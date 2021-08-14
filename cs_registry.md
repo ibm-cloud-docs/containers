@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -440,15 +440,15 @@ The following steps create an API key that stores the credentials of an {{site.d
     </tr>
     <tr>
     <td><code>--roles <em>&lt;service_access_role&gt;</em></code></td>
-    <td>Required. Enter the [service access role for {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-iam#service_access_roles) that you want to scope the service ID access to. Possible values are <code>Reader</code>, <code>Writer</code>, and <code>Manager</code>.</td>
+    <td>Required. Enter the <a href="/docs/Registry?topic=Registry-iam#service_access_roles">service access role for {{site.data.keyword.registrylong_notm}}</a> that you want to scope the service ID access to. Possible values are <code>Reader</code>, <code>Writer</code>, and <code>Manager</code>.</td>
     </tr>
     <tr>
     <td><code>--region <em>&lt;IAM_region&gt;</em></code></td>
-    <td>Optional. If you want to scope the access policy to certain IAM regions, enter the regions in a comma-separated list. Possible values are <code>global</code> and the [local registry regions](/docs/Registry?topic=Registry-registry_overview#registry_regions_local).</td>
+    <td>Optional. If you want to scope the access policy to certain IAM regions, enter the regions in a comma-separated list. Possible values are <code>global</code> and the <a href="/docs/Registry?topic=Registry-registry_overview#registry_regions_local">local registry regions</a>.</td>
     </tr>
     <tr>
     <td><code>--resource-type <em>namespace</em> --resource <em>&lt;registry_namespace&gt;</em></code></td>
-    <td>Optional. If you want to limit access to only images in certain [{{site.data.keyword.registrylong_notm}} namespaces](/docs/Registry?topic=Registry-registry_setup_cli_namespace#registry_setup_cli_namespace_plan), enter <code>namespace</code> for the resource type and specify the <code><registry_namespace></code>. To list registry namespaces, run <code>ibmcloud cr namespaces</code>.</td>
+    <td>Optional. If you want to limit access to only images in certain <a href="/docs/Registry?topic=Registry-registry_setup_cli_namespace#registry_setup_cli_namespace_plan">{{site.data.keyword.registrylong_notm}} namespaces</a>, enter <code>namespace</code> for the resource type and specify the <code><registry_namespace></code>. To list registry namespaces, run <code>ibmcloud cr namespaces</code>.</td>
     </tr>
     </tbody></table>
 4. Create an API key for the service ID. Name the API key similar to your service ID, and include the service ID that you previously created, ``<cluster_name>-<kube_namespace>-id`. Be sure to give the API key a description that helps you retrieve the key later.
@@ -495,7 +495,7 @@ The following steps create an API key that stores the credentials of an {{site.d
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry_URL&gt;</em></code></td>
-    <td>Required. Set the URL to the image registry where your registry namespace is set up. For available domains, see [Local regions](/docs/Registry?topic=Registry-registry_overview#registry_regions).</td>
+    <td>Required. Set the URL to the image registry where your registry namespace is set up. For available domains, see <a href="/docs/Registry?topic=Registry-registry_overview#registry_regions">Local regions</a>.</td>
     </tr>
     <tr>
     <td><code>--docker-username iamapikey</code></td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, affinity, taint
 
@@ -304,8 +304,8 @@ Before you begin:
     ```
     Taints:             dedicated=edge:NoExecute
         Hostname:    10.176.48.83
-    Taints:             dedicated=edge:NoExecute
-        Hostname:    10.184.58.7
+      Taints:             dedicated=edge:NoExecute
+    Hostname:    10.184.58.7
     ```
     {: screen}
 

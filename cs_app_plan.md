@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, deploy
 
@@ -283,7 +283,7 @@ Both resources define key-value pairs, but you use them for different situations
 <dt>Secret</dt>
 <dd>Provide sensitive information to your workloads, such as follows. Other users of the cluster might have access to the secret, so be sure that you know the secret information can be shared with those users.
 <ul><li><strong>Personally identifiable information (PII)</strong>: Store sensitive information such as email addresses or other types of information that are required for company compliance or government regulation in secrets.</li>
-<li><strong>Credentials</strong>: Put credentials such as passwords, keys, and tokens in a secret to reduce the risk of accidental exposure. For example, when you [bind a service](/docs/containers?topic=containers-service-binding) to your cluster, the credentials are stored in a secret.</li></ul></dd>
+<li><strong>Credentials</strong>: Put credentials such as passwords, keys, and tokens in a secret to reduce the risk of accidental exposure. For example, when you <a href="/docs/containers?topic=containers-service-binding">bind a service</a> to your cluster, the credentials are stored in a secret.</li></ul></dd>
 </dl>
 
 Want to make your secrets even more secured? Ask your cluster admin to [enable a key management service provider](/docs/containers?topic=containers-encryption#keyprotect) in your cluster to encrypt new and existing secrets.
@@ -444,7 +444,7 @@ If you want to run your app in multiple clusters, public and private environment
 <dt>Set up a continuous integration and delivery (CI/CD) pipeline</dt>
     <dd>With your app configuration files organized in a source control management system such as Git, you can build your pipeline to test and deploy code to different environments, such as `test` and `prod`. Work with your cluster administrator to [set up continuous integration and delivery](/docs/containers?topic=containers-cicd).</dd>
 <dt>Package your app configuration files</dt>
-    <dd>Package your app with tools like Kustomize or Helm.<ul><li>With the [<code>kustomize</code> project](/docs/containers?topic=containers-app#kustomize), you can write, customize, and reuse your Kubernetes resource YAML configurations.</li><li>With the [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/docs/) Kubernetes package manager, you can specify all Kubernetes resources that your app requires in a Helm chart. Then, you can use Helm to create the YAML configuration files and deploy these files in your cluster. You can also [integrate {{site.data.keyword.cloud_notm}}-provided Helm charts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/helm) to extend your cluster's capabilities, such as with a block storage plug-in.</li></ul><p class="tip">Are you just looking for an easy way to create YAML file templates? Some people use Helm to do just that, or you might try out other community tools such as [`ytt` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://get-ytt.io/).</p></dd>
+    <dd>Package your app with tools like Kustomize or Helm.<ul><li>With the <a href="/docs/containers?topic=containers-app#kustomize"><code>kustomize</code> project</a>, you can write, customize, and reuse your Kubernetes resource YAML configurations.</li><li>With the <a href="https://helm.sh/docs/">Helm</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> Kubernetes package manager, you can specify all Kubernetes resources that your app requires in a Helm chart. Then, you can use Helm to create the YAML configuration files and deploy these files in your cluster. You can also <a href="https://cloud.ibm.com/kubernetes/helm">integrate {{site.data.keyword.cloud_notm}}-provided Helm charts</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> to extend your cluster's capabilities, such as with a block storage plug-in.</li></ul><p class="tip">Are you just looking for an easy way to create YAML file templates? Some people use Helm to do just that, or you might try out other community tools such as [`ytt` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://get-ytt.io/).</p></dd>
 </dl>
 
 <br />

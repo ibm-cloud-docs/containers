@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -920,21 +920,21 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
     Labels:       <none>
     Annotations:  <none>
 
-    Data
-    ====
-    repo_name:
-    ----
-    us.icr.io
-    service_k8s_ns:
-    ----
-    default
-    inventory:
-    ----
-    10.XXX.XX.XX:22 ansible_user=root ansible_connection=ssh
-    clusterdns_setup:
-    ----
-    true
-    Events:  <none>
+  Data
+  ====
+  repo_name:
+  ----
+  us.icr.io
+  service_k8s_ns:
+  ----
+  default
+  inventory:
+  ----
+  10.XXX.XX.XX:22 ansible_user=root ansible_connection=ssh
+  clusterdns_setup:
+  ----
+  true
+  Events:  <none>
     ```
     {: screen}
 
@@ -1035,18 +1035,18 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     ```
     start_time: "Tue Dec 17 15:19:23 UTC 2019"
     config:
-        kubernetes_version: 1.20.7
-        pod_name: ibm-external-compute-job-wk9xc
-        image_url: us.icr.io/armada-master/stranger:v1.0.0
-        prepare_host: True
-        configure_gateway: True
-        calico_node_version: v3.8.4
-        ibm_gateway_controller_version: 1027
-        service_k8s_ns: default
-        repo_name: us.icr.io
-        clusterdns_setup: True
-        etcd_private_host: c1.private.containers.mycluster.cloud.ibm.com
-        etcd_port: 28649
+      kubernetes_version: 1.20.7
+      pod_name: ibm-external-compute-job-wk9xc
+      image_url: us.icr.io/armada-master/stranger:v1.0.0
+      prepare_host: True
+      configure_gateway: True
+      calico_node_version: v3.8.4
+      ibm_gateway_controller_version: 1027
+      service_k8s_ns: default
+      repo_name: us.icr.io
+      clusterdns_setup: True
+      etcd_private_host: c1.private.containers.mycluster.cloud.ibm.com
+      etcd_port: 28649
     end_time: "Tue Dec 17 15:21:12 UTC 2019"
     ```
     {: screen}
@@ -1255,7 +1255,7 @@ Choose among the following options:
 
 | Adding tags to clusters with the console. |
 |:-----------------|
-| <p><ol><li>Log in to the [<strong>{{site.data.keyword.cloud_notm}} clusters</strong> console](https://cloud.ibm.com/kubernetes/clusters){: external}.</li><li>Select a cluster with existing tags.</li><li>Next to the cluster name and status, click the <strong>Edit tags</strong> pencil icon.<p class="note">If your cluster does not have any existing tags, you do not have an <strong>Edit tags</strong> pencil icon. Instead, use the [resource list](/docs/account?topic=account-tag) or CLI.</p></li><li>Enter the tag that you want to add to your cluster. To assign a key-value pair, use a colon such as <code>costctr:1234</code>.</li></ol></p> |
+| <p><ol><li>Log in to the <a href="https://cloud.ibm.com/kubernetes/clusters"><strong>{{site.data.keyword.cloud_notm}} clusters</strong> console</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li><li>Select a cluster with existing tags.</li><li>Next to the cluster name and status, click the <strong>Edit tags</strong> pencil icon.<p class="note">If your cluster does not have any existing tags, you do not have an <strong>Edit tags</strong> pencil icon. Instead, use the <a href="/docs/account?topic=account-tag">resource list</a> or CLI.</p></li><li>Enter the tag that you want to add to your cluster. To assign a key-value pair, use a colon such as <code>costctr:1234</code>.</li></ol></p> |
 {: caption="Adding tags to clusters with the console." caption-side="top"}
 {: #tags-1}
 {: tab-title="Console"}
@@ -1264,7 +1264,7 @@ Choose among the following options:
 
 | Adding tags to clusters with the CLI. |
 |:-----------------|
-| <p><ol><li>Log in to the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_cli#ibmcloud_login).<pre class="pre"><code>ibmcloud login [--sso]</code></pre></li><li>[Tag your cluster](/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_commands_resource#ibmcloud_resource_tag_attach). Replace the <code>--resource-name</code> with the name of your cluster. To list available clusters, run <code>ibmcloud ks cluster ls</code>. If you want to check your existing tags so as not to duplicate any, run <code>ibmcloud resource tags</code>.<pre class="pre"><code>ibmcloud resource tag-attach --resource-name <cluster_name> --tag-names &lt;tag1,tag2&gt;</code></pre><p class="note">If you have more than one resource of the same name in your {{site.data.keyword.cloud_notm}} account, the error message lists the resource CRNs and details, and instructs you to try again with the <code>--resource-id</code> flag.</p></li></ol></p> |
+| <p><ol><li>Log in to the <a href="/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_cli#ibmcloud_login">{{site.data.keyword.cloud_notm}} CLI</a>.<pre class="pre"><code>ibmcloud login [--sso]</code></pre></li><li><a href="/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_commands_resource#ibmcloud_resource_tag_attach">Tag your cluster</a>. Replace the <code>--resource-name</code> with the name of your cluster. To list available clusters, run <code>ibmcloud ks cluster ls</code>. If you want to check your existing tags so as not to duplicate any, run <code>ibmcloud resource tags</code>.<pre class="pre"><code>ibmcloud resource tag-attach --resource-name <cluster_name> --tag-names &lt;tag1,tag2&gt;</code></pre><p class="note">If you have more than one resource of the same name in your {{site.data.keyword.cloud_notm}} account, the error message lists the resource CRNs and details, and instructs you to try again with the <code>--resource-id</code> flag.</p></li></ol></p> |
 {: caption="Adding tags to clusters with the CLI." caption-side="top"}
 {: #tags-2}
 {: tab-title="CLI"}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -443,7 +443,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
     </tr>
     <tr>
     <td><code>--workers <em>&lt;number&gt;</em></code></td>
-    <td>Specify the number of worker nodes to include in the cluster. If you do not specify this option, a cluster with the minimum value of 1 is created.  For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).</td>
+    <td>Specify the number of worker nodes to include in the cluster. If you do not specify this option, a cluster with the minimum value of 1 is created.  For more information, see <a href="/docs/containers?topic=containers-faqs#smallest_cluster">What is the smallest size cluster that I can make?</a>.</td>
     </tr>
     <tr>
     <td><code>--version <em>&lt;major.minor.patch&gt;</em></code></td>
@@ -455,7 +455,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
     </tr>
     <tr>
     <td><code>--private-service-endpoint</code></td>
-    <td><strong>In [VRF-enabled](/docs/account?topic=account-vrf-service-endpoint#vrf) and [service endpoint-enabled](/docs/account?topic=account-vrf-service-endpoint#service-endpoint) accounts</strong>: Enable the private cloud service endpoint so that your Kubernetes master and the worker nodes can communicate over the private VLAN. In addition, you can choose to enable the public cloud service endpoint by using the <code>--public-service-endpoint</code> flag to access your cluster over the internet. If you enable the private cloud service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private cloud service endpoint, you cannot later disable it.<br><br>After you create the cluster, you can get the endpoint by running <code>ibmcloud ks cluster get --cluster <cluster_name_or_ID></code>.</td>
+    <td><strong>In <a href="/docs/account?topic=account-vrf-service-endpoint#vrf">VRF-enabled</a> and <a href="/docs/account?topic=account-vrf-service-endpoint#service-endpoint">service endpoint-enabled</a> accounts</strong>: Enable the private cloud service endpoint so that your Kubernetes master and the worker nodes can communicate over the private VLAN. In addition, you can choose to enable the public cloud service endpoint by using the <code>--public-service-endpoint</code> flag to access your cluster over the internet. If you enable the private cloud service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private cloud service endpoint, you cannot later disable it.<br><br>After you create the cluster, you can get the endpoint by running <code>ibmcloud ks cluster get --cluster <cluster_name_or_ID></code>.</td>
     </tr>
     <tr>
     <td><code>--pod-subnet</code></td>
@@ -478,7 +478,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
     </tr>
     <tr>
     <td><code>--disable-disk-encrypt</code></td>
-    <td>Worker nodes feature AES 256-bit [disk encryption](/docs/containers?topic=containers-security#encrypted_disk) by default. If you want to disable encryption, include this option.</td>
+    <td>Worker nodes feature AES 256-bit <a href="/docs/containers?topic=containers-security#encrypted_disk">disk encryption</a> by default. If you want to disable encryption, include this option.</td>
     </tr>
     </tbody></table>
 
@@ -619,7 +619,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
     </tr>
     <tr>
     <td><code>--flavor <em>&lt;flavor&gt;</em></code></td>
-    <td>Specify the flavor for your compute worker nodes that you chose earlier. Note that the gateway worker nodes are created with the <code>u3c.2x4</code> flavor by default. If you want to change the isolation and flavor of the gateway worker nodes, you can [create a new gateway worker pool](/docs/containers?topic=containers-add_workers#gateway_replace) to replace the gateway worker pool that is created by default.</td>
+    <td>Specify the flavor for your compute worker nodes that you chose earlier. Note that the gateway worker nodes are created with the <code>u3c.2x4</code> flavor by default. If you want to change the isolation and flavor of the gateway worker nodes, you can <a href="/docs/containers?topic=containers-add_workers#gateway_replace">create a new gateway worker pool</a> to replace the gateway worker pool that is created by default.</td>
     </tr>
     <tr>
     <td><code>--hardware <em>&lt;shared_or_dedicated&gt;</em></code></td>
@@ -674,7 +674,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
     </tr>
     <tr>
     <td><code>--disable-disk-encrypt</code></td>
-    <td>Worker nodes feature AES 256-bit [disk encryption](/docs/containers?topic=containers-security#encrypted_disk) by default. If you want to disable encryption, include this option.</td>
+    <td>Worker nodes feature AES 256-bit <a href="/docs/containers?topic=containers-security#encrypted_disk">disk encryption</a> by default. If you want to disable encryption, include this option.</td>
     </tr>
     </tbody></table>
 
@@ -846,11 +846,11 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     </tr>
     <tr>
     <td><code>--subnet-id <em>&lt;subnet_ID&gt;</em></code></td>
-    <td>Enter the ID of the VPC subnet that you created earlier. When you create a VPC cluster from the CLI, you can initially create your cluster in one zone with one subnet only. To create a multizone cluster, [add more zones](/docs/containers?topic=containers-add_workers) with the subnets that you created earlier to your cluster after the cluster is created. To list the IDs of your subnets in all resource groups, run <code> ibmcloud ks subnets --provider vpc-gen2 --vpc-id &lt,VPC_ID&gt; --zone &lt;subnet_zone&gt; </code>.  </td>
+    <td>Enter the ID of the VPC subnet that you created earlier. When you create a VPC cluster from the CLI, you can initially create your cluster in one zone with one subnet only. To create a multizone cluster, <a href="/docs/containers?topic=containers-add_workers">add more zones</a> with the subnets that you created earlier to your cluster after the cluster is created. To list the IDs of your subnets in all resource groups, run <code> ibmcloud ks subnets --provider vpc-gen2 --vpc-id &lt,VPC_ID&gt; --zone &lt;subnet_zone&gt; </code>.  </td>
     </tr>
     <tr>
     <td><code>--flavor <em>&lt;worker_flavor&gt;</em></code></td>
-    <td>Enter the worker node flavor that you want to use. The flavor determines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to your apps. VPC worker nodes can be created as virtual machines on shared infrastructure only. Bare metal or software-defined storage machines are not supported.  For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). To view available flavors, first list available VPC zones with <code>ibmcloud ks zone ls --provider vpc-gen2</code>, and then use the zone to list supported flavors by running <code>ibmcloud ks flavors --zone &lt;VPC_zone&gt; --provider vpc-gen2</code>. After you create your cluster, you can add different flavors by adding a worker node or worker pool to the cluster.</td>
+    <td>Enter the worker node flavor that you want to use. The flavor determines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to your apps. VPC worker nodes can be created as virtual machines on shared infrastructure only. Bare metal or software-defined storage machines are not supported.  For more information, see <a href="/docs/containers?topic=containers-planning_worker_nodes">Planning your worker node setup</a>. To view available flavors, first list available VPC zones with <code>ibmcloud ks zone ls --provider vpc-gen2</code>, and then use the zone to list supported flavors by running <code>ibmcloud ks flavors --zone &lt;VPC_zone&gt; --provider vpc-gen2</code>. After you create your cluster, you can add different flavors by adding a worker node or worker pool to the cluster.</td>
     </tr>
     <tr>
     <td><code>--version <em>&lt;major.minor.patch&gt;</em></code></td>
@@ -858,7 +858,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     </tr>
     <tr>
     <td><code>--workers <em>&lt;number&gt;</em></code></td>
-    <td>Specify the number of worker nodes to include in the cluster. If you do not specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster). This value is optional.</td>
+    <td>Specify the number of worker nodes to include in the cluster. If you do not specify this option, a cluster with the minimum value of 1 is created. For more information, see <a href="/docs/containers?topic=containers-faqs#smallest_cluster">What is the smallest size cluster that I can make?</a>. This value is optional.</td>
     </tr>
     <tr>
     <td><code>--pod-subnet</code></td>
@@ -868,7 +868,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     <ul><li><code>172.17.0.0 - 172.17.255.255</code></li>
     <li><code>172.21.0.0 - 172.31.255.255</code></li>
     <li><code>192.168.0.0 - 192.168.254.255</code></li>
-    <li><code>198.18.0.0 - 198.19.255.255</code></li></ul>Note that the pod and service subnets cannot overlap. If you use custom-range subnets for your worker nodes, you must [ensure that your worker node subnets do not overlap with your cluster's pod subnet](/docs/containers?topic=containers-vpc-subnets#vpc-ip-range).</p></td>
+    <li><code>198.18.0.0 - 198.19.255.255</code></li></ul>Note that the pod and service subnets cannot overlap. If you use custom-range subnets for your worker nodes, you must <a href="/docs/containers?topic=containers-vpc-subnets#vpc-ip-range">ensure that your worker node subnets do not overlap with your cluster's pod subnet</a>.</p></td>
     </tr>
     <tr>
     <td><code>--service-subnet</code></td>
@@ -881,7 +881,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     </tr>
     <tr>
     <td><code>--disable-public-service-endpoint</code></td>
-    <td>Include this option in your command to create your VPC cluster with a private cloud service endpoint only. If you do not include this option, your cluster is set up with a public and a private cloud service endpoint. The service endpoint determines how your Kubernetes master and the worker nodes communicate, how your cluster access other {{site.data.keyword.cloud_notm}} services and apps outside the cluster, and how your users connect to your cluster. For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).</td>
+    <td>Include this option in your command to create your VPC cluster with a private cloud service endpoint only. If you do not include this option, your cluster is set up with a public and a private cloud service endpoint. The service endpoint determines how your Kubernetes master and the worker nodes communicate, how your cluster access other {{site.data.keyword.cloud_notm}} services and apps outside the cluster, and how your users connect to your cluster. For more information, see <a href="/docs/containers?topic=containers-plan_clusters">Planning your cluster network setup</a>.</td>
     </tr>
     </tbody></table>
 6. Verify that the creation of the cluster was requested. It can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account.

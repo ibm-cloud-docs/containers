@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -602,7 +602,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
         </tr>
         <tr>
         <td><code>--cos-endpoint <em>&lt;location_of_COS_bucket&gt;</em></code></td>
-        <td>The regional, cross regional, or single data center {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. For available endpoints, see [Endpoints and storage locations](/docs/cloud-object-storage/basics?topic=cloud-object-storage-endpoints) in the {{site.data.keyword.cos_short}} documentation.</td>
+        <td>The regional, cross regional, or single data center {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. For available endpoints, see <a href="/docs/cloud-object-storage/basics?topic=cloud-object-storage-endpoints">Endpoints and storage locations</a> in the {{site.data.keyword.cos_short}} documentation.</td>
         </tr>
         <tr>
         <td><code>--hmac-key-id <em>&lt;HMAC_access_key_ID&gt;</em></code></td>

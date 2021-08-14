@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, vyatta, strongswan, ipsec, on-prem
 
@@ -788,5 +788,4 @@ To set up a Virtual Router Appliance:
 
 If you have an existing router appliance and then add a cluster, the new portable subnets that are ordered for the cluster are not configured on the router appliance. In order to use networking services, you must enable routing between the subnets on the same VLAN by [enabling VLAN spanning or VRF](/docs/containers?topic=containers-plan_clusters#worker-worker).
 {: important}
-
 

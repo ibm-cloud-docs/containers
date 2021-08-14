@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -301,7 +301,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
         <tbody>
         <tr>
         <td><code>annotations</code></td>
-        <td><ul><li><code>kubernetes.io/ingress.class: "public-iks-k8s-nginx"</code>: Apply this Ingress resource to the public ALBs that run the Kubernetes Ingress image in your cluster.<p class="note">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, do not specify this annotation. Instead, find the Ingress class for yourr configuration, and specify that class in a <code>spec.ingressClassName: <class_name></code> field. You must also specify this custom class in an [<code>IngressClass</code> resource and a <code>ibm-ingress-deploy-config</code> configmap](#ingress-class-custom).</p></li><li>To customize routing for Ingress, you can add [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (<code>nginx.ingress.kubernetes.io/<annotation></code>). Custom {{site.data.keyword.containerlong_notm}} annotations (<code>ingress.bluemix.net/<annotation></code>) are <strong>not</strong> supported.</li></ul></td>
+        <td><ul><li><code>kubernetes.io/ingress.class: "public-iks-k8s-nginx"</code>: Apply this Ingress resource to the public ALBs that run the Kubernetes Ingress image in your cluster.<p class="note">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, do not specify this annotation. Instead, find the Ingress class for yourr configuration, and specify that class in a <code>spec.ingressClassName: <class_name></code> field. You must also specify this custom class in an <a href="#ingress-class-custom"><code>IngressClass</code> resource and a <code>ibm-ingress-deploy-config</code> configmap</a>.</p></li><li>To customize routing for Ingress, you can add <a href="/docs/containers?topic=containers-comm-ingress-annotations#annotations">Kubernetes NGINX annotations</a> (<code>nginx.ingress.kubernetes.io/<annotation></code>). Custom {{site.data.keyword.containerlong_notm}} annotations (<code>ingress.bluemix.net/<annotation></code>) are <strong>not</strong> supported.</li></ul></td>
         </tr>
         <tr>
         <td><code>tls.hosts</code></td>
@@ -321,7 +321,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
         </tr>
         <tr>
         <td>Kubernetes 1.19 and later only: <code>pathType</code></td>
-        <td>The URL path matching method. Supported values are <code>ImplementationSpecific</code>, <code>Exact</code>, or <code>Prefix</code>. For more information about and examples of each path type, see the [community Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types).</td>
+        <td>The URL path matching method. Supported values are <code>ImplementationSpecific</code>, <code>Exact</code>, or <code>Prefix</code>. For more information about and examples of each path type, see the <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types">community Kubernetes documentation</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
         </tr>
         <tr>
         <td><code>service.name</code> (Kubernetes 1.19 or later) or <code>serviceName</code> (Kubernetes 1.18 or earlier)</td>
@@ -491,7 +491,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
         <tbody>
         <tr>
         <td><code>annotations</code></td>
-        <td><ul><li><code>kubernetes.io/ingress.class: "public-iks-k8s-nginx"</code>: Apply this Ingress resource to the private ALBs that run the Kubernetes Ingress image in your cluster.<p class="note">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, do not specify this annotation. Instead, find the Ingress class for your configuration, and specify that class in a <code>spec.ingressClassName: <class_name></code> field. You must also specify this custom class in an [<code>IngressClass</code> resource and a <code>ibm-ingress-deploy-config</code> configmap](#ingress-class-custom).</p></li><li>To customize routing for Ingress, you can add [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (<code>nginx.ingress.kubernetes.io/<annotation></code>). Custom {{site.data.keyword.containerlong_notm}} annotations (<code>ingress.bluemix.net/<annotation></code>) are <strong>not</strong> supported.</li></ul></td>
+        <td><ul><li><code>kubernetes.io/ingress.class: "public-iks-k8s-nginx"</code>: Apply this Ingress resource to the private ALBs that run the Kubernetes Ingress image in your cluster.<p class="note">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, do not specify this annotation. Instead, find the Ingress class for your configuration, and specify that class in a <code>spec.ingressClassName: <class_name></code> field. You must also specify this custom class in an <a href="#ingress-class-custom"><code>IngressClass</code> resource and a <code>ibm-ingress-deploy-config</code> configmap</a>.</p></li><li>To customize routing for Ingress, you can add <a href="/docs/containers?topic=containers-comm-ingress-annotations#annotations">Kubernetes NGINX annotations</a> (<code>nginx.ingress.kubernetes.io/<annotation></code>). Custom {{site.data.keyword.containerlong_notm}} annotations (<code>ingress.bluemix.net/<annotation></code>) are <strong>not</strong> supported.</li></ul></td>
         </tr>
         <tr>
         <td><code>tls.hosts</code></td>
@@ -511,7 +511,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
         </tr>
         <tr>
         <td>Kubernetes 1.19 and later only: <code>pathType</code></td>
-        <td>The URL path matching method. Supported values are <code>ImplementationSpecific</code>, <code>Exact</code>, or <code>Prefix</code>. For more information about and examples of each path type, see the [community Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types).</td>
+        <td>The URL path matching method. Supported values are <code>ImplementationSpecific</code>, <code>Exact</code>, or <code>Prefix</code>. For more information about and examples of each path type, see the <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types">community Kubernetes documentation</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
         </tr>
         <tr>
         <td><code>service.name</code> (Kubernetes 1.19 or later) or <code>serviceName</code> (Kubernetes 1.18 or earlier)</td>

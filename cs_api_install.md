@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -141,8 +141,8 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
     </tr>
     <tr>
     <td>API reference docs</td>
-    <td>[<code>https://containers.cloud.ibm.com/global/swagger-global-api/</code> ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/#/)</td>
-    <td>[<code>https://containers.cloud.ibm.com/global/swagger-global-api/</code> ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/#/)</td>
+    <td><a href="https://containers.cloud.ibm.com/global/swagger-global-api/#/"><code>https://containers.cloud.ibm.com/global/swagger-global-api/</code></a> <img src="../icons/launch-glyph.svg" alt="External link icon"></td>
+    <td><a href="https://containers.cloud.ibm.com/global/swagger-global-api/#/"><code>https://containers.cloud.ibm.com/global/swagger-global-api/</code></a> <img src="../icons/launch-glyph.svg" alt="External link icon"></td>
     </tr>
     <tr>
     <td>API architectural style</td>
@@ -156,8 +156,8 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
     </tr>
     <tr>
     <td>Kubernetes API</td>
-    <td>To use the Kubernetes API to manage Kubernetes resources within the cluster, such as pods or namespaces, see [Working with your cluster by using the Kubernetes API](#kube_api).</td>
-    <td>Same as <code>v1</code>; see [Working with your cluster by using the Kubernetes API](#kube_api).</td>
+    <td>To use the Kubernetes API to manage Kubernetes resources within the cluster, such as pods or namespaces, see <a href="#kube_api">Working with your cluster by using the Kubernetes API</a>.</td>
+    <td>Same as <code>v1</code>; see <a href="#kube_api">Working with your cluster by using the Kubernetes API</a>.</td>
     </tr>
     <tr>
     <td>Supported infrastructure providers</td>
@@ -200,8 +200,8 @@ You can also use the [API swagger JSON file](https://containers.cloud.ibm.com/gl
 
 |{{site.data.keyword.cloud_notm}} ID|My options|
 |-----------------------------------|----------|
-|Unfederated ID|<ul><li><strong>Generate an {{site.data.keyword.cloud_notm}} API key:</strong> As an alternative to using the {{site.data.keyword.cloud_notm}} username and password, you can [use {{site.data.keyword.cloud_notm}} API keys](/docs/account?topic=account-userapikey#create_user_key){: external}. {{site.data.keyword.cloud_notm}} API keys are dependent on the {{site.data.keyword.cloud_notm}} account they are generated for. You cannot combine your {{site.data.keyword.cloud_notm}} API key with a different account ID in the same {{site.data.keyword.cloud_notm}} IAM token. To access clusters that were created with an account other than the one your {{site.data.keyword.cloud_notm}} API key is based on, you must log in to the account to generate a new API key.</li><li><strong>{{site.data.keyword.cloud_notm}} username and password:</strong> You can follow the steps in this topic to fully automate the creation of your {{site.data.keyword.cloud_notm}} IAM access token.</li></ul>|
-|Federated ID|<ul><li><strong>Generate an {{site.data.keyword.cloud_notm}} API key:</strong> [{{site.data.keyword.cloud_notm}} API keys](/docs/account?topic=account-userapikey#create_user_key){: external} are dependent on the {{site.data.keyword.cloud_notm}} account they are generated for. You cannot combine your {{site.data.keyword.cloud_notm}} API key with a different account ID in the same {{site.data.keyword.cloud_notm}} IAM token. To access clusters that were created with an account other than the one your {{site.data.keyword.cloud_notm}} API key is based on, you must log in to the account to generate a new API key.</li><li><strong>Use a one-time passcode: </strong> If you authenticate with {{site.data.keyword.cloud_notm}} by using a one-time passcode, you cannot fully automate the creation of your {{site.data.keyword.cloud_notm}} IAM token because the retrieval of your one-time passcode requires a manual interaction with your web browser. To fully automate the creation of your {{site.data.keyword.cloud_notm}} IAM token, you must create an {{site.data.keyword.cloud_notm}} API key instead.</ul>|
+|Unfederated ID|<ul><li><strong>Generate an {{site.data.keyword.cloud_notm}} API key:</strong> As an alternative to using the {{site.data.keyword.cloud_notm}} username and password, you can <a href="/docs/account?topic=account-userapikey#create_user_key">use {{site.data.keyword.cloud_notm}} API keys</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. {{site.data.keyword.cloud_notm}} API keys are dependent on the {{site.data.keyword.cloud_notm}} account they are generated for. You cannot combine your {{site.data.keyword.cloud_notm}} API key with a different account ID in the same {{site.data.keyword.cloud_notm}} IAM token. To access clusters that were created with an account other than the one your {{site.data.keyword.cloud_notm}} API key is based on, you must log in to the account to generate a new API key.</li><li><strong>{{site.data.keyword.cloud_notm}} username and password:</strong> You can follow the steps in this topic to fully automate the creation of your {{site.data.keyword.cloud_notm}} IAM access token.</li></ul>|
+|Federated ID|<ul><li><strong>Generate an {{site.data.keyword.cloud_notm}} API key:</strong> <a href="/docs/account?topic=account-userapikey#create_user_key">{{site.data.keyword.cloud_notm}} API keys</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> are dependent on the {{site.data.keyword.cloud_notm}} account they are generated for. You cannot combine your {{site.data.keyword.cloud_notm}} API key with a different account ID in the same {{site.data.keyword.cloud_notm}} IAM token. To access clusters that were created with an account other than the one your {{site.data.keyword.cloud_notm}} API key is based on, you must log in to the account to generate a new API key.</li><li><strong>Use a one-time passcode: </strong> If you authenticate with {{site.data.keyword.cloud_notm}} by using a one-time passcode, you cannot fully automate the creation of your {{site.data.keyword.cloud_notm}} IAM token because the retrieval of your one-time passcode requires a manual interaction with your web browser. To fully automate the creation of your {{site.data.keyword.cloud_notm}} IAM token, you must create an {{site.data.keyword.cloud_notm}} API key instead.</ul>|
 {: caption="ID types and options" caption-side="top"}
 {: summary="ID types and options with the input parameter in column 1 and the value in column 2."}
 
@@ -547,7 +547,7 @@ The following instructions require public network access in your cluster to conn
     </tr>
     <tr>
     <td>Path</td>
-    <td><code><cluster_name_or_ID></code>: The name or ID of your cluster that you retrieved with the <code>GET https://containers.cloud.ibm.com/global/v2/classic/getClusters</code> or <code>GET https://containers.cloud.ibm.com/global/v2/vpc/getClusters?provider=vpc-gen2</code> API in [Automating cluster deployments with the API](#cs_api).</td>
+    <td><code><cluster_name_or_ID></code>: The name or ID of your cluster that you retrieved with the <code>GET https://containers.cloud.ibm.com/global/v2/classic/getClusters</code> or <code>GET https://containers.cloud.ibm.com/global/v2/vpc/getClusters?provider=vpc-gen2</code> API in <a href="#cs_api">Automating cluster deployments with the API</a>.</td>
     </tr>
     </tbody>
     </table>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-11"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks
 
@@ -106,7 +106,7 @@ content-type: troubleshoot
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
-  
+
 # VPC: Why is no VPC available when I create a cluster in the console?
 {: #ts_no_vpc}
 
@@ -125,7 +125,6 @@ During cluster creation, the {{site.data.keyword.containerlong_notm}} console us
 {: tsCauses}
 
 If no API key is set for the `default` resource group, no VPCs are listed in the {{site.data.keyword.containerlong_notm}} console, even if your VPC exists in a different resource group and an API key is set for that resource group.
-
 
 To set an API key for the `default` resource group, use the {{site.data.keyword.containerlong_notm}} CLI.
 {: tsResolve}
@@ -149,3 +148,5 @@ To set an API key for the `default` resource group, use the {{site.data.keyword.
     {: pre}
 
 4. In the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/catalog/create){: external}, click **Refresh VPCs**. Your available VPCs are now listed in a drop-down menu.
+
+

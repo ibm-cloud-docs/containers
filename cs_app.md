@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -239,8 +239,8 @@ The default `imagePullPolicy` is set to `IfNotPresent`, which pulls the image on
 ```yaml
 containers:
 - name: wasliberty
-    image: icr.io/ibm/liberty:webProfile8
-    imagePullPolicy: Always
+  image: icr.io/ibm/liberty:webProfile8
+  imagePullPolicy: Always
 ```
 {: codeblock}
 
@@ -832,7 +832,7 @@ To set up configuration files with Kustomize:
         </tr>
         <tr>
         <td>Other possible configurations</td>
-        <td>For more configurations that you might add to your file, see the [Make a <code>kustomization</code> file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/kustomize#1-make-a-kustomization-file).</td>
+        <td>For more configurations that you might add to your file, see the <a href="https://github.com/kubernetes-sigs/kustomize#1-make-a-kustomization-file">Make a <code>kustomization</code> file</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
         </tr>
         </tbody></table>
     2. Build your staging overlay configuration files.

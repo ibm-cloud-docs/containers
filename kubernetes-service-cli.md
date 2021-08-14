@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -351,7 +351,7 @@ Enable a managed add-on in an existing cluster. This command must be combined wi
 #### <code>ibmcloud ks cluster addon enable alb-oauth-proxy</code>
 {: #cs_cluster_addon_enable_alb-oauth-proxy}
 
-Enable the add-on for the [ALB OAuth Proxy](/docs/containers?topic=containers-debug-tool) in a cluster. When your ALBs run the Kubernetes Ingress image, you can use the ALB OAuth proxy to enforce authentication for your apps by configuring Ingress with {{site.data.keyword.appid_full_notm}}.
+Enable the add-on for the <a href="/docs/containers?topic=containers-debug-tool">ALB OAuth Proxy</a> in a cluster. When your ALBs run the Kubernetes Ingress image, you can use the ALB OAuth proxy to enforce authentication for your apps by configuring Ingress with {{site.data.keyword.appid_full_notm}}.
 {: shortdesc}
 
 <code></code>`sh
@@ -805,7 +805,7 @@ ibmcloud ks cluster config --cluster CLUSTER [--admin] [--endpoint ENDPOINT_TYPE
 <dd>Optional: Download the TLS certificates and permission files for the Super User role. You can use the certs to automate tasks in a cluster without having to reauthenticate. The files are downloaded to `<user_home_directory>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>-admin`.</dd>
 
 <dt><code>--endpoint <em>ENDPOINT_TYPE</em></code></dt>
-<dd>Optional: Specify the type of endpoint to use to connect to the cluster. If you do not specify this flag, the default service endpoint for your cluster is used.<ul><li><code>private</code>: If the private cloud service endpoint is enabled for your cluster, set to <code>private</code> to use the private cloud service endpoint for your cluster context. Note you must be in your {{site.data.keyword.cloud_notm}} private network or connected to the private network through a [VPC VPN connection](/docs/vpc?topic=vpc-vpn-onprem-example), or for classic infrastructure, a [classic VPN connection](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl).</li></ul></dd>
+<dd>Optional: Specify the type of endpoint to use to connect to the cluster. If you do not specify this flag, the default service endpoint for your cluster is used.<ul><li><code>private</code>: If the private cloud service endpoint is enabled for your cluster, set to <code>private</code> to use the private cloud service endpoint for your cluster context. Note you must be in your {{site.data.keyword.cloud_notm}} private network or connected to the private network through a <a href="/docs/vpc?topic=vpc-vpn-onprem-example">VPC VPN connection</a>, or for classic infrastructure, a <a href="/docs/iaas-vpn?topic=iaas-vpn-getting-started">classic VPN connection</a> or <a href="/docs/dl?topic=dl-get-started-with-ibm-cloud-dl">{{site.data.keyword.dl_full_notm}}</a>.</li></ul></dd>
 
 <dt><code>--network</code></dt>
 <dd>Optional: Download the Calico configuration file, TLS certificates, and permission files that are required to run <code>calicoctl</code> commands in your cluster. **Note**: This option cannot be used with the <code>--yaml</code> option.</dd>

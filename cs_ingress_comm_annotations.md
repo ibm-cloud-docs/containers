@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -740,7 +740,7 @@ nginx.ingress.kubernetes.io/session-cookie-name: "cookie_name1"
 nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
 nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
 nginx.ingress.kubernetes.io/configuration-snippet: |
-    more_set_headers "Set-Cookie: HttpOnly";
+  more_set_headers "Set-Cookie: HttpOnly";
 ```
 {: screen}
 
@@ -925,12 +925,12 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
         </thead>
         <tbody>
         <tr><td><code>defaultBackendService</code></td><td>Specify the name of an optional default service to receive requests when no host is configured or no matching host is found. This service replaces the IBM-provided default service that generates a <code>404</code> message. You might use this service to configure custom error pages or for testing connections.</td></tr>
-        <tr><td><code>defaultCertificate</code></td><td>A secret for a default TLS certificate to apply to any subdomain that is configured with Ingress ALBs in the format <code>secret_namespace/secret_name</code>. To create a secret, you can run the [<code>ibmcloud ks ingress secret create</code> command](/docs/containers?topic=containers-ingress-types#manage_certs). If a secret for a different TLS certificate is specified in the <code>spec.tls</code> section of an Ingress resource, and that secret exists in the same namespace as the Ingress resource, then that secret is applied instead of this default secret.</td></tr>
+        <tr><td><code>defaultCertificate</code></td><td>A secret for a default TLS certificate to apply to any subdomain that is configured with Ingress ALBs in the format <code>secret_namespace/secret_name</code>. To create a secret, you can run the <a href="/docs/containers?topic=containers-ingress-types#manage_certs"><code>ibmcloud ks ingress secret create</code> command</a>. If a secret for a different TLS certificate is specified in the <code>spec.tls</code> section of an Ingress resource, and that secret exists in the same namespace as the Ingress resource, then that secret is applied instead of this default secret.</td></tr>
         <tr><td><code>enableSslPassthrough</code></td><td>Enable SSL passthrough for the ALB. The TLS connection is not terminated and passes through untouched.</td></tr>
         <tr><td><code>httpPort</code>, <code>httpsPort</code></td><td>Expose non-default ports for the Ingress ALB by adding the HTTP or HTTPS ports that you want to open.</td></tr>
         <tr><td><code>ingressClass</code></td><td>If you specified a class other than <code>public-iks-k8s-nginx</code> or <code>private-iks-k8s-nginx</code> in your Ingress resource, specify the class.</td></tr>
-        <tr><td><code>replicas</code></td><td>By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods. For more information, see [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-types#scale_albs).</td></tr>
-        <tr><td><code>tcpServicesConfig</code></td><td>Specify a configmap and the namespace that the configmap is in, such as [<code>kube-system/tcp-services</code>](#tcp-ports), that contains information about accessing your app service through a non-standard TCP port.</td></tr>
+        <tr><td><code>replicas</code></td><td>By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods. For more information, see <a href="/docs/containers?topic=containers-ingress-types#scale_albs">Increasing the number of ALB pod replicas</a>.</td></tr>
+        <tr><td><code>tcpServicesConfig</code></td><td>Specify a configmap and the namespace that the configmap is in, such as <a href="#tcp-ports"><code>kube-system/tcp-services</code></a>, that contains information about accessing your app service through a non-standard TCP port.</td></tr>
         </tbody>
         </table>
 

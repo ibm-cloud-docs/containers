@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-11"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -106,11 +106,10 @@ content-type: troubleshoot
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
-  
+
 
 # Why does the cluster autoscaler add-on fail with the pod stuck in `Init` state?
 {: #ca_ts_secret}
-
 
 When you deploy the cluster autoscaler add-on, the `ibm-iks-cluster-autoscaler` pods are stuck in the `Init` state. When you run the `kubectl get pods | grep auto` command, you see output similar to the following:
 {: tsSymptoms}
@@ -160,3 +159,5 @@ To verify that the issue is a secret validation issue, get the logs from the `se
     {: pre}
 
 4. Update your `storage-secret-store` secret with the required IAM permissions by [resetting your credentials](/docs/containers?topic=containers-missing_permissions).
+
+

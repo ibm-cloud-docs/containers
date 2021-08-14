@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks
 
@@ -128,35 +128,35 @@ Various use cases show the strengths of {{site.data.keyword.containerlong_notm}}
         <tr>
     <td align="center"><img src="images/finance.svg" alt="Icon of front and back of credit card"/><br>Financial services</td>
     <td><ul>
-    <li>[Trim IT costs and accelerate regulatory compliance](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage)</li>
-    <li>[Streamline developer productivity to deploy AI tools to partners 4 times faster](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech)</li>
+    <li><a href="/docs/containers?topic=containers-cs_uc_finance#uc_mortgage">Trim IT costs and accelerate regulatory compliance</a></li>
+    <li><a href="/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech">Streamline developer productivity to deploy AI tools to partners 4 times faster</a></li>
     </ul></td>
         </tr>
         <tr>
         <td align="center"><img src="images/gov.svg" alt="Icon of government building with person inside"/><br>Government</td>
         <td><ul>
-    <li>[Secure the exchange of data, connecting public and private organizations](/docs/containers?topic=containers-cs_uc_gov#uc_port)</li>
-        <li>[Improve collaboration velocity with community Developers, combining public-private data](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup)</li></ul></td>
+    <li><a href="/docs/containers?topic=containers-cs_uc_gov#uc_port">Secure the exchange of data, connecting public and private organizations</a></li>
+        <li><a href="/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup">Improve collaboration velocity with community Developers, combining public-private data</a></li></ul></td>
         </tr>
     <tr>
         <td align="center"><img src="images/health.svg" alt="Icon of medical bag"/><br>Healthcare</td>
         <td><ul>
-        <li>[Migrate workloads from inefficient VMs to easily operated containers for patient systems](/docs/containers?topic=containers-cs_uc_health#uc_migrate)</li>
-        <li>[Securely host sensitive data while you grow research with partners](/docs/containers?topic=containers-cs_uc_health#uc_research)</li>
+        <li><a href="/docs/containers?topic=containers-cs_uc_health#uc_migrate">Migrate workloads from inefficient VMs to easily operated containers for patient systems</a></li>
+        <li><a href="/docs/containers?topic=containers-cs_uc_health#uc_research">Securely host sensitive data while you grow research with partners</a></li>
         </ul></td>
         </tr>
         <tr>
             <td align="center"><img src="images/retail.svg" alt="Icon of shopping cart with currency symbol"/><br>Retail</td>
             <td><ul>
-        <li>[Share data via APIs with global business partners to drive omni-channel sales](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
-            <li>[Optimize inventory expenses with digital insights to sales behavior](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)</li>
+        <li><a href="/docs/containers?topic=containers-cs_uc_retail#uc_data-share">Share data via APIs with global business partners to drive omni-channel sales</a></li>
+            <li><a href="/docs/containers?topic=containers-cs_uc_retail#uc_grocer">Optimize inventory expenses with digital insights to sales behavior</a></li>
               </ul></td>
           </tr>
         <tr>
         <td align="center"><img src="images/transport.svg" alt="Icon of railroad car with containers"/><br>Transportation</td>
             <td><ul>
-          <li>[Build and deploy HR site with AI in less than 3 weeks](/docs/containers?topic=containers-cs_uc_transport#uc_airline)</li>
-            <li>[Increase availability of worldwide systems for business partners](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
+          <li><a href="/docs/containers?topic=containers-cs_uc_transport#uc_airline">Build and deploy HR site with AI in less than 3 weeks</a></li>
+            <li><a href="/docs/containers?topic=containers-cs_uc_transport#uc_shipping">Increase availability of worldwide systems for business partners</a></li></ul></td>
         </tr>
     </tbody>
     </table>

@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -1409,7 +1409,7 @@ The following table shows the changes that are included in the master and worker
 | Kubernetes | Both | v1.16.9 | v1.16.10 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.10){: external}. |
 | Kubernetes Dashboard | Master | v2.0.0-rc7 | v2.0.0 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0){: external}. |
 | Kubernetes Metrics Server | Master | N/A | N/A | Increased the CPU per node for the `metrics-server` container to improve availability of the metrics server API service for large clusters. |
-| Kubernetes `NodeLocal` DNS cache | Master | 1.15.4 | 1.15.13 | <ul><li>See the [Kubernetes <code>NodeLocal</code> DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.15.13){: external}</li><li>Now, when you [apply the label to set up node local DNS caching](/docs/containers?topic=containers-cluster_dns#dns_cache), the requests are handled immediately and you do not need to reload the worker nodes.</li><li>The <code>NodeLocal</code> DNS cache configuration now allows customization of stub domains and upstream DNS servers.</li><li>The <code>node-local-dns</code> daemon set is updated to include the <code>prometheus.io/port</code> and <code>prometheus.io/scrape</code> annotations on the pods.</li></ul> |
+| Kubernetes `NodeLocal` DNS cache | Master | 1.15.4 | 1.15.13 | <ul><li>See the <a href="https://github.com/kubernetes/dns/releases/tag/1.15.13">Kubernetes <code>NodeLocal</code> DNS cache release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon"></li><li>Now, when you <a href="/docs/containers?topic=containers-cluster_dns#dns_cache">apply the label to set up node local DNS caching</a>, the requests are handled immediately and you do not need to reload the worker nodes.</li><li>The <code>NodeLocal</code> DNS cache configuration now allows customization of stub domains and upstream DNS servers.</li><li>The <code>node-local-dns</code> daemon set is updated to include the <code>prometheus.io/port</code> and <code>prometheus.io/scrape</code> annotations on the pods.</li></ul> |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | Master | 177 | 208 | Updated the version 2.0 network load balancers (NLB) to clean up unnecessary IPVS rules. Improved application logging. Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | Ubuntu 18.04 packages | Worker | 4.15.0-99-generic | 4.15.0-101-generic | Updated worker node images with kernel and package updates for [CVE-2019-20795](https://nvd.nist.gov/vuln/detail/CVE-2019-20795){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616){: external}, and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
 | Ubuntu 16.04 packages | Worker | 4.4.0-178-generic | 4.4.0-179-generic | Updated worker node images with package and kernel updates for [CVE-2019-19060](https://nvd.nist.gov/vuln/detail/CVE-2019-19060){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-11608](https://nvd.nist.gov/vuln/detail/CVE-2020-11608){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616), and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
@@ -1578,7 +1578,7 @@ The following table shows the changes that are included in the master and worker
 | Gateway-enabled cluster controller | 1032 | 1045 | Updated image for [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | GPU device plug-in and installer | f2e7bd7 | da19df3 | Updated image for [CVE-2019-13627](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13627) and [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. Updated the GPU drivers to version [440.44](https://www.nvidia.com/Download/driverResults.aspx/156086/){: external}. |
 | IBM Calico extension | 130 | 258 | Updated image for [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
-| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: <code>ibmc-file-bronze-gid</code>, <code>ibmc-file-silver-gid</code>, and <code>ibmc-file-gold-gid</code>.</li><li>Fixed bugs in support of [non-root user access to an NFS file share](/docs/containers?topic=containers-cs_storage_nonroot).</li><li>Resolved [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}.</li></ul> |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: <code>ibmc-file-bronze-gid</code>, <code>ibmc-file-silver-gid</code>, and <code>ibmc-file-gold-gid</code>.</li><li>Fixed bugs in support of <a href="/docs/containers?topic=containers-cs_storage_nonroot">non-root user access to an NFS file share</a>.</li><li>Resolved <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551">CVE-2019-1551</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li></ul> |
 | {{site.data.keyword.cloud_notm}} Provider | v1.16.3-115 | v1.16.5-148 | Updated to support the Kubernetes 1.16.5 release. |
 | Key Management Service provider | 270 | 277 | Updated the {{site.data.keyword.keymanagementservicelong_notm}} Go client. |
 | Kubernetes | v1.16.3 | v1.16.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.5){: external}. |
@@ -1699,7 +1699,7 @@ The following tables show the changes that are included in the patch `1.16.2_151
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
 |Calico | v3.8.2 | v3.9.2 | See the [Calico release notes](https://docs.projectcalico.org/archive/v3.9/release-notes/){: external}.|
-|CoreDNS |    1.3.1 |    1.6.2 |    See the [CoreDNS release notes](https://coredns.io/2019/08/13/coredns-1.6.2-release/). This update includes the following configuration changes. <ul><li>CoreDNS now runs <code>3</code> replica pods by default, and the pods prefer to schedule across worker nodes and zones to improve cluster DNS availability. If you update your cluster to version 1.16 from an earlier version, you can [configure the CoreDNS autoscaler](/docs/containers?topic=containers-cluster_dns#dns_autoscale) to use a minimum of <code>3</code> pods.</li><li>CoreDNS caching is updated to better support older DNS clients. If you disabled the CoreDNS <code>cache</code> plug-in, you can now re-enable the plug-in.</li><li>The CoreDNS deployment is now configured to check readiness by using the <code>ready</code> plug-in.</li><li>CoreDNS version 1.6 no longer supports the <code>proxy</code> plug-in, which is replaced by the <code>forward</code> plug-in. In addition, the CoreDNS <code>kubernetes</code> plug-in no longer supports the <code>resyncperiod</code> option and ignores the <code>upstream</code> option. </li></ul>|
+|CoreDNS |    1.3.1 |    1.6.2 |    See the [CoreDNS release notes](https://coredns.io/2019/08/13/coredns-1.6.2-release/). This update includes the following configuration changes. <ul><li>CoreDNS now runs <code>3</code> replica pods by default, and the pods prefer to schedule across worker nodes and zones to improve cluster DNS availability. If you update your cluster to version 1.16 from an earlier version, you can <a href="/docs/containers?topic=containers-cluster_dns#dns_autoscale">configure the CoreDNS autoscaler</a> to use a minimum of <code>3</code> pods.</li><li>CoreDNS caching is updated to better support older DNS clients. If you disabled the CoreDNS <code>cache</code> plug-in, you can now re-enable the plug-in.</li><li>The CoreDNS deployment is now configured to check readiness by using the <code>ready</code> plug-in.</li><li>CoreDNS version 1.6 no longer supports the <code>proxy</code> plug-in, which is replaced by the <code>forward</code> plug-in. In addition, the CoreDNS <code>kubernetes</code> plug-in no longer supports the <code>resyncperiod</code> option and ignores the <code>upstream</code> option. </li></ul>|
 | {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor | 350 | 351 | Updated to use the `distroless/static` base image and to use `Go` version 1.12.10.|
 | Kubernetes | v1.15.5 | v1.16.2 | See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.2).|
 | Kubernetes configuration |    N/A |    N/A |    [Kubernetes service account token volume projection](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#service-account-token-volume-projection){: external} is enabled and issues tokens that use `https://kubernetes.default.svc` as the default API audience. |
@@ -2058,7 +2058,7 @@ The following table shows the changes that are included in the master and worker
 | etcd | v3.3.17 | v3.3.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.18){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | Gateway-enabled cluster controller | 1032 | 1045 | Updated image for [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | GPU device plug-in and installer | f2e7bd7 | da19df3 | Updated image for [CVE-2019-13627](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13627) and [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. Updated the GPU drivers to version [440.44](https://www.nvidia.com/Download/driverResults.aspx/156086/){: external}. |
-| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: <code>ibmc-file-bronze-gid</code>, <code>ibmc-file-silver-gid</code>, and <code>ibmc-file-gold-gid</code>.</li><li>Fixed bugs in support of [non-root user access to an NFS file share](/docs/containers?topic=containers-cs_storage_nonroot).</li><li>Resolved [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}.</li></ul> |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: <code>ibmc-file-bronze-gid</code>, <code>ibmc-file-silver-gid</code>, and <code>ibmc-file-gold-gid</code>.</li><li>Fixed bugs in support of <a href="/docs/containers?topic=containers-cs_storage_nonroot">non-root user access to an NFS file share</a>.</li><li>Resolved <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551">CVE-2019-1551</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li></ul> |
 | {{site.data.keyword.cloud_notm}} Provider | v1.15.6-200 | v1.15.8-230 | Updated to support the Kubernetes 1.15.8 release. |
 | Key Management Service provider | 270 | 277 | Updated the {{site.data.keyword.keymanagementservicelong_notm}} Go client. |
 | Kubernetes | v1.15.6 | v1.15.8 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.8){: external}. |
@@ -2186,7 +2186,7 @@ The following table shows the changes that are included in the master fix pack `
 | {{site.data.keyword.cloud_notm}} Provider | v1.15.4-136 | v1.15.5-159 | Updated to support the Kubernetes 1.15.5 release. |
 | Key Management Service provider | 221 | 237 | Updated image for [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276){: external}. |
 | Kubernetes |    v1.15.4 |    v1.15.5    | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.5){: external}. Update resolves [CVE-2019-11253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11253){: external} (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/1098759)) and [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276){: external}. |
-| Kubernetes Metrics Server | v0.3.4 |    v0.3.6    | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.6){: external}. The update also includes the following configuration changes to improve reliability and availability.<ul><li>Added [Kubernetes liveness and readiness probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/){: external}.</li><li>Added [Kubernetes pod affinity rule](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/){: external} to prefer scheduling to the same worker node as the OpenVPN client <code>vpn</code> pod in the <code>kube-system</code> namespace.</li><li>Increased metrics resolution timeout from 30 to 45 seconds.</li></ul>|
+| Kubernetes Metrics Server | v0.3.4 |    v0.3.6    | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.6){: external}. The update also includes the following configuration changes to improve reliability and availability.<ul><li>Added <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">Kubernetes liveness and readiness probes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li><li>Added <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/">Kubernetes pod affinity rule</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> to prefer scheduling to the same worker node as the OpenVPN client <code>vpn</code> pod in the <code>kube-system</code> namespace.</li><li>Increased metrics resolution timeout from 30 to 45 seconds.</li></ul>|
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 153 | 159 | Updated image for [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}, and [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276){: external}. |
 {: caption="Changes since version 1.15.4_1519" caption-side="top"}
 
@@ -2211,13 +2211,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu 16.04 packages and kernel</td>
 <td>4.4.0-164-generic</td>
 <td>4.4.0-165-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-0136 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-0136), [CVE-2018-20961 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20961), [CVE-2019-11487 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11487), [CVE-2016-10905 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2016-10905), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5094">CVE-2019-5094</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20976">CVE-2018-20976</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-0136">CVE-2019-0136</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20961">CVE-2018-20961</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11487">CVE-2019-11487</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2016-10905">CVE-2016-10905</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16056">CVE-2019-16056</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16935">CVE-2019-16935</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 packages and kernel</td>
 <td>4.15.0-64-generic</td>
 <td>4.15.0-65-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5094">CVE-2019-5094</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20976">CVE-2018-20976</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16056">CVE-2019-16056</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16935">CVE-2019-16935</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -2246,7 +2246,7 @@ The following table shows the changes that are included in the patch 1.15.4_1518
 <td>Calico</td>
 <td>v3.8.1</td>
 <td>v3.8.2</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/archive/v3.8/release-notes/).</td>
+<td>See the <a href="https://docs.projectcalico.org/archive/v3.8/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster master HA configuration</td>
@@ -2258,7 +2258,7 @@ The following table shows the changes that are included in the patch 1.15.4_1518
 <td>containerd</td>
 <td>v1.2.9</td>
 <td>v1.2.10</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.10). Update resolves [CVE-2019-16884 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16884) and [CVE-2019-16276 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.10">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16884">CVE-2019-16884</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276">CVE-2019-16276</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Default IBM file storage class</td>
@@ -2270,31 +2270,31 @@ The following table shows the changes that are included in the patch 1.15.4_1518
 <td>Gateway-enabled cluster controller</td>
 <td>N/A</td>
 <td>844</td>
-<td>New! For [classic clusters with a gateway enabled](/docs/containers?topic=containers-clusters#gateway_cluster_cli), a <code>DaemonSet</code> is installed to configure settings for routing network traffic to worker nodes.</td>
+<td>New! For <a href="/docs/containers?topic=containers-clusters#gateway_cluster_cli">classic clusters with a gateway enabled</a>, a <code>DaemonSet</code> is installed to configure settings for routing network traffic to worker nodes.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.15.3-112</td>
 <td>v1.15.4-136</td>
-<td>Updated to support the Kubernetes 1.15.4 release. In addition, version 1.0 and 2.0 network load balancers (NLBs) were updated to support [classic clusters with a gateway enabled](/docs/containers?topic=containers-clusters#gateway_cluster_cli).</td>
+<td>Updated to support the Kubernetes 1.15.4 release. In addition, version 1.0 and 2.0 network load balancers (NLBs) were updated to support <a href="/docs/containers?topic=containers-clusters#gateway_cluster_cli">classic clusters with a gateway enabled</a>.</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
 <td>212</td>
 <td>221</td>
-<td>Improved Kubernetes [key management service provider](/docs/containers?topic=containers-encryption#keyprotect) caching of {{site.data.keyword.cloud_notm}} IAM tokens. In addition, fixed a problem with Kubernetes secret decryption when the cluster's root key is rotated.</td>
+<td>Improved Kubernetes <a href="/docs/containers?topic=containers-encryption#keyprotect">key management service provider</a> caching of {{site.data.keyword.cloud_notm}} IAM tokens. In addition, fixed a problem with Kubernetes secret decryption when the cluster's root key is rotated.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.15.3</td>
 <td>v1.15.4</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.4).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.15.4">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes Metrics Server</td>
 <td>v0.3.3</td>
 <td>v0.3.4</td>
-<td>See the [Kubernetes Metrics Server release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.4).</td>
+<td>See the <a href="https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.4">Kubernetes Metrics Server release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
@@ -2306,19 +2306,19 @@ The following table shows the changes that are included in the patch 1.15.4_1518
 <td>OpenVPN server</td>
 <td>2.4.6-r3-IKS-115</td>
 <td>2.4.6-r3-IKS-121</td>
-<td>Updated images for [CVE-2019-1547 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547) and [CVE-2019-1563 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563).</td>
+<td>Updated images for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547">CVE-2019-1547</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563">CVE-2019-1563</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel and packages</td>
 <td>4.15.0-62-generic</td>
 <td>4.15.0-64-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-15031 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15031), [CVE-2019-15030 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15030), and [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15031">CVE-2019-15031</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15030">CVE-2019-15030</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14835">CVE-2019-14835</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel and packages</td>
 <td>4.4.0-161-generic</td>
 <td>4.4.0-164-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14835">CVE-2019-14835</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -2345,19 +2345,19 @@ The following table shows the changes that are included in the worker node fix p
 <td>containerd</td>
 <td>v1.2.8</td>
 <td>v1.2.9</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.9). Update resolves [CVE-2019-9515 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9515).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.9">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9515">CVE-2019-9515</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 packages and kernel</td>
 <td>4.4.0-159-generic</td>
 <td>4.4.0-161-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5481 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5481), [CVE-2019-5482 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5482), [CVE-2019-15903 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15903), [CVE-2015-9383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2015-9383), [CVE-2019-10638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10638), [CVE-2019-3900 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3900), [CVE-2018-20856 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20856), [CVE-2019-14283 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14283), [CVE-2019-14284 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14284), [CVE-2019-5010 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5010), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636), [CVE-2019-9740 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9740), [CVE-2019-9947 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9947), [CVE-2019-9948 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9948), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636), [CVE-2018-20852 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20852), [CVE-2018-20406 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20406), and [CVE-2019-10160 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10160).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5481">CVE-2019-5481</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5482">CVE-2019-5482</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15903">CVE-2019-15903</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2015-9383">CVE-2015-9383</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10638">CVE-2019-10638</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-3900">CVE-2019-3900</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20856">CVE-2018-20856</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14283">CVE-2019-14283</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14284">CVE-2019-14284</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5010">CVE-2019-5010</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9740">CVE-2019-9740</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9947">CVE-2019-9947</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9948">CVE-2019-9948</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20852">CVE-2018-20852</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20406">CVE-2018-20406</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10160">CVE-2019-10160</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 packages and kernel</td>
 <td>4.15.0-58-generic</td>
 <td>4.15.0-62-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5481 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5481), [CVE-2019-5482 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5482), [CVE-2019-15903 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15903), [CVE-2019-14283 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14283), [CVE-2019-14284 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14284), [CVE-2018-20852 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20852), [CVE-2019-5010 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5010), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636), [CVE-2019-9740 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9740), [CVE-2019-9947 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9947), [CVE-2019-9948 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9948), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636), [CVE-2019-10160 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10160), and [CVE-2019-15718 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15718).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5481">CVE-2019-5481</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5482">CVE-2019-5482</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15903">CVE-2019-15903</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14283">CVE-2019-14283</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14284">CVE-2019-14284</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20852">CVE-2018-20852</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5010">CVE-2019-5010</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9740">CVE-2019-9740</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9947">CVE-2019-9947</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9948">CVE-2019-9948</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10160">CVE-2019-10160</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15718">CVE-2019-15718</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -2383,13 +2383,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>containerd</td>
 <td>v1.2.7</td>
 <td>v1.2.8</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.8). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.8">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.15.2</td>
 <td>v1.15.3</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.3). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514)), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514)), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.15.3">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">), <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">), and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 packages</td>
@@ -2401,7 +2401,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu 18.04 packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated worker node images with package updates for [CVE-2019-10222 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10222) and [CVE-2019-11922 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11922).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10222">CVE-2019-10222</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11922">CVE-2019-11922</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -2427,19 +2427,19 @@ The following table shows the changes that are included in the master fix pack 1
 <td><code>etcd</code></td>
 <td>v3.3.13</td>
 <td>v3.3.15</td>
-<td>See the [<code>etcd</code> release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.15). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.3.15"><code>etcd</code> release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>07c9b67</td>
 <td>de13f2a</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809). Updated the GPU drivers to [430.40 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/Download/driverResults.aspx/149138/).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Updated the GPU drivers to <a href="https://www.nvidia.com/Download/driverResults.aspx/149138/">430.40</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>348</td>
 <td>349</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -2451,19 +2451,19 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Key Management Service provider</td>
 <td>207</td>
 <td>212</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.15.2</td>
 <td>v1.15.3</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.3). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514)), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514)), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.15.3">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">), <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">), and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>147</td>
 <td>148</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -2489,25 +2489,25 @@ The following table shows the changes that are included in the worker node fix p
 <td>Cluster master HA Proxy</td>
 <td>2.0.1-alpine</td>
 <td>1.8.21-alpine</td>
-<td>Moved to HA Proxy 1.8 to fix [socket leak in HA proxy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/haproxy/haproxy/issues/136). Also added a liveliness check to monitor the health of HA Proxy. For more information, see [HA Proxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.8/src/CHANGELOG).</td>
+<td>Moved to HA Proxy 1.8 to fix <a href="https://github.com/haproxy/haproxy/issues/136">socket leak in HA proxy</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Also added a liveliness check to monitor the health of HA Proxy. For more information, see <a href="https://www.haproxy.org/download/1.8/src/CHANGELOG">HA Proxy release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.15.1</td>
 <td>v1.15.2</td>
-<td>For more information, see the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.2).</td>
+<td>For more information, see the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.15.2">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel and packages</td>
 <td>4.4.0-157-generic</td>
 <td>4.4.0-159-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13012), [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-10126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), and [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13012">CVE-2019-13012</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-1125">CVE-2019-1125</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-5383">CVE-2018-5383</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10126">CVE-2019-10126</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-3846">CVE-2019-3846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel and packages</td>
 <td>4.15.0-55-generic</td>
 <td>4.15.0-58-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2019-2101 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-2101), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-13233 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13233), [CVE-2019-13272 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13272), [CVE-2019-10126](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846), [CVE-2019-12818 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12818), [CVE-2019-12984 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12984), and [CVE-2019-12819 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12819).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-1125">CVE-2019-1125</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-2101">CVE-2019-2101</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-5383">CVE-2018-5383</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13233">CVE-2019-13233</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13272">CVE-2019-13272</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10126">CVE-2019-10126</a>, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-3846">CVE-2019-3846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-12818">CVE-2019-12818</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-12984">CVE-2019-12984</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-12819">CVE-2019-12819</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -2565,13 +2565,13 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Cluster health</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Cluster health shows <code>Warning</code> state if a cluster control plane operation failed or was canceled. For more information, see [Debugging clusters](/docs/containers?topic=containers-debug_clusters).</td>
+<td>Cluster health shows <code>Warning</code> state if a cluster control plane operation failed or was canceled. For more information, see <a href="/docs/containers?topic=containers-debug_clusters">Debugging clusters</a>.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>d91d200</td>
 <td>07c9b67</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -2583,31 +2583,31 @@ The following table shows the changes that are included in the master fix pack 1
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>347</td>
 <td>348</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.15.1</td>
 <td>v1.15.2</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.2). Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967115)) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967123)).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.15.2">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Updates resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247">CVE-2019-11247</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/node/967115">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">) and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249">CVE-2019-11249</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/node/967123">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">).</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>146</td>
 <td>147</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN client</td>
 <td>2.4.6-r3-IKS-90</td>
 <td>2.4.6-r3-IKS-116</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN server</td>
 <td>2.4.6-r3-IKS-25</td>
 <td>2.4.6-r3-IKS-115</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -2633,7 +2633,7 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 <td>Calico</td>
 <td>v3.6.4</td>
 <td>v3.8.1</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). In addition, Kubernetes version 1.15 clusters now have a new <code>allow-all-private-default</code> global network policy to allow all ingress and egress network traffic on private interface. For more information, see [Isolating clusters on the private network](/docs/containers?topic=containers-network_policies#isolate_workers).</td>
+<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. In addition, Kubernetes version 1.15 clusters now have a new <code>allow-all-private-default</code> global network policy to allow all ingress and egress network traffic on private interface. For more information, see <a href="/docs/containers?topic=containers-network_policies#isolate_workers">Isolating clusters on the private network</a>.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -2645,55 +2645,55 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 <td>Kubernetes</td>
 <td>v1.14.4</td>
 <td>v1.15.1</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.1) and [Kubernetes 1.15 blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2019/06/19/kubernetes-1-15-release-announcement/). Update resolves [CVE-2019-11248 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967113)).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.15.1">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://kubernetes.io/blog/2019/06/19/kubernetes-1-15-release-announcement/">Kubernetes 1.15 blog</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248">CVE-2019-11248</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/node/967113">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">).</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated Kubernetes API server default toleration seconds to 600 for the Kubernetes default <code>node.kubernetes.io/not-ready</code> and <code>node.kubernetes.io/unreachable</code> pod tolerations. For more information about tolerations, see [Taints and Tolerations ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).</td>
+<td>Updated Kubernetes API server default toleration seconds to 600 for the Kubernetes default <code>node.kubernetes.io/not-ready</code> and <code>node.kubernetes.io/unreachable</code> pod tolerations. For more information about tolerations, see <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">Taints and Tolerations</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes add-on resizer</td>
 <td>1.8.4</td>
 <td>1.8.5</td>
-<td>For more information, see the [Kubernetes add-on resizer release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.5).</td>
+<td>For more information, see the <a href="https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.5">Kubernetes add-on resizer release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes DNS autoscaler</td>
 <td>1.4.0</td>
 <td>1.6.0</td>
-<td>For more information, see the [Kubernetes DNS autoscaler release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.6.0).</td>
+<td>For more information, see the <a href="https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.6.0">Kubernetes DNS autoscaler release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes nodelocal DNS cache</td>
 <td>N/A</td>
 <td>1.15.4</td>
-<td>For more information, see the [Kubernetes nodelocal DNS cache release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/releases/tag/1.15.4). For more information about this new beta feature, see [Setting up Nodelocal DNS Cache (beta)](/docs/containers?topic=containers-cluster_dns#dns_enablecache).</td>
+<td>For more information, see the <a href="https://github.com/kubernetes/dns/releases/tag/1.15.4">Kubernetes nodelocal DNS cache release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information about this new beta feature, see [Setting up Nodelocal DNS Cache (beta)](/docs/containers?topic=containers-cluster_dns#dns_enablecache).</td>
 </tr>
 <tr>
 <td>Cluster master HA proxy</td>
 <td>1.9.7-alpine</td>
 <td>2.0.1-alpine</td>
-<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/2.0/src/CHANGELOG).</td>
+<td>See the <a href="https://www.haproxy.org/download/2.0/src/CHANGELOG">HAProxy release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>a7e8ece</td>
 <td>d91d200</td>
-<td>Updated image for [CVE-2019-9924 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924">CVE-2019-9924</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel and packages</td>
 <td>4.15.0-54-generic</td>
 <td>4.15.0-55-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-11085 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11085), [CVE-2019-11815 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11815), [CVE-2019-11833 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11833), [CVE-2019-11884 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11884), [CVE-2019-13057 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13057), [CVE-2019-13565 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13565), [CVE-2019-13636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13636), and [CVE-2019-13638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13638).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11085">CVE-2019-11085</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11815">CVE-2019-11815</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11833">CVE-2019-11833</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11884">CVE-2019-11884</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13057">CVE-2019-13057</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13565">CVE-2019-13565</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13636">CVE-2019-13636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13638">CVE-2019-13638</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel and packages</td>
 <td>4.4.0-154-generic</td>
 <td>4.4.0-157-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-2054 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-2054), [CVE-2019-11833 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11833), [CVE-2019-13057 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13057), [CVE-2019-13565 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13565), [CVE-2019-13636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13636), and [CVE-2019-13638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13638).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-2054">CVE-2019-2054</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11833">CVE-2019-11833</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13057">CVE-2019-13057</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13565">CVE-2019-13565</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13636">CVE-2019-13636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13638">CVE-2019-13638</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -2895,7 +2895,7 @@ The following table shows the changes that are included in the master and worker
 | Cluster master HA Proxy | 1.8.21-alpine | 1.8.23-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.8/src/CHANGELOG){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | etcd | v3.3.17 | v3.3.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.18){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | GPU device plug-in and installer | f2e7bd7 | da19df3 | Updated image for [CVE-2019-13627](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13627) and [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. Updated the GPU drivers to version [440.44](https://www.nvidia.com/Download/driverResults.aspx/156086/){: external}. |
-| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: <code>ibmc-file-bronze-gid</code>, <code>ibmc-file-silver-gid</code>, and <code>ibmc-file-gold-gid</code>.</li><li>Fixed bugs in support of [non-root user access to an NFS file share](/docs/containers?topic=containers-cs_storage_nonroot).</li><li>Resolved [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}.</li></ul> |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: <code>ibmc-file-bronze-gid</code>, <code>ibmc-file-silver-gid</code>, and <code>ibmc-file-gold-gid</code>.</li><li>Fixed bugs in support of <a href="/docs/containers?topic=containers-cs_storage_nonroot">non-root user access to an NFS file share</a>.</li><li>Resolved <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551">CVE-2019-1551</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li></ul> |
 | {{site.data.keyword.cloud_notm}} Provider | v1.14.9-239    | v1.14.10-288 | Updated to support the Kubernetes 1.14.10 release. |
 | Key Management Service provider | 270 | 277 | Updated the {{site.data.keyword.keymanagementservicelong_notm}} Go client. |
 | Kubernetes | v1.14.9 |    v1.14.10 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.10){: external}. |
@@ -3043,13 +3043,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu 16.04 packages and kernel</td>
 <td>4.4.0-164-generic</td>
 <td>4.4.0-165-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-0136 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-0136), [CVE-2018-20961 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20961), [CVE-2019-11487 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11487), [CVE-2016-10905 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2016-10905), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5094">CVE-2019-5094</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20976">CVE-2018-20976</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-0136">CVE-2019-0136</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20961">CVE-2018-20961</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11487">CVE-2019-11487</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2016-10905">CVE-2016-10905</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16056">CVE-2019-16056</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16935">CVE-2019-16935</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 packages and kernel</td>
 <td>4.15.0-64-generic</td>
 <td>4.15.0-65-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5094">CVE-2019-5094</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20976">CVE-2018-20976</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16056">CVE-2019-16056</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16935">CVE-2019-16935</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -3078,7 +3078,7 @@ The following table shows the changes that are included in the patch 1.14.7_1534
 <td>Calico</td>
 <td>v3.6.4</td>
 <td>v3.6.5</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/archive/v3.6/release-notes/).</td>
+<td>See the <a href="https://docs.projectcalico.org/archive/v3.6/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster master HA configuration</td>
@@ -3090,7 +3090,7 @@ The following table shows the changes that are included in the patch 1.14.7_1534
 <td>containerd</td>
 <td>v1.2.9</td>
 <td>v1.2.10</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.10). Update resolves [CVE-2019-16884 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16884) and [CVE-2019-16276 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.10">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16884">CVE-2019-16884</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276">CVE-2019-16276</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Default IBM file storage class</td>
@@ -3108,13 +3108,13 @@ The following table shows the changes that are included in the patch 1.14.7_1534
 <td>Key Management Service provider</td>
 <td>212</td>
 <td>221</td>
-<td>Improved Kubernetes [key management service provider](/docs/containers?topic=containers-encryption#keyprotect) caching of {{site.data.keyword.cloud_notm}} IAM tokens. In addition, fixed a problem with Kubernetes secret decryption when the cluster's root key is rotated.</td>
+<td>Improved Kubernetes <a href="/docs/containers?topic=containers-encryption#keyprotect">key management service provider</a> caching of {{site.data.keyword.cloud_notm}} IAM tokens. In addition, fixed a problem with Kubernetes secret decryption when the cluster's root key is rotated.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.14.6</td>
 <td>v1.14.7</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.7).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.14.7">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
@@ -3126,19 +3126,19 @@ The following table shows the changes that are included in the patch 1.14.7_1534
 <td>OpenVPN server</td>
 <td>2.4.6-r3-IKS-115</td>
 <td>2.4.6-r3-IKS-121</td>
-<td>Updated images for [CVE-2019-1547 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547) and [CVE-2019-1563 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563).</td>
+<td>Updated images for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547">CVE-2019-1547</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563">CVE-2019-1563</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel and packages</td>
 <td>4.15.0-62-generic</td>
 <td>4.15.0-64-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-15031 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15031), [CVE-2019-15030 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15030), and [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15031">CVE-2019-15031</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15030">CVE-2019-15030</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14835">CVE-2019-14835</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel and packages</td>
 <td>4.4.0-161-generic</td>
 <td>4.4.0-164-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14835">CVE-2019-14835</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -3165,19 +3165,19 @@ The following table shows the changes that are included in the worker node fix p
 <td>containerd</td>
 <td>v1.2.8</td>
 <td>v1.2.9</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.9). Update resolves [CVE-2019-9515 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9515).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.9">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9515">CVE-2019-9515</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 packages and kernel</td>
 <td>4.4.0-159-generic</td>
 <td>4.4.0-161-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5481 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5481), [CVE-2019-5482 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5482), [CVE-2019-15903 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15903), [CVE-2015-9383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2015-9383), [CVE-2019-10638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10638), [CVE-2019-3900 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3900), [CVE-2018-20856 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20856), [CVE-2019-14283 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14283), [CVE-2019-14284 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14284), [CVE-2019-5010 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5010), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636),[CVE-2019-9740 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9740), [CVE-2019-9947 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9947), [CVE-2019-9948 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9948), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636), [CVE-2018-20852 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20852), [CVE-2018-20406 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20406), and [CVE-2019-10160 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10160).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5481">CVE-2019-5481</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5482">CVE-2019-5482</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15903">CVE-2019-15903</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2015-9383">CVE-2015-9383</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10638">CVE-2019-10638</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-3900">CVE-2019-3900</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20856">CVE-2018-20856</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14283">CVE-2019-14283</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14284">CVE-2019-14284</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5010">CVE-2019-5010</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">,<a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9740">CVE-2019-9740</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9947">CVE-2019-9947</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9948">CVE-2019-9948</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20852">CVE-2018-20852</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20406">CVE-2018-20406</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10160">CVE-2019-10160</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 packages and kernel</td>
 <td>4.15.0-58-generic</td>
 <td>4.15.0-62-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5481 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5481), [CVE-2019-5482 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5482), [CVE-2019-15903 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15903), [CVE-2019-14283 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14283), [CVE-2019-14284 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14284), [CVE-2018-20852 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20852), [CVE-2019-5010 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5010), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636), [CVE-2019-9740 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9740), [CVE-2019-9947 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9947), [CVE-2019-9948 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9948), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636), [CVE-2019-10160 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10160), and [CVE-2019-15718 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15718).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5481">CVE-2019-5481</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5482">CVE-2019-5482</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15903">CVE-2019-15903</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14283">CVE-2019-14283</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14284">CVE-2019-14284</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20852">CVE-2018-20852</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5010">CVE-2019-5010</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9740">CVE-2019-9740</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9947">CVE-2019-9947</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9948">CVE-2019-9948</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10160">CVE-2019-10160</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15718">CVE-2019-15718</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -3203,13 +3203,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>containerd</td>
 <td>v1.2.7</td>
 <td>v1.2.8</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.8). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.8">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.14.5</td>
 <td>v1.14.6</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514)), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514)), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">), <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">), and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 packages</td>
@@ -3221,7 +3221,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu 18.04 packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated worker node images with package updates for [CVE-2019-10222 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10222) and [CVE-2019-11922 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11922).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10222">CVE-2019-10222</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11922">CVE-2019-11922</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -3247,19 +3247,19 @@ The following table shows the changes that are included in the master fix pack 1
 <td><code>etcd</code></td>
 <td>v3.3.13</td>
 <td>v3.3.15</td>
-<td>See the [<code>etcd</code> release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.15). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.3.15"><code>etcd</code> release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>07c9b67</td>
 <td>de13f2a</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809). Updated the GPU drivers to [430.40 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/Download/driverResults.aspx/149138/).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Updated the GPU drivers to <a href="https://www.nvidia.com/Download/driverResults.aspx/149138/">430.40</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>348</td>
 <td>349</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -3271,19 +3271,19 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Key Management Service provider</td>
 <td>207</td>
 <td>212</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.14.5</td>
 <td>v1.14.6</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514)), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514)), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">), <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">), and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>147</td>
 <td>148</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -3309,25 +3309,25 @@ The following table shows the changes that are included in the worker node fix p
 <td>Cluster master HA proxy</td>
 <td>2.0.1-alpine</td>
 <td>1.8.21-alpine</td>
-<td>Moved to HA proxy 1.8 to fix [socket leak in HA proxy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/haproxy/haproxy/issues/136). Also added a liveliness check to monitor the health of HA proxy. For more information, see [HA proxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.8/src/CHANGELOG).</td>
+<td>Moved to HA proxy 1.8 to fix <a href="https://github.com/haproxy/haproxy/issues/136">socket leak in HA proxy</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Also added a liveliness check to monitor the health of HA proxy. For more information, see <a href="https://www.haproxy.org/download/1.8/src/CHANGELOG">HA proxy release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.14.4</td>
 <td>v1.14.5</td>
-<td>For more information, see the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.5).</td>
+<td>For more information, see the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.14.5">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel and packages</td>
 <td>4.4.0-157-generic</td>
 <td>4.4.0-159-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13012), [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-10126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), and [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13012">CVE-2019-13012</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-1125">CVE-2019-1125</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-5383">CVE-2018-5383</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10126">CVE-2019-10126</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-3846">CVE-2019-3846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel and packages</td>
 <td>4.15.0-55-generic</td>
 <td>4.15.0-58-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2019-2101 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-2101), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-13233 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13233), [CVE-2019-13272 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13272), [CVE-2019-10126](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846), [CVE-2019-12818 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12818), [CVE-2019-12984 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12984), and [CVE-2019-12819 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12819).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-1125">CVE-2019-1125</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-2101">CVE-2019-2101</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-5383">CVE-2018-5383</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13233">CVE-2019-13233</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13272">CVE-2019-13272</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10126">CVE-2019-10126</a>, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-3846">CVE-2019-3846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-12818">CVE-2019-12818</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-12984">CVE-2019-12984</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-12819">CVE-2019-12819</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -3385,19 +3385,19 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Cluster health</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Cluster health shows <code>Warning</code> state if a cluster control plane operation failed or was canceled. For more information, see [Debugging clusters](/docs/containers?topic=containers-debug_clusters).</td>
+<td>Cluster health shows <code>Warning</code> state if a cluster control plane operation failed or was canceled. For more information, see <a href="/docs/containers?topic=containers-debug_clusters">Debugging clusters</a>.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>a7e8ece</td>
 <td>07c9b67</td>
-<td>Image updated for [CVE-2019-9924 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924) and [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924">CVE-2019-9924</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>347</td>
 <td>348</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -3409,25 +3409,25 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Kubernetes</td>
 <td>v1.14.4</td>
 <td>v1.14.5</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.5). Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967115)) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967123)).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.14.5">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Updates resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247">CVE-2019-11247</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/node/967115">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">) and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249">CVE-2019-11249</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/node/967123">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">).</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>146</td>
 <td>147</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN client</td>
 <td>2.4.6-r3-IKS-13</td>
 <td>2.4.6-r3-IKS-116</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN server</td>
 <td>2.4.6-r3-IKS-25</td>
 <td>2.4.6-r3-IKS-115</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -3453,13 +3453,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu 18.04 kernel and packages</td>
 <td>4.15.0-54-generic</td>
 <td>4.15.0-55-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-11085 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11085), [CVE-2019-11815 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11815), [CVE-2019-11833 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11833), [CVE-2019-11884 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11884), [CVE-2019-13057 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13057), [CVE-2019-13565 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13565), [CVE-2019-13636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13636), and [CVE-2019-13638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13638).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11085">CVE-2019-11085</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11815">CVE-2019-11815</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11833">CVE-2019-11833</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11884">CVE-2019-11884</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13057">CVE-2019-13057</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13565">CVE-2019-13565</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13636">CVE-2019-13636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13638">CVE-2019-13638</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel and packages</td>
 <td>4.4.0-154-generic</td>
 <td>4.4.0-157-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-2054 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-2054), [CVE-2019-11815 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11815), [CVE-2019-11833 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11833), [CVE-2019-11884 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11884), [CVE-2019-13057 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13057), [CVE-2019-13565 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13565), [CVE-2019-13636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13636), and [CVE-2019-13638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13638).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-2054">CVE-2019-2054</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11815">CVE-2019-11815</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11833">CVE-2019-11833</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11884">CVE-2019-11884</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13057">CVE-2019-13057</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13565">CVE-2019-13565</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13636">CVE-2019-13636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13638">CVE-2019-13638</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -3485,13 +3485,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kubernetes</td>
 <td>v1.14.3</td>
 <td>v1.14.4</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.4). Update resolves [CVE-2019-11248 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248). For more information, see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967113)).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.14.4">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248">CVE-2019-11248</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see <a href="https://www.ibm.com/support/pages/node/967113">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">).</td>
 </tr>
 <tr>
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-13012) and [CVE-2019-7307 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-7307.html).</td>
+<td>Updated worker node images with package updates for <a href="https://ubuntu.com/security/CVE-2019-13012">CVE-2019-13012</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-7307.html">CVE-2019-7307</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -3518,13 +3518,13 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Calico</td>
 <td>v3.6.1</td>
 <td>v3.6.4</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [TTA-2019-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.tigera.io/security-bulletins/#TTA-2019-001). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/959551).</td>
+<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/#TTA-2019-001">TTA-2019-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/959551">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>CoreDNS configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Changed the default CoreDNS configuration from a 5 to 30 second TTL for DNS records in the <code>kubernetes</code> zone. This change aligns with the default KubeDNS configuration. Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize).</td>
+<td>Changed the default CoreDNS configuration from a 5 to 30 second TTL for DNS records in the <code>kubernetes</code> zone. This change aligns with the default KubeDNS configuration. Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see <a href="/docs/containers?topic=containers-cluster_dns#dns_customize">Customizing the cluster DNS provider</a>.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
@@ -3536,7 +3536,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Kubernetes</td>
 <td>v1.14.3</td>
 <td>v1.14.4</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.4).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.14.4">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -3568,13 +3568,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-151-generic</td>
 <td>4.4.0-154-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11479.html">CVE-2019-11479</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/958863">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-52-generic</td>
 <td>4.15.0-54-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11479.html">CVE-2019-11479</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/958863">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -3601,19 +3601,19 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-150-generic</td>
 <td>4.4.0-151-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11477.html">CVE-2019-11477</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/958863">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-51-generic</td>
 <td>4.15.0-52-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11477.html">CVE-2019-11477</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/958863">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>containerd</td>
 <td>1.2.6</td>
 <td>1.2.7</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.7).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.7">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Max pods</td>
@@ -3645,7 +3645,7 @@ The following table shows the changes that are included in the patch 1.14.3_1523
 <td>GPU device plug-in and installer</td>
 <td>32257d3</td>
 <td>5d34347</td>
-<td>Updated image for [CVE-2019-8457 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457). Updated the GPU drivers to [430.14 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/Download/driverResults.aspx/147582/).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457">CVE-2019-8457</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Updated the GPU drivers to <a href="https://www.nvidia.com/Download/driverResults.aspx/147582/">430.14</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
@@ -3663,7 +3663,7 @@ The following table shows the changes that are included in the patch 1.14.3_1523
 <td>Kubernetes</td>
 <td>v1.14.2</td>
 <td>v1.14.3</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.3).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.14.3">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes feature gates configuration</td>
@@ -3675,19 +3675,19 @@ The following table shows the changes that are included in the patch 1.14.3_1523
 <td>Public service endpoint for Kubernetes master</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Fixed an issue to [enable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).</td>
+<td>Fixed an issue to <a href="/docs/containers?topic=containers-cs_network_cluster#set-up-public-se">enable the public cloud service endpoint</a>.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-148-generic</td>
 <td>4.4.0-150-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-10906">CVE-2019-10906</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-50-generic</td>
 <td>4.15.0-51-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-10906">CVE-2019-10906</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -3725,13 +3725,13 @@ The following table shows the changes that are included in the patch 1.14.2_1521
 <td>etcd</td>
 <td>v3.3.11</td>
 <td>v3.3.13</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.13).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.3.13">etcd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>55c1f66</td>
 <td>32257d3</td>
-<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844">CVE-2018-10844</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845">CVE-2018-10845</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846">CVE-2018-10846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829">CVE-2019-3829</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836">CVE-2019-3836</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893">CVE-2019-9893</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435">CVE-2019-5435</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436">CVE-2019-5436</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -3743,19 +3743,19 @@ The following table shows the changes that are included in the patch 1.14.2_1521
 <td>Kubernetes</td>
 <td>v1.14.1</td>
 <td>v1.14.2</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.2).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.14.2">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes Metrics Server</td>
 <td>v0.3.1</td>
 <td>v0.3.3</td>
-<td>See the [Kubernetes Metrics Server release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.3).</td>
+<td>See the <a href="https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.3">Kubernetes Metrics Server release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>13c7ef0</td>
 <td>e8c6d72</td>
-<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844">CVE-2018-10844</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845">CVE-2018-10845</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846">CVE-2018-10846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829">CVE-2019-3829</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836">CVE-2019-3836</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893">CVE-2019-9893</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435">CVE-2019-5435</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436">CVE-2019-5436</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -3781,13 +3781,13 @@ The following table shows the changes that are included in the patch 1.14.1_1519
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-145-generic</td>
 <td>4.4.0-148-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2018-12126.html">CVE-2018-12126</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://ubuntu.com/security/CVE-2018-12127.html">CVE-2018-12127</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://ubuntu.com/security/CVE-2018-12130.html">CVE-2018-12130</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-47-generic</td>
 <td>4.15.0-50-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2018-12126.html">CVE-2018-12126</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://ubuntu.com/security/CVE-2018-12127.html">CVE-2018-12127</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://ubuntu.com/security/CVE-2018-12130.html">CVE-2018-12130</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -3813,7 +3813,7 @@ The following table shows the changes that are included in the patch 1.14.1_1518
 <td>Cluster master HA proxy</td>
 <td>1.9.6-alpine</td>
 <td>1.9.7-alpine</td>
-<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Update resolves [CVE-2019-6706 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+<td>See the <a href="https://www.haproxy.org/download/1.9/src/CHANGELOG">HAProxy release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706">CVE-2019-6706</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
@@ -3831,7 +3831,7 @@ The following table shows the changes that are included in the patch 1.14.1_1518
 <td>Trusted compute agent</td>
 <td>e7182c7</td>
 <td>13c7ef0</td>
-<td>Updated image for [CVE-2016-7076 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076) and [CVE-2017-1000368 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076">CVE-2016-7076</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368">CVE-2017-1000368</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -3857,31 +3857,31 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 <td>Calico</td>
 <td>v3.4.4</td>
 <td>v3.6.1</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/archive/v3.6/release-notes/).</td>
+<td>See the <a href="https://docs.projectcalico.org/archive/v3.6/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>CoreDNS</td>
 <td>1.2.6</td>
 <td>1.3.1</td>
-<td>See the [CoreDNS release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2019/01/13/coredns-1.3.1-release/). The update includes the addition of a [metrics port ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/plugins/metrics/) on the cluster DNS service. <br><br>CoreDNS is now the only supported cluster DNS provider. If you update a cluster to Kubernetes version 1.14 from an earlier version and used KubeDNS, KubeDNS is automatically migrated to CoreDNS during the cluster update. For more information or to test out CoreDNS before you update, see [Configure the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns).</td>
+<td>See the <a href="https://coredns.io/2019/01/13/coredns-1.3.1-release/">CoreDNS release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. The update includes the addition of a <a href="https://coredns.io/plugins/metrics/">metrics port</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> on the cluster DNS service. <br><br>CoreDNS is now the only supported cluster DNS provider. If you update a cluster to Kubernetes version 1.14 from an earlier version and used KubeDNS, KubeDNS is automatically migrated to CoreDNS during the cluster update. For more information or to test out CoreDNS before you update, see <a href="/docs/containers?topic=containers-cluster_dns#cluster_dns">Configure the cluster DNS provider</a>.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>9ff3fda</td>
 <td>ed0dafc</td>
-<td>Updated image for [CVE-2019-1543 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543">CVE-2019-1543</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.13.5-107</td>
 <td>v1.14.1-71</td>
-<td>Updated to support the Kubernetes 1.14.1 release. Additionally, <code>calicoctl</code> version is updated to 3.6.1. Fixed updates to version 2.0 network load balancers (NLBs) with only one available worker node for the load balancer pods. Private load balancers now support running on [private edge workers nodes](/docs/containers?topic=containers-edge#edge).</td>
+<td>Updated to support the Kubernetes 1.14.1 release. Additionally, <code>calicoctl</code> version is updated to 3.6.1. Fixed updates to version 2.0 network load balancers (NLBs) with only one available worker node for the load balancer pods. Private load balancers now support running on <a href="/docs/containers?topic=containers-edge#edge">private edge workers nodes</a>.</td>
 </tr>
 <tr>
 <td>IBM pod security policies</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>[IBM pod security policies](/docs/containers?topic=containers-psp#ibm_psp) are updated to support the Kubernetes [RunAsGroup ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#users-and-groups) feature.</td>
+<td><a href="/docs/containers?topic=containers-psp#ibm_psp">IBM pod security policies</a> are updated to support the Kubernetes <a href="https://kubernetes.io/docs/concepts/policy/pod-security-policy/#users-and-groups">RunAsGroup</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> feature.</td>
 </tr>
 <tr>
 <td><code>kubelet</code> configuration</td>
@@ -3893,7 +3893,7 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 <td>Kubernetes</td>
 <td>v1.13.5</td>
 <td>v1.14.1</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.1) and [Kubernetes 1.14 blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2019/03/25/kubernetes-1-14-release-announcement/).<br><br>The Kubernetes default role-based access control (RBAC) policies no longer grant access to [discovery and permission-checking APIs to unauthenticated users ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles). This change applies only to new version 1.14 clusters. If you update a cluster from a prior version, unauthenticated users still have access to the discovery and permission-checking APIs.</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.14.1">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://kubernetes.io/blog/2019/03/25/kubernetes-1-14-release-announcement/">Kubernetes 1.14 blog</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.<br><br>The Kubernetes default role-based access control (RBAC) policies no longer grant access to <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles">discovery and permission-checking APIs to unauthenticated users</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. This change applies only to new version 1.14 clusters. If you update a cluster from a prior version, unauthenticated users still have access to the discovery and permission-checking APIs.</td>
 </tr>
 <tr>
 <td>Kubernetes admission controllers configuration</td>
@@ -3901,13 +3901,13 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 <td>N/A</td>
 <td><ul>
 <li>Added <code>NodeRestriction</code> to the <code>--enable-admission-plugins</code> option for the cluster's Kubernetes API server and configured the related cluster resources to support this security enhancement.</li>
-<li>Removed <code>Initializers</code> from the <code>--enable-admission-plugins</code> option and <code>admissionregistration.k8s.io/v1alpha1=true</code> from the <code>--runtime-config</code> option for the cluster's Kubernetes API server because these APIs are no longer supported. Instead, you can use [Kubernetes admission webhooks ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).</li></ul></td>
+<li>Removed <code>Initializers</code> from the <code>--enable-admission-plugins</code> option and <code>admissionregistration.k8s.io/v1alpha1=true</code> from the <code>--runtime-config</code> option for the cluster's Kubernetes API server because these APIs are no longer supported. Instead, you can use <a href="https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/">Kubernetes admission webhooks</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li></ul></td>
 </tr>
 <tr>
 <td>Kubernetes DNS autoscaler</td>
 <td>1.3.0</td>
 <td>1.4.0</td>
-<td>See the [Kubernetes DNS autoscaler release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.4.0).</td>
+<td>See the <a href="https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.4.0">Kubernetes DNS autoscaler release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes feature gates configuration</td>
@@ -3915,13 +3915,13 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 <td>N/A</td>
 <td><ul>
     <li>Added <code>RuntimeClass=false</code> to disable selection of the container runtime configuration.</li>
-    <li>Removed <code>ExperimentalCriticalPodAnnotation=true</code> because the <code>scheduler.alpha.kubernetes.io/critical-pod</code> pod annotation is no longer supported. Instead, you can use [Kubernetes pod priority ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/containers?topic=containers-pod_priority#pod_priority).</li></ul></td>
+    <li>Removed <code>ExperimentalCriticalPodAnnotation=true</code> because the <code>scheduler.alpha.kubernetes.io/critical-pod</code> pod annotation is no longer supported. Instead, you can use <a href="/docs/containers?topic=containers-pod_priority#pod_priority">Kubernetes pod priority</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li></ul></td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>e132aa4</td>
 <td>e7182c7</td>
-<td>Updated image for [CVE-2019-11068 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068">CVE-2019-11068</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -4014,7 +4014,7 @@ The following table shows the changes that are included in the master and worker
 | Cluster master HA Proxy | 1.8.21-alpine | 1.8.23-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.8/src/CHANGELOG){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | etcd | v3.3.17 | v3.3.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.18){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | GPU device plug-in and installer | f2e7bd7 | da19df3 | Updated image for [CVE-2019-13627](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13627) and [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. Updated the GPU drivers to version [440.44](https://www.nvidia.com/Download/driverResults.aspx/156086/){: external}. |
-| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: <code>ibmc-file-bronze-gid</code>, <code>ibmc-file-silver-gid</code>, and <code>ibmc-file-gold-gid</code>.</li><li>Fixed bugs in support of [non-root user access to an NFS file share](/docs/containers?topic=containers-cs_storage_nonroot).</li><li>Resolved [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}.</li></ul> |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: <code>ibmc-file-bronze-gid</code>, <code>ibmc-file-silver-gid</code>, and <code>ibmc-file-gold-gid</code>.</li><li>Fixed bugs in support of <a href="/docs/containers?topic=containers-cs_storage_nonroot">non-root user access to an NFS file share</a>.</li><li>Resolved <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551">CVE-2019-1551</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li></ul> |
 | Key Management Service provider | 270 | 277 | Updated the {{site.data.keyword.keymanagementservicelong_notm}} Go client. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 159 | 169 | Updated image for [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | OpenVPN server | 2.4.6-r3-IKS-121 | 2.4.6-r3-IKS-131 | Updated image for [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
@@ -4154,13 +4154,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu 16.04 packages and kernel</td>
 <td>4.4.0-164-generic</td>
 <td>4.4.0-165-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-0136 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-0136), [CVE-2018-20961 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20961), [CVE-2019-11487 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11487), [CVE-2016-10905 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2016-10905), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5094">CVE-2019-5094</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20976">CVE-2018-20976</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-0136">CVE-2019-0136</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20961">CVE-2018-20961</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11487">CVE-2019-11487</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2016-10905">CVE-2016-10905</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16056">CVE-2019-16056</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16935">CVE-2019-16935</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 packages and kernel</td>
 <td>4.15.0-64-generic</td>
 <td>4.15.0-65-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5094">CVE-2019-5094</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20976">CVE-2018-20976</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16056">CVE-2019-16056</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16935">CVE-2019-16935</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -4190,7 +4190,7 @@ The following table shows the changes that are included in the patch 1.13.11_153
 <td>Calico</td>
 <td>v3.6.4</td>
 <td>v3.6.5</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/archive/v3.6/release-notes/).</td>
+<td>See the <a href="https://docs.projectcalico.org/archive/v3.6/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster master HA configuration</td>
@@ -4202,7 +4202,7 @@ The following table shows the changes that are included in the patch 1.13.11_153
 <td>containerd</td>
 <td>v1.2.9</td>
 <td>v1.2.10</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.10). Update resolves [CVE-2019-16884 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16884) and [CVE-2019-16276 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.10">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16884">CVE-2019-16884</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276">CVE-2019-16276</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Default IBM file storage class</td>
@@ -4220,13 +4220,13 @@ The following table shows the changes that are included in the patch 1.13.11_153
 <td>Key Management Service provider</td>
 <td>212</td>
 <td>221</td>
-<td>Improved Kubernetes [key management service provider](/docs/containers?topic=containers-encryption#keyprotect) caching of {{site.data.keyword.cloud_notm}} IAM tokens. In addition, fixed a problem with Kubernetes secret decryption when the cluster's root key is rotated.</td>
+<td>Improved Kubernetes <a href="/docs/containers?topic=containers-encryption#keyprotect">key management service provider</a> caching of {{site.data.keyword.cloud_notm}} IAM tokens. In addition, fixed a problem with Kubernetes secret decryption when the cluster's root key is rotated.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.13.10</td>
 <td>v1.13.11</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.11).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.13.11">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
@@ -4238,19 +4238,19 @@ The following table shows the changes that are included in the patch 1.13.11_153
 <td>OpenVPN server</td>
 <td>2.4.6-r3-IKS-115</td>
 <td>2.4.6-r3-IKS-121</td>
-<td>Updated images for [CVE-2019-1547 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547) and [CVE-2019-1563 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563).</td>
+<td>Updated images for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547">CVE-2019-1547</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563">CVE-2019-1563</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel and packages</td>
 <td>4.15.0-62-generic</td>
 <td>4.15.0-64-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-15031 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15031), [CVE-2019-15030 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15030), and [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15031">CVE-2019-15031</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15030">CVE-2019-15030</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14835">CVE-2019-14835</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel and packages</td>
 <td>4.4.0-161-generic</td>
 <td>4.4.0-164-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14835">CVE-2019-14835</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -4277,19 +4277,19 @@ The following table shows the changes that are included in the worker node fix p
 <td>containerd</td>
 <td>v1.2.8</td>
 <td>v1.2.9</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.9). Update resolves [CVE-2019-9515 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9515).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.9">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9515">CVE-2019-9515</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 packages and kernel</td>
 <td>4.4.0-159-generic</td>
 <td>4.4.0-161-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5481 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5481), [CVE-2019-5482 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5482), [CVE-2019-15903 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15903), [CVE-2015-9383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2015-9383), [CVE-2019-10638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10638), [CVE-2019-3900 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3900), [CVE-2018-20856 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20856), [CVE-2019-14283 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14283), [CVE-2019-14284 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14284), [CVE-2019-5010 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5010), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636),[CVE-2019-9740 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9740), [CVE-2019-9947 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9947), [CVE-2019-9948 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9948), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636), [CVE-2018-20852 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20852), [CVE-2018-20406 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20406), and [CVE-2019-10160 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10160).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5481">CVE-2019-5481</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5482">CVE-2019-5482</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15903">CVE-2019-15903</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2015-9383">CVE-2015-9383</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10638">CVE-2019-10638</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-3900">CVE-2019-3900</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20856">CVE-2018-20856</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14283">CVE-2019-14283</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14284">CVE-2019-14284</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5010">CVE-2019-5010</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">,<a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9740">CVE-2019-9740</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9947">CVE-2019-9947</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9948">CVE-2019-9948</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20852">CVE-2018-20852</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20406">CVE-2018-20406</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10160">CVE-2019-10160</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 packages and kernel</td>
 <td>4.15.0-58-generic</td>
 <td>4.15.0-62-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5481 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5481), [CVE-2019-5482 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5482), [CVE-2019-15903 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15903), [CVE-2019-14283 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14283), [CVE-2019-14284 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14284), [CVE-2018-20852 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20852), [CVE-2019-5010 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5010), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636), [CVE-2019-9740 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9740), [CVE-2019-9947 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9947), [CVE-2019-9948 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9948), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636), [CVE-2019-10160 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10160), and [CVE-2019-15718 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15718).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5481">CVE-2019-5481</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5482">CVE-2019-5482</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15903">CVE-2019-15903</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14283">CVE-2019-14283</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14284">CVE-2019-14284</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20852">CVE-2018-20852</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5010">CVE-2019-5010</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9740">CVE-2019-9740</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9947">CVE-2019-9947</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9948">CVE-2019-9948</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10160">CVE-2019-10160</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15718">CVE-2019-15718</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -4315,13 +4315,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>containerd</td>
 <td>v1.2.7</td>
 <td>v1.2.8</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.8). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.8">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.13.9</td>
 <td>v1.13.10</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.10). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514)), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514)), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.13.10">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">), <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">), and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 packages</td>
@@ -4333,7 +4333,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu 18.04 packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated worker node images with package updates for [CVE-2019-10222 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10222) and [CVE-2019-11922 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11922).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10222">CVE-2019-10222</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11922">CVE-2019-11922</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -4359,19 +4359,19 @@ The following table shows the changes that are included in the master fix pack 1
 <td><code>etcd</code></td>
 <td>v3.3.13</td>
 <td>v3.3.15</td>
-<td>See the [<code>etcd</code> release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.15). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.3.15"><code>etcd</code> release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>07c9b67</td>
 <td>de13f2a</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809). Updated the GPU drivers to [430.40 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/Download/driverResults.aspx/149138/).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Updated the GPU drivers to <a href="https://www.nvidia.com/Download/driverResults.aspx/149138/">430.40</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>348</td>
 <td>349</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -4383,19 +4383,19 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Key Management Service provider</td>
 <td>207</td>
 <td>212</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.13.9</td>
 <td>v1.13.10</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.10). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514)), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514)), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.13.10">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">), <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/security-bulletin-ibm-cloud-kubernetes-service-affected-kubernetes-security-vulnerabilities-cve-2019-9512-cve-2019-9514">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">), and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>147</td>
 <td>148</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -4421,25 +4421,25 @@ The following table shows the changes that are included in the worker node fix p
 <td>Cluster master HA proxy</td>
 <td>2.0.1-alpine</td>
 <td>1.8.21-alpine</td>
-<td>Moved to HA proxy 1.8 to fix [socket leak in HA proxy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/haproxy/haproxy/issues/136). Also added a liveliness check to monitor the health of HA proxy. For more information, see [HA proxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.8/src/CHANGELOG).</td>
+<td>Moved to HA proxy 1.8 to fix <a href="https://github.com/haproxy/haproxy/issues/136">socket leak in HA proxy</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Also added a liveliness check to monitor the health of HA proxy. For more information, see <a href="https://www.haproxy.org/download/1.8/src/CHANGELOG">HA proxy release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.13.8</td>
 <td>v1.13.9</td>
-<td>For more information, see the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.9).</td>
+<td>For more information, see the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.13.9">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel and packages</td>
 <td>4.4.0-157-generic</td>
 <td>4.4.0-159-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13012), [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-10126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), and [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13012">CVE-2019-13012</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-1125">CVE-2019-1125</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-5383">CVE-2018-5383</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10126">CVE-2019-10126</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-3846">CVE-2019-3846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel and packages</td>
 <td>4.15.0-55-generic</td>
 <td>4.15.0-58-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2019-2101 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-2101), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-13233 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13233), [CVE-2019-13272 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13272), [CVE-2019-10126](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846), [CVE-2019-12818 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12818), [CVE-2019-12984 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12984), and [CVE-2019-12819 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12819).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-1125">CVE-2019-1125</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-2101">CVE-2019-2101</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-5383">CVE-2018-5383</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13233">CVE-2019-13233</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13272">CVE-2019-13272</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10126">CVE-2019-10126</a>, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-3846">CVE-2019-3846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-12818">CVE-2019-12818</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-12984">CVE-2019-12984</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-12819">CVE-2019-12819</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -4498,13 +4498,13 @@ The following table shows the changes that are included in the master fix pack 1
 <td>GPU device plug-in and installer</td>
 <td>a7e8ece</td>
 <td>07c9b67</td>
-<td>Image updated for [CVE-2019-9924 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924) and [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924">CVE-2019-9924</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.filestorage_full_notm}} plug-in</td>
 <td>347</td>
 <td>348</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -4516,31 +4516,31 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Kubernetes</td>
 <td>v1.13.8</td>
 <td>v1.13.9</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.9). Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967115)) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967123)).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.13.9">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Updates resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247">CVE-2019-11247</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/node/967115">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">) and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249">CVE-2019-11249</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/node/967123">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">).</td>
 </tr>
 <tr>
 <td>Kubernetes DNS</td>
 <td>1.14.13</td>
 <td>1.15.4</td>
-<td>See the [Kubernetes DNS release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/releases/tag/1.15.4). Image update resolves [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>See the <a href="https://github.com/kubernetes/dns/releases/tag/1.15.4">Kubernetes DNS release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Image update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>146</td>
 <td>147</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN client</td>
 <td>2.4.6-r3-IKS-13</td>
 <td>2.4.6-r3-IKS-116</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN server</td>
 <td>2.4.6-r3-IKS-25</td>
 <td>2.4.6-r3-IKS-115</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -4566,13 +4566,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu 18.04 kernel and packages</td>
 <td>4.15.0-54-generic</td>
 <td>4.15.0-55-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-11085 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11085), [CVE-2019-11815 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11815), [CVE-2019-11833 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11833), [CVE-2019-11884 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11884), [CVE-2019-13057 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13057), [CVE-2019-13565 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13565), [CVE-2019-13636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13636), and [CVE-2019-13638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13638).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11085">CVE-2019-11085</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11815">CVE-2019-11815</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11833">CVE-2019-11833</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11884">CVE-2019-11884</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13057">CVE-2019-13057</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13565">CVE-2019-13565</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13636">CVE-2019-13636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13638">CVE-2019-13638</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel and packages</td>
 <td>4.4.0-154-generic</td>
 <td>4.4.0-157-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-2054 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-2054), [CVE-2019-11833 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11833), [CVE-2019-13057 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13057), [CVE-2019-13565 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13565), [CVE-2019-13636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13636), and [CVE-2019-13638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13638).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-2054">CVE-2019-2054</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11833">CVE-2019-11833</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13057">CVE-2019-13057</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13565">CVE-2019-13565</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13636">CVE-2019-13636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13638">CVE-2019-13638</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -4598,13 +4598,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kubernetes</td>
 <td>v1.13.7</td>
 <td>v1.13.8</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.8). Update resolves [CVE-2019-11248 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967113)).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.13.8">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248">CVE-2019-11248</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> (see <a href="https://www.ibm.com/support/pages/node/967113">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">).</td>
 </tr>
 <tr>
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-13012) and [CVE-2019-7307 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-7307.html).</td>
+<td>Updated worker node images with package updates for <a href="https://ubuntu.com/security/CVE-2019-13012">CVE-2019-13012</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-7307.html">CVE-2019-7307</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
     </tbody>
 </table>
@@ -4631,13 +4631,13 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Calico</td>
 <td>v3.4.4</td>
 <td>v3.6.4</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [TTA-2019-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.tigera.io/security-bulletins/#TTA-2019-001). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/959551).</td>
+<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/#TTA-2019-001">TTA-2019-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/959551">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>CoreDNS configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Changed the default CoreDNS configuration from a 5 to 30 second TTL for DNS records in the <code>kubernetes</code> zone. This change aligns with the default KubeDNS configuration. Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize).</td>
+<td>Changed the default CoreDNS configuration from a 5 to 30 second TTL for DNS records in the <code>kubernetes</code> zone. This change aligns with the default KubeDNS configuration. Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see <a href="/docs/containers?topic=containers-cluster_dns#dns_customize">Customizing the cluster DNS provider</a>.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
@@ -4649,7 +4649,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Kubernetes</td>
 <td>v1.13.7</td>
 <td>v1.13.8</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.8).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.13.8">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -4681,13 +4681,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-151-generic</td>
 <td>4.4.0-154-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11479.html">CVE-2019-11479</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/958863">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-52-generic</td>
 <td>4.15.0-54-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11479.html">CVE-2019-11479</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/958863">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -4714,19 +4714,19 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-150-generic</td>
 <td>4.4.0-151-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11477.html">CVE-2019-11477</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/958863">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-51-generic</td>
 <td>4.15.0-52-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11477.html">CVE-2019-11477</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/958863">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>containerd</td>
 <td>1.2.6</td>
 <td>1.2.7</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.7).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.7">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Max pods</td>
@@ -4758,7 +4758,7 @@ The following table shows the changes that are included in the patch 1.13.7_1526
 <td>GPU device plug-in and installer</td>
 <td>32257d3</td>
 <td>5d34347</td>
-<td>Updated image for [CVE-2019-8457 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457). Updated the GPU drivers to [430.14 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/Download/driverResults.aspx/147582/).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457">CVE-2019-8457</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Updated the GPU drivers to <a href="https://www.nvidia.com/Download/driverResults.aspx/147582/">430.14</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
@@ -4776,24 +4776,24 @@ The following table shows the changes that are included in the patch 1.13.7_1526
 <td>Kubernetes</td>
 <td>v1.13.6</td>
 <td>v1.13.7</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.7).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.13.7">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <td>Public service endpoint for Kubernetes master</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Fixed an issue to [enable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).</td>
+<td>Fixed an issue to <a href="/docs/containers?topic=containers-cs_network_cluster#set-up-public-se">enable the public cloud service endpoint</a>.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-148-generic</td>
 <td>4.4.0-150-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-10906">CVE-2019-10906</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-50-generic</td>
 <td>4.15.0-51-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-10906">CVE-2019-10906</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -4831,25 +4831,25 @@ The following table shows the changes that are included in the patch 1.13.6_1524
 <td>etcd</td>
 <td>v3.3.11</td>
 <td>v3.3.13</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.13).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.3.13">etcd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>55c1f66</td>
 <td>32257d3</td>
-<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844">CVE-2018-10844</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845">CVE-2018-10845</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846">CVE-2018-10846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829">CVE-2019-3829</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836">CVE-2019-3836</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893">CVE-2019-9893</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435">CVE-2019-5435</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436">CVE-2019-5436</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes Metrics Server</td>
 <td>v0.3.1</td>
 <td>v0.3.3</td>
-<td>See the [Kubernetes Metrics Server release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.3).</td>
+<td>See the <a href="https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.3">Kubernetes Metrics Server release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>13c7ef0</td>
 <td>e8c6d72</td>
-<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844">CVE-2018-10844</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845">CVE-2018-10845</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846">CVE-2018-10846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829">CVE-2019-3829</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836">CVE-2019-3836</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893">CVE-2019-9893</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435">CVE-2019-5435</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436">CVE-2019-5436</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -4875,13 +4875,13 @@ The following table shows the changes that are included in the patch 1.13.6_1522
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-145-generic</td>
 <td>4.4.0-148-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2018-12126.html">CVE-2018-12126</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://ubuntu.com/security/CVE-2018-12127.html">CVE-2018-12127</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://ubuntu.com/security/CVE-2018-12130.html">CVE-2018-12130</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-47-generic</td>
 <td>4.15.0-50-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2018-12126.html">CVE-2018-12126</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://ubuntu.com/security/CVE-2018-12127.html">CVE-2018-12127</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://ubuntu.com/security/CVE-2018-12130.html">CVE-2018-12130</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -4907,13 +4907,13 @@ The following table shows the changes that are included in the patch 1.13.6_1521
 <td>Cluster master HA proxy</td>
 <td>1.9.6-alpine</td>
 <td>1.9.7-alpine</td>
-<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Update resolves [CVE-2019-6706 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+<td>See the <a href="https://www.haproxy.org/download/1.9/src/CHANGELOG">HAProxy release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706">CVE-2019-6706</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>9ff3fda</td>
 <td>55c1f66</td>
-<td>Updated image for [CVE-2019-1543 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543">CVE-2019-1543</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -4925,7 +4925,7 @@ The following table shows the changes that are included in the patch 1.13.6_1521
 <td>Kubernetes</td>
 <td>v1.13.5</td>
 <td>v1.13.6</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.6).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.13.6">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
@@ -4943,7 +4943,7 @@ The following table shows the changes that are included in the patch 1.13.6_1521
 <td>Trusted compute agent</td>
 <td>e132aa4</td>
 <td>13c7ef0</td>
-<td>Updated image for [CVE-2016-7076 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368), and [CVE-2019-11068 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076">CVE-2016-7076</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368">CVE-2017-1000368</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068">CVE-2019-11068</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -4975,7 +4975,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>containerd</td>
 <td>1.2.5</td>
 <td>1.2.6</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.6).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.6">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5001,7 +5001,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updates to installed Ubuntu packages including <code>systemd</code> for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-3842.html).</td>
+<td>Updates to installed Ubuntu packages including <code>systemd</code> for <a href="https://ubuntu.com/security/CVE-2019-3842.html">CVE-2019-3842</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5027,13 +5027,13 @@ The following table shows the changes that are included in the patch 1.13.5_1517
 <td>Calico</td>
 <td>v3.4.0</td>
 <td>v3.4.4</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/releases/). Update resolves [CVE-2019-9946 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/879585).</td>
+<td>See the <a href="https://docs.projectcalico.org/releases/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946">CVE-2019-9946</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/879585">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster master HA proxy</td>
 <td>1.8.12-alpine</td>
 <td>1.9.6-alpine</td>
-<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Update resolves [CVE-2018-0732 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543), and [CVE-2019-1559 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+<td>See the <a href="https://www.haproxy.org/download/1.9/src/CHANGELOG">HAProxy release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732">CVE-2018-0732</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734">CVE-2018-0734</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737">CVE-2018-0737</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407">CVE-2018-5407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543">CVE-2019-1543</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559">CVE-2019-1559</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -5045,25 +5045,25 @@ The following table shows the changes that are included in the patch 1.13.5_1517
 <td>Kubernetes</td>
 <td>v1.13.4</td>
 <td>v1.13.5</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.5).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.13.5">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>a02f765</td>
 <td>e132aa4</td>
-<td>Updated image for [CVE-2017-12447 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447">CVE-2017-12447</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-143-generic</td>
 <td>4.4.0-145-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2019-9213.html">CVE-2019-9213</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-46-generic</td>
 <td>4.15.0-47-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2019-9213.html">CVE-2019-9213</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5089,7 +5089,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
+<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see <a href="/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node">Worker node resource reserves</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -5121,19 +5121,19 @@ The following table shows the changes that are included in the master fix pack 1
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>345</td>
 <td>346</td>
-<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
 <td>166</td>
 <td>167</td>
-<td>Fixes intermittent <code>context deadline exceeded</code> and <code>timeout</code> errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrypted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Fixes intermittent <code>context deadline exceeded</code> and <code>timeout</code> errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrypted. Update includes fix for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>143</td>
 <td>146</td>
-<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5171,43 +5171,43 @@ The following table shows the changes that are included in the patch 1.13.4_1513
 <td>CoreDNS configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated the CoreDNS configuration to support [multiple Corefiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2017/07/23/corefile-explained/) after updating the cluster Kubernetes version from 1.12.</td>
+<td>Updated the CoreDNS configuration to support <a href="https://coredns.io/2017/07/23/corefile-explained/">multiple Corefiles</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> after updating the cluster Kubernetes version from 1.12.</td>
 </tr>
 <tr>
 <td>containerd</td>
 <td>1.2.4</td>
 <td>1.2.5</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.5). Update includes improved fix for [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/871600).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.5">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update includes improved fix for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736">CVE-2019-5736</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/871600">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>e32d51c</td>
 <td>9ff3fda</td>
-<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9741.html).</td>
+<td>Updated the GPU drivers to <a href="https://www.nvidia.com/object/unix.html">418.43</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update includes fix for <a href="https://ubuntu.com/security/CVE-2019-9741.html">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>344</td>
 <td>345</td>
-<td>Added support for [private cloud service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+<td>Added support for <a href="/docs/containers?topic=containers-cs_network_cluster#set-up-private-se">private cloud service endpoints</a>.</td>
 </tr>
 <tr>
 <td>Kernel</td>
 <td>4.4.0-141</td>
 <td>4.4.0-143</td>
-<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-6133.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2019-6133.html">CVE-2019-6133</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
 <td>136</td>
 <td>166</td>
-<td>Updated image for [CVE-2018-16890 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822), and [CVE-2019-3823 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890">CVE-2018-16890</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822">CVE-2019-3822</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823">CVE-2019-3823</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>5f3d092</td>
 <td>a02f765</td>
-<td>Updated image for [CVE-2018-10779 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128), and [CVE-2019-7663 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779">CVE-2018-10779</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900">CVE-2018-12900</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000">CVE-2018-17000</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210">CVE-2018-19210</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128">CVE-2019-6128</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663">CVE-2019-7663</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5239,7 +5239,7 @@ The following table shows the changes that are included in the patch 1.13.4_1510
 <td>GPU device plug-in and installer</td>
 <td>eb3a259</td>
 <td>e32d51c</td>
-<td>Updated images for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+<td>Updated images for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454">CVE-2019-6454</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -5251,43 +5251,43 @@ The following table shows the changes that are included in the patch 1.13.4_1510
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>342</td>
 <td>344</td>
-<td>Changed the base operating system for the image from Fedora to Alpine. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Changed the base operating system for the image from Fedora to Alpine. Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
 <td>122</td>
 <td>136</td>
-<td>Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.13.2</td>
 <td>v1.13.4</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.4). Update resolves [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) and [CVE-2019-1002100 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/873324).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.13.4">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100">CVE-2019-1002100</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/873324">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added <code>ExperimentalCriticalPodAnnotation=true</code> to the <code>--feature-gates</code> option. This setting helps migrate pods from the deprecated <code>scheduler.alpha.kubernetes.io/critical-pod</code> annotation to [Kubernetes pod priority support](/docs/containers?topic=containers-pod_priority#pod_priority).</td>
+<td>Added <code>ExperimentalCriticalPodAnnotation=true</code> to the <code>--feature-gates</code> option. This setting helps migrate pods from the deprecated <code>scheduler.alpha.kubernetes.io/critical-pod</code> annotation to <a href="/docs/containers?topic=containers-pod_priority#pod_priority">Kubernetes pod priority support</a>.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>132</td>
 <td>143</td>
-<td>Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN client and server</td>
 <td>2.4.6-r3-IKS-13</td>
 <td>2.4.6-r3-IKS-25</td>
-<td>Updated image for [CVE-2019-1559 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559">CVE-2019-1559</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>1ea5ad3</td>
 <td>5f3d092</td>
-<td>Updated image for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454">CVE-2019-6454</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5313,7 +5313,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-141</td>
 <td>4.4.0-142</td>
-<td>Updated worker node images with kernel update for [CVE-2018-19407 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+<td>Updated worker node images with kernel update for <a href="https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog">CVE-2018-19407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5345,7 +5345,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>containerd</td>
 <td>1.2.2</td>
 <td>1.2.4</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.4). Update resolves [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/871600).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.4">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736">CVE-2019-5736</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/871600">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes <code>kubelet</code> configuration</td>
@@ -5377,7 +5377,7 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 <td>Calico</td>
 <td>v3.3.1</td>
 <td>v3.4.0</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/).</td>
+<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster DNS provider</td>
@@ -5389,25 +5389,25 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 <td>containerd</td>
 <td>1.1.5</td>
 <td>1.2.2</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.2).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.2">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>CoreDNS</td>
 <td>1.2.2</td>
 <td>1.2.6</td>
-<td>See the [CoreDNS release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coredns/coredns/releases/tag/v1.2.6). Additionally, the CoreDNS configuration is updated to [support multiple Corefiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2017/07/23/corefile-explained/).</td>
+<td>See the <a href="https://github.com/coredns/coredns/releases/tag/v1.2.6">CoreDNS release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Additionally, the CoreDNS configuration is updated to <a href="https://coredns.io/2017/07/23/corefile-explained/">support multiple Corefiles</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>etcd</td>
 <td>v3.3.1</td>
 <td>v3.3.11</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.3.11">etcd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>13fdc0d</td>
 <td>eb3a259</td>
-<td>Updated images for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) and [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Updated images for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462">CVE-2019-3462</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -5420,7 +5420,7 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 <td>338</td>
 <td>342</td>
 <td>The file storage plug-in is updated as follows:
-<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers?topic=containers-file_storage#file-topology).</li>
+<ul><li>Supports dynamic provisioning with <a href="/docs/containers?topic=containers-file_storage#file-topology">volume topology-aware scheduling</a>.</li>
 <li>Ignores persistent volume claim (PVC) delete errors if the storage is already deleted.</li>
 <li>Adds a failure message annotation to failed PVCs.</li>
 <li>Optimizes the storage provisioner controller's leader election and resync period settings, and increases the provisioning timeout from 30 minutes to 1 hour.</li>
@@ -5437,7 +5437,7 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 <td>Kubernetes</td>
 <td>v1.12.4</td>
 <td>v1.13.2</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.2).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.13.2">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
@@ -5449,25 +5449,25 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 <td>Kubernetes DNS autoscaler</td>
 <td>1.2.0</td>
 <td>1.3.0</td>
-<td>See the [Kubernetes DNS autoscaler release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.3.0).</td>
+<td>See the <a href="https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.3.0">Kubernetes DNS autoscaler release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN client</td>
 <td>2.4.6-r3-IKS-8</td>
 <td>2.4.6-r3-IKS-13</td>
-<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Added <code>CriticalAddonsOnly</code> toleration to the <code>vpn</code> deployment in the <code>kube-system</code> namespace. Additionally, the pod configuration is now obtained from a secret instead of from a configmap.</td>
+<td>Updated image for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734">CVE-2018-0734</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407">CVE-2018-5407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Added <code>CriticalAddonsOnly</code> toleration to the <code>vpn</code> deployment in the <code>kube-system</code> namespace. Additionally, the pod configuration is now obtained from a secret instead of from a configmap.</td>
 </tr>
 <tr>
 <td>OpenVPN server</td>
 <td>2.4.6-r3-IKS-8</td>
 <td>2.4.6-r3-IKS-13</td>
-<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
+<td>Updated image for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734">CVE-2018-0734</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407">CVE-2018-5407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>systemd</td>
 <td>230</td>
 <td>229</td>
-<td>Security patch for [CVE-2018-16864 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+<td>Security patch for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864">CVE-2018-16864</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5551,13 +5551,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu 16.04 packages and kernel</td>
 <td>4.4.0-164-generic</td>
 <td>4.4.0-165-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-0136 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-0136), [CVE-2018-20961 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20961), [CVE-2019-11487 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11487), [CVE-2016-10905 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2016-10905), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5094">CVE-2019-5094</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20976">CVE-2018-20976</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-0136">CVE-2019-0136</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20961">CVE-2018-20961</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11487">CVE-2019-11487</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2016-10905">CVE-2016-10905</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16056">CVE-2019-16056</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16935">CVE-2019-16935</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 packages and kernel</td>
 <td>4.15.0-64-generic</td>
 <td>4.15.0-65-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5094">CVE-2019-5094</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20976">CVE-2018-20976</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16056">CVE-2019-16056</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-16935">CVE-2019-16935</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5583,13 +5583,13 @@ The following table shows the changes that are included in the patch 1.12.10_156
 <td>Ubuntu 18.04 kernel and packages</td>
 <td>4.15.0-62-generic</td>
 <td>4.15.0-64-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-15031 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15031), [CVE-2019-15030 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15030), and [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15031">CVE-2019-15031</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15030">CVE-2019-15030</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14835">CVE-2019-14835</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel and packages</td>
 <td>4.4.0-161-generic</td>
 <td>4.4.0-164-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14835">CVE-2019-14835</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5615,13 +5615,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu 16.04 packages and kernel</td>
 <td>4.4.0-159-generic</td>
 <td>4.4.0-161-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5481 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5481), [CVE-2019-5482 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5482), [CVE-2019-15903 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15903), [CVE-2015-9383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2015-9383), [CVE-2019-10638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10638), [CVE-2019-3900 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3900), [CVE-2018-20856 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20856), [CVE-2019-14283 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14283), [CVE-2019-14284 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14284), [CVE-2019-5010 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5010), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636),[CVE-2019-9740 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9740), [CVE-2019-9947 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9947), [CVE-2019-9948 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9948), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636), [CVE-2018-20852 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20852), [CVE-2018-20406 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20406), and [CVE-2019-10160 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10160).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5481">CVE-2019-5481</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5482">CVE-2019-5482</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15903">CVE-2019-15903</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2015-9383">CVE-2015-9383</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10638">CVE-2019-10638</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-3900">CVE-2019-3900</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20856">CVE-2018-20856</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14283">CVE-2019-14283</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14284">CVE-2019-14284</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5010">CVE-2019-5010</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">,<a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9740">CVE-2019-9740</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9947">CVE-2019-9947</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9948">CVE-2019-9948</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20852">CVE-2018-20852</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20406">CVE-2018-20406</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10160">CVE-2019-10160</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 packages and kernel</td>
 <td>4.15.0-58-generic</td>
 <td>4.15.0-62-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-5481 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5481), [CVE-2019-5482 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5482), [CVE-2019-15903 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15903), [CVE-2019-14283 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14283), [CVE-2019-14284 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14284), [CVE-2018-20852 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20852), [CVE-2019-5010 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5010), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636), [CVE-2019-9740 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9740), [CVE-2019-9947 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9947), [CVE-2019-9948 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9948), [CVE-2019-9636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-9636), [CVE-2019-10160 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10160), and [CVE-2019-15718 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15718).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5481">CVE-2019-5481</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5482">CVE-2019-5482</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15903">CVE-2019-15903</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14283">CVE-2019-14283</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14284">CVE-2019-14284</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20852">CVE-2018-20852</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5010">CVE-2019-5010</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9740">CVE-2019-9740</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9947">CVE-2019-9947</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9948">CVE-2019-9948</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9636">CVE-2019-9636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10160">CVE-2019-10160</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-15718">CVE-2019-15718</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5653,7 +5653,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu 18.04 packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated worker node images with package updates for [CVE-2019-10222 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10222) and [CVE-2019-11922 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11922).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10222">CVE-2019-10222</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11922">CVE-2019-11922</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5679,31 +5679,31 @@ The following table shows the changes that are included in the master fix pack 1
 <td><code>etcd</code></td>
 <td>v3.3.13</td>
 <td>v3.3.15</td>
-<td>See the [<code>etcd</code> release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.15). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.3.15"><code>etcd</code> release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>07c9b67</td>
 <td>de13f2a</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809). Updated the GPU drivers to [430.40 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/Download/driverResults.aspx/149138/).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Updated the GPU drivers to <a href="https://www.nvidia.com/Download/driverResults.aspx/149138/">430.40</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>348</td>
 <td>349</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
 <td>207</td>
 <td>212</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>147</td>
 <td>148</td>
-<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512">CVE-2019-9512</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514">CVE-2019-9514</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809">CVE-2019-14809</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5729,19 +5729,19 @@ The following table shows the changes that are included in the worker node fix p
 <td>Cluster master HA proxy</td>
 <td>2.0.1-alpine</td>
 <td>1.8.21-alpine</td>
-<td>Moved to HA proxy 1.8 to fix [socket leak in HA proxy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/haproxy/haproxy/issues/136). Also added a liveliness check to monitor the health of HA proxy. For more information, see [HA proxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.8/src/CHANGELOG).</td>
+<td>Moved to HA proxy 1.8 to fix <a href="https://github.com/haproxy/haproxy/issues/136">socket leak in HA proxy</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Also added a liveliness check to monitor the health of HA proxy. For more information, see <a href="https://www.haproxy.org/download/1.8/src/CHANGELOG">HA proxy release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel and packages</td>
 <td>4.4.0-157-generic</td>
 <td>4.4.0-159-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13012), [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-10126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), and [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13012">CVE-2019-13012</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-1125">CVE-2019-1125</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-5383">CVE-2018-5383</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10126">CVE-2019-10126</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-3846">CVE-2019-3846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel and packages</td>
 <td>4.15.0-55-generic</td>
 <td>4.15.0-58-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2019-2101 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-2101), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-13233 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13233), [CVE-2019-13272 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13272), [CVE-2019-10126](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846), [CVE-2019-12818 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12818), [CVE-2019-12984 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12984), and [CVE-2019-12819 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12819).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-1125">CVE-2019-1125</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-2101">CVE-2019-2101</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-5383">CVE-2018-5383</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13233">CVE-2019-13233</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13272">CVE-2019-13272</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10126">CVE-2019-10126</a>, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-3846">CVE-2019-3846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-12818">CVE-2019-12818</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-12984">CVE-2019-12984</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-12819">CVE-2019-12819</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5799,43 +5799,43 @@ The following table shows the changes that are included in the master fix pack 1
 <td>GPU device plug-in and installer</td>
 <td>a7e8ece</td>
 <td>07c9b67</td>
-<td>Image updated for [CVE-2019-9924 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924) and [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924">CVE-2019-9924</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>347</td>
 <td>348</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes DNS</td>
 <td>1.14.13</td>
 <td>1.15.4</td>
-<td>See the [Kubernetes DNS release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/releases/tag/1.15.4). Image update resolves [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>See the <a href="https://github.com/kubernetes/dns/releases/tag/1.15.4">Kubernetes DNS release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Image update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes DNS autoscaler</td>
 <td>1.2.0</td>
 <td>1.3.0</td>
-<td>See the [Kubernetes DNS autoscaler release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.3.0). Image update resolves [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>See the <a href="https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.3.0">Kubernetes DNS autoscaler release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Image update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>146</td>
 <td>147</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN client</td>
 <td>2.4.6-r3-IKS-13</td>
 <td>2.4.6-r3-IKS-116</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN server</td>
 <td>2.4.6-r3-IKS-25</td>
 <td>2.4.6-r3-IKS-115</td>
-<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Image updated for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5861,13 +5861,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu 18.04 kernel and packages</td>
 <td>4.15.0-54-generic</td>
 <td>4.15.0-55-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-11085 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11085), [CVE-2019-11815 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11815), [CVE-2019-11833 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11833), [CVE-2019-11884 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11884), [CVE-2019-13057 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13057), [CVE-2019-13565 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13565), [CVE-2019-13636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13636), [CVE-2019-13638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13638), and [CVE-2019-2054 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-2054).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11085">CVE-2019-11085</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11815">CVE-2019-11815</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11833">CVE-2019-11833</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11884">CVE-2019-11884</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13057">CVE-2019-13057</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13565">CVE-2019-13565</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13636">CVE-2019-13636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13638">CVE-2019-13638</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-2054">CVE-2019-2054</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel and packages</td>
 <td>4.4.0-154-generic</td>
 <td>4.4.0-157-generic</td>
-<td>Updated worker node images with package updates for [CVE-2019-2054 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-2054), [CVE-2019-11833 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11833), [CVE-2019-13057 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13057), [CVE-2019-13565 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13565), [CVE-2019-13636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13636), and [CVE-2019-13638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13638).</td>
+<td>Updated worker node images with package updates for <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-2054">CVE-2019-2054</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11833">CVE-2019-11833</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13057">CVE-2019-13057</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13565">CVE-2019-13565</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13636">CVE-2019-13636</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-13638">CVE-2019-13638</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -5893,13 +5893,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kubernetes</td>
 <td>v1.12.9</td>
 <td>v1.12.10</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.10). Update resolves [CVE-2019-11248 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248). For more information, see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967113)).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.12.10">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248">CVE-2019-11248</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see <a href="https://www.ibm.com/support/pages/node/967113">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">).</td>
 </tr>
 <tr>
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-13012) and [CVE-2019-7307 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-7307.html).</td>
+<td>Updated worker node images with package updates for <a href="https://ubuntu.com/security/CVE-2019-13012">CVE-2019-13012</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-7307.html">CVE-2019-7307</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
     </tbody>
 </table>
@@ -5926,13 +5926,13 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Calico</td>
 <td>v3.3.6</td>
 <td>v3.6.4</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [TTA-2019-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.tigera.io/security-bulletins/#TTA-2019-001). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/959551).</td>
+<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/#TTA-2019-001">TTA-2019-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/959551">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>CoreDNS configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Changed the default CoreDNS configuration from a 5 to 30 second TTL for DNS records in the <code>kubernetes</code> zone. This change aligns with the default KubeDNS configuration. Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize).
+<td>Changed the default CoreDNS configuration from a 5 to 30 second TTL for DNS records in the <code>kubernetes</code> zone. This change aligns with the default KubeDNS configuration. Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see <a href="/docs/containers?topic=containers-cluster_dns#dns_customize">Customizing the cluster DNS provider</a>.
 </td>
 </tr>
 <tr>
@@ -5945,7 +5945,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Kubernetes</td>
 <td>v1.12.9</td>
 <td>v1.12.10</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.10).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.12.10">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -5977,13 +5977,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-151-generic</td>
 <td>4.4.0-154-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11479.html">CVE-2019-11479</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/958863">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-52-generic</td>
 <td>4.15.0-54-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11479.html">CVE-2019-11479</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/958863">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6009,19 +6009,19 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-150-generic</td>
 <td>4.4.0-151-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11477.html">CVE-2019-11477</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/958863">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-51-generic</td>
 <td>4.15.0-52-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11477.html">CVE-2019-11477</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/958863">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>containerd</td>
 <td>1.2.6</td>
 <td>1.2.7</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.7).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.7">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6047,7 +6047,7 @@ The following table shows the changes that are included in the patch 1.12.9_1557
 <td>GPU device plug-in and installer</td>
 <td>32257d3</td>
 <td>5d34347</td>
-<td>Updated image for [CVE-2019-8457 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457). Updated the GPU drivers to [430.14 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/Download/driverResults.aspx/147582/).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457">CVE-2019-8457</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Updated the GPU drivers to <a href="https://www.nvidia.com/Download/driverResults.aspx/147582/">430.14</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
@@ -6058,19 +6058,19 @@ The following table shows the changes that are included in the patch 1.12.9_1557
 <td>Public service endpoint for Kubernetes master</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Fixed an issue to [enable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).</td>
+<td>Fixed an issue to <a href="/docs/containers?topic=containers-cs_network_cluster#set-up-public-se">enable the public cloud service endpoint</a>.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-148-generic</td>
 <td>4.4.0-150-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-10906">CVE-2019-10906</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-50-generic</td>
 <td>4.15.0-51-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-10906">CVE-2019-10906</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6108,13 +6108,13 @@ The following table shows the changes that are included in the patch 1.12.9_1555
 <td>etcd</td>
 <td>v3.3.11</td>
 <td>v3.3.13</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.13).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.3.13">etcd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>55c1f66</td>
 <td>32257d3</td>
-<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844">CVE-2018-10844</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845">CVE-2018-10845</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846">CVE-2018-10846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829">CVE-2019-3829</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836">CVE-2019-3836</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893">CVE-2019-9893</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435">CVE-2019-5435</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436">CVE-2019-5436</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -6126,19 +6126,19 @@ The following table shows the changes that are included in the patch 1.12.9_1555
 <td>Kubernetes</td>
 <td>v1.12.8</td>
 <td>v1.12.9</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.9).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.12.9">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes Metrics Server</td>
 <td>v0.3.1</td>
 <td>v0.3.3</td>
-<td>See the [Kubernetes Metrics Server release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.3).</td>
+<td>See the <a href="https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.3">Kubernetes Metrics Server release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>13c7ef0</td>
 <td>e8c6d72</td>
-<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844">CVE-2018-10844</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845">CVE-2018-10845</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846">CVE-2018-10846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829">CVE-2019-3829</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836">CVE-2019-3836</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893">CVE-2019-9893</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435">CVE-2019-5435</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436">CVE-2019-5436</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6164,13 +6164,13 @@ The following table shows the changes that are included in the patch 1.12.8_1553
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-145-generic</td>
 <td>4.4.0-148-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2018-12126.html">CVE-2018-12126</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://ubuntu.com/security/CVE-2018-12127.html">CVE-2018-12127</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://ubuntu.com/security/CVE-2018-12130.html">CVE-2018-12130</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-47-generic</td>
 <td>4.15.0-50-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2018-12126.html">CVE-2018-12126</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://ubuntu.com/security/CVE-2018-12127.html">CVE-2018-12127</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://ubuntu.com/security/CVE-2018-12130.html">CVE-2018-12130</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6196,13 +6196,13 @@ The following table shows the changes that are included in the patch 1.12.8_1552
 <td>Cluster master HA proxy</td>
 <td>1.9.6-alpine</td>
 <td>1.9.7-alpine</td>
-<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Update resolves [CVE-2019-6706 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+<td>See the <a href="https://www.haproxy.org/download/1.9/src/CHANGELOG">HAProxy release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706">CVE-2019-6706</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>9ff3fda</td>
 <td>55c1f66</td>
-<td>Updated image for [CVE-2019-1543 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543">CVE-2019-1543</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -6214,7 +6214,7 @@ The following table shows the changes that are included in the patch 1.12.8_1552
 <td>Kubernetes</td>
 <td>v1.12.7</td>
 <td>v1.12.8</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.8).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.12.8">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
@@ -6232,7 +6232,7 @@ The following table shows the changes that are included in the patch 1.12.8_1552
 <td>Trusted compute agent</td>
 <td>e132aa4</td>
 <td>13c7ef0</td>
-<td>Updated image for [CVE-2016-7076 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368), and [CVE-2019-11068 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076">CVE-2016-7076</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368">CVE-2017-1000368</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068">CVE-2019-11068</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6264,7 +6264,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>containerd</td>
 <td>1.1.6</td>
 <td>1.1.7</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.7).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.1.7">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6291,7 +6291,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updates to installed Ubuntu packages including <code>systemd</code> for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-3842.html).</td>
+<td>Updates to installed Ubuntu packages including <code>systemd</code> for <a href="https://ubuntu.com/security/CVE-2019-3842.html">CVE-2019-3842</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6317,13 +6317,13 @@ The following table shows the changes that are included in the patch 1.12.7_1548
 <td>Calico</td>
 <td>v3.3.1</td>
 <td>v3.3.6</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [CVE-2019-9946 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/879585).</td>
+<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946">CVE-2019-9946</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/879585">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster master HA proxy</td>
 <td>1.8.12-alpine</td>
 <td>1.9.6-alpine</td>
-<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Update resolves [CVE-2018-0732 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543), and [CVE-2019-1559 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+<td>See the <a href="https://www.haproxy.org/download/1.9/src/CHANGELOG">HAProxy release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732">CVE-2018-0732</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734">CVE-2018-0734</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737">CVE-2018-0737</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407">CVE-2018-5407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543">CVE-2019-1543</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559">CVE-2019-1559</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -6335,25 +6335,25 @@ The following table shows the changes that are included in the patch 1.12.7_1548
 <td>Kubernetes</td>
 <td>v1.12.6</td>
 <td>v1.12.7</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.7).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.12.7">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>a02f765</td>
 <td>e132aa4</td>
-<td>Updated image for [CVE-2017-12447 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447">CVE-2017-12447</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-143-generic</td>
 <td>4.4.0-145-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2019-9213.html">CVE-2019-9213</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-46-generic</td>
 <td>4.15.0-47-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2019-9213.html">CVE-2019-9213</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6379,7 +6379,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
+<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see <a href="/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node">Worker node resource reserves</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -6406,19 +6406,19 @@ The following table shows the changes that are included in the master fix pack 1
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>345</td>
 <td>346</td>
-<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
 <td>166</td>
 <td>167</td>
-<td>Fixes intermittent <code>context deadline exceeded</code> and <code>timeout</code> errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrypted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Fixes intermittent <code>context deadline exceeded</code> and <code>timeout</code> errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrypted. Update includes fix for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>143</td>
 <td>146</td>
-<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6456,37 +6456,37 @@ The following table shows the changes that are included in the patch 1.12.6_1544
 <td>CoreDNS configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated the CoreDNS configuration to support [multiple Corefiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2017/07/23/corefile-explained/).</td>
+<td>Updated the CoreDNS configuration to support <a href="https://coredns.io/2017/07/23/corefile-explained/">multiple Corefiles</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>e32d51c</td>
 <td>9ff3fda</td>
-<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9741.html).</td>
+<td>Updated the GPU drivers to <a href="https://www.nvidia.com/object/unix.html">418.43</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update includes fix for <a href="https://ubuntu.com/security/CVE-2019-9741.html">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>344</td>
 <td>345</td>
-<td>Added support for [private cloud service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+<td>Added support for <a href="/docs/containers?topic=containers-cs_network_cluster#set-up-private-se">private cloud service endpoints</a>.</td>
 </tr>
 <tr>
 <td>Kernel</td>
 <td>4.4.0-141</td>
 <td>4.4.0-143</td>
-<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-6133.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2019-6133.html">CVE-2019-6133</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
 <td>136</td>
 <td>166</td>
-<td>Updated image for [CVE-2018-16890 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822), and [CVE-2019-3823 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890">CVE-2018-16890</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822">CVE-2019-3822</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823">CVE-2019-3823</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>5f3d092</td>
 <td>a02f765</td>
-<td>Updated image for [CVE-2018-10779 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128), and [CVE-2019-7663 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779">CVE-2018-10779</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900">CVE-2018-12900</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000">CVE-2018-17000</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210">CVE-2018-19210</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128">CVE-2019-6128</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663">CVE-2019-7663</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6518,7 +6518,7 @@ The following table shows the changes that are included in the patch 1.12.6_1541
 <td>GPU device plug-in and installer</td>
 <td>eb3a259</td>
 <td>e32d51c</td>
-<td>Updated images for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+<td>Updated images for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454">CVE-2019-6454</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -6530,43 +6530,43 @@ The following table shows the changes that are included in the patch 1.12.6_1541
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>342</td>
 <td>344</td>
-<td>Changed the base operating system for the image from Fedora to Alpine. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Changed the base operating system for the image from Fedora to Alpine. Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
 <td>122</td>
 <td>136</td>
-<td>Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.12.5</td>
 <td>v1.12.6</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.6). Update resolves [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) and [CVE-2019-1002100 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/873324).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.12.6">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100">CVE-2019-1002100</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/873324">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added <code>ExperimentalCriticalPodAnnotation=true</code> to the <code>--feature-gates</code> option. This setting helps migrate pods from the deprecated <code>scheduler.alpha.kubernetes.io/critical-pod</code> annotation to [Kubernetes pod priority support](/docs/containers?topic=containers-pod_priority#pod_priority).</td>
+<td>Added <code>ExperimentalCriticalPodAnnotation=true</code> to the <code>--feature-gates</code> option. This setting helps migrate pods from the deprecated <code>scheduler.alpha.kubernetes.io/critical-pod</code> annotation to <a href="/docs/containers?topic=containers-pod_priority#pod_priority">Kubernetes pod priority support</a>.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>132</td>
 <td>143</td>
-<td>Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN client and server</td>
 <td>2.4.6-r3-IKS-13</td>
 <td>2.4.6-r3-IKS-25</td>
-<td>Updated image for [CVE-2019-1559 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559">CVE-2019-1559</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>1ea5ad3</td>
 <td>5f3d092</td>
-<td>Updated image for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454">CVE-2019-6454</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6592,7 +6592,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-141</td>
 <td>4.4.0-142</td>
-<td>Updated worker node images with kernel update for [CVE-2018-19407 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+<td>Updated worker node images with kernel update for <a href="https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog">CVE-2018-19407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6624,7 +6624,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>containerd</td>
 <td>1.1.5</td>
 <td>1.1.6</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.6). Update resolves [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/871600).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.1.6">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736">CVE-2019-5736</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/871600">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes <code>kubelet</code> configuration</td>
@@ -6656,13 +6656,13 @@ The following table shows the changes that are included in the patch 1.12.5_1537
 <td>etcd</td>
 <td>v3.3.1</td>
 <td>v3.3.11</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.3.11">etcd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>13fdc0d</td>
 <td>eb3a259</td>
-<td>Updated images for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) and [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Updated images for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462">CVE-2019-3462</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -6675,7 +6675,7 @@ The following table shows the changes that are included in the patch 1.12.5_1537
 <td>338</td>
 <td>342</td>
 <td>The file storage plug-in is updated as follows:
-<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers?topic=containers-file_storage#file-topology).</li>
+<ul><li>Supports dynamic provisioning with <a href="/docs/containers?topic=containers-file_storage#file-topology">volume topology-aware scheduling</a>.</li>
 <li>Ignores persistent volume claim (PVC) delete errors if the storage is already deleted.</li>
 <li>Adds a failure message annotation to failed PVCs.</li>
 <li>Optimizes the storage provisioner controller's leader election and resync period settings, and increases the provisioning timeout from 30 minutes to 1 hour.</li>
@@ -6691,7 +6691,7 @@ The following table shows the changes that are included in the patch 1.12.5_1537
 <td>Kubernetes</td>
 <td>v1.12.4</td>
 <td>v1.12.5</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.5).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.12.5">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
@@ -6703,19 +6703,19 @@ The following table shows the changes that are included in the patch 1.12.5_1537
 <td>OpenVPN client</td>
 <td>2.4.6-r3-IKS-8</td>
 <td>2.4.6-r3-IKS-13</td>
-<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Additionally, the pod configuration is now obtained from a secret instead of from a configmap.</td>
+<td>Updated image for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734">CVE-2018-0734</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407">CVE-2018-5407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Additionally, the pod configuration is now obtained from a secret instead of from a configmap.</td>
 </tr>
 <tr>
 <td>OpenVPN server</td>
 <td>2.4.6-r3-IKS-8</td>
 <td>2.4.6-r3-IKS-13</td>
-<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
+<td>Updated image for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734">CVE-2018-0734</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407">CVE-2018-5407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>systemd</td>
 <td>230</td>
 <td>229</td>
-<td>Security patch for [CVE-2018-16864 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+<td>Security patch for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864">CVE-2018-16864</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6741,7 +6741,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updates to installed Ubuntu packages including <code>apt</code> for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) and [USN-3863-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-3863-1).</td>
+<td>Updates to installed Ubuntu packages including <code>apt</code> for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462">CVE-2019-3462</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/notices/USN-3863-1">USN-3863-1</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6774,19 +6774,19 @@ The following table shows the changes that are included in the patch 1.12.3_1534
 <td>Kubernetes</td>
 <td>v1.12.3</td>
 <td>v1.12.4</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.4).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.12.4">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes add-on resizer</td>
 <td>1.8.1</td>
 <td>1.8.4</td>
-<td>See the [Kubernetes add-on resizer release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4).</td>
+<td>See the <a href="https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4">Kubernetes add-on resizer release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes dashboard</td>
 <td>v1.8.3</td>
 <td>v1.10.1</td>
-<td>See the [Kubernetes dashboard release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). Update resolves [CVE-2018-18264 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).</td>
+<td>See the <a href="https://github.com/kubernetes/dashboard/releases/tag/v1.10.1">Kubernetes dashboard release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264">CVE-2018-18264</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU installer</td>
@@ -6818,7 +6818,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-139</td>
 <td>4.4.0-141</td>
-<td>Updated worker node images with kernel update for [CVE-2017-5753, CVE-2018-18690 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog).</td>
+<td>Updated worker node images with kernel update for <a href="https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog">CVE-2017-5753, CVE-2018-18690</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6877,7 +6877,7 @@ The following table shows the changes that are included in the patch 1.12.3_1531
 <td>Kubernetes</td>
 <td>v1.12.2</td>
 <td>v1.12.3</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.3). Update resolves [CVE-2018-1002105 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/71411). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/743917).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.12.3">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://github.com/kubernetes/kubernetes/issues/71411">CVE-2018-1002105</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/743917">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6903,7 +6903,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added dedicated cgroups for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
+<td>Added dedicated cgroups for the kubelet and containerd to prevent these components from running out of resources. For more information, see <a href="/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node">Worker node resource reserves</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -6931,7 +6931,7 @@ The following table shows the changes that are included in patch 1.12.2_1529.
 <td>Calico</td>
 <td>v3.2.1</td>
 <td>v3.3.1</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [Tigera Technical Advisory TTA-2018-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.tigera.io/security-bulletins/). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/740799).</td>
+<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/">Tigera Technical Advisory TTA-2018-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/740799">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster DNS configuration</td>
@@ -6943,13 +6943,13 @@ The following table shows the changes that are included in patch 1.12.2_1529.
 <td>containerd</td>
 <td>v1.2.0</td>
 <td>v1.1.5</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.5). Updated containerd to fix a deadlock that can [stop pods from terminating ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/issues/2744).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.1.5">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Updated containerd to fix a deadlock that can <a href="https://github.com/containerd/containerd/issues/2744">stop pods from terminating</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN client and server</td>
 <td>2.4.4-r1-6</td>
 <td>2.4.6-r3-IKS-8</td>
-<td>Updated image for [CVE-2018-0732 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) and [CVE-2018-0737 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737).</td>
+<td>Updated image for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732">CVE-2018-0732</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737">CVE-2018-0737</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -6975,7 +6975,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-137</td>
 <td>4.4.0-139</td>
-<td>Updated worker node images with kernel update for [CVE-2018-7755 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
+<td>Updated worker node images with kernel update for <a href="https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog">CVE-2018-7755</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7020,44 +7020,44 @@ The following table shows the changes that are included in patch 1.12.2_1527.
 <td>containerd</td>
 <td>1.1.4</td>
 <td>1.2.0</td>
-<td>See the [containerd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.0).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.2.0">containerd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.0</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>CoreDNS</td>
 <td>N/A</td>
 <td>1.2.2</td>
-<td>See the [CoreDNS release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coredns/coredns/releases/tag/v1.2.2).</td>
+<td>See the <a href="https://github.com/coredns/coredns/releases/tag/v1.2.2">CoreDNS release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coredns/coredns/releases/tag/v1.2.2</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.11.3</td>
 <td>v1.12.2</td>
-<td>See the [Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.2).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.12.2">Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.2</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added three new IBM pod security policies and their associated cluster roles. For more information, see [Understanding default resources for IBM cluster management](/docs/containers?topic=containers-psp#ibm_psp).</td>
+<td>Added three new IBM pod security policies and their associated cluster roles. For more information, see <a href="/docs/containers?topic=containers-psp#ibm_psp">Understanding default resources for IBM cluster management</a>.</td>
 </tr>
 <tr>
 <td>Kubernetes Dashboard</td>
 <td>v1.8.3</td>
 <td>v1.10.0</td>
-<td>See the [Kubernetes Dashboard release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.0).<br><br>
-If you access the dashboard via <code>kubectl proxy</code>, the <strong>SKIP</strong> button on the login page is removed. Instead, [use a <strong>Token</strong> to log in](/docs/containers?topic=containers-deploy_app#cli_dashboard). Additionally, you can now scale up the number of Kubernetes Dashboard pods by running <code>kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3</code>.</td>
+<td>See the <a href="https://github.com/kubernetes/dashboard/releases/tag/v1.10.0">Kubernetes Dashboard release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.0</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.<br><br>
+If you access the dashboard via <code>kubectl proxy</code>, the <strong>SKIP</strong> button on the login page is removed. Instead, <a href="/docs/containers?topic=containers-deploy_app#cli_dashboard">use a <strong>Token</strong> to log in</a>. Additionally, you can now scale up the number of Kubernetes Dashboard pods by running <code>kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3</code>.</td>
 </tr>
 <tr>
 <td>Kubernetes DNS</td>
 <td>1.14.10</td>
 <td>1.14.13</td>
-<td>See the [Kubernetes DNS release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/releases/tag/1.14.13).</td>
+<td>See the <a href="https://github.com/kubernetes/dns/releases/tag/1.14.13">Kubernetes DNS release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/releases/tag/1.14.13</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes Metrics Server</td>
 <td>N/A</td>
 <td>v0.3.1</td>
-<td>See the [Kubernetes Metrics Server release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.1).</td>
+<td>See the <a href="https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.1">Kubernetes Metrics Server release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.1</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -7066,7 +7066,7 @@ If you access the dashboard via <code>kubectl proxy</code>, the <strong>SKIP</st
 <td>Updated to support the Kubernetes 1.12 release. Additional changes include the following:
 <ul><li>Load balancer pods (<code>ibm-cloud-provider-ip-*</code> in <code>ibm-system</code> namespace) now set CPU and memory resource requests.</li>
 <li>The <code>service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan</code> annotation is added to specify the VLAN that the load balancer service deploys to. To see available VLANs in your cluster, run <code>ibmcloud ks vlan ls --zone <zone></code>.</li>
-<li>A new [load balancer 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs) is available as a beta.</li></ul></td>
+<li>A new <a href="/docs/containers?topic=containers-loadbalancer-about#planning_ipvs">load balancer 2.0</a> is available as a beta.</li></ul></td>
 </tr>
 <tr>
 <td>OpenVPN client configuration</td>
@@ -7141,13 +7141,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-151-generic</td>
 <td>4.4.0-154-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11479.html">CVE-2019-11479</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-52-generic</td>
 <td>4.15.0-54-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11479.html">CVE-2019-11479</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7173,13 +7173,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-150-generic</td>
 <td>4.4.0-151-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11477.html">CVE-2019-11477</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-51-generic</td>
 <td>4.15.0-52-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-11477.html">CVE-2019-11477</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/CVE-2019-11478.html">CVE-2019-11478</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7205,13 +7205,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-148-generic</td>
 <td>4.4.0-150-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-10906">CVE-2019-10906</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-50-generic</td>
 <td>4.15.0-51-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
+<td>Updated worker node images with kernel and package updates for <a href="https://ubuntu.com/security/CVE-2019-10906">CVE-2019-10906</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7243,19 +7243,19 @@ The following table shows the changes that are included in the patch 1.11.10_156
 <td>etcd</td>
 <td>v3.3.11</td>
 <td>v3.3.13</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.13).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.3.13">etcd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>55c1f66</td>
 <td>32257d3</td>
-<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844">CVE-2018-10844</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845">CVE-2018-10845</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846">CVE-2018-10846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829">CVE-2019-3829</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836">CVE-2019-3836</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893">CVE-2019-9893</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435">CVE-2019-5435</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436">CVE-2019-5436</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>13c7ef0</td>
 <td>e8c6d72</td>
-<td>Updated image for [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), and [CVE-2019-5436 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844">CVE-2018-10844</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845">CVE-2018-10845</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846">CVE-2018-10846</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829">CVE-2019-3829</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836">CVE-2019-3836</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893">CVE-2019-9893</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435">CVE-2019-5435</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436">CVE-2019-5436</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7281,13 +7281,13 @@ The following table shows the changes that are included in the patch pack 1.11.1
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-145-generic</td>
 <td>4.4.0-148-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2018-12126.html">CVE-2018-12126</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://ubuntu.com/security/CVE-2018-12127.html">CVE-2018-12127</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://ubuntu.com/security/CVE-2018-12130.html">CVE-2018-12130</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-47-generic</td>
 <td>4.15.0-50-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2018-12126.html">CVE-2018-12126</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://ubuntu.com/security/CVE-2018-12127.html">CVE-2018-12127</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://ubuntu.com/security/CVE-2018-12130.html">CVE-2018-12130</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7313,13 +7313,13 @@ The following table shows the changes that are included in the patch 1.11.10_155
 <td>Cluster master HA proxy</td>
 <td>1.9.6-alpine</td>
 <td>1.9.7-alpine</td>
-<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Update resolves [CVE-2019-6706 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+<td>See the <a href="https://www.haproxy.org/download/1.9/src/CHANGELOG">HAProxy release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706">CVE-2019-6706</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>9ff3fda</td>
 <td>55c1f66</td>
-<td>Updated image for [CVE-2019-1543 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543">CVE-2019-1543</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -7331,7 +7331,7 @@ The following table shows the changes that are included in the patch 1.11.10_155
 <td>Kubernetes</td>
 <td>v1.11.9</td>
 <td>v1.11.10</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.10).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.11.10">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
@@ -7349,7 +7349,7 @@ The following table shows the changes that are included in the patch 1.11.10_155
 <td>Trusted compute agent</td>
 <td>e132aa4</td>
 <td>13c7ef0</td>
-<td>Updated image for [CVE-2016-7076 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368), and [CVE-2019-11068 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076">CVE-2016-7076</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368">CVE-2017-1000368</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068">CVE-2019-11068</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7381,7 +7381,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>containerd</td>
 <td>1.1.6</td>
 <td>1.1.7</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.7).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.1.7">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7408,7 +7408,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updates to installed Ubuntu packages including <code>systemd</code> for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-3842.html).</td>
+<td>Updates to installed Ubuntu packages including <code>systemd</code> for <a href="https://ubuntu.com/security/CVE-2019-3842.html">CVE-2019-3842</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7434,13 +7434,13 @@ The following table shows the changes that are included in the patch 1.11.9_1554
 <td>Calico</td>
 <td>v3.3.1</td>
 <td>v3.3.6</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [CVE-2019-9946 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946).</td>
+<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946">CVE-2019-9946</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster master HA proxy</td>
 <td>1.8.12-alpine</td>
 <td>1.9.6-alpine</td>
-<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Update resolves [CVE-2018-0732 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543), and [CVE-2019-1559 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+<td>See the <a href="https://www.haproxy.org/download/1.9/src/CHANGELOG">HAProxy release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732">CVE-2018-0732</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734">CVE-2018-0734</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737">CVE-2018-0737</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407">CVE-2018-5407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543">CVE-2019-1543</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559">CVE-2019-1559</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -7452,31 +7452,31 @@ The following table shows the changes that are included in the patch 1.11.9_1554
 <td>Kubernetes</td>
 <td>v1.11.8</td>
 <td>v1.11.9</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.9).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.11.9">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes DNS</td>
 <td>1.14.10</td>
 <td>1.14.13</td>
-<td>See the [Kubernetes DNS release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/releases/tag/1.14.13).</td>
+<td>See the <a href="https://github.com/kubernetes/dns/releases/tag/1.14.13">Kubernetes DNS release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>a02f765</td>
 <td>e132aa4</td>
-<td>Updated image for [CVE-2017-12447 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447">CVE-2017-12447</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-143-generic</td>
 <td>4.4.0-145-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2019-9213.html">CVE-2019-9213</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-46-generic</td>
 <td>4.15.0-47-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2019-9213.html">CVE-2019-9213</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7502,7 +7502,7 @@ The following table shows the changes that are included in the worker node fix 1
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
+<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see <a href="/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node">Worker node resource reserves</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -7528,19 +7528,19 @@ The following table shows the changes that are included in the master fix pack 1
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>345</td>
 <td>346</td>
-<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
 <td>166</td>
 <td>167</td>
-<td>Fixes intermittent <code>context deadline exceeded</code> and <code>timeout</code> errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrypted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Fixes intermittent <code>context deadline exceeded</code> and <code>timeout</code> errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrypted. Update includes fix for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>143</td>
 <td>146</td>
-<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7572,31 +7572,31 @@ The following table shows the changes that are included in the patch 1.11.8_1550
 <td>GPU device plug-in and installer</td>
 <td>e32d51c</td>
 <td>9ff3fda</td>
-<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9741.html).</td>
+<td>Updated the GPU drivers to <a href="https://www.nvidia.com/object/unix.html">418.43</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update includes fix for <a href="https://ubuntu.com/security/CVE-2019-9741.html">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>344</td>
 <td>345</td>
-<td>Added support for [private cloud service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+<td>Added support for <a href="/docs/containers?topic=containers-cs_network_cluster#set-up-private-se">private cloud service endpoints</a>.</td>
 </tr>
 <tr>
 <td>Kernel</td>
 <td>4.4.0-141</td>
 <td>4.4.0-143</td>
-<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-6133.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2019-6133.html">CVE-2019-6133</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
 <td>136</td>
 <td>166</td>
-<td>Updated image for [CVE-2018-16890 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822), and [CVE-2019-3823 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890">CVE-2018-16890</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822">CVE-2019-3822</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823">CVE-2019-3823</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>5f3d092</td>
 <td>a02f765</td>
-<td>Updated image for [CVE-2018-10779 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128), and [CVE-2019-7663 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779">CVE-2018-10779</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900">CVE-2018-12900</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000">CVE-2018-17000</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210">CVE-2018-19210</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128">CVE-2019-6128</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663">CVE-2019-7663</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7622,7 +7622,7 @@ The following table shows the changes that are included in the patch 1.11.8_1547
 <td>GPU device plug-in and installer</td>
 <td>eb3a259</td>
 <td>e32d51c</td>
-<td>Updated images for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+<td>Updated images for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454">CVE-2019-6454</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -7634,25 +7634,25 @@ The following table shows the changes that are included in the patch 1.11.8_1547
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>342</td>
 <td>344</td>
-<td>Changed the base operating system for the image from Fedora to Alpine. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Changed the base operating system for the image from Fedora to Alpine. Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
 <td>122</td>
 <td>136</td>
-<td>Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.11.7</td>
 <td>v1.11.8</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.8). Update resolves [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) and [CVE-2019-1002100 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.11.8">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100">CVE-2019-1002100</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added <code>ExperimentalCriticalPodAnnotation=true</code> to the <code>--feature-gates</code> option. This setting helps migrate pods from the deprecated <code>scheduler.alpha.kubernetes.io/critical-pod</code> annotation to [Kubernetes pod priority support](/docs/containers?topic=containers-pod_priority#pod_priority).</td>
+<td>Added <code>ExperimentalCriticalPodAnnotation=true</code> to the <code>--feature-gates</code> option. This setting helps migrate pods from the deprecated <code>scheduler.alpha.kubernetes.io/critical-pod</code> annotation to <a href="/docs/containers?topic=containers-pod_priority#pod_priority">Kubernetes pod priority support</a>.</td>
 </tr>
 <tr>
 <td>Kubernetes DNS</td>
@@ -7664,19 +7664,19 @@ The following table shows the changes that are included in the patch 1.11.8_1547
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>132</td>
 <td>143</td>
-<td>Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN client and server</td>
 <td>2.4.6-r3-IKS-13</td>
 <td>2.4.6-r3-IKS-25</td>
-<td>Updated image for [CVE-2019-1559 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559">CVE-2019-1559</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>1ea5ad3</td>
 <td>5f3d092</td>
-<td>Updated image for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454">CVE-2019-6454</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7702,7 +7702,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-141</td>
 <td>4.4.0-142</td>
-<td>Updated worker node images with kernel update for [CVE-2018-19407 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+<td>Updated worker node images with kernel update for <a href="https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog">CVE-2018-19407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7734,7 +7734,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>containerd</td>
 <td>1.1.5</td>
 <td>1.1.6</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.6). Update resolves [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.1.6">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736">CVE-2019-5736</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes <code>kubelet</code> configuration</td>
@@ -7766,13 +7766,13 @@ The following table shows the changes that are included in the patch 1.11.7_1543
 <td>etcd</td>
 <td>v3.3.1</td>
 <td>v3.3.11</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.3.11">etcd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>13fdc0d</td>
 <td>eb3a259</td>
-<td>Updated images for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) and [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Updated images for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462">CVE-2019-3462</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -7785,7 +7785,7 @@ The following table shows the changes that are included in the patch 1.11.7_1543
 <td>338</td>
 <td>342</td>
 <td>The file storage plug-in is updated as follows:
-<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers?topic=containers-file_storage#file-topology).</li>
+<ul><li>Supports dynamic provisioning with <a href="/docs/containers?topic=containers-file_storage#file-topology">volume topology-aware scheduling</a>.</li>
 <li>Ignores persistent volume claim (PVC) delete errors if the storage is already deleted.</li>
 <li>Adds a failure message annotation to failed PVCs.</li>
 <li>Optimizes the storage provisioner controller's leader election and resync period settings, and increases the provisioning timeout from 30 minutes to 1 hour.</li>
@@ -7801,7 +7801,7 @@ The following table shows the changes that are included in the patch 1.11.7_1543
 <td>Kubernetes</td>
 <td>v1.11.6</td>
 <td>v1.11.7</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.7).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.11.7">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
@@ -7813,19 +7813,19 @@ The following table shows the changes that are included in the patch 1.11.7_1543
 <td>OpenVPN client</td>
 <td>2.4.6-r3-IKS-8</td>
 <td>2.4.6-r3-IKS-13</td>
-<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Additionally, the pod configuration is now obtained from a secret instead of from a configmap.</td>
+<td>Updated image for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734">CVE-2018-0734</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407">CVE-2018-5407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Additionally, the pod configuration is now obtained from a secret instead of from a configmap.</td>
 </tr>
 <tr>
 <td>OpenVPN server</td>
 <td>2.4.6-r3-IKS-8</td>
 <td>2.4.6-r3-IKS-13</td>
-<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
+<td>Updated image for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734">CVE-2018-0734</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407">CVE-2018-5407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>systemd</td>
 <td>230</td>
 <td>229</td>
-<td>Security patch for [CVE-2018-16864 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+<td>Security patch for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864">CVE-2018-16864</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7851,7 +7851,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updates to installed Ubuntu packages including <code>apt</code> for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) / [USN-3863-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-3863-1).</td>
+<td>Updates to installed Ubuntu packages including <code>apt</code> for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462">CVE-2019-3462</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> / <a href="https://ubuntu.com/security/notices/USN-3863-1">USN-3863-1</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7883,19 +7883,19 @@ The following table shows the changes that are included in the patch 1.11.6_1540
 <td>Kubernetes</td>
 <td>v1.11.5</td>
 <td>v1.11.6</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.6).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.11.6">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes add-on resizer</td>
 <td>1.8.1</td>
 <td>1.8.4</td>
-<td>See the [Kubernetes add-on resizer release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4).</td>
+<td>See the <a href="https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4">Kubernetes add-on resizer release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes dashboard</td>
 <td>v1.8.3</td>
 <td>v1.10.1</td>
-<td>See the [Kubernetes dashboard release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). Update resolves [CVE-2018-18264 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>If you access the dashboard via <code>kubectl proxy</code>, the <strong>SKIP</strong> button on the login page is removed. Instead, [use a <strong>Token</strong> to log in](/docs/containers?topic=containers-deploy_app#cli_dashboard).</td>
+<td>See the <a href="https://github.com/kubernetes/dashboard/releases/tag/v1.10.1">Kubernetes dashboard release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264">CVE-2018-18264</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.<br><br>If you access the dashboard via <code>kubectl proxy</code>, the <strong>SKIP</strong> button on the login page is removed. Instead, <a href="/docs/containers?topic=containers-deploy_app#cli_dashboard">use a <strong>Token</strong> to log in</a>.</td>
 </tr>
 <tr>
 <td>GPU installer</td>
@@ -7927,7 +7927,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-139</td>
 <td>4.4.0-141</td>
-<td>Updated worker node images with kernel update for [CVE-2017-5753, CVE-2018-18690 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog).</td>
+<td>Updated worker node images with kernel update for <a href="https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog">CVE-2017-5753, CVE-2018-18690</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -7985,7 +7985,7 @@ The following table shows the changes that are included in the patch 1.11.5_1537
 <td>Kubernetes</td>
 <td>v1.11.4</td>
 <td>v1.11.5</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.5). Update resolves [CVE-2018-1002105 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/71411).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.11.5">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://github.com/kubernetes/kubernetes/issues/71411">CVE-2018-1002105</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -8011,7 +8011,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added dedicated cgroups for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
+<td>Added dedicated cgroups for the kubelet and containerd to prevent these components from running out of resources. For more information, see <a href="/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node">Worker node resource reserves</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -8037,13 +8037,13 @@ The following table shows the changes that are included in patch 1.11.4_1535.
 <td>Calico</td>
 <td>v3.2.1</td>
 <td>v3.3.1</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [Tigera Technical Advisory TTA-2018-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.tigera.io/security-bulletins/).</td>
+<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/">Tigera Technical Advisory TTA-2018-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>containerd</td>
 <td>v1.1.4</td>
 <td>v1.1.5</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.5). Updated containerd to fix a deadlock that can [stop pods from terminating ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/issues/2744).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.1.5">containerd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Updated containerd to fix a deadlock that can <a href="https://github.com/containerd/containerd/issues/2744">stop pods from terminating</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -8055,13 +8055,13 @@ The following table shows the changes that are included in patch 1.11.4_1535.
 <td>Kubernetes</td>
 <td>v1.11.3</td>
 <td>v1.11.4</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.4).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.11.4">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN client and server</td>
 <td>2.4.4-r1-6</td>
 <td>2.4.6-r3-IKS-8</td>
-<td>Updated image for [CVE-2018-0732 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) and [CVE-2018-0737 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737).</td>
+<td>Updated image for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732">CVE-2018-0732</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737">CVE-2018-0737</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -8087,7 +8087,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-137</td>
 <td>4.4.0-139</td>
-<td>Updated worker node images with kernel update for [CVE-2018-7755 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
+<td>Updated worker node images with kernel update for <a href="https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog">CVE-2018-7755</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -8126,7 +8126,7 @@ The following table shows the changes that are included in patch 1.11.3_1533.
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-kubernetes-service-cli) on an existing cluster, you need to [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the <strong>Trustable</strong> field after running the <code>ibmcloud ks flavors --zone</code> [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you <a href="/docs/containers?topic=containers-kubernetes-service-cli">enable trust</a> on an existing cluster, you need to <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload">reload</a> any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the <strong>Trustable</strong> field after running the <code>ibmcloud ks flavors --zone</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types">command</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -8164,13 +8164,13 @@ The following table shows the changes that are included in the master fix pack 1
 <td>etcd</td>
 <td>v3.2.18</td>
 <td>v3.3.1</td>
-<td>See the [etcd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.1).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.3.1">etcd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.1</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Encrypting data in etcd</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Previously, etcd data was stored on a master’s NFS file storage instance that is encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect).</td>
+<td>Previously, etcd data was stored on a master’s NFS file storage instance that is encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, <a href="/docs/containers?topic=containers-encryption#keyprotect">enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -8254,7 +8254,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-133</td>
 <td>4.4.0-137</td>
-<td>Updated worker node images with kernel update for [CVE-2018-14633, CVE-2018-17182 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-137.163/changelog).</td>
+<td>Updated worker node images with kernel update for <a href="https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-137.163/changelog">CVE-2018-14633, CVE-2018-17182</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Inactive session timeout</td>
@@ -8287,7 +8287,7 @@ The following table shows the changes that are included in patch 1.11.3_1524.
 <td>containerd</td>
 <td>1.1.3</td>
 <td>1.1.4</td>
-<td>See the [containerd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.4).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.1.4">containerd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.4</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -8300,7 +8300,7 @@ The following table shows the changes that are included in patch 1.11.3_1524.
 <td>N/A</td>
 <td>N/A</td>
 <td>Removed duplicate <code>reclaimPolicy</code> parameter in the IBM file storage classes.<br><br>
-Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass).</td>
+Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to set your own default, see <a href="/docs/containers?topic=containers-kube_concepts#default_storageclass">Changing the default storage class</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -8333,37 +8333,37 @@ The following table shows the changes that are included in patch 1.11.3_1521.
 <td>N/A</td>
 <td>N/A</td>
 <td>Removed <code>mountOptions</code> in the IBM file storage classes to use the default that is provided by the worker node.<br><br>
-Also, now when you update the cluster master, the default IBM file storage class remains <code>ibmc-file-bronze</code>. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass).</td>
+Also, now when you update the cluster master, the default IBM file storage class remains <code>ibmc-file-bronze</code>. If you want to set your own default, see <a href="/docs/containers?topic=containers-kube_concepts#default_storageclass">Changing the default storage class</a>.</td>
 </tr>
 <tr>
 <td>Key Management Service Provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added the ability to use the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect), all your Kubernetes secrets are encrypted.</td>
+<td>Added the ability to use the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you <a href="/docs/containers?topic=containers-encryption#keyprotect">enable {{site.data.keyword.keymanagementserviceshort}} in your cluster</a>, all your Kubernetes secrets are encrypted.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.11.2</td>
 <td>v1.11.3</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.3).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.11.3">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes DNS autoscaler</td>
 <td>1.1.2-r2</td>
 <td>1.2.0</td>
-<td>See the [Kubernetes DNS autoscaler release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.2.0).</td>
+<td>See the <a href="https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.2.0">Kubernetes DNS autoscaler release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Log rotate</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Switched to use <code>systemd</code> timers instead of <code>cronjobs</code> to prevent <code>logrotate</code> from failing on worker nodes that are not reloaded or updated within 90 days. <strong>Note</strong>: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the <code>ibmcloud ks worker reload</code> [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or the <code>ibmcloud ks worker update</code> [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update).</td>
+<td>Switched to use <code>systemd</code> timers instead of <code>cronjobs</code> to prevent <code>logrotate</code> from failing on worker nodes that are not reloaded or updated within 90 days. <strong>Note</strong>: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the <code>ibmcloud ks worker reload</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload">command</a> or the <code>ibmcloud ks worker update</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update">command</a>.</td>
 </tr>
 <tr>
 <td>Root password expiration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running <code>chage -M -1 root</code>. <strong>Note</strong>: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) or [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) your worker nodes at least every 90 days.</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running <code>chage -M -1 root</code>. <strong>Note</strong>: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update">update</a> or <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload">reload</a> your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
 <td>Worker node runtime components (<code>kubelet</code>, <code>kube-proxy</code>, <code>containerd</code>)</td>
@@ -8375,7 +8375,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
+<td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses <a href="https://github.com/kubernetes/kubernetes/issues/57345">Kubernetes issue 57345</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -8401,13 +8401,13 @@ The following table shows the changes that are included in patch 1.11.2_1516.
 <td>Calico</td>
 <td>v3.1.3</td>
 <td>v3.2.1</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/).</td>
+<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>containerd</td>
 <td>1.1.2</td>
 <td>1.1.3</td>
-<td>See the [<code>containerd</code> release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.3).</td>
+<td>See the <a href="https://github.com/containerd/containerd/releases/tag/v1.1.3"><code>containerd</code> release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -8419,7 +8419,7 @@ The following table shows the changes that are included in patch 1.11.2_1516.
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
+<td>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see <a href="/docs/containers?topic=containers-file_storage#nfs_version_class">Changing the default NFS version</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -8451,7 +8451,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-127</td>
 <td>4.4.0-133</td>
-<td>Updated worker node images with kernel update for [CVE-2018-3620,CVE-2018-3646 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-3741-1/).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/notices/USN-3741-1/">CVE-2018-3620,CVE-2018-3646</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -8477,7 +8477,7 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <td>containerd</td>
 <td>N/A</td>
 <td>1.1.2</td>
-<td><code>containerd</code> replaces Docker as the new container runtime for Kubernetes. See the [<code>containerd</code> release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.2).</td>
+<td><code>containerd</code> replaces Docker as the new container runtime for Kubernetes. See the <a href="https://github.com/containerd/containerd/releases/tag/v1.1.2"><code>containerd</code> release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Docker</td>
@@ -8489,7 +8489,7 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <td>etcd</td>
 <td>v3.2.14</td>
 <td>v3.2.18</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.2.18).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.2.18">etcd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -8507,21 +8507,21 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <td>Kubernetes</td>
 <td>v1.10.5</td>
 <td>v1.11.2</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.2).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.11.2">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>Updated the OpenID Connect configuration for the cluster's Kubernetes API server to support {{site.data.keyword.cloud_notm}} Identity Access and Management (IAM) access groups. Added <code>Priority</code> to the <code>--enable-admission-plugins</code> option for the cluster's Kubernetes API server and configured the cluster to support pod priority. For more information, see:
-<ul><li>[{{site.data.keyword.cloud_notm}} IAM access groups](/docs/containers?topic=containers-users#rbac)</li>
-<li>[Configuring pod priority](/docs/containers?topic=containers-pod_priority#pod_priority)</li></ul></td>
+<ul><li><a href="/docs/containers?topic=containers-users#rbac">{{site.data.keyword.cloud_notm}} IAM access groups</a></li>
+<li><a href="/docs/containers?topic=containers-pod_priority#pod_priority">Configuring pod priority</a></li></ul></td>
 </tr>
 <tr>
 <td>Kubernetes Heapster</td>
 <td>v1.5.2</td>
 <td>v.1.5.4</td>
-<td>Increased resource limits for the <code>heapster-nanny</code> container. See the [Kubernetes Heapster release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-retired/heapster/releases/tag/v1.5.4).</td>
+<td>Increased resource limits for the <code>heapster-nanny</code> container. See the <a href="https://github.com/kubernetes-retired/heapster/releases/tag/v1.5.4">Kubernetes Heapster release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Logging configuration</td>
@@ -8595,7 +8595,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Cluster master HA proxy</td>
 <td>1.9.6-alpine</td>
 <td>1.9.7-alpine</td>
-<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Update resolves [CVE-2019-6706 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+<td>See the <a href="https://www.haproxy.org/download/1.9/src/CHANGELOG">HAProxy release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706">CVE-2019-6706</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -8648,7 +8648,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updates to installed Ubuntu packages including <code>systemd</code> for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-3842.html).</td>
+<td>Updates to installed Ubuntu packages including <code>systemd</code> for <a href="https://ubuntu.com/security/CVE-2019-3842.html">CVE-2019-3842</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -8674,31 +8674,31 @@ The following table shows the changes that are included in the patch 1.10.13_155
 <td>Cluster master HA proxy</td>
 <td>1.8.12-alpine</td>
 <td>1.9.6-alpine</td>
-<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Update resolves [CVE-2018-0732 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543), and [CVE-2019-1559 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+<td>See the <a href="https://www.haproxy.org/download/1.9/src/CHANGELOG">HAProxy release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732">CVE-2018-0732</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734">CVE-2018-0734</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737">CVE-2018-0737</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407">CVE-2018-5407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543">CVE-2019-1543</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559">CVE-2019-1559</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes DNS</td>
 <td>1.14.10</td>
 <td>1.14.13</td>
-<td>See the [Kubernetes DNS release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/releases/tag/1.14.13).</td>
+<td>See the <a href="https://github.com/kubernetes/dns/releases/tag/1.14.13">Kubernetes DNS release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>a02f765</td>
 <td>e132aa4</td>
-<td>Updated image for [CVE-2017-12447 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447">CVE-2017-12447</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-143-generic</td>
 <td>4.4.0-145-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2019-9213.html">CVE-2019-9213</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-46-generic</td>
 <td>4.15.0-47-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2019-9213.html">CVE-2019-9213</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -8724,7 +8724,7 @@ The following table shows the changes that are included in the worker node fix 1
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
+<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see <a href="/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node">Worker node resource reserves</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -8751,19 +8751,19 @@ The following table shows the changes that are included in the master fix pack 1
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>345</td>
 <td>346</td>
-<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
 <td>166</td>
 <td>167</td>
-<td>Fixes intermittent <code>context deadline exceeded</code> and <code>timeout</code> errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrypted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Fixes intermittent <code>context deadline exceeded</code> and <code>timeout</code> errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrypted. Update includes fix for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>143</td>
 <td>146</td>
-<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -8795,31 +8795,31 @@ The following table shows the changes that are included in the patch 1.10.13_155
 <td>GPU device plug-in and installer</td>
 <td>e32d51c</td>
 <td>9ff3fda</td>
-<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9741.html).</td>
+<td>Updated the GPU drivers to <a href="https://www.nvidia.com/object/unix.html">418.43</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update includes fix for <a href="https://ubuntu.com/security/CVE-2019-9741.html">CVE-2019-9741</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>344</td>
 <td>345</td>
-<td>Added support for [private cloud service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+<td>Added support for <a href="/docs/containers?topic=containers-cs_network_cluster#set-up-private-se">private cloud service endpoints</a>.</td>
 </tr>
 <tr>
 <td>Kernel</td>
 <td>4.4.0-141</td>
 <td>4.4.0-143</td>
-<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-6133.html).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/CVE-2019-6133.html">CVE-2019-6133</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
 <td>136</td>
 <td>166</td>
-<td>Updated image for [CVE-2018-16890 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822), and [CVE-2019-3823 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890">CVE-2018-16890</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822">CVE-2019-3822</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823">CVE-2019-3823</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>5f3d092</td>
 <td>a02f765</td>
-<td>Updated image for [CVE-2018-10779 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128), and [CVE-2019-7663 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779">CVE-2018-10779</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900">CVE-2018-12900</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000">CVE-2018-17000</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210">CVE-2018-19210</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128">CVE-2019-6128</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663">CVE-2019-7663</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -8845,7 +8845,7 @@ The following table shows the changes that are included in the patch 1.10.13_154
 <td>GPU device plug-in and installer</td>
 <td>eb3a259</td>
 <td>e32d51c</td>
-<td>Updated images for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+<td>Updated images for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454">CVE-2019-6454</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -8857,19 +8857,19 @@ The following table shows the changes that are included in the patch 1.10.13_154
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>342</td>
 <td>344</td>
-<td>Changed the base operating system for the image from Fedora to Alpine. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Changed the base operating system for the image from Fedora to Alpine. Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
 <td>122</td>
 <td>136</td>
-<td>Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.10.12</td>
 <td>v1.10.13</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.13).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.10.13">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes DNS</td>
@@ -8881,19 +8881,19 @@ The following table shows the changes that are included in the patch 1.10.13_154
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
 <td>132</td>
 <td>143</td>
-<td>Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN client and server</td>
 <td>2.4.6-r3-IKS-13</td>
 <td>2.4.6-r3-IKS-25</td>
-<td>Updated image for [CVE-2019-1559 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559">CVE-2019-1559</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
 <td>1ea5ad3</td>
 <td>5f3d092</td>
-<td>Updated image for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+<td>Updated image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454">CVE-2019-6454</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -8919,7 +8919,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-141</td>
 <td>4.4.0-142</td>
-<td>Updated worker node images with kernel update for [CVE-2018-19407 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+<td>Updated worker node images with kernel update for <a href="https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog">CVE-2018-19407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -8945,7 +8945,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Docker</td>
 <td>18.06.1-ce</td>
 <td>18.06.2-ce</td>
-<td>See the [Docker Community Edition release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/docker/docker-ce/releases/tag/v18.06.2-ce). Update resolves [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+<td>See the <a href="https://github.com/docker/docker-ce/releases/tag/v18.06.2-ce">Docker Community Edition release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736">CVE-2019-5736</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes <code>kubelet</code> configuration</td>
@@ -8977,20 +8977,20 @@ The following table shows the changes that are included in the patch 1.10.12_154
 <td>etcd</td>
 <td>v3.3.1</td>
 <td>v3.3.11</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.3.11">etcd release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>13fdc0d</td>
 <td>eb3a259</td>
-<td>Updated images for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) and [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+<td>Updated images for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462">CVE-2019-3462</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486">CVE-2019-6486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>338</td>
 <td>342</td>
 <td>The file storage plug-in is updated as follows:
-<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers?topic=containers-file_storage#file-topology).</li>
+<ul><li>Supports dynamic provisioning with <a href="/docs/containers?topic=containers-file_storage#file-topology">volume topology-aware scheduling</a>.</li>
 <li>Ignores persistent volume claim (PVC) delete errors if the storage is already deleted.</li>
 <li>Adds a failure message annotation to failed PVCs.</li>
 <li>Optimizes the storage provisioner controller's leader election and resync period settings, and increases the provisioning timeout from 30 minutes to 1 hour.</li>
@@ -9012,19 +9012,19 @@ The following table shows the changes that are included in the patch 1.10.12_154
 <td>OpenVPN client</td>
 <td>2.4.6-r3-IKS-8</td>
 <td>2.4.6-r3-IKS-13</td>
-<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Additionally, the pod configuration is now obtained from a secret instead of from a configmap.</td>
+<td>Updated image for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734">CVE-2018-0734</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407">CVE-2018-5407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Additionally, the pod configuration is now obtained from a secret instead of from a configmap.</td>
 </tr>
 <tr>
 <td>OpenVPN server</td>
 <td>2.4.6-r3-IKS-8</td>
 <td>2.4.6-r3-IKS-13</td>
-<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
+<td>Updated image for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734">CVE-2018-0734</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407">CVE-2018-5407</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>systemd</td>
 <td>230</td>
 <td>229</td>
-<td>Security patch for [CVE-2018-16864 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+<td>Security patch for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864">CVE-2018-16864</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -9050,7 +9050,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updates to installed Ubuntu packages including <code>apt</code> for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) and [USN-3863-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-3863-1).</td>
+<td>Updates to installed Ubuntu packages including <code>apt</code> for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462">CVE-2019-3462</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://ubuntu.com/security/notices/USN-3863-1">USN-3863-1</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -9082,19 +9082,19 @@ The following table shows the changes that are included in the patch 1.10.12_154
 <td>Kubernetes</td>
 <td>v1.10.11</td>
 <td>v1.10.12</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.12).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.10.12">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes add-on resizer</td>
 <td>1.8.1</td>
 <td>1.8.4</td>
-<td>See the [Kubernetes add-on resizer release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4).</td>
+<td>See the <a href="https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4">Kubernetes add-on resizer release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes dashboard</td>
 <td>v1.8.3</td>
 <td>v1.10.1</td>
-<td>See the [Kubernetes dashboard release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). Update resolves [CVE-2018-18264 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>If you access the dashboard via <code>kubectl proxy</code>, the <strong>SKIP</strong> button on the login page is removed. Instead, [use a <strong>Token</strong> to log in](/docs/containers?topic=containers-deploy_app#cli_dashboard).</td>
+<td>See the <a href="https://github.com/kubernetes/dashboard/releases/tag/v1.10.1">Kubernetes dashboard release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264">CVE-2018-18264</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.<br><br>If you access the dashboard via <code>kubectl proxy</code>, the <strong>SKIP</strong> button on the login page is removed. Instead, <a href="/docs/containers?topic=containers-deploy_app#cli_dashboard">use a <strong>Token</strong> to log in</a>.</td>
 </tr>
 <tr>
 <td>GPU installer</td>
@@ -9126,7 +9126,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-139</td>
 <td>4.4.0-141</td>
-<td>Updated worker node images with kernel update for [CVE-2017-5753, CVE-2018-18690 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog).</td>
+<td>Updated worker node images with kernel update for <a href="https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog">CVE-2017-5753, CVE-2018-18690</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -9179,7 +9179,7 @@ The following table shows the changes that are included in patch 1.10.11_1536.
 <td>Calico</td>
 <td>v3.2.1</td>
 <td>v3.3.1</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [Tigera Technical Advisory TTA-2018-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.tigera.io/security-bulletins/).</td>
+<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/">Tigera Technical Advisory TTA-2018-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -9191,19 +9191,19 @@ The following table shows the changes that are included in patch 1.10.11_1536.
 <td>Kubernetes</td>
 <td>v1.10.8</td>
 <td>v1.10.11</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.11). Update resolves [CVE-2018-1002105 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/71411).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.10.11">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://github.com/kubernetes/kubernetes/issues/71411">CVE-2018-1002105</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>OpenVPN client and server</td>
 <td>2.4.4-r1-6</td>
 <td>2.4.6-r3-IKS-8</td>
-<td>Updated image for [CVE-2018-0732 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) and [CVE-2018-0737 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737).</td>
+<td>Updated image for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732">CVE-2018-0732</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737">CVE-2018-0737</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
+<td>Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see <a href="/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node">Worker node resource reserves</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -9229,7 +9229,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Docker</td>
 <td>17.06.2</td>
 <td>18.06.1</td>
-<td>See the [Docker release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/release-notes/#18061-ce).</td>
+<td>See the <a href="https://docs.docker.com/engine/release-notes/#18061-ce">Docker release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -9255,7 +9255,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-137</td>
 <td>4.4.0-139</td>
-<td>Updated worker node images with kernel update for [CVE-2018-7755 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
+<td>Updated worker node images with kernel update for <a href="https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog">CVE-2018-7755</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -9293,13 +9293,13 @@ The following table shows the changes that are included in patch 1.10.8_1530.
 <td>etcd</td>
 <td>v3.2.18</td>
 <td>v3.3.1</td>
-<td>See the [etcd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.1).</td>
+<td>See the <a href="https://github.com/etcd-io/etcd/releases/v3.3.1">etcd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.1</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Encrypting data in etcd</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Previously, etcd data was stored on a master’s NFS file storage instance that is encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect).</td>
+<td>Previously, etcd data was stored on a master’s NFS file storage instance that is encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, <a href="/docs/containers?topic=containers-encryption#keyprotect">enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster</a>.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -9311,7 +9311,7 @@ The following table shows the changes that are included in patch 1.10.8_1530.
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-kubernetes-service-cli) on an existing cluster, you need to [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the <strong>Trustable</strong> field after running the <code>ibmcloud ks flavors --zone</code> [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you <a href="/docs/containers?topic=containers-kubernetes-service-cli">enable trust</a> on an existing cluster, you need to <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload">reload</a> any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the <strong>Trustable</strong> field after running the <code>ibmcloud ks flavors --zone</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types">command</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -9395,7 +9395,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-133</td>
 <td>4.4.0-137</td>
-<td>Updated worker node images with kernel update for [CVE-2018-14633, CVE-2018-17182 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-137.163/changelog).</td>
+<td>Updated worker node images with kernel update for <a href="https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-137.163/changelog">CVE-2018-14633, CVE-2018-17182</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Inactive session timeout</td>
@@ -9428,19 +9428,19 @@ The following table shows the changes that are included in patch 1.10.8_1524.
 <td>Key Management Service Provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added the ability to use the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect), all your Kubernetes secrets are encrypted.</td>
+<td>Added the ability to use the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you <a href="/docs/containers?topic=containers-encryption#keyprotect">enable {{site.data.keyword.keymanagementserviceshort}} in your cluster</a>, all your Kubernetes secrets are encrypted.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.10.7</td>
 <td>v1.10.8</td>
-<td>See the [Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.8).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.10.8">Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.8</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes DNS autoscaler</td>
 <td>1.1.2-r2</td>
 <td>1.2.0</td>
-<td>See the [Kubernetes DNS autoscaler release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.2.0).</td>
+<td>See the <a href="https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.2.0">Kubernetes DNS autoscaler release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.2.0</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -9453,7 +9453,7 @@ The following table shows the changes that are included in patch 1.10.8_1524.
 <td>N/A</td>
 <td>N/A</td>
 <td>Removed <code>mountOptions</code> in the IBM file storage classes to use the default that is provided by the worker node. Removed duplicate <code>reclaimPolicy</code> parameter in the IBM file storage classes.<br><br>
-Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass).</td>
+Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to set your own default, see <a href="/docs/containers?topic=containers-kube_concepts#default_storageclass">Changing the default storage class</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -9479,7 +9479,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Log rotate</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Switched to use <code>systemd</code> timers instead of <code>cronjobs</code> to prevent <code>logrotate</code> from failing on worker nodes that are not reloaded or updated within 90 days. <strong>Note</strong>: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the <code>ibmcloud ks worker reload</code> [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or the <code>ibmcloud ks worker update</code> [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update).</td>
+<td>Switched to use <code>systemd</code> timers instead of <code>cronjobs</code> to prevent <code>logrotate</code> from failing on worker nodes that are not reloaded or updated within 90 days. <strong>Note</strong>: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the <code>ibmcloud ks worker reload</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload">command</a> or the <code>ibmcloud ks worker update</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update">command</a>.</td>
 </tr>
 <tr>
 <td>Worker node runtime components (<code>kubelet</code>, <code>kube-proxy</code>, <code>docker</code>)</td>
@@ -9491,13 +9491,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>Root password expiration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running <code>chage -M -1 root</code>. <strong>Note</strong>: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) or [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) your worker nodes at least every 90 days.</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running <code>chage -M -1 root</code>. <strong>Note</strong>: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update">update</a> or <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload">reload</a> your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
 <td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
+<td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses <a href="https://github.com/kubernetes/kubernetes/issues/57345">Kubernetes issue 57345</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Docker</td>
@@ -9531,7 +9531,7 @@ The following table shows the changes that are included in patch 1.10.7_1520.
 <td>Calico</td>
 <td>v3.1.3</td>
 <td>v3.2.1</td>
-<td>See the Calico [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/).</td>
+<td>See the Calico <a href="https://docs.projectcalico.org/release-notes/">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -9543,13 +9543,13 @@ The following table shows the changes that are included in patch 1.10.7_1520.
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>334</td>
 <td>338</td>
-<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br> Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
+<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br> Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see <a href="/docs/containers?topic=containers-file_storage#nfs_version_class">Changing the default NFS version</a>.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.10.5</td>
 <td>v1.10.7</td>
-<td>See the Kubernetes [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.7).</td>
+<td>See the Kubernetes <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.10.7">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes Heapster configuration</td>
@@ -9587,7 +9587,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-127</td>
 <td>4.4.0-133</td>
-<td>Updated worker node images with kernel update for [CVE-2018-3620,CVE-2018-3646 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-3741-1/).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/notices/USN-3741-1/">CVE-2018-3620,CVE-2018-3646</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -9640,7 +9640,7 @@ The following table shows the changes that are included in patch 1.10.5_1517.
 <td>Calico</td>
 <td>v3.1.1</td>
 <td>v3.1.3</td>
-<td>See the Calico [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/releases/).</td>
+<td>See the Calico <a href="https://docs.projectcalico.org/releases/">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -9658,7 +9658,7 @@ The following table shows the changes that are included in patch 1.10.5_1517.
 <td>Kubernetes</td>
 <td>v1.10.3</td>
 <td>v1.10.5</td>
-<td>See the Kubernetes [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.5).</td>
+<td>See the Kubernetes <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.10.5">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kernel</td>
@@ -9749,13 +9749,13 @@ The following table shows the changes that are included in patch 1.10.3_1512.
 <td>Kubernetes</td>
 <td>v1.10.1</td>
 <td>v1.10.3</td>
-<td>See the Kubernetes [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.3).</td>
+<td>See the Kubernetes <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.10.3">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes Configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added <code>PodSecurityPolicy</code> to the <code>--enable-admission-plugins</code> option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](/docs/containers?topic=containers-psp).</td>
+<td>Added <code>PodSecurityPolicy</code> to the <code>--enable-admission-plugins</code> option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see <a href="/docs/containers?topic=containers-psp">Configuring pod security policies</a>.</td>
 </tr>
 <tr>
 <td>Kubelet Configuration</td>
@@ -9779,7 +9779,7 @@ The following table shows the changes that are included in patch 1.10.3_1512.
 <td>Kernel update</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>New worker node images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+<td>New worker node images with kernel update for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639">CVE-2018-3639</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -9859,19 +9859,19 @@ The following table shows the changes that are included in patch 1.10.1_1508.
 <td>Calico</td>
 <td>v2.6.5</td>
 <td>v3.1.1</td>
-<td>See the Calico [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/).</td>
+<td>See the Calico <a href="https://docs.projectcalico.org/release-notes/">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes Heapster</td>
 <td>v1.5.0</td>
 <td>v1.5.2</td>
-<td>See the Kubernetes Heapster [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-retired/heapster/releases/tag/v1.5.2).</td>
+<td>See the Kubernetes Heapster <a href="https://github.com/kubernetes-retired/heapster/releases/tag/v1.5.2">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.9.7</td>
 <td>v1.10.1</td>
-<td>See the Kubernetes [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.1).</td>
+<td>See the Kubernetes <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.10.1">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes Configuration</td>
@@ -9883,7 +9883,7 @@ The following table shows the changes that are included in patch 1.10.1_1508.
 <td>Kubernetes DNS</td>
 <td>1.14.8</td>
 <td>1.14.10</td>
-<td>See the Kubernetes DNS [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/releases/tag/1.14.10).</td>
+<td>See the Kubernetes DNS <a href="https://github.com/kubernetes/dns/releases/tag/1.14.10">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -9895,7 +9895,7 @@ The following table shows the changes that are included in patch 1.10.1_1508.
 <td>GPU support</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Support for [graphics processing unit (GPU) container workloads](/docs/containers?topic=containers-deploy_app#gpu_app) is now available for scheduling and execution. For a list of available GPU flavors, see [Hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes). For more information, see the Kubernetes documentation to [Schedule GPUs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
+<td>Support for [graphics processing unit (GPU) container workloads](/docs/containers?topic=containers-deploy_app#gpu_app) is now available for scheduling and execution. For a list of available GPU flavors, see <a href="/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes">Hardware for worker nodes</a>. For more information, see the Kubernetes documentation to <a href="https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/">Schedule GPUs</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -9977,7 +9977,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
+<td>Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see <a href="/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node">Worker node resource reserves</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -10003,7 +10003,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Docker</td>
 <td>17.06.2</td>
 <td>18.06.1</td>
-<td>See the [Docker release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/release-notes/#18061-ce).</td>
+<td>See the <a href="https://docs.docker.com/engine/release-notes/#18061-ce">Docker release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -10029,19 +10029,19 @@ The following table shows the changes that are included in patch 1.9.11_1536.
 <td>Calico</td>
 <td>v2.6.5</td>
 <td>v2.6.12</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [Tigera Technical Advisory TTA-2018-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.tigera.io/security-bulletins/).</td>
+<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/">Tigera Technical Advisory TTA-2018-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kernel</td>
 <td>4.4.0-137</td>
 <td>4.4.0-139</td>
-<td>Updated worker node images with kernel update for [CVE-2018-7755 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
+<td>Updated worker node images with kernel update for <a href="https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog">CVE-2018-7755</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.9.10</td>
 <td>v1.9.11</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.11).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.9.11">Kubernetes release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}}</td>
@@ -10053,7 +10053,7 @@ The following table shows the changes that are included in patch 1.9.11_1536.
 <td>OpenVPN client and server</td>
 <td>2.4.4-r2</td>
 <td>2.4.6-r3-IKS-8</td>
-<td>Updated image for [CVE-2018-0732 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) and [CVE-2018-0737 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737).</td>
+<td>Updated image for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732">CVE-2018-0732</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737">CVE-2018-0737</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -10079,7 +10079,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-kubernetes-service-cli) on an existing cluster, you need to [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the <strong>Trustable</strong> field after running the <code>ibmcloud ks flavors --zone</code> [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you <a href="/docs/containers?topic=containers-kubernetes-service-cli">enable trust</a> on an existing cluster, you need to <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload">reload</a> any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the <strong>Trustable</strong> field after running the <code>ibmcloud ks flavors --zone</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types">command</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -10157,7 +10157,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-133</td>
 <td>4.4.0-137</td>
-<td>Updated worker node images with kernel update for [CVE-2018-14633, CVE-2018-17182 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-137.163/changelog).</td>
+<td>Updated worker node images with kernel update for <a href="https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-137.163/changelog">CVE-2018-14633, CVE-2018-17182</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Inactive session timeout</td>
@@ -10197,7 +10197,7 @@ The following table shows the changes that are included in patch 1.9.10_1527.
 <td>N/A</td>
 <td>N/A</td>
 <td>Removed <code>mountOptions</code> in the IBM file storage classes to use the default that is provided by the worker node. Removed duplicate <code>reclaimPolicy</code> parameter in the IBM file storage classes.<br><br>
-Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass).</td>
+Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to set your own default, see <a href="/docs/containers?topic=containers-kube_concepts#default_storageclass">Changing the default storage class</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -10223,7 +10223,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Log rotate</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Switched to use <code>systemd</code> timers instead of <code>cronjobs</code> to prevent <code>logrotate</code> from failing on worker nodes that are not reloaded or updated within 90 days. <strong>Note</strong>: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the <code>ibmcloud ks worker reload</code> [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or the <code>ibmcloud ks worker update</code> [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update).</td>
+<td>Switched to use <code>systemd</code> timers instead of <code>cronjobs</code> to prevent <code>logrotate</code> from failing on worker nodes that are not reloaded or updated within 90 days. <strong>Note</strong>: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the <code>ibmcloud ks worker reload</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload">command</a> or the <code>ibmcloud ks worker update</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update">command</a>.</td>
 </tr>
 <tr>
 <td>Worker node runtime components (<code>kubelet</code>, <code>kube-proxy</code>, <code>docker</code>)</td>
@@ -10235,13 +10235,13 @@ The following table shows the changes that are included in the worker node fix p
 <td>Root password expiration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running <code>chage -M -1 root</code>. <strong>Note</strong>: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) or [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) your worker nodes at least every 90 days.</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running <code>chage -M -1 root</code>. <strong>Note</strong>: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update">update</a> or <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload">reload</a> your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
 <td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
+<td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses <a href="https://github.com/kubernetes/kubernetes/issues/57345">Kubernetes issue 57345</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Docker</td>
@@ -10281,13 +10281,13 @@ The following table shows the changes that are included in patch 1.9.10_1523.
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>334</td>
 <td>338</td>
-<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
+<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see <a href="/docs/containers?topic=containers-file_storage#nfs_version_class">Changing the default NFS version</a>.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.9.9</td>
 <td>v1.9.10</td>
-<td>See the Kubernetes [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.10).</td>
+<td>See the Kubernetes <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.9.10">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes Heapster configuration</td>
@@ -10325,7 +10325,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel</td>
 <td>4.4.0-127</td>
 <td>4.4.0-133</td>
-<td>Updated worker node images with kernel update for [CVE-2018-3620,CVE-2018-3646 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-3741-1/).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/notices/USN-3741-1/">CVE-2018-3620,CVE-2018-3646</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -10390,7 +10390,7 @@ The following table shows the changes that are included in patch 1.9.9_1520.
 <td>Kubernetes</td>
 <td>v1.9.8</td>
 <td>v1.9.9</td>
-<td>See the Kubernetes [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.9).</td>
+<td>See the Kubernetes <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.9.9">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kernel</td>
@@ -10481,13 +10481,13 @@ The following table shows the changes that are included in patch 1.9.8_1515.
 <td>Kubernetes</td>
 <td>v1.9.7</td>
 <td>v1.9.8</td>
-<td>See the [Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.8).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.9.8">Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.8</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes Configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added <code>PodSecurityPolicy</code> to the <code>--admission-control</code> option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](/docs/containers?topic=containers-psp).</td>
+<td>Added <code>PodSecurityPolicy</code> to the <code>--admission-control</code> option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see <a href="/docs/containers?topic=containers-psp">Configuring pod security policies</a>.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -10526,7 +10526,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kernel update</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>New worker node images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+<td>New worker node images with kernel update for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639">CVE-2018-3639</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -10604,7 +10604,7 @@ The following table shows the changes that are included in patch 1.9.7_1510.
 <td>Kubernetes</td>
 <td>v1.9.3</td>
 <td>v1.9.7    </td>
-<td><p>See the [Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.7). This release addresses [CVE-2017-1002101 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) and [CVE-2017-1002102 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) vulnerabilities.</p><p><strong>Note</strong>: Now <code>secret</code>, <code>configMap</code>, <code>downwardAPI</code>, and projected volumes are mounted as read-only. Previously, apps could write data to these volumes, but the system could automatically revert the data. If your apps rely on the previous insecure behavior, modify them accordingly.</p></td>
+<td><p>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.9.7">Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.7</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. This release addresses <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101">CVE-2017-1002101</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102">CVE-2017-1002102</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> vulnerabilities.</p><p><strong>Note</strong>: Now <code>secret</code>, <code>configMap</code>, <code>downwardAPI</code>, and projected volumes are mounted as read-only. Previously, apps could write data to these volumes, but the system could automatically revert the data. If your apps rely on the previous insecure behavior, modify them accordingly.</p></td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
@@ -10616,13 +10616,13 @@ The following table shows the changes that are included in patch 1.9.7_1510.
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.9.3-71</td>
 <td>v1.9.7-102</td>
-<td><code>NodePort</code> and <code>LoadBalancer</code> services now support [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#lb_source_ip) by setting <code>service.spec.externalTrafficPolicy</code> to <code>Local</code>.</td>
+<td><code>NodePort</code> and <code>LoadBalancer</code> services now support <a href="/docs/containers?topic=containers-loadbalancer#lb_source_ip">preserving the client source IP</a> by setting <code>service.spec.externalTrafficPolicy</code> to <code>Local</code>.</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>Fix [edge node](/docs/containers?topic=containers-edge#edge) toleration setup for older clusters.</td>
+<td>Fix <a href="/docs/containers?topic=containers-edge#edge">edge node</a> toleration setup for older clusters.</td>
 </tr>
 </tbody>
 </table>
@@ -10665,7 +10665,7 @@ Review the version 1.8 changelogs.
 <td>Log rotate</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Switched to use <code>systemd</code> timers instead of <code>cronjobs</code> to prevent <code>logrotate</code> from failing on worker nodes that are not reloaded or updated within 90 days. <strong>Note</strong>: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the <code>ibmcloud ks worker reload</code> [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or the <code>ibmcloud ks worker update</code> [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update).</td>
+<td>Switched to use <code>systemd</code> timers instead of <code>cronjobs</code> to prevent <code>logrotate</code> from failing on worker nodes that are not reloaded or updated within 90 days. <strong>Note</strong>: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the <code>ibmcloud ks worker reload</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload">command</a> or the <code>ibmcloud ks worker update</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update">command</a>.</td>
 </tr>
 <tr>
 <td>Worker node runtime components (<code>kubelet</code>, <code>kube-proxy</code>, <code>docker</code>)</td>
@@ -10677,13 +10677,13 @@ Review the version 1.8 changelogs.
 <td>Root password expiration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running <code>chage -M -1 root</code>. <strong>Note</strong>: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) or [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) your worker nodes at least every 90 days.</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running <code>chage -M -1 root</code>. <strong>Note</strong>: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update">update</a> or <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload">reload</a> your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
 <td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
+<td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses <a href="https://github.com/kubernetes/kubernetes/issues/57345">Kubernetes issue 57345</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -10712,7 +10712,7 @@ Review the version 1.8 changelogs.
 <td>Kernel</td>
 <td>4.4.0-127</td>
 <td>4.4.0-133</td>
-<td>Updated worker node images with kernel update for [CVE-2018-3620,CVE-2018-3646 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-3741-1/).</td>
+<td>Updated worker node images with kernel update for <a href="https://ubuntu.com/security/notices/USN-3741-1/">CVE-2018-3620,CVE-2018-3646</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -10770,7 +10770,7 @@ Review the version 1.8 changelogs.
 <td>Kubernetes</td>
 <td>v1.8.13</td>
 <td>v1.8.15</td>
-<td>See the Kubernetes [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.15).</td>
+<td>See the Kubernetes <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.8.15">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kernel</td>
@@ -10852,13 +10852,13 @@ Review the version 1.8 changelogs.
 <td>Kubernetes</td>
 <td>v1.8.11</td>
 <td>v1.8.13</td>
-<td>See the [Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.13).</td>
+<td>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.8.13">Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.13</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes Configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added <code>PodSecurityPolicy</code> to the <code>--admission-control</code> option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](/docs/containers?topic=containers-psp).</td>
+<td>Added <code>PodSecurityPolicy</code> to the <code>--admission-control</code> option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see <a href="/docs/containers?topic=containers-psp">Configuring pod security policies</a>.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -10894,7 +10894,7 @@ Review the version 1.8 changelogs.
 <td>Kernel update</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>New worker node images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+<td>New worker node images with kernel update for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639">CVE-2018-3639</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -10965,7 +10965,7 @@ Review the version 1.8 changelogs.
 <td>Kubernetes</td>
 <td>v1.8.8</td>
 <td>v1.8.11    </td>
-<td><p>See the [Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11). This release addresses [CVE-2017-1002101 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) and [CVE-2017-1002102 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) vulnerabilities.</p><p>Now <code>secret</code>, <code>configMap</code>, <code>downwardAPI</code>, and projected volumes are mounted as read-only. Previously, apps could write data to these volumes, but the system could automatically revert the data. If your apps rely on the previous insecure behavior, modify them accordingly.</p></td>
+<td><p>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11">Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. This release addresses <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101">CVE-2017-1002101</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102">CVE-2017-1002102</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> vulnerabilities.</p><p>Now <code>secret</code>, <code>configMap</code>, <code>downwardAPI</code>, and projected volumes are mounted as read-only. Previously, apps could write data to these volumes, but the system could automatically revert the data. If your apps rely on the previous insecure behavior, modify them accordingly.</p></td>
 </tr>
 <tr>
 <td>Pause container image</td>
@@ -10977,13 +10977,13 @@ Review the version 1.8 changelogs.
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.8.8-86</td>
 <td>v1.8.11-126</td>
-<td><code>NodePort</code> and <code>LoadBalancer</code> services now support [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#lb_source_ip) by setting <code>service.spec.externalTrafficPolicy</code> to <code>Local</code>.</td>
+<td><code>NodePort</code> and <code>LoadBalancer</code> services now support <a href="/docs/containers?topic=containers-loadbalancer#lb_source_ip">preserving the client source IP</a> by setting <code>service.spec.externalTrafficPolicy</code> to <code>Local</code>.</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>Fix [edge node](/docs/containers?topic=containers-edge#edge) toleration setup for older clusters.</td>
+<td>Fix <a href="/docs/containers?topic=containers-edge#edge">edge node</a> toleration setup for older clusters.</td>
 </tr>
 </tbody>
 </table>
@@ -11019,7 +11019,7 @@ Review the version 1.7 changelogs.
 <td>Kernel update</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>New worker node images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+<td>New worker node images with kernel update for <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639">CVE-2018-3639</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 </tbody>
 </table>
@@ -11088,18 +11088,18 @@ Review the version 1.7 changelogs.
 <td>Kubernetes</td>
 <td>v1.7.4</td>
 <td>v1.7.16    </td>
-<td><p>See the [Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16). This release addresses [CVE-2017-1002101 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) and [CVE-2017-1002102 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) vulnerabilities.</p><p>Now <code>secret</code>, <code>configMap</code>, <code>downwardAPI</code>, and projected volumes are mounted as read-only. Previously, apps could write data to these volumes, but the system could automatically revert the data. If your apps rely on the previous insecure behavior, modify them accordingly.</p></td>
+<td><p>See the <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16">Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. This release addresses <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101">CVE-2017-1002101</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102">CVE-2017-1002102</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> vulnerabilities.</p><p>Now <code>secret</code>, <code>configMap</code>, <code>downwardAPI</code>, and projected volumes are mounted as read-only. Previously, apps could write data to these volumes, but the system could automatically revert the data. If your apps rely on the previous insecure behavior, modify them accordingly.</p></td>
 </tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.7.4-133</td>
 <td>v1.7.16-17</td>
-<td><code>NodePort</code> and <code>LoadBalancer</code> services now support [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#lb_source_ip) by setting <code>service.spec.externalTrafficPolicy</code> to <code>Local</code>.</td>
+<td><code>NodePort</code> and <code>LoadBalancer</code> services now support <a href="/docs/containers?topic=containers-loadbalancer#lb_source_ip">preserving the client source IP</a> by setting <code>service.spec.externalTrafficPolicy</code> to <code>Local</code>.</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>Fix [edge node](/docs/containers?topic=containers-edge#edge) toleration setup for older clusters.</td>
+<td>Fix <a href="/docs/containers?topic=containers-edge#edge">edge node</a> toleration setup for older clusters.</td>
 </tr>
 </tbody>
 </table>
