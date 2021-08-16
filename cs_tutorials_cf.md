@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-16"
 
 keywords: kubernetes, iks
 
@@ -147,8 +147,6 @@ This tutorial is intended for Cloud Foundry app developers.
 - [Learn about Docker and Kubernetes terminology](/docs/containers?topic=containers-service-arch).
 
 
-<br />
-
 
 ## Download app code
 {: #cf_1}
@@ -183,8 +181,6 @@ Get your code ready to go. Don't have any code yet? You can download starter cod
 Your app code is ready to be containerized!
 
 
-<br />
-
 
 ## Create a Docker image with your app code
 {: #cf_2}
@@ -202,7 +198,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
 
 2. Copy the following script into the Dockerfile. This Dockerfile applies specifically to a Python app. If you are using another type of code, your Dockerfile must include a different base image and might require other fields to be defined.
 
-    ```
+    ```dockerfile
     #Use the Python image from DockerHub as a base image
     FROM python:3-slim
 
@@ -235,33 +231,14 @@ Create a Dockerfile that includes your app code and the necessary configurations
     ibmcloud cr build -t <region>.icr.io/namespace/cf-py .
     ```
     {: pre}
-
-    <table summary="The columns are read from left to right. The first column has the parameter of the command. The second column describes the parameter.">
-    <caption>Understanding this command's components</caption>
-    <col width="15%">
-    <thead>
-    <th>Parameter</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td>Parameter</td>
-    <td>Description</td>
-    </tr>
-    <tr>
-    <td><code>build</code></td>
-    <td>The build command.</td>
-    </tr>
-    <tr>
-    <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-    <td>Your private registry path, which includes your unique namespace and the name of the image. For this example, the same name is used for the image as the app directory, but you can choose any name for the image in your private registry. If you are unsure what your namespace is, run the <code>ibmcloud cr namespaces</code> command to find it.</td>
-    </tr>
-    <tr>
-    <td><code>.</code></td>
-    <td>The location of the Dockerfile. If you are running the build command from the directory that includes the Dockerfile, enter a period (.). Otherwise, use the relative path to the Dockerfile.</td>
-    </tr>
-    </tbody>
-    </table>
+    
+    | Option             | Description      | 
+    |--------------------|------------------|
+    | `build` | The build command. | 
+    | `-t registry.<region>.icr.io/namespace/cf-py` | Your private registry path, which includes your unique namespace and the name of the image. For this example, the same name is used for the image as the app directory, but you can choose any name for the image in your private registry. If you are unsure what your namespace is, run the `ibmcloud cr namespaces` command to find it. |
+    | `.` | The location of the Dockerfile. If you are running the build command from the directory that includes the Dockerfile, enter a period (.). Otherwise, use the relative path to the Dockerfile. | 
+    {: summary="The columns are read from left to right. The first column has the option of the command. The second column describes the option."}
+    {: caption="Table 1. Understanding this command's components" caption-side="top"}
 
     The image is created in your private registry. You can run the `ibmcloud cr images` command to verify that the image was created.
 
@@ -272,7 +249,6 @@ Create a Dockerfile that includes your app code and the necessary configurations
     {: screen}
 
 
-<br />
 
 
 ## Deploy a container from your image
@@ -284,61 +260,51 @@ Deploy your app as a container in a Kubernetes cluster.
 
 1. Create a configuration YAML file that is named `cf-py.yaml` and update `<registry_namespace>` with the name of your private image registry. This configuration file defines a container deployment from the image that you created in the previous lesson and a service to expose the app to the public.
 
-    ```
+    ```yaml
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-        labels:
-          app: cf-py
-    name: cf-py
-    namespace: default
-  spec:
-    selector:
-      matchLabels:
+      labels:
         app: cf-py
-    replicas: 1
-    template:
-      metadata:
-        labels:
+      name: cf-py
+      namespace: default
+    spec:
+      selector:
+        matchLabels:
           app: cf-py
-      spec:
-        containers:
-        - image: us.icr.io/<registry_namespace>/cf-py:latest
-          name: cf-py
-  ---
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: cf-py-nodeport
-    labels:
-      app: cf-py
-  spec:
-    selector:
-      app: cf-py
-    type: NodePort
-    ports:
-     - port: 5000
-       nodePort: 30872
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            app: cf-py
+        spec:
+          containers:
+          - image: us.icr.io/<registry_namespace>/cf-py:latest
+            name: cf-py
+            
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: cf-py-nodeport
+      labels:
+        app: cf-py
+    spec:
+      selector:
+        app: cf-py
+      type: NodePort
+      ports:
+       - port: 5000
+         nodePort: 30872
     ```
     {: codeblock}
-
-    <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-    <caption>Understanding the YAML file components</caption>
-    <col width="15%">
-    <thead>
-    <th>Parameter</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>image</code></td>
-    <td>In <code>us.icr.io/<registry_namespace>/cf-py:latest</code>, replace &lt;registry_namespace&gt; with the namespace of your private image registry. If you are unsure what your namespace is, run the <code>ibmcloud cr namespaces</code> command to find it.</td>
-    </tr>
-    <tr>
-    <td><code>nodePort</code></td>
-    <td>Expose your app by creating a Kubernetes service of type NodePort. NodePorts are in the range of 30000 - 32767. You use this port to test your app in a browser later.</td>
-    </tr>
-    </tbody></table>
+    
+    | Parameter          | Description      | 
+    |--------------------|------------------|
+    | `image` | In `us.icr.io/<registry_namespace>/cf-py:latest`, replace <registry_namespace> with the namespace of your private image registry. If you are unsure what your namespace is, run the `ibmcloud cr namespaces` command to find it. | 
+    | `nodePort` | Expose your app by creating a Kubernetes service of type NodePort. NodePorts are in the range of 30000 - 32767. You use this port to test your app in a browser later. |
+    {: summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter."}
+    {: caption="Table 2. Understanding the YAML file components" caption-side="top"}
 
 2. Apply the configuration file to create the deployment and the service in your cluster.
 
@@ -347,7 +313,7 @@ Deploy your app as a container in a Kubernetes cluster.
     ```
     {: pre}
 
-    Output:
+    **Example output**
 
     ```
     deployment "cf-py" configured
@@ -364,7 +330,7 @@ Deploy your app as a container in a Kubernetes cluster.
     ```
     {: pre}
 
-    Output:
+    **Example output**
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
@@ -373,8 +339,8 @@ Deploy your app as a container in a Kubernetes cluster.
     {: screen}
 
     b. Open a browser and check out the app with the following URL: `http://<public_IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. You can give this URL to a co-worker to try or enter it in your cell phone's browser so that you can see that the app really is publicly available. **Note**: Because worker nodes in VPC clusters do not have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. Then, you can use the worker node's private IP address and NodePort: `http://<private_IP_address>:<NodePort>`.
-
-    <img src="images/python_flask.png" alt="A screen capture of the deployed boilerplate Python Flask app." />
+    
+    ![A screen capture of the deployed boilerplate Python Flask app.](images/python_flask.png "A screen capture of the deployed boilerplate Python Flask app."){: caption="Figure 2. A screen capture of the deployed boilerplate Python Flask app." caption-side="bottom"}
 
 5. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
 
