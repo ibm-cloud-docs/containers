@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 # Managing security and compliance with Kubernetes
 {: #manage-security-compliance}
 
@@ -150,4 +148,6 @@ Review the following goals for {{site.data.keyword.containerlong_notm}}.
 *  **Check whether {{site.data.keyword.containershort_notm}} has no more than # service IDs with the IAM administrator role.** Your account administrator configures the number of service IDs in [{{site.data.keyword.compliance_short}}](/docs/security-compliance?topic=security-compliance-custom-goals).
 *  **Check whether {{site.data.keyword.containershort_notm}} has no more than # users with the IAM administrator role.** Your account administrator configures the number of service IDs in [{{site.data.keyword.compliance_short}}](/docs/security-compliance?topic=security-compliance-custom-goals).
 *  **Check whether {{site.data.keyword.containershort_notm}} is configured with role-based access control (RBAC).** [{{site.data.keyword.cloud_notm}} IAM service access roles for **Kubernetes Service**](/docs/containers?topic=containers-access_reference#service) are automatically synchronized with RBAC roles in the cluster. You can also [customize RBAC](/docs/containers?topic=containers-access-overview).
+
+
 

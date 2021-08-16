@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-12"
+lastupdated: "2021-08-13"
 
 keywords: kubernetes, iks
 
@@ -59,7 +59,6 @@ completion-time: 45m
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
 {:note: .note}
-{:note:.deprecated}
 {:objectc: .ph data-hd-programlang='Objective C'}
 {:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -110,9 +109,8 @@ completion-time: 45m
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Deploy a starter kit app to a Kubernetes cluster
 {: #tutorial-starterkit-kube}
@@ -184,24 +182,24 @@ With your toolchain set up, explore how you can use each tool to automate the de
 {: shortdesc}
 
 1. On the **App details** page, click the toolchain name. The **Overview** tab of the toolchain page is displayed, which shows the tools that are included with the toolchain. This example includes the following tools that were preselected in the starter kit when the toolchain was created:
-  * An issues tracker in GitLab to track project updates and changes.
-  * A GitLab repo that contains the source code of your app.
-  * An Eclipse Orion instance, which is a web-based IDE to edit your app.
-  * A Delivery Pipeline that consists of a customizable **BUILD** and **DEPLOY** stage.
+    * An issues tracker in GitLab to track project updates and changes.
+    * A GitLab repo that contains the source code of your app.
+    * An Eclipse Orion instance, which is a web-based IDE to edit your app.
+    * A Delivery Pipeline that consists of a customizable **BUILD** and **DEPLOY** stage.
 2. Configure your GitLab repo.
-   1. From the toolchain overview page, select the **Git** card.
-   2. From your project overview page, select **Repository** > **Files** to review your app code and dependencies.
-   3. From your project overview page, select **Issues** to find or create your issues.
-   4. Optional. Configure SSH on your desktop by following the on-screen instructions so that you can push and pull code changes by using the CLI.
-   5. Optional. To allow apps to access the Git API, create a personal access token for your account.
-      1. From your user profile, click **Settings**.
-      2. Select **Access Tokens**.
-      3. Follow the on-screen instructions to set up your personal access token.
+    1. From the toolchain overview page, select the **Git** card.
+    2. From your project overview page, select **Repository** > **Files** to review your app code and dependencies.
+    3. From your project overview page, select **Issues** to find or create your issues.
+    4. Optional. Configure SSH on your desktop by following the on-screen instructions so that you can push and pull code changes by using the CLI.
+    5. Optional. To allow apps to access the Git API, create a personal access token for your account.
+        1. From your user profile, click **Settings**.
+        2. Select **Access Tokens**.
+        3. Follow the on-screen instructions to set up your personal access token.
 3. Review your **Delivery Pipeline** stages.
-   1. From the toolchain overview page, select **Delivery Pipeline**. The pipeline stages are displayed.
-      - The **BUILD** stage clones your GitLab repository, builds your Docker image, and pushes the image to your namespace in {{site.data.keyword.registrylong_notm}}.
-      - The **DEPLOY** stage retrieves the container image from {{site.data.keyword.registrylong_notm}} and deploys your app to your Kubernetes cluster.
-   2. To find the details of what happened in each deployment stage, click **View logs and history**.
+    1. From the toolchain overview page, select **Delivery Pipeline**. The pipeline stages are displayed.
+        - The **BUILD** stage clones your GitLab repository, builds your Docker image, and pushes the image to your namespace in {{site.data.keyword.registrylong_notm}}.
+        - The **DEPLOY** stage retrieves the container image from {{site.data.keyword.registrylong_notm}} and deploys your app to your Kubernetes cluster.
+    2. To find the details of what happened in each deployment stage, click **View logs and history**.
 
 ## Verify the health of your app
 {: #verify-starterkit-kube}
@@ -214,11 +212,11 @@ Access your app to verify that your app is up and running.
 2. Click **View logs and history**.
 3. At the end of your log file, find the public URL that is assigned to your app.
 
-   Example log entry:
-   ```
-   View the application health at: http://<ipaddress>:<port>/health.
-   ```
-   {: screen}
+    Example log entry:
+    ```
+    View the application health at: http://<ipaddress>:<port>/health.
+    ```
+    {: screen}
 
 4. In your preferred web browser, enter the URL. If your app is up and running, you see a `Congratulations` or `{"status":"UP"}` message in your web browser.
 
@@ -232,3 +230,5 @@ Access your app to verify that your app is up and running.
 * **Access service credentials from your app**: You can use the _@Value_ annotation, or use the Spring framework environment class _getProperty()_ method. For more information, see [Accessing credentials](/docs/java?topic=java-spring-configuration#spring-access-credentials).
 
 * **Add more capabilities to your app**: When you add another service to your app after the DevOps toolchain is created, those service credentials aren't automatically updated to your deployed app and GitLab repository. You must [manually add the credentials to the deployment environment](/docs/apps?topic=apps-credentials_overview).
+
+

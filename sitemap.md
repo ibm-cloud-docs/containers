@@ -2,13 +2,12 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-16"
 
 keywords: containers
 subcollection: containers
 
 ---
-
 
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
@@ -104,12 +103,13 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Site map
 {: #cs_sitemap}
+
+
 
 
 
@@ -426,6 +426,7 @@ subcollection: containers
   * [Accessing classic clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#classic_private_se)
   * [Creating an allowlist for the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist)
 * [Accessing the cluster master via admission controllers and webhooks](/docs/containers?topic=containers-access_cluster#access_webhooks)
+* [Accessing private clusters by using the Wireguard VPN](/docs/containers?topic=containers-access_cluster#access_vpn_containers)
 
 
 ## Managing the cluster and worker node lifecycle
@@ -703,13 +704,8 @@ subcollection: containers
 * [Isolating ALB proxy workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_gateway)
 
 [Classic: Controlling traffic with network policies](/docs/containers?topic=containers-network_policies)
-  * [Kubernetes network policies](/docs/containers?topic=containers-network_policies#kubernetes-network-policies)
-  * [Calico network policies](/docs/containers?topic=containers-network_policies#calico-network-policies)
 * [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy)
 * [Installing and configuring the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)
-* [Installing the Calico CLI, `calicoctl`, according to your operating system.](/docs/containers?topic=containers-network_policies#cli_install-calicoctl)
-  * [Linux and OS X](/docs/containers?topic=containers-network_policies#cli_install-calicoctl-linux-osx)
-  * [Windows](/docs/containers?topic=containers-network_policies#cli_install-calicoctl-windows)
 * [Viewing network policies](/docs/containers?topic=containers-network_policies#view_policies)
 * [Adding network policies](/docs/containers?topic=containers-network_policies#adding_network_policies)
 * [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress)
@@ -1518,8 +1514,8 @@ subcollection: containers
 [{{site.data.keyword.containerlong_notm}} CLI](/docs/containers?topic=containers-kubernetes-service-cli)
 * [`cluster` commands](/docs/containers?topic=containers-kubernetes-service-cli#cluster)
   * [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_disable)
-  * [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable)
-  * [`ibmcloud ks cluster addon get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_get)
+  * [<code>ibmcloud ks cluster addon enable</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable)
+  * [<code>ibmcloud ks cluster addon get</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_get)
   * [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addons)
   * [`ibmcloud ks cluster addon options`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_options)
   * [`ibmcloud ks cluster addon update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_update)
@@ -1563,7 +1559,7 @@ subcollection: containers
 * [`worker-pool` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool)
   * [`ibmcloud ks worker-pool create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_create)
   * [`ibmcloud ks worker-pool create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2)
-  * [`ibmcloud ks worker-pool get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_get)
+  * [<code>ibmcloud ks worker-pool get</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_get)
   * [`ibmcloud ks worker-pool label rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_rm)
   * [`ibmcloud ks worker-pool label set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set)
   * [`ibmcloud ks worker-pool ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pools)
@@ -1683,7 +1679,7 @@ subcollection: containers
 * [Logging commands](/docs/containers?topic=containers-observability_cli#logging-commands)
   * [`ibmcloud ob logging agent discover`](/docs/containers?topic=containers-observability_cli#logging_agent_discover)
   * [`ibmcloud ob logging config create`](/docs/containers?topic=containers-observability_cli#logging_config_create)
-  * [`ibmcloud ob logging config delete`](/docs/containers?topic=containers-observability_cli#logging_config_delete)
+  * [<code>ibmcloud ob logging config delete</code>](/docs/containers?topic=containers-observability_cli#logging_config_delete)
   * [`ibmcloud ob logging config list`](/docs/containers?topic=containers-observability_cli#logging_config_list)
   * [`ibmcloud ob logging config enable public-endpoint|private-endpoint`](/docs/containers?topic=containers-observability_cli#logging_config_enable)
   * [`ibmcloud ob logging config replace`](/docs/containers?topic=containers-observability_cli#logging_config_replace)
@@ -1691,7 +1687,7 @@ subcollection: containers
 * [Monitoring commands](/docs/containers?topic=containers-observability_cli#monitoring-commands)
   * [`ibmcloud ob monitoring agent discover`](/docs/containers?topic=containers-observability_cli#monitoring_agent_discover)
   * [`ibmcloud ob monitoring config create`](/docs/containers?topic=containers-observability_cli#monitoring_config_create)
-  * [`ibmcloud ob monitoring config delete`](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
+  * [<code>ibmcloud ob monitoring config delete</code>](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
   * [`ibmcloud ob monitoring config list`](/docs/containers?topic=containers-observability_cli#monitoring_config_list)
   * [`ibmcloud ob monitoring config enable public-endpoint|private-endpoint`](/docs/containers?topic=containers-observability_cli#monitoring_config_enable)
   * [`ibmcloud ob monitoring config replace`](/docs/containers?topic=containers-observability_cli#monitoring_config_replace)
@@ -1739,6 +1735,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog#121_changelog)
+  * [Changelog for worker node fix pack 1.21.3_1527, released 16 August 2021](/docs/containers?topic=containers-changelog#1213_1527)
   * [Changelog for worker node fix pack 1.21.3_1526, released 02 August 2021](/docs/containers?topic=containers-changelog#1213_1526)
   * [Changelog for master fix pack 1.21.3_1525, released 27 July 2021](/docs/containers?topic=containers-changelog#1213_1525)
   * [Changelog for worker node fix pack 1.21.2_1524, released 19 July 2021](/docs/containers?topic=containers-changelog#1212_1524)
@@ -1748,6 +1745,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.21.1_1520, released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1520)
   * [Changelog for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1519)
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+  * [Changelog for worker node fix pack 1.20.9_1549, released 16 August 2021](/docs/containers?topic=containers-changelog#1209_1549)
   * [Changelog for worker node fix pack 1.20.9_1548, released 02 August 2021](/docs/containers?topic=containers-changelog#1209_1548)
   * [Changelog for master fix pack 1.20.9_1547, released 27 July 2021](/docs/containers?topic=containers-changelog#1209_1547)
   * [Changelog for worker node fix pack 1.20.8_1546, released 19 July 2021](/docs/containers?topic=containers-changelog#1208_1546)
@@ -1770,6 +1768,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.20.4_1530, released 22 February 2021](/docs/containers?topic=containers-changelog#1204_1530)
   * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for worker node fix pack 1.19.13_1556, released 16 August 2021](/docs/containers?topic=containers-changelog#11913_1556)
   * [Changelog for worker node fix pack 1.19.13_1555, released 02 August 2021](/docs/containers?topic=containers-changelog#11913_1555)
   * [Changelog for master fix pack 1.19.13_1554, released 27 July 2021](/docs/containers?topic=containers-changelog#11913_1554)
   * [Changelog for worker node fix pack 1.19.12_1553, released 19 July 2021](/docs/containers?topic=containers-changelog#11912_1553)
@@ -1807,6 +1806,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Deprecated: Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.20_1561, released 16 August 2021](/docs/containers?topic=containers-changelog#11820_1561)
   * [Changelog for worker node fix pack 1.18.20_1560, released 02 August 2021](/docs/containers?topic=containers-changelog#11820_1560)
   * [Changelog for master fix pack 1.18.20_1559, released 27 July 2021](/docs/containers?topic=containers-changelog#11820_1559)
   * [Changelog for worker node fix pack 1.18.29_1558, released 19 July 2021](/docs/containers?topic=containers-changelog#11829_1558)

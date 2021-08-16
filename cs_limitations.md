@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy, http2, quota
 
 subcollection: containers
 
 ---
-
 
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 
 # Service limitations
@@ -115,6 +113,7 @@ subcollection: containers
 
 {{site.data.keyword.containerlong}} and the Kubernetes open source project come with default service settings and limitations to ensure security, convenience, and basic functionality. Some of the limitations you might be able to change where noted.
 {: shortdesc}
+
 <br>
 
 If you anticipate reaching any of the following {{site.data.keyword.containerlong_notm}} limitations, [contact IBM Support](/docs/get-support?topic=get-support-using-avatar) and provide the cluster ID, the new quota limit, the region, and infrastructure provider in your support ticket.
@@ -177,9 +176,9 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 
 | Category | Description |
 | -------- | ----------- |
-| Ingress ALBs | <ul><li>The Ingress application load balancer (ALB) can process 32,768 connections per second. If your Ingress traffic exceeds this number, [scale up the number of ALB replicas](/docs/containers?topic=containers-ingress-types#scale_albs) in your cluster to handle the increased workload.</li><li>ALBs that run the [{{site.data.keyword.containerlong_notm}} custom Ingress image](/docs/containers?topic=containers-ingress-types) only: HTTP/2 is not supported.</li><li>ALBs that run the [{{site.data.keyword.containerlong_notm}} custom Ingress image](/docs/containers?topic=containers-ingress-types) only: The names of the `ClusterIP` services that expose your apps must be unique across all namespaces in your cluster.</li></ul> |
+| Ingress ALBs | <ul><li>The Ingress application load balancer (ALB) can process 32,768 connections per second. If your Ingress traffic exceeds this number, <a href="/docs/containers?topic=containers-ingress-types#scale_albs">scale up the number of ALB replicas</a> in your cluster to handle the increased workload.</li><li>ALBs that run the <a href="/docs/containers?topic=containers-ingress-types">{{site.data.keyword.containerlong_notm}} custom Ingress image</a> only: HTTP/2 is not supported.</li><li>ALBs that run the <a href="/docs/containers?topic=containers-ingress-types">{{site.data.keyword.containerlong_notm}} custom Ingress image</a> only: The names of the <code>ClusterIP</code> services that expose your apps must be unique across all namespaces in your cluster.</li></ul> |
 | Istio managed add-on | See [Istio add-on limitations](/docs/containers?topic=containers-istio-about#istio_limitations). |
-| Network load balancers (NLB)| <ul><li>You cannot update an existing NLB from version 1.0 to 2.0. You must create a new NLB 2.0.</li><li>You cannot create subdomains for private NLBs.</li><li>You can register up to 128 subdomains. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-using-avatar).</li></ul> |
+| Network load balancers (NLB)| <ul><li>You cannot update an existing NLB from version 1.0 to 2.0. You must create a new NLB 2.0.</li><li>You cannot create subdomains for private NLBs.</li><li>You can register up to 128 subdomains. This limit can be lifted on request by opening a <a href="/docs/get-support?topic=get-support-using-avatar">support case</a>.</li></ul> |
 | strongSwan VPN service | See [strongSwan VPN service considerations](/docs/openshift?topic=openshift-vpn#strongswan_limitations). |
 | Service IP addresses | You can have 65,000 IP addresses per cluster in the 172.21.0.0/16 range that you can assign to Kubernetes services within the cluster. |
 | Subnets per VLAN | Each VLAN has a limit of 40 subnets. |
@@ -237,7 +236,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | NodePort | You can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. To access an app from the internet, you must use a VPC load balancer or Ingress service instead. |
 | Pod network | VPC access control lists (ACLs) filter incoming and outgoing traffic for your cluster at the subnet level, and security groups filter incoming and outgoing traffic for your cluster at the worker nodes level. To control traffic within the cluster at the pod-to-pod level, you cannot use VPC security groups or ACLs. Instead, use [Calico](/docs/containers?topic=containers-network_policies) and [Kubernetes network policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies), which can control the pod-level network traffic that uses IP in IP encapsulation. |
 | strongSwan VPN service | The strongSwan service is not supported. To connect your cluster to resources in an on-premises network or another VPC, see [Using VPN with your VPC](/docs/vpc?topic=vpc-vpn-onprem-example). |
-| Subnets | <ul><li>See [VPC networking limitations](/docs/containers?topic=containers-vpc-subnets#vpc_basics_limitations).</li><li>Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.</li></ul> |
+| Subnets | <ul><li>See <a href="/docs/containers?topic=containers-vpc-subnets#vpc_basics_limitations">VPC networking limitations</a>.</li><li>Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.</li></ul> |
 | VPC load balancer | See [VPC load balancer limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations). |
 | VPC security groups | VPC clusters that run Kubernetes version 1.18 or earlier only: You must [allow inbound traffic requests to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups). |
 {: summary="This table contains information on networking limitations for VPC clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
@@ -251,13 +250,15 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Category | Description |
 | -------- | ----------- |
 | Storage class for profile sizes | The [available volume profiles](/docs/vpc?topic=vpc-block-storage-profiles) are limited to 2TB in size and 20,000 IOPS in capacity. |
-| Supported types | You can set up {{site.data.keyword.block_storage_is_short}}, {{site.data.keyword.cos_full_notm}} and {{site.data.keyword.databases-for}} only.<ul><li>[{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block) is available as a cluster add-on. Make sure to [attach a public gateway to all the VPC subnets](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#attach-public-gateway-cli) that the cluster uses so that you can provision {{site.data.keyword.block_storage_is_short}}.</li><li>[{{site.data.keyword.cos_full_notm}}](/docs/openshift?topic=openshift-object_storage) is available as a Helm chart.</li></ul> |
+| Supported types | You can set up {{site.data.keyword.block_storage_is_short}}, {{site.data.keyword.cos_full_notm}} and {{site.data.keyword.databases-for}} only.<ul><li><a href="/docs/containers?topic=containers-vpc-block">{{site.data.keyword.block_storage_is_short}}</a> is available as a cluster add-on. Make sure to <a href="/docs/vpc?topic=vpc-creating-a-vpc-using-cli#attach-public-gateway-cli">attach a public gateway to all the VPC subnets</a> that the cluster uses so that you can provision {{site.data.keyword.block_storage_is_short}}.</li><li><a href="/docs/openshift?topic=openshift-object_storage">{{site.data.keyword.cos_full_notm}}</a> is available as a Helm chart.</li></ul> |
 | Unsupported types | NFS File Storage is not supported. |
 | Volume attachments | See [Volume attachment limits](/docs/vpc?topic=vpc-attaching-block-storage#vol-attach-limits).|
 | Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-portworx#portworx_limitations). |
 | {{site.data.keyword.block_storage_is_short}} | The default storage class in VPC clusters can not be changed. However, you can [create a custom storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class). |
 {: summary="This table contains information on storage limitations for VPC clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="VPC cluster storage limitations"}
+
+
 
 
 

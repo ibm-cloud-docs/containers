@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, containers
 
 subcollection: containers
 
 ---
-
 
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Benefits and service offerings
 {: #cs_ov}
@@ -129,10 +127,10 @@ Ready to get started? Try out the [creating a Kubernetes cluster tutorial](/docs
 
 |Benefit|Description|
 |-------|-----------|
-|Choice of container platform provider | <ul><li>Deploy clusters with **{{site.data.keyword.openshiftshort}}** or community **Kubernetes** installed as the container platform orchestrator.</li><li>Choose the developer experience that fits your company, or run workloads across both {{site.data.keyword.openshiftshort}} or community Kubernetes clusters.</li><li>Built-in integrations from the {{site.data.keyword.cloud_notm}} console to the Kubernetes dashboard or {{site.data.keyword.openshiftshort}} web console.</li><li>Single view and management experience of all your {{site.data.keyword.openshiftshort}} or community Kubernetes clusters from {{site.data.keyword.cloud_notm}}.</li><li>For more information, see [Comparison between {{site.data.keyword.openshiftshort}} and community Kubernetes clusters](#openshift_kubernetes).</li></ul>|
-|Single-tenant Kubernetes clusters with compute, network, and storage infrastructure isolation|<ul><li>Create your own customized infrastructure that meets the requirements of your organization.</li><li>Choose between [{{site.data.keyword.cloud_notm}} Classic or VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).</li><li>Provision a dedicated and secured Kubernetes master, worker nodes, virtual networks, and storage by using the resources provided by IBM Cloud infrastructure.</li><li>Fully managed Kubernetes master that is continuously monitored and updated by {{site.data.keyword.IBM_notm}} to keep your cluster available.</li><li>Option to provision worker nodes as bare metal servers for compute-intensive workloads such as data, GPU, and AI.</li><li>Store persistent data, share data between Kubernetes pods, and restore data when needed with the integrated and secure volume service.</li><li>Benefit from full support for all native Kubernetes APIs.</li></ul>|
+|Choice of container platform provider | <ul><li>Deploy clusters with <strong>{{site.data.keyword.openshiftshort}}</strong> or community <strong>Kubernetes</strong> installed as the container platform orchestrator.</li><li>Choose the developer experience that fits your company, or run workloads across both {{site.data.keyword.openshiftshort}} or community Kubernetes clusters.</li><li>Built-in integrations from the {{site.data.keyword.cloud_notm}} console to the Kubernetes dashboard or {{site.data.keyword.openshiftshort}} web console.</li><li>Single view and management experience of all your {{site.data.keyword.openshiftshort}} or community Kubernetes clusters from {{site.data.keyword.cloud_notm}}.</li><li>For more information, see <a href="#openshift_kubernetes">Comparison between {{site.data.keyword.openshiftshort}} and community Kubernetes clusters</a>.</li></ul>|
+|Single-tenant Kubernetes clusters with compute, network, and storage infrastructure isolation|<ul><li>Create your own customized infrastructure that meets the requirements of your organization.</li><li>Choose between <a href="/docs/containers?topic=containers-infrastructure_providers">{{site.data.keyword.cloud_notm}} Classic or VPC infrastructure providers</a>.</li><li>Provision a dedicated and secured Kubernetes master, worker nodes, virtual networks, and storage by using the resources provided by IBM Cloud infrastructure.</li><li>Fully managed Kubernetes master that is continuously monitored and updated by {{site.data.keyword.IBM_notm}} to keep your cluster available.</li><li>Option to provision worker nodes as bare metal servers for compute-intensive workloads such as data, GPU, and AI.</li><li>Store persistent data, share data between Kubernetes pods, and restore data when needed with the integrated and secure volume service.</li><li>Benefit from full support for all native Kubernetes APIs.</li></ul>|
 | Multizone clusters to increase high availability | <ul><li>Easily manage worker nodes of the same flavor (CPU, memory, virtual or physical) with worker pools.</li><li>Guard against zone failure by spreading nodes evenly across select multizones and by using anti-affinity pod deployments for your apps.</li><li>Decrease your costs by using multizone clusters instead of duplicating the resources in a separate cluster.</li><li>Benefit from automatic load balancing across apps with the multizone load balancer (MZLB) that is set up automatically for you in each zone of the cluster.</li></ul>|
-| Highly available masters | <ul><li>Reduce cluster downtime such as during master updates with highly available masters that are provisioned automatically when you create a cluster.</li><li>Spread your masters across zones in a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone) to protect your cluster from zonal failures.</li></ul> |
+| Highly available masters | <ul><li>Reduce cluster downtime such as during master updates with highly available masters that are provisioned automatically when you create a cluster.</li><li>Spread your masters across zones in a <a href="/docs/containers?topic=containers-ha_clusters#multizone">multizone cluster</a> to protect your cluster from zonal failures.</li></ul> |
 |Image security compliance with Vulnerability Advisor|<ul><li>Set up your own repo in our secured Docker private image registry where images are stored and shared by all users in the organization.</li><li>Benefit from automatic scanning of images in your private {{site.data.keyword.cloud_notm}} registry.</li><li>Review recommendations specific to the operating system used in the image to fix potential vulnerabilities.</li></ul>|
 |Continuous monitoring of the cluster health|<ul><li>Use the cluster dashboard to quickly see and manage the health of your cluster, worker nodes, and container deployments.</li><li>Find detailed consumption metrics by using {{site.data.keyword.mon_full}} and quickly expand your cluster to meet work loads.</li><li>Review logging information by using {{site.data.keyword.la_full}} to see detailed cluster activities.</li></ul>|
 |Secure exposure of apps to the public|<ul><li>Choose between a public IP address, an {{site.data.keyword.IBM_notm}} provided route, or your own custom domain to access services in your cluster from the internet.</li></ul>|
@@ -140,6 +138,7 @@ Ready to get started? Try out the [creating a Kubernetes cluster tutorial](/docs
 {: caption="Benefits of the {{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
 <br />
+
 
 
 ## Comparison of offerings and their combinations
@@ -152,23 +151,23 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.clou
 <table summary="The columns are read from left to right. The first column has the type of cloud setup. The second column describes the setup.">
 <caption>Differences between {{site.data.keyword.containershort_notm}} setups</caption>
 <col width="25%">
- <thead>
- <th>{{site.data.keyword.containershort_notm}} setup</th>
- <th>Description</th>
- </thead>
- <tbody>
- <tr>
- <td>{{site.data.keyword.cloud_notm}} Public, off-premises</td>
- <td>With {{site.data.keyword.cloud_notm}} Public on [shared or dedicated hardware or on bare metal machines](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes), you can host your apps in clusters on the cloud by using {{site.data.keyword.containerlong_notm}}. You can also create a cluster with worker pools in multiple zones to increase high availability for your apps. {{site.data.keyword.containerlong_notm}} on {{site.data.keyword.cloud_notm}} Public delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.<br><br>For more information, see [{{site.data.keyword.containerlong_notm}} technology](/docs/containers?topic=containers-service-arch).
- <p class="tip">You can also create your cluster in a Virtual Private Cloud (VPC), which gives you the security of a private cloud environment with isolated networking features along with the dynamic scalability of the public cloud. For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).</p>
- </td>
- </tr>
- <tr>
- <td>{{site.data.keyword.cloud_notm}} Private, on-premises</td>
- <td>{{site.data.keyword.cloud_notm}} Private is an application platform that can be installed locally on your own machines. You might choose to use Kubernetes in {{site.data.keyword.cloud_notm}} Private when you need to develop and manage on-premises, containerized apps in your own controlled environment behind a firewall. <br><br>For more information, see the [{{site.data.keyword.cloud_notm}} Private product documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/docs/en/cloud-private/3.2.x).
- </td>
- </tr>
- </tbody>
+    <thead>
+    <th>{{site.data.keyword.containershort_notm}} setup</th>
+    <th>Description</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>{{site.data.keyword.cloud_notm}} Public, off-premises</td>
+    <td>With {{site.data.keyword.cloud_notm}} Public on <a href="/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes">shared or dedicated hardware or on bare metal machines</a>, you can host your apps in clusters on the cloud by using {{site.data.keyword.containerlong_notm}}. You can also create a cluster with worker pools in multiple zones to increase high availability for your apps. {{site.data.keyword.containerlong_notm}} on {{site.data.keyword.cloud_notm}} Public delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.<br><br>For more information, see <a href="/docs/containers?topic=containers-service-arch">{{site.data.keyword.containerlong_notm}} technology</a>.
+    <p class="tip">You can also create your cluster in a Virtual Private Cloud (VPC), which gives you the security of a private cloud environment with isolated networking features along with the dynamic scalability of the public cloud. For more information, see <a href="/docs/containers?topic=containers-infrastructure_providers">Overview of Classic and VPC infrastructure providers</a>.</p>
+    </td>
+    </tr>
+    <tr>
+    <td>{{site.data.keyword.cloud_notm}} Private, on-premises</td>
+    <td>{{site.data.keyword.cloud_notm}} Private is an application platform that can be installed locally on your own machines. You might choose to use Kubernetes in {{site.data.keyword.cloud_notm}} Private when you need to develop and manage on-premises, containerized apps in your own controlled environment behind a firewall. <br><br>For more information, see the <a href="https://www.ibm.com/docs/en/cloud-private/3.2.x">{{site.data.keyword.cloud_notm}} Private product documentation</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.
+    </td>
+    </tr>
+    </tbody>
 </table>
 
 <br />
@@ -205,6 +204,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 <br />
 
 
+
 ## Comparison between {{site.data.keyword.openshiftshort}} and community Kubernetes clusters
 {: #openshift_kubernetes}
 
@@ -233,6 +233,8 @@ Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerl
 |Preferred external traffic networking| Ingress | Router |
 |Secured routes encrypted with {{site.data.keyword.hscrypto}} | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 {: caption="Characteristics of community Kubernetes and {{site.data.keyword.openshiftshort}} clusters" caption-side="top"}
+
+
 
 
 

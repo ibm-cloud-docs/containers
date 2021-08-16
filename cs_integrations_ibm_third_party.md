@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # IBM Cloud services and third-party integrations
 {: #ibm-3rd-party-integrations}
@@ -209,5 +207,7 @@ You might use custom resource definitions (CRDs) to extend the Kubernetes API to
 {: shortdesc}
 
 To get started, see the Kubernetes documentation for [Custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/){: external} and [Operators](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/){: external}.
+
+
 
 

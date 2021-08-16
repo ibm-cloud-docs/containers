@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-16"
 
 keywords: kubernetes, iks, docker, containers
 
 subcollection: containers
 
 ---
-
 
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
@@ -105,8 +104,7 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
+  
 
 
 # Architecture and dependencies of the service
@@ -129,8 +127,8 @@ The following image shows the components of your cluster and how they interact i
 
 <p>
 <figure>
- <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
- <figcaption>{{site.data.keyword.containerlong_notm}} architecture when only the public cloud service endpoint is enabled</figcaption>
+    <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
+    <figcaption>{{site.data.keyword.containerlong_notm}} architecture when only the public cloud service endpoint is enabled</figcaption>
 </figure>
 </p>
 
@@ -142,8 +140,8 @@ The following image shows the components of your cluster and how they interact i
 
 <p>
 <figure>
- <img src="images/cs_org_ov_both_ses.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
- <figcaption>{{site.data.keyword.containerlong_notm}} architecture when public and private cloud service endpoints are enabled</figcaption>
+    <img src="images/cs_org_ov_both_ses.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
+    <figcaption>{{site.data.keyword.containerlong_notm}} architecture when public and private cloud service endpoints are enabled</figcaption>
 </figure>
 </p>
 
@@ -171,19 +169,19 @@ The following table describes the components of the Kubernetes master.
 <td>The Kubernetes API server serves as the main entry point for all cluster management requests from the worker node to the Kubernetes master. The Kubernetes API server validates and processes requests that change the state of Kubernetes resources, such as pods or services, and stores this state in etcd.</td>
 </tr>
 <tr>
-<td>`openvpn-server` (Kubernetes version 1.20 or earlier) or `konnectivity-server` (Kubernetes version 1.21 or later)</td>
-<td>The OpenVPN or Konnectivity server works with the OpenVPN client or Konnectivity agent to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</td>
+<td><code>openvpn-server</code> (Kubernetes version 1.20 or earlier) or <code>konnectivity-server</code> (Kubernetes version 1.21 or later)</td>
+<td>The OpenVPN or Konnectivity server works with the OpenVPN client or Konnectivity agent to securely connect the master to the worker node. This connection supports <code>apiserver proxy</code> calls to your pods and services, and <code>kubectl exec</code>, <code>attach</code>, and <code>logs</code> calls to the kubelet.</td>
 </tr>
 <tr>
-<td>`etcd`</td>
-<td>`etcd` is a highly available key value store that stores the state of all Kubernetes resources of a cluster, such as services, deployments, and pods. Data in etcd is backed up to an encrypted storage instance that IBM manages.</td>
+<td><code>etcd</code></td>
+<td><code>etcd</code> is a highly available key value store that stores the state of all Kubernetes resources of a cluster, such as services, deployments, and pods. Data in etcd is backed up to an encrypted storage instance that IBM manages.</td>
 </tr>
 <tr>
-<td>`kube-scheduler`</td>
+<td><code>kube-scheduler</code></td>
 <td>The Kubernetes scheduler watches for newly created pods and decides where to deploy them based on capacity, performance needs, policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster.</td>
 </tr>
 <tr>
-<td>`kube-controller-manager`</td>
+<td><code>kube-controller-manager</code></td>
 <td>The Kubernetes controller manager is a daemon that watches the state of cluster resources, such as replica sets. When the state of a resource changes, for example if a pod in a replica set goes down, the controller manager initiates correcting actions to achieve the required state.</td>
 </tr>
 </tbody></table>
@@ -211,73 +209,73 @@ The following table describes the components of a worker node.
     </thead>
     <tbody>
     <tr>
-    <td>`ibm-master-proxy`</td>
-    <td>`kube-system`</td>
-    <td>The `ibm-master-proxy` forwards requests from the worker node to the IP addresses of the highly available master replicas. In single zone clusters, the master has three replicas on separate hosts with one master IP address and domain name. For clusters that are in a multizone-capable zone, the master has three replicas that are spread across zones. As such, each master has its own IP address that is registered with DNS, with one domain name for the entire cluster master.</td>
+    <td><code>ibm-master-proxy</code></td>
+    <td><code>kube-system</code></td>
+    <td>The <code>ibm-master-proxy</code> forwards requests from the worker node to the IP addresses of the highly available master replicas. In single zone clusters, the master has three replicas on separate hosts with one master IP address and domain name. For clusters that are in a multizone-capable zone, the master has three replicas that are spread across zones. As such, each master has its own IP address that is registered with DNS, with one domain name for the entire cluster master.</td>
     </tr>
     <tr>
-    <td>`openvpn-client` (Kubernetes version 1.20 or earlier) or `konnectivity-agent` (Kubernetes version 1.21 or later)</td>
-    <td>`kube-system`</td>
-    <td>The OpenVPN client or Konnectivity agent works with the OpenVPN or Konnectivity server to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</td>
+    <td><code>openvpn-client</code> (Kubernetes version 1.20 or earlier) or <code>konnectivity-agent</code> (Kubernetes version 1.21 or later)</td>
+    <td><code>kube-system</code></td>
+    <td>The OpenVPN client or Konnectivity agent works with the OpenVPN or Konnectivity server to securely connect the master to the worker node. This connection supports <code>apiserver proxy</code> calls to your pods and services, and <code>kubectl exec</code>, <code>attach</code>, and <code>logs</code> calls to the kubelet.</td>
     </tr>
     <tr>
-    <td>`kubelet`</td>
-    <td>`kube-system`</td>
+    <td><code>kubelet</code></td>
+    <td><code>kube-system</code></td>
     <td>The kubelet is a pod that runs on every worker node and is responsible for monitoring the health of pods that run on the worker node and for watching the events that the Kubernetes API server sends. Based on the events, the kubelet creates or removes pods, ensures liveness and readiness probes, and reports back the status of the pods to the Kubernetes API server.</td>
     </tr>
     <tr>
-    <td>`coredns`</td>
-    <td>`kube-system`</td>
+    <td><code>coredns</code></td>
+    <td><code>kube-system</code></td>
     <td>By default, Kubernetes schedules a CoreDNS pod (or KubeDNS pod in version 1.12 and earlier) and service on the cluster. Containers automatically use the DNS service's IP to resolve DNS names in their searches for other pods and services.</td>
     </tr>
     <tr>
-    <td>`calico`</td>
-    <td>`kube-system`</td>
+    <td><code>calico</code></td>
+    <td><code>kube-system</code></td>
     <td>Calico manages network policies for your cluster, and comprises a few components as follows.
     <ul>
-    <li>**`calico-cni`**: The Calico container network interface (CNI) manages the network connectivity of containers and removes allocated resources when a container is deleted.</li>
-    <li>**`calico-ipam`**: The Calico IPAM manages IP address assignment for containers.</li>
-    <li>**`calico-node`**: The Calico node is a container that bundles together the various components that are required for networking containers with Calico.</li>
-    <li>**`calico-policy-controller`**: The Calico policy controller watches inbound and outbound network traffic for compliance with set network policies. If the traffic is not allowed in the cluster, access to the cluster is blocked. The Calico policy controller is also used to create and set network policies for a cluster.</li></ul></td>
+    <li><strong><code>calico-cni</code></strong>: The Calico container network interface (CNI) manages the network connectivity of containers and removes allocated resources when a container is deleted.</li>
+    <li><strong><code>calico-ipam</code></strong>: The Calico IPAM manages IP address assignment for containers.</li>
+    <li><strong><code>calico-node</code></strong>: The Calico node is a container that bundles together the various components that are required for networking containers with Calico.</li>
+    <li><strong><code>calico-policy-controller</code></strong>: The Calico policy controller watches inbound and outbound network traffic for compliance with set network policies. If the traffic is not allowed in the cluster, access to the cluster is blocked. The Calico policy controller is also used to create and set network policies for a cluster.</li></ul></td>
     </tr>
     <tr>
-    <td>`kube-proxy`</td>
-    <td>`kube-system`</td>
+    <td><code>kube-proxy</code></td>
+    <td><code>kube-system</code></td>
     <td>The Kubernetes network proxy is a daemon that runs on every worker node and that forwards or load balances TCP and UDP network traffic for services that run in the cluster.</td>
     </tr>
     <tr>
-    <td>`kube-dashboard`</td>
-    <td>`kube-system`</td>
+    <td><code>kube-dashboard</code></td>
+    <td><code>kube-system</code></td>
     <td>The Kubernetes dashboard is a web-based GUI that allows users to manage and troubleshoot the cluster and applications that run in the cluster.</td>
     </tr>
     <tr>
-    <td>`heapster`</td>
-    <td>`kube-system`</td>
+    <td><code>heapster</code></td>
+    <td><code>kube-system</code></td>
     <td>Heapster is a cluster-wide aggregator of monitoring and event data. The Heapster pod discovers all nodes in the cluster and queries usage information from each node's kubelet. You can find utilization graphs in the Kubernetes dashboard.</td>
     </tr>
     <tr>
     <td>Ingress ALB</td>
-    <td>`kube-system`</td>
+    <td><code>kube-system</code></td>
     <td>Ingress is a Kubernetes service that you can use to balance network traffic workloads in your cluster by forwarding public or private requests to multiple apps in your cluster. To expose your apps over the public or private network, you must create an Ingress resource to register your apps with the Ingress application load balancer (ALB). Multiple apps can then be accessed by using a single URL or IP address.</td>
     </tr>
     <tr>
     <td>Storage provider</td>
-    <td>`kube-system`</td>
+    <td><code>kube-system</code></td>
     <td>Every cluster is set up with a plug-in to provision file storage. You can choose to install other add-ons, such as block storage.</td>
     </tr>
     <tr>
     <td>Logging and metrics</td>
-    <td>`ibm-system`</td>
+    <td><code>ibm-system</code></td>
     <td>You can use the {{site.data.keyword.la_full}} and {{site.data.keyword.mon_full}} services to expand your collection and retention capabilities when working with logs and metrics.</td>
     </tr>
     <tr>
     <td>Load balancer</td>
-    <td>`ibm-system`</td>
+    <td><code>ibm-system</code></td>
     <td>A load balancer is a Kubernetes service that can be used to balance network traffic workloads in your cluster by forwarding public or private requests to an app.</td>
     </tr>
     <tr>
     <td>App pods and services</td>
-    <td>`default`</td>
+    <td><code>default</code></td>
     <td>In the <code>default</code> namespace or in namespaces that you create, you can deploy apps in pods and services to communicate with those pods.</td>
     </tr>
     </tbody></table>
@@ -297,7 +295,7 @@ The following diagram and table describe the default components that are set up 
 | Component | Description |
 |:-----------------|:-----------------|
 | Master |  [Master components](#master-components), including the API server and etcd, have three replicas and are spread across zones for even higher availability. Masters include the same components as described in the community Kubernetes architecture. The master and all the master components are dedicated only to you, and are not shared with other IBM customers.  |
-| Worker node |  With {{site.data.keyword.containerlong_notm}}, the virtual machines that your cluster manages are instances that are called worker nodes. These worker nodes virtual machines and all the worker node components are dedicated to you only and are not shared with other IBM customers. However, the underlying hardware is shared with other IBM customers. For more information, see [Virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm). </br</br> You manage the worker nodes through the automation tools that are provided by {{site.data.keyword.containerlong_notm}}, such as the API, CLI, or console. Unlike classic clusters, you do not see VPC compute worker nodes in your infrastructure portal or separate infrastructure bill, but instead manage all maintenance and billing activity for the worker nodes from {{site.data.keyword.containerlong_notm}}.</br></br> Worker nodes include the same [components](#worker-components) as described in the Classic architecture. Community Kubernetes worker nodes run on Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated). |
+| Worker node |  With {{site.data.keyword.containerlong_notm}}, the virtual machines that your cluster manages are instances that are called worker nodes. These worker nodes virtual machines and all the worker node components are dedicated to you only and are not shared with other IBM customers. However, the underlying hardware is shared with other IBM customers. For more information, see [Virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm). </br></br> You manage the worker nodes through the automation tools that are provided by {{site.data.keyword.containerlong_notm}}, such as the API, CLI, or console. Unlike classic clusters, you do not see VPC compute worker nodes in your infrastructure portal or separate infrastructure bill, but instead manage all maintenance and billing activity for the worker nodes from {{site.data.keyword.containerlong_notm}}.</br></br> Worker nodes include the same [components](#worker-components) as described in the Classic architecture. Community Kubernetes worker nodes run on Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated). |
 | Cluster networking | Your worker nodes are created in a VPC subnet in the zone that you specify. By default, the public and private cloud service endpoints for your cluster are enabled. Communication between the master and worker nodes is over the private network. Authenticated external users can communicate with the master over the public network, such as to run `kubectl` commands. You can optionally set up your cluster to communicate with on-prem services by setting up a VPC VPN on the private network. |
 | App networking | You can create a Kubernetes `LoadBalancer` service for your apps in the cluster, which automatically provisions a VPC load balancer in your VPC outside the cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. For more information, see [Exposing apps with VPC load balancers](/docs/containers?topic=containers-vpc-lbaas).<br><br>Calico is used as the cluster networking policy fabric. |
 | Storage | You can set up only block persistent storage. Block storage is available as a cluster add-on. For more information, see [Storing data on IBM Block Storage for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-block_storage). |
@@ -389,3 +387,4 @@ Review the list of 3rd party services that {{site.data.keyword.containerlong_not
 | Let's Encrypt | This service is used as the Certificate authority to generate SSL certificates for customer owned public endpoints. All generated certificates are managed in {{site.data.keyword.cloudcerts_short}}.|
 {: caption="{{site.data.keyword.containerlong_notm}} dependencies to third-party services." caption-side="top"}
 {: summary="The rows are read from left to right. The first column is the service. The second column is a description of the service."}
+

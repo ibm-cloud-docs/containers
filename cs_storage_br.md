@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 # Backing up and restoring storage data
 {: #storage_br}
 
@@ -121,3 +119,4 @@ If you have not provisioned storage, review the [Kubernetes storage basics](/doc
 * [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
 * [{{site.data.keyword.cos_short}}](/docs/containers?topic=containers-object_storage#cos_backup_restore)
 * [Portworx disaster recovery](/docs/containers?topic=containers-portworx#px-dr)
+

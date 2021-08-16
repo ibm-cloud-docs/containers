@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,8 +104,7 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
+  
 
 
 # Bringing your own Ingress controller
@@ -133,8 +131,8 @@ In classic clusters, bringing your own Ingress controller is supported only for 
 {: note}
 
 1. Get the configuration file for your Ingress controller ready. For example, you can use the [cloud-generic NGINX community Ingress controller](https://github.com/kubernetes/ingress-nginx/blob/main/deploy/static/provider/cloud/deploy.yaml){: external}. If you use the community controller, edit the `deploy.yaml` file by following these steps.
-  1. Replace all instances of `namespace: ingress-nginx` with `namespace: kube-system`.
-  2. Replace all instances of the `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/instance: ingress-nginx` labels with one `app: ingress-nginx` label.
+    1. Replace all instances of `namespace: ingress-nginx` with `namespace: kube-system`.
+    2. Replace all instances of the `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/instance: ingress-nginx` labels with one `app: ingress-nginx` label.
 
 2. Deploy your own Ingress controller. For example, to use the cloud-generic NGINX community Ingress controller, run the following command.
     ```
@@ -164,10 +162,10 @@ In classic clusters, bringing your own Ingress controller is supported only for 
     {: codeblock}
 
 4. Create the service in your cluster.
-  ```
-  kubectl apply -f ingress-nginx.yaml -n kube-system
-  ```
-  {: pre}
+    ```
+    kubectl apply -f ingress-nginx.yaml -n kube-system
+    ```
+    {: pre}
 
 5. Get the **EXTERNAL-IP** address for the load balancer.
     ```
@@ -183,13 +181,14 @@ In classic clusters, bringing your own Ingress controller is supported only for 
     {: screen}
 
 6. Register the load balancer IP address by creating a new DNS hostname or by using the existing Ingress subdomain for your cluster. If you plan to continue to use IBM-provided ALBs concurrently with your custom Ingress controller in one cluster, you must create a new DNS hostname.
-  * Create a new DNS hostname:
-      1. Register the NLB IP address with a DNS hostname.
+    * Create a new DNS hostname:
+        1. Register the NLB IP address with a DNS hostname.
         ```
         ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP>
         ```
         {: pre}
-      2. Verify that the hostname is created.
+
+        2. Verify that the hostname is created.
         ```
         ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
         ```
@@ -201,15 +200,16 @@ In classic clusters, bringing your own Ingress controller is supported only for 
         mycluster-a1b2cdef345678g9hi012j3kl4567890-0000.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
         ```
         {: screen}
-      3. Optional: [Enable health checks on the hostname by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor).
-  * Use the existing Ingress subdomain for your cluster:
-      1. Get the Ingress subdomain for your cluster.
+
+        3. Optional: [Enable health checks on the hostname by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor).
+    * Use the existing Ingress subdomain for your cluster:
+        1. Get the Ingress subdomain for your cluster.
         ```
         ibmcloud ks cluster get -c <cluster> | grep Ingress
         ```
         {: pre}
 
-      2. Get the existing ALB IP addresses that are registered by default with the Ingress subdomain. In the output, look for the **IP(s)** that are registered for the Ingress subdomain for your cluster.
+        2. Get the existing ALB IP addresses that are registered by default with the Ingress subdomain. In the output, look for the **IP(s)** that are registered for the Ingress subdomain for your cluster.
         ```
         ibmcloud ks nlb-dns ls -c <cluster>
         ```
@@ -222,19 +222,19 @@ In classic clusters, bringing your own Ingress controller is supported only for 
         ```
         {: screen}
 
-      3. Remove the ALB IP addresses from the subdomain. If you have a multizone cluster, run this command for each ALB IP address.
+        3. Remove the ALB IP addresses from the subdomain. If you have a multizone cluster, run this command for each ALB IP address.
         ```
         ibmcloud ks nlb-dns rm classic --cluster <cluster> --ip <ALB_IP> --nlb-host <Ingress_subdomain>
         ```
         {: pre}
 
-      4. Add the IP address for your load balancer to the subdomain.
+        4. Add the IP address for your load balancer to the subdomain.
         ```
         ibmcloud ks nlb-dns add --cluster <cluster> --ip <load_balancer_IP> --nlb-host <Ingress_subdomain>
         ```
         {: pre}
 
-      5. If you do not plan to continue to use IBM-provided ALBs concurrently with your custom Ingress controller:
+        5. If you do not plan to continue to use IBM-provided ALBs concurrently with your custom Ingress controller:
           1. Get the ID of the ALBs.
             ```
             ibmcloud ks ingress alb ls --cluster <cluster-name>
@@ -247,21 +247,22 @@ In classic clusters, bringing your own Ingress controller is supported only for 
             ```
             {: pre}
 
-      6. Verify that your load balancer is now registered with the Ingress subdomain.
+        6. Verify that your load balancer is now registered with the Ingress subdomain.
         ```
         ibmcloud ks nlb-dns ls -c <cluster>
         ```
         {: pre}
+
 7. Deploy any other resources that are required by your custom Ingress controller, such as the configmap. If you used the cloud-generic NGINX community Ingress controller in step 1, you can skip this step because the resources are already included in the `deploy.yaml` file.
 
 8. Create Ingress resources for your apps. You can use the Kubernetes documentation to create [an Ingress resource file](https://kubernetes.io/docs/concepts/services-networking/ingress/){: external} and use [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/){: external}.
-  <p class="important">If you continue to use IBM-provided ALBs concurrently with your custom Ingress controller in one cluster, create separate Ingress resources for your ALBs and custom controller. In the [Ingress resource that you create to apply to the IBM ALBs only](/docs/containers?topic=containers-ingress-types#alb-comm-create), you must add the annotation <code>kubernetes.io/ingress.class: "iks-nginx"</code>.</p>
+    <p class="important">If you continue to use IBM-provided ALBs concurrently with your custom Ingress controller in one cluster, create separate Ingress resources for your ALBs and custom controller. In the [Ingress resource that you create to apply to the IBM ALBs only](/docs/containers?topic=containers-ingress-types#alb-comm-create), you must add the annotation <code>kubernetes.io/ingress.class: "iks-nginx"</code>.</p>
 
 9. Access your app by using the subdomain you configured in step 6 and the path that your app listens on that you specified in the Ingress resource file.
-  ```
-  https://<host_name>/<app_path>
-  ```
-  {: codeblock}
+    ```
+    https://<host_name>/<app_path>
+    ```
+    {: codeblock}
 
 ## VPC clusters: Exposing your Ingress controller by creating a VPC load balancer and subdomain
 {: #user_managed_vpc}
@@ -270,9 +271,9 @@ In classic clusters, bringing your own Ingress controller is supported only for 
 {: shortdesc}
 
 1. Get the configuration file for your Ingress controller ready. For example, you can use the [cloud-generic NGINX community Ingress controller]( https://github.com/kubernetes/ingress-nginx/blob/main/deploy/static/provider/cloud/deploy.yaml){: external}. If you use the community controller, edit the `deploy.yaml` file by following these steps.
-  1. Replace all instances of `namespace: ingress-nginx` with `namespace: kube-system`.
-  2. Replace all instances of the `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/instance: ingress-nginx` labels with one `app: ingress-nginx` label.
-  3. Remove the `LimitRange` object.
+    1. Replace all instances of `namespace: ingress-nginx` with `namespace: kube-system`.
+    2. Replace all instances of the `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/instance: ingress-nginx` labels with one `app: ingress-nginx` label.
+    3. Remove the `LimitRange` object.
 
 2. Deploy your own Ingress controller. For example, to use the cloud-generic NGINX community Ingress controller, run the following command.
     ```
@@ -310,48 +311,49 @@ In classic clusters, bringing your own Ingress controller is supported only for 
 
 5. Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When the service is created, copy the hostname that is assigned by the VPC load balancer in the **LoadBalancer Ingress** field.
 
-  **The VPC load balancer takes a few minutes to provision in your VPC.** You cannot access the hostname of your Kubernetes `LoadBalancer` service until the VPC load balancer is fully provisioned.
-  {: note}
-  ```
-  kubectl describe svc ingress-nginx -n kube-system
-  ```
-  {: pre}
+    **The VPC load balancer takes a few minutes to provision in your VPC.** You cannot access the hostname of your Kubernetes `LoadBalancer` service until the VPC load balancer is fully provisioned.
+    {: note}
 
-  In the following example output, the **LoadBalancer Ingress** hostname is `1234abcd-us-south.lb.appdomain.cloud`:
-  ```
-  Name:                     ingress-nginx
-  Namespace:                kube-system
-  Labels:                   <none>
-  Annotations:              kubectl.kubernetes.io/last-applied-configuration:
+    ```
+    kubectl describe svc ingress-nginx -n kube-system
+    ```
+    {: pre}
+
+    In the following example output, the **LoadBalancer Ingress** hostname is `1234abcd-us-south.lb.appdomain.cloud`:
+    ```
+    Name:                     ingress-nginx
+    Namespace:                kube-system
+    Labels:                   <none>
+    Annotations:              kubectl.kubernetes.io/last-applied-configuration:
                               {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type":"public"},...
                             service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: public
-  Selector:                 run=webserver
-  Type:                     LoadBalancer
-  IP:                       172.21.106.166
-  LoadBalancer Ingress:     1234abcd-us-south.lb.appdomain.cloud
-  Port:                     <unset>  8080/TCP
-  TargetPort:               8080/TCP
-  NodePort:                 <unset>  30532/TCP
-  Endpoints:
-  Session Affinity:         None
-  External Traffic Policy:  Cluster
-  Events:
-    Type    Reason                Age   From                Message
+    Selector:                 run=webserver
+    Type:                     LoadBalancer
+    IP:                       172.21.106.166
+    LoadBalancer Ingress:     1234abcd-us-south.lb.appdomain.cloud
+    Port:                     <unset>  8080/TCP
+    TargetPort:               8080/TCP
+    NodePort:                 <unset>  30532/TCP
+    Endpoints:
+    Session Affinity:         None
+    External Traffic Policy:  Cluster
+    Events:
+        Type    Reason                Age   From                Message
     ----    ------                ----  ----                -------
     Normal  EnsuringLoadBalancer  52s   service-controller  Ensuring load balancer
     Normal  EnsuredLoadBalancer   35s   service-controller  Ensured load balancer
-  ```
-  {: screen}
+    ```
+    {: screen}
 
 6. To register the VPC load balancer hostname, create a new DNS subdomain or use the existing Ingress subdomain for your cluster. If you plan to continue to use IBM-provided ALBs concurrently with your custom Ingress controller in one cluster, you must create a new DNS subdomain.
-  * Create a new DNS subdomain:
-      1. Create a DNS entry for the VPC load balancer hostname by creating a subdomain with an SSL certificate.
+    * Create a new DNS subdomain:
+        1. Create a DNS entry for the VPC load balancer hostname by creating a subdomain with an SSL certificate.
         ```
         ibmcloud ks nlb-dns create vpc-gen2 --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type (public|private)
         ```
         {: pre}
 
-      2. Verify that the subdomain is created.
+        2. Verify that the subdomain is created.
         ```
         ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
         ```
@@ -363,20 +365,21 @@ In classic clusters, bringing your own Ingress controller is supported only for 
         mycluster-a1b2cdef345678g9hi012j3kl4567890-0000.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
         ```
         {: screen}
-  * Use the existing Ingress subdomain for your cluster:
-      1. Get the Ingress subdomain.
+
+    * Use the existing Ingress subdomain for your cluster:
+        1. Get the Ingress subdomain.
         ```
         ibmcloud ks cluster get -c <cluster> | grep Ingress
         ```
         {: pre}
 
-      2. Register the VPC load balancer hostname with your Ingress subdomain. This command replaces the ALB hostname that was previously registered with your VPC load balancer hostname.
+        2. Register the VPC load balancer hostname with your Ingress subdomain. This command replaces the ALB hostname that was previously registered with your VPC load balancer hostname.
         ```
         ibmcloud ks nlb-dns replace --cluster <cluster> --nlb-subdomain <Ingress_subdomain> --lb-host <VPC_lb_hostname>
         ```
         {: pre}
 
-      3. If you do not plan to continue to use IBM-provided ALBs concurrently with your custom Ingress controller:
+        3. If you do not plan to continue to use IBM-provided ALBs concurrently with your custom Ingress controller:
           1. Get the ID of the ALBs.
             ```
             ibmcloud ks ingress alb ls --cluster <cluster-name>
@@ -389,7 +392,7 @@ In classic clusters, bringing your own Ingress controller is supported only for 
             ```
             {: pre}
 
-      4. Verify that your VPC load balancer hostname is now registered with the Ingress subdomain.
+        4. Verify that your VPC load balancer hostname is now registered with the Ingress subdomain.
         ```
         ibmcloud ks nlb-dns ls -c <cluster>
         ```
@@ -398,10 +401,12 @@ In classic clusters, bringing your own Ingress controller is supported only for 
 7. Deploy any other resources that are required by your custom Ingress controller, such as the configmap. If you used the cloud-generic NGINX community Ingress controller in step 1, you can skip this step because the resources are already included in the `deploy.yaml` file.
 
 8. Create Ingress resources for your apps. You can use the Kubernetes documentation to create [an Ingress resource file](https://kubernetes.io/docs/concepts/services-networking/ingress/){: external} and use [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/){: external}.
-  <p class="tip">If you continue to use IBM-provided ALBs concurrently with your custom Ingress controller in one cluster, you can create separate Ingress resources for your IBM ALBs and custom controller. In the [Ingress resource that you create to apply to the IBM ALBs only](/docs/containers?topic=containers-ingress-types#alb-comm-create), add the annotation <code>kubernetes.io/ingress.class: "iks-nginx"</code>.</p>
+    <p class="tip">If you continue to use IBM-provided ALBs concurrently with your custom Ingress controller in one cluster, you can create separate Ingress resources for your IBM ALBs and custom controller. In the [Ingress resource that you create to apply to the IBM ALBs only](/docs/containers?topic=containers-ingress-types#alb-comm-create), add the annotation <code>kubernetes.io/ingress.class: "iks-nginx"</code>.</p>
 
 9. Access your app by using the subdomain you configured in step 6 and the path that your app listens on that you specified in the Ingress resource file. If you created a subdomain for a private VPC load balancer, you must be [connected to your private VPC network](/docs/vpc?topic=vpc-vpn-onprem-example) to test access to your subdomain.
-  ```
-  https://<load_balancer_subdomain>/<app_path>
-  ```
-  {: codeblock}
+    ```
+    https://<load_balancer_subdomain>/<app_path>
+    ```
+    {: codeblock}
+
+

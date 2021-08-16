@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-11"
+lastupdated: "2021-08-13"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -106,7 +106,7 @@ content-type: troubleshoot
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
-  
+
 
 # Why does no Ingress secret exist after cluster creation?
 {: #ingress_secret}
@@ -149,10 +149,10 @@ Also, if you used the same cluster name repeatedly, you might have a rate limiti
 1. Check the ID of the user or functional user who sets the API key for this cluster.
 {: tsResolve}
 
-  ```
-  ibmcloud ks api-key info -c <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks api-key info -c <cluster_name_or_ID>
+    ```
+    {: pre}
 
 2. [Assign the following IAM permissions](/docs/containers?topic=containers-users#add_users) to the user or functional user who sets the API key.
     * The **Administrator** or **Editor** platform access role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**
@@ -176,3 +176,5 @@ Also, if you used the same cluster name repeatedly, you might have a rate limiti
 
 
 For more information, see [Managing TLS certificates and secrets](/docs/containers?topic=containers-ingress-types#manage_certs).
+
+

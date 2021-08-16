@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-11"
+lastupdated: "2021-08-13"
 
 keywords: kubernetes, iks
 
@@ -106,7 +106,7 @@ content-type: troubleshoot
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
-  
+
 # Why do pods repeatedly fail to restart or are unexpectedly removed?
 {: #ts-app-pod-fail}
 
@@ -134,22 +134,24 @@ See the following sections:
 ## Fixing container resource limits
 {: #pod-fail-resource-limits}
 
-1.  Get the name of your pod. If you used a label, you can include it to filter your results.
+1. Get the name of your pod. If you used a label, you can include it to filter your results.
     ```
     kubectl get pods --selector='app=wasliberty'
     ```
     {: pre}
-2.  Describe the pod and look for the **Restart Count**.
+
+2. Describe the pod and look for the **Restart Count**.
     ```
     kubectl describe pod
     ```
     {: pre}
-3.  If the pod restarted many times in a short period of time, fetch its status.
+
+3. If the pod restarted many times in a short period of time, fetch its status.
     ```
     kubectl get pod <pod_name> -n <namespace> -o go-template='{{range.status.containerStatuses}}{{"Container Name: "}}{{.name}}{{"\r\nLastState: "}}{{.lastState}}{{end}}'
     ```
-4.  Review the reason. For example, `OOM Killed` means "out of memory," indicating that the container is crashing because of a resource limit.
-5.  Add capacity to your cluster such as by [resizing worker pools](/docs/containers?topic=containers-add_workers) so that the resources can be fulfilled.
+4. Review the reason. For example, `OOM Killed` means "out of memory," indicating that the container is crashing because of a resource limit.
+5. Add capacity to your cluster such as by [resizing worker pools](/docs/containers?topic=containers-add_workers) so that the resources can be fulfilled.
 
 <br />
 
@@ -157,52 +159,54 @@ See the following sections:
 {: #pod-fail-higher-priority}
 
 To see if your pod is being replaced by higher priority pods:
-1.  Get the name of your pod.
+1. Get the name of your pod.
 
     ```
     kubectl get pods
     ```
     {: pre}
 
-2.  Describe your pod YAML.
+2. Describe your pod YAML.
 
     ```
     kubectl get pod <pod_name> -o yaml
     ```
     {: pre}
 
-3.  Check the `priorityClassName` field.
+3. Check the `priorityClassName` field.
 
-    1.  If there is no `priorityClassName` field value, then your pod has the `globalDefault` priority class. If your cluster admin did not set a `globalDefault` priority class, then the default is zero (0), or the lowest priority. Any pod with a higher priority class can preempt, or remove, your pod.
+    1. If there is no `priorityClassName` field value, then your pod has the `globalDefault` priority class. If your cluster admin did not set a `globalDefault` priority class, then the default is zero (0), or the lowest priority. Any pod with a higher priority class can preempt, or remove, your pod.
 
-    2.  If there is a `priorityClassName` field value, get the priority class.
+    2. If there is a `priorityClassName` field value, get the priority class.
 
         ```
         kubectl get priorityclass <priority_class_name> -o yaml
         ```
         {: pre}
 
-    3.  Note the `value` field to check your pod's priority.
+    3. Note the `value` field to check your pod's priority.
 
-4.  List existing priority classes in the cluster.
+4. List existing priority classes in the cluster.
 
     ```
     kubectl get priorityclasses
     ```
     {: pre}
 
-5.  For each priority class, get the YAML file and note the `value` field.
+5. For each priority class, get the YAML file and note the `value` field.
 
     ```
     kubectl get priorityclass <priority_class_name> -o yaml
     ```
     {: pre}
 
-6.  Compare your pod's priority class value with the other priority class values to see if it is higher or lower in priority.
+6. Compare your pod's priority class value with the other priority class values to see if it is higher or lower in priority.
 
-7.  Repeat steps 1 to 3 for other pods in the cluster, to check what priority class they are using. If those other pods' priority class is higher than your pod, your pod is not provisioned unless there is enough resources for your pod and every pod with higher priority.
+7. Repeat steps 1 to 3 for other pods in the cluster, to check what priority class they are using. If those other pods' priority class is higher than your pod, your pod is not provisioned unless there is enough resources for your pod and every pod with higher priority.
 
-8.  Contact your cluster admin to add more capacity to your cluster and confirm that the right priority classes are assigned.
+8. Contact your cluster admin to add more capacity to your cluster and confirm that the right priority classes are assigned.
+
+
 
 
 

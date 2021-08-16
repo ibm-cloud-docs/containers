@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Retail use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_retail}
@@ -281,5 +279,7 @@ Technical solution:
 * Customer traffic and sales increased in stores by making the stores themselves a differentiating asset.
 * At the same time, new insights from social and cognitive analysis improved reduced inventory OpEx (operating expenses).
 * Social sharing in the mobile app also helps to identify and market to new customers.
+
+
 
 

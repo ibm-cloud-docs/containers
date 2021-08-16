@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, classic
 
 subcollection: containers
 
 ---
-
 
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Supported infrastructure providers
 {: #infrastructure_providers}
@@ -134,9 +132,11 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from the foll
 |Available locations and versions|Classic clusters are [available worldwide](/docs/containers?topic=containers-regions-and-zones#locations), including all six {{site.data.keyword.cloud_notm}} multizone metros and 20 single zone locations in more than a dozen countries.|VPC clusters are available worldwide in the [multizone location](/docs/containers?topic=containers-regions-and-zones#zones-vpc).|
 |Service interface (API, CLI, UI)|Classic clusters are fully supported in the {{site.data.keyword.containershort_notm}} [v1 API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/#/), [CLI](/docs/containers?topic=containers-kubernetes-service-cli), and [console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters).|VPC clusters are supported by the [next version (`v2`) of the {{site.data.keyword.containerlong_notm}} API](/docs/containers?topic=containers-cs_api_install), and you can manage your VPC clusters through the same CLI and console as classic clusters.|
 |Service compliance|See the classic section in [What standards does the service comply to?](/docs/containers?topic=containers-faqs#standards). | See the VPC section in [What standards does the service comply to?](/docs/containers?topic=containers-faqs#standards). |
-|Service limitations|See [Service limitations](/docs/containers?topic=containers-limitations#tech_limits). Feature-specific limitations are documented by section.|See [Service limitations](/docs/containers?topic=containers-limitations#tech_limits).<ul><li>For VPC-specific limitations in {{site.data.keyword.containerlong_notm}}, see [VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits).</li><li>For general VPC infrastructure provider limitations, see [Limitations](/docs/vpc?topic=vpc-limitations).</li></ul>|
+|Service limitations|See [Service limitations](/docs/containers?topic=containers-limitations#tech_limits). Feature-specific limitations are documented by section.|See [Service limitations](/docs/containers?topic=containers-limitations#tech_limits).<ul><li>For VPC-specific limitations in {{site.data.keyword.containerlong_notm}}, see <a href="/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits">VPC cluster limitations</a>.</li><li>For general VPC infrastructure provider limitations, see <a href="/docs/vpc?topic=vpc-limitations">Limitations</a>.</li></ul>|
 |Troubleshooting and support|Both classic and VPC clusters are supported through the same {{site.data.keyword.cloud_notm}} Support processes. For cluster issues, check out the [Debugging your clusters](/docs/containers?topic=containers-debug_clusters) guide. For questions, try posting in the [Slack channel](https://cloud.ibm.com/kubernetes/slack){: external}.|Both classic and VPC clusters are supported through the same {{site.data.keyword.cloud_notm}} Support processes. For cluster issues, check out the [troubleshooting documentation](/docs/containers?topic=containers-debug_clusters) for VPC-specific topics. For questions, try posting in the [Slack channel](https://cloud.ibm.com/kubernetes/slack){: external}.|
 {: caption="Infrastructure providers for {{site.data.keyword.containerlong_notm}} clusters"}
 {: summary="The rows are read from left to right, with the area of comparison in column one, classic infrastructure provider in column two, and VPC infrastructure provider in column three."}
+
+
 
 

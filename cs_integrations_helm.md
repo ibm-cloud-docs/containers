@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Adding services by using Helm charts
 {: #helm}
@@ -151,64 +149,66 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 2. Add the {{site.data.keyword.cloud_notm}} Helm repositories to your Helm instance.
 
-   If you enabled [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint) in your {{site.data.keyword.cloud_notm}} account, you can use the private {{site.data.keyword.cloud_notm}} Helm repository to keep your image pull traffic on the private network. If you cannot enable VRF or service endpoints in your account, use the public registry domain: `helm repo add iks-charts https://icr.io/helm/iks-charts`.
-   {: note}
+    If you enabled [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint) in your {{site.data.keyword.cloud_notm}} account, you can use the private {{site.data.keyword.cloud_notm}} Helm repository to keep your image pull traffic on the private network. If you cannot enable VRF or service endpoints in your account, use the public registry domain: `helm repo add iks-charts https://icr.io/helm/iks-charts`.
+    {: note}
 
-   ```
-   helm repo add iks-charts https://private.icr.io/helm/iks-charts
-   ```
-   {: pre}
+    ```
+    helm repo add iks-charts https://private.icr.io/helm/iks-charts
+    ```
+    {: pre}
 
-   ```
-   helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
-   ```
-   {: pre}
+    ```
+    helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
+    ```
+    {: pre}
 
-   ```
-   helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
-   ```
-   {: pre}
+    ```
+    helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
+    ```
+    {: pre}
 
-   ```
-   helm repo add entitled https://raw.githubusercontent.com/IBM/charts/master/repo/entitled
-   ```
-   {: pre}
+    ```
+    helm repo add entitled https://raw.githubusercontent.com/IBM/charts/master/repo/entitled
+    ```
+    {: pre}
 
-   ```
-   helm repo add ibm-helm https://raw.githubusercontent.com/IBM/charts/master/repo/ibm-helm
-   ```
-   {: pre}
+    ```
+    helm repo add ibm-helm https://raw.githubusercontent.com/IBM/charts/master/repo/ibm-helm
+    ```
+    {: pre}
 
 3. Update the repos to retrieve the latest versions of all Helm charts.
-   ```
-   helm repo update
-   ```
-   {: pre}
+    ```
+    helm repo update
+    ```
+    {: pre}
 
 4. List the Helm charts that are currently available in the {{site.data.keyword.cloud_notm}} repositories.
-   ```
-   helm search repo iks-charts
-   ```
-   {: pre}
+    ```
+    helm search repo iks-charts
+    ```
+    {: pre}
 
-   ```
-   helm search repo ibm-charts
-   ```
-   {: pre}
+    ```
+    helm search repo ibm-charts
+    ```
+    {: pre}
 
-   ```
-   helm search repo ibm-community
-   ```
-   {: pre}
+    ```
+    helm search repo ibm-community
+    ```
+    {: pre}
 
-   ```
-   helm search repo entitled
-   ```
-   {: pre}
+    ```
+    helm search repo entitled
+    ```
+    {: pre}
 
-   ```
-   helm search repo ibm-helm
-   ```
-   {: pre}
+    ```
+    helm search repo ibm-helm
+    ```
+    {: pre}
 
 5. Identify the Helm chart that you want to install and follow the instructions in the Helm chart `README` to install the Helm chart in your cluster.
+
+

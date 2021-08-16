@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks
 
 subcollection: containers
 
 ---
-
 
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Deploying Kubernetes-native apps in clusters
 {: #deploy_app}
@@ -149,27 +147,27 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 **Launching the Kubernetes dashboard from the {{site.data.keyword.cloud_notm}} console**
 {: #db_gui}
 
-1.  Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
-2.  From the menu bar, select the account that you want to use.
-3.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
-4.  On the **Clusters** page, click the cluster that you want to access.
-5.  From the cluster detail page, click the **Kubernetes Dashboard** button.
+1. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
+2. From the menu bar, select the account that you want to use.
+3. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
+4. On the **Clusters** page, click the cluster that you want to access.
+5. From the cluster detail page, click the **Kubernetes Dashboard** button.
 
 </br>
 
 **Launching the Kubernetes dashboard from the CLI**
 {: #db_cli}
 
-1.  Get your credentials for Kubernetes.
+1. Get your credentials for Kubernetes.
 
     ```
     kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
     ```
     {: pre}
 
-2.  Copy the **id-token** value that is shown in the output.
+2. Copy the **id-token** value that is shown in the output.
 
-3.  Set the proxy with the default port number.
+3. Set the proxy with the default port number.
 
     ```
     kubectl proxy
@@ -183,18 +181,18 @@ You can use the default port or set your own port to launch the Kubernetes dashb
     ```
     {: screen}
 
-4.  Sign in to the dashboard.
+4. Sign in to the dashboard.
 
-  1.  In your browser, navigate to the following URL:
+    1. In your browser, navigate to the following URL:
 
-      ```
-      http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-      ```
-      {: codeblock}
+        ```
+        http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+        ```
+        {: codeblock}
 
-  2.  In the sign-on page, select the **Token** authentication method.
+    2. In the sign-on page, select the **Token** authentication method.
 
-  3.  Then, paste the **id-token** value that you previously copied into the **Token** field and click **SIGN IN**.
+    3. Then, paste the **id-token** value that you previously copied into the **Token** field and click **SIGN IN**.
 
 When you are done with the Kubernetes dashboard, use `CTRL+C` to exit the `proxy` command. After you exit, the Kubernetes dashboard is no longer available. Run the `proxy` command to restart the Kubernetes dashboard.
 
@@ -220,17 +218,17 @@ Before you begin:
 
 To deploy your app:
 
-1.  Open the Kubernetes [dashboard](#cli_dashboard) and click **+ Create**.
-2.  Enter your app details in 1 of 2 ways.
-  * Select **Specify app details below** and enter the details.
-  * Select **Upload a YAML or JSON file** to upload your app [configuration file](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/){: external}.
+1. Open the Kubernetes [dashboard](#cli_dashboard) and click **+ Create**.
+2. Enter your app details in 1 of 2 ways.
+    * Select **Specify app details below** and enter the details.
+    * Select **Upload a YAML or JSON file** to upload your app [configuration file](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/){: external}.
 
-  Need help with your configuration file? Check out this [example YAML file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml){: external}. In this example, a container is deployed from the **ibmliberty** image in the US-South region. Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
-  {: tip}
+    Need help with your configuration file? Check out this [example YAML file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml){: external}. In this example, a container is deployed from the **ibmliberty** image in the US-South region. Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
+    {: tip}
 
-3.  Verify that you successfully deployed your app in one of the following ways.
-  * In the Kubernetes dashboard, click **Deployments**. A list of successful deployments is displayed.
-  * If your app is [publicly available](/docs/containers?topic=containers-cs_network_planning#public_access), navigate to the cluster overview page in your {{site.data.keyword.containerlong}} dashboard. Copy the subdomain, which is located in the cluster summary section and paste it into a browser to view your app.
+3. Verify that you successfully deployed your app in one of the following ways.
+    * In the Kubernetes dashboard, click **Deployments**. A list of successful deployments is displayed.
+    * If your app is [publicly available](/docs/containers?topic=containers-cs_network_planning#public_access), navigate to the cluster overview page in your {{site.data.keyword.containerlong}} dashboard. Copy the subdomain, which is located in the cluster summary section and paste it into a browser to view your app.
 
 <br />
 
@@ -248,7 +246,7 @@ Before you begin:
 
 To deploy your app:
 
-1.  Create a configuration file based on [Kubernetes best practices](https://kubernetes.io/docs/concepts/configuration/overview/){: external}. Generally, a configuration file contains configuration details for each of the resources you are creating in Kubernetes. Your script might include one or more of the following sections:
+1. Create a configuration file based on [Kubernetes best practices](https://kubernetes.io/docs/concepts/configuration/overview/){: external}. Generally, a configuration file contains configuration details for each of the resources you are creating in Kubernetes. Your script might include one or more of the following sections:
 
     -   [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: external}: Defines the creation of pods and replica sets. A pod includes an individual containerized app and replica sets control multiple instances of pods.
 
@@ -258,14 +256,14 @@ To deploy your app:
 
     Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
 
-2.  Run the configuration file in a cluster's context.
+2. Run the configuration file in a cluster's context.
 
     ```
     kubectl apply -f config.yaml
     ```
     {: pre}
 
-3.  If you made your app publicly available by using a nodeport service, a load balancer service, or Ingress, verify that you can access the app.
+3. If you made your app publicly available by using a nodeport service, a load balancer service, or Ingress, verify that you can access the app.
 
 <br />
 
@@ -282,19 +280,19 @@ Before you begin:
 
 To deploy apps to specific worker nodes:
 
-1.  Get the ID of the worker pool that you want to deploy app pods to.
+1. Get the ID of the worker pool that you want to deploy app pods to.
     ```
     ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-2.  List the worker nodes that are in the worker pool, and note one of the **Private IP** addresses.
+2. List the worker nodes that are in the worker pool, and note one of the **Private IP** addresses.
     ```
     ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
     ```
     {: pre}
 
-3.  Describe the worker node. In the **Labels** output, note the worker pool ID label, `ibm-cloud.kubernetes.io/worker-pool-id`.
+3. Describe the worker node. In the **Labels** output, note the worker pool ID label, `ibm-cloud.kubernetes.io/worker-pool-id`.
 
     <p class="tip">The steps in this topic use a worker pool ID to deploy app pods only to worker nodes within that worker pool. To deploy app pods to specific worker nodes by using a different label, note this label instead. For example, to deploy app pods only to worker nodes on a specific private VLAN, use the `privateVLAN=` label.</p>
 
@@ -423,7 +421,7 @@ Before you begin:
 * [Install the NVIDIA GPU operator for your cluster version](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/getting-started.html#operator-install-guide){: external}.
 
 To execute a workload on a GPU machine:
-1.  Create a YAML file. In this example, a `Job` YAML manages batch-like workloads by making a short-lived pod that runs until the command that it is scheduled to complete successfully terminates.
+1. Create a YAML file. In this example, a `Job` YAML manages batch-like workloads by making a short-lived pod that runs until the command that it is scheduled to complete successfully terminates.
 
     For GPU workloads, you must always provide the `resources: limits: nvidia.com/gpu` field in the YAML specification.
     {: note}
@@ -470,7 +468,7 @@ To execute a workload on a GPU machine:
     <tbody>
     <tr>
     <td>Metadata and label names</td>
-    <td>Give a name and a label for the job, and use the same name in both the file's metadata and the `spec template` metadata. For example, `nvidia-smi`.</td>
+    <td>Give a name and a label for the job, and use the same name in both the file's metadata and the <code>spec template</code> metadata. For example, <code>nvidia-smi</code>.</td>
     </tr>
     <tr>
     <td><code>containers.image</code></td>
@@ -486,9 +484,9 @@ To execute a workload on a GPU machine:
     </tr>
     <tr>
     <td><code>resources.limits</code></td>
-    <td>For GPU machines, you must specify the resource limit. The Kubernetes [Device Plug-in ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/) sets the default resource request to match the limit.
+    <td>For GPU machines, you must specify the resource limit. The Kubernetes <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/">Device Plug-in</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> sets the default resource request to match the limit.
     <ul><li>You must specify the key as <code>nvidia.com/gpu</code>.</li>
-    <li>Enter the whole number of GPUs that you request, such as <code>2</code>. <strong>Note</strong>: Container pods do not share GPUs and GPUs cannot be overcommitted. For example, if you have only 1 `mg1c.16x128` machine, then you have only 2 GPUs in that machine and can specify a maximum of `2`.</li></ul></td>
+    <li>Enter the whole number of GPUs that you request, such as <code>2</code>. <strong>Note</strong>: Container pods do not share GPUs and GPUs cannot be overcommitted. For example, if you have only 1 <code>mg1c.16x128</code> machine, then you have only 2 GPUs in that machine and can specify a maximum of <code>2</code>.</li></ul></td>
     </tr>
     <tr>
     <td><code>volumeMounts</code></td>
@@ -500,14 +498,14 @@ To execute a workload on a GPU machine:
     </tr>
     </tbody></table>
 
-2.  Apply the YAML file. For example:
+2. Apply the YAML file. For example:
 
     ```
     kubectl apply -f nvidia-smi.yaml
     ```
     {: pre}
 
-3.  Check the job pod by filtering your pods by the `nvidia-sim` label. Verify that the **STATUS** is **Completed**.
+3. Check the job pod by filtering your pods by the `nvidia-sim` label. Verify that the **STATUS** is **Completed**.
 
     ```
     kubectl get pod -a -l 'name in (nvidia-sim)'
@@ -521,7 +519,7 @@ To execute a workload on a GPU machine:
     ```
     {: screen}
 
-4.  Describe the pod to see how the GPU device plug-in scheduled the pod.
+4. Describe the pod to see how the GPU device plug-in scheduled the pod.
     * In the `Limits` and `Requests` fields, see that the resource limit that you specified matches the request that the device plug-in automatically set.
     * In the events, verify that the pod is assigned to your GPU worker node.
 
@@ -536,9 +534,9 @@ To execute a workload on a GPU machine:
     Namespace:      default
     ...
     Limits:
-     nvidia.com/gpu:  2
+        nvidia.com/gpu:  2
     Requests:
-     nvidia.com/gpu:  2
+        nvidia.com/gpu:  2
     ...
     Events:
     Type    Reason                 Age   From                     Message
@@ -548,7 +546,7 @@ To execute a workload on a GPU machine:
     ```
     {: screen}
 
-5.  To verify that the job used the GPU to compute its workload, you can check the logs. The `[ "/usr/test/nvidia-smi" ]` command from the job queried the GPU device state on the GPU worker node.
+5. To verify that the job used the GPU to compute its workload, you can check the logs. The `[ "/usr/test/nvidia-smi" ]` command from the job queried the GPU device state on the GPU worker node.
 
     ```
     kubectl logs nvidia-sim-ppkd4
@@ -582,6 +580,8 @@ To execute a workload on a GPU machine:
     In this example, you see that both GPUs were used to execute the job because both the GPUs were scheduled in the worker node. If the limit is set to 1, only 1 GPU is shown.
 
 Now that you deployed a test GPU workload, you might want to set up your cluster to run a tool that relies on GPU processing, such as [IBM Maximo Visual Inspection](https://www.ibm.com/products/maximo/remote-monitoring){: external}.
+
+
 
 
 

@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-14"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
 subcollection: containers
 
 ---
-
 
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
@@ -105,8 +104,7 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
+  
 
 # Ingress ALB and Fluentd version changelog
 {: #cluster-add-ons-changelog}
@@ -288,48 +286,48 @@ Refer to the following table for a summary of changes for each build of the Flue
 <td>c7901bf0d1323806d44ce5f92bce5085f9b6c791</td>
 <td>14 Nov 2019</td>
 <td>-</td>
-<td>The Fluentd component is created for your cluster only if you [create a logging configuration to forward logs to a syslog server](/docs/containers?topic=containers-health#configuring). If no logging configurations for syslog exist in your cluster, the Fluentd component is removed automatically. If you do not forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, [automatic updates to Fluentd must be enabled](/docs/containers?topic=containers-update#logging-up).</td>
+<td>The Fluentd component is created for your cluster only if you <a href="/docs/containers?topic=containers-health#configuring">create a logging configuration to forward logs to a syslog server</a>. If no logging configurations for syslog exist in your cluster, the Fluentd component is removed automatically. If you do not forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, <a href="/docs/containers?topic=containers-update#logging-up">automatic updates to Fluentd must be enabled</a>.</td>
 </tr>
 <tr>
 <td>c7901bf0d1323806d44ce5f92bce5085f9b6c791</td>
 <td>06 Nov 2019</td>
-<td>Fixes `LibSass` vulnerabilities for [CVE-2018-19218 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19218).</td>
+<td>Fixes <code>LibSass</code> vulnerabilities for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19218">CVE-2018-19218</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 <td>-</td>
 </tr>
 <tr>
 <td>ee01ba3471cadbb9925269183acd724f4bf0e5bd</td>
 <td>28 Oct 2019</td>
-<td>Fixes Ruby vulnerabilities for [CVE-2019-15845](https://www.ruby-lang.org/en/news/2019/10/01/nul-injection-file-fnmatch-cve-2019-15845/), [CVE-2019-16201](https://www.ruby-lang.org/en/news/2019/10/01/webrick-regexp-digestauth-dos-cve-2019-16201/), [CVE-2019-16254](https://www.ruby-lang.org/en/news/2019/10/01/http-response-splitting-in-webrick-cve-2019-16254/), and [CVE-2019-16255](https://www.ruby-lang.org/en/news/2019/10/01/code-injection-shell-test-cve-2019-16255/).</td>
+<td>Fixes Ruby vulnerabilities for <a href="https://www.ruby-lang.org/en/news/2019/10/01/nul-injection-file-fnmatch-cve-2019-15845/">CVE-2019-15845</a>, <a href="https://www.ruby-lang.org/en/news/2019/10/01/webrick-regexp-digestauth-dos-cve-2019-16201/">CVE-2019-16201</a>, <a href="https://www.ruby-lang.org/en/news/2019/10/01/http-response-splitting-in-webrick-cve-2019-16254/">CVE-2019-16254</a>, and <a href="https://www.ruby-lang.org/en/news/2019/10/01/code-injection-shell-test-cve-2019-16255/">CVE-2019-16255</a>.</td>
 <td>-</td>
 </tr>
 <tr>
 <td>58c604236080f142f35d14fe3b6c4b4484290121</td>
 <td>24 Sep 2019</td>
-<td>Fixes OpenSSL vulnerabilities for [CVE-2019-1547 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547), [CVE-2019-1549 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549), and [CVE-2019-1563 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563).</td>
+<td>Fixes OpenSSL vulnerabilities for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547">CVE-2019-1547</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549">CVE-2019-1549</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563">CVE-2019-1563</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 <td>-</td>
 </tr>
 <tr>
 <td>7c94e41a34ff1b7a56b9163471ff740a9585e053</td>
 <td>18 Sep 2019</td>
-<td>Updates the Kubernetes API version in the Fluentd deployment from `extensions/v1beta1` to `apps/v1`.</td>
+<td>Updates the Kubernetes API version in the Fluentd deployment from <code>extensions/v1beta1</code> to <code>apps/v1</code>.</td>
 <td>-</td>
 </tr>
 <tr>
 <td>e7e944a8279deee0c3a8743e2fa69696ed71b6f5</td>
 <td>15 Aug 2019</td>
-<td>Fixes GNU binary utilities (`binutils`) vulnerabilities for [CVE-2018-6543 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6543), [CVE-2018-6759 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6759), [CVE-2018-6872 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6872), [CVE-2018-7208 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7208), [CVE-2018-7568 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7568), [CVE-2018-7569 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7569), [CVE-2018-7570 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7570), [CVE-2018-7642 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7642), [CVE-2018-7643 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7643), and [CVE-2018-8945 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-8945).</td>
+<td>Fixes GNU binary utilities (<code>binutils</code>) vulnerabilities for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6543">CVE-2018-6543</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6759">CVE-2018-6759</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6872">CVE-2018-6872</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7208">CVE-2018-7208</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7568">CVE-2018-7568</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7569">CVE-2018-7569</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7570">CVE-2018-7570</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7642">CVE-2018-7642</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7643">CVE-2018-7643</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-8945">CVE-2018-8945</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 <td>-</td>
 </tr>
 <tr>
 <td>d24b1afcc004ec9745dc3f9ef1328d3ed4b495f8</td>
 <td>09 Aug 2019</td>
-<td>Fixes `musl libc` vulnerabilities for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>Fixes <code>musl libc</code> vulnerabilities for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697">CVE-2019-14697</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 <td>-</td>
 </tr>
 <tr>
 <td>96f399cdea1c86c63a4ca4e043180f81f3559676</td>
 <td>22 Jul 2019</td>
-<td>Updates Alpine packages for [CVE-2019-8905 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8905), [CVE-2019-8906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8906), and [CVE-2019-8907 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8907).</td>
+<td>Updates Alpine packages for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8905">CVE-2019-8905</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8906">CVE-2019-8906</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8907">CVE-2019-8907</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 <td>-</td>
 </tr>
 <tr>
@@ -347,13 +345,13 @@ Refer to the following table for a summary of changes for each build of the Flue
 <tr>
 <td>60fc11f7bd39d9c6cfed923c598bf6457b3f2037</td>
 <td>10 May 2019</td>
-<td>Updates Ruby packages for [CVE-2019-8320 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8320), [CVE-2019-8321 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8321), [CVE-2019-8322 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8322), [CVE-2019-8323 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8323), [CVE-2019-8324 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8324), and [CVE-2019-8325 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8325).</td>
+<td>Updates Ruby packages for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8320">CVE-2019-8320</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8321">CVE-2019-8321</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8322">CVE-2019-8322</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8323">CVE-2019-8323</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8324">CVE-2019-8324</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8325">CVE-2019-8325</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 <td>-</td>
 </tr>
 <tr>
 <td>91a737f68f7d9e81b5d2223c910aaa7d7f91b76d</td>
 <td>08 May 2019</td>
-<td>Updates Ruby packages for [CVE-2019-8320 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8320), [CVE-2019-8321 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8321), [CVE-2019-8322 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8322), [CVE-2019-8323 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8323), [CVE-2019-8324 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8324), and [CVE-2019-8325 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8325).</td>
+<td>Updates Ruby packages for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8320">CVE-2019-8320</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8321">CVE-2019-8321</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8322">CVE-2019-8322</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8323">CVE-2019-8323</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8324">CVE-2019-8324</a> <img src="../icons/launch-glyph.svg" alt="External link icon">, and <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8325">CVE-2019-8325</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 <td>-</td>
 </tr>
 <tr>
@@ -371,7 +369,7 @@ Refer to the following table for a summary of changes for each build of the Flue
 <tr>
 <td>c85567b75bd7ad1c9428794cd63a8e239c3fd8f5</td>
 <td>18 Mar 2019</td>
-<td>Removes the dependency on cURL for [CVE-2019-8323 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8323).</td>
+<td>Removes the dependency on cURL for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8323">CVE-2019-8323</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 <td>-</td>
 </tr>
 <tr>
@@ -379,7 +377,7 @@ Refer to the following table for a summary of changes for each build of the Flue
 <td>18 Feb 2019</td>
 <td><ul>
 <li>Updates Fluentd to version 1.3.</li>
-<li>Removes Git from the Fluentd image for [CVE-2018-19486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19486).</li>
+<li>Removes Git from the Fluentd image for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19486">CVE-2018-19486</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li>
 </ul></td>
 <td>-</td>
 </tr>
@@ -387,10 +385,12 @@ Refer to the following table for a summary of changes for each build of the Flue
 <td>972865196aefd3324105087878de12c518ed579f</td>
 <td>01 Jan 2019</td>
 <td><ul>
-<li>Enables UTF-8 encoding for the Fluentd `in_tail` plug-in.</li>
+<li>Enables UTF-8 encoding for the Fluentd <code>in_tail</code> plug-in.</li>
 <li>Minor bug fixes.</li>
 </ul></td>
 <td>-</td>
 </tr>
 </tbody>
 </table>
+
+

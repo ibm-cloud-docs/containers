@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Default service settings for Kubernetes components
 {: #service-settings}
@@ -168,7 +166,7 @@ Review the default settings for the `kubelet` worker node component in {{site.da
 | CPU CFS quota | `cpu-cfs-quota-period=20ms` |
 | Feature gates | See [Feature gates](#feature-gates). In addition, <code>CRIContainerLogRotation=true</code> is set. | 
 | File check frequency | `file-check-frequency=5s` |
-| Graceful Node Shutdown | For Kubernetes version 1.21 and later:<ul><li>`shutdownGracePeriod: 30s`</li><li>`shutdownGracePeriodCriticalPods: 15s`</li></ul> |
+| Graceful Node Shutdown | For Kubernetes version 1.21 and later:<ul><li><code>shutdownGracePeriod: 30s</code></li><li><code>shutdownGracePeriodCriticalPods: 15s</code></li></ul> |
 | Kubernetes and system reserves | <ul><li><code>kube-reserved='memory=1051Mi,cpu=36m,pid=2048'</code></li><li><code>system-reserved='memory=1576Mi,cpu=54m,pid=2048'</code></li></ul> |
 | Pod eviction | <ul><li><code>eviction-soft='memory.available<100Mi,nodefs.available<10%,imagefs.available<10%,nodefs.inodesFree<10%,imagefs.inodesFree<10%'</code></li><li><code>eviction-soft-grace-period='memory.available=10m,nodefs.available=10m,imagefs.available=10m,nodefs.inodesFree=10m,imagefs.inodesFree=10m'</code></li><li><code>eviction-hard='memory.available<100Mi,nodefs.available<5%,imagefs.available<5%,nodefs.inodesFree<5%,imagefs.inodesFree<5%'</code></li></ul> | 
 | Pod manifest path | `pod-manifest-path=/etc/kubernetes/manifests` | 
@@ -218,4 +216,6 @@ Review the feature gates that are applied to all master and worker node componen
 | 1.18 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li><li><code>AllowInsecureBackendProxy=false</code></li></ul>|
 {: caption="Overview of feature gates" caption-side="top"}
 {: summary="The rows are read from left to right. The version is in the first column, with the default feature gates in the second column."}
+
+
 

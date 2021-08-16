@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 # Reviewing service, API server, and worker node logs
 {: #health-audit}
 
@@ -127,8 +125,9 @@ Before you set up a Kubernetes API audit configuration, review the following inf
 {: shortdesc}
 
 * To see how the audit webhook collects logs, check out the {{site.data.keyword.containerlong_notm}} [`kube-audit` policy](https://github.com/IBM-Cloud/kube-samples/blob/master/kube-audit/kube-audit-policy.yaml){: external}.
-  You cannot modify the default policy or apply your own custom policy.
-  {: note}
+    You cannot modify the default policy or apply your own custom policy.
+    {: note}
+
 * For Kubernetes audit logs and verbosity, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/){: external}.
 * Only one audit webhook can be created in a cluster.
 * You must have the  [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the {{site.data.keyword.containerlong_notm}} cluster.
@@ -146,118 +145,118 @@ The Kubernetes audit system in your cluster consists of an audit webhook, a log 
 **Before you begin**: Ensure that you reviewed the [considerations and prerequisites](#prereqs-apiserver-logs) and that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/account?topic=account-userroles) for {{site.data.keyword.la_full_notm}}.
 
 1. Target the global container registry for public {{site.data.keyword.cloud_notm}} images.
-  ```
-  ibmcloud cr region-set global
-  ```
-  {: pre}
+    ```
+    ibmcloud cr region-set global
+    ```
+    {: pre}
 
 2. Optional: For more information about the `kube-audit` image, inspect `icr.io/ibm/ibmcloud-kube-audit-to-logdna`.
-  ```
-  ibmcloud cr image-inspect icr.io/ibm/ibmcloud-kube-audit-to-logdna
-  ```
-  {: pre}
+    ```
+    ibmcloud cr image-inspect icr.io/ibm/ibmcloud-kube-audit-to-logdna
+    ```
+    {: pre}
 
 3. Create a configuration file that is named `ibmcloud-kube-audit.yaml`. This configuration file creates a log collection service and a deployment that pulls the `icr.io/ibm/ibmcloud-kube-audit-to-logdna` image to create a log collection container.
-   ```yaml
-   apiVersion: v1
-   kind: List
-   metadata:
-     name: ibmcloud-kube-audit
-   items:
-     - apiVersion: apps/v1
-       kind: Deployment
-       metadata:
-         name: ibmcloud-kube-audit
-         labels:
-           app: ibmcloud-kube-audit
-       spec:
-         replicas: 1
-         selector:
-           matchLabels:
-             app: ibmcloud-kube-audit
-         template:
-           metadata:
-             labels:
-               app: ibmcloud-kube-audit
-           spec:
-             containers:
-               - name: ibmcloud-kube-audit
-                 image: 'icr.io/ibm/ibmcloud-kube-audit-to-logdna:latest'
-                 ports:
-                   - containerPort: 3000
-     - apiVersion: v1
-       kind: Service
-       metadata:
-         name: ibmcloud-kube-audit-service
-         labels:
-           app: ibmcloud-kube-audit
-       spec:
-         selector:
-           app: ibmcloud-kube-audit
-         ports:
-           - protocol: TCP
-             port: 80
-             targetPort: 3000
-         type: ClusterIP
-   ```
-   {: codeblock}
+    ```yaml
+    apiVersion: v1
+    kind: List
+    metadata:
+      name: ibmcloud-kube-audit
+    items:
+      - apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: ibmcloud-kube-audit
+          labels:
+            app: ibmcloud-kube-audit
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              app: ibmcloud-kube-audit
+          template:
+            metadata:
+              labels:
+                app: ibmcloud-kube-audit
+            spec:
+              containers:
+                - name: ibmcloud-kube-audit
+                  image: 'icr.io/ibm/ibmcloud-kube-audit-to-logdna:latest'
+                  ports:
+                    - containerPort: 3000
+      - apiVersion: v1
+        kind: Service
+        metadata:
+          name: ibmcloud-kube-audit-service
+          labels:
+            app: ibmcloud-kube-audit
+        spec:
+          selector:
+            app: ibmcloud-kube-audit
+          ports:
+            - protocol: TCP
+              port: 80
+              targetPort: 3000
+          type: ClusterIP
+    ```
+    {: codeblock}
 
 4. Create the deployment in the `default` namespace of your cluster.
-  ```
-  kubectl create -f ibmcloud-kube-audit.yaml
-  ```
-  {: pre}
+    ```
+    kubectl create -f ibmcloud-kube-audit.yaml
+    ```
+    {: pre}
 
 5. Verify that the `ibmcloud-kube-audit-service` pod has a **STATUS** of `Running`.
-  ```
-  kubectl get pods -l app=ibmcloud-kube-audit
-  ```
-  {: pre}
+    ```
+    kubectl get pods -l app=ibmcloud-kube-audit
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  NAME                                             READY   STATUS             RESTARTS   AGE
-  ibmcloud-kube-audit-c75cb84c5-qtzqd              1/1     Running   0          21s
-  ```
-  {: screen}
+    Example output:
+    ```
+    NAME                                             READY   STATUS             RESTARTS   AGE
+    ibmcloud-kube-audit-c75cb84c5-qtzqd              1/1     Running   0          21s
+    ```
+    {: screen}
 
 6. Verify that the `ibmcloud-kube-audit-service` service is deployed in your cluster. In the output, note the **CLUSTER_IP**.
-  ```
-  kubectl get svc -l app=ibmcloud-kube-audit
-  ```
-  {: pre}
+    ```
+    kubectl get svc -l app=ibmcloud-kube-audit
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  NAME                          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-  ibmcloud-kube-audit-service   ClusterIP   172.21.xxx.xxx   <none>        80/TCP           1m
-  ```
-  {: screen}
+    Example output:
+    ```
+    NAME                          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+    ibmcloud-kube-audit-service   ClusterIP   172.21.xxx.xxx   <none>        80/TCP           1m
+    ```
+    {: screen}
 
 7. Create the audit webhook to collect Kubernetes API server event logs. Add the `http://` prefix to the **CLUSTER_IP**.
-  ```
-  ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server http://172.21.xxx.xxx
-  ```
-  {: pre}
+    ```
+    ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server http://172.21.xxx.xxx
+    ```
+    {: pre}
 
 8. Verify that the audit webhook is created in your cluster.
-  ```
-  ibmcloud ks cluster master audit-webhook get --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks cluster master audit-webhook get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  OK
-  Server:			http://172.21.xxx.xxx
-  ```
-  {: screen}
+    Example output:
+    ```
+    OK
+    Server:            http://172.21.xxx.xxx
+    ```
+    {: screen}
 
 9. Apply the webhook to your Kubernetes API server by refreshing the cluster master. It might take several minutes for the master to refresh.
-  ```
-  ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 10. While the master refreshes, [provision an instance of {{site.data.keyword.la_full_notm}} and deploy a logging agent to every worker node in your cluster](/docs/log-analysis?topic=log-analysis-kube#kube). The logging agent is required to forward logs from inside your cluster to the {{site.data.keyword.la_full_notm}} service. If you already set up logging agents in your cluster, you can skip this step.
 
@@ -275,73 +274,73 @@ Forward audit logs to a resource other than {{site.data.keyword.la_short}} that 
 **Before you begin**: Ensure that you reviewed the [considerations and prerequisites](#prereqs-apiserver-logs).
 
 1. Create a configuration file that is named `kube-audit-remote-private-ip.yaml`. This configuration file creates an endpoint and service for the IP address of the resource that your cluster sends logs to through the {{site.data.keyword.cloud_notm}} private network. Do not include a selector in the service.
-   ```yaml
-   apiVersion: v1
-   kind: Endpoints
-   metadata:
-     name: kube-audit-remote-private-ip
-   subsets:
-     - addresses:
-         - ip: <logging_resource_private_IP>
-       ports:
-         - port: 31100
-   ---
-   apiVersion: v1
-   kind: Service
-   metadata:
-     name: kube-audit-remote-private-ip
-   spec:
-     ports:
-       - protocol: TCP
-         port: 80
-         targetPort: 31100
-   ```
-   {: codeblock}
+    ```yaml
+    apiVersion: v1
+    kind: Endpoints
+    metadata:
+      name: kube-audit-remote-private-ip
+    subsets:
+      - addresses:
+          - ip: <logging_resource_private_IP>
+        ports:
+          - port: 31100
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: kube-audit-remote-private-ip
+    spec:
+      ports:
+        - protocol: TCP
+          port: 80
+          targetPort: 31100
+    ```
+    {: codeblock}
 
 2. Create the endpoint and service.
-  ```
-  kubectl create -f kube-audit-remote-private-ip.yaml
-  ```
-  {: pre}
+    ```
+    kubectl create -f kube-audit-remote-private-ip.yaml
+    ```
+    {: pre}
 
 3. Verify that the `kube-audit-remote-private-ip` service is deployed in your cluster. In the output, note the **CLUSTER-IP**.
-  ```
-  kubectl get svc
-  ```
-  {: pre}
+    ```
+    kubectl get svc
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  NAME                          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-  ...
-  kube-audit-remote-private-ip  ClusterIP   172.21.xxx.xxx   <none>        80/TCP           1m
-  ```
-  {: screen}
+    Example output:
+    ```
+    NAME                          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+    ...
+    kube-audit-remote-private-ip  ClusterIP   172.21.xxx.xxx   <none>        80/TCP           1m
+    ```
+    {: screen}
 
 4. Create the audit webhook to collect Kubernetes API server event logs. Add the `http://` prefix to the `CLUSTER-IP` of the service that you previously retrieved.
-  ```
-  ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server http://172.21.xxx.xxx
-  ```
-  {: pre}
+    ```
+    ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server http://172.21.xxx.xxx
+    ```
+    {: pre}
 
 5. Verify that the audit webhook is created in your cluster.
-  ```
-  ibmcloud ks cluster master audit-webhook get --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks cluster master audit-webhook get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  OK
-  Server:			http://172.21.xxx.xxx
-  ```
-  {: screen}
+    Example output:
+    ```
+    OK
+    Server:            http://172.21.xxx.xxx
+    ```
+    {: screen}
 
 6. Apply the webhook to your Kubernetes API server by refreshing the cluster master. The master might take several minutes to refresh.
-  ```
-  ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 After the master refresh completes, your logs are sent to the private IP address of your logging resource.
 
@@ -364,36 +363,36 @@ For example, you might [use Logstash with Kubernetes](https://kubernetes.io/docs
     ```
     {: pre}
 
-  <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-  <caption>Understanding this command's components</caption>
-  <col width="20%">
-  <thead>
-  <th>Parameter</th>
-  <th>Description</th>
-    </thead>
+    <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
+    <caption>Understanding this command's components</caption>
+    <col width="20%">
+    <thead>
+    <th>Parameter</th>
+    <th>Description</th>
+        </thead>
     <tbody>
-      <tr>
+        <tr>
         <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
         <td>The name or ID of the cluster.</td>
-      </tr>
-      <tr>
+        </tr>
+        <tr>
         <td><code><em>&lt;server_URL&gt;</em></code></td>
         <td>A publicly accessible URL or IP address for the remote logging service that you want to send logs to. Certificates are ignored if you provide an unsecure server URL.</td>
-      </tr>
-      <tr>
+        </tr>
+        <tr>
         <td><code><em>&lt;CA_cert_path&gt;</em></code></td>
         <td>The file path for the CA certificate that is used to verify the remote logging service.</td>
-      </tr>
-      <tr>
+        </tr>
+        <tr>
         <td><code><em>&lt;client_cert_path&gt;</em></code></td>
         <td>The file path for the client certificate that is used to authenticate against the remote logging service.</td>
-      </tr>
-      <tr>
+        </tr>
+        <tr>
         <td><code><em>&lt;client_key_path&gt;</em></code></td>
         <td>The file path for the corresponding client key that is used to connect to the remote logging service.</td>
-      </tr>
+        </tr>
     </tbody>
-  </table>
+    </table>
 
 2. Verify that log forwarding was enabled by viewing the URL for the remote logging service.
 
@@ -405,7 +404,7 @@ For example, you might [use Logstash with Kubernetes](https://kubernetes.io/docs
     Example output:
     ```
     OK
-    Server:			https://8.8.8.8
+    Server:            https://8.8.8.8
     ```
     {: screen}
 
@@ -452,3 +451,5 @@ See [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/d
 {: #audit-service}
 
 By default, {{site.data.keyword.containerlong_notm}} generates and sends events to {{site.data.keyword.at_full_notm}}. To see these events, you must create an {{site.data.keyword.at_full_notm}} instance. For more information, see [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events).
+
+

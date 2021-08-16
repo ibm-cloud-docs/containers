@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,8 +104,7 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
+  
 
 
 # Supported IBM Cloud and third-party integrations
@@ -245,3 +243,5 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 |Cloud databases|You can choose between various {{site.data.keyword.cloud_notm}} database services, such as {{site.data.keyword.composeForMongoDB_full}} or {{site.data.keyword.cloudantfull}} to deploy highly available and scalable database solutions in your cluster. For a list of available cloud databases, see the [{{site.data.keyword.cloud_notm}} catalog](https://cloud.ibm.com/catalog?category=databases){: external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Database services"}
 {: summary="The table shows available services that you can add to your cluster to add database capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
+
+

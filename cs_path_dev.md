@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 <style>
     <!--
@@ -228,96 +226,96 @@ Following a curated learning path to deploy highly available containerized apps 
 {: shortdesc}
 
 <div class=solutionBoxContainer>
-  <div class="solutionBox">
-    <a href = "#dev_cluster">
-      <div>
+    <div class="solutionBox">
+        <a href = "#dev_cluster">
+        <div>
         <img src="images/desktop.svg" alt="Access icon" style="height:50px; border-style: none"/>
         <h2>Access the cluster</h2>
         <p class="bx--type-caption">Begin working with your cluster by setting up the CLI and accessing the cluster.</p>
-      </div>
+        </div>
     </a>
-  </div>
-  <div class="solutionBox">
-    <a href = "#dev_plan">
-      <div>
+    </div>
+    <div class="solutionBox">
+        <a href = "#dev_plan">
+        <div>
         <img src="images/progress.svg" alt="Plan icon" style="height:50px; border-style: none"/>
         <h2>Plan your deployment</h2>
         <p class="bx--type-caption">Plan your app setup for optimal service integration and high availability.</p>
-      </div>
+        </div>
     </a>
-  </div>
-  <div class="solutionBox">
-    <a href = "#dev_develop">
-      <div>
+    </div>
+    <div class="solutionBox">
+        <a href = "#dev_develop">
+        <div>
         <img src="images/design--and--development--02.svg" alt="Develop icon" style="height:50px; border-style: none"/>
         <h2>Develop your app</h2>
         <p class="bx--type-caption">Configure your app and set up your app versioning and delivery pipeline.</p>
-      </div>
+        </div>
     </a>
-  </div>
-  <div class="solutionBox">
-    <a href = "#dev_deploy">
-      <div>
+    </div>
+    <div class="solutionBox">
+        <a href = "#dev_deploy">
+        <div>
         <img src="images/app--developer.svg" alt="Deploy icon" style="height:50px; border-style: none"/>
         <h2>Deploy your app</h2>
         <p class="bx--type-caption">Deploy your app to the cluster by running your app configuration file.</p>
-      </div>
+        </div>
     </a>
-  </div>
-  <div class="solutionBox">
-    <a href = "#dev_test">
-      <div>
+    </div>
+    <div class="solutionBox">
+        <a href = "#dev_test">
+        <div>
         <img src="images/chart--line.svg" alt="Health icon" style="height:50px; border-style: none"/>
         <h2>Test, log, and monitor</h2>
         <p class="bx--type-caption">Conduct app performance testing and gain visibility into your workload health.</p>
-      </div>
+        </div>
     </a>
-  </div>
-  <div class="solutionBox">
-    <a href = "#dev_update">
-      <div>
+    </div>
+    <div class="solutionBox">
+        <a href = "#dev_update">
+        <div>
         <img src="images/networking--04.svg" alt="Update icon" style="height:50px; border-style: none"/>
         <h2>Update your app</h2>
         <p class="bx--type-caption">Perform rolling updates and rollbacks of apps without downtime for your users.</p>
-      </div>
+        </div>
     </a>
-  </div>
-  <div class="solutionBox">
-    <a href = "#dev_secure">
-      <div>
+    </div>
+    <div class="solutionBox">
+        <a href = "#dev_secure">
+        <div>
         <img src="images/lock--alt.svg" alt="Security icon" style="height:50px; border-style: none"/>
         <h2>Secure your app</h2>
         <p class="bx--type-caption">Encrypt data and store confidential information in Kubernetes secrets.</p>
-      </div>
+        </div>
     </a>
-  </div>
-  <div class="solutionBox">
-    <a href = "#dev_expose">
-      <div>
+    </div>
+    <div class="solutionBox">
+        <a href = "#dev_expose">
+        <div>
         <img src="images/global--network.svg" alt="Network icon" style="height:50px; border-style: none"/>
         <h2>Expose your app</h2>
         <p class="bx--type-caption">Expose an app to users on the internet or on a private network only.</p>
-      </div>
+        </div>
     </a>
-  </div>
-  <div class="solutionBox">
-    <a href = "#dev_storage">
-      <div>
+    </div>
+    <div class="solutionBox">
+        <a href = "#dev_storage">
+        <div>
         <img src="images/data--storage.svg" alt="Storage icon" style="height:50px; border-style: none"/>
         <h2>Add app storage</h2>
         <p class="bx--type-caption">Plan and add highly available persistent storage for your app data.</p>
-      </div>
+        </div>
     </a>
-  </div>
-  <div class="solutionBox">
-    <a href = "#dev_integrate">
-      <div>
+    </div>
+    <div class="solutionBox">
+        <a href = "#dev_integrate">
+        <div>
         <img src="images/connect.svg" alt="Integrations icon" style="height:50px; border-style: none"/>
         <h2>Add integrations</h2>
         <p class="bx--type-caption">Enhance app capabilities by integrating external and catalog services.</p>
-      </div>
+        </div>
     </a>
-  </div>
+    </div>
 </div>
 
 ## Access the cluster
@@ -352,12 +350,12 @@ Configure your app in a YAML file that declares the configuration of the Kuberne
 {: shortdesc}
 
 1. **Develop your app**:
-  1. Review the [basics of Kubernetes-native app deployments](/docs/containers?topic=containers-plan_deploy#kube-objects).
-  2. Build app containers from [images in public or private image registries](/docs/containers?topic=containers-images).
-  3. Specify your [app requirements in a YAML file](/docs/containers?topic=containers-app#app_yaml), which declares the configuration of the Kubernetes object.
+    1. Review the [basics of Kubernetes-native app deployments](/docs/containers?topic=containers-plan_deploy#kube-objects).
+    2. Build app containers from [images in public or private image registries](/docs/containers?topic=containers-images).
+    3. Specify your [app requirements in a YAML file](/docs/containers?topic=containers-app#app_yaml), which declares the configuration of the Kubernetes object.
 2. **Version your app**:
-  1. To plan customized configurations for more than one environment, such as development, testing, and production environments, [use the Kustomize tool](/docs/containers?topic=containers-app#kustomize) to manage your configuration YAML file.
-  2. If you want to run your app in multiple clusters, public and private environments, or even multiple cloud providers, [package your application to help automate deployments](/docs/containers?topic=containers-plan_deploy#packaging).
+    1. To plan customized configurations for more than one environment, such as development, testing, and production environments, [use the Kustomize tool](/docs/containers?topic=containers-app#kustomize) to manage your configuration YAML file.
+    2. If you want to run your app in multiple clusters, public and private environments, or even multiple cloud providers, [package your application to help automate deployments](/docs/containers?topic=containers-plan_deploy#packaging).
 
 </br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-debug_apps).
 
@@ -390,8 +388,8 @@ In a test environment, deliberately create various non-ideal scenarios, such as 
 
 1. **Test access**: Test access to your app by creating a public or private [NodePort](/docs/containers?topic=containers-nodeport) on your worker nodes.
 2. **Monitoring**:
-  1. Open a [Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard) on your local system to view information about your app resources.
-  2. [Choose a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics), such as {{site.data.keyword.mon_full}}, to gain operational visibility into the performance and health of your apps.
+    1. Open a [Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard) on your local system to view information about your app resources.
+    2. [Choose a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics), such as {{site.data.keyword.mon_full}}, to gain operational visibility into the performance and health of your apps.
 3. **Logging**: [Choose a logging solution](/docs/containers?topic=containers-health#logging_overview), such as {{site.data.keyword.la_full}}, to monitor container logs.
 
 </br>Need help? Check out [Troubleshooting logging and monitoring](/docs/containers?topic=containers-cs_dashboard_graphs).
@@ -406,9 +404,9 @@ Perform rolling updates and rollbacks of apps without downtime for your users.
 
 1. **Update strategy**: [Plan your strategy for keeping your app up-to-date](/docs/containers?topic=containers-update_app#updating_apps).
 2. **Set up updates**:
-  * Add a [rolling update to your deployment file](/docs/containers?topic=containers-update_app#app_rolling)
-  * Perform A/B, canary, and phased rollouts with the [Istio managed add-on](/docs/containers?topic=containers-istio-qs).
-  * Set up [a continuous delivery pipeline for a cluster](/docs/containers?topic=containers-cicd).
+    * Add a [rolling update to your deployment file](/docs/containers?topic=containers-update_app#app_rolling)
+    * Perform A/B, canary, and phased rollouts with the [Istio managed add-on](/docs/containers?topic=containers-istio-qs).
+    * Set up [a continuous delivery pipeline for a cluster](/docs/containers?topic=containers-cicd).
 3. **Scaling**: Enable [horizontal pod autoscaling](/docs/containers?topic=containers-update_app#app_scaling) to automatically increase or decrease the number of instances of your apps based on CPU.
 
 <br />
@@ -421,9 +419,9 @@ Use Kubernetes secrets to store confidential information, such as credentials or
 
 
 1. **Secrets**:
-  1. Store personal or sensitive information in [Kubernetes secrets](/docs/containers?topic=containers-security#pi) that your app can access.
-  2. [Encrypt secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect).
-  3. [Verify that secrets are encrypted](/docs/containers?topic=containers-encryption#verify_kms).
+    1. Store personal or sensitive information in [Kubernetes secrets](/docs/containers?topic=containers-security#pi) that your app can access.
+    2. [Encrypt secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect).
+    3. [Verify that secrets are encrypted](/docs/containers?topic=containers-encryption#verify_kms).
 2. **Pod-to-pod traffic**: [Enable mTLS encryption for traffic between microservices within an Istio service mesh](/docs/containers?topic=containers-istio-mesh#mtls).
 
 <br />
@@ -435,16 +433,16 @@ Publicly expose an app in your cluster to the internet or privately expose an ap
 {: shortdesc}
 
 1. **Plan service discovery**:
-  1. Understand the [basics of Kubernetes service discovery](/docs/containers?topic=containers-plan_deploy#service_discovery).
-  2. [Choose an app exposure service](/docs/containers?topic=containers-cs_network_planning) that fits your requirements for incoming traffic to the app.
+    1. Understand the [basics of Kubernetes service discovery](/docs/containers?topic=containers-plan_deploy#service_discovery).
+    2. [Choose an app exposure service](/docs/containers?topic=containers-cs_network_planning) that fits your requirements for incoming traffic to the app.
 2. **Expose your app**:
-  * Load balancers:
-    * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
+    * Load balancers:
+        * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
         1. Create an [NLB 1.0](/docs/containers?topic=containers-loadbalancer) or [NLB 2.0](/docs/containers?topic=containers-loadbalancer-v2).
         2. [Register a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname) for the NLB.
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters: Set up a [VPC load balancer](/docs/containers?topic=containers-vpc-lbaas).
 
-  * Ingress: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress-types#alb-comm-create) or the [private network](/docs/containers?topic=containers-ingress-types#alb-comm-create-private).
+    * Ingress: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress-types#alb-comm-create) or the [private network](/docs/containers?topic=containers-ingress-types#alb-comm-create-private).
 
 </br>Need help? Check out [Troubleshooting Ingress](/docs/containers?topic=containers-ingress-debug) and [Troubleshooting load balancers](/docs/containers?topic=containers-cs_loadbalancer_fails).
 
@@ -468,12 +466,14 @@ Enhance app capabilities by integrating various external services and catalog se
 {: shortdesc}
 
 1. **Review supported integrations**:
-  * [All supported integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations)
-  * [{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-service-partners)
-  * [{{site.data.keyword.cloud_notm}} services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations)
+    * [All supported integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations)
+    * [{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-service-partners)
+    * [{{site.data.keyword.cloud_notm}} services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations)
 2. **Add services to your cluster**: Ask your cluster administrator to [add the integration to your cluster](/docs/containers?topic=containers-learning-path-admin#admin_integrate).
 3. **Access services from your app**: Ensure that your app can access the service. For example, to access an IBM Cloud service instance from your app, you must [make the service credentials that are stored in the Kubernetes secret available to your app](/docs/containers?topic=containers-service-binding#adding_app).
 
 </br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-debug_worker_nodes).
+
+
 
 
