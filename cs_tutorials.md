@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-16"
 
 keywords: kubernetes, iks
 
@@ -131,7 +131,7 @@ In this tutorial, you work for a public relations (PR) firm and complete a serie
 
 The following diagram provides an overview of what you set up in this tutorial.
 
-<img src="images/tutorial_ov.png" width="500" alt="Create a cluster and deploy a {{site.data.keyword.watson}} app overview diagram" style="width:500px; border-style: none"/>
+![Create a cluster and deploy a {{site.data.keyword.watson}} app overview diagram](images/tutorial_ov.png "Title text that shows on hover here"){: caption="Figure 1. Create a cluster and deploy a {{site.data.keyword.watson}} app overview diagram" caption-side="bottom"}
 
 ## Audience
 {: #tutorials_audience}
@@ -185,6 +185,7 @@ Because it can take a few minutes to provision, create your cluster before you s
     {: pre}
 
     The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as **kubernetes-service**, and the {{site.data.keyword.registrylong_notm}} plug-in is displayed in the results as **container-registry**.
+    
 6. Set up your own private image repository in {{site.data.keyword.registrylong_notm}} to securely store and share Docker images with all cluster users. A private image repository in {{site.data.keyword.cloud_notm}} is identified by a namespace. The namespace is used to create a unique URL to your image repository that developers can use to access private Docker images.
     Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
@@ -222,7 +223,7 @@ Because it can take a few minutes to provision, create your cluster before you s
         ```
         {: pre}
 
-        Example output:
+        **Example output**
         ```
         <cluster_name>/<cluster_ID>
         ```
@@ -255,7 +256,8 @@ With {{site.data.keyword.cloud_notm}} services, you can take advantage of alread
     ```
     {: pre}
 
-    Example output:
+    **Example output**
+    
     ```
     ibmcloud ks cluster service bind pr_firm_cluster default mytoneanalyzer
     Binding service instance to namespace...
@@ -272,7 +274,7 @@ With {{site.data.keyword.cloud_notm}} services, you can take advantage of alread
     ```
     {: pre}
 
-    Example output:
+    **Example output**
 
     ```
     NAME                       TYPE                                  DATA      AGE
@@ -352,7 +354,7 @@ To deploy the app:
     ```
     {: pre}
 
-    Example output:
+    **Example output**
     ```
     deployment "hello-world-deployment" created
     ```
@@ -365,45 +367,24 @@ To deploy the app:
     ```
     {: pre}
 
-    Example output:
+    **Example output**
+    
     ```
     service "hello-world-service" exposed
     ```
     {: screen}
+    
+    | option             | Description      | 
+    |--------------------|------------------|
+    | `expose` | Expose a resource as a Kubernetes service and make it publicly available to users. | 
+    | `deployment/*<hello-world-deployment>*` | The resource type and the name of the resource to expose with this service. |
+    | `--name=*<hello-world-service>*` | The name of the service. |
+    | `--port=*<8080>*` | The port on which the service serves. |
+    | `--type=NodePort` | The service type to create. |
+    | `--target-port=*<8080>*` | The port to which the service directs traffic. In this instance, the target-port is the same as the port, but other apps you create might differ. |
+    {: caption="Table 1. More about the expose option" caption-side="top"}
+    {: summary="The rows are read from left to right, with the command `expose` options in column one and the description in column two."}
 
-    <table summary="Information about the expose command parameters.">
-    <caption>More about the expose parameters</caption>
-    <thead>
-    <col width="25%">
-    <th>Parameter</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>expose</code></td>
-    <td>Expose a resource as a Kubernetes service and make it publicly available to users.</td>
-    </tr>
-    <tr>
-    <td><code>deployment/<em>&lt;hello-world-deployment&gt;</em></code></td>
-    <td>The resource type and the name of the resource to expose with this service.</td>
-    </tr>
-    <tr>
-    <td><code>--name=<em>&lt;hello-world-service&gt;</em></code></td>
-    <td>The name of the service.</td>
-    </tr>
-    <tr>
-    <td><code>--port=<em>&lt;8080&gt;</em></code></td>
-    <td>The port on which the service serves.</td>
-    </tr>
-    <tr>
-    <td><code>--type=NodePort</code></td>
-    <td>The service type to create.</td>
-    </tr>
-    <tr>
-    <td><code>--target-port=<em>&lt;8080&gt;</em></code></td>
-    <td>The port to which the service directs traffic. In this instance, the target-port is the same as the port, but other apps you create might differ.</td>
-    </tr>
-    </tbody></table>
 6. Now that all the deployment work is done, you can test your app in a browser. Get the details to form the URL.
     1. Get information about the service to see which NodePort was assigned.
         ```
@@ -411,7 +392,7 @@ To deploy the app:
         ```
         {: pre}
 
-        Example output:
+        **Example output**
         ```
         Name:                   hello-world-service
         Namespace:              default
@@ -434,7 +415,7 @@ To deploy the app:
         ```
         {: pre}
 
-        Example output:
+        **Example output**
         ```
         ibmcloud ks worker ls --cluster pr_firm_cluster
         Listing cluster workers...
@@ -468,25 +449,28 @@ Too many commands in this lesson? Agreed. How about using a configuration script
 
 Want to delete the resources that you created in this lesson before you move on? When you created the deployment, Kubernetes assigned the deployment a label, `app=hello-world-deployment` (or whatever you named the deployment). Then, when you exposed the deployment, Kubernetes applied the same label to the service that was created. Labels are useful tools for you to organize your Kubernetes resources so that you can apply bulk actions such as `get` or `delete` to them.
 
-    You can check all your resources that have the `app=hello-world-deployment` label.
-    ```
-    kubectl get all -l app=hello-world-deployment
-    ```
-    {: pre}
+You can check all your resources that have the `app=hello-world-deployment` label.
 
-    Then, you can delete all the resources with the label.
-    ```
-    kubectl delete all -l app=hello-world-deployment
-    ```
-    {: pre}
+```
+kubectl get all -l app=hello-world-deployment
+```
+{: pre}
 
-    Example output:
-    ```
-    pod "hello-world-deployment-5c78f9b898-b9klb" deleted
-    service "hello-world-service" deleted
-    deployment.apps "hello-world-deployment" deleted
-    ```
-    {: screen}
+Then, you can delete all the resources with the label.
+
+```
+kubectl delete all -l app=hello-world-deployment
+```
+{: pre}
+
+**Example output**
+
+```
+pod "hello-world-deployment-5c78f9b898-b9klb" deleted
+service "hello-world-service" deleted
+deployment.apps "hello-world-deployment" deleted
+```
+{: screen}
 
 <br />
 
@@ -514,9 +498,10 @@ If you took a break from the last lesson, make sure that you log back in to your
     {: pre}
 
 2. Build, tag, and push the app as an image to your namespace in {{site.data.keyword.registrylong_notm}}. Don't forget the period (`.`) at the end of the command.
+
     ```
     ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:2 .
-        ```
+    ```
     {: pre}
 
     Verify that you see the success message.
@@ -559,13 +544,14 @@ If you took a break from the last lesson, make sure that you log back in to your
         {: codeblock}
 
     4. In the **Service** section, note the `NodePort`. Rather than generating a random NodePort like you did in the previous lesson, you can specify a port in the 30000 - 32767 range. This example uses 30072.
+    
 4. Switch back to the CLI that you used to set your cluster context, and run the configuration script. When the deployment and the service are created, the app is available for the PR firm's users to see.
     ```
     kubectl apply -f healthcheck.yml
     ```
     {: pre}
 
-    Example output:
+    **Example output**
     ```
     deployment "hw-demo-deployment" created
     service "hw-demo-service" created
@@ -593,24 +579,25 @@ If you took a break from the last lesson, make sure that you log back in to your
     }
     ```
     {: screen}
-
+    
 6. Check your pod status to monitor the health of your app in Kubernetes. You can check the status from the CLI or in the Kubernetes dashboard.
-    *   **From the CLI**: Watch what is happening to your pods as they change status.
-        ```
-        kubectl get pods -o wide -w
-        ```
-        {: pre}
+    * **From the CLI**: Watch what is happening to your pods as they change status.
+      
+      ```
+      kubectl get pods -o wide -w
+      ```
+      {: pre}
 
-    *   **From the Kubernetes dashboard**:
-        1. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
-        2. In the **Workloads** tab, you can see the resources that you created. From this tab, you can continually refresh and see that the health check is working. In the **Pods** section, you can see how many times the pods are restarted when      containers in them are re-created. If you happen to catch the following error in the dashboard, this message indicates that the health check caught a problem. Give it a few minutes and refresh again. You see the number of restarts changes for each pod.
+    * **From the Kubernetes dashboard**:
+      1. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
+      2. In the **Workloads** tab, you can see the resources that you created. From this tab, you can continually refresh and see that the health check is working. In the **Pods** section, you can see how many times the pods are restarted when      containers in them are re-created. If you happen to catch the following error in the dashboard, this message indicates that the health check caught a problem. Give it a few minutes and refresh again. You see the number of restarts changes for each pod.
 
-            ```
-            Liveness probe failed: HTTP probe failed with statuscode: 500
-            Back-off restarting failed docker container
-            Error syncing pod, skipping: failed to "StartContainer" for "hw-container" w      CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-d     deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
-            ```
-            {: screen}
+          ```
+          Liveness probe failed: HTTP probe failed with statuscode: 500
+          Back-off restarting failed docker container
+          Error syncing pod, skipping: failed to "StartContainer" for "hw-container" w      CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-d     deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
+          ```
+          {: screen}
 
 Nice, you deployed the second version of the app. You had to use fewer commands, learned how health checks work, and edited a deployment, which is great! The Hello world app passed the test for the PR firm. Now, you can deploy a more useful app for the PR firm to start analyzing press releases.
 
@@ -618,18 +605,18 @@ Nice, you deployed the second version of the app. You had to use fewer commands,
 
 Ready to delete what you created before you continue to the next lesson? This time, you can use the same configuration script to delete both of the resources that you created.
 
-    ```
-    kubectl delete -f healthcheck.yml
-    ```
-    {: pre}
+```
+kubectl delete -f healthcheck.yml
+```
+{: pre}
 
-    Example output:
+**Example output**
 
-    ```
-    deployment "hw-demo-deployment" deleted
-    service "hw-demo-service" deleted
-    ```
-    {: screen}
+```
+deployment "hw-demo-deployment" deleted
+service "hw-demo-service" deleted
+```
+{: screen}
 
 <br />
 
@@ -697,7 +684,7 @@ If you took a break from the last lesson, make sure that you log back in to your
     ```
     {: pre}
 
-    Example output:
+    **Example output**
 
     ```
     Listing images...
@@ -710,13 +697,13 @@ If you took a break from the last lesson, make sure that you log back in to your
 
 4. In the `Lab 3` directory, open the `watson-deployment.yml` file with a text editor. This configuration script includes a deployment and a service for both the `watson` and `watson-talk` components of the app.
     1. Update the details for the image in your registry namespace for both deployments.
-        **watson**:
+        **watson**
         ```
         image: "<region>.icr.io/<namespace>/watson"
         ```
         {: codeblock}
 
-        **watson-talk**:
+        **watson-talk**
         ```
         image: "<region>.icr.io/<namespace>/watson-talk"
         ```
@@ -739,6 +726,7 @@ If you took a break from the last lesson, make sure that you log back in to your
         {: pre}
 
     3. In the watson-talk service section, note the value that is set for the `NodePort`. This example uses 30080.
+    
 5. Run the configuration script.
     ```
     kubectl apply -f watson-deployment.yml
@@ -752,7 +740,7 @@ If you took a break from the last lesson, make sure that you log back in to your
         ```
         {: pre}
 
-        Example output:
+        **Example output**
         ```
         NAME                                 READY     STATUS    RESTARTS  AGE
         watson-pod-4255222204-rdl2f          1/1       Running   0         13h
@@ -766,7 +754,7 @@ If you took a break from the last lesson, make sure that you log back in to your
         ```
         {: pre}
 
-        Example output:
+        **Example output**
         ```
         Volumes:
           service-bind-volume:
@@ -779,7 +767,7 @@ If you took a break from the last lesson, make sure that you log back in to your
         {: codeblock}
 
 7. Open a browser and analyze some text. The format of the URL is `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`.
-    Example:
+    
     ```
     http://169.xx.xxx.xxx:30080/analyze/"Today is a beautiful day"
     ```
@@ -825,6 +813,7 @@ Change the name of the image:
     {: pre}
 
     Depending on your operating system, either a vi editor opens or a text editor opens.
+    
 2. Change the name of the image to `ibmliberty`.
     ```
     spec:
@@ -854,34 +843,32 @@ Good job! You deployed the {{site.data.keyword.watson}} {{site.data.keyword.tone
 
 Ready to delete the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app that you created in your {{site.data.keyword.containerlong_notm}} cluster? You can use the configuration script to delete the resources that you created.
 
-    ```
-    kubectl delete -f watson-deployment.yml
-    ```
-    {: pre}
+```
+kubectl delete -f watson-deployment.yml
+```
+{: pre}
 
-    Example output:
+**Example output**
 
-    ```
-    deployment "watson-pod" deleted
-    deployment "watson-talk-pod" deleted
-    service "watson-service" deleted
-    service "watson-talk-service" deleted
-    ```
-    {: screen}
+```
+deployment "watson-pod" deleted
+deployment "watson-talk-pod" deleted
+service "watson-service" deleted
+service "watson-talk-service" deleted
+```
+{: screen}
 
-    If you do not want to keep the cluster, you can delete that too.
+If you do not want to keep the cluster, you can delete that too.
 
-    ```
-    ibmcloud ks cluster rm --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
+```
+ibmcloud ks cluster rm --cluster <cluster_name_or_ID>
+```
+{: pre}
 
 
 Quiz time! You covered a lot of material, so [make sure that you understand it all](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php){: external}. Don't worry, the quiz is not cumulative!
 {: note}
 
-
-<br />
 
 ## What's next?
 {: #tutorials_next}
