@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-17"
 
 keywords: kubernetes, iks, clusters
 
@@ -438,7 +438,6 @@ Many cluster add-ons, plug-ins, and other third-party extensions use admission c
 
 See [Cluster cannot update because of broken webhook](/docs/containers?topic=containers-webhooks_update).
 
-
 ## Accessing private clusters by using the Wireguard VPN
 {: #access_vpn_containers}
 
@@ -754,5 +753,4 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
     2. On the cluster overview page, go to the **Networking** section and copy the **Ingress subdomain**.
     3. Ping the Ingress subdomain to verify that you can connect to your private Kubernetes cluster.
     4. From the cluster overview page, open the Kubernetes web console. 
-
 
