@@ -262,6 +262,7 @@ Kubernetes Service
     Troubleshooting
         get_help.md
         ts_debug_tool.md
+        cs_states_workers.md
 
         {: .topicgroup}
         Clusters and masters
