@@ -2566,11 +2566,11 @@ subcollection: containers
 * [Normal](/docs/containers?topic=containers-worker-node-state-reference#worker-node-normal)
 * [Provisioned](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioned)
 * [Provisioning](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioning)
-* [Provision pending](/docs/containers?topic=containers-worker-node-state-reference#worker-node-pending)
+* [Provision pending](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-pending)
 * [Provision_failed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-failed)
 * [Reloading](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading)
 * [Reloading_failed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading-failed)
-* [Reload_pending](/docs/containers?topic=containers-worker-node-state-reference#worker-node-pending)
+* [Reload_pending](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reload-pending)
 * [Unknown](/docs/containers?topic=containers-worker-node-state-reference#worker-node-unknown)
 * [Warning](/docs/containers?topic=containers-worker-node-state-reference#worker-node-warning)
 
