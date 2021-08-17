@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-16"
+lastupdated: "2021-08-17"
 
 keywords: kubernetes, iks, odo
 
@@ -285,6 +285,7 @@ You might wonder, how can the microservice be pushed to the cluster without a Do
         odo push
         ```
         {: pre}
+
 4. In a web browser, open the URL of your NodeJS app. You see your app, or if you used the starter kit, a message similar to the following.
     ```
     Hello from Node.js Starter Application!

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-16"
+lastupdated: "2021-08-17"
 
 keywords: kubernetes, iks
 
@@ -247,8 +247,6 @@ Create a Dockerfile that includes your app code and the necessary configurations
     us.icr.io/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
     ```
     {: screen}
-
-
 
 
 ## Deploy a container from your image
