@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-16"
 
 keywords: kubernetes, iks
 
@@ -132,7 +132,7 @@ Create a containerized app from an {{site.data.keyword.cloud_notm}} starter kit 
 - Explore the DevOps tools, such as GitLab or the DevOps delivery pipeline.
 - View deployment information and verify that your app is up and running.
 
-![Starter kit flow diagram](images/starterkit-app.png)
+![Starter kit flow diagram](images/starterkit-app.png ""Starter kit flow diagram){: caption="Figure 1. "Flow diagram for starter kit objectives" caption-side="bottom"}
 
 ## Audience
 {: #audience-starterkit-kube}

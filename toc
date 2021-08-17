@@ -281,6 +281,7 @@ Kubernetes Service
         Worker nodes
             ts-worker/ts-worker-debug.md
             ts-worker/ts-worker-debug-kube-api.md
+            cs_states_workers.md
             ts-worker/ts-worker-common-issues.md
             ts-worker/ts-worker-create-delete.md
             ts-worker/ts-worker-autorebalance.md

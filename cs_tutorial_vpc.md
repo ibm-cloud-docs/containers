@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-16"
 
 keywords: kubernetes, iks
 
@@ -216,7 +216,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         ```
         {: pre}
 
-        Example output:
+        **Example output**
         ```
         Client Version: 1.20.7
         Server Version: 1.20.7+IKS
@@ -298,7 +298,7 @@ To deploy the app:
     ```
     {: pre}
 
-    Example output:
+    **Example output**
 
     ```
     deployment.apps/hello-world-deployment created
@@ -314,46 +314,23 @@ To deploy the app:
     ```
     {: pre}
 
-    Example output:
+    **Example output**
 
     ```
     service/hello-world-service exposed
     ```
     {: screen}
-
-    <table summary=“Information about the expose command parameters. Columns are read left to right, with the first column the command parameter and the second column the description of the parameter.”>
-    <caption>More about the expose parameters</caption>
-    <thead>
-    <col width="25%">
-    <th>Parameter</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>expose</code></td>
-    <td>Expose a Kubernetes resource, such as a deployment, as a Kubernetes service so that users can access the resource by using the IP address of the service.</td>
-    </tr>
-    <tr>
-    <td><code>deployment/<em>&lt;hello-world-deployment&gt;</em></code></td>
-    <td>The resource type and the name of the resource to expose with this service.</td>
-    </tr>
-    <tr>
-    <td><code>--name=<em>&lt;hello-world-service&gt;</em></code></td>
-    <td>The name of the service.</td>
-    </tr>
-    <tr>
-    <td><code>--type=NodePort</code></td>
-    <td>The service type to create. In this lesson, you create a <code>NodePort</code> service. In the following lesson, you create a <code>LoadBalancer</code> service.</td>
-    </tr>
-    <tr>
-    <td><code>--port=<em>&lt;8080&gt;</em></code></td>
-    <td>The port on which the service listens for external network traffic.</td>
-    </tr>
-    <tr>
-    <td><code>--target-port=<em>&lt;8080&gt;</em></code></td>
-    <td>The port that your app listens on and to which the service directs incoming network traffic. In this example, the <code>target-port</code> is the same as the <code>port</code>, but other apps that you create might use a different port.</td>
-    </tr>
-    </tbody></table>
+    
+    | Parameter             | Description   | 
+    |--------------------|------------------|
+    | `expose` | Expose a Kubernetes resource, such as a deployment, as a Kubernetes service so that users can access the resource by using the IP address of the service. | 
+    | `deployment/*<hello-world-deployment>*` | The resource type and the name of the resource to expose with this service. |
+    | `--name=*<hello-world-service>*` | The name of the service. |
+    | `--type=NodePort` | The service type to create. In this lesson, you create a `NodePort` service. In the following lesson, you create a `LoadBalancer` service. |
+    | `--port=*<8080>*` | The port on which the service listens for external network traffic. |
+    | `--target-port=*<8080>*` | The port that your app listens on and to which the service directs incoming network traffic. In this example, the `target-port` is the same as the `port`, but other apps that you create might use a different port. |
+    {: caption="Table 1. Information about the `expose` command options." caption-side="top"}
+    {: summary="Information about the `expose` command options. Columns are read left to right, with the first column the command parameter and the second column the description of the parameter."}
 
 7. Now that all the deployment work is done, you can test your app from within the cluster. Get the details to form the private IP address that you can use to access your app.
     1. Get information about the service to see which NodePort was assigned. The NodePorts are randomly assigned when they are generated with the `expose` command, but within 30000-32767. In this example, the **NodePort** is 30872.
@@ -363,7 +340,7 @@ To deploy the app:
         ```
         {: pre}
 
-        Example output:
+        **Example output**
 
         ```
         Name:                   hello-world-service
@@ -386,7 +363,7 @@ To deploy the app:
         ```
         {: pre}
 
-        Example output:
+        **Example output**
         ```
         NAME                                     READY     STATUS        RESTARTS   AGE
         hello-world-deployment-d99cddb45-lmj2v   1/1       Running       0          2d
@@ -399,7 +376,8 @@ To deploy the app:
         ```
         {: pre}
 
-        Example output:
+        **Example output**
+        
         ```
         Name:               hello-world-deployment-d99cddb45-lmj2v
         Namespace:          default
@@ -428,7 +406,7 @@ To deploy the app:
     ```
     {: pre}
 
-    Example output:
+    **Example output**
     ```
     Connecting to 10.xxx.xx.xxx:30872 (10.xxx.xx.xxx:30872)
     Hello world from hello-world-deployment-d99cddb45-lmj2v! Your app is up and running in a cluster!
@@ -438,7 +416,6 @@ To deploy the app:
 
     To close your pod session, enter `exit`.
 
-<br />
 
 ## Set up a Load Balancer for VPC to expose your app publicly
 {: #vpc_ks_vpc_lb}
@@ -449,7 +426,7 @@ Set up a VPC load balancer to expose your app on the public network.
 
 When you create a Kubernetes `LoadBalancer` service in your cluster, a load balancer for VPC is automatically created in your VPC outside of your cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. The following diagram illustrates how a user accesses an app's service through the load balancer, even though your worker node is connected to only a private subnet.
 
-<img src="images/vpc_tutorial_lesson4_lb.png" width="800" alt="VPC load balancing for a cluster" style="width:600px; border-style: none"/>
+![VPC load balancing for a cluster.](images/vpc_tutorial_lesson4_lb.png "VPC load balancing for a cluster"){: caption="Figure 1. VPC load balancing for a cluster" caption-side="bottom"}
 
 1. Create a Kubernetes `LoadBalancer` service in your cluster to publicly expose the hello world app.
     ```
@@ -457,46 +434,23 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     ```
     {: pre}
 
-    Example output:
+    **Example output**
 
     ```
     service "hw-lb-svc" exposed
     ```
     {: screen}
-
-    <table summary=“Information about the expose command parameters. Columns are read left to right, with the first column the command parameter and the second column the description of the parameter.”>
-    <caption>More about the expose parameters</caption>
-    <thead>
-    <col width="25%">
-    <th>Component</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>expose</code></td>
-    <td>Expose a Kubernetes resource, such as a deployment, as a Kubernetes service so that users can access the resource by using the VPC load balancer hostname.</td>
-    </tr>
-    <tr>
-    <td><code>deployment/<em>&lt;hello-world-deployment&gt;</em></code></td>
-    <td>The resource type and the name of the resource to expose with this service.</td>
-    </tr>
-    <tr>
-    <td><code>--name=<em>&lt;hello-world-service&gt;</em></code></td>
-    <td>The name of the service.</td>
-    </tr>
-    <tr>
-    <td><code>--type=LoadBalancer</code></td>
-    <td>The Kubernetes service type to create. In this lesson, you create a <code>LoadBalancer</code> service.</td>
-    </tr>
-    <tr>
-    <td><code>--port=<em>&lt;8080&gt;</em></code></td>
-    <td>The port on which the service listens for external network traffic.</td>
-    </tr>
-    <tr>
-    <td><code>--target-port=<em>&lt;8080&gt;</em></code></td>
-    <td>The port that your app endpoint listens on and to which the service directs incoming network traffic. In this example, the <code>target-port</code> is the same as the <code>port</code>, but other apps that you create might use a different port.</td>
-    </tr>
-    </tbody></table>
+    
+    | Parameter             | Description   | 
+    |--------------------|------------------|
+    | `expose` | Expose a Kubernetes resource, such as a deployment, as a Kubernetes service so that users can access the resource by using the IP address of the service. | 
+    | `deployment/*<hello-world-deployment>*` | The resource type and the name of the resource to expose with this service. |
+    | `--name=*<hello-world-service>*` | The name of the service. |
+    | `--type=LoadBalancer` | The Kubernetes service type to create. In this lesson, you create a `LoadBalancer` service. |
+    | `--port=*<8080>*` | The port on which the service listens for external network traffic. |
+    | `--target-port=*<8080>*` | The port that your app listens on and to which the service directs incoming network traffic. In this example, the `target-port` is the same as the `port`, but other apps that you create might use a different port. |
+    {: caption="Table 2. Information about the `expose` command options." caption-side="top"}
+    {: summary="Information about the `expose` command options. Columns are read left to right, with the first column the command parameter and the second column the description of the parameter."}
 
 2. Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When you create the Kubernetes `LoadBalancer` service, a VPC load balancer is automatically created for you. The VPC load balancer assigns a hostname to your Kubernetes LoadBalancer service that you can see in the **LoadBalancer Ingress** field of your CLI output.<p class="note">The VPC load balancer takes a few minutes to provision in your VPC. Until the VPC load balancer is ready, you cannot access the Kubernetes `LoadBalancer` service through its hostname.</p>
 
@@ -505,7 +459,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     ```
     {: pre}
 
-    Example CLI output:
+    **Example CLI output**
     ```
     Name:                     hw-lb-svc
     Namespace:                default
@@ -546,19 +500,18 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     ```
     {: screen}
 
-4. Send a request to your app by curling the hostname and port of the Kubernetes `LoadBalancer` service that is assigned by the VPC load balancer that you found in step 2. Example:
+4. Send a request to your app by curling the hostname and port of the Kubernetes `LoadBalancer` service that is assigned by the VPC load balancer that you found in step 2.
     ```
     curl 1234abcd-us-south.lb.appdomain.cloud:8080
     ```
     {: pre}
 
-    Example output:
+    **Example output**
     ```
     Hello world from hello-world-deployment-5fd7787c79-sl9hn! Your app is up and running in a cluster!
     ```
     {: screen}
 
-<br />
 
 ## What's next?
 {: #vpc_ks_next}

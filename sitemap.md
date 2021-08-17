@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-08-16"
+lastupdated: "2021-08-17"
 
 keywords: containers
 subcollection: containers
@@ -2555,6 +2555,24 @@ subcollection: containers
 * [Step 4: Review the infrastructure provider for the worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-rev-infra)
 
 [Debugging worker nodes with Kubernetes API](/docs/containers?topic=containers-debug-kube-nodes)
+
+[Worker node states](/docs/containers?topic=containers-worker-node-state-reference)
+* [Critical](/docs/containers?topic=containers-worker-node-state-reference#worker-node-critical)
+* [Deleting](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleting)
+* [Deleted](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleted)
+* [Deployed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deployed)
+* [Deploying](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploying)
+* [Deploy_failed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploy-failed)
+* [Normal](/docs/containers?topic=containers-worker-node-state-reference#worker-node-normal)
+* [Provisioned](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioned)
+* [Provisioning](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioning)
+* [Provision pending](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-pending)
+* [Provision_failed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-failed)
+* [Reloading](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading)
+* [Reloading_failed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading-failed)
+* [Reload_pending](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reload-pending)
+* [Unknown](/docs/containers?topic=containers-worker-node-state-reference#worker-node-unknown)
+* [Warning](/docs/containers?topic=containers-worker-node-state-reference#worker-node-warning)
 
 [Common issues with worker nodes](/docs/containers?topic=containers-common_worker_nodes_issues)
 * [Account prohibited from ordering](/docs/containers?topic=containers-common_worker_nodes_issues#order-prohibit)

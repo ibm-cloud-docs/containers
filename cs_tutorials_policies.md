@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-16"
 
 keywords: kubernetes, iks
 
@@ -148,7 +148,6 @@ This tutorial is intended for software developers and network administrators who
     - [Any platform access role](/docs/containers?topic=containers-users#checking-perms)
     - [The **Writer** or **Manager** service access role](/docs/containers?topic=containers-users#checking-perms)
 
-<br />
 
 ## Deploy an app and expose it by using an NLB
 {: #lesson1}
@@ -162,9 +161,9 @@ Start by deploying a sample web server app to use throughout the tutorial. The `
 Want to use an Ingress application load balancer (ALB)? Instead of creating an NLB in steps 3 and 4, [create a service for the web server app](/docs/containers?topic=containers-ingress-types#alb-comm-create) and [create an Ingress resource for the web server app](/docs/containers?topic=containers-ingress-types#alb-comm-create). Then get the public IPs of your ALBs by running `ibmcloud ks ingress alb ls --cluster <cluster_name>` and use these IPs throughout the tutorial in place of the `<loadbalancer_IP>.`
 {: tip}
 
-The following image shows how the web server app is exposed to the internet by the public node port and public NLB at the end of Lesson 1:
+The following image shows how the web server app is exposed to the internet by the public node port and public NLB at the end of Lesson 1.
 
-<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="At the end of Lesson 1, the web server app is exposed to the internet by the public node port and public NLB." style="width:450px; border-style: none"/>
+![At the end of Lesson 1, the web server app is exposed to the internet by the public node port and public NLB.](images/cs_tutorial_policies_Lesson1.png "The web server app is exposed to the internet by the public node port and public NLB."){: caption="Figure 1. The web server app is exposed to the internet by the public node port and public NLB." caption-side="bottom"}
 
 1. Deploy the sample web server app. When a connection is made to the web server app, the app responds with the HTTP headers that it received in the connection.
     ```
@@ -178,7 +177,7 @@ The following image shows how the web server app is exposed to the internet by t
     ```
     {: pre}
 
-    Example output:
+    **Example output**
     ```
     NAME                         READY     STATUS    RESTARTS   AGE       IP               NODE
     webserver-855556f688-6dbsn   1/1       Running   0          1m        172.30.xxx.xxx   10.176.48.78
@@ -188,6 +187,7 @@ The following image shows how the web server app is exposed to the internet by t
     {: screen}
 
 3. To expose the app to the public internet, create an NLB 1.0 service configuration file called `webserver-lb.yaml` in a text editor.
+
     ```yaml
     apiVersion: v1
     kind: Service
@@ -221,7 +221,7 @@ The following image shows how the web server app is exposed to the internet by t
         ```
         {: pre}
 
-        Example output:
+        **Example output**
         ```
         NAME           CLUSTER-IP       EXTERNAL-IP        PORT(S)        AGE       SELECTOR
         webserver-lb   172.21.xxx.xxx   169.xx.xxx.xxx     80:31024/TCP   2m        run=webserver
@@ -281,7 +281,7 @@ The following image shows how the web server app is exposed to the internet by t
         ```
         {: pre}
 
-        Example output:
+        **Example output**
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
         kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.20.7_1513*   
@@ -335,7 +335,7 @@ To secure the PR firm's cluster, you must block public access to both the NLB se
 
 The following image shows how traffic is permitted to the NLB but not to node ports at the end of Lesson 2:
 
-<img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="At the end of Lesson 2, the webserver app is exposed to the internet by public NLB only." style="width:425px; border-style: none"/>
+![At the end of Lesson 2, the webserver app is exposed to the internet by public NLB only.](images/cs_tutorial_policies_Lesson2.png "The webserver app is exposed to the internet by public NLB only"){: caption="Figure 2. The webserver app is exposed to the internet by public NLB only." caption-side="bottom"}
 
 1. In a text editor, create a high-order Pre-DNAT policy called `deny-nodeports.yaml` to deny incoming TCP and UDP traffic from any source IP to all node ports.
     ```yaml
@@ -381,7 +381,7 @@ The following image shows how traffic is permitted to the NLB but not to node po
         ```
         {: pre}
 
-    Example output:
+    **Example output**
     ```
     Successfully applied 1 'GlobalNetworkPolicy' resource(s)
     ```
@@ -411,7 +411,7 @@ The following image shows how traffic is permitted to the NLB but not to node po
     ```
     {: pre}
 
-    Example output:
+    **Example output**
     ```
     Hostname: webserver-855556f688-76rkp
     Pod Information:
@@ -450,9 +450,9 @@ Next, you can create and apply Calico policies to allow traffic from only certai
 You now decide to completely lock down traffic to the PR firm's cluster and test access by allowing only your own computer's IP address.
 {: shortdesc}
 
-First, in addition to the node ports, you must block all incoming traffic to the NLB exposing the app. Then, you can create a policy that allows your system's IP address. At the end of Lesson 3, all traffic to the public node ports and NLB is blocked and only traffic from your allowed system IP is allowed:
+First, in addition to the node ports, you must block all incoming traffic to the NLB exposing the app. Then, you can create a policy that allows your system's IP address. At the end of Lesson 3, all traffic to the public node ports and NLB is blocked and only traffic from your allowed system IP is allowed.
 
-<img src="images/cs_tutorial_policies_L3.png" width="500" alt="The webserver app is exposed by public NLB to your system IP only." style="width:550px; border-style: none"/>
+![The webserver app is exposed by public NLB to your system IP only.](images/cs_tutorial_policies_L3.png "The webserver app is exposed by public NLB to your system IP only."){: caption="Figure 3. The webserver app is exposed by public NLB to your system IP only." caption-side="bottom"}
 
 1. In a text editor, create a high-order Pre-DNAT policy called `deny-lb-port-80.yaml` to deny all incoming TCP and UDP traffic from any source IP to the NLB IP address and port. Replace `<loadbalancer_IP>` with the NLB public IP address from your cheat sheet.
 
@@ -576,9 +576,9 @@ At this point, all traffic to the public node ports and NLB is blocked. Only tra
 In the previous lesson, you blocked all traffic and allowed only a few IPs. That scenario works well for testing purposes when you want to limit access to only a few controlled source IP addresses. However, the PR firm has apps that need to be widely available to the public. You need to make sure that all traffic is permitted except for the unusual traffic you are seeing from a few IP addresses. A denylist is useful in a scenario like this one because it can help you prevent an attack from a small set of IP addresses.
 {: shortdesc}
 
-In this lesson, block traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports is blocked, and all traffic to the public NLB is allowed. Only traffic from your specific system IP to the NLB is blocked:
+In this lesson, block traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports is blocked, and all traffic to the public NLB is allowed. Only traffic from your specific system IP to the NLB is blocked.
 
-<img src="images/cs_tutorial_policies_L4.png" width="550" alt="The webserver app is exposed by public NLB to the internet. Only traffic from your system IP is blocked." style="width:550px; border-style: none"/>
+![The webserver app is exposed by public NLB to the internet. Only traffic from your system IP is blocked.](images/cs_tutorial_policies_L4.png "The webserver app is exposed by public NLB to the internet. Only traffic from your system IP is blocked."){: caption="Figure 4. The webserver app is exposed by public NLB to the internet." caption-side="bottom"}
 
 1. Clean up the allowlist policies you created in the previous lesson.
     - Linux:
@@ -610,35 +610,35 @@ In this lesson, block traffic from your own system's source IP address. At the e
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
     metadata:
-        name: blocklist
-      spec:
-    applyOnForward: true
-    preDNAT: true
-    ingress:
-    - action: Deny
-      destination:
-        nets:
-        - <loadbalancer_IP>/32
-        ports:
-        - 80
-      protocol: TCP
-      source:
-        nets:
-        - <client_address>/32
-    - action: Deny
-      destination:
-        nets:
-        - <loadbalancer_IP>/32
-        ports:
-        - 80
-      protocol: UDP
-      source:
-        nets:
-        - <client_address>/32
-    selector: ibm.role=='worker_public'
-    order: 500
-    types:
-    - Ingress
+      name: blocklist
+    spec:
+      applyOnForward: true
+      preDNAT: true
+      ingress:
+      - action: Deny
+        destination:
+          nets:
+          - <loadbalancer_IP>/32
+          ports:
+          - 80
+        protocol: TCP
+        source:
+          nets:
+          - <client_address>/32
+      - action: Deny
+        destination:
+          nets:
+          - <loadbalancer_IP>/32
+          ports:
+          - 80
+        protocol: UDP
+        source:
+          nets:
+          - <client_address>/32
+     selector: ibm.role=='worker_public'
+     order: 500
+     types:
+     - Ingress
     ```
     {: codeblock}
 
@@ -684,34 +684,34 @@ In our example scenario, the PR firm you work for wants you to set up a logging 
     kind: GlobalNetworkPolicy
     metadata:
         name: log-denied-packets
-      spec:
-    applyOnForward: true
-    preDNAT: true
-    ingress:
-    - action: Log
-      destination:
-        nets:
-        - <loadbalancer_IP>/32
-        ports:
-        - 80
-      protocol: TCP
-      source:
-        nets:
-        - <client_address>/32
-    - action: Log
-      destination:
-        nets:
-        - <loadbalancer_IP>/32
-        ports:
-        - 80
-      protocol: UDP
-      source:
-        nets:
-        - <client_address>/32
-    selector: ibm.role=='worker_public'
-    order: 300
-    types:
-    - Ingress
+     spec:
+      applyOnForward: true
+      preDNAT: true
+      ingress:
+      - action: Log
+        destination:
+          nets:
+          - <loadbalancer_IP>/32
+          ports:
+          - 80
+        protocol: TCP
+        source:
+          nets:
+          - <client_address>/32
+      - action: Log
+        destination:
+          nets:
+          - <loadbalancer_IP>/32
+          ports:
+          - 80
+        protocol: UDP
+        source:
+          nets:
+          - <client_address>/32
+      selector: ibm.role=='worker_public'
+      order: 300
+      types:
+      - Ingress
     ```
     {: codeblock}
 
