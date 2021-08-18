@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-08-17"
+lastupdated: "2021-08-18"
 
 keywords: containers
 subcollection: containers
@@ -890,6 +890,8 @@ subcollection: containers
   * [Master states](/docs/containers?topic=containers-health-monitor#states_master)
   * [Worker node states](/docs/containers?topic=containers-health-monitor#states_workers)
 * [Monitoring worker node health in with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
+  * [Understanding the configmap components](/docs/containers?topic=containers-health-monitor#configmap-components)
+  * [Understanding the individual components of health checks](/docs/containers?topic=containers-health-monitor#health-check-components)
 
 [Reviewing service, API server, and worker node logs](/docs/containers?topic=containers-health-audit)
 * [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)
