@@ -131,7 +131,7 @@ In this tutorial, you work for a public relations (PR) firm and complete a serie
 
 The following diagram provides an overview of what you set up in this tutorial.
 
-![Create a cluster and deploy a {{site.data.keyword.watson}} app overview diagram](images/tutorial_ov.png){: caption="Figure 1. Create a cluster and deploy a {{site.data.keyword.watson}} app overview diagram" caption-side="bottom"}
+![Create a cluster and deploy a {{site.data.keyword.watson}} app overview diagram](images/tutorial_ov.png){: caption="Figure 1. Create a cluster and deploy an app overview" caption-side="bottom"}
 
 ## Audience
 {: #tutorials_audience}
