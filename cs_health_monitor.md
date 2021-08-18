@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-17"
+lastupdated: "2021-08-18"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -126,14 +126,13 @@ Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.co
 To avoid conflicts when using metrics services, be sure that clusters across resource groups and regions have unique names.
 {: tip}
 
-<dl>
-    <dt>{{site.data.keyword.mon_full}}</dt>
-    <dd>Gain operational visibility into the performance and health of your apps and your cluster by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/monitoring?topic=monitoring-getting-started). To set up the {{site.data.keyword.mon_short}} agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#monitoring).</dd>
+**{{site.data.keyword.mon_full}}**
+Gain operational visibility into the performance and health of your apps and your cluster by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/monitoring?topic=monitoring-getting-started). To set up the {{site.data.keyword.mon_short}} agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#monitoring).
 
-    <dt>Kubernetes dashboard</dt>
-    <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-deploy_app#cli_dashboard).</dd>
+**Kubernetes dashboard**
+The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-deploy_app#cli_dashboard).
 
-</dl>
+
 
 <br />
 
@@ -350,8 +349,6 @@ The **Master Status** provides details of what operation from the master state i
 
 Review the [Worker node state reference](/docs/containers?topic=containers-worker-node-state-reference).
 
-
-
 ## Monitoring worker node health in with Autorecovery
 {: #autorecovery}
 
@@ -371,14 +368,17 @@ To configure Autorecovery:
 
 1. [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the Helm version 3 client on your local machine.
 
-2. Create a configuration map file that defines your checks in JSON format. For example, the following YAML file defines three checks: an HTTP check and two Kubernetes API server checks. Refer to the tables following the example YAML file for information about the three kinds of checks and information about the individual components of the checks.<p class="tip">*Define each check as a unique key in the `data` section of the configuration map.</p>
+2. Create a configuration map file that defines your checks in JSON format. For example, the following YAML file defines three checks: an HTTP check and two Kubernetes API server checks. Refer to the [component descriptions](#configmap-components) and the [health check component table](#health-check-components) for information about the three kinds of checks and information about the individual components of the checks.
+
+    Define each check as a unique key in the `data` section of the configuration map.
+    {: tip}
 
     ```yaml
     kind: ConfigMap
     apiVersion: v1
     metadata:
       name: ibm-worker-recovery-checks
-      namespace: kube-system
+      namespace: kube-system # The `kube-system` namespace is a constant and cannot be changed.
     data:
       checknode.json: |
         {
@@ -419,104 +419,6 @@ To configure Autorecovery:
     ```
     {: codeblock}
 
-    <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-    <caption>Understanding the configmap components</caption>
-    <thead>
-    <col width="25%">
-    <th>Component</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>name</code></td>
-    <td>The configuration name <code>ibm-worker-recovery-checks</code> is a constant and cannot be changed.</td>
-    </tr>
-    <tr>
-    <td><code>namespace</code></td>
-    <td>The <code>kube-system</code> namespace is a constant and cannot be changed.</td>
-    </tr>
-    <tr>
-    <td><code>checknode.json</code></td>
-    <td>Defines a Kubernetes API node check that checks whether each worker node is in the <code>Ready</code> state. The check for a specific worker node counts as a failure if the worker node is not in the <code>Ready</code> state. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running <code>ibmcloud ks worker reload</code>.<br></br>The node check is enabled until you set the <b>Enabled</b> field to <code>false</code> or remove the check.<p class="note">Reloading is supported only for worker nodes on classic infrastructure.</p></td>
-    </tr>
-    <tr>
-    <td><code>checkpod.json</code></td>
-    <td>
-    Defines a Kubernetes API pod check that checks the total percentage of <code>NotReady</code> pods on a worker node based on the total pods that are assigned to that worker node. The check for a specific worker node counts as a failure if the total percentage of <code>NotReady</code> pods is greater than the defined <code>PodFailureThresholdPercent</code>. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running <code>ibmcloud ks worker reload</code>. For example, the default <code>PodFailureThresholdPercent</code> is 50%. If the percentage of <code>NotReady</code> pods is greater than 50% three consecutive times, the worker node is reloaded. <br></br>By default, pods in all namespaces are checked. To restrict the check to only pods in a specified namespace, add the <code>Namespace</code> field to the check. The pod check is enabled until you set the <b>Enabled</b> field to <code>false</code> or remove the check.<p class="note">Reloading is supported only for worker nodes on classic infrastructure.</p>
-    </td>
-    </tr>
-    <tr>
-    <td><code>checkhttp.json</code></td>
-    <td>Defines an HTTP check that checks if an HTTP server that runs on your worker node is healthy. To use this check, you must deploy an HTTP server on every worker node in your cluster by using a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">daemon set</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. You must implement a health check that is available at the <code>/myhealth</code> path and that can verify whether your HTTP server is healthy. You can define other paths by changing the <code>Route</code> parameter. If the HTTP server is healthy, you must return the HTTP response code that is defined in <code>ExpectedStatus</code>. The HTTP server must be configured to listen on the private IP address of the worker node. You can find the private IP address by running <code>kubectl get nodes</code>.<br></br>
-    For example, consider two nodes in a cluster that have the private IP addresses 10.10.10.1 and 10.10.10.2. In this example, two routes are checked for a 200 HTTP response: <code>http://10.10.10.1:80/myhealth</code> and <code>http://10.10.10.2:80/myhealth</code>.
-    The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is rebooted. This action is equivalent to running <code>ibmcloud ks worker reboot</code>.<br></br>The HTTP check is disabled until you set the <b>Enabled</b> field to <code>true</code>.</td>
-    </tr>
-    </tbody>
-    </table>
-
-    <table summary="The columns are read from left to right. The first column has the component of the check. The second column describes the component.">
-    <caption>Understanding the individual components of checks</caption>
-    <thead>
-    <col width="25%">
-    <th>Component</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>Check</code></td>
-    <td>Enter the type of check that you want Autorecovery to use. <ul><li><code>HTTP</code>: Autorecovery calls HTTP servers that run on each node to determine whether the nodes are running properly.</li><li><code>KUBEAPI</code>: Autorecovery calls the Kubernetes API server and reads the health status data reported by the worker nodes.</li></ul></td>
-    </tr>
-    <tr>
-    <td><code>Resource</code></td>
-    <td>When the check type is <code>KUBEAPI</code>, enter the type of resource that you want Autorecovery to check. Accepted values are <code>NODE</code> or <code>POD</code>.</td>
-    </tr>
-    <tr>
-    <td><code>FailureThreshold</code></td>
-    <td>Enter the threshold for the number of consecutive failed checks. When this threshold is met, Autorecovery triggers the specified corrective action. For example, if the value is 3 and Autorecovery fails a configured check three consecutive times, Autorecovery triggers the corrective action that is associated with the check.</td>
-    </tr>
-    <tr>
-    <td><code>PodFailureThresholdPercent</code></td>
-    <td>When the resource type is <code>POD</code>, enter the threshold for the percentage of pods on a worker node that can be in a <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes"><strong><code>NotReady</code></strong></a> <img src="../icons/launch-glyph.svg" alt="External link icon"> state. This percentage is based on the total number of pods that are scheduled to a worker node. When a check determines that the percentage of unhealthy pods is greater than the threshold, the check counts as one failure.</td>
-    </tr>
-    <tr>
-    <td><code>CorrectiveAction</code></td>
-    <td>Enter the action to run when the failure threshold is met. A corrective action runs only while no other workers are being repaired and when this worker node is not in a cool-off period from a previous action. <ul><li><code>REBOOT</code>: Reboots the worker node.</li><li><code>RELOAD</code>: Reloads all of the necessary configurations for the worker node from a clean OS.</li></ul></td>
-    </tr>
-    <tr>
-    <td><code>CooloffSeconds</code></td>
-    <td>Enter the number of seconds Autorecovery must wait to issue another corrective action for a node that was already issued a corrective action. The cool off period starts at the time a corrective action is issued.</td>
-    </tr>
-    <tr>
-    <td><code>IntervalSeconds</code></td>
-    <td>Enter the number of seconds in between consecutive checks. For example, if the value is 180, Autorecovery runs the check on each node every 3 minutes.</td>
-    </tr>
-    <tr>
-    <td><code>TimeoutSeconds</code></td>
-    <td>Enter the maximum number of seconds that a check call to the database takes before Autorecovery terminates the call operation. The value for <code>TimeoutSeconds</code> must be less than the value for <code>IntervalSeconds</code>.</td>
-    </tr>
-    <tr>
-    <td><code>Port</code></td>
-    <td>When the check type is <code>HTTP</code>, enter the port that the HTTP server must bind to on the worker nodes. This port must be exposed on the IP of every worker node in the cluster. Autorecovery requires a constant port number across all nodes for checking servers. Use <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">daemon sets</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> when you deploy a custom server into a cluster.</td>
-    </tr>
-    <tr>
-    <td><code>ExpectedStatus</code></td>
-    <td>When the check type is <code>HTTP</code>, enter the HTTP server status that you expect to be returned from the check. For example, a value of 200 indicates that you expect an <code>OK</code> response from the server.</td>
-    </tr>
-    <tr>
-    <td><code>Route</code></td>
-    <td>When the check type is <code>HTTP</code>, enter the path that is requested from the HTTP server. This value is typically the metrics path for the server that runs on all of the worker nodes.</td>
-    </tr>
-    <tr>
-    <td><code>Enabled</code></td>
-    <td>Enter <code>true</code> to enable the check or <code>false</code> to disable the check.</td>
-    </tr>
-    <tr>
-    <td><code>Namespace</code></td>
-    <td> Optional: To restrict <code>checkpod.json</code> to checking only pods in one namespace, add the <code>Namespace</code> field and enter the namespace.</td>
-    </tr>
-    </tbody>
-    </table>
-
 3. Create the configuration map in your cluster.
     ```
     kubectl apply -f ibm-worker-recovery-checks.yaml
@@ -546,6 +448,45 @@ To configure Autorecovery:
     helm test ibm-worker-recovery -n kube-system
     ```
     {: pre}
+
+
+### Understanding the configmap components
+{: #configmap-components}
+
+Review the following information on the individual components of health checks.
+{: shortdesc}
+
+- `name`: The configuration name `ibm-worker-recovery-checks` is a constant and cannot be changed.
+- `namespace`: The `kube-system` namespace is a constant and cannot be changed.
+- `checknode.json`: Defines a Kubernetes API node check that checks whether each worker node is in the `Ready` state. The check for a specific worker node counts as a failure if the worker node is not in the `Ready` state. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running `ibmcloud ks worker reload`. The node check is enabled until you set the **Enabled** field to `false` or remove the check. Note that reloading is supported only for worker nodes on classic infrastructure.
+- `checkpod.json`: Defines a Kubernetes API pod check that checks the total percentage of `NotReady` pods on a worker node based on the total pods that are assigned to that worker node. The check for a specific worker node counts as a failure if the total percentage of `NotReady` pods is greater than the defined `PodFailureThresholdPercent`. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running `ibmcloud ks worker reload`. For example, the default `PodFailureThresholdPercent` is 50%. If the percentage of `NotReady` pods is greater than 50% three consecutive times, the worker node is reloaded. The check runs on all namespaces by default. To restrict the check to only pods in a specified namespace, add the `Namespace` field to the check. The pod check is enabled until you set the **Enabled** field to `false` or remove the check. Note that reloading is supported only for worker nodes on classic infrastructure.
+- `checkhttp.json`: Defines an HTTP check that checks if an HTTP server that runs on your worker node is healthy. To use this check, you must deploy an HTTP server on every worker node in your cluster by using a [daemon set](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset). You must implement a health check that is available at the `/myhealth` path and that can verify whether your HTTP server is healthy. You can define other paths by changing the `Route` parameter. If the HTTP server is healthy, you must return the HTTP response code that is defined in `ExpectedStatus`. The HTTP server must be configured to listen on the private IP address of the worker node. You can find the private IP address by running `kubectl get nodes`. For example, consider two nodes in a cluster that have the private IP addresses 10.10.10.1 and 10.10.10.2. In this example, two routes are checked for a 200 HTTP response: `http://10.10.10.1:80/myhealth` and `http://10.10.10.2:80/myhealth`. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is rebooted. This action is equivalent to running `ibmcloud ks worker reboot`. The HTTP check is disabled until you set the **Enabled** field to `true`.
+
+
+### Understanding the individual components of health checks
+{: #health-check-components}
+
+Review the following table for information on the individual components of health checks.
+{: shortdesc}
+
+
+| Component | Description |
+| --- | --- |
+| `Check` | Enter the type of check that you want Autorecovery to use. <br>`HTTP`: Autorecovery calls HTTP servers that run on each node to determine whether the nodes are running properly.<br>`KUBEAPI`: Autorecovery calls the Kubernetes API server and reads the health status data reported by the worker nodes. |
+| `Resource` | When the check type is `KUBEAPI`, enter the type of resource that you want Autorecovery to check. Accepted values are `NODE` or `POD`. |
+| `FailureThreshold` | Enter the threshold for the number of consecutive failed checks. When this threshold is met, Autorecovery triggers the specified corrective action. For example, if the value is 3 and Autorecovery fails a configured check three consecutive times, Autorecovery triggers the corrective action that is associated with the check. |
+|`PodFailureThresholdPercent`| When the resource type is `POD`, enter the threshold for the percentage of pods on a worker node that can be in a [NotReady](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes) state. This percentage is based on the total number of pods that are scheduled to a worker node. When a check determines that the percentage of unhealthy pods is greater than the threshold, the check counts as one failure.|
+|`CorrectiveAction`| Enter the action to run when the failure threshold is met. A corrective action runs only while no other workers are being repaired and when this worker node is not in a cool-off period from a previous action. <br>`REBOOT`: Reboots the worker node.<br>`RELOAD`: Reloads all of the necessary configurations for the worker node from a clean OS.|
+|`CooloffSeconds`| Enter the number of seconds Autorecovery must wait to issue another corrective action for a node that was already issued a corrective action. The cool off period starts at the time a corrective action is issued.|
+|`IntervalSeconds`| Enter the number of seconds in between consecutive checks. For example, if the value is 180, Autorecovery runs the check on each node every 3 minutes.|
+|`TimeoutSeconds`| Enter the maximum number of seconds that a check call to the database takes before Autorecovery terminates the call operation. The value for `TimeoutSeconds` must be less than the value for `IntervalSeconds`.|
+|`Port`| When the check type is `HTTP`, enter the port that the HTTP server must bind to on the worker nodes. This port must be exposed on the IP of every worker node in the cluster. Autorecovery requires a constant port number across all nodes for checking servers. Use [daemon sets](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) when you deploy a custom server into a cluster.|
+|`ExpectedStatus`| When the check type is `HTTP`, enter the HTTP server status that you expect to be returned from the check. For example, a value of 200 indicates that you expect an `OK` response from the server.|
+| `Route`| When the check type is `HTTP`, enter the path that is requested from the HTTP server. This value is typically the metrics path for the server that runs on all of the worker nodes.|
+| `Enabled`| Enter `true` to enable the check or `false` to disable the check.|
+|`Namespace`| Optional: To restrict `checkpod.json` to checking only pods in one namespace, add the `Namespace` field and enter the namespace.|
+{: caption="Health check components"}
+{: summary="The table shows the components of health checks. Rows are to be read from the left to right, with the name of the component in column one, and a description of the component in column two."}
 
 
 

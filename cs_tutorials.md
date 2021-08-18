@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-16"
+lastupdated: "2021-08-17"
 
 keywords: kubernetes, iks
 
@@ -131,7 +131,7 @@ In this tutorial, you work for a public relations (PR) firm and complete a serie
 
 The following diagram provides an overview of what you set up in this tutorial.
 
-![Create a cluster and deploy a {{site.data.keyword.watson}} app overview diagram](images/tutorial_ov.png "Title text that shows on hover here"){: caption="Figure 1. Create a cluster and deploy a {{site.data.keyword.watson}} app overview diagram" caption-side="bottom"}
+![Create a cluster and deploy a {{site.data.keyword.watson}} app overview diagram](images/tutorial_ov.png "Create a cluster and deploy a {{site.data.keyword.watson}} app overview diagram"){: caption="Figure 1. Create a cluster and deploy a {{site.data.keyword.watson}} app overview diagram" caption-side="bottom"}
 
 ## Audience
 {: #tutorials_audience}
@@ -231,7 +231,6 @@ Because it can take a few minutes to provision, create your cluster before you s
 
 Good job! You've successfully installed the CLIs and set up your cluster context for the following lessons. Next, set up your cluster environment and add the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service.
 
-<br />
 
 ## Add an {{site.data.keyword.cloud_notm}} service to your cluster
 {: #cs_cluster_tutorial_lesson2}
@@ -284,7 +283,7 @@ With {{site.data.keyword.cloud_notm}} services, you can take advantage of alread
     ```
     {: screen}
 
-</br>
+
 Great work! Your cluster is configured and your local environment is ready for you to start deploying apps into the cluster.
 
 
@@ -292,7 +291,6 @@ Before you continue with the next lesson, why not test your knowledge and [take 
 {: note}
 
 
-<br />
 
 ## Deploy single instance apps to Kubernetes clusters
 {: #cs_cluster_tutorial_lesson3}
@@ -303,7 +301,7 @@ In the previous lesson, you set up a cluster with one worker node. In this lesso
 
 The components that you deploy by completing this lesson are shown in the following diagram.
 
-![Deployment setup](images/cs_app_tutorial_mz-components1.png)
+![Deploying an app into a pod.](images/cs_app_tutorial_mz-components1.png "Deploying an app into a pod"){: caption="Figure 2. Deploying an app into a pod" caption-side="bottom"}
 
 To deploy the app:
 
@@ -409,6 +407,7 @@ To deploy the app:
         {: screen}
 
         The NodePorts are randomly assigned when they are generated with the `expose` command, but within 30000-32767. In this example, the NodePort is 30872.
+        
     2. Get the public IP address for the worker node in the cluster.
         ```
         ibmcloud ks worker ls --cluster <cluster_name_or_ID>
@@ -483,7 +482,7 @@ In this lesson, you deploy three instances of the Hello World app into a cluster
 
 Higher availability means that user access is divided across the three instances. When too many users are trying to access the same app instance, they might notice slow response times. Multiple instances can mean faster response times for your users. In this lesson, you also learn how health checks and deployment updates can work with Kubernetes. The following diagram includes the components that you deploy by completing this lesson.
 
-![Deployment setup](images/cs_app_tutorial_mz-components2.png)
+![Deploying multiple instances of an app.](images/cs_app_tutorial_mz-components2.png "Deploying multiple instances of an app"){: caption="Figure 3. Deploying multiple instances of an app" caption-side="bottom"}
 
 In the previous lessons, you created your cluster with one worker node and deployed a single instance of an app. In this lesson, you configure a deployment and deploy three instances of the Hello World app. Each instance is deployed in a Kubernetes pod as part of a replica set in the worker node. To make it publicly available, you also create a Kubernetes service.
 
@@ -618,7 +617,6 @@ service "hw-demo-service" deleted
 ```
 {: screen}
 
-<br />
 
 ## Deploy and update the {{site.data.keyword.watson}} Tone Analyzer app
 {: #cs_cluster_tutorial_lesson5}
@@ -629,7 +627,7 @@ In the previous lessons, the apps were deployed as single components in one work
 
 Separating components into different containers ensures that you can update one without affecting the others. Then, you update the app to scale it up with more replicas to make it more highly available. The following diagram includes the components that you deploy by completing this lesson.
 
-![Deployment setup](images/cs_app_tutorial_mz-components3.png)
+![Setting up deployments for each component of your app.](images/cs_app_tutorial_mz-components3.png "Multiple deployments for each component of your app"){: caption="Figure 1. Setting up deployments for each component of your app" caption-side="bottom"}
 
 From the previous tutorial, you have your account and a cluster with one worker node. In this lesson, you create an instance of {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service in your {{site.data.keyword.cloud_notm}} account and configure two deployments, one deployment for each component of the app. Each component is deployed in a Kubernetes pod in the worker node. To make both of those components publicly available, you also create a Kubernetes service for each component.
 

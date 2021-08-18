@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-16"
+lastupdated: "2021-08-17"
 
 keywords: kubernetes, iks
 
@@ -159,7 +159,6 @@ Complete the following prerequisite steps to set up permissions and the command-
 
 5. Make sure that the [`kubectl` version](/docs/containers?topic=containers-cs_cli_install#kubectl) matches the Kubernetes version of your VPC cluster. This tutorial creates a cluster that runs version **1.20.7**.
 
-<br />
 
 ## Create a cluster in VPC
 {: #vpc_ks_create_vpc_cluster}
