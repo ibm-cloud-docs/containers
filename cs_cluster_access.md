@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-17"
+lastupdated: "2021-08-18"
 
 keywords: kubernetes, iks, clusters
 
@@ -441,7 +441,7 @@ See [Cluster cannot update because of broken webhook](/docs/containers?topic=con
 ## Accessing private clusters by using the Wireguard VPN
 {: #access_vpn_containers}
 
-You can use the Wireguard VPN to securely connect to Kubernetes clusters with only a private network connection. Your cluster might run in a private network in {{site.data.keyword.cloud_notm}} or an {{site.data.keyword.satellitelong_notm}} location in another cloud provider or your on-premises data center.
+You can use the Wireguard VPN to securely connect to Kubernetes clusters with only a private network connection. 
 {: shortdesc}
 
 Before you begin, make sure that you have a Kubernetes cluster with a private-only network connection and that the cluster is assigned a private service endpoint.
