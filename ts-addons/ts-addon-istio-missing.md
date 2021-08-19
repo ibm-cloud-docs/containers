@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-14"
+lastupdated: "2021-08-19"
 
 keywords: kubernetes, iks, help
 
@@ -20,15 +20,19 @@ content-type: troubleshoot
 {:app_name: data-hd-keyref="app_name"}
 {:app_secret: data-hd-keyref="app_secret"}
 {:app_url: data-hd-keyref="app_url"}
+{:audio: .audio}
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
+{:c#: .ph data-hd-programlang='c#'}
 {:c#: data-hd-programlang="c#"}
 {:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
+{:curl: #curl .ph data-hd-programlang='curl'}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
 {:dotnet-standard: .ph data-hd-programlang='dotnet-standard'}
 {:download: .download}
+{:external: .external target="_blank"}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
 {:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
@@ -41,20 +45,26 @@ content-type: troubleshoot
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
+{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
+{:middle: .ph data-hd-position='middle'}
+{:navgroup: .navgroup}
 {:new_window: target="_blank"}
-{:note .note}
+{:node: .ph data-hd-programlang='node'}
 {:note: .note}
-{:objectc data-hd-programlang="objectc"}
+{:objectc: .ph data-hd-programlang='Objective C'}
+{:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
+{:php: .ph data-hd-programlang='PHP'}
 {:php: data-hd-programlang="php"}
 {:pre: .pre}
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
 {:ruby: .ph data-hd-programlang='ruby'}
@@ -72,8 +82,10 @@ content-type: troubleshoot
 {:shortdesc: .shortdesc}
 {:space_name: data-hd-keyref="space_name"}
 {:step: data-tutorial-type='step'}
+{:step: data-tutorial-type='step'} 
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -81,6 +93,7 @@ content-type: troubleshoot
 {:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
+{:topicgroup: .topicgroup}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
@@ -98,39 +111,45 @@ content-type: troubleshoot
 {: #istio_control_plane}
 
 **Infrastructure provider**:
-  * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
+    * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+    * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
-{: tsSymptoms}
+
 One or more of the Istio control plane components, such as `istiod`, does not exist in your cluster.
+{: tsSymptoms}
 
+Review the following possible causes:
 {: tsCauses}
+
 * You deleted one of the Istio deployments that is installed in your cluster Istio managed add-on.
 * You changed the default `IstioOperator` (IOP) resource. When you enable the managed Istio add-on, you cannot use `IstioOperator` (`iop`) resources to customize the Istio control plane installation. Only the `IstioOperator` resources that are managed by IBM for the Istio control plane are supported. Changing the control plane settings might result in an unsupported control plane state. If you create an `IstioOperator` resource for custom gateways in your Istio data plane, you are responsible for managing those resources.
 
-{: tsResolve}
+
 To verify the control plane components installation:
+{: tsResolve}
 
 1. Check the values of any customizations that you specified in the customization configmap. For example, if the value of the `istio-components-pilot-requests-cpu` setting is too high, control plane components might not be scheduled.
-  ```
-  kubectl describe cm managed-istio-custom -n ibm-operators
-  ```sh
-  {: pre}
+    ```
+    kubectl describe cm managed-istio-custom -n ibm-operators
+    ```sh
+    {: pre}
 
 2. Check the logs of the Istio operator. If any logs indicate that the operator is failing to reconcile your customization settings, verify your settings for the [customized Istio installation](/docs/containers?topic=containers-istio#customize) again.
-  ```
-  kubectl logs -n ibm-operators -l name=managed-istio-operator
-  ```
-  {: pre}
+    ```
+    kubectl logs -n ibm-operators -l name=managed-istio-operator
+    ```
+    {: pre}
 
 3. Optional: To refresh your `managed-istio-custom` configmap resource, delete the configmap from your cluster. After about 5 minutes, a default configmap that contains the original installation settings is created in your cluster. The Istio operator reconciles the installation of Istio to the original add-on settings, including the core components of the Istio control plane.
-  ```sh
-  kubectl delete cm managed-istio-custom -n ibm-operators
-  ```
-  {: pre}
+    ```sh
+    kubectl delete cm managed-istio-custom -n ibm-operators
+    ```
+    {: pre}
 
 4. If Istio control plane components or other Istio resources are still unavailable, refresh the cluster master.
-  ```sh
-  ibmcloud ks cluster master refresh -c <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```sh
+    ibmcloud ks cluster master refresh -c <cluster_name_or_ID>
+    ```
+    {: pre}
+
+
