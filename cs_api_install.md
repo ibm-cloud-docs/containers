@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-14"
+lastupdated: "2021-08-20"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -403,7 +403,7 @@ You can also use the [API swagger JSON file](https://containers.cloud.ibm.com/gl
         <tbody>
         <tr>
         <td>Header</td>
-        <td><li><code>Authorization: bearer <iam_token></code></td>
+        <td><li><code>Authorization: bearer &lt;iam_token&gt;</code></td>
         </tr>
         </tbody>
         </table>
@@ -422,7 +422,7 @@ You can also use the [API swagger JSON file](https://containers.cloud.ibm.com/gl
         <tbody>
         <tr>
         <td>Header</td>
-        <td><code>Authorization</code>: Your {{site.data.keyword.cloud_notm}} IAM access token (<code>bearer <iam_token></code>).</td>
+        <td><code>Authorization</code>: Your {{site.data.keyword.cloud_notm}} IAM access token (<code>bearer &lt;iam_token&gt;</code>).</td>
         </tr>
         </tbody>
         </table>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-14"
+lastupdated: "2021-08-20"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -920,21 +920,21 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
     Labels:       <none>
     Annotations:  <none>
 
-  Data
-  ====
-  repo_name:
-  ----
-  us.icr.io
-  service_k8s_ns:
-  ----
-  default
-  inventory:
-  ----
-  10.XXX.XX.XX:22 ansible_user=root ansible_connection=ssh
-  clusterdns_setup:
-  ----
-  true
-  Events:  <none>
+    Data
+    ====
+    repo_name:
+    ----
+    us.icr.io
+    service_k8s_ns:
+    ----
+    default
+    inventory:
+    ----
+    10.XXX.XX.XX:22 ansible_user=root ansible_connection=ssh
+    clusterdns_setup:
+    ----
+    true
+    Events:  <none>
     ```
     {: screen}
 
