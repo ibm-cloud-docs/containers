@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-18"
+lastupdated: "2021-08-23"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -239,77 +239,8 @@ To view information about a specific cluster, such as its zones, service endpoin
 
 You can review information about the overall cluster, the IBM-managed master, and your worker nodes. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](/docs/containers?topic=containers-debug_clusters).
 
-### Cluster states
-{: #states_cluster}
-
-You can view the current cluster state by running the `ibmcloud ks cluster ls` command and locating the **State** field.
-{: shortdesc}
-
-    <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
-    <caption>Cluster states</caption>
-        <thead>
-        <th>Cluster state</th>
-        <th>Description</th>
-        </thead>
-        <tbody>
-    <tr>
-        <td><code>Aborted</code></td>
-        <td>The deletion of the cluster is requested by the user before the Kubernetes master is deployed. After the deletion of the cluster is completed, the cluster is removed from your dashboard. If your cluster is stuck in this state for a long time, open an <a href="/docs/containers?topic=containers-get-help">{{site.data.keyword.cloud_notm}} support case</a>.</td>
-        </tr>
-        <tr>
-            <td><code>Critical</code></td>
-            <td>The Kubernetes master cannot be reached or all worker nodes in the cluster are down. If you enabled {{site.data.keyword.keymanagementservicelong_notm}} in your cluster, the {{site.data.keyword.keymanagementserviceshort}} container might fail to encrypt or decrypt your cluster secrets. If so, you can view an error with more information when you run <code>kubectl get secrets</code>.</td>
-        </tr>
-        <tr>
-            <td><code>Delete failed</code></td>
-            <td>The Kubernetes master or at least one worker node cannot be deleted. List worker nodes by running <code>ibmcloud ks worker ls --cluster <cluster_name_or_ID></code>. If worker nodes are listed, see <a href="/docs/containers?topic=containers-worker_infra_errors">Unable to create or delete worker nodes</a>. If no workers are listed, open an <a href="/docs/containers?topic=containers-get-help">{{site.data.keyword.cloud_notm}} support case</a>.</td>
-        </tr>
-        <tr>
-            <td><code>Deleted</code></td>
-            <td>The cluster is deleted but not yet removed from your dashboard. If your cluster is stuck in this state for a long time, open an <a href="/docs/containers?topic=containers-get-help">{{site.data.keyword.cloud_notm}} support case</a>. </td>
-        </tr>
-        <tr>
-        <td><code>Deleting</code></td>
-        <td>The cluster is being deleted and cluster infrastructure is being dismantled. You cannot access the cluster.  </td>
-        </tr>
-        <tr>
-            <td><code>Deploy failed</code></td>
-            <td>The deployment of the Kubernetes master could not be completed. You cannot resolve this state. Contact IBM Cloud support by opening an <a href="/docs/containers?topic=containers-get-help">{{site.data.keyword.cloud_notm}} support case</a>.</td>
-        </tr>
-            <tr>
-            <td><code>Deploying</code></td>
-            <td>The Kubernetes master is not fully deployed yet. You cannot access your cluster. Wait until your cluster is fully deployed to review the health of your cluster.</td>
-          </tr>
-          <tr>
-            <td><code>Normal</code></td>
-            <td>All worker nodes in a cluster are up and running. You can access the cluster and deploy apps to the cluster. This state is considered healthy and does not require an action from you.<p class="note">Although the worker nodes might be normal, other infrastructure resources, such as <a href="/docs/containers?topic=containers-coredns_lameduck">networking</a> and <a href="/docs/containers?topic=containers-debug_storage_file">storage</a>, might still need attention. If you just created the cluster, some parts of the cluster that are used by other services such as Ingress secrets or registry image pull secrets, might still be in process.</p></td>
-        </tr>
-          <tr>
-            <td><code>Pending</code></td>
-            <td>The Kubernetes master is deployed. The worker nodes are being provisioned and are not available in the cluster yet. You can access the cluster, but you cannot deploy apps to the cluster.  </td>
-            </tr>
-        <tr>
-            <td><code>Requested</code></td>
-            <td>A request to create the cluster and order the infrastructure for the Kubernetes master and worker nodes is sent. When the deployment of the cluster starts, the cluster state changes to <code>Deploying</code>. If your cluster is stuck in the <code>Requested</code> state for a long time, open an <a href="/docs/containers?topic=containers-get-help">{{site.data.keyword.cloud_notm}} support case</a>. </td>
-        </tr>
-        <tr>
-            <td><code>Updating</code></td>
-            <td>The Kubernetes API server that runs in your Kubernetes master is being updated to a new Kubernetes API version. During the update, you cannot access or change the cluster. Worker nodes, apps, and resources that the user deployed are not modified and continue to run. Wait for the update to complete to review the health of your cluster. </td>
-        </tr>
-        <tr>
-        <td><code>Unsupported</code></td>
-        <td>The <a href="/docs/containers?topic=containers-cs_versions#cs_versions">Kubernetes version</a> that the cluster runs is no longer supported. Your cluster's health is no longer actively monitored or reported. Additionally, you cannot add or reload worker nodes. To continue receiving important security updates and support, you must update your cluster. Review the <a href="/docs/containers?topic=containers-cs_versions#prep-up">version update preparation actions</a>, then <a href="/docs/containers?topic=containers-update#update">update your cluster</a> to a supported Kubernetes version.</td>
-        </tr>
-        <tr>
-            <td><code>Warning</code></td>
-            <td><ul><li>At least one worker node in the cluster is not available, but other worker nodes are available and can take over the workload. Try to <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload">reload</a> the unavailable worker nodes.</li>
-            <li>Your cluster has zero worker nodes, such as if you created a cluster without any worker nodes or manually removed all the worker nodes from the cluster. <a href="/docs/containers?topic=containers-add_workers#resize_pool">Resize your worker pool</a> to add worker nodes to recover from a <code>Warning</code> state, and then <a href="/docs/containers?topic=containers-zero_nodes_calico_failure">update the Calico node entries for your worker nodes</a>.</li>
-            <li>A control plane operation for your cluster failed. View the cluster in the console or run <code>ibmcloud ks cluster get --cluster <cluster_name_or_ID></code> to <a href="/docs/containers?topic=containers-debug_master">check the <strong>Master Status</strong> for further debugging</a>.</li></ul></td>
-        </tr>
-        </tbody>
-        </table>
-
-
+- [Cluster states](/docs/openshift?topic=openshift-cluster-state-reference).
+- [Worker node states](/docs/openshift?topic=openshift-worker-node-state-reference).
 
 ### Master states
 {: #states_master}
@@ -343,11 +274,156 @@ The **Master Status** provides details of what operation from the master state i
 {: summary="Table rows read from left to right, with the master state in column one and a description in column two."}
 
 
+</staging>
 
-### Worker node states
-{: #states_workers}
+## Setting up {{site.data.keyword.mon_full}} alerts
+{: #monitoring-alerts}
 
-Review the [Worker node state reference](/docs/containers?topic=containers-worker-node-state-reference).
+When you set up alerts, make sure to allow your cluster enough time to self-heal. Because Kubernetes has self healing capabilities, configure your alerts only for the issues that arise over time. By observing your cluster over time, you can learn which issues Kubernetes can resolve itself and which issues require alerts to avoid downtime.
+{: shortdesc}
+
+Depending on the size of your cluster, consider setting up alerts on the following levels:
+
+- [Apps](#app-level-alerts)
+- [Worker nodes](#worker-node-level-alerts)
+- [Cluster](#cluster-level-alerts)
+- [Zone](#zone-level-alerts)
+- [Account](#account-level-alerts)
+
+
+
+Set up [autorecovery](#autorecovery) on your worker nodes to enable your cluster to automatically resolve issues.
+{: tip}
+
+
+
+### App level alerts
+{: #app-level-alerts}
+
+Review the following app level metrics and alert thresholds for help setting up app monitoring in your cluster.
+{: shortdesc}
+
+Common app level conditions to monitor include things such as,
+    - Multiple app pods or containers are restarted within 10 minutes.
+    - More than one replica of an app is not running.
+    - More than ten 5XX `HTTP` response codes received within 10 minute time frame.
+    - More than one pod in a namespace is in an unknown state.
+    - More than five pods cannot be scheduled on a worker node (pending state).
+
+The underlying issues for these symptoms include things such as,
+    - One or more worker node is in an unhealthy state.
+    - Worker nodes ran out of CPU, memory, or disk space.
+    - Maximum pod limit per cluster reached.
+    - App itself has an issue.
+
+To set up monitoring for these conditions, configure alerts based on the following {{site.data.keyword.mon_full}} metrics. Note that your alert thresholds might change depending on your cluster configuration.
+
+| Metric | {{site.data.keyword.mon_full}} metric | Alert threshold |
+| --- | --- |
+| Multiple restarts of a pod in a short amount of time. |`kubernetes.pod.restart.count` | Greater than 4 for the last 10 minutes |
+| No running replicas in a replicaset. |`kubernetes.replicaSet.replicas.running` in `kubernetes.deployment.name` | Less than one. |
+| More than 5 pods pending in cluster. |`kubernetes.namespace.pod.status.name` | Status equals `pending` greater than five.|
+| No replicas in a deployment available. |`kubernets.deployment.replicas.available` | Less than one. |
+| Number of pods per node reaching threshold of 110. | Count by `(kube_cluster_name,kube_node_name)(kube_pod_container_info)` Greater than or equal to 100. Note that this query is a promQL query. This alert must be configured in promQL. To set up promQL alerts, you...|
+| Workloads that are in an unknown state. | `(kube_workload_status_unavailable)` | Greater than or equal to one. (PROMQL query!) |
+{: caption="App metrics"}
+{: summary="The table shows the app metrics that you can configure in {{site.data.keyword.mon_full}}. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
+
+
+
+### Worker nodes
+{: #worker-node-level-alerts}
+
+|Metric| {{site.data.keyword.mon_full}} metric | Alert threshold |
+| --- | --- |
+| CPU utilization of the worker node over threshold. | `cpu.used.percent` | Greater than 80% for 1 hour. |
+| CPU utilization of the worker node over threshold. | `cpu.used.percent` | Greater than 65% for 24 hours. |
+| Memory utilization of the worker node over threshold. | `memory.used.percent` | Greater than 80 % for 1 hour. |
+| Memory utilization of the worker node over threshold. | `memory.used.percent` | Greater than 65% for 24 hours. |
+| Nodes with memory pressure exist. | `kubernetes.node.memoryPressure` | Greater than or equal to 1 for 10 minutes. |
+| Amount of memory used over threshold. | `memory.bytes.used` | Greater than `NUMBER_OF_BYBTES`. |
+| Nodes with disk pressure exist. | `kubernetes.node.diskPressure` | Greater than or equal to 1 for 10 minutes. |
+| Nodes without disk space exist. | `kubernetes.nodes.outOfDisk` | Greater than or equal to 1. |
+| Average free disk space. | `fs.free.percent` | Less than 20% for 1 hour. |
+| Kubernetes nodes not ready exist. |kubernetes.node.ready >= 1|
+{: caption="Worker node metrics"}
+{: summary="The table shows worker node metrics that you can configure. Rows are to be read from the left to right, with the name of the metric in column one, and Monitoring parameter in column two, and an example alert threshold in column three."}
+
+#### Resolving worker node alerts
+{: #worker-node-resolve}
+
+In most cases, reloading or rebooting the worker can resolve the issue. However, in some cases you might need add more workers to increase capacity.
+{: shortdesc}
+
+1. Get your worker nodes and review the [state](/docs/openshift?topic=openshift-worker-node-state-reference). 
+    ```
+    {[kubectl get nodes]}
+    ```
+    {: pre}
+
+  1. If all of the worker nodes are **not** in the `Ready` state, [add worker nodes to your cluster](/docs/containers?topic=containers-add_workers&interface=ui).
+
+  1. If all the worker nodes are in the `Ready` state, [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker nodes.
+      1. Describe your worker node and review the **Events** section for common error messages.
+          ```
+          kubectl describe node <node>
+          ```
+          {: pre}
+      
+      1. Cordon the node that isn't `Ready` so that you can start investigating.
+
+      1. Drain the worker node. Review the [Kubernetes documentation to safely drain pods from your worker node](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/).
+          ```
+          kubectl drain <node>
+          ```
+          {: pre}
+
+      1. [Reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker node.
+
+### Zone alerts
+{: #zone-level-alerts}
+
+1. `kubectl edit configmap sysdig-agent -n ibm-observe`.
+1. Add the following section after `k8s_cluster_name: <cluster_name>`:
+    ```yaml
+    k8s_labels_filter:
+      - include: "kubernetes.node.label.kubernetes.io/hostname"
+      - include: "kubernetes.node.label.kubernetes.io/role"
+      - include: "kubernetes.node.label.ibm-cloud.kubernetes.io/zone"
+      - exclude: "*.kubernetes.io/*"
+      - exclude: "*.pod-template-hash"
+      - exclude: "*.pod-template-generation"
+      - exclude: "*.controller-revision-hash"
+      - include: "*"
+     ```
+     {: codeblock}
+
+1. Restart the {{site.data.keyword.mon_full}} pods (remove all and let them restart)
+    1. `kubectl get pods -n ibm-observe`
+    1. `kubectl delete pods sysdig-agent-1111 sysdig-agent-2222 sysdig-agent-3333 -n ibm-observe` 
+    1. Wait about 5 minutes for the pods to come up again and the label to be available in {{site.data.keyword.mon_full}}  
+    1. Verify that the labels now show by opening the {{site.data.keyword.mon_full}} dashboard > Explore > PromQL query > enter `kube_node_labels` in the query field and hit `Run Query`. 
+
+All worker nodes in a zone are reaching capacity threshold of 80% (Solution: Add worker nodes in that zone so that load goes below 70%)
+More than 2 worker nodes in one zone are not ready (label: label_failure_domain_beta_kubernetes_io_zone)
+
+### Cluster alerts
+{: #cluster-level-alerts}
+
+All worker nodes in a region are reaching capacity threshold of 80%.
+More than 50% of all worker nodes are in an unhealthy state
+Reaching maximum number of file and block storage volumes per account (250)
+Reaching maximum number of worker nodes per cluster (500)
+
+### Account alerts
+{: #account-level-alerts}
+
+Max number of clusters per account is reaching limit (100 per region/ infrastructure provider)
+
+
+</staging>
+
+
 
 ## Monitoring worker node health in with Autorecovery
 {: #autorecovery}
