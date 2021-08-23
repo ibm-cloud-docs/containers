@@ -267,6 +267,7 @@ Kubernetes Service
         Clusters and masters
             ts-cluster/ts-cluster-debug.md
             ts-cluster/ts-cluster-master.md
+            cs_states_cluster.md
             ts-cluster/ts-cluster-cli.md
             ts-cluster/ts-cluster-create-delete.md
             ts-cluster/ts-cluster-no-vpc.md

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-14"
+lastupdated: "2021-08-23"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -114,7 +114,7 @@ subcollection: containers
 Modify default ALB settings and add annotations to your Ingress resources for ALBs that run the Kubernetes Ingress image.
 {: shortdesc}
 
-<p class="important">From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains for all clusters in {{site.data.keyword.containerlong_notm}}. Review the following actions that you must make to your Ingress setup.<ul><li>If you currently allow inbound traffic to your classic cluster from the Cloudflare source IP addresses, you must also allow inbound traffic from the [Akamai source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} before 07 July. After the migration completes on 31 July, you can remove the Cloudflare IP address rules.</li><li>The Akamai health check does not support verification of the body of the health check response. Update any custom health check rules that you configured for Cloudflare that use verification of the body of the health check responses.</li><li>Cluster subdomains that were health checked in Cloudflare are now registered in the Akamai DNS as CNAME records. These CNAME records point to an Akamai Global Traffic Management domain that health checks the subdomains. When a client runs a DNS query for a health checked subdomain, a CNAME record is returned to the client, as opposed to Cloudflare, in which an A record was returned. If your client expects an A record for a subdomain that was health checked in Cloudflare, update your logic to accept a CNAME record.</li><li>During the migration, an Akamai Global Traffic Management (GTM) health check was automatically created for any subdomains that had a Cloudflare health check. If you previously created a Cloudflare health check for a subdomain, and you create an Akamai health check for the subdomain after the migration, the two Akamai health checks might conflict. Note that Akamai GTM configurations do not support nested subdomains. In these cases, you can use the `ibmcloud ks nlb-dns monitor disable` command to disable the Akamai health check that the migration automatically configured for your subdomain.</li></ul>For more information, see the [announcement](https://cloud.ibm.com/notifications?selected=1621697674798){: external}.</p>
+<p class="important">From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains for all clusters in {{site.data.keyword.containerlong_notm}}. Review the following actions that you must make to your Ingress setup.<ul><li>If you currently allow inbound traffic to your classic cluster from the Cloudflare source IP addresses, you must also allow inbound traffic from the [Akamai source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} before 07 July. After the migration completes on 31 July, you can remove the Cloudflare IP address rules.</li><li>The Akamai health check does not support verification of the body of the health check response. Update any custom health check rules that you configured for Cloudflare that use verification of the body of the health check responses.</li><li>Cluster subdomains that were health checked in Cloudflare are now registered in the Akamai DNS as CNAME records. These CNAME records point to an Akamai Global Traffic Management domain that health checks the subdomains. When a client runs a DNS query for a health checked subdomain, a CNAME record is returned to the client, as opposed to Cloudflare, in which an A record was returned. If your client expects an A record for a subdomain that was health checked in Cloudflare, update your logic to accept a CNAME record.</li><li>During the migration, an Akamai Global Traffic Management (GTM) health check was automatically created for any subdomains that had a Cloudflare health check. If you previously created a Cloudflare health check for a subdomain, and you create an Akamai health check for the subdomain after the migration, the two Akamai health checks might conflict. Note that Akamai GTM configurations do not support nested subdomains. In these cases, you can use the `ibmcloud ks nlb-dns monitor disable` command to disable the Akamai health check that the migration automatically configured for your subdomain.</li></ul>For more information, see the [announcement](https://cloud.ibm.com/notifications?selected=1621697674798).</p>
 
 ## Customizing routing with annotations
 {: #annotations}
@@ -128,6 +128,7 @@ Kubernetes NGINX annotations are always applied to all service paths in the reso
 {: note}
 
 ### Add server port to host header
+{: #add-sport-hheader}
 
 Add a server port to the client request before the request is forwarded to your back-end app.
 {: shortdesc}
@@ -143,6 +144,7 @@ Kubernetes Ingress field: No equivalent annotation exists. Configure proxying ex
 
 
 ### ALB ID
+{: #alb_id_anno}
 
 Route incoming requests to your apps with a private ALB.
 {: shortdesc}
@@ -178,6 +180,7 @@ Kubernetes Ingress field: See [Adding {{site.data.keyword.appid_short_notm}} aut
 
 
 ### Client request body size
+{: #client-request-bodysize}
 
 Set the maximum size of the body that the client can send as part of a request.
 {: shortdesc}
@@ -205,6 +208,7 @@ proxy-body-size: 200m
 
 
 ### Client response data buffering
+{: #client-response-data-buffering}
 
 Disable or enable the storage of response data on the ALB while the data is sent to the client.
 {: shortdesc}
@@ -225,6 +229,7 @@ nginx.ingress.kubernetes.io/proxy-buffering: "on"
 
 
 ### Custom connect and read timeouts
+{: #custom-connect-read-timeouts}
 
 Set the time that the ALB waits to connect to and read from the back-end app before the back-end app is considered unavailable.
 {: shortdesc}
@@ -255,6 +260,7 @@ nginx.ingress.kubernetes.io/proxy-read-timeout: 62
 
 
 ### Custom error actions
+{: #custom-error-actions}
 
 Indicate custom actions that the ALB can take for specific HTTP errors.
 {: shortdesc}
@@ -278,24 +284,32 @@ Kubernetes Ingress field: See the [`custom-http-errors` documentation](https://k
 
 
 ### Custom HTTP and HTTPS ports
+{: #custom-http-https-ports}
 
 Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress fields:
-* Ingress resource annotation:
-    ```
-    ingress.bluemix.net/custom-port: "protocol=http port=8080;protocol=https port=8443"
-    ```
-    {: screen}
+Previous {{site.data.keyword.containerlong_notm}} Ingress fields
 
-* `ibm-cloud-provider-ingress-cm` configmap field:
-    ```
-    public-ports: "80;443;9443"
-    ```
-    {: screen}
+#### Ingress resource annotation
+{: #ingress-resource-annotation}
 
-Kubernetes Ingress fields:
+```
+ingress.bluemix.net/custom-port: "protocol=http port=8080;protocol=https port=8443"
+```
+{: screen}
+
+#### `ibm-k8s-controller-config` configmap field
+{: #ibm-k8s-configmap-field}
+
+```
+public-ports: "80;443;9443"
+```
+{: screen}
+
+#### Kubernetes Ingress fields
+{: #kube-ingress-fields}
+
 1. `ibm-ingress-deploy-config` configmap [fields](#comm-customize-deploy):
     ```
     httpPort=8080
@@ -307,6 +321,7 @@ Kubernetes Ingress fields:
 
 
 ### Custom request header
+{: #custom-request-header}
 
 Add header information to a client request before forwarding the request to your back-end app.
 {: shortdesc}
@@ -334,6 +349,7 @@ For the `custom-headers` configmap requirements, see [this example](https://gith
 
 
 ### Custom response header
+{: #custom-response-header}
 
 Add header information to a client response before sending it to the client.
 {: shortdesc}
@@ -357,6 +373,7 @@ nginx.ingress.kubernetes.io/configuration-snippet: |
 
 
 ### External services
+{: #external-services-path}
 
 Add path definitions to external services, such as services hosted in IBM Cloud.
 {: shortdesc}
@@ -372,6 +389,7 @@ Kubernetes Ingress field: No equivalent annotation exists. Configure proxying ex
 
 
 ### HTTP redirects to HTTPS
+{: #http-redirects-https}
 
 Convert insecure HTTP client requests to HTTPS.
 {: shortdesc}
@@ -399,6 +417,7 @@ Kubernetes Ingress fields: HTTP redirects to HTTPS by default. To disable:
 
 
 ### HTTP Strict Transport Security
+{: #http-strict-transport-security}
 
 Set the browser to access the domain only by using HTTPS.
 {: shortdesc}
@@ -412,7 +431,7 @@ ingress.bluemix.net/hsts: enabled=true maxAge=31536000 includeSubdomains=true
 
 Kubernetes Ingress fields: HSTS is enabled by default.
 * To add max age and subdomain granularity, see [this NGINX blog](https://www.nginx.com/blog/http-strict-transport-security-hsts-and-nginx/){: external}.
-* To disable, set the `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#hsts){: external}:
+* To disable, set the `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#hsts){: external}.
     ```
     hsts: false
     ```
@@ -420,6 +439,7 @@ Kubernetes Ingress fields: HSTS is enabled by default.
 
 
 ### Keepalive requests
+{: #keepalive-requests}
 
 Set the maximum number of requests that can be served through one keepalive connection.
 {: shortdesc}
@@ -442,6 +462,7 @@ The default value for `keep-alive-requests` in Kubernetes Ingress is `100`, whic
 {: note}
 
 ### Keepalive request timeout
+{: #keepalive-request-timeout}
 
 Set the maximum time that a keepalive connection stays open between the client and the ALB proxy server.
 {: shortdesc}
@@ -462,6 +483,7 @@ keep-alive: 60
 {: screen}
 
 ### Large client header buffers
+{: #large-client-header-buffers}
 
 Set the maximum number and size of buffers that read large client request headers.
 {: shortdesc}
@@ -482,6 +504,7 @@ large-client-header-buffers: 4 8k
 
 
 ### Location modifier
+{: #location-modifier}
 
 Modify the way the ALB matches the request URI against the app path.
 {: shortdesc}
@@ -504,6 +527,7 @@ For more info, see [this blog](https://kubernetes.github.io/ingress-nginx/user-g
 
 
 ### Location snippets
+{: #location-snippets}
 
 Add a custom location block configuration for a service.
 {: shortdesc}
@@ -528,6 +552,7 @@ nginx.ingress.kubernetes.io/configuration-snippet: |
 
 
 ### Mutual authentication
+{: #mutual-authentication}
 
 Configure mutual authentication for the ALB.
 {: shortdesc}
@@ -554,6 +579,7 @@ Note that mutual authentication cannot be applied to custom ports and must be ap
 
 
 ### Proxy buffer size
+{: #proxy-buffer-size}
 
 Configure the size of the proxy buffer that reads the first part of the response.
 {: shortdesc}
@@ -574,6 +600,7 @@ nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
 
 
 ### Proxy buffers
+{: #config-proxy-buffers}
 
 Configure the number and size of proxy buffers for the ALB.
 {: shortdesc}
@@ -595,6 +622,7 @@ nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
 
 
 ### Proxy busy buffers size
+{: #proxy-busy-buffer-size}
 
 Configure the size of proxy buffers that can be busy.
 {: shortdesc}
@@ -610,6 +638,7 @@ Kubernetes Ingress field: No equivalent annotation exists. Configure proxying ex
 
 
 ### Proxy next upstream
+{: #proxy-next-upstream}
 
 Set when the ALB can pass a request to the next upstream server.
 {: shortdesc}
@@ -639,6 +668,7 @@ Kubernetes Ingress fields:
 
 
 ### Rate limiting
+{: #rate-limiting}
 
 Limit the request processing rate and number of connections per a defined key for all or specific services.
 {: shortdesc}
@@ -655,6 +685,7 @@ Kubernetes Ingress field: No directly equivalent annotation exists, but several 
 
 
 ### Response header removal
+{: #response-header-removal}
 
 Remove header information that is included in the client response from the back-end end app before the response is sent to the client.
 {: shortdesc}
@@ -673,6 +704,7 @@ Kubernetes Ingress field: No equivalent annotation exists. Configure response he
 
 
 ### Rewrite paths
+{: #alb-rewrite-paths}
 
 Route incoming network traffic on an ALB domain path to a different path that your back-end app listens on.
 {: shortdesc}
@@ -693,6 +725,7 @@ nginx.ingress.kubernetes.io/rewrite-target: /newpath
 
 
 ### Server snippets
+{: #server-snippets-custom}
 
 Add a custom server block configuration.
 {: shortdesc}
@@ -721,6 +754,7 @@ nginx.ingress.kubernetes.io/server-snippet: |
 
 
 ### Session affinity with cookies
+{: #session-affinity-cookies}
 
 Always route incoming network traffic to the same upstream server by using a sticky cookie.
 {: shortdesc}
@@ -748,6 +782,7 @@ The Kubernetes Ingress controller adds the `Secure` and `HttpOnly` attributes to
 
 
 ### SSL services support
+{: #ssl-services-support}
 
 Allow SSL services support to encrypt traffic to your upstream apps that require HTTPS.
 {: shortdesc}
@@ -772,6 +807,7 @@ nginx.ingress.kubernetes.io/proxy-ssl-verify: true
 
 
 ### TCP ports
+{: #tcp-ports-non-standard}
 
 Access an app via a non-standard TCP port.
 {: shortdesc}
@@ -811,6 +847,7 @@ Kubernetes Ingress fields:
 4. [Modify each ALB service](#comm-customize-deploy) to add the ports.
 
 ### Upstream fail timeout
+{: #upstream-fail-timeout}
 
 Set the amount of time during which the ALB can attempt to connect to the server.
 {: shortdesc}
@@ -826,6 +863,7 @@ Kubernetes Ingress field: Currently, no configuration option for the Kubernetes 
 
 
 ### Upstream keepalive requests
+{: #upstream-keepalive-requests}
 
 Set the maximum number of requests that can be served through one keepalive connection.
 {: shortdesc}
@@ -846,6 +884,7 @@ upstream-keepalive-requests: 32
 
 
 ### Upstream keepalive timeout
+{: #upstream-keepalive-timeout}
 
 Set the maximum time that a keepalive connection stays open between the ALB proxy server and your app's upstream server.
 {: shortdesc}
@@ -866,6 +905,7 @@ upstream-keepalive-timeout: 32
 
 
 ### Upstream max fails
+{: #upstream-max-fails}
 
 Set the maximum number of unsuccessful attempts to communicate with the server.
 {: shortdesc}
@@ -889,16 +929,16 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 
 1. Get the names of the services that expose each ALB.
     * Classic clusters:
-    ```
-    kubectl get svc -n kube-system | grep alb
-    ```
-    {: pre}
+        ```
+        kubectl get svc -n kube-system | grep alb
+        ```
+        {: pre}
 
     * VPC clusters: In the output, look for a service name that is formatted such as `public-crc204dl7w0qf6n6sp7tug`.
-    ```
-    kubectl get svc -n kube-system | grep LoadBalancer
-    ```
-    {: pre}
+        ```
+        kubectl get svc -n kube-system | grep LoadBalancer
+        ```
+        {: pre}
 
 2. Create a configmap to customize the Ingress deployment.
 
@@ -935,23 +975,23 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
         </table>
 
     2. Create the `ibm-ingress-deploy-config` configmap in your cluster.
-    ```
-    kubectl create -f ibm-ingress-deploy-config.yaml
-    ```
-    {: pre}
+        ```
+        kubectl create -f ibm-ingress-deploy-config.yaml
+        ```
+        {: pre}
 
     3. To pick up the changes, update your ALBs. Note that it might take up to 5 minutes for the changes to be applied to your ALBs.
-    ```
-    ibmcloud ks ingress alb update -c <cluster_name_or_ID>
-    ```
-    {: pre}
+        ```
+        ibmcloud ks ingress alb update -c <cluster_name_or_ID>
+        ```
+        {: pre}
 
 3. If you specified non-standard HTTP, HTTPS, or TCP ports, you must open the ports on each ALB service.
     1. For each ALB service that you found in step 1, edit the YAML file.
-    ```
-    kubectl edit svc -n kube-system <alb_svc_name>
-    ```
-    {: pre}
+        ```
+        kubectl edit svc -n kube-system <alb_svc_name>
+        ```
+        {: pre}
 
     2. In the `spec.ports` section, add the ports that you want to open.
         * By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, do not remove them from this file. Any port that is not specified is closed.
@@ -975,7 +1015,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
           port: <port>
           protocol: TCP
           targetPort: <port>
-      ...
+        ...
         ```
         {: screen}
 
@@ -1003,7 +1043,9 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
 
 1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.
 
-    <p class="note">An {{site.data.keyword.appid_short_notm}} instance can be used in only one namespace in your cluster. If you want to configure {{site.data.keyword.appid_short_notm}} for Ingress resources in multiple namespaces, repeat the steps in this section to specify a unique {{site.data.keyword.appid_short_notm}} instance for the Ingress resources in each namespace.</p>
+    An {{site.data.keyword.appid_short_notm}} instance can be used in only one namespace in your cluster. If you want to configure {{site.data.keyword.appid_short_notm}} for Ingress resources in multiple namespaces, repeat the steps in this section to specify a unique {{site.data.keyword.appid_short_notm}} instance for the Ingress resources in each namespace.
+    {: note}
+    
     * To use an existing instance, ensure that the service instance name contains only **lowercase** alphanumeric characters or hyphens (`-`), and doesn't contain spaces. To change the name, select **Rename service** from the more options menu on your service instance details page.
     * To provision a [new {{site.data.keyword.appid_short_notm}} instance](https://cloud.ibm.com/catalog/services/app-id):
         1. Replace the auto-filled **Service name** with your own unique name for the service instance. The service instance name must contain only lowercase alphanumeric characters or hyphens (`-`), and can't contain spaces.
@@ -1053,42 +1095,43 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
         ...
         annotations:
         nginx.ingress.kubernetes.io/auth-url: https://oauth2-<App_ID_service_instance_name>.<namespace_of_Ingress_resource>.svc.cluster.local/oauth2-<App_ID_service_instance_name>/auth
-      ...
+        ...
         ```
         {: codeblock}
 
     2. Choose which tokens to send in the `Authorization` header to your app. For more information about ID and access tokens, see the [{{site.data.keyword.appid_short_notm}} documentation](/docs/appid?topic=appid-tokens){: external}.
         * To send only the `ID Token`, add the `nginx.ingress.kubernetes.io/auth-response-headers: Authorization` annotation.
         * To send only the `Access Token`, add the following information to the `access_by_lua_block{}` in the `configuration-snippet` annotation.
-        ```yaml
-        ...
-        annotations:
-            nginx.ingress.kubernetes.io/configuration-snippet: |
-            auth_request_set $access_token $upstream_http_x_auth_request_access_token;
-            access_by_lua_block {
-                if ngx.var.access_token ~= "" then
-                ngx.req.set_header("Authorization", "Bearer " .. ngx.var.access_token)
-                end
-            }
-        ...
-        ```
-        {: codeblock}
+        
+            ```yaml
+            ...
+            annotations:
+                nginx.ingress.kubernetes.io/configuration-snippet: |
+                auth_request_set $access_token $upstream_http_x_auth_request_access_token;
+                access_by_lua_block {
+                    if ngx.var.access_token ~= "" then
+                    ngx.req.set_header("Authorization", "Bearer " .. ngx.var.access_token)
+                    end
+                }
+            ...
+            ```
+            {: codeblock}
 
         * To send the `Access Token` and the `ID Token`, add the following information to the `access_by_lua_block{}` in the `configuration-snippet` annotation.
-        ```yaml
-        ...
-        annotations:
-            nginx.ingress.kubernetes.io/configuration-snippet: |
-            auth_request_set $access_token $upstream_http_x_auth_request_access_token;
-            auth_request_set $id_token $upstream_http_authorization;
-            access_by_lua_block {
-                if ngx.var.id_token ~= "" and ngx.var.access_token ~= "" then
-                ngx.req.set_header("Authorization", "Bearer " .. ngx.var.access_token .. " " .. ngx.var.id_token:match("%s*Bearer%s*(.*)"))
-                end
-            }
-        ...
-        ```
-        {: codeblock}
+            ```yaml
+            ...
+             annotations:
+                nginx.ingress.kubernetes.io/configuration-snippet: |
+                auth_request_set $access_token $upstream_http_x_auth_request_access_token;
+                auth_request_set $id_token $upstream_http_authorization;
+                access_by_lua_block {
+                    if ngx.var.id_token ~= "" and ngx.var.access_token ~= "" then
+                    ngx.req.set_header("Authorization", "Bearer " .. ngx.var.access_token .. " " .. ngx.var.id_token:match("%s*Bearer%s*(.*)"))
+                    end
+                }
+            ...
+            ```
+            {: codeblock}
 
     3. Optional: If your app supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy) in addition to or instead of the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy), add the `nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2-<App_ID_service_instance_name>/start?rd=$escaped_request_uri` annotation. Note that all letters in the service instance name must specified as lowercase.
         * If you specify this annotation, and the authentication for a client fails, the client is redirected to the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance. This OAuth2-Proxy, which acts as the OIDC Relying Party (RP) for {{site.data.keyword.appid_short_notm}}, redirects the client to your {{site.data.keyword.appid_short_notm}} login page for authentication.
@@ -1199,7 +1242,7 @@ By default, the source IP address of the client request is not preserved. When a
 
 To preserve the original source IP address of the client request, you can enable [source IP preservation](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer){: external}. Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies.
 
-<p class="note">When source IP preservation is enabled, load balancers shift from forwarding traffic to an app pod on a different worker node to an app pod on the same worker node. Your apps might experience downtime during this shift.</br></br>If you [disable an ALB](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure), any source IP changes you make to the load balancer service that exposes the ALB are lost. When you re-enable the ALB, you must enable source IP again.</p>
+When source IP preservation is enabled, load balancers shift from forwarding traffic to an app pod on a different worker node to an app pod on the same worker node. Your apps might experience downtime during this shift.</br></br>If you [disable an ALB](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure), any source IP changes you make to the load balancer service that exposes the ALB are lost. When you re-enable the ALB, you must enable source IP again.</p>
 
 **Before you begin**: If you configured edge nodes in your cluster, ALB pods are deployed to edge nodes and can only forward traffic to app pods that are also deployed to those edge nodes. Ensure that you have [at least three edge worker nodes per zone](/docs/containers?topic=containers-edge#edge_nodes).
 
@@ -1285,7 +1328,7 @@ To enable source IP preservation, edit the load balancer service that exposes an
 ## Configuring SSL protocols and SSL ciphers at the HTTP level
 {: #ssl_protocols_ciphers}
 
-Enable SSL protocols and ciphers at the global HTTP level by editing the `ibm-cloud-provider-ingress-cm` configmap.
+Enable SSL protocols and ciphers at the global HTTP level by editing the `ibm-k8s-controller-config` configmap.
 {: shortdesc}
 
 For example, if you still have legacy clients that require TLS 1.0 or 1.1 support, you must manually enable these TLS versions to override the default setting of TLS 1.2 and TLS 1.3 only. For more information about how to see the TLS versions that your clients use to access your apps, see this [{{site.data.keyword.cloud_notm}} blog post](https://www.ibm.com/cloud/blog/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default).
@@ -1295,10 +1338,10 @@ When you specify the enabled protocols for all hosts, the TLSv1.1 and TLSv1.2 pa
 
 To edit the configmap to enable SSL protocols and ciphers:
 
-1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+1. Edit the configuration file for the `ibm-k8s-controller-config` configmap resource.
 
     ```
-    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
+    kubectl edit cm ibm-k8s-controller-config -n kube-system
     ```
     {: pre}
 
@@ -1311,7 +1354,7 @@ To edit the configmap to enable SSL protocols and ciphers:
       ssl-ciphers: "HIGH:!aNULL:!MD5:!CAMELLIA:!AESCCM:!ECDH+CHACHA20"
     kind: ConfigMap
     metadata:
-      name: ibm-cloud-provider-ingress-cm
+      name: ibm-k8s-controller-config
       namespace: kube-system
     ```
     {: codeblock}
@@ -1321,7 +1364,7 @@ To edit the configmap to enable SSL protocols and ciphers:
 4. Verify that the configmap changes were applied. The changes are applied to your ALBs automatically.
 
     ```
-    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+    kubectl get cm ibm-k8s-controller-config -n kube-system -o yaml
     ```
     {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-14"
+lastupdated: "2021-08-23"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -199,13 +199,7 @@ For workloads in other Kubernetes namespaces in the cluster to pull container im
 
 **My cluster image pull secret uses a registry token. Does a token still work?**
 
-
-The previous method of authorizing cluster access to {{site.data.keyword.registrylong_notm}} via [tokens](https://www.ibm.com/cloud/blog/announcements/announcing-end-of-ibm-cloud-container-registry-support-for-uaa-tokens){: external} is supported but deprecated.
-{: deprecated}
-
-Tokens authorize access to the deprecated `registry.bluemix.net` registry domains, whereas API keys authorize access to the `icr.io` registry domains. Existing clusters might have both tokens and API key-based image pull secrets, but new clusters only use API keys. Therefore by default, new clusters can pull images from only `icr.io` domains in the `default` Kubernetes namespace.
-
-Before the deprecated tokens and `registry.bluemix.net` domains become unsupported, update your cluster image pull secrets to use the API key method for the [`default` Kubernetes namespace](#imagePullSecret_migrate_api_key) and [any other namespaces or accounts](#other) you might use. Then, update your deployments to pull from the `icr.io` registry domains.
+Images and registry tokens from `registry.bluemix.net` domains are unsupported, update your cluster image pull secrets to use the API key method for the [`default` Kubernetes namespace](#imagePullSecret_migrate_api_key) and [any other namespaces or accounts](#other) you might use. Then, update your deployments to pull from the `icr.io` registry domains.
 
 **After I copy or create an image pull secret in another Kubernetes namespace, am I done?**
 
@@ -432,7 +426,7 @@ The following steps create an API key that stores the credentials of an {{site.d
     <tbody>
     <tr>
     <td><code><em>&lt;cluster_service_ID&gt;</em></code></td>
-    <td>Required. Replace with the <code><cluster_name>-<kube_namespace>-id</code> service ID that you previously created for your Kubernetes cluster.</td>
+    <td>Required. Replace with the <code><cluster_name>-&lt;kube_namespace&gt;-id</code> service ID that you previously created for your Kubernetes cluster.</td>
     </tr>
     <tr>
     <td><code>--service-name <em>container-registry</em></code></td>
@@ -448,10 +442,11 @@ The following steps create an API key that stores the credentials of an {{site.d
     </tr>
     <tr>
     <td><code>--resource-type <em>namespace</em> --resource <em>&lt;registry_namespace&gt;</em></code></td>
-    <td>Optional. If you want to limit access to only images in certain <a href="/docs/Registry?topic=Registry-registry_setup_cli_namespace#registry_setup_cli_namespace_plan">{{site.data.keyword.registrylong_notm}} namespaces</a>, enter <code>namespace</code> for the resource type and specify the <code><registry_namespace></code>. To list registry namespaces, run <code>ibmcloud cr namespaces</code>.</td>
+    <td>Optional. If you want to limit access to only images in certain <a href="/docs/Registry?topic=Registry-registry_setup_cli_namespace#registry_setup_cli_namespace_plan">{{site.data.keyword.registrylong_notm}} namespaces</a>, enter <code>namespace</code> for the resource type and specify the <code>&lt;registry_namespace&gt;</code>. To list registry namespaces, run <code>ibmcloud cr namespaces</code>.</td>
     </tr>
     </tbody></table>
-4. Create an API key for the service ID. Name the API key similar to your service ID, and include the service ID that you previously created, ``<cluster_name>-<kube_namespace>-id`. Be sure to give the API key a description that helps you retrieve the key later.
+4. Create an API key for the service ID. Name the API key similar to your service ID, and include the service ID that you previously created,
+    `<cluster_name>-<kube_namespace>-id`. Be sure to give the API key a description that helps you retrieve the key later.
     ```
     ibmcloud iam service-api-key-create <cluster_name>-<namespace>-key <cluster_name>-<namespace>-id --description "API key for service ID <service_id> in Kubernetes cluster <cluster_name> namespace <namespace>"
     ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-19"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -117,8 +117,9 @@ content-type: troubleshoot
 
 
 
-{: tsSymptoms}
+
 When you create your PVC or deploy a pod that mounts the PVC, the creation or deployment fails.
+{: tsSymptoms}
 
 Example error message for a PVC creation failure:
     ```sh
@@ -132,11 +133,13 @@ Example error message for a pod creation failure:
     ```
     {: screen}
 
-{: tsCauses}
-The Kubernetes secret that you created is not referenced correctly in your deployment yaml or is not set to the `ibm/ibmc-s3fs` type.
 
-{: tsResolve}
+The Kubernetes secret that you created is not referenced correctly in your deployment yaml or is not set to the `ibm/ibmc-s3fs` type.
+{: tsCauses}
+
+
 This task requires [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for all namespaces.
+{: tsResolve}
 
 1. List the secrets in your cluster and review the secret type. The secret must show `ibm/ibmc-s3fs` as the **Type**.
     ```sh

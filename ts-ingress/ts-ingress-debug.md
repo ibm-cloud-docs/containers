@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-05"
+lastupdated: "2021-08-19"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -55,7 +55,6 @@ content-type: troubleshoot
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
 {:note: .note}
-{:note:.deprecated}
 {:objectc: .ph data-hd-programlang='Objective C'}
 {:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -117,15 +116,17 @@ content-type: troubleshoot
 * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
-{: tsSymptoms}
-You exposed your app by creating an Ingress resource for your app in your cluster. However, when you try to connect to your app through the Ingress subdomain or the ALBs' IP addresses, the connection fails or times out.
 
-{: tsResolve}
+You exposed your app by creating an Ingress resource for your app in your cluster. However, when you try to connect to your app through the Ingress subdomain or the ALBs' IP addresses, the connection fails or times out.
+{: tsSymptoms}
+
+
 The steps in the following sections can help you debug your Ingress setup.
+{: tsResolve}
 
 Before you begin, ensure you have the following [{{site.data.keyword.cloud_notm}} IAM access policies](/docs/containers?topic=containers-users#checking-perms) for {{site.data.keyword.containerlong_notm}}:
-  - **Editor** or **Administrator** platform access role for the cluster
-  - **Writer** or **Manager** service access role
+    - **Editor** or **Administrator** platform access role for the cluster
+    - **Writer** or **Manager** service access role
 
 ## Step 1: Check your app deployment
 {: #app-debug-ingress}
@@ -156,8 +157,8 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
 6. Click **Run**.
 
 7. Check the results of each test.
-  * If any test fails, click the information icon next to the test's name in the left-hand column for information about how to resolve the issue.
-  * You can also use the results of tests that only gather information while you debug your Ingress service in the following sections.
+    * If any test fails, click the information icon next to the test's name in the left-hand column for information about how to resolve the issue.
+    * You can also use the results of tests that only gather information while you debug your Ingress service in the following sections.
 
 ## Step 3: Check for error messages in your Ingress deployment and the ALB pod logs
 {: #errors}
@@ -179,26 +180,27 @@ Start by checking for error messages in the Ingress resource deployment events a
     Address:          169.xx.xxx.xxx,169.xx.xxx.xxx
     Default backend:  default-http-backend:80 (<none>)
     Rules:
-      Host                                             Path  Backends
-      ----                                             ----  --------
-      mycluster-<hash>-0000.us-south.containers.appdomain.cloud
-                                                       /tea      myservice1:80 (<none>)
-                                                       /coffee   myservice2:80 (<none>)
+        Host                                             Path  Backends
+        ----                                             ----  --------
+        mycluster-<hash>-0000.us-south.containers.appdomain.cloud
+/tea      myservice1:80 (<none>)
+/coffee   myservice2:80 (<none>)
     Annotations:
-      custom-port:        protocol=http port=7490; protocol=https port=4431
-      location-modifier:  modifier='~' serviceName=myservice1;modifier='^~' serviceName=myservice2
+        custom-port:        protocol=http port=7490; protocol=https port=4431
+        location-modifier:  modifier='~' serviceName=myservice1;modifier='^~' serviceName=myservice2
     Events:
-      Type     Reason             Age   From                                                            Message
-      ----     ------             ----  ----                                                            -------
-      Normal   Success            1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  TLSSecretNotFound  1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress resource.
-      Normal   Success            59s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  AnnotationError    40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Error annotation format error : One of the mandatory fields not valid/missing for annotation ingress.bluemix.net/custom-port
-      Normal   Success            40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  AnnotationError    2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Invalid port 7490. Annotation cannot use ports 7481 - 7490
-      Normal   Success            2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
+        Type     Reason             Age   From                                                            Message
+        ----     ------             ----  ----                                                            -------
+        Normal   Success            1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
+        Warning  TLSSecretNotFound  1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress resource.
+        Normal   Success            59s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
+        Warning  AnnotationError    40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Error annotation format error : One of the mandatory fields not valid/missing for annotation ingress.bluemix.net/custom-port
+        Normal   Success            40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
+        Warning  AnnotationError    2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Invalid port 7490. Annotation cannot use ports 7481 - 7490
+        Normal   Success            2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
     ```
     {: screen}
+
 {: #check_pods}
 2. Check the status of your ALB pods.
     1. Get the ALB pods that are running in your cluster.
@@ -210,7 +212,7 @@ Start by checking for error messages in the Ingress resource deployment events a
     2. Make sure that all pods are running by checking the **STATUS** column.
 
     3. If a pod does not have a `Running` status, you can disable and re-enable the ALB. In the following commands, replace `<ALB_ID>` with the ID of the pod's ALB. For example, if the pod that is not running has the name `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-5d6d86fbbc-kxj6z`, the ALB ID is `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1`.
-      * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
+        * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
         ```
         ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
@@ -220,18 +222,20 @@ Start by checking for error messages in the Ingress resource deployment events a
         ibmcloud ks ingress alb enable classic --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
         {: pre}
-      * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters:
+
+        * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters:
         ```
         ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
         {: pre}
+
         ```
         ibmcloud ks ingress alb enable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
         {: pre}
 
 3. Check the logs for your ALB.
-    1.  Get the IDs of the ALB pods that are running in your cluster.
+    1. Get the IDs of the ALB pods that are running in your cluster.
         ```
         kubectl get pods -n kube-system | grep alb
         ```
@@ -271,8 +275,8 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
     * If a public ALB has no IP address (classic) or hostname (VPC), see [Ingress ALB does not deploy in a zone](/docs/containers?topic=containers-cs_subnet_limit).
 
 2. Verify that your ALB IP addresses are reachable by the ALB health check.
-  * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic**: If you use Calico pre-DNAT network policies or another custom firewall to block incoming traffic to your cluster, you must allow inbound access on port 80 from the Kubernetes control plane and Akamai's IPv4 IP addresses to the IP addresses of your ALBs so that the Kubernetes control plane can check the health of your ALBs. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALB IP addresses from [Akamai's source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} on port 80 and the [control plane subnets for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}.<p class="important">From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains for all clusters in {{site.data.keyword.containerlong_notm}}. If you currently allow inbound traffic to your classic cluster from the Cloudflare source IP addresses, you must also allow inbound traffic from the [Akamai source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} before 07 July. After the migration completes on 31 July, you can remove the Cloudflare IP address rules. For more information, see the [announcement](https://cloud.ibm.com/notifications?selected=1621697674798){: external}.</p>
-  * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC**: If you set up [VPC security groups](/docs/containers?topic=containers-vpc-network-policy#security_groups) or [VPC access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy#acls) to secure your cluster network, ensure that you create the rules to allow the necessary traffic from the Kubernetes control plane IP addresses. Alternatively, to allow the inbound traffic for ALB healthchecks, you can create one rule to allow all incoming traffic on port 80.
+    * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic**: If you use Calico pre-DNAT network policies or another custom firewall to block incoming traffic to your cluster, you must allow inbound access on port 80 from the Kubernetes control plane and Akamai's IPv4 IP addresses to the IP addresses of your ALBs so that the Kubernetes control plane can check the health of your ALBs. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALB IP addresses from [Akamai's source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} on port 80 and the [control plane subnets for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}.<p class="important">From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains for all clusters in {{site.data.keyword.containerlong_notm}}. If you currently allow inbound traffic to your classic cluster from the Cloudflare source IP addresses, you must also allow inbound traffic from the [Akamai source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} before 07 July. After the migration completes on 31 July, you can remove the Cloudflare IP address rules. For more information, see the [announcement](https://cloud.ibm.com/notifications?selected=1621697674798){: external}.</p>
+    * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC**: If you set up [VPC security groups](/docs/containers?topic=containers-vpc-network-policy#security_groups) or [VPC access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy#acls) to secure your cluster network, ensure that you create the rules to allow the necessary traffic from the Kubernetes control plane IP addresses. Alternatively, to allow the inbound traffic for ALB healthchecks, you can create one rule to allow all incoming traffic on port 80.
 
 3. Check the health of your ALB IPs (classic) or hostname (VPC).
 
@@ -302,6 +306,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
         healthy
         ```
         {: screen}
+
         If one or more of the IPs returns `unhealthy`, [check the status of your ALB pods](#check_pods).
 
 4. Get the IBM-provided Ingress subdomain.
@@ -372,7 +377,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
 
     2. Check that the subdomain and TLS certificate are correct. To find the IBM provided Ingress subdomain and TLS certificate, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 
-    3.  Make sure that your app listens on the same path that is configured in the **path** section of your Ingress. If your app is set up to listen on the root path, use `/` as the path. If incoming traffic to this path must be routed to a different path that your app listens on, use the [rewrite paths](/docs/containers?topic=containers-comm-ingress-annotations#rewrite-paths) annotation.
+    3. Make sure that your app listens on the same path that is configured in the **path** section of your Ingress. If your app is set up to listen on the root path, use `/` as the path. If incoming traffic to this path must be routed to a different path that your app listens on, use the [rewrite paths](/docs/containers?topic=containers-comm-ingress-annotations#rewrite-paths) annotation.
 
     4. Edit your resource configuration YAML as needed. When you close the editor, your changes are saved and automatically applied.
         ```
@@ -494,13 +499,13 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     * If you get an error in response, there might be an error in your app or in a configuration that applies only to this specific ALB. Check your app code, your [Ingress resource configuration files](/docs/containers?topic=containers-ingress-types#alb-comm-create), or any other configurations you have applied to only this ALB.
 
 7. After you finish debugging, restore the health check on the ALB pods. Repeat these steps for each ALB pod.
-  1. Log in to the ALB pod and remove the `#` from the `server_name`.
+    1. Log in to the ALB pod and remove the `#` from the `server_name`.
     ```
     kubectl exec -ti <pod_name> -n kube-system -c nginx-ingress -- sed -i -e 's*#server_name*server_name*g' /etc/nginx/conf.d/kube-system-alb-health.conf
     ```
     {: pre}
 
-  2. Reload the NGINX configuration so that the health check restoration is applied.
+    2. Reload the NGINX configuration so that the health check restoration is applied.
     ```
     kubectl exec -ti <pod_name> -n kube-system -c nginx-ingress -- nginx -s reload
     ```
@@ -524,3 +529,5 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.62.196.238
     ```
     {: screen}
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-28"
+lastupdated: "2021-08-19"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -20,15 +20,19 @@ content-type: troubleshoot
 {:app_name: data-hd-keyref="app_name"}
 {:app_secret: data-hd-keyref="app_secret"}
 {:app_url: data-hd-keyref="app_url"}
+{:audio: .audio}
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
+{:c#: .ph data-hd-programlang='c#'}
 {:c#: data-hd-programlang="c#"}
 {:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
+{:curl: #curl .ph data-hd-programlang='curl'}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
 {:dotnet-standard: .ph data-hd-programlang='dotnet-standard'}
 {:download: .download}
+{:external: .external target="_blank"}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
 {:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
@@ -41,20 +45,26 @@ content-type: troubleshoot
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
+{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
+{:middle: .ph data-hd-position='middle'}
+{:navgroup: .navgroup}
 {:new_window: target="_blank"}
-{:note .note}
+{:node: .ph data-hd-programlang='node'}
 {:note: .note}
-{:objectc data-hd-programlang="objectc"}
+{:objectc: .ph data-hd-programlang='Objective C'}
+{:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
+{:php: .ph data-hd-programlang='PHP'}
 {:php: data-hd-programlang="php"}
 {:pre: .pre}
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
 {:ruby: .ph data-hd-programlang='ruby'}
@@ -72,8 +82,10 @@ content-type: troubleshoot
 {:shortdesc: .shortdesc}
 {:space_name: data-hd-keyref="space_name"}
 {:step: data-tutorial-type='step'}
+{:step: data-tutorial-type='step'} 
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -81,6 +93,7 @@ content-type: troubleshoot
 {:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
+{:topicgroup: .topicgroup}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
@@ -101,24 +114,48 @@ content-type: troubleshoot
 * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
-{: tsSymptoms}
-* After you deploy an Ingress application load balancer (ALB) secret to your cluster by using the `ibmcloud ks ingress secret create` command, the `Description` field is not updating with the secret name when you view your certificate in {{site.data.keyword.cloudcerts_full_notm}}.
-* When you list information about the ALB secret, the state says `*_failed`. For example, `create_failed`, `update_failed`, `delete_failed`.
 
-{: tsResolve}
+After you deploy an Ingress application load balancer (ALB) secret to your cluster by using the `ibmcloud ks ingress secret create` command, the `Description` field is not updating with the secret name when you view your certificate in {{site.data.keyword.cloudcerts_full_notm}}.
+{: tsSymptoms}
+
+When you list information about the ALB secret, the state says `*_failed`. For example, `create_failed`, `update_failed`, `delete_failed`.
+
+
 Review the following reasons why the ALB secret might fail and the corresponding troubleshooting steps.
+{: tsResolve}
 
 Before you begin, list the ALB secret details (`ibmcloud ks ingress secretget`) and view the ALB secret `status` to get more information on the reason for failure.
 {: tip}
 
-|Why it's happening|How to fix it|
-|--- |--- |
-|The owner of the cluster's API Key does not have the required access roles to download and update certificate data.|Check with your account Administrator to assign the owner of the cluster's API Key, the following {{site.data.keyword.cloud_notm}} IAM roles:<ul><li>The **Manager** and **Writer** service access roles for your {{site.data.keyword.cloudcerts_full_notm}} instance. For more information, see Managing service access for {{site.data.keyword.cloudcerts_short}}.</li><li>The **Administrator** platform access role for the cluster.</li></ul>|
-|The certificate CRN provided at time of create, update, or remove does not belong to the same account as the cluster.|Check that the certificate CRN you provided is imported to an instance of the {{site.data.keyword.cloudcerts_short}} service that is deployed in the same account as your cluster.|
-|The certificate CRN provided at time of create is incorrect.|<ol><li>Check the accuracy of the certificate CRN string you provide.</li><li>If the certificate CRN is found to be accurate, then try to update the secret: ibmcloud ks ingress secret update --cluster <cluster_name_or_ID> --name <secret_name> --namespace <namespace> --cert-crn <certificate_CRN></li><li>If this command results in the update_failed status, then remove the secret: ibmcloud ks ingress secret rm --cluster <cluster_name_or_ID> --name <secret_name> --namespace <namespace></li><li>Deploy the secret again: ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --name <secret_name> --cert-crn <certificate_CRN> --namespace <namespace></li></ol>|
-|The certificate CRN provided at time of update is incorrect.|<ol><li>Check the accuracy of the certificate CRN string you provide.</li><li>If the certificate CRN is found to be accurate, then remove the secret: ibmcloud ks ingress secret rm --cluster <cluster_name_or_ID> --name <secret_name> --namespace <namespace></li><li>Deploy the secret again: ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --name <secret_name> --cert-crn <certificate_CRN> --namespace <namespace></li><li>Try to update the secret: ibmcloud ks ingress secret update --cluster <cluster_name_or_ID> --name <secret_name> --namespace <namespace> --cert-crn <certificate_CRN></li></ol>|
-|The {{site.data.keyword.cloudcerts_long_notm}} service is experiencing downtime.|Check that your {{site.data.keyword.cloudcerts_short}} service is up and running.|
-|Your imported secret has the same name as the IBM-provided Ingress secret.|Rename your secret. You can check the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster get --cluster  | grep Ingress`.|
-|The description for the certificate is not updated with the secret name when you view the certificate in {{site.data.keyword.cloudcerts_full_notm}}.|Check whether the length of the certificate description reached the upper limit of 1024 characters.|
-{: caption="Troubleshooting Ingress application load balancer secrets"}
-{: summary="The columns are read from left to right. The first column describes why the issue happens. The second column provides steps to resolve the error."}
+
+**The owner of the cluster's API Key does not have the required access roles to download and update certificate data.**  
+Check with your account Administrator to assign the owner of the cluster's API Key, the following {{site.data.keyword.cloud_notm}} IAM roles:
+    - The **Manager** and **Writer** service access roles for your {{site.data.keyword.cloudcerts_full_notm}} instance. For more information, see Managing service access for {{site.data.keyword.cloudcerts_short}}.
+    - The **Administrator** platform access role for the cluster.
+
+**The certificate CRN provided at time of create, update, or remove does not belong to the same account as the cluster.**  
+Check that the certificate CRN you provided is imported to an instance of the {{site.data.keyword.cloudcerts_short}} service that is deployed in the same account as your cluster**
+
+**The certificate CRN provided at time of create is incorrect.**  
+Check the accuracy of the certificate CRN string you provide.
+    - If the certificate CRN is found to be accurate, then try to update the secret: `ibmcloud ks ingress secret update --cluster <cluster_name_or_ID> --name <secret_name> --namespace <namespace> --cert-crn <certificate_CRN>`.
+    - If this command results in the update_failed status, then remove the secret: `ibmcloud ks ingress secret rm --cluster <cluster_name_or_ID> --name <secret_name> --namespace <namespace>`.
+    - Deploy the secret again: `ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --name <secret_name> --cert-crn <certificate_CRN> --namespace`.
+
+**The certificate CRN provided at time of update is incorrect.**  
+    - Check the accuracy of the certificate CRN string you provide.
+    - If the certificate CRN is found to be accurate, then remove the secret: `ibmcloud ks ingress secret rm --cluster <cluster_name_or_ID> --name <secret_name> --namespace <namespace>`.
+    - Deploy the secret again: `ibmcloud ks ingress s-ecret create --cluster <cluster_name_or_ID> --name <secret_name> --cert-crn <certificate_CRN> --namespace <namespace>`.
+    - Try to update the secret: `ibmcloud ks ingress secret update --cluster <cluster_name_or_ID> --name <secret_name> --namespace <namespace> --cert-crn <certificate_CRN>`.
+
+**The {{site.data.keyword.cloudcerts_long_notm}} service is experiencing downtime.**  
+Check that your {{site.data.keyword.cloudcerts_short}} service is up and running.
+
+**Your imported secret has the same name as the IBM-provided Ingress secret.**  
+Rename your secret. You can check the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster get --cluster  | grep Ingress`.
+
+**The description for the certificate is not updated with the secret name when you view the certificate in {{site.data.keyword.cloudcerts_full_notm}}.**  
+Check whether the length of the certificate description reached the upper limit of 1024 characters.
+
+
+

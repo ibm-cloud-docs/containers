@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-14"
+lastupdated: "2021-08-23"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -512,7 +512,7 @@ ibmcloud ks get --addon ADDON --cluster CLUSTER [--output OUTPUT] [-q]
 <strong>Command options</strong>:
 <dl>
 <dt><code>--addon <em>ADDON</em></code></dt>
-<dd>Required: The name of the addon. To list installed add-ons, run `ibmcloud ks cluster addon ls`.</dd>
+<dd>Required: The name of the `addon`. To list installed add-ons, run `ibmcloud ks cluster addon ls`.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>Required: The name or ID of the cluster.</dd>
@@ -572,7 +572,7 @@ ibmcloud ks cluster addon options --addon ADDON [--output OUTPUT] [-q] [--versio
 **Command options**:
 <dl>
 <dt><code>--addon <em>ADDON</em></code></dt>
-<dd>Required: The name of the addon. To list available add-ons, run `ibmcloud ks cluster addon versions`.</dd>
+<dd>Required: The name of the `addon`. To list available add-ons, run `ibmcloud ks cluster addon versions`.</dd>
 
 <dt><code>--output json</code></dt>
 <dd>Optional: Prints the command output in JSON format.</dd>
@@ -4038,7 +4038,7 @@ ibmcloud ks ingress lb get --cluster mycluster
 Disable the NGINX PROXY protocol for the load balancers in front of all Ingress ALBs in your cluster so that client connection information is no longer passed in request headers to ALBs.
 {: shortdesc}
 
-After you run this command, the existing load balancers are deleted and recreated, which can cause service disruptions. Two unused IP addresses must be available in each subnet during the load balancer recreation.
+After you run this command, the existing load balancers are deleted and re-created, which can cause service disruptions. Two unused IP addresses must be available in each subnet during the load balancer recreation.
 {: important}
 
 ```sh
@@ -4080,7 +4080,7 @@ Enable the [NGINX PROXY protocol](https://docs.nginx.com/nginx/admin-guide/load-
 
 The PROXY protocol enables load balancers to pass client connection information that is contained in headers on the client request to the ALBs. This client information can include the client IP address, the proxy server IP address, and both port numbers.
 
-After you run this command, the existing load balancers are deleted and recreated, which can cause service disruptions. Two unused IP addresses must be available in each subnet during the load balancer recreation.
+After you run this command, the existing load balancers are deleted and re-created, which can cause service disruptions. Two unused IP addresses must be available in each subnet during the load balancer recreation.
 {: important}
 
 ```sh
@@ -5809,7 +5809,7 @@ ibmcloud ks api-key info --cluster my_cluster
 Create an {{site.data.keyword.cloud_notm}} IAM API key that impersonates the user's permissions to authenticate requests for all clusters in the current resource group and region. For more information, see [Understanding how the API key works](/docs/containers?topic=containers-access-creds#api_key_about).
 {: shortdesc}
 
-If you use the {{site.data.keyword.block_storage_is_short}} add-on in your cluster, you must recreate the controller pod after resetting your API key. To recreate the controller pod, delete it by running the `kubectl delete pod -n kube-system ibm-vpc-block-csi-controller-0` command.
+If you use the {{site.data.keyword.block_storage_is_short}} add-on in your cluster, you must re-create the controller pod after resetting your API key. To re-create the controller pod, delete it by running the `kubectl delete pod -n kube-system ibm-vpc-block-csi-controller-0` command.
 {: note}
 
 <p class="important">Before you use this command, make sure that the user who runs this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure permissions](/docs/containers?topic=containers-access_reference#cluster_create_permissions). Target the resource group and region that you want to set the API key for.</br></br>When the API key is reset, the previous API key that was used, if any, for the region and resource group is deleted. Before you reset the API key, check whether you have other services that use the existing API key, such as a [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) or the [default {{site.data.keyword.cloudcerts_long}} service instance for your cluster](/docs/containers?topic=containers-ingress-types#manage_certs).</p>
@@ -5999,7 +5999,7 @@ For a list of common use cases by permission, see [Infrastructure roles](/docs/c
 
 If your company's policies for permissions are strict, you might need to limit the `suggested` permissions for your cluster's use case. Otherwise, make sure that your infrastructure credentials for the region and resource group include all the `required` and `suggested` permissions.
 
-For most use cases, [set up the API key](/docs/containers?topic=containers-access-creds) for the region and resource group with the appropriate infrastructure permissions. If you need to use another infrastructure account that differs from your current account, [set up manual credentials](/docs/containers?topic=containers-access-creds#credentials.
+For most use cases, [set up the API key](/docs/containers?topic=containers-access-creds) for the region and resource group with the appropriate infrastructure permissions. If you need to use another infrastructure account that differs from your current account, [set up manual credentials](/docs/containers?topic=containers-access-creds#credentials).
 
 **How do I control what actions the users can perform?**
 
