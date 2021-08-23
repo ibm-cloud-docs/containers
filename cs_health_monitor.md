@@ -357,7 +357,7 @@ In most cases, reloading or rebooting the worker can resolve the issue. However,
 
 1. Get your worker nodes and review the [state](/docs/openshift?topic=openshift-worker-node-state-reference). 
     ```
-    {[kubectl get nodes]}
+    kubectl get nodes
     ```
     {: pre}
 

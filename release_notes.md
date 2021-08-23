@@ -126,6 +126,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 23 August 2021 | Registry tokens are no longer accepted for authentication in {{site.data.keyword.registrylong_notm}}. Update your clusters to use {{site.data.keyword.cloud_notm}} IAM authentication. For more information, see [Automating access to {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-registry_access#registry_access_serviceid_apikey). For more information about Registry token deprecation, see [IBM Cloud Container Registry Deprecates Registry Tokens for Authentication](https://www.ibm.com/cloud/blog/announcements/ibm-cloud-container-registry-deprecates-registry-tokens-for-authentication){: external}.|
 | 16 August 2021 | **Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes. For more information, see [Version changelog](/docs/containers?topic=containers-changelog). | 
 | 12 August 2021 | **Istio add-on changelog**: [Version 1.9.7](/docs/containers?topic=containers-istio-changelog#196) of the Istio managed add-on is released. |
 | 10 August 2021 | **Ingress changelogs**: Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.48.1_1465_iks`, `0.47.0_1480_iks`, and `0.45.0_1482_iks`. **ALB OAuth Proxy**: Updated the version changelog for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog).  |

@@ -972,10 +972,6 @@ subcollection: containers
 * [Enabling image security enforcement in your cluster](/docs/containers?topic=containers-images#portieris-image-sec)
   * [Enabling or disabling image security enforcement](/docs/containers?topic=containers-images#portieris-enable)
   * [Default image policies](/docs/containers?topic=containers-images#portieris-default-policies)
-* [Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registrylong_notm}} image](/docs/containers?topic=containers-images#namespace_token)
-  * [Deprecated: Deploying images to the `default` Kubernetes namespace with a registry token](/docs/containers?topic=containers-images#token_default_namespace)
-  * [Deprecated: Copying the token-based image pull secret from the default namespace to other namespaces in your cluster](/docs/containers?topic=containers-images#token_copy_imagePullSecret)
-  * [Deprecated: Accessing token-authorized images in other {{site.data.keyword.cloud_notm}} regions and accounts](/docs/containers?topic=containers-images#token_other_regions_accounts)
 
 [Developing Kubernetes-native apps](/docs/containers?topic=containers-app)
 * [Specifying your app requirements in your YAML file](/docs/containers?topic=containers-app#app_yaml)
@@ -2676,7 +2672,6 @@ subcollection: containers
 
 [Why do images fail to pull from registry with `ImagePullBackOff` or authorization errors?](/docs/containers?topic=containers-ts-app-image-pull)
 * [Troubleshooting image pull secrets that use API keys](/docs/containers?topic=containers-ts-app-image-pull#img-pull-api-key)
-* [Deprecated: Troubleshooting image pull secrets that use tokens](/docs/containers?topic=containers-ts-app-image-pull#img-pull-token)
 
 [Why don't my containers start?](/docs/containers?topic=containers-ts-app-container-start)
 * [Fixing registry quota issues](/docs/containers?topic=containers-ts-app-container-start#regitry-quota)
