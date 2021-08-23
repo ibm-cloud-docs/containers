@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-20"
+lastupdated: "2021-08-23"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -301,7 +301,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
         <tbody>
         <tr>
         <td><code>annotations</code></td>
-        <td><ul><li><code>kubernetes.io/ingress.class: "public-iks-k8s-nginx"</code>: Apply this Ingress resource to the public ALBs that run the Kubernetes Ingress image in your cluster.<p class="note">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, do not specify this annotation. Instead, find the Ingress class for yourr configuration, and specify that class in a <code>spec.ingressClassName: &lt;class_name&gt;</code> field. You must also specify this custom class in an <a href="#ingress-class-custom"><code>IngressClass</code> resource and a <code>ibm-ingress-deploy-config</code> configmap</a>.</p></li><li>To customize routing for Ingress, you can add <a href="/docs/containers?topic=containers-comm-ingress-annotations#annotations">Kubernetes NGINX annotations</a> (<code>nginx.ingress.kubernetes.io/<annotation></code>). Custom {{site.data.keyword.containerlong_notm}} annotations (<code>ingress.bluemix.net/<annotation></code>) are <strong>not</strong> supported.</li></ul></td>
+        <td><ul><li><code>kubernetes.io/ingress.class: "public-iks-k8s-nginx"</code>: Apply this Ingress resource to the public ALBs that run the Kubernetes Ingress image in your cluster.<p class="note">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, do not specify this annotation. Instead, find the Ingress class for yourr configuration, and specify that class in a <code>spec.ingressClassName: &lt;class_name&gt;</code> field. You must also specify this custom class in an <a href="#ingress-class-custom"><code>IngressClass</code> resource and a <code>ibm-ingress-deploy-config</code> configmap</a>.</p></li><li>To customize routing for Ingress, you can add <a href="/docs/containers?topic=containers-comm-ingress-annotations#annotations">Kubernetes NGINX annotations</a> (<code>nginx.ingress.kubernetes.io/&lt;annotation&gt;</code>). Custom {{site.data.keyword.containerlong_notm}} annotations (<code>ingress.bluemix.net/&lt;annotation&gt;</code>) are <strong>not</strong> supported.</li></ul></td>
         </tr>
         <tr>
         <td><code>tls.hosts</code></td>
@@ -491,7 +491,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
         <tbody>
         <tr>
         <td><code>annotations</code></td>
-        <td><ul><li><code>kubernetes.io/ingress.class: "public-iks-k8s-nginx"</code>: Apply this Ingress resource to the private ALBs that run the Kubernetes Ingress image in your cluster.<p class="note">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, do not specify this annotation. Instead, find the Ingress class for your configuration, and specify that class in a <code>spec.ingressClassName: &lt;class_name&gt;</code> field. You must also specify this custom class in an <a href="#ingress-class-custom"><code>IngressClass</code> resource and a <code>ibm-ingress-deploy-config</code> configmap</a>.</p></li><li>To customize routing for Ingress, you can add <a href="/docs/containers?topic=containers-comm-ingress-annotations#annotations">Kubernetes NGINX annotations</a> (<code>nginx.ingress.kubernetes.io/<annotation></code>). Custom {{site.data.keyword.containerlong_notm}} annotations (<code>ingress.bluemix.net/<annotation></code>) are <strong>not</strong> supported.</li></ul></td>
+        <td><ul><li><code>kubernetes.io/ingress.class: "public-iks-k8s-nginx"</code>: Apply this Ingress resource to the private ALBs that run the Kubernetes Ingress image in your cluster.<p class="note">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, do not specify this annotation. Instead, find the Ingress class for your configuration, and specify that class in a <code>spec.ingressClassName: &lt;class_name&gt;</code> field. You must also specify this custom class in an <a href="#ingress-class-custom"><code>IngressClass</code> resource and a <code>ibm-ingress-deploy-config</code> configmap</a>.</p></li><li>To customize routing for Ingress, you can add <a href="/docs/containers?topic=containers-comm-ingress-annotations#annotations">Kubernetes NGINX annotations</a> (<code>nginx.ingress.kubernetes.io/&lt;annotation&gt;</code>). Custom {{site.data.keyword.containerlong_notm}} annotations (<code>ingress.bluemix.net/&lt;annotation&gt;</code>) are <strong>not</strong> supported.</li></ul></td>
         </tr>
         <tr>
         <td><code>tls.hosts</code></td>

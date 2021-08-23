@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-20"
+lastupdated: "2021-08-23"
 
 keywords: kubernetes, iks, release notes
 
@@ -831,7 +831,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
     <td>15 July 2019</td>
     <td><ul>
     <li><strong>Cluster and worker node ID</strong>: The ID format for clusters and worker nodes is changed. Existing clusters and worker nodes keep their existing IDs. If you have automation that relies on the previous format, update it for new clusters.<ul>
-    <li><strong>Cluster ID</strong>: In the regex format <code>{a-v0-9}<a href="/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog">7]{a-z0-9}[2]{a-v0-9}[11]</code></li>
+    <li><strong>Cluster ID</strong>: In the regex format <code>{a-v0-9}<a href="/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog">7]{a-z0-9}[2]{a-v0-9}[11]</code></a>.</li>
     <li><strong>Worker node ID</strong>: In the format <code>kube-&lt;cluster_ID&gt;-&lt;cluster_name_truncated&gt;-&lt;resource_group_truncated&gt;-&lt;worker_ID&gt;</code></li></ul></li>
     <li><strong>Ingress ALB changelog</strong>: Updated the [ALB <code>nginx-ingress</code> image to build 497</a>.</li>
     <li><strong>Troubleshooting clusters</strong>: Added <a href="/docs/containers?topic=containers-worker_infra_errors#cs_totp">troubleshooting steps</a> for when you cannot manage clusters and worker nodes because the time-based one-time passcode (TOTP) option is enabled for your account.</li>
