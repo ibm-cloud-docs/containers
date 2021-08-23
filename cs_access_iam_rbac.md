@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-20"
+lastupdated: "2021-08-23"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -312,7 +312,7 @@ Grant users access to your {{site.data.keyword.containerlong_notm}} clusters by 
         ```
         {: pre}
 
-    2. For individual users, get the user's **userID** and **ibmUniqueId**.
+    2. For individual users, get the user's **`userID`** and **`ibmUniqueId`**.
         ```
         ibmcloud account users --account-id <account_ID> --output JSON
         ```
@@ -888,9 +888,11 @@ Verify your custom RBAC or synchronized IAM service access to RBAC roles in your
         ```
         {: pre}
 
-    **Example output**: If you assign user `user@email.com` and access group `team1` the **Reader** service access role, and then run `kubectl get rolebinding ibm-view -o yaml -n default`, you get the following example output.
+**Example output** 
 
-    ```
+If you assign user `user@email.com` and access group `team1` the **Reader** service access role, and then run `kubectl get rolebinding ibm-view -o yaml -n default`, you get the following example output.
+
+    ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
