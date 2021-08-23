@@ -1876,6 +1876,7 @@ subcollection: containers
   * [Version 0.48.0 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_48_0)
   * [Version 0.47.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_47_0)
   * [Version 0.45.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_45_0)
+  * [Version 0.43.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_43_0)
   * [Version 0.35.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0)
   * [Version 0.34.1 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_34_1)
   * [Version 0.33.0 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_33_0)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-23"
 
 keywords: kubernetes, iks, oauth proxy, add-on
 
@@ -122,6 +122,7 @@ View information for version updates to the [ALB OAuth Proxy add-on](/docs/conta
 
 |Version build|Release date|Changes|
 |-------------|------------|-------|
+| 1.0.0_684 | 23 August 2021 | Updates to address [CVE-2021-36221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-36221){: external}. |
 | 1.0.0_638 | 10 August 2021 | OAuth proxy image upgrade from 6.1.1. to 7.1.2. Updates to address [CVE-2021-34558](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-34558){: external}, [CVE-2021-21411](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-21411){: external}, and [CVE-2021-21291](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-21291){: external}. |
 | 1.0.0_618 | 17 Jun 2021 | Updates to address [CVE-2021-31525](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-31525){: external} and [CVE-2021-33194](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-33194){: external}.|
 | 1.0.0_590 | 19 Apr 2021 | Updates to address [CVE-2021-3121](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-3121){: external}, [CVE-2021-28851](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-28851){: external}, and [CVE-2021-28852](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-28852){: external}.|
