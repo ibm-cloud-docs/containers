@@ -363,7 +363,7 @@ Reloading or rebooting the worker can resolve the issue. However, you might need
 
   1. If all of the worker nodes are **not** in the `Ready` state, [add worker nodes to your cluster](/docs/containers?topic=containers-add_workers&interface=ui).
 
-  1. If all the worker nodes are in the `Ready` state, [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker nodes.
+  1. If all the worker nodes are in the `Ready` state, [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker nodes.
       1. Describe your worker node and review the **Events** section for common error messages.
           ```
           kubectl describe node <node>
@@ -378,7 +378,7 @@ Reloading or rebooting the worker can resolve the issue. However, you might need
           ```
           {: pre}
 
-      1. [Reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker node.
+      1. [Reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker node.
 
 All worker nodes in a zone are reaching capacity threshold of 80% (Solution: Add worker nodes in that zone so that load goes below 70%)
 More than 2 worker nodes in one zone are not ready (label: label_failure_domain_beta_kubernetes_io_zone)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-19"
+lastupdated: "2021-08-24"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -377,7 +377,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
 
     2. Check that the subdomain and TLS certificate are correct. To find the IBM provided Ingress subdomain and TLS certificate, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 
-    3. Make sure that your app listens on the same path that is configured in the **path** section of your Ingress. If your app is set up to listen on the root path, use `/` as the path. If incoming traffic to this path must be routed to a different path that your app listens on, use the [rewrite paths](/docs/containers?topic=containers-comm-ingress-annotations#rewrite-paths) annotation.
+    3. Make sure that your app listens on the same path that is configured in the **path** section of your Ingress. If your app is set up to listen on the root path, use `/` as the path. If incoming traffic to this path must be routed to a different path that your app listens on, use the [rewrite paths](/docs/containers?topic=containers-comm-ingress-annotations#alb-rewrite-paths) annotation.
 
     4. Edit your resource configuration YAML as needed. When you close the editor, your changes are saved and automatically applied.
         ```
