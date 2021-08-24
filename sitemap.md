@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-08-23"
+lastupdated: "2021-08-24"
 
 keywords: containers
 subcollection: containers
@@ -888,8 +888,8 @@ subcollection: containers
 * [Viewing cluster states](/docs/containers?topic=containers-health-monitor#states)
   * [Master states](/docs/containers?topic=containers-health-monitor#states_master)
 * [Setting up {{site.data.keyword.mon_full}} alerts](/docs/containers?topic=containers-health-monitor#monitoring-alerts)
-  * [App level alerts](/docs/containers?topic=containers-health-monitor#app-level-alerts)
-  * [Worker nodes](/docs/containers?topic=containers-health-monitor#worker-node-level-alerts)
+  * [App alerts](/docs/containers?topic=containers-health-monitor#app-level-alerts)
+  * [Worker node alerts](/docs/containers?topic=containers-health-monitor#worker-node-level-alerts)
   * [Zone alerts](/docs/containers?topic=containers-health-monitor#zone-level-alerts)
   * [Cluster alerts](/docs/containers?topic=containers-health-monitor#cluster-level-alerts)
   * [Account alerts](/docs/containers?topic=containers-health-monitor#account-level-alerts)
