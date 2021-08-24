@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-23"
+lastupdated: "2021-08-24"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -198,6 +198,9 @@ For workloads in other Kubernetes namespaces in the cluster to pull container im
 
 
 **My cluster image pull secret uses a registry token. Does a token still work?**
+
+From 19 August 2021, using {{site.data.keyword.registrylong_notm}} tokens is discontinued and no longer works. For more information, see [{{site.data.keyword.registrylong_notm}} Deprecates Registry Tokens for Authentication](https://www.ibm.com/cloud/blog/announcements/ibm-cloud-container-registry-deprecates-registry-tokens-for-authentication){: external}.
+{: deprecated}
 
 Images and registry tokens from `registry.bluemix.net` domains are unsupported, update your cluster image pull secrets to use the API key method for the [`default` Kubernetes namespace](#imagePullSecret_migrate_api_key) and [any other namespaces or accounts](#other) you might use. Then, update your deployments to pull from the `icr.io` registry domains.
 

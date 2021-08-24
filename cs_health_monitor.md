@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-23"
+lastupdated: "2021-08-24"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -297,7 +297,7 @@ Set up [autorecovery](#autorecovery) on your worker nodes to enable your cluster
 
 
 
-### App level alerts
+### App alerts
 {: #app-level-alerts}
 
 Review the following app level metrics and alert thresholds for help setting up app monitoring in your cluster.
@@ -316,25 +316,25 @@ The underlying issues for these symptoms include things such as,
     - Maximum pod limit per cluster reached.
     - App itself has an issue.
 
-To set up monitoring for these conditions, configure alerts based on the following {{site.data.keyword.mon_full}} metrics. Note that your alert thresholds might change depending on your cluster configuration.
+To set up monitoring for these conditions, configure alerts based on the following {{site.data.keyword.mon_full_notm}} metrics. Note that your alert thresholds might change depending on your cluster configuration.
 
-| Metric | {{site.data.keyword.mon_full}} metric | Alert threshold |
-| --- | --- |
-| Multiple restarts of a pod in a short amount of time. |`kubernetes.pod.restart.count` | Greater than 4 for the last 10 minutes |
-| No running replicas in a replicaset. |`kubernetes.replicaSet.replicas.running` in `kubernetes.deployment.name` | Less than one. |
-| More than 5 pods pending in cluster. |`kubernetes.namespace.pod.status.name` | Status equals `pending` greater than five.|
-| No replicas in a deployment available. |`kubernets.deployment.replicas.available` | Less than one. |
-| Number of pods per node reaching threshold of 110. | Count by `(kube_cluster_name,kube_node_name)(kube_pod_container_info)` Greater than or equal to 100. Note that this query is a promQL query. This alert must be configured in promQL. To set up promQL alerts, you...|
-| Workloads that are in an unknown state. | `(kube_workload_status_unavailable)` | Greater than or equal to one. (PROMQL query!) |
+| Metric | {{site.data.keyword.mon_full_notm}} metric | Alert threshold |
+| --- | --- | --- |
+| Multiple restarts of a pod in a short amount of time. | `kubernetes.pod.restart.count` | Greater than 4 for the last 10 minutes |
+| No running replicas in a replicaset. | `kubernetes.replicaSet.replicas.running` in `kubernetes.deployment.name` | Less than one. |
+| More than 5 pods pending in cluster. | `kubernetes.namespace.pod.status.name` | Status equals `pending` greater than five.|
+| No replicas in a deployment available. | `kubernets.deployment.replicas.available` | Less than one. |
+| Number of pods per node reaching threshold of 110. | Count by `(kube_cluster_name,kube_node_name)(kube_pod_container_info)` Greater than or equal to 100. Note that this query is a promQL query. |
+| Workloads that are in an unknown state. | `(kube_workload_status_unavailable)` | Greater than or equal to one. Note that this query is a promQL query. |
 {: caption="App metrics"}
-{: summary="The table shows the app metrics that you can configure in {{site.data.keyword.mon_full}}. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
+{: summary="The table shows the app metrics that you can configure in {{site.data.keyword.mon_full_notm}}. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 
 
-### Worker nodes
+### Worker node alerts
 {: #worker-node-level-alerts}
 
-|Metric| {{site.data.keyword.mon_full}} metric | Alert threshold |
+|Metric| {{site.data.keyword.mon_full_notm}} metric | Alert threshold |
 | --- | --- |
 | CPU utilization of the worker node over threshold. | `cpu.used.percent` | Greater than 80% for 1 hour. |
 | CPU utilization of the worker node over threshold. | `cpu.used.percent` | Greater than 65% for 24 hours. |
@@ -352,7 +352,7 @@ To set up monitoring for these conditions, configure alerts based on the followi
 #### Resolving worker node alerts
 {: #worker-node-resolve}
 
-In most cases, reloading or rebooting the worker can resolve the issue. However, in some cases you might need add more workers to increase capacity.
+Reloading or rebooting the worker can resolve the issue. However, you might need add more workers to increase capacity.
 {: shortdesc}
 
 1. Get your worker nodes and review the [state](/docs/openshift?topic=openshift-worker-node-state-reference). 
@@ -380,11 +380,17 @@ In most cases, reloading or rebooting the worker can resolve the issue. However,
 
       1. [Reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker node.
 
+All worker nodes in a zone are reaching capacity threshold of 80% (Solution: Add worker nodes in that zone so that load goes below 70%)
+More than 2 worker nodes in one zone are not ready (label: label_failure_domain_beta_kubernetes_io_zone)
+
 ### Zone alerts
 {: #zone-level-alerts}
 
+To set up zone level alerts in , edit the `sysdig-agent` configmap to include the required label filters.
+{: shortdesc}
+
 1. `kubectl edit configmap sysdig-agent -n ibm-observe`.
-1. Add the following section after `k8s_cluster_name: <cluster_name>`:
+1. Add the following YAML block after `k8s_cluster_name: <cluster_name>`:
     ```yaml
     k8s_labels_filter:
       - include: "kubernetes.node.label.kubernetes.io/hostname"
@@ -398,14 +404,14 @@ In most cases, reloading or rebooting the worker can resolve the issue. However,
      ```
      {: codeblock}
 
-1. Restart the {{site.data.keyword.mon_full}} pods (remove all and let them restart)
+1. Restart the {{site.data.keyword.mon_full_notm}} pods. Delete all the pods and wait for them to restart.
     1. `kubectl get pods -n ibm-observe`
     1. `kubectl delete pods sysdig-agent-1111 sysdig-agent-2222 sysdig-agent-3333 -n ibm-observe` 
-    1. Wait about 5 minutes for the pods to come up again and the label to be available in {{site.data.keyword.mon_full}}  
-    1. Verify that the labels now show by opening the {{site.data.keyword.mon_full}} dashboard > Explore > PromQL query > enter `kube_node_labels` in the query field and hit `Run Query`. 
+    1. Wait 5 minutes for the pods to come up again and the label to be available in {{site.data.keyword.mon_full_notm}}  
+    1. Verify that the labels now show by opening the **{{site.data.keyword.mon_full_notm}} dashboard** > **Explore** > **PromQL query**.
+    1. Enter `kube_node_labels` in the query field and click `Run Query`. 
 
-All worker nodes in a zone are reaching capacity threshold of 80% (Solution: Add worker nodes in that zone so that load goes below 70%)
-More than 2 worker nodes in one zone are not ready (label: label_failure_domain_beta_kubernetes_io_zone)
+
 
 ### Cluster alerts
 {: #cluster-level-alerts}
