@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-23"
+lastupdated: "2021-08-25"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -970,7 +970,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
         <tr><td><code>httpPort</code>, <code>httpsPort</code></td><td>Expose non-default ports for the Ingress ALB by adding the HTTP or HTTPS ports that you want to open.</td></tr>
         <tr><td><code>ingressClass</code></td><td>If you specified a class other than <code>public-iks-k8s-nginx</code> or <code>private-iks-k8s-nginx</code> in your Ingress resource, specify the class.</td></tr>
         <tr><td><code>replicas</code></td><td>By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods. For more information, see <a href="/docs/containers?topic=containers-ingress-types#scale_albs">Increasing the number of ALB pod replicas</a>.</td></tr>
-        <tr><td><code>tcpServicesConfig</code></td><td>Specify a configmap and the namespace that the configmap is in, such as <a href="#tcp-ports"><code>kube-system/tcp-services</code></a>, that contains information about accessing your app service through a non-standard TCP port.</td></tr>
+        <tr><td><code>tcpServicesConfig</code></td><td>Specify a configmap and the namespace that the configmap is in, such as <a href="#tcp-ports-non-standard"><code>kube-system/tcp-services</code></a>, that contains information about accessing your app service through a non-standard TCP port.</td></tr>
         </tbody>
         </table>
 

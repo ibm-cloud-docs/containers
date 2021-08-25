@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-24"
+lastupdated: "2021-08-25"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -239,7 +239,7 @@ To view information about a specific cluster, such as its zones, service endpoin
 
 You can review information about the overall cluster, the IBM-managed master, and your worker nodes. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](/docs/containers?topic=containers-debug_clusters).
 
-- [Cluster states](/docs/openshift?topic=openshift-cluster-state-reference).
+- [Cluster states](/docs/openshift?topic=openshift-health-monitor#states).
 - [Worker node states](/docs/openshift?topic=openshift-worker-node-state-reference).
 
 ### Master states
