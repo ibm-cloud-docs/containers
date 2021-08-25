@@ -134,7 +134,7 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 Review the version 1.21 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.21.4_1528, released 24 August 2021
+### Changelog for master fix pack 1.21.4_1528, released 25 August 2021
 {: #1214_1528}
 
 The following table shows the changes that are included in the master fix pack patch update `1.21.4_1528`. Master patch updates are applied automatically.
@@ -325,7 +325,7 @@ The following table shows the changes that are included in the master fix pack p
 Review the version 1.20 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.20.10_1550 released 24 August 2021
+### Changelog for master fix pack 1.20.10_1550 released 25 August 2021
 {: #12010_1550}
 
 The following table shows the changes that are included in the master fix pack patch update `1.20.10_1550`. Master patch updates are applied automatically.
@@ -716,7 +716,7 @@ The following table shows the changes that are included in the version updates f
 Review the version 1.19 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.19.14_1557, released 24 August 2021
+### Changelog for master fix pack 1.19.14_1557, released 25 August 2021
 {: #11914_1557}
 
 The following table shows the changes that are included in the master fix pack patch update `1.19.14_1557`. Master patch updates are applied automatically.
@@ -1354,7 +1354,7 @@ Review the version 1.18 changelog.
 Kubernetes version 1.18 is deprecated, with a tentative unsupported date of 1 September 2021. Update your cluster to at least [version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119) as soon as possible.
 {: deprecated}
 
-### Changelog for master fix pack 1.18.20_1562, released 24 August 2021
+### Changelog for master fix pack 1.18.20_1562, released 25 August 2021
 {: #11820_1562}
 
 The following table shows the changes that are included in the master fix pack patch update `1.18.20_1562`. Master patch updates are applied automatically.
