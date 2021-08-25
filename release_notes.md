@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-24"
+lastupdated: "2021-08-25"
 
 keywords: kubernetes, iks, release notes
 
@@ -126,6 +126,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 25 August 2021 | <ul><li>**New! Create a cluster with a template**: No longer do you have to manually specify the networking and worker node details to create a cluster, or enable security integrations such as logging and monitoring after creation. Instead, you can try out the **technical preview** to create a multizone cluster with nine worker nodes and encryption, logging, and monitoring already enabled. For more information, see [Creating a cluster by using an {{site.data.keyword.bpfull_notm}} template](/docs/openshift?topic=openshift-templates&interface=ui).</li><li>**{{site.data.keyword.cos_full_notm}} plug-in**: Version `2.1.3` is [released](/docs/containers?topic=containers-cos_plugin_changelog).</li><li>Master fix pack update changelog documentation is available for Kubernetes version <a href="/docs/containers?topic=containers-changelog#1214_1528">1.21.4_ 1528</a>, <a href="/docs/containers?topic=containers-changelog#12010_1550">1.20.10_1550</a>, <a href="/docs/containers?topic=containers-changelog#11914_1557">1.19.14_1557</a>, and <a href="/docs/containers?topic=containers-changelog#11820_1562">1.18.20_1562</a>.</li><</ul> |
 | 23 August 2021 | <ul><li>Registry tokens are no longer accepted for authentication in {{site.data.keyword.registrylong_notm}}. Update your clusters to use {{site.data.keyword.cloud_notm}} IAM authentication. For more information, see <a href="/docs/Registry?topic=Registry-registry_access#registry_access_serviceid_apikey">Automating access to {{site.data.keyword.registrylong_notm}}</a>. For more information about Registry token deprecation, see <a href="https://www.ibm.com/cloud/blog/announcements/ibm-cloud-container-registry-deprecates-registry-tokens-for-authentication">IBM Cloud Container Registry Deprecates Registry Tokens for Authentication</a>.</li><li> <strong>Ingress changelogs</strong>: Updated the <a href="/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog">Ingress ALB changelog</a> for versions <code>0.48.1_1541_iks</code>, <code>0.47.0_1540_iks</code>, and <code>0.43.0_1539_iks</code>. Version <code>0.45.0_1482_iks</code> is removed.</li><li> <strong>ALB OAuth Proxy</strong>: Updated the version changelog for the <a href="/docs/containers?topic=containers-alb-oauth-proxy-changelog">ALB OAuth Proxy add-on</a>.</li></ul> |
 | 16 August 2021 | **Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes. For more information, see [Version changelog](/docs/containers?topic=containers-changelog). | 
 | 12 August 2021 | **Istio add-on changelog**: [Version 1.9.7](/docs/containers?topic=containers-istio-changelog#196) of the Istio managed add-on is released. |
