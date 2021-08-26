@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-08-25"
+lastupdated: "2021-08-26"
 
 keywords: containers
 subcollection: containers
@@ -62,6 +62,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -1949,6 +1950,7 @@ subcollection: containers
 
 [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog)
 * [Version 1.0.3](/docs/containers?topic=containers-ca_changelog#0103_ca_addon)
+  * [Changelog for patch update 1.0.3_360, released 26 August 2021](/docs/containers?topic=containers-ca_changelog#103360_ca)
   * [Changelog for patch update 1.0.3_352, released 23 June 2021](/docs/containers?topic=containers-ca_changelog#103352_ca)
 * [Version 1.0.2](/docs/containers?topic=containers-ca_changelog#0102_ca_addon)
   * [Changelog for patch update 1.0.2_267, released 10 May 2021](/docs/containers?topic=containers-ca_changelog#102267_ca)
