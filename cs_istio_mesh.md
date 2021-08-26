@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-26"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -63,6 +63,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -112,7 +113,7 @@ subcollection: containers
 
 After you [install the Istio add-on](/docs/containers?topic=containers-istio#istio_install) in your cluster, you can deploy your apps into the Istio service mesh by setting up Envoy proxy sidecar injection and exposing your apps with a subdomain.
 
-## Trying out the BookInfo sample app
+## Understanding the BookInfo sample app
 {: #istio_bookinfo}
 
 The [BookInfo sample application for Istio](https://istio.io/latest/docs/examples/bookinfo/){: external} includes the base demo setup and the default destination rules so that you can try out Istio's capabilities immediately.
@@ -132,29 +133,28 @@ The four BookInfo microservices include:
 
 The deployment YAMLs for each of these microservices are modified so that Envoy sidecar proxies are pre-injected as containers into the microservices' pods before they are deployed. For more information about manual sidecar injection, see the [Istio documentation](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/){: external}. The BookInfo app is also already exposed on a public IP address by an Istio Gateway. Although the BookInfo app can help you get started, the app is not meant for production use.
 
-### Setting up the BookInfo sample app
+## Setting up the BookInfo sample app
 {: #bookinfo_setup}
 
-1. Install BookInfo in your cluster.
-    1. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
+1. Install BookInfo in your cluster. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
     ```
     curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.10.3 sh -
     ```
     {: pre}
 
-    2. Navigate to the Istio package directory.
+1. Navigate to the Istio package directory.
     ```
     cd istio-1.10.3
     ```
     {: pre}
 
-    3. Label the `default` namespace for automatic sidecar injection.
+1. Label the `default` namespace for automatic sidecar injection.
     ```
     kubectl label namespace default istio-injection=enabled
     ```
     {: pre}
 
-    4. Deploy the BookInfo application, gateway, and destination rules.
+1. Deploy the BookInfo application, gateway, and destination rules.
     ```
     kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
     kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
@@ -162,7 +162,7 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
     ```
     {: pre}
 
-2. Ensure that the BookInfo microservices and their corresponding pods are deployed.
+1. Ensure that the BookInfo microservices and their corresponding pods are deployed.
     ```
     kubectl get svc
     ```
@@ -194,56 +194,74 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
     ```
     {: screen}
 
-### Publicly accessing BookInfo
+## Publicly accessing BookInfo
 {: #istio_access_bookinfo}
+Get the public address for the `istio-ingressgateway` load balancer that exposes BookInfo.
+{: shortdesc}
 
-1. Get the public address for the `istio-ingressgateway` load balancer that exposes BookInfo.
-    * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**:
-        1. Set the Istio ingress host.
-            ```
-            export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-            ```
-            {: pre}
+### Creating a gateway URL in Classic clusters
+1. Set the Istio ingress host.
+    ```
+    export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+    ```
+    {: pre}
 
-        2. Set the Istio ingress port.
-            ```
-            export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
-            ```
-            {: pre}
+2. Set the Istio ingress port.
+    ```
+    export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
+    ```
+    {: pre}
 
-        3. Create a `GATEWAY_URL` environment variable that uses the Istio ingress host and port.
-            ```
-            export GATEWAY_URL=$INGRESS_IP:$INGRESS_PORT
-            ```
-            {: pre}
+3. Create a `GATEWAY_URL` environment variable that uses the Istio ingress host and port.
+    ```
+    export GATEWAY_URL=$INGRESS_IP:$INGRESS_PORT
+    ```
+    {: pre}
 
-    * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**: Create a `GATEWAY_URL` environment variable that uses the Istio ingress hostname.
-        ```
-        export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-        ```
-        {: pre}
-
-2. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
+1. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
     ```
     curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/productpage
     ```
     {: pre}
 
-3. View the BookInfo web page in a browser.
+4. Try refreshing the page several times. Different versions of the reviews section round-robin through red stars, black stars, and no stars.
 
-    Mac OS or Linux:
+### Creating a gateway URL in VPC clusters
+1. Create a `GATEWAY_URL` environment variable that uses the Istio ingress hostname.
+    ```
+    export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+    ```
+    {: pre}
+
+1. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
+    ```
+    curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/productpage
+    ```
+    {: pre}
+
+
+
+### Viewing the BookInfo web page in a browser
+{: viewing-bookinfo}
+
+Run the following command based on your operating to view the BookInfo app in your browser.
+{: shortdesc}
+
+- Mac OS or Linux:
     ```
     open http://$GATEWAY_URL/productpage
     ```
     {: pre}
 
-    Windows:
+- Windows:
     ```
     start http://$GATEWAY_URL/productpage
     ```
     {: pre}
 
-4. Try refreshing the page several times. Different versions of the reviews section round-robin through red stars, black stars, and no stars.
+
+Try refreshing the page several times. Different versions of the reviews section round-robin through red stars, black stars, and no stars.
+{: tip}
 
 ### Exposing BookInfo by using an IBM-provided subdomain without TLS
 {: #istio_expose_bookinfo}
@@ -253,16 +271,16 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 
 1. Register the IP address in classic clusters or the hostname in VPC clusters for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic:
-    ```
-    ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --cluster <cluster_name_or_id>
-    ```
-    {: pre}
+        ```
+        ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --cluster <cluster_name_or_id>
+        ```
+        {: pre}
 
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC:
-    ```
-    ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
-    ```
-    {: pre}
+        ```
+        ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
+        ```
+        {: pre}
 
 2. Verify that the subdomain is created and copy the subdomain.
     ```
@@ -270,19 +288,19 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     ```
     {: pre}
 
-    Example output for classic clusters:
-    ```
-    Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-    ```
-    {: screen}
+    **Example output for classic clusters**:
+        ```
+        Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+        ```
+        {: screen}
 
-    Example output for VPC clusters:
-    ```
-    Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
-    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
-    ```
-    {: screen}
+    **Example output for VPC clusters**:
+        ```
+        Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+        ```
+        {: screen}
 
 3. In a web browser, open the BookInfo product page. Because no TLS is configured, make sure that you use HTTP.
     ```
@@ -300,16 +318,16 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 
 1. Register the IP address in classic clusters or the hostname in VPC clusters for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic:
-    ```
-    ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --secret-namespace istio-system --cluster <cluster_name_or_id>
-    ```
-    {: pre}
+        ```
+        ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --secret-namespace istio-system --cluster <cluster_name_or_id>
+        ```
+        {: pre}
 
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC:
-    ```
-    ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --secret-namespace istio-system --cluster <cluster_name_or_id>
-    ```
-    {: pre}
+        ```
+        ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --secret-namespace istio-system --cluster <cluster_name_or_id>
+        ```
+        {: pre}
 
 2. Verify that the subdomain is created and note the name of your SSL secret in the **SSL Cert Secret Name** field.
     ```
@@ -317,12 +335,12 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     ```
     {: pre}
 
-    Example output for classic clusters:
-    ```
-    Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-    ```
-    {: screen}
+    **Example output for classic clusters**:
+        ```
+        Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+        ```
+        {: screen}
 
     Example output for VPC clusters:
     ```
@@ -331,36 +349,41 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     ```
     {: screen}
 
-3. Configure the `bookinfo-gateway` to use TLS termination.
-    1. Delete the existing `bookinfo-gateway`, which is not configured to handle TLS connections.
+### Configuring the bookinfo-gateway to use TLS termination
+{: #bookinfo-tls}
+
+Complete the following steps to set up TLS termination for the `bookinfo-gateway`.
+{: shortdesc}
+
+1. Delete the existing `bookinfo-gateway`, which is not configured to handle TLS connections.
     ```
     kubectl delete gateway bookinfo-gateway
     ```
     {: pre}
 
-    2. Create a new `bookinfo-gateway` configuration file that uses TLS termination. Save the following YAML file as `bookinfo-gateway.yaml`. Replace `<secret_name>` with the name of the SSL secret that you previously found.
+2. Create a new `bookinfo-gateway` configuration file that uses TLS termination. Save the following YAML file as `bookinfo-gateway.yaml`. Replace `<secret_name>` with the name of the SSL secret that you previously found.
     ```yaml
     apiVersion: networking.istio.io/v1alpha3
     kind: Gateway
     metadata:
-      name: bookinfo-gateway
+        name: bookinfo-gateway
     spec:
-      selector:
+        selector:
         istio: ingressgateway
-      servers:
-      - port:
-          number: 443
-          name: https
-          protocol: HTTPS
+        servers:
+        - port:
+            number: 443
+            name: https
+            protocol: HTTPS
         tls:
-          mode: SIMPLE
-          credentialName: <secret_name>
+            mode: SIMPLE
+            credentialName: <secret_name>
         hosts:
         - "*"
     ```
     {: codeblock}
 
-    3. Create the new `bookinfo-gateway` in your cluster.
+3. Create the new `bookinfo-gateway` in your cluster.
     ```
     kubectl apply -f bookinfo-gateway.yaml
     ```
@@ -399,7 +422,7 @@ The BookInfo sample demonstrates how three of Istio's traffic management compone
 
 </br>
 
-<br />
+
 
 ## Including apps in the Istio service mesh by setting up sidecar injection
 {: #istio_sidecar}
@@ -425,39 +448,39 @@ To enable automatic sidecar injection for a namespace:
     ```
     {: pre}
 
-2. Label the namespace as `istio-injection=enabled`.
+1. Label the namespace as `istio-injection=enabled`.
     ```
     kubectl label namespace <namespace> istio-injection=enabled
     ```
     {: pre}
 
-3. Deploy apps into the labeled namespace, or redeploy apps that are already in the namespace.
+1. Deploy apps into the labeled namespace, or redeploy apps that are already in the namespace.
     * To deploy an app into the labeled namespace:
-    ```
-    kubectl apply <myapp>.yaml --namespace <namespace>
-    ```
-    {: pre}
+        ```
+        kubectl apply <myapp>.yaml --namespace <namespace>
+        ```
+        {: pre}
 
     * To redeploy an app that is already deployed in that namespace, delete the app pod so that it is redeployed with the injected sidecar.
-    ```
-    kubectl delete pod -l app=<myapp>
-    ```
-    {: pre}
+        ```
+        kubectl delete pod -l app=<myapp>
+        ```
+        {: pre}
 
-5. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services](https://istio.io/latest/docs/ops/deployment/requirements/){: external}.
+1. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services](https://istio.io/latest/docs/ops/deployment/requirements/){: external}.
 
-    1. Define a service for the app.
+1. Define a service for the app.
     ```yaml
     apiVersion: v1
     kind: Service
     metadata:
-      name: myappservice
+        name: myappservice
     spec:
-      selector:
+        selector:
         <selector_key>: <selector_value>
-      ports:
-       - protocol: TCP
-         port: 8080
+        ports:
+        - protocol: TCP
+            port: 8080
     ```
     {: codeblock}
 
@@ -480,7 +503,7 @@ To enable automatic sidecar injection for a namespace:
         </tr>
         </tbody></table>
 
-    2. Create the service in your cluster. Ensure that the service deploys into the same namespace as the app.
+1. Create the service in your cluster. Ensure that the service deploys into the same namespace as the app.
     ```
     kubectl apply -f myappservice.yaml -n <namespace>
     ```
@@ -503,7 +526,7 @@ Do not enable sidecar injection for the `kube-system`, `ibm-system,` or `ibm-ope
     ```
     {: pre}
 
-2. Navigate to the Istio package directory.
+1. Navigate to the Istio package directory.
     ```
     cd istio-1.10.3
     ```
@@ -517,41 +540,41 @@ To manually inject sidecars into a deployment:
     ```
     {: pre}
 
-2. Deploy your app.
+1. Deploy your app.
     ```
     kubectl apply <myapp>.yaml
     ```
     {: pre}
 
-3. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services](https://istio.io/latest/docs/ops/deployment/requirements/){: external}.
+1. If you didn't create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services](https://istio.io/latest/docs/ops/deployment/requirements/){: external}.
 
     1. Define a service for the app.
-    ```yaml
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: myappservice
-    spec:
-      selector:
-        <selector_key>: <selector_value>
-      ports:
-       - protocol: TCP
-         port: 8080
-    ```
-    {: codeblock}
+        ```yaml
+        apiVersion: v1
+        kind: Service
+        metadata:
+        name: myappservice
+        spec:
+        selector:
+            <selector_key>: <selector_value>
+        ports:
+        - protocol: TCP
+            port: 8080
+        ```
+        {: codeblock}
 
-    <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-    <caption>Understanding this YAML file.</caption>
-    <thead>
-    <col width="20%">
-    <thead>
-    <th>Parameter</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>selector</code></td>
-    <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs.</td>
+        <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
+        <caption>Understanding this YAML file.</caption>
+        <thead>
+        <col width="20%">
+        <thead>
+        <th>Parameter</th>
+        <th>Description</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>selector</code></td>
+        <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs.</td>
         </tr>
         <tr>
         <td><code>port</code></td>
@@ -560,14 +583,14 @@ To manually inject sidecars into a deployment:
         </tbody></table>
 
     2. Create the service in your cluster. Ensure that the service deploys into the same namespace as the app.
-    ```
-    kubectl apply -f myappservice.yaml -n <namespace>
-    ```
-    {: pre}
+        ```
+        kubectl apply -f myappservice.yaml -n <namespace>
+        ```
+        {: pre}
 
 The app pods are now integrated into your Istio service mesh because they have the Istio sidecar container that runs alongside your app container.
 
-<br />
+
 
 ## Enabling or disabling public Istio load balancers
 {: #config-gateways}
@@ -730,34 +753,34 @@ To publicly expose apps:
     ```
     {: pre}
 
-    Example output for classic clusters:
-    ```
-    NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                                                                                                AGE
-    ...
-    istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
-    ```
-    {: screen}
+    **Example output for classic clusters**:
+        ```
+        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                                                                                                AGE
+        ...
+        istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+        ```
+        {: screen}
 
-    Example output for VPC clusters:
-    ```
-    NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                 PORT(S)                                                                                                                AGE
-    ...
-    istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   1234abcd-us-south.lb.appdomain.cloud       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
-    ```
-    {: screen}
+    **Example output for VPC clusters**:
+        ```
+        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                 PORT(S)                                                                                                                AGE
+        ...
+        istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   1234abcd-us-south.lb.appdomain.cloud       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+        ```
+        {: screen}
 
 6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-    ```
-    ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
-    ```
-    {: pre}
+        ```
+        ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
+        ```
+        {: pre}
 
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters:
-    ```
-    ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname>
-    ```
-    {: pre}
+        ```
+        ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname>
+        ```
+        {: pre}
 
 7. Verify that the subdomain is created. In the output, copy the name of your SSL secret in the **SSL Cert Secret Name** field.
     ```
@@ -765,19 +788,19 @@ To publicly expose apps:
     ```
     {: pre}
 
-    Example output for classic clusters:
-    ```
-    Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-    ```
-    {: screen}
+    **Example output for classic clusters**:
+        ```
+        Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+        ```
+        {: screen}
 
-    Example output for VPC clusters:
-    ```
-    Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
-    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
-    ```
-    {: screen}
+    **Example output for VPC clusters**:
+        ```
+        Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+        ```
+        {: screen}
 
 6. Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
     ```
@@ -791,7 +814,7 @@ Looking for even more fine-grained control over routing? To create rules that ar
 Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers. If you notice that the `ibm-cloud-provider-ip` pod for a gateway is stuck in `pending`, see [this troubleshooting topic](/docs/containers?topic=containers-istio_gateway_affinity).
 {: tip}
 
-</br>
+
 
 ### Exposing the Istio ingress gateway with DNS with TLS termination
 {: #tls}
@@ -900,34 +923,34 @@ To publicly expose apps:
     ```
     {: pre}
 
-    Example output for classic clusters:
-    ```
-    NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                                                                                                AGE
-    ...
-    istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
-    ```
-    {: screen}
+    **Example output for classic clusters**:
+        ```
+        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                                                                                                AGE
+        ...
+        istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+        ```
+        {: screen}
 
-    Example output for VPC clusters:
-    ```
-    NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                 PORT(S)                                                                                                                AGE
-    ...
-    istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   1234abcd-us-south.lb.appdomain.cloud       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
-    ```
-    {: screen}
+    **Example output for VPC clusters**:
+        ```
+        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                 PORT(S)                                                                                                                AGE
+        ...
+        istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   1234abcd-us-south.lb.appdomain.cloud       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+        ```
+        {: screen}
 
 6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-    ```
-    ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
-    ```
-    {: pre}
+        ```
+        ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
+        ```
+        {: pre}
 
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters:
-    ```
-    ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname>
-    ```
-    {: pre}
+        ```
+        ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname>
+        ```
+        {: pre}
 
 7. Verify that the subdomain is created. In the output, copy the name of your SSL secret in the **SSL Cert Secret Name** field.
     ```
@@ -935,19 +958,19 @@ To publicly expose apps:
     ```
     {: pre}
 
-    Example output for classic clusters:
-    ```
-    Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-    ```
-    {: screen}
+    **Example output for classic clusters**:
+        ```
+        Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+        ```
+        {: screen}
 
-    Example output for VPC clusters:
-    ```
-    Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
-    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
-    ```
-    {: screen}
+    **Example output for VPC clusters**:
+        ```
+        Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+        ```
+        {: screen}
 
 8. Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
     ```
