@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-26"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -63,6 +63,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -475,11 +476,11 @@ Update the CLIs regularly to use new features.
 {: shortdesc}
 
 This task includes the information for updating the following CLIs:
--   {{site.data.keyword.cloud_notm}} CLI version 0.8.0 or later
--   {{site.data.keyword.containerlong_notm}} plug-in
--   Kubernetes CLI version 1.20.7 or later
--   {{site.data.keyword.registrylong_notm}} plug-in
--   {{site.data.keyword.containerlong_notm}} observability plug-in
+- {{site.data.keyword.cloud_notm}} CLI version 0.8.0 or later
+- {{site.data.keyword.containerlong_notm}} plug-in
+- Kubernetes CLI version 1.20.7 or later
+- {{site.data.keyword.registrylong_notm}} plug-in
+- {{site.data.keyword.containerlong_notm}} observability plug-in
 
 
 <br>
@@ -494,8 +495,8 @@ To update the CLIs:
     ```
     {: pre}
 
-        If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your username and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
-        {: tip}
+    If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your username and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+    {: tip}
 
 3. Update the {{site.data.keyword.containerlong_notm}} plug-in.
     1. Install the update from the {{site.data.keyword.cloud_notm}} plug-in repository.
@@ -646,7 +647,7 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
         ```
         {: pre}
 
-    2.   Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
+    2. Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
         ```
         kubectl config current-context
         ```
