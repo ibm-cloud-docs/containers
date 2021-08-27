@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-08-25"
+lastupdated: "2021-08-27"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -63,6 +63,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -1351,7 +1352,7 @@ The following table shows the changes that are included in the `1.19.2_1524` ver
 Review the version 1.18 changelog.
 {: shortdesc}
 
-Kubernetes version 1.18 is deprecated, with a tentative unsupported date of 1 September 2021. Update your cluster to at least [version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119) as soon as possible.
+Kubernetes version 1.18 is deprecated, with a tentative unsupported date of 30 September 2021. Update your cluster to at least [version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119) as soon as possible.
 {: deprecated}
 
 ### Changelog for master fix pack 1.18.20_1562, released 25 August 2021
