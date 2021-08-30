@@ -219,6 +219,16 @@ subcollection: containers
 * [Add integrations](/docs/containers?topic=containers-learning-path-dev#dev_integrate)
 
 
+## Release notes
+{: #sitemap_release_notes}
+
+
+[Release notes](/docs/containers?topic=containers-rel-notes)
+
+* [August 2021](/docs/containers?topic=containers-rel-notes#release-aug-2021)
+    * [30 August 2021](/docs/containers?topic=containers-rel-notes#30aug2021)
+
+
 ## Tutorials library for Kubernetes Service
 
 [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}

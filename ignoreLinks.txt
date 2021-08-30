@@ -10,4 +10,5 @@ https://containers.cloud.ibm.com/global/v1,
 https://sysdig.com/blog/monitor-istio/,
 https://sysdig.com/products/monitor/,
 https://sysdig.com/opensource/falco/,
-https://sysdig.com/blog/monitor-istio/
+https://sysdig.com/blog/monitor-istio/,
+https://s3.openshift-storage.svc

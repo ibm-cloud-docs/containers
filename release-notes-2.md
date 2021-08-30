@@ -129,8 +129,7 @@ Review the release notes for 30 August 2021.
 {: shortdesc}
 
 
-{{site.data.keyword.block_storage_is_short}} add-on
-:   Version [4.0.0](/docs/containers?topic=containers-vpc_bs_changelog) is available.
-
 Worker node fix pack update
 :   Changelog documentation is available for Kubernetes version [`1.17.17_1568`](/docs/containers?topic=containers-changelog#11717_1568), [`1.18.20_1563`](/docs/containers?topic=containers-changelog#11820_1563), [`1.19.14_1558`](/docs/containers?topic=containers-changelog#11914_1558), [`1.20.10_1551`](/docs/containers?topic=containers-changelog#12010_1551), and [`1.21.4_1529`](/docs/containers?topic=containers-changelog#12104_1529).
+
+

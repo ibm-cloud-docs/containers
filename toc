@@ -27,9 +27,9 @@ Kubernetes Service
     Learning paths
         cs_path_admin.md
         cs_path_dev.md
-    {: .navgroup-end}
 
     release-notes-2.md
+    {: .navgroup-end}
 
     {: .navgroup id="tutorial"}
     [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20)
