@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-08-27"
+lastupdated: "2021-08-30"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -187,7 +187,7 @@ The following table shows the changes that are included in the worker node fix p
 | Registry endpoints | N/A | N/A | Added zonal public registry endpoints for clusters with both private and public service endpoints enabled. |
 | Read only disk self healing | N/A | N/A | For VPC Gen2 workers. Added automation to recover from disks going read only. |
 | Containerd | v1.5.2 | v1.5.4 | See [changelogs](https://github.com/containerd/containerd/releases/tag/v1.5.4){: external}. |
-| Kubernetes | v1.21.2 | v1.21.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.3){: external}. |
+| Kubernetes | v1.21.2 | v1.21.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.3){: external}. The update resolves CVE-2021-32760 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6478995){: external}). |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.21.2_1524" caption-side="top"}
 
@@ -377,7 +377,7 @@ The following table shows the changes that are included in the worker node fix p
 | Registry endpoints | Added zonal public registry endpoints for clusters with both private and public service endpoints enabled. |
 | Read only disk self healing | For VPC Gen2 workers. Added automation to recover from disks going read only. |
 | Containerd | v1.4.6 | v1.4.8 | See [changelogs](https://github.com/containerd/containerd/releases/tag/v1.4.8){: external}. |
-| Kubernetes | v1.20.8 | v1.20.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.9){: external}. |
+| Kubernetes | v1.20.8 | v1.20.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.9){: external}. The update resolves CVE-2021-32760 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6478995){: external}).|
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.20.8_1546" caption-side="top"}
 
@@ -767,7 +767,7 @@ The following table shows the changes that are included in the worker node fix p
 | HA proxy | aae810 | 68e6b3 | Updated image with fixes for [CVE-2021-33910](https://nvd.nist.gov/vuln/detail/CVE-2021-33910){: external}. |
 | Registry endpoints | Added zonal public registry endpoints for clusters with both private and public service endpoints enabled. |
 | Read only disk self healing | For VPC Gen2 workers. Added automation to recover from disks going read only. |
-| Kubernetes | v1.19.12 | v1.19.13 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.9){: external}. |
+| Kubernetes | v1.19.12 | v1.19.13 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.9){: external}. The update resolves CVE-2021-32760 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6478995){: external}). |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.19.12_1553" caption-side="top"}
 
