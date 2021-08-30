@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-30"
 
 keywords: kubernetes, iks, audit
 
@@ -63,6 +63,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -436,6 +437,7 @@ The following table shows the {{site.data.keyword.at_short}} location where your
 | {{site.data.keyword.containerlong_notm}} VPC location | {{site.data.keyword.at_short}} event location |
 |-----|-----|-----|
 | Dallas (us-south-1, us-south-2, us-south-3) | Dallas |
+| São Paulo (br-sao-1, br-sao-2, br-sao-3) | Dallas |
 | Washington, D.C. (us-east-1, us-east-2, us-east-3) | Washington, D.C. |
 | Toronto (ca-tor-1, ca-tor-2, ca-tor-3) | Washington, D.C. |
 | Frankfurt (eu-de-1, eu-de-2, eu-de-3) | Frankfurt |
