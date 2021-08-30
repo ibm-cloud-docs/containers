@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-08-26"
+lastupdated: "2021-08-30"
 
 keywords: containers
 subcollection: containers
@@ -217,6 +217,16 @@ subcollection: containers
 * [Expose your app](/docs/containers?topic=containers-learning-path-dev#dev_expose)
 * [Add app storage](/docs/containers?topic=containers-learning-path-dev#dev_storage)
 * [Add integrations](/docs/containers?topic=containers-learning-path-dev#dev_integrate)
+
+
+## Release notes
+{: #sitemap_release_notes}
+
+
+[Release notes](/docs/containers?topic=containers-rel-notes)
+
+* [August 2021](/docs/containers?topic=containers-rel-notes#release-aug-2021)
+    * [30 August 2021](/docs/containers?topic=containers-rel-notes#30aug2021)
 
 
 ## Tutorials library for Kubernetes Service
@@ -1045,11 +1055,15 @@ subcollection: containers
 * [Troubleshooting](/docs/containers?topic=containers-istio#istio-ts)
 
 [Managing and exposing apps in the service mesh](/docs/containers?topic=containers-istio-mesh)
-* [Trying out the BookInfo sample app](/docs/containers?topic=containers-istio-mesh#istio_bookinfo)
-  * [Setting up the BookInfo sample app](/docs/containers?topic=containers-istio-mesh#bookinfo_setup)
-  * [Publicly accessing BookInfo](/docs/containers?topic=containers-istio-mesh#istio_access_bookinfo)
+* [Understanding the BookInfo sample app](/docs/containers?topic=containers-istio-mesh#istio_bookinfo)
+* [Setting up the BookInfo sample app](/docs/containers?topic=containers-istio-mesh#bookinfo_setup)
+* [Publicly accessing BookInfo](/docs/containers?topic=containers-istio-mesh#istio_access_bookinfo)
+  * [Creating a gateway URL in Classic clusters](/docs/containers?topic=containers-istio-mesh#creating-a-gateway-url-in-classic-clusters)
+  * [Creating a gateway URL in VPC clusters](/docs/containers?topic=containers-istio-mesh#creating-a-gateway-url-in-vpc-clusters)
+  * [Viewing the BookInfo web page in a browser](/docs/containers?topic=containers-istio-mesh#viewing-the-bookinfo-web-page-in-a-browser)
   * [Exposing BookInfo by using an IBM-provided subdomain without TLS](/docs/containers?topic=containers-istio-mesh#istio_expose_bookinfo)
   * [Exposing BookInfo by using an IBM-provided subdomain with TLS](/docs/containers?topic=containers-istio-mesh#istio_expose_bookinfo_tls)
+  * [Configuring the bookinfo-gateway to use TLS termination](/docs/containers?topic=containers-istio-mesh#bookinfo-tls)
   * [Understanding what happened](/docs/containers?topic=containers-istio-mesh#istio_bookinfo_understanding)
 * [Including apps in the Istio service mesh by setting up sidecar injection](/docs/containers?topic=containers-istio-mesh#istio_sidecar)
   * [Enabling automatic sidecar injection](/docs/containers?topic=containers-istio-mesh#istio_sidecar_automatic)
@@ -1740,6 +1754,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog#121_changelog)
+  * [Changelog for worker node fix pack 1.21.4_1529, released 30 August 2021](/docs/containers?topic=containers-changelog#12104_1529)
   * [Changelog for master fix pack 1.21.4_1528, released 25 August 2021](/docs/containers?topic=containers-changelog#1214_1528)
   * [Changelog for worker node fix pack 1.21.3_1527, released 16 August 2021](/docs/containers?topic=containers-changelog#1213_1527)
   * [Changelog for worker node fix pack 1.21.3_1526, released 02 August 2021](/docs/containers?topic=containers-changelog#1213_1526)
@@ -1751,6 +1766,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.21.1_1520, released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1520)
   * [Changelog for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1519)
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+  * [Changelog for worker node fix pack 1.20.10_1551, released 30 August 2021](/docs/containers?topic=containers-changelog#12010_1551)
   * [Changelog for master fix pack 1.20.10_1550 released 25 August 2021](/docs/containers?topic=containers-changelog#12010_1550)
   * [Changelog for worker node fix pack 1.20.9_1549, released 16 August 2021](/docs/containers?topic=containers-changelog#1209_1549)
   * [Changelog for worker node fix pack 1.20.9_1548, released 02 August 2021](/docs/containers?topic=containers-changelog#1209_1548)
@@ -1775,6 +1791,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.20.4_1530, released 22 February 2021](/docs/containers?topic=containers-changelog#1204_1530)
   * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for worker node fix pack 1.19.14_1558, released 30 August 2021](/docs/containers?topic=containers-changelog#11914_1558)
   * [Changelog for master fix pack 1.19.14_1557, released 25 August 2021](/docs/containers?topic=containers-changelog#11914_1557)
   * [Changelog for worker node fix pack 1.19.13_1556, released 16 August 2021](/docs/containers?topic=containers-changelog#11913_1556)
   * [Changelog for worker node fix pack 1.19.13_1555, released 02 August 2021](/docs/containers?topic=containers-changelog#11913_1555)
@@ -1814,6 +1831,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Deprecated: Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.20_1563, released 30 August 2021](/docs/containers?topic=containers-changelog#11820_1563)
   * [Changelog for master fix pack 1.18.20_1562, released 25 August 2021](/docs/containers?topic=containers-changelog#11820_1562)
   * [Changelog for worker node fix pack 1.18.20_1561, released 16 August 2021](/docs/containers?topic=containers-changelog#11820_1561)
   * [Changelog for worker node fix pack 1.18.20_1560, released 02 August 2021](/docs/containers?topic=containers-changelog#11820_1560)

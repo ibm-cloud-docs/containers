@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-14"
+lastupdated: "2021-08-30"
 
 keywords: kubernetes, iks
 
@@ -63,6 +63,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -123,8 +124,8 @@ By setting pod priority, you can help prevent lower priority workloads from impa
 Make sure that you have [set up proper user access](/docs/containers?topic=containers-users#users) to your cluster, and if applicable, [pod security policies (PSPs)](/docs/containers?topic=containers-psp). Access policies and PSPs can help prevent untrusted users from deploying high priority pods that prevent other pods from scheduling.
 {: tip}
 
-{: #priority_scheduling}
-**How does priority scheduling and preemption work?**
+
+**How does priority scheduling and preemption work?** {: #priority_scheduling}
 
 In general, pending pods that have a higher priority are scheduled before lower prioritized pods. If you do not have enough resources left in your worker nodes, the Kubernetes scheduler can preempt (remove) pods to free up enough resources for the higher prioritized pods to be scheduled. Preemption is also affected by graceful termination periods, pod disruption budgets, and worker node affinity.
 
@@ -236,7 +237,7 @@ To use a priority class:
     <tr>
     <td><code>globalDefault</code></td>
     <td>Optional: Set the field to <code>true</code> to make this priority class the global default that is applied to every pod that is scheduled without a <code>priorityClassName</code> value. Only one priority class in your cluster can be set as the global default. If there is no global default, pods with no <code>priorityClassName</code> specified have a priority of zero (<code>0</code>).</br></br>
-    The <a href="#default_priority_class">default priority classes</a> do not set a <code>globalDefault</code>. If you created other priority classes in your cluster, you can check to make sure that they do not set a <code>globalDefault</code> by running <code>kubectl describe priorityclass <name></code>.</td>
+    The <a href="#default_priority_class">default priority classes</a> do not set a <code>globalDefault</code>. If you created other priority classes in your cluster, you can check to make sure that they do not set a <code>globalDefault</code> by running <code>kubectl describe priorityclass &lt;name&gt;</code>.</td>
     </tr>
     <tr>
     <td><code>description</code></td>

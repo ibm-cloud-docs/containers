@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-24"
+lastupdated: "2021-08-27"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -63,6 +63,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -199,7 +200,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 | [1.21](#cs_v121) | Yes | 09 Jun 2021 | Jun 2022 `†` |
 | [1.20](#cs_v120) | Yes | 16 Feb 2021 | Feb 2022 `†` |
 | [1.19](#cs_v119) | Yes | 13 Oct 2020 | 31 Dec 2021 `†` |
-| [1.18](#cs_v118) | Deprecated | 09 Jun 2021 | 30 Sep 2021 `†` |
+| [1.18](#cs_v118) | Deprecated | 09 Jun 2021 | 30 Sep 2021`†` |
 {: caption="Release history for {{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
 Earlier versions of {{site.data.keyword.containerlong_notm}} are [unsupported](#k8s_version_archive).
@@ -390,7 +391,7 @@ The following table shows the actions that you must take after you update your w
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.18.
 {: shortdesc}
 
-Kubernetes version 1.18 is deprecated, with a tentative unsupported date of 1 September 2021. Update your cluster to at least [version 1.19](#cs_v119) as soon as possible.
+Kubernetes version 1.18 is deprecated, with a tentative unsupported date of 30 September 2021. Update your cluster to at least [version 1.19](#cs_v119) as soon as possible.
 {: deprecated}
 
 ### Update before master

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-24"
+lastupdated: "2021-08-30"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -64,6 +64,7 @@ content-type: troubleshoot
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -183,8 +184,8 @@ Start by checking for error messages in the Ingress resource deployment events a
         Host                                             Path  Backends
         ----                                             ----  --------
         mycluster-<hash>-0000.us-south.containers.appdomain.cloud
-/tea      myservice1:80 (<none>)
-/coffee   myservice2:80 (<none>)
+        /tea      myservice1:80 (<none>)
+        /coffee   myservice2:80 (<none>)
     Annotations:
         custom-port:        protocol=http port=7490; protocol=https port=4431
         location-modifier:  modifier='~' serviceName=myservice1;modifier='^~' serviceName=myservice2
@@ -201,8 +202,7 @@ Start by checking for error messages in the Ingress resource deployment events a
     ```
     {: screen}
 
-{: #check_pods}
-2. Check the status of your ALB pods.
+2. Check the status of your ALB pods. {: #check_pods}
     1. Get the ALB pods that are running in your cluster.
         ```
         kubectl get pods -n kube-system | grep alb

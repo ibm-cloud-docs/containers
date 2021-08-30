@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-26"
+lastupdated: "2021-08-30"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -2179,7 +2179,7 @@ ibmcloud ks worker add --cluster my_cluster --workers 3 --public-vlan my_public_
 ```
 {: pre}
 
-</br>
+
 ### `ibmcloud ks worker get`
 {: #cs_worker_get}
 
@@ -2882,7 +2882,7 @@ ibmcloud ks worker-pool rebalance --cluster my_cluster --worker-pool my_pool
 ```
 {: pre}
 
-</br>
+
 ### `ibmcloud ks worker-pool resize`
 {: #cs_worker_pool_resize}
 
@@ -5343,7 +5343,6 @@ ibmcloud ks nlb-dns monitor configure --cluster mycluster --nlb-host mycluster-a
 ```
 {: pre}
 
-</br>
 ### `ibmcloud ks nlb-dns monitor disable`
 {: #cs_nlb-dns-monitor-disable}
 
@@ -5457,7 +5456,7 @@ ibmcloud ks nlb-dns monitor get --cluster mycluster --nlb-host mycluster-a1b2cde
 ```
 {: pre}
 
-</br>
+
 ### `ibmcloud ks nlb-dns monitor ls`
 {: #cs_nlb-dns-monitor-ls}
 

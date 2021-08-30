@@ -4,10 +4,9 @@ copyright:
   years: 2014, 2021
 lastupdated: "2021-08-30"
 
-keywords: kubernetes, iks, help, network, connectivity
+keywords: kubernetes, iks, release notes
 
 subcollection: containers
-content-type: troubleshoot
 
 ---
 
@@ -109,31 +108,28 @@ content-type: troubleshoot
   
 
 
-# VPC: Why doesn't replacing a worker node create a worker node?
-{: #auto-rebalance-off}
+# Release notes
+{: #rel-notes}
 
-**Infrastructure provider**: <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
-
-
-When you [replace a worker node](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_replace) or [update a VPC worker node](/docs/containers?topic=containers-update#vpc_worker_node), a worker node is not automatically added back to your cluster.
-{: tsSymptoms}
+Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
+{: shortdesc}
 
 
-By default, your worker pools are set to automatically rebalance when you replace a worker node. However, you might have disabled automatic rebalancing by manually removing a worker node, such as in the following scenario.
-{: tsCauses}
+## August 2021
+{: #release-aug-2021}
 
-1. You have a worker pool that automatically rebalances by default.
-2. You have a troublesome worker node in the worker pool that you removed individually, such as with the `ibmcloud ks worker rm` command.
-3. Now, automatic rebalancing is disabled for your worker pool, and is not reset unless you try to rebalance or resize the worker pool.
-4. You try to replace a worker node with the `ibmcloud ks worker replace` command or update a VPC worker node with the `ibmcloud ks worker replace --update` command. The worker node is removed, but another worker node is not added back to your worker pool.
+Review the release notes for August 2021.
+{: shortdesc}
 
-You might also have issued the `remove` command shortly after the `replace` command. If the `remove` command is processed before the `replace` command, the worker pool automatic rebalancing is still disabled, so your worker node is not replaced.
-{: note}
+### 30 August 2021
+{: #30aug2021}
+{: release-note}
 
-
-To enable automatic rebalancing, [rebalance](/docs/containers?topic=containers-kubernetes-service-cli#cs_rebalance) or [resize](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_resize) your worker pool. Now, when you replace a worker node, another worker node is created for you.
-{: tsResolve}
+Review the release notes for 30 August 2021.
+{: shortdesc}
 
 
+Worker node fix pack update
+:   Changelog documentation is available for Kubernetes version [`1.17.17_1568`](/docs/containers?topic=containers-changelog#11717_1568), [`1.18.20_1563`](/docs/containers?topic=containers-changelog#11820_1563), [`1.19.14_1558`](/docs/containers?topic=containers-changelog#11914_1558), [`1.20.10_1551`](/docs/containers?topic=containers-changelog#12010_1551), and [`1.21.4_1529`](/docs/containers?topic=containers-changelog#12104_1529).
 
 

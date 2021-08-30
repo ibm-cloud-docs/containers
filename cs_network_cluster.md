@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-30"
 
 keywords: kubernetes, iks, vlan
 
@@ -63,6 +63,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -197,8 +198,8 @@ If you previously disabled the public endpoint, you can re-enable it.
     </br>
 
 
-{: #disable-public-se}
-**Steps to disable**
+
+**Steps to disable** {: #disable-public-se}
 
 To disable the public cloud service endpoint, you must first enable the private cloud service endpoint so that your worker nodes can communicate with the Kubernetes master.
 1. [Enable the private cloud service endpoint](#set-up-private-se).
