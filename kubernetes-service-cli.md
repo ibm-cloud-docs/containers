@@ -6545,7 +6545,6 @@ If you need to list and work with resources from one region only, you can use th
 * Frankfurt (EU Central, eu-de): `https://eu-de.containers.cloud.ibm.com`
 * London (UK South, eu-gb): `https://eu-gb.containers.cloud.ibm.com`
 * Osaka (jp-osa): `https://jp-osa.containers.cloud.ibm.com`
-* São Paulo (br-sao): `https://br-sao.containers.cloud.ibm.com`
 * Sydney (AP South, au-syd): `https://au-syd.containers.cloud.ibm.com`
 * Tokyo (AP North, jp-tok): `https://jp-tok.containers.cloud.ibm.com`
 * Toronto (ca-tor): `https://ca-tor.containers.cloud.ibm.com`
@@ -6615,7 +6614,6 @@ If you need to list and work with resources from one region only, you can use th
 * Frankfurt (EU Central, eu-de): `https://eu-de.containers.cloud.ibm.com`
 * London (UK South, eu-gb): `https://eu-gb.containers.cloud.ibm.com`
 * Osaka (jp-osa): `https://jp-osa.containers.cloud.ibm.com`
-* São Paulo (br-sao): `https://br-sao.containers.cloud.ibm.com`
 * Sydney (AP South, au-syd): `https://au-syd.containers.cloud.ibm.com`
 * Tokyo (AP North, jp-tok): `https://jp-tok.containers.cloud.ibm.com`
 * Toronto (ca-tor): `https://ca-tor.containers.cloud.ibm.com`
