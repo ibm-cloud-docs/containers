@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-20"
+lastupdated: "2021-08-31"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -63,6 +63,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -163,7 +164,7 @@ To resize the worker pool, change the number of worker nodes that the worker poo
     ```
     {: screen}
 
-<br />
+
 
 
 ## Adding worker nodes in VPC clusters
@@ -309,7 +310,7 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
     ```
     {: screen}
 
-<br />
+
 
 ## Adding worker nodes in classic clusters
 {: #classic_pools}
@@ -391,7 +392,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     ```
     {: screen}
 
-<br />
+
 
 ### Adding a zone to a worker pool
 {: #add_zone}
@@ -473,7 +474,7 @@ To add a zone with worker nodes to your worker pool:
     ```
     {: screen}
 
-<br />
+
 
 ## Adding worker nodes in gateway-enabled classic clusters
 {: #gateway_pools}
@@ -695,7 +696,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     ```
     {: pre}
 
-<br />
+
 
 ## Adding classic infrastructure servers to gateway-enabled classic clusters
 {: #gateway_vsi}
@@ -1132,7 +1133,7 @@ Before you begin: [Install and configure the Calico CLI.](/docs/containers?topic
     ```
     {: pre}
 
-<br />
+
 
 
 
@@ -1175,7 +1176,7 @@ If you have a cluster that was created after worker pools were introduced, you c
     ```
     {: pre}
 
-<br />
+
 
 
 ## Installing SGX drivers and platform software on SGX-capable worker nodes
@@ -1231,7 +1232,7 @@ Now, you can develop your confidential computing app to use the enclave for sens
 To uninstall the drivers and platform software, you can follow the same steps, but with the following installation command: `kubectl create -f https://raw.githubusercontent.com/ibm-cloud-security/data-shield-reference-apps/master/scripts/sgx-driver-psw/uninstall_sgx/deployment_uninstall_sgx_iks.yaml`
 {: note}
 
-<br />
+
 
 
 
@@ -1264,14 +1265,14 @@ Choose among the following options:
 
 | Adding tags to clusters with the CLI. |
 |:-----------------|
-| <p><ol><li>Log in to the <a href="/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_cli#ibmcloud_login">{{site.data.keyword.cloud_notm}} CLI</a>.<pre class="pre"><code>ibmcloud login [--sso]</code></pre></li><li><a href="/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_commands_resource#ibmcloud_resource_tag_attach">Tag your cluster</a>. Replace the <code>--resource-name</code> with the name of your cluster. To list available clusters, run <code>ibmcloud ks cluster ls</code>. If you want to check your existing tags so as not to duplicate any, run <code>ibmcloud resource tags</code>.<pre class="pre"><code>ibmcloud resource tag-attach --resource-name <cluster_name> --tag-names &lt;tag1,tag2&gt;</code></pre><p class="note">If you have more than one resource of the same name in your {{site.data.keyword.cloud_notm}} account, the error message lists the resource CRNs and details, and instructs you to try again with the <code>--resource-id</code> flag.</p></li></ol></p> |
+| <p><ol><li>Log in to the <a href="/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_cli#ibmcloud_login">{{site.data.keyword.cloud_notm}} CLI</a>.<pre class="pre"><code>ibmcloud login [--sso]</code></pre></li><li><a href="/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_commands_resource#ibmcloud_resource_tag_attach">Tag your cluster</a>. Replace the <code>--resource-name</code> with the name of your cluster. To list available clusters, run <code>ibmcloud ks cluster ls</code>. If you want to check your existing tags so as not to duplicate any, run <code>ibmcloud resource tags</code>.<pre class="pre"><code>ibmcloud resource tag-attach --resource-name &lt;cluster_name&gt; --tag-names &lt;tag1,tag2&gt;</code></pre><p class="note">If you have more than one resource of the same name in your {{site.data.keyword.cloud_notm}} account, the error message lists the resource CRNs and details, and instructs you to try again with the <code>--resource-id</code> flag.</p></li></ol></p> |
 {: caption="Adding tags to clusters with the CLI." caption-side="top"}
 {: #tags-2}
 {: tab-title="CLI"}
 {: tab-group="tags"}
 {: class="simple-tab-table"}
 
-<br />
+
 
 ## Adding labels to existing worker pools
 {: #worker_pool_labels}
@@ -1335,15 +1336,15 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             Example output for an added label (`app=test`):
             ```
             Labels:   app=test
-arch=amd64
-...
+            arch=amd64
+            ...
             ```
             {: screen}
 
             Example output for a removed label (the `app=test` label is gone):
             ```
             Labels:   arch=amd64
-...
+            ...
             ```
             {: screen}            
 
@@ -1366,7 +1367,7 @@ arch=amd64
 
 After you label your worker pool, you can use the [label in your app deployments](/docs/containers?topic=containers-app#label) so that your workloads run on only these worker nodes, or [taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} to prevent deployments from running on these worker nodes.
 
-<br />
+
 
 ## Automatically resolving issues for your worker nodes
 {: #planning_autorecovery}

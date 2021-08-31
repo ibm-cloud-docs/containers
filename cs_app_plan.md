@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-14"
+lastupdated: "2021-08-31"
 
 keywords: kubernetes, iks, deploy
 
@@ -63,6 +63,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -125,13 +126,11 @@ Learn what kinds of workloads can be run on {{site.data.keyword.containerlong_no
 Your containerized app must be able to run on the supported operating system, Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated). You also want to consider the statefulness of your app.
 {: shortdesc}
 
-<dl>
-<dt>Stateless apps</dt>
-    <dd><p>Stateless apps are preferred for cloud-native environments like Kubernetes. They are simple to migrate and scale because they declare dependencies, store configurations separately from the code, and treat backing services such as databases as attached resources instead of coupled to the app. The app pods do not require persistent data storage or a stable network IP address, and as such, pods can be terminated, rescheduled, and scaled in response to workload demands. The app uses a Database-as-a-Service for persistent data, and NodePort, load balancer, or Ingress services to expose the workload on a stable IP address.</p></dd>
-<dt>Stateful apps</dt>
-    <dd><p>Stateful apps are more complicated than stateless apps to set up, manage, and scale because the pods require persistent data and a stable network identity. Stateful apps are often databases or other distributed, data-intensive workloads where processing is more efficient closer to the data itself.</p>
-    <p>If you want to deploy a stateful app, you need to set up persistent storage and mount a persistent volume to the pod that is controlled by a StatefulSet object. You can choose to add [file](/docs/containers?topic=containers-file_storage#file_statefulset), [block](/docs/containers?topic=containers-block_storage#block_statefulset), or [object](/docs/containers?topic=containers-object_storage#cos_statefulset) storage as the persistent storage for your stateful set. You can also install [Portworx](/docs/containers?topic=containers-portworx) on top of your bare metal worker nodes and use Portworx as a highly available software-defined storage solution to manage persistent storage for your stateful apps. For more information about how stateful sets work, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/).</p></dd>
-</dl>
+Stateless apps
+:   Stateless apps are preferred for cloud-native environments like Kubernetes. They are simple to migrate and scale because they declare dependencies, store configurations separately from the code, and treat backing services such as databases as attached resources instead of coupled to the app. The app pods do not require persistent data storage or a stable network IP address, and as such, pods can be terminated, rescheduled, and scaled in response to workload demands. The app uses a Database-as-a-Service for persistent data, and NodePort, load balancer, or Ingress services to expose the workload on a stable IP address.
+
+Stateful apps
+:   Stateful apps are more complicated than stateless apps to set up, manage, and scale because the pods require persistent data and a stable network identity. Stateful apps are often databases or other distributed, data-intensive workloads where processing is more efficient closer to the data itself. If you want to deploy a stateful app, you need to set up persistent storage and mount a persistent volume to the pod that is controlled by a StatefulSet object. You can choose to add [file](/docs/containers?topic=containers-file_storage#file_statefulset), [block](/docs/containers?topic=containers-block_storage#block_statefulset), or [object](/docs/containers?topic=containers-object_storage#cos_statefulset) storage as the persistent storage for your stateful set. You can also install [Portworx](/docs/containers?topic=containers-portworx) on top of your bare metal worker nodes and use Portworx as a highly available software-defined storage solution to manage persistent storage for your stateful apps. For more information about how stateful sets work, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/){: external}.
 
 ### What are some guidelines for developing stateless, cloud-native apps?
 {: #12factor}
@@ -176,7 +175,7 @@ For more, see the following tutorials:
 
 
 
-<br />
+
 
 ## Understanding Kubernetes objects for apps
 {: #kube-objects}
@@ -273,18 +272,16 @@ To consume a configmap or secret, you need to mount it to the pod. The configmap
 
 Both resources define key-value pairs, but you use them for different situations.
 
-<dl>
-<dt>Configmap</dt>
-<dd>Provide non-sensitive configuration information for workloads that are specified in a deployment. You can use configmaps in three main ways.
-<ul><li><strong>File system</strong>: You can mount an entire file or a set of variables to a pod. A file is created for each entry based on the key name contents of the file that are set to the value.</li>
-<li><strong>Environment variable</strong>: Dynamically set the environment variable for a container spec.</li>
-<li><strong>Command-line argument</strong>: Set the command-line argument that is used in a container spec.</li></ul></dd>
+Configmap
+:   Provide non-sensitive configuration information for workloads that are specified in a deployment. You can use configmaps in three main ways.
+    - File system: You can mount an entire file or a set of variables to a pod. A file is created for each entry based on the key name contents of the file that are set to the value.
+    - Environment variable: Dynamically set the environment variable for a container spec.
+    - Command-line argument: Set the command-line argument that is used in a container spec.
 
-<dt>Secret</dt>
-<dd>Provide sensitive information to your workloads, such as follows. Other users of the cluster might have access to the secret, so be sure that you know the secret information can be shared with those users.
-<ul><li><strong>Personally identifiable information (PII)</strong>: Store sensitive information such as email addresses or other types of information that are required for company compliance or government regulation in secrets.</li>
-<li><strong>Credentials</strong>: Put credentials such as passwords, keys, and tokens in a secret to reduce the risk of accidental exposure. For example, when you <a href="/docs/containers?topic=containers-service-binding">bind a service</a> to your cluster, the credentials are stored in a secret.</li></ul></dd>
-</dl>
+Secret
+:   Provide sensitive information to your workloads, such as follows. Other users of the cluster might have access to the secret, so be sure that you know the secret information can be shared with those users.
+    - Personally identifiable information (PII: Store sensitive information such as email addresses or other types of information that are required for company compliance or government regulation in secrets.</li>
+    - Credentials: Put credentials such as passwords, keys, and tokens in a secret to reduce the risk of accidental exposure. For example, when you [bind a service](/docs/containers?topic=containers-service-binding) to your cluster, the credentials are stored in a secret.
 
 Want to make your secrets even more secured? Ask your cluster admin to [enable a key management service provider](/docs/containers?topic=containers-encryption#keyprotect) in your cluster to encrypt new and existing secrets.
 {: tip}
@@ -296,8 +293,8 @@ When you [specify your app YAML file](/docs/containers?topic=containers-app#app_
 {: shortdesc}
 
 Additionally, your cluster admin might set up resource controls that can affect your app deployment, such as the following.
-*  [Resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/){: external}
-*  [Pod priority](/docs/containers?topic=containers-pod_priority)
+* [Resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/){: external}
+* [Pod priority](/docs/containers?topic=containers-pod_priority)
 
 ### How can I add capabilities to my app configuration?
 {: #capabilities}
@@ -320,7 +317,7 @@ See [Specifying your app requirements in your YAML file](/docs/containers?topic=
 
 See [Adding services to apps](/docs/containers?topic=containers-service-binding#adding_app).
 
-<br />
+
 
 ## Planning highly available deployments
 {: #highly_available_apps}
@@ -379,7 +376,7 @@ Consider the following options to increase availability of your app.
 If you want to dynamically add and remove apps in response to workload usage, see [Scaling apps](/docs/containers?topic=containers-update_app#app_scaling) for steps to enable horizontal pod autoscaling.
 {: shortdesc}
 
-<br />
+
 
 ## Versioning and updating apps
 {: #updating}
@@ -425,14 +422,14 @@ Within the YAML file, you can use labels or annotations as metadata to manage yo
 
 To update your app, you can choose from various strategies such as the following. You might start with a rolling deployment or instantaneous switch before you progress to a more complicated canary deployment.
 
-<dl>
-<dt>Rolling deployment</dt>
-    <dd>You can use Kubernetes-native functionality to create a `v2` deployment and to gradually replace your previous `v1` deployment. This approach requires that apps are backwards-compatible so that users who are served the `v2` app version do not experience any breaking changes. For more information, see [Managing rolling deployments to update your apps](/docs/containers?topic=containers-update_app#app_rolling).</dd>
-<dt>Instantaneous switch</dt>
-    <dd>Also referred to as a blue-green deployment, an instantaneous switch requires double the compute resources to have two versions of an app running at once. With this approach, you can switch your users to the newer version in near real time. Make sure that you use service label selectors (such as `version: green` and `version: blue`) to make sure that requests are sent to the right app version. You can create the new `version: green` deployment, wait until it is ready, and then delete the `version: blue` deployment. Or you can perform a [rolling update](/docs/containers?topic=containers-update_app#app_rolling), but set the `maxUnavailable` parameter to `0%` and the `maxSurge` parameter to `100%`.</dd>
-<dt>Canary or A/B deployment</dt>
-    <dd>A more complex update strategy, a canary deployment is when you pick a percentage of users such as 5% and send them to the new app version. You collect metrics in your logging and monitoring tools on how the new app version performs, do A/B testing, and then roll out the update to more users. As with all deployments, labeling the app (such as `version: stable` and `version: canary`) is critical. To manage canary deployments, you might [install the managed Istio add-on service mesh](/docs/containers?topic=containers-istio), [set up {{site.data.keyword.mon_short}} for your cluster](/docs/monitoring?topic=monitoring-kubernetes_cluster#kubernetes_cluster), and then use the Istio service mesh for A/B testing as described [in this blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://sysdig.com/blog/monitor-istio/).</dd>
-</dl>
+Rolling deployment
+:   You can use Kubernetes-native functionality to create a `v2` deployment and to gradually replace your previous `v1` deployment. This approach requires that apps are backwards-compatible so that users who are served the `v2` app version do not experience any breaking changes. For more information, see [Managing rolling deployments to update your apps](/docs/containers?topic=containers-update_app#app_rolling).
+
+Instantaneous switch
+:   Also referred to as a blue-green deployment, an instantaneous switch requires double the compute resources to have two versions of an app running at once. With this approach, you can switch your users to the newer version in near real time. Make sure that you use service label selectors (such as `version: green` and `version: blue`) to make sure that requests are sent to the right app version. You can create the new `version: green` deployment, wait until it is ready, and then delete the `version: blue` deployment. Or you can perform a [rolling update](/docs/containers?topic=containers-update_app#app_rolling), but set the `maxUnavailable` parameter to `0%` and the `maxSurge` parameter to `100%`.
+
+Canary or A/B deployment
+:   A more complex update strategy, a canary deployment is when you pick a percentage of users such as 5% and send them to the new app version. You collect metrics in your logging and monitoring tools on how the new app version performs, do A/B testing, and then roll out the update to more users. As with all deployments, labeling the app (such as `version: stable` and `version: canary`) is critical. To manage canary deployments, you might [install the managed Istio add-on service mesh](/docs/containers?topic=containers-istio), [set up {{site.data.keyword.mon_short}} for your cluster](/docs/monitoring?topic=monitoring-kubernetes_cluster#kubernetes_cluster), and then use the Istio service mesh for A/B testing as described [in this blog post](https://sysdig.com/blog/monitor-istio/).
 
 ### How can I automate my app deployment?
 {: #packaging}
@@ -440,14 +437,17 @@ To update your app, you can choose from various strategies such as the following
 If you want to run your app in multiple clusters, public and private environments, or even multiple cloud providers, you might wonder how you can make your deployment strategy work across these environments. With {{site.data.keyword.cloud_notm}} and other open source tools, you can package your application to help automate deployments.
 {: shortdesc}
 
-<dl>
-<dt>Set up a continuous integration and delivery (CI/CD) pipeline</dt>
-    <dd>With your app configuration files organized in a source control management system such as Git, you can build your pipeline to test and deploy code to different environments, such as `test` and `prod`. Work with your cluster administrator to [set up continuous integration and delivery](/docs/containers?topic=containers-cicd).</dd>
-<dt>Package your app configuration files</dt>
-    <dd>Package your app with tools like Kustomize or Helm.<ul><li>With the <a href="/docs/containers?topic=containers-app#kustomize"><code>kustomize</code> project</a>, you can write, customize, and reuse your Kubernetes resource YAML configurations.</li><li>With the <a href="https://helm.sh/docs/">Helm</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> Kubernetes package manager, you can specify all Kubernetes resources that your app requires in a Helm chart. Then, you can use Helm to create the YAML configuration files and deploy these files in your cluster. You can also <a href="https://cloud.ibm.com/kubernetes/helm">integrate {{site.data.keyword.cloud_notm}}-provided Helm charts</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> to extend your cluster's capabilities, such as with a block storage plug-in.</li></ul><p class="tip">Are you just looking for an easy way to create YAML file templates? Some people use Helm to do just that, or you might try out other community tools such as [`ytt` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://get-ytt.io/).</p></dd>
-</dl>
+Set up a continuous integration and delivery (CI/CD) pipeline
+:   With your app configuration files organized in a source control management system such as Git, you can build your pipeline to test and deploy code to different environments, such as `test` and `prod`. Work with your cluster administrator to [set up continuous integration and delivery](/docs/containers?topic=containers-cicd).
 
-<br />
+Package your app configuration files
+:   Package your app with tools like Kustomize or Helm.
+    - With the `kustomize` [project](/docs/containers?topic=containers-app#kustomize), you can write, customize, and reuse your Kubernetes resource YAML configurations.</li>
+    - With the [Helm](https://helm.sh/docs/){: external} Kubernetes package manager, you can specify all Kubernetes resources that your app requires in a Helm chart. Then, you can use Helm to create the YAML configuration files and deploy these files in your cluster. You can also [integrate {{site.data.keyword.cloud_notm}}-provided Helm charts](https://cloud.ibm.com/kubernetes/helm){: external} to extend your cluster's capabilities, such as with a block storage plug-in.
+        
+Are you looking to create YAML file templates? Some people use Helm to do just that, or you might try out other community tools such as [`ytt`](https://get-ytt.io/){: external}.
+
+
 
 ## Setting up service discovery
 {: #service_discovery}
@@ -486,18 +486,20 @@ As you plan how many `Service` objects you need in your cluster, keep in mind th
 As you plan and develop your app, consider the following options to maintain a secure image, ensure that sensitive information is encrypted, encrypt traffic between app microservices, and control traffic between your app pods and other pods and services in the cluster.
 {: shortdesc}
 
-<dl>
-<dt>Image security</dt>
-<dd>To protect your app, you must protect the image and establish checks to ensure the image's integrity. Review the [image and registry security topic](/docs/containers?topic=containers-security#images_registry) for steps that you can take to ensure secure container images. For example, you might use Vulnerability Advisor checks the security status of container images. When you add an image to your organization's {{site.data.keyword.registrylong_notm}} namespace, the image is automatically scanned by Vulnerability Advisor to detect security issues and potential vulnerabilities. If security issues are found, instructions are provided to help fix the reported vulnerability. To get started, see [Managing image security with Vulnerability Advisor](/docs/Registry?topic=va-va_index).</dd>
-<dt>Kubernetes secrets</dt>
-<dd>When you deploy your app, do not store confidential information, such as credentials or keys, in the YAML configuration file, configmaps, or scripts. Instead, use [Kubernetes secrets](/docs/containers?topic=containers-security#pi), such as an image pull secret for registry credentials. You can then reference these secrets in your deployment YAML file.</dd>
-<dt>Secret encryption</dt>
-<dd>You can encrypt the Kubernetes secrets that you create in your cluster by using a key management service (KMS) provider, such as {{site.data.keyword.keymanagementserviceshort}}. To get started, see [Encrypt secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect) and [Verify that secrets are encrypted](/docs/containers?topic=containers-encryption#verify_kms).</dd>
-<dt>Microservice traffic encryption</dt>
-<dd>After you deploy your app, you can set up a service mesh and enable mTLS encryption for traffic between services in the mesh. To get started, [set up the managed Istio add-on](/docs/containers?topic=containers-istio). Then, follow the steps in [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls).</dd>
-<dt>Pod traffic management</dt>
-<dd>By default, any pod has access to any other pod in the cluster. Additionally, any pod has access to any services that are exposed by the pod network, such as a metrics service, the cluster DNS, the API server, or any services that you manually create in your cluster. [Kubernetes network policies](/docs/containers?topic=containers-network_policies#isolate_services) protect pods from internal network traffic. For example, if most or all pods do not require access to specific pods or services, and you want to ensure that pods by default cannot access those pods or services, you can create a Kubernetes network policy to block ingress traffic to those pods or services. Kubernetes network policies can also help you enforce workload isolation between namespaces by controlling how pods and services in different namespaces can communicate.<br><br>For clusters that run Kubernetes 1.21 and later, the service account tokens that pods use to communicate with the Kubernetes API server are time-limited, automatically refreshed, scoped to a particular audience of users (the pod), and invalidated after the pod is deleted. To continue communicating with the API server, you must design your apps to read the refreshed token value on a regular basis, such as every minute. For more information, see [Bound Service Account Tokens ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/enhancements/blob/master/keps/sig-auth/1205-bound-service-account-tokens/README.md).</dd>
-</dl>
+Image security
+:   To protect your app, you must protect the image and establish checks to ensure the image's integrity. Review the [image and registry security topic](/docs/containers?topic=containers-security#images_registry) for steps that you can take to ensure secure container images. For example, you might use Vulnerability Advisor to check the security status of container images. When you add an image to your organization's {{site.data.keyword.registrylong_notm}} namespace, the image is automatically scanned by Vulnerability Advisor to detect security issues and potential vulnerabilities. If security issues are found, instructions are provided to help fix the reported vulnerability. To get started, see [Managing image security with Vulnerability Advisor](/docs/Registry?topic=va-va_index).
+
+Kubernetes secrets
+:   When you deploy your app, do not store confidential information, such as credentials or keys, in the YAML configuration file, configmaps, or scripts. Instead, use [Kubernetes secrets](/docs/containers?topic=containers-security#pi), such as an image pull secret for registry credentials. You can then reference these secrets in your deployment YAML file.
+
+Secret encryption
+:   You can encrypt the Kubernetes secrets that you create in your cluster by using a key management service (KMS) provider, such as {{site.data.keyword.keymanagementserviceshort}}. To get started, see [Encrypt secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect) and [Verify that secrets are encrypted](/docs/containers?topic=containers-encryption#verify_kms).
+
+Microservice traffic encryption
+:   After you deploy your app, you can set up a service mesh and enable mTLS encryption for traffic between services in the mesh. To get started, [set up the managed Istio add-on](/docs/containers?topic=containers-istio). Then, follow the steps in [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls).
+
+Pod traffic management
+:   By default, any pod has access to any other pod in the cluster. Additionally, any pod has access to any services that are exposed by the pod network, such as a metrics service, the cluster DNS, the API server, or any services that you manually create in your cluster. [Kubernetes network policies](/docs/containers?topic=containers-network_policies#isolate_services) protect pods from internal network traffic. For example, if most or all pods do not require access to specific pods or services, and you want to ensure that pods by default cannot access those pods or services, you can create a Kubernetes network policy to block ingress traffic to those pods or services. Kubernetes network policies can also help you enforce workload isolation between namespaces by controlling how pods and services in different namespaces can communicate. For clusters that run Kubernetes 1.21 and later, the service account tokens that pods use to communicate with the Kubernetes API server are time-limited, automatically refreshed, scoped to a particular audience of users (the pod), and invalidated after the pod is deleted. To continue communicating with the API server, you must design your apps to read the refreshed token value on a regular basis, such as every minute. For more information, see [Bound Service Account Tokens](https://github.com/kubernetes/enhancements/blob/master/keps/sig-auth/1205-bound-service-account-tokens/README.md){: external}.
 
 ## Managing access and monitoring app health
 {: #app_plan_logmet}

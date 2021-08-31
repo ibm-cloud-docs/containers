@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-30"
+lastupdated: "2021-08-31"
 
 keywords: kubernetes, iks, release notes
 
@@ -115,7 +115,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 {: shortdesc}
 
 
-This page has moved. For the latest release note information, see [Release notes](/docs/openshift?topic=rel-notes).
+This page has moved. For the latest release note information, see [Release notes](/docs/openshift?topic=openshift-rel-notes).
 {: important}
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status){: external}.
