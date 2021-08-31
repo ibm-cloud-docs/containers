@@ -36,43 +36,43 @@ toc:
             - cs_path_admin.md
             - cs_path_dev.md
         - release-notes-2.md
-    - navgroup: 
-      id: tutorials
-      topics:
-        - link: 
-          label: Tutorials library for Kubernetes Service
-          href: https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20
         - topicgroup: 
-          label: Creating clusters
+          label: Tutorials
           topics:
-            - cs_tutorials.md
-            - cs_tutorial_vpc.md
-        - topicgroup: 
-          label: Migrating environments to clusters
-          topics:
-            - cs_tutorials_cf.md
-            - link:
-              label: Moving a VM-based application to Kubernetes
-              href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes
-            - cs_tutorial_vpc.md
-        - topicgroup:
-          label: Developing apps in clusters
-          topics:
-            - cs_tutorial_odo.md
-            - cs_tutorials_starter.md
-            - link:
-              label: Developing a Kubernetes app toolchain with Code Risk Analyzer
-              href: https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer)
-            - link:
-              label: Continuous Deployment to Kubernetes
-              href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes
-        - topicgroup:
-          label: Controlling traffic to apps in clusters
-          topics:
-            - cs_tutorials_policies.md
-            - link:
-              label: Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services
-              href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis
+            - link: 
+              label: Tutorials library for Kubernetes Service
+              href: https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20
+            - topicgroup: 
+              label: Creating clusters
+              topics:
+                - cs_tutorials.md
+                - cs_tutorial_vpc.md
+            - topicgroup: 
+              label: Migrating environments to clusters
+              topics:
+                - cs_tutorials_cf.md
+                - link:
+                  label: Moving a VM-based application to Kubernetes
+                  href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes
+                - cs_tutorial_vpc.md
+            - topicgroup:
+              label: Developing apps in clusters
+              topics:
+                - cs_tutorial_odo.md
+                - cs_tutorials_starter.md
+                - link:
+                  label: Developing a Kubernetes app toolchain with Code Risk Analyzer
+                  href: https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer)
+                - link:
+                  label: Continuous Deployment to Kubernetes
+                  href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes
+            - topicgroup:
+              label: Controlling traffic to apps in clusters
+              topics:
+                - cs_tutorials_policies.md
+                - link:
+                  label: Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services
+                  href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis
     - navgroup: 
       id: howto
       topics:
@@ -139,21 +139,22 @@ toc:
             - cs_manage_scc.md
         - topicgroup:
           label: Managing the cluster network
-        - topicgroup:
-            label: Classic clusters
-            topics:
-              - cs_subnets.md
-              - cs_network_cluster.md
-              - cs_vpn.md
-              - cs_dns.md
-              - cs_static_routes.md
-        - topicgroup:
-          label: VPC clusters
           topics:
-            - vpc_subnets.md
-            - vpc_vpn.md
-            - cs_dns.md
-            - cs_static_routes.md
+            - topicgroup:
+                label: Classic clusters
+                topics:
+                  - cs_subnets.md
+                  - cs_network_cluster.md
+                  - cs_vpn.md
+                  - cs_dns.md
+                  - cs_static_routes.md
+            - topicgroup:
+              label: VPC clusters
+              topics:
+                - vpc_subnets.md
+                - vpc_vpn.md
+                - cs_dns.md
+                - cs_static_routes.md
         - topicgroup:
           label: Logging and monitoring
           topics:
@@ -165,7 +166,6 @@ toc:
           topics:
             - cs_registry.md
             - cs_cicd.md
-
         - topicgroup:
           label: Developing and deploying apps
           topics:
@@ -191,12 +191,12 @@ toc:
             - topicgroup:
               label: Exposing apps with load balancers
               topics:
-              - cs_loadbalancer_qs.md
-              - vpc_lbaas.md
-              - cs_loadbalancer_about.md
-              - cs_loadbalancer.md
-              - cs_loadbalancer_v2.md
-              - cs_loadbalancer_dns.md
+                - cs_loadbalancer_qs.md
+                - vpc_lbaas.md
+                - cs_loadbalancer_about.md
+                - cs_loadbalancer.md
+                - cs_loadbalancer_v2.md
+                - cs_loadbalancer_dns.md
             - topicgroup:
               label: Exposing apps with Ingress ALBs
               topics:
@@ -232,21 +232,21 @@ toc:
       - topicgroup:
         label: API reference
         topics:
-        - link:
-          label: IBM Cloud Kubernetes Service API
-          href: https://containers.cloud.ibm.com/global/swagger-global-api/#/
-        - link:
-          label: IBM Cloud Kubernetes Service API JSON
-          href: https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json
-        - link:
-          label: IBM Cloud Container Registry API
-          href: https://cloud.ibm.com/apidocs/container-registry
-        - link: 
-          label: IBM Cloud Vulnerability Advisor API
-          href: https://cloud.ibm.com/apidocs/container-registry/va
-        - link: 
-          label: Community Kubernetes API
-          href: https://kubernetes.io/docs/reference/
+          - link:
+            label: IBM Cloud Kubernetes Service API
+            href: https://containers.cloud.ibm.com/global/swagger-global-api/#/
+          - link:
+            label: IBM Cloud Kubernetes Service API JSON
+            href: https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json
+          - link:
+            label: IBM Cloud Container Registry API
+            href: https://cloud.ibm.com/apidocs/container-registry
+          - link: 
+            label: IBM Cloud Vulnerability Advisor API
+            href: https://cloud.ibm.com/apidocs/container-registry/va
+          - link: 
+            label: Community Kubernetes API
+            href: https://kubernetes.io/docs/reference/
       - topicgroup:
         label: CLI plug-in reference
         topics:
@@ -279,16 +279,16 @@ toc:
       - topicgroup:
         label: Related links
         topics:
-        - link: 
-          label: Community Kubernetes documentation
-          href: https://kubernetes.io/docs/home/
-        - link: 
-          label: IBM Developer - Containers
-          href: https://developer.ibm.com/technologies/containers/
-        - link: 
-          label: IBM Developer - Kubernetes
-          href: https://developer.ibm.com/components/kubernetes/
-        - faqs.md
+          - link: 
+            label: Community Kubernetes documentation
+            href: https://kubernetes.io/docs/home/
+          - link: 
+            label: IBM Developer - Containers
+            href: https://developer.ibm.com/technologies/containers/
+          - link: 
+            label: IBM Developer - Kubernetes
+            href: https://developer.ibm.com/components/kubernetes/
+          - faqs.md
       - topicgroup:
         label: Troubleshooting
         topics:
@@ -310,8 +310,8 @@ toc:
               - ts-cluster/ts-cluster-view-work.md
               - ts-cluster/ts-cluster-access-resources.md
           - topicgroup:
-              label: Worker nodes
-              topics:
+            label: Worker nodes
+            topics:
               - ts-worker/ts-worker-debug.md
               - ts-worker/ts-worker-debug-kube-api.md
               - cs_states_workers.md
