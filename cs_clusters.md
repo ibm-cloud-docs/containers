@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-27"
+lastupdated: "2021-08-31"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -774,7 +774,10 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
         * **Virtual - shared**: Infrastructure resources, such as the hypervisor and physical hardware, are shared across you and other IBM customers, but each worker node is accessible only by you. Although this option is less expensive and sufficient in most cases, you might want to verify your performance and infrastructure requirements with your company policies. Virtual machines are billed hourly.
         * **Virtual - dedicated**: Your worker nodes are hosted on infrastructure that is devoted to your account. Your physical resources are completely isolated. Virtual machines are billed hourly.
     2. Set how many worker nodes to create per zone, such as **3**. For example, if you selected 2 zones and want to create 3 worker nodes, a total of 6 worker nodes are provisioned in your cluster with 3 worker nodes in each zone. You must set at least 1 worker node. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
-    3. Toggle disk encryption. By default, [worker nodes feature AES 256-bit disk encryption](/docs/containers?topic=containers-security#workernodes).
+    3. Select a key management service (KMS) instance and root key to encrypt the local disk for each worker node in the `default` worker pool.
+
+    Before you can use KMS encryption, you must create a KMS instance and set up the required service authorization in IAM. See [Managing encryption for the worker nodes in your cluster](/docs/containers?topic=containers-encryption#worker-encryption).
+    {: note}
 
 8. Configure your cluster with a private or a public and a private cloud service endpoint by setting the **Master service endpoint**. For more information about what setup is required to run internet-facing apps, or to keep your cluster private, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters#vpc-workeruser-master).
 9. If you do not have the required infrastructure permissions to create a cluster, the **Infrastructure permissions checker** lists the missing permissions. Ask your account owner to [set up the API key](/docs/containers?topic=containers-access-creds) with the required permissions.
@@ -821,7 +824,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     * For more information, see [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}: Subnets](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets).
 5. Create the cluster in your VPC. You can use the `ibmcloud ks cluster create vpc-gen2` command to create a single zone cluster in your VPC with worker nodes that are connected to one VPC subnet only. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#vpc_add_zone) to your cluster after the cluster is created. The cluster takes a few minutes to provision.
     ```
-    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] 
+    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] [--kms-instance <KMS_instance_ID> --crk <root_key_ID>]
     ```
     {: pre}
 
@@ -883,6 +886,14 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     <tr>
     <td><code>--disable-public-service-endpoint</code></td>
     <td>Include this option in your command to create your VPC cluster with a private cloud service endpoint only. If you do not include this option, your cluster is set up with a public and a private cloud service endpoint. The service endpoint determines how your Kubernetes master and the worker nodes communicate, how your cluster access other {{site.data.keyword.cloud_notm}} services and apps outside the cluster, and how your users connect to your cluster. For more information, see <a href="/docs/containers?topic=containers-plan_clusters">Planning your cluster network setup</a>.</td>
+    </tr>
+    <tr>
+    <td><code>--kms-instance &lt;KMS_instance_ID&gt;</code></td>
+    <td>Optional: Include the ID of a key management service (KMS) instance to use to encrypt the local disk on the worker nodes in the <code>default</code> worker pool. To list available KMS instances, run <code>ibmcloud ks kms instance ls</code>. If you include this option, you must also include the <code>--crk</code> option.<p class="note">Before you can use KMS encryption, you must create a KMS instance and set up the required service authorization in IAM. See <a href="/docs/containers?topic=containers-encryption#worker-encryption">Managing encryption for the worker nodes in your cluster</a>.</p></td>
+    </tr>
+    <tr>
+    <td><code>--crk &lt;root_key&gt;/code></td>
+    <td>Optional: Include the ID of the root key in the KMS instance to use to encrypt the local disk on the worker nodes in the <code>default</code> worker pool. To list available root keys, run <code>ibmcloud ks kms crk ls --instance-id</code>. If you include this option, you must also include the <code>--kms-instance</code> option.<p class="note">Before you can use KMS encryption, you must create a KMS instance and set up the required service authorization in IAM. See <a href="/docs/containers?topic=containers-encryption#worker-encryption">Managing encryption for the worker nodes in your cluster</a>.</p></td>
     </tr>
     </tbody></table>
 6. Verify that the creation of the cluster was requested. It can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account.
