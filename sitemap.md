@@ -680,6 +680,9 @@ subcollection: containers
   * [Enabling KMS encryption for the cluster through the console](/docs/containers?topic=containers-encryption#kms_ui)
   * [Rotating the root key for your cluster](/docs/containers?topic=containers-encryption#kms_rotate)
 * [Verifying secret encryption](/docs/containers?topic=containers-encryption#verify_kms)
+* [Managing encryption for the worker nodes in your cluster](/docs/containers?topic=containers-encryption#worker-encryption)
+  * [Classic worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-classic)
+  * [VPC worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-vpc)
 * [Encrypting data in classic clusters by using IBM Cloud Data Shield](/docs/containers?topic=containers-encryption#datashield)
 
 [Configuring pod security policies](/docs/containers?topic=containers-psp)

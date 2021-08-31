@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-30"
+lastupdated: "2021-08-31"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -976,7 +976,7 @@ Free clusters are not available in VPC.
 {: note}
 
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--version MAJOR.MINOR.PATCH] [--workers NUMBER_WORKERS_PER_ZONE] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--skip-advance-permissions-check] [-q]
+ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--version MAJOR.MINOR.PATCH] [--workers NUMBER_WORKERS_PER_ZONE] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] --kms-instance KMS_INSTANCE_ID --crk ROOT_KEY_ID][--skip-advance-permissions-check] [-q]
 ```
 {: pre}
 
@@ -1038,6 +1038,12 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
 
 <dt><code><strong>--skip-advance-permissions-check</strong></code></dt>
 <dd>Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
+
+<dt><code>--kms-instance <em>KMS_INSTANCE_ID</em></code></dt>
+<dd>Optional: Include the ID of a key management service (KMS) instance to use to encrypt the local disk on the worker nodes in the <code>default</code> worker pool. To list available KMS instances, run <code>ibmcloud ks kms instance ls</code>. If you include this option, you must also include the <code>--crk</code> option.<p class="note">Before you can use KMS encryption, you must create a KMS instance and set up the required service authorization in IAM. See [Managing encryption for the worker nodes in your cluster](/docs/containers?topic=containers-encryption#worker-encryption).</p></dd>
+
+<dt><code>--crk <em>ROOT_KEY</em>/code></dt>
+<dd>Optional: Include the ID of the root key in the KMS instance to use to encrypt the local disk on the worker nodes in the <code>default</code> worker pool. To list available root keys, run <code>ibmcloud ks kms crk ls --instance-id</code>. If you include this option, you must also include the <code>--kms-instance</code> option.<p class="note">Before you can use KMS encryption, you must create a KMS instance and set up the required service authorization in IAM. See [Managing encryption for the worker nodes in your cluster](/docs/containers?topic=containers-encryption#worker-encryption).</p></dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -2639,7 +2645,7 @@ Add a worker pool to a VPC cluster. No worker nodes are created until you [add z
 {: shortdesc}
 
 ```sh
-ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> [--vpc-id <VPC ID>] [--label KEY1=VALUE1] [-q] [--output json]
+ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> [--vpc-id <VPC ID>] [--label KEY1=VALUE1] [--kms-instance KMS_INSTANCE_ID --crk ROOT_KEY_ID] [-q] [--output json]
 ```
 {: pre}
 
@@ -2667,6 +2673,12 @@ ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <clu
 
 <dt><code>-l, --label <em>KEY1=VALUE1</em></code></dt>
 <dd>Optional: Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple flags, such as `-l key1=value1 -l key2=value2`.</ul></dd>
+
+<dt><code>--kms-instance <em>KMS_INSTANCE_ID</em></code></dt>
+<dd>Optional: Include the ID of a key management service (KMS) instance to use to encrypt the local disk on the worker nodes in the <code>default</code> worker pool. To list available KMS instances, run <code>ibmcloud ks kms instance ls</code>. If you include this option, you must also include the <code>--crk</code> option. For more information including steps to create , see [Managing encryption for the worker nodes in your cluster](/docs/containers?topic=containers-encryption#worker-encryption).</dd>
+
+<dt><code>--crk <em>ROOT_KEY</em>/code></dt>
+<dd>Optional: Include the ID of the root key in the KMS instance to use to encrypt the local disk on the worker nodes in this worker pool. To list available root keys, run <code>ibmcloud ks kms crk ls --instance-id</code>. If you include this option, you must also include the <code>--kms-instance</code> option.<p class="note">Before you can use KMS encryption, you must create a KMS instance and set up the required service authorization in IAM. See [Managing encryption for the worker nodes in your cluster](/docs/containers?topic=containers-encryption#worker-encryption).</p></dd>
 
 <dt><code>-q</code>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -6545,6 +6557,7 @@ If you need to list and work with resources from one region only, you can use th
 * Frankfurt (EU Central, eu-de): `https://eu-de.containers.cloud.ibm.com`
 * London (UK South, eu-gb): `https://eu-gb.containers.cloud.ibm.com`
 * Osaka (jp-osa): `https://jp-osa.containers.cloud.ibm.com`
+* São Paulo (br-sao): `https://br-sao.containers.cloud.ibm.com`
 * Sydney (AP South, au-syd): `https://au-syd.containers.cloud.ibm.com`
 * Tokyo (AP North, jp-tok): `https://jp-tok.containers.cloud.ibm.com`
 * Toronto (ca-tor): `https://ca-tor.containers.cloud.ibm.com`
@@ -6614,6 +6627,7 @@ If you need to list and work with resources from one region only, you can use th
 * Frankfurt (EU Central, eu-de): `https://eu-de.containers.cloud.ibm.com`
 * London (UK South, eu-gb): `https://eu-gb.containers.cloud.ibm.com`
 * Osaka (jp-osa): `https://jp-osa.containers.cloud.ibm.com`
+* São Paulo (br-sao): `https://br-sao.containers.cloud.ibm.com`
 * Sydney (AP South, au-syd): `https://au-syd.containers.cloud.ibm.com`
 * Tokyo (AP North, jp-tok): `https://jp-tok.containers.cloud.ibm.com`
 * Toronto (ca-tor): `https://ca-tor.containers.cloud.ibm.com`

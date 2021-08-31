@@ -134,6 +134,9 @@ Istio add-on changelog
 New! Sao Paolo multizone region
 :   You can now create classic or VPC clusters in the Sao Paolo, Brazil [location](/docs/containers?topic=containers-regions-and-zones).
 
+ VPC disk encryption on worker nodes
+:   Now, you can manage the encryption for the disk on your VPC worker nodes. For more information, see [VPC worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-vpc).
+
 ### 30 August 2021
 {: #30aug2021}
 {: release-note}
@@ -145,4 +148,3 @@ Review the release notes for 30 August 2021.
 
 Worker node fix pack update
 :   Changelog documentation is available for Kubernetes version [`1.17.17_1568`](/docs/containers?topic=containers-changelog#11717_1568), [`1.18.20_1563`](/docs/containers?topic=containers-changelog#11820_1563), [`1.19.14_1558`](/docs/containers?topic=containers-changelog#11914_1558), [`1.20.10_1551`](/docs/containers?topic=containers-changelog#12010_1551), and [`1.21.4_1529`](/docs/containers?topic=containers-changelog#12104_1529).
-
