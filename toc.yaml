@@ -430,6 +430,6 @@ toc:
               - ts-storage/ts-storage-debug-portworx.md
               - ts-storage/ts-storage-px-debug.md
               - ts-storage/ts-storage-px-encryption-fails.md
-              - release_notes.md
-              - cs_limitations.md
-              - sitemap.md
+          - release_notes.md
+          - cs_limitations.md
+          - sitemap.md
