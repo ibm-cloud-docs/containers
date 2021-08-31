@@ -240,16 +240,18 @@ Run the following command based on your operating to view the BookInfo app in yo
 {: shortdesc}
 
 Mac OS or Linux:
-    ```
-    open http://$GATEWAY_URL/productpage
-    ```
-    {: pre}
+
+```
+open http://$GATEWAY_URL/productpage
+```
+{: pre}
 
 Windows:
-    ```
-    start http://$GATEWAY_URL/productpage
-    ```
-    {: pre}
+
+```
+start http://$GATEWAY_URL/productpage
+```
+{: pre}
 
 
 Try refreshing the page several times. Different versions of the reviews section round-robin through red stars, black stars, and no stars.
@@ -329,19 +331,19 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 
 **Example output for classic clusters**
 
-    ```
-    Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-    ```
-    {: screen}
+```
+Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+```
+{: screen}
 
 **Example output for VPC clusters**
 
-    ```
-    Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
-    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
-    ```
-    {: screen}
+```
+Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+```
+{: screen}
 
 ### Configuring the bookinfo-gateway to use TLS termination
 {: #bookinfo-tls}
@@ -680,16 +682,12 @@ To publicly expose apps:
 
     **Example output for classic clusters**:
         ```
-        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                                                                                                AGE
-        ...
         istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
         ```
         {: screen}
 
     **Example output for VPC clusters**:
         ```
-        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                 PORT(S)                                                                                                                AGE
-        ...
         istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   1234abcd-us-south.lb.appdomain.cloud       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
         ```
         {: screen}
@@ -713,25 +711,28 @@ To publicly expose apps:
     ```
     {: pre}
 
-    **Example output for classic clusters**:
-        ```
-        Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-        ```
-        {: screen}
+**Example output for classic clusters**:
 
-    **Example output for VPC clusters**:
-        ```
-        Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
-        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
-        ```
-        {: screen}
+```
+Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+```
+{: screen}
 
-6. Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
-    ```
-    http://<host_name>/<service_path>
-    ```
-    {: codeblock}
+**Example output for VPC clusters**:
+
+```
+Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+```
+{: screen}
+
+**Next steps** Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
+
+```
+http://<host_name>/<service_path>
+```
+{: codeblock}
 
 Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules`](https://istio.io/latest/docs/reference/config/networking/destination-rule/){: external}.
 {: tip}
@@ -819,17 +820,15 @@ To publicly expose apps:
     {: pre}
 
     **Example output for classic clusters**:
+    
         ```
-        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                                                                                                AGE
-        ...
         istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
         ```
         {: screen}
 
     **Example output for VPC clusters**:
+
         ```
-        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                 PORT(S)                                                                                                                AGE
-        ...
         istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   1234abcd-us-south.lb.appdomain.cloud       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
         ```
         {: screen}

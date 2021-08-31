@@ -132,7 +132,7 @@ The {{site.data.keyword.cos_full_notm}} plug-in is configured to work with any s
 
 Follow these steps to create an {{site.data.keyword.cos_full_notm}} service instance. If you plan to use a local Cloud Object Storage server or a different s3 API endpoint, refer to the provider documentation to set up your Cloud Object Storage instance.
 
-1. Open the [{{site.data.keyword.cos_full_notm}} catalog page](https://cloud.ibm.com/catalog/services/cloud-object-storage).
+1. Open the [{{site.data.keyword.cos_full_notm}} catalog page](https://cloud.ibm.com/objectstorage/create).
 2. Enter a name for your service instance, such as `cos-backup`, and select the same resource group that your cluster is in. To view the resource group of your cluster, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.   
 3. Review the [plan options](https://www.ibm.com/cloud/object-storage/pricing/#s3api){: external} for pricing information and select a plan.
 4. Click **Create**. The service details page opens.
