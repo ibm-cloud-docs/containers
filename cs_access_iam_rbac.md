@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-23"
+lastupdated: "2021-08-31"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -63,6 +63,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -380,7 +381,7 @@ Grant users access to your {{site.data.keyword.containerlong_notm}} clusters by 
         <tr>
         <td><code>subjects.attributes</code></td>
         <td>Enter the {{site.data.keyword.cloud_notm}} IAM details for the individual user or access group that you previously retrieved.
-        <ul><li>For individual users, set <code>iam_id</code> for the <code>name</code> field. Enter the previously retrieved <strong>ibmUniqueId</strong> for the <code>value</code> field.</li>
+        <ul><li>For individual users, set <code>iam_id</code> for the <code>name</code> field. Enter the previously retrieved <code>ibmUniqueId</code> for the <code>value</code> field.</li>
         <li>For access groups, set <code>access_group_id</code> for the <code>name</code> field. Enter the previously retrieved <strong>ID</strong> for the <code>value</code> field.</li></ul></td>
         </tr>
         <tr>

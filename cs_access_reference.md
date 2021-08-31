@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-14"
+lastupdated: "2021-08-31"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -63,6 +63,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -192,8 +193,8 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | List all Ingress ALBs in a cluster. | [`ibmcloud ks ingress alb ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_albs) | <ul><li>Classic: <a href="https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetClusterALBs"><code>GET /v1/clusters/{idOrName}</code></a></li><li>VPC: <a href="https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/V2GetClusterALBs"><code>GET ​/v2​/alb​/getClusterAlbs</code></a></ul></li>|
 | Get the configuration of load balancers that expose Ingress ALBs in your cluster. | [`ibmcloud ks ingress lb get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_get) | [`GET /ingress/v2/load-balancer/configuration`](https://containers.cloud.ibm.com/global/swagger-global-api/#/beta/GetLBConfig) |
 | View the name and email address for the owner of the {{site.data.keyword.cloud_notm}} IAM API key for a resource group and region. | [`ibmcloud ks api-key info`](/docs/containers?topic=containers-kubernetes-service-cli#cs_api_key_info) | [`GET /v1/logging/{idOrName}/clusterkeyowner`](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/GetClusterKeyOwner) |
-| Download Kubernetes configuration data and certificates to connect to your cluster and run kubectl commands. | [`ibmcloud ks cluster config`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_config) | [`GET /v1/clusters/{idOrName}/config`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterConfig) |
-| View information for a cluster. | [`ibmcloud ks cluster get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_get) | <ul><li>Provider-agnostic: <a href="https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/getCluster"><code>GET /v2​/getCluster</code></a></li><li>Classic: <a href="https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetCluster"><code>GET /v1/clusters/{idOrName}</code></a></li><li>VPC: <a href="https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/vpcGetCluster"><code>GET /v2​/vpc/getCluster</code></a></li></ul> |
+| Download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands. | [`ibmcloud ks cluster config`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_config) | [`GET /v1/clusters/{idOrName}/config`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterConfig) |
+| View information for a cluster. | [`ibmcloud ks cluster get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_get) | <ul><li>Provider-independent: <a href="https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/getCluster"><code>GET /v2​/getCluster</code></a></li><li>Classic: <a href="https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetCluster"><code>GET /v1/clusters/{idOrName}</code></a></li><li>VPC: <a href="https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/vpcGetCluster"><code>GET /v2​/vpc/getCluster</code></a></li></ul> |
 | List all services in all namespaces that are bound to a cluster. | [`ibmcloud ks cluster service ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_services) | [`GET /v1/clusters/{idOrName}/services`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ListServicesForAllNamespaces) |
 | List all clusters. | [`ibmcloud ks cluster ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_clusters) | <ul><li>Classic: <a href="https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusters"><code>GET /v1/clusters</code></a></li><li>VPC: <a href="https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/vpcGetClusters"><code>GET ​/v2​/vpc​/getClusters</code></a></li></ul> |
 | Get the infrastructure credentials that are set for the {{site.data.keyword.cloud_notm}} account to access a different classic infrastructure portfolio. | [`ibmcloud ks credential get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credential_get) | [`GET /v1/credentials`](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetUserCredentials) |

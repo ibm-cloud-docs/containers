@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-08-30"
+lastupdated: "2021-08-31"
 
 keywords: containers
 subcollection: containers
@@ -226,6 +226,7 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-rel-notes)
 
 * [August 2021](/docs/containers?topic=containers-rel-notes#release-aug-2021)
+    * [31 August 2021](/docs/containers?topic=containers-rel-notes#31aug2021)
     * [30 August 2021](/docs/containers?topic=containers-rel-notes#30aug2021)
 
 
@@ -1365,6 +1366,7 @@ subcollection: containers
 * [Deciding on the object storage configuration](/docs/containers?topic=containers-object_storage#configure_cos)
 * [VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#cos_auth_ip)
 * [Adding object storage to apps](/docs/containers?topic=containers-object_storage#add_cos)
+  * [Creating a deployment](/docs/containers?topic=containers-object_storage#create-cos-deployment-steps)
 * [Using object storage in a stateful set](/docs/containers?topic=containers-object_storage#cos_statefulset)
 * [Backing up and restoring data](/docs/containers?topic=containers-object_storage#cos_backup_restore)
 * [Adding your {{site.data.keyword.cos_full_notm}} credentials to the default storage classes](/docs/containers?topic=containers-object_storage#storage_class_custom)
@@ -1909,6 +1911,8 @@ subcollection: containers
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
+* [Version 1.11](/docs/containers?topic=containers-istio-changelog#v111)
+  * [Changelog for 1.11.1, released 31 August 2021](/docs/containers?topic=containers-istio-changelog#1111)
 * [Version 1.10](/docs/containers?topic=containers-istio-changelog#v110)
   * [Changelog for 1.10.3, released 5 August 2021](/docs/containers?topic=containers-istio-changelog#1103)
   * [Changelog for 1.10.2, released 15 July 2021](/docs/containers?topic=containers-istio-changelog#1102)

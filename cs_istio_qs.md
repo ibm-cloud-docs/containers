@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-08-31"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -63,6 +63,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -257,19 +258,21 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 
 4. View the BookInfo web page in a browser.
 
-    Mac OS or Linux:
-    ```
-    open http://$GATEWAY_URL/productpage
-    ```
-    {: pre}
+Mac OS or Linux:
 
-    Windows:
-    ```
-    start http://$GATEWAY_URL/productpage
-    ```
-    {: pre}
+```
+open http://$GATEWAY_URL/productpage
+```
+{: pre}
 
-5. Try refreshing the page several times. Different versions of the reviews section round-robin through no stars (`v1` of `reviews`), black stars (`v2`), and red stars (`v3`).
+Windows:
+
+```
+start http://$GATEWAY_URL/productpage
+```
+{: pre}
+
+**Next steps** Try refreshing the page several times. Different versions of the reviews section round-robin through no stars (`v1` of `reviews`), black stars (`v2`), and red stars (`v3`).
 
 For more information about how routing works in Istio, see [Understanding what happened](/docs/containers?topic=containers-istio-mesh#istio_bookinfo_understanding).
 
@@ -312,16 +315,16 @@ After you finish testing your app and are ready to start directing live traffic 
 4. View the BookInfo web page in a browser.
 
     Mac OS or Linux:
-    ```
-    open http://$GATEWAY_URL/productpage
-    ```
-    {: pre}
+        ```
+        open http://$GATEWAY_URL/productpage
+        ```
+        {: pre}
 
     Windows:
-    ```
-    start http://$GATEWAY_URL/productpage
-    ```
-    {: pre}
+        ```
+        start http://$GATEWAY_URL/productpage
+        ```
+        {: pre}
 
 5. Try refreshing the page several times. Notice that the page with no stars (`v1`) is no longer shown, and that a majority of page refreshes show the black stars (`v2`). Only rarely is the page with red stars (`v3`) shown.
 

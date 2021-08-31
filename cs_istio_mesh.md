@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-26"
+lastupdated: "2021-08-31"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -165,6 +165,7 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 1. Ensure that the BookInfo microservices and their corresponding pods are deployed.
     ```
     kubectl get svc
+    kubectl get pods
     ```
     {: pre}
 
@@ -175,15 +176,6 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
     productpage               ClusterIP      172.21.168.196   <none>         9080/TCP         2m
     ratings                   ClusterIP      172.21.11.131    <none>         9080/TCP         2m
     reviews                   ClusterIP      172.21.117.164   <none>         9080/TCP         2m
-    ```
-    {: screen}
-
-    ```
-    kubectl get pods
-    ```
-    {: pre}
-
-    ```
     NAME                                     READY     STATUS      RESTARTS   AGE
     details-v1-6865b9b99d-7v9h8              2/2       Running     0          2m
     productpage-v1-f8c8fb8-tbsz9             2/2       Running     0          2m
@@ -247,17 +239,19 @@ Get the public address for the `istio-ingressgateway` load balancer that exposes
 Run the following command based on your operating to view the BookInfo app in your browser.
 {: shortdesc}
 
-- Mac OS or Linux:
-    ```
-    open http://$GATEWAY_URL/productpage
-    ```
-    {: pre}
+Mac OS or Linux:
 
-- Windows:
-    ```
-    start http://$GATEWAY_URL/productpage
-    ```
-    {: pre}
+```
+open http://$GATEWAY_URL/productpage
+```
+{: pre}
+
+Windows:
+
+```
+start http://$GATEWAY_URL/productpage
+```
+{: pre}
 
 
 Try refreshing the page several times. Different versions of the reviews section round-robin through red stars, black stars, and no stars.
@@ -335,19 +329,21 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     ```
     {: pre}
 
-    **Example output for classic clusters**:
-        ```
-        Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-        ```
-        {: screen}
+**Example output for classic clusters**
 
-    Example output for VPC clusters:
-    ```
-    Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
-    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
-    ```
-    {: screen}
+```
+Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+```
+{: screen}
+
+**Example output for VPC clusters**
+
+```
+Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+```
+{: screen}
 
 ### Configuring the bookinfo-gateway to use TLS termination
 {: #bookinfo-tls}
@@ -403,25 +399,27 @@ Complete the following steps to set up TLS termination for the `bookinfo-gateway
 The BookInfo sample demonstrates how three of Istio's traffic management components work together to route ingress traffic to the app.
 {: shortdesc}
 
-<dl>
-<dt><code>Gateway</code></dt>
-<dd>The `bookinfo-gateway` [Gateway ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/latest/docs/reference/config/networking/gateway/) describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace that acts as the entry point for inbound HTTP/TCP traffic for BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file.
-</br></br>To see the configuration file for the BookInfo gateway, run the following command.
-<pre class="pre"><code>kubectl get gateway bookinfo-gateway -o yaml</code></pre></dd>
+`Gateway`
+:   The `bookinfo-gateway` [Gateway](https://istio.io/latest/docs/reference/config/networking/gateway/){: external} describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace that acts as the entry point for inbound HTTP/TCP traffic for BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file. To see the configuration file for the BookInfo gateway, run the following command. 
+    ```
+    kubectl get gateway bookinfo-gateway -o yaml
+    ```
+    {: pre}
 
-<dt><code>VirtualService</code></dt>
-<dd>The `bookinfo` [`VirtualService` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/latest/docs/reference/config/networking/virtual-service/) defines the rules that control how requests are routed within the service mesh by defining microservices as `destinations`. In the `bookinfo` virtual service, the `/productpage` URI of a request is routed to the `productpage` host on port `9080`. In this way, all requests to the BookInfo app are routed first to the `productpage` microservice, which then calls the other microservices of BookInfo.
-</br></br>To see the virtual service rule that is applied to BookInfo, run the following command.
-<pre class="pre"><code>kubectl get virtualservice bookinfo -o yaml</code></pre></dd>
+`VirtualService`
+:   The `bookinfo` [VirtualService](https://istio.io/latest/docs/reference/config/networking/virtual-service/){: external} defines the rules that control how requests are routed within the service mesh by defining microservices as `destinations`. In the `bookinfo` virtual service, the `/productpage` URI of a request is routed to the `productpage` host on port `9080`. In this way, all requests to the BookInfo app are routed first to the `productpage` microservice, which then calls the other microservices of BookInfo. To see the virtual service rule, run the following command.
+    ```
+    kubectl get virtualservice bookinfo -o yaml
+    ```
+    {: pre}
 
-<dt><code>DestinationRule</code></dt>
-<dd>After the gateway routes the request according to virtual service rule, the `details`, `productpage`, `ratings`, and `reviews` [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/latest/docs/reference/config/networking/destination-rule/) define policies that are applied to the request when it reaches a microservice. For example, when you refresh the BookInfo product page, the changes that you see are the result of the `productpage` microservice randomly calling different versions, `v1`, `v2`, and `v3`, of the `reviews` microservice. The versions are selected randomly because the `reviews` destination rule gives equal weight to the `subsets`, or the named versions, of the microservice. These subsets are used by the virtual service rules when traffic is routed to specific versions of the service.
-</br></br>To see the destination rules that are applied to BookInfo, run the following command.
-<pre class="pre"><code>kubectl describe destinationrules</code></pre></dd>
-</dl>
+`DestinationRule`
+:   After the gateway routes the request according to virtual service rule, the `details`, `productpage`, `ratings`, and `reviews` [DestinationRules](https://istio.io/latest/docs/reference/config/networking/destination-rule/){: external} define policies that are applied to the request when it reaches a microservice. For example, when you refresh the BookInfo product page, the changes that you see are the result of the `productpage` microservice randomly calling different versions, `v1`, `v2`, and `v3`, of the `reviews` microservice. The versions are selected randomly because the `reviews` destination rule gives equal weight to the `subsets`, or the named versions, of the microservice. These subsets are used by the virtual service rules when traffic is routed to specific versions of the service. To see the destination rules that are applied to BookInfo, run the following command.
 
-</br>
-
+    ```
+    kubectl describe destinationrules
+    ```
+    {: pre}
 
 
 ## Including apps in the Istio service mesh by setting up sidecar injection
@@ -455,19 +453,18 @@ To enable automatic sidecar injection for a namespace:
     {: pre}
 
 1. Deploy apps into the labeled namespace, or redeploy apps that are already in the namespace.
-    * To deploy an app into the labeled namespace:
-        ```
-        kubectl apply <myapp>.yaml --namespace <namespace>
-        ```
-        {: pre}
+    ```
+    kubectl apply <myapp>.yaml --namespace <namespace>
+    ```
+    {: pre}
 
-    * To redeploy an app that is already deployed in that namespace, delete the app pod so that it is redeployed with the injected sidecar.
-        ```
-        kubectl delete pod -l app=<myapp>
-        ```
-        {: pre}
+1. **Optional** To redeploy an app in that namespace, delete the app pod so that it is redeployed with the injected sidecar.
+    ```
+    kubectl delete pod -l app=<myapp>
+    ```
+    {: pre}
 
-1. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services](https://istio.io/latest/docs/ops/deployment/requirements/){: external}.
+1. If you didn't create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services](https://istio.io/latest/docs/ops/deployment/requirements/){: external}.
 
 1. Define a service for the app.
     ```yaml
@@ -476,32 +473,13 @@ To enable automatic sidecar injection for a namespace:
     metadata:
         name: myappservice
     spec:
-        selector:
-        <selector_key>: <selector_value>
+        selector: 
+        <selector_key>: <selector_value> # Enter the label key `selector_key` and value `selector_value` pair that you want to use to target the pods where your app runs.
         ports:
         - protocol: TCP
-            port: 8080
+            port: 8080 # The port that the service listens on
     ```
     {: codeblock}
-
-    <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-    <caption>Understanding this YAML file.</caption>
-    <thead>
-    <col width="25%">
-    <thead>
-    <th>Parameter</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>selector</code></td>
-    <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs.</td>
-        </tr>
-        <tr>
-        <td><code>port</code></td>
-        <td>The port that the service listens on.</td>
-        </tr>
-        </tbody></table>
 
 1. Create the service in your cluster. Ensure that the service deploys into the same namespace as the app.
     ```
@@ -514,7 +492,7 @@ The app pods are now integrated into your Istio service mesh because they have t
 ### Manually injecting sidecars
 {: #istio_sidecar_manual}
 
-If you do not want to enable automatic sidecar injection for a namespace, you can manually inject the sidecar into a deployment YAML. Inject sidecars manually when apps are running in namespaces alongside other deployments that you do not want sidecars automatically injected into.
+If you don't want to enable automatic sidecar injection for a namespace, you can manually inject the sidecar into a deployment YAML. Inject sidecars manually when apps are running in namespaces alongside other deployments that you do not want sidecars automatically injected into.
 
 Do not enable sidecar injection for the `kube-system`, `ibm-system,` or `ibm-operators` namespaces.
 {: note}
@@ -548,45 +526,26 @@ To manually inject sidecars into a deployment:
 
 1. If you didn't create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services](https://istio.io/latest/docs/ops/deployment/requirements/){: external}.
 
-    1. Define a service for the app.
-        ```yaml
-        apiVersion: v1
-        kind: Service
-        metadata:
-        name: myappservice
-        spec:
-        selector:
-            <selector_key>: <selector_value>
+1. Define a service for the app.
+    ```yaml
+    apiVersion: v1
+    kind: Service
+    metadata:
+     name: myappservice
+    spec:
+    selector:
+        <selector_key>: <selector_value> # Enter the label key `selector_key` and value `selector_value` pair that you want to use to target the pods where your app runs.
         ports:
         - protocol: TCP
-            port: 8080
-        ```
-        {: codeblock}
+            port: 8080 # The port that the service listens on.
+    ```
+    {: codeblock}
 
-        <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-        <caption>Understanding this YAML file.</caption>
-        <thead>
-        <col width="20%">
-        <thead>
-        <th>Parameter</th>
-        <th>Description</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>selector</code></td>
-        <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs.</td>
-        </tr>
-        <tr>
-        <td><code>port</code></td>
-        <td>The port that the service listens on.</td>
-        </tr>
-        </tbody></table>
-
-    2. Create the service in your cluster. Ensure that the service deploys into the same namespace as the app.
-        ```
-        kubectl apply -f myappservice.yaml -n <namespace>
-        ```
-        {: pre}
+1. Create the service in your cluster. Ensure that the service deploys into the same namespace as the app.
+    ```
+    kubectl apply -f myappservice.yaml -n <namespace>
+    ```
+    {: pre}
 
 The app pods are now integrated into your Istio service mesh because they have the Istio sidecar container that runs alongside your app container.
 
@@ -648,7 +607,6 @@ In the following steps, you set up a subdomain through which your users can acce
 * A virtual service that is called `my-virtual-service`. `my-gateway` uses the rules that you define in `my-virtual-service` to route traffic to your app.
 * A subdomain for the `istio-ingressgateway` load balancer. All user requests to the subdomain are forwarded to your app according to your `my-virtual-service` routing rules.
 
-</br>
 
 ### Exposing the Istio ingress gateway with DNS without TLS termination
 {: #no-tls}
@@ -666,18 +624,17 @@ To publicly expose apps:
     apiVersion: networking.istio.io/v1alpha3
     kind: Gateway
     metadata:
-        name: my-gateway
-    namespace: <namespace>
-  spec:
-    selector:
-      istio: ingressgateway
-    servers:
-    - port:
-        name: http
-        number: 80
-        protocol: HTTP
-      hosts:
-      - '*'
+      name: ingress
+    spec:
+      selector:
+        app: ingressgateway
+      servers:
+      - port:
+          number: 80
+          name: http
+          protocol: HTTP
+        hosts:
+        - "*"
     ```
     {: codeblock}
 
@@ -692,54 +649,24 @@ To publicly expose apps:
     apiVersion: networking.istio.io/v1beta1
     kind: VirtualService
     metadata:
-        name: my-virtual-service
-    namespace: <namespace>
-  spec:
+      name: my-virtual-service
+    namespace: <namespace> # The namespace where your Istio-managed microservices are deployed.
+    spec:
     gateways:
-    - my-gateway
+    - my-gateway # `my-gateway` is specified so that the gateway can apply these virtual service routing rules to the `istio-ingressgateway` load balancer.
     hosts:
     - '*'
     http:
     - match:
       - uri:
-          exact: /<service_path>
+          exact: /<service_path> # Replace `service_path` with the path that your entrypoint microservice listens on. For example, in the BookInfo app, the path is defined as `/productpage`.
       route:
       - destination:
-          host: <service_name>
+          host: <service_name> # Replace `service_name` with the name of your entrypoint microservice. For example, in the BookInfo app, `productpage` served as the entrypoint microservice that called the other app microservices.
           port:
-            number: 80
+            number: 80 # If your microservice listens on a different port, replace `80` with the port.
     ```
     {: codeblock}
-
-    <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-    <caption>Understanding this YAML file.</caption>
-    <thead>
-    <col width="30%">
-    <th>Parameter</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>namespace</code></td>
-    <td>Replace <em>&lt;namespace&gt;</em> with the namespace where your Istio-managed microservices are deployed.</td>
-    </tr>
-    <tr>
-    <td><code>gateways</code></td>
-    <td>The <code>my-gateway</code> is specified so that the gateway can apply these virtual service routing rules to the <code>istio-ingressgateway</code> load balancer.<td>
-    </tr>
-    <tr>
-    <td><code>http.match.uri.exact</code></td>
-    <td>Replace <em>&lt;service_path&gt;</em> with the path that your entrypoint microservice listens on. For example, in the BookInfo app, the path is defined as <code>/productpage</code>.</td>
-    </tr>
-    <tr>
-    <td><code>http.route.destination.host</code></td>
-    <td>Replace <em>&lt;service_name&gt;</em> with the name of your entrypoint microservice. For example, in the BookInfo app, <code>productpage</code> served as the entrypoint microservice that called the other app microservices.</td>
-    </tr>
-    <tr>
-    <td><code>http.route.destination.port.number</code></td>
-    <td>If your microservice listens on a different port, replace <em>&lt;80&gt;</em> with the port.</td>
-    </tr>
-    </tbody></table>
 
 4. Apply the virtual service rules in the namespace where your Istio-managed microservice is deployed.
     ```
@@ -755,16 +682,12 @@ To publicly expose apps:
 
     **Example output for classic clusters**:
         ```
-        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                                                                                                AGE
-        ...
         istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
         ```
         {: screen}
 
     **Example output for VPC clusters**:
         ```
-        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                 PORT(S)                                                                                                                AGE
-        ...
         istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   1234abcd-us-south.lb.appdomain.cloud       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
         ```
         {: screen}
@@ -788,25 +711,28 @@ To publicly expose apps:
     ```
     {: pre}
 
-    **Example output for classic clusters**:
-        ```
-        Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-        ```
-        {: screen}
+**Example output for classic clusters**:
 
-    **Example output for VPC clusters**:
-        ```
-        Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
-        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
-        ```
-        {: screen}
+```
+Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+```
+{: screen}
 
-6. Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
-    ```
-    http://<host_name>/<service_path>
-    ```
-    {: codeblock}
+**Example output for VPC clusters**:
+
+```
+Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+```
+{: screen}
+
+**Next steps** Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
+
+```
+http://<host_name>/<service_path>
+```
+{: codeblock}
 
 Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules`](https://istio.io/latest/docs/reference/config/networking/destination-rule/){: external}.
 {: tip}
@@ -834,11 +760,11 @@ To publicly expose apps:
     metadata:
         name: my-gateway
     namespace: <namespace>
-  spec:
-    selector:
-      istio: ingressgateway
-    servers:
-    - port:
+    spec:
+      selector:
+        istio: ingressgateway
+      servers:
+        - port:
         name: https
         protocol: HTTPS
         number: 443
@@ -863,53 +789,23 @@ To publicly expose apps:
     kind: VirtualService
     metadata:
       name: my-virtual-service
-      namespace: <namespace>
+      namespace: <namespace> # The namespace where your Istio-managed microservices are deployed.
     spec:
       gateways:
-      - my-gateway
+      - my-gateway # `my-gateway` is specified so that the gateway can apply these virtual service routing rules to the `istio-ingressgateway` load balancer.
       hosts:
       - '*'
       http:
       - match:
         - uri:
-            exact: /<service_path>
+            exact: /<service_path> # Replace `service_path` with the path that your entrypoint microservice listens on. For example, in the BookInfo app, the path is defined as `/productpage`.
         route:
         - destination:
-            host: <service_name>
+            host: <service_name> # The name of your entrypoint microservice. For example, in the BookInfo app, `productpage` served as the entrypoint microservice that called the other app microservices.
             port:
-              number: 443
+              number: 443 # If your microservice listens on a different port, replace 443 with the port.
     ```
     {: codeblock}
-
-    <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-    <caption>Understanding this YAML file.</caption>
-    <thead>
-    <col width="30%">
-    <th>Parameter</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>namespace</code></td>
-    <td>Replace <em>&lt;namespace&gt;</em> with the namespace where your Istio-managed microservices are deployed.</td>
-    </tr>
-    <tr>
-    <td><code>gateways</code></td>
-    <td>The <code>my-gateway</code> is specified so that the gateway can apply these virtual service routing rules to the <code>istio-ingressgateway</code> load balancer.<td>
-    </tr>
-    <tr>
-    <td><code>http.match.uri.exact</code></td>
-    <td>Replace <em>&lt;service_path&gt;</em> with the path that your entrypoint microservice listens on. For example, in the BookInfo app, the path is defined as <code>/productpage</code>.</td>
-    </tr>
-    <tr>
-    <td><code>http.route.destination.host</code></td>
-    <td>Replace <em>&lt;service_name&gt;</em> with the name of your entrypoint microservice. For example, in the BookInfo app, <code>productpage</code> served as the entrypoint microservice that called the other app microservices.</td>
-    </tr>
-    <tr>
-    <td><code>http.route.destination.port.number</code></td>
-    <td>If your microservice listens on a different port, replace <em>&lt;443&gt;</em> with the port.</td>
-    </tr>
-    </tbody></table>
 
 4. Apply the virtual service rules in the namespace where your Istio-managed microservice is deployed.
     ```
@@ -924,17 +820,15 @@ To publicly expose apps:
     {: pre}
 
     **Example output for classic clusters**:
+    
         ```
-        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                                                                                                AGE
-        ...
         istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
         ```
         {: screen}
 
     **Example output for VPC clusters**:
+
         ```
-        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                 PORT(S)                                                                                                                AGE
-        ...
         istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   1234abcd-us-south.lb.appdomain.cloud       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
         ```
         {: screen}
@@ -986,8 +880,6 @@ Looking for even more fine-grained control over routing? To create rules that ar
 
 Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers. If you notice that the `ibm-cloud-provider-ip` pod for a gateway is stuck in `pending`, see [this troubleshooting topic](/docs/containers?topic=containers-istio_gateway_affinity).
 {: tip}
-
-<br />
 
 ## Securing in-cluster traffic by enabling mTLS
 {: #mtls}

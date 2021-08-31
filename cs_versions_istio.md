@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-25"
+lastupdated: "2021-08-31"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -63,6 +63,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -120,6 +121,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | --- | --- | --- |
+| 1.11 | Yes | 1.19, 1.20, 1.21 |
 | 1.10 | Yes | 1.18, 1.19, 1.20, 1.21 |
 | 1.9 | Yes| 1.17, 1.18, 1.19, 1.20 |
 | 1.8 | No | - |
@@ -129,6 +131,28 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 | 1.4 | No| - |
 {: summary="The rows are read from left to right. The first column is the Istio add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the Istio version is supported for."}
 {: caption="Supported Istio versions" caption-side="top"}
+
+## Version 1.11
+{: #v111}
+
+### Changelog for 1.11.1, released 31 August 2021
+{: #1111}
+
+Review the changes that are included in version 1.11.1 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.10.3
+**Current version**: 1.11.1   
+**Updates in this version:**  
+- See the Istio release notes for [Istio 1.11.0](https://istio.io/latest/news/releases/1.11.x/announcing-1.11/){: external} and [Istio 1.11.1](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.1/.){:external}.
+- Resolves the following CVEs:
+    - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
+    - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
+    - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
+- Adds a postStart to the sidecar to enable the holdApplicationUntilProxyStarts option. Since the sidecar is normally last this doesn't impact default behavior where Istio places the sidecar as the last container. If you are adding containers to your pods, verify that they get added before the sidecar or are okay waiting for the sidecar to start.
+- For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/).
+
+
 
 ## Version 1.10
 {: #v110}
@@ -1050,8 +1074,6 @@ Review the changes that are included in version 1.4.2 of the managed Istio add-o
     - [CVE-2019-18838](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18838){: external}
 - For more information, see the [Istio security bulletin](https://istio.io/latest/news/security/istio-security-2019-007/){: external}.
   
-
-
 
 
 
