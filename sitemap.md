@@ -1911,6 +1911,8 @@ subcollection: containers
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
+* [Version 1.11](/docs/containers?topic=containers-istio-changelog#v111)
+  * [Changelog for 1.11.1, released 31 August 2021](/docs/containers?topic=containers-istio-changelog#1111)
 * [Version 1.10](/docs/containers?topic=containers-istio-changelog#v110)
   * [Changelog for 1.10.3, released 5 August 2021](/docs/containers?topic=containers-istio-changelog#1103)
   * [Changelog for 1.10.2, released 15 July 2021](/docs/containers?topic=containers-istio-changelog#1102)
