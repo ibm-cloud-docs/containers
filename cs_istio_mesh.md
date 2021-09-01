@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-31"
+lastupdated: "2021-09-01"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -282,27 +282,31 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     ```
     {: pre}
 
-    **Example output for classic clusters**:
-        ```
-        Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-        ```
-        {: screen}
+Example output for Classic clusters:
 
-    **Example output for VPC clusters**:
-        ```
-        Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
-        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
-        ```
-        {: screen}
+```
+Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+```
+{: screen}
 
-3. In a web browser, open the BookInfo product page. Because no TLS is configured, make sure that you use HTTP.
-    ```
-    http://<subdomain>/productpage
-    ```
-    {: codeblock}
+Example output for VPC clusters:
 
-4. Try refreshing the page several times. The requests to `http://<subdomain>/productpage` are received by the Istio gateway load balancer. The different versions of the `reviews` microservice are still returned randomly because the Istio gateway manages the virtual service and destination routing rules for microservices.
+```
+Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+```
+{: screen}
+
+**Next steps**: In a web browser, open the BookInfo product page. Because no TLS is configured, make sure that you use HTTP.
+
+```
+http://<subdomain>/productpage
+```
+{: codeblock}
+
+Try refreshing the page several times. The requests to `http://<subdomain>/productpage` are received by the Istio gateway load balancer. The different versions of the `reviews` microservice are still returned randomly because the Istio gateway manages the virtual service and destination routing rules for microservices.
+{: tip}
 
 ### Exposing BookInfo by using an IBM-provided subdomain with TLS
 {: #istio_expose_bookinfo_tls}
@@ -680,17 +684,17 @@ To publicly expose apps:
     ```
     {: pre}
 
-    **Example output for classic clusters**:
-        ```
-        istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
-        ```
-        {: screen}
+    ```sh
+    # Example output for classic clusters
+    istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+    ```
+    {: screen}
 
-    **Example output for VPC clusters**:
-        ```
-        istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   1234abcd-us-south.lb.appdomain.cloud       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
-        ```
-        {: screen}
+    ```sh
+    # Example output for VPC clusters:
+    istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   1234abcd-us-south.lb.appdomain.cloud       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+    ```
+    {: screen}
 
 6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
@@ -819,19 +823,17 @@ To publicly expose apps:
     ```
     {: pre}
 
-    **Example output for classic clusters**:
-    
-        ```
-        istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
-        ```
-        {: screen}
+    ```sh
+    # Example output for classic clusters:
+    istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+    ```
+    {: screen}
 
-    **Example output for VPC clusters**:
-
-        ```
-        istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   1234abcd-us-south.lb.appdomain.cloud       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
-        ```
-        {: screen}
+    ```sh
+    # Example output for VPC clusters:
+    istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   1234abcd-us-south.lb.appdomain.cloud       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+    ```
+    {: screen}
 
 6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
@@ -852,19 +854,19 @@ To publicly expose apps:
     ```
     {: pre}
 
-    **Example output for classic clusters**:
-        ```
-        Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-        ```
-        {: screen}
+    ```sh
+    # Example output for classic clusters:
+    Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+    ```
+    {: screen}
 
-    **Example output for VPC clusters**:
-        ```
-        Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
-        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
-        ```
-        {: screen}
+    ```sh
+    # Example output for VPC clusters:
+    Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+    ```
+    {: screen}
 
 8. Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
     ```
