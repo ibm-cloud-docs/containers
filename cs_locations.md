@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-31"
+lastupdated: "2021-09-01"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -164,7 +164,6 @@ The following image is used as an example to explain how {{site.data.keyword.con
 | Europe | United Kingdom | London | lon04, lon05`*`, lon06 | UK South (`uk-south`, `eu-gb`) |
 | North America | United States | Dallas | dal10, dal12, dal13 | US South (`us-south`) |
 | North America | United States | Washington, D.C. | wdc04, wdc06, wdc07 | US East (`us-east`) |
-| South America | Brazil | São Paulo | sao01, sao04, sao05 | - |
 {: caption="Available multizone metro locations for classic clusters in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
 {: summary="The rows are read from left to right. The first column is the IBM Cloud geography of the location. The second column is where the country of the location. The third column is the metro that the location is in. The fourth column is the data center of the location. The fifth column is the name of the IBM Cloud region that the location is in."}
 
