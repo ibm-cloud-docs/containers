@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-08-31"
+lastupdated: "2021-09-01"
 
 keywords: containers
 subcollection: containers
@@ -224,6 +224,9 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-rel-notes)
+
+* [September 2021](/docs/containers?topic=containers-rel-notes#release-sep-2021)
+    * [1 September 2021](/docs/containers?topic=containers-rel-notes#1sep2021)
 
 * [August 2021](/docs/containers?topic=containers-rel-notes#release-aug-2021)
     * [31 August 2021](/docs/containers?topic=containers-rel-notes#31aug2021)
@@ -1993,6 +1996,8 @@ subcollection: containers
   * [Changelog for patch update 1.0.1_114, released 10 September 2020](/docs/containers?topic=containers-ca_changelog#101114_ca)
 
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog)
+* [Version 4.0](/docs/containers?topic=containers-vpc_bs_changelog#0400_is_block)
+  * [Changelog for version 4.0, released 1 September 2021](/docs/containers?topic=containers-vpc_bs_changelog#0400_is_block_relnote)
 * [Version 3.0.1](/docs/containers?topic=containers-vpc_bs_changelog#0301_is_block)
   * [Changelog for version 3.0.1, released 15 July 2021](/docs/containers?topic=containers-vpc_bs_changelog#301_init)
 * [Version 3.0.0](/docs/containers?topic=containers-vpc_bs_changelog#0300_is_block)
@@ -2007,6 +2012,7 @@ subcollection: containers
   * [Changelog for patch update 2.0.3_365, released 05 August 2020](/docs/containers?topic=containers-vpc_bs_changelog#203365_is_block)
 
 [Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog)
+* [Changelog for version 2.1.4, released 1 September 2021](/docs/containers?topic=containers-cos_plugin_changelog#0214_object_plugin)
 * [Changelog for version 2.1.3, released 25 August 2021](/docs/containers?topic=containers-cos_plugin_changelog#0213_object_plugin)
 * [Changelog for version 2.1.2, released 22 June 2021](/docs/containers?topic=containers-cos_plugin_changelog#0212_object_plugin)
 * [Changelog for version 2.1.1, released 03 June 2021](/docs/containers?topic=containers-cos_plugin_changelog#0211_object_plugin)

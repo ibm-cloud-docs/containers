@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-31"
+lastupdated: "2021-09-01"
 
 keywords: kubernetes, iks, release notes
 
@@ -114,6 +114,25 @@ subcollection: containers
 Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {: shortdesc}
 
+## September 2021
+{: #release-sep-2021}
+
+Review the release notes for September 2021.
+{: shortdesc}
+
+### 1 September 2021
+{: #1sep2021}
+{: release-note}
+
+Review the release notes for 1 September 2021.
+{: shortdesc}
+
+{{site.data.keyword.block_storage_is_short}} add-on
+:   Version [`4.0.0`](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+
+{{site.data.keyword.cos_full_notm}} plug-in 
+:   Version [`2.1.4`](/docs/containers?topic=containers-cos_plugin_changelog) is available.
+
 
 ## August 2021
 {: #release-aug-2021}
@@ -132,7 +151,7 @@ Istio add-on changelog
 :   [Version 1.11.1](/docs/containers?topic=containers-istio-changelog#1111) of the Istio managed add-on is released.
 
 New! Sao Paolo multizone region
-:   You can now create classic or VPC clusters in the Sao Paolo, Brazil [location](/docs/containers?topic=containers-regions-and-zones).
+:   You can now create VPC clusters in the Sao Paolo, Brazil [location](/docs/containers?topic=containers-regions-and-zones).
 
  VPC disk encryption on worker nodes
 :   Now, you can manage the encryption for the disk on your VPC worker nodes. For more information, see [VPC worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-vpc).
@@ -143,8 +162,6 @@ New! Sao Paolo multizone region
 
 Review the release notes for 30 August 2021.
 {: shortdesc}
-
-
 
 Worker node fix pack update
 :   Changelog documentation is available for Kubernetes version [`1.17.17_1568`](/docs/containers?topic=containers-changelog#11717_1568), [`1.18.20_1563`](/docs/containers?topic=containers-changelog#11820_1563), [`1.19.14_1558`](/docs/containers?topic=containers-changelog#11914_1558), [`1.20.10_1551`](/docs/containers?topic=containers-changelog#12010_1551), and [`1.21.4_1529`](/docs/containers?topic=containers-changelog#12104_1529).
