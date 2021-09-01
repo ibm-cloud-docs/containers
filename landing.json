@@ -14,14 +14,29 @@
         "href": "/docs/containers?topic=containers-rel-notes"
       },  
       {
-        "title": "Understanding IBM Cloud Kubernetes Service",
+        "title": "Understand IBM Cloud Kubernetes Service",
         "description": "Review frequently asked questions and key technologies that IBM Cloud Kubernetes Service uses.",
         "href": "/docs/containers?topic=containers-iks-overview"
       },
       {
-        "title": "Create a Kubernetes cluster in the UI",
-        "description": "Get started using the IBM Cloud console and the Kubernetes dashboard to create a cluster and deploy your first containerized app.",
+        "title": "Get started with Kubernetes",
+        "description": "Use the IBM Cloud console and the Kubernetes dashboard to create a cluster and deploy your first containerized app.",
         "href": "/docs/containers?topic=containers-getting-started"
+      },
+      {
+        "title": "Plan your environment",
+        "description": "Plan a highly available cluster with capacity for app workloads.",
+        "href": "/docs/containers?topic=containers-learning-path-admin#admin_plan"
+      },
+      {
+        "title": "Create a cluster",
+        "description": "Create a cluster according to your planned setup.",
+        "href": "/docs/containers?topic=containers-learning-path-admin#admin_cluster"
+      },
+      {
+        "title": "Add storage",
+        "description": "Plan and add highly available persistent storage for your app data.",
+        "href": "/docs/containers?topic=containers-learning-path-admin#admin_plan"
       }
     ],
 
