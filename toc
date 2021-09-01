@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" version="2" category="containers" audience="service" href="/docs/containers?topic=containers-getting-started" console-page="/kubernetes/overview" product-page="https://www.ibm.com/cloud/kubernetes-service" path="containers"}
+{: .toc subcollection="containers" version="2" category="containers" audience="service" href="/docs/containers" console-page="/kubernetes/overview" product-page="https://www.ibm.com/cloud/kubernetes-service" path="containers"}
 Kubernetes Service
 
     {: .navgroup id="learn"}
