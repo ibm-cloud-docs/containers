@@ -591,32 +591,32 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 
 - If you installed Istio by using the {{site.data.keyword.cloud_notm}} Istio Helm chart:
     1. Uninstall the Istio Helm deployment.
-    ```
-    helm del istio --purge
-    ```
-    {: pre}
+        ```
+        helm del istio --purge
+        ```
+        {: pre}
 
     2. If you used Helm 2.9 or earlier, delete the extra job resource.
-    ```
-    kubectl -n istio-system delete job --all
-    ```
-    {: pre}
+        ```
+        kubectl -n istio-system delete job --all
+        ```
+        {: pre}
 
     3. The uninstallation process can take up to 10 minutes. Before you install the Istio managed add-on in the cluster, run `kubectl get namespaces` and verify that the `istio-system` namespace is removed.
 
 - If you installed Istio manually or used the Istio community Helm chart, see the [Istio uninstall documentation](https://istio.io/latest/docs/setup/getting-started/#uninstall){: external}.
-* If you previously installed BookInfo in the cluster, clean up those resources.
+- If you previously installed BookInfo in the cluster, clean up those resources.
     1. Change the directory to the Istio file location.
-    ```
-    cd <filepath>/istio-1.10.3
-    ```
-    {: pre}
+        ```
+        cd <filepath>/istio-1.10.3
+        ```
+        {: pre}
 
     2. Delete all BookInfo services, pods, and deployments in the cluster.
-    ```
-    samples/bookinfo/platform/kube/cleanup.sh
-    ```
-    {: pre}
+        ```
+        samples/bookinfo/platform/kube/cleanup.sh
+        ```
+        {: pre}
 
     3. The uninstallation process can take up to 10 minutes. Before you install the Istio managed add-on in the cluster, run `kubectl get namespaces` and verify that the `istio-system` namespace is removed.
 
