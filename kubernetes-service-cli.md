@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-31"
+lastupdated: "2021-09-07"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -5391,7 +5391,8 @@ ibmcloud ks nlb-dns monitor disable --cluster mycluster --nlb-host mycluster-a1b
 ```
 {: pre}
 
-</br>
+
+
 ### `ibmcloud ks nlb-dns monitor enable`
 {: #cs_nlb-dns-monitor-enable}
 

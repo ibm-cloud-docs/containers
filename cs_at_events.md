@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-09-02"
+lastupdated: "2021-09-07"
 
 keywords: kubernetes, iks, audit
 
@@ -429,10 +429,8 @@ The following table shows the {{site.data.keyword.at_short}} location where your
 | Singapore (sng01) | Tokyo |
 | Tokyo (tok02, tok04, tok05) | Tokyo |
 {: caption="Corresponding {{site.data.keyword.at_short}} instance and {{site.data.keyword.containerlong_notm}} cluster locations." caption-side="top"}
-{: class="simple-tab-table"}
-{: #atlocationclassic}
-{: tab-title=" Locations for classic clusters"}
-{: tab-group="at-locations"}
+
+
 
 | {{site.data.keyword.containerlong_notm}} VPC location | {{site.data.keyword.at_short}} event location |
 |-----|-----|
@@ -444,11 +442,8 @@ The following table shows the {{site.data.keyword.at_short}} location where your
 | London (eu-gb-1, eu-gb-2, eu-gb-3) | London |
 | Sydney (au-syd-1, au-syd-2, au-syd-3) | Sydney |
 | Tokyo (jp-tok-1, jp-tok-2, jp-tok-3) | Tokyo |
-{: class="simple-tab-table"}
 {: caption="Corresponding {{site.data.keyword.at_short}} instance and {{site.data.keyword.containerlong_notm}} cluster locations." caption-side="top"}
-{: #atlocationvpc}
-{: tab-title="Locations for VPC clusters"}
-{: tab-group="at-locations"}
+
 
 
 
