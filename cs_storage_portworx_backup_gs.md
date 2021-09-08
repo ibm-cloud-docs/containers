@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-09-07"
 
 keywords: kubernetes, iks, portworx, sds, px-backup, px backup, portworx backup, backup and restore
 subcollection: containers
@@ -62,6 +62,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -112,7 +113,7 @@ subcollection: containers
 Follow these links to verify your installation, configure your PX-Backup service, and to start backing up and restoring apps and data from your clusters. 
 {: shortdesc}
 
-1. [Verify that PX-Backup is sucessfully installed in your cluster](/docs/containers?topic=containers-portworx#px-backup-verify).
+1. [Verify that PX-Backup is installed in your cluster](/docs/containers?topic=containers-portworx#px-backup-verify).
 2. [Log in to the PX-Backup console](/docs/containers?topic=containers-portworx#px-backup-ui). 
 3. [Add a backup location to your PX-Backup service](/docs/containers?topic=containers-portworx#px-backup-storage).
 4. [Add the cluster that you want to back up or restore](/docs/containers?topic=containers-portworx#px-backup-cluster).

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-09-01"
+lastupdated: "2021-09-08"
 
 keywords: containers
 subcollection: containers
@@ -217,20 +217,6 @@ subcollection: containers
 * [Expose your app](/docs/containers?topic=containers-learning-path-dev#dev_expose)
 * [Add app storage](/docs/containers?topic=containers-learning-path-dev#dev_storage)
 * [Add integrations](/docs/containers?topic=containers-learning-path-dev#dev_integrate)
-
-
-## Release notes
-{: #sitemap_release_notes}
-
-
-[Release notes](/docs/containers?topic=containers-rel-notes)
-
-* [September 2021](/docs/containers?topic=containers-rel-notes#release-sep-2021)
-    * [1 September 2021](/docs/containers?topic=containers-rel-notes#1sep2021)
-
-* [August 2021](/docs/containers?topic=containers-rel-notes#release-aug-2021)
-    * [31 August 2021](/docs/containers?topic=containers-rel-notes#31aug2021)
-    * [30 August 2021](/docs/containers?topic=containers-rel-notes#30aug2021)
 
 
 ## Tutorials library for Kubernetes Service
@@ -1367,6 +1353,7 @@ subcollection: containers
 * [Creating {{site.data.keyword.cos_full_notm}} service credentials](/docs/containers?topic=containers-object_storage#service_credentials)
 * [Creating a secret for the object storage service credentials](/docs/containers?topic=containers-object_storage#create_cos_secret)
 * [Installing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#install_cos)
+  * [Verifying your installation](/docs/containers?topic=containers-object_storage#cos-plugin verify)
   * [Updating the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin)
   * [Removing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#remove_cos_plugin)
 * [Deciding on the object storage configuration](/docs/containers?topic=containers-object_storage#configure_cos)

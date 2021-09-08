@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-30"
+lastupdated: "2021-09-07"
 
 keywords: kubernetes, iks, kernel
 
@@ -558,7 +558,8 @@ By default, the Calico network plug-in in your {{site.data.keyword.containerlong
 * If your cluster's worker nodes exist on different subnets, increasing the MTU value for the worker nodes and for the Calico MTU can allow pods to use the full bandwidth capability of the worker nodes.
 
 **Before you begin**: If your bare metal worker nodes still run the default MTU value, increase the MTU value for your worker nodes first before you increase the MTU value for the Calico plug-in. For example, you can apply the following daemon set to change the MTU for your worker nodes's jumbo frames to 9000 bytes.
-```
+
+```yaml
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -616,6 +617,9 @@ spec:
              path: /sys
 ```
 {: codeblock}
+
+
+
 1. Edit the `calico-config` configmap resource.
     ```
     kubectl edit cm calico-config -n kube-system
@@ -705,8 +709,8 @@ spec:
     etcd_key: /calico-secrets/etcd-key
     typha_service_name: none
     veth_mtu: "8980"
-  kind: ConfigMap
-  ...
+    kind: ConfigMap
+    ...
     ```
     {: screen}
 

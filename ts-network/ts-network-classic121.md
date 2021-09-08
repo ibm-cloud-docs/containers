@@ -1,10 +1,10 @@
 ---
 
 copyright:
-  years: 2014, 2021
-lastupdated: "2021-09-01"
+  years: 2021
+lastupdated: "2021-09-08"
 
-keywords: kubernetes, iks, release notes
+keywords: kubernetes, iks, help, network, connectivity
 
 subcollection: containers
 
@@ -105,63 +105,46 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-  
 
 
-# Release notes
-{: #rel-notes}
+# After upgrading my classic cluster to version 1.21, I'm finding connectivity issues
+{: #ts-network-classic121}
 
-Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
+There is a known issue with classic Kubernetes 1.21 clusters that have public and private service endpoint, but do not have VRF enabled.
 {: shortdesc}
 
-## September 2021
-{: #release-sep-2021}
+You upgraded your classic cluster to Kubernetes 1.21 and are finding connectivity issues such as connecting to the Kubernetes console, fetching logs from pods, or running the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool.
+{: tsSymptoms}
 
-Review the release notes for September 2021.
-{: shortdesc}
+In Kubernetes version 1.21, Konnectivity replaces OpenVPN as the network proxy that is used to secure the communication of the Kubernetes API server master to worker nodes in the cluster.
+{: tsCauses}
 
-### 1 September 2021
-{: #1sep2021}
-{: release-note}
+However, when using Konnectivity, a problem exists with masters to cluster nodes communication when all of the following conditions are met.
 
-Review the release notes for 1 September 2021.
-{: shortdesc}
+- You are updating an existing classic cluster to Kubernetes version 1.21 or are deploying a new classic cluster.
+- The cluster has both private and public service endpoints enabled.
+- Service endpoints or VRF are not enabled in the account.
 
-{{site.data.keyword.block_storage_is_short}} add-on
-:   Version [`4.0.0`](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+To determine if VRF and service endpoints are enabled in your account, run `ibmcloud account show`. Look for the following options.
 
-{{site.data.keyword.cos_full_notm}} plug-in 
-:   Version [`2.1.4`](/docs/containers?topic=containers-cos_plugin_changelog) is available.
+```
+VRF Enabled:                        true   
+Service Endpoint Enabled:           true 
+```
+{: screen}
 
 
-## August 2021
-{: #release-aug-2021}
+To determine if your classic cluster has both public and private service endpoint enabled, run `ibmcloud ks cluster get -c <cluster_id>`. Look for output similar to:
 
-Review the release notes for August 2021.
-{: shortdesc}
+```
+Public Service Endpoint URL:    https://c105.<REGION>.containers.cloud.ibm.com:<port> 
+Private Service Endpoint URL:   https://c105.private.<REGION>.containers.cloud.ibm.com:<port> 
+```
+{: screen}
 
-### 31 August 2021
-{: #31aug2021}
-{: release-note}
+If your cluster meets these conditions, delay updating to version 1.21 until you can [enable service endpoints and VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for the account. If you are updating your VPC clusters or classic clusters that have only public service endpoints enabled, there is no issue updating to 1.21. If you have questions about this issue, please open a support ticket and reference this announcement.
+{: tsResolve}
 
-Review the release notes for 31 August 2021.
-{: shortdesc}
+Do not create classic clusters with only a private service endpoint enabled unless you have both VRF and the Service Endpoint enabled.
+{: important}
 
-Istio add-on changelog
-:   [Version 1.11.1](/docs/containers?topic=containers-istio-changelog#1111) of the Istio managed add-on is released.
-
-New! Sao Paolo multizone region
-:   You can now create VPC clusters in the Sao Paolo, Brazil [location](/docs/containers?topic=containers-regions-and-zones).
-
- VPC disk encryption on worker nodes
-:   Now, you can manage the encryption for the disk on your VPC worker nodes. For more information, see [VPC worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-vpc).
-
-### 30 August 2021
-{: #30aug2021}
-{: release-note}
-
-Review the release notes for 30 August 2021.
-{: shortdesc}
-
-Worker node fix pack update
-:   Changelog documentation is available for Kubernetes version [`1.17.17_1568`](/docs/containers?topic=containers-changelog#11717_1568), [`1.18.20_1563`](/docs/containers?topic=containers-changelog#11820_1563), [`1.19.14_1558`](/docs/containers?topic=containers-changelog#11914_1558), [`1.20.10_1551`](/docs/containers?topic=containers-changelog#12010_1551), and [`1.21.4_1529`](/docs/containers?topic=containers-changelog#12104_1529).

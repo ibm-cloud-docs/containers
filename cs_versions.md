@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-27"
+lastupdated: "2021-09-08"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -200,7 +200,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 | [1.21](#cs_v121) | Yes | 09 Jun 2021 | Jun 2022 `†` |
 | [1.20](#cs_v120) | Yes | 16 Feb 2021 | Feb 2022 `†` |
 | [1.19](#cs_v119) | Yes | 13 Oct 2020 | 31 Dec 2021 `†` |
-| [1.18](#cs_v118) | Deprecated | 09 Jun 2021 | 30 Sep 2021`†` |
+| [1.18](#cs_v118) | Deprecated | 09 Jun 2021 | 10 Oct 2021`†` |
 {: caption="Release history for {{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
 Earlier versions of {{site.data.keyword.containerlong_notm}} are [unsupported](#k8s_version_archive).
@@ -251,6 +251,9 @@ This information summarizes updates that are likely to have impact on deployed a
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.21.
 {: shortdesc}
+
+There is a known issue when updating an existing classic cluster to version 1.21. If your classic cluster has both private and public service endpoints enabled, but you do not have both VRF and Service Endpoint enabled in your account, do not update to 1.21. For more information, see [After upgrading my classic cluster to version 1.21, I'm finding connectivity issues](/docs/containers?topic=containers-ts-network-classic121).
+{: note}
 
 ### Update before master
 {: #121_before}
@@ -340,7 +343,7 @@ The following table shows the actions that you must take before you update the K
 
 | Type | Description|
 | ---- | ---------- |
-| Calico data store driver change | When you update your cluster to version 1.19, Calico is updated to use the Kubernetes data store driver (KDD). During the update, you can request resources that require Calico, such as pods that are subject to Calico policies, but the resources remain pending until the update is complete. <ul><li>Before the update, you must delete any <code>NetworkPolicy</code> resources that are scoped to namespaces that no longer exist. When you delete a namespace, Kubernetes cleans up all resources that are associated with that namespace. However, resources that you created for Calico by using the <code>calicoctl</code> CLI, such as <code>NetworkPolicy</code> resources that you scoped to that namespace, are not cleaned up and remain in your cluster even after the namespace is deleted. To find and delete any of these policies, list all <code>NetworkPolicy</code> resources by running <code>calicoctl get NetworkPolicy -A -o wide</code>. In the output, check if the namespace for each policy still exists in your cluster. You can list existing namespaces by running <code>kubectl get namespaces</code>. If any policy is scoped to a non-existent namespace, delete the policy by running <code>calicoctl delete networkpolicy &lt;policy_name&gt; -n <namespace></code>.</li><li>As part of the update to KDD and going forward, access to the <code>etcd</code> port in the cluster master is blocked. If you use the <code>etcd</code> port, such as in firewall rules or Calico policies that allow worker nodes to access <code>etcd</code>, update these resources to use the <code>apiserver</code> port instead. To get the <code>apiserver</code> port, run <code>ibmcloud ks cluster get -c <cluster_name_or_ID></code> and look for the node port that is listed for the <strong>Master URL</strong>.</li><li>Complete the steps in <a href="/docs/containers?topic=containers-ts-app-container-start#individual-ips">Releasing individual IP addresses</a> to ensure that any pod IP addresses that are incorrectly detected as in use by the Calico IP address manager (IPAM) are released.</li></ul> |
+| Calico data store driver change | When you update your cluster to version 1.19, Calico is updated to use the Kubernetes data store driver (KDD). During the update, you can request resources that require Calico, such as pods that are subject to Calico policies, but the resources remain pending until the update is complete. <ul><li>Before the update, you must delete any <code>NetworkPolicy</code> resources that are scoped to namespaces that no longer exist. When you delete a namespace, Kubernetes cleans up all resources that are associated with that namespace. However, resources that you created for Calico by using the <code>calicoctl</code> CLI, such as <code>NetworkPolicy</code> resources that you scoped to that namespace, are not cleaned up and remain in your cluster even after the namespace is deleted. To find and delete any of these policies, list all <code>NetworkPolicy</code> resources by running <code>calicoctl get NetworkPolicy -A -o wide</code>. In the output, check if the namespace for each policy still exists in your cluster. You can list existing namespaces by running <code>kubectl get namespaces</code>. If any policy is scoped to a non-existent namespace, delete the policy by running <code>calicoctl delete networkpolicy &lt;policy_name&gt; -n &lt;namespace&gt;</code>.</li><li>As part of the update to KDD and going forward, access to the <code>etcd</code> port in the cluster master is blocked. If you use the <code>etcd</code> port, such as in firewall rules or Calico policies that allow worker nodes to access <code>etcd</code>, update these resources to use the <code>apiserver</code> port instead. To get the <code>apiserver</code> port, run <code>ibmcloud ks cluster get -c &lt;cluster_name_or_ID&gt;</code> and look for the node port that is listed for the <strong>Master URL</strong>.</li><li>Complete the steps in <a href="/docs/containers?topic=containers-ts-app-container-start#individual-ips">Releasing individual IP addresses</a> to ensure that any pod IP addresses that are incorrectly detected as in use by the Calico IP address manager (IPAM) are released.</li></ul> |
 | **Unsupported:** CoreDNS `federations` plug-in | CoreDNS version 1.7 and later no longer support the `federations` plug-in. If you customized your CoreDNS configuration to use this plug-in, you must remove the plug-in and any related configurations before updating. For more information about updating your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize). |
 | **Unsupported:** Select CoreDNS metrics | CoreDNS version 1.7 and later [metrics changed](https://coredns.io/2020/06/15/coredns-1.7.0-release/#metric-changes){: external}. If you rely on these changed metrics, update accordingly. For example, you might update a Prometheus query of CoreDNS metrics to handle both the old and new metrics. |
 | **Unsupported:** Select Kubernetes API server metrics | The following Kubernetes API service metric label names for `kubernetes_build_info` changed. These metrics, available via the `/metrics` endpoint, changed as follows. If you rely on these changed metrics, update accordingly.<ul><li>From <code>gitVersion</code> to <code>git_version</code></li><li>From <code>gitCommit</code> to <code>git_commit</code></li><li>From <code>gitTreeState</code> to <code>git_tree_state</code></li><li>From <code>buildDate</code> to <code>build_date</code></li><li>From <code>goVersion</code> to <code>go_version</code></li></ul>. |
@@ -391,7 +394,7 @@ The following table shows the actions that you must take after you update your w
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.18.
 {: shortdesc}
 
-Kubernetes version 1.18 is deprecated, with a tentative unsupported date of 30 September 2021. Update your cluster to at least [version 1.19](#cs_v119) as soon as possible.
+Kubernetes version 1.18 is deprecated, with a tentative unsupported date of 10 October 2021. Update your cluster to at least [version 1.19](#cs_v119) as soon as possible.
 {: deprecated}
 
 ### Update before master
@@ -544,5 +547,3 @@ As of 4 April 2018, {{site.data.keyword.containerlong_notm}} clusters that run [
 {: shortdesc}
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
-
-

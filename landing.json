@@ -1,0 +1,50 @@
+{
+    "title": "IBM Cloud Kubernetes Service",
+    "lastupdated": "2021-09-01",
+    "introduction": "Explore the capabilities of IBM Cloud Kubernetes Service and discover the tools to automate, isolate, secure, manage, and monitor your workloads. ",
+    "section_devtools": {
+      "api": "/apidocs/kubernetes", 
+      "cli": "/docs/containers?topic=containers-kubernetes-service-cli", 
+      "terraform": "/docs/ibm-cloud-provider-for-terraform?topic=ibm-cloud-provider-for-terraform-tutorial-tf-clusters"
+    },
+    "section_recommended": [
+      {
+        "title": "See what's new",
+        "description": "Read about the latest changes to IBM Cloud Kubernetes Service. ",
+        "href": "/docs/containers?topic=containers-rel-notes"
+      },  
+      {
+        "title": "Understand IBM Cloud Kubernetes Service",
+        "description": "Review frequently asked questions and key technologies that IBM Cloud Kubernetes Service uses.",
+        "href": "/docs/containers?topic=containers-iks-overview"
+      },
+      {
+        "title": "Get started with Kubernetes",
+        "description": "Use the IBM Cloud console and the Kubernetes dashboard to create a cluster and deploy your first containerized app.",
+        "href": "/docs/containers?topic=containers-getting-started"
+      },
+      {
+        "title": "Plan your environment",
+        "description": "Plan a highly available cluster with capacity for app workloads.",
+        "href": "/docs/containers?topic=containers-learning-path-admin#admin_plan"
+      },
+      {
+        "title": "Create a cluster",
+        "description": "Create a cluster according to your planned setup.",
+        "href": "/docs/containers?topic=containers-learning-path-admin#admin_cluster"
+      },
+      {
+        "title": "Add storage",
+        "description": "Plan and add highly available persistent storage for your app data.",
+        "href": "/docs/containers?topic=containers-learning-path-admin#admin_plan"
+      }
+    ],
+
+    "section_learn": {
+      "architecture": "https://www.ibm.com/cloud/architecture/architectures/kubernetes-infrastructure-with-ibm-cloud",
+      "training": "https://www.ibm.com/training/search?query=Kubernetes",
+      "community": "https://community.ibm.com/community/user/publiccloud/home"
+    }
+    
+  }
+  

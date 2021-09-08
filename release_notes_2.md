@@ -1,13 +1,12 @@
 ---
 
 copyright:
-  years: 2021, 2021
-lastupdated: "2021-09-07"
+  years: 2014, 2021
+lastupdated: "2021-09-08"
 
-keywords: openshift, storage
+keywords: kubernetes, iks, release notes
 
-subcollection: openshift
-content-type: troubleshoot
+subcollection: containers
 
 ---
 
@@ -106,34 +105,71 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+  
 
 
-# {{site.data.keyword.block_storage_is_short}} PVC creation fails after API key reset
-{: #vpc-block-api-key-reset-ts}
+# Release notes
+{: #rel-notes}
 
-**Infrastructure provider**:
-<img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
+Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
+{: shortdesc}
 
+For information about releases that occured before August 30th, see [Release notes](/docs/containers?topic=containers-iks-release).
+{: note}
 
-After you reset your API key, {{site.data.keyword.block_storage_is_short}} PVC creation fails with an IAM permission error.
-{: tsSymptoms}
+Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status){: external}.
+{: note}
 
+## September 2021
+{: #release-sep-2021}
 
-Resetting your API key means the credentials the {{site.data.keyword.block_storage_is_short}} add-on uses to provision volumes are no longer valid. After resetting your API key, you must reset the {{site.data.keyword.block_storage_is_short}} controller to use the latest API key for volume provisioning.
-{: tsCauses}
-
-
-After resetting your API key, you must re-create the {{site.data.keyword.block_storage_is_short}} controller pod. To recreate the controller pod, delete it by running the following command:
-{: tsResolve}
-
-```sh
-kubectl delete pod -n kube-system ibm-vpc-block-csi-controller-0
-```
-{: pre}
+Review the release notes for September 2021.
+{: shortdesc}
 
 
 
+### 1 September 2021
+{: #1sep2021}
+{: release-note}
+
+Review the release notes for 1 September 2021.
+{: shortdesc}
+
+{{site.data.keyword.block_storage_is_short}} add-on
+:   Version [`4.0.0`](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+
+{{site.data.keyword.cos_full_notm}} plug-in 
+:   Version [`2.1.4`](/docs/containers?topic=containers-cos_plugin_changelog) is available.
 
 
+## August 2021
+{: #release-aug-2021}
 
+Review the release notes for August 2021.
+{: shortdesc}
 
+### 31 August 2021
+{: #31aug2021}
+{: release-note}
+
+Review the release notes for 31 August 2021.
+{: shortdesc}
+
+Istio add-on changelog
+:   [Version 1.11.1](/docs/containers?topic=containers-istio-changelog#1111) of the Istio managed add-on is released.
+
+New! Sao Paolo multizone region
+:   You can now create VPC clusters in the Sao Paolo, Brazil [location](/docs/containers?topic=containers-regions-and-zones).
+
+ VPC disk encryption on worker nodes
+:   Now, you can manage the encryption for the disk on your VPC worker nodes. For more information, see [VPC worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-vpc).
+
+### 30 August 2021
+{: #30aug2021}
+{: release-note}
+
+Review the release notes for 30 August 2021.
+{: shortdesc}
+
+Worker node fix pack update
+:   Changelog documentation is available for Kubernetes version [`1.17.17_1568`](/docs/containers?topic=containers-changelog#11717_1568), [`1.18.20_1563`](/docs/containers?topic=containers-changelog#11820_1563), [`1.19.14_1558`](/docs/containers?topic=containers-changelog#11914_1558), [`1.20.10_1551`](/docs/containers?topic=containers-changelog#12010_1551), and [`1.21.4_1529`](/docs/containers?topic=containers-changelog#12104_1529).

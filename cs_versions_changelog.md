@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-08-30"
+lastupdated: "2021-09-08"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -1388,7 +1388,7 @@ The following table shows the changes that are included in the `1.19.2_1524` ver
 Review the version 1.18 changelog.
 {: shortdesc}
 
-Kubernetes version 1.18 is deprecated, with a tentative unsupported date of 30 September 2021. Update your cluster to at least [version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119) as soon as possible.
+Kubernetes version 1.18 is deprecated, with a tentative unsupported date of October 10 2021. Update your cluster to at least [version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119) as soon as possible.
 {: deprecated}
 
 ### Changelog for worker node fix pack 1.18.20_1563, released 30 August 2021
