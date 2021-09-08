@@ -252,6 +252,9 @@ This information summarizes updates that are likely to have impact on deployed a
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.21.
 {: shortdesc}
 
+There is a known issue when updating an existing classic cluster to version 1.21. If your classic cluster has both private and public service endpoints enabled, but you do not have both VRF and Service Endpoint enabled in your account, do not update to 1.21. For more information, see [After upgrading my classic cluster to version 1.21, I'm finding connectivity issues](/docs/containers?topic=containers-ts-network-classic121).
+{: note}
+
 ### Update before master
 {: #121_before}
 
@@ -544,5 +547,3 @@ As of 4 April 2018, {{site.data.keyword.containerlong_notm}} clusters that run [
 {: shortdesc}
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
-
-

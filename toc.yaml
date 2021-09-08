@@ -339,6 +339,7 @@ toc:
                 - ts-network/ts-network-strongswan-vpn.md
                 - ts-network/ts-network-strongswan-install-new.md
                 - ts-network/ts-network-strongswan-network-nodes.md
+                - ts-network/ts-network-classic121.md
             - topicgroup:
               label: Logging and monitoring
               topics:
