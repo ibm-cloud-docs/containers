@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-17"
+lastupdated: "2021-09-09"
 
 keywords: kubernetes, iks
 
@@ -39,7 +39,6 @@ completion-time: 30m
 {:external: .external target="_blank"}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
-{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
 {:generic: data-hd-operatingsystem="generic"}
 {:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
@@ -68,6 +67,7 @@ completion-time: 30m
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -107,8 +107,9 @@ completion-time: 30m
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+{:video: .video} -->
+{{site.data.keyword.attribute-definition-list}}
   
 
 
@@ -328,8 +329,8 @@ To deploy the app:
     | `--type=NodePort` | The service type to create. In this lesson, you create a `NodePort` service. In the following lesson, you create a `LoadBalancer` service. |
     | `--port=*<8080>*` | The port on which the service listens for external network traffic. |
     | `--target-port=*<8080>*` | The port that your app listens on and to which the service directs incoming network traffic. In this example, the `target-port` is the same as the `port`, but other apps that you create might use a different port. |
-    {: caption="Table 1. Information about the `expose` command options." caption-side="top"}
-    {: summary="Information about the `expose` command options. Columns are read left to right, with the first column the command parameter and the second column the description of the parameter."}
+    {: caption="Table 1. Information about the command options." caption-side="top"}
+    {: summary="Information about the command options. Columns are read left to right, with the first column the command parameter and the second column the description of the parameter."}
 
 7. Now that all the deployment work is done, you can test your app from within the cluster. Get the details to form the private IP address that you can use to access your app.
     1. Get information about the service to see which NodePort was assigned. The NodePorts are randomly assigned when they are generated with the `expose` command, but within 30000-32767. In this example, the **NodePort** is 30872.
@@ -448,8 +449,8 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     | `--type=LoadBalancer` | The Kubernetes service type to create. In this lesson, you create a `LoadBalancer` service. |
     | `--port=*<8080>*` | The port on which the service listens for external network traffic. |
     | `--target-port=*<8080>*` | The port that your app listens on and to which the service directs incoming network traffic. In this example, the `target-port` is the same as the `port`, but other apps that you create might use a different port. |
-    {: caption="Table 2. Information about the `expose` command options." caption-side="top"}
-    {: summary="Information about the `expose` command options. Columns are read left to right, with the first column the command parameter and the second column the description of the parameter."}
+    {: caption="Table 2. Information about the command options." caption-side="top"}
+    {: summary="Information about the command options. Columns are read left to right, with the first column the command parameter and the second column the description of the parameter."}
 
 2. Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When you create the Kubernetes `LoadBalancer` service, a VPC load balancer is automatically created for you. The VPC load balancer assigns a hostname to your Kubernetes LoadBalancer service that you can see in the **LoadBalancer Ingress** field of your CLI output.<p class="note">The VPC load balancer takes a few minutes to provision in your VPC. Until the VPC load balancer is ready, you cannot access the Kubernetes `LoadBalancer` service through its hostname.</p>
 

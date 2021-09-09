@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-14"
+lastupdated: "2021-09-09"
 
 keywords: kubernetes, iks, containers
 
@@ -34,7 +34,6 @@ subcollection: containers
 {:external: .external target="_blank"}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
-{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
 {:generic: data-hd-operatingsystem="generic"}
 {:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
@@ -63,6 +62,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -102,123 +102,14 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+{:video: .video} -->
+{{site.data.keyword.attribute-definition-list}}
   
 
 
 
-<style>
-    <!--
-        #tutorials { /* hide the page header */
-            display: none !important;
-        }
-        .allCategories {
-            display: flex !important;
-            flex-direction: row !important;
-            flex-wrap: wrap !important;
-        }
-        .categoryBox {
-            flex-grow: 1 !important;
-            width: calc(33% - 20px) !important;
-            text-decoration: none !important;
-            margin: 0 10px 20px 0 !important;
-            padding: 16px !important;
-            border: 1px #dfe6eb solid !important;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
-            text-align: center !important;
-            text-overflow: ellipsis !important;
-            overflow: hidden !important;
-        }
-        .solutionBoxContainer {}
-        .solutionBoxContainer a {
-            text-decoration: none !important;
-            border: none !important;
-        }
-        .solutionBox {
-            display: inline-block !important;
-            width: 100% !important;
-            margin: 0 10px 20px 0 !important;
-            padding: 16px !important;
-            background-color: #f4f4f4 !important;
-        }
-        @media screen and (min-width: 960px) {
-            .solutionBox {
-            width: calc(50% - 3%) !important;
-            }
-            .solutionBox.solutionBoxFeatured {
-            width: calc(50% - 3%) !important;
-            }
-            .solutionBoxContent {
-            height: 350px !important;
-            }
-        }
-        @media screen and (min-width: 1298px) {
-            .solutionBox {
-            width: calc(33% - 2%) !important;
-            }
-            .solutionBoxContent {
-            min-height: 350px !important;
-            }
-        }
-        .solutionBox:hover {
-            border: 1px rgb(136, 151, 162)solid !important;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
-        }
-        .solutionBoxContent {
-            display: flex !important;
-            flex-direction: column !important;
-        }
-        .solutionBoxTitle {
-            margin: 0rem !important;
-            margin-bottom: 5px !important;
-            font-size: 14px !important;
-            font-weight: 900 !important;
-            line-height: 16px !important;
-            height: 37px !important;
-            text-overflow: ellipsis !important;
-            overflow: hidden !important;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 2 !important;
-            -webkit-box-orient: vertical !important;
-            -webkit-box-align: inherit !important;
-        }
-        .solutionBoxDescription {
-            flex-grow: 1 !important;
-            display: flex !important;
-            flex-direction: column !important;
-        }
-        .descriptionContainer {
-        }
-        .descriptionContainer p {
-            margin: 0 !important;
-            overflow: hidden !important;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 4 !important;
-            -webkit-box-orient: vertical !important;
-            font-size: 14px !important;
-            font-weight: 400 !important;
-            line-height: 1.5 !important;
-            letter-spacing: 0 !important;
-            max-height: 70px !important;
-        }
-        .architectureDiagramContainer {
-            flex-grow: 1 !important;
-            min-width: calc(33% - 2%) !important;
-            padding: 0 16px !important;
-            text-align: center !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: center !important;
-            background-color: #f4f4f4;
-        }
-        .architectureDiagram {
-            max-height: 175px !important;
-            padding: 5px !important;
-            margin: 0 auto !important;
-        }
-    -->
-    </style>
+{[css-tiles.html]}
 
 # Getting started with {{site.data.keyword.containerlong_notm}}
 {: #getting-started}
@@ -273,7 +164,6 @@ To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {
 
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
 
-<br />
 
 ## Creating a VPC cluster
 {: #vpc-gen2-gs}
@@ -311,11 +201,10 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
     4. Click **Save**.
     5. If you require VPC VPN access or classic infrastructure access into this cluster, repeat these steps to add a rule that uses the **UDP** protocol, `30000` for the **Port min**, `32767` for the **Port max**, and the **Any** source type.
 
-<br>
 
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
 
-<br />
+
 
 ## Deploying an app to your cluster
 {: #deploy-app}
@@ -347,10 +236,9 @@ The steps to deploy an app vary if you have a free or standard cluster, because 
 {: tab-title="Standard cluster"}
 {: tab-group="deployapp"}
 
-<br>
+
 Great job! You just deployed your first app in your Kubernetes cluster.
 
-<br />
 
 
 ## What's next?

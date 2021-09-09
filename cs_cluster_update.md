@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-23"
+lastupdated: "2021-09-09"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -34,7 +34,6 @@ subcollection: containers
 {:external: .external target="_blank"}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
-{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
 {:generic: data-hd-operatingsystem="generic"}
 {:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
@@ -63,6 +62,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -102,8 +102,9 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+{:video: .video} -->
+{{site.data.keyword.attribute-definition-list}}
   
 
 
@@ -176,16 +177,16 @@ To update the Kubernetes master _major_ or _minor_ version:
 
     * **Checking add-ons**
         1. List the add-ons in the cluster.
-          ```
-          ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
-          ```
-          {: pre}
+            ```
+            ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+            ```
+            {: pre}
 
         2. Check the supported Kubernetes version for each add-on that is installed.
-          ```
-          ibmcloud ks addon-versions
-          ```
-          {: pre}
+            ```
+            ibmcloud ks addon-versions
+            ```
+            {: pre}
 
         3. If the add-on must be updated to run in the Kubernetes version that you want to update your cluster to, [update the add-on](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
 
@@ -201,8 +202,8 @@ To update the Kubernetes master _major_ or _minor_ version:
 6. Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the API server version that runs in the master. [Kubernetes does not support](https://kubernetes.io/releases/version-skew-policy/){: external} `kubectl` client versions that are two or more versions apart from the server version (n +/- 2).
 
 When the master update is complete, you can update your worker nodes, depending on the type of cluster infrastructure provider that you have.
-*  [Updating classic worker nodes](#worker_node).
-*  [Updating VPC worker nodes](#vpc_worker_node).
+* [Updating classic worker nodes](#worker_node).
+* [Updating VPC worker nodes](#vpc_worker_node).
 
 <br />
 
@@ -299,40 +300,40 @@ Set up a configmap to perform a rolling update of your classic worker nodes.
 
 4. Create a config map and define the unavailability rules for your worker nodes. The following example shows four checks, the `zonecheck.json`, `regioncheck.json`, `defaultcheck.json`, and a check template. You can use these example checks to define rules for worker nodes in a specific zone (`zonecheck.json`), region (`regioncheck.json`), or for all worker nodes that do not match any of the checks that you defined in the config map (`defaultcheck.json`). Use the check template to create your own check. For every check, to identify a worker node, you must choose one of the worker node labels that you retrieved in the previous step.  
 
-    For every check, you can set only one value for <code>NodeSelectorKey</code> and <code>NodeSelectorValue</code>. If you want to set rules for more than one region, zone, or other worker node labels, create a new check. Define up to 10 checks in a config map. If you add more checks, they are ignored.
+    For every check, you can set only one value for `NodeSelectorKey` and `NodeSelectorValue`. If you want to set rules for more than one region, zone, or other worker node labels, create a new check. Define up to 10 checks in a config map. If you add more checks, they are ignored.
     {: note}
 
-    Example:
-    ```
+    Example
+    ```yaml
     apiVersion: v1
     kind: ConfigMap
     metadata:
       name: ibm-cluster-update-configuration
       namespace: kube-system
     data:
-    drain_timeout_seconds: "120"
-    zonecheck.json: |
-      {
-        "MaxUnavailablePercentage": 30,
-        "NodeSelectorKey": "failure-domain.beta.kubernetes.io/zone",
-        "NodeSelectorValue": "dal13"
-      }
-    regioncheck.json: |
-      {
-        "MaxUnavailablePercentage": 20,
-        "NodeSelectorKey": "failure-domain.beta.kubernetes.io/region",
-        "NodeSelectorValue": "us-south"
-      }
-    defaultcheck.json: |
-      {
-        "MaxUnavailablePercentage": 20
-      }
-    <check_name>: |
-      {
-        "MaxUnavailablePercentage": <value_in_percentage>,
-        "NodeSelectorKey": "<node_selector_key>",
-        "NodeSelectorValue": "<node_selector_value>"
-      }
+      drain_timeout_seconds: "120"
+      zonecheck.json: |
+        {
+          "MaxUnavailablePercentage": 30,
+          "NodeSelectorKey": "failure-domain.beta.kubernetes.io/zone",
+          "NodeSelectorValue": "dal13"
+        }
+      regioncheck.json: |
+        {
+          "MaxUnavailablePercentage": 20,
+          "NodeSelectorKey": "failure-domain.beta.kubernetes.io/region",
+          "NodeSelectorValue": "us-south"
+        }
+      defaultcheck.json: |
+        {
+          "MaxUnavailablePercentage": 20
+        }
+      <check_name>: |
+        {
+          "MaxUnavailablePercentage": <value_in_percentage>,
+          "NodeSelectorKey": "<node_selector_key>",
+          "NodeSelectorValue": "<node_selector_value>"
+        }
     ```
     {: codeblock}
 
@@ -405,9 +406,9 @@ Set up a configmap to perform a rolling update of your classic worker nodes.
 10. Verify that you do not have duplicate worker nodes. In some cases, older clusters might list duplicate worker nodes with a **`NotReady`** status after an update. To remove duplicates, see [troubleshooting](/docs/containers?topic=containers-cs_duplicate_nodes).
 
 Next steps:
--   Repeat the update process with other worker pools.
--   Inform developers who work in the cluster to update their `kubectl` CLI to the version of the Kubernetes master.
--   If the Kubernetes dashboard does not display utilization graphs, [delete the `kube-dashboard` pod](/docs/containers?topic=containers-cs_dashboard_graphs).
+- Repeat the update process with other worker pools.
+- Inform developers who work in the cluster to update their `kubectl` CLI to the version of the Kubernetes master.
+- If the Kubernetes dashboard does not display utilization graphs, [delete the `kube-dashboard` pod](/docs/containers?topic=containers-cs_dashboard_graphs).
 
 ### Updating classic worker nodes in the console
 {: #worker_up_console}
@@ -424,7 +425,7 @@ To update worker nodes from the console:
 
 If you have Portworx installed in your cluster, you must restart the Portworx pods on updated worker nodes. For more information, see [Portworx limitations](/docs/containers?topic=containers-portworx#portworx_limitations).
 
-<br />
+
 
 ## Updating VPC worker nodes
 {: #vpc_worker_node}
@@ -516,7 +517,7 @@ You can update your VPC worker nodes in the console. Before you begin, consider 
 4. From the **Worker Nodes** tab, select the checkbox for each worker node that you want to update. An action bar is displayed over the table header row.
 5. From the action bar, click **Update**.
 
-<br />
+
 
 ## Updating flavors (machine types)
 {: #machine_type}
@@ -534,35 +535,35 @@ To update flavors:
 1. List available worker nodes and note their private IP address.
     - **For worker nodes in a worker pool**:
         1. List available worker pools in your cluster.
-        ```
-        ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
+            ```
+            ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+            ```
+            {: pre}
 
         2. List the worker nodes in the worker pool. Note the **ID** and **Private IP**.
-        ```
-        ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
-        ```
-        {: pre}
+            ```
+            ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+            ```
+            {: pre}
 
         3. Get the details for a worker node. In the output, note the zone and either the private and public VLAN ID for classic clusters or the subnet ID for VPC clusters.
-        ```
-        ibmcloud ks worker get --cluster <cluster_name_or_ID> --worker <worker_ID>
-        ```
-        {: pre}
+            ```
+            ibmcloud ks worker get --cluster <cluster_name_or_ID> --worker <worker_ID>
+            ```
+            {: pre}
 
     - **Deprecated: For stand-alone worker nodes**:
         1. List available worker nodes. Note the **ID** and **Private IP**.
-        ```
-        ibmcloud ks worker ls --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
+            ```
+            ibmcloud ks worker ls --cluster <cluster_name_or_ID>
+            ```
+            {: pre}
 
         2. Get the details for a worker node and note the zone, the private VLAN ID, and the public VLAN ID.
-        ```
-        ibmcloud ks worker get --cluster <cluster_name_or_ID> --worker <worker_ID>
-        ```
-        {: pre}
+            ```
+            ibmcloud ks worker get --cluster <cluster_name_or_ID> --worker <worker_ID>
+            ```
+            {: pre}
 
 2. List available flavors in the zone.
     ```
@@ -574,22 +575,22 @@ To update flavors:
     - **For worker nodes in a worker pool**:
         1. Create a worker pool with the number of worker nodes that you want to replace.
         * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-          ```
-          ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
-          ```
-          {: pre}
+            ```
+            ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
+            ```
+            {: pre}
 
         * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 clusters:
-          ```
-          ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
-          ```
-          {: pre}
+            ```
+            ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
+            ```
+            {: pre}
 
         2. Verify that the worker pool is created.
-        ```
-        ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
+            ```
+            ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+            ```
+            {: pre}
 
         3. Add the zone to your worker pool that you retrieved earlier. When you add a zone, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. If you want to spread your worker nodes across multiple zones, choose a [classic](/docs/containers?topic=containers-regions-and-zones#zones-mz) or [VPC](/docs/containers?topic=containers-regions-and-zones#zones-vpc) multizone location.
         * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
@@ -619,16 +620,16 @@ To update flavors:
 5. Remove the old worker node. **Note**: If you are removing a flavor that is billed monthly (such as bare metal), you are charged for the entire the month.
     - **For worker nodes in a worker pool**:
         1. Remove the worker pool with the old machine type. Removing a worker pool removes all worker nodes in the pool in all zones. This process might take a few minutes to complete.
-        ```
-        ibmcloud ks worker-pool rm --worker-pool <pool_name> --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
+            ```
+            ibmcloud ks worker-pool rm --worker-pool <pool_name> --cluster <cluster_name_or_ID>
+            ```
+            {: pre}
 
         2. Verify that the worker pool is removed.
-        ```
-        ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
+            ```
+            ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+            ```
+            {: pre}
 
     - **Deprecated: For stand-alone worker nodes**:
         ```
@@ -698,7 +699,7 @@ You can manage automatic updates of the Fluentd component in the following ways.
         {: pre}
 
     * Force a one-time update when you use a logging command that includes the `--force-update` option. **Note**: Your pods update to the latest version of the Fluentd component, but Fluentd does not update automatically going forward.
-        Example command:
+        Example command
 
         ```
         ibmcloud ks logging config update --cluster <cluster_name_or_ID> --id <log_config_ID> --type <log_type> --force-update
@@ -711,7 +712,7 @@ You can manage automatic updates of the Fluentd component in the following ways.
 Control when the Ingress application load balancer (ALB) component is updated. For information about keeping ALBs up-to-date, see [Managing the Ingress ALB lifecycle](/docs/containers?topic=containers-ingress-types).
 {: shortdesc}
 
-<br />
+
 
 ## Updating managed add-ons
 {: #addons}

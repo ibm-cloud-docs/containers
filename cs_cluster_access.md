@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-18"
+lastupdated: "2021-09-09"
 
 keywords: kubernetes, iks, clusters
 
@@ -34,7 +34,6 @@ subcollection: containers
 {:external: .external target="_blank"}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
-{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
 {:generic: data-hd-operatingsystem="generic"}
 {:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
@@ -63,6 +62,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -102,8 +102,9 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+{:video: .video} -->
+{{site.data.keyword.attribute-definition-list}}
   
 
 
@@ -272,62 +273,62 @@ The Kubernetes master is accessible through the private cloud service endpoint i
 3. To create the private NLB, you must be connected to the cluster master. Because you cannot yet connect through the private cloud service endpoint from a VPN or {{site.data.keyword.dl_full_notm}}, you must connect to the cluster master and create the NLB by using the public cloud service endpoint or Kubernetes dashboard.
     * If you enabled the private cloud service endpoint only, you can use the Kubernetes dashboard to create the NLB. The dashboard automatically routes all requests to the private cloud service endpoint of the master.
         1. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
-    2. From the menu bar, select the account that you want to use.
-    3. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
-    4. On the **Clusters** page, click the cluster that you want to access.
-    5. From the cluster detail page, click the **Kubernetes Dashboard**.
-    6. Click **+ Create**.
-    7. Select **Create from file**, upload the `kube-api-via-nlb.yaml` file, and click **Upload**.
-    8. In the **Overview** page, verify that the `kube-api-via-nlb` service is created. In the **External endpoints** column, note the `10.x.x.x` address. This IP address exposes the private cloud service endpoint for the Kubernetes master on the port that you specified in your YAML file.
+        2. From the menu bar, select the account that you want to use.
+        3. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
+        4. On the **Clusters** page, click the cluster that you want to access.
+        5. From the cluster detail page, click the **Kubernetes Dashboard**.
+        6. Click **+ Create**.
+        7. Select **Create from file**, upload the `kube-api-via-nlb.yaml` file, and click **Upload**.
+        8. In the **Overview** page, verify that the `kube-api-via-nlb` service is created. In the **External endpoints** column, note the `10.x.x.x` address. This IP address exposes the private cloud service endpoint for the Kubernetes master on the port that you specified in your YAML file.
 
     * If you also enabled the public cloud service endpoint, you already have access to the master.
         1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
-        ```
-        ibmcloud ks cluster config -c <cluster_name_or_ID>
-        ```
-        {: pre}
+            ```
+            ibmcloud ks cluster config -c <cluster_name_or_ID>
+            ```
+            {: pre}
 
-    2. Create the NLB and endpoint.
-        ```
-        kubectl apply -f kube-api-via-nlb.yaml
-        ```
-        {: pre}
+        2. Create the NLB and endpoint.
+            ```
+            kubectl apply -f kube-api-via-nlb.yaml
+            ```
+            {: pre}
 
-    3. Verify that the `kube-api-via-nlb` NLB is created. In the output, note the `10.x.x.x` **EXTERNAL-IP** address. This IP address exposes the private cloud service endpoint for the Kubernetes master on the port that you specified in your YAML file.
-        ```
-        kubectl get svc -o wide
-        ```
-        {: pre}
+        3. Verify that the `kube-api-via-nlb` NLB is created. In the output, note the `10.x.x.x` **EXTERNAL-IP** address. This IP address exposes the private cloud service endpoint for the Kubernetes master on the port that you specified in your YAML file.
+            ```
+            kubectl get svc -o wide
+            ```
+            {: pre}
 
-        In this example output, the IP address for the private cloud service endpoint of the Kubernetes master is `10.186.92.42`.
-        ```
-        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)          AGE   SELECTOR
-        kube-api-via-nlb         LoadBalancer   172.21.150.118   10.186.92.42     443:32235/TCP    10m   <none>
-        ...
-        ```
-        {: screen}
+            In this example output, the IP address for the private cloud service endpoint of the Kubernetes master is `10.186.92.42`.
+            ```
+            NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)          AGE   SELECTOR
+            kube-api-via-nlb         LoadBalancer   172.21.150.118   10.186.92.42     443:32235/TCP    10m   <none>
+            ...
+            ```
+            {: screen}
 
 4. On the client machines where you or your users run `kubectl` commands, add the NLB IP address and the private cloud service endpoint URL to the `/etc/hosts` file. Do not include any ports in the IP address and URL and do not include `https://` in the URL.
     * For macOS and Linux users:
-    ```
-    sudo nano /etc/hosts
-    ```
-    {: pre}
+        ```
+        sudo nano /etc/hosts
+        ```
+        {: pre}
 
     * For Windows users:
-    ```
-    notepad C:\Windows\System32\drivers\etc\hosts
-    ```
-    {: pre}
+        ```
+        notepad C:\Windows\System32\drivers\etc\hosts
+        ```
+        {: pre}
+    
+        Depending on your local machine permissions, you might need to run Notepad as an administrator to edit the hosts file.
+        {: tip}
 
-    Depending on your local machine permissions, you might need to run Notepad as an administrator to edit the hosts file.
-    {: tip}
-
-    Example text to add:
-    ```
-    10.186.92.42      c1.private.us-east.containers.cloud.ibm.com
-    ```
-    {: codeblock}
+        Example text to add
+        ```
+        10.186.92.42      c1.private.us-east.containers.cloud.ibm.com
+        ```
+        {: codeblock}
 
 5. Verify that you are connected to the private network through a [VPN](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl) connection.
 

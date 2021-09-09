@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-18"
+lastupdated: "2021-09-09"
 
 keywords: kubernetes, iks
 
@@ -39,7 +39,6 @@ completion-time: 60m
 {:external: .external target="_blank"}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
-{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
 {:generic: data-hd-operatingsystem="generic"}
 {:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
@@ -68,6 +67,7 @@ completion-time: 60m
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -107,8 +107,9 @@ completion-time: 60m
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+{:video: .video} -->
+{{site.data.keyword.attribute-definition-list}}
   
 
 
@@ -381,7 +382,7 @@ To deploy the app:
     | `--type=NodePort` | The service type to create. |
     | `--target-port=*<8080>*` | The port to which the service directs traffic. In this instance, the target-port is the same as the port, but other apps you create might differ. |
     {: caption="Table 1. More about the expose option" caption-side="top"}
-    {: summary="The rows are read from left to right, with the command `expose` options in column one and the description in column two."}
+    {: summary="The rows are read from left to right, with the command options in column one and the description in column two."}
 
 6. Now that all the deployment work is done, you can test your app in a browser. Get the details to form the URL.
     1. Get information about the service to see which NodePort was assigned.
