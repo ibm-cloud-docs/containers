@@ -330,7 +330,6 @@ To deploy the app:
     | `--port=*<8080>*` | The port on which the service listens for external network traffic. |
     | `--target-port=*<8080>*` | The port that your app listens on and to which the service directs incoming network traffic. In this example, the `target-port` is the same as the `port`, but other apps that you create might use a different port. |
     {: caption="Table 1. Information about the command options." caption-side="top"}
-    {: summary="Information about the command options. Columns are read left to right, with the first column the command parameter and the second column the description of the parameter."}
 
 7. Now that all the deployment work is done, you can test your app from within the cluster. Get the details to form the private IP address that you can use to access your app.
     1. Get information about the service to see which NodePort was assigned. The NodePorts are randomly assigned when they are generated with the `expose` command, but within 30000-32767. In this example, the **NodePort** is 30872.
@@ -450,7 +449,6 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     | `--port=*<8080>*` | The port on which the service listens for external network traffic. |
     | `--target-port=*<8080>*` | The port that your app listens on and to which the service directs incoming network traffic. In this example, the `target-port` is the same as the `port`, but other apps that you create might use a different port. |
     {: caption="Table 2. Information about the command options." caption-side="top"}
-    {: summary="Information about the command options. Columns are read left to right, with the first column the command parameter and the second column the description of the parameter."}
 
 2. Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When you create the Kubernetes `LoadBalancer` service, a VPC load balancer is automatically created for you. The VPC load balancer assigns a hostname to your Kubernetes LoadBalancer service that you can see in the **LoadBalancer Ingress** field of your CLI output.<p class="note">The VPC load balancer takes a few minutes to provision in your VPC. Until the VPC load balancer is ready, you cannot access the Kubernetes `LoadBalancer` service through its hostname.</p>
 

@@ -381,8 +381,7 @@ To deploy the app:
     | `--port=*<8080>*` | The port on which the service serves. |
     | `--type=NodePort` | The service type to create. |
     | `--target-port=*<8080>*` | The port to which the service directs traffic. In this instance, the target-port is the same as the port, but other apps you create might differ. |
-    {: caption="Table 1. More about the expose option" caption-side="top"}
-    {: summary="The rows are read from left to right, with the command options in column one and the description in column two."}
+    {: caption="Table 1. Learn about expose option" caption-side="top"}
 
 6. Now that all the deployment work is done, you can test your app in a browser. Get the details to form the URL.
     1. Get information about the service to see which NodePort was assigned.

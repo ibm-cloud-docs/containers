@@ -109,7 +109,117 @@ subcollection: containers
 
 
 
-{[css-tiles.html]}
+<style>
+    <!--
+        #tutorials { /* hide the page header */
+            display: none !important;
+        }
+        .allCategories {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+        }
+        .categoryBox {
+            flex-grow: 1 !important;
+            width: calc(33% - 20px) !important;
+            text-decoration: none !important;
+            margin: 0 10px 20px 0 !important;
+            padding: 16px !important;
+            border: 1px #dfe6eb solid !important;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
+            text-align: center !important;
+            text-overflow: ellipsis !important;
+            overflow: hidden !important;
+        }
+        .solutionBoxContainer {}
+        .solutionBoxContainer a {
+            text-decoration: none !important;
+            border: none !important;
+        }
+        .solutionBox {
+            display: inline-block !important;
+            width: 100% !important;
+            margin: 0 10px 20px 0 !important;
+            padding: 16px !important;
+            background-color: #f4f4f4 !important;
+        }
+        @media screen and (min-width: 960px) {
+            .solutionBox {
+            width: calc(50% - 3%) !important;
+            }
+            .solutionBox.solutionBoxFeatured {
+            width: calc(50% - 3%) !important;
+            }
+            .solutionBoxContent {
+            height: 350px !important;
+            }
+        }
+        @media screen and (min-width: 1298px) {
+            .solutionBox {
+            width: calc(33% - 2%) !important;
+            }
+            .solutionBoxContent {
+            min-height: 350px !important;
+            }
+        }
+        .solutionBox:hover {
+            border: 1px rgb(136, 151, 162)solid !important;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
+        }
+        .solutionBoxContent {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+        .solutionBoxTitle {
+            margin: 0rem !important;
+            margin-bottom: 5px !important;
+            font-size: 14px !important;
+            font-weight: 900 !important;
+            line-height: 16px !important;
+            height: 37px !important;
+            text-overflow: ellipsis !important;
+            overflow: hidden !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            -webkit-box-align: inherit !important;
+        }
+        .solutionBoxDescription {
+            flex-grow: 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+        .descriptionContainer {
+        }
+        .descriptionContainer p {
+            margin: 0 !important;
+            overflow: hidden !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 4 !important;
+            -webkit-box-orient: vertical !important;
+            font-size: 14px !important;
+            font-weight: 400 !important;
+            line-height: 1.5 !important;
+            letter-spacing: 0 !important;
+            max-height: 70px !important;
+        }
+        .architectureDiagramContainer {
+            flex-grow: 1 !important;
+            min-width: calc(33% - 2%) !important;
+            padding: 0 16px !important;
+            text-align: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            background-color: #f4f4f4;
+        }
+        .architectureDiagram {
+            max-height: 175px !important;
+            padding: 5px !important;
+            margin: 0 auto !important;
+        }
+    -->
+    </style>
 
 
 # Getting started with {{site.data.keyword.containerlong_notm}}
@@ -229,7 +339,7 @@ The steps to deploy an app vary if you have a free or standard cluster, because 
 
 | Steps |
 | ----- |
-| <ol><li>Select your cluster from the <a href="https://cloud.ibm.com/kubernetes/clusters">cluster list</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> to open the details for your cluster.</li><li>Click <strong>Kubernetes dashboard</strong>.</li><li>From the menu bar, click the <strong>Create new resource</strong> icon (<code>+</code>).</li><li>Select the <strong>Create from form</strong> tab.<ol><li>Enter a name for your app, such as <code>liberty</code>.</li><li>Enter <code>websphere-liberty</code> for your container image. Remember that your cluster's VPC subnet must have a public gateway so that the cluster can pull an image from DockerHub.</li><li>Enter the number of pods for your app deployment, such as <code>1</code>.</li><li>From the <strong>Service</strong> drop-down menu, select <strong>External</strong> to create a <code>LoadBalancer</code> service that external users can use to access the app. Configure the external service as follows.<ul><li><strong>Port</strong>: <code>80</code></li><li><strong>Target port</strong>: <code>9080</code></li><li><strong>Protocol</strong>: <code>TCP</code></li></ul></li></ol></li><li>Click <strong>Deploy</strong>. During the deployment, the cluster downloads the <code>websphere-liberty</code> container image from Docker Hub and deploys the app in your cluster. Your app is exposed by a Layer 4, version 1.0 network load balancer (NLB) so that it can be accessed by other users internally or externally. For other ways to expose an app such as Ingress, see <a href="/docs/containers?topic=containers-cs_network_planning">Planning in-cluster and external networking for apps</a>.</li><li>From the <strong>Workloads</strong> > <strong>Pods</strong> menu, click your <code>liberty</code> pod and check that its status is <strong>Running</strong>.</li><li>From the <strong>Discovery and Load Balancing > Services</strong> menu, click the <strong>External Endpoint</strong> of your <code>liberty</code> service. For example, <code>169.xx.xxx.xxx:80</code> for classic clusters or <code>http://<hash>-<region>.lb.appdomain.cloud/</code> for VPC clusters. The <strong>Welcome to Liberty</strong> page is displayed.</li></ol> |
+| <ol><li>Select your cluster from the <a href="https://cloud.ibm.com/kubernetes/clusters">cluster list</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> to open the details for your cluster.</li><li>Click <strong>Kubernetes dashboard</strong>.</li><li>From the menu bar, click the <strong>Create new resource</strong> icon (<code>+</code>).</li><li>Select the <strong>Create from form</strong> tab.<ol><li>Enter a name for your app, such as <code>liberty</code>.</li><li>Enter <code>websphere-liberty</code> for your container image. Remember that your cluster's VPC subnet must have a public gateway so that the cluster can pull an image from DockerHub.</li><li>Enter the number of pods for your app deployment, such as <code>1</code>.</li><li>From the <strong>Service</strong> drop-down menu, select <strong>External</strong> to create a <code>LoadBalancer</code> service that external users can use to access the app. Configure the external service as follows.<ul><li><strong>Port</strong>: <code>80</code></li><li><strong>Target port</strong>: <code>9080</code></li><li><strong>Protocol</strong>: <code>TCP</code></li></ul></li></ol></li><li>Click <strong>Deploy</strong>. During the deployment, the cluster downloads the <code>websphere-liberty</code> container image from Docker Hub and deploys the app in your cluster. Your app is exposed by a Layer 4, version 1.0 network load balancer (NLB) so that it can be accessed by other users internally or externally. For other ways to expose an app such as Ingress, see <a href="/docs/containers?topic=containers-cs_network_planning">Planning in-cluster and external networking for apps</a>.</li><li>From the <strong>Workloads</strong> > <strong>Pods</strong> menu, click your <code>liberty</code> pod and check that its status is <strong>Running</strong>.</li><li>From the <strong>Discovery and Load Balancing > Services</strong> menu, click the <strong>External Endpoint</strong> of your <code>liberty</code> service. For example, <code>169.xx.xxx.xxx:80</code> for classic clusters or <code>http://&lt;hash&gt;-&lt;region&gt;.lb.appdomain.cloud/</code> for VPC clusters. The <strong>Welcome to Liberty</strong> page is displayed.</li></ol> |
 {: summary="The rows contains the steps to deploy an app and expose it with a load balancer."}
 {: class="simple-tab-table"}
 {: caption="Deploying an app to a standard cluster and exposing with a load balancer" caption-side="top"}
