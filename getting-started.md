@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-14"
+lastupdated: "2021-09-09"
 
 keywords: kubernetes, iks, containers
 
@@ -34,7 +34,6 @@ subcollection: containers
 {:external: .external target="_blank"}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
-{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
 {:generic: data-hd-operatingsystem="generic"}
 {:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
@@ -63,6 +62,7 @@ subcollection: containers
 {:preview: .preview}
 {:python: .ph data-hd-programlang='python'}
 {:python: data-hd-programlang="python"}
+{:release-note: data-hd-content-type='release-note'}
 {:right: .ph data-hd-position='right'}
 {:route: data-hd-keyref="route"}
 {:row-headers: .row-headers}
@@ -102,10 +102,10 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+{:video: .video} -->
+{{site.data.keyword.attribute-definition-list}}
   
-
 
 
 <style>
@@ -220,6 +220,7 @@ subcollection: containers
     -->
     </style>
 
+
 # Getting started with {{site.data.keyword.containerlong_notm}}
 {: #getting-started}
 
@@ -273,7 +274,6 @@ To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {
 
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
 
-<br />
 
 ## Creating a VPC cluster
 {: #vpc-gen2-gs}
@@ -311,11 +311,10 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
     4. Click **Save**.
     5. If you require VPC VPN access or classic infrastructure access into this cluster, repeat these steps to add a rule that uses the **UDP** protocol, `30000` for the **Port min**, `32767` for the **Port max**, and the **Any** source type.
 
-<br>
 
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
 
-<br />
+
 
 ## Deploying an app to your cluster
 {: #deploy-app}
@@ -339,7 +338,7 @@ The steps to deploy an app vary if you have a free or standard cluster, because 
 
 | Steps |
 | ----- |
-| <ol><li>Select your cluster from the <a href="https://cloud.ibm.com/kubernetes/clusters">cluster list</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> to open the details for your cluster.</li><li>Click <strong>Kubernetes dashboard</strong>.</li><li>From the menu bar, click the <strong>Create new resource</strong> icon (<code>+</code>).</li><li>Select the <strong>Create from form</strong> tab.<ol><li>Enter a name for your app, such as <code>liberty</code>.</li><li>Enter <code>websphere-liberty</code> for your container image. Remember that your cluster's VPC subnet must have a public gateway so that the cluster can pull an image from DockerHub.</li><li>Enter the number of pods for your app deployment, such as <code>1</code>.</li><li>From the <strong>Service</strong> drop-down menu, select <strong>External</strong> to create a <code>LoadBalancer</code> service that external users can use to access the app. Configure the external service as follows.<ul><li><strong>Port</strong>: <code>80</code></li><li><strong>Target port</strong>: <code>9080</code></li><li><strong>Protocol</strong>: <code>TCP</code></li></ul></li></ol></li><li>Click <strong>Deploy</strong>. During the deployment, the cluster downloads the <code>websphere-liberty</code> container image from Docker Hub and deploys the app in your cluster. Your app is exposed by a Layer 4, version 1.0 network load balancer (NLB) so that it can be accessed by other users internally or externally. For other ways to expose an app such as Ingress, see <a href="/docs/containers?topic=containers-cs_network_planning">Planning in-cluster and external networking for apps</a>.</li><li>From the <strong>Workloads</strong> > <strong>Pods</strong> menu, click your <code>liberty</code> pod and check that its status is <strong>Running</strong>.</li><li>From the <strong>Discovery and Load Balancing > Services</strong> menu, click the <strong>External Endpoint</strong> of your <code>liberty</code> service. For example, <code>169.xx.xxx.xxx:80</code> for classic clusters or <code>http://<hash>-<region>.lb.appdomain.cloud/</code> for VPC clusters. The <strong>Welcome to Liberty</strong> page is displayed.</li></ol> |
+| <ol><li>Select your cluster from the <a href="https://cloud.ibm.com/kubernetes/clusters">cluster list</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> to open the details for your cluster.</li><li>Click <strong>Kubernetes dashboard</strong>.</li><li>From the menu bar, click the <strong>Create new resource</strong> icon (<code>+</code>).</li><li>Select the <strong>Create from form</strong> tab.<ol><li>Enter a name for your app, such as <code>liberty</code>.</li><li>Enter <code>websphere-liberty</code> for your container image. Remember that your cluster's VPC subnet must have a public gateway so that the cluster can pull an image from DockerHub.</li><li>Enter the number of pods for your app deployment, such as <code>1</code>.</li><li>From the <strong>Service</strong> drop-down menu, select <strong>External</strong> to create a <code>LoadBalancer</code> service that external users can use to access the app. Configure the external service as follows.<ul><li><strong>Port</strong>: <code>80</code></li><li><strong>Target port</strong>: <code>9080</code></li><li><strong>Protocol</strong>: <code>TCP</code></li></ul></li></ol></li><li>Click <strong>Deploy</strong>. During the deployment, the cluster downloads the <code>websphere-liberty</code> container image from Docker Hub and deploys the app in your cluster. Your app is exposed by a Layer 4, version 1.0 network load balancer (NLB) so that it can be accessed by other users internally or externally. For other ways to expose an app such as Ingress, see <a href="/docs/containers?topic=containers-cs_network_planning">Planning in-cluster and external networking for apps</a>.</li><li>From the <strong>Workloads</strong> > <strong>Pods</strong> menu, click your <code>liberty</code> pod and check that its status is <strong>Running</strong>.</li><li>From the <strong>Discovery and Load Balancing > Services</strong> menu, click the <strong>External Endpoint</strong> of your <code>liberty</code> service. For example, <code>169.xx.xxx.xxx:80</code> for classic clusters or <code>http://&lt;hash&gt;-&lt;region&gt;.lb.appdomain.cloud/</code> for VPC clusters. The <strong>Welcome to Liberty</strong> page is displayed.</li></ol> |
 {: summary="The rows contains the steps to deploy an app and expose it with a load balancer."}
 {: class="simple-tab-table"}
 {: caption="Deploying an app to a standard cluster and exposing with a load balancer" caption-side="top"}
@@ -347,10 +346,9 @@ The steps to deploy an app vary if you have a free or standard cluster, because 
 {: tab-title="Standard cluster"}
 {: tab-group="deployapp"}
 
-<br>
+
 Great job! You just deployed your first app in your Kubernetes cluster.
 
-<br />
 
 
 ## What's next?

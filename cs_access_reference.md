@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-31"
+lastupdated: "2021-09-09"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -34,7 +34,6 @@ subcollection: containers
 {:external: .external target="_blank"}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
-{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
 {:generic: data-hd-operatingsystem="generic"}
 {:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
@@ -103,8 +102,9 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+{:video: .video} -->
+{{site.data.keyword.attribute-definition-list}}
   
 
 
@@ -120,42 +120,42 @@ When you [assign cluster permissions](/docs/containers?topic=containers-users#ch
 Review the minimum permissions in {{site.data.keyword.cloud_notm}} IAM that the account owner must set up so that users can create clusters in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-<dl>
-<dt>API key for each region and resource group</dt>
-<dd>The API key is used to provide the underlying access to infrastructure and other account resources. For more information, see [Setting up the API key to enable access to the infrastructure portfolio](/docs/containers?topic=containers-access-creds).
-<ul><li><strong>IAM Services</strong></li><ul>
-    <li><strong>Administrator</strong> platform access role for <strong>Kubernetes Service</strong> in the console (<strong>containers-kubernetes</strong> in the API or CLI) in <strong>All resource groups</strong>.</li>
-    <li><strong>Writer</strong> or <strong>Manager</strong> service access role for <strong>Kubernetes Service</strong> in the console (<strong>containers-kubernetes</strong> in the API or CLI) in <strong>All resource groups</strong>.</li>
-    <li><strong>Administrator</strong> platform access role for <strong>Container Registry</strong> in the console (<strong>container-registry</strong> in the API or CLI) at the <strong>Account</strong> level. Do not limit policies for {{site.data.keyword.registrylong_notm}} to the resource group level.</li>
-    <li>If you plan to <a href="/docs/containers?topic=containers-ingress-about">expose apps with Ingress</a>, assign the user <strong>Administrator</strong> or <strong>Editor</strong> platform access role and the <strong>Manager</strong> service access role for <strong>{{site.data.keyword.cloudcerts_short}}</strong> in <strong>All resource groups</strong>.</li>
-    <li><strong>Viewer</strong> platform access role for the resource group access.</li>
-    <li>If your account <a href="/docs/account?topic=account-restrict-service-id-create">restricts service ID creation</a>, the <strong>Service ID creator</strong> role to <strong>Identity and Access Management</strong> in the console (<code>iam-identity</code> in the API or CLI).</li>
-    <li>If your account <a href="/docs/account?topic=account-allow-api-create">restricts API key creation</a>, the <strong>User API key creator</strong> role to <strong>Identity and Access Management</strong> in the console (<code>iam-identity</code> in the API or CLI).</li>
-    <li>If you plan to <a href="/docs/containers?topic=containers-encryption#keyprotect">encrypt your cluster</a>:<ul><li>Assign the user the appropriate permission to the key management service (KMS) provider, such as the <strong>Administrator</strong> platform access role for {{site.data.keyword.keymanagementserviceshort}}.</li><li>For clusters that run Kubernetes 1.18.8_1525 or later: When you enable KMS encryption, an additional <strong>Reader</strong> <a href="/docs/account?topic=account-serviceauth">service-to-service authorization policy</a> between {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.keymanagementserviceshort}} is automatically created for your cluster, if the policy does not already exist. Without this policy, your cluster cannot use all the <a href="/docs/containers?topic=containers-encryption#kms-keyprotect-features">{{site.data.keyword.keymanagementserviceshort}} features</a>.</li></ul></li>
-    <li><strong>Viewer</strong> platform access role for the resource group access.</li></ul>
-<li><strong>Infrastructure</strong></li><ul>
-    <li>Classic clusters only: <strong>Super User</strong> role or the <a href="#infra">minimum required permissions</a> for classic infrastructure.</li>
-    <li>VPC clusters only: <strong>Administrator</strong> platform access role for <a href="/docs/vpc?topic=vpc-iam-getting-started"><strong>VPC Infrastructure</strong></a>.</li></ul></ul></dd>
+**IAM Services**
+- **Administrator platform** access role for the **Kubernetes Service** in the console (`containers-kubernetes` in the API or CLI) in **All resource groups**.   
+- **Writer** or **Manager** service access role for **Kubernetes Service** in the console (**containers-kubernetes** in the API or CLI) in **All resource groups**.   
+- Administrator platform access role for **Container Registry** in the console (**container-registry** in the API or CLI) at the **Account** level. Do not limit policies for {{site.data.keyword.registrylong_notm}} to the resource group level.
+- If you plan to [expose apps with Ingress](/docs/containers?topic=containers-ingress-about), assign the user **Administrator** or **Editor** platform access role and the **Manager** service access role for **{{site.data.keyword.cloudcerts_short}}** in **All resource groups**.
+- **Viewer** platform access role for the resource group access.
+- If your account [restricts service ID creation](/docs/account?topic=account-restrict-service-id-create), the **Service ID creator** role to **IAM Identity Service** in the console (`iam-identity` in the API or CLI).
+- If your account [restricts API key creation](/docs/account?topic=account-allow-api-create), the **User API key creator** role to **IAM Identity Service** in the console (`iam-identity` in the API or CLI).
+- If you plan to [encrypt your cluster](/docs/containers?topic=containers-encryption#keyprotect):
+    - Assign the user the appropriate permission to the key management service (KMS) provider, such as the **Administrator** platform access role for {{site.data.keyword.keymanagementserviceshort}}.  
+    - For clusters that run Kubernetes `1.18.8_1525` or later: When you enable KMS encryption, an additional **Reader** [service-to-service authorization policy](/docs/account?topic=account-serviceauth) between {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.keymanagementserviceshort}} is automatically created for your cluster, if the policy doesn't already exist. Without this policy, your cluster cannot use all the [{{site.data.keyword.keymanagementserviceshort}} features](/docs/containers?topic=containers-encryption#kms-keyprotect-features).
+- **Viewer** platform access role for the resource group access.  
 
-<dt>User that creates the cluster</dt>
-<dd>In addition to the API key, each individual user must have the following permissions to create a cluster.<ul>
-<li><strong>Administrator</strong> platform access role for <strong>Kubernetes Service</strong> in the console (<strong>containers-kubernetes</strong> in the API or CLI). If your access is scoped to a resource group or region, you must also have the <strong>Viewer</strong> platform access role at the <strong>Account</strong> level to view the account's VLANs.</li>
-<li><strong>Administrator</strong> platform access role for <strong>Container Registry</strong> in the console (<strong>container-registry</strong> in the API or CLI) at the <strong>Account</strong> level.</li>
-<li><strong>Viewer</strong> platform access role to <strong>IAM Identity Service</strong> for account management access.</li>
-<li><strong>Viewer</strong> platform access role for the resource group access.</li></ul></dd>
-</dl>
 
-<br>
+**Infrastructure**
+- Classic clusters only: **Super User** role or the [minimum required permissions](#infra) for classic infrastructure.
+- VPC clusters only: **Administrator** platform access role for [VPC Infrastructure](/docs/vpc?topic=vpc-iam-getting-started).
 
-**More information about assigning permissions**:
-* To understand how access works and how to assign users roles in {{site.data.keyword.cloud_notm}} IAM, see [Setting up access to your cluster](/docs/containers?topic=containers-access-overview#access-checklist).
-* To create clusters, see [Preparing to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare).
-* For permissions that you might set up for different types of users such as auditors, see [Example use cases and roles](/docs/containers?topic=containers-users#example-iam).
+**User that creates the cluster**
+In addition to the API key, each individual user must have the following permissions to create a cluster.
+
+- **Administrator** platform access role for **Kubernetes Service** in the console (**containers-kubernetes** in the API or CLI). If your access is scoped to a resource group or region, you must also have the **Viewer** platform access role at the **Account** level to view the account's VLANs.
+- **Administrator** platform access role for **Container Registry** in the console (**container-registry** in the API or CLI) at the **Account** level.
+- **Viewer** platform access role to **IAM Identity Service** for account management access.
+- **Viewer** platform access role for the resource group access.
+
+
+**More information about assigning permissions**
+- To understand how access works and how to assign users roles in {{site.data.keyword.cloud_notm}} IAM, see [Setting up access to your cluster](/docs/containers?topic=containers-access-overview#access-checklist).  
+- To create clusters, see [Preparing to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare).  
+- For permissions that you might set up for different types of users such as auditors, see [Example use cases and roles](/docs/containers?topic=containers-users#example-iam).  
 
 ## {{site.data.keyword.cloud_notm}} IAM platform access roles
 {: #iam_platform}
 
-{{site.data.keyword.containerlong_notm}} is configured to use {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) roles. {{site.data.keyword.cloud_notm}} IAM platform access roles determine the actions that users can perform on {{site.data.keyword.cloud_notm}} resources such as clusters, worker nodes, and Ingress application load balancers (ALBs). {{site.data.keyword.cloud_notm}} IAM platform access roles also automatically set basic infrastructure permissions for users. To assign platform access roles, see [Granting users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#checking-perms).
+{{site.data.keyword.containerlong_notm}} is configured to use {{site.data.keyword.cloud_notm}} IAM Identity Service roles. {{site.data.keyword.cloud_notm}} IAM platform access roles determine the actions that users can perform on {{site.data.keyword.cloud_notm}} resources such as clusters, worker nodes, and Ingress application load balancers (ALBs). {{site.data.keyword.cloud_notm}} IAM platform access roles also automatically set basic infrastructure permissions for users. To assign platform access roles, see [Granting users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#checking-perms).
 {: shortdesc}
 
 <p class="tip">Do not assign {{site.data.keyword.cloud_notm}} IAM platform access roles at the same time as a service access role. You must assign platform and service access roles separately.</p>

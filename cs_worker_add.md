@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-31"
+lastupdated: "2021-09-09"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -34,7 +34,6 @@ subcollection: containers
 {:external: .external target="_blank"}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
-{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
 {:generic: data-hd-operatingsystem="generic"}
 {:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
@@ -103,8 +102,9 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+{:video: .video} -->
+{{site.data.keyword.attribute-definition-list}}
   
 
 
@@ -845,16 +845,16 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
 
 1. Create an inventory file and add the server instance private IP address that you found in the previous step. Your cluster uses this inventory file to establish a connection to the server instance.
     1. Create a file that contains the following line and name the file `inventory`. If you want to add multiple server instances to your cluster network, specify each server instance IP address in a different line.
-    ```
-    <server_private_IP>:22 ansible_user=root ansible_connection=ssh
-    ```
-    {: codeblock}
+        ```
+        <server_private_IP>:22 ansible_user=root ansible_connection=ssh
+        ```
+        {: codeblock}
 
     2. Export the file as an `INVENTORY` environment variable.
-    ```
-    export INVENTORY=./inventory
-    ```
-    {: pre}
+        ```
+        export INVENTORY=./inventory
+        ```
+        {: pre}
 
 2. Create a Kubernetes secret that is named `ibm-external-compute-pk` in the `kube-system` namespace. This secret stores the private key of the SSH key that you used for the virtual or bare metal server.
     ```
@@ -905,16 +905,16 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
 
 5. When the virtual or bare metal server instance accesses services in your cluster, you can configure the cluster DNS provider to resolve the services' DNS hostnames.
     * To enable DNS resolution, set the `CLUSTERDNS_SETUP` environment variable as `true`.
-    ```
-    export CLUSTERDNS_SETUP=true
-    ```
-    {: pre}
+        ```
+        export CLUSTERDNS_SETUP=true
+        ```
+        {: pre}
 
     * Otherwise, set the `CLUSTERDNS_SETUP` environment variable as `false`.
-    ```
-    export CLUSTERDNS_SETUP=false
-    ```
-    {: pre}
+        ```
+        export CLUSTERDNS_SETUP=false
+        ```
+        {: pre}
 
 6. Create the `ibm-external-compute-config` config map, which provides the necessary information to access and configure the connection to the server instance. This config map provides the server IP address, {{site.data.keyword.registrylong_notm}} domain, Kubernetes service namespace, and DNS resolution option that you set in the previous steps.
     ```
@@ -928,7 +928,7 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     Name:         ibm-external-compute-config
     Namespace:    kube-system
@@ -984,7 +984,7 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     serviceaccount/ibm-external-compute-job created
     clusterrole.rbac.authorization.k8s.io/ibm-external-compute-job created
@@ -999,7 +999,7 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     NAME                                                  READY     STATUS    RESTARTS   AGE
     ibm-external-compute-job-6lz8j                        1/1       Running   0          2m
@@ -1012,7 +1012,7 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     NAME                       COMPLETIONS   DURATION   AGE
     ibm-external-compute-job   1/1           20m        20m
@@ -1021,69 +1021,69 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
 
 6. Test the connection from your server instance to your cluster's pods.
     1. Find the private IP address of one of your app pods in your cluster. In the output, look for the **IP:** field.
-    ```
-    kubectl describe pod <pod_name>
-    ```
-    {: pre}
+        ```
+        kubectl describe pod <pod_name>
+        ```
+        {: pre}
 
     2. Log in to your server instance. For example, you might use SSH to access a VSI.
 
     3. Ping the private IP address of the pod from the server instance.
-    ```
-    ping <pod_private_IP>
-    ```
-    {: pre}
+        ```
+        ping <pod_private_IP>
+        ```
+        {: pre}
 
     4. Optional: If you enabled DNS resolution for the server instance by setting `CLUSTERDNS_SETUP=true`, you can also ping the hostname of the services.
-    ```
-    ping <service_hostname>
-    ```
-    {: pre}
+        ```
+        ping <service_hostname>
+        ```
+        {: pre}
 
     5. Optional: While you are logged in to your server instance, you can also view the `/etc/ibm-external-compute-provision.yml` file that is created on the server instance. This file contains information about the connection that you set up between your gateway-enabled cluster and your server instance.
-    ```
-    cat /etc/ibm-external-compute-provision.yml
-    ```
-    {: pre}
+        ```
+        cat /etc/ibm-external-compute-provision.yml
+        ```
+        {: pre}
 
-    Example output:
-    ```
-    start_time: "Tue Dec 17 15:19:23 UTC 2019"
-    config:
-      kubernetes_version: 1.20.7
-      pod_name: ibm-external-compute-job-wk9xc
-      image_url: us.icr.io/armada-master/stranger:v1.0.0
-      prepare_host: True
-      configure_gateway: True
-      calico_node_version: v3.8.4
-      ibm_gateway_controller_version: 1027
-      service_k8s_ns: default
-      repo_name: us.icr.io
-      clusterdns_setup: True
-      etcd_private_host: c1.private.containers.mycluster.cloud.ibm.com
-      etcd_port: 28649
-    end_time: "Tue Dec 17 15:21:12 UTC 2019"
-    ```
-    {: screen}
+        Example output
+        ```
+        start_time: "Tue Dec 17 15:19:23 UTC 2019"
+        config:
+          kubernetes_version: 1.20.7
+          pod_name: ibm-external-compute-job-wk9xc
+          image_url: us.icr.io/armada-master/stranger:v1.0.0
+          prepare_host: True
+          configure_gateway: True
+          calico_node_version: v3.8.4
+          ibm_gateway_controller_version: 1027
+          service_k8s_ns: default
+          repo_name: us.icr.io
+          clusterdns_setup: True
+          etcd_private_host: c1.private.containers.mycluster.cloud.ibm.com
+          etcd_port: 28649
+        end_time: "Tue Dec 17 15:21:12 UTC 2019"
+        ```
+        {: screen}
 
 7. Test the connection from your cluster's pods to your server instance. To use ping, the `allow_all` security group or another security group that allows the ICMP protocol must be enabled on the server instance.
     1. Get the IP address for your server.
-    ```
-    kubectl get ep -n <namespace> <server_hostname>
-    ```
-    {: pre}
+        ```
+        kubectl get ep -n <namespace> <server_hostname>
+        ```
+        {: pre}
 
     2. Log in to a pod in your cluster.
-    ```
-    kubectl exec <pod_name> -it bash
-    ```
-    {: pre}
+        ```
+        kubectl exec <pod_name> -it bash
+        ```
+        {: pre}
 
     3. Ping the private IP address of the server instance from the pod.
-    ```
-    ping <server_IP>
-    ```
-    {: pre}
+        ```
+        ping <server_IP>
+        ```
+        {: pre}
 
 ### Updating the server instance connection
 {: #update_connection}
@@ -1146,7 +1146,6 @@ Before you begin: [Install and configure the Calico CLI.](/docs/containers?topic
     kubectl delete service -n <namespace> <service_name>
     ```
     {: pre}
-
 
 
 

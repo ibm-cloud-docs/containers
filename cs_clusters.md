@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-31"
+lastupdated: "2021-09-09"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -34,7 +34,6 @@ subcollection: containers
 {:external: .external target="_blank"}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
-{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
 {:generic: data-hd-operatingsystem="generic"}
 {:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
@@ -103,8 +102,9 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+{:video: .video} -->
+{{site.data.keyword.attribute-definition-list}}
   
 
 
@@ -122,7 +122,7 @@ After [getting started](/docs/containers?topic=containers-getting-started), you 
 
 
 
-<br />
+
 
 ## Sample commands
 {: #cluster_create_samples}
@@ -138,12 +138,13 @@ ibmcloud ks cluster create classic --name my_cluster
 ```
 {: pre}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**:
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**
+
 *  Classic cluster, shared virtual machine:
-        ```
-        ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
-        ```
-        {: pre}
+    ```
+    ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+    ```
+    {: pre}
 
 *  Classic cluster, bare metal:
     ```
@@ -171,7 +172,7 @@ ibmcloud ks cluster create classic --name my_cluster
 
 
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**:
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**
 *  <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC cluster:
     ```
     ibmcloud ks cluster create vpc-gen2 --name my_cluster --zone us-east-1 --vpc-id <VPC_ID> --subnet-id <VPC_SUBNET_ID> --flavor b2.4x16 --workers 3
@@ -185,7 +186,6 @@ ibmcloud ks cluster create classic --name my_cluster
     {: pre}
 
 
-<br />
 
 ## Preparing to create clusters at the account level
 {: #cluster_prepare}
@@ -230,7 +230,7 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
         2. Configure a gateway appliance to connect your cluster to the on-premises network. For example, you might choose to set up a [Virtual Router Appliance](/docs/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or a [Fortigate Security Appliance](/docs/vmwaresolutions/services?topic=vmwaresolutions-fsa_considerations) to act as your firewall to allow required network traffic and to block unwanted network traffic.
         3. [Open up the required private IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_outbound) for each region so that the master and the worker nodes can communicate and for the {{site.data.keyword.cloud_notm}} services that you plan to use.
 
-<br />
+
 
 ## Deciding on your cluster setup
 {: #prepare_cluster_level}
@@ -260,7 +260,7 @@ The following image walks you through choosing the setup that you want for your 
     <area target="" alt="Estimate costs (cluster create page)" title="Estimate costs (cluster create page)" href="https://cloud.ibm.com/kubernetes/catalog/create" coords="248,732,426,776" shape="rect">
 </map>
 
-<br />
+
 
 ## Creating a standard classic cluster
 {: #clusters_standard}
@@ -321,7 +321,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
     *  Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.<p class="tip">Is your cluster not in a **Normal** state? Check out the [Debugging clusters](/docs/containers?topic=containers-debug_clusters) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).</p>
 10. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](/docs/containers?topic=containers-access_cluster). For more possibilities, review the [Next steps](/docs/containers?topic=containers-clusters#next_steps).
 
-<br />
+
 
 ### Creating a standard classic cluster in the CLI
 {: #clusters_cli_steps}
@@ -521,7 +521,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
 
 Your cluster is ready for your workloads! You might also want to [add a tag to your cluster](/docs/containers?topic=containers-add_workers#cluster_tags), such as the team or billing department that uses the cluster, to help manage {{site.data.keyword.cloud_notm}} resources. For more ideas of what to do with your cluster, review the [Next steps](/docs/containers?topic=containers-clusters#next_steps).
 
-<br />
+
 
 
 
@@ -723,7 +723,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 
 
 
-<br />
+
 
 ## Creating a standard VPC cluster
 {: #clusters_vpcg2}
@@ -960,7 +960,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 
 Your cluster is ready for your workloads! You might also want to [add a tag to your cluster](/docs/containers?topic=containers-add_workers#cluster_tags), such as the team or billing department that uses the cluster, to help manage {{site.data.keyword.cloud_notm}} resources. For more ideas of what to do with your cluster, review the [Next steps](/docs/containers?topic=containers-clusters#next_steps).
 
-<br />
+
 
 ## Next steps
 {: #next_steps}
