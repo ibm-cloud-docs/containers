@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-13"
 
 keywords: kubernetes, iks, containers
 
@@ -219,14 +219,14 @@ For more information, see [Your responsibilities by using {{site.data.keyword.co
 Use the `ibmcloud ks worker update` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version that your worker nodes run. When updates are available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.cloud_notm}} console or CLI, such as with the `ibmcloud ks clusters ls` or `ibmcloud ks workers ls --cluster <cluster_name>` commands. Worker node updates are provided by IBM as a full worker node image that includes the latest security patches. To apply the updates, the worker node must be reimaged and reloaded with the new image. Keys for the root user are automatically rotated when the worker node is reloaded.
 {: important}
 
-**How does my worker node setup look like?**
+**How does my worker node setup look?**
 
 The following image shows the components that are set up for every worker node to protect your worker node from malicious attacks.
 
 The image does not include components that ensure secure end-to-end communication to and from the worker node. For more information, see [network security](#network).
 {: note}
 
-![Worker node setup in {{site.data.keyword.containerlong_notm}} (excluding network security).](images/cs_worker_setup.png "Worker node setup in {{site.data.keyword.containerlong_notm}}"){: caption="Figure 2. Worker node setup in {{site.data.keyword.containerlong_notm}} (excluding network security)" caption-side="bottom"}
+![Worker node setup in {{site.data.keyword.containerlong_notm}} excluding network security.](images/cs_worker_setup.png "Worker node setup in {{site.data.keyword.containerlong_notm}}"){: caption="Figure 2. Worker node setup in {{site.data.keyword.containerlong_notm}} excluding network security" caption-side="bottom"}
 
 
 
@@ -240,10 +240,10 @@ Continuous monitoring by Site Reliability Engineers (SREs)
 : The image that is installed on your worker nodes is continuously monitored by IBM Site Reliability Engineers (SREs) to detect vulnerabilities and security compliance issues. To address vulnerabilities, SREs create security patches and fix packs for your worker nodes. Make sure to apply these patches when they are available to ensure a secure environment for your worker nodes and the apps that you run on top of them.
 
 CIS Kubernetes worker node benchmark
-: To configure {{site.data.keyword.containerlong_notm}}, IBM engineers follow relevant cybersecurity practices from the Kubernetes worker node benchmark that is published by the [Center of Internet Security (CIS)](https://www.cisecurity.org/benchmark/kubernetes/). You can review the compliance of worker nodes against [CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test) standards.
+:   To configure {{site.data.keyword.containerlong_notm}}, IBM engineers follow relevant cybersecurity practices from the Kubernetes worker node benchmark that is published by the [Center of Internet Security (CIS)](https://www.cisecurity.org/benchmark/kubernetes/). You can review the compliance of worker nodes against [CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test) standards.
 
 Compute isolation
-: Worker nodes are dedicated to a cluster and do not host workloads of other clusters. When you create a standard classic cluster, you can choose to provision your worker nodes as [physical machines (bare metal) or as virtual machines](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) that run on shared or dedicated physical hardware. Worker nodes in a free classic cluster or in a standard VPC compute cluster can be provisioned as virtual machines on shared infrastructure only.</td>
+:   Worker nodes are dedicated to a cluster and do not host workloads of other clusters. When you create a standard classic cluster, you can choose to provision your worker nodes as [physical machines (bare metal) or as virtual machines](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) that run on shared or dedicated physical hardware. Worker nodes in a free classic cluster or in a standard VPC compute cluster can be provisioned as virtual machines on shared infrastructure only.</td>
 
 Option to deploy bare metal on classic</td>
 : If you create a standard classic cluster, you can choose to provision your worker nodes on bare metal physical servers (instead of virtual server instances). With bare metal machines, you have additional control over the compute host, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Bare metal servers are dedicated to you, with all its resources available for cluster usage.
