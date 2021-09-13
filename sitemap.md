@@ -1919,6 +1919,10 @@ subcollection: containers
 * [Changelog for version 2.0.6, 18 December 2020](/docs/containers?topic=containers-cos_plugin_changelog#0206_object_plugin)
 * [Changelog for version 2.0.5, released 25 November 2020](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
 
+[Static route add-on version changelog](/docs/containers?topic=containers-static-route-changelog)
+* [Version 1.0.0](/docs/containers?topic=containers-static-route-changelog#v100)
+  * [Changelog for 1.0.0_649, released 8 September 2021](/docs/containers?topic=containers-static-route-changelog#100_649)
+
 [Back up and restore Helm chart](/docs/containers?topic=containers-backup_restore_changelog)
 * [Changelog for 1.0.5, released 17 December 2020](/docs/containers?topic=containers-backup_restore_changelog#0105_br_chart)
 
