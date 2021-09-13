@@ -236,6 +236,7 @@ Kubernetes Service
         cs_versions_autoscaler.md
         cs_versions_vpc_block_addon.md
         cs_versions_object.md
+        cs_versions_static_route.md
         cs_versions_backup_restore.md
         cs_versions_alb_oauth_proxy.md
         cs_versions_archive.md
