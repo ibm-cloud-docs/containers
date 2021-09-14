@@ -1802,7 +1802,8 @@ subcollection: containers
 
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog)
 * [Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
-  * [Version 0.48.0 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_48_0)
+  * [Version 1.0.0 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#1_0_0)
+  * [Version 0.48.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_48_0)
   * [Version 0.47.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_47_0)
   * [Version 0.45.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_45_0)
   * [Version 0.43.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_43_0)
