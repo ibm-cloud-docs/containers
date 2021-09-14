@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-14"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -58,9 +58,28 @@ Review the changes that are included in version 1.11.1 of the managed Istio add-
 - For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/).
 
 
-
 ## Version 1.10
 {: #v110}
+
+Review the changes that are included in version 1.10 of the managed Istio add-on.
+{: shortdesc}
+
+
+### Changelog for 1.10.4, released 14 September 2021
+{: #1104}
+
+Review the changes that are included in version 1.10.4 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.10.3  
+**Current version**: 1.10.4   
+**Updates in this version:**  
+- See the Istio release notes for [Istio 1.10.4](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.4/.){:external}. 
+- Resolves the following CVEs:
+    - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
+    - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
+    - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
+- For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/).
 
 ### Changelog for 1.10.3, released 5 August 2021
 {: #1103}
@@ -95,9 +114,31 @@ Review the changes that are included in version 1.10.2 of the managed Istio add-
     - [CVE-2021-3580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3580){: external}. 
   
   
-  
 ## Version 1.9
 {: #v19}
+
+Review the changes that are included in version 1.9 of the managed Istio add-on.
+{: shortdesc}
+
+
+### Changelog for 1.9.8, released 14 September 2021
+{: #198}
+
+Review the changes that are included in version 1.9.8 of the managed Istio add-on.
+{: shortdesc}
+
+This the final update for version 1.9, which becomes unsupported on 14 October 2021.
+(: deprecated}
+
+**Previous version**: 1.9.7  
+**Current version**: 1.9.8   
+**Updates in this version:**  
+- See the Istio release notes for [Istio 1.9.8](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.8/.){:external}. 
+- Resolves the following CVEs:
+    - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
+    - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
+    - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
+- For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/).
 
 ### Changelog for 1.9.7, released 12 August 2021
 {: #197}
@@ -186,9 +227,6 @@ Review the changes that are included in version 1.9.2 of the managed Istio add-o
     - [Istio 1.9.2](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.2/){: external}. 
 - The `istio-components-pilot-requests-cpu` setting is added to the `managed-istio-custom` configmap resource to change the default CPU request of `500` for `istiod`.
 
-  
-  
-  
   
 ## Version 1.8 (unsupported)
 {: #v18}
@@ -979,7 +1017,6 @@ Review the changes that are included in version 1.4.2 of the managed Istio add-o
     - [CVE-2019-18838](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18838){: external}
 - For more information, see the [Istio security bulletin](https://istio.io/latest/news/security/istio-security-2019-007/){: external}.
   
-
 
 
 
