@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-09-14"
+lastupdated: "2021-09-15"
 
 keywords: containers
 subcollection: containers
@@ -2493,13 +2493,13 @@ subcollection: containers
 * [Deleted](/docs/containers?topic=containers-cluster-states-reference#cluster-state-deleted)
 * [Deleting](/docs/containers?topic=containers-cluster-states-reference#cluster-state-deleting)
 * [Deploy failed](/docs/containers?topic=containers-cluster-states-reference#cluster-state-deploy-failed)
-  * [Deploying](/docs/containers?topic=containers-cluster-states-reference#cluster-state-deploying)
-  * [Normal](/docs/containers?topic=containers-cluster-states-reference#cluster-state-normal)
-  * [Pending](/docs/containers?topic=containers-cluster-states-reference#cluster-state-pending)
-  * [Requested](/docs/containers?topic=containers-cluster-states-reference#cluster-state-requested)
-  * [Updating](/docs/containers?topic=containers-cluster-states-reference#cluster-state-updating)
-  * [Unsupported](/docs/containers?topic=containers-cluster-states-reference#cluster-state-unsupported)
-  * [Warning](/docs/containers?topic=containers-cluster-states-reference#cluster-state-warning)
+* [Deploying](/docs/containers?topic=containers-cluster-states-reference#cluster-state-deploying)
+* [Normal](/docs/containers?topic=containers-cluster-states-reference#cluster-state-normal)
+* [Pending](/docs/containers?topic=containers-cluster-states-reference#cluster-state-pending)
+* [Requested](/docs/containers?topic=containers-cluster-states-reference#cluster-state-requested)
+* [Updating](/docs/containers?topic=containers-cluster-states-reference#cluster-state-updating)
+* [Unsupported](/docs/containers?topic=containers-cluster-states-reference#cluster-state-unsupported)
+* [Warning](/docs/containers?topic=containers-cluster-states-reference#cluster-state-warning)
 
 [Debugging common CLI issues with clusters](/docs/containers?topic=containers-ts_clis)
 * [Firewall prevents running CLI commands](/docs/containers?topic=containers-ts_clis#ts_firewall_clis)
