@@ -35,11 +35,11 @@ Review the release notes for September 2021.
 
 
 
-### 14 September 2021
-{: #14sep2021}
+### 15 September 2021
+{: #15sep2021}
 {: release-note}
 
-Review the release notes for 14 September 2021.
+Review the release notes for 15 September 2021.
 {: shortdesc}
 
 Ingress ALB version change log
