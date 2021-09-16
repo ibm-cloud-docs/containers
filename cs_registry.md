@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-16"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -48,8 +48,6 @@ Learn more about [securing your personal information](/docs/containers?topic=con
 To pull images from a registry, your {{site.data.keyword.containerlong_notm}} cluster uses a special type of Kubernetes secret, an `imagePullSecret`. This image pull secret stores the credentials to access a container registry.
 {: shortdesc}
 
-
-
 The container registry can be:
 * A private namespace in your own {{site.data.keyword.registrylong_notm}}.
 * A private namespace in {{site.data.keyword.registrylong_notm}} that belongs to a different {{site.data.keyword.cloud_notm}} account.
@@ -78,12 +76,14 @@ You can check the image pull secrets by [logging in to your cluster](/docs/conta
 
 Yes, you can [edit the existing IAM policy of the service ID](/docs/account?topic=account-serviceids#update_serviceid) that restricts the **Reader** service access role to that regional registry or a registry resource such as a namespace. Before you can customize registry IAM policies, you must [enable {{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-user#existing_users).
 
-    Want to make your registry credentials even more secured? Ask your cluster admin to [enable a key management service provider](/docs/containers?topic=containers-encryption#keyprotect) in your cluster to encrypt Kubernetes secrets in your cluster, such as the image pull secret that stores your registry credentials.
-    {: tip}
+Want to make your registry credentials even more secured Ask your cluster admin to [enable a key management service provider](/docs/containers?topic=containers-encryption#keyprotect) in your cluster to encrypt Kubernetes secrets in your cluster, such as the image pull secret that stores your registry credentials.
+{: tip}
+
 
 **Can I pull images in a Kubernetes namespace other than `default`?**
 
 Not by default. By using the default cluster setup, you can deploy containers from any image that is stored in your {{site.data.keyword.registrylong_notm}} namespace into the `default` Kubernetes namespace of your cluster. To use these images in any other Kubernetes namespaces or other {{site.data.keyword.cloud_notm}} accounts, [you have the option to copy or create your own image pull secrets](#other).
+
 
 **Can I pull images from a different {{site.data.keyword.cloud_notm}} account?**
 
@@ -135,7 +135,7 @@ The image push and pull traffic is automatically on the private network. {{site.
 
 Yes, if you [sign your images for trusted content](/docs/Registry?topic=Registry-registry_trustedcontent), the signatures contain the registry domain name. If you want to use the private `icr.io` domain for your signed images, resign your images with the private `icr.io` domains.
 
-<br />
+
 
 ## Updating existing clusters to use the API key image pull secret
 {: #imagePullSecret_migrate_api_key}
@@ -144,32 +144,36 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image
 {: shortdesc}
 
 **Before you begin**:
-*   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-*   Make sure that you have the following permissions:
-    *   {{site.data.keyword.cloud_notm}} IAM **Operator or Administrator** platform access role for {{site.data.keyword.containerlong_notm}}. The account owner can give you the role by running:
-        ```
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+2. Make sure that you have the following permissions:
+    1. {{site.data.keyword.cloud_notm}} IAM **Operator or Administrator** platform access role for {{site.data.keyword.containerlong_notm}}. The account owner can give you the role by running the following command.
+
+        ```sh
         ibmcloud iam user-policy-create <your_user_email> --service-name containers-kubernetes --roles <(Administrator|Operator)>
         ```
         {: pre}
 
-    *   {{site.data.keyword.cloud_notm}} IAM **Administrator** platform access role for {{site.data.keyword.registrylong_notm}}, across all regions and resource groups. The policy cannot be scoped to a particular region or resource group. The account owner can give you the role by running:
-        ```
+    2 {{site.data.keyword.cloud_notm}} IAM **Administrator** platform access role for {{site.data.keyword.registrylong_notm}}, across all regions and resource groups. The policy cannot be scoped to a particular region or resource group. The account owner can give you the role by running the following command.
+
+        ```sh
         ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
         ```
         {: pre}
 
-    *   If your account [restricts service ID creation](/docs/account?topic=account-restrict-service-id-create), add the **Service ID creator** role to **Identity and Access Management** in the console (`iam-identity` in the API or CLI).</li>
-    *   If your account [restricts API key creation](/docs/account?topic=account-allow-api-create), add the **User API key creator** role to **Identity and Access Management** in the console (`iam-identity` in the API or CLI).</li>
+    3. If your account [restricts service ID creation](/docs/account?topic=account-restrict-service-id-create), add the **Service ID creator** role to **Identity and Access Management** in the console (`iam-identity` in the API or CLI).</li>
+    4. If your account [restricts API key creation](/docs/account?topic=account-allow-api-create), add the **User API key creator** role to **Identity and Access Management** in the console (`iam-identity` in the API or CLI).</li>
 
 **To update your cluster image pull secret in the `default` Kubernetes namespace**:
 1. Get your cluster ID.
-    ```
+
+    ```sh
     ibmcloud ks cluster ls
     ```
     {: pre}
 
 2. Run the following command to create a service ID for the cluster and assign the service ID an IAM **Reader** service access role for {{site.data.keyword.registrylong_notm}}. The command also creates an API key to impersonate the service ID credentials and stores the API key in a Kubernetes image pull secret in the cluster. The image pull secret is in the `default` Kubernetes namespace.
-    ```
+
+    ```sh
     ibmcloud ks cluster pull-secret apply --cluster <cluster_name_or_ID>
     ```
     {: pre}
@@ -178,13 +182,15 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image
     {: important}
 
 3. Verify that the image pull secrets are created in your cluster.
-    ```
+
+    ```sh
     kubectl get secrets | grep icr-io
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     all-icr-io           kubernetes.io/dockerconfigjson        1         16d
     ```
     {: screen}
@@ -198,7 +204,7 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image
     1. Make sure that [{{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registrylong_notm}} are enabled](/docs/Registry?topic=Registry-user#existing_users).
     2. [Edit the {{site.data.keyword.cloud_notm}} IAM policies](/docs/account?topic=account-serviceids#update_serviceid) for the service ID, or [create another image pull secret](#other_registry_accounts).
 
-<br />
+
 
 ## Using an image pull secret to access images in other {{site.data.keyword.cloud_notm}} accounts or external private registries from non-default Kubernetes namespaces
 {: #other}
@@ -211,19 +217,23 @@ After you create the image pull secret, your containers must use the secret to b
 Image pull secrets are valid only for the Kubernetes namespaces that they were created for. Repeat these steps for every namespace where you want to deploy containers. Images from [DockerHub](#dockerhub) do not require image pull secrets.
 {: tip}
 
+
 Before you begin:
 
 1. [Set up a namespace in {{site.data.keyword.registrylong_notm}} and push images to this namespace](/docs/Registry?topic=Registry-getting-started#gs_registry_namespace_add).
 2. [Create a Kubernetes cluster](/docs/containers?topic=containers-clusters).
 3. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-<br/>
+
+
 To use your own image pull secret, choose among the following options:
+
 - [Copy the image pull secret](#copy_imagePullSecret) from the default Kubernetes namespace to other namespaces in your cluster.
 - [Create new IAM API key credentials and store them in an image pull secret](#other_registry_accounts) to access images in other {{site.data.keyword.cloud_notm}} accounts or to apply IAM policies that restrict access to certain registry domains or namespaces.
 - [Create an image pull secret to access images in external private registries](#private_images).
 
-<br/>
+
+
 If you already created an image pull secret in your namespace that you want to use in your deployment, see [Deploying containers by using the created `imagePullSecret`](#use_imagePullSecret).
 
 ### Copying an existing image pull secret
@@ -233,13 +243,15 @@ You can copy an image pull secret, such as the one that is automatically created
 {: shortdesc}
 
 1. List available Kubernetes namespaces in your cluster, or create a namespace to use.
-    ```
+
+    ```sh
     kubectl get namespaces
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     default          Active    79d
     ibm-cert-store   Active    79d
     ibm-system       Active    79d
@@ -248,32 +260,37 @@ You can copy an image pull secret, such as the one that is automatically created
     ```
     {: screen}
 
-    To create a namespace:
-    ```
+    To create a namespace
+
+    ```sh
     kubectl create namespace <namespace_name>
     ```
     {: pre}
 
 2. List the existing image pull secrets in the `default` Kubernetes namespace for {{site.data.keyword.registrylong_notm}}.
-    ```
+
+    ```sh
     kubectl get secrets -n default | grep icr-io
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     all-icr-io          kubernetes.io/dockerconfigjson        1         16d
     ```
     {: screen}
 
 3. Copy the `all-icr-io` image pull secret from the `default` namespace to the namespace of your choice. The new image pull secrets are named `<namespace_name>-icr-<region>-io`.
-    ```
+
+    ```sh
     kubectl get secret all-icr-io -n default -o yaml | sed 's/default/<new-namespace>/g' | kubectl create -n <new-namespace> -f -   
     ```
     {: pre}
 
 4. Verify that the secrets are created successfully.
-    ```
+
+    ```sh
     kubectl get secrets -n <namespace_name> | grep icr-io
     ```
     {: pre}
@@ -292,13 +309,15 @@ The following steps create an API key that stores the credentials of an {{site.d
 {: note}
 
 1. List available Kubernetes namespaces in your cluster, or create a namespace to use where you want to deploy containers from your registry images.
-    ```
+
+    ```sh
     kubectl get namespaces
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     default          Active    79d
     ibm-cert-store   Active    79d
     ibm-system       Active    79d
@@ -307,62 +326,52 @@ The following steps create an API key that stores the credentials of an {{site.d
     ```
     {: screen}
 
-    To create a namespace:
-    ```
+    To create a namespace
+
+    ```sh
     kubectl create namespace <namespace_name>
     ```
     {: pre}
 
 2. Create an {{site.data.keyword.cloud_notm}} IAM service ID for your cluster that is used for the IAM policies and API key credentials in the image pull secret. Be sure to give the service ID a description that helps you retrieve the service ID later, such as including both the cluster and namespace name.
-    ```
+
+    ```sh
     ibmcloud iam service-id-create <cluster_name>-<namespace>-id --description "Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <namespace>"
     ```
     {: pre}
 
 3. Create a custom {{site.data.keyword.cloud_notm}} IAM policy for your cluster service ID that grants access to {{site.data.keyword.registrylong_notm}}.
-    ```
+    ```sh
     ibmcloud iam service-policy-create <cluster_service_ID> --roles <service_access_role> --service-name container-registry [--region <IAM_region>] [--resource-type namespace --resource <registry_namespace>]
     ```
     {: pre}
 
-    <table summary="The columns are read from left to right. The first column has the parameter of the command. The second column describes the parameter.">
-    <caption>Understanding this command's components</caption>
-    <col width="25%">
-    <thead>
-    <th>Component</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code><em>&lt;cluster_service_ID&gt;</em></code></td>
-    <td>Required. Replace with the <code>&lt;cluster_name&gt;-&lt;kube_namespace&gt;-id</code> service ID that you previously created for your Kubernetes cluster.</td>
-    </tr>
-    <tr>
-    <td><code>--service-name <em>container-registry</em></code></td>
-    <td>Required. Enter <code>container-registry</code> so that the IAM policy is for {{site.data.keyword.registrylong_notm}}.</td>
-    </tr>
-    <tr>
-    <td><code>--roles <em>&lt;service_access_role&gt;</em></code></td>
-    <td>Required. Enter the <a href="/docs/Registry?topic=Registry-iam#service_access_roles">service access role for {{site.data.keyword.registrylong_notm}}</a> that you want to scope the service ID access to. Possible values are <code>Reader</code>, <code>Writer</code>, and <code>Manager</code>.</td>
-    </tr>
-    <tr>
-    <td><code>--region <em>&lt;IAM_region&gt;</em></code></td>
-    <td>Optional. If you want to scope the access policy to certain IAM regions, enter the regions in a comma-separated list. Possible values are <code>global</code> and the <a href="/docs/Registry?topic=Registry-registry_overview#registry_regions_local">local registry regions</a>.</td>
-    </tr>
-    <tr>
-    <td><code>--resource-type <em>namespace</em> --resource <em>&lt;registry_namespace&gt;</em></code></td>
-    <td>Optional. If you want to limit access to only images in certain <a href="/docs/Registry?topic=Registry-registry_setup_cli_namespace#registry_setup_cli_namespace_plan">{{site.data.keyword.registrylong_notm}} namespaces</a>, enter <code>namespace</code> for the resource type and specify the <code>&lt;registry_namespace&gt;</code>. To list registry namespaces, run <code>ibmcloud cr namespaces</code>.</td>
-    </tr>
-    </tbody></table>
+    `cluster_service_ID`
+    :   Required. Replace with the `<cluster_name>-<kube_namespace>-id` service ID that you previously created for your Kubernetes cluster.</td>
+    
+    `--service-name container-registry`
+    :   Required. Enter `container-registry` so that the IAM policy is for {{site.data.keyword.registrylong_notm}}.
+    
+    `--roles <service_access_role>`
+    :   Required. Enter the [service access role](/docs/Registry?topic=Registry-iam#service_access_roles) for {{site.data.keyword.registrylong_notm}} that you want to scope the service ID access to. Possible values are `Reader`, `Writer`, and `Manager`.
+    
+    `--region <IAM_region>`
+    :   Optional. If you want to scope the access policy to certain IAM regions, enter the regions in a comma-separated list. Possible values are `global` and the [local registry regions](/docs/Registry?topic=Registry-registry_overview#registry_regions_local).
+    
+    `--resource-type namespace --resource <registry_namespace>`
+    :   Optional. If you want to limit access to only images in certain [{{site.data.keyword.registrylong_notm}} namespaces](/docs/Registry?topic=Registry-registry_setup_cli_namespace#registry_setup_cli_namespace_plan), enter `namespace` for the resource type and specify the `<registry_namespace>`. To list registry namespaces, run `ibmcloud cr namespaces`.
+
 4. Create an API key for the service ID. Name the API key similar to your service ID, and include the service ID that you previously created,
-    `<cluster_name>-<kube_namespace>-id`. Be sure to give the API key a description that helps you retrieve the key later.
-    ```
+    `<cluster_name>-<kube_namespace>-id`. Be sure to give the API key a description that helps you retrieve the key later
+    
+    ```sh
     ibmcloud iam service-api-key-create <cluster_name>-<namespace>-key <cluster_name>-<namespace>-id --description "API key for service ID <service_id> in Kubernetes cluster <cluster_name> namespace <namespace>"
     ```
     {: pre}
 
 5. Retrieve your **API Key** value from the output of the previous command.
-    ```
+
+    ```sh
     Please preserve the API key! It cannot be retrieved after it's created.
 
     Name          <cluster_name>-<kube_namespace>-key   
@@ -376,47 +385,33 @@ The following steps create an API key that stores the credentials of an {{site.d
     {: screen}
 
 6. Create an image pull secret to store the API key credentials in the cluster namespace. Repeat this step for each namespace of each cluster for each `icr.io` domain that you want to pull images from.
-    ```
+
+    ```sh
     kubectl --namespace <namespace> create secret docker-registry <secret_name> --docker-server=<registry_URL> --docker-username=iamapikey --docker-password=<api_key_value> --docker-email=<docker_email>
     ```
     {: pre}
 
-    <table summary="The columns are read from left to right. The first column has the parameter of the command. The second column describes the parameter.">
-    <caption>Understanding this command's components</caption>
-    <col width="25%">
-    <thead>
-    <th>Component</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>--namespace <em>&lt;namespace&gt;</em></code></td>
-    <td>Required. Specify the Kubernetes namespace of your cluster that you used for the service ID name.</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;secret_name&gt;</em></code></td>
-    <td>Required. Enter a name for your image pull secret.</td>
-    </tr>
-    <tr>
-    <td><code>--docker-server <em>&lt;registry_URL&gt;</em></code></td>
-    <td>Required. Set the URL to the image registry where your registry namespace is set up. For available domains, see <a href="/docs/Registry?topic=Registry-registry_overview#registry_regions">Local regions</a>.</td>
-    </tr>
-    <tr>
-    <td><code>--docker-username iamapikey</code></td>
-    <td>Required. Enter the username to log in to your private registry. If you use {{site.data.keyword.registrylong_notm}}, enter <strong><code>iamapikey</code></strong>.</td>
-    </tr>
-    <tr>
-    <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
-    <td>Required. Enter the value of your <strong>API Key</strong> that you previously retrieved.</td>
-    </tr>
-    <tr>
-    <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>Required. If you have one, enter your Docker email address. If you do not, enter a fictional email address, such as <code>a@b.c</code>. This email is required to create a Kubernetes secret, but is not used after creation.</td>
-    </tr>
-    </tbody></table>
+    `--namespace <namespace>`
+    :   Required. Specify the Kubernetes namespace of your cluster that you used for the service ID name.
+
+    `<secret_name>`
+    :   Required. Enter a name for your image pull secret.
+    
+    `--docker-server <registry_URL>`
+    :   Required. Set the URL to the image registry where your registry namespace is set up. For available domains, see [Local regions](/docs/Registry?topic=Registry-registry_overview#registry_regions).
+    
+    `--docker-username iamapikey`
+    :   Required. Enter the username to log in to your private registry. If you use {{site.data.keyword.registrylong_notm}}, enter `iamapikey`.
+    
+    `--docker-password <token_value>`
+    :   Required. Enter the value of your `API Key` that you previously retrieved.
+    
+    `--docker-email <docker-email>`
+    :   Required. If you have one, enter your Docker email address. If you do not, enter a fictional email address, such as `a@b.c`. This email is required to create a Kubernetes secret, but is not used after creation.
+
 7. Verify that the secret was created successfully. Replace <em>&lt;namespace&gt;</em> with the namespace where you created the image pull secret.
 
-    ```
+    ```sh
     kubectl get secrets --namespace <namespace>
     ```
     {: pre}
@@ -438,55 +433,39 @@ To create an image pull secret:
 
 1. Create the Kubernetes secret to store your private registry credentials.
 
-    ```
+    ```sh
     kubectl --namespace <namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=<docker_username> --docker-password=<docker_password> --docker-email=<docker_email>
     ```
     {: pre}
 
-    <table summary="The columns are read from left to right. The first column has the parameter of the command. The second column describes the parameter.">
-    <caption>Understanding this command's components</caption>
-    <col width="25%">
-    <thead>
-    <th>Component</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>--namespace <em>&lt;namespace&gt;</em></code></td>
-    <td>Required. The Kubernetes namespace of your cluster where you want to use the secret and deploy containers to. To list available namespaces in your cluster, run <code>kubectl get namespaces</code>.</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;secret_name&gt;</em></code></td>
-    <td>Required. The name that you want to use for your image pull secret.</td>
-    </tr>
-    <tr>
-    <td><code>--docker-server <em>&lt;registry_URL&gt;</em></code></td>
-    <td>Required. The URL to the registry where your private images are stored.</td>
-    </tr>
-    <tr>
-    <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>Required. The username to log in to your private registry.</td>
-    </tr>
-    <tr>
-    <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
-    <td>Required. The password to log in to your private registry, such as a token value.</td>
-    </tr>
-    <tr>
-    <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>Required. If you have one, enter your Docker email address. If you do not have one, enter a fictional email address, such as <code>a@b.c</code>. This email is required to create a Kubernetes secret, but is not used after creation.</td>
-    </tr>
-    </tbody></table>
+    `--namespace <namespace>`
+    :   Required. The Kubernetes namespace of your cluster where you want to use the secret and deploy containers to. To list available namespaces in your cluster, run `kubectl get namespaces`.
+    
+    `<secret_name>`
+    :   Required. The name that you want to use for your image pull secret.
+    
+    `--docker-server <registry_URL>`
+    :   Required. The URL to the registry where your private images are stored.
+    
+    `--docker-username <docker_username>`
+    :   Required. The username to log in to your private registry.
+    
+    `--docker-password <token_value>`
+    :   Required. The password to log in to your private registry, such as a token value.
+   
+    `--docker-email <docker-email>`
+    :   Required. If you have one, enter your Docker email address. If you do not have one, enter a fictional email address, such as `a@b.c`. This email is required to create a Kubernetes secret, but is not used after creation.
 
-2. Verify that the secret was created successfully. Replace <em>&lt;namespace&gt;</em> with the name of the namespace where you created the image pull secret.
+2. Verify that the secret was created successfully. Replace `<namespace>` with the name of the namespace where you created the image pull secret.
 
-    ```
+    ```sh
     kubectl get secrets --namespace <namespace>
     ```
     {: pre}
 
 3. [Create a pod that references the image pull secret](#use_imagePullSecret).
 
-<br />
+
 
 ## Using the image pull secret to deploy containers
 {: #use_imagePullSecret}
@@ -505,33 +484,40 @@ Every Kubernetes namespace has a Kubernetes service account that is named `defau
 {: shortdesc}
 
 1. Check if an image pull secret already exists for your default service account.
-    ```
+
+    ```sh
     kubectl describe serviceaccount default -n <namespace_name>
     ```
     {: pre}
 
     When `<none>` is displayed in the **Image pull secrets** entry, no image pull secret exists.
+
 2. Add the image pull secret to your default service account.
-    - **To add the image pull secret when no image pull secret is defined:**
-        ```
+
+    - Example command to add the image pull secret when no image pull secret is defined.
+
+        ```sh
         kubectl patch -n <namespace_name> serviceaccount/default -p '{"imagePullSecrets":[{"name": "<image_pull_secret_name>"}]}'
         ```
         {: pre}
 
-    - **To add the image pull secret when an image pull secret is already defined:**
-        ```
+    - Example command to add the image pull secret when an image pull secret is already defined.
+
+        ```sh
         kubectl patch -n <namespace_name> serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"<image_pull_secret_name>"}}]'
         ```
         {: pre}
 
 3. Verify that your image pull secret was added to your default service account.
-    ```
+
+    ```sh
     kubectl describe serviceaccount default -n <namespace_name>
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     Name:                default
     Namespace:           <namespace_name>
     Labels:              <none>
@@ -546,6 +532,7 @@ Every Kubernetes namespace has a Kubernetes service account that is named `defau
     If the **Image pull secrets** says `<secret> (not found)`, verify that the image pull secret exists in the same namespace as your service account by running `kubectl get secrets -n namespace`.
 
 4. Create a pod configuration file that is named `mypod.yaml` to deploy a container from an **image** in your registry.
+
     ```yaml
     apiVersion: v1
     kind: Pod
@@ -559,12 +546,13 @@ Every Kubernetes namespace has a Kubernetes service account that is named `defau
     {: codeblock}
 
 5. Create the pod in the cluster by applying the `mypod.yaml` configuration file.
-    ```
+
+    ```sh
     kubectl apply -f mypod.yaml
     ```
     {: pre}
 
-<br />
+
 
 ## Setting up a cluster to pull entitled software
 {: #secret_entitled_software}
@@ -578,25 +566,29 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     1. Log in to [MyIBM.com](https://myibm.ibm.com){: external} and scroll to the **Container software library** section. Click **View library**.
     2. From the **Access your container software > Entitlement keys** page, click **Copy key**. This key authorizes access to all the entitled software in your container software library.
 2. In the namespace that you want to deploy your entitled containers, create an image pull secret so that you can access the `cp.icr.io` entitled registry. Use the **entitlement key** that you previously retrieved as the `--docker-password` value. For more information, see [Accessing images that are stored in other private registries](#private_images).
-    ```
+
+    ```sh
     kubectl create secret docker-registry entitled-cp-icr-io --docker-server=cp.icr.io --docker-username=cp --docker-password=<entitlement_key> --docker-email=<docker_email> -n <namespace>
     ```
     {: pre}
 
 3. Add the image pull secret to the service account of the namespace so that any container in the namespace can use the entitlement key to pull entitled images. For more information, see [Using the image pull secret to deploy containers](#use_imagePullSecret).
-    ```
+
+    ```sh
     kubectl patch -n <namespace> serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"entitled-cp-icr-io"}}]'
     ```
     {: pre}
 
 4. Create a pod in the namespace that builds a container from an image in the entitled registry.
-    ```
+
+    ```sh
     kubectl run <pod_name> --image=cp.icr.io/<image_name> -n <namespace> --generator=run-pod/v1
     ```
     {: pre}
 
 5. Check that your container was able to successfully build from the entitled image by verifying that the pod is in a **Running** status.
-    ```
+
+    ```sh
     kubectl get pod <pod_name> -n <namespace>
     ```
     {: pre}

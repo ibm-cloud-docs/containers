@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-09-15"
+lastupdated: "2021-09-16"
 
 keywords: containers
 subcollection: containers
@@ -1196,6 +1196,11 @@ subcollection: containers
 * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version)
 * [Scaling down the default {{site.data.keyword.filestorage_short}} plug-in](/docs/containers?topic=containers-file_storage#file_scaledown_plugin)
 * [Backing up and restoring data](/docs/containers?topic=containers-file_storage#file_backup_restore)
+  * [Setting up periodic snapshots](/docs/containers?topic=containers-file_storage#file-snapshots)
+  * [Replicating snapshots to another zone](/docs/containers?topic=containers-file_storage#replicating-snapshots-to-another-zone)
+  * [Duplicating storage](/docs/containers?topic=containers-file_storage#file-dupe-storage)
+  * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-file_storage#file-backup-helm)
+  * [Copying data to and from pods and containers](/docs/containers?topic=containers-file_storage#file-cp-data)
 * [Storage class reference](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
 * [Sample customized storage classes](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
   * [Creating topology-aware storage](/docs/containers?topic=containers-file_storage#file-topology)
@@ -1224,6 +1229,11 @@ subcollection: containers
   * [Static provisioning: Using existing PVCs with a stateful set](/docs/containers?topic=containers-block_storage#block_static_statefulset)
 * [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-block_storage#block_change_storage_configuration)
 * [Backing up and restoring data](/docs/containers?topic=containers-block_storage#block_backup_restore)
+  * [Setting up periodic snapshots](/docs/containers?topic=containers-block_storage#block-snaps)
+  * [Replicating snapshots to another zone](/docs/containers?topic=containers-block_storage#block-replicate)
+  * [Duplicating storage](/docs/containers?topic=containers-block_storage#block-dupe)
+  * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-block_storage#block-cos-backup)
+  * [Copying data to and from pods and containers](/docs/containers?topic=containers-block_storage#block-cp)
 * [Storage class reference](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
 * [Sample customized storage classes](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
   * [Creating topology-aware storage](/docs/containers?topic=containers-block_storage#topology_yaml)
@@ -1896,6 +1906,7 @@ subcollection: containers
 
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog)
 * [Version 4.0](/docs/containers?topic=containers-vpc_bs_changelog#0400_is_block)
+  * [Changelog for version 4.0.0_769, released 16 September 2021](/docs/containers?topic=containers-vpc_bs_changelog#0400769_is_block_relnote)
   * [Changelog for version 4.0, released 1 September 2021](/docs/containers?topic=containers-vpc_bs_changelog#0400_is_block_relnote)
 * [Version 3.0.1](/docs/containers?topic=containers-vpc_bs_changelog#0301_is_block)
   * [Changelog for version 3.0.1, released 15 July 2021](/docs/containers?topic=containers-vpc_bs_changelog#301_init)
@@ -2604,8 +2615,6 @@ subcollection: containers
 * [Step 5: Restart the pod](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-pod-restart)
 * [Step 6: Disable and reenable](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-disable)
 * [Step 8: Check if the issue is resolved](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-more)
-
-[Why does the cluster autoscaler add-on fail with the pod stuck in `Init` state?](/docs/containers?topic=containers-ca_ts_secret)
 
 
 ## Cluster network

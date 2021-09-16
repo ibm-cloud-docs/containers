@@ -299,7 +299,6 @@ Kubernetes Service
         {: .topicgroup}
         Cluster autoscaler
             ts-autoscaler/ts-ca-debug.md
-            ts-autoscaler/ts-ca-pod-init.md
 
         {: .topicgroup}
         Cluster network

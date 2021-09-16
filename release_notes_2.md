@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-15"
+lastupdated: "2021-09-16"
 
 keywords: kubernetes, iks, release notes
 
@@ -26,20 +26,26 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: note}
 
 
-
 ## September 2021
 {: #release-sep-2021}
 
 Review the release notes for September 2021.
 {: shortdesc}
 
+### 16 September 2021
+{: #16sep2021}
+
+{{site.data.keyword.block_storage_is_short}} add-on  
+:   Version [`4.0.0_769`](/docs/containers?topic=containers-vpc_bs_changelog) is available.
 
 
-### 15 September 2021
-{: #15sep2021}
+
+
+### 14 September 2021
+{: #14sep2021}
 {: release-note}
 
-Review the release notes for 15 September 2021.
+Review the release notes for 14 September 2021.
 {: shortdesc}
 
 Ingress ALB version change log
