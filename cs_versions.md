@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-17"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -105,7 +105,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 | [1.21](#cs_v121) | Yes | 09 Jun 2021 | Jun 2022 `†` |
 | [1.20](#cs_v120) | Yes | 16 Feb 2021 | Feb 2022 `†` |
 | [1.19](#cs_v119) | Yes | 13 Oct 2020 | 31 Dec 2021 `†` |
-| [1.18](#cs_v118) | Deprecated | 09 Jun 2021 | 10 Oct 2021`†` |
+| [1.18](#cs_v118) | Deprecated | 11 May 2020 | 10 Oct 2021`†` |
 {: caption="Release history for {{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
 Earlier versions of {{site.data.keyword.containerlong_notm}} are [unsupported](#k8s_version_archive).
