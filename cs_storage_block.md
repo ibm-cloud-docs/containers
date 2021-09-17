@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-16"
+lastupdated: "2021-09-17"
 
 keywords: kubernetes, iks
 
@@ -22,11 +22,15 @@ subcollection: containers
 Keep in mind the following requirements when you use the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in.
 {: important}
 
-- {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure.  If you have a VPC cluster, see [Storing data on {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-vpc-block#vpc-block-reference).
-- If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private cloud service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your {{site.data.keyword.blockstorageshort}} instance over the private network.
-- {{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure.  If you have a VPC cluster, see [Storing data on {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-vpc-block#vpc-block-reference).
 
-<br>
+
+If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private cloud service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your {{site.data.keyword.blockstorageshort}} instance over the private network.
+
+
+{{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+
+
 
 ## Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}
 {: #block_qs}
@@ -48,13 +52,13 @@ First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come b
       billingType: "hourly"
       region: # Example: us-south
       zone: # Example: dal13
-  spec:
-    accessModes:
-      - ReadWriteOnce
-    resources:
-      requests:
-        storage: 24Gi
-    storageClassName: ibmc-block-silver
+    spec:
+      accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 24Gi
+        storageClassName: ibmc-block-silver
     ```
     {: codeblock}
 
@@ -71,43 +75,44 @@ First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come b
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-        name: my-deployment
-    labels:
-      app:
-  spec:
-    selector:
-      matchLabels:
-        app: my-app
-    template:
-      metadata:
-        labels:
+      name: my-deployment
+      labels:
+        app:
+    spec:
+      selector:
+        matchLabels:
           app: my-app
-      spec:
-        containers:
-        - image: # Your contanerized app image.
-          name: my-container
-          volumeMounts:
+      template:
+        metadata:
+          labels:
+            app: my-app
+        spec:
+          containers:
+          - image: # Your contanerized app image.
+            name: my-container
+            volumeMounts:
+            - name: my-volume
+              mountPath: /mount-path
+          volumes:
           - name: my-volume
-            mountPath: /mount-path
-        volumes:
-        - name: my-volume
-          persistentVolumeClaim:
-            claimName: my-pvc
+            persistentVolumeClaim:
+              claimName: my-pvc
     ```
     {: codeblock}
 
-3. Create the deployment in your cluster.
+4. Create the deployment in your cluster.
 
     ```sh
     kubectl apply -f deployment.yaml
     ```
     {: pre}
 
-For more information, see:
-    * [Installing the {{site.data.keyword.blockstorageshort}} plug-in](#install_block)
-    * [Adding {{site.data.keyword.blockstorageshort}} to apps](#add_block).
-    * [Storage class reference](#block_storageclass_reference).
-    * [Customizing storage classes](#block_custom_storageclass).
+For more information, see the following links:
+
+* [Installing the {{site.data.keyword.blockstorageshort}} plug-in](#install_block)
+* [Adding {{site.data.keyword.blockstorageshort}} to apps](#add_block).
+* [Storage class reference](#block_storageclass_reference).
+* [Customizing storage classes](#block_custom_storageclass).
 
 
 
@@ -171,7 +176,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     NAME:   <name>
     LAST DEPLOYED: Wed Apr 18 10:02:55 2018
@@ -216,13 +221,15 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: screen}
 
 5. Verify that the installation was successful.
-    ```
+
+    ```sh
     kubectl get pod -n <namespace> | grep block
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output.
+    
+    ```sh
     ibmcloud-block-storage-driver-kh4mt                              1/1       Running   0          27d       10.118.98.19   10.118.98.19
     ibmcloud-block-storage-plugin-58c5f9dc86-pbl4t                   1/1       Running   0          14d       172.21.0.204   10.118.98.19
     ```
@@ -231,13 +238,15 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     The installation is successful when you see one `ibmcloud-block-storage-plugin` pod and one or more `ibmcloud-block-storage-driver` pods. The number of `ibmcloud-block-storage-driver` pods equals the number of worker nodes in your cluster. All pods must be in a **Running** state.
 
 6. Verify that the storage classes for {{site.data.keyword.blockstorageshort}} were added to your cluster.
-    ```
+
+    ```sh
     kubectl get storageclasses | grep block
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+    
+    ```sh
     ibmc-block-bronze            ibm.io/ibmc-block
     ibmc-block-custom            ibm.io/ibmc-block
     ibmc-block-gold              ibm.io/ibmc-block
@@ -263,38 +272,44 @@ You can upgrade the existing {{site.data.keyword.cloud_notm}} Block Storage plug
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
-    ```
+
+    ```sh
     helm repo update
     ```
     {: pre}
 
 2. Optional: Download the latest Helm chart to your local machine. Then, extract the package and review the `release.md` file to find the latest release information.
-    ```
+
+    ```sh
     helm pull iks-charts/ibmcloud-block-storage-plugin --untar
     ```
     {: pre}
 
 3. Find the release name and namespace of the block storage Helm chart that you installed in your cluster.
-    ```
+
+    ```sh
     helm ls -A
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+    
+    ```sh
     NAME            NAMESPACE      REVISION        UPDATED                                 STATUS      CHART                                  APP VERSION
     <name>      <namespace>        1           2020-01-27 09:18:33.046018 -0500 EST    deployed    ibmcloud-block-storage-plugin-1.6.0
     ```
     {: screen}
 
 4. Upgrade the {{site.data.keyword.cloud_notm}} Block Storage plug-in to the latest version.
-    ```
+
+    ```sh
     helm upgrade <name> iks-charts/ibmcloud-block-storage-plugin -n kube-system
     ```
     {: pre}
 
 5. Optional: When you update the plug-in, the `default` storage class is unset. If you want to set the default storage class to a storage class of your choice, run the following command.
-    ```
+
+    ```sh
     kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
     ```
     {: pre}
@@ -315,13 +330,15 @@ Before you begin:
 To remove the plug-in:
 
 1. Find the release name and the namespace of the block storage Helm chart that you installed in your cluster.
-    ```
+
+    ```sh
     helm ls -A
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+    
+    ```sh
     NAME             NAMESPACE      REVISION        UPDATED                                 STATUS      CHART                                  APP VERSION
     <name> <namespace>        1           2020-01-27 09:18:33.046018 -0500 EST    deployed    ibmcloud-block-storage-plugin-1.6.0
     ```
@@ -343,13 +360,14 @@ To remove the plug-in:
 
     The removal of the pods is successful if no pods are displayed in your CLI output.
 
-4. Verify that the block storage classes are removed.
-    ```
+4. Verify that the block storage classes are removed. The removal of the storage classes is successful if no storage classes are displayed in your CLI output.
+
+    ```sh
     kubectl get storageclasses | grep block
     ```
     {: pre}
 
-    The removal of the storage classes is successful if no storage classes are displayed in your CLI output.
+    
 
 
 
@@ -1521,20 +1539,15 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         
         `name`
         :   In the spec volume claim templates metadata section, enter a name for your volume. Use the same name that you defined in the `spec.containers.volumeMount.name` section. The name that you enter here is used to create the name for your PVC in the format: `<volume_name>-<statefulset_name>-<replica_number></code>. </td>
-        </tr>
-        <tr>
-        <td style="text-align:left"><code>storage</code></td>
-        <td style="text-align:left">In the spec volume claim templates spec resources requests section, enter the size of the block storage in gigabytes (Gi).</td>
-        </tr>
-        <tr>
-        <td style="text-align:left"><code>iops</code></td>
-        <td style="text-align:left">In the spec volume claim templates spec resources requests section, if you want to provision [performance storage](#block_predefined_storageclass), enter the number of IOPS. If you use an endurance storage class and specify a number of IOPS, the number of IOPS is ignored. Instead, the IOPS that is specified in your storage class is used.  </td>
-        </tr>
-        <tr>
-        <td style="text-align:left"><code>storageClassName</code></td>
-        <td style="text-align:left">In the spec volume claim templates spec section, enter the storage class that you want to use. To list existing storage classes, run <code>kubectl get storageclasses | grep block</code>. If you do not specify a storage class, the PVC is created with the default storage class that is set in your cluster. Make sure that the default storage class uses the <code>ibm.io/ibmc-block</code> provisioner so that your stateful set is provisioned with block storage.</td>
-        </tr>
-        </tbody></table>
+        
+        `storage`
+        :   In the spec volume claim templates spec resources requests section, enter the size of the block storage in gigabytes (Gi).
+        
+        `iops`
+        :   In the spec volume claim templates spec resources requests section, if you want to provision [performance storage](#block_predefined_storageclass), enter the number of IOPS. If you use an endurance storage class and specify a number of IOPS, the number of IOPS is ignored. Instead, the IOPS that is specified in your storage class is used.
+        
+        `storageClassName`
+        :   In the spec volume claim templates spec section, enter the storage class that you want to use. To list existing storage classes, run `kubectl get storageclasses | grep block`. If you do not specify a storage class, the PVC is created with the default storage class that is set in your cluster. Make sure that the default storage class uses the `ibm.io/ibmc-block` provisioner so that your stateful set is provisioned with block storage.
 
 3. Create your stateful set.
 
@@ -1565,18 +1578,28 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 1. If you want to pre-provision the PVC for your stateful set before you create the stateful set, follow steps 1-3 in [Adding block storage to apps](#add_block) to create a PVC for each stateful set replica. Make sure that you create your PVC with a name that follows the following format: `<volume_name>-<statefulset_name>-<replica_number>`.
 
-    - **`<volume_name>`**: Use the name that you want to specify in the `spec.volumeClaimTemplates.metadata.name` section of your stateful set, such as `nginxvol`.
-    - **`<statefulset_name>`**: Use the name that you want to specify in the `metadata.name` section of your stateful set, such as `nginx_statefulset`.
-    - **`<replica_number>`**: Enter the number of your replica, starting with 0.
+    `<volume_name>`
+    :   Use the name that you want to specify in the `spec.volumeClaimTemplates.metadata.name` section of your stateful set, such as `nginxvol`.
+    
+    `<statefulset_name>`
+    :   Use the name that you want to specify in the `metadata.name` section of your stateful set, such as `nginx_statefulset`.
+    
+    `<replica_number>`
+    :    Enter the number of your replica, starting with 0.
 
     For example, if you must create three stateful set replicas, create three PVCs with the following names: `nginxvol-nginx_statefulset-0`, `nginxvol-nginx_statefulset-1`, and `nginxvol-nginx_statefulset-2`.  
 
     Looking to create a PVC and PV for an existing storage device? Create your PVC and PV by using [static provisioning](#existing_block).
 
 2. Follow the steps in [Dynamic provisioning: Creating the PVC when you create a stateful set](#block_dynamic_statefulset) to create your stateful set. The name of your PVC follows the format `<volume_name>-<statefulset_name>-<replica_number>`. Make sure to use the following values from your PVC name in the stateful set specification:
-    - **`spec.volumeClaimTemplates.metadata.name`**: Enter the `<volume_name>` of your PVC name.
-    - **`metadata.name`**: Enter the `<statefulset_name>` of your PVC name.
-    - **`spec.replicas`**: Enter the number of replicas that you want to create for your stateful set. The number of replicas must equal the number of PVCs that you created earlier.
+    `spec.volumeClaimTemplates.metadata.name`
+    :   Enter the `<volume_name>` of your PVC name.
+    
+    `metadata.name`
+    :   Enter the `<statefulset_name>` of your PVC name.
+    
+    `spec.replicas`
+    :   Enter the number of replicas that you want to create for your stateful set. The number of replicas must equal the number of PVCs that you created earlier.
 
     If your PVCs are in different zones, do not include a region or zone label in your stateful set.
     {: note}
@@ -1945,54 +1968,56 @@ To use topology-aware volume scheduling, make sure that you installed the {{site
 
 The following examples show how to create storage classes that delay the creation of the block storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, you must include the `volumeBindingMode: WaitForFirstConsumer` option. If you do not include this option, the `volumeBindingMode` is automatically set to `Immediate` and the block storage instance is created when you create the PVC.
 
-- **Example for Endurance block storage:**
-    ```yaml
-    apiVersion: storage.k8s.io/v1
-    kind: StorageClass
-    metadata:
-        name: ibmc-block-bronze-delayed
-      parameters:
+Example for Endurance block storage.
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ibmc-block-bronze-delayed
+  parameters:
     billingType: hourly
     classVersion: "2"
     fsType: ext4
     iopsPerGB: "2"
     sizeRange: '[20-12000]Gi'
     type: Endurance
-  provisioner: ibm.io/ibmc-block
-  reclaimPolicy: Delete
-  volumeBindingMode: WaitForFirstConsumer
-    ```
-    {: codeblock}
-
-- **Example for Performance block storage:**
-    ```yaml
-    apiVersion: storage.k8s.io/v1
-    kind: StorageClass
-    metadata:
-     name: ibmc-block-performance-storageclass
-     labels:
-       kubernetes.io/cluster-service: "true"
     provisioner: ibm.io/ibmc-block
-    parameters:
-     billingType: "hourly"
-     classVersion: "2"
-     sizeIOPSRange: |-
-       "[20-39]Gi:[100-1000]"
-       "[40-79]Gi:[100-2000]"
-       "[80-99]Gi:[100-4000]"
-       "[100-499]Gi:[100-6000]"
-       "[500-999]Gi:[100-10000]"
-       "[1000-1999]Gi:[100-20000]"
-       "[2000-2999]Gi:[200-40000]"
-       "[3000-3999]Gi:[200-48000]"
-       "[4000-7999]Gi:[300-48000]"
-       "[8000-9999]Gi:[500-48000]"
-       "[10000-12000]Gi:[1000-48000]"
-     type: "Performance"
     reclaimPolicy: Delete
     volumeBindingMode: WaitForFirstConsumer
-    ```
-    {: codeblock}
+```
+{: codeblock}
+
+Example for Performance block storage.
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ibmc-block-performance-storageclass
+  labels:
+  kubernetes.io/cluster-service: "true"
+  provisioner: ibm.io/ibmc-block
+  parameters:
+    billingType: "hourly"
+    classVersion: "2"
+    sizeIOPSRange: |-
+    "[20-39]Gi:[100-1000]"
+    "[40-79]Gi:[100-2000]"
+    "[80-99]Gi:[100-4000]"
+    "[100-499]Gi:[100-6000]"
+    "[500-999]Gi:[100-10000]"
+    "[1000-1999]Gi:[100-20000]"
+    "[2000-2999]Gi:[200-40000]"
+    "[3000-3999]Gi:[200-48000]"
+    "[4000-7999]Gi:[300-48000]"
+    "[8000-9999]Gi:[500-48000]"
+    "[10000-12000]Gi:[1000-48000]"
+    type: "Performance"
+    reclaimPolicy: Delete
+    volumeBindingMode: WaitForFirstConsumer
+```
+{: codeblock}
 
 ### Specifying the zone and region
 {: #block_multizone_yaml}
@@ -2007,53 +2032,56 @@ The following `.yaml` file customizes a storage class that is based on the `ibm-
 
 Create the storage class in the same region and zone as your cluster and worker nodes. To get the region of your cluster, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>` and look for the region prefix in the **Master URL**, such as `eu-de` in `https://c2.eu-de.containers.cloud.ibm.com:11111`. To get the zone of your worker node, run `ibmcloud ks worker ls --cluster <cluster_name_or_ID>`.
 
-- **Example for Endurance block storage:**
-    ```yaml
-    apiVersion: storage.k8s.io/v1
-    kind: StorageClass
-    metadata:
-      name: ibmc-block-silver-mycustom-storageclass
-      labels:
-        kubernetes.io/cluster-service: "true"
-    provisioner: ibm.io/ibmc-block
-    parameters:
-      zone: "dal12"
-      region: "us-south"
-      type: "Endurance"
-      iopsPerGB: "4"
-      sizeRange: "[20-12000]Gi"
-    reclaimPolicy: "Delete"
-    ```
-    {: codeblock}
+Example for Endurance block storage.
 
-- **Example for Performance block storage:**
-    ```yaml
-    apiVersion: storage.k8s.io/v1
-    kind: StorageClass
-    metadata:
-        name: ibmc-block-performance-storageclass
-    labels:
-      kubernetes.io/cluster-service: "true"
-    provisioner: ibm.io/ibmc-block
-    parameters:
-      zone: "dal12"
-      region: "us-south"
-      type: "Performance"
-      sizeIOPSRange: |-
-      "[20-39]Gi:[100-1000]"
-      "[40-79]Gi:[100-2000]"
-      "[80-99]Gi:[100-4000]"
-      "[100-499]Gi:[100-6000]"
-      "[500-999]Gi:[100-10000]"
-      "[1000-1999]Gi:[100-20000]"
-      "[2000-2999]Gi:[200-40000]"
-      "[3000-3999]Gi:[200-48000]"
-      "[4000-7999]Gi:[300-48000]"
-      "[8000-9999]Gi:[500-48000]"
-      "[10000-12000]Gi:[1000-48000]"
-    reclaimPolicy: "Delete"
-    ```
-    {: codeblock}
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ibmc-block-silver-mycustom-storageclass
+  labels:
+    kubernetes.io/cluster-service: "true"
+provisioner: ibm.io/ibmc-block
+parameters:
+  zone: "dal12"
+  region: "us-south"
+  type: "Endurance"
+  iopsPerGB: "4"
+  sizeRange: "[20-12000]Gi"
+reclaimPolicy: "Delete"
+```
+{: codeblock}
+
+
+Example for Performance block storage.
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+    name: ibmc-block-performance-storageclass
+labels:
+  kubernetes.io/cluster-service: "true"
+provisioner: ibm.io/ibmc-block
+parameters:
+  zone: "dal12"
+  region: "us-south"
+  type: "Performance"
+  sizeIOPSRange: |-
+  "[20-39]Gi:[100-1000]"
+  "[40-79]Gi:[100-2000]"
+  "[80-99]Gi:[100-4000]"
+  "[100-499]Gi:[100-6000]"
+  "[500-999]Gi:[100-10000]"
+  "[1000-1999]Gi:[100-20000]"
+  "[2000-2999]Gi:[200-40000]"
+  "[3000-3999]Gi:[200-48000]"
+  "[4000-7999]Gi:[300-48000]"
+  "[8000-9999]Gi:[500-48000]"
+  "[10000-12000]Gi:[1000-48000]"
+reclaimPolicy: "Delete"
+```
+{: codeblock}
 
 ### Mounting block storage with an `XFS` file system
 {: #xfs}
@@ -2063,53 +2091,53 @@ The following examples create a storage class that provisions block storage with
 
 Example for Endurance block storage.
 
-    ```yaml
-    apiVersion: storage.k8s.io/v1
-    kind: StorageClass
-    metadata:
-      name: ibmc-block-custom-xfs
-    labels:
-      addonmanager.kubernetes.io/mode: Reconcile
-    provisioner: ibm.io/ibmc-block
-    parameters:
-      type: "Endurance"
-      iopsPerGB: "4"
-      sizeRange: "[20-12000]Gi"
-      fsType: "xfs"
-    reclaimPolicy: "Delete"
-    ```
-    {: codeblock}
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ibmc-block-custom-xfs
+labels:
+  addonmanager.kubernetes.io/mode: Reconcile
+provisioner: ibm.io/ibmc-block
+parameters:
+  type: "Endurance"
+  iopsPerGB: "4"
+  sizeRange: "[20-12000]Gi"
+  fsType: "xfs"
+reclaimPolicy: "Delete"
+```
+{: codeblock}
 
 
 Example for Performance block storage.
 
-    ```yaml
-    apiVersion: storage.k8s.io/v1
-    kind: StorageClass
-    metadata:
-      name: ibmc-block-custom-xfs
-      labels:
-        addonmanager.kubernetes.io/mode: Reconcile
-    provisioner: ibm.io/ibmc-block
-    parameters:
-      classVersion: "2"
-      type: "Performance"
-      sizeIOPSRange: |-
-        [20-39]Gi:[100-1000]
-        [40-79]Gi:[100-2000]
-        [80-99]Gi:[100-4000]
-        [100-499]Gi:[100-6000]
-        [500-999]Gi:[100-10000]
-        [1000-1999]Gi:[100-20000]
-        [2000-2999]Gi:[200-40000]
-        [3000-3999]Gi:[200-48000]
-        [4000-7999]Gi:[300-48000]
-        [8000-9999]Gi:[500-48000]
-        [10000-12000]Gi:[1000-48000]
-      fsType: "xfs"
-    reclaimPolicy: "Delete"
-    ```
-    {: codeblock}
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ibmc-block-custom-xfs
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+provisioner: ibm.io/ibmc-block
+parameters:
+  classVersion: "2"
+  type: "Performance"
+  sizeIOPSRange: |-
+    [20-39]Gi:[100-1000]
+    [40-79]Gi:[100-2000]
+    [80-99]Gi:[100-4000]
+    [100-499]Gi:[100-6000]
+    [500-999]Gi:[100-10000]
+    [1000-1999]Gi:[100-20000]
+    [2000-2999]Gi:[200-40000]
+    [3000-3999]Gi:[200-48000]
+    [4000-7999]Gi:[300-48000]
+    [8000-9999]Gi:[500-48000]
+    [10000-12000]Gi:[1000-48000]
+  fsType: "xfs"
+reclaimPolicy: "Delete"
+```
+{: codeblock}
 
 
 
@@ -2265,14 +2293,30 @@ To clean up persistent data:
     {: screen}
 
     Understanding the **Notes** field information:
-    *  **`"plugin":"ibm-file-plugin-5b55b7b77b-55bb7"`**: The storage plug-in that the cluster uses.
-    *  **`"region":"us-south"`**: The region that your cluster is in.
-    *  **`"cluster":"aa1a11a1a11b2b2bb22b22222c3c3333"`**: The cluster ID that is associated with the storage instance.
-    *  **`"type":"Endurance"`**: The type of file or block storage, either `Endurance` or `Performance`.
-    *  **`"ns":"default"`**: The namespace that the storage instance is deployed to.
-    *  **`"pvc":"mypvc"`**: The name of the PVC that is associated with the storage instance.
-    *  **`"pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7"`**: The PV that is associated with the storage instance.
-    *  **`"storageclass":"ibmc-file-gold"`**: The type of storage class: bronze, silver, gold, or custom.
+    
+    `"plugin":"ibm-file-plugin-5b55b7b77b-55bb7"`
+    :   The storage plug-in that the cluster uses.
+    
+    `"region":"us-south"`
+    : The region that your cluster is in.
+    
+    `"cluster":"aa1a11a1a11b2b2bb22b22222c3c3333"`
+    :   The cluster ID that is associated with the storage instance.
+    
+    `"type":"Endurance"`
+    :   The type of file or block storage, either `Endurance` or `Performance`.
+    
+    `"ns":"default"`
+    :   The namespace that the storage instance is deployed to.
+    
+    `"pvc":"mypvc"`
+    :   The name of the PVC that is associated with the storage instance.
+    
+    `"pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7"`
+    :   The PV that is associated with the storage instance.
+   
+    `"storageclass":"ibmc-file-gold"`
+    :   The type of storage class: bronze, silver, gold, or custom.
 
 1. Remove the physical storage instance.
 
@@ -2283,13 +2327,13 @@ To clean up persistent data:
 
 1. Verify that the physical storage instance is removed.
 
-    The deletion process might take up to 72 hours to complete.
-    {: important}
+The deletion process might take up to 72 hours to complete.
+{: important}
 
-    ```sh
-    ibmcloud sl block volume-list
-    ```
-    {: pre}
+```sh
+ibmcloud sl block volume-list
+```
+{: pre}
 
 
 

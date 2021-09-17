@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-09-16"
+lastupdated: "2021-09-17"
 
 keywords: containers
 subcollection: containers
@@ -829,6 +829,7 @@ subcollection: containers
   * [Default image pull secret setup](/docs/containers?topic=containers-registry#cluster_registry_auth_default)
   * [Private network connection to `icr.io` registries](/docs/containers?topic=containers-registry#cluster_registry_auth_private)
 * [Updating existing clusters to use the API key image pull secret](/docs/containers?topic=containers-registry#imagePullSecret_migrate_api_key)
+  * [Updating your image pull secret](/docs/containers?topic=containers-registry#update-pull-secret)
 * [Using an image pull secret to access images in other {{site.data.keyword.cloud_notm}} accounts or external private registries from non-default Kubernetes namespaces](/docs/containers?topic=containers-registry#other)
   * [Copying an existing image pull secret](/docs/containers?topic=containers-registry#copy_imagePullSecret)
   * [Creating an image pull secret with different IAM API key credentials for more control or access to images in other {{site.data.keyword.cloud_notm}} accounts](/docs/containers?topic=containers-registry#other_registry_accounts)
@@ -1185,6 +1186,10 @@ subcollection: containers
 [Storing data on classic IBM Cloud {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage)
 * [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
 * [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
+  * [File storage types](/docs/containers?topic=containers-file_storage#file-types)
+  * [IOPS](/docs/containers?topic=containers-file_storage#file-iops)
+  * [Reclaim policy](/docs/containers?topic=containers-file_storage#reclaim-policy)
+  * [Billing type](/docs/containers?topic=containers-file_storage#file-billing)
 * [Adding {{site.data.keyword.filestorage_short}} to apps](/docs/containers?topic=containers-file_storage#add_file)
 * [Using existing {{site.data.keyword.filestorage_short}} in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
   * [Step 1: Preparing your existing storage.](/docs/containers?topic=containers-file_storage#existing-file-1)
@@ -2597,9 +2602,12 @@ subcollection: containers
 [Classic: Why do I see a timeout error when I try to log in to a pod on a new worker node?](/docs/containers?topic=containers-cs_nodes_duplicate_ip)
 
 [Why can't I SSH into my worker node?](/docs/containers?topic=containers-cs_ssh_worker)
-* [Option 1: `kubectl debug`](/docs/containers?topic=containers-cs_ssh_worker#oc-debug)
-* [Option 2: `kubectl exec`](/docs/containers?topic=containers-cs_ssh_worker#kubectl-exec)
-* [Option 3: Create a pod with root SSH access](/docs/containers?topic=containers-cs_ssh_worker#pod-ssh)
+* [Debugging by using `kubectl debug`](/docs/containers?topic=containers-cs_ssh_worker#oc-debug)
+* [Debugging by using `kubectl exec`](/docs/containers?topic=containers-cs_ssh_worker#kubectl-exec)
+* [Debugging by creating a pod with root SSH access](/docs/containers?topic=containers-cs_ssh_worker#pod-ssh)
+  * [Private network](/docs/containers?topic=containers-cs_ssh_worker#ssh-private-network)
+  * [Public network classic clusters that are connected to a public VLAN only](/docs/containers?topic=containers-cs_ssh_worker#public-network-only-classic-debug)
+  * [Cleaning up after debugging](/docs/containers?topic=containers-cs_ssh_worker#ssh-debug-cleanup)
 
 
 ## Cluster autoscaler
