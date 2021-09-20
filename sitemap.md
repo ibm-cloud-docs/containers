@@ -1161,7 +1161,13 @@ subcollection: containers
 
 [Bringing your own Ingress controller](/docs/containers?topic=containers-ingress-user_managed)
 * [Classic clusters: Exposing your Ingress controller by creating an NLB and a hostname](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
+  * [Registering the load balancer IP address by creating a DNS hostname](/docs/containers?topic=containers-ingress-user_managed#register-lb-ip-dns)
+  * [Registering the load balancer IP address by using the existing Ingress subdomain for your cluster](/docs/containers?topic=containers-ingress-user_managed#register-lb-ip-ingress-subdomain)
+  * [Deploying additional resources for your custom Ingress controller](/docs/containers?topic=containers-ingress-user_managed#deploy-resources-custom-ingress)
 * [VPC clusters: Exposing your Ingress controller by creating a VPC load balancer and subdomain](/docs/containers?topic=containers-ingress-user_managed#user_managed_vpc)
+  * [Registering the load balancer IP address by creating a DNS hostname](/docs/containers?topic=containers-ingress-user_managed#register-lb-ip-dns-vpc)
+  * [Registering the load balancer IP address by using the existing Ingress subdomain for your cluster](/docs/containers?topic=containers-ingress-user_managed#register-lb-ip-ingress-subdomain-vpc)
+  * [Deploying additional resources for your custom Ingress controller](/docs/containers?topic=containers-ingress-user_managed#deploy-resources-custom-ingress-vpc)
 
 
 ## Storing data on persistent storage

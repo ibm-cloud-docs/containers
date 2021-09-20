@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-14"
+lastupdated: "2021-09-20"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -46,7 +46,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 
 |Version build|Release date|Changes|
 |-------------|------------|-------|
-| 1.0.0_1645_iks | 14 September 2021 |  Version 1.0.0_1645_iks is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto-update enabled, your ALBs automatically update to use this image. |
+| 1.0.0_1645_iks | 14 September 2021 | N/A |
 {: summary="The rows are read from left to right. The first column is the build of the image version. The second column is the build release date. The third column contains a brief description of the change made in the version build."}
 {: caption="Build changelog for version 0.48.0 of the Kubernetes Ingress image" caption-side="top"}
 
