@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-21"
 
 keywords: kubernetes, iks
 
@@ -66,15 +66,17 @@ By default, your cluster contains the following RBAC resources that enable clust
 
 You can modify these RBAC roles to remove or add administrators, users, services, or nodes to the policy. These modifications do not prevent cluster administrators, service accounts, and nodes from using the privileged pod security policy in the `kube-system`, `ibm-system`, and `ibm-operators` namespaces. Do not modify these system namespaces, which are privileged namespaces.
 
-Before you begin:
-*  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-*  Understand working with RBAC roles. For more information, see [Authorizing users with custom Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac) or the [Kubernetes documentation](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview){: external}.
+Before you begin
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* Understand working with RBAC roles. For more information, see [Authorizing users with custom Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac) or the [Kubernetes documentation](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview){: external}.
 * Ensure you have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for all namespaces.
 
 When you modify the default configuration, you can prevent important cluster actions, such as pod deployments or cluster updates. Test your changes in a non-production cluster that other teams do not rely on.
 {: important}
 
-**To modify the RBAC resources**:
+### Modifying the RBAC resources
+{: #modify_rbac}
+
 1. Get the name of the RBAC cluster role binding. The following steps use the `privileged-psp-user` RBAC as an example, but you can take similar steps for the `restricted-psp-user` RBAC or custom pod security policies.
     ```
     kubectl get clusterrolebinding
@@ -91,7 +93,7 @@ When you modify the default configuration, you can prevent important cluster act
     You might want to save a copy of the existing policy so that you can revert to it if the modified policy yields unexpected results.
     {: tip}
 
-    **Example cluster role binding file**:
+    Example cluster role binding file
 
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
@@ -124,7 +126,7 @@ When you modify the default configuration, you can prevent important cluster act
 
 3. Edit the cluster role binding `.yaml` file. To understand what you can edit, review the [Kubernetes documentation](https://kubernetes.io/docs/concepts/policy/pod-security-policy/){: external}. Example actions:
 
-    *   **Service accounts**: You might want to authorize service accounts so that deployments can occur only in specific namespaces. For example, if you scope the policy to allow actions within the `default` namespace, the service account can deploy privileged pods in that namespace. However, actions in other namespaces are no longer authorized because you changed the scope from service accounts generally to service accounts specifically in the `default` namespace.
+    - **Service accounts**: You might want to authorize service accounts so that deployments can occur only in specific namespaces. For example, if you scope the policy to allow actions within the `default` namespace, the service account can deploy privileged pods in that namespace. However, actions in other namespaces are no longer authorized because you changed the scope from service accounts generally to service accounts specifically in the `default` namespace.
 
         Do not scope the policy to namespaces that run system components, such as the `kube-system`, `ibm-system`, or `ibm-operators` namespaces. These namespaces already have [their own policies](/docs/containers?topic=containers-psp#ibm_psp). Changing the system component policies might cause unexpected results, such as all service accounts in all namespaces being able to deploy privileged pods.
         {: important}
@@ -148,7 +150,7 @@ When you modify the default configuration, you can prevent important cluster act
         ```
         {: codeblock}
 
-    *   **Users**: You might want to remove authorization for all authenticated users to deploy pods with privileged access. Remove the following `system:authenticated` entry.
+    - **Users**: You might want to remove authorization for all authenticated users to deploy pods with privileged access. Remove the following `system:authenticated` entry.
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
           kind: Group
@@ -170,9 +172,11 @@ When you modify the default configuration, you can prevent important cluster act
     ```
     {: pre}
 
-</br>
+### Deleting RBAC resources
+{: #delete_rbac}
 
-**To delete the RBAC resources**:
+To delete the RBAC resources,
+
 1. Get the name of the RBAC cluster role binding. The following steps use the `privileged-psp-user` RBAC as an example, but you can take similar steps for the `restricted-psp-user` RBAC or custom pod security policies.
     ```
     kubectl get clusterrolebinding
@@ -191,8 +195,9 @@ When you modify the default configuration, you can prevent important cluster act
     ```
     {: pre}
 
-</br>
-**To create your own pod security policy**:</br>
+### Creating your own pod security policy
+{: #creating_security_policy}
+
 To create your own pod security policy resource and authorize users with RBAC, review the [Kubernetes documentation](https://kubernetes.io/docs/concepts/policy/pod-security-policy/){: external}.
 
 Make sure that you modified the existing policies so that the new policy that you create does not conflict with the existing policy. For example, the existing policy permits users to create and update privileged pods. If you create a policy that does not permit users to create or update privileged pods, the conflict between the existing and the new policy might cause unexpected results.

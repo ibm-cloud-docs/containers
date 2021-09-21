@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-09-17"
+lastupdated: "2021-09-21"
 
 keywords: containers
 subcollection: containers
@@ -538,7 +538,9 @@ subcollection: containers
 [Controlling user access with {{site.data.keyword.cloud_notm}} IAM and Kubernetes RBAC](/docs/containers?topic=containers-users)
 * [Example cluster use cases and IAM roles](/docs/containers?topic=containers-users#example-iam)
 * [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the console](/docs/containers?topic=containers-users#add_users)
-* [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the CLI](/docs/containers?topic=containers-users#add_users_cli)
+* [Assign {{site.data.keyword.cloud_notm}} IAM roles with the CLI](/docs/containers?topic=containers-users#add_users_cli)
+  * [Assigning {{site.data.keyword.cloud_notm}} IAM _platform_ roles from the CLI](/docs/containers?topic=containers-users#add_users_cli_platform)
+  * [Assigning {{site.data.keyword.cloud_notm}} IAM _service_ roles from the CLI:**](/docs/containers?topic=containers-users#add_users_cli_service)
 * [Understanding RBAC permissions](/docs/containers?topic=containers-users#understand-rbac)
 * [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac)
 * [Extending existing permissions by aggregating cluster roles](/docs/containers?topic=containers-users#rbac_aggregate)
@@ -581,6 +583,9 @@ subcollection: containers
 
 [Configuring pod security policies](/docs/containers?topic=containers-psp)
 * [Customizing pod security policies](/docs/containers?topic=containers-psp#customize_psp)
+  * [Modifying the RBAC resources](/docs/containers?topic=containers-psp#modify_rbac)
+  * [Deleting RBAC resources](/docs/containers?topic=containers-psp#delete_rbac)
+  * [Creating your own pod security policy](/docs/containers?topic=containers-psp#creating_security_policy)
 * [Understanding default resources for {{site.data.keyword.IBM_notm}} cluster management](/docs/containers?topic=containers-psp#ibm_psp)
 
 [Setting pod priority](/docs/containers?topic=containers-pod_priority)
@@ -1161,7 +1166,13 @@ subcollection: containers
 
 [Bringing your own Ingress controller](/docs/containers?topic=containers-ingress-user_managed)
 * [Classic clusters: Exposing your Ingress controller by creating an NLB and a hostname](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
+  * [Registering the load balancer IP address by creating a DNS hostname](/docs/containers?topic=containers-ingress-user_managed#register-lb-ip-dns)
+  * [Registering the load balancer IP address by using the existing Ingress subdomain for your cluster](/docs/containers?topic=containers-ingress-user_managed#register-lb-ip-ingress-subdomain)
+  * [Deploying additional resources for your custom Ingress controller](/docs/containers?topic=containers-ingress-user_managed#deploy-resources-custom-ingress)
 * [VPC clusters: Exposing your Ingress controller by creating a VPC load balancer and subdomain](/docs/containers?topic=containers-ingress-user_managed#user_managed_vpc)
+  * [Registering the load balancer IP address by creating a DNS hostname](/docs/containers?topic=containers-ingress-user_managed#register-lb-ip-dns-vpc)
+  * [Registering the load balancer IP address by using the existing Ingress subdomain for your cluster](/docs/containers?topic=containers-ingress-user_managed#register-lb-ip-ingress-subdomain-vpc)
+  * [Deploying additional resources for your custom Ingress controller](/docs/containers?topic=containers-ingress-user_managed#deploy-resources-custom-ingress-vpc)
 
 
 ## Storing data on persistent storage
@@ -1188,7 +1199,7 @@ subcollection: containers
 * [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
   * [File storage types](/docs/containers?topic=containers-file_storage#file-types)
   * [IOPS](/docs/containers?topic=containers-file_storage#file-iops)
-  * [Reclaim policy](/docs/containers?topic=containers-file_storage#reclaim-policy)
+  * [Reclaim policy](/docs/containers?topic=containers-file_storage#file-reclaim)
   * [Billing type](/docs/containers?topic=containers-file_storage#file-billing)
 * [Adding {{site.data.keyword.filestorage_short}} to apps](/docs/containers?topic=containers-file_storage#add_file)
 * [Using existing {{site.data.keyword.filestorage_short}} in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
