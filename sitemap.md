@@ -1199,7 +1199,7 @@ subcollection: containers
 * [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
   * [File storage types](/docs/containers?topic=containers-file_storage#file-types)
   * [IOPS](/docs/containers?topic=containers-file_storage#file-iops)
-  * [Reclaim policy](/docs/containers?topic=containers-file_storage#reclaim-policy)
+  * [Reclaim policy](/docs/containers?topic=containers-file_storage#file-reclaim)
   * [Billing type](/docs/containers?topic=containers-file_storage#file-billing)
 * [Adding {{site.data.keyword.filestorage_short}} to apps](/docs/containers?topic=containers-file_storage#add_file)
 * [Using existing {{site.data.keyword.filestorage_short}} in your cluster](/docs/containers?topic=containers-file_storage#existing_file)

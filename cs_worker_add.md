@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-21"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -620,7 +620,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 ## Adding classic infrastructure servers to gateway-enabled classic clusters
 {: #gateway_vsi}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> If you have non-containerized workloads on a classic IBM Cloud infrastructure [virtual server](https://cloud.ibm.com/catalog/infrastructure/virtual-server-group) or [bare metal server](https://cloud.ibm.com/catalog/infrastructure/bare-metal), you can connect those workloads to the workloads in your gateway-enabled classic cluster by adding the server instance to your cluster network.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> If you have non-containerized workloads on a classic IBM Cloud infrastructure [virtual server](https://cloud.ibm.com/gen1/infrastructure/provision/vs) or [bare metal server](https://cloud.ibm.com/gen1/infrastructure/provision/bm), you can connect those workloads to the workloads in your gateway-enabled classic cluster by adding the server instance to your cluster network.
 {: shortdesc}
 
 You can add classic infrastructure servers to gateway-enabled classic clusters that run Kubernetes version 1.18 and earlier only. This feature is not supported for clusters that run Kubernetes version 1.19.
