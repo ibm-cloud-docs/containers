@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-09-20"
+lastupdated: "2021-09-21"
 
 keywords: containers
 subcollection: containers
@@ -538,7 +538,9 @@ subcollection: containers
 [Controlling user access with {{site.data.keyword.cloud_notm}} IAM and Kubernetes RBAC](/docs/containers?topic=containers-users)
 * [Example cluster use cases and IAM roles](/docs/containers?topic=containers-users#example-iam)
 * [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the console](/docs/containers?topic=containers-users#add_users)
-* [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the CLI](/docs/containers?topic=containers-users#add_users_cli)
+* [Assign {{site.data.keyword.cloud_notm}} IAM roles with the CLI](/docs/containers?topic=containers-users#add_users_cli)
+  * [Assigning {{site.data.keyword.cloud_notm}} IAM _platform_ roles from the CLI](/docs/containers?topic=containers-users#add_users_cli_platform)
+  * [Assigning {{site.data.keyword.cloud_notm}} IAM _service_ roles from the CLI:**](/docs/containers?topic=containers-users#add_users_cli_service)
 * [Understanding RBAC permissions](/docs/containers?topic=containers-users#understand-rbac)
 * [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac)
 * [Extending existing permissions by aggregating cluster roles](/docs/containers?topic=containers-users#rbac_aggregate)
@@ -581,6 +583,9 @@ subcollection: containers
 
 [Configuring pod security policies](/docs/containers?topic=containers-psp)
 * [Customizing pod security policies](/docs/containers?topic=containers-psp#customize_psp)
+  * [Modifying the RBAC resources](/docs/containers?topic=containers-psp#modify_rbac)
+  * [Deleting RBAC resources](/docs/containers?topic=containers-psp#delete_rbac)
+  * [Creating your own pod security policy](/docs/containers?topic=containers-psp#creating_security_policy)
 * [Understanding default resources for {{site.data.keyword.IBM_notm}} cluster management](/docs/containers?topic=containers-psp#ibm_psp)
 
 [Setting pod priority](/docs/containers?topic=containers-pod_priority)
