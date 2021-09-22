@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-22"
 
 keywords: kubernetes, iks
 
@@ -43,14 +43,14 @@ Do you have so many resources and users in your cluster that the Kubernetes dash
 To check the logs for individual app pods, you can run `kubectl logs <pod name>`. Do not use the Kubernetes dashboard to stream logs for your pods, which might cause a disruption in your access to the Kubernetes dashboard.
 {: important}
 
-Before you begin:
+Before you begin
 * Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
 * To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform access role](/docs/containers?topic=containers-users#checking-perms). If you are assigned only a service access role but no platform access role, [launch the Kubernetes dashboard from the CLI](#db_cli).
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
 
-**Launching the Kubernetes dashboard from the {{site.data.keyword.cloud_notm}} console**
+### Launching the Kubernetes dashboard from the {{site.data.keyword.cloud_notm}} console
 {: #db_gui}
 
 1. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
@@ -59,9 +59,8 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 4. On the **Clusters** page, click the cluster that you want to access.
 5. From the cluster detail page, click the **Kubernetes Dashboard** button.
 
-</br>
 
-**Launching the Kubernetes dashboard from the CLI**
+### Launching the Kubernetes dashboard from the CLI
 {: #db_cli}
 
 1. Get your credentials for Kubernetes.
@@ -102,9 +101,8 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 
 When you are done with the Kubernetes dashboard, use `CTRL+C` to exit the `proxy` command. After you exit, the Kubernetes dashboard is no longer available. Run the `proxy` command to restart the Kubernetes dashboard.
 
-[Next, you can run a configuration file from the dashboard.](#app_ui)
+Next, you can [run a configuration file from the dashboard.](#app_ui).
 
-<br />
 
 ## Deploying apps with the Kubernetes dashboard
 {: #app_ui}
@@ -115,14 +113,14 @@ When you deploy an app to your cluster by using the Kubernetes dashboard, a depl
 Do you have so many resources and users in your cluster that the Kubernetes dashboard is a little slow? Your cluster admin can scale the `kubernetes-dashboard` deployment by running `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
 {: tip}
 
-Before you begin:
+Before you begin
 
--   [Install the required CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
--   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
--   Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
--   To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform access role](/docs/containers?topic=containers-users#checking-perms). If you are assigned only a service access role but no platform access role, [launch the Kubernetes dashboard from the CLI](#db_cli).
+- [Install the required CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
+- To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform access role](/docs/containers?topic=containers-users#checking-perms). If you are assigned only a service access role but no platform access role, [launch the Kubernetes dashboard from the CLI](#db_cli).
 
-To deploy your app:
+To deploy your app,
 
 1. Open the Kubernetes [dashboard](#cli_dashboard) and click **+ Create**.
 2. Enter your app details in 1 of 2 ways.
@@ -136,29 +134,27 @@ To deploy your app:
     * In the Kubernetes dashboard, click **Deployments**. A list of successful deployments is displayed.
     * If your app is [publicly available](/docs/containers?topic=containers-cs_network_planning#public_access), navigate to the cluster overview page in your {{site.data.keyword.containerlong}} dashboard. Copy the subdomain, which is located in the cluster summary section and paste it into a browser to view your app.
 
-<br />
-
 ## Deploying apps with the CLI
 {: #app_cli}
 
 After a cluster is created, you can deploy an app into that cluster by using the Kubernetes CLI.
 {: shortdesc}
 
-Before you begin:
+Before you begin
 
--   Install the required [CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
--   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
--   Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
+- Install the required [CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
-To deploy your app:
+To deploy your app,
 
 1. Create a configuration file based on [Kubernetes best practices](https://kubernetes.io/docs/concepts/configuration/overview/){: external}. Generally, a configuration file contains configuration details for each of the resources you are creating in Kubernetes. Your script might include one or more of the following sections:
 
-    -   [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: external}: Defines the creation of pods and replica sets. A pod includes an individual containerized app and replica sets control multiple instances of pods.
+    - [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: external}: Defines the creation of pods and replica sets. A pod includes an individual containerized app and replica sets control multiple instances of pods.
 
-    -   [Service](https://kubernetes.io/docs/concepts/services-networking/service/){: external}: Provides front-end access to pods by using a worker node or load balancer public IP address, or a public Ingress route.
+    - [Service](https://kubernetes.io/docs/concepts/services-networking/service/){: external}: Provides front-end access to pods by using a worker node or load balancer public IP address, or a public Ingress route.
 
-    -   [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/){: external}: Specifies a type of load balancer that provides routes to access your app publicly.
+    - [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/){: external}: Specifies a type of load balancer that provides routes to access your app publicly.
 
     Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
 
@@ -171,18 +167,16 @@ To deploy your app:
 
 3. If you made your app publicly available by using a nodeport service, a load balancer service, or Ingress, verify that you can access the app.
 
-<br />
-
 ## Deploying apps to specific worker nodes by using labels
 {: #node_affinity}
 
 When you deploy an app, the app pods indiscriminately deploy to various worker nodes in your cluster. In some cases, you might want to restrict the worker nodes that the app pods to deploy to. For example, you might want app pods to deploy to only worker nodes in a certain worker pool because those worker nodes are on bare metal machines. To designate the worker nodes that app pods must deploy to, add an affinity rule to your app deployment.
 {: shortdesc}
 
-Before you begin:
-*   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-*   Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the Kubernetes namespace.
-*  **Optional**: [Set a label for the worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels) that you want to run the app on.
+Before you begin
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the Kubernetes namespace.
+* **Optional**: [Set a label for the worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels) that you want to run the app on.
 
 To deploy apps to specific worker nodes:
 
@@ -200,14 +194,15 @@ To deploy apps to specific worker nodes:
 
 3. Describe the worker node. In the **Labels** output, note the worker pool ID label, `ibm-cloud.kubernetes.io/worker-pool-id`.
 
-    <p class="tip">The steps in this topic use a worker pool ID to deploy app pods only to worker nodes within that worker pool. To deploy app pods to specific worker nodes by using a different label, note this label instead. For example, to deploy app pods only to worker nodes on a specific private VLAN, use the `privateVLAN=` label.</p>
+    The steps in this topic use a worker pool ID to deploy app pods only to worker nodes within that worker pool. To deploy app pods to specific worker nodes by using a different label, note this label instead. For example, to deploy app pods only to worker nodes on a specific private VLAN, use the `privateVLAN=` label.
+    {: tip}
 
     ```
     kubectl describe node <worker_node_private_IP>
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     Name:               10.xxx.xx.xxx
     Roles:              <none>
@@ -234,7 +229,7 @@ To deploy apps to specific worker nodes:
 
 4. [Add an affinity rule](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/){: external} for the worker pool ID label to the app deployment.
 
-    Example YAML:
+    Example YAML
 
     ```yaml
     apiVersion: apps/v1
@@ -273,7 +268,7 @@ To deploy apps to specific worker nodes:
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         NAME                   READY     STATUS              RESTARTS   AGE       IP               NODE
         cf-py-d7b7d94db-vp8pq  1/1       Running             0          15d       172.30.xxx.xxx   10.176.48.78
@@ -291,7 +286,7 @@ To deploy apps to specific worker nodes:
         ```
         {: pre}
 
-        Example output:
+        Example output
 
         ```
         ID                                                 Public IP       Private IP     Machine Type      State    Status  Zone    Version
@@ -306,10 +301,6 @@ To deploy apps to specific worker nodes:
 
     4. In the output, verify that the worker node with the private IP address that you identified in the previous step is deployed in this worker pool.
 
-<br />
-
-
-
 ## Deploying an app on a GPU machine
 {: #gpu_app}
 
@@ -321,12 +312,13 @@ In the following steps, you learn how to deploy workloads that require the GPU. 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> GPU machines are available only for clusters on classic infrastructure.
 {: note}
 
-Before you begin:
-* Create a [cluster](/docs/containers?topic=containers-clusters#clusters_standard) or [worker pool](/docs/containers?topic=containers-add_workers#add_pool) that uses a GPU bare metal flavor. Keep in mind that setting up a bare metal machine can take more than one business day to complete.
-* Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the cluster.
-* [Install the NVIDIA GPU operator for your cluster version](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/getting-started.html#operator-install-guide){: external}.
+Before you begin
+- Create a [cluster](/docs/containers?topic=containers-clusters#clusters_standard) or [worker pool](/docs/containers?topic=containers-add_workers#add_pool) that uses a GPU bare metal flavor. Keep in mind that setting up a bare metal machine can take more than one business day to complete.
+- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the cluster.
+- [Install the NVIDIA GPU operator for your cluster version](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/getting-started.html#operator-install-guide){: external}.
 
-To execute a workload on a GPU machine:
+To run a workload on a GPU machine,
+
 1. Create a YAML file. In this example, a `Job` YAML manages batch-like workloads by making a short-lived pod that runs until the command that it is scheduled to complete successfully terminates.
 
     For GPU workloads, you must always provide the `resources: limits: nvidia.com/gpu` field in the YAML specification.
@@ -363,46 +355,17 @@ To execute a workload on a GPU machine:
           restartPolicy: Never
     ```
     {: codeblock}
-
-    <table summary="A table that describes in Column 1 the YAML file fields and in Column 2 how to fill out those fields.">
-    <caption>YAML components</caption>
-    <thead>
-    <col width="25%">
-    <th>Component</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td>Metadata and label names</td>
-    <td>Give a name and a label for the job, and use the same name in both the file's metadata and the <code>spec template</code> metadata. For example, <code>nvidia-smi</code>.</td>
-    </tr>
-    <tr>
-    <td><code>containers.image</code></td>
-    <td>Provide the image that the container is a running instance of. In this example, the value is set to use the DockerHub CUDA image:<code>nvidia/cuda:9.1-base-ubuntu16.04</code></td>
-    </tr>
-    <tr>
-    <td><code>containers.command</code></td>
-    <td>Specify a command to run in the container. In this example, the <code>[ "/usr/test/nvidia-smi" ]</code>command refers to a binary file that is on the GPU machine, so you must also set up a volume mount.</td>
-    </tr>
-    <tr>
-    <td><code>containers.imagePullPolicy</code></td>
-    <td>To pull a new image only if the image is not currently on the worker node, specify <code>IfNotPresent</code>.</td>
-    </tr>
-    <tr>
-    <td><code>resources.limits</code></td>
-    <td>For GPU machines, you must specify the resource limit. The Kubernetes <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/">Device Plug-in</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> sets the default resource request to match the limit.
-    <ul><li>You must specify the key as <code>nvidia.com/gpu</code>.</li>
-    <li>Enter the whole number of GPUs that you request, such as <code>2</code>. <strong>Note</strong>: Container pods do not share GPUs and GPUs cannot be overcommitted. For example, if you have only 1 <code>mg1c.16x128</code> machine, then you have only 2 GPUs in that machine and can specify a maximum of <code>2</code>.</li></ul></td>
-    </tr>
-    <tr>
-    <td><code>volumeMounts</code></td>
-    <td>Name the volume that is mounted onto the container, such as <code>nvidia0</code>. Specify the <code>mountPath</code> on the container for the volume. In this example, the path <code>/usr/test</code> matches the path that is used in the job container command.</td>
-    </tr>
-    <tr>
-    <td><code>volumes</code></td>
-    <td>Name the job volume, such as <code>nvidia0</code>. In the GPU worker node's <code>hostPath</code>, specify the volume's <code>path</code> on the host, in this example, <code>/usr/bin</code>. The container <code>mountPath</code> is mapped to the host volume <code>path</code>, which gives this job access to the NVIDIA binaries on the GPU worker node for the container command to run.</td>
-    </tr>
-    </tbody></table>
+    
+    | Component | Description |
+    | ---- | ------- |
+    | Metadata and label names | Enter a name and a label for the job, and use the same name in both the file's metadata and the `spec template` metadata. For example, `nvidia-smi`. |
+    | `containers.image` | Provide the image that the container is a running instance of. In this example, the value is set to use the DockerHub CUDA image:`nvidia/cuda:9.1-base-ubuntu16.04`. |
+    | `containers.command` | Specify a command to run in the container. In this example, the `[ "/usr/test/nvidia-smi" ]` command refers to a binary file that is on the GPU machine, so you must also set up a volume mount. |
+    | `containers.imagePullPolicy` | To pull a new image only if the image is not currently on the worker node, specify `IfNotPresent`. |
+    | `resources.limits` | For GPU machines, you must specify the resource limit. The Kubernetes [Device Plug-in](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/){: external} sets the default resource request to match the limit. \n * You must specify the key as `nvidia.com/gpu`. \n * Enter the whole number of GPUs that you request, such as `2`. Note that container pods do not share GPUs and GPUs cannot be overcommitted. For example, if you have only 1 `mg1c.16x128` machine, then you have only 2 GPUs in that machine and can specify a maximum of `2`. |
+    | `volumeMounts` | Name the volume that is mounted onto the container, such as `nvidia0`. Specify the `mountPath` on the container for the volume. In this example, the path `/usr/test` matches the path that is used in the job container command. |
+    | `volumes` | Name the job volume, such as `nvidia0`. In the GPU worker node's `hostPath`, specify the volume's `path` on the host, in this example, `/usr/bin`. The container `mountPath` is mapped to the host volume `path`, which gives this job access to the NVIDIA binaries on the GPU worker node for the container command to run. |
+    {: caption="Table 1. Understanding your YAML components" caption-side="top"}
 
 2. Apply the YAML file. For example:
 
@@ -418,7 +381,7 @@ To execute a workload on a GPU machine:
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     NAME                  READY     STATUS      RESTARTS   AGE
     nvidia-smi-ppkd4      0/1       Completed   0          36s
@@ -434,7 +397,7 @@ To execute a workload on a GPU machine:
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         Name:           nvidia-smi-ppkd4
         Namespace:      default
@@ -459,7 +422,7 @@ To execute a workload on a GPU machine:
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     +-----------------------------------------------------------------------------+
     | NVIDIA-SMI 390.12                 Driver Version: 390.12                    |
@@ -486,7 +449,6 @@ To execute a workload on a GPU machine:
     In this example, you see that both GPUs were used to execute the job because both the GPUs were scheduled in the worker node. If the limit is set to 1, only 1 GPU is shown.
 
 Now that you deployed a test GPU workload, you might want to set up your cluster to run a tool that relies on GPU processing, such as [IBM Maximo Visual Inspection](https://www.ibm.com/products/maximo/remote-monitoring){: external}.
-
 
 
 

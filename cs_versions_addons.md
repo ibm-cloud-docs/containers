@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-20"
+lastupdated: "2021-09-22"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -46,6 +46,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 
 |Version build|Release date|Changes|
 |-------------|------------|-------|
+| 1.0.0_1699_iks | 22 September 2021 | Version 1.0.0_1699_iks is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto-update enabled, your ALBs automatically update to use this image. Resolves [CVE-2021-22945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22945){:external}, [CVE-2021-22946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22946){:external}, and [CVE-2021-22947](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22947){:external}. |
 | 1.0.0_1645_iks | 14 September 2021 | N/A |
 {: summary="The rows are read from left to right. The first column is the build of the image version. The second column is the build release date. The third column contains a brief description of the change made in the version build."}
 {: caption="Build changelog for version 0.48.0 of the Kubernetes Ingress image" caption-side="top"}
@@ -58,6 +59,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 
 |Version build|Release date|Changes|
 |-------------|------------|-------|
+| 0.48.1_1698_iks | 22 September 2021 | Resolves [CVE-2021-22945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22945){:external}, [CVE-2021-22946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22946){:external}, and [CVE-2021-22947](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22947){:external}. |
 | 0.48.1_1613_iks | 09 September 2021 | **As of 14 Sep 2021, this is the only image supported for Kubernetes version 1.18 clusters**. Updates to address [CVE-2021-3711](https://nvd.nist.gov/vuln/detail/CVE-2021-3711){: external} and [CVE-2021-3712](https://nvd.nist.gov/vuln/detail/CVE-2021-3712){: external}. |
 | 0.48.1_1579_iks | 01 September 2021 |  Updates to support arbitrary controller values in the Ingress classes. |
 | 0.48.1_1541_iks | 23 August 2021 | Updates to address [CVE-2021-36221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36221){: external} and [CVE-2021-3121](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3121){: external}. |
@@ -108,6 +110,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 
 |Version build|Release date|Changes|
 |-------------|------------|-------|
+| 0.43.0_1697_iks | 22 September 2021 | Resolves [CVE-2021-22945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22945){:external}, [CVE-2021-22946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22946){:external}, and [CVE-2021-22947](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22947){:external}. |
 | 0.43.0_1612_iks | 09 September 2021 | Updates to address [CVE-2021-3711](https://nvd.nist.gov/vuln/detail/CVE-2021-3711){: external} and [CVE-2021-3712](https://nvd.nist.gov/vuln/detail/CVE-2021-3712){: external}. |
 | 0.43.0_1580_iks | 01 September 2021 | Updates to support arbitrary controller values in the Ingress classes. |
 | 0.43.0_1539_iks | 23 August 2021 | Updates to address [CVE-2021-36221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36221){: external} and [CVE-2021-3121](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3121){: external}. |

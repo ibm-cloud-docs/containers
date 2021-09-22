@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-13"
+lastupdated: "2021-09-22"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -32,15 +32,12 @@ Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.co
 To avoid conflicts when using metrics services, be sure that clusters across resource groups and regions have unique names.
 {: tip}
 
-**{{site.data.keyword.mon_full}}**
-Gain operational visibility into the performance and health of your apps and your cluster by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/monitoring?topic=monitoring-getting-started). To set up the {{site.data.keyword.mon_short}} agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#monitoring).
+{{site.data.keyword.mon_full}}
+: Gain operational visibility into the performance and health of your apps and your cluster by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/monitoring?topic=monitoring-getting-started). To set up the {{site.data.keyword.mon_short}} agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#monitoring).
 
-**Kubernetes dashboard**
-The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-deploy_app#cli_dashboard).
+Kubernetes dashboard
+: The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-deploy_app#cli_dashboard).
 
-
-
-<br />
 
 ## Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}
 {: #monitoring}
@@ -51,8 +48,8 @@ Use the {{site.data.keyword.containerlong_notm}} observability plug-in to create
 With {{site.data.keyword.mon_full_notm}}, you can collect cluster and pod metrics, such as the CPU and memory usage of your worker nodes, incoming and outgoing HTTP traffic for your pods, and data about several infrastructure components. In addition, the agent can collect custom application metrics by using either a Prometheus-compatible scraper or a StatsD facade.
 
 Considerations for using the {{site.data.keyword.containerlong_notm}} observability plug-in:
-* You can have only one monitoring configuration for {{site.data.keyword.mon_full_notm}} in your cluster at a time. If you want to use a different {{site.data.keyword.mon_full_notm}} service instance to send metrics to, use the [`ibmcloud ob monitoring config replace`](/docs/containers?topic=containers-observability_cli#monitoring_config_replace) command.
-* If you created a {{site.data.keyword.mon_short}} configuration in your cluster without using the {{site.data.keyword.containerlong_notm}} observability plug-in, you can use the [`ibmcloud ob monitoring agent discover`](/docs/containers?topic=containers-observability_cli#monitoring_agent_discover) command to make the configuration visible to the plug-in. Then, you can use the observability plug-in commands and functionality in the {{site.data.keyword.cloud_notm}} console to manage the configuration.
+- You can have only one monitoring configuration for {{site.data.keyword.mon_full_notm}} in your cluster at a time. If you want to use a different {{site.data.keyword.mon_full_notm}} service instance to send metrics to, use the [`ibmcloud ob monitoring config replace`](/docs/containers?topic=containers-observability_cli#monitoring_config_replace) command.
+- If you created a {{site.data.keyword.mon_short}} configuration in your cluster without using the {{site.data.keyword.containerlong_notm}} observability plug-in, you can use the [`ibmcloud ob monitoring agent discover`](/docs/containers?topic=containers-observability_cli#monitoring_agent_discover) command to make the configuration visible to the plug-in. Then, you can use the observability plug-in commands and functionality in the {{site.data.keyword.cloud_notm}} console to manage the configuration.
 
 Before you begin:
 - Verify that you are assigned the **Editor** platform access role and **Manager** server access role for {{site.data.keyword.mon_full_notm}}.
@@ -66,44 +63,44 @@ To set up a monitoring configuration for your cluster:
 1. Create an [{{site.data.keyword.mon_full_notm}} service instance](/docs/monitoring?topic=monitoring-provision) and note the name of the instance. The service instance must belong to the same {{site.data.keyword.cloud_notm}} account where you created your cluster, but can be in a different resource group and {{site.data.keyword.cloud_notm}} region than your cluster.
 2. Set up a monitoring configuration for your cluster. When you create the monitoring configuration, a Kubernetes namespace `ibm-observe` is created and a {{site.data.keyword.mon_short}} agent is deployed as a Kubernetes daemon set to all worker nodes in your cluster. This agent collects cluster and pod metrics, such as the worker node CPU and memory usage, or the amount incoming and outgoing network traffic to your pods.
 
-    - **From the console: **
+    - **From the console**
         1. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster for which you want to create a {{site.data.keyword.mon_short}} configuration.
         2. On the cluster **Overview** page, click **Connect**.
         3. Select the region and the {{site.data.keyword.mon_full_notm}} service instance that you created earlier, and click **Connect**.
 
-    - **From the CLI:**
+    - **From the CLI**
         1. Create the {{site.data.keyword.mon_short}} configuration. When you create the {{site.data.keyword.mon_short}} configuration, the access key that was last added is retrieved automatically. If you want to use a different access key, add the `--sysdig-access-key <access_key>` option to the command.
 
-        To use a different service access key after you created the monitoring configuration, use the [`ibmcloud ob monitoring config replace`](/docs/containers?topic=containers-observability_cli#monitoring_config_replace) command.
-        {: tip}
+            To use a different service access key after you created the monitoring configuration, use the [`ibmcloud ob monitoring config replace`](/docs/containers?topic=containers-observability_cli#monitoring_config_replace) command.
+            {: tip}
 
-        ```
-        ibmcloud ob monitoring config create --cluster <cluster_name_or_ID> --instance <Monitoring_instance_name_or_ID>
-        ```
-        {: pre}
+            ```
+            ibmcloud ob monitoring config create --cluster <cluster_name_or_ID> --instance <Monitoring_instance_name_or_ID>
+            ```
+            {: pre}
 
-        Example output:
-        ```
-        Creating configuration...
-        OK
-        ```
-        {: screen}
+            Example output
+            ```
+            Creating configuration...
+            OK
+            ```
+            {: screen}
 
         2. Verify that the monitoring configuration was added to your cluster.
-        ```
-        ibmcloud ob monitoring config list --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
+            ```
+            ibmcloud ob monitoring config list --cluster <cluster_name_or_ID>
+            ```
+            {: pre}
 
-        Example output:
-        ```
-        Listing configurations...
+            Example output
+            ```
+            Listing configurations...
 
-        OK
-        Instance Name                Instance ID                            CRN   
-        IBM Cloud Monitoring-aaa     1a111a1a-1111-11a1-a1aa-aaa11111a11a   crn:v1:prod:public:sysdig:us-south:a/a11111a1aaaaa11a111aa11a1aa1111a:1a111a1a-1111-11a1-a1aa-aaa11111a11a::  
-        ```
-        {: screen}
+            OK
+            Instance Name                Instance ID                            CRN   
+            IBM Cloud Monitoring-aaa     1a111a1a-1111-11a1-a1aa-aaa11111a11a   crn:v1:prod:public:sysdig:us-south:a/a11111a1aaaaa11a111aa11a1aa1111a:1a111a1a-1111-11a1-a1aa-aaa11111a11a::  
+            ```
+            {: screen}
 
 3. Optional: Verify that the {{site.data.keyword.mon_short}} agent was set up successfully.
     1. If you used the console to create the {{site.data.keyword.mon_short}} configuration, log in to your cluster. For more information, see [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -113,7 +110,7 @@ To set up a monitoring configuration for your cluster:
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         NAME           DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
         sysdig-agent   9         9         9       9            9           <none>          14m
@@ -156,11 +153,11 @@ Your {{site.data.keyword.containerlong_notm}} cluster includes an IBM-managed ma
 
 **Master Health**
 
-The **Master Health** reflects the state of master components and notifies you if something needs your attention. The health might be one of the following:
-*   `error`: The master is not operational. IBM is automatically notified and takes action to resolve this issue. You can continue monitoring the health until the master is `normal`. You can also [open an {{site.data.keyword.cloud_notm}} support case](/docs/containers?topic=containers-get-help).
-*   `normal`: The master is operational and healthy. No action is required.
-*   `unavailable`: The master might not be accessible, which means some actions such as resizing a worker pool are temporarily unavailable. IBM is automatically notified and takes action to resolve this issue. You can continue monitoring the health until the master is `normal`.
-*   `unsupported`: The master runs an unsupported version of Kubernetes. You must [update your cluster](/docs/containers?topic=containers-update) to return the master to `normal` health.
+The **Master Health** reflects the state of master components and notifies you if something needs your attention. The health might be one of the following states.
+- `error`: The master is not operational. IBM is automatically notified and takes action to resolve this issue. You can continue monitoring the health until the master is `normal`. You can also [open an {{site.data.keyword.cloud_notm}} support case](/docs/containers?topic=containers-get-help).
+- `normal`: The master is operational and healthy. No action is required.
+- `unavailable`: The master might not be accessible, which means some actions such as resizing a worker pool are temporarily unavailable. IBM is automatically notified and takes action to resolve this issue. You can continue monitoring the health until the master is `normal`.
+- `unsupported`: The master runs an unsupported version of Kubernetes. You must [update your cluster](/docs/containers?topic=containers-update) to return the master to `normal` health.
 
 **Master Status and State**
 
@@ -179,161 +176,6 @@ The **Master Status** provides details of what operation from the master state i
 {: caption="Master states"}
 {: summary="Table rows read from left to right, with the master state in column one and a description in column two."}
 
-
-</staging>
-
-## Setting up {{site.data.keyword.mon_full}} alerts
-{: #monitoring-alerts}
-
-When you set up alerts, make sure to allow your cluster enough time to self-heal. Because Kubernetes has self healing capabilities, configure your alerts only for the issues that arise over time. By observing your cluster over time, you can learn which issues Kubernetes can resolve itself and which issues require alerts to avoid downtime.
-{: shortdesc}
-
-Depending on the size of your cluster, consider setting up alerts on the following levels:
-
-- [Apps](#app-level-alerts)
-- [Worker nodes](#worker-node-level-alerts)
-- [Cluster](#cluster-level-alerts)
-- [Zone](#zone-level-alerts)
-- [Account](#account-level-alerts)
-
-
-
-Set up [autorecovery](#autorecovery) on your worker nodes to enable your cluster to automatically resolve issues.
-{: tip}
-
-
-
-### App alerts
-{: #app-level-alerts}
-
-Review the following app level metrics and alert thresholds for help setting up app monitoring in your cluster.
-{: shortdesc}
-
-Common app level conditions to monitor include things such as,
-    - Multiple app pods or containers are restarted within 10 minutes.
-    - More than one replica of an app is not running.
-    - More than ten 5XX `HTTP` response codes received within 10 minute time frame.
-    - More than one pod in a namespace is in an unknown state.
-    - More than five pods cannot be scheduled on a worker node (pending state).
-
-The underlying issues for these symptoms include things such as,
-    - One or more worker node is in an unhealthy state.
-    - Worker nodes ran out of CPU, memory, or disk space.
-    - Maximum pod limit per cluster reached.
-    - App itself has an issue.
-
-To set up monitoring for these conditions, configure alerts based on the following {{site.data.keyword.mon_full_notm}} metrics. Note that your alert thresholds might change depending on your cluster configuration.
-
-| Metric | {{site.data.keyword.mon_full_notm}} metric | Alert threshold |
-| --- | --- | --- |
-| Multiple restarts of a pod in a short amount of time. | `kubernetes.pod.restart.count` | Greater than 4 for the last 10 minutes |
-| No running replicas in a replicaset. | `kubernetes.replicaSet.replicas.running` in `kubernetes.deployment.name` | Less than one. |
-| More than 5 pods pending in cluster. | `kubernetes.namespace.pod.status.name` | Status equals `pending` greater than five.|
-| No replicas in a deployment available. | `kubernets.deployment.replicas.available` | Less than one. |
-| Number of pods per node reaching threshold of 110. | Count by `(kube_cluster_name,kube_node_name)(kube_pod_container_info)` Greater than or equal to 100. Note that this query is a promQL query. |
-| Workloads that are in an unknown state. | `(kube_workload_status_unavailable)` | Greater than or equal to one. Note that this query is a promQL query. |
-{: caption="App metrics"}
-{: summary="The table shows the app metrics that you can configure in {{site.data.keyword.mon_full_notm}}. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
-
-
-
-### Worker node alerts
-{: #worker-node-level-alerts}
-
-|Metric| {{site.data.keyword.mon_full_notm}} metric | Alert threshold |
-| --- | --- |
-| CPU utilization of the worker node over threshold. | `cpu.used.percent` | Greater than 80% for 1 hour. |
-| CPU utilization of the worker node over threshold. | `cpu.used.percent` | Greater than 65% for 24 hours. |
-| Memory utilization of the worker node over threshold. | `memory.used.percent` | Greater than 80 % for 1 hour. |
-| Memory utilization of the worker node over threshold. | `memory.used.percent` | Greater than 65% for 24 hours. |
-| Nodes with memory pressure exist. | `kubernetes.node.memoryPressure` | Greater than or equal to 1 for 10 minutes. |
-| Amount of memory used over threshold. | `memory.bytes.used` | Greater than `NUMBER_OF_BYBTES`. |
-| Nodes with disk pressure exist. | `kubernetes.node.diskPressure` | Greater than or equal to 1 for 10 minutes. |
-| Nodes without disk space exist. | `kubernetes.nodes.outOfDisk` | Greater than or equal to 1. |
-| Average free disk space. | `fs.free.percent` | Less than 20% for 1 hour. |
-| Kubernetes nodes not ready exist. |kubernetes.node.ready >= 1|
-{: caption="Worker node metrics"}
-{: summary="The table shows worker node metrics that you can configure. Rows are to be read from the left to right, with the name of the metric in column one, and Monitoring parameter in column two, and an example alert threshold in column three."}
-
-#### Resolving worker node alerts
-{: #worker-node-resolve}
-
-Reloading or rebooting the worker can resolve the issue. However, you might need add more workers to increase capacity.
-{: shortdesc}
-
-1. Get your worker nodes and review the [state](/docs/openshift?topic=openshift-worker-node-state-reference). 
-    ```
-    kubectl get nodes
-    ```
-    {: pre}
-
-  1. If all of the worker nodes are **not** in the `Ready` state, [add worker nodes to your cluster](/docs/containers?topic=containers-add_workers).
-
-  1. If all the worker nodes are in the `Ready` state, [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker nodes.
-      1. Describe your worker node and review the **Events** section for common error messages.
-          ```
-          kubectl describe node <node>
-          ```
-          {: pre}
-      
-      1. Cordon the node that isn't `Ready` so that you can start investigating.
-
-      1. Drain the worker node. Review the [Kubernetes documentation to safely drain pods from your worker node](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/).
-          ```
-          kubectl drain <node>
-          ```
-          {: pre}
-
-      1. [Reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker node.
-
-All worker nodes in a zone are reaching capacity threshold of 80% (Solution: Add worker nodes in that zone so that load goes below 70%)
-More than 2 worker nodes in one zone are not ready (label: label_failure_domain_beta_kubernetes_io_zone)
-
-### Zone alerts
-{: #zone-level-alerts}
-
-To set up zone level alerts in , edit the `sysdig-agent` configmap to include the required label filters.
-{: shortdesc}
-
-1. `kubectl edit configmap sysdig-agent -n ibm-observe`.
-1. Add the following YAML block after `k8s_cluster_name: <cluster_name>`:
-    ```yaml
-    k8s_labels_filter:
-      - include: "kubernetes.node.label.kubernetes.io/hostname"
-      - include: "kubernetes.node.label.kubernetes.io/role"
-      - include: "kubernetes.node.label.ibm-cloud.kubernetes.io/zone"
-      - exclude: "*.kubernetes.io/*"
-      - exclude: "*.pod-template-hash"
-      - exclude: "*.pod-template-generation"
-      - exclude: "*.controller-revision-hash"
-      - include: "*"
-     ```
-     {: codeblock}
-
-1. Restart the {{site.data.keyword.mon_full_notm}} pods. Delete all the pods and wait for them to restart.
-    1. `kubectl get pods -n ibm-observe`
-    1. `kubectl delete pods sysdig-agent-1111 sysdig-agent-2222 sysdig-agent-3333 -n ibm-observe` 
-    1. Wait 5 minutes for the pods to come up again and the label to be available in {{site.data.keyword.mon_full_notm}}  
-    1. Verify that the labels now show by opening the **{{site.data.keyword.mon_full_notm}} dashboard** > **Explore** > **PromQL query**.
-    1. Enter `kube_node_labels` in the query field and click `Run Query`. 
-
-
-
-### Cluster alerts
-{: #cluster-level-alerts}
-
-All worker nodes in a region are reaching capacity threshold of 80%.
-More than 50% of all worker nodes are in an unhealthy state
-Reaching maximum number of file and block storage volumes per account (250)
-Reaching maximum number of worker nodes per cluster (500)
-
-### Account alerts
-{: #account-level-alerts}
-
-Max number of clusters per account is reaching limit (100 per region/ infrastructure provider)
-
-
-</staging>
 
 
 

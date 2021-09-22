@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-09-21"
+lastupdated: "2021-09-22"
 
 keywords: containers
 subcollection: containers
@@ -679,6 +679,7 @@ subcollection: containers
 * [Overview of classic networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics)
   * [VLANs](/docs/containers?topic=containers-subnets#basics_vlans)
   * [Subnets and IP addresses](/docs/containers?topic=containers-subnets#basics_subnets)
+  * [Finding subnets provisioned in your account](/docs/containers?topic=containers-subnets#finding_subnets_account)
   * [Network segmentation](/docs/containers?topic=containers-subnets#basics_segmentation)
 * [Using existing subnets to create a cluster](/docs/containers?topic=containers-subnets#subnets_custom)
 * [Managing existing portable IP addresses](/docs/containers?topic=containers-subnets#managing_ips)
@@ -695,6 +696,8 @@ subcollection: containers
 [Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster)
 * [Setting up the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
 * [Setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
+  * [Steps to enable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#steps-set-up-public)
+  * [Steps to disable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#disable-public-se)
 * [Switching from the public cloud service endpoint to the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
 * [Changing your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
 
@@ -736,6 +739,8 @@ subcollection: containers
 [Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes)
 * [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
 * [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
+  * [Enabling the static route add-on from the console](/docs/containers?topic=containers-static-routes#enable-add-on-console)
+  * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
 * [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
 
 
@@ -760,8 +765,14 @@ subcollection: containers
 
 [Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas)
 * [Communication with resources in on-premises data centers](/docs/containers?topic=containers-vpc-vpnaas#onprem)
+  * [{{site.data.keyword.vpc_short}} VPN](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn-def)
+  * [{{site.data.keyword.dl_short}}](/docs/containers?topic=containers-vpc-vpnaas#vpc-directlink-def)
 * [Communication with resources in other VPCs](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpc)
+  * [{{site.data.keyword.vpc_short}} VPN](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn-other)
+  * [{{site.data.keyword.tg_full_notm}}](/docs/containers?topic=containers-vpc-vpnaas#vpc-transit-def)
 * [Communication with {{site.data.keyword.cloud_notm}} classic resources](/docs/containers?topic=containers-vpc-vpnaas#vpc-classic)
+  * [Create a classic-access VPC](/docs/containers?topic=containers-vpc-vpnaas#vpc-create-classic)
+  * [Use {{site.data.keyword.tg_full_notm}}](/docs/containers?topic=containers-vpc-vpnaas#vpc-use-transit-gw)
 
 [Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns)
 * [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
@@ -779,6 +790,8 @@ subcollection: containers
 [Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes)
 * [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
 * [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
+  * [Enabling the static route add-on from the console](/docs/containers?topic=containers-static-routes#enable-add-on-console)
+  * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
 * [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
 
 
@@ -797,18 +810,13 @@ subcollection: containers
   * [Filtering logs that are forwarded](/docs/containers?topic=containers-health#filter-logs)
   * [Verifying, updating, and deleting log forwarding](/docs/containers?topic=containers-health#verifying-log-forwarding)
 * [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master)
+  * [Creating a snapshot](/docs/containers?topic=containers-health#creating-snapshot)
 
 [Monitoring cluster health](/docs/containers?topic=containers-health-monitor)
 * [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics)
 * [Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health-monitor#monitoring)
 * [Viewing cluster states](/docs/containers?topic=containers-health-monitor#states)
   * [Master states](/docs/containers?topic=containers-health-monitor#states_master)
-* [Setting up {{site.data.keyword.mon_full}} alerts](/docs/containers?topic=containers-health-monitor#monitoring-alerts)
-  * [App alerts](/docs/containers?topic=containers-health-monitor#app-level-alerts)
-  * [Worker node alerts](/docs/containers?topic=containers-health-monitor#worker-node-level-alerts)
-  * [Zone alerts](/docs/containers?topic=containers-health-monitor#zone-level-alerts)
-  * [Cluster alerts](/docs/containers?topic=containers-health-monitor#cluster-level-alerts)
-  * [Account alerts](/docs/containers?topic=containers-health-monitor#account-level-alerts)
 * [Monitoring worker node health in with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
   * [Understanding the configmap components](/docs/containers?topic=containers-health-monitor#configmap-components)
   * [Understanding the individual components of health checks](/docs/containers?topic=containers-health-monitor#health-check-components)
@@ -910,6 +918,8 @@ subcollection: containers
 
 [Deploying Kubernetes-native apps in clusters](/docs/containers?topic=containers-deploy_app)
 * [Launching the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard)
+  * [Launching the Kubernetes dashboard from the {{site.data.keyword.cloud_notm}} console](/docs/containers?topic=containers-deploy_app#db_gui)
+  * [Launching the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-deploy_app#db_cli)
 * [Deploying apps with the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#app_ui)
 * [Deploying apps with the CLI](/docs/containers?topic=containers-deploy_app#app_cli)
 * [Deploying apps to specific worker nodes by using labels](/docs/containers?topic=containers-deploy_app#node_affinity)
