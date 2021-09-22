@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-22"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -29,23 +29,17 @@ By default, logs are generated and written locally for all of the following {{si
 
 You can choose your logging solution based on which cluster components you need to collect logs for. A common implementation is to choose a logging service that you prefer based on its analysis and interface capabilities, such as {{site.data.keyword.la_full_notm}} or a third-party service. You can then use {{site.data.keyword.at_full_notm}} to audit user activity in the cluster and back up cluster master logs to {{site.data.keyword.cos_full_notm}}.
 
-<dl>
-<dt>{{site.data.keyword.la_full}}</dt>
-<dd>Manage pod container logs by deploying an instance of {{site.data.keyword.la_full_notm}} and configuring this instance for your cluster in {{site.data.keyword.containershort_notm}}. A logging agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to your {{site.data.keyword.la_full_notm}} service instance. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/log-analysis?topic=log-analysis-getting-started) documentation. To enable {{site.data.keyword.la_full_notm}} in your cluster, see [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](#logging).</dd>
+{{site.data.keyword.la_full}}
+: Manage pod container logs by deploying an instance of {{site.data.keyword.la_full_notm}} and configuring this instance for your cluster in {{site.data.keyword.containershort_notm}}. A logging agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to your {{site.data.keyword.la_full_notm}} service instance. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/log-analysis?topic=log-analysis-getting-started) documentation. To enable {{site.data.keyword.la_full_notm}} in your cluster, see [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](#logging).
 
-<dt>{{site.data.keyword.at_full}}</dt>
-<dd>To monitor user-initiated administrative activity made in your cluster, {{site.data.keyword.containershort_notm}} automatically generates cluster management events and forwards these event logs to {{site.data.keyword.at_full_notm}}. To access these logs, [provision an instance of {{site.data.keyword.at_full_notm}}](/docs/activity-tracker?topic=activity-tracker-getting-started). For more information about the types of {{site.data.keyword.containerlong_notm}} events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).</dd>
+{{site.data.keyword.at_full}}
+: To monitor user-initiated administrative activity made in your cluster, {{site.data.keyword.containershort_notm}} automatically generates cluster management events and forwards these event logs to {{site.data.keyword.at_full_notm}}. To access these logs, [provision an instance of {{site.data.keyword.at_full_notm}}](/docs/activity-tracker?topic=activity-tracker-getting-started). For more information about the types of {{site.data.keyword.containerlong_notm}} events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).
 
-<dt>Fluentd with an external server</dt>
-<dd>To collect, forward, and view logs for a cluster component, you can create a logging configuration by using Fluentd. When you create a logging configuration, the [Fluentd ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.fluentd.org/) cluster component collects logs from the paths for a specified source. Fluentd can then forward these logs to an external server that accepts a syslog protocol. To get started, see [Understanding cluster and app log forwarding to syslog](#logging).
-</dd>
+Fluentd with an external server
+: To collect, forward, and view logs for a cluster component, you can create a logging configuration by using Fluentd. When you create a logging configuration, the [Fluentd](https://www.fluentd.org/){: external} cluster component collects logs from the paths for a specified source. Fluentd can then forward these logs to an external server that accepts a syslog protocol. To get started, see [Understanding cluster and app log forwarding to syslog](#logging).
 
-<dt>{{site.data.keyword.cos_full_notm}}</dt>
-<dd>To collect, forward, and view logs for your cluster's Kubernetes master, you can take a snapshot of your master logs at any point in time to collect in an {{site.data.keyword.cos_full_notm}} bucket. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies. To get started, see [Collecting master logs](#collect_master).</dd>
-
-</dl>
-
-<br />
+{{site.data.keyword.cos_full_notm}}
+: To collect, forward, and view logs for your cluster's Kubernetes master, you can take a snapshot of your master logs at any point in time to collect in an {{site.data.keyword.cos_full_notm}} bucket. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies. To get started, see [Collecting master logs](#collect_master).
 
 
 ## Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}
@@ -61,14 +55,14 @@ Considerations for using the {{site.data.keyword.containerlong_notm}} observabil
 * You can have only one logging configuration for {{site.data.keyword.la_full_notm}} in your cluster at a time. If you want to use a different {{site.data.keyword.la_full_notm}} service instance to send logs to, use the [`ibmcloud ob logging config replace`](/docs/containers?topic=containers-observability_cli#logging_config_replace) command.
 * If you created a {{site.data.keyword.la_short}} configuration in your cluster without using the {{site.data.keyword.containerlong_notm}} observability plug-in, you can use the [`ibmcloud ob logging agent discover`](/docs/containers?topic=containers-observability_cli#logging_agent_discover) command to make the configuration visible to the plug-in. Then, you can use the observability plug-in commands and functionality in the {{site.data.keyword.cloud_notm}} console to manage the configuration.
 
-Before you begin:
+Before you begin
 - Verify that you are assigned the **Editor** platform access role and **Manager** server access role for {{site.data.keyword.la_full_notm}}.
 - Verify that you are assigned the **Administrator** platform access role and the **Manager** service access role for all Kubernetes namespaces in {{site.data.keyword.containerlong_notm}} to create the logging configuration. To view a logging configuration or launch the {{site.data.keyword.la_short}} dashboard after the logging configuration is created, users must be assigned the **Viewer** platform access role and **Reader** service access role for the `ibm-observe` Kubernetes namespace in {{site.data.keyword.containerlong_notm}}.
 - If you want to use the CLI to set up the logging configuration:
     - [Install the {{site.data.keyword.containerlong_notm}} observability CLI plug-in (`ibmcloud ob`)](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
     - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-To set up a logging configuration for your cluster:
+To set up a logging configuration for your cluster,
 
 1. Create an [{{site.data.keyword.la_full_notm}} service instance](/docs/log-analysis?topic=log-analysis-provision) and note the name of the instance. The service instance must belong to the same {{site.data.keyword.cloud_notm}} account where you created your cluster, but can be in a different resource group and {{site.data.keyword.cloud_notm}} region than your cluster.
 2. Set up a logging configuration for your cluster. When you create the logging configuration, a Kubernetes namespace `ibm-observe` is created and a {{site.data.keyword.la_short}} agent is deployed as a daemon set to all worker nodes in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
@@ -97,20 +91,20 @@ To set up a logging configuration for your cluster:
             {: screen}
 
         2. Verify that the logging configuration was added to your cluster.
-        ```
-        ibmcloud ob logging config list --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
+            ```
+            ibmcloud ob logging config list --cluster <cluster_name_or_ID>
+            ```
+            {: pre}
 
-        Example output:
-        ```
-        Listing configurations...
+            Example output:
+            ```
+            Listing configurations...
 
-        OK
-        Instance Name                Instance ID                            CRN   
-        IBM Cloud Log Analysis-opm   1a111a1a-1111-11a1-a1aa-aaa11111a11a   crn:v1:prod:public:logdna:us-south:a/a11111a1aaaaa11a111aa11a1aa1111a:1a111a1a-1111-11a1-a1aa-aaa11111a11a::  
-        ```
-        {: screen}
+            OK
+            Instance Name                Instance ID                            CRN   
+            IBM Cloud Log Analysis-opm   1a111a1a-1111-11a1-a1aa-aaa11111a11a   crn:v1:prod:public:logdna:us-south:a/a11111a1aaaaa11a111aa11a1aa1111a:1a111a1a-1111-11a1-a1aa-aaa11111a11a::  
+            ```
+            {: screen}
 
 3. Optional: Verify that the {{site.data.keyword.la_short}} agent was set up successfully.
     1. If you used the console to create the {{site.data.keyword.la_short}} configuration, log in to your cluster. For more information, see [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
@@ -143,7 +137,6 @@ To set up a logging configuration for your cluster:
 
 5. Review how you can [search and filter logs in the {{site.data.keyword.la_short}} dashboard](/docs/log-analysis?topic=log-analysis-view_logs).
 
-<br />
 
 ## Forwarding cluster and app logs to an external server
 {: #configuring}
@@ -164,35 +157,43 @@ As of 14 November 2019, a Fluentd component is created for your cluster only if 
 
 In the following image, you can see the location of the sources that you can configure logging for.
 
-<img src="images/log_sources.png" width="600" alt="Log sources in your cluster" style="width:600px; border-style: none"/>
+![Log sources in your cluster.](images/log_sources.png "Log sources in your cluster"){: caption="Figure 1. Log sources in your cluster" caption-side="bottom"}
 
-1. `worker`: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In `auth.log` you can find information on the authentication requests that are made to the OS.</br>**Paths**:
-    * `/var/log/syslog`
-    * `/var/log/auth.log`
+1. `worker`: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In `auth.log` you can find information on the authentication requests that are made to the OS.
+    
+    **Paths**
+    - `/var/log/syslog`
+    - `/var/log/auth.log`
 
 2. `container`: Information that is logged by a running container.</br>**Paths**: Anything that is written to `STDOUT` or `STDERR`.
 
 3. `application`: Information about events that occur at the application level. This could be a notification that an event took place such as a successful login, a warning about storage, or other operations that can be performed at the app level.</br>**Paths**: You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is `/usr/local/spark/work/app-0546/0/stderr` but the logs actually go to `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`, then the logs cannot be read.
 
-4. `storage`: Information about persistent storage that is set up in your cluster. Storage logs can help you set up problem determination dashboards and alerts as part of your DevOps pipeline and production releases. **Note**: The paths `/var/log/kubelet.log` and `/var/log/syslog` also contain storage logs, but logs from these paths are collected by the `kubernetes` and `worker` log sources.</br>**Paths**:
+4. `storage`: Information about persistent storage that is set up in your cluster. Storage logs can help you set up problem determination dashboards and alerts as part of your DevOps pipeline and production releases. **Note**: The paths `/var/log/kubelet.log` and `/var/log/syslog` also contain storage logs, but logs from these paths are collected by the `kubernetes` and `worker` log sources.
+    
+    **Paths**
     * `/var/log/ibmc-s3fs.log`
     * `/var/log/ibmc-block.log`
 
-    **Pods**:
-        * `portworx-***`
-        * `ibmcloud-block-storage-attacher-***`
-        * `ibmcloud-block-storage-driver-***`
-        * `ibmcloud-block-storage-plugin-***`
-        * `ibmcloud-object-storage-plugin-***`
+    **Pods**
+    * `portworx-***`
+    * `ibmcloud-block-storage-attacher-***`
+    * `ibmcloud-block-storage-driver-***`
+    * `ibmcloud-block-storage-plugin-***`
+    * `ibmcloud-object-storage-plugin-***`
 
-5. `kubernetes`: Information from the kubelet, the kube-proxy, and other Kubernetes events that happen in the kube-system namespace of the worker node.</br>**Paths**:
+5. `kubernetes`: Information from the kubelet, the kube-proxy, and other Kubernetes events that happen in the kube-system namespace of the worker node.
+
+    **Paths**
     * `/var/log/kubelet.log`
     * `/var/log/kube-proxy.log`
     * `/var/log/event-exporter/1..log`
 
 6. `kube-audit`: Information about cluster-related actions that is sent to the Kubernetes API server, including the time, the user, and the affected resource.
 
-7. `ingress`: Information about the network traffic that comes into a cluster through the Ingress ALB.</br>**Paths**:
+7. `ingress`: Information about the network traffic that comes into a cluster through the Ingress ALB.
+
+    **Paths**
     * `/var/log/alb/ids/*.log`
     * `/var/log/alb/ids/*.err`
     * `/var/log/alb/customerlogs/*.log`
@@ -207,7 +208,6 @@ In order to change your logging or filter configurations, the Fluentd logging co
 
 Yes. For example, if you have a particularly chatty pod, you might want to prevent logs from that pod from taking up log storage space, while still allowing other pods' logs to be forwarded. To prevent logs from a specific pod from being forwarded, see [Filtering logs](#filter-logs).
 
-<br />
 
 ### Forwarding cluster and app logs
 {: #enable-forwarding}
@@ -217,66 +217,22 @@ Create a configuration for cluster and app logging. You can differentiate betwee
 
 The following table shows the different options that you have when you configure logging and their descriptions.
 
-<table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-<caption> Understanding logging configuration options</caption>
-<col width="20%">
-<thead>
-<th>Parameter</th>
-<th>Description</th>
-    </thead>
-    <tbody>
-        <tr>
-        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-        <td>The name or ID of the cluster.</td>
-    </tr>
-    <tr>
-        <td><code><em>--logsource</em></code></td>
-        <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>storage</code>. This argument supports a comma-separated list of log sources to apply to the configuration. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</td>
-    </tr>
-    <tr>
-        <td><code><em>--type syslog</em></code></td>
-        <td>The value <code>syslog</code> forwards your logs to an external server.</p>
-        </dd></td>
-    </tr>
-    <tr>
-        <td><code><em>--namespace</em></code></td>
-        <td>Optional: The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</td>
-    </tr>
-    <tr>
-        <td><code><em>--hostname</em></code></td>
-        <td>Specify the hostname or IP address of the log collector service.</td>
-    </tr>
-    <tr>
-        <td><code><em>--port</em></code></td>
-        <td>The ingestion port. If you do not specify a port, then the standard port <code>9091</code> is used.
-        <p>For syslog, specify the port of the log collector server. If you do not specify a port, then the standard port <code>514</code> is used.</td>
-    </tr>
-    <tr>
-        <td><code><em>--app-containers</em></code></td>
-        <td>Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided.</td>
-    </tr>
-    <tr>
-        <td><code><em>--app-paths</em></code></td>
-        <td>The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. Example: <code>/var/log/myApp1/*,/var/log/myApp2/*</code></td>
-    </tr>
-    <tr>
-        <td><code><em>--syslog-protocol</em></code></td>
-        <td>When the logging type is <code>syslog</code>, the transport layer protocol. You can use the following protocols: <code>udp</code>, <code>tls</code>, or <code>tcp</code>. When forwarding to a rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
-    </tr>
-    <tr>
-        <td><code><em>--ca-cert</em></code></td>
-        <td>Required: When the logging type is <code>syslog</code> and the protocol is <code>tls</code>, the Kubernetes secret name that contains the certificate authority certificate.</td>
-    </tr>
-    <tr>
-        <td><code><em>--verify-mode</em></code></td>
-        <td>When the logging type is <code>syslog</code> and the protocol is <code>tls</code>, the verification mode. Supported values are <code>verify-peer</code> and the default <code>verify-none</code>.</td>
-    </tr>
-    <tr>
-        <td><code><em>--skip-validation</em></code></td>
-        <td>Optional: Skip the validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration will not correctly forward logs.</td>
-    </tr>
-    </tbody>
-</table>
+| Parameter | Description |
+| --- | ---------- |
+| `<cluster_name_or_ID>` | The name or ID of the cluster. |
+| `--logsource` | The source that you want to forward logs from. Accepted values are `container`, `application`, `worker`, `kubernetes`, `ingress`, and `storage`. This argument supports a comma-separated list of log sources to apply to the configuration. If you do not provide a log source, logging configurations are created for `container` and `ingress` log sources. |
+| `--type syslog` | The value `syslog` forwards your logs to an external server. |
+| `--namespace` | Optional: The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the `ibm-system` and `kube-system` Kubernetes namespaces. This value is valid only for the `container` log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration. |
+| `--hostname` | Specify the hostname or IP address of the log collector service. |
+| `--port` | The ingestion port. If you do not specify a port, then the standard port `9091` is used. For syslog, specify the port of the log collector server. If you do not specify a port, then the standard port `514` is used. | 
+| `--app-containers` | Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. |
+| `--app-paths` | The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list; for example, `/var/log/myApp1/*,/var/log/myApp2/*` |
+| `--syslog-protocol` | When the logging type is `syslog<`, the transport layer protocol. You can use the following protocols: `udp`, `tls`, or `tcp`. When forwarding to a rsyslog server with the `udp` protocol, logs that are over 1KB are truncated. |
+| `--ca-cert` | Required: When the logging type is `syslog` and the protocol is `tls`, the Kubernetes secret name that contains the certificate authority certificate. |
+| `--verify-mode` | When the logging type is `syslog` and the protocol is `tls`, the verification mode. Supported values are `verify-peer` and the default `verify-none`. |
+| `--skip-validation` | Optional: Skip the validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration will not correctly forward logs. |
+{: caption="Table 1. Understanding logging configuration options" caption-side="top"}
+
 
 ### Forwarding logs to your own server over the `udp` or `tcp` protocols
 {: #enable-forwarding-udp-tcp}
@@ -299,7 +255,7 @@ The following table shows the different options that you have when you configure
     ```
     {: pre}
 
-</br></br>
+
 
 ### Forwarding logs to your own server over the `tls` protocol
 {: #enable-forwarding-tls}
@@ -338,57 +294,19 @@ The following steps are general instructions. Prior to using the container in a 
 You can choose which logs to forward to your external server by filtering out specific logs for a period of time. You can differentiate between the different filtering options by using flags.
 {: shortdesc}
 
-<table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-<caption>Understanding the options for log filtering</caption>
-<col width="25%">
-<col width="75%">
-<thead>
-<th>Parameter</th>
-<th>Description</th>
-    </thead>
-    <tbody>
-        <tr>
-        <td><code>&lt;cluster_name_or_ID&gt;</code></td>
-        <td>Required: The name or ID of the cluster that you want to filter logs for.</td>
-    </tr>
-    <tr>
-        <td><code>&lt;log_type&gt;</code></td>
-        <td>The type of logs that you want to apply the filter to. Currently <code>all</code>, <code>container</code>, and <code>host</code> are supported.</td>
-    </tr>
-    <tr>
-        <td><code>&lt;configs&gt;</code></td>
-        <td>Optional: A comma-separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> option.</td>
-    </tr>
-    <tr>
-        <td><code>&lt;kubernetes_namespace&gt;</code></td>
-        <td>Optional: The Kubernetes namespace that you want to forward logs from. This flag applies only when you are using log type <code>container</code>.</td>
-    </tr>
-    <tr>
-        <td><code>&lt;container_name&gt;</code></td>
-        <td>Optional: The name of the container from which you want to filter logs.</td>
-    </tr>
-    <tr>
-        <td><code>&lt;logging_level&gt;</code></td>
-        <td>Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. <strong>Note</strong>: You can use this flag only when log messages are in JSON format and contain a level field. To display your messages in JSON, append the <code>--output json</code> flag to the command.</td>
-    </tr>
-    <tr>
-        <td><code>&lt;message&gt;</code></td>
-        <td>Optional: Filters out logs that contain a specified message that is written as a regular expression.</td>
-    </tr>
-    <tr>
-        <td><code>&lt;filter_ID&gt;</code></td>
-        <td>Optional: The ID of the log filter.</td>
-    </tr>
-    <tr>
-        <td><code>--show-matching-configs</code></td>
-        <td>Optional: Show the logging configurations that each filter applies to.</td>
-    </tr>
-    <tr>
-        <td><code>--all</code></td>
-        <td>Optional: Delete all of your log forwarding filters.</td>
-    </tr>
-    </tbody>
-</table>
+| Parameter | Description |
+| --- | ------- |
+| `<cluster_name_or_ID>` | Required: The name or ID of the cluster that you want to filter logs for. |
+| `<log_type>` | The type of logs that you want to apply the filter to. Currently `all`, `container`, and `host` are supported. |
+| `<configs>` | Optional: A comma-separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` option. | 
+| `<kubernetes_namespace>` | Optional: The Kubernetes namespace that you want to forward logs from. This flag applies only when you are using log type `container`. |
+| `<container_name>` | Optional: The name of the container from which you want to filter logs. |
+| `<logging_level>` | Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. To display your messages in JSON, append the `--output json` flag to the command. |
+| `<message>` | Optional: Filters out logs that contain a specified message that is written as a regular expression. |
+| `<filter_ID>` | Optional: The ID of the log filter. |
+| `--show-matching-configs` | Optional: Show the logging configurations that each filter applies to. |
+| `--all` | Optional: Delete all of your log forwarding filters. |
+{: caption="Table 2. Understanding the options for log filtering" caption-side="top"}
 
 1. Create a logging filter.
     ```
@@ -419,23 +337,25 @@ You can choose which logs to forward to your external server by filtering out sp
 ### Verifying, updating, and deleting log forwarding
 {: #verifying-log-forwarding}
 
-**Verifying**
+#### Verifying log forwarding
+{: #verify-log-forwarding}
 
 You can verify that your configuration is set up correctly in 1 of 2 ways:
 
-* To list all of the logging configurations in a cluster:
+- To list all of the logging configurations in a cluster:
     ```
     ibmcloud ks logging config get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-* To list the logging configurations for one type of log source:
+- To list the logging configurations for one type of log source:
     ```
     ibmcloud ks logging config get --cluster <cluster_name_or_ID> --logsource <source>
     ```
     {: pre}
 
-**Updating**
+#### Updating log forwarding
+{: #updating-log-forwarding}
 
 You can update a logging configuration that you already created:
 ```
@@ -443,23 +363,23 @@ ibmcloud ks logging config update --cluster <cluster_name_or_ID> --id <log_confi
 ```
 {: pre}
 
-**Deleting**
+#### Deleting log forwarding
+{: #deleting-log-forwarding}
 
 You can stop forwarding logs by deleting one or all of the logging configurations for a cluster:
 
-* To delete one logging configuration:
+- To delete one logging configuration:
     ```
     ibmcloud ks logging config rm --cluster <cluster_name_or_ID> --id <log_config_ID>
     ```
     {: pre}
 
-* To delete all of the logging configurations:
+- To delete all of the logging configurations:
     ```
     ibmcloud ks logging config rm --cluster <my_cluster> --all
     ```
     {: pre}
 
-<br />
 
 ## Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket
 {: #collect_master}
@@ -471,10 +391,11 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 
 **Before you begin**
 
-* [Provision an instance](/docs/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.cloud_notm}} catalog.
-* Ensure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the cluster.
+- [Provision an instance](/docs/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.cloud_notm}} catalog.
+- Ensure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the cluster.
 
-**Creating a snapshot**
+### Creating a snapshot
+{: #creating-snapshot}
 
 1. Create an Object Storage bucket through the {{site.data.keyword.cloud_notm}} console by following [this getting started tutorial](/docs/cloud-object-storage?topic=cloud-object-storage-getting-started-cloud-object-storage#gs-create-buckets).
 
@@ -490,38 +411,16 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
     ```
     {: pre}
 
-    <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-    <caption>Understanding this command's components</caption>
-    <col width="30%">
-    <thead>
-    <th>Parameter</th>
-    <th>Description</th>
-        </thead>
-    <tbody>
-        <tr>
-        <td><code>-c, --cluster <em>&lt;cluster_name_or_ID&gt;</em></code></td>
-        <td>The name or ID of the cluster.</td>
-        </tr>
-        <tr>
-        <td><code>--cos-bucket <em>&lt;COS_bucket_name&gt;</em></code></td>
-        <td>The name of the {{site.data.keyword.cos_short}} bucket that you want to store your logs in.</td>
-        </tr>
-        <tr>
-        <td><code>--cos-endpoint <em>&lt;location_of_COS_bucket&gt;</em></code></td>
-        <td>The regional, cross regional, or single data center {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. For available endpoints, see <a href="/docs/cloud-object-storage/basics?topic=cloud-object-storage-endpoints">Endpoints and storage locations</a> in the {{site.data.keyword.cos_short}} documentation.</td>
-        </tr>
-        <tr>
-        <td><code>--hmac-key-id <em>&lt;HMAC_access_key_ID&gt;</em></code></td>
-        <td>The unique ID for your HMAC credentials for your {{site.data.keyword.cos_short}} instance.</td>
-        </tr>
-        <tr>
-        <td><code>--hmac-key <em>&lt;HMAC_access_key&gt;</em></code></td>
-        <td>The HMAC key for your {{site.data.keyword.cos_short}} instance.</td>
-        </tr>
-    </tbody>
-    </table>
+    | Parameter | Description |
+    | ---- | -------- |
+    | `-c, --cluster <cluster_name_or_ID>` | The name or ID of the cluster. |
+    | `--cos-bucket <COS_bucket_name>` | The name of the {{site.data.keyword.cos_short}} bucket that you want to store your logs in. |
+    | `--cos-endpoint <location_of_COS_bucket>` | The regional, cross regional, or single data center {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. For available endpoints, see [Endpoints and storage locations](/docs/cloud-object-storage/basics?topic=cloud-object-storage-endpoints) in the {{site.data.keyword.cos_short}} documentation. |
+    | `--hmac-key-id <HMAC_access_key_ID>` | The unique ID for your HMAC credentials for your {{site.data.keyword.cos_short}} instance. |
+    | `--hmac-key <HMAC_access_key>` | The HMAC key for your {{site.data.keyword.cos_short}} instance. |
+    {: caption="Table 2. Understanding the options for log filtering" caption-side="top"}
 
-    Example command and response:
+    Example command and response
 
     ```
     ibmcloud ks logging collect --cluster mycluster --cos-bucket mybucket --cos-endpoint s3-api.us-geo.objectstorage.softlayer.net --hmac-key-id e2e7f5c9fo0144563c418dlhi3545m86 --hmac-key c485b9b9fo4376722f692b63743e65e1705301ab051em96j
@@ -539,7 +438,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
     ```
     {: pre}
 
-    Example output:
+    Example output
 
     ```
     ibmcloud ks logging collect-status --cluster mycluster

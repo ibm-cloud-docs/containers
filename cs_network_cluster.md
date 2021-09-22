@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-22"
 
 keywords: kubernetes, iks, vlan
 
@@ -52,21 +52,23 @@ Did you create a cluster with only a private cloud service endpoint before you e
 5. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the configmap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
 6. Update all the worker nodes in your cluster to pick up the private cloud service endpoint configuration.
 
-    <p class="important">By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must [reload the worker nodes manually](/docs/containers?topic=containers-kubernetes-service-cli). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.</p>
+    By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must [reload the worker nodes manually](/docs/containers?topic=containers-kubernetes-service-cli). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.
+    {: important}
+    
     ```
     ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
     ```
     {: pre}
 
 7. If the cluster is in an environment behind a firewall:
-    * [Allow your authorized cluster users to run `kubectl` commands to access the master through the private cloud service endpoint.](/docs/containers?topic=containers-firewall#firewall_kubectl)
-    * [Allow outbound network traffic to the private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for infrastructure resources and for the {{site.data.keyword.cloud_notm}} services that you plan to use.
+    - [Allow your authorized cluster users to run `kubectl` commands to access the master through the private cloud service endpoint.](/docs/containers?topic=containers-firewall#firewall_kubectl)
+    - [Allow outbound network traffic to the private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for infrastructure resources and for the {{site.data.keyword.cloud_notm}} services that you plan to use.
 
 9. Optional: To use the private cloud service endpoint only:
     1. [Disable the public cloud service endpoint](#disable-public-se).
     2. [Set up access to the master on the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se).
 
-<br />
+
 
 ## Setting up the public cloud service endpoint
 {: #set-up-public-se}
@@ -78,7 +80,8 @@ Enable or disable the public cloud service endpoint for your cluster.
 
 The public cloud service endpoint makes your Kubernetes master publicly accessible. Your worker nodes and your authorized cluster users can securely communicate with the Kubernetes master over the public network. For more information, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#internet-facing).
 
-**Steps to enable**
+### Steps to enable the public cloud service endpoint
+{: #steps-set-up-public}
 
 If you previously disabled the public endpoint, you can re-enable it.
 1. Enable the public cloud service endpoint.
@@ -100,13 +103,15 @@ If you previously disabled the public endpoint, you can re-enable it.
     ```
     {: pre}
 
-    </br>
 
 
 
-**Steps to disable** {: #disable-public-se}
+
+### Steps to disable the public cloud service endpoint
+{: #disable-public-se}
 
 To disable the public cloud service endpoint, you must first enable the private cloud service endpoint so that your worker nodes can communicate with the Kubernetes master.
+
 1. [Enable the private cloud service endpoint](#set-up-private-se).
 2. Disable the public cloud service endpoint.
     ```
@@ -121,6 +126,7 @@ To disable the public cloud service endpoint, you must first enable the private 
     {: pre}
 
 4. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the configmap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
+
 5. Update all the worker nodes in your cluster to remove the public cloud service endpoint configuration.<p class="important">By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually with the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.</p>
     ```
     ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
@@ -134,8 +140,9 @@ Enable worker nodes to communicate with the master over the private network inst
 {: shortdesc}
 
 All clusters that are connected to a public and a private VLAN use the public cloud service endpoint by default. Your worker nodes and your authorized cluster users can securely communicate with the Kubernetes master over the public network. To enable worker nodes to communicate with the Kubernetes master over the private network instead of the public network, you can enable the private cloud service endpoint. Then, you can optionally disable the public cloud service endpoint.
-* If you enable the private cloud service endpoint and keep the public cloud service endpoint enabled too, workers always communicate with the master over the private network, but your users can communicate with the master over either the public or private network.
-* If you enable the private cloud service endpoint but disable the public cloud service endpoint, workers and users must communicate with the master over the private network.
+
+- If you enable the private cloud service endpoint and keep the public cloud service endpoint enabled too, workers always communicate with the master over the private network, but your users can communicate with the master over either the public or private network.
+- If you enable the private cloud service endpoint but disable the public cloud service endpoint, workers and users must communicate with the master over the private network.
 
 Note that you cannot disable the private cloud service endpoint after you enable it.
 
@@ -157,13 +164,15 @@ Note that you cannot disable the private cloud service endpoint after you enable
 
 6. Update all the worker nodes in your cluster to pick up the private cloud service endpoint configuration.
 
-    <p class="important">By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must [reload the worker nodes manually](/docs/containers?topic=containers-kubernetes-service-cli). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.</p>
+    By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must [reload the worker nodes manually](/docs/containers?topic=containers-kubernetes-service-cli). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.
+    {: important}
+    
     ```
     ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
     ```
     {: pre}
 
-7. Optional: To use the private cloud service endpoint only:
+7. Optional: To use the private cloud service endpoint only,
     1. Disable the public cloud service endpoint.
         ```
         ibmcloud ks cluster master public-service-endpoint disable --cluster <cluster_name_or_ID>
@@ -172,7 +181,7 @@ Note that you cannot disable the private cloud service endpoint after you enable
 
     2. [Set up access to the master on the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se).
 
-<br />
+
 
 ## Changing your worker node VLAN connections
 {: #change-vlans}
@@ -181,9 +190,9 @@ Note that you cannot disable the private cloud service endpoint after you enable
 When you create a cluster, you choose whether to connect your worker nodes to a private and a public VLAN or to a private VLAN only. Your worker nodes are part of worker pools, which store networking metadata that includes the VLANs to use to provision future worker nodes in the pool. You might want to change your cluster's VLAN connectivity setup later, in cases such as the following.
 {: shortdesc}
 
-* The worker pool VLANs in a zone run out of capacity, and you need to provision a new VLAN for your cluster worker nodes to use.
-* You have a cluster with worker nodes that are on both public and private VLANs, but you want to change to a [private-only cluster](/docs/containers?topic=containers-plan_clusters#private_clusters).
-* You have a private-only cluster, but you want some worker nodes such as a worker pool of [edge nodes](/docs/containers?topic=containers-edge#edge) on the public VLAN to expose your apps on the internet.
+- The worker pool VLANs in a zone run out of capacity, and you need to provision a new VLAN for your cluster worker nodes to use.
+- You have a cluster with worker nodes that are on both public and private VLANs, but you want to change to a [private-only cluster](/docs/containers?topic=containers-plan_clusters#private_clusters).
+- You have a private-only cluster, but you want some worker nodes such as a worker pool of [edge nodes](/docs/containers?topic=containers-edge#edge) on the public VLAN to expose your apps on the internet.
 
 Trying to change the service endpoint for master-worker communication instead? Check out the topics to set up [public](#set-up-public-se) and [private](#set-up-private-se) service endpoints.
 {: tip}
@@ -191,11 +200,11 @@ Trying to change the service endpoint for master-worker communication instead? C
 
 
 
-Before you begin: 
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* If your worker nodes are stand-alone (not part of a worker pool), [update them to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
+Before you begin 
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- If your worker nodes are stand-alone (not part of a worker pool), [update them to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
-To change the VLANs that a worker pool uses to provision worker nodes:
+To change the VLANs that a worker pool uses to provision worker nodes.
 
 1. List the names of the worker pools in your cluster.
     ```
@@ -235,17 +244,17 @@ To change the VLANs that a worker pool uses to provision worker nodes:
 
 4. Set up a worker pool with the new VLAN network metadata for each zone. You can create a new worker pool, or modify an existing worker pool.
 
-    * **Create a new worker pool**: See [adding worker nodes by creating a new worker pool](/docs/containers?topic=containers-add_workers#add_pool).
+    - **Create a new worker pool**: See [adding worker nodes by creating a new worker pool](/docs/containers?topic=containers-add_workers#add_pool).
 
-    * **Modify an existing worker pool**: Set the worker pool's network metadata to use the VLAN for each zone. Worker nodes that were already created in the pool continue to use the previous VLANs, but new worker nodes in the pool use new VLAN metadata that you set.
+    - **Modify an existing worker pool**: Set the worker pool's network metadata to use the VLAN for each zone. Worker nodes that were already created in the pool continue to use the previous VLANs, but new worker nodes in the pool use new VLAN metadata that you set.
 
-    * Example to add both public and private VLANs, such as if you change from private-only to both private and public:
+    - Example to add both public and private VLANs, such as if you change from private-only to both private and public:
         ```
         ibmcloud ks zone network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_vlan_id> --public-vlan <public_vlan_id>
         ```
         {: pre}
 
-    * Example to add only a private VLAN, such as if you change from public and private VLANs to private-only when you have a [VRF-enabled account that uses service endpoints](/docs/account?topic=account-vrf-service-endpoint):
+    - Example to add only a private VLAN, such as if you change from public and private VLANs to private-only when you have a [VRF-enabled account that uses service endpoints](/docs/account?topic=account-vrf-service-endpoint):
 
         ```
         ibmcloud ks zone network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_vlan_id> --private-only

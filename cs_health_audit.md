@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-21"
+lastupdated: "2021-09-22"
 
 keywords: kubernetes, iks, logmet, logs, metrics, audit, events
 
@@ -119,7 +119,7 @@ The Kubernetes audit system in your cluster consists of an audit webhook, a log 
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     NAME                                             READY   STATUS             RESTARTS   AGE
     ibmcloud-kube-audit-c75cb84c5-qtzqd              1/1     Running   0          21s
@@ -132,7 +132,7 @@ The Kubernetes audit system in your cluster consists of an audit webhook, a log 
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     NAME                          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
     ibmcloud-kube-audit-service   ClusterIP   172.21.xxx.xxx   <none>        80/TCP           1m
@@ -151,7 +151,7 @@ The Kubernetes audit system in your cluster consists of an audit webhook, a log 
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     OK
     Server:            http://172.21.xxx.xxx
@@ -177,7 +177,7 @@ After you set up the audit webhook in your cluster, you can monitor version upda
 Forward audit logs to a resource other than {{site.data.keyword.la_short}} that is outside of your cluster and accessible in the {{site.data.keyword.cloud_notm}} private network.
 {: shortdesc}
 
-**Before you begin**: Ensure that you reviewed the [considerations and prerequisites](#prereqs-apiserver-logs).
+Before you begin, ensure that you reviewed the [considerations and prerequisites](#prereqs-apiserver-logs).
 
 1. Create a configuration file that is named `kube-audit-remote-private-ip.yaml`. This configuration file creates an endpoint and service for the IP address of the resource that your cluster sends logs to through the {{site.data.keyword.cloud_notm}} private network. Do not include a selector in the service.
     ```yaml
@@ -215,7 +215,7 @@ Forward audit logs to a resource other than {{site.data.keyword.la_short}} that 
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     NAME                          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
     ...
@@ -235,7 +235,7 @@ Forward audit logs to a resource other than {{site.data.keyword.la_short}} that 
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     OK
     Server:            http://172.21.xxx.xxx
@@ -260,7 +260,7 @@ To audit any events that are passed through your Kubernetes API server, you can 
 
 For example, you might [use Logstash with Kubernetes](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend){: external} to collect audit events. To see how Fluentd is used, see [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging).
 
-**Before you begin**: Ensure that you reviewed the [considerations and prerequisites](#prereqs-apiserver-logs). Note that [log filters](/docs/containers?topic=containers-health#filter-logs) are not supported.
+Before you begin, ensure that you reviewed the [considerations and prerequisites](#prereqs-apiserver-logs). Note that [log filters](/docs/containers?topic=containers-health#filter-logs) are not supported.
 
 1. Set up the webhook. If you do not provide any information in the flags, a default configuration is used.
 
@@ -268,37 +268,15 @@ For example, you might [use Logstash with Kubernetes](https://kubernetes.io/docs
     ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server <server_URL_or_IP> --ca-cert <CA_cert_path> --client-cert <client_cert_path> --client-key <client_key_path>
     ```
     {: pre}
-
-    <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-    <caption>Understanding this command's components</caption>
-    <col width="20%">
-    <thead>
-    <th>Parameter</th>
-    <th>Description</th>
-        </thead>
-    <tbody>
-        <tr>
-        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-        <td>The name or ID of the cluster.</td>
-        </tr>
-        <tr>
-        <td><code><em>&lt;server_URL&gt;</em></code></td>
-        <td>A publicly accessible URL or IP address for the remote logging service that you want to send logs to. Certificates are ignored if you provide an unsecure server URL.</td>
-        </tr>
-        <tr>
-        <td><code><em>&lt;CA_cert_path&gt;</em></code></td>
-        <td>The file path for the CA certificate that is used to verify the remote logging service.</td>
-        </tr>
-        <tr>
-        <td><code><em>&lt;client_cert_path&gt;</em></code></td>
-        <td>The file path for the client certificate that is used to authenticate against the remote logging service.</td>
-        </tr>
-        <tr>
-        <td><code><em>&lt;client_key_path&gt;</em></code></td>
-        <td>The file path for the corresponding client key that is used to connect to the remote logging service.</td>
-        </tr>
-    </tbody>
-    </table>
+    
+    | Option | Description |
+    | --- | ------ |
+    | `<cluster_name_or_ID>` | The name or ID of the cluster. |
+    | `<server_URL>` | A publicly accessible URL or IP address for the remote logging service that you want to send logs to. Certificates are ignored if you provide an unsecure server URL. |
+    | `<CA_cert_path>` | The file path for the CA certificate that is used to verify the remote logging service. |
+    | `<client_cert_path>` | The file path for the client certificate that is used to authenticate against the remote logging service. |
+    | `<client_key_path>` | The file path for the corresponding client key that is used to connect to the remote logging service. |
+    {: caption="Table 1. Understanding this command's components" caption-side="top"}
 
 2. Verify that log forwarding was enabled by viewing the URL for the remote logging service.
 
@@ -348,8 +326,6 @@ See [Verifying, updating, and deleting log forwarding](/docs/containers?topic=co
 See [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master).
 
 
-
-<br />
 
 
 
