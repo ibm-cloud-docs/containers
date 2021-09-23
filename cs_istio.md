@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-23"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -28,14 +28,15 @@ With one click, you can get all Istio core components up and running. Istio on {
 In Kubernetes clusters, you can install the generally available managed Istio add-on.
 {: shortdesc}
 
-**Before you begin**
+Before you begin
 
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for {{site.data.keyword.containerlong_notm}}.
 * [Create a standard Kubernetes cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_ui).
 * You cannot run community Istio concurrently with the managed Istio add-on in your cluster. If you use an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
 * Classic multizone clusters: Ensure that you enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
 
-**To use the {{site.data.keyword.cloud_notm}} console**
+### Installing the Istio add-on from the console
+{: #istio_install-console}
 
 1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the Istio add-on.
 
@@ -47,7 +48,8 @@ In Kubernetes clusters, you can install the generally available managed Istio ad
 
 5. On the Managed Istio card, verify that the add-on is listed.
 
-**To use the CLI**
+### Installing the Istio add-on with the CLI
+{: #istio_install-cli}
 
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
@@ -63,7 +65,7 @@ In Kubernetes clusters, you can install the generally available managed Istio ad
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     Name            Version     Health State   Health Status
     istio           1.10.3       normal         Addon Ready
@@ -185,7 +187,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
     :   By default, Istio [generates trace spans for 1 out of every 100 requests](https://istio.io/latest/docs/tasks/observability/distributed-tracing/overview/#trace-sampling){: external}, which is a sampling rate of 1%. To generate more trace spans, increase the percentage value.
     
 
-    For example, your configmap might look like the following:
+    For example, your configmap might look like the following example.
     ```
     apiVersion: v1
     data:
@@ -210,7 +212,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     data plane version: version.ProxyInfo{ID:"test-6f86fc4677-vsbsf.default", IstioVersion:"1.10.3"}
     data plane version: version.ProxyInfo{ID:"rerun-xfs-f8958bb94-j6n89.default", IstioVersion:"1.10.3"}
@@ -325,7 +327,7 @@ For example, the patch version of your add-on might be updated automatically by 
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     client version: 1.8.4
     cluster-local-gateway version:
@@ -473,7 +475,10 @@ If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras`
 After the add-on is completely uninstalled, you can remove the Istio operator.
 {: shortdesc}
 
-**Version 1.10 or later**: Delete the Istio operator deployment, service account, cluster role binding, and cluster role.
+#### Version 1.10 or later
+{: #istio_uninstall_operator-110}
+
+Delete the Istio operator deployment, service account, cluster role binding, and cluster role.
 ```
 kubectl delete deployment -n ibm-operators addon-istio-operator --ignore-not-found=true
 kubectl delete serviceaccount -n ibm-operators addon-istio-operator --ignore-not-found=true
@@ -482,7 +487,10 @@ kubectl delete clusterrole addon-istio-operator --ignore-not-found=true
 ```
 {: pre}
 
-**Version 1.9 or earlier**: Delete the Istio operator pod's CSV.
+#### Version 1.9 or earlier 
+{: #istio_uninstall_operator-19}
+
+Delete the Istio operator pod's CSV.
 ```
 kubectl delete clusterserviceversion -n ibm-operators -l addon.name=istio --ignore-not-found=true
 ```
@@ -494,7 +502,7 @@ kubectl delete clusterserviceversion -n ibm-operators -l addon.name=istio --igno
 If you previously installed Istio in the cluster by using the IBM Helm chart or through another method, clean up that Istio installation before you enable the managed Istio add-on in the cluster. To check whether Istio is already in a cluster, run `kubectl get namespaces` and look for the `istio-system` namespace in the output.
 {: shortdesc}
 
-- If you installed Istio by using the {{site.data.keyword.cloud_notm}} Istio Helm chart:
+- If you installed Istio by using the {{site.data.keyword.cloud_notm}} Istio Helm chart,
     1. Uninstall the Istio Helm deployment.
         ```
         helm del istio --purge

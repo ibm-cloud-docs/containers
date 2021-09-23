@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-22"
+lastupdated: "2021-09-23"
 
 keywords: kubernetes, iks, release notes
 
@@ -32,8 +32,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 Review the release notes for September 2021.
 {: shortdesc}
 
+### 23 September 2021
+{: #23sep2021}
+{: release-note}
 
+Review the release notes for 23 September 2021.
+{: shortdesc}
 
+Istio add-on change log
+:   [Version `1.11.2`](/docs/containers?topic=containers-istio-changelog#1112) of the Istio managed add-on is released.
 
 ### 22 September 2021
 {: #22sep2021}
@@ -134,3 +141,4 @@ Review the release notes for 30 August 2021.
 
 Worker node fix pack update
 :   Changelog documentation is available for Kubernetes version [`1.17.17_1568`](/docs/containers?topic=containers-changelog#11717_1568), [`1.18.20_1563`](/docs/containers?topic=containers-changelog#11820_1563), [`1.19.14_1558`](/docs/containers?topic=containers-changelog#11914_1558), [`1.20.10_1551`](/docs/containers?topic=containers-changelog#12010_1551), and [`1.21.4_1529`](/docs/containers?topic=containers-changelog#12104_1529).
+

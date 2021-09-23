@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-23"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -36,7 +36,6 @@ For example, using Istio in your microservice mesh can help you:
 
 An Istio service mesh is composed of a data plane and a control plane. The data plane consists of Envoy proxy sidecars in each app pod, which mediate communication between microservices. The control plane consists of Pilot, Mixer telemetry and policy, and Citadel, which apply Istio configurations in your cluster. For more information about each of these components, see the [`istio` add-on description](#istio_ov_components).
 
-<br />
 
 ## What is Istio on {{site.data.keyword.containerlong_notm}}?
 {: #istio_ov_addon}
@@ -57,7 +56,6 @@ Whenever the managed Istio add-on is updated, make sure that you [update your `i
 If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial](https://istio.io/latest/docs/setup/platform-setup/ibm/){: external}. However, note that you cannot run community Istio concurrently with the managed Istio add-on in your cluster.
 {: note}
 
-<br />
 
 ## What comes with the Istio add-on?
 {: #istio_ov_components}
@@ -71,7 +69,6 @@ The Istio add-on installs the core components of Istio. For more information abo
 * The `istio-ingressgateway` and `istio-egressgateway` control incoming traffic to and outgoing traffic from your Istio-managed apps.
 * The Istio operator (`addon-istio-operator` in Istio version 1.10 or later, or `managed-istio-operator` in Istio version 1.19 or earlier) in the `ibm-operators` namespace validates and reconciles any custom Istio operator (IOP) changes that you make.
 
-<br />
 
 ## Limitations
 {: #istio_limitations}

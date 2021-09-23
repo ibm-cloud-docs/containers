@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-23"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -36,8 +36,6 @@ Before you begin, review the following considerations for using custom gateways.
 * The managed Istio add-on does not manage or reconcile any custom gateways that you create. You are responsible for creating, managing, and maintaining these resources.
 * If you use a custom `IstioOperator` (IOP) resource and plan to enable version 1.8 of the add-on or update your add-on from an unsupported version to 1.8, you must first remove the `revision` field from the resource so that the custom gateways use version 1.8 of `istiod`. After you update your Istio add-on, update the `tag` for any custom gateways to 1.8.
 * If you need to debug your custom ingress or egress gateway setups, check the logs for the `addon-istio-operator` (Istio version 1.10 or later) or `managed-istio-operator` (Istio version 1.19 or earlier) pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`. The Istio operator validates and reconciles any custom Istio operator (IOP) changes that you make. Additionally, ensure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers.
-
-<br />
 
 ## Creating a custom ingress gateway for public traffic
 {: #custom-ingress-gateway-public}
@@ -89,7 +87,7 @@ Use an `IstioOperator` (IOP) to create a custom ingress gateway deployment and p
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     NAME                                    READY   UP-TO-DATE   AVAILABLE   AGE
     deployment.apps/custom-ingressgateway   1/1     1            1           4m53s
@@ -221,17 +219,17 @@ Create an IBM-provided subdomain to register the IP address (classic) or hostnam
 {: shortdesc}
 
 1. Register the IP address or hostname of the custom gateway load balancer by creating a DNS subdomain. Specify the `custom-gateway` namespace for the TLS secrets.
-    * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-    ```
-    ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> --secret-namespace custom-gateways
-    ```
-    {: pre}
+    * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters
+        ```
+        ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> --secret-namespace custom-gateways
+        ```
+        {: pre}
 
-    * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters:
-    ```
-    ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname> --secret-namespace custom-gateways
-    ```
-    {: pre}
+    * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters
+        ```
+        ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname> --secret-namespace custom-gateways
+        ```
+        {: pre}
 
 2. Verify that the subdomain is created.
     ```
@@ -239,14 +237,14 @@ Create an IBM-provided subdomain to register the IP address (classic) or hostnam
     ```
     {: pre}
 
-    Example output for classic clusters:
+    Example output for classic clusters
     ```
     Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
     mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
     ```
     {: screen}
 
-    Example output for VPC clusters:
+    Example output for VPC clusters
     ```
     Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
     mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
@@ -259,7 +257,7 @@ Create an IBM-provided subdomain to register the IP address (classic) or hostnam
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     mycluster-af23f234rwr3asdfasdf-002   kubernetes.io/tls                     2      15m
     ```
@@ -301,7 +299,6 @@ Create an IBM-provided subdomain to register the IP address (classic) or hostnam
     ```
     {: codeblock}
 
-<br />
 
 ## Creating a custom ingress gateway for private network traffic
 {: #custom-ingress-gateway-private}
@@ -313,7 +310,6 @@ Note the following considerations:
 * If your classic cluster is connected to private VLANs only, or if your VPC cluster has only the private cloud service endpoint enabled, a private load balancer is created by default when you apply the IOP.
 * For classic clusters only, you cannot use the `ibmcloud ks nlb-dns create classic` to create a DNS record and IBM-provided subdomain for the IP address of the custom gateway load balancer.
 
-<br />
 
 ## Controlling custom gateway updates and versions
 {: #custom-gateway-version}
@@ -335,7 +331,6 @@ Do not set the tag to a version that is later than your Istio add-on's control p
 Update your custom gateway pods as soon as possible after a version is released. Custom gateways that run earlier versions can be exposed to security vulnerabilities.
 {: important}
 
-<br />
 
 ## Additional gateway customizations
 {: custom-gateway-options}
@@ -405,7 +400,6 @@ spec:
 ```
 {: codeblock}
 
-<br />
 
 ## Creating a custom egress gateway
 {: #custom-egress-gateway}
@@ -413,7 +407,7 @@ spec:
 In version 1.8 and later of the managed Istio add-on, you can create custom egress gateways. Egress gateways serve as the exit point for all outbound traffic from apps in the service mesh to external destinations.
 {: shortdesc}
 
-For example, to create a custom egress gateway, you can apply the following YAML file for an IOP in your cluster:
+For example, to create a custom egress gateway, you can apply the following YAML file for an IOP in your cluster.
 ```yaml
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
@@ -437,7 +431,6 @@ spec:
 For more information about configuring and using custom egress gateways, see the [Istio open-source documentation](https://istio.io/latest/docs/tasks/traffic-management/egress/egress-gateway/){: external}.
 {: tip}
 
-<br />
 
 ## Disabling the default gateways
 {: #disable-default-gateways}
