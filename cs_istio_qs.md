@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-23"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -42,7 +42,7 @@ Set up the managed Istio add-on in your cluster.
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     Name            Version     Health State   Health Status
     istio           1.10.3       normal         Addon Ready
@@ -81,79 +81,79 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 
 1. Install BookInfo in your cluster.
     1. Download the latest Istio package, which includes the configuration files for the BookInfo app.
-    ```
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.10.3 sh -
-    ```
-    {: pre}
+        ```
+        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.10.3 sh -
+        ```
+        {: pre}
 
     2. Navigate to the Istio package directory.
-    ```
-    cd istio-1.10.3
-    ```
-    {: pre}
+        ```
+        cd istio-1.10.3
+        ```
+        {: pre}
 
     3. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
-    ```
-    export PATH=$PWD/bin:$PATH
-    ```
-    {: pre}
+        ```
+        export PATH=$PWD/bin:$PATH
+        ```
+        {: pre}
 
     4. Label the `default` namespace for automatic sidecar injection. Any new pods that are deployed to `default` are now automatically created with Envoy proxy sidecar containers.
-    ```
-    kubectl label namespace default istio-injection=enabled
-    ```
-    {: pre}
+        ```
+        kubectl label namespace default istio-injection=enabled
+        ```
+        {: pre}
 
     5. Deploy the BookInfo application, gateway, and destination rules.
-    ```
-    kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
-    kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
-    kubectl apply -f samples/bookinfo/networking/destination-rule-all.yaml
-    ```
-    {: pre}
+        ```
+        kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+        kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+        kubectl apply -f samples/bookinfo/networking/destination-rule-all.yaml
+        ```
+        {: pre}
 
     6. Ensure that the BookInfo microservices pods are `Running`.
-    ```
-    kubectl get pods
-    ```
-    {: pre}
+        ```
+        kubectl get pods
+        ```
+        {: pre}
 
-    ```
-    NAME                                     READY     STATUS      RESTARTS   AGE
-    details-v1-6865b9b99d-7v9h8              2/2       Running     0          2m
-    productpage-v1-f8c8fb8-tbsz9             2/2       Running     0          2m
-    ratings-v1-77f657f55d-png6j              2/2       Running     0          2m
-    reviews-v1-6b7f6db5c5-fdmbq              2/2       Running     0          2m
-    reviews-v2-7ff5966b99-zflkv              2/2       Running     0          2m
-    reviews-v3-5df889bcff-nlmjp              2/2       Running     0          2m
-    ```
-    {: screen}
+        ```
+        NAME                                     READY     STATUS      RESTARTS   AGE
+        details-v1-6865b9b99d-7v9h8              2/2       Running     0          2m
+        productpage-v1-f8c8fb8-tbsz9             2/2       Running     0          2m
+        ratings-v1-77f657f55d-png6j              2/2       Running     0          2m
+        reviews-v1-6b7f6db5c5-fdmbq              2/2       Running     0          2m
+        reviews-v2-7ff5966b99-zflkv              2/2       Running     0          2m
+        reviews-v3-5df889bcff-nlmjp              2/2       Running     0          2m
+        ```
+        {: screen}
 
 2. Get the public address for the `istio-ingressgateway` load balancer that exposes BookInfo.
-    * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**:
+    * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**
         1. Set the Istio ingress IP address as an environment variable.
-        ```
-        export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-        ```
-        {: pre}
+            ```
+            export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+            ```
+            {: pre}
 
-    2. Set the Istio ingress port as an environment variable.
-        ```
-        export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
-        ```
-        {: pre}
+        2. Set the Istio ingress port as an environment variable.
+            ```
+            export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
+            ```
+            {: pre}
 
-    3. Create a `GATEWAY_URL` environment variable that uses the Istio ingress host and port.
-        ```
-        export GATEWAY_URL=$INGRESS_IP:$INGRESS_PORT
-        ```
-        {: pre}
+        3. Create a `GATEWAY_URL` environment variable that uses the Istio ingress host and port.
+            ```
+            export GATEWAY_URL=$INGRESS_IP:$INGRESS_PORT
+            ```
+            {: pre}
 
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**: Create a `GATEWAY_URL` environment variable that uses the Istio ingress hostname.
-    ```
-    export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-    ```
-    {: pre}
+        ```
+        export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+        ```
+        {: pre}
 
 3. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
     ```
@@ -163,19 +163,19 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 
 4. View the BookInfo web page in a browser.
 
-Mac OS or Linux:
+    Mac OS or Linux
 
-```
-open http://$GATEWAY_URL/productpage
-```
-{: pre}
+        ```
+        open http://$GATEWAY_URL/productpage
+        ```
+        {: pre}
 
-Windows:
+    Windows
 
-```
-start http://$GATEWAY_URL/productpage
-```
-{: pre}
+        ```
+        start http://$GATEWAY_URL/productpage
+        ```
+        {: pre}
 
 **Next steps** Try refreshing the page several times. Different versions of the reviews section round-robin through no stars (`v1` of `reviews`), black stars (`v2`), and red stars (`v3`).
 
@@ -190,13 +190,13 @@ To simulate a release of an app, you can perform a phased rollout `v3` of the `r
 After you finish testing your app and are ready to start directing live traffic to it, you can perform rollouts gradually through Istio. For example, you can first release `v3` to 10% of the users, then to 20% of users, and so on.
 
 1. Configure a virtual service to distribute 0% of traffic to `v1`, 90% of traffic to `v2`, and 10% of traffic to `v3` of `reviews`.
-    ```
-    kubectl apply -f - <<EOF
+    
+    ```yaml
     apiVersion: networking.istio.io/v1beta1
     kind: VirtualService
     metadata:
         name: reviews
-      spec:
+    spec:
     hosts:
       - reviews
     http:
@@ -213,19 +213,23 @@ After you finish testing your app and are ready to start directing live traffic 
           host: reviews
           subset: v3
         weight: 10
-  EOF
     ```
-    {: codeblock}
+    {: pre}
+    
+    ```
+    kubectl apply -f - <filename>.yaml
+    ```
+    {: pre}
 
 4. View the BookInfo web page in a browser.
 
-    Mac OS or Linux:
+    Mac OS or Linux
         ```
         open http://$GATEWAY_URL/productpage
         ```
         {: pre}
 
-    Windows:
+    Windows
         ```
         start http://$GATEWAY_URL/productpage
         ```
@@ -259,7 +263,7 @@ Use one of {{site.data.keyword.mon_short}}'s predefined Istio dashboards to moni
 
 The managed `istio` add-on installs Prometheus into your cluster. The `istio-mixer-telemetry` pods in your cluster are annotated with a Prometheus endpoint so that Prometheus can aggregate all telemetry data for your pods. When you deploy a monitoring agent to the worker nodes in your cluster, {{site.data.keyword.mon_short}} is already automatically enabled to detect and scrape the data from these Prometheus endpoints to display them in your {{site.data.keyword.cloud_notm}} monitoring dashboard.
 
-Since all of the Prometheus work is done, all that is left for you is to deploy monitoring agents in your cluster.
+Because all of the Prometheus work is done, all that is left for you to do is to deploy monitoring agents in your cluster.
 
 1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observe/monitoring/create){: external}.
 
@@ -285,7 +289,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
     kind: "PeerAuthentication"
     metadata:
         name: "default"
-      spec:
+    spec:
     mtls:
       mode: STRICT
     ```
@@ -303,7 +307,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
     kind: "DestinationRule"
     metadata:
         name: "destination-mtls"
-      spec:
+    spec:
     host: "*.local"
     trafficPolicy:
       tls:

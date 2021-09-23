@@ -956,6 +956,8 @@ subcollection: containers
 
 [Setting up Istio](/docs/containers?topic=containers-istio)
 * [Installing the Istio add-on](/docs/containers?topic=containers-istio#istio_install)
+  * [Installing the Istio add-on from the console](/docs/containers?topic=containers-istio#istio_install-console)
+  * [Installing the Istio add-on with the CLI](/docs/containers?topic=containers-istio#istio_install-cli)
 * [Installing the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl)
 * [Customizing the Istio installation](/docs/containers?topic=containers-istio#customize)
 * [Updating the Istio add-on](/docs/containers?topic=containers-istio#istio_update)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-23"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -144,14 +144,14 @@ Get the public address for the `istio-ingressgateway` load balancer that exposes
 Run the following command based on your operating to view the BookInfo app in your browser.
 {: shortdesc}
 
-Mac OS or Linux:
+Mac OS or Linux
 
 ```
 open http://$GATEWAY_URL/productpage
 ```
 {: pre}
 
-Windows:
+Windows
 
 ```
 start http://$GATEWAY_URL/productpage
@@ -187,7 +187,7 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     ```
     {: pre}
 
-Example output for Classic clusters:
+Example output for Classic clusters
 
 ```
 Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
@@ -195,7 +195,7 @@ mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cl
 ```
 {: screen}
 
-Example output for VPC clusters:
+Example output for VPC clusters
 
 ```
 Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
@@ -406,7 +406,7 @@ If you don't want to enable automatic sidecar injection for a namespace, you can
 Do not enable sidecar injection for the `kube-system`, `ibm-system,` or `ibm-operators` namespaces.
 {: note}
 
-**Before you begin**:
+**Before you begin**
 1. Download the `istioctl` client.
     ```
     curl -L https://istio.io/downloadIstio | sh -
@@ -800,7 +800,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
     kind: "PeerAuthentication"
     metadata:
         name: "default"
-      spec:
+    spec:
     mtls:
       mode: STRICT
     ```
@@ -818,7 +818,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
     kind: "DestinationRule"
     metadata:
         name: "destination-mtls"
-      spec:
+    spec:
     host: "*.local"
     trafficPolicy:
       tls:
