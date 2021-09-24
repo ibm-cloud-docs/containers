@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-22"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -450,5 +450,9 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
     s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-2-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
     ```
     {: screen}
+
+
+
+
 
 

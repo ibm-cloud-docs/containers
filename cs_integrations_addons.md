@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, helm
 
@@ -10,7 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Adding services by using managed add-ons
 {: #managed-addons}
@@ -108,6 +110,8 @@ The **Health State** reflects the lifecycle of the add-on components. The **Heal
 
 Still having trouble with the Istio add-on? Check out these [troubleshooting topics](/docs/containers?topic=containers-istio#istio-ts) to debug your Istio deployment.
 {: tip}
+
+
 
 
 

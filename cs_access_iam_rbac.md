@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-21"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Controlling user access with {{site.data.keyword.cloud_notm}} IAM and Kubernetes RBAC
 {: #users}
@@ -886,4 +887,7 @@ Classic infrastructure permissions apply only to classic clusters. For VPC clust
 3. Click the **Classic infrastructure** tab, then click the **Permissions, Devices, or VPN subnets** tabs.
 4. In each tab, deselect specific permissions.
 5. To save your changes, click **Set** and **Save**. Permissions are downgraded after a few minutes.
+
+
+
 

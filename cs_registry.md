@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-22"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -600,6 +600,9 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 Wondering what to do next? You can [set up the **entitled** Helm chart repository](/docs/containers?topic=containers-helm), where Helm charts that incorporate entitled software are stored. If you already have Helm installed in your cluster, run `helm repo add entitled https://raw.githubusercontent.com/IBM/charts/master/repo/entitled`.
 {: tip}
+
+
+
 
 
 

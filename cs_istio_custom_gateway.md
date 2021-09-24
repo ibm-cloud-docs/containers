@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-23"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -468,5 +468,9 @@ If you want you apps to be accessible to clients, ensure that at least one gatew
     kubectl get svc -n istio-system
     ```
     {: pre}
+
+
+
+
 
 

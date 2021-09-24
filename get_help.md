@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-22"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Getting help
 {: #get-help}
@@ -92,5 +93,7 @@ Before you open a support case, gather relevant information about your cluster e
 5. For the **Problem type**, search for or select **{{site.data.keyword.containershort}}**.
 
 4. For the **Case details**, provide a descriptive title and include the details that you previously gathered. From the **Resources**, you can also select the cluster that the issue is related to.
+
+
 
 

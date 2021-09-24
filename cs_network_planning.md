@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, networking
 
@@ -252,5 +252,9 @@ Check out the following load balancing deployment patterns for private app netwo
 |Ingress ALB|HTTPS load balancing that exposes the app with a hostname and uses custom routing rules|Implement custom routing rules and SSL termination for multiple apps.|<ol><li><a href="/docs/containers?topic=containers-ingress-types#alb-comm-create-private">Enable the private ALB, create a subdomain to register the ALB with a DNS entry, and create an Ingress resource</a>.</li><li>Customize ALB routing rules with <a href="/docs/containers?topic=containers-comm-ingress-annotations">annotations</a>.</li></ol>|
 {: caption="Characteristics of private network deployment patterns for a VPC cluster" caption-side="top"}
 {: summary="This table reads left to right about the name, characteristics, use cases, and deployment steps of private network deployment patterns in VPC clusters."}
+
+
+
+
 
 

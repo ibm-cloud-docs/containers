@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-22"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -330,4 +330,8 @@ Refer to the following table for a summary of changes for each build of the Flue
 </tr>
 </tbody>
 </table>
+
+
+
+
 

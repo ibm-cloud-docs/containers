@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-22"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, strongswan, ipsec, on-prem, vpnaas, direct link
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Setting up VPC VPN connectivity
 {: #vpc-vpnaas}
@@ -98,5 +99,7 @@ To get started, see [Setting up access to classic infrastructure](/docs/vpc?topi
 {: #vpc-use-transit-gw}
 
 If you plan to connect multiple VPCs to classic infrastructure, you can use {{site.data.keyword.tg_full_notm}} to manage access between your VPCs in multiple regions to resources in your {{site.data.keyword.cloud_notm}} classic infrastructure. To get started, see the [{{site.data.keyword.tg_short}} documentation](/docs/transit-gateway?topic=transit-gateway-getting-started).
+
+
 
 

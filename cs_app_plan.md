@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-22"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, deploy
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Planning app deployments
 {: #plan_deploy}
@@ -433,6 +434,7 @@ Want to control access at the application level? To create a sign-on flow that y
 
 You can set up {{site.data.keyword.cloud_notm}} [logging and monitoring](/docs/containers?topic=containers-health) for your cluster. You might also choose to integrate with a third-party [logging or monitoring service](/docs/containers?topic=containers-supported_integrations#health_services).
 {: shortdesc}
+
 
 
 

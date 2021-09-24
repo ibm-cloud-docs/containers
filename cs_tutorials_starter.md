@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks
 
@@ -136,5 +136,9 @@ Access your app to verify that your app is up and running.
 * **Access service credentials from your app**: You can use the _@Value_ annotation, or use the Spring framework environment class _getProperty()_ method. For more information, see [Accessing credentials](/docs/java?topic=java-spring-configuration#spring-access-credentials).
 
 * **Add more capabilities to your app**: When you add another service to your app after the DevOps toolchain is created, those service credentials aren't automatically updated to your deployed app and GitLab repository. You must [manually add the credentials to the deployment environment](/docs/apps?topic=apps-credentials_overview).
+
+
+
+
 
 

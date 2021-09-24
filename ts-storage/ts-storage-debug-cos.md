@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-15"
+lastupdated: "2021-09-24"
 
 keywords: file, debug, help
 
@@ -11,8 +11,9 @@ content-type: troubleshoot
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Debugging {{site.data.keyword.cos_full_notm}} failures
 {: #debug_storage_cos}
@@ -100,7 +101,6 @@ Some issues can be resolved by restarting and redeploying your pods. Follow the 
     ibmcloud plugin update
     ```
     {: pre}
-
 
 ## Verifying that the storage driver and plug-in pods show a status of **Running**
 {: #debug_storage_cos_driver_plugin}
@@ -219,10 +219,6 @@ If you use a `kubectl` CLI version that does not match at least the major.minor 
 {: #debug_storage_cos_plugin}
 
 [Follow the steps to update the {{site.data.keyword.cos_short}} plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin).
-
-
-
-
 
 
 

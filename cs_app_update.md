@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-23"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Managing the app lifecycle
 {: #update_app}
@@ -277,6 +278,7 @@ Before you begin, you need two clusters and the **Manager** [service access role
     kubectl get all
     ```
     {: pre}
+
 
 
 

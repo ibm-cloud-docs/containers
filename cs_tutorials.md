@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks
 
@@ -782,5 +782,9 @@ Now that you conquered the basics, you can move to more advanced activities. Con
 *   Complete a [more complicated lab](https://github.com/IBM/container-service-getting-started-wt#lab-overview){: external} in the repository.
 *   Learn about creating [highly available apps](/docs/containers?topic=containers-ha) by using features such as multizone clusters, persistent storage, cluster autoscaler, and horizontal pod autoscaling for apps.
 *   Explore the container orchestration code patterns on [IBM Developer](https://developer.ibm.com/technologies/containers/){: external}.
+
+
+
+
 
 

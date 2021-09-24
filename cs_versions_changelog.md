@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-09-14"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -2209,4 +2209,8 @@ The following table shows the changes that are included in patch update 1.18.2_1
 | Pause container image | 3.1 | 3.2 | See the [pause container image release notes](https://github.com/kubernetes/kubernetes/blob/master/build/pause/CHANGELOG.md){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.17.5_1523" caption-side="top"}
+
+
+
+
 

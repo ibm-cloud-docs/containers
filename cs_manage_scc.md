@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-21"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks
 
@@ -10,7 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Managing security and compliance with Kubernetes
 {: #manage-security-compliance}
@@ -54,6 +56,8 @@ Review the following goals for {{site.data.keyword.containerlong_notm}}.
 - **Check whether {{site.data.keyword.containershort_notm}} has no more than # service IDs with the IAM administrator role.** Your account administrator configures the number of service IDs in [{{site.data.keyword.compliance_short}}](/docs/security-compliance?topic=security-compliance-custom-goals).
 - **Check whether {{site.data.keyword.containershort_notm}} has no more than # users with the IAM administrator role.** Your account administrator configures the number of service IDs in [{{site.data.keyword.compliance_short}}](/docs/security-compliance?topic=security-compliance-custom-goals).
 - **Check whether {{site.data.keyword.containershort_notm}} is configured with role-based access control (RBAC).** [{{site.data.keyword.cloud_notm}} IAM service access roles for **Kubernetes Service**](/docs/containers?topic=containers-access_reference#service) are automatically synchronized with RBAC roles in the cluster. You can also [customize RBAC](/docs/containers?topic=containers-access-overview).
+
+
 
 
 

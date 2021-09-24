@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-21"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, firewall, ips
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # VPC: Opening required ports and IP addresses in other network firewalls
 {: #vpc-firewall}
@@ -316,5 +317,7 @@ To permit egress to your cluster from another service, modify that service's fir
 
 2. Add the subnet CIDRs or individual worker node IP addresses to your service's firewall or your on-premises firewall for outbound traffic.
 3. Repeat these steps for each cluster that you want to allow traffic to or from.
+
+
 
 

@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Default service settings for Kubernetes components
 {: #service-settings}
@@ -122,6 +123,9 @@ Review the feature gates that are applied to all master and worker node componen
 | 1.18 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li><li><code>AllowInsecureBackendProxy=false</code></li></ul>|
 {: caption="Overview of feature gates" caption-side="top"}
 {: summary="The rows are read from left to right. The version is in the first column, with the default feature gates in the second column."}
+
+
+
 
 
 

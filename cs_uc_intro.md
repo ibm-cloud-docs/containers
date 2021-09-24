@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks
 
@@ -66,5 +66,9 @@ Various use cases show the strengths of {{site.data.keyword.containerlong_notm}}
         </tr>
     </tbody>
     </table>
+
+
+
+
 
 

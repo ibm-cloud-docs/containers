@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-22"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, ips, vlans, networking, public gateway
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Configuring VPC subnets
 {: #vpc-subnets}
@@ -565,6 +566,8 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
         {: screen}
 
 9. Optional: If you use [access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy) to control your cluster network traffic, create inbound and outbound rules in this subnet's ACL to allow ingress from and egress to the external public endpoints that your pods must access.
+
+
 
 
 

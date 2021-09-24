@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-20"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, nginx, iks multiple ingress controllers, byo controller
 
@@ -391,3 +391,7 @@ Register the VPC load balancer hostname by using the existing Ingress subdomain 
     https://<load_balancer_subdomain>/<app_path>
     ```
     {: codeblock}
+
+
+
+

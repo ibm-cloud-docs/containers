@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-13"
+lastupdated: "2021-09-24"
 
 ---
 
@@ -13,6 +13,10 @@ lastupdated: "2021-08-13"
 
 
 Customer-facing documentation: https://cloud.ibm.com/docs/containers?topic=containers-getting-started#getting-started
+
+
+
+
 
 
 

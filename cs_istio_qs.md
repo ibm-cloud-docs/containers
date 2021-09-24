@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-23"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -325,5 +325,9 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
 
 Destination rules are also used for non-authentication reasons, such as routing traffic to different versions of a service. Any destination rule that you create for a service must also contain the same TLS block that is set to `mode: ISTIO_MUTUAL`. This block prevents the rule from overriding the mesh-wide mTLS settings that you configured in this section.
 {: note}
+
+
+
+
 
 

@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, helm
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # IBM Cloud services and third-party integrations
 {: #ibm-3rd-party-integrations}
@@ -113,6 +114,7 @@ You might use custom resource definitions (CRDs) to extend the Kubernetes API to
 {: shortdesc}
 
 To get started, see the Kubernetes documentation for [Custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/){: external} and [Operators](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/){: external}.
+
 
 
 

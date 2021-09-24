@@ -1,8 +1,8 @@
 ---
 
-copyright:
-  years: 2017, 2021
-lastupdated: "2021-09-10"
+copyright: 
+  years: 2014, 2021
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, audit
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # {{site.data.keyword.at_full_notm}} events
 {: #at_events}

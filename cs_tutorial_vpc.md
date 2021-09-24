@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks
 
@@ -429,5 +429,9 @@ Now that you have a VPC cluster, learn more about what you can do.
 
 Need help, have questions, or want to give feedback on VPC clusters? Try posting in the [Slack channel](https://cloud.ibm.com/kubernetes/slack){: external}.
 {: tip}
+
+
+
+
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks
 
@@ -681,5 +681,9 @@ If you want to clean up the blocklist and the log policies:
 
 * Read more about [controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
 * For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo](https://docs.projectcalico.org/security/tutorials/kubernetes-policy-demo/kubernetes-demo){: external} and the [advanced network policy](https://docs.projectcalico.org/security/tutorials/kubernetes-policy-advanced){: external}.
+
+
+
+
 
 

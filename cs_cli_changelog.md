@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # CLI changelog
 {: #cs_cli_changelog}
@@ -191,5 +192,7 @@ Version 0.1 of the CLI plug-in is deprecated. To update to the latest version, s
 | 0.1.590 | 01 Oct 2018 | <ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect"><code>ibmcloud ks logging collect</code></a> and <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect_status"><code>ibmcloud ks logging collect-status</code></a> commands for collecting API server logs in your cluster.</li><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#ks_kms"><code>ibmcloud ks key-protect-enable</code> command</a> to enable {{site.data.keyword.keymanagementserviceshort}} as a key management service (KMS) provider in your cluster.</li><li>Adds the <code>--skip-master-health</code> flag to the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot">ibmcloud ks worker reboot</a> and <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot">ibmcloud ks worker reload</a> commands to skip the master health check before initiating the reboot or reload.</li><li>Renames <code>Owner Email</code> to <code>Owner</code> in the output of <code>ibmcloud ks cluster get</code>.</li></ul> |
 {: caption="Overview of version changes for version 0.1 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
 {: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
+
+
 
 

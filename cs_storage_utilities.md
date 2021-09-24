@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # IBM Cloud storage utilities
 {: #utilities}
@@ -1244,7 +1245,6 @@ When an alert is triggered, review the alert details in {{site.data.keyword.mon_
 * [Troubleshooting apps](/docs/containers?topic=containers-debug_apps).
 * [Troubleshooting clusters](/docs/containers?topic=containers-debug_clusters).
 * [Open a support case](/docs/get-support?topic=get-support-using-avatar).
-
 
 
 

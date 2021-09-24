@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021
-lastupdated: "2021-09-13"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -52,4 +52,8 @@ If your cluster meets these conditions, delay updating to version 1.21 until you
 
 Do not create classic clusters with only a private service endpoint enabled unless you have both VRF and the Service Endpoint enabled.
 {: important}
+
+
+
+
 

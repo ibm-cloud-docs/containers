@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-23"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -109,5 +109,9 @@ Before you begin
     istioctl dashboard envoy <pod-name>.<namespace>
     ```
     {: pre}
+
+
+
+
 
 

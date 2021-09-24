@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-21"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, encrypt, security, kms, root key, crk
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Protecting sensitive information in your cluster
 {: #encryption}

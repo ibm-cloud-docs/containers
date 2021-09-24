@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-17"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -11,8 +11,9 @@ content-type: troubleshoot
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Why can't I SSH into my worker node?
 {: #cs_ssh_worker}
@@ -307,6 +308,8 @@ After you finish debugging, clean up resources to disable SSH access.
     {: pre}
 
 3. [Reload your classic worker node](/docs/openshift?topic=openshift-kubernetes-service-cli#cs_worker_reload) or [replace your VPC worker node](/docs/openshift?topic=openshift-kubernetes-service-cli#cli_worker_replace) so that the original SSH configuration is used and the SSH key that you added is removed.
+
+
 
 
 

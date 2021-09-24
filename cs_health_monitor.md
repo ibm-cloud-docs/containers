@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-22"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -317,6 +317,10 @@ Review the following table for information on the individual components of healt
 |`Namespace`| Optional: To restrict `checkpod.json` to checking only pods in one namespace, add the `Namespace` field and enter the namespace.|
 {: caption="Health check components"}
 {: summary="The table shows the components of health checks. Rows are to be read from the left to right, with the name of the component in column one, and a description of the component in column two."}
+
+
+
+
 
 
 
