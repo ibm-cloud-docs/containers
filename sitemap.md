@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-09-24"
+lastupdated: "2021-09-27"
 
 keywords: containers
 subcollection: containers
@@ -45,22 +45,6 @@ subcollection: containers
 {: #sitemap_about}
 
 
-[Overview](/docs/containers?topic=containers-iks-overview#iks-overview)
-
-* [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-iks-overview#service-concepts)
-
-* [Docker containers](/docs/containers?topic=containers-iks-overview#docker_containers)
-
-    * [Key concepts](/docs/containers?topic=containers-iks-overview#docker-concepts)
-
-    * [Benefits](/docs/containers?topic=containers-iks-overview#docker-benefits)
-
-* [Kubernetes clusters](/docs/containers?topic=containers-iks-overview#kubernetes_basics)
-
-    * [Key concepts](/docs/containers?topic=containers-iks-overview#kubernetes-concepts)
-
-    * [Related resources](/docs/containers?topic=containers-iks-overview#kubernetes-resources)
-
 [Benefits and service offerings](/docs/containers?topic=containers-cs_ov#cs_ov)
 
 * [Benefits of using the service](/docs/containers?topic=containers-cs_ov#benefits)
@@ -70,26 +54,6 @@ subcollection: containers
 * [Comparison of free and standard clusters](/docs/containers?topic=containers-cs_ov#cluster_types)
 
 * [Comparison between {{site.data.keyword.openshiftshort}} and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes)
-
-[Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers)
-
-[Your responsibilities with using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
-
-* [Overview of shared responsibilities](/docs/containers?topic=containers-responsibilities_iks#overview-by-resource)
-
-* [Tasks for shared responsibilities by area](/docs/containers?topic=containers-responsibilities_iks#task-responsibilities)
-
-    * [Incident and operations management](/docs/containers?topic=containers-responsibilities_iks#incident-and-ops)
-
-    * [Change management](/docs/containers?topic=containers-responsibilities_iks#change-management)
-
-    * [Identity and access management](/docs/containers?topic=containers-responsibilities_iks#iam-responsibilities)
-
-    * [Security and regulation compliance](/docs/containers?topic=containers-responsibilities_iks#security-compliance)
-
-    * [Disaster recovery](/docs/containers?topic=containers-responsibilities_iks#disaster-recovery)
-
-    * [Applications and data](/docs/containers?topic=containers-responsibilities_iks#applications-and-data)
 
 
 ## Use cases
@@ -132,77 +96,6 @@ subcollection: containers
 ## Learning paths
 {: #sitemap_learning_paths}
 
-
-[Learning path for administrators](/docs/containers?topic=containers-learning-path-admin#learning-path-admin)
-
-* [Plan your environment](/docs/containers?topic=containers-learning-path-admin#admin_plan)
-
-* [Create a cluster](/docs/containers?topic=containers-learning-path-admin#admin_cluster)
-
-* [Manage the network](/docs/containers?topic=containers-learning-path-admin#admin_network)
-
-* [Secure your cluster](/docs/containers?topic=containers-learning-path-admin#admin_secure)
-
-* [Logging and monitoring](/docs/containers?topic=containers-learning-path-admin#admin_health)
-
-* [Add a registry and CI/CD](/docs/containers?topic=containers-learning-path-admin#admin_registry)
-
-* [Add storage](/docs/containers?topic=containers-learning-path-admin#admin_storage)
-
-* [Add integrations](/docs/containers?topic=containers-learning-path-admin#admin_integrate)
-
-* [Manage the lifecycle](/docs/containers?topic=containers-learning-path-admin#admin_lifecycle)
-
-[Learning path for developers](/docs/containers?topic=containers-learning-path-dev#learning-path-dev)
-
-* [Access the cluster](/docs/containers?topic=containers-learning-path-dev#dev_cluster)
-
-* [Plan your deployment](/docs/containers?topic=containers-learning-path-dev#dev_plan)
-
-* [Develop your app](/docs/containers?topic=containers-learning-path-dev#dev_develop)
-
-* [Deploy your app](/docs/containers?topic=containers-learning-path-dev#dev_deploy)
-
-* [Test, log, and monitor](/docs/containers?topic=containers-learning-path-dev#dev_test)
-
-* [Update your app](/docs/containers?topic=containers-learning-path-dev#dev_update)
-
-* [Secure your app](/docs/containers?topic=containers-learning-path-dev#dev_secure)
-
-* [Expose your app](/docs/containers?topic=containers-learning-path-dev#dev_expose)
-
-* [Add app storage](/docs/containers?topic=containers-learning-path-dev#dev_storage)
-
-* [Add integrations](/docs/containers?topic=containers-learning-path-dev#dev_integrate)
-
-
-## Release notes
-{: #sitemap_release_notes}
-
-
-[Release notes](/docs/containers?topic=containers-rel-notes#rel-notes)
-
-[September 2021](/docs/containers?topic=containers-rel-notes#release-sep-2021)
-
-* [23 September 2021](/docs/containers?topic=containers-rel-notes#23sep2021)
-
-* [22 September 2021](/docs/containers?topic=containers-rel-notes#22sep2021)
-
-* [16 September 2021](/docs/containers?topic=containers-rel-notes#16sep2021)
-
-* [14 September 2021](/docs/containers?topic=containers-rel-notes#14sep2021)
-
-* [13 September 2021](/docs/containers?topic=containers-rel-notes#13sep2021)
-
-* [9 September 2021](/docs/containers?topic=containers-rel-notes#9sep2021)
-
-* [1 September 2021](/docs/containers?topic=containers-rel-notes#1sep2021)
-
-[August 2021](/docs/containers?topic=containers-rel-notes#release-aug-2021)
-
-* [31 August 2021](/docs/containers?topic=containers-rel-notes#31aug2021)
-
-* [30 August 2021](/docs/containers?topic=containers-rel-notes#30aug2021)
 
 
 ## Tutorials library for Kubernetes Service
@@ -388,18 +281,6 @@ subcollection: containers
 
 * [Deprecated: Using the Kubernetes web terminal in your web browser](/docs/containers?topic=containers-cs_cli_install#cli_web)
 
-[Setting up the API](/docs/containers?topic=containers-cs_api_install#cs_api_install)
-
-* [About the API](/docs/containers?topic=containers-cs_api_install#api_about)
-
-* [Automating cluster deployments with the API](/docs/containers?topic=containers-cs_api_install#cs_api)
-
-* [Working with your cluster by using the Kubernetes API](/docs/containers?topic=containers-cs_api_install#kube_api)
-
-* [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
-
-* [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_cli_refresh)
-
 
 ## Setting up clusters
 {: #sitemap_setting_up_clusters}
@@ -409,88 +290,6 @@ subcollection: containers
 ### Planning your cluster environment
 {: #sitemap_planning_your_cluster_environment}
 
-
-[Moving your environment to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-strategy#strategy)
-
-* [Moving your workloads to the {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-strategy#cloud_workloads)
-
-    * [What can I move to the {{site.data.keyword.cloud_notm}}?](/docs/containers?topic=containers-strategy#move_to_cloud)
-
-    * [Can I automate my infrastructure deployments?](/docs/containers?topic=containers-strategy#infra_packaging)
-
-    * [What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?](/docs/containers?topic=containers-strategy#app_kinds)
-
-    * [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#knowledge)
-
-* [Sizing your Kubernetes cluster to support your workload](/docs/containers?topic=containers-strategy#sizing)
-
-    * [How many resources does my app require?](/docs/containers?topic=containers-strategy#sizing_resources)
-
-    * [What else besides my app might use resources in the cluster?](/docs/containers?topic=containers-strategy#sizing_other)
-
-    * [What type of availability do I want my workload to have?](/docs/containers?topic=containers-strategy#sizing_availability)
-
-    * [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
-
-    * [How do I monitor resource usage and capacity in my cluster?](/docs/containers?topic=containers-strategy#sizing_manage)
-
-* [Structuring your Kubernetes environment](/docs/containers?topic=containers-strategy#kube_env)
-
-    * [What type of cluster and flavors should I get?](/docs/containers?topic=containers-strategy#env_flavors)
-
-    * [Do I use multiple clusters, or just add more workers to an existing cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
-
-    * [How can I set up my resources within the cluster?](/docs/containers?topic=containers-strategy#env_resources)
-
-    * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-strategy#updating_kube)
-
-* [Making your resources highly available](/docs/containers?topic=containers-strategy#kube_ha)
-
-[Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters#plan_clusters)
-
-* [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#plan_vpc_basics)
-
-    * [Worker-to-worker communication: VPC subnets](/docs/containers?topic=containers-plan_clusters#vpc-worker-worker)
-
-    * [Worker-to-master and user-to-master communication: Virtual private endpoints or cloud service endpoints](/docs/containers?topic=containers-plan_clusters#vpc-workeruser-master)
-
-    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_clusters#vpc-worker-services-onprem)
-
-    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_clusters#vpc-external-workers)
-
-* [Example scenarios for VPC cluster network setups](/docs/containers?topic=containers-plan_clusters#vpc-scenarios)
-
-    * [Scenario: Run internet-facing app workloads in a VPC cluster](/docs/containers?topic=containers-plan_clusters#vpc-no-pgw)
-
-    * [Scenario: Run internet-facing app workloads in a VPC cluster with limited public egress](/docs/containers?topic=containers-plan_clusters#vpc-pgw)
-
-    * [Scenario: Extend your on-premises data center to a VPC cluster](/docs/containers?topic=containers-plan_clusters#vpc-vpn)
-
-* [Understanding network basics of classic clusters](/docs/containers?topic=containers-plan_clusters#plan_basics)
-
-    * [Worker-to-worker communication: classic VLANs and subnets](/docs/containers?topic=containers-plan_clusters#worker-worker)
-
-    * [Worker-to-master and user-to-master communication: Service endpoints](/docs/containers?topic=containers-plan_clusters#workeruser-master)
-
-    * [Worker communication to other {{site.data.keyword.cloud_notm}} services or on-premises networks](/docs/containers?topic=containers-plan_clusters#worker-services-onprem)
-
-    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_clusters#external-workers)
-
-* [Example scenarios for classic cluster network setups](/docs/containers?topic=containers-plan_clusters#classic-scenarios)
-
-    * [Scenario: Run internet-facing app workloads in a classic cluster](/docs/containers?topic=containers-plan_clusters#internet-facing)
-
-    * [Scenario: Extend your on-premises data center to a classic cluster and add limited public access](/docs/containers?topic=containers-plan_clusters#limited-public)
-
-    * [Scenario: Extend your on-premises data center to a classic cluster](/docs/containers?topic=containers-plan_clusters#private_clusters)
-
-[Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
-
-* [Single zone cluster](/docs/containers?topic=containers-ha_clusters#single_zone)
-
-* [Multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone)
-
-* [Multiple public clusters connected with a global load balancer](/docs/containers?topic=containers-ha_clusters#multiple_clusters)
 
 [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 
@@ -520,30 +319,6 @@ subcollection: containers
 ## Creating and accessing clusters
 {: #sitemap_creating_and_accessing_clusters}
 
-
-[Creating clusters](/docs/containers?topic=containers-clusters#clusters)
-
-* [Sample commands](/docs/containers?topic=containers-clusters#cluster_create_samples)
-
-* [Preparing to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare)
-
-* [Deciding on your cluster setup](/docs/containers?topic=containers-clusters#prepare_cluster_level)
-
-* [Creating a standard classic cluster](/docs/containers?topic=containers-clusters#clusters_standard)
-
-    * [Creating a standard classic cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui)
-
-    * [Creating a standard classic cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps)
-
-    * [Creating a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli)
-
-* [Creating a standard VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2)
-
-    * [Creating a standard VPC cluster in the console](/docs/containers?topic=containers-clusters#clusters_vpcg2_ui)
-
-    * [Creating standard VPC clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpcg2_cli)
-
-* [Next steps](/docs/containers?topic=containers-clusters#next_steps)
 
 [Accessing clusters](/docs/containers?topic=containers-access_cluster#access_cluster)
 
@@ -618,64 +393,6 @@ subcollection: containers
 
 * [Automatically resolving issues for your worker nodes](/docs/containers?topic=containers-add_workers#planning_autorecovery)
 
-[Autoscaling clusters](/docs/containers?topic=containers-ca#ca)
-
-* [Understanding scale-up and scale-down](/docs/containers?topic=containers-ca#ca_about)
-
-* [Following scalable deployment practices](/docs/containers?topic=containers-ca#scalable-practices)
-
-    * [Can I autoscale multiple worker pools at once?](/docs/containers?topic=containers-ca#scalable-practices-multiple)
-
-    * [How can I make sure that the cluster autoscaler responds to what resources my app needs?](/docs/containers?topic=containers-ca#scalable-practices-resrequests)
-
-    * [Can I scale down a worker pool to zero (0) nodes?](/docs/containers?topic=containers-ca#scalable-practices-zero)
-
-    * [Can I optimize my deployments for autoscaling?](/docs/containers?topic=containers-ca#scalable-practices-apps)
-
-    * [Can I use taints and tolerations with autoscaled worker pools?](/docs/containers?topic=containers-ca#scalable-practices-taints)
-
-    * [Why are my autoscaled worker pools unbalanced?](/docs/containers?topic=containers-ca#scalable-practices-unbalanced)
-
-    * [Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ca#scalable-practices-resize)
-
-* [Preparing your cluster for autoscaling](/docs/containers?topic=containers-ca#ca_prepare_cluster)
-
-* [Installing the cluster autoscaler add-on in your cluster](/docs/containers?topic=containers-ca#ca_addon)
-
-* [Installing the cluster autoscaler Helm chart in your cluster](/docs/containers?topic=containers-ca#ca_helm)
-
-* [Updating the cluster autoscaler configmap to enable scaling](/docs/containers?topic=containers-ca#ca_cm)
-
-* [Customizing the cluster autoscaler configuration values](/docs/containers?topic=containers-ca#ca_customize)
-
-    * [Customizing the cluster autoscaler add-on configmap](/docs/containers?topic=containers-ca#ca_addon_values)
-
-    * [Customizing the cluster autoscaler Helm chart values](/docs/containers?topic=containers-ca#ca_chart_values)
-
-* [Deploying apps to your autoscaled worker pools](/docs/containers?topic=containers-ca#ca_limit_pool)
-
-* [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-ca#ca_scaleup)
-
-    * [Pause pods](/docs/containers?topic=containers-ca#pause-pods-ca)
-
-    * [Horizontal pod autoscaling (HPA)](/docs/containers?topic=containers-ca#hpca)
-
-* [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-ca#ca_addon_up)
-
-* [Rebalancing or resizing autoscaled worker pools](/docs/containers?topic=containers-ca#ca_update_worker_node_pool)
-
-* [Upgrading a cluster autoscaler Helm chart release](/docs/containers?topic=containers-ca#ca_helm_up)
-
-    * [Prerequisites](/docs/containers?topic=containers-ca#ca_helm_up_prereqs)
-
-    * [Upgrading the cluster autoscaler release version](/docs/containers?topic=containers-ca#ca_helm_up_general)
-
-* [Removing the cluster autoscaler](/docs/containers?topic=containers-ca#ca_rm)
-
-* [Cluster autoscaler add-on parameter reference](/docs/containers?topic=containers-ca#ca_addon_ref)
-
-* [Cluster autoscaler Helm chart parameter reference](/docs/containers?topic=containers-ca#ca_helm_ref)
-
 [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update#update)
 
 * [Updating the Kubernetes master](/docs/containers?topic=containers-update#master)
@@ -712,105 +429,15 @@ subcollection: containers
 
 * [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool)
 
-[Tuning performance](/docs/containers?topic=containers-kernel#kernel)
-
-* [Default worker node settings](/docs/containers?topic=containers-kernel#worker-default)
-
-    * [Customizing the operating system](/docs/containers?topic=containers-kernel#worker-default-os)
-
-    * [Hardware changes](/docs/containers?topic=containers-kernel#worker-default-hw)
-
-* [Modifying default worker node settings to optimize performance](/docs/containers?topic=containers-kernel#worker)
-
-* [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
-
-* [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics)
-
-* [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
-
-* [Changing the Calico maximum transmission unit (MTU)](/docs/containers?topic=containers-kernel#calico-mtu)
-
-* [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
-
-[Removing clusters](/docs/containers?topic=containers-remove#remove)
-
 
 ## Managing cluster costs
 {: #sitemap_managing_cluster_costs}
 
 
-[Understanding costs for your clusters](/docs/containers?topic=containers-costs#costs)
-
-* [Understanding costs by component](/docs/containers?topic=containers-costs#costs-for-clusters)
-
-    * [Worker nodes](/docs/containers?topic=containers-costs#nodes)
-
-    * [Public bandwidth](/docs/containers?topic=containers-costs#bandwidth)
-
-    * [Subnet IP addresses](/docs/containers?topic=containers-costs#subnet_ips)
-
-    * [Multizone load balancer](/docs/containers?topic=containers-costs#mzlb_pricing)
-
-    * [Storage](/docs/containers?topic=containers-costs#persistent_storage)
-
-    * [{{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-costs#services)
-
-    * [Operators and other third-party integrations](/docs/containers?topic=containers-costs#operators_pricing)
-
-    * [VPC worker nodes](/docs/containers?topic=containers-costs#charges_vpc_gen2)
-
-* [Estimating costs](/docs/containers?topic=containers-costs#costs-estimate)
-
-* [Managing costs](/docs/containers?topic=containers-costs#costs-manage)
-
-[Using reservations to reduce classic worker node costs](/docs/containers?topic=containers-reservations#reservations)
-
-* [Understanding reservations](/docs/containers?topic=containers-reservations#ri-about)
-
-    * [Reservation usage and lifecycle](/docs/containers?topic=containers-reservations#ri-usage-lifecycle)
-
-    * [Billing and discounts](/docs/containers?topic=containers-reservations#ri-about-billing)
-
-* [Creating a reservation](/docs/containers?topic=containers-reservations#ri-create)
-
-* [Using a reservation in a cluster](/docs/containers?topic=containers-reservations#ri-use)
-
-* [Reviewing reservation usage](/docs/containers?topic=containers-reservations#ri-review)
-
 
 ## Enhancing security
 {: #sitemap_enhancing_security}
 
-
-[Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security)
-
-* [Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
-
-* [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver)
-
-    * [Rotating CA certificates in your cluster](/docs/containers?topic=containers-security#cert-rotate)
-
-* [Worker node](/docs/containers?topic=containers-security#workernodes)
-
-* [Network](/docs/containers?topic=containers-security#network)
-
-    * [Network segmentation and privacy for classic clusters](/docs/containers?topic=containers-security#network_segmentation)
-
-    * [Network segmentation and privacy for VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc)
-
-    * [Securely expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
-
-* [Persistent storage](/docs/containers?topic=containers-security#storage)
-
-* [Monitoring and logging](/docs/containers?topic=containers-security#monitoring_logging)
-
-* [Image and registry](/docs/containers?topic=containers-security#images_registry)
-
-* [Container isolation and security](/docs/containers?topic=containers-security#container)
-
-* [Storing personal information](/docs/containers?topic=containers-security#pi)
-
-* [Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
 
 [Architecture and dependencies of the service](/docs/containers?topic=containers-service-arch#service-arch)
 
@@ -845,124 +472,10 @@ subcollection: containers
 {: #sitemap_managing_access_control}
 
 
-[Understanding access control for clusters](/docs/containers?topic=containers-access-overview#access-overview)
-
-* [Access control checklist](/docs/containers?topic=containers-access-overview#access-checklist)
-
-    * [{{site.data.keyword.cloud_notm}} access control](/docs/containers?topic=containers-access-overview#access-checklist-iam)
-
-    * [Other types of access control](/docs/containers?topic=containers-access-overview#access-checklist-other)
-
-* [Understanding IAM access policies and roles](/docs/containers?topic=containers-access-overview#access_policies)
-
-    * [Pick the right access policy and role for your users](/docs/containers?topic=containers-access-overview#access_roles)
-
-    * [Assign access roles to individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-access-overview#iam_individuals_groups)
-
-    * [Scope user access to cluster instances, namespaces, or resource groups](/docs/containers?topic=containers-access-overview#resource_groups)
-
-[Setting up API key credentials so the service can access the infrastructure and other cloud services](/docs/containers?topic=containers-access-creds#access-creds)
-
-* [Setting up the API key in most cases](/docs/containers?topic=containers-access-creds#api_key_most_cases)
-
-* [Understanding other options than the API key](/docs/containers?topic=containers-access-creds#api_key_other)
-
-* [Understanding how the API key works](/docs/containers?topic=containers-access-creds#api_key_about)
-
-* [Ensuring that the API key or infrastructure credentials owner has the correct permissions](/docs/containers?topic=containers-access-creds#owner_permissions)
-
-* [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-access-creds#understand_infra)
-
-* [Accessing the infrastructure portfolio with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription account](/docs/containers?topic=containers-access-creds#default_account)
-
-* [Accessing a different classic infrastructure account](/docs/containers?topic=containers-access-creds#credentials)
-
-* [Customizing classic infrastructure permissions](/docs/containers?topic=containers-access-creds#infra_access)
-
-    * [Assigning infrastructure access through the console](/docs/containers?topic=containers-access-creds#infra_console)
-
-    * [Assigning infrastructure access through the CLI](/docs/containers?topic=containers-access-creds#infra_cli)
-
-[Controlling user access with {{site.data.keyword.cloud_notm}} IAM and Kubernetes RBAC](/docs/containers?topic=containers-users#users)
-
-* [Example cluster use cases and IAM roles](/docs/containers?topic=containers-users#example-iam)
-
-* [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the console](/docs/containers?topic=containers-users#add_users)
-
-* [Assign {{site.data.keyword.cloud_notm}} IAM roles with the CLI](/docs/containers?topic=containers-users#add_users_cli)
-
-    * [Assigning {{site.data.keyword.cloud_notm}} IAM _platform_ roles from the CLI](/docs/containers?topic=containers-users#add_users_cli_platform)
-
-    * [Assigning {{site.data.keyword.cloud_notm}} IAM _service_ roles from the CLI:**](/docs/containers?topic=containers-users#add_users_cli_service)
-
-* [Understanding RBAC permissions](/docs/containers?topic=containers-users#understand-rbac)
-
-* [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac)
-
-* [Extending existing permissions by aggregating cluster roles](/docs/containers?topic=containers-users#rbac_aggregate)
-
-* [Checking user permissions](/docs/containers?topic=containers-users#checking-perms)
-
-    * [Checking IAM platform and service access roles](/docs/containers?topic=containers-users#checking-iam)
-
-    * [Checking RBAC roles](/docs/containers?topic=containers-users#checking-rbac)
-
-    * [Checking infrastructure roles](/docs/containers?topic=containers-users#checking-infra)
-
-* [Removing user permissions](/docs/containers?topic=containers-users#removing)
-
-    * [Checking if the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-users#removing_check_infra)
-
-    * [Removing a user from your account](/docs/containers?topic=containers-users#remove_user)
-
-    * [Removing specific permissions](/docs/containers?topic=containers-users#remove_permissions)
-
-[Authorizing pods in your cluster to {{site.data.keyword.cloud_notm}} services with IAM trusted profiles](/docs/containers?topic=containers-pod-iam-identity#pod-iam-identity)
-
-* [Prerequisites](/docs/containers?topic=containers-pod-iam-identity#iam-identity-prereqs)
-
-* [Creating an IAM trusted profile for your cluster in the API](/docs/containers?topic=containers-pod-iam-identity#iam-identity-create-api)
-
-* [Creating an IAM trusted profile for your cluster in the UI](/docs/containers?topic=containers-pod-iam-identity#iam-identity-create-ui)
-
-* [Configure your application pods to authenticate with {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-pod-iam-identity#iam-identity-pod)
-
 
 ## Securing cluster workloads
 {: #sitemap_securing_cluster_workloads}
 
-
-[Protecting sensitive information in your cluster](/docs/containers?topic=containers-encryption#encryption)
-
-* [Overview of cluster encryption](/docs/containers?topic=containers-encryption#encrypt_ov)
-
-* [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms)
-
-    * [Available KMS providers](/docs/containers?topic=containers-encryption#kms-providers)
-
-    * [Controlling encryption](/docs/containers?topic=containers-encryption#kms-encrypt-control)
-
-    * [Features and limitations of KMS providers](/docs/containers?topic=containers-encryption#kms-keyprotect-features)
-
-* [Encrypting the Kubernetes master's local disk and secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect)
-
-    * [Prerequisites](/docs/containers?topic=containers-encryption#kms_prereqs)
-
-    * [Enabling KMS encryption for the cluster through the CLI](/docs/containers?topic=containers-encryption#kms_cli)
-
-    * [Enabling KMS encryption for the cluster through the console](/docs/containers?topic=containers-encryption#kms_ui)
-
-    * [Rotating the root key for your cluster](/docs/containers?topic=containers-encryption#kms_rotate)
-
-* [Verifying secret encryption](/docs/containers?topic=containers-encryption#verify_kms)
-
-* [Managing encryption for the worker nodes in your cluster](/docs/containers?topic=containers-encryption#worker-encryption)
-
-    * [Classic worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-classic)
-
-    * [VPC worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-vpc)
-
-* [Encrypting data in classic clusters by using IBM Cloud Data Shield](/docs/containers?topic=containers-encryption#datashield)
 
 [Configuring pod security policies](/docs/containers?topic=containers-psp#psp)
 
@@ -976,126 +489,10 @@ subcollection: containers
 
 * [Understanding default resources for {{site.data.keyword.IBM_notm}} cluster management](/docs/containers?topic=containers-psp#ibm_psp)
 
-[Setting pod priority](/docs/containers?topic=containers-pod_priority#pod_priority)
-
-* [Understanding default priority classes](/docs/containers?topic=containers-pod_priority#default_priority_class)
-
-* [Creating a priority class](/docs/containers?topic=containers-pod_priority#create_priority_class)
-
-* [Assigning priority to your pods](/docs/containers?topic=containers-pod_priority#prioritize)
-
-[Setting Kubernetes API priority and fairness](/docs/containers?topic=containers-kubeapi-priority#kubeapi-priority)
-
-* [Reviewing default flow schema and priority levels](/docs/containers?topic=containers-kubeapi-priority#kubeapi-default-priority)
-
 
 ## Securing the cluster network
 {: #sitemap_securing_the_cluster_network}
 
-
-[Classic: Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-firewall#firewall)
-
-* [Opening ports in a corporate firewall](/docs/containers?topic=containers-firewall#corporate)
-
-    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_bx)
-
-    * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_kubectl)
-
-    * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_calicoctl)
-
-* [Opening ports in gateway appliance firewalls](/docs/containers?topic=containers-firewall#vyatta_firewall)
-
-    * [Opening required ports in a public firewall](/docs/containers?topic=containers-firewall#firewall_outbound)
-
-    * [Opening required ports in a private firewall](/docs/containers?topic=containers-firewall#firewall_private)
-
-    * [Opening ports in a public or private firewall for inbound traffic to NodePort, load balancer, and Ingress services](/docs/containers?topic=containers-firewall#firewall_inbound)
-
-* [Allowing the cluster to access resources through Calico network policies](/docs/containers?topic=containers-firewall#firewall_calico_egress)
-
-* [Allowing traffic from your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-firewall#allowlist_workers)
-
-* [Updating IAM firewalls for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-firewall#iam_allowlist)
-
-[Classic: Restricting network traffic to edge worker nodes](/docs/containers?topic=containers-edge#edge)
-
-* [Isolating networking workloads to edge nodes](/docs/containers?topic=containers-edge#edge_nodes)
-
-* [Preventing app workloads from running on edge worker nodes](/docs/containers?topic=containers-edge#edge_workloads)
-
-* [Isolating ALB proxy workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_gateway)
-
-[Classic: Controlling traffic with network policies](/docs/containers?topic=containers-network_policies#network_policies)
-
-* [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy)
-
-* [Installing and configuring the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)
-
-* [Viewing network policies](/docs/containers?topic=containers-network_policies#view_policies)
-
-* [Adding network policies](/docs/containers?topic=containers-network_policies#adding_network_policies)
-
-* [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress)
-
-* [Isolating clusters on the public network](/docs/containers?topic=containers-network_policies#isolate_workers_public)
-
-* [Isolating clusters on the private network](/docs/containers?topic=containers-network_policies#isolate_workers)
-
-* [Controlling traffic between pods](/docs/containers?topic=containers-network_policies#isolate_services)
-
-    * [Isolate app services within a namespace](/docs/containers?topic=containers-network_policies#services_one_ns)
-
-    * [Isolate app services between namespaces](/docs/containers?topic=containers-network_policies#services_across_ns)
-
-* [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
-
-[VPC: Opening required ports and IP addresses in other network firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
-
-* [Opening ports in a corporate firewall](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
-
-    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
-
-    * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
-
-    * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
-
-* [Allowing traffic from your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers)
-
-    * [Allowing ingress from a cluster to another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_ingress)
-
-    * [Allowing egress to a cluster from another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
-
-[VPC: Controlling traffic with ACLs, security groups, and network policies](/docs/containers?topic=containers-vpc-network-policy#vpc-network-policy)
-
-* [Overview](/docs/containers?topic=containers-vpc-network-policy#overview)
-
-    * [Comparison of network security options](/docs/containers?topic=containers-vpc-network-policy#comparison)
-
-    * [Do I use ACLs or security groups?](/docs/containers?topic=containers-vpc-network-policy#acl-sg-compare)
-
-* [Controlling traffic with the default security group](/docs/containers?topic=containers-vpc-network-policy#security_groups)
-
-    * [Creating security group rules in the console](/docs/containers?topic=containers-vpc-network-policy#security_groups_ui)
-
-    * [Creating security group rules from the CLI](/docs/containers?topic=containers-vpc-network-policy#security_groups_cli)
-
-* [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-network-policy#acls)
-
-    * [Creating ACLs in the console](/docs/containers?topic=containers-vpc-network-policy#acls_ui)
-
-    * [Creating ACLs from the CLI](/docs/containers?topic=containers-vpc-network-policy#acls_cli)
-
-* [Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
-
-    * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#services_one_ns)
-
-    * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#services_across_ns)
-
-[Managing security and compliance with Kubernetes](/docs/containers?topic=containers-manage-security-compliance#manage-security-compliance)
-
-* [Monitoring security and compliance posture with Kubernetes](/docs/containers?topic=containers-manage-security-compliance#monitor-clusters)
-
-    * [Available goals for Kubernetes](/docs/containers?topic=containers-manage-security-compliance#clusters-available-goals)
 
 
 ## Managing the cluster network
@@ -1106,96 +503,6 @@ subcollection: containers
 ### Classic clusters
 {: #sitemap_classic_clusters}
 
-
-[Configuring classic subnets and IP addresses](/docs/containers?topic=containers-subnets#subnets)
-
-* [Overview of classic networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics)
-
-    * [VLANs](/docs/containers?topic=containers-subnets#basics_vlans)
-
-    * [Subnets and IP addresses](/docs/containers?topic=containers-subnets#basics_subnets)
-
-    * [Finding subnets provisioned in your account](/docs/containers?topic=containers-subnets#finding_subnets_account)
-
-    * [Network segmentation](/docs/containers?topic=containers-subnets#basics_segmentation)
-
-* [Using existing subnets to create a cluster](/docs/containers?topic=containers-subnets#subnets_custom)
-
-* [Managing existing portable IP addresses](/docs/containers?topic=containers-subnets#managing_ips)
-
-    * [Viewing available portable public IP addresses](/docs/containers?topic=containers-subnets#review_ip)
-
-    * [Freeing up used IP addresses](/docs/containers?topic=containers-subnets#free)
-
-* [Adding portable IP addresses](/docs/containers?topic=containers-subnets#adding_ips)
-
-    * [Adding portable IPs by ordering more subnets](/docs/containers?topic=containers-subnets#request)
-
-    * [Adding portable IPs by adding existing subnets to your cluster](/docs/containers?topic=containers-subnets#add-existing)
-
-* [Managing subnet routing](/docs/containers?topic=containers-subnets#subnet-routing)
-
-    * [Enabling routing between primary subnets on the same VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
-
-    * [Managing subnet routing for gateway appliances](/docs/containers?topic=containers-subnets#vra-routing)
-
-* [Removing subnets from a cluster](/docs/containers?topic=containers-subnets#remove-subnets)
-
-[Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster)
-
-* [Setting up the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
-
-* [Setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
-
-    * [Steps to enable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#steps-set-up-public)
-
-    * [Steps to disable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#disable-public-se)
-
-* [Switching from the public cloud service endpoint to the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
-
-* [Changing your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
-
-[Setting up classic VPN connectivity](/docs/containers?topic=containers-vpn#vpn)
-
-* [Using the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn-setup)
-
-* [strongSwan VPN service considerations](/docs/containers?topic=containers-vpn#strongswan_limitations)
-
-* [Configuring the strongSwan VPN in a multizone cluster](/docs/containers?topic=containers-vpn#vpn_multizone)
-
-    * [Configuring a single outbound VPN connection from a multizone cluster](/docs/containers?topic=containers-vpn#multizone_one_outbound)
-
-    * [Configuring a single inbound VPN connection to a multizone cluster](/docs/containers?topic=containers-vpn#multizone_one_inbound)
-
-    * [Configuring an inbound VPN connection in each zone of a multizone cluster](/docs/containers?topic=containers-vpn#multizone_multiple)
-
-* [Configuring the strongSwan Helm chart](/docs/containers?topic=containers-vpn#vpn_configure)
-
-    * [Step 1: Get the strongSwan Helm chart](/docs/containers?topic=containers-vpn#strongswan_1)
-
-    * [Step 2: Configure basic IPSec settings](/docs/containers?topic=containers-vpn#strongswan_2)
-
-    * [Step 3: Select inbound or outbound VPN connection](/docs/containers?topic=containers-vpn#strongswan_3)
-
-    * [Step 4: Access cluster resources over the VPN connection](/docs/containers?topic=containers-vpn#strongswan_4)
-
-    * [Step 5: Access remote network resources over the VPN connection](/docs/containers?topic=containers-vpn#strongswan_5)
-
-    * [Step 6 (optional): Enable monitoring with the Slack webhook integration](/docs/containers?topic=containers-vpn#strongswan_6)
-
-    * [Step 7: Deploy the Helm chart](/docs/containers?topic=containers-vpn#strongswan_7)
-
-* [Testing and verifying strongSwan VPN connectivity](/docs/containers?topic=containers-vpn#vpn_test)
-
-* [Limiting strongSwan VPN traffic by namespace or worker node](/docs/containers?topic=containers-vpn#limit)
-
-    * [Limiting strongSwan VPN traffic by namespace](/docs/containers?topic=containers-vpn#limit_namespace)
-
-    * [Limiting strongSwan VPN traffic by worker node](/docs/containers?topic=containers-vpn#limit_worker)
-
-* [Upgrading or disabling the strongSwan Helm chart](/docs/containers?topic=containers-vpn#vpn_upgrade)
-
-* [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
 
 [Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns)
 
@@ -1221,70 +528,10 @@ subcollection: containers
 
     * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
-[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes#static-routes)
-
-* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
-
-* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
-
-    * [Enabling the static route add-on from the console](/docs/containers?topic=containers-static-routes#enable-add-on-console)
-
-    * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
-
-* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
-
 
 ### VPC clusters
 {: #sitemap_vpc_clusters}
 
-
-[Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets#vpc-subnets)
-
-* [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-subnets#vpc_basics)
-
-    * [Subnets](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets)
-
-    * [Public gateways](/docs/containers?topic=containers-vpc-subnets#vpc_basics_pgw)
-
-    * [Virtual private endpoints (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe)
-
-    * [Network segmentation](/docs/containers?topic=containers-vpc-subnets#vpc_basics_segmentation)
-
-    * [VPC networking limitations](/docs/containers?topic=containers-vpc-subnets#vpc_basics_limitations)
-
-* [Creating a VPC subnet and attaching a public gateway](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet)
-
-    * [Creating a VPC subnet in the console](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet_ui)
-
-    * [Creating a VPC subnet in the CLI](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet_cli)
-
-* [Creating VPC subnets for classic access](/docs/containers?topic=containers-vpc-subnets#classic_access_subnets)
-
-    * [Creating VPC subnets for classic access in the console](/docs/containers?topic=containers-vpc-subnets#ca_subnet_ui)
-
-    * [Creating VPC subnets for classic access from the CLI](/docs/containers?topic=containers-vpc-subnets#ca_subnet_cli)
-
-* [Restricting public network traffic to a subnet with a public gateway](/docs/containers?topic=containers-vpc-subnets#vpc-restrict-gateway)
-
-[Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpnaas)
-
-* [Communication with resources in on-premises data centers](/docs/containers?topic=containers-vpc-vpnaas#onprem)
-
-    * [{{site.data.keyword.vpc_short}} VPN](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn-def)
-
-    * [{{site.data.keyword.dl_short}}](/docs/containers?topic=containers-vpc-vpnaas#vpc-directlink-def)
-
-* [Communication with resources in other VPCs](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpc)
-
-    * [{{site.data.keyword.vpc_short}} VPN](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn-other)
-
-    * [{{site.data.keyword.tg_full_notm}}](/docs/containers?topic=containers-vpc-vpnaas#vpc-transit-def)
-
-* [Communication with {{site.data.keyword.cloud_notm}} classic resources](/docs/containers?topic=containers-vpc-vpnaas#vpc-classic)
-
-    * [Create a classic-access VPC](/docs/containers?topic=containers-vpc-vpnaas#vpc-create-classic)
-
-    * [Use {{site.data.keyword.tg_full_notm}}](/docs/containers?topic=containers-vpc-vpnaas#vpc-use-transit-gw)
 
 [Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns)
 
@@ -1367,24 +614,6 @@ subcollection: containers
 
     * [Understanding the individual components of health checks](/docs/containers?topic=containers-health-monitor#health-check-components)
 
-[Reviewing service, API server, and worker node logs](/docs/containers?topic=containers-health-audit#health-audit)
-
-* [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)
-
-    * [Considerations and prerequisites](/docs/containers?topic=containers-health-audit#prereqs-apiserver-logs)
-
-    * [Forwarding Kubernetes API audit logs to {{site.data.keyword.la_short}}](/docs/containers?topic=containers-health-audit#audit-api-server-la)
-
-    * [Forwarding Kubernetes API audit logs to a resource in the {{site.data.keyword.cloud_notm}} private network](/docs/containers?topic=containers-health-audit#audit-api-server-priv)
-
-    * [Forwarding Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health-audit#audit-api-server-external)
-
-    * [Managing API server log forwarding](/docs/containers?topic=containers-health-audit#audit-api-server-manage)
-
-    * [Taking a snapshot of API server logs](/docs/containers?topic=containers-health-audit#audit-api-server-snapshot)
-
-* [Service audit logs](/docs/containers?topic=containers-health-audit#audit-service)
-
 
 ## Setting up an image build pipeline
 {: #sitemap_setting_up_an_image_build_pipeline}
@@ -1418,88 +647,10 @@ subcollection: containers
 
 * [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-registry#secret_entitled_software)
 
-[Setting up continuous integration and delivery](/docs/containers?topic=containers-cicd#cicd)
-
-* [Supported automation tools](/docs/containers?topic=containers-cicd#cicd_strategy)
-
-* [Setting up a continuous delivery pipeline for a cluster](/docs/containers?topic=containers-cicd#continuous-delivery-pipeline)
-
 
 ## Developing and deploying apps
 {: #sitemap_developing_and_deploying_apps}
 
-
-[Planning app deployments](/docs/containers?topic=containers-plan_deploy#plan_deploy)
-
-* [Moving workloads to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-plan_deploy#moving)
-
-    * [What kind of apps can I run in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-plan_deploy#app_types)
-
-    * [What are some guidelines for developing stateless, cloud-native apps?](/docs/containers?topic=containers-plan_deploy#12factor)
-
-    * [I already have an app. How can I migrate it to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-plan_deploy#migrate_containerize)
-
-* [Understanding Kubernetes objects for apps](/docs/containers?topic=containers-plan_deploy#kube-objects)
-
-    * [I thought that I needed to put my app in a container. Now what's all this stuff about pods?](/docs/containers?topic=containers-plan_deploy#deploy_pods)
-
-    * [So if I can just use a pod, why do I need all these different types of objects?](/docs/containers?topic=containers-plan_deploy#deploy_objects)
-
-    * [What type of Kubernetes objects can I make for my app?](/docs/containers?topic=containers-plan_deploy#object)
-
-    * [What if I want my app configuration to use variables? How do I add these to the YAML?](/docs/containers?topic=containers-plan_deploy#variables)
-
-    * [How can I make sure that my app has the right resources?](/docs/containers?topic=containers-plan_deploy#resources)
-
-    * [How can I add capabilities to my app configuration?](/docs/containers?topic=containers-plan_deploy#capabilities)
-
-    * [How can I add IBM services to my app, such as {{site.data.keyword.watson}}?](/docs/containers?topic=containers-plan_deploy#services_ibm)
-
-* [Planning highly available deployments](/docs/containers?topic=containers-plan_deploy#highly_available_apps)
-
-    * [How can I increase the availability of my app?](/docs/containers?topic=containers-plan_deploy#increase_availability)
-
-    * [How can I scale my app?](/docs/containers?topic=containers-plan_deploy#scale)
-
-* [Versioning and updating apps](/docs/containers?topic=containers-plan_deploy#updating)
-
-    * [How can I organize my deployments to make them easier to update and manage?](/docs/containers?topic=containers-plan_deploy#deploy_organize)
-
-    * [What app update strategies can I use?](/docs/containers?topic=containers-plan_deploy#updating_apps_strategy)
-
-    * [How can I automate my app deployment?](/docs/containers?topic=containers-plan_deploy#packaging)
-
-* [Setting up service discovery](/docs/containers?topic=containers-plan_deploy#service_discovery)
-
-    * [How can I make sure that my services are connected to the right deployments and ready to go?](/docs/containers?topic=containers-plan_deploy#services_connected)
-
-    * [How can I expose my services on the Internet?](/docs/containers?topic=containers-plan_deploy#services_expose_apps)
-
-* [Securing apps](/docs/containers?topic=containers-plan_deploy#secure_apps)
-
-* [Managing access and monitoring app health](/docs/containers?topic=containers-plan_deploy#app_plan_logmet)
-
-    * [How can I control who has access to my app deployments?](/docs/containers?topic=containers-plan_deploy#app_plan_logmet_access)
-
-    * [After I deploy my app, how can I monitor its health?](/docs/containers?topic=containers-plan_deploy#app_plan_logmet_monitor)
-
-[Building containers from images](/docs/containers?topic=containers-images#images)
-
-* [Deploying containers from an {{site.data.keyword.registrylong_notm}} image to the `default` Kubernetes namespace](/docs/containers?topic=containers-images#namespace)
-
-* [Referring to the image pull secret in your pod deployment](/docs/containers?topic=containers-images#pod_imagePullSecret)
-
-* [Pushing images to {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-images#push-images)
-
-* [Managing security of images in {{site.data.keyword.registrylong_notm}} with Vulnerability Advisor](/docs/containers?topic=containers-images#va-images)
-
-* [Setting up trusted content for container images](/docs/containers?topic=containers-images#trusted_images)
-
-* [Enabling image security enforcement in your cluster](/docs/containers?topic=containers-images#portieris-image-sec)
-
-    * [Enabling or disabling image security enforcement](/docs/containers?topic=containers-images#portieris-enable)
-
-    * [Default image policies](/docs/containers?topic=containers-images#portieris-default-policies)
 
 [Developing Kubernetes-native apps](/docs/containers?topic=containers-app#app)
 
@@ -1550,24 +701,6 @@ subcollection: containers
 * [Deploying apps to specific worker nodes by using labels](/docs/containers?topic=containers-deploy_app#node_affinity)
 
 * [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app)
-
-[Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
-
-* [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
-
-* [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
-
-[Managing the app lifecycle](/docs/containers?topic=containers-update_app#update_app)
-
-* [Update strategies](/docs/containers?topic=containers-update_app#updating_apps)
-
-* [Scaling apps](/docs/containers?topic=containers-update_app#app_scaling)
-
-* [Managing rolling deployments to update your apps](/docs/containers?topic=containers-update_app#app_rolling)
-
-* [Setting up continuous integration and delivery](/docs/containers?topic=containers-update_app#app_cicd)
-
-* [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
 
 
 ## Setting up a service mesh with Istio
@@ -1723,92 +856,6 @@ subcollection: containers
 ### Exposing apps with load balancers
 {: #sitemap_exposing_apps_with_load_balancers}
 
-
-[Quick start for load balancers](/docs/containers?topic=containers-loadbalancer-qs#loadbalancer-qs)
-
-* [Exposing an app by using an NLB in a classic cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_classic)
-
-* [Exposing an app by using a VPC load balancer in a VPC cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_vpc)
-
-[VPC: Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas#vpc-lbaas)
-
-* [About VPC load balancing in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-lbaas#lbaas_about)
-
-    * [Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#nlb_vpc)
-
-    * [Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#lb_vpc)
-
-* [Setting up a Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb)
-
-    * [Setting up a public VPC NLB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_pub)
-
-    * [Setting up a private VPC NLB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_priv)
-
-    * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_nlb_dns)
-
-* [Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb)
-
-    * [Setting up a public or private VPC ALB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_alb_pub_priv)
-
-    * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
-
-* [Limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations)
-
-[Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about#loadbalancer-about)
-
-* [Comparison of basic and DSR load balancing in version 1.0 and 2.0 NLBs](/docs/containers?topic=containers-loadbalancer-about#comparison)
-
-* [Components and architecture of an NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_planning)
-
-    * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_single)
-
-    * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_multi)
-
-    * [Traffic flow in a gateway-enabled cluster](/docs/containers?topic=containers-loadbalancer-about#v1_gateway)
-
-* [Components and architecture of an NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs)
-
-    * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_single)
-
-    * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_multi)
-
-    * [Traffic flow in a gateway-enabled cluster](/docs/containers?topic=containers-loadbalancer-about#v2_gateway)
-
-[Classic: Setting up basic load balancing with an NLB 1.0](/docs/containers?topic=containers-loadbalancer#loadbalancer)
-
-* [Setting up an NLB 1.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
-
-* [Setting up an NLB 1.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer#lb_config)
-
-* [Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer#lb_source_ip)
-
-    * [Adding edge node affinity rules and tolerations](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
-
-    * [Adding affinity rules for multiple public or private VLANs](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
-
-[Classic: Setting up DSR load balancing with an NLB 2.0](/docs/containers?topic=containers-loadbalancer-v2#loadbalancer-v2)
-
-* [Prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision)
-
-* [Setting up an NLB 2.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)
-
-* [Setting up an NLB 2.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)
-
-* [Scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling)
-
-    * [Supported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_supported)
-
-    * [Unsupported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_unsupported)
-
-[Classic: Registering a DNS subdomain for an NLB](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname)
-
-* [Registering NLB IPs with a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns)
-
-* [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format)
-
-* [Enable health checks on a subdomain by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor)
-
-    * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
 
 
 ### Exposing apps with Ingress ALBs
@@ -2020,468 +1067,10 @@ subcollection: containers
 {: #sitemap_storing_data_on_persistent_storage}
 
 
-[Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning)
-
-* [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution)
-
-* [Comparison of non-persistent storage options](/docs/containers?topic=containers-storage_planning#non_persistent_overview)
-
-* [Comparison of persistent storage options for single zone clusters](/docs/containers?topic=containers-storage_planning#single_zone_persistent_storage)
-
-* [Comparison of persistent storage options for multizone clusters](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)
-
-[Understanding Kubernetes storage basics](/docs/containers?topic=containers-kube_concepts#kube_concepts)
-
-* [Persistent volumes and persistent volume claims](/docs/containers?topic=containers-kube_concepts#pvc_pv)
-
-* [Dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning)
-
-* [Static provisioning](/docs/containers?topic=containers-kube_concepts#static_provisioning)
-
-* [Storage classes](/docs/containers?topic=containers-kube_concepts#storageclasses)
-
-    * [Customizing a storage class](/docs/containers?topic=containers-kube_concepts#customized_storageclass)
-
-    * [Changing or updating to a different storage class](/docs/containers?topic=containers-kube_concepts#update_storageclass)
-
-    * [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass)
-
-[Storing data on classic IBM Cloud {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
-
-* [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
-
-* [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
-
-    * [File storage types](/docs/containers?topic=containers-file_storage#file-types)
-
-    * [IOPS](/docs/containers?topic=containers-file_storage#file-iops)
-
-    * [Reclaim policy](/docs/containers?topic=containers-file_storage#file-reclaim)
-
-    * [Billing type](/docs/containers?topic=containers-file_storage#file-billing)
-
-* [Adding {{site.data.keyword.filestorage_short}} to apps](/docs/containers?topic=containers-file_storage#add_file)
-
-* [Using existing {{site.data.keyword.filestorage_short}} in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
-
-    * [Step 1: Preparing your existing storage.](/docs/containers?topic=containers-file_storage#existing-file-1)
-
-    * [Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-file_storage#existing-file-2)
-
-* [Using {{site.data.keyword.filestorage_short}} in a stateful set](/docs/containers?topic=containers-file_storage#file_statefulset)
-
-    * [Dynamic provisioning: Creating the PVC when you create a stateful set](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
-
-    * [Static provisioning: Using an existing PVC with your stateful set](/docs/containers?topic=containers-file_storage#file_static_statefulset)
-
-* [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-file_storage#file_change_storage_configuration)
-
-* [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version)
-
-* [Scaling down the default {{site.data.keyword.filestorage_short}} plug-in](/docs/containers?topic=containers-file_storage#file_scaledown_plugin)
-
-* [Backing up and restoring data](/docs/containers?topic=containers-file_storage#file_backup_restore)
-
-    * [Setting up periodic snapshots](/docs/containers?topic=containers-file_storage#file-snapshots)
-
-    * [Replicating snapshots to another zone](/docs/containers?topic=containers-file_storage#replicating-snapshots-to-another-zone)
-
-    * [Duplicating storage](/docs/containers?topic=containers-file_storage#file-dupe-storage)
-
-    * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-file_storage#file-backup-helm)
-
-    * [Copying data to and from pods and containers](/docs/containers?topic=containers-file_storage#file-cp-data)
-
-* [Storage class reference](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
-
-* [Sample customized storage classes](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
-
-    * [Creating topology-aware storage](/docs/containers?topic=containers-file_storage#file-topology)
-
-    * [Specifying the zone for multizone clusters](/docs/containers?topic=containers-file_storage#file_multizone_yaml)
-
-    * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class)
-
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-file_storage#cleanup)
-
-    * [Understanding your storage removal options](/docs/containers?topic=containers-file_storage#storage_delete_options)
-
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove)
-
-[Storing data on classic IBM Cloud {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
-
-* [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
-
-* [Installing the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block)
-
-    * [Updating the {{site.data.keyword.cloud_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#update_block)
-
-    * [Removing the {{site.data.keyword.cloud_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#rm_block)
-
-* [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
-
-* [Setting up encryption for {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_encryption_setup)
-
-    * [Encrypting volume data by using a custom storage class](/docs/containers?topic=containers-block_storage#encrypt_custom_sc)
-
-    * [Create a PVC that references your {{site.data.keyword.blockstorageshort}} secret](/docs/containers?topic=containers-block_storage#pvc_encrypt_label)
-
-    * [Verifying the encryption of your {{site.data.keyword.blockstorageshort}} volumes](/docs/containers?topic=containers-block_storage#block_encrypt)
-
-* [Adding block storage to apps](/docs/containers?topic=containers-block_storage#add_block)
-
-* [Using existing block storage in your cluster](/docs/containers?topic=containers-block_storage#existing_block)
-
-    * [Step 1: Retrieving the information of your existing block storage](/docs/containers?topic=containers-block_storage#existing-block-1)
-
-    * [Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-block_storage#existing-block-2)
-
-* [Using block storage in a stateful set](/docs/containers?topic=containers-block_storage#block_statefulset)
-
-    * [Dynamic provisioning: Creating the PVC when you create a stateful set](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
-
-    * [Static provisioning: Using existing PVCs with a stateful set](/docs/containers?topic=containers-block_storage#block_static_statefulset)
-
-* [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-block_storage#block_change_storage_configuration)
-
-* [Backing up and restoring data](/docs/containers?topic=containers-block_storage#block_backup_restore)
-
-    * [Setting up periodic snapshots](/docs/containers?topic=containers-block_storage#block-snaps)
-
-    * [Replicating snapshots to another zone](/docs/containers?topic=containers-block_storage#block-replicate)
-
-    * [Duplicating storage](/docs/containers?topic=containers-block_storage#block-dupe)
-
-    * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-block_storage#block-cos-backup)
-
-    * [Copying data to and from pods and containers](/docs/containers?topic=containers-block_storage#block-cp)
-
-* [Storage class reference](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
-
-* [Sample customized storage classes](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
-
-    * [Creating topology-aware storage](/docs/containers?topic=containers-block_storage#topology_yaml)
-
-    * [Specifying the zone and region](/docs/containers?topic=containers-block_storage#block_multizone_yaml)
-
-    * [Mounting block storage with an `XFS` file system](/docs/containers?topic=containers-block_storage#xfs)
-
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-block_storage#cleanup)
-
-    * [Understanding your storage removal options](/docs/containers?topic=containers-block_storage#storage_delete_options)
-
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove)
-
-[Storing data on {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block)
-
-* [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc_block_qs)
-
-* [Adding {{site.data.keyword.block_storage_is_short}} to your apps](/docs/containers?topic=containers-vpc-block#vpc-block-add)
-
-* [Using an existing {{site.data.keyword.block_storage_is_short}} instance](/docs/containers?topic=containers-vpc-block#vpc-block-static)
-
-* [Updating the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-block#vpc-addon-update)
-
-* [Setting up encryption for {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block-encryption)
-
-* [Customizing the default storage settings](/docs/containers?topic=containers-vpc-block#vpc-customize-default)
-
-    * [Creating a custom storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class)
-
-    * [Verifying your {{site.data.keyword.block_storage_is_short}} file system](/docs/containers?topic=containers-vpc-block#vpc-block-fs-verify)
-
-    * [Storing your custom PVC settings in a Kubernetes secret](/docs/containers?topic=containers-vpc-block#vpc-block-storageclass-secret)
-
-    * [Enabling every user to customize the default PVC settings](/docs/containers?topic=containers-vpc-block#customize-with-secret)
-
-    * [Enforcing base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key CRN](/docs/containers?topic=containers-vpc-block#static-secret)
-
-* [Setting up volume expansion](/docs/containers?topic=containers-vpc-block#vpc-block-volume-expand)
-
-    * [Expanding existing volumes](/docs/containers?topic=containers-vpc-block#expanding-existing-volumes)
-
-* [Backing up and restoring data](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
-
-* [Storage class reference](/docs/containers?topic=containers-vpc-block#vpc-block-reference)
-
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup)
-
-    * [Understanding your storage removal options](/docs/containers?topic=containers-vpc-block#storage_delete_options)
-
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-vpc-block#storage_remove)
-
-[Storing data on IBM Cloud Object Storage](/docs/containers?topic=containers-object_storage#object_storage)
-
-* [Creating your object storage service instance](/docs/containers?topic=containers-object_storage#create_cos_service)
-
-* [Creating {{site.data.keyword.cos_full_notm}} service credentials](/docs/containers?topic=containers-object_storage#service_credentials)
-
-* [Creating a secret for the object storage service credentials](/docs/containers?topic=containers-object_storage#create_cos_secret)
-
-* [Installing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#install_cos)
-
-    * [Verifying your installation](/docs/containers?topic=containers-object_storage#cos-plugin verify)
-
-    * [Updating the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin)
-
-    * [Removing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#remove_cos_plugin)
-
-* [Deciding on the object storage configuration](/docs/containers?topic=containers-object_storage#configure_cos)
-
-* [VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#cos_auth_ip)
-
-* [Adding object storage to apps](/docs/containers?topic=containers-object_storage#add_cos)
-
-    * [Creating a deployment](/docs/containers?topic=containers-object_storage#create-cos-deployment-steps)
-
-* [Using object storage in a stateful set](/docs/containers?topic=containers-object_storage#cos_statefulset)
-
-* [Backing up and restoring data](/docs/containers?topic=containers-object_storage#cos_backup_restore)
-
-* [Adding your {{site.data.keyword.cos_full_notm}} credentials to the default storage classes](/docs/containers?topic=containers-object_storage#storage_class_custom)
-
-* [Storage class reference](/docs/containers?topic=containers-object_storage#cos_storageclass_reference)
-
-    * [Standard](/docs/containers?topic=containers-object_storage#standard)
-
-    * [Vault](/docs/containers?topic=containers-object_storage#Vault)
-
-    * [Cold](/docs/containers?topic=containers-object_storage#cold)
-
-    * [Flex](/docs/containers?topic=containers-object_storage#flex)
-
-* [Limitations](/docs/containers?topic=containers-object_storage#cos_limitations)
-
-[Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
-
-* [About Portworx](/docs/containers?topic=containers-portworx#about-portworx)
-
-    * [What is software-defined storage (SDS)?](/docs/containers?topic=containers-portworx#about-px-sds)
-
-    * [How does Portworx work?](/docs/containers?topic=containers-portworx#about-px-work)
-
-    * [What worker node flavor in {{site.data.keyword.containerlong_notm}} is the right one for Portworx?](/docs/containers?topic=containers-portworx#about-px-flavors)
-
-    * [What if I want to run Portworx in a classic cluster with non-SDS worker nodes?](/docs/containers?topic=containers-portworx#about-px-non-sds)
-
-    * [How can I make sure that my data is stored highly available?](/docs/containers?topic=containers-portworx#about-px-ha)
-
-    * [What volume topology offers the best performance for my pods?](/docs/containers?topic=containers-portworx#about-px-topology)
-
-    * [Can I install Portworx in a private cluster?](/docs/containers?topic=containers-portworx#about-px-private)
-
-    * [What's next?](/docs/containers?topic=containers-portworx#about-px-next)
-
-* [Planning your Portworx setup](/docs/containers?topic=containers-portworx#portworx_planning)
-
-* [Creating raw, unformatted, and unmounted block storage for VPC and non-SDS classic worker nodes](/docs/containers?topic=containers-portworx#create_block_storage)
-
-* [Private only clusters: Copying the `ImagePullSecret` to the `kube-system` namespace from the Kubernetes dashboard](/docs/containers?topic=containers-portworx#vpc-image-pull-px)
-
-* [Setting up a key-value store for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
-
-    * [Using the Portworx KVDB](/docs/containers?topic=containers-portworx#portworx-kvdb)
-
-    * [Optional: Setting up a Databases for etcd service instance](/docs/containers?topic=containers-portworx#databases-for-etcd)
-
-* [Optional: Setting up volume encryption](/docs/containers?topic=containers-portworx#encrypt_volumes)
-
-    * [Portworx per-volume encryption workflow](/docs/containers?topic=containers-portworx#px_encryption)
-
-    * [Portworx per-volume decryption workflow](/docs/containers?topic=containers-portworx#decryption)
-
-    * [Enabling per-volume encryption for your Portworx volumes](/docs/containers?topic=containers-portworx#setup_encryption)
-
-    * [Creating a secret to store the KMS credentials](/docs/containers?topic=containers-portworx#px_create_km_secret)
-
-* [Installing Portworx in your cluster](/docs/containers?topic=containers-portworx#install_portworx)
-
-    * [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx)
-
-* [Creating a Portworx volume](/docs/containers?topic=containers-portworx#add_portworx_storage)
-
-* [Mounting the volume to your app](/docs/containers?topic=containers-portworx#mount_pvc)
-
-* [Backing up and restoring apps and data with PX-Backup](/docs/containers?topic=containers-portworx#px-backup)
-
-    * [Installing PX-Backup on an {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-portworx#px-backup-install)
-
-    * [Verifying your PX-Backup installation](/docs/containers?topic=containers-portworx#px-backup-verify)
-
-    * [Logging in to the PX-Backup console](/docs/containers?topic=containers-portworx#px-backup-ui)
-
-    * [Adding a backup location to your PX-Backup service](/docs/containers?topic=containers-portworx#px-backup-storage)
-
-    * [Adding an {{site.data.keyword.containerlong_notm}} cluster to your PX-Backup service](/docs/containers?topic=containers-portworx#px-backup-cluster)
-
-    * [Backing up and restoring cluster data with PX-Backup](/docs/containers?topic=containers-portworx#px-backup-and-restore)
-
-* [Setting up disaster recovery with Portworx](/docs/containers?topic=containers-portworx#px-dr)
-
-* [Exploring other Portworx features](/docs/containers?topic=containers-portworx#features)
-
-* [Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-portworx#portworx_cleanup)
-
-    * [Removing Portworx volumes from apps](/docs/containers?topic=containers-portworx#remove_pvc_apps_volumes)
-
-    * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-portworx#remove_storage_node_cluster-px)
-
-    * [Removing the Portworx daemon set](/docs/containers?topic=containers-portworx#remove_px_daemonset)
-
-    * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
-
-* [Getting help and support](/docs/containers?topic=containers-portworx#portworx_help_sup)
-
-    * [Gathering logs](/docs/containers?topic=containers-portworx#portworx_logs)
-
-* [Limitations](/docs/containers?topic=containers-portworx#portworx_limitations)
-
-[Storing data on {{site.data.keyword.block_storage_is_short}} for unmanaged clusters](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-storage-driver-unmanaged)
-
-* [Prerequisites](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-prereq)
-
-    * [Labelling your worker nodes](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-label-um)
-
-    * [Retrieving IAM and VPC details](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-driver-get-details)
-
-* [Creating the image pull secret in your cluster](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-create-storage-secret)
-
-* [Creating the {{site.data.keyword.block_storage_is_short}} driver deployment](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-deploy-cm)
-
-* [Deploying a stateful set that uses {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-stateful-set-deploy)
-
-* [Removing the {{site.data.keyword.block_storage_is_short}} driver](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#removing-the-block-storage-for-vpc-driver)
-
-* [Config map reference](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-cm-ref)
-
-    * [RHEL or CentOS configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-rhel-cm)
-
-    * [Ubuntu configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
-
-[Backing up and restoring storage data](/docs/containers?topic=containers-storage_br#storage_br)
-
-[IBM Cloud storage utilities](/docs/containers?topic=containers-utilities#utilities)
-
-* [Classic: Installing the IBM Cloud Block Storage Attacher plug-in (beta)](/docs/containers?topic=containers-utilities#block_storage_attacher)
-
-    * [Updating the IBM Cloud Block Storage Attacher plug-in](/docs/containers?topic=containers-utilities#update_block_attacher)
-
-    * [Removing the IBM Cloud Block Volume Attacher plug-in](/docs/containers?topic=containers-utilities#remove_block_attacher)
-
-* [Classic: Manually adding block storage to specific worker nodes](/docs/containers?topic=containers-utilities#manual_block)
-
-* [Classic: Attaching raw block storage to non-SDS worker nodes](/docs/containers?topic=containers-utilities#attach_block)
-
-* [VPC: Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes by using the API](/docs/containers?topic=containers-utilities#vpc_api_attach)
-
-    * [Detaching raw and unformatted {{site.data.keyword.blockstorageshort}} from a worker node in a VPC cluster by using the API](/docs/containers?topic=containers-utilities#vpc_api_detach)
-
-    * [Reviewing volume attachment details for a VPC worker node by using the API](/docs/containers?topic=containers-utilities#vpc_api_get_worker)
-
-* [VPC: Attaching raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes by using the CLI](/docs/containers?topic=containers-utilities#vpc_cli_attach)
-
-    * [Removing raw {{site.data.keyword.blockstorageshort}} from VPC worker nodes by using the CLI](/docs/containers?topic=containers-utilities#storage-util-rm-vpc-cli)
-
-* [Setting up {{site.data.keyword.mon_full_notm}} for storage volumes](/docs/containers?topic=containers-utilities#monitor_storage)
-
-    * [Troubleshooting persistent storage when a {{site.data.keyword.mon_full_notm}} alert is triggered](/docs/containers?topic=containers-utilities#monitor_storage_ts)
-
 
 ## Enhancing cluster capabilities with integrations
 {: #sitemap_enhancing_cluster_capabilities_with_integrations}
 
-
-[{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-service-partners#service-partners)
-
-* [Portworx](/docs/containers?topic=containers-service-partners#portworx-parter)
-
-    * [Benefits](/docs/containers?topic=containers-service-partners#portworx-benefits)
-
-    * [Integration with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-service-partners#portworx-integration)
-
-    * [Billing and support](/docs/containers?topic=containers-service-partners#portworx-billing-support)
-
-[IBM Cloud services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-3rd-party-integrations)
-
-* [IBM Cloud services](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-cloud-services)
-
-    * [IBM Cloud platform services](/docs/containers?topic=containers-ibm-3rd-party-integrations#platform-services)
-
-    * [IBM Cloud classic infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#infrastructure-services)
-
-    * [IBM Cloud VPC infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#vpc-infrastructure-services)
-
-* [Kubernetes community and open source integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-tools)
-
-    * [Integrations operated in partnership](/docs/containers?topic=containers-ibm-3rd-party-integrations#open-source-partners)
-
-    * [Managed add-ons](/docs/containers?topic=containers-ibm-3rd-party-integrations#cluster-add-ons)
-
-    * [Other third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-helm)
-
-    * [Extending Kubernetes API and software with CRDs and Operators](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-crd-operators)
-
-[Adding services by using managed add-ons](/docs/containers?topic=containers-managed-addons#managed-addons)
-
-* [Adding managed add-ons](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
-
-* [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
-
-* [Reviewing add-on states and statuses](/docs/containers?topic=containers-managed-addons#debug_addons_review)
-
-[Adding services by using Helm charts](/docs/containers?topic=containers-helm#helm)
-
-* [About Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-helm#about-helm)
-
-    * [What is Helm and how do I use it?](/docs/containers?topic=containers-helm#what-is-helm)
-
-    * [What Helm charts are supported in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-helm#supported-charts)
-
-* [Installing Helm v3 in your cluster](/docs/containers?topic=containers-helm#install_v3)
-
-[Adding services by using IBM Cloud service binding](/docs/containers?topic=containers-service-binding#service-binding)
-
-* [About service binding](/docs/containers?topic=containers-service-binding#svc-bind-about)
-
-    * [What types of services can I bind to my cluster?](/docs/containers?topic=containers-service-binding#svc-bind-types)
-
-    * [What is {{site.data.keyword.cloud_notm}} service binding?](/docs/containers?topic=containers-service-binding#svc-bind-what)
-
-    * [I already have an {{site.data.keyword.cloud_notm}} service. Can I still use {{site.data.keyword.cloud_notm}} service binding?](/docs/containers?topic=containers-service-binding#svc-bind-existing)
-
-    * [What if I want to use service credentials that use the private cloud service endpoint?](/docs/containers?topic=containers-service-binding#svc-bind-private-cse)
-
-    * [Can I use all {{site.data.keyword.cloud_notm}} services in my cluster?](/docs/containers?topic=containers-service-binding#svc-bind-which)
-
-    * [Can I bind multiple {{site.data.keyword.cloud_notm}} services to multiple clusters at once?](/docs/containers?topic=containers-service-binding#svc-bind-trusted-profile)
-
-* [Adding IBM Cloud services to clusters](/docs/containers?topic=containers-service-binding#bind-services)
-
-* [Accessing service credentials from your apps](/docs/containers?topic=containers-service-binding#adding_app)
-
-    * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
-
-    * [Referencing the secret in environment variables](/docs/containers?topic=containers-service-binding#reference_secret)
-
-* [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
-
-[Understanding high availability and disaster recovery for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#ha)
-
-* [About high availability](/docs/containers?topic=containers-ha#ha-about)
-
-* [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
-
-    * [1. Container or pod availability](/docs/containers?topic=containers-ha#ha-container)
-
-    * [2. Worker node availability](/docs/containers?topic=containers-ha#ha-worker)
-
-    * [3. Cluster availability](/docs/containers?topic=containers-ha#ha-cluster)
-
-    * [4. Zone availability](/docs/containers?topic=containers-ha#ha-zone)
-
-    * [5. Region availability](/docs/containers?topic=containers-ha#ha-region)
-
-    * [6. Storage availability](/docs/containers?topic=containers-ha#ha-storage)
 
 
 ## API reference
@@ -2502,362 +1091,6 @@ subcollection: containers
 ## CLI plug-in reference
 {: #sitemap_cli_plug-in_reference}
 
-
-[{{site.data.keyword.containerlong_notm}} CLI](/docs/containers?topic=containers-kubernetes-service-cli#kubernetes-service-cli)
-
-* [`cluster` commands](/docs/containers?topic=containers-kubernetes-service-cli#cluster)
-
-    * [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_disable)
-
-    * [<code>ibmcloud ks cluster addon enable</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable)
-
-    * [<code>ibmcloud ks cluster addon get</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_get)
-
-    * [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addons)
-
-    * [`ibmcloud ks cluster addon options`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_options)
-
-    * [`ibmcloud ks cluster addon update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_update)
-
-    * [`ibmcloud ks cluster addon versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_addon_versions)
-
-    * [`ibmcloud ks cluster ca create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_create)
-
-    * [`ibmcloud ks cluster ca rotate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_rotate)
-
-    * [`ibmcloud ks cluster ca status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_status)
-
-    * [`ibmcloud ks cluster config`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_config)
-
-    * [`ibmcloud ks cluster create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_create)
-
-    * [`ibmcloud ks cluster create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_cluster-create-vpc-gen2)
-
-    * [`ibmcloud ks cluster get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_get)
-
-    * [`ibmcloud ks cluster image-security disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs-image-security-disable)
-
-    * [`ibmcloud ks cluster image-security enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs-image-security-enable)
-
-    * [`ibmcloud ks cluster ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_clusters)
-
-    * [`ibmcloud ks cluster master audit-webhook`](/docs/containers?topic=containers-kubernetes-service-cli#cluster_master_audit_webhook)
-
-    * [`ibmcloud ks cluster master private-service-endpoint allowlist`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist)
-
-    * [`ibmcloud ks cluster master private-service-endpoint enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_enable)
-
-    * [`ibmcloud ks cluster master public-service-endpoint disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pub_se_disable)
-
-    * [`ibmcloud ks cluster master public-service-endpoint enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pub_se_enable)
-
-    * [`ibmcloud ks cluster master refresh`](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh)
-
-    * [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update)
-
-    * [`ibmcloud ks cluster pull-secret apply`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_pull_secret_apply)
-
-    * [`ibmcloud ks cluster rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_rm)
-
-    * [`ibmcloud ks cluster service bind`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_service_bind)
-
-    * [`ibmcloud ks cluster service ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_services)
-
-    * [`ibmcloud ks cluster service unbind`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_service_unbind)
-
-    * [`ibmcloud ks cluster subnet add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_add)
-
-    * [`ibmcloud ks cluster subnet create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_create)
-
-    * [`ibmcloud ks cluster subnet detach`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_detach)
-
-    * [Deprecated: `ibmcloud ks cluster user-subnet add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_user_subnet_add)
-
-    * [Deprecated: `ibmcloud ks cluster user-subnet rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_user_subnet_rm)
-
-* [`worker` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker_node_commands)
-
-    * [Deprecated: `ibmcloud ks worker add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_add)
-
-    * [`ibmcloud ks worker get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_get)
-
-    * [`ibmcloud ks worker ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_workers)
-
-    * [`ibmcloud ks worker reboot`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot)
-
-    * [`ibmcloud ks worker reload`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload)
-
-    * [`ibmcloud ks worker replace`](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_replace)
-
-    * [`ibmcloud ks worker rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_rm)
-
-    * [`ibmcloud ks worker update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update)
-
-* [`worker-pool` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool)
-
-    * [`ibmcloud ks worker-pool create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_create)
-
-    * [`ibmcloud ks worker-pool create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2)
-
-    * [<code>ibmcloud ks worker-pool get</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_get)
-
-    * [`ibmcloud ks worker-pool label rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_rm)
-
-    * [`ibmcloud ks worker-pool label set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set)
-
-    * [`ibmcloud ks worker-pool ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pools)
-
-    * [`ibmcloud ks worker-pool rebalance`](/docs/containers?topic=containers-kubernetes-service-cli#cs_rebalance)
-
-    * [`ibmcloud ks worker-pool resize`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_resize)
-
-    * [`ibmcloud ks worker-pool rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_rm)
-
-    * [`ibmcloud ks worker-pool taint`](/docs/containers?topic=containers-kubernetes-service-cli#worker_pool_taint)
-
-    * [`ibmcloud ks worker-pool zones`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_zones)
-
-* [`zone` commands](/docs/containers?topic=containers-kubernetes-service-cli#zone)
-
-    * [`ibmcloud ks zone add classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_zone_add)
-
-    * [`ibmcloud ks zone add vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_zone-add-vpc-gen2)
-
-    * [`ibmcloud ks zone ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_datacenters)
-
-    * [`ibmcloud ks zone network-set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_zone_network_set)
-
-    * [`ibmcloud ks zone rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_zone_rm)
-
-* [`ingress` commands](/docs/containers?topic=containers-kubernetes-service-cli#alb-commands)
-
-    * [`ibmcloud ks ingress alb autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable)
-
-    * [`ibmcloud ks ingress alb autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_enable)
-
-    * [`ibmcloud ks ingress alb autoupdate get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_get)
-
-    * [`ibmcloud ks ingress alb create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_create)
-
-    * [`ibmcloud ks ingress alb create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb-create-vpc-gen2)
-
-    * [`ibmcloud ks ingress alb disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_disable)
-
-    * [`ibmcloud ks ingress alb enable classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure)
-
-    * [`ibmcloud ks ingress alb enable vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb_configure_vpc_gen2)
-
-    * [`ibmcloud ks ingress alb get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_get)
-
-    * [`ibmcloud ks ingress alb ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_albs)
-
-    * [Beta: `ibmcloud ks ingress alb migrate clean`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_clean)
-
-    * [Beta: `ibmcloud ks ingress alb migrate start`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_start)
-
-    * [Beta: `ibmcloud ks ingress alb migrate status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_status)
-
-    * [`ibmcloud ks ingress alb update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_update)
-
-    * [`ibmcloud ks ingress alb versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_versions)
-
-    * [Beta: `ibmcloud ks ingress lb get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_get)
-
-    * [Beta: `ibmcloud ks ingress lb proxy-protocol disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_disable)
-
-    * [Beta: `ibmcloud ks ingress lb proxy-protocol enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_enable)
-
-    * [Beta: `ibmcloud ks ingress secret create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create)
-
-    * [Beta: `ibmcloud ks ingress secret get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_get)
-
-    * [Beta: `ibmcloud ks ingress secret ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_ls)
-
-    * [Beta: `ibmcloud ks ingress secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_rm)
-
-    * [Beta: `ibmcloud ks ingress secret update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_update)
-
-    * [`ibmcloud ks ingress status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status)
-
-* [`logging` commands](/docs/containers?topic=containers-kubernetes-service-cli#logging_commands)
-
-    * [`ibmcloud ks logging autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_disable)
-
-    * [`ibmcloud ks logging autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_enable)
-
-    * [`ibmcloud ks logging autoupdate get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_get)
-
-    * [`ibmcloud ks logging collect`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect)
-
-    * [`ibmcloud ks logging collect-status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect_status)
-
-    * [`ibmcloud ks logging config create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_create)
-
-    * [`ibmcloud ks logging config get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_get)
-
-    * [`ibmcloud ks logging config rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_rm)
-
-    * [`ibmcloud ks logging config update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_update)
-
-    * [`ibmcloud ks logging filter create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_filter_create)
-
-    * [`ibmcloud ks logging filter get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_filter_view)
-
-    * [`ibmcloud ks logging filter rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_filter_delete)
-
-    * [`ibmcloud ks logging filter update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_filter_update)
-
-    * [`ibmcloud ks logging refresh`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_refresh)
-
-* [`nlb-dns` commands](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns)
-
-    * [`ibmcloud ks nlb-dns add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-add)
-
-    * [`ibmcloud ks nlb-dns create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-create)
-
-    * [`ibmcloud ks nlb-dns create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-create-vpc-gen2)
-
-    * [`ibmcloud ks nlb-dns ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-ls)
-
-    * [`ibmcloud ks nlb-dns monitor configure`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-configure)
-
-    * [`ibmcloud ks nlb-dns monitor disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-disable)
-
-    * [`ibmcloud ks nlb-dns monitor enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-enable)
-
-    * [`ibmcloud ks nlb-dns monitor get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-get)
-
-    * [`ibmcloud ks nlb-dns monitor ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-ls)
-
-    * [`ibmcloud ks nlb-dns replace`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-replace)
-
-    * [`ibmcloud ks nlb-dns rm classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-rm)
-
-    * [`ibmcloud ks nlb-dns rm vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-rm-vpc-gen2)
-
-    * [Experimental: `ibmcloud ks nlb-dns secret regenerate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-regenerate)
-
-    * [Experimental: `ibmcloud ks nlb-dns secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-rm)
-
-* [`webhook-create` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_webhook_create)
-
-* [`api-key` commands](/docs/containers?topic=containers-kubernetes-service-cli#api_key-commands)
-
-    * [`ibmcloud ks api-key info`](/docs/containers?topic=containers-kubernetes-service-cli#cs_api_key_info)
-
-    * [`ibmcloud ks api-key reset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_api_key_reset)
-
-* [`credential` commands](/docs/containers?topic=containers-kubernetes-service-cli#credential)
-
-    * [`ibmcloud ks credential get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credential_get)
-
-    * [`ibmcloud ks credential set classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credentials_set)
-
-    * [`ibmcloud ks credential unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credentials_unset)
-
-* [`infra-permissions` commands](/docs/containers?topic=containers-kubernetes-service-cli#infra-commands)
-
-    * [`ibmcloud ks infra-permissions get`](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get)
-
-* [`kms` commands](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms)
-
-    * [`ibmcloud ks kms crk ls`](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_crk_ls)
-
-    * [`ibmcloud ks kms enable`](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_enable)
-
-    * [`ibmcloud ks kms instance ls`](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_instance_ls)
-
-* [`quota` commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_quota)
-
-    * [`ibmcloud ks quota ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_quota_ls)
-
-* [`subnets` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_subnets)
-
-* [`vlan` commands](/docs/containers?topic=containers-kubernetes-service-cli#vlan)
-
-    * [`ibmcloud ks vlan ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlans)
-
-    * [`ibmcloud ks vlan spanning get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get)
-
-* [`vpcs` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vpcs)
-
-* [`flavors` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types)
-
-* [`messages` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_messages)
-
-* [locations command](/docs/containers?topic=containers-kubernetes-service-cli#cs_supported-locations)
-
-* [`versions` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_versions_command)
-
-* [`api` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cli_api)
-
-* [`init` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_init)
-
-* [`script` commands](/docs/containers?topic=containers-kubernetes-service-cli#script)
-
-    * [`ibmcloud ks script update`](/docs/containers?topic=containers-kubernetes-service-cli#script_update)
-
-* [Beta: `storage` commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage)
-
-    * [`ibmcloud ks storage attachment create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_cr)
-
-    * [`ibmcloud ks storage attachment get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_get)
-
-    * [`ibmcloud ks storage attachment ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_ls)
-
-    * [`ibmcloud ks storage attachment rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_rm)
-
-    * [`ibmcloud ks storage volume get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_ls_c)
-
-    * [`ibmcloud ks storage volume ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_ls_2)
-
-[CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
-
-* [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
-
-* [Deprecated versions](/docs/containers?topic=containers-cs_cli_changelog#deprecated)
-
-    * [Updating to version 1.0 of the plug-in](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta)
-
-    * [Version 0.4](/docs/containers?topic=containers-cs_cli_changelog#04)
-
-    * [Version 0.3](/docs/containers?topic=containers-cs_cli_changelog#03)
-
-    * [Version 0.2](/docs/containers?topic=containers-cs_cli_changelog#02)
-
-    * [Version 0.1](/docs/containers?topic=containers-cs_cli_changelog#01)
-
-[Observability plug-in CLI](/docs/containers?topic=containers-observability_cli#observability_cli)
-
-* [Logging commands](/docs/containers?topic=containers-observability_cli#logging-commands)
-
-    * [`ibmcloud ob logging agent discover`](/docs/containers?topic=containers-observability_cli#logging_agent_discover)
-
-    * [`ibmcloud ob logging config create`](/docs/containers?topic=containers-observability_cli#logging_config_create)
-
-    * [<code>ibmcloud ob logging config delete</code>](/docs/containers?topic=containers-observability_cli#logging_config_delete)
-
-    * [`ibmcloud ob logging config list`](/docs/containers?topic=containers-observability_cli#logging_config_list)
-
-    * [`ibmcloud ob logging config enable public-endpoint|private-endpoint`](/docs/containers?topic=containers-observability_cli#logging_config_enable)
-
-    * [`ibmcloud ob logging config replace`](/docs/containers?topic=containers-observability_cli#logging_config_replace)
-
-    * [`ibmcloud ob logging config show`](/docs/containers?topic=containers-observability_cli#logging_config_show)
-
-    * [`ibmcloud ob monitoring agent discover`](/docs/containers?topic=containers-observability_cli#monitoring_agent_discover)
-
-    * [`ibmcloud ob monitoring config create`](/docs/containers?topic=containers-observability_cli#monitoring_config_create)
-
-    * [<code>ibmcloud ob monitoring config delete</code>](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
-
-    * [`ibmcloud ob monitoring config list`](/docs/containers?topic=containers-observability_cli#monitoring_config_list)
-
-    * [`ibmcloud ob monitoring config enable public-endpoint|private-endpoint`](/docs/containers?topic=containers-observability_cli#monitoring_config_enable)
-
-    * [`ibmcloud ob monitoring config replace`](/docs/containers?topic=containers-observability_cli#monitoring_config_replace)
-
-    * [`ibmcloud ob monitoring config show`](/docs/containers?topic=containers-observability_cli#monitoring_config_show)
 
 
 ## Version history
@@ -3203,26 +1436,6 @@ subcollection: containers
     * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
 
     * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
-
-[CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark)
-
-* [Using the benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-use)
-
-* [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
-
-* [Benchmark 1.5 results for Kubernetes versions 1.18 - 1.21](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15)
-
-    * [Section 1: Master node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-1)
-
-    * [Section 2: `etcd` node configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-2)
-
-    * [Section 3: Control plane configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-3)
-
-    * [Section 4: Worker node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-4)
-
-    * [Section 5: Kubernetes policies](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-5)
-
-    * [Explanation and remediation](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-remediation)
 
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 
@@ -4229,91 +2442,6 @@ subcollection: containers
 
 * [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
 
-[{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events#at_events)
-
-* [Cluster events](/docs/containers?topic=containers-at_events#clusters-events)
-
-* [Cluster account events](/docs/containers?topic=containers-at_events#cluster-account-events)
-
-* [Cluster add-on events](/docs/containers?topic=containers-at_events#cluster-addons)
-
-* [Fluentd logging events](/docs/containers?topic=containers-at_events#at-fluentd)
-
-* [Ingress ALB events](/docs/containers?topic=containers-at_events#ingress-alb-events)
-
-* [Ingress secret events](/docs/containers?topic=containers-at_events#ingress-secret-events)
-
-* [Observability events for logging and monitoring](/docs/containers?topic=containers-at_events#at-lm)
-
-* [NLB DNS events](/docs/containers?topic=containers-at_events#ingress-nlb-dns-events)
-
-* [Private service endpoint allowlist events](/docs/containers?topic=containers-at_events#acl-events)
-
-* [{{site.data.keyword.satelliteshort}} events](/docs/containers?topic=containers-at_events#satellite-events)
-
-* [Storage events](/docs/containers?topic=containers-at_events#storage-events)
-
-* [Worker node and worker pool events](/docs/containers?topic=containers-at_events#worker-events)
-
-* [Viewing your cluster events](/docs/containers?topic=containers-at_events#at-ui)
-
-[IAM and {{site.data.keyword.cloudaccesstrailshort}} action by API method](/docs/containers?topic=containers-api-at-iam#api-at-iam)
-
-* [Account](/docs/containers?topic=containers-api-at-iam#ks-account)
-
-* [Cluster](/docs/containers?topic=containers-api-at-iam#ks-cluster)
-
-* [Ingress](/docs/containers?topic=containers-api-at-iam#ks-ingress)
-
-* [Ingress ALB](/docs/containers?topic=containers-api-at-iam#ks-alb)
-
-* [Fluentd logging](/docs/containers?topic=containers-api-at-iam#ks-logging)
-
-* [NLB DNS](/docs/containers?topic=containers-api-at-iam#ks-nlb-dns)
-
-* [Observability: {{site.data.keyword.la_short}}](/docs/containers?topic=containers-api-at-iam#ks-observability-logging)
-
-* [Observability: {{site.data.keyword.mon_short}}](/docs/containers?topic=containers-api-at-iam#ks-observability-monitoring)
-
-* [Private service endpoint allowlist](/docs/containers?topic=containers-api-at-iam#ks-acl)
-
-* [Satellite](/docs/containers?topic=containers-api-at-iam#sat-api)
-
-* [Storage](/docs/containers?topic=containers-api-at-iam#ks-storage)
-
-* [Worker nodes and worker pools](/docs/containers?topic=containers-api-at-iam#ks-workers)
-
-
-## Locations
-{: #sitemap_locations}
-
-
-[Locations](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-
-[{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
-
-* [How locations are organized](/docs/containers?topic=containers-regions-and-zones#example_locations_org)
-
-* [Classic multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-mz)
-
-* [Classic single zone regions](/docs/containers?topic=containers-regions-and-zones#zones-sz)
-
-* [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
-
-* [Resources in a single zone cluster](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
-
-* [Resources in a multizone cluster](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
-
-* [Free clusters](/docs/containers?topic=containers-regions-and-zones#regions_free)
-
-[Accessing the global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint)
-
-* [Logging in to {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-regions-and-zones#login-ic)
-
-* [Logging in to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#login-iks)
-
-[Previous {{site.data.keyword.cloud_notm}} region and zone structure](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
-
 
 ## Supported IBM Cloud and third-party integrations
 {: #sitemap_supported_ibm_cloud_and_third-party_integrations}
@@ -4336,25 +2464,6 @@ subcollection: containers
 [Database services](/docs/containers?topic=containers-supported_integrations#database_services)
 
 
-## Default service settings for Kubernetes components
-{: #sitemap_default_service_settings_for_kubernetes_components}
-
-
-[Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings#service-settings)
-
-[`kube-apiserver`](/docs/containers?topic=containers-service-settings#kube-apiserver)
-
-[`kube-controller-manager`](/docs/containers?topic=containers-service-settings#kube-controller-manager)
-
-[`kubelet`](/docs/containers?topic=containers-service-settings#kubelet)
-
-[`kube-scheduler`](/docs/containers?topic=containers-service-settings#kube-scheduler)
-
-[`kube-proxy`](/docs/containers?topic=containers-service-settings#kube-proxy)
-
-[Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
-
-
 ## Related links
 {: #sitemap_related_links}
 
@@ -4364,51 +2473,6 @@ subcollection: containers
 [IBM Developer - Containers](https://developer.ibm.com/technologies/containers/){: new_window}{: external}
 
 [IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: new_window}{: external}
-
-
-## FAQs
-{: #sitemap_faqs}
-
-
-[FAQs](/docs/containers?topic=containers-faqs#faqs)
-
-[What is Kubernetes?](/docs/containers?topic=containers-faqs#kubernetes)
-
-[How does {{site.data.keyword.containerlong_notm}} work?](/docs/containers?topic=containers-faqs#kubernetes_service)
-
-[Why should I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#faq_benefits)
-
-[Can I get a free cluster?](/docs/containers?topic=containers-faqs#faq_free)
-
-[What container platforms are available for my cluster?](/docs/containers?topic=containers-faqs#container_platforms)
-
-[Does the service come with a managed Kubernetes master and worker nodes?](/docs/containers?topic=containers-faqs#managed_master_worker)
-
-[Are the master and worker nodes highly available?](/docs/containers?topic=containers-faqs#faq_ha)
-
-[What options do I have to secure my cluster?](/docs/containers?topic=containers-faqs#secure_cluster)
-
-[What access policies do I give my cluster users?](/docs/containers?topic=containers-faqs#faq_access)
-
-[Where can I find a list of security bulletins that affect my cluster?](/docs/containers?topic=containers-faqs#faq_security_bulletins)
-
-[Does the service offer support for bare metal and GPU?](/docs/containers?topic=containers-faqs#bare_metal_gpu)
-
-[What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster)
-
-[Which Kubernetes versions does the service support?](/docs/containers?topic=containers-faqs#supported_kube_versions)
-
-[Where is the service available?](/docs/containers?topic=containers-faqs#supported_regions)
-
-[Is the service highly available?](/docs/containers?topic=containers-faqs#ha_sla)
-
-[What compliance standards does the service meet?](/docs/containers?topic=containers-faqs#standards)
-
-[Can I use IBM Cloud and other services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
-
-[Does IBM support third-party and open source tools that I use with my cluster?](/docs/containers?topic=containers-faqs#faq_thirdparty_oss)
-
-[What am I charged for? Can I estimate and control costs in my cluster?](/docs/containers?topic=containers-faqs#charges)
 
 
 ## Troubleshooting
@@ -4425,82 +2489,10 @@ subcollection: containers
 
 * [Contacting support](/docs/containers?topic=containers-get-help#help-support)
 
-[Running tests with the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool#debug-tool)
-
-* [Prerequisites](/docs/containers?topic=containers-debug-tool#debug-tool-prereqs)
-
-* [Enabling the Diagnostics and Debug Tool add-on](/docs/containers?topic=containers-debug-tool#debug-tool-enable)
-
 
 ### Clusters and masters
 {: #sitemap_clusters_and_masters}
 
-
-[Debugging clusters](/docs/containers?topic=containers-debug_clusters#debug_clusters)
-
-[Reviewing master health](/docs/containers?topic=containers-debug_master#debug_master)
-
-* [Reviewing master health, status, and states](/docs/containers?topic=containers-debug_master#review-master-health)
-
-* [Understanding the impact of a master outage](/docs/containers?topic=containers-debug_master#review-master-outage)
-
-[Cluster states](/docs/containers?topic=containers-cluster-states-reference#cluster-states-reference)
-
-* [Aborted](/docs/containers?topic=containers-cluster-states-reference#cluster-state-aborted)
-
-* [Critical](/docs/containers?topic=containers-cluster-states-reference#cluster-state-critical)
-
-* [Delete failed](/docs/containers?topic=containers-cluster-states-reference#cluster-state-delete-failed)
-
-* [Deleted](/docs/containers?topic=containers-cluster-states-reference#cluster-state-deleted)
-
-* [Deleting](/docs/containers?topic=containers-cluster-states-reference#cluster-state-deleting)
-
-* [Deploy failed](/docs/containers?topic=containers-cluster-states-reference#cluster-state-deploy-failed)
-
-* [Deploying](/docs/containers?topic=containers-cluster-states-reference#cluster-state-deploying)
-
-* [Normal](/docs/containers?topic=containers-cluster-states-reference#cluster-state-normal)
-
-* [Pending](/docs/containers?topic=containers-cluster-states-reference#cluster-state-pending)
-
-* [Requested](/docs/containers?topic=containers-cluster-states-reference#cluster-state-requested)
-
-* [Updating](/docs/containers?topic=containers-cluster-states-reference#cluster-state-updating)
-
-* [Unsupported](/docs/containers?topic=containers-cluster-states-reference#cluster-state-unsupported)
-
-* [Warning](/docs/containers?topic=containers-cluster-states-reference#cluster-state-warning)
-
-[Debugging common CLI issues with clusters](/docs/containers?topic=containers-ts_clis#ts_clis)
-
-* [Firewall prevents running CLI commands](/docs/containers?topic=containers-ts_clis#ts_firewall_clis)
-
-* [`kubectl` commands do not work](/docs/containers?topic=containers-ts_clis#kubectl_fails)
-
-* [`kubectl` commands time out](/docs/containers?topic=containers-ts_clis#exec_logs_fail)
-
-[Why can't I create or delete clusters?](/docs/containers?topic=containers-cluster_infra_errors#cluster_infra_errors)
-
-* [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-cluster_infra_errors#cs_credentials)
-
-* [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-cluster_infra_errors#orphaned)
-
-* [Unable to create or delete worker nodes due to endpoints error](/docs/containers?topic=containers-cluster_infra_errors#vpe-ts)
-
-* [Unable to create or delete worker nodes due to paid account or one time password error](/docs/containers?topic=containers-cluster_infra_errors#cs_totp)
-
-[VPC: Why is no VPC available when I create a cluster in the console?](/docs/containers?topic=containers-ts_no_vpc#ts_no_vpc)
-
-[Why can't the cluster pull images from {{site.data.keyword.registrylong_notm}} during creation?](/docs/containers?topic=containers-ts_image_pull_create#ts_image_pull_create)
-
-[Why do cluster operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update#webhooks_update)
-
-[Why is my Portieris cluster image security enforcement installation canceled?](/docs/containers?topic=containers-portieris_enable#portieris_enable)
-
-[Why does my cluster stay in a pending state?](/docs/containers?topic=containers-cs_cluster_pending#cs_cluster_pending)
-
-[Why can't I view or work with my cluster?](/docs/containers?topic=containers-cs_cluster_access#cs_cluster_access)
 
 [Classic: Why can't I access resources in my cluster?](/docs/containers?topic=containers-cs_firewall#cs_firewall)
 
@@ -4509,136 +2501,12 @@ subcollection: containers
 {: #sitemap_worker_nodes}
 
 
-[Debugging worker nodes](/docs/containers?topic=containers-debug_worker_nodes#debug_worker_nodes)
-
-* [Step 1: Get the worker node state](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-get-state)
-
-* [Step 2: Review the worker node state](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-rev-state)
-
-* [Step 3: Get the details for each worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-get-details)
-
-* [Step 4: Review the infrastructure provider for the worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-rev-infra)
-
-[Debugging worker nodes with Kubernetes API](/docs/containers?topic=containers-debug-kube-nodes#debug-kube-nodes)
-
-[Worker node states](/docs/containers?topic=containers-worker-node-state-reference#worker-node-state-reference)
-
-* [Critical](/docs/containers?topic=containers-worker-node-state-reference#worker-node-critical)
-
-* [Deleting](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleting)
-
-* [Deleted](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleted)
-
-* [Deployed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deployed)
-
-* [Deploying](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploying)
-
-* [Deploy_failed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploy-failed)
-
-* [Normal](/docs/containers?topic=containers-worker-node-state-reference#worker-node-normal)
-
-* [Provisioned](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioned)
-
-* [Provisioning](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioning)
-
-* [Provision pending](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-pending)
-
-* [Provision_failed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-failed)
-
-* [Reloading](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading)
-
-* [Reloading_failed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading-failed)
-
-* [Reload_pending](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reload-pending)
-
-* [Unknown](/docs/containers?topic=containers-worker-node-state-reference#worker-node-unknown)
-
-* [Warning](/docs/containers?topic=containers-worker-node-state-reference#worker-node-warning)
-
-[Common issues with worker nodes](/docs/containers?topic=containers-common_worker_nodes_issues#common_worker_nodes_issues)
-
-* [Account prohibited from ordering](/docs/containers?topic=containers-common_worker_nodes_issues#order-prohibit)
-
-* [Could not place order](/docs/containers?topic=containers-common_worker_nodes_issues#order-not-placed)
-
-* [Could not obtain network VLAN](/docs/containers?topic=containers-common_worker_nodes_issues#no-network-vlan)
-
-* [Location invalid](/docs/containers?topic=containers-common_worker_nodes_issues#location-invalid)
-
-* [Permissions error](/docs/containers?topic=containers-common_worker_nodes_issues#permissions-error)
-
-* [Firewall error](/docs/containers?topic=containers-common_worker_nodes_issues#firewall-error)
-
-* [Hard reboot](/docs/containers?topic=containers-common_worker_nodes_issues#hard-reboot)
-
-* [Instance cannot be found](/docs/containers?topic=containers-common_worker_nodes_issues#instance-not-found)
-
-[Why can't I create or delete worker nodes?](/docs/containers?topic=containers-worker_infra_errors#worker_infra_errors)
-
-* [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-worker_infra_errors#cs_credentials)
-
-* [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-worker_infra_errors#orphaned)
-
-* [Unable to create or delete worker nodes due to endpoints error](/docs/containers?topic=containers-worker_infra_errors#vpe-ts)
-
-* [Unable to create or delete worker nodes due to paid account or one time password error](/docs/containers?topic=containers-worker_infra_errors#cs_totp)
-
-[VPC: Why doesn't replacing a worker node create a worker node?](/docs/containers?topic=containers-auto-rebalance-off#auto-rebalance-off)
-
-[Classic: Why is the bare metal instance ID inconsistent with worker records?](/docs/containers?topic=containers-bm_machine_id#bm_machine_id)
-
-[After deleting all worker nodes, why don't my pods start on new worker nodes?](/docs/containers?topic=containers-zero_nodes_calico_failure#zero_nodes_calico_failure)
-
-[After a worker node updates or reloads, why do duplicate nodes and pods appear?](/docs/containers?topic=containers-cs_duplicate_nodes#cs_duplicate_nodes)
-
-[Classic: Why can't I add worker nodes with an invalid VLAN ID?](/docs/containers?topic=containers-suspended#suspended)
-
-[Classic: Why do I see a timeout error when I try to log in to a pod on a new worker node?](/docs/containers?topic=containers-cs_nodes_duplicate_ip#cs_nodes_duplicate_ip)
-
-[Why can't I SSH into my worker node?](/docs/containers?topic=containers-cs_ssh_worker#cs_ssh_worker)
-
-* [Debugging by using `kubectl debug`](/docs/containers?topic=containers-cs_ssh_worker#oc-debug)
-
-* [Debugging by using `kubectl exec`](/docs/containers?topic=containers-cs_ssh_worker#kubectl-exec)
-
-* [Debugging by creating a pod with root SSH access](/docs/containers?topic=containers-cs_ssh_worker#pod-ssh)
-
-    * [Private network](/docs/containers?topic=containers-cs_ssh_worker#ssh-private-network)
-
-    * [Public network classic clusters that are connected to a public VLAN only](/docs/containers?topic=containers-cs_ssh_worker#public-network-only-classic-debug)
-
-    * [Cleaning up after debugging](/docs/containers?topic=containers-cs_ssh_worker#ssh-debug-cleanup)
-
-[Debugging the cluster autoscaler](/docs/containers?topic=containers-debug_cluster_autoscaler#debug_cluster_autoscaler)
-
-* [Step 1: Check the version](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-version)
-
-* [Step 2: Check the configuration](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-config)
-
-* [Step 3: Review the cluster autoscaler status](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-status)
-
-* [Step 4: Check the cluster autoscaler pod](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-pod)
-
-* [Step 5: Search the pod logs](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-pod-logs)
-
-* [Step 5: Restart the pod](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-pod-restart)
-
-* [Step 6: Disable and reenable](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-disable)
-
-* [Step 8: Check if the issue is resolved](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-more)
-
 
 ### Cluster network
 {: #sitemap_cluster_network}
 
 
 [Why does DNS resolution fail when CoreDNS pods are restarted?](/docs/containers?topic=containers-coredns_lameduck#coredns_lameduck)
-
-[Why can't I establish VPN connectivity with the strongSwan Helm chart?](/docs/containers?topic=containers-cs_vpn_fails#cs_vpn_fails)
-
-[Why can't I install a new strongSwan Helm chart release?](/docs/containers?topic=containers-cs_strongswan_release#cs_strongswan_release)
-
-[Why does strongSwan VPN connectivity fail after I add or delete worker nodes?](/docs/containers?topic=containers-cs_vpn_fails_worker_add#cs_vpn_fails_worker_add)
 
 [After upgrading my classic cluster to version 1.21, I'm finding connectivity issues](/docs/containers?topic=containers-ts-network-classic121#ts-network-classic121)
 
@@ -4649,53 +2517,19 @@ subcollection: containers
 
 [Why doesn't the Kubernetes dashboard display utilization graphs?](/docs/containers?topic=containers-cs_dashboard_graphs#cs_dashboard_graphs)
 
-[Why are my log lines so long?](/docs/containers?topic=containers-long_lines#long_lines)
-
 
 ### Apps and services
 {: #sitemap_apps_and_services}
 
 
-[Debugging app deployments](/docs/containers?topic=containers-debug_apps#debug_apps)
-
-[Why do images fail to pull from registry with `ImagePullBackOff` or authorization errors?](/docs/containers?topic=containers-ts-app-image-pull#ts-app-image-pull)
-
-* [Troubleshooting image pull secrets that use API keys](/docs/containers?topic=containers-ts-app-image-pull#img-pull-api-key)
-
-[Why don't my containers start?](/docs/containers?topic=containers-ts-app-container-start#ts-app-container-start)
-
-* [Fixing registry quota issues](/docs/containers?topic=containers-ts-app-container-start#regitry-quota)
-
-* [Fixing IP address issues](/docs/containers?topic=containers-ts-app-container-start#calico-ips)
-
-    * [Step 1: Releasing individual IP addresses](/docs/containers?topic=containers-ts-app-container-start#individual-ips)
-
-    * [Step 2: Releasing IP address blocks](/docs/containers?topic=containers-ts-app-container-start#releasing-individual-ips)
-
 [Why do my pods fail to deploy after applying a pod security policy?](/docs/containers?topic=containers-ts-app-psp#ts-app-psp)
 
-[Why do pods remain in pending state?](/docs/containers?topic=containers-ts-app-pod-pending#ts-app-pod-pending)
-
-[Why do pods repeatedly fail to restart or are unexpectedly removed?](/docs/containers?topic=containers-ts-app-pod-fail#ts-app-pod-fail)
-
-* [Fixing container resource limits](/docs/containers?topic=containers-ts-app-pod-fail#pod-fail-resource-limits)
-
-* [Fixing pod replacement by higher priority pods](/docs/containers?topic=containers-ts-app-pod-fail#pod-fail-higher-priority)
-
 [Why does binding a service to a cluster result in a same name error?](/docs/containers?topic=containers-ts-app-svc-bind-name#ts-app-svc-bind-name)
-
-[Why does binding a service to a cluster results in service not found error?](/docs/containers?topic=containers-ts-app-svc-bind-not-found#ts-app-svc-bind-not-found)
-
-[Why does binding a service to a cluster results in service does not support service keys error?](/docs/containers?topic=containers-ts-app-svc-key#ts-app-svc-key)
-
-[Why can't I install a Helm chart with updated configuration values?](/docs/containers?topic=containers-ts-app-helm-install#ts-app-helm-install)
 
 
 ### Managed add-ons
 {: #sitemap_managed_add-ons}
 
-
-[Debugging cluster add-ons](/docs/containers?topic=containers-debug_addons#debug_addons)
 
 [Debugging Istio](/docs/containers?topic=containers-istio_debug_tool#istio_debug_tool)
 
@@ -4712,28 +2546,10 @@ subcollection: containers
 {: #sitemap_load_balancers}
 
 
-[Classic clusters: Why can't my app connect via a network load balancer (NLB) service?](/docs/containers?topic=containers-cs_loadbalancer_fails#cs_loadbalancer_fails)
-
-[Classic clusters: Why can't I deploy a load balancer?](/docs/containers?topic=containers-cs_subnet_limit_lb#cs_subnet_limit_lb)
-
-[Classic clusters: Why does source IP preservation fail when using tainted nodes?](/docs/containers?topic=containers-cs_source_ip_fails_lb#cs_source_ip_fails_lb)
-
-[VPC clusters: Why can't my app connect via load balancer?](/docs/containers?topic=containers-vpc_ts_lb#vpc_ts_lb)
-
-[VPC clusters: Why does a Kubernetes `LoadBalancer` service fail with no IPs?](/docs/containers?topic=containers-vpc_no_lb#vpc_no_lb)
-
 
 ### Ingress
 {: #sitemap_ingress}
 
-
-[Checking the status of Ingress components](/docs/containers?topic=containers-ingress-status#ingress-status)
-
-* [Getting the status and message](/docs/containers?topic=containers-ingress-status#check_status)
-
-* [Ingress statuses](/docs/containers?topic=containers-ingress-status#ingress_status)
-
-* [Ingress messages](/docs/containers?topic=containers-ingress-status#ingress_message)
 
 [Debugging Ingress](/docs/containers?topic=containers-ingress-debug#ingress-debug)
 
@@ -4749,17 +2565,7 @@ subcollection: containers
 
 * [Removing an ALB from DNS for debugging](/docs/containers?topic=containers-ingress-debug#one_alb)
 
-[Classic clusters: Why can't my app connect via Ingress?](/docs/containers?topic=containers-cs_ingress_fails#cs_ingress_fails)
-
-[VPC clusters: Why can't my app connect via Ingress?](/docs/containers?topic=containers-vpc_ts_alb#vpc_ts_alb)
-
 [Why does no Ingress subdomain exist after cluster creation?](/docs/containers?topic=containers-ingress_subdomain#ingress_subdomain)
-
-[Why does no Ingress subdomain exist after I create clusters of the same or similar name?](/docs/containers?topic=containers-cs_rate_limit#cs_rate_limit)
-
-[Why does no Ingress secret exist after cluster creation?](/docs/containers?topic=containers-ingress_secret#ingress_secret)
-
-[Why isn't the Ingress secret expiration date updated?](/docs/containers?topic=containers-sync_cert_dates#sync_cert_dates)
 
 [Why does ALB secret creation or deletion fail?](/docs/containers?topic=containers-cs_albsecret_fails#cs_albsecret_fails)
 
@@ -4773,204 +2579,25 @@ subcollection: containers
 
 [Why does a connection via WebSocket close after 60 seconds?](/docs/containers?topic=containers-cs_ingress_websocket#cs_ingress_websocket)
 
-[Ingress health checks fail on Akamai Global Load Balancer (GLB) configurations](/docs/containers?topic=containers-cs_ingress_health_check_ctm#cs_ingress_health_check_ctm)
-
 
 ### File Storage
 {: #sitemap_file_storage}
 
-
-[Debugging {{site.data.keyword.filestorage_full_notm}} failures](/docs/containers?topic=containers-debug_storage_file#debug_storage_file)
-
-* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_deploy)
-
-* [Restarting your app pod](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_restart)
-
-* [Verifying that the storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_driver_plugin)
-
-* [Checking whether your PVC is successfully provisioned.](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_pvc)
-
-* [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_cli)
-
-[What permissions do I need to manage storage and create PVCs?](/docs/containers?topic=containers-missing_permissions#missing_permissions)
-
-[File storage and block storage: Why does my PVC remain in a pending state?](/docs/containers?topic=containers-file_pvc_pending#file_pvc_pending)
-
-[Why can't my app access or write to PVCs?](/docs/containers?topic=containers-file_app_failures#file_app_failures)
-
-[Why does my app fail with a group ID error for NFS file storage permissions?](/docs/containers?topic=containers-root#root)
-
-[Why does my app fail when a non-root user owns the NFS file storage mount path?](/docs/containers?topic=containers-nonroot#nonroot)
-
-[Why can't I add non-root user access to persistent storage?](/docs/containers?topic=containers-cs_storage_nonroot#cs_storage_nonroot)
-
-* [Verifying the read and write permissions for the non-root user](/docs/containers?topic=containers-cs_storage_nonroot#verify-rw-permissions)
-
-[Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes#readonly_nodes)
-
-[Storage: Feedback, questions, and support](/docs/containers?topic=containers-getting_help_storage#getting_help_storage)
 
 
 ### Block Storage
 {: #sitemap_block_storage}
 
 
-[Debugging {{site.data.keyword.blockstorageshort}} failures](/docs/containers?topic=containers-debug_storage_block#debug_storage_block)
-
-* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_deploy)
-
-* [Restarting your app pod](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_restart)
-
-* [Verifying that the storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_driver_plugin)
-
-* [Checking whether your PVC is successfully provisioned.](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_pvc)
-
-* [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_cli)
-
-* [Checking and updating the {{site.data.keyword.blockstorageshort}} driver](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_driver)
-
-[Why can't my app access or write to PVCs?](/docs/containers?topic=containers-block_app_failures#block_app_failures)
-
-[Why does mounting existing block storage to a pod fail with the wrong file system?](/docs/containers?topic=containers-block_filesystem#block_filesystem)
-
-[Why does block storage change to read-only?](/docs/containers?topic=containers-readonly_block#readonly_block)
-
-[Why does the Block storage plug-in Helm chart give CPU throttling warnings?](/docs/containers?topic=containers-block_helm_cpu#block_helm_cpu)
-
-[{{site.data.keyword.block_storage_is_short}} PVC creation fails after API key reset](/docs/containers?topic=containers-vpc-block-api-key-reset-ts#vpc-block-api-key-reset-ts)
-
-[Why do I get a `Volume not attached` error when trying to expand a {{site.data.keyword.block_storage_is_short}} volume?](/docs/containers?topic=containers-block_not_attached_vpc#block_not_attached_vpc)
-
 
 ### Object Storage
 {: #sitemap_object_storage}
 
 
-[Debugging {{site.data.keyword.cos_full_notm}} failures](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos)
-
-* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_deploy)
-
-* [Restarting your app pod](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_restart)
-
-* [Verifying that the storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_driver_plugin)
-
-* [Checking whether your PVC is successfully provisioned](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_pvc)
-
-* [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_cli)
-
-* [Checking and updating the {{site.data.keyword.cos_short}} plug-in](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_plugin)
-
-[Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails#cos_access_bucket_fails)
-
-[Why does installing the Object storage `ibmc` Helm plug-in fail?](/docs/containers?topic=containers-cos_helm_fails#cos_helm_fails)
-
-[Why can't non-root users access files?](/docs/containers?topic=containers-cos_nonroot_access#cos_nonroot_access)
-
-* [Verifying that the permissions for your files are updated](/docs/containers?topic=containers-cos_nonroot_access#verifying_file_permission_update)
-
-[Why does my app pod fail with an `Operation not permitted` error?](/docs/containers?topic=containers-cos_operation_not_permitted#cos_operation_not_permitted)
-
-[Why can't the ownership of the mount path be changed?](/docs/containers?topic=containers-cos_mountpath_error#cos_mountpath_error)
-
-[Why does installing the Object storage plug-in fail?](/docs/containers?topic=containers-cos_plugin_fails#cos_plugin_fails)
-
-[Why do I see wrong credentials or access denied messages when I create a PVC?](/docs/containers?topic=containers-cred_failure#cred_failure)
-
-[Why do I see wrong s3fs or IAM API endpoints when I create a PVC?](/docs/containers?topic=containers-cos_api_endpoint_failure#cos_api_endpoint_failure)
-
-[Why does my PVC remain in a pending state?](/docs/containers?topic=containers-cos_pvc_pending#cos_pvc_pending)
-
-[Why does PVC or pod creation fail due to not finding the Kubernetes secret?](/docs/containers?topic=containers-cos_secret_access_fails#cos_secret_access_fails)
-
 
 ### Portworx Storage
 {: #sitemap_portworx_storage}
 
-
-[Debugging Portworx failures](/docs/containers?topic=containers-debug_storage_px#debug_storage_px)
-
-* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_deploy)
-
-* [Restarting your app pod](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_restart)
-
-* [Verifying that the Portworx storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_driver_plugin)
-
-* [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_cli)
-
-* [Updating Helm charts](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_helm)
-
-[Debugging your Portworx installation](/docs/containers?topic=containers-debug-portworx#debug-portworx)
-
-* [Step 1: Verifying the {{site.data.keyword.cloud_notm}} catalog information](/docs/containers?topic=containers-debug-portworx#px-verify-catalog)
-
-* [Step 2: Verifying the cluster setup](/docs/containers?topic=containers-debug-portworx#px-verify-cluster)
-
-* [Step 3: Reach out to Portworx and IBM](/docs/containers?topic=containers-debug-portworx#px-support)
-
-[Why does encryption fail with an invalid KMS endpoint?](/docs/containers?topic=containers-px-kms-endpoint#px-kms-endpoint)
-
-
-## Release notes
-{: #sitemap_release_notes}
-
-
-[Release notes](/docs/containers?topic=containers-iks-release#iks-release)
-
-[August 2021](/docs/containers?topic=containers-iks-release#aug21)
-
-[July 2021](/docs/containers?topic=containers-iks-release#jul21)
-
-[June 2021](/docs/containers?topic=containers-iks-release#jun21)
-
-[May 2021](/docs/containers?topic=containers-iks-release#may21)
-
-[April 2021](/docs/containers?topic=containers-iks-release#apr21)
-
-[March 2021](/docs/containers?topic=containers-iks-release#mar21)
-
-[February 2021](/docs/containers?topic=containers-iks-release#feb21)
-
-[January 2021](/docs/containers?topic=containers-iks-release#jan21)
-
-[December 2020](/docs/containers?topic=containers-iks-release#dec20)
-
-[November 2020](/docs/containers?topic=containers-iks-release#nov20)
-
-[October 2020](/docs/containers?topic=containers-iks-release#oct20)
-
-[September 2020](/docs/containers?topic=containers-iks-release#sep20)
-
-[August 2020](/docs/containers?topic=containers-iks-release#aug20)
-
-[July 2020](/docs/containers?topic=containers-iks-release#july20)
-
-[June 2020](/docs/containers?topic=containers-iks-release#june20)
-
-[May 2020](/docs/containers?topic=containers-iks-release#may20)
-
-[April 2020](/docs/containers?topic=containers-iks-release#apr20)
-
-[March 2020](/docs/containers?topic=containers-iks-release#mar20)
-
-[February 2020](/docs/containers?topic=containers-iks-release#feb20)
-
-[January 2020](/docs/containers?topic=containers-iks-release#jan20)
-
-[December 2019](/docs/containers?topic=containers-iks-release#dec19)
-
-[November 2019](/docs/containers?topic=containers-iks-release#nov19)
-
-[October 2019](/docs/containers?topic=containers-iks-release#oct19)
-
-[September 2019](/docs/containers?topic=containers-iks-release#sept19)
-
-[August 2019](/docs/containers?topic=containers-iks-release#aug19)
-
-[July 2019](/docs/containers?topic=containers-iks-release#jul19)
-
-[June 2019](/docs/containers?topic=containers-iks-release#jun19)
-
-[May 2019](/docs/containers?topic=containers-iks-release#may19)
 
 
 ## Service limitations
