@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks
 
@@ -14,7 +14,6 @@ content-type: troubleshoot
 
 
 {{site.data.keyword.attribute-definition-list}}
-
 
 # Why don't my containers start?
 {: #ts-app-container-start}
@@ -48,8 +47,8 @@ If you see either of the IP address-related messages that are listed in the symp
 {: tsResolve}
 
 **Infrastructure provider**:
-* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
+* <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+* <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
 To fix registry quota issues, [free up storage in {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-registry_quota#registry_quota_freeup).
 {: shortdesc}
@@ -58,8 +57,8 @@ To fix registry quota issues, [free up storage in {{site.data.keyword.registrylo
 {: #calico-ips}
 
 **Infrastructure provider and versions**:
-* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
+* <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+* <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 * Your cluster must run a [supported version](/docs/containers?topic=containers-cs_versions#version_types). If you cluster runs a deprecated or unsupported version, first [update your cluster](/docs/containers?topic=containers-update).
 
 To fix IP address issues, release individual and blocks of IP addresses that were not cleanly removed from the Calico IPAM records so that they can be reused by pods in your cluster.

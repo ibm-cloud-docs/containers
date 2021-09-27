@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -12,14 +12,16 @@ content-type: troubleshoot
 ---
 
 
+
 {{site.data.keyword.attribute-definition-list}}
   
+
 
 # Classic clusters: Why does source IP preservation fail when using tainted nodes?
 {: #cs_source_ip_fails}
 
 **Infrastructure provider**:
-* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+* <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 
 You [enabled source IP preservation for an Ingress ALB](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip_classic) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the back-end service for your app.
