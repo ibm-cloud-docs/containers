@@ -14,6 +14,7 @@ subcollection: containers
 
 {{site.data.keyword.attribute-definition-list}}
 
+
 # Adding worker nodes and zones to clusters
 {: #add_workers}
 

@@ -14,6 +14,7 @@ subcollection: containers
 
 {{site.data.keyword.attribute-definition-list}}
 
+
 # Transportation use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_transport}
 

@@ -11,7 +11,8 @@ content-type: troubleshoot
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 # Why are Istio components missing?
 {: #istio_control_plane}

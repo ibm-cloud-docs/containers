@@ -14,6 +14,7 @@ subcollection: containers
 
 {{site.data.keyword.attribute-definition-list}}
 
+
 # Retail use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_retail}
 

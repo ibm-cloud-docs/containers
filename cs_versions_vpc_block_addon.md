@@ -14,6 +14,7 @@ subcollection: containers
 
 {{site.data.keyword.attribute-definition-list}}
 
+
 # {{site.data.keyword.block_storage_is_short}} add-on changelog
 {: #vpc_bs_changelog}
 

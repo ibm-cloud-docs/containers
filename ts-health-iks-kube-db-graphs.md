@@ -11,7 +11,8 @@ content-type: troubleshoot
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 # Why doesn't the Kubernetes dashboard display utilization graphs?
 {: #cs_dashboard_graphs}

@@ -11,7 +11,8 @@ content-type: troubleshoot
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 # Why does DNS resolution fail when CoreDNS pods are restarted?
 {: #coredns_lameduck}
