@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-27"
 
 keywords: kubernetes, iks, clusters
 
@@ -10,7 +10,8 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 
 # Accessing clusters
@@ -660,4 +661,8 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
     2. On the cluster overview page, go to the **Networking** section and copy the **Ingress subdomain**.
     3. Ping the Ingress subdomain to verify that you can connect to your private Kubernetes cluster.
     4. From the cluster overview page, open the Kubernetes web console. 
+
+
+
+
 

@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-27"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -10,7 +10,8 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 # Archived Kubernetes version changelogs
 {: #changelog_archive}
@@ -11009,5 +11010,9 @@ Review the version 1.7 changelogs.
 </tr>
 </tbody>
 </table>
+
+
+
+
 
 

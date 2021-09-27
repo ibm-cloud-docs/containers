@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-23"
+lastupdated: "2021-09-27"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -10,7 +10,8 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 # Istio add-on version changelog
 {: #istio-changelog}
@@ -1032,6 +1033,10 @@ Review the changes that are included in version 1.4.2 of the managed Istio add-o
     - [CVE-2019-18838](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18838){: external}
 - For more information, see the [Istio security bulletin](https://istio.io/latest/news/security/istio-security-2019-007/){: external}.
   
+
+
+
+
 
 
 

@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Building containers from images
 {: #images}
@@ -267,6 +268,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     kubectl get ImagePolicy --all-namespaces
     ```
     {: pre}
+
 
 
 

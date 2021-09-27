@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-27"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -10,7 +10,8 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 
 # Configuring the cluster DNS provider
@@ -658,5 +659,9 @@ To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of 
     ibmcloud ks cluster get -c <cluster_name_or_ID>
     ```
     {: pre}
+
+
+
+
 
 

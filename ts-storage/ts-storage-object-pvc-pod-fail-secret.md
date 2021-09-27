@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-15"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -11,8 +11,9 @@ content-type: troubleshoot
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Why does PVC or pod creation fail due to not finding the Kubernetes secret?
 {: #cos_secret_access_fails}
@@ -59,6 +60,8 @@ This task requires [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} I
 2. If your secret does not show `ibm/ibmc-s3fs` as the **Type**, [re-create your secret](/docs/containers?topic=containers-object_storage#create_cos_secret).
 
 3. Check your YAML configuration file for your PVC and pod to verify that you used the correct secret.
+
+
 
 
 

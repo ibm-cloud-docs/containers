@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-27"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -10,7 +10,8 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 
 # Setting up the CLI
@@ -597,5 +598,9 @@ To install and launch the Kubernetes web terminal:
         3. In the service endpoint URL for the `server` field, add `private.` before the region. For example, if the service endpoint URL is `https://c1.us-south.containers.cloud.ibm.com:20267`, change it to `https://c1.private.us-south.containers.cloud.ibm.com:20267`.
         4. Type `Esc` (escape key) to exit insert mode.
         5. Type `:wq` to save and exit your file.
+
+
+
+
 
 

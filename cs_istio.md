@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-23"
+lastupdated: "2021-09-27"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -10,7 +10,8 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 
 
@@ -540,5 +541,9 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 
 To resolve some common issues that you might encounter when you use the managed Istio add-on, see [Troubleshooting managed add-ons](/docs/containers?topic=containers-debug_addons).
 {: shortdesc}
+
+
+
+
 
 

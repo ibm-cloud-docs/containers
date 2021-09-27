@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-15"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -11,8 +11,9 @@ content-type: troubleshoot
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Why can't I add non-root user access to persistent storage?
 {: #cs_storage_nonroot}
@@ -232,6 +233,8 @@ Allocating a supplemental group ID for a non-root user of a file storage device 
 
 If you need to change the ownership of the mount path from `nobody`, see [App fails when a non-root user owns the NFS file storage mount path](/docs/containers?topic=containers-nonroot).
 {: tip}
+
+
 
 
 

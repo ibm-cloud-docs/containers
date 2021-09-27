@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-22"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, vyatta, strongswan, ipsec, on-premises, vpn, gateway, static route, routing table
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Adding static routes to worker nodes
 {: #static-routes}
@@ -211,6 +212,7 @@ After you [enable the static route add-on](#enable-add-on), you can create and a
             subnet: 10.94.227.46/24
     ```
     {: screen}
+
 
 
 

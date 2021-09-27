@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-24"
 
 keywords: storage, back up, restore
 
@@ -10,7 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Backing up and restoring storage data
 {: #storage_br}
@@ -25,4 +27,6 @@ If you have not provisioned storage, review the [Kubernetes storage basics](/doc
 * [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
 * [{{site.data.keyword.cos_short}}](/docs/containers?topic=containers-object_storage#cos_backup_restore)
 * [Portworx disaster recovery](/docs/containers?topic=containers-portworx#px-dr)
+
+
 

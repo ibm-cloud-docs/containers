@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-27"
 
 keywords: kubernetes, iks
 
@@ -15,7 +15,8 @@ completion-time: 30m
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 
 # Creating a cluster in your Virtual Private Cloud (VPC)
@@ -429,5 +430,9 @@ Now that you have a VPC cluster, learn more about what you can do.
 
 Need help, have questions, or want to give feedback on VPC clusters? Try posting in the [Slack channel](https://cloud.ibm.com/kubernetes/slack){: external}.
 {: tip}
+
+
+
+
 
 

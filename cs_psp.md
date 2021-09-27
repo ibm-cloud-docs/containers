@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-21"
+lastupdated: "2021-09-27"
 
 keywords: kubernetes, iks
 
@@ -10,7 +10,8 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 
 # Configuring pod security policies
@@ -230,5 +231,9 @@ You must not delete or modify these resources.
 | `ibm-restricted-psp` | All | `PodSecurityPolicy` | Policy for unprivileged, or restricted, pod creation. |
 | `ibm-restricted-psp-user` | All | `ClusterRole` | Cluster role that allows the use of `ibm-restricted-psp` pod security policy. |
 {: caption="IBM pod security policies resources that you must not modify" caption-side="top"}
+
+
+
+
 
 

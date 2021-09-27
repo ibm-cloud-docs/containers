@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-27"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -10,7 +10,8 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 
 # Architecture and dependencies of the service
@@ -259,7 +260,6 @@ To remove that data that IBM stores, choose between the following options. Note 
 - **End your {{site.data.keyword.cloud_notm}} subscription**: After you end your {{site.data.keyword.cloud_notm}} subscription, {{site.data.keyword.containerlong_notm}} removes the customer root key in {{site.data.keyword.keymanagementservicelong_notm}} that IBM created and managed for you as well as all the personal and sensitive information from the etcd data store and {{site.data.keyword.cos_short}} backup.
 
 
-
 ## Dependencies to other {{site.data.keyword.cloud_notm}} services
 {: #dependencies-ibmcloud}
 
@@ -293,4 +293,8 @@ Review the list of 3rd party services that {{site.data.keyword.containerlong_not
 | Let's Encrypt | This service is used as the Certificate authority to generate SSL certificates for customer owned public endpoints. All generated certificates are managed in {{site.data.keyword.cloudcerts_short}}.|
 {: caption="{{site.data.keyword.containerlong_notm}} dependencies to third-party services." caption-side="top"}
 {: summary="The rows are read from left to right. The first column is the service. The second column is a description of the service."}
+
+
+
+
 

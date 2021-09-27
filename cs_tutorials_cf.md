@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-27"
 
 keywords: kubernetes, iks
 
@@ -14,7 +14,8 @@ completion-time: 30m
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 
 # Migrating an app from Cloud Foundry to a cluster
@@ -254,5 +255,9 @@ Deploy your app as a container in a Kubernetes cluster.
 6. In the **Workloads** tab, you can see the resources that you created.
 
 Good job! Your app is deployed in a container!
+
+
+
+
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-23"
+lastupdated: "2021-09-27"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -10,7 +10,8 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 
 # About the managed Istio add-on
@@ -80,5 +81,9 @@ Review the following limitations for the managed Istio add-on.
 * You cannot modify any Istio resources that are created for you in the `istio-system` namespace. If you need to customize the Istio installation, you can [edit the `managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize).
 * The following features are not supported in the managed Istio add-on:
     * [Any features by the community that are in alpha release stages](https://istio.io/latest/docs/releases/feature-stages/){: external}
+
+
+
+
 
 

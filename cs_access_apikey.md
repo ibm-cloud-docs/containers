@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-21"
+lastupdated: "2021-09-24"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -10,8 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
 
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Setting up API key credentials so the service can access the infrastructure and other cloud services
 {: #access-creds}
@@ -419,4 +420,7 @@ To customize classic infrastructure permissions through the CLI:
     {: pre}
 
 6. For individual required or suggested permissions, see the [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra) table.
+
+
+
 

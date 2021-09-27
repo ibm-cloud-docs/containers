@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-10"
+lastupdated: "2021-09-27"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -10,7 +10,8 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+{{site.data.keyword.attribute-definition-list}}
+  
 
 
 # Updating clusters, worker nodes, and cluster components
@@ -626,7 +627,6 @@ Managed {{site.data.keyword.containerlong_notm}} add-ons are an easy way to enha
 
 
 
-
 ## Updating from stand-alone worker nodes to worker pools
 {: #standalone_to_workerpool}
 
@@ -719,5 +719,9 @@ To update stand-alone worker nodes to worker pools:
 **What's next?**
 
 Now that you updated your cluster to use worker pools, you can, improve availability by adding more zones to your cluster. Adding more zones to your cluster changes your cluster from a single zone cluster to a [multizone cluster](/docs/containers?topic=containers-ha_clusters#ha_clusters). When you change your single zone cluster to a multizone cluster, your Ingress domain changes from `<cluster_name>.<region>.containers.mybluemix.net` to `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. The existing Ingress domain is still valid and can be used to send requests to your apps.
+
+
+
+
 
 

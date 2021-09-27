@@ -1,8 +1,8 @@
 ---
 
-copyright:
+copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-23"
+lastupdated: "2021-09-27"
 
 keywords: kubernetes, iks, release notes
 
@@ -10,7 +10,9 @@ subcollection: containers
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+
+
+{{site.data.keyword.attribute-definition-list}}
 
 
 # Release notes
@@ -31,6 +33,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 Review the release notes for September 2021.
 {: shortdesc}
+
+### 27 September 2021
+{: #27sep2021}
+{: release-note}
+
+Master fix pack update
+:   Changelog documentation is available for Kubernetes version [`1.21.5_1531`](/docs/containers?topic=containers-changelog#1215_1531), [`1.20.11_1553`](/docs/containers?topic=containers-changelog#12011_1553), [`1.19.15_1560`](/docs/containers?topic=containers-changelog#11915_1560), [`1.18.20_1565`](/docs/containers?topic=containers-changelog#11820_1565).
+
+
+Worker node fix pack update
+:   Changelog documentation is available for Kubernetes version [`1.18.20_1566`](/docs/containers?topic=containers-changelog#11820_1566), [`1.19.15_1561`](/docs/containers?topic=containers-changelog#11915_1561), [`12011_1554`](/docs/containers?topic=containers-changelog#12011_1554), and [`1.21.5_1532`](/docs/containers?topic=containers-changelog#1215_1532).
 
 ### 23 September 2021
 {: #23sep2021}
@@ -141,4 +154,7 @@ Review the release notes for 30 August 2021.
 
 Worker node fix pack update
 :   Changelog documentation is available for Kubernetes version [`1.17.17_1568`](/docs/containers?topic=containers-changelog#11717_1568), [`1.18.20_1563`](/docs/containers?topic=containers-changelog#11820_1563), [`1.19.14_1558`](/docs/containers?topic=containers-changelog#11914_1558), [`1.20.10_1551`](/docs/containers?topic=containers-changelog#12010_1551), and [`1.21.4_1529`](/docs/containers?topic=containers-changelog#12104_1529).
+
+
+
 
