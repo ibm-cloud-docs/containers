@@ -177,6 +177,37 @@ subcollection: containers
 * [Add integrations](/docs/containers?topic=containers-learning-path-dev#dev_integrate)
 
 
+## Release notes
+{: #sitemap_release_notes}
+
+
+[Release notes](/docs/containers?topic=containers-rel-notes#rel-notes)
+
+[September 2021](/docs/containers?topic=containers-rel-notes#release-sep-2021)
+
+* [27 September 2021](/docs/containers?topic=containers-rel-notes#27sep2021)
+
+* [23 September 2021](/docs/containers?topic=containers-rel-notes#23sep2021)
+
+* [22 September 2021](/docs/containers?topic=containers-rel-notes#22sep2021)
+
+* [16 September 2021](/docs/containers?topic=containers-rel-notes#16sep2021)
+
+* [14 September 2021](/docs/containers?topic=containers-rel-notes#14sep2021)
+
+* [13 September 2021](/docs/containers?topic=containers-rel-notes#13sep2021)
+
+* [9 September 2021](/docs/containers?topic=containers-rel-notes#9sep2021)
+
+* [1 September 2021](/docs/containers?topic=containers-rel-notes#1sep2021)
+
+[August 2021](/docs/containers?topic=containers-rel-notes#release-aug-2021)
+
+* [31 August 2021](/docs/containers?topic=containers-rel-notes#31aug2021)
+
+* [30 August 2021](/docs/containers?topic=containers-rel-notes#30aug2021)
+
+
 ## Tutorials library for Kubernetes Service
 
 [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: new_window}{: external}
