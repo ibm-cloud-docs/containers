@@ -10,6 +10,7 @@ subcollection: containers
 
 ---
 
+
 {{site.data.keyword.attribute-definition-list}}
 
 # After upgrading my classic cluster to version 1.21, I'm finding connectivity issues

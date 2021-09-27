@@ -11,7 +11,11 @@ content-type: troubleshoot
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+
+
+{{site.data.keyword.attribute-definition-list}}
+  
+
 
 # Classic clusters: Why does source IP preservation fail when using tainted nodes?
 {: #cs_source_ip_fails}

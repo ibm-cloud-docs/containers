@@ -11,7 +11,11 @@ content-type: troubleshoot
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+
+
+{{site.data.keyword.attribute-definition-list}}
+  
+
 
 # Classic clusters: Why are no ALBs deployed in a zone?
 {: #cs_subnet_limit}

@@ -11,7 +11,11 @@ content-type: troubleshoot
 
 ---
 
-{{site.data.keyword.attribute-definition-list}}  
+
+
+{{site.data.keyword.attribute-definition-list}}
+  
+
 
 # Why does binding a service to a cluster result in a same name error?
 {: #ts-app-svc-bind-name}

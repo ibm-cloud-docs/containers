@@ -10,6 +10,7 @@ subcollection: containers
 
 ---
 
+
 {{site.data.keyword.attribute-definition-list}}
   
 
@@ -340,6 +341,7 @@ spec:
                 key: LANGUAGE
         ...
 ---
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -438,6 +440,7 @@ spec:
           claimName: wasliberty
         ...
 ---
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -553,6 +556,7 @@ spec:
         persistentVolumeClaim:
           claimName: wasliberty
 ---
+
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
@@ -563,6 +567,7 @@ spec:
     matchLabels:
       app: wasliberty
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -576,6 +581,7 @@ spec:
     app: wasliberty
   type: NodePort
 ---
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -586,6 +592,7 @@ data:
   VERSION: "1.0"
   LANGUAGE: en
 ---
+
 apiVersion: v1
 kind: Secret
 metadata:
@@ -597,6 +604,7 @@ data:
   username: dXNlcm5hbWU=
   password: cGFzc3dvcmQ=
 ---
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
