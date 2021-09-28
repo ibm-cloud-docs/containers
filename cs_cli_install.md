@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -96,7 +96,7 @@ For reference information about these CLIs, see the documentation for those tool
 -   [`ibmcloud cr` commands](/docs/Registry?topic=container-registry-cli-plugin-containerregcli)
 -   [`ibmcloud ob` commands](/docs/containers?topic=containers-observability_cli)
 
-<br />
+
 
 
 
@@ -155,7 +155,7 @@ Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.
 For more information about the Kubernetes CLI, see the [`kubectl` reference docs](https://kubectl.docs.kubernetes.io/){: external}.
 {: note}
 
-<br />
+
 
 ## Running the CLI in a container on your computer
 {: #cs_cli_container}
@@ -181,7 +181,7 @@ Before you begin, [install Docker for Mac](https://docs.docker.com/docker-for-ma
 
 3. Begin running `ibmcloud ks` and `kubectl` commands from the interactive shell. If you create data that you want to save, save that data to the volume that you mounted. When you exit the shell, the container stops.
 
-<br />
+
 
 ## Configuring the CLI to run `kubectl`
 {: #cs_cli_configure}
@@ -245,7 +245,7 @@ Now, you can run `kubectl` commands to manage your cluster in {{site.data.keywor
 If you are using Windows and the Kubernetes CLI is not installed in the same directory as the {{site.data.keyword.cloud_notm}} CLI, you must change directories to the path where the Kubernetes CLI is installed to run `kubectl` commands successfully.
 {: tip}
 
-<br />
+
 
 ## Setting the Kubernetes context for multiple clusters
 {: #cli_config_multiple}
@@ -318,7 +318,7 @@ To set the Kubernetes context for multiple clusters:
         Plan to switch contexts by command often? Create an alias for each cluster in your command line for the context. For example: `alias kprod='kubectl --context=mycluster/abc123'`. Then you can use the alias to switch clusters.
         {: tip}
 
-<br />
+
 
 ## Creating a temporary `kubeconfig` file
 {: #cli_temp_kubeconfig}
@@ -371,7 +371,7 @@ Instead of merging the `kubeconfig` file of [multiple clusters](#cli_config_mult
 
 6. Repeat these steps when you want to use a different cluster or open a new command line session.
 
-<br />
+
 
 
 
@@ -465,7 +465,7 @@ To update the CLIs:
 
         The observability plug-in is displayed in the results as `observe-service/ob`.
 
-<br />
+
 
 ## Installing the `odo` CLI for developers
 {: #cli-odo-install}
@@ -473,7 +473,7 @@ To update the CLIs:
 Looking to develop apps without using `kubectl` system admin commands or YAML configuration files? Check out the [Developing on clusters with the {{site.data.keyword.openshiftshort}} Do CLI](/docs/containers?topic=containers-odo-tutorial) tutorial.
 {: shortdesc}
 
-<br />
+
 
 ## Uninstalling the CLI
 {: #cs_cli_uninstall}
@@ -528,7 +528,7 @@ To uninstall the CLIs:
     ```
     {: pre}
 
-<br />
+
 
 ## Using the {{site.data.keyword.cloud-shell_notm}} in your web browser
 {: #cloud-shell}

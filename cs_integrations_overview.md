@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, helm
 
@@ -47,7 +47,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 {: caption="Popular integrations"}
 {: summary="The table shows available services that you can add to your cluster and that are popular among {{site.data.keyword.containerlong_notm}} users. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
-<br />
+
 
 ## DevOps services
 {: #devops_services}
@@ -67,7 +67,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 {: caption="DevOps services"}
 {: summary="The table shows available services that you can add to your cluster to add extra DevOps capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
-<br />
+
 
 ## Hybrid cloud services
 {: #hybrid_cloud_services}
@@ -81,7 +81,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 {: caption="Hybrid cloud services"}
 {: summary="The table shows available services that you can use to connect your cluster to on-premises data centers. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
-<br />
+
 
 ## Logging and monitoring services
 {: #health_services}
@@ -101,7 +101,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 {: caption="Logging and monitoring services"}
 {: summary="The table shows available services that you can add to your cluster to add extra logging and monitoring capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
-<br />
+
 
 
 ## Security services
@@ -123,7 +123,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 {: caption="Security services"}
 {: summary="The table shows available services that you can add to your cluster to add extra security capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
-<br />
+
 
 
 ## Storage services
@@ -140,7 +140,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 {: caption="Storage services"}
 {: summary="The table shows available services that you can add to your cluster to add persistent storage capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
-<br />
+
 
 ## Database services
 {: #database_services}

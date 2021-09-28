@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -80,7 +80,7 @@ Default Kubernetes policies that limits access to the Kubernetes Dashboard are a
 {: caption="Default Kubernetes policies for each cluster"}
 {: summary="The first row in the table spans both columns. Read the rest of the rows from left to right, with the Kubernetes policy in column one and the description in column two."}
 
-<br />
+
 
 ## Installing and configuring the Calico CLI
 {: #cli_install}

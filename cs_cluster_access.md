@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, clusters
 
@@ -35,7 +35,7 @@ After your {{site.data.keyword.containerlong}} cluster is created, you can begin
     *  **Private Service Endpoint URL only**: Continue with [Accessing clusters through the private cloud service endpoint](#access_private_se).
     *  **Both service endpoint URLs**: You can access your cluster either through the [public](#access_public_se) or the [private](#access_private_se) service endpoint.
 
-<br />
+
 
 ## Accessing clusters through the public cloud service endpoint
 {: #access_public_se}
@@ -83,7 +83,7 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
         ```
         {: codeblock}
 
-<br />
+
 
 ## Accessing clusters through the private cloud service endpoint
 {: #access_private_se}
@@ -302,7 +302,7 @@ To create a private cloud service endpoint allowlist:
 
 Your authorized users can now continue with [Accessing clusters through the private cloud service endpoint](#access_private_se).
 
-<br />
+
 
 ## Accessing the cluster master via admission controllers and webhooks
 {: #access_webhooks}

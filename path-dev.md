@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, containers
 
@@ -16,117 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-<style>
-    <!--
-        #tutorials { /* hide the page header */
-            display: none !important;
-        }
-        .allCategories {
-            display: flex !important;
-            flex-direction: row !important;
-            flex-wrap: wrap !important;
-        }
-        .categoryBox {
-            flex-grow: 1 !important;
-            width: calc(33% - 20px) !important;
-            text-decoration: none !important;
-            margin: 0 10px 20px 0 !important;
-            padding: 16px !important;
-            border: 1px #dfe6eb solid !important;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
-            text-align: center !important;
-            text-overflow: ellipsis !important;
-            overflow: hidden !important;
-        }
-        .solutionBoxContainer {}
-        .solutionBoxContainer a {
-            text-decoration: none !important;
-            border: none !important;
-        }
-        .solutionBox {
-            display: inline-block !important;
-            width: 100% !important;
-            margin: 0 10px 20px 0 !important;
-            padding: 16px !important;
-            background-color: #f4f4f4 !important;
-        }
-        @media screen and (min-width: 960px) {
-            .solutionBox {
-            width: calc(50% - 3%) !important;
-            }
-            .solutionBox.solutionBoxFeatured {
-            width: calc(50% - 3%) !important;
-            }
-            .solutionBoxContent {
-            height: 350px !important;
-            }
-        }
-        @media screen and (min-width: 1298px) {
-            .solutionBox {
-            width: calc(33% - 2%) !important;
-            }
-            .solutionBoxContent {
-            min-height: 350px !important;
-            }
-        }
-        .solutionBox:hover {
-            border: 1px rgb(136, 151, 162)solid !important;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
-        }
-        .solutionBoxContent {
-            display: flex !important;
-            flex-direction: column !important;
-        }
-        .solutionBoxTitle {
-            margin: 0rem !important;
-            margin-bottom: 5px !important;
-            font-size: 14px !important;
-            font-weight: 900 !important;
-            line-height: 16px !important;
-            height: 37px !important;
-            text-overflow: ellipsis !important;
-            overflow: hidden !important;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 2 !important;
-            -webkit-box-orient: vertical !important;
-            -webkit-box-align: inherit !important;
-        }
-        .solutionBoxDescription {
-            flex-grow: 1 !important;
-            display: flex !important;
-            flex-direction: column !important;
-        }
-        .descriptionContainer {
-        }
-        .descriptionContainer p {
-            margin: 0 !important;
-            overflow: hidden !important;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 4 !important;
-            -webkit-box-orient: vertical !important;
-            font-size: 14px !important;
-            font-weight: 400 !important;
-            line-height: 1.5 !important;
-            letter-spacing: 0 !important;
-            max-height: 70px !important;
-        }
-        .architectureDiagramContainer {
-            flex-grow: 1 !important;
-            min-width: calc(33% - 2%) !important;
-            padding: 0 16px !important;
-            text-align: center !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: center !important;
-            background-color: #f4f4f4;
-        }
-        .architectureDiagram {
-            max-height: 175px !important;
-            padding: 5px !important;
-            margin: 0 auto !important;
-        }
-    -->
-    </style>
+{[css-tiles.html]}
 
 # Learning path for developers
 {: #learning-path-dev}
@@ -239,7 +129,7 @@ Begin working with your cluster by setting up the CLI and accessing the cluster.
 
 </br>Need help? Check out [Troubleshooting clusters and masters](/docs/containers?topic=containers-debug_clusters) and [Troubleshooting worker nodes](/docs/containers?topic=containers-debug_worker_nodes).
 
-<br />
+
 
 ## Plan your deployment
 {: #dev_plan}
@@ -250,7 +140,7 @@ Before you deploy an app, decide how you want to set up your app so that your ap
 1. **Kubernetes-native**: [Plan your strategy for developing a Kubernetes-native app](/docs/containers?topic=containers-plan_deploy).
 2. **Highly available**: [Plan your strategy for a highly available deployment](/docs/containers?topic=containers-plan_deploy#highly_available_apps).
 
-<br />
+
 
 ## Develop your app
 {: #dev_develop}
@@ -268,7 +158,7 @@ Configure your app in a YAML file that declares the configuration of the Kuberne
 
 </br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-debug_apps).
 
-<br />
+
 
 ## Deploy your app
 {: #dev_deploy}
@@ -285,7 +175,7 @@ Deploy your app to the cluster by running your app configuration file.
 
 </br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-debug_apps).
 
-<br />
+
 
 ## Test, log, and monitor
 {: #dev_test}
@@ -303,7 +193,7 @@ In a test environment, deliberately create various non-ideal scenarios, such as 
 
 </br>Need help? Check out [Troubleshooting logging and monitoring](/docs/containers?topic=containers-cs_dashboard_graphs).
 
-<br />
+
 
 ## Update your app
 {: #dev_update}
@@ -318,7 +208,7 @@ Perform rolling updates and rollbacks of apps without downtime for your users.
     * Set up [a continuous delivery pipeline for a cluster](/docs/containers?topic=containers-cicd).
 3. **Scaling**: Enable [horizontal pod autoscaling](/docs/containers?topic=containers-update_app#app_scaling) to automatically increase or decrease the number of instances of your apps based on CPU.
 
-<br />
+
 
 ## Secure your app
 {: #dev_secure}
@@ -333,7 +223,7 @@ Use Kubernetes secrets to store confidential information, such as credentials or
     3. [Verify that secrets are encrypted](/docs/containers?topic=containers-encryption#verify_kms).
 2. **Pod-to-pod traffic**: [Enable mTLS encryption for traffic between microservices within an Istio service mesh](/docs/containers?topic=containers-istio-mesh#mtls).
 
-<br />
+
 
 ## Expose your app
 {: #dev_expose}
@@ -355,7 +245,7 @@ Publicly expose an app in your cluster to the internet or privately expose an ap
 
 </br>Need help? Check out [Troubleshooting Ingress](/docs/containers?topic=containers-ingress-debug) and [Troubleshooting load balancers](/docs/containers?topic=containers-cs_loadbalancer_fails).
 
-<br />
+
 
 ## Add app storage
 {: #dev_storage}
@@ -366,7 +256,7 @@ Publicly expose an app in your cluster to the internet or privately expose an ap
 
 </br>Need help? Check out the troubleshooting page for your persistent storage solution.
 
-<br />
+
 
 ## Add integrations
 {: #dev_integrate}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -137,7 +137,7 @@ Estimated days and versions are provided for general understanding. Actual avail
 If you wait until your cluster is two or more minor versions behind the oldest supported version, you cannot update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster.<br><br>To avoid this issue, update deprecated clusters to a supported version less than two ahead of the current version, such as 1.19 or 1.20 and then update to the latest version, 1.21. If the worker nodes run a version two or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support.<br><br>You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}.
 {: important}
 
-<br />
+
 
 ## Preparing to update
 {: #prep-up}
@@ -149,7 +149,7 @@ This information summarizes updates that are likely to have impact on deployed a
 -  **Deprecated**: Version 1.18 [preparation actions](#cs_v118).
 -  [Archive](#k8s_version_archive) of unsupported versions.
 
-<br />
+
 
 ## Version 1.21
 {: #cs_v121}
@@ -194,7 +194,7 @@ The following table shows the actions that you must take after you update the Ku
 {: caption="Changes to make after you update the master to Kubernetes 1.21" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
-<br />
+
 
 ## Version 1.20
 {: #cs_v120}
@@ -232,7 +232,7 @@ The following table shows the actions that you must take after you update the Ku
 {: caption="Changes to make after you update the master to Kubernetes 1.20" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
-<br />
+
 
 ## Version 1.19
 {: #cs_v119}
@@ -291,7 +291,7 @@ The following table shows the actions that you must take after you update your w
 {: caption="Changes to make after you update the worker nodes to Kubernetes 1.19" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
-<br />
+
 
 ## Deprecated: Version 1.18
 {: #cs_v118}
@@ -351,7 +351,7 @@ The following table shows the actions that you must take after you update your w
 {: caption="Changes to make after you update the worker nodes to Kubernetes 1.18" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
-<br />
+
 
 ## Archive
 {: #k8s_version_archive}

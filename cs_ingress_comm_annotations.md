@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -827,7 +827,7 @@ ingress.bluemix.net/upstream-max-fails: "serviceName=app1 max-fails=2"
 
 Kubernetes Ingress field: Currently, no configuration option for the Kubernetes Ingress exists.
 
-<br />
+
 
 ## Customizing the ALB deployment
 {: #comm-customize-deploy}
@@ -931,7 +931,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 
 4. If you use {{site.data.keyword.blockchainfull}}, you must [re-establish connectivity between the {{site.data.keyword.blockchain}} management console and your cluster](/docs/blockchain?topic=blockchain-ibp-console-manage-console#ibp-console-refresh).
 
-<br />
+
 
 ## Customizing the Ingress class
 {: #-custom-ingress-class}
@@ -941,7 +941,7 @@ An Ingress class associates a class name with an Ingress controller type. Use th
 
 For more information, see [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class).
 
-<br />
+
 
 ## Adding {{site.data.keyword.appid_short_notm}} authentication to apps
 {: #app-id}
@@ -1106,7 +1106,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
 For the list of changes for each ALB OAuth Proxy add-on version, see the [{{site.data.keyword.cloud_notm}} ALB OAuth Proxy add-on changelog](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 {: tip}
 
-<br />
+
 
 ## Preserving the source IP address
 {: #preserve_source_ip}
@@ -1231,7 +1231,7 @@ To enable source IP preservation, edit the load balancer service that exposes an
         ```
         {: pre}
 
-<br />
+
 
 ## Configuring SSL protocols and SSL ciphers at the HTTP level
 {: #ssl_protocols_ciphers}
@@ -1276,7 +1276,7 @@ To edit the configmap to enable SSL protocols and ciphers:
     ```
     {: pre}
 
-<br />
+
 
 ## Sending your custom certificate to legacy clients
 {: #default_server_cert}
@@ -1313,7 +1313,7 @@ When you create a classic cluster, a Let's Encrypt certificate is generated for 
     ```
     {: pre}
 
-<br />
+
 
 ## Tuning ALB performance
 {: #perf_tuning}

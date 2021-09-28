@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -191,7 +191,7 @@ Free clusters are limited to specific locations and are available for only class
 
 
 
-<br />
+
 
 ## Accessing the global endpoint
 {: #endpoint}
@@ -272,7 +272,7 @@ GET https://containers.cloud.ibm.com/global/v1/clusters
 
 If you need to specify a region in an API call, remove the `/global` parameter from the path and pass the region name in the `X-Region` header. To list available regions, review the [Previous region](#zones-mz) column in the {{site.data.keyword.containerlong_notm}} locations table.
 
-<br />
+
 
 
 

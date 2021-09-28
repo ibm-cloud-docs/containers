@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -2031,7 +2031,7 @@ ibmcloud ks cluster user-subnet rm --cluster my_cluster --subnet-cidr 169.xx.xxx
 ```
 {: pre}
 
-<br />
+
 
 ## `worker` commands
 {: #worker_node_commands}
@@ -2485,7 +2485,7 @@ ibmcloud ks worker update --cluster my_cluster -w kube-dal10-cr18a61a63a6a94b658
 ```
 {: pre}
 
-<br />
+
 
 ## `worker-pool` commands
 {: #worker-pool}
@@ -3010,7 +3010,7 @@ ibmcloud ks worker-pool zones --cluster my_cluster --worker-pool pool1
 ```
 {: pre}
 
-<br />
+
 
 ## `zone` commands
 {: #zone}
@@ -3285,7 +3285,7 @@ ibmcloud ks zone rm --zone dal10 --cluster my_cluster
 ```
 {: pre}
 
-<br />
+
 
 ## `ingress` commands
 {: #alb-commands}
@@ -4311,7 +4311,7 @@ ibmcloud ks ingress status --cluster mycluster
 
 </br>
 
-<br />
+
 
 ## `logging` commands
 {: #logging_commands}
@@ -4995,7 +4995,7 @@ ibmcloud ks logging refresh --cluster my_cluster
 ```
 {: pre}
 
-<br />
+
 
 ## `nlb-dns` commands
 {: #nlb-dns}
@@ -5629,7 +5629,7 @@ ibmcloud ks nlb-dns secret rm --cluster mycluster --nlb-subdomain mycluster-a1b2
 
 </br>
 
-<br />
+
 
 ## `webhook-create` command
 {: #cs_webhook_create}
@@ -5673,7 +5673,7 @@ ibmcloud ks webhook-create --cluster my_cluster --level Normal --type slack --ur
 ```
 {: pre}
 
-<br />
+
 
 ## `api-key` commands
 {: #api_key-commands}
@@ -5763,7 +5763,7 @@ ibmcloud ks api-key reset --region us-south
 ```
 {: pre}
 
-<br />
+
 
 ## `credential` commands
 {: #credential}
@@ -5887,7 +5887,7 @@ ibmcloud ks credential unset --region us-south
 ```
 {: pre}
 
-<br />
+
 
 ## `infra-permissions` commands
 {: #infra-commands}
@@ -5976,7 +5976,7 @@ Manage Storage    required
 ```
 {: screen}
 
-<br />
+
 
 ## `kms` commands
 {: #ks_kms}
@@ -6099,7 +6099,7 @@ ibmcloud ks kms instance ls
 ```
 {: pre}
 
-<br />
+
 
 ## `quota` commands
 {: #cs_quota}
@@ -6138,7 +6138,7 @@ ibmcloud ks quota ls
 
 </br>
 
-<br />
+
 
 ## `subnets` command
 {: #cs_subnets}
@@ -6270,7 +6270,7 @@ ibmcloud ks vlan spanning get --region us-south
 ```
 {: pre}
 
-<br />
+
 
 
 ## `vpcs` command
@@ -6307,7 +6307,7 @@ ibmcloud ks vpcs
 ```
 {: pre}
 
-<br />
+
 
 ## `flavors` command
 {: #cs_machine_types}
@@ -6364,7 +6364,7 @@ ibmcloud ks flavors --zone us-south-1 --provider vpc-gen2
 {: pre}
 
 
-<br />
+
 
 ## `messages` command
 {: #cs_messages}
@@ -6385,7 +6385,7 @@ ibmcloud ks messages
 
 **Command options**: None
 
-<br />
+
 
 ## locations command
 {: #cs_supported-locations}
@@ -6410,7 +6410,7 @@ ibmcloud ks locations [--output json]
 <dd>Optional: Prints the command output in JSON format.</dd>
 </dl>
 
-<br />
+
 
 ## `versions` command
 {: #cs_versions_command}
@@ -6450,7 +6450,7 @@ ibmcloud ks versions
 ```
 {: pre}
 
-<br />
+
 
 ## `api` command
 {: #cs_cli_api}
@@ -6519,7 +6519,7 @@ Region:                us-south
 ```
 {: screen}
 
-<br />
+
 
 ## `init` command
 {: #cs_init}
@@ -6587,7 +6587,7 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-q]
     ```
     {: pre}
 
-<br />
+
 
 ## `script` commands
 {: #script}
@@ -6669,7 +6669,7 @@ To use this command to prepare your automation scripts for the release of versio
     ```
     {: pre}
 
-<br />
+
 
 ## Beta: `storage` commands
 {: #cs_storage}

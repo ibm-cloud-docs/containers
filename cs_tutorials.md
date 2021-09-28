@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks
 
@@ -378,7 +378,7 @@ deployment.apps "hello-world-deployment" deleted
 ```
 {: screen}
 
-<br />
+
 
 ## Deploy and update apps with higher availability
 {: #cs_cluster_tutorial_lesson4}

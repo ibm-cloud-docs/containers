@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, networking
 
@@ -68,7 +68,7 @@ The following image demonstrates how Kubernetes forwards public network traffic 
 </figure>
 </p>
 
-<br />
+
 
 ## Understanding Kubernetes service types
 {: #external}
@@ -118,7 +118,7 @@ The following table compares the features of each network service type.
 `*` An SSL certificate for HTTPS load balancing is provided by `ibmcloud ks nlb-dns` commands. In classic clusters, these commands are supported for public NLBs only.
 {: note}
 
-<br />
+
 
 ## Planning public external load balancing
 {: #public_access}
@@ -170,7 +170,7 @@ When you create a VPC cluster that runs Kubernetes version 1.18 or earlier, the 
 {: caption="Characteristics of public network deployment patterns in {{site.data.keyword.containerlong_notm}} VPC clusters" caption-side="top"}
 {: summary="This table reads left to right about the name, characteristics, use cases, and deployment steps of public network deployment patterns in VPC clusters."}
 
-<br />
+
 
 ## Planning private external load balancing
 {: #private_access}
@@ -218,7 +218,7 @@ Check out the following load balancing deployment patterns for private networkin
 {: caption="Characteristics of network deployment patterns for a public and a private VLAN setup" caption-side="top"}
 {: summary="This table reads left to right about the name, characteristics, use cases, and deployment steps of private network deployment patterns in classic clusters."}
 
-<br />
+
 
 #### Setting up private load balancing for a private VLAN only setup
 {: #plan_private_vlan}

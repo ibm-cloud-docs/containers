@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -180,7 +180,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 4. After a few minutes, the CoreDNS pods pick up the configmap changes.
 
-<br />
+
 
 ## Setting up NodeLocal DNS cache
 {: #dns_cache}
@@ -307,7 +307,7 @@ You can disable the `NodeLocal` DNS cache for one or more worker nodes.
 
 3. Repeat the previous steps for each worker node to disable DNS caching.
 
-<br />
+
 
 ## Customizing NodeLocal DNS cache
 {: #dns_nodelocal_customize}
@@ -488,7 +488,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 4. After a few minutes, the `NodeLocal` DNS cache pods pick up the configmap changes.
 
 
-<br />
+
 
 ## Setting up zone-aware DNS
 {: #dns_zone_aware}

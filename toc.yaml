@@ -18,7 +18,7 @@ toc:
             label: About
             topics:
             - overview.md
-            - cs_why.md
+            - why-benefits.md
             - providers.md
             - responsibilities.md
         - topicgroup:
@@ -28,7 +28,7 @@ toc:
             - cs_uc_finance.md
             - cs_uc_health.md
             - cs_uc_retail.md
-            - cs_uc_transport.md
+            - uc-transport.md
             - cs_uc_gov.md
         - topicgroup:
             label: Learning paths
@@ -58,7 +58,7 @@ toc:
         - topicgroup:
             label: Developing apps in clusters
             topics:
-            - cs_tutorial_odo.md
+            - tutorial-odo.md
             - cs_tutorials_starter.md
             - link:
                 label: Developing a Kubernetes app toolchain with Code Risk Analyzer
@@ -90,7 +90,7 @@ toc:
                 - kube-strategy.md
                 - cluster-plan-network.md
                 - cluster-plan-ha.md
-                - cs_worker_plan.md
+                - worker-plan.md
         - topicgroup:
             label: Creating and accessing clusters
             topics:
@@ -99,7 +99,7 @@ toc:
         - topicgroup:
             label: Managing the cluster and worker node lifecycle
             topics:
-            - cs_worker_add.md
+            - worker-add.md
             - cluster-scaling.md
             - cs_cluster_update.md
             - performance.md
@@ -261,17 +261,17 @@ toc:
               - benchmarks.md
               - cs_versions_addons.md
               - cs_versions_istio.md
-              - cs_versions_autoscaler.md
-              - cs_versions_vpc_block_addon.md
-              - cs_versions_object.md
-              - cs_versions_static_route.md
-              - cs_versions_backup_restore.md
+              - versions-autoscaler.md
+              - versions-vpc-block-addon.md
+              - versions-object.md
+              - versions-static-route.md
+              - versions-backup-restore.md
               - cs_versions_alb_oauth_proxy.md
               - cs_versions_archive.md
         - topicgroup:
             label: IAM and Activity Tracker events
             topics:
-            - cs_access_reference.md
+            - users-access_ref.md
             - at-events.md
             - api-at-iam.md
         - locations.md
@@ -347,10 +347,10 @@ toc:
                   topics:
                     - ts-app-01-debug.md
                     - ts-app-02-imgpull.md
-                    - ts-app-03-container-start.md
+                    - ts-app-container-start.md
                     - ts-app-04-psp.md
                     - ts-app-05-pod-pending.md
-                    - ts-app-06-pod-fail.md
+                    - ts-app-pod-fail.md
                     - ts-app-07-svc-name.md
                     - ts-app-08-svc-not-found.md
                     - ts-app-09-svc-key.md
@@ -391,6 +391,7 @@ toc:
               - topicgroup:
                   label: File Storage
                   topics:
+                    - ts-storage-debug.md
                     - ts-storage-debug-file.md
                     - ts-storage-pvc-fail-permissions.md
                     - ts-storage-file-block-pvc-pending.md

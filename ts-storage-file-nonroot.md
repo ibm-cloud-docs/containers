@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-24"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -15,10 +15,11 @@ content-type: troubleshoot
 
 {{site.data.keyword.attribute-definition-list}}
 
+
 # Why can't I add non-root user access to persistent storage?
 {: #cs_storage_nonroot}
 
-**Infrastructure provider**: <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+**Infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 
 After you [add non-root user access to persistent storage](/docs/containers?topic=containers-nonroot) or deploy a Helm chart with a non-root user ID specified, the user cannot write to the mounted storage.
