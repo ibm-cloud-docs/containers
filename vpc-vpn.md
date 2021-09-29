@@ -17,7 +17,7 @@ subcollection: containers
 
 
 # Setting up VPC VPN connectivity
-{: #vpc-vpnaas}
+{: #vpc-vpn}
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This VPN information is specific to VPC clusters. For VPN information for classic clusters, see [Setting up VPN connectivity](/docs/containers?topic=containers-vpn).
 {: note}
