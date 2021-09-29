@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-28"
+lastupdated: "2021-09-29"
 
 keywords: kubernetes, iks
 
@@ -11,10 +11,7 @@ subcollection: containers
 ---
 
 
-
-
 {{site.data.keyword.attribute-definition-list}}
-
 
 # Setting Kubernetes API priority and fairness
 {: #kubeapi-priority}
@@ -36,26 +33,33 @@ The Kubernetes API priority and feature gate is enabled in clusters that run Kub
 You can create your own flow schema and priorities, but do not modify the default settings. Unexpected results might occur in your cluster when you modify API request priorities.
 {: important}
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-
-1. List the flow schemas in your cluster.
-    ```
-    kubectl get flowschemas
-    ```
-    {: pre} 
-
-2. Review the details of a particular flow schema to understand the scope of the flow schema, including which resources can make prioritized API requests, what type of API requests can be made, and what objects the requests can modify.
-    ```
-    kubectl describe flowschema <flow-schema-name>
-    ```
-    {: pre}
-
 {{site.data.keyword.containerlong_notm}} sets the following flow schemas:
 * `apiserver-health`
 * `ibm-admin`
 * `ibm-system-service-accounts`
 * `ibm-operators-service-accounts`
+* `system-node-high`
 * `system-node-proxiers`
+
+Follow the steps to review the flow schemas and priority levels set by {{site.data.keyword.containerlong_notm}}.
+
+1. List all flow schemas in your cluster, including those set by {{site.data.keyword.containerlong_notm}}, and their corresponding priority levels .
+    ```
+    kubectl get flowschemas
+    ```
+    {: pre} 
+
+
+2. Review the details of a particular flow schema including which resources can make prioritized API requests, what type of API requests can be made, and what objects the requests can modify.
+    ```
+    kubectl describe flowschema <flow-schema-name>
+    ```
+    {: pre}
+
+
+
+
+
 
 
 

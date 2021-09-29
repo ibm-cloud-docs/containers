@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-09-28"
+lastupdated: "2021-09-29"
 
 keywords: containers
 subcollection: containers
@@ -185,6 +185,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-rel-notes#rel-notes)
 
 [September 2021](/docs/containers?topic=containers-rel-notes#release-sep-2021)
+
+* [29 September 2021](/docs/containers?topic=containers-rel-notes#29sep2021)
 
 * [27 September 2021](/docs/containers?topic=containers-rel-notes#27sep2021)
 
@@ -2344,6 +2346,12 @@ subcollection: containers
 
     * [Removing raw {{site.data.keyword.blockstorageshort}} from VPC worker nodes by using the CLI](/docs/containers?topic=containers-utilities#storage-util-rm-vpc-cli)
 
+* [Backing up and restoring PVC data for file and block storage](/docs/containers?topic=containers-utilities#ibmcloud-backup-restore)
+
+    * [Setting up an {{site.data.keyword.cos_full_notm}} service instance](/docs/containers?topic=containers-utilities#backup_restore_setup_object_storage)
+
+    * [Using {{site.data.keyword.cos_full_notm}} to back up and restore PVC data](/docs/containers?topic=containers-utilities#backup-restore-pvc)
+
 * [Setting up {{site.data.keyword.mon_full_notm}} for storage volumes](/docs/containers?topic=containers-utilities#monitor_storage)
 
     * [Troubleshooting persistent storage when a {{site.data.keyword.mon_full_notm}} alert is triggered](/docs/containers?topic=containers-utilities#monitor_storage_ts)
@@ -2838,6 +2846,12 @@ subcollection: containers
 
 * [Preparing to update](/docs/containers?topic=containers-cs_versions#prep-up)
 
+* [Version 1.22](/docs/containers?topic=containers-cs_versions#cs_v122)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions#122_before)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions#122_after)
+
 * [Version 1.21](/docs/containers?topic=containers-cs_versions#cs_v121)
 
     * [Update before master](/docs/containers?topic=containers-cs_versions#121_before)
@@ -2896,6 +2910,10 @@ subcollection: containers
 
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 
+* [Version 1.22 changelog](/docs/containers?topic=containers-changelog#122_changelog)
+
+    * [Changelog for master fix pack 1.22.2_1522 and worker node fix pack 1.22.2_1523, released 29 Sept 2021](/docs/containers?topic=containers-changelog#1222_1522_and_1222_1523)
+
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog#121_changelog)
 
     * [Changelog for worker node fix pack 1.21.5_1532, released 27 September 2021](/docs/containers?topic=containers-changelog#1215_1532)
@@ -2930,7 +2948,7 @@ subcollection: containers
 
     * [Changelog for worker node fix pack 1.20.11_1554, released 27 September 2021](/docs/containers?topic=containers-changelog#12011_1554)
 
-    * [Changelog for master fix pack 1.20.11_1553, released 27 September 2021](/docs/containers?topic=containers-changelog#1211_1553)
+    * [Changelog for master fix pack 1.20.11_1553, released 27 September 2021](/docs/containers?topic=containers-changelog#12011_1553)
 
     * [Changelog for worker node fix pack 1.20.10_1552, released 13 September 2021](/docs/containers?topic=containers-changelog#12010_1552)
 
@@ -3072,9 +3090,9 @@ subcollection: containers
 
     * [Changelog for worker node fix pack 1.18.20_1566, released 27 September 2021](/docs/containers?topic=containers-changelog#11820_1566)
 
-    * [Changelog for master fix pack 1.18.20_1565, released 27 September 2021](/docs/containers?topic=containers-changelog#changelog-for-master-fix-pack-11820_1565,-released-27-september-2021)
+    * [Changelog for master fix pack 1.18.20_1565, released 27 September 2021](/docs/containers?topic=containers-changelog#11820_1565)
 
-    * [Changelog for worker node fix pack 1.18.20_1564, released 13 September 2021](/docs/containers?topic=containers-changelog#118201564)
+    * [Changelog for worker node fix pack 1.18.20_1564, released 13 September 2021](/docs/containers?topic=containers-changelog#11820_1564)
 
     * [Changelog for worker node fix pack 1.18.20_1563, released 30 August 2021](/docs/containers?topic=containers-changelog#11820_1563)
 
@@ -4603,6 +4621,8 @@ subcollection: containers
 [Why does strongSwan VPN connectivity fail after I add or delete worker nodes?](/docs/containers?topic=containers-cs_vpn_fails_worker_add#cs_vpn_fails_worker_add)
 
 [After upgrading my classic cluster to version 1.21, I'm finding connectivity issues](/docs/containers?topic=containers-ts-network-classic121#ts-network-classic121)
+
+[Why do OpenSSL connections to Let's Encrypt fail after 30 September 2021?](/docs/containers?topic=containers-ts-letsencrypt#ts-letsencrypt)
 
 
 ### Logging and monitoring

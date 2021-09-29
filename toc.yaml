@@ -337,6 +337,7 @@ toc:
                     - ts-network-strongswan-install-new.md
                     - ts-network-strongswan-network-nodes.md
                     - ts-network-classic121.md
+                    - ts-letsencrypt.md
               - topicgroup:
                   label: Logging and monitoring
                   topics:
