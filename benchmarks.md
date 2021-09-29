@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, containers
 
@@ -67,7 +67,7 @@ Next, decide whether the component falls within your responsibility. If so, you 
 
 See [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security).
 
-<br />
+
 
 ## Running the worker node CIS Kubernetes benchmark
 {: #cis-worker-test}
@@ -136,7 +136,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: pre}
 
-<br />
+
 
 ## Benchmark 1.5 results for Kubernetes versions 1.18 - 1.21
 {: #cis-benchmark-15}

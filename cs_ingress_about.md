@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -112,7 +112,7 @@ Note that the VPC load balancer health checks only public ALBs and updates DNS l
 If you set up [VPC security groups](/docs/containers?topic=containers-vpc-network-policy#security_groups) or [VPC access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy#acls) to secure your cluster network, ensure that you create the rules to allow the necessary traffic from the Kubernetes control plane IP addresses. Alternatively, to allow the inbound traffic for ALB healthchecks, you can create one rule to allow all incoming traffic on port 80.
 {: note}
 
-<br />
+
 
 ## How does a request get to my app in a classic cluster?
 {: #architecture-classic}
@@ -179,7 +179,7 @@ This diagram shows the traffic flow through a single-zone, gateway-enabled clust
 
 6. The app returns a response to the client. Equal Cost Multipath (ECMP) routing is used to balance the response traffic through a gateway on one of the gateway worker nodes to the client.
 
-<br />
+
 
 ## How does a request get to my app in a VPC cluster?
 {: #architecture-vpc}
@@ -199,7 +199,7 @@ This diagram shows the traffic flow through a single-zone, gateway-enabled clust
 
 5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is proxied according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the IP address of the worker node where the app pod runs. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.
 
-<br />
+
 
 ## How can I enable TLS certificates?
 {: #enable-certs}
@@ -211,7 +211,7 @@ When you configure the public ALB, you choose the domain that your apps are acce
 
 TLS secret configuration depends on the type of Ingress controller image that your ALB runs. For information about how to manage TLS certificates and secrets for Ingress, see the [Kubernetes Ingress image TLS documentation](/docs/containers?topic=containers-ingress-types#manage_certs) or [{{site.data.keyword.containerlong_notm}} Ingress image TLS documentation](/docs/containers?topic=containers-ingress-types#manage_certs).
 
-<br />
+
 
 ## How can I customize routing?
 {: #custom-routing}
@@ -222,7 +222,7 @@ You can modify default ALB settings and add annotations to your Ingress resource
 * To manage how requests are routed to your app, specify [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`) in your Ingress resources.
 * To modify default Ingress settings, such as to enable source IP preservation or configure SSL protocols, [change the `ibm-cloud-provider-ingress-cm`, `ibm-k8s-controller-config`, or `ibm-ingress-deploy-config` configmap resources](/docs/containers?topic=containers-comm-ingress-annotations) for your Ingress ALBs.
 
-<br />
+
 
 ## How do I manage the lifecycle of my ALBs?
 {: #alb-lifecycle}

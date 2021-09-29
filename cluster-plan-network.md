@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-29"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -170,7 +170,7 @@ You can use public Kubernetes networking services, such as creating [`LoadBalanc
 
 Note that a public gateway is not required on your subnets to allow inbound network traffic from the internet to `LoadBalancer` services or ALBs. Public gateways are required only to allow worker nodes to make outbound requests to public endpoints. For more information, see [Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#public_access).
 
-<br />
+
 
 ## Example scenarios for VPC cluster network setups
 {: #vpc-scenarios}
@@ -211,7 +211,7 @@ After you test your app, you can expose it to the internet by creating a public 
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC clusters](/docs/containers?topic=containers-clusters).
 
-<br />
+
 
 ### Scenario: Run internet-facing app workloads in a VPC cluster with limited public egress
 {: #vpc-pgw}
@@ -248,7 +248,7 @@ After you test your app, you can expose it to the internet by creating a public 
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC clusters](/docs/containers?topic=containers-clusters).
 
-<br />
+
 
 
 ### Scenario: Extend your on-premises data center to a VPC cluster
@@ -284,7 +284,7 @@ After you test your app, you can expose it to the private network by creating a 
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC clusters](/docs/containers?topic=containers-clusters).
 
-<br />
+
 
 ## Understanding network basics of classic clusters
 {: #plan_basics}
@@ -409,7 +409,7 @@ For additional security, you can isolate networking workloads to gateway worker 
 * **Classic clusters without a gateway**: Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes that are connected to public VLANs to be accessed externally and by isolating the networking workload. When you [label worker nodes as edge nodes](/docs/containers?topic=containers-edge#edge_nodes), NLB and ALB pods are deployed to only those specified worker nodes. To also prevent other workloads from running on edge nodes, you can [taint the edge nodes](/docs/containers?topic=containers-edge#edge_workloads). Then, you can deploy both public and private NLBs and ALBs to edge nodes.
 For example, if your worker nodes are connected to a private VLAN only, but you need to permit public access to an app in your cluster, you can create an edge worker pool in which the edge nodes are connected to public and private VLANs. You can deploy public NLBs and ALBs to these edge nodes to ensure that only those workers handle public connections.
 
-<br />
+
 
 ## Example scenarios for classic cluster network setups
 {: #classic-scenarios}
@@ -455,7 +455,7 @@ To expose an app in your cluster to the internet, you can create a public networ
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating clusters](/docs/containers?topic=containers-clusters).
 
-<br />
+
 
 ### Scenario: Extend your on-premises data center to a classic cluster and add limited public access
 {: #limited-public}
@@ -533,7 +533,7 @@ To provide private access to an app in your cluster, you can create a private ne
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating clusters](/docs/containers?topic=containers-clusters).
 
-<br />
+
 
 
 

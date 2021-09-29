@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-24"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks
 
@@ -13,12 +13,14 @@ content-type: troubleshoot
 
 
 
+
 {{site.data.keyword.attribute-definition-list}}
+
 
 # VPC: Why is no VPC available when I create a cluster in the console?
 {: #ts_no_vpc}
 
-**Infrastructure provider**: <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
+**Infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
 You try to create a VPC cluster by using the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/catalog/create){: external}.
 {: tsSymptoms} 

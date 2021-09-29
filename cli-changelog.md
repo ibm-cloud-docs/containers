@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-29"
 
 keywords: kubernetes, iks
 
@@ -89,7 +89,7 @@ Check out the following syntax and behavior changes between each version of the 
 {: caption="Latest versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in" caption-side="top"}
 {: summary="The rows are read from left to right, with the functionality in column one, version 0.2 of the CLI in column two, version 0.3 in column three, version 0.4 in column four, and version 1.0 in column five."}
 
-<br />
+
 
 ### Version 0.4
 {: #04}
@@ -117,7 +117,7 @@ Version 0.4 of the CLI plug-in is deprecated. To update to the latest version, s
 {: caption="Overview of version changes for version 0.4 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
 {: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
 
-<br />
+
 
 ### Version 0.3
 {: #03}
@@ -144,7 +144,7 @@ Version 0.3 of the CLI plug-in is deprecated. To update to the latest version, s
 {: caption="Overview of version changes for version 0.3 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
 {: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
 
-<br />
+
 
 ### Version 0.2
 {: #02}
@@ -171,7 +171,7 @@ Version 0.2 of the CLI plug-in is deprecated. To update to the latest version, s
 {: caption="Overview of version changes for version 0.2 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
 {: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
 
-<br />
+
 
 ### Version 0.1
 {: #01}

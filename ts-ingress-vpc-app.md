@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-24"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, nginx, nlb, help
 
@@ -13,13 +13,15 @@ content-type: troubleshoot
 
 
 
+
 {{site.data.keyword.attribute-definition-list}}
+
 
 # VPC clusters: Why can't my app connect via Ingress?
 {: #vpc_ts_alb}
 
 **Infrastructure provider**:
-* <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
+* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
 
 You exposed your app by creating an Ingress resource for your app in your VPC cluster. When you tried to connect to your app by using the Ingress subdomain, the connection failed or timed out.

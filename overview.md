@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -65,7 +65,7 @@ Review the following links to find out more about the benefits and responsibilit
 - [Limitations](/docs/containers?topic=containers-limitations)
 - Learn how you can use {{site.data.keyword.containerlong_notm}} to modernize and run containerized apps in these <a href="https://www.ibm.com/demos/collection/Containers-(Kubernetes)-on-IBM-Cloud/?lc=null">videos</a>.
 
-<br />
+
 
 
 ## Docker containers

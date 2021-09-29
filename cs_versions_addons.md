@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -195,7 +195,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 {: summary="The rows are read from left to right. The first column is the build of the image version. The second column is the build release date. The third column contains a brief description of the change made in the version build."}
 {: caption="Build changelog for version 0.32.0 of the Kubernetes Ingress image" caption-side="top"}
 
-<br />
+
 
 ## Fluentd for logging changelog
 {: #fluentd_changelog}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-24"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, firewall
 
@@ -12,7 +12,9 @@ subcollection: containers
 
 
 
+
 {{site.data.keyword.attribute-definition-list}}
+
 
 # VPC: Controlling traffic with ACLs, security groups, and network policies
 {: #vpc-network-policy}

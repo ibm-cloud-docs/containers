@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-24"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -13,7 +13,9 @@ content-type: troubleshoot
 
 
 
+
 {{site.data.keyword.attribute-definition-list}}
+
 
 # Debugging worker nodes
 {: #debug_worker_nodes}
@@ -24,8 +26,8 @@ Review the options to debug your worker nodes and find the root causes for failu
 {: shortdesc}
 
 **Infrastructure provider**:
-* <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-* <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
+* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
 ## Step 1: Get the worker node state
 {: #worker-debug-get-state}

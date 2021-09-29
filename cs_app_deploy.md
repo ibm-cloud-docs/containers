@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks
 
@@ -31,7 +31,7 @@ Learn the general steps for deploying apps by clicking an area of the following 
 <area href="#cli_dashboard" target="_blank" alt="Option 2: Start the Kubernetes dashboard locally and run configuration files." title="Option 2: Start the Kubernetes dashboard locally and run configuration files." shape="rect" coords="544, 141, 728, 204" />
 </map>
 
-<br />
+
 
 ## Launching the Kubernetes dashboard
 {: #cli_dashboard}

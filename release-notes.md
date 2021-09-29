@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-29"
 
 keywords: kubernetes, iks, release notes
 
@@ -552,7 +552,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 </tr>
 </tbody></table>
 
-<br />
+
 
 ## September 2019
 {: #sept19}
@@ -618,7 +618,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 </tr>
 </tbody></table>
 
-<br />
+
 
 ## August 2019
 {: #aug19}

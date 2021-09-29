@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-24"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -13,12 +13,14 @@ content-type: troubleshoot
 
 
 
+
 {{site.data.keyword.attribute-definition-list}}
+
 
 # Why can't my app access or write to PVCs?
 {: #file_app_failures}
 
-**Infrastructure provider**: <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+**Infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 When you mount a PVC to your pod, you might experience errors when accessing or writing to the PVC.
 {: shortdesc}

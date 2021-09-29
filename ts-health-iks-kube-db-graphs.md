@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-24"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, logging, help, debug
 
@@ -12,10 +12,8 @@ content-type: troubleshoot
 ---
 
 
-
 {{site.data.keyword.attribute-definition-list}}
   
-
 
 # Why doesn't the Kubernetes dashboard display utilization graphs?
 {: #cs_dashboard_graphs}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-29"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -12,8 +12,6 @@ subcollection: containers
 
 
 {{site.data.keyword.attribute-definition-list}}
-  
-
 
 
 # Kubernetes version information and update actions  
@@ -23,6 +21,7 @@ Review information about supported Kubernetes versions for {{site.data.keyword.c
 {: shortdesc}
 
 For more information about the Kubernetes project versions, see the Kubernetes changelog.
+* [Kubernetes 1.22 release note](){: external}
 * [Kubernetes 1.21 release notes](https://kubernetes.io/releases/notes/){: external}
 * [Kubernetes 1.20 release notes](https://v1-20.docs.kubernetes.io/docs/setup/release/notes/){: external}
 * [Kubernetes 1.19 release notes](https://v1-19.docs.kubernetes.io/docs/setup/release/notes/){: external}
@@ -47,7 +46,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch. As 
         <dd>First, [update your master node](/docs/containers?topic=containers-update#master) and then [update the worker nodes](/docs/containers?topic=containers-update#worker_node).
     <ul><li>You cannot update a Kubernetes master two or more minor versions ahead (n+2). For example, if your current master is version 1.19 and you want to update to 1.21, you must update to 1.20 first.</li>
     <li>Worker nodes cannot run a Kubernetes major or minor version that is greater than the masters. Additionally, your worker nodes can be only up to two versions behind the master version (<code>n-2</code>).</li>
-    <li>If you use a <code>kubectl</code> CLI version that does not match at least the <code>major.minor</code> version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and <a href="/docs/containers?topic=containers-cs_cli_install#kubectl">CLI versions</a> up-to-date.</li></ul></dd>
+    <li>If you use a <code>kubectl</code> CLI version that does not match at least the <code>major.minor</code> version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and <a href="/docs/containers?topic=containers-cs_cli_install#kubectl">CLI versions</a> up-to-date. **Note**: For kubectl version 1.21, there is a known issue where failed `kubectl exec` commands do not automatically time out. For clusters on Kubernetes versions 1.21 or 1.22, use kubectl version 1.20 instead. </li></ul></dd>
     <dt>Patch updates (x.x.4_1510)</dt>
         <dd>Changes across patches are documented in the [Version changelog](/docs/containers?topic=containers-changelog). Master patches are applied automatically, but you initiate worker node patches updates. Worker nodes can also run patch versions that are greater than the masters. As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.cloud_notm}} console or CLI, such as with the following commands: `ibmcloud ks cluster ls`, `cluster get`, `worker ls`, or `worker get`.<br>
     Patches can be for worker nodes, masters, or both.
@@ -104,9 +103,10 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}}<br>release date | {{site.data.keyword.containerlong_notm}}<br>unsupported date |
 |------|------|----------|----------|
+| [1.22](#cs_v122) | Yes | XX XXX 2021 |XX XXX 2022 `†` |
 | [1.21](#cs_v121) | Yes | 09 Jun 2021 | Jun 2022 `†` |
 | [1.20](#cs_v120) | Yes | 16 Feb 2021 | Feb 2022 `†` |
-| [1.19](#cs_v119) | Yes | 13 Oct 2020 | 31 Dec 2021 `†` |
+| [1.19](#cs_v119) | Deprecated | 13 Oct 2020 | 31 Dec 2021 `†` |
 | [1.18](#cs_v118) | Deprecated | 11 May 2020 | 10 Oct 2021`†` |
 {: caption="Release history for {{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
@@ -120,7 +120,7 @@ Earlier versions of {{site.data.keyword.containerlong_notm}} are [unsupported](#
 
 Each supported version of {{site.data.keyword.containerlong_notm}} goes through a lifecycle of testing, development, general release, support, deprecation, and becoming unsupported. Review the following diagram to understand how the community Kubernetes and {{site.data.keyword.cloud_notm}} provider version lifecycles interact across time.
 
-![Diagram of the lifecycle of community Kubernetes and supported {{site.data.keyword.cloud_notm}} releases across time](images/version_flowchart_kube.png)
+![Diagram of the lifecycle of community Kubernetes and supported {{site.data.keyword.cloud_notm}} releases across time](images/version_flowchart_kube.svg)
 
 Estimated days and versions are provided for general understanding. Actual availability and release dates are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 {: note}
@@ -137,19 +137,69 @@ Estimated days and versions are provided for general understanding. Actual avail
 If you wait until your cluster is two or more minor versions behind the oldest supported version, you cannot update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster.<br><br>To avoid this issue, update deprecated clusters to a supported version less than two ahead of the current version, such as 1.19 or 1.20 and then update to the latest version, 1.21. If the worker nodes run a version two or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support.<br><br>You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}.
 {: important}
 
-<br />
+
 
 ## Preparing to update
 {: #prep-up}
 This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version. For a complete list of changes, review the [community Kubernetes changelogs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG), [IBM version changelogs](/docs/containers?topic=containers-changelog){: external}, and [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
 
+-  Version 1.22 [preparation actions](#cs_v122).
+-  Version 1.21 [preparation actions](#cs_v121).
 -  Version 1.20 [preparation actions](#cs_v120).
 -  Version 1.19 [preparation actions](#cs_v119).
 -  **Deprecated**: Version 1.18 [preparation actions](#cs_v118).
 -  [Archive](#k8s_version_archive) of unsupported versions.
 
 <br />
+
+
+
+## Version 1.22
+{: #cs_v122}
+
+<p><img src="images/certified_kubernetes_1x21.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.21 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.21 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
+
+Review changes that you might need to make when you update from the previous Kubernetes version to 1.22.
+{: shortdesc}
+
+### Update before master
+{: #122_before}
+
+The following table shows the actions that you must take before you update the Kubernetes master.
+{: shortdesc}
+
+| Type | Description|
+| --- | --- |
+| **Unsupported:**  Beta versions of ValidatingWebhookConfiguration and MutatingWebhookConfiguration API | The beta API has been removed. Migrate manifests and API clients to use the admissionregistration.k8s.io/v1 API version, available since v1.16. |
+| **Unsupported:**  Beta version of CustomResourceDefinition API | The beta API has been removed. Migrate manifests and API clients to use the apiextensions.k8s.io/v1 API version, available since v1.16. |
+| **Unsupported:**  Beta version of APIService API | The beta API has been removed. Migrate manifests and API clients to use the apiregistration.k8s.io/v1 API version, available since v1.10. |
+| **Unsupported:**  Beta version of TokenReview API | The beta API has been removed. Migrate manifests and API clients to use the authentication.k8s.io/v1 API version, available since v1.6. |
+| **Unsupported:**  Beta versions of of SubjectAccessReview, LocalSubjectAccessReview, SelfSubjectAccessReview API | The beta API has been removed. Migrate manifests and API clients to use the authorization.k8s.io/v1 API version, available since v1.6. |
+| **Unsupported:**  Beta version of CertificateSigningRequest API | The beta API has been removed. Migrate manifests and API clients to use the certificates.k8s.io/v1 API version, available since v1.19. |
+| **Unsupported:**  Beta version of Lease API | The beta API has been removed. Migrate manifests and API clients to use the coordination.k8s.io/v1 API version, available since v1.14. |
+| **Unsupported:**  Beta version of Ingress API | The beta API has been removed. Migrate manifests and API clients to use the networking.k8s.io/v1 API version, available since v1.19. |
+| `kubectl exec` session timeout | For kubectl version 1.21, there is a known issue where failed `kubectl exec` commands do not automatically time out. Update your kubectl client to use version 1.20 instead. |
+{: caption="Changes to make before you update the master to Kubernetes 1.22" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+
+
+### Update after master
+{: #122_after}
+
+The following table shows the actions that you must take after you update the Kubernetes master.
+{: shortdesc}
+
+| Type | Description|
+| --- | --- |
+| **Unsupported:**  `kubectl autoscale` removed deprecated flag | The `kubectl austoscale` command removes the deprecated `--generator` flag. If your scripts rely on this flag, update them. |
+| **Unsupported:** `kubectl create deployment` removed deprecated flag | The `kubectl create deployment` command removes the deprecated `--generator` flag. If your scripts rely on this flag, update them. |
+| Fix how nulls are handled in array and objects in json patches | In prior releases, using `kubectl` to modify a resource resulted in the loss of the "null" values in arrays. This bug fix maintains the null entries in arrays. |
+| `system:aggregate-to-edit` role | The `system:aggregate-to-edit` role no longer includes write access to the Endpoints API. Existing clusters that are upgraded to Kubernetes 1.22 are not impacted. However, in new Kubernetes 1.22 clusters, the edit and admin roles do not have write access to the Endpoints API. For instructions to retain this access in the aggregated edit and admin roles in newly created 1.22 clusters, refer to https://github.com/kubernetes/website/pull/29025. |
+{: caption="Changes to make after you update the master to Kubernetes 1.22" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+
+
 
 ## Version 1.21
 {: #cs_v121}
@@ -170,6 +220,7 @@ The following table shows the actions that you must take before you update the K
 
 | Type | Description|
 | --- | --- |
+| `kubectl exec` session timeout | For kubectl version 1.21, there is a known issue where failed `kubectl exec` commands do not automatically time out. Update your `kubectl client` to use version 1.20 instead. |
 | **Unsupported**: Kubernetes REST API `export` query parameter removed | The `export` query parameter is removed from the Kubernetes REST API and now returns a `400` error status response. If you use this query parameter, remove it from your API requests. |
 | **Unsupported**: Kubernetes external IP services | The Kubernetes [DenyServiceExternalIPs admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#denyserviceexternalips){: external} is enabled, which prevents creating or updating Kubernetes external IP services. If you use Kubernetes external IP services, migrate to a supported service type. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6428013){: external}. |
 | Kubernetes snapshot CRDs | {{site.data.keyword.containerlong_notm}} installs Kubernetes snapshot custom resource definition (CRD) version `v1beta1`. If you use other Kubernetes snapshot CRD versions `v1` or `v1alpha1`, you must change the version to `v1beta1`. To check the currently installed version of your snapshot CRDs, run `grep snapshot.storage.k8s.io <<(kubectl get apiservices)`. Follow the Kubernetes documentation to [Upgrade from v1alpha1 to v1beta1](https://github.com/kubernetes-csi/external-snapshotter#upgrade-from-v1alpha1-to-v1beta1){: external} to make sure that your snapshot CRDs are at the correct `v1beta1` version. The steps to downgrade from version `v1` to `v1beta1` are the same as those to upgrade from `v1alpha1`. Do not follow the instructions to upgrade from version `v1beta1` to version `v1`. |
@@ -194,7 +245,7 @@ The following table shows the actions that you must take after you update the Ku
 {: caption="Changes to make after you update the master to Kubernetes 1.21" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
-<br />
+
 
 ## Version 1.20
 {: #cs_v120}
@@ -232,7 +283,7 @@ The following table shows the actions that you must take after you update the Ku
 {: caption="Changes to make after you update the master to Kubernetes 1.20" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
-<br />
+
 
 ## Version 1.19
 {: #cs_v119}
@@ -291,7 +342,7 @@ The following table shows the actions that you must take after you update your w
 {: caption="Changes to make after you update the worker nodes to Kubernetes 1.19" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
-<br />
+
 
 ## Deprecated: Version 1.18
 {: #cs_v118}
@@ -351,7 +402,7 @@ The following table shows the actions that you must take after you update your w
 {: caption="Changes to make after you update the worker nodes to Kubernetes 1.18" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
-<br />
+
 
 ## Archive
 {: #k8s_version_archive}
@@ -454,7 +505,5 @@ As of 4 April 2018, {{site.data.keyword.containerlong_notm}} clusters that run [
 {: shortdesc}
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
-
-
 
 

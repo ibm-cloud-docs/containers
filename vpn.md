@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-24"
+lastupdated: "2021-09-29"
 
 keywords: kubernetes, iks, vyatta, strongswan, ipsec, on-prem
 
@@ -12,7 +12,9 @@ subcollection: containers
 
 
 
+
 {{site.data.keyword.attribute-definition-list}}
+
 
 # Setting up classic VPN connectivity
 {: #vpn}

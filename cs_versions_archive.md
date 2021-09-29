@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-29"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -896,7 +896,7 @@ The following table shows the changes that are included in patch update 1.17.2_1
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.16.5_1522" caption-side="top"}
 
-<br />
+
 
 ## Version 1.16 changelog (unsupported as of 31 January 2021)
 {: #116_changelog}
@@ -1630,7 +1630,7 @@ The following tables show the changes that are included in the patch `1.16.2_151
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Worker node patch: Changes since version 1.15.5_1521" caption-side="top"}
 
-<br />
+
 
 ## Version 1.15 changelog (unsupported 22 September 2020)
 {: #115_changelog}
@@ -2606,7 +2606,7 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 </tbody>
 </table>
 
-<br />
+
 
 ## Version 1.14 changelog (unsupported 31 May 2020)
 {: #114_changelog}
@@ -3834,7 +3834,7 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 </tbody>
 </table>
 
-<br />
+
 
 ## Version 1.13 changelog (unsupported 22 February 2020)
 {: #113_changelog}
@@ -5380,7 +5380,7 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 </tbody>
 </table>
 
-<br />
+
 
 ## Version 1.12 changelog (unsupported 3 November 2019)
 {: #112_changelog}
@@ -6985,7 +6985,7 @@ If you access the dashboard via <code>kubectl proxy</code>, the <strong>SKIP</st
 </tbody>
 </table>
 
-<br />
+
 
 ## Version 1.11 changelog (unsupported as of 20 July 2019)
 {: #111_changelog}
@@ -8440,7 +8440,7 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 </tbody>
 </table>
 
-<br />
+
 
 ## Version 1.10 changelog (unsupported as of 16 May 2019)
 {: #110_changelog}
@@ -9808,7 +9808,7 @@ The following table shows the changes that are included in patch 1.10.1_1508.
 </tbody>
 </table>
 
-<br />
+
 
 ## Version 1.9 changelog (unsupported as of 27 December 2018)
 {: #19_changelog}
@@ -10535,7 +10535,7 @@ The following table shows the changes that are included in patch 1.9.7_1510.
 </tbody>
 </table>
 
-<br />
+
 
 ## Version 1.8 changelog (Unsupported)
 {: #18_changelog}
@@ -10896,7 +10896,7 @@ Review the version 1.8 changelogs.
 </tbody>
 </table>
 
-<br />
+
 
 ## Version 1.7 changelog (Unsupported)
 {: #17_changelog}

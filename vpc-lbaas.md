@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-24"
+lastupdated: "2021-09-29"
 
 keywords: kubernetes, iks
 
@@ -12,7 +12,9 @@ subcollection: containers
 
 
 
+
 {{site.data.keyword.attribute-definition-list}}
+
 
 # VPC: Exposing apps with load balancers for VPC
 {: #vpc-lbaas}
@@ -85,7 +87,7 @@ The following diagram illustrates how a user accesses an app from the internet t
 2. The request is automatically forwarded by the VPC ALB to one of the node ports on the worker node, and then to the private IP address of the app pod.
 3. If app instances are deployed to multiple worker nodes in the cluster, the load balancer routes the requests between the app pods on various worker nodes. Additionally, if you have a multizone cluster, the VPC ALB routes requests to worker nodes across all subnets and zones in your cluster.
 
-<br />
+
 
 ## Setting up a Network Load Balancer for VPC
 {: #setup_vpc_nlb}
@@ -529,7 +531,7 @@ myapp-vpc-nlb-jp-tok-3    LoadBalancer   172.21.xxx.xxx   169.xx.xxx.xx     8080
 To use the SSL certificate to access your app via HTTPS, ensure that you defined an HTTPS port in your [Kubernetes `LoadBalancer` service](#setup_vpc_ks_vpc_lb). You can verify that requests are correctly routing through the HTTPS port by running `curl -v --insecure https://<domain>`. A connection error indicates that no HTTPS port is open on the service. Also, ensure that TLS connections can be terminated by your app. You can verify that your app terminates TLS properly by running `curl -v https://<domain>`. A certificate error indicates that your app is not properly terminating TLS connections.
 {: tip}
 
-<br />
+
 
 ## Setting up an Application Load Balancer for VPC
 {: #setup_vpc_ks_vpc_lb}
@@ -729,7 +731,7 @@ Do not confuse the Application Load Balancer for VPC with {{site.data.keyword.co
 Do not delete the subnets that you attached to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.
 {: important}
 
-<br />
+
 
 ### Registering a DNS record and TLS certificate
 {: #vpc_lb_dns}
@@ -789,7 +791,7 @@ After you create a DNS subdomain for a VPC ALB hostname, you cannot use `nlb-dns
 To use the TLS certificate to access your app via HTTPS, ensure that you defined an HTTPS port in your [Kubernetes `LoadBalancer` service](#setup_vpc_ks_vpc_lb). You can verify that requests are correctly routing through the HTTPS port by running `curl -v --insecure https://<domain>`. A connection error indicates that no HTTPS port is open on the service. Also, ensure that TLS connections can be terminated by your app. You can verify that your app terminates TLS properly by running `curl -v https://<domain>`. A certificate error indicates that your app is not properly terminating TLS connections.
 {: tip}
 
-<br />
+
 
 ## Limitations
 {: #lbaas_limitations}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-24"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks
 
@@ -13,7 +13,9 @@ content-type: troubleshoot
 
 
 
+
 {{site.data.keyword.attribute-definition-list}}
+
 
 # Why can't I create or delete clusters?
 {: #cluster_infra_errors}
@@ -164,7 +166,7 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
 ## Unable to create or delete worker nodes due to incorrect account error
 {: #orphaned}
 
-**Infrastructure provider**: <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+**Infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 
 You cannot manage worker nodes for your cluster, or view the cluster worker nodes in your classic IBM Cloud infrastructure account. However, you can update and manage other clusters in the account.
@@ -233,7 +235,7 @@ Before you begin: Log in to the [Kubernetes clusters console](https://cloud.ibm.
 ## Unable to create or delete worker nodes due to endpoints error
 {: #vpe-ts}
 
-**Infrastructure provider**: <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Kubernetes version 1.20 or later
+**Infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Kubernetes version 1.20 or later
 
 
 You cannot manage worker nodes for your cluster, and you receive an error message similar to one of the following.
@@ -295,7 +297,7 @@ Re-establish the VPE connection between your worker nodes and Kubernetes master.
 ## Unable to create or delete worker nodes due to paid account or one time password error
 {: #cs_totp}
 
-**Infrastructure provider**: <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+**Infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 
 You cannot manage worker nodes for your cluster, and you receive an error message similar to one of the following.

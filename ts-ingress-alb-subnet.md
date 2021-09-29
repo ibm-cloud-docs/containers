@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-24"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -12,17 +12,14 @@ content-type: troubleshoot
 ---
 
 
-
 {{site.data.keyword.attribute-definition-list}}
   
-
-
 
 # Classic clusters: Why does enabling Ingress ALBs result in subnet errors?
 {: #cs_alb_subnet}
 
 **Infrastructure provider**:
-* <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 
 When you try to enable an Ingress ALB by running the `ibmcloud ks ingress alb enable` command, you see the following error:

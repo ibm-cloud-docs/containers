@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-27"
+lastupdated: "2021-09-28"
 
 keywords: kubernetes, iks, kernel
 
@@ -129,7 +129,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: pre}
 
-<br />
+
 
 To revert your worker nodes' `sysctl` parameters to the default values set by {{site.data.keyword.containerlong_notm}}:
 
@@ -141,7 +141,7 @@ To revert your worker nodes' `sysctl` parameters to the default values set by {{
 
 2. [Reboot all worker nodes in the cluster](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot). The worker nodes come back online with the default values applied.
 
-<br />
+
 
 
 
@@ -182,7 +182,7 @@ Before you begin, ensure you have the [**Manager** {{site.data.keyword.cloud_not
 
 3. If you changed the `net.core.somaxconn` value in the kernel settings, most apps can automatically use the updated value. However, some apps might require you to manually change the corresponding value in your app code to match the kernel value. For example, if you're tuning the performance of a pod where an NGINX app runs, you must change the value of the `backlog` field in the NGINX app code to match. For more information, see this [NGINX blog post](https://www.nginx.com/blog/tuning-nginx/){: external}.
 
-<br />
+
 
 ## Adjusting cluster metrics provider resources
 {: #metrics}
@@ -272,7 +272,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 Want to tune more settings? Check out the [Kubernetes Add-on resizer configuration docs](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration){: external} for more ideas.
 {: tip}
 
-<br />
+
 
 ## Enabling huge pages
 {: #huge-pages}
@@ -449,7 +449,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 To troubleshoot worker nodes with huge pages, you can only reboot the worker node. The huge pages configuration does not persist across any other worker node life cycle operation, such as updating, reloading, replacing, or adding worker nodes. To remove the huge pages configuration from your cluster, you can update, reload, or replace all the worker nodes.
 
-<br />
+
 
 
 
