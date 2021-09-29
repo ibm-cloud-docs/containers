@@ -297,7 +297,7 @@ toc:
               label: Troubleshooting
               topics:
               - get-help.md
-              - ts-debug-tool.md
+              - ts_debug_tool.md
               - topicgroup:
                   label: Clusters and masters
                   topics:
