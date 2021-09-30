@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-29"
+lastupdated: "2021-09-30"
 
 keywords: kubernetes, iks, release notes
 
@@ -35,9 +35,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 Review the release notes for September 2021.
 {: shortdesc}
 
-
-
-
 ### 29 September 2021
 {: #29sep2021}
 {: release-note}
@@ -50,7 +47,6 @@ Deprecated and unsupported Kubernetes versions
 
 Master fix pack and worker node fix pack update
 :   Change log documentation is available for Kubernetes version [`1.22.2_1522` and `1.22.2_1523`](/docs/containers?topic=containers-changelog#1222_1522_and_1222_1523).
-
 
 
 
