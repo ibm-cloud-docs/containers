@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Why can't the cluster pull images from {{site.data.keyword.registrylong_notm}} during creation?
 {: #ts_image_pull_create}
 
@@ -45,7 +46,7 @@ To successfully assign the **Reader** service access policy to the service ID du
 
 Steps:
 1. Make sure that the account owner gives you the **Administrator** role to {{site.data.keyword.registrylong_notm}}.
-    ```
+    ```sh
     ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
     ```
     {: pre}

@@ -12,6 +12,7 @@ subcollection: containers
 
 
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 
@@ -360,7 +361,7 @@ You can verify that your configuration is set up correctly in 1 of 2 ways:
 {: #updating-log-forwarding}
 
 You can update a logging configuration that you already created:
-```
+```sh
 ibmcloud ks logging config update --cluster <cluster_name_or_ID> --id <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <container1,2> --app-paths <paths_to_logs>
 ```
 {: pre}

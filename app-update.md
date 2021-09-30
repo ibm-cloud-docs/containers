@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Managing the app lifecycle
 {: #update_app}
 

@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Understanding high availability and disaster recovery for {{site.data.keyword.containerlong_notm}}
 {: #ha}
 

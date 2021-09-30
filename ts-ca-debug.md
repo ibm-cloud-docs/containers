@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Debugging the cluster autoscaler
 {: #debug_cluster_autoscaler}
 

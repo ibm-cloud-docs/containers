@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # After a worker node updates or reloads, why do duplicate nodes and pods appear?
 {: #cs_duplicate_nodes}
 
@@ -36,7 +37,7 @@ Older clusters listed worker nodes by the cluster's public IP address. Now, work
 Service is not disrupted due to these duplicates, but you can remove the old worker node references from the API server.
 {: tsResolve}
 
-```
+```sh
 kubectl delete node <node_name1> <node_name2>
 ```
 {: pre}

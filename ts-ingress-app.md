@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Classic clusters: Why can't my app connect via Ingress?
 {: #cs_ingress_fails}
 
@@ -33,7 +34,7 @@ When you tried to connect to your app by using the public IP address or Ingress 
 First, check that your cluster is fully deployed and has at least 2 worker nodes available per zone to ensure high availability for your ALB.
 {: tsResolve}
 
-```
+```sh
 ibmcloud ks worker ls --cluster <cluster_name_or_ID>
 ```
 {: pre}

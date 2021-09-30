@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Checking the status of Ingress components
 {: #ingress-status}
 
@@ -30,7 +31,7 @@ content-type: troubleshoot
 To check the overall health and status of your cluster's Ingress components:
 {: shortdesc}
 
-```
+```sh
 ibmcloud ks ingress status -c <cluster_name_or_ID>
 ```
 {: pre}

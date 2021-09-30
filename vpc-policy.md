@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # VPC: Controlling traffic with ACLs, security groups, and network policies
 {: #vpc-network-policy}
 
@@ -138,13 +139,13 @@ Use the {{site.data.keyword.cloud_notm}} CLI to add inbound and outbound rules t
 
 Before you begin
 1. Install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
-    ```
+    ```sh
     ibmcloud plugin install infrastructure-service
     ```
     {: pre}
 
 2. Target the region that your VPC is in.
-    ```
+    ```sh
     ibmcloud target -r <region>
     ```
     {: pre}
@@ -352,13 +353,13 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
 
 Before you begin:
 1. Install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
-    ```
+    ```sh
     ibmcloud plugin install infrastructure-service
     ```
     {: pre}
 
 2. Target the region that your VPC is in.
-    ```
+    ```sh
     ibmcloud target -r <region>
     ```
     {: pre}

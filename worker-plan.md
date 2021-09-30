@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Planning your worker node setup
 {: #planning_worker_nodes}
 

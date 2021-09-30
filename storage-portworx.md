@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Storing data on software-defined storage (SDS) with Portworx
 {: #portworx}
 
@@ -367,7 +368,7 @@ Follow these steps to set up encryption for your Portworx volumes.
     * [Create a **{{site.data.keyword.keymanagementservicelong_notm}}** root key](/docs/key-protect?topic=key-protect-create-root-keys).
     * [Create a **{{site.data.keyword.hscrypto}}** root key](/docs/hs-crypto?topic=hs-crypto-create-root-keys).
 4. Retrieve the **GUID** of the service instance that you created.
-    ```
+    ```sh
     ibmcloud resource service-instance <service_instance_name_or_ID>
     ```
     {: pre}

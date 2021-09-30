@@ -355,7 +355,7 @@ toc:
                     - ts-app-07-svc-name.md
                     - ts-app-08-svc-not-found.md
                     - ts-app-09-svc-key.md
-                    - ts-app-10-helm-install.md
+                    - ts-app-helm-install.md
               - topicgroup:
                   label: Managed add-ons
                   topics:
@@ -436,7 +436,5 @@ toc:
           - release-notes.md
           - limitations.md
           - sitemap.md
-
-
 
 

@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Healthcare use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_health}
 

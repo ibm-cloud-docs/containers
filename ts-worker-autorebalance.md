@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # VPC: Why doesn't replacing a worker node create a worker node?
 {: #auto-rebalance-off}
 

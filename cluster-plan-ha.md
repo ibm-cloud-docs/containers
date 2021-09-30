@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Planning your cluster for high availability
 {: #ha_clusters}
 

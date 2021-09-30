@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Configuring classic subnets and IP addresses
 {: #subnets}
 
@@ -259,7 +260,7 @@ By default, 4 portable public and 4 portable private IP addresses can be used to
 To list all of the portable IP addresses in your cluster, both used and available, you can run the following command.
 {: shortdesc}
 
-```
+```sh
 kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 ```
 {: pre}

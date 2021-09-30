@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # {{site.data.keyword.containerlong_notm}} CLI
 {: #kubernetes-service-cli}
 
@@ -1012,7 +1013,7 @@ ibmcloud ks cluster get --cluster my_cluster --show-resources
 Disable [image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec). When you disable the feature, the underlying `ClusterImagePolicy` CRD is removed, which removes all of the default image policies and any custom images policies that you created.
 {: shortdesc}
 
-```
+```sh
 ibmcloud ks cluster image-security disable --cluster CLUSTER [-q]
 ```
 {: pre}
@@ -1044,7 +1045,7 @@ ibmcloud ks cluster image-security disable --cluster CLUSTER [-q]
 Enable [image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec) by installing the Portieris Kubernetes admission controller and the associated default image policies in your cluster.
 {: shortdesc}
 
-```
+```sh
 ibmcloud ks cluster image-security enable --cluster CLUSTER [-f] [-q]
 ```
 {: pre}
@@ -4609,7 +4610,7 @@ ibmcloud ks logging config get --cluster my_cluster --logsource worker
 Delete one log forwarding configuration or all logging configurations for a cluster. Deleting the log configuration stops log forwarding to a remote syslog server.
 {: shortdesc}
 
-```
+```sh
 ibmcloud ks logging config rm --cluster CLUSTER (--namespace NAMESPACE --id LOG_CONFIG_ID] [--all] [--force-update] [-q]
 ```
 {: pre}
@@ -6664,7 +6665,7 @@ To use this command to prepare your automation scripts for the release of versio
 6. Test your automation with the updated script. Note that you might incur charges if your automation includes creating clusters.
 7. Update all of your scripts.
 8. Update your CLI plug-in to version 1.0.
-    ```
+    ```sh
     ibmcloud plugin update kubernetes-service
     ```
     {: pre}

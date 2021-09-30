@@ -12,6 +12,7 @@ subcollection: containers
 
 
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 
@@ -46,7 +47,7 @@ To install the CLIs:
     {: tip}
 
 2. Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
-    ```
+    ```sh
     ibmcloud login
     ```
     {: pre}
@@ -55,25 +56,25 @@ To install the CLIs:
     {: tip}
 
 4. Install the {{site.data.keyword.cloud_notm}} plug-in for {{site.data.keyword.containerlong_notm}} (`ibmcloud ks`). Use this plug-in to create and manage {{site.data.keyword.containerlong_notm}} resources such as clusters, worker nodes, or network load balancers.
-    ```
+    ```sh
     ibmcloud plugin install container-service
     ```
     {: pre}
 
 5. Install the {{site.data.keyword.cloud_notm}} plug-in for {{site.data.keyword.registrylong_notm}} (`ibmcloud cr`). Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster.
-    ```
+    ```sh
     ibmcloud plugin install container-registry
     ```
     {: pre}
 
 6. To create a logging configuration for {{site.data.keyword.la_full_notm}} or a monitoring configuration for {{site.data.keyword.mon_full_notm}} for your cluster, install the {{site.data.keyword.containerlong_notm}} observability plug-in (`ibmcloud ob`).
-    ```
+    ```sh
     ibmcloud plugin install observe-service
     ```
     {: pre}
 
 7. Verify that the plug-ins are installed correctly.
-    ```
+    ```sh
     ibmcloud plugin list
     ```
     {: pre}
@@ -199,7 +200,7 @@ Before you can run `kubectl` commands:
 To run `kubectl` commands to manage your cluster:
 
 1. Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
-    ```
+    ```sh
     ibmcloud login
     ```
     {: pre}
@@ -210,7 +211,7 @@ To run `kubectl` commands to manage your cluster:
 2. Select an {{site.data.keyword.cloud_notm}} account. If you are assigned to multiple {{site.data.keyword.cloud_notm}} organizations, select the organization where the cluster was created. Clusters are specific to an organization, but are independent from an {{site.data.keyword.cloud_notm}} space. Therefore, you are not required to select a space.
 
 3. To create and work with clusters in a resource group other than the default, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks cluster ls`. **Note**: You must have [**Viewer** access](/docs/containers?topic=containers-users#checking-perms) to the resource group.
-    ```
+    ```sh
     ibmcloud target -g <resource_group_name>
     ```
     {: pre}
@@ -255,7 +256,7 @@ You can use the {{site.data.keyword.containerlong_notm}} plug-in CLI to add the 
 
 Before you begin:
 *   [Update the {{site.data.keyword.containerlong_notm}} plug-in](#cs_cli_upgrade) to at least version 1.0.
-    ```
+    ```sh
     ibmcloud plugin update kubernetes-service
     ```
     {: pre}
@@ -397,7 +398,7 @@ To update the CLIs:
 
 2. Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
 
-    ```
+    ```sh
     ibmcloud login
     ```
     {: pre}
@@ -492,28 +493,28 @@ To uninstall the CLIs:
 
 1. Uninstall the {{site.data.keyword.containerlong_notm}} plug-in.
 
-    ```
+    ```sh
     ibmcloud plugin uninstall kubernetes-service
     ```
     {: pre}
 
 2. Uninstall the {{site.data.keyword.registrylong_notm}} plug-in.
 
-    ```
+    ```sh
     ibmcloud plugin uninstall container-registry
     ```
     {: pre}
 
 3. Uninstall the {{site.data.keyword.containerlong_notm}} observability plug-in.
 
-    ```
+    ```sh
     ibmcloud plugin uninstall ob
     ```
     {: pre}
 
 4. Verify the plug-ins were uninstalled by running the following command and checking the list of the plug-ins that are installed.
 
-    ```
+    ```sh
     ibmcloud plugin list
     ```
     {: pre}

@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Setting pod priority
 {: #pod_priority}
 
@@ -78,7 +79,7 @@ The following table describes the priority classes that are in your cluster by d
 
 You can check which pods use the priority classes by running the following command.
 
-```
+```sh
 kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY:.spec.priorityClassName
 ```
 {: pre}

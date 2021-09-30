@@ -16,6 +16,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Why does installing the Object storage plug-in fail?
 {: #cos_plugin_fails}
 

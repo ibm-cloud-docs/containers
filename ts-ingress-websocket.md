@@ -13,6 +13,7 @@ content-type: troubleshoot
 
 
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 # Why does a connection via WebSocket close after 60 seconds?

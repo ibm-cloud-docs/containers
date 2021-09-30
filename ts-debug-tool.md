@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Running tests with the Diagnostics and Debug Tool
 {: #debug-tool}
 {: troubleshoot}

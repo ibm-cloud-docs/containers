@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Why do pods repeatedly fail to restart or are unexpectedly removed?
 {: #ts-app-pod-fail}
 

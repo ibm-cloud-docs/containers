@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # CLI changelog
 {: #cs_cli_changelog}
 

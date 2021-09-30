@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Classic clusters: Why can't I deploy a load balancer?
 {: #cs_subnet_limit_lb}
 
@@ -25,7 +26,7 @@ content-type: troubleshoot
 When you describe the `ibm-cloud-provider-vlan-ip-config` configmap in your classic cluster, you might see an error message similar to the following example output.
 {: tsSymptoms}
 
-```
+```sh
 kubectl describe cm ibm-cloud-provider-vlan-ip-config -n kube-system
 ```
 {: pre}

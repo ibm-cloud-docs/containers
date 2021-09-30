@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Debugging cluster add-ons
 {: #debug_addons}
 
@@ -28,7 +29,7 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
 You can check the health state and status of a cluster add-on by running the following command:
-```
+```sh
 ibmcloud ks cluster addon ls -c <cluster_name_or_ID>
 ```
 {: pre}

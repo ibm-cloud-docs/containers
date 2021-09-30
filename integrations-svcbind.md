@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Adding services by using IBM Cloud service binding
 {: #service-binding}
 

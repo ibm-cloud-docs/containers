@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Cluster states
 {: #cluster-states-reference}
 You can view the current cluster state by running the `ibmcloud ks cluster ls` command and locating the **State** field.

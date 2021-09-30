@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Why does no Ingress secret exist after cluster creation?
 {: #ingress_secret}
 

@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Storing data on classic IBM Cloud {{site.data.keyword.filestorage_short}}
 {: #file_storage}
 

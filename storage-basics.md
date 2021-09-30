@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Understanding Kubernetes storage basics
 {: #kube_concepts}
 

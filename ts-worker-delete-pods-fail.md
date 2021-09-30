@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # After deleting all worker nodes, why don't my pods start on new worker nodes?
 {: #zero_nodes_calico_failure}
 
@@ -28,7 +29,7 @@ content-type: troubleshoot
 You deleted all worker nodes in your cluster so that zero worker nodes exist. Then, you added one or more worker nodes. When you run the following command, several pods for Kubernetes components are stuck in the `ContainerCreating` status, and the `calico-node` pods are stuck in the `CrashLoopBackOff` status.
 {: tsSymptoms}
 
-```
+```sh
 kubectl -n kube-system get pods
 ```
 {: pre}

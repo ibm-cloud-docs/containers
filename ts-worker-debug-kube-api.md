@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Debugging worker nodes with Kubernetes API
 {: #debug-kube-nodes}
 

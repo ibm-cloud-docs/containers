@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Storing data on {{site.data.keyword.block_storage_is_short}}
 {: #vpc-block}
 

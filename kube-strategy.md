@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Moving your environment to {{site.data.keyword.containerlong_notm}}
 {: #strategy}
 

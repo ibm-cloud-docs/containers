@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Debugging {{site.data.keyword.blockstorageshort}} failures
 {: #debug_storage_block}
 {: troubleshoot}

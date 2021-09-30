@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Locations
 {: #regions-and-zones}
 
@@ -35,7 +36,7 @@ You can deploy {{site.data.keyword.containerlong}} clusters worldwide. When you 
 {{site.data.keyword.cloud_notm}} resources are organized into a hierarchy of geographic locations. {{site.data.keyword.containerlong_notm}} is available in a subset of these locations, including worldwide multizone regions and single zone regions. Other {{site.data.keyword.cloud_notm}} services might be available globally or within a specific location.
 {: shortdesc}
 
-```
+```sh
 ibmcloud ks locations
 ```
 {: pre}

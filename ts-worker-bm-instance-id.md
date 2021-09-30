@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Classic: Why is the bare metal instance ID inconsistent with worker records?
 {: #bm_machine_id}
 

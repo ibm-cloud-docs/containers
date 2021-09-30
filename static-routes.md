@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Adding static routes to worker nodes
 {: #static-routes}
 

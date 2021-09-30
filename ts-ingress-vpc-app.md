@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # VPC clusters: Why can't my app connect via Ingress?
 {: #vpc_ts_alb}
 
@@ -42,7 +43,7 @@ Verify that no VPC security groups are blocking traffic to your cluster and that
 {: tsResolve}
 
 1. Install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
-    ```
+    ```sh
     ibmcloud plugin install infrastructure-service
     ```
     {: pre}

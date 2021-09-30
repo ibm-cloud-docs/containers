@@ -12,6 +12,7 @@ subcollection: containers
 
 
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 # Ingress ALB and Fluentd version changelog
@@ -31,7 +32,7 @@ View version changes for Ingress application load balancers (ALBs) that run the 
 {: shortdesc}
 
 When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` flag. The latest three versions of the Kubernetes Ingress image are supported for ALBs. To list the currently supported versions, run the following command:
-```
+```sh
 ibmcloud ks ingress alb versions
 ```
 {: pre}

@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # VPC clusters: Why can't my app connect via load balancer?
 {: #vpc_ts_lb}
 

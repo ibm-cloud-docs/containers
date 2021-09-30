@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # VPC clusters: Why does a Kubernetes `LoadBalancer` service fail with no IPs?
 {: #vpc_no_lb}
 

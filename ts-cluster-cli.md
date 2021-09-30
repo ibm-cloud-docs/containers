@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Debugging common CLI issues with clusters
 {: #ts_clis}
 {: troubleshoot}

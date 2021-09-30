@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Storing data on IBM Cloud Object Storage
 {: #object_storage}
 
@@ -75,7 +76,7 @@ To create a secret for your {{site.data.keyword.cos_full_notm}} credentials:
 1. Retrieve the **apikey**, or the **access_key_id** and the **secret_access_key** of your [{{site.data.keyword.cos_full_notm}} service credentials](#service_credentials). Note that the service credentials that you refer to in your secret must be sufficient for the bucket operations that your app needs to perform. For example, if your app reads data from a bucket, the service credentials you refer to in your secret must have **Reader** permissions at minimum.
 
 2. Get the **GUID** of your {{site.data.keyword.cos_full_notm}} service instance.
-    ```
+    ```sh
     ibmcloud resource service-instance <service_name> | grep GUID
     ```
     {: pre}

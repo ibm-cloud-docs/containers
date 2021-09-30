@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Common issues with worker nodes
 {: #common_worker_nodes_issues}
 

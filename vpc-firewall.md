@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # VPC: Opening required ports and IP addresses in other network firewalls
 {: #vpc-firewall}
 
@@ -36,7 +37,7 @@ If corporate network policies prevent access from your local system to public en
 
 1. Allow access to `cloud.ibm.com` on port 443 in your firewall.
 2. Verify your connection by logging in to {{site.data.keyword.cloud_notm}} through this API endpoint.
-    ```
+    ```sh
     ibmcloud login -a https://cloud.ibm.com/
     ```
     {: pre}
@@ -84,13 +85,13 @@ To allow access for a specific cluster:
 
 1. Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated account, include the `--sso` option.
 
-    ```
+    ```sh
     ibmcloud login [--sso]
     ```
     {: pre}
 
 2. If the cluster is in a resource group other than `default`, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks cluster ls`. **Note**: You must have at least the [**Viewer** role](/docs/containers?topic=containers-users#checking-perms) for the resource group.
-    ```
+    ```sh
     ibmcloud target -g <resource_group_name>
     ```
     {: pre}
@@ -214,7 +215,7 @@ If you want to permit egress from your firewall-protected services to your clust
 Before you begin
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 2. Install the `infrastructure-service` CLI plug-in. The prefix for running VPC infrastructure commands is `ibmcloud is`.
-    ```
+    ```sh
     ibmcloud plugin install infrastructure-service
     ```
     {: pre}

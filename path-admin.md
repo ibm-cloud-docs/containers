@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 <style>
     <!--
         #tutorials { /* hide the page header */
@@ -127,6 +128,7 @@ subcollection: containers
         }
     -->
     </style>
+
 
 # Learning path for administrators
 {: #learning-path-admin}

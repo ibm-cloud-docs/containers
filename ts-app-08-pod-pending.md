@@ -17,6 +17,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Why do pods remain in pending state?
 {: #ts-app-pod-pending}
 
@@ -42,7 +43,7 @@ This task requires the {{site.data.keyword.cloud_notm}} IAM [**Administrator** p
 
 If you just created the Kubernetes cluster, run the following command and wait for the worker nodes to initialize.
 
-```
+```sh
 kubectl get nodes
 ```
 {: pre}

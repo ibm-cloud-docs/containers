@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Your responsibilities with using {{site.data.keyword.containerlong_notm}}
 {: #responsibilities_iks}
 {: help}

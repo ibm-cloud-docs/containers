@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Default service settings for Kubernetes components
 {: #service-settings}
 

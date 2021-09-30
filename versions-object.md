@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Object storage plug-in 
 {: #cos_plugin_changelog}
 

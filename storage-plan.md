@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Planning highly available persistent storage
 {: #storage_planning}
 

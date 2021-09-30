@@ -17,6 +17,7 @@ completion-time: 60m
 
 
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 
@@ -81,13 +82,13 @@ Because it can take a few minutes to provision, create your cluster before you s
     {: tip}
 
 3. In your command line, log in to your {{site.data.keyword.cloud_notm}} account. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the `--sso` flag to log in. Select the region and, if applicable, target the resource group (`-g`) that you created your cluster in.
-    ```
+    ```sh
     ibmcloud login [-g <resource_group>] [--sso]
     ```
     {: pre}
 
 5. Verify that the plug-ins are installed correctly.
-    ```
+    ```sh
     ibmcloud plugin list
     ```
     {: pre}
@@ -152,7 +153,7 @@ With {{site.data.keyword.cloud_notm}} services, you can take advantage of alread
     When you add the {{site.data.keyword.toneanalyzershort}} service to your account, a message is displayed that the service is not free. If you limit your API call, this tutorial does not incur charges from the {{site.data.keyword.watson}} service. [Review the pricing information for the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service](https://cloud.ibm.com/catalog/services/tone-analyzer){: external}.
     {: note}
 
-    ```
+    ```sh
     ibmcloud resource service-instance-create <service_name> tone-analyzer standard <region>
     ```
     {: pre}
@@ -765,7 +766,7 @@ service "watson-talk-service" deleted
 
 If you do not want to keep the cluster, you can delete that too.
 
-```
+```sh
 ibmcloud ks cluster rm --cluster <cluster_name_or_ID>
 ```
 {: pre}

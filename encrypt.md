@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Protecting sensitive information in your cluster
 {: #encryption}
 
@@ -81,7 +82,7 @@ Review the following known limitations:
 Additionally, your cluster version impacts the functionality of the KMS provider. To see what {{site.data.keyword.keymanagementserviceshort}} features are available for different cluster versions of {{site.data.keyword.containerlong_notm}}, review the following table.
 
 To check your cluster version, run the following command.
-```
+```sh
 ibmcloud ks cluster ls
 ```
 {: pre}

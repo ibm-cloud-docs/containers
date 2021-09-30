@@ -12,6 +12,7 @@ subcollection: containers
 
 
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 
@@ -67,7 +68,7 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 
 1. Get your credentials for Kubernetes.
 
-    ```
+    ```sh
     kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
     ```
     {: pre}
@@ -76,14 +77,14 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 
 3. Set the proxy with the default port number.
 
-    ```
+    ```sh
     kubectl proxy
     ```
     {: pre}
 
     Example output:
 
-    ```
+    ```sh
     Starting to serve on 127.0.0.1:8001
     ```
     {: screen}
@@ -92,7 +93,7 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 
     1. In your browser, navigate to the following URL:
 
-        ```
+        ```sh
         http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
         ```
         {: codeblock}
@@ -162,7 +163,7 @@ To deploy your app,
 
 2. Run the configuration file in a cluster's context.
 
-    ```
+    ```sh
     kubectl apply -f config.yaml
     ```
     {: pre}

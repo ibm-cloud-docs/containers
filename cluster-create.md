@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Creating clusters
 {: #clusters}
 
@@ -41,7 +42,7 @@ Have you created a cluster before and are just looking for quick example command
 
 
 **Free cluster**:
-```
+```sh
 ibmcloud ks cluster create classic --name my_cluster
 ```
 {: pre}
@@ -717,7 +718,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 **To create a VPC cluster from the CLI**:
 
 1. In your command line, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc?topic=vpc-creating-a-vpc-in-a-different-region). Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the --sso flag to log in.
-    ```
+    ```sh
     ibmcloud login -r <region> [-g <resource_group>] [--sso]
     ```
     {: pre}

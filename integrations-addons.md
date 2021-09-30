@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Adding services by using managed add-ons
 {: #managed-addons}
 
@@ -70,7 +71,7 @@ The versions of each managed add-on are tested by {{site.data.keyword.cloud_notm
 {: #debug_addons_review}
 
 You can check the health state and status of a cluster add-on by running the following command:
-```
+```sh
 ibmcloud ks cluster addon ls -c <cluster_name_or_ID>
 ```
 {: pre}

@@ -16,6 +16,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Static route add-on version changelog
 {: #static-route-changelog}
 

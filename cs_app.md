@@ -12,6 +12,7 @@ subcollection: containers
 
 
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 
@@ -68,7 +69,7 @@ With [labels](/docs/containers?topic=containers-plan_deploy#deploy_organize), yo
 
 You can retrieve objects that are labeled in your cluster, such as to see `staging` or `production` components. For example, list all resources with an `env: production` label across all namespaces in the cluster. **Note:** You need access to all namespaces to run this command.
 
-```
+```sh
 kubectl get all -l env=production --all-namespaces
 ```
 {: pre}
@@ -469,7 +470,7 @@ The following example is a copy of the deployment YAML that is [discussed sectio
 
 To apply the YAML,
 
-```
+```sh
 kubectl apply -f file.yaml [-n <namespace>]
 ```
 {: pre}
