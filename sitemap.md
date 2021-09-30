@@ -2069,9 +2069,9 @@ subcollection: containers
 
 * [Removing persistent storage from a cluster](/docs/containers?topic=containers-file_storage#cleanup)
 
-    * [Understanding your storage removal options](/docs/containers?topic=containers-file_storage#storage_delete_options)
+    * [Understanding your storage removal options](/docs/containers?topic=containers-file_storage#storage_delete_options_file)
 
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove)
+    * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove_file)
 
 [Storing data on classic IBM Cloud {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
 
@@ -2133,9 +2133,9 @@ subcollection: containers
 
 * [Removing persistent storage from a cluster](/docs/containers?topic=containers-block_storage#cleanup)
 
-    * [Understanding your storage removal options](/docs/containers?topic=containers-block_storage#storage_delete_options)
+    * [Understanding your storage removal options](/docs/containers?topic=containers-block_storage#storage_delete_options_block)
 
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove)
+    * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
 
 [Storing data on {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block)
 
@@ -2171,9 +2171,9 @@ subcollection: containers
 
 * [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup)
 
-    * [Understanding your storage removal options](/docs/containers?topic=containers-vpc-block#storage_delete_options)
+    * [Understanding your storage removal options](/docs/containers?topic=containers-vpc-block#storage_delete_options_block_vpc)
 
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-vpc-block#storage_remove)
+    * [Cleaning up persistent storage](/docs/containers?topic=containers-vpc-block#storage_remove_block_vpc)
 
 [Storing data on IBM Cloud Object Storage](/docs/containers?topic=containers-object_storage#object_storage)
 
