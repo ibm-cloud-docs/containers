@@ -1376,34 +1376,6 @@ subcollection: containers
 {: #sitemap_setting_up_an_image_build_pipeline}
 
 
-[Setting up an image registry](/docs/containers?topic=containers-registry#registry)
-
-* [Planning image registries](/docs/containers?topic=containers-registry#planning_images)
-
-* [Understanding how to authorize your cluster to pull images from a private registry](/docs/containers?topic=containers-registry#cluster_registry_auth)
-
-    * [Default image pull secret setup](/docs/containers?topic=containers-registry#cluster_registry_auth_default)
-
-    * [Private network connection to `icr.io` registries](/docs/containers?topic=containers-registry#cluster_registry_auth_private)
-
-* [Updating existing clusters to use the API key image pull secret](/docs/containers?topic=containers-registry#imagePullSecret_migrate_api_key)
-
-    * [Updating your image pull secret](/docs/containers?topic=containers-registry#update-pull-secret)
-
-* [Using an image pull secret to access images in other {{site.data.keyword.cloud_notm}} accounts or external private registries from non-default Kubernetes namespaces](/docs/containers?topic=containers-registry#other)
-
-    * [Copying an existing image pull secret](/docs/containers?topic=containers-registry#copy_imagePullSecret)
-
-    * [Creating an image pull secret with different IAM API key credentials for more control or access to images in other {{site.data.keyword.cloud_notm}} accounts](/docs/containers?topic=containers-registry#other_registry_accounts)
-
-    * [Accessing images that are stored in other private registries](/docs/containers?topic=containers-registry#private_images)
-
-* [Using the image pull secret to deploy containers](/docs/containers?topic=containers-registry#use_imagePullSecret)
-
-    * [Storing the image pull secret in the Kubernetes service account for the selected namespace](/docs/containers?topic=containers-registry#store_imagePullSecret)
-
-* [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-registry#secret_entitled_software)
-
 [Setting up continuous integration and delivery](/docs/containers?topic=containers-cicd#cicd)
 
 * [Supported automation tools](/docs/containers?topic=containers-cicd#cicd_strategy)
