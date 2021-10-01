@@ -223,12 +223,7 @@ By default, you are logged in to the global {{site.data.keyword.containerlong_no
 When you use the new global functionality in the {{site.data.keyword.containerlong_notm}} CLI, consider the following changes from the legacy region-based functionality.
 
 * Listing resources:
-    * When you list resources, such as with the `ibmcloud ks cluster ls`, `ibmcloud ks subnets`, or `ibmcloud ks zone ls` commands, resources in all locations are returned. To filter resources by a specific location, certain commands include a `--location` flag. For example, if you filter clusters for the `wdc` metro, multizone clusters in that metro and single-zone clusters in data centers (zones) within that metro are returned. If you filter clusters for the `wdc06` data center (zone), multizone clusters that have a worker node in that zone and single-zone clusters in that zone are returned.
-        Example to filter by location:
-    ```sh
-    ibmcloud ks cluster ls -l dal -l seo
-    ```
-    {: pre}
+    * When you list resources, such as with the `ibmcloud ks cluster ls`, `ibmcloud ks subnets`, or `ibmcloud ks zone ls` commands, resources in all locations are returned. To filter resources by a specific location, certain commands include a `--location` flag. For example, if you filter clusters for the `wdc` metro, multizone clusters in that metro and single-zone clusters in data centers (zones) within that metro are returned. If you filter clusters for the `wdc06` data center (zone), multizone clusters that have a worker node in that zone and single-zone clusters in that zone are returned. `ibmcloud ks cluster ls -l dal -l seo`.
 
     * Other commands do not return resources in all locations. To run `credential set/unset/get`, `api-key reset`, and `vlan spanning get` commands, you must specify a region in the `--region`.
 
@@ -237,20 +232,21 @@ When you use the new global functionality in the {{site.data.keyword.containerlo
     * If you have clusters with the same name in different regions, use the cluster ID when you run commands or set a region with the `ibmcloud ks init` command and use the cluster name when you run commands.
 
 * Legacy functionality:
-    * If you need to list and work with resources from one region only, you can use the `ibmcloud ks init` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_init) to target a regional endpoint instead of the global endpoint.
-        Example to target the US South regional endpoint:
-    ```sh
-    ibmcloud ks init --host https://us-south.containers.cloud.ibm.com
-    ```
-    {: pre}
+    * If you need to list and work with resources from one region only, you can use the `ibmcloud ks init` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_init) to target a regional endpoint instead of the global endpoint. Example to target the US South regional endpoint:
+        ```sh
+        ibmcloud ks init --host https://us-south.containers.cloud.ibm.com
+        ```
+        {: pre}
 
     * To use the global functionality, you can use the `ibmcloud ks init` command again to target the global endpoint. Example to target the global endpoint again:
-    ```sh
-    ibmcloud ks init --host https://containers.cloud.ibm.com
-    ```
-    {: pre}
+        ```sh
+        ibmcloud ks init --host https://containers.cloud.ibm.com
+        ```
+        {: pre}
 
-</br></br>
+
+
+
 **{{site.data.keyword.containerlong_notm}} API**:
 * [Get started with the API](/docs/containers?topic=containers-cs_api_install#cs_api).
 * [View documentation on the API commands](https://containers.cloud.ibm.com/global/swagger-global-api/#/).
@@ -259,12 +255,12 @@ When you use the new global functionality in the {{site.data.keyword.containerlo
 To interact with the global {{site.data.keyword.containerlong_notm}} API, enter the command type and append `global/v1/command` to the endpoint.
 
 Example of `GET /clusters` global API:
-```
+```sh
 GET https://containers.cloud.ibm.com/global/v1/clusters
 ```
 {: codeblock}
 
-</br>
+
 
 If you need to specify a region in an API call, remove the `/global` parameter from the path and pass the region name in the `X-Region` header. To list available regions, review the [Previous region](#zones-mz) column in the {{site.data.keyword.containerlong_notm}} locations table.
 
