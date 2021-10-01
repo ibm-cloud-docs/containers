@@ -74,7 +74,7 @@ ibmcloud ks cluster addon ls -c <cluster_name_or_ID>
 {: pre}
 
 Example output
-```
+```sh
 Name            Version   Health State   Health Status
 debug-tool      2.0.0     normal         Addon Ready
 istio           1.4       -              Enabling
@@ -94,7 +94,9 @@ The **Health State** reflects the lifecycle of the add-on components. The **Heal
 {: caption="Add-on health states"}
 {: summary="Table rows read from left to right, with the add-on state in column one and a description in column two."}
 
-</br>
+
+
+
 
 |Status code|Add-on health status|Description|
 |--- |--- |--- |
@@ -107,6 +109,7 @@ The **Health State** reflects the lifecycle of the add-on components. The **Heal
 |H1512|`Addon daemonset may not be available on all Ready nodes.`|For the static route add-on: The static route operator `DaemonSet` is not available on any worker nodes, which prevents you from applying static route resources. Your worker nodes cannot run the static route operator `DaemonSet` for the following reasons:<ul><li>One or more worker nodes reached their <a href="/docs/containers?topic=containers-debug_worker_nodes">resource limits</a>.</li><li>One or more worker nodes are running the <a href="/docs/containers?topic=containers-limitations#classic_limits">maximum number of pods per worker node</a>.</li></ul>|
 {: caption="Add-on health statuses"}
 {: summary="Table rows read from left to right, with the add-on status in column one and a description in column two."}
+
 
 Still having trouble with the Istio add-on? Check out these [troubleshooting topics](/docs/containers?topic=containers-istio#istio-ts) to debug your Istio deployment.
 {: tip}

@@ -150,7 +150,6 @@ This information summarizes updates that are likely to have impact on deployed a
 -  **Deprecated**: Version 1.18 [preparation actions](#cs_v118).
 -  [Archive](#k8s_version_archive) of unsupported versions.
 
-<br />
 
 
 

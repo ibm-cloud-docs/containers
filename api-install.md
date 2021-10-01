@@ -181,7 +181,7 @@ You can also use the [API swagger JSON file](https://containers.cloud.ibm.com/gl
 
 2. Retrieve the ID of the {{site.data.keyword.cloud_notm}} account that you want to work with. Replace `<iam_access_token>` with the {{site.data.keyword.cloud_notm}} IAM token that you retrieved from the **access_token** field of your API output in the previous step. In your API output, you can find the ID of your {{site.data.keyword.cloud_notm}} account in the **resources.metadata.guid** field.
 
-    ```
+    ```sh
     GET https://accounts.cloud.ibm.com/coe/v2/accounts
     ```
     {: codeblock}
@@ -204,7 +204,7 @@ You can also use the [API swagger JSON file](https://containers.cloud.ibm.com/gl
 
     Example output
 
-    ```
+    ```sh
     {
     "next_url": null,
     "total_results": 5,
@@ -219,7 +219,6 @@ You can also use the [API swagger JSON file](https://containers.cloud.ibm.com/gl
             },
             "entity": {
                 "name": "<account_name>",
-    ...
     ```
     {: screen}
 
@@ -280,7 +279,7 @@ You can also use the [API swagger JSON file](https://containers.cloud.ibm.com/gl
 
     Example output
 
-    ```
+    ```json
     {
         "access_token": "<iam_token>",
         "refresh_token": "<iam_refresh_token>",
@@ -296,7 +295,7 @@ You can also use the [API swagger JSON file](https://containers.cloud.ibm.com/gl
 
 4. List all classic or VPC clusters in your account. If you want to [run Kubernetes API requests against a cluster](#kube_api), make sure to note the name or ID of the cluster that you want to work with.
     * **Classic**:
-        ```
+        ```sh
         GET https://containers.cloud.ibm.com/global/v2/classic/getClusters
         ```
         {: codeblock}
@@ -315,7 +314,7 @@ You can also use the [API swagger JSON file](https://containers.cloud.ibm.com/gl
         </tbody>
         </table>
     * **VPC**:
-        ```
+        ```sh
         GET https://containers.cloud.ibm.com/global/v2/vpc/getClusters?provider=vpc-gen2
         ```
         {: codeblock}
@@ -355,7 +354,7 @@ The following instructions require public network access in your cluster to conn
 1. Follow the steps in [Automating cluster deployments with the API](#cs_api) to retrieve your {{site.data.keyword.cloud_notm}} IAM access token, refresh token, the ID of the cluster where you want to run Kubernetes API requests, and the {{site.data.keyword.containerlong_notm}} region where your cluster is located.
 
 2. Retrieve an {{site.data.keyword.cloud_notm}} IAM delegated refresh token.
-    ```
+    ```sh
     POST https://iam.cloud.ibm.com/identity/token
     ```
     {: codeblock}
@@ -393,7 +392,7 @@ The following instructions require public network access in your cluster to conn
     {: screen}
 
 3. Retrieve an {{site.data.keyword.cloud_notm}} IAM ID, IAM access, and IAM refresh token by using the delegated refresh token from the previous step. In your API output, you can find the IAM ID token in the **id_token** field, the IAM access token in the **access_token** field, and the IAM refresh token in the **refresh_token** field.
-    ```
+    ```sh
     POST https://iam.cloud.ibm.com/identity/token
     ```
     {: codeblock}
@@ -438,7 +437,7 @@ The following instructions require public network access in your cluster to conn
     If only the public cloud service endpoint or only the private cloud service endpoint is enabled for your cluster, that endpoint is listed for the `masterURL`. If both the public and private cloud service endpoints are enabled for your cluster, the public cloud service endpoint is listed by default for the `masterURL`. To use the private cloud service endpoint instead, find the URL in the `privateServiceEndpointURL` field of the output.
     {: note}
 
-    ```
+    ```sh
     GET https://containers.cloud.ibm.com/global/v2/getCluster?cluster=<cluster_name_or_ID>
     ```
     {: codeblock}
@@ -462,7 +461,7 @@ The following instructions require public network access in your cluster to conn
     </table>
 
     Example output for a public cloud service endpoint:
-    ```
+    ```sh
     ...
     "etcdPort": "31593",
     "masterURL": "https://c2.us-south.containers.cloud.ibm.com:30422",
@@ -472,7 +471,7 @@ The following instructions require public network access in your cluster to conn
     {: screen}
 
     Example output for a private cloud service endpoint:
-    ```
+    ```sh
     ...
     "etcdPort": "31593",
     "masterURL": "https://c2.private.us-south.containers.cloud.ibm.com:30422",
@@ -488,7 +487,7 @@ The following instructions require public network access in your cluster to conn
     If you enabled SSL certificate verification in your API test framework, make sure to disable this feature.
     {: tip}
 
-    ```
+    ```sh
     GET <masterURL>/version
     ```
     {: codeblock}
@@ -545,8 +544,8 @@ Before you begin, make sure that you have an {{site.data.keyword.cloud_notm}} IA
     2. Click the **Users** page and then select yourself.
     3. In the **API keys** pane, click **Create an IBM Cloud API key**.
     4. Enter a **Name** and **Description** for your API key and click **Create**.
-    4. Click **Show** to see the API key that was generated for you.
-    5. Copy the API key so that you can use it to retrieve your new {{site.data.keyword.cloud_notm}} IAM access token.
+    5. Click **Show** to see the API key that was generated for you.
+    6. Copy the API key so that you can use it to retrieve your new {{site.data.keyword.cloud_notm}} IAM access token.
 
 Use the following steps if you want to create an {{site.data.keyword.cloud_notm}} IAM token or if you want to obtain a new refresh token.
 

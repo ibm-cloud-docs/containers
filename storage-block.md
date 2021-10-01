@@ -137,7 +137,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         {: pre}
 
         Example output
-        ```
+        ```sh
         OK
         ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
         kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.20.7_1523*
@@ -2252,42 +2252,42 @@ To clean up persistent data:
     ```
     {: screen}
 
-2. Remove the pod that uses the PVC. If the pod is part of a deployment, remove the deployment.
+4. Remove the pod that uses the PVC. If the pod is part of a deployment, remove the deployment.
 
     ```sh
     kubectl delete pod <pod_name>
     ```
     {: pre}
 
-3. Verify that the pod is removed.
+5. Verify that the pod is removed.
 
     ```sh
     kubectl get pods
     ```
     {: pre}
 
-4. Remove the PVC.
+6. Remove the PVC.
 
     ```sh
     kubectl delete pvc <pvc_name>
     ```
     {: pre}
 
-5. Review the status of your PV. Use the name of the PV that you retrieved earlier as **`VOLUME`**. When you remove the PVC, the PV that is bound to the PVC is released. Depending on how you provisioned your storage, your PV goes into a `Deleting` state if the PV is deleted automatically, or into a `Released` state, if you must manually delete the PV. **Note**: For PVs that are automatically deleted, the status might briefly say `Released` before it is deleted. Rerun the command after a few minutes to see whether the PV is removed.
+7. Review the status of your PV. Use the name of the PV that you retrieved earlier as **`VOLUME`**. When you remove the PVC, the PV that is bound to the PVC is released. Depending on how you provisioned your storage, your PV goes into a `Deleting` state if the PV is deleted automatically, or into a `Released` state, if you must manually delete the PV. **Note**: For PVs that are automatically deleted, the status might briefly say `Released` before it is deleted. Rerun the command after a few minutes to see whether the PV is removed.
 
     ```sh
     kubectl get pv <pv_name>
     ```
     {: pre}
 
-6. If your PV is not deleted, manually remove the PV.
+8. If your PV is not deleted, manually remove the PV.
 
     ```sh
     kubectl delete pv <pv_name>
     ```
     {: pre}
 
-7. Verify that the PV is removed.
+9. Verify that the PV is removed.
 
     ```sh
     kubectl get pv

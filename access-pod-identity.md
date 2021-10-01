@@ -35,23 +35,22 @@ In your cluster
 To use {{site.data.keyword.cloud_notm}} IAM identities for pods in your cluster, verify that you meet the prerequisites.
 {: shortdesc}
 
-**Supported infrastructure provider**
+Supported infrastructure providers
 
 - <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC  
 - <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic  
 
 
 
-**Minimum required permissions**
-* **Viewer** [platform](/docs/containers?topic=containers-access_reference#iam_platform) access role and the **Writer** [service](/docs/containers?topic=containers-access_reference#service) access role for the cluster in {{site.data.keyword.cloud_notm}} IAM for **{{site.data.keyword.containershort}}**.
+Minimum required permissions
+- **Viewer** [platform](/docs/containers?topic=containers-access_reference#iam_platform) access role and the **Writer** [service](/docs/containers?topic=containers-access_reference#service) access role for the cluster in {{site.data.keyword.cloud_notm}} IAM for **{{site.data.keyword.containershort}}**.
 * The `iam-identity.profile.create` and `iam-identity.profile.linkToResource` actions for the [IAM identity service](/docs/account?topic=account-iam-service-roles-actions#iam-identity-service).
 
-**Supported version**
+Supported versions
+
 * The cluster must be [created](/docs/containers?topic=containers-clusters) at Kubernetes version 1.21 or later.
 * To use a cluster that was updated to this version from a previous version, [contact support](/docs/containers?topic=containers-get-help#help-support). Title the request `Enable pod identity` and include the cluster ID, version, and region.
 
-**Log in to the cluster** 
-[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ## Creating an IAM trusted profile for your cluster in the API
 {: #iam-identity-create-api}
@@ -61,6 +60,8 @@ As an account administrator, create a trusted profile in {{site.data.keyword.clo
 {: shortdesc}
 
 **Before you begin**: Verify that you meet the [prerequisites](#iam-identity-prereqs).
+
+[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Create an [IAM trusted profile](/docs/account?topic=account-create-trusted-profile) in {{site.data.keyword.cloud_notm}} Identity and Access Management. Note the `uuid` (profile ID) in the output.
 
