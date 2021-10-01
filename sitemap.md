@@ -2874,7 +2874,7 @@ subcollection: containers
 
     * [Update after master](/docs/containers?topic=containers-cs_versions#120_after)
 
-* [Version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119)
+* [Deprecated: Version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119)
 
     * [Update before master](/docs/containers?topic=containers-cs_versions#119_before)
 
@@ -3010,7 +3010,7 @@ subcollection: containers
 
     * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 
-* [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+* [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
 
     * [Changelog for worker node fix pack 1.19.15_1561, released 27 September 2021](/docs/containers?topic=containers-changelog#11915_1561)
 

@@ -199,7 +199,7 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
 2. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 3. Configure your VPC environment.
     1. Select the **Standard** plan.
-    2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.20.7 or later**.
+    2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.21.5 or later**.
     3. Select **VPC** infrastructure.
     4. From the **Virtual private cloud** drop-down menu, select the VPC that you created earlier.
 4. Configure the **Location** details for your cluster.

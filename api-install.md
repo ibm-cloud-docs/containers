@@ -515,8 +515,8 @@ The following instructions require public network access in your cluster to conn
     ```sh
     {
     "major": "1",
-    "minor": "1.20.7",
-    "gitVersion": "v1.20.7+IKS",
+    "minor": "1.21.5",
+    "gitVersion": "v1.21.5+IKS",
     "gitCommit": "c35166bd86eaa91d17af1c08289ffeab3e71e11e",
     "gitTreeState": "clean",
     "buildDate": "2019-03-21T10:08:03Z",

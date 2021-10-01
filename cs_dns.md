@@ -254,7 +254,7 @@ The following steps update DNS pods that run on particular worker nodes. You can
         
         ```sh
         NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.20.7+IKS   true
+        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.21.5+IKS   true
         ```
         {: screen}
 
@@ -309,7 +309,7 @@ You can disable the `NodeLocal` DNS cache for one or more worker nodes.
         
         ```sh
         NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.20.7+IKS   
+        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.21.5+IKS   
         ```
         {: screen}
 

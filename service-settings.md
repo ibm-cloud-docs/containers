@@ -117,7 +117,7 @@ Review the feature gates that are applied to all master and worker node componen
 
 | Kubernetes version | Default feature gates |
 |---|---|
-| 1.22 | <code>ServiceLBNodePortControl=false</code>
+| 1.22 | <ul><li><code>ServiceLBNodePortControl=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li><li><code>IPv6DualStack=false</code></li></ul>
 | 1.21 | <ul><li><code>CustomCPUCFSQuotaPeriod=true</code></li><li><code>IPv6DualStack=false</code></li></ul>|
 | 1.20 | <ul><li><code>AllowInsecureBackendProxy=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul>|
 | 1.19 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li><li><code>AllowInsecureBackendProxy=false</code></li><li><code>SCTPSupport=false</code></li><li><code>ServiceAppProtocol=false</code></li></ul>|
