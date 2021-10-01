@@ -8,9 +8,7 @@ keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, ve
 
 subcollection: containers
 
----
-
-{{site.data.keyword.attribute-definition-list}}
+---{{site.data.keyword.attribute-definition-list}}
 
   
 
@@ -71,6 +69,7 @@ Review the version 1.21 changelog.
 {: shortdesc}
 
 ### Changelog for worker node fix pack 1.21.5_1532, released 27 September 2021
+
 {: #1215_1532}
 
 The following table shows the changes that are included in the worker node fix pack patch update `1.21.5_1532`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -85,7 +84,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.21.4_1530" caption-side="top"}
 
-### Changelog for master fix pack 1.21.5_1531, released 27 September 2021
+### Changelog for master fix pack 1.21.5_1531, released 28 September 2021
 {: #1215_1531}
 
 The following table shows the changes that are included in the master fix pack patch update `1.21.5_1531`. Master patch updates are applied automatically.
@@ -339,7 +338,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.20.10_1552" caption-side="top"}
 
-### Changelog for master fix pack 1.20.11_1553, released 27 September 2021
+### Changelog for master fix pack 1.20.11_1553, released 28 September 2021
 {: #12011_1553}
 
 The following table shows the changes that are included in the master fix pack patch update `1.21.1_1553`. Master patch updates are applied automatically.
@@ -798,7 +797,7 @@ The following table shows the changes that are included in the worker node fix p
 {: caption="Changes since version 1.19.14_1559" caption-side="top"}
 
 
-### Changelog for master fix pack 1.19.15_1560, released 27 September 2021
+### Changelog for master fix pack 1.19.15_1560, released 28 September 2021
 {: #11915_1560}
 
 The following table shows the changes that are included in the master fix pack patch update `1.19.15_1560`. Master patch updates are applied automatically.
@@ -1498,7 +1497,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.18.20_1564" caption-side="top"}
 
-### Changelog for master fix pack 1.18.20_1565, released 27 September 2021
+### Changelog for master fix pack 1.18.20_1565, released 28 September 2021
 {: #11820_1565}
 
 The following table shows the changes that are included in the master fix pack patch update `1.18.20_1565`. Master patch updates are applied automatically.

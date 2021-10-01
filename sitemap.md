@@ -2928,7 +2928,7 @@ subcollection: containers
 
     * [Changelog for worker node fix pack 1.21.5_1532, released 27 September 2021](/docs/containers?topic=containers-changelog#1215_1532)
 
-    * [Changelog for master fix pack 1.21.5_1531, released 27 September 2021](/docs/containers?topic=containers-changelog#1215_1531)
+    * [Changelog for master fix pack 1.21.5_1531, released 28 September 2021](/docs/containers?topic=containers-changelog#1215_1531)
 
     * [Changelog for worker node fix pack 1.21.4_1530, released 13 September 2021](/docs/containers?topic=containers-changelog#12104_1530)
 
@@ -2958,7 +2958,7 @@ subcollection: containers
 
     * [Changelog for worker node fix pack 1.20.11_1554, released 27 September 2021](/docs/containers?topic=containers-changelog#12011_1554)
 
-    * [Changelog for master fix pack 1.20.11_1553, released 27 September 2021](/docs/containers?topic=containers-changelog#12011_1553)
+    * [Changelog for master fix pack 1.20.11_1553, released 28 September 2021](/docs/containers?topic=containers-changelog#12011_1553)
 
     * [Changelog for worker node fix pack 1.20.10_1552, released 13 September 2021](/docs/containers?topic=containers-changelog#12010_1552)
 
@@ -3014,7 +3014,7 @@ subcollection: containers
 
     * [Changelog for worker node fix pack 1.19.15_1561, released 27 September 2021](/docs/containers?topic=containers-changelog#11915_1561)
 
-    * [Changelog for master fix pack 1.19.15_1560, released 27 September 2021](/docs/containers?topic=containers-changelog#11915_1560)
+    * [Changelog for master fix pack 1.19.15_1560, released 28 September 2021](/docs/containers?topic=containers-changelog#11915_1560)
 
     * [Changelog for worker node fix pack 1.19.14_1559, released 13 September 2021](/docs/containers?topic=containers-changelog#11914_1559)
 
@@ -3100,7 +3100,7 @@ subcollection: containers
 
     * [Changelog for worker node fix pack 1.18.20_1566, released 27 September 2021](/docs/containers?topic=containers-changelog#11820_1566)
 
-    * [Changelog for master fix pack 1.18.20_1565, released 27 September 2021](/docs/containers?topic=containers-changelog#11820_1565)
+    * [Changelog for master fix pack 1.18.20_1565, released 28 September 2021](/docs/containers?topic=containers-changelog#11820_1565)
 
     * [Changelog for worker node fix pack 1.18.20_1564, released 13 September 2021](/docs/containers?topic=containers-changelog#11820_1564)
 
