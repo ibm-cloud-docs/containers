@@ -10,9 +10,6 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
 
 
@@ -97,7 +94,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ...
     VPC ID:        <VPC_ID>
     ...
@@ -156,7 +154,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ID                                                     Primary IP     Flavor   State          Status                                        Zone       Version   
     kube-<ID_string>-<cluster_name>-<pool_name>-00000002   10.xxx.xx.xxx   c2.2x4   provisioning   Infrastructure instance status is 'pending'   us-south-1   -   
     kube-<ID_string>-<cluster_name>-<pool_name>-00000003   10.xxx.xx.xxx   c2.2x4   normal   Ready   us-south-1   1.20.7_1511   
@@ -182,7 +181,8 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ...
     VPC ID:        <VPC_ID>
     Workers:       3
@@ -227,7 +227,8 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     Workers:       9
     Worker Zones:  us-south-1, us-south-2, us-south-3
     ```
@@ -259,7 +260,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ...
     Worker Zones: dal10, dal12, dal13
     ```
@@ -308,7 +310,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
     kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.20.7
     kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.20.7
@@ -372,6 +375,7 @@ To add a zone with worker nodes to your worker pool:
     {: pre}
 
     Example output
+
     ```sh
     NAME:                           mycluster
     ID:                             df253b6025d64944ab99ed63bb4567b6
@@ -476,7 +480,8 @@ To add a zone to your worker pool:
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ...
     Worker Zones:                   dal10, dal12
     ...
@@ -498,7 +503,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ...
     Worker Zones: dal10, dal12
     ```
@@ -541,7 +547,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ID                                                     Public IP     Private IP      Machine Type      State    Status  Zone    Version
     kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.20.7
     kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.20.7
@@ -563,7 +570,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ...
     Worker Zones: dal10, dal12
     ```
@@ -606,7 +614,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ID                                                     Public IP        Private IP      Machine Type      State    Status  Zone    Version
     kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.20.7
     kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.20.7
@@ -679,7 +688,8 @@ If you have an existing virtual or bare metal server that meets all of these req
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ...
     Private VLAN:   2625667
     ...
@@ -720,7 +730,7 @@ If you have an existing virtual or bare metal server that meets all of these req
 
 8. Get the server instance's **private_ip** address.
     * Virtual:
-        ```
+        ```sh
         ibmcloud sl vs list
         ```
         {: pre}
@@ -733,7 +743,7 @@ If you have an existing virtual or bare metal server that meets all of these req
         {: screen}
 
     * Bare metal:
-        ```
+        ```sh
         ibmcloud sl hardware list
         ```
         {: pre}
@@ -772,7 +782,7 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
     {: pre}
 
 3. Set the {{site.data.keyword.registrylong_notm}} domain for the zone that your virtual or bare metal server is deployed in. In subsequent steps, you create a manifest file for a Kubernetes job. When the job runs to add the server instance to your cluster network, container images are pulled from this {{site.data.keyword.registrylong_notm}} domain to configure the server instance.
-    ```
+    ```sh
     export REPO_NAME=<registry_domain>
     ```
     {: pre}
@@ -807,7 +817,7 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
     </tbody></table>
 
 4. Set the namespace in your cluster where you want the Kubernetes job to create a headless Kubernetes service. This service provides a DNS entry for the server instance's hostname so that the workloads in your cluster can access the server instance.
-    ```
+    ```sh
     export SERVICE_K8S_NS=<namespace>
     ```
     {: pre}
@@ -838,6 +848,7 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
     {: pre}
 
     Example output
+
     ```sh
     NAME:         ibm-external-compute-config
     Namespace:    kube-system
@@ -894,7 +905,8 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     serviceaccount/ibm-external-compute-job created
     clusterrole.rbac.authorization.k8s.io/ibm-external-compute-job created
     clusterrolebinding.rbac.authorization.k8s.io/ibm-external-compute-job created
@@ -909,6 +921,7 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     {: pre}
 
     Example output
+
     ```sh
     NAME                                                  READY     STATUS    RESTARTS   AGE
     ibm-external-compute-job-6lz8j                        1/1       Running   0          2m
@@ -922,6 +935,7 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     {: pre}
 
     Example output
+
     ```sh
     NAME                       COMPLETIONS   DURATION   AGE
     ibm-external-compute-job   1/1           20m        20m

@@ -7,7 +7,9 @@ lastupdated: "2021-10-01"
 keywords: containers
 subcollection: containers
 
----{{site.data.keyword.attribute-definition-list}}
+---
+
+{{site.data.keyword.attribute-definition-list}}
 
   
 

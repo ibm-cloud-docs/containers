@@ -9,7 +9,9 @@ keywords: kubernetes, iks
 subcollection: containers
 content-type: troubleshoot
 
----{{site.data.keyword.attribute-definition-list}}
+---
+
+{{site.data.keyword.attribute-definition-list}}
 
 
 

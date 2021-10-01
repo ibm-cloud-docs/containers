@@ -8,7 +8,9 @@ keywords: kubernetes, iks
 
 subcollection: containers
 
----{{site.data.keyword.attribute-definition-list}}
+---
+
+{{site.data.keyword.attribute-definition-list}}
 
 
 # Setting Kubernetes API priority and fairness

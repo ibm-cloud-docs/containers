@@ -8,7 +8,9 @@ keywords: kubernetes, iks, node scaling, ca, autoscaler
 
 subcollection: containers
 
----{{site.data.keyword.attribute-definition-list}}
+---
+
+{{site.data.keyword.attribute-definition-list}}
 
 
 
