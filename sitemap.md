@@ -437,6 +437,10 @@ subcollection: containers
 
     * [Worker-to-master and user-to-master communication: Virtual private endpoints or cloud service endpoints](/docs/containers?topic=containers-plan_clusters#vpc-workeruser-master)
 
+    * [Worker-to-master communication](/docs/containers?topic=containers-plan_clusters#worker-to-master-comms)
+
+    * [User-to-master communication](/docs/containers?topic=containers-plan_clusters#user-to-master-comms)
+
     * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_clusters#vpc-worker-services-onprem)
 
     * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_clusters#vpc-external-workers)
