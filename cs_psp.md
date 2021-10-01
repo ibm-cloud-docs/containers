@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -10,8 +10,8 @@ subcollection: containers
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 
@@ -80,14 +80,14 @@ When you modify the default configuration, you can prevent important cluster act
 {: #modify_rbac}
 
 1. Get the name of the RBAC cluster role binding. The following steps use the `privileged-psp-user` RBAC as an example, but you can take similar steps for the `restricted-psp-user` RBAC or custom pod security policies.
-    ```
+    ```sh
     kubectl get clusterrolebinding
     ```
     {: pre}
 
 2. Download the cluster role binding as a `.yaml` file that you can edit locally.
 
-    ```
+    ```sh
     kubectl get clusterrolebinding privileged-psp-user -o yaml > privileged-psp-user.yaml
     ```
     {: pre}
@@ -162,14 +162,14 @@ When you modify the default configuration, you can prevent important cluster act
 
 4. Create the modified cluster role binding resource in your cluster. Now, any users and service accounts that are not explicitly authorized to the privileged pod security policy can create pods only by using the restricted pod security policy.
 
-    ```
+    ```sh
     kubectl apply -f privileged-psp-user.yaml
     ```
     {: pre}
 
 5. Verify that the resource was modified.
 
-    ```
+    ```sh
     kubectl get clusterrolebinding privileged-psp-user -o yaml
     ```
     {: pre}
@@ -180,19 +180,19 @@ When you modify the default configuration, you can prevent important cluster act
 To delete the RBAC resources,
 
 1. Get the name of the RBAC cluster role binding. The following steps use the `privileged-psp-user` RBAC as an example, but you can take similar steps for the `restricted-psp-user` RBAC or custom pod security policies.
-    ```
+    ```sh
     kubectl get clusterrolebinding
     ```
     {: pre}
 
 2. Delete the RBAC role that you want to remove. Now, any users and service accounts can create pods only by using the restricted pod security policy.
-    ```
+    ```sh
     kubectl delete clusterrolebinding privileged-psp-user
     ```
     {: pre}
 
 3. Verify that the RBAC cluster role binding is no longer in your cluster.
-    ```
+    ```sh
     kubectl get clusterrolebinding
     ```
     {: pre}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -10,8 +10,8 @@ subcollection: containers
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Kubernetes version information and update actions  
@@ -21,10 +21,10 @@ Review information about supported Kubernetes versions for {{site.data.keyword.c
 {: shortdesc}
 
 For more information about the Kubernetes project versions, see the Kubernetes changelog.
-* [Kubernetes 1.22 release note](){: external}
-* [Kubernetes 1.21 release notes](https://kubernetes.io/releases/notes/){: external}
+* [Kubernetes 1.22 release notes](https://kubernetes.io/releases/notes/.){: external}
+* [Kubernetes 1.21 release notes](https://v1-21.docs.kubernetes.io/releases/notes/){: external}
 * [Kubernetes 1.20 release notes](https://v1-20.docs.kubernetes.io/docs/setup/release/notes/){: external}
-* [Kubernetes 1.19 release notes](https://v1-19.docs.kubernetes.io/docs/setup/release/notes/){: external}
+* **Deprecated**: [Kubernetes 1.19 release notes](https://v1-19.docs.kubernetes.io/docs/setup/release/notes/){: external}
 * **Deprecated**: [Kubernetes 1.18 release notes](https://v1-18.docs.kubernetes.io/docs/setup/release/notes/){: external}
 * [Kubernetes changelogs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG){: external}
 
@@ -37,7 +37,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch. As 
 |Update type|Examples of version labels|Updated by|Impact
 |-----|-----|-----|-----|
 |Major|1.x.x|You|Operation changes for clusters, including scripts or deployments.|
-|Minor|x.19.x|You|Operation changes for clusters, including scripts or deployments.|
+|Minor|x.21.x|You|Operation changes for clusters, including scripts or deployments.|
 |Patch|x.x.4_1510|IBM and you|Kubernetes patches, as well as other {{site.data.keyword.cloud_notm}} Provider component updates such as security and operating system patches. IBM updates masters automatically, but you apply patches to worker nodes. See more about patches in the following section.|
 {: caption="Impacts of Kubernetes updates" caption-side="top"}
 
@@ -66,25 +66,24 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-*   Latest: 1.21.3
-*   Default: 1.20.7
-*   Other: 1.19.11
+*   Latest: 1.22.2
+*   Default: 1.21.5
+*   Other: 1.20.11
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: 1.18.19
+*   Deprecated: 1.19.15
 *   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17
 
-<br>
 
 To check the server version of a cluster, log in to the cluster and run the following command.
-```
+```sh
 kubectl version  --short | grep -i server
 ```
 {: pre}
 
-Example output:
+Example output
 ```
-Server Version: v1.20.7+IKS
+Server Version: v1.21.5+IKS
 ```
 {: screen}
 
@@ -103,7 +102,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}}<br>release date | {{site.data.keyword.containerlong_notm}}<br>unsupported date |
 |------|------|----------|----------|
-| [1.22](#cs_v122) | Yes | XX XXX 2021 |XX XXX 2022 `†` |
+| [1.22](#cs_v122) | Yes | 29 Sep 2021 |Sep 2022 `†` |
 | [1.21](#cs_v121) | Yes | 09 Jun 2021 | Jun 2022 `†` |
 | [1.20](#cs_v120) | Yes | 16 Feb 2021 | Feb 2022 `†` |
 | [1.19](#cs_v119) | Deprecated | 13 Oct 2020 | 31 Dec 2021 `†` |
@@ -127,14 +126,14 @@ Estimated days and versions are provided for general understanding. Actual avail
 
 1. The Kubernetes community releases version `n`. IBM engineers begin a process of testing and hardening the community version in preparation to release a supported {{site.data.keyword.containerlong_notm}} version.
 2. Version `n` is released as the latest supported {{site.data.keyword.containerlong_notm}} version.
-3. Version `n` becomes the default supported {{site.data.keyword.containerlong_notm}} version.
-4. Version `n` becomes the oldest supported {{site.data.keyword.containerlong_notm}} version.
-5. Version `n` is deprecated, and security patch updates might not be provided. Depending on the community release cycle and version testing, you have 45 days or less until the next phase of deprecation starts in step 6. During the deprecation period, your cluster is still functional, but might require updating to a supported release to fix security vulnerabilities. For example, you can add and reload worker nodes.
+3. Version `n-1` becomes the default supported {{site.data.keyword.containerlong_notm}} version.
+4. Version `n-2` becomes the oldest supported {{site.data.keyword.containerlong_notm}} version.
+5. Version `n-3` is deprecated, and security patch updates might not be provided. Depending on the community release cycle and version testing, you have 45 days or less until the next phase of deprecation starts in step 6. During the deprecation period, your cluster is still functional, but might require updating to a supported release to fix security vulnerabilities. For example, you can add and reload worker nodes.
 6. You receive a notification in the console and CLI that you have 45 days to update your cluster to a supported version before version `n` becomes unsupported. Similar to step 5, your cluster is still functional, but might require updating to a supported release to fix security vulnerabilities.
-7. Version `n` is unsupported. Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support.
+7. Version `n-4` is unsupported. Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support.
 8. The cluster master runs two or more versions behind the oldest supported version. You cannot update the cluster. Delete the cluster, and create a new one.
 
-If you wait until your cluster is two or more minor versions behind the oldest supported version, you cannot update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster.<br><br>To avoid this issue, update deprecated clusters to a supported version less than two ahead of the current version, such as 1.19 or 1.20 and then update to the latest version, 1.21. If the worker nodes run a version two or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support.<br><br>You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}.
+If you wait until your cluster is two or more minor versions behind the oldest supported version, you cannot update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster.<br><br>To avoid this issue, update deprecated clusters to a supported version less than two ahead of the current version, such as 1.20 or 1.21 and then update to the latest version, 1.22. If the worker nodes run a version two or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support.<br><br>You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}.
 {: important}
 
 
@@ -147,18 +146,17 @@ This information summarizes updates that are likely to have impact on deployed a
 -  Version 1.22 [preparation actions](#cs_v122).
 -  Version 1.21 [preparation actions](#cs_v121).
 -  Version 1.20 [preparation actions](#cs_v120).
--  Version 1.19 [preparation actions](#cs_v119).
+-  **Deprecated**: Version 1.19 [preparation actions](#cs_v119).
 -  **Deprecated**: Version 1.18 [preparation actions](#cs_v118).
 -  [Archive](#k8s_version_archive) of unsupported versions.
 
-<br />
 
 
 
 ## Version 1.22
 {: #cs_v122}
 
-<p><img src="images/certified_kubernetes_1x21.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.21 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.21 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
+<p><img src="images/certified_kubernetes_1.22-color.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.22 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.22 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.22.
 {: shortdesc}
@@ -171,17 +169,16 @@ The following table shows the actions that you must take before you update the K
 
 | Type | Description|
 | --- | --- |
-| **Unsupported:**  Beta versions of ValidatingWebhookConfiguration and MutatingWebhookConfiguration API | The beta API has been removed. Migrate manifests and API clients to use the admissionregistration.k8s.io/v1 API version, available since v1.16. |
-| **Unsupported:**  Beta version of CustomResourceDefinition API | The beta API has been removed. Migrate manifests and API clients to use the apiextensions.k8s.io/v1 API version, available since v1.16. |
-| **Unsupported:**  Beta version of APIService API | The beta API has been removed. Migrate manifests and API clients to use the apiregistration.k8s.io/v1 API version, available since v1.10. |
-| **Unsupported:**  Beta version of TokenReview API | The beta API has been removed. Migrate manifests and API clients to use the authentication.k8s.io/v1 API version, available since v1.6. |
-| **Unsupported:**  Beta versions of of SubjectAccessReview, LocalSubjectAccessReview, SelfSubjectAccessReview API | The beta API has been removed. Migrate manifests and API clients to use the authorization.k8s.io/v1 API version, available since v1.6. |
-| **Unsupported:**  Beta version of CertificateSigningRequest API | The beta API has been removed. Migrate manifests and API clients to use the certificates.k8s.io/v1 API version, available since v1.19. |
-| **Unsupported:**  Beta version of Lease API | The beta API has been removed. Migrate manifests and API clients to use the coordination.k8s.io/v1 API version, available since v1.14. |
-| **Unsupported:**  Beta version of Ingress API | The beta API has been removed. Migrate manifests and API clients to use the networking.k8s.io/v1 API version, available since v1.19. |
-| `kubectl exec` session timeout | For kubectl version 1.21, there is a known issue where failed `kubectl exec` commands do not automatically time out. Update your kubectl client to use version 1.20 instead. |
-{: caption="Changes to make before you update the master to Kubernetes 1.22" caption-side="top"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+| **Unsupported:**  Beta versions of `ValidatingWebhookConfiguration` and `MutatingWebhookConfiguration` APIs | Migrate manifests and API clients to use the `admissionregistration.k8s.io/v1` API version, available since Kubernetes version 1.16. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
+| **Unsupported:**  Beta version of `CustomResourceDefinition` API | Migrate manifests and API clients to use the `apiextensions.k8s.io/v1` API version, available since Kubernetes version 1.16. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
+| **Unsupported:**  Beta version of `APIService` API | Migrate manifests and API clients to use the `apiregistration.k8s.io/v1` API version, available since Kubernetes version 1.10. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
+| **Unsupported:**  Beta version of `TokenReview` API | Migrate manifests and API clients to use the `authentication.k8s.io/v1` API version, available since Kubernetes version 1.10. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
+| **Unsupported:**  Beta versions of `SubjectAccessReview`, `LocalSubjectAccessReview`, `SelfSubjectAccessReview` APIs | Migrate manifests and API clients to use the `authorization.k8s.io/v1` API version, available since Kubernetes version 1.6. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
+| **Unsupported:**  Beta version of `CertificateSigningRequest` API | Migrate manifests and API clients to use the `certificates.k8s.io/v1` API version, available since Kubernetes version 1.19. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
+| **Unsupported:**  Beta version of `Lease` API | Migrate manifests and API clients to use the `coordination.k8s.io/v1` API version, available since Kubernetes version 1.14. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
+| **Unsupported:**  Beta versions of `Ingress` API | Migrate manifests and API clients to use the `networking.k8s.io/v1` API version, available since Kubernetes version 1.19. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
+| **Unsupported:** IBM Cloud Kubernetes Ingress Controller | As of 1 Jun 2021, the IBM Cloud Kubernetes Ingress Controller is no longer supported on {{site.data.keyword.containerlong_notm}}. Migrate your IBM Cloud Kubernetes Ingress Controller based ALBs to the Kubernetes Ingress Controller. |
+| Ingress | Kubernetes 1.22 supports Ingress and IngressClass resources with `networking.k8s.io/v1` version, which is only available on Kubernetes Ingress Controller version 1.0.0 and newer. Kubernetes Ingress Controller version 1.0.0 is supported on {{site.data.keyword.containerlong_notm}} cluster versions 1.19 or newer.<ul><li>**Cluster versions prior to 1.19**: Update your Ingress and IngressClass resources and Kubernetes clusters as soon as possible to avoid disruptions. For more information, review the migration guide.</li><li>**Cluster versions 1.19, 1.20, and 1.21**: Ingress and IngressClass resources that were created on clusters that run on Kubernetes versions 1.19, 1.20 or 1.21 and Ingress Controller version 1.0.0 are automatically updated during the cluster update to 1.22. The Kubernetes API Server dynamically manages the conversion from the earlier `extensions/v1beta1` and `networking.k8s.io/v1beta1` Ingresses to the new `networking.k8s.io/v1`.</li><li>**External Ingress resources**: For Ingress resources that are stored outside of Kubernetes clusters, such as in a version control system or any other external storage, the `extensions/v1beta1` and `networking.k8s.io/v1beta1` descriptors cannot be used with Kubernetes 1.22. Convert these descriptors to `networking.k8s.io/v1` Ingresses and IngressClasses.</li><li> If you have ALB auto updates enabled, you don't need to manually update your ALBs.</li><li> If you have ALB auto updates disabled, you must update your Kubernetes Ingress Controller based ALBs to a supported 0.4.x version before updating to 1.0.0 or newer. To check your auto update settings, run the ibmcloud ks ingress alb autoupdate get command.</li><li>**ALB OAuth-Proxy add-on**: `networking.k8s.io/v1beta1` is compatible with ALB OAuth-Proxy add-on version 2.0.0 only. If you use the ALB OAuth-Proxy add-on you must update the add-on to version 2.0.0 before updating your cluster to 1.22.</li></ul>
 
 
 ### Update after master
@@ -285,10 +282,13 @@ The following table shows the actions that you must take after you update the Ku
 
 
 
-## Version 1.19
+## Deprecated: Version 1.19
 {: #cs_v119}
 
 <p><img src="images/certified_kubernetes_1x19.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.19 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.19 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
+
+Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 31 Dec 2021. Update your cluster to at least [version 1.20](#cs_v120) as soon as possible.
+{: deprecated}
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.19.
 {: shortdesc}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -11,8 +11,8 @@ content-type: troubleshoot
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 # Debugging Ingress
@@ -75,15 +75,15 @@ Start by checking for error messages in the Ingress resource deployment events a
 {: shortdesc}
 
 1. Check your Ingress resource deployment and look for warnings or error messages.
-    ```
+    ```sh
     kubectl describe ingress <myingress>
     ```
     {: pre}
 
     In the **Events** section of the output, you might see warning messages about invalid values in your Ingress resource or in certain annotations that you used. Check the [Ingress resource configuration documentation](/docs/containers?topic=containers-ingress-types#alb-comm-create) or the [annotations documentation](/docs/containers?topic=containers-comm-ingress-annotations).
 
-    ```
-    Name:             myingress
+    ```sh
+    NAME:             myingress
     Namespace:        default
     Address:          169.xx.xxx.xxx,169.xx.xxx.xxx
     Default backend:  default-http-backend:80 (<none>)
@@ -111,7 +111,7 @@ Start by checking for error messages in the Ingress resource deployment events a
 
 2. Check the status of your ALB pods. {: #check_pods}
     1. Get the ALB pods that are running in your cluster.
-        ```
+        ```sh
         kubectl get pods -n kube-system | grep alb
         ```
         {: pre}
@@ -120,36 +120,36 @@ Start by checking for error messages in the Ingress resource deployment events a
 
     3. If a pod does not have a `Running` status, you can disable and re-enable the ALB. In the following commands, replace `<ALB_ID>` with the ID of the pod's ALB. For example, if the pod that is not running has the name `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-5d6d86fbbc-kxj6z`, the ALB ID is `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1`.
         * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-        ```
+        ```sh
         ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
         {: pre}
 
-        ```
+        ```sh
         ibmcloud ks ingress alb enable classic --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
         {: pre}
 
         * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters:
-        ```
+        ```sh
         ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
         {: pre}
 
-        ```
+        ```sh
         ibmcloud ks ingress alb enable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
         {: pre}
 
 3. Check the logs for your ALB.
     1. Get the IDs of the ALB pods that are running in your cluster.
-        ```
+        ```sh
         kubectl get pods -n kube-system | grep alb
         ```
         {: pre}
 
     3. Get the logs for the `nginx-ingress` container on each ALB pod.
-        ```
+        ```sh
         kubectl logs <ingress_pod_ID> nginx-ingress -n kube-system
         ```
         {: pre}
@@ -163,7 +163,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
 {: shortdesc}
 
 1. Get the IP addresses (classic) or hostname (VPC) that your public ALBs are listening on.
-    ```
+    ```sh
     ibmcloud ks ingress alb ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
@@ -197,18 +197,18 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
         * If you don't have a firewall or your firewall does not block the pings and the pings still timeout, [check the status of your ALB pods](#check_pods).
 
     * Multizone clusters only: You can use the MZLB health check to determine the status of your ALB IPs (classic) or hostname (VPC). For more information about the MZLB, see [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress-about#ingress_components). The following HTTP cURL command uses the `albhealth` host, which is configured by {{site.data.keyword.containerlong_notm}} to return the `healthy` or `unhealthy` status for an ALB IP.
-        ```
+        ```sh
         curl -X GET http://<ALB_IP>/ -H "Host: albhealth.<ingress_subdomain>"
         ```
         {: pre}
 
         Example command:
-        ```
+        ```sh
         curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud"
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         healthy
         ```
@@ -217,13 +217,14 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
         If one or more of the IPs returns `unhealthy`, [check the status of your ALB pods](#check_pods).
 
 4. Get the IBM-provided Ingress subdomain.
-    ```
+    ```sh
     ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     Ingress Subdomain:      mycluster-<hash>-0000.us-south.containers.appdomain.cloud
     Ingress Secret:         mycluster-<hash>-0000
     ```
@@ -231,13 +232,14 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
 
 5. Ensure that the IPs (classic) or hostname (VPC) for each public ALB that you got in step 1 of this section are registered with your cluster's IBM-provided Ingress subdomain. For example, in a classic multizone cluster, the public ALB IP in each zone where you have worker nodes must be registered under the same subdomain.
 
-    ```
+    ```sh
     kubectl get ingress -o wide
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     NAME                HOSTS                                                    ADDRESS                        PORTS     AGE
     myingressresource   mycluster-<hash>-0000.us-south.containers.appdomain.cloud      169.46.52.222,169.62.196.238   80        1h
     ```
@@ -253,7 +255,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         www.my-domain.com is an alias for mycluster-<hash>-0000.us-south.containers.appdomain.cloud
         mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.46.52.222
@@ -267,7 +269,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         www.my-domain.com has address 169.46.52.222
         www.my-domain.com has address 169.62.196.238
@@ -275,7 +277,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
         {: screen}
 
 2. Check the Ingress resource configuration files for your cluster.
-    ```
+    ```sh
     kubectl get ingress -o yaml
     ```
     {: pre}
@@ -287,7 +289,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
     3. Make sure that your app listens on the same path that is configured in the **path** section of your Ingress. If your app is set up to listen on the root path, use `/` as the path. If incoming traffic to this path must be routed to a different path that your app listens on, use the [rewrite paths](/docs/containers?topic=containers-comm-ingress-annotations#alb-rewrite-paths) annotation.
 
     4. Edit your resource configuration YAML as needed. When you close the editor, your changes are saved and automatically applied.
-        ```
+        ```sh
         kubectl edit ingress <myingressresource>
         ```
         {: pre}
@@ -301,7 +303,7 @@ If you can't access your app through a specific ALB IP, you can temporarily remo
 For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs have IP addresses `169.46.52.222` and `169.62.196.238`. Although the health check is returning healthy for the second zone's ALB, your app isn't directly reachable through it. You decide to remove that ALB's IP address, `169.62.196.238`, from production for debugging. The first zone's ALB IP, `169.46.52.222`, is registered with your domain and continues to route traffic while you debug the second zone's ALB.
 
 1. Get the name of the ALB with the unreachable IP address.
-    ```
+    ```sh
     ibmcloud ks ingress alb ls --cluster <cluster_name> | grep <ALB_IP>
     ```
     {: pre}
@@ -314,13 +316,14 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     {: screen}
 
 2. Using the ALB name from the previous step, get the names of the ALB pods. The following command uses the example ALB name from the previous step:
-    ```
+    ```sh
     kubectl get pods -n kube-system | grep public-cr24a9f2caf6554648836337d240064935-alb1
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq   2/2       Running   0          24m
     public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-trqxc   2/2       Running   0          24m
     ```
@@ -328,7 +331,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 
 3. Disable the health check that runs for all ALB pods. Repeat these steps for each ALB pod that you got in the previous step. The example commands and output in these steps use the first pod, `public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq`.
     1. Log in to the ALB pod and check the `server_name` line in the NGINX configuration file.
-        ```
+        ```sh
         kubectl exec -ti public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq -n kube-system -c nginx-ingress -- grep server_name /etc/nginx/conf.d/kube-system-alb-health.conf
         ```
         {: pre}
@@ -340,25 +343,25 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
         {: screen}
 
     2. To remove the IP by disabling the health check, insert `#` in front of the `server_name`. When the `albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud` virtual host is disabled for the ALB, the automated health check automatically removes the IP from the DNS response.
-        ```
+        ```sh
         kubectl exec -ti public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq -n kube-system -c nginx-ingress -- sed -i -e 's*server_name*#server_name*g' /etc/nginx/conf.d/kube-system-alb-health.conf
         ```
         {: pre}
 
     3. Verify that the change was applied.
-        ```
+        ```sh
         kubectl exec -ti public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq -n kube-system -c nginx-ingress -- grep server_name /etc/nginx/conf.d/kube-system-alb-health.conf
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         #server_name albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud
         ```
         {: screen}
 
     4. To remove the IP from the DNS registration, reload the NGINX configuration.
-        ```
+        ```sh
         kubectl exec -ti public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq -n kube-system -c nginx-ingress -- nginx -s reload
         ```
         {: pre}
@@ -366,7 +369,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     5. Repeat these steps for each ALB pod.
 
 4. Now, when you attempt to cURL the `albhealth` host to health check the ALB IP, the check fails.
-    ```
+    ```sh
     curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud"
     ```
     {: pre}
@@ -397,7 +400,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     {: screen}
 
 6. Now that the ALB IP has been removed from production, you can run debugging tests against your app through it. To test communication to your app through this IP, you can run the following cURL command, replacing the example values with your own values:
-    ```
+    ```sh
     curl -X GET --resolve mycluster-<hash>-0000.us-south.containers.appdomain.cloud:443:169.62.196.238 https://mycluster-<hash>-0000.us-south.containers.appdomain.cloud/
     ```
     {: pre}
@@ -407,19 +410,19 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 
 7. After you finish debugging, restore the health check on the ALB pods. Repeat these steps for each ALB pod.
     1. Log in to the ALB pod and remove the `#` from the `server_name`.
-    ```
+    ```sh
     kubectl exec -ti <pod_name> -n kube-system -c nginx-ingress -- sed -i -e 's*#server_name*server_name*g' /etc/nginx/conf.d/kube-system-alb-health.conf
     ```
     {: pre}
 
     2. Reload the NGINX configuration so that the health check restoration is applied.
-    ```
+    ```sh
     kubectl exec -ti <pod_name> -n kube-system -c nginx-ingress -- nginx -s reload
     ```
     {: pre}
 
 9. Now, when you cURL the `albhealth` host to health check the ALB IP, the check returns `healthy`.
-    ```
+    ```sh
     curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud"
     ```
     {: pre}
@@ -430,8 +433,9 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.46.52.222
     mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.62.196.238
     ```

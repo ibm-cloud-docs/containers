@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -10,10 +10,8 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Using reservations to reduce classic worker node costs

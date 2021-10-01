@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -15,8 +15,8 @@ completion-time: 60m
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 
@@ -81,13 +81,13 @@ Because it can take a few minutes to provision, create your cluster before you s
     {: tip}
 
 3. In your command line, log in to your {{site.data.keyword.cloud_notm}} account. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the `--sso` flag to log in. Select the region and, if applicable, target the resource group (`-g`) that you created your cluster in.
-    ```
+    ```sh
     ibmcloud login [-g <resource_group>] [--sso]
     ```
     {: pre}
 
 5. Verify that the plug-ins are installed correctly.
-    ```
+    ```sh
     ibmcloud plugin list
     ```
     {: pre}
@@ -105,7 +105,7 @@ Because it can take a few minutes to provision, create your cluster before you s
     {: pre}
 
 7. Before you continue to the next step, verify that the deployment of your worker node is complete.
-    ```
+    ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
@@ -114,25 +114,25 @@ Because it can take a few minutes to provision, create your cluster before you s
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.20.7
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.21.5
     ```
     {: screen}
 
 8. Set the context for your Kubernetes cluster in your CLI.
     1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable. Every time that you log in to the {{site.data.keyword.containerlong}} CLI to work with clusters, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in {{site.data.keyword.cloud_notm}}.
-        ```
+        ```sh
         ibmcloud ks cluster config --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
     2. Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
-        ```
+        ```sh
         kubectl config current-context
         ```
         {: pre}
 
         **Example output**
-        ```
+        ```sh
         <cluster_name>/<cluster_ID>
         ```
         {: screen}
@@ -152,20 +152,20 @@ With {{site.data.keyword.cloud_notm}} services, you can take advantage of alread
     When you add the {{site.data.keyword.toneanalyzershort}} service to your account, a message is displayed that the service is not free. If you limit your API call, this tutorial does not incur charges from the {{site.data.keyword.watson}} service. [Review the pricing information for the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service](https://cloud.ibm.com/catalog/services/tone-analyzer){: external}.
     {: note}
 
-    ```
+    ```sh
     ibmcloud resource service-instance-create <service_name> tone-analyzer standard <region>
     ```
     {: pre}
 
 2. Bind the {{site.data.keyword.toneanalyzershort}} instance to the `default` Kubernetes namespace for the cluster. Later, you can create your own namespaces to manage user access to Kubernetes resources, but for now, use the `default` namespace. Kubernetes namespaces are different from the registry namespace you created earlier.
-    ```
+    ```sh
     ibmcloud ks cluster service bind --cluster <cluster_name> --namespace default --service <service_name>
     ```
     {: pre}
 
     **Example output**
     
-    ```
+    ```sh
     ibmcloud ks cluster service bind pr_firm_cluster default mytoneanalyzer
     Binding service instance to namespace...
     OK
@@ -176,14 +176,14 @@ With {{site.data.keyword.cloud_notm}} services, you can take advantage of alread
 
 3. Verify that the Kubernetes secret was created in your cluster namespace. When you [bind an {{site.data.keyword.cloud_notm}} service to your cluster](/docs/containers?topic=containers-service-binding), a JSON file is generated that includes confidential information such as the {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) API key and the URL that the container uses to gain access to the service. To securely store this information, the JSON file is stored in a Kubernetes secret.
 
-    ```
+    ```sh
     kubectl get secrets --namespace=default
     ```
     {: pre}
 
     **Example output**
 
-    ```
+    ```sh
     NAME                       TYPE                                  DATA      AGE
     binding-mytoneanalyzer     Opaque                                1         1m
     bluemix-default-secret     kubernetes.io/dockercfg               1         1h
@@ -218,13 +218,13 @@ To deploy the app:
     *   `app.js`: The Hello world app.
     *   `package.json`: Metadata about the app.
 
-    ```
+    ```sh
     git clone https://github.com/IBM/container-service-getting-started-wt.git
     ```
     {: pre}
 
 2. Navigate to the `Lab 1` directory.
-    ```
+    ```sh
     cd 'container-service-getting-started-wt/Lab 1'
     ```
     {: pre}
@@ -255,7 +255,7 @@ To deploy the app:
     {: screen}
 
 4. Create a deployment. Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod by referring to the image that you built in your private registry. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
-    ```
+    ```sh
     kubectl create deployment hello-world-deployment --image=<region>.icr.io/<namespace>/hello-world:1
     ```
     {: pre}
@@ -268,7 +268,7 @@ To deploy the app:
 
     Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
 5. Make the app accessible to the world by exposing the deployment as a NodePort service. Just as you might expose a port for a Cloud Foundry app, the NodePort that you expose is the port on which the worker node listens for traffic.
-    ```
+    ```sh
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
     ```
     {: pre}
@@ -292,14 +292,14 @@ To deploy the app:
 
 6. Now that all the deployment work is done, you can test your app in a browser. Get the details to form the URL.
     1. Get information about the service to see which NodePort was assigned.
-        ```
+        ```sh
         kubectl describe service hello-world-service
         ```
         {: pre}
 
         **Example output**
-        ```
-        Name:                   hello-world-service
+        ```sh
+        NAME:                   hello-world-service
         Namespace:              default
         Labels:                 run=hello-world-deployment
         Selector:               run=hello-world-deployment
@@ -316,18 +316,18 @@ To deploy the app:
         The NodePorts are randomly assigned when they are generated with the `expose` command, but within 30000-32767. In this example, the NodePort is 30872.
         
     2. Get the public IP address for the worker node in the cluster.
-        ```
+        ```sh
         ibmcloud ks worker ls --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
         **Example output**
-        ```
+        ```sh
         ibmcloud ks worker ls --cluster pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.20.7
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.21.5
         ```
         {: screen}
 
@@ -357,14 +357,14 @@ Want to delete the resources that you created in this lesson before you move on?
 
 You can check all your resources that have the `app=hello-world-deployment` label.
 
-```
+```sh
 kubectl get all -l app=hello-world-deployment
 ```
 {: pre}
 
 Then, you can delete all the resources with the label.
 
-```
+```sh
 kubectl delete all -l app=hello-world-deployment
 ```
 {: pre}
@@ -398,7 +398,7 @@ As defined in the configuration script, Kubernetes can use an availability check
 If you took a break from the last lesson, make sure that you log back in to your cluster.
 
 1. In your command line, navigate to the `Lab 2` directory.
-    ```
+    ```sh
     cd 'container-service-getting-started-wt/Lab 2'
     ```
     {: pre}
@@ -452,7 +452,7 @@ If you took a break from the last lesson, make sure that you log back in to your
     4. In the **Service** section, note the `NodePort`. Rather than generating a random NodePort like you did in the previous lesson, you can specify a port in the 30000 - 32767 range. This example uses 30072.
     
 4. Switch back to the CLI that you used to set your cluster context, and run the configuration script. When the deployment and the service are created, the app is available for the PR firm's users to see.
-    ```
+    ```sh
     kubectl apply -f healthcheck.yml
     ```
     {: pre}
@@ -465,7 +465,7 @@ If you took a break from the last lesson, make sure that you log back in to your
     {: screen}
 
 5. Now that the deployment work is done, open a browser and check out the app. To form the URL, take the same public IP address that you used in the previous lesson for your worker node and combine it with the NodePort that was specified in the configuration script. To get the public IP address for the worker node:
-    ```
+    ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
@@ -511,7 +511,7 @@ Nice, you deployed the second version of the app. You had to use fewer commands,
 
 Ready to delete what you created before you continue to the next lesson? This time, you can use the same configuration script to delete both of the resources that you created.
 
-```
+```sh
 kubectl delete -f healthcheck.yml
 ```
 {: pre}
@@ -548,14 +548,14 @@ Deploy the {{site.data.keyword.watson}} apps, access the service publicly, and a
 If you took a break from the last lesson, make sure that you log back in to your cluster.
 
 1. In a CLI, navigate to the `Lab 3` directory.
-    ```
+    ```sh
     cd 'container-service-getting-started-wt/Lab 3'
     ```
     {: pre}
 
 2. Build the first {{site.data.keyword.watson}} image.
     1. Navigate to the `watson` directory.
-        ```
+        ```sh
         cd watson
         ```
         {: pre}
@@ -573,7 +573,7 @@ If you took a break from the last lesson, make sure that you log back in to your
         {: screen}
 
     3. Repeat these steps to build the second `watson-talk` image.
-        ```
+        ```sh
         cd 'container-service-getting-started-wt/Lab 3/watson-talk'
         ```
         {: pre}
@@ -625,7 +625,7 @@ If you took a break from the last lesson, make sure that you log back in to your
         {: codeblock}
 
         If you forgot what you named the secret, run the following command.
-        ```
+        ```sh
         kubectl get secrets --namespace=default
         ```
         {: pre}
@@ -633,20 +633,20 @@ If you took a break from the last lesson, make sure that you log back in to your
     3. In the watson-talk service section, note the value that is set for the `NodePort`. This example uses 30080.
     
 5. Run the configuration script.
-    ```
+    ```sh
     kubectl apply -f watson-deployment.yml
     ```
     {: pre}
 
 6. Optional: Verify that the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} secret is mounted as a volume to the pod.
     1. To get the name of a watson pod, run the following command.
-        ```
+        ```sh
         kubectl get pods
         ```
         {: pre}
 
         **Example output**
-        ```
+        ```sh
         NAME                                 READY     STATUS    RESTARTS  AGE
         watson-pod-4255222204-rdl2f          1/1       Running   0         13h
         watson-talk-pod-956939399-zlx5t      1/1       Running   0         13h
@@ -654,7 +654,7 @@ If you took a break from the last lesson, make sure that you log back in to your
         {: screen}
 
     2. Get the details about the pod and look for the secret name.
-        ```
+        ```sh
         kubectl describe pod <pod_name>
         ```
         {: pre}
@@ -712,7 +712,7 @@ While a deployment is running, you can edit the deployment to change values in t
 Change the name of the image:
 
 1. Open the configuration details for the running deployment.
-    ```
+    ```sh
     kubectl edit deployment/watson-talk-pod
     ```
     {: pre}
@@ -729,7 +729,7 @@ Change the name of the image:
 
 3. Save your changes and exit the editor.
 4. Apply the changes to the running deployment.
-    ```
+    ```sh
     kubectl rollout status deployment/watson-talk-pod
     ```
     {: pre}
@@ -748,7 +748,7 @@ Good job! You deployed the {{site.data.keyword.watson}} {{site.data.keyword.tone
 
 Ready to delete the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app that you created in your {{site.data.keyword.containerlong_notm}} cluster? You can use the configuration script to delete the resources that you created.
 
-```
+```sh
 kubectl delete -f watson-deployment.yml
 ```
 {: pre}
@@ -765,7 +765,7 @@ service "watson-talk-service" deleted
 
 If you do not want to keep the cluster, you can delete that too.
 
-```
+```sh
 ibmcloud ks cluster rm --cluster <cluster_name_or_ID>
 ```
 {: pre}

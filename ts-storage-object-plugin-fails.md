@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -10,10 +10,8 @@ subcollection: containers
 content-type: troubleshoot
 
 ---
-
-
-
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Why does installing the Object storage plug-in fail?
@@ -43,13 +41,13 @@ Delete the resource that is display in the error message and retry the installat
 {: tsResolve}
 
 1. Delete the resource that is displayed in the error message.
-    ```
+    ```sh
     kubectl delete <resource_kind> <resource_name>
     ```
     {: pre}
 
     Example for deleting a storage class resource:
-    ```
+    ```sh
     kubectl delete storageclass <storage_class_name>
     ```
     {: pre}

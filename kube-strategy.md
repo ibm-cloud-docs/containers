@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, containers
 
@@ -10,10 +10,8 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Moving your environment to {{site.data.keyword.containerlong_notm}}
@@ -159,13 +157,13 @@ Now that you have a good estimate of your app size and the worker nodes that you
 2. Review what compute resources your cluster uses by default and calculate the remaining cluster capacity that you can use for your workloads.
     1. With the {{site.data.keyword.cloud_notm}} IAM **Manager** service access role for the cluster in all namespaces: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
     2. Find the CPU and memory usage across all worker nodes. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, you can also click your cluster and review the **Cluster Insights** card.
-        ```
+        ```sh
         kubectl top nodes
         ```
         {: pre}
 
-        Example output:
-        ```
+        Example output
+        ```sh
         NAME            CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   
         10.xxx.xx.xxx   149m         7%     2402Mi          84%       
         10.xxx.xx.xxx   122m         6%     2395Mi          83%       
@@ -180,13 +178,13 @@ Now that you have a good estimate of your app size and the worker nodes that you
 5. Review what compute resources your workloads consume and calculate the remaining cluster capacity to deploy additional apps or scale existing apps.
     1. With at least the {{site.data.keyword.cloud_notm}} IAM **Reader** service access role for the cluster in all namespaces: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
     2. List the pods that run in your cluster.
-        ```
+        ```sh
         kubectl get pods --all-namespaces
         ```
         {: pre}
 
     3. Get the details of a pod. Note the **limits** and **request** map of the CPU and memory.
-        ```
+        ```sh
         kubectl get pod -n <namespace> <pod> -o=jsonpath='{range .spec.containers[*]}  {.name}:{.resources}{"\n"}{end}'
         ```
         {: pre}

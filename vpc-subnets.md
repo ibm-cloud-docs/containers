@@ -2,18 +2,15 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, ips, vlans, networking, public gateway
 
 subcollection: containers
 
 ---
-
-
-
-
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Configuring VPC subnets
@@ -158,6 +155,7 @@ When you create VPC subnets for your clusters, keep in mind the following featur
 
 
 
+
 ## Creating a VPC subnet and attaching a public gateway
 {: #create_vpc_subnet}
 
@@ -189,7 +187,7 @@ Use the {{site.data.keyword.cloud_notm}} CLI to create a VPC subnet for your clu
 Before you begin
 
 1. In your command line, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc?topic=vpc-creating-a-vpc-in-a-different-region). The cluster's resource group can differ from the VPC resource group. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the `--sso` flag to log in.
-    ```
+    ```sh
     ibmcloud login -r <region> [-g <resource_group>] [--sso]
     ```
     {: pre}
@@ -199,7 +197,7 @@ Before you begin
 To create a VPC subnet, follow these steps.
 
 1. Get the ID of the VPC where you want to create the subnet.
-    ```
+    ```sh
     ibmcloud ks vpcs
     ```
     {: pre}
@@ -220,7 +218,8 @@ To create a VPC subnet, follow these steps.
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ID                                     Name                                       VPC                          Zone         Floating IP                  Created                     Status      Resource group
     26426426-6065-4716-a90b-ac7ed7917c63   test-pgw                                   testvpc(36c8f522-.)          us-south-1   169.xx.xxx.xxx(26466378-.)   2019-09-20T16:27:32-05:00   available   -
     2ba2ba2b-fffa-4b0c-bdca-7970f09f9b8a   pgw-73b62bc0-b53a-11e9-9838-f3f4efa02374   team3(ff537d43-.)            us-south-2   169.xx.xxx.xxx(2ba9a280-.)   2019-08-02T10:30:29-05:00   available   -
@@ -235,7 +234,8 @@ To create a VPC subnet, follow these steps.
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ID               26466378-6065-4716-a90b-ac7ed7917c63
     Name             mycluster-us-south-1-gateway
     Floating IP      169.xx.xx.xxx(26466378-6065-4716-a90b-ac7ed7917c63)
@@ -254,7 +254,8 @@ To create a VPC subnet, follow these steps.
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ID                  91e946b4-7094-46d0-9223-5c2dea2e5023
     Name                mysubnet1
     IPv4 CIDR           10.240.xx.xx/24
@@ -308,7 +309,7 @@ If you enable classic access when you create your VPC, [classic access default a
 {: #ca_subnet_cli}
 
 1. In your command line, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc?topic=vpc-creating-a-vpc-in-a-different-region). The cluster's resource group can differ from the VPC resource group. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the `--sso` flag to log in.
-    ```
+    ```sh
     ibmcloud login -r <region> [-g <resource_group>] [--sso]
     ```
     {: pre}
@@ -395,7 +396,7 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
 {: note}
 
 1. Target the region of the VPC that your cluster is deployed to.
-    ```
+    ```sh
     ibmcloud target -r <region>
     ```
     {: pre}
@@ -407,7 +408,8 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ID                                     Name                                       VPC                          Zone         Floating IP                  Created                     Status      Resource group
     26426426-6065-4716-a90b-ac7ed7917c63   test-pgw                                   testvpc(36c8f522-.)          us-south-1   169.xx.xxx.xxx(26466378-.)   2019-09-20T16:27:32-05:00   available   -
     2ba2ba2b-fffa-4b0c-bdca-7970f09f9b8a   pgw-73b62bc0-b53a-11e9-9838-f3f4efa02374   team3(ff537d43-.)            us-south-2   169.xx.xxx.xxx(2ba9a280-.)   2019-08-02T10:30:29-05:00   available   -
@@ -422,7 +424,8 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ID               26466378-6065-4716-a90b-ac7ed7917c63
     Name             mycluster-us-south-1-gateway
     Floating IP      169.xx.xx.xxx(26466378-6065-4716-a90b-ac7ed7917c63)
@@ -435,13 +438,14 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
     {: screen}
 
 3. List the worker nodes in your cluster. For the zone where you enabled the public gateway, note the **Primary IP** of one worker node.
-    ```
+    ```sh
     ibmcloud ks worker ls -c <cluster_name_or_ID>
     ```
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ID                                                   Primary IP     Flavor   State    Status   Zone         Version
     kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.21.3
     kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.21.3
@@ -449,14 +453,15 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
     {: screen}
 
 4. Describe the worker node. In the **Labels output**, note the subnet ID in the label `ibm-cloud.kubernetes.io/subnet-id`, such as `5f5787a4-f560-471b-b6ce-20067ac93439` in the following example.
-    ```
+    ```sh
     kubectl describe node <worker_primary_ip>
     ```
     {: pre}
 
     Example output
-    ```
-    Name:               10.240.01.00
+
+    ```sh
+    NAME:               10.240.01.00
     Roles:              <none>
     Labels:             arch=amd64
     beta.kubernetes.io/arch=amd64
@@ -492,7 +497,8 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ID                  91e946b4-7094-46d0-9223-5c2dea2e5023
     Name                mysubnet1
     IPv4 CIDR           10.240.xx.xx/24
@@ -532,7 +538,7 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
     {: codeblock}
 
 7. Apply the updated deployment configuration file.
-    ```
+    ```sh
     kubectl apply -f with-node-affinity.yaml
     ```
     {: pre}
@@ -540,13 +546,13 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
 8. Verify that the app pods deployed to the correct worker nodes.
 
     1. List the pods in your cluster. In the output, identify a pod for your app. Note the **NODE** private IP address of the worker node that the pod is on.
-        ```
+        ```sh
         kubectl get pods -o wide
         ```
         {: pre}
 
         In this example output, the app pod `cf-py-d7b7d94db-vp8pq` is on a worker node with the IP address `10.240.01.00`.
-        ```
+        ```sh
         NAME                   READY     STATUS              RESTARTS   AGE       IP               NODE
         cf-py-d7b7d94db-vp8pq  1/1       Running             0          15d       172.30.xxx.xxx   10.240.01.00
         ```
@@ -554,7 +560,7 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
 
     2. List the worker nodes in your cluster. In the output, look for the worker nodes in the zone where you attached the public gateway. Verify that the worker node with the private IP address that you identified in the previous step is deployed in this zone.
 
-        ```
+        ```sh
         ibmcloud ks worker ls --cluster <cluster_name_or_ID>
         ```
         {: pre}

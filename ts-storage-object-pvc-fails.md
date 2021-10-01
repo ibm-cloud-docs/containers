@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -10,10 +10,8 @@ subcollection: containers
 content-type: troubleshoot
 
 ---
-
-
-
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Why do I see wrong credentials or access denied messages when I create a PVC?

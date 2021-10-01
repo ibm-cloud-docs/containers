@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, clusters
 
@@ -10,8 +10,8 @@ subcollection: containers
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 
@@ -48,26 +48,26 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
 
 1. Set the cluster that you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
     1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
-        ```
+        ```sh
         ibmcloud ks cluster config -c <cluster_name_or_ID>
         ```
         {: pre}
 
     2. Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
-        ```
+        ```sh
         kubectl config current-context
         ```
         {: pre}
 
-        Example output:
-        ```
+        Example output
+        ```sh
         <cluster_name>/<cluster_ID>
         ```
         {: screen}
 
 2. Launch your Kubernetes dashboard with the default port `8001`.
     1. Set the proxy with the default port number.
-        ```
+        ```sh
         kubectl proxy
         ```
         {: pre}
@@ -78,7 +78,7 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
         {: screen}
 
     2. Open the following URL in a web browser to see the Kubernetes dashboard.
-        ```
+        ```sh
         http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
         ```
         {: codeblock}
@@ -103,19 +103,20 @@ The Kubernetes master is accessible through the private cloud service endpoint i
     3. Verify that you are connected to the private network through your {{site.data.keyword.vpc_short}} VPN connection.
 
 2. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
-    ```
+    ```sh
     ibmcloud ks cluster config -c <cluster_name_or_ID> --endpoint private
     ```
     {: pre}
 
 3. Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
-    ```
+    ```sh
     kubectl config current-context
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     <cluster_name>/<cluster_ID>
     ```
     {: screen}
@@ -128,14 +129,14 @@ The Kubernetes master is accessible through the private cloud service endpoint i
 {: shortdesc}
 
 1. Get the private cloud service endpoint URL and port for your cluster.
-    ```
+    ```sh
     ibmcloud ks cluster get -c <cluster_name_or_ID>
     ```
     {: pre}
 
     In this example output, the **Private Service Endpoint URL** is `https://c1.private.us-east.containers.cloud.ibm.com:25073`.
-    ```
-    Name:                           setest
+    ```sh
+    NAME:                           setest
     ID:                             b8dcc56743394fd19c9f3db7b990e5e3
     State:                          normal
     Status:                         healthy cluster
@@ -240,19 +241,20 @@ The Kubernetes master is accessible through the private cloud service endpoint i
 5. Verify that you are connected to the private network through a [VPN](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl) connection.
 
 6. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
-    ```
+    ```sh
     ibmcloud ks cluster config -c <cluster_name_or_ID> --endpoint private
     ```
     {: pre}
 
 7. Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
-    ```
+    ```sh
     kubectl config current-context
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     <cluster_name>/<cluster_ID>
     ```
     {: screen}
@@ -283,19 +285,19 @@ To create a private cloud service endpoint allowlist:
 1. Get the subnets that you want to add to the allowlist. For example, you might get the subnet for the connection through your VPN or {{site.data.keyword.dl_short}} tunnel to your {{site.data.keyword.cloud_notm}} private network.
 
 2. Enable the subnet allowlist feature for a cluster's private cloud service endpoint. Now, access to the cluster via the private cloud service endpoint is blocked for any requests that originate from a subnet that is not in the allowlist. Your worker nodes continue to run and have access to the master.
-    ```
+    ```sh
     ibmcloud ks cluster master private-service-endpoint allowlist enable --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 3. Add subnets from which authorized users can access your private cloud service endpoint to the allowlist.
-    ```
+    ```sh
     ibmcloud ks cluster master private-service-endpoint allowlist add --cluster <cluster_name_or_ID> --subnet <subnet_CIDR> [--subnet <subnet_CIDR> ...]
     ```
     {: pre}
 
 4. Verify that the subnets in your allowlist are correct. The allowlist includes subnets that you manually added and subnets that are automatically added and managed by IBM, such as worker node subnets.
-    ```
+    ```sh
     ibmcloud ks cluster master private-service-endpoint allowlist get --cluster <cluster_name_or_ID>
     ```
     {: pre}
@@ -313,7 +315,6 @@ Admission controllers intercept authorized API requests from various Kubernetes 
 
 Review the order of default admission controllers by cluster version in the [`kube-apiserver` component reference information](/docs/containers?topic=containers-service-settings#kube-apiserver).
 
-<br>
 
 **Can I create my own admission controllers?**
 
@@ -332,7 +333,6 @@ Keep in mind the following considerations when you configure a webhook.
 * Scope your webhook to the appropriate namespace. Avoid webhooks that process resources that run in system-critical namespaces that are set up in your cluster by default, such as `kube-system`, `ibm-system`, `ibm-operators`, `calico-system`, `tigera-operator` and `openshift-*` namespaces.
 * Make sure that the worker nodes in your cluster are [the right size for running your webhook applications](/docs/containers?topic=containers-strategy#sizing). For example, if your pods request more CPU or memory than the worker node can provide, the pods are not scheduled.
 
-<br>
 
 **What other types of apps use admission controllers?**
 
@@ -340,7 +340,6 @@ Many cluster add-ons, plug-ins, and other third-party extensions use admission c
 *   [Portieris](/docs/openshift?topic=openshift-images#portieris-image-sec)
 *   [Istio](/docs/containers?topic=containers-istio-about)
 
-<br>
 
 **I need help with a broken webhook. What can I do?**
 
@@ -391,7 +390,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         *** System restart required ***
         ```
@@ -447,15 +446,16 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     ens3
     ```
     {: screen}
 
 6. Create the Wireguard server configuration.
     1. Open the Wireguard server configuration. The configuration is intially empty.
-        ```
+        ```sh
         nano /etc/wireguard/wg0.conf
         ```
         {: pre}
@@ -503,7 +503,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
 
 8. Enable IPv4 forwarding on the Wireguard server.
     1. Open the VSI system and network settings.
-        ```
+        ```sh
         nano /etc/sysctl.conf
         ```
         {: pre}
@@ -530,7 +530,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
 
 9. Retrieve the list of IP addresses that you need to allow in your Wireguard client configuration so that you can successfully connect to your private Kubernetes cluster.
     1. Get the details of your cluster and note the **Ingress Subdomain** and the **Private Service Endpoint URL**.
-        ```
+        ```sh
         ibmcloud ks cluster get --cluster <cluster_name_or_ID>
         ```
         {: pre}
@@ -550,7 +550,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         {: tip}
 
     3. Get the IP address CIDR of all the VPC subnets, private VLANs, or on-prem networks that your cluster worker nodes are connected to. For example, if you created a VPC cluster in {{site.data.keyword.cloud_notm}}, you can get the subnet CIDR by getting the details for each worker node.  
-        ```
+        ```sh
         ibmcloud ks worker get --worker <worker_ID> --cluster <cluster_name_or_ID>
         ```
         {: pre}
@@ -599,7 +599,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
 
 10. Finish the Wireguard server configuration.
     1. On your VSI, open the Wireguard server configuration again.
-        ```
+        ```sh
         nano /etc/wireguard/wg0.conf
         ```
         {: pre}
@@ -645,7 +645,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         interface: wg0
         public key: AA11aa1aa/aa1AaA1AaaaAAAaa1AAaaA1aAAAAaaAAA=

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -11,8 +11,8 @@ content-type: troubleshoot
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 # Why does binding a service to a cluster result in a same name error?
@@ -43,20 +43,21 @@ Use the service GUID instead of the service instance name in the `ibmcloud ks cl
 1. [Log in to the {{site.data.keyword.cloud_notm}} region that includes the service instance to bind.](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
 2. Get the GUID for the service instance.
-    ```
+    ```sh
     ibmcloud service show <service_instance_name> --guid
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     Invoking 'cf service <service_instance_name> --guid'...
     <service_instance_GUID>
     ```
     {: screen}
 
 3. Bind the service to the cluster again.
-    ```
+    ```sh
     ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_GUID>
     ```
     {: pre}

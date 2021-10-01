@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -10,8 +10,8 @@ subcollection: containers
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 
@@ -68,7 +68,7 @@ With [labels](/docs/containers?topic=containers-plan_deploy#deploy_organize), yo
 
 You can retrieve objects that are labeled in your cluster, such as to see `staging` or `production` components. For example, list all resources with an `env: production` label across all namespaces in the cluster. **Note:** You need access to all namespaces to run this command.
 
-```
+```sh
 kubectl get all -l env=production --all-namespaces
 ```
 {: pre}
@@ -177,13 +177,13 @@ Cluster administrators make sure that teams that share a cluster don't take up m
 {: shortdesc}
 
 1. Check whether a resource quota is set for a namespace.
-    ```
+    ```sh
     kubectl get quota --namespace=<namespace>
     ```
     {: pre}
 
 2. See what the quota limits are.
-    ```
+    ```sh
     kubectl describe quota <quota_name> --namespace=<namespace>
     ```
     {: pre}
@@ -469,7 +469,7 @@ The following example is a copy of the deployment YAML that is [discussed sectio
 
 To apply the YAML,
 
-```
+```sh
 kubectl apply -f file.yaml [-n <namespace>]
 ```
 {: pre}
@@ -650,7 +650,7 @@ To set up configuration files with Kustomize:
         {: pre}
 
 2. Create a directory for your app in a version control system, such as Git.
-    ```
+    ```sh
     git init ~/<my_app>
     ```
     {: pre}
@@ -676,14 +676,14 @@ To set up configuration files with Kustomize:
 
 4. Set up the `base` repo.
     1. Navigate to the base repo.
-        ```
+        ```sh
         cd ~/<my_app>/base
         ```
         {: pre}
 
     2. Create an initial set of Kubernetes configuration YAML files for your app deployment. You might use the `wasliberty` [YAML example](#yaml-example) to create a deployment, service, config map, and persistent volume claim.
     3. Create a [`kustomization` file](https://github.com/kubernetes-sigs/kustomize#1-make-a-kustomization-file) that specifies the base configuration to be applied across environments. The `kustomization` file must include the list of Kubernetes resource configuration YAMLs that are stored in the same `base` repo. In the `kustomization` file, you can also add configurations that apply to all the resource YAMLs in the base repo, such as a prefix or suffix that is appended to all the resource names, a label, the existing namespace all the resources are created in, secrets, configmaps, and more.
-        ```
+        ```yaml
         apiVersion: kustomize.config.k8s.io/v1beta1
         kind: Kustomization
         namespace: wasliberty
@@ -710,7 +710,7 @@ To set up configuration files with Kustomize:
 
 5. Set up your overlay repo with unique `kustomization` YAML files for each of your environments, such as staging and prod.
     1. In the staging repo, create a `kustomization.yaml` file. Add any configurations that are unique to staging, such as a label, image tag, or YAML for a new component that you want to test out.
-        ```
+        ```yaml
         apiVersion: kustomize.config.k8s.io/v1beta1
         kind: Kustomization
         namePrefix: staging-
@@ -767,13 +767,13 @@ To set up configuration files with Kustomize:
 
 6. Apply the Kubernetes resources for the environment that you want to deploy. The following example uses the staging repo.
     1. Navigate to the staging overlay directory. If you did not build your resources in the previous step, create them now.
-        ```
+        ```sh
         cd overlay/staging && kustomize build
         ```
         {: pre}
 
     2. Apply the Kubernetes resources to your cluster. Include the `-k` flag and the directory where the `kustomization` file is located. For example, if you are already in the staging directory, include `../staging` to mark the path to the directory.
-        ```
+        ```sh
         kubectl apply -k ../staging
         ```
         {: pre}
@@ -788,13 +788,13 @@ To set up configuration files with Kustomize:
         persistentvolumeclaim/staging-kustomtest-pvc-v2 created
         ```
     3. Check to make sure that the staging-unique changes are applied. For example, if you added a `staging-` prefix, the pods and other resources that are created include this prefix in their name.
-        ```
+        ```sh
         kubectl get -k ../staging
         ```
         {: pre}
 
         Example output
-        ```
+        ```sh
         NAME                                        DATA   AGE
         configmap/staging-kustomtest-configmap-v2   2      90s
 
@@ -817,13 +817,14 @@ To set up configuration files with Kustomize:
 
     4. Repeat these steps for each environment that you want to build.
 7. **Optional**: Clean up your environment by removing all the resources that you applied with Kustomize.
-    ```
+    ```sh
     kubectl delete -k <directory>
     ```
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     configmap "staging-kustomtest-configmap-v2" deleted
     secret "staging-kustomtest-secret-v2" deleted
     service "staging-kustomtest-service-v2" deleted

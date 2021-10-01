@@ -2,16 +2,14 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
 subcollection: containers
 
----
+---{{site.data.keyword.attribute-definition-list}}
 
-
-{{site.data.keyword.attribute-definition-list}}
   
 
 
@@ -71,6 +69,7 @@ Review the version 1.21 changelog.
 {: shortdesc}
 
 ### Changelog for worker node fix pack 1.21.5_1532, released 27 September 2021
+
 {: #1215_1532}
 
 The following table shows the changes that are included in the worker node fix pack patch update `1.21.5_1532`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -85,7 +84,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.21.4_1530" caption-side="top"}
 
-### Changelog for master fix pack 1.21.5_1531, released 27 September 2021
+### Changelog for master fix pack 1.21.5_1531, released 28 September 2021
 {: #1215_1531}
 
 The following table shows the changes that are included in the master fix pack patch update `1.21.5_1531`. Master patch updates are applied automatically.
@@ -102,7 +101,7 @@ The following table shows the changes that are included in the master fix pack p
 | Konnectivity agent | v0.0.21e_231_iks | v0.0.23_245_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.23){: external}. |
 | Konnectivity server | v0.0.21e_231_iks | v0.0.23_245_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.23){: external}. |
 | Kubernetes | v1.21.4 | v1.21.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.5){: external}. |
-| Kubernetes API server auditing configuration | N/A | N/A| Updated to support `verbose` [Kubernetes API server auditing](https://cloud.ibm.com/docs/containers?topic=containers-health-audit#audit-api-server){: external}. |
+| Kubernetes API server auditing configuration | N/A | N/A| Updated to support `verbose` [Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | Kubernetes NodeLocal DNS cache | N/A | N/A | Increased memory resource requests from `5Mi` to `8Mi` to better align with normal resource utilization. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1510 | 1547 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711){: external} and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}. |
 | Operator Lifecycle Manager | 0.16.1-IKS-12 | 0.16.1-IKS-14 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711){: external} and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}. |
@@ -339,7 +338,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.20.10_1552" caption-side="top"}
 
-### Changelog for master fix pack 1.20.11_1553, released 27 September 2021
+### Changelog for master fix pack 1.20.11_1553, released 28 September 2021
 {: #12011_1553}
 
 The following table shows the changes that are included in the master fix pack patch update `1.21.1_1553`. Master patch updates are applied automatically.
@@ -355,7 +354,7 @@ The following table shows the changes that are included in the master fix pack p
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 945df65 | e3cb629 | Updated to use `Go` version `1.16.7`. |
 | {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} plug-in and monitor | 398 | 400 | Updated to use `Go` version `1.16.7`. Updated universal base image (UBI) to the latest `8.4-208` version to resolve CVEs. |
 | Kubernetes | v1.20.10 | v1.20.11 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.11). |
-| Kubernetes API server auditing configuration | N/A | N/A| Updated to support `verbose` [Kubernetes API server auditing](https://cloud.ibm.com/docs/containers?topic=containers-health-audit#audit-api-server){: external}. |
+| Kubernetes API server auditing configuration | N/A | N/A| Updated to support `verbose` [Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | Kubernetes NodeLocal DNS cache | N/A | N/A | Increased memory resource requests from `5Mi` to `8Mi` to better align with normal resource utilization. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1510 | 1547 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711) and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712). |
 | Operator Lifecycle Manager | 0.16.1-IKS-12 | 0.16.1-IKS-14 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711) and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712). |
@@ -773,11 +772,14 @@ The following table shows the changes that are included in the version updates f
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.19.7_1532 (master) and 1.19.7_1535 (worker node)." caption-side="top"}
 
-## Version 1.19 changelog
+## Deprecated: Version 1.19 changelog
 {: #119_changelog}
 
 Review the version 1.19 changelog.
 {: shortdesc}
+
+Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 31 Dec 2021. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120) as soon as possible.
+{: deprecated}
 
 ### Changelog for worker node fix pack 1.19.15_1561, released 27 September 2021
 {: #11915_1561}
@@ -795,7 +797,7 @@ The following table shows the changes that are included in the worker node fix p
 {: caption="Changes since version 1.19.14_1559" caption-side="top"}
 
 
-### Changelog for master fix pack 1.19.15_1560, released 27 September 2021
+### Changelog for master fix pack 1.19.15_1560, released 28 September 2021
 {: #11915_1560}
 
 The following table shows the changes that are included in the master fix pack patch update `1.19.15_1560`. Master patch updates are applied automatically.
@@ -810,7 +812,7 @@ The following table shows the changes that are included in the master fix pack p
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 945df65 | e3cb629 | Updated to use `Go` version `1.16.7`. |
 | {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} plug-in and monitor | 398 | 400 | Updated to use `Go` version `1.16.7`. Updated universal base image (UBI) to the latest `8.4-208` version to resolve CVEs. |
 | Kubernetes | v1.19.14 | v1.19.15 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.15){: external}. |
-| Kubernetes API server auditing configuration | N/A | N/A| Updated to support `verbose` [Kubernetes API server auditing](https://cloud.ibm.com/docs/containers?topic=containers-health-audit#audit-api-server){: external}. |
+| Kubernetes API server auditing configuration | N/A | N/A| Updated to support `verbose` [Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | Kubernetes NodeLocal DNS cache | N/A | N/A | Increased memory resource requests from `5Mi` to `8Mi` to better align with normal resource utilization. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1510 | 1550 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711){: external} and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}. |
 | Operator Lifecycle Manager | 0.16.1-IKS-12 | 0.16.1-IKS-14 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711){: external} and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}. |
@@ -1495,7 +1497,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.18.20_1564" caption-side="top"}
 
-### Changelog for master fix pack 1.18.20_1565, released 27 September 2021
+### Changelog for master fix pack 1.18.20_1565, released 28 September 2021
 {: #11820_1565}
 
 The following table shows the changes that are included in the master fix pack patch update `1.18.20_1565`. Master patch updates are applied automatically.
@@ -1507,7 +1509,7 @@ The following table shows the changes that are included in the master fix pack p
 | GPU device plug-in and installer | a9461a8 | eb817b2 | Updated to use `Go` version `1.16.7`. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 945df65 | e3cb629 | Updated to use `Go` version `1.16.7`. |
 | {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} plug-in and monitor | 398 | 400 | Updated to use `Go` version `1.16.7`. Updated universal base image (UBI) to the latest `8.4-208` version to resolve CVEs. |
-| Kubernetes API server auditing configuration | N/A | N/A| Updated to support `verbose` [Kubernetes API server auditing](https://cloud.ibm.com/docs/containers?topic=containers-health-audit#audit-api-server){: external}. |
+| Kubernetes API server auditing configuration | N/A | N/A| Updated to support `verbose` [Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | Kubernetes NodeLocal DNS cache | N/A | N/A | Increased memory resource requests from `5Mi` to `8Mi` to better align with normal resource utilization. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1510 | 1550 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711) and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}. |
 | Operator Lifecycle Manager | 0.14.1-IKS-11 | 0.14.1-IKS-13 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711){: external} and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}. |

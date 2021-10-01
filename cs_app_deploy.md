@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -10,8 +10,8 @@ subcollection: containers
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 
@@ -67,7 +67,7 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 
 1. Get your credentials for Kubernetes.
 
-    ```
+    ```sh
     kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
     ```
     {: pre}
@@ -76,14 +76,14 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 
 3. Set the proxy with the default port number.
 
-    ```
+    ```sh
     kubectl proxy
     ```
     {: pre}
 
-    Example output:
+    Example output
 
-    ```
+    ```sh
     Starting to serve on 127.0.0.1:8001
     ```
     {: screen}
@@ -92,7 +92,7 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 
     1. In your browser, navigate to the following URL:
 
-        ```
+        ```sh
         http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
         ```
         {: codeblock}
@@ -162,7 +162,7 @@ To deploy your app,
 
 2. Run the configuration file in a cluster's context.
 
-    ```
+    ```sh
     kubectl apply -f config.yaml
     ```
     {: pre}
@@ -183,13 +183,13 @@ Before you begin
 To deploy apps to specific worker nodes:
 
 1. Get the ID of the worker pool that you want to deploy app pods to.
-    ```
+    ```sh
     ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 2. List the worker nodes that are in the worker pool, and note one of the **Private IP** addresses.
-    ```
+    ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
     ```
     {: pre}
@@ -199,14 +199,15 @@ To deploy apps to specific worker nodes:
     The steps in this topic use a worker pool ID to deploy app pods only to worker nodes within that worker pool. To deploy app pods to specific worker nodes by using a different label, note this label instead. For example, to deploy app pods only to worker nodes on a specific private VLAN, use the `privateVLAN=` label.
     {: tip}
 
-    ```
+    ```sh
     kubectl describe node <worker_node_private_IP>
     ```
     {: pre}
 
     Example output
-    ```
-    Name:               10.xxx.xx.xxx
+
+    ```sh
+    NAME:               10.xxx.xx.xxx
     Roles:              <none>
     Labels:             arch=amd64
                         beta.kubernetes.io/arch=amd64
@@ -220,7 +221,7 @@ To deploy apps to specific worker nodes:
                         ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.20.7_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.21.5_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -257,7 +258,7 @@ To deploy apps to specific worker nodes:
     In the **affinity** section of the example YAML, `ibm-cloud.kubernetes.io/worker-pool-id` is the `key` and `<worker_pool_ID>` is the `value`.
 
 5. Apply the updated deployment configuration file.
-    ```
+    ```sh
     kubectl apply -f with-node-affinity.yaml
     ```
     {: pre}
@@ -265,13 +266,13 @@ To deploy apps to specific worker nodes:
 6. Verify that the app pods deployed to the correct worker nodes.
 
     1. List the pods in your cluster.
-        ```
+        ```sh
         kubectl get pods -o wide
         ```
         {: pre}
 
         Example output
-        ```
+        ```sh
         NAME                   READY     STATUS              RESTARTS   AGE       IP               NODE
         cf-py-d7b7d94db-vp8pq  1/1       Running             0          15d       172.30.xxx.xxx   10.176.48.78
         ```
@@ -283,7 +284,7 @@ To deploy apps to specific worker nodes:
 
     3. List the worker nodes in the worker pool that you designated in your app deployment.
 
-        ```
+        ```sh
         ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
         ```
         {: pre}
@@ -371,20 +372,21 @@ To run a workload on a GPU machine,
 
 2. Apply the YAML file. For example:
 
-    ```
+    ```sh
     kubectl apply -f nvidia-smi.yaml
     ```
     {: pre}
 
 3. Check the job pod by filtering your pods by the `nvidia-sim` label. Verify that the **STATUS** is **Completed**.
 
-    ```
+    ```sh
     kubectl get pod -a -l 'name in (nvidia-sim)'
     ```
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     NAME                  READY     STATUS      RESTARTS   AGE
     nvidia-smi-ppkd4      0/1       Completed   0          36s
     ```
@@ -394,14 +396,14 @@ To run a workload on a GPU machine,
     * In the `Limits` and `Requests` fields, see that the resource limit that you specified matches the request that the device plug-in automatically set.
     * In the events, verify that the pod is assigned to your GPU worker node.
 
-        ```
+        ```sh
         kubectl describe pod nvidia-smi-ppkd4
         ```
         {: pre}
 
         Example output
-        ```
-        Name:           nvidia-smi-ppkd4
+        ```sh
+        NAME:           nvidia-smi-ppkd4
         Namespace:      default
         ...
         Limits:
@@ -419,13 +421,14 @@ To run a workload on a GPU machine,
 
 5. To verify that the job used the GPU to compute its workload, you can check the logs. The `[ "/usr/test/nvidia-smi" ]` command from the job queried the GPU device state on the GPU worker node.
 
-    ```
+    ```sh
     kubectl logs nvidia-sim-ppkd4
     ```
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     +-----------------------------------------------------------------------------+
     | NVIDIA-SMI 390.12                 Driver Version: 390.12                    |
     |-------------------------------+----------------------+----------------------+

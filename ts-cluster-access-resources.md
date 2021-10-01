@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -11,8 +11,8 @@ content-type: troubleshoot
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 # Classic: Why can't I access resources in my cluster?
@@ -64,7 +64,7 @@ Review the worker node state.
 {: tsResolve}
 
 1. List the worker nodes in your cluster and verify that your worker nodes are not stuck in a `Reloading` state.
-    ```
+    ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_id>
     ```
     {: pre}

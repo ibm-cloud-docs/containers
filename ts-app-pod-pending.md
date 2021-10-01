@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -11,10 +11,8 @@ content-type: troubleshoot
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Why do pods remain in pending state?
@@ -42,7 +40,7 @@ This task requires the {{site.data.keyword.cloud_notm}} IAM [**Administrator** p
 
 If you just created the Kubernetes cluster, run the following command and wait for the worker nodes to initialize.
 
-```
+```sh
 kubectl get nodes
 ```
 {: pre}
@@ -52,7 +50,7 @@ If this cluster is an existing one, check your cluster capacity.
 
 1. Set the proxy with the default port number.
 
-    ```
+    ```sh
     kubectl proxy
     ```
     {: pre}
@@ -70,14 +68,14 @@ If this cluster is an existing one, check your cluster capacity.
 
     1. Review the current sizes and flavors of your worker pools to decide which one to resize.
 
-        ```
+        ```sh
         ibmcloud ks worker-pool ls
         ```
         {: pre}
 
     2. Resize your worker pools to add more nodes to each zone that the pool spans.
 
-        ```
+        ```sh
         ibmcloud ks worker-pool resize --worker-pool <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
         ```
         {: pre}
@@ -86,7 +84,7 @@ If this cluster is an existing one, check your cluster capacity.
 
     1. Confirm that the `resources.requests` values are not larger than the worker node's capacity. For example, if the pod request `cpu: 4000m`, or 4 cores, but the worker node size is only 2 cores, the pod cannot be deployed.
 
-        ```
+        ```sh
         kubectl get pod <pod_name> -o yaml
         ```
         {: pre}

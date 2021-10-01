@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks,
 
@@ -10,10 +10,8 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Storing data on software-defined storage (SDS) with Portworx
@@ -295,7 +293,7 @@ Databases for etcd is a managed etcd service that securely stores and replicates
         {: codeblock}
 
     2. Create the secret in your cluster.
-        ```
+        ```sh
         kubectl apply -f secret.yaml
         ```
         {: pre}
@@ -367,13 +365,14 @@ Follow these steps to set up encryption for your Portworx volumes.
     * [Create a **{{site.data.keyword.keymanagementservicelong_notm}}** root key](/docs/key-protect?topic=key-protect-create-root-keys).
     * [Create a **{{site.data.keyword.hscrypto}}** root key](/docs/hs-crypto?topic=hs-crypto-create-root-keys).
 4. Retrieve the **GUID** of the service instance that you created.
-    ```
+    ```sh
     ibmcloud resource service-instance <service_instance_name_or_ID>
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     Retrieving service instance <name> in resource group default under account IBM as <user>...
     OK
 
@@ -411,7 +410,7 @@ Follow these steps to set up encryption for your Portworx volumes.
     {: pre}
 
 10. Create a namespace in your cluster that is called `portworx`. 
-    ```
+    ```sh
     kubectl create ns portworx
     ```
     {: pre}
@@ -466,20 +465,20 @@ Follow these steps to set up encryption for your Portworx volumes.
         </table>
 
     2. Create the secret in the `portworx` namespace of your cluster.
-        ```
+        ```sh
         kubectl apply -f secret.yaml
         ```
         {: pre}
 
     3. Verify that the secret is created successfully.
-        ```
+        ```sh
         kubectl get secrets -n portworx
         ```
         {: pre}
 
 12. If you set up encryption before your installed Portworx, you can now [install Portworx in your cluster](#add_portworx_storage). To add encryption to your cluster after you installed Portworx, update the Portworx daemon set to add `"-secret_type"` and `"ibm-kp"` as additional arguments to the Portworx container definition.
     1. Update the Portworx daemon set.
-        ```
+        ```sh
         kubectl edit daemonset portworx -n kube-system
         ```
         {: pre}
@@ -503,19 +502,19 @@ Follow these steps to set up encryption for your Portworx volumes.
         After you edit the daemon set, the Portworx pods are restarted and automatically update the `config.json` file on the worker node to reflect that change.
 
     2. List the Portworx pods in your `kube-system` namespace.
-        ```
+        ```sh
         kubectl get pods -n kube-system | grep portworx
         ```
         {: pre}
 
     3. Log in to one of your Portworx pods.
-        ```
+        ```sh
         kubectl exec -it <pod_name> -it -n kube-system
         ```
         {: pre}
 
     4. Navigate in to the `pwx` directory.
-        ```
+        ```sh
         cd etc/pwx
         ```
         {: pre}
@@ -526,7 +525,7 @@ Follow these steps to set up encryption for your Portworx volumes.
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         {
         "alertingurl": "",
@@ -607,12 +606,12 @@ To install Portworx:
 1. If the **Status** changes to `Provision failure`, follow the [instructions](/docs/containers?topic=containers-debug-portworx) to start troubleshooting why your installation failed.
 1. If the **Status** changes to `Provisioned`, verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer.
     1. List the Portworx pods in the `kube-system` namespace. The installation is successful when you see one or more `portworx`, `stork`, and `stork-scheduler` pods. The number of pods equals the number of worker nodes that are included in your Portworx cluster. All pods must be in a `Running` state.
-        ```
+        ```sh
         kubectl get pods -n kube-system | grep 'portworx\|stork'
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         portworx-594rw                          1/1       Running     0          20h
         portworx-rn6wk                          1/1       Running     0          20h
@@ -627,12 +626,12 @@ To install Portworx:
         {: screen}
 
     2. Log in to one of your `portworx` pods and list the status of your Portworx cluster.
-        ```
+        ```sh
         kubectl exec <portworx_pod> -it -n kube-system -- /opt/pwx/bin/pxctl status
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         Status: PX is operational
         License: Trial (expires in 30 days)
@@ -668,12 +667,12 @@ To install Portworx:
     4. Verify that each storage node is listed with the correct amount of raw block storage by reviewing the **Capacity** column in the **Cluster Summary** section of your CLI output.
 
     5. Review the Portworx I/O classification that was assigned to the disks that are part of the Portworx cluster. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on how fast the network is that your worker node is connected to and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes.
-        ```
+        ```sh
         kubectl exec -it <portworx_pod> -n kube-system -- /opt/pwx/bin/pxctl cluster provision-status
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         NODE        NODE STATUS    POOL    POOL STATUS    IO_PRIORITY    SIZE    AVAILABLE    USED    PROVISIONED    RESERVEFACTOR    ZONE    REGION        RACK
         10.184.58.11    Up        0    Online        LOW        20 GiB    17 GiB        3.0 GiB    0 B        0        dal12    us-south    default
@@ -691,13 +690,13 @@ You can upgrade Portworx to the latest version.
 1. [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the Helm version 3 client on your local machine.
 
 1. Update your Helm repos.
-    ```
+    ```sh
     helm repo update
     ```
     {: pre}
 
 2. Find release name of your Portworx Helm chart.
-    ```
+    ```sh
     helm list -A | grep portworx
     ```
     {: pre}
@@ -709,7 +708,7 @@ You can upgrade Portworx to the latest version.
     {: screen}
 
 3. Update your Portworx release with the latest version of the Helm chart.
-    ```
+    ```sh
     helm upgrade <release_name> ibm-community/portworx/
     ```
     {: pre}
@@ -723,7 +722,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
 {: shortdesc}
 
 1. List available storage classes in your cluster and check whether you can use an existing Portworx storage class that was set up during the Portworx installation. The pre-defined storage classes are optimized for database usage and to share data across pods.
-    ```
+    ```sh
     kubectl get storageclasses | grep portworx
     ```
     {: pre}
@@ -780,13 +779,13 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
         </table>
 
     2. Create the storage class.
-        ```
+        ```sh
         kubectl apply -f storageclass.yaml
         ```
         {: pre}
 
     3. Verify that the storage class is created.
-        ```
+        ```sh
         kubectl get storageclasses
         ```
         {: pre}
@@ -837,13 +836,13 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
         </table>
 
     2. Create your PVC.
-        ```
+        ```sh
         kubectl apply -f pvc.yaml
         ```
         {: pre}
 
     3. Verify that your PVC is created and bound to a persistent volume (PV). This process might take a few minutes.
-        ```
+        ```sh
         kubectl get pvc
         ```
         {: pre}
@@ -949,13 +948,13 @@ To access the storage from your app, you must mount the PVC to your app.
     </tbody></table>
 
 2. Create your deployment.
-    ```
+    ```sh
     kubectl apply -f deployment.yaml
     ```
     {: pre}
 
 3. Verify that the PV is successfully mounted to your app.
-    ```
+    ```sh
     kubectl describe deployment <deployment_name>
     ```
     {: pre}
@@ -976,7 +975,7 @@ To access the storage from your app, you must mount the PVC to your app.
 
 4. Verify that you can write data to your Portworx cluster.
     1. Log in to the pod that mounts your PV.
-        ```
+        ```sh
         kubectl exec <pod_name> -it bash
         ```
         {: pre}
@@ -1064,13 +1063,13 @@ Verify that PX-Backup is correctly installed on your cluster.
 3. If the status changes to **Active**, verify that the PX-Backup pods are running in your cluster.
     1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
     2. Run the command to verify that the installation has completed.
-        ```
+        ```sh
         kubectl get po -n <px_backup_namespace> -ljob-name=pxcentral-post-install-hook  -o wide | awk '{print $1   $3}' | grep -iv error
         ```
         {: pre}
 
-        Example output:
-        ```
+        Example output
+        ```sh
         NAMESTATUS
         pxcentral-post-install-hook-5b86qCompleted
         ```
@@ -1158,7 +1157,7 @@ Adding a cluster:
 2. Click **Add Cluster**.
 3. Enter the name of the cluster that you want to back up.
 4. In the CLI, get the Kubeconfig file output for your cluster. Make sure that you have set the context to your cluster with the `--admin` flag to prevent the Kubeconfig from expiring.
-    ```
+    ```sh
     kubectl config view --flatten --minify
     ```
     {: pre}
@@ -1195,19 +1194,20 @@ If a cluster that you want to back up with PX-Backup does not have Portworx Ente
     {: screen}
 
 7. Save the file and run the command to apply the file to your cluster and install Stork.
-    ```
+    ```sh
     kubectl apply -f <file_name>.yaml
     ```
     {: pre}
 
 8. Verify that Stork is successfully installed on your cluster and that all pods are running.
-    ```
+    ```sh
     kubectl get deployment -n kube-system | grep stork
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     stork                3/3   3      3      7d20h
     ```
     {: screen}
@@ -1296,20 +1296,21 @@ When you added storage from your Portworx cluster to your app, you have three ma
 {: shortdesc}
 
 1. List the PVCs in your cluster and note the **NAME** of the PVC, and the name of the PV that is bound to the PVC and shown as **VOLUME**.
-    ```
+    ```sh
     kubectl get pvc
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     NAME                  STATUS    VOLUME                                     CAPACITY   ACCESSMODES   STORAGECLASS            AGE
     px-pvc          Bound     pvc-06886b77-102b-11e8-968a-f6612bb731fb   20Gi       RWO           px-high                 78d
     ```
     {: screen}
 
 2. Review the **`ReclaimPolicy`** for the storage class.
-    ```
+    ```sh
     kubectl describe storageclass <storageclass_name>
     ```
     {: pre}
@@ -1318,12 +1319,12 @@ When you added storage from your Portworx cluster to your app, you have three ma
 
 3. Remove any pods that mount the PVC.
     1. List the pods that mount the PVC.
-        ```
+        ```sh
         kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         blockdepl-12345-prz7b:    claim1-block-bronze  
         ```
@@ -1336,25 +1337,25 @@ When you added storage from your Portworx cluster to your app, you have three ma
         If the pod is part of a deployment, remove the deployment.
         {: tip}
 
-        ```
+        ```sh
         kubectl delete pod <pod_name>
         ```
         {: pre}
 
     3. Verify that the pod is removed.
-        ```
+        ```sh
         kubectl get pods
         ```
         {: pre}
 
 4. Remove the PVC.
-    ```
+    ```sh
     kubectl delete pvc <pvc_name>
     ```
     {: pre}
 
 5. Review the status of your PV. Use the name of the PV that you retrieved earlier as **VOLUME**.
-    ```
+    ```sh
     kubectl get pv <pv_name>
     ```
     {: pre}
@@ -1362,25 +1363,25 @@ When you added storage from your Portworx cluster to your app, you have three ma
     When you remove the PVC, the PV that is bound to the PVC is released. Depending on how you provisioned your storage, your PV goes into a `Deleting` state if the PV is deleted automatically, or into a `Released` state, if you must manually delete the PV. **Note**: For PVs that are automatically deleted, the status might briefly say `Released` before it is deleted. Rerun the command after a few minutes to see whether the PV is removed.
 
 6. If your PV is not deleted, manually remove the PV.
-    ```
+    ```sh
     kubectl delete pv <pv_name>
     ```
     {: pre}
 
 7. Verify that the PV is removed.
-    ```
+    ```sh
     kubectl get pv
     ```
     {: pre}
 
 8. Verify that your Portworx volume is removed. Log in to one of your Portworx pods in your cluster to list your volumes. To find available Portworx pods, run `kubectl get pods -n kube-system | grep portworx`.
-    ```
+    ```sh
     kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl volume list
     ```
     {: pre}
 
 9. If your Portworx volume is not removed, manually remove the volume.
-    ```
+    ```sh
     kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl volume delete <volume_ID>
     ```
     {: pre}
@@ -1450,7 +1451,8 @@ The following commands result in data loss.
     ```
     {: pre}
 
-    Example output:
+    Example output
+
     ```sh
     NAME             NAMESPACE      REVISION    UPDATED                                 STATUS       CHART                                  APP VERSION
     <release_name>     <namespace>        1     2020-01-27 09:18:33.046018 -0500 EST    deployed  portworx-1.0.0     default     

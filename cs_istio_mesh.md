@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -10,8 +10,8 @@ subcollection: containers
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 
@@ -44,25 +44,25 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 {: #bookinfo_setup}
 
 1. Install BookInfo in your cluster. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
-    ```
+    ```sh
     curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.10.3 sh -
     ```
     {: pre}
 
 1. Navigate to the Istio package directory.
-    ```
+    ```sh
     cd istio-1.10.3
     ```
     {: pre}
 
 1. Label the `default` namespace for automatic sidecar injection.
-    ```
+    ```sh
     kubectl label namespace default istio-injection=enabled
     ```
     {: pre}
 
 1. Deploy the BookInfo application, gateway, and destination rules.
-    ```
+    ```sh
     kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
     kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
     kubectl apply -f samples/bookinfo/networking/destination-rule-all.yaml
@@ -70,13 +70,13 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
     {: pre}
 
 1. Ensure that the BookInfo microservices and their corresponding pods are deployed.
-    ```
+    ```sh
     kubectl get svc
     kubectl get pods
     ```
     {: pre}
 
-    ```
+    ```sh
     NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
     details                   ClusterIP      172.21.19.104    <none>         9080/TCP         2m
     kubernetes                ClusterIP      172.21.0.1       <none>         443/TCP          1d
@@ -100,25 +100,25 @@ Get the public address for the `istio-ingressgateway` load balancer that exposes
 
 ### Creating a gateway URL in Classic clusters
 1. Set the Istio ingress host.
-    ```
+    ```sh
     export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
     ```
     {: pre}
 
 2. Set the Istio ingress port.
-    ```
+    ```sh
     export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
     ```
     {: pre}
 
 3. Create a `GATEWAY_URL` environment variable that uses the Istio ingress host and port.
-    ```
+    ```sh
     export GATEWAY_URL=$INGRESS_IP:$INGRESS_PORT
     ```
     {: pre}
 
 1. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
-    ```
+    ```sh
     curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/productpage
     ```
     {: pre}
@@ -127,13 +127,13 @@ Get the public address for the `istio-ingressgateway` load balancer that exposes
 
 ### Creating a gateway URL in VPC clusters
 1. Create a `GATEWAY_URL` environment variable that uses the Istio ingress hostname.
-    ```
+    ```sh
     export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
     ```
     {: pre}
 
 1. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
-    ```
+    ```sh
     curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/productpage
     ```
     {: pre}
@@ -172,19 +172,19 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 
 1. Register the IP address in classic clusters or the hostname in VPC clusters for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic:
-        ```
+        ```sh
         ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --cluster <cluster_name_or_id>
         ```
         {: pre}
 
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC:
-        ```
+        ```sh
         ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
         ```
         {: pre}
 
 2. Verify that the subdomain is created and copy the subdomain.
-    ```
+    ```sh
     ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
     ```
     {: pre}
@@ -223,19 +223,19 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 
 1. Register the IP address in classic clusters or the hostname in VPC clusters for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic:
-        ```
+        ```sh
         ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --secret-namespace istio-system --cluster <cluster_name_or_id>
         ```
         {: pre}
 
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC:
-        ```
+        ```sh
         ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --secret-namespace istio-system --cluster <cluster_name_or_id>
         ```
         {: pre}
 
 2. Verify that the subdomain is created and note the name of your SSL secret in the **SSL Cert Secret Name** field.
-    ```
+    ```sh
     ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
     ```
     {: pre}
@@ -263,7 +263,7 @@ Complete the following steps to set up TLS termination for the `bookinfo-gateway
 {: shortdesc}
 
 1. Delete the existing `bookinfo-gateway`, which is not configured to handle TLS connections.
-    ```
+    ```sh
     kubectl delete gateway bookinfo-gateway
     ```
     {: pre}
@@ -291,7 +291,7 @@ Complete the following steps to set up TLS termination for the `bookinfo-gateway
     {: codeblock}
 
 3. Create the new `bookinfo-gateway` in your cluster.
-    ```
+    ```sh
     kubectl apply -f bookinfo-gateway.yaml
     ```
     {: pre}
@@ -312,14 +312,14 @@ The BookInfo sample demonstrates how three of Istio's traffic management compone
 
 `Gateway`
 :   The `bookinfo-gateway` [Gateway](https://istio.io/latest/docs/reference/config/networking/gateway/){: external} describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace that acts as the entry point for inbound HTTP/TCP traffic for BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file. To see the configuration file for the BookInfo gateway, run the following command. 
-    ```
+    ```sh
     kubectl get gateway bookinfo-gateway -o yaml
     ```
     {: pre}
 
 `VirtualService`
 :   The `bookinfo` [VirtualService](https://istio.io/latest/docs/reference/config/networking/virtual-service/){: external} defines the rules that control how requests are routed within the service mesh by defining microservices as `destinations`. In the `bookinfo` virtual service, the `/productpage` URI of a request is routed to the `productpage` host on port `9080`. In this way, all requests to the BookInfo app are routed first to the `productpage` microservice, which then calls the other microservices of BookInfo. To see the virtual service rule, run the following command.
-    ```
+    ```sh
     kubectl get virtualservice bookinfo -o yaml
     ```
     {: pre}
@@ -327,7 +327,7 @@ The BookInfo sample demonstrates how three of Istio's traffic management compone
 `DestinationRule`
 :   After the gateway routes the request according to virtual service rule, the `details`, `productpage`, `ratings`, and `reviews` [DestinationRules](https://istio.io/latest/docs/reference/config/networking/destination-rule/){: external} define policies that are applied to the request when it reaches a microservice. For example, when you refresh the BookInfo product page, the changes that you see are the result of the `productpage` microservice randomly calling different versions, `v1`, `v2`, and `v3`, of the `reviews` microservice. The versions are selected randomly because the `reviews` destination rule gives equal weight to the `subsets`, or the named versions, of the microservice. These subsets are used by the virtual service rules when traffic is routed to specific versions of the service. To see the destination rules that are applied to BookInfo, run the following command.
 
-    ```
+    ```sh
     kubectl describe destinationrules
     ```
     {: pre}
@@ -352,25 +352,25 @@ Do not enable sidecar injection for the `kube-system`, `ibm-system,` or `ibm-ope
 To enable automatic sidecar injection for a namespace:
 
 1. Get the name of the namespace where you want to deploy Istio-managed apps.
-    ```
+    ```sh
     kubectl get namespaces
     ```
     {: pre}
 
 1. Label the namespace as `istio-injection=enabled`.
-    ```
+    ```sh
     kubectl label namespace <namespace> istio-injection=enabled
     ```
     {: pre}
 
 1. Deploy apps into the labeled namespace, or redeploy apps that are already in the namespace.
-    ```
+    ```sh
     kubectl apply <myapp>.yaml --namespace <namespace>
     ```
     {: pre}
 
 1. **Optional** To redeploy an app in that namespace, delete the app pod so that it is redeployed with the injected sidecar.
-    ```
+    ```sh
     kubectl delete pod -l app=<myapp>
     ```
     {: pre}
@@ -393,7 +393,7 @@ To enable automatic sidecar injection for a namespace:
     {: codeblock}
 
 1. Create the service in your cluster. Ensure that the service deploys into the same namespace as the app.
-    ```
+    ```sh
     kubectl apply -f myappservice.yaml -n <namespace>
     ```
     {: pre}
@@ -410,13 +410,13 @@ Do not enable sidecar injection for the `kube-system`, `ibm-system,` or `ibm-ope
 
 **Before you begin**
 1. Download the `istioctl` client.
-    ```
+    ```sh
     curl -L https://istio.io/downloadIstio | sh -
     ```
     {: pre}
 
 1. Navigate to the Istio package directory.
-    ```
+    ```sh
     cd istio-1.10.3
     ```
     {: pre}
@@ -424,13 +424,13 @@ Do not enable sidecar injection for the `kube-system`, `ibm-system,` or `ibm-ope
 To manually inject sidecars into a deployment:
 
 1. Inject the Envoy sidecar into your app deployment YAML.
-    ```
+    ```sh
     istioctl kube-inject -f <myapp>.yaml | kubectl apply -f -
     ```
     {: pre}
 
 1. Deploy your app.
-    ```
+    ```sh
     kubectl apply <myapp>.yaml
     ```
     {: pre}
@@ -453,7 +453,7 @@ To manually inject sidecars into a deployment:
     {: codeblock}
 
 1. Create the service in your cluster. Ensure that the service deploys into the same namespace as the app.
-    ```
+    ```sh
     kubectl apply -f myappservice.yaml -n <namespace>
     ```
     {: pre}
@@ -469,7 +469,7 @@ By default, one public Istio load balancer, `istio-ingressgateway`, is enabled i
 {: shortdesc}
 
 1. Edit the `managed-istio-custom` configmap resource.
-    ```
+    ```sh
     kubectl edit cm managed-istio-custom -n ibm-operators
     ```
     {: pre}
@@ -499,7 +499,7 @@ By default, one public Istio load balancer, `istio-ingressgateway`, is enabled i
 4. Save and close the configuration file.
 
 5. Verify that the new `istio-ingressgateway` load balancer services are created.
-    ```
+    ```sh
     kubectl get svc -n istio-system
     ```
     {: pre}
@@ -550,7 +550,7 @@ To publicly expose apps:
     {: codeblock}
 
 2. Apply the gateway in the namespace where your Istio-managed microservices are deployed.
-    ```
+    ```sh
     kubectl apply -f my-gateway.yaml -n <namespace>
     ```
     {: pre}
@@ -580,13 +580,13 @@ To publicly expose apps:
     {: codeblock}
 
 4. Apply the virtual service rules in the namespace where your Istio-managed microservice is deployed.
-    ```
+    ```sh
     kubectl apply -f my-virtual-service.yaml -n <namespace>
     ```
     {: pre}
 
 5. Get the **EXTERNAL-IP** address (classic clusters) or the hostname (VPC clusters) for the `istio-ingressgateway` public load balancer. If you [enabled an Istio load balancer in each zone of your cluster](#config-gateways), get the IP address or hostname of the load balancer service in each zone.
-    ```
+    ```sh
     kubectl get svc -n istio-system
     ```
     {: pre}
@@ -605,19 +605,19 @@ To publicly expose apps:
 
 6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-        ```
+        ```sh
         ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
         ```
         {: pre}
 
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters:
-        ```
+        ```sh
         ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname>
         ```
         {: pre}
 
 7. Verify that the subdomain is created. In the output, copy the name of your SSL secret in the **SSL Cert Secret Name** field.
-    ```
+    ```sh
     ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
     ```
     {: pre}
@@ -689,7 +689,7 @@ To publicly expose apps:
     {: codeblock}
 
 2. Apply the gateway in the namespace where your Istio-managed microservices are deployed.
-    ```
+    ```sh
     kubectl apply -f my-gateway.yaml -n <namespace>
     ```
     {: pre}
@@ -719,13 +719,13 @@ To publicly expose apps:
     {: codeblock}
 
 4. Apply the virtual service rules in the namespace where your Istio-managed microservice is deployed.
-    ```
+    ```sh
     kubectl apply -f my-virtual-service.yaml -n <namespace>
     ```
     {: pre}
 
 5. Get the **EXTERNAL-IP** address (classic clusters) or the hostname (VPC clusters) for the `istio-ingressgateway` public load balancer. If you [enabled an Istio load balancer in each zone of your cluster](#config-gateways), get the IP address or hostname of the load balancer service in each zone.
-    ```
+    ```sh
     kubectl get svc -n istio-system
     ```
     {: pre}
@@ -744,19 +744,19 @@ To publicly expose apps:
 
 6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-        ```
+        ```sh
         ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
         ```
         {: pre}
 
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters:
-        ```
+        ```sh
         ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname>
         ```
         {: pre}
 
 7. Verify that the subdomain is created. In the output, copy the name of your SSL secret in the **SSL Cert Secret Name** field.
-    ```
+    ```sh
     ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
     ```
     {: pre}
@@ -809,7 +809,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
     {: codeblock}
 
 2. Apply the authentication policy to a namespace.
-    ```
+    ```sh
     kubectl apply -f default.yaml -n <namespace>
     ```
     {: pre}
@@ -829,7 +829,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
     {: codeblock}
 
 4. Apply the destination rule.
-    ```
+    ```sh
     kubectl apply -f destination-mtls.yaml -n <namespace>
     ```
     {: pre}

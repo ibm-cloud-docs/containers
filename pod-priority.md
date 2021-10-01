@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -10,10 +10,8 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Setting pod priority
@@ -78,7 +76,7 @@ The following table describes the priority classes that are in your cluster by d
 
 You can check which pods use the priority classes by running the following command.
 
-```
+```sh
 kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY:.spec.priorityClassName
 ```
 {: pre}
@@ -99,14 +97,14 @@ To use a priority class:
 
     1. List existing priority classes.
 
-        ```
+        ```sh
         kubectl get priorityclasses
         ```
         {: pre}
 
     2. Choose the priority class that you want to copy and create a local YAML file.
 
-        ```
+        ```sh
         kubectl get priorityclass <priority_class> -o yaml > Downloads/priorityclass.yaml
         ```
         {: pre}
@@ -134,14 +132,14 @@ To use a priority class:
 
 3. Create the priority class in your cluster.
 
-    ```
+    ```sh
     kubectl apply -f filepath/priorityclass.yaml
     ```
     {: pre}
 
 4. Verify that the priority class is created.
 
-    ```
+    ```sh
     kubectl get priorityclasses
     ```
     {: pre}
@@ -165,21 +163,21 @@ To assign priority to your pods:
 
     1. View the priority classes that other pods in the namespace use.
 
-        ```
+        ```sh
         kubectl get pods -n <namespace> -o custom-columns=NAME:.metadata.name,PRIORITY:.spec.priorityClassName
         ```
         {: pre}
 
     2. Get the details of the priority class and note the **value** number. Pods with higher numbers are prioritized before pods with lower numbers. Repeat this step for each priority class that you want to review.
 
-        ```
+        ```sh
         kubectl describe priorityclass <priorityclass_name>
         ```
         {: pre}
 
 2. Get the priority class that you want to use, or [create your own priority class](#create_priority_class).
 
-    ```
+    ```sh
     kubectl get priorityclasses
     ```
     {: pre}
@@ -212,7 +210,7 @@ To assign priority to your pods:
 
 4. Create your prioritized pods in the namespace that you want to deploy them to.
 
-    ```
+    ```sh
     kubectl apply -f filepath/pod-deployment.yaml
     ```
     {: pre}

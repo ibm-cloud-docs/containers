@@ -27,9 +27,9 @@ toc:
             - cs_uc_intro.md
             - cs_uc_finance.md
             - cs_uc_health.md
-            - cs_uc_retail.md
+            - uc-retail.md
             - uc-transport.md
-            - cs_uc_gov.md
+            - uc-gov.md
         - topicgroup:
             label: Learning paths
             topics:
@@ -147,14 +147,13 @@ toc:
                   - network-cluster.md
                   - vpn.md
                   - cs_dns.md
-                  - static-routes.md
             - topicgroup:
                 label: VPC clusters
                 topics:
                 - vpc-subnets.md
                 - vpc-vpn.md
                 - cs_dns.md
-                - cs_static_routes.md
+            - static-routes.md
         - topicgroup:
             label: Logging and monitoring
             topics:
@@ -164,7 +163,7 @@ toc:
         - topicgroup:
             label: Setting up an image build pipeline
             topics:
-            - cs_registry.md
+            - registry.md
             - cicd.md
         - topicgroup:
             label: Developing and deploying apps
@@ -350,12 +349,12 @@ toc:
                     - ts-app-02-imgpull.md
                     - ts-app-container-start.md
                     - ts-app-04-psp.md
-                    - ts-app-05-pod-pending.md
+                    - ts-app-pod-pending.md
                     - ts-app-pod-fail.md
                     - ts-app-07-svc-name.md
-                    - ts-app-08-svc-not-found.md
-                    - ts-app-09-svc-key.md
-                    - ts-app-10-helm-install.md
+                    - ts-app-svc-not-found.md
+                    - ts-app-svc-key.md
+                    - ts-app-helm-install.md
               - topicgroup:
                   label: Managed add-ons
                   topics:
@@ -436,7 +435,4 @@ toc:
           - release-notes.md
           - limitations.md
           - sitemap.md
-
-
-
 

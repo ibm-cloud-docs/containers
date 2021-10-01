@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, containers
 
@@ -10,8 +10,8 @@ subcollection: containers
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 
@@ -177,7 +177,6 @@ To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {
 3. Give your cluster a unique name, such as `mycluster-free`.
 4. Select a resource group to create the cluster in, such as `default`.
 3. In the **Summary** pane, review the order summary and then click **Create**. A worker pool is created that contains one worker node in the default resource group.
-<br>
 
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
 
@@ -200,7 +199,7 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
 2. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 3. Configure your VPC environment.
     1. Select the **Standard** plan.
-    2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.20.7 or later**.
+    2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.21.5 or later**.
     3. Select **VPC** infrastructure.
     4. From the **Virtual private cloud** drop-down menu, select the VPC that you created earlier.
 4. Configure the **Location** details for your cluster.

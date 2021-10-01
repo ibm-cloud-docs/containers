@@ -2,15 +2,15 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: containers
 subcollection: containers
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 
@@ -99,18 +99,6 @@ subcollection: containers
 
 
 [Overview of use cases](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro)
-
-[Financial services use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_finance#cs_uc_finance)
-
-* [Mortgage company trims costs and accelerates regulatory compliance](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage)
-
-* [Payment tech company streamlines developer productivity, deploying AI-enabled tools to their partners 4 times faster](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech)
-
-[Healthcare use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_health#cs_uc_health)
-
-* [Healthcare provider migrates workloads from inefficient VMs to Ops-friendly containers for reporting and patient systems](/docs/containers?topic=containers-cs_uc_health#uc_migrate)
-
-* [Research nonprofit securely hosts sensitive data while it grows research with partners](/docs/containers?topic=containers-cs_uc_health#uc_research)
 
 [Retail use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_retail#cs_uc_retail)
 
@@ -459,6 +447,10 @@ subcollection: containers
     * [Worker-to-worker communication: VPC subnets](/docs/containers?topic=containers-plan_clusters#vpc-worker-worker)
 
     * [Worker-to-master and user-to-master communication: Virtual private endpoints or cloud service endpoints](/docs/containers?topic=containers-plan_clusters#vpc-workeruser-master)
+
+    * [Worker-to-master communication](/docs/containers?topic=containers-plan_clusters#worker-to-master-comms)
+
+    * [User-to-master communication](/docs/containers?topic=containers-plan_clusters#user-to-master-comms)
 
     * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_clusters#vpc-worker-services-onprem)
 
@@ -1227,18 +1219,6 @@ subcollection: containers
 
     * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
-[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes#static-routes)
-
-* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
-
-* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
-
-    * [Enabling the static route add-on from the console](/docs/containers?topic=containers-static-routes#enable-add-on-console)
-
-    * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
-
-* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
-
 
 ### VPC clusters
 {: #sitemap_vpc_clusters}
@@ -1316,6 +1296,18 @@ subcollection: containers
 
     * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
+[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes#static-routes)
+
+* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
+
+* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
+
+    * [Enabling the static route add-on from the console](/docs/containers?topic=containers-static-routes#enable-add-on-console)
+
+    * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
+
+* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
+
 
 ## Logging and monitoring
 {: #sitemap_logging_and_monitoring}
@@ -1387,6 +1379,24 @@ subcollection: containers
 [Setting up an image registry](/docs/containers?topic=containers-registry#registry)
 
 * [Planning image registries](/docs/containers?topic=containers-registry#planning_images)
+
+* [Choosing an image registry solution](/docs/containers?topic=containers-registry#openshift_registry_options)
+
+* [Storing images in the internal registry](/docs/containers?topic=containers-registry#openshift_internal_registry)
+
+    * [VPC: Backing up your {{site.data.keyword.openshiftshort}} internal image registry to {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-registry#cos_image_registry)
+
+    * [Classic: Storing images in the internal registry](/docs/containers?topic=containers-registry#storage_internal_registry)
+
+    * [Storing images in the worker node empty directory](/docs/containers?topic=containers-registry#emptydir_internal_registry)
+
+* [Setting up a secure external route for the internal registry](/docs/containers?topic=containers-registry#route_internal_registry)
+
+* [Importing images from {{site.data.keyword.registrylong_notm}} into the internal registry image stream](/docs/containers?topic=containers-registry#imagestream_registry)
+
+* [Setting up builds in the internal registry to push images to {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-registry#builds_registry)
+
+* [Using {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-registry#openshift_iccr)
 
 * [Understanding how to authorize your cluster to pull images from a private registry](/docs/containers?topic=containers-registry#cluster_registry_auth)
 
@@ -2066,11 +2076,11 @@ subcollection: containers
 
     * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class)
 
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-file_storage#cleanup)
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-file_storage#cleanup_file)
 
-    * [Understanding your storage removal options](/docs/containers?topic=containers-file_storage#storage_delete_options)
+    * [Understanding your storage removal options](/docs/containers?topic=containers-file_storage#storage_delete_options_file)
 
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove)
+    * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove_file)
 
 [Storing data on classic IBM Cloud {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
 
@@ -2130,11 +2140,11 @@ subcollection: containers
 
     * [Mounting block storage with an `XFS` file system](/docs/containers?topic=containers-block_storage#xfs)
 
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-block_storage#cleanup)
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-block_storage#cleanup_block)
 
-    * [Understanding your storage removal options](/docs/containers?topic=containers-block_storage#storage_delete_options)
+    * [Understanding your storage removal options](/docs/containers?topic=containers-block_storage#storage_delete_options_block)
 
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove)
+    * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
 
 [Storing data on {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block)
 
@@ -2168,11 +2178,11 @@ subcollection: containers
 
 * [Storage class reference](/docs/containers?topic=containers-vpc-block#vpc-block-reference)
 
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup)
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup_block_vpc)
 
-    * [Understanding your storage removal options](/docs/containers?topic=containers-vpc-block#storage_delete_options)
+    * [Understanding your storage removal options](/docs/containers?topic=containers-vpc-block#storage_delete_options_block_vpc)
 
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-vpc-block#storage_remove)
+    * [Cleaning up persistent storage](/docs/containers?topic=containers-vpc-block#storage_remove_block_vpc)
 
 [Storing data on IBM Cloud Object Storage](/docs/containers?topic=containers-object_storage#object_storage)
 
@@ -2864,7 +2874,7 @@ subcollection: containers
 
     * [Update after master](/docs/containers?topic=containers-cs_versions#120_after)
 
-* [Version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119)
+* [Deprecated: Version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119)
 
     * [Update before master](/docs/containers?topic=containers-cs_versions#119_before)
 
@@ -2918,7 +2928,7 @@ subcollection: containers
 
     * [Changelog for worker node fix pack 1.21.5_1532, released 27 September 2021](/docs/containers?topic=containers-changelog#1215_1532)
 
-    * [Changelog for master fix pack 1.21.5_1531, released 27 September 2021](/docs/containers?topic=containers-changelog#1215_1531)
+    * [Changelog for master fix pack 1.21.5_1531, released 28 September 2021](/docs/containers?topic=containers-changelog#1215_1531)
 
     * [Changelog for worker node fix pack 1.21.4_1530, released 13 September 2021](/docs/containers?topic=containers-changelog#12104_1530)
 
@@ -2948,7 +2958,7 @@ subcollection: containers
 
     * [Changelog for worker node fix pack 1.20.11_1554, released 27 September 2021](/docs/containers?topic=containers-changelog#12011_1554)
 
-    * [Changelog for master fix pack 1.20.11_1553, released 27 September 2021](/docs/containers?topic=containers-changelog#12011_1553)
+    * [Changelog for master fix pack 1.20.11_1553, released 28 September 2021](/docs/containers?topic=containers-changelog#12011_1553)
 
     * [Changelog for worker node fix pack 1.20.10_1552, released 13 September 2021](/docs/containers?topic=containers-changelog#12010_1552)
 
@@ -3000,11 +3010,11 @@ subcollection: containers
 
     * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 
-* [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+* [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
 
     * [Changelog for worker node fix pack 1.19.15_1561, released 27 September 2021](/docs/containers?topic=containers-changelog#11915_1561)
 
-    * [Changelog for master fix pack 1.19.15_1560, released 27 September 2021](/docs/containers?topic=containers-changelog#11915_1560)
+    * [Changelog for master fix pack 1.19.15_1560, released 28 September 2021](/docs/containers?topic=containers-changelog#11915_1560)
 
     * [Changelog for worker node fix pack 1.19.14_1559, released 13 September 2021](/docs/containers?topic=containers-changelog#11914_1559)
 
@@ -3090,7 +3100,7 @@ subcollection: containers
 
     * [Changelog for worker node fix pack 1.18.20_1566, released 27 September 2021](/docs/containers?topic=containers-changelog#11820_1566)
 
-    * [Changelog for master fix pack 1.18.20_1565, released 27 September 2021](/docs/containers?topic=containers-changelog#11820_1565)
+    * [Changelog for master fix pack 1.18.20_1565, released 28 September 2021](/docs/containers?topic=containers-changelog#11820_1565)
 
     * [Changelog for worker node fix pack 1.18.20_1564, released 13 September 2021](/docs/containers?topic=containers-changelog#11820_1564)
 

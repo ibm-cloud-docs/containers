@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -10,8 +10,8 @@ subcollection: containers
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 
@@ -42,12 +42,12 @@ To verify your installation:
 3. If the **Status** changes to `Provision failure`, follow the [instructions](/docs/containers?topic=containers-debug-portworx) to start troubleshooting why your installation failed.
 4. If the **Status** changes to `Provisioned`, verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer.
     1. List the Portworx pods in the `kube-system` namespace. The installation is successful when you see one or more `portworx`, `stork`, and `stork-scheduler` pods. The number of pods equals the number of worker nodes that are included in your Portworx cluster. All pods must be in a `Running` state.
-        ```
+        ```sh
         kubectl get pods -n kube-system | grep 'portworx\|stork'
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         portworx-594rw                          1/1       Running     0          20h
         portworx-rn6wk                          1/1       Running     0          20h
@@ -62,12 +62,12 @@ To verify your installation:
         {: screen}
 
     2. Log in to one of your `portworx` pods and list the status of your Portworx cluster.
-        ```
+        ```sh
         kubectl exec <portworx_pod> -it -n kube-system -- /opt/pwx/bin/pxctl status
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         Status: PX is operational
         License: Enterprise
@@ -103,12 +103,12 @@ To verify your installation:
     4. Verify that each storage node is listed with the correct amount of raw block storage by reviewing the **Capacity** column in the **Cluster Summary** section of your CLI output.
 
     5. Review the Portworx I/O classification that was assigned to the disks that are part of the Portworx cluster. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on how fast the network is that your worker node is connected to and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes.
-        ```
+        ```sh
         kubectl exec -it <portworx_pod> -n kube-system -- /opt/pwx/bin/pxctl cluster provision-status
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         NODE        NODE STATUS    POOL    POOL STATUS    IO_PRIORITY    SIZE    AVAILABLE    USED    PROVISIONED    RESERVEFACTOR    ZONE    REGION        RACK
         10.184.58.11    Up        0    Online        LOW        20 GiB    17 GiB        3.0 GiB    0 B        0        dal12    us-south    default
@@ -124,7 +124,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
 {: shortdesc}
 
 1. List available storage classes in your cluster and check whether you can use an existing Portworx storage class that was set up during the Portworx installation. The pre-defined storage classes are optimized for database usage and to share data across pods.
-    ```
+    ```sh
     kubectl get storageclasses | grep portworx
     ```
     {: pre}
@@ -181,13 +181,13 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
         </table>
 
     2. Create the storage class.
-        ```
+        ```sh
         kubectl apply -f storageclass.yaml
         ```
         {: pre}
 
     3. Verify that the storage class is created.
-        ```
+        ```sh
         kubectl get storageclasses
         ```
         {: pre}
@@ -237,13 +237,13 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
         </table>
 
     2. Create your PVC.
-        ```
+        ```sh
         kubectl apply -f pvc.yaml
         ```
         {: pre}
 
     3. Verify that your PVC is created and bound to a persistent volume (PV). This process might take a few minutes.
-        ```
+        ```sh
         kubectl get pvc
         ```
         {: pre}
@@ -346,13 +346,13 @@ To access the storage from your app, you must mount the PVC to your app.
     </tbody></table>
 
 2. Create your deployment.
-    ```
+    ```sh
     kubectl apply -f deployment.yaml
     ```
     {: pre}
 
 3. Verify that the PV is successfully mounted to your app.
-    ```
+    ```sh
     kubectl describe deployment <deployment_name>
     ```
     {: pre}
@@ -373,7 +373,7 @@ To access the storage from your app, you must mount the PVC to your app.
 
 4. Verify that you can write data to your Portworx cluster.
     1. Log in to the pod that mounts your PV.
-        ```
+        ```sh
         kubectl exec <pod_name> -it bash
         ```
         {: pre}
@@ -405,20 +405,21 @@ When you added storage from your Portworx cluster to your app, you have three ma
 {: shortdesc}
 
 1. List the PVCs in your cluster and note the **NAME** of the PVC, and the name of the PV that is bound to the PVC and shown as **VOLUME**.
-    ```
+    ```sh
     kubectl get pvc
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     NAME                  STATUS    VOLUME                                     CAPACITY   ACCESSMODES   STORAGECLASS            AGE
     px-pvc          Bound     pvc-06886b77-102b-11e8-968a-f6612bb731fb   20Gi       RWO           px-high                 78d
     ```
     {: screen}
 
 2. Review the **`ReclaimPolicy`** for the storage class.
-    ```
+    ```sh
     kubectl describe storageclass <storageclass_name>
     ```
     {: pre}
@@ -427,12 +428,12 @@ When you added storage from your Portworx cluster to your app, you have three ma
 
 3. Remove any pods that mount the PVC.
     1. List the pods that mount the PVC.
-        ```
+        ```sh
         kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         blockdepl-12345-prz7b:    claim1-block-bronze  
         ```
@@ -445,25 +446,25 @@ When you added storage from your Portworx cluster to your app, you have three ma
         If the pod is part of a deployment, remove the deployment.
         {: tip}
 
-        ```
+        ```sh
         kubectl delete pod <pod_name>
         ```
         {: pre}
 
     3. Verify that the pod is removed.
-        ```
+        ```sh
         kubectl get pods
         ```
         {: pre}
 
 4. Remove the PVC.
-    ```
+    ```sh
     kubectl delete pvc <pvc_name>
     ```
     {: pre}
 
 5. Review the status of your PV. Use the name of the PV that you retrieved earlier as **VOLUME**.
-    ```
+    ```sh
     kubectl get pv <pv_name>
     ```
     {: pre}
@@ -471,25 +472,25 @@ When you added storage from your Portworx cluster to your app, you have three ma
     When you remove the PVC, the PV that is bound to the PVC is released. Depending on how you provisioned your storage, your PV goes into a `Deleting` state if the PV is deleted automatically, or into a `Released` state, if you must manually delete the PV. **Note**: For PVs that are automatically deleted, the status might briefly say `Released` before it is deleted. Rerun the command after a few minutes to see whether the PV is removed.
 
 6. If your PV is not deleted, manually remove the PV.
-    ```
+    ```sh
     kubectl delete pv <pv_name>
     ```
     {: pre}
 
 7. Verify that the PV is removed.
-    ```
+    ```sh
     kubectl get pv
     ```
     {: pre}
 
 8. Verify that your Portworx volume is removed. Log in to one of your Portworx pods in your cluster to list your volumes. To find available Portworx pods, run `kubectl get pods -n kube-system | grep portworx`.
-    ```
+    ```sh
     kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl volume list
     ```
     {: pre}
 
 9. If your Portworx volume is not removed, manually remove the volume.
-    ```
+    ```sh
     kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl volume delete <volume_ID>
     ```
     {: pre}

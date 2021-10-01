@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, help
 
@@ -11,8 +11,8 @@ content-type: troubleshoot
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
+
   
 
 # Why are Istio components missing?
@@ -37,13 +37,13 @@ To verify the control plane components installation:
 {: tsResolve}
 
 1. Check the values of any customizations that you specified in the customization configmap. For example, if the value of the `istio-components-pilot-requests-cpu` setting is too high, control plane components might not be scheduled.
-    ```
+    ```sh
     kubectl describe cm managed-istio-custom -n ibm-operators
     ```sh
     {: pre}
 
 2. Check the logs of the Istio operator. If any logs indicate that the operator is failing to reconcile your customization settings, verify your settings for the [customized Istio installation](/docs/containers?topic=containers-istio#customize) again.
-    ```
+    ```sh
     kubectl logs -n ibm-operators -l name=managed-istio-operator
     ```
     {: pre}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, firewall
 
@@ -10,10 +10,8 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # VPC: Controlling traffic with ACLs, security groups, and network policies
@@ -138,19 +136,19 @@ Use the {{site.data.keyword.cloud_notm}} CLI to add inbound and outbound rules t
 
 Before you begin
 1. Install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
-    ```
+    ```sh
     ibmcloud plugin install infrastructure-service
     ```
     {: pre}
 
 2. Target the region that your VPC is in.
-    ```
+    ```sh
     ibmcloud target -r <region>
     ```
     {: pre}
 
 3. Get your cluster's **ID**.
-    ```
+    ```sh
     ibmcloud ks cluster get -c <cluster_name>
     ```
     {: pre}
@@ -352,13 +350,13 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
 
 Before you begin:
 1. Install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
-    ```
+    ```sh
     ibmcloud plugin install infrastructure-service
     ```
     {: pre}
 
 2. Target the region that your VPC is in.
-    ```
+    ```sh
     ibmcloud target -r <region>
     ```
     {: pre}
@@ -374,8 +372,9 @@ To create an ACL for each subnet that your cluster is attached to:
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     ID                                          Name          Status      Subnet CIDR        Addresses   ACL                                                  Public Gateway                            VPC       Zone         Resource group
     0717-2224d664-d435-425e-b5ec-f324af2df445   mysubnet1     available   10.240.0.0/28      11/16       armored-never-chitchat-gangly-skylight-prototype     -                                  myvpc     us-south-1   default
     0717-1eff410a-a47e-4bc2-b4a3-5f742f320008   mysubnet2     available   10.240.1.0/24      251/256     armored-never-chitchat-gangly-skylight-prototype     pgw-ed8f6970-9b71-11ea-b94a-956de1af1ccd        myvpc     us-south-2   default
@@ -389,7 +388,8 @@ To create an ACL for each subnet that your cluster is attached to:
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     Creating network ACL mycluster-mysubnet1-acl under account Account as user user@email.com...
 
     ID        740b07cb-4e69-4ef2-b667-42ed27d8b29e
@@ -409,7 +409,7 @@ To create an ACL for each subnet that your cluster is attached to:
     {: screen}
 
 3. Export the ACL ID as an environment variable.
-    ```
+    ```sh
     export ACL_ID=<acl_id>
     ```
     {: pre}
@@ -496,7 +496,8 @@ To create an ACL for each subnet that your cluster is attached to:
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ID                  a1b2c3d4-f560-471b-b6ce-20067ac93439
     Name                mysubnet1
     IPv*                ipv4
