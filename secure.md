@@ -10,9 +10,6 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
 
 
@@ -163,7 +160,8 @@ To rotate the CA certificates for your cluster:
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     Status:             CA certificate creation complete. Ensure that your worker nodes are reloaded before you start a CA certificate rotation.
     Action Started:     2020-08-30T16:17:56+0000
     Action Completed:   2020-08-30T16:21:13+0000

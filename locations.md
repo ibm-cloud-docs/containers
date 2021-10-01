@@ -10,9 +10,6 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
 
 
@@ -114,10 +111,8 @@ The following image is used as an example to explain how {{site.data.keyword.con
 `*` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.
 {: note}
 
-<br>
 
 **Deprecated data centers**
-<br>
 
 Oslo (osl01) is deprecated and becomes unsupported later this year. To prevent any interruption of service, [redeploy all of your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your `osl01` clusters by **1 August 2021**. Before the unsupported date, you are blocked from adding new worker nodes and clusters starting on **1 July 2021**. For more information, see [Data center closures in 2021](/docs/get-support?topic=get-support-dc-closure).
 {: deprecated}
@@ -207,7 +202,7 @@ When you log in to the {{site.data.keyword.cloud_notm}} (`ibmcloud`) command lin
 {: shortdesc}
 
 To log in to the {{site.data.keyword.cloud_notm}} global API endpoint and target the resource group that your cluster is in:
-```
+```sh
 ibmcloud login -a https://cloud.ibm.com -g <nondefault_resource_group_name>
 ```
 {: pre}

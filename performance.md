@@ -10,9 +10,6 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
 
 
@@ -202,7 +199,8 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: pre}
 
     Example output
-    ```
+
+    ```yaml
     apiVersion: v1
     data:
       NannyConfiguration: |-
@@ -608,6 +606,7 @@ spec:
     {: pre}
 
     Example output
+
     ```yaml
     apiVersion: v1
     data:

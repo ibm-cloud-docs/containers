@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -10,9 +10,6 @@ subcollection: containers
 content-type: troubleshoot
 
 ---
-
-
-
 {{site.data.keyword.attribute-definition-list}}
 
 
@@ -183,7 +180,8 @@ The init container starts before your app container starts. The init container c
     {: pre}
 
     Example output
-    ```yaml
+
+    ```shyaml
     Name:       mypod-123456789
     Namespace:    default
     ...

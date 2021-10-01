@@ -10,9 +10,6 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
 
 
@@ -387,7 +384,8 @@ The following instructions require public network access in your cluster to conn
     </table>
 
     Example output
-    ```
+
+    ```sh
     {
     "delegated_refresh_token": <delegated_refresh_token>
     }
@@ -421,7 +419,8 @@ The following instructions require public network access in your cluster to conn
     </table>
 
     Example output
-    ```
+
+    ```sh
     {
     "access_token": "<iam_access_token>",
     "id_token": "<iam_id_token>",
@@ -513,7 +512,8 @@ The following instructions require public network access in your cluster to conn
     </table>
 
     Example output
-    ```
+
+    ```sh
     {
     "major": "1",
     "minor": "1.20.7",

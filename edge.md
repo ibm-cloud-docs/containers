@@ -10,9 +10,6 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
 
 
@@ -91,7 +88,8 @@ To create an edge node worker pool,
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     service "webserver-lb" configured
     ```
     {: screen}
@@ -106,7 +104,7 @@ To create an edge node worker pool,
         {: pre}
 
         Example output
-        ```
+        ```sh
         ibm-system                 ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-wz6dg                 5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
         ibm-system                 ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-2z64r                 5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
         ```
@@ -162,6 +160,7 @@ To create an edge node worker pool,
     {: pre}
 
     Example output
+
     ```sh
     ibm-system                 ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-wz6dg                 5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
     ibm-system                 ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-2z64r                 5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
@@ -212,7 +211,8 @@ To prevent other workloads from running on edge worker nodes,
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     Taints:             dedicated=edge:NoExecute
         Hostname:    10.176.48.83
       Taints:             dedicated=edge:NoExecute
@@ -264,7 +264,8 @@ To create an edge node worker pool in a gateway-enabled classic cluster,
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ...
     Worker Zones:                   dal10, dal12
     ```
@@ -314,6 +315,7 @@ To create an edge node worker pool in a gateway-enabled classic cluster,
     {: pre}
 
     Example output
+
     ```sh
     NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
     kube-system   private-crdf253b6025d64944ab99ed63bb4567b6-alb1  LoadBalancer   172.21.158.78    10.xxx.xx.xxx   80:31015/TCP,443:31401/TCP,9443:32352/TCP   25d
@@ -328,7 +330,8 @@ To create an edge node worker pool in a gateway-enabled classic cluster,
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     service "private-crdf253b6025d64944ab99ed63bb4567b6-alb1" configured
     ```
     {: screen}
@@ -341,7 +344,8 @@ To create an edge node worker pool in a gateway-enabled classic cluster,
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     kube-system                private-crdf253b6025d64944ab99ed63bb4567b6-alb1-d5dd478db-27pv4    0 (0%)        0 (0%)      0 (0%)           0 (0%)
     kube-system                private-crdf253b6025d64944ab99ed63bb4567b6-alb1-d5dd478db-7p9q6    0 (0%)        0 (0%)      0 (0%)           0 (0%)
     kube-system                public-crdf253b6025d64944ab99ed63bb4567b6-alb1-5ff8cdff89-s77z6    0 (0%)        0 (0%)      0 (0%)           0 (0%)

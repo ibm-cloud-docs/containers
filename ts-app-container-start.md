@@ -11,9 +11,6 @@ content-type: troubleshoot
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
 
 
@@ -130,7 +127,8 @@ First, check for and release individual IP addresses that were not cleanly remov
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     Check complete; found 0 problems.
     ```
     {: screen}

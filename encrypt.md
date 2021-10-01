@@ -10,9 +10,6 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
 
 
@@ -275,7 +272,8 @@ To verify secret encryption by disabling a root key
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     Unable to connect to the server: dial tcp 169.48.110.250:32346: i/o timeout
     ```
     {: screen}

@@ -10,9 +10,6 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
 
 
@@ -242,7 +239,6 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
 * Ensure that you complete the prerequisites to [prepare your account](#cluster_prepare) and decide on your [cluster setup](#prepare_cluster_level).
 * Install the {{site.data.keyword.cloud_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
 
-<br>
 
 **To create a classic cluster from the CLI**:
 
@@ -289,7 +285,8 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     ID        Name   Number   Type      Router
     1519999   vlan   1355     private   bcr02a.dal10
     1519898   vlan   1357     private   bcr02a.dal10
@@ -446,7 +443,6 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
 * Make sure that you complete the prerequisites to [prepare your account](#cluster_prepare) and decide on your [cluster setup](#prepare_cluster_level). Your account must be enabled with VRF and enabled to use private cloud service endpoints.
 * Install the {{site.data.keyword.cloud_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
 
-<br>
 
 **To create a classic gateway cluster**:
 
@@ -713,7 +709,6 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 * Install the {{site.data.keyword.cloud_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
 * Install the [VPC CLI plug-in](/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#cli-ref-prereqs).
 
-<br>
 
 **To create a VPC cluster from the CLI**:
 

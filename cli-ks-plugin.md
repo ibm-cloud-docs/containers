@@ -10,9 +10,6 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
 
 
@@ -3209,6 +3206,7 @@ ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER --worker-pool WORKER_
     {: pre}
 
     Example output
+
     ```sh
     Subnet VLANs
     VLAN ID   Subnet CIDR         Public   User-managed
@@ -6657,7 +6655,7 @@ To use this command to prepare your automation scripts for the release of versio
 
 4. Search for and address any commands that are flagged in the script with `# WARNING` messages. For example, some commands are deprecated and do not have a replacement command.
 5. Within the script or the environment where the script is run, set the `IKS_BETA_VERSION` environment variable to `1.0`.
-    ```
+    ```sh
     export IKS_BETA_VERSION=1.0
     ```
     {: pre}
