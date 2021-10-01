@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -230,7 +230,7 @@ When you use the new global functionality in the {{site.data.keyword.containerlo
 * Listing resources:
     * When you list resources, such as with the `ibmcloud ks cluster ls`, `ibmcloud ks subnets`, or `ibmcloud ks zone ls` commands, resources in all locations are returned. To filter resources by a specific location, certain commands include a `--location` flag. For example, if you filter clusters for the `wdc` metro, multizone clusters in that metro and single-zone clusters in data centers (zones) within that metro are returned. If you filter clusters for the `wdc06` data center (zone), multizone clusters that have a worker node in that zone and single-zone clusters in that zone are returned.
         Example to filter by location:
-    ```
+    ```sh
     ibmcloud ks cluster ls -l dal -l seo
     ```
     {: pre}
@@ -244,13 +244,13 @@ When you use the new global functionality in the {{site.data.keyword.containerlo
 * Legacy functionality:
     * If you need to list and work with resources from one region only, you can use the `ibmcloud ks init` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_init) to target a regional endpoint instead of the global endpoint.
         Example to target the US South regional endpoint:
-    ```
+    ```sh
     ibmcloud ks init --host https://us-south.containers.cloud.ibm.com
     ```
     {: pre}
 
     * To use the global functionality, you can use the `ibmcloud ks init` command again to target the global endpoint. Example to target the global endpoint again:
-    ```
+    ```sh
     ibmcloud ks init --host https://containers.cloud.ibm.com
     ```
     {: pre}

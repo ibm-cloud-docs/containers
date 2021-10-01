@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -317,7 +317,7 @@ ibmcloud ks cluster addon enable debug-tool --cluster CLUSTER [--version VERSION
 </dl>
 
 **Example**:
-    ```
+    ```sh
     ibmcloud ks cluster addon enable debug-tool --cluster my_cluster
     ```
     {: pre}
@@ -564,7 +564,7 @@ ibmcloud ks cluster addon versions [--addon ADD-ON_NAME] [--output json] [-q]
 
 **Example**:
 
-    ```
+    ```sh
     ibmcloud ks cluster addon versions --addon istio
     ```
     {: pre}
@@ -1034,7 +1034,7 @@ ibmcloud ks cluster image-security disable --cluster CLUSTER [-q]
 </dl>
 
 **Example**:
-    ```
+    ```sh
     ibmcloud ks cluster image-security disable --cluster my_cluster
     ```
     {: pre}
@@ -1069,7 +1069,7 @@ ibmcloud ks cluster image-security enable --cluster CLUSTER [-f] [-q]
 </dl>
 
 **Example**:
-    ```
+    ```sh
     ibmcloud ks cluster image-security enable --cluster my_cluster
     ```
     {: pre}
@@ -2195,7 +2195,7 @@ Rebooting a worker node can cause data corruption on the worker node. Use this c
 Before you reboot your worker node, make sure that you have enough capacity in other worker nodes to reschedule the pods on the worker node. Rescheduling pods helps to avoid downtime for your app or data corruption on your worker node.
 
 1. List all worker nodes in your cluster and note the **name** of the worker node that you want to remove.
-    ```
+    ```sh
     kubectl get nodes
     ```
     {: pre}
@@ -2203,21 +2203,21 @@ Before you reboot your worker node, make sure that you have enough capacity in o
     The **name** that is returned in this command is the private IP address that is assigned to your worker node. You can find more information about your worker node when you run the `ibmcloud ks worker ls --cluster <cluster_name_or_ID>` command and look for the worker node with the same **Private IP** address.
 
 2. Force pods to be removed from your worker node and rescheduled onto remaining worker nodes in the cluster. The worker node is also cordoned, or marked as unavailable for future pod scheduling. Replace `<worker_name>` with the private IP address of the worker node that you previously retrieved.
-    ```
+    ```sh
     kubectl drain <worker_name>
     ```
     {: pre}
 
     This process can take a few minutes.
 3. Reboot the worker node. Use the worker ID that is returned from the `ibmcloud ks worker ls --cluster <cluster_name_or_ID>` command.
-    ```
+    ```sh
     ibmcloud ks worker reboot --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
     ```
     {: pre}
 
 4. Wait about 5 minutes before you make your worker node available for pod scheduling to ensure that the reboot is finished. During the reboot, the state of your worker node does not change. The reboot of a worker node is usually completed in a few seconds.
 5. Make your worker node available for pod scheduling. Use the **name** for your worker node that is returned from the `kubectl get nodes` command.
-    ```
+    ```sh
     kubectl uncordon <worker_name>
     ```
     {: pre}
@@ -2286,7 +2286,7 @@ Before you reload your worker node, make sure that you have enough capacity in o
     The **name** that is returned in this command is the private IP address that is assigned to your worker node. You can find more information about your worker node when you run the `ibmcloud ks worker ls --cluster <cluster_name_or_ID>` command and look for the worker node with the same **Private IP** address.
 
 2. Reload the worker node. As part of the reload process, the pods that run on the worker node are drained and rescheduled onto remaining worker nodes in the cluster. The worker node is also cordoned, or marked as unavailable for future pod scheduling. Use the worker node ID that is returned from the `ibmcloud ks worker ls --cluster <cluster_name_or_ID>` command.
-    ```
+    ```sh
     ibmcloud ks worker reload --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
     ```
     {: pre}
@@ -3208,7 +3208,7 @@ ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER --worker-pool WORKER_
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```sh
     Subnet VLANs
     VLAN ID   Subnet CIDR         Public   User-managed
@@ -4714,14 +4714,14 @@ ibmcloud ks logging config update --cluster CLUSTER --id LOG_CONFIG_ID --type LO
 
 **Example for log type `ibm`**:
 
-    ```
+    ```sh
     ibmcloud ks logging config update --cluster my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
     ```
     {: pre}
 
 **Example for log type `syslog`**:
 
-    ```
+    ```sh
     ibmcloud ks logging config update --cluster my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
     ```
     {: pre}
@@ -4763,7 +4763,7 @@ ibmcloud ks logging filter create --cluster CLUSTER --type LOG_TYPE [--logging-c
 <dd>Optional: The name of the container from which you want to filter out logs. This flag applies only when you are using log type <code>container</code>.</dd>
 
 <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
-<dd>Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
+<dd>Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output <code>{"log": "hello", "level": "info"}</code></dd>
 
 <dt><code>--message <em>MESSAGE</em></code></dt>
 <dd>Optional: Filters out any logs that contain a specified message anywhere in the log. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".</dd>
@@ -4924,7 +4924,7 @@ ibmcloud ks logging filter update --cluster CLUSTER --id FILTER_ID --type LOG_TY
 <dd>Optional: The name of the container from which you want to filter out logs. This flag applies only when you are using log type <code>container</code>.</dd>
 
 <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
-<dd>Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
+<dd>Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output <code>{"log": "hello", "level": "info"}</code></dd>
 
 <dt><code>--message <em>MESSAGE</em></code></dt>
 <dd>Optional: Filters out any logs that contain a specified message anywhere in the log. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".</dd>
@@ -5954,7 +5954,7 @@ ibmcloud ks infra-permissions get --region us-south
 ```
 {: pre}
 
-Example output:
+Example output
 ```
 Missing Virtual Worker Permissions
 
@@ -6577,13 +6577,13 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-q]
 
 **Examples**:
 *  Example to target the US South regional endpoint:
-    ```
+    ```sh
     ibmcloud ks init --host https://us-south.containers.cloud.ibm.com
     ```
     {: pre}
 
 *  Example to target the global endpoint again:
-    ```
+    ```sh
     ibmcloud ks init --host https://containers.cloud.ibm.com
     ```
     {: pre}
@@ -6626,12 +6626,12 @@ ibmcloud ks script update [--in-place] FILE [FILE ...]
 
 To use this command to prepare your automation scripts for the release of version 1.0 of the {{site.data.keyword.containerlong_notm}} plug-in:
 1. Run the command on a test script without the `--in-place` flag.
-    ```
+    ```sh
     ibmcloud ks script update ./mytestscript.sh
     ```
     {: pre}
 
-2. Review the proposed changes to the script in the difference that is shown in the command line STDOUT. Example output:
+2. Review the proposed changes to the script in the difference that is shown in the command line STDOUT. Example output
     ```
     --- a/script-test-2
     +++ b/script-test-2
@@ -6650,7 +6650,7 @@ To use this command to prepare your automation scripts for the release of versio
     {: screen}
 
 3. To rewrite the script with the proposed updates, run the command again with the `--in-place` flag.
-    ```
+    ```sh
     ibmcloud ks script update ./mytestscript.sh --in-place
     ```
     {: pre}

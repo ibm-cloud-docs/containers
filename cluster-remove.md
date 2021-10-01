@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -48,7 +48,7 @@ When you delete your cluster, the default {{site.data.keyword.cloudcerts_short}}
 **To remove a cluster**:
 
 1. Optional: From the CLI, save a copy of all data in your cluster to a local YAML file.
-    ```
+    ```sh
     kubectl get all --all-namespaces -o yaml
     ```
     {: pre}
@@ -60,14 +60,14 @@ When you delete your cluster, the default {{site.data.keyword.cloudcerts_short}}
     - From the {{site.data.keyword.cloud_notm}} CLI
         1. List the available clusters.
 
-        ```
+        ```sh
         ibmcloud ks cluster ls
         ```
         {: pre}
 
     2. Delete the cluster.
 
-        ```
+        ```sh
         ibmcloud ks cluster rm --cluster <cluster_name_or_ID>
         ```
         {: pre}

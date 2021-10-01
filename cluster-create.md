@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -50,31 +50,31 @@ ibmcloud ks cluster create classic --name my_cluster
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**
 
 *  Classic cluster, shared virtual machine:
-    ```
+    ```sh
     ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
     ```
     {: pre}
 
 *  Classic cluster, bare metal:
-    ```
+    ```sh
     ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
     ```
     {: pre}
 
 *  Classic cluster with a gateway enabled:
-    ```
+    ```sh
     ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --gateway-enabled --version 1.21.3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --public-service-endpoint --private-service-endpoint
     ```
     {: pre}
 
 *  Classic cluster that uses private VLANs and the private cloud service endpoint only:
-    ```
+    ```sh
     ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --private-vlan <private_VLAN_ID> --private-only --private-service-endpoint
     ```
     {: pre}
 
 *  For a classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-mz), [add zones](/docs/containers?topic=containers-add_workers#add_zone):
-    ```
+    ```sh
     ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
     ```
     {: pre}
@@ -83,13 +83,13 @@ ibmcloud ks cluster create classic --name my_cluster
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**
 *  <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC cluster:
-    ```
+    ```sh
     ibmcloud ks cluster create vpc-gen2 --name my_cluster --zone us-east-1 --vpc-id <VPC_ID> --subnet-id <VPC_SUBNET_ID> --flavor b2.4x16 --workers 3
     ```
     {: pre}
 
 *  For a VPC multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-vpc), [add zones](/docs/containers?topic=containers-add_workers#vpc_add_zone):
-    ```
+    ```sh
     ibmcloud ks zone add vpc-gen2 --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <VPC_SUBNET_ID>
     ```
     {: pre}
@@ -264,7 +264,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
         {: pre} 
 
 3. Review the zones where you can create your cluster. In the output of the following command, zones have a **Location Type** of `dc`. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones-mz). Multizone-capable zones have a metro value in the **Multizone Metro** column. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#add_zone) to your cluster after the cluster is created.
-    ```
+    ```sh
     ibmcloud ks locations
     ```
     {: pre}
@@ -277,18 +277,18 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
     Before you create a bare metal machine, be sure that you want to provision one. Bare metal machines are billed monthly. If you order a bare metal machine by mistake, you are charged for the entire month, even if you cancel the machine immediately.  
     {: tip}
 
-    ```
+    ```sh
     ibmcloud ks flavors --zone <zone>
     ```
     {: pre}
 
 5. Check if you have existing VLANs in the zones that you want to include in your cluster, and note the ID of the VLAN. If you do not have a public or private VLAN in one of the zones that you want to use in your cluster, {{site.data.keyword.containerlong_notm}} automatically creates these VLANs for you when you create the cluster.
-    ```
+    ```sh
     ibmcloud ks vlan ls --zone <zone>
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     ID        Name   Number   Type      Router
     1519999   vlan   1355     private   bcr02a.dal10
@@ -304,13 +304,13 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
 6. Create your standard cluster.
 
     * To create a cluster in which you can run internet-facing workloads:
-        ```
+        ```sh
         ibmcloud ks cluster create classic --zone <zone> --flavor <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --version <major.minor.patch> [--public-service-endpoint] [--private-service-endpoint] [--pod-subnet] [--service-subnet] [--disable-disk-encrypt]
         ```
         {: pre}
 
     * To create a cluster with private network connectivity only, such as to extend your on-premises data center:
-        ```
+        ```sh
         ibmcloud ks cluster create classic --zone <zone> --flavor <flavor> --hardware <shared_or_dedicated> --private-vlan <private_VLAN_ID> --private-only --workers <number> --name <cluster_name> --version <major.minor.patch> --public-service-endpoint [--pod-subnet] [--service-subnet] [--disable-disk-encrypt]
         ```
         {: pre}
@@ -393,14 +393,14 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
     </tbody></table>
 
 7. Verify that the creation of the cluster was requested. For virtual machines, it can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account. Bare metal physical machines are provisioned by manual interaction with IBM Cloud infrastructure, and can take more than one business day to complete.
-    ```
+    ```sh
     ibmcloud ks cluster ls
     ```
     {: pre}
 
     When the provisioning of your Kubernetes master is completed, the **State** of your cluster changes to `normal`. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
-    ```
-    Name         ID                         State      Created          Workers    Zone      Version     Resource Group Name   Provider
+    ```sh
+    NAME         ID                         State      Created          Workers    Zone      Version     Resource Group Name   Provider
     mycluster    blrs3b1d0p0p2f7haq0g       normal   20170201162433   3          dal10     1.20.7      Default             classic
     ```
     {: screen}
@@ -409,7 +409,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
     {: tip}
 
 8. Check the status of the worker nodes.
-    ```
+    ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
@@ -472,7 +472,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
         {: pre} 
 
 3. Review the zones where you can create your cluster. In the output of the following command, zones have a **Location Type** of `dc`. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones-mz). Multizone-capable zones have a metro value in the **Multizone Metro** column. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#add_zone) to your cluster after the cluster is created.
-    ```
+    ```sh
     ibmcloud ks locations
     ```
     {: pre}
@@ -484,13 +484,13 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
     Before you create a bare metal machine, be sure that you want to provision one. Bare metal machines are billed monthly. If you order a bare metal machine by mistake, you are charged for the entire month, even if you cancel the machine immediately.
     {: tip}
 
-    ```
+    ```sh
     ibmcloud ks flavors --zone <zone>
     ```
     {: pre}
 
 5. In the zone where you want to create your cluster, check to see whether a public and private VLAN exist. If a public and private VLAN already exist, and they have matching routers, note the VLAN IDs. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match. If you do not have a public or private VLAN in the zone that you want to use in your cluster, or if you do not have VLANs that have matching routers, {{site.data.keyword.containerlong_notm}} automatically creates these VLANs for you when you create the cluster.
-    ```
+    ```sh
     ibmcloud ks vlan ls --zone <zone>
     ```
     {: pre}
@@ -506,7 +506,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
     {: screen}
 
 6. Create your gateway-enabled cluster.
-    ```
+    ```sh
     ibmcloud ks cluster create classic --zone <single_zone> --gateway-enabled --flavor <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --version 1.21.3 --private-service-endpoint --public-service-endpoint [--pod-subnet] [--service-subnet] [--disable-disk-encrypt]
     ```
     {: pre}
@@ -589,14 +589,14 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
     </tbody></table>
 
 7. Verify that the creation of the cluster was requested. For virtual machines, it can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account. Bare metal physical machines are provisioned by manual interaction with IBM Cloud infrastructure, and can take more than one business day to complete.
-    ```
+    ```sh
     ibmcloud ks cluster ls
     ```
     {: pre}
 
     When the provisioning of your Kubernetes master is completed, the **State** of your cluster changes to `normal`. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
-    ```
-    Name          ID                                 State    Created         Workers   Location          Version                   Resource Group Name   Provider
+    ```sh
+    NAME          ID                                 State    Created         Workers   Location          Version                   Resource Group Name   Provider
     mycluster     blbfcbhd0p6lse558lgg               normal   1 month ago     1         Dallas            1.20.7_1515               default               classic
     ```
     {: screen}
@@ -605,7 +605,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
     {: tip}
 
 8. Check the status of the worker nodes. When the worker nodes are ready, the worker node **State** changes to `normal` and the **Status** changes to `Ready`. When the node **Status** changes to `Ready`, you can then access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
-    ```
+    ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
@@ -732,7 +732,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     * **Important**: Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.
     * For more information, see [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}: Subnets](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets).
 5. Create the cluster in your VPC. You can use the `ibmcloud ks cluster create vpc-gen2` command to create a single zone cluster in your VPC with worker nodes that are connected to one VPC subnet only. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#vpc_add_zone) to your cluster after the cluster is created. The cluster takes a few minutes to provision.
-    ```
+    ```sh
     ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] [--kms-instance <KMS_instance_ID> --crk <root_key_ID>]
     ```
     {: pre}
@@ -806,14 +806,14 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     </tr>
     </tbody></table>
 6. Verify that the creation of the cluster was requested. It can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account.
-    ```
+    ```sh
     ibmcloud ks cluster ls
     ```
     {: pre}
 
     When the provisioning of your Kubernetes master is completed, the state of your cluster changes to **normal**. After the Kubernetes master is ready, your worker nodes are set up.
-    ```
-    Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name   Provider
+    ```sh
+    NAME         ID                                   State      Created          Workers    Zone      Version     Resource Group Name   Provider
     mycluster    aaf97a8843a29941b49a598f516da72101   normal   20170201162433   3          Dallas     1.20.7      Default               vpc-gen2
     ```
     {: screen}
@@ -822,7 +822,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     {: tip}
 
 7. Check the status of the worker nodes.
-    ```
+    ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, ips, vlans, networking, public gateway
 
@@ -200,7 +200,7 @@ Before you begin
 To create a VPC subnet, follow these steps.
 
 1. Get the ID of the VPC where you want to create the subnet.
-    ```
+    ```sh
     ibmcloud ks vpcs
     ```
     {: pre}
@@ -436,7 +436,7 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
     {: screen}
 
 3. List the worker nodes in your cluster. For the zone where you enabled the public gateway, note the **Primary IP** of one worker node.
-    ```
+    ```sh
     ibmcloud ks worker ls -c <cluster_name_or_ID>
     ```
     {: pre}
@@ -450,14 +450,14 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
     {: screen}
 
 4. Describe the worker node. In the **Labels output**, note the subnet ID in the label `ibm-cloud.kubernetes.io/subnet-id`, such as `5f5787a4-f560-471b-b6ce-20067ac93439` in the following example.
-    ```
+    ```sh
     kubectl describe node <worker_primary_ip>
     ```
     {: pre}
 
     Example output
-    ```
-    Name:               10.240.01.00
+    ```sh
+    NAME:               10.240.01.00
     Roles:              <none>
     Labels:             arch=amd64
     beta.kubernetes.io/arch=amd64
@@ -533,7 +533,7 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
     {: codeblock}
 
 7. Apply the updated deployment configuration file.
-    ```
+    ```sh
     kubectl apply -f with-node-affinity.yaml
     ```
     {: pre}
@@ -541,13 +541,13 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
 8. Verify that the app pods deployed to the correct worker nodes.
 
     1. List the pods in your cluster. In the output, identify a pod for your app. Note the **NODE** private IP address of the worker node that the pod is on.
-        ```
+        ```sh
         kubectl get pods -o wide
         ```
         {: pre}
 
         In this example output, the app pod `cf-py-d7b7d94db-vp8pq` is on a worker node with the IP address `10.240.01.00`.
-        ```
+        ```sh
         NAME                   READY     STATUS              RESTARTS   AGE       IP               NODE
         cf-py-d7b7d94db-vp8pq  1/1       Running             0          15d       172.30.xxx.xxx   10.240.01.00
         ```
@@ -555,7 +555,7 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
 
     2. List the worker nodes in your cluster. In the output, look for the worker nodes in the zone where you attached the public gateway. Verify that the worker node with the private IP address that you identified in the previous step is deployed in this zone.
 
-        ```
+        ```sh
         ibmcloud ks worker ls --cluster <cluster_name_or_ID>
         ```
         {: pre}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -134,12 +134,12 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: note}
 
     1. List the current patch version of your worker nodes.
-        ```
+        ```sh
         ibmcloud ks worker ls --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         OK
         ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
@@ -181,7 +181,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: pre}
 
     Example output
-    ```
+    ```sh
     NAME:   <name>
     LAST DEPLOYED: Wed Apr 18 10:02:55 2018
     NAMESPACE: default
@@ -2145,7 +2145,7 @@ reclaimPolicy: "Delete"
 
 
 ## Removing persistent storage from a cluster
-{: #cleanup}
+{: #cleanup_block}
 
 When you set up persistent storage in your cluster, you have three main components: the Kubernetes persistent volume claim (PVC) that requests storage, the Kubernetes persistent volume (PV) that is mounted to a pod and described in the PVC, and the IBM Cloud infrastructure instance, such as classic file or block storage. Depending on how you created your storage, you might need to delete all three components separately. 
 {: shortdesc}

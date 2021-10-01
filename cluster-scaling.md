@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -202,7 +202,7 @@ The cluster autoscaler add-on is not supported for baremetal worker nodes.
 
     **In the CLI**
     1. Install the `cluster-autoscaler` add-on.
-        ```
+        ```sh
         ibmcloud ks cluster addon enable cluster-autoscaler —-cluster <cluster_name>
         ```
         {: pre}
@@ -216,15 +216,15 @@ The cluster autoscaler add-on is not supported for baremetal worker nodes.
         {: screen}
 
     2. Verify that the add-on is installed and `Ready`.
-        ```
+        ```sh
         ibmcloud ks cluster addon ls --cluster <cluster_name>
         ```
         {: pre}
 
         Example output
 
-        ```
-        Name                 Version   Health State   Health Status   
+        ```sh
+        NAME                 Version   Health State   Health Status   
         cluster-autoscaler   1.0.1     normal         Addon Ready
         ```
         {: screen}
@@ -248,12 +248,12 @@ Install the {{site.data.keyword.cloud_notm}} cluster autoscaler plug-in with a H
 1. [Prepare your cluster for autoscaling](#ca_prepare_cluster).
 2. [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the **Helm version 3** client on your local machine.
 3. Add and update the Helm repo where the cluster autoscaler Helm chart is.
-    ```
+    ```sh
     helm repo add iks-charts https://icr.io/helm/iks-charts
     ```
     {: pre}
 
-    ```
+    ```sh
     helm repo update
     ```
     {: pre}
@@ -272,14 +272,14 @@ Install the {{site.data.keyword.cloud_notm}} cluster autoscaler plug-in with a H
     * **`enabled=(true|false)`**: Set the value to `true` to enable the cluster autoscaler to scale your worker pool. Set the value to `false` to stop the cluster autoscaler from scaling the worker pool. Later, if you want to [remove the cluster autoscaler](/docs/containers?topic=containers-ca#ca_rm), you must first disable each worker pool in the configmap.
 
 5. Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster. In the example command, the `autoscale` worker pool is enabled for autoscaling with the Helm chart installation. The worker pool details are added to the cluster autoscaler config map.
-    ```
+    ```sh
     helm install ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system --set workerpools[0].default.max=5,workerpools[0].autoscale.min=2,workerpools[0].default.enabled=true
     ```
     {: pre}
 
     Example output
     
-    ```
+    ```sh
     NAME: ibm-iks-cluster-autoscaler
     LAST DEPLOYED: Fri Jan 17 12:20:30 2020
     NAMESPACE: kube-system
@@ -296,7 +296,7 @@ Install the {{site.data.keyword.cloud_notm}} cluster autoscaler plug-in with a H
 6. Verify that the installation is successful.
 
     1. Check that the cluster autoscaler pod is in a **Running** state.
-        ```
+        ```sh
         kubectl get pods --namespace=kube-system | grep ibm-iks-cluster-autoscaler
         ```
         {: pre}
@@ -308,7 +308,7 @@ Install the {{site.data.keyword.cloud_notm}} cluster autoscaler plug-in with a H
         {: screen}
 
     2. Check that the cluster autoscaler service is created.
-        ```
+        ```sh
         kubectl get service --namespace=kube-system | grep ibm-iks-cluster-autoscaler
         ```
         {: pre}
@@ -320,7 +320,7 @@ Install the {{site.data.keyword.cloud_notm}} cluster autoscaler plug-in with a H
         {: screen}
 
     3. Optional: If you enabled autoscaling for a worker pool during the Helm chart installation, verify that the config map is correct by checking that the `workerPoolsConfig.json` field is updated and that the `workerPoolsConfigStatus` field shows a `SUCCESS` message.
-        ```
+        ```sh
         kubectl get cm iks-ca-configmap -n kube-system -o yaml
         ```
         {: pre}
@@ -366,7 +366,7 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler sca
 **To update the cluster autoscaler configmap and values**:
 
 1. Edit the cluster autoscaler configmap YAML file.
-    ```
+    ```sh
     kubectl edit cm iks-ca-configmap -n kube-system -o yaml
     ```
     {: pre}
@@ -407,14 +407,14 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler sca
 
 4. Save the configuration file.
 5. Get your cluster autoscaler pod.
-    ```
+    ```sh
     kubectl get pods -n kube-system
     ```
     {: pre}
 
 6. Review the **`Events`** section of the cluster autoscaler pod for a **`ConfigUpdated`** event to verify that the configmap is successfully updated. The event message for your configmap is in the following format: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
 
-    ```
+    ```sh
     kubectl describe pod -n kube-system <cluster_autoscaler_pod>
     ```
     {: pre}
@@ -454,7 +454,7 @@ When you modify a configmap parameter other than the worker pool `minSize`, `max
 1. Review the default parameters for the [cluster autoscaler configmap](#ca_addon_ref).
 
 2. Download the cluster autoscaler add-on configmap and review the parameters.
-    ```
+    ```sh
     kubectl get cm iks-ca-configmap -n kube-system -o yaml > configmap.yaml
     ```
     {: pre}
@@ -462,13 +462,13 @@ When you modify a configmap parameter other than the worker pool `minSize`, `max
 3. Open the `configmap.yaml` file and update the settings that you want to change.
 
 4. Reapply the cluster autoscaler add-on configmap.
-    ```
+    ```sh
     kubectl apply -f configmap.yaml
     ```
     {: pre}
 
 5. Verify that the pods are restarted successfully.
-    ```
+    ```sh
     kubectl get pods -n kube-system | grep autoscaler
     ```
     {: pre}
@@ -480,13 +480,13 @@ The cluster autoscaler Helm chart is deprecated. For the latest version of the c
 {: deprecated}
 
 1. To change any of the cluster autoscaler configuration values, update the config map or the Helm chart with the new values. Include the `--recreate-pods` flag so that any existing cluster autoscaler pods are re-created to pick up the custom setting changes. The following example command changes the scan interval to `2m` and enables autoscaling for the `autoscale` worker pool, with a maximum of `5` and minimum of `3` worker nodes per zone.
-    ```
+    ```sh
     helm upgrade --set scanInterval=2m --set workerpools[0].default.max=5,workerpools[0].autoscale.min=3,workerpools[0].default.enabled=true ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler -i --recreate-pods --namespace kube-system
     ```
     {: pre}
 
     To reset the Helm chart to the default values:
-    ```
+    ```sh
     helm upgrade --reset-values ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler --recreate-pods
     ```
     {: pre}
@@ -501,7 +501,7 @@ The cluster autoscaler Helm chart is deprecated. For the latest version of the c
 3. Verify that the installation is successful.
 
     1. Check that the cluster autoscaler pod is in a **Running** state.
-        ```
+        ```sh
         kubectl get pods --namespace=kube-system | grep ibm-iks-cluster-autoscaler
         ```
         {: pre}
@@ -513,7 +513,7 @@ The cluster autoscaler Helm chart is deprecated. For the latest version of the c
         {: screen}
 
     2. Check that the cluster autoscaler service is created.
-        ```
+        ```sh
         kubectl get service --namespace=kube-system | grep ibm-iks-cluster-autoscaler
         ```
         {: pre}
@@ -525,7 +525,7 @@ The cluster autoscaler Helm chart is deprecated. For the latest version of the c
         {: screen}
 
 2. Verify that the config map is correct by checking that the `workerPoolsConfig.json` field is updated and that the `workerPoolsConfigStatus` field shows a `SUCCESS` message.
-    ```
+    ```sh
     kubectl get cm iks-ca-configmap -n kube-system -o yaml
     ```
     {: pre}
@@ -613,7 +613,7 @@ For more information, see the following Kubernetes docs:
     {: codeblock}
 
 4. Deploy the pod. Because of the matching label, the pod is scheduled onto a worker node that is in the labeled worker pool. Because of the matching toleration, the pod can run on the tainted worker pool.
-    ```
+    ```sh
     kubectl apply -f pod.yaml
     ```
     {: pre}
@@ -666,13 +666,13 @@ Release updates
 
 
 1. Check the version of the cluster autoscaler add-on that is deployed in your cluster. If an update is available, review the [release notes](/docs/containers?topic=containers-ca_changelog) for the latest add-on version.
-    ```
+    ```sh
     ibmcloud ks cluster addon ls --cluster <cluster_name>
     ```
     {: pre}
 
 2. Disable the cluster autoscaler add-on. You might see a warning that resources or data might be deleted. For the cluster autoscaler update, any autoscaling operations that are in process when you disable fail. When you re-enable the add-on, the autoscaling operation is restarted for you. Existing cluster autoscaler resources like the `iks-ca-configmap` are retained even after you disable the add-on. Your worker nodes are not deleted because of disabling the add-on.
-    ```
+    ```sh
     ibmcloud ks cluster addon disable cluster-autoscaler --cluster <cluster_name>
     ```
     {: pre}
@@ -690,7 +690,7 @@ Release updates
     {: pre}
 
 3. Verify the add-on is successfully updated and `Ready`.
-    ```
+    ```sh
     ibmcloud ks cluster addon ls --cluster <cluster_name>
     ```
     {: pre}
@@ -767,19 +767,19 @@ To upgrade your cluster autoscaler release, you can update the Helm chart repo a
 Before you begin, see the [Prerequisites](#ca_helm_up_prereqs).
 
 1. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
-    ```
+    ```sh
     helm repo update
     ```
     {: pre}
 
 2. Optional: Download the latest Helm chart to your local machine. Then, extract the package and review the `release.md` file to find the latest release information.
-    ```
+    ```sh
     helm pull iks-charts/ibm-iks-cluster-autoscaler
     ```
     {: pre}
 
 3. Find the name of the cluster autoscaler release that you installed in your cluster.
-    ```
+    ```sh
     helm list -n <namespace> | grep cluster-autoscaler
     ```
     {: pre}
@@ -791,20 +791,20 @@ Before you begin, see the [Prerequisites](#ca_helm_up_prereqs).
     {: screen}
 
 4. Upgrade the cluster autoscaler release to the latest version.
-    ```
+    ```sh
     helm upgrade --force --recreate-pods <helm_chart_name>  iks-charts/ibm-iks-cluster-autoscaler
     ```
     {: pre}
 
 5. Verify that the [cluster autoscaler configmap](#ca_cm) `workerPoolsConfig.json` section is set to `"enabled": true` for the worker pools that you want to scale.
-    ```
+    ```sh
     kubectl describe cm iks-ca-configmap -n kube-system
     ```
     {: pre}
 
     Example output
-    ```
-    Name:         iks-ca-configmap
+    ```sh
+    NAME:         iks-ca-configmap
     Namespace:    kube-system
     Labels:       <none>
     Annotations:  kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"v1","data":{"workerPoolsConfig.json":"[\n {\"name\": \"docs\",\"minSize\": 1,\"maxSize\": 3,\"enabled\":true}\n]\n"},"kind":"ConfigMap",...
@@ -830,13 +830,13 @@ If you do not want to automatically scale your worker pools, you can uninstall t
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Optional: To refer to your autoscaling settings later, make a backup of your configmap.
-    ```
+    ```sh
     kubectl get cm iks-ca-configmap -o yaml > backup_configmap.yaml
     ```
     {: pre}
 
 1. In the [cluster autoscaler configmap](#ca_cm), remove the worker pool by setting the `"enabled"` value to `false`.
-    ```
+    ```sh
     kubectl edit cm iks-ca-configmap -n kube-system
     ```
     {: pre}
@@ -869,13 +869,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
     **Add-on**
     1. Disable the add-on.
-    ```
+    ```sh
     ibmcloud ks cluster addon disable cluster-autoscaler --cluster <cluster_name>
     ```
     {: pre}
 
     2. Verify the add-on is disabled.
-    ```
+    ```sh
     ibmcloud ks cluster addon ls --cluster <cluster_name>
     ```
     {: pre}

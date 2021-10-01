@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -98,13 +98,13 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
             {: pre}
 
         2. Set the `DATASTORE_TYPE` environment variable to `kubernetes`.
-            ```
+            ```sh
             export DATASTORE_TYPE=kubernetes
             ```
             {: pre}
 
     * Kubernetes version 1.18 and earlier: Download the `kubeconfig` configuration file for your cluster. Include the `--network` option to download the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
-        ```
+        ```sh
         ibmcloud ks cluster config --cluster <cluster_name_or_ID> --network
         ```
         {: pre}
@@ -162,7 +162,7 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
     {: pre}
 
     Example output
-    ```
+    ```sh
     NAME
     10.176.48.106
     10.176.48.107
@@ -380,14 +380,14 @@ Before you begin, [install and configure the Calico CLI, and set the context for
 
 1. Clone the `IBM-Cloud/kube-samples` repository.
 
-    ```
+    ```sh
     git clone https://github.com/IBM-Cloud/kube-samples.git
     ```
     {: pre}
 
 2. Navigate to the public policy directory for the region that your cluster is in. Example command for a cluster in US South:
 
-    ```
+    ```sh
     cd <filepath>/IBM-Cloud/kube-samples/calico-policies/public-network-isolation/us-south
     ```
     {: pre}
@@ -442,14 +442,14 @@ Before you begin, [install and configure the Calico CLI, and set the context for
 
 1. Clone the `IBM-Cloud/kube-samples` repository.
 
-    ```
+    ```sh
     git clone https://github.com/IBM-Cloud/kube-samples.git
     ```
     {: pre}
 
 2. Navigate to the `calico-v3` private policy directory for the region that your cluster is in. Example command for a cluster in US South:
 
-    ```
+    ```sh
     cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3/us-south
     ```
     {: pre}
@@ -674,7 +674,7 @@ Before you begin, [install and configure the Calico CLI, and set the context for
 
     2. Apply the policy. The Kubernetes policy is automatically converted to a Calico `NetworkPolicy` so that Calico can apply it as `Iptables` rules. The Calico network policy name has the `knp.default` prefix. To update the policy in the future, update the Kubernetes policy and the updates are automatically applied to the Calico network policy.
 
-        ```
+        ```sh
         kubectl apply -f <policy_name>.yaml
         ```
         {: pre}

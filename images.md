@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -97,7 +97,7 @@ To deploy a container into the **default** namespace of your cluster:
 
 3. Create the deployment in your cluster.
 
-    ```
+    ```sh
     kubectl apply -f <deployment>.yaml
     ```
     {: pre}
@@ -181,7 +181,7 @@ Steps:
 
 3. Save your changes.
 4. Create the deployment in your cluster.
-    ```
+    ```sh
     kubectl apply -f mypod.yaml
     ```
     {: pre}
@@ -261,13 +261,13 @@ When you enable image security enforcement, {{site.data.keyword.containerlong_no
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. List the image policies that apply globally to the cluster. For an example configuration, see the [Portieris policy documentation](https://github.com/IBM/portieris/blob/master/helm/portieris/templates/policies.yaml#L66){: external}.
-    ```
+    ```sh
     kubectl get ClusterImagePolicy
     ```
     {: pre}
 
 2. List the image policies that apply to particular namespaces within the cluster. For an example configuration, see the [Portieris policy documentation](https://github.com/IBM/portieris/blob/master/helm/portieris/templates/policies.yaml#L14){: external}.
-    ```
+    ```sh
     kubectl get ImagePolicy --all-namespaces
     ```
     {: pre}

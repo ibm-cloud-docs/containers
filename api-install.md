@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -205,7 +205,7 @@ You can also use the [API swagger JSON file](https://containers.cloud.ibm.com/gl
     </tbody>
     </table>
 
-    Example output:
+    Example output
 
     ```
     {
@@ -281,7 +281,7 @@ You can also use the [API swagger JSON file](https://containers.cloud.ibm.com/gl
     </tbody>
     </table>
 
-    Example output:
+    Example output
 
     ```
     {
@@ -386,7 +386,7 @@ The following instructions require public network access in your cluster to conn
     </tbody>
     </table>
 
-    Example output:
+    Example output
     ```
     {
     "delegated_refresh_token": <delegated_refresh_token>
@@ -420,7 +420,7 @@ The following instructions require public network access in your cluster to conn
     </tbody>
     </table>
 
-    Example output:
+    Example output
     ```
     {
     "access_token": "<iam_access_token>",
@@ -512,7 +512,7 @@ The following instructions require public network access in your cluster to conn
     </tbody>
     </table>
 
-    Example output:
+    Example output
     ```
     {
     "major": "1",

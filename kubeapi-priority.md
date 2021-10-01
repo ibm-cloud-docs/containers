@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -45,14 +45,14 @@ You can create your own flow schema and priorities, but do not modify the defaul
 Follow the steps to review the flow schemas and priority levels set by {{site.data.keyword.containerlong_notm}}.
 
 1. List all flow schemas in your cluster, including those set by {{site.data.keyword.containerlong_notm}}, and their corresponding priority levels .
-    ```
+    ```sh
     kubectl get flowschemas
     ```
     {: pre} 
 
 
 2. Review the details of a particular flow schema including which resources can make prioritized API requests, what type of API requests can be made, and what objects the requests can modify.
-    ```
+    ```sh
     kubectl describe flowschema <flow-schema-name>
     ```
     {: pre}

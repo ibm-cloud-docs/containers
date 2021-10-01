@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -129,7 +129,7 @@ First, check for and release individual IP addresses that were not cleanly remov
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     Check complete; found 0 problems.
     ```
@@ -137,19 +137,19 @@ First, check for and release individual IP addresses that were not cleanly remov
 
 5. Optional: To verify that the data store was successfully unlocked and that IP addresses are now available for assignment, create a pod and check that it starts correctly.
     1. For example, create a simple NGNINX pod.
-    ```
+    ```sh
     kubectl run test --image=nginx --generator=run-pod/v1
     ```
     {: pre}
 
     2. Verify that the pod has an IP address and is running successfully.
-    ```
+    ```sh
     kubectl get po test
     ```
     {: pre}
 
     3. Delete the test pod.
-    ```
+    ```sh
     kubectl delete pod test
     ```
     {: pre}

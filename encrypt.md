@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, encrypt, security, kms, root key, crk
 
@@ -146,32 +146,32 @@ You can enable a KMS provider or update the instance or root key that encrypts s
 
 1. Complete the [prerequisite steps](#kms_prereqs) to create a KMS instance and root key.
 2. Get the ID of the KMS instance that you previously created.
-    ```
+    ```sh
     ibmcloud ks kms instance ls
     ```
     {: pre}
 
 3. Get the **ID** of the root key that you previously created.
-    ```
+    ```sh
     ibmcloud ks kms crk ls --instance-id <KMS_instance_ID>
     ```
     {: pre}
 
 4. Enable the KMS provider to encrypt secrets in your cluster. Fill in the flags with the information that you previously retrieved. The KMS provider's private cloud service endpoint is used by default to download the encryption keys. To use the public cloud service endpoint instead, include the `--public-endpoint` flag. The enablement process can take some time to complete.<p class="important">During the enablement, you might not be able to access the Kubernetes master such as to update YAML configurations for deployments.</p>
-    ```
+    ```sh
     ibmcloud ks kms enable -c <cluster_name_or_ID> --instance-id <kms_instance_ID> --crk <root_key_ID> [--public-endpoint]
     ```
     {: pre}
 
 5. Verify that the KMS enablement process is finished. The process is finished when that the **Master Status** is **Ready** and **Key management service** is **enabled**.
-    ```
+    ```sh
     ibmcloud ks cluster get -c <cluster_name_or_ID>
     ```
     {: pre}
 
     Example output when the enablement is in progress
-    ```
-    Name:                   <cluster_name>   
+    ```sh
+    NAME:                   <cluster_name>   
     ID:                     <cluster_ID>   
     ...
     Master Status:          Key management service feature enablement in progress.  
@@ -179,8 +179,8 @@ You can enable a KMS provider or update the instance or root key that encrypts s
     {: screen}
 
     Example output when the master is ready
-    ```
-    Name:                   <cluster_name>   
+    ```sh
+    NAME:                   <cluster_name>   
     ID:                     <cluster_ID>   
     ...
     Master Status:          Ready (1 min ago)
@@ -250,14 +250,14 @@ Before you begin
 To verify secret encryption by disabling a root key
 
 1. [Enable KMS encryption in your cluster](#keyprotect). To check that KMS encryption is enabled, verify that the **Key Management Service** status is set to `enabled` in the output of the following command.
-    ```
+    ```sh
     ibmcloud ks cluster get -c <cluster_name_or_ID>
     ```
     {: pre}
 
 2. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 3. Verify that you can list the secrets in your cluster.
-    ```
+    ```sh
     kubectl get secrets --all-namespaces
     ```
     {: pre}
@@ -269,19 +269,19 @@ To verify secret encryption by disabling a root key
     {: note}
 
 6. Try to list your secrets. You get a timeout error because you can no longer connect to your cluster. If you try to set the context for your cluster by running `ibmcloud ks cluster config`, the command fails.
-    ```
+    ```sh
     kubectl get secrets --all-namespaces
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     Unable to connect to the server: dial tcp 169.48.110.250:32346: i/o timeout
     ```
     {: screen}
 
 7. For clusters that run Kubernetes version `1.19` or later, check that your cluster is in a **warning** state. Your cluster remains in this state and is unusable until you enable your root key again.
-    ```
+    ```sh
     ibmcloud ks cluster get -c <cluster_name_or_ID>
     ```
     {: pre}
@@ -347,7 +347,7 @@ You can manage the encryption of the worker nodes by enabling a KMS provider at 
 4. Verify that your worker pool is encrypted by reviewing the worker pool details.
     - **UI**: After selecting your cluster from the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Worker pools**. Then, click your worker pool.
     - **CLI**: Review the **KMS** and **CRK** fields in the output of the following command.
-        ```
+        ```sh
         ibmcloud ks worker-pool get --name <worker_pool_name> --cluster <cluster_name_or_ID>
         ```
         {: codeblock}

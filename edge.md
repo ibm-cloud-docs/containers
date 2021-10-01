@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, affinity, taint
 
@@ -56,25 +56,25 @@ To create an edge node worker pool,
 
 2. Verify that the worker pool and worker nodes have the `dedicated=edge` label.
     * To check the worker pool
-        ```
+        ```sh
         ibmcloud ks worker-pool get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
         ```
         {: pre}
 
     * To check individual worker nodes, review the **Labels** field of the output of the following command.
-        ```
+        ```sh
         kubectl describe node <worker_node_private_IP>
         ```
         {: pre}
 
 3. Retrieve all existing NLBs and ALBs in the cluster.
-    ```
+    ```sh
     kubectl get services --all-namespaces | grep LoadBalancer
     ```
     {: pre}
 
     In the output, note the **Namespace** and **Name** of each load balancer service. For example, the following output shows four load balancer services: one public NLB in the `default` namespace, and one private and two public ALBs in the `kube-system` namespace.
-    ```
+    ```sh
     NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
     default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                                11m
     kube-system   private-crdf253b6025d64944ab99ed63bb4567b6-alb1  LoadBalancer   172.21.158.78    10.185.94.150   80:31015/TCP,443:31401/TCP,9443:32352/TCP   25d
@@ -85,7 +85,7 @@ To create an edge node worker pool,
 
 4. Using the output from the previous step, run the following command for each NLB and ALB. This command redeploys the NLB or ALB to an edge worker node.You can deploy both public and private NLBs and ALBs to the edge worker nodes.
 
-    ```
+    ```sh
     kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
     ```
     {: pre}
@@ -100,7 +100,7 @@ To create an edge node worker pool,
 
     * NLB pods
         1. Confirm that the NLB pods are deployed to edge nodes. Search for the external IP address of the load balancer service that is listed in the output of step 3. Replace the periods (`.`) with hyphens (`-`). Example for the `webserver-lb` NLB that has an external IP address of `169.46.17.2`:
-        ```
+        ```sh
         kubectl describe nodes -l dedicated=edge | grep "169-46-17-2"
         ```
         {: pre}
@@ -113,7 +113,7 @@ To create an edge node worker pool,
         {: screen}
 
     2. Confirm that no NLB pods are deployed to non-edge nodes. Example for the `webserver-lb` NLB that has an external IP address of `169.46.17.2`:
-        ```
+        ```sh
         kubectl describe nodes -l dedicated!=edge | grep "169-46-17-2"
         ```
         {: pre}
@@ -123,7 +123,7 @@ To create an edge node worker pool,
 
     * ALB pods:
         1. Confirm that all ALB pods are deployed to edge nodes. Each public and private ALB that is enabled in your cluster has two pods.
-        ```
+        ```sh
         kubectl describe nodes -l dedicated=edge | grep alb
         ```
         {: pre}
@@ -140,7 +140,7 @@ To create an edge node worker pool,
         {: screen}
 
     2. Confirm that no ALB pods are deployed to non-edge nodes.
-        ```
+        ```sh
         kubectl describe nodes -l dedicated!=edge | grep alb
         ```
         {: pre}
@@ -150,19 +150,19 @@ To create an edge node worker pool,
 
 6. If NLB or ALB pods are still deployed to non-edge nodes, you can delete the pods so that they redeploy to edge nodes. **Important**: Delete only one pod at a time, and verify that the pod is rescheduled onto an edge node before you delete other pods.
     1. Delete a pod. Example for if one of the `webserver-lb` NLB pods did not schedule to an edge node:
-    ```
+    ```sh
     kubectl delete pod ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-wz6dg
     ```
     {: pre}
 
     2. Verify that the pod is rescheduled onto an edge worker node. Rescheduling is automatic, but might take a few minutes. Example for the `webserver-lb` NLB that has an external IP address of `169.46.17.2`:
-    ```
+    ```sh
     kubectl describe nodes -l dedicated=edge | grep "169-46-17-2"
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+    ```sh
     ibm-system                 ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-wz6dg                 5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
     ibm-system                 ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-2z64r                 5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
     ```
@@ -192,13 +192,13 @@ To prevent other workloads from running on edge worker nodes,
 1. Apply a taint to the worker nodes with the `dedicated=edge` label. The taint prevents pods from running on the worker node and removes pods that do not have the `dedicated=edge` label from the worker node. The pods that are removed are redeployed to other worker nodes with capacity.
 
     To apply a taint to all existing and future worker nodes in a worker pool:
-    ```
+    ```sh
     ibmcloud ks worker-pool taint set -c <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> --taint dedicated=edge:NoExecute
     ```
     {: pre}
 
     To apply a taint to individual worker nodes:
-    ```
+    ```sh
     kubectl taint node -l dedicated=edge dedicated=edge:NoExecute
     ```
     {: pre}
@@ -206,12 +206,12 @@ To prevent other workloads from running on edge worker nodes,
     Now, only pods with the `dedicated=edge` toleration are deployed to your edge worker nodes.
 
 2. Verify that your edge nodes are tainted.
-    ```
+    ```sh
     kubectl describe nodes -l dedicated=edge | egrep "Taints|Hostname"
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     Taints:             dedicated=edge:NoExecute
         Hostname:    10.176.48.83
@@ -225,13 +225,13 @@ To prevent other workloads from running on edge worker nodes,
 4. Optional: You can remove a taint from the worker nodes.
 
     To remove all taints from all worker nodes in a worker pool,
-    ```
+    ```sh
     ibmcloud ks worker-pool taint rm -c <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
     ```
     {: pre}
 
     To remove individual taints from individual worker nodes,
-    ```
+    ```sh
     kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-
     ```
     {: pre}
@@ -258,12 +258,12 @@ Before you begin
 To create an edge node worker pool in a gateway-enabled classic cluster,
 
 1. Retrieve all of the **Worker Zones** that your existing worker nodes are connected to.
-    ```
+    ```sh
     ibmcloud ks cluster get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     ...
     Worker Zones:                   dal10, dal12
@@ -271,50 +271,50 @@ To create an edge node worker pool in a gateway-enabled classic cluster,
     {: screen}
 
 2. For each zone, list available private VLANs. Note the private VLAN ID that you want to use.
-    ```
+    ```sh
     ibmcloud ks vlan ls --zone <zone>
     ```
     {: pre}
 
 3. For each zone, review the available [flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
-    ```
+    ```sh
     ibmcloud ks flavors --zone <zone>
     ```
     {: pre}
 
 4. Create a worker pool for your edge worker nodes. Your worker pool includes the machine type, the number of worker nodes that you want to have, and the edge labels that you want to add to the worker nodes. When you create the worker pool, your worker nodes are not yet provisioned. Continue with the next step to add worker nodes to your edge worker pool.
-    ```
+    ```sh
     ibmcloud ks worker pool create classic --cluster <cluster_name_or_ID> --name edge --flavor <flavor> --size-per-zone 2 --labels dedicated=edge,node-role.kubernetes.io/edge=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
     ```
     {: pre}
 
 5. Deploy worker nodes in the `edge` worker pool by adding the zones that you previously retrieved to the worker pool. Repeat this command for each zone. All worker nodes in this `edge` pool are connected to a private VLAN only.
-    ```
+    ```sh
     ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool edge --private-vlan <private_VLAN_ID>
     ```
     {: pre}
 
 6. Verify that the worker pool and worker nodes are provisioned and have the `dedicated=edge` label.
     * To check the worker pool:
-        ```
+        ```sh
         ibmcloud ks worker-pool get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
         ```
         {: pre}
 
     * To check individual worker nodes, review the **Labels** field of the output of the following command. Your edge nodes are ready when the **Status** is `Ready`.
-        ```
+        ```sh
         kubectl describe node <worker_node_private_IP>
         ```
         {: pre}
 
 7. Retrieve all existing ALBs in the cluster. In the output, note the **Namespace** and **Name** of each ALB.
-    ```
+    ```sh
     kubectl get services --all-namespaces | grep alb
     ```
     {: pre}
 
     Example output
-    ```
+    ```sh
     NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
     kube-system   private-crdf253b6025d64944ab99ed63bb4567b6-alb1  LoadBalancer   172.21.158.78    10.xxx.xx.xxx   80:31015/TCP,443:31401/TCP,9443:32352/TCP   25d
     kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.xx.xxx.xx   80:30286/TCP,443:31363/TCP                  25d
@@ -322,7 +322,7 @@ To create an edge node worker pool in a gateway-enabled classic cluster,
     {: screen}
 
 8. Using the output from the previous step, run the following command for each ALB. This command redeploys the ALB to an edge worker node.
-    ```
+    ```sh
     kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
     ```
     {: pre}
@@ -335,7 +335,7 @@ To create an edge node worker pool in a gateway-enabled classic cluster,
 
 9. Verify that ALB pods are scheduled onto edge nodes and are not scheduled onto compute nodes.
     1. Confirm that all ALB pods are deployed to edge nodes. Each public and private ALB that is enabled in your cluster has two pods.
-    ```
+    ```sh
     kubectl describe nodes -l dedicated=edge | grep alb
     ```
     {: pre}
@@ -350,7 +350,7 @@ To create an edge node worker pool in a gateway-enabled classic cluster,
     {: screen}
 
     2. Confirm that no ALB pods are deployed to non-edge nodes.
-    ```
+    ```sh
     kubectl describe nodes -l dedicated!=edge | grep alb
     ```
     {: pre}
@@ -360,13 +360,13 @@ To create an edge node worker pool in a gateway-enabled classic cluster,
 
 10. If ALB pods are still deployed to non-edge nodes, you can delete the pods so that they redeploy to edge nodes. **Important**: Delete only one pod at a time, and verify that the pod is rescheduled onto an edge node before you delete other pods.
     1. Delete a pod.
-        ```
+        ```sh
         kubectl delete pod <pod_name>
         ```
         {: pre}
 
     2. Verify that the pod is rescheduled onto an edge worker node. Rescheduling is automatic, but might take a few minutes.
-        ```
+        ```sh
         kubectl describe nodes -l dedicated=edge | grep "<pod_name>"
         ```
         {: pre}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: containers
 subcollection: containers
@@ -101,35 +101,11 @@ subcollection: containers
 
 [Overview of use cases](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro)
 
-[Financial services use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_finance#cs_uc_finance)
-
-* [Mortgage company trims costs and accelerates regulatory compliance](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage)
-
-* [Payment tech company streamlines developer productivity, deploying AI-enabled tools to their partners 4 times faster](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech)
-
-[Healthcare use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_health#cs_uc_health)
-
-* [Healthcare provider migrates workloads from inefficient VMs to Ops-friendly containers for reporting and patient systems](/docs/containers?topic=containers-cs_uc_health#uc_migrate)
-
-* [Research nonprofit securely hosts sensitive data while it grows research with partners](/docs/containers?topic=containers-cs_uc_health#uc_research)
-
-[Retail use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_retail#cs_uc_retail)
-
-* [Brick-and-mortar retailer shares data, by using APIs with global business partners to drive omnichannel sales](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)
-
-* [Traditional grocer increases customer traffic and sales with digital insights](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)
-
 [Transportation use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_transport#cs_uc_transport)
 
 * [Shipping company increases availability of worldwide systems for business partner ecosystem](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)
 
 * [Airline delivers innovative Human Resources (HR) benefits site in under 3 weeks](/docs/containers?topic=containers-cs_uc_transport#uc_airline)
-
-[Government use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_gov#cs_uc_gov)
-
-* [Regional government improves collaboration and velocity with community Developers who combine public-private data](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup)
-
-* [Large public port secures exchange of port data and shipping manifests that connect public and private organizations](/docs/containers?topic=containers-cs_uc_gov#uc_port)
 
 
 ## Learning paths
@@ -2067,7 +2043,7 @@ subcollection: containers
 
     * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class)
 
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-file_storage#cleanup)
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-file_storage#cleanup_file)
 
     * [Understanding your storage removal options](/docs/containers?topic=containers-file_storage#storage_delete_options_file)
 
@@ -2131,7 +2107,7 @@ subcollection: containers
 
     * [Mounting block storage with an `XFS` file system](/docs/containers?topic=containers-block_storage#xfs)
 
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-block_storage#cleanup)
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-block_storage#cleanup_block)
 
     * [Understanding your storage removal options](/docs/containers?topic=containers-block_storage#storage_delete_options_block)
 
@@ -2169,7 +2145,7 @@ subcollection: containers
 
 * [Storage class reference](/docs/containers?topic=containers-vpc-block#vpc-block-reference)
 
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup)
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup_block_vpc)
 
     * [Understanding your storage removal options](/docs/containers?topic=containers-vpc-block#storage_delete_options_block_vpc)
 
@@ -4657,8 +4633,6 @@ subcollection: containers
 
 [Why do my pods fail to deploy after applying a pod security policy?](/docs/containers?topic=containers-ts-app-psp#ts-app-psp)
 
-[Why do pods remain in pending state?](/docs/containers?topic=containers-ts-app-pod-pending#ts-app-pod-pending)
-
 [Why do pods repeatedly fail to restart or are unexpectedly removed?](/docs/containers?topic=containers-ts-app-pod-fail#ts-app-pod-fail)
 
 * [Fixing container resource limits](/docs/containers?topic=containers-ts-app-pod-fail#pod-fail-resource-limits)
@@ -4666,10 +4640,6 @@ subcollection: containers
 * [Fixing pod replacement by higher priority pods](/docs/containers?topic=containers-ts-app-pod-fail#pod-fail-higher-priority)
 
 [Why does binding a service to a cluster result in a same name error?](/docs/containers?topic=containers-ts-app-svc-bind-name#ts-app-svc-bind-name)
-
-[Why does binding a service to a cluster results in service not found error?](/docs/containers?topic=containers-ts-app-svc-bind-not-found#ts-app-svc-bind-not-found)
-
-[Why does binding a service to a cluster results in service does not support service keys error?](/docs/containers?topic=containers-ts-app-svc-key#ts-app-svc-key)
 
 [Why can't I install a Helm chart with updated configuration values?](/docs/containers?topic=containers-ts-app-helm-install#ts-app-helm-install)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -79,7 +79,7 @@ To install the CLIs:
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     Listing installed plug-ins...
 
@@ -113,7 +113,7 @@ Using both {{site.data.keyword.openshiftlong_notm}} and Ubuntu {{site.data.keywo
 1. If you already have a cluster, check that the version of your client `kubectl` CLI matches the version of the cluster API server.
     1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
     2. Compare the client and server versions. If the client does not match the server, continue to the next step. If the versions match, you already installed the appropriate version of `kubectl`.
-        ```
+        ```sh
         kubectl version --short
         ```
         {: pre}
@@ -217,25 +217,25 @@ To run `kubectl` commands to manage your cluster:
     {: pre}
 
 4. List all of the clusters in the account to get the name of the cluster. If you have only an {{site.data.keyword.cloud_notm}} IAM service access role and cannot view clusters, ask your cluster admin for the IAM platform **Viewer** role, or the cluster name and ID.
-    ```
+    ```sh
     ibmcloud ks cluster ls
     ```
     {: pre}
 
 5. Set the cluster as the context for this session. Complete these configuration steps every time that you work with your cluster. The following command sets the context by downloading and adding the `kubeconfig` file for your cluster to your existing `kubeconfig` file in `~/.kube/config` (`<user_profile>/.kube/config` in Windows) or the [last file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig). Note that any pre-existing `kubeconfig` files are not merged automatically.
 
-    ```
+    ```sh
     ibmcloud ks cluster config --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 6. Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
-    ```
+    ```sh
     kubectl config current-context
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     <cluster_name>/<cluster_ID>
     ```
@@ -265,32 +265,32 @@ Before you begin:
 
 To set the Kubernetes context for multiple clusters:
 1. Get the **Name** or **ID** of the clusters that you want to set the Kubernetes context for.
-    ```
+    ```sh
     ibmcloud ks cluster ls
     ```
     {: pre}
 
 2. Add the `kubeconfig` file for the cluster to the Kubernetes context for your command line. The Kubernetes context is set by the `~/.kube/config` file (`<user_profile>/.kube/config` in Windows), or the [last file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig), on your local machine.
-    ```
+    ```sh
     ibmcloud ks cluster config -c <cluster_name_or_ID>
     ```
     {: pre}
 
 3. Repeat step 2 for each cluster that you want to set the Kubernetes context for.
 4. Check which cluster your command line is currently set to use.
-    ```
+    ```sh
     kubectl config current-context
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     <cluster_name>/<cluster_ID>
     ```
     {: pre}
 
 5. List the available Kubernetes contexts and note the **Name** of a cluster context that you want to use.
-    ```
+    ```sh
     kubectl config get-contexts
     ```
     {: pre}
@@ -299,19 +299,19 @@ To set the Kubernetes context for multiple clusters:
 
     *   **Switch the Kubernetes context**: Use the context of a different cluster. Replace `<context>` with the context that you previously retrieved.
 
-        ```
+        ```sh
         kubectl config use-context <context>
         ```
         {: pre}
 
     *   **Specify the Kubernetes context per command**: For clusters that run the same version of Kubernetes as other clusters, you can switch between contexts by specifying the context in each `kubectl` command. Replace `<context>` with the context that you previously retrieved.
-        ```
+        ```sh
         kubectl --context=<context> <command>
         ```
         {: pre}
 
         Example:
-        ```
+        ```sh
         kubectl --context=mycluster/abc123 get pods
         ```
         {: pre}
@@ -328,7 +328,7 @@ Instead of merging the `kubeconfig` file of [multiple clusters](#cli_config_mult
 {: shortdesc}
 
 1. Get the **Name** and **ID** of the cluster that you want to download a separate `kubeconfig` file for.
-    ```
+    ```sh
     ibmcloud ks clusters
     ```
     {: pre}
@@ -340,7 +340,7 @@ Instead of merging the `kubeconfig` file of [multiple clusters](#cli_config_mult
     {: pre}
 
 3. Download the `kubeconfig` file to the temporary directory that you just created.
-    ```
+    ```sh
     ibmcloud ks cluster config -c <cluster_name_or_ID>
     ```
     {: pre}
@@ -352,7 +352,7 @@ Instead of merging the `kubeconfig` file of [multiple clusters](#cli_config_mult
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         /tmp/tmp.zhK6bD5Lpw
         ```
@@ -365,7 +365,7 @@ Instead of merging the `kubeconfig` file of [multiple clusters](#cli_config_mult
         {: pre}
 
 5. Verify that the Kubernetes context is set for your cluster, such as by listing pods.
-    ```
+    ```sh
     kubectl get pods
     ```
     {: pre}
@@ -425,7 +425,7 @@ To update the CLIs:
 
     3. Initialize the CLI.
 
-        ```
+        ```sh
         ibmcloud ks init
         ```
         {: pre}
@@ -550,19 +550,19 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
 2. A session starts and automatically logs you in to the {{site.data.keyword.cloud_notm}} CLI with your current account credentials.
 3. Target your session context to the cluster that you want to work with so that you can manage the cluster with `kubectl` commands.
     1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
-        ```
+        ```sh
         ibmcloud ks cluster config --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
     2. Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
-        ```
+        ```sh
         kubectl config current-context
         ```
         {: pre}
 
-        Example output:
-        ```
+        Example output
+        ```sh
         <cluster_name>/<cluster_ID>
         ```
         {: screen}

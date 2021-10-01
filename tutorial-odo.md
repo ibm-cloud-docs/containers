@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, odo
 
@@ -68,7 +68,7 @@ After you complete the [prerequisites](#odo-prereqs) install the CLI and select 
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     ✓  Project 'nodejs-test' is ready for use
     ✓  New project created and now using project: nodejs-test
@@ -80,7 +80,7 @@ After you complete the [prerequisites](#odo-prereqs) install the CLI and select 
     If you do not have an existing NodeJS app and want to download a start kit in a later step, the directory must be empty.
     {: note}
 
-    ```
+    ```sh
     cd nodejs-test-app
     ```
     {: pre}
@@ -91,7 +91,7 @@ After you complete the [prerequisites](#odo-prereqs) install the CLI and select 
     ```
     {: pre}
 
-    1. Select the `nodejs` component, as shown in the following example. Example output:
+    1. Select the `nodejs` component, as shown in the following example. Example output
         ```
         ? Which devfile component type do you wish to create  [Use arrows to move, type to filter]
         java-openliberty
@@ -137,7 +137,7 @@ You might wonder, how can the microservice be pushed to the cluster without a Do
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     Validation
     ✓  Validating the devfile [710378ns]
@@ -163,19 +163,19 @@ You might wonder, how can the microservice be pushed to the cluster without a Do
     {: screen}
 
 2. Verify that the component is running in your cluster. You can also view the component from your cluster's Kubernetes dashboard.
-    ```
+    ```sh
     kubectl get all -n nodejs-test
     ```
     {: pre}
 
 3. Expose your NodeJS microservice so that users can access the microservice from outside the cluster.
     1. Get your cluster's Ingress subdomain.
-        ```
+        ```sh
         ibmcloud ks cluster get -c <cluster> | grep Subdomain
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         Ingress Subdomain: <cluster_name>-<ID>.<region>.containers.appdomain.cloud  
         ```

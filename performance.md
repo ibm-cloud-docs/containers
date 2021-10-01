@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, kernel
 
@@ -125,7 +125,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: codeblock}
 
 2. Apply the daemon set to your worker nodes. The changes are applied immediately.
-    ```
+    ```sh
     kubectl apply -f worker-node-kernel-settings.yaml
     ```
     {: pre}
@@ -135,7 +135,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 To revert your worker nodes' `sysctl` parameters to the default values set by {{site.data.keyword.containerlong_notm}}:
 
 1. Delete the daemon set. The `initContainers` that applied the custom settings are removed.
-    ```
+    ```sh
     kubectl delete ds kernel-optimization
     ```
     {: pre}
@@ -176,7 +176,7 @@ Before you begin, ensure you have the [**Manager** {{site.data.keyword.cloud_not
     {: codeblock}
 
 2. Patch each of your deployments.
-    ```
+    ```sh
     kubectl patch deployment <deployment_name> --patch pod-patch.yaml
     ```
     {: pre}
@@ -196,12 +196,12 @@ The metrics provider pod also has a `nanny` container that scales the `metrics-s
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Open the `metrics-server` configmap YAML.
-    ```
+    ```sh
     kubectl edit configmap metrics-server-config -n kube-system
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```
     apiVersion: v1
     data:
@@ -249,7 +249,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: screen}
 
 5. Open the `metrics-server` configmap YAML.
-    ```
+    ```sh
     kubectl edit configmap metrics-server-config -n kube-system
     ```
     {: pre}
@@ -356,26 +356,26 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: codeblock}
 
 2. Apply the file that you previously created.
-    ```
+    ```sh
     kubectl apply -f hugepages-ds.yaml
     ```
     {: pre}
 
 3. Verify that the pods are **Running**.
-    ```
+    ```sh
     kubectl get pods
     ```
     {: pre}
 
 4. Restart the kubelet that runs on each worker node by rebooting the worker nodes. Do **not** reload the worker node to restart the kubelet. Reloading the worker node before the kubelet picks up on the huge pages enablement causes the enablement to fail.
     1. List the worker nodes in your cluster.
-        ```
+        ```sh
         ibmcloud ks worker ls -c <cluster_name_or_ID>
         ```
         {: pre}
 
     2. Reboot the worker nodes. You can reboot multiple worker nodes by including multiple `-w` flags, but make sure to leave enough worker nodes running at the same time for your apps to avoid an outage.
-        ```
+        ```sh
         ibmcloud ks worker reboot -c <cluster_name_or_ID> -w <worker1_ID> -w <worker2_ID>
         ```
         {: pre}
@@ -410,20 +410,20 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: codeblock}
 
 6. Apply the pod file that you previously created.
-    ```
+    ```sh
     kubectl apply -f hugepages-pod.yaml
     ```
     {: pre}
 
 7. Verify that your pod uses the huge pages resources.
     1. Check that your pod is **Running**. The pod does not run if no worker nodes with huge pages are available.
-        ```
+        ```sh
         kubectl get pods
         ```
         {: pre}
 
     2. Log in to the pod.
-        ```
+        ```sh
         kubectl exec -it <pod> /bin/sh
         ```
         {: pre}
@@ -434,14 +434,14 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         ```
         {: pre}
 
-        Example output:
+        Example output
         ```
         hugepages-1048576kB  hugepages-2048kB
         ```
         {: screen}
 
 8. Optional: Remove the enablement daemon set. Keep in mind that you must re-create the daemon set if you need to update, reload, replace, or add worker nodes with huge pages later.
-    ```
+    ```sh
     kubectl -n kube-system delete daemonset hugepages-enablement
     ```
     {: pre}
@@ -530,7 +530,7 @@ spec:
 
 
 1. Edit the `calico-config` configmap resource.
-    ```
+    ```sh
     kubectl edit cm calico-config -n kube-system
     ```
     {: pre}
@@ -590,24 +590,24 @@ spec:
     {: codeblock}
 
 3. Apply the MTU changes to your cluster master by refreshing the master API server. It might take several minutes for the master to refresh.
-    ```
+    ```sh
     ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 4. Verify that the master refresh is completed. When the refresh is complete, the **Master Status** changes to `Ready`.
-    ```
+    ```sh
     ibmcloud ks cluster get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 5. In the `data` section of the output, verify that the `veth_mtu` field shows the new MTU value for Calico that you specified in step 2.
-    ```
+    ```sh
     kubectl get cm -n kube-system calico-config -o yaml
     ```
     {: pre}
 
-    Example output:
+    Example output
     ```yaml
     apiVersion: v1
     data:
@@ -643,7 +643,7 @@ If you must use `hostPorts`, do not disable the port map plug-in.
 To disable the port map plug-in:
 
 1. Edit the `calico-config` configmap resource.
-    ```
+    ```sh
     kubectl edit cm calico-config -n kube-system
     ```
     {: pre}
@@ -690,7 +690,7 @@ To disable the port map plug-in:
     {: important}
 
 3. Apply the change to your cluster by restarting all `calico-node` pods.
-    ```
+    ```sh
     kubectl rollout restart daemonset -n kube-system calico-node
     ```
     {: pre}
