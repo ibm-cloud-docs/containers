@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, logging, help, debug
 
@@ -10,7 +10,6 @@ subcollection: containers
 content-type: troubleshoot
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -31,7 +30,7 @@ Sometimes after a cluster update or worker node reboot, the `kube-dashboard` pod
 Delete the `kube-dashboard` pod to force a restart. The pod is re-created with RBAC policies to access `heapster` for utilization information.
 {: tsResolve}
 
-    ```
+    ```sh
     kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
     ```
     {: pre}

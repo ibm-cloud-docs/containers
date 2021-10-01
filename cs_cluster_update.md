@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, upgrade, version
 
 subcollection: containers
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -48,7 +47,6 @@ If your cluster runs an unsupported Kubernetes version, follow the [version arch
 Your worker nodes cannot run a later `major.minor` Kubernetes version than the master. Additionally, your worker nodes can be only up to two versions behind the master version (`n-2`). First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster.
 
 Worker nodes can run later patch versions than the master, such as patch versions that are specific to worker nodes for security updates.
-<br>
 
 **How are patch updates applied?**
 
@@ -172,20 +170,21 @@ Set up a configmap to perform a rolling update of your classic worker nodes.
 1. Complete the [prerequisite steps](#worker-up-prereqs).
 2. List available worker nodes and note their private IP address.
 
-    ```
+    ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 3. View the labels of a worker node. You can find the worker node labels in the **Labels** section of your CLI output. Every label consists of a `NodeSelectorKey` and a `NodeSelectorValue`.
-    ```
+    ```sh
     kubectl describe node <private_worker_IP>
     ```
     {: pre}
 
-    Example output:
-    ```
-    Name:               10.184.58.3
+    Example output
+
+    ```sh
+    NAME:               10.184.58.3
     Roles:              <none>
     Labels:             arch=amd64
                     beta.kubernetes.io/arch=amd64
@@ -281,32 +280,32 @@ Set up a configmap to perform a rolling update of your classic worker nodes.
     </table>
 
 5. Create the configuration map in your cluster.
-    ```
+    ```sh
     kubectl apply -f <filepath/configmap.yaml>
     ```
     {: pre}
 
 6. Verify that the config map is created.
-    ```
+    ```sh
     kubectl get configmap --namespace kube-system
     ```
     {: pre}
 
 7. Update the worker nodes.
 
-    ```
+    ```sh
     ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker_node1_ID> --worker <worker_node2_ID>
     ```
     {: pre}
 
 8. Optional: Verify the events that are triggered by the config map and any validation errors that occur. The events can be reviewed in the  **Events** section of your CLI output.
-    ```
+    ```sh
     kubectl describe -n kube-system cm ibm-cluster-update-configuration
     ```
     {: pre}
 
 9. Confirm that the update is complete by reviewing the Kubernetes version of your worker nodes.  
-    ```
+    ```sh
     kubectl get nodes
     ```
     {: pre}
@@ -392,20 +391,20 @@ Before you update your VPC worker nodes, review the prerequisite steps.
 1. Complete the [prerequisite steps](#vpc_worker_prereqs).
 2. Optional: Add capacity to your cluster by [resizing the worker pool](/docs/containers?topic=containers-add_workers#resize_pool). The pods on the worker node can be rescheduled and continue running on the added worker nodes during the update.
 3. List the worker nodes in your cluster and note the **ID** and **Primary IP** of the worker node that you want to update.
-    ```
+    ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 4. Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
     *  To update the worker node to the same `major.minor` version as the master, such as from 1.20 to 1.21.3, include the `--update` flag.
-        ```
+        ```sh
         ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID> --update
         ```
         {: pre}
 
     *  To update the worker node to the latest patch version at the same `major.minor` version, such as from 1.20.8_1530 to 1.20.9_1533, do not include the `--update` flag.
-        ```
+        ```sh
         ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID>
         ```
         {: pre}
@@ -474,7 +473,7 @@ To update flavors:
             {: pre}
 
 2. List available flavors in the zone.
-    ```
+    ```sh
     ibmcloud ks flavors --zone <zone>
     ```
     {: pre}
@@ -514,13 +513,13 @@ To update flavors:
             {: pre}
 
     - **Deprecated: For stand-alone worker nodes**:
-        ```
+        ```sh
         ibmcloud ks worker add --cluster <cluster_name> --flavor <flavor> --workers <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
         ```
         {: pre}
 
 4. Wait for the worker nodes to be deployed. When the worker node state changes to **Normal**, the deployment is finished.
-    ```
+    ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
@@ -540,13 +539,13 @@ To update flavors:
             {: pre}
 
     - **Deprecated: For stand-alone worker nodes**:
-        ```
+        ```sh
         ibmcloud ks worker rm --cluster <cluster_name> --worker <worker_node>
         ```
         {: pre}
 
 6. Verify that the worker nodes are removed from your cluster.
-    ```
+    ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
@@ -601,7 +600,7 @@ You can manage automatic updates of the Fluentd component in the following ways.
 * Disable automatic updates by running the `ibmcloud ks logging autoupdate disable` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_disable).
 * If automatic updates are disabled, but you need to change your configuration, you have two options:
     * Turn on automatic updates for your Fluentd pods.
-        ```
+        ```sh
         ibmcloud ks logging autoupdate enable --cluster <cluster_name_or_ID>
         ```
         {: pre}
@@ -609,7 +608,7 @@ You can manage automatic updates of the Fluentd component in the following ways.
     * Force a one-time update when you use a logging command that includes the `--force-update` option. **Note**: Your pods update to the latest version of the Fluentd component, but Fluentd does not update automatically going forward.
         Example command
 
-        ```
+        ```sh
         ibmcloud ks logging config update --cluster <cluster_name_or_ID> --id <log_config_ID> --type <log_type> --force-update
         ```
         {: pre}
@@ -654,25 +653,25 @@ Before you begin:
 To update stand-alone worker nodes to worker pools:
 
 1. List existing stand-alone worker nodes in your cluster and note the **ID**, the **Machine Type**, and **Private IP**.
-    ```
+    ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 2. Create a worker pool and decide on the flavor and the number of worker nodes that you want to add to the pool.
-    ```
+    ```sh
     ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
     ```
     {: pre}
 
 3. List available zones and decide where you want to provision the worker nodes in your worker pool. To view the zone where your stand-alone worker nodes are provisioned, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`. If you want to spread your worker nodes across multiple zones, choose a [classic](/docs/containers?topic=containers-regions-and-zones#zones-mz) or [VPC](/docs/containers?topic=containers-regions-and-zones#zones-vpc) multizone.
-    ```
+    ```sh
     ibmcloud ks zone ls
     ```
     {: pre}
 
 4. List available VLANs for the zone that you chose in the previous step. If you do not have a VLAN in that zone yet, the VLAN is automatically created for you when you add the zone to the worker pool.
-    ```
+    ```sh
     ibmcloud ks vlan ls --zone <zone>
     ```
     {: pre}
@@ -681,13 +680,13 @@ To update stand-alone worker nodes to worker pools:
     1. **To add a zone to one worker pool**: Replace `<pool_name>` with the name of your worker pool, and fill in the cluster ID, zone, and VLANs with the information you previously retrieved. If you do not have a private and a public VLAN in that zone, do not specify this option. A private and a public VLAN are automatically created for you.
 
         If you want to use different VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.
-        ```
+        ```sh
         ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
         ```
         {: pre}
 
     2. **To add the zone to multiple worker pools**: Add multiple worker pools to the `ibmcloud ks zone add classic` command. To add multiple worker pools to a zone, you must have an existing private and public VLAN in that zone. If you do not have a public and private VLAN in that zone, consider adding the zone to one worker pool first so that a public and a private VLAN are created for you. Then, you can add the zone to other worker pools. </br></br>It is important that the worker nodes in all your worker pools are provisioned into all the zones to ensure that your cluster is balanced across zones. If you want to use different VLANs for different worker pools, repeat this command with the VLAN that you want to use for your worker pool. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
-        ```
+        ```sh
         ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> -w <pool_name1> -w <pool_name2> -w <pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
         ```
         {: pre}
@@ -695,7 +694,7 @@ To update stand-alone worker nodes to worker pools:
     3. **To add multiple zones to your worker pools**: Repeat the `ibmcloud ks zone add classic` command with a different zone and specify the worker pools that you want to provision in that zone. By adding more zones to your cluster, you change your cluster from a single zone cluster to a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone).
 
 6. Wait for the worker nodes to be deployed in each zone.
-    ```
+    ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
@@ -704,13 +703,13 @@ To update stand-alone worker nodes to worker pools:
 
 7. Remove your stand-alone worker nodes. If you have multiple stand-alone worker nodes, remove one at a time.
     1. List the worker nodes in your cluster and compare the private IP address from this command with the private IP address that you retrieved in the beginning to find your stand-alone worker nodes.
-        ```
+        ```sh
         kubectl get nodes
         ```
         {: pre}
 
     2. Remove your stand-alone worker node. Use the ID of the worker node that you retrieved with the `ibmcloud ks worker ls --cluster <cluster_name_or_ID>` command.
-        ```
+        ```sh
         ibmcloud ks worker rm --cluster <cluster_name_or_ID> --worker <worker_ID>
         ```
         {: pre}

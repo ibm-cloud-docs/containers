@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
 subcollection: containers
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -72,13 +71,14 @@ Before you begin
 {: #controlz}
 
 1. Get the pod name for the Istio component that you want to inspect. You can inspect the component pods for `istio-citadel`, `istio-galley`, `istio-pilot`, `istio-policy`, and `istio-telemetry`.
-    ```
+    ```sh
     kubectl get pods -n istio-system | grep istio
     ```
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     NAME                                      READY   STATUS    RESTARTS   AGE
     istio-citadel-869c7f9498-wtldz            1/1     Running   0          2m
     istio-egressgateway-69bb5d4585-qxxbp      1/1     Running   0          2m
@@ -93,7 +93,7 @@ Before you begin
     {: screen}
 
 2. Access the ControlZ dashboard for that component.
-    ```
+    ```sh
     istioctl dashboard controlz <component_pod_name>.istio-system
     ```
     {: pre}
@@ -102,13 +102,13 @@ Before you begin
 {: #envoy}
 
 1. Get the name of the app pod where you want to inspect the Envoy sidecar container.
-    ```
+    ```sh
     kubectl get pods -n <namespace>
     ```
     {: pre}
 
 2. Access the Envoy dashboard for that pod.
-    ```
+    ```sh
     istioctl dashboard envoy <pod-name>.<namespace>
     ```
     {: pre}

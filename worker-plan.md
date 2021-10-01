@@ -10,9 +10,6 @@ subcollection: containers
 
 ---
 
-
-
-
 {{site.data.keyword.attribute-definition-list}}
 
 
@@ -96,6 +93,7 @@ You can also log in to your cluster to check the operating system of the worker 
     {: pre}
 
     Example output
+
     ```sh
     NAME:               10.xxx.xx.xxx
     Roles:              <none>

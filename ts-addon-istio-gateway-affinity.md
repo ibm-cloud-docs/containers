@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, help
 
@@ -10,7 +10,6 @@ subcollection: containers
 content-type: troubleshoot
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -42,31 +41,32 @@ These `ibm-cloud-provider-ip` pods have a node affinity rule so that they are cr
 To verify that the `ibm-cloud-provider-ip` and `istio-ingressgateway` pods do not exist in the same zone:
 
 1. Identify the **NODE** that your `istio-ingressgateway` pod is deployed to.
-    ```
+    ```sh
     kubectl get pod -n istio-system -o wide
     ```
     {: pre}
 
 2. Get the **EXTERNAL-IP** address for the gateway's load balancer service.
-    ```
+    ```sh
     kubectl get service -n istio-system
     ```
     {: pre}
 
 3. Identify the **NODE** that the `ibm-cloud-provider-ip` pod for the load balancer is deployed to. Replace `<IP-with-hyphens>` with the IP address that you found in the previous step. In the IP address, use hyphens (-) instead of periods (.). For example, `169.12.345.67` becomes `169-12-345-67`.
-    ```
+    ```sh
     kubectl get pod -n ibm-system -o wide -l ibm-cloud-provider-ip=<IP-with-hyphens>
     ```
     {: pre}
 
 4. List the zones that the worker nodes are in. Compare the worker nodes that you found in step 1 and 3 to determine whether the pods are deployed to worker nodes in different zones.
-    ```
+    ```sh
     kubectl get node --no-headers -L ibm-cloud.kubernetes.io/zone
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     10.176.48.106   Ready   <none>   529d    v1.20.7+IKS   dal10
     10.176.48.107   Ready   <none>   196d    v1.20.7+IKS   dal10
     10.184.58.23    Ready   <none>   2y38d   v1.20.7+IKS   dal12
@@ -88,7 +88,7 @@ Move the `istio-ingressgateway` pod to the same zone as the `ibm-cloud-provider-
 {: shortdesc}
 
 1. Edit the `managed-istio-custom` configmap resource.
-    ```
+    ```sh
     kubectl edit cm managed-istio-custom -n ibm-operators
     ```
     {: pre}
@@ -104,13 +104,13 @@ Move the `ibm-cloud-provider-ip` pod to the same zone as the `istio-ingressgatew
 {: shortdesc}
 
 1. Edit the `managed-istio-custom` configmap resource.
-    ```
+    ```sh
     kubectl edit cm managed-istio-custom -n ibm-operators
     ```
     {: pre}
 
 2. Note the name of the `istio-ingressgateway-zone-<1|2|3>` setting for the gateway. In this example configmap, to move the `ibm-cloud-provider-ip` pod for the gateway that exists in `dal10`, note the key that is called `istio-ingressgateway-zone-1`.
-    ```
+    ```yaml
     apiVersion: v1
     data:
       istio-ingressgateway-zone-1: dal10
@@ -124,7 +124,7 @@ Move the `ibm-cloud-provider-ip` pod to the same zone as the `istio-ingressgatew
     {: screen}
 
 3. Temporarily disable the gateway by changing the corresponding `istio-ingressgateway-public-<1|2|3>-enabled` setting to `"false"`. In this example configmap, to move the `ibm-cloud-provider-ip` pod for the gateway that exists in `dal10`, change `istio-ingressgateway-public-1-enabled` to `"false"`.
-    ```
+    ```yaml
     apiVersion: v1
     data:
       istio-ingressgateway-zone-1: dal10
@@ -140,13 +140,13 @@ Move the `ibm-cloud-provider-ip` pod to the same zone as the `istio-ingressgatew
 4. Save and close the configuration file.
 
 5. Verify that the gateway's load balancer pod is deleted. Note that it might take up to 30 minutes for the changes to complete.
-    ```
+    ```sh
     kubectl get service -n istio-system -o wide
     ```
     {: pre}
 
 6. Open the `managed-istio-custom` configmap resource.
-    ```
+    ```sh
     kubectl edit cm managed-istio-custom -n ibm-operators
     ```
     {: pre}

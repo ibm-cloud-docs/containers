@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -10,7 +10,6 @@ subcollection: containers
 content-type: troubleshoot
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -41,7 +40,7 @@ By default, ALB pods have two replicas. However, ALB pods have anti-affinity rul
 {: tsResolve}
 
 1. Check the number of worker nodes per zone in your cluster.
-    ```
+    ```sh
     ibmcloud ks worker ls -c <cluster_name_or_ID>
     ```
     {: pre}
@@ -52,7 +51,7 @@ By default, ALB pods have two replicas. However, ALB pods have anti-affinity rul
     * Classic clusters only: If more than one worker node exists in each zone of your classic cluster, your worker nodes might be connected to different VLANs within one zone so that only one worker node exists on a private VLAN. Continue to the next step.
 
 2. For each worker node in one zone, get the private VLAN that the worker node is attached to.
-    ```
+    ```sh
     ibmcloud ks worker get -w <worker_ID> -c <cluster_name_or_ID>
     ```
     {: pre}

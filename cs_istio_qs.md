@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
 subcollection: containers
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -34,31 +33,32 @@ Set up the managed Istio add-on in your cluster.
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 2. Enable the `istio` add-on.
-    ```
+    ```sh
     ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 3. Verify that the managed Istio add-on has a status of `Addon Ready`. Note that it can take a few minutes for the add-on to be ready.
-    ```
+    ```sh
     ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
     Example output
-    ```
-    Name            Version     Health State   Health Status
+
+    ```sh
+    NAME            Version     Health State   Health Status
     istio           1.10.3       normal         Addon Ready
     ```
     {: screen}
 
 4. You can also check out the individual components of the add-on to ensure that the Istio pods are deployed.
-    ```
+    ```sh
     kubectl get pods -n istio-system
     ```
     {: pre}  
 
-    ```
+    ```sh
     kubectl get svc -n istio-system
     ```
     {: pre}
@@ -84,31 +84,31 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 
 1. Install BookInfo in your cluster.
     1. Download the latest Istio package, which includes the configuration files for the BookInfo app.
-        ```
+        ```sh
         curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.10.3 sh -
         ```
         {: pre}
 
     2. Navigate to the Istio package directory.
-        ```
+        ```sh
         cd istio-1.10.3
         ```
         {: pre}
 
     3. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
-        ```
+        ```sh
         export PATH=$PWD/bin:$PATH
         ```
         {: pre}
 
     4. Label the `default` namespace for automatic sidecar injection. Any new pods that are deployed to `default` are now automatically created with Envoy proxy sidecar containers.
-        ```
+        ```sh
         kubectl label namespace default istio-injection=enabled
         ```
         {: pre}
 
     5. Deploy the BookInfo application, gateway, and destination rules.
-        ```
+        ```sh
         kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
         kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
         kubectl apply -f samples/bookinfo/networking/destination-rule-all.yaml
@@ -116,12 +116,12 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
         {: pre}
 
     6. Ensure that the BookInfo microservices pods are `Running`.
-        ```
+        ```sh
         kubectl get pods
         ```
         {: pre}
 
-        ```
+        ```sh
         NAME                                     READY     STATUS      RESTARTS   AGE
         details-v1-6865b9b99d-7v9h8              2/2       Running     0          2m
         productpage-v1-f8c8fb8-tbsz9             2/2       Running     0          2m
@@ -135,31 +135,31 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 2. Get the public address for the `istio-ingressgateway` load balancer that exposes BookInfo.
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**
         1. Set the Istio ingress IP address as an environment variable.
-            ```
+            ```sh
             export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
             ```
             {: pre}
 
         2. Set the Istio ingress port as an environment variable.
-            ```
+            ```sh
             export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
             ```
             {: pre}
 
         3. Create a `GATEWAY_URL` environment variable that uses the Istio ingress host and port.
-            ```
+            ```sh
             export GATEWAY_URL=$INGRESS_IP:$INGRESS_PORT
             ```
             {: pre}
 
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**: Create a `GATEWAY_URL` environment variable that uses the Istio ingress hostname.
-        ```
+        ```sh
         export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
         ```
         {: pre}
 
 3. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
-    ```
+    ```sh
     curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/productpage
     ```
     {: pre}
@@ -168,7 +168,7 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 
     Mac OS or Linux
 
-        ```
+        ```sh
         open http://$GATEWAY_URL/productpage
         ```
         {: pre}
@@ -219,30 +219,18 @@ After you finish testing your app and are ready to start directing live traffic 
     ```
     {: pre}
     
-    ```
+    ```sh
     kubectl apply -f - <filename>.yaml
     ```
     {: pre}
 
-4. View the BookInfo web page in a browser.
-
-    Mac OS or Linux
-        ```
-        open http://$GATEWAY_URL/productpage
-        ```
-        {: pre}
-
-    Windows
-        ```
-        start http://$GATEWAY_URL/productpage
-        ```
-        {: pre}
+4. View the BookInfo web page in a browser by running `open http://$GATEWAY_URL/productpage` on Mac OS or Linux or by running `start http://$GATEWAY_URL/productpage` on Windows.
 
 5. Try refreshing the page several times. Notice that the page with no stars (`v1`) is no longer shown, and that a majority of page refreshes show the black stars (`v2`). Only rarely is the page with red stars (`v3`) shown.
 
 6. Change the traffic distribution so that all traffic is sent only to `v3`. Note that in a real scenario, you might slowly roll out your version changes by changing the traffic distribution first to 80:20, then 70:30, and so on, until all traffic is routed to only the latest version.
     1. Edit the configuration file for the `reviews` virtual service.
-        ```
+        ```sh
         kubectl edit VirtualService reviews
         ```
         {: pre}
@@ -253,7 +241,7 @@ After you finish testing your app and are ready to start directing live traffic 
 7. Try refreshing the BookInfo page several times. Notice that the page with black stars (`v2`) is no longer shown, and only the page with red stars (`v3`) shown.
 
 8. Verify that in the time since you changed the YAML file for the reviews `VirtualService`, no logs exist for requests to `v2`.
-    ```
+    ```sh
     kubectl logs -l app=reviews,version=v2 -c istio-proxy
     ```
     {: pre}
@@ -299,7 +287,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
     {: codeblock}
 
 2. Apply the authentication policy to a namespace.
-    ```
+    ```sh
     kubectl apply -f default.yaml -n <namespace>
     ```
     {: pre}
@@ -319,7 +307,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
     {: codeblock}
 
 4. Apply the destination rule.
-    ```
+    ```sh
     kubectl apply -f destination-mtls.yaml -n <namespace>
     ```
     {: pre}

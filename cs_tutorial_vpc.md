@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -14,7 +14,6 @@ account-plan:
 completion-time: 30m
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -100,26 +99,26 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         {: pre}
 
 3. Create a cluster in your VPC in the same zone as the subnet. By default, your cluster is created with a public and a private cloud service endpoint. You can use the public cloud service endpoint to access the Kubernetes master, such as to run `kubectl` commands, from your local machine. Your worker nodes can communicate with the master on the private cloud service endpoint. For more information about the command options, see the [`cluster create vpc-gen2` CLI reference docs](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-gen2).
-    ```
+    ```sh
     ibmcloud ks cluster create vpc-gen2 --name myvpc-cluster --zone us-south-1 --version 1.20.7 --flavor bx2.2x8 --workers 1 --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID>
     ```
     {: pre}
 
 4. Check the state of your cluster. The cluster might take a few minutes to provision.
     1. Verify that the cluster **State** is **normal**.
-        ```
+        ```sh
         ibmcloud ks cluster ls --provider vpc-gen2
         ```
         {: pre}
 
     2. Download the Kubernetes configuration files.
-        ```
+        ```sh
         ibmcloud ks cluster config --cluster myvpc-cluster
         ```
         {: pre}
 
     3. Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
-        ```
+        ```sh
         kubectl version  --short
         ```
         {: pre}
@@ -151,14 +150,14 @@ To deploy the app:
     * `app.js`: The Hello world app.
     * `package.json`: Metadata about the app.
 
-    ```
+    ```sh
     git clone https://github.com/IBM/container-service-getting-started-wt.git
     ```
     {: pre}
 
 2. Navigate to the `Lab 1` directory.
 
-    ```
+    ```sh
     cd 'container-service-getting-started-wt/Lab 1'
     ```
     {: pre}
@@ -201,7 +200,7 @@ To deploy the app:
 
 5. Create a deployment for your app. Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
 
-    ```
+    ```sh
     kubectl create deployment hello-world-deployment --image=us.icr.io/vpc-gen2/hello-world:1
     ```
     {: pre}
@@ -217,7 +216,7 @@ To deploy the app:
 
 6. Make the app accessible by exposing the deployment as a NodePort service. Because your VPC worker nodes are connected to a private subnet only, the NodePort is assigned only a private IP address and is not exposed on the public network. Other services that run on the private network can access your app by using the private IP address of the NodePort service.
 
-    ```
+    ```sh
     kubectl expose deployment/hello-world-deployment --type=NodePort --name=hello-world-service --port=8080 --target-port=8080
     ```
     {: pre}
@@ -242,15 +241,15 @@ To deploy the app:
 7. Now that all the deployment work is done, you can test your app from within the cluster. Get the details to form the private IP address that you can use to access your app.
     1. Get information about the service to see which NodePort was assigned. The NodePorts are randomly assigned when they are generated with the `expose` command, but within 30000-32767. In this example, the **NodePort** is 30872.
 
-        ```
+        ```sh
         kubectl describe service hello-world-service
         ```
         {: pre}
 
         **Example output**
 
-        ```
-        Name:                   hello-world-service
+        ```sh
+        NAME:                   hello-world-service
         Namespace:              default
         Labels:                 run=hello-world-deployment
         Selector:               run=hello-world-deployment
@@ -265,28 +264,28 @@ To deploy the app:
         {: screen}
 
     2. List the pods that run your app, and note the pod name.
-        ```
+        ```sh
         kubectl get pods
         ```
         {: pre}
 
         **Example output**
-        ```
+        ```sh
         NAME                                     READY     STATUS        RESTARTS   AGE
         hello-world-deployment-d99cddb45-lmj2v   1/1       Running       0          2d
         ```
         {: screen}
 
     3. Describe your pod to find out what worker node the pod is running on. In the example output, the worker node that the pod runs on is **10.xxx.xx.xxx**.
-        ```
+        ```sh
         kubectl describe pod hello-world-deployment-d99cddb45-lmj2v
         ```
         {: pre}
 
         **Example output**
         
-        ```
-        Name:               hello-world-deployment-d99cddb45-lmj2v
+        ```sh
+        NAME:               hello-world-deployment-d99cddb45-lmj2v
         Namespace:          default
         Priority:           0
         PriorityClassName:  <none>
@@ -302,7 +301,7 @@ To deploy the app:
         {: screen}
 
 8. Log in to the pod so that you can make a request to your app from within the cluster.
-    ```
+    ```sh
     kubectl exec -it hello-world-deployment-d99cddb45-lmj2v /bin/sh
     ```
     {: pre}
@@ -336,7 +335,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
 ![VPC load balancing for a cluster.](images/vpc_tutorial_lesson4_lb.png "VPC load balancing for a cluster"){: caption="Figure 1. VPC load balancing for a cluster" caption-side="bottom"}
 
 1. Create a Kubernetes `LoadBalancer` service in your cluster to publicly expose the hello world app.
-    ```
+    ```sh
     kubectl expose deployment/hello-world-deployment --type=LoadBalancer --name=hw-lb-svc  --port=8080 --target-port=8080
     ```
     {: pre}
@@ -360,14 +359,14 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
 
 2. Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When you create the Kubernetes `LoadBalancer` service, a VPC load balancer is automatically created for you. The VPC load balancer assigns a hostname to your Kubernetes LoadBalancer service that you can see in the **LoadBalancer Ingress** field of your CLI output.<p class="note">The VPC load balancer takes a few minutes to provision in your VPC. Until the VPC load balancer is ready, you cannot access the Kubernetes `LoadBalancer` service through its hostname.</p>
 
-    ```
+    ```sh
     kubectl describe service hw-lb-svc
     ```
     {: pre}
 
     **Example CLI output**
-    ```
-    Name:                     hw-lb-svc
+    ```sh
+    NAME:                     hw-lb-svc
     Namespace:                default
     Labels:                   app=hello-world-deployment
     Annotations:              <none>
@@ -407,7 +406,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     {: screen}
 
 4. Send a request to your app by curling the hostname and port of the Kubernetes `LoadBalancer` service that is assigned by the VPC load balancer that you found in step 2.
-    ```
+    ```sh
     curl 1234abcd-us-south.lb.appdomain.cloud:8080
     ```
     {: pre}

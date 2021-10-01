@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -10,7 +10,6 @@ subcollection: containers
 content-type: troubleshoot
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -49,7 +48,7 @@ If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, re
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 2. Refresh the Kubernetes master to restore it.
 
-    ```
+    ```sh
     ibmcloud ks cluster master refresh
     ```
     {: pre}

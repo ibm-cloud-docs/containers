@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -10,7 +10,6 @@ subcollection: containers
 content-type: troubleshoot
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -61,7 +60,7 @@ Option 3: If you are not using all the subnets in the VLAN, you can reuse subnet
 2. Use the [`ibmcloud ks cluster subnet add` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_add) to make an existing subnet available to your cluster.
 
 3. Verify that the subnet was successfully created and added to your cluster. The subnet CIDR is listed in the **Subnet VLANs** section.
-    ```
+    ```sh
     ibmcloud ks cluster get --cluster <cluster_name> --show-resources
     ```
     {: pre}

@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
 subcollection: containers
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -378,6 +377,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: pre}
 
     Example output
+
     ```yaml
     apiVersion: v1
     kind: ConfigMap

@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
 subcollection: containers
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -49,7 +48,7 @@ Use an `IstioOperator` (IOP) to create a custom ingress gateway deployment and p
 1. [Install the Istio add-on](/docs/containers?topic=containers-istio#istio_install).
 
 2. Create a namespace for the custom ingress gateway.
-    ```
+    ```sh
     kubectl create namespace custom-gateways
     ```
     {: pre}
@@ -79,19 +78,20 @@ Use an `IstioOperator` (IOP) to create a custom ingress gateway deployment and p
     {: codeblock}
 
 4. Create the `IstioOperator` (IOP) resource in your cluster. The managed Istio operator in the `ibm-operators` namespace uses the IOP resource to deploy and expose the ingress gateway in the `custom-gateways` namespace with a public load balancer service.
-    ```
+    ```sh
     kubectl apply -f ./custom-ingress-iop.yaml
     ```
     {: pre}
 
 5. Verify that the ingress gateway deployment and service are created in the `custom-gateways` namespace.
-    ```
+    ```sh
     kubectl get deploy,svc -n custom-gateways
     ```
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     NAME                                    READY   UP-TO-DATE   AVAILABLE   AGE
     deployment.apps/custom-ingressgateway   1/1     1            1           4m53s
 
@@ -111,25 +111,25 @@ Deploy the [BookInfo sample application for Istio](https://istio.io/latest/docs/
 {: shortdesc}
 
 1. Create a `bookinfo` namespace and label the namespace for [automatic sidecar injection](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/){: external}.
-    ```
+    ```sh
     kubectl create namespace bookinfo
     kubectl label namespace bookinfo istio-injection=enabled
     ```
     {: pre}
 
 2. Deploy the BookInfo sample app. Replace `<version>` with the major.minor version that your managed Istio add-on runs, which you can find by running `ibmcloud ks cluster addon ls -c <cluster_name_or_ID>`.
-    ```
+    ```sh
     kubectl apply -n bookinfo -f https://raw.githubusercontent.com/istio/istio/release-<version>/samples/bookinfo/platform/kube/bookinfo.yaml
     ```
     {: pre}
 
 2. Ensure that the BookInfo microservices and their corresponding pods are deployed.
-    ```
+    ```sh
     kubectl get svc -n bookinfo
     ```
     {: pre}
 
-    ```
+    ```sh
     NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
     details                   ClusterIP      172.21.19.104    <none>         9080/TCP         2m
     kubernetes                ClusterIP      172.21.0.1       <none>         443/TCP          1d
@@ -139,12 +139,12 @@ Deploy the [BookInfo sample application for Istio](https://istio.io/latest/docs/
     ```
     {: screen}
 
-    ```
+    ```sh
     kubectl get pods -n bookinfo
     ```
     {: pre}
 
-    ```
+    ```sh
     NAME                                     READY     STATUS      RESTARTS   AGE
     details-v1-6865b9b99d-7v9h8              2/2       Running     0          2m
     productpage-v1-f8c8fb8-tbsz9             2/2       Running     0          2m
@@ -202,7 +202,7 @@ Deploy the [BookInfo sample application for Istio](https://istio.io/latest/docs/
     {: codeblock}
 
 4. Create the `Gateway` and `VirtualService` resources in your cluster.
-    ```
+    ```sh
     kubectl apply -f bookinfo-custom-gateway.yaml -n bookinfo
     ```
     {: pre}
@@ -223,25 +223,25 @@ Create an IBM-provided subdomain to register the IP address (classic) or hostnam
 
 1. Register the IP address or hostname of the custom gateway load balancer by creating a DNS subdomain. Specify the `custom-gateway` namespace for the TLS secrets.
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters
-        ```
+        ```sh
         ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> --secret-namespace custom-gateways
         ```
         {: pre}
 
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters
-        ```
+        ```sh
         ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname> --secret-namespace custom-gateways
         ```
         {: pre}
 
 2. Verify that the subdomain is created.
-    ```
+    ```sh
     ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
     ```
     {: pre}
 
     Example output for classic clusters
-    ```
+    ```sh
     Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
     mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
     ```
@@ -255,13 +255,14 @@ Create an IBM-provided subdomain to register the IP address (classic) or hostnam
     {: screen}
 
 2. Get the name of the secret for your subdomain.
-    ```
+    ```sh
     kubectl get secret -n custom-gateways
     ```
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     mycluster-af23f234rwr3asdfasdf-002   kubernetes.io/tls                     2      15m
     ```
     {: screen}
@@ -291,7 +292,7 @@ Create an IBM-provided subdomain to register the IP address (classic) or hostnam
     {: codeblock}
 
 4. Create the modified `Gateway` resource in your cluster.
-    ```
+    ```sh
     kubectl apply -f bookinfo-custom-gateway.yaml -n bookinfo
     ```
     {: pre}
@@ -445,7 +446,7 @@ If you want you apps to be accessible to clients, ensure that at least one gatew
 {: note}
 
 1. Edit the `managed-istio-custom` configmap resource.
-    ```
+    ```sh
     kubectl edit cm managed-istio-custom -n ibm-operators
     ```
     {: pre}
@@ -467,7 +468,7 @@ If you want you apps to be accessible to clients, ensure that at least one gatew
 4. Save and close the configuration file.
 
 5. Verify that the default gateway services are removed.
-    ```
+    ```sh
     kubectl get svc -n istio-system
     ```
     {: pre}

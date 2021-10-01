@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -13,7 +13,6 @@ account-plan:
 completion-time: 60m
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -75,19 +74,19 @@ The following image shows how the web server app is exposed to the internet by t
 ![At the end of Lesson 1, the web server app is exposed to the internet by the public node port and public NLB.](images/cs_tutorial_policies_Lesson1.png "The web server app is exposed to the internet by the public node port and public NLB."){: caption="Figure 1. The web server app is exposed to the internet by the public node port and public NLB." caption-side="bottom"}
 
 1. Deploy the sample web server app. When a connection is made to the web server app, the app responds with the HTTP headers that it received in the connection.
-    ```
+    ```sh
     kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/webserver.yaml
     ```
     {: pre}
 
 2. Verify that the web server app pods have a **STATUS** of `Running`.
-    ```
+    ```sh
     kubectl get pods -o wide
     ```
     {: pre}
 
     **Example output**
-    ```
+    ```sh
     NAME                         READY     STATUS    RESTARTS   AGE       IP               NODE
     webserver-855556f688-6dbsn   1/1       Running   0          1m        172.30.xxx.xxx   10.176.48.78
     webserver-855556f688-76rkp   1/1       Running   0          1m        172.30.xxx.xxx   10.176.48.78
@@ -117,7 +116,7 @@ The following image shows how the web server app is exposed to the internet by t
     {: codeblock}
 
 4. Deploy the NLB.
-    ```
+    ```sh
     kubectl apply -f filepath/webserver-lb.yaml
     ```
     {: pre}
@@ -125,13 +124,13 @@ The following image shows how the web server app is exposed to the internet by t
 5. Verify that you can publicly access the app that is exposed by the NLB from your computer.
 
     1. Get the public **EXTERNAL-IP** address of the NLB.
-        ```
+        ```sh
         kubectl get svc -o wide
         ```
         {: pre}
 
         **Example output**
-        ```
+        ```sh
         NAME           CLUSTER-IP       EXTERNAL-IP        PORT(S)        AGE       SELECTOR
         webserver-lb   172.21.xxx.xxx   169.xx.xxx.xxx     80:31024/TCP   2m        run=webserver
         ```
@@ -140,7 +139,7 @@ The following image shows how the web server app is exposed to the internet by t
     2. Create a cheat sheet text file, and copy the NLB IP into the text file. The cheat sheet helps you more quickly use values in later lessons.
 
     3. Verify that you can publicly access the external IP for the NLB.
-        ```
+        ```sh
         curl --connect-timeout 10 <loadbalancer_IP>:80
         ```
         {: pre}
@@ -172,20 +171,20 @@ The following image shows how the web server app is exposed to the internet by t
 6. Verify that you can publicly access the app that is exposed by the node port from your computer. An NLB service makes your app available over both the NLB service IP address and the worker nodes' node ports.
 
     1. Get the node port that the NLB assigned to the worker nodes. The node port is in the 30000 - 32767 range.
-        ```
+        ```sh
         kubectl get svc -o wide
         ```
         {: pre}
 
         In the following example output, the node port is `31024`:
-        ```
+        ```sh
         NAME           CLUSTER-IP       EXTERNAL-IP        PORT(S)        AGE       SELECTOR
         webserver-lb   172.21.xxx.xxx   169.xx.xxx.xxx     80:31024/TCP   2m        run=webserver
         ```
         {: screen}  
 
     2. For classic clusters, get the **Public IP** address of a worker node. For VPC clusters, get the **Private IP** address instead.
-        ```
+        ```sh
         ibmcloud ks worker ls --cluster <cluster_name>
         ```
         {: pre}
@@ -202,7 +201,7 @@ The following image shows how the web server app is exposed to the internet by t
     3. Copy the public IP of the worker node and the node port into your text cheat sheet to use in later lessons.
 
     4. Verify that you can access the public IP address the worker node through the node port. **Note**: Because worker nodes in VPC clusters do not have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. Then, you can use the worker node's private IP address and NodePort: `<worker_private_IP>:<NodePort>`.
-        ```
+        ```sh
         curl  --connect-timeout 10 <worker_IP>:<NodePort>
         ```
         {: pre}
@@ -297,31 +296,31 @@ The following image shows how traffic is permitted to the NLB but not to node po
     {: screen}
 
 3. Using the values from your cheat sheet, verify that you can't publicly access the worker node public IP address and node port.
-    ```
+    ```sh
     curl  --connect-timeout 10 <worker_IP>:<NodePort>
     ```
     {: pre}
 
     The connection times out because the Calico policy you created is blocking traffic to node ports.
-    ```
+    ```sh
     curl: (28) Connection timed out after 10016 milliseconds
     ```
     {: screen}
 
 4. Change the externalTrafficPolicy of the LoadBalancer you created in the previous lesson from `Cluster` to `Local`. `Local` ensures that the source IP of your system is preserved when you curl the external IP of the LoadBalancer in the next step.
-    ```
+    ```sh
     kubectl patch svc webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
     ```
     {: pre}
 
 5. Using the value from your cheat sheet, verify that you can still publicly access the NLB external IP address.
-    ```
+    ```sh
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
 
     **Example output**
-    ```
+    ```sh
     Hostname: webserver-855556f688-76rkp
     Pod Information:
         -no pod information available-
@@ -413,7 +412,7 @@ First, in addition to the node ports, you must block all incoming traffic to the
         {: pre}
 
 3. Using the value from your cheat sheet, verify that you now can't access the public NLB IP address. The connection times out because the Calico policy you created is blocking traffic to the NLB.
-    ```
+    ```sh
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
@@ -463,13 +462,13 @@ First, in addition to the node ports, you must block all incoming traffic to the
     Your system's IP address is now allowed.
 
 6. Using the value from your cheat sheet, verify that you now can access the public NLB IP address.
-    ```
+    ```sh
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
 
 7. If you have access to another system that has a different IP address, try to access the NLB from that system.
-    ```
+    ```sh
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
@@ -569,7 +568,7 @@ In this lesson, block traffic from your own system's source IP address. At the e
     Your system's IP address is now blocked.
 
 4. Using the value from your cheat sheet, verify from your system that you can't access the NLB IP because your system's IP is blocked.
-    ```
+    ```sh
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
@@ -639,7 +638,7 @@ In our example scenario, the PR firm you work for wants you to set up a logging 
         ```
 
 3. Generate log entries by sending requests from your system IP to the NLB IP. These request packets are logged before they are denied.
-    ```
+    ```sh
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}

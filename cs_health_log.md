@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
 subcollection: containers
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -86,7 +85,7 @@ To set up a logging configuration for your cluster,
             ```
             {: pre}
 
-            Example output:
+            Example output
             ```
             Creating configuration...
             OK
@@ -99,7 +98,7 @@ To set up a logging configuration for your cluster,
             ```
             {: pre}
 
-            Example output:
+            Example output
             ```
             Listing configurations...
 
@@ -113,13 +112,13 @@ To set up a logging configuration for your cluster,
     1. If you used the console to create the {{site.data.keyword.la_short}} configuration, log in to your cluster. For more information, see [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
     2. Verify that the daemon set for the {{site.data.keyword.la_short}} agent was created and all instances are listed as `AVAILABLE`.
-        ```
+        ```sh
         kubectl get daemonsets -n ibm-observe
         ```
         {: pre}
 
-        Example output:
-        ```
+        Example output
+        ```sh
         NAME           DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
         logdna-agent   9         9         9       9            9           <none>          14m
         ```
@@ -128,7 +127,7 @@ To set up a logging configuration for your cluster,
         The number of daemon set instances that are deployed equals the number of worker nodes in your cluster.
 
     3. Review the configmap that was created for your {{site.data.keyword.la_short}} agent.
-        ```
+        ```sh
         kubectl describe configmap -n ibm-observe
         ```
         {: pre}
@@ -253,7 +252,7 @@ The following table shows the different options that you have when you configure
     {: tip}
 
 4. Create a log forwarding configuration. For more information about the parameters, see the [Understanding logging configuration options table](#enable-forwarding).
-    ```
+    ```sh
     ibmcloud ks logging config create --cluster <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <container1,2> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
     ```
     {: pre}
@@ -280,13 +279,13 @@ The following steps are general instructions. Prior to using the container in a 
 4. Save your certificate authority certificate to a file named `ca-cert`. It must be that exact name.
 
 5. Create a secret in the `kube-system` namespace for the `ca-cert` file. When you create your logging configuration, use the secret name for the `--ca-cert` flag.
-    ```
+    ```sh
     kubectl -n kube-system create secret generic --from-file=ca-cert
     ```
     {: pre}
 
 6. Create a log forwarding configuration. For more information about the parameters, see the [Understanding logging configuration options table](#enable-forwarding).
-    ```
+    ```sh
     ibmcloud ks logging config create --cluster <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
     ```
     {: pre}
@@ -312,27 +311,27 @@ You can choose which logs to forward to your external server by filtering out sp
 {: caption="Table 2. Understanding the options for log filtering" caption-side="top"}
 
 1. Create a logging filter.
-    ```
+    ```sh
     ibmcloud ks logging filter create --cluster <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
     ```
     {: pre}
 
 2. View the log filter that you created.
 
-    ```
+    ```sh
     ibmcloud ks logging filter get --cluster <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
     ```
     {: pre}
 
 3. Update the log filter that you created.
-    ```
+    ```sh
     ibmcloud ks logging filter update --cluster <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
     ```
     {: pre}
 
 4. Delete a log filter that you created.
 
-    ```
+    ```sh
     ibmcloud ks logging filter rm --cluster <cluster_name_or_ID> --id <filter_ID> [--all]
     ```
     {: pre}
@@ -346,13 +345,13 @@ You can choose which logs to forward to your external server by filtering out sp
 You can verify that your configuration is set up correctly in 1 of 2 ways:
 
 - To list all of the logging configurations in a cluster:
-    ```
+    ```sh
     ibmcloud ks logging config get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 - To list the logging configurations for one type of log source:
-    ```
+    ```sh
     ibmcloud ks logging config get --cluster <cluster_name_or_ID> --logsource <source>
     ```
     {: pre}
@@ -372,13 +371,13 @@ ibmcloud ks logging config update --cluster <cluster_name_or_ID> --id <log_confi
 You can stop forwarding logs by deleting one or all of the logging configurations for a cluster:
 
 - To delete one logging configuration:
-    ```
+    ```sh
     ibmcloud ks logging config rm --cluster <cluster_name_or_ID> --id <log_config_ID>
     ```
     {: pre}
 
 - To delete all of the logging configurations:
-    ```
+    ```sh
     ibmcloud ks logging config rm --cluster <my_cluster> --all
     ```
     {: pre}
@@ -409,7 +408,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 
 3. Through the CLI, make a request for a snapshot of your master logs.
 
-    ```
+    ```sh
     ibmcloud ks logging collect --cluster <cluster name or ID> --cos-bucket <COS_bucket_name> --cos-endpoint <location_of_COS_bucket> --hmac-key-id <HMAC_access_key_ID> --hmac-key <HMAC_access_key>
     ```
     {: pre}
@@ -425,7 +424,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 
     Example command and response
 
-    ```
+    ```sh
     ibmcloud ks logging collect --cluster mycluster --cos-bucket mybucket --cos-endpoint s3-api.us-geo.objectstorage.softlayer.net --hmac-key-id e2e7f5c9fo0144563c418dlhi3545m86 --hmac-key c485b9b9fo4376722f692b63743e65e1705301ab051em96j
     There is no specified log type. The default master will be used.
     Submitting log collection request for master logs for cluster mycluster...
@@ -436,14 +435,14 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 
 4. Check the status of your request. It can take some time for the snapshot to complete, but you can check to see whether your request is successfully being completed or not. You can find the name of the file that contains your master logs in the response and use the {{site.data.keyword.cloud_notm}} console to download the file.
 
-    ```
+    ```sh
     ibmcloud ks logging collect-status --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
     Example output
 
-    ```
+    ```sh
     ibmcloud ks logging collect-status --cluster mycluster
     Getting the status of the last log collection request for cluster mycluster...
     OK

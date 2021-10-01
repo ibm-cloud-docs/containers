@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {{site.data.keyword.attribute-definition-list}}
 
   
@@ -38,7 +37,6 @@ This task includes the information for installing these CLIs and plug-ins:
 If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can run CLI commands directly from your web browser in the [{{site.data.keyword.cloud-shell_notm}}](#cloud-shell).
 {: tip}
 
-<br>
 To install the CLIs:
 
 1. Install the stand-alone [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-install-ibmcloud-cli) (`ibmcloud`).
@@ -80,7 +78,8 @@ To install the CLIs:
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     Listing installed plug-ins...
 
     Plugin Name                            Version   Status
@@ -123,33 +122,32 @@ Using both {{site.data.keyword.openshiftlong_notm}} and Ubuntu {{site.data.keywo
     -   **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.20.7/bin/linux/amd64/kubectl](https://storage.googleapis.com/kubernetes-release/release/v1.20.7/bin/linux/amd64/kubectl){: external}
     -   **Windows**: Install the Kubernetes CLI in the same directory as the {{site.data.keyword.cloud_notm}} CLI. This setup saves you some file path changes when you run commands later. [https://storage.googleapis.com/kubernetes-release/release/v1.20.7/bin/windows/amd64/kubectl.exe](https://storage.googleapis.com/kubernetes-release/release/v1.20.7/bin/windows/amd64/kubectl.exe){: external}
 
-3. If you use OS X or Linux, complete the following steps.
-    1. Move the executable file to the `/usr/local/bin` directory.
-        ```
-        mv /<filepath>/kubectl /usr/local/bin/kubectl
-        ```
-        {: pre}
+3. If you use OS X or Linux, move the executable file to the `/usr/local/bin` directory.
+    ```sh
+    mv /<filepath>/kubectl /usr/local/bin/kubectl
+    ```
+    {: pre}
 
-    2. Make sure that `/usr/local/bin` is listed in your `PATH` system variable. The `PATH` variable contains all directories where your operating system can find executable files. The directories that are listed in the `PATH` variable serve different purposes. `/usr/local/bin` is used to store executable files for software that is not part of the operating system and that was manually installed by the system administrator.
-        ```
-        echo $PATH
-        ```
-        {: pre}
+4. Make sure that `/usr/local/bin` is listed in your `PATH` system variable. The `PATH` variable contains all directories where your operating system can find executable files. The directories that are listed in the `PATH` variable serve different purposes. `/usr/local/bin` is used to store executable files for software that is not part of the operating system and that was manually installed by the system administrator.
+    ```sh
+    echo $PATH
+    ```
+    {: pre}
 
-        Example CLI output:
-        ```
-        /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-        ```
-        {: screen}
+    Example CLI output:
+    ```sh
+    /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+    ```
+    {: screen}
 
-    3. Make the file executable.
-        ```
-        chmod +x /usr/local/bin/kubectl
-        ```
-        {: pre}
+5. Make the file executable.
+    ```sh
+    chmod +x /usr/local/bin/kubectl
+    ```
+    {: pre}
 
-4. If you have clusters that run different versions of Kubernetes, such as 1.21.3 and 1.19.11, download each `kubectl` version binary file to a separate directory. Then, you can set up an alias in your local command-line interface profile to point to the `kubectl` binary file directory that matches the `kubectl` version of the cluster that you want to work with, or [run the CLI from a container](#cs_cli_container).
-5. **Optional**: [Enable autocompletion for `kubectl` commands](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion){: external}. The steps vary depending on the shell that you use.
+6. If you have clusters that run different versions of Kubernetes, such as 1.21.3 and 1.19.11, download each `kubectl` version binary file to a separate directory. Then, you can set up an alias in your local command-line interface profile to point to the `kubectl` binary file directory that matches the `kubectl` version of the cluster that you want to work with, or [run the CLI from a container](#cs_cli_container).
+7. **Optional**: [Enable autocompletion for `kubectl` commands](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion){: external}. The steps vary depending on the shell that you use.
 
 Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters#clusters_cli_steps).
 
@@ -168,14 +166,14 @@ Before you begin, [install Docker for Mac](https://docs.docker.com/docker-for-ma
 
 1. Create an image from the provided Dockerfile.
 
-    ```
+    ```sh
     docker build -t <image_name> https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/install-clis-container/Dockerfile
     ```
     {: pre}
 
 2. Deploy the image locally as a container and mount a volume to access local files.
 
-    ```
+    ```sh
     docker run -it -v /local/path:/container/volume <image_name>
     ```
     {: pre}
@@ -236,7 +234,8 @@ To run `kubectl` commands to manage your cluster:
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     <cluster_name>/<cluster_ID>
     ```
     {: screen}
@@ -255,7 +254,7 @@ You can use the {{site.data.keyword.containerlong_notm}} plug-in CLI to add the 
 {: shortdesc}
 
 Before you begin:
-*   [Update the {{site.data.keyword.containerlong_notm}} plug-in](#cs_cli_upgrade) to at least version 1.0.
+* [Update the {{site.data.keyword.containerlong_notm}} plug-in](#cs_cli_upgrade) to at least version 1.0.
     ```sh
     ibmcloud plugin update kubernetes-service
     ```
@@ -284,7 +283,8 @@ To set the Kubernetes context for multiple clusters:
     {: pre}
 
     Example output
-    ```
+
+    ```sh
     <cluster_name>/<cluster_ID>
     ```
     {: pre}
@@ -297,14 +297,14 @@ To set the Kubernetes context for multiple clusters:
 
 6. Set the Kubernetes context to another cluster. You can switch the Kubernetes configuration context for each command-line interface (CLI) that uses the `kubeconfig` file, or specify the context on each `kubectl` command.
 
-    *   **Switch the Kubernetes context**: Use the context of a different cluster. Replace `<context>` with the context that you previously retrieved.
+    * **Switch the Kubernetes context**: Use the context of a different cluster. Replace `<context>` with the context that you previously retrieved.
 
         ```sh
         kubectl config use-context <context>
         ```
         {: pre}
 
-    *   **Specify the Kubernetes context per command**: For clusters that run the same version of Kubernetes as other clusters, you can switch between contexts by specifying the context in each `kubectl` command. Replace `<context>` with the context that you previously retrieved.
+    * **Specify the Kubernetes context per command**: For clusters that run the same version of Kubernetes as other clusters, you can switch between contexts by specifying the context in each `kubectl` command. Replace `<context>` with the context that you previously retrieved.
         ```sh
         kubectl --context=<context> <command>
         ```
@@ -334,7 +334,7 @@ Instead of merging the `kubeconfig` file of [multiple clusters](#cli_config_mult
     {: pre}
 
 2. Set your `KUBECONFIG` environment variable in your command line to a temporary file path.
-    ```
+    ```sh
     export KUBECONFIG=$(mktemp)
     ```
     {: pre}
@@ -346,20 +346,20 @@ Instead of merging the `kubeconfig` file of [multiple clusters](#cli_config_mult
     {: pre}
 
 4. Optional: Get the `kubeconfig` file that you just downloaded.
-    *   To list the path of the `kubeconfig` file:
-        ```
+    * To list the path of the `kubeconfig` file:
+        ```sh
         echo $KUBECONFIG
         ```
         {: pre}
 
         Example output
-        ```
+        ```sh
         /tmp/tmp.zhK6bD5Lpw
         ```
         {: screen}
 
-    *   To print the `kubeconfig` file in your command line:
-        ```
+    * To print the `kubeconfig` file in your command line:
+        ```sh
         cat $KUBECONFIG
         ```
         {: pre}
@@ -391,7 +391,6 @@ This task includes the information for updating the following CLIs:
 - {{site.data.keyword.containerlong_notm}} observability plug-in
 
 
-<br>
 To update the CLIs:
 
 1. Update the {{site.data.keyword.cloud_notm}} CLI. Download the [latest version](/docs/cli?topic=cli-getting-started){: external} and run the installer.
@@ -406,65 +405,62 @@ To update the CLIs:
     If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your username and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
     {: tip}
 
-3. Update the {{site.data.keyword.containerlong_notm}} plug-in.
-    1. Install the update from the {{site.data.keyword.cloud_notm}} plug-in repository.
+3. Install the update from the {{site.data.keyword.cloud_notm}} plug-in repository.
 
-        ```
-        ibmcloud plugin update kubernetes-service 
-        ```
-        {: pre}
+    ```sh
+    ibmcloud plugin update kubernetes-service 
+    ```
+    {: pre}
 
-    2. Verify the plug-in installation by running the following command and checking the list of the plug-ins that are installed.
+4. Verify the plug-in installation by running the following command and checking the list of the plug-ins that are installed.
 
-        ```
-        ibmcloud plugin list
-        ```
-        {: pre}
+    ```sh
+    ibmcloud plugin list
+    ```
+    {: pre}
 
-        The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as `kubernetes-service`.
+    The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as `kubernetes-service`.
 
-    3. Initialize the CLI.
+5. Initialize the CLI.
 
-        ```sh
-        ibmcloud ks init
-        ```
-        {: pre}
+    ```sh
+    ibmcloud ks init
+    ```
+    {: pre}
 
-4. [Update the Kubernetes CLI](#kubectl).
+6. [Update the Kubernetes CLI](#kubectl).
 
-5. Update the {{site.data.keyword.registrylong_notm}} plug-in.
-    1. Install the update from the {{site.data.keyword.cloud_notm}} plug-in repository.
+7. Update the `container-registry` plugin from the {{site.data.keyword.cloud_notm}} plug-in repository.
 
-        ```
-        ibmcloud plugin update container-registry 
-        ```
-        {: pre}
+    ```sh
+    ibmcloud plugin update container-registry 
+    ```
+    {: pre}
 
-    2. Verify the plug-in installation by running the following command and checking the list of the plug-ins that are installed.
+8. Verify the plug-in installation by running the following command and checking the list of the plug-ins that are installed.
 
-        ```
-        ibmcloud plugin list
-        ```
-        {: pre}
+    ```sh
+    ibmcloud plugin list
+    ```
+    {: pre}
 
-        The registry plug-in is displayed in the results as `container-registry`.
+    The registry plug-in is displayed in the results as `container-registry`.
 
-6. Update the {{site.data.keyword.containerlong_notm}} observability plug-in.
-    1. Install the update from the {{site.data.keyword.cloud_notm}} plug-in repository.
+9. Update the observability plug-in from the {{site.data.keyword.cloud_notm}} plug-in repository.
 
-        ```
-        ibmcloud plugin update ob 
-        ```
-        {: pre}
+    ```sh
+    ibmcloud plugin update ob 
+    ```
+    {: pre}
 
-    2. Verify that the plug-in is listed with the latest version.
+10. Verify that the plug-in is listed with the latest version.
 
-        ```
-        ibmcloud plugin list
-        ```
-        {: pre}
+    ```sh
+    ibmcloud plugin list
+    ```
+    {: pre}
 
-        The observability plug-in is displayed in the results as `observe-service/ob`.
+    The observability plug-in is displayed in the results as `observe-service/ob`.
 
 
 
@@ -524,7 +520,7 @@ To uninstall the CLIs:
 5. [Uninstall the {{site.data.keyword.cloud_notm}} CLI.](/docs/cli?topic=cli-uninstall-ibmcloud-cli)
 
 6. Uninstall the Kubernetes CLI.
-    ```
+    ```sh
     sudo rm /usr/local/bin/kubectl
     ```
     {: pre}
@@ -567,6 +563,9 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
         ```
         {: screen}
 
+
+
+
 ## Deprecated: Using the Kubernetes web terminal in your web browser
 {: #cli_web}
 
@@ -591,10 +590,10 @@ To install and launch the Kubernetes web terminal:
     * Enable a [public gateway](/docs/vpc?topic=vpc-about-networking-for-vpc#public-gateway-for-external-connectivity) on each VPC subnet that your worker nodes are attached to. This ensures that the `kube-terminal` pod in your cluster is always deployed to a worker node on a subnet that has external access.
     * Edit the `KUBECONFIG` file to use the private cloud service endpoint for your cluster.
         1. In the web terminal, edit the `KUBECONFIG` file.
-        ```
-        vim .kube/config
-        ```
-        {: pre}
+            ```sh
+            vim .kube/config
+            ```
+            {: pre}
 
         2. Type `i` to switch to insert mode so that you can edit the file.
         3. In the service endpoint URL for the `server` field, add `private.` before the region. For example, if the service endpoint URL is `https://c1.us-south.containers.cloud.ibm.com:20267`, change it to `https://c1.private.us-south.containers.cloud.ibm.com:20267`.

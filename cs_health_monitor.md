@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
 subcollection: containers
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -108,13 +107,13 @@ To set up a monitoring configuration for your cluster:
 3. Optional: Verify that the {{site.data.keyword.mon_short}} agent was set up successfully.
     1. If you used the console to create the {{site.data.keyword.mon_short}} configuration, log in to your cluster. For more information, see [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
     2. Verify that the daemon set for the {{site.data.keyword.mon_short}} agent was created and all instances are listed as `AVAILABLE`.
-        ```
+        ```sh
         kubectl get daemonsets -n ibm-observe
         ```
         {: pre}
 
         Example output
-        ```
+        ```sh
         NAME           DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
         sysdig-agent   9         9         9       9            9           <none>          14m
         ```
@@ -123,7 +122,7 @@ To set up a monitoring configuration for your cluster:
         The number of daemon set instances that are deployed equals the number of worker nodes in your cluster.
 
     3. Review the configmap that was created for your {{site.data.keyword.mon_short}} agent.
-        ```
+        ```sh
         kubectl describe configmap -n ibm-observe
         ```
         {: pre}
@@ -253,31 +252,31 @@ To configure Autorecovery:
     {: codeblock}
 
 3. Create the configuration map in your cluster.
-    ```
+    ```sh
     kubectl apply -f ibm-worker-recovery-checks.yaml
     ```
     {: pre}
 
 4. Verify that you created the configuration map with the name `ibm-worker-recovery-checks` in the `kube-system` namespace with the proper checks.
-    ```
+    ```sh
     kubectl -n kube-system get cm ibm-worker-recovery-checks -o yaml
     ```
     {: pre}
 
 5. Deploy Autorecovery into your cluster by installing the `ibm-worker-recovery` Helm chart.
-    ```
+    ```sh
     helm install ibm-worker-recovery iks-charts/ibm-worker-recovery --namespace kube-system
     ```
     {: pre}
 
 6. After a few minutes, you can check the `Events` section in the output of the following command to see activity on the Autorecovery deployment.
-    ```
+    ```sh
     kubectl -n kube-system describe deployment ibm-worker-recovery
     ```
     {: pre}
 
 7. If you do not see activity on the Autorecovery deployment, you can check the Helm deployment by running the tests that are included in the Autorecovery chart definition.
-    ```
+    ```sh
     helm test ibm-worker-recovery -n kube-system
     ```
     {: pre}

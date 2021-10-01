@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -10,7 +10,6 @@ subcollection: containers
 content-type: troubleshoot
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -61,13 +60,14 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
 If the Ingress subdomain and secret are still unavailable after your cluster is in a `normal` state for more than 15 minutes, you can check the progress of the creation process by following these steps:
 
 1. Verify that the worker nodes have a **State** of `normal` and a **Status** of `Ready`. After you create the cluster, it can take up to 20 minutes for the worker nodes to be ready.
-    ```
+    ```sh
     ibmcloud ks worker ls -c <cluster_name_or_ID>
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     ID                                                     Public IP         Private IP      Flavor              State     Status   Zone    Version
     kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx    10.xxx.xx.xxx   u3c.2x4.encrypted   deployed   Ready    dal10   1.20.7
     ```
@@ -75,7 +75,7 @@ If the Ingress subdomain and secret are still unavailable after your cluster is 
 
 2. Verify that the prerequisite steps for your ALB creation are completed.
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**: Get the details of the `ibm-cloud-provider-vlan-ip-config` config map.
-    ```
+    ```sh
     kubectl describe cm ibm-cloud-provider-vlan-ip-config -n kube-system
     ```
     {: pre}
@@ -84,8 +84,8 @@ If the Ingress subdomain and secret are still unavailable after your cluster is 
     * If the **Events** section shows a warning message similar to `ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN`, see the [VLAN capacity troubleshooting topic](/docs/containers?topic=containers-cs_subnet_limit).
 
     Example output of a config map populated with IP addresses:
-    ```
-    Name:         ibm-cloud-provider-vlan-ip-config
+    ```sh
+    NAME:         ibm-cloud-provider-vlan-ip-config
     Namespace:    kube-system
     Labels:       <none>
     Annotations:  <none>
@@ -168,13 +168,14 @@ If the Ingress subdomain and secret are still unavailable after your cluster is 
     <p class="note">Even though the VPC load balancer is listed, its DNS entry might still be registering. When a VPC load balancer is created, the hostname is registered through a public DNS. In some cases, it can take several minutes for this DNS entry to be replicated to the specific DNS that your client is using.</p>
 
 3. Check whether an ALB exists for your cluster and that the ALB has an IP address (classic clusters) or hostname (VPC clusters) assigned.
-    ```
+    ```sh
     ibmcloud ks ingress alb ls -c <cluster_name_or_ID>
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     ALB ID                                Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
     private-crbmnj1b1d09lpvv3oof0g-alb1   false     disabled   private   -               dal10   ingress:0.47.0_1434_iks   2234947       2.0
     public-crbmnj1b1d09lpvv3oof0g-alb1    true      enabled    public    169.XX.XXX.XX   dal10   ingress:0.47.0_1434_iks   2234945       2.0
@@ -184,23 +185,23 @@ If the Ingress subdomain and secret are still unavailable after your cluster is 
     * If a public ALB is listed and is assigned an IP address (classic clusters) or hostname (VPC clusters), continue to the next step.
     * If a public ALB is listed and but is not assigned an IP address (classic clusters) or hostname (VPC clusters), try to disable and re-enable the ALBs.
         * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-        ```
+        ```sh
         ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
         {: pre}
 
-        ```
+        ```sh
         ibmcloud ks ingress alb enable classic --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
         {: pre}
 
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters:
-        ```
+        ```sh
         ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
         {: pre}
 
-        ```
+        ```sh
         ibmcloud ks ingress alb enable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
         {: pre}
@@ -211,19 +212,20 @@ If the Ingress subdomain and secret are still unavailable after your cluster is 
     * If a `LoadBalancer` service is listed and is assigned an IP address (classic clusters) or hostname (VPC clusters), continue to the next step.
     * If no `LoadBalancer` services are created after several minutes, [review ways to get help](/docs/containers?topic=containers-get-help).
 
-    ```
+    ```sh
     kubectl get svc -n kube-system | grep LoadBalancer
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     public-crbmnj1b1d09lpvv3oof0g-alb1   LoadBalancer   172.21.XXX.XXX   169.XX.XXX.XX   80:30723/TCP,443:31241/TCP   1d
     ```
     {: screen}
 
 5. Check again whether the Ingress subdomain and secret are created. If they are not available, but you verified that all of the components in steps 1 - 4 exist, [review ways to get help](/docs/containers?topic=containers-get-help).
-    ```
+    ```sh
     ibmcloud ks cluster get -c <cluster_name_or_ID>
     ```
     {: pre}

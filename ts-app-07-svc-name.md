@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -10,7 +10,6 @@ subcollection: containers
 content-type: troubleshoot
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -49,15 +48,16 @@ Use the service GUID instead of the service instance name in the `ibmcloud ks cl
     ```
     {: pre}
 
-    Example output:
-    ```
+    Example output
+
+    ```sh
     Invoking 'cf service <service_instance_name> --guid'...
     <service_instance_GUID>
     ```
     {: screen}
 
 3. Bind the service to the cluster again.
-    ```
+    ```sh
     ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_GUID>
     ```
     {: pre}

@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
 subcollection: containers
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -75,15 +74,14 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 *   Deprecated: 1.18.19
 *   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17
 
-<br>
 
 To check the server version of a cluster, log in to the cluster and run the following command.
-```
+```sh
 kubectl version  --short | grep -i server
 ```
 {: pre}
 
-Example output:
+Example output
 ```
 Server Version: v1.20.7+IKS
 ```

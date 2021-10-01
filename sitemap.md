@@ -100,11 +100,23 @@ subcollection: containers
 
 [Overview of use cases](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro)
 
+[Retail use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_retail#cs_uc_retail)
+
+* [Brick-and-mortar retailer shares data, by using APIs with global business partners to drive omnichannel sales](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)
+
+* [Traditional grocer increases customer traffic and sales with digital insights](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)
+
 [Transportation use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_transport#cs_uc_transport)
 
 * [Shipping company increases availability of worldwide systems for business partner ecosystem](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)
 
 * [Airline delivers innovative Human Resources (HR) benefits site in under 3 weeks](/docs/containers?topic=containers-cs_uc_transport#uc_airline)
+
+[Government use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_gov#cs_uc_gov)
+
+* [Regional government improves collaboration and velocity with community Developers who combine public-private data](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup)
+
+* [Large public port secures exchange of port data and shipping manifests that connect public and private organizations](/docs/containers?topic=containers-cs_uc_gov#uc_port)
 
 
 ## Learning paths
@@ -1207,18 +1219,6 @@ subcollection: containers
 
     * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
-[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes#static-routes)
-
-* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
-
-* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
-
-    * [Enabling the static route add-on from the console](/docs/containers?topic=containers-static-routes#enable-add-on-console)
-
-    * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
-
-* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
-
 
 ### VPC clusters
 {: #sitemap_vpc_clusters}
@@ -1295,6 +1295,18 @@ subcollection: containers
     * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
 
     * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
+
+[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes#static-routes)
+
+* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
+
+* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
+
+    * [Enabling the static route add-on from the console](/docs/containers?topic=containers-static-routes#enable-add-on-console)
+
+    * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
+
+* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
 
 
 ## Logging and monitoring
@@ -4636,6 +4648,8 @@ subcollection: containers
 
 [Why do my pods fail to deploy after applying a pod security policy?](/docs/containers?topic=containers-ts-app-psp#ts-app-psp)
 
+[Why do pods remain in pending state?](/docs/containers?topic=containers-ts-app-pod-pending#ts-app-pod-pending)
+
 [Why do pods repeatedly fail to restart or are unexpectedly removed?](/docs/containers?topic=containers-ts-app-pod-fail#ts-app-pod-fail)
 
 * [Fixing container resource limits](/docs/containers?topic=containers-ts-app-pod-fail#pod-fail-resource-limits)
@@ -4643,6 +4657,10 @@ subcollection: containers
 * [Fixing pod replacement by higher priority pods](/docs/containers?topic=containers-ts-app-pod-fail#pod-fail-higher-priority)
 
 [Why does binding a service to a cluster result in a same name error?](/docs/containers?topic=containers-ts-app-svc-bind-name#ts-app-svc-bind-name)
+
+[Why does binding a service to a cluster results in service not found error?](/docs/containers?topic=containers-ts-app-svc-bind-not-found#ts-app-svc-bind-not-found)
+
+[Why does binding a service to a cluster results in service does not support service keys error?](/docs/containers?topic=containers-ts-app-svc-key#ts-app-svc-key)
 
 [Why can't I install a Helm chart with updated configuration values?](/docs/containers?topic=containers-ts-app-helm-install#ts-app-helm-install)
 

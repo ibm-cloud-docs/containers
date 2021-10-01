@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-01"
 
 keywords: kubernetes, iks
 
@@ -13,7 +13,6 @@ account-plan:
 completion-time: 30m
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -100,7 +99,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
 
 1. In the `cf-py` directory that you created in the previous lesson, create a `Dockerfile`, which is the basis for creating a container image. You can create the Dockerfile by using your preferred CLI editor or a text editor on your computer. The following example shows how to create a Dockerfile file with the nano editor.
 
-    ```
+    ```sh
     nano Dockerfile
     ```
     {: pre}
@@ -215,7 +214,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
 2. Apply the configuration file to create the deployment and the service in your cluster.
 
-    ```
+    ```sh
     kubectl apply -f <filepath>/cf-py.yaml
     ```
     {: pre}
@@ -232,7 +231,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
     a.  Get the public IP address for the worker node in the cluster.
 
-    ```
+    ```sh
     ibmcloud ks worker ls --cluster <cluster_name>
     ```
     {: pre}
