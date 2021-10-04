@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, ips, vlans, networking, public gateway
 
@@ -19,7 +19,7 @@ subcollection: containers
 Change the pool of available portable public or private IP addresses by adding subnets to your {{site.data.keyword.containerlong}} VPC cluster.
 {: shortdesc}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The content on this page is specific to VPC clusters. For information about classic clusters, see [Configuring subnets and IP addresses for classic clusters](/docs/containers?topic=containers-subnets).
+![VPC infrastructure provider icon.](images/icon-vpc-2.svg) The content on this page is specific to VPC clusters. For information about classic clusters, see [Configuring subnets and IP addresses for classic clusters](/docs/containers?topic=containers-subnets).
 {: note}
 
 ## Overview of VPC networking in {{site.data.keyword.containerlong_notm}}
@@ -334,7 +334,7 @@ If you enable classic access when you create your VPC, [classic access default a
 
 5. Optional: Attach a public network gateway to your subnet. A public network gateway is required when you want your cluster to access public endpoints, such as a public URL of another app, or an {{site.data.keyword.cloud_notm}} service that supports public cloud service endpoints only.
     1. Create a public gateway in each zone. Consider naming the public gateway in the format `<cluster>-<zone>-gateway`. In the output, note the public gateway's **ID**.
-        ```
+        ```sh
         ibmcloud is public-gateway-create <gateway_name> <VPC_ID> <zone>
         ```
         {: pre}
@@ -353,7 +353,7 @@ If you enable classic access when you create your VPC, [classic access default a
         {: screen}
 
     2. By using the IDs of the public gateway and the subnet, attach the public gateway to the subnet.
-        ```
+        ```sh
         ibmcloud is subnet-update <subnet_ID> --public-gateway-id <gateway_ID>
         ```
         {: pre}
@@ -447,8 +447,8 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
 
     ```sh
     ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-    kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.21.3
-    kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.21.3
+    kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.22.2
+    kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.22.2
     ```
     {: screen}
 
@@ -568,8 +568,8 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
         Example output
         ```
         ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-        kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.21.3
-        kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.21.3
+        kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.22.2
+        kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.22.2
         ```
         {: screen}
 

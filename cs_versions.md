@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -46,7 +46,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch. As 
         <dd>First, [update your master node](/docs/containers?topic=containers-update#master) and then [update the worker nodes](/docs/containers?topic=containers-update#worker_node).
     <ul><li>You cannot update a Kubernetes master two or more minor versions ahead (n+2). For example, if your current master is version 1.19 and you want to update to 1.21, you must update to 1.20 first.</li>
     <li>Worker nodes cannot run a Kubernetes major or minor version that is greater than the masters. Additionally, your worker nodes can be only up to two versions behind the master version (<code>n-2</code>).</li>
-    <li>If you use a <code>kubectl</code> CLI version that does not match at least the <code>major.minor</code> version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and <a href="/docs/containers?topic=containers-cs_cli_install#kubectl">CLI versions</a> up-to-date. **Note**: For kubectl version 1.21, there is a known issue where failed `kubectl exec` commands do not automatically time out. For clusters on Kubernetes versions 1.21 or 1.22, use kubectl version 1.20 instead. </li></ul></dd>
+    <li>If you use a <code>kubectl</code> CLI version that does not match at least the <code>major.minor</code> version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and <a href="/docs/containers?topic=containers-cs_cli_install#kubectl">CLI versions</a> up-to-date.
     <dt>Patch updates (x.x.4_1510)</dt>
         <dd>Changes across patches are documented in the [Version changelog](/docs/containers?topic=containers-changelog). Master patches are applied automatically, but you initiate worker node patches updates. Worker nodes can also run patch versions that are greater than the masters. As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.cloud_notm}} console or CLI, such as with the following commands: `ibmcloud ks cluster ls`, `cluster get`, `worker ls`, or `worker get`.<br>
     Patches can be for worker nodes, masters, or both.
@@ -67,11 +67,11 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 **Supported Kubernetes versions**:
 *   Latest: 1.22.2
-*   Default: 1.21.5
-*   Other: 1.20.11
+*   Default: 1.20.11
+*   Other: 1.21.5
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: 1.19.15
+*   Deprecated: 1.18.19
 *   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17
 
 
@@ -83,7 +83,7 @@ kubectl version  --short | grep -i server
 
 Example output
 ```
-Server Version: v1.21.5+IKS
+Server Version: v1.20.11+IKS
 ```
 {: screen}
 
@@ -178,8 +178,10 @@ The following table shows the actions that you must take before you update the K
 | **Unsupported:**  Beta version of `Lease` API | Migrate manifests and API clients to use the `coordination.k8s.io/v1` API version, available since Kubernetes version 1.14. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
 | **Unsupported:**  Beta versions of `Ingress` API | Migrate manifests and API clients to use the `networking.k8s.io/v1` API version, available since Kubernetes version 1.19. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
 | **Unsupported:** IBM Cloud Kubernetes Ingress Controller | As of 1 Jun 2021, the IBM Cloud Kubernetes Ingress Controller is no longer supported on {{site.data.keyword.containerlong_notm}}. Migrate your IBM Cloud Kubernetes Ingress Controller based ALBs to the Kubernetes Ingress Controller. |
-| Ingress | Kubernetes 1.22 supports Ingress and IngressClass resources with `networking.k8s.io/v1` version, which is only available on Kubernetes Ingress Controller version 1.0.0 and newer. Kubernetes Ingress Controller version 1.0.0 is supported on {{site.data.keyword.containerlong_notm}} cluster versions 1.19 or newer.<ul><li>**Cluster versions prior to 1.19**: Update your Ingress and IngressClass resources and Kubernetes clusters as soon as possible to avoid disruptions. For more information, review the migration guide.</li><li>**Cluster versions 1.19, 1.20, and 1.21**: Ingress and IngressClass resources that were created on clusters that run on Kubernetes versions 1.19, 1.20 or 1.21 and Ingress Controller version 1.0.0 are automatically updated during the cluster update to 1.22. The Kubernetes API Server dynamically manages the conversion from the earlier `extensions/v1beta1` and `networking.k8s.io/v1beta1` Ingresses to the new `networking.k8s.io/v1`.</li><li>**External Ingress resources**: For Ingress resources that are stored outside of Kubernetes clusters, such as in a version control system or any other external storage, the `extensions/v1beta1` and `networking.k8s.io/v1beta1` descriptors cannot be used with Kubernetes 1.22. Convert these descriptors to `networking.k8s.io/v1` Ingresses and IngressClasses.</li><li> If you have ALB auto updates enabled, you don't need to manually update your ALBs.</li><li> If you have ALB auto updates disabled, you must update your Kubernetes Ingress Controller based ALBs to a supported 0.4.x version before updating to 1.0.0 or newer. To check your auto update settings, run the ibmcloud ks ingress alb autoupdate get command.</li><li>**ALB OAuth-Proxy add-on**: `networking.k8s.io/v1beta1` is compatible with ALB OAuth-Proxy add-on version 2.0.0 only. If you use the ALB OAuth-Proxy add-on you must update the add-on to version 2.0.0 before updating your cluster to 1.22.</li></ul>
-
+| Ingress | Kubernetes 1.22 supports Ingress and IngressClass resources with `networking.k8s.io/v1` version, which is only available on Kubernetes Ingress Controller version 1.0.0 and newer. Kubernetes Ingress Controller version 1.0.0 is supported on {{site.data.keyword.containerlong_notm}} cluster versions 1.19 or newer.<ul><li>**Cluster versions prior to 1.19**: Update your Ingress and IngressClass resources and Kubernetes clusters as soon as possible to avoid disruptions. For more information, review the migration guide.</li><li>**Cluster versions 1.19, 1.20, and 1.21**: Ingress and IngressClass resources that were created on clusters that run on Kubernetes versions 1.19, 1.20 or 1.21 and Ingress Controller version 1.0.0 are automatically updated during the cluster update to 1.22. The Kubernetes API Server dynamically manages the conversion from the earlier `extensions/v1beta1` and `networking.k8s.io/v1beta1` Ingresses to the new `networking.k8s.io/v1`.</li><li>**External Ingress resources**: For Ingress resources that are stored outside of Kubernetes clusters, such as in a version control system or any other external storage, the `extensions/v1beta1` and `networking.k8s.io/v1beta1` descriptors cannot be used with Kubernetes 1.22. Convert these descriptors to `networking.k8s.io/v1` Ingresses and IngressClasses.</li><li> If you have ALB auto updates enabled, you don't need to manually update your ALBs.</li><li> If you have ALB auto updates disabled, you must update your Kubernetes Ingress Controller based ALBs to a supported 0.4.x version before updating to 1.0.0 or newer. To check your auto update settings, run the ibmcloud ks ingress alb autoupdate get command.</li><li>**ALB OAuth-Proxy add-on**: `networking.k8s.io/v1beta1` is compatible with ALB OAuth-Proxy add-on version 2.0.0 only. If you use the ALB OAuth-Proxy add-on you must update the add-on to version 2.0.0 before updating your cluster to 1.22.</li></ul> |
+| **Unsupported:** Service `service.alpha.kubernetes.io/tolerate-unready-endpoints` annotation | Services no longer support the `service.alpha.kubernetes.io/tolerate-unready-endpoints` annotation. The annotation has been deprecated since Kubernetes version 1.11 and has been replaced by the `Service` `spec.publishNotReadyAddresses` field. If your services rely on this annotation, update them to use the `spec.publishNotReadyAddresses` field instead. For more information on this field, see [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/){: external} |
+{: caption="Changes to make before you update the master to Kubernetes 1.22" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 ### Update after master
 {: #122_after}
@@ -223,6 +225,7 @@ The following table shows the actions that you must take before you update the K
 | Kubernetes snapshot CRDs | {{site.data.keyword.containerlong_notm}} installs Kubernetes snapshot custom resource definition (CRD) version `v1beta1`. If you use other Kubernetes snapshot CRD versions `v1` or `v1alpha1`, you must change the version to `v1beta1`. To check the currently installed version of your snapshot CRDs, run `grep snapshot.storage.k8s.io <<(kubectl get apiservices)`. Follow the Kubernetes documentation to [Upgrade from v1alpha1 to v1beta1](https://github.com/kubernetes-csi/external-snapshotter#upgrade-from-v1alpha1-to-v1beta1){: external} to make sure that your snapshot CRDs are at the correct `v1beta1` version. The steps to downgrade from version `v1` to `v1beta1` are the same as those to upgrade from `v1alpha1`. Do not follow the instructions to upgrade from version `v1beta1` to version `v1`. |
 | OpenVPN replaced by Konnectivity | [Konnectivity](https://kubernetes.io/docs/tasks/extend-kubernetes/setup-konnectivity/){: external} replaces OpenVPN as the network proxy that is used to secure the communication of the Kubernetes API server master to worker nodes in the cluster. If your apps rely on the OpenVPN implementation of Kubernetes master to worker node communication, update them to support [Konnectivity](https://kubernetes.io/docs/tasks/extend-kubernetes/setup-konnectivity/){: external}. |
 | Pod access via service account token | For clusters that run Kubernetes 1.21 and later, the service account tokens that pods use to communicate with the Kubernetes API server are time-limited, automatically refreshed, scoped to a particular audience of users (the pod), and invalidated after the pod is deleted. To continue communicating with the API server, you must design your apps to read the refreshed token value on a regular basis, such as every minute. For applications that invoke the `setuid` internally, you must [manually set the `fsGroup` in the pod security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod){: external}. For more information, see [Bound Service Account Tokens](https://github.com/kubernetes/enhancements/blob/master/keps/sig-auth/1205-bound-service-account-tokens/README.md){: external}. |
+| **Unsupported:** Service `service.alpha.kubernetes.io/tolerate-unready-endpoints` annotation | Services no longer support the `service.alpha.kubernetes.io/tolerate-unready-endpoints` annotation. The annotation has been deprecated since Kubernetes version 1.11 and has been replaced by the `Service` `spec.publishNotReadyAddresses` field. If your services rely on this annotation, update them to use the `spec.publishNotReadyAddresses` field instead. For more information on this field, see [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/){: external} |
 {: caption="Changes to make before you update the master to Kubernetes 1.21" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 

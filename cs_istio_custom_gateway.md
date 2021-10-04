@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -222,13 +222,13 @@ Create an IBM-provided subdomain to register the IP address (classic) or hostnam
 {: shortdesc}
 
 1. Register the IP address or hostname of the custom gateway load balancer by creating a DNS subdomain. Specify the `custom-gateway` namespace for the TLS secrets.
-    * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters
+    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters
         ```sh
         ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> --secret-namespace custom-gateways
         ```
         {: pre}
 
-    * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters
+    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters
         ```sh
         ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname> --secret-namespace custom-gateways
         ```

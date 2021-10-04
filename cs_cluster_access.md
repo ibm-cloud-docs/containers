@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, clusters
 
@@ -191,7 +191,7 @@ The Kubernetes master is accessible through the private cloud service endpoint i
 
     * If you also enabled the public cloud service endpoint, you already have access to the master.
         1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
-            ```
+            ```sh
             ibmcloud ks cluster config -c <cluster_name_or_ID>
             ```
             {: pre}

@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, networking
 
 subcollection: containers
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -90,8 +89,8 @@ When you expose apps with a NodePort service, a NodePort in the range of 30000 -
 **LoadBalancer**
 
 The LoadBalancer service type is implemented differently depending on your cluster's infrastructure provider.
-* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters: [Network load balancer (NLB)](/docs/containers?topic=containers-loadbalancer). Every standard cluster is provisioned with four portable public and four portable private IP addresses that you can use to create a layer 4 TCP/UDP network load balancer (NLB) for your app. You can customize your NLB by exposing any port that your app requires. The portable public and private IP addresses that are assigned to the NLB are permanent and do not change when a worker node is re-created in the cluster. You can create a subdomain for your app that registers public NLB IP addresses with a DNS entry. You can also enable health check monitors on the NLB IPs for each subdomain.
-* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters: [Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas). When you create a Kubernetes LoadBalancer service for an app in your cluster, a layer 7 VPC load balancer is automatically created in your VPC outside of your cluster. The VPC load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. By default, the load balancer is also created with a hostname that you can use to access your app.
+* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters: [Network load balancer (NLB)](/docs/containers?topic=containers-loadbalancer). Every standard cluster is provisioned with four portable public and four portable private IP addresses that you can use to create a layer 4 TCP/UDP network load balancer (NLB) for your app. You can customize your NLB by exposing any port that your app requires. The portable public and private IP addresses that are assigned to the NLB are permanent and do not change when a worker node is re-created in the cluster. You can create a subdomain for your app that registers public NLB IP addresses with a DNS entry. You can also enable health check monitors on the NLB IPs for each subdomain.
+* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters: [Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas). When you create a Kubernetes LoadBalancer service for an app in your cluster, a layer 7 VPC load balancer is automatically created in your VPC outside of your cluster. The VPC load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. By default, the load balancer is also created with a hostname that you can use to access your app.
 
 **[Ingress](/docs/containers?topic=containers-ingress-types)**
 
@@ -105,15 +104,15 @@ The following table compares the features of each network service type.
 
 |Characteristics|ClusterIP|NodePort|LoadBalancer (Classic - NLB)|LoadBalancer (VPC load balancer)|Ingress|
 |---------------|---------|--------|----------------------------|--------------------------------|-------|
-|Free clusters|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />| | | |
-|Standard clusters|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|Externally accessible| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|External hostname| | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|Stable external IP| | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|HTTP(S) load balancing| | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />*|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />*|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|TLS termination| | | | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|Custom routing rules| | | | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|Multiple apps per service| | | | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|Free clusters|Yes|Yes| | | |
+|Standard clusters|Yes|Yes|Yes|Yes|Yes|
+|Externally accessible| |Yes|Yes|Yes|Yes|
+|External hostname| | |Yes|Yes|Yes|
+|Stable external IP| | |Yes| |Yes|
+|HTTP(S) load balancing| | |Yes*|Yes*|Yes|
+|TLS termination| | | | |Yes|
+|Custom routing rules| | | | |Yes|
+|Multiple apps per service| | | | |Yes|
 {: caption="Characteristics of Kubernetes network service types" caption-side="top"}
 
 `*` An SSL certificate for HTTPS load balancing is provided by `ibmcloud ks nlb-dns` commands. In classic clusters, these commands are supported for public NLBs only.
@@ -127,9 +126,9 @@ The following table compares the features of each network service type.
 Publicly expose an app in your cluster to the internet.
 {: shortdesc}
 
-In <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **classic** clusters, you can connect worker nodes to a public VLAN. The public VLAN determines the public IP address that is assigned to each worker node, which provides each worker node with a public network interface. Public networking services connect to this public network interface by providing your app with a public IP address and, optionally, a public URL.
+In ![Classic infrastructure provider icon.](images/icon-classic-2.svg) **classic** clusters, you can connect worker nodes to a public VLAN. The public VLAN determines the public IP address that is assigned to each worker node, which provides each worker node with a public network interface. Public networking services connect to this public network interface by providing your app with a public IP address and, optionally, a public URL.
 
-In <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC** clusters, your worker nodes are connected to private VPC subnets only. However, when you create public networking services, a VPC load balancer is automatically created. The VPC load balancer can route public requests to your app by providing your app a public URL. When an app is publicly exposed, anyone that has the public URL can send a request to your app.
+In ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) **VPC** clusters, your worker nodes are connected to private VPC subnets only. However, when you create public networking services, a VPC load balancer is automatically created. The VPC load balancer can route public requests to your app by providing your app a public URL. When an app is publicly exposed, anyone that has the public URL can send a request to your app.
 
 When an app is publicly exposed, anyone that has the public service IP address or the URL that you set up for your app can send a request to your app. For this reason, expose as few apps as possible. Expose an app to the public only when your app is ready to accept traffic from external web clients or users.
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, kernel
 
@@ -288,8 +288,8 @@ You can reboot the worker node and the huge pages configuration persists. Howeve
 {: important}
 
 **Supported infrastructure providers and required permissions**:
-* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
+* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
 * **Operator** platform access role and **Manager** service access role for the cluster in {{site.data.keyword.cloud_notm}} IAM
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)

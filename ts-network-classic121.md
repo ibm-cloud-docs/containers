@@ -2,14 +2,13 @@
 
 copyright:
   years: 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, help, network, connectivity
 
 subcollection: containers
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 

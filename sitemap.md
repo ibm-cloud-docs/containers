@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: containers
 subcollection: containers
@@ -268,22 +268,6 @@ subcollection: containers
 * [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
 [Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: new_window}{: external}
-
-[Creating a cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial)
-
-* [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
-
-* [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
-
-* [Prerequisites](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_prereqs)
-
-* [Create a cluster in VPC](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_create_vpc_cluster)
-
-* [Deploy a privately available app](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_app)
-
-* [Set up a Load Balancer for VPC to expose your app publicly](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_vpc_lb)
-
-* [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
 
 ## Developing apps in clusters
@@ -1195,30 +1179,6 @@ subcollection: containers
 
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
 
-[Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns)
-
-* [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
-
-* [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize)
-
-* [Setting up NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_cache)
-
-    * [Enable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_enablecache)
-
-    * [Disable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_disablecache)
-
-* [Customizing NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize)
-
-    * [Editing the `node-local-dns` configmap for general configuration updates](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_configmap)
-
-    * [Editing the `node-local-dns-config` configmap to extend with stub domains or upstream servers](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_stub_upstream)
-
-* [Setting up zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
-
-    * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
-
-    * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
-
 
 ### VPC clusters
 {: #sitemap_vpc_clusters}
@@ -1272,6 +1232,18 @@ subcollection: containers
 
     * [Use {{site.data.keyword.tg_full_notm}}](/docs/containers?topic=containers-vpc-vpnaas#vpc-use-transit-gw)
 
+[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes#static-routes)
+
+* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
+
+* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
+
+    * [Enabling the static route add-on from the console](/docs/containers?topic=containers-static-routes#enable-add-on-console)
+
+    * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
+
+* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
+
 [Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns)
 
 * [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
@@ -1295,18 +1267,6 @@ subcollection: containers
     * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
 
     * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
-
-[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes#static-routes)
-
-* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
-
-* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
-
-    * [Enabling the static route add-on from the console](/docs/containers?topic=containers-static-routes#enable-add-on-console)
-
-    * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
-
-* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
 
 
 ## Logging and monitoring
@@ -1421,6 +1381,8 @@ subcollection: containers
     * [Storing the image pull secret in the Kubernetes service account for the selected namespace](/docs/containers?topic=containers-registry#store_imagePullSecret)
 
 * [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-registry#secret_entitled_software)
+
+* [Updating your cluster's containerd registry host configuration](/docs/containers?topic=containers-registry#update_containerd_registry_config)
 
 [Setting up continuous integration and delivery](/docs/containers?topic=containers-cicd#cicd)
 
@@ -1826,6 +1788,10 @@ subcollection: containers
 * [Prerequisites](/docs/containers?topic=containers-ingress-types#config_prereqs)
 
 * [Publicly exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create)
+
+    * [IBM-provided domain](/docs/containers?topic=containers-ingress-types#alb-com-create-ibm-domain)
+
+    * [Custom domain](/docs/containers?topic=containers-ingress-types#alb-comm-create-custom)
 
 * [Privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private)
 
@@ -2794,6 +2760,52 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.312](/docs/containers?topic=containers-cs_cli_changelog#cli-10312)
+
+* [Version 1.0.300](/docs/containers?topic=containers-cs_cli_changelog#cli-10300)
+
+* [Version 1.0.295](/docs/containers?topic=containers-cs_cli_changelog#cli-10295)
+
+* [Version 1.0.275](/docs/containers?topic=containers-cs_cli_changelog#cli-10275)
+
+* [Version 1.0.258](/docs/containers?topic=containers-cs_cli_changelog#cli-10258)
+
+* [Version 1.0.233](/docs/containers?topic=containers-cs_cli_changelog#cli-10233)
+
+* [Version 1.0.231](/docs/containers?topic=containers-cs_cli_changelog#cli-10231)
+
+* [Version 1.0.223](/docs/containers?topic=containers-cs_cli_changelog#cli-102238)
+
+* [Version 1.0.208](/docs/containers?topic=containers-cs_cli_changelog#cli-10208)
+
+* [Version 1.0.206](/docs/containers?topic=containers-cs_cli_changelog#cli-10206)
+
+* [Version 1.0.197](/docs/containers?topic=containers-cs_cli_changelog#cli-10197)
+
+* [Version 1.0.178](/docs/containers?topic=containers-cs_cli_changelog#cli-10178)
+
+* [Version 1.0.171](/docs/containers?topic=containers-cs_cli_changelog#cli-10171)
+
+* [Version 1.0.157](/docs/containers?topic=containers-cs_cli_changelog#cli-10157)
+
+* [Version 1.0.143](/docs/containers?topic=containers-cs_cli_changelog#cli-10143)
+
+* [Version 1.0.118](/docs/containers?topic=containers-cs_cli_changelog#cli-10118)
+
+* [Version 1.0.99](/docs/containers?topic=containers-cs_cli_changelog#cli-1099)
+
+* [Version 1.0.94](/docs/containers?topic=containers-cs_cli_changelog#cli-1094)
+
+* [Version 1.0.84](/docs/containers?topic=containers-cs_cli_changelog#cli-1084)
+
+* [Version 1.0.57](/docs/containers?topic=containers-cs_cli_changelog#cli-1057)
+
+* [Version 1.0.28](/docs/containers?topic=containers-cs_cli_changelog#cli-1028)
+
+* [Version 1.0.15](/docs/containers?topic=containers-cs_cli_changelog#cli-1015)
+
+* [Version 1.0.0](/docs/containers?topic=containers-cs_cli_changelog#cli-100)
 
 * [Deprecated versions](/docs/containers?topic=containers-cs_cli_changelog#deprecated)
 
@@ -4218,6 +4230,22 @@ subcollection: containers
 ## IAM and Activity Tracker events
 {: #sitemap_iam_and_activity_tracker_events}
 
+
+[User access permissions](/docs/containers?topic=containers-access_reference#access_reference)
+
+* [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions)
+
+* [{{site.data.keyword.cloud_notm}} IAM platform access roles](/docs/containers?topic=containers-access_reference#iam_platform)
+
+* [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service)
+
+* [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
+
+* [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-access_reference#iam_issuer_users)
+
+* [Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)
+
+* [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
 
 [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events#at_events)
 

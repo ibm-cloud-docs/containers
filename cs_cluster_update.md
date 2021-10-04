@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -83,13 +83,13 @@ To update the Kubernetes master _major_ or _minor_ version:
 
     * **Checking add-ons**
         1. List the add-ons in the cluster.
-            ```
+            ```sh
             ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
             ```
             {: pre}
 
         2. Check the supported Kubernetes version for each add-on that is installed.
-            ```
+            ```sh
             ibmcloud ks addon-versions
             ```
             {: pre}
@@ -119,7 +119,7 @@ When the master update is complete, you can update your worker nodes, depending 
 You notice that an update is available for your worker nodes in a [classic infrastructure](/docs/containers?topic=containers-infrastructure_providers) cluster. What does that mean? As security updates and patches are put in place for the API server and other master components, you must be sure that the worker nodes remain in sync. You can make two types of updates: updating only the patch version, or updating the `major.minor` version with the patch version.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Applies to only classic clusters. Have a VPC cluster? See [Updating VPC worker nodes](#vpc_worker_node) instead.
+![Classic infrastructure provider icon.](images/icon-classic-2.svg) Applies to only classic clusters. Have a VPC cluster? See [Updating VPC worker nodes](#vpc_worker_node) instead.
 {: note}
 
 For the latest security patches and fixes, make sure to update your worker nodes to the latest patch as soon as possible after it is available. For more information about the latest updates, review the [Changelog](/docs/containers?topic=containers-changelog).
@@ -340,7 +340,7 @@ If you have Portworx installed in your cluster, you must restart the Portworx po
 You notice that an update is available for your worker nodes in a [VPC infrastructure cluster](/docs/containers?topic=containers-infrastructure_providers). What does that mean? As security updates and patches are put in place for the API server and other master components, you must be sure that the worker nodes remain in sync. You can make two types of updates: updating only the patch version, or updating the `major.minor` version with the patch version.
 {: shortdesc}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/>  Applies to only VPC clusters. Have a classic cluster? See [Updating classic worker nodes](#worker_node) instead.
+![VPC infrastructure provider icon.](images/icon-vpc-2.svg)  Applies to only VPC clusters. Have a classic cluster? See [Updating classic worker nodes](#worker_node) instead.
 {: note}
 
 For the latest security patches and fixes, make sure to update your worker nodes to the latest patch as soon as possible after it is available. For more information about the latest updates, review the [Changelog](/docs/containers?topic=containers-changelog).
@@ -397,7 +397,7 @@ Before you update your VPC worker nodes, review the prerequisite steps.
     {: pre}
 
 4. Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
-    *  To update the worker node to the same `major.minor` version as the master, such as from 1.20 to 1.21.3, include the `--update` flag.
+    *  To update the worker node to the same `major.minor` version as the master, such as from 1.20 to 1.22.2, include the `--update` flag.
         ```sh
         ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID> --update
         ```
@@ -442,32 +442,32 @@ To update flavors:
 1. List available worker nodes and note their private IP address.
     - **For worker nodes in a worker pool**:
         1. List available worker pools in your cluster.
-            ```
+            ```sh
             ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
             ```
             {: pre}
 
         2. List the worker nodes in the worker pool. Note the **ID** and **Private IP**.
-            ```
+            ```sh
             ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
             ```
             {: pre}
 
         3. Get the details for a worker node. In the output, note the zone and either the private and public VLAN ID for classic clusters or the subnet ID for VPC clusters.
-            ```
+            ```sh
             ibmcloud ks worker get --cluster <cluster_name_or_ID> --worker <worker_ID>
             ```
             {: pre}
 
     - **Deprecated: For stand-alone worker nodes**:
         1. List available worker nodes. Note the **ID** and **Private IP**.
-            ```
+            ```sh
             ibmcloud ks worker ls --cluster <cluster_name_or_ID>
             ```
             {: pre}
 
         2. Get the details for a worker node and note the zone, the private VLAN ID, and the public VLAN ID.
-            ```
+            ```sh
             ibmcloud ks worker get --cluster <cluster_name_or_ID> --worker <worker_ID>
             ```
             {: pre}
@@ -481,33 +481,33 @@ To update flavors:
 3. Create a worker node with the new machine type.
     - **For worker nodes in a worker pool**:
         1. Create a worker pool with the number of worker nodes that you want to replace.
-        * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-            ```
+        * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters:
+            ```sh
             ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
             ```
             {: pre}
 
-        * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 clusters:
-            ```
+        * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC Generation 2 clusters:
+            ```sh
             ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
             ```
             {: pre}
 
         2. Verify that the worker pool is created.
-            ```
+            ```sh
             ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
             ```
             {: pre}
 
         3. Add the zone to your worker pool that you retrieved earlier. When you add a zone, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. If you want to spread your worker nodes across multiple zones, choose a [classic](/docs/containers?topic=containers-regions-and-zones#zones-mz) or [VPC](/docs/containers?topic=containers-regions-and-zones#zones-vpc) multizone location.
-        * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-            ```
+        * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters:
+            ```sh
             ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
             ```
             {: pre}
 
-        * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 clusters:
-            ```
+        * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC Generation 2 clusters:
+            ```sh
             ibmcloud ks zone add vpc-gen2 --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <vpc_subnet_id>
             ```
             {: pre}
@@ -527,13 +527,13 @@ To update flavors:
 5. Remove the old worker node. **Note**: If you are removing a flavor that is billed monthly (such as bare metal), you are charged for the entire the month.
     - **For worker nodes in a worker pool**:
         1. Remove the worker pool with the old machine type. Removing a worker pool removes all worker nodes in the pool in all zones. This process might take a few minutes to complete.
-            ```
+            ```sh
             ibmcloud ks worker-pool rm --worker-pool <pool_name> --cluster <cluster_name_or_ID>
             ```
             {: pre}
 
         2. Verify that the worker pool is removed.
-            ```
+            ```sh
             ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
             ```
             {: pre}

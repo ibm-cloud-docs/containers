@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -178,8 +178,8 @@ Keep in mind that some services such as Ingress might require multiple worker no
 
 **Supported Kubernetes versions**:
 *   Latest: 1.22.2
-*   Default: 1.21.5
-*   Other: 1.20.11
+*   Default: 1.20.11
+*   Other: 1.21.5
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
 
@@ -212,7 +212,7 @@ For the latest HA service level agreement terms, refer to the [{{site.data.keywo
 
 To view detailed system requirements, you can run a [software product compatibility report for {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/software/reports/compatibility/clarity-reports/report/html/softwareReqsForProduct?deliverableId=4440E450C2C811E6A98AAE81A233E762){: external}. Note that compliance depends on the underlying [infrastructure provider](/docs/containers?topic=containers-infrastructure_providers) for the cluster worker nodes, networking, and storage resources.
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic infrastructure**: {{site.data.keyword.containerlong_notm}} implements controls commensurate with the following security standards:
+![Classic infrastructure provider icon.](images/icon-classic-2.svg) **Classic infrastructure**: {{site.data.keyword.containerlong_notm}} implements controls commensurate with the following security standards:
 - EU-US Privacy Shield and Swiss-US Privacy Shield Framework
 - Health Insurance Portability and Accountability Act (HIPAA)
 - Service Organization Control standards (SOC 1 Type 2, SOC 2 Type 2)
@@ -220,7 +220,7 @@ To view detailed system requirements, you can run a [software product compatibil
 - International Organization for Standardization (ISO 27001, ISO 27017, ISO 27018)
 - Payment Card Industry Data Security Standard (PCI DSS)
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC infrastructure**: {{site.data.keyword.containerlong_notm}} implements controls commensurate with the following security standards:
+![VPC infrastructure provider icon.](images/icon-vpc-2.svg) **VPC infrastructure**: {{site.data.keyword.containerlong_notm}} implements controls commensurate with the following security standards:
 - EU-US Privacy Shield and Swiss-US Privacy Shield Framework
 - Health Insurance Portability and Accountability Act (HIPAA)
 - International Standard on Assurance Engagements 3402 (ISAE 3402), Assurance Reports on Controls at a Service Organization

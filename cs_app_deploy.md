@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks
 
@@ -312,7 +312,7 @@ If you have a [bare metal graphics processing unit (GPU) machine type](/docs/con
 
 In the following steps, you learn how to deploy workloads that require the GPU. You can also deploy apps that don't need to process their workloads across both the GPU and CPU. After, you might find it useful to play around with mathematically intensive workloads such as the [TensorFlow](https://www.tensorflow.org/){: external} machine learning framework with [this Kubernetes demo](https://github.com/pachyderm/pachyderm/tree/master/examples/ml/tensorflow){: external}.
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> GPU machines are available only for clusters on classic infrastructure.
+![Classic infrastructure provider icon.](images/icon-classic-2.svg) GPU machines are available only for clusters on classic infrastructure.
 {: note}
 
 Before you begin

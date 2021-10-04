@@ -2,13 +2,12 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, portworx, sds, px-backup, px backup, portworx backup, backup and restore
 subcollection: containers
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 

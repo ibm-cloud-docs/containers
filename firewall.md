@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, firewall, vyatta, ips
 
@@ -17,7 +17,7 @@ subcollection: containers
 # Classic: Opening required ports and IP addresses in your firewall
 {: #firewall}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This firewall information is specific to classic clusters. For VPC clusters, see [Opening required ports and IP addresses in your firewall for VPC clusters](/docs/containers?topic=containers-vpc-firewall).
+![Classic infrastructure provider icon.](images/icon-classic-2.svg) This firewall information is specific to classic clusters. For VPC clusters, see [Opening required ports and IP addresses in your firewall for VPC clusters](/docs/containers?topic=containers-vpc-firewall).
 {: note}
 
 Review these situations in which you might need to open specific ports and IP addresses in your firewalls for your {{site.data.keyword.containerlong}} clusters.
@@ -481,7 +481,7 @@ If you want to access services that run inside or outside {{site.data.keyword.cl
 
         1. List the worker nodes in your cluster.
 
-            ```
+            ```sh
             ibmcloud ks worker ls --cluster <cluster_name_or_ID>
             ```
             {: pre}

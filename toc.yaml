@@ -54,7 +54,6 @@ toc:
             - link:
                 label: Moving a VM-based application to Kubernetes
                 href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes
-            - cs_tutorial_vpc.md
         - topicgroup:
             label: Developing apps in clusters
             topics:
@@ -146,14 +145,13 @@ toc:
                   - subnets.md
                   - network-cluster.md
                   - vpn.md
-                  - cs_dns.md
             - topicgroup:
                 label: VPC clusters
                 topics:
                 - vpc-subnets.md
                 - vpc-vpn.md
-                - cs_dns.md
             - static-routes.md
+            - cs_dns.md
         - topicgroup:
             label: Logging and monitoring
             topics:

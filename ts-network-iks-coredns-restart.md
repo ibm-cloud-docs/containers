@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -19,8 +19,8 @@ content-type: troubleshoot
 {: #coredns_lameduck}
 
 **Infrastructure provider**:
-* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
+* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
 
 
 Your app sometimes fails to resolve DNS names for cluster services around the same time that one or more CoreDNS pods are restarted, such as during a worker reload or patch update.

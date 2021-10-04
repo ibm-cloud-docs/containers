@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks
 
@@ -99,7 +99,7 @@ Because it can take a few minutes to provision, create your cluster before you s
 
     In this example, the PR firm wants to create only one image repository in {{site.data.keyword.registrylong_notm}}, so they choose `pr_firm` as their namespace to group all images in their account. Replace `<namespace>` with a namespace of your choice that is unrelated to the tutorial.
 
-    ```
+    ```sh
     ibmcloud cr namespace-add <namespace>
     ```
     {: pre}
@@ -233,7 +233,7 @@ To deploy the app:
 
     Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image. **Note**: You must specify a [registry region](/docs/Registry?topic=Registry-registry_overview#registry_regions), such as `us`. To get the registry region that you are currently in, run `ibmcloud cr region`.
 
-    ```
+    ```sh
     ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:1 .
     ```
     {: pre}
@@ -405,7 +405,7 @@ If you took a break from the last lesson, make sure that you log back in to your
 
 2. Build, tag, and push the app as an image to your namespace in {{site.data.keyword.registrylong_notm}}. Don't forget the period (`.`) at the end of the command.
 
-    ```
+    ```sh
     ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:2 .
     ```
     {: pre}
@@ -584,7 +584,7 @@ If you took a break from the last lesson, make sure that you log back in to your
         {: pre}
 
 3. Verify that the images were successfully added to your registry namespace.
-    ```
+    ```sh
     ibmcloud cr images
     ```
     {: pre}

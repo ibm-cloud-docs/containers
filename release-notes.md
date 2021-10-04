@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, release notes
 
@@ -199,7 +199,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
-| 24 November 2020 | <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **New! Reservations to reduce classic worker node costs**: Create a reservation with contracts for 1 or 3 year terms for classic worker nodes to lock in a reduced cost for the life of the contract. Typical savings range between 30-50% compared to on-demand worker node costs. Reservations can be created in the {{site.data.keyword.cloud_notm}} console for classic infrastructure only. For more information, see [Reserving instances to reduce classic worker node costs](/docs/containers?topic=containers-reservations). |
+| 24 November 2020 | ![Classic infrastructure provider icon.](images/icon-classic-2.svg) **New! Reservations to reduce classic worker node costs**: Create a reservation with contracts for 1 or 3 year terms for classic worker nodes to lock in a reduced cost for the life of the contract. Typical savings range between 30-50% compared to on-demand worker node costs. Reservations can be created in the {{site.data.keyword.cloud_notm}} console for classic infrastructure only. For more information, see [Reserving instances to reduce classic worker node costs](/docs/containers?topic=containers-reservations). |
 | 23 November 2020 | **Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.4_1527](/docs/containers?topic=containers-changelog#1194_1527_worker), [1.18.12_1533](/docs/containers?topic=containers-changelog#11812_1533_worker), [1.17.14_1545](/docs/containers?topic=containers-changelog#11714_1545_worker), and [1.16.15_1552](/docs/containers?topic=containers-changelog_archive#11615_1552_worker). |
 | 20 November 2020 | **New! Portieris for image security enforcement**: With the [open source Portieris project](https://github.com/IBM/portieris){: external}, you can set up a Kubernetes admission controller to enforce image security policies by namespace or cluster. Use [Portieris](/docs/Registry?topic=Registry-security_enforce_portieris) instead of the deprecated Container Image Security Enforcement Helm chart. |
 | 19 November 2020 | **Ingress ALB changelog**: Updated the [`nginx-ingress` build to 653 and the `ingress-auth` build to 425](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image. |
