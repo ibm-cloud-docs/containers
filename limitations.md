@@ -58,7 +58,7 @@ To view quota limits on cluster-related resources in your {{site.data.keyword.cl
 ## Classic cluster limitations
 {: #classic_limits}
 
-![Classic infrastructure provider icon.](images/icon-classic-2.png) Classic infrastructure clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations.
+![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic infrastructure clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations.
 {: shortdesc}
 
 ### Compute
@@ -107,7 +107,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 ## VPC cluster limitations
 {: #ks_vpc_gen2_limits}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.png) VPC clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations. Additionally, all the underlying [VPC quotas, VPC limits](/docs/vpc?topic=vpc-quotas), [VPC service limitations](/docs/vpc?topic=vpc-limitations), and [regular service limitations](#tech_limits) apply.
+![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations. Additionally, all the underlying [VPC quotas, VPC limits](/docs/vpc?topic=vpc-quotas), [VPC service limitations](/docs/vpc?topic=vpc-limitations), and [regular service limitations](#tech_limits) apply.
 {: shortdesc}
 
 ### Compute

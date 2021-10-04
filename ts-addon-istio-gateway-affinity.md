@@ -19,8 +19,8 @@ content-type: troubleshoot
 {: #istio_gateway_affinity}
 
 **Infrastructure provider**:
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.png) Classic
-    * ![VPC infrastructure provider icon.](images/icon-vpc-2.png) VPC
+    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
     * Multizone clusters only
 
 

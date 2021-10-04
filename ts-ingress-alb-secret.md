@@ -19,8 +19,8 @@ content-type: troubleshoot
 {: #cs_albsecret_fails}
 
 **Infrastructure provider**:
-* ![Classic infrastructure provider icon.](images/icon-classic-2.png) Classic
-* ![VPC infrastructure provider icon.](images/icon-vpc-2.png) VPC
+* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
 
 
 After you deploy an Ingress application load balancer (ALB) secret to your cluster by using the `ibmcloud ks ingress secret create` command, the `Description` field is not updating with the secret name when you view your certificate in {{site.data.keyword.cloudcerts_full_notm}}.

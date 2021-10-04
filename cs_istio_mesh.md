@@ -171,13 +171,13 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 {: shortdesc}
 
 1. Register the IP address in classic clusters or the hostname in VPC clusters for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.png) Classic:
+    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic:
         ```sh
         ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --cluster <cluster_name_or_id>
         ```
         {: pre}
 
-    * ![VPC infrastructure provider icon.](images/icon-vpc-2.png) VPC:
+    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC:
         ```sh
         ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
         ```
@@ -222,13 +222,13 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 {: shortdesc}
 
 1. Register the IP address in classic clusters or the hostname in VPC clusters for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.png) Classic:
+    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic:
         ```sh
         ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --secret-namespace istio-system --cluster <cluster_name_or_id>
         ```
         {: pre}
 
-    * ![VPC infrastructure provider icon.](images/icon-vpc-2.png) VPC:
+    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC:
         ```sh
         ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --secret-namespace istio-system --cluster <cluster_name_or_id>
         ```
@@ -604,13 +604,13 @@ To publicly expose apps:
     {: screen}
 
 6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.png) Classic clusters:
+    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters:
         ```sh
         ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
         ```
         {: pre}
 
-    * ![VPC infrastructure provider icon.](images/icon-vpc-2.png) VPC clusters:
+    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters:
         ```sh
         ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname>
         ```
@@ -743,13 +743,13 @@ To publicly expose apps:
     {: screen}
 
 6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.png) Classic clusters:
+    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters:
         ```sh
         ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
         ```
         {: pre}
 
-    * ![VPC infrastructure provider icon.](images/icon-vpc-2.png) VPC clusters:
+    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters:
         ```sh
         ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname>
         ```

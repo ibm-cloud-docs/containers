@@ -55,7 +55,7 @@ Worker nodes begin to incur charges after they successfully complete the `provis
 * **Monthly billing only**: All bare metals are charged monthly.
 * **Longer ordering process**: After you order or cancel a bare metal server, the process is completed manually in your IBM Cloud infrastructure account. Therefore, it can take more than one business day to complete.
 
-    ![VPC infrastructure provider icon.](images/icon-vpc-2.png) <strong>VPC Generation 2 only</strong>: Prices vary by region where the underlying worker node infrastructure resides, and you can get sustained usage discounts. For more information, see [What are the regional uplift charges and sustained usage discounts for VPC worker nodes?](#charges_vpc_gen2).
+    ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) <strong>VPC Generation 2 only</strong>: Prices vary by region where the underlying worker node infrastructure resides, and you can get sustained usage discounts. For more information, see [What are the regional uplift charges and sustained usage discounts for VPC worker nodes?](#charges_vpc_gen2).
     {: note}
 
 For more information about worker node specifications, see [Available hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
@@ -68,14 +68,14 @@ For more information about worker node specifications, see [Available hardware f
 Bandwidth refers to the public data transfer of inbound and outbound network traffic, both to and from {{site.data.keyword.cloud_notm}} resources in data centers around the globe.
 {: shortdesc}
 
-![Classic infrastructure provider icon.](images/icon-classic-2.png) **Classic clusters**: Public bandwidth is charged per GB. You can review your current bandwidth summary by logging into the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/), from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") selecting **Classic Infrastructure**, and then selecting the **Network > Bandwidth > Summary** page.
+![Classic infrastructure provider icon.](images/icon-classic-2.svg) **Classic clusters**: Public bandwidth is charged per GB. You can review your current bandwidth summary by logging into the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/), from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") selecting **Classic Infrastructure**, and then selecting the **Network > Bandwidth > Summary** page.
 
 Review the following factors that impact public bandwidth charges:
 * **Location**: As with worker nodes, charges vary depending on the zone that your resources are deployed in.
 * **Pay-As-You-Go for VM**: Because VMs are billed at an hourly rate, your VM worker node machines have a Pay-As-You-Go allocation of outbound networking based on GB usage.
 * **Included bandwidth and tiered packages for BM**: Bare metal worker nodes might come with a certain allocation of outbound networking per month that varies by geography: 20 TB for North America and Europe, or 5 TB for Asia Pacific and South America. After you exceed your included bandwidth, you are charged according to a tiered usage scheme for your geography. If you exceed a tier allotment, you might also be charged a standard data transfer fee. For more information, see [Bandwidth packages](https://www.ibm.com/cloud/bandwidth){: external}.
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.png) **VPC clusters**: For more information about how internet data transfer works in your Virtual Private Cloud, see [Pricing for VPC](https://www.ibm.com/cloud/vpc/pricing){: external}.
+![VPC infrastructure provider icon.](images/icon-vpc-2.svg) **VPC clusters**: For more information about how internet data transfer works in your Virtual Private Cloud, see [Pricing for VPC](https://www.ibm.com/cloud/vpc/pricing){: external}.
 
 ### Subnet IP addresses
 {: #subnet_ips}
@@ -83,9 +83,9 @@ Review the following factors that impact public bandwidth charges:
 Subnets for {{site.data.keyword.containerlong_notm}} clusters vary by infrastructure provider.
 {: shortdesc}
 
-![Classic infrastructure provider icon.](images/icon-classic-2.png) **Classic clusters**: When you create a standard cluster, a portable public subnet with 8 public IP addresses is ordered and charged to your account monthly. For pricing information, see the [Subnets and IPs](/docs/subnets?topic=subnets-pricing-for-ibm-cloud-subnets) documentation or estimate your costs in the [classic subnets console)](https://cloud.ibm.com/classic/network/subnet/provision){: external}.</p><p>If you already have available portable public subnets in your infrastructure account, you can use these subnets instead. Create the cluster with the `--no-subnets` [flag](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_create), and then [reuse your subnets](/docs/containers?topic=containers-subnets#subnets_custom).
+![Classic infrastructure provider icon.](images/icon-classic-2.svg) **Classic clusters**: When you create a standard cluster, a portable public subnet with 8 public IP addresses is ordered and charged to your account monthly. For pricing information, see the [Subnets and IPs](/docs/subnets?topic=subnets-pricing-for-ibm-cloud-subnets) documentation or estimate your costs in the [classic subnets console)](https://cloud.ibm.com/classic/network/subnet/provision){: external}.</p><p>If you already have available portable public subnets in your infrastructure account, you can use these subnets instead. Create the cluster with the `--no-subnets` [flag](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_create), and then [reuse your subnets](/docs/containers?topic=containers-subnets#subnets_custom).
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.png) **VPC clusters**: For more information about charges for floating IPs and other networking costs, see [Pricing for VPC](https://www.ibm.com/cloud/vpc/pricing){: external}.
+![VPC infrastructure provider icon.](images/icon-vpc-2.svg) **VPC clusters**: For more information about charges for floating IPs and other networking costs, see [Pricing for VPC](https://www.ibm.com/cloud/vpc/pricing){: external}.
 
 ### Multizone load balancer
 {: #mzlb_pricing}
@@ -94,8 +94,8 @@ When you create a multizone cluster or add zones to a single zone cluster, you m
 {: shortdesc}
 
 The type of load balancer that is automatically created varies depending on the type of cluster. For more information, see [Multizone load balancer (MZLB) or Load Balancer for VPC](/docs/containers?topic=containers-ingress-about#mzlb).
-* ![Classic infrastructure provider icon.](images/icon-classic-2.png) **Classic clusters**: An Akamai MZLB is automatically created for each multizone cluster. You can view the hourly rate in the pricing summary when you create the cluster.
-* ![VPC infrastructure provider icon.](images/icon-vpc-2.png) **VPC clusters**: A Load Balancer for VPC is automatically created in your VPC for your cluster. For cost information, see [Pricing for Load Balancer for VPC](https://www.ibm.com/cloud/vpc/pricing){: external}.
+* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) **Classic clusters**: An Akamai MZLB is automatically created for each multizone cluster. You can view the hourly rate in the pricing summary when you create the cluster.
+* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) **VPC clusters**: A Load Balancer for VPC is automatically created in your VPC for your cluster. For cost information, see [Pricing for Load Balancer for VPC](https://www.ibm.com/cloud/vpc/pricing){: external}.
 
 
 
@@ -129,7 +129,7 @@ Operators and other [third-party integrations](/docs/containers?topic=containers
 Pricing for VPC infrastructure varies based on regional location and sustained usage.
 {: shortdesc}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.png) This information applies to VPC worker nodes only.
+![VPC infrastructure provider icon.](images/icon-vpc-2.svg) This information applies to VPC worker nodes only.
 {: note}
 
 **Regional uplift charges**

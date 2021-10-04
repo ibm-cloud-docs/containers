@@ -18,8 +18,8 @@ content-type: troubleshoot
 {: #cos_secret_access_fails}
 
 **Infrastructure provider**:
-* ![Classic infrastructure provider icon.](images/icon-classic-2.png) Classic
-* ![VPC infrastructure provider icon.](images/icon-vpc-2.png) VPC
+* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
 
 
 

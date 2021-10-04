@@ -19,8 +19,8 @@ content-type: troubleshoot
 {: #alb-pod-affinity}
 
 **Infrastructure provider**:
-* ![Classic infrastructure provider icon.](images/icon-classic-2.png) Classic
-* ![VPC infrastructure provider icon.](images/icon-vpc-2.png) VPC
+* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
 
 
 When you run `kubectl get pods -n kube-system | grep alb`, either no ALB pods or only some ALB pods successfully deployed to your worker nodes.

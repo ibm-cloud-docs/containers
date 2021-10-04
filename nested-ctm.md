@@ -19,7 +19,7 @@ content-type: troubleshoot
 {: #cs_ingress_health_check_ctm}
 
 **Supported infrastructure provider**:
-* ![Classic infrastructure provider icon.](images/icon-classic-2.png) Classic
+* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
 
 
 When you try to include Ingress subdomains that have health checks enabled in your Akamai Global Traffic Managment (GTM) configuration, the health checks fail.
