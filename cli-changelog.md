@@ -32,33 +32,257 @@ Review the following changes for 1.0 versions of the CLI plug-in.
 
 
 
-|Version|Release date|Changes|
-|-------|------------|-------|
-| 1.0.312 | 09 Aug 2021 | <ul><li>Removes the <code>ibmcloud ks nlb-dns monitor status</code> command. Checking the health of individual IP addresses, which was previously supported by the Cloudflare DNS provider, is not supported by the Akamai DNS provider. Instead, you can check the overall health of a subdomain by using the <code>ibmcloud ks nlb-dns monitor ls</code> command. For more information on the migration to Akamai for all <code>containers.appdomain.cloud</code>, <code>containers.mybluemix.net</code>, and <code>containers.cloud.ibm.com</code> domains, see the <a href="https://cloud.ibm.com/notifications?selected=1621697674798">migration announcement</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li><li>Removes the <code>ibmcloud ks cluster addon enable kube-terminal</code> command. The Kubernetes web terminal add-on became unsupported on 1 July 2021. Instead, use the <a href="/docs/containers?topic=containers-cs_cli_install#cloud-shell">IBM Cloud Shell</a>.</li><li>Makes the <code>ibmcloud ks cluster addon update</code> feature available to all users.</li><li>Updates the help text in various languages.</li></ul> |
-| 1.0.300 | 12 Jul 2021 |<ul><li>Updates the help text in various languages.</li></ul>|
-| 1.0.295 | 24 Jun 2021 | <ul><li>Removes the unsupported {{site.data.keyword.containerlong_notm}} Ingress image version from the output of <code>ibmcloud ks alb version ls</code>.</li><li>Adds the following updates for add-on commands:<ul><li>Adds the <code>ibmcloud ks cluster addon get</code> command to view the details of an installed add-on.</li><li>Adds the <code>ibmcloud ks cluster addon options</code> command to view optional installation settings for an add-on.</li><li>Adds the <code>--param</code> flag to specify an optional installation setting for the <code>ibmcloud ks cluster addon enable openshift-container-storage</code> command.</li></ul></li><li>Updates the help text in various languages.</li></ul> |
-| 1.0.275 | 26 May 2021 | <ul><li>The <code>--region</code> flag is now required for the <code>ibmcloud ks api-key reset</code>, <code>ibmcloud ks credential get</code>, and <code>ibmcloud ks credential set</code> commands.</li><li>Adds the <code>ibmcloud ks cluster addon versions</code> command to list the Kubernetes versions that are supported for each add-on version, and deprecates the <code>ibmcloud ks addon-versions</code> command.</li><li>The <code>ibmcloud ks image-security disable</code> and <code>ibmcloud ks image-security enable</code> commands are now generally available.</li><li>The IAM token that is used for your CLI session is now refreshed 5 minutes before expiration to keep the session active.</li><li>Updates the help text in various languages.</li></ul> |
-| 1.0.258 | 26 Apr 2021 | <ul><li>Adds the <code>--ip</code> flag to the <code>ibmcloud ks nlb-dns create vpc-gen2</code> and <code>ibmcloud ks nlb-dns rm vpc-gen2</code> commands to support DNS records for Network Load Balancers for VPC.</li><li>Adds the <code>--dns-type</code> flag to <code>ibmcloud ks nlb-dns create</code> commands to specify the DNS provider type for the subdomain registration. Currently, only <code>public</code> DNS is supported.</li><li>Adds a warning that the <code>--region</code> flag is planned to be required for the <code>ibmcloud ks api-key reset</code>, <code>ibmcloud ks credential get</code>, and <code>ibmcloud ks credential set</code> commands as of 10 May 2021. The region is already required by the API. Currently in the CLI, the region defaults to the targeted region if the <code>--region</code> flag is not used.</li><li>In the output of the <code>ibmcloud ks addon-versions</code> command, changes the <code>Min. OpenShift version</code> column to <code>Supported Openshift Range</code>.</li><li>When <code>--output json</code> is specified for the <code>ibmcloud ks storage attachment get</code> or <code>ibmcloud ks storage attachment ls</code> commands, fixes the output so that a volume table is not printed after the JSON output.</li><li>Fixes a <code>golang</code> vulnerability for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28852">CVE-2020-28852</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li><li>Updates the help text in various languages.</li></ul> |
-| 1.0.233 | 01 Mar 2021 | <ul><li>Adds <code>satellite</code> as a supported provider to the output of the <code>ibmcloud ks cluster ls</code> command.</li><li>General refactoring and improvements.</li></ul> |
-| 1.0.231 | 25 Feb 2021 | <ul><li>Updates the Go version to 1.15.8.</li><li>Updates the help text in various languages.</li></ul> |
-| 1.0.223 | 08 Feb 2021 | <ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set"><code>ibmcloud ks worker-pool label set</code></a> and <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_rm"><code>ibmcloud ks worker-pool label rm</code></a> commands to set and remove custom Kubernetes labels for all worker nodes in a worker pool.</li></ul> |
-| 1.0.208 | 18 Dec 2020 | Updates the help text in various languages. |
-| 1.0.206 | 10 Dec 2020 | <ul><li>Adds the <code>ibmcloud ks ingress lb get</code>, <code>ibmcloud ks ingress lb proxy-protocol disable</code>, and <code>ibmcloud ks ingress lb proxy-protocol disable</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_enable">beta commands</a> to manage the configuration of load balancers that expose Ingress ALBs in your cluster. For example, you can enable the NGINX PROXY protocol so that client connection information is passed in request headers to ALBs.</li><li>Adds the optional <code>--endpoint</code> flag to the <code>ibmcloud ks cluster config</code> command to specify a type of endpoint for the cluster context, such as the cluster's private cloud service endpoint.</li><li>Updates the help text in various languages.</li><li>Updates the Go version to 1.15.6.</li></ul> |
-| 1.0.197 | 18 Nov 2020 | <ul><li>Adds a warning message to the <code>ibmcloud ks cluster config</code> command about temporary <code>kubectl</code> command failures due to RBAC synchronization.</li><li>Ensures that incident IDs are returned with 500-level messages.</li><li>In <code>ibmcloud ks cluster storage</code> commands, the cluster name is now accepted in the <code>--cluster</code> flag in addition to the cluster ID.</li><li>Updates the output of the <code>ibmcloud ks ingress alb migrate</code> command to be more readable.</li><li>Updates the help text in various languages.</li></ul> |
-| 1.0.178 | 06 Oct 2020 | <ul><li>Updates the Go version to 1.15.2.</li><li>Updates the help text in various languages.</li></ul> |
-| 1.0.171 | 24 Sep 2020 | <ul><li>Shifts all existing <code>ibmcloud ks cluster feature</code> commands into the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_enable"><code>ibmcloud ks cluster master</code></a> subcategory.</li><li>Adds the cluster <code>Status</code>, the <code>Pod Subnet</code>, and the <code>Service Subnet</code> fields to the output of the <code>ibmcloud ks cluster get</code> command.</li><li>Updates the help text in various languages.</li></ul> |
-| 1.0.157 | 24 Aug 2020 | **Added commands**: The following commands are added.<ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_create"><code>ibmcloud ks cluster ca create</code></a>, <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_rotate"><code>ibmcloud ks cluster ca rotate</code></a>, and <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_status"><code>ibmcloud ks cluster ca status</code></a> commands to manage the rotation of certificate authority (CA) certificates for your cluster components.</li><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create"><code>ibmcloud ks ingress secret</code></a> set of beta commands to manage Ingress secrets in your cluster, such as creating secrets for TLS certificates that are stored in {{site.data.keyword.cloudcerts_long_notm}}.</li><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_start"><code>ibmcloud ks ingress alb migrate</code></a> set of beta commands to migrate resources that are formatted for ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress image to resources that are formatted for ALBs that run the Kubernetes Ingress image.</li><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure"><code>ibmcloud ks ingress alb enable</code></a> and <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_disable"><code>ibmcloud ks ingress alb disable</code></a> commands.</li><li>Adds the optional <code>--version</code> flag to the <code>ibmcloud ks ingress alb create</code> command to specify the {{site.data.keyword.containerlong_notm}} Ingress image version or Kubernetes Ingress image version for the ALB.</li></ul>**Renamed commands**: The following commands are shifted to new naming categories.<ul><li>Shifts all existing <code>ibmcloud ks alb</code> commands into the <a href="/docs/containers?topic=containers-kubernetes-service-cli#alb-commands"><code>ibmcloud ks ingress alb</code></a> subcategory.</li><li>Changes the names of the following flags in the relevant <code>ibmcloud ks ingress alb</code> commands: <code>--alb-id</code> to <code>--alb</code>, <code>--secret-name</code> to <code>--name</code>, and <code>--user-ip</code> to <code>--ip</code>.</li></ul>**Deprecated commands**: The following commands are deprecated in favor of the new commands.<ul><li>Deprecates the <code>ibmcloud ks alb cert</code> set of commands.</li><li>Deprecates the <code>ibmcloud ks alb configure</code> command.</li><li>Removes the deprecated <code>ibmcloud ks alb rollback</code> command.</li></ul> |
-| 1.0.143 | 06 Aug 2020 | <ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_quota_ls"><code>ibmcloud ks quota ls</code></a> command to list all quota and limits for cluster-related resources in your {{site.data.keyword.cloud_notm}} account.</li><li>Deprecates the <code>--json</code> flag. To print a command output in JSON format, use the <code>--output json</code> flag instead.</li><li>Deprecates the <code>-s</code> flag. To not show the message of the day or update reminders in command output, use the <code>-q</code> flag instead.</li><li>Updates <code>ibmcloud ks cluster ls</code> command so that if you include the <code>--ouput json</code> flag but do not include the <code>--provider</code> flag, only classic clusters are returned.</li><li>Corrects the example master update command that is displayed in the output of the <code>ibmcloud ks cluster get</code> command when a master update is available.</li><li>Adds information about the effects of worker node replacement in the warning message for the <code>ibmcloud ks worker replace</code> command.</li><li>Standardizes the help text for flags that have a list of supported values.</li><li>Updates the help text in various languages.</li></ul> |
-| 1.0.118 | 07 July 2020 | <ul><li>Deprecates the <code>ibmcloud ks cluster user-subnet add</code>, <code>ibmcloud ks cluster user-subnet rm</code>, and <code>ibmcloud ks va</code> commands.</li><li>Updates the Go version to 1.13.12 for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7919">CVE-2020-7919</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li><li>Fixes a bug for downloading the Calico configuration by using the <code>--network</code> flag in the <code>ibmcloud ks cluster config</code> command.</li><li>Updates the help text for the <code>--endpoint</code> flag of the <code>ibmcloud ks kms enable</code> command.</li><li>Updates the help text in various languages.</li></ul> |
-| 1.0.99 | 15 June 2020 | Updates the help text in various places.|
-| 1.0.94 | 09 June 2020 | <ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable_static-route"><code>ibmcloud ks cluster addon enable static-route</code></a> and <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_disable_static-route"><code>ibmcloud ks cluster addon disable static-route</code></a> commands to manage the Static Route add-on for your cluster.</li><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#worker_pool_taint_set"><code>ibmcloud ks worker-pool taint set</code></a> and <a href="/docs/containers?topic=containers-kubernetes-service-cli#worker_pool_taint_rm"><code>ibmcloud ks worker-pool taint rm</code></a> commands to set and remove Kubernetes taints on worker nodes in a worker pool.</li><li>Beta: Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_storage"><code>ibmcloud ks storage</code></a> set of commands to view and modify storage resources in your cluster.</li><li>Moves the <code>ibmcloud ks locations</code> command to the <code>Informational Commands</code> group in the help output of <code>ibmcloud ks</code>.</li><li>Updates the help text for options in the <code>ibmcloud ks nlb-dns monitor configure</code> command.</li><li>Updates the help text in various languages.</li></ul>|
-| 1.0.84 | 26 May 2020 | <ul><li>Fixes bugs for credentials in Kubernetes configuration contexts:<ul><li>When you download the contexts for clusters that run Kubernetes version 1.17 or later, those contexts are merged into your <code>kubeconfig</code> file. The tokens from the version 1.17 or later contexts now do not overwrite tokens for any version 1.16 or later contexts.</li><li>Credentials are now correctly added to your <code>kubeconfig</code> file when you download the context for a cluster.</li><li>Fixes credential issues for CLI plug-in installations on macOS that do not use <code>cgo</code>.</li></ul></li><li>Adds commands for creating and managing VPC clusters:<ul><li><a href="/docs/containers?topic=containers-kubernetes-service-cli#cli_alb_configure_vpc_gen2"><code>alb configure vpc-gen2</code></a></li><li><a href="/docs/containers?topic=containers-kubernetes-service-cli#cli_alb-create-vpc-gen2"><code>alb create vpc-gen2</code></a></li><li><a href="/docs/containers?topic=containers-kubernetes-service-cli#cli_cluster-create-vpc-gen2"><code>cluster create vpc-gen2</code></a></li><li><a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-create-vpc-gen2"><code>nlb-dns create vpc-gen2</code></a></li><li><a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-rm-vpc-gen2"><code>nlb-dns rm vpc-gen2</code></a></li><li><a href="/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2"><code>worker-pool create vpc-gen2</code></a></li><li><a href="/docs/containers?topic=containers-kubernetes-service-cli#cli_zone-add-vpc-gen2"><code>zone add vpc-gen2</code></a></li></ul></li><li>Adds the <strong>Ingress Status</strong> and <strong>Ingress Message</strong> fields to the output of the <code>ibmcloud ks cluster get</code> command. For more information about these fields, see <a href="/docs/containers?topic=containers-ingress-status">Checking the status of Ingress components</a>.</li><li>Adds the ALB ID to the output of the <code>ibmcloud ks alb create</code> command.</li><li>Adds the supported <code>Auth version</code> to the output of the <code>ibmcloud ks alb versions</code> command.</li><li>Adds the supported range of Kubernetes versions that your cluster must run to the output of the <code>ibmcloud ks addon versions</code> command.</li><li>Updates the help text in various languages.</li></ul>|
-| 1.0.57 | 07 May 2020 | <ul><li>Adds a check for deprecated positional arguments.</li><li>Updates the macOS DNS resolver to fix network issues when you use the CLI plug-in with a VPN connection.</li><li>Help documentation updates:<ul><li>Adds instructions for enabling or disabling an add-on to the help text for the <code>ibmcloud ks addon-versions</code> command.</li><li>Clarifies optional and required flags in flag help text.</li><li>Updates the help text in various languages.</li></ul></li></ul>|
-| 1.0.28 | 06 Apr 2020 | <ul><li>Adds the optional <code>--alb-id</code> flag to <code>ibmcloud ks alb update</code> so that you can specify IDs of individual ALBs to update.</li><li>Adds the optional <code>--show-storage</code> flag to <code>ibmcloud ks flavors</code> to show additional raw disks that are available for <a href="/docs/containers?topic=containers-planning_worker_nodes#sds">SDS worker node flavors</a>.</li><li>Adds a message to the output of <code>ibmcloud ks pull-secret apply</code> about the amount of time it takes for the pull secrets to be applied to your cluster.</li></ul>|
-| 1.0.15 | 24 Mar 2020 | <ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-regenerate"><code>ibmcloud ks nlb-dns secret regenerate</code></a> and <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-rm"><code>ibmcloud ks nlb-dns secret rm</code></a> commands to help you manage secrets for NLB subdomains.</li><li>Adds the optional <code>--worker-pool WORKER_POOL</code> flag to <code>ibmcloud ks zone rm</code>.</li><li>Deprecates the option to specify a YAML file in the <code>--file</code> flag of the <code>ibmcloud ks cluster create</code> and <code>ibmcloud ks worker add</code> commands. Instead, specify values for your cluster in the supported flags for these commands.</li><li>Fixes the following bugs:<ul><li>For <code>ibmcloud ks cluster rm</code>, the <code>--force-delete-storage</code> flag no longer sets the <code>-f</code> flag.</li><li>For <code>ibmcloud ks cluster create</code>, the <code>--private-only</code> flag no longer requires the <code>--private-vlan</code> flag.</li></ul></li><li>Updates the help text in various languages.</li></ul>|
-| 1.0.0 | 16 Mar 2020 | Introduces permanent behavior and syntax changes that are not compatible with earlier versions. For a summary of the changes in version 1.0, see [Using version 1.0 of the plug-in](#changelog_beta).|
-{: caption="Overview of version changes for version 1.0 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
-{: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
+## Version 1.0.312
+{: #cli-10312}
+
+Version 1.0.312 of the CLI was released on 9 August 2021.
+
+- Removes the `ibmcloud ks nlb-dns monitor status` command. Checking the health of individual IP addresses, which was previously supported by the Cloudflare DNS provider, is not supported by the Akamai DNS provider. Instead, you can check the overall health of a subdomain by using the `ibmcloud ks nlb-dns monitor ls` command. For more information on the migration to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains, see the [migration announcement](https://cloud.ibm.com/notifications?selected=1621697674798){: external}.
+- Removes the `ibmcloud ks cluster addon enable kube-terminal` command. The Kubernetes web terminal add-on became unsupported on 1 July 2021. Instead, use the [IBM Cloud Shell])/docs/containers?topic=containers-cs_cli_install#cloud-shell).
+
+- Makes the `ibmcloud ks cluster addon update` feature available to all users.
+- Updates the help text in various languages.
+
+## Version 1.0.300
+{: #cli-10300}
+
+Version 1.0.300 of the CLI was released on 12 July 2021.
+
+- Updates the help text in various languages.
+
+## Version 1.0.295
+{: #cli-10295}
+
+Version 1.0.295 of the CLI was released on 24 June 2021.
+
+- Removes the unsupported {{site.data.keyword.containerlong_notm}} Ingress image version from the output of `ibmcloud ks alb version ls`.
+- Adds the following updates for add-on commands: - Adds the `ibmcloud ks cluster addon get` command to view the details of an installed add-on. 
+- Adds the `ibmcloud ks cluster addon options` command to view optional installation settings for an add-on. 
+- Adds the `--param` flag to specify an optional installation setting for the `ibmcloud ks cluster addon enable openshift-container-storage` command. 
+- Updates the help text in various languages.
+
+## Version 1.0.275
+{: #cli-10275}
+
+Version 1.0.275 of the CLI was released on 26 May 2021.
+  
+- The `--region` flag is now required for the `ibmcloud ks api-key reset`, `ibmcloud ks credential get`, and `ibmcloud ks credential set` commands. 
+- Adds the `ibmcloud ks cluster addon versions` command to list the Kubernetes versions that are supported for each add-on version, and deprecates the `ibmcloud ks addon-versions` command.
+- The `ibmcloud ks image-security disable` and `ibmcloud ks image-security enable` commands are now generally available. 
+- The IAM token that is used for your CLI session is now refreshed 5 minutes before expiration to keep the session active. 
+- Updates the help text in various languages.
+
+## Version 1.0.258
+{: #cli-10258}
+
+Version 1.0.258 of the CLI was released on 26 April 2021.
+  
+- Adds the `--ip` flag to the `ibmcloud ks nlb-dns create vpc-gen2` and `ibmcloud ks nlb-dns rm vpc-gen2` commands to support DNS records for Network Load Balancers for VPC. 
+- Adds the `--dns-type` flag to `ibmcloud ks nlb-dns create` commands to specify the DNS provider type for the subdomain registration. Currently, only `public` DNS is supported. 
+- Adds a warning that the `--region` flag is planned to be required for the `ibmcloud ks api-key reset`, `ibmcloud ks credential get`, and `ibmcloud ks credential set` commands as of 10 May 2021. The region is already required by the API. Currently in the CLI, the region defaults to the targeted region if the `--region` flag is not used. 
+- In the output of the `ibmcloud ks addon-versions` command, changes the `Min. OpenShift version` column to `Supported Openshift Range`. 
+- When `--output json` is specified for the `ibmcloud ks storage attachment get` or `ibmcloud ks storage attachment ls` commands, fixes the output so that a volume table is not printed after the JSON output. 
+- Fixes a `golang` vulnerability for [CVE-2020-28852](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28852){: external}. 
+- Updates the help text in various languages.
+
+## Version 1.0.233
+{: #cli-10233}
+
+Version 1.0.233 of the CLI was released on 1 March 2021.
+
+- Adds `satellite` as a supported provider to the output of the `ibmcloud ks cluster ls` command. 
+- General refactoring and improvements.
+
+## Version 1.0.231
+{: #cli-10231}
+
+Version 1.0.231 of the CLI was released on 25 February 2021.
+
+- Updates the Go version to 1.15.8. 
+- Updates the help text in various languages.
+
+## Version 1.0.223
+{: #cli-102238
+
+Version 1.0.223 of the CLI was released on 8 February 2021.
+
+- Adds the [`ibmcloud ks worker-pool label set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set) and [`ibmcloud ks worker-pool label rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_rm) commands to set and remove custom Kubernetes labels for all worker nodes in a worker pool.
+
+## Version 1.0.208
+{: #cli-10208}
+
+Version 1.0.208 of the CLI was released on 18 December 2020.
+
+- Updates the help text in various languages.
+
+## Version 1.0.206
+{: #cli-10206}
+
+Version 1.0.206 of the CLI was released on 10 December 2020.
+
+- Adds the `ibmcloud ks ingress lb get`, `ibmcloud ks ingress lb proxy-protocol disable`, and `ibmcloud ks ingress lb proxy-protocol disable` [beta commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_enable) to manage the configuration of load balancers that expose Ingress ALBs in your cluster. For example, you can enable the NGINX PROXY protocol so that client connection information is passed in request headers to ALBs. 
+- Adds the optional `--endpoint` flag to the `ibmcloud ks cluster config` command to specify a type of endpoint for the cluster context, such as the cluster's private cloud service endpoint. 
+- Updates the help text in various languages. 
+- Updates the Go version to 1.15.6.
+
+## Version 1.0.197
+{: #cli-10197}
+
+Version 1.0.197 of the CLI was released on 18 November 2020.
+
+- Adds a warning message to the `ibmcloud ks cluster config` command about temporary `kubectl` command failures due to RBAC synchronization. 
+- Ensures that incident IDs are returned with 500-level messages. 
+- In `ibmcloud ks cluster storage` commands, the cluster name is now accepted in the `--cluster` flag in addition to the cluster ID. 
+- Updates the output of the `ibmcloud ks ingress alb migrate` command to be more readable. 
+- Updates the help text in various languages.
+
+## Version 1.0.178
+{: #cli-10178}
+
+Version 1.0.178 of the CLI was released on 6 October 2020.
+
+- Updates the Go version to 1.15.2.
+- Updates the help text in various languages.
+
+## Version 1.0.171
+{: #cli-10171}
+
+Version 1.0.171 of the CLI was released on 24 September 2020.
+
+- Shifts all existing `ibmcloud ks cluster feature` commands into the [`ibmcloud ks cluster master`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_enable) subcategory. 
+- Adds the cluster `Status`, the `Pod Subnet`, and the `Service Subnet` fields to the output of the `ibmcloud ks cluster get` command. 
+- Updates the help text in various languages.
+
+## Version 1.0.157
+{: #cli-10157}
+
+Version 1.0.157 of the CLI was released on 24 August 2020.
+
+**Added commands**: The following commands are added. 
+- Adds the [`ibmcloud ks cluster ca create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_create), [`ibmcloud ks cluster ca rotate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_rotate), and [`ibmcloud ks cluster ca status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_status) commands to manage the rotation of certificate authority (CA) certificates for your cluster components. 
+- Adds the [`ibmcloud ks ingress secret`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create) set of beta commands to manage Ingress secrets in your cluster, such as creating secrets for TLS certificates that are stored in {{site.data.keyword.cloudcerts_long_notm}}. 
+- Adds the [`ibmcloud ks ingress alb migrate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_start) set of beta commands to migrate resources that are formatted for ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress image to resources that are formatted for ALBs that run the Kubernetes Ingress image. 
+- Adds the [`ibmcloud ks ingress alb enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure) and [`ibmcloud ks ingress alb disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_disable) commands. 
+- Adds the optional `--version` flag to the `ibmcloud ks ingress alb create` command to specify the {{site.data.keyword.containerlong_notm}} Ingress image version or Kubernetes Ingress image version for the ALB.
+
+**Renamed commands**: The following commands are shifted to new naming categories. 
+- Shifts all existing `ibmcloud ks alb` commands into the [`ibmcloud ks ingress alb`](/docs/containers?topic=containers-kubernetes-service-cli#alb-commands)</a> subcategory. 
+- Changes the names of the following flags in the relevant `ibmcloud ks ingress alb` commands: `--alb-id` to `--alb`, `--secret-name` to `--name`, and `--user-ip` to `--ip`.
+
+**Deprecated commands**: The following commands are deprecated in favor of the new commands. 
+- Deprecates the `ibmcloud ks alb cert` set of commands. 
+- Deprecates the `ibmcloud ks alb configure` command. 
+- Removes the deprecated `ibmcloud ks alb rollback` command,
+
+## Version 1.0.143
+{: #cli-10143}
+
+Version 1.0.143 of the CLI was released on 6 August 2020.
+
+- Adds the [`ibmcloud ks quota ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_quota_ls) command to list all quota and limits for cluster-related resources in your {{site.data.keyword.cloud_notm}} account. 
+- Deprecates the `--json` flag. To print a command output in JSON format, use the `--output json` flag instead. 
+- Deprecates the `-s` flag. To not show the message of the day or update reminders in command output, use the `-q` flag instead. 
+- Updates `ibmcloud ks cluster ls` command so that if you include the `--ouput json` flag but do not include the `--provider` flag, only classic clusters are returned. 
+- Corrects the example master update command that is displayed in the output of the `ibmcloud ks cluster get` command when a master update is available. 
+- Adds information about the effects of worker node replacement in the warning message for the `ibmcloud ks worker replace` command. 
+- Standardizes the help text for flags that have a list of supported values. 
+- Updates the help text in various languages.
+
+## Version 1.0.118
+{: #cli-10118}
+
+Version 1.0.118 of the CLI was released on 7 July 2020.
+
+- Deprecates the `ibmcloud ks cluster user-subnet add`, `ibmcloud ks cluster user-subnet rm`, and `ibmcloud ks va` commands.
+- Updates the Go version to 1.13.12 for [CVE-2020-7919](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7919){: external}. 
+- Fixes a bug for downloading the Calico configuration by using the `--network` flag in the `ibmcloud ks cluster config` command. 
+- Updates the help text for the `--endpoint` flag of the `ibmcloud ks kms enable` command. 
+- Updates the help text in various languages.
+
+## Version 1.0.99
+{: #cli-1099}
+
+Version 1.0.99 of the CLI was released on 15 June 2020.
+
+
+- Updates the help text in various places.
+
+## Version 1.0.94
+{: #cli-1094}
+
+Version 1.0.94 of the CLI was released on 9 June 2020.
+
+- Adds the [`ibmcloud ks cluster addon enable static-route`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable_static-route) and [`ibmcloud ks cluster addon disable static-route`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_disable_static-route) commands to manage the Static Route add-on for your cluster. 
+- Adds the [`ibmcloud ks worker-pool taint set`](/docs/containers?topic=containers-kubernetes-service-cli#worker_pool_taint_set) and [`ibmcloud ks worker-pool taint rm`](/docs/containers?topic=containers-kubernetes-service-cli#worker_pool_taint_rm) commands to set and remove Kubernetes taints on worker nodes in a worker pool. 
+- Beta: Adds the [`ibmcloud ks storage`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage) set of commands to view and modify storage resources in your cluster. 
+- Moves the `ibmcloud ks locations` command to the `Informational Commands` group in the help output of `ibmcloud ks`. 
+- Updates the help text for options in the `ibmcloud ks nlb-dns monitor configure` command. 
+- Updates the help text in various languages.
+
+## Version 1.0.84
+{: #cli-1084}
+
+Version 1.0.84 of the CLI was released on 26 May 2020.
+
+- Fixes bugs for credentials in Kubernetes configuration contexts: 
+    - When you download the contexts for clusters that run Kubernetes version 1.17 or later, those contexts are merged into your `kubeconfig` file. The tokens from the version 1.17 or later contexts now do not overwrite tokens for any version 1.16 or later contexts. 
+    - Credentials are now correctly added to your `kubeconfig` file when you download the context for a cluster. 
+    - Fixes credential issues for CLI plug-in installations on macOS that do not use `cgo`. 
+- Adds commands for creating and managing VPC clusters.
+    - [`alb configure vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb_configure_vpc_gen2)
+    - [`alb create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb-create-vpc-gen2)
+    - [`cluster create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_cluster-create-vpc-gen2)
+    - [`nlb-dns create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-create-vpc-gen2)
+    - [`nlb-dns rm vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-rm-vpc-gen2)
+    - [`worker-pool create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2)
+    - [`zone add vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_zone-add-vpc-gen2)
+- Adds the **Ingress Status** and **Ingress Message** fields to the output of the `ibmcloud ks cluster get` command. For more information about these fields, see [Checking the status of Ingress components](/docs/containers?topic=containers-ingress-status).
+- Adds the ALB ID to the output of the `ibmcloud ks alb create` command. 
+- Adds the supported `Auth version` to the output of the `ibmcloud ks alb versions` command. 
+- Adds the supported range of Kubernetes versions that your cluster must run to the output of the `ibmcloud ks addon versions` command. 
+- Updates the help text in various languages.
+
+## Version 1.0.57
+{: #cli-1057}
+
+Version 1.0.57 of the CLI was released on 7 May 2020.
+
+- Adds a check for deprecated positional arguments. 
+- Updates the macOS DNS resolver to fix network issues when you use the CLI plug-in with a VPN connection. 
+- Help documentation updates: 
+    - Adds instructions for enabling or disabling an add-on to the help text for the `ibmcloud ks addon-versions` command. 
+    - Clarifies optional and required flags in flag help text. 
+    - Updates the help text in various languages.
+
+## Version 1.0.28
+{: #cli-1028}
+
+Version 1.0.28 of the CLI was released on 6 April 2020.
+
+- Adds the optional `--alb-id` flag to `ibmcloud ks alb update` so that you can specify IDs of individual ALBs to update. 
+- Adds the optional `--show-storage` flag to `ibmcloud ks flavors` to show additional raw disks that are available for [SDS worker node flavors](/docs/containers?topic=containers-planning_worker_nodes#sds). 
+- Adds a message to the output of `ibmcloud ks pull-secret apply` about the amount of time it takes for the pull secrets to be applied to your cluster.
+
+## Version 1.0.15
+{: #cli-1015}
+
+Version 1.0.15 of the CLI was released on 24 March 2020.
+
+- Adds the [`ibmcloud ks nlb-dns secret regenerate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-regenerate) and [`ibmcloud ks nlb-dns secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-rm) commands to help you manage secrets for NLB subdomains. 
+- Adds the optional `--worker-pool WORKER_POOL` flag to `ibmcloud ks zone rm`. 
+- Deprecates the option to specify a YAML file in the `--file` flag of the `ibmcloud ks cluster create` and `ibmcloud ks worker add` commands. Instead, specify values for your cluster in the supported flags for these commands. 
+- Fixes the following bugs: 
+    - For `ibmcloud ks cluster rm`, the `--force-delete-storage` flag no longer sets the `-f` flag.
+    - For `ibmcloud ks cluster create`, the `--private-only` flag no longer requires the `--private-vlan` flag.
+- Updates the help text in various languages.
+
+## Version 1.0.0
+{: #cli-100}
+
+Version 1.0.0 of the CLI was released on 26 March 2020.
+
+- Introduces permanent behavior and syntax changes that are not compatible with earlier versions. For a summary of the changes in version 1.0, see [Using version 1.0 of the plug-in](#changelog_beta).
+
 
 ## Deprecated versions
 {: #deprecated}
@@ -69,7 +293,9 @@ All versions of the CLI plug-in that are earlier than version 1.0 are no longer 
 ### Updating to version 1.0 of the plug-in
 {: #changelog_beta}
 
-Version 1.0 of the CLI plug-in was released on 16 March 2020. This version contains permanent syntax and behavior changes that are not compatible with earlier versions.</br></br>To maintain all CLI functionality, update and test any automation before you update to 1.0 by checking out the [`ibmcloud ks script update` command](/docs/containers?topic=containers-kubernetes-service-cli#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, update your CLI to version `1.0` of the plug-in.
+Version 1.0 of the CLI plug-in was released on 16 March 2020. This version contains permanent syntax and behavior changes that are not compatible with earlier versions.
+
+To maintain all CLI functionality, update and test any automation before you update to 1.0 by checking out the [`ibmcloud ks script update` command](/docs/containers?topic=containers-kubernetes-service-cli#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, update your CLI to version `1.0` of the plug-in.
 {: important}
 
 Check out the following syntax and behavior changes between each version of the CLI plug-in:
@@ -77,17 +303,15 @@ Check out the following syntax and behavior changes between each version of the 
 |Functionality|`0.2`|`0.3`|`0.4`|`1.0`|
 |-------------|-----|-----|-----|-----|
 | Supported? | Deprecated | Deprecated | Deprecated | Default |
-| `ibmcloud ks help` output structure<ul><li>Legacy: Alphabetical list of commands</li><li>Latest: Categories of commands</li></ul> | Legacy | Legacy | Latest | Latest |
-| Command structure<ul><li>Legacy: Hyphenated structure (<code>ibmcloud ks cluster-get</code>)</li><li>Latest: Spaced structure (<code>ibmcloud ks cluster get</code>)</li></ul> | Legacy and latest | Legacy and latest | Legacy and latest | Latest |
-| Positional arguments<ul><li>Legacy: Arguments specified by position (<code>cluster-get mycluster</code>)</li><li>Latest: Arguments specified by flags (<code>cluster get --cluster mycluster</code>)</li></ul> | Legacy and latest | Legacy and latest | Legacy and latest | Latest |
-| Repeated arguments<ul><li>Legacy: Comma-delineated values (<code>--worker-pools pool1,pool2,pool3 ...</code>)</li><li>Latest: Repeated flags for each value with optional shorthand flag aliases (<code>-p pool1 -p pool2 ...</code>)</li></ul> | Legacy | Legacy | Legacy and latest | Latest |
-| Flag format<ul><li>Legacy: Camel-case (<code>--showResources</code>)</li><li>Latest: Dashed (<code>--show-resources</code>)</li></ul> | Legacy | Legacy | Legacy and latest | Latest |
-| Cluster context provided by `ibmcloud ks cluster-config`<ul><li>Legacy: Provides a command that you must copy and paste to set the new <code>kubeconfig</code> file as your current <code>KUBECONFIG</code> environment variable. You must set your environment variable before you can interact with your cluster.</li><li>Latest: Appends the new <code>kubeconfig</code> file to your existing <code>kubeconfig</code> file in <code>~/.kube/config</code> or the <a href="/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig">last file that is set by the <code>KUBECONFIG</code> environment variable</a>. After you run <code>ibmcloud ks cluster config</code>, you can interact with your cluster immediately, and quickly <a href="/docs/containers?topic=containers-cs_cli_install#cli_config_multiple">change the context to other clusters in the Kubernetes context</a>.</li></ul> | Legacy | Legacy | Legacy | Latest |
-| API endpoint<ul><li>Legacy: <a href="/docs/containers?topic=containers-regions-and-zones#bluemix_regions">Target a region and use a regional endpoint to work with resources in that region</a>.</li><li>Latest: <a href="/docs/containers?topic=containers-regions-and-zones#bluemix_regions">Use the global endpoint to work with resources in any location</a>.</li></ul> | Legacy | Latest | Latest | Latest |
+| `ibmcloud ks help` output structure  \n -  Legacy: Alphabetical list of commands  \n -  Latest: Categories of commands | Legacy | Legacy | Latest | Latest |
+| Command structure  \n -  Legacy: Hyphenated structure (`ibmcloud ks cluster-get`)  \n -  Latest: Spaced structure (`ibmcloud ks cluster get`) | Legacy and latest | Legacy and latest | Legacy and latest | Latest |
+| Positional arguments  \n -  Legacy: Arguments specified by position (`cluster-get mycluster`)  \n -  Latest: Arguments specified by flags (`cluster get --cluster mycluster`) | Legacy and latest | Legacy and latest | Legacy and latest | Latest |
+| Repeated arguments  \n -  Legacy: Comma-delineated values (`--worker-pools pool1,pool2,pool3 ...`)  \n -  Latest: Repeated flags for each value with optional shorthand flag aliases (`-p pool1 -p pool2 ...`) | Legacy | Legacy | Legacy and latest | Latest |
+| Flag format  \n -  Legacy: Camel-case (`--showResources`)  \n -  Latest: Dashed (`--show-resources`) | Legacy | Legacy | Legacy and latest | Latest |
+| Cluster context provided by `ibmcloud ks cluster-config`  \n -  Legacy: Provides a command that you must copy and paste to set the new `kubeconfig` file as your current `KUBECONFIG` environment variable. You must set your environment variable before you can interact with your cluster.  \n -  Latest: Appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the [last file that is set by the `KUBECONFIG` environment variable](/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig). After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately, and quickly [change the context to other clusters in the Kubernetes context](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple). | Legacy | Legacy | Legacy | Latest |
+| API endpoint  \n -  Legacy: [Target a region and use a regional endpoint to work with resources in that region](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).  \n -  Latest: [Use the global endpoint to work with resources in any location](/docs/containers?topic=containers-regions-and-zones#bluemix_regions). | Legacy | Latest | Latest | Latest |
 {: caption="Latest versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in" caption-side="top"}
 {: summary="The rows are read from left to right, with the functionality in column one, version 0.2 of the CLI in column two, version 0.3 in column three, version 0.4 in column four, and version 1.0 in column five."}
-
-
 
 ### Version 0.4
 {: #04}
@@ -98,22 +322,139 @@ Review the following changes for 0.4 versions of the CLI plug-in.
 Version 0.4 of the CLI plug-in is deprecated. To update to the latest version, see [Updating to version 1.0 of the plug-in](#changelog_beta).
 {: deprecated}
 
-|Version|Release date|Changes|
-|-------|------------|-------|
-| 0.4.102 | 04 Mar 2020 | <ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_create"><code>ibmcloud ks alb create classic</code></a> and <code>ibmcloud ks alb create vpc-classic</code> commands so that you can create and enable new public or private ALBs in a zone.</li><li>Removes the beta tag from <code>ibmcloud ks kms</code> commands.</li><li>Adds <code>--public-endpoint</code> as an optional flag to the <code>ibmcloud ks kms enable</code> command. Include this flag only if you want to use the KMS public cloud service endpoint instead of the private cloud service endpoint.</li><li>Fixes a bug so that the new <code>--version</code> flag is accepted in <code>ibmcloud ks cluster create</code> commands.</li><li>Help documentation updates:<ul><li>Fixes incorrect deprecation warnings for commands that are correctly formatted with version 1.0 syntax.</li><li>Removes incorrect <code>ibmcloud ks cs</code> syntax from command deprecation warnings.</li><li>Updates the help text in various languages.</li></ul></li></ul>|
-| 0.4.90 | 19 Feb 2020 | <ul><li>Updates the Go version to 1.13.5 and removes <code>xgo</code>.</li><li><strong>Command updates</strong>:<ul><li>Adds the <code>--provider</code> flag to the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types"><code>ibmcloud ks flavors</code></a> command.</li><li>Accepts newer flag names like <code>--flavor</code> instead of <code>--machine-type</code> across various commands.</li><li>Changes the default value of the <code>--flavor</code> flag to <code>free</code>.</li><li>Deprecates the <code>--disable-deployment</code> flag of the <code>ibmcloud ks alb configure vpc-classic</code> command.</li></ul></li><li><strong>VPC-specific command updates</strong>:<ul><li>Fixes the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_zone_rm"><code>ibmcloud ks zone rm</code></a> command for VPC multizone clusters.</li><li>For the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_vpcs"><code>ibmcloud ks vpcs</code></a> command, defaults to list only generation 1 (<code>vpc-classic</code>) VPCs.</li><li>Revises the <code>ibmcloud ks worker-pool create vpc-classic</code> command to remove the <code>--disable-disk-encrypt</code> flag and to hide the <code>--hardware</code> flag because it only accepts one value.</li></ul></li><li><strong>Help documentation updates</strong>:<ul><li>Add deprecation warnings to encourage you to use the newer <code>classic</code> subcommands. For example, use <code>ibmcloud ks cluster create classic</code> instead of <code>ibmcloud ks cluster create</code>.</li><li>Standardizes formatting in help text, such as adding single quotes around variable names or styling for URLs.</li><li>Updates the help text in various languages.</li></ul></li></ul>|
-| 0.4.66 | 19 Dec 2019 | <ul><li>Adds a <strong>Status</strong> field to the <code>ibmcloud ks alb cert get</code> command. The previous <strong>Status</strong> field is now called <strong>State</strong>.</li><li>Fixes a bug so that help text is now properly displayed for top-level commands, such as <code>ibmcloud ks flavors</code> and <code>ibmcloud ks subnets</code>.</li></ul>|
-| 0.4.64 | 11 Dec 2019 | <ul><li>Updates the Go version to 1.12.11.</li><li>Updates the help text in various languages.</li></ul>|
-| 0.4.61 | 26 Nov 2019 | <ul><li>Removes the <code>kube-audit</code> log source option from <code>ibmcloud ks logging config</code> commands.</li><li>Adds a check to verify that you are logged in to the {{site.data.keyword.cloud_notm}} CLI before a command request is issued.</li><li>Updates the help text in various languages.</li></ul>|
-| 0.4.51 | 07 Nov 2019 | <ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_crk_ls"><code>ibmcloud ks kms crk ls</code></a>, <a href="/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_enable"><code>ibmcloud ks kms enable</code></a>, and <a href="/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_instance_ls"><code>ibmcloud ks kms instance ls</code></a> commands to create and manage key management service (KMS) providers in a cluster.</li><li>Adds the optional <code>--skip-advance-permissions-check</code> flag to <code>ibmcloud ks cluster create</code> and <code>ibmcloud ks cluster rm</code>.</li><li>Changes the <code>--vpc-id</code> flag to be optional for <code>ibmcloud ks worker-pool create vpc-classic</code>.</li><li>Fixes the error message for when no cluster name or ID is specified for <code>ibmcloud ks worker get</code> or <code>ibmcloud ks worker-pool get</code>.</li><li>Adds <code>public</code> and <code>private</code> as supported values for the <code>--hardware</code> flag of <code>ibmcloud ks worker-pool create classic</code>.</li><li>When the <code>--admin</code> flag is included in <code>ibmcloud ks cluster config</code>, removes <code>-admin</code> from the cluster name in the <code>KUBECONFIG</code> file path.</li><li>Updates all command help to use the new space-separated syntax.</li></ul>|
-| 0.4.42 | 24 Oct 2019 |<ul><li>Adds the cluster ID to the output of <code>ibmcloud ks cluster create</code>.</li><li>Updates the Go version to 1.12.10 to fix <code>golang</code> vulnerabilities for <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276">CVE-2019-16276</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li></ul>|
-| 0.4.38 | 14 Oct 2019 |<ul><li>Adds the <code>ibmcloud ks nlb-dns create vpc-classic</code>, <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-replace"><code>ibmcloud ks nlb-dns replace</code></a>, and <code>ibmcloud ks nlb-dns rm vpc-classic</code> commands to create and manage DNS subdomains for VPC load balancers in VPC clusters.</li><li>Adds the <code>--secret-namespace</code> flag to the <code>ibmcloud ks nlb-dns create classic</code> and <code>ibmcloud ks nlb-dns create vpc-classic</code> commands to specify the Kubernetes namespace that you want the SSL secret for the DNS subdomain to be created in.</li><li>Updates status information of worker nodes for VPC clusters.</li><li>Updates the help text in various languages.</li></ul>|
-| 0.4.31 | 24 Sep 2019 |<ul><li>Adds the <code>--gateway-enabled</code> flag to the <code>ibmcloud ks cluster create classic</code> command to create a gateway-enabled cluster. You can enable a gateway only on standard, Kubernetes clusters during cluster creation. For more information, see <a href="/docs/containers?topic=containers-clusters#gateway_cluster_cli">Creating a standard classic cluster with a gateway in the CLI</a>.</li><li>Removes the deprecated <code>region get</code>, <code>region set</code>, and <code>region ls</code> commands from help output.</li><li>Updates command structure to the new spaced format in help output.</li><li>Adds a warning to the output of legacy <code>cluster config</code> behavior. For more information, see the <a href="/docs/containers?topic=containers-cs_cli_changelog#changelog_beta">version 1.0 plug-in documentation</a>.</li><li>Fixes a bug so that <code>worker reload</code> and <code>messages</code> commands now fail if the command errors.</li><li>Updates the help text in various languages.</li></ul>|
-| 0.4.23 | 16 Sep 2019 |<ul><li>Decreases startup time for the plug-in.</li><li>Fixes a Go version issue for macOS users.</li><li>Improves debug tracing.</li><li>In <code>ibmcloud ks logging filter</code> commands, the syntax of the <code>--logging-config</code> flag changes from accepting multiple values in a comma-separated list to requiring repeated flags.</li><li>Minor bug and security fixes.</li><li>Updates message, warning, and help text.</li></ul>|
-| 0.4.3 | 04 Sep 2019 | Adds deprecation warnings for legacy commands to error messages that are sent to `stderr`. |
-| 0.4.1 | 03 Sep 2019 |<ul><li>Sets the {{site.data.keyword.containerlong_notm}} plug-in to the redesigned format by default. This redesigned version includes changes such as categorical lists instead of an alphabetical list of commands in the output of <code>ibmcloud ks help</code>, spaced-structured commands instead of hyphenated-structure commands, repeated flags instead of multiple values in comma-separated lists, and more. For a full list of the changes between version <code>0.3</code> and <code>0.4</code>, see the comparison table in <a href="/docs/containers?topic=containers-cs_cli_changelog#changelog_beta">Using the beta {{site.data.keyword.containerlong_notm}} plug-in</a>.</li><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#script_update"><code>ibmcloud ks script update</code></a> command to rewrite scripts that call <code>ibmcloud ks</code> commands.</li><li>Improves error handling for <code>ibmcloud ks cluster ls</code>.</li><li>Updates help text.</li></ul>|
-{: caption="Overview of version changes for version 0.4 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
-{: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
+#### Version 0.4.102
+{: #cli-04102}
+
+Version 0.4.102 of the CLI was released on 4 March 2020.
+
+- Adds the [`ibmcloud ks alb create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_create) and `ibmcloud ks alb create vpc-classic` commands so that you can create and enable new public or private ALBs in a zone. 
+- Removes the beta tag from `ibmcloud ks kms` commands. 
+- Adds `--public-endpoint` as an optional flag to the `ibmcloud ks kms enable` command. Include this flag only if you want to use the KMS public cloud service endpoint instead of the private cloud service endpoint. 
+- Fixes a bug so that the new `--version` flag is accepted in `ibmcloud ks cluster create` commands. 
+- Help documentation updates: 
+    - Fixes incorrect deprecation warnings for commands that are correctly formatted with version 1.0 syntax. 
+    - Removes incorrect `ibmcloud ks cs` syntax from command deprecation warnings.
+    - Updates the help text in various languages.
+
+#### Version 0.4.90
+{: #cli-0490}
+
+Version 0.4.90 of the CLI was released on 19 February 2020.
+
+- Updates the Go version to 1.13.5 and removes `xgo`. 
+- **Command updates**: 
+    - Adds the `--provider` flag to the [`ibmcloud ks flavors`](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types) command. 
+    - Accepts newer flag names like `--flavor` instead of `--machine-type` across various commands.
+    - Changes the default value of the `--flavor` flag to `free`.
+    - Deprecates the `--disable-deployment` flag of the `ibmcloud ks alb configure vpc-classic` command. 
+- **VPC-specific command updates**: 
+    - Fixes the [`ibmcloud ks zone rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_zone_rm) command for VPC multizone clusters. 
+    - For the [`ibmcloud ks vpcs`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vpcs) command, defaults to list only generation 1 (`vpc-classic`) VPCs. 
+    - Revises the `ibmcloud ks worker-pool create vpc-classic` command to remove the `--disable-disk-encrypt` flag and to hide the `--hardware` flag because it only accepts one value. 
+- **Help documentation updates**: 
+    - Add deprecation warnings to encourage you to use the newer `classic` subcommands. For example, use `ibmcloud ks cluster create classic` instead of `ibmcloud ks cluster create`.
+    - Standardizes formatting in help text, such as adding single quotes around variable names or styling for URLs. 
+    - Updates the help text in various languages.|
+
+#### Version 0.4.66
+{: #cli-0466}
+
+Version 0.4.66 of the CLI was released on 19 December 2019.
+
+- Adds a **Status** field to the `ibmcloud ks alb cert get` command. The previous **Status** field is now called **State**. 
+- Fixes a bug so that help text is now properly displayed for top-level commands, such as `ibmcloud ks flavors` and `ibmcloud ks subnets`.
+
+#### Version 0.4.64
+{: #cli-0464}
+
+Version 0.4.64 of the CLI was released on 11 December 2019.
+
+
+- Updates the Go version to 1.12.11. 
+- Updates the help text in various languages.
+  
+#### Version 0.4.61
+{: #cli-0461}
+
+Version 0.4.61 of the CLI was released on 26 November 2019.
+
+- Removes the `kube-audit` log source option from `ibmcloud ks logging config` commands.
+- Adds a check to verify that you are logged in to the {{site.data.keyword.cloud_notm}} CLI before a command request is issued. 
+- Updates the help text in various languages.
+  
+#### Version 0.4.51
+{: #cli-0451}
+
+Version 0.4.51 of the CLI was released on 7 November 2019.
+
+- Adds the [`ibmcloud ks kms crk ls`](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_crk_ls), [`ibmcloud ks kms enable`](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_enable), and [`ibmcloud ks kms instance ls`](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_instance_ls) commands to create and manage key management service (KMS) providers in a cluster. 
+- Adds the optional `--skip-advance-permissions-check` flag to `ibmcloud ks cluster create` and `ibmcloud ks cluster rm`. 
+- Changes the `--vpc-id` flag to be optional for `ibmcloud ks worker-pool create vpc-classic`. 
+- Fixes the error message for when no cluster name or ID is specified for `ibmcloud ks worker get` or `ibmcloud ks worker-pool get`. 
+- Adds `public` and `private` as supported values for the `--hardware` flag of `ibmcloud ks worker-pool create classic`. 
+- When the `--admin` flag is included in `ibmcloud ks cluster config`, removes `-admin` from the cluster name in the `KUBECONFIG` file path. 
+- Updates all command help to use the new space-separated syntax.
+
+#### Version 0.4.42
+{: #cli-0442}
+
+Version 0.4.42 of the CLI was released on 24 Octo er 2019.
+
+- Adds the cluster ID to the output of `ibmcloud ks cluster create`. 
+- Updates the Go version to 1.12.10 to fix `golang` vulnerabilities for [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276){: external}.
+
+#### Version 0.4.38
+{: #cli-0438}
+
+Version 0.4.38 of the CLI was released on 14 Octoer 2019.
+
+
+- Adds the `ibmcloud ks nlb-dns create vpc-classic`, [`ibmcloud ks nlb-dns replace`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-replace), and `ibmcloud ks nlb-dns rm vpc-classic` commands to create and manage DNS subdomains for VPC load balancers in VPC clusters.
+- Adds the `--secret-namespace` flag to the `ibmcloud ks nlb-dns create classic` and `ibmcloud ks nlb-dns create vpc-classic` commands to specify the Kubernetes namespace that you want the SSL secret for the DNS subdomain to be created in. 
+- Updates status information of worker nodes for VPC clusters. 
+- Updates the help text in various languages.
+
+#### Version 0.4.31
+{: #cli-0431}
+
+Version 0.4.31 of the CLI was released on 24 September 2019.
+
+
+- Adds the `--gateway-enabled` flag to the `ibmcloud ks cluster create classic` command to create a gateway-enabled cluster. You can enable a gateway only on standard, Kubernetes clusters during cluster creation. For more information, see [Creating a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli).
+- Removes the deprecated `region get`, `region set`, and `region ls` commands from help output. 
+- Updates command structure to the new spaced format in help output. 
+- Adds a warning to the output of legacy `cluster config` behavior. For more information, see the [version 1.0 plug-in documentation](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta). 
+- Fixes a bug so that `worker reload` and `messages` commands now fail if the command errors. 
+- Updates the help text in various languages.
+
+#### Version 0.4.23
+{: #cli-0423}
+
+Version 0.4.23 of the CLI was released on 16 September 2019.
+
+- Decreases startup time for the plug-in. 
+- Fixes a Go version issue for macOS users. 
+- Improves debug tracing. 
+- In `ibmcloud ks logging filter` commands, the syntax of the `--logging-config` flag changes from accepting multiple values in a comma-separated list to requiring repeated flags. 
+- Minor bug and security fixes. 
+- Updates message, warning, and help text.
+
+#### Version 0.4.3
+{: #cli-043}
+
+Version 0.4.3 of the CLI was released on 4 September 2019.
+
+- Adds deprecation warnings for legacy commands to error messages that are sent to `stderr`.
+
+#### Version 0.4.1
+{: #cli-041}
+
+Version 0.4.1 of the CLI was released on 3 April 2019.
+
+- Sets the {{site.data.keyword.containerlong_notm}} plug-in to the redesigned format by default. This redesigned version includes changes such as categorical lists instead of an alphabetical list of commands in the output of `ibmcloud ks help`, spaced-structured commands instead of hyphenated-structure commands, repeated flags instead of multiple values in comma-separated lists, and more. For a full list of the changes between version `0.3` and `0.4`, see the comparison table in [Using the beta {{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta). 
+- Adds the [`ibmcloud ks script update`](/docs/containers?topic=containers-kubernetes-service-cli#script_update) command to rewrite scripts that call `ibmcloud ks` commands. 
+- Improves error handling for `ibmcloud ks cluster ls`. 
+- Updates help text.
 
 
 
@@ -126,22 +467,106 @@ Review the following changes for 0.3 versions of the CLI plug-in.
 Version 0.3 of the CLI plug-in is deprecated. To update to the latest version, see [Updating to version 1.0 of the plug-in](#changelog_beta).
 {: deprecated}
 
-|Version|Release date|Changes|
-|-------|------------|-------|
-| 0.3.112 | 19 Aug 2019 |<ul><li>With the release of the <a href="/docs/containers?topic=containers-cs_api_install#api_about">{{site.data.keyword.containerlong_notm}} version 2 API</a>, the {{site.data.keyword.cloud_notm}} CLI <code>kubernetes-service</code> plug-in supports both classic and VPC infrastructure providers. Some <code>ibmcloud ks</code> commands support only one type of infrastructure, whereas other commands include additional names or options.</li><li>Adds the <code>--pod-subnet</code> and <code>--service-subnet</code> flags to the <code>ibmcloud ks cluster create classic</code> commands for standard clusters that run Kubernetes 1.15 or later. If you plan to connect your cluster to on-premises networks, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your pods and subnets.</li><li>Enhances the <code>ibmcloud ks nlb-dns create</code> and <code>ibmcloud ks nlb-dns add</code> commands so that you can add more than one IP address at a time. For example, to create a DNS entry for multiple network load balancer IP addresses, use multiple flags such as <code>ibmcloud ks nlb-dns create --cluster mycluster --ip IP1 --ip IP2</code>.</li></ul> |
-| 0.3.103 | 12 Aug 2019 | General refactoring and improvements. |
-| 0.3.99 | 05 Aug 2019 |<ul><li>Improves error handling for <code>ibmcloud ks cluster config</code>.</li><li>Updates the help text in various languages.</li></ul> |
-| 0.3.95 | 30 Jul 2019 |<ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_detach"><code>ibmcloud ks cluster subnet detach</code></a> command to detach a public or private portable subnet in a classic IBM Cloud infrastructure account from a cluster.</li><li>Renames the <code>ibmcloud ks machine-types</code> command to <code>ibmcloud ks flavors</code>. You can still use the <code>machine-types</code> alias.</li><li>In the output of <code>ibmcloud ks flavors (machine-types)</code>, indicates flavors that are supported only for {{site.data.keyword.containerlong_notm}} or only for {{site.data.keyword.openshiftlong_notm}}.</li><li>In the output of <code>ibmcloud ks cluster get</code>, changes the term <code>Owner</code> to <code>Creator</code> to reflect that the field returns information about the user that created the cluster.</li><li>Improves error handling for <code>ibmcloud ks zone add</code>.</li><li>Updates the help text in various languages.</li></ul> |
-| 0.3.58 | 02 Jul 2019 | <ul><li>Fixes a bug so that a worker pool rebalance message is not returned when the cluster autoscaler is enabled.</li><li>Updates help text for the <code>cluster master private-service-endpoint enable</code> and <code>nlb-dns monitor configure</code> commands.</li><li>Updates the help text in various languages.</li></ul> |
-| 0.3.49 | 18 Jun 2019 | Updates the Go version to 1.12.6. |
-| 0.3.47 | 15 Jun 2019 | <ul><li>Fixes a bug so that empty tables are not returned in the output of <code>ibmcloud ks kube-versions</code>.</li><li>Updates the NLB DNS model so that an array of NLB IP addresses is returned by <code>ibmcloud ks nlb-dns ls</code>.</li><li>Changes the description text for the {{site.data.keyword.containerlong_notm}} CLI plug-in.</li></ul> |
-| 0.3.34 | 31 May 2019 | <ul><li>Adds the <code>versions</code> command to list all supported Kubernetes and {{site.data.keyword.openshiftshort}} versions.</li><li>Deprecates the <code>kube-versions</code> command.</li></ul> |
-| 0.3.33 | 30 May 2019 | <ul><li>Adds the <code>--powershell</code> flag to the <code>cluster config</code> command to retrieve Kubernetes environment variables in Windows PowerShell format.</li><li>Deprecates the <code>region get</code>, <code>region set</code>, and <code>region ls</code> commands. For more information, see <a href="/docs/containers?topic=containers-regions-and-zones#endpoint">global endpoint functionality</a>.</li></ul> |
-| 0.3.28 | 23 May 2019 | <ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get"><code>ibmcloud ks infra-permissions get</code></a> command to check whether the credentials that allow <a href="/docs/containers?topic=containers-access-creds">access to the IBM Cloud infrastructure portfolio</a> for the targeted resource group and region are missing suggested or required infrastructure permissions.</li><li>Adds the <code>--private-only</code> flag to the <code>zone network-set</code> command to unset the public VLAN for the worker pool metadata. Subsequent worker nodes in that worker pool zone are connected to a private VLAN only.</li><li>Removes the <code>--force-update</code> flag from the <code>worker update</code> command.</li><li>Adds the <strong>VLAN ID</strong> column to the output of the <code>alb ls</code> and <code>alb get</code> commands.</li><li>Adds the <strong>Multizone Metro</strong> column to the output of the <code>locations</code> command to designate zones that are multizone-capable.</li><li>Adds the <strong>Master State</strong> and <strong>Master Health</strong> fields to the output of the <code>cluster get</code> command. For more information, see <a href="/docs/containers?topic=containers-health-monitor#states_master">Master states</a>.</li><li>Updates the help text in various languages.</li></ul> |
-| 0.3.8 | 30 Apr 2019 | Adds support for [global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint) in version `0.3`. By default, you can now view and manage all of your {{site.data.keyword.containerlong_notm}} resources in all locations. You are not required to target a region to work with resources.<ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_supported-locations"><code>ibmcloud ks locations</code></a> command to list all locations that {{site.data.keyword.containerlong_notm}} supports.</li><li>Adds the <code>--location</code> flag to the <code>cluster ls</code> and <code>zone ls</code> commands to filter resources by one or more locations.</li><li>Adds the <code>--region</code> flag to the <code>credential set/unset/get</code>, <code>api-key reset</code>, and <code>vlan spanning get</code> commands. To run these commands, you must specify a region in the <code>--region</code> flag.</li></ul> |
-{: caption="Overview of version changes for version 0.3 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
-{: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
+#### Version 0.3.112
+{: #cli-03112}
 
+Version 0.3.112 of the CLI was released on 19 August 2019.
+
+- With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API](/docs/containers?topic=containers-cs_api_install#api_about), the {{site.data.keyword.cloud_notm}} CLI `kubernetes-service` plug-in supports both classic and VPC infrastructure providers. Some `ibmcloud ks` commands support only one type of infrastructure, whereas other commands include additional names or options. 
+- Adds the `--pod-subnet` and `--service-subnet` flags to the `ibmcloud ks cluster create classic` commands for standard clusters that run Kubernetes 1.15 or later. If you plan to connect your cluster to on-premises networks, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your pods and subnets. 
+- Enhances the `ibmcloud ks nlb-dns create` and `ibmcloud ks nlb-dns add` commands so that you can add more than one IP address at a time. For example, to create a DNS entry for multiple network load balancer IP addresses, use multiple flags such as `ibmcloud ks nlb-dns create --cluster mycluster --ip IP1 --ip IP2`.
+
+#### Version 0.3.103
+{: #cli-03103}
+
+Version 0.3.103 of the CLI was released on 12 August 2019.
+
+- General refactoring and improvements.
+
+#### Version 0.3.99
+{: #cli-0399}
+
+Version 0.3.99 of the CLI was released on 5 August 2019.
+
+- Improves error handling for `ibmcloud ks cluster config`. 
+- Updates the help text in various languages.
+
+#### Version 0.3.95
+{: #cli-0395}
+
+Version 0.3.95 of the CLI was released on 30 July 2019.
+
+
+- Adds the [`ibmcloud ks cluster subnet detach`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_detach) command to detach a public or private portable subnet in a classic IBM Cloud infrastructure account from a cluster. 
+- Renames the `ibmcloud ks machine-types` command to `ibmcloud ks flavors`. You can still use the `machine-types` alias. 
+- In the output of `ibmcloud ks flavors (machine-types)`, indicates flavors that are supported only for {{site.data.keyword.containerlong_notm}} or only for {{site.data.keyword.openshiftlong_notm}}. 
+- In the output of `ibmcloud ks cluster get`, changes the term `Owner` to `Creator` to reflect that the field returns information about the user that created the cluster. 
+- Improves error handling for `ibmcloud ks zone add`. 
+- Updates the help text in various languages.
+
+#### Version 0.3.58
+{: #cli-0358}
+
+Version 0.3.58 of the CLI was released on 2 July 2019.
+
+- Fixes a bug so that a worker pool rebalance message is not returned when the cluster autoscaler is enabled.
+- Updates help text for the `cluster master private-service-endpoint enable` and `nlb-dns monitor configure` commands. 
+- Updates the help text in various languages.
+  
+#### Version 0.3.49
+{: #cli-0349}
+
+Version 0.3.49 of the CLI was released on 18 June 2019.
+
+- Updates the Go version to 1.12.6.
+
+#### Version 0.3.47
+{: #cli-0347}
+
+Version 0.3.47 of the CLI was released on 15 June 2019.
+
+- Fixes a bug so that empty tables are not returned in the output of `ibmcloud ks kube-versions`. 
+- Updates the NLB DNS model so that an array of NLB IP addresses is returned by `ibmcloud ks nlb-dns ls`. 
+- Changes the description text for the {{site.data.keyword.containerlong_notm}} CLI plug-in.
+
+#### Version 0.3.34
+{: #cli-0334}
+
+Version 0.3.34 of the CLI was released on 31 May 2019.
+
+
+- Adds the `versions` command to list all supported Kubernetes and {{site.data.keyword.openshiftshort}} versions. 
+- Deprecates the `kube-versions` command.
+
+#### Version 0.3.33
+{: #cli-0333}
+
+Version 0.3.33 of the CLI was released on 30 May 2019.
+
+- Adds the `--powershell` flag to the `cluster config` command to retrieve Kubernetes environment variables in Windows PowerShell format. 
+- Deprecates the `region get`, `region set`, and `region ls` commands. For more information, see [global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint).
+
+#### Version 0.3.28
+{: #cli-0328}
+
+Version 0.3.28 of the CLI was released on 23 May 2019.
+
+- Adds the [`ibmcloud ks infra-permissions get`](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get) command to check whether the credentials that allow [access to the IBM Cloud infrastructure portfolio](/docs/containers?topic=containers-access-creds) for the targeted resource group and region are missing suggested or required infrastructure permissions.
+- Adds the `--private-only` flag to the `zone network-set` command to unset the public VLAN for the worker pool metadata. Subsequent worker nodes in that worker pool zone are connected to a private VLAN only.
+- Removes the `--force-update` flag from the `worker update` command. 
+- Adds the **VLAN ID** column to the output of the `alb ls` and `alb get` commands. 
+- Adds the **Multizone Metro** column to the output of the `locations` command to designate zones that are multizone-capable. 
+- Adds the **Master State** and **Master Health** fields to the output of the `cluster get` command. For more information, see [Master states](/docs/containers?topic=containers-health-monitor#states_master). 
+- Updates the help text in various languages.
+
+#### Version 0.3.8
+{: #cli-038}
+
+Version 0.3.8 of the CLI was released on 30 April 2019.
+
+- Adds support for [global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint) in version `0.3`. By default, you can now view and manage all of your {{site.data.keyword.containerlong_notm}} resources in all locations. You are not required to target a region to work with resources. 
+- Adds the [`ibmcloud ks locations`](/docs/containers?topic=containers-kubernetes-service-cli#cs_supported-locations) command to list all locations that {{site.data.keyword.containerlong_notm}} supports. 
+- Adds the `--location` flag to the `cluster ls` and `zone ls` commands to filter resources by one or more locations. - Adds the `--region` flag to the `credential set/unset/get`, `api-key reset`, and `vlan spanning get` commands. To run these commands, you must specify a region in the `--region` flag.
 
 
 ### Version 0.2
@@ -153,22 +578,105 @@ Review the following changes for 0.2 versions of the CLI plug-in.
 Version 0.2 of the CLI plug-in is deprecated. To update to the latest version, see [Updating to version 1.0 of the plug-in](#changelog_beta).
 {: deprecated}
 
-|Version|Release date|Changes|
-|-------|------------|-------|
-| 0.2.102 | 15 Apr 2019 | Adds the [`ibmcloud ks nlb-dns` group of commands](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns) for registering and managing a subdomain for network load balancer (NLB) IP addresses, and the [`ibmcloud ks nlb-dns monitor` group of commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-configure) for creating and modifying health check monitors for NLB subdomains. For more information, see [Registering NLB IPs with a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns). |
-| 0.2.99 | 09 Apr 2019 | <ul><li>Updates help text.</li><li>Updates the Go version to 1.12.2.</li></ul> |
-| 0.2.95 | 03 Apr 2019 | <ul><li>Adds versioning support for managed cluster add-ons.</li><ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_addon_versions"><code>ibmcloud ks addon-versions</code></a> command.</li><li>Adds the <code>--version</code> flag to <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable"><code>ibmcloud ks cluster addon enable</code></a> commands.</li></ul><li>Updates the help text in various languages.</li><li>Updates short links to documentation in help text.</li><li>Fixes a bug where JSON error messages printed in an incorrect format.</li><li>Fixes a bug where using the silent flag (<code>-s</code>) on some commands prevented errors from printing.</li></ul> |
-| 0.2.80 | 19 Mar 2019 | <ul><li>Adds support for enabling <a href="/docs/containers?topic=containers-plan_clusters#workeruser-master">master-to-worker communication with service endpoints</a> in standard clusters in <a href="/docs/account?topic=account-vrf-service-endpoint#vrf">VRF-enabled accounts</a>.<ul><li>Adds the <code>--private-service-endpoint</code> and <code>--public-service-endpoint</code> flags to the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_create"><code>ibmcloud ks cluster-create</code></a> command.</li><li>Adds the <strong>Public Service Endpoint URL</strong> and <strong>Private Service Endpoint URL</strong> fields to the output of <code>ibmcloud ks cluster get</code>.</li><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_enable"><code>ibmcloud ks cluster master private-service-endpoint enable</code></a> command.</li><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pub_se_enable"><code>ibmcloud ks cluster master public-service-endpoint enable</code></a> command.</li><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pub_se_disable"><code>ibmcloud ks cluster master public-service-endpoint disable</code></a> command.</li></ul></li><li>Updates the help text in various languages.</li><li>Updates the Go version to 1.11.6.</li><li>Resolves intermittent networking issues for macOS users.</li></ul> |
-| 0.2.75 | 14 Mar 2019 | <ul><li>Hides raw HTML from error outputs.</li><li>Fixes typos in help text.</li><li>Updates the help text in various languages.</li></ul> |
-| 0.2.61 | 26 Feb 2019 | <ul><li>Adds the <code>cluster pull-secret apply</code> command, which creates an IAM service ID for the cluster, policies, API key, and image pull secrets so that containers that run in the <code>default</code> Kubernetes namespace can pull images from IBM Cloud Container Registry. For new clusters, image pull secrets that use IAM credentials are created by default. Use this command to update existing clusters or if your cluster has an image pull secret error during creation. For more information, see <a href="/docs/containers?topic=containers-registry#cluster_registry_auth">the doc</a>.</li><li>Fixes a bug where <code>ibmcloud ks init</code> failures caused help output to be printed.</li></ul> |
-| 0.2.53 | 19 Feb 2019 | <ul><li>Fixes a bug where the region was ignored for <code>ibmcloud ks api-key reset</code>, <code>ibmcloud ks credential get/set</code>, and <code>ibmcloud ks vlan spanning get</code>.</li><li>Improves performance for <code>ibmcloud ks worker update</code>.</li><li>Adds the version of the add-on in <code>ibmcloud ks cluster addon enable</code> prompts.</li></ul> |
-| 0.2.44 | 08 Feb 2019 | <ul><li>Adds <code>--skip-rbac</code> option to the <code>ibmcloud ks cluster config</code> command to skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.cloud_notm}} IAM service access roles to the cluster configuration. Include this option only if you <a href="/docs/containers?topic=containers-users#rbac">manage your own Kubernetes RBAC roles</a>. If you use <a href="/docs/containers?topic=containers-access_reference#service">{{site.data.keyword.cloud_notm}} IAM service access roles</a> to manage all your RBAC users, do not include this option.</li><li>Updates the Go version to 1.11.5.</li></ul> |
-| 0.2.40 | 06 Feb 2019 | <ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addons"><code>ibmcloud ks cluster addon ls</code></a>, <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable"><code>ibmcloud ks cluster addon enable</code></a>, and <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_disable"><code>ibmcloud ks cluster addon disable</code></a> commands for working with managed cluster add-ons such as the <a href="/docs/containers?topic=containers-istio">Istio</a> managed add-on for {{site.data.keyword.containerlong_notm}}.</li><li>Improves help text for {{site.data.keyword.Bluemix_dedicated_notm}} users of the <code>ibmcloud ks vlan ls</code> command.</li></ul> |
-| 0.2.30 | 31 Jan 2019 | Increases the default timeout value for `ibmcloud ks cluster config` to `500s`. |
-| 0.2.19 | 16 Jan 2019 | <ul><li>Adds the <code>IKS_BETA_VERSION</code> environment variable to enable the redesigned beta version of the {{site.data.keyword.containerlong_notm}} plug-in CLI. To try out the redesigned version, see <a href="/docs/containers?topic=containers-cs_cli_changelog#changelog_beta">Using the beta command structure</a>.</li><li>Increases the default timeout value for <code>ibmcloud ks subnets</code> to <code>60s</code>.</li><li>Fixes a minor bug and updates the help text in various languages.</li></ul> |
-{: caption="Overview of version changes for version 0.2 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
-{: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
+#### Version 0.2.102
+{: #cli-02102}
 
+Version 0.2.102 of the CLI was released on 15 April 2019.
+
+- Adds the [`ibmcloud ks nlb-dns` group of commands](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns) for registering and managing a subdomain for network load balancer (NLB) IP addresses, and the [`ibmcloud ks nlb-dns monitor` group of commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-configure) for creating and modifying health check monitors for NLB subdomains. For more information, see [Registering NLB IPs with a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns).
+
+#### Version 0.2.99
+{: #cli-0299}
+
+Version 0.2.99 of the CLI was released on 9 April 2019.
+
+- Updates help text. 
+- Updates the Go version to 1.12.2.
+
+#### Version 0.2.95
+{: #cli-02}
+
+Version 0.2.95 of the CLI was released on 3 April 2019.
+
+- Adds versioning support for managed cluster add-ons.
+- Adds the [`ibmcloud ks addon-versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_addon_versions) command. 
+- Adds the `--version` flag to [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable) commands.
+- Updates the help text in various languages. 
+- Updates short links to documentation in help text. 
+- Fixes a bug where JSON error messages printed in an incorrect format. 
+- Fixes a bug where using the silent flag (`-s`) on some commands prevented errors from printing.
+  
+#### Version 0.2.80
+{: #cli-0280}
+
+Version 0.2.80 of the CLI was released on 19 March 2019.
+
+- Adds support for enabling [master-to-worker communication with service endpoints](/docs/containers?topic=containers-plan_clusters#workeruser-master) in standard clusters in [VRF-enabled accounts](/docs/account?topic=account-vrf-service-endpoint#vrf). 
+- Adds the `--private-service-endpoint` and `--public-service-endpoint` flags to the [`ibmcloud ks cluster-create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_create) command. 
+- Adds the **Public Service Endpoint URL** and **Private Service Endpoint URL** fields to the output of `ibmcloud ks cluster get`. 
+- Adds the [`ibmcloud ks cluster master private-service-endpoint enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_enable) command. 
+- Adds the [`ibmcloud ks cluster master public-service-endpoint enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pub_se_enable) command.
+- Adds the [`ibmcloud ks cluster master public-service-endpoint disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pub_se_disable) command.
+- Updates the help text in various languages. 
+- Updates the Go version to 1.11.6. 
+- Resolves intermittent networking issues for macOS users.
+
+#### Version 0.2.75
+{: #cli-0275}
+
+Version 0.2.75 of the CLI was released on 14 March 2019.
+
+- Hides raw HTML from error outputs. 
+- Fixes typos in help text. 
+- Updates the help text in various languages.
+
+#### Version 0.2.61
+{: #cli-0261}
+
+Version 0.2.61 of the CLI was released on 26 February 2019.
+
+- Adds the `cluster pull-secret apply` command, which creates an IAM service ID for the cluster, policies, API key, and image pull secrets so that containers that run in the `default` Kubernetes namespace can pull images from IBM Cloud Container Registry. For new clusters, image pull secrets that use IAM credentials are created by default. Use this command to update existing clusters or if your cluster has an image pull secret error during creation. For more information, see [the doc](/docs/containers?topic=containers-registry#cluster_registry_auth). 
+- Fixes a bug where `ibmcloud ks init` failures caused help output to be printed.
+
+#### Version 0.2.53
+{: #cli-0253}
+
+Version 0.2.53 of the CLI was released on 19 February 2019.
+
+- Fixes a bug where the region was ignored for `ibmcloud ks api-key reset`, `ibmcloud ks credential get/set`, and `ibmcloud ks vlan spanning get`. 
+- Improves performance for `ibmcloud ks worker update`. 
+- Adds the version of the add-on in `ibmcloud ks cluster addon enable` prompts.
+
+#### Version 0.2.44
+{: #cli-0244}
+
+Version 0.2.44 of the CLI was released on 8 February 2019.
+
+- Adds `--skip-rbac` option to the `ibmcloud ks cluster config` command to skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.cloud_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service) to manage all your RBAC users, do not include this option. - Updates the Go version to 1.11.5.
+
+#### Version 0.2.40
+{: #cli-0240}
+
+Version 0.2.40 of the CLI was released on 6 February 2019.
+
+- Adds the [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addons), [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable), and [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_disable) commands for working with managed cluster add-ons such as the [Istio](/docs/containers?topic=containers-istio) managed add-on for {{site.data.keyword.containerlong_notm}}. 
+- Improves help text for {{site.data.keyword.Bluemix_dedicated_notm}} users of the `ibmcloud ks vlan ls` command.
+
+#### Version 0.2.30
+{: #cli-0230}
+
+Version 0.2.30 of the CLI was released on 31 January 2019.
+
+- Increases the default timeout value for `ibmcloud ks cluster config` to `500s`.
+
+#### Version 0.2.19
+{: #cli-0219}
+
+Version 0.2.19 of the CLI was released on 16 January 2019.
+
+- Adds the `IKS_BETA_VERSION` environment variable to enable the redesigned beta version of the {{site.data.keyword.containerlong_notm}} plug-in CLI. To try out the redesigned version, see [Using the beta command structure](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta). 
+- Increases the default timeout value for `ibmcloud ks subnets` to `60s`. 
+- Fixes a minor bug and updates the help text in various languages.
 
 
 ### Version 0.1
@@ -180,19 +688,77 @@ Review the following changes for 0.1 versions of the CLI plug-in.
 Version 0.1 of the CLI plug-in is deprecated. To update to the latest version, see [Updating to version 1.0 of the plug-in](#changelog_beta).
 {: deprecated}
 
-|Version|Release date|Changes|
-|-------|------------|-------|
-| 0.1.668 | 18 Dec 2018 | <ul><li>Changes the default API endpoint from <code>containers.bluemix.net</code> to <code>containers.cloud.ibm.com</code>.</li><li>Fixes bug so that command help text and error messages display properly for various languages.</li><li>Displays command help faster.</li></ul> |
-| 0.1.654 | 05 Dec 2018 | Updates the help text in various languages. |
-| 0.1.638 | 15 Nov 2018 |<ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh"><code>ibmcloud ks cluster-refresh</code></a> alias to the <code>apiserver-refresh</code> command.</li><li>Adds the resource group name to the output of <code>ibmcloud ks cluster get</code> and <code>ibmcloud ks cluster ls</code>.</li></ul>|
-| 0.1.635 | 06 Nov 2018 | Adds commands for managing automatic updates of the Ingress ALB cluster add-on:<ul><li><a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable"><code>ibmcloud ks alb autoupdate disable</code></a></li><li><a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_enable"><code>ibmcloud ks alb autoupdate enable</code></a></li><li><a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_get"><code>ibmcloud ks alb autoupdate get</code></a></li><li><code>ibmcloud ks alb rollback</code></li><li><a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_update"><code>ibmcloud ks alb-update</code></a></li></ul> |
-| 0.1.621 | 30 Oct 2018 | <ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_credential_get"><code>ibmcloud ks credential get</code> command</a>.</li><li>Adds support for the <code>storage</code> log source to all cluster logging commands. For more information, see <a href="/docs/containers?topic=containers-health#logging">Understanding cluster and app log forwarding</a>.</li><li>Adds the <code>--network</code> flag to the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_config"><code>ibmcloud ks cluster config</code> command</a>, which downloads the Calico configuration file to run all Calico commands.</li><li>Minor bug fixes and refactoring</li></ul>|
-| 0.1.593 | 10 Oct 2018 | <ul><li>Adds the resource group ID to the output of <code>ibmcloud ks cluster get</code>.</li><li>When <a href="/docs/containers?topic=containers-encryption#keyprotect">{{site.data.keyword.keymanagementserviceshort}} is enabled</a> as a key management service (KMS) provider in your cluster, adds the KMS enabled field in the output of <code>ibmcloud ks cluster get</code>.</li></ul> |
-| 0.1.591 | 02 Oct 2018 | Adds support for [resource groups](/docs/containers?topic=containers-clusters#cluster_prepare). |
-| 0.1.590 | 01 Oct 2018 | <ul><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect"><code>ibmcloud ks logging collect</code></a> and <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect_status"><code>ibmcloud ks logging collect-status</code></a> commands for collecting API server logs in your cluster.</li><li>Adds the <a href="/docs/containers?topic=containers-kubernetes-service-cli#ks_kms"><code>ibmcloud ks key-protect-enable</code> command</a> to enable {{site.data.keyword.keymanagementserviceshort}} as a key management service (KMS) provider in your cluster.</li><li>Adds the <code>--skip-master-health</code> flag to the <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot">ibmcloud ks worker reboot</a> and <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot">ibmcloud ks worker reload</a> commands to skip the master health check before initiating the reboot or reload.</li><li>Renames <code>Owner Email</code> to <code>Owner</code> in the output of <code>ibmcloud ks cluster get</code>.</li></ul> |
-{: caption="Overview of version changes for version 0.1 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
-{: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
+#### Version 0.1.668
+{: #cli-01668}
+
+Version 0.1.68 of the CLI was released on 18  December 2018.
+
+- Changes the default API endpoint from `containers.bluemix.net` to `containers.cloud.ibm.com`. 
+- Fixes bug so that command help text and error messages display properly for various languages. 
+- Displays command help faster.
+
+#### Version 0.1.654
+{: #cli-01654}
+
+Version 0.1.654 of the CLI was released on 5  December 2018.
+
+- Updates the help text in various languages.
+
+#### Version 0.1.638
+{: #cli-01638}
+
+Version 0.1.638 of the CLI was released on 15 November 2018.
+
+- Adds the [`ibmcloud ks cluster-refresh`](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh) alias to the `apiserver-refresh` command. 
+- Adds the resource group name to the output of `ibmcloud ks cluster get` and `ibmcloud ks cluster ls`.
+
+#### Version 0.1.635
+{: #cli-01635}
+
+Version 0.1.635 of the CLI was released on 6 November 2018.
+
+Adds commands for managing automatic updates of the Ingress ALB cluster add-on: 
+- [`ibmcloud ks alb autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable)
+- [`ibmcloud ks alb autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_enable)
+- [`ibmcloud ks alb autoupdate get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_get)
+- `ibmcloud ks alb rollback` 
+- [`ibmcloud ks alb-update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_update)
+
+#### Version 0.1.621
+{: #cli-01621}
+
+Version 0.1.621 of the CLI was released on 30 October 2018.
 
 
+- Adds the [`ibmcloud ks credential get` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_credential_get). 
+- Adds support for the `storage` log source to all cluster logging commands. For more information, see [Understanding cluster and app log forwarding](/docs/containers?topic=containers-health#logging). 
+- Adds the `--network` flag to the [`ibmcloud ks cluster config` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_config), which downloads the Calico configuration file to run all Calico commands. 
+- Minor bug fixes and refactoring.
+
+#### Version 0.1.593
+{: #cli-01593}
+
+Version 0.1.593 of the CLI was released on 10 October 2018.
+
+- Adds the resource group ID to the output of `ibmcloud ks cluster get`. 
+- When [{{site.data.keyword.keymanagementserviceshort}} is enabled](/docs/containers?topic=containers-encryption#keyprotect) as a key management service (KMS) provider in your cluster, adds the KMS enabled field in the output of `ibmcloud ks cluster get`.
+
+#### Version 0.1.591
+{: #cli-01591}
+
+Version 0.1.591 of the CLI was released on 2 October 2018.
+
+- Adds support for [resource groups](/docs/containers?topic=containers-clusters#cluster_prepare).
+
+#### Version 0.1.590
+{: #cli-01590}
+
+Version 0.1.590 of the CLI was released on 1 October 2018.
 
 
+- Adds the [`ibmcloud ks logging collect`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect) and [`ibmcloud ks logging collect-status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect_status) commands for collecting API server logs in your cluster.
+- Adds the [`ibmcloud ks key-protect-enable` command](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms) to enable {{site.data.keyword.keymanagementserviceshort}} as a key management service (KMS) provider in your cluster. 
+- Adds the `--skip-master-health` flag to the [ibmcloud ks worker reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) and [ibmcloud ks worker reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) commands to skip the master health check before initiating the reboot or reload. 
+- Renames `Owner Email` to `Owner` in the output of `ibmcloud ks cluster get`.
+  
+  
