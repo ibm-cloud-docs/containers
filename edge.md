@@ -240,7 +240,7 @@ To prevent other workloads from running on edge worker nodes,
 ## Isolating ALB proxy workloads to edge nodes in classic gateway-enabled clusters
 {: #edge_gateway}
 
-![Classic infrastructure provider icon.](images/icon-classic.png) Create a worker pool of edge nodes in your gateway-enabled cluster to ensure that Ingress application load balancers (ALB) pods are deployed to those worker nodes only.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Create a worker pool of edge nodes in your gateway-enabled cluster to ensure that Ingress application load balancers (ALB) pods are deployed to those worker nodes only.
 {: shortdesc}
 
 When you create a [classic cluster with a gateway](/docs/containers?topic=containers-plan_clusters#gateway), the cluster is created with a `compute` worker pool of compute worker nodes that are connected to a private VLAN only, and a `gateway` worker pool of gateway worker nodes that are connected to public and private VLANs. Gateway worker nodes help you achieve network connectivity separation between the internet or an on-premises data center and the compute workload that runs in your cluster. By default, all network load balancer (NLB) and Ingress application load balancer (ALB) pods deploy to the gateway worker nodes, which are also tainted so that no compute workloads can be scheduled onto them.

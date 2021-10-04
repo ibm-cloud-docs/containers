@@ -29,7 +29,7 @@ completion-time: 30m
 Create an {{site.data.keyword.containerlong}} cluster in your Virtual Private Cloud (VPC).
 {: shortdesc}
 
-![VPC infrastructure provider icon.](images/icon-vpc.png) With **{{site.data.keyword.containerlong_notm}} clusters on VPC**, you can create your cluster in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> With **{{site.data.keyword.containerlong_notm}} clusters on VPC**, you can create your cluster in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
 
 ## Objectives
 {: #vpc_ks_objectives}

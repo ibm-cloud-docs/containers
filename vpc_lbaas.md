@@ -20,7 +20,7 @@ subcollection: containers
 Set up a Load Balancer for VPC to expose your app on the public or private network.
 {: shortdesc}
 
-![VPC infrastructure provider icon.](images/icon-vpc.png) VPC load balancers can be created for VPC clusters only, and cannot be created for classic clusters. To load balance in classic clusters, see [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about).
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC load balancers can be created for VPC clusters only, and cannot be created for classic clusters. To load balance in classic clusters, see [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about).
 
 ## About VPC load balancing in {{site.data.keyword.containerlong_notm}}
 {: #lbaas_about}
@@ -546,7 +546,7 @@ Do not confuse the Application Load Balancer for VPC with {{site.data.keyword.co
 **Before you begin**:
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for the namespace in which you deploy the Kubernetes `LoadBalancer` service for the VPC NLB.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* ![VPC infrastructure provider icon.](images/icon-vpc.png) VPC clusters that run Kubernetes version 1.18 or earlier only: [Allow traffic requests that are routed by the VPC ALB to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
+* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters that run Kubernetes version 1.18 or earlier only: [Allow traffic requests that are routed by the VPC ALB to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 * To view VPC ALBs, install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
     ```sh
     ibmcloud plugin install infrastructure-service
