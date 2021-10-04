@@ -24,7 +24,7 @@ Review sample cluster architectures and the components that are created in your 
 ## Classic cluster
 {: #architecture_classic}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The following architectural overviews are specific to the classic infrastructure provider. For an architectural overview for the VPC infrastructure provider, see [VPC cluster architecture](#architecture_vpc).
+![Classic infrastructure provider icon.](images/icon-classic-2.png) The following architectural overviews are specific to the classic infrastructure provider. For an architectural overview for the VPC infrastructure provider, see [VPC cluster architecture](#architecture_vpc).
 {: note}
 
 ### Non-VRF or VRF-enabled account with public cloud service endpoint only
@@ -195,7 +195,7 @@ The following table describes the components of a worker node.
 The following diagram and table describe the default components that are set up in an {{site.data.keyword.containerlong_notm}} VPC cluster architecture.
 {: shortdesc}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The following architectural overviews are specific to the VPC infrastructure provider. For an architectural overview for the classic infrastructure provider, see [Classic cluster architecture](#architecture_classic).
+![VPC infrastructure provider icon.](images/icon-vpc-2.png) The following architectural overviews are specific to the VPC infrastructure provider. For an architectural overview for the classic infrastructure provider, see [Classic cluster architecture](#architecture_classic).
 {: note}
 
 ![Kubernetes cluster in a VPC](images/cs_org_ov_vpc.png)

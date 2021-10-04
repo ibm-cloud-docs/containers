@@ -59,7 +59,7 @@ If you do not already have an app ready, you can use a Kubernetes example app ca
 Before you begin
 
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters: [Allow traffic requests that are routed to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
+* ![VPC infrastructure provider icon.](images/icon-vpc-2.png) VPC clusters: [Allow traffic requests that are routed to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 
 To use a NodePort,
 

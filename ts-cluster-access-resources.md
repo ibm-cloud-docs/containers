@@ -18,7 +18,7 @@ content-type: troubleshoot
 # Classic: Why can't I access resources in my cluster?
 {: #cs_firewall}
 
-**Infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+**Infrastructure provider**: ![Classic infrastructure provider icon.](images/icon-classic-2.png) Classic
 
 
 When the worker nodes in your cluster cannot communicate on the private network, you might see various different symptoms.

@@ -19,7 +19,7 @@ content-type: troubleshoot
 {: #cs_alb_subnet}
 
 **Infrastructure provider**:
-* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+* ![Classic infrastructure provider icon.](images/icon-classic-2.png) Classic
 
 
 When you try to enable an Ingress ALB by running the `ibmcloud ks ingress alb enable` command, you see the following error:

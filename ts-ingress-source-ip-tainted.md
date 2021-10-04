@@ -19,7 +19,7 @@ content-type: troubleshoot
 {: #cs_source_ip_fails}
 
 **Infrastructure provider**:
-* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+* ![Classic infrastructure provider icon.](images/icon-classic-2.png) Classic
 
 
 You [enabled source IP preservation for an Ingress ALB](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip_classic) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the back-end service for your app.

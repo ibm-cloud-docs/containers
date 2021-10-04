@@ -133,7 +133,7 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
         {: screen}
 
 2. Get the public address for the `istio-ingressgateway` load balancer that exposes BookInfo.
-    * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**
+    * ![Classic infrastructure provider icon.](images/icon-classic-2.png) **Classic clusters**
         1. Set the Istio ingress IP address as an environment variable.
             ```sh
             export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
@@ -152,7 +152,7 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
             ```
             {: pre}
 
-    * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**: Create a `GATEWAY_URL` environment variable that uses the Istio ingress hostname.
+    * ![VPC infrastructure provider icon.](images/icon-vpc-2.png) **VPC clusters**: Create a `GATEWAY_URL` environment variable that uses the Istio ingress hostname.
         ```sh
         export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
         ```
