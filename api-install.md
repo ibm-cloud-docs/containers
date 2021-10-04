@@ -247,7 +247,7 @@ Federated ID
         {: codeblock}
 
         Header
-        :     `Authorization: bearer <iam_token>`
+        :    - `Authorization: bearer <iam_token>`
 
     * **VPC**
     
@@ -257,7 +257,7 @@ Federated ID
         {: codeblock}
 
         Header
-        :     `Authorization`: Your {{site.data.keyword.cloud_notm}} IAM access token (`bearer <iam_token>`).
+        :    - `Authorization`: Your {{site.data.keyword.cloud_notm}} IAM access token (`bearer <iam_token>`).
 
 5. Review the [{{site.data.keyword.containerlong_notm}} API documentation](https://containers.cloud.ibm.com/global/swagger-global-api/#/){: external} to find a list of supported APIs.
 
@@ -285,18 +285,18 @@ The following instructions require public network access in your cluster to conn
     {: codeblock}
 
     Header
-    :     - `Content-Type: application/x-www-form-urlencoded`
-          - `Authorization: Basic Yng6Yng=`
-              `Yng6Yng=` equals the URL-encoded authorization for the username **bx** and the password **bx**.
-              {: note}
-          - `cache-control: no-cache`
+    :    - `Content-Type: application/x-www-form-urlencoded`
+         - `Authorization: Basic Yng6Yng=`
+             `Yng6Yng=` equals the URL-encoded authorization for the username **bx** and the password **bx**.
+             {: note}
+         - `cache-control: no-cache`
 
     Body
-    :     - `delegated_refresh_token_expiry: 600`
-          - `receiver_client_ids: kube`
-          - `response_type: delegated_refresh_token`
-          - `refresh_token`: Your {{site.data.keyword.cloud_notm}} IAM refresh token.
-          - `grant_type: refresh_token
+    :    - `delegated_refresh_token_expiry: 600`
+         - `receiver_client_ids: kube`
+         - `response_type: delegated_refresh_token`
+         - `refresh_token`: Your {{site.data.keyword.cloud_notm}} IAM refresh token.
+         - `grant_type: refresh_token
 
     The following example shows output from the previous API request.
 
@@ -314,14 +314,14 @@ The following instructions require public network access in your cluster to conn
     {: codeblock}
 
     Header
-    :     - `Content-Type: application/x-www-form-urlencoded` 
-          - `Authorization: Basic a3ViZTprdWJl`
+    :    - `Content-Type: application/x-www-form-urlencoded` 
+         - `Authorization: Basic a3ViZTprdWJl`
               `a3ViZTprdWJl` equals the URL-encoded authorization for the username **`kube`** and the password **`kube`**.
               {: note}
-          - `cache-control: no-cache`
+         - `cache-control: no-cache`
     Body
-    :     - `refresh_token`: Your {{site.data.keyword.cloud_notm}} IAM delegated refresh token.
-          - `grant_type: urn:ibm:params:oauth:grant-type:delegated-refresh-token`
+    :    - `refresh_token`: Your {{site.data.keyword.cloud_notm}} IAM delegated refresh token.
+         - `grant_type: urn:ibm:params:oauth:grant-type:delegated-refresh-token`
 
     The following example shows output from the previous API request.
 
@@ -348,11 +348,11 @@ The following instructions require public network access in your cluster to conn
     ```
     {: codeblock}
 
-    Header</td>
-    :     - `Authorization`: Your {{site.data.keyword.cloud_notm}} IAM access token.</td>
+    Header
+    :    - `Authorization`: Your {{site.data.keyword.cloud_notm}} IAM access token.
    
     Path
-    :     - `<cluster_name_or_ID>`: The name or ID of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/global/v2/classic/getClusters` or `GET https://containers.cloud.ibm.com/global/v2/vpc/getClusters?provider=vpc-gen2` API in [Automating cluster deployments with the API](#cs_api).
+    :    - `<cluster_name_or_ID>`: The name or ID of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/global/v2/classic/getClusters` or `GET https://containers.cloud.ibm.com/global/v2/vpc/getClusters?provider=vpc-gen2` API in [Automating cluster deployments with the API](#cs_api).
 
     The following example shows output for a public cloud service endpoint request.
     
@@ -388,10 +388,10 @@ The following instructions require public network access in your cluster to conn
     {: codeblock}
 
     Header
-    :     - `Authorization: bearer &lt;id_token&gt;`</td>
+    :    - `Authorization: bearer &lt;id_token&gt;`</td>
     
     Path
-    :     - `<masterURL>`: The service endpoint of your Kubernetes master that you retrieved in the previous step.
+    :    - `<masterURL>`: The service endpoint of your Kubernetes master that you retrieved in the previous step.
 
     The following example shows the output of the previous API request.
 
@@ -439,33 +439,33 @@ Use the following steps if you want to create an {{site.data.keyword.cloud_notm}
     {: codeblock}
 
     Header
-    :     - `Content-Type: application/x-www-form-urlencoded`
-          - `Authorization: Basic Yng6Yng=`
-              `Yng6Yng=` equals the URL-encoded authorization for the username **bx** and the password **bx**.
-              {: note}
+    :    - `Content-Type: application/x-www-form-urlencoded`
+         - `Authorization: Basic Yng6Yng=`
+             `Yng6Yng=` equals the URL-encoded authorization for the username **bx** and the password **bx**.
+             {: note}
     
     Body when using the refresh token
-    :     - `grant_type: refresh_token`
-          - `response_type: cloud_iam uaa`
-          - `refresh_token:` Your {{site.data.keyword.cloud_notm}} IAM refresh token.
-          - `uaa_client_ID: cf`
-          - `uaa_client_secret:`
-          - `bss_account:` Your {{site.data.keyword.cloud_notm}} account ID.
-              Add the `uaa_client_secret` key with no value specified.
-              {: note}
+    :    - `grant_type: refresh_token`
+         - `response_type: cloud_iam uaa`
+         - `refresh_token:` Your {{site.data.keyword.cloud_notm}} IAM refresh token.
+         - `uaa_client_ID: cf`
+         - `uaa_client_secret:`
+         - `bss_account:` Your {{site.data.keyword.cloud_notm}} account ID.
+             Add the `uaa_client_secret` key with no value specified.
+             {: note}
           
     Body when using the {{site.data.keyword.cloud_notm}} API key
-    :     - `grant_type: urn:ibm:params:oauth:grant-type:apikey`
-          - `response_type: cloud_iam uaa`
-          - `apikey:` Your {{site.data.keyword.cloud_notm}} API key.
-          - `uaa_client_ID: cf`
-          - `uaa_client_secret:`
-              Add the `uaa_client_secret` key with no value specified.
-              {: note}
+    :    - `grant_type: urn:ibm:params:oauth:grant-type:apikey`
+         - `response_type: cloud_iam uaa`
+         - `apikey:` Your {{site.data.keyword.cloud_notm}} API key.
+         - `uaa_client_ID: cf`
+         - `uaa_client_secret:`
+             Add the `uaa_client_secret` key with no value specified.
+             {: note}
 
     The following example shows the output of the previous API request.
 
-    ```
+    ```sh
     {
         "access_token": "<iam_token>",
         "refresh_token": "<iam_refresh_token>",
