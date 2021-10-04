@@ -2,13 +2,15 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
 subcollection: containers
 
----{{site.data.keyword.attribute-definition-list}}
+---
+
+{{site.data.keyword.attribute-definition-list}}
 
   
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-01"
+lastupdated: "2021-10-04"
 
 keywords: containers
 subcollection: containers
@@ -1826,6 +1826,10 @@ subcollection: containers
 * [Prerequisites](/docs/containers?topic=containers-ingress-types#config_prereqs)
 
 * [Publicly exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create)
+
+    * [IBM-provided domain](/docs/containers?topic=containers-ingress-types#alb-com-create-ibm-domain)
+
+    * [Custom domain](/docs/containers?topic=containers-ingress-types#alb-comm-create-custom)
 
 * [Privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private)
 
@@ -4218,6 +4222,22 @@ subcollection: containers
 ## IAM and Activity Tracker events
 {: #sitemap_iam_and_activity_tracker_events}
 
+
+[User access permissions](/docs/containers?topic=containers-access_reference#access_reference)
+
+* [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions)
+
+* [{{site.data.keyword.cloud_notm}} IAM platform access roles](/docs/containers?topic=containers-access_reference#iam_platform)
+
+* [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service)
+
+* [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
+
+* [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-access_reference#iam_issuer_users)
+
+* [Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)
+
+* [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
 
 [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events#at_events)
 

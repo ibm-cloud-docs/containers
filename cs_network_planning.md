@@ -2,14 +2,13 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-09-30"
+lastupdated: "2021-10-04"
 
 keywords: kubernetes, iks, networking
 
 subcollection: containers
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -105,15 +104,15 @@ The following table compares the features of each network service type.
 
 |Characteristics|ClusterIP|NodePort|LoadBalancer (Classic - NLB)|LoadBalancer (VPC load balancer)|Ingress|
 |---------------|---------|--------|----------------------------|--------------------------------|-------|
-|Free clusters|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />| | | |
-|Standard clusters|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|Externally accessible| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|External hostname| | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|Stable external IP| | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|HTTP(S) load balancing| | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />*|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />*|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|TLS termination| | | | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|Custom routing rules| | | | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|Multiple apps per service| | | | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|Free clusters|Yes|Yes| | | |
+|Standard clusters|Yes|Yes|Yes|Yes|Yes|
+|Externally accessible| |Yes|Yes|Yes|Yes|
+|External hostname| | |Yes|Yes|Yes|
+|Stable external IP| | |Yes| |Yes|
+|HTTP(S) load balancing| | |Yes*|Yes*|Yes|
+|TLS termination| | | | |Yes|
+|Custom routing rules| | | | |Yes|
+|Multiple apps per service| | | | |Yes|
 {: caption="Characteristics of Kubernetes network service types" caption-side="top"}
 
 `*` An SSL certificate for HTTPS load balancing is provided by `ibmcloud ks nlb-dns` commands. In classic clusters, these commands are supported for public NLBs only.
