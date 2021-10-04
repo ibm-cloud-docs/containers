@@ -380,7 +380,7 @@ To access the storage from your app, you must mount the PVC to your app.
 
     2. Navigate to your volume mount path that you defined in your app deployment.
     3. Create a text file.
-        ```
+        ```sh
         echo "This is a test" > test.txt
         ```
         {: pre}

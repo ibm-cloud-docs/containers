@@ -135,7 +135,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
 
 4. Build a Docker image that includes your app code and push it to your private registry.
 
-    ```
+    ```sh
     ibmcloud cr build -t <region>.icr.io/namespace/cf-py .
     ```
     {: pre}

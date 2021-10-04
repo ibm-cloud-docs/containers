@@ -269,22 +269,6 @@ subcollection: containers
 
 [Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: new_window}{: external}
 
-[Creating a cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial)
-
-* [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
-
-* [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
-
-* [Prerequisites](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_prereqs)
-
-* [Create a cluster in VPC](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_create_vpc_cluster)
-
-* [Deploy a privately available app](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_app)
-
-* [Set up a Load Balancer for VPC to expose your app publicly](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_vpc_lb)
-
-* [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
-
 
 ## Developing apps in clusters
 {: #sitemap_developing_apps_in_clusters}
@@ -1195,30 +1179,6 @@ subcollection: containers
 
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
 
-[Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns)
-
-* [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
-
-* [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize)
-
-* [Setting up NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_cache)
-
-    * [Enable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_enablecache)
-
-    * [Disable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_disablecache)
-
-* [Customizing NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize)
-
-    * [Editing the `node-local-dns` configmap for general configuration updates](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_configmap)
-
-    * [Editing the `node-local-dns-config` configmap to extend with stub domains or upstream servers](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_stub_upstream)
-
-* [Setting up zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
-
-    * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
-
-    * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
-
 
 ### VPC clusters
 {: #sitemap_vpc_clusters}
@@ -1272,6 +1232,18 @@ subcollection: containers
 
     * [Use {{site.data.keyword.tg_full_notm}}](/docs/containers?topic=containers-vpc-vpnaas#vpc-use-transit-gw)
 
+[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes#static-routes)
+
+* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
+
+* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
+
+    * [Enabling the static route add-on from the console](/docs/containers?topic=containers-static-routes#enable-add-on-console)
+
+    * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
+
+* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
+
 [Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns)
 
 * [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
@@ -1295,18 +1267,6 @@ subcollection: containers
     * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
 
     * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
-
-[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes#static-routes)
-
-* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
-
-* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
-
-    * [Enabling the static route add-on from the console](/docs/containers?topic=containers-static-routes#enable-add-on-console)
-
-    * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
-
-* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
 
 
 ## Logging and monitoring

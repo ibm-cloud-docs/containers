@@ -144,18 +144,15 @@ You can customize a set of Istio configuration options by editing the `managed-i
     `istio-components-pilot-requests-cpu`
     :   Default value: `"500m"`
     :   Configure the CPU request in millicpu for the `istiod` component pod.
-    
         Use caution when changing this value. Setting this value too low might prevent the control plane from working properly, and setting this value too high might prevent the <code>istiod</code> pod from being scheduled.
         {: important}
 
     `istio-global-logging-level`
     :   Default value: `"default:info"`
     :   Define the scope of logs and the level of log messages for control plane components. A scope represents a functional area within a control plane component and each scope supports specific log information levels. The `default` logging scope, which is for non-categorized log messages, is applied to all components in the control plane at the basic `info` level.
-    
-        To specify log levels for individual component scopes, enter a comma-separated list of scopes and levels, such as `"<scope>:<level>,<scope>:<level>"`. For a list of the scopes for each control plane component and the information level of log messages, see the [Istio component logging documentation](https://istio.io/latest/docs/ops/diagnostic-tools/component-logging/){: external}. 
-    
-       To change the log level of the data plane, use the `istioctl proxy-config log <pod> --level <level>` command.
-       {: tip}
+    :   To specify log levels for individual component scopes, enter a comma-separated list of scopes and levels, such as `"<scope>:<level>,<scope>:<level>"`. For a list of the scopes for each control plane component and the information level of log messages, see the [Istio component logging documentation](https://istio.io/latest/docs/ops/diagnostic-tools/component-logging/){: external}.
+        To change the log level of the data plane, use the `istioctl proxy-config log <pod> --level <level>` command.
+        {: tip}
       
     `istio-global-outboundTrafficPolicy-mode`
     :   Default value: `"ALLOW_ANY"`

@@ -82,7 +82,7 @@ Before you get started with Ingress, review the following prerequisites.
 {: shortdesc}
 
 - Classic clusters: Enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). When a VRF or VLAN spanning is enabled, the ALB can route packets to various subnets in the account.
-- <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters: Ensure that traffic requests that are routed by Ingress to node ports on your worker nodes are permitted in [VPC security groups](/docs/containers?topic=containers-vpc-network-policy#security_groups).
+- ![VPC infrastructure provider icon.](images/icon-vpc.png) VPC clusters: Ensure that traffic requests that are routed by Ingress to node ports on your worker nodes are permitted in [VPC security groups](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 - Setting up Ingress requires the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms):
     - **Administrator** platform access role for the cluster
     - **Manager** service access role in all namespaces
@@ -107,6 +107,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
     kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
     ```
     {: pre}
+    
 2. Choose a domain and set up TLS for your apps. You can use the IBM-provided domain, such as `mycluster-<hash>-0000.us-south.containers.appdomain.cloud/myapp`, or define a custom domain.
 
 ### IBM-provided domain
@@ -277,6 +278,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
     kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
     ```
     {: pre}
+    
 2. Verify that you have at least one private ALB in each zone that runs the Kubernetes Ingress image. Look for ALBs with a **Type** of `private` and a **Build** version in the `<community_version>_<ibm_build>_iks` Kubernetes Ingress format.
 
     ```sh
@@ -637,7 +639,7 @@ Create new ALBs that run the Kubernetes Ingress image. After you create the new 
     ```
     {: pre}
 
-2. <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Optional for classic clusters: If you do not want traffic to immediately be routed to the ALBs that you create in the next step, you can first remove the new ALBs from the DNS registration for the ALB health check subdomain.
+2. ![Classic infrastructure provider icon.](images/icon-classic.png) Optional for classic clusters: If you do not want traffic to immediately be routed to the ALBs that you create in the next step, you can first remove the new ALBs from the DNS registration for the ALB health check subdomain.
 
     1. Open the health check resource for ALBs that run the Kubernetes Ingress image.
 
@@ -692,7 +694,7 @@ Create new ALBs that run the Kubernetes Ingress image. After you create the new 
     ```
     {: pre}
 
-8. <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Optional for classic clusters: If you changed the ALB health check subdomain in step 2, remove the added character to ensure that the new ALBs are included in the DNS registration again.
+8. ![Classic infrastructure provider icon.](images/icon-classic.png) Optional for classic clusters: If you changed the ALB health check subdomain in step 2, remove the added character to ensure that the new ALBs are included in the DNS registration again.
 
     1. Open the health check resource for ALBs that run the Kubernetes Ingress image.
 
@@ -1191,7 +1193,7 @@ For example, if you have worker nodes in `dal10`, a default public ALB exists in
 You can also use these steps to create more ALBs across zones in your cluster. When you create a multizone cluster, a default public ALB is created in each zone where you have worker nodes. However, default public ALBs are created in only up to three zones. If, for example, you later remove one of these original three zones and add workers in a different zone, a default public ALB is not created in that new zone. You can manually create an ALB to process connections in that new zone.
 {: tip}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters:**
+![Classic infrastructure provider icon.](images/icon-classic.png) **Classic clusters:**
 
 1. In each zone where you have worker nodes, create an ALB. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_create).
 
@@ -1229,7 +1231,7 @@ You can also use these steps to create more ALBs across zones in your cluster. W
 
     
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters:**
+![VPC infrastructure provider icon.](images/icon-vpc.png) **VPC clusters:**
 
 1. In each zone where you have worker nodes, create an ALB. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb-create-vpc-gen2).
 
@@ -1270,7 +1272,7 @@ You can also use these steps to create more ALBs across zones in your cluster. W
 ## Moving ALBs across VLANs
 {: #migrate-alb-vlan}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The information in this topic is specific to classic clusters only.
+![Classic infrastructure provider icon.](images/icon-classic.png) The information in this topic is specific to classic clusters only.
 {: note}
 
 When you [change your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans), the worker nodes are connected to the new VLAN and assigned new public or private IP addresses. However, ALBs cannot automatically migrate to the new VLAN because they are assigned a stable, portable public or private IP address from a subnet that belongs to the old VLAN. When your worker nodes and ALBs are connected to different VLANs, the ALBs cannot forward incoming network traffic to app pods to your worker nodes. To move your ALBs to a different VLAN, you must create an ALB on the new VLAN and disable the ALB on the old VLAN.

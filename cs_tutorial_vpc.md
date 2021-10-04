@@ -29,7 +29,7 @@ completion-time: 30m
 Create an {{site.data.keyword.containerlong}} cluster in your Virtual Private Cloud (VPC).
 {: shortdesc}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> With **{{site.data.keyword.containerlong_notm}} clusters on VPC**, you can create your cluster in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
+![VPC infrastructure provider icon.](images/icon-vpc.png) With **{{site.data.keyword.containerlong_notm}} clusters on VPC**, you can create your cluster in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
 
 ## Objectives
 {: #vpc_ks_objectives}
@@ -83,7 +83,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
 
 2. Create a VPC for your cluster. For more information, see the docs for creating a VPC in the [console](/docs/vpc?topic=vpc-creating-a-vpc-using-the-ibm-cloud-console) or [CLI](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-vpc-cli).
     1. Create a VPC that is called `myvpc` and note the **ID** in the output. VPCs provide an isolated environment for your workloads to run within the public cloud. You can use the same VPC for multiple clusters, such as if you plan to have different clusters host separate microservices that need to communicate with each other. If you want to separate your clusters, such as for different departments, you can create a VPC for each cluster.
-        ```
+        ```sh
         ibmcloud is vpc-create myvpc
         ```
         {: pre}
@@ -93,7 +93,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         *  **IP addresses**: VPC subnets provide private IP addresses for your worker nodes and load balancer services in your cluster, so make sure to [create a subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IP addresses that a VPC subnet has later.
         *  **Public gateways**: You do not need to attach a public gateway to complete this tutorial. Instead, you can keep your worker nodes isolated from public access by using VPC load balancers to expose workloads securely. You might attach a public gateway if your worker nodes need to access a public URL. For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
 
-        ```
+        ```sh
         ibmcloud is subnet-create mysubnet1 <vpc_ID> --zone us-south-1 --ipv4-address-count 256
         ```
         {: pre}
@@ -163,12 +163,12 @@ To deploy the app:
     {: pre}
 
 3. Use an existing registry namespace or create one, such as `vpc-gen2`.
-    ```
+    ```sh
     ibmcloud cr namespace-list
     ```
     {: pre}
 
-    ```
+    ```sh
     ibmcloud cr namespace-add vpc-gen2
     ```
     {: pre}
@@ -177,7 +177,7 @@ To deploy the app:
 
     Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image.
 
-    ```
+    ```sh
     ibmcloud cr build -t us.icr.io/<namespace>/hello-world:1 .
     ```
     {: pre}
