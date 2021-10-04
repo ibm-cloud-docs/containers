@@ -53,7 +53,7 @@ The following table shows the changes that are included in the master fix pack `
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Calico | v3.19.3 | v3.20.1 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
-| containerd configuration | N/A | N/A | Cluster administrators may now update the containerd registry host configurations on their clusters. See the [containerd CRI plugin configuration guide](https://github.com/containerd/containerd/blob/v1.5.5/docs/cri/config.md#registry-configuration){: external}. |
+| containerd configuration | N/A | N/A | Cluster administrators may now update the containerd registry host configurations on their clusters. See [Updating your cluster's containerd registry host configuration](/docs/containers?topic=containers-registry#update_containerd_registry_config) and the [containerd CRI plugin configuration guide](https://github.com/containerd/containerd/blob/v1.5.5/docs/cri/config.md#registry-configuration){: external}.|
 | IBM Cloud Controller Manager | v1.21.5-1 | v1.22.2-1 | Updated to support the Kubernetes `1.22.2` release. In addition, the code for this component is now [open source](https://github.com/IBM-Cloud/cloud-provider-ibm){: external}. |
 | Kubernetes | v1.21.5 | v1.22.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.2){: external}. |
 | Kubernetes add-on resizer | 1.8.13 | 1.8.14 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.14){: external}. |
@@ -61,6 +61,8 @@ The following table shows the changes that are included in the master fix pack `
 | Kubernetes configuration | N/A | N/A | Updated the [feature gate configuration](https://cloud.ibm.com/docs/containers?topic=containers-service-settings#feature-gates){: external}. |
 | Kubernetes CSI snapshotter CRDs | v3.0.2 | v4.0.0 | See the [Kubernetes container storage interface (CSI) snapshotter release notes](https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v4.0.0){: external}. |
 | Kubernetes Metrics Server | v0.4.4 | v0.5.0 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.5.0){: external}. The `metrics-server-nanny` container configuration has been updated to use a 30 second poll period (previously 5 minutes) in order to allow faster scaling of the metrics server. |
+| Kubernetes NodeLocal DNS cache | 1.17.3 | 1.20.0 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.20.0). |
+| Portieris admission controller | v0.10.3 | v0.11.0 | See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.11.0). |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.21.5_1531 (master) and 1.21.5_1532 (worker node)." caption-side="top"}
 

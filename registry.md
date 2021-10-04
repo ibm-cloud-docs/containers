@@ -1200,3 +1200,10 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 Wondering what to do next? You can [set up the **entitled** Helm chart repository](/docs/containers?topic=containers-helm), where Helm charts that incorporate entitled software are stored. If you already have Helm installed in your cluster, run `helm repo add entitled https://raw.githubusercontent.com/IBM/charts/master/repo/entitled`.
 {: tip}
 
+
+
+## Updating your cluster's containerd registry host configuration
+{: #update_containerd_registry_config}
+
+You can configure a daemonset to update the containerd registry host configurations across all nodes in a cluster. To get started, see the [example daemonset](https://github.com/IBM-Cloud/kube-samples/blob/master/containerd-registry-daemonset-example){: external} to configure a dockerhub registry config file. For more information on containerd registry configurations, see the [containerd documentation](https://github.com/containerd/containerd/blob/v1.5.6/docs/hosts.md).
+

@@ -958,7 +958,7 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
 
 **Example**:
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name mycluster --version 1.21.5 --zone us-south-1 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --subnet-id 1ab23c45-6789-0123-456d-789ef01gh234 --flavor bx2.4x16 --workers 3
+ibmcloud ks cluster create vpc-gen2 --name mycluster --version 1.20.11 --zone us-south-1 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --subnet-id 1ab23c45-6789-0123-456d-789ef01gh234 --flavor bx2.4x16 --workers 3
 ```
 {: pre}
 
@@ -1160,7 +1160,7 @@ Set the webhook back end for the API server configuration. The webhook back end 
 {: shortdesc}
 
 ```sh
-ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server SERVER_URL_OR_IP] [--ca-cert CA_CERT_PATH] [--client-cert CLIENT_CERT_PATH] [--client-key CLIENT_KEY_PATH] [--policy POLICY] [-q]
+ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server SERVER_URL_OR_IP] [--ca-cert CA_CERT_PATH] [--client-cert CLIENT_CERT_PATH] [--client-key CLIENT_KEY_PATH] <staging-cli-next-2066>[--policy POLICY]</staging-cli-next-1066> [-q]
 ```
 {: pre}
 
@@ -1184,13 +1184,13 @@ ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server 
 <dd>Optional: The file path for the client certificate that is used to authenticate against the remote logging service.</dd>
 
 <dt><code>--client-key <em> CLIENT_KEY_PATH</em></code></dt>
-<dd>Optional: The file path for the corresponding client key that is used to connect to the remote logging service.</dd>
+<dd>Optional: The file path for the corresponding client key that is used to connect to the remote logging service.</dd><staging-cli-next-2066>
 
 <dt><code>--policy <em> POLICY</em></code></dt>
 <dd>Optional: The type of policy that is used for auditing. Use `default` or `verbose`. Note that the `verbose` policy type audits a larger number of API transactions, which may impact cluster performance, and is only recommended for occasional use.</dd>
 
 The `verbose` policy option is supported on {{site.data.keyword.containershort}} clusters that run on version 1.18 and later.
-{: note}
+{: note}<staging-cli-next-2066>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>

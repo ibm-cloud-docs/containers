@@ -1382,6 +1382,8 @@ subcollection: containers
 
 * [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-registry#secret_entitled_software)
 
+* [Updating your cluster's containerd registry host configuration](/docs/containers?topic=containers-registry#update_containerd_registry_config)
+
 [Setting up continuous integration and delivery](/docs/containers?topic=containers-cicd#cicd)
 
 * [Supported automation tools](/docs/containers?topic=containers-cicd#cicd_strategy)

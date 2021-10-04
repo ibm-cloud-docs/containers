@@ -178,8 +178,8 @@ Keep in mind that some services such as Ingress might require multiple worker no
 
 **Supported Kubernetes versions**:
 *   Latest: 1.22.2
-*   Default: 1.21.5
-*   Other: 1.20.11
+*   Default: 1.20.11
+*   Other: 1.21.5
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
 
