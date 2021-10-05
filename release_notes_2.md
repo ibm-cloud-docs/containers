@@ -31,14 +31,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## October 2021
 {: #release-oct-2021}
 
-
 Review the release notes for October 2021.
 {: shortdesc}
 
 
 
-### 4 October 2021
-{: #4oct2021}
+### 5 October 2021
+{: #5oct2021}
+
+Updated supported, deprecated, and unsupported versions for strongSwan Helm chart.
+:   [Upgrading or disabling the strongSwan Helm chart](/docs/containers?topic=containers-vpn#vpn_upgrade)
+
+
 
 {{site.data.keyword.cos_full_notm}} plug-in.
 :   [Version 2.1.5](/docs/containers?topic=containers-cos_plugin_changelog) is released.
@@ -185,7 +189,4 @@ Review the release notes for 30 August 2021.
 
 Worker node fix pack update
 :   Changelog documentation is available for Kubernetes version [`1.17.17_1568`](/docs/containers?topic=containers-changelog#11717_1568), [`1.18.20_1563`](/docs/containers?topic=containers-changelog#11820_1563), [`1.19.14_1558`](/docs/containers?topic=containers-changelog#11914_1558), [`1.20.10_1551`](/docs/containers?topic=containers-changelog#12010_1551), and [`1.21.4_1529`](/docs/containers?topic=containers-changelog#12104_1529).
-
-
-
 

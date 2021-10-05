@@ -174,7 +174,7 @@ subcollection: containers
 
 [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
 
-* [4 October 2021](/docs/containers?topic=containers-rel-notes#4oct2021)
+* [5 October 2021](/docs/containers?topic=containers-rel-notes#5oct2021)
 
 [September 2021](/docs/containers?topic=containers-rel-notes#release-sep-2021)
 
@@ -3464,7 +3464,7 @@ subcollection: containers
 
 [Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
-* [Changelog for version 2.1.5, released 4 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0215_object_plugin)
+* [Changelog for version 2.1.5, released 5 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0215_object_plugin)
 
 * [Changelog for version 2.1.4, released 1 September 2021](/docs/containers?topic=containers-cos_plugin_changelog#0214_object_plugin)
 
