@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-04"
+lastupdated: "2021-10-05"
 
 keywords: kubernetes, iks, release notes
 
@@ -25,6 +25,27 @@ For information about releases that occured before August 30th, see [Release not
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status){: external}.
 {: note}
+
+
+
+## October 2021
+{: #release-oct-2021}
+
+Review the release notes for October 2021.
+{: shortdesc}
+
+
+
+### 5 October 2021
+{: #5oct2021}
+
+Updated supported, deprecated, and unsupported versions for strongSwan Helm chart.
+:   [Upgrading or disabling the strongSwan Helm chart](/docs/containers?topic=containers-vpn#vpn_upgrade)
+
+
+
+{{site.data.keyword.cos_full_notm}} plug-in.
+:   [Version 2.1.5](/docs/containers?topic=containers-cos_plugin_changelog) is released.
 
 
 ## September 2021
@@ -168,7 +189,4 @@ Review the release notes for 30 August 2021.
 
 Worker node fix pack update
 :   Changelog documentation is available for Kubernetes version [`1.17.17_1568`](/docs/containers?topic=containers-changelog#11717_1568), [`1.18.20_1563`](/docs/containers?topic=containers-changelog#11820_1563), [`1.19.14_1558`](/docs/containers?topic=containers-changelog#11914_1558), [`1.20.10_1551`](/docs/containers?topic=containers-changelog#12010_1551), and [`1.21.4_1529`](/docs/containers?topic=containers-changelog#12104_1529).
-
-
-
 

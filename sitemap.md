@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-04"
+lastupdated: "2021-10-05"
 
 keywords: containers
 subcollection: containers
@@ -171,6 +171,10 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-rel-notes#rel-notes)
+
+[October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
+
+* [5 October 2021](/docs/containers?topic=containers-rel-notes#5oct2021)
 
 [September 2021](/docs/containers?topic=containers-rel-notes#release-sep-2021)
 
@@ -2455,9 +2459,9 @@ subcollection: containers
 
     * [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_disable)
 
-    * [<code>ibmcloud ks cluster addon enable</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable)
+    * [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable)
 
-    * [<code>ibmcloud ks cluster addon get</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_get)
+    * [`ibmcloud ks cluster addon get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_get)
 
     * [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addons)
 
@@ -2545,7 +2549,7 @@ subcollection: containers
 
     * [`ibmcloud ks worker-pool create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2)
 
-    * [<code>ibmcloud ks worker-pool get</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_get)
+    * [`ibmcloud ks worker-pool get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_get)
 
     * [`ibmcloud ks worker-pool label rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_rm)
 
@@ -3459,6 +3463,8 @@ subcollection: containers
     * [Changelog for patch update 2.0.3_365, released 05 August 2020](/docs/containers?topic=containers-vpc_bs_changelog#203365_is_block)
 
 [Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Changelog for version 2.1.5, released 5 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0215_object_plugin)
 
 * [Changelog for version 2.1.4, released 1 September 2021](/docs/containers?topic=containers-cos_plugin_changelog#0214_object_plugin)
 
