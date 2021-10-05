@@ -54,7 +54,7 @@ Update the Helm chart values to reflect the worker node changes.
 2. Open the configuration file for your strongSwan VPN service.
 
     ```sh
-    helm show values ibm/strongswan > config.yaml
+    helm show values iks-charts/strongswan > config.yaml
     ```
     {: pre}
 
