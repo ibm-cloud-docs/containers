@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021, 2021
-lastupdated: "2021-10-04"
+lastupdated: "2021-10-05"
 
 keywords: kubectl, exec, timeout
 

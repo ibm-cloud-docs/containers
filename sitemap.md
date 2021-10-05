@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-04"
+lastupdated: "2021-10-05"
 
 keywords: containers
 subcollection: containers
@@ -2455,9 +2455,9 @@ subcollection: containers
 
     * [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_disable)
 
-    * [<code>ibmcloud ks cluster addon enable</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable)
+    * [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable)
 
-    * [<code>ibmcloud ks cluster addon get</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_get)
+    * [`ibmcloud ks cluster addon get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_get)
 
     * [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addons)
 
@@ -2545,7 +2545,7 @@ subcollection: containers
 
     * [`ibmcloud ks worker-pool create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2)
 
-    * [<code>ibmcloud ks worker-pool get</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_get)
+    * [`ibmcloud ks worker-pool get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_get)
 
     * [`ibmcloud ks worker-pool label rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_rm)
 
