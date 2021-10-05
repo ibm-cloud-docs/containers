@@ -30,6 +30,8 @@ The Kubernetes API priority and feature gate is enabled in clusters that run Kub
 {{site.data.keyword.containerlong_notm}} sets certain default flow schema and priority levels in addition to the default settings from Kubernetes.
 {: shortdesc}
 
+
+
 You can create your own flow schema and priorities, but do not modify the default settings. Unexpected results might occur in your cluster when you modify API request priorities.
 {: important}
 
@@ -40,6 +42,7 @@ You can create your own flow schema and priorities, but do not modify the defaul
 * `ibm-operators-service-accounts`
 * `system-node-high`
 * `system-node-proxiers`
+* `system-node-high`
 
 Follow the steps to review the flow schemas and priority levels set by {{site.data.keyword.containerlong_notm}}.
 
