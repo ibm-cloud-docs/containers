@@ -144,5 +144,3 @@ You are completely responsible for the applications, workloads, and data that yo
 {: caption="Table 7. Applications and data" caption-side="top"}
 
 
-
-

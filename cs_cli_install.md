@@ -547,7 +547,7 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
 3. Target your session context to the cluster that you want to work with so that you can manage the cluster with `kubectl` commands.
     1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
         ```sh
-        ibmcloud ks cluster config --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster config --cluster <cluster_name_or_ID> --admin
         ```
         {: pre}
 
