@@ -172,6 +172,10 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-rel-notes#rel-notes)
 
+[October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
+
+* [4 October 2021](/docs/containers?topic=containers-rel-notes#4oct2021)
+
 [September 2021](/docs/containers?topic=containers-rel-notes#release-sep-2021)
 
 * [29 September 2021](/docs/containers?topic=containers-rel-notes#29sep2021)
@@ -3459,6 +3463,8 @@ subcollection: containers
     * [Changelog for patch update 2.0.3_365, released 05 August 2020](/docs/containers?topic=containers-vpc_bs_changelog#203365_is_block)
 
 [Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Changelog for version 2.1.5, released 4 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0215_object_plugin)
 
 * [Changelog for version 2.1.4, released 1 September 2021](/docs/containers?topic=containers-cos_plugin_changelog#0214_object_plugin)
 

@@ -143,7 +143,7 @@ To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {
     <div class="solutionBox">
         <a href = "#clusters_gs">
         <div>
-        <p><strong>![Classic infrastructure provider icon.](images/icon-classic-2.svg) Create a classic cluster</p></strong>
+        <p><strong>Create a classic cluster</p></strong>
         <p class="bx--type-caption">Create a Kubernetes cluster on {{site.data.keyword.cloud_notm}} classic workers nodes, subnets, and VLAN networking. Choose from a variety of virtual, bare metal, GPU, or software-defined storage flavors.</p>
         </div>
     </a>
@@ -151,7 +151,7 @@ To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {
     <div class="solutionBox">
         <a href = "#vpc-gen2-gs">
         <div>
-            <p><strong>![VPC infrastructure provider icon.](images/icon-vpc-2.svg) Create a VPC cluster</p></strong>
+            <p><strong>Create a VPC cluster</p></strong>
             <p class="bx--type-caption">Create your cluster in the second generation of compute resources in a Virtual Private Cloud (VPC) that gives you the security of a private cloud with the dynamic scalability of a public cloud.</p>
         </div>
     </a>
@@ -159,7 +159,7 @@ To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {
     <div class="solutionBox">
         <a href = "#deploy-app">
         <div>
-            <p><strong><img src="images/icon-containers-bw.svg" alt="Container icon" width="15" style="width:15px; border-style: none"/> Deploy and expose an app</p></strong>
+            <p><strong>Deploy and expose an app</p></strong>
             <p class="bx--type-caption">Deploy a `websphere-liberty` Java application server as a container from a Docker Hub image. Then, expose it with a `LoadBalancer` service to get an IP address for quick testing of your first app.</p>
         </div>
     </a>

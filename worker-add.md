@@ -242,7 +242,7 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
 ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Add worker nodes to your classic cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Want to save on your classic worker node costs? [Create a reservation](/docs/containers?topic=containers-reservations) to lock in a discount over 1 or 3 year terms! Then, create your worker pool by using the reserved instances.
+{[icon_classic]} Want to save on your classic worker node costs? [Create a reservation](/docs/containers?topic=containers-reservations) to lock in a discount over 1 or 3 year terms! Then, create your worker pool by using the reserved instances.
 {: tip}
 
 ### Creating a new worker pool

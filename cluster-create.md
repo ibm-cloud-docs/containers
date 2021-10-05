@@ -180,7 +180,7 @@ The following image walks you through choosing the setup that you want for your 
 
 
 
-Want to try out a free cluster first? See [Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs). <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Want to save on your classic worker node costs? [Create a reservation](/docs/containers?topic=containers-reservations) to lock in a discount over 1 or 3 year terms! Then, create your worker pool by using the reserved instances.
+Want to try out a free cluster first? See [Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs). {[icon_classic]} Want to save on your classic worker node costs? [Create a reservation](/docs/containers?topic=containers-reservations) to lock in a discount over 1 or 3 year terms! Then, create your worker pool by using the reserved instances.
 {: tip}
 
 
