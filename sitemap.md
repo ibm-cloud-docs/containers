@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-05"
+lastupdated: "2021-10-06"
 
 keywords: containers
 subcollection: containers
@@ -98,8 +98,6 @@ subcollection: containers
 {: #sitemap_use_cases}
 
 
-[Overview of use cases](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro)
-
 [Retail use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_retail#cs_uc_retail)
 
 * [Brick-and-mortar retailer shares data, by using APIs with global business partners to drive omnichannel sales](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)
@@ -173,6 +171,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-rel-notes#rel-notes)
 
 [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
+
+* [6 October 2021](/docs/containers?topic=containers-rel-notes#6oct2021)
 
 * [5 October 2021](/docs/containers?topic=containers-rel-notes#5oct2021)
 
@@ -1694,6 +1694,36 @@ subcollection: containers
 {: #sitemap_exposing_apps_with_load_balancers}
 
 
+[Quick start for load balancers](/docs/containers?topic=containers-loadbalancer-qs#loadbalancer-qs)
+
+* [Exposing an app by using an NLB in a classic cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_classic)
+
+* [Exposing an app by using a VPC load balancer in a VPC cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_vpc)
+
+[VPC: Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas#vpc-lbaas)
+
+* [About VPC load balancing in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-lbaas#lbaas_about)
+
+    * [Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#nlb_vpc)
+
+    * [Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#lb_vpc)
+
+* [Setting up a Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb)
+
+    * [Setting up a public VPC NLB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_pub)
+
+    * [Setting up a private VPC NLB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_priv)
+
+    * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_nlb_dns)
+
+* [Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb)
+
+    * [Setting up a public or private VPC ALB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_alb_pub_priv)
+
+    * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
+
+* [Limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations)
+
 [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about#loadbalancer-about)
 
 * [Comparison of basic and DSR load balancing in version 1.0 and 2.0 NLBs](/docs/containers?topic=containers-loadbalancer-about#comparison-lbs)
@@ -2147,6 +2177,14 @@ subcollection: containers
 * [Backing up and restoring data](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
 
 * [Storage class reference](/docs/containers?topic=containers-vpc-block#vpc-block-reference)
+
+    * [10 IOPs tier](/docs/containers?topic=containers-vpc-block#10iops-sc-vpc-block)
+
+    * [5 IOPs tier](/docs/containers?topic=containers-vpc-block#5iops-sc-vpc-block)
+
+    * [Custom](/docs/containers?topic=containers-vpc-block#custom-sc-vpc-block)
+
+    * [General purpose](/docs/containers?topic=containers-vpc-block#gen-purp-sc-vpc-block)
 
 * [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup_block_vpc)
 
@@ -3433,6 +3471,8 @@ subcollection: containers
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
 
 * [Version 4.0](/docs/containers?topic=containers-vpc_bs_changelog#0400_is_block)
+
+    * [Changelog for version 4.0.1_780, released 06 October 2021](/docs/containers?topic=containers-vpc_bs_changelog#0400780_is_block_relnote)
 
     * [Changelog for version 4.0.0_769, released 16 September 2021](/docs/containers?topic=containers-vpc_bs_changelog#0400769_is_block_relnote)
 
