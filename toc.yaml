@@ -24,9 +24,9 @@ toc:
         - topicgroup:
             label: Use cases
             topics:
-            - cs_uc_intro.md
-            - cs_uc_finance.md
-            - cs_uc_health.md
+            - uc_intro.md
+            - uc_finance.md
+            - uc_health.md
             - uc-retail.md
             - uc-transport.md
             - uc-gov.md
@@ -188,8 +188,8 @@ toc:
             - topicgroup:
                 label: Exposing apps with load balancers
                 topics:
-                - lb-qs.md
-                - vpc-lbaas.md
+                - lb-quickstart.md
+                - vpc_lbaas.md
                 - lb-about.md
                 - lb.md
                 - lb-v2.md
