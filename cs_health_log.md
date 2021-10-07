@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-06"
+lastupdated: "2021-10-07"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -86,7 +86,7 @@ To set up a logging configuration for your cluster,
             {: pre}
 
             Example output
-            ```
+            ```sh
             Creating configuration...
             OK
             ```
@@ -99,7 +99,7 @@ To set up a logging configuration for your cluster,
             {: pre}
 
             Example output
-            ```
+            ```sh
             Listing configurations...
 
             OK
@@ -173,33 +173,33 @@ In the following image, you can see the location of the sources that you can con
 
 4. `storage`: Information about persistent storage that is set up in your cluster. Storage logs can help you set up problem determination dashboards and alerts as part of your DevOps pipeline and production releases. **Note**: The paths `/var/log/kubelet.log` and `/var/log/syslog` also contain storage logs, but logs from these paths are collected by the `kubernetes` and `worker` log sources.
     
-    **Paths**
-    * `/var/log/ibmc-s3fs.log`
-    * `/var/log/ibmc-block.log`
+    Paths
+    :   `/var/log/ibmc-s3fs.log`
+    :   `/var/log/ibmc-block.log`
 
-    **Pods**
-    * `portworx-***`
-    * `ibmcloud-block-storage-attacher-***`
-    * `ibmcloud-block-storage-driver-***`
-    * `ibmcloud-block-storage-plugin-***`
-    * `ibmcloud-object-storage-plugin-***`
+    Pods**
+    :   `portworx-***`
+    :   `ibmcloud-block-storage-attacher-***`
+    :   `ibmcloud-block-storage-driver-***`
+    :   `ibmcloud-block-storage-plugin-***`
+    :   `ibmcloud-object-storage-plugin-***`
 
 5. `kubernetes`: Information from the kubelet, the kube-proxy, and other Kubernetes events that happen in the kube-system namespace of the worker node.
 
-    **Paths**
-    * `/var/log/kubelet.log`
-    * `/var/log/kube-proxy.log`
-    * `/var/log/event-exporter/1..log`
+    Paths
+    :   `/var/log/kubelet.log`
+    :   `/var/log/kube-proxy.log`
+    :   `/var/log/event-exporter/1..log`
 
 6. `kube-audit`: Information about cluster-related actions that is sent to the Kubernetes API server, including the time, the user, and the affected resource.
 
 7. `ingress`: Information about the network traffic that comes into a cluster through the Ingress ALB.
 
-    **Paths**
-    * `/var/log/alb/ids/*.log`
-    * `/var/log/alb/ids/*.err`
-    * `/var/log/alb/customerlogs/*.log`
-    * `/var/log/alb/customerlogs/*.err`
+    Paths
+    :   `/var/log/alb/ids/*.log`
+    :   `/var/log/alb/ids/*.err`
+    :   `/var/log/alb/customerlogs/*.log`
+    :   `/var/log/alb/customerlogs/*.err`
 
 
 **Am I responsible for keeping Fluentd updated?**
@@ -228,7 +228,7 @@ The following table shows the different options that you have when you configure
 | `--hostname` | Specify the hostname or IP address of the log collector service. |
 | `--port` | The ingestion port. If you do not specify a port, then the standard port `9091` is used. For syslog, specify the port of the log collector server. If you do not specify a port, then the standard port `514` is used. | 
 | `--app-containers` | Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. |
-| `--app-paths` | The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list; for example, `/var/log/myApp1/*,/var/log/myApp2/*` |
+| `--app-paths` | The path on a container that the apps log to. To forward logs with source type `application`, you must provide a path. To specify more than one path, use a comma-separated list; for example, `/var/log/myApp1/*,/var/log/myApp2/*` |
 | `--syslog-protocol` | When the logging type is `syslog<`, the transport layer protocol. You can use the following protocols: `udp`, `tls`, or `tcp`. When forwarding to a rsyslog server with the `udp` protocol, logs that are over 1KB are truncated. |
 | `--ca-cert` | Required: When the logging type is `syslog` and the protocol is `tls`, the Kubernetes secret name that contains the certificate authority certificate. |
 | `--verify-mode` | When the logging type is `syslog` and the protocol is `tls`, the verification mode. Supported values are `verify-peer` and the default `verify-none`. |
@@ -244,11 +244,11 @@ The following table shows the different options that you have when you configure
 2. For the cluster where the log source is located: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 3. Set up a server that accepts a syslog protocol in 1 of 2 ways:
-    * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
+    :  Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
 
-    * Run syslog from a container. For example, you can use this [deployment .yaml file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml){: external} to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
+    :  Run syslog from a container. For example, you can use this [deployment .yaml file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml){: external} to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
 
-    You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the top of your <code>etc/rsyslog.conf</code> file where your rsyslog server runs: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
+    You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the top of your `etc/rsyslog.conf` file where your rsyslog server runs: `$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat`
     {: tip}
 
 4. Create a log forwarding configuration. For more information about the parameters, see the [Understanding logging configuration options table](#enable-forwarding).
@@ -266,15 +266,15 @@ The following steps are general instructions. Prior to using the container in a 
 {: tip}
 
 1. Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms):
-    * **Editor** or **Administrator** platform access role for the cluster
-    * **Writer** or **Manager** service access role for the `kube-system` namespace
+    - **Editor** or **Administrator** platform access role for the cluster
+    - **Writer** or **Manager** service access role for the `kube-system` namespace
 
 2. For the cluster where the log source is located: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 3. Set up a server that accepts a syslog protocol in 1 of 2 ways:
-    * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
+    - Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
 
-    * Run syslog from a container. For example, you can use this [deployment .yaml file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml){: external} to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host. You need to inject the relevant certificate authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
+    - Run syslog from a container. For example, you can use this [deployment .yaml file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml){: external} to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host. You need to inject the relevant certificate authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
 
 4. Save your certificate authority certificate to a file named `ca-cert`. It must be that exact name.
 
@@ -452,7 +452,6 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
     s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-2-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
     ```
     {: screen}
-
 
 
 

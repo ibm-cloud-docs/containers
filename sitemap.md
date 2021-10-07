@@ -1606,7 +1606,7 @@ subcollection: containers
 
     * [Creating a gateway URL in Classic clusters](/docs/containers?topic=containers-istio-mesh#creating-a-gateway-url-in-classic-clusters)
 
-    * [Creating a gateway URL in VPC clusters](/docs/containers?topic=containers-istio-mesh#creating-a-gateway-url-in-vpc-clusters)
+    * [Creating a gateway URL in VPC clusters](/docs/containers?topic=containers-istio-mesh#create-gateway-vpc)
 
     * [Viewing the BookInfo web page in a browser](/docs/containers?topic=containers-istio-mesh#viewing-the-bookinfo-web-page-in-a-browser)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-06"
+lastupdated: "2021-10-07"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -123,7 +123,7 @@ Deploy the [BookInfo sample application for Istio](https://istio.io/latest/docs/
     ```
     {: pre}
 
-2. Ensure that the BookInfo microservices and their corresponding pods are deployed.
+3. Ensure that the BookInfo microservices and their corresponding pods are deployed.
     ```sh
     kubectl get svc -n bookinfo
     ```
@@ -201,13 +201,13 @@ Deploy the [BookInfo sample application for Istio](https://istio.io/latest/docs/
     ```
     {: codeblock}
 
-4. Create the `Gateway` and `VirtualService` resources in your cluster.
+5. Create the `Gateway` and `VirtualService` resources in your cluster.
     ```sh
     kubectl apply -f bookinfo-custom-gateway.yaml -n bookinfo
     ```
     {: pre}
 
-5. Using the IP address (classic) or hostname (VPC) that you found for the `service/custom-ingressgateway` load balancer in the previous section, open the product page for the BookInfo app in a browser.
+6. Using the IP address (classic) or hostname (VPC) that you found for the `service/custom-ingressgateway` load balancer in the previous section, open the product page for the BookInfo app in a browser.
     ```
     http://<IP_OR_HOSTNAME>/productpage
     ```
@@ -248,13 +248,13 @@ Create an IBM-provided subdomain to register the IP address (classic) or hostnam
     {: screen}
 
     Example output for VPC clusters
-    ```
+    ```sh
     Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
     mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
     ```
     {: screen}
 
-2. Get the name of the secret for your subdomain.
+3. Get the name of the secret for your subdomain.
     ```sh
     kubectl get secret -n custom-gateways
     ```
@@ -267,7 +267,7 @@ Create an IBM-provided subdomain to register the IP address (classic) or hostnam
     ```
     {: screen}
 
-3. In the `bookinfo-custom-gateway.yaml` that you created in the previous section, modify the `bookinfo-gateway` `Gateway` resource by adding an HTTPS port 443 and a TLS section that specifies your subdomain's secret.
+4. In the `bookinfo-custom-gateway.yaml` that you created in the previous section, modify the `bookinfo-gateway` `Gateway` resource by adding an HTTPS port 443 and a TLS section that specifies your subdomain's secret.
     ```yaml
     apiVersion: networking.istio.io/v1alpha3
     kind: Gateway
@@ -291,14 +291,14 @@ Create an IBM-provided subdomain to register the IP address (classic) or hostnam
     ```
     {: codeblock}
 
-4. Create the modified `Gateway` resource in your cluster.
+5. Create the modified `Gateway` resource in your cluster.
     ```sh
     kubectl apply -f bookinfo-custom-gateway.yaml -n bookinfo
     ```
     {: pre}
 
-5. In a web browser, open the BookInfo product page. Ensure that you use HTTPS for the subdomain that you found in step 2.
-    ```
+6. In a web browser, open the BookInfo product page. Ensure that you use HTTPS for the subdomain that you found in step 2.
+    ```sh
     https://<subdomain>/productpage
     ```
     {: codeblock}
@@ -452,7 +452,7 @@ If you want you apps to be accessible to clients, ensure that at least one gatew
     {: pre}
 
 2. Disable the default ingress gateways by setting the `istio-ingressgateway-public-1|2|3-enabled` fields to `"false"`.
-    ```
+    ```sh
     istio-ingressgateway-public-1-enabled: "false"
     istio-ingressgateway-public-2-enabled: "false"
     istio-ingressgateway-public-3-enabled: "false"
@@ -460,7 +460,7 @@ If you want you apps to be accessible to clients, ensure that at least one gatew
     {: codeblock}
 
 3. To disable the default egress gateway, add the `istio-egressgateway-public-1-enabled: "false"` field.
-    ```
+    ```sh
     istio-egressgateway-public-1-enabled: "false"
     ```
     {: codeblock}

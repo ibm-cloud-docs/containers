@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-06"
+lastupdated: "2021-10-07"
 
 keywords: object storage, plug-in, changelog
 
@@ -20,24 +20,22 @@ subcollection: containers
 View information for updates to the {{site.data.keyword.cos_full_notm}} plug-in in your {{site.data.keyword.containerlong}} clusters.
 {: shortdesc}
 
-Version 2.1.3 includes a new version of the `ibmc` plug-in. To update the `ibmc` plug-in, uninstall and re-install the {{site.data.keyword.cos_full_notm}} plug-in. For more information, see [Updating the {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#update_cos_plugin) plug-in.
-{: note}
 
 Refer to the following tables for a summary of changes for each version of the [Object Storage plug-in](/docs/containers?topic=containers-object_storage).
 
 | Object Storage plug-in version | Supported? | Kubernetes version support | Supported architecture |
 | --- | --- |--- | --- |
 | 2.1.5 | Yes |  Greater than 1.10 | x86 |
-| 2.1.4 | Yes |  Greater than 1.10 | x86 |
-| 2.1.3 | Yes |  Greater than 1.10 | x86 |
-| 2.1.2 | Yes |  Greater than 1.10 | x86 |
-| 2.1.1 | Yes | 1.10 to 1.20 | x86 |
-| 2.1.0 | Yes | 1.10 to 1.20 | x86 |
-| 2.0.9 | Yes | 1.10 to 1.20 | x86 |
-| 2.0.8 | Yes | 1.10 to 1.20 | x86 |
-| 2.0.7 | Yes | 1.10 to 1.20 | x86 |
-| 2.0.6 | Yes | 1.10 to 1.20 | x86 | 
-| 2.0.5 | Yes | 1.10 to 1.20 | x86 |
+| 2.1.4 | Deprecated |  Greater than 1.10 | x86 |
+| 2.1.3 | Deprecated |  Greater than 1.10 | x86 |
+| 2.1.2 | Deprecated |  Greater than 1.10 | x86 |
+| 2.1.1 | Deprecated | 1.10 to 1.20 | x86 |
+| 2.1.0 | Deprecated | 1.10 to 1.20 | x86 |
+| 2.0.9 | Deprecated | 1.10 to 1.20 | x86 |
+| 2.0.8 | Deprecated | 1.10 to 1.20 | x86 |
+| 2.0.7 | Deprecated | 1.10 to 1.20 | x86 |
+| 2.0.6 | Deprecated | 1.10 to 1.20 | x86 | 
+| 2.0.5 | Deprecated | 1.10 to 1.20 | x86 |
 {: caption="Object Storage plug-in versions" caption-side="top"}
 {: summary="The rows are read from left to right. The first column is the Object Storage plug-in version. The second column is the version's supported state. The third column is the version of your cluster that the Object Storage plug-in version is supported for."}
 

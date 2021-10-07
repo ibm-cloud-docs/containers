@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-06"
+lastupdated: "2021-10-07"
 
 keywords: kubernetes, nginx, iks multiple ingress controllers, byo controller
 
@@ -193,7 +193,7 @@ If you plan to continue to use IBM-provided ALBs concurrently with your custom I
     ```
     {: pre}
     
-4. Deploy any [additional resources that are required by your Ingress controller](#deploy-resources-custom-ingress), then deploy your app.
+7. Deploy any [additional resources that are required by your Ingress controller](#deploy-resources-custom-ingress), then deploy your app.
         
 ### Deploying additional resources for your custom Ingress controller
 {: #deploy-resources-custom-ingress}
@@ -374,7 +374,7 @@ Register the VPC load balancer hostname by using the existing Ingress subdomain 
     ```
     {: pre}
         
-4. Deploy any [additional resources that are required by your Ingress controller](#deploy-resources-custom-ingress), then deploy your app.
+5. Deploy any [additional resources that are required by your Ingress controller](#deploy-resources-custom-ingress), then deploy your app.
         
 ### Deploying additional resources for your custom Ingress controller
 {: #deploy-resources-custom-ingress-vpc}
@@ -386,7 +386,7 @@ Register the VPC load balancer hostname by using the existing Ingress subdomain 
     If you continue to use IBM-provided ALBs concurrently with your custom Ingress controller in one cluster, you can create separate Ingress resources for your IBM ALBs and custom controller. In the [Ingress resource that you create to apply to the IBM ALBs only](/docs/containers?topic=containers-ingress-types#alb-comm-create), add the annotation `kubernetes.io/ingress.class: "iks-nginx"`.
     {: tip}
 
-9. Access your app by using the subdomain you configured in step 6 and the path that your app listens on that you specified in the Ingress resource file. If you created a subdomain for a private VPC load balancer, you must [connect to your private VPC network](/docs/vpc?topic=vpc-vpn-onprem-example) to test access to your subdomain.
+3. Access your app by using the subdomain you configured in step 6 and the path that your app listens on that you specified in the Ingress resource file. If you created a subdomain for a private VPC load balancer, you must [connect to your private VPC network](/docs/vpc?topic=vpc-vpn-onprem-example) to test access to your subdomain.
 
     ```sh
     https://<load_balancer_subdomain>/<app_path>

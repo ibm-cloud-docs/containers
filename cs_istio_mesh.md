@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-06"
+lastupdated: "2021-10-07"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -95,6 +95,7 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 
 ## Publicly accessing BookInfo
 {: #istio_access_bookinfo}
+
 Get the public address for the `istio-ingressgateway` load balancer that exposes BookInfo.
 {: shortdesc}
 
@@ -117,15 +118,17 @@ Get the public address for the `istio-ingressgateway` load balancer that exposes
     ```
     {: pre}
 
-1. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
+4. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
     ```sh
     curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/productpage
     ```
     {: pre}
 
-4. Try refreshing the page several times. Different versions of the reviews section round-robin through red stars, black stars, and no stars.
+5. Try refreshing the page several times. Different versions of the reviews section round-robin through red stars, black stars, and no stars.
 
 ### Creating a gateway URL in VPC clusters
+{: #create-gateway-vpc}
+
 1. Create a `GATEWAY_URL` environment variable that uses the Istio ingress hostname.
     ```sh
     export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
@@ -148,14 +151,14 @@ Run the following command based on your operating to view the BookInfo app in yo
 
 Mac OS or Linux
 
-```
+```sh
 open http://$GATEWAY_URL/productpage
 ```
 {: pre}
 
 Windows
 
-```
+```sh
 start http://$GATEWAY_URL/productpage
 ```
 {: pre}
@@ -191,7 +194,7 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 
 Example output for Classic clusters
 
-```
+```sh
 Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
 mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
 ```
@@ -199,7 +202,7 @@ mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cl
 
 Example output for VPC clusters
 
-```
+```sh
 Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
 mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
 ```
@@ -207,7 +210,7 @@ mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cl
 
 **Next steps**: In a web browser, open the BookInfo product page. Because no TLS is configured, make sure that you use HTTP.
 
-```
+```sh
 http://<subdomain>/productpage
 ```
 {: codeblock}
@@ -240,21 +243,21 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     ```
     {: pre}
 
-**Example output for classic clusters**
+    Example output for classic clusters.
 
-```
-Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-```
-{: screen}
+    ```sh
+    Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+    ```
+    {: screen}
 
-**Example output for VPC clusters**
+    Example output for VPC clusters
 
-```
-Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
-mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
-```
-{: screen}
+    ```sh
+    Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+    ```
+    {: screen}
 
 ### Configuring the bookinfo-gateway to use TLS termination
 {: #bookinfo-tls}
@@ -297,7 +300,7 @@ Complete the following steps to set up TLS termination for the `bookinfo-gateway
     {: pre}
 
 4. In a web browser, open the BookInfo product page. Ensure that you use HTTPS for the subdomain that you found in step 2.
-    ```
+    ```sh
     https://<subdomain>/productpage
     ```
     {: codeblock}
@@ -312,25 +315,27 @@ The BookInfo sample demonstrates how three of Istio's traffic management compone
 
 `Gateway`
 :   The `bookinfo-gateway` [Gateway](https://istio.io/latest/docs/reference/config/networking/gateway/){: external} describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace that acts as the entry point for inbound HTTP/TCP traffic for BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file. To see the configuration file for the BookInfo gateway, run the following command. 
-    ```sh
-    kubectl get gateway bookinfo-gateway -o yaml
-    ```
-    {: pre}
+
+```sh
+kubectl get gateway bookinfo-gateway -o yaml
+```
+{: pre}
 
 `VirtualService`
 :   The `bookinfo` [VirtualService](https://istio.io/latest/docs/reference/config/networking/virtual-service/){: external} defines the rules that control how requests are routed within the service mesh by defining microservices as `destinations`. In the `bookinfo` virtual service, the `/productpage` URI of a request is routed to the `productpage` host on port `9080`. In this way, all requests to the BookInfo app are routed first to the `productpage` microservice, which then calls the other microservices of BookInfo. To see the virtual service rule, run the following command.
-    ```sh
-    kubectl get virtualservice bookinfo -o yaml
-    ```
-    {: pre}
+
+```sh
+kubectl get virtualservice bookinfo -o yaml
+```
+{: pre}
 
 `DestinationRule`
 :   After the gateway routes the request according to virtual service rule, the `details`, `productpage`, `ratings`, and `reviews` [DestinationRules](https://istio.io/latest/docs/reference/config/networking/destination-rule/){: external} define policies that are applied to the request when it reaches a microservice. For example, when you refresh the BookInfo product page, the changes that you see are the result of the `productpage` microservice randomly calling different versions, `v1`, `v2`, and `v3`, of the `reviews` microservice. The versions are selected randomly because the `reviews` destination rule gives equal weight to the `subsets`, or the named versions, of the microservice. These subsets are used by the virtual service rules when traffic is routed to specific versions of the service. To see the destination rules that are applied to BookInfo, run the following command.
 
-    ```sh
-    kubectl describe destinationrules
-    ```
-    {: pre}
+```sh
+kubectl describe destinationrules
+```
+{: pre}
 
 
 ## Including apps in the Istio service mesh by setting up sidecar injection
@@ -408,7 +413,7 @@ If you don't want to enable automatic sidecar injection for a namespace, you can
 Do not enable sidecar injection for the `kube-system`, `ibm-system,` or `ibm-operators` namespaces.
 {: note}
 
-**Before you begin**
+
 1. Download the `istioctl` client.
     ```sh
     curl -L https://istio.io/downloadIstio | sh -
@@ -486,7 +491,8 @@ By default, one public Istio load balancer, `istio-ingressgateway`, is enabled i
 
 3. Enable or disable an Istio load balancer in each zone by setting the `istio-ingressgateway-public-1|2|3-enabled` fields to `"true"` or `"false"`.
 
-    <p class="note">If you want you apps to be accessible to clients, ensure that at least one load balancer is enabled, or [create custom gateway load balancers](/docs/containers?topic=containers-istio-custom-gateway). If you disable all load balancers in all zones, your app is no longer exposed and cannot be accessed externally.</p>
+    If you want you apps to be accessible to clients, ensure that at least one load balancer is enabled, or [create custom gateway load balancers](/docs/containers?topic=containers-istio-custom-gateway). If you disable all load balancers in all zones, your app is no longer exposed and cannot be accessed externally.
+    {: note}
 
     Example to enable a public gateway in each zone:
     ```yaml
