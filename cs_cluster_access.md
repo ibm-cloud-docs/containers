@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-06"
+lastupdated: "2021-10-07"
 
 keywords: kubernetes, iks, clusters
 
@@ -318,7 +318,7 @@ Review the order of default admission controllers by cluster version in the [`ku
 
 **Can I create my own admission controllers?**
 
-Yes, see the [Kubernetes](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} documentation for more information.
+Yes, see the [Kubernetes](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} documentation for more information. 
 
 As noted in the Kubernetes documentation, you can use admission controllers for operations that are otherwise handled by the control plane. As such, take great caution when you configure a custom admission controller. You are responsible for any changes that happen in your cluster because of a custom admission controller.
 {: important}
@@ -345,6 +345,14 @@ Many cluster add-ons, plug-ins, and other third-party extensions use admission c
 
 See [Cluster cannot update because of broken webhook](/docs/containers?topic=containers-webhooks_update).
 
+
+ 
+
+
+
+
+
+
 ## Accessing private clusters by using the Wireguard VPN
 {: #access_vpn_containers}
 
@@ -363,7 +371,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         - Inbound UDP traffic on port 51820 for the Wireguard server
         - All outbound traffic
 2. Log in to your VSI by using the public IP address of the VSI.
-    ```
+    ```sh
     ssh -i <filepath_to_sshkey> root@<public_IP>
     ```
     {: pre}
@@ -374,74 +382,74 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
     {: note}
 
     1. Update the Ubuntu operating system.
-        ```
+        ```sh
         apt update
         ```
         {: pre}
         
-        ```
+        ```sh
         apt upgrade
         ```
         {: pre}
 
     2. Check if your VSI requires a reboot to apply the updates.
-        ```
+        ```sh
         cat /var/run/reboot-required
         ```
         {: pre}
 
         Example output
-        ```
+        ```sh
         *** System restart required ***
         ```
         {: screen}
 
     3. If a reboot is required, reboot the VSI.
-        ```
+        ```sh
         reboot
         ```
         {: pre}
 
     4. Wait for the reboot to finish. Then, log in to your VSI again.
-        ```
+        ```sh
         ssh -i <filepath_to_sshkey> root@<public_IP>
         ```
         {: pre}
 
     5. Install the Wireguard server.
-        ```
+        ```sh
         apt install wireguard
         ```
         {: pre}
 
 4. Create Wireguard server keys.
     1. On your VSI, create a new directory to store your keys.
-        ```
+        ```sh
         mkdir -p /etc/wireguard/keys
         ```
         {: pre}
 
     2. Create a private and a public Wireguard server key.
-        ```
+        ```sh
         wg genkey | tee /etc/wireguard/keys/server.key | wg pubkey | tee /etc/wireguard/keys/server.key.pub
         ```
         {: pre}
 
     3. Display the public and the private key that you created. </br>
         **Private key**:
-        ```
+        ```sh
         cat /etc/wireguard/keys/server.key
         ```
         {: pre}
 
         **Public key**:
-        ```
+        ```sh
         cat /etc/wireguard/keys/server.key.pub
         ```
         {: pre}
 
 5. Retrieve the network interface that your VSI uses to route traffic.
-    ```
+    ```sh
     ip -o -4 route show to default | awk '{print $5}'
     ```
     {: pre}
@@ -465,7 +473,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         The server configuration does not yet include the Wireguard client configuration (`Peer`). You add the client configuration after you set up the Wireguard client on your local machine in a later step.
         {: note}
 
-        ```
+        ```sh
         [Interface]
         PrivateKey = <wireguard_server_private_key>
         Address = 172.16.0.1/24
@@ -477,26 +485,26 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
 
     3. Save your changes and exit the nano editor.
     4. Change the permissions to your Wireguard configuration and server key file.
-        ```
+        ```sh
         chmod 600 /etc/wireguard/wg0.conf /etc/wireguard/keys/server.key
         ```
         {: pre}
 
 7. Start the Wireguard server.
     1. Start the Wireguard server.
-        ```
+        ```sh
         wg-quick up wg0
         ```
         {: pre}
 
     2. Show the status of your Wireguard server connections. Note that your output only shows an interface section and no peer section as the Wireguard client is not successfully configured yet.
-        ```
+        ```sh
         wg show
         ```
         {: pre}
 
     3. Change the VSI system settings to automatically start the Wireguard server every time the VSI is booted.
-        ```
+        ```sh
         systemctl enable wg-quick@wg0
         ```
         {: pre}
@@ -509,7 +517,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         {: pre}
 
     2. Remove the comment (`#`) from the `net.ipv4.ip_forward=1` line. Your configuration looks similar to the following:
-        ```
+        ```sh
         ...
         # Uncomment the next line to enable TCP/IP SYN cookies
         # See http://lwn.net/Articles/277146/
@@ -523,7 +531,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         {: screen}
         
     3. Enable IPv4 forwarding on your VSI. 
-        ```
+        ```sh
         sysctl -p
         ```
         {: pre}
@@ -536,12 +544,12 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         {: pre}
 
     2. Retrieve the IP address that is assigned to the Ingress subdomain and your private service endpoint URL.
-        ```
+        ```sh
         nslookup <ingress_subdomain>
         ```
         {: pre}
 
-        ```
+        ```sh
         nslookup <private_service_endpoint_URL>
         ```
         {: pre}
@@ -570,7 +578,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         - `AllowedIPs`: The IP address CIDRs of worker nodes, Ingress subdomain, the private service endpoint URL, and the Wireguard server that you retrieved earlier, separated by commas.
         - `Endpoint`: The public IP address of the jumpbox VSI.  
 
-        ```
+        ```sh
         Address = 192.168.3.217/32
 
         [Peer]
@@ -581,7 +589,8 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         {: codeblock}
 
         Your final client configuration looks similar to the following:
-        ```
+        
+        ```sh
         [Interface]
         PrivateKey = aAAA1a1AAAAAaaaaa1aaa1AAAa1AaAAaAaAAAaAaaAa=
         Address = 192.168.3.217/32
@@ -597,7 +606,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
     7. Click **Activate** to start your Wireguard client. If the client is activated successfully, the status changes to **Active**.
     8. Copy the Wireguard client public key.
 
-10. Finish the Wireguard server configuration.
+11. Finish the Wireguard server configuration.
     1. On your VSI, open the Wireguard server configuration again.
         ```sh
         nano /etc/wireguard/wg0.conf
@@ -605,7 +614,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         {: pre}
 
     2. Add the `Peer` section to your Wireguard server configuration to add the Wireguard client. Enter the Wireguard client public key in the `PublicKey` field and the IP address CIDR that you assigned to the client in the `AllowedIPs` field.  
-        ```
+        ```sh
         ...
         [Peer]
         PublicKey = <wireguard_client_public_key>
@@ -614,7 +623,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         {: codeblock}
 
         Your server configuration looks similar to the following:
-        ```
+        ```sh
         [Interface]
         PrivateKey = <wireguard_server_private_key>
         Address = 172.16.0.1/24
@@ -629,24 +638,24 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         {: codeblock}
 
     3. Stop the Wireguard server and start it again to apply your changes.
-        ```
+        ```sh
         wg-quick down wg0
         ```
         {: pre}
 
-        ```
+        ```sh
         wg-quick up wg0
         ```
         {: pre}
 
     4. Show the updated status of your Wireguard server connections. The interface and peer connections are displayed in your CLI output.
-        ```
+        ```sh
         wg show wg0
         ```
         {: pre}
 
         Example output
-        ```
+        ```sh
         interface: wg0
         public key: AA11aa1aa/aa1AaA1AaaaAAAaa1AAaaA1aAAAAaaAAA=
         private key: (hidden)
@@ -657,7 +666,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         ```
         {: screen}
 
-11. Check that you can connect to the private Kubernetes cluster from your local machine.
+12. Check that you can connect to the private Kubernetes cluster from your local machine.
     1. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, select your private cluster that you want to connect to.  
     2. On the cluster overview page, go to the **Networking** section and copy the **Ingress subdomain**.
     3. Ping the Ingress subdomain to verify that you can connect to your private Kubernetes cluster.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-06"
+lastupdated: "2021-10-07"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -41,6 +41,24 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 ## Version 1.11
 {: #v111}
+
+### Changelog for 1.11.3, released 7 October 2021
+{: #1113}
+
+Review the changes that are included in version 1.11.3 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.11.2  
+**Current version**: 1.11.3   
+**Updates in this version**:  
+- See the Istio release notes for [Istio 1.11.3](https://istio.io/latest/news/releases/1.11.x/announcing-1.10.3/){:external}. 
+- Resolves the following CVEs:
+    - [CVE-2021-22945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22945){: external}
+    - [CVE-2021-22946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22946){: external}
+    - [CVE-2021-22947](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22947){: external}
+    - [CVE-2021-33560](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33560){: external}
+    - [CVE-2021-40528](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-40528){: external}
+- For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/).
 
 ### Changelog for 1.11.2, released 23 September 2021
 {: #1112}
@@ -1034,7 +1052,6 @@ Review the changes that are included in version 1.4.2 of the managed Istio add-o
     - [CVE-2019-18838](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18838){: external}
 - For more information, see the [Istio security bulletin](https://istio.io/latest/news/security/istio-security-2019-007/){: external}.
   
-
 
 
 

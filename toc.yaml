@@ -25,8 +25,8 @@ toc:
             label: Use cases
             topics:
             - uc_intro.md
-            - uc_finance.md
-            - uc_health.md
+            - uc-finance.md
+            - uc-health.md
             - uc-retail.md
             - uc-transport.md
             - uc-gov.md
@@ -334,6 +334,7 @@ toc:
                     - ts-network-strongswan-install-new.md
                     - ts-network-strongswan-network-nodes.md
                     - ts-network-classic121.md
+                    - ts-network-mangle-table.md
                     - ts-letsencrypt.md
               - topicgroup:
                   label: Logging and monitoring

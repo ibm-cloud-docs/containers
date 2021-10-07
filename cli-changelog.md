@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-06"
+lastupdated: "2021-10-07"
 
 keywords: kubernetes, iks
 
@@ -166,7 +166,7 @@ Version 1.0.157 of the CLI was released on 24 August 2020.
 - Adds the optional `--version` flag to the `ibmcloud ks ingress alb create` command to specify the {{site.data.keyword.containerlong_notm}} Ingress image version or Kubernetes Ingress image version for the ALB.
 
 **Renamed commands**: The following commands are shifted to new naming categories. 
-- Shifts all existing `ibmcloud ks alb` commands into the [`ibmcloud ks ingress alb`](/docs/containers?topic=containers-kubernetes-service-cli#alb-commands)</a> subcategory. 
+- Shifts all existing `ibmcloud ks alb` commands into the [`ibmcloud ks ingress alb`](/docs/containers?topic=containers-kubernetes-service-cli#alb-commands) subcategory. 
 - Changes the names of the following flags in the relevant `ibmcloud ks ingress alb` commands: `--alb-id` to `--alb`, `--secret-name` to `--name`, and `--user-ip` to `--ip`.
 
 **Deprecated commands**: The following commands are deprecated in favor of the new commands. 

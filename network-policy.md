@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-06"
+lastupdated: "2021-10-07"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -504,6 +504,7 @@ Kubernetes policies protect pods from internal network traffic. You can create s
 By default, any pod has access to any other pod in the cluster. Additionally, any pod has access to any services that are exposed by the pod network, such as a metrics service, the cluster DNS, the API server, or any services that you manually create in your cluster.
 
 If most or all pods do not require access to specific pods or services, and you want to ensure that pods by default cannot access those pods or services, you can create a Kubernetes network policy to block ingress traffic to those pods or services. For example, any pod can access the metrics endpoints on the CoreDNS pods. To block unnecessary access, you can apply a policy such as the following, which allows all ingress to TCP and UDP port 53 so that pods can access the CoreDNS functionality. However, it blocks all other ingress, such as any attempts to gather metrics from the CoreDNS pods, except from pods or services in namespaces that have the `coredns-metrics-policy: allow` label, or from pods in the `kube-system` namespace that have the `coredns-metrics-policy: allow` label.
+
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy

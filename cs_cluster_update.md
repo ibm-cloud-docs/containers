@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-06"
+lastupdated: "2021-10-07"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -244,41 +244,24 @@ Set up a configmap to perform a rolling update of your classic worker nodes.
     ```
     {: codeblock}
 
-    <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the parameter in column one and the description that matches in column two.">
-    <caption>Configmap components</caption>
-    <thead>
-    <col width="25%">
-    <th>Component</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-        <tr>
-        <td><code>drain_timeout_seconds</code></td>
-        <td> Optional: The timeout in seconds to wait for the <a href="https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/">drain</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> to complete. Draining a worker node safely removes all existing pods from the worker node and reschedules the pods onto other worker nodes in the cluster. Accepted values are integers in the range 1 - 180. The default value is 30.</td>
-        </tr>
-        <tr>
-        <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
-        <td>Two checks that define a rule for a set of worker nodes that you can identify with the specified <code>NodeSelectorKey</code> and <code>NodeSelectorValue</code>. The <code>zonecheck.json</code> identifies worker nodes based on their zone label, and the <code>regioncheck.json</code> uses the region label that is added to every worker node during provisioning. In the example, 30% of all worker nodes that have <code>dal13</code> as their zone label and 20% of all the worker nodes in <code>us-south</code> can be unavailable during the update.</td>
-        </tr>
-        <tr>
-        <td><code>defaultcheck.json</code></td>
-        <td>If you do not create a config map or the map is configured incorrectly, the Kubernetes default is applied. By default, only 20% of the worker nodes in the cluster can be unavailable at a time. You can override the default value by adding the default check to your config map. In the example, every worker node that is not specified in the zone and region checks (<code>dal13</code> or <code>us-south</code>) can be unavailable during the update. </td>
-        </tr>
-        <tr>
-        <td><code>MaxUnavailablePercentage</code></td>
-        <td>The maximum number of nodes that are allowed to be unavailable for a specified label key and value, which is specified as a percentage. A worker node is unavailable during the deploying, reloading, or provisioning process. The queued worker nodes are blocked from updating if it exceeds any defined maximum unavailable percentages. </td>
-        </tr>
-        <tr>
-        <td><code>NodeSelectorKey</code></td>
-        <td>The label key of the worker node for which you want to set a rule. You can set rules for the default labels that are provided by IBM, as well as on worker node labels that you created. <ul><li>If you want to add a rule for worker nodes that belong to one worker pool, you can use the <code>ibm-cloud.kubernetes.io/machine-type</code> label. </li><li> If you have more than one worker pool with the same machine type, use a custom label. </li></ul></td>
-        </tr>
-        <tr>
-        <td><code>NodeSelectorValue</code></td>
-        <td>The label value that the worker node must have to be considered for the rule that you define. </td>
-        </tr>
-    </tbody>
-    </table>
+    `drain_timeout_seconds`
+    :    Optional: The timeout in seconds to wait for the [drain](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/){: external} to complete. Draining a worker node safely removes all existing pods from the worker node and reschedules the pods onto other worker nodes in the cluster. Accepted values are integers in the range 1 - 180. The default value is 30.
 
+    `zonecheck.json` and `regioncheck.json`
+    :   Two checks that define a rule for a set of worker nodes that you can identify with the specified `NodeSelectorKey` and `NodeSelectorValue`. The `zonecheck.json` identifies worker nodes based on their zone label, and the `regioncheck.json` uses the region label that is added to every worker node during provisioning. In the example, 30% of all worker nodes that have `dal13` as their zone label and 20% of all the worker nodes in `us-south` can be unavailable during the update.
+
+    `defaultcheck.json`
+    :   If you do not create a config map or the map is configured incorrectly, the Kubernetes default is applied. By default, only 20% of the worker nodes in the cluster can be unavailable at a time. You can override the default value by adding the default check to your config map. In the example, every worker node that is not specified in the zone and region checks (`dal13` or `us-south`) can be unavailable during the update. 
+
+    `MaxUnavailablePercentage`
+    :   The maximum number of nodes that are allowed to be unavailable for a specified label key and value, which is specified as a percentage. A worker node is unavailable during the deploying, reloading, or provisioning process. The queued worker nodes are blocked from updating if it exceeds any defined maximum unavailable percentages. 
+
+    `NodeSelectorKey`
+    :   The label key of the worker node for which you want to set a rule. You can set rules for the default labels that are provided by IBM, as well as on worker node labels that you created. If you want to add a rule for worker nodes that belong to one worker pool, you can use the `ibm-cloud.kubernetes.io/machine-type` label.
+
+    `NodeSelectorValue`
+    :   The label value that the worker node must have to be considered for the rule that you define.
+        
 5. Create the configuration map in your cluster.
     ```sh
     kubectl apply -f <filepath/configmap.yaml>
@@ -409,8 +392,8 @@ Before you update your VPC worker nodes, review the prerequisite steps.
         ```
         {: pre}
 
-6. Repeat these steps for each worker node that you must update.
-7. Optional: After the replaced worker nodes are in a **Ready** status, [resize the worker pool](/docs/containers?topic=containers-add_workers#resize_pool) to meet the cluster capacity that you want.
+5. Repeat these steps for each worker node that you must update.
+6. Optional: After the replaced worker nodes are in a **Ready** status, [resize the worker pool](/docs/containers?topic=containers-add_workers#resize_pool) to meet the cluster capacity that you want.
 
 ### Updating VPC worker nodes in the console
 {: #vpc_worker_ui}
@@ -481,17 +464,17 @@ To update flavors:
 3. Create a worker node with the new machine type.
     - **For worker nodes in a worker pool**:
         1. Create a worker pool with the number of worker nodes that you want to replace.
-        * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters:
-            ```sh
-            ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
-            ```
-            {: pre}
+            * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters:
+                ```sh
+                ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
+                ```
+                {: pre}
 
-        * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC Generation 2 clusters:
-            ```sh
-            ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
-            ```
-            {: pre}
+            * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC Generation 2 clusters:
+                ```sh
+                ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
+                ```
+                {: pre}
 
         2. Verify that the worker pool is created.
             ```sh
@@ -500,17 +483,17 @@ To update flavors:
             {: pre}
 
         3. Add the zone to your worker pool that you retrieved earlier. When you add a zone, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. If you want to spread your worker nodes across multiple zones, choose a [classic](/docs/containers?topic=containers-regions-and-zones#zones-mz) or [VPC](/docs/containers?topic=containers-regions-and-zones#zones-vpc) multizone location.
-        * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters:
-            ```sh
-            ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-            ```
-            {: pre}
+            * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters:
+                ```sh
+                ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+                ```
+                {: pre}
 
-        * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC Generation 2 clusters:
-            ```sh
-            ibmcloud ks zone add vpc-gen2 --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <vpc_subnet_id>
-            ```
-            {: pre}
+            * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC Generation 2 clusters:
+                ```sh
+                ibmcloud ks zone add vpc-gen2 --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <vpc_subnet_id>
+                ```
+                {: pre}
 
     - **Deprecated: For stand-alone worker nodes**:
         ```sh
@@ -634,7 +617,7 @@ Managed {{site.data.keyword.containerlong_notm}} add-ons are an easy way to enha
 With the introduction of multizone clusters, worker nodes with the same configuration, such as the machine type, are grouped in worker pools. When you create a new cluster, a worker pool that is named `default` is automatically created for you.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Applies to only classic clusters. VPC clusters always use worker pools.
+![Classic infrastructure provider icon.](images/icon-classic-2.svg) Applies to only classic clusters. VPC clusters always use worker pools.
 {: note}
 
 You can use worker pools to spread worker nodes evenly across zones and build a balanced cluster. Balanced clusters are more available and resilient to failures. If a worker node is removed from a zone, you can rebalance the worker pool and automatically provision new worker nodes to that zone. Worker pools are also used to install Kubernetes version updates to all of your worker nodes.  
@@ -644,7 +627,7 @@ If you created clusters before multizone clusters became available, your worker 
 
 Review the following image to see how your cluster setup changes when you move from stand-alone worker nodes to worker pools.
 
-<img src="images/cs_cluster_migrate.png" alt="Update your cluster from stand-alone worker nodes to worker pools" width="600" style="width:600px; border-style: none"/>
+![Update your cluster from stand-alone worker nodes to worker pools](images/cs_cluster_migrate.png)
 
 Before you begin:
 - Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the cluster.
