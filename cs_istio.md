@@ -426,7 +426,7 @@ Review the following optional steps for saving or deleting custom Istio resource
 
 
 
-### Step 2: Uninstalling the Istion add-on
+### Step 2: Uninstalling the Istio add-on
 {: #istio_uninstall_addon}
 
 Uninstall the add-on from the consle or CLI.

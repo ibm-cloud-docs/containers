@@ -98,6 +98,18 @@ subcollection: containers
 {: #sitemap_use_cases}
 
 
+[Financial services use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_finance#cs_uc_finance)
+
+* [Mortgage company trims costs and accelerates regulatory compliance](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage)
+
+* [Payment tech company streamlines developer productivity, deploying AI-enabled tools to their partners 4 times faster](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech)
+
+[Healthcare use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_health#cs_uc_health)
+
+* [Healthcare provider migrates workloads from inefficient VMs to Ops-friendly containers for reporting and patient systems](/docs/containers?topic=containers-cs_uc_health#uc_migrate)
+
+* [Research nonprofit securely hosts sensitive data while it grows research with partners](/docs/containers?topic=containers-cs_uc_health#uc_research)
+
 [Retail use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_retail#cs_uc_retail)
 
 * [Brick-and-mortar retailer shares data, by using APIs with global business partners to drive omnichannel sales](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)
@@ -1590,7 +1602,7 @@ subcollection: containers
 
     * [Step 1: Managing resources before uninstallation](/docs/containers?topic=containers-istio#uninstall_resources)
 
-    * [Step 2: Uninstalling the Istion add-on](/docs/containers?topic=containers-istio#istio_uninstall_addon)
+    * [Step 2: Uninstalling the Istio add-on](/docs/containers?topic=containers-istio#istio_uninstall_addon)
 
     * [Step 3: Remove the Istio operator](/docs/containers?topic=containers-istio#istio_uninstall_operator)
 
