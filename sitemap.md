@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-06"
+lastupdated: "2021-10-07"
 
 keywords: containers
 subcollection: containers
@@ -4705,6 +4705,8 @@ subcollection: containers
 [Why does strongSwan VPN connectivity fail after I add or delete worker nodes?](/docs/containers?topic=containers-cs_vpn_fails_worker_add#cs_vpn_fails_worker_add)
 
 [After upgrading my classic cluster to version 1.21, I'm finding connectivity issues](/docs/containers?topic=containers-ts-network-classic121#ts-network-classic121)
+
+[Why are certain packets dropped on the public VLAN?](/docs/containers?topic=containers-mangle-table#mangle-table)
 
 [Why do OpenSSL connections to Let's Encrypt fail after 30 September 2021?](/docs/containers?topic=containers-ts-letsencrypt#ts-letsencrypt)
 
