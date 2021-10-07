@@ -172,6 +172,8 @@ subcollection: containers
 
 [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
 
+* [7 October 2021](/docs/containers?topic=containers-rel-notes#7oct2021)
+
 * [6 October 2021](/docs/containers?topic=containers-rel-notes#6oct2021)
 
 * [5 October 2021](/docs/containers?topic=containers-rel-notes#5oct2021)
@@ -3312,6 +3314,8 @@ subcollection: containers
 
 * [Version 1.11](/docs/containers?topic=containers-istio-changelog#v111)
 
+    * [Changelog for 1.11.3, released 7 October 2021](/docs/containers?topic=containers-istio-changelog#1113)
+
     * [Changelog for 1.11.2, released 23 September 2021](/docs/containers?topic=containers-istio-changelog#1112)
 
     * [Changelog for 1.11.1, released 31 August 2021](/docs/containers?topic=containers-istio-changelog#1111)
@@ -3433,6 +3437,10 @@ subcollection: containers
 * [Changelog for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
 
 [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog#ca_changelog)
+
+* [Version 1.0.4](/docs/containers?topic=containers-ca_changelog#0104_ca_addon)
+
+    * [Changelog for patch update 1.0.4_374, released 7 October 2021](/docs/containers?topic=containers-ca_changelog#104374_ca)
 
 * [Version 1.0.3](/docs/containers?topic=containers-ca_changelog#0103_ca_addon)
 
