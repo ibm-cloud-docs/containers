@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-07"
+lastupdated: "2021-10-08"
 
 keywords: containers
 subcollection: containers
@@ -397,12 +397,7 @@ subcollection: containers
 * [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_cli_refresh)
 
 
-## Setting up clusters
-{: #sitemap_setting_up_clusters}
-
-
-
-### Planning your cluster environment
+## Planning your cluster environment
 {: #sitemap_planning_your_cluster_environment}
 
 
