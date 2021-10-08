@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-07"
+lastupdated: "2021-10-08"
 
 keywords: containers
 subcollection: containers
@@ -39,6 +39,10 @@ subcollection: containers
 [Creating a VPC cluster](/docs/containers?topic=containers-getting-started#vpc-gen2-gs)
 
 [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
+
+* [Deploying an app to a free classic cluster and exposing it with a node port](/docs/containers?topic=containers-getting-started#deployapp1)
+
+* [Deploying an app to a standard cluster and exposing with a load balancer](/docs/containers?topic=containers-getting-started#deployapp2)
 
 [What's next?](/docs/containers?topic=containers-getting-started#whats-next)
 
@@ -93,10 +97,26 @@ subcollection: containers
 
     * [Applications and data](/docs/containers?topic=containers-responsibilities_iks#applications-and-data)
 
+* [Tasks for IBM responsibilities by area](/docs/containers?topic=containers-responsibilities_iks#task-responsibilities)
+
+    * [Incident and operations management](/docs/containers?topic=containers-responsibilities_iks#incident-and-ops-ibm)
+
+    * [Change management](/docs/containers?topic=containers-responsibilities_iks#change-management-ibm)
+
+    * [Identity and access management](/docs/containers?topic=containers-responsibilities_iks#iam-responsibilities-ibm)
+
+    * [Security and regulation compliance](/docs/containers?topic=containers-responsibilities_iks#security-compliance-ibm)
+
+    * [Disaster recovery](/docs/containers?topic=containers-responsibilities_iks#disaster-recovery-ibm)
+
+    * [Applications and data](/docs/containers?topic=containers-responsibilities_iks#applications-and-data-ibm)
+
 
 ## Use cases
 {: #sitemap_use_cases}
 
+
+[Overview of use cases](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro)
 
 [Financial services use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_finance#cs_uc_finance)
 
@@ -397,12 +417,7 @@ subcollection: containers
 * [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_cli_refresh)
 
 
-## Setting up clusters
-{: #sitemap_setting_up_clusters}
-
-
-
-### Planning your cluster environment
+## Planning your cluster environment
 {: #sitemap_planning_your_cluster_environment}
 
 
@@ -1324,6 +1339,18 @@ subcollection: containers
 * [Viewing cluster states](/docs/containers?topic=containers-health-monitor#states)
 
     * [Master states](/docs/containers?topic=containers-health-monitor#states_master)
+
+* [Setting up {{site.data.keyword.mon_full}} alerts](/docs/containers?topic=containers-health-monitor#monitoring-alerts)
+
+    * [App alerts](/docs/containers?topic=containers-health-monitor#app-level-alerts)
+
+    * [Worker node alerts](/docs/containers?topic=containers-health-monitor#worker-node-level-alerts)
+
+    * [Zone alerts](/docs/containers?topic=containers-health-monitor#zone-level-alerts)
+
+    * [Cluster alerts](/docs/containers?topic=containers-health-monitor#cluster-level-alerts)
+
+    * [Account alerts](/docs/containers?topic=containers-health-monitor#account-level-alerts)
 
 * [Monitoring worker node health in with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
 
@@ -2298,6 +2325,8 @@ subcollection: containers
 
 * [Mounting the volume to your app](/docs/containers?topic=containers-portworx#mount_pvc)
 
+* [VPC: Updating worker nodes with Portworx volumes](/docs/containers?topic=containers-portworx#portworx_vpc_up)
+
 * [Backing up and restoring apps and data with PX-Backup](/docs/containers?topic=containers-portworx#px-backup)
 
     * [Installing PX-Backup on an {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-portworx#px-backup-install)
@@ -2363,6 +2392,8 @@ subcollection: containers
     * [Updating the IBM Cloud Block Storage Attacher plug-in](/docs/containers?topic=containers-utilities#update_block_attacher)
 
     * [Removing the IBM Cloud Block Volume Attacher plug-in](/docs/containers?topic=containers-utilities#remove_block_attacher)
+
+* [Classic: Automatically provisioning unformatted block storage and authorizing your worker nodes to access the storage](/docs/containers?topic=containers-utilities#automatic_block)
 
 * [Classic: Manually adding block storage to specific worker nodes](/docs/containers?topic=containers-utilities#manual_block)
 
@@ -2522,6 +2553,12 @@ subcollection: containers
     * [`ibmcloud ks cluster addon update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_update)
 
     * [`ibmcloud ks cluster addon versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_addon_versions)
+
+    * [`ibmcloud ks cluster autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_autoupdate_disable)
+
+    * [`ibmcloud ks cluster autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_autoupdate_enable)
+
+    * [`ibmcloud ks cluster autoupdate get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_autoupdate_get)
 
     * [`ibmcloud ks cluster ca create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_create)
 

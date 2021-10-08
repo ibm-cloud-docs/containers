@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-07"
+lastupdated: "2021-10-08"
 
 keywords: object storage, plug-in, changelog
 
@@ -66,6 +66,7 @@ Review the changes in version 2.1.4 of the {{site.data.keyword.cos_full_notm}} p
 - Fixes a `timeoutSeconds` issue in the `livenessProbe` and `readinessProbe`.
 - Updates the GoLang version to `v1.17`.
 - Updates the UBI image to `8.4-208`.
+- Migrates the image from the `ibmcom` public repository to `icr.io/cpopen` repo.
 - Resolves [CVE-2021-36221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36221){: external}, [CVE-2021-29923](https://nvd.nist.gov/vuln/detail/CVE-2021-29923){: external}, and [CVE-2021-33196](https://nvd.nist.gov/vuln/detail/CVE-2021-33196){: external}.
 
 
@@ -189,7 +190,6 @@ Review the changes that are included in version 2.0.5 of the Object Storage plug
 
 - Fixes a `NilPointer` error.  
 - Resolves the following CVEs: `CVE-2018-20843`, `CVE-2019-13050`, `CVE-2019-13627`, `CVE-2019-14889`, `CVE-2019-1551`, `CVE-2019-15903`, `,CVE-2019-16168`, `CVE-2019-16935`, `CVE-2019-19221`, `CVE-2019-19906`, `CVE-2019-19956`, `CVE-2019-20218`, `CVE-2019-20386`, `CVE-2019-20387`, `CVE-2019-20388`, `CVE-2019-20454`, `CVE-2019-20907`, `CVE-2019-5018`, `CVE-2020-10029`, `CVE-2020-13630`, `CVE-2020-13631`, `CVE-2020-13632`, `CVE-2020-14422`, `CVE-2020-1730`, `CVE-2020-1751`, `CVE-2020-1752`, `CVE-2020-6405`, `CVE-2020-7595`, and `CVE-2020-8177`.   
-
 
 
 

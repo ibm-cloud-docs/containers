@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-06"
+lastupdated: "2021-10-08"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -41,18 +41,18 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch. As 
 |Patch|x.x.4_1510|IBM and you|Kubernetes patches, as well as other {{site.data.keyword.cloud_notm}} Provider component updates such as security and operating system patches. IBM updates masters automatically, but you apply patches to worker nodes. See more about patches in the following section.|
 {: caption="Impacts of Kubernetes updates" caption-side="top"}
 
-<dl>
-    <dt>Major and minor updates (1.x)</dt>
-        <dd>First, [update your master node](/docs/containers?topic=containers-update#master) and then [update the worker nodes](/docs/containers?topic=containers-update#worker_node).
-    <ul><li>You cannot update a Kubernetes master two or more minor versions ahead (n+2). For example, if your current master is version 1.19 and you want to update to 1.21, you must update to 1.20 first.</li>
-    <li>Worker nodes cannot run a Kubernetes major or minor version that is greater than the masters. Additionally, your worker nodes can be only up to two versions behind the master version (<code>n-2</code>).</li>
-    <li>If you use a <code>kubectl</code> CLI version that does not match at least the <code>major.minor</code> version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and <a href="/docs/containers?topic=containers-cs_cli_install#kubectl">CLI versions</a> up-to-date.
-    <dt>Patch updates (x.x.4_1510)</dt>
-        <dd>Changes across patches are documented in the [Version changelog](/docs/containers?topic=containers-changelog). Master patches are applied automatically, but you initiate worker node patches updates. Worker nodes can also run patch versions that are greater than the masters. As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.cloud_notm}} console or CLI, such as with the following commands: `ibmcloud ks cluster ls`, `cluster get`, `worker ls`, or `worker get`.<br>
-    Patches can be for worker nodes, masters, or both.
-    <ul><li><strong>Worker node patches</strong>: Check monthly to see whether an update is available, and use the <code>ibmcloud ks worker update</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update">command</a> or the <code>ibmcloud ks worker reload</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload">command</a> to apply these security and operating system patches. During an update or reload, your worker node machine is reimaged, and data is deleted if not <a href="/docs/containers?topic=containers-storage_planning#persistent_storage_overview">stored outside the worker node</a>.</li>
-    <li><strong>Master patches</strong>: Master patches are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, as noted in the changelog, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the <code>ibmcloud ks cluster master update</code> <a href="/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update">command</a> yourself without waiting for the update automation to apply.</li></ul></dd>
-</dl>
+Major and minor updates (1.x)
+:   First, [update your master node](/docs/containers?topic=containers-update#master) and then [update the worker nodes](/docs/containers?topic=containers-update#worker_node).
+:   You cannot update a Kubernetes master two or more minor versions ahead (n+2). For example, if your current master is version 1.19 and you want to update to 1.21, you must update to 1.20 first.
+:   Worker nodes cannot run a Kubernetes major or minor version that is greater than the masters. Additionally, your worker nodes can be only up to two versions behind the master version (`n-2`).
+:   If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](/docs/containers?topic=containers-cs_cli_install#kubectl) up-to-date.
+
+Patch updates (x.x.4_1510)
+:   Changes across patches are documented in the [Version changelog](/docs/containers?topic=containers-changelog). Master patches are applied automatically, but you initiate worker node patches updates. Worker nodes can also run patch versions that are greater than the masters. As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.cloud_notm}} console or CLI, such as with the following commands: `ibmcloud ks cluster ls`, `cluster get`, `worker ls`, or `worker get`.
+:   Patches can be for worker nodes, masters, or both.
+    - **Worker node patches**: Check monthly to see whether an update is available, and use the [`ibmcloud ks worker update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) command or the [`ibmcloud ks worker reload`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) command to apply these security and operating system patches. During an update or reload, your worker node machine is reimaged, and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+    - **Master patches**: Master patches are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, as noted in the changelog, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply.
+
 
 ## Kubernetes versions
 {: #version_types}

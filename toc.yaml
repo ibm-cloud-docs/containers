@@ -24,7 +24,7 @@ toc:
         - topicgroup:
             label: Use cases
             topics:
-            - uc_intro.md
+            - cs_uc_intro.md
             - uc-finance.md
             - uc-health.md
             - uc-retail.md
@@ -81,15 +81,12 @@ toc:
             - cs_cli_install.md
             - api-install.md
         - topicgroup:
-            label: Setting up clusters
+            label: Planning your cluster environment
             topics:
-            - topicgroup:
-                label: Planning your cluster environment
-                topics:
-                - kube-strategy.md
-                - cluster-plan-network.md
-                - cluster-plan-ha.md
-                - worker-plan.md
+            - kube-strategy.md
+            - cluster-plan-network.md
+            - cluster-plan-ha.md
+            - worker-plan.md
         - topicgroup:
             label: Creating and accessing clusters
             topics:
