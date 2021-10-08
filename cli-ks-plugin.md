@@ -1137,7 +1137,7 @@ Set the webhook back end for the API server configuration. The webhook back end 
 {: shortdesc}
 
 ```sh
-ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server SERVER_URL_OR_IP] [--ca-cert CA_CERT_PATH] [--client-cert CLIENT_CERT_PATH] [--client-key CLIENT_KEY_PATH] <staging-cli-next-2066>[--policy POLICY]</staging-cli-next-1066> [-q]
+ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server SERVER_URL_OR_IP] [--ca-cert CA_CERT_PATH] [--client-cert CLIENT_CERT_PATH] [--client-key CLIENT_KEY_PATH]  [-q]
 ```
 {: pre}
 
@@ -1161,13 +1161,7 @@ ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server 
 :    Optional: The file path for the client certificate that is used to authenticate against the remote logging service.
 
 `--client-key CLIENT_KEY_PATH`
-:    Optional: The file path for the corresponding client key that is used to connect to the remote logging service.<staging-cli-next-2066>
-
-`--policy POLICY`
-:    Optional: The type of policy that is used for auditing. Use `default` or `verbose`. Note that the `verbose` policy type audits a larger number of API transactions, which may impact cluster performance, and is only recommended for occasional use.
-
-The `verbose` policy option is supported on {{site.data.keyword.containershort}} clusters that run on version 1.18 and later.
-{: note}<staging-cli-next-2066>
+:    Optional: The file path for the corresponding client key that is used to connect to the remote logging service.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
