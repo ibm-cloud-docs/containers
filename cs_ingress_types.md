@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-06"
+lastupdated: "2021-10-08"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -39,6 +39,8 @@ Not ready to switch your ALBs to the Kubernetes Ingress image yet? The custom {{
 {: tip}
 
 For a comparison of the Kubernetes Ingress image and the unsupported IBM Ingress image, review the following tables.
+
+If you use the [Kubernetes Ingress controller](https://github.com/kubernetes/ingress-nginx){: external}, Prometheus metrics are enabled by default, which might result in additional billing.
 
 ## Comparison of the ALB image types
 {: #about-alb-images}
