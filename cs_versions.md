@@ -82,7 +82,7 @@ kubectl version  --short | grep -i server
 {: pre}
 
 Example output
-```
+```sh
 Server Version: v1.20.11+IKS
 ```
 {: screen}
