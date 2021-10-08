@@ -24,7 +24,7 @@ toc:
         - topicgroup:
             label: Use cases
             topics:
-            - uc_intro.md
+            - cs_uc_intro.md
             - uc-finance.md
             - uc-health.md
             - uc-retail.md

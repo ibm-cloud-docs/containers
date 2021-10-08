@@ -138,34 +138,6 @@ First, create a cluster with a few clicks in the {{site.data.keyword.cloud_notm}
 
 To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {{site.data.keyword.cloud_notm}} account](/docs/account?topic=account-upgrading-account) where you are the owner or have [full Administrator access](/docs/account?topic=account-assign-access-resources).
 {: note}
-
-<div class=solutionBoxContainer>
-    <div class="solutionBox">
-        <a href = "#clusters_gs">
-        <div>
-        <p>**Create a classic cluster</p>**
-        <p class="bx--type-caption">Create a Kubernetes cluster on {{site.data.keyword.cloud_notm}} classic workers nodes, subnets, and VLAN networking. Choose from a variety of virtual, bare metal, GPU, or software-defined storage flavors.</p>
-        </div>
-    </a>
-    </div>
-    <div class="solutionBox">
-        <a href = "#vpc-gen2-gs">
-        <div>
-            <p>**Create a VPC cluster</p>**
-            <p class="bx--type-caption">Create your cluster in the second generation of compute resources in a Virtual Private Cloud (VPC) that gives you the security of a private cloud with the dynamic scalability of a public cloud.</p>
-        </div>
-    </a>
-    </div>
-    <div class="solutionBox">
-        <a href = "#deploy-app">
-        <div>
-            <p>**Deploy and expose an app</p>**
-            <p class="bx--type-caption">Deploy a `websphere-liberty` Java application server as a container from a Docker Hub image. Then, expose it with a `LoadBalancer` service to get an IP address for quick testing of your first app.</p>
-        </div>
-    </a>
-    </div>
-</div>
-
 ## Creating a free classic cluster
 {: #clusters_gs}
 
