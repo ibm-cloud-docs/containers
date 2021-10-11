@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-08"
+lastupdated: "2021-10-11"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -636,8 +636,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 ![Classic infrastructure provider icon.](images/icon-classic-2.svg) If you have non-containerized workloads on a classic IBM Cloud infrastructure [virtual server](https://cloud.ibm.com/gen1/infrastructure/provision/vs) or [bare metal server](https://cloud.ibm.com/gen1/infrastructure/provision/bm), you can connect those workloads to the workloads in your gateway-enabled classic cluster by adding the server instance to your cluster network.
 {: shortdesc}
 
-You can add classic infrastructure servers to gateway-enabled classic clusters that run Kubernetes version 1.18 and earlier only. This feature is not supported for clusters that run Kubernetes version 1.19.
-{: important}
+This feature is deprecated. 
+{: deprecated}
 
 The server instance is added to your cluster's private 172.30.X.X pod network so that your cluster workloads can communicate with the server. For example, you might have a database with specific configurations already running in an {{site.data.keyword.cloud_notm}} bare metal server. You can directly attach the database to the network of your gateway-enabled cluster without migrating the database to a container. The apps that run on your compute worker nodes can then send data to and receive data from the database in the bare metal server.
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-08"
+lastupdated: "2021-10-11"
 
 keywords: kubernetes, iks, release notes
 
@@ -34,6 +34,11 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 Review the release notes for October 2021.
 {: shortdesc}
 
+### 10 October 2021
+{: #10oct2021}
+
+Unsupported Kubernetes version 1.18
+:   Kubernetes version 1.18 is unsupported. To continue receiving important security updates and support, you must [update your cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately.
 
 ### 7 October 2021
 {: #7oct2021}
@@ -44,7 +49,6 @@ Istio add-on change log
 
 Cluster autoscaler add-on.
 :   [Version 1.0.4](/docs/containers?topic=containers-ca_changelog) is released.
-
 
 
 

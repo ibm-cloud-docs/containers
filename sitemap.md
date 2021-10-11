@@ -204,6 +204,8 @@ subcollection: containers
 
 [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
 
+* [10 October 2021](/docs/containers?topic=containers-rel-notes#10oct2021)
+
 * [7 October 2021](/docs/containers?topic=containers-rel-notes#7oct2021)
 
 * [6 October 2021](/docs/containers?topic=containers-rel-notes#6oct2021)
@@ -2991,15 +2993,9 @@ subcollection: containers
 
     * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#119_after_worker)
 
-* [Deprecated: Version 1.18](/docs/containers?topic=containers-cs_versions#cs_v118)
-
-    * [Update before master](/docs/containers?topic=containers-cs_versions#118_before)
-
-    * [Update after master](/docs/containers?topic=containers-cs_versions#118_after)
-
-    * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#118_after_worker)
-
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
+
+    * [Version 1.18 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v118)
 
     * [Version 1.17 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v117)
 
@@ -3204,120 +3200,6 @@ subcollection: containers
     * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
 
     * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
-
-* [Deprecated: Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
-
-    * [Changelog for worker node fix pack 1.18.20_1566, released 27 September 2021](/docs/containers?topic=containers-changelog#11820_1566)
-
-    * [Changelog for master fix pack 1.18.20_1565, released 28 September 2021](/docs/containers?topic=containers-changelog#11820_1565)
-
-    * [Changelog for worker node fix pack 1.18.20_1564, released 13 September 2021](/docs/containers?topic=containers-changelog#11820_1564)
-
-    * [Changelog for worker node fix pack 1.18.20_1563, released 30 August 2021](/docs/containers?topic=containers-changelog#11820_1563)
-
-    * [Changelog for master fix pack 1.18.20_1562, released 25 August 2021](/docs/containers?topic=containers-changelog#11820_1562)
-
-    * [Changelog for worker node fix pack 1.18.20_1561, released 16 August 2021](/docs/containers?topic=containers-changelog#11820_1561)
-
-    * [Changelog for worker node fix pack 1.18.20_1560, released 02 August 2021](/docs/containers?topic=containers-changelog#11820_1560)
-
-    * [Changelog for master fix pack 1.18.20_1559, released 27 July 2021](/docs/containers?topic=containers-changelog#11820_1559)
-
-    * [Changelog for worker node fix pack 1.18.29_1558, released 19 July 2021](/docs/containers?topic=containers-changelog#11829_1558)
-
-    * [Changelog for worker node fix pack 1.18.20_1557, released 6 July 2021](/docs/containers?topic=containers-changelog#11820_1557)
-
-    * [Changelog for master fix pack 1.18.20_1556, released 28 June 2021](/docs/containers?topic=containers-changelog#11820_1556)
-
-    * [Changelog for worker node fix pack 1.18.19_1555, released 22 June 2021](/docs/containers?topic=containers-changelog#11819_1555)
-
-    * [Changelog for worker node fix pack 1.18.19_1554, released 7 June 2021](/docs/containers?topic=containers-changelog#11819_1554)
-
-    * [Changelog for worker node fix pack 1.18.19_1553, released 24 May 2021](/docs/containers?topic=containers-changelog#11819_1553)
-
-    * [Changelog for master fix pack 1.18.19_1552, released 24 May 2021](/docs/containers?topic=containers-changelog#11819_1552)
-
-    * [Changelog for worker node fix pack 1.18.18_1551, released 10 May 2021](/docs/containers?topic=containers-changelog#11818_1551)
-
-    * [Changelog for master fix pack 1.18.18_1549, released 27 April 2021](/docs/containers?topic=containers-changelog#11818_1549)
-
-    * [Changelog for worker node fix pack 1.18.18_1550, released 26 April 2021](/docs/containers?topic=containers-changelog#11818_1550)
-
-    * [Changelog for worker node fix pack 1.18.17_1548, released 12 April 2021](/docs/containers?topic=containers-changelog#11817_1548)
-
-    * [Changelog for master fix pack 1.18.17_1546, released 30 March 2021](/docs/containers?topic=containers-changelog#11817_1546)
-
-    * [Changelog for worker node fix pack 1.18.17_1547, released 29 March 2021](/docs/containers?topic=containers-changelog#11817_1547)
-
-    * [Changelog for worker node fix pack 1.18.16_1545, released 12 March 2021](/docs/containers?topic=containers-changelog#11816_1545)
-
-    * [Changelog for worker node fix pack 1.18.16_1544, released 1 March 2021](/docs/containers?topic=containers-changelog#11816_1544)
-
-    * [Changelog for master fix pack 1.18.16_1544, released 27 February 2021](/docs/containers?topic=containers-changelog#11816_1544_master)
-
-    * [Changelog for master fix pack 1.18.16_1543, released 22 February 2021](/docs/containers?topic=containers-changelog#11816_1543)
-
-    * [Changelog for worker node fix pack 1.18.15_1541, released 15 February 2021](/docs/containers?topic=containers-changelog#11815_1541)
-
-    * [Changelog for worker node fix pack 1.18.15_1540, released 3 February 2021](/docs/containers?topic=containers-changelog#11815_1540)
-
-    * [Changelog for worker node fix pack 1.18.15_1539, released 1 February 2021](/docs/containers?topic=containers-changelog#11815_1539)
-
-    * [Changelog for master fix pack 1.18.15_1538, released 19 January 2021](/docs/containers?topic=containers-changelog#11815_1538_master)
-
-    * [Changelog for worker node fix pack 1.18.15_1538, released 18 January 2021](/docs/containers?topic=containers-changelog#11815_1538)
-
-    * [Changelog for master fix pack 1.18.14_1537, released 6 January 2021](/docs/containers?topic=containers-changelog#11814_1537)
-
-    * [Changelog for worker node fix pack 1.18.13_1536, released 21 December 2020](/docs/containers?topic=containers-changelog#11813_1536)
-
-    * [Changelog for master fix pack 1.18.13_1535, released 14 December 2020](/docs/containers?topic=containers-changelog#11813_1535)
-
-    * [Changelog for worker node fix pack 1.18.12_1535, released 11 December 2020](/docs/containers?topic=containers-changelog#11812_1535)
-
-    * [Changelog for worker node fix pack 1.18.12_1534, released 7 December 2020](/docs/containers?topic=containers-changelog#11812_1534)
-
-    * [Changelog for worker node fix pack 1.18.12_1533, released 23 November 2020](/docs/containers?topic=containers-changelog#11812_1533_worker)
-
-    * [Changelog for master fix pack 1.18.12_1533, released 16 November 2020](/docs/containers?topic=containers-changelog#11812_1533)
-
-    * [Changelog for worker node fix pack 1.18.10_1532, released 9 November 2020](/docs/containers?topic=containers-changelog#11810_1532)
-
-    * [Changelog for worker node fix pack 1.18.10_1531, released 26 October 2020](/docs/containers?topic=containers-changelog#11810_1531_worker)
-
-    * [Changelog for master fix pack 1.18.10_1531, released 26 October 2020](/docs/containers?topic=containers-changelog#11810_1531)
-
-    * [Changelog for worker node fix pack 1.18.9_1530, released 12 October 2020](/docs/containers?topic=containers-changelog#1189_1530)
-
-    * [Changelog for worker node fix pack 1.18.9_1529, released 28 September 2020](/docs/containers?topic=containers-changelog#1189_1529)
-
-    * [Changelog for master fix pack 1.18.9_1528, released 21 September 2020](/docs/containers?topic=containers-changelog#1189_1528)
-
-    * [Changelog for worker node fix pack 1.18.8_1527, released 14 September 2020](/docs/containers?topic=containers-changelog#1188_1527)
-
-    * [Changelog for worker node fix pack 1.18.8_1526, released 31 August 2020](/docs/containers?topic=containers-changelog#1188_1526)
-
-    * [Changelog for master fix pack 1.18.8_1525, released 18 August 2020](/docs/containers?topic=containers-changelog#1188_1525_master)
-
-    * [Changelog for worker node fix pack 1.18.8_1525, released 17 August 2020](/docs/containers?topic=containers-changelog#1188_1525)
-
-    * [Changelog for worker node fix pack 1.18.6_1523, released 3 August 2020](/docs/containers?topic=containers-changelog#1186_1523)
-
-    * [Changelog for master fix pack 1.18.6_1522, released 24 July 2020](/docs/containers?topic=containers-changelog#1186_1522)
-
-    * [Changelog for master fix pack 1.18.6_1521, released 20 July 2020](/docs/containers?topic=containers-changelog#1186_1521)
-
-    * [Changelog for worker node fix pack 1.18.6_1520, released 20 July 2020](/docs/containers?topic=containers-changelog#1186_1520)
-
-    * [Changelog for worker node fix pack 1.18.4_1518, released 6 July 2020](/docs/containers?topic=containers-changelog#1184_1518)
-
-    * [Changelog for 1.18.4_1517, released 22 June 2020](/docs/containers?topic=containers-changelog#1184_1517)
-
-    * [Changelog for worker node fix pack 1.18.3_1515, released 8 June 2020](/docs/containers?topic=containers-changelog#1183_1515)
-
-    * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
-
-    * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 
 [CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark)
 
@@ -3602,6 +3484,120 @@ subcollection: containers
 * [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0)
 
 [Archived Kubernetes version changelogs](/docs/containers?topic=containers-changelog_archive#changelog_archive)
+
+* [Version 1.18 changelog (Unsupported as of 10 October 2021)](/docs/containers?topic=containers-changelog_archive#118_changelog)
+
+    * [Changelog for worker node fix pack 1.18.20_1566, released 27 September 2021](/docs/containers?topic=containers-changelog_archive#11820_1566)
+
+    * [Changelog for master fix pack 1.18.20_1565, released 28 September 2021](/docs/containers?topic=containers-changelog_archive#11820_1565)
+
+    * [Changelog for worker node fix pack 1.18.20_1564, released 13 September 2021](/docs/containers?topic=containers-changelog_archive#11820_1564)
+
+    * [Changelog for worker node fix pack 1.18.20_1563, released 30 August 2021](/docs/containers?topic=containers-changelog_archive#11820_1563)
+
+    * [Changelog for master fix pack 1.18.20_1562, released 25 August 2021](/docs/containers?topic=containers-changelog_archive#11820_1562)
+
+    * [Changelog for worker node fix pack 1.18.20_1561, released 16 August 2021](/docs/containers?topic=containers-changelog_archive#11820_1561)
+
+    * [Changelog for worker node fix pack 1.18.20_1560, released 02 August 2021](/docs/containers?topic=containers-changelog_archive#11820_1560)
+
+    * [Changelog for master fix pack 1.18.20_1559, released 27 July 2021](/docs/containers?topic=containers-changelog_archive#11820_1559)
+
+    * [Changelog for worker node fix pack 1.18.29_1558, released 19 July 2021](/docs/containers?topic=containers-changelog_archive#11829_1558)
+
+    * [Changelog for worker node fix pack 1.18.20_1557, released 6 July 2021](/docs/containers?topic=containers-changelog_archive#11820_1557)
+
+    * [Changelog for master fix pack 1.18.20_1556, released 28 June 2021](/docs/containers?topic=containers-changelog_archive#11820_1556)
+
+    * [Changelog for worker node fix pack 1.18.19_1555, released 22 June 2021](/docs/containers?topic=containers-changelog_archive#11819_1555)
+
+    * [Changelog for worker node fix pack 1.18.19_1554, released 7 June 2021](/docs/containers?topic=containers-changelog_archive#11819_1554)
+
+    * [Changelog for worker node fix pack 1.18.19_1553, released 24 May 2021](/docs/containers?topic=containers-changelog_archive#11819_1553)
+
+    * [Changelog for master fix pack 1.18.19_1552, released 24 May 2021](/docs/containers?topic=containers-changelog_archive#11819_1552)
+
+    * [Changelog for worker node fix pack 1.18.18_1551, released 10 May 2021](/docs/containers?topic=containers-changelog_archive#11818_1551)
+
+    * [Changelog for master fix pack 1.18.18_1549, released 27 April 2021](/docs/containers?topic=containers-changelog_archive#11818_1549)
+
+    * [Changelog for worker node fix pack 1.18.18_1550, released 26 April 2021](/docs/containers?topic=containers-changelog_archive#11818_1550)
+
+    * [Changelog for worker node fix pack 1.18.17_1548, released 12 April 2021](/docs/containers?topic=containers-changelog_archive#11817_1548)
+
+    * [Changelog for master fix pack 1.18.17_1546, released 30 March 2021](/docs/containers?topic=containers-changelog_archive#11817_1546)
+
+    * [Changelog for worker node fix pack 1.18.17_1547, released 29 March 2021](/docs/containers?topic=containers-changelog_archive#11817_1547)
+
+    * [Changelog for worker node fix pack 1.18.16_1545, released 12 March 2021](/docs/containers?topic=containers-changelog_archive#11816_1545)
+
+    * [Changelog for worker node fix pack 1.18.16_1544, released 1 March 2021](/docs/containers?topic=containers-changelog_archive#11816_1544)
+
+    * [Changelog for master fix pack 1.18.16_1544, released 27 February 2021](/docs/containers?topic=containers-changelog_archive#11816_1544_master)
+
+    * [Changelog for master fix pack 1.18.16_1543, released 22 February 2021](/docs/containers?topic=containers-changelog_archive#11816_1543)
+
+    * [Changelog for worker node fix pack 1.18.15_1541, released 15 February 2021](/docs/containers?topic=containers-changelog_archive#11815_1541)
+
+    * [Changelog for worker node fix pack 1.18.15_1540, released 3 February 2021](/docs/containers?topic=containers-changelog_archive#11815_1540)
+
+    * [Changelog for worker node fix pack 1.18.15_1539, released 1 February 2021](/docs/containers?topic=containers-changelog_archive#11815_1539)
+
+    * [Changelog for master fix pack 1.18.15_1538, released 19 January 2021](/docs/containers?topic=containers-changelog_archive#11815_1538_master)
+
+    * [Changelog for worker node fix pack 1.18.15_1538, released 18 January 2021](/docs/containers?topic=containers-changelog_archive#11815_1538)
+
+    * [Changelog for master fix pack 1.18.14_1537, released 6 January 2021](/docs/containers?topic=containers-changelog_archive#11814_1537)
+
+    * [Changelog for worker node fix pack 1.18.13_1536, released 21 December 2020](/docs/containers?topic=containers-changelog_archive#11813_1536)
+
+    * [Changelog for master fix pack 1.18.13_1535, released 14 December 2020](/docs/containers?topic=containers-changelog_archive#11813_1535)
+
+    * [Changelog for worker node fix pack 1.18.12_1535, released 11 December 2020](/docs/containers?topic=containers-changelog_archive#11812_1535)
+
+    * [Changelog for worker node fix pack 1.18.12_1534, released 7 December 2020](/docs/containers?topic=containers-changelog_archive#11812_1534)
+
+    * [Changelog for worker node fix pack 1.18.12_1533, released 23 November 2020](/docs/containers?topic=containers-changelog_archive#11812_1533_worker)
+
+    * [Changelog for master fix pack 1.18.12_1533, released 16 November 2020](/docs/containers?topic=containers-changelog_archive#11812_1533)
+
+    * [Changelog for worker node fix pack 1.18.10_1532, released 9 November 2020](/docs/containers?topic=containers-changelog_archive#11810_1532)
+
+    * [Changelog for worker node fix pack 1.18.10_1531, released 26 October 2020](/docs/containers?topic=containers-changelog_archive#11810_1531_worker)
+
+    * [Changelog for master fix pack 1.18.10_1531, released 26 October 2020](/docs/containers?topic=containers-changelog_archive#11810_1531)
+
+    * [Changelog for worker node fix pack 1.18.9_1530, released 12 October 2020](/docs/containers?topic=containers-changelog_archive#1189_1530)
+
+    * [Changelog for worker node fix pack 1.18.9_1529, released 28 September 2020](/docs/containers?topic=containers-changelog_archive#1189_1529)
+
+    * [Changelog for master fix pack 1.18.9_1528, released 21 September 2020](/docs/containers?topic=containers-changelog_archive#1189_1528)
+
+    * [Changelog for worker node fix pack 1.18.8_1527, released 14 September 2020](/docs/containers?topic=containers-changelog_archive#1188_1527)
+
+    * [Changelog for worker node fix pack 1.18.8_1526, released 31 August 2020](/docs/containers?topic=containers-changelog_archive#1188_1526)
+
+    * [Changelog for master fix pack 1.18.8_1525, released 18 August 2020](/docs/containers?topic=containers-changelog_archive#1188_1525_master)
+
+    * [Changelog for worker node fix pack 1.18.8_1525, released 17 August 2020](/docs/containers?topic=containers-changelog_archive#1188_1525)
+
+    * [Changelog for worker node fix pack 1.18.6_1523, released 3 August 2020](/docs/containers?topic=containers-changelog_archive#1186_1523)
+
+    * [Changelog for master fix pack 1.18.6_1522, released 24 July 2020](/docs/containers?topic=containers-changelog_archive#1186_1522)
+
+    * [Changelog for master fix pack 1.18.6_1521, released 20 July 2020](/docs/containers?topic=containers-changelog_archive#1186_1521)
+
+    * [Changelog for worker node fix pack 1.18.6_1520, released 20 July 2020](/docs/containers?topic=containers-changelog_archive#1186_1520)
+
+    * [Changelog for worker node fix pack 1.18.4_1518, released 6 July 2020](/docs/containers?topic=containers-changelog_archive#1184_1518)
+
+    * [Changelog for 1.18.4_1517, released 22 June 2020](/docs/containers?topic=containers-changelog_archive#1184_1517)
+
+    * [Changelog for worker node fix pack 1.18.3_1515, released 8 June 2020](/docs/containers?topic=containers-changelog_archive#1183_1515)
+
+    * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog_archive#1183_1514)
+
+    * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog_archive#1182_1512)
 
 * [Version 1.17 changelog (unsupported as of 2 July 2021)](/docs/containers?topic=containers-changelog_archive#117_changelog)
 
