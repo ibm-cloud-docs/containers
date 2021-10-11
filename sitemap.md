@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-08"
+lastupdated: "2021-10-11"
 
 keywords: containers
 subcollection: containers
@@ -430,6 +430,8 @@ subcollection: containers
     * [Can I automate my infrastructure deployments?](/docs/containers?topic=containers-strategy#infra_packaging)
 
     * [What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?](/docs/containers?topic=containers-strategy#app_kinds)
+
+    * [What about serverless apps?](/docs/containers?topic=containers-strategy#apps_serverless)
 
     * [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#knowledge)
 
@@ -1447,6 +1449,8 @@ subcollection: containers
     * [What kind of apps can I run in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-plan_deploy#app_types)
 
     * [What are some guidelines for developing stateless, cloud-native apps?](/docs/containers?topic=containers-plan_deploy#12factor)
+
+    * [What about serverless apps?](/docs/containers?topic=containers-plan_deploy#apps_serverless)
 
     * [I already have an app. How can I migrate it to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-plan_deploy#migrate_containerize)
 
