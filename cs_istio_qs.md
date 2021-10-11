@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-08"
+lastupdated: "2021-10-11"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -57,6 +57,7 @@ Set up the managed Istio add-on in your cluster.
     kubectl get pods -n istio-system
     ```
     {: pre}  
+
 
     ```sh
     kubectl get svc -n istio-system
@@ -168,17 +169,17 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 
     Mac OS or Linux
 
-        ```sh
-        open http://$GATEWAY_URL/productpage
-        ```
-        {: pre}
+    ```sh
+    open http://$GATEWAY_URL/productpage
+    ```
+    {: pre}
 
     Windows
 
-        ```
-        start http://$GATEWAY_URL/productpage
-        ```
-        {: pre}
+    ```sh
+    start http://$GATEWAY_URL/productpage
+    ```
+    {: pre}
 
 **Next steps** Try refreshing the page several times. Different versions of the reviews section round-robin through no stars (`v1` of `reviews`), black stars (`v2`), and red stars (`v3`).
 
@@ -224,11 +225,11 @@ After you finish testing your app and are ready to start directing live traffic 
     ```
     {: pre}
 
-4. View the BookInfo web page in a browser by running `open http://$GATEWAY_URL/productpage` on Mac OS or Linux or by running `start http://$GATEWAY_URL/productpage` on Windows.
+2. View the BookInfo web page in a browser by running `open http://$GATEWAY_URL/productpage` on Mac OS or Linux or by running `start http://$GATEWAY_URL/productpage` on Windows.
 
-5. Try refreshing the page several times. Notice that the page with no stars (`v1`) is no longer shown, and that a majority of page refreshes show the black stars (`v2`). Only rarely is the page with red stars (`v3`) shown.
+3. Try refreshing the page several times. Notice that the page with no stars (`v1`) is no longer shown, and that a majority of page refreshes show the black stars (`v2`). Only rarely is the page with red stars (`v3`) shown.
 
-6. Change the traffic distribution so that all traffic is sent only to `v3`. Note that in a real scenario, you might slowly roll out your version changes by changing the traffic distribution first to 80:20, then 70:30, and so on, until all traffic is routed to only the latest version.
+4. Change the traffic distribution so that all traffic is sent only to `v3`. Note that in a real scenario, you might slowly roll out your version changes by changing the traffic distribution first to 80:20, then 70:30, and so on, until all traffic is routed to only the latest version.
     1. Edit the configuration file for the `reviews` virtual service.
         ```sh
         kubectl edit VirtualService reviews
@@ -238,9 +239,9 @@ After you finish testing your app and are ready to start directing live traffic 
     2. Change the `weight` of `v2` to `0` and the `weight` of `v3` to `100`.
     3. Save and close the file.
 
-7. Try refreshing the BookInfo page several times. Notice that the page with black stars (`v2`) is no longer shown, and only the page with red stars (`v3`) shown.
+5. Try refreshing the BookInfo page several times. Notice that the page with black stars (`v2`) is no longer shown, and only the page with red stars (`v3`) shown.
 
-8. Verify that in the time since you changed the YAML file for the reviews `VirtualService`, no logs exist for requests to `v2`.
+6. Verify that in the time since you changed the YAML file for the reviews `VirtualService`, no logs exist for requests to `v2`.
     ```sh
     kubectl logs -l app=reviews,version=v2 -c istio-proxy
     ```

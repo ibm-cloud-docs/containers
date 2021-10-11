@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-08"
+lastupdated: "2021-10-11"
 
 keywords: kubernetes, iks, containers
 
@@ -15,118 +15,6 @@ subcollection: containers
   
 
 
-<style>
-    <!--
-        #tutorials { /* hide the page header */
-            display: none !important;
-        }
-        .allCategories {
-            display: flex !important;
-            flex-direction: row !important;
-            flex-wrap: wrap !important;
-        }
-        .categoryBox {
-            flex-grow: 1 !important;
-            width: calc(33% - 20px) !important;
-            text-decoration: none !important;
-            margin: 0 10px 20px 0 !important;
-            padding: 16px !important;
-            border: 1px #dfe6eb solid !important;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
-            text-align: center !important;
-            text-overflow: ellipsis !important;
-            overflow: hidden !important;
-        }
-        .solutionBoxContainer {}
-        .solutionBoxContainer a {
-            text-decoration: none !important;
-            border: none !important;
-        }
-        .solutionBox {
-            display: inline-block !important;
-            width: 100% !important;
-            margin: 0 10px 20px 0 !important;
-            padding: 16px !important;
-            background-color: #f4f4f4 !important;
-        }
-        @media screen and (min-width: 960px) {
-            .solutionBox {
-            width: calc(50% - 3%) !important;
-            }
-            .solutionBox.solutionBoxFeatured {
-            width: calc(50% - 3%) !important;
-            }
-            .solutionBoxContent {
-            height: 350px !important;
-            }
-        }
-        @media screen and (min-width: 1298px) {
-            .solutionBox {
-            width: calc(33% - 2%) !important;
-            }
-            .solutionBoxContent {
-            min-height: 350px !important;
-            }
-        }
-        .solutionBox:hover {
-            border: 1px rgb(136, 151, 162)solid !important;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
-        }
-        .solutionBoxContent {
-            display: flex !important;
-            flex-direction: column !important;
-        }
-        .solutionBoxTitle {
-            margin: 0rem !important;
-            margin-bottom: 5px !important;
-            font-size: 14px !important;
-            font-weight: 900 !important;
-            line-height: 16px !important;
-            height: 37px !important;
-            text-overflow: ellipsis !important;
-            overflow: hidden !important;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 2 !important;
-            -webkit-box-orient: vertical !important;
-            -webkit-box-align: inherit !important;
-        }
-        .solutionBoxDescription {
-            flex-grow: 1 !important;
-            display: flex !important;
-            flex-direction: column !important;
-        }
-        .descriptionContainer {
-        }
-        .descriptionContainer p {
-            margin: 0 !important;
-            overflow: hidden !important;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 4 !important;
-            -webkit-box-orient: vertical !important;
-            font-size: 14px !important;
-            font-weight: 400 !important;
-            line-height: 1.5 !important;
-            letter-spacing: 0 !important;
-            max-height: 70px !important;
-        }
-        .architectureDiagramContainer {
-            flex-grow: 1 !important;
-            min-width: calc(33% - 2%) !important;
-            padding: 0 16px !important;
-            text-align: center !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: center !important;
-            background-color: #f4f4f4;
-        }
-        .architectureDiagram {
-            max-height: 175px !important;
-            padding: 5px !important;
-            margin: 0 auto !important;
-        }
-    -->
-    </style>
-
 
 # Getting started with {{site.data.keyword.containerlong_notm}}
 {: #getting-started}
@@ -138,6 +26,7 @@ First, create a cluster with a few clicks in the {{site.data.keyword.cloud_notm}
 
 To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {{site.data.keyword.cloud_notm}} account](/docs/account?topic=account-upgrading-account) where you are the owner or have [full Administrator access](/docs/account?topic=account-assign-access-resources).
 {: note}
+
 ## Creating a free classic cluster
 {: #clusters_gs}
 
@@ -265,18 +154,18 @@ Great job! You just deployed your first app in your Kubernetes cluster.
 {: #whats-next}
 
 Go through a tutorial to install the CLI, create a private image registry, set up your cluster environment, add an {{site.data.keyword.cloud_notm}} service to the cluster, and deploy an app.
-* [Classic clusters tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
-* [VPC clusters tutorial](/docs/containers?topic=containers-vpc_ks_tutorial)
+- [Classic clusters tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
+- [VPC clusters tutorial](/docs/containers?topic=containers-vpc_ks_tutorial)
 
 Set up the right environment for your workloads.
-* Plan your [cluster network setup](/docs/containers?topic=containers-plan_clusters), develop a [highly available architecture](/docs/containers?topic=containers-ha_clusters), and [set up autoscaling](/docs/containers?topic=containers-ca) for your cluster.
-* Create [image pull secrets](/docs/containers?topic=containers-registry#other) to [deploy apps](/docs/containers?topic=containers-app) to Kubernetes namespaces other than `default`.
-* Decide what type of [file, block, object, database, or software-defined storage](/docs/containers?topic=containers-storage_planning) you want to integrate with your apps.
-* Control network traffic to your apps for [classic](/docs/containers?topic=containers-network_policies) and [VPC](/docs/containers?topic=containers-vpc-network-policy) clusters.
+- Plan your [cluster network setup](/docs/containers?topic=containers-plan_clusters), develop a [highly available architecture](/docs/containers?topic=containers-ha_clusters), and [set up autoscaling](/docs/containers?topic=containers-ca) for your cluster.
+- Create [image pull secrets](/docs/containers?topic=containers-registry#other) to [deploy apps](/docs/containers?topic=containers-app) to Kubernetes namespaces other than `default`.
+- Decide what type of [file, block, object, database, or software-defined storage](/docs/containers?topic=containers-storage_planning) you want to integrate with your apps.
+- Control network traffic to your apps for [classic](/docs/containers?topic=containers-network_policies) and [VPC](/docs/containers?topic=containers-vpc-network-policy) clusters.
 
 Explore other capabilities for your cluster.
-* Check out [{{site.data.keyword.cloud_notm}} and 3rd-party services](/docs/containers?topic=containers-supported_integrations), such as Portworx.
-* Enhance your app lifecycle with [managed add-ons](/docs/containers?topic=containers-managed-addons) like Istio.
+- Check out [{{site.data.keyword.cloud_notm}} and 3rd-party services](/docs/containers?topic=containers-supported_integrations), such as Portworx.
+- Enhance your app lifecycle with [managed add-ons](/docs/containers?topic=containers-managed-addons) like Istio.
 
 Looking for an overview of all your options in {{site.data.keyword.containerlong_notm}}? Check out the curated [learning path for administrators](/docs/containers?topic=containers-learning-path-admin) or [learning path for developers](/docs/containers?topic=containers-learning-path-dev).
 {: tip}

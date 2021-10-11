@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-08"
+lastupdated: "2021-10-11"
 
 keywords: kubernetes, iks
 
@@ -21,17 +21,12 @@ subcollection: containers
 You can use Kubernetes techniques in {{site.data.keyword.containerlong}} to deploy apps in containers and ensure that those apps are up and running at all times. For example, you can perform rolling updates and rollbacks without downtime for your users.
 {: shortdesc}
 
-Learn the general steps for deploying apps by clicking an area of the following image. Want to learn the basics first? Try out the [deploying apps tutorial](/docs/containers?topic=containers-tutorial-starterkit-kube).
+For more information about creating a configuration file for your application, see [Configuration Best Practices](https://kubernetes.io/docs/concepts/configuration/overview/){: external}.
 
-<img usemap="#d62e18" border="0" class="image" id="basic_app_deployment_process" src="images/basic_app_deployment_process.png" width="780" style="width:780px;" alt="Basic deployment process"/>
-<map name="d62e18" id="d62e18">
-<area href="/docs/containers?topic=containers-cs_cli_install" target="_blank" alt="Install the CLIs." title="Install the CLIs." shape="rect" coords="30, 69, 179, 209" />
-<area href="https://kubernetes.io/docs/concepts/configuration/overview/" target="_blank" alt="Create a configuration file for your app. Review the best practices from Kubernetes." title="Create a configuration file for your app. Review the best practices from Kubernetes." shape="rect" coords="254, 64, 486, 231" />
-<area href="#app_cli" target="_blank" alt="Option 1: Run configuration files from the Kubernetes CLI." title="Option 1: Run configuration files from the Kubernetes CLI." shape="rect" coords="544, 67, 730, 124" />
-<area href="#cli_dashboard" target="_blank" alt="Option 2: Start the Kubernetes dashboard locally and run configuration files." title="Option 2: Start the Kubernetes dashboard locally and run configuration files." shape="rect" coords="544, 141, 728, 204" />
-</map>
+Try out the [deploying apps tutorial](/docs/containers?topic=containers-tutorial-starterkit-kube).
+{: tip}
 
-
+![Basic deployment process.](images/basic_app_deployment_process.png "Basic deployment process"){: caption="Figure 1. Basic deployment process" caption-side="bottom"}
 
 ## Launching the Kubernetes dashboard
 {: #cli_dashboard}
@@ -46,9 +41,9 @@ To check the logs for individual app pods, you can run `kubectl logs <pod name>`
 {: important}
 
 Before you begin
-* Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
-* To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform access role](/docs/containers?topic=containers-users#checking-perms). If you are assigned only a service access role but no platform access role, [launch the Kubernetes dashboard from the CLI](#db_cli).
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
+- To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform access role](/docs/containers?topic=containers-users#checking-perms). If you are assigned only a service access role but no platform access role, [launch the Kubernetes dashboard from the CLI](#db_cli).
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
 
@@ -64,6 +59,8 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 
 ### Launching the Kubernetes dashboard from the CLI
 {: #db_cli}
+
+Before you begin, [install the CLI](/docs/containers?topic=containers-cs_cli_install).
 
 1. Get your credentials for Kubernetes.
 
@@ -126,15 +123,15 @@ To deploy your app,
 
 1. Open the Kubernetes [dashboard](#cli_dashboard) and click **+ Create**.
 2. Enter your app details in 1 of 2 ways.
-    * Select **Specify app details below** and enter the details.
-    * Select **Upload a YAML or JSON file** to upload your app [configuration file](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/){: external}.
+    - Select **Specify app details below** and enter the details.
+    - Select **Upload a YAML or JSON file** to upload your app [configuration file](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/){: external}.
 
     Need help with your configuration file? Check out this [example YAML file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml){: external}. In this example, a container is deployed from the **ibmliberty** image in the US-South region. Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
     {: tip}
 
 3. Verify that you successfully deployed your app in one of the following ways.
-    * In the Kubernetes dashboard, click **Deployments**. A list of successful deployments is displayed.
-    * If your app is [publicly available](/docs/containers?topic=containers-cs_network_planning#public_access), navigate to the cluster overview page in your {{site.data.keyword.containerlong}} dashboard. Copy the subdomain, which is located in the cluster summary section and paste it into a browser to view your app.
+    - In the Kubernetes dashboard, click **Deployments**. A list of successful deployments is displayed.
+    - If your app is [publicly available](/docs/containers?topic=containers-cs_network_planning#public_access), navigate to the cluster overview page in your {{site.data.keyword.containerlong}} dashboard. Copy the subdomain, which is located in the cluster summary section and paste it into a browser to view your app.
 
 ## Deploying apps with the CLI
 {: #app_cli}
@@ -176,11 +173,11 @@ When you deploy an app, the app pods indiscriminately deploy to various worker n
 {: shortdesc}
 
 Before you begin
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the Kubernetes namespace.
-* **Optional**: [Set a label for the worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels) that you want to run the app on.
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the Kubernetes namespace.
+- **Optional**: [Set a label for the worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels) that you want to run the app on.
 
-To deploy apps to specific worker nodes:
+To deploy apps to specific worker nodes,
 
 1. Get the ID of the worker pool that you want to deploy app pods to.
     ```sh
@@ -291,7 +288,7 @@ To deploy apps to specific worker nodes:
 
         Example output
 
-        ```
+        ```sh
         ID                                                 Public IP       Private IP     Machine Type      State    Status  Zone    Version
         kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b3c.4x16          normal   Ready   dal10   1.8.6_1504
         kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b3c.4x16          normal   Ready   dal10   1.8.6_1504
@@ -393,8 +390,8 @@ To run a workload on a GPU machine,
     {: screen}
 
 4. Describe the pod to see how the GPU device plug-in scheduled the pod.
-    * In the `Limits` and `Requests` fields, see that the resource limit that you specified matches the request that the device plug-in automatically set.
-    * In the events, verify that the pod is assigned to your GPU worker node.
+    - In the `Limits` and `Requests` fields, see that the resource limit that you specified matches the request that the device plug-in automatically set.
+    - In the events, verify that the pod is assigned to your GPU worker node.
 
         ```sh
         kubectl describe pod nvidia-smi-ppkd4

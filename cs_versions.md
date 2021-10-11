@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-08"
+lastupdated: "2021-10-11"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -348,73 +348,16 @@ The following table shows the actions that you must take after you update your w
 {: caption="Changes to make after you update the worker nodes to Kubernetes 1.19" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
-
-
-## Deprecated: Version 1.18
-{: #cs_v118}
-
-![This badge indicates Kubernetes version 1.18 certification for {{site.data.keyword.containerlong_notm}}](images/certified_kubernetes_1x18.svg)
-{{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.18 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
-
-Review changes that you might need to make when you update from the previous Kubernetes version to 1.18.
-{: shortdesc}
-
-Kubernetes version 1.18 is deprecated, with a tentative unsupported date of 10 October 2021. Update your cluster to at least [version 1.19](#cs_v119) as soon as possible.
-{: deprecated}
-
-### Update before master
-{: #118_before}
-
-The following table shows the actions that you must take before you update the Kubernetes master.
-{: shortdesc}
-
-| Type | Description|
-| --- | --- |
-| Add-ons and plug-ins | For each add-on and plug-in that you installed in your cluster, check for any impacts that might be caused by updating the cluster version. For instructions, see [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps) and refer to the add-on and plug-in documentation. |
-| **Unsupported:** CoreDNS `federations` plug-in | CoreDNS version 1.7 and later no longer support the `federations` plug-in. If you customized your CoreDNS configuration to use this plug-in, you must remove the plug-in and any related configurations before updating. For more information about updating your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize). |
-| **Unsupported:** Select CoreDNS metrics | CoreDNS version 1.7 and later [metrics changed](https://coredns.io/2020/06/15/coredns-1.7.0-release/#metric-changes){: external}. If you rely on these changed metrics, update accordingly. For example, you might update a Prometheus query of CoreDNS metrics to handle both the old and new metrics. |
-| **Unsupported:** Select `kubelet` metrics | The following `kubelet` metrics that were available via the `/metrics` endpoint are unsupported and removed. If you use any of these [removed and deprecated kubelet metrics](https://kubernetes.io/releases/notes/#client-go){: external}, change to use the available replacement metric: `kubelet_cgroup_manager_latency_microseconds`, `kubelet_cgroup_manager_latency_microseconds_count`, `kubelet_cgroup_manager_latency_microseconds_sum`, `kubelet_pleg_relist_interval_microseconds`, `kubelet_pleg_relist_interval_microseconds_count`, `kubelet_pleg_relist_interval_microseconds_sum`, `kubelet_pleg_relist_latency_microseconds`, `kubelet_pleg_relist_latency_microseconds_count`, `kubelet_pleg_relist_latency_microseconds_sum`, `kubelet_pod_start_latency_microseconds`, `kubelet_pod_start_latency_microseconds_count`, `kubelet_pod_start_latency_microseconds_sum`, `kubelet_pod_worker_latency_microseconds`, `kubelet_pod_worker_latency_microseconds_count`, `kubelet_pod_worker_latency_microseconds_sum`, `kubelet_pod_worker_start_latency_microseconds`, `kubelet_pod_worker_start_latency_microseconds_count`, `kubelet_pod_worker_start_latency_microseconds_sum`, `kubelet_runtime_operations`, `kubelet_runtime_operations_errors`, `kubelet_runtime_operations_latency_microseconds`, `kubelet_runtime_operations_latency_microseconds_count`, `kubelet_runtime_operations_latency_microseconds_sum` |
-| **Unsupported:** Kubernetes API `batch/v2alpha1` | Kubernetes API `batch/v2alpha1` is no longer supported. If your apps rely on this API, update them to use `batch/v1beta1` instead. |
-{: caption="Changes to make before you update the master to Kubernetes 1.18" caption-side="top"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
-
-### Update after master
-{: #118_after}
-
-The following table shows the actions that you must take after you update the Kubernetes master.
-{: shortdesc}
-
-| Type | Description|
-| --- | --- |
-| Registry image pull secret includes all domains | Previously, separate image pull secrets were created for each regional, public `icr.io` registry domain to enable your cluster to [pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-registry#cluster_registry_auth). Now, all the public and private `icr.io` registry domains for all regions are stored in a single `all-icr-io` image pull secret that is automatically created in the `default` namespace. Update your apps to use the new single `all-icr-io` image pull secret. |
-| `kubectl diff` return code | The [`kubectl diff` command](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#diff){: external} now returns `0` when no differences are found, `1` when differences are found, and greater than `1` when an error occurs. If your scripts rely on the previous return code behavior, update them. |
-| `kubectl get` includes `managedFields` | The [Server Side Apply](https://kubernetes.io/docs/reference/using-api/api-concepts/#server-side-apply){: external} feature adds the `managedFields` field that is part of a resource's `metadata`.  If your scripts use `grep`, `awk`, or similar commands to parse the output of the `kubectl get` command, update your scripts to handle the addition of `managedFields`. For example, you might select fields by using the `kubectl get <resource> -o jsonpath` command or by using the [`jq` package](https://stedolan.github.io/jq/){: external} to parse the JSON output from the `kubectl get <resource> -o json` command. |
-| **Unsupported:** `kubectl rolling-update` | The `kubectl rolling-update` command is removed. If your scripts rely on this command, update them to use the [`kubectl rollout` command](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#rollout){: external} instead. |
-| **Unsupported:** `kubectl run` removed deprecated flags | The [`kubectl run` command](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#run){: external} removed deprecated flags that are not used to create pods. If your scripts use `kubectl run` to create resources other than pods, such as deployments, update them to use the `kubectl create` or `kubectl apply` commands instead. |
-| Kubernetes `Go` client updates | The Kubernetes `Go` client, `k8s.io/client-go` version 0.18.0 and later, is updated.  Signatures on methods in generated `clientsets`, `dynamic`, `metadata`, and `scale` clients are modified to accept `context.Context` as a first argument. Signatures of `Create`, `Update`, and `Patch` methods are updated to accept `CreateOptions`, `UpdateOptions` and `PatchOptions`. Signatures of `Delete` and `DeleteCollection` methods now accept `DeleteOptions` by value instead of by reference. Generated `clientsets` with the previous interface are added in new `deprecated` packages to allow incremental migration to the new APIs. The `deprecated` packages are scheduled to be removed in the Kubernetes version 1.21 release. For help to rewrite method invocations with the new signatures, try the [`clientgofix` tool](http://sigs.k8s.io/clientgofix){: external}. |
-| Temporary `kubectl` latency | RBAC operations are now performed asynchronously. After you run `ibmcloud ks cluster config` for the first time after the update, `kubectl` commands might fail for a few seconds while RBAC synchronizes for the first time. Afterward, `kubectl` commands perform as expected. If you use automation to access the cluster with `kubectl` commands, add retry logic for `kubectl` commands after a `kubeconfig` file is successfully retrieved. |
-| **Unsupported**: `kubelet` statistics | The `kubelet` statistics that were available via the `/stats` endpoint are unsupported and removed. The cluster insights panel in the cluster console no longer reports statistics from this endpoint. |
-{: caption="Changes to make after you update the master to Kubernetes 1.18" caption-side="top"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
-
-### Update after worker nodes
-{: #118_after_worker}
-
-The following table shows the actions that you must take after you update your worker nodes.
-{: shortdesc}
-
-| Type | Description|
-| --- | --- |
-| Format of the `CPUManager` state file | The format of the [`CPUManager`](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/){: external} state file is changed. Update any tools that rely on previous format. |
-{: caption="Changes to make after you update the worker nodes to Kubernetes 1.18" caption-side="top"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
-
-
-
 ## Archive
 {: #k8s_version_archive}
 
 Find an overview of Kubernetes versions that are unsupported in {{site.data.keyword.containerlong_notm}}.
+{: shortdesc}
+
+### Version 1.18 (Unsupported)
+{: #cs_v118}
+
+As of 10 October 2021, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.18](/docs/containers?topic=containers-changelog_archive) are unsupported.
 {: shortdesc}
 
 ### Version 1.17 (Unsupported)
