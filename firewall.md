@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-08"
+lastupdated: "2021-10-11"
 
 keywords: kubernetes, iks, firewall, vyatta, ips
 
@@ -91,7 +91,7 @@ If corporate network policies prevent access from your local system to public en
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `kubectl` commands, you must allow TCP access for the cluster.
 {: shortdesc}
 
-When a cluster is created, the port in the service endpoint URLs is randomly assigned from within 20000-32767. You can either choose to open port range 20000-32767 for any cluster that might get created or you can choose to allow access for a specific existing cluster.
+When a cluster is created, the port in the service endpoint URLs is randomly assigned from within 30000-32767. You can either choose to open port range 30000-32767 for any cluster that might get created or you can choose to allow access for a specific existing cluster.
 
 Before you begin, allow access to [run `ibmcloud ks` commands](#firewall_bx).
 
@@ -253,9 +253,9 @@ ibmcloud ks worker ls --cluster <cluster_name_or_ID>
 #### Allow worker notes to communicate with cluster master
 {: #master_ips}
 
-To allow worker nodes to communicate with the cluster master over the public cloud service endpoint, allow outgoing network traffic from the source *<each_worker_node_publicIP>* to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups.
+To allow worker nodes to communicate with the cluster master over the public cloud service endpoint, allow outgoing network traffic from the source *<each_worker_node_publicIP>* to the destination TCP/UDP port range 30000-32767 and port 443, and the following IP addresses and network groups.
 
-* `TCP/UDP port range 20000-32767, port 443 FROM <each_worker_node_publicIP> TO <public_IPs>`
+* `TCP/UDP port range 30000-32767, port 443 FROM <each_worker_node_publicIP> TO <public_IPs>`
 * Replace *<public_IPs>* with the public IP addresses of the region that your cluster is located.
 
 | Region             | Public IP address  | 
@@ -354,9 +354,9 @@ If you have a firewall on the private network in your IBM Cloud infrastructure a
 #### Allow worker nodes to communicate with cluster master
 {: #firewall_private_worker}
 
-To allow worker nodes to communicate with the cluster master over the private cloud service endpoint, allow outgoing network traffic from the source *<each_worker_node_privateIP>* to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups.
+To allow worker nodes to communicate with the cluster master over the private cloud service endpoint, allow outgoing network traffic from the source *<each_worker_node_privateIP>* to the destination TCP/UDP port range 30000-32767 and port 443, and the following IP addresses and network groups.
 
-* `TCP/UDP port range 20000-32767, port 443 FROM <each_worker_node_privateIP> TO <private_IPs>`
+* `TCP/UDP port range 30000-32767, port 443 FROM <each_worker_node_privateIP> TO <private_IPs>`
 * Replace *<private_IPs>* with the private IP addresses of the region where your cluster is located.
 
 | Region | Private IP address  |

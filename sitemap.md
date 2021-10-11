@@ -2347,6 +2347,8 @@ subcollection: containers
 
     * [Backing up and restoring cluster data with PX-Backup](/docs/containers?topic=containers-portworx#px-backup-and-restore)
 
+    * [Upgrading PX-Backup](/docs/containers?topic=containers-portworx#px-backup-upgrade)
+
 * [Setting up disaster recovery with Portworx](/docs/containers?topic=containers-portworx#px-dr)
 
 * [Exploring other Portworx features](/docs/containers?topic=containers-portworx#features)
@@ -3027,9 +3029,13 @@ subcollection: containers
 
 * [Version 1.22 changelog](/docs/containers?topic=containers-changelog#122_changelog)
 
+    * [Changelog for worker node fix pack 1.22.2_1524, released 11 October 2021](/docs/containers?topic=containers-changelog#1222_1524)
+
     * [Changelog for master fix pack 1.22.2_1522 and worker node fix pack 1.22.2_1523, released 29 Sept 2021](/docs/containers?topic=containers-changelog#1222_1522_and_1222_1523)
 
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog#121_changelog)
+
+    * [Changelog for worker node fix pack 1.21.5_1533, released 11 October 2021](/docs/containers?topic=containers-changelog#1215_1533)
 
     * [Changelog for worker node fix pack 1.21.5_1532, released 27 September 2021](/docs/containers?topic=containers-changelog#1215_1532)
 
@@ -3060,6 +3066,8 @@ subcollection: containers
     * [Changelog for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1519)
 
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+
+    * [Changelog for worker node fix pack 1.20.11_1555, released 11 October 2021](/docs/containers?topic=containers-changelog#12011_1555)
 
     * [Changelog for worker node fix pack 1.20.11_1554, released 27 September 2021](/docs/containers?topic=containers-changelog#12011_1554)
 
@@ -3116,6 +3124,8 @@ subcollection: containers
     * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 
 * [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+
+    * [Changelog for worker node fix pack 1.19.15_1562, released 11 October 2021](/docs/containers?topic=containers-changelog#11915_1562)
 
     * [Changelog for worker node fix pack 1.19.15_1561, released 27 September 2021](/docs/containers?topic=containers-changelog#11915_1561)
 
@@ -3209,17 +3219,43 @@ subcollection: containers
 
 * [Benchmark 1.5 results for Kubernetes versions 1.18 - 1.21](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15)
 
-    * [Section 1: Master node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-1)
+    * [1.1 Master Node Configuration Files](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-1-1)
 
-    * [Section 2: `etcd` node configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-2)
+    * [1.2 API Server](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-1-2)
 
-    * [Section 3: Control plane configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-3)
+    * [1.3 Controller Manager](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-1-3)
 
-    * [Section 4: Worker node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-4)
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-1-4)
 
-    * [Section 5: Kubernetes policies](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-5)
+* [2 `etcd` Node Configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-2)
 
-    * [Explanation and remediation](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-remediation)
+* [3 Control Plane Configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-3)
+
+    * [3.1 Authentication and Authorization](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-3-1)
+
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-3-2)
+
+* [4 Worker Node Security Configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-4)
+
+    * [4.1 Worker Node Configuration Files](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-4-1)
+
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-4-2)
+
+* [5 Kubernetes Policies](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-5)
+
+    * [5.1 RBAC and Service Accounts](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-5-1)
+
+    * [5.2 Pod Security Policies](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-5-2)
+
+    * [5.3 Network Policies and CNI](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-5-3)
+
+    * [5.4 Secrets Management](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-5-4)
+
+    * [5.5 Extensible Admission Control](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-5-5)
+
+    * [5.6 General Policies](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-5-6)
+
+    * [Explanations and remediation](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-remediation)
 
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 

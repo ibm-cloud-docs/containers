@@ -58,15 +58,26 @@ To deploy a container into the **default** namespace of your cluster:
             image: <region>.icr.io/<namespace>/<image>:<tag>
     ```
     {: codeblock}
+
+
+    `<deployment>`
+    :   Give your deployment a name.
     
-    | Parameter | Description |
-    | -------------- | -------------- |
-    | `<deployment>` | Give your deployment a name. |
-    | `<number_of_replicas>` | Enter the number of replica pods that the deployment creates. |
-    | `app: <app_name>` | Use the name of your app as a label for the container. |
-    | `name: <app_name>` | Give your container a name, such as the name of your `app` label. |
-    | `image: <region>.icr.io/<namespace>/<image>:<tag>` | Enter your image URL variable. \n - `<region>`: The regional {{site.data.keyword.registrylong_notm}} API endpoint for the registry domain. To list the domain for the region that you are logged in to, run `ibmcloud cr api`. \n - `<namespace>`: The registry namespace. To get your namespace information, run `ibmcloud cr namespace-list`. \n - `<image>:<tag>`: The image and tag that you want to use for your container. To list the images that are available in your registry namespace, run `ibmcloud cr images`. |
-    {: caption="Table 1. Understanding the YAML file components" caption-side="bottom"}
+    `<number_of_replicas>`
+    :   Enter the number of replica pods that the deployment creates.
+    
+    `app: <app_name>`
+    :   Use the name of your app as a label for the container.
+    
+    `name: <app_name>`
+    :   Give your container a name, such as the name of your `app` label.
+    
+    `image: <region>.icr.io/namespace>/image>:tag>`
+    :   Replace the image URL variables with the information for your image:
+    :   `region>`: The regional {{site.data.keyword.registrylong_notm}} API endpoint for the registry domain. To list the domain for the region that you are logged in to, run `ibmcloud cr api`.
+    :   `namespace>`: The registry namespace. To get your namespace information, run `ibmcloud cr namespace-list`.
+    :   `image>:tag>`: The image and tag that you want to use for your container. To list the images that are available in your registry namespace, run `ibmcloud cr images`.
+
 
 3. Create the deployment in your cluster.
 
@@ -121,15 +132,18 @@ To refer to the image pull secret in your pod deployment,
         - name: <secret_name>
     ```
     {: codeblock}
-    
-    | Parameter | Description |
-    | -------------- | -------------- |
-    | `<container_name>` | The name of the container to deploy to your cluster. |
-    | `<namespace_name>` | The registry namespace where the image is stored. To list available namespaces, run <code>ibmcloud cr namespace-list</code>. |
-    | `<image_name>` | The name of the image to use. To list available images in an {{site.data.keyword.cloud_notm}} account, run `ibmcloud cr image-list`. |
-    | `<tag>` | The version of the image that you want to use. If no tag is specified, the image that is tagged `latest` is used by default. |
-    | `<secret_name>` | The name of the image pull secret that you created earlier. |
-    {: caption="Table 1. Understanding the YAML file components" caption-side="bottom"}
+
+
+    `container_name>`
+    :   The name of the container to deploy to your cluster.
+    `namespace_name>`
+    :   The registry namespace where the image is stored. To list available namespaces, run `ibmcloud cr namespace-list`.
+    `image_name>`
+    :   The name of the image to use. To list available images in an {{site.data.keyword.cloud_notm}} account, run `ibmcloud cr image-list`.
+    `tag>`
+    :   The version of the image that you want to use. If no tag is specified, the image that is tagged **latest** is used by default.
+    `<secret_name>`
+    :   The name of the image pull secret that you created earlier.
 
 3. Save your changes.
 4. Create the deployment in your cluster.

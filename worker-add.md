@@ -61,7 +61,7 @@ To resize the worker pool, change the number of worker nodes that the worker poo
     {: pre}
 
     Example output for a worker pool that is in two zones, `dal10` and `dal12`, and is resized to two worker nodes per zone:
-    ```
+    ```sh
     ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
     kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.20.11
     kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.20.11
@@ -129,25 +129,25 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
         ```
         {: pre}
 
-4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. Include the `--vpc-id` option if the worker pool is the first in the cluster.Optionally include the `--kms-instance` and `--crk` flags with the values you previously retrieved. For more options, see the [CLI documentation](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2). Note that the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
+5. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. Include the `--vpc-id` option if the worker pool is the first in the cluster.Optionally include the `--kms-instance` and `--crk` flags with the values you previously retrieved. For more options, see the [CLI documentation](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2). Note that the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
     ```sh
     ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes_min_1> [--label <key>=<value>] [--vpc-id] [--kms-instance <KMS_instance_ID> --crk <root_key_ID>]
     ```
     {: pre}
 
-5. Verify that the worker pool is created.
+6. Verify that the worker pool is created.
     ```sh
     ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-6. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
+7. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
     ```sh
     ibmcloud ks zone add vpc-gen2 --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
     ```
     {: pre}
 
-7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the **State** changes from `provisioning` to `normal`.
+8. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the **State** changes from `provisioning` to `normal`.
     ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
     ```
@@ -704,7 +704,7 @@ If you have an existing virtual or bare metal server that meets all of these req
     {: pre}
 
     In this example output, the router for private VLAN `2625667` is `bcr01a.dal10`.
-    ```
+    ```sh
     ID        Name   Number   Type      Router         Supports Virtual Workers
     2625667          1813     private   bcr01a.dal10   true
     2650233          1488     public    fcr03a.dal10   true
@@ -736,7 +736,7 @@ If you have an existing virtual or bare metal server that meets all of these req
         {: pre}
 
         Example output
-        ```
+        ```sh
         id         hostname                                                 domain        cpu   memory   public_ip        private_ip      datacenter   action
         91639324   myvsi                                                    example.com   4     4096     -                10.XXX.XX.XX    dal10
         ```
@@ -749,7 +749,7 @@ If you have an existing virtual or bare metal server that meets all of these req
         {: pre}
 
         Example output
-        ```
+        ```sh
         id        hostname      domain      public_ip   private_ip     datacenter   status
         1624411   baremetal01   ibm.cloud   -           10.XXX.XX.XX   dal10        ACTIVE
         ```
@@ -764,7 +764,7 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
 
 1. Create an inventory file and add the server instance private IP address that you found in the previous step. Your cluster uses this inventory file to establish a connection to the server instance.
     1. Create a file that contains the following line and name the file `inventory`. If you want to add multiple server instances to your cluster network, specify each server instance IP address in a different line.
-        ```
+        ```sh
         <server_private_IP>:22 ansible_user=root ansible_connection=ssh
         ```
         {: codeblock}
@@ -787,34 +787,20 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
     ```
     {: pre}
 
-    <table summary="A table that lists zones in Column 1 and the corresponding in {{site.data.keyword.registrylong_notm}} domain in Column 2.">
-    <caption>{{site.data.keyword.registrylong_notm}} domains</caption>
-    <thead>
-    <th>Zone</th>
-    <th>{{site.data.keyword.registrylong_notm}} domain</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td>syd01, syd04, syd05</td>
-    <td><code>au.icr.io</code></td>
-    </tr>
-    <tr>
-    <td>ams03, fra02, fra04, fra05, par01, mil01, osl01</td>
-    <td><code>de.icr.io</code></td>
-    </tr>
-    <tr>
-    <td>che01, hkg02, seo01, sng01, tok02, tok04, tok05</td>
-    <td><code>jp.icr.io</code></td>
-    </tr>
-    <tr>
-    <td>lon04, lon05, lon06</td>
-    <td><code>uk.icr.io</code></td>
-    </tr>
-    <tr>
-    <td>dal10, dal12, dal13, mex01, mon01, sao01, sjc03, sjc04, tor01, wdc04, wdc06, wdc07</td>
-    <td><code>us.icr.io</code></td>
-    </tr>
-    </tbody></table>
+    syd01, syd04, syd05
+    :   `au.icr.io`
+    
+    ams03, fra02, fra04, fra05, par01, mil01, osl01
+    :   `de.icr.io`
+    
+    che01, hkg02, seo01, sng01, tok02, tok04, tok05
+    :   `jp.icr.io`
+    
+    lon04, lon05, lon06
+    :   `uk.icr.io`
+    
+    dal10, dal12, dal13, mex01, mon01, sao01, sjc03, sjc04, tor01, wdc04, wdc06, wdc07
+    :   `us.icr.io`
 
 4. Set the namespace in your cluster where you want the Kubernetes job to create a headless Kubernetes service. This service provides a DNS entry for the server instance's hostname so that the workloads in your cluster can access the server instance.
     ```sh
@@ -958,19 +944,19 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
         {: pre}
 
     4. Optional: If you enabled DNS resolution for the server instance by setting `CLUSTERDNS_SETUP=true`, you can also ping the hostname of the services.
-        ```
+        ```sh
         ping <service_hostname>
         ```
         {: pre}
 
     5. Optional: While you are logged in to your server instance, you can also view the `/etc/ibm-external-compute-provision.yml` file that is created on the server instance. This file contains information about the connection that you set up between your gateway-enabled cluster and your server instance.
-        ```
+        ```sh
         cat /etc/ibm-external-compute-provision.yml
         ```
         {: pre}
 
         Example output
-        ```
+        ```sh
         start_time: "Tue Dec 17 15:19:23 UTC 2019"
         config:
           kubernetes_version: 1.20.11
@@ -1003,7 +989,7 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
         {: pre}
 
     3. Ping the private IP address of the server instance from the pod.
-        ```
+        ```sh
         ping <server_IP>
         ```
         {: pre}
@@ -1039,13 +1025,13 @@ Before you begin: [Install and configure the Calico CLI.](/docs/containers?topic
 1. Log in to your server instance. For example, you might use SSH to access a VSI.
 
 2. Find the Calico node name for the server instance.
-    ```
+    ```sh
     cat /var/lib/calico/nodename
     ```
     {: pre}
 
 3. Stop the `calico-node`, `calico-node-label`, `create-host-endpoint`, and `create-workload-endpoint` services on the server instance.
-    ```
+    ```sh
     systemctl stop calico-node.service calico-node-label.service create-workload-endpoint.service create-host-endpoint.service
     ```
     {: pre}
@@ -1138,7 +1124,7 @@ Before you begin, [create a worker pool](/docs/containers?topic=containers-add_w
 
 3. Create a daemon set to install the drivers and platform software on your SGX-capable worker nodes.
 
-    ```
+    ```sh
     kubectl create -f https://raw.githubusercontent.com/ibm-cloud-security/data-shield-reference-apps/master/scripts/sgx-driver-psw/install_sgx/deployment_install_sgx_iks.yaml
     ```
     {: codeblock}
@@ -1270,7 +1256,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             {: pre}
 
             Example output for an added label (`app=test`):
-            ```
+            ```sh
             Labels:   app=test
             arch=amd64
             ...
@@ -1278,7 +1264,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             {: screen}
 
             Example output for a removed label (the `app=test` label is gone):
-            ```
+            ```sh
             Labels:   arch=amd64
             ...
             ```
