@@ -60,7 +60,7 @@ Cluster autoscaler add-on.
 ### 6 October 2021
 {: #6oct2021}
 
-{{site.data.keyword.block_storage_is_full}} add-on.
+{{site.data.keyword.block_storage_is_short}} add-on.
 :   [Version 4.0.1_780](/docs/containers?topic=containers-vpc_bs_changelog) is released.
 
 
