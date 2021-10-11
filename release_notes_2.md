@@ -34,8 +34,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 Review the release notes for October 2021.
 {: shortdesc}
 
-### 10 October 2021
-{: #10oct2021}
+### 11 October 2021
+{: #11oct2021}
 
 Unsupported Kubernetes version 1.18
 :   Kubernetes version 1.18 is unsupported. To continue receiving important security updates and support, you must [update your cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately.

@@ -204,7 +204,7 @@ subcollection: containers
 
 [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
 
-* [10 October 2021](/docs/containers?topic=containers-rel-notes#10oct2021)
+* [11 October 2021](/docs/containers?topic=containers-rel-notes#11oct2021)
 
 * [7 October 2021](/docs/containers?topic=containers-rel-notes#7oct2021)
 

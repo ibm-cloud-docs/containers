@@ -165,6 +165,7 @@ If you set up [VPC security groups](/docs/containers?topic=containers-vpc-networ
 
 <img src="images/cs_ingress_gateway.png" width="800" alt="Expose an app in a gateway-enabled cluster by using Ingress" style="width:800px; border-style: none"/>
 
+
 This diagram shows the traffic flow through a single-zone, gateway-enabled cluster. If your gateway-enabled cluster is multizone, one public ALB and one private ALB is created in each zone. Each ALB routes requests to the app instances in its own zone and to app instances in other zones.
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the Ingress subdomain for your cluster appended with the Ingress resource path for your exposed app, such as `mycluster-<hash>-0000.us-south.containers.appdomain.cloud/myapp`.
