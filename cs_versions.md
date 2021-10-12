@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-11"
+lastupdated: "2021-10-12"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -25,7 +25,6 @@ For more information about the Kubernetes project versions, see the Kubernetes c
 * [Kubernetes 1.21 release notes](https://v1-21.docs.kubernetes.io/releases/notes/){: external}
 * [Kubernetes 1.20 release notes](https://v1-20.docs.kubernetes.io/docs/setup/release/notes/){: external}
 * **Deprecated**: [Kubernetes 1.19 release notes](https://v1-19.docs.kubernetes.io/docs/setup/release/notes/){: external}
-* **Deprecated**: [Kubernetes 1.18 release notes](https://v1-18.docs.kubernetes.io/docs/setup/release/notes/){: external}
 * [Kubernetes changelogs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG){: external}
 
 ## Update types
@@ -71,8 +70,8 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 *   Other: 1.21.5
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: 1.18.19
-*   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17
+*   Deprecated: 1.19
+*   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18
 
 
 To check the server version of a cluster, log in to the cluster and run the following command.
@@ -106,7 +105,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 | [1.21](#cs_v121) | Yes | 09 Jun 2021 | Jun 2022 `†` |
 | [1.20](#cs_v120) | Yes | 16 Feb 2021 | Feb 2022 `†` |
 | [1.19](#cs_v119) | Deprecated | 13 Oct 2020 | 31 Dec 2021 `†` |
-| [1.18](#cs_v118) | Deprecated | 11 May 2020 | 10 Oct 2021`†` |
 {: caption="Release history for {{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
 Earlier versions of {{site.data.keyword.containerlong_notm}} are [unsupported](#k8s_version_archive).
@@ -148,9 +146,7 @@ This information summarizes updates that are likely to have impact on deployed a
 -  Version 1.21 [preparation actions](#cs_v121).
 -  Version 1.20 [preparation actions](#cs_v120).
 -  **Deprecated**: Version 1.19 [preparation actions](#cs_v119).
--  **Deprecated**: Version 1.18 [preparation actions](#cs_v118).
 -  [Archive](#k8s_version_archive) of unsupported versions.
-
 
 
 
@@ -158,6 +154,7 @@ This information summarizes updates that are likely to have impact on deployed a
 {: #cs_v122}
 
 ![This badge indicates Kubernetes version 1.22 certification for {{site.data.keyword.containerlong_notm}}](images/certified_kubernetes_1x22.svg)
+
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.22 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.22.
@@ -205,6 +202,7 @@ The following table shows the actions that you must take after you update the Ku
 {: #cs_v121}
 
 ![This badge indicates Kubernetes version 1.21 certification for {{site.data.keyword.containerlong_notm}}](images/certified_kubernetes_1x21.svg)
+
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.21 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.21.
@@ -252,6 +250,7 @@ The following table shows the actions that you must take after you update the Ku
 {: #cs_v120}
 
 ![This badge indicates Kubernetes version 1.20 certification for {{site.data.keyword.containerlong_notm}}](images/certified_kubernetes_1x20.svg)
+
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.20 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.20.
@@ -291,6 +290,7 @@ The following table shows the actions that you must take after you update the Ku
 {: #cs_v119}
 
 ![This badge indicates Kubernetes version 1.19 certification for {{site.data.keyword.containerlong_notm}}](images/certified_kubernetes_1x19.svg)
+
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.19 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
 Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 31 Dec 2021. Update your cluster to at least [version 1.20](#cs_v120) as soon as possible.
@@ -360,13 +360,15 @@ Find an overview of Kubernetes versions that are unsupported in {{site.data.keyw
 As of 10 October 2021, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.18](/docs/containers?topic=containers-changelog_archive) are unsupported.
 {: shortdesc}
 
+Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support.
+
 ### Version 1.17 (Unsupported)
 {: #cs_v117}
 
 As of 2 July 2021, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.17](/docs/containers?topic=containers-changelog_archive) are unsupported.
 {: shortdesc}
 
-Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support.
+{[unsupported_n-2]
 
 ### Version 1.16 (Unsupported)
 {: #cs_v116}
