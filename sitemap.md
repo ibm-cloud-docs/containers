@@ -3259,7 +3259,7 @@ subcollection: containers
 
     * [5.6 General Policies](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-5-6)
 
-    * [Explanations and remediation](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-remediation)
+    * [Explanations and remediation](/docs/containers?topic=containers-cis-benchmark#ibm-remediations-and-explanations)
 
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 
