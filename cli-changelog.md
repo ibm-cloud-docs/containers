@@ -32,6 +32,14 @@ Review the following changes for 1.0 versions of the CLI plug-in.
 
 
 
+## Version 1.0.331
+{: #cli-10331}
+
+Version 1.0.331 of the CLI was released on 12 October 2021.
+{: shortdesc}
+
+- Adds the `--policy` flag to the `ibmcloud ks master audit-webhook set` command. You can now configure the amount of information included in your cluster audits by specifying the `default` or `verbose` audit policy type.
+
 ## Version 1.0.312
 {: #cli-10312}
 

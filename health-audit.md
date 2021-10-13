@@ -186,6 +186,7 @@ The Kubernetes audit system in your cluster consists of an audit webhook, a log 
     ```sh
     OK
     Server:            http://172.21.xxx.xxx
+    Policy:            default
     ```
     {: screen}
 

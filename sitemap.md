@@ -204,6 +204,8 @@ subcollection: containers
 
 [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
 
+* [13 October 2021](/docs/containers?topic=containers-rel-notes#13oct2021)
+
 * [11 October 2021](/docs/containers?topic=containers-rel-notes#11oct2021)
 
 * [7 October 2021](/docs/containers?topic=containers-rel-notes#7oct2021)
@@ -2861,6 +2863,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.331](/docs/containers?topic=containers-cs_cli_changelog#cli-10331)
 
 * [Version 1.0.312](/docs/containers?topic=containers-cs_cli_changelog#cli-10312)
 
