@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-12"
+lastupdated: "2021-10-13"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -104,7 +104,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 | [1.22](#cs_v122) | Yes | 29 Sep 2021 |Sep 2022 `†` |
 | [1.21](#cs_v121) | Yes | 09 Jun 2021 | Jun 2022 `†` |
 | [1.20](#cs_v120) | Yes | 16 Feb 2021 | Feb 2022 `†` |
-| [1.19](#cs_v119) | Deprecated | 13 Oct 2020 | 31 Dec 2021 `†` |
+| [1.19](#cs_v119) | Deprecated | 13 Oct 2020 | 31 Jan 2022 `†` |
 {: caption="Release history for {{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
 Earlier versions of {{site.data.keyword.containerlong_notm}} are [unsupported](#k8s_version_archive).
@@ -293,7 +293,7 @@ The following table shows the actions that you must take after you update the Ku
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.19 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
-Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 31 Dec 2021. Update your cluster to at least [version 1.20](#cs_v120) as soon as possible.
+Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 31 Jan 2022. Update your cluster to at least [version 1.20](#cs_v120) as soon as possible.
 {: deprecated}
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.19.

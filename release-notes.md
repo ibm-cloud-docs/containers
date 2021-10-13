@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-12"
+lastupdated: "2021-10-13"
 
 keywords: kubernetes, iks, release notes
 
@@ -49,7 +49,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 | Date | Description |
 | ---- | ----------- |
 | 27 July 2021 | <ul><li><strong>New! IAM trusted profile support</strong>: Link your cluster to a trusted profile in IAM so that the pods in your cluster can authenticate with IAM to use other {{site.data.keyword.cloud_notm}} services.</li><li><strong>Master versions</strong>: Master fix pack update changelog documentation is available for Kubernetes version <a href="/docs/containers?topic=containers-changelog#1213_1525">1.21.3_1525</a>, <a href="/docs/containers?topic=containers-changelog#1209_1547">1.20.9_1547</a>, <a href="/docs/containers?topic=containers-changelog#11913_1554">1.19.13_1554</a>, and <a href="/docs/containers?topic=containers-changelog_archive#11820_1559">1.18.20_1559</a>. |
-| 26 July 2021 | <ul><li>For centralized management of all your secrets across clusters and injection at application runtime, try <a href="/docs/secrets-manager?topic=secrets-manager-tutorial-kubernetes-secrets">{{site.data.keyword.secrets-manager_full_notm}}</a>.</li><li><strong>{{site.data.keyword.block_storage_is_short}} add-on</strong>: <a href="/docs/containers?topic=containers-vpc_bs_changelog">Version <code>3.0.1</code></a> of the {{site.data.keyword.block_storage_is_short}} add-on is available.</li></ul> |
+| 26 July 2021 | <ul><li>For centralized management of all your secrets across clusters and also injection at application runtime, try <a href="/docs/secrets-manager?topic=secrets-manager-tutorial-kubernetes-secrets">{{site.data.keyword.secrets-manager_full_notm}}</a>.</li><li><strong>{{site.data.keyword.block_storage_is_short}} add-on</strong>: <a href="/docs/containers?topic=containers-vpc_bs_changelog">Version <code>3.0.1</code></a> of the {{site.data.keyword.block_storage_is_short}} add-on is available.</li></ul> |
 | 22 July 2021 | **Istio add-on changelog**: [Version 1.9.6](/docs/containers?topic=containers-istio-changelog#196) of the Istio managed add-on is released. |
 | 19 July 2021 | **Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.21.2_1524](/docs/containers?topic=containers-changelog#1212_1524), [1.20.8_1546](/docs/containers?topic=containers-changelog#1208_1546), [1.19.12_1553](/docs/containers?topic=containers-changelog#11912_1553), [1.18.20_1558](/docs/containers?topic=containers-changelog_archive#11820_1558), and [1.17.17_1568](/docs/containers?topic=containers-changelog_archive#1171_1568).
 | 15 July 2021 | <ul><li><strong>Istio add-on changelog</strong>: <a href="/docs/containers?topic=containers-istio-changelog#v110">Version 1.10.2</a> of the Istio managed add-on is released.</li><li> |

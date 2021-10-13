@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-08"
+lastupdated: "2021-10-13"
 
 keywords: kubernetes, iks, logmet, logs, metrics, audit, events
 
@@ -186,6 +186,7 @@ The Kubernetes audit system in your cluster consists of an audit webhook, a log 
     ```sh
     OK
     Server:            http://172.21.xxx.xxx
+    Policy:            default
     ```
     {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-11"
+lastupdated: "2021-10-13"
 
 keywords: kubernetes, iks, containers
 
@@ -399,7 +399,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 {: caption="Section 5.6 General policies benchmark results" caption-side="top"}
 
 ### Explanations and remediation
-{: #cis-benchmark-15-remediation}
+{: #ibm-remediations-and-explanations}
 
 Review the following explanations and possible remediation actions that you can take to address recommendations that are not met in the default configuration for {{site.data.keyword.containerlong_notm}} version 1.18 clusters.
 {: shortdesc}

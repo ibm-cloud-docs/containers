@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-11"
+lastupdated: "2021-10-13"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -1137,7 +1137,7 @@ Set the webhook back end for the API server configuration. The webhook back end 
 {: shortdesc}
 
 ```sh
-ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server SERVER_URL_OR_IP] [--ca-cert CA_CERT_PATH] [--client-cert CLIENT_CERT_PATH] [--client-key CLIENT_KEY_PATH]  [-q]
+ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server SERVER_URL_OR_IP] [--ca-cert CA_CERT_PATH] [--client-cert CLIENT_CERT_PATH] [--client-key CLIENT_KEY_PATH] [--policy POLICY] [-q]
 ```
 {: pre}
 
@@ -1162,6 +1162,12 @@ ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server 
 
 `--client-key CLIENT_KEY_PATH`
 :    Optional: The file path for the corresponding client key that is used to connect to the remote logging service.
+
+`--policy POLICY`
+:    Optional: The type of policy that is used for auditing. Use `default` or `verbose`. Note that the `verbose` policy type audits a larger number of API transactions, which may impact cluster performance, and is only recommended for occasional use.
+
+The `verbose` policy option is supported on {{site.data.keyword.containershort}} clusters that run on version 1.18 and later.
+{: note}
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.

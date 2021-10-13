@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-11"
+lastupdated: "2021-10-13"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -48,8 +48,8 @@ Supported container platforms
 
   
 Kubernetes API
-:    v1 API: To use the Kubernetes API to manage Kubernetes resources within the cluster, such as pods or namespaces, see <a href="#kube_api">Working with your cluster by using the Kubernetes API</a>.
-:    v2 API: Same as `v1`; see <a href="#kube_api">Working with your cluster by using the Kubernetes API</a>.
+:    v1 API: To use the Kubernetes API to manage Kubernetes resources within the cluster, such as pods or namespaces, see [Working with your cluster by using the Kubernetes API](#kube_api).
+:    v2 API: Same as `v1`; see [Working with your cluster by using the Kubernetes API](#kube_api).
 
 Supported infrastructure providers
 :    v1 API: `classic`
@@ -372,7 +372,7 @@ The following instructions require public network access in your cluster to conn
     ```
     {: screen}
 
-5. To use a private cloud service endpoint, you must first [expose the private cloud service endpoint with a load balancer IP that is routable from your VPN connection into the private network](/docs/containers?topic=containers-access_cluster#access_private_se).
+5. To use a private cloud service endpoint, you must first [expose the private cloud service endpoint by using a load balancer IP that is routable from your VPN connection into the private network](/docs/containers?topic=containers-access_cluster#access_private_se).
 
 6. Run Kubernetes API requests against your cluster by using the IAM ID token that you retrieved earlier. For example, list the Kubernetes version that runs in your cluster.
 
