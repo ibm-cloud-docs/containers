@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-10-11"
+lastupdated: "2021-10-13"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -19,7 +19,7 @@ subcollection: containers
 The following Kubernetes versions are no longer supported for {{site.data.keyword.containerlong}}. You can review the archive of the changelogs.
 {: shortdesc}
 
-Unsupported Kubernetes versions: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17
+Unsupported Kubernetes versions: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18
 
 Looking for the changelogs of supported versions? See [Kubernetes version changelog](/docs/containers?topic=containers-changelog).
 {: tip}

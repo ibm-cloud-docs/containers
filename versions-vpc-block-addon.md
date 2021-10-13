@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-11"
+lastupdated: "2021-10-13"
 
 keywords: vpc block, add-on, vpc block changelog
 

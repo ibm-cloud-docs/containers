@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-11"
+lastupdated: "2021-10-13"
 
 keywords: kubernetes, iks, release notes
 
@@ -91,7 +91,7 @@ New! Kubernetes 1.22
 :   You can create or [update clusters to Kubernetes version 1.22](/docs/containers?topic=containers-cs_versions#cs_v122). With Kubernetes 1.22, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. For more information, [see the blog announcement](https://www.ibm.com/cloud/blog/announcements/kubernetes-version-121-now-available-in-ibm-cloud-kubernetes-service){: external}.
 
 Deprecated and unsupported Kubernetes versions
-:   With the release of Kubernetes 1.22, clusters that run version 1.19 are deprecated, with a tentative unsupported date of 31 Dec 2021. Clusters that run version 1.18 remain deprecated, with a tentative unsupported date of 10 Oct 2021. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120) as soon as possible.
+:   With the release of Kubernetes 1.22, clusters that run version 1.19 are deprecated, with a tentative unsupported date of 31 Jan 2022. Clusters that run version 1.18 remain deprecated, with a tentative unsupported date of 10 Oct 2021. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120) as soon as possible.
 
 Master fix pack and worker node fix pack update
 :   Change log documentation is available for Kubernetes version [`1.22.2_1522` and `1.22.2_1523`](/docs/containers?topic=containers-changelog#1222_1522_and_1222_1523).
