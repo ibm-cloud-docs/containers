@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-14"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -52,6 +52,7 @@ The following table shows the changes that are included in the worker node fix p
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
+| Containerd | v1.5.5 | v1.5.7 | See [change log](https://github.com/containerd/containerd/releases/tag/v1.5.7){: external}. |
 | Ubuntu 18.04 packages | 4.15.0-158 | 4.15.0-159 | Updated worker node images and kernel with package updates [CVE-2021-3778](https://nvd.nist.gov/vuln/detail/CVE-2021-3778){: external} and [CVE-2021-3796](https://nvd.nist.gov/vuln/detail/CVE-2021-3796){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.22.2_1523" caption-side="top"}
@@ -92,6 +93,7 @@ The following table shows the changes that are included in the worker node fix p
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
+| Containerd | v1.5.5 | v1.5.7 | See [change log](https://github.com/containerd/containerd/releases/tag/v1.5.7){: external}. |
 | Ubuntu 18.04 packages | 4.15.0-158 | 4.15.0-159 | Updated worker node images and kernel with package updates [CVE-2021-3778](https://nvd.nist.gov/vuln/detail/CVE-2021-3778){: external} and [CVE-2021-3796](https://nvd.nist.gov/vuln/detail/CVE-2021-3796){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.21.5_1532" caption-side="top"}
@@ -358,6 +360,7 @@ The following table shows the changes that are included in the worker node fix p
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
+| Containerd | v1.4.9 | v1.4.11 | See [change logs](https://github.com/containerd/containerd/releases/tag/v1.4.11){: external}. |
 | Ubuntu 18.04 packages | 4.15.0-158 | 4.15.0-159 | Updated worker node images and kernel with package updates [CVE-2021-3778](https://nvd.nist.gov/vuln/detail/CVE-2021-3778){: external} and [CVE-2021-3796](https://nvd.nist.gov/vuln/detail/CVE-2021-3796){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.20.11_1554" caption-side="top"}
@@ -828,6 +831,7 @@ The following table shows the changes that are included in the worker node fix p
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
+| Containerd | v1.4.9 | v1.4.11 | See [change logs](https://github.com/containerd/containerd/releases/tag/v1.4.11){: external}. |
 | Ubuntu 18.04 packages | 4.15.0-158 | 4.15.0-159 | Updated worker node images and kernel with package updates [CVE-2021-3778](https://nvd.nist.gov/vuln/detail/CVE-2021-3778){: external} and [CVE-2021-3796](https://nvd.nist.gov/vuln/detail/CVE-2021-3796){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.19.15_1561" caption-side="top"}
