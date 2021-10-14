@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-14"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -369,37 +369,37 @@ spec:
           tolerations: # Schedule the custom gateway pods onto edge nodes
           - key: dedicated
             value: edge
-          overlays:
-            - kind: Deployment
-              name: custom-ingressgateway
-              patches:
-                - path: spec.template.spec.containers.[name:istio-proxy].lifecycle # Add lifecycle hooks for graceful shutdowns
-                  value:
-                    preStop:
-                      exec:
-                        command: ["sleep", "25"]
-                - path: spec.template.spec.affinity # Specify pod anti-affinity and worker node affinity
-                  value:
-                    podAntiAffinity:
-                      preferredDuringSchedulingIgnoredDuringExecution:
-                        - podAffinityTerm:
-                            labelSelector:
-                              matchExpressions:
-                                - key: app
-                                  operator: In
-                                  values:
-                                    - custom-ingressgateway
-                            topologyKey: kubernetes.io/hostname
-                          weight: 100
-                    nodeAffinity:
-                      preferredDuringSchedulingIgnoredDuringExecution:
-                        - preference:
-                            matchExpressions:
-                              - key: dedicated
-                                operator: In
-                                values:
-                                  - edge
-                          weight: 100
+          env:
+          - name: TERMINATION_DRAIN_DURATION
+            value: 30s
+          affinity:
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+              - podAffinityTerm:
+                  labelSelector:
+                    matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - istio-ingressgateway
+                  topologyKey: kubernetes.io/hostname
+                weight: 100
+            nodeAffinity: # Example node affinities to control the zone or the edge
+              preferredDuringSchedulingIgnoredDuringExecution: # Could be requiredDuringSchedulingIgnoredDuringExecution instead
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: ibm-cloud.kubernetes.io/zone
+                    operator: In
+                    values:
+                    - "dal12" # Deploy the load balancer to a specific zone in your cluster
+              preferredDuringSchedulingIgnoredDuringExecution:
+              - preference:
+                  matchExpressions:
+                  - key: dedicated
+                    operator: In
+                    values:
+                    - edge
+                weight: 100
 
 ```
 {: codeblock}

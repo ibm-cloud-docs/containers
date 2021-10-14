@@ -307,6 +307,7 @@ toc:
                   - ts-cluster-pending.md
                   - ts-cluster-view-work.md
                   - ts-cluster-access-resources.md
+                  - ts-kubectl-exec-timeout.md
               - topicgroup:
                   label: Worker nodes
                   topics:
