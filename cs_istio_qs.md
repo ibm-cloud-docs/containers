@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-14"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -199,24 +199,24 @@ After you finish testing your app and are ready to start directing live traffic 
     apiVersion: networking.istio.io/v1beta1
     kind: VirtualService
     metadata:
-        name: reviews
+      name: reviews
     spec:
-    hosts:
+      hosts:
       - reviews
-    http:
-    - route:
-      - destination:
-          host: reviews
-          subset: v1
-        weight: 0
-      - destination:
-          host: reviews
-          subset: v2
-        weight: 90
-      - destination:
-          host: reviews
-          subset: v3
-        weight: 10
+      http:
+      - route:
+        - destination:
+            host: reviews
+            subset: v1
+          weight: 0
+        - destination:
+            host: reviews
+            subset: v2
+          weight: 90
+        - destination:
+            host: reviews
+            subset: v3
+          weight: 10
     ```
     {: pre}
     
@@ -280,10 +280,10 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
     apiVersion: "security.istio.io/v1beta1"
     kind: "PeerAuthentication"
     metadata:
-        name: "default"
+      name: "default"
     spec:
-    mtls:
-      mode: STRICT
+      mtls:
+        mode: STRICT
     ```
     {: codeblock}
 
@@ -298,12 +298,12 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
     apiVersion: "networking.istio.io/v1beta1"
     kind: "DestinationRule"
     metadata:
-        name: "destination-mtls"
+      name: "destination-mtls"
     spec:
-    host: "*.local"
-    trafficPolicy:
-      tls:
-        mode: ISTIO_MUTUAL
+      host: "*.local"
+      trafficPolicy:
+        tls:
+          mode: ISTIO_MUTUAL
     ```
     {: codeblock}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-14"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -276,18 +276,18 @@ Complete the following steps to set up TLS termination for the `bookinfo-gateway
     apiVersion: networking.istio.io/v1alpha3
     kind: Gateway
     metadata:
-        name: bookinfo-gateway
+      name: bookinfo-gateway
     spec:
-        selector:
+      selector:
         istio: ingressgateway
-        servers:
-        - port:
-            number: 443
-            name: https
-            protocol: HTTPS
+      servers:
+      - port:
+          number: 443
+          name: https
+          protocol: HTTPS
         tls:
-            mode: SIMPLE
-            credentialName: <secret_name>
+          mode: SIMPLE
+          credentialName: <secret_name>
         hosts:
         - "*"
     ```
@@ -387,13 +387,13 @@ To enable automatic sidecar injection for a namespace:
     apiVersion: v1
     kind: Service
     metadata:
-        name: myappservice
+      name: myappservice
     spec:
-        selector: 
+      selector: 
         <selector_key>: <selector_value> # Enter the label key `selector_key` and value `selector_value` pair that you want to use to target the pods where your app runs.
-        ports:
-        - protocol: TCP
-            port: 8080 # The port that the service listens on
+      ports:
+      - protocol: TCP
+        port: 8080 # The port that the service listens on
     ```
     {: codeblock}
 
@@ -447,13 +447,13 @@ To manually inject sidecars into a deployment:
     apiVersion: v1
     kind: Service
     metadata:
-     name: myappservice
+      name: myappservice
     spec:
-    selector:
+      selector:
         <selector_key>: <selector_value> # Enter the label key `selector_key` and value `selector_value` pair that you want to use to target the pods where your app runs.
-        ports:
-        - protocol: TCP
-            port: 8080 # The port that the service listens on.
+      ports:
+      - protocol: TCP
+        port: 8080 # The port that the service listens on.
     ```
     {: codeblock}
 
@@ -541,7 +541,7 @@ To publicly expose apps:
     apiVersion: networking.istio.io/v1alpha3
     kind: Gateway
     metadata:
-      name: ingress
+      name: my-gateway
     spec:
       selector:
         app: ingressgateway
@@ -567,21 +567,21 @@ To publicly expose apps:
     kind: VirtualService
     metadata:
       name: my-virtual-service
-    namespace: <namespace> # The namespace where your Istio-managed microservices are deployed.
+      namespace: <namespace> # The namespace where your Istio-managed microservices are deployed.
     spec:
-    gateways:
-    - my-gateway # `my-gateway` is specified so that the gateway can apply these virtual service routing rules to the `istio-ingressgateway` load balancer.
-    hosts:
-    - '*'
-    http:
-    - match:
-      - uri:
-          exact: /<service_path> # Replace `service_path` with the path that your entrypoint microservice listens on. For example, in the BookInfo app, the path is defined as `/productpage`.
-      route:
-      - destination:
-          host: <service_name> # Replace `service_name` with the name of your entrypoint microservice. For example, in the BookInfo app, `productpage` served as the entrypoint microservice that called the other app microservices.
-          port:
-            number: 80 # If your microservice listens on a different port, replace `80` with the port.
+      gateways:
+      - my-gateway # `my-gateway` is specified so that the gateway can apply these virtual service routing rules to the `istio-ingressgateway` load balancer.
+      hosts:
+      - '*'
+      http:
+      - match:
+        - uri:
+            exact: /<service_path> # Replace `service_path` with the path that your entrypoint microservice listens on. For example, in the BookInfo app, the path is defined as `/productpage`.
+        route:
+        - destination:
+            host: <service_name> # Replace `service_name` with the name of your entrypoint microservice. For example, in the BookInfo app, `productpage` served as the entrypoint microservice that called the other app microservices.
+            port:
+              number: 80 # If your microservice listens on a different port, replace `80` with the port.
     ```
     {: codeblock}
 
@@ -675,22 +675,22 @@ To publicly expose apps:
     apiVersion: networking.istio.io/v1alpha3
     kind: Gateway
     metadata:
-        name: my-gateway
-    namespace: <namespace>
+      name: my-gateway
+      namespace: <namespace>
     spec:
       selector:
         istio: ingressgateway
       servers:
         - port:
-        name: https
-        protocol: HTTPS
-        number: 443
+            name: https
+            protocol: HTTPS
+            number: 443
         tls:
           mode: SIMPLE
           serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
           privateKey: /etc/istio/ingressgateway-certs/tls.key
-      hosts:
-      - "*"
+        hosts:
+        - "*"
     ```
     {: codeblock}
 
@@ -807,10 +807,10 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
     apiVersion: "security.istio.io/v1beta1"
     kind: "PeerAuthentication"
     metadata:
-        name: "default"
+      name: "default"
     spec:
-    mtls:
-      mode: STRICT
+      mtls:
+        mode: STRICT
     ```
     {: codeblock}
 
@@ -825,12 +825,12 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
     apiVersion: "networking.istio.io/v1beta1"
     kind: "DestinationRule"
     metadata:
-        name: "destination-mtls"
+      name: "destination-mtls"
     spec:
-    host: "*.local"
-    trafficPolicy:
-      tls:
-        mode: ISTIO_MUTUAL
+      host: "*.local"
+      trafficPolicy:
+        tls:
+          mode: ISTIO_MUTUAL
     ```
     {: codeblock}
 
