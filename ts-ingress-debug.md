@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-14"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -60,11 +60,11 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
 
 5. On the Diagnostics and Debug Tool card, click **Dashboard**.
 
-5. In the debug tool dashboard, select the **ingress** group of tests. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
+6. In the debug tool dashboard, select the **ingress** group of tests. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
 
-6. Click **Run**.
+7. Click **Run**.
 
-7. Check the results of each test.
+8. Check the results of each test.
     * If any test fails, click the information icon next to the test's name in the left-hand column for information about how to resolve the issue.
     * You can also use the results of tests that only gather information while you debug your Ingress service in the following sections.
 
@@ -73,6 +73,14 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
 
 Start by checking for error messages in the Ingress resource deployment events and ALB pod logs. These error messages can help you find the root causes for failures and further debug your Ingress setup in the next sections.
 {: shortdesc}
+
+From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains for all clusters in {{site.data.keyword.containerlong_notm}}. Review the following actions that you must make to your Ingress setup.
+{: important}
+
+    - If you currently allow inbound traffic to your classic cluster from the Cloudflare source IP addresses, you must also allow inbound traffic from the [Akamai source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} before 07 July. After the migration completes on 31 July, you can remove the Cloudflare IP address rules.    
+ - The Akamai health check does not support verification of the body of the health check response. Update any custom health check rules that you configured for Cloudflare that use verification of the body of the health check responses.    
+ - Cluster subdomains that were health checked in Cloudflare are now registered in the Akamai DNS as CNAME records. These CNAME records point to an Akamai Global Traffic Management domain that health checks the subdomains. When a client runs a DNS query for a health checked subdomain, a CNAME record is returned to the client, as opposed to Cloudflare, in which an A record was returned. If your client expects an A record for a subdomain that was health checked in Cloudflare, update your logic to accept a CNAME record.    
+ - During the migration, an Akamai Global Traffic Management (GTM) health check was automatically created for any subdomains that had a Cloudflare health check. If you previously created a Cloudflare health check for a subdomain, and you create an Akamai health check for the subdomain after the migration, the two Akamai health checks might conflict. Note that Akamai GTM configurations do not support nested subdomains. In these cases, you can use the `ibmcloud ks nlb-dns monitor disable` command to disable the Akamai health check that the migration automatically configured for your subdomain.
 
 1. Check your Ingress resource deployment and look for warnings or error messages.
     ```sh
@@ -148,13 +156,13 @@ Start by checking for error messages in the Ingress resource deployment events a
         ```
         {: pre}
 
-    3. Get the logs for the `nginx-ingress` container on each ALB pod.
+    2. Get the logs for the `nginx-ingress` container on each ALB pod.
         ```sh
         kubectl logs <ingress_pod_ID> nginx-ingress -n kube-system
         ```
         {: pre}
 
-    4. Look for error messages in the ALB logs.
+    2. Look for error messages in the ALB logs.
 
 ## Step 4: Ping the ALB subdomain and public IP addresses
 {: #ping}
@@ -170,7 +178,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
 
     Example output for a classic multizone cluster with worker nodes in `dal10` and `dal13`:
 
-    ```
+    ```sh
     ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
     private-cr24a9f2caf6554648836337d240064935-alb1   false     disabled   private   -               dal13   ingress:0.47.0_1434_iks   2294021       -
     private-cr24a9f2caf6554648836337d240064935-alb2   false     disabled   private   -               dal10   ingress:0.47.0_1434_iks   2234947       -
@@ -182,17 +190,15 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
     * If a public ALB has no IP address (classic) or hostname (VPC), see [Ingress ALB does not deploy in a zone](/docs/containers?topic=containers-cs_subnet_limit).
 
 2. Verify that your ALB IP addresses are reachable by the ALB health check.
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) **Classic**: If you use Calico pre-DNAT network policies or another custom firewall to block incoming traffic to your cluster, you must allow inbound access on port 80 from the Kubernetes control plane and Akamai's IPv4 IP addresses to the IP addresses of your ALBs so that the Kubernetes control plane can check the health of your ALBs. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALB IP addresses from [Akamai's source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} on port 80 and the [control plane subnets for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}.<p class="important">From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains for all clusters in {{site.data.keyword.containerlong_notm}}. Review the following actions that you must make to your Ingress setup.  
- - If you currently allow inbound traffic to your classic cluster from the Cloudflare source IP addresses, you must also allow inbound traffic from the [Akamai source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} before 07 July. After the migration completes on 31 July, you can remove the Cloudflare IP address rules.  
- - The Akamai health check does not support verification of the body of the health check response. Update any custom health check rules that you configured for Cloudflare that use verification of the body of the health check responses.  
- - Cluster subdomains that were health checked in Cloudflare are now registered in the Akamai DNS as CNAME records. These CNAME records point to an Akamai Global Traffic Management domain that health checks the subdomains. When a client runs a DNS query for a health checked subdomain, a CNAME record is returned to the client, as opposed to Cloudflare, in which an A record was returned. If your client expects an A record for a subdomain that was health checked in Cloudflare, update your logic to accept a CNAME record.  
- - During the migration, an Akamai Global Traffic Management (GTM) health check was automatically created for any subdomains that had a Cloudflare health check. If you previously created a Cloudflare health check for a subdomain, and you create an Akamai health check for the subdomain after the migration, the two Akamai health checks might conflict. Note that Akamai GTM configurations do not support nested subdomains. In these cases, you can use the `ibmcloud ks nlb-dns monitor disable` command to disable the Akamai health check that the migration automatically configured for your subdomain.</p>
+    
+    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) **Classic**: If you use Calico pre-DNAT network policies or another custom firewall to block incoming traffic to your cluster, you must allow inbound access on port 80 from the Kubernetes control plane and Akamai's IPv4 IP addresses to the IP addresses of your ALBs so that the Kubernetes control plane can check the health of your ALBs. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALB IP addresses from [Akamai's source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} on port 80 and the [control plane subnets for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}.
+    
     * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) **VPC**: If you set up [VPC security groups](/docs/containers?topic=containers-vpc-network-policy#security_groups) or [VPC access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy#acls) to secure your cluster network, ensure that you create the rules to allow the necessary traffic from the Kubernetes control plane IP addresses. Alternatively, to allow the inbound traffic for ALB healthchecks, you can create one rule to allow all incoming traffic on port 80.
 
 3. Check the health of your ALB IPs (classic) or hostname (VPC).
 
     * For single zone cluster and multizone clusters: Ping the IP address (classic) or hostname (VPC) of each public ALB to ensure that each ALB is able to successfully receive packets. If you are using private ALBs, you can ping their IP addresses (classic) or hostname (VPC) only from the private network.
-        ```
+        ```sh
         ping <ALB_IP>
         ```
         {: pre}
@@ -213,7 +219,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
         {: pre}
 
         Example output
-        ```
+        ```sh
         healthy
         ```
         {: screen}
@@ -254,13 +260,13 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
 
 1. If you use a custom domain, verify that you used your DNS provider to map the custom domain to the IBM-provided subdomain or the ALB's public IP address. Note that using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
     * **IBM-provided subdomain CNAME**: Check that your custom domain is mapped to the cluster's IBM-provided subdomain in the Canonical Name record (CNAME).
-        ```
+        ```sh
         host www.my-domain.com
         ```
         {: pre}
 
         Example output
-        ```
+        ```sh
         www.my-domain.com is an alias for mycluster-<hash>-0000.us-south.containers.appdomain.cloud
         mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.46.52.222
         mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.62.196.238
@@ -268,13 +274,13 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
         {: screen}
 
     * **Public IP address A record**: Check that your custom domain is mapped to the ALB's portable public IP address in the A record. The IPs should match the public ALB IPs that you got in step 1 of the [previous section](#ping).
-        ```
+        ```sh
         host www.my-domain.com
         ```
         {: pre}
 
         Example output
-        ```
+        ```sh
         www.my-domain.com has address 169.46.52.222
         www.my-domain.com has address 169.62.196.238
         ```
@@ -313,7 +319,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     {: pre}
 
     For example, the unreachable IP `169.62.196.238` belongs to the ALB `public-cr24a9f2caf6554648836337d240064935-alb1`:
-    ```
+    ```sh
     ALB ID                                            Enabled   Status     Type      ALB IP           Zone    Build                          ALB VLAN ID   NLB Version
     public-cr24a9f2caf6554648836337d240064935-alb1    false     disabled   private   169.62.196.238   dal13   ingress:0.47.0_1434_iks   2294021       -
     ```
@@ -341,7 +347,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
         {: pre}
 
         Example output that confirms the ALB pod is configured with the correct health check subdomain, `albhealth.<domain>`:
-        ```
+        ```sh
         server_name albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud;
         ```
         {: screen}
@@ -359,7 +365,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
         {: pre}
 
         Example output
-        ```
+        ```sh
         #server_name albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud
         ```
         {: screen}
@@ -379,7 +385,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     {: pre}
 
     Output:
-    ```
+    ```sh
     <html>
         <head>
             <title>404 Not Found</title>
@@ -392,13 +398,13 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     {: screen}
 
 5. Verify that the ALB IP address is removed from the DNS registration for your domain by checking the Akamai server. Note that the DNS registration might take a few minutes to update.
-    ```
+    ```sh
     host mycluster-<hash>-0000.us-south.containers.appdomain.cloud ada.ns.Akamai.com
     ```
     {: pre}
 
     Example output that confirms that only the healthy ALB IP, `169.46.52.222`, remains in the DNS registration and that the unhealthy ALB IP, `169.62.196.238`, has been removed:
-    ```
+    ```sh
     mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.46.52.222
     ```
     {: screen}
@@ -414,25 +420,25 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 
 7. After you finish debugging, restore the health check on the ALB pods. Repeat these steps for each ALB pod.
     1. Log in to the ALB pod and remove the `#` from the `server_name`.
-    ```sh
-    kubectl exec -ti <pod_name> -n kube-system -c nginx-ingress -- sed -i -e 's*#server_name*server_name*g' /etc/nginx/conf.d/kube-system-alb-health.conf
-    ```
-    {: pre}
+        ```sh
+        kubectl exec -ti <pod_name> -n kube-system -c nginx-ingress -- sed -i -e 's*#server_name*server_name*g' /etc/nginx/conf.d/kube-system-alb-health.conf
+        ```
+        {: pre}
 
     2. Reload the NGINX configuration so that the health check restoration is applied.
-    ```sh
-    kubectl exec -ti <pod_name> -n kube-system -c nginx-ingress -- nginx -s reload
-    ```
-    {: pre}
+        ```sh
+        kubectl exec -ti <pod_name> -n kube-system -c nginx-ingress -- nginx -s reload
+        ```
+        {: pre}
 
-9. Now, when you cURL the `albhealth` host to health check the ALB IP, the check returns `healthy`.
+8. Now, when you cURL the `albhealth` host to health check the ALB IP, the check returns `healthy`.
     ```sh
     curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud"
     ```
     {: pre}
 
-10. Verify that the ALB IP address has been restored in the DNS registration for your domain by checking the Akamai server. Note that the DNS registration might take a few minutes to update.
-    ```
+9. Verify that the ALB IP address has been restored in the DNS registration for your domain by checking the Akamai server. Note that the DNS registration might take a few minutes to update.
+    ```sh
     host mycluster-<hash>-0000.us-south.containers.appdomain.cloud ada.ns.Akamai.com
     ```
     {: pre}
