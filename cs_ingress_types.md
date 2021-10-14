@@ -238,7 +238,7 @@ To use a custom domain, complete the following steps.
     ```
     {: pre}
 
-7. If one ALB per zone runs the Kubernetes Ingress image, continue to step 6. If you do not have one ALB per zone that runs the Kubernetes Ingress image, create at least one in each zone.
+7. If one ALB per zone runs the Kubernetes Ingress image, continue to the next step. If you do not have one ALB per zone that runs the Kubernetes Ingress image, create at least one in each zone.
         
     ```sh
     ibmcloud ks ingress alb create <classic|vpc-gen2> --cluster <cluster_name_or_ID> --type public --zone <zone> --vlan <VLAN_ID> --version 0.47.0_1434_iks
@@ -252,14 +252,14 @@ To use a custom domain, complete the following steps.
     ```
     {: pre}
 
-9. Using the ALB's IP address (classic) or hostname (VPC), the app path, and your domain, verify that you can successfully send traffic to your app through this ALB.
+9. By using the ALB's IP address (classic) or hostname (VPC), the app path, and your domain, verify that you can successfully send traffic to your app through this ALB.
 
     ```sh
     curl http://<ALB_IP>/<app_path> -H "Host: <ingress_subdomain>"
     ```
     {: pre}
 
-    For example, to send a request to "myapp" by using a default Ingress subdomain run the following command.
+    For example, to send a request to "myapp" by using a default Ingress subdomain, run the following command.
     
     ```sh
     curl http://169.X.X.X/myapp -H "Host: mycluster-a1b2cdef345678g9hi012j3kl4567890-0000.us-south.containers.appdomain.cloud"
