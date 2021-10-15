@@ -14,7 +14,6 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
-
 # Debugging app deployments
 {: #debug_apps}
 

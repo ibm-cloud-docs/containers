@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-15"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -429,7 +429,7 @@ Review the following optional steps for saving or deleting custom Istio resource
 ### Step 2: Uninstalling the Istio add-on
 {: #istio_uninstall_addon}
 
-Uninstall the add-on from the consle or CLI.
+Uninstall the add-on from the console or CLI.
 {: shortdesc}
 
 #### Uninstalling the Istio add-on from the console

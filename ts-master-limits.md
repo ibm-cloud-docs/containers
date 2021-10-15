@@ -14,7 +14,6 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
-
 # Why does my cluster master status say it is approaching its resource limit?
 {: #master_resource_limit}
 

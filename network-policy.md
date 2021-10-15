@@ -13,7 +13,6 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-
 # Classic: Controlling traffic with network policies
 {: #network_policies}
 

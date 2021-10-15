@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-15"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -12,7 +12,6 @@ subcollection: containers
 
 {{site.data.keyword.attribute-definition-list}}
 
-  
 
 # Setting up an image registry
 {: #registry}

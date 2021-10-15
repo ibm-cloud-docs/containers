@@ -13,7 +13,6 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-
 # Release notes
 {: #iks-release}
 
