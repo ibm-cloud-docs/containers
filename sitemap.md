@@ -204,6 +204,8 @@ subcollection: containers
 
 [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
 
+* [18 October 2021](/docs/containers?topic=containers-rel-notes#18oct2021)
+
 * [13 October 2021](/docs/containers?topic=containers-rel-notes#13oct2021)
 
 * [11 October 2021](/docs/containers?topic=containers-rel-notes#11oct2021)
@@ -4654,6 +4656,8 @@ subcollection: containers
 [Why can't I view or work with my cluster?](/docs/containers?topic=containers-cs_cluster_access#cs_cluster_access)
 
 [Classic: Why can't I access resources in my cluster?](/docs/containers?topic=containers-cs_firewall#cs_firewall)
+
+[Why does my cluster master status say it is approaching its resource limit?](/docs/containers?topic=containers-master_resource_limit#master_resource_limit)
 
 
 ### Worker nodes

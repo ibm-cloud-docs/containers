@@ -308,6 +308,7 @@ toc:
                   - ts-cluster-view-work.md
                   - ts-cluster-access-resources.md
                   - ts-kubectl-exec-timeout.md
+                  - ts-master-limits.md
               - topicgroup:
                   label: Worker nodes
                   topics:
