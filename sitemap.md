@@ -1096,15 +1096,15 @@ subcollection: containers
 
 * [Controlling traffic with the default security group](/docs/containers?topic=containers-vpc-network-policy#security_groups)
 
-    * [Creating security group rules in the console](/docs/containers?topic=containers-vpc-network-policy#security_groups_ui)
+    * [Creating security group rules from the console](/docs/containers?topic=containers-vpc-network-policy#security_groups_ui)
 
-    * [Creating security group rules from the CLI](/docs/containers?topic=containers-vpc-network-policy#security_groups_cli)
+    * [Creating security group rules with the CLI](/docs/containers?topic=containers-vpc-network-policy#security_groups_cli)
 
 * [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-network-policy#acls)
 
-    * [Creating ACLs in the console](/docs/containers?topic=containers-vpc-network-policy#acls_ui)
+    * [Creating ACLs from the console](/docs/containers?topic=containers-vpc-network-policy#acls_ui)
 
-    * [Creating ACLs from the CLI](/docs/containers?topic=containers-vpc-network-policy#acls_cli)
+    * [Creating ACLs with the CLI](/docs/containers?topic=containers-vpc-network-policy#acls_cli)
 
 * [Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
 
