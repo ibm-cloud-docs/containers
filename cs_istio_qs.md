@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-14"
+lastupdated: "2021-10-18"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -48,7 +48,7 @@ Set up the managed Istio add-on in your cluster.
 
     ```sh
     NAME            Version     Health State   Health Status
-    istio           1.11.2       normal         Addon Ready
+    istio           1.11.3       normal         Addon Ready
     ```
     {: screen}
 
@@ -86,13 +86,13 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 1. Install BookInfo in your cluster.
     1. Download the latest Istio package, which includes the configuration files for the BookInfo app.
         ```sh
-        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.11.2 sh -
+        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.11.3 sh -
         ```
         {: pre}
 
     2. Navigate to the Istio package directory.
         ```sh
-        cd istio-1.11.2
+        cd istio-1.11.3
         ```
         {: pre}
 
@@ -221,7 +221,7 @@ After you finish testing your app and are ready to start directing live traffic 
     {: pre}
     
     ```sh
-    kubectl apply -f - <filename>.yaml
+    kubectl apply -f <filename>.yaml
     ```
     {: pre}
 
@@ -241,7 +241,7 @@ After you finish testing your app and are ready to start directing live traffic 
 
 5. Try refreshing the BookInfo page several times. Notice that the page with black stars (`v2`) is no longer shown, and only the page with red stars (`v3`) shown.
 
-6. Verify that in the time since you changed the YAML file for the reviews `VirtualService`, no logs exist for requests to `v2`.
+6. **If you have envoy access logs enabled**: Verify that in the time since you changed the YAML file for the reviews `VirtualService`, no logs exist for requests to `v2`.
     ```sh
     kubectl logs -l app=reviews,version=v2 -c istio-proxy
     ```
@@ -272,7 +272,7 @@ For more information about referencing metrics and dashboards, monitoring Istio 
 ## Step 5: Secure in-cluster traffic by enabling mTLS
 {: #mtls-qs}
 
-Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation](https://istio.io/v1.4/docs/tasks/security/authentication/authn-policy/){: external}.
+Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation](https://istio.io/latest/docs/tasks/security/authentication/authn-policy){: external}.
 {: shortdesc}
 
 1. Create an authentication policy file that is named `default.yaml`. This policy is namespace-scoped and configures workloads in the service mesh to accept only encrypted requests with TLS. Note that no `targets` specifications are included because the policy applies to all services in the mesh in this namespace.
@@ -317,7 +317,6 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
 
 Destination rules are also used for non-authentication reasons, such as routing traffic to different versions of a service. Any destination rule that you create for a service must also contain the same TLS block that is set to `mode: ISTIO_MUTUAL`. This block prevents the rule from overriding the mesh-wide mTLS settings that you configured in this section.
 {: note}
-
 
 
 

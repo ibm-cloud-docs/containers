@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-14"
+lastupdated: "2021-10-18"
 
 keywords: containers
 subcollection: containers
@@ -97,20 +97,6 @@ subcollection: containers
 
     * [Applications and data](/docs/containers?topic=containers-responsibilities_iks#applications-and-data)
 
-* [Tasks for IBM responsibilities by area](/docs/containers?topic=containers-responsibilities_iks#task-responsibilities)
-
-    * [Incident and operations management](/docs/containers?topic=containers-responsibilities_iks#incident-and-ops-ibm)
-
-    * [Change management](/docs/containers?topic=containers-responsibilities_iks#change-management-ibm)
-
-    * [Identity and access management](/docs/containers?topic=containers-responsibilities_iks#iam-responsibilities-ibm)
-
-    * [Security and regulation compliance](/docs/containers?topic=containers-responsibilities_iks#security-compliance-ibm)
-
-    * [Disaster recovery](/docs/containers?topic=containers-responsibilities_iks#disaster-recovery-ibm)
-
-    * [Applications and data](/docs/containers?topic=containers-responsibilities_iks#applications-and-data-ibm)
-
 
 ## Use cases
 {: #sitemap_use_cases}
@@ -203,6 +189,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-rel-notes#rel-notes)
 
 [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
+
+* [18 October 2021](/docs/containers?topic=containers-rel-notes#18oct2021)
 
 * [13 October 2021](/docs/containers?topic=containers-rel-notes#13oct2021)
 
@@ -845,6 +833,12 @@ subcollection: containers
 
     * [Worker node components](/docs/containers?topic=containers-service-arch#worker-components)
 
+    * [ `kube-system` namespace](/docs/containers?topic=containers-service-arch#kube-system-ns-resources)
+
+    * [`ibm-system` namespace](/docs/containers?topic=containers-service-arch#ibm-system-ns-resources)
+
+    * [`default` namespace](/docs/containers?topic=containers-service-arch#default-ns-resources)
+
 * [VPC cluster](/docs/containers?topic=containers-service-arch#architecture_vpc)
 
 * [Overview of personal and sensitive data storage and removal options](/docs/containers?topic=containers-service-arch#ibm-data)
@@ -1096,15 +1090,15 @@ subcollection: containers
 
 * [Controlling traffic with the default security group](/docs/containers?topic=containers-vpc-network-policy#security_groups)
 
-    * [Creating security group rules in the console](/docs/containers?topic=containers-vpc-network-policy#security_groups_ui)
+    * [Creating security group rules from the console](/docs/containers?topic=containers-vpc-network-policy#security_groups_ui)
 
-    * [Creating security group rules from the CLI](/docs/containers?topic=containers-vpc-network-policy#security_groups_cli)
+    * [Creating security group rules with the CLI](/docs/containers?topic=containers-vpc-network-policy#security_groups_cli)
 
 * [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-network-policy#acls)
 
-    * [Creating ACLs in the console](/docs/containers?topic=containers-vpc-network-policy#acls_ui)
+    * [Creating ACLs from the console](/docs/containers?topic=containers-vpc-network-policy#acls_ui)
 
-    * [Creating ACLs from the CLI](/docs/containers?topic=containers-vpc-network-policy#acls_cli)
+    * [Creating ACLs with the CLI](/docs/containers?topic=containers-vpc-network-policy#acls_cli)
 
 * [Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
 
@@ -2333,8 +2327,6 @@ subcollection: containers
 
 * [Mounting the volume to your app](/docs/containers?topic=containers-portworx#mount_pvc)
 
-* [VPC: Updating worker nodes with Portworx volumes](/docs/containers?topic=containers-portworx#portworx_vpc_up)
-
 * [Backing up and restoring apps and data with PX-Backup](/docs/containers?topic=containers-portworx#px-backup)
 
     * [Installing PX-Backup on an {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-portworx#px-backup-install)
@@ -2402,8 +2394,6 @@ subcollection: containers
     * [Updating the IBM Cloud Block Storage Attacher plug-in](/docs/containers?topic=containers-utilities#update_block_attacher)
 
     * [Removing the IBM Cloud Block Volume Attacher plug-in](/docs/containers?topic=containers-utilities#remove_block_attacher)
-
-* [Classic: Automatically provisioning unformatted block storage and authorizing your worker nodes to access the storage](/docs/containers?topic=containers-utilities#automatic_block)
 
 * [Classic: Manually adding block storage to specific worker nodes](/docs/containers?topic=containers-utilities#manual_block)
 
@@ -2563,12 +2553,6 @@ subcollection: containers
     * [`ibmcloud ks cluster addon update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_update)
 
     * [`ibmcloud ks cluster addon versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_addon_versions)
-
-    * [`ibmcloud ks cluster autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_autoupdate_disable)
-
-    * [`ibmcloud ks cluster autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_autoupdate_enable)
-
-    * [`ibmcloud ks cluster autoupdate get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_autoupdate_get)
 
     * [`ibmcloud ks cluster ca create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_create)
 
@@ -2932,7 +2916,7 @@ subcollection: containers
 
     * [`ibmcloud ob logging config create`](/docs/containers?topic=containers-observability_cli#logging_config_create)
 
-    * [<code>ibmcloud ob logging config delete</code>](/docs/containers?topic=containers-observability_cli#logging_config_delete)
+    * [`ibmcloud ob logging config delete`](/docs/containers?topic=containers-observability_cli#logging_config_delete)
 
     * [`ibmcloud ob logging config list`](/docs/containers?topic=containers-observability_cli#logging_config_list)
 
@@ -2946,7 +2930,7 @@ subcollection: containers
 
     * [`ibmcloud ob monitoring config create`](/docs/containers?topic=containers-observability_cli#monitoring_config_create)
 
-    * [<code>ibmcloud ob monitoring config delete</code>](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
+    * [`ibmcloud ob monitoring config delete`](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
 
     * [`ibmcloud ob monitoring config list`](/docs/containers?topic=containers-observability_cli#monitoring_config_list)
 
@@ -3221,7 +3205,7 @@ subcollection: containers
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
 
-* [Benchmark 1.5 results for Kubernetes versions 1.18 - 1.21](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15)
+* [Benchmark 1.5 results for Kubernetes versions 1.18 - 1.22](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15)
 
     * [1.1 Master Node Configuration Files](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-1-1)
 
@@ -3303,7 +3287,7 @@ subcollection: containers
 
     * [Changelog for 1.10.2, released 15 July 2021](/docs/containers?topic=containers-istio-changelog#1102)
 
-* [Version 1.9](/docs/containers?topic=containers-istio-changelog#v19)
+* [Version 1.9 (unsupported)](/docs/containers?topic=containers-istio-changelog#v19)
 
     * [Changelog for 1.9.8, released 14 September 2021](/docs/containers?topic=containers-istio-changelog#198)
 
@@ -4654,6 +4638,8 @@ subcollection: containers
 [Why can't I view or work with my cluster?](/docs/containers?topic=containers-cs_cluster_access#cs_cluster_access)
 
 [Classic: Why can't I access resources in my cluster?](/docs/containers?topic=containers-cs_firewall#cs_firewall)
+
+[Why does my cluster master status say it is approaching its resource limit?](/docs/containers?topic=containers-master_resource_limit#master_resource_limit)
 
 
 ### Worker nodes

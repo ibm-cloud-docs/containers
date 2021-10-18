@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-15"
 
 keywords: kubernetes, iks
 
@@ -14,13 +14,12 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
-
 # Why can't the cluster pull images from {{site.data.keyword.registrylong_notm}} during creation?
 {: #ts_image_pull_create}
 
 **Infrastructure provider**:
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
-    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
 
 
 When you created a cluster, you received an error message similar to the following.

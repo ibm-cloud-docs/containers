@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-15"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -7893,7 +7893,7 @@ If you access the dashboard via <code>kubectl proxy</code>, the <strong>SKIP</st
 <td>v1.12.2-68</td>
 <td>Updated to support the Kubernetes 1.12 release. Additional changes include the following:
 <ul><li>Load balancer pods (<code>ibm-cloud-provider-ip-*</code> in <code>ibm-system</code> namespace) now set CPU and memory resource requests.</li>
-<li>The <code>service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan</code> annotation is added to specify the VLAN that the load balancer service deploys to. To see available VLANs in your cluster, run <code>ibmcloud ks vlan ls --zone <zone></code>.</li>
+<li>The <code>service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan</code> annotation is added to specify the VLAN that the load balancer service deploys to. To see available VLANs in your cluster, run <code>ibmcloud ks vlan ls --zone &lt;zone&gt;</code>.</li>
 <li>A new <a href="/docs/containers?topic=containers-loadbalancer-about#planning_ipvs">load balancer 2.0</a> is available as a beta.</li></ul></td>
 </tr>
 <tr>
@@ -8948,7 +8948,7 @@ The following table shows the changes that are included in patch 1.11.3_1533.
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.11.3-100</td>
 <td>v1.11.3-127</td>
-<td>Added the <code>service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan</code> annotation to specify the VLAN that the load balancer service deploys to. To see available VLANs in your cluster, run <code>ibmcloud ks vlan ls --zone <zone></code>.</td>
+<td>Added the <code>service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan</code> annotation to specify the VLAN that the load balancer service deploys to. To see available VLANs in your cluster, run <code>ibmcloud ks vlan ls --zone &lt;zone&gt;</code>.</td>
 </tr>
 <tr>
 <td>TPM-enabled kernel</td>
@@ -10133,7 +10133,7 @@ The following table shows the changes that are included in patch 1.10.8_1530.
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.10.8-172</td>
 <td>v1.10.8-197</td>
-<td>Added the <code>service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan</code> annotation to specify the VLAN that the load balancer service deploys to. To see available VLANs in your cluster, run <code>ibmcloud ks vlan ls --zone <zone></code>.</td>
+<td>Added the <code>service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan</code> annotation to specify the VLAN that the load balancer service deploys to. To see available VLANs in your cluster, run <code>ibmcloud ks vlan ls --zone &lt;zone&gt;</code>.</td>
 </tr>
 <tr>
 <td>TPM-enabled kernel</td>

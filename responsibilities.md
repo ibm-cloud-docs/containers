@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-15"
 
 keywords: kubernetes, iks, responsibilities, incident, operations, change, security, regulation, disaster recovery, management, RACI
 
@@ -11,7 +11,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
 
 
 # Your responsibilities with using {{site.data.keyword.containerlong_notm}}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-15"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -11,7 +11,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
 
 
 # Autoscaling clusters
@@ -1133,7 +1132,7 @@ This table refers to the cluster autoscaler Helm chart parameters. For add-on va
 :   Set the maximum time in minutes that the cluster autoscaler pod runs without a successfully completed action before the pod is automatically restarted. The default value is `15m`.
 
 `customImageVersion`
-:   To override the default installation version, specify the version of the cluster autoscaler Helm chart that you want to install. There is no default value for this paramter.
+:   To override the default installation version, specify the version of the cluster autoscaler Helm chart that you want to install. There is no default value for this parameter.
 
 `maxRetryGap`
 :   Set the maximum time in seconds to retry after failing to connect to the service API. Use this parameter and the `retryAttempts` parameter to adjust the retry window for the cluster autoscaler. The default value is `60`.

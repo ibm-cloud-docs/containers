@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-15"
 
 keywords: kubernetes, iks
 
@@ -19,8 +19,8 @@ content-type: troubleshoot
 {: #ts-app-psp}
 
 **Infrastructure provider**:
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
-    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
 
 
 After creating a pod or running `kubectl get events` to check on a pod deployment, you see an error message similar to the following.

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-14"
+lastupdated: "2021-10-15"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -11,7 +11,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
 
 
 # {{site.data.keyword.containerlong_notm}} CLI
@@ -32,6 +31,7 @@ The following image depicts the structure and grouping of the `ibmcloud ks` comm
 {: shortdesc}
 
 ![Image of the structure and groupings of commands in {{site.data.keyword.containerlong_notm}} plug-in.](images/cs_cli_ref_imagemap.svg "Image of the structure and groupings of commands in {{site.data.keyword.containerlong_notm}} plug-in"){: caption="Image of the structure and groupings of commands in {{site.data.keyword.containerlong_notm}} plug-in" caption-side="bottom"}
+
 
 ## `cluster` commands
 {: #cluster}

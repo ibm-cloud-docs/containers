@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-14"
+lastupdated: "2021-10-18"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -45,13 +45,13 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 
 1. Install BookInfo in your cluster. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
     ```sh
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.11.2 sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.11.3 sh -
     ```
     {: pre}
 
 1. Navigate to the Istio package directory.
     ```sh
-    cd istio-1.11.2
+    cd istio-1.11.3
     ```
     {: pre}
 
@@ -422,7 +422,7 @@ Do not enable sidecar injection for the `kube-system`, `ibm-system,` or `ibm-ope
 
 1. Navigate to the Istio package directory.
     ```sh
-    cd istio-1.11.2
+    cd istio-1.11.3
     ```
     {: pre}
 
@@ -670,6 +670,39 @@ Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-a
 
 To publicly expose apps:
 
+1. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
+    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters:
+        ```sh
+        ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
+        ```
+        {: pre}
+
+    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters:
+        ```sh
+        ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname>
+        ```
+        {: pre}
+
+1. Verify that the subdomain is created. In the output, copy the name of your SSL secret in the **SSL Cert Secret Name** field.
+    ```sh
+    ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
+    ```
+    {: pre}
+
+    ```sh
+    # Example output for classic clusters:
+    Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+    ```
+    {: screen}
+
+    ```sh
+    # Example output for VPC clusters:
+    Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+    ```
+    {: screen}
+
 1. Create a gateway that uses the public `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/latest/docs/reference/config/networking/gateway/){: external}.
     ```yaml
     apiVersion: networking.istio.io/v1alpha3
@@ -694,13 +727,13 @@ To publicly expose apps:
     ```
     {: codeblock}
 
-2. Apply the gateway in the namespace where your Istio-managed microservices are deployed.
+1. Apply the gateway in the namespace where your Istio-managed microservices are deployed.
     ```sh
     kubectl apply -f my-gateway.yaml -n <namespace>
     ```
     {: pre}
 
-3. Create a virtual service that uses the `my-gateway` gateway and defines routing rules for your app microservices. For more information about virtual service YAML components, see the [Istio reference documentation](https://istio.io/latest/docs/reference/config/networking/virtual-service/){: external}.
+1. Create a virtual service that uses the `my-gateway` gateway and defines routing rules for your app microservices. For more information about virtual service YAML components, see the [Istio reference documentation](https://istio.io/latest/docs/reference/config/networking/virtual-service/){: external}.
     ```yaml
     apiVersion: networking.istio.io/v1beta1
     kind: VirtualService
@@ -724,13 +757,13 @@ To publicly expose apps:
     ```
     {: codeblock}
 
-4. Apply the virtual service rules in the namespace where your Istio-managed microservice is deployed.
+1. Apply the virtual service rules in the namespace where your Istio-managed microservice is deployed.
     ```sh
     kubectl apply -f my-virtual-service.yaml -n <namespace>
     ```
     {: pre}
 
-5. Get the **EXTERNAL-IP** address (classic clusters) or the hostname (VPC clusters) for the `istio-ingressgateway` public load balancer. If you [enabled an Istio load balancer in each zone of your cluster](#config-gateways), get the IP address or hostname of the load balancer service in each zone.
+1. Get the **EXTERNAL-IP** address (classic clusters) or the hostname (VPC clusters) for the `istio-ingressgateway` public load balancer. If you [enabled an Istio load balancer in each zone of your cluster](#config-gateways), get the IP address or hostname of the load balancer service in each zone.
     ```sh
     kubectl get svc -n istio-system
     ```
@@ -748,40 +781,8 @@ To publicly expose apps:
     ```
     {: screen}
 
-6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters:
-        ```sh
-        ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
-        ```
-        {: pre}
 
-    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters:
-        ```sh
-        ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname>
-        ```
-        {: pre}
-
-7. Verify that the subdomain is created. In the output, copy the name of your SSL secret in the **SSL Cert Secret Name** field.
-    ```sh
-    ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
-    ```
-    {: pre}
-
-    ```sh
-    # Example output for classic clusters:
-    Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-    ```
-    {: screen}
-
-    ```sh
-    # Example output for VPC clusters:
-    Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
-    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
-    ```
-    {: screen}
-
-8. Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
+1. Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
     ```
     https://<host_name>/<service_path>
     ```
@@ -799,7 +800,7 @@ Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-a
 ## Securing in-cluster traffic by enabling mTLS
 {: #mtls}
 
-Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation](https://istio.io/v1.4/docs/tasks/security/authentication/authn-policy/){: external}.
+Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation](https://istio.io/latest/docs/tasks/security/authentication/authn-policy){: external}.
 {: shortdesc}
 
 1. Create an authentication policy file that is named `default.yaml`. This policy is namespace-scoped and configures workloads in the service mesh to accept only encrypted requests with TLS. Note that no `targets` specifications are included because the policy applies to all services in the mesh in this namespace.

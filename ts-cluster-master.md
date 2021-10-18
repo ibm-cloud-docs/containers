@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-15"
 
 keywords: kubernetes, iks
 
@@ -14,7 +14,6 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
-
 # Reviewing master health
 {: #debug_master}
 {: troubleshoot}
@@ -24,8 +23,8 @@ Review your cluster master health.
 {: shortdesc}
 
 **Infrastructure provider**:
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
-    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
 
 ## Reviewing master health, status, and states
 {: #review-master-health}

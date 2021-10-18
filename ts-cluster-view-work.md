@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-14"
+lastupdated: "2021-10-15"
 
 keywords: kubernetes, iks
 
@@ -14,13 +14,12 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
-
 # Why can't I view or work with my cluster?
 {: #cs_cluster_access}
 
 **Infrastructure provider**:
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
-    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
 
 You are not able to find a cluster. When you run `ibmcloud ks cluster ls`, the cluster is not listed in the output.
 {: tsSymptoms}

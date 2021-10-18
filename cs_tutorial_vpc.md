@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-18"
 
 keywords: kubernetes, iks
 
@@ -393,7 +393,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     The VPC load balancer is named in the format `kube-<cluster_ID>-<kubernetes_lb_service_UID>`. To see your cluster ID, run `ibmcloud ks cluster get --cluster <cluster_name>`. To see the Kubernetes `LoadBalancer` service UID, run `kubectl get svc hw-lb-svc -o yaml` and look for the **metadata.uid** field in the output.
     {: tip}
 
-    ```
+    ```sh
     ibmcloud is load-balancers
     ```
     {: pre}

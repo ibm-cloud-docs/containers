@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-14"
+lastupdated: "2021-10-18"
 
 keywords: kubernetes, iks
 
@@ -11,7 +11,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
 
 
 # VPC: Exposing apps with load balancers for VPC
@@ -254,7 +253,7 @@ Expose your app to public network traffic by setting up a Kubernetes `LoadBalanc
     Do not rename any VPC NLBs that are created automatically for `LoadBalancer` services. If you rename a VPC NLB, Kubernetes automatically creates another VPC NLB for the `LoadBalancer` service.
     {: important}
 
-    ```
+    ```sh
     ibmcloud is load-balancers
     ```
     {: pre}
@@ -450,7 +449,7 @@ Expose your app to private network traffic by setting up a Kubernetes `LoadBalan
     Do not rename any VPC NLBs that are created automatically for `LoadBalancer` services. If you rename a VPC NLB, Kubernetes automatically creates another VPC NLB for the `LoadBalancer` service.
     {: important}
 
-    ```
+    ```sh
     ibmcloud is load-balancers
     ```
     {: pre}
@@ -698,7 +697,7 @@ Do not confuse the Application Load Balancer for VPC with {{site.data.keyword.co
     Do not rename any VPC ALBs that are created automatically for `LoadBalancer` services. If you rename a VPC ALB, Kubernetes automatically creates another VPC ALB for the `LoadBalancer` service.
     {: important}
 
-    ```
+    ```sh
     ibmcloud is load-balancers
     ```
     {: pre}

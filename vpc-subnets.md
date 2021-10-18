@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-15"
 
 keywords: kubernetes, iks, ips, vlans, networking, public gateway
 
@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 {{site.data.keyword.attribute-definition-list}}
-
 
 
 # Configuring VPC subnets

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-18"
 
 keywords: kubernetes, iks
 
@@ -11,7 +11,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
 
 
 # Storing data on classic IBM Cloud {{site.data.keyword.filestorage_short}}
@@ -542,7 +541,7 @@ If you want to use existing storage that you provisioned earlier, but never used
     :   Enter the name of the PV object to create.
 
     `labels`
-    :   Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and 
+    :   Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and zone.
 
     `storage`
     :   Enter the storage size of the existing NFS file share that you retrieved earlier. The storage size must be written in gigabytes, for example, 20Gi (20 GB) or 1000Gi (1 TB), and the size must match the size of the existing file share.  

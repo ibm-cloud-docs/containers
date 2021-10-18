@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-15"
 
 keywords: kubernetes, iks, release notes
 
@@ -11,8 +11,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-
 
 # Release notes
 {: #rel-notes}
@@ -34,11 +32,19 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 Review the release notes for October 2021.
 {: shortdesc}
 
+### 18 October 2021
+{: #18oct2021}
+
+New troubleshooting topic
+:   See [Why does my cluster master status say it is approaching its resource limit?](/docs/containers?topic=containers-master_resource_limit). 
+
+
+
 ### 13 October 2021
 {: #13oct2021}
 
-CLI change log
-:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.331. 
+CLI changelog
+:   The [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.331. 
 
 ### 11 October 2021
 {: #11oct2021}

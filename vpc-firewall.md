@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-18"
 
 keywords: kubernetes, iks, firewall, ips
 
@@ -11,7 +11,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
 
 
 # VPC: Opening required ports and IP addresses in other network firewalls
@@ -250,7 +249,7 @@ To permit ingress from your cluster to another service, modify that service's fi
 2. For the worker zones and VPC that you found, ensure that you [enabled a public gateway on the VPC subnets in each worker zone](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#attach-public-gateway-cli).
 
 3. List the public gateways for the subnets. In the output, for the zones and VPC that your cluster is in, note the gateway **Floating IP** addresses for the subnets.
-    ```
+    ```sh
     ibmcloud is public-gateways
     ```
     {: pre}
