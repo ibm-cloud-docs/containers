@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-15"
+lastupdated: "2021-10-18"
 
 keywords: kubernetes, iks
 
@@ -129,7 +129,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 | Multizone-capable | No, as specific to a data center. Data cannot be shared across zones, unless you implement your own data replication. |No, as specific to a data center. Data cannot be shared across zones, unless you implement your own data replication. | 
 | Supported in VPC clusters | No | Yes |
 | Ideal data types | All | All | 
-| Data usage pattern | Random read-write operations, sequential read-write operations, random read-write operations, or write-intensive workloads | 
+| Data usage pattern | Random read-write operations, sequential read-write operations, or write-intensive workloads | 
 | Access | Via file system on mounted volume | Via file system on mounted volume|
 | Supported Kubernetes access writes | ReadWriteMany (RWX), ReadOnlyMany (ROX), ReadWriteOnce (RWO) | ReadWriteOnce (RWO) | 
 | Performance | Predictable due to assigned IOPS and size. IOPS are shared between the pods that access the volume.| Predictable due to assigned IOPS and size. IOPS are not shared between pods. | 
