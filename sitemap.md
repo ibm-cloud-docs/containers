@@ -833,6 +833,12 @@ subcollection: containers
 
     * [Worker node components](/docs/containers?topic=containers-service-arch#worker-components)
 
+    * [ `kube-system` namespace](/docs/containers?topic=containers-service-arch#kube-system-ns-resources)
+
+    * [`ibm-system` namespace](/docs/containers?topic=containers-service-arch#ibm-system-ns-resources)
+
+    * [`default` namespace](/docs/containers?topic=containers-service-arch#default-ns-resources)
+
 * [VPC cluster](/docs/containers?topic=containers-service-arch#architecture_vpc)
 
 * [Overview of personal and sensitive data storage and removal options](/docs/containers?topic=containers-service-arch#ibm-data)
@@ -1333,6 +1339,18 @@ subcollection: containers
 * [Viewing cluster states](/docs/containers?topic=containers-health-monitor#states)
 
     * [Master states](/docs/containers?topic=containers-health-monitor#states_master)
+
+* [Setting up {{site.data.keyword.mon_full}} alerts](/docs/containers?topic=containers-health-monitor#monitoring-alerts)
+
+    * [App alerts](/docs/containers?topic=containers-health-monitor#app-level-alerts)
+
+    * [Worker node alerts](/docs/containers?topic=containers-health-monitor#worker-node-level-alerts)
+
+    * [Zone alerts](/docs/containers?topic=containers-health-monitor#zone-level-alerts)
+
+    * [Cluster alerts](/docs/containers?topic=containers-health-monitor#cluster-level-alerts)
+
+    * [Account alerts](/docs/containers?topic=containers-health-monitor#account-level-alerts)
 
 * [Monitoring worker node health in with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
 
@@ -2898,7 +2916,7 @@ subcollection: containers
 
     * [`ibmcloud ob logging config create`](/docs/containers?topic=containers-observability_cli#logging_config_create)
 
-    * [<code>ibmcloud ob logging config delete</code>](/docs/containers?topic=containers-observability_cli#logging_config_delete)
+    * [`ibmcloud ob logging config delete`](/docs/containers?topic=containers-observability_cli#logging_config_delete)
 
     * [`ibmcloud ob logging config list`](/docs/containers?topic=containers-observability_cli#logging_config_list)
 
@@ -2912,7 +2930,7 @@ subcollection: containers
 
     * [`ibmcloud ob monitoring config create`](/docs/containers?topic=containers-observability_cli#monitoring_config_create)
 
-    * [<code>ibmcloud ob monitoring config delete</code>](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
+    * [`ibmcloud ob monitoring config delete`](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
 
     * [`ibmcloud ob monitoring config list`](/docs/containers?topic=containers-observability_cli#monitoring_config_list)
 

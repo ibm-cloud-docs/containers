@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-18"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -176,6 +176,187 @@ The **Master Status** provides details of what operation from the master state i
 
 
 
+## Setting up {{site.data.keyword.mon_full}} alerts
+{: #monitoring-alerts}
+
+When you set up alerts, make sure to allow your cluster enough time to self-heal. Because Kubernetes has self healing capabilities, configure your alerts only for the issues that arise over time. By observing your cluster over time, you can learn which issues Kubernetes can resolve itself and which issues require alerts to avoid downtime.
+{: shortdesc}
+
+Depending on the size of your cluster, consider setting up alerts on the following levels:
+
+- [Apps](#app-level-alerts)
+- [Worker nodes](#worker-node-level-alerts)
+- [Cluster](#cluster-level-alerts)
+- [Zone](#zone-level-alerts)
+- [Account](#account-level-alerts)
+
+
+
+Set up [autorecovery](#autorecovery) on your worker nodes to enable your cluster to automatically resolve issues.
+{: tip}
+
+
+
+
+### App alerts
+{: #app-level-alerts}
+
+Review the following app level metrics and alert thresholds for help setting up app monitoring in your cluster.
+{: shortdesc}
+
+Common app level conditions to monitor include things such as,
+- Multiple app pods or containers are restarted within 10 minutes.
+- More than one replica of an app is not running.
+- More than ten 5XX `HTTP` response codes received within 10 minute time frame.
+- More than one pod in a namespace is in an unknown state.
+- More than five pods cannot be scheduled on a worker node (pending state).
+
+The underlying issues for these symptoms include things such as,
+- One or more worker node is in an unhealthy state.
+- Worker nodes ran out of CPU, memory, or disk space.
+- Maximum pod limit per cluster reached.
+- App itself has an issue.
+
+To set up monitoring for these conditions, configure alerts based on the following {{site.data.keyword.mon_full_notm}} metrics. Note that your alert thresholds might change depending on your cluster configuration.
+
+| Metric | {{site.data.keyword.mon_full_notm}} metric | Alert threshold |
+| --- | --- | --- |
+| Multiple restarts of a pod in a short amount of time. | `kubernetes.pod.restart.count` | Greater than 4 for the last 10 minutes |
+| No running replicas in a replicaset. | `kubernetes.replicaSet.replicas.running` in `kubernetes.deployment.name` | Less than one. |
+| More than 5 pods pending in cluster. | `kubernetes.namespace.pod.status.name` | Status equals `pending` greater than five.|
+| No replicas in a deployment available. | `kubernets.deployment.replicas.available` | Less than one. |
+| Number of pods per node reaching threshold of 110. | Count by `(kube_cluster_name,kube_node_name)(kube_pod_container_info)` Greater than or equal to 100. Note that this query is a promQL query. |
+| Workloads that are in an unknown state. | `(kube_workload_status_unavailable)` | Greater than or equal to one. Note that this query is a promQL query. |
+{: caption="App level metrics"}
+{: summary="The table shows the app metrics that you can configure. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
+
+
+
+
+
+### Worker node alerts
+{: #worker-node-level-alerts}
+
+Review the following thresholds and alerts for worker nodes.
+{: shortdesc}
+
+|Metric| {{site.data.keyword.mon_full_notm}} metric | Alert threshold |
+| --- | --- | --- |
+| CPU utilization of the worker node over threshold. | `cpu.used.percent` | Greater than 80% for 1 hour. |
+| CPU utilization of the worker node over threshold. | `cpu.used.percent` | Greater than 65% for 24 hours. |
+| Memory utilization of the worker node over threshold. | `memory.used.percent` | Greater than 80 % for 1 hour. |
+| Memory utilization of the worker node over threshold. | `memory.used.percent` | Greater than 65% for 24 hours. |
+| Nodes with memory pressure exist. | `kubernetes.node.memoryPressure` | Greater than or equal to 1 for 10 minutes. |
+| Amount of memory used over threshold. | `memory.bytes.used` | Greater than `NUMBER_OF_BYBTES`. |
+| Nodes with disk pressure exist. | `kubernetes.node.diskPressure` | Greater than or equal to 1 for 10 minutes. |
+| Nodes without disk space exist. | `kubernetes.nodes.outOfDisk` | Greater than or equal to 1. |
+| Average free disk space. | `fs.free.percent` | Less than 20% for 1 hour. |
+| Kubernetes nodes not ready exist. | |kubernetes.node.ready >= 1|
+{: caption="Worker node metrics"}
+{: summary="The table shows worker node metrics that you can configure. Rows are to be read from the left to right, with the name of the metric in column one, and Monitoring parameter in column two, and an example alert threshold in column three."}
+
+#### Resolving worker node alerts
+{: #worker-node-resolve}
+
+Reloading or rebooting the worker can resolve the issue. However, you might need add more workers to increase capacity.
+{: shortdesc}
+
+1. Get your worker nodes and review the [state](/docs/openshift?topic=openshift-worker-node-state-reference). 
+    ```sh
+    kubectl get nodes
+    ```
+    {: pre}
+
+2. If all of the worker nodes are **not** in the `Ready` state, [add worker nodes to your cluster](/docs/containers?topic=containers-add_workers).
+
+3. If all the worker nodes are in the `Ready` state, [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker nodes.
+    1. Describe your worker node and review the **Events** section for common error messages.
+        ```sh
+        kubectl describe node <node>
+        ```
+        {: pre}
+      
+    1. Cordon the node that isn't `Ready` so that you can start investigating.
+
+    1. Drain the worker node. Review the [Kubernetes documentation to safely drain pods from your worker node](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/){: external}.
+        ```sh
+        kubectl drain <node>
+        ```
+        {: pre}
+
+    1. [Reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker node.
+
+All worker nodes in a zone are reaching capacity threshold of 80% (Solution: Add worker nodes in that zone so that load goes below 70%)
+More than 2 worker nodes in one zone are not ready (label: label_failure_domain_beta_kubernetes_io_zone)
+
+### Zone alerts
+{: #zone-level-alerts}
+
+To set up zone level alerts, edit the `sysdig-agent` configmap to include the required label filters.
+{: shortdesc}
+
+1. Edit the configmap by running the followig command.
+    ```sh
+    kubectl edit configmap sysdig-agent -n ibm-observe
+    ```
+    {: pre}
+    
+1. Add the following YAML block after `k8s_cluster_name: <cluster_name>`. Replace `<cluster_name>` with the name of the cluster that you want to you want to monitor.
+    ```yaml
+    k8s_labels_filter:
+      - include: "kubernetes.node.label.kubernetes.io/hostname"
+      - include: "kubernetes.node.label.kubernetes.io/role"
+      - include: "kubernetes.node.label.ibm-cloud.kubernetes.io/zone"
+      - exclude: "*.kubernetes.io/*"
+      - exclude: "*.pod-template-hash"
+      - exclude: "*.pod-template-generation"
+      - exclude: "*.controller-revision-hash"
+      - include: "*"
+     ```
+     {: codeblock}
+
+1. Restart the {{site.data.keyword.mon_full_notm}} pods. Delete all the pods and wait for them to restart. Get the list of pods.
+    ```sh
+    kubectl get pods -n ibm-observe
+    ```
+    {: pre}
+    
+1. Delete the pods to restart them.
+    ```sh
+    kubectl delete pods sysdig-agent-1111 sysdig-agent-2222 sysdig-agent-3333 -n ibm-observe
+    ```
+    {: pre}
+    
+1. Wait 5 minutes for the pods restart. After the pods have restarted, the label that you added earlier is available in {{site.data.keyword.mon_full_notm}}  
+1. Verify that the labels now show by opening the **{{site.data.keyword.mon_full_notm}} dashboard** > **Explore** > **PromQL query**.
+1. Enter `kube_node_labels` in the query field and click `Run Query`. 
+    
+    
+| Metric | PromQL query |
+| --- | --- |
+| CPU usage per zone over threshold | `sum(sysdig_container_cpu_used_percent{agent_tag_cluster="<cluster_name>"}) by (kube_node_label_ibm_cloud_kubernetes_io_zone) / sum (kube_node_info) by (kube_node_label_ibm_cloud_kubernetes_io_zone) > 80` |
+| Memory usage per zone over threshold |`sum(sysdig_container_cpu_used_percent{agent_tag_cluster="<cluster_name>"}) by (kube_node_label_ibm_cloud_kubernetes_io_zone)/ sum (kube_node_info) by (kube_node_label_ibm_cloud_kubernetes_io_zone) > 80` |
+{: caption="Zone level alerts"}
+{: summary="Zone level CPU and memory alerts"}
+
+
+
+### Cluster alerts
+{: #cluster-level-alerts}
+
+Review the following example thresholds for creating alerts at the cluster level.
+{: shortdesc}
+
+- All worker nodes in a region are reaching capacity threshold of 80%.
+- More than 50% of all worker nodes are in an unhealthy state.
+- Reaching maximum number of file and block storage volumes per account (250).
+- Reaching maximum number of worker nodes per cluster (500).
+
+### Account alerts
+{: #account-level-alerts}
+
+You might set up an alert for when the maximum number of clusters per account is reaching the limit. For example, 100 per region/infrastructure provider.
+{: shortdesc}
 
 
 ## Monitoring worker node health in with Autorecovery

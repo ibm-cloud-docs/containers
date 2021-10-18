@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-18"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -160,7 +160,7 @@ If the Ingress subdomain and secret are still unavailable after your cluster is 
     {: screen}
 
     * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) **VPC clusters**: Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer **Name** that starts with `kube-<cluster_ID>`. If you did not install the `infrastructure-service` plug-in, install it by running `ibmcloud plugin install infrastructure-service`.
-    ```
+    ```sh
     ibmcloud is load-balancers
     ```
     {: pre}
