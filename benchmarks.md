@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-15"
+lastupdated: "2021-10-18"
 
 keywords: kubernetes, iks, containers
 
@@ -137,10 +137,10 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 
 
-## Benchmark 1.5 results for Kubernetes versions 1.18 - 1.21
+## Benchmark 1.5 results for Kubernetes versions 1.18 - 1.22
 {: #cis-benchmark-15}
 
-Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.5 CIS Kubernetes benchmark for clusters that run Kubernetes versions 1.18 - 1.21. For help understanding the benchmark, see [Using the benchmark](#cis-benchmark-use).
+Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.5 CIS Kubernetes benchmark for clusters that run Kubernetes versions 1.18 - 1.22. For help understanding the benchmark, see [Using the benchmark](#cis-benchmark-use).
 {: shortdesc}
 
 
