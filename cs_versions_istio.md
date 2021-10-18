@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-18"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -149,21 +149,17 @@ Review the changes that are included in version 1.10.2 of the managed Istio add-
     - [CVE-2021-3580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3580){: external}. 
   
   
-## Version 1.9
+## Version 1.9 (unsupported)
 {: #v19}
 
-Review the changes that are included in version 1.9 of the managed Istio add-on.
-{: shortdesc}
-
+Version 1.9 of the managed Istio add-on is unsupported.
+(: deprecated)
 
 ### Changelog for 1.9.8, released 14 September 2021
 {: #198}
 
 Review the changes that are included in version 1.9.8 of the managed Istio add-on.
 {: shortdesc}
-
-This the final update for version 1.9, which becomes unsupported on 14 October 2021.
-(: deprecated}
 
 **Previous version**: 1.9.7  
 **Current version**: 1.9.8   
@@ -266,14 +262,14 @@ Review the changes that are included in version 1.9.2 of the managed Istio add-o
 ## Version 1.8 (unsupported)
 {: #v18}
 
+Version 1.8 of the managed Istio add-on is unsupported.
+(: deprecated)
+
 ### Changelog for 1.8.6, released 27 May 2021
 {: #186}
 
 Review the changes that are included in version 1.8.6 of the managed Istio add-on.
 {: shortdesc}
-
-This the final update for version 1.8, which becomes unsupported on 01 July 2021.
-(: deprecated)
 
 **Previous version** 1.8.5  
 **Current version** 1.8.6  
@@ -395,6 +391,9 @@ Review the changes that are included in version 1.8.0 of the managed Istio add-o
 
 ## Version 1.7 (unsupported)
 {: #v17}
+
+Version 1.7 of the managed Istio add-on is unsupported.
+(: deprecated)
 
 ### Changelog for 1.7.8, released 10 March 2021
 {: #178}
@@ -537,6 +536,9 @@ Review the changes that are included in version 1.7.0 of the managed Istio add-o
   
 ## Version 1.6 (unsupported)
 {: #v16}
+
+Version 1.6 of the managed Istio add-on is unsupported.
+(: deprecated)
 
 ### Differences between version 1.6 of managed and community Istio
 {: #diff-managed-comm-16}
@@ -699,11 +701,12 @@ Review the changes that are included in version 1.6 of the managed Istio add-on.
 - Support is added for the `istio-knative-cluster-local-gateway-enabled` and `istio-monitoring-telemetry` options in the [`managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize). You can use these options to manage inclusion of Knative apps in the service mesh and the Istio telemetry enablement. Support for {{site.data.keyword.mon_full_notm}} is enabled for Istio by default.
   
   
-  
-
 
 ## Version 1.5 (unsupported)
 {: #v15}
+
+Version 1.5 of the managed Istio add-on is unsupported.
+(: deprecated)
 
 ### Differences between version 1.5 of managed and community Istio
 {: #diff-managed-comm}
@@ -853,6 +856,9 @@ Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes ve
 
 ## Version 1.4 (unsupported)
 {: #v14}
+
+Version 1.4 of the managed Istio add-on is unsupported.
+(: deprecated)
 
 ## Changelog for 1.4.9, released 18 May 2020
 {: #149}

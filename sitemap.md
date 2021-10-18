@@ -3269,7 +3269,7 @@ subcollection: containers
 
     * [Changelog for 1.10.2, released 15 July 2021](/docs/containers?topic=containers-istio-changelog#1102)
 
-* [Version 1.9](/docs/containers?topic=containers-istio-changelog#v19)
+* [Version 1.9 (unsupported)](/docs/containers?topic=containers-istio-changelog#v19)
 
     * [Changelog for 1.9.8, released 14 September 2021](/docs/containers?topic=containers-istio-changelog#198)
 

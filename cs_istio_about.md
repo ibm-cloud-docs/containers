@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-18"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -62,14 +62,14 @@ If you need to use the latest version of Istio or customize your Istio installat
 ## What comes with the Istio add-on?
 {: #istio_ov_components}
 
-In Kubernetes clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.11.2.
+In Kubernetes clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.11.3.
 {: shortdesc}
 
 The Istio add-on installs the core components of Istio. For more information about any of the following control plane components, see the [Istio documentation](https://istio.io/latest/about/service-mesh/){: external}.
 * `Envoy` proxies inbound and outbound traffic for all services in the mesh. Envoy is deployed as a sidecar container in the same pod as your app container.
 * `istiod` unifies functionality that Pilot, Galley, Citadel, and the sidecar injector previously performed into a single control plane package.
 * The `istio-ingressgateway` and `istio-egressgateway` control incoming traffic to and outgoing traffic from your Istio-managed apps.
-* The Istio operator (`addon-istio-operator` in Istio version 1.10 or later, or `managed-istio-operator` in Istio version 1.19 or earlier) in the `ibm-operators` namespace validates and reconciles any custom Istio operator (IOP) changes that you make.
+* The Istio operator (`addon-istio-operator` in Istio version 1.10 or later, or `managed-istio-operator` in Istio version 1.9 or earlier) in the `ibm-operators` namespace validates and reconciles any custom Istio operator (IOP) changes that you make.
 
 
 ## Limitations

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-15"
+lastupdated: "2021-10-18"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -42,7 +42,7 @@ Before you begin
 
 1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the Istio add-on.
 
-2. Click the **Add-ons** tab.
+2. Navigate to the **Add-ons** section.
 
 3. On the Managed Istio card, click **Install**.
 
@@ -55,7 +55,13 @@ Before you begin
 
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.11.2, is installed.
+2. Review the supported [Istio versions](/docs/containers?topic=containers-istio-changelog).
+    ```sh
+    ibmcloud ks addon-versions --addon istio
+    ```
+    {: pre}
+
+2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.11.3, is installed.
     ```sh
     ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
     ```
@@ -71,7 +77,7 @@ Before you begin
 
     ```sh
     NAME            Version     Health State   Health Status
-    istio           1.11.2       normal         Addon Ready
+    istio           1.11.3       normal         Addon Ready
     ```
     {: screen}
 
@@ -103,13 +109,13 @@ Install the `istioctl` CLI client. For more information, see the [`istioctl` com
 
 2. Download the version of `istioctl` that matches your cluster's Istio version.
     ```sh
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.11.2 sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.11.3 sh -
     ```
     {: pre}
 
 3. Navigate to the Istio package directory.
     ```sh
-    cd istio-1.11.2
+    cd istio-1.11.3
     ```
     {: pre}
 
@@ -217,25 +223,25 @@ You can customize a set of Istio configuration options by editing the `managed-i
         Example output
 
         ```sh
-        data plane version: version.ProxyInfo{ID:"test-6f86fc4677-vsbsf.default", IstioVersion:"1.11.2"}
-        data plane version: version.ProxyInfo{ID:"rerun-xfs-f8958bb94-j6n89.default", IstioVersion:"1.11.2"}
-        data plane version: version.ProxyInfo{ID:"test2-5cbc75859c-jh6bx.default", IstioVersion:"1.11.2"}
-        data plane version: version.ProxyInfo{ID:"minio-test-78b5d4597d-hkpvt.default", IstioVersion:"1.11.2"}
-        data plane version: version.ProxyInfo{ID:"sb-887f89d7d-7s8ts.default", IstioVersion:"1.11.2"}
-        data plane version: version.ProxyInfo{ID:"gid-deployment-5dc86db4c4-kdshs.default", IstioVersion:"1.11.2"}
+        data plane version: version.ProxyInfo{ID:"test-6f86fc4677-vsbsf.default", IstioVersion:"1.11.3"}
+        data plane version: version.ProxyInfo{ID:"rerun-xfs-f8958bb94-j6n89.default", IstioVersion:"1.11.3"}
+        data plane version: version.ProxyInfo{ID:"test2-5cbc75859c-jh6bx.default", IstioVersion:"1.11.3"}
+        data plane version: version.ProxyInfo{ID:"minio-test-78b5d4597d-hkpvt.default", IstioVersion:"1.11.3"}
+        data plane version: version.ProxyInfo{ID:"sb-887f89d7d-7s8ts.default", IstioVersion:"1.11.3"}
+        data plane version: version.ProxyInfo{ID:"gid-deployment-5dc86db4c4-kdshs.default", IstioVersion:"1.11.3"}
         ```
         {: screen}
 
-    2. Restart each pod by deleting it. In the output of the previous step, the pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"1.11.2"}`.
+    2. Restart each pod by deleting it. In the output of the previous step, the pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"1.11.3"}`.
         ```sh
         kubectl delete pod <pod_name> -n <namespace>
         ```
         {: pre}
 
-If you later want to change a setting that you added to the configmap, you can use a patch script. For example, if you added the `istio-global-proxy-accessLogFile: "/dev/stdout"` setting and later want to change it back to `""`, you can run `kubectl patch cm managed-istio-custom -n ibm-operators --type='json' -p='[{"op": "add", "path": "/data/istio-global-proxy-accessLogFile", "value":""}]'`. /n Need to debug your customization setup? Check the logs for the `addon-istio-operator` (Istio version 1.10 or later) or `managed-istio-operator` (Istio version 1.19 or earlier) pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`. The Istio operator validates and reconciles any custom Istio changes that you make.
+**Want to change a configmap setting?**: If you later want to change a setting that you added to the configmap, you can use a patch script. For example, if you added the `istio-global-proxy-accessLogFile: "/dev/stdout"` setting and later want to change it back to `""`, you can run `kubectl patch cm managed-istio-custom -n ibm-operators --type='json' -p='[{"op": "add", "path": "/data/istio-global-proxy-accessLogFile", "value":""}]'`. **Need to debug your customization setup?**: Check the logs for the `addon-istio-operator` (Istio version 1.10 or later) or `managed-istio-operator` (Istio version 1.9 or earlier) pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`. The Istio operator validates and reconciles any custom Istio changes that you make.
 {: tip}
 
-If you disable the Istio add-on, the `managed-istio-custom` configmap is not removed during uninstallation. When you re-enable the Istio add-on, your customized configmap is applied during installation. /n If you do not want to re-use your custom settings in a later installation of Istio, you must delete the configmap after you disable the Istio add-on by running `kubectl delete cm -n ibm-operators managed-istio-custom`. When you re-enable the Istio add-on, the default configmap is applied during installation.
+If you disable the Istio add-on, the `managed-istio-custom` configmap is not removed during uninstallation. When you re-enable the Istio add-on, your customized configmap is applied during installation. If you do not want to re-use your custom settings in a later installation of Istio, you must delete the configmap after you disable the Istio add-on by running `kubectl delete cm -n ibm-operators managed-istio-custom`. When you re-enable the Istio add-on, the default configmap is applied during installation.
 {: note}
 
 
@@ -338,13 +344,13 @@ For example, the patch version of your add-on might be updated automatically by 
 
     ```sh
     client version: version.BuildInfo{Version:"1.11.2"}
-    pilot version: version.BuildInfo{Version:1.11.2}
-    pilot version: version.BuildInfo{Version:1.11.2}
-    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-vp97p.istio-system", IstioVersion:1.11.2}
-    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-qkhgm.istio-system", IstioVersion:1.11.2}
-    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-dffhq.istio-system", IstioVersion:1.11.2}
-    data plane version: version.ProxyInfo{ID:"httpbin-74fb669cc6-svc8x.default", IstioVersion:1.11.2}
-    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-cs9r9.istio-system", IstioVersion:1.11.2}
+    pilot version: version.BuildInfo{Version:1.11.3}
+    pilot version: version.BuildInfo{Version:1.11.3}
+    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-vp97p.istio-system", IstioVersion:1.11.3}
+    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-qkhgm.istio-system", IstioVersion:1.11.3}
+    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-dffhq.istio-system", IstioVersion:1.11.3}
+    data plane version: version.ProxyInfo{ID:"httpbin-74fb669cc6-svc8x.default", IstioVersion:1.11.3}
+    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-cs9r9.istio-system", IstioVersion:1.11.3}
     ...
     ```
     {: screen}
@@ -353,14 +359,14 @@ For example, the patch version of your add-on might be updated automatically by 
     1. Download the `istioctl` client of the same version as the control plane components.
     
         ```sh
-        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.11.2 sh -
+        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.11.3 sh -
         ```
         {: pre}
 
     2. Navigate to the Istio package directory.
     
         ```sh
-        cd istio-1.11.2
+        cd istio-1.11.3
         ```
         {: pre}
 
@@ -437,7 +443,7 @@ Uninstall the add-on from the console or CLI.
 
 1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to remove the Istio add-on.
 
-2. Click the **Add-ons** tab.
+2. Navigate to the **Add-ons** section.
 
 3. On the Managed Istio card, click the Action menu icon.
 
@@ -528,7 +534,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 - If you previously installed BookInfo in the cluster, clean up those resources.
     1. Change the directory to the Istio file location.
         ```sh
-        cd <filepath>/istio-1.11.2
+        cd <filepath>/istio-1.11.3
         ```
         {: pre}
 
