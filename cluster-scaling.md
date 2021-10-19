@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-15"
+lastupdated: "2021-10-19"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -879,7 +879,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 1. Optional: To refer to your autoscaling settings later, make a backup of your configmap.
 
     ```sh
-    kubectl get cm iks-ca-configmap -o yaml > backup_configmap.yaml
+    kubectl get cm iks-ca-configmap -n kube-system -o yaml > backup_configmap.yaml
     ```
     {: pre}
 
