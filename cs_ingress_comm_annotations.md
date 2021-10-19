@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-15"
+lastupdated: "2021-10-19"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -871,8 +871,8 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
           name: ibm-ingress-deploy-config
           namespace: kube-system
         data:
-          <alb1-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
-          <alb2-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
+          <alb1-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
+          <alb2-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>","logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
           ...
         ```
         {: screen}
@@ -891,6 +891,13 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
         
         `ingressClass`
         :   If you specified a class other than `public-iks-k8s-nginx` or `private-iks-k8s-nginx` in your Ingress resource, specify the class.
+        
+        `logLevel`
+        :   Specify the log level that you want to use. Choose from the following values. 
+        :   `--v=2`: Shows the details by using diff about the changes in the configuration in `NGINX`. 
+        :   `--v=3`: Shows the details about the service, Ingress rule, endpoint changes in JSON format.
+        :   `--v=5`: Configures `NGINX` in debug mode.
+        :   For more information about logging, see [Debug Logging](https://kubernetes.github.io/ingress-nginx/troubleshooting/#debug-logging){: external}.
         
         `replicas`
         :   By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods. For more information, see [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-types#scale_albs).

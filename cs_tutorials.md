@@ -110,7 +110,7 @@ Because it can take a few minutes to provision, create your cluster before you s
 
     When your worker node is finished provisioning, the status changes to **Ready** and you can start binding {{site.data.keyword.cloud_notm}} services.
 
-    ```
+    ```sh
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
     kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.20.11
     ```
@@ -129,7 +129,7 @@ Because it can take a few minutes to provision, create your cluster before you s
         ```
         {: pre}
 
-        **Example output**
+        Example output
         ```sh
         <cluster_name>/<cluster_ID>
         ```
@@ -238,7 +238,7 @@ To deploy the app:
 
     When the build is complete, verify that you see the following success message:
 
-    ```
+    ```sh
     Successfully built <image_ID>
     Successfully tagged <region>.icr.io/<namespace>/hello-world:1
     The push refers to a repository [<region>.icr.io/<namespace>/hello-world]
@@ -259,7 +259,7 @@ To deploy the app:
     {: pre}
 
     **Example output**
-    ```
+    ```sh
     deployment "hello-world-deployment" created
     ```
     {: screen}
@@ -273,7 +273,7 @@ To deploy the app:
 
     **Example output**
     
-    ```
+    ```sh
     service "hello-world-service" exposed
     ```
     {: screen}
@@ -330,7 +330,7 @@ To deploy the app:
         {: screen}
 
 7. Open a browser and check out the app with the following URL: `http://<IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. When you enter that URL in a browser, you can see the following text.
-    ```
+    ```sh
     Hello world! Your app is up and running in a cluster!
     ```
     {: screen}
@@ -349,8 +349,6 @@ Good job! You deployed your first version of the app.
 
 Too many commands in this lesson? Agreed. How about using a configuration script to do some of the work for you? To use a configuration script for the second version of the app, and to create higher availability by deploying multiple instances of that app, continue to the next lesson.
 
-**Clean up**
-
 Want to delete the resources that you created in this lesson before you move on? When you created the deployment, Kubernetes assigned the deployment a label, `app=hello-world-deployment` (or whatever you named the deployment). Then, when you exposed the deployment, Kubernetes applied the same label to the service that was created. Labels are useful tools for you to organize your Kubernetes resources so that you can apply bulk actions such as `get` or `delete` to them.
 
 You can check all your resources that have the `app=hello-world-deployment` label.
@@ -367,9 +365,9 @@ kubectl delete all -l app=hello-world-deployment
 ```
 {: pre}
 
-**Example output**
+Example output
 
-```
+```sh
 pod "hello-world-deployment-5c78f9b898-b9klb" deleted
 service "hello-world-service" deleted
 deployment.apps "hello-world-deployment" deleted
@@ -409,7 +407,7 @@ If you took a break from the last lesson, make sure that you log back in to your
     {: pre}
 
     Verify that you see the success message.
-    ```
+    ```sh
     Successfully built <image_ID>
     Successfully tagged <region>.icr.io/<namespace>/hello-world:1
     The push refers to a repository [<region>.icr.io/<namespace>/hello-world]
@@ -425,19 +423,19 @@ If you took a break from the last lesson, make sure that you log back in to your
 
 3. In the `Lab 2` directory, open the `healthcheck.yml` file with a text editor. This configuration script combines a few steps from the previous lesson to create a deployment and a service at the same time. The PR firm's app developers can use these scripts when updates are made or to troubleshoot issues by re-creating the pods.
     1. Update the details for the image in your private registry namespace.
-        ```
+        ```sh
         image: "<region>.icr.io/<namespace>/hello-world:2"
         ```
         {: codeblock}
 
     2. In the **Deployment** section, note the `replicas`. Replicas are the number instances of your app. Running three instances makes the app more highly available than just one instance.
-        ```
+        ```sh
         replicas: 3
         ```
         {: codeblock}
 
     3. Note the HTTP liveness probe that checks the health of the container every 5 seconds.
-        ```
+        ```sh
         livenessProbe:
           httpGet:
             path: /healthz
@@ -455,8 +453,8 @@ If you took a break from the last lesson, make sure that you log back in to your
     ```
     {: pre}
 
-    **Example output**
-    ```
+    Example output
+    ```sh
     deployment "hw-demo-deployment" created
     service "hw-demo-service" created
     ```
@@ -469,7 +467,7 @@ If you took a break from the last lesson, make sure that you log back in to your
     {: pre}
 
     With the example values, the URL is `http://169.xx.xxx.xxx:30072`. In a browser, you might see the following text. If you do not see this text, don't worry. This app is designed to go up and down.
-    ```
+    ```sh
     Hello world! Great job getting the second stage up and running!
     ```
     {: screen}
@@ -477,7 +475,7 @@ If you took a break from the last lesson, make sure that you log back in to your
     You can also check `http://169.xx.xxx.xxx:30072/healthz` for status.
 
     For the first 10 - 15 seconds, a 200 message is returned, so you know that the app is running successfully. After those 15 seconds, a timeout message is displayed. This is an expected behavior.
-    ```
+    ```sh
     {
         "error": "Timeout, Health check error!"
     }
@@ -487,7 +485,7 @@ If you took a break from the last lesson, make sure that you log back in to your
 6. Check your pod status to monitor the health of your app in Kubernetes. You can check the status from the CLI or in the Kubernetes dashboard.
     * **From the CLI**: Watch what is happening to your pods as they change status.
       
-      ```
+      ```sh
       kubectl get pods -o wide -w
       ```
       {: pre}
@@ -496,7 +494,7 @@ If you took a break from the last lesson, make sure that you log back in to your
       1. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
       2. In the **Workloads** tab, you can see the resources that you created. From this tab, you can continually refresh and see that the health check is working. In the **Pods** section, you can see how many times the pods are restarted when      containers in them are re-created. If you happen to catch the following error in the dashboard, this message indicates that the health check caught a problem. Give it a few minutes and refresh again. You see the number of restarts changes for each pod.
 
-          ```
+          ```sh
           Liveness probe failed: HTTP probe failed with statuscode: 500
           Back-off restarting failed docker container
           Error syncing pod, skipping: failed to "StartContainer" for "hw-container" w      CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-d     deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
@@ -505,7 +503,7 @@ If you took a break from the last lesson, make sure that you log back in to your
 
 Nice, you deployed the second version of the app. You had to use fewer commands, learned how health checks work, and edited a deployment, which is great! The Hello world app passed the test for the PR firm. Now, you can deploy a more useful app for the PR firm to start analyzing press releases.
 
-**Clean up**
+Clean up**
 
 Ready to delete what you created before you continue to the next lesson? This time, you can use the same configuration script to delete both of the resources that you created.
 
@@ -514,9 +512,9 @@ kubectl delete -f healthcheck.yml
 ```
 {: pre}
 
-**Example output**
+Example output
 
-```
+```sh
 deployment "hw-demo-deployment" deleted
 service "hw-demo-service" deleted
 ```
@@ -559,13 +557,13 @@ If you took a break from the last lesson, make sure that you log back in to your
         {: pre}
 
     2. Build, tag, and push the `watson` app as an image to your namespace in {{site.data.keyword.registrylong_notm}}. Again, don't forget the period (`.`) at the end of the command.
-        ```
+        ```sh
         ibmcloud cr build -t <region>.icr.io/<namespace>/watson .
         ```
         {: pre}
 
         Verify that you see the success message.
-        ```
+        ```sh
         Successfully built <image_id>
         ```
         {: screen}
@@ -576,7 +574,7 @@ If you took a break from the last lesson, make sure that you log back in to your
         ```
         {: pre}
 
-        ```
+        ```sh
         ibmcloud cr build -t <region>.icr.io/<namespace>/watson-talk .
         ```
         {: pre}
@@ -587,9 +585,9 @@ If you took a break from the last lesson, make sure that you log back in to your
     ```
     {: pre}
 
-    **Example output**
+    Example output
 
-    ```
+    ```sh
     Listing images...
 
     REPOSITORY                        NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
@@ -601,19 +599,19 @@ If you took a break from the last lesson, make sure that you log back in to your
 4. In the `Lab 3` directory, open the `watson-deployment.yml` file with a text editor. This configuration script includes a deployment and a service for both the `watson` and `watson-talk` components of the app.
     1. Update the details for the image in your registry namespace for both deployments.
         **watson**
-        ```
+        ```sh
         image: "<region>.icr.io/<namespace>/watson"
         ```
         {: codeblock}
 
         **watson-talk**
-        ```
+        ```sh
         image: "<region>.icr.io/<namespace>/watson-talk"
         ```
         {: codeblock}
 
     2. In the volumes section of the `watson-pod` deployment, update the name of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} secret that you created in [Lesson 2](#cs_cluster_tutorial_lesson2). By mounting the Kubernetes secret as a volume to your deployment, you make the {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) API key available to the container that runs in your pod. The {{site.data.keyword.watson}} app components in this tutorial are configured to look up the API key by using the volume mount path.
-        ```
+        ```sh
         volumes:
         - name: service-bind-volume
           secret:
@@ -657,8 +655,8 @@ If you took a break from the last lesson, make sure that you log back in to your
         ```
         {: pre}
 
-        **Example output**
-        ```
+        Example output
+        ```sh
         Volumes:
           service-bind-volume:
             Type:       Secret (a volume populated by a Secret)
@@ -671,13 +669,13 @@ If you took a break from the last lesson, make sure that you log back in to your
 
 7. Open a browser and analyze some text. The format of the URL is `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`.
     
-    ```
+    ```sh
     http://169.xx.xxx.xxx:30080/analyze/"Today is a beautiful day"
     ```
     {: codeblock}
 
     In a browser, you can see the JSON response for the text you entered.
-    ```
+    ```sh
     {
         "document_tone": {
         "tone_categories": [
@@ -718,7 +716,7 @@ Change the name of the image:
     Depending on your operating system, either a vi editor opens or a text editor opens.
     
 2. Change the name of the image to `ibmliberty`.
-    ```
+    ```sh
     spec:
         containers:
         - image: icr.io/ibm/liberty:latest
@@ -733,7 +731,7 @@ Change the name of the image:
     {: pre}
 
     Wait for confirmation that the rollout is complete.
-    ```
+    ```sh
     deployment "watson-talk-pod" successfully rolled out
     ```
     {: screen}
@@ -742,7 +740,6 @@ Change the name of the image:
 
 Good job! You deployed the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app and learned how to perform a simple app update. The PR firm can use this deployment to start analyzing their press releases with the latest AI technology.
 
-**Clean up**
 
 Ready to delete the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app that you created in your {{site.data.keyword.containerlong_notm}} cluster? You can use the configuration script to delete the resources that you created.
 
@@ -751,9 +748,9 @@ kubectl delete -f watson-deployment.yml
 ```
 {: pre}
 
-**Example output**
+Example output
 
-```
+```sh
 deployment "watson-pod" deleted
 deployment "watson-talk-pod" deleted
 service "watson-service" deleted

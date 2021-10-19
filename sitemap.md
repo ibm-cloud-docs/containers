@@ -3249,17 +3249,69 @@ subcollection: containers
 
 * [Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
 
-    * [Version 1.0.0 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#1_0_0)
+* [Version 1.0.0 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#1_0_0)
 
-    * [Version 0.49.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_49_0)
+    * [Version 1.0.3_1730_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.3_1730_iks)
 
-    * [Version 0.48.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_48_0)
+    * [Version 1.0.0_1699_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.0_1699_iks)
 
-    * [Version 0.47.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_47_0)
+    * [Version 1.0.0_1645_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.0_1645_iks)
 
-    * [Version 0.45.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_45_0)
+* [Version 0.49.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_49_0)
 
-    * [Version 0.43.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_43_0)
+    * [Version 0.49.3_1745_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.49.3_1745_iks)
+
+* [Version 0.48.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_48_0)
+
+    * [Version 0.48.1_1698_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1698_iks)
+
+    * [Version 0.48.1_1613_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1613_iks)
+
+    * [Version 0.48.1_1579_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1579_iks)
+
+    * [Version 0.48.1_1541_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1541_iks)
+
+    * [Version 0.48.1_1465_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1465_iks)
+
+* [Version 0.47.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_47_0)
+
+    * [Version 0.47.0_1614_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1614_iks)
+
+    * [Version 0.47.0_1578_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1578_iks)
+
+    * [Version 0.47.0_1540_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1540_iks)
+
+    * [Version 0.47.0_1480_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1480_iks)
+
+    * [Version 0.47.0_1434_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1434_iks)
+
+    * [Version 0.47.0_1376_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1376_iks)
+
+    * [Version 0.47.0_1341_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1341_iks)
+
+* [Version 0.45.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_45_0)
+
+    * [Version 0.45.0_1482_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.45.0_1482_iks)
+
+    * [Version 0.45.0_1435_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.45.0_1435_iks)
+
+    * [Version 0.45.0_1329_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.45.0_1329_iks)
+
+    * [Version regression](/docs/containers?topic=containers-cluster-add-ons-changelog#regression)
+
+    * [Version 0.45.0_1228_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.45.0_1228_iks)
+
+* [Version 0.43.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_43_0)
+
+    * [Version 0.43.0_1697_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.43.0_1697_iks)
+
+    * [Version 0.43.0_1612_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.43.0_1612_iks)
+
+    * [Version 0.43.0_1580_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.43.0_1580_iks)
+
+    * [Version 0.43.0_1539_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.43.0_1539_iks)
+
+* [Archive](/docs/containers?topic=containers-cluster-add-ons-changelog#archive-unsupported)
 
     * [Version 0.35.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0)
 

@@ -38,20 +38,20 @@ The Kubernetes Ingress version follows the format `<community_version>_<ibm_buil
 
 When automatic updates are enabled for ALBs, your ALBs are updated to the most recent build of the version that is marked as `default`. If you want to use a version other than the default, you must [disable automatic updates](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable). Typically, the latest version becomes the default version one month after the latest version is released by the Kubernetes community. Actual availability and release dates of versions are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 
-### Version 1.0.0 (default)
+## Version 1.0.0 (default)
 {: #1_0_0}
 
 For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following table for a summary of changes for each build of version 1.0.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
-#### Version 1.0.3_1730_iks
+### Version 1.0.3_1730_iks
 {: #1.0.3_1730_iks}
 
 Version 1.0.3_1730_iks of the Kubernetes Ingress image was released on 19 October 2021.
 
 
 
-#### Version 1.0.0_1699_iks
+### Version 1.0.0_1699_iks
 {: #1.0.0_1699_iks}
 
 Version 1.0.0_1699_iks of the Kubernetes Ingress image was released on 22 September 2021.
@@ -63,41 +63,44 @@ Updates address
 - [CVE-2021-22946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22946){:external}
 - [CVE-2021-22947](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22947){:external}
 
-#### Version 1.0.0_1645_iks
+### Version 1.0.0_1645_iks
 {: #1.0.0_1645_iks}
 
 Version 1.0.0_1645_iks of the Kubernetes Ingress image was released on 14 September 2021
 
-### Version 0.49.0
+## Version 0.49.0
 {: #0_49_0}
 
 For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following sections for a summary of changes for each build of version 0.49.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
-#### Version 0.49.3_1745_iks
+### Version 0.49.3_1745_iks
 {: #0.49.3_1745_iks}
 
 Version 0.49.3_1745_iks of the Kubernetes Ingress image was released on 19 October 2021
 
 **As of 14 Sep 2021, this is the only image supported for Kubernetes version 1.18 clusters**. 
 
-### Version 0.48.0 
+## Version 0.48.0 
 {: #0_48_0}
 
 For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0480){: external}. Refer to the following table for a summary of changes for each build of version 0.48.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
-#### Version 0.48.1_1698_iks
+### Version 0.48.1_1698_iks
 {: #0.48.1_1698_iks}
 
 Version 0.48.1_1698_iks of the Kubernetes Ingress image was released on 22 September 2021.
+
+This image is no longer available.
+{: note}
 
 Updates to address
 - [CVE-2021-22945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22945){:external}
 - [CVE-2021-22946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22946){:external}
 - [CVE-2021-22947](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22947){:external}
 
-#### Version 0.48.1_1613_iks
+### Version 0.48.1_1613_iks
 {: #0.48.1_1613_iks}
 
 Version 0.48.1_1613_iks of the Kubernetes Ingress image was released on 09 September 2021.
@@ -106,14 +109,14 @@ Updates to address
 - [CVE-2021-3711](https://nvd.nist.gov/vuln/detail/CVE-2021-3711){: external}
 - [CVE-2021-3712](https://nvd.nist.gov/vuln/detail/CVE-2021-3712){: external}
 
-#### Version 0.48.1_1579_iks
+### Version 0.48.1_1579_iks
 {: #0.48.1_1579_iks}
 
 Version 0.48.1_1579_iks of the Kubernetes Ingress image was released on 01 September 2021.
 
 Updates to support arbitrary controller values in the Ingress classes.
 
-#### Version 0.48.1_1541_iks
+### Version 0.48.1_1541_iks
 {: #0.48.1_1541_iks}
 
 Version 0.48.1_1541_iks of the Kubernetes Ingress image was released on 23 August 2021.
@@ -122,21 +125,21 @@ Updates to address
 - [CVE-2021-36221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36221){: external}
 - [CVE-2021-3121](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3121){: external}
 
-#### Version 0.48.1_1465_iks
+### Version 0.48.1_1465_iks
 {: #0.48.1_1465_iks}
 
 Version 0.48.1_1465_iks of the Kubernetes Ingress image was released on 10 August 2021.
 
 Version 0.48.1_1465_iks is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto-update enabled, your ALBs automatically update to use this image.
 
-### Version 0.47.0 
+## Version 0.47.0 
 {: #0_47_0}
 
 For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0470){: external}. Refer to the following table for a summary of changes for each build of version 0.47.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 
-#### Version 0.47.0_1614_iks
+### Version 0.47.0_1614_iks
 {: #0.47.0_1614_iks}
 
 Version 0.47.0_1614_iks of the Kubernetes Ingress image was released on 09 September 2021.
@@ -148,14 +151,14 @@ Updates to address
 - [CVE-2021-3711](https://nvd.nist.gov/vuln/detail/CVE-2021-3711){: external}
 - [CVE-2021-3712](https://nvd.nist.gov/vuln/detail/CVE-2021-3712){: external}
 
-#### Version 0.47.0_1578_iks
+### Version 0.47.0_1578_iks
 {: #0.47.0_1578_iks}
 
 Version 0.47.0_1578_iks of the Kubernetes Ingress image was released on 01 September 2021.
 
 Updates to support arbitrary controller values in the Ingress classes.
 
-#### Version 0.47.0_1540_iks
+### Version 0.47.0_1540_iks
 {: #0.47.0_1540_iks}
 
 Version 0.47.0_1540_iks of the Kubernetes Ingress image was released on 23 August 2021.
@@ -164,7 +167,7 @@ Updates to address
 - [CVE-2021-36221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36221){: external}
 - [CVE-2021-3121](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3121){: external}
 
-#### Version 0.47.0_1480_iks
+### Version 0.47.0_1480_iks
 {: #0.47.0_1480_iks}
 
 Version 0.47.0_1480_iks of the Kubernetes Ingress image was released on 10 August 2021.
@@ -172,7 +175,7 @@ Version 0.47.0_1480_iks of the Kubernetes Ingress image was released on 10 Augus
 Updates to address
 - [CVE-2021-34558](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-34558){: external}
 
-#### Version 0.47.0_1434_iks
+### Version 0.47.0_1434_iks
 {: #0.47.0_1434_iks}
 
 Version 0.47.0_1434_iks of the Kubernetes Ingress image was released on 02 August 2021.
@@ -182,27 +185,27 @@ Updates to address
 - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
 - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
 
-#### Version 0.47.0_1376_iks
+### Version 0.47.0_1376_iks
 {: #0.47.0_1376_iks}
 
 Version 0.47.0_1376_iks of the Kubernetes Ingress image was released on 06 July 2021.
 
 Updates to address [CVE-2019-20633](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2019-20633){: external}.
 
-#### Version 0.47.0_1341_iks
+### Version 0.47.0_1341_iks
 {: #0.47.0_1341_iks}
 
 Version 0.47.0_1341_iks of the Kubernetes Ingress image was released on 21 June 2021.
 
 Version 0.47.0 is now the default version for all ALBs that run the Kubernetes Ingress image.
 
-### Version 0.45.0
+## Version 0.45.0
 {: #0_45_0}
 
 For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0450){: external}. Refer to the following table for a summary of changes for each build of version 0.45.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
-#### Version 0.45.0_1482_iks
+### Version 0.45.0_1482_iks
 {: #0.45.0_1482_iks}
 
 Version 0.45.0_1482_iks of the Kubernetes Ingress image was released on 10 August 2021.
@@ -210,7 +213,7 @@ Version 0.45.0_1482_iks of the Kubernetes Ingress image was released on 10 Augus
 This image is no longer available.
 {: note}
 
-#### Version 0.45.0_1435_iks
+### Version 0.45.0_1435_iks
 {: #0.45.0_1435_iks}
 
 Version 0.45.0_1435_iks of the Kubernetes Ingress image was released on 02 August 2021.
@@ -220,7 +223,7 @@ Updates to address
 - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
 - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
 
-#### Version 0.45.0_1329_iks
+### Version 0.45.0_1329_iks
 {: #0.45.0_1329_iks}
 
 Version 0.45.0_1329_iks of the Kubernetes Ingress image was released on 21 June 2021.
@@ -232,14 +235,14 @@ Updates to address
 - [CVE-2021-33194](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-33194){: external}
 - [CVE-2021-31525](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-31525){: external}
 
-#### Version regression
+### Version regression
 {: #regression}
 
 This update was released on 25 May 2021.
 
 Due to a [regression in the community Kubernetes Ingress NGINX code](https://github.com/kubernetes/ingress-nginx/issues/6931){: external}, trailing slashes (`/`) are removed from subdomains during TLS redirects.
 
-#### Version 0.45.0_1228_iks
+### Version 0.45.0_1228_iks
 {: #0.45.0_1228_iks}
 
 Version 0.45.0_1228_iks of the Kubernetes Ingress image was released on 23 April 2021.
@@ -247,23 +250,26 @@ Version 0.45.0_1228_iks of the Kubernetes Ingress image was released on 23 April
 Version 0.45.0 is now the default version for all ALBs that run the Kubernetes Ingress image.
 
 
-### Version 0.43.0
+## Version 0.43.0
 {: #0_43_0}
 
 For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0430){: external}. Refer to the following table for a summary of changes for each build of version 0.43.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
-#### Version 0.43.0_1697_iks
+### Version 0.43.0_1697_iks
 {: #0.43.0_1697_iks}
 
 Version 0.43.0_1697_iks of the Kubernetes Ingress image was released on 22 September 2021.
+
+This image is no longer available.
+{: note}
 
 Updates to address 
 - [CVE-2021-22945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22945){:external}
 - [CVE-2021-22946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22946){:external}
 - [CVE-2021-22947](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22947){:external}
 
-#### Version 0.43.0_1612_iks
+### Version 0.43.0_1612_iks
 {: #0.43.0_1612_iks}
 
 Version 0.43.0_1612_iks of the Kubernetes Ingress image was released on 09 September 2021.
@@ -272,14 +278,14 @@ Updates to address
 - [CVE-2021-3711](https://nvd.nist.gov/vuln/detail/CVE-2021-3711){: external} 
 - [CVE-2021-3712](https://nvd.nist.gov/vuln/detail/CVE-2021-3712){: external}
 
-#### Version 0.43.0_1580_iks
+### Version 0.43.0_1580_iks
 {: #0.43.0_1580_iks}
 
 Version 0.43.0_1580_iks of the Kubernetes Ingress image was released on 01 September 2021.
 
 Updates to support arbitrary controller values in the Ingress classes.
 
-#### Version 0.43.0_1539_iks
+### Version 0.43.0_1539_iks
 {: #0.43.0_1539_iks}
 
 Version 0.43.0_1539_iks of the Kubernetes Ingress image was released on 23 August 2021.
@@ -287,7 +293,8 @@ Version 0.43.0_1539_iks of the Kubernetes Ingress image was released on 23 Augus
 Updates to address
 - [CVE-2021-36221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36221){: external}
 - [CVE-2021-3121](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3121){: external}
-
+## Archive
+{: #archive-unsupported}
 
 ### Version 0.35.0
 {: #0_35_0}

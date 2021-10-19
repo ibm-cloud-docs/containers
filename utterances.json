@@ -32,7 +32,7 @@
     "How to verify that the service is linked for Ingress ",
     "check the service is linked correctly to the pods in kubernetes"
   ],
-  "ts_image_pull": [
+  "ts-app-02-imgpull": [
     "Issues with with ImagePullBackOff or authorization errors",
     "Failed to pull image from registry with ImagePullBackOff",
     "Pods fail with an ImagePullBackOff status",
