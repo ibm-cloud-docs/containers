@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-19"
 
 keywords: kubernetes, iks
 
@@ -16,8 +16,6 @@ completion-time: 45m
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-  
 
 
 # Deploy a starter kit app to a Kubernetes cluster

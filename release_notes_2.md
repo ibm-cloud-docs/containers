@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-15"
+lastupdated: "2021-10-19"
 
 keywords: kubernetes, iks, release notes
 
@@ -32,8 +32,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 Review the release notes for October 2021.
 {: shortdesc}
 
+### 19 October 2021
+{: #19oct2021}
+{: release-note}
+
+Ingress ALB changelog updates
+:   Updated the [Ingress ALB changelog](/docs/containers?topic=containers-iks-release) for versions `0.49.3_1745_iks` and `1.0.3_1730_iks`.
+
 ### 18 October 2021
 {: #18oct2021}
+{: release-note}
 
 New troubleshooting topic
 :   See [Why does my cluster master status say it is approaching its resource limit?](/docs/containers?topic=containers-master_resource_limit). 
@@ -42,12 +50,14 @@ New troubleshooting topic
 
 ### 13 October 2021
 {: #13oct2021}
+{: release-note}
 
 CLI changelog
 :   The [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.331. 
 
 ### 11 October 2021
 {: #11oct2021}
+{: release-note}
 
 
 
@@ -71,6 +81,7 @@ Cluster autoscaler add-on.
 
 ### 6 October 2021
 {: #6oct2021}
+{: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on.
 :   [Version 4.0.1_780](/docs/containers?topic=containers-vpc_bs_changelog) is released.
@@ -144,10 +155,9 @@ Ingress ALB version change log
 
 
 
-
-
 ### 16 September 2021
 {: #16sep2021}
+{: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on  
 :   Version [`4.0.0_769`](/docs/containers?topic=containers-vpc_bs_changelog) is available.

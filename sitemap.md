@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-18"
+lastupdated: "2021-10-19"
 
 keywords: containers
 subcollection: containers
@@ -10,8 +10,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-  
 
 
 # Site map
@@ -189,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-rel-notes#rel-notes)
 
 [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
+
+* [19 October 2021](/docs/containers?topic=containers-rel-notes#19oct2021)
 
 * [18 October 2021](/docs/containers?topic=containers-rel-notes#18oct2021)
 
@@ -3251,6 +3251,8 @@ subcollection: containers
 
     * [Version 1.0.0 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#1_0_0)
 
+    * [Version 0.49.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_49_0)
+
     * [Version 0.48.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_48_0)
 
     * [Version 0.47.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_47_0)
@@ -3268,6 +3270,40 @@ subcollection: containers
     * [Version 0.32.0 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_32_0)
 
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
+
+    * [14 Nov 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#14-nov-2019)
+
+    * [06 Nov 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#06-nov-2019)
+
+    * [28 October 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#28-oct-2019)
+
+    * [24 September 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#24-sept-2019)
+
+    * [18 September 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#18-sept-2019)
+
+    * [15 August 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#14-aug-2019)
+
+    * [09 August 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#09-aug-2019)
+
+    * [22 July 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#22-july-2019)
+
+    * [30 June 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#30-june-2019)
+
+    * [21 May 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#21-may-2019)
+
+    * [10 May 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#10-may-2019)
+
+    * [08 May 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#08-may-2019)
+
+    * [11 April 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#11-april-2019)
+
+    * [01 April 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#01-april-2019)
+
+    * [18 March 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#18-mar-2019)
+
+    * [18 February 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#18-feb-2019)
+
+    * [01 January 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#01-jan-2019)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
