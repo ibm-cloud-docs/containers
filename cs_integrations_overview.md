@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-19"
 
 keywords: kubernetes, iks, helm
 
@@ -11,8 +11,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-  
 
 
 # Supported IBM Cloud and third-party integrations

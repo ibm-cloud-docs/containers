@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-19"
 
 keywords: kubernetes, iks
 
@@ -15,8 +15,6 @@ completion-time: 60m
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-  
 
 
 # Using Calico network policies to block traffic

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-15"
+lastupdated: "2021-10-19"
 
 keywords: kubernetes, iks
 
@@ -12,8 +12,6 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-  
 
 # Why does binding a service to a cluster result in a same name error?
 {: #ts-app-svc-bind-name}

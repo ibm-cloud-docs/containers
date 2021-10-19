@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-18"
+lastupdated: "2021-10-19"
 
 keywords: kubernetes, iks
 
@@ -16,8 +16,6 @@ completion-time: 30m
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-  
 
 
 # Creating a cluster in your Virtual Private Cloud (VPC)

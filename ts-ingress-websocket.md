@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-19"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -12,8 +12,6 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-  
 
 # Why does a connection via WebSocket close after 60 seconds?
 {: #cs_ingress_websocket}
