@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-19"
+lastupdated: "2021-10-20"
 
 keywords: containers
 subcollection: containers
@@ -3249,9 +3249,9 @@ subcollection: containers
 
 * [Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
 
-* [Version 1.0.0 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#1_0_0)
+* [Version 1.0.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_0_0)
 
-    * [Version 1.0.3_1730_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.3_1730_iks)
+    * [Version 1.0.3_1730_iks (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.3_1730_iks)
 
     * [Version 1.0.0_1699_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.0_1699_iks)
 
