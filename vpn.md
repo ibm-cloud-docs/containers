@@ -2,11 +2,12 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-15"
+lastupdated: "2021-10-21"
 
 keywords: kubernetes, iks, vyatta, strongswan, ipsec, on-prem
 
 subcollection: containers
+
 
 ---
 

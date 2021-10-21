@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-20"
+lastupdated: "2021-10-21"
 
 keywords: containers
 subcollection: containers
@@ -2326,6 +2326,8 @@ subcollection: containers
 * [Creating a Portworx volume](/docs/containers?topic=containers-portworx#add_portworx_storage)
 
 * [Mounting the volume to your app](/docs/containers?topic=containers-portworx#mount_pvc)
+
+* [VPC: Updating worker nodes with Portworx volumes](/docs/containers?topic=containers-portworx#portworx_vpc_up)
 
 * [Backing up and restoring apps and data with PX-Backup](/docs/containers?topic=containers-portworx#px-backup)
 
