@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-10-21"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -32,9 +32,9 @@ However, when using Konnectivity, a problem exists with masters to cluster nodes
 - The cluster has both private and public service endpoints enabled.
 - Service endpoints or VRF are not enabled in the account.
 
-To determine if VRF and service endpoints are enabled in your account, run `ibmcloud account show`. Look for the following options.
+To determine if VRF and service endpoints are enabled in your account, run `ibmcloud account show`. Look for the following output.
 
-```
+```sh
 VRF Enabled:                        true   
 Service Endpoint Enabled:           true 
 ```
@@ -43,7 +43,7 @@ Service Endpoint Enabled:           true
 
 To determine if your classic cluster has both public and private service endpoint enabled, run `ibmcloud ks cluster get -c <cluster_id>`. Look for output similar to:
 
-```
+```sh
 Public Service Endpoint URL:    https://c105.<REGION>.containers.cloud.ibm.com:<port> 
 Private Service Endpoint URL:   https://c105.private.<REGION>.containers.cloud.ibm.com:<port> 
 ```
