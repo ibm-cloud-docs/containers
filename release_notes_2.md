@@ -2,11 +2,12 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-19"
+lastupdated: "2021-10-22"
 
 keywords: kubernetes, iks, release notes
 
 subcollection: containers
+
 
 ---
 
@@ -18,8 +19,10 @@ subcollection: containers
 Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {: shortdesc}
 
+
 For information about releases that occured before August 30th, see [Release notes](/docs/containers?topic=containers-iks-release).
 {: note}
+
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status){: external}.
 {: note}
@@ -31,6 +34,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 Review the release notes for October 2021.
 {: shortdesc}
+
+### 22 October 2021
+{: #22oct2021}
+{: release-note}
+
+{{site.data.keyword.cos_full_notm}} plug-in.
+:   [Version 2.1.6](/docs/containers?topic=containers-cos_plugin_changelog) is released.
 
 ### 19 October 2021
 {: #19oct2021}

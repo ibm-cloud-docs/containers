@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-19"
+lastupdated: "2021-10-21"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -392,6 +392,9 @@ Before you update your VPC worker nodes, review the prerequisite steps.
 
 5. Repeat these steps for each worker node that you must update.
 6. Optional: After the replaced worker nodes are in a **Ready** status, [resize the worker pool](/docs/containers?topic=containers-add_workers#resize_pool) to meet the cluster capacity that you want.
+
+If you are running Portworx in your VPC cluster, you must [manually attach your {{site.data.keyword.block_storage_is_short}} volume to your new worker node.](/docs/containers?topic=containers-portworx#portworx_vpc_up)
+{: note}
 
 ### Updating VPC worker nodes in the console
 {: #vpc_worker_ui}

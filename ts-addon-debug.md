@@ -2,11 +2,12 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-18"
+lastupdated: "2021-10-21"
 
 keywords: kubernetes, iks, help, network, connectivity
 
 subcollection: containers
+
 content-type: troubleshoot
 
 ---

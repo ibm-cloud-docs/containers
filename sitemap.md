@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-20"
+lastupdated: "2021-10-22"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-rel-notes#rel-notes)
 
 [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
+
+* [22 October 2021](/docs/containers?topic=containers-rel-notes#22oct2021)
 
 * [19 October 2021](/docs/containers?topic=containers-rel-notes#19oct2021)
 
@@ -2327,6 +2329,8 @@ subcollection: containers
 
 * [Mounting the volume to your app](/docs/containers?topic=containers-portworx#mount_pvc)
 
+* [VPC: Updating worker nodes with Portworx volumes](/docs/containers?topic=containers-portworx#portworx_vpc_up)
+
 * [Backing up and restoring apps and data with PX-Backup](/docs/containers?topic=containers-portworx#px-backup)
 
     * [Installing PX-Backup on an {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-portworx#px-backup-install)
@@ -3548,6 +3552,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Changelog for version 2.1.6, released 22 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0216_object_plugin)
 
 * [Changelog for version 2.1.5, released 5 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0215_object_plugin)
 
