@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-22"
+lastupdated: "2021-10-25"
 
 keywords: kubernetes, iks, release notes
 
@@ -34,6 +34,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 Review the release notes for October 2021.
 {: shortdesc}
+
+### 25 October 2021
+{: #25oct2021}
+{: release-note}
+
+Worker node fix pack update
+:   Changelog documentation is available for Kubernetes version [`1.22.2_1527`](/docs/containers?topic=containers-changelog#1222_1527), [`1.21.5_1537`](/docs/containers?topic=containers-changelog#1215_1537), [`1.20.11_1559`](/docs/containers?topic=containers-changelog#12011_1559), and [`1.19.15_1566`](/docs/containers?topic=containers-changelog#11915_1566).
 
 ### 22 October 2021
 {: #22oct2021}
@@ -75,7 +82,7 @@ Unsupported Kubernetes version 1.18
 :   Kubernetes version 1.18 is unsupported. To continue receiving important security updates and support, you must [update your cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately. 
 
 Worker node fix pack update
-:   Changelog documentation is available for Kubernetes version [`1.22.2_1524`](/docs/containers?topic=containers-changelog#1222_1524), [`1.21.5_1533`](/docs/containers?topic=containers-changelog#1215_1533), [`1.20.11_1555`](/docs/containers?topic=containers-changelog#12011_1555), and [`11.19.15_1562`](/docs/containers?topic=containers-changelog#11915_1562).
+:   Changelog documentation is available for Kubernetes version [`1.22.2_1524`](/docs/containers?topic=containers-changelog#1222_1524), [`1.21.5_1533`](/docs/containers?topic=containers-changelog#1215_1533), [`1.20.11_1555`](/docs/containers?topic=containers-changelog#12011_1555), and [`1.19.15_1562`](/docs/containers?topic=containers-changelog#11915_1562).
 
 ### 7 October 2021
 {: #7oct2021}
