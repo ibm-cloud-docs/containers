@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-22"
+lastupdated: "2021-10-25"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-rel-notes#rel-notes)
 
 [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
+
+* [25 October 2021](/docs/containers?topic=containers-rel-notes#25oct2021)
 
 * [22 October 2021](/docs/containers?topic=containers-rel-notes#22oct2021)
 
@@ -2237,7 +2239,7 @@ subcollection: containers
 
     * [Cleaning up persistent storage](/docs/containers?topic=containers-vpc-block#storage_remove_block_vpc)
 
-[Storing data on IBM Cloud Object Storage](/docs/containers?topic=containers-object_storage#object_storage)
+[Storing data on {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#object_storage)
 
 * [Creating your object storage service instance](/docs/containers?topic=containers-object_storage#create_cos_service)
 
@@ -3021,11 +3023,15 @@ subcollection: containers
 
 * [Version 1.22 changelog](/docs/containers?topic=containers-changelog#122_changelog)
 
+    * [Changelog for worker node fix pack 1.22.2_1527, released 25 October 2021](/docs/containers?topic=containers-changelog#1222_1527)
+
     * [Changelog for worker node fix pack 1.22.2_1524, released 11 October 2021](/docs/containers?topic=containers-changelog#1222_1524)
 
     * [Changelog for master fix pack 1.22.2_1522 and worker node fix pack 1.22.2_1523, released 29 Sept 2021](/docs/containers?topic=containers-changelog#1222_1522_and_1222_1523)
 
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog#121_changelog)
+
+    * [Changelog for worker node fix pack 1.21.5_1537, released 25 October 2021](/docs/containers?topic=containers-changelog#1215_1537)
 
     * [Changelog for worker node fix pack 1.21.5_1533, released 11 October 2021](/docs/containers?topic=containers-changelog#1215_1533)
 
@@ -3058,6 +3064,8 @@ subcollection: containers
     * [Changelog for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1519)
 
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+
+    * [Changelog for worker node fix pack 1.20.11_1559, released 25 October 2021](/docs/containers?topic=containers-changelog#12011_1559)
 
     * [Changelog for worker node fix pack 1.20.11_1555, released 11 October 2021](/docs/containers?topic=containers-changelog#12011_1555)
 
@@ -3116,6 +3124,8 @@ subcollection: containers
     * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 
 * [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+
+    * [Changelog for worker node fix pack 1.19.15_1566, released 25 October 2021](/docs/containers?topic=containers-changelog#11915_1566)
 
     * [Changelog for worker node fix pack 1.19.15_1562, released 11 October 2021](/docs/containers?topic=containers-changelog#11915_1562)
 

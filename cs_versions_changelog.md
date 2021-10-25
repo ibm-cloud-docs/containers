@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-10-19"
+lastupdated: "2021-10-25"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -41,6 +41,19 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.22 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.22.2_1527, released 25 October 2021
+{: #1222_1527}
+
+The following table shows the changes that are included in the worker node fix pack patch update `1.22.2_1527`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | N/A | N/A | Updated worker node images with package updates. Contains fix for cloud-init performance problem. |
+| Worker-pool taint automation | N/A | N/A | Fixes known issue related to worker-pool taint automation that prevents workers from getting providerID. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.22.2_1524" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.22.2_1524, released 11 October 2021
 {: #1222_1524}
@@ -82,6 +95,19 @@ The following table shows the changes that are included in the master fix pack `
 
 Review the version 1.21 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.21.5_1537, released 25 October 2021
+{: #1215_1537}
+
+The following table shows the changes that are included in the worker node fix pack patch update `1.21.25_1537`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | N/A | N/A | Updated worker node images with package updates. Contains fix for cloud-init performance problem. |
+| Worker-pool taint automation | N/A | N/A | Fixes known issue related to worker-pool taint automation that prevents workers from getting providerID. | 
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.21.5_1533" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.21.5_1533, released 11 October 2021
 {: #1215_1533}
@@ -155,7 +181,7 @@ The following table shows the changes that are included in the worker node fix p
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Ubuntu 18.04 packages | 4.15.0-153 | 4.15.0-154 | Updated worker node images and kernel with package updates for [CVE-2021-3711](https://nvd.nist.gov/vuln/detail/CVE-2021-3711) and [CVE-2021-3712](https://nvd.nist.gov/vuln/detail/CVE-2021-3712). |
+| Ubuntu 18.04 packages | 4.15.0-153 | 4.15.0-154 | Updated worker node images and kernel with package updates for [CVE-2021-3711](https://nvd.nist.gov/vuln/detail/CVE-2021-3711){: external} and [CVE-2021-3712](https://nvd.nist.gov/vuln/detail/CVE-2021-3712){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.21.2_1524" caption-side="top"}
 
@@ -349,6 +375,19 @@ The following table shows the changes that are included in the master fix pack p
 
 Review the version 1.20 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.20.11_1559, released 25 October 2021
+{: #12011_1559}
+
+The following table shows the changes that are included in the worker node fix pack patch update `1.20.11_1559`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | N/A | N/A | Updated worker node images with package updates. Contains fix for cloud-init performance problem. |
+| Worker-pool taint automation | N/A | N/A | Fixes known issue related to worker-pool taint automation that prevents workers from getting providerID. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.20.11_1555" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.20.11_1555, released 11 October 2021
 {: #12011_1555}
@@ -820,6 +859,19 @@ Review the version 1.19 changelog.
 
 Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 31 Jan 2022. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120) as soon as possible.
 {: deprecated}
+
+### Changelog for worker node fix pack 1.19.15_1566, released 25 October 2021
+{: #11915_1566}
+
+The following table shows the changes that are included in the worker node fix pack patch update `1.19.15_1566`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | N/A | N/A | Updated worker node images with package updates. Contains fix for cloud-init performance problem. |
+| Worker-pool taint automation | N/A | N/A | Fixes known issue related to worker-pool taint automation that prevents workers from getting providerID. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.19.15_1562" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.19.15_1562, released 11 October 2021
 {: #11915_1562}
