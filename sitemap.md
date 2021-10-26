@@ -188,6 +188,8 @@ subcollection: containers
 
 [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
 
+* [26 October 2021](/docs/containers?topic=containers-rel-notes#26oct2021)
+
 * [25 October 2021](/docs/containers?topic=containers-rel-notes#25oct2021)
 
 * [22 October 2021](/docs/containers?topic=containers-rel-notes#22oct2021)
@@ -2584,6 +2586,8 @@ subcollection: containers
 
     * [`ibmcloud ks cluster master private-service-endpoint allowlist`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist)
 
+    * [`ibmcloud ks cluster master private-service-endpoint disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_disable)
+
     * [`ibmcloud ks cluster master private-service-endpoint enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_enable)
 
     * [`ibmcloud ks cluster master public-service-endpoint disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pub_se_disable)
@@ -2853,6 +2857,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.334](/docs/containers?topic=containers-cs_cli_changelog#cli-10334)
 
 * [Version 1.0.331](/docs/containers?topic=containers-cs_cli_changelog#cli-10331)
 
