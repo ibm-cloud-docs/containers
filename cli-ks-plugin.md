@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-21"
+lastupdated: "2021-10-26"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -1400,7 +1400,6 @@ ibmcloud ks cluster master private-service-endpoint allowlist rm --cluster CLUST
 ibmcloud ks cluster master private-service-endpoint allowlist rm --cluster mycluster --subnet 1.1.1.1/16
 ```
 {: pre}
-
 
 ### `ibmcloud ks cluster master private-service-endpoint enable`
 {: #cs_cluster_master_pse_enable}
