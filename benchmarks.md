@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-22"
+lastupdated: "2021-10-28"
 
 keywords: kubernetes, iks, containers
 
@@ -150,7 +150,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ### 1.1 Master Node Configuration Files
 {: #cis-benchmark-15-1-1}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 1.1.1 | Ensure that the API server pod specification file permissions are set to 644 or more restrictive | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.1.2 | Ensure that the API server pod specification file ownership is set to root:root | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
@@ -179,7 +179,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ### 1.2 API Server
 {: #cis-benchmark-15-1-2}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 1.2.1 | Ensure that the `--anonymous-auth` option is set to false | Not Scored | 1 | [Fail](#ibm-remediations-and-explanations) | {{site.data.keyword.IBM_notm}} |
 | 1.2.2 | Ensure that the `--basic-auth-file` option is not set | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
@@ -222,7 +222,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ### 1.3 Controller Manager
 {: #cis-benchmark-15-1-3}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 1.3.1 | Ensure that the `--terminated-pod-gc-threshold` option is set as appropriate | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.3.2 | Ensure that the `--profiling` option is set to false | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
@@ -237,7 +237,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ### 1.4 Scheduler
 {: #cis-benchmark-15-1-4}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 1.4.1 | Ensure that the `--profiling option` is set to false | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.4.2 | Ensure that the `--bind-address` option is set to 127.0.0.1 | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
@@ -247,7 +247,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ## 2 `etcd` Node Configuration
 {: #cis-benchmark-15-2}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 2.1 | Ensure that the `--cert-file` and `--key-file` options are set as appropriate | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 2.2 | Ensure that the `--client-cert-auth` option is set to true | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
@@ -265,7 +265,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ### 3.1 Authentication and Authorization
 {: #cis-benchmark-15-3-1}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 3.1.1 | Client certificate authentication should not be used for users | Not Scored | 2 | Pass | Shared |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
@@ -274,7 +274,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ### 3.2 Logging
 {: #cis-benchmark-15-3-2}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 3.2.1 | Ensure that a minimal audit policy is created | Scored | 1 | [Fail](#ibm-remediations-and-explanations) | Shared |
 | 3.2.2 | Ensure that the audit policy covers key security concerns | Not Scored | 2 | [Fail](#ibm-remediations-and-explanations) | Shared |
@@ -287,7 +287,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ### 4.1 Worker Node Configuration Files
 {: #cis-benchmark-15-4-1}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 4.1.1 | Ensure that the kubelet service file permissions are set to 644 or more restrictive | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 4.1.2 | Ensure that the kubelet service file ownership is set to root:root | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
@@ -305,7 +305,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ### 4.2 Kubelet
 {: #cis-benchmark-15-4-2}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 4.2.1 | Ensure that the `--anonymous-auth` option is set to false | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 4.2.2 | Ensure that the `--authorization-mode` option is not set to `AlwaysAllow` | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
@@ -329,7 +329,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ### 5.1 RBAC and Service Accounts
 {: #cis-benchmark-15-5-1}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.1.1 | Ensure that the `cluster-admin` role is only used where required | Not Scored | 1 | Pass | Shared |
 | 5.1.2 | Minimize access to secrets | Not Scored | 1 | [Fail](#ibm-remediations-and-explanations) | Shared |
@@ -343,7 +343,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ### 5.2 Pod Security Policies
 {: #cis-benchmark-15-5-2}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.2.1 | Minimize the admission of privileged containers | Not Scored | 1 | [Pass](#ibm-remediations-and-explanations) | Shared |
 | 5.2.2 | Minimize the admission of containers wanting to share the host process ID namespace | Scored | 1 | [Pass](#ibm-remediations-and-explanations) | Shared |
@@ -360,7 +360,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ### 5.3 Network Policies and CNI
 {: #cis-benchmark-15-5-3}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.3.1 | Ensure that the CNI in use supports Network Policies | Not Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 5.3.2 | Ensure that all Namespaces have Network Policies defined | Scored | 2 | [Fail](#ibm-remediations-and-explanations) | Shared |
@@ -370,7 +370,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ### 5.4 Secrets Management
 {: #cis-benchmark-15-5-4}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.4.1 | Prefer using secrets as files over secrets as environment variables | Not Scored | 1 | Pass | Shared |
 | 5.4.2 | Consider external secret storage | Not Scored | 2 | [Fail](#ibm-remediations-and-explanations) | Shared |
@@ -380,7 +380,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ### 5.5 Extensible Admission Control
 {: #cis-benchmark-15-5-5}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.5.1 | Configure Image Provenance by using `ImagePolicyWebhook` admission controller | Not Scored | 2 | [Fail](#ibm-remediations-and-explanations) | Shared |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
@@ -389,7 +389,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 ### 5.6 General Policies
 {: #cis-benchmark-15-5-6}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.6.1 | Create administrative boundaries between resources using namespaces | Not Scored | 1 | Pass | Shared |
 | 5.6.2 | Ensure that the `seccomp` profile is set to docker/default in your pod definitions | Not Scored | 2 | [Fail](#ibm-remediations-and-explanations) | Shared |
@@ -404,7 +404,7 @@ Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.
 Review the following explanations and possible remediation actions that you can take to address recommendations that are not met in the default configuration for {{site.data.keyword.containerlong_notm}} version 1.18 clusters.
 {: shortdesc}
 
-| # | Remediation/Explanation |
+| Section | Remediation/Explanation |
 | --- | --- |
 | 1.2.1 | {{site.data.keyword.containerfull_notm}} utilizes RBAC for cluster protection, but allows anonymous discovery, which is considered reasonable per [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/). |
 | 1.2.10 | {{site.data.keyword.containerfull_notm}} does not enable the [`EventRateLimit`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit) admission controller since it is a Kubernetes alpha feature. |
