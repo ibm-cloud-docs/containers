@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-26"
+lastupdated: "2021-10-28"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-rel-notes#rel-notes)
 
 [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
+
+* [28 October 2021](/docs/containers?topic=containers-rel-notes#28oct2021)
 
 * [26 October 2021](/docs/containers?topic=containers-rel-notes#26oct2021)
 
@@ -3388,6 +3390,8 @@ subcollection: containers
     * [Changelog for 1.11.1, released 31 August 2021](/docs/containers?topic=containers-istio-changelog#1111)
 
 * [Version 1.10](/docs/containers?topic=containers-istio-changelog#v110)
+
+    * [Changelog for 1.10.5, released 28 October 2021](/docs/containers?topic=containers-istio-changelog#1105)
 
     * [Changelog for 1.10.4, released 14 September 2021](/docs/containers?topic=containers-istio-changelog#1104)
 
