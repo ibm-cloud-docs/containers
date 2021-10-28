@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-19"
+lastupdated: "2021-10-28"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -26,7 +26,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | --- | --- | --- |
-| 1.11 | Yes | 1.19, 1.20, 1.21 |
+| 1.11 | Yes | 1.19, 1.20, 1.21, 1.22 |
 | 1.10 | Yes | 1.18, 1.19, 1.20, 1.21 |
 | 1.9 | Yes| 1.17, 1.18, 1.19, 1.20 |
 | 1.8 | No | - |
@@ -97,6 +97,27 @@ Review the changes that are included in version 1.11.1 of the managed Istio add-
 Review the changes that are included in version 1.10 of the managed Istio add-on.
 {: shortdesc}
 
+### Changelog for 1.10.5, released 28 October 2021
+{: #1105}
+
+Review the changes that are included in version 1.10.5 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.10.4  
+**Current version**: 1.10.5  
+**Updates in this version:**  
+- See the Istio release notes for [Istio 1.10.5](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.5/){:external}. 
+- Resolves the following CVEs:
+    - [CVE-2021-22945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22945){: external}
+    - [CVE-2021-22946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22946){: external}
+    - [CVE-2021-22947](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22947){: external}
+    - [CVE-2021-33560](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33560){: external}
+    - [CVE-2021-40528](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-40528){: external}
+    - [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33560){: external}
+    - [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-40528){: external}
+    - [usn-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
+    - [usn-5079-3](https://ubuntu.com/security/notices/USN-5079-1){: external}
+- For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
 ### Changelog for 1.10.4, released 14 September 2021
 {: #1104}
