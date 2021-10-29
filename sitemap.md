@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-28"
+lastupdated: "2021-10-29"
 
 keywords: containers
 subcollection: containers
@@ -32,17 +32,17 @@ subcollection: containers
 
 [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started#getting-started)
 
-[Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs)
+* [Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs)
 
-[Creating a VPC cluster](/docs/containers?topic=containers-getting-started#vpc-gen2-gs)
+* [Creating a VPC cluster](/docs/containers?topic=containers-getting-started#vpc-gen2-gs)
 
-[Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
+* [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
 
-* [Deploying an app to a free classic cluster and exposing it with a node port](/docs/containers?topic=containers-getting-started#deployapp1)
+    * [Deploying an app to a free classic cluster and exposing it with a node port](/docs/containers?topic=containers-getting-started#deployapp1)
 
-* [Deploying an app to a standard cluster and exposing with a load balancer](/docs/containers?topic=containers-getting-started#deployapp2)
+    * [Deploying an app to a standard cluster and exposing with a load balancer](/docs/containers?topic=containers-getting-started#deployapp2)
 
-[What's next?](/docs/containers?topic=containers-getting-started#whats-next)
+* [What's next?](/docs/containers?topic=containers-getting-started#whats-next)
 
 
 ## About
@@ -186,58 +186,59 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-rel-notes#rel-notes)
 
-[October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
+* [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
 
-* [28 October 2021](/docs/containers?topic=containers-rel-notes#28oct2021)
+    * [28 October 2021](/docs/containers?topic=containers-rel-notes#28oct2021)
 
-* [26 October 2021](/docs/containers?topic=containers-rel-notes#26oct2021)
+    * [26 October 2021](/docs/containers?topic=containers-rel-notes#26oct2021)
 
-* [25 October 2021](/docs/containers?topic=containers-rel-notes#25oct2021)
+    * [25 October 2021](/docs/containers?topic=containers-rel-notes#25oct2021)
 
-* [22 October 2021](/docs/containers?topic=containers-rel-notes#22oct2021)
+    * [22 October 2021](/docs/containers?topic=containers-rel-notes#22oct2021)
 
-* [19 October 2021](/docs/containers?topic=containers-rel-notes#19oct2021)
+    * [19 October 2021](/docs/containers?topic=containers-rel-notes#19oct2021)
 
-* [18 October 2021](/docs/containers?topic=containers-rel-notes#18oct2021)
+    * [18 October 2021](/docs/containers?topic=containers-rel-notes#18oct2021)
 
-* [13 October 2021](/docs/containers?topic=containers-rel-notes#13oct2021)
+    * [13 October 2021](/docs/containers?topic=containers-rel-notes#13oct2021)
 
-* [11 October 2021](/docs/containers?topic=containers-rel-notes#11oct2021)
+    * [11 October 2021](/docs/containers?topic=containers-rel-notes#11oct2021)
 
-* [7 October 2021](/docs/containers?topic=containers-rel-notes#7oct2021)
+    * [7 October 2021](/docs/containers?topic=containers-rel-notes#7oct2021)
 
-* [6 October 2021](/docs/containers?topic=containers-rel-notes#6oct2021)
+    * [6 October 2021](/docs/containers?topic=containers-rel-notes#6oct2021)
 
-* [5 October 2021](/docs/containers?topic=containers-rel-notes#5oct2021)
+    * [5 October 2021](/docs/containers?topic=containers-rel-notes#5oct2021)
 
-[September 2021](/docs/containers?topic=containers-rel-notes#release-sep-2021)
+* [September 2021](/docs/containers?topic=containers-rel-notes#release-sep-2021)
 
-* [29 September 2021](/docs/containers?topic=containers-rel-notes#29sep2021)
+    * [29 September 2021](/docs/containers?topic=containers-rel-notes#29sep2021)
 
-* [27 September 2021](/docs/containers?topic=containers-rel-notes#27sep2021)
+    * [27 September 2021](/docs/containers?topic=containers-rel-notes#27sep2021)
 
-* [23 September 2021](/docs/containers?topic=containers-rel-notes#23sep2021)
+    * [23 September 2021](/docs/containers?topic=containers-rel-notes#23sep2021)
 
-* [22 September 2021](/docs/containers?topic=containers-rel-notes#22sep2021)
+    * [22 September 2021](/docs/containers?topic=containers-rel-notes#22sep2021)
 
-* [16 September 2021](/docs/containers?topic=containers-rel-notes#16sep2021)
+    * [16 September 2021](/docs/containers?topic=containers-rel-notes#16sep2021)
 
-* [14 September 2021](/docs/containers?topic=containers-rel-notes#14sep2021)
+    * [14 September 2021](/docs/containers?topic=containers-rel-notes#14sep2021)
 
-* [13 September 2021](/docs/containers?topic=containers-rel-notes#13sep2021)
+    * [13 September 2021](/docs/containers?topic=containers-rel-notes#13sep2021)
 
-* [9 September 2021](/docs/containers?topic=containers-rel-notes#9sep2021)
+    * [9 September 2021](/docs/containers?topic=containers-rel-notes#9sep2021)
 
-* [1 September 2021](/docs/containers?topic=containers-rel-notes#1sep2021)
+    * [1 September 2021](/docs/containers?topic=containers-rel-notes#1sep2021)
 
-[August 2021](/docs/containers?topic=containers-rel-notes#release-aug-2021)
+* [August 2021](/docs/containers?topic=containers-rel-notes#release-aug-2021)
 
-* [31 August 2021](/docs/containers?topic=containers-rel-notes#31aug2021)
+    * [31 August 2021](/docs/containers?topic=containers-rel-notes#31aug2021)
 
-* [30 August 2021](/docs/containers?topic=containers-rel-notes#30aug2021)
+    * [30 August 2021](/docs/containers?topic=containers-rel-notes#30aug2021)
 
 
 ## Tutorials library for Kubernetes Service
+{: #sitemap_tutorials-library-for-kubernetes-service}
 
 [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: new_window}{: external}
 
@@ -2313,7 +2314,7 @@ subcollection: containers
 
 * [Setting up a key-value store for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
 
-    * [Using the Portworx KVDB](/docs/containers?topic=containers-portworx#portworx-kvdb)
+    * [Using the Portworx key-value database](/docs/containers?topic=containers-portworx#portworx-kvdb)
 
     * [Optional: Setting up a Databases for etcd service instance](/docs/containers?topic=containers-portworx#databases-for-etcd)
 
@@ -2363,7 +2364,7 @@ subcollection: containers
 
     * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-portworx#remove_storage_node_cluster-px)
 
-    * [Removing the Portworx daemon set](/docs/containers?topic=containers-portworx#remove_px_daemonset)
+    * [Removing the Portworx DaemonSet](/docs/containers?topic=containers-portworx#remove_px_daemonset)
 
     * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
 
@@ -2427,7 +2428,7 @@ subcollection: containers
 
 * [Setting up {{site.data.keyword.mon_full_notm}} for storage volumes](/docs/containers?topic=containers-utilities#monitor_storage)
 
-    * [Troubleshooting persistent storage when a {{site.data.keyword.mon_full_notm}} alert is triggered](/docs/containers?topic=containers-utilities#monitor_storage_ts)
+    * [Troubleshooting persistent storage when an {{site.data.keyword.mon_full_notm}} alert is triggered](/docs/containers?topic=containers-utilities#monitor_storage_ts)
 
 
 ## Enhancing cluster capabilities with integrations
@@ -2939,6 +2940,8 @@ subcollection: containers
     * [`ibmcloud ob logging config replace`](/docs/containers?topic=containers-observability_cli#logging_config_replace)
 
     * [`ibmcloud ob logging config show`](/docs/containers?topic=containers-observability_cli#logging_config_show)
+
+* [Monitoring commands](/docs/containers?topic=containers-observability_cli#monitoring_commands_top)
 
     * [`ibmcloud ob monitoring agent discover`](/docs/containers?topic=containers-observability_cli#monitoring_agent_discover)
 
@@ -4539,29 +4542,29 @@ subcollection: containers
 
 [Locations](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 
-[{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
+* [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
 
-* [How locations are organized](/docs/containers?topic=containers-regions-and-zones#example_locations_org)
+    * [How locations are organized](/docs/containers?topic=containers-regions-and-zones#example_locations_org)
 
-* [Classic multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-mz)
+    * [Classic multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-mz)
 
-* [Classic single zone regions](/docs/containers?topic=containers-regions-and-zones#zones-sz)
+    * [Classic single zone regions](/docs/containers?topic=containers-regions-and-zones#zones-sz)
 
-* [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
+    * [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
 
-* [Resources in a single zone cluster](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
+    * [Resources in a single zone cluster](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
 
-* [Resources in a multizone cluster](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
+    * [Resources in a multizone cluster](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
 
-* [Free clusters](/docs/containers?topic=containers-regions-and-zones#regions_free)
+    * [Free clusters](/docs/containers?topic=containers-regions-and-zones#regions_free)
 
-[Accessing the global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint)
+* [Accessing the global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint)
 
-* [Logging in to {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-regions-and-zones#login-ic)
+    * [Logging in to {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-regions-and-zones#login-ic)
 
-* [Logging in to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#login-iks)
+    * [Logging in to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#login-iks)
 
-[Previous {{site.data.keyword.cloud_notm}} region and zone structure](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
+* [Previous {{site.data.keyword.cloud_notm}} region and zone structure](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
 
 ## Supported IBM Cloud and third-party integrations
@@ -4570,19 +4573,19 @@ subcollection: containers
 
 [Supported IBM Cloud and third-party integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations)
 
-[Popular integrations](/docs/containers?topic=containers-supported_integrations#popular_services)
+* [Popular integrations](/docs/containers?topic=containers-supported_integrations#popular_services)
 
-[DevOps services](/docs/containers?topic=containers-supported_integrations#devops_services)
+* [DevOps services](/docs/containers?topic=containers-supported_integrations#devops_services)
 
-[Hybrid cloud services](/docs/containers?topic=containers-supported_integrations#hybrid_cloud_services)
+* [Hybrid cloud services](/docs/containers?topic=containers-supported_integrations#hybrid_cloud_services)
 
-[Logging and monitoring services](/docs/containers?topic=containers-supported_integrations#health_services)
+* [Logging and monitoring services](/docs/containers?topic=containers-supported_integrations#health_services)
 
-[Security services](/docs/containers?topic=containers-supported_integrations#security_services)
+* [Security services](/docs/containers?topic=containers-supported_integrations#security_services)
 
-[Storage services](/docs/containers?topic=containers-supported_integrations#storage_services)
+* [Storage services](/docs/containers?topic=containers-supported_integrations#storage_services)
 
-[Database services](/docs/containers?topic=containers-supported_integrations#database_services)
+* [Database services](/docs/containers?topic=containers-supported_integrations#database_services)
 
 
 ## Default service settings for Kubernetes components
@@ -4591,17 +4594,17 @@ subcollection: containers
 
 [Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings#service-settings)
 
-[`kube-apiserver`](/docs/containers?topic=containers-service-settings#kube-apiserver)
+* [`kube-apiserver`](/docs/containers?topic=containers-service-settings#kube-apiserver)
 
-[`kube-controller-manager`](/docs/containers?topic=containers-service-settings#kube-controller-manager)
+* [`kube-controller-manager`](/docs/containers?topic=containers-service-settings#kube-controller-manager)
 
-[`kubelet`](/docs/containers?topic=containers-service-settings#kubelet)
+* [`kubelet`](/docs/containers?topic=containers-service-settings#kubelet)
 
-[`kube-scheduler`](/docs/containers?topic=containers-service-settings#kube-scheduler)
+* [`kube-scheduler`](/docs/containers?topic=containers-service-settings#kube-scheduler)
 
-[`kube-proxy`](/docs/containers?topic=containers-service-settings#kube-proxy)
+* [`kube-proxy`](/docs/containers?topic=containers-service-settings#kube-proxy)
 
-[Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
+* [Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
 
 
 ## Related links
@@ -4621,43 +4624,43 @@ subcollection: containers
 
 [FAQs](/docs/containers?topic=containers-faqs#faqs)
 
-[What is Kubernetes?](/docs/containers?topic=containers-faqs#kubernetes)
+* [What is Kubernetes?](/docs/containers?topic=containers-faqs#kubernetes)
 
-[How does {{site.data.keyword.containerlong_notm}} work?](/docs/containers?topic=containers-faqs#kubernetes_service)
+* [How does {{site.data.keyword.containerlong_notm}} work?](/docs/containers?topic=containers-faqs#kubernetes_service)
 
-[Why should I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#faq_benefits)
+* [Why should I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#faq_benefits)
 
-[Can I get a free cluster?](/docs/containers?topic=containers-faqs#faq_free)
+* [Can I get a free cluster?](/docs/containers?topic=containers-faqs#faq_free)
 
-[What container platforms are available for my cluster?](/docs/containers?topic=containers-faqs#container_platforms)
+* [What container platforms are available for my cluster?](/docs/containers?topic=containers-faqs#container_platforms)
 
-[Does the service come with a managed Kubernetes master and worker nodes?](/docs/containers?topic=containers-faqs#managed_master_worker)
+* [Does the service come with a managed Kubernetes master and worker nodes?](/docs/containers?topic=containers-faqs#managed_master_worker)
 
-[Are the master and worker nodes highly available?](/docs/containers?topic=containers-faqs#faq_ha)
+* [Are the master and worker nodes highly available?](/docs/containers?topic=containers-faqs#faq_ha)
 
-[What options do I have to secure my cluster?](/docs/containers?topic=containers-faqs#secure_cluster)
+* [What options do I have to secure my cluster?](/docs/containers?topic=containers-faqs#secure_cluster)
 
-[What access policies do I give my cluster users?](/docs/containers?topic=containers-faqs#faq_access)
+* [What access policies do I give my cluster users?](/docs/containers?topic=containers-faqs#faq_access)
 
-[Where can I find a list of security bulletins that affect my cluster?](/docs/containers?topic=containers-faqs#faq_security_bulletins)
+* [Where can I find a list of security bulletins that affect my cluster?](/docs/containers?topic=containers-faqs#faq_security_bulletins)
 
-[Does the service offer support for bare metal and GPU?](/docs/containers?topic=containers-faqs#bare_metal_gpu)
+* [Does the service offer support for bare metal and GPU?](/docs/containers?topic=containers-faqs#bare_metal_gpu)
 
-[What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster)
+* [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster)
 
-[Which Kubernetes versions does the service support?](/docs/containers?topic=containers-faqs#supported_kube_versions)
+* [Which Kubernetes versions does the service support?](/docs/containers?topic=containers-faqs#supported_kube_versions)
 
-[Where is the service available?](/docs/containers?topic=containers-faqs#supported_regions)
+* [Where is the service available?](/docs/containers?topic=containers-faqs#supported_regions)
 
-[Is the service highly available?](/docs/containers?topic=containers-faqs#ha_sla)
+* [Is the service highly available?](/docs/containers?topic=containers-faqs#ha_sla)
 
-[What compliance standards does the service meet?](/docs/containers?topic=containers-faqs#standards)
+* [What compliance standards does the service meet?](/docs/containers?topic=containers-faqs#standards)
 
-[Can I use IBM Cloud and other services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
+* [Can I use IBM Cloud and other services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
 
-[Does IBM support third-party and open source tools that I use with my cluster?](/docs/containers?topic=containers-faqs#faq_thirdparty_oss)
+* [Does IBM support third-party and open source tools that I use with my cluster?](/docs/containers?topic=containers-faqs#faq_thirdparty_oss)
 
-[What am I charged for? Can I estimate and control costs in my cluster?](/docs/containers?topic=containers-faqs#charges)
+* [What am I charged for? Can I estimate and control costs in my cluster?](/docs/containers?topic=containers-faqs#charges)
 
 
 ## Troubleshooting
@@ -4899,7 +4902,7 @@ subcollection: containers
 
 
 ### Logging and monitoring
-{: #sitemap_logging_and_monitoring}
+{: #sitemap_logging_and_monitoring1}
 
 
 [Why doesn't the Kubernetes dashboard display utilization graphs?](/docs/containers?topic=containers-cs_dashboard_graphs#cs_dashboard_graphs)
@@ -5180,66 +5183,66 @@ subcollection: containers
 
 
 ## Release notes
-{: #sitemap_release_notes}
+{: #sitemap_release_notes1}
 
 
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
-[August 2021](/docs/containers?topic=containers-iks-release#aug21)
+* [August 2021](/docs/containers?topic=containers-iks-release#aug21)
 
-[July 2021](/docs/containers?topic=containers-iks-release#jul21)
+* [July 2021](/docs/containers?topic=containers-iks-release#jul21)
 
-[June 2021](/docs/containers?topic=containers-iks-release#jun21)
+* [June 2021](/docs/containers?topic=containers-iks-release#jun21)
 
-[May 2021](/docs/containers?topic=containers-iks-release#may21)
+* [May 2021](/docs/containers?topic=containers-iks-release#may21)
 
-[April 2021](/docs/containers?topic=containers-iks-release#apr21)
+* [April 2021](/docs/containers?topic=containers-iks-release#apr21)
 
-[March 2021](/docs/containers?topic=containers-iks-release#mar21)
+* [March 2021](/docs/containers?topic=containers-iks-release#mar21)
 
-[February 2021](/docs/containers?topic=containers-iks-release#feb21)
+* [February 2021](/docs/containers?topic=containers-iks-release#feb21)
 
-[January 2021](/docs/containers?topic=containers-iks-release#jan21)
+* [January 2021](/docs/containers?topic=containers-iks-release#jan21)
 
-[December 2020](/docs/containers?topic=containers-iks-release#dec20)
+* [December 2020](/docs/containers?topic=containers-iks-release#dec20)
 
-[November 2020](/docs/containers?topic=containers-iks-release#nov20)
+* [November 2020](/docs/containers?topic=containers-iks-release#nov20)
 
-[October 2020](/docs/containers?topic=containers-iks-release#oct20)
+* [October 2020](/docs/containers?topic=containers-iks-release#oct20)
 
-[September 2020](/docs/containers?topic=containers-iks-release#sep20)
+* [September 2020](/docs/containers?topic=containers-iks-release#sep20)
 
-[August 2020](/docs/containers?topic=containers-iks-release#aug20)
+* [August 2020](/docs/containers?topic=containers-iks-release#aug20)
 
-[July 2020](/docs/containers?topic=containers-iks-release#july20)
+* [July 2020](/docs/containers?topic=containers-iks-release#july20)
 
-[June 2020](/docs/containers?topic=containers-iks-release#june20)
+* [June 2020](/docs/containers?topic=containers-iks-release#june20)
 
-[May 2020](/docs/containers?topic=containers-iks-release#may20)
+* [May 2020](/docs/containers?topic=containers-iks-release#may20)
 
-[April 2020](/docs/containers?topic=containers-iks-release#apr20)
+* [April 2020](/docs/containers?topic=containers-iks-release#apr20)
 
-[March 2020](/docs/containers?topic=containers-iks-release#mar20)
+* [March 2020](/docs/containers?topic=containers-iks-release#mar20)
 
-[February 2020](/docs/containers?topic=containers-iks-release#feb20)
+* [February 2020](/docs/containers?topic=containers-iks-release#feb20)
 
-[January 2020](/docs/containers?topic=containers-iks-release#jan20)
+* [January 2020](/docs/containers?topic=containers-iks-release#jan20)
 
-[December 2019](/docs/containers?topic=containers-iks-release#dec19)
+* [December 2019](/docs/containers?topic=containers-iks-release#dec19)
 
-[November 2019](/docs/containers?topic=containers-iks-release#nov19)
+* [November 2019](/docs/containers?topic=containers-iks-release#nov19)
 
-[October 2019](/docs/containers?topic=containers-iks-release#oct19)
+* [October 2019](/docs/containers?topic=containers-iks-release#oct19)
 
-[September 2019](/docs/containers?topic=containers-iks-release#sept19)
+* [September 2019](/docs/containers?topic=containers-iks-release#sept19)
 
-[August 2019](/docs/containers?topic=containers-iks-release#aug19)
+* [August 2019](/docs/containers?topic=containers-iks-release#aug19)
 
-[July 2019](/docs/containers?topic=containers-iks-release#jul19)
+* [July 2019](/docs/containers?topic=containers-iks-release#jul19)
 
-[June 2019](/docs/containers?topic=containers-iks-release#jun19)
+* [June 2019](/docs/containers?topic=containers-iks-release#jun19)
 
-[May 2019](/docs/containers?topic=containers-iks-release#may19)
+* [May 2019](/docs/containers?topic=containers-iks-release#may19)
 
 
 ## Service limitations
@@ -5248,20 +5251,20 @@ subcollection: containers
 
 [Service limitations](/docs/containers?topic=containers-limitations#limitations)
 
-[Service and quota limitations](/docs/containers?topic=containers-limitations#tech_limits)
+* [Service and quota limitations](/docs/containers?topic=containers-limitations#tech_limits)
 
-[Classic cluster limitations](/docs/containers?topic=containers-limitations#classic_limits)
+* [Classic cluster limitations](/docs/containers?topic=containers-limitations#classic_limits)
 
-* [Compute](/docs/containers?topic=containers-limitations#classic_compute_limit)
+    * [Compute](/docs/containers?topic=containers-limitations#classic_compute_limit)
 
-* [Networking](/docs/containers?topic=containers-limitations#classic_networking_limit)
+    * [Networking](/docs/containers?topic=containers-limitations#classic_networking_limit)
 
-* [Storage](/docs/containers?topic=containers-limitations#classic_storage_limit)
+    * [Storage](/docs/containers?topic=containers-limitations#classic_storage_limit)
 
-[VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
+* [VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
 
-* [Compute](/docs/containers?topic=containers-limitations#vpc_gen2_compute_limit)
+    * [Compute](/docs/containers?topic=containers-limitations#vpc_gen2_compute_limit)
 
-* [Networking](/docs/containers?topic=containers-limitations#vpc_gen2_networking_limit)
+    * [Networking](/docs/containers?topic=containers-limitations#vpc_gen2_networking_limit)
 
-* [Storage](/docs/containers?topic=containers-limitations#vpc_gen2_storage_limit)
+    * [Storage](/docs/containers?topic=containers-limitations#vpc_gen2_storage_limit)

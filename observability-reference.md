@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-21"
+lastupdated: "2021-10-29"
 
 keywords: observability commands, observability cli, observability plug-in, logging commands, monitoring commands, logging cli, monitoring cli, logging config, monitoring config
 
@@ -25,6 +25,7 @@ Looking for `ibmcloud ks` commands? See the [{{site.data.keyword.containerlong_n
 
 ## Logging commands
 {: #logging-commands}
+
 ### `ibmcloud ob logging agent discover`
 {: #logging_agent_discover}
 
@@ -284,7 +285,7 @@ ibmcloud ob logging config show --cluster CLUSTER --instance LOGGING_INSTANCE
 
 
 ## Monitoring commands
-
+{: #monitoring_commands_top}
 
 ### `ibmcloud ob monitoring agent discover`
 {: #monitoring_agent_discover}
