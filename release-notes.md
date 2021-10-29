@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-25"
+lastupdated: "2021-10-29"
 
 keywords: kubernetes, iks, release notes
 
@@ -937,7 +937,7 @@ From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai f
     <td>13 May 2019</td>
     <td><ul>
     <li><strong>Version changelogs</strong>: Added that new patch updates are available for <a href="/docs/containers?topic=containers-changelog_archive#1141_1518">1.14.1_1518</a>, <a href="/docs/containers?topic=containers-changelog_archive#1136_1521">1.13.6_1521</a>, <a href="/docs/containers?topic=containers-changelog_archive#1128_1552">1.12.8_1552</a>, <a href="/docs/containers?topic=containers-changelog_archive#11110_1558">1.11.10_1558</a>, and <a href="/docs/containers?topic=containers-changelog_archive#11013_1558">1.10.13_1558</a>.</li>
-    <li><strong>Worker node flavors</strong>: Removed all <a href="/docs/containers?topic=containers-planning_worker_nodes#vm">virtual machine worker node flavors</a> that are 48 or more cores per <a href="https://cloud.ibm.com/status?component=containers-kubernetes&selected=status">cloud status</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. You can still provision <a href="/docs/containers?topic=containers-planning_worker_nodes#bm">bare metal worker nodes</a> with 48 or more cores.</li></ul></td>
+    <li><strong>Worker node flavors</strong>: Removed all <a href="/docs/containers?topic=containers-planning_worker_nodes#vm">virtual machine worker node flavors</a> that are 48 or more cores. You can still provision <a href="/docs/containers?topic=containers-planning_worker_nodes#bm">bare metal worker nodes</a> with 48 or more cores.</li></ul></td>
 </tr>
 <tr>
     <td>08 May 2019</td>

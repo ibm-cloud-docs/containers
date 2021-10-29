@@ -2314,7 +2314,7 @@ subcollection: containers
 
 * [Setting up a key-value store for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
 
-    * [Using the Portworx KVDB](/docs/containers?topic=containers-portworx#portworx-kvdb)
+    * [Using the Portworx key-value database](/docs/containers?topic=containers-portworx#portworx-kvdb)
 
     * [Optional: Setting up a Databases for etcd service instance](/docs/containers?topic=containers-portworx#databases-for-etcd)
 
@@ -2364,7 +2364,7 @@ subcollection: containers
 
     * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-portworx#remove_storage_node_cluster-px)
 
-    * [Removing the Portworx daemon set](/docs/containers?topic=containers-portworx#remove_px_daemonset)
+    * [Removing the Portworx DaemonSet](/docs/containers?topic=containers-portworx#remove_px_daemonset)
 
     * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
 
@@ -2428,7 +2428,7 @@ subcollection: containers
 
 * [Setting up {{site.data.keyword.mon_full_notm}} for storage volumes](/docs/containers?topic=containers-utilities#monitor_storage)
 
-    * [Troubleshooting persistent storage when a {{site.data.keyword.mon_full_notm}} alert is triggered](/docs/containers?topic=containers-utilities#monitor_storage_ts)
+    * [Troubleshooting persistent storage when an {{site.data.keyword.mon_full_notm}} alert is triggered](/docs/containers?topic=containers-utilities#monitor_storage_ts)
 
 
 ## Enhancing cluster capabilities with integrations
@@ -2940,6 +2940,8 @@ subcollection: containers
     * [`ibmcloud ob logging config replace`](/docs/containers?topic=containers-observability_cli#logging_config_replace)
 
     * [`ibmcloud ob logging config show`](/docs/containers?topic=containers-observability_cli#logging_config_show)
+
+* [Monitoring commands](/docs/containers?topic=containers-observability_cli#monitoring_commands_top)
 
     * [`ibmcloud ob monitoring agent discover`](/docs/containers?topic=containers-observability_cli#monitoring_agent_discover)
 

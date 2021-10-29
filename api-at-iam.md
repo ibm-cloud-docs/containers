@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-22"
+lastupdated: "2021-10-29"
 
-keywords: kubernetes, iks, istio, add-on
+keywords: Kubernetes, iks, istio, add-on
 
 subcollection: containers
 

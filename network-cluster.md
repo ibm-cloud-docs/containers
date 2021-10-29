@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-21"
+lastupdated: "2021-10-29"
 
 keywords: kubernetes, iks, vlan
 
@@ -65,7 +65,7 @@ Did you create a cluster with only a private cloud service endpoint before you e
     - [Allow your authorized cluster users to run `kubectl` commands to access the master through the private cloud service endpoint.](/docs/containers?topic=containers-firewall#firewall_kubectl)
     - [Allow outbound network traffic to the private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for infrastructure resources and for the {{site.data.keyword.cloud_notm}} services that you plan to use.
 
-9. Optional: To use the private cloud service endpoint only:
+8. Optional: To use the private cloud service endpoint only:
     1. [Disable the public cloud service endpoint](#disable-public-se).
     2. [Set up access to the master on the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se).
 
@@ -98,11 +98,14 @@ If you previously disabled the public endpoint, you can re-enable it.
     {: pre}
 
 3. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the configmap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
-4. Update all the worker nodes in your cluster to remove the public cloud service endpoint configuration.<p class="important">By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually with the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.</p>
+4. Update all the worker nodes in your cluster to remove the public cloud service endpoint configuration.
     ```sh
     ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
     ```
     {: pre}
+    
+    By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually with the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.
+    {: important}
 
 
 
@@ -133,6 +136,9 @@ To disable the public cloud service endpoint, you must first enable the private 
     ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
     ```
     {: pre}
+    
+    By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually with the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.
+    {: important}
 
 ## Switching from the public cloud service endpoint to the private cloud service endpoint
 {: #migrate-to-private-se}
@@ -228,7 +234,7 @@ To change the VLANs that a worker pool uses to provision worker nodes.
         {: pre}
 
     2. Check that the public and private VLANs in the zone are compatible. To be compatible, the **Router** must have the same pod ID. In this example output, the **Router** pod IDs match: `01a` and `01a`. If one pod ID was `01a` and the other was `02a`, you cannot set these public and private VLAN IDs for your worker pool.
-        ```
+        ```sh
         ID        Name   Number   Type      Router         Supports Virtual Workers
         229xxxx          1234     private   bcr01a.dal12   true
         229xxxx          5678     public    fcr01a.dal12   true

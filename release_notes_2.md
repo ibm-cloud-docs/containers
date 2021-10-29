@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-28"
+lastupdated: "2021-10-29"
 
 keywords: kubernetes, iks, release notes
 
@@ -20,7 +20,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 {: shortdesc}
 
 
-For information about releases that occured before August 30th, see [Release notes](/docs/containers?topic=containers-iks-release).
+For information about releases that occurred before August 30th, see [Release notes](/docs/containers?topic=containers-iks-release).
 {: note}
 
 

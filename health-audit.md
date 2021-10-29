@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-21"
+lastupdated: "2021-10-29"
 
 keywords: kubernetes, iks, logmet, logs, metrics, audit, events
 
@@ -48,7 +48,7 @@ To get started, follow the instructions to send Kubernetes API audit logs [to {{
 To forward audit logs to {{site.data.keyword.la_full_notm}}, you can create a Kubernetes audit system by using the provided image and deployment.
 {: shortdesc}
 
-The Kubernetes audit system in your cluster consists of an audit webhook, a log collection service and webserver app, and a logging agent. The webhook collects the Kubernetes API server events from your cluster master. The log collection service is a Kubernetes `ClusterIP` service that is created from an image from the public {{site.data.keyword.cloud_notm}} registry. This service exposes a simple `node.js` HTTP webserver app that is exposed only on the private network. The webserver app parses the log data from the audit webhook and creates each log as a unique JSON line. Finally, the logging agent forwards the logs from the webserver app to {{site.data.keyword.la_full_notm}}, where you can view the logs.
+The Kubernetes audit system in your cluster consists of an audit webhook, a log collection service and web server app, and a logging agent. The webhook collects the Kubernetes API server events from your cluster master. The log collection service is a Kubernetes `ClusterIP` service that is created from an image from the public {{site.data.keyword.cloud_notm}} registry. This service exposes a simple `node.js` HTTP web server app that is exposed only on the private network. The web server app parses the log data from the audit webhook and creates each log as a unique JSON line. Finally, the logging agent forwards the logs from the web server app to {{site.data.keyword.la_full_notm}}, where you can view the logs.
 
 **Before you begin**: Ensure that you reviewed the [considerations and prerequisites](#prereqs-apiserver-logs) and that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/account?topic=account-userroles) for {{site.data.keyword.la_full_notm}}.
 
@@ -169,7 +169,7 @@ The Kubernetes audit system in your cluster consists of an audit webhook, a log 
     {: screen}
     
 
-9. Configure the audit webhook and specify the `certificate-authority`, `client-certificate`, and `client-key` that you retreived in the previous step.
+9. Configure the audit webhook and specify the `certificate-authority`, `client-certificate`, and `client-key` that you retrieved in the previous step.
     ```sh
     ibmcloud ks cluster master audit-webhook set --cluster <cluster> --remote-server https://127.0.0.1:2040/api/v1/namespaces/default/services/ibmcloud-kube-audit-service/proxy/post --ca-cert <certificate-authority> --client-cert <client-certificate> --client-key <client-key>
     ```
