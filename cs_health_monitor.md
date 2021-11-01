@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-19"
+lastupdated: "2021-11-01"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -45,7 +45,7 @@ Kubernetes dashboard
 Use the {{site.data.keyword.containerlong_notm}} observability plug-in to create a monitoring configuration for {{site.data.keyword.mon_full_notm}} in your cluster, and use this monitoring configuration to automatically collect and forward metrics to {{site.data.keyword.mon_full_notm}}.
 {: shortdesc}
 
-With {{site.data.keyword.mon_full_notm}}, you can collect cluster and pod metrics, such as the CPU and memory usage of your worker nodes, incoming and outgoing HTTP traffic for your pods, and data about several infrastructure components. In addition, the agent can collect custom application metrics by using either a Prometheus-compatible scraper or a StatsD facade.
+With {{site.data.keyword.mon_full_notm}}, you can collect cluster and pod metrics, such as the CPU and memory usage of your worker nodes, incoming and outgoing HTTP traffic for your pods, and data about several infrastructure components. In addition, the agent can collect custom application metrics by using either a Prometheus-compatible scraper or a statsd facade.
 
 Considerations for using the {{site.data.keyword.containerlong_notm}} observability plug-in:
 - You can have only one monitoring configuration for {{site.data.keyword.mon_full_notm}} in your cluster at a time. If you want to use a different {{site.data.keyword.mon_full_notm}} service instance to send metrics to, use the [`ibmcloud ob monitoring config replace`](/docs/containers?topic=containers-observability_cli#monitoring_config_replace) command.
@@ -220,11 +220,11 @@ To set up monitoring for these conditions, configure alerts based on the followi
 | Metric | {{site.data.keyword.mon_full_notm}} metric | Alert threshold |
 | --- | --- | --- |
 | Multiple restarts of a pod in a short amount of time. | `kubernetes.pod.restart.count` | Greater than 4 for the last 10 minutes |
-| No running replicas in a replicaset. | `kubernetes.replicaSet.replicas.running` in `kubernetes.deployment.name` | Less than one. |
+| No running replicas in a ReplicaSet. | `kubernetes.replicaSet.replicas.running` in `kubernetes.deployment.name` | Less than one. |
 | More than 5 pods pending in cluster. | `kubernetes.namespace.pod.status.name` | Status equals `pending` greater than five.|
 | No replicas in a deployment available. | `kubernets.deployment.replicas.available` | Less than one. |
-| Number of pods per node reaching threshold of 110. | Count by `(kube_cluster_name,kube_node_name)(kube_pod_container_info)` Greater than or equal to 100. Note that this query is a promQL query. |
-| Workloads that are in an unknown state. | `(kube_workload_status_unavailable)` | Greater than or equal to one. Note that this query is a promQL query. |
+| Number of pods per node reaching threshold of 110. | Count by `(kube_cluster_name,kube_node_name)(kube_pod_container_info)` Greater than or equal to 100. Note that this query is a `promQL` query. |
+| Workloads that are in an unknown state. | `(kube_workload_status_unavailable)` | Greater than or equal to one. Note that this query is a `promQL` query. |
 {: caption="App level metrics"}
 {: summary="The table shows the app metrics that you can configure. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
@@ -249,7 +249,7 @@ Review the following thresholds and alerts for worker nodes.
 | Nodes with disk pressure exist. | `kubernetes.node.diskPressure` | Greater than or equal to 1 for 10 minutes. |
 | Nodes without disk space exist. | `kubernetes.nodes.outOfDisk` | Greater than or equal to 1. |
 | Average free disk space. | `fs.free.percent` | Less than 20% for 1 hour. |
-| Kubernetes nodes not ready exist. | |kubernetes.node.ready >= 1|
+| Kubernetes nodes not ready exist. | `kubernetes.node.ready >= 1` |
 {: caption="Worker node metrics"}
 {: summary="The table shows worker node metrics that you can configure. Rows are to be read from the left to right, with the name of the metric in column one, and Monitoring parameter in column two, and an example alert threshold in column three."}
 
@@ -293,7 +293,7 @@ More than 2 worker nodes in one zone are not ready (label: label_failure_domain_
 To set up zone level alerts, edit the `sysdig-agent` configmap to include the required label filters.
 {: shortdesc}
 
-1. Edit the configmap by running the followig command.
+1. Edit the configmap by running the following command.
     ```sh
     kubectl edit configmap sysdig-agent -n ibm-observe
     ```
