@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-10-29"
+lastupdated: "2021-11-01"
 
 keywords: containers
 subcollection: containers
@@ -474,7 +474,7 @@ subcollection: containers
 
     * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_clusters#vpc-worker-services-onprem)
 
-    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_clusters#vpc-external-workers)
+    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_clusters#vpc-worker-services-onprem)
 
 * [Example scenarios for VPC cluster network setups](/docs/containers?topic=containers-plan_clusters#vpc-scenarios)
 
@@ -579,7 +579,7 @@ subcollection: containers
 
 * [Accessing the cluster master via admission controllers and webhooks](/docs/containers?topic=containers-access_cluster#access_webhooks)
 
-* [Accessing private clusters by using the Wireguard VPN](/docs/containers?topic=containers-access_cluster#access_vpn_containers)
+* [Accessing private clusters by using the WireGuard VPN](/docs/containers?topic=containers-access_cluster#access_vpn_containers)
 
 
 ## Managing the cluster and worker node lifecycle
@@ -2022,6 +2022,10 @@ subcollection: containers
     * [Changing the number of open files for worker processes](/docs/containers?topic=containers-comm-ingress-annotations#max-worker-files)
 
     * [Tuning kernel performance](/docs/containers?topic=containers-comm-ingress-annotations#ingress_kernel)
+
+[Observing Kubernetes Ingress](/docs/containers?topic=containers-cs_ingress_monitor#cs_ingress_monitor)
+
+* [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-cs_ingress_monitor#ingress_health_mon)
 
 [Bringing your own Ingress controller](/docs/containers?topic=containers-ingress-user_managed#ingress-user_managed)
 
