@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-01"
+lastupdated: "2021-11-02"
 
 keywords: containers
 subcollection: containers
@@ -185,6 +185,10 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-rel-notes#rel-notes)
+
+* [November 2021](/docs/containers?topic=containers-rel-notes#release-nov-2021)
+
+    * [2 November 2021](/docs/containers?topic=containers-rel-notes#2nov2021)
 
 * [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
 
@@ -474,7 +478,7 @@ subcollection: containers
 
     * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_clusters#vpc-worker-services-onprem)
 
-    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_clusters#vpc-worker-services-onprem)
+    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_clusters#vpc-external-workers)
 
 * [Example scenarios for VPC cluster network setups](/docs/containers?topic=containers-plan_clusters#vpc-scenarios)
 
@@ -3389,6 +3393,8 @@ subcollection: containers
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
 * [Version 1.11](/docs/containers?topic=containers-istio-changelog#v111)
+
+    * [Changelog for 1.11.4, released 2 November 2021](/docs/containers?topic=containers-istio-changelog#1114)
 
     * [Changelog for 1.11.3, released 7 October 2021](/docs/containers?topic=containers-istio-changelog#1113)
 

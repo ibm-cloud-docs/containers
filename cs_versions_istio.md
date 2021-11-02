@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-28"
+lastupdated: "2021-11-02"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -40,6 +40,17 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 ## Version 1.11
 {: #v111}
 
+### Changelog for 1.11.4, released 2 November 2021
+{: #1114}
+
+Review the changes that are included in version 1.11.4 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.11.3  
+**Current version**: 1.11.4  
+**Updates in this version:**  
+- See the Istio release notes for [Istio 1.11.4](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.4/){: external}.
+
 ### Changelog for 1.11.3, released 7 October 2021
 {: #1113}
 
@@ -56,7 +67,7 @@ Review the changes that are included in version 1.11.3 of the managed Istio add-
     - [CVE-2021-22947](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22947){: external}
     - [CVE-2021-33560](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33560){: external}
     - [CVE-2021-40528](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-40528){: external}
-- For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/).
+- For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
 ### Changelog for 1.11.2, released 23 September 2021
 {: #1112}
@@ -88,7 +99,7 @@ Review the changes that are included in version 1.11.1 of the managed Istio add-
     - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
     - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
 - Adds a postStart to the sidecar to enable the holdApplicationUntilProxyStarts option. Since the sidecar is normally last this doesn't impact default behavior where Istio places the sidecar as the last container. If you are adding containers to your pods, verify that they get added before the sidecar or are okay waiting for the sidecar to start.
-- For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/).
+- For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
 
 ## Version 1.10
@@ -133,7 +144,7 @@ Review the changes that are included in version 1.10.4 of the managed Istio add-
     - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
     - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
     - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
-- For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/).
+- For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
 ### Changelog for 1.10.3, released 5 August 2021
 {: #1103}
@@ -188,7 +199,7 @@ Review the changes that are included in version 1.9.8 of the managed Istio add-o
     - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
     - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
     - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
-- For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/).
+- For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
 ### Changelog for 1.9.7, released 12 August 2021
 {: #197}
@@ -259,7 +270,7 @@ Review the changes that are included in version 1.9.3 of the managed Istio add-o
     - [CVE-2021-22890](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22890){: external}
     - [usn-4891-1](https://ubuntu.com/security/notices/USN-4891-1/){: external}
     - [usn-4898-1](https://ubuntu.com/security/notices/USN-4898-1/){: external}. 
-- For more information, see the [Istio security bulletin 2021-003](https://istio.io/latest/news/security/istio-security-2021-003/).
+- For more information, see the [Istio security bulletin 2021-003](https://istio.io/latest/news/security/istio-security-2021-003/){: external}.
 
 
 ### Changelog for 1.9.2, released 1 April 2021
