@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-19"
+lastupdated: "2021-11-03"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -188,16 +188,16 @@ In the following image, you can see the location of the sources that you can con
     :   `/var/log/kubelet.log`
     :   `/var/log/kube-proxy.log`
     :   `/var/log/event-exporter/1..log`
-
-6. `kube-audit`: Information about cluster-related actions that is sent to the Kubernetes API server, including the time, the user, and the affected resource.
-
-7. `ingress`: Information about the network traffic that comes into a cluster through the Ingress ALB.
+    
+6. `ingress`: Information about the network traffic that comes into a cluster through the Ingress ALB.
 
     Paths
     :   `/var/log/alb/ids/*.log`
     :   `/var/log/alb/ids/*.err`
     :   `/var/log/alb/customerlogs/*.log`
     :   `/var/log/alb/customerlogs/*.err`
+
+7. `kube-audit`: Information about cluster-related actions that is sent to the Kubernetes API server, including the time, the user, and the affected resource. The `kube-audit` source can be configured with a webhook. For more information, see [Forwarding Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health-audit#audit-api-server-external).
 
 
 **Am I responsible for keeping Fluentd updated?**
@@ -450,7 +450,6 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
     s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-2-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
     ```
     {: screen}
-
 
 
 
