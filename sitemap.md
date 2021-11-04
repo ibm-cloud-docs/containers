@@ -1440,7 +1440,9 @@ subcollection: containers
 
 * [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-registry#secret_entitled_software)
 
-* [Updating your cluster's containerd registry host configuration](/docs/containers?topic=containers-registry#update_containerd_registry_config)
+* [Updating an {{site.data.keyword.containerlong_notm}} containerd custom registry configuration](/docs/containers?topic=containers-registry#update_containerd_registry_config)
+
+    * [Example daemonset to update a containerd custom registry configuration](/docs/containers?topic=containers-registry#ds-example-registry)
 
 [Setting up continuous integration and delivery](/docs/containers?topic=containers-cicd#cicd)
 
