@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-02"
+lastupdated: "2021-11-04"
 
 keywords: containers
 subcollection: containers
@@ -38,9 +38,9 @@ subcollection: containers
 
 * [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
 
-    * [Deploying an app to a free classic cluster and exposing it with a node port](/docs/containers?topic=containers-getting-started#deployapp1)
+* [Deploying an app to a free classic cluster and exposing it with a node port](/docs/containers?topic=containers-getting-started#deployapp1)
 
-    * [Deploying an app to a standard cluster and exposing with a load balancer](/docs/containers?topic=containers-getting-started#deployapp2)
+* [Deploying an app to a standard cluster and exposing with a load balancer](/docs/containers?topic=containers-getting-started#deployapp2)
 
 * [What's next?](/docs/containers?topic=containers-getting-started#whats-next)
 
@@ -188,57 +188,59 @@ subcollection: containers
 
 * [November 2021](/docs/containers?topic=containers-rel-notes#release-nov-2021)
 
-    * [2 November 2021](/docs/containers?topic=containers-rel-notes#2nov2021)
+* [4 November 2021](/docs/containers?topic=containers-rel-notes#4nov2021)
+
+* [2 November 2021](/docs/containers?topic=containers-rel-notes#2nov2021)
 
 * [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
 
-    * [28 October 2021](/docs/containers?topic=containers-rel-notes#28oct2021)
+* [28 October 2021](/docs/containers?topic=containers-rel-notes#28oct2021)
 
-    * [26 October 2021](/docs/containers?topic=containers-rel-notes#26oct2021)
+* [26 October 2021](/docs/containers?topic=containers-rel-notes#26oct2021)
 
-    * [25 October 2021](/docs/containers?topic=containers-rel-notes#25oct2021)
+* [25 October 2021](/docs/containers?topic=containers-rel-notes#25oct2021)
 
-    * [22 October 2021](/docs/containers?topic=containers-rel-notes#22oct2021)
+* [22 October 2021](/docs/containers?topic=containers-rel-notes#22oct2021)
 
-    * [19 October 2021](/docs/containers?topic=containers-rel-notes#19oct2021)
+* [19 October 2021](/docs/containers?topic=containers-rel-notes#19oct2021)
 
-    * [18 October 2021](/docs/containers?topic=containers-rel-notes#18oct2021)
+* [18 October 2021](/docs/containers?topic=containers-rel-notes#18oct2021)
 
-    * [13 October 2021](/docs/containers?topic=containers-rel-notes#13oct2021)
+* [13 October 2021](/docs/containers?topic=containers-rel-notes#13oct2021)
 
-    * [11 October 2021](/docs/containers?topic=containers-rel-notes#11oct2021)
+* [11 October 2021](/docs/containers?topic=containers-rel-notes#11oct2021)
 
-    * [7 October 2021](/docs/containers?topic=containers-rel-notes#7oct2021)
+* [7 October 2021](/docs/containers?topic=containers-rel-notes#7oct2021)
 
-    * [6 October 2021](/docs/containers?topic=containers-rel-notes#6oct2021)
+* [6 October 2021](/docs/containers?topic=containers-rel-notes#6oct2021)
 
-    * [5 October 2021](/docs/containers?topic=containers-rel-notes#5oct2021)
+* [5 October 2021](/docs/containers?topic=containers-rel-notes#5oct2021)
 
 * [September 2021](/docs/containers?topic=containers-rel-notes#release-sep-2021)
 
-    * [29 September 2021](/docs/containers?topic=containers-rel-notes#29sep2021)
+* [29 September 2021](/docs/containers?topic=containers-rel-notes#29sep2021)
 
-    * [27 September 2021](/docs/containers?topic=containers-rel-notes#27sep2021)
+* [27 September 2021](/docs/containers?topic=containers-rel-notes#27sep2021)
 
-    * [23 September 2021](/docs/containers?topic=containers-rel-notes#23sep2021)
+* [23 September 2021](/docs/containers?topic=containers-rel-notes#23sep2021)
 
-    * [22 September 2021](/docs/containers?topic=containers-rel-notes#22sep2021)
+* [22 September 2021](/docs/containers?topic=containers-rel-notes#22sep2021)
 
-    * [16 September 2021](/docs/containers?topic=containers-rel-notes#16sep2021)
+* [16 September 2021](/docs/containers?topic=containers-rel-notes#16sep2021)
 
-    * [14 September 2021](/docs/containers?topic=containers-rel-notes#14sep2021)
+* [14 September 2021](/docs/containers?topic=containers-rel-notes#14sep2021)
 
-    * [13 September 2021](/docs/containers?topic=containers-rel-notes#13sep2021)
+* [13 September 2021](/docs/containers?topic=containers-rel-notes#13sep2021)
 
-    * [9 September 2021](/docs/containers?topic=containers-rel-notes#9sep2021)
+* [9 September 2021](/docs/containers?topic=containers-rel-notes#9sep2021)
 
-    * [1 September 2021](/docs/containers?topic=containers-rel-notes#1sep2021)
+* [1 September 2021](/docs/containers?topic=containers-rel-notes#1sep2021)
 
 * [August 2021](/docs/containers?topic=containers-rel-notes#release-aug-2021)
 
-    * [31 August 2021](/docs/containers?topic=containers-rel-notes#31aug2021)
+* [31 August 2021](/docs/containers?topic=containers-rel-notes#31aug2021)
 
-    * [30 August 2021](/docs/containers?topic=containers-rel-notes#30aug2021)
+* [30 August 2021](/docs/containers?topic=containers-rel-notes#30aug2021)
 
 
 ## Tutorials library for Kubernetes Service
@@ -2262,7 +2264,7 @@ subcollection: containers
 
 * [Installing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#install_cos)
 
-    * [Verifying your installation](/docs/containers?topic=containers-object_storage#cos-plugin verify)
+    * [Verifying your installation](/docs/containers?topic=containers-object_storage#cos-plugin)
 
     * [Updating the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin)
 
@@ -4554,25 +4556,25 @@ subcollection: containers
 
 * [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
 
-    * [How locations are organized](/docs/containers?topic=containers-regions-and-zones#example_locations_org)
+* [How locations are organized](/docs/containers?topic=containers-regions-and-zones#example_locations_org)
 
-    * [Classic multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-mz)
+* [Classic multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-mz)
 
-    * [Classic single zone regions](/docs/containers?topic=containers-regions-and-zones#zones-sz)
+* [Classic single zone regions](/docs/containers?topic=containers-regions-and-zones#zones-sz)
 
-    * [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
+* [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
 
-    * [Resources in a single zone cluster](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
+* [Resources in a single zone cluster](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
 
-    * [Resources in a multizone cluster](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
+* [Resources in a multizone cluster](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
 
-    * [Free clusters](/docs/containers?topic=containers-regions-and-zones#regions_free)
+* [Free clusters](/docs/containers?topic=containers-regions-and-zones#regions_free)
 
 * [Accessing the global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint)
 
-    * [Logging in to {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-regions-and-zones#login-ic)
+* [Logging in to {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-regions-and-zones#login-ic)
 
-    * [Logging in to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#login-iks)
+* [Logging in to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#login-iks)
 
 * [Previous {{site.data.keyword.cloud_notm}} region and zone structure](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
@@ -5265,16 +5267,16 @@ subcollection: containers
 
 * [Classic cluster limitations](/docs/containers?topic=containers-limitations#classic_limits)
 
-    * [Compute](/docs/containers?topic=containers-limitations#classic_compute_limit)
+* [Compute](/docs/containers?topic=containers-limitations#classic_compute_limit)
 
-    * [Networking](/docs/containers?topic=containers-limitations#classic_networking_limit)
+* [Networking](/docs/containers?topic=containers-limitations#classic_networking_limit)
 
-    * [Storage](/docs/containers?topic=containers-limitations#classic_storage_limit)
+* [Storage](/docs/containers?topic=containers-limitations#classic_storage_limit)
 
 * [VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
 
-    * [Compute](/docs/containers?topic=containers-limitations#vpc_gen2_compute_limit)
+* [Compute](/docs/containers?topic=containers-limitations#vpc_gen2_compute_limit)
 
-    * [Networking](/docs/containers?topic=containers-limitations#vpc_gen2_networking_limit)
+* [Networking](/docs/containers?topic=containers-limitations#vpc_gen2_networking_limit)
 
-    * [Storage](/docs/containers?topic=containers-limitations#vpc_gen2_storage_limit)
+* [Storage](/docs/containers?topic=containers-limitations#vpc_gen2_storage_limit)
