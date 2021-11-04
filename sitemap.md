@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-02"
+lastupdated: "2021-11-04"
 
 keywords: containers
 subcollection: containers
@@ -188,6 +188,8 @@ subcollection: containers
 
 * [November 2021](/docs/containers?topic=containers-rel-notes#release-nov-2021)
 
+    * [4 November 2021](/docs/containers?topic=containers-rel-notes#4nov2021)
+
     * [2 November 2021](/docs/containers?topic=containers-rel-notes#2nov2021)
 
 * [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
@@ -346,8 +348,6 @@ subcollection: containers
 * [Explore the toolchain tools, logs, and history](/docs/containers?topic=containers-tutorial-starterkit-kube#view-logs-starterkit-kube)
 
 * [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
-
-* [What's next?](/docs/containers?topic=containers-tutorial-starterkit-kube#next-steps-startkit-kube)
 
 [Developing a Kubernetes app toolchain with Code Risk Analyzer](https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer)){: new_window}{: external}
 
@@ -2262,7 +2262,7 @@ subcollection: containers
 
 * [Installing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#install_cos)
 
-    * [Verifying your installation](/docs/containers?topic=containers-object_storage#cos-plugin verify)
+    * [Verifying your installation](/docs/containers?topic=containers-object_storage#cos-plugin)
 
     * [Updating the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin)
 

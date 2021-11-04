@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021, 2021
-lastupdated: "2021-10-13"
+lastupdated: "2021-11-04"
 
 keywords: kubectl, exec, timeout
 
@@ -16,11 +16,26 @@ content-type: troubleshoot
 # Why doesn't the `kubectl exec` command automatically timeout?
 {: ts-kubectl-exec-timeout}
 
-When you use kubectl version 1.21 to run `kubectl exec <pod_name>`, the command does not automatically timeout. 
+When you use kubectl version 1.21 or later to run `kubectl exec <pod_name>`, the command does not automatically timeout. 
 {: tsSymptoms}
 
-There is a known issue in `kubectl` version 1.21 that prevents `kubectl exec <pod_name>` from timing out.
+There is a known issue that prevents the `kubectl exec <pod_name>` command from timing out in `kubectl` versions 1.21 and later.
 {: tsCauses}
 
-[Install `kubectl` version 1.20 or earlier](/docs/containers?topic=containers-cs_cli_install#kubectl). For clusters that run on Kubernetes versions 1.21 or 1.22, use `kubectl` version 1.20. For clusters that run on earlier Kubernetes versions, use the `kubectl` version that matches the `major.minor` Kubernetes version of your cluster. 
+For clusters that run on Kubernetes version 1.21 or later, run the `kubectl exec` command with `kubectl` version 1.20. To run all other commands, use the `kubectl` version that matches the `major.minor` version of your Kubernetes cluster. 
 {: tsResolve}
+
+1. [Download the binary file for `kubectl` version 1.20](/docs/containers?topic=containers-cs_cli_install#kubectl) and rename it to `kubectl-1.20` or similar.
+
+2. To run `kubectl exec`, refer to the renamed 1.20 version.
+
+```sh
+kubectl-1.20 exec <pod_name>
+```
+{: pre}
+
+### Links to additional information
+
+- [`kubectl` 1.21 and containerd fail to follow `stream_idle_timeout`](https://github.com/containerd/containerd/issues/5563){: external}
+- [`exec` timeout does not kick users out on `kubectl` client 1.21](https://github.com/kubernetes/kubernetes/issues/102569){: external}
+
