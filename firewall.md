@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-03"
+lastupdated: "2021-11-05"
 
 keywords: kubernetes, iks, firewall, vyatta, ips
 
@@ -250,7 +250,7 @@ ibmcloud ks worker ls --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
-#### Allow worker notes to communicate with cluster master
+#### Allow worker nodes to communicate with cluster master
 {: #master_ips}
 
 To allow worker nodes to communicate with the cluster master over the public cloud service endpoint, allow outgoing network traffic from the source *<each_worker_node_publicIP>* to the destination TCP/UDP port range 30000-32767 and port 443, and the following IP addresses and network groups.
