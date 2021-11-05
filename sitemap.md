@@ -2328,7 +2328,7 @@ subcollection: containers
 
     * [Optional: Setting up a Databases for etcd service instance](/docs/containers?topic=containers-portworx#databases-for-etcd)
 
-* [Optional: Setting up volume encryption](/docs/containers?topic=containers-portworx#encrypt_volumes)
+* [Setting up volume encryption](/docs/containers?topic=containers-portworx#encrypt_volumes)
 
     * [Portworx per-volume encryption workflow](/docs/containers?topic=containers-portworx#px_encryption)
 
