@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-04"
+lastupdated: "2021-11-05"
 
 keywords: containers
 subcollection: containers
@@ -1440,7 +1440,9 @@ subcollection: containers
 
 * [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-registry#secret_entitled_software)
 
-* [Updating your cluster's containerd registry host configuration](/docs/containers?topic=containers-registry#update_containerd_registry_config)
+* [Updating an {{site.data.keyword.containerlong_notm}} containerd custom registry configuration](/docs/containers?topic=containers-registry#update_containerd_registry_config)
+
+    * [Example daemonset to update a containerd custom registry configuration](/docs/containers?topic=containers-registry#ds-example-registry)
 
 [Setting up continuous integration and delivery](/docs/containers?topic=containers-cicd#cicd)
 
@@ -2326,7 +2328,7 @@ subcollection: containers
 
     * [Optional: Setting up a Databases for etcd service instance](/docs/containers?topic=containers-portworx#databases-for-etcd)
 
-* [Optional: Setting up volume encryption](/docs/containers?topic=containers-portworx#encrypt_volumes)
+* [Setting up volume encryption](/docs/containers?topic=containers-portworx#encrypt_volumes)
 
     * [Portworx per-volume encryption workflow](/docs/containers?topic=containers-portworx#px_encryption)
 
