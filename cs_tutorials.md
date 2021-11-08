@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-19"
+lastupdated: "2021-11-08"
 
 keywords: kubernetes, iks
 
@@ -232,23 +232,17 @@ To deploy the app:
     Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image. **Note**: You must specify a [registry region](/docs/Registry?topic=Registry-registry_overview#registry_regions), such as `us`. To get the registry region that you are currently in, run `ibmcloud cr region`.
 
     ```sh
-    ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:1 .
+    docker -t <region>.icr.io/<namespace>/hello-world:1 .
     ```
     {: pre}
 
-    When the build is complete, verify that you see the following success message:
+    When the build is complete, verify that you see the following success message at the end of the output:
 
     ```sh
-    Successfully built <image_ID>
-    Successfully tagged <region>.icr.io/<namespace>/hello-world:1
-    The push refers to a repository [<region>.icr.io/<namespace>/hello-world]
-    29042bc0b00c: Pushed
-    f31d9ee9db57: Pushed
-    33c64488a635: Pushed
-    0804854a4553: Layer already exists
-    6bd4a62f5178: Layer already exists
-    9dfa40a0da3b: Layer already exists
-    1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
+    => exporting to image                                                                           0.0s
+    => => exporting layers                                                                          0.0s
+    => => writing image sha256:3ca1eb1d0998f738b552d4c435329edf731fe59e427555b78ba2fb54f2017906     0.0s
+    => => naming to <region>.icr.io/<namespace>/hello-world:1                                       0.0s
     ```
     {: screen}
 
@@ -402,22 +396,16 @@ If you took a break from the last lesson, make sure that you log back in to your
 2. Build, tag, and push the app as an image to your namespace in {{site.data.keyword.registrylong_notm}}. Don't forget the period (`.`) at the end of the command.
 
     ```sh
-    ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:2 .
+    docker -t <region>.icr.io/<namespace>/hello-world:2 .
     ```
     {: pre}
 
-    Verify that you see the success message.
+    Verify that you see the success message at the end of the output.
     ```sh
-    Successfully built <image_ID>
-    Successfully tagged <region>.icr.io/<namespace>/hello-world:1
-    The push refers to a repository [<region>.icr.io/<namespace>/hello-world]
-    29042bc0b00c: Pushed
-    f31d9ee9db57: Pushed
-    33c64488a635: Pushed
-    0804854a4553: Layer already exists
-    6bd4a62f5178: Layer already exists
-    9dfa40a0da3b: Layer already exists
-    1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
+    => exporting to image                                                                           0.0s
+    => => exporting layers                                                                          0.0s
+    => => writing image sha256:3ca1eb1d0998f738b552d4c435329edf731fe59e427555b78ba2fb54f2017906     0.0s
+    => => naming to <region>.icr.io/<namespace>/hello-world:1                                       0.0s
     ```
     {: screen}
 
@@ -558,13 +546,16 @@ If you took a break from the last lesson, make sure that you log back in to your
 
     2. Build, tag, and push the `watson` app as an image to your namespace in {{site.data.keyword.registrylong_notm}}. Again, don't forget the period (`.`) at the end of the command.
         ```sh
-        ibmcloud cr build -t <region>.icr.io/<namespace>/watson .
+        docker build -t <region>.icr.io/<namespace>/watson .
         ```
         {: pre}
 
-        Verify that you see the success message.
+        Verify that you see the success message at the end of the output.
         ```sh
-        Successfully built <image_id>
+            => exporting to image                                                                           0.0s
+            => => exporting layers                                                                          0.0s
+            => => writing image sha256:3ca1eb1d0998f738b552d4c435329edf731fe59e427555b78ba2fb54f2017906     0.0s
+            => => naming to <region>.icr.io/<namespace>/watson                                              0.0s
         ```
         {: screen}
 
@@ -575,7 +566,7 @@ If you took a break from the last lesson, make sure that you log back in to your
         {: pre}
 
         ```sh
-        ibmcloud cr build -t <region>.icr.io/<namespace>/watson-talk .
+        ibmcloud cr docker -t <region>.icr.io/<namespace>/watson-talk .
         ```
         {: pre}
 

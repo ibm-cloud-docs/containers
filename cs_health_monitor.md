@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-01"
+lastupdated: "2021-11-08"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -223,7 +223,7 @@ To set up monitoring for these conditions, configure alerts based on the followi
 | No running replicas in a ReplicaSet. | `kubernetes.replicaSet.replicas.running` in `kubernetes.deployment.name` | Less than one. |
 | More than 5 pods pending in cluster. | `kubernetes.namespace.pod.status.name` | Status equals `pending` greater than five.|
 | No replicas in a deployment available. | `kubernets.deployment.replicas.available` | Less than one. |
-| Number of pods per node reaching threshold of 110. | Count by `(kube_cluster_name,kube_node_name)(kube_pod_container_info)` Greater than or equal to 100. Note that this query is a `promQL` query. |
+| Number of pods per node reaching threshold of 110. | Count by `(kube_cluster_name,kube_node_name)(kube_pod_container_info)` | Greater than or equal to 100. Note that this query is a `promQL` query. |
 | Workloads that are in an unknown state. | `(kube_workload_status_unavailable)` | Greater than or equal to one. Note that this query is a `promQL` query. |
 {: caption="App level metrics"}
 {: summary="The table shows the app metrics that you can configure. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}

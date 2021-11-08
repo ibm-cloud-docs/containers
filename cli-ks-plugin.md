@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-29"
+lastupdated: "2021-11-08"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -862,6 +862,8 @@ Create a Virtual Private Cloud (VPC) cluster with worker nodes on Generation 2 i
 Free clusters are not available in VPC.
 {: note}
 
+
+
 ```sh
 ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--version MAJOR.MINOR.PATCH] [--workers NUMBER_WORKERS_PER_ZONE] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] --kms-instance KMS_INSTANCE_ID --crk ROOT_KEY_ID][--skip-advance-permissions-check] [-q]
 ```
@@ -1528,6 +1530,7 @@ ibmcloud ks cluster master public-service-endpoint disable --cluster my_cluster
 
 Enable the [public cloud service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) to make your cluster master publicly accessible.
 {: shortdesc}
+
 
 After you run this command, you must refresh the API server to use the service endpoint by following the prompt in the CLI.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-19"
+lastupdated: "2021-11-08"
 
 keywords: kubernetes, iks
 
@@ -176,23 +176,17 @@ To deploy the app:
     Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image.
 
     ```sh
-    ibmcloud cr build -t us.icr.io/<namespace>/hello-world:1 .
+    docker build -t us.icr.io/<namespace>/hello-world:1 .
     ```
     {: pre}
 
     When the build is complete, verify that you see the following success message:
 
     ```
-    Successfully built <image_ID>
-    Successfully tagged us.icr.io/<namespace>/hello-world:1
-    The push refers to a repository [us.icr.io/vpc-gen2/hello-world]
-    29042bc0b00c: Pushed
-    f31d9ee9db57: Pushed
-    33c64488a635: Pushed
-    0804854a4553: Layer already exists
-    6bd4a62f5178: Layer already exists
-    9dfa40a0da3b: Layer already exists
-    1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
+    => exporting to image                                                                           0.0s
+    => => exporting layers                                                                          0.0s
+    => => writing image sha256:3ca1eb1d0998f738b552d4c435329edf731fe59e427555b78ba2fb54f2017906     0.0s
+    => => naming to <region>.icr.io/<namespace>/hello-world:1                                       0.0s
     ```
     {: screen}
 
