@@ -188,6 +188,8 @@ subcollection: containers
 
 * [November 2021](/docs/containers?topic=containers-rel-notes#release-nov-2021)
 
+    * [8 November 2021](/docs/containers?topic=containers-rel-notes#8nov2021)
+
     * [4 November 2021](/docs/containers?topic=containers-rel-notes#4nov2021)
 
     * [2 November 2021](/docs/containers?topic=containers-rel-notes#2nov2021)
