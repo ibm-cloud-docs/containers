@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-08"
+lastupdated: "2021-11-09"
 
 keywords: containers
 subcollection: containers
@@ -1017,6 +1017,8 @@ subcollection: containers
 [Setting Kubernetes API priority and fairness](/docs/containers?topic=containers-kubeapi-priority#kubeapi-priority)
 
 * [Reviewing default flow schema and priority levels](/docs/containers?topic=containers-kubeapi-priority#kubeapi-default-priority)
+
+    * [Viewing {{site.data.keyword.containerlong_notm}} created priority level configurations](/docs/containers?topic=containers-kubeapi-priority#kube-api-prioritylevelconfig)
 
 
 ## Securing the cluster network
