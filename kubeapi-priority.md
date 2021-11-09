@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-04"
+lastupdated: "2021-11-09"
 
 keywords: kubernetes, iks
 
@@ -32,7 +32,7 @@ The Kubernetes API priority and feature gate is enabled in clusters that run Kub
 
 | Flow schema | Resources that requests come from | Priority level |
 | ----------- | --------- | -------------- |
-| `apiserver-health` | Kubernetes API server health resources | Custom priority level for these resources |
+| `apiserver-health` | Kubernetes API server health resources | [Custom priority level](#kube-api-prioritylevelconfig) for these resources. |
 | `ibm-admin` | Resources from IBM cluster administrators | Exempts requests by cluster administrators from priority restrictions |
 | `ibm-system-service-accounts` | Resources in the `ibm-system` namespace that use a service account in the namespace | Same priority as `kube-system` namespace service accounts |
 | `ibm-operators-service-accounts` | Resources in the `ibm-operators` namespace that use a service account in the namespace | Same priority as `kube-system` namespace service accounts |
@@ -58,7 +58,23 @@ Follow the steps to review the flow schemas and priority levels set by {{site.da
     ```
     {: pre}
 
+### Viewing {{site.data.keyword.containerlong_notm}} created priority level configurations
+{: #kube-api-prioritylevelconfig}
 
+{{site.data.keyword.containerlong_notm}} sets a custom priority level configuration for the `apiserver-health` resource. 
+{: shortdesc}
+
+Use the following commands to view details about the configuration. 
+
+a. ```sh
+    kubectl get prioritylevelconfiguration apiserver-health
+    ```
+    {: pre}
+
+b. ```sh
+    kubectl describe prioritylevelconfiguration apiserver-health
+    ```
+    {: pre}
 
 
 

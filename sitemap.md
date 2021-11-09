@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-08"
+lastupdated: "2021-11-09"
 
 keywords: containers
 subcollection: containers
@@ -1017,6 +1017,8 @@ subcollection: containers
 [Setting Kubernetes API priority and fairness](/docs/containers?topic=containers-kubeapi-priority#kubeapi-priority)
 
 * [Reviewing default flow schema and priority levels](/docs/containers?topic=containers-kubeapi-priority#kubeapi-default-priority)
+
+    * [Viewing {{site.data.keyword.containerlong_notm}} created priority level configurations](/docs/containers?topic=containers-kubeapi-priority#kube-api-prioritylevelconfig)
 
 
 ## Securing the cluster network
@@ -2632,6 +2634,24 @@ subcollection: containers
     * [Deprecated: `ibmcloud ks cluster user-subnet add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_user_subnet_add)
 
     * [Deprecated: `ibmcloud ks cluster user-subnet rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_user_subnet_rm)
+
+* [`dedicated` commands](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_commands)
+
+    * [`ibmcloud ks dedicated host create`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_create)
+
+    * [`ibmcloud ks dedicated host get`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_get)
+
+    * [`ibmcloud ks dedicated host ls`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_ls)
+
+    * [`ibmcloud ks dedicated host rm`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_rm)
+
+    * [`ibmcloud ks dedicated pool create`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_create)
+
+    * [`ibmcloud ks dedicated pool get`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_get)
+
+    * [`ibmcloud ks dedicated pool ls`](/docs/containers?topic=containers-kubernetes-service-cli#dedicate_pool_ls)
+
+    * [`ibmcloud ks dedicated pool rm`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_rm)
 
 * [`worker` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker_node_commands)
 
