@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-08"
+lastupdated: "2021-11-09"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -2037,9 +2037,279 @@ ibmcloud ks cluster user-subnet rm --cluster CLUSTER --subnet-cidr SUBNET_CIDR -
 ```sh
 ibmcloud ks cluster user-subnet rm --cluster my_cluster --subnet-cidr 169.xx.xxx.xxx/29 --private-vlan 1502175
 ```
+{: pre}<staging-cli-2073>
+
+## `dedicated` commands
+{: #dedicated_commands}
+
+View, create, and remove a dedicated host or dedicated host pool. 
+{: shortdesc}
+
+### `ibmcloud ks dedicated host create`
+{: #dedicated_host_create}
+
+Create a dedicated host. 
+{: shortdesc}
+
+```sh
+ibmcloud ks dedicated host create --flavor FLAVOR --pool POOL --zone ZONE [--output OUTPUT] [-q]
+```
 {: pre}
 
+**Supported infrastructure provider**: * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
 
+**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+
+**Command options**:
+
+`-- flavor FLAVOR`
+:    The flavor of the dedicated host.
+
+`-- pool POOL`
+:    The name of the dedicated host pool where the dedicated host is added.
+
+`--zone ZONE`
+:    The zone to create the dedicated host in.
+
+`--output json`
+:    Optional: Prints the command output in JSON format.
+
+**Example**:
+
+```sh
+ibmcloud ks dedicated host create --flavor b3c.4x16 --pool mypool --zone wdc
+```
+{: pre}
+
+### `ibmcloud ks dedicated host get`
+{: #dedicated_host_get}
+
+Get the details of a dedicated host.
+{: shortdesc}
+
+```sh
+ibmcloud ks dedicated host get --host HOST --pool POOL [--output OUTPUT] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**: * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+
+**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+
+**Command options**:
+
+`--host HOST`
+:    The ID of the dedicated host. 
+
+`--pool POOL`
+:    The ID of the dedicated host pool that the dedicated host is located in. To list dedicated host pools run `ibmcloud ks dedicated pool ls`.
+
+`--output json`
+:    Optional: Prints the command output in JSON format.
+
+`-q`
+:    Optional: Do not show the message of the day or update reminders.
+
+**Example**:
+
+```sh
+ibmcloud ks dedicated host get --host myhost  --pool mypool 
+```
+{: pre}
+
+### `ibmcloud ks dedicated host ls`
+{: #dedicated_host_ls}
+
+List all dedicated hosts in a dedicated host pool. 
+{: shortdesc}
+
+```sh
+ibmcloud ks dedicated host ls --pool POOL [--output OUTPUT] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**: * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+
+**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+
+**Command options**:
+
+`--pool POOL`
+:    The ID of the dedicated host pool. To list dedicated host pools run `ibmcloud ks dedicated pool ls`.
+
+`-q`
+:    Optional: Do not show the message of the day or update reminders.
+
+**Example**:
+
+```sh
+ibmcloud ks dedicated host ls --pool mypool 
+```
+{: pre}
+
+### `ibmcloud ks dedicated host rm`
+{: #dedicated_host_rm}
+
+Delete a dedicated host. This action cannot be undone.
+{: shortdesc}
+
+```sh
+ibmcloud ks dedicated host rm --host HOST --pool POOL [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**: * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+
+**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+
+**Command options**:
+
+`--pool POOL`
+:    The ID of the dedicated host pool that contains the dedicated host to delete. To list dedicated host pools run `ibmcloud ks dedicated pool ls`.
+
+`--output json`
+:    Optional: Prints the command output in JSON format.
+
+`--q`
+:    Optional: Do not show the message of the day or update reminders.
+
+**Example**:
+
+```sh
+ibmcloud ks dedicated host rm --host myhost --pool mypool
+```
+{: pre}
+
+### `ibmcloud ks dedicated pool create`
+{: #dedicated_pool_create}
+
+Create a dedicated host pool. 
+{: shortdesc}
+
+```sh
+ibmcloud ks dedicated pool create --flavor-class CLASS --metro METRO --name NAME [--output OUTPUT]
+```
+{: pre}
+
+**Supported infrastructure provider**: * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+
+**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+
+**Command options**:
+
+`--flavor-class CLASS`
+:    The flavor-class of the dedicated host pool. To see available options, run `ibmcloud ks flavors`.
+
+`--metro METRO`
+:    The metro to create the dedicated host pool in, such as `dal` or `wdc`.
+
+`--name NAME`
+:    The name of the dedicated host pool. 
+
+`--output json`
+:    Optional: Prints the command output in JSON format.
+
+`-q`
+:    Optional: Do not show the message of the day or update reminders.
+
+**Example**:
+
+```sh
+ibmcloud ks dedicated pool --flavor-class mb4c.20x64 --metro dal --name mypool
+```
+{: pre}
+
+### `ibmcloud ks dedicated pool get`
+{: #dedicated_pool_get}
+
+Get the details of a dedicated host pool.
+{: shortdesc}
+
+```sh
+ibmcloud ks dedicated pool get --pool POOL [--output OUTPUT] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**: * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+
+**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+
+**Command options**:
+
+`--pool POOL`
+:    The ID of the dedicated host pool. To list dedicated host pools run `ibmcloud ks dedicated pool ls`.
+
+`--output OUTPUT`
+
+`-q`
+:    Optional: Do not show the message of the day or update reminders.
+
+**Example**:
+
+```sh
+ibmcloud ks dedicated pool get --pool mypool
+```
+{: pre}
+
+### `ibmcloud ks dedicated pool ls`
+{: #dedicate_pool_ls}
+
+List all dedicated host pools. 
+{: shortdesc}
+
+```sh
+ibmcloud ks dedicated pool ls [--output OUTPUT] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**: * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+
+**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+
+**Command options**:
+
+`--output json`
+:    Optional: Prints the command output in JSON format.
+
+`--q`
+:    Optional: Do not show the message of the day or update reminders.
+
+**Example**:
+
+```sh
+ibmcloud ks dedicated pool ls 
+```
+{: pre}
+
+### `ibmcloud ks dedicated pool rm`
+{: #dedicated_pool_rm}
+
+Delete a dedicated host pool. This action cannot be undone. 
+{: shortdesc}
+
+```sh
+ibmcloud ks dedicated pool rm --pool POOL [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**: * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+
+**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+
+**Command options**:
+
+`--pool POOL`
+:    The ID of the dedicated host pool to delete. To list dedicated host pools run `ibmcloud ks dedicated pool ls`.
+
+`--q`
+:    Optional: Do not show the message of the day or update reminders.
+
+**Example**:
+
+```sh
+ibmcloud ks dedicated pool rm --pool mypool
+```
+{: pre}</staging-cli-2073>
 
 ## `worker` commands
 {: #worker_node_commands}
