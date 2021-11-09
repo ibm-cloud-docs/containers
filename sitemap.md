@@ -585,6 +585,8 @@ subcollection: containers
 
 * [Accessing the cluster master via admission controllers and webhooks](/docs/containers?topic=containers-access_cluster#access_webhooks)
 
+    * [Setting up admission controller webhooks](/docs/containers?topic=containers-access_cluster#setting-up-admission-controller-webhooks)
+
 * [Accessing private clusters by using the WireGuard VPN](/docs/containers?topic=containers-access_cluster#access_vpn_containers)
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-01"
+lastupdated: "2021-11-09"
 
 keywords: kubernetes, iks, clusters
 
@@ -349,6 +349,43 @@ See [Cluster cannot update because of broken webhook](/docs/containers?topic=con
 
 
 
+
+
+### Setting up admission controller webhooks
+{: configure-webhooks-122}
+
+In Kubernetes cluster versions 1.21 and later, Konnectivity replaced the OpenVPN solution. If you have cluster version 1.21 and later, and your webhook uses the ClusterIP, you must update your webhook to use a Kubernetes service instead.
+{: shortdesc}
+
+You can configure a webhook by referencing the webhook app as a Kubernetes service, or by referencing the webhook app as an IP address or publicly registered DNS name.
+
+#### Example configuration for eferencing the webhook app as a Kubernetes service
+
+```sh
+clientConfig:
+   caBundle: #CA_BUNDLE_BASE64#
+   service:
+      name: admission-webhook
+      namespace: default
+      path: /validate
+      port: 443
+```
+{: pre}
+
+#### Example configuration for referencing the webhook app as an IP address or publicly registered DNS name
+
+```sh
+clientConfig:
+   caBundle: #CA_BUNDLE_BASE64#
+   url: https://#WEBHOOK_URL#:443/validate
+```
+{: pre}
+
+Note the following limitations for referencing the webhook app as an IP or DNS name:
+
+- If the URL is a DNS, then this DNS must be a publicly registered DNS name. Private DNS configurations are not supported.
+- If the URL is an external IP, which means the webhook service is outside of the cluster, the control plane network is used to connect to the service. The control plane must be able to reach the IP. If, for example, the IP is from an on-premises network and the control plane cannot reach the IP, the webhook service does not work.
+- If the URL is a cluster IP, which means the webhook service is inside of the cluster, the Kubernetes API needs to connect to cluster network.  If you have cluster version 1.21 and later, and your webhook uses the cluster IP, you must update your webhook to use a Kubernetes service instead.
 
 
 ## Accessing private clusters by using the WireGuard VPN
