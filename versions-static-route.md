@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-29"
+lastupdated: "2021-11-10"
 
-keywords: kubernetes, iks, static route, add-on
+keywords: kubernetes, static route, add-on
 
 subcollection: containers
 

@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-08"
+lastupdated: "2021-11-10"
 
-keywords: kubernetes, iks, release notes
+keywords: kubernetes, release notes
 
 subcollection: containers
 

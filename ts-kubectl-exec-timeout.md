@@ -2,9 +2,9 @@
 
 copyright:
   years: 2021, 2021
-lastupdated: "2021-11-04"
+lastupdated: "2021-11-10"
 
-keywords: kubectl, exec, timeout
+keywords: kubernetes, kubectl, exec, timeout
 
 subcollection: containers
 content-type: troubleshoot

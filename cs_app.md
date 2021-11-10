@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-19"
+lastupdated: "2021-11-10"
 
-keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
+keywords: kubernetes, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
 subcollection: containers
 

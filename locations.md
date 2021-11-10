@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-22"
+lastupdated: "2021-11-10"
 
-keywords: kubernetes, iks, mzr, szr, multizone, multi az
+keywords: kubernetes, mzr, szr, multizone, multi az
 
 subcollection: containers
 

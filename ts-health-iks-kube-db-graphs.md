@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-19"
+lastupdated: "2021-11-10"
 
-keywords: kubernetes, iks, logging, help, debug
+keywords: kubernetes, logging, help, debug
 
 subcollection: containers
 content-type: troubleshoot

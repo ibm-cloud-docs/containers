@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-28"
+lastupdated: "2021-11-10"
 
-keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
+keywords: kubernetes, hardware, flavor, machine type, vm, bm
 
 subcollection: containers
 
