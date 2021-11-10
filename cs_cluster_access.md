@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-09"
+lastupdated: "2021-11-10"
 
 keywords: kubernetes, iks, clusters
 
@@ -359,7 +359,7 @@ In Kubernetes cluster versions 1.21 and later, Konnectivity replaced the OpenVPN
 
 You can configure a webhook by referencing the webhook app as a Kubernetes service, or by referencing the webhook app as an IP address or publicly registered DNS name.
 
-#### Example configuration for eferencing the webhook app as a Kubernetes service
+#### Example configuration for referencing the webhook app as a Kubernetes service
 
 ```sh
 clientConfig:
@@ -370,7 +370,7 @@ clientConfig:
       path: /validate
       port: 443
 ```
-{: pre}
+{: screen}
 
 #### Example configuration for referencing the webhook app as an IP address or publicly registered DNS name
 
@@ -379,7 +379,7 @@ clientConfig:
    caBundle: #CA_BUNDLE_BASE64#
    url: https://#WEBHOOK_URL#:443/validate
 ```
-{: pre}
+{: screen}
 
 Note the following limitations for referencing the webhook app as an IP or DNS name:
 
