@@ -42,6 +42,18 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the version 1.22 changelog.
 {: shortdesc}
 
+### Changelog for worker node fix pack 1.22.2_1528, released 10 November 2021
+{: #1222_1528}
+
+The following table shows the changes that are included in the worker node fix pack patch update `1.22.2_1528`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | Updated worker node image packages for [CVE-2020-16592](https://nvd.nist.gov/vuln/detail/CVE-2020-16592){: external}, [CVE-2020-27781](https://nvd.nist.gov/vuln/detail/CVE-2020-27781){: external}, [CVE-2021-25219](https://nvd.nist.gov/vuln/detail/CVE-2021-25219){: external}, [CVE-2021-3487](https://nvd.nist.gov/vuln/detail/CVE-2021-3487){: external}, [CVE-2021-3524](https://nvd.nist.gov/vuln/detail/CVE-2021-3524){: external}, [CVE-2021-3531](https://nvd.nist.gov/vuln/detail/CVE-2021-3531){: external}, and [CVE-2021-40490](https://nvd.nist.gov/vuln/detail/CVE-2021-40490){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.22.2_1527" caption-side="top"}
+
 ### Changelog for worker node fix pack 1.22.2_1527, released 25 October 2021
 {: #1222_1527}
 
@@ -95,6 +107,20 @@ The following table shows the changes that are included in the master fix pack `
 
 Review the version 1.21 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.21.5_1538, released 10 November 2021
+{: #1215_1538}
+
+The following table shows the changes that are included in the worker node fix pack patch update `1.21.5_1538`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | Updated worker node image packages for [CVE-2020-16592](https://nvd.nist.gov/vuln/detail/CVE-2020-16592){: external}, [CVE-2020-27781](https://nvd.nist.gov/vuln/detail/CVE-2020-27781){: external}, [CVE-2021-25219](https://nvd.nist.gov/vuln/detail/CVE-2021-25219){: external}, [CVE-2021-3487](https://nvd.nist.gov/vuln/detail/CVE-2021-3487){: external}, [CVE-2021-3524](https://nvd.nist.gov/vuln/detail/CVE-2021-3524){: external}, [CVE-2021-3531](https://nvd.nist.gov/vuln/detail/CVE-2021-3531){: external}, and [CVE-2021-40490](https://nvd.nist.gov/vuln/detail/CVE-2021-40490){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.21.5_1537" caption-side="top"}
+
+
 
 ### Changelog for worker node fix pack 1.21.5_1537, released 25 October 2021
 {: #1215_1537}
@@ -375,6 +401,18 @@ The following table shows the changes that are included in the master fix pack p
 
 Review the version 1.20 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.20.11_1560, released 10 November 2021
+{: #12011_1560}
+
+The following table shows the changes that are included in the worker node fix pack patch update `1.20.11_1560`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | Updated worker node image packages for [CVE-2020-16592](https://nvd.nist.gov/vuln/detail/CVE-2020-16592){: external}, [CVE-2020-27781](https://nvd.nist.gov/vuln/detail/CVE-2020-27781){: external}, [CVE-2021-25219](https://nvd.nist.gov/vuln/detail/CVE-2021-25219){: external}, [CVE-2021-3487](https://nvd.nist.gov/vuln/detail/CVE-2021-3487){: external}, [CVE-2021-3524](https://nvd.nist.gov/vuln/detail/CVE-2021-3524){: external}, [CVE-2021-3531](https://nvd.nist.gov/vuln/detail/CVE-2021-3531){: external}, and [CVE-2021-40490](https://nvd.nist.gov/vuln/detail/CVE-2021-40490){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.20.11_1559" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.20.11_1559, released 25 October 2021
 {: #12011_1559}
@@ -859,6 +897,18 @@ Review the version 1.19 changelog.
 
 Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 31 Jan 2022. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120) as soon as possible.
 {: deprecated}
+
+### Changelog for worker node fix pack 1.19.15_1567, released 10 November 2021
+{: #11915_1567}
+
+The following table shows the changes that are included in the worker node fix pack patch update `1.19.15_1567`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | Updated worker node image packages for [CVE-2020-16592](https://nvd.nist.gov/vuln/detail/CVE-2020-16592){: external}, [CVE-2020-27781](https://nvd.nist.gov/vuln/detail/CVE-2020-27781){: external}, [CVE-2021-25219](https://nvd.nist.gov/vuln/detail/CVE-2021-25219){: external}, [CVE-2021-3487](https://nvd.nist.gov/vuln/detail/CVE-2021-3487){: external}, [CVE-2021-3524](https://nvd.nist.gov/vuln/detail/CVE-2021-3524){: external}, [CVE-2021-3531](https://nvd.nist.gov/vuln/detail/CVE-2021-3531){: external}, and [CVE-2021-40490](https://nvd.nist.gov/vuln/detail/CVE-2021-40490){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.19.15_1566" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.19.15_1566, released 25 October 2021
 {: #11915_1566}
