@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-10-19"
+lastupdated: "2021-11-10"
 
-keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
+keywords: kubernetes, ic, ks, kubectl
 
 subcollection: containers
 

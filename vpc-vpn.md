@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-21"
+lastupdated: "2021-11-10"
 
-keywords: kubernetes, iks, strongswan, ipsec, on-prem, vpnaas, direct link
+keywords: kubernetes, strongswan, ipsec, on-prem, vpnaas, direct link
 
 subcollection: containers
 

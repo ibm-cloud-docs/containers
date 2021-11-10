@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-10-21"
+lastupdated: "2021-11-10"
 
-keywords: kubernetes, iks, helm, integrations, helm chart
+keywords: kubernetes, helm, integrations, helm chart
 
 subcollection: containers
 
