@@ -188,6 +188,8 @@ subcollection: containers
 
 * [November 2021](/docs/containers?topic=containers-iks-release#release-nov-2021)
 
+    * [12 November 2021](/docs/containers?topic=containers-iks-release#12nov2021)
+
     * [10 November 2021](/docs/containers?topic=containers-iks-release#10nov2021)
 
     * [8 November 2021](/docs/containers?topic=containers-iks-release#8nov2021)

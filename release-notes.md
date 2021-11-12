@@ -29,17 +29,19 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 Review the release notes for November 2021.
 {: shortdesc}
 
+### 12 November 2021
+{: #12nov2021}
+{: release-note}
+
+Master fix pack updates
+:   Changelog documentation is available for Kubernetes version  [`1.22.2_1526`](/docs/containers?topic=containers-changelog#1222_1526), [`1.21.5_1536`](/docs/containers?topic=containers-changelog#1215_1536), [`1.20.11_1558`](/docs/containers?topic=containers-changelog#12011_1558), and [`1.19.15_1565`](/docs/containers?topic=containers-changelog#11915_1565).
+
 ### 10 November 2021
 {: #10nov2021}
 {: release-note}
 
 Worker node fix pack update
 :   Changelog documentation is available for Kubernetes version [`1.22.2_1528`](/docs/containers?topic=containers-changelog#1222_1528), [`1.21.5_1538`](/docs/containers?topic=containers-changelog#1215_1538), [`1.20.11_1560`](/docs/containers?topic=containers-changelog#12011_156-), and [`1.19.15_1567`](/docs/containers?topic=containers-changelog#11915_1567).
-
-
-
-
-
 
 ### 8 November 2021
 {: #8nov2021}
