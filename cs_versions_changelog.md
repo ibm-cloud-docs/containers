@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-11-11"
+lastupdated: "2021-11-12"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -67,6 +67,30 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.22.2_1524" caption-side="top"}
 
+### Changelog for master fix pack 1.22.2_1526, released 29 October 2021
+{: #1222_1526}
+
+The following table shows the changes that are included in the master fix pack update `1.22.2_1526`.  Master patch updates are applied automatically.
+{: shortdesc}
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.2.15 | v1.2.16 | Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs:  [CVE-2021-36222](https://nvd.nist.gov/vuln/detail/CVE-2021-36222){: external}, [CVE-2021-37750](https://nvd.nist.gov/vuln/detail/CVE-2021-37750){: external}, [CVE-2021-22922](https://nvd.nist.gov/vuln/detail/CVE-2021-22922){: external}, [CVE-2021-22923](https://nvd.nist.gov/vuln/detail/CVE-2021-22923){: external}, and [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924){: external}. |
+| CoreDNS | 1.8.4 | 1.8.6 | See the [CoreDNS release notes](https://coredns.io/2021/10/07/coredns-1.8.6-release/){: external}. |
+| etcd | v3.4.16 | v3.4.17 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.17){: external}. |
+| {{site.data.keyword.IBM_notm}}  Calico extension | 763 | 864 | Updated to use `Go` version `1.16.9`. Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs. |
+| {site.data.keyword.cloud_notm}} Controller Manager | v1.22.2-1 | v1.22.2-3 | Updated to ignore VPC load balancer (LB) state when a LB delete is requested. |
+| {site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} plug-in and monitor | 400 | 401 | Updated universal base image (UBI) to the latest `8.4-210` version to resolve CVEs. |
+| Key Management Service provider | v2.3.7 | v2.3.8 | Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs:  [CVE-2021-36222](https://nvd.nist.gov/vuln/detail/CVE-2021-36222){: external}, [CVE-2021-37750](https://nvd.nist.gov/vuln/detail/CVE-2021-37750){: external}, [CVE-2021-22922](https://nvd.nist.gov/vuln/detail/CVE-2021-22922){: external}, [CVE-2021-22923](https://nvd.nist.gov/vuln/detail/CVE-2021-22923){: external}, and [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924){: external}. |
+| Konnectivity agent | v0.0.23_245_iks | v0.0.24_262_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.24){: external}.  Modified Konnectivity agent CPU and memory resource requests and memory resource limit and removed the CPU resource limit. |
+| Konnectivity server | v0.0.23_245_iks | v0.0.24_262_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.24){: external}. |
+| Kubernetes Metrics Server | v0.5.0 | v0.5.1 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.5.1){: external}. |
+| Kubernetes NodeLocal DNS cache | 1.20.0 | 1.21.1 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.21.1){: external}. |
+| Portieris admission controller | v0.11.0 | v0.12.0 | See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.12.0){: external} |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.22.2_1522" caption-side="top"}
+
 ### Changelog for worker node fix pack 1.22.2_1524, released 11 October 2021
 {: #1222_1524}
 
@@ -90,7 +114,7 @@ The following table shows the changes that are included in the master fix pack `
 | --- | --- | --- | --- |
 | Calico | v3.19.3 | v3.20.1 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
 | containerd configuration | N/A | N/A | Cluster administrators may now update the containerd registry host configurations on their clusters. See [Updating your cluster's containerd registry host configuration](/docs/containers?topic=containers-registry#update_containerd_registry_config) and the [containerd CRI plugin configuration guide](https://github.com/containerd/containerd/blob/v1.5.5/docs/cri/config.md#registry-configuration){: external}.|
-| IBM Cloud Controller Manager | v1.21.5-1 | v1.22.2-1 | Updated to support the Kubernetes `1.22.2` release. In addition, the code for this component is now [open source](https://github.com/IBM-Cloud/cloud-provider-ibm){: external}. |
+| {site.data.keyword.cloud_notm}} Controller Manager | v1.21.5-1 | v1.22.2-1 | Updated to support the Kubernetes `1.22.2` release. In addition, the code for this component is now [open source](https://github.com/IBM-Cloud/cloud-provider-ibm){: external}. |
 | Kubernetes | v1.21.5 | v1.22.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.2){: external}. This update resolves [CVE-2021-25741](https://nvd.nist.gov/vuln/detail/CVE-2021-25741){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6496649){: external}). |
 | Kubernetes add-on resizer | 1.8.13 | 1.8.14 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.14){: external}. |
 | Kubernetes admission controllers configuration | N/A | N/A | Added `PodSecurity` to the `--disable-admission-plugins` option for the cluster's [Kubernetes API server](/docs/containers?topic=containers-service-settings#kube-apiserver). Pod security continues to be [configured via pod security policies](/docs/containers?topic=containers-psp). |
@@ -120,7 +144,24 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.21.5_1537" caption-side="top"}
 
+### Changelog for master fix pack 1.21.5_1536, released 29 October 2021
+{: #1215_1536}
 
+The following table shows the changes that are included in the master fix pack update `1.21.5_1536`.  Master patch updates are applied automatically.
+{: shortdesc}
+
+ Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.2.15 | v1.2.16 | Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs:  [CVE-2021-36222](https://nvd.nist.gov/vuln/detail/CVE-2021-36222){: external}, [CVE-2021-37750](https://nvd.nist.gov/vuln/detail/CVE-2021-37750){: external}, [CVE-2021-22922](https://nvd.nist.gov/vuln/detail/CVE-2021-22922){: external}, [CVE-2021-22923](https://nvd.nist.gov/vuln/detail/CVE-2021-22923){: external}, and [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924){: external}. |
+| etcd | v3.4.16 | v3.4.17 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.17){: external}. |
+| {site.data.keyword.IBM_notm}} Calico extension | 763 | 864 | Updated to use `Go` version `1.16.9`. Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs. |
+| {site.data.keyword.cloud_notm}} Controller Manager | v1.21.5-1 | v1.21.5-2 | Updated to ignore VPC load balancer (LB) state when a LB delete is requested. |
+| {site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} plug-in and monitor | 400 | 401 | Updated universal base image (UBI) to the latest `8.4-210` version to resolve CVEs. |
+| Key Management Service provider | v2.3.7 | v2.3.8 | Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs:  [CVE-2021-36222](https://nvd.nist.gov/vuln/detail/CVE-2021-36222){: external}, [CVE-2021-37750](https://nvd.nist.gov/vuln/detail/CVE-2021-37750){: external}, [CVE-2021-22922](https://nvd.nist.gov/vuln/detail/CVE-2021-22922){: external}, [CVE-2021-22923](https://nvd.nist.gov/vuln/detail/CVE-2021-22923){: external}, [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924){: external} |
+| Konnectivity agent | v0.0.23_245_iks | v0.0.24_262_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.24){: external}.  Modified Konnectivity agent CPU and memory resource requests and memory resource limit and removed the CPU resource limit. |
+| Konnectivity server | v0.0.23_245_iks | v0.0.24_262_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.24){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.21.5_1531" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.21.5_1537, released 25 October 2021
 {: #1215_1537}
@@ -413,6 +454,23 @@ The following table shows the changes that are included in the worker node fix p
 | Ubuntu 18.04 packages | N/A | N/A | Updated worker node image packages for [CVE-2020-16592](https://nvd.nist.gov/vuln/detail/CVE-2020-16592){: external}, [CVE-2020-27781](https://nvd.nist.gov/vuln/detail/CVE-2020-27781){: external}, [CVE-2021-25219](https://nvd.nist.gov/vuln/detail/CVE-2021-25219){: external}, [CVE-2021-3487](https://nvd.nist.gov/vuln/detail/CVE-2021-3487){: external}, [CVE-2021-3524](https://nvd.nist.gov/vuln/detail/CVE-2021-3524){: external}, [CVE-2021-3531](https://nvd.nist.gov/vuln/detail/CVE-2021-3531){: external}, and [CVE-2021-40490](https://nvd.nist.gov/vuln/detail/CVE-2021-40490){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.20.11_1559" caption-side="top"}
+
+### Changelog for master fix pack 1.20.11_1558, released 29 October 2021
+{: #12011_1558}
+
+The following table shows the changes that are included in the master fix pack patch update `1.20.11_1558`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.2.15 | v1.2.16 | Move from dependency `form3tech-oss/jwt-go` to `golang-jwt/jwt` since the former is no longer maintained. Updated universal base image (UBI) to the latest 8.4 version to resolve CVEs:  [CVE-2021-36222](https://nvd.nist.gov/vuln/detail/CVE-2021-36222){: external}, [CVE-2021-37750](https://nvd.nist.gov/vuln/detail/CVE-2021-37750){: external}, [CVE-2021-22922](https://nvd.nist.gov/vuln/detail/CVE-2021-22922){: external}, [CVE-2021-22923](https://nvd.nist.gov/vuln/detail/CVE-2021-22923){: external}, [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924){: external} |
+| etcd | v3.4.16 | v3.4.17 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.17){: external}. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 763 | 864 | Updated to use Go version 1.16.9. Updated universal base image (UBI) to resolve CVEs. |
+| {{site.data.keyword.cloud_notm}} Controller Manager |  v1.20.11-1 | v1.20.11-2 | Updated to ignore VPC load balancer (LB) state when a LB delete is requested. |
+| {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} plug-in and monitor | 400 | 401 | Updated universal base image (UBI) to the latest 8.4-210 version |
+| Key Management Service provider | v2.3.7 | v2.3.8 | Updated universal base image (UBI) to the latest 8.4 version to resolve CVEs:  [CVE-2021-36222](https://nvd.nist.gov/vuln/detail/CVE-2021-36222){: external}, [CVE-2021-37750](https://nvd.nist.gov/vuln/detail/CVE-2021-37750){: external}, [CVE-2021-22922](https://nvd.nist.gov/vuln/detail/CVE-2021-22922){: external}, [CVE-2021-22923](https://nvd.nist.gov/vuln/detail/CVE-2021-22923){: external}, [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924){: external} |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.20.11_1553" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.20.11_1559, released 25 October 2021
 {: #12011_1559}
@@ -909,6 +967,23 @@ The following table shows the changes that are included in the worker node fix p
 | Ubuntu 18.04 packages | N/A | N/A | Updated worker node image packages for [CVE-2020-16592](https://nvd.nist.gov/vuln/detail/CVE-2020-16592){: external}, [CVE-2020-27781](https://nvd.nist.gov/vuln/detail/CVE-2020-27781){: external}, [CVE-2021-25219](https://nvd.nist.gov/vuln/detail/CVE-2021-25219){: external}, [CVE-2021-3487](https://nvd.nist.gov/vuln/detail/CVE-2021-3487){: external}, [CVE-2021-3524](https://nvd.nist.gov/vuln/detail/CVE-2021-3524){: external}, [CVE-2021-3531](https://nvd.nist.gov/vuln/detail/CVE-2021-3531){: external}, and [CVE-2021-40490](https://nvd.nist.gov/vuln/detail/CVE-2021-40490){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.19.15_1566" caption-side="top"}
+
+### Changelog for master fix pack 1.19.15_1565, released 29 October 2021
+{: #11915_1565}
+
+The following table shows the changes that are included in the master fix pack patch update `1.19.15_1565`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.2.15 | v1.2.16 | Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs:  [CVE-2021-36222](https://nvd.nist.gov/vuln/detail/CVE-2021-36222){: external}, [CVE-2021-37750](https://nvd.nist.gov/vuln/detail/CVE-2021-37750){: external}, [CVE-2021-22922](https://nvd.nist.gov/vuln/detail/CVE-2021-22922){: external}, [CVE-2021-22923](https://nvd.nist.gov/vuln/detail/CVE-2021-22923){: external}, and [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924){: external}. |
+| etcd | v3.4.16 | v3.4.17 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.17){: external}. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 763 | 864 | Updated to use `Go` version `1.16.9`. Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.19.15-1 | v1.19.15-3 | Updated to ignore VPC load balancer (LB) state when a LB delete is requested. |
+| {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} plug-in and monitor | 400 | 401 | Updated universal base image (UBI) to the latest `8.4-210` version to resolve CVEs. |
+| Key Management Service provider | v2.3.7 | v2.3.8 | Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs:  [CVE-2021-36222](https://nvd.nist.gov/vuln/detail/CVE-2021-36222){: external}, [CVE-2021-37750](https://nvd.nist.gov/vuln/detail/CVE-2021-37750){: external}, [CVE-2021-22922](https://nvd.nist.gov/vuln/detail/CVE-2021-22922){: external}, [CVE-2021-22923](https://nvd.nist.gov/vuln/detail/CVE-2021-22923){: external}, and [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.19.15_1560" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.19.15_1566, released 25 October 2021
 {: #11915_1566}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-12"
 
 keywords: containers
 subcollection: containers
@@ -184,67 +184,209 @@ subcollection: containers
 {: #sitemap_release_notes}
 
 
-[Release notes](/docs/containers?topic=containers-rel-notes#rel-notes)
+[Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
-* [November 2021](/docs/containers?topic=containers-rel-notes#release-nov-2021)
+* [November 2021](/docs/containers?topic=containers-iks-release#release-nov-2021)
 
-    * [10 November 2021](/docs/containers?topic=containers-rel-notes#10nov2021)
+    * [12 November 2021](/docs/containers?topic=containers-iks-release#12nov2021)
 
-    * [8 November 2021](/docs/containers?topic=containers-rel-notes#8nov2021)
+    * [10 November 2021](/docs/containers?topic=containers-iks-release#10nov2021)
 
-    * [4 November 2021](/docs/containers?topic=containers-rel-notes#4nov2021)
+    * [8 November 2021](/docs/containers?topic=containers-iks-release#8nov2021)
 
-    * [2 November 2021](/docs/containers?topic=containers-rel-notes#2nov2021)
+    * [4 November 2021](/docs/containers?topic=containers-iks-release#4nov2021)
 
-* [October 2021](/docs/containers?topic=containers-rel-notes#release-oct-2021)
+    * [2 November 2021](/docs/containers?topic=containers-iks-release#2nov2021)
 
-    * [28 October 2021](/docs/containers?topic=containers-rel-notes#28oct2021)
+* [October 2021](/docs/containers?topic=containers-iks-release#release-oct-2021)
 
-    * [26 October 2021](/docs/containers?topic=containers-rel-notes#26oct2021)
+    * [28 October 2021](/docs/containers?topic=containers-iks-release#28oct2021)
 
-    * [25 October 2021](/docs/containers?topic=containers-rel-notes#25oct2021)
+    * [26 October 2021](/docs/containers?topic=containers-iks-release#26oct2021)
 
-    * [22 October 2021](/docs/containers?topic=containers-rel-notes#22oct2021)
+    * [25 October 2021](/docs/containers?topic=containers-iks-release#25oct2021)
 
-    * [19 October 2021](/docs/containers?topic=containers-rel-notes#19oct2021)
+    * [22 October 2021](/docs/containers?topic=containers-iks-release#22oct2021)
 
-    * [18 October 2021](/docs/containers?topic=containers-rel-notes#18oct2021)
+    * [19 October 2021](/docs/containers?topic=containers-iks-release#19oct2021)
 
-    * [13 October 2021](/docs/containers?topic=containers-rel-notes#13oct2021)
+    * [18 October 2021](/docs/containers?topic=containers-iks-release#18oct2021)
 
-    * [11 October 2021](/docs/containers?topic=containers-rel-notes#11oct2021)
+    * [13 October 2021](/docs/containers?topic=containers-iks-release#13oct2021)
 
-    * [7 October 2021](/docs/containers?topic=containers-rel-notes#7oct2021)
+    * [11 October 2021](/docs/containers?topic=containers-iks-release#11oct2021)
 
-    * [6 October 2021](/docs/containers?topic=containers-rel-notes#6oct2021)
+    * [7 October 2021](/docs/containers?topic=containers-iks-release#7oct2021)
 
-    * [5 October 2021](/docs/containers?topic=containers-rel-notes#5oct2021)
+    * [6 October 2021](/docs/containers?topic=containers-iks-release#6oct2021)
 
-* [September 2021](/docs/containers?topic=containers-rel-notes#release-sep-2021)
+    * [5 October 2021](/docs/containers?topic=containers-iks-release#5oct2021)
 
-    * [29 September 2021](/docs/containers?topic=containers-rel-notes#29sep2021)
+* [September 2021](/docs/containers?topic=containers-iks-release#release-sep-2021)
 
-    * [27 September 2021](/docs/containers?topic=containers-rel-notes#27sep2021)
+    * [29 September 2021](/docs/containers?topic=containers-iks-release#29sep2021)
 
-    * [23 September 2021](/docs/containers?topic=containers-rel-notes#23sep2021)
+    * [27 September 2021](/docs/containers?topic=containers-iks-release#27sep2021)
 
-    * [22 September 2021](/docs/containers?topic=containers-rel-notes#22sep2021)
+    * [23 September 2021](/docs/containers?topic=containers-iks-release#23sep2021)
 
-    * [16 September 2021](/docs/containers?topic=containers-rel-notes#16sep2021)
+    * [22 September 2021](/docs/containers?topic=containers-iks-release#22sep2021)
 
-    * [14 September 2021](/docs/containers?topic=containers-rel-notes#14sep2021)
+    * [16 September 2021](/docs/containers?topic=containers-iks-release#16sep2021)
 
-    * [13 September 2021](/docs/containers?topic=containers-rel-notes#13sep2021)
+    * [14 September 2021](/docs/containers?topic=containers-iks-release#14sep2021)
 
-    * [9 September 2021](/docs/containers?topic=containers-rel-notes#9sep2021)
+    * [13 September 2021](/docs/containers?topic=containers-iks-release#13sep2021)
 
-    * [1 September 2021](/docs/containers?topic=containers-rel-notes#1sep2021)
+    * [9 September 2021](/docs/containers?topic=containers-iks-release#9sep2021)
 
-* [August 2021](/docs/containers?topic=containers-rel-notes#release-aug-2021)
+    * [1 September 2021](/docs/containers?topic=containers-iks-release#1sep2021)
 
-    * [31 August 2021](/docs/containers?topic=containers-rel-notes#31aug2021)
+* [August 2021](/docs/containers?topic=containers-iks-release#aug21)
 
-    * [30 August 2021](/docs/containers?topic=containers-rel-notes#30aug2021)
+    * [31 August 2021](/docs/containers?topic=containers-iks-release#31aug2021)
+
+    * [30 August 2021](/docs/containers?topic=containers-iks-release#30aug2021)
+
+    * [25 August 2021](/docs/containers?topic=containers-iks-release#26aug2021)
+
+    * [23 August 2021](/docs/containers?topic=containers-iks-release#23aug2021)
+
+    * [16 August 2021](/docs/containers?topic=containers-iks-release#16aug2021)
+
+    * [12 August 2021](/docs/containers?topic=containers-iks-release#12aug2021)
+
+    * [10 August 2021](/docs/containers?topic=containers-iks-release#10aug2021)
+
+    * [9 August 2021](/docs/containers?topic=containers-iks-release#09aug2021)
+
+    * [2 August 2021](/docs/containers?topic=containers-iks-release#02aug2021)
+
+* [July 2021](/docs/containers?topic=containers-iks-release#jul21)
+
+    * [27 July 2021](/docs/containers?topic=containers-iks-release#27july2021)
+
+    * [26 July 2021](/docs/containers?topic=containers-iks-release#26july2021)
+
+    * [28 October 2019](/docs/containers?topic=containers-iks-release#28oct2019)
+
+    * [24 October 2019](/docs/containers?topic=containers-iks-release#24oct2019)
+
+    * [23 October 2019](/docs/containers?topic=containers-iks-release#23oct2019)
+
+    * [22 October 2019](/docs/containers?topic=containers-iks-release#22oct2019)
+
+    * [17 October 2019](/docs/containers?topic=containers-iks-release#17oct2019)
+
+    * [14 October 2019](/docs/containers?topic=containers-iks-release#14oct2019)
+
+    * [3 October 2019](/docs/containers?topic=containers-iks-release#03oct2019)
+
+    * [1 October 2019](/docs/containers?topic=containers-iks-release#01oct2019)
+
+* [September 2019](/docs/containers?topic=containers-iks-release#sept19)
+
+    * [27 September 2019](/docs/containers?topic=containers-iks-release#27sept2019)
+
+    * [24 September 2019](/docs/containers?topic=containers-iks-release#24sept2019)
+
+    * [19 September 2019](/docs/containers?topic=containers-iks-release#19sept2019)
+
+    * [16 September 2019](/docs/containers?topic=containers-iks-release#16sept2019)
+
+    * [13 September 2019](/docs/containers?topic=containers-iks-release#13sept2019)
+
+    * [12 September 2019](/docs/containers?topic=containers-iks-release#12sept2019)
+
+    * [5 September 2019](/docs/containers?topic=containers-iks-release#05sept2019)
+
+    * [4 September 2019](/docs/containers?topic=containers-iks-release#04sept2019)
+
+    * [3 September 2019](/docs/containers?topic=containers-iks-release#03sept2019)
+
+* [August 2019](/docs/containers?topic=containers-iks-release#aug19)
+
+    * [29 August 2019](/docs/containers?topic=containers-iks-release#29aug2019)
+
+    * [28 August 2019](/docs/containers?topic=containers-iks-release#28aug2019)
+
+    * [26 August 2019](/docs/containers?topic=containers-iks-release#26aug2019)
+
+    * [23 August 2019](/docs/containers?topic=containers-iks-release#23aug2019)
+
+    * [20 August 2019](/docs/containers?topic=containers-iks-release#20aug2019)
+
+    * [19 August 2019](/docs/containers?topic=containers-iks-release#19aug2019)
+
+    * [17 August 2019](/docs/containers?topic=containers-iks-release#17aug2019)
+
+    * [15 August 2019](/docs/containers?topic=containers-iks-release#15aug2019)
+
+    * [12 August 2019](/docs/containers?topic=containers-iks-release#12aug2019)
+
+    * [5 August 2019](/docs/containers?topic=containers-iks-release#05aug2019)
+
+* [July 2019](/docs/containers?topic=containers-iks-release#jul19)
+
+    * [30 July 2019](/docs/containers?topic=containers-iks-release#30july2019)
+
+    * [23 July 2019](/docs/containers?topic=containers-iks-release#23july2019)
+
+    * [22 July 2019](/docs/containers?topic=containers-iks-release#22july2019)
+
+    * [17 July 2019](/docs/containers?topic=containers-iks-release#17july2019)
+
+    * [15 July 2019](/docs/containers?topic=containers-iks-release#15july2019)
+
+    * [8 July 2019](/docs/containers?topic=containers-iks-release#08july2019)
+
+    * [2 July 2019](/docs/containers?topic=containers-iks-release#02july2019)
+
+    * [1 July 2019](/docs/containers?topic=containers-iks-release#01july2019)
+
+* [June 2019](/docs/containers?topic=containers-iks-release#jun19)
+
+    * [24 June 2019](/docs/containers?topic=containers-iks-release#24june2019)
+
+    * [21 June 2019](/docs/containers?topic=containers-iks-release#21june2019)
+
+    * [18 June 2019](/docs/containers?topic=containers-iks-release#18june2019)
+
+    * [14 June 2019](/docs/containers?topic=containers-iks-release#14june2019)
+
+    * [12 June 2019](/docs/containers?topic=containers-iks-release#12june2019)
+
+    * [7 June 2019](/docs/containers?topic=containers-iks-release#07june2019)
+
+    * [6 June 2019](/docs/containers?topic=containers-iks-release#06june2019)
+
+    * [5 June 2019](/docs/containers?topic=containers-iks-release#05june2019)
+
+    * [4 June 2019](/docs/containers?topic=containers-iks-release#04june2019)
+
+    * [3 June 2019](/docs/containers?topic=containers-iks-release#03june2019)
+
+* [May 2019](/docs/containers?topic=containers-iks-release#may19)
+
+    * [30 May 2019](/docs/containers?topic=containers-iks-release#30may2019)
+
+    * [28 May 2019](/docs/containers?topic=containers-iks-release#28may2019)
+
+    * [23 May 2019](/docs/containers?topic=containers-iks-release#23may2019)
+
+    * [20 May 2019](/docs/containers?topic=containers-iks-release#20may2019)
+
+    * [16 May 2019](/docs/containers?topic=containers-iks-release#16may2019)
+
+    * [15 May 2019](/docs/containers?topic=containers-iks-release#15may2019)
+
+    * [13 May 2019](/docs/containers?topic=containers-iks-release#13may2019)
+
+    * [8 May 2019](/docs/containers?topic=containers-iks-release#08may2019)
+
+    * [7 May 2019](/docs/containers?topic=containers-iks-release#07may2019)
+
+    * [1 May 2019](/docs/containers?topic=containers-iks-release#01may2019)
 
 
 ## Tutorials library for Kubernetes Service
@@ -3074,6 +3216,8 @@ subcollection: containers
 
     * [Changelog for worker node fix pack 1.22.2_1527, released 25 October 2021](/docs/containers?topic=containers-changelog#1222_1527)
 
+    * [Changelog for master fix pack 1.22.2_1526, released 29 October 2021](/docs/containers?topic=containers-changelog#1222_1526)
+
     * [Changelog for worker node fix pack 1.22.2_1524, released 11 October 2021](/docs/containers?topic=containers-changelog#1222_1524)
 
     * [Changelog for master fix pack 1.22.2_1522 and worker node fix pack 1.22.2_1523, released 29 Sept 2021](/docs/containers?topic=containers-changelog#1222_1522_and_1222_1523)
@@ -3081,6 +3225,8 @@ subcollection: containers
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog#121_changelog)
 
     * [Changelog for worker node fix pack 1.21.5_1538, released 10 November 2021](/docs/containers?topic=containers-changelog#1215_1538)
+
+    * [Changelog for master fix pack 1.21.5_1536, released 29 October 2021](/docs/containers?topic=containers-changelog#1215_1536)
 
     * [Changelog for worker node fix pack 1.21.5_1537, released 25 October 2021](/docs/containers?topic=containers-changelog#1215_1537)
 
@@ -3117,6 +3263,8 @@ subcollection: containers
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
 
     * [Changelog for worker node fix pack 1.20.11_1560, released 10 November 2021](/docs/containers?topic=containers-changelog#12011_1560)
+
+    * [Changelog for master fix pack 1.20.11_1558, released 29 October 2021](/docs/containers?topic=containers-changelog#12011_1558)
 
     * [Changelog for worker node fix pack 1.20.11_1559, released 25 October 2021](/docs/containers?topic=containers-changelog#12011_1559)
 
@@ -3179,6 +3327,8 @@ subcollection: containers
 * [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
 
     * [Changelog for worker node fix pack 1.19.15_1567, released 10 November 2021](/docs/containers?topic=containers-changelog#11915_1567)
+
+    * [Changelog for master fix pack 1.19.15_1565, released 29 October 2021](/docs/containers?topic=containers-changelog#11915_1565)
 
     * [Changelog for worker node fix pack 1.19.15_1566, released 25 October 2021](/docs/containers?topic=containers-changelog#11915_1566)
 
@@ -5226,69 +5376,6 @@ subcollection: containers
 * [Step 3: Reach out to Portworx and IBM](/docs/containers?topic=containers-debug-portworx#px-support)
 
 [Why does encryption fail with an invalid KMS endpoint?](/docs/containers?topic=containers-px-kms-endpoint#px-kms-endpoint)
-
-
-## Release notes
-{: #sitemap_release_notes1}
-
-
-[Release notes](/docs/containers?topic=containers-iks-release#iks-release)
-
-* [August 2021](/docs/containers?topic=containers-iks-release#aug21)
-
-* [July 2021](/docs/containers?topic=containers-iks-release#jul21)
-
-* [June 2021](/docs/containers?topic=containers-iks-release#jun21)
-
-* [May 2021](/docs/containers?topic=containers-iks-release#may21)
-
-* [April 2021](/docs/containers?topic=containers-iks-release#apr21)
-
-* [March 2021](/docs/containers?topic=containers-iks-release#mar21)
-
-* [February 2021](/docs/containers?topic=containers-iks-release#feb21)
-
-* [January 2021](/docs/containers?topic=containers-iks-release#jan21)
-
-* [December 2020](/docs/containers?topic=containers-iks-release#dec20)
-
-* [November 2020](/docs/containers?topic=containers-iks-release#nov20)
-
-* [October 2020](/docs/containers?topic=containers-iks-release#oct20)
-
-* [September 2020](/docs/containers?topic=containers-iks-release#sep20)
-
-* [August 2020](/docs/containers?topic=containers-iks-release#aug20)
-
-* [July 2020](/docs/containers?topic=containers-iks-release#july20)
-
-* [June 2020](/docs/containers?topic=containers-iks-release#june20)
-
-* [May 2020](/docs/containers?topic=containers-iks-release#may20)
-
-* [April 2020](/docs/containers?topic=containers-iks-release#apr20)
-
-* [March 2020](/docs/containers?topic=containers-iks-release#mar20)
-
-* [February 2020](/docs/containers?topic=containers-iks-release#feb20)
-
-* [January 2020](/docs/containers?topic=containers-iks-release#jan20)
-
-* [December 2019](/docs/containers?topic=containers-iks-release#dec19)
-
-* [November 2019](/docs/containers?topic=containers-iks-release#nov19)
-
-* [October 2019](/docs/containers?topic=containers-iks-release#oct19)
-
-* [September 2019](/docs/containers?topic=containers-iks-release#sept19)
-
-* [August 2019](/docs/containers?topic=containers-iks-release#aug19)
-
-* [July 2019](/docs/containers?topic=containers-iks-release#jul19)
-
-* [June 2019](/docs/containers?topic=containers-iks-release#jun19)
-
-* [May 2019](/docs/containers?topic=containers-iks-release#may19)
 
 
 ## Service limitations

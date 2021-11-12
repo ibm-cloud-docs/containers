@@ -35,7 +35,7 @@ toc:
             topics:
             - path-admin.md
             - path-dev.md
-        - release_notes_2.md
+        - release-notes.md
     - navgroup:
         id: tutorial
         topics:
@@ -431,7 +431,6 @@ toc:
                     - ts-storage-debug-portworx.md
                     - ts-storage-px-debug.md
                     - ts-storage-px-encryption-fails.md
-          - release-notes.md
           - limitations.md
           - sitemap.md
 
