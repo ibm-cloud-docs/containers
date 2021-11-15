@@ -188,6 +188,8 @@ subcollection: containers
 
 * [November 2021](/docs/containers?topic=containers-iks-release#release-nov-2021)
 
+    * [15 November 2021](/docs/containers?topic=containers-iks-release#15nov2021)
+
     * [12 November 2021](/docs/containers?topic=containers-iks-release#12nov2021)
 
     * [10 November 2021](/docs/containers?topic=containers-iks-release#10nov2021)
@@ -2781,24 +2783,6 @@ subcollection: containers
 
     * [Deprecated: `ibmcloud ks cluster user-subnet rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_user_subnet_rm)
 
-* [`dedicated` commands](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_commands)
-
-    * [`ibmcloud ks dedicated host create`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_create)
-
-    * [`ibmcloud ks dedicated host get`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_get)
-
-    * [`ibmcloud ks dedicated host ls`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_ls)
-
-    * [`ibmcloud ks dedicated host rm`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_rm)
-
-    * [`ibmcloud ks dedicated pool create`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_create)
-
-    * [`ibmcloud ks dedicated pool get`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_get)
-
-    * [`ibmcloud ks dedicated pool ls`](/docs/containers?topic=containers-kubernetes-service-cli#dedicate_pool_ls)
-
-    * [`ibmcloud ks dedicated pool rm`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_rm)
-
 * [`worker` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker_node_commands)
 
     * [Deprecated: `ibmcloud ks worker add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_add)
@@ -3038,6 +3022,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.344](/docs/containers?topic=containers-cs_cli_changelog#cli-10344)
 
 * [Version 1.0.334](/docs/containers?topic=containers-cs_cli_changelog#cli-10334)
 
