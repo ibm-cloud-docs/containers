@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-12"
+lastupdated: "2021-11-15"
 
 keywords: containers
 subcollection: containers
@@ -392,7 +392,7 @@ subcollection: containers
 ## Tutorials library for Kubernetes Service
 {: #sitemap_tutorials-library-for-kubernetes-service}
 
-[Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: new_window}{: external}
+[Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
 
 
 ## Creating clusters
@@ -458,7 +458,7 @@ subcollection: containers
 
 * [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
-[Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: new_window}{: external}
+[Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
 
 
 ## Developing apps in clusters
@@ -495,9 +495,9 @@ subcollection: containers
 
 * [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
 
-[Developing a Kubernetes app toolchain with Code Risk Analyzer](https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer)){: new_window}{: external}
+[Developing a Kubernetes app toolchain with Code Risk Analyzer](https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer)){: external}
 
-[Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: new_window}{: external}
+[Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: external}
 
 
 ## Controlling traffic to apps in clusters
@@ -524,7 +524,7 @@ subcollection: containers
 
 * [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
 
-[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: new_window}{: external}
+[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
 
 
 ## Installing the CLI and API
@@ -2692,15 +2692,15 @@ subcollection: containers
 {: #sitemap_api_reference}
 
 
-[IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/#/){: new_window}{: external}
+[IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/#/){: external}
 
-[IBM Cloud Kubernetes Service API JSON](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json){: new_window}{: external}
+[IBM Cloud Kubernetes Service API JSON](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json){: external}
 
-[IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry){: new_window}{: external}
+[IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry){: external}
 
-[IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va){: new_window}{: external}
+[IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va){: external}
 
-[Community Kubernetes API](https://kubernetes.io/docs/reference/){: new_window}{: external}
+[Community Kubernetes API](https://kubernetes.io/docs/reference/){: external}
 
 
 ## CLI plug-in reference
@@ -4807,11 +4807,11 @@ subcollection: containers
 {: #sitemap_related_links}
 
 
-[Community Kubernetes documentation](https://kubernetes.io/docs/home/){: new_window}{: external}
+[Community Kubernetes documentation](https://kubernetes.io/docs/home/){: external}
 
-[IBM Developer - Containers](https://developer.ibm.com/technologies/containers/){: new_window}{: external}
+[IBM Developer - Containers](https://developer.ibm.com/technologies/containers/){: external}
 
-[IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: new_window}{: external}
+[IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: external}
 
 
 ## FAQs
