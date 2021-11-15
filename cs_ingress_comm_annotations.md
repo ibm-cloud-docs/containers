@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-15"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -1279,7 +1279,7 @@ To edit the configmap to enable SSL protocols and ciphers:
     ```
     {: pre}
 
-2. Add the SSL protocols and ciphers. Format ciphers according to the [OpenSSL library cipher list format](https://www.openssl.org/docs/man1.0.2/man1/ciphers.html){: external}.
+2. Add the SSL protocols and ciphers. Format ciphers according to the [OpenSSL library cipher list format](https://www.openssl.org/docs/man1.1.1/man1/ciphers.html){: external}.
 
     ```yaml
     apiVersion: v1
