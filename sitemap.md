@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-16"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [November 2021](/docs/containers?topic=containers-iks-release#release-nov-2021)
+
+    * [15 November 2021](/docs/containers?topic=containers-iks-release#15nov2021)
 
     * [12 November 2021](/docs/containers?topic=containers-iks-release#12nov2021)
 
@@ -728,6 +730,14 @@ subcollection: containers
     * [Creating an allowlist for the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist)
 
 * [Accessing the cluster master via admission controllers and webhooks](/docs/containers?topic=containers-access_cluster#access_webhooks)
+
+    * [What are the default admission controllers in my cluster?](/docs/containers?topic=containers-access_cluster#)
+
+    * [Can I create my own admission controllers?](/docs/containers?topic=containers-access_cluster#access_webhooks_create_controllers)
+
+    * [What other types of apps use admission controllers?](/docs/containers?topic=containers-access_cluster#access_webhooks-app-use-controllers)
+
+    * [I need help with a broken webhook. What can I do?](/docs/containers?topic=containers-access_cluster#access_webhooks-help)
 
     * [Setting up admission controller webhooks](/docs/containers?topic=containers-access_cluster#setting-up-admission-controller-webhooks)
 
@@ -2781,24 +2791,6 @@ subcollection: containers
 
     * [Deprecated: `ibmcloud ks cluster user-subnet rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_user_subnet_rm)
 
-* [`dedicated` commands](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_commands)
-
-    * [`ibmcloud ks dedicated host create`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_create)
-
-    * [`ibmcloud ks dedicated host get`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_get)
-
-    * [`ibmcloud ks dedicated host ls`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_ls)
-
-    * [`ibmcloud ks dedicated host rm`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_rm)
-
-    * [`ibmcloud ks dedicated pool create`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_create)
-
-    * [`ibmcloud ks dedicated pool get`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_get)
-
-    * [`ibmcloud ks dedicated pool ls`](/docs/containers?topic=containers-kubernetes-service-cli#dedicate_pool_ls)
-
-    * [`ibmcloud ks dedicated pool rm`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_rm)
-
 * [`worker` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker_node_commands)
 
     * [Deprecated: `ibmcloud ks worker add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_add)
@@ -3038,6 +3030,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.344](/docs/containers?topic=containers-cs_cli_changelog#cli-10344)
 
 * [Version 1.0.334](/docs/containers?topic=containers-cs_cli_changelog#cli-10334)
 
@@ -4951,6 +4945,10 @@ subcollection: containers
 [Why can't I view or work with my cluster?](/docs/containers?topic=containers-cs_cluster_access#cs_cluster_access)
 
 [Classic: Why can't I access resources in my cluster?](/docs/containers?topic=containers-cs_firewall#cs_firewall)
+
+[Why doesn't the `kubectl exec` command automatically timeout?](/docs/containers?topic=containers-additional-link-info#why-doesn't-the-kubectl-exec-command-automatically-timeout?)
+
+* [Links to additional information](/docs/containers?topic=containers-additional-link-info#additional-link-info)
 
 [Why does my cluster master status say it is approaching its resource limit?](/docs/containers?topic=containers-master_resource_limit#master_resource_limit)
 
