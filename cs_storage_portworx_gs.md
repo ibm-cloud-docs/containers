@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-16"
 
 keywords: kubernetes, local persistent storage
 
@@ -46,7 +46,7 @@ To verify your installation:
         {: pre}
 
         Example output
-        ```
+        ```sh
         portworx-594rw                          1/1       Running     0          20h
         portworx-rn6wk                          1/1       Running     0          20h
         portworx-rx9vf                          1/1       Running     0          20h
@@ -66,7 +66,7 @@ To verify your installation:
         {: pre}
 
         Example output
-        ```
+        ```sh
         Status: PX is operational
         License: Enterprise
         Node ID: 10.176.48.67
@@ -100,14 +100,14 @@ To verify your installation:
 
     4. Verify that each storage node is listed with the correct amount of raw block storage by reviewing the **Capacity** column in the **Cluster Summary** section of your CLI output.
 
-    5. Review the Portworx I/O classification that was assigned to the disks that are part of the Portworx cluster. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on how fast the network is that your worker node is connected to and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes.
+    5. Review the Portworx I/O classification that was assigned to the disks that are part of the Portworx cluster. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on how fast the network is that your worker node is connected to and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the slower network speed that comes with virtual worker nodes.
         ```sh
         kubectl exec -it <portworx_pod> -n kube-system -- /opt/pwx/bin/pxctl cluster provision-status
         ```
         {: pre}
 
         Example output
-        ```
+        ```sh
         NODE        NODE STATUS    POOL    POOL STATUS    IO_PRIORITY    SIZE    AVAILABLE    USED    PROVISIONED    RESERVEFACTOR    ZONE    REGION        RACK
         10.184.58.11    Up        0    Online        LOW        20 GiB    17 GiB        3.0 GiB    0 B        0        dal12    us-south    default
         10.176.48.67    Up        0    Online        LOW        20 GiB    17 GiB        3.0 GiB    0 B        0        dal10    us-south    default
@@ -137,46 +137,38 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
         apiVersion: storage.k8s.io/v1
         metadata:
         name: <storageclass_name>
-      provisioner: kubernetes.io/portworx-volume
-      parameters:
-        repl: "<replication_factor>"
-        secure: "<true_or_false>"
-        priority_io: "<io_priority>"
-        shared: "<true_or_false>"
+        provisioner: kubernetes.io/portworx-volume
+        parameters:
+          repl: "<replication_factor>"
+          secure: "<true_or_false>"
+          priority_io: "<io_priority>"
+          shared: "<true_or_false>"
         ```
         {: codeblock}
 
-        <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-        <caption>Understanding the YAML file components</caption>
-        <thead>
-        <col width="30%">
-        <thead>
-        <th>Parameter</th>
-        <th>Description</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>metadata.name</code></td>
-        <td>Enter a name for your storage class. </td>
-        </tr>
-        <tr>
-        <td><code>parameters.repl</code></td>
-        <td>Enter the number of replicas for your data that you want to store across different worker nodes. Allowed numbers are <code>1</code>,<code>2</code>, or <code>3</code>. For example, if you enter <code>3</code>, then your data is replicated across three different worker nodes in your Portworx cluster. To store your data highly available, use a multizone cluster and replicate your data across three worker nodes in different zones. <strong>Note: </strong>You must have enough worker nodes to fulfill your replication requirement. For example, if you have two worker nodes, but you specify three replicas, then the creation of the PVC with this storage class fails. </td>
-        </tr>
-        <tr>
-        <td><code>parameters.secure</code></td>
-        <td>Specify whether you want to encrypt the data in your volume with {{site.data.keyword.keymanagementservicelong_notm}}. Choose between the following options: <ul><li><strong>true</strong>: Enter <code>true</code> to enable encryption for your Portworx volumes. To encrypt volumes, you must have an {{site.data.keyword.keymanagementservicelong_notm}} service instance and a Kubernetes secret that holds your customer root key. For more information about how to set up encryption for Portworx volumes, see <a href="/docs/containers?topic=containers-portworx#encrypt_volumes">Encrypting your Portworx volumes</a>. </li><li><strong>false</strong>: When you enter <code>false</code>, your Portworx volumes are not encrypted. </li></ul> If you do not specify this option, your Portworx volumes are not encrypted by default. <strong>Note:</strong> You can choose to enable volume encryption in your PVC, even if you disabled encryption in your storage class. The setting that you make in the PVC take precedence over the settings in the storage class.  </td>
-        </tr>
-        <tr>
-        <td><code>parameters.priority_io</code></td>
-        <td>Enter the Portworx I/O priority that you want to request for your data. Available options are <code>high</code>, <code>medium</code>, and <code>low</code>. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on the network bandwidth of your worker node and the type of storage device that you have. Disks of SDS worker nodes are classified as <code>high</code>. If you manually attach disks to a virtual worker node, then these disks are classified as <code>low</code> due to the lower network speed that comes with virtual worker nodes. </br><br> When you create a PVC with a storage class, the number of replicas that you specify in <code>parameters/repl</code> takes precedence over the I/O priority. For example, when you specify three replicas that you want to store on high-speed disks, but you have only one worker node with a high-speed disk in your cluster, then your PVC creation still succeeds. Your data is replicated across both high and low speed disks. </td>
-        </tr>
-        <tr>
-        <td><code>parameters.shared</code></td>
-        <td>Define whether you want to allow multiple pods to access the same volume. Choose between the following options: <ul><li><strong>True: </strong>If you set this option to <code>true</code>, then you can access the same volume by multiple pods that are distributed across worker nodes in different zones. </li><li><strong>False: </strong>If you set this option to <code>false</code>, you can access the volume from multiple pods only if the pods are deployed onto the worker node that attaches the physical disk that backs the volume. If your pod is deployed onto a different worker node, the pod cannot access the volume.</li></ul></td>
-        </tr>
-        </tbody>
-        </table>
+        `metadata.name`
+        :    Enter a name for your storage class. 
+        
+        `parameters.repl`
+        :    Enter the number of replicas for your data that you want to store across different worker nodes. Allowed numbers are `1`,`2`, or `3`. For example, if you enter `3`, then your data is replicated across three different worker nodes in your Portworx cluster. To store your data highly available, use a multizone cluster and replicate your data across three worker nodes in different zones. 
+             You must have enough worker nodes to fulfill your replication requirement. For example, if you have two worker nodes, but you specify three replicas, then the creation of the PVC with this storage class fails.
+             {: note}
+             
+        `parameters.secure`
+        :    Specify whether you want to encrypt the data in your volume with {{site.data.keyword.keymanagementservicelong_notm}}. Choose between the following options: 
+             - **true**: Enter `true` to enable encryption for your Portworx volumes. To encrypt volumes, you must have an {{site.data.keyword.keymanagementservicelong_notm}} service instance and a Kubernetes secret that holds your customer root key. For more information about how to set up encryption for Portworx volumes, see [Encrypting your Portworx volumes](/docs/containers?topic=containers-portworx#encrypt_volumes). 
+             - **false**: When you enter `false`, your Portworx volumes are not encrypted.
+        :    If you do not specify this option, your Portworx volumes are not encrypted by default.
+        :    You can choose to enable volume encryption in your PVC, even if you disabled encryption in your storage class. The setting that you make in the PVC take precedence over the settings in the storage class.  
+        
+        `parameters.priority_io`
+        :    Enter the Portworx I/O priority that you want to request for your data. Available options are `high`, `medium`, and `low`. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on the network bandwidth of your worker node and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the slower network speed that comes with virtual worker nodes.
+        :    When you create a PVC with a storage class, the number of replicas that you specify in `parameters/repl` takes precedence over the I/O priority. For example, when you specify three replicas that you want to store on high-speed disks, but you have only one worker node with a high-speed disk in your cluster, then your PVC creation still succeeds. Your data is replicated across both high and low speed disks. 
+        
+        `parameters.shared`
+        :    Define whether you want to allow multiple pods to access the same volume. Choose between the following options: 
+             - **True:** If you set this option to `true`, then you can access the same volume by multiple pods that are distributed across worker nodes in different zones. 
+             - **False:** If you set this option to `false`, you can access the volume from multiple pods only if the pods are deployed onto the worker node that attaches the physical disk that backs the volume. If your pod is deployed onto a different worker node, the pod cannot access the volume.
 
     2. Create the storage class.
         ```sh
@@ -197,42 +189,30 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
         apiVersion: v1
         metadata:
         name: mypvc
-      spec:
-        accessModes:
-          - <access_mode>
-        resources:
-          requests:
-            storage: <size>
-        storageClassName: portworx-shared-sc
+        spec:
+          accessModes:
+            - <access_mode>
+          resources:
+            requests:
+              storage: <size>
+          storageClassName: portworx-shared-sc
         ```
         {: codeblock}
 
-        <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-        <caption>Understanding the YAML file components</caption>
-        <col width="30%">
-        <thead>
-        <th>Parameter</th>
-        <th>Description</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>metadata.name</code></td>
-        <td>Enter a name for your PVC, such as <code>mypvc</code>. </td>
-        </tr>
-        <tr>
-        <td><code>spec.accessModes</code></td>
-        <td>Enter the <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">Kubernetes access mode</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> that you want to use. </td>
-        </tr>
-        <tr>
-        <td><code>resources.requests.storage</code></td>
-        <td>Enter the amount of storage in gigabytes that you want to assign from your Portworx cluster. For example, to assign 2 gigabytes from your Portworx cluster, enter <code>2Gi</code>. The amount of storage that you can specify is limited by the amount of storage that is available in your Portworx cluster. If you specified a replication factor in your storage class that is higher than 1, then the amount of storage that you specify in your PVC is reserved on multiple worker nodes.   </td>
-        </tr>
-        <tr>
-        <td><code>spec.storageClassName</code></td>
-        <td>Enter the name of the storage class that you chose or created earlier and that you want to use to provision your PV. The example YAML file uses the <code>portworx-shared-sc</code> storage class. </td>
-        </tr>
-        </tbody>
-        </table>
+        `metadata.name`
+        :    Enter a name for your PVC, such as <code>mypvc</code>. 
+        
+        
+        `spec.accessModes`
+        :    Enter the [Kubernetes access mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes){: external} that you want to use. 
+        
+        
+        `resources.requests.storage`
+        :    Enter the amount of storage in gigabytes that you want to assign from your Portworx cluster. For example, to assign 2 gigabytes from your Portworx cluster, enter `2Gi`. The amount of storage that you can specify is limited by the amount of storage that is available in your Portworx cluster. If you specified a replication factor in your storage class that is higher than 1, then the amount of storage that you specify in your PVC is reserved on multiple worker nodes.   
+        
+        
+        `spec.storageClassName`
+        :    Enter the name of the storage class that you chose or created earlier and that you want to use to provision your PV. The example YAML file uses the `portworx-shared-sc` storage class. 
 
     2. Create your PVC.
         ```sh
@@ -288,61 +268,42 @@ To access the storage from your app, you must mount the PVC to your app.
             fsGroup: <group_ID>
     ```
     {: codeblock}
-
-    <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-    <caption>Understanding the YAML file components</caption>
-    <col width="40%">
-    <thead>
-    <th>Parameter</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-        <tr>
-    <td><code>metadata.labels.app</code></td>
-    <td>A label for the deployment.</td>
-        </tr>
-        <tr>
-        <td><code>spec.selector.matchLabels.app</code> <br/> <code>spec.template.metadata.labels.app</code></td>
-        <td>A label for your app.</td>
-        </tr>
-    <tr>
-    <td><code>template.metadata.labels.app</code></td>
-    <td>A label for the deployment.</td>
-        </tr>
-    <tr>
-    <td><code>spec.schedulerName</code></td>
-    <td>Use <a href="https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/">Stork</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> as the scheduler for your Portworx cluster. With Stork, you can co-locate pods with their data, provides seamless migration of pods in case of storage errors and makes it easier to create and restore snapshots of Portworx volumes. </td>
-    </tr>
-    <tr>
-    <td><code>spec.containers.image</code></td>
-    <td>The name of the image that you want to use. To list available images in your {{site.data.keyword.registrylong_notm}} account, run <code>ibmcloud cr image-list</code>.</td>
-    </tr>
-    <tr>
-    <td><code>spec.containers.name</code></td>
-    <td>The name of the container that you want to deploy to your cluster.</td>
-    </tr>
-    <tr>
-    <td><code>spec.containers.securityContext.fsGroup</code></td>
-    <td>Optional: To access your storage with a non-root user, specify the <a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">security context</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> for your pod and define the set of users that you want to grant access in the <code>fsGroup</code> section on your deployment YAML. For more information, see <a href="https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users/">Accessing Portworx volumes with a non-root user</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. </td>
-    </tr>
-    <tr>
-    <td><code>spec.containers.volumeMounts.mountPath</code></td>
-    <td>The absolute path of the directory to where the volume is mounted inside the container. If you want to share a volume between different apps, you can specify <a href="https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath">volume sub paths</a> <img src="../icons/launch-glyph.svg" alt="External link icon"> for each of your apps.</td>
-    </tr>
-    <tr>
-    <td><code>spec.containers.volumeMounts.name</code></td>
-    <td>The name of the volume to mount to your pod.</td>
-    </tr>
-    <tr>
-    <td><code>volumes.name</code></td>
-    <td>The name of the volume to mount to your pod. Typically this name is the same as <code>volumeMounts/name</code>.</td>
-    </tr>
-    <tr>
-    <td><code>volumes.persistentVolumeClaim.claimName</code></td>
-    <td>The name of the PVC that binds the PV that you want to use. </td>
-    </tr>
-    </tbody></table>
-
+    
+    To understand your yaml file components, see the following parameters and descriptions.
+    
+    `metadata.labels.app`
+    :    A label for the deployment.
+        
+    `spec.selector.matchLabels.app` or `spec.template.metadata.labels.app`
+    :    A label for your app.
+        
+   `template.metadata.labels.app`
+    :    A label for the deployment.
+        
+   `spec.schedulerName`
+    :    Use [Stork](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/){: external} as the scheduler for your Portworx cluster. With Stork, you can co-locate pods with their data, provides seamless migration of pods in case of storage errors and makes it easier to create and restore snapshots of Portworx volumes. 
+   
+   `spec.containers.image`
+    :    The name of the image that you want to use. To list available images in your {{site.data.keyword.registrylong_notm}} account, run `ibmcloud cr image-list`.
+    
+   `spec.containers.name`
+    :    The name of the container that you want to deploy to your cluster.
+    
+   `spec.containers.securityContext.fsGroup`
+    :    Optional: To access your storage with a non-root user, specify the [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external} for your pod and define the set of users that you want to grant access in the `fsGroup` section on your deployment YAML. For more information, see [Accessing Portworx volumes with a non-root user](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users/){: external}. 
+    
+   `spec.containers.volumeMounts.mountPath`
+    :    The absolute path of the directory to where the volume is mounted inside the container. If you want to share a volume between different apps, you can specify [volume sub paths](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath){: external} for each of your apps.
+    
+   `spec.containers.volumeMounts.name`
+    :    The name of the volume to mount to your pod.
+    
+   `volumes.name`
+    :    The name of the volume to mount to your pod. Typically this name is the same as `volumeMounts/name`.
+    
+   `volumes.persistentVolumeClaim.claimName`
+    :    The name of the PVC that binds the PV that you want to use. 
+    
 2. Create your deployment.
     ```sh
     kubectl apply -f deployment.yaml
@@ -432,7 +393,7 @@ When you added storage from your Portworx cluster to your app, you have three ma
         {: pre}
 
         Example output
-        ```
+        ```sh
         blockdepl-12345-prz7b:    claim1-block-bronze  
         ```
         {: screen}
@@ -506,14 +467,9 @@ Removing your Portworx cluster removes all the data from your Portworx cluster. 
 - **Remove the entire Portworx cluster:** When you remove a Portworx cluster, you can decide if you want to remove all your data at the same time. For more information, see [Uninstall from Kubernetes cluster](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/uninstall/#delete-wipe-px-cluster-configuration){: external}.
 
 
-
 ## Getting help and support
 {: #portworx_help_and_support}
 
 If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://pure1.purestorage.com/support){: external}. You can also submit a request by sending an e-mail to `support@purestorage.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@purestorage.com`.
-
-
-
-
 
 

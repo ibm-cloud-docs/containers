@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-16"
 
 keywords: containers
 subcollection: containers
@@ -730,6 +730,14 @@ subcollection: containers
     * [Creating an allowlist for the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist)
 
 * [Accessing the cluster master via admission controllers and webhooks](/docs/containers?topic=containers-access_cluster#access_webhooks)
+
+    * [What are the default admission controllers in my cluster?](/docs/containers?topic=containers-access_cluster#)
+
+    * [Can I create my own admission controllers?](/docs/containers?topic=containers-access_cluster#access_webhooks_create_controllers)
+
+    * [What other types of apps use admission controllers?](/docs/containers?topic=containers-access_cluster#access_webhooks-app-use-controllers)
+
+    * [I need help with a broken webhook. What can I do?](/docs/containers?topic=containers-access_cluster#access_webhooks-help)
 
     * [Setting up admission controller webhooks](/docs/containers?topic=containers-access_cluster#setting-up-admission-controller-webhooks)
 
@@ -4937,6 +4945,10 @@ subcollection: containers
 [Why can't I view or work with my cluster?](/docs/containers?topic=containers-cs_cluster_access#cs_cluster_access)
 
 [Classic: Why can't I access resources in my cluster?](/docs/containers?topic=containers-cs_firewall#cs_firewall)
+
+[Why doesn't the `kubectl exec` command automatically timeout?](/docs/containers?topic=containers-additional-link-info#why-doesn't-the-kubectl-exec-command-automatically-timeout?)
+
+* [Links to additional information](/docs/containers?topic=containers-additional-link-info#additional-link-info)
 
 [Why does my cluster master status say it is approaching its resource limit?](/docs/containers?topic=containers-master_resource_limit#master_resource_limit)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-16"
 
 keywords: kubernetes, kubectl, exec, timeout
 
@@ -34,8 +34,8 @@ kubectl-1.20 exec <pod_name>
 ```
 {: pre}
 
-### Links to additional information
+## Links to additional information
+{: #additional-link-info}
 
 - [`kubectl` 1.21 and containerd fail to follow `stream_idle_timeout`](https://github.com/containerd/containerd/issues/5563){: external}
 - [`exec` timeout does not kick users out on `kubectl` client 1.21](https://github.com/kubernetes/kubernetes/issues/102569){: external}
-
