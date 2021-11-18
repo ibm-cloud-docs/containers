@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-16"
+lastupdated: "2021-11-18"
 
 keywords: containers
 subcollection: containers
@@ -3766,6 +3766,8 @@ subcollection: containers
 
 [Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
+* [Changelog version 2.1.7, released 18 November 2021](/docs/containers?topic=containers-cos_plugin_changelog#0217_object_plugin)
+
 * [Changelog for version 2.1.6, released 22 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0216_object_plugin)
 
 * [Changelog for version 2.1.5, released 5 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0215_object_plugin)
@@ -5093,6 +5095,12 @@ subcollection: containers
 [Why are certain packets dropped on the public VLAN?](/docs/containers?topic=containers-mangle-table#mangle-table)
 
 [Why do OpenSSL connections to Let's Encrypt fail after 30 September 2021?](/docs/containers?topic=containers-ts-letsencrypt#ts-letsencrypt)
+
+[Debugging Calico components](/docs/containers?topic=containers-calico_log_level#calico_log_level)
+
+* [Increasing the log level for components.](/docs/containers?topic=containers-calico_log_level#calico-increase-logging)
+
+* [Gathering Calico logs](/docs/containers?topic=containers-calico_log_level#calico-log-gather)
 
 
 ### Logging and monitoring
