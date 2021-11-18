@@ -3766,6 +3766,8 @@ subcollection: containers
 
 [Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
+* [Changelog version 2.1.7, released 18 November 2021](/docs/containers?topic=containers-cos_plugin_changelog#0217_object_plugin)
+
 * [Changelog for version 2.1.6, released 22 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0216_object_plugin)
 
 * [Changelog for version 2.1.5, released 5 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0215_object_plugin)
