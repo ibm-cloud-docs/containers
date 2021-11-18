@@ -5096,6 +5096,12 @@ subcollection: containers
 
 [Why do OpenSSL connections to Let's Encrypt fail after 30 September 2021?](/docs/containers?topic=containers-ts-letsencrypt#ts-letsencrypt)
 
+[Debugging Calico components](/docs/containers?topic=containers-calico_log_level#calico_log_level)
+
+* [Increasing the log level for components.](/docs/containers?topic=containers-calico_log_level#calico-increase-logging)
+
+* [Gathering Calico logs](/docs/containers?topic=containers-calico_log_level#calico-log-gather)
+
 
 ### Logging and monitoring
 {: #sitemap_logging_and_monitoring1}
