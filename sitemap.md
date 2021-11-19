@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-18"
+lastupdated: "2021-11-19"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [November 2021](/docs/containers?topic=containers-iks-release#release-nov-2021)
+
+    * [19 November 2021](/docs/containers?topic=containers-iks-release#19nov2021)
+
+    * [18 November 2021](/docs/containers?topic=containers-iks-release#18nov2021)
 
     * [15 November 2021](/docs/containers?topic=containers-iks-release#15nov2021)
 
@@ -3464,13 +3468,17 @@ subcollection: containers
 
 * [Version 1.0.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_0_0)
 
-    * [Version 1.0.3_1730_iks (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.3_1730_iks)
+    * [Version 1.0.3_1831_iks (default), released on 19 November 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.3_1831_iks)
 
-    * [Version 1.0.0_1699_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.0_1699_iks)
+    * [Version 1.0.3_1730_iks, released on 20 October 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.3_1730_iks)
 
-    * [Version 1.0.0_1645_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.0_1645_iks)
+    * [Version 1.0.0_1699_iks, released on 22 September 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.0_1699_iks)
+
+    * [Version 1.0.0_1645_iks, released on 14 September 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.0_1645_iks)
 
 * [Version 0.49.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_49_0)
+
+    * [Version 0.49.3_1830_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.49.3_1830_iks)
 
     * [Version 0.49.3_1745_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.49.3_1745_iks)
 
@@ -3803,6 +3811,8 @@ subcollection: containers
 * [Changelog for 1.0.5, released 17 December 2020](/docs/containers?topic=containers-backup_restore_changelog#0105_br_chart)
 
 [ALB OAuth Proxy add-on changelog](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
+
+* [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
 
 * [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0)
 
