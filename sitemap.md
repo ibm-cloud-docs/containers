@@ -3808,6 +3808,8 @@ subcollection: containers
 
 [ALB OAuth Proxy add-on changelog](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
+* [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
 * [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0)
 
 [Archived Kubernetes version changelogs](/docs/containers?topic=containers-changelog_archive#changelog_archive)
