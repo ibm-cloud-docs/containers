@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, logmet, logs, metrics, audit, events
 
@@ -33,7 +33,7 @@ Before you set up a Kubernetes API audit configuration, review the following inf
 {: shortdesc}
 
 * To see how the audit webhook collects logs, check out the {{site.data.keyword.containerlong_notm}} [`kube-audit` policy](https://github.com/IBM-Cloud/kube-samples/blob/master/kube-audit/kube-audit-policy.yaml){: external}.
-    You cannot modify the default policy or apply your own custom policy.
+    You can't modify the default policy or apply your own custom policy.
     {: note}
 
 * For Kubernetes audit logs and verbosity, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/){: external}.
@@ -297,7 +297,7 @@ For example, you might [use Logstash with Kubernetes](https://kubernetes.io/docs
 
 Before you begin, ensure that you reviewed the [considerations and prerequisites](#prereqs-apiserver-logs). Note that [log filters](/docs/containers?topic=containers-health#filter-logs) are not supported.
 
-1. Set up the webhook. If you do not provide any information in the flags, a default configuration is used.
+1. Set up the webhook. If you don't provide any information in the flags, a default configuration is used.
 
     ```sh
     ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server <server_URL_or_IP> --ca-cert <CA_cert_path> --client-cert <client_cert_path> --client-key <client_key_path>

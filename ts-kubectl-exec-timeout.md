@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021, 2021
-lastupdated: "2021-11-16"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, kubectl, exec, timeout
 
@@ -14,7 +14,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 # Why doesn't the `kubectl exec` command automatically timeout?
-{: ts-kubectl-exec-timeout}
+{: #ts-kubectl-exec-timeout}
 
 When you use kubectl version 1.21 or later to run `kubectl exec <pod_name>`, the command does not automatically timeout. 
 {: tsSymptoms}
@@ -39,3 +39,4 @@ kubectl-1.20 exec <pod_name>
 
 - [`kubectl` 1.21 and containerd fail to follow `stream_idle_timeout`](https://github.com/containerd/containerd/issues/5563){: external}
 - [`exec` timeout does not kick users out on `kubectl` client 1.21](https://github.com/kubernetes/kubernetes/issues/102569){: external}
+

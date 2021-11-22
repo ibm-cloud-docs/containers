@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -53,7 +53,7 @@ The Istio version in the managed add-on is tested by {{site.data.keyword.cloud_n
 
 Whenever the managed Istio add-on is updated, make sure that you [update your `istioctl` client and the Istio sidecars for your app](/docs/containers?topic=containers-istio#update_client_sidecar) to match the Istio version of the add-on. You can check whether the versions of your `istioctl` client and the Istio add-on control plane match by running `istioctl version`.
 
-If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial](https://istio.io/latest/docs/setup/platform-setup/ibm/){: external}. However, note that you cannot run community Istio concurrently with the managed Istio add-on in your cluster.
+If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial](https://istio.io/latest/docs/setup/platform-setup/ibm/){: external}. However, note that you can't run community Istio concurrently with the managed Istio add-on in your cluster.
 {: note}
 
 
@@ -76,8 +76,8 @@ The Istio add-on installs the core components of Istio. For more information abo
 Review the following limitations for the managed Istio add-on.
 {: shortdesc}
 
-* When you enable the managed Istio add-on, you cannot use `IstioOperator` (IOP) resources to customize the Istio control plane installation. Only the `IstioOperator` resources that are managed by IBM for the Istio control plane are supported. If you create an `IstioOperator` resource for custom gateways in your Istio data plane, you are responsible for managing those resources.
-* You cannot modify any Istio resources that are created for you in the `istio-system` namespace. If you need to customize the Istio installation, you can [edit the `managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize).
+* When you enable the managed Istio add-on, you can't use `IstioOperator` (IOP) resources to customize the Istio control plane installation. Only the `IstioOperator` resources that are managed by IBM for the Istio control plane are supported. If you create an `IstioOperator` resource for custom gateways in your Istio data plane, you are responsible for managing those resources.
+* You can't modify any Istio resources that are created for you in the `istio-system` namespace. If you need to customize the Istio installation, you can [edit the `managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize).
 * The following features are not supported in the managed Istio add-on:
     * [Any features by the community that are in alpha release stages](https://istio.io/latest/docs/releases/feature-stages/){: external}
 

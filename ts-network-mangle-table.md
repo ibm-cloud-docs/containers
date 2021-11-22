@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -20,7 +20,7 @@ content-type: troubleshoot
 - ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
 - ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
 
-You find that your {{site.data.keyword.containerlong_notm}} workers are dropping certain invalid packets or ingress packets while on a public VLAN with private source addresses. For example, you create an application load balancer (ALB) for your cluster, but cannot connect to it. You receive a message similar to `Unable to connect to <ALB>`. 
+You find that your {{site.data.keyword.containerlong_notm}} workers are dropping certain invalid packets or ingress packets while on a public VLAN with private source addresses. For example, you create an application load balancer (ALB) for your cluster, but can't connect to it. You receive a message similar to `Unable to connect to <ALB>`. 
 {: tsSymptoms}
 
 For certain custom network configurations, for example, if you configure a VPN to allow ingress traffic to a public IKS LoadBalancer that comes from private source IP addresses, then you might find that your custom traffic drops and is no longer available. This action is caused by the Distributed Denial of Service (DDOS) rules that are set in a Kubernetes worker node mangle iptable.
@@ -57,5 +57,5 @@ The mangle iptable includes the following the following rules.
 {: screen}
 
 
-To resolve this issue, [create a private load balancer](/docs/containers?topic=containers-cs_network_planning) to allow this traffic with the private source IP addresses. If that does not resolve the problem, or for some reason, you cannot create a private load balancer, then create a daemonset that removes the rules that are causing the issue.
+To resolve this issue, [create a private load balancer](/docs/containers?topic=containers-cs_network_planning) to allow this traffic with the private source IP addresses. If that does not resolve the problem, or for some reason, you can't create a private load balancer, then create a daemonset that removes the rules that are causing the issue.
 {: tsResolve}

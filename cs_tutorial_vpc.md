@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes
 
@@ -80,7 +80,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
     {: pre}
 
 2. Create a VPC for your cluster. For more information, see the docs for creating a VPC in the [console](/docs/vpc?topic=vpc-creating-a-vpc-using-the-ibm-cloud-console) or [CLI](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-vpc-cli).
-    1. Create a VPC that is called `myvpc` and note the **ID** in the output. VPCs provide an isolated environment for your workloads to run within the public cloud. You can use the same VPC for multiple clusters, such as if you plan to have different clusters host separate microservices that need to communicate with each other. If you want to separate your clusters, such as for different departments, you can create a VPC for each cluster.
+    1. Create a VPC called `myvpc` and note the **ID** in the output. VPCs provide an isolated environment for your workloads to run within the public cloud. You can use the same VPC for multiple clusters, such as if you plan to have different clusters host separate microservices that need to communicate with each other. If you want to separate your clusters, such as for different departments, you can create a VPC for each cluster.
         ```sh
         ibmcloud is vpc-create myvpc
         ```
@@ -88,8 +88,8 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
 
     2. Create a subnet for your VPC, and note its **ID**. Consider the following information when you create the VPC subnet:
         - **Zones**: You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created the VPC in. To list available zones in the region, run `ibmcloud is zones`.
-        - **IP addresses**: VPC subnets provide private IP addresses for your worker nodes and load balancer services in your cluster, so make sure to [create a subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IP addresses that a VPC subnet has later.
-        - **Public gateways**: You do not need to attach a public gateway to complete this tutorial. Instead, you can keep your worker nodes isolated from public access by using VPC load balancers to expose workloads securely. You might attach a public gateway if your worker nodes need to access a public URL. For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
+        - **IP addresses**: VPC subnets provide private IP addresses for your worker nodes and load balancer services in your cluster, so make sure to [create a subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You can't change the number of IP addresses that a VPC subnet has later.
+        - **Public gateways**: You don't need to attach a public gateway to complete this tutorial. Instead, you can keep your worker nodes isolated from public access by using VPC load balancers to expose workloads securely. You might attach a public gateway if your worker nodes need to access a public URL. For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
 
         ```sh
         ibmcloud is subnet-create mysubnet1 <vpc_ID> --zone us-south-1 --ipv4-address-count 256
@@ -121,7 +121,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         ```
         {: pre}
 
-        **Example output**
+        Example output
         ```
         Client Version: 1.20.11
         Server Version: 1.20.11+IKS
@@ -197,7 +197,7 @@ To deploy the app:
     ```
     {: pre}
 
-    **Example output**
+    Example output
 
     ```
     deployment.apps/hello-world-deployment created
@@ -213,7 +213,7 @@ To deploy the app:
     ```
     {: pre}
 
-    **Example output**
+    Example output
 
     ```
     service/hello-world-service exposed
@@ -238,7 +238,7 @@ To deploy the app:
         ```
         {: pre}
 
-        **Example output**
+        Example output
 
         ```sh
         NAME:                   hello-world-service
@@ -261,7 +261,7 @@ To deploy the app:
         ```
         {: pre}
 
-        **Example output**
+        Example output
         ```sh
         NAME                                     READY     STATUS        RESTARTS   AGE
         hello-world-deployment-d99cddb45-lmj2v   1/1       Running       0          2d
@@ -274,7 +274,7 @@ To deploy the app:
         ```
         {: pre}
 
-        **Example output**
+        Example output
         
         ```sh
         NAME:               hello-world-deployment-d99cddb45-lmj2v
@@ -304,7 +304,7 @@ To deploy the app:
     ```
     {: pre}
 
-    **Example output**
+    Example output
     ```
     Connecting to 10.xxx.xx.xxx:30872 (10.xxx.xx.xxx:30872)
     Hello world from hello-world-deployment-d99cddb45-lmj2v! Your app is up and running in a cluster!
@@ -332,9 +332,9 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     ```
     {: pre}
 
-    **Example output**
+    Example output
 
-    ```
+    ```sh
     service "hw-lb-svc" exposed
     ```
     {: screen}
@@ -349,7 +349,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     | `--target-port=*<8080>*` | The port that your app listens on and to which the service directs incoming network traffic. In this example, the `target-port` is the same as the `port`, but other apps that you create might use a different port. |
     {: caption="Table 2. Information about the command options." caption-side="top"}
 
-2. Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When you create the Kubernetes `LoadBalancer` service, a VPC load balancer is automatically created for you. The VPC load balancer assigns a hostname to your Kubernetes LoadBalancer service that you can see in the **LoadBalancer Ingress** field of your CLI output.<p class="note">The VPC load balancer takes a few minutes to provision in your VPC. Until the VPC load balancer is ready, you cannot access the Kubernetes `LoadBalancer` service through its hostname.</p>
+2. Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When you create the Kubernetes `LoadBalancer` service, a VPC load balancer is automatically created for you. The VPC load balancer assigns a hostname to your Kubernetes LoadBalancer service that you can see in the **LoadBalancer Ingress** field of your CLI output.<p class="note">The VPC load balancer takes a few minutes to provision in your VPC. Until the VPC load balancer is ready, you can't access the Kubernetes `LoadBalancer` service through its hostname.</p>
 
     ```sh
     kubectl describe service hw-lb-svc
@@ -403,8 +403,8 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     ```
     {: pre}
 
-    **Example output**
-    ```
+    Example output
+    ```sh
     Hello world from hello-world-deployment-5fd7787c79-sl9hn! Your app is up and running in a cluster!
     ```
     {: screen}

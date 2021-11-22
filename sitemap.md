@@ -1899,6 +1899,10 @@ subcollection: containers
 
 * [Understanding load balancing for apps through Kubernetes service discovery](/docs/containers?topic=containers-cs_network_planning#in-cluster)
 
+    * [Services](/docs/containers?topic=containers-cs_network_planning#app-exposure-service)
+
+* [kube-proxy](/docs/containers?topic=containers-cs_network_planning#app-exposure-proxy)
+
 * [Understanding Kubernetes service types](/docs/containers?topic=containers-cs_network_planning#external)
 
 * [Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#public_access)
@@ -4960,7 +4964,7 @@ subcollection: containers
 
 * [Firewall prevents running CLI commands](/docs/containers?topic=containers-ts_clis#ts_firewall_clis)
 
-* [`kubectl` commands do not work](/docs/containers?topic=containers-ts_clis#kubectl_fails)
+* [`kubectl` commands don't work](/docs/containers?topic=containers-ts_clis#kubectl_fails)
 
 * [`kubectl` commands time out](/docs/containers?topic=containers-ts_clis#exec_logs_fail)
 
@@ -4988,9 +4992,9 @@ subcollection: containers
 
 [Classic: Why can't I access resources in my cluster?](/docs/containers?topic=containers-cs_firewall#cs_firewall)
 
-[Why doesn't the `kubectl exec` command automatically timeout?](/docs/containers?topic=containers-additional-link-info#why-doesn't-the-kubectl-exec-command-automatically-timeout?)
+[Why doesn't the `kubectl exec` command automatically timeout?](/docs/containers?topic=containers-ts-kubectl-exec-timeout#ts-kubectl-exec-timeout)
 
-* [Links to additional information](/docs/containers?topic=containers-additional-link-info#additional-link-info)
+* [Links to additional information](/docs/containers?topic=containers-ts-kubectl-exec-timeout#additional-link-info)
 
 [Why does my cluster master status say it is approaching its resource limit?](/docs/containers?topic=containers-master_resource_limit#master_resource_limit)
 
@@ -5061,7 +5065,7 @@ subcollection: containers
 
 * [Hard reboot](/docs/containers?topic=containers-common_worker_nodes_issues#hard-reboot)
 
-* [Instance cannot be found](/docs/containers?topic=containers-common_worker_nodes_issues#instance-not-found)
+* [Instance can't be found](/docs/containers?topic=containers-common_worker_nodes_issues#instance-not-found)
 
 [Why can't I create or delete worker nodes?](/docs/containers?topic=containers-worker_infra_errors#worker_infra_errors)
 

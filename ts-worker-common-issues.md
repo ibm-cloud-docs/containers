@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -58,7 +58,7 @@ To resolve, try one of the following options:
 * Infrastructure resource availability in zones can fluctuate often. Wait a few minutes and try again.
 * For a single zone cluster, create the cluster in a different zone. For a multizone cluster, add a zone to the cluster.
 * Specify a different pair of public and private VLANs for your worker nodes in your IBM Cloud infrastructure account. For worker nodes that are in a worker pool, you can use the `ibmcloud ks zone network-set` [command](/docs/containers?topic=containers-kubernetes-service-cli<opens</li>
-* Contact your IBM Cloud infrastructure account manager to verify that you do not exceed an account limit, such as a global quota.
+* Contact your IBM Cloud infrastructure account manager to verify that you don't exceed an account limit, such as a global quota.
 * Open an [IBM Cloud infrastructure support case](/docs/containers?topic=containers-get-help).
 
 ## Could not obtain network VLAN
@@ -128,7 +128,7 @@ If you have a firewall, [configure your firewall settings to allow outgoing traf
 
 Check whether your cluster does not have a public IP by running `ibmcloud ks worker ls --cluster <mycluster>`. If no public IP is listed, then your cluster has only private VLANs.
     * If you want the cluster to have only private VLANs, set up your [VLAN connection](/docs/containers?topic=containers-plan_clusters#private_clusters) and your [firewall](/docs/containers?topic=containers-firewall#firewall_outbound).</li>
-    * If you created the cluster with only the private cloud service endpoint before you enabled your account for [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint), your workers cannot connect to the master. Try [setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account. If you still want a private cloud service endpoint only cluster after your account is updated, you can then disable the public cloud service endpoint.
+    * If you created the cluster with only the private cloud service endpoint before you enabled your account for [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint), your workers can't connect to the master. Try [setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account. If you still want a private cloud service endpoint only cluster after your account is updated, you can then disable the public cloud service endpoint.
     * If you want the cluster to have a public IP, [add new worker nodes](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_add) with both public and private VLANs.
 
 ## Hard reboot
@@ -145,23 +145,23 @@ The worker did not respond to the soft reboot request. A hard reboot might be ne
 
 Although you issued a reboot on your worker node, the worker node is unresponsive. You can rerun the [reboot command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) with the `--hard` flag to power off the worker node, or run the `worker reload` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload).
 
-## Instance cannot be found
+## Instance can't be found
 {: #instance-not-found}
 
 **Message**:
 
 ```
-Cannot create IMS portal token, as no IMS account is linked to the selected BSS account
+can't create IMS portal token, as no IMS account is linked to the selected BSS account
 
 Provided user not found or active
 
 User account is currently cancel_pending.
 
-The worker node instance '<ID>' cannot be found. Review '<provider>' infrastructure user permissions.
+The worker node instance '<ID>' can't be found. Review '<provider>' infrastructure user permissions.
 
-The worker node instance cannot be found. Review '<provider>' infrastructure user permissions.
+The worker node instance can't be found. Review '<provider>' infrastructure user permissions.
 
-The worker node instance cannot be identified. Review '<provider>' infrastructure user permissions.
+The worker node instance can't be identified. Review '<provider>' infrastructure user permissions.
 ```
 {: screen}
 

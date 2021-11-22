@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -39,7 +39,7 @@ Gain operational visibility into the performance and health of your Istio-manage
 
 The managed `istio` add-on installs Prometheus into your cluster. The `istio-mixer-telemetry` pods in your cluster are annotated with a Prometheus endpoint so that Prometheus can aggregate all telemetry data for your pods. When you deploy a monitoring agent to the worker nodes in your cluster, {{site.data.keyword.mon_short}} is already automatically enabled to detect and scrape the data from these Prometheus endpoints to display them in your {{site.data.keyword.cloud_notm}} monitoring dashboard.
 
-Because all of the Prometheus work is done, all that is left for you to do is to deploy monitoring agents in your cluster.
+Because all the Prometheus work is done, all that is left for you to do is to deploy monitoring agents in your cluster.
 
 1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observe/monitoring/create){: external}.
 

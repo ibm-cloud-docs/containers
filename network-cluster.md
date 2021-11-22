@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, vlan
 
@@ -31,7 +31,7 @@ After you initially set up your network when you [create a cluster](/docs/contai
 Enable the private cloud service endpoint for your cluster.
 {: shortdesc}
 
-The private cloud service endpoint makes your Kubernetes master privately accessible. Your worker nodes and your authorized cluster users can communicate with the Kubernetes master over the private network. To determine whether you can enable the private cloud service endpoint, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master). Note that you cannot disable the private cloud service endpoint after you enable it.
+The private cloud service endpoint makes your Kubernetes master privately accessible. Your worker nodes and your authorized cluster users can communicate with the Kubernetes master over the private network. To determine whether you can enable the private cloud service endpoint, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master). Note that you can't disable the private cloud service endpoint after you enable it.
 
 Did you create a cluster with only a private cloud service endpoint before you enabled your account for [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint)? Try [setting up the public cloud service endpoint](#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account.
 {: tip}
@@ -151,7 +151,7 @@ All clusters that are connected to a public and a private VLAN use the public cl
 - If you enable the private cloud service endpoint and keep the public cloud service endpoint enabled too, workers always communicate with the master over the private network, but your users can communicate with the master over either the public or private network.
 - If you enable the private cloud service endpoint but disable the public cloud service endpoint, workers and users must communicate with the master over the private network.
 
-Note that you cannot disable the private cloud service endpoint after you enable it.
+Note that you can't disable the private cloud service endpoint after you enable it.
 
 1. Enable [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
 2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
@@ -233,7 +233,7 @@ To change the VLANs that a worker pool uses to provision worker nodes.
         ```
         {: pre}
 
-    2. Check that the public and private VLANs in the zone are compatible. To be compatible, the **Router** must have the same pod ID. In this example output, the **Router** pod IDs match: `01a` and `01a`. If one pod ID was `01a` and the other was `02a`, you cannot set these public and private VLAN IDs for your worker pool.
+    2. Check that the public and private VLANs in the zone are compatible. To be compatible, the **Router** must have the same pod ID. In this example output, the **Router** pod IDs match: `01a` and `01a`. If one pod ID was `01a` and the other was `02a`, you can't set these public and private VLAN IDs for your worker pool.
         ```sh
         ID        Name   Number   Type      Router         Supports Virtual Workers
         229xxxx          1234     private   bcr01a.dal12   true
@@ -305,7 +305,7 @@ To change the VLANs that a worker pool uses to provision worker nodes.
 
 8. Optional: You can repeat steps 2 - 7 for each worker pool in your cluster. After you complete these steps, all worker nodes in your cluster are set up with the new VLANs.
 
-9. The default ALBs in your cluster are still bound to the old VLAN because their IP addresses are from a subnet on that VLAN. Because ALBs cannot be moved across VLANs, you can instead [create ALBs on the new VLANs and disable ALBs on the old VLANs](/docs/containers?topic=containers-ingress-types#migrate-alb-vlan).
+9. The default ALBs in your cluster are still bound to the old VLAN because their IP addresses are from a subnet on that VLAN. Because ALBs can't be moved across VLANs, you can instead [create ALBs on the new VLANs and disable ALBs on the old VLANs](/docs/containers?topic=containers-ingress-types#migrate-alb-vlan).
 
 10. Optional: If you no longer need the subnets on the old VLANs, you can [remove them](/docs/containers?topic=containers-subnets#remove-subnets).
 

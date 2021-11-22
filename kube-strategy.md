@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, containers
 
@@ -78,7 +78,7 @@ If you already have an app, you can [migrate it to {{site.data.keyword.container
 ### What about serverless apps?
 {: #apps_serverless}
 
-You can run serverless apps and jobs through the [{{site.data.keyword.codeenginefull_notm}}](/docs/codeengine?topic=codeengine-getting-started) service. {{site.data.keyword.codeengineshort}} can also build your images for you. {{site.data.keyword.codeengineshort}} is designed so that you do not need to interact with the underlying technology it is built upon. However, if you have existing tooling that is based upon Kubernetes or Knative, you can still use it with {{site.data.keyword.codeengineshort}}. For more information, see [Using Kubernetes to interact with your application](/docs/codeengine?topic=codeengine-kubernetes). 
+You can run serverless apps and jobs through the [{{site.data.keyword.codeenginefull_notm}}](/docs/codeengine?topic=codeengine-getting-started) service. {{site.data.keyword.codeengineshort}} can also build your images for you. {{site.data.keyword.codeengineshort}} is designed so that you don't need to interact with the underlying technology it is built upon. However, if you have existing tooling that is based upon Kubernetes or Knative, you can still use it with {{site.data.keyword.codeengineshort}}. For more information, see [Using Kubernetes to interact with your application](/docs/codeengine?topic=codeengine-kubernetes). 
 {: shortdesc}
 
 ### What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?
@@ -215,7 +215,7 @@ Your {{site.data.keyword.containerlong_notm}} is linked to one IBM Cloud infrast
 
 **Types of clusters**: Decide whether you want a [single zone, multizone, or multiple cluster setup](/docs/containers?topic=containers-ha_clusters#ha_clusters). Multizone clusters are available in worldwide worldwide {{site.data.keyword.cloud_notm}} [multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-mz). Also keep in mind that worker nodes vary by zone.
 
-**Types of worker nodes**: In general, your intensive workloads are more suited to run on bare metal physical machines, whereas for cost-effective testing and development work, you might choose virtual machines on shared or dedicated hardware. With bare metal worker nodes, your cluster has a network speed of 10 Gbps and hyper-threaded cores that offer higher throughput. Virtual machines come with a network speed of 1 Gbps and regular cores that do not offer hyper-threading. [Check out the machine isolation and flavors that are available](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
+**Types of worker nodes**: In general, your intensive workloads are more suited to run on bare metal physical machines, whereas for cost-effective testing and development work, you might choose virtual machines on shared or dedicated hardware. With bare metal worker nodes, your cluster has a network speed of 10 Gbps and hyper-threaded cores that offer higher throughput. Virtual machines come with a network speed of 1 Gbps and regular cores that don't offer hyper-threading. [Check out the machine isolation and flavors that are available](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
 
 ### Do I use multiple clusters, or just add more workers to an existing cluster?
 {: #env_multicluster}

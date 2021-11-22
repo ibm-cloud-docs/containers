@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes
 
@@ -19,7 +19,7 @@ content-type: troubleshoot
 **Infrastructure provider**: ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
 
 
-When the worker nodes in your cluster cannot communicate on the private network, you might see various different symptoms.
+When the worker nodes in your cluster can't communicate on the private network, you might see various different symptoms.
 {: tsSymptoms}
 
 - Sample error message when you run `kubectl exec`, `attach`, `logs`, `proxy`, or `port-forward`:

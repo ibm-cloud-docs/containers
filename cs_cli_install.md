@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, ic, ks, kubectl
 
@@ -212,7 +212,7 @@ To run `kubectl` commands to manage your cluster:
     ```
     {: pre}
 
-4. List all of the clusters in the account to get the name of the cluster. If you have only an {{site.data.keyword.cloud_notm}} IAM service access role and cannot view clusters, ask your cluster admin for the IAM platform **Viewer** role, or the cluster name and ID.
+4. List all the clusters in the account to get the name of the cluster. If you have only an {{site.data.keyword.cloud_notm}} IAM service access role and can't view clusters, ask your cluster admin for the IAM platform **Viewer** role, or the cluster name and ID.
     ```sh
     ibmcloud ks cluster ls
     ```
@@ -535,7 +535,7 @@ The {{site.data.keyword.cloud-shell_notm}} is enabled with several [plug-ins and
 
 While you use the {{site.data.keyword.cloud-shell_short}}, keep in mind the following limitations:
 * You can open up to five concurrent sessions, which operate independently so you can work with different resources, regions, and accounts at once.
-* Any files that you download and edit locally, such as YAML files, are stored temporarily in the {{site.data.keyword.cloud-shell_short}} and do not persist across sessions.
+* Any files that you download and edit locally, such as YAML files, are stored temporarily in the {{site.data.keyword.cloud-shell_short}} and don't persist across sessions.
 * {{site.data.keyword.cloud-shell_short}} has a usage quota that limits you to 50 hours within a week.
 
 To launch and use the {{site.data.keyword.cloud-shell_notm}}:
@@ -575,7 +575,7 @@ The Kubernetes web terminal is deprecated and becomes unsupported 1 July 2021. T
 
 If you use the cluster dashboard in the {{site.data.keyword.cloud_notm}} console to manage your clusters but want to quickly make more advanced configuration changes, you can now run CLI commands directly from your web browser in the Kubernetes web terminal. The Kubernetes Terminal is enabled with the base [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started){: external}, the {{site.data.keyword.containerlong_notm}} plug-in, and the {{site.data.keyword.registrylong_notm}} plug-in. Additionally, the terminal context is already set to the cluster that you are working with so that you can run Kubernetes `kubectl` commands to work with your cluster.
 
-Any files that you download and edit locally, such as YAML files, are stored temporarily in Kubernetes Terminal and do not persist across sessions.
+Any files that you download and edit locally, such as YAML files, are stored temporarily in Kubernetes Terminal and don't persist across sessions.
 {: note}
 
 To install and launch the Kubernetes web terminal:

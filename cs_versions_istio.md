@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, istio, add-on
 
@@ -43,7 +43,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 ### Changelog for 1.11.4, released 2 November 2021
 {: #1114}
 
-Review the changes that are included in version 1.11.4 of the managed Istio add-on.
+Review the changes that are in version 1.11.4 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.11.3  
@@ -54,7 +54,7 @@ Review the changes that are included in version 1.11.4 of the managed Istio add-
 ### Changelog for 1.11.3, released 7 October 2021
 {: #1113}
 
-Review the changes that are included in version 1.11.3 of the managed Istio add-on.
+Review the changes that are in version 1.11.3 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.11.2  
@@ -72,7 +72,7 @@ Review the changes that are included in version 1.11.3 of the managed Istio add-
 ### Changelog for 1.11.2, released 23 September 2021
 {: #1112}
 
-Review the changes that are included in version 1.11.2 of the managed Istio add-on.
+Review the changes that are in version 1.11.2 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.11.1
@@ -87,7 +87,7 @@ Review the changes that are included in version 1.11.2 of the managed Istio add-
 ### Changelog for 1.11.1, released 31 August 2021
 {: #1111}
 
-Review the changes that are included in version 1.11.1 of the managed Istio add-on.
+Review the changes that are in version 1.11.1 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.10.3
@@ -105,13 +105,13 @@ Review the changes that are included in version 1.11.1 of the managed Istio add-
 ## Version 1.10
 {: #v110}
 
-Review the changes that are included in version 1.10 of the managed Istio add-on.
+Review the changes that are in version 1.10 of the managed Istio add-on.
 {: shortdesc}
 
 ### Changelog for 1.10.5, released 28 October 2021
 {: #1105}
 
-Review the changes that are included in version 1.10.5 of the managed Istio add-on.
+Review the changes that are in version 1.10.5 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.10.4  
@@ -133,7 +133,7 @@ Review the changes that are included in version 1.10.5 of the managed Istio add-
 ### Changelog for 1.10.4, released 14 September 2021
 {: #1104}
 
-Review the changes that are included in version 1.10.4 of the managed Istio add-on.
+Review the changes that are in version 1.10.4 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.10.3  
@@ -149,7 +149,7 @@ Review the changes that are included in version 1.10.4 of the managed Istio add-
 ### Changelog for 1.10.3, released 5 August 2021
 {: #1103}
 
-Review the changes that are included in version 1.10.3 of the managed Istio add-on.
+Review the changes that are in version 1.10.3 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.10.2  
@@ -160,7 +160,7 @@ Review the changes that are included in version 1.10.3 of the managed Istio add-
 ### Changelog for 1.10.2, released 15 July 2021
 {: #1102}
 
-Review the changes that are included in version 1.10.2 of the managed Istio add-on.
+Review the changes that are in version 1.10.2 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.9.5  
@@ -188,7 +188,7 @@ Version 1.9 of the managed Istio add-on is unsupported.
 ### Changelog for 1.9.8, released 14 September 2021
 {: #198}
 
-Review the changes that are included in version 1.9.8 of the managed Istio add-on.
+Review the changes that are in version 1.9.8 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.9.7  
@@ -204,7 +204,7 @@ Review the changes that are included in version 1.9.8 of the managed Istio add-o
 ### Changelog for 1.9.7, released 12 August 2021
 {: #197}
 
-Review the changes that are included in version 1.9.7 of the managed Istio add-on.
+Review the changes that are in version 1.9.7 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.9.6  
@@ -215,7 +215,7 @@ See the Istio release notes for [Istio 1.9.7](https://istio.io/latest/news/relea
 ### Changelog for 1.9.6, released 22 July 2021
 {: #196}
 
-Review the changes that are included in version 1.9.6 of the managed Istio add-on.
+Review the changes that are in version 1.9.6 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.9.5  
@@ -230,7 +230,7 @@ Review the changes that are included in version 1.9.6 of the managed Istio add-o
 ### Changelog for 1.9.5, released 27 May 2021
 {: #195}
 
-Review the changes that are included in version 1.9.5 of the managed Istio add-on.
+Review the changes that are in version 1.9.5 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.9.4  
@@ -242,7 +242,7 @@ Review the changes that are included in version 1.9.5 of the managed Istio add-o
 ### Changelog for 1.9.4, released 17 May 2021
 {: #194}
 
-Review the changes that are included in version 1.9.4 of the managed Istio add-on.
+Review the changes that are in version 1.9.4 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.9.3  
@@ -254,7 +254,7 @@ See the Istio release notes for [Istio 1.9.4](https://istio.io/latest/news/relea
 ### Changelog for 1.9.3, released 29 April 2021
 {: #193}
 
-Review the changes that are included in version 1.9.3 of the managed Istio add-on.
+Review the changes that are in version 1.9.3 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.9.2  
@@ -276,7 +276,7 @@ Review the changes that are included in version 1.9.3 of the managed Istio add-o
 ### Changelog for 1.9.2, released 1 April 2021
 {: #192}
 
-Review the changes that are included in version 1.9.2 of the managed Istio add-on.
+Review the changes that are in version 1.9.2 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.8.4  
@@ -298,7 +298,7 @@ Version 1.8 of the managed Istio add-on is unsupported.
 ### Changelog for 1.8.6, released 27 May 2021
 {: #186}
 
-Review the changes that are included in version 1.8.6 of the managed Istio add-on.
+Review the changes that are in version 1.8.6 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.8.5  
@@ -311,7 +311,7 @@ Review the changes that are included in version 1.8.6 of the managed Istio add-o
 ### Changelog for 1.8.5, released 29 April 2021
 {: #185}
 
-Review the changes that are included in version 1.8.5 of the managed Istio add-on.
+Review the changes that are in version 1.8.5 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.8.4  
@@ -336,7 +336,7 @@ Review the changes that are included in version 1.8.5 of the managed Istio add-o
 ### Changelog for 1.8.4, released 23 March 2021
 {: #184}
 
-Review the changes that are included in version 1.8.4 of the managed Istio add-on.
+Review the changes that are in version 1.8.4 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.8.3  
@@ -353,7 +353,7 @@ Review the changes that are included in version 1.8.4 of the managed Istio add-o
 ### Changelog for 1.8.3, released 1 March 2021
 {: #183}
 
-Review the changes that are included in version 1.8.3 of the managed Istio add-on.
+Review the changes that are in version 1.8.3 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.8.2   
@@ -370,7 +370,7 @@ Review the changes that are included in version 1.8.3 of the managed Istio add-o
 ### Changelog for 1.8.2, released 25 January 2021
 {: #182}
 
-Review the changes that are included in version 1.8.2 of the managed Istio add-on.
+Review the changes that are in version 1.8.2 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.8.1  
@@ -393,7 +393,7 @@ Review the changes that are included in version 1.8.2 of the managed Istio add-o
 ### Changelog for 1.8.1, released 16 December 2020
 {: #181}
 
-Review the changes that are included in version 1.8.1 of the managed Istio add-on.
+Review the changes that are in version 1.8.1 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.8.0 
@@ -405,7 +405,7 @@ See the Istio release notes for [Istio 1.8.1](https://istio.io/latest/news/relea
 ### Changelog for 1.8.0, released 9 December 2020
 {: #180}
 
-Review the changes that are included in version 1.8.0 of the managed Istio add-on.
+Review the changes that are in version 1.8.0 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.8.0  
@@ -428,7 +428,7 @@ Version 1.7 of the managed Istio add-on is unsupported.
 ### Changelog for 1.7.8, released 10 March 2021
 {: #178}
 
-Review the changes that are included in version 1.7.8 of the managed Istio add-on.
+Review the changes that are in version 1.7.8 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.7.7 
@@ -443,7 +443,7 @@ Review the changes that are included in version 1.7.8 of the managed Istio add-o
 ### Changelog for 1.7.7, released 8 February 2021
 {: #177}
 
-Review the changes that are included in version 1.7.7 of the managed Istio add-on.
+Review the changes that are in version 1.7.7 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.7.6 
@@ -469,7 +469,7 @@ Review the changes that are included in version 1.7.7 of the managed Istio add-o
 ### Changelog for 1.7.6, released 16 December 2020
 {: #176}
 
-Review the changes that are included in version 1.7.6 of the managed Istio add-on.
+Review the changes that are in version 1.7.6 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.7.5 
@@ -482,7 +482,7 @@ Review the changes that are included in version 1.7.6 of the managed Istio add-o
 ### Changelog for 1.7.5, released 3 December 2020
 {: #175}
 
-Review the changes that are included in version 1.7.5 of the managed Istio add-on.
+Review the changes that are in version 1.7.5 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.7.4 
@@ -494,7 +494,7 @@ See the Istio release notes for [Istio 1.7.5](https://istio.io/latest/news/relea
 ### Changelog for 1.7.4, released 5 November 2020
 {: #174}
 
-Review the changes that are included in version 1.7.4 of the managed Istio add-on.
+Review the changes that are in version 1.7.4 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.7.3 
@@ -509,7 +509,7 @@ Review the changes that are included in version 1.7.4 of the managed Istio add-o
 ### Changelog for 1.7.3, released 06 October 2020
 {: #173}
 
-Review the changes that are included in version 1.7.3 of the managed Istio add-on.
+Review the changes that are in version 1.7.3 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.7.2 
@@ -527,7 +527,7 @@ Review the changes that are included in version 1.7.3 of the managed Istio add-o
 ### Changelog for 1.7.2, released 23 September 2020
 {: #172}
 
-Review the changes that are included in version 1.7.2 of the managed Istio add-on.
+Review the changes that are in version 1.7.2 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.7.1 
@@ -539,7 +539,7 @@ See the Istio release notes for [Istio 1.7.2](https://istio.io/latest/news/relea
 ### Changelog for 1.7.1, released 14 September 2020
 {: #171}
 
-Review the changes that are included in version 1.7.1 of the managed Istio add-on.
+Review the changes that are in version 1.7.1 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.7.0 
@@ -550,7 +550,7 @@ See the Istio release notes for [Istio 1.7.1](https://istio.io/latest/news/relea
 ### Changelog for 1.7.0, released 02 September 2020
 {: #170}
 
-Review the changes that are included in version 1.7.0 of the managed Istio add-on.
+Review the changes that are in version 1.7.0 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.6.8 
@@ -588,7 +588,7 @@ To see options for changing settings in the managed version of Istio, see [Custo
 ### Changelog for 1.6.14, released 3 December 2020
 {: #1614}
 
-Review the changes that are included in version 1.6.14 of the managed Istio add-on.
+Review the changes that are in version 1.6.14 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.6.13  
@@ -600,7 +600,7 @@ Review the changes that are included in version 1.6.14 of the managed Istio add-
 ### Changelog for 1.6.13, released 5 November 2020
 {: #1613}
 
-Review the changes that are included in version 1.6.13 of the managed Istio add-on.
+Review the changes that are in version 1.6.13 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.6.12  
@@ -615,7 +615,7 @@ Review the changes that are included in version 1.6.13 of the managed Istio add-
 ### Changelog for 1.6.12, released 22 October 2020
 {: #1612}
 
-Review the changes that are included in version 1.6.12 of the managed Istio add-on.
+Review the changes that are in version 1.6.12 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.6.11  
@@ -626,7 +626,7 @@ See the Istio release notes for [Istio 1.6.12](https://istio.io/latest/news/rele
 ### Changelog for 1.6.11, released 06 October 2020
 {: #1611}
 
-Review the changes that are included in version 1.6.11 of the managed Istio add-on.
+Review the changes that are in version 1.6.11 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.6.9  
@@ -646,7 +646,7 @@ Review the changes that are included in version 1.6.11 of the managed Istio add-
 ### Changelog for 1.6.9, released 14 September 2020
 {: #169}
 
-Review the changes that are included in version 1.6.9 of the managed Istio add-on.
+Review the changes that are in version 1.6.9 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.6.8  
@@ -662,7 +662,7 @@ Review the changes that are included in version 1.6.9 of the managed Istio add-o
 ### Changelog for 1.6.8, released 12 August 2020
 {: #168}
 
-Review the changes that are included in version 1.6.8 of the managed Istio add-on.
+Review the changes that are in version 1.6.8 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.6.7  
@@ -676,7 +676,7 @@ Review the changes that are included in version 1.6.8 of the managed Istio add-o
 ### Changelog for 1.6.7, released 04 August 2020
 {: #167}
 
-Review the changes that are included in version 1.6.7 of the managed Istio add-on.
+Review the changes that are in version 1.6.7 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.6.5  
@@ -696,7 +696,7 @@ Review the changes that are included in version 1.6.7 of the managed Istio add-o
 ### Changelog for 1.6.5, released 17 July 2020
 {: #165}
 
-Review the changes that are included in version 1.6.5 of the managed Istio add-on.
+Review the changes that are in version 1.6.5 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.6  
@@ -722,7 +722,7 @@ Review the changes that are included in version 1.6.5 of the managed Istio add-o
 ### Changelog for 1.6, released 08 July 2020
 {: #16}
 
-Review the changes that are included in version 1.6 of the managed Istio add-on.
+Review the changes that are in version 1.6 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.5.7  
@@ -751,13 +751,13 @@ To see options for changing settings in the managed version of Istio, see [Custo
 | ------- | --------------------------------------- |
 | `egressGateways[name: istio-egressgateway].enabled: true` | In the managed Istio add-on, the egress gateway is enabled by default. |
 | `istiod`, `istio-ingressgateway`, and `istio-egressgateway` | In the managed Istio add-on, `istiod` and all Istio ingress and egress gateways are set up for basic high availability support. High availability support on these components includes the following settings by default: node anti-affinity, `HorizontalPodAutoscaler`, `PodDisruptionBudget`, and automatic scaling of replicas. |
-| `prometheus.enabled: false` | In the managed Istio add-on, the Prometheus, Grafana, Jaeger, and Kiali monitoring components are disabled by default due to current security concerns in the community release of Istio that cannot be adequately addressed for a production environment. |
+| `prometheus.enabled: false` | In the managed Istio add-on, the Prometheus, Grafana, Jaeger, and Kiali monitoring components are disabled by default due to current security concerns in the community release of Istio that can't be adequately addressed for a production environment. |
 | `values.global.pilot.enableProtocolSniffingForInbound` and `values.global.pilot.enableProtocolSniffingForOutbound` | In the managed Istio add-on, protocol sniffing is disabled by default until the feature becomes more stable in the community Istio.
 
 ### Changelog for 1.5.10, released 1 September 2020
 {: #1510}
 
-Review the changes that are included in version 1.5.10 of the managed Istio add-on.
+Review the changes that are in version 1.5.10 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.5.9  
@@ -769,7 +769,7 @@ See the Istio release notes for [Istio 1.5.10](https://istio.io/latest/news/rele
 ### Changelog for 1.5.9, released 12 August 2020
 {: #159}
 
-Review the changes that are included in version 1.6.8 of the managed Istio add-on.
+Review the changes that are in version 1.6.8 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.5.8  
@@ -788,7 +788,7 @@ Review the changes that are included in version 1.6.8 of the managed Istio add-o
 ### Changelog for 1.5.8, released 16 July 2020
 {: #158}
 
-Review the changes that are included in version 1.5.8 of the managed Istio add-on.
+Review the changes that are in version 1.5.8 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.5.7  
@@ -814,7 +814,7 @@ Review the changes that are included in version 1.5.8 of the managed Istio add-o
 ### Changelog for 1.5.7, released 8 July 2020
 {: #157}
 
-Review the changes that are included in version 1.5.7 of the managed Istio add-on.
+Review the changes that are in version 1.5.7 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.5.6  
@@ -835,7 +835,7 @@ Review the changes that are included in version 1.5.7 of the managed Istio add-o
 ### Changelog for 1.5.6, released 23 June 2020
 {: #156}
 
-Review the changes that are included in version 1.5.6 of the managed Istio add-on.
+Review the changes that are in version 1.5.6 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version** 1.5.4  
@@ -869,7 +869,7 @@ Review the changes that are included in version 1.5.6 of the managed Istio add-o
 ### Changelog for 1.5, released 19 May 2020
 {: #15}
 
-Review the changes that are included in version 1.5 of the managed Istio add-on.
+Review the changes that are in version 1.5 of the managed Istio add-on.
 {: shortdesc}
 
 Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes versions 1.17 only.
@@ -879,7 +879,7 @@ Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes ve
 **Current version** 1.5  
 **Updates in this version**  
 - See the Istio release notes for [Istio 1.5](https://istio.io/latest/news/releases/1.5.x/announcing-1.5/change-notes/){: external}. 
-- The Citadel secret discovery service (SDS) is now enabled by default to provide identity provisioning and certification for workloads in the service mesh. [With the `managed-istio-custom` configmap resource, you can customize a set of Istio configuration options](/docs/containers?topic=containers-istio#customize). These settings include extra control over monitoring, logging, and networking in your control plane and service mesh. Beta: By default, one public Istio load balancer, `istio-ingressgateway`, is enabled in your cluster. To achieve higher availability, you can now enable an Istio load balancer in each zone of your cluster. For more information, see [Enabling or disabling public Istio load balancers](/docs/containers?topic=containers-istio-mesh#config-gateways). The Prometheus, Grafana, Jaeger, and Kiali monitoring components are disabled by default due to current security concerns in the community release of Istio that cannot be adequately addressed for a production environment. If you use {{site.data.keyword.mon_full_notm}} to monitor your Istio-managed apps, update the `sysdig-agent` configmap so that sidecar metrics are tracked. Changes cannot be made to the Kiali dashboard in view-only mode by default. You can change this setting by [editing the `managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize). Your cluster must have a secret with credentials to Grafana to access the Grafana dashboard. 
+- The Citadel secret discovery service (SDS) is now enabled by default to provide identity provisioning and certification for workloads in the service mesh. [With the `managed-istio-custom` configmap resource, you can customize a set of Istio configuration options](/docs/containers?topic=containers-istio#customize). These settings include extra control over monitoring, logging, and networking in your control plane and service mesh. Beta: By default, one public Istio load balancer, `istio-ingressgateway`, is enabled in your cluster. To achieve higher availability, you can now enable an Istio load balancer in each zone of your cluster. For more information, see [Enabling or disabling public Istio load balancers](/docs/containers?topic=containers-istio-mesh#config-gateways). The Prometheus, Grafana, Jaeger, and Kiali monitoring components are disabled by default due to current security concerns in the community release of Istio that can't be adequately addressed for a production environment. If you use {{site.data.keyword.mon_full_notm}} to monitor your Istio-managed apps, update the `sysdig-agent` configmap so that sidecar metrics are tracked. Changes can't be made to the Kiali dashboard in view-only mode by default. You can change this setting by [editing the `managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize). Your cluster must have a secret with credentials to Grafana to access the Grafana dashboard. 
   
   
   
@@ -893,7 +893,7 @@ Version 1.4 of the managed Istio add-on is unsupported.
 ## Changelog for 1.4.9, released 18 May 2020
 {: #149}
 
-Review the changes that are included in version 1.4.9 of the managed Istio add-on.
+Review the changes that are in version 1.4.9 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.4.8  
@@ -911,7 +911,7 @@ Review the changes that are included in version 1.4.9 of the managed Istio add-o
 ## Changelog for 1.4.8, released 30 April 2020
 {: #148}
 
-Review the changes that are included in version 1.4.8 of the managed Istio add-on.
+Review the changes that are in version 1.4.8 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.4.7  
@@ -934,7 +934,7 @@ Review the changes that are included in version 1.4.8 of the managed Istio add-o
 ## Changelog for 1.4.7, released 01 April 2020
 {: #147}
 
-Review the changes that are included in version 1.4.7 of the managed Istio add-on.
+Review the changes that are in version 1.4.7 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.4.6  
@@ -960,7 +960,7 @@ Review the changes that are included in version 1.4.7 of the managed Istio add-o
 ## Changelog for 1.4.6, released 09 March 2020
 {: #146}
 
-Review the changes that are included in version 1.4.6 of the managed Istio add-on.
+Review the changes that are in version 1.4.6 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.4.5  
@@ -976,7 +976,7 @@ Review the changes that are included in version 1.4.6 of the managed Istio add-o
 ## Changelog for 1.4.5, released 21 February 2020
 {: #145}
 
-Review the changes that are included in version 1.4.5 of the managed Istio add-on.
+Review the changes that are in version 1.4.5 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.4.4  
@@ -1003,7 +1003,7 @@ Review the changes that are included in version 1.4.5 of the managed Istio add-o
 ## Changelog for 1.4.4, released 14 February 2020
 {: #144}
 
-Review the changes that are included in version 1.4.4 of the managed Istio add-on.
+Review the changes that are in version 1.4.4 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.4.3  
@@ -1061,7 +1061,7 @@ Review the changes that are included in version 1.4.4 of the managed Istio add-o
 ## Changelog for 1.4.3, released 16 January 2020
 {: #143}
 
-Review the changes that are included in version 1.4.3 of the managed Istio add-on.
+Review the changes that are in version 1.4.3 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.4.2  
@@ -1074,7 +1074,7 @@ Review the changes that are included in version 1.4.3 of the managed Istio add-o
 ## Changelog for 1.4.2, released 16 December 2020
 {: #142}
 
-Review the changes that are included in version 1.4.2 of the managed Istio add-on.
+Review the changes that are in version 1.4.2 of the managed Istio add-on.
 {: shortdesc}
 
 **Previous version**: 1.4.0  

@@ -8,7 +8,7 @@
     "How to ensure that all Calico factors align"
   ],
   "cs_dashboard_graphs": [
-    "utilization graphs do not display in Kubernetes dashboard",
+    "utilization graphs don't display in Kubernetes dashboard",
     "pods don't update after kubernetes cluster update or worker node reboot",
     "How to fix utilization graphs issues in kubernetes cluster",
     "How to delete the kube-dashboard pod to force a restart",
@@ -42,11 +42,11 @@
     "ImagePullBackOff error in kubenetes"
   ],
   "containers_do_not_start": [
-    "After pods deployment containers do not start",
+    "After pods deployment containers don't start",
     "Why don't the containers start after cluster successful deployment",
     "Containers might not start when the registry quota",
     "How to free up storage in Cloud Container Registry",
-    "Containers do not start",
+    "Containers don't start",
     "unable to start containers for kubernetes"
   ],
   "cs_psp": [
@@ -107,7 +107,7 @@
     "Error: failed to download Helm chart",
     "How fix Helm install chart issues",
     "How to list the IBM Cloud Helm repositories currently available ",
-    "Cannot install a Helm chart"
+    "can't install a Helm chart"
   ],
   "debug_addons": [
     "check the health state and status of a kubernetes cluster add-on",
@@ -136,7 +136,7 @@
     "trying to connect to public IP address of the NLB in kubernetes"
   ],
   "cs_subnet_limit_lb": [
-    "Cannot deploy a load balancer to kubernetes clusters",
+    "can't deploy a load balancer to kubernetes clusters",
     "Error Warning  CreatingLoadBalancerFailed ... ErrorSubnetLimitReached:",
     "Error There are already the maximum number of subnets permitted in this VLAN in kubernetes",
     "How to verify that the subnet was successfully created and added to your kubernetes cluster?",
@@ -146,7 +146,7 @@
   ],
   "vpc_ts_lb": [
     "Problem connecting to a VPC app via kubernetes load balancer",
-    "Connection fails or times out - Cannot connect to an app via load balancer in kubernetes",
+    "Connection fails or times out - can't connect to an app via load balancer in kubernetes",
     "Error The VPC load balancer that routes requests to this Kubernetes LoadBalancer service is offline.",
     "Error The VPC load balancer that routes requests to this Kubernetes LoadBalancer service was deleted from your VPC.",
     "How to remove the load balancing setup for an app in your VPC cluster",
@@ -155,7 +155,7 @@
   "vpc_no_lb": [
     "Issue with Kubernetes LoadBalancer service fails because no IPs are available",
     "Warning message - The subnet with ID(s) '<subnet_id>' has insufficient available ipv4 addresses",
-    "Problem with VPC you cannot resize it or change its IP range",
+    "Problem with VPC you can't resize it or change its IP range",
     "How to create a new worker pool in your kubernetes cluster",
     "How to verify if your LoadBalancer service is successfully provisioned in kubernetes",
     "Kubernetes LoadBalancer service failing with no IPs are available"
@@ -181,7 +181,7 @@
     "Problem with connecting to an app via Ingress with VPC clusters",
     "connect the app by using the subdomain of the Ingress application load balancer failed",
     "connection timed out connecting to an app via Ingress",
-    "Reasons why requests cannot be routed to your app ",
+    "Reasons why requests can't be routed to your app ",
     "How to verify that no VPC security groups are blocking traffic to your cluster ",
     "How to see the hostnames for your public and private ALBs",
     "see the hostnames for your public and private ALBs in kubes"
@@ -221,7 +221,7 @@
     "adding subnet to a ibmcloud ks cluster in kubernetes"
   ],
   "cs_alb_subnet": [
-    "Problem with Ingress ALB cannot be enabled due to subnet errors",
+    "Problem with Ingress ALB can't be enabled due to subnet errors",
     "Error No valid subnets found for the specified zone. Verify that a subnet exists on the VLAN in the zone that you specify by running 'ibmcloud ks subnets'",
     "How to verify one or more subnets are available on the VLAN in the zone where the ALB exists.",
     "Steps to Moving ALBs across VLANs.",
@@ -444,7 +444,7 @@
     "permissions needed to create kubernetes clusters"
   ],
   "suspended": [
-    "Cannot add worker nodes due to an invalid VLAN ID",
+    "can't add worker nodes due to an invalid VLAN ID",
     "Could not obtain kubernetes network VLAN",
     "Why my kubernetes worker got deleted",
     "Why my kubernetes account was suspended",
@@ -453,7 +453,7 @@
     "unable to add worker nodes because of an invalid VLAN"
   ],
   "cs_vpn_fails": [
-    "Cannot establish VPN connectivity with the strongSwan Helm chart",
+    "can't establish VPN connectivity with the strongSwan Helm chart",
     "not able to connect from kubernetes to my on-premises server",
     "How to connect between kubernetes and on-premise",
     "connect between kubernetes and on-prem server",
@@ -463,7 +463,7 @@
   ],
   "orphaned": [
     "Unable to modify or delete infrastructure in an orphaned kubernetes cluster",
-    "Cannot add or remove worker node for kubernetes?",
+    "can't add or remove worker node for kubernetes?",
     "Not able to connect to your kubernetes infrastructure account",
     "How to reset the kubernetes infrastructure credentials",
     "Engineer who created kubernetes cluster unavailable",
@@ -506,8 +506,8 @@
     "DNS resolution fails after restarting CoreDNS pods"
   ],
   "cs_firewall": [
-    "Cannot access resources in kubernetes cluster",
-    "kubernetes worker node cannot communicate to the private network",
+    "can't access resources in kubernetes cluster",
+    "kubernetes worker node can't communicate to the private network",
     "getting error from server dial tcp: connection time out in cluster",
     "getting kubectl proxy error",
     "getting TLS handshake timeout in kubernetes",
@@ -562,7 +562,7 @@
     "locations available for kubernetes"
   ],
   "cs_strongswan_release": [
-    "cannot establish VPN connectivity with the strongSwan Helm chart",
+    "can't establish VPN connectivity with the strongSwan Helm chart",
     "Can't install a new strongSwan heml chart release",
     "How to delete previous release of strongSwan",
     "kubernetes VPN error: release vpn failed: deployments.extensions",
@@ -581,8 +581,8 @@
   ],
   "ts_image_pull_create": [
     "How to access my Registry repo for kubernetes",
-    "Error cannot pull images from Cloud Container Registry",
-    "Your cluster cannot pull images from Container Registry 'icr.io'",
+    "Error can't pull images from Cloud Container Registry",
+    "Your cluster can't pull images from Container Registry 'icr.io'",
     "What permission needed to pull image to my cluster",
     "Not able to pull an image from registry into my cluster"
   ],

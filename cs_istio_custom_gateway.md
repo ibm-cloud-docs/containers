@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
 
@@ -152,7 +152,7 @@ Deploy the [BookInfo sample application for Istio](https://istio.io/latest/docs/
     ```
     {: screen}
 
-4. Create a YAML file that is called `bookinfo-custom-gateway.yaml` to define `Gateway` and `VirtualService` resources. Note that the `Gateway` resource specifies `custom-ingressgateway` for the name of the custom ingress load balancer that you previously created, and the `VirtualService` resource specifies `bookinfo-gateway` for the name of the `Gateway` resource.
+4. Create a YAML file called `bookinfo-custom-gateway.yaml` to define `Gateway` and `VirtualService` resources. Note that the `Gateway` resource specifies `custom-ingressgateway` for the name of the custom ingress load balancer that you previously created, and the `VirtualService` resource specifies `bookinfo-gateway` for the name of the `Gateway` resource.
     ```yaml
     apiVersion: networking.istio.io/v1alpha3
     kind: Gateway
@@ -309,7 +309,7 @@ To create a custom ingress gateway deployment and expose it with a private load 
 
 Note the following considerations:
 * If your classic cluster is connected to private VLANs only, or if your VPC cluster has only the private cloud service endpoint enabled, a private load balancer is created by default when you apply the IOP.
-* For classic clusters only, you cannot use the `ibmcloud ks nlb-dns create classic` to create a DNS record and IBM-provided subdomain for the IP address of the custom gateway load balancer.
+* For classic clusters only, you can't use the `ibmcloud ks nlb-dns create classic` to create a DNS record and IBM-provided subdomain for the IP address of the custom gateway load balancer.
 
 
 ## Controlling custom gateway updates and versions
@@ -436,10 +436,10 @@ For more information about configuring and using custom egress gateways, see the
 ## Disabling the default gateways
 {: #disable-default-gateways}
 
-If you do not need the default `istio-ingressgateway` or `istio-egressgateway` deployments after you create custom gateways, you can optionally disable them.
+If you don't need the default `istio-ingressgateway` or `istio-egressgateway` deployments after you create custom gateways, you can optionally disable them.
 {: shortdesc}
 
-If you want you apps to be accessible to clients, ensure that at least one gateway load balancer is enabled and configured to route traffic to your apps. If you disable the default gateway load balancers in all zones, your app is no longer exposed and cannot be accessed externally.
+If you want you apps to be accessible to clients, ensure that at least one gateway load balancer is enabled and configured to route traffic to your apps. If you disable the default gateway load balancers in all zones, your app is no longer exposed and can't be accessed externally.
 {: note}
 
 1. Edit the `managed-istio-custom` configmap resource.

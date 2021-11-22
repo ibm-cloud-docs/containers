@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, containers
 
@@ -62,7 +62,7 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
     3. Select **VPC** infrastructure.
     4. From the **Virtual private cloud** drop-down menu, select the VPC that you created earlier.
 4. Configure the **Location** details for your cluster.
-    1. Select the **Resource group** that you want to create your cluster in. You cannot change the resource group later.
+    1. Select the **Resource group** that you want to create your cluster in. You can't change the resource group later.
     2. Select the zones to create your cluster in. The zones are filtered based on the VPC that you selected, and include the subnets that you previously created.
 5. Configure your **Worker pool** setup.
     1. If you want a larger size for your worker nodes, click **Change flavor**. Otherwise, leave the default **4 vCPUs / 16 GB** flavor selected.
@@ -89,7 +89,7 @@ After you create a [classic](#clusters_gs) or a [VPC](#vpc-gen2-gs) cluster with
 
 The [Kubernetes dashboard](https://github.com/kubernetes/dashboard){: external} is a web console component that is provided by the open source community and installed in your cluster by default. Use the Kubernetes dashboard to manage Kubernetes resources that are within your cluster, such as pods, services, and namespaces. Not sure what all these Kubernetes resources mean? Check out the overview for [container](/docs/containers?topic=containers-iks-overview#docker_containers) and [Kubernetes](/docs/containers?topic=containers-iks-overview#kubernetes_basics) concepts.
 
-The steps to deploy an app vary if you have a free or standard cluster, because free clusters do not support load balancers.
+The steps to deploy an app vary if you have a free or standard cluster, because free clusters don't support load balancers.
 
 ### Deploying an app to a free classic cluster and exposing it with a node port
 {: #deployapp1}

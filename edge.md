@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, affinity, taint
 
@@ -20,7 +20,7 @@ subcollection: containers
 Edge worker nodes can improve the security of your {{site.data.keyword.containerlong}} cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload.
 {: shortdesc}
 
-When these worker nodes are marked for networking only, other workloads cannot consume the CPU or memory of the worker node and interfere with networking.
+When these worker nodes are marked for networking only, other workloads can't consume the CPU or memory of the worker node and interfere with networking.
 
 If you want to restrict network traffic to edge worker nodes in a multizone cluster, at least two edge worker nodes must be enabled per zone for high availability of load balancer or Ingress pods. Create an edge node worker pool that spans all the zones in your cluster, with at least two worker nodes per zone.
 {: tip}
@@ -48,7 +48,7 @@ To create an edge node worker pool,
     If you want to use an existing worker pool, the pool must span all zones in your cluster and have at least two worker nodes per zone. You can label the worker pool with `dedicated=edge` by using the [`ibmcloud ks worker-pool label set` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set).
     {: tip}
 
-    To ensure that ALB pods are always scheduled to edge worker nodes if they are present and not scheduled to non-edge worker nodes, you must create or use an existing worker pool that has at least three edge worker nodes per zone. During the update of an ALB pod, a new ALB pod rolls out to replace an existing ALB pod. However, ALB pods have anti-affinity rules that do not permit a pod to deploy to a worker node where another ALB pod already exists. If you have only two edge nodes per zone, both ALB pod replicas already exist on those edge nodes, so the new ALB pod must be scheduled on a non-edge worker node. When three edge nodes are present in a zone, the new ALB pod can be scheduled to the third edge node. Then, the old ALB pod is removed.
+    To ensure that ALB pods are always scheduled to edge worker nodes if they are present and not scheduled to non-edge worker nodes, you must create or use an existing worker pool that has at least three edge worker nodes per zone. During the update of an ALB pod, a new ALB pod rolls out to replace an existing ALB pod. However, ALB pods have anti-affinity rules that don't permit a pod to deploy to a worker node where another ALB pod already exists. If you have only two edge nodes per zone, both ALB pod replicas already exist on those edge nodes, so the new ALB pod must be scheduled on a non-edge worker node. When three edge nodes are present in a zone, the new ALB pod can be scheduled to the third edge node. Then, the old ALB pod is removed.
     {: important}
 
 2. Verify that the worker pool and worker nodes have the `dedicated=edge` label.
@@ -168,7 +168,7 @@ To create an edge node worker pool,
         {: screen}
 
 
-You labeled worker nodes in a worker pool with `dedicated=edge` and redeployed all of the existing ALBs and NLBs to the edge nodes. All subsequent ALBs and NLBs that are added to the cluster are also deployed to an edge node in your edge worker pool. Next, prevent other [workloads from running on edge worker nodes](#edge_workloads) and [block inbound traffic to NodePorts on worker nodes](/docs/containers?topic=containers-network_policies#block_ingress).
+You labeled worker nodes in a worker pool with `dedicated=edge` and redeployed all the existing ALBs and NLBs to the edge nodes. All subsequent ALBs and NLBs that are added to the cluster are also deployed to an edge node in your edge worker pool. Next, prevent other [workloads from running on edge worker nodes](#edge_workloads) and [block inbound traffic to NodePorts on worker nodes](/docs/containers?topic=containers-network_policies#block_ingress).
 
 
 ## Preventing app workloads from running on edge worker nodes
@@ -189,7 +189,7 @@ Before you begin
 
 To prevent other workloads from running on edge worker nodes,
 
-1. Apply a taint to the worker nodes with the `dedicated=edge` label. The taint prevents pods from running on the worker node and removes pods that do not have the `dedicated=edge` label from the worker node. The pods that are removed are redeployed to other worker nodes with capacity.
+1. Apply a taint to the worker nodes with the `dedicated=edge` label. The taint prevents pods from running on the worker node and removes pods that don't have the `dedicated=edge` label from the worker node. The pods that are removed are redeployed to other worker nodes with capacity.
 
     To apply a taint to all existing and future worker nodes in a worker pool:
     ```sh
@@ -245,7 +245,7 @@ To prevent other workloads from running on edge worker nodes,
 
 When you create a [classic cluster with a gateway](/docs/containers?topic=containers-plan_clusters#gateway), the cluster is created with a `compute` worker pool of compute worker nodes that are connected to a private VLAN only, and a `gateway` worker pool of gateway worker nodes that are connected to public and private VLANs. Gateway worker nodes help you achieve network connectivity separation between the internet or an on-premises data center and the compute workload that runs in your cluster. By default, all network load balancer (NLB) and Ingress application load balancer (ALB) pods deploy to the gateway worker nodes, which are also tainted so that no compute workloads can be scheduled onto them.
 
-If you want to provide another level of network separation between the public network and workloads in your compute worker nodes, you can optionally create a worker pool of edge nodes. As opposed to gateway nodes, the edge nodes have only private network connectivity and cannot be accessed directly from the public network. NLB pods remain deployed to the gateway worker nodes, but ALB pods are deployed to only edge nodes. By deploying only ALBs to edge nodes, all layer 7 proxy management is kept separate from the gateway worker nodes so that TLS termination and HTTP request routing is completed by the ALBs on the private network only. The edge nodes are also tainted so that no compute workloads can be scheduled onto them.
+If you want to provide another level of network separation between the public network and workloads in your compute worker nodes, you can optionally create a worker pool of edge nodes. As opposed to gateway nodes, the edge nodes have only private network connectivity and can't be accessed directly from the public network. NLB pods remain deployed to the gateway worker nodes, but ALB pods are deployed to only edge nodes. By deploying only ALBs to edge nodes, all layer 7 proxy management is kept separate from the gateway worker nodes so that TLS termination and HTTP request routing is completed by the ALBs on the private network only. The edge nodes are also tainted so that no compute workloads can be scheduled onto them.
 
 If you use Ingress ALBs to expose your apps, requests to the path for your app are first routed to the load balancer that exposes your ALBs in the gateway worker pool. The traffic is then load balanced over the private network to one of the ALB pods that is deployed in the edge worker pool. Finally, the ALB in the edge worker pool proxies the request to one of your app pods in your worker pools of compute worker nodes. For more information about the flow of traffic through Ingress ALBs in gateway-enabled clusters, see the [Ingress architecture diagram](/docs/containers?topic=containers-ingress-about#classic-gateway).
 
@@ -258,7 +258,7 @@ Before you begin
 
 To create an edge node worker pool in a gateway-enabled classic cluster,
 
-1. Retrieve all of the **Worker Zones** that your existing worker nodes are connected to.
+1. Retrieve all the **Worker Zones** that your existing worker nodes are connected to.
     ```sh
     ibmcloud ks cluster get --cluster <cluster_name_or_ID>
     ```
@@ -376,7 +376,7 @@ To create an edge node worker pool in a gateway-enabled classic cluster,
         ```
         {: pre}
 
-You labeled worker nodes in a worker pool with `dedicated=edge` and redeployed all of the existing ALBs to the edge nodes. All subsequent ALBs that are enabled in or added to the cluster are also deployed to an edge node in your edge worker pool.
+You labeled worker nodes in a worker pool with `dedicated=edge` and redeployed all the existing ALBs to the edge nodes. All subsequent ALBs that are enabled in or added to the cluster are also deployed to an edge node in your edge worker pool.
 
 
 

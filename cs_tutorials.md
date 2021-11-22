@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes
 
@@ -161,7 +161,7 @@ With {{site.data.keyword.cloud_notm}} services, you can take advantage of alread
     ```
     {: pre}
 
-    **Example output**
+    Example output
     
     ```sh
     ibmcloud ks cluster service bind pr_firm_cluster default mytoneanalyzer
@@ -179,7 +179,7 @@ With {{site.data.keyword.cloud_notm}} services, you can take advantage of alread
     ```
     {: pre}
 
-    **Example output**
+    Example output
 
     ```sh
     NAME                       TYPE                                  DATA      AGE
@@ -252,7 +252,7 @@ To deploy the app:
     ```
     {: pre}
 
-    **Example output**
+    Example output
     ```sh
     deployment "hello-world-deployment" created
     ```
@@ -265,7 +265,7 @@ To deploy the app:
     ```
     {: pre}
 
-    **Example output**
+    Example output
     
     ```sh
     service "hello-world-service" exposed
@@ -289,7 +289,7 @@ To deploy the app:
         ```
         {: pre}
 
-        **Example output**
+        Example output
         ```sh
         NAME:                   hello-world-service
         Namespace:              default
@@ -313,7 +313,7 @@ To deploy the app:
         ```
         {: pre}
 
-        **Example output**
+        Example output
         ```sh
         ibmcloud ks worker ls --cluster pr_firm_cluster
         Listing cluster workers...
@@ -454,7 +454,7 @@ If you took a break from the last lesson, make sure that you log back in to your
     ```
     {: pre}
 
-    With the example values, the URL is `http://169.xx.xxx.xxx:30072`. In a browser, you might see the following text. If you do not see this text, don't worry. This app is designed to go up and down.
+    With the example values, the URL is `http://169.xx.xxx.xxx:30072`. In a browser, you might see the following text. If you don't see this text, don't worry. This app is designed to go up and down.
     ```sh
     Hello world! Great job getting the second stage up and running!
     ```
@@ -632,7 +632,7 @@ If you took a break from the last lesson, make sure that you log back in to your
         ```
         {: pre}
 
-        **Example output**
+        Example output
         ```sh
         NAME                                 READY     STATUS    RESTARTS  AGE
         watson-pod-4255222204-rdl2f          1/1       Running   0         13h
@@ -749,7 +749,7 @@ service "watson-talk-service" deleted
 ```
 {: screen}
 
-If you do not want to keep the cluster, you can delete that too.
+If you don't want to keep the cluster, you can delete that too.
 
 ```sh
 ibmcloud ks cluster rm --cluster <cluster_name_or_ID>

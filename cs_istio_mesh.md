@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -342,7 +342,7 @@ kubectl describe destinationrules
 Ready to manage your own apps by using Istio? Before you deploy your app, you must first decide how you want to inject the Envoy proxy sidecars into app pods.
 {: shortdesc}
 
-Each app pod must be running an Envoy proxy sidecar so that the microservices can be included in the service mesh. You can make sure that sidecars are injected into each app pod automatically or manually. For more information about sidecar injection, see the [Istio documentation](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/){: external}.
+Each app pod must be running an Envoy proxy sidecar so that the microservices are in the service mesh. You can make sure that sidecars are injected into each app pod automatically or manually. For more information about sidecar injection, see the [Istio documentation](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/){: external}.
 
 ### Enabling automatic sidecar injection
 {: #istio_sidecar_automatic}
@@ -406,7 +406,7 @@ The app pods are now integrated into your Istio service mesh because they have t
 ### Manually injecting sidecars
 {: #istio_sidecar_manual}
 
-If you don't want to enable automatic sidecar injection for a namespace, you can manually inject the sidecar into a deployment YAML. Inject sidecars manually when apps are running in namespaces alongside other deployments that you do not want sidecars automatically injected into.
+If you don't want to enable automatic sidecar injection for a namespace, you can manually inject the sidecar into a deployment YAML. Inject sidecars manually when apps are running in namespaces alongside other deployments that you don't want sidecars automatically injected into.
 
 Do not enable sidecar injection for the `kube-system`, `ibm-system,` or `ibm-operators` namespaces.
 {: note}
@@ -477,7 +477,7 @@ By default, one public Istio load balancer, `istio-ingressgateway`, is enabled i
     ```
     {: pre}
 
-2. Verify that all of your cluster zones are included in the `istio-ingressgateway-zone` fields.
+2. Verify that all your cluster zones are in the `istio-ingressgateway-zone` fields.
 
     Example for a classic, multizone cluster in Dallas:
     ```yaml
@@ -489,7 +489,7 @@ By default, one public Istio load balancer, `istio-ingressgateway`, is enabled i
 
 3. Enable or disable an Istio load balancer in each zone by setting the `istio-ingressgateway-public-1|2|3-enabled` fields to `"true"` or `"false"`.
 
-    If you want you apps to be accessible to clients, ensure that at least one load balancer is enabled, or [create custom gateway load balancers](/docs/containers?topic=containers-istio-custom-gateway). If you disable all load balancers in all zones, your app is no longer exposed and cannot be accessed externally.
+    If you want you apps to be accessible to clients, ensure that at least one load balancer is enabled, or [create custom gateway load balancers](/docs/containers?topic=containers-istio-custom-gateway). If you disable all load balancers in all zones, your app is no longer exposed and can't be accessed externally.
     {: note}
 
     Example to enable a public gateway in each zone:
@@ -518,8 +518,8 @@ Publicly expose your Istio-managed apps by creating a DNS entry for the `istio-i
 {: shortdesc}
 
 In the following steps, you set up a subdomain through which your users can access your app by creating the following resources:
-* A gateway that is called `my-gateway`. This gateway acts as the public entry point to your apps and uses the existing `istio-ingressgateway` load balancer service to expose your app. The gateway can optionally be configured for TLS termination.
-* A virtual service that is called `my-virtual-service`. `my-gateway` uses the rules that you define in `my-virtual-service` to route traffic to your app.
+* A gateway called `my-gateway`. This gateway acts as the public entry point to your apps and uses the existing `istio-ingressgateway` load balancer service to expose your app. The gateway can optionally be configured for TLS termination.
+* A virtual service called `my-virtual-service`. `my-gateway` uses the rules that you define in `my-virtual-service` to route traffic to your app.
 * A subdomain for the `istio-ingressgateway` load balancer. All user requests to the subdomain are forwarded to your app according to your `my-virtual-service` routing rules.
 
 
@@ -530,7 +530,7 @@ In the following steps, you set up a subdomain through which your users can acce
 
 1. [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
 2. [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
-3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
+3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they are in the Istio service mesh](#istio_sidecar).
 
 To publicly expose apps:
 
@@ -664,7 +664,7 @@ Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-a
 
 1. [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
 2. [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
-3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
+3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they are in the Istio service mesh](#istio_sidecar).
 
 To publicly expose apps:
 

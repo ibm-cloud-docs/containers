@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, nginx, multiple ingress controllers, byo controller
 
@@ -168,7 +168,7 @@ If you plan to continue to use IBM-provided ALBs concurrently with your custom I
     ```
     {: pre}
 
-5. If you do not plan to continue to use IBM-provided ALBs concurrently with your custom Ingress controller.
+5. If you don't plan to continue to use IBM-provided ALBs concurrently with your custom Ingress controller.
 
     1. Get the ID of the ALBs.
     
@@ -260,7 +260,7 @@ If you plan to continue to use IBM-provided ALBs concurrently with your custom I
 
 5. Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When the service is created, copy the hostname that is assigned by the VPC load balancer in the **LoadBalancer Ingress** field.
 
-    **The VPC load balancer takes a few minutes to provision in your VPC.** You cannot access the hostname of your Kubernetes `LoadBalancer` service until the VPC load balancer is fully provisioned.
+    **The VPC load balancer takes a few minutes to provision in your VPC.** You can't access the hostname of your Kubernetes `LoadBalancer` service until the VPC load balancer is fully provisioned.
     {: note}
 
     ```sh
