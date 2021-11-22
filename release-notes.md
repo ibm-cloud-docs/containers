@@ -37,6 +37,13 @@ Review the release notes for November 2021.
 Worker node fix pack update
 :   Changelog documentation is available for Kubernetes version [`1.22.3_1530`](/docs/containers?topic=containers-changelog#1223_1530), [`1.21.6_1540`](/docs/containers?topic=containers-changelog#1216_1540), [`1.20.12_1562`](/docs/containers?topic=containers-changelog#12012_1562), and [`1.19.16_1569`](/docs/containers?topic=containers-changelog#11916_1569).
 
+{{site.data.keyword.block_storage_is_short}} add-on.
+:   [Version 4.0.2_788](/docs/containers?topic=containers-vpc_bs_changelog) is released.
+
+Cluster autoscaler add-on.
+:   [Version 1.0.4_387](/docs/containers?topic=containers-ca_changelog) is released.
+
+
 ### 19 November 2021
 {: #19nov2021}
 {: release-note}
