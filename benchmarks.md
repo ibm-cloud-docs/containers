@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, containers
 
@@ -57,7 +57,7 @@ Because {{site.data.keyword.containerlong_notm}} is a managed offering, IBM alre
 
 First, check the explanation of the failure for any remediation steps.
 
-Then, determine whether the failure is acceptable according to your security requirements. For example, some recommendations might be more in-depth configuration requirements than your particular processes or standards require. Also, some recommendations are not scored, and do not impact the overall benchmark score.
+Then, determine whether the failure is acceptable according to your security requirements. For example, some recommendations might be more in-depth configuration requirements than your particular processes or standards require. Also, some recommendations are not scored, and don't impact the overall benchmark score.
 
 Next, decide whether the component falls within your responsibility. If so, you might need to change how you configure that component. For example, you might configure pod security policies for all your app deployments. For components that are not directly within your responsibility, assess whether you can use another {{site.data.keyword.cloud_notm}} service to meet the recommendation.
 
@@ -84,7 +84,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: pre}
 
 2. Create a configmap with the `config` and `node` configuration files from the [kube-samples](https://github.com/IBM-Cloud/kube-samples/tree/master/cis-kube-benchmark/cis-1.5/ibm){: external} GitHub repository.
-    1. Download the the `config` and `node` configuration files into a local directory that is called `ibm`. You can also clone the repository and navigate into the `ibm` directory.
+    1. Download the the `config` and `node` configuration files into a local directory called `ibm`. You can also clone the repository and navigate into the `ibm` directory.
         * [`config` file](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/cis-kube-benchmark/cis-1.5/ibm/config.yaml){: external}
         * [`node` file](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/cis-kube-benchmark/cis-1.5/ibm/node.yaml){: external}
     2. Create the configmap by using the `--from-file` flag to specify the `ibm` directory where your downloaded the configuration files.
@@ -440,7 +440,7 @@ Review the following explanations and possible remediation actions that you can 
 | 5.4.2 | {{site.data.keyword.containerfull_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
 | 5.5.1 | {{site.data.keyword.containerfull_notm}} can optionally [enable image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec). |
 | 5.6.2 | {{site.data.keyword.containerfull_notm}} does not annotate all pods with [seccomp profiles](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp). |
-| 5.6.3 | {{site.data.keyword.containerfull_notm}} deploys some system components that do not set a [pod or container `securityContext`](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/). |
+| 5.6.3 | {{site.data.keyword.containerfull_notm}} deploys some system components that don't set a [pod or container `securityContext`](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/). |
 | 5.6.4 | {{site.data.keyword.containerfull_notm}} deploys some Kubernetes resources to the default names. |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
 {: caption="Explanation and remediation" caption-side="top"}

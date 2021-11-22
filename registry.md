@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, registry, pull secret, secrets
 
@@ -691,13 +691,13 @@ To use a non-{{site.data.keyword.cloud_notm}} registry such as Docker, see [Acce
 
 **Does the API key need to be for a service ID? What happens if I reach the limit of service IDs for my account?**
 
-The default cluster setup creates a service ID to store {{site.data.keyword.cloud_notm}} IAM API key credentials in the image pull secret. However, you can also create an API key for an individual user and store those credentials in an image pull secret. If you reach the [IAM limit for service IDs](/docs/account?topic=account-policy-limits), your cluster is created without the service ID and image pull secret and cannot pull images from the `icr.io` registry domains by default. You must [create your own image pull secret](#other_registry_accounts), but by using an API key for an individual user such as a functional ID, not an {{site.data.keyword.cloud_notm}} IAM service ID.
+The default cluster setup creates a service ID to store {{site.data.keyword.cloud_notm}} IAM API key credentials in the image pull secret. However, you can also create an API key for an individual user and store those credentials in an image pull secret. If you reach the [IAM limit for service IDs](/docs/account?topic=account-policy-limits), your cluster is created without the service ID and image pull secret and can't pull images from the `icr.io` registry domains by default. You must [create your own image pull secret](#other_registry_accounts), but by using an API key for an individual user such as a functional ID, not an {{site.data.keyword.cloud_notm}} IAM service ID.
 
 **I see image pull secrets for the regional registry domains and all registry domains. Which one do I use?**
 
 Previously, {{site.data.keyword.containerlong_notm}} created separate image pull secrets for each regional, public `icr.io` registry domain. Now, all the public and private `icr.io` registry domains for all regions are stored in a single `all-icr-io` image pull secret that is automatically created in the `default` Kubernetes namespace of your cluster.
 
-For workloads in other Kubernetes namespaces in the cluster to pull container images from a private registry, you can now copy only the `all-icr-io` image pull secret to that Kubernetes namespace. Then, specify the `all-icr-io` secret in your service account or deployment. You do not need to copy the image pull secret that matches the regional registry of your image anymore. Also, keep in mind that you do not need image pull secrets for public registries, which do not require authentication.
+For workloads in other Kubernetes namespaces in the cluster to pull container images from a private registry, you can now copy only the `all-icr-io` image pull secret to that Kubernetes namespace. Then, specify the `all-icr-io` secret in your service account or deployment. You don't need to copy the image pull secret that matches the regional registry of your image anymore. Also, keep in mind that you don't need image pull secrets for public registries, which don't require authentication.
 
 
 
@@ -723,11 +723,11 @@ When you set up your {{site.data.keyword.cloud_notm}} account to use service end
 1. Enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so that you can use the {{site.data.keyword.registrylong_notm}} private cloud service endpoint. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command.
 2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
 
-Now, {{site.data.keyword.registrylong_notm}} automatically uses the private cloud service endpoint. You do not need to enable the private cloud service endpoint for your {{site.data.keyword.containerlong_notm}} clusters.
+Now, {{site.data.keyword.registrylong_notm}} automatically uses the private cloud service endpoint. You don't need to enable the private cloud service endpoint for your {{site.data.keyword.containerlong_notm}} clusters.
 
 **I have a private-only cluster. How do I enforce that my image traffic remains on the private network?**
 
-The image push and pull traffic is automatically on the private network. {{site.data.keyword.containerlong_notm}} can use the public `icr.io` registry domains in existing image pull secrets to authenticate requests to {{site.data.keyword.registrylong_notm}}. These requests are automatically redirected to the private `icr.io` registry domains. You do not need to modify the image pull secrets or configure additional settings.
+The image push and pull traffic is automatically on the private network. {{site.data.keyword.containerlong_notm}} can use the public `icr.io` registry domains in existing image pull secrets to authenticate requests to {{site.data.keyword.registrylong_notm}}. These requests are automatically redirected to the private `icr.io` registry domains. You don't need to modify the image pull secrets or configure additional settings.
 
 **Do I have to use the private `icr.io` registry addresses for anything else?**
 
@@ -750,7 +750,7 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image
     ```
     {: pre}
 
-2. {{site.data.keyword.cloud_notm}} IAM **Administrator** platform access role for {{site.data.keyword.registrylong_notm}}, across all regions and resource groups. The policy cannot be scoped to a particular region or resource group. The account owner can give you the role by running the following command.
+2. {{site.data.keyword.cloud_notm}} IAM **Administrator** platform access role for {{site.data.keyword.registrylong_notm}}, across all regions and resource groups. The policy can't be scoped to a particular region or resource group. The account owner can give you the role by running the following command.
 
     ```sh
     ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
@@ -781,7 +781,7 @@ To update your cluster image pull secret in the `default` Kubernetes namespace.
     ```
     {: pre}
 
-    When you run this command, the creation of IAM credentials and image pull secrets is initiated and can take some time to complete. You cannot deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} `icr.io` domains until the image pull secrets are created.
+    When you run this command, the creation of IAM credentials and image pull secrets is initiated and can take some time to complete. You can't deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} `icr.io` domains until the image pull secrets are created.
     {: important}
 
 3. Verify that the image pull secrets are created in your cluster.
@@ -817,7 +817,7 @@ Set up your own image pull secret in your cluster to deploy containers to Kubern
 
 After you create the image pull secret, your containers must use the secret to be authorized to pull an image from the registry. You can add the image pull secret to the service account for the namespace, or refer to the secret in each deployment. For instructions, see [Using the image pull secret to deploy containers](#use_imagePullSecret).
 
-Image pull secrets are valid only for the Kubernetes namespaces that they were created for. Repeat these steps for every namespace where you want to deploy containers. Images from [DockerHub](#dockerhub) do not require image pull secrets.
+Image pull secrets are valid only for the Kubernetes namespaces that they were created for. Repeat these steps for every namespace where you want to deploy containers. Images from [DockerHub](#dockerhub) don't require image pull secrets.
 {: tip}
 
 
@@ -975,7 +975,7 @@ The following steps create an API key that stores the credentials of an {{site.d
 5. Retrieve your **API Key** value from the output of the previous command.
 
     ```sh
-    Please preserve the API key! It cannot be retrieved after it's created.
+    Please preserve the API key! It can't be retrieved after it's created.
 
     Name          <cluster_name>-<kube_namespace>-key   
     Description   key_for_registry_for_serviceid_for_kubernetes_cluster_multizone_namespace_test   
@@ -1010,7 +1010,7 @@ The following steps create an API key that stores the credentials of an {{site.d
     :   Required. Enter the value of your `API Key` that you previously retrieved.
     
     `--docker-email <docker-email>`
-    :   Required. If you have one, enter your Docker email address. If you do not, enter a fictional email address, such as `a@b.c`. This email is required to create a Kubernetes secret, but is not used after creation.
+    :   Required. If you have one, enter your Docker email address. If you don't, enter a fictional email address, such as `a@b.c`. This email is required to create a Kubernetes secret, but is not used after creation.
 
 7. Verify that the secret was created successfully. Replace <em>&lt;namespace&gt;</em> with the namespace where you created the image pull secret.
 
@@ -1057,7 +1057,7 @@ To create an image pull secret:
     :   Required. The password to log in to your private registry, such as a token value.
    
     `--docker-email <docker-email>`
-    :   Required. If you have one, enter your Docker email address. If you do not have one, enter a fictional email address, such as `a@b.c`. This email is required to create a Kubernetes secret, but is not used after creation.
+    :   Required. If you have one, enter your Docker email address. If you don't have one, enter a fictional email address, such as `a@b.c`. This email is required to create a Kubernetes secret, but is not used after creation.
 
 2. Verify that the secret was created successfully. Replace `<namespace>` with the name of the namespace where you created the image pull secret.
 
@@ -1073,18 +1073,18 @@ To create an image pull secret:
 ## Using the image pull secret to deploy containers
 {: #use_imagePullSecret}
 
-You can define an image pull secret in your pod deployment or store the image pull secret in your Kubernetes service account so that it is available for all deployments that do not specify a Kubernetes service account in the namespace.
+You can define an image pull secret in your pod deployment or store the image pull secret in your Kubernetes service account so that it is available for all deployments that don't specify a Kubernetes service account in the namespace.
 {: shortdesc}
 
 To plan how image pull secrets are used in your cluster, choose between the following options.
 
-* Referring to the image pull secret in your pod deployment: Use this option if you do not want to grant access to your registry for all pods in your namespace by default. Developers can [include the image pull secret in each pod deployment](/docs/containers?topic=containers-images#pod_imagePullSecret) that must access your registry.
+* Referring to the image pull secret in your pod deployment: Use this option if you don't want to grant access to your registry for all pods in your namespace by default. Developers can [include the image pull secret in each pod deployment](/docs/containers?topic=containers-images#pod_imagePullSecret) that must access your registry.
 * Storing the image pull secret in the Kubernetes service account: Use this option to grant access to images in your registry for all deployments in the selected Kubernetes namespaces. To store an image pull secret in the Kubernetes service account, use the [following steps](#store_imagePullSecret).
 
 ### Storing the image pull secret in the Kubernetes service account for the selected namespace
 {: #store_imagePullSecret}
 
-Every Kubernetes namespace has a Kubernetes service account that is named `default`. Within the namespace, you can add the image pull secret to this service account to grant access for pods to pull images from your registry. Deployments that do not specify a service account automatically use the `default` service account for this Kubernetes namespace.
+Every Kubernetes namespace has a Kubernetes service account that is named `default`. Within the namespace, you can add the image pull secret to this service account to grant access for pods to pull images from your registry. Deployments that don't specify a service account automatically use the `default` service account for this Kubernetes namespace.
 {: shortdesc}
 
 1. Check if an image pull secret already exists for your default service account.

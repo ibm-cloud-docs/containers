@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -17,7 +17,7 @@ subcollection: containers
 # After upgrading my classic cluster to version 1.21, I'm finding connectivity issues
 {: #ts-network-classic121}
 
-There is a known issue with classic Kubernetes 1.21 clusters that have public and private service endpoint, but do not have VRF enabled.
+There is a known issue with classic Kubernetes 1.21 clusters that have public and private service endpoint, but don't have VRF enabled.
 {: shortdesc}
 
 You upgraded your classic cluster to Kubernetes 1.21 and are finding connectivity issues such as connecting to the Kubernetes console, fetching logs from pods, or running the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool.
@@ -26,7 +26,7 @@ You upgraded your classic cluster to Kubernetes 1.21 and are finding connectivit
 In Kubernetes version 1.21, Konnectivity replaces OpenVPN as the network proxy that is used to secure the communication of the Kubernetes API server master to worker nodes in the cluster.
 {: tsCauses}
 
-However, when using Konnectivity, a problem exists with masters to cluster nodes communication when all of the following conditions are met.
+However, when using Konnectivity, a problem exists with masters to cluster nodes communication when all the following conditions are met.
 
 - You are updating an existing classic cluster to Kubernetes version 1.21 or are deploying a new classic cluster.
 - The cluster has both private and public service endpoints enabled.

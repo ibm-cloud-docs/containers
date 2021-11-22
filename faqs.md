@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
 
@@ -60,7 +60,7 @@ For a detailed overview of capabilities and benefits, see [Benefits of using the
 
 You can have 1 free cluster at a time in {{site.data.keyword.containerlong_notm}}, and each free cluster expires in 30 days. Free clusters have [select capabilities](/docs/containers?topic=containers-cs_ov#cluster_types), minimal 2x4 compute resources, select single zone [locations](/docs/containers?topic=containers-regions-and-zones#regions_free), and support only the Kubernetes container platform and {{site.data.keyword.cloud_notm}} classic infrastructure provider. Free clusters are ideal for testing out Kubernetes deployments and getting familiar with the {{site.data.keyword.containerlong_notm}} API, CLI, and console tools. After you are done playing around with your free cluster, you can [copy your configuration files and redeploy them to a standard cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster).
 
-To create a free cluster, you must have a Pay-As-You-Go or Subscription {{site.data.keyword.cloud_notm}} account. Free clusters cannot be created in Lite accounts.
+To create a free cluster, you must have a Pay-As-You-Go or Subscription {{site.data.keyword.cloud_notm}} account. Free clusters can't be created in Lite accounts.
 {: note}
 
 
@@ -70,7 +70,7 @@ To create a free cluster, you must have a Pay-As-You-Go or Subscription {{site.d
 {: faq}
 {: support}
 
-With {{site.data.keyword.cloud_notm}}, you can create clusters for your containerized workloads from two different container management platforms: the IBM version of community Kubernetes and {{site.data.keyword.openshiftlong_notm}}. The container platform that you select is installed on your cluster master and worker nodes. Later, you can [update the version](/docs/containers?topic=containers-update#update) but cannot roll back to a previous version or switch to a different container platform. If you want to use multiple container platforms, create a separate cluster for each.
+With {{site.data.keyword.cloud_notm}}, you can create clusters for your containerized workloads from two different container management platforms: the IBM version of community Kubernetes and {{site.data.keyword.openshiftlong_notm}}. The container platform that you select is installed on your cluster master and worker nodes. Later, you can [update the version](/docs/containers?topic=containers-update#update) but can't roll back to a previous version or switch to a different container platform. If you want to use multiple container platforms, create a separate cluster for each.
 
 For more information, see [Comparison between {{site.data.keyword.openshiftshort}} and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes).
 
@@ -156,7 +156,7 @@ For more information about available bare metal flavors and how bare metal is di
 {: #smallest_cluster}
 {: faq}
 
-Your cluster must have at least 1 worker node to run default Kubernetes components. You cannot have a cluster with 0 worker nodes, and you cannot power off or suspend billing for your worker nodes. Additionally, the type of cluster and the number of worker pools that you have can impact the size of your cluster.
+Your cluster must have at least 1 worker node to run default Kubernetes components. You can't have a cluster with 0 worker nodes, and you can't power off or suspend billing for your worker nodes. Additionally, the type of cluster and the number of worker pools that you have can impact the size of your cluster.
 
 * **Single zone clusters**: [Create a cluster](/docs/containers?topic=containers-clusters) with 1 worker node in the default worker pool.
 * **Multizone clusters**: You must [create a cluster](/docs/containers?topic=containers-clusters) with 1 worker node per zone in the worker pool. Later, you can [remove zones](/docs/containers?topic=containers-kubernetes-service-cli#cs_zone_rm) from the worker pool or [remove individual worker nodes](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_rm) so that your cluster size reduces to the minimum size of 1.

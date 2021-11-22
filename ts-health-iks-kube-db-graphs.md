@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, logging, help, debug
 
@@ -17,7 +17,7 @@ content-type: troubleshoot
 {: #cs_dashboard_graphs}
 
 
-When you access the Kubernetes dashboard, utilization graphs do not display.
+When you access the Kubernetes dashboard, utilization graphs don't display.
 {: tsSymptoms}
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -34,7 +34,7 @@ When you describe an ALB pod by running `kubectl describe pod -n kube-system <po
 Ingress requires at least two worker nodes per zone to ensure high availability and apply periodic updates.
 {: tsCauses}
 
-By default, ALB pods have two replicas. However, ALB pods have anti-affinity rules to ensure that only one pod is scheduled to each worker node for high availability. When only one worker node exists per zone in a classic or VPC cluster, or if only one worker node exists on a VLAN that your classic cluster is attached to, ALB pods cannot deploy correctly.
+By default, ALB pods have two replicas. However, ALB pods have anti-affinity rules to ensure that only one pod is scheduled to each worker node for high availability. When only one worker node exists per zone in a classic or VPC cluster, or if only one worker node exists on a VLAN that your classic cluster is attached to, ALB pods can't deploy correctly.
 {: tsResolve}
 
 1. Check the number of worker nodes per zone in your cluster.
@@ -44,7 +44,7 @@ By default, ALB pods have two replicas. However, ALB pods have anti-affinity rul
     {: pre}
 
     * Classic and VPC clusters: If only one worker node exists in a zone, increase the number of worker nodes in that zone.
-        * **If you do not use edge nodes**: Ensure that at least two worker nodes exist in each zone by [resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool), [creating a new worker pool in a VPC cluster](/docs/containers?topic=containers-add_workers#vpc_add_pool), or [creating a new worker pool in a classic cluster](/docs/containers?topic=containers-add_workers#add_pool).
+        * **If you don't use edge nodes**: Ensure that at least two worker nodes exist in each zone by [resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool), [creating a new worker pool in a VPC cluster](/docs/containers?topic=containers-add_workers#vpc_add_pool), or [creating a new worker pool in a classic cluster](/docs/containers?topic=containers-add_workers#add_pool).
         * **If you use edge nodes**: Ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge) are enabled in each zone.
     * Classic clusters only: If more than one worker node exists in each zone of your classic cluster, your worker nodes might be connected to different VLANs within one zone so that only one worker node exists on a private VLAN. Continue to the next step.
 

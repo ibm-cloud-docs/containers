@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes
 
@@ -692,7 +692,7 @@ ibmcloud ks cluster config --cluster CLUSTER [--admin] [--endpoint ENDPOINT_TYPE
 
 **Minimum required permissions**: **Viewer** or **Reader** {{site.data.keyword.cloud_notm}} IAM service access role for the cluster in {{site.data.keyword.containerlong_notm}}. Further, if you have only a platform access role or only a service access role, additional constraints apply.
 * **Platform**: If you have only a platform access role, you can perform this command, but you need a [service access role](/docs/containers?topic=containers-users#checking-perms) or a [custom RBAC policy](/docs/containers?topic=containers-access-overview#role-binding) to perform Kubernetes actions in the cluster.
-* **Service**: If you have only a service access role, you can perform this command. However, your cluster admin must give you the cluster name and ID because you cannot run the `ibmcloud ks cluster ls` command or open the {{site.data.keyword.containerlong_notm}} console to view clusters. After you receive the cluster name and ID, you can [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-deploy_app#db_cli) and work with Kubernetes.
+* **Service**: If you have only a service access role, you can perform this command. However, your cluster admin must give you the cluster name and ID because you can't run the `ibmcloud ks cluster ls` command or open the {{site.data.keyword.containerlong_notm}} console to view clusters. After you receive the cluster name and ID, you can [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-deploy_app#db_cli) and work with Kubernetes.
 
 **Command options**:
 
@@ -703,16 +703,16 @@ ibmcloud ks cluster config --cluster CLUSTER [--admin] [--endpoint ENDPOINT_TYPE
 :    Optional: Download the TLS certificates and permission files for the Super User role. You can use the certs to automate tasks in a cluster without having to reauthenticate. The files are downloaded to `<user_home_directory>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>-admin`.
 
 `--endpoint ENDPOINT_TYPE`
-:    Optional: Specify the type of endpoint to use to connect to the cluster. If you do not specify this flag, the default service endpoint for your cluster is used.
+:    Optional: Specify the type of endpoint to use to connect to the cluster. If you don't specify this flag, the default service endpoint for your cluster is used.
      - `private`: If the private cloud service endpoint is enabled for your cluster, set to `private` to use the private cloud service endpoint for your cluster context. Note you must be in your {{site.data.keyword.cloud_notm}} private network or connected to the private network through a [VPC VPN connection](/docs/vpc?topic=vpc-vpn-onprem-example), or for classic infrastructure, a [classic VPN connection](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl).
 
 `--network`
 :    Optional: Download the Calico configuration file, TLS certificates, and permission files that are required to run `calicoctl` commands in your cluster. 
-     This option cannot be used with the `--yaml` option.
+     This option can't be used with the `--yaml` option.
      {: note}
 
 `--skip-rbac`
-:    Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.cloud_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service) to manage all your RBAC users, do not include this option.
+:    Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.cloud_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service) to manage all your RBAC users, don't include this option.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
@@ -751,7 +751,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 :    The level of hardware isolation for your worker node. Use `dedicated` so that available physical resources are dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. This value is optional for VM standard clusters and is not available for free clusters. For bare metal flavors, specify `dedicated`.
 
 `--zone ZONE`
-:    The zone where you want to create the cluster. This value is required for standard clusters. Free clusters can be created in the region that you target with the `ibmcloud ks init` command, but you cannot specify the zone.
+:    The zone where you want to create the cluster. This value is required for standard clusters. Free clusters can be created in the region that you target with the `ibmcloud ks init` command, but you can't specify the zone.
 :    Review available [classic](/docs/containers?topic=containers-regions-and-zones#zones-mz) or [VPC](/docs/containers?topic=containers-regions-and-zones#zones-vpc) zones.
      When you select a zone that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.
      {: note}
@@ -769,15 +769,15 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 :    By default, a public and a private portable subnet are created on the VLAN associated with the cluster. Include the `--no-subnet` flag to avoid creating subnets with the cluster. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster later.
 
 `--private-vlan PRIVATE_VLAN`
-:    This parameter is not available for free clusters. If this standard cluster is the first standard cluster that you create in this zone, do not include this flag. A private VLAN is created for you when the cluster is created. If you created a standard cluster before in this zone or created a private VLAN in IBM Cloud infrastructure before, you must specify that private VLAN. Private VLAN routers always begin with `bcr` (back-end router) and public VLAN routers always begin with `fcr` (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match.
+:    This parameter is not available for free clusters. If this standard cluster is the first standard cluster that you create in this zone, don't include this flag. A private VLAN is created for you when the cluster is created. If you created a standard cluster before in this zone or created a private VLAN in IBM Cloud infrastructure before, you must specify that private VLAN. Private VLAN routers always begin with `bcr` (back-end router) and public VLAN routers always begin with `fcr` (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match.
 :    To find out whether you already have a private VLAN for a specific zone or to find the name of an existing private VLAN, run `ibmcloud ks vlan ls --zone ZONE`.
 
 `--public-vlan PUBLIC_VLAN`
-:    This parameter is not available for free clusters. If this standard cluster is the first standard cluster that you create in this zone, do not use this flag. A public VLAN is created for you when the cluster is created. If you created a standard cluster before in this zone or created a public VLAN in IBM Cloud infrastructure before, specify that public VLAN. If you want to connect your worker nodes to a private VLAN only, do not specify this option. Private VLAN routers always begin with `bcr` (back-end router) and public VLAN routers always begin with `fcr` (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match.
+:    This parameter is not available for free clusters. If this standard cluster is the first standard cluster that you create in this zone, don't use this flag. A public VLAN is created for you when the cluster is created. If you created a standard cluster before in this zone or created a public VLAN in IBM Cloud infrastructure before, specify that public VLAN. If you want to connect your worker nodes to a private VLAN only, don't specify this option. Private VLAN routers always begin with `bcr` (back-end router) and public VLAN routers always begin with `fcr` (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match.
 :    To find out whether you already have a public VLAN for a specific zone or to find the name of an existing public VLAN, run `ibmcloud ks vlan ls --zone ZONE`. 
 
 `--private-only`
-:    Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.
+:    Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and don't include the `--public-vlan` flag.
      If worker nodes are set up with a private VLAN only, you must enable the private cloud service endpoint or configure a gateway appliance. For more information, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master).
      {: note}
 
@@ -785,7 +785,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 :    Create a cluster with a `gateway` worker pool of two gateway worker nodes that are connected to public and private VLANs to provide limited public access, and a `compute` worker pool of compute worker nodes that are connected to the private VLAN only. You can specify the number of compute nodes that are created in the `--workers` option. Note that you can later resize both the `compute` and `gateway` worker nodes by using the `ibmcloud ks worker-pool resize` command. For more information about gateway-enabled clusters, see [Using a gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway).
 
 `--private-service-endpoint`
-:    **Standard clusters in [accounts that are enabled with VRF and service endpoints](/docs/account?topic=account-vrf-service-endpoint)**: Enable the [private cloud service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) so that your Kubernetes master and the worker nodes communicate over the private VLAN. In addition, you can choose to enable the public cloud service endpoint by using the `--public-service-endpoint` flag to access your cluster over the internet. If you enable the private cloud service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private cloud service endpoint, you cannot later disable it.
+:    **Standard clusters in [accounts that are enabled with VRF and service endpoints](/docs/account?topic=account-vrf-service-endpoint)**: Enable the [private cloud service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) so that your Kubernetes master and the worker nodes communicate over the private VLAN. In addition, you can choose to enable the public cloud service endpoint by using the `--public-service-endpoint` flag to access your cluster over the internet. If you enable the private cloud service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private cloud service endpoint, you can't later disable it.
      After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 
 `--public-service-endpoint`
@@ -794,7 +794,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 
 
 `--workers WORKER`
-:    Optional: Specify the number of worker nodes to include in the cluster. If you do not specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
+:    Optional: Specify the number of worker nodes to include in the cluster. If you don't specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
      If you create a cluster with only one worker node per zone, you might experience issues with Ingress. For high availability, create a cluster with at least two workers per zone. Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
      {: important}
 
@@ -809,7 +809,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
      - `172.21.0.0 - 172.31.255.255`
      - `192.168.0.0 - 192.168.254.255`
      - `198.18.0.0 - 198.19.255.255`
-     Note that the pod and service subnets cannot overlap. The service subnet is in the 172.21.0.0/16 range by default.
+     Note that the pod and service subnets can't overlap. The service subnet is in the 172.21.0.0/16 range by default.
 
 `--service-subnet *SUBNET`{: #service-subnet}
 :    All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.dl_full_notm}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your services.
@@ -818,10 +818,10 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
      - `172.21.0.0 - 172.31.255.255`
      - `192.168.0.0 - 192.168.254.255`
      - `198.18.0.0 - 198.19.255.255`
-     Note that the pod and service subnets cannot overlap. The pod subnet is in the 172.30.0.0/16 range by default.
+     Note that the pod and service subnets can't overlap. The pod subnet is in the 172.30.0.0/16 range by default.
 
 `--skip-advance-permissions-check`
-:    Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.
+:    Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you don't have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
@@ -838,7 +838,7 @@ ibmcloud ks cluster create classic --name my_cluster
 ```
 {: pre}
 
-**Create your first standard cluster**: The first standard cluster that is created in a zone also creates a private VLAN. Therefore, do not include the `--public-vlan` flag.
+**Create your first standard cluster**: The first standard cluster that is created in a zone also creates a private VLAN. Therefore, don't include the `--public-vlan` flag.
 {: #example_cluster_create}
 
 ```sh
@@ -901,7 +901,7 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
 :    Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-gen2`.
 
 `--workers NUMBER_WORKERS_PER_ZONE`
-:    Optional: Specify the number of worker nodes to include in the cluster. If you do not specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
+:    Optional: Specify the number of worker nodes to include in the cluster. If you don't specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
       Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
       {: important}
 
@@ -916,7 +916,7 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
      - `172.21.0.0 - 172.31.255.255`
      - `192.168.0.0 - 192.168.254.255`
      - `198.18.0.0 - 198.19.255.255`
-     Note that the pod and service subnets cannot overlap. If you use custom-range subnets for your worker nodes, you must [ensure that your worker node subnets do not overlap with your cluster's pod subnet](/docs/containers?topic=containers-vpc-subnets#vpc-ip-range).
+     Note that the pod and service subnets can't overlap. If you use custom-range subnets for your worker nodes, you must [ensure that your worker node subnets don't overlap with your cluster's pod subnet](/docs/containers?topic=containers-vpc-subnets#vpc-ip-range).
 
 `--service-subnet SUBNET`
 :    All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.dl_full_notm}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your services.
@@ -925,10 +925,10 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
      - `172.21.0.0 - 172.31.255.255`
      - `192.168.0.0 - 192.168.254.255`
      - `198.18.0.0 - 198.19.255.255`
-     Note that the pod and service subnets cannot overlap.
+     Note that the pod and service subnets can't overlap.
 
 `--skip-advance-permissions-check`
-:    Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.
+:    Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you don't have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.
 
 `--kms-instance KMS_INSTANCE_ID`
 :    Optional: Include the ID of a key management service (KMS) instance to use to encrypt the local disk on the worker nodes in the `default` worker pool. To list available KMS instances, run `ibmcloud ks kms instance ls`. If you include this option, you must also include the `--crk` option.
@@ -991,7 +991,7 @@ ibmcloud ks cluster get --cluster my_cluster --show-resources
 ### `ibmcloud ks cluster image-security disable`
 {: #cs-image-security-disable}
 
-Disable [image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec). When you disable the feature, the underlying `ClusterImagePolicy` CRD is removed, which removes all of the default image policies and any custom images policies that you created.
+Disable [image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec). When you disable the feature, the underlying `ClusterImagePolicy` CRD is removed, which removes all the default image policies and any custom images policies that you created.
 {: shortdesc}
 
 ```sh
@@ -1083,7 +1083,7 @@ ibmcloud ks cluster ls [--provider (classic | vpc-gen2)] [--location LOCATION] [
 :    Filter output by a specific location. To see supported locations, run `ibmcloud ks locations`. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.
 
 `--output json`
-:    Optional: Prints the command output in JSON format. **Note**: If you do not include the `--provider` flag, only classic clusters are returned.
+:    Optional: Prints the command output in JSON format. **Note**: If you don't include the `--provider` flag, only classic clusters are returned.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
@@ -1413,7 +1413,7 @@ Disable the [private cloud service endpoint](/docs/containers?topic=containers-p
 **Important**: Before you disable the private endpoint, you first must complete the following steps to enable the public cloud service endpoint:
 1. Enable the public cloud service endpoint by running `ibmcloud ks cluster master public-service-endpoint enable --cluster <cluster_name>`.
 2. Follow the prompt in the CLI to refresh the Kubernetes master API server.
-3. [Reload all of the worker nodes in your cluster to pick up the public endpoint configuration.](#cs_worker_reload)
+3. [Reload all the worker nodes in your cluster to pick up the public endpoint configuration.](#cs_worker_reload)
 
 ```sh
 ibmcloud ks cluster master private-service-endpoint disable --cluster CLUSTER [-f] [-q] [-y] 
@@ -1597,7 +1597,7 @@ ibmcloud ks cluster master refresh --cluster CLUSTER [-q]
 ### `ibmcloud ks cluster master update`
 {: #cs_cluster_update}
 
-Update the Kubernetes master to the default API version. During the update, you cannot access or change the cluster. Worker nodes, apps, and resources that were deployed by the user are not modified and continue to run.
+Update the Kubernetes master to the default API version. During the update, you can't access or change the cluster. Worker nodes, apps, and resources that were deployed by the user are not modified and continue to run.
 {: shortdesc}
 
 You might need to change your YAML files for future deployments. Review this [release note](/docs/containers?topic=containers-cs_versions) for details.
@@ -1622,7 +1622,7 @@ ibmcloud ks cluster master update --cluster CLUSTER [--version MAJOR.MINOR.PATCH
 :    Required: The name or ID of the cluster.
 
 `--version MAJOR.MINOR.PATCH`
-:    Optional: The Kubernetes version of the cluster. If you do not specify a version, the Kubernetes master is updated to the default API version. To see available versions, run [ibmcloud ks versions](#cs_versions_command).
+:    Optional: The Kubernetes version of the cluster. If you don't specify a version, the Kubernetes master is updated to the default API version. To see available versions, run [ibmcloud ks versions](#cs_versions_command).
 
 `--force-update`
 :    Optional: Attempt the update even if the change is greater than two minor versions from the worker node version.
@@ -1651,7 +1651,7 @@ This API key method replaces the previous method of authorizing a cluster to acc
 
 For more information, see [Understanding how your cluster is authorized to pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-registry#cluster_registry_auth).
 
-When you run this command, the creation of IAM credentials and image pull secrets is initiated and can take some time to complete. You cannot deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} `icr.io` domains until the image pull secrets are created. To check the image pull secrets, run `kubectl get secrets | grep icr-io`. If you added IAM policies to an existing service ID, such as to restrict access to a regional registry, the service ID, IAM policies, and API key for the image pull secret are reset by this command.
+When you run this command, the creation of IAM credentials and image pull secrets is initiated and can take some time to complete. You can't deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} `icr.io` domains until the image pull secrets are created. To check the image pull secrets, run `kubectl get secrets | grep icr-io`. If you added IAM policies to an existing service ID, such as to restrict access to a regional registry, the service ID, IAM policies, and API key for the image pull secret are reset by this command.
 {: important}
 
 ```sh
@@ -1665,7 +1665,7 @@ ibmcloud ks cluster pull-secret apply --cluster CLUSTER
 
 **Minimum required permissions**:
 *  **Operator or Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
-*  **Administrator** platform access role in {{site.data.keyword.registrylong_notm}} across all regions and resource groups. The policy cannot be scoped to a particular region or resource group.
+*  **Administrator** platform access role in {{site.data.keyword.registrylong_notm}} across all regions and resource groups. The policy can't be scoped to a particular region or resource group.
 
 **Command options**:
 
@@ -1677,7 +1677,7 @@ ibmcloud ks cluster pull-secret apply --cluster CLUSTER
 ### `ibmcloud ks cluster rm`
 {: #cs_cluster_rm}
 
-Delete a cluster. All worker nodes, apps, and containers are permanently deleted. This action cannot be undone.
+Delete a cluster. All worker nodes, apps, and containers are permanently deleted. This action can't be undone.
 {: shortdesc}
 
 ```sh
@@ -1697,10 +1697,10 @@ ibmcloud ks cluster rm --cluster CLUSTER [--force-delete-storage] [--skip-advanc
 :    Required: The name or ID of the cluster.
 
 `--force-delete-storage`
-:    Optional: Deletes the cluster and any persistent storage that the cluster uses. **Attention**: If you include this flag, the data that is stored in the cluster or its associated storage instances cannot be recovered.
+:    Optional: Deletes the cluster and any persistent storage that the cluster uses. **Attention**: If you include this flag, the data that is stored in the cluster or its associated storage instances can't be recovered.
 
 `--skip-advance-permissions-check`
-:    Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get) before deleting the cluster. Note that if you do not have the correct infrastructure permissions, the cluster deletion might only partially succeed, such as the IBM-managed master being removed but the worker nodes unable to be removed from your infrastructure account. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.
+:    Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get) before deleting the cluster. Note that if you don't have the correct infrastructure permissions, the cluster deletion might only partially succeed, such as the IBM-managed master being removed but the worker nodes unable to be removed from your infrastructure account. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.
 
 `-f`
 :    Optional: Force the command to run with no user prompts.
@@ -1744,10 +1744,10 @@ ibmcloud ks cluster service bind --cluster CLUSTER --namespace KUBERNETES_NAMESP
 :    Required: The name of the Kubernetes namespace where you want to create the Kubernetes secret for your service credentials.
 
 `--key SERVICE_INSTANCE_KEY`
-:    Optional: The name or GUID of an existing service key. When you use the `service-binding` command, new service credentials are automatically created for your service instance and assigned the IAM **Writer** service access role for IAM-enabled services. If you want to use an existing service key that you created earlier, use this option. If you define a service key, you cannot set the `--role` option at the same time because your service keys are already created with a specific IAM service access role.
+:    Optional: The name or GUID of an existing service key. When you use the `service-binding` command, new service credentials are automatically created for your service instance and assigned the IAM **Writer** service access role for IAM-enabled services. If you want to use an existing service key that you created earlier, use this option. If you define a service key, you can't set the `--role` option at the same time because your service keys are already created with a specific IAM service access role.
 
 `--role IAM_SERVICE_ROLE`
-:    The {{site.data.keyword.cloud_notm}} IAM role that you want the service key to have. This value is optional and can be used for IAM-enabled services only. If you do not set this option, your service credentials are automatically created and assigned the IAM **Writer** service access role. If you want to use existing service keys by specifying the `--key` option, do not include this option.
+:    The {{site.data.keyword.cloud_notm}} IAM role that you want the service key to have. This value is optional and can be used for IAM-enabled services only. If you don't set this option, your service credentials are automatically created and assigned the IAM **Writer** service access role. If you want to use existing service keys by specifying the `--key` option, don't include this option.
      To list available roles for the service, run `ibmcloud iam roles --service <service_name>`. The service name is the name of the service in the catalog, which you can get by running `ibmcloud catalog search`.
 
 `--service SERVICE_INSTANCE`
@@ -1767,7 +1767,7 @@ ibmcloud ks cluster service bind --cluster my_cluster --namespace my_namespace -
 ### `ibmcloud ks cluster service ls`
 {: #cs_cluster_services}
 
-List the services that are bound to one or all of the Kubernetes namespace in a cluster. If no options are specified, the services for the default namespace are displayed.
+List the services that are bound to one or all the Kubernetes namespace in a cluster. If no options are specified, the services for the default namespace are displayed.
 {: shortdesc}
 
 ```sh
@@ -1790,7 +1790,7 @@ ibmcloud ks cluster service ls --cluster CLUSTER [--namespace KUBERNETES_NAMESPA
 :    Optional: Include the services that are bound to a specific namespace in a cluster.
 
 `--all-namespaces`
-:    Optional: Include the services that are bound to all of the namespaces in a cluster.
+:    Optional: Include the services that are bound to all the namespaces in a cluster.
 
 `--output json`
 :    Optional: Prints the command output in JSON format.
@@ -1812,7 +1812,7 @@ ibmcloud ks cluster service ls --cluster my_cluster --namespace my_namespace
 Remove an {{site.data.keyword.cloud_notm}} service from a cluster by unbinding it from a Kubernetes namespace.
 {: shortdesc}
 
-When you remove an {{site.data.keyword.cloud_notm}} service, the service credentials are removed from the cluster. If a pod is still using the service, it fails because the service credentials cannot be found.
+When you remove an {{site.data.keyword.cloud_notm}} service, the service credentials are removed from the cluster. If a pod is still using the service, it fails because the service credentials can't be found.
 {: tip}
 
 ```sh
@@ -1891,7 +1891,7 @@ ibmcloud ks cluster subnet add --cluster my_cluster --subnet-id 1643389
 Create a portable classic subnet in an IBM Cloud infrastructure account on your public or private VLAN and make it available to a cluster.
 {: shortdesc}
 
-Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time. When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time. If you use the same subnet across multiple clusters, your default Ingress TLS certificate might become invalidated. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
+Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time. When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time. If you use the same subnet across multiple clusters, your default Ingress TLS certificate might become invalidated. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
 {: important}
 
 ```sh
@@ -1910,7 +1910,7 @@ ibmcloud ks cluster subnet create --cluster CLUSTER --size SIZE --vlan VLAN_ID [
 
 `--size SIZE`
 :    The number of IP addresses that you want to create in the portable subnet. Accepted values are 8, 16, 32, or 64.
-     When you add portable IP addresses for your subnet, three IP addresses are used to establish cluster-internal networking. You cannot use these three IP addresses for your Ingress application load balancers (ALBs) or to create network load balancer (NLB) services. For example, if you request eight portable public IP addresses, you can use five of them to expose your apps to the public.
+     When you add portable IP addresses for your subnet, three IP addresses are used to establish cluster-internal networking. You can't use these three IP addresses for your Ingress application load balancers (ALBs) or to create network load balancer (NLB) services. For example, if you request eight portable public IP addresses, you can use five of them to expose your apps to the public.
      {: note}
 
 `--vlan VLAN_ID`
@@ -1972,7 +1972,7 @@ Bring your own private subnet to your {{site.data.keyword.containerlong_notm}} c
 This command is deprecated. Add an existing IBM Cloud infrastructure subnet to your cluster by running [`ibmcloud ks cluster subnet add`](#cs_cluster_subnet_add).
 {: deprecated}
 
-When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time. If you use the same subnet across multiple clusters, your default Ingress TLS certificate might become invalidated. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
+When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time. If you use the same subnet across multiple clusters, your default Ingress TLS certificate might become invalidated. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
 {: important}
 
 ```sh
@@ -2083,7 +2083,7 @@ ibmcloud ks worker add --cluster CLUSTER [--hardware HARDWARE] --flavor FLAVOR -
 :    Required: The private VLAN that was specified when the cluster was created. Private VLAN routers always begin with `bcr` (back-end router) and public VLAN routers always begin with `fcr` (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match.
 
 `--public-vlan PUBLIC_VLAN`
-:    Optional: The public VLAN that was specified when the cluster was created. If you want your worker nodes to exist on a private VLAN only, do not provide a public VLAN ID. Private VLAN routers always begin with `bcr` (back-end router) and public VLAN routers always begin with `fcr` (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match.
+:    Optional: The public VLAN that was specified when the cluster was created. If you want your worker nodes to exist on a private VLAN only, don't provide a public VLAN ID. Private VLAN routers always begin with `bcr` (back-end router) and public VLAN routers always begin with `fcr` (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match.
      If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) or [configuring a gateway appliance](/docs/containers?topic=containers-plan_clusters#workeruser-master).
      {: note}
 
@@ -2338,9 +2338,9 @@ ibmcloud ks worker reload --cluster my_cluster -w kube-dal10-cr18a61a63a6a94b658
 Delete a worker node and replace it with a new worker node in the same worker pool.
 {: shortdesc}
 
-The replacement worker node is created in the same zone and has the same flavor as the old worker node, but might be assigned new public or private IP addresses. You might replace a worker node if you cannot reload or update the worker node, such as if it enters a troubled state.
+The replacement worker node is created in the same zone and has the same flavor as the old worker node, but might be assigned new public or private IP addresses. You might replace a worker node if you can't reload or update the worker node, such as if it enters a troubled state.
 
-You can also use this command to update the Kubernetes version of the worker node to match the major and minor version of the Kubernetes master by including the `--update` flag. If you do not include the `--update` flag, patch version updates are applied to your worker node, but not major or minor updates. To see the changes from one major, minor, or patch version to the next, review the [Version changelog](/docs/containers?topic=containers-changelog) documentation. Remember that your worker nodes can be only up to two versions behind the master version (`n-2`).
+You can also use this command to update the Kubernetes version of the worker node to match the major and minor version of the Kubernetes master by including the `--update` flag. If you don't include the `--update` flag, patch version updates are applied to your worker node, but not major or minor updates. To see the changes from one major, minor, or patch version to the next, review the [Version changelog](/docs/containers?topic=containers-changelog) documentation. Remember that your worker nodes can be only up to two versions behind the master version (`n-2`).
 
 When you replace a worker node, keep in mind the following considerations.
 {: important}
@@ -2883,7 +2883,7 @@ ibmcloud ks worker-pool rm --cluster my_cluster --worker-pool pool1
 ### `ibmcloud ks worker-pool taint`
 {: #worker_pool_taint}
 
-Set or remove Kubernetes taints for all the worker nodes in a worker pool. After you set up taints, pods without a matching toleration cannot run on the worker pool. You might use taints to dedicate your worker pool exclusively for a certain type of workload, such as for networking edge nodes or the cluster autoscaler. For more information about how taints and tolerations work, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external}.
+Set or remove Kubernetes taints for all the worker nodes in a worker pool. After you set up taints, pods without a matching toleration can't run on the worker pool. You might use taints to dedicate your worker pool exclusively for a certain type of workload, such as for networking edge nodes or the cluster autoscaler. For more information about how taints and tolerations work, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external}.
 {: shortdesc}
 
 #### `ibmcloud ks worker-pool taint set`
@@ -3039,17 +3039,17 @@ ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER --worker-pool WORKER_
 `--private-vlan PRIVATE_VLAN`
 :    The ID of the private VLAN. This value is conditional.
      If you have a private VLAN in the zone, this value must match the private VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run `ibmcloud ks cluster get --cluster <cluster> --show-resources`. New worker nodes are added to the VLAN that you specify, but the VLANs for any existing worker nodes are not changed.
-     If you do not have a private or public VLAN in that zone, do not specify this option. A private and a public VLAN are automatically created for you when you initially add a zone to your worker pool.
-     In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
+     If you don't have a private or public VLAN in that zone, don't specify this option. A private and a public VLAN are automatically created for you when you initially add a zone to your worker pool.
+     In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
 
 `--public-vlan PUBLIC_VLAN`
 :    The ID of the public VLAN. This value is required if you want to expose workloads on the nodes to the public after you create the cluster. It must match the public VLAN ID of one or more of the worker nodes in the cluster for the zone. To see the VLANs that you have available, run `ibmcloud ks cluster get --cluster <cluster> --show-resources`. New worker nodes are added to the VLAN that you specify, but the VLANs for any existing worker nodes are not changed.
-     If you do not have a private or public VLAN in that zone, do not specify this option. A private and a public VLAN are automatically created for you when you initially add a zone to your worker pool.
-     In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
+     If you don't have a private or public VLAN in that zone, don't specify this option. A private and a public VLAN are automatically created for you when you initially add a zone to your worker pool.
+     In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
      {: note}
 
 `--private-only`
-:    Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.
+:    Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and don't include the `--public-vlan` flag.
      If worker nodes are set up with a private VLAN only, you must enable the private cloud service endpoint or configure a gateway appliance. For more information, see [Planning your private cluster and worker node setup](/docs/containers?topic=containers-plan_clusters#private_clusters).
      {: pre}
 
@@ -3222,7 +3222,7 @@ ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER --worker-pool WORKER_
     ```
     {: pre}
 
-    In the example output, note that **Router** pod IDs match: `01a` and `01a`. If one pod ID was `01a` and the other was `02a`, you cannot set these public and private VLAN IDs for your worker pool.
+    In the example output, note that **Router** pod IDs match: `01a` and `01a`. If one pod ID was `01a` and the other was `02a`, you can't set these public and private VLAN IDs for your worker pool.
     ```sh
     ID        Name   Number   Type      Router         Supports Virtual Workers
     229xxxx          1234     private   bcr01a.dal12   true
@@ -3230,7 +3230,7 @@ ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER --worker-pool WORKER_
     ```
     {: screen}
 
-3. If you do not have any VLANs available, you can [order new VLANs](/docs/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
+3. If you don't have any VLANs available, you can [order new VLANs](/docs/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
 
 **Example**:
 ```sh
@@ -3268,7 +3268,7 @@ ibmcloud ks zone rm --cluster CLUSTER --zone ZONE [--worker-pool WORKER_POOL] [-
 :    Required: The zone that you want to remove.
 
 `-p, --worker-pool WORKER_POOL`
-:    The name of the worker pool to remove the zone from. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`. To remove the zone from all worker pools in the cluster, do not include this flag.
+:    The name of the worker pool to remove the zone from. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`. To remove the zone from all worker pools in the cluster, don't include this flag.
 
 `-f`
 :    Optional: Force the command to run with no user prompts.
@@ -3726,7 +3726,7 @@ ibmcloud ks ingress alb migrate clean --cluster CLUSTER [--generated-resources] 
 :    Delete automatically generated and manually created Ingress resources of class `test` for the test ALB service running the Kubernetes Ingress image.
 
 `-f`
-:    Optional: Force the command to run with no user prompts. If you do not include this flag, you are prompted for each type of resource to be deleted.
+:    Optional: Force the command to run with no user prompts. If you don't include this flag, you are prompted for each type of resource to be deleted.
 
 `--output json`
 :    Optional: Prints the command output in JSON format.
@@ -3823,7 +3823,7 @@ ibmcloud ks ingress alb migrate status --cluster my_cluster --output json
 Force an update of the pods for individual or all Ingress ALBs in the cluster to the latest or a specific version.
 {: shortdesc}
 
-If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest build, you can also use this command to roll back ALB pods to an earlier, supported version. Note that you can use this command to update your ALB image to a different version, but you cannot use this command to change your ALB from one type of image to another. After you force a one-time update, automatic updates remain disabled, but can be re-enabled with the `ibmcloud ks ingress alb autoupdate enable` command.
+If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest build, you can also use this command to roll back ALB pods to an earlier, supported version. Note that you can use this command to update your ALB image to a different version, but you can't use this command to change your ALB from one type of image to another. After you force a one-time update, automatic updates remain disabled, but can be re-enabled with the `ibmcloud ks ingress alb autoupdate enable` command.
 
 ```sh
 ibmcloud ks ingress alb update --cluster CLUSTER [--alb ALB1_ID --alb ALB2_ID ...] [--version IMAGE_VERSION] [--output json] [-q]
@@ -3845,7 +3845,7 @@ ibmcloud ks ingress alb update --cluster CLUSTER [--alb ALB1_ID --alb ALB2_ID ..
 :    Optional: The ID of the individual ALB to update. To list ALB IDs, run `ibmcloud ks ingress alb ls -c <cluster>`. To update multiple ALBs, use multiple flags, such as `--alb ALB1_ID --alb ALB2_ID`. If you omit this flag, all ALBs in the cluster are updated.
 
 `--version IMAGE_VERSION`
-:    Optional: The version of the image that you want to update ALBs to. Note that you cannot use this flag to [change your ALB from one type of image to another](/docs/containers?topic=containers-ingress-types#alb-type-migration). To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, ALBs are updated to the latest version of the image type.
+:    Optional: The version of the image that you want to update ALBs to. Note that you can't use this flag to [change your ALB from one type of image to another](/docs/containers?topic=containers-ingress-types#alb-type-migration). To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, ALBs are updated to the latest version of the image type.
 
 `--output json`
 :    Optional: Prints the command output in JSON format.
@@ -4051,10 +4051,10 @@ ibmcloud ks ingress secret create --cert-crn CERTIFICATE_CRN --cluster CLUSTER -
 :    Required: The name or ID of the cluster.
 
 `--name SECRET_NAME`
-:    Required: Specify a name for the secret. Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret, which you can find by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress`.
+:    Required: Specify a name for the secret. Make sure that you don't create the secret with the same name as the IBM-provided Ingress secret, which you can find by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress`.
 
 `--namespace NAMESPACE`
-:    Optional: Specify the namespace that your Ingress resource is deployed to. If your ALB runs the Kubernetes Ingress image, this value is required, because the ALB can identify secrets only in the same namespace as your Ingress resource. If your ALB runs the {{site.data.keyword.containerlong_notm}} Ingress image, and you do not specify a namespace, the certificate secret is created in a namespace called `ibm-cert-store`. A reference to this secret is then created in the `default` namespace, which any Ingress resource in any namespace can access. While processing requests, the ALB follows the reference to pick up and use the certificate secret from the `ibm-cert-store` namespace.
+:    Optional: Specify the namespace that your Ingress resource is deployed to. If your ALB runs the Kubernetes Ingress image, this value is required, because the ALB can identify secrets only in the same namespace as your Ingress resource. If your ALB runs the {{site.data.keyword.containerlong_notm}} Ingress image, and you don't specify a namespace, the certificate secret is created in a namespace called `ibm-cert-store`. A reference to this secret is then created in the `default` namespace, which any Ingress resource in any namespace can access. While processing requests, the ALB follows the reference to pick up and use the certificate secret from the `ibm-cert-store` namespace.
 
 `--persist`
 :    Optional: Persist the secret data in your cluster. If the secret is later deleted from the CLI or {{site.data.keyword.openshiftshort}} web console, the secret is automatically re-created in your cluster. To permanently delete the secret, you must use the [`/ingress/v2/secret/deleteSecret` API](https://containers.cloud.ibm.com/global/swagger-global-api/#/beta/DeleteIngressSecret).
@@ -4469,34 +4469,34 @@ ibmcloud ks logging config create --cluster CLUSTER --logsource LOG_SOURCE --typ
 :    The name or ID of the cluster.
 
 `--logsource LOG_SOURCE`
-:    The log source to enable log forwarding for. This argument supports a comma-separated list of log sources to apply for the configuration. Accepted values are `container`, `application`, `worker`, `kubernetes`, `storage`, and `ingress`. If you do not provide a log source, configurations are created for `container` and `ingress`.
+:    The log source to enable log forwarding for. This argument supports a comma-separated list of log sources to apply for the configuration. Accepted values are `container`, `application`, `worker`, `kubernetes`, `storage`, and `ingress`. If you don't provide a log source, configurations are created for `container` and `ingress`.
 
 `--type syslog`
 :    Enter `syslog` to forward logs to an external server.
 
 `-n, --namespace KUBERNETES_NAMESPACE`
-:    The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the `ibm-system` and `kube-system` Kubernetes namespaces. This value is valid only for the container log source and is optional. If you do not specify a namespace, then all namespaces in the cluster use this configuration.
+:    The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the `ibm-system` and `kube-system` Kubernetes namespaces. This value is valid only for the container log source and is optional. If you don't specify a namespace, then all namespaces in the cluster use this configuration.
 
 `--hostname LOG_SERVER_HOSTNAME`
 :    The hostname or IP address of the log collector server.
 
 `--port LOG_SERVER_PORT`
-:    Optional: The port of the log collector server. If you do not specify a port, then the standard port `514` is used for `syslog` and the standard port `9091` is used for `ibm`.
+:    Optional: The port of the log collector server. If you don't specify a port, then the standard port `514` is used for `syslog` and the standard port `9091` is used for `ibm`.
 
 `--space CLUSTER_SPACE`
-:    Optional: The name of the Cloud Foundry space that you want to send logs to. This value is valid only for log type `ibm` and is optional. If you do not specify a space, logs are sent to the account level. If you do, you must also specify an `org`.
+:    Optional: The name of the Cloud Foundry space that you want to send logs to. This value is valid only for log type `ibm` and is optional. If you don't specify a space, logs are sent to the account level. If you do, you must also specify an `org`.
 
 `--org CLUSTER_ORG`
 :    Optional: The name of the Cloud Foundry org that the space is in. This value is valid only for log type `ibm` and is required if you specified a space.
 
 `-p, --app-path`
-:    The path on the container that the apps are logging to. To forward logs with source type `application`, you must provide a path. Wildcards, such as '/var/log/*.log', can be used, but recursive globs, such as '/var/log/**/test.log', cannot be used. To specify more than one path, use multiple flags, such as `-p /var/log/myApp1/&ast; -p /var/log/myApp2/&ast;`. This value is required for log source `application`.
+:    The path on the container that the apps are logging to. To forward logs with source type `application`, you must provide a path. Wildcards, such as '/var/log/*.log', can be used, but recursive globs, such as '/var/log/**/test.log', can't be used. To specify more than one path, use multiple flags, such as `-p /var/log/myApp1/&ast; -p /var/log/myApp2/&ast;`. This value is required for log source `application`.
 
 `--syslog-protocol`
 :    The transfer layer protocol that is used when the logging type is `syslog`. Supported values are `tcp`, `tls`, and the default `udp`. When forwarding to a rsyslog server with the `udp` protocol, logs that are over 1 KB are truncated.
 
 `-C, --app-container`
-:    To forward logs from apps, you can specify the name of the container that contains your app. To specify more than one container, use multiple flags, such as `-C /var/log/myApp1/&ast; -C /var/log/myApp2/&ast;`. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source `application`.
+:    To forward logs from apps, you can specify the name of the container that contains your app. To specify more than one container, use multiple flags, such as `-C /var/log/myApp1/&ast; -C /var/log/myApp2/&ast;`. If no containers are specified, logs are forwarded from all the containers that contain the paths that you provided. This option is only valid for log source `application`.
 
 `--skip-validation`
 :    Optional: Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs.
@@ -4641,25 +4641,25 @@ ibmcloud ks logging config update --cluster CLUSTER --id LOG_CONFIG_ID --type LO
 :    Required: The log forwarding protocol that you want to use. Currently, `syslog` and `ibm` are supported.
 
 `-n, --namespace NAMESPACE`
-:    The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the `ibm-system` and `kube-system` Kubernetes namespaces. This value is valid only for the `container` log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.
+:    The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the `ibm-system` and `kube-system` Kubernetes namespaces. This value is valid only for the `container` log source. If you don't specify a namespace, then all namespaces in the cluster use this configuration.
 
 `--hostname LOG_SERVER_HOSTNAME`
 :    The hostname or IP address of the log collector server.
 
 `--port LOG_SERVER_PORT`
-:    The port of the log collector server. This value is optional when the logging type is `syslog`. If you do not specify a port, then the standard port `514` is used for `syslog` and `9091` is used for `ibm`.
+:    The port of the log collector server. This value is optional when the logging type is `syslog`. If you don't specify a port, then the standard port `514` is used for `syslog` and `9091` is used for `ibm`.
 
 `--space CLUSTER_SPACE`
-:    Optional: The name of the space that you want to send logs to. This value is valid only for log type `ibm` and is optional. If you do not specify a space, logs are sent to the account level. If you do, you must also specify an `org`.
+:    Optional: The name of the space that you want to send logs to. This value is valid only for log type `ibm` and is optional. If you don't specify a space, logs are sent to the account level. If you do, you must also specify an `org`.
 
 `--org CLUSTER_ORG`
 :    Optional: The name of the Cloud Foundry org that the space is in. This value is valid only for log type `ibm` and is required if you specified a space.
 
 `-p, --app-path`
-:    The path on the container that the apps are logging to. To forward logs with source type `application`, you must provide a path. Wildcards, such as '/var/log/*.log', can be used, but recursive globs, such as '/var/log/**/test.log', cannot be used. To specify more than one path, use multiple flags, such as `-p /var/log/myApp1/&ast; -p /var/log/myApp2/&ast;`. This value is required for log source `application`.
+:    The path on the container that the apps are logging to. To forward logs with source type `application`, you must provide a path. Wildcards, such as '/var/log/*.log', can be used, but recursive globs, such as '/var/log/**/test.log', can't be used. To specify more than one path, use multiple flags, such as `-p /var/log/myApp1/&ast; -p /var/log/myApp2/&ast;`. This value is required for log source `application`.
 
 `-C, --app-container`
-:    To forward logs from apps, you can specify the name of the container that contains your app. To specify more than one container, use multiple flags, such as `-C /var/log/myApp1/&ast; -C /var/log/myApp2/&ast;`. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source `application`.
+:    To forward logs from apps, you can specify the name of the container that contains your app. To specify more than one container, use multiple flags, such as `-C /var/log/myApp1/&ast; -C /var/log/myApp2/&ast;`. If no containers are specified, logs are forwarded from all the containers that contain the paths that you provided. This option is only valid for log source `application`.
 
 `--output json`
 :    Optional: Prints the command output in JSON format.
@@ -4715,7 +4715,7 @@ ibmcloud ks logging filter create --cluster CLUSTER --type LOG_TYPE [--logging-c
 :    The type of logs that you want to apply the filter to. Currently `all`, `container`, and `host` are supported.
 
 `-lc, --logging-config CONFIG`
-:    Optional: The logging configuration ID. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` flag with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`.
+:    Optional: The logging configuration ID. If not provided, the filter is applied to all the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` flag with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`.
 
 `-n, --namespace KUBERNETES_NAMESPACE`
 :    Optional: The Kubernetes namespace from which you want to filter logs.
@@ -4750,7 +4750,7 @@ ibmcloud ks logging filter create --cluster example-cluster --type container --n
 ```
 {: pre}
 
-This example filters out all of the logs that are forwarded, at an `info` level or less, from a specific cluster. The output is returned as JSON.
+This example filters out all the logs that are forwarded, at an `info` level or less, from a specific cluster. The output is returned as JSON.
 ```sh
 ibmcloud ks logging filter create --cluster example-cluster --type all --level info --output json
 ```
@@ -4828,7 +4828,7 @@ ibmcloud ks logging filter rm --cluster CLUSTER [--id FILTER_ID] [--all] [--forc
 :    The ID of the log filter to delete.
 
 `--all`
-:    Optional: Delete all of your log forwarding filters.
+:    Optional: Delete all your log forwarding filters.
 
 `--force-update`
 :    Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version to change your logging configurations.
@@ -4873,7 +4873,7 @@ ibmcloud ks logging filter update --cluster CLUSTER --id FILTER_ID --type LOG_TY
 :    The type of logs that you want to apply the filter to. Currently `all`, `container`, and `host` are supported.
 
 `-lc, --logging-config CONFIG`
-:    Optional: The logging configuration ID. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` flag with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`.
+:    Optional: The logging configuration ID. If not provided, the filter is applied to all the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` flag with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`.
 
 `-n, --namespace KUBERNETES_NAMESPACE`
 :    Optional: The Kubernetes namespace from which you want to filter logs.
@@ -4908,7 +4908,7 @@ ibmcloud ks logging filter update --cluster example-cluster --id 885274 --type c
 ```
 {: pre}
 
-This example filters out all of the logs that are forwarded, at an `info` level or less, from a specific cluster. The output is returned as JSON.
+This example filters out all the logs that are forwarded, at an `info` level or less, from a specific cluster. The output is returned as JSON.
 ```sh
 ibmcloud ks logging filter update --cluster example-cluster --id 274885 --type all --level info --output json
 ```
@@ -5027,7 +5027,7 @@ ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP -
 :    The network load balancer IP address that you want to register. To see your NLB IP addresses, run `kubectl get svc`. To specify multiple IP addresses, use multiple `--ip` flags.
 
 `--secret-namespace NAMESPACE`
-:    The Kubernetes namespace where you want to create the Kubernetes secret that holds the SSL certificate information for the NLB. If you do not specify a namespace, the secret is automatically created in the `default` namespace.
+:    The Kubernetes namespace where you want to create the Kubernetes secret that holds the SSL certificate information for the NLB. If you don't specify a namespace, the secret is automatically created in the `default` namespace.
 
 `--dns-type public`
 :    The DNS provider type for subdomain registration. Currently, only `public` is supported.
@@ -5078,7 +5078,7 @@ ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER (--lb-host VPC_ALB_HOSTNAM
 :    The DNS provider type for the subdomain registration. Currently, only `public` DNS is supported.
 
 `--secret-namespace NAMESPACE`
-:    The Kubernetes namespace where you want to create the Kubernetes secret that holds the SSL certificate information for the NLB. If you do not specify a namespace, the secret is automatically created in the `default` namespace.
+:    The Kubernetes namespace where you want to create the Kubernetes secret that holds the SSL certificate information for the NLB. If you don't specify a namespace, the secret is automatically created in the `default` namespace.
 
 `--type (public|private)`
 :    The VPC load balancer type.
@@ -5192,7 +5192,7 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host SUBDOMAIN [--
 :    The port number to connect to for the health check. When `type` is `TCP`, this parameter is required. When `type` is `HTTP` or `HTTPS`, define the port only if you use a port other than 80 for HTTP or 443 for HTTPS. Default for TCP: `0`. Default for HTTP: `80`. Default for HTTPS: `443`.
 
 `--header HEADER`
-:    Required when `type` is `HTTP` or `HTTPS`: HTTP request headers to send in the health check, such as a Host header. The User-Agent header cannot be overridden. This flag is valid only for type 'HTTP' or 'HTTPS'. To add more than one header to the requests, specify this flag multiple times. This flag accepts values in the following format: '--header Header-Name=value'. When updating a monitor, the existing headers are replaced by the ones you specify. To delete all existing headers specify the flag with an empty value '--header ""'.
+:    Required when `type` is `HTTP` or `HTTPS`: HTTP request headers to send in the health check, such as a Host header. The User-Agent header can't be overridden. This flag is valid only for type 'HTTP' or 'HTTPS'. To add more than one header to the requests, specify this flag multiple times. This flag accepts values in the following format: '--header Header-Name=value'. When updating a monitor, the existing headers are replaced by the ones you specify. To delete all existing headers specify the flag with an empty value '--header ""'.
 
 `--expected-body BODY STRING`
 :    When `type` is `HTTP` or `HTTPS`: A case-insensitive substring that the health check looks for in the response body. If this string is not found, the IP is considered unhealthy.
@@ -5370,7 +5370,7 @@ ibmcloud ks nlb-dns monitor ls --cluster mycluster
 ### `ibmcloud ks nlb-dns replace`
 {: #cs_nlb-dns-replace}
 
-Replace the load balancer hostname that is registered with a DNS subdomain. For example, if you create a new VPC load balancer for your app, but you do not want to create a new DNS subdomain through which users can access your app, you can replace the hostname of the old load balancer with the hostname of the new load balancer.
+Replace the load balancer hostname that is registered with a DNS subdomain. For example, if you create a new VPC load balancer for your app, but you don't want to create a new DNS subdomain through which users can access your app, you can replace the hostname of the old load balancer with the hostname of the new load balancer.
 {: shortdesc}
 
 ```sh
@@ -5498,7 +5498,7 @@ Regenerate the certificate and secret for an NLB subdomain. Secret regeneration 
 
 If the Let’s Encrypt certificate creation fails during secret regeneration, a 10 minute wait period must pass before the regeneration is automatically attempted again. The regeneration of the secret takes another 5 minutes to complete, making it a total of 15 minutes before the process is completed.
 
-To avoid the Let’s Encrypt rate limit, do not regenerate a secret more than 5 times per day.
+To avoid the Let’s Encrypt rate limit, don't regenerate a secret more than 5 times per day.
 {: note}
 
 ```sh
@@ -5765,7 +5765,7 @@ If you have an {{site.data.keyword.cloud_notm}} Pay-As-You-Go account, you have 
 
 If IBM Cloud infrastructure credentials are manually set for a region and a resource group, these credentials are used to order infrastructure for all clusters within that region in the resource group. These credentials are used to determine infrastructure permissions, even if an [{{site.data.keyword.cloud_notm}} IAM API key](#cs_api_key_info) exists for the resource group and region. If the user whose credentials are stored does not have the required permissions to order infrastructure, then infrastructure-related actions, such as creating a cluster or reloading a worker node can fail.
 
-You cannot set multiple credentials for the same {{site.data.keyword.containerlong_notm}} resource group and region.
+You can't set multiple credentials for the same {{site.data.keyword.containerlong_notm}} resource group and region.
 
 Before you use this command, make sure that the user whose credentials are used has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure permissions](/docs/containers?topic=containers-users#users).
 {: important}
@@ -5936,7 +5936,7 @@ Enable a [key management service (KMS) provider](/docs/containers?topic=containe
 List available customer root keys (CRKs) in a key management service instance. Root keys wrap and unwrap the local data encryption keys (DEKs) that the cluster uses to encrypt its secrets. For more information, see [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms).
 {: shortdesc}
 
-Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and cannot be recovered.
+Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and can't be recovered.
 {: important}
 
 ```sh
@@ -5974,7 +5974,7 @@ ibmcloud ks kms crk ls --instance-id 1aa1a111-1111-1111-a111-a1aaaa1a1a1a
 Encrypt your Kubernetes secrets by [enabling a key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) in your cluster. To rotate a key in a cluster with existing key encryption, rerun this command with a new root key ID.
 {: shortdesc}
 
-Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and cannot be recovered. When you rotate a root key, you cannot reuse a previous root key for the same cluster.
+Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and can't be recovered. When you rotate a root key, you can't reuse a previous root key for the same cluster.
 {: important}
 
 ```sh
@@ -6000,7 +6000,7 @@ ibmcloud ks kms enable --cluster CLUSTER_NAME_OR_ID --instance-id KMS_INSTANCE_I
 :    The ID of the customer root key (CRK) in your KMS instance that you want to use to wrap the data encryption keys (DEK) that are stored locally in your cluster. To list available root keys, run `ibmcloud ks kms crk ls --instance-id <kms_instance_id>`.
 
 `--public-endpoint`
-:    Optional: Specify this option to use the KMS public cloud service endpoint. If you do not include this flag, the private cloud service endpoint is used by default.
+:    Optional: Specify this option to use the KMS public cloud service endpoint. If you don't include this flag, the private cloud service endpoint is used by default.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
@@ -6398,7 +6398,7 @@ ibmcloud ks versions
 ## `api` command
 {: #cs_cli_api}
 
-Target the API endpoint for {{site.data.keyword.containerlong_notm}}. If you do not specify an endpoint, you can view information about the current endpoint that is targeted.
+Target the API endpoint for {{site.data.keyword.containerlong_notm}}. If you don't specify an endpoint, you can view information about the current endpoint that is targeted.
 {: shortdesc}
 
 Region-specific endpoints are deprecated. Use the [global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint) instead.
@@ -6596,7 +6596,7 @@ To use this command to prepare your automation scripts for the release of versio
     ```
     {: pre}
 
-4. Search for and address any commands that are flagged in the script with `# WARNING` messages. For example, some commands are deprecated and do not have a replacement command.
+4. Search for and address any commands that are flagged in the script with `# WARNING` messages. For example, some commands are deprecated and don't have a replacement command.
 5. Within the script or the environment where the script is run, set the `IKS_BETA_VERSION` environment variable to `1.0`.
     ```sh
     export IKS_BETA_VERSION=1.0
@@ -6604,7 +6604,7 @@ To use this command to prepare your automation scripts for the release of versio
     {: pre}
 
 6. Test your automation with the updated script. Note that you might incur charges if your automation includes creating clusters.
-7. Update all of your scripts.
+7. Update all your scripts.
 8. Update your CLI plug-in to version 1.0.
     ```sh
     ibmcloud plugin update kubernetes-service

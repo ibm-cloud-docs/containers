@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -164,10 +164,10 @@ The **Master Status** provides details of what operation from the master state i
 |`deployed`|The master is successfully deployed. Check the status to verify that the master is `Ready` or to see if an update is available.|
 |`deploying`|The master is currently deploying. Wait for the state to become `deployed` before working with your cluster, such as adding worker nodes.|
 |`deploy_failed`|The master failed to deploy. IBM Support is notified and works to resolve the issue. Check the **Master Status** field for more information, or wait for the state to become `deployed`.|
-|`deleting`|The master is currently deleting because you deleted the cluster. You cannot undo a deletion. After the cluster is deleted, you can no longer check the master state because the cluster is completely removed.|
-|`delete_failed`|The master failed to delete. IBM Support is notified and works to resolve the issue. You cannot resolve the issue by trying to delete the cluster again. Instead, check the **Master Status** field for more information, or wait for the cluster to delete. You can also [open an {{site.data.keyword.cloud_notm}} support case](/docs/containers?topic=containers-get-help).|
+|`deleting`|The master is currently deleting because you deleted the cluster. You can't undo a deletion. After the cluster is deleted, you can no longer check the master state because the cluster is completely removed.|
+|`delete_failed`|The master failed to delete. IBM Support is notified and works to resolve the issue. You can't resolve the issue by trying to delete the cluster again. Instead, check the **Master Status** field for more information, or wait for the cluster to delete. You can also [open an {{site.data.keyword.cloud_notm}} support case](/docs/containers?topic=containers-get-help).|
 |`updating`|The master is updating its Kubernetes version. The update might be a patch update that is automatically applied, or a minor or major version that you applied by updating the cluster. During the update, your highly available master can continue processing requests, and your app workloads and worker nodes continue to run. After the master update is complete, you can [update your worker nodes](/docs/containers?topic=containers-update#worker_node).</br></br>If the update is unsuccessful, the master returns to a `deployed` state and continues running the previous version. IBM Support is notified and works to resolve the issue. You can check if the update failed in the **Master Status** field.|
-|`update_cancelled`|The master update is canceled because the cluster was not in a healthy state at the time of the update. Your master remains in this state until your cluster is healthy and you manually update the master. To update the master, use the `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update). If you do not want to update the master to the default `major.minor` version during the update, include the `--version` flag and specify the latest patch version that is available for the `major.minor` version that you want, such as `1.20.11`. To list available versions, run `ibmcloud ks versions`.|
+|`update_cancelled`|The master update is canceled because the cluster was not in a healthy state at the time of the update. Your master remains in this state until your cluster is healthy and you manually update the master. To update the master, use the `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update). If you don't want to update the master to the default `major.minor` version during the update, include the `--version` flag and specify the latest patch version that is available for the `major.minor` version that you want, such as `1.20.11`. To list available versions, run `ibmcloud ks versions`.|
 |`update_failed`|The master update failed. IBM Support is notified and works to resolve the issue. You can continue to monitor the health of the master until the master reaches a normal state. If the master remains in this state for more than 1 day, [open an {{site.data.keyword.cloud_notm}} support case](/docs/containers?topic=containers-get-help). IBM Support might identify other issues in your cluster that you must fix before the master can be updated.|
 {: caption="Master states"}
 {: summary="Table rows read from left to right, with the master state in column one and a description in column two."}
@@ -207,7 +207,7 @@ Common app level conditions to monitor include things such as,
 - More than one replica of an app is not running.
 - More than ten 5XX `HTTP` response codes received within 10 minute time frame.
 - More than one pod in a namespace is in an unknown state.
-- More than five pods cannot be scheduled on a worker node (pending state).
+- More than five pods can't be scheduled on a worker node (pending state).
 
 The underlying issues for these symptoms include things such as,
 - One or more worker node is in an unhealthy state.
@@ -265,7 +265,7 @@ Reloading or rebooting the worker can resolve the issue. However, you might need
     ```
     {: pre}
 
-2. If all of the worker nodes are **not** in the `Ready` state, [add worker nodes to your cluster](/docs/containers?topic=containers-add_workers).
+2. If all the worker nodes are **not** in the `Ready` state, [add worker nodes to your cluster](/docs/containers?topic=containers-add_workers).
 
 3. If all the worker nodes are in the `Ready` state, [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker nodes.
     1. Describe your worker node and review the **Events** section for common error messages.
@@ -386,7 +386,7 @@ To configure Autorecovery:
     apiVersion: v1
     metadata:
       name: ibm-worker-recovery-checks
-      namespace: kube-system # The `kube-system` namespace is a constant and cannot be changed.
+      namespace: kube-system # The `kube-system` namespace is a constant and can't be changed.
     data:
       checknode.json: |
         {
@@ -451,7 +451,7 @@ To configure Autorecovery:
     ```
     {: pre}
 
-7. If you do not see activity on the Autorecovery deployment, you can check the Helm deployment by running the tests that are included in the Autorecovery chart definition.
+7. If you don't see activity on the Autorecovery deployment, you can check the Helm deployment by running the tests that are in the Autorecovery chart definition.
     ```sh
     helm test ibm-worker-recovery -n kube-system
     ```
@@ -464,8 +464,8 @@ To configure Autorecovery:
 Review the following information on the individual components of health checks.
 {: shortdesc}
 
-- `name`: The configuration name `ibm-worker-recovery-checks` is a constant and cannot be changed.
-- `namespace`: The `kube-system` namespace is a constant and cannot be changed.
+- `name`: The configuration name `ibm-worker-recovery-checks` is a constant and can't be changed.
+- `namespace`: The `kube-system` namespace is a constant and can't be changed.
 - `checknode.json`: Defines a Kubernetes API node check that checks whether each worker node is in the `Ready` state. The check for a specific worker node counts as a failure if the worker node is not in the `Ready` state. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running `ibmcloud ks worker reload`. The node check is enabled until you set the **Enabled** field to `false` or remove the check. Note that reloading is supported only for worker nodes on classic infrastructure.
 - `checkpod.json`: Defines a Kubernetes API pod check that checks the total percentage of `NotReady` pods on a worker node based on the total pods that are assigned to that worker node. The check for a specific worker node counts as a failure if the total percentage of `NotReady` pods is greater than the defined `PodFailureThresholdPercent`. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running `ibmcloud ks worker reload`. For example, the default `PodFailureThresholdPercent` is 50%. If the percentage of `NotReady` pods is greater than 50% three consecutive times, the worker node is reloaded. The check runs on all namespaces by default. To restrict the check to only pods in a specified namespace, add the `Namespace` field to the check. The pod check is enabled until you set the **Enabled** field to `false` or remove the check. Note that reloading is supported only for worker nodes on classic infrastructure.
 - `checkhttp.json`: Defines an HTTP check that checks if an HTTP server that runs on your worker node is healthy. To use this check, you must deploy an HTTP server on every worker node in your cluster by using a [daemon set](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset). You must implement a health check that is available at the `/myhealth` path and that can verify whether your HTTP server is healthy. You can define other paths by changing the `Route` parameter. If the HTTP server is healthy, you must return the HTTP response code that is defined in `ExpectedStatus`. The HTTP server must be configured to listen on the private IP address of the worker node. You can find the private IP address by running `kubectl get nodes`. For example, consider two nodes in a cluster that have the private IP addresses 10.10.10.1 and 10.10.10.2. In this example, two routes are checked for a 200 HTTP response: `http://10.10.10.1:80/myhealth` and `http://10.10.10.2:80/myhealth`. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is rebooted. This action is equivalent to running `ibmcloud ks worker reboot`. The HTTP check is disabled until you set the **Enabled** field to `true`.
@@ -484,13 +484,13 @@ Review the following table for information on the individual components of healt
 | `Resource` | When the check type is `KUBEAPI`, enter the type of resource that you want Autorecovery to check. Accepted values are `NODE` or `POD`. |
 | `FailureThreshold` | Enter the threshold for the number of consecutive failed checks. When this threshold is met, Autorecovery triggers the specified corrective action. For example, if the value is 3 and Autorecovery fails a configured check three consecutive times, Autorecovery triggers the corrective action that is associated with the check. |
 |`PodFailureThresholdPercent`| When the resource type is `POD`, enter the threshold for the percentage of pods on a worker node that can be in a [NotReady](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes) state. This percentage is based on the total number of pods that are scheduled to a worker node. When a check determines that the percentage of unhealthy pods is greater than the threshold, the check counts as one failure.|
-|`CorrectiveAction`| Enter the action to run when the failure threshold is met. A corrective action runs only while no other workers are being repaired and when this worker node is not in a cool-off period from a previous action. <br>`REBOOT`: Reboots the worker node.<br>`RELOAD`: Reloads all of the necessary configurations for the worker node from a clean OS.|
+|`CorrectiveAction`| Enter the action to run when the failure threshold is met. A corrective action runs only while no other workers are being repaired and when this worker node is not in a cool-off period from a previous action. <br>`REBOOT`: Reboots the worker node.<br>`RELOAD`: Reloads all the necessary configurations for the worker node from a clean OS.|
 |`CooloffSeconds`| Enter the number of seconds Autorecovery must wait to issue another corrective action for a node that was already issued a corrective action. The cool off period starts at the time a corrective action is issued.|
 |`IntervalSeconds`| Enter the number of seconds in between consecutive checks. For example, if the value is 180, Autorecovery runs the check on each node every 3 minutes.|
 |`TimeoutSeconds`| Enter the maximum number of seconds that a check call to the database takes before Autorecovery terminates the call operation. The value for `TimeoutSeconds` must be less than the value for `IntervalSeconds`.|
 |`Port`| When the check type is `HTTP`, enter the port that the HTTP server must bind to on the worker nodes. This port must be exposed on the IP of every worker node in the cluster. Autorecovery requires a constant port number across all nodes for checking servers. Use [daemon sets](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) when you deploy a custom server into a cluster.|
 |`ExpectedStatus`| When the check type is `HTTP`, enter the HTTP server status that you expect to be returned from the check. For example, a value of 200 indicates that you expect an `OK` response from the server.|
-| `Route`| When the check type is `HTTP`, enter the path that is requested from the HTTP server. This value is typically the metrics path for the server that runs on all of the worker nodes.|
+| `Route`| When the check type is `HTTP`, enter the path that is requested from the HTTP server. This value is typically the metrics path for the server that runs on all the worker nodes.|
 | `Enabled`| Enter `true` to enable the check or `false` to disable the check.|
 |`Namespace`| Optional: To restrict `checkpod.json` to checking only pods in one namespace, add the `Namespace` field and enter the namespace.|
 {: caption="Health check components"}

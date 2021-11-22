@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, networking
 
@@ -21,13 +21,7 @@ With {{site.data.keyword.containerlong}}, you can manage in-cluster and external
 
 To quickly get started with app networking, follow this decision tree and click an option to see its setup docs:
 
-<img usemap="#networking_map" border="0" class="image" src="images/cs_network_planning_dt.png" width="700" alt="This image walks you through choosing the best networking option for your application." style="width:700px;" />
-<map name="networking_map" id="networking_map">
-    <area target="" alt="NodePort service" title="NodePort service" href="/docs/containers?topic=containers-nodeport" coords="52,300,35" shape="circle">
-    <area target="" alt="Network load balancer (NLB) service" title="Network load balancer (NLB) service" href="/docs/containers?topic=containers-loadbalancer-about" coords="309,594,46" shape="circle">
-    <area target="" alt="Ingress application load balancer (ALB) service" title="Ingress application load balancer (ALB) service" href="/docs/containers?topic=containers-ingress-about" coords="463,595,51" shape="circle">
-    <area target="" alt="Load Balancer for VPC" title="Load Balancer for VPC" href="/docs/containers?topic=containers-vpc-lbaas" coords="619,593,44" shape="circle">
-</map>
+![Choosing an app exposure service](images/cs_network_planning_dt.png "Choosing an app exposure service"){caption="Figure 1. This image walks you through choosing the best networking option for your application caption-side="bottom"}
 
 ## Understanding load balancing for apps through Kubernetes service discovery
 {: #in-cluster}
@@ -35,7 +29,8 @@ To quickly get started with app networking, follow this decision tree and click 
 Kubernetes service discovery provides apps with a network connection by using network services and a local Kubernetes proxy.
 {: shortdesc}
 
-**Services**
+### Services
+{: #app-exposure-service}
 
 All pods that are deployed to a worker node are assigned a private IP address in the 172.30.0.0/16 range and are routed between worker nodes only. To avoid conflicts, don't use this IP range on any nodes that communicate with your worker nodes. Worker nodes and pods can securely communicate on the private network by using private IP addresses. However, when a pod crashes or a worker node needs to be re-created, a new private IP address is assigned.
 
@@ -50,7 +45,8 @@ To avoid conflicts, don't use this IP range on any nodes that communicate with y
 If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} or a VPN service, you might have subnet conflicts with the default 172.30.0.0/16 range for pods and 172.21.0.0/16 range for services. You can avoid subnet conflicts when you [create a cluster](/docs/containers?topic=containers-kubernetes-service-cli#pod-subnet) by specifying a custom subnet CIDR for pods in the `--pod-subnet` flag and a custom subnet CIDR for services in the `--service-subnet` flag.
 {: tip}
 
-**`kube-proxy`**
+## kube-proxy
+{: #app-exposure-proxy}
 
 To provide basic load balancing of all TCP and UDP network traffic for services, a local Kubernetes network proxy, `kube-proxy`, runs as a daemon on each worker node in the `kube-system` namespace. `kube-proxy` uses Iptables rules, a Linux kernel feature, to direct requests to the pod behind a service equally, independent of pods' in-cluster IP addresses and the worker node that they are deployed to.
 
@@ -59,13 +55,8 @@ For example, apps inside the cluster can access a pod behind a cluster service b
 If you use a service that provides both an internal cluster IP address and an external IP address, clients outside of the cluster can send requests to the service's external public or private IP address. `kube-proxy` forwards the requests to the service's in-cluster IP address and load balances between the app pods behind the service.
 
 The following image demonstrates how Kubernetes forwards public network traffic through `kube-proxy` and NodePort, LoadBalancer, or Ingress services in {{site.data.keyword.containerlong_notm}}.
-<p>
-<figure>
-    <img src="images/cs_network_planning_ov-01.png" alt="{{site.data.keyword.containerlong_notm}} external traffic network architecture">
-    <figcaption>How Kubernetes forwards public network traffic through NodePort, LoadBalancer, and Ingress services in {{site.data.keyword.containerlong_notm}}</figcaption>
-</figure>
-</p>
 
+![{{site.data.keyword.containerlong_notm}} external traffic network architecture](images/cs_network_planning_ov-01.png "External traffic network architecture"){: caption="How Kubernetes forwards public network traffic through NodePort, LoadBalancer, and Ingress services}
 
 
 ## Understanding Kubernetes service types
@@ -76,26 +67,22 @@ The following image demonstrates how Kubernetes forwards public network traffic 
 Kubernetes supports four basic types of network services: `ClusterIP`, `NodePort`, `LoadBalancer`, and `Ingress`. `ClusterIP` services make your apps accessible internally to allow communication between pods in your cluster only. `NodePort`, `LoadBalancer`, and `Ingress` services make your apps externally accessible from the public internet or a private network.
 {: shortdesc}
 
-**[ClusterIP](https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service)**
+[ClusterIP](https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service)
+:   You can expose apps only as cluster IP services on the private network. A `clusterIP` service provides an in-cluster IP address that is accessible by other pods and services inside the cluster only. No external IP address is created for the app. To access a pod behind a cluster service, other apps in the cluster can either use the in-cluster IP address of the service or send a request by using the name of the service. When a request reaches the service, the service forwards requests to the pods equally, independent of pods' in-cluster IP addresses and the worker node that they are deployed to. Note that if you don't specify a `type` in a service's YAML configuration file, the `ClusterIP` type is created by default.
 
-You can expose apps only as cluster IP services on the private network. A `clusterIP` service provides an in-cluster IP address that is accessible by other pods and services inside the cluster only. No external IP address is created for the app. To access a pod behind a cluster service, other apps in the cluster can either use the in-cluster IP address of the service or send a request by using the name of the service. When a request reaches the service, the service forwards requests to the pods equally, independent of pods' in-cluster IP addresses and the worker node that they are deployed to. Note that if you do not specify a `type` in a service's YAML configuration file, the `ClusterIP` type is created by default.
+[NodePort](/docs/containers?topic=containers-nodeport)
+:   When you expose apps with a NodePort service, a NodePort in the range of 30000 - 32767 and an internal cluster IP address is assigned to the service. To access the service from outside the cluster, you use the public or private IP address of any worker node and the NodePort in the format `<IP_address>:<nodeport>`. However, the public and private IP addresses of the worker node are not permanent. When a worker node is removed or re-created, a new public and a new private IP address are assigned to the worker node. NodePorts are ideal for testing public or private access or providing access for only a short amount of time. **Note**: Because worker nodes in VPC clusters don't have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection.
 
-**[NodePort](/docs/containers?topic=containers-nodeport)**
+LoadBalancer
+:   The LoadBalancer service type is implemented differently depending on your cluster's infrastructure provider.
+    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters: [Network load balancer (NLB)](/docs/containers?topic=containers-loadbalancer). Every standard cluster is provisioned with four portable public and four portable private IP addresses that you can use to create a layer 4 TCP/UDP network load balancer (NLB) for your app. You can customize your NLB by exposing any port that your app requires. The portable public and private IP addresses that are assigned to the NLB are permanent and don't change when a worker node is re-created in the cluster. You can create a subdomain for your app that registers public NLB IP addresses with a DNS entry. You can also enable health check monitors on the NLB IPs for each subdomain.
+    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters: [Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas). When you create a Kubernetes LoadBalancer service for an app in your cluster, a layer 7 VPC load balancer is automatically created in your VPC outside of your cluster. The VPC load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. By default, the load balancer is also created with a hostname that you can use to access your app.
 
-When you expose apps with a NodePort service, a NodePort in the range of 30000 - 32767 and an internal cluster IP address is assigned to the service. To access the service from outside the cluster, you use the public or private IP address of any worker node and the NodePort in the format `<IP_address>:<nodeport>`. However, the public and private IP addresses of the worker node are not permanent. When a worker node is removed or re-created, a new public and a new private IP address are assigned to the worker node. NodePorts are ideal for testing public or private access or providing access for only a short amount of time. **Note**: Because worker nodes in VPC clusters do not have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection.
-
-**LoadBalancer**
-
-The LoadBalancer service type is implemented differently depending on your cluster's infrastructure provider.
-* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters: [Network load balancer (NLB)](/docs/containers?topic=containers-loadbalancer). Every standard cluster is provisioned with four portable public and four portable private IP addresses that you can use to create a layer 4 TCP/UDP network load balancer (NLB) for your app. You can customize your NLB by exposing any port that your app requires. The portable public and private IP addresses that are assigned to the NLB are permanent and do not change when a worker node is re-created in the cluster. You can create a subdomain for your app that registers public NLB IP addresses with a DNS entry. You can also enable health check monitors on the NLB IPs for each subdomain.
-* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters: [Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas). When you create a Kubernetes LoadBalancer service for an app in your cluster, a layer 7 VPC load balancer is automatically created in your VPC outside of your cluster. The VPC load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. By default, the load balancer is also created with a hostname that you can use to access your app.
-
-**[Ingress](/docs/containers?topic=containers-ingress-types)**
-
-Expose multiple apps in a cluster by setting up routing with the Ingress application load balancer (ALB). The ALB uses a secured and unique public or private entry point, an Ingress subdomain, to route incoming requests to your apps. You can use one subdomain to expose multiple apps in your cluster as services. Ingress consists of three components:
-* The Ingress resource defines the rules for how to route and load balance incoming requests for an app.
-* The ALB listens for incoming HTTP, HTTPS, or TCP service requests. It forwards requests across the apps' pods based on the rules that you defined in the Ingress resource.
-* The multizone load balancer (MZLB) for classic clusters or the VPC load balancer for VPC clusters handles all incoming requests to your apps and load balances the requests among the ALBs in the various zones. It also enables health checks for the public Ingress IP addresses.
+[Ingress](/docs/containers?topic=containers-ingress-types)
+:   Expose multiple apps in a cluster by setting up routing with the Ingress application load balancer (ALB). The ALB uses a secured and unique public or private entry point, an Ingress subdomain, to route incoming requests to your apps. You can use one subdomain to expose multiple apps in your cluster as services. Ingress consists of three components:
+    * The Ingress resource defines the rules for how to route and load balance incoming requests for an app.
+    * The ALB listens for incoming HTTP, HTTPS, or TCP service requests. It forwards requests across the apps' pods based on the rules that you defined in the Ingress resource.
+    * The multizone load balancer (MZLB) for classic clusters or the VPC load balancer for VPC clusters handles all incoming requests to your apps and load balances the requests among the ALBs in the various zones. It also enables health checks for the public Ingress IP addresses.
 
 
 The following table compares the features of each network service type.
@@ -224,13 +211,13 @@ Check out the following load balancing deployment patterns for private networkin
 When your worker nodes are connected to a private VLAN only, you can make your app externally accessible from a private network only by creating private NodePort, LoadBalancer, or Ingress services.
 {: shortdesc}
 
-If your cluster is connected to a private VLAN only and you enable the master and worker nodes to communicate through a private-only service endpoint, you cannot automatically expose your apps to a private network. You must set up a gateway appliance, such as a [VRA (Vyatta)](/docs/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or an [FSA](/docs/vmwaresolutions/services?topic=vmwaresolutions-fsa_considerations) to act as your firewall and block or allow traffic. Because your worker nodes aren't connected to a public VLAN, no public traffic is routed to NodePort, LoadBalancer, or Ingress services. However, you must open up the required ports and IP addresses in your gateway appliance firewall to permit inbound traffic to these services.
+If your cluster is connected to a private VLAN only and you enable the master and worker nodes to communicate through a private-only service endpoint, you can't automatically expose your apps to a private network. You must set up a gateway appliance, such as a [VRA (Vyatta)](/docs/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or an [FSA](/docs/vmwaresolutions/services?topic=vmwaresolutions-fsa_considerations) to act as your firewall and block or allow traffic. Because your worker nodes aren't connected to a public VLAN, no public traffic is routed to NodePort, LoadBalancer, or Ingress services. However, you must open up the required ports and IP addresses in your gateway appliance firewall to permit inbound traffic to these services.
 
 Check out the following load balancing deployment patterns for private networking:
 
 |Name|Load-balancing method|Use case|Implementation|
 |----|---------------------|--------|--------------|
-|NodePort|Port on a worker node that exposes the app on the worker's private IP address|Test private access to one app or provide access for only a short amount of time.|<ol><li><a href="/docs/containers?topic=containers-nodeport">Create a NodePort service</a>.</li><li>In your private firewall, open the port that you configured when you deployed the service to the private IP addresses for all of the worker nodes to allow traffic to. To find the port, run <code>kubectl get svc</code>. The port is in the 30000-32767 range.</li></ol>|
+|NodePort|Port on a worker node that exposes the app on the worker's private IP address|Test private access to one app or provide access for only a short amount of time.|<ol><li><a href="/docs/containers?topic=containers-nodeport">Create a NodePort service</a>.</li><li>In your private firewall, open the port that you configured when you deployed the service to the private IP addresses for all the worker nodes to allow traffic to. To find the port, run <code>kubectl get svc</code>. The port is in the 30000-32767 range.</li></ol>|
 |NLB v1.0|Basic load balancing that exposes the app with a private IP address|Quickly expose one app to a private network with a private IP address.|<ol><li><a href="/docs/containers?topic=containers-loadbalancer">Create a private NLB service</a>.</li><li>In your private firewall, open the port that you configured when you deployed the service to the NLB's private IP address.</li></ol>|
 |NLB v2.0|DSR load balancing that exposes the app with a private IP address|Expose an app that might receive high levels of traffic to a private network with an IP address.|<ol><li><a href="/docs/containers?topic=containers-loadbalancer">Create a private NLB service</a>.</li><li>In your private firewall, open the port that you configured when you deployed the service to the NLB's private IP address.</li></ol>|
 |Ingress ALB|HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules|Implement custom routing rules and SSL termination for multiple apps.|<ol><li>Configure a <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/">DNS service that is available on the private network</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li><li><a href="/docs/containers?topic=containers-ingress-types#alb-comm-create-private">Enable the private ALB and create an Ingress resource</a>.</li><li>In your private firewall, open port 80 for HTTP or port 443 for HTTPS to the IP address for the private ALB.</li><li>Customize ALB routing rules with <a href="/docs/containers?topic=containers-comm-ingress-annotations">annotations</a>.</li></ol>|

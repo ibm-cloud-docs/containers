@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, kernel
 
@@ -32,7 +32,7 @@ By default, your worker nodes have the operating system and compute hardware of 
 ### Customizing the operating system
 {: #worker-default-os}
 
-The following operating systems are available for worker nodes: **Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated)**. Your cluster cannot mix operating systems or use different operating systems.
+The following operating systems are available for worker nodes: **Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated)**. Your cluster can't mix operating systems or use different operating systems.
 {: shortdesc}
 
 To optimize your worker nodes, consider the following information.
@@ -266,7 +266,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: codeblock}
 
 7. Monitor the metrics provider pods for at least an hour. It can take several minutes for the metrics server to start collecting metrics.
-    * If metrics continue to be unavailable or incomplete, repeat these steps and increase the `cpuPerNode` size until the metrics are stable. If the load on a specific worker node is very high, the metrics provider might timeout waiting for metrics from that worker node, and continue to report unknown values for that worker node. Note that due to the timing of requests relative to other processing that occur in the `metrics-server`, you might not be able to get metrics for all of your pods all of the time.
+    * If metrics continue to be unavailable or incomplete, repeat these steps and increase the `cpuPerNode` size until the metrics are stable. If the load on a specific worker node is very high, the metrics provider might timeout waiting for metrics from that worker node, and continue to report unknown values for that worker node. Note that due to the timing of requests relative to other processing that occur in the `metrics-server`, you might not be able to get metrics for all your pods all the time.
 
 Want to tune more settings? Check out the [Kubernetes Add-on resizer configuration docs](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration){: external} for more ideas.
 {: tip}
@@ -634,7 +634,7 @@ The `portmap` plug-in for the Calico container network interface (CNI) enables y
 
 When you have a large number of services in your cluster, such as more than 500 services, or a large number of ports on services, such as more than 50 ports per service for 10 or more services, a large number of iptables rules are generated for the Calico and Kubernetes network policies for these services. A large number of iptables rules can lead to performance issues for the port map plug-in, and might prevent future updates of iptables rules or cause the `calico-node` container to restart when no lock is received to make iptables rules updates within a specified time. To prevent these performance issues, you can disable the port map plug-in by removing it from your cluster's Calico CNI configuration.
 
-If you must use `hostPorts`, do not disable the port map plug-in.
+If you must use `hostPorts`, don't disable the port map plug-in.
 {: note}
 
 

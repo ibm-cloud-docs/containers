@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, firewall, vyatta, ips
 
@@ -344,7 +344,7 @@ Before you begin
 1. Allow the IBM Cloud infrastructure private IP ranges so that you can create worker nodes in your cluster.
 
     1. Allow the appropriate IBM Cloud infrastructure private IP ranges. See [Backend (private) Network](/docs/hardware-firewall-shared?topic=hardware-firewall-shared-ibm-cloud-ip-ranges#back-end-private-network).
-    2. Allow the IBM Cloud infrastructure private IP ranges for all of the [zones](/docs/containers?topic=containers-regions-and-zones#locations) that you are using. **Note**: You must add the `166.8.0.0/14` and `161.26.0.0/16` IP ranges, the IP ranges for the `dal01`, `dal10`, `wdc04` zones, and if your cluster is in the Europe geography, the `ams01` zone. See [Service Network (on backend/private network)](/docs/hardware-firewall-shared?topic=hardware-firewall-shared-ibm-cloud-ip-ranges#service-network-on-back-endprivate-network).
+    2. Allow the IBM Cloud infrastructure private IP ranges for all the [zones](/docs/containers?topic=containers-regions-and-zones#locations) that you are using. **Note**: You must add the `166.8.0.0/14` and `161.26.0.0/16` IP ranges, the IP ranges for the `dal01`, `dal10`, `wdc04` zones, and if your cluster is in the Europe geography, the `ams01` zone. See [Service Network (on backend/private network)](/docs/hardware-firewall-shared?topic=hardware-firewall-shared-ibm-cloud-ip-ranges#service-network-on-back-endprivate-network).
 
 2. Note the private IP address for each worker node in the cluster.
 
@@ -444,7 +444,7 @@ You can allow incoming access to NodePort, load balancer, and Ingress services.
 {: shortdesc}
 
 NodePort service
-:   Open the port that you configured when you deployed the service to the public or private IP addresses for all of the worker nodes to allow traffic to. To find the port, run `kubectl get svc`. The port is in the 20000-32000 range.
+:   Open the port that you configured when you deployed the service to the public or private IP addresses for all the worker nodes to allow traffic to. To find the port, run `kubectl get svc`. The port is in the 20000-32000 range.
 
 Load balancer service
 :   Open the port that you configured when you deployed the service to the load balancer service's public or private IP address.
@@ -519,7 +519,7 @@ If you want to access services that run inside or outside {{site.data.keyword.cl
             *   `169.xx.210.xxx/28`
             *   `169.xx.178.xxx/28`
             
-    - **Individual worker node IP addresses**: If you have a small number of worker nodes that run only one app and do not need to scale, or if you want to add only one worker node, list all the worker nodes in your cluster and note the **Public IP** addresses. If your worker nodes are connected to a private network only and you want to connect to {{site.data.keyword.cloud_notm}} services by using the private cloud service endpoint, note the **Private IP** addresses instead. Only these worker nodes are added. If you delete the worker nodes or add worker nodes to the cluster, you must update your firewall accordingly.
+    - **Individual worker node IP addresses**: If you have a small number of worker nodes that run only one app and don't need to scale, or if you want to add only one worker node, list all the worker nodes in your cluster and note the **Public IP** addresses. If your worker nodes are connected to a private network only and you want to connect to {{site.data.keyword.cloud_notm}} services by using the private cloud service endpoint, note the **Private IP** addresses instead. Only these worker nodes are added. If you delete the worker nodes or add worker nodes to the cluster, you must update your firewall accordingly.
 
         ```sh
         ibmcloud ks worker ls --cluster <cluster_name_or_ID>

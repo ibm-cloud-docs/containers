@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -24,7 +24,7 @@ Continuous monitoring and logging is the key to detecting attacks on your cluste
 ## Choosing a logging solution
 {: #logging_overview}
 
-By default, logs are generated and written locally for all of the following {{site.data.keyword.containerlong_notm}} cluster components: worker nodes, containers, applications, persistent storage, Ingress application load balancer, Kubernetes API, and the `kube-system` namespace. Several logging solutions are available to collect, forward, and view these logs.
+By default, logs are generated and written locally for all the following {{site.data.keyword.containerlong_notm}} cluster components: worker nodes, containers, applications, persistent storage, Ingress application load balancer, Kubernetes API, and the `kube-system` namespace. Several logging solutions are available to collect, forward, and view these logs.
 {: shortdesc}
 
 You can choose your logging solution based on which cluster components you need to collect logs for. A common implementation is to choose a logging service that you prefer based on its analysis and interface capabilities, such as {{site.data.keyword.la_full_notm}} or a third-party service. You can then use {{site.data.keyword.at_full_notm}} to audit user activity in the cluster and back up cluster master logs to {{site.data.keyword.cos_full_notm}}.
@@ -150,7 +150,7 @@ Configure log forwarding for {{site.data.keyword.containerlong_notm}} standard c
 When you create a logging configuration for a source in your cluster to forward to an external server, a [Fluentd](https://www.fluentd.org/){: external} component is created in your cluster. Fluentd collects the logs from that source's paths and forwards the logs to an external server. The traffic from the source to the logging service on the ingestion port is encrypted.
 {: shortdesc}
 
-As of 14 November 2019, a Fluentd component is created for your cluster only if you create a logging configuration to forward logs to a syslog server. If no logging configurations for syslog exist in your cluster, the Fluentd component is removed automatically. If you do not forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, [automatic updates to Fluentd must be enabled](/docs/containers?topic=containers-update#logging-up).
+As of 14 November 2019, a Fluentd component is created for your cluster only if you create a logging configuration to forward logs to a syslog server. If no logging configurations for syslog exist in your cluster, the Fluentd component is removed automatically. If you don't forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, [automatic updates to Fluentd must be enabled](/docs/containers?topic=containers-update#logging-up).
 {: important}
 
 **What are the sources that I can configure log forwarding for?**
@@ -167,7 +167,7 @@ In the following image, you can see the location of the sources that you can con
 
 2. `container`: Information that is logged by a running container.</br>**Paths**: Anything that is written to `STDOUT` or `STDERR`.
 
-3. `application`: Information about events that occur at the application level. This could be a notification that an event took place such as a successful login, a warning about storage, or other operations that can be performed at the app level.</br>**Paths**: You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is `/usr/local/spark/work/app-0546/0/stderr` but the logs actually go to `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`, then the logs cannot be read.
+3. `application`: Information about events that occur at the application level. This could be a notification that an event took place such as a successful login, a warning about storage, or other operations that can be performed at the app level.</br>**Paths**: You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs can't be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is `/usr/local/spark/work/app-0546/0/stderr` but the logs actually go to `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`, then the logs can't be read.
 
 4. `storage`: Information about persistent storage that is set up in your cluster. Storage logs can help you set up problem determination dashboards and alerts as part of your DevOps pipeline and production releases. **Note**: The paths `/var/log/kubelet.log` and `/var/log/syslog` also contain storage logs, but logs from these paths are collected by the `kubernetes` and `worker` log sources.
     
@@ -220,12 +220,12 @@ The following table shows the different options that you have when you configure
 | Parameter | Description |
 | --- | ---------- |
 | `<cluster_name_or_ID>` | The name or ID of the cluster. |
-| `--logsource` | The source that you want to forward logs from. Accepted values are `container`, `application`, `worker`, `kubernetes`, `ingress`, and `storage`. This argument supports a comma-separated list of log sources to apply to the configuration. If you do not provide a log source, logging configurations are created for `container` and `ingress` log sources. |
+| `--logsource` | The source that you want to forward logs from. Accepted values are `container`, `application`, `worker`, `kubernetes`, `ingress`, and `storage`. This argument supports a comma-separated list of log sources to apply to the configuration. If you don't provide a log source, logging configurations are created for `container` and `ingress` log sources. |
 | `--type syslog` | The value `syslog` forwards your logs to an external server. |
-| `--namespace` | Optional: The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the `ibm-system` and `kube-system` Kubernetes namespaces. This value is valid only for the `container` log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration. |
+| `--namespace` | Optional: The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the `ibm-system` and `kube-system` Kubernetes namespaces. This value is valid only for the `container` log source. If you don't specify a namespace, then all namespaces in the cluster use this configuration. |
 | `--hostname` | Specify the hostname or IP address of the log collector service. |
-| `--port` | The ingestion port. If you do not specify a port, then the standard port `9091` is used. For syslog, specify the port of the log collector server. If you do not specify a port, then the standard port `514` is used. | 
-| `--app-containers` | Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. |
+| `--port` | The ingestion port. If you don't specify a port, then the standard port `9091` is used. For syslog, specify the port of the log collector server. If you don't specify a port, then the standard port `514` is used. | 
+| `--app-containers` | Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all the containers that contain the paths that you provided. |
 | `--app-paths` | The path on a container that the apps log to. To forward logs with source type `application`, you must provide a path. To specify more than one path, use a comma-separated list; for example, `/var/log/myApp1/*,/var/log/myApp2/*` |
 | `--syslog-protocol` | When the logging type is `syslog<`, the transport layer protocol. You can use the following protocols: `udp`, `tls`, or `tcp`. When forwarding to a rsyslog server with the `udp` protocol, logs that are over 1KB are truncated. |
 | `--ca-cert` | Required: When the logging type is `syslog` and the protocol is `tls`, the Kubernetes secret name that contains the certificate authority certificate. |
@@ -298,14 +298,14 @@ You can choose which logs to forward to your external server by filtering out sp
 | --- | ------- |
 | `<cluster_name_or_ID>` | Required: The name or ID of the cluster that you want to filter logs for. |
 | `<log_type>` | The type of logs that you want to apply the filter to. Currently `all`, `container`, and `host` are supported. |
-| `<configs>` | Optional: A comma-separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` option. | 
+| `<configs>` | Optional: A comma-separated list of your logging configuration IDs. If not provided, the filter is applied to all the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` option. | 
 | `<kubernetes_namespace>` | Optional: The Kubernetes namespace that you want to forward logs from. This flag applies only when you are using log type `container`. |
 | `<container_name>` | Optional: The name of the container from which you want to filter logs. |
 | `<logging_level>` | Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. To display your messages in JSON, append the `--output json` flag to the command. |
 | `<message>` | Optional: Filters out logs that contain a specified message that is written as a regular expression. |
 | `<filter_ID>` | Optional: The ID of the log filter. |
 | `--show-matching-configs` | Optional: Show the logging configurations that each filter applies to. |
-| `--all` | Optional: Delete all of your log forwarding filters. |
+| `--all` | Optional: Delete all your log forwarding filters. |
 {: caption="Table 2. Understanding the options for log filtering" caption-side="top"}
 
 1. Create a logging filter.
@@ -342,7 +342,7 @@ You can choose which logs to forward to your external server by filtering out sp
 
 You can verify that your configuration is set up correctly in 1 of 2 ways:
 
-- To list all of the logging configurations in a cluster:
+- To list all the logging configurations in a cluster:
     ```sh
     ibmcloud ks logging config get --cluster <cluster_name_or_ID>
     ```
@@ -366,7 +366,7 @@ ibmcloud ks logging config update --cluster <cluster_name_or_ID> --id <log_confi
 #### Deleting log forwarding
 {: #deleting-log-forwarding}
 
-You can stop forwarding logs by deleting one or all of the logging configurations for a cluster:
+You can stop forwarding logs by deleting one or all the logging configurations for a cluster:
 
 - To delete one logging configuration:
     ```sh
@@ -374,7 +374,7 @@ You can stop forwarding logs by deleting one or all of the logging configuration
     ```
     {: pre}
 
-- To delete all of the logging configurations:
+- To delete all the logging configurations:
     ```sh
     ibmcloud ks logging config rm --cluster <my_cluster> --all
     ```

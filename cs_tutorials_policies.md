@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes
 
@@ -83,7 +83,7 @@ The following image shows how the web server app is exposed to the internet by t
     ```
     {: pre}
 
-    **Example output**
+    Example output
     ```sh
     NAME                         READY     STATUS    RESTARTS   AGE       IP               NODE
     webserver-855556f688-6dbsn   1/1       Running   0          1m        172.30.xxx.xxx   10.176.48.78
@@ -127,7 +127,7 @@ The following image shows how the web server app is exposed to the internet by t
         ```
         {: pre}
 
-        **Example output**
+        Example output
         ```sh
         NAME           CLUSTER-IP       EXTERNAL-IP        PORT(S)        AGE       SELECTOR
         webserver-lb   172.21.xxx.xxx   169.xx.xxx.xxx     80:31024/TCP   2m        run=webserver
@@ -187,7 +187,7 @@ The following image shows how the web server app is exposed to the internet by t
         ```
         {: pre}
 
-        **Example output**
+        Example output
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
         kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.20.11_1513*   
@@ -198,7 +198,7 @@ The following image shows how the web server app is exposed to the internet by t
 
     3. Copy the public IP of the worker node and the node port into your text cheat sheet to use in later lessons.
 
-    4. Verify that you can access the public IP address the worker node through the node port. **Note**: Because worker nodes in VPC clusters do not have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. Then, you can use the worker node's private IP address and NodePort: `<worker_private_IP>:<NodePort>`.
+    4. Verify that you can access the public IP address the worker node through the node port. **Note**: Because worker nodes in VPC clusters don't have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. Then, you can use the worker node's private IP address and NodePort: `<worker_private_IP>:<NodePort>`.
         ```sh
         curl  --connect-timeout 10 <worker_IP>:<NodePort>
         ```
@@ -287,7 +287,7 @@ The following image shows how traffic is permitted to the NLB but not to node po
         ```
         {: pre}
 
-    **Example output**
+    Example output
     ```
     Successfully applied 1 'GlobalNetworkPolicy' resource(s)
     ```
@@ -317,7 +317,7 @@ The following image shows how traffic is permitted to the NLB but not to node po
     ```
     {: pre}
 
-    **Example output**
+    Example output
     ```sh
     Hostname: webserver-855556f688-76rkp
     Pod Information:

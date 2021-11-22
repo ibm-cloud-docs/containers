@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes
 
@@ -23,14 +23,14 @@ configure policies to authorize who can create and update pods in {{site.data.ke
 
 As a cluster admin, you want to control what happens in your cluster, especially actions that affect the cluster's security or readiness. Pod security policies can help you control usage of privileged containers, root privileges, host networking and ports, volume types, host file systems, Linux capabilities, and more.
 
-With the `PodSecurityPolicy` admission controller, pod creation is controlled by pod security policies and related role-based access control (RBAC). By default, {{site.data.keyword.containerlong_notm}} clusters do not restrict pod creation for any authenticated users or service accounts. To secure your cluster, customize the pod security policies. This customization can have unintended side-effects, so make sure to thoroughly test your customizations. To deploy apps, the user and service accounts must all be authorized by the pod security policies that are required to deploy pods.
+With the `PodSecurityPolicy` admission controller, pod creation is controlled by pod security policies and related role-based access control (RBAC). By default, {{site.data.keyword.containerlong_notm}} clusters don't restrict pod creation for any authenticated users or service accounts. To secure your cluster, customize the pod security policies. This customization can have unintended side-effects, so make sure to thoroughly test your customizations. To deploy apps, the user and service accounts must all be authorized by the pod security policies that are required to deploy pods.
 
 Trying to control which users have access to the {{site.data.keyword.containerlong_notm}}? See [Assigning cluster access](/docs/containers?topic=containers-users#users) to set {{site.data.keyword.cloud_notm}} IAM and infrastructure permissions.
 {: tip}
 
 **Are any policies set by default? What can I add?**
 
-By default, {{site.data.keyword.containerlong_notm}} configures the `PodSecurityPolicy` admission controller with [resources for {{site.data.keyword.IBM_notm}} cluster management](#ibm_psp) that you cannot delete or modify. You also cannot disable the admission controller.
+By default, {{site.data.keyword.containerlong_notm}} configures the `PodSecurityPolicy` admission controller with [resources for {{site.data.keyword.IBM_notm}} cluster management](#ibm_psp) that you can't delete or modify. You also can't disable the admission controller.
 
 Pod actions are not locked down by default. Instead, two role-based access control (RBAC) resources in the cluster authorize all administrators, users, services, and nodes to create privileged and unprivileged pods. Additional RBAC resources are included for portability with {{site.data.keyword.cloud_notm}} Private packages that are used for hybrid deployments.
 
@@ -64,14 +64,14 @@ By default, your cluster contains the following RBAC resources that enable clust
 | `restricted-psp-user` | All | `ClusterRoleBinding` | Enables cluster administrators, authenticated users, service accounts, and nodes to use `ibm-restricted-psp` pod security policy. |
 {: caption="Default RBAC resources that you can modify" caption-side="top"}
 
-You can modify these RBAC roles to remove or add administrators, users, services, or nodes to the policy. These modifications do not prevent cluster administrators, service accounts, and nodes from using the privileged pod security policy in the `kube-system`, `ibm-system`, and `ibm-operators` namespaces. Do not modify these system namespaces, which are privileged namespaces.
+You can modify these RBAC roles to remove or add administrators, users, services, or nodes to the policy. These modifications don't prevent cluster administrators, service accounts, and nodes from using the privileged pod security policy in the `kube-system`, `ibm-system`, and `ibm-operators` namespaces. Do not modify these system namespaces, which are privileged namespaces.
 
 Before you begin
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * Understand working with RBAC roles. For more information, see [Authorizing users with custom Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac) or the [Kubernetes documentation](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview){: external}.
 * Ensure you have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for all namespaces.
 
-When you modify the default configuration, you can prevent important cluster actions, such as pod deployments or cluster updates. Test your changes in a non-production cluster that other teams do not rely on.
+When you modify the default configuration, you can prevent important cluster actions, such as pod deployments or cluster updates. Test your changes in a non-production cluster that other teams don't rely on.
 {: important}
 
 ### Modifying the RBAC resources

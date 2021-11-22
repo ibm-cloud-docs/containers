@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-19"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,21 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 Review the release notes for November 2021.
 {: shortdesc}
+
+
+### 22 November 2021
+{: #22nov2021}
+{: release-note}
+
+Worker node fix pack update
+:   Changelog documentation is available for Kubernetes version [`1.22.3_1530`](/docs/containers?topic=containers-changelog#1223_1530), [`1.21.6_1540`](/docs/containers?topic=containers-changelog#1216_1540), [`1.20.12_1562`](/docs/containers?topic=containers-changelog#12012_1562), and [`1.19.16_1569`](/docs/containers?topic=containers-changelog#11916_1569).
+
+{{site.data.keyword.block_storage_is_short}} add-on.
+:   [Version 4.0.2_788](/docs/containers?topic=containers-vpc_bs_changelog) is released.
+
+Cluster autoscaler add-on.
+:   [Version 1.0.4_387](/docs/containers?topic=containers-ca_changelog) is released.
+
 
 ### 19 November 2021
 {: #19nov2021}
@@ -572,7 +587,7 @@ Customizing PVC settings for VPC Block Storage
 {: release-note}
 
 Sending custom Ingress certificates to legacy clients
-:   Added [steps](/docs/containers?topic=containers-comm-ingress-annotations) for ensuring that your custom certificate, instead of the default IBM-provided certificate, is sent by the Ingress ALB to legacy clients that do not support SNI.
+:   Added [steps](/docs/containers?topic=containers-comm-ingress-annotations) for ensuring that your custom certificate, instead of the default IBM-provided certificate, is sent by the Ingress ALB to legacy clients that don't support SNI.
 
 
 ### 16 September 2019
@@ -830,7 +845,7 @@ Ingress ALB changelog
 :   Updated the ALB `nginx-ingress` image to build 497.
 
 Troubleshooting clusters
-:   Added [troubleshooting steps](/docs/containers?topic=containers-worker_infra_errors#cs_totp) for when you cannot manage clusters and worker nodes because the time-based one-time passcode (TOTP) option is enabled for your account.
+:   Added [troubleshooting steps](/docs/containers?topic=containers-worker_infra_errors#cs_totp) for when you can't manage clusters and worker nodes because the time-based one-time passcode (TOTP) option is enabled for your account.
 
 Version changelogs
 :   Updated the changelogs for [1.14.4_1526](/docs/containers?topic=containers-changelog_archive#1144_1526), [1.13.8_1529](/docs/containers?topic=containers-changelog_archive#1138_1529), and [1.12.10_1560](/docs/containers?topic=containers-changelog_archive#11210_1560) master fix pack updates.
@@ -927,7 +942,7 @@ Tutorial to create a cluster and deploy an app
 :   Combined the tutorials for creating clusters and deploying apps into one comprehensive [tutorial](/docs/containers?topic=containers-cs_cluster_tutorial).
 
 Using existing subnets to create a cluster
-:   To [reuse subnets from an unneeded cluster when you create a new cluster](/docs/containers?topic=containers-subnets#subnets_custom), the subnets must be user-managed subnets that you manually added from an on-premises network. All subnets that were automatically ordered during cluster creation are immediately marked for deletion after you delete a cluster, and you cannot reuse these subnets to create a new cluster.
+:   To [reuse subnets from an unneeded cluster when you create a new cluster](/docs/containers?topic=containers-subnets#subnets_custom), the subnets must be user-managed subnets that you manually added from an on-premises network. All subnets that were automatically ordered during cluster creation are immediately marked for deletion after you delete a cluster, and you can't reuse these subnets to create a new cluster.
     
 
 ### 12 June 2019
@@ -1007,7 +1022,7 @@ CLI reference
 
 Troubleshooting storage: 
 :   - Added a file and block storage troubleshooting topic for [PVC pending states](/docs/containers?topic=containers-file_pvc_pending).
-    - Added a block storage troubleshooting topic for when [an app cannot access or write to PVC](/docs/containers?topic=containers-block_app_failures). 
+    - Added a block storage troubleshooting topic for when [an app can't access or write to PVC](/docs/containers?topic=containers-block_app_failures). 
 
 ### 28 May 2019
 {: #28may2019}
@@ -1017,7 +1032,7 @@ Cluster add-ons changelog
 :   Updated the [ALB `nginx-ingress` image to build 462](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
 Troubleshooting registry
-:   Added a [troubleshooting topic](/docs/containers?topic=containers-ts_image_pull_create) for when your cluster cannot pull images from {{site.data.keyword.registryfull}} due to an error during cluster creation.
+:   Added a [troubleshooting topic](/docs/containers?topic=containers-ts_image_pull_create) for when your cluster can't pull images from {{site.data.keyword.registryfull}} due to an error during cluster creation.
     
 Troubleshooting storage
 :   - Added a topic for debugging persistent storage failures.
@@ -1047,7 +1062,7 @@ Cluster planning and creation
     - [Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster)
     
 Cluster version updates
-:   Updated the [unsupported versions policy](/docs/containers?topic=containers-cs_versions) to note that you cannot update clusters if the master version is three or more versions behind the oldest supported version. You can view if the cluster is **unsupported** by reviewing the **State** field when you list clusters.
+:   Updated the [unsupported versions policy](/docs/containers?topic=containers-cs_versions) to note that you can't update clusters if the master version is three or more versions behind the oldest supported version. You can view if the cluster is **unsupported** by reviewing the **State** field when you list clusters.
 
 Istio
 :   Updated the [Istio page](/docs/containers?topic=containers-istio) to remove the limitation that Istio does not work in clusters that are connected to a private VLAN only. Added a step to the [Updating managed add-ons topic](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons) to re-create Istio gateways that use TLS sections after the update of the Istio managed add-on is complete.

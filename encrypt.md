@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, encrypt, security, kms, root key, crk
 
@@ -36,7 +36,7 @@ The following image and description outline default and optional data encryption
 4. **Worker node disks**: Attached disks are used to boot your worker node, host the container file system, and store locally pulled images. The encryption and number of disks varies by infrastructure provider.
     * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) **VPC**: See [VPC worker nodes](#worker-encryption-vpc).
     * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) **Classic**: See [Classic worker nodes](#worker-encryption-classic).
-5. **Cluster secrets**: When you deploy your app, do not store confidential information, such as credentials or keys, in the YAML configuration file, configmaps, or scripts. Instead, use [Kubernetes secrets](https://kubernetes.io/docs/concepts/configuration/secret/){: external}, which are base64 encoded by default. To manage encryption of the Kubernetes secrets in your cluster, you can enable a KMS provider. The secrets are encrypted by KMS-provided encryption until their information is used. For example, if you update a Kubernetes pod that mounts a secret, the pod requests the secret values from the master API server. The master API server asks the KMS provider to use the root key to unwrap the DEK and encode its values to base64. Then, the master API server uses the KMS provider DEK that is stored in etcd to read the secret, and sends the secret to the pod by using TLS.
+5. **Cluster secrets**: When you deploy your app, don't store confidential information, such as credentials or keys, in the YAML configuration file, configmaps, or scripts. Instead, use [Kubernetes secrets](https://kubernetes.io/docs/concepts/configuration/secret/){: external}, which are base64 encoded by default. To manage encryption of the Kubernetes secrets in your cluster, you can enable a KMS provider. The secrets are encrypted by KMS-provided encryption until their information is used. For example, if you update a Kubernetes pod that mounts a secret, the pod requests the secret values from the master API server. The master API server asks the KMS provider to use the root key to unwrap the DEK and encode its values to base64. Then, the master API server uses the KMS provider DEK that is stored in etcd to read the secret, and sends the secret to the pod by using TLS.
 
 6. **Persistent storage encryption**: You can choose to store data by [setting up file, block, object, or software-defined Portworx persistent storage](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). If you store your data on file or block storage, your data is automatically encrypted at rest. If you use object storage, your data is also encrypted during transit. With Portworx, you can choose to [set up volume encryption](/docs/containers?topic=containers-portworx#encrypt_volumes) to protect your data during transit and at rest. The IBM Cloud infrastructure storage instances save the data on encrypted disks, so your data at rest is encrypted.
 7. **Data-in-use encryption**: For select, SGX-enabled classic worker node flavors, you can use [{{site.data.keyword.datashield_short}}](#datashield) to encrypt data-in-use within the worker node.
@@ -58,11 +58,11 @@ By default, {{site.data.keyword.containerlong_notm}} supports the following KMS 
 * {{site.data.keyword.keymanagementservicefull}} for [public cloud](/docs/key-protect?topic=key-protect-getting-started-tutorial) or [on-prem](https://www.ibm.com/docs/en/cloud-private/3.2.0?topic=apis-key-management-service){: external} environments.
 * [{{site.data.keyword.hscrypto}}](https://cloud.ibm.com/catalog/services/hyper-protect-crypto-services){: external} for keep your own key (KYOK) crypto unit support.
 
-Because adding a different KMS provider requires updating the managed master default configuration, you cannot add other KMS providers to the cluster.
+Because adding a different KMS provider requires updating the managed master default configuration, you can't add other KMS providers to the cluster.
 
-You can have one KMS provider enabled in the cluster. You can switch the KMS provider, but you cannot disable KMS provider encryption after it is enabled. For example, if you enabled {{site.data.keyword.keymanagementserviceshort}} in your cluster, but want to use {{site.data.keyword.hscrypto}} instead, you can [enable](#keyprotect) {{site.data.keyword.hscrypto}} as the KMS provider.
+You can have one KMS provider enabled in the cluster. You can switch the KMS provider, but you can't disable KMS provider encryption after it is enabled. For example, if you enabled {{site.data.keyword.keymanagementserviceshort}} in your cluster, but want to use {{site.data.keyword.hscrypto}} instead, you can [enable](#keyprotect) {{site.data.keyword.hscrypto}} as the KMS provider.
 
-You cannot disable KMS provider encryption. Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and cannot be recovered. Similarly, if you disable a root key, operations that rely on reading secrets fail. Unlike deleting a root key, however, you can reenable a disabled key to make your cluster usable again.
+You can't disable KMS provider encryption. Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and can't be recovered. Similarly, if you disable a root key, operations that rely on reading secrets fail. Unlike deleting a root key, however, you can reenable a disabled key to make your cluster usable again.
 {: important}
 
 ### Controlling encryption
@@ -97,7 +97,7 @@ To use the additional {{site.data.keyword.keymanagementserviceshort}} features:
 | Clusters automatically respond if you disable, enable, or restore root keys in {{site.data.keyword.keymanagementserviceshort}}. | | Yes |
 | Disabling a root key restricts cluster functionality until you reenable the key. | Yes | Yes |
 | Deleting a root key makes the cluster unusable and unrecoverable. | Yes | Yes |
-| Root keys cannot be deleted if the key is used by a cluster. | | Yes |
+| Root keys can't be deleted if the key is used by a cluster. | | Yes |
 {: row-headers}
 {: class="comparison-table"}
 {: caption="{{site.data.keyword.keymanagementserviceshort}} features by cluster version." caption-side="top"}
@@ -121,7 +121,7 @@ Before you enable a key management service (KMS) provider in your cluster, creat
 1. Create a KMS instance, such as [{{site.data.keyword.keymanagementserviceshort}}](/docs/key-protect?topic=key-protect-provision#provision) or [{{site.data.keyword.hscrypto}}](https://cloud.ibm.com/catalog/services/hyper-protect-crypto-services){: external}.
 2. Create a customer root key (CRK) in your KMS instance, such as a [{{site.data.keyword.keymanagementserviceshort}} root key](/docs/key-protect?topic=key-protect-create-root-keys#create-root-keys) or [{{site.data.keyword.hscrypto}} root key](/docs/hs-crypto?topic=hs-crypto-create-root-keys). By default, the root key is created without an expiration date.
 
-    **{{site.data.keyword.keymanagementserviceshort}}:** Need to set an expiration date to comply with internal security policies? [Create the root key by using the API](/docs/key-protect?topic=key-protect-create-root-keys#create-root-key-api) and include the `expirationDate` parameter. **Important**: Before your root key expires, repeat these steps to update your cluster to use a new root key. When a root key expires, the cluster secrets cannot be decrypted and your cluster becomes unusable. Depending on the cluster version, the time lapse between the root key expiring and the cluster no longer being able to decrypt secrets might be about an hour, or when the master is refreshed.
+    **{{site.data.keyword.keymanagementserviceshort}}:** Need to set an expiration date to comply with internal security policies? [Create the root key by using the API](/docs/key-protect?topic=key-protect-create-root-keys#create-root-key-api) and include the `expirationDate` parameter. **Important**: Before your root key expires, repeat these steps to update your cluster to use a new root key. When a root key expires, the cluster secrets can't be decrypted and your cluster becomes unusable. Depending on the cluster version, the time lapse between the root key expiring and the cluster no longer being able to decrypt secrets might be about an hour, or when the master is refreshed.
     {: tip}
 
 3. Make sure that you have the correct permissions in {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) to enable KMS in your cluster.
@@ -129,7 +129,7 @@ Before you enable a key management service (KMS) provider in your cluster, creat
     * Ensure that the API key owner of the [API key](/docs/containers?topic=containers-access-creds#api_key_about) that is set for the region and resource group that your cluster is in has the correct permissions for the KMS provider. For more information on granting access in IAM to the KMS provider, see the [{{site.data.keyword.keymanagementserviceshort}} user access documentation](/docs/key-protect?topic=key-protect-manage-access) or [{{site.data.keyword.hscrypto}} user access documentation](/docs/hs-crypto?topic=hs-crypto-manage-access#platform-mgmt-roles).
         * For example, to create an instance and root key, you need at least the **Editor** platform and **Writer** service access roles for {{site.data.keyword.keymanagementserviceshort}} or for {{site.data.keyword.hscrypto}}.
         * If you plan to use an existing KMS instance and root key, you need at least the **Viewer** platform and **Reader** service access roles for {{site.data.keyword.keymanagementserviceshort}} or for {{site.data.keyword.hscrypto}}.
-    * **For clusters that run Kubernetes 1.18.8_1525 or later**: An additional **Reader** [service-to-service authorization policy](/docs/account?topic=account-serviceauth) between {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.keymanagementserviceshort}} is automatically created for your cluster, if the policy does not already exist. Without this policy, your cluster cannot use all the [{{site.data.keyword.keymanagementserviceshort}} features](#kms-keyprotect-features).
+    * **For clusters that run Kubernetes 1.18.8_1525 or later**: An additional **Reader** [service-to-service authorization policy](/docs/account?topic=account-serviceauth) between {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.keymanagementserviceshort}} is automatically created for your cluster, if the policy does not already exist. Without this policy, your cluster can't use all the [{{site.data.keyword.keymanagementserviceshort}} features](#kms-keyprotect-features).
     {: note}
 
 4. Consider [updating your cluster](/docs/containers?topic=containers-update) to at least version `1.18.8_1525` to get the latest [{{site.data.keyword.keymanagementserviceshort}} features](#kms-keyprotect-features).
@@ -194,7 +194,7 @@ You can enable a KMS provider or update the instance or root key that encrypts s
 
 7. Optional: [Verify that your secrets are encrypted](#verify_kms).
 
-Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and cannot be recovered. When you rotate a root key, you cannot reuse a previous root key for the same cluster.  \n \n Similarly, if you disable a root key, operations that rely on reading secrets fail. Unlike deleting a root key, however, you can reenable a disabled key to make your cluster usable again.
+Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and can't be recovered. When you rotate a root key, you can't reuse a previous root key for the same cluster.  \n \n Similarly, if you disable a root key, operations that rely on reading secrets fail. Unlike deleting a root key, however, you can reenable a disabled key to make your cluster usable again.
 {: important}
 
 ### Enabling KMS encryption for the cluster through the console
@@ -230,13 +230,13 @@ You can enable a KMS provider or update the instance or root key that encrypts s
 
 7. Optional: [Verify that your secrets are encrypted](#verify_kms).
 
-Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and cannot be recovered. When you rotate a root key, you cannot reuse a previous root key for the same cluster. \n \n Similarly, if you disable a root key, operations that rely on reading secrets fail. Unlike deleting a root key, however, you can reenable a disabled key to make your cluster usable again.
+Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and can't be recovered. When you rotate a root key, you can't reuse a previous root key for the same cluster. \n \n Similarly, if you disable a root key, operations that rely on reading secrets fail. Unlike deleting a root key, however, you can reenable a disabled key to make your cluster usable again.
 {: important}
 
 ### Rotating the root key for your cluster
 {: #kms_rotate}
 
-To rotate the root key that is used to encrypt your cluster, you can repeat the steps to enable KMS encryption from the [CLI](#kms_cli) or [console](#kms_ui). When you rotate a root key, you cannot reuse a previous root key for the same cluster.
+To rotate the root key that is used to encrypt your cluster, you can repeat the steps to enable KMS encryption from the [CLI](#kms_cli) or [console](#kms_ui). When you rotate a root key, you can't reuse a previous root key for the same cluster.
 {: shortdesc}
 
 Additionally, if your cluster runs version `1.18.8_1525` or later, you can also [rotate the root key](/docs/key-protect?topic=key-protect-rotate-keys) from your {{site.data.keyword.keymanagementserviceshort}} instance.
@@ -248,7 +248,7 @@ After you enable a KMS provider in your {{site.data.keyword.containerlong_notm}}
 {: shortdesc}
 
 Before you begin
-- Consider [updating your cluster](/docs/containers?topic=containers-update) to at least Kubernetes version `1.19`. If you do not update your cluster to this version, changes to the root key are not reported in the cluster health status and take longer to take effect in your cluster.
+- Consider [updating your cluster](/docs/containers?topic=containers-update) to at least Kubernetes version `1.19`. If you don't update your cluster to this version, changes to the root key are not reported in the cluster health status and take longer to take effect in your cluster.
 - Make sure that you have the {{site.data.keyword.cloud_notm}} IAM **Administrator** platform and **Manager** service access role for the cluster.
 
 To verify secret encryption by disabling a root key
@@ -317,7 +317,7 @@ You can manage the encryption of the local disks in your worker nodes by using a
 
 You can manage the encryption of the worker nodes by enabling a KMS provider at the worker pool level.
 
-1. Complete the same [prerequisite steps](#kms_prereqs) for enabling a KMS provider at the cluster level, including to create your own KMS instance and root key. You do not have to enable encryption at the cluster level, but you might want to so that you manage the encryption of cluster secrets.
+1. Complete the same [prerequisite steps](#kms_prereqs) for enabling a KMS provider at the cluster level, including to create your own KMS instance and root key. You don't have to enable encryption at the cluster level, but you might want to so that you manage the encryption of cluster secrets.
 2. Make sure that you have [service authorization policies in {{site.data.keyword.cloud_notm}} IAM](https://cloud.ibm.com/iam/authorizations){: external} with the following details.
     - **Required service access policy for Kubernetes Service and the KMS provider**
         1. Set the **Source service** to **Kubernetes Service**.
@@ -359,7 +359,7 @@ You can manage the encryption of the worker nodes by enabling a KMS provider at 
 
 5. Optional: [Rotate the root key](/docs/vpc?topic=vpc-vpc-key-rotation) periodically per your company's security compliance guidelines. For more information, see the [Managing encryption topic in the VPC documentation](/docs/vpc?topic=vpc-vpc-encryption-managing).
 
-    Do not delete your KMS instance. You cannot change the KMS instance that is used to encrypt the worker pool. If you disable or delete the root key, your worker nodes enter a `critical` state until you restore the root key and [reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) the worker nodes.
+    Do not delete your KMS instance. You can't change the KMS instance that is used to encrypt the worker pool. If you disable or delete the root key, your worker nodes enter a `critical` state until you restore the root key and [reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) the worker nodes.
     {: important}
 
 The encryption for the disks of the worker nodes in your worker pool are now managed by the root key in your KMS provider. If you created a cluster, the worker pool is the `default` worker pool.
@@ -372,7 +372,7 @@ The encryption for the disks of the worker nodes in your worker pool are now man
 {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that the app code and data of your containerized workloads are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.
 {: shortdesc}
 
-![Classic infrastructure provider icon.](images/icon-classic-2.svg) Applies to only classic clusters. VPC clusters cannot have bare metal worker nodes, which are required to use {{site.data.keyword.datashield_short}}.
+![Classic infrastructure provider icon.](images/icon-classic-2.svg) Applies to only classic clusters. VPC clusters can't have bare metal worker nodes, which are required to use {{site.data.keyword.datashield_short}}.
 {: note}
 
 When it comes to protecting your data, encryption is one of the most popular and effective controls. But, the data must be encrypted at each step of its lifecycle for your data to be protected. During its lifecycle, data has three phases. It can be at rest, in motion, or in use. Data at rest and in motion are generally the area of focus when you think of securing your data. But, after an application starts to run, data that is in use by CPU and memory is vulnerable to various attacks. The attacks might include malicious insiders, root users, credential compromise, OS zero-day, network intruders, and others. Taking that protection one step further, you can now encrypt data in use.

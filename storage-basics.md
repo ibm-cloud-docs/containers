@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-18"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes
 
@@ -137,7 +137,7 @@ For more information about how to statically provision storage, see:
 To dynamically provision persistent storage, you must define the type and configuration of the storage that you want.
 {: shortdesc}
 
-A [Kubernetes storage class](https://kubernetes.io/docs/concepts/storage/storage-classes/){: external} is used to abstract the underlying storage platform that is supported in {{site.data.keyword.cloud_notm}} so that you do not have to know all the details about supported sizes, IOPS, or retention policies to successfully provision persistent storage in a cluster. {{site.data.keyword.containerlong_notm}} provides pre-defined storage classes for every type of storage that is supported. Each storage class is designed to abstract the supported storage tier while giving you the choice to decide on the size, IOPS, and retention policy that you want.
+A [Kubernetes storage class](https://kubernetes.io/docs/concepts/storage/storage-classes/){: external} is used to abstract the underlying storage platform that is supported in {{site.data.keyword.cloud_notm}} so that you don't have to know all the details about supported sizes, IOPS, or retention policies to successfully provision persistent storage in a cluster. {{site.data.keyword.containerlong_notm}} provides pre-defined storage classes for every type of storage that is supported. Each storage class is designed to abstract the supported storage tier while giving you the choice to decide on the size, IOPS, and retention policy that you want.
 
 For the pre-defined storage class specifications, see the following topics.
 - [Classic File Storage](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
@@ -151,7 +151,7 @@ Not finding what you are looking for? You can also create your own customized st
 ### Customizing a storage class
 {: #customized_storageclass}
 
-If you cannot use one of the provided storage classes, you can create your own customized storage class. You might want to customize a storage class to specify configurations such as the zone, file system type, server type, or [volume binding mode](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode){: external} options (block storage only).
+If you can't use one of the provided storage classes, you can create your own customized storage class. You might want to customize a storage class to specify configurations such as the zone, file system type, server type, or [volume binding mode](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode){: external} options (block storage only).
 {: shortdesc}
 
 1. Create a customized storage class. You can start by using one of the pre-defined storage classes, or check out our sample customized storage classes.
@@ -194,7 +194,7 @@ If you cannot use one of the provided storage classes, you can create your own c
 ### Changing or updating to a different storage class
 {: #update_storageclass}
 
-When you dynamically provision persistent storage by using a storage class, you provision persistent storage with a specific configuration. You cannot change the name of the storage class or the type of storage that you provisioned. However, you have the option to scale your storage as shows in the following list.
+When you dynamically provision persistent storage by using a storage class, you provision persistent storage with a specific configuration. You can't change the name of the storage class or the type of storage that you provisioned. However, you have the option to scale your storage as shows in the following list.
 {: shortdesc}
 
 Classic File Storage
@@ -204,10 +204,10 @@ Classic Block Storage
 :    You can increase your storage size and assigned IOPS by [modifying your existing volume](/docs/containers?topic=containers-block_storage#block_change_storage_configuration).
 
 VPC Block Storage
-:    You cannot change the storage size or assigned IOPS.
+:    You can't change the storage size or assigned IOPS.
 
 {{site.data.keyword.cos_full_notm}}
-Your volume automatically scales in size and you are charged based on your actual consumption. However, you cannot change the performance attributes of your volume as they are defined in the storage class that you used to create your bucket in {{site.data.keyword.cos_full_notm}}. To change to a different storage class, you must provision a new bucket by using the storage class that you want. Then, copy your data from the old bucket to the new one.
+Your volume automatically scales in size and you are charged based on your actual consumption. However, you can't change the performance attributes of your volume as they are defined in the storage class that you used to create your bucket in {{site.data.keyword.cos_full_notm}}. To change to a different storage class, you must provision a new bucket by using the storage class that you want. Then, copy your data from the old bucket to the new one.
 
 Portworx
 You can increase your storage size by [changing your PVC specifications](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/resize-pvc/){: external}.

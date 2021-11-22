@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -28,7 +28,7 @@ From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai f
 
 - Cluster subdomains that were health checked in Cloudflare are now registered in the Akamai DNS as CNAME records. These CNAME records point to an Akamai Global Traffic Management domain that health checks the subdomains. When a client runs a DNS query for a health checked subdomain, a CNAME record is returned to the client, as opposed to Cloudflare, in which an A record was returned. If your client expects an A record for a subdomain that was health checked in Cloudflare, update your logic to accept a CNAME record.
 
-- During the migration, an Akamai Global Traffic Management (GTM) health check was automatically created for any subdomains that had a Cloudflare health check. If you previously created a Cloudflare health check for a subdomain, and you create an Akamai health check for the subdomain after the migration, the two Akamai health checks might conflict. Note that Akamai GTM configurations do not support nested subdomains. In these cases, you can use the `ibmcloud ks nlb-dns monitor disable` command to disable the Akamai health check that the migration automatically configured for your subdomain.
+- During the migration, an Akamai Global Traffic Management (GTM) health check was automatically created for any subdomains that had a Cloudflare health check. If you previously created a Cloudflare health check for a subdomain, and you create an Akamai health check for the subdomain after the migration, the two Akamai health checks might conflict. Note that Akamai GTM configurations don't support nested subdomains. In these cases, you can use the `ibmcloud ks nlb-dns monitor disable` command to disable the Akamai health check that the migration automatically configured for your subdomain.
 
 
 ## Customizing routing with annotations
@@ -39,7 +39,7 @@ To customize routing for Ingress, you can add [Kubernetes NGINX annotations](htt
 
 The following sections compares the custom {{site.data.keyword.containerlong_notm}} annotations with equivalent Kubernetes NGINX annotations. If no equivalent Kubernetes NGINX annotation exists, alternate options, such as configuring a field in the `ibm-k8s-controller-config` configmap or the `ibm-ingress-deploy-config` configmap, are listed.
 
-Kubernetes NGINX annotations are always applied to all service paths in the resource, and you cannot specify service names within the annotations.
+Kubernetes NGINX annotations are always applied to all service paths in the resource, and you can't specify service names within the annotations.
 {: note}
 
 ### Add server port to host header
@@ -491,7 +491,7 @@ nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "true"
 ```
 {: screen}
 
-Note that mutual authentication cannot be applied to custom ports and must be applied to the HTTPS port.
+Note that mutual authentication can't be applied to custom ports and must be applied to the HTTPS port.
 
 
 ### Proxy buffer size
@@ -695,7 +695,7 @@ nginx.ingress.kubernetes.io/configuration-snippet: |
 ```
 {: screen}
 
-The Kubernetes Ingress controller adds the `Secure` and `HttpOnly` attributes to the sticky cookies by default, which cannot be changed.
+The Kubernetes Ingress controller adds the `Secure` and `HttpOnly` attributes to the sticky cookies by default, which can't be changed.
 
 
 ### SSL services support
@@ -863,7 +863,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 
 2. Create a configmap to customize the Ingress deployment.
 
-    1. Create a YAML file for an `ibm-ingress-deploy-config` configmap. For each ALB ID, you can specify one or more of the following optional settings. Note that you can specify only the settings that you want to configure, and do not need to specify all of the settings.
+    1. Create a YAML file for an `ibm-ingress-deploy-config` configmap. For each ALB ID, you can specify one or more of the following optional settings. Note that you can specify only the settings that you want to configure, and don't need to specify all the settings.
         ```yaml
         apiVersion: v1
         kind: ConfigMap
@@ -925,7 +925,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
         ```
         {: pre}
 
-    2. In the `spec.ports` section, add the ports that you want to open. By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, do not remove them from this file. Any port that is not specified is closed. Do not specify a `nodePort`. After you add the port and apply the changes, a `nodePort` is automatically assigned
+    2. In the `spec.ports` section, add the ports that you want to open. By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, don't remove them from this file. Any port that is not specified is closed. Do not specify a `nodePort`. After you add the port and apply the changes, a `nodePort` is automatically assigned
             
         ```sh
         ...
@@ -1064,7 +1064,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
 
     3. Optional: If your app supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy) in addition to or instead of the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy), add the `nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2-<App_ID_service_instance_name>/start?rd=$escaped_request_uri` annotation. Note that all letters in the service instance name must specified as lowercase.
         * If you specify this annotation, and the authentication for a client fails, the client is redirected to the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance. This OAuth2-Proxy, which acts as the OIDC Relying Party (RP) for {{site.data.keyword.appid_short_notm}}, redirects the client to your {{site.data.keyword.appid_short_notm}} login page for authentication.
-        * If you do not specify this annotation, a client must authenticate with a valid bearer token. If the authentication for a client fails, the client's request is rejected with a `401 Unauthorized` error message.
+        * If you don't specify this annotation, a client must authenticate with a valid bearer token. If the authentication for a client fails, the client's request is rejected with a `401 Unauthorized` error message.
 
 6. Re-apply your Ingress resources to enforce {{site.data.keyword.appid_short_notm}} authentication. After an Ingress resource with the appropriate annotations is re-applied, the ALB OAuth Proxy add-on deploys an OAuth2-Proxy deployment, creates a service for the deployment, and creates a separate Ingress resource to configure routing for the OAuth2-Proxy deployment messages. Do not delete these add-on resources.
     ```sh
@@ -1307,10 +1307,10 @@ To edit the configmap to enable SSL protocols and ciphers:
 ## Sending your custom certificate to legacy clients
 {: #default_server_cert}
 
-If you have legacy devices that do not support Server Name Indication (SNI) and you use a [custom TLS certificate in your Ingress resources](/docs/containers?topic=containers-ingress-types#alb-comm-create), you must edit the ALB's server settings to use your custom TLS certificate and custom TLS secret.
+If you have legacy devices that don't support Server Name Indication (SNI) and you use a [custom TLS certificate in your Ingress resources](/docs/containers?topic=containers-ingress-types#alb-comm-create), you must edit the ALB's server settings to use your custom TLS certificate and custom TLS secret.
 {: shortdesc}
 
-When you create a classic cluster, a Let's Encrypt certificate is generated for the default Ingress secret that IBM provides. If you create a custom secret in your cluster and specify this custom secret for TLS termination in your Ingress resources, the Ingress ALB sends the certificate for your custom secret to the client instead of the default Let's Encrypt certificate. However, if a client does not support SNI, the Ingress ALB defaults to the Let's Encrypt certificate because the default secret is listed in the ALB's default server settings. To send your custom certificate to devices that do not support SNI, complete the following steps to change the ALB's default server settings to your custom secret.
+When you create a classic cluster, a Let's Encrypt certificate is generated for the default Ingress secret that IBM provides. If you create a custom secret in your cluster and specify this custom secret for TLS termination in your Ingress resources, the Ingress ALB sends the certificate for your custom secret to the client instead of the default Let's Encrypt certificate. However, if a client does not support SNI, the Ingress ALB defaults to the Let's Encrypt certificate because the default secret is listed in the ALB's default server settings. To send your custom certificate to devices that don't support SNI, complete the following steps to change the ALB's default server settings to your custom secret.
 
 1. Edit the `alb-default-server` Ingress resource.
     ```sh
@@ -1427,7 +1427,7 @@ Change the default setting for how many simultaneous connections the NGINX worke
 
 Each ALB has NGINX worker processes that process the client connections and communicate with the upstream servers for the apps that the ALB exposes. By changing the number of worker processes per ALB or how many connections the worker processes can handle, you can manage the maximum number of clients that an ALB can handle. Calculate your maximum client connections with the following formula: `maximum clients = worker_processes * worker_connections`.
 
-* The `max-worker-connections` field sets the maximum number of simultaneous connections that can be handled by the NGINX worker processes for one ALB. The default value is `16384`. Note that the `max-worker-connections` parameter includes all connections that the ALB proxies, not just connections with clients. Additionally, the actual number of simultaneous connections cannot exceed the [limit on the maximum number of open files](#max-worker-files), which is set by the `max-worker-open-files` parameter. If you set the value of `max-worker-connections` to `0`, the value for `max-worker-open-files` is used instead.
+* The `max-worker-connections` field sets the maximum number of simultaneous connections that can be handled by the NGINX worker processes for one ALB. The default value is `16384`. Note that the `max-worker-connections` parameter includes all connections that the ALB proxies, not just connections with clients. Additionally, the actual number of simultaneous connections can't exceed the [limit on the maximum number of open files](#max-worker-files), which is set by the `max-worker-open-files` parameter. If you set the value of `max-worker-connections` to `0`, the value for `max-worker-open-files` is used instead.
 * The `worker-processes` field sets the maximum number of NGINX worker processes for one ALB. The default value is `"auto"`, which indicates that the number of worker processes matches the number of cores on the worker node where the ALB is deployed. You can change this value to a number if your worker processes must perform high levels of I/0 operations.
 
 1. Edit the `ibm-k8s-controller-config` configmap.

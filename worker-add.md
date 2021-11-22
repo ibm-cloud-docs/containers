@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, delete
 
@@ -104,7 +104,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     ```
     {: screen}
 
-2. For each zone, note the ID of VPC subnet that you want to use for the worker pool. If you do not have a VPC subnet in the zone, [create a VPC subnet](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-subnet-cli). VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256.
+2. For each zone, note the ID of VPC subnet that you want to use for the worker pool. If you don't have a VPC subnet in the zone, [create a VPC subnet](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-subnet-cli). VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256.
     ```sh
     ibmcloud ks subnets --zone <zone> --provider vpc-gen2 --vpc-id <VPC_ID>
     ```
@@ -171,7 +171,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the new zone and considered for future workload scheduling. {{site.data.keyword.containerlong_notm}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.
 
-If you have multiple worker pools in your cluster, add the zone to all of them so that worker nodes are spread evenly across your cluster. Note that when you add worker nodes to your cluster, the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
+If you have multiple worker pools in your cluster, add the zone to all them so that worker nodes are spread evenly across your cluster. Note that when you add worker nodes to your cluster, the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
 
 **Before you begin**: Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/openshift?topic=openshift-users).
 
@@ -199,7 +199,7 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
     ```
     {: pre}
 
-3. List available VPC subnets for each zone that you want to add. If you do not have a VPC subnet in the zone, [create a VPC subnet](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-subnet-cli). VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IP addresses that a VPC subnet has later.
+3. List available VPC subnets for each zone that you want to add. If you don't have a VPC subnet in the zone, [create a VPC subnet](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-subnet-cli). VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You can't change the number of IP addresses that a VPC subnet has later.
     ```sh
     ibmcloud ks subnets --zone <zone> --provider vpc-gen2 --vpc-id <VPC_ID>
     ```
@@ -268,7 +268,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     ```
     {: screen}
 
-2. For each zone, list available private and public VLANs. Note the private and the public VLAN that you want to use. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
+2. For each zone, list available private and public VLANs. Note the private and the public VLAN that you want to use. If you don't have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
     ```sh
     ibmcloud ks vlan ls --zone <zone>
     ```
@@ -329,12 +329,12 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the new zone and considered for future workload scheduling. {{site.data.keyword.containerlong_notm}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.
 
-If you have multiple worker pools in your cluster, add the zone to all of them so that worker nodes are spread evenly across your cluster. Note that when you add worker nodes to your cluster, the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
+If you have multiple worker pools in your cluster, add the zone to all them so that worker nodes are spread evenly across your cluster. Note that when you add worker nodes to your cluster, the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
 
 Before you begin:
 *  To add a zone to your worker pool, your worker pool must be in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones-mz). If your worker pool is not in a multizone-capable zone, consider [creating a new worker pool](#add_pool).
 *  Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/openshift?topic=openshift-users).
-*  In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
+*  In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
 
 To add a zone with worker nodes to your worker pool:
 
@@ -344,7 +344,7 @@ To add a zone with worker nodes to your worker pool:
     ```
     {: pre}
 
-2. List available VLANs in that zone. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
+2. List available VLANs in that zone. If you don't have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
     ```sh
     ibmcloud ks vlan ls --zone <zone>
     ```
@@ -358,7 +358,7 @@ To add a zone with worker nodes to your worker pool:
 
 4. Add the zone to your worker pool. If you have multiple worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones.
 
-    A private and a public VLAN must exist before you can add a zone to multiple worker pools. If you do not have a private and a public VLAN in that zone, add the zone to one worker pool first so that a private and a public VLAN is created for you. Then, you can add the zone to other worker pools by specifying the private and the public VLAN that was created for you.
+    A private and a public VLAN must exist before you can add a zone to multiple worker pools. If you don't have a private and a public VLAN in that zone, add the zone to one worker pool first so that a private and a public VLAN is created for you. Then, you can add the zone to other worker pools by specifying the private and the public VLAN that was created for you.
     {: note}
 
     If you want to use different VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.
@@ -421,7 +421,7 @@ You can span your classic gateway-enabled cluster across multiple zones within o
 
 When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the new zone and considered for future workload scheduling. {{site.data.keyword.containerlong_notm}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.
 
-If you have multiple worker pools in your cluster, add the zone to all of them so that worker nodes are spread evenly across your cluster. Note that when you add worker nodes to your cluster, the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
+If you have multiple worker pools in your cluster, add the zone to all them so that worker nodes are spread evenly across your cluster. Note that when you add worker nodes to your cluster, the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
 
 Before you begin:
 * To add a zone to your worker pools, your compute and gateway worker pools must be in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones-mz). If your worker pools are not in a multizone-capable zone, consider [creating a new compute worker pool](#gateway_compute) and [creating a new gateway worker pool](#gateway_replace).
@@ -435,7 +435,7 @@ To add a zone to your worker pool:
     ```
     {: pre}
 
-2. List available VLANs in that zone. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
+2. List available VLANs in that zone. If you don't have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
     ```sh
     ibmcloud ks vlan ls --zone <zone>
     ```
@@ -450,7 +450,7 @@ To add a zone to your worker pool:
 4. Add the zone to your compute and gateway worker pools. Compute worker pools are connected to a private VLAN only, but gateway worker pools are connected to both a public and a private VLAN.
     1. Add the zone to your compute worker pools. If you have multiple compute worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones.
 
-        A private VLAN must exist before you can add a zone to multiple compute worker pools. If you do not have a private VLAN in that zone, add the zone to one worker pool first so that a private VLAN is created for you. Then, you can add the zone to other compute worker pools by specifying the private VLAN that was created for you.
+        A private VLAN must exist before you can add a zone to multiple compute worker pools. If you don't have a private VLAN in that zone, add the zone to one worker pool first so that a private VLAN is created for you. Then, you can add the zone to other compute worker pools by specifying the private VLAN that was created for you.
         {: note}
 
         If you want to use different private VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLAN that you specify, but the VLAN for any existing worker nodes are not changed.
@@ -463,7 +463,7 @@ To add a zone to your worker pool:
 
     2. Add the zone to your gateway worker pools. If you have multiple gateway worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones.
 
-        A public VLAN and private VLAN must exist before you can add a zone to multiple compute worker pools. If you do not have a public VLAN and private VLAN in that zone, add the zone to one worker pool first so that public and private VLANs are created for you. Then, you can add the zone to other compute worker pools by specifying the public VLAN and private VLAN that was created for you.
+        A public VLAN and private VLAN must exist before you can add a zone to multiple compute worker pools. If you don't have a public VLAN and private VLAN in that zone, add the zone to one worker pool first so that public and private VLANs are created for you. Then, you can add the zone to other compute worker pools by specifying the public VLAN and private VLAN that was created for you.
         {: note}
 
         If you want to use different private VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.
@@ -497,7 +497,7 @@ To add a zone to your worker pool:
 
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/openshift?topic=openshift-users).
 
-1. Retrieve all of the existing **Worker Zones** of your cluster.
+1. Retrieve all the existing **Worker Zones** of your cluster.
     ```sh
     ibmcloud ks cluster get --cluster <cluster_name_or_ID>
     ```
@@ -511,7 +511,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     ```
     {: screen}
 
-2. For each zone, list available private VLANs. Note the private VLAN that you want to use. If you do not have a private VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
+2. For each zone, list available private VLANs. Note the private VLAN that you want to use. If you don't have a private VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
     ```sh
     ibmcloud ks vlan ls --zone <zone>
     ```
@@ -564,7 +564,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/openshift?topic=openshift-users).
 
-1. Retrieve all of the existing **Worker Zones** of your cluster.
+1. Retrieve all the existing **Worker Zones** of your cluster.
     ```sh
     ibmcloud ks cluster get --cluster <cluster_name_or_ID>
     ```
@@ -578,7 +578,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     ```
     {: screen}
 
-2. For each zone, list available private and public VLANs. Note the private and the public VLAN that you want to use. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
+2. For each zone, list available private and public VLANs. Note the private and the public VLAN that you want to use. If you don't have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
     ```sh
     ibmcloud ks vlan ls --zone <zone>
     ```
@@ -667,7 +667,7 @@ The server instance that you attach to your cluster's network must have the foll
 * Accessible on the private network only
 * Stores the public key of an SSH key for the root user
 
-If you have an existing virtual or bare metal server that meets all of these requirements, you can skip steps 2 - 6. Otherwise, follow steps 2 - 6 to create a new virtual or bare metal server.
+If you have an existing virtual or bare metal server that meets all these requirements, you can skip steps 2 - 6. Otherwise, follow steps 2 - 6 to create a new virtual or bare metal server.
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Include the `--admin` and `--network` options with the `ibmcloud ks cluster config` command. `--admin` downloads the keys to access your infrastructure portfolio. `--network` downloads the Calico network configuration file for your cluster.
 
@@ -714,7 +714,7 @@ If you have an existing virtual or bare metal server that meets all of these req
 
 5. Use the {{site.data.keyword.cloud_notm}} console to create a [virtual server](https://cloud.ibm.com/gen1/infrastructure/provision/vs) or a [bare metal server](https://cloud.ibm.com/gen1/infrastructure/provision/bm). The following options and values are required for a virtual or bare metal server that can be attached to a gateway-enabled cluster, but for the other options you can select whichever values you prefer. For example, you can choose any type of virtual or bare metal server as long as the following options and values are selected.
     * For **Location**, select the same zone that you found in step 2.
-    * For **SSH keys**, select the name of an SSH key that you stored in {{site.data.keyword.cloud_notm}}. An SSH key is required for your cluster to access the VSI. If you do not have an SSH key stored in {{site.data.keyword.cloud_notm}}, click **Add key**.
+    * For **SSH keys**, select the name of an SSH key that you stored in {{site.data.keyword.cloud_notm}}. An SSH key is required for your cluster to access the VSI. If you don't have an SSH key stored in {{site.data.keyword.cloud_notm}}, click **Add key**.
     * For **Image**, select CentOS 7.x, Red Hat 7.x, or Ubuntu 18.04.
     * Select private-only networking.
         * Virtual: For **Uplink port speeds**, select a **Private only** option.
@@ -1066,7 +1066,7 @@ Before you begin: [Install and configure the Calico CLI.](/docs/containers?topic
 If you have a cluster that was created before worker pools were introduced, you can use the deprecated commands to add stand-alone worker nodes.
 {: deprecated}
 
-If you have a cluster that was created after worker pools were introduced, you cannot add stand-alone worker nodes. Instead, you can [create a worker pool](#add_pool), [resize an existing worker pool](#resize_pool), or [add a zone to a worker pool](#add_zone) to add worker nodes to your cluster.
+If you have a cluster that was created after worker pools were introduced, you can't add stand-alone worker nodes. Instead, you can [create a worker pool](#add_pool), [resize an existing worker pool](#resize_pool), or [add a zone to a worker pool](#add_zone) to add worker nodes to your cluster.
 {: note}
 
 1. List available zones and pick the zone where you want to add worker nodes.
@@ -1174,12 +1174,12 @@ Do not include personal information in your tags. Learn more about [securing you
 
 Choose among the following options:
 
-*   [Create a cluster in the console](/docs/containers?topic=containers-clusters) with a tag. You cannot create a cluster with a tag in the CLI.
+*   [Create a cluster in the console](/docs/containers?topic=containers-clusters) with a tag. You can't create a cluster with a tag in the CLI.
 *   Add tags to an existing cluster in the console or CLI.
 
 | Adding tags to clusters with the console. |
 |:-----------------|
-| <p><ol><li>Log in to the <a href="https://cloud.ibm.com/kubernetes/clusters"><strong>{{site.data.keyword.cloud_notm}} clusters</strong> console</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li><li>Select a cluster with existing tags.</li><li>Next to the cluster name and status, click the <strong>Edit tags</strong> pencil icon.<p class="note">If your cluster does not have any existing tags, you do not have an <strong>Edit tags</strong> pencil icon. Instead, use the <a href="/docs/account?topic=account-tag">resource list</a> or CLI.</p></li><li>Enter the tag that you want to add to your cluster. To assign a key-value pair, use a colon such as <code>costctr:1234</code>.</li></ol></p> |
+| <p><ol><li>Log in to the <a href="https://cloud.ibm.com/kubernetes/clusters"><strong>{{site.data.keyword.cloud_notm}} clusters</strong> console</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</li><li>Select a cluster with existing tags.</li><li>Next to the cluster name and status, click the <strong>Edit tags</strong> pencil icon.<p class="note">If your cluster does not have any existing tags, you don't have an <strong>Edit tags</strong> pencil icon. Instead, use the <a href="/docs/account?topic=account-tag">resource list</a> or CLI.</p></li><li>Enter the tag that you want to add to your cluster. To assign a key-value pair, use a colon such as <code>costctr:1234</code>.</li></ol></p> |
 {: caption="Adding tags to clusters with the console." caption-side="top"}
 {: #tags-1}
 {: tab-title="Console"}
@@ -1222,7 +1222,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 3. Label the worker pool with a `key=value` label. When you set a worker pool label, all the existing custom labels are replaced. To keep any existing custom labels on the worker pool, include those labels with this flag.
 
-    You can also rename an existing label by assigning the same key a new value. However, do not modify the worker pool or worker node labels that are provided by default because these labels are required for worker pools to function properly. Modify only custom labels that you previously added.
+    You can also rename an existing label by assigning the same key a new value. However, don't modify the worker pool or worker node labels that are provided by default because these labels are required for worker pools to function properly. Modify only custom labels that you previously added.
     {: important}
 
     ```sh

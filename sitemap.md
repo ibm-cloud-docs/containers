@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-19"
+lastupdated: "2021-11-22"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [November 2021](/docs/containers?topic=containers-iks-release#release-nov-2021)
+
+    * [22 November 2021](/docs/containers?topic=containers-iks-release#22nov2021)
 
     * [19 November 2021](/docs/containers?topic=containers-iks-release#19nov2021)
 
@@ -1897,6 +1899,10 @@ subcollection: containers
 
 * [Understanding load balancing for apps through Kubernetes service discovery](/docs/containers?topic=containers-cs_network_planning#in-cluster)
 
+    * [Services](/docs/containers?topic=containers-cs_network_planning#app-exposure-service)
+
+* [kube-proxy](/docs/containers?topic=containers-cs_network_planning#app-exposure-proxy)
+
 * [Understanding Kubernetes service types](/docs/containers?topic=containers-cs_network_planning#external)
 
 * [Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#public_access)
@@ -3210,6 +3216,8 @@ subcollection: containers
 
 * [Version 1.22 changelog](/docs/containers?topic=containers-changelog#122_changelog)
 
+    * [Changelog for worker node fix pack 1.22.3_1530, released 22 November 2021](/docs/containers?topic=containers-changelog#1223_1530)
+
     * [Changelog for worker node fix pack 1.22.2_1528, released 10 November 2021](/docs/containers?topic=containers-changelog#1222_1528)
 
     * [Changelog for worker node fix pack 1.22.2_1527, released 25 October 2021](/docs/containers?topic=containers-changelog#1222_1527)
@@ -3221,6 +3229,8 @@ subcollection: containers
     * [Changelog for master fix pack 1.22.2_1522 and worker node fix pack 1.22.2_1523, released 29 Sept 2021](/docs/containers?topic=containers-changelog#1222_1522_and_1222_1523)
 
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog#121_changelog)
+
+    * [Changelog for worker node fix pack 1.21.6_1540, released 22 November 2021](/docs/containers?topic=containers-changelog#1216_1540)
 
     * [Changelog for worker node fix pack 1.21.5_1538, released 10 November 2021](/docs/containers?topic=containers-changelog#1215_1538)
 
@@ -3259,6 +3269,8 @@ subcollection: containers
     * [Changelog for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1519)
 
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+
+    * [Changelog for worker node fix pack 1.20.12_1562, released 22 November 2021](/docs/containers?topic=containers-changelog#12012_1562)
 
     * [Changelog for worker node fix pack 1.20.11_1560, released 10 November 2021](/docs/containers?topic=containers-changelog#12011_1560)
 
@@ -3323,6 +3335,8 @@ subcollection: containers
     * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 
 * [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+
+    * [Changelog for worker node fix pack 1.19.16_1569, released 22 November 2021](/docs/containers?topic=containers-changelog#11916_1569)
 
     * [Changelog for worker node fix pack 1.19.15_1567, released 10 November 2021](/docs/containers?topic=containers-changelog#11915_1567)
 
@@ -3478,59 +3492,59 @@ subcollection: containers
 
 * [Version 0.49.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_49_0)
 
-    * [Version 0.49.3_1830_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.49.3_1830_iks)
+    * [Version 0.49.3_1830_iks, released on 19 November 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.49.3_1830_iks)
 
-    * [Version 0.49.3_1745_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.49.3_1745_iks)
+    * [Version 0.49.3_1745_iks, released on 20 October 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.49.3_1745_iks)
 
 * [Version 0.48.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_48_0)
 
-    * [Version 0.48.1_1698_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1698_iks)
+    * [Version 0.48.1_1698_iks, released on 22 September 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1698_iks)
 
-    * [Version 0.48.1_1613_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1613_iks)
+    * [Version 0.48.1_1613_iks, released on 09 September 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1613_iks)
 
-    * [Version 0.48.1_1579_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1579_iks)
+    * [Version 0.48.1_1579_iks, released on 01 September 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1579_iks)
 
-    * [Version 0.48.1_1541_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1541_iks)
+    * [Version 0.48.1_1541_iks, released on 23 August 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1541_iks)
 
-    * [Version 0.48.1_1465_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1465_iks)
+    * [Version 0.48.1_1465_iks, released on 10 August 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.48.1_1465_iks)
 
 * [Version 0.47.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_47_0)
 
-    * [Version 0.47.0_1614_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1614_iks)
+    * [Version 0.47.0_1614_iks, released on 09 September 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1614_iks)
 
-    * [Version 0.47.0_1578_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1578_iks)
+    * [Version 0.47.0_1578_iks, released on 01 September 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1578_iks)
 
-    * [Version 0.47.0_1540_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1540_iks)
+    * [Version 0.47.0_1540_iks, released on 23 August 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1540_iks)
 
-    * [Version 0.47.0_1480_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1480_iks)
+    * [Version 0.47.0_1480_iks, released on 10 August 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1480_iks)
 
-    * [Version 0.47.0_1434_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1434_iks)
+    * [Version 0.47.0_1434_iks, released on 02 August 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1434_iks)
 
-    * [Version 0.47.0_1376_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1376_iks)
+    * [Version 0.47.0_1376_iks, released on 06 July 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1376_iks)
 
-    * [Version 0.47.0_1341_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1341_iks)
+    * [Version 0.47.0_1341_iks, released on 21 June 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.47.0_1341_iks)
 
 * [Version 0.45.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_45_0)
 
-    * [Version 0.45.0_1482_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.45.0_1482_iks)
+    * [Version 0.45.0_1482_iks, released on 10 August 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.45.0_1482_iks)
 
-    * [Version 0.45.0_1435_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.45.0_1435_iks)
+    * [Version 0.45.0_1435_iks, released on 02 August 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.45.0_1435_iks)
 
-    * [Version 0.45.0_1329_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.45.0_1329_iks)
+    * [Version 0.45.0_1329_iks, released on 21 June 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.45.0_1329_iks)
 
-    * [Version regression](/docs/containers?topic=containers-cluster-add-ons-changelog#regression)
+    * [Version regression, released on 25 May 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#regression)
 
-    * [Version 0.45.0_1228_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.45.0_1228_iks)
+    * [Version 0.45.0_1228_iks, released on 23 April 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.45.0_1228_iks)
 
 * [Version 0.43.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_43_0)
 
-    * [Version 0.43.0_1697_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.43.0_1697_iks)
+    * [Version 0.43.0_1697_iks, released on 22 September 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.43.0_1697_iks)
 
-    * [Version 0.43.0_1612_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.43.0_1612_iks)
+    * [Version 0.43.0_1612_iks, released on 09 September 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.43.0_1612_iks)
 
-    * [Version 0.43.0_1580_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.43.0_1580_iks)
+    * [Version 0.43.0_1580_iks, released on 01 September 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.43.0_1580_iks)
 
-    * [Version 0.43.0_1539_iks](/docs/containers?topic=containers-cluster-add-ons-changelog#0.43.0_1539_iks)
+    * [Version 0.43.0_1539_iks, released on 23 August 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.43.0_1539_iks)
 
 * [Archive](/docs/containers?topic=containers-cluster-add-ons-changelog#archive-unsupported)
 
@@ -3712,6 +3726,8 @@ subcollection: containers
 
 * [Version 1.0.4](/docs/containers?topic=containers-ca_changelog#0104_ca_addon)
 
+    * [Changelog for patch update 1.0.4_387, released 22 November 2021](/docs/containers?topic=containers-ca_changelog#10387_ca)
+
     * [Changelog for patch update 1.0.4_374, released 7 October 2021](/docs/containers?topic=containers-ca_changelog#104374_ca)
 
 * [Version 1.0.3](/docs/containers?topic=containers-ca_changelog#0103_ca_addon)
@@ -3751,6 +3767,8 @@ subcollection: containers
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
 
 * [Version 4.0](/docs/containers?topic=containers-vpc_bs_changelog#0400_is_block)
+
+    * [Changelog for version 4.0.2_788, released 22 November 2021](/docs/containers?topic=containers-vpc_bs_changelog#0400788_is_block_relnote)
 
     * [Changelog for version 4.0.1_780, released 06 October 2021](/docs/containers?topic=containers-vpc_bs_changelog#0400780_is_block_relnote)
 
@@ -3814,7 +3832,23 @@ subcollection: containers
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
 
+    * [Version 2.0.0_755, released on 19 November 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_755)
+
+    * [Version 2.0.0_704, released on 15 September 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_704)
+
 * [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0)
+
+    * [Version 1.0.0_756, released on 19 November 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_756)
+
+    * [Version 1.0.0_684, released on 23 August 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_684)
+
+    * [Version 1.0.0_638, released on 10 August 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_638)
+
+    * [Version 1.0.0_618, released on 17 June 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_618)
+
+    * [Version 1.0.0_590, released on 19 April 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_590)
+
+    * [Version 1.0.0_574, released on 30 March 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_574)
 
 [Archived Kubernetes version changelogs](/docs/containers?topic=containers-changelog_archive#changelog_archive)
 
@@ -4930,7 +4964,7 @@ subcollection: containers
 
 * [Firewall prevents running CLI commands](/docs/containers?topic=containers-ts_clis#ts_firewall_clis)
 
-* [`kubectl` commands do not work](/docs/containers?topic=containers-ts_clis#kubectl_fails)
+* [`kubectl` commands don't work](/docs/containers?topic=containers-ts_clis#kubectl_fails)
 
 * [`kubectl` commands time out](/docs/containers?topic=containers-ts_clis#exec_logs_fail)
 
@@ -4958,9 +4992,9 @@ subcollection: containers
 
 [Classic: Why can't I access resources in my cluster?](/docs/containers?topic=containers-cs_firewall#cs_firewall)
 
-[Why doesn't the `kubectl exec` command automatically timeout?](/docs/containers?topic=containers-additional-link-info#why-doesn't-the-kubectl-exec-command-automatically-timeout?)
+[Why doesn't the `kubectl exec` command automatically timeout?](/docs/containers?topic=containers-ts-kubectl-exec-timeout#ts-kubectl-exec-timeout)
 
-* [Links to additional information](/docs/containers?topic=containers-additional-link-info#additional-link-info)
+* [Links to additional information](/docs/containers?topic=containers-ts-kubectl-exec-timeout#additional-link-info)
 
 [Why does my cluster master status say it is approaching its resource limit?](/docs/containers?topic=containers-master_resource_limit#master_resource_limit)
 
@@ -5031,7 +5065,7 @@ subcollection: containers
 
 * [Hard reboot](/docs/containers?topic=containers-common_worker_nodes_issues#hard-reboot)
 
-* [Instance cannot be found](/docs/containers?topic=containers-common_worker_nodes_issues#instance-not-found)
+* [Instance can't be found](/docs/containers?topic=containers-common_worker_nodes_issues#instance-not-found)
 
 [Why can't I create or delete worker nodes?](/docs/containers?topic=containers-worker_infra_errors#worker_infra_errors)
 

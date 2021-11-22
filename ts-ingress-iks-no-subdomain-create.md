@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -224,7 +224,7 @@ If the Ingress subdomain and secret are still unavailable after your cluster is 
     ```
     {: screen}
 
-5. Check again whether the Ingress subdomain and secret are created. If they are not available, but you verified that all of the components in steps 1 - 4 exist, [review ways to get help](/docs/containers?topic=containers-get-help).
+5. Check again whether the Ingress subdomain and secret are created. If they are not available, but you verified that all the components in steps 1 - 4 exist, [review ways to get help](/docs/containers?topic=containers-get-help).
     ```sh
     ibmcloud ks cluster get -c <cluster_name_or_ID>
     ```

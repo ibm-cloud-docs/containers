@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes
 
@@ -217,7 +217,7 @@ Deploy your app as a container in a Kubernetes cluster.
     ```
     {: pre}
 
-    **Example output**
+    Example output
 
     ```
     deployment "cf-py" configured
@@ -234,7 +234,7 @@ Deploy your app as a container in a Kubernetes cluster.
     ```
     {: pre}
 
-    **Example output**
+    Example output
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
@@ -242,7 +242,7 @@ Deploy your app as a container in a Kubernetes cluster.
     ```
     {: screen}
 
-    b. Open a browser and check out the app with the following URL: `http://<public_IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. You can give this URL to a co-worker to try or enter it in your cell phone's browser so that you can see that the app really is publicly available. **Note**: Because worker nodes in VPC clusters do not have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. Then, you can use the worker node's private IP address and NodePort: `http://<private_IP_address>:<NodePort>`.
+    b. Open a browser and check out the app with the following URL: `http://<public_IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. You can give this URL to a co-worker to try or enter it in your cell phone's browser so that you can see that the app really is publicly available. **Note**: Because worker nodes in VPC clusters don't have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. Then, you can use the worker node's private IP address and NodePort: `http://<private_IP_address>:<NodePort>`.
     
     ![A screen capture of the deployed boilerplate Python Flask app.](images/python_flask.png "A screen capture of the deployed boilerplate Python Flask app."){: caption="Figure 2. A screen capture of the deployed boilerplate Python Flask app." caption-side="bottom"}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-16"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, clusters
 
@@ -26,7 +26,7 @@ After your {{site.data.keyword.containerlong}} cluster is created, you can begin
 
 1. [Install the required CLI tools](/docs/containers?topic=containers-cs_cli_install), including the {{site.data.keyword.cloud_notm}} CLI, {{site.data.keyword.containershort_notm}} plug-in (`ibmcloud ks`), and Kubernetes CLI (`kubectl`). For quick access to test features in your cluster, you can also use the [{{site.data.keyword.cloud-shell_notm}}](/docs/containers?topic=containers-cs_cli_install#cloud-shell).
 2. [Create your {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-clusters).
-3. If your network is protected by a company firewall, [allow access](/docs/containers?topic=containers-firewall#corporate) to the {{site.data.keyword.cloud_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports. For private cloud service endpoint-only clusters, you cannot test the connection to your cluster until you [configure access to the cloud service endpoint subnet](#access_private_se).
+3. If your network is protected by a company firewall, [allow access](/docs/containers?topic=containers-firewall#corporate) to the {{site.data.keyword.cloud_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports. For private cloud service endpoint-only clusters, you can't test the connection to your cluster until you [configure access to the cloud service endpoint subnet](#access_private_se).
 4. Check that your cluster is in a healthy state by running `ibmcloud ks cluster get -c <cluster_name_or_ID>`. If your cluster is not in a healthy state, review the [Debugging clusters](/docs/containers?topic=containers-debug_clusters) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall).
 5. In the output of the cluster details from the previous step, check the **Public** or **Private Service Endpoint** URL of the cluster.
     *  **Public Service Endpoint URL only**: Continue with [Accessing clusters through the public cloud service endpoint](#access_public_se).
@@ -176,7 +176,7 @@ The Kubernetes master is accessible through the private cloud service endpoint i
     ```
     {: codeblock}
 
-3. To create the private NLB, you must be connected to the cluster master. Because you cannot yet connect through the private cloud service endpoint from a VPN or {{site.data.keyword.dl_full_notm}}, you must connect to the cluster master and create the NLB by using the public cloud service endpoint or Kubernetes dashboard.
+3. To create the private NLB, you must be connected to the cluster master. Because you can't yet connect through the private cloud service endpoint from a VPN or {{site.data.keyword.dl_full_notm}}, you must connect to the cluster master and create the NLB by using the public cloud service endpoint or Kubernetes dashboard.
     * If you enabled the private cloud service endpoint only, you can use the Kubernetes dashboard to create the NLB. The dashboard automatically routes all requests to the private cloud service endpoint of the master.
         1. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
         2. From the menu bar, select the account that you want to use.
@@ -214,7 +214,7 @@ The Kubernetes master is accessible through the private cloud service endpoint i
             ```
             {: screen}
 
-4. On the client machines where you or your users run `kubectl` commands, add the NLB IP address and the private cloud service endpoint URL to the `/etc/hosts` file. Do not include any ports in the IP address and URL and do not include `https://` in the URL.
+4. On the client machines where you or your users run `kubectl` commands, add the NLB IP address and the private cloud service endpoint URL to the `/etc/hosts` file. Do not include any ports in the IP address and URL and don't include `https://` in the URL.
     * For macOS and Linux users:
         ```
         sudo nano /etc/hosts
@@ -328,7 +328,7 @@ Keep in mind the following considerations when you configure a webhook.
 - Set appropriate CPU and memory [resource requests and limits](/docs/containers?topic=containers-app#resourcereq) for your webhook.
 - Add [liveness and readiness probes](/docs/containers?topic=containers-app#probe) to help make sure your webhook container is running and ready to serve requests.
 - Set pod [anti-affinity scheduling rules](/docs/containers?topic=containers-app#affinity) to prefer that your webhook pods run on different worker nodes and zones when possible. In clusters that run Kubernetes version 1.18 or later, you might use [pod topology](https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/){: external} instead. However, avoid [taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} or forced affinity that might restrict where the webhook pods can be scheduled.
-- [Set pod priority](/docs/containers?topic=containers-pod_priority) to `system-cluster-critical` for the webhook pods so that other pods cannot take resources from your webhook pods.
+- [Set pod priority](/docs/containers?topic=containers-pod_priority) to `system-cluster-critical` for the webhook pods so that other pods can't take resources from your webhook pods.
 - Scope your webhook to the appropriate namespace. Avoid webhooks that process resources that run in system-critical namespaces that are set up in your cluster by default, such as `kube-system`, `ibm-system`, `ibm-operators`, `calico-system`, `tigera-operator` and `openshift-*` namespaces.
 - Make sure that the worker nodes in your cluster are [the right size for running your webhook applications](/docs/containers?topic=containers-strategy#sizing). For example, if your pods request more CPU or memory than the worker node can provide, the pods are not scheduled.
 
@@ -344,7 +344,7 @@ Many cluster add-ons, plug-ins, and other third-party extensions use admission c
 ### I need help with a broken webhook. What can I do?
 {: #access_webhooks-help}
 
-See [Cluster cannot update because of broken webhook](/docs/containers?topic=containers-webhooks_update).
+See [Cluster can't update because of broken webhook](/docs/containers?topic=containers-webhooks_update).
 
 
 
@@ -384,7 +384,7 @@ clientConfig:
 Note the following limitations for referencing the webhook app as an IP or DNS name:
 
 - If the URL is a DNS, then this DNS must be a publicly registered DNS name. Private DNS configurations are not supported.
-- If the URL is an external IP, which means the webhook service is outside of the cluster, the control plane network is used to connect to the service. The control plane must be able to reach the IP. If, for example, the IP is from an on-premises network and the control plane cannot reach the IP, the webhook service does not work.
+- If the URL is an external IP, which means the webhook service is outside of the cluster, the control plane network is used to connect to the service. The control plane must be able to reach the IP. If, for example, the IP is from an on-premises network and the control plane can't reach the IP, the webhook service does not work.
 - If the URL is a cluster IP, which means the webhook service is inside of the cluster, the Kubernetes API needs to connect to cluster network.  If you have cluster version 1.21 and later, and your webhook uses the cluster IP, you must update your webhook to use a Kubernetes service instead.
 
 

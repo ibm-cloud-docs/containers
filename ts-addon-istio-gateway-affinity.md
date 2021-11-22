@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, help
 
@@ -36,9 +36,9 @@ To identify the `ibm-cloud-provider-ip` pod for your gateway, you can run `kubec
 When an `istio-ingressgateway` load balancer service is created, an `ibm-cloud-provider-ip` pod is created to provide an external IP address to the load balancer.
 {: tsCauses}
 
-These `ibm-cloud-provider-ip` pods have a node affinity rule so that they are created in the same zone as the subnet from which the IP address is derived. However, when the `ExternalTrafficPolicy` setting for the `istio-ingressgateway` load balancer service is set to `Local`, then the `ibm-cloud-provider-ip` pod also has a pod affinity rule to be deployed to the same zone as the gateway load balancer pod. If the IP address and gateway load balancer exist in different zones in your cluster, the `ibm-cloud-provider-ip` pod cannot properly deploy.
+These `ibm-cloud-provider-ip` pods have a node affinity rule so that they are created in the same zone as the subnet from which the IP address is derived. However, when the `ExternalTrafficPolicy` setting for the `istio-ingressgateway` load balancer service is set to `Local`, then the `ibm-cloud-provider-ip` pod also has a pod affinity rule to be deployed to the same zone as the gateway load balancer pod. If the IP address and gateway load balancer exist in different zones in your cluster, the `ibm-cloud-provider-ip` pod can't properly deploy.
 
-To verify that the `ibm-cloud-provider-ip` and `istio-ingressgateway` pods do not exist in the same zone:
+To verify that the `ibm-cloud-provider-ip` and `istio-ingressgateway` pods don't exist in the same zone:
 
 1. Identify the **NODE** that your `istio-ingressgateway` pod is deployed to.
     ```sh
@@ -109,7 +109,7 @@ Move the `ibm-cloud-provider-ip` pod to the same zone as the `istio-ingressgatew
     ```
     {: pre}
 
-2. Note the name of the `istio-ingressgateway-zone-<1|2|3>` setting for the gateway. In this example configmap, to move the `ibm-cloud-provider-ip` pod for the gateway that exists in `dal10`, note the key that is called `istio-ingressgateway-zone-1`.
+2. Note the name of the `istio-ingressgateway-zone-<1|2|3>` setting for the gateway. In this example configmap, to move the `ibm-cloud-provider-ip` pod for the gateway that exists in `dal10`, note the key called `istio-ingressgateway-zone-1`.
     ```yaml
     apiVersion: v1
     data:

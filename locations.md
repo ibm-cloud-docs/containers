@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-15"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, mzr, szr, multizone, multi az
 
@@ -81,7 +81,7 @@ The following image is used as an example to explain how {{site.data.keyword.con
 ### Classic single zone regions
 {: #zones-sz}
 
-![Classic infrastructure provider icon.](images/icon-classic-2.svg) **Classic single zone**: If you create a classic cluster in a single zone region, you can create multiple worker nodes but you cannot spread them across data centers (zones). The highly available master includes three replicas on separate hosts, but is not spread across zones.
+![Classic infrastructure provider icon.](images/icon-classic-2.svg) **Classic single zone**: If you create a classic cluster in a single zone region, you can create multiple worker nodes but you can't spread them across data centers (zones). The highly available master includes three replicas on separate hosts, but is not spread across zones.
 {: shortdesc}
 
 | Geography |  Country  | Metro | Data center |  Previous region  |
@@ -114,10 +114,10 @@ The following image is used as an example to explain how {{site.data.keyword.con
 
 **Deprecated data centers**
 
-Oslo (osl01) is deprecated and becomes unsupported later this year. To prevent any interruption of service, [redeploy all of your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your `osl01` clusters by **1 August 2021**. Before the unsupported date, you are blocked from adding new worker nodes and clusters starting on **1 July 2021**. For more information, see [Data center closures in 2021](/docs/get-support?topic=get-support-dc-closure).
+Oslo (osl01) is deprecated and becomes unsupported later this year. To prevent any interruption of service, [redeploy all your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your `osl01` clusters by **1 August 2021**. Before the unsupported date, you are blocked from adding new worker nodes and clusters starting on **1 July 2021**. For more information, see [Data center closures in 2021](/docs/get-support?topic=get-support-dc-closure).
 {: deprecated}
 
-Houston (hou02) is deprecated and becomes unsupported later this year. For more information, see [Data center closures in 2021](/docs/get-support?topic=get-support-dc-closure). To prevent any interruption of service, [redeploy all of your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your `hou02` clusters by **1 August 2021**. Houston supports free clusters that are created in US South, and is not available for standard, production clusters.
+Houston (hou02) is deprecated and becomes unsupported later this year. For more information, see [Data center closures in 2021](/docs/get-support?topic=get-support-dc-closure). To prevent any interruption of service, [redeploy all your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your `hou02` clusters by **1 August 2021**. Houston supports free clusters that are created in US South, and is not available for standard, production clusters.
 {: deprecated}
 
 ### VPC multizone regions
@@ -177,11 +177,11 @@ In a multizone cluster, your cluster's resources are spread across multiple zone
 Free clusters are limited to specific locations and are available for only classic infrastructure, not VPC infrastructure. For more information about free clusters, see [the FAQ](/docs/containers?topic=containers-faqs#faq_free).
 {: shortdesc}
 
-**Creating a free cluster in the CLI**: You can create a free cluster in select regions only. Your cluster is created in a data center within the region that you target. You cannot specify the data center. The following regions are available.
+**Creating a free cluster in the CLI**: You can create a free cluster in select regions only. Your cluster is created in a data center within the region that you target. You can't specify the data center. The following regions are available.
 * Frankfurt region in `ibmcloud ks init --host https://eu-de.containers.cloud.ibm.com`
 * Dallas region in `ibmcloud ks init --host https://us-south.containers.cloud.ibm.com`
 
-**Creating a free cluster in the {{site.data.keyword.cloud_notm}} console**: When you use the console, you cannot select a location. Your cluster is created in one of the following locations.
+**Creating a free cluster in the {{site.data.keyword.cloud_notm}} console**: When you use the console, you can't select a location. Your cluster is created in one of the following locations.
 * Dallas region in North America
 * Frankfurt region in Europe
 
@@ -225,7 +225,7 @@ When you use the new global functionality in the {{site.data.keyword.containerlo
 * Listing resources:
     * When you list resources, such as with the `ibmcloud ks cluster ls`, `ibmcloud ks subnets`, or `ibmcloud ks zone ls` commands, resources in all locations are returned. To filter resources by a specific location, certain commands include a `--location` flag. For example, if you filter clusters for the `wdc` metro, multizone clusters in that metro and single-zone clusters in data centers (zones) within that metro are returned. If you filter clusters for the `wdc06` data center (zone), multizone clusters that have a worker node in that zone and single-zone clusters in that zone are returned. `ibmcloud ks cluster ls -l dal -l seo`.
 
-    * Other commands do not return resources in all locations. To run `credential set/unset/get`, `api-key reset`, and `vlan spanning get` commands, you must specify a region in the `--region`.
+    * Other commands don't return resources in all locations. To run `credential set/unset/get`, `api-key reset`, and `vlan spanning get` commands, you must specify a region in the `--region`.
 
 * Working with resources:
     * When you use the global endpoint, you can work with resources that you have access permissions to in any location, even if you target one region and the resource that you want to work with is in another region.

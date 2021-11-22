@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-16"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, local persistent storage
 
@@ -39,7 +39,7 @@ To verify your installation:
 2. Review the **Status** column to see if the installation succeeded or failed. The status might take a few minutes to update.
 3. If the **Status** changes to `Provision failure`, follow the [instructions](/docs/containers?topic=containers-debug-portworx) to start troubleshooting why your installation failed.
 4. If the **Status** changes to `Provisioned`, verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer.
-    1. List the Portworx pods in the `kube-system` namespace. The installation is successful when you see one or more `portworx`, `stork`, and `stork-scheduler` pods. The number of pods equals the number of worker nodes that are included in your Portworx cluster. All pods must be in a `Running` state.
+    1. List the Portworx pods in the `kube-system` namespace. The installation is successful when you see one or more `portworx`, `stork`, and `stork-scheduler` pods. The number of pods equals the number of worker nodes that are in your Portworx cluster. All pods must be in a `Running` state.
         ```sh
         kubectl get pods -n kube-system | grep 'portworx\|stork'
         ```
@@ -93,7 +93,7 @@ To verify your installation:
         ```
         {: screen}
 
-    3. Verify that all worker nodes that you wanted to include in your Portworx storage layer are included by reviewing the **StorageNode** column in the **Cluster Summary** section of your CLI output. Worker nodes that are included in the storage layer are displayed with `Yes` in the **StorageNode** column.
+    3. Verify that all worker nodes that you wanted to include in your Portworx storage layer are included by reviewing the **StorageNode** column in the **Cluster Summary** section of your CLI output. Worker nodes that are in the storage layer are displayed with `Yes` in the **StorageNode** column.
 
         Because Portworx runs as a daemon set in your cluster, new worker nodes that you add to your cluster are automatically inspected for raw block storage and added to the Portworx data layer.
         {: note}
@@ -158,7 +158,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
         :    Specify whether you want to encrypt the data in your volume with {{site.data.keyword.keymanagementservicelong_notm}}. Choose between the following options: 
              - **true**: Enter `true` to enable encryption for your Portworx volumes. To encrypt volumes, you must have an {{site.data.keyword.keymanagementservicelong_notm}} service instance and a Kubernetes secret that holds your customer root key. For more information about how to set up encryption for Portworx volumes, see [Encrypting your Portworx volumes](/docs/containers?topic=containers-portworx#encrypt_volumes). 
              - **false**: When you enter `false`, your Portworx volumes are not encrypted.
-        :    If you do not specify this option, your Portworx volumes are not encrypted by default.
+        :    If you don't specify this option, your Portworx volumes are not encrypted by default.
         :    You can choose to enable volume encryption in your PVC, even if you disabled encryption in your storage class. The setting that you make in the PVC take precedence over the settings in the storage class.  
         
         `parameters.priority_io`
@@ -168,7 +168,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
         `parameters.shared`
         :    Define whether you want to allow multiple pods to access the same volume. Choose between the following options: 
              - **True:** If you set this option to `true`, then you can access the same volume by multiple pods that are distributed across worker nodes in different zones. 
-             - **False:** If you set this option to `false`, you can access the volume from multiple pods only if the pods are deployed onto the worker node that attaches the physical disk that backs the volume. If your pod is deployed onto a different worker node, the pod cannot access the volume.
+             - **False:** If you set this option to `false`, you can access the volume from multiple pods only if the pods are deployed onto the worker node that attaches the physical disk that backs the volume. If your pod is deployed onto a different worker node, the pod can't access the volume.
 
     2. Create the storage class.
         ```sh
@@ -354,7 +354,7 @@ To access the storage from your app, you must mount the PVC to your app.
 ## Cleaning up your Portworx volumes and cluster
 {: #portworx_cleanup_volumes}
 
-Remove a [Portworx volume](#remove_pvc), a [storage node](#remove_storage_node_cluster), or the [entire Portworx cluster](#remove_storage_node_cluster) if you do not need it anymore.
+Remove a [Portworx volume](#remove_pvc), a [storage node](#remove_storage_node_cluster), or the [entire Portworx cluster](#remove_storage_node_cluster) if you don't need it anymore.
 {: shortdesc}
 
 ### Removing Portworx volumes from apps
@@ -398,7 +398,7 @@ When you added storage from your Portworx cluster to your app, you have three ma
         ```
         {: screen}
 
-        If no pod is returned in your CLI output, you do not have a pod that uses the PVC.
+        If no pod is returned in your CLI output, you don't have a pod that uses the PVC.
 
     2. Remove the pod that uses the PVC.
 
@@ -457,7 +457,7 @@ When you added storage from your Portworx cluster to your app, you have three ma
 ### Removing a worker node from your Portworx cluster or the entire Portworx cluster
 {: #remove_storage_node_cluster}
 
-You can exclude worker nodes from your Portworx cluster or remove the entire Portworx cluster if you do not want to use Portworx anymore.
+You can exclude worker nodes from your Portworx cluster or remove the entire Portworx cluster if you don't want to use Portworx anymore.
 {: shortdesc}
 
 Removing your Portworx cluster removes all the data from your Portworx cluster. Make sure to [create a snapshot for your data and save this snapshot to the cloud](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-snapshots/){: external}.
@@ -470,6 +470,6 @@ Removing your Portworx cluster removes all the data from your Portworx cluster. 
 ## Getting help and support
 {: #portworx_help_and_support}
 
-If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://pure1.purestorage.com/support){: external}. You can also submit a request by sending an e-mail to `support@purestorage.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@purestorage.com`.
+If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://pure1.purestorage.com/support){: external}. You can also submit a request by sending an e-mail to `support@purestorage.com`. If you don't have an account on the Portworx Service Portal, send an e-mail to `support@purestorage.com`.
 
 
