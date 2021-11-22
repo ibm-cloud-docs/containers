@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-19"
+lastupdated: "2021-11-22"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 Review the release notes for November 2021.
 {: shortdesc}
+
+
+### 22 November 2021
+{: #22nov2021}
+{: release-note}
+
+Worker node fix pack update
+:   Changelog documentation is available for Kubernetes version [`1.22.3_1530`](/docs/containers?topic=containers-changelog#1223_1530), [`1.21.6_1540`](/docs/containers?topic=containers-changelog#1216_1540), [`1.20.12_1562`](/docs/containers?topic=containers-changelog#12012_1562), and [`1.19.16_1569`](/docs/containers?topic=containers-changelog#11916_1569).
 
 ### 19 November 2021
 {: #19nov2021}
