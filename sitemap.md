@@ -800,6 +800,10 @@ subcollection: containers
 
 * [Adding tags to existing clusters](/docs/containers?topic=containers-add_workers#cluster_tags)
 
+    * [Adding tags to clusters with the console](/docs/containers?topic=containers-add_workers#add-tags-console)
+
+    * [Adding tags to clusters with the CLI](/docs/containers?topic=containers-add_workers#adding-tags-to-clusters-with-the-cli)
+
 * [Adding labels to existing worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels)
 
 * [Automatically resolving issues for your worker nodes](/docs/containers?topic=containers-add_workers#planning_autorecovery)
@@ -5216,7 +5220,7 @@ subcollection: containers
 {: #sitemap_load_balancers}
 
 
-[Classic clusters: Why can't my app connect via a network load balancer (NLB) service?](/docs/containers?topic=containers-cs_loadbalancer_fails#cs_loadbalancer_fails)
+[Why can't my app connect via a network load balancer (NLB) service?](/docs/containers?topic=containers-cs_loadbalancer_fails#cs_loadbalancer_fails)
 
 [Classic clusters: Why can't I deploy a load balancer?](/docs/containers?topic=containers-cs_subnet_limit_lb#cs_subnet_limit_lb)
 
