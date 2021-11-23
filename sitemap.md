@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-22"
+lastupdated: "2021-11-23"
 
 keywords: containers
 subcollection: containers
@@ -799,6 +799,10 @@ subcollection: containers
     * [Installing with a script](/docs/containers?topic=containers-add_workers#intel-sgx-script)
 
 * [Adding tags to existing clusters](/docs/containers?topic=containers-add_workers#cluster_tags)
+
+    * [Adding tags to clusters with the console](/docs/containers?topic=containers-add_workers#add-tags-console)
+
+    * [Adding tags to clusters with the CLI](/docs/containers?topic=containers-add_workers#adding-tags-to-clusters-with-the-cli)
 
 * [Adding labels to existing worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels)
 
@@ -3768,7 +3772,7 @@ subcollection: containers
 
 * [Version 4.0](/docs/containers?topic=containers-vpc_bs_changelog#0400_is_block)
 
-    * [Changelog for version 4.0.2_788, released 22 November 2021](/docs/containers?topic=containers-vpc_bs_changelog#0400788_is_block_relnote)
+    * [Changelog for version 4.0.3_793, released 22 November 2021](/docs/containers?topic=containers-vpc_bs_changelog#403793_is_block_relnote)
 
     * [Changelog for version 4.0.1_780, released 06 October 2021](/docs/containers?topic=containers-vpc_bs_changelog#0400780_is_block_relnote)
 
@@ -5216,7 +5220,7 @@ subcollection: containers
 {: #sitemap_load_balancers}
 
 
-[Classic clusters: Why can't my app connect via a network load balancer (NLB) service?](/docs/containers?topic=containers-cs_loadbalancer_fails#cs_loadbalancer_fails)
+[Why can't my app connect via a network load balancer (NLB) service?](/docs/containers?topic=containers-cs_loadbalancer_fails#cs_loadbalancer_fails)
 
 [Classic clusters: Why can't I deploy a load balancer?](/docs/containers?topic=containers-cs_subnet_limit_lb#cs_subnet_limit_lb)
 
