@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-23"
+lastupdated: "2021-11-29"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 Review the release notes for November 2021.
 {: shortdesc}
+
 
 
 ### 22 November 2021
