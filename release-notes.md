@@ -31,6 +31,15 @@ Review the release notes for November 2021.
 
 
 
+### 29 November 2021
+{: #29nov2021}
+{: release-note}
+
+Container service CLI 
+:   The [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.347.
+
+
+
 ### 22 November 2021
 {: #22nov2021}
 {: release-note}

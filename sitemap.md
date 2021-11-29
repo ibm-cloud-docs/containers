@@ -188,6 +188,8 @@ subcollection: containers
 
 * [November 2021](/docs/containers?topic=containers-iks-release#release-nov-2021)
 
+    * [29 November 2021](/docs/containers?topic=containers-iks-release#29nov2021)
+
     * [22 November 2021](/docs/containers?topic=containers-iks-release#22nov2021)
 
     * [19 November 2021](/docs/containers?topic=containers-iks-release#19nov2021)
@@ -1567,24 +1569,6 @@ subcollection: containers
 [Setting up an image registry](/docs/containers?topic=containers-registry#registry)
 
 * [Planning image registries](/docs/containers?topic=containers-registry#planning_images)
-
-* [Choosing an image registry solution](/docs/containers?topic=containers-registry#openshift_registry_options)
-
-* [Storing images in the internal registry](/docs/containers?topic=containers-registry#openshift_internal_registry)
-
-    * [VPC: Backing up your {{site.data.keyword.openshiftshort}} internal image registry to {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-registry#cos_image_registry)
-
-    * [Classic: Storing images in the internal registry](/docs/containers?topic=containers-registry#storage_internal_registry)
-
-    * [Storing images in the worker node empty directory](/docs/containers?topic=containers-registry#emptydir_internal_registry)
-
-* [Setting up a secure external route for the internal registry](/docs/containers?topic=containers-registry#route_internal_registry)
-
-* [Importing images from {{site.data.keyword.registrylong_notm}} into the internal registry image stream](/docs/containers?topic=containers-registry#imagestream_registry)
-
-* [Setting up builds in the internal registry to push images to {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-registry#builds_registry)
-
-* [Using {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-registry#openshift_iccr)
 
 * [Understanding how to authorize your cluster to pull images from a private registry](/docs/containers?topic=containers-registry#cluster_registry_auth)
 
@@ -3044,6 +3028,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.347](/docs/containers?topic=containers-cs_cli_changelog#cli-10347)
 
 * [Version 1.0.344](/docs/containers?topic=containers-cs_cli_changelog#cli-10344)
 
