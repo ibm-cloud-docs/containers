@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-22"
+lastupdated: "2021-12-01"
 
 keywords: kubernetes, upgrade, version
 
@@ -324,6 +324,9 @@ You notice that an update is available for your worker nodes in a [VPC infrastru
 ![VPC infrastructure provider icon.](images/icon-vpc-2.svg)  Applies to only VPC clusters. Have a classic cluster? See [Updating classic worker nodes](#worker_node) instead.
 {: note}
 
+If you have Portworx deployed in your cluster, follow the steps to [update VPC worker nodes with Portworx volumes](/docs/containers?topic=containers-portworx#portworx_vpc_up).
+{: important}
+
 For the latest security patches and fixes, make sure to update your worker nodes to the latest patch as soon as possible after it is available. For more information about the latest updates, review the [Changelog](/docs/containers?topic=containers-changelog).
 {: tip}
 
@@ -378,13 +381,13 @@ Before you update your VPC worker nodes, review the prerequisite steps.
     {: pre}
 
 4. Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
-    *  To update the worker node to the same `major.minor` version as the master, such as from 1.20 to 1.22.2, include the `--update` flag.
+    *  To update the worker node to the same `major.minor` version as the master, such as from 1.21 to 1.23.0, include the `--update` flag.
         ```sh
         ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID> --update
         ```
         {: pre}
 
-    *  To update the worker node to the latest patch version at the same `major.minor` version, such as from 1.20.8_1530 to 1.20.9_1533, don't include the `--update` flag.
+    *  To update the worker node to the latest patch version at the same `major.minor` version, such as from 1.21.8_1530 to 1.21.9_1533, don't include the `--update` flag.
         ```sh
         ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID>
         ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-11-29"
+lastupdated: "2021-12-01"
 
 keywords: containers
 subcollection: containers
@@ -185,6 +185,10 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
+
+* [December 2021](/docs/containers?topic=containers-iks-release#release-dec-2021)
+
+    * [2 December 2021](/docs/containers?topic=containers-iks-release#2dec2021)
 
 * [November 2021](/docs/containers?topic=containers-iks-release#release-nov-2021)
 
