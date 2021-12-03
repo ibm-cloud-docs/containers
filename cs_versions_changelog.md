@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-12-02"
+lastupdated: "2021-12-03"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -56,10 +56,10 @@ The following table shows the changes that are in the worker node fix pack patch
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.22.2_1528" caption-side="top"}
 
-### Changelog for worker node fix pack 1.22.2_1529, released 17 November 2021
+### Changelog for master fix pack 1.22.2_1529, released 17 November 2021
 {: #1222_1529}
 
-The following table shows the changes that are in the worker node fix pack patch update `1.22.2_1529`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+The following table shows the changes that are in the master fix pack update `1.22.2_1529`.  Master patch updates are applied automatically.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -182,10 +182,10 @@ The following table shows the changes that are in the worker node fix pack patch
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.21.5_1538" caption-side="top"}
 
-### Changelog for worker node fix pack 1.21.5_1539, released 17 November 2021
+### Changelog for master fix pack 1.21.5_1539, released 17 November 2021
 {: #1215_1539}
 
-The following table shows the changes that are in the worker node fix pack patch update `1.21.5_1539`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+The following table shows the changes that are in the master fix pack update `1.21.5_1539`.  Master patch updates are applied automatically.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -529,10 +529,10 @@ The following table shows the changes that are in the worker node fix pack patch
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.20.11_1560" caption-side="top"}
 
-### Changelog for worker node fix pack 1.20.11_1561, released 17 November 2021
+### Changelog for master fix pack 1.20.11_1561, released 17 November 2021
 {: #12011_1561}
 
-The following table shows the changes that are in the worker node fix pack patch update `1.20.11_1561`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+The following table shows the changes that are in the master fix pack patch update `1.20.11_1561`. Master patch updates are applied automatically.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -1079,10 +1079,10 @@ The following table shows the changes that are in the worker node fix pack patch
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.19.15_1567" caption-side="top"}
 
-### Changelog for worker node fix pack 1.19.15_1568, released 17 November 2021
+### Changelog for master fix pack 1.19.15_1568, released 17 November 2021
 {: #11915_1568}
 
-The following table shows the changes that are in the worker node fix pack patch update `1.19.15_1568`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+The following table shows the changes that are in the master fix pack patch update `1.19.15_1568`. Master patch updates are applied automatically.
 {: shortdesc}
 
 | Component | Previous | Current | Description |

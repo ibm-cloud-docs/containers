@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-22"
+lastupdated: "2021-12-03"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
 
@@ -189,6 +189,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
     `istio-pilot-traceSampling`
     :   Default value: `"1.0"`
     :   By default, Istio [generates trace spans for 1 out of every 100 requests](https://istio.io/latest/docs/tasks/observability/distributed-tracing/overview/#trace-sampling){: external}, which is a sampling rate of 1%. To generate more trace spans, increase the percentage value.
+
     
 
     For example, your configmap might look like the following example.
@@ -551,8 +552,6 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 
 To resolve some common issues that you might encounter when you use the managed Istio add-on, see [Troubleshooting managed add-ons](/docs/containers?topic=containers-debug_addons).
 {: shortdesc}
-
-
 
 
 
