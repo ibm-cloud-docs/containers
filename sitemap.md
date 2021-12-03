@@ -3033,6 +3033,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version 1.0.353](/docs/containers?topic=containers-cs_cli_changelog#cli-10347)
+
 * [Version 1.0.347](/docs/containers?topic=containers-cs_cli_changelog#cli-10347)
 
 * [Version 1.0.344](/docs/containers?topic=containers-cs_cli_changelog#cli-10344)
