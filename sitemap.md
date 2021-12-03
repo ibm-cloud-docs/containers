@@ -3212,7 +3212,7 @@ subcollection: containers
 
     * [Changelog for worker node fix pack 1.22.3_1530, released 22 November 2021](/docs/containers?topic=containers-changelog#1223_1530)
 
-    * [Changelog for worker node fix pack 1.22.2_1529, released 17 November 2021](/docs/containers?topic=containers-changelog#1222_1529)
+    * [Changelog for master fix pack 1.22.2_1529, released 17 November 2021](/docs/containers?topic=containers-changelog#1222_1529)
 
     * [Changelog for worker node fix pack 1.22.2_1528, released 10 November 2021](/docs/containers?topic=containers-changelog#1222_1528)
 
@@ -3228,7 +3228,7 @@ subcollection: containers
 
     * [Changelog for worker node fix pack 1.21.6_1540, released 22 November 2021](/docs/containers?topic=containers-changelog#1216_1540)
 
-    * [Changelog for worker node fix pack 1.21.5_1539, released 17 November 2021](/docs/containers?topic=containers-changelog#1215_1539)
+    * [Changelog for master fix pack 1.21.5_1539, released 17 November 2021](/docs/containers?topic=containers-changelog#1215_1539)
 
     * [Changelog for worker node fix pack 1.21.5_1538, released 10 November 2021](/docs/containers?topic=containers-changelog#1215_1538)
 
@@ -3270,7 +3270,7 @@ subcollection: containers
 
     * [Changelog for worker node fix pack 1.20.12_1562, released 22 November 2021](/docs/containers?topic=containers-changelog#12012_1562)
 
-    * [Changelog for worker node fix pack 1.20.11_1561, released 17 November 2021](/docs/containers?topic=containers-changelog#12011_1561)
+    * [Changelog for master fix pack 1.20.11_1561, released 17 November 2021](/docs/containers?topic=containers-changelog#12011_1561)
 
     * [Changelog for worker node fix pack 1.20.11_1560, released 10 November 2021](/docs/containers?topic=containers-changelog#12011_1560)
 
@@ -3338,7 +3338,7 @@ subcollection: containers
 
     * [Changelog for worker node fix pack 1.19.16_1569, released 22 November 2021](/docs/containers?topic=containers-changelog#11916_1569)
 
-    * [Changelog for worker node fix pack 1.19.15_1568, released 17 November 2021](/docs/containers?topic=containers-changelog#11915_1568)
+    * [Changelog for master fix pack 1.19.15_1568, released 17 November 2021](/docs/containers?topic=containers-changelog#11915_1568)
 
     * [Changelog for worker node fix pack 1.19.15_1567, released 10 November 2021](/docs/containers?topic=containers-changelog#11915_1567)
 
