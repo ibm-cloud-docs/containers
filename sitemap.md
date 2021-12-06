@@ -3276,7 +3276,7 @@ subcollection: containers
 
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
 
-    * [Changelog for worker node fix pack 1.20.13_1564, released 22 November 2021](/docs/containers?topic=containers-changelog#12013_1564)
+    * [Changelog for worker node fix pack 1.20.13_1564, released 6 December 2021](/docs/containers?topic=containers-changelog#12013_1564)
 
     * [Changelog for worker node fix pack 1.20.12_1562, released 22 November 2021](/docs/containers?topic=containers-changelog#12012_1562)
 
