@@ -359,7 +359,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | N/A | N/A | Updated the rolling update configuration for the `calico-node` daemonset in the `kube-system` namespace.  The configuration is now the same regardless of the number of cluster worker nodes. |
+| Calico | N/A | N/A | Updated the rolling update configuration for the `calico-node` daemonset in the `kube-system` namespace. The configuration is now the same regardless of the number of cluster worker nodes. |
 | Cluster health image | v1.2.14 | v1.2.15 | Updated to use `Go` version `1.15.15`. Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs. |
 | CoreDNS | 1.8.0 | 1.8.4 | See the [CoreDNS release notes](https://coredns.io/2021/05/28/coredns-1.8.4-release/){: external}. |
 | Gateway-enabled cluster controller | 1348 | 1444 | Updated image for [CVE-2021-36159](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36159){: external}. |
@@ -542,7 +542,7 @@ The following table shows the changes that are in the master fix pack patch upda
 Review the version 1.20 changelog.
 {: shortdesc}
 
-### Changelog for worker node fix pack 1.20.13_1564, released 22 November 2021
+### Changelog for worker node fix pack 1.20.13_1564, released 6 December 2021
 {: #12013_1564}
 
 The following table shows the changes that are in the worker node fix pack patch update `1.20.13_1564`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -1112,6 +1112,8 @@ Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 31 J
 The following table shows the changes that are in the worker node fix pack patch update `1.19.16_1571`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-162 | 4.15.0-163 | Updated worker node images and kernel with package updates. Contains fixes for [CVE-2021-43527](https://nvd.nist.gov/vuln/detail/CVE-2021-43527){: external} | 
 | Containerd | v1.4.11 | v1.4.12 | See the [change log](https://github.com/containerd/containerd/releases/tag/v1.4.12){: external}. | 
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
