@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-12-03"
+lastupdated: "2021-12-06"
 
 keywords: containers
 subcollection: containers
@@ -646,7 +646,7 @@ subcollection: containers
 
     * [Scenario: Run internet-facing app workloads in a VPC cluster with limited public egress](/docs/containers?topic=containers-plan_clusters#vpc-pgw)
 
-    * [Scenario: Extend your on-premises data center to a VPC cluster](/docs/containers?topic=containers-plan_clusters#vpc-vpn)
+    * [Extend your on-premises data center to a VPC cluster](/docs/containers?topic=containers-plan_clusters#vpc-vpn)
 
 * [Understanding network basics of classic clusters](/docs/containers?topic=containers-plan_clusters#plan_basics)
 
@@ -660,9 +660,9 @@ subcollection: containers
 
 * [Example scenarios for classic cluster network setups](/docs/containers?topic=containers-plan_clusters#classic-scenarios)
 
-    * [Scenario: Run internet-facing app workloads in a classic cluster](/docs/containers?topic=containers-plan_clusters#internet-facing)
+    * [Running internet-facing app workloads in a classic cluster](/docs/containers?topic=containers-plan_clusters#internet-facing)
 
-    * [Scenario: Extend your on-premises data center to a classic cluster and add limited public access](/docs/containers?topic=containers-plan_clusters#limited-public)
+    * [Extending your on-premises data center to a classic cluster and add limited public access](/docs/containers?topic=containers-plan_clusters#limited-public)
 
     * [Scenario: Extend your on-premises data center to a classic cluster](/docs/containers?topic=containers-plan_clusters#private_clusters)
 

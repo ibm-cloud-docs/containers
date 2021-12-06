@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-01"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes
 
@@ -341,7 +341,7 @@ To deploy the app:
 
 Good job! You deployed your first version of the app.
 
-Too many commands in this lesson? Agreed. How about using a configuration script to do some of the work for you? To use a configuration script for the second version of the app, and to create higher availability by deploying multiple instances of that app, continue to the next lesson.
+Too many commands in this lesson? Agreed. How about using a configuration script to do some work for you? To use a configuration script for the second version of the app, and to create higher availability by deploying multiple instances of that app, continue to the next lesson.
 
 Want to delete the resources that you created in this lesson before you move on? When you created the deployment, Kubernetes assigned the deployment a label, `app=hello-world-deployment` (or whatever you named the deployment). Then, when you exposed the deployment, Kubernetes applied the same label to the service that was created. Labels are useful tools for you to organize your Kubernetes resources so that you can apply bulk actions such as `get` or `delete` to them.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-01"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -165,7 +165,7 @@ If the Ingress subdomain and secret are still unavailable after your cluster is 
     ```
     {: pre}
 
-    <p class="note">Even though the VPC load balancer is listed, its DNS entry might still be registering. When a VPC load balancer is created, the hostname is registered through a public DNS. In some cases, it can take several minutes for this DNS entry to be replicated to the specific DNS that your client is using.</p>
+    <p class="note">Even though the VPC load balancer is listed, its DNS entry might still be registering. When a VPC load balancer is created, the hostname is registered through a public DNS. Sometimes, it can take several minutes for this DNS entry to be replicated to the specific DNS that your client is using.</p>
 
 3. Check whether an ALB exists for your cluster and that the ALB has an IP address (classic clusters) or hostname (VPC clusters) assigned.
     ```sh

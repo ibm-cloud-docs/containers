@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-22"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -644,7 +644,7 @@ A user with the **Super User** infrastructure access role [sets the API key for 
 {: note}
 
 
-Need to check that the API key or manually-set credentials have the required and suggested infrastructure permissions? Use the `ibmcloud ks infra-permissions get` [command](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get).
+Need to check that the API key or manually set credentials have the required and suggested infrastructure permissions? Use the `ibmcloud ks infra-permissions get` [command](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get).
 {: tip}
 
 The following table shows the classic infrastructure permissions that the credentials for a region and resource group can have for creating clusters and other common use cases. The description includes how you can assign the permission in the {{site.data.keyword.cloud_notm}} IAM Classic infrastructure console or the `ibmcloud sl` command. For more information, see the instructions for the [console](/docs/containers?topic=containers-access-creds#infra_console) or [CLI](/docs/containers?topic=containers-access-creds#infra_cli).

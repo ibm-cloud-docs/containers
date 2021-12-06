@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-12-01"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes, release notes
 
@@ -1042,7 +1042,7 @@ CLI reference
 :   Updated the [CLI reference page](/docs/containers?topic=containers-kubernetes-service-cli) to reflect multiple changes for the [release of version 0.3.33](/docs/containers?topic=containers-cs_cli_changelog) of the {{site.data.keyword.containerlong_notm}} CLI plug-in.
 
 Troubleshooting storage: 
-:   - Added a file and block storage troubleshooting topic for [PVC pending states](/docs/containers?topic=containers-file_pvc_pending).
+:   Added a file and block storage troubleshooting topic for [PVC pending states](/docs/containers?topic=containers-file_pvc_pending).
     - Added a block storage troubleshooting topic for when [an app can't access or write to PVC](/docs/containers?topic=containers-block_app_failures). 
 
 ### 28 May 2019
@@ -1056,7 +1056,7 @@ Troubleshooting registry
 :   Added a [troubleshooting topic](/docs/containers?topic=containers-ts_image_pull_create) for when your cluster can't pull images from {{site.data.keyword.registryfull}} due to an error during cluster creation.
     
 Troubleshooting storage
-:   - Added a topic for debugging persistent storage failures.
+:   Added a topic for debugging persistent storage failures.
     - Added a troubleshooting topic for [PVC creation failures due to missing permissions](/docs/containers?topic=containers-missing_permissions).
 
 ### 23 May 2019

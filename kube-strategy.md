@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-22"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes, containers
 
@@ -272,7 +272,7 @@ To apply labels to worker nodes, [create your worker pool](/docs/containers?topi
 ### How can I keep my cluster in a supported state?
 {: #updating_kube}
 
-Make sure that your cluster runs a [supported Kubernetes version](/docs/containers?topic=containers-cs_versions) at all times. When a new Kubernetes minor version is released, an older version is shortly deprecated after and then becomes unsupported. For more information, see [Updating the master](/docs/containers?topic=containers-update#master) and [worker nodes](/docs/containers?topic=containers-update#worker_node).
+Make sure that your cluster always runs a [supported Kubernetes version](/docs/containers?topic=containers-cs_versions). When a new Kubernetes minor version is released, an older version is shortly deprecated after and then becomes unsupported. For more information, see [Updating the master](/docs/containers?topic=containers-update#master) and [worker nodes](/docs/containers?topic=containers-update#worker_node).
 
 
 

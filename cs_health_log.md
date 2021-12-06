@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-22"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -202,7 +202,7 @@ In the following image, you can see the location of the sources that you can con
 
 **Am I responsible for keeping Fluentd updated?**
 
-In order to change your logging or filter configurations, the Fluentd logging component must be at the latest version. By default, automatic updates to the add-on are enabled. To disable automatic updates, see [Updating cluster components: Fluentd for logging](/docs/containers?topic=containers-update#logging-up).
+To change your logging or filter configurations, the Fluentd logging component must be at the latest version. By default, automatic updates to the add-on are enabled. To disable automatic updates, see [Updating cluster components: Fluentd for logging](/docs/containers?topic=containers-update#logging-up).
 
 **Can I forward some logs, but not others, from one source in my cluster?**
 

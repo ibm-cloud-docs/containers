@@ -2,14 +2,14 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-01"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes
 
 subcollection: containers
 
 content-type: tutorial
-account-plan:
+account-plan: paid
 completion-time: 60m
 
 ---
