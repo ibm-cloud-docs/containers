@@ -28,8 +28,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ### 6 December 2021
 
+
+
 Worker node fix pack update
-:   Changelog documentation is available for Kubernetes version [`1.22.4_1532`](/docs/containers?topic=containers-changelog#1224_1532), [`1.21.7_1542](/docs/containers?topic=containers-changelog#1217_1542), [`1.20.13_1564`](/docs/containers?topic=containers-changelog#12013_1564), and [`1.19.16_1571`](/docs/containers?topic=containers-changelog#11916_1571).
+:   Changelog documentation is available for Kubernetes version [`1.22.4_1532`](/docs/containers?topic=containers-changelog#1224_1532), [`1.21.7_1542`](/docs/containers?topic=containers-changelog#1217_1542), [`1.20.13_1564`](/docs/containers?topic=containers-changelog#12013_1564), and [`1.19.16_1571`](/docs/containers?topic=containers-changelog#11916_1571).
+
+
 
 ### 2 December 2021
 {: #2dec2021}
