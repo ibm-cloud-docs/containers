@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-12-03"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -65,7 +65,7 @@ The following table shows the changes that are in the master fix pack update `1.
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.2.16 | v1.2.18 | Updated `Go` module dependencies and to use `Go` version `1.16.9`.  Updated image for [CVE-2021-22946](https://nvd.nist.gov/vuln/detail/CVE-2021-22946), [CVE-2021-22947](https://nvd.nist.gov/vuln/detail/CVE-2021-22947), [CVE-2021-33928](https://nvd.nist.gov/vuln/detail/CVE-2021-33928), [CVE-2021-33929](https://nvd.nist.gov/vuln/detail/CVE-2021-33929) and [CVE-2021-33930](https://nvd.nist.gov/vuln/detail/CVE-2021-33930). |
-| etcd | v3.4.17 | v3.4.18 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.18). |
+| etcd | v3.4.17 | v3.4.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.18). |
 | Gateway-enabled cluster controller | 1510 | 1567 | Updated to use `Go` version `1.16.9`. |
 | GPU device plug-in and installer | 58d7589 | 7fd867d | Updated image for [CVE-2021-36222](https://nvd.nist.gov/vuln/detail/CVE-2021-36222), [CVE-2021-37750](https://nvd.nist.gov/vuln/detail/CVE-2021-37750), [CVE-2021-22922](https://nvd.nist.gov/vuln/detail/CVE-2021-22922), [CVE-2021-22923](https://nvd.nist.gov/vuln/detail/CVE-2021-22923) and [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924). |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.22.2-3 | v1.22.3-2 | Updated to support the Kubernetes `1.22.3` release and to use `Go` version `1.16.9`. Updated image for [DLA-2797-1](https://www.debian.org/lts/security/2021/dla-2797). |
@@ -148,7 +148,7 @@ The following table shows the changes that are in the master fix pack `1.22.2_15
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.19.3 | v3.20.1 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | v3.19.3 | v3.20.1 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
 | containerd configuration | N/A | N/A | Cluster administrators may now update the containerd registry host configurations on their clusters. See [Updating your cluster's containerd registry host configuration](/docs/containers?topic=containers-registry#update_containerd_registry_config) and the [containerd CRI plugin configuration guide](https://github.com/containerd/containerd/blob/v1.5.5/docs/cri/config.md#registry-configuration){: external}.|
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.21.5-1 | v1.22.2-1 | Updated to support the Kubernetes `1.22.2` release. In addition, the code for this component is now [open source](https://github.com/IBM-Cloud/cloud-provider-ibm){: external}. |
 | Kubernetes | v1.21.5 | v1.22.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.2){: external}. This update resolves [CVE-2021-25741](https://nvd.nist.gov/vuln/detail/CVE-2021-25741){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6496649){: external}). |
@@ -191,7 +191,7 @@ The following table shows the changes that are in the master fix pack update `1.
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.2.16 | v1.2.18 | Updated `Go` module dependencies and to use `Go` version `1.16.9`.  Updated image for [CVE-2021-22946](https://nvd.nist.gov/vuln/detail/CVE-2021-22946), [CVE-2021-22947](https://nvd.nist.gov/vuln/detail/CVE-2021-22947), [CVE-2021-33928](https://nvd.nist.gov/vuln/detail/CVE-2021-33928), [CVE-2021-33929](https://nvd.nist.gov/vuln/detail/CVE-2021-33929) and [CVE-2021-33930](https://nvd.nist.gov/vuln/detail/CVE-2021-33930).  |
-| etcd | v3.4.17 | v3.4.18 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.18). |
+| etcd | v3.4.17 | v3.4.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.18). |
 | Gateway-enabled cluster controller | 1510 | 1567 | Updated to use `Go` version `1.16.9`. |
 | GPU device plug-in and installer | 58d7589 | 7fd867d | Updated image for [CVE-2021-36222](https://nvd.nist.gov/vuln/detail/CVE-2021-36222), [CVE-2021-37750](https://nvd.nist.gov/vuln/detail/CVE-2021-37750), [CVE-2021-22922](https://nvd.nist.gov/vuln/detail/CVE-2021-22922), [CVE-2021-22923](https://nvd.nist.gov/vuln/detail/CVE-2021-22923) and [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924). |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.21.5-2 | v1.21.6-2 | Updated to support the Kubernetes `1.21.6` release and to use `Go` version `1.16.9`. Updated image for [DLA-2797-1](https://www.debian.org/lts/security/2021/dla-2797). |
@@ -284,7 +284,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.19.1 | v3.19.3 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. Increased liveness and readiness probe timeouts to 10 seconds. |
+| Calico | v3.19.1 | v3.19.3 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. Increased liveness and readiness probe timeouts to 10 seconds. |
 | Gateway-enabled cluster controller | 1444 | 1510 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711) and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712). |
 | GPU device plug-in and installer | 8c8bcdf | 58d7589 | Updated to use `Go` version `1.16.7`. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.21.4-1 | v1.21.5-1 | Updated to support the Kubernetes `1.21.5` release and to use `Go` version `1.16.8` and calicoctl version `3.19.3`. Fixed a bug that may cause node initialization to fail when a new node reuses the name of a deleted node. |
@@ -489,7 +489,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.17.3 | v3.19.1 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | v3.17.3 | v3.19.1 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
 | Gateway-enabled cluster controller | 1352 | 1348 | Updated to run as a non-root user by default, with privileged escalation as needed. |
 | GPU device plug-in and installer | 9a5e70b | c7b87b1 | Updated to use Go version `1.15.12`. Updated universal base image (UBI) to version 8.4 to resolve CVEs. Updated the GPU drivers to version [460.73.01](https://www.nvidia.com/Download/driverResults.aspx/173142/){: external}. |
 | IBM Calico extension | 689 | 695 | Updated UBI minimal base image to version 8.4 to resolve CVEs. |
@@ -538,7 +538,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.2.16 | v1.2.18 | Updated `Go` module dependencies and to use `Go` version `1.16.9`.  Updated image for [CVE-2021-22946](https://nvd.nist.gov/vuln/detail/CVE-2021-22946), [CVE-2021-22947](https://nvd.nist.gov/vuln/detail/CVE-2021-22947), [CVE-2021-33928](https://nvd.nist.gov/vuln/detail/CVE-2021-33928), [CVE-2021-33929](https://nvd.nist.gov/vuln/detail/CVE-2021-33929) and [CVE-2021-33930](https://nvd.nist.gov/vuln/detail/CVE-2021-33930).  |
-| etcd | v3.4.17 | v3.4.18 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.18). |
+| etcd | v3.4.17 | v3.4.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.18). |
 | Gateway-enabled cluster controller | 1510 | 1567 | Updated to use `Go` version `1.16.9`. |
 | GPU device plug-in and installer | 58d7589 | 7fd867d | Updated image for [CVE-2021-36222](https://nvd.nist.gov/vuln/detail/CVE-2021-36222), [CVE-2021-37750](https://nvd.nist.gov/vuln/detail/CVE-2021-37750), [CVE-2021-22922](https://nvd.nist.gov/vuln/detail/CVE-2021-22922), [CVE-2021-22923](https://nvd.nist.gov/vuln/detail/CVE-2021-22923) and [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924). |
 | Kubernetes add-on resizer | 1.8.12 | 1.8.13 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.13). |
@@ -630,7 +630,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.17.4 | v3.17.5 | See the [Calico release notes](https://docs.projectcalico.org/releases). Increased liveness and readiness probe timeouts to 10 seconds. |
+| Calico | v3.17.4 | v3.17.5 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases). Increased liveness and readiness probe timeouts to 10 seconds. |
 | CoreDNS | 1.8.0 | 1.8.4 | See the [CoreDNS release notes](https://coredns.io/2021/05/28/coredns-1.8.4-release/). |
 | Gateway-enabled cluster controller | 1444 | 1510 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711) and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712). |
 | GPU device plug-in and installer | 8c8bcdf | 58d7589 | Updated to use `Go` version `1.16.7`. |
@@ -780,7 +780,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.17.3 | v3.17.4 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | v3.17.3 | v3.17.4 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
 | Cluster health image | v1.2.12 | v1.2.13 | Updated to use `Go` version `1.15.12`. Updated image for [CVE-2021-33194](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33194){: external}. |
 | Gateway-enabled cluster controller | 1352 | 1348 | Updated to run as a non-root user by default, with privileged escalation as needed. |
 | GPU device plug-in and installer | 9a5e70b | 772e15f | Updated to use `Go` version `1.15.12`. Updated universal base image (UBI) to version 8.4 to resolve CVEs. Updated the GPU drivers to version [460.73.01](https://www.nvidia.com/Download/driverResults.aspx/173142/){: external}. |
@@ -1007,7 +1007,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.17.2 | v3.17.3 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | v3.17.2 | v3.17.3 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.20.4-2 | v1.20.4-4 | Updated to use `calicoctl` version 3.17.3. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1165 | 1274 | Fixed a bug that might cause version 2.0 network load balancers (NLBs) to crash and restart on load balancer updates. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
@@ -1036,7 +1036,7 @@ The following table shows the changes that are in the version updates for `1.20.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.16.5 | v3.17.2 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | v3.16.5 | v3.17.2 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
 | Cluster health image | v1.2.6 | v1.2.8 | Updated to use `Go` version 1.15.7. Updated image to implement additional IBM security controls. |
 | Gateway-enabled cluster controller | 1195 | 1232 | Updated to use `Go` version 1.15.7. |
 | GPU device plug-in and installer | af5a6cb | 1c41e4b | Updated to support the Kubernetes 1.20 release. |
@@ -1088,7 +1088,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.2.16 | v1.2.18 | Updated `Go` module dependencies and to use `Go` version `1.16.9`.  Updated image for [CVE-2021-22946](https://nvd.nist.gov/vuln/detail/CVE-2021-22946), [CVE-2021-22947](https://nvd.nist.gov/vuln/detail/CVE-2021-22947), [CVE-2021-33928](https://nvd.nist.gov/vuln/detail/CVE-2021-33928), [CVE-2021-33929](https://nvd.nist.gov/vuln/detail/CVE-2021-33929) and [CVE-2021-33930](https://nvd.nist.gov/vuln/detail/CVE-2021-33930).  |
-| etcd | v3.4.17 | v3.4.18 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.18). |
+| etcd | v3.4.17 | v3.4.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.18). |
 | Gateway-enabled cluster controller | 1510 | 1567 | Updated to use `Go` version `1.16.9`. |
 | GPU device plug-in and installer | eb817b2 | b87bfa2 | Updated image for [CVE-2021-36222](https://nvd.nist.gov/vuln/detail/CVE-2021-36222), [CVE-2021-37750](https://nvd.nist.gov/vuln/detail/CVE-2021-37750), [CVE-2021-22922](https://nvd.nist.gov/vuln/detail/CVE-2021-22922), [CVE-2021-22923](https://nvd.nist.gov/vuln/detail/CVE-2021-22923) and [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924). |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.19.15-3 | v1.19.16-3 | Updated to support the Kubernetes `1.19.16` release. Updated image for [DLA-2797-1](https://www.debian.org/lts/security/2021/dla-2797). |
@@ -1330,7 +1330,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.16.8 | v3.16.10 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | v3.16.8 | v3.16.10 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
 | Cluster health image | v1.2.12 | v1.2.13 | Updated to use `Go` version `1.15.12`. Updated image for [CVE-2021-33194](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33194){: external}. |
 | Gateway-enabled cluster controller | 1352 | 1348 | Updated to run as a non-root user by default, with privileged escalation as needed. |
 | GPU device plug-in and installer | 19bf25c | 22e2e0d | Updated to use `Go` version `1.15.12`. Updated universal base image (UBI) to version `8.4` to resolve CVEs. Updated the GPU drivers to version [460.73.01](https://www.nvidia.com/Download/driverResults.aspx/173142/){: external}. |
@@ -1556,7 +1556,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.16.7 | v3.16.8 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | v3.16.7 | v3.16.8 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.19.8-2 | v1.19.8-4 | Updated to use `calicoctl` version 3.16.8. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1165 | 1274 | Fixed a bug that might cause version 2.0 network load balancers (NLBs) to crash and restart on load balancer updates. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
@@ -1570,7 +1570,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.16.5 | v3.16.7 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | v3.16.5 | v3.16.7 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
 | Cluster health image | v1.2.6 | v1.2.8 | Updated to use `Go` version 1.15.7. Updated image to implement additional IBM security controls. |
 | Gateway-enabled cluster controller | 1195 | 1232 | Updated to use `Go` version 1.15.7. |
 | IBM Calico extension | 567 | 618 | Updated to use `Go` version 1.15.7. |
@@ -1769,7 +1769,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.16.4 | v3.16.5 | See the [Calico release notes](https://docs.projectcalico.org/releases). |
+| Calico | v3.16.4 | v3.16.5 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases). |
 | Cluster health image | v1.2.2 | v1.2.3 | Status codes have been added to add-on health messages. Set add-on health state to `critical` and status to `unknown` when cluster health is `critical`. When a cluster has a Kubernetes key management service (KMS) provider enabled and a disabled [Key Protect](/docs/containers?topic=containers-encryption#keyprotect) key, cluster health state is now set to `critical`. Updated image for [DLA-2424-1](https://www.debian.org/lts/security/2020/dla-2424). |
 | CoreDNS | 1.7.1 | 1.8.0 | See the [CoreDNS release notes](https://coredns.io/2020/10/22/coredns-1.8.0-release/). |
 | GPU device plug-in and installer | 0c07674 | b966c41 | Updated image for [CVE-2019-20386](https://nvd.nist.gov/vuln/detail/CVE-2019-20386){: external}, [CVE-2019-13050](https://nvd.nist.gov/vuln/detail/CVE-2019-13050){: external}, [CVE-2020-8177](https://nvd.nist.gov/vuln/detail/CVE-2020-8177){: external}, [CVE-2019-14889](https://nvd.nist.gov/vuln/detail/CVE-2019-14889){: external}, [CVE-2020-1730](https://nvd.nist.gov/vuln/detail/CVE-2020-1730){: external}, [CVE-2020-10029](https://nvd.nist.gov/vuln/detail/CVE-2020-10029){: external}, [CVE-2020-1751](https://nvd.nist.gov/vuln/detail/CVE-2020-1751){: external}, [CVE-2020-1752](https://nvd.nist.gov/vuln/detail/CVE-2020-1752){: external}, [CVE-2019-16168](https://nvd.nist.gov/vuln/detail/CVE-2019-16168){: external}, [CVE-2019-20218](https://nvd.nist.gov/vuln/detail/CVE-2019-20218){: external}, [CVE-2019-5018](https://nvd.nist.gov/vuln/detail/CVE-2019-5018){: external}, [CVE-2020-13630](https://nvd.nist.gov/vuln/detail/CVE-2020-13630){: external}, [CVE-2020-13631](https://nvd.nist.gov/vuln/detail/CVE-2020-13631){: external}, [CVE-2020-13632](https://nvd.nist.gov/vuln/detail/CVE-2020-13632){: external}, [CVE-2020-6405](https://nvd.nist.gov/vuln/detail/CVE-2020-6405){: external}, [CVE-2020-9327](https://nvd.nist.gov/vuln/detail/CVE-2020-9327){: external}, [CVE-2019-1551](https://nvd.nist.gov/vuln/detail/CVE-2019-1551){: external}, [CVE-2019-19221](https://nvd.nist.gov/vuln/detail/CVE-2019-19221){: external}, [CVE-2019-16935](https://nvd.nist.gov/vuln/detail/CVE-2019-16935){: external}, [CVE-2019-20907](https://nvd.nist.gov/vuln/detail/CVE-2019-20907){: external}, [CVE-2020-14422](https://nvd.nist.gov/vuln/detail/CVE-2020-14422){: external}, [CVE-2020-8492](https://nvd.nist.gov/vuln/detail/CVE-2020-8492){: external}, [CVE-2019-19906](https://nvd.nist.gov/vuln/detail/CVE-2019-19906){: external}, [CVE-2019-20454](https://nvd.nist.gov/vuln/detail/CVE-2019-20454){: external}, [CVE-2019-19956](https://nvd.nist.gov/vuln/detail/CVE-2019-19956){: external}, [CVE-2019-20388](https://nvd.nist.gov/vuln/detail/CVE-2019-20388){: external}, [CVE-2020-7595](https://nvd.nist.gov/vuln/detail/CVE-2020-7595){: external}, [CVE-2019-13627](https://nvd.nist.gov/vuln/detail/CVE-2019-13627){: external}, [CVE-2018-20843](https://nvd.nist.gov/vuln/detail/CVE-2018-20843){: external}, [CVE-2019-15903](https://nvd.nist.gov/vuln/detail/CVE-2019-15903){: external}, and [CVE-2019-20387](https://nvd.nist.gov/vuln/detail/CVE-2019-20387){: external}. |
@@ -1815,7 +1815,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.16.2 | v3.16.4 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | v3.16.2 | v3.16.4 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
 | Calico configuration | N/A | N/A | Updated the `calico-node` daemon set in the `kube-system` namespace to set the `spec.updateStrategy.rollingUpdate.maxUnavailable` parameter to `10%` for clusters with more than 50 worker nodes. |
 | Cluster health image | v1.2.1 | v1.2.2 | Fixed the cluster health status for when add-on customizations are used. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.19.2-9 | v1.19.3-3 | Updated to support the Kubernetes 1.19.3 release and to use `Go` version 1.15.2. |
@@ -1832,7 +1832,7 @@ The following table shows the changes that are in the `1.19.2_1524` version upda
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.13.4 | v3.16.2 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. In addition, the Calico configuration was updated to use the [Kubernetes API data store driver](https://docs.projectcalico.org/getting-started/kubernetes/hardway/the-calico-datastore){: external}. |
+| Calico | v3.13.4 | v3.16.2 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. In addition, the Calico configuration was updated to use the [Kubernetes API data store driver](https://docs.projectcalico.org/getting-started/kubernetes/hardway/the-calico-datastore){: external}. |
 | Cluster health image | v1.1.11 | v1.2.1 | When a cluster has a Kubernetes key management service (KMS) provider enabled and a disabled [{{site.data.keyword.keymanagementserviceshort}}](/docs/containers?topic=containers-encryption#keyprotect) key, a warning is now returned in the cluster health state. In addition, updated to use `Go` version 1.15.2. |
 | containerd | 1.3.4 | 1.4.1 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.4.1){: external}. |
 | CoreDNS | 1.6.9 | 1.7.1 | See the [CoreDNS release notes](https://coredns.io/2020/09/21/coredns-1.7.1-release/){: external}. In addition, the CoreDNS configuration was updated to increase the weight of scheduling CoreDNS pods to different worker nodes and zones. |
