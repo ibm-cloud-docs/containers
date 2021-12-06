@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-01"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes
 
@@ -10,7 +10,7 @@ subcollection: containers
 
 content-type: tutorial
 services: containers, vpc
-account-plan:
+account-plan: paid
 completion-time: 30m
 
 ---
@@ -122,7 +122,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         {: pre}
 
         Example output
-        ```
+        ```sh
         Client Version: 1.21.6
         Server Version: 1.21.6+IKS
         ```
@@ -153,7 +153,7 @@ To deploy the app:
     ```
     {: pre}
 
-2. Navigate to the `Lab 1` directory.
+2. Go to the `Lab 1` directory.
 
     ```sh
     cd 'container-service-getting-started-wt/Lab 1'
@@ -182,7 +182,7 @@ To deploy the app:
 
     When the build is complete, verify that you see the following success message:
 
-    ```
+    ```sh
     => exporting to image                                                                           0.0s
     => => exporting layers                                                                          0.0s
     => => writing image sha256:3ca1eb1d0998f738b552d4c435329edf731fe59e427555b78ba2fb54f2017906     0.0s
@@ -199,7 +199,7 @@ To deploy the app:
 
     Example output
 
-    ```
+    ```sh
     deployment.apps/hello-world-deployment created
     ```
     {: screen}
@@ -215,7 +215,7 @@ To deploy the app:
 
     Example output
 
-    ```
+    ```sh
     service/hello-world-service exposed
     ```
     {: screen}
@@ -299,13 +299,13 @@ To deploy the app:
     {: pre}
 
 9. Make a request to the NodePort service by using the worker node private IP address and the node port that you previously retrieved.
-    ```
+    ```sh
     wget -O - 10.xxx.xx.xxx:30872
     ```
     {: pre}
 
     Example output
-    ```
+    ```sh
     Connecting to 10.xxx.xx.xxx:30872 (10.xxx.xx.xxx:30872)
     Hello world from hello-world-deployment-d99cddb45-lmj2v! Your app is up and running in a cluster!
     -                    100% |*****************************************************************************************|    88   0:00:00 ETA
@@ -391,7 +391,8 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     {: pre}
 
     In the following example CLI output, the VPC load balancer that is named `kube-bsaucubd07dhl66e4tgg-1f4f408ce6d2485499bcbdec0fa2d306` is created for the Kubernetes `LoadBalancer` service:
-    ```
+    
+    ```sh
     ID                                          Name                                                         Family        Subnets               Is public   Provision status   Operating status   Resource group
     r006-d044af9b-92bf-4047-8f77-a7b86efcb923   kube-bsaucubd07dhl66e4tgg-1f4f408ce6d2485499bcbdec0fa2d306   Application   mysubnet-us-south-3   true        active             online             default
     ```

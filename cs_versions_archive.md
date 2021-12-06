@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-11-22"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -414,7 +414,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.13.4 | v3.13.5 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | v3.13.4 | v3.13.5 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
 | Cluster health image | v1.1.16 | v1.1.18 | Updated to use `Go` version 1.15.7. Updated image to implement additional IBM security controls. |
 | Gateway-enabled cluster controller | 1195 | 1232 | Updated to use `Go` version 1.15.7. |
 | IBM Calico extension | 567 | 618 | Updated to use `Go` version 1.15.7. |
@@ -865,7 +865,7 @@ The following table shows the changes that are in the master and worker node upd
 
 | Component | Location | Previous | Current | Description |
 | --------- | -------- | ------- | -------- | ----------- |
-| Calico | Master | v3.13.3 | v3.13.4 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. The master update resolves CVE-2020-13597 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6226322){: external}). |
+| Calico | Master | v3.13.3 | v3.13.4 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. The master update resolves CVE-2020-13597 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6226322){: external}). |
 | Cluster health image | Master | v1.1.5 | v1.1.8 | Additional status information is included when an add-on health state is `critical`. Improved performance when handling cluster status updates. |
 | Cluster master operations | Master | N/A | N/A | Cluster master operations such as `refresh` or `update` are now canceled if a broken [Kubernetes admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} is detected. |
 | etcd | Master | v3.4.7 | v3.4.9 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.9){: external}. |
@@ -1597,7 +1597,7 @@ The following table shows the changes that are in the master and worker node upd
 
 | Component | Location | Previous | Current | Description |
 | --------- | -------- | ------- | -------- | ----------- |
-| Calico | Master | v3.12.1 | v3.12.2 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. The master update resolves CVE-2020-13597 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6226322){: external}). |
+| Calico | Master | v3.12.1 | v3.12.2 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. The master update resolves CVE-2020-13597 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6226322){: external}). |
 | Cluster health image | Master | v1.1.5 | v1.1.8 | Additional status information is included when an add-on health state is `critical`. Improved performance when handling cluster status updates. |
 | Cluster master operations | Master | N/A | N/A | Cluster master operations such as `refresh` or `update` are now canceled if a broken [Kubernetes admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} is detected. |
 | etcd | Master | v3.4.7 | v3.4.9 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.9){: external}. |
@@ -1701,7 +1701,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.12.0 | v3.12.1 | See the [Calico release notes](https://docs.projectcalico.org/release-notes/){: external}. Updated to allow egress from the worker nodes via the `allow-vrrp` `GlobalNetworkPolicy`. |
+| Calico | v3.12.0 | v3.12.1 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/){: external}. Updated to allow egress from the worker nodes via the `allow-vrrp` `GlobalNetworkPolicy`. |
 | CoreDNS | 1.6.7 | 1.6.9 | See the [CoreDNS release notes](https://coredns.io/2020/03/24/coredns-1.6.9-release/){: external}. Fixed a bug during Corefile migration that might generate invalid data that makes CoreDNS pods fail. |
 | GPU device plug-in and installer | 49979f5 | 8c6538f | Updated the GPU drivers to version [440.33.01](https://www.nvidia.com/download/driverResults.aspx/154570){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.17.4-1 | v1.17.4-3 | Updated to use `calicoctl` version 3.12.1. |
@@ -2191,7 +2191,7 @@ The following table shows the changes that are in the master and worker node upd
 
 | Component | Location | Previous | Current | Description |
 | --------- | -------- | ------- | -------- | ----------- |
-| Calico | Master | v3.9.5 | v3.9.6 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. The master update resolves CVE-2020-13597 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6226322){: external}). |
+| Calico | Master | v3.9.5 | v3.9.6 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. The master update resolves CVE-2020-13597 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6226322){: external}). |
 | Cluster health image | Master | v1.1.5 | v1.1.8 | Additional status information is included when an add-on health state is `critical`. Improved performance when handling cluster status updates. |
 | Cluster master operations | Master | N/A | N/A | Cluster master operations such as `refresh` or `update` are now canceled if a broken [Kubernetes admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} is detected. |
 | etcd | Master | v3.3.20 | v3.3.22 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.22){: external}. |
@@ -2492,7 +2492,7 @@ The following table shows the changes that are in the master fix pack 1.16.3_151
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.9.2 | v3.9.3 | See the [Calico release notes](https://docs.projectcalico.org/release-notes/){: external}. Update resolves [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}, [CVE-2019-5094](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094){: external}, and [DSA-4539-3](https://lists.debian.org/debian-security-announce/2019/msg00193.html){: external}. |
+| Calico | v3.9.2 | v3.9.3 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/){: external}. Update resolves [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}, [CVE-2019-5094](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094){: external}, and [DSA-4539-3](https://lists.debian.org/debian-security-announce/2019/msg00193.html){: external}. |
 | GPU device plug-in and installer | 9cd3df7 |    f2e7bd7 | Updated image for [CVE-2019-17596](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17596){: external}. Updated the GPU drivers to version [440.31](https://www.nvidia.com/Download/driverResults.aspx/153226/){: external}. |
 | {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor    | 351 | 353 | Updated to use `Go` version 1.12.11. |
 | {{site.data.keyword.cloud_notm}} Provider    | v1.16.2-77 | v1.16.3-94 | Updated to support the Kubernetes 1.16.3 release. `calicoctl` version is updated to v3.9.3. |
@@ -2693,7 +2693,7 @@ The following table shows the changes that are in the master and worker node upd
 
 | Component | Location | Previous | Current | Description |
 | --------- | -------- | ------- | -------- | ----------- |
-| Calico | Master | v3.8.6 | v3.8.9 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. The master update resolves CVE-2020-13597 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6226322){: external}). |
+| Calico | Master | v3.8.6 | v3.8.9 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. The master update resolves CVE-2020-13597 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6226322){: external}). |
 | Cluster health image | Master | v1.1.5 | v1.1.8 | Additional status information is included when an add-on health state is `critical`. Improved performance when handling cluster status updates. |
 | Cluster master operations | Master | N/A | N/A | Cluster master operations such as `refresh` or `update` are now canceled if a broken [Kubernetes admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} is detected. |
 | etcd | Master | v3.3.20 | v3.3.22 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.22){: external}. |
@@ -2962,7 +2962,7 @@ The following table shows the changes that are in the master fix pack 1.15.6_152
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.8.2 | v3.8.4 | See the [Calico release notes](https://docs.projectcalico.org/release-notes/){: external}. Update resolves [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}, [CVE-2019-5094](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094){: external}, and [DSA-4539-3](https://lists.debian.org/debian-security-announce/2019/msg00193.html){: external}. |
+| Calico | v3.8.2 | v3.8.4 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/){: external}. Update resolves [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}, [CVE-2019-5094](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094){: external}, and [DSA-4539-3](https://lists.debian.org/debian-security-announce/2019/msg00193.html){: external}. |
 | GPU device plug-in and installer | 9cd3df7 | f2e7bd7 | Updated image for [CVE-2019-17596](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17596){: external}. Updated the GPU drivers to version [440.31](https://www.nvidia.com/Download/driverResults.aspx/153226/){: external}. |
 | {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor    | 350 | 353 | Updated to use the `distroless/static` base image and to use `Go` version 1.12.11. |
 | {{site.data.keyword.cloud_notm}} Provider    | v1.15.5-159 | v1.15.6-182 | Updated to support the Kubernetes 1.15.6 release. `calicoctl` version is updated to v3.8.4. |
@@ -3461,7 +3461,7 @@ The following table shows the changes that are in the patch 1.15.1_1511.
 <td>Calico</td>
 <td>v3.6.4</td>
 <td>v3.8.1</td>
-<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. In addition, Kubernetes version 1.15 clusters now have a new <code>allow-all-private-default</code> global network policy to allow all ingress and egress network traffic on private interface. For more information, see <a href="/docs/containers?topic=containers-network_policies#isolate_workers">Isolating clusters on the private network</a>.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. In addition, Kubernetes version 1.15 clusters now have a new <code>allow-all-private-default</code> global network policy to allow all ingress and egress network traffic on private interface. For more information, see <a href="/docs/containers?topic=containers-network_policies#isolate_workers">Isolating clusters on the private network</a>.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -4346,7 +4346,7 @@ The following table shows the changes that are in the master fix pack 1.14.4_152
 <td>Calico</td>
 <td>v3.6.1</td>
 <td>v3.6.4</td>
-<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/#TTA-2019-001">TTA-2019-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/959551">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/#TTA-2019-001">TTA-2019-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/959551">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>CoreDNS configuration</td>
@@ -5459,7 +5459,7 @@ The following table shows the changes that are in the master fix pack 1.13.8_152
 <td>Calico</td>
 <td>v3.4.4</td>
 <td>v3.6.4</td>
-<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/#TTA-2019-001">TTA-2019-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/959551">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/#TTA-2019-001">TTA-2019-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/959551">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>CoreDNS configuration</td>
@@ -5855,7 +5855,7 @@ The following table shows the changes that are in the patch 1.13.5_1517.
 <td>Calico</td>
 <td>v3.4.0</td>
 <td>v3.4.4</td>
-<td>See the <a href="https://docs.projectcalico.org/releases/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946">CVE-2019-9946</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/879585">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/releases/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946">CVE-2019-9946</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/879585">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster master HA proxy</td>
@@ -6205,7 +6205,7 @@ The following table shows the changes that are in the patch 1.13.2_1507.
 <td>Calico</td>
 <td>v3.3.1</td>
 <td>v3.4.0</td>
-<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster DNS provider</td>
@@ -6754,7 +6754,7 @@ The following table shows the changes that are in the master fix pack 1.12.10_15
 <td>Calico</td>
 <td>v3.3.6</td>
 <td>v3.6.4</td>
-<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/#TTA-2019-001">TTA-2019-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/959551">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/#TTA-2019-001">TTA-2019-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/959551">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>CoreDNS configuration</td>
@@ -7145,7 +7145,7 @@ The following table shows the changes that are in the patch 1.12.7_1548.
 <td>Calico</td>
 <td>v3.3.1</td>
 <td>v3.3.6</td>
-<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946">CVE-2019-9946</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/879585">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946">CVE-2019-9946</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/879585">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster master HA proxy</td>
@@ -7759,7 +7759,7 @@ The following table shows the changes that are in patch 1.12.2_1529.
 <td>Calico</td>
 <td>v3.2.1</td>
 <td>v3.3.1</td>
-<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/">Tigera Technical Advisory TTA-2018-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/740799">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/">Tigera Technical Advisory TTA-2018-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. For more information, see the <a href="https://www.ibm.com/support/pages/node/740799">IBM security bulletin</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster DNS configuration</td>
@@ -8262,7 +8262,7 @@ The following table shows the changes that are in the patch 1.11.9_1554.
 <td>Calico</td>
 <td>v3.3.1</td>
 <td>v3.3.6</td>
-<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946">CVE-2019-9946</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946">CVE-2019-9946</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster master HA proxy</td>
@@ -8865,7 +8865,7 @@ The following table shows the changes that are in patch 1.11.4_1535.
 <td>Calico</td>
 <td>v3.2.1</td>
 <td>v3.3.1</td>
-<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/">Tigera Technical Advisory TTA-2018-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/">Tigera Technical Advisory TTA-2018-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -9229,7 +9229,7 @@ The following table shows the changes that are in patch 1.11.2_1516.
 <td>Calico</td>
 <td>v3.1.3</td>
 <td>v3.2.1</td>
-<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -10007,7 +10007,7 @@ The following table shows the changes that are in patch 1.10.11_1536.
 <td>Calico</td>
 <td>v3.2.1</td>
 <td>v3.3.1</td>
-<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/">Tigera Technical Advisory TTA-2018-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/">Tigera Technical Advisory TTA-2018-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -10359,7 +10359,7 @@ The following table shows the changes that are in patch 1.10.7_1520.
 <td>Calico</td>
 <td>v3.1.3</td>
 <td>v3.2.1</td>
-<td>See the Calico <a href="https://docs.projectcalico.org/release-notes/">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the Calico <a href="https://projectcalico.docs.tigera.io/release-notes/">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -10468,7 +10468,7 @@ The following table shows the changes that are in patch 1.10.5_1517.
 <td>Calico</td>
 <td>v3.1.1</td>
 <td>v3.1.3</td>
-<td>See the Calico <a href="https://docs.projectcalico.org/releases/">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the Calico <a href="https://projectcalico.docs.tigera.io/releases/">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -10687,7 +10687,7 @@ The following table shows the changes that are in patch 1.10.1_1508.
 <td>Calico</td>
 <td>v2.6.5</td>
 <td>v3.1.1</td>
-<td>See the Calico <a href="https://docs.projectcalico.org/release-notes/">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the Calico <a href="https://projectcalico.docs.tigera.io/release-notes/">release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kubernetes Heapster</td>
@@ -10857,7 +10857,7 @@ The following table shows the changes that are in patch 1.9.11_1536.
 <td>Calico</td>
 <td>v2.6.5</td>
 <td>v2.6.12</td>
-<td>See the <a href="https://docs.projectcalico.org/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/">Tigera Technical Advisory TTA-2018-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">. Update resolves <a href="https://www.tigera.io/security-bulletins/">Tigera Technical Advisory TTA-2018-001</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Kernel</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-01"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -205,7 +205,7 @@ Review the following app level metrics and alert thresholds for help setting up 
 Common app level conditions to monitor include things such as,
 - Multiple app pods or containers are restarted within 10 minutes.
 - More than one replica of an app is not running.
-- More than ten 5XX `HTTP` response codes received within 10 minute time frame.
+- More than ten 5XX `HTTP` response codes received within 10 minutes.
 - More than one pod in a namespace is in an unknown state.
 - More than five pods can't be scheduled on a worker node (pending state).
 
@@ -486,7 +486,7 @@ Review the following table for information on the individual components of healt
 |`PodFailureThresholdPercent`| When the resource type is `POD`, enter the threshold for the percentage of pods on a worker node that can be in a [NotReady](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes) state. This percentage is based on the total number of pods that are scheduled to a worker node. When a check determines that the percentage of unhealthy pods is greater than the threshold, the check counts as one failure.|
 |`CorrectiveAction`| Enter the action to run when the failure threshold is met. A corrective action runs only while no other workers are being repaired and when this worker node is not in a cool-off period from a previous action. <br>`REBOOT`: Reboots the worker node.<br>`RELOAD`: Reloads all the necessary configurations for the worker node from a clean OS.|
 |`CooloffSeconds`| Enter the number of seconds Autorecovery must wait to issue another corrective action for a node that was already issued a corrective action. The cool off period starts at the time a corrective action is issued.|
-|`IntervalSeconds`| Enter the number of seconds in between consecutive checks. For example, if the value is 180, Autorecovery runs the check on each node every 3 minutes.|
+|`IntervalSeconds`| Enter the number of seconds between consecutive checks. For example, if the value is 180, Autorecovery runs the check on each node every 3 minutes.|
 |`TimeoutSeconds`| Enter the maximum number of seconds that a check call to the database takes before Autorecovery terminates the call operation. The value for `TimeoutSeconds` must be less than the value for `IntervalSeconds`.|
 |`Port`| When the check type is `HTTP`, enter the port that the HTTP server must bind to on the worker nodes. This port must be exposed on the IP of every worker node in the cluster. Autorecovery requires a constant port number across all nodes for checking servers. Use [daemon sets](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) when you deploy a custom server into a cluster.|
 |`ExpectedStatus`| When the check type is `HTTP`, enter the HTTP server status that you expect to be returned from the check. For example, a value of 200 indicates that you expect an `OK` response from the server.|

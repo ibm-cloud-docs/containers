@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-22"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -829,6 +829,7 @@ As of 24 August 2020, an [{{site.data.keyword.cloudcerts_long}}](/docs/certifica
 {: #manager_certs_about}
 
 #### Verifying permissions for {{site.data.keyword.cloudcerts_short}}
+{: #verifying_cloud_cert_perms}
 
 For a {{site.data.keyword.cloudcerts_short}} instance to be created for your new or existing cluster, ensure that the API key for the region and resource group that the cluster is created in has the correct permissions. You can check who set the API key for the cluster by running `ibmcloud ks api-key info -c <cluster_name_or_ID>`.
 * If the account owner set the API key, then your cluster is assigned a {{site.data.keyword.cloudcerts_short}} instance.
@@ -838,6 +839,7 @@ When the creation of the {{site.data.keyword.cloudcerts_short}} instance is trig
 {: note}
 
 #### Viewing your {{site.data.keyword.cloudcerts_short}} instance and certificates
+{: #verify_certs_instances}
 
 To view your {{site.data.keyword.cloudcerts_short}} instance:
 1. In the {{site.data.keyword.cloud_notm}} console, navigate to your [{{site.data.keyword.cloud_notm}} resource list](https://cloud.ibm.com/resources){: external}.
@@ -851,6 +853,7 @@ Do not delete your cluster's {{site.data.keyword.cloudcerts_short}} instance. Wh
 {: important}
 
 #### Managing secrets for certificates
+{: #manage_certs_secrets}
 
 To manage the secrets for TLS certificates in your cluster, you can use the `ibmcloud ks ingress secret` set of commands.
 
@@ -964,7 +967,7 @@ An [`IngressClass` resource](https://kubernetes.io/docs/concepts/services-networ
 ### Default Ingress classes for public and private ALBs
 {: #ingress-class-default}
 
-In {{site.data.keyword.containerlong_notm}} clusters that run Kubernetes version 1.18 or later and that are created on or after 01 December 2020, `IngressClass` resources are created by default for public and private ALBs.
+In {{site.data.keyword.containerlong_notm}} clusters that run Kubernetes version 1.18 or later, `IngressClass` resources are created by default for public and private ALBs.
 {: shortdesc}
 
 The default `IngressClass` resources for public ALBs `public-iks-k8s-nginx` and private ALBs `private-iks-k8s-nginx` are not automatically created for existing 1.18 clusters that were created before 01 December 2020. Instead, choose among the following options.

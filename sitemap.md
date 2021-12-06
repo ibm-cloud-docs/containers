@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-12-03"
+lastupdated: "2021-12-06"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [December 2021](/docs/containers?topic=containers-iks-release#release-dec-2021)
+
+    * [6 December 2021](/docs/containers?topic=containers-iks-release#6-december-2021)
 
     * [2 December 2021](/docs/containers?topic=containers-iks-release#2dec2021)
 
@@ -646,7 +648,7 @@ subcollection: containers
 
     * [Scenario: Run internet-facing app workloads in a VPC cluster with limited public egress](/docs/containers?topic=containers-plan_clusters#vpc-pgw)
 
-    * [Scenario: Extend your on-premises data center to a VPC cluster](/docs/containers?topic=containers-plan_clusters#vpc-vpn)
+    * [Extend your on-premises data center to a VPC cluster](/docs/containers?topic=containers-plan_clusters#vpc-vpn)
 
 * [Understanding network basics of classic clusters](/docs/containers?topic=containers-plan_clusters#plan_basics)
 
@@ -660,9 +662,9 @@ subcollection: containers
 
 * [Example scenarios for classic cluster network setups](/docs/containers?topic=containers-plan_clusters#classic-scenarios)
 
-    * [Scenario: Run internet-facing app workloads in a classic cluster](/docs/containers?topic=containers-plan_clusters#internet-facing)
+    * [Running internet-facing app workloads in a classic cluster](/docs/containers?topic=containers-plan_clusters#internet-facing)
 
-    * [Scenario: Extend your on-premises data center to a classic cluster and add limited public access](/docs/containers?topic=containers-plan_clusters#limited-public)
+    * [Extending your on-premises data center to a classic cluster and add limited public access](/docs/containers?topic=containers-plan_clusters#limited-public)
 
     * [Scenario: Extend your on-premises data center to a classic cluster](/docs/containers?topic=containers-plan_clusters#private_clusters)
 
@@ -3033,7 +3035,7 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
-* [Version 1.0.353](/docs/containers?topic=containers-cs_cli_changelog#cli-10347)
+* [Version 1.0.353](/docs/containers?topic=containers-cs_cli_changelog#cli-10353)
 
 * [Version 1.0.347](/docs/containers?topic=containers-cs_cli_changelog#cli-10347)
 
@@ -3212,6 +3214,8 @@ subcollection: containers
 
 * [Version 1.22 changelog](/docs/containers?topic=containers-changelog#122_changelog)
 
+    * [Changelog for worker node fix pack 1.22.4_1532, released 6 December 2021](/docs/containers?topic=containers-changelog#1224_1532)
+
     * [Changelog for worker node fix pack 1.22.3_1530, released 22 November 2021](/docs/containers?topic=containers-changelog#1223_1530)
 
     * [Changelog for master fix pack 1.22.2_1529, released 17 November 2021](/docs/containers?topic=containers-changelog#1222_1529)
@@ -3227,6 +3231,8 @@ subcollection: containers
     * [Changelog for master fix pack 1.22.2_1522 and worker node fix pack 1.22.2_1523, released 29 Sept 2021](/docs/containers?topic=containers-changelog#1222_1522_and_1222_1523)
 
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog#121_changelog)
+
+    * [Changelog for worker node fix pack 1.21.7_1542, released 6 December 2021](/docs/containers?topic=containers-changelog#changelog-for-worker-node-fix-pack-1217_1542,-released-6-december-2021)
 
     * [Changelog for worker node fix pack 1.21.6_1540, released 22 November 2021](/docs/containers?topic=containers-changelog#1216_1540)
 
@@ -3269,6 +3275,8 @@ subcollection: containers
     * [Changelog for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1519)
 
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+
+    * [Changelog for worker node fix pack 1.20.13_1564, released 22 November 2021](/docs/containers?topic=containers-changelog#12013_1564)
 
     * [Changelog for worker node fix pack 1.20.12_1562, released 22 November 2021](/docs/containers?topic=containers-changelog#12012_1562)
 
@@ -3337,6 +3345,8 @@ subcollection: containers
     * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 
 * [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+
+    * [Changelog for worker node fix pack 1.19.16_1571, released 6 December 2021](/docs/containers?topic=containers-changelog#11916_1571)
 
     * [Changelog for worker node fix pack 1.19.16_1569, released 22 November 2021](/docs/containers?topic=containers-changelog#11916_1569)
 

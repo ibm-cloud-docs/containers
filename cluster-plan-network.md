@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-11-22"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes, subnets, ips, vlans, networking
 
@@ -266,7 +266,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 
 
 
-### Scenario: Extend your on-premises data center to a VPC cluster
+### Extend your on-premises data center to a VPC cluster
 {: #vpc-vpn}
 
 ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) In this scenario, you run workloads in a VPC cluster. However, you want these workloads to be accessible only to services, databases, or other resources in your private networks in an on-premises data center. Your cluster workloads might need to access a few other {{site.data.keyword.cloud_notm}} services that support communication over the private network.
@@ -445,7 +445,7 @@ For example, if your worker nodes are connected to a private VLAN only, but you 
 ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Now that you understand the basics of cluster networking, check out some example scenarios in which various classic cluster network setups can meet your workload needs.
 {: shortdesc}
 
-### Scenario: Run internet-facing app workloads in a classic cluster
+### Running internet-facing app workloads in a classic cluster
 {: #internet-facing}
 
 ![Classic infrastructure provider icon.](images/icon-classic-2.svg) In this scenario, you want to run workloads in a classic cluster that are accessible to requests from the Internet so that end users can access your apps. You want the option of isolating public access in your cluster and of controlling what public requests are permitted to your cluster. Additionally, your workers have automatic access to any {{site.data.keyword.cloud_notm}} services that you want to connect with your cluster.
@@ -453,7 +453,7 @@ For example, if your worker nodes are connected to a private VLAN only, but you 
 
 ![Architecture image for a cluster that runs internet-facing workloads.](images/cs_clusters_planning_internet.png){: caption="Figure 1. Network setup for a cluster that runs internet-facing workloads" caption-side="bottom"}
 
-#### Worker-to-worker communication
+#### Worker-to-worker communication in classic clusters
 {: #internet-facing-worker}
 
 To achieve this setup, you create a cluster by connecting worker nodes to public and private VLANs.
@@ -461,7 +461,7 @@ To achieve this setup, you create a cluster by connecting worker nodes to public
 If you create the cluster with both public and private VLANs, you can't later remove all public VLANs from that cluster. Removing all public VLANs from a cluster causes several cluster components to stop working. Instead, create a new worker pool that is connected to a private VLAN only.
 {: note}
 
-#### Worker-to-master and user-to-master communication
+#### Worker-to-master and user-to-master communication in classic clusters
 {: #internet-facing-master}
 
 You can choose to allow worker-to-master and user-to-master communication over the public and private networks, or over the public network only.
@@ -484,7 +484,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 
 
 
-### Scenario: Extend your on-premises data center to a classic cluster and add limited public access
+### Extending your on-premises data center to a classic cluster and add limited public access
 {: #limited-public}
 
 ![Classic infrastructure provider icon.](images/icon-classic-2.svg) In this scenario, you want to run workloads in a classic cluster that are accessible to services, databases, or other resources in your on-premises data center. However, you might need to provide limited public access to your cluster, and want to ensure that any public access is controlled and isolated in your cluster. For example, you might need your workers to access an {{site.data.keyword.cloud_notm}} service that does not support private cloud service endpoints, and must be accessed over the public network. Or you might need to provide limited public access to an app that runs in your cluster.
@@ -492,7 +492,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 
 To achieve this cluster setup, you can create a firewall by creating a [gateway-enabled cluster](#gateway) or [using a gateway appliance](#vyatta-gateway).
 
-#### Using a gateway-enabled cluster
+#### Using a gateway-enabled classic cluster
 {: #gateway}
 
 Keep your compute workloads private and allow limited public connectivity to your classic cluster by enabling a gateway on the cluster's network.

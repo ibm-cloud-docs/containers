@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-12-01"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
 
@@ -161,7 +161,7 @@ Your cluster must have at least 1 worker node to run default Kubernetes componen
 * **Single zone clusters**: [Create a cluster](/docs/containers?topic=containers-clusters) with 1 worker node in the default worker pool.
 * **Multizone clusters**: You must [create a cluster](/docs/containers?topic=containers-clusters) with 1 worker node per zone in the worker pool. Later, you can [remove zones](/docs/containers?topic=containers-kubernetes-service-cli#cs_zone_rm) from the worker pool or [remove individual worker nodes](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_rm) so that your cluster size reduces to the minimum size of 1.
 * **Free clusters**: Free clusters have only 1 worker node.
-* **Worker pools**: For any type of cluster, each worker pool must have at least 1 worker node at all times. For the smallest size cluster possible, you can have only 1 worker pool.
+* **Worker pools**: For any type of cluster, each worker pool must always have at least 1 worker node. For the smallest size cluster possible, you can have only 1 worker pool.
 
 Keep in mind that some services such as Ingress might require multiple worker nodes for high availability, and you might not be able to run these services or your apps in the smallest size cluster possible.
 {: important}

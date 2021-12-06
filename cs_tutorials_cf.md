@@ -2,14 +2,14 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-01"
+lastupdated: "2021-12-06"
 
 keywords: kubernetes
 
 subcollection: containers
 
 content-type: tutorial
-account-plan:
+account-plan: paid
 completion-time: 30m
 
 ---
@@ -39,7 +39,7 @@ Want to automatically generate a Dockerfile and Kubernetes configuration files f
 ## Audience
 {: #cf_audience}
 
-This tutorial is intended for Cloud Foundry app developers.
+Cloud Foundry app developers.
 
 ## Prerequisites
 {: #cf_prereqs}
@@ -63,7 +63,7 @@ Get your code ready to go. Don't have any code yet? You can download starter cod
 
 1. Create a directory that is named `cf-py` and navigate into it. In this directory, you save all the files that are required to build the Docker image and to run your app.
 
-    ```
+    ```sh
     mkdir cf-py && cd cf-py
     ```
     {: pre}
@@ -148,7 +148,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
 
     The image is created in your private registry. You can run the `ibmcloud cr images` command to verify that the image was created.
 
-    ```
+    ```sh
     REPOSITORY                       NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
     us.icr.io/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
     ```
@@ -219,7 +219,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
     Example output
 
-    ```
+    ```sh
     deployment "cf-py" configured
     service "cf-py-nodeport" configured
     ```
@@ -227,7 +227,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
 3. Now that all the deployment work is done, you can test your app in a browser. Get the details to form the URL.
 
-    a.  Get the public IP address for the worker node in the cluster.
+    a. Get the public IP address for the worker node in the cluster.
 
     ```sh
     ibmcloud ks worker ls --cluster <cluster_name>
@@ -236,7 +236,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
     Example output
 
-    ```
+    ```sh
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
     kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.21.6
     ```
