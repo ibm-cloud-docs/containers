@@ -42,6 +42,20 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the version 1.22 changelog.
 {: shortdesc}
 
+### Changelog for worker node fix pack 1.22.4_1532, released 6 December 2021
+{: #1224_1532}
+
+The following table shows the changes that are in the worker node fix pack patch update `1.22.4_1532`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | 4.15.0-162 | 4.15.0-163 | Updated worker node images and kernel with package updates. Contains fixes for [CVE-2021-43527](https://nvd.nist.gov/vuln/detail/CVE-2021-43527){: external} |
+| Kubernetes | 1.22.3 | 1.22.4 | See the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.4){: external}. | 
+| Containerd | v1.5.7 | v1.5.8 | See the [change log](https://github.com/containerd/containerd/releases/tag/v1.5.8){: external}. | 
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.22.3_1530" caption-side="top"}
+
 ### Changelog for worker node fix pack 1.22.3_1530, released 22 November 2021
 {: #1223_1530}
 
@@ -167,6 +181,19 @@ The following table shows the changes that are in the master fix pack `1.22.2_15
 
 Review the version 1.21 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.21.7_1542, released 6 December 2021
+
+The following table shows the changes that are in the worker node fix pack patch update `1.21.7_1542`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | 4.15.0-162 | 4.15.0-163 | Updated worker node images and kernel with package updates. Contains fixes for [CVE-2021-43527](https://nvd.nist.gov/vuln/detail/CVE-2021-43527){: external} |
+| Kubernetes | 1.21.6 | 1.21.7 | See the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.7){: external} | 
+| Containerd | v1.5.7 | v1.5.8 | See the [change log](https://github.com/containerd/containerd/releases/tag/v1.5.8){: external}. | 
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.21.6_1540" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.21.6_1540, released 22 November 2021
 {: #1216_1540}
@@ -514,6 +541,20 @@ The following table shows the changes that are in the master fix pack patch upda
 
 Review the version 1.20 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.20.13_1564, released 22 November 2021
+{: #12013_1564}
+
+The following table shows the changes that are in the worker node fix pack patch update `1.20.13_1564`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | 4.15.0-162 | 4.15.0-163 | Updated worker node images and kernel with package updates. Contains fixes for [CVE-2021-43527](https://nvd.nist.gov/vuln/detail/CVE-2021-43527){: external} |
+| Kubernetes | 1.20.12 | 1.20.13 | See the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.13){: external} | 
+| Containerd | v1.4.11 | v1.4.12 | See the [change log](https://github.com/containerd/containerd/releases/tag/v1.4.12){: external}. | 
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.20.12_1562" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.20.12_1562, released 22 November 2021
 {: #12012_1562}
@@ -1064,6 +1105,17 @@ Review the version 1.19 changelog.
 
 Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 31 Jan 2022. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120) as soon as possible.
 {: deprecated}
+
+### Changelog for worker node fix pack 1.19.16_1571, released 6 December 2021
+{: #11916_1571}
+
+The following table shows the changes that are in the worker node fix pack patch update `1.19.16_1571`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Ubuntu 18.04 packages | 4.15.0-162 | 4.15.0-163 | Updated worker node images and kernel with package updates. Contains fixes for [CVE-2021-43527](https://nvd.nist.gov/vuln/detail/CVE-2021-43527){: external} | 
+| Containerd | v1.4.11 | v1.4.12 | See the [change log](https://github.com/containerd/containerd/releases/tag/v1.4.12){: external}. | 
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.19.16_1569" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.19.16_1569, released 22 November 2021
 {: #11916_1569}
