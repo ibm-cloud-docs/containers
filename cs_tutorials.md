@@ -227,12 +227,12 @@ To deploy the app:
     ```
     {: pre}
 
-3. Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registrylong_notm}} namespace that you created in the previous lesson. If you need to make a change to the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
+3. Build a Docker image that includes the app files of the `Lab 1` directory. If you need to make a change to the app in the future, repeat this step and the next step to create and push another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
     Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image. **Note**: You must specify a [registry region](/docs/Registry?topic=Registry-registry_overview#registry_regions), such as `us`. To get the registry region that you are currently in, run `ibmcloud cr region`.
 
     ```sh
-    docker -t <region>.icr.io/<namespace>/hello-world:1 .
+    docker build -t <region>.icr.io/<namespace>/hello-world:1 .
     ```
     {: pre}
 
@@ -246,7 +246,26 @@ To deploy the app:
     ```
     {: screen}
 
-4. Create a deployment. Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod by referring to the image that you built in your private registry. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
+4. Push the image to the {{site.data.keyword.registrylong_notm}} namespace that you created in the previous lesson.
+    ```sh
+    docker push <region>.icr.io/<namespace>/hello-world:1 
+    ```
+    {: pre}
+    
+    Example output
+    ```sh
+    The push refers to repository [<region>.icr.io/<namespace>/hello-world]
+    6892912ec6a7: Pushed 
+    f0d0b9005378: Pushed 
+    55e8d86efefd: Pushed 
+    0804854a4553: Pushed 
+    6bd4a62f5178: Pushed 
+    9dfa40a0da3b: Pushed 
+    1: digest: sha256:1651263a1cc4b00d75a31e8b2ea437efc91abc3276e8af7331aca20affb2927f size: 1576
+    ```
+    {: screen}
+    
+5. Create a deployment. Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod by referring to the image that you built in your private registry. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
     ```sh
     kubectl create deployment hello-world-deployment --image=<region>.icr.io/<namespace>/hello-world:1
     ```
@@ -259,7 +278,7 @@ To deploy the app:
     {: screen}
 
     Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
-5. Make the app accessible to the world by exposing the deployment as a NodePort service. Just as you might expose a port for a Cloud Foundry app, the NodePort that you expose is the port on which the worker node listens for traffic.
+6. Make the app accessible to the world by exposing the deployment as a NodePort service. Just as you might expose a port for a Cloud Foundry app, the NodePort that you expose is the port on which the worker node listens for traffic.
     ```sh
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
     ```
@@ -282,7 +301,7 @@ To deploy the app:
     | `--target-port=*<8080>*` | The port to which the service directs traffic. In this instance, the target-port is the same as the port, but other apps you create might differ. |
     {: caption="Table 1. Learn about expose option" caption-side="top"}
 
-6. Now that all the deployment work is done, you can test your app in a browser. Get the details to form the URL.
+7. Now that all the deployment work is done, you can test your app in a browser. Get the details to form the URL.
     1. Get information about the service to see which NodePort was assigned.
         ```sh
         kubectl describe service hello-world-service
@@ -323,7 +342,7 @@ To deploy the app:
         ```
         {: screen}
 
-7. Open a browser and check out the app with the following URL: `http://<IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. When you enter that URL in a browser, you can see the following text.
+8. Open a browser and check out the app with the following URL: `http://<IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. When you enter that URL in a browser, you can see the following text.
     ```sh
     Hello world! Your app is up and running in a cluster!
     ```
@@ -332,12 +351,12 @@ To deploy the app:
     To see that the app is publicly available, try entering it into a browser on your cell phone.
     {: tip}
 
-8. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
+9. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
 
     If you select your cluster in the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}
 
-9. In the **Workloads** tab, you can see the resources that you created.
+10. In the **Workloads** tab, you can see the resources that you created.
 
 Good job! You deployed your first version of the app.
 
@@ -393,10 +412,10 @@ If you took a break from the last lesson, make sure that you log back in to your
     ```
     {: pre}
 
-2. Build, tag, and push the app as an image to your namespace in {{site.data.keyword.registrylong_notm}}. Don't forget the period (`.`) at the end of the command.
+2. Build and tag the image. Don't forget the period (`.`) at the end of the command.
 
     ```sh
-    docker -t <region>.icr.io/<namespace>/hello-world:2 .
+    docker build -t <region>.icr.io/<namespace>/hello-world:2 .
     ```
     {: pre}
 
@@ -405,11 +424,30 @@ If you took a break from the last lesson, make sure that you log back in to your
     => exporting to image                                                                           0.0s
     => => exporting layers                                                                          0.0s
     => => writing image sha256:3ca1eb1d0998f738b552d4c435329edf731fe59e427555b78ba2fb54f2017906     0.0s
-    => => naming to <region>.icr.io/<namespace>/hello-world:1                                       0.0s
+    => => naming to <region>.icr.io/<namespace>/hello-world:2                                       0.0s
     ```
     {: screen}
 
-3. In the `Lab 2` directory, open the `healthcheck.yml` file with a text editor. This configuration script combines a few steps from the previous lesson to create a deployment and a service at the same time. The PR firm's app developers can use these scripts when updates are made or to troubleshoot issues by re-creating the pods.
+3. Push the image to your namespace.
+    ```sh
+    docker push <region>.icr.io/<namespace>/hello-world:2 
+    ```
+    {: pre}
+    
+    Example output
+    ```sh
+    The push refers to repository [<region>.icr.io/<namespace>/hello-world]
+    7c549284dc35: Pushed 
+    dce6afc1fb05: Pushed 
+    2685a280bba4: Pushed 
+    0804854a4553: Layer already exists 
+    6bd4a62f5178: Layer already exists 
+    9dfa40a0da3b: Layer already exists 
+    2: digest: sha256:630bdaff6c555390ec55bc7f23f62b6bcf43188f2914551f71e239db072b4fa2 size: 1576
+    ```
+    {: screen}
+
+4. In the `Lab 2` directory, open the `healthcheck.yml` file with a text editor. This configuration script combines a few steps from the previous lesson to create a deployment and a service at the same time. The PR firm's app developers can use these scripts when updates are made or to troubleshoot issues by re-creating the pods.
     1. Update the details for the image in your private registry namespace.
         ```sh
         image: "<region>.icr.io/<namespace>/hello-world:2"
@@ -435,7 +473,7 @@ If you took a break from the last lesson, make sure that you log back in to your
 
     4. In the **Service** section, note the `NodePort`. Rather than generating a random NodePort like you did in the previous lesson, you can specify a port in the 30000 - 32767 range. This example uses 30072.
     
-4. Switch back to the CLI that you used to set your cluster context, and run the configuration script. When the deployment and the service are created, the app is available for the PR firm's users to see.
+5. Switch back to the CLI that you used to set your cluster context, and run the configuration script. When the deployment and the service are created, the app is available for the PR firm's users to see.
     ```sh
     kubectl apply -f healthcheck.yml
     ```
@@ -448,7 +486,7 @@ If you took a break from the last lesson, make sure that you log back in to your
     ```
     {: screen}
 
-5. Now that the deployment work is done, open a browser and check out the app. To form the URL, take the same public IP address that you used in the previous lesson for your worker node and combine it with the NodePort that was specified in the configuration script. To get the public IP address for the worker node:
+6. Now that the deployment work is done, open a browser and check out the app. To form the URL, take the same public IP address that you used in the previous lesson for your worker node and combine it with the NodePort that was specified in the configuration script. To get the public IP address for the worker node:
     ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
@@ -470,7 +508,7 @@ If you took a break from the last lesson, make sure that you log back in to your
     ```
     {: screen}
     
-6. Check your pod status to monitor the health of your app in Kubernetes. You can check the status from the CLI or in the Kubernetes dashboard.
+7. Check your pod status to monitor the health of your app in Kubernetes. You can check the status from the CLI or in the Kubernetes dashboard.
     * **From the CLI**: Watch what is happening to your pods as they change status.
       
       ```sh
@@ -544,7 +582,7 @@ If you took a break from the last lesson, make sure that you log back in to your
         ```
         {: pre}
 
-    2. Build, tag, and push the `watson` app as an image to your namespace in {{site.data.keyword.registrylong_notm}}. Again, don't forget the period (`.`) at the end of the command.
+    2. Build and tag the image. Again, don't forget the period (`.`) at the end of the command.
         ```sh
         docker build -t <region>.icr.io/<namespace>/watson .
         ```
@@ -559,7 +597,26 @@ If you took a break from the last lesson, make sure that you log back in to your
         ```
         {: screen}
 
-    3. Repeat these steps to build the second `watson-talk` image.
+    3. Push the image to your namespace.
+         ```sh
+          docker push <region>.icr.io/<namespace>/watson 
+         ```
+         {: pre}
+    
+         Example output
+         ```sh
+         The push refers to repository [<region>.icr.io/<namespace>/watson]
+         6892912ec6a7: Pushed 
+         f0d0b9005378: Pushed 
+         55e8d86efefd: Pushed 
+         0804854a4553: Pushed 
+         6bd4a62f5178: Pushed 
+         9dfa40a0da3b: Pushed 
+         1: digest: sha256:1651263a1cc4b00d75a31e8b2ea437efc91abc3276e8af7331aca20affb2927f size: 1576
+         ```
+         {: screen}
+
+    4. Repeat these steps to build the second `watson-talk` image.
         ```sh
         cd 'container-service-getting-started-wt/Lab 3/watson-talk'
         ```
@@ -770,7 +827,6 @@ Now that you conquered the basics, you can move to more advanced activities. Con
 *   Complete a [more complicated lab](https://github.com/IBM/container-service-getting-started-wt#lab-overview){: external} in the repository.
 *   Learn about creating [highly available apps](/docs/containers?topic=containers-ha) by using features such as multizone clusters, persistent storage, cluster autoscaler, and horizontal pod autoscaling for apps.
 *   Explore the container orchestration code patterns on [IBM Developer](https://developer.ibm.com/technologies/containers/){: external}.
-
 
 
 
