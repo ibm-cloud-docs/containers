@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-03"
+lastupdated: "2021-12-07"
 
 keywords: kubernetes, istio, add-on
 
@@ -37,6 +37,22 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 {: summary="The rows are read from left to right. The first column is the Istio add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the Istio version is supported for."}
 {: caption="Supported Istio versions" caption-side="top"}
 
+
+## Version 1.12, released 7 December 2021
+{: #v112}
+
+Review the changes that are in version 1.12 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.11.4
+**Current version**: 1.12.0  
+**Updates in this version:**  
+- See the Istio release notes for [Istio 1.12.0](https://istio.io/latest/news/releases/1.12.x/announcing-1.12/){:external}. 
+- Updates the `managed-istio` operator settings. This includes a `TERMINATION_DRAIN_DURATION` of 30 seconds which replaces an earlier prestop variable of 25 seconds. If you are already using a `TERMINATION_DRAIN_DURATION` you must increase the value by 30 seconds to account for this change. 
+- Updates the affinity rules in the `k8s.overlay` to `k8s.affinity`. If you are using custom gateways, review the updated configuration for the default gateways to see if you want to use the change in your custom gateways. 
+- Users can now increase the max horizontal pod autoscaler (HPA) pods for istiod. This is not recommended but if necessary, this setting is available. Decreasing is possible, but is not recommended ever. 
+- Resolves the following CVEs:
+    - [usn-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
 
 
 ## Version 1.11

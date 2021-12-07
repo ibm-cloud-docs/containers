@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-12-06"
+lastupdated: "2021-12-07"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [December 2021](/docs/containers?topic=containers-iks-release#release-dec-2021)
+
+    * [7 December 2021](/docs/containers?topic=containers-iks-release#7dec2021)
 
     * [6 December 2021](/docs/containers?topic=containers-iks-release#6-december-2021)
 
@@ -3607,6 +3609,8 @@ subcollection: containers
     * [01 January 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#01-jan-2019)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.12, released 7 December 2021](/docs/containers?topic=containers-istio-changelog#v112)
 
 * [Version 1.11](/docs/containers?topic=containers-istio-changelog#v111)
 
