@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-12-06"
+lastupdated: "2021-12-08"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -923,7 +923,7 @@ The following table shows the changes that are in patch update 1.18.2_1512. If y
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.12.1 | v3.13.3 | See the [Calico release notes](https://docs.projectcalico.org/archive/v3.13/release-notes/){: external}. |
+| Calico | v3.12.1 | v3.13.3 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.13/release-notes/){: external}. |
 | Cluster health image | v1.1.1 | v1.1.4 | When cluster add-ons don't support the current cluster version, a warning is now returned in the cluster health state. |
 | CoreDNS configuration | N/A | N/A | To improve cluster DNS availability, CoreDNS [pods now prefer evenly distributed scheduling](https://kubernetes.io/blog/2020/05/introducing-podtopologyspread/){: external} across worker nodes and zones. |
 | etcd | v3.4.3 | v3.4.7 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.7){: external}). |
@@ -1799,7 +1799,7 @@ The following table shows the changes that are in patch update 1.17.2_1515.
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.9.5 | v3.12.0 | See the [Calico release notes](https://docs.projectcalico.org/archive/v3.12/release-notes/){: external}. |
+| Calico | v3.9.5 | v3.12.0 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.12/release-notes/){: external}. |
 | CoreDNS | 1.6.6 | 1.6.7 | See the [CoreDNS release notes](https://coredns.io/2020/01/28/coredns-1.6.7-release/){: external}. |
 | etcd | v3.3.18 | v3.4.3 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.3){: external}. |
 | GPU device plug-in and installer | da19df3 | affdfe2 | Image updated for [CVE-2016-9840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9840){: external}, [CVE-2016-9841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9841){: external}, [CVE-2016-9842](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9842){: external}, [CVE-2016-9843](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9843){: external}, and [CVE-2019-5188](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5188){: external}. |
@@ -2399,7 +2399,7 @@ The following table shows the changes that are in the master and worker node pat
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.9.3 | v3.9.5 | See the [Calico release notes](https://docs.projectcalico.org/archive/v3.9/release-notes/){: external}. |
+| Calico | v3.9.3 | v3.9.5 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.9/release-notes/){: external}. |
 | Cluster master HA Proxy | 1.8.21-alpine | 1.8.23-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.8/src/CHANGELOG){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | CoreDNS | 1.6.2 | 1.6.6 | See the [CoreDNS release notes](https://coredns.io/2019/12/11/coredns-1.6.6-release/){: external}. Update resolves [CVE-2019-19794](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19794){: external}. |
 | etcd | v3.3.17 | v3.3.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.18){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
@@ -2526,7 +2526,7 @@ The following tables show the changes that are in the patch `1.16.2_1514`. If yo
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-|Calico | v3.8.2 | v3.9.2 | See the [Calico release notes](https://docs.projectcalico.org/archive/v3.9/release-notes/){: external}.|
+|Calico | v3.8.2 | v3.9.2 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.9/release-notes/){: external}.|
 |CoreDNS |    1.3.1 |    1.6.2 |    See the [CoreDNS release notes](https://coredns.io/2019/08/13/coredns-1.6.2-release/). This update includes the following configuration changes. <ul><li>CoreDNS now runs <code>3</code> replica pods by default, and the pods prefer to schedule across worker nodes and zones to improve cluster DNS availability. If you update your cluster to version 1.16 from an earlier version, you can <a href="/docs/containers?topic=containers-cluster_dns#dns_autoscale">configure the CoreDNS autoscaler</a> to use a minimum of <code>3</code> pods.</li><li>CoreDNS caching is updated to better support older DNS clients. If you disabled the CoreDNS <code>cache</code> plug-in, you can now re-enable the plug-in.</li><li>The CoreDNS deployment is now configured to check readiness by using the <code>ready</code> plug-in.</li><li>CoreDNS version 1.6 no longer supports the <code>proxy</code> plug-in, which is replaced by the <code>forward</code> plug-in. In addition, the CoreDNS <code>kubernetes</code> plug-in no longer supports the <code>resyncperiod</code> option and ignores the <code>upstream</code> option. </li></ul>|
 | {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor | 350 | 351 | Updated to use the `distroless/static` base image and to use `Go` version 1.12.10.|
 | Kubernetes | v1.15.5 | v1.16.2 | See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.2).|
@@ -2881,7 +2881,7 @@ The following table shows the changes that are in the master and worker node pat
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.8.4 | v3.8.6 | See the [Calico release notes](https://docs.projectcalico.org/archive/v3.8/release-notes/){: external}. |
+| Calico | v3.8.4 | v3.8.6 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.8/release-notes/){: external}. |
 | Cluster master HA Proxy | 1.8.21-alpine | 1.8.23-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.8/src/CHANGELOG){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | etcd | v3.3.17 | v3.3.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.18){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | Gateway-enabled cluster controller | 1032 | 1045 | Updated image for [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
@@ -3074,7 +3074,7 @@ The following table shows the changes that are in the patch 1.15.4_1518.
 <td>Calico</td>
 <td>v3.8.1</td>
 <td>v3.8.2</td>
-<td>See the <a href="https://docs.projectcalico.org/archive/v3.8/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/archive/v3.8/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster master HA configuration</td>
@@ -3906,7 +3906,7 @@ The following table shows the changes that are in the patch 1.14.7_1534.
 <td>Calico</td>
 <td>v3.6.4</td>
 <td>v3.6.5</td>
-<td>See the <a href="https://docs.projectcalico.org/archive/v3.6/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/archive/v3.6/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster master HA configuration</td>
@@ -4685,7 +4685,7 @@ The following table shows the changes that are in the patch 1.14.1_1516.
 <td>Calico</td>
 <td>v3.4.4</td>
 <td>v3.6.1</td>
-<td>See the <a href="https://docs.projectcalico.org/archive/v3.6/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/archive/v3.6/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>CoreDNS</td>
@@ -5018,7 +5018,7 @@ The following table shows the changes that are in the patch 1.13.11_1537.
 <td>Calico</td>
 <td>v3.6.4</td>
 <td>v3.6.5</td>
-<td>See the <a href="https://docs.projectcalico.org/archive/v3.6/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
+<td>See the <a href="https://projectcalico.docs.tigera.io/archive/v3.6/release-notes/">Calico release notes</a> <img src="../icons/launch-glyph.svg" alt="External link icon">.</td>
 </tr>
 <tr>
 <td>Cluster master HA configuration</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-06"
+lastupdated: "2021-12-08"
 
 keywords: kubernetes
 
@@ -28,7 +28,7 @@ Learn how to use Calico policies to allow network traffic from and to certain IP
 
 By default, Kubernetes NodePort, LoadBalancer, and Ingress services make your app available on all public and private cluster network interfaces. The `allow-node-port-dnat` default Calico policy permits incoming traffic from NodePort, network load balancer (NLB), and Ingress application load balancer (ALB) services to the app pods that those services expose. Kubernetes uses destination network address translation (DNAT) to forward service requests to the correct pods.
 
-However, for security reasons, you might need to allow traffic to the networking services from certain source IP addresses only. You can use [Calico Pre-DNAT policies](https://docs.projectcalico.org/security/host-forwarded-traffic){: external} to allow or block traffic from or to certain IP addresses. Pre-DNAT policies prevent specified traffic from reaching your apps because they are applied before Kubernetes uses regular DNAT to forward traffic to pods. When you create Calico Pre-DNAT policies, you choose whether to allow or block source IP addresses. For most scenarios, allowing specific traffic provides the most secure configuration because all traffic is blocked except traffic from known, permitted source IP addresses. denying specific traffic is typically useful only in scenarios such as preventing an attack from a small set of IP addresses.
+However, for security reasons, you might need to allow traffic to the networking services from certain source IP addresses only. You can use [Calico Pre-DNAT policies](https://projectcalico.docs.tigera.io/security/host-forwarded-traffic){: external} to allow or block traffic from or to certain IP addresses. Pre-DNAT policies prevent specified traffic from reaching your apps because they are applied before Kubernetes uses regular DNAT to forward traffic to pods. When you create Calico Pre-DNAT policies, you choose whether to allow or block source IP addresses. For most scenarios, allowing specific traffic provides the most secure configuration because all traffic is blocked except traffic from known, permitted source IP addresses. denying specific traffic is typically useful only in scenarios such as preventing an attack from a small set of IP addresses.
 
 In this scenario, you play the role of a networking administrator for a PR firm, and you notice some unusual traffic that hits your apps. The lessons in this tutorial walk you through creating a sample web server app, exposing the app by using a network load balancer (NLB) service, and protecting the app from unwanted unusual traffic with both allowlist and blocklist Calico policies.
 
@@ -680,7 +680,7 @@ If you want to clean up the blocklist and the log policies:
 {: #whats_next}
 
 * Read more about [controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
-* For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo](https://docs.projectcalico.org/security/tutorials/kubernetes-policy-demo/kubernetes-demo){: external} and the [advanced network policy](https://docs.projectcalico.org/security/tutorials/kubernetes-policy-advanced){: external}.
+* For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo](https://projectcalico.docs.tigera.io/security/tutorials/kubernetes-policy-demo/kubernetes-demo){: external} and the [advanced network policy](https://projectcalico.docs.tigera.io/security/tutorials/kubernetes-policy-advanced){: external}.
 
 
 
