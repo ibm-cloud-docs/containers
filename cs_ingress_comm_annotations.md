@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-22"
+lastupdated: "2021-12-07"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -977,7 +977,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
     
     * To use an existing instance, ensure that the service instance name contains only **lowercase** alphanumeric characters or hyphens (`-`), and doesn't contain spaces. To change the name, select **Rename service** from the more options menu on your service instance details page.
     * To provision a [new {{site.data.keyword.appid_short_notm}} instance](https://cloud.ibm.com/catalog/services/app-id):
-        1. Replace the auto-filled **Service name** with your own unique name for the service instance. The service instance name must contain only lowercase alphanumeric characters or hyphens (`-`), and can't contain spaces.
+        1. Replace the **Service name** with your own unique name for the service instance. The service instance name must contain only lowercase alphanumeric characters or hyphens (`-`), and can't contain spaces.
         2. Choose the same region that your cluster is deployed in.
         3. Click **Create**.
 

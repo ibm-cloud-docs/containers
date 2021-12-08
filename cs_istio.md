@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-03"
+lastupdated: "2021-12-07"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
 
@@ -190,7 +190,9 @@ You can customize a set of Istio configuration options by editing the `managed-i
     :   Default value: `"1.0"`
     :   By default, Istio [generates trace spans for 1 out of every 100 requests](https://istio.io/latest/docs/tasks/observability/distributed-tracing/overview/#trace-sampling){: external}, which is a sampling rate of 1%. To generate more trace spans, increase the percentage value.
 
-    
+    `istio-components-pilot-hpa-maxReplicas`
+    :   Default value: `"5"`
+    :   By default, Istio sets the default horizontal pod autoscaler (HPA) max pods for istiod to 5. Do not increase this value unless you have a large service mesh where istiod needs increased resources to update the configurations.
 
     For example, your configmap might look like the following example.
     ```yaml
