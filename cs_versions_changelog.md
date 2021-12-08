@@ -49,7 +49,7 @@ The following table shows the changes that are in the master fix pack update `1.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.20.1 | v3.20.3 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. Calico now adds the `node.kubernetes.io/network-unavailable` node taint when Calico shuts down on a node. The taint continues to be removed when Calico starts on a node. |
+| Calico | v3.20.1 | v3.20.3 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. Calico now adds the `node.kubernetes.io/network-unavailable` node taint when Calico shuts down on a node. The taint continues to be removed when Calico starts on a node. |
 | Cluster health image | v1.2.18 | v1.2.20 | Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs. Updated to use `Go` version `1.16.10`. |
 | Gateway-enabled cluster controller | 1567 | 1586 | Updated Alpine base image to the latest `3.14` version to resolve CVEs. Updated to use `Go` version `1.16.10`. |
 | GPU device plug-in and installer | 7fd867d | c9bfc8c | Updated universal base image (UBI) to the `8.5-204` version to resolve CVEs. Updated to use `Go` version `1.16.10`. |
@@ -604,7 +604,7 @@ The following table shows the changes that are in the master fix pack update `1.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.17.5 | v3.17.6 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | v3.17.5 | v3.17.6 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
 | Cluster health image | v1.2.18 | v1.2.20 | Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs. Updated to use `Go` version `1.16.10`. |
 | CoreDNS | 1.8.4 | 1.8.6 | See the [CoreDNS release notes](https://coredns.io/2021/10/07/coredns-1.8.6-release/){: external}. |
 | Gateway-enabled cluster controller | 1567 | 1586 | Updated Alpine base image to the latest `3.14` version to resolve CVEs. Updated to use `Go` version `1.16.10`. |
@@ -1986,7 +1986,7 @@ The following table shows the changes that are in the `1.19.2_1524` version upda
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.13.4 | v3.16.2 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. In addition, the Calico configuration was updated to use the [Kubernetes API data store driver](https://docs.projectcalico.org/getting-started/kubernetes/hardway/the-calico-datastore){: external}. |
+| Calico | v3.13.4 | v3.16.2 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. In addition, the Calico configuration was updated to use the [Kubernetes API data store driver](https://projectcalico.docs.tigera.io/getting-started/kubernetes/hardway/the-calico-datastore){: external}. |
 | Cluster health image | v1.1.11 | v1.2.1 | When a cluster has a Kubernetes key management service (KMS) provider enabled and a disabled [{{site.data.keyword.keymanagementserviceshort}}](/docs/containers?topic=containers-encryption#keyprotect) key, a warning is now returned in the cluster health state. In addition, updated to use `Go` version 1.15.2. |
 | containerd | 1.3.4 | 1.4.1 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.4.1){: external}. |
 | CoreDNS | 1.6.9 | 1.7.1 | See the [CoreDNS release notes](https://coredns.io/2020/09/21/coredns-1.7.1-release/){: external}. In addition, the CoreDNS configuration was updated to increase the weight of scheduling CoreDNS pods to different worker nodes and zones. |
