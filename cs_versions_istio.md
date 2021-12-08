@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-07"
+lastupdated: "2021-12-08"
 
 keywords: kubernetes, istio, add-on
 
@@ -26,6 +26,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | --- | --- | --- |
+| 1.12 | Yes | 1.20, 1.21, 1.22 |
 | 1.11 | Yes | 1.19, 1.20, 1.21, 1.22 |
 | 1.10 | Yes | 1.18, 1.19, 1.20, 1.21 |
 | 1.9 | Yes| 1.17, 1.18, 1.19, 1.20 |
@@ -50,13 +51,15 @@ Review the changes that are in version 1.12 of the managed Istio add-on.
 - See the Istio release notes for [Istio 1.12.0](https://istio.io/latest/news/releases/1.12.x/announcing-1.12/){:external}. 
 - Updates the `managed-istio` operator settings. This includes a `TERMINATION_DRAIN_DURATION` of 30 seconds which replaces an earlier prestop variable of 25 seconds. If you are already using a `TERMINATION_DRAIN_DURATION` you must increase the value by 30 seconds to account for this change. 
 - Updates the affinity rules in the `k8s.overlay` to `k8s.affinity`. If you are using custom gateways, review the updated configuration for the default gateways to see if you want to use the change in your custom gateways. 
-- Users can now increase the max horizontal pod autoscaler (HPA) pods for istiod. This is not recommended but if necessary, this setting is available. Decreasing is possible, but is not recommended ever. 
+- Users can now increase the max horizontal pod autoscaler (HPA) pods for istiod. Do not change this value to less than the default of `5`. You can increase this value, but only in situations where you have a large service mesh.
 - Resolves the following CVEs:
     - [usn-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
 
 
 ## Version 1.11
 {: #v111}
+
+
 
 ### Changelog for 1.11.4, released 2 November 2021
 {: #1114}
@@ -118,7 +121,6 @@ Review the changes that are in version 1.11.1 of the managed Istio add-on.
     - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
 - Adds a postStart to the sidecar to enable the holdApplicationUntilProxyStarts option. Since the sidecar is normally last this doesn't impact default behavior where Istio places the sidecar as the last container. If you are adding containers to your pods, verify that they get added before the sidecar or are okay waiting for the sidecar to start.
 - For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
-
 
 ## Version 1.10
 {: #v110}
@@ -1106,4 +1108,3 @@ Review the changes that are in version 1.4.2 of the managed Istio add-on.
     - [CVE-2019-18838](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18838){: external}
 - For more information, see the [Istio security bulletin](https://istio.io/latest/news/security/istio-security-2019-007/){: external}.
   
-
