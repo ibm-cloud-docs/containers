@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-12-07"
+lastupdated: "2021-12-09"
 
 keywords: kubernetes, release notes
 
@@ -34,7 +34,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 Istio add-on
 
-:   [Version `1.12`](/docs/containers?topic=containers-istio-changelog#112) of the Istio managed add-on is released.
+:   [Version `1.12`](/docs/containers?topic=containers-istio-changelog#1102) of the Istio managed add-on is released.
 
 Master fix pack update
 :   Changelog documentation is available for Kubernetes version [`1.22.4_1531`](/docs/containers?topic=containers-changelog#1224_1531), [`1.21.7_1541`](/docs/containers?topic=containers-changelog#1217_1541), [`1.20.13_1563`](/docs/containers?topic=containers-changelog#12013_1563), and [`1.19.16_1570`](/docs/containers?topic=containers-changelog#11916_1570).
