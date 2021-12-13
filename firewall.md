@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-12-09"
+lastupdated: "2021-12-13"
 
 keywords: kubernetes, firewall, vyatta, ips
 
@@ -427,7 +427,7 @@ To create persistent volume claims in a cluster where worker nodes are connected
 If you must use a Kubernetes version or {{site.data.keyword.cloud_notm}} storage plug-in version that does not support network communication over the private network, or if you want to use {{site.data.keyword.cos_full_notm}} without HMAC authentication, allow egress access through your firewall to IBM Cloud infrastructure and {{site.data.keyword.cloud_notm}} Identity and Access Management:
 
 - Allow all egress network traffic on TCP port 443.
-- Allow access to the IBM Cloud infrastructure IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/hardware-firewall-shared?topic=hardware-firewall-shared-ibm-cloud-ip-ranges#front-end-public-network) and [**Back-end (private) Network**](/docs/hardware-firewall-shared?topic=hardware-firewall-shared-ibm-cloud-ip-ranges#back-end-private). To find the zone of your cluster, run `ibmcloud ks cluster ls`.
+- Allow access to the IBM Cloud infrastructure IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/hardware-firewall-shared?topic=hardware-firewall-shared-ibm-cloud-ip-ranges#front-end-public) and [**Back-end (private) Network**](/docs/hardware-firewall-shared?topic=hardware-firewall-shared-ibm-cloud-ip-ranges#back-end-private). To find the zone of your cluster, run `ibmcloud ks cluster ls`.
 
 #### Optional: Set up firewall rules for {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon_full_notm}} services
 {: #firewall_private_mon_la}
