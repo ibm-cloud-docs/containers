@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-09"
+lastupdated: "2021-12-14"
 
 keywords: kubernetes, istio, add-on
 
@@ -59,6 +59,18 @@ Review the changes that are in version 1.12 of the managed Istio add-on.
 ## Version 1.11
 {: #v111}
 
+### Changelog for 1.11.5, released 14 December 2021
+{: #1115}
+
+Review the changes that are in version 1.11.5 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.11.4  
+**Current version**: 1.11.5   
+**Updates in this version:**  
+- See the Istio release notes for [Istio 1.11.5](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.5/.){:external}. 
+- Resolves the following CVE:
+    - [USN-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
 
 
 ### Changelog for 1.11.4, released 2 November 2021
