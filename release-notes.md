@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-12-09"
+lastupdated: "2021-12-14"
 
 keywords: kubernetes, release notes
 
@@ -25,6 +25,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## December 2021
 {: #release-dec-2021}
+
+### 14 December 2021
+{: #14dec2021}
+{: release-note}
+
+
+
+Istio add-on
+
+:   [Version `1.11.5`](/docs/containers?topic=containers-istio-changelog#1115) of the Istio managed add-on is released.
 
 ### 7 December 2021
 {: #7dec2021}
