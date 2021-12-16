@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-12-06"
+lastupdated: "2021-12-16"
 
 keywords: kubernetes
 
@@ -3068,7 +3068,7 @@ ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER --worker-pool WORKER_
 
 **Example**:
 ```sh
-ibmcloud ks zone add classic --zone dal10 --cluster my_cluster -w pool1 -w pool2 --private-vlan 2294021
+ibmcloud ks zone add classic --zone dal10 --cluster my_cluster -p pool1 -w pool2 --private-vlan 2294021
 ```
 {: pre}
 
@@ -3111,7 +3111,7 @@ ibmcloud ks zone add vpc-gen2 --zone ZONE --subnet-id VPC_SUBNET_ID --cluster CL
 
 **Example**:
 ```sh
-ibmcloud ks zone add vpc-gen2 --zone us-south-3 --cluster my_cluster -w pool1 -w pool2
+ibmcloud ks zone add vpc-gen2 --zone us-south-3 --cluster my_cluster -p pool1 -w pool2
 ```
 {: pre}
 

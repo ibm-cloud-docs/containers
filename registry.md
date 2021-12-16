@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-29"
+lastupdated: "2021-12-16"
 
 keywords: kubernetes, registry, pull secret, secrets
 
@@ -107,7 +107,7 @@ To use a non-{{site.data.keyword.cloud_notm}} registry such as Docker, see [Acce
 
 **Does the API key need to be for a service ID? What happens if I reach the limit of service IDs for my account?**
 
-The default cluster setup creates a service ID to store {{site.data.keyword.cloud_notm}} IAM API key credentials in the image pull secret. However, you can also create an API key for an individual user and store those credentials in an image pull secret. If you reach the [IAM limit for service IDs](/docs/account?topic=account-policy-limits), your cluster is created without the service ID and image pull secret and can't pull images from the `icr.io` registry domains by default. You must [create your own image pull secret](#other_registry_accounts), but by using an API key for an individual user such as a functional ID, not an {{site.data.keyword.cloud_notm}} IAM service ID.
+The default cluster setup creates a service ID to store {{site.data.keyword.cloud_notm}} IAM API key credentials in the image pull secret. However, you can also create an API key for an individual user and store those credentials in an image pull secret. If you reach the [IAM limit for service IDs](/docs/account?topic=account-known-issues#iam_limits), your cluster is created without the service ID and image pull secret and can't pull images from the `icr.io` registry domains by default. You must [create your own image pull secret](#other_registry_accounts), but by using an API key for an individual user such as a functional ID, not an {{site.data.keyword.cloud_notm}} IAM service ID.
 
 **I see image pull secrets for the regional registry domains and all registry domains. Which one do I use?**
 
