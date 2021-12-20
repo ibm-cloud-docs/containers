@@ -38,12 +38,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 Deprecated and unsupported Kubernetes versions
 :   Clusters that run version 1.19 are deprecated, with a tentative unsupported date of 31 Jan 2022. Update your clusters to at least [version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120) as soon as possible.
 
-
-
 ### 14 December 2021
 {: #14dec2021}
 {: release-note}
-
 
 
 Istio add-on
@@ -62,8 +59,6 @@ Istio add-on
 
 Master fix pack update
 :   Changelog documentation is available for Kubernetes version [`1.22.4_1531`](/docs/containers?topic=containers-changelog#1224_1531), [`1.21.7_1541`](/docs/containers?topic=containers-changelog#1217_1541), [`1.20.13_1563`](/docs/containers?topic=containers-changelog#12013_1563), and [`1.19.16_1570`](/docs/containers?topic=containers-changelog#11916_1570).
-
-
 
 ### 6 December 2021
 {: #6dec2021}
