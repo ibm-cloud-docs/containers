@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2021
-lastupdated: "2021-12-06"
+lastupdated: "2021-12-20"
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
 
@@ -176,7 +176,7 @@ Keep in mind that some services such as Ingress might require multiple worker no
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. The following versions are currently supported:
 
 **Supported Kubernetes versions**:
-*   Latest: 1.23.0
+*   Latest: 1.22.4
 *   Default: 1.21.6
 *   Other: 1.22.3
 
