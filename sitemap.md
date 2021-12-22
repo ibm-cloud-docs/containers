@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-12-20"
+lastupdated: "2021-12-22"
 
 keywords: containers
 subcollection: containers
@@ -5174,7 +5174,13 @@ subcollection: containers
 
 [Debugging Calico components](/docs/containers?topic=containers-calico_log_level#calico_log_level)
 
-* [Increasing the log level for components.](/docs/containers?topic=containers-calico_log_level#calico-increase-logging)
+* [Increasing the log level for the `calico-typha` components](/docs/containers?topic=containers-calico_log_level#calico-increase-logging-typha)
+
+* [Increasing the log level for the `calico-cni` components](/docs/containers?topic=containers-calico_log_level#calico-increase-logging-cni)
+
+* [Increasing the log level for the `calico-node` components](/docs/containers?topic=containers-calico_log_level#calico-increase-logging-node)
+
+* [Increasing the log level for the `calico-kube-controllers` components](/docs/containers?topic=containers-calico_log_level#calico-increase-logging-kube-controllers)
 
 * [Gathering Calico logs](/docs/containers?topic=containers-calico_log_level#calico-log-gather)
 

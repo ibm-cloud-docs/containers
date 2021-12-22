@@ -2,13 +2,14 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-08"
+lastupdated: "2021-12-22"
 
 keywords: kubernetes
 
 subcollection: containers
 
 content-type: tutorial
+services: containers
 account-plan: paid
 completion-time: 60m
 
@@ -142,8 +143,9 @@ The following image shows how the web server app is exposed to the internet by t
         ```
         {: pre}
 
-        The following example output confirms that the NLB exposes your app on the `169.1.1.1` public NLB IP address. The `webserver-855556f688-76rkp` app pod received the curl request:
-        ```
+        The following example output confirms that the NLB exposes your app on the `169.1.1.1` public NLB IP address. The `webserver-855556f688-76rkp` app pod received the curl request.
+        
+        ```sh
         Hostname: webserver-855556f688-76rkp
         Pod Information:
             -no pod information available-
@@ -188,7 +190,8 @@ The following image shows how the web server app is exposed to the internet by t
         {: pre}
 
         Example output
-        ```
+        
+        ```sh
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
         kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.21.6_1513*   
         kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.21.6_1513*   
@@ -205,7 +208,7 @@ The following image shows how the web server app is exposed to the internet by t
         {: pre}
 
         The following example output confirms that the request to your app came through the private IP address `10.1.1.1` for the worker node and the `31024` node port. The `webserver-855556f688-xd849` app pod received the curl request:
-        ```
+        ```sh
         Hostname: webserver-855556f688-xd849
         Pod Information:
             -no pod information available-
@@ -275,20 +278,20 @@ The following image shows how traffic is permitted to the NLB but not to node po
 2. Apply the policy.
     - Linux:
 
-        ```
+        ```sh
         calicoctl apply -f filepath/deny-nodeports.yaml
         ```
         {: pre}
 
     - Windows and OS X:
 
-        ```
+        ```sh
         calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
         ```
         {: pre}
 
     Example output
-    ```
+    ```sh
     Successfully applied 1 'GlobalNetworkPolicy' resource(s)
     ```
     {: screen}
@@ -397,14 +400,14 @@ First, in addition to the node ports, you must block all incoming traffic to the
 2. Apply the policy.
     - Linux:
 
-        ```
+        ```sh
         calicoctl apply -f filepath/deny-lb-port-80.yaml
         ```
         {: pre}
 
     - Windows and OS X:
 
-        ```
+        ```sh
         calicoctl apply -f filepath/deny-lb-port-80.yaml --config=filepath/calicoctl.cfg
         ```
         {: pre}
@@ -445,14 +448,14 @@ First, in addition to the node ports, you must block all incoming traffic to the
 5. Apply the policy.
     - Linux:
 
-        ```
+        ```sh
         calicoctl apply -f filepath/allowlist.yaml
         ```
         {: pre}
 
     - Windows and OS X:
 
-        ```
+        ```sh
         calicoctl apply -f filepath/allowlist.yaml --config=filepath/calicoctl.cfg
         ```
         {: pre}
@@ -488,23 +491,23 @@ In this lesson, block traffic from your own system's source IP address. At the e
 
 1. Clean up the allowlist policies you created in the previous lesson.
     - Linux:
-        ```
+        ```sh
         calicoctl delete GlobalNetworkPolicy deny-lb-port-80
         ```
         {: pre}
 
-        ```
+        ```sh
         calicoctl delete GlobalNetworkPolicy allowlist
         ```
         {: pre}
 
     - Windows and OS X:
-        ```
+        ```sh
         calicoctl delete GlobalNetworkPolicy deny-lb-port-80 --config=filepath/calicoctl.cfg
         ```
         {: pre}
 
-        ```
+        ```sh
         calicoctl delete GlobalNetworkPolicy allowlist --config=filepath/calicoctl.cfg
         ```
         {: pre}
@@ -551,14 +554,14 @@ In this lesson, block traffic from your own system's source IP address. At the e
 3. Apply the policy.
     - Linux:
 
-        ```
+        ```sh
         calicoctl apply -f filepath/blocklist.yaml
         ```
         {: pre}
 
     - Windows and OS X:
 
-        ```
+        ```sh
         calicoctl apply -f filepath/blocklist.yaml --config=filepath/calicoctl.cfg
         ```
         {: pre}
@@ -624,14 +627,14 @@ In our example scenario, the PR firm you work for wants you to set up a logging 
 2. Apply the policy.
     - Linux:
 
-        ```
+        ```sh
         calicoctl apply -f /log-denied-packets.yaml
         ```
         {: pre}
 
     - Windows and OS X:
 
-        ```
+        ```sh
         calicoctl apply -f /log-denied-packets.yaml --config=<filepath>/calicoctl.cfg
         ```
 
@@ -642,7 +645,7 @@ In our example scenario, the PR firm you work for wants you to set up a logging 
     {: pre}
 
 4. Check for log entries that are written to the `/var/log/syslog` path. The log entry looks similar to the following.
-    ```
+    ```sh
     Sep 5 14:34:40 <worker_hostname> kernel: [158271.044316] calico-packet: IN=eth1 OUT= MAC=08:00:27:d5:4e:57:0a:00:27:00:00:00:08:00 SRC=192.XXX.XX.X DST=192.XXX.XX.XX LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=52866 DF PROTO=TCP SPT=42962 DPT=22 WINDOW=29200 RES=0x00 SYN URGP=0
     ```
     {: screen}
@@ -652,26 +655,26 @@ Nice! You set up logging so that blocked traffic can be monitored more easily.
 If you want to clean up the blocklist and the log policies:
 1. Clean up the blocklist policy.
     - Linux:
-        ```
+        ```sh
         calicoctl delete GlobalNetworkPolicy blocklist
         ```
         {: pre}
 
     - Windows and OS X:
-        ```
+        ```sh
         calicoctl delete GlobalNetworkPolicy blocklist --config=filepath/calicoctl.cfg
         ```
         {: pre}
 
 2. Clean up the log policy.
     - Linux:
-        ```
+        ```sh
         calicoctl delete GlobalNetworkPolicy log-denied-packets
         ```
         {: pre}
 
     - Windows and OS X:
-        ```
+        ```sh
         calicoctl delete GlobalNetworkPolicy log-denied-packets --config=filepath/calicoctl.cfg
         ```
         {: pre}
@@ -679,8 +682,8 @@ If you want to clean up the blocklist and the log policies:
 ## What's next?
 {: #whats_next}
 
-* Read more about [controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
-* For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo](https://projectcalico.docs.tigera.io/security/tutorials/kubernetes-policy-demo/kubernetes-demo){: external} and the [advanced network policy](https://projectcalico.docs.tigera.io/security/tutorials/kubernetes-policy-advanced){: external}.
+- Read more about [controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
+- For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo](https://projectcalico.docs.tigera.io/security/tutorials/kubernetes-policy-demo/kubernetes-demo){: external} and the [advanced network policy](https://projectcalico.docs.tigera.io/security/tutorials/kubernetes-policy-advanced){: external}.
 
 
 

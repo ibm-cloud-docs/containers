@@ -2,13 +2,14 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-06"
+lastupdated: "2021-12-22"
 
 keywords: kubernetes
 
 subcollection: containers
 
 content-type: tutorial
+services: containers
 account-plan: paid
 completion-time: 30m
 
@@ -244,14 +245,14 @@ Deploy your app as a container in a Kubernetes cluster.
 
     b. Open a browser and check out the app with the following URL: `http://<public_IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. You can give this URL to a co-worker to try or enter it in your cell phone's browser so that you can see that the app really is publicly available. **Note**: Because worker nodes in VPC clusters don't have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. Then, you can use the worker node's private IP address and NodePort: `http://<private_IP_address>:<NodePort>`.
     
-    ![A screen capture of the deployed boilerplate Python Flask app.](images/python_flask.png "A screen capture of the deployed boilerplate Python Flask app."){: caption="Figure 2. A screen capture of the deployed boilerplate Python Flask app." caption-side="bottom"}
+    ![A screen capture of the deployed boilerplate Python Flask app.](images/python_flask.png "A screen capture of the deployed boilerplate Python Flask app."){: caption="Figure 2. Th deployed boilerplate Python Flask app" caption-side="bottom"}
 
-5. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
+4. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
 
     If you select your cluster in the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}
 
-6. In the **Workloads** tab, you can see the resources that you created.
+5. In the **Workloads** tab, you can see the resources that you created.
 
 Good job! Your app is deployed in a container!
 
