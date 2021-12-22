@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-06"
+lastupdated: "2021-12-22"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -170,7 +170,6 @@ The **Master Status** provides details of what operation from the master state i
 |`update_cancelled`|The master update is canceled because the cluster was not in a healthy state at the time of the update. Your master remains in this state until your cluster is healthy and you manually update the master. To update the master, use the `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update). If you don't want to update the master to the default `major.minor` version during the update, include the `--version` flag and specify the latest patch version that is available for the `major.minor` version that you want, such as `1.21.6`. To list available versions, run `ibmcloud ks versions`.|
 |`update_failed`|The master update failed. IBM Support is notified and works to resolve the issue. You can continue to monitor the health of the master until the master reaches a normal state. If the master remains in this state for more than 1 day, [open an {{site.data.keyword.cloud_notm}} support case](/docs/containers?topic=containers-get-help). IBM Support might identify other issues in your cluster that you must fix before the master can be updated.|
 {: caption="Master states"}
-{: summary="Table rows read from left to right, with the master state in column one and a description in column two."}
 
 
 
@@ -251,7 +250,6 @@ Review the following thresholds and alerts for worker nodes.
 | Average free disk space. | `fs.free.percent` | Less than 20% for 1 hour. |
 | Kubernetes nodes not ready exist. | `kubernetes.node.ready >= 1` |
 {: caption="Worker node metrics"}
-{: summary="The table shows worker node metrics that you can configure. Rows are to be read from the left to right, with the name of the metric in column one, and Monitoring parameter in column two, and an example alert threshold in column three."}
 
 #### Resolving worker node alerts
 {: #worker-node-resolve}
@@ -335,8 +333,6 @@ To set up zone level alerts, edit the `sysdig-agent` configmap to include the re
 | CPU usage per zone over threshold | `sum(sysdig_container_cpu_used_percent{agent_tag_cluster="<cluster_name>"}) by (kube_node_label_ibm_cloud_kubernetes_io_zone) / sum (kube_node_info) by (kube_node_label_ibm_cloud_kubernetes_io_zone) > 80` |
 | Memory usage per zone over threshold |`sum(sysdig_container_cpu_used_percent{agent_tag_cluster="<cluster_name>"}) by (kube_node_label_ibm_cloud_kubernetes_io_zone)/ sum (kube_node_info) by (kube_node_label_ibm_cloud_kubernetes_io_zone) > 80` |
 {: caption="Zone level alerts"}
-{: summary="Zone level CPU and memory alerts"}
-
 
 
 ### Cluster alerts
@@ -480,11 +476,11 @@ Review the following table for information on the individual components of healt
 
 | Component | Description |
 | --- | --- |
-| `Check` | Enter the type of check that you want Autorecovery to use. <br>`HTTP`: Autorecovery calls HTTP servers that run on each node to determine whether the nodes are running properly.<br>`KUBEAPI`: Autorecovery calls the Kubernetes API server and reads the health status data reported by the worker nodes. |
+| `Check` | Enter the type of check that you want Autorecovery to use.  \n `HTTP`: Autorecovery calls HTTP servers that run on each node to determine whether the nodes are running properly.  \n `KUBEAPI`: Autorecovery calls the Kubernetes API server and reads the health status data reported by the worker nodes. |
 | `Resource` | When the check type is `KUBEAPI`, enter the type of resource that you want Autorecovery to check. Accepted values are `NODE` or `POD`. |
 | `FailureThreshold` | Enter the threshold for the number of consecutive failed checks. When this threshold is met, Autorecovery triggers the specified corrective action. For example, if the value is 3 and Autorecovery fails a configured check three consecutive times, Autorecovery triggers the corrective action that is associated with the check. |
 |`PodFailureThresholdPercent`| When the resource type is `POD`, enter the threshold for the percentage of pods on a worker node that can be in a [NotReady](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes) state. This percentage is based on the total number of pods that are scheduled to a worker node. When a check determines that the percentage of unhealthy pods is greater than the threshold, the check counts as one failure.|
-|`CorrectiveAction`| Enter the action to run when the failure threshold is met. A corrective action runs only while no other workers are being repaired and when this worker node is not in a cool-off period from a previous action. <br>`REBOOT`: Reboots the worker node.<br>`RELOAD`: Reloads all the necessary configurations for the worker node from a clean OS.|
+|`CorrectiveAction`| Enter the action to run when the failure threshold is met. A corrective action runs only while no other workers are being repaired and when this worker node is not in a cool-off period from a previous action.  \n `REBOOT`: Reboots the worker node.  \n `RELOAD`: Reloads all the necessary configurations for the worker node from a clean OS.|
 |`CooloffSeconds`| Enter the number of seconds Autorecovery must wait to issue another corrective action for a node that was already issued a corrective action. The cool off period starts at the time a corrective action is issued.|
 |`IntervalSeconds`| Enter the number of seconds between consecutive checks. For example, if the value is 180, Autorecovery runs the check on each node every 3 minutes.|
 |`TimeoutSeconds`| Enter the maximum number of seconds that a check call to the database takes before Autorecovery terminates the call operation. The value for `TimeoutSeconds` must be less than the value for `IntervalSeconds`.|
@@ -494,10 +490,6 @@ Review the following table for information on the individual components of healt
 | `Enabled`| Enter `true` to enable the check or `false` to disable the check.|
 |`Namespace`| Optional: To restrict `checkpod.json` to checking only pods in one namespace, add the `Namespace` field and enter the namespace.|
 {: caption="Health check components"}
-{: summary="The table shows the components of health checks. Rows are to be read from the left to right, with the name of the component in column one, and a description of the component in column two."}
-
-
-
 
 
 
