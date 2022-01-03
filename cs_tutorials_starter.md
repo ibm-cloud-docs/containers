@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-10"
+lastupdated: "2021-12-22"
 
 keywords: kubernetes
 
@@ -48,9 +48,9 @@ This tutorial is intended for software developers who want to learn how to creat
 ## Prerequisites
 {: #prereqs-starterkit-kube}
 
-* Create a **Java + Spring** app by using a [starter kit](/docs/apps/tutorials?topic=apps-tutorial-starterkit).
-* Install the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started#idt-prereq).
-* Create a [classic](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC](/docs/containers?topic=containers-clusters#clusters_vpcg2) cluster.
+- Create a **Java + Spring** app by using a [starter kit](/docs/apps/tutorials?topic=apps-tutorial-starterkit).
+- Install the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started#idt-prereq).
+- Create a [classic](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC](/docs/containers?topic=containers-clusters#clusters_vpcg2) cluster.
 
 ## Add services to your app
 {: #resources-starterkit-kube}
@@ -61,10 +61,10 @@ Provision an {{site.data.keyword.cloudant_short_notm}} service instance, create 
 
 1. Open your starter kit app and select the **App details** tab.
 2. Click **Create service**.
-2. Select **Databases** and click **Next**.
-3. Select **Cloudant** and click **Next**.
-4. On the **Add Cloudant** page, select the {{site.data.keyword.cloud_notm}} region and resource group that your cluster is in. Then, select a pricing plan. For example, use **Lite** to create a free {{site.data.keyword.cloudant_short_notm}} database instance.
-5. Click **Create**. The **App details** page is displayed, and the Cloudant instance is provisioned and bound to your app. After the database is set up, you can see the credentials to access your database in the **Credentials** field on the **App details** page. This field might take a few minutes to display.
+3. Select **Databases** and click **Next**.
+4. Select **Cloudant** and click **Next**.
+5. On the **Add Cloudant** page, select the {{site.data.keyword.cloud_notm}} region and resource group that your cluster is in. Then, select a pricing plan. For example, use **Lite** to create a free {{site.data.keyword.cloudant_short_notm}} database instance.
+6. Click **Create**. The **App details** page is displayed, and the Cloudant instance is provisioned and bound to your app. After the database is set up, you can see the credentials to access your database in the **Credentials** field on the **App details** page. This field might take a few minutes to display.
 
 ## Deploy your app by using a DevOps toolchain
 {: #deploy-starterkit-kube}
@@ -88,10 +88,10 @@ With your toolchain set up, explore how you can use each tool to automate the de
 {: shortdesc}
 
 1. On the **App details** page, click the toolchain name. The **Overview** tab of the toolchain page is displayed, which shows the tools that are included with the toolchain. This example includes the following tools that were preselected in the starter kit when the toolchain was created:
-    * An issues tracker in GitLab to track project updates and changes.
-    * A GitLab repo that contains the source code of your app.
-    * An Eclipse Orion instance, which is a web-based IDE to edit your app.
-    * A Delivery Pipeline that consists of a customizable **BUILD** and **DEPLOY** stage.
+    - An issues tracker in GitLab to track project updates and changes.
+    - A GitLab repo that contains the source code of your app.
+    - An Eclipse Orion instance, which is a web-based IDE to edit your app.
+    - A Delivery Pipeline that consists of a customizable **BUILD** and **DEPLOY** stage.
 2. Configure your GitLab repo.
     1. From the toolchain overview page, select the **Git** card.
     2. From your project overview page, select **Repository** > **Files** to review your app code and dependencies.
@@ -119,7 +119,7 @@ Access your app to verify that your app is up and running.
 3. At the end of your log file, find the public URL that is assigned to your app.
 
     Example log entry:
-    ```
+    ```sh
     View the application health at: http://<ipaddress>:<port>/health.
     ```
     {: screen}

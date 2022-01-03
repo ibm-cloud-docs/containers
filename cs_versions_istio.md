@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-14"
+lastupdated: "2021-12-22"
 
 keywords: kubernetes, istio, add-on
 
@@ -48,7 +48,7 @@ Review the changes that are in version 1.12 of the managed Istio add-on.
 **Previous version**: 1.11.4
 **Current version**: 1.12.0  
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.12.0](https://istio.io/latest/news/releases/1.12.x/announcing-1.12/){:external}. 
+- See the Istio release notes for [Istio 1.12.0](https://istio.io/latest/news/releases/1.12.x/announcing-1.12/){: external}. 
 - Updates the `managed-istio` operator settings. This includes a `TERMINATION_DRAIN_DURATION` of 30 seconds which replaces an earlier prestop variable of 25 seconds. If you are already using a `TERMINATION_DRAIN_DURATION` you must increase the value by 30 seconds to account for this change. 
 - Updates the affinity rules in the `k8s.overlay` to `k8s.affinity`. If you are using custom gateways, review the updated configuration for the default gateways to see if you want to use the change in your custom gateways. 
 - Users can now increase the max horizontal pod autoscaler (HPA) pods for istiod. Do not change this value to less than the default of `5`. You can increase this value, but only in situations where you have a large service mesh.
@@ -68,7 +68,7 @@ Review the changes that are in version 1.11.5 of the managed Istio add-on.
 **Previous version**: 1.11.4  
 **Current version**: 1.11.5   
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.11.5](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.5/.){:external}. 
+- See the Istio release notes for [Istio 1.11.5](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.5/.){: external}. 
 - Resolves the following CVE:
     - [USN-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
 
@@ -93,7 +93,7 @@ Review the changes that are in version 1.11.3 of the managed Istio add-on.
 **Previous version**: 1.11.2  
 **Current version**: 1.11.3   
 **Updates in this version**:  
-- See the Istio release notes for [Istio 1.11.3](https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases){:external}. 
+- See the Istio release notes for [Istio 1.11.3](https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases){: external}. 
 - Resolves the following CVEs:
     - [CVE-2021-22945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22945){: external}
     - [CVE-2021-22946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22946){: external}
@@ -111,7 +111,7 @@ Review the changes that are in version 1.11.2 of the managed Istio add-on.
 **Previous version**: 1.11.1
 **Current version**: 1.11.2  
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.11.2](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.2/){:external}.
+- See the Istio release notes for [Istio 1.11.2](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.2/){: external}.
 - Resolves the following CVEs:
     - [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711){: external}
     - [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}
@@ -126,7 +126,7 @@ Review the changes that are in version 1.11.1 of the managed Istio add-on.
 **Previous version**: 1.10.3
 **Current version**: 1.11.1   
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.11.0](https://istio.io/latest/news/releases/1.11.x/announcing-1.11/){: external} and [Istio 1.11.1](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.1/.){:external}.
+- See the Istio release notes for [Istio 1.11.0](https://istio.io/latest/news/releases/1.11.x/announcing-1.11/){: external} and [Istio 1.11.1](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.1/.){: external}.
 - Resolves the following CVEs:
     - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
     - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
@@ -149,7 +149,7 @@ Review the changes that are in version 1.10.5 of the managed Istio add-on.
 **Previous version**: 1.10.4  
 **Current version**: 1.10.5  
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.10.5](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.5/){:external}. 
+- See the Istio release notes for [Istio 1.10.5](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.5/){: external}. 
 - Resolves the following CVEs:
     - [CVE-2021-22945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22945){: external}
     - [CVE-2021-22946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22946){: external}
@@ -171,7 +171,7 @@ Review the changes that are in version 1.10.4 of the managed Istio add-on.
 **Previous version**: 1.10.3  
 **Current version**: 1.10.4   
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.10.4](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.4/.){:external}. 
+- See the Istio release notes for [Istio 1.10.4](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.4/.){: external}. 
 - Resolves the following CVEs:
     - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
     - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
@@ -187,7 +187,7 @@ Review the changes that are in version 1.10.3 of the managed Istio add-on.
 **Previous version**: 1.10.2  
 **Current version**: 1.10.3   
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.10.3](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.3/.){:external}. 
+- See the Istio release notes for [Istio 1.10.3](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.3/.){: external}. 
 
 ### Changelog for 1.10.2, released 15 July 2021
 {: #1102}
@@ -226,7 +226,7 @@ Review the changes that are in version 1.9.8 of the managed Istio add-on.
 **Previous version**: 1.9.7  
 **Current version**: 1.9.8   
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.9.8](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.8/.){:external}. 
+- See the Istio release notes for [Istio 1.9.8](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.8/.){: external}. 
 - Resolves the following CVEs:
     - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
     - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
@@ -242,7 +242,7 @@ Review the changes that are in version 1.9.7 of the managed Istio add-on.
 **Previous version**: 1.9.6  
 **Current version**: 1.9.7  
 **Updates in this version:**  
-See the Istio release notes for [Istio 1.9.7](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.7/.){:external}.
+See the Istio release notes for [Istio 1.9.7](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.7/.){: external}.
 
 ### Changelog for 1.9.6, released 22 July 2021
 {: #196}
@@ -616,6 +616,7 @@ To see options for changing settings in the managed version of Istio, see [Custo
 | `meshConfig.enablePrometheusMerge=true` and `values.telemetry.v2.enabled=true` | In the managed Istio add-on, support for telemetry with {{site.data.keyword.mon_full_notm}} is enabled by default. This support can be disabled by [customizing the Istio installation](/docs/containers?topic=containers-istio#customize). |
 | `istio-ingressgateway` and `istio-egressgateway` | In the managed Istio add-on, placement of gateways on edge worker nodes is preferred, but not required. |
 | Envoy sidecar proxy lifecycle pre-stop | In the managed Istio add-on, a sleep time of 25 seconds is added to allow traffic connections to close before an Envoy sidecar is removed from an app pod. |
+{: caption="Table 1. Differences between the managed {{site.data.keyword.containerlong_notm}} Istio and the community Istio" caption-side="bottom"}
 
 ### Changelog for 1.6.14, released 3 December 2020
 {: #1614}
@@ -785,6 +786,7 @@ To see options for changing settings in the managed version of Istio, see [Custo
 | `istiod`, `istio-ingressgateway`, and `istio-egressgateway` | In the managed Istio add-on, `istiod` and all Istio ingress and egress gateways are set up for basic high availability support. High availability support on these components includes the following settings by default: node anti-affinity, `HorizontalPodAutoscaler`, `PodDisruptionBudget`, and automatic scaling of replicas. |
 | `prometheus.enabled: false` | In the managed Istio add-on, the Prometheus, Grafana, Jaeger, and Kiali monitoring components are disabled by default due to current security concerns in the community release of Istio that can't be adequately addressed for a production environment. |
 | `values.global.pilot.enableProtocolSniffingForInbound` and `values.global.pilot.enableProtocolSniffingForOutbound` | In the managed Istio add-on, protocol sniffing is disabled by default until the feature becomes more stable in the community Istio.
+{: caption="Table 1. Differences between the managed {{site.data.keyword.containerlong_notm}} Istio and the community Istio" caption-side="bottom"}
 
 ### Changelog for 1.5.10, released 1 September 2020
 {: #1510}
@@ -931,7 +933,7 @@ Review the changes that are in version 1.4.9 of the managed Istio add-on.
 **Previous version**: 1.4.8  
 **Current version**: 1.4.9  
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.4.9](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.9/){:external}. 
+- See the Istio release notes for [Istio 1.4.9](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.9/){: external}. 
 - Resolves the following CVEs:
     - [CVE-2019-18348](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18348){: external}
     - [CVE-2020-3810](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-3810){: external}
@@ -949,7 +951,7 @@ Review the changes that are in version 1.4.8 of the managed Istio add-on.
 **Previous version**: 1.4.7  
 **Current version**: 1.4.8  
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.4.8](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.8/){:external}. 
+- See the Istio release notes for [Istio 1.4.8](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.8/){: external}. 
 - Resolves the following CVEs:
     - [CVE-2017-15412](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-15412){: external}
     - [CVE-2016-5131](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5131){: external}
@@ -972,7 +974,7 @@ Review the changes that are in version 1.4.7 of the managed Istio add-on.
 **Previous version**: 1.4.6  
 **Current version**: 1.4.7  
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.4.7](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.7/){:external}. 
+- See the Istio release notes for [Istio 1.4.7](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.7/){: external}. 
 - Resolves the following CVEs:
     - [CVE-2020-1764](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1764){: external}
     - [CVE-2019-19925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19925){: external}
@@ -998,7 +1000,7 @@ Review the changes that are in version 1.4.6 of the managed Istio add-on.
 **Previous version**: 1.4.5  
 **Current version**: 1.4.6  
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.4.6](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.6/){:external}. 
+- See the Istio release notes for [Istio 1.4.6](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.6/){: external}. 
 - Resolves the following CVEs:
     - [CVE-2020-8659](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8659){: external}
     - [CVE-2020-8660](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8660){: external}
@@ -1014,7 +1016,7 @@ Review the changes that are in version 1.4.5 of the managed Istio add-on.
 **Previous version**: 1.4.4  
 **Current version**: 1.4.5  
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.4.5](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.5/){:external}. 
+- See the Istio release notes for [Istio 1.4.5](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.5/){: external}. 
 - Resolves the following CVEs:
     - [CVE-2019-18634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18634){: external}
     - [CVE-2019-3843](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3843){: external}
@@ -1041,7 +1043,7 @@ Review the changes that are in version 1.4.4 of the managed Istio add-on.
 **Previous version**: 1.4.3  
 **Current version**: 1.4.4  
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.4.4](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.4/){:external}. 
+- See the Istio release notes for [Istio 1.4.4](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.4/){: external}. 
 - Disables [protocol sniffing and detection](https://istio.io/latest/docs/ops/configuration/traffic-management/protocol-selection/).
 - Improves the termination sequence for rolling updates of ingress and egress gateways. 
 - Resolves the following CVEs:
@@ -1099,7 +1101,7 @@ Review the changes that are in version 1.4.3 of the managed Istio add-on.
 **Previous version**: 1.4.2  
 **Current version**: 1.4.3  
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.4.3](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.3/){:external}. 
+- See the Istio release notes for [Istio 1.4.3](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.3/){: external}. 
 - Disables [protocol sniffing and detection](https://istio.io/latest/docs/ops/configuration/traffic-management/protocol-selection/).
 - Improves the termination sequence for rolling updates of ingress and egress gateways. 
 
@@ -1112,8 +1114,8 @@ Review the changes that are in version 1.4.2 of the managed Istio add-on.
 **Previous version**: 1.4.0  
 **Current version**: 1.4.2  
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.4.1](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.1/){:external}. 
-- See the Istio release notes for [Istio 1.4.2](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.2/){:external}. 
+- See the Istio release notes for [Istio 1.4.1](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.1/){: external}. 
+- See the Istio release notes for [Istio 1.4.2](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.2/){: external}. 
 - Resolves the following CVEs:
     - [CVE-2019-18801](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18801){: external}
     - [CVE-2019-18802](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18802){: external}

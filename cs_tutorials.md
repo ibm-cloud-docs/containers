@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-06"
+lastupdated: "2021-12-22"
 
 keywords: kubernetes
 
@@ -69,7 +69,7 @@ Because it can take a few minutes to provision, create your cluster before you s
     You can also create a [cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps).
     {: tip}
 
-2. While your cluster provisions, install the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started){: external}. This installation includes:
+2. While your cluster provisions, install the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started){: external}. This installation includes the following plug-ins.
     -   The base {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`).
     -   The {{site.data.keyword.containerlong_notm}} plug-in plug-in (`ibmcloud ks`). Use this plug-in to manage your Kubernetes clusters, such as to resize worker pools for added compute capacity or to bind {{site.data.keyword.cloud_notm}} services to the cluster.
     -   {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`). Use this plug-in to set up and manage a private image repository in {{site.data.keyword.registrylong_notm}}.
@@ -84,7 +84,7 @@ Because it can take a few minutes to provision, create your cluster before you s
     ```
     {: pre}
 
-5. Verify that the plug-ins are installed correctly.
+4. Verify that the plug-ins are installed correctly.
     ```sh
     ibmcloud plugin list
     ```
@@ -92,7 +92,7 @@ Because it can take a few minutes to provision, create your cluster before you s
 
     The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as **kubernetes-service**, and the {{site.data.keyword.registrylong_notm}} plug-in is displayed in the results as **container-registry**.
     
-6. Set up your own private image repository in {{site.data.keyword.registrylong_notm}} to securely store and share Docker images with all cluster users. A private image repository in {{site.data.keyword.cloud_notm}} is identified by a namespace. The namespace is used to create a unique URL to your image repository that developers can use to access private Docker images.
+5. Set up your own private image repository in {{site.data.keyword.registrylong_notm}} to securely store and share Docker images with all cluster users. A private image repository in {{site.data.keyword.cloud_notm}} is identified by a namespace. The namespace is used to create a unique URL to your image repository that developers can use to access private Docker images.
     Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
     In this example, the PR firm wants to create only one image repository in {{site.data.keyword.registrylong_notm}}, so they choose `pr_firm` as their namespace to group all images in their account. Replace `<namespace>` with a namespace of your choice that is unrelated to the tutorial.
@@ -102,7 +102,7 @@ Because it can take a few minutes to provision, create your cluster before you s
     ```
     {: pre}
 
-7. Before you continue to the next step, verify that the deployment of your worker node is complete.
+6. Before you continue to the next step, verify that the deployment of your worker node is complete.
     ```sh
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
@@ -116,7 +116,7 @@ Because it can take a few minutes to provision, create your cluster before you s
     ```
     {: screen}
 
-8. Set the context for your Kubernetes cluster in your CLI.
+7. Set the context for your Kubernetes cluster in your CLI.
     1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable. Every time that you log in to the {{site.data.keyword.containerlong}} CLI to work with clusters, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in {{site.data.keyword.cloud_notm}}.
         ```sh
         ibmcloud ks cluster config --cluster <cluster_name_or_ID>

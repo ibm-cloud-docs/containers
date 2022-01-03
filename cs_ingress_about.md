@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-11-22"
+lastupdated: "2021-12-22"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -52,7 +52,7 @@ The Ingress resource also specifies the path to your app services. When you crea
 |Subdomain component|Description|
 |----|----|
 |`*`|The wildcard for the subdomain is registered by default for your cluster.|
-|`<cluster_name>`|The name of your cluster.<ul><li>If the cluster name is 26 characters or fewer and the cluster name is unique in this region, the entire cluster name is included and is not modified: <code>myclustername</code>.</li><li>If the cluster name is 26 characters or fewer and there is an existing cluster of the same name in this region, the entire cluster name is included and a dash with six random characters is added: <code>myclustername-ABC123</code>.</li><li>If the cluster name is 26 characters or greater and the cluster name is unique in this region, only the first 24 characters of the cluster name are used: <code>myveryverylongclusternam</code>.</li><li>If the cluster name is 26 characters or greater and there is an existing cluster of the same name in this region, only the first 17 characters of the cluster name are used and a dash with six random characters is added: <code>myveryverylongclu-ABC123</code>.</li></ul>|
+|`<cluster_name>`|The name of your cluster. \n - If the cluster name is 26 characters or fewer and the cluster name is unique in this region, the entire cluster name is included and is not modified: `myclustername`. \n - If the cluster name is 26 characters or fewer and there is an existing cluster of the same name in this region, the entire cluster name is included and a dash with six random characters is added: `myclustername-ABC123`. \n - If the cluster name is 26 characters or greater and the cluster name is unique in this region, only the first 24 characters of the cluster name are used: `myveryverylongclusternam`. \n - If the cluster name is 26 characters or greater and there is an existing cluster of the same name in this region, only the first 17 characters of the cluster name are used and a dash with six random characters is added: `myveryverylongclu-ABC123`.|
 |`<globally_unique_account_HASH>`|A globally unique HASH is created for your {{site.data.keyword.cloud_notm}} account. All subdomains that you create for NLBs in clusters in your account use this globally unique HASH.|
 |`0000`|The first and second characters indicate a public or a private (internal) subdomain. `00` indicates a subdomain that has a public DNS entry. `i0` indicates a subdomain that has a private DNS entry. The third and fourth characters, such as `00` or another number, act as a counter for each subdomain that is created in your cluster.|
 |`<region>`|The region that the cluster is created in.|
@@ -139,7 +139,7 @@ If you set up [VPC security groups](/docs/containers?topic=containers-vpc-networ
 ![Classic infrastructure provider icon.](images/icon-classic-2.svg) The following diagram shows how Ingress directs communication from the internet to an app in a classic single-zone cluster.
 {: shortdesc}
 
-<img src="images/cs_ingress_singlezone.png" width="600" alt="Expose an app in a single-zone cluster by using Ingress" style="width:600px; border-style: none"/>
+![Expose an app in a single-zone cluster by using Ingress.](images/cs_ingress_singlezone.png){: caption="Figure 1. Expose an app in a single-zone cluster by using Ingress" caption-side="bottom"}
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the Ingress subdomain for your cluster appended with the Ingress resource path for your exposed app, such as `mycluster-<hash>-0000.us-south.containers.appdomain.cloud/myapp`.
 
@@ -159,7 +159,7 @@ If you set up [VPC security groups](/docs/containers?topic=containers-vpc-networ
 ![Classic infrastructure provider icon.](images/icon-classic-2.svg) The following diagram shows how Ingress directs communication from the internet to an app in a classic multizone cluster.
 {: shortdesc}
 
-<img src="images/cs_ingress_multizone.png" width="800" alt="Expose an app in a multizone cluster by using Ingress" style="width:800px; border-style: none"/>
+![Expose an app in a multizone cluster by using Ingress.](images/cs_ingress_multizone.png){: caption="Figure 1. Expose an app in a multizone cluster by using Ingress" caption-side="bottom"}
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the Ingress subdomain for your cluster appended with the Ingress resource path for your exposed app, such as `mycluster-<hash>-0000.us-south.containers.appdomain.cloud/myapp`.
 
@@ -179,8 +179,7 @@ If you set up [VPC security groups](/docs/containers?topic=containers-vpc-networ
 ![Classic infrastructure provider icon.](images/icon-classic-2.svg) The following diagram shows how Ingress directs communication from the internet to an app in a [classic gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway).
 {: shortdesc}
 
-<img src="images/cs_ingress_gateway.png" width="800" alt="Expose an app in a gateway-enabled cluster by using Ingress" style="width:800px; border-style: none"/>
-
+![Expose an app in a gateway-enabled cluster by using Ingress.](images/cs_ingress_gateway.png){: caption="Figure 1. Expose an app in a gateway-enabled cluster by using Ingress" caption-side="bottom"}
 
 This diagram shows the traffic flow through a single-zone, gateway-enabled cluster. If your gateway-enabled cluster is multizone, one public ALB and one private ALB is created in each zone. Each ALB routes requests to the app instances in its own zone and to app instances in other zones.
 
@@ -204,7 +203,7 @@ This diagram shows the traffic flow through a single-zone, gateway-enabled clust
 ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) The following diagram shows how Ingress directs communication from the internet to an app in a VPC multizone cluster.
 {: shortdesc}
 
-<img src="images/cs_ingress_vpc.png" width="830" alt="Expose an app in a VPC cluster by using Ingress" style="width:830px; border-style: none"/>
+![Expose an app in a VPC cluster by using Ingress.](images/cs_ingress_vpc.png){: caption="Figure 1. Expose an app in a VPC cluster by using Ingress" caption-side="bottom"}
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the Ingress subdomain for your cluster for your exposed app appended with the Ingress resource path, such as `mycluster-<hash>-0000.us-south.containers.appdomain.cloud/myapp`.
 

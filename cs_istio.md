@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-12-09"
+lastupdated: "2021-12-22"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
 
@@ -59,13 +59,13 @@ Before you begin
     ```
     {: pre}
 
-2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.12.0, is installed.
+3. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.12.0, is installed.
     ```sh
     ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-3. Verify that the managed Istio add-on has a status of `Addon Ready`.
+4. Verify that the managed Istio add-on has a status of `Addon Ready`.
     ```sh
     ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
     ```
@@ -79,7 +79,7 @@ Before you begin
     ```
     {: screen}
 
-4. You can also check out the individual components of the add-on to ensure that the Istio services and their corresponding pods are deployed.
+5. You can also check out the individual components of the add-on to ensure that the Istio services and their corresponding pods are deployed.
     ```sh
     kubectl get svc -n istio-system
     ```
@@ -90,7 +90,7 @@ Before you begin
     ```
     {: pre}
 
-5. Next, you can include your apps in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar).
+6. Next, you can include your apps in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar).
 
 
 
@@ -148,7 +148,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
     `istio-components-pilot-requests-cpu`
     :   Default value: `"500m"`
     :   Configure the CPU request in millicpu for the `istiod` component pod.
-        Use caution when changing this value. Setting this value too low might prevent the control plane from working properly, and setting this value too high might prevent the <code>istiod</code> pod from being scheduled.
+        Use caution when changing this value. Setting this value too low might prevent the control plane from working properly, and setting this value too high might prevent the `istiod` pod from being scheduled.
         {: important}
 
     `istio-global-logging-level`
