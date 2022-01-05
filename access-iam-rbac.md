@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2021
-lastupdated: "2021-11-22"
+  years: 2014, 2022
+lastupdated: "2022-01-05"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -187,6 +187,9 @@ Role
         ```
         {: pre}
 
+Users must run the `ibmcloud ks cluster config` command for their role changes to take effect. 
+{: note}
+
 
 ### Assigning {{site.data.keyword.cloud_notm}} IAM _service_ roles from the CLI:**
 {: #add_users_cli_service}
@@ -282,6 +285,8 @@ Role
 
 5. **Optional**: After a couple minutes, verify that the user is added to the corresponding [RBAC role binding or cluster role binding](#checking-rbac). 
 
+Users must run the `ibmcloud ks cluster config` command for their role changes to take effect. 
+{: note}
 
 
 ## Understanding RBAC permissions
