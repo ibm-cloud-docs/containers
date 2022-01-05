@@ -262,7 +262,21 @@ toc:
               - versions-static-route.md
               - versions-backup-restore.md
               - cs_versions_alb_oauth_proxy.md
-              - cs_versions_archive.md
+              - topicgroup:
+                  label: Archived Kubernetes version changelogs
+                  topics:
+                    - cs-version-118.md
+                    - cs-version-117.md
+                    - cs-version-116.md
+                    - cs-version-115.md
+                    - cs-version-114.md
+                    - cs-version-113.md
+                    - cs-version-112.md
+                    - cs-version-111.md
+                    - cs-version-110.md
+                    - cs-version-19.md
+                    - cs-version-18.md
+                    - cs-version-17.md
         - topicgroup:
             label: IAM and Activity Tracker events
             topics:
