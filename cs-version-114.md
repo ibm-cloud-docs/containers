@@ -435,7 +435,8 @@ The following table shows the changes that are in the worker node fix pack 1.14.
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
 | Kubernetes | v1.14.3 | v1.14.4 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.4){: external}. Update resolves [CVE-2019-11248](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248){: external}. For more information, see [IBM security bulletin](https://www.ibm.com/support/pages/node/967113){: external}). |
-| Ubuntu packages | N/A | N/A | Updated worker node images with package updates for [CVE-2019-13012](https://ubuntu.com/security/CVE-2019-13012){: external} and [CVE-2019-7307](https://ubuntu.com/security/CVE-2019-7307.html){: external}. |{: caption="Table 1. Changes since version 1.14.3_1525" caption-side="bottom"}
+| Ubuntu packages | N/A | N/A | Updated worker node images with package updates for [CVE-2019-13012](https://ubuntu.com/security/CVE-2019-13012){: external} and [CVE-2019-7307](https://ubuntu.com/security/CVE-2019-7307.html){: external}. |
+{: caption="Table 1. Changes since version 1.14.3_1525" caption-side="bottom"}
 
 
 

@@ -69,7 +69,8 @@ The following table shows the changes that are in the patch 1.10.13_1555.
 | Cluster master HA proxy | 1.8.12-alpine | 1.9.6-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.9/src/CHANGELOG){: external}. Update resolves [CVE-2018-0732](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732){: external}, [CVE-2018-0734](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734){: external}, [CVE-2018-0737](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737){: external}, [CVE-2018-5407](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407){: external}, [CVE-2019-1543](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543){: external}, and [CVE-2019-1559](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559){: external}.  |
 | Kubernetes DNS | 1.14.10 | 1.14.13 | See the [Kubernetes DNS release notes](https://github.com/kubernetes/dns/releases/tag/1.14.13){: external}.  |
 | Trusted compute agent | a02f765 | e132aa4 | Updated image for [CVE-2017-12447](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447){: external}.  |
-| Ubuntu 16.04 kernel | 4.4.0-143-generic | 4.4.0-145-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://ubuntu.com/security/CVE-2019-9213.html){: external}.  || Ubuntu 18.04 kernel | 4.15.0-46-generic | 4.15.0-47-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://ubuntu.com/security/CVE-2019-9213.html){: external}. |
+| Ubuntu 16.04 kernel | 4.4.0-143-generic | 4.4.0-145-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://ubuntu.com/security/CVE-2019-9213.html){: external}.  |
+| Ubuntu 18.04 kernel | 4.15.0-46-generic | 4.15.0-47-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://ubuntu.com/security/CVE-2019-9213.html){: external}. |
 {: caption="Table 1. Changes since version 1.10.13_1554" caption-side="bottom"}
 
 ## Changelog for worker node fix pack 1.10.13_1554, released 1 April 2019
@@ -133,7 +134,8 @@ The following table shows the changes that are in the patch 1.10.13_1548.
 | Key Management Service provider | 122 | 136 | Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486){: external}.  |
 | Kubernetes | v1.10.12 | v1.10.13 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.13){: external}.  |
 | Kubernetes DNS | N/A | N/A | Increased Kubernetes DNS pod memory limit from `170Mi` to `400Mi` in order to handle more cluster services.  |
-| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 132 | 143 | Updated image for [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486){: external}.  || OpenVPN client and server | 2.4.6-r3-IKS-13 | 2.4.6-r3-IKS-25 | Updated image for [CVE-2019-1559](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559){: external}.  |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 132 | 143 | Updated image for [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486){: external}.  |
+| OpenVPN client and server | 2.4.6-r3-IKS-13 | 2.4.6-r3-IKS-25 | Updated image for [CVE-2019-1559](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559){: external}.  |
 | Trusted compute agent | 1ea5ad3 | 5f3d092 | Updated image for [CVE-2019-6454](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454){: external}. |
 {: caption="Table 1. Changes since version 1.10.12_1546" caption-side="bottom"}
 
@@ -322,7 +324,8 @@ The following table shows the changes that are in the master fix pack 1.10.8_152
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico configuration | N/A | N/A | Fixed `calico-node` container readiness probe to better handle node failures.  || Cluster update | N/A | N/A | Fixed problem with updating cluster add-ons when the master is updated from an unsupported version. 
+| Calico configuration | N/A | N/A | Fixed `calico-node` container readiness probe to better handle node failures.  |
+| Cluster update | N/A | N/A | Fixed problem with updating cluster add-ons when the master is updated from an unsupported version. 
 {: caption="Table 1. Changes since version 1.10.8_1524" caption-side="bottom"}
 
 
@@ -350,7 +353,8 @@ The following table shows the changes that are in patch 1.10.8_1524.
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
 | Key Management Service Provider | N/A | N/A | Added the ability to use the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect), all your Kubernetes secrets are encrypted.  |
-| Kubernetes | v1.10.7 | v1.10.8 | See the [Kubernetes release notes (https://github.com/kubernetes/kubernetes/releases/tag/v1.10.8){: external}.  || Kubernetes DNS autoscaler | 1.1.2-r2 | 1.2.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.2.0){: external}.  |
+| Kubernetes | v1.10.7 | v1.10.8 | See the [Kubernetes release notes (https://github.com/kubernetes/kubernetes/releases/tag/v1.10.8){: external}.  |
+| Kubernetes DNS autoscaler | 1.1.2-r2 | 1.2.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.2.0){: external}.  |
 | {{site.data.keyword.cloud_notm}} Provider | v1.10.7-146 | v1.10.8-172 | Updated to support Kubernetes 1.10.8 release. Also, updated the documentation link in load balancer error messages.  |
 | IBM file storage classes | N/A | N/A | Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node. Removed duplicate `reclaimPolicy` parameter in the IBM file storage classes.  \n 
 Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass). |

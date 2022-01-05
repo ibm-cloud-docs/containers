@@ -317,7 +317,7 @@ The following table shows the changes that are in the worker node fix pack 1.12.
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
 | Ubuntu packages | N/A | N/A | Updates to installed Ubuntu packages including `systemd` for [CVE-2019-3842](https://ubuntu.com/security/CVE-2019-3842.html){: external}. |
-{: caption="Changes since version 1.12.7_1548" caption-side="bottom"
+{: caption="Changes since version 1.12.7_1548" caption-side="bottom"}
 
 
 ## Changelog for 1.12.7_1548, released 8 April 2019
@@ -417,7 +417,8 @@ The following table shows the changes that are in the worker node fix pack 1.12.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Kernel | 4.4.0-141 | 4.4.0-142 | Updated worker node images with kernel update for [CVE-2018-19407](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelogl){: external}. |{: caption="Changes since version 1.12.5_1538" caption-side="bottom"}
+| Kernel | 4.4.0-141 | 4.4.0-142 | Updated worker node images with kernel update for [CVE-2018-19407](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelogl){: external}. |
+{: caption="Changes since version 1.12.5_1538" caption-side="bottom"}
 
 
 ## Changelog for worker node fix pack 1.12.5_1538, released 15 February 2019
@@ -550,7 +551,8 @@ The following table shows the changes that are in patch 1.12.2_1529.
 | Calico | v3.2.1 | v3.3.1 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/l){: external}. Update resolves [Tigera Technical Advisory TTA-2018-001](https://www.tigera.io/security-bulletins/l){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/740799l){: external}. |
 | Cluster DNS configuration | N/A | N/A | Fixed a bug that could result in both Kubernetes DNS and CoreDNS pods to run after cluster creation or update operations. |
 | containerd | v1.2.0 | v1.1.5 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.1.5l){: external}. Updated containerd to fix a deadlock that can [stop pods from terminating](https://github.com/containerd/containerd/issues/2744l){: external}. |
-| OpenVPN client and server | 2.4.4-r1-6 | 2.4.6-r3-IKS-8 | Updated image for [CVE-2018-0732](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732l){: external} and [CVE-2018-0737](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737l){: external}. |{: caption="Changes since version 1.12.2_1528" caption-side="bottom"}
+| OpenVPN client and server | 2.4.4-r1-6 | 2.4.6-r3-IKS-8 | Updated image for [CVE-2018-0732](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732l){: external} and [CVE-2018-0737](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737l){: external}. |
+{: caption="Changes since version 1.12.2_1528" caption-side="bottom"}
 
 
 ## Changelog for worker node fix pack 1.12.2_1528, released 19 November 2018
@@ -562,7 +564,8 @@ The following table shows the changes that are in the worker node fix pack 1.12.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Kernel | 4.4.0-137 | 4.4.0-139 | Updated worker node images with kernel update for [CVE-2018-7755](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelogl){: external}. |{: caption="Changes since version 1.12.2_1527" caption-side="bottom"}
+| Kernel | 4.4.0-137 | 4.4.0-139 | Updated worker node images with kernel update for [CVE-2018-7755](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelogl){: external}. |
+{: caption="Changes since version 1.12.2_1527" caption-side="bottom"}
 
 
 ## Changelog for 1.12.2_1527, released 7 November 2018

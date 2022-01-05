@@ -279,7 +279,8 @@ The following table shows the changes that are in the master fix pack 1.13.9_153
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Key Management Service provider | 167 | 207 | Fixed an issue that causes the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) to fail to manage Kubernetes secrets. |{: caption="Table 1. Changes since version 1.13.9_1532" caption-side="bottom"}
+| Key Management Service provider | 167 | 207 | Fixed an issue that causes the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) to fail to manage Kubernetes secrets. |
+{: caption="Table 1. Changes since version 1.13.9_1532" caption-side="bottom"}
 
 
 ## Changelog for master fix pack 1.13.9_1532, released 15 August 2019
