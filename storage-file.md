@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-05"
+lastupdated: "2022-01-06"
 
 keywords: kubernetes
 
@@ -45,7 +45,7 @@ First time using {{site.data.keyword.filestorage_short}} in your cluster? Come b
            zone: # Example: dal13
     spec:
      accessModes:
-       - ReadWriteMany
+        - ReadWriteMany
        resources:
          requests:
            storage: 24Gi
@@ -765,10 +765,10 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             volumeMounts:
             - name: myvol
               mountPath: /usr/share/nginx/html
-       volumeClaimTemplates:
-       - metadata:
+        volumeClaimTemplates:
+        - metadata:
            name: myvol
-         spec:
+          spec:
            accessModes:
            - ReadWriteOnce
            resources:
