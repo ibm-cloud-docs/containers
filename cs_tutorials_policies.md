@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2021
-lastupdated: "2021-12-22"
+  years: 2014, 2022
+lastupdated: "2022-01-06"
 
 keywords: kubernetes
 
@@ -47,8 +47,7 @@ This tutorial is intended for software developers and network administrators who
 
 ## Prerequisites
 {: #policies_prereqs}
-
-- [Create a classic cluster](/docs/containers?topic=containers-clusters#clusters_ui). This tutorial is not available for VPC clusters.
+- [Create a classic cluster with at least 3 worker nodes. Free clusters, or single worker node clusters don’t have the required resources to complete this tutorial](/docs/containers?topic=containers-clusters#clusters_ui). This tutorial is not available for VPC clusters.
 - [Target your CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Install and configure the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install).
 - Ensure that you have the following {{site.data.keyword.cloud_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
