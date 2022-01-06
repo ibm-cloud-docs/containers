@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-04"
+lastupdated: "2022-01-06"
 
 keywords: kubernetes, release notes
 
@@ -26,6 +26,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## January 2022
 {: #release-jan-2022}}
 
+
+### 06 January 2022
+{: #jan0622}
+{: release-note}
+
+
+{{site.data.keyword.block_storage_is_short}} add-on.
+:   [Version 4.1.0_807](/docs/containers?topic=containers-vpc_bs_changelog) is released.
+
+
 ### 4 January 2022
 {: #10nov2021}
 {: release-note}
@@ -37,16 +47,18 @@ Worker node fix pack update
 {: #release-dec-2021}
 
 
-
-
-
-
-### 17 December 2021
-{: #17dec2021}
+### 20 December 2021
+{: #20dec2021}
 {: release-note}
 
+
+
+
+
+  
 Deprecated and unsupported Kubernetes versions
 :   Clusters that run version 1.19 are deprecated, with a tentative unsupported date of 31 Jan 2022. Update your clusters to at least [version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120) as soon as possible.
+
 
 ### 14 December 2021
 {: #14dec2021}
@@ -54,7 +66,6 @@ Deprecated and unsupported Kubernetes versions
 
 
 Istio add-on
-
 :   [Version `1.11.5`](/docs/containers?topic=containers-istio-changelog#1115) of the Istio managed add-on is released.
 
 ### 7 December 2021
@@ -64,7 +75,6 @@ Istio add-on
 
 
 Istio add-on
-
 :   [Version `1.12`](/docs/containers?topic=containers-istio-changelog#1102) of the Istio managed add-on is released.
 
 Master fix pack update
@@ -305,6 +315,8 @@ Review the release notes for September 2021.
 ### 29 September 2021
 {: #29sep2021}
 {: release-note}
+
+
 
 New! Kubernetes 1.22
 :   You can create or [update clusters to Kubernetes version 1.22](/docs/containers?topic=containers-cs_versions#cs_v122). With Kubernetes 1.22, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. For more information, [see the blog announcement](https://www.ibm.com/cloud/blog/announcements/kubernetes-version-121-now-available-in-ibm-cloud-kubernetes-service){: external}.
