@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-03"
+lastupdated: "2022-01-11"
 
 keywords: kubernetes, registry, pull secret, secrets
 
