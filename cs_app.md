@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2021
-lastupdated: "2021-11-22"
+  years: 2014, 2022
+lastupdated: "2022-01-11"
 
 keywords: kubernetes, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
