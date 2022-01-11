@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-01-05"
+lastupdated: "2022-01-11"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -55,8 +55,8 @@ The following table shows the changes that are in the worker node patch 1.11.10_
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Ubuntu 16.04 kernel | 4.4.0-148-generic | 4.4.0-150-generic | Updated worker node images with kernel and package updates for [CVE-2019-10906](https://ubuntu.com/security/CVE-2019-10906l){: external}. |
-| Ubuntu 18.04 kernel | 4.15.0-50-generic | 4.15.0-51-generic | Updated worker node images with kernel and package updates for [CVE-2019-10906](https://ubuntu.com/security/CVE-2019-10906l){: external}. |
+| Ubuntu 16.04 kernel | 4.4.0-148-generic | 4.4.0-150-generic | Updated worker node images with kernel and package updates for [CVE-2019-10906](https://ubuntu.com/security/CVE-2019-10906){: external}. |
+| Ubuntu 18.04 kernel | 4.15.0-50-generic | 4.15.0-51-generic | Updated worker node images with kernel and package updates for [CVE-2019-10906](https://ubuntu.com/security/CVE-2019-10906){: external}. |
 {: caption="Changes since version 1.11.10_1561" caption-side="bottom"}
 
 
@@ -70,9 +70,9 @@ The following table shows the changes that are in the patch 1.11.10_1561.
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
 | Cluster master HA configuration | N/A | N/A | Updated configuration to minimize intermittent master network connectivity failures during a master update. |
-| etcd | v3.3.11 | v3.3.13 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.13l){: external}. |
-| GPU device plug-in and installer | 55c1f66 | 32257d3 | Updated image for [CVE-2018-10844](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844l){: external}, [CVE-2018-10845](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845l){: external}, [CVE-2018-10846](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846l){: external}, [CVE-2019-3829](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829l){: external}, [CVE-2019-3836](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836l){: external}, [CVE-2019-9893](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893l){: external}, [CVE-2019-5435](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435l){: external}, and [CVE-2019-5436](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436l){: external}. |
-| Trusted compute agent | 13c7ef0 | e8c6d72 | Updated image for [CVE-2018-10844](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844l){: external}, [CVE-2018-10845](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845l){: external}, [CVE-2018-10846](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846l){: external}, [CVE-2019-3829](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829l){: external}, [CVE-2019-3836](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836l){: external}, [CVE-2019-9893](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893l){: external}, [CVE-2019-5435](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435l){: external}, and [CVE-2019-5436](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436l){: external}. |
+| etcd | v3.3.11 | v3.3.13 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.13){: external}. |
+| GPU device plug-in and installer | 55c1f66 | 32257d3 | Updated image for [CVE-2018-10844](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844){: external}, [CVE-2018-10845](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845){: external}, [CVE-2018-10846](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846){: external}, [CVE-2019-3829](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829){: external}, [CVE-2019-3836](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836){: external}, [CVE-2019-9893](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893){: external}, [CVE-2019-5435](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435){: external}, and [CVE-2019-5436](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436){: external}. |
+| Trusted compute agent | 13c7ef0 | e8c6d72 | Updated image for [CVE-2018-10844](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844){: external}, [CVE-2018-10845](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845){: external}, [CVE-2018-10846](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846){: external}, [CVE-2019-3829](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829){: external}, [CVE-2019-3836](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836){: external}, [CVE-2019-9893](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893){: external}, [CVE-2019-5435](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435){: external}, and [CVE-2019-5436](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436){: external}. |
 {: caption="Changes since version 1.11.10_1559" caption-side="bottom"}
 
 
@@ -98,13 +98,13 @@ The following table shows the changes that are in the patch 1.11.10_1558.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Cluster master HA proxy | 1.9.6-alpine | 1.9.7-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.9/src/CHANGELOGl){: external}. Update resolves [CVE-2019-6706](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706l){: external}. |
-| GPU device plug-in and installer | 9ff3fda | 55c1f66 | Updated image for [CVE-2019-1543](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543l){: external}. |
+| Cluster master HA proxy | 1.9.6-alpine | 1.9.7-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.9/src/CHANGELOG){: external}. Update resolves [CVE-2019-6706](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706){: external}. |
+| GPU device plug-in and installer | 9ff3fda | 55c1f66 | Updated image for [CVE-2019-1543](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543){: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | v1.11.9-241 | v1.11.10-270 | Updated to support the Kubernetes 1.11.10 release. |
-| Kubernetes | v1.11.9 | v1.11.10 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.10l){: external}. |
+| Kubernetes | v1.11.9 | v1.11.10 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.10){: external}. |
 | Kubernetes configuration | N/A | N/A | The Kubernetes API server audit policy configuration is updated to not log the `/openapi/v2*` read-only URL. In addition, the Kubernetes controller manager configuration increased the validity duration of signed `kubelet` certificates from 1 to 3 years. |
 | OpenVPN client configuration | N/A | N/A | The OpenVPN client `vpn-*` pod in the `kube-system` namespace now sets `dnsPolicy` to `Default` to prevent the pod from failing when cluster DNS is down. |
-| Trusted compute agent | e132aa4 | 13c7ef0 | Updated image for [CVE-2016-7076](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076l){: external}, [CVE-2017-1000368](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368l){: external}, and [CVE-2019-11068](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068l){: external}. |
+| Trusted compute agent | e132aa4 | 13c7ef0 | Updated image for [CVE-2016-7076](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076){: external}, [CVE-2017-1000368](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368){: external}, and [CVE-2019-11068](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068){: external}. |
 {: caption="Changes since version 1.11.9_1556" caption-side="bottom"}
 
 
@@ -117,7 +117,7 @@ The following table shows the changes that are in the worker node fix pack 1.11.
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
 | Ubuntu packages | N/A | N/A | Updates to installed Ubuntu packages. |
-| containerd | 1.1.6 | 1.1.7 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.1.7l){: external}. |
+| containerd | 1.1.6 | 1.1.7 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.1.7){: external}. |
 {: caption="Changes since version 1.11.9_1555" caption-side="bottom"}
 
 
@@ -142,12 +142,12 @@ The following table shows the changes that are in the patch 1.11.9_1554.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.3.1 | v3.3.6 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/l){: external}. Update resolves [CVE-2019-9946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946l){: external}. |
-| Cluster master HA proxy | 1.8.12-alpine | 1.9.6-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.9/src/CHANGELOGl){: external}. Update resolves [CVE-2018-0732](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732l){: external}, [CVE-2018-0734](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734l){: external}, [CVE-2018-0737](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737l){: external}, [CVE-2018-5407](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407l){: external}, [CVE-2019-1543](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543l){: external}, and [CVE-2019-1559](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559l){: external}. |
+| Calico | v3.3.1 | v3.3.6 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/){: external}. Update resolves [CVE-2019-9946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946){: external}. |
+| Cluster master HA proxy | 1.8.12-alpine | 1.9.6-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.9/src/CHANGELOG){: external}. Update resolves [CVE-2018-0732](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732){: external}, [CVE-2018-0734](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734){: external}, [CVE-2018-0737](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737){: external}, [CVE-2018-5407](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407){: external}, [CVE-2019-1543](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543){: external}, and [CVE-2019-1559](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559){: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | v1.11.8-219 | v1.11.9-241 | Updated to support the Kubernetes 1.11.9 and Calico 3.3.6 releases. |
-| Kubernetes | v1.11.8 | v1.11.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.9l){: external}. |
-| Kubernetes DNS | 1.14.10 | 1.14.13 | See the [Kubernetes DNS release notes](https://github.com/kubernetes/dns/releases/tag/1.14.13l){: external}. |
-| Trusted compute agent | a02f765 | e132aa4 | Updated image for [CVE-2017-12447](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447l){: external}. |
+| Kubernetes | v1.11.8 | v1.11.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.9){: external}. |
+| Kubernetes DNS | 1.14.10 | 1.14.13 | See the [Kubernetes DNS release notes](https://github.com/kubernetes/dns/releases/tag/1.14.13){: external}. |
+| Trusted compute agent | a02f765 | e132aa4 | Updated image for [CVE-2017-12447](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447){: external}. |
 | Ubuntu 16.04 kernel | 4.4.0-143-generic | 4.4.0-145-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://ubuntu.com/security/CVE-2019-9213.html){: external}. |
 | Ubuntu 18.04 kernel | 4.15.0-46-generic | 4.15.0-47-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://ubuntu.com/security/CVE-2019-9213.html){: external}. |
 {: caption="Changes since version 1.11.8_1553" caption-side="bottom"}
@@ -174,9 +174,9 @@ The following table shows the changes that are in the master fix pack 1.11.8_155
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| {{site.data.keyword.filestorage_full_notm}} plug-in | 345 | 346 | Updated image for [CVE-2019-9741](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741l){: external}. |
-| Key Management Service provider | 166 | 167 | Fixes intermittent `context deadline exceeded` and `timeout` errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrypted. Update includes fix for [CVE-2019-9741](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741l){: external}. |
-| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 143 | 146 | Updated image for [CVE-2019-9741](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741l){: external}. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in | 345 | 346 | Updated image for [CVE-2019-9741](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741){: external}. |
+| Key Management Service provider | 166 | 167 | Fixes intermittent `context deadline exceeded` and `timeout` errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrypted. Update includes fix for [CVE-2019-9741](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 143 | 146 | Updated image for [CVE-2019-9741](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741){: external}. |
 {: caption="Changes since version 1.11.8_1550" caption-side="bottom"}
 
 
@@ -193,8 +193,8 @@ The following table shows the changes that are in the patch 1.11.8_1550.
 | GPU device plug-in and installer | e32d51c | 9ff3fda | Updated the GPU drivers to [418.43](https://www.nvidia.com/object/unix.html){: external}. Update includes fix for [CVE-2019-9741](https://ubuntu.com/security/CVE-2019-9741.html){: external}. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in | 344 | 345 | Added support for [private cloud service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-sel). |
 | Kernel | 4.4.0-141 | 4.4.0-143 | Updated worker node images with kernel update for [CVE-2019-6133](https://ubuntu.com/security/CVE-2019-6133.html){: external}. |
-| Key Management Service provider | 136 | 166 | Updated image for [CVE-2018-16890](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890l){: external}, [CVE-2019-3822](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822l){: external}, and [CVE-2019-3823](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823l){: external}. |
-| Trusted compute agent | 5f3d092 | a02f765 | Updated image for [CVE-2018-10779](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779l){: external}, [CVE-2018-12900](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900l){: external}, [CVE-2018-17000](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000l){: external}, [CVE-2018-19210](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210l){: external}, [CVE-2019-6128](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128l){: external}, and [CVE-2019-7663](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663l){: external}. |
+| Key Management Service provider | 136 | 166 | Updated image for [CVE-2018-16890](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890){: external}, [CVE-2019-3822](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822){: external}, and [CVE-2019-3823](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823){: external}. |
+| Trusted compute agent | 5f3d092 | a02f765 | Updated image for [CVE-2018-10779](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779){: external}, [CVE-2018-12900](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900){: external}, [CVE-2018-17000](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000){: external}, [CVE-2018-19210](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210){: external}, [CVE-2019-6128](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128){: external}, and [CVE-2019-7663](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663){: external}. |
 {: caption="Changes since version 1.11.8_1547" caption-side="bottom"}
 
 
@@ -207,16 +207,16 @@ The following table shows the changes that are in the patch 1.11.8_1547.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| GPU device plug-in and installer | eb3a259 | e32d51c | Updated images for [CVE-2019-6454](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454l){: external}. |
+| GPU device plug-in and installer | eb3a259 | e32d51c | Updated images for [CVE-2019-6454](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454){: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | v1.11.7-198 | v1.11.8-219 | Updated to support the Kubernetes 1.11.8 release. Fixed periodic connectivity problems for load balancers that set `externalTrafficPolicy` to `local`. Updated load balancer events to use the latest {{site.data.keyword.cloud_notm}} documentation links. |
-| {{site.data.keyword.filestorage_full_notm}} plug-in | 342 | 344 | Changed the base operating system for the image from Fedora to Alpine. Updated image for [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486l){: external}. |
-| Key Management Service provider | 122 | 136 | Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486l){: external}. |
-| Kubernetes | v1.11.7 | v1.11.8 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.8l){: external}. Update resolves [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486l){: external} and [CVE-2019-1002100](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100l){: external}. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in | 342 | 344 | Changed the base operating system for the image from Fedora to Alpine. Updated image for [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486){: external}. |
+| Key Management Service provider | 122 | 136 | Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486){: external}. |
+| Kubernetes | v1.11.7 | v1.11.8 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.8){: external}. Update resolves [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486){: external} and [CVE-2019-1002100](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100){: external}. |
 | Kubernetes configuration | N/A | N/A | Added `ExperimentalCriticalPodAnnotation=true` to the `--feature-gates` option. This setting helps migrate pods from the deprecated `scheduler.alpha.kubernetes.io/critical-pod` annotation to [Kubernetes pod priority support](/docs/containers?topic=containers-pod_priority#pod_priorityl). |
 | Kubernetes DNS | N/A | N/A | Increased Kubernetes DNS pod memory limit from `170Mi` to `400Mi` in order to handle more cluster services. |
-| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 132 | 143 | Updated image for [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486l){: external}. |
-| OpenVPN client and server | 2.4.6-r3-IKS-13 | 2.4.6-r3-IKS-25 | Updated image for [CVE-2019-1559](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559l){: external}. |
-| Trusted compute agent | 1ea5ad3 | 5f3d092 | Updated image for [CVE-2019-6454](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454l){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 132 | 143 | Updated image for [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486){: external}. |
+| OpenVPN client and server | 2.4.6-r3-IKS-13 | 2.4.6-r3-IKS-25 | Updated image for [CVE-2019-1559](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559){: external}. |
+| Trusted compute agent | 1ea5ad3 | 5f3d092 | Updated image for [CVE-2019-6454](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454){: external}. |
 {: caption="Changes since version 1.11.7_1546" caption-side="bottom"}
 
 
@@ -229,7 +229,7 @@ The following table shows the changes that are in the worker node fix pack 1.11.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Kernel | 4.4.0-141 | 4.4.0-142 | Updated worker node images with kernel update for [CVE-2018-19407](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelogl){: external}. |
+| Kernel | 4.4.0-141 | 4.4.0-142 | Updated worker node images with kernel update for [CVE-2018-19407](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog){: external}. |
 {: caption="Changes since version 1.11.7_1546" caption-side="bottom"}
 
 
@@ -243,7 +243,7 @@ The following table shows the changes that are in the worker node fix pack 1.11.
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
 | Cluster master HA proxy configuration | N/A | N/A | Changed the pod configuration `spec.priorityClassName` value to `system-node-critical` and set the `spec.priority` value to `2000001000`. |
-| containerd | 1.1.5 | 1.1.6 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.1.6l){: external}. Update resolves [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736l){: external}. |
+| containerd | 1.1.5 | 1.1.6 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.1.6){: external}. Update resolves [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736){: external}. |
 | Kubernetes `kubelet` configuration | N/A | N/A | Enabled the `ExperimentalCriticalPodAnnotation` feature gate to prevent critical static pod eviction. |
 {: caption="Changes since version 1.11.7_1543" caption-side="bottom"}
 
@@ -256,16 +256,16 @@ The following table shows the changes that are in the patch 1.11.7_1543.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| etcd | v3.3.1 | v3.3.11 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.11l){: external}. Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more). |
-| GPU device plug-in and installer | 13fdc0d | eb3a259 | Updated images for [CVE-2019-3462](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462l){: external} and [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486l){: external}. |
+| etcd | v3.3.1 | v3.3.11 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.11){: external}. Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more). |
+| GPU device plug-in and installer | 13fdc0d | eb3a259 | Updated images for [CVE-2019-3462](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462){: external} and [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486){: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | v1.11.6-180 | v1.11.7-198 | Updated to support the Kubernetes 1.11.7 release. Additionally, `calicoctl` version is updated to 3.3.1. Fixed unnecessary configuration updates to version 2.0 network load balancers on worker node status changes. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in | 338 | 342 | The file storage plug-in is updated as follows: \n - Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers?topic=containers-file_storage#file-topologyl). \n - Ignores persistent volume claim (PVC) delete errors if the storage is already deleted. \n - Adds a failure message annotation to failed PVCs. \n - Optimizes the storage provisioner controller's leader election and resync period settings, and increases the provisioning timeout from 30 minutes to 1 hour. \n - Checks user permissions before starting the provisioning. |
 | Key Management Service provider | 111 | 122 | Added retry logic to avoid temporary failures when Kubernetes secrets are managed by {{site.data.keyword.keymanagementservicefull_notm}}. |
-| Kubernetes | v1.11.6 | v1.11.7 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.7l){: external}. |
+| Kubernetes | v1.11.6 | v1.11.7 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.7){: external}. |
 | Kubernetes configuration | N/A | N/A | The Kubernetes API server audit policy configuration is updated to include logging metadata for `cluster-admin` requests and logging the request body of workload `create`, `update`, and `patch` requests. |
-| OpenVPN client | 2.4.6-r3-IKS-8 | 2.4.6-r3-IKS-13 | Updated image for [CVE-2018-0734](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734l){: external} and [CVE-2018-5407](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407l){: external}. Additionally, the pod configuration is now obtained from a secret instead of from a configmap. |
-| OpenVPN server | 2.4.6-r3-IKS-8 | 2.4.6-r3-IKS-13 | Updated image for [CVE-2018-0734](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734l){: external} and [CVE-2018-5407](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407l){: external}. |
-| `systemd` | 230 | 229 | Security patch for [CVE-2018-16864](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864l){: external}. |
+| OpenVPN client | 2.4.6-r3-IKS-8 | 2.4.6-r3-IKS-13 | Updated image for [CVE-2018-0734](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734){: external} and [CVE-2018-5407](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407){: external}. Additionally, the pod configuration is now obtained from a secret instead of from a configmap. |
+| OpenVPN server | 2.4.6-r3-IKS-8 | 2.4.6-r3-IKS-13 | Updated image for [CVE-2018-0734](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734){: external} and [CVE-2018-5407](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407){: external}. |
+| `systemd` | 230 | 229 | Security patch for [CVE-2018-16864](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864){: external}. |
 {: caption="Changes since version 1.11.6_1541" caption-side="bottom"}
 
 
@@ -278,7 +278,7 @@ The following table shows the changes that are in the worker node fix pack 1.11.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Ubuntu packages | N/A | N/A | Updates to installed Ubuntu packages including `apt` for [CVE-2019-3462](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462l){: external} / [USN-3863-1](https://ubuntu.com/security/notices/USN-3863-1l){: external}. |
+| Ubuntu packages | N/A | N/A | Updates to installed Ubuntu packages including `apt` for [CVE-2019-3462](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462){: external} / [USN-3863-1](https://ubuntu.com/security/notices/USN-3863-1){: external}. |
 {: caption="Changes since version 1.11.6_1540" caption-side="bottom"}
 
 
@@ -292,9 +292,9 @@ The following table shows the changes that are in the patch 1.11.6_1540.
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
 | {{site.data.keyword.cloud_notm}} Provider | v1.11.5-152 | v1.11.6-180 | Updated to support the Kubernetes 1.11.6 release. |
-| Kubernetes | v1.11.5 | v1.11.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.6l){: external}. |
-| Kubernetes add-on resizer | 1.8.1 | 1.8.4 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4l){: external}. |
-| Kubernetes dashboard | v1.8.3 | v1.10.1 | See the [Kubernetes dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1l){: external}. Update resolves [CVE-2018-18264](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264l){: external}.  \n If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers?topic=containers-deploy_app#cli_dashboardl). |
+| Kubernetes | v1.11.5 | v1.11.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.6){: external}. |
+| Kubernetes add-on resizer | 1.8.1 | 1.8.4 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4){: external}. |
+| Kubernetes dashboard | v1.8.3 | v1.10.1 | See the [Kubernetes dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1){: external}. Update resolves [CVE-2018-18264](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264){: external}.  \n If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers?topic=containers-deploy_app#cli_dashboardl). |
 | GPU installer | 390.12 | 410.79 | Updated the installed GPU drivers to 410.79. |
 {: caption="Changes since version 1.11.5_1539" caption-side="bottom"}
 
@@ -308,7 +308,7 @@ The following table shows the changes that are in the worker node fix pack 1.11.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Kernel | 4.4.0-139 | 4.4.0-141 | Updated worker node images with kernel update for [CVE-2017-5753, CVE-2018-18690](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelogl){: external}. |
+| Kernel | 4.4.0-139 | 4.4.0-141 | Updated worker node images with kernel update for [CVE-2017-5753, CVE-2018-18690](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-141.167/changelog){: external}. |
 {: caption="Changes since version 1.11.5_1538" caption-side="bottom"}
 
 ## Changelog for worker node fix pack 1.11.5_1538, released 17 December 2018
@@ -333,7 +333,7 @@ The following table shows the changes that are in the patch 1.11.5_1537.
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
 | {{site.data.keyword.cloud_notm}} Provider | v1.11.4-142 | v1.11.5-152 | Updated to support the Kubernetes 1.11.5 release. |
-| Kubernetes | v1.11.4 | v1.11.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.5l){: external}. Update resolves [CVE-2018-1002105](https://github.com/kubernetes/kubernetes/issues/71411l){: external}. |
+| Kubernetes | v1.11.4 | v1.11.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.5){: external}. Update resolves [CVE-2018-1002105](https://github.com/kubernetes/kubernetes/issues/71411){: external}. |
 {: caption="Changes since version 1.11.4_1536" caption-side="bottom"}
 
 
@@ -359,11 +359,11 @@ The following table shows the changes that are in patch 1.11.4_1535.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.2.1 | v3.3.1 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/l){: external}. Update resolves [Tigera Technical Advisory TTA-2018-001](https://www.tigera.io/security-bulletins/l){: external}. |
-| containerd | v1.1.4 | v1.1.5 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.1.5l){: external}. Updated containerd to fix a deadlock that can [stop pods from terminating](https://github.com/containerd/containerd/issues/2744l){: external}. |
+| Calico | v3.2.1 | v3.3.1 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/){: external}. Update resolves [Tigera Technical Advisory TTA-2018-001](https://www.tigera.io/security-bulletins/){: external}. |
+| containerd | v1.1.4 | v1.1.5 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.1.5){: external}. Updated containerd to fix a deadlock that can [stop pods from terminating](https://github.com/containerd/containerd/issues/2744){: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | v1.11.3-127 | v1.11.4-142 | Updated to support the Kubernetes 1.11.4 release. |
-| Kubernetes | v1.11.3 | v1.11.4 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.4l){: external}. |
-| OpenVPN client and server | 2.4.4-r1-6 | 2.4.6-r3-IKS-8 | Updated image for [CVE-2018-0732](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732l){: external} and [CVE-2018-0737](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737l){: external}. |
+| Kubernetes | v1.11.3 | v1.11.4 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.4){: external}. |
+| OpenVPN client and server | 2.4.4-r1-6 | 2.4.6-r3-IKS-8 | Updated image for [CVE-2018-0732](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732){: external} and [CVE-2018-0737](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737){: external}. |
 {: caption="Changes since version 1.11.3_1534" caption-side="bottom"}
 
 ## Changelog for worker node fix pack 1.11.3_1534, released 19 November 2018
@@ -375,7 +375,7 @@ The following table shows the changes that are in the worker node fix pack 1.11.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Kernel | 4.4.0-137 | 4.4.0-139 | Updated worker node images with kernel update for [CVE-2018-7755](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelogl){: external}. |
+| Kernel | 4.4.0-137 | 4.4.0-139 | Updated worker node images with kernel update for [CVE-2018-7755](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog){: external}. |
 {: caption="Changes since version 1.11.3_1533" caption-side="bottom"}
 
 
@@ -446,7 +446,7 @@ The following table shows the changes that are in the worker node fix pack 1.11.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Kernel | 4.4.0-133 | 4.4.0-137 | Updated worker node images with kernel update for [CVE-2018-14633, CVE-2018-17182](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-137.163/changelogl){: external}. |
+| Kernel | 4.4.0-133 | 4.4.0-137 | Updated worker node images with kernel update for [CVE-2018-14633, CVE-2018-17182](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-137.163/changelog){: external}. |
 | Inactive session timeout | N/A | N/A | Set the inactive session timeout to 5 minutes for compliance reasons. |
 {: caption="Changes since version 1.11.3_1524" caption-side="bottom"}
 
@@ -479,12 +479,12 @@ The following table shows the changes that are in patch 1.11.3_1521.
 | {{site.data.keyword.cloud_notm}} Provider | v1.11.2-71 | v1.11.3-91 | Updated to support Kubernetes 1.11.3 release. |
 | {{site.data.keyword.IBM_notm}} file storage classes | N/A | N/A | Removed `mountOptions` in the {{site.data.keyword.IBM_notm}} file storage classes to use the default that is provided by the worker node.  \n Also, now when you update the cluster master, the default IBM file storage class remains `ibmc-file-bronze`. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclassl). |
 | Key Management Service Provider | N/A | N/A | Added the ability to use the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](/docs/containers?topic=containers-encryption#keyprotectl), all your Kubernetes secrets are encrypted. |
-| Kubernetes | v1.11.2 | v1.11.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.3l){: external}. |
-| Kubernetes DNS autoscaler | 1.1.2-r2 | 1.2.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.2.0l){: external}. |
+| Kubernetes | v1.11.2 | v1.11.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.3){: external}. |
+| Kubernetes DNS autoscaler | 1.1.2-r2 | 1.2.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.2.0){: external}. |
 | Log rotate | N/A | N/A | Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reloadl) or the `ibmcloud ks worker update` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_updatel). |
 | Root password expiration | N/A | N/A | Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, don't disable the expiration. Instead, you can [update](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_updatel) or [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reloadl) your worker nodes at least every 90 days. |
 | Worker node runtime components (`kubelet`, `kube-proxy`, `containerd`) | N/A | N/A | Removed dependencies of runtime components on the primary disk. This enhancement prevents worker nodes from failing when the primary disk is filled up. |
-| systemd | N/A | N/A | Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345](https://github.com/kubernetes/kubernetes/issues/57345l){: external}. |
+| systemd | N/A | N/A | Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345](https://github.com/kubernetes/kubernetes/issues/57345){: external}. |
 {: caption="Changes since version 1.11.2_1516" caption-side="bottom"}
 
 
@@ -497,8 +497,8 @@ The following table shows the changes that are in patch 1.11.2_1516.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.1.3 | v3.2.1 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/l){: external}. |
-| containerd | 1.1.2 | 1.1.3 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.1.3l){: external}. |
+| Calico | v3.1.3 | v3.2.1 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/){: external}. |
+| containerd | 1.1.2 | 1.1.3 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.1.3){: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | v1.11.2-60 | v1.11.2-71 | Changed the cloud provider configuration to better handle updates for load balancer services with `externalTrafficPolicy` set to `local`. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in configuration | N/A | N/A | Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_classl). |
 {: caption="Changes since version 1.11.2_1514" caption-side="bottom"}
@@ -514,7 +514,7 @@ The following table shows the changes that are in the worker node fix pack 1.11.
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
 | `systemd` | 229 | 230 | Updated `systemd` to fix `cgroup` leak. |
-| Kernel | 4.4.0-127 | 4.4.0-133 | Updated worker node images with kernel update for [CVE-2018-3620,CVE-2018-3646](https://ubuntu.com/security/notices/USN-3741-1/l){: external}. |
+| Kernel | 4.4.0-127 | 4.4.0-133 | Updated worker node images with kernel update for [CVE-2018-3620,CVE-2018-3646](https://ubuntu.com/security/notices/USN-3741-1/){: external}. |
 {: caption="Changes since version 1.11.2_1513" caption-side="bottom"}
 
 
@@ -528,13 +528,13 @@ The following table shows the changes that are in patch 1.11.2_1513.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| containerd | N/A | 1.1.2 | `containerd` replaces Docker as the new container runtime for Kubernetes. See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.1.2l){: external}. |
+| containerd | N/A | 1.1.2 | `containerd` replaces Docker as the new container runtime for Kubernetes. See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.1.2){: external}. |
 | Docker | N/A | N/A | `containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance. |
-| etcd | v3.2.14 | v3.2.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.2.18l){: external}. |
+| etcd | v3.2.14 | v3.2.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.2.18){: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | v1.10.5-118 | v1.11.2-60 | Updated to support Kubernetes 1.11 release. In addition, load balancer pods now use the new `ibm-app-cluster-critical` pod priority class. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in | 334 | 338 | Updated `incubator` version to 1.8. File storage is provisioned to the specific zone that you select. You can't update an existing (static) PV instance labels. |
-| Kubernetes | v1.10.5 | v1.11.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.2l){: external}. |
+| Kubernetes | v1.10.5 | v1.11.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.2){: external}. |
 | Kubernetes configuration | N/A | N/A | Updated the OpenID Connect configuration for the cluster's Kubernetes API server to support {{site.data.keyword.cloud_notm}} Identity Access and Management (IAM) access groups. Added `Priority` to the `--enable-admission-plugins` option for the cluster's Kubernetes API server and configured the cluster to support pod priority. For more information, see: \n - [{{site.data.keyword.cloud_notm}} IAM access groups](/docs/containers?topic=containers-users#rbacl) \n - [Configuring pod priority](/docs/containers?topic=containers-pod_priority#pod_priorityl) |
-| Kubernetes Heapster | v1.5.2 | v.1.5.4 | Increased resource limits for the `heapster-nanny` container. See the [Kubernetes Heapster release notes](https://github.com/kubernetes-retired/heapster/releases/tag/v1.5.4l){: external}. |
+| Kubernetes Heapster | v1.5.2 | v.1.5.4 | Increased resource limits for the `heapster-nanny` container. See the [Kubernetes Heapster release notes](https://github.com/kubernetes-retired/heapster/releases/tag/v1.5.4){: external}. |
 | Logging configuration | N/A | N/A | The container log directory is now `/var/log/pods/` instead of the previous `/var/lib/docker/containers/`. |
 {: caption="Changes since version 1.10.5_1518" caption-side="bottom"}
