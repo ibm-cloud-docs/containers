@@ -26,7 +26,7 @@ Review the supported versions of the static route add-on. In the CLI, you can ru
 
 | Static route add-on version | Supported? | Kubernetes |
 | --- | --- | --- |
-| 1.00 | Yes | 1.19, 1.20, 1.21 |
+| 1.00 | Yes | 1.19, 1.20, 1.21, 1.22 |
 {: summary="The rows are read from left to right. The first column is the static route add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the static route add-on version is supported for."}
 {: caption="Supported static route add-on versions" caption-side="top"}
 
