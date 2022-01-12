@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-12"
 
 keywords: containers
 subcollection: containers
@@ -1243,7 +1243,7 @@ subcollection: containers
 
 * [Isolating ALB proxy workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_gateway)
 
-[Classic: Controlling traffic with network policies](/docs/containers?topic=containers-network_policies#network_policies)
+[Controlling traffic with network policies on classic clusters](/docs/containers?topic=containers-network_policies#network_policies)
 
 * [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy)
 
