@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-12"
 
 keywords: kubernetes, release notes
 
@@ -930,10 +930,11 @@ Ingress ALB changelog
 {: release-note}
 
 
+
 Cluster and worker node ID
 :   The ID format for clusters and worker nodes is changed. Existing clusters and worker nodes keep their existing IDs. If you have automation that relies on the previous format, update it for new clusters.
     - **Cluster ID**: In the regex format `{a-v0-9}7]{a-z0-9}[2]{a-v0-9}[11]`.
-    - **Worker node ID**: In the format `kube-<cluster_ID>-<cluster_name_truncated>-<resource_group_truncated>-<worker_ID>`
+    - **Worker node ID**: In the format: `kube-<cluster_ID>-<cluster_name_truncated>-<resource_group_truncated>-<worker_ID>`
 
 Ingress ALB changelog
 :   Updated the ALB `nginx-ingress` image to build 497.
