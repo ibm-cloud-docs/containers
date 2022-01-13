@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-13"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -20,7 +20,7 @@ Version 1.17 is unsupported. You can review the following archive of 1.17 change
 {: shortdesc}
 
 ## Changelog for worker node fix pack 1.17.17_1568, released 19 July 2021
-{: #1171_1568}
+{: #11717_1568}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1568`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}

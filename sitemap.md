@@ -540,7 +540,7 @@ subcollection: containers
 
     * [2 September 2020](/docs/containers?topic=containers-iks-release#02sept2020)
 
-    * [1 September 2020](/docs/containers?topic=containers-iks-release#26sept2020)
+    * [1 September 2020](/docs/containers?topic=containers-iks-release#1sept2020)
 
 * [August 2020](/docs/containers?topic=containers-iks-release#aug20)
 
@@ -4529,7 +4529,7 @@ subcollection: containers
 
 [Version 1.17 changelog (unsupported as of 2 July 2021)](/docs/containers?topic=containers-117_changelog#117_changelog)
 
-* [Changelog for worker node fix pack 1.17.17_1568, released 19 July 2021](/docs/containers?topic=containers-117_changelog#1171_1568)
+* [Changelog for worker node fix pack 1.17.17_1568, released 19 July 2021](/docs/containers?topic=containers-117_changelog#11717_1568)
 
 * [Changelog for worker node fix pack 1.17.17_1567, released 6 July 2021](/docs/containers?topic=containers-117_changelog#11717_1567_worker)
 
