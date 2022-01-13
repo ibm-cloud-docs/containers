@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-13"
 
 keywords: kubernetes
 
@@ -311,7 +311,7 @@ To add {{site.data.keyword.filestorage_short}}:
     `storage`
     :   Enter the size of the {{site.data.keyword.filestorage_short}}, in gigabytes (Gi). After your storage is provisioned, you can't change the size of your {{site.data.keyword.filestorage_short}}. Make sure to specify a size that matches the amount of data that you want to store.
     
-    `iops``
+    `iops`
     :   This option is available for the custom storage classes only (`ibmc-file-custom / ibmc-file-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. If you choose an IOPS other than one that is listed, the IOPS is rounded up.
     
     `storageClassName`
@@ -1304,7 +1304,7 @@ You can [set up periodic snapshots for your {{site.data.keyword.filestorage_shor
 Complete the following steps to create a snapshot for your volume.
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-2. Log in to the `ibmcloud sl</code> CLI`. 
+2. Log in to the `ibmcloud sl` CLI. 
 
     ```sh
     ibmcloud sl init
