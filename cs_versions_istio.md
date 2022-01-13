@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-13"
 
 keywords: kubernetes, istio, add-on
 
@@ -38,7 +38,6 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 {: summary="The rows are read from left to right. The first column is the Istio add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the Istio version is supported for."}
 {: caption="Supported Istio versions" caption-side="top"}
 
-
 ## Version 1.12, released 7 December 2021
 {: #v112}
 
@@ -54,6 +53,17 @@ Review the changes that are in version 1.12 of the managed Istio add-on.
 - Users can now increase the max horizontal pod autoscaler (HPA) pods for istiod. Do not change this value to less than the default of `5`. You can increase this value, but only in situations where you have a large service mesh.
 - Resolves the following CVEs:
     - [usn-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
+
+### Changelog for 1.12.1, released 13 January 2022
+{: #1121}
+
+Review the changes that are included in version 1.12.1 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.12.0  
+**Current version**: 1.12.1   
+**Updates in this version:**  
+- See the Istio release notes for [Istio 1.12.1](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.1/){:external}. 
 
 
 ## Version 1.11
@@ -139,6 +149,17 @@ Review the changes that are in version 1.11.1 of the managed Istio add-on.
 
 Review the changes that are in version 1.10 of the managed Istio add-on.
 {: shortdesc}
+
+### Changelog for 1.10.6, released 13 January 2022
+{: #1106}
+
+Review the changes that are included in version 1.10.6 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.10.5  
+**Current version**: 1.10.6 
+**Updates in this version:**  
+- See the Istio release notes for [Istio 1.10.6](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.6/){:external}. 
 
 ### Changelog for 1.10.5, released 28 October 2021
 {: #1105}

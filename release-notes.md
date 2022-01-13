@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-12"
+lastupdated: "2022-01-13"
 
 keywords: kubernetes, release notes
 
@@ -25,6 +25,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## January 2022
 {: #release-jan-2022}}
+
+
+
+### 13 January 2022
+{: #13jan2021}
+{: release-note}
+
+Istio add-on
+:   [Version `1.12.1`](/docs/containers?topic=containers-istio-changelog#1121) and [Version `1.10.6`](/docs/containers?topic=containers-istio-changelog#1106) of the Istio managed add-on are released.
+
+
 
 
 
@@ -581,7 +592,7 @@ Istio add-on changelog
 {: release-note}
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.21.2_1524](/docs/containers?topic=containers-changelog#1212_1524), [1.20.8_1546](/docs/containers?topic=containers-changelog#1208_1546), [1.19.12_1553](/docs/containers?topic=containers-changelog#11912_1553), [1.18.20_1558](/docs/containers?topic=containers-118_changelog#11820_1558), and [1.17.17_1568](/docs/containers?topic=containers-117_changelog#1171_1568).
+:   Worker node fix pack update changelog documentation is available for version [1.21.2_1524](/docs/containers?topic=containers-changelog#1212_1524), [1.20.8_1546](/docs/containers?topic=containers-changelog#1208_1546), [1.19.12_1553](/docs/containers?topic=containers-changelog#11912_1553), [1.18.29_1558](/docs/containers?topic=containers-118_changelog#11829_1558), and [1.17.17_1568](/docs/containers?topic=containers-117_changelog#1171_1568).
 
 ### 15 July 2021
 {: #15july2021}
@@ -1884,7 +1895,7 @@ Istio add-on
 :   [Version 1.7 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#v17) is released.
 
 ### 1 September 2020
-{: #26sept2020}
+{: #1sept2020}
 {: release-note}
 
 Deprecation of VPC Gen 1 compute

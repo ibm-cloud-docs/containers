@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-01-12"
+lastupdated: "2022-01-13"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -235,7 +235,7 @@ The following table shows the changes that are in the patch 1.12.9_1557.
 | -------------- | -------------- | -------------- | ------------- |
 | GPU device plug-in and installer | 32257d3 | 5d34347 | Updated image for [CVE-2019-8457](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457){: external}. Updated the GPU drivers to [430.14](https://www.nvidia.com/Download/driverResults.aspx/147582/){: external}. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in | 346 | 347 | Updated so that the IAM API key can be either encrypted or unencrypted. |
-| Public service endpoint for Kubernetes master | N/A | N/A | Fixed an issue to [enable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-sel). |
+| Public service endpoint for Kubernetes master | N/A | N/A | Fixed an issue to [enable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se). |
 | Ubuntu 16.04 kernel | 4.4.0-148-generic | 4.4.0-150-generic | Updated worker node images with kernel and package updates for [CVE-2019-10906](https://ubuntu.com/security/CVE-2019-10906){: external}. |
 | Ubuntu 18.04 kernel | 4.15.0-50-generic | 4.15.0-51-generic | Updated worker node images with kernel and package updates for [CVE-2019-10906](https://ubuntu.com/security/CVE-2019-10906){: external}. |
 {: caption="Changes since version 1.12.9_1555" caption-side="bottom"}
