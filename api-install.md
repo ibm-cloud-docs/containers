@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-13"
 
 keywords: kubernetes, ic, ks, kubectl, api
 
@@ -294,7 +294,7 @@ The following instructions require public network access in your cluster to conn
          - `receiver_client_ids: kube`
          - `response_type: delegated_refresh_token`
          - `refresh_token`: Your {{site.data.keyword.cloud_notm}} IAM refresh token.
-         - `grant_type: refresh_token
+         - `grant_type`: refresh_token
 
     The following example shows output from the previous API request.
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-01-13"
+lastupdated: "2022-01-14"
 
 keywords: kubernetes
 
@@ -52,7 +52,7 @@ The page lists all `ibmcloud ks` commands as they are structured in the CLI. For
         * [`ibmcloud ks cluster master audit-webhook set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_config_set) 
         * [`ibmcloud ks cluster master audit-webhook unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_config_unset) 
     * **`cluster master private-service-endpoint`**: Manage the private service endpoint of a cluster.
-        * **[`ibmcloud ks cluster master private-service-endpoint allowlist`**: Manage the private service endpoint allowlist.
+        * **`ibmcloud ks cluster master private-service-endpoint allowlist`**: Manage the private service endpoint allowlist.
             * [`ibmcloud ks cluster master private-service-endpoint allowlist add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist_add)
             * [`ibmcloud ks cluster master private-service-endpoint allowlist disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist_disable)
             * [`ibmcloud ks cluster master private-service-endpoint allowlist enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist_enable)
@@ -82,7 +82,7 @@ The page lists all `ibmcloud ks` commands as they are structured in the CLI. For
 [View and modify worker nodes for a cluster](/docs/containers?topic=containers-kubernetes-service-cli#worker_node_commands).
 {: shortdesc}
 
-* [`ibmcloud ks worker add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_add) **Deprecated**
+* **Deprecated** [`ibmcloud ks worker add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_add) 
 * [`ibmcloud ks worker get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_get)
 * [`ibmcloud ks worker ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_workers)
 * [`ibmcloud ks worker reboot`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot)
@@ -108,7 +108,7 @@ The page lists all `ibmcloud ks` commands as they are structured in the CLI. For
 * [`ibmcloud ks worker-pool rebalance`](/docs/containers?topic=containers-kubernetes-service-cli#cs_rebalance)
 * [`ibmcloud ks worker-pool resize`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_resize)
 * [`ibmcloud ks worker-pool rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_rm)
-* [`ibmcloud ks worker-pool taint`](/docs/containers?topic=containers-kubernetes-service-cli#worker_pool_taint): Set and remove Kubernetes taints for all worker nodes in a worker pool.
+* **[`worker-pool taint`]**: Set and remove Kubernetes taints for all worker nodes in a worker pool.
     * [`ibmcloud ks worker-pool taint rm`](/docs/containers?topic=containers-kubernetes-service-cli#worker_pool_taint_rm)
     * [`ibmcloud ks worker-pool taint set`](/docs/containers?topic=containers-kubernetes-service-cli#worker_pool_taint_set)
 * [`ibmcloud ks worker-pool zones`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_zones)
@@ -138,8 +138,8 @@ The page lists all `ibmcloud ks` commands as they are structured in the CLI. For
         * [`ibmcloud ks ingress alb autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_enable)
         * [`ibmcloud ks ingress alb autoupdate get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_get)
     * **`ingress alb create`**: Create an Ingress ALB in a cluster.
-            * [`ibmcloud ks ingress alb create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_create)
-            * [`ibmcloud ks ingress alb create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb-create-vpc-gen2)
+        * [`ibmcloud ks ingress alb create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_create)
+        * [`ibmcloud ks ingress alb create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb-create-vpc-gen2)
     * [`ibmcloud ks ingress alb disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_disable)
     * **`ingress alb enable`**: Enable an Ingress ALB in a cluster.
         * [`ibmcloud ks ingress alb enable classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure)
@@ -210,7 +210,7 @@ The page lists all `ibmcloud ks` commands as they are structured in the CLI. For
 * **`nlb-dns rm`**: Create and manage health check monitors for network load balancer (NLB) IP addresses and host names in a cluster.
     * [`ibmcloud ks nlb-dns rm classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-rm)
     * [`ibmcloud ks nlb-dns rm vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-rm-vpc-gen2)
-* **`nlb-dns secret`**: **Beta** Manage the secret for an NLB subdomain.
+* **Beta** **`nlb-dns secret`**:  Manage the secret for an NLB subdomain.
     * [`ibmcloud ks nlb-dns secret regenerate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-regenerate)
     * [`ibmcloud ks nlb-dns secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-rm)
 
@@ -315,7 +315,7 @@ The page lists all `ibmcloud ks` commands as they are structured in the CLI. For
 ## ibmcloud ks api
 {: #icks_map_api}
 
-[**Deprecated** View or set the API endpoint and API version for the service](/docs/containers?topic=containers-kubernetes-service-cli#cs_cli_api).
+**Deprecated** [View or set the API endpoint and API version for the service](/docs/containers?topic=containers-kubernetes-service-cli#cs_cli_api).
 {: shortdesc}
 
 ## ibmcloud ks init
@@ -335,7 +335,7 @@ The page lists all `ibmcloud ks` commands as they are structured in the CLI. For
 ## ibmcloud ks storage 
 {: #icks_map_storage}
 
-[**Beta** View and modify storage resources](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage).
+**Beta** [View and modify storage resources](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage).
 {: shortdesc}
 
 * **`storage attachment`**: View and modify storage volume attachments of worker nodes in your cluster.
