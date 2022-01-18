@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-14"
+lastupdated: "2022-01-18"
 
 keywords: kubernetes, release notes
 
@@ -25,6 +25,35 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## January 2022
 {: #release-jan-2022}}
+
+
+
+
+### 18 January 2022
+{: #18jan2021}
+{: release-note}
+
+Review the release notes for January 2022.
+{: shortdesc}
+
+**New!** {{site.data.keyword.containerlong_notm}} CLI Map
+:    The [{{site.data.keyword.containerlong_notm}} CLI Map](/docs/containers?topic=containers-icks_map) lists all `ibmcloud ks` commands as they are structured in the CLI. Use this page as a visual reference for how ibmcloud ks commands are organized, or to quickly find a specific command. 
+
+{{site.data.keyword.containershort}} 1.19, 1.20, 1.21, and 1.22 unsupported date change
+:   The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#release-history) page has been updated with the new unsupported dates. 
+
+Version changelog
+:   Worker node fix pack update.
+:   Kubernetes [1.22.4_1536](/docs/containers?topic=containers-changelog#1224_1536), [1.21.7_1546](/docs/containers?topic=containers-changelog#1217_1546), [1.20.13_1567](/docs/containers?topic=containers-changelog#12013_1567), and [1.19.16_1574](/docs/containers?topic=containers-changelog#11916_1574).
+
+
+
+### 17 January 2022
+{: #17jan2022}
+{: release-note}
+
+Object Storage plug-in
+:   Version `2.1.8` of the Object Storage plug-in is released. For more information, see the [Object Storage plug-in changelog](/docs/containers?topic=containers-cos_plugin_changelog).
 
 
 
@@ -63,6 +92,8 @@ Worker node fix pack update
 ## December 2021
 {: #release-dec-2021}
 
+Review the release notes for December 2021.
+{: shortdesc}
 
 ### 20 December 2021
 {: #20dec2021}
