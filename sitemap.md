@@ -190,6 +190,8 @@ subcollection: containers
 
     * [18 January 2022](/docs/containers?topic=containers-iks-release#18jan2021)
 
+    * [17 January 2022](/docs/containers?topic=containers-iks-release#17jan2022)
+
     * [13 January 2022](/docs/containers?topic=containers-iks-release#13jan2021)
 
     * [06 January 2022](/docs/containers?topic=containers-iks-release#jan0622)
@@ -4359,6 +4361,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Changlog version 2.1.8, released 17 January 2022](/docs/containers?topic=containers-cos_plugin_changelog#0218_object_plugin)
 
 * [Changelog version 2.1.7, released 18 November 2021](/docs/containers?topic=containers-cos_plugin_changelog#0217_object_plugin)
 
