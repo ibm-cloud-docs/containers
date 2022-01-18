@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-14"
+lastupdated: "2022-01-18"
 
 keywords: kubernetes
 
@@ -15,7 +15,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# {{site.data.keyword.containerlong_notm}} CLI
+# {{site.data.keyword.containerlong_notm}} CLI reference
 {: #kubernetes-service-cli}
 
 Refer to these commands to create and manage **both community Kubernetes or {{site.data.keyword.openshiftshort}} clusters** in {{site.data.keyword.containerlong}}.

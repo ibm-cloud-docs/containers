@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-01-14"
+lastupdated: "2022-01-18"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [January 2022](/docs/containers?topic=containers-iks-release#release-jan-2022)
+
+    * [18 Jan 2022](/docs/containers?topic=containers-iks-release#18jan2022)
 
     * [13 January 2022](/docs/containers?topic=containers-iks-release#13jan2021)
 
@@ -3235,7 +3237,7 @@ subcollection: containers
 
 * [ibmcloud ks storage](/docs/containers?topic=containers-icks_map#icks_map_storage)
 
-[{{site.data.keyword.containerlong_notm}} CLI](/docs/containers?topic=containers-kubernetes-service-cli#kubernetes-service-cli)
+[{{site.data.keyword.containerlong_notm}} CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#kubernetes-service-cli)
 
 * [{{site.data.keyword.containerlong_notm}} commands](/docs/containers?topic=containers-kubernetes-service-cli#cli_commands)
 
