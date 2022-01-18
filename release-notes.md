@@ -26,15 +26,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## January 2022
 {: #release-jan-2022}}
 
+
+### 18 January 2022
+{: #18jan2021}
+{: release-note}
+
 Review the release notes for January 2022.
 {: shortdesc}
 
-### 18 Jan 2022
-{: #18jan2022}
-{: release-note}
-
 **New!** {{site.data.keyword.containerlong_notm}} CLI Map
 :    The [{{site.data.keyword.containerlong_notm}} CLI Map](/docs/containers?topic=containers-icks_map) lists all `ibmcloud ks` commands as they are structured in the CLI. Use this page as a visual reference for how ibmcloud ks commands are organized, or to quickly find a specific command. 
+
+Version changelog
+:   Worker node fix pack update.
+:   Kubernetes [1.22.4_1536](/docs/containers?topic=containers-changelog#1224_1536), [1.21.7_1546](/docs/containers?topic=containers-changelog#1217_1546), [1.20.13_1567](/docs/containers?topic=containers-changelog#12013_1567), and [1.19.16_1574](/docs/containers?topic=containers-changelog#11916_1574).
+
+
+
+
 
 
 ### 13 January 2022

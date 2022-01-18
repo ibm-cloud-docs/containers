@@ -188,7 +188,7 @@ subcollection: containers
 
 * [January 2022](/docs/containers?topic=containers-iks-release#release-jan-2022)
 
-    * [18 Jan 2022](/docs/containers?topic=containers-iks-release#18jan2022)
+    * [18 January 2022](/docs/containers?topic=containers-iks-release#18jan2021)
 
     * [13 January 2022](/docs/containers?topic=containers-iks-release#13jan2021)
 
@@ -3732,6 +3732,8 @@ subcollection: containers
 
 * [Version 1.22 changelog](/docs/containers?topic=containers-changelog#122_changelog)
 
+    * [Changelog for worker node fix pack 1.22.4_1536, released 18 January 2022](/docs/containers?topic=containers-changelog#1224_1536)
+
     * [Changelog for worker node fix pack 1.22.4_1534, released 4 January 2022](/docs/containers?topic=containers-changelog#1224_1534)
 
     * [Changelog for master fix pack 1.22.4_1531, released 7 December 2021](/docs/containers?topic=containers-changelog#1224_1531)
@@ -3753,6 +3755,8 @@ subcollection: containers
     * [Changelog for master fix pack 1.22.2_1522 and worker node fix pack 1.22.2_1523, released 29 Sept 2021](/docs/containers?topic=containers-changelog#1222_1522_and_1222_1523)
 
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog#121_changelog)
+
+    * [Changelog for worker node fix pack 1.21.7_1546, released 18 January 2022](/docs/containers?topic=containers-changelog#1217_1546)
 
     * [Changelog for worker node fix pack 1.21.7_1544, released 4 January 2022](/docs/containers?topic=containers-changelog#1217_1544)
 
@@ -3801,6 +3805,8 @@ subcollection: containers
     * [Changelog for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1519)
 
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+
+    * [Changelog for worker node fix pack 1.20.13_1567, released 18 January 2022](/docs/containers?topic=containers-changelog#12013_1567)
 
     * [Changelog for worker node fix pack 1.20.13_1566, released 4 January 2022](/docs/containers?topic=containers-changelog#12013_1566)
 
@@ -3875,6 +3881,8 @@ subcollection: containers
     * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 
 * [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+
+    * [Changelog for worker node fix pack 1.19.16_1574, released 18 January 2022](/docs/containers?topic=containers-changelog#11916_1574)
 
     * [Changelog for worker node fix pack 1.19.16_1573, released 4 January 2022](/docs/containers?topic=containers-changelog#11916_1573)
 
