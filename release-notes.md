@@ -37,6 +37,9 @@ Review the release notes for January 2022.
 **New!** {{site.data.keyword.containerlong_notm}} CLI Map
 :    The [{{site.data.keyword.containerlong_notm}} CLI Map](/docs/containers?topic=containers-icks_map) lists all `ibmcloud ks` commands as they are structured in the CLI. Use this page as a visual reference for how ibmcloud ks commands are organized, or to quickly find a specific command. 
 
+{{site.data.keyword.containershort}} 1.19, 1.20, 1.21, and 1.22 unsupported date change
+:   The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#release-history) page has been updated with the new unsupported dates. 
+
 Version changelog
 :   Worker node fix pack update.
 :   Kubernetes [1.22.4_1536](/docs/containers?topic=containers-changelog#1224_1536), [1.21.7_1546](/docs/containers?topic=containers-changelog#1217_1546), [1.20.13_1567](/docs/containers?topic=containers-changelog#12013_1567), and [1.19.16_1574](/docs/containers?topic=containers-changelog#11916_1574).
