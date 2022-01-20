@@ -188,6 +188,8 @@ subcollection: containers
 
 * [January 2022](/docs/containers?topic=containers-iks-release#release-jan-2022)
 
+    * [20 January 2022](/docs/containers?topic=containers-iks-release#20jan2022)
+
     * [18 January 2022](/docs/containers?topic=containers-iks-release#18jan2021)
 
     * [17 January 2022](/docs/containers?topic=containers-iks-release#17jan2022)
@@ -4292,6 +4294,8 @@ subcollection: containers
 
 * [Version 1.0.4](/docs/containers?topic=containers-ca_changelog#0104_ca_addon)
 
+    * [Changelog for patch update 1.0.4_403, released 20 January 2022](/docs/containers?topic=containers-ca_changelog#10387_ca)
+
     * [Changelog for patch update 1.0.4_387, released 22 November 2021](/docs/containers?topic=containers-ca_changelog#10387_ca)
 
     * [Changelog for patch update 1.0.4_374, released 7 October 2021](/docs/containers?topic=containers-ca_changelog#104374_ca)
@@ -4333,6 +4337,8 @@ subcollection: containers
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
 
 * [Version 4.1](/docs/containers?topic=containers-vpc_bs_changelog#041_is_block)
+
+    * [Changelog for version 4.1.1_827, released 20 January 2022](/docs/containers?topic=containers-vpc_bs_changelog#0411837_is_block_relnote)
 
     * [Changelog for version 4.1.0_807, released 06 January 2022](/docs/containers?topic=containers-vpc_bs_changelog#41_is_block_relnote)
 
