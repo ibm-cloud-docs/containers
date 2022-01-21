@@ -156,6 +156,7 @@ First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come b
     ```sh
     kubectl logs
     ```
+    {: pre}
     
     Example output.
     ```sh
@@ -352,8 +353,8 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     Example output.
     
     ```sh
-    NAME            NAMESPACE   REVISION    UPDATED                            	STATUS  	CHART                               	APP VERSION
-    block-plugin    default     1           2022-01-21 09:02:46.11622 -0500 EST	deployed	ibmcloud-block-storage-plugin-v2.1.5
+    NAME            NAMESPACE   REVISION    UPDATED                             STATUS      CHART                                   APP VERSION
+    block-plugin    default     1           2022-01-21 09:02:46.11622 -0500 EST deployed        bmcloud-block-storage-plugin-v2.1.5
     ```
     {: screen}
 
@@ -396,8 +397,8 @@ To remove the plug-in:
     Example output
     
     ```sh
-    NAME        	NAMESPACE	REVISION	UPDATED                            	STATUS  	CHART                               	APP VERSION
-    block-plugin	default  	1       	2022-01-21 09:02:46.11622 -0500 EST	deployed	ibmcloud-block-storage-plugin-v2.1.5
+    NAME            NAMESPACE   REVISION    UPDATED                             STATUS   CHART                                  APP VERSION
+    block-plugin    default     1           2022-01-21 09:02:46.11622 -0500 EST deployed    ibmcloud-block-storage-plugin-v2.1.5
     ```
     {: screen}
 
@@ -921,7 +922,9 @@ To add block storage:
     Example output
     ```sh
     NAME                STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
-    block-storage-pvc              Bound    pvc-6ec3fcae-86f7-48d9-ab46-04b92624f3bc   45Gi       RWO            ibmc-block-silver   150m
+    block-storage-pvc              Bound    pvc-1aa1aaaa-11a1-48d1-ab11-11b11111f3bc   45Gi       RWO            ibmc-block-silver   150m
+    ```
+    {: screen}
 
 4. To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV. {: #block_app_volume_mount}
 
@@ -2028,9 +2031,9 @@ metadata:
     iopsPerGB: "2"
     sizeRange: '[20-12000]Gi'
     type: Endurance
-    provisioner: ibm.io/ibmc-block
-    reclaimPolicy: Delete
-    volumeBindingMode: WaitForFirstConsumer
+  provisioner: ibm.io/ibmc-block
+  reclaimPolicy: Delete
+  volumeBindingMode: WaitForFirstConsumer
 ```
 {: codeblock}
 
