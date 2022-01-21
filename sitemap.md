@@ -2800,6 +2800,56 @@ subcollection: containers
 
 * [Adding block storage to apps](/docs/containers?topic=containers-block_storage#add_block)
 
+* [Using existing block storage in your cluster](/docs/containers?topic=containers-block_storage#existing_block)
+
+    * [Retrieving the information of your existing block storage](/docs/containers?topic=containers-block_storage#existing-block-1)
+
+    * [Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-block_storage#existing-block-2)
+
+* [Using block storage in a stateful set](/docs/containers?topic=containers-block_storage#block_statefulset)
+
+    * [Creating the PVC by using dynamic provisioning when you create a stateful set](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
+
+    * [Static provisioning: Using existing PVCs with a stateful set](/docs/containers?topic=containers-block_storage#block_static_statefulset)
+
+* [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-block_storage#block_change_storage_configuration)
+
+* [Backing up and restoring data](/docs/containers?topic=containers-block_storage#block_backup_restore)
+
+    * [Setting up periodic snapshots](/docs/containers?topic=containers-block_storage#block-snaps)
+
+    * [Replicating snapshots to another zone](/docs/containers?topic=containers-block_storage#block-replicate)
+
+    * [Duplicating storage](/docs/containers?topic=containers-block_storage#block-dupe)
+
+    * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-block_storage#block-cos-backup)
+
+    * [Copying data to and from pods and containers](/docs/containers?topic=containers-block_storage#block-cp)
+
+* [Storage class reference](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
+
+    * [Bronze](/docs/containers?topic=containers-block_storage#bronze-block)
+
+    * [Silver](/docs/containers?topic=containers-block_storage#silver-block)
+
+    * [Gold](/docs/containers?topic=containers-block_storage#gold-block)
+
+    * [Custom](/docs/containers?topic=containers-block_storage#custom-block)
+
+* [Sample customized storage classes](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
+
+    * [Creating topology-aware storage](/docs/containers?topic=containers-block_storage#topology_yaml)
+
+    * [Specifying the zone and region](/docs/containers?topic=containers-block_storage#block_multizone_yaml)
+
+    * [Mounting block storage with an `XFS` file system](/docs/containers?topic=containers-block_storage#xfs)
+
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-block_storage#cleanup_block)
+
+    * [Understanding your storage removal options](/docs/containers?topic=containers-block_storage#storage_delete_options_block)
+
+    * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
+
 [Storing data on {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block)
 
 * [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc_block_qs)
