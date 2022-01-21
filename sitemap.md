@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-01-20"
+lastupdated: "2022-01-21"
 
 keywords: containers
 subcollection: containers
@@ -2802,13 +2802,13 @@ subcollection: containers
 
 * [Using existing block storage in your cluster](/docs/containers?topic=containers-block_storage#existing_block)
 
-    * [Step 1: Retrieving the information of your existing block storage](/docs/containers?topic=containers-block_storage#existing-block-1)
+    * [Retrieving the information of your existing block storage](/docs/containers?topic=containers-block_storage#existing-block-1)
 
-    * [Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-block_storage#existing-block-2)
+    * [Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-block_storage#existing-block-2)
 
 * [Using block storage in a stateful set](/docs/containers?topic=containers-block_storage#block_statefulset)
 
-    * [Dynamic provisioning: Creating the PVC when you create a stateful set](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
+    * [Creating the PVC by using dynamic provisioning when you create a stateful set](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
 
     * [Static provisioning: Using existing PVCs with a stateful set](/docs/containers?topic=containers-block_storage#block_static_statefulset)
 
@@ -2827,6 +2827,14 @@ subcollection: containers
     * [Copying data to and from pods and containers](/docs/containers?topic=containers-block_storage#block-cp)
 
 * [Storage class reference](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
+
+    * [Bronze](/docs/containers?topic=containers-block_storage#bronze-block)
+
+    * [Silver](/docs/containers?topic=containers-block_storage#silver-block)
+
+    * [Gold](/docs/containers?topic=containers-block_storage#gold-block)
+
+    * [Custom](/docs/containers?topic=containers-block_storage#custom-block)
 
 * [Sample customized storage classes](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
 

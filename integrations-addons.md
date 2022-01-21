@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-21"
 
 keywords: kubernetes, helm
 
@@ -28,9 +28,6 @@ Support
 
 Billing
 :    If the tool that you add to your cluster incurs costs, these costs are automatically integrated and listed as part of your {{site.data.keyword.containerlong_notm}} billing. The billing cycle is determined by {{site.data.keyword.cloud_notm}} depending on when you enabled the add-on in your cluster.
-
-Limitations
-:    If you installed an admission controller that blocks unsigned images, such as [Portieris](/docs/openshift?topic=openshift-images#portieris-image-sec), you can't enable managed add-ons in your cluster.
 
 :    In general, no additional setup, such as opening ports or IP addresses is required. However, refer to the documentation of each managed add-on to find the prerequisites that your cluster must meet before you install the managed add-on.
 
