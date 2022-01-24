@@ -56,7 +56,7 @@ OpenShift Data Foundation
 
 
 ### 18 January 2022
-{: #18jan2021}
+{: #18jan2022}
 {: release-note}
 
 Review the release notes for January 2022.
