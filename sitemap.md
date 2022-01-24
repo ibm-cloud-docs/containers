@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-01-21"
+lastupdated: "2022-01-24"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [January 2022](/docs/containers?topic=containers-iks-release#release-jan-2022)
+
+    * [24 January 2022](/docs/containers?topic=containers-iks-release#24jan2022)
 
     * [20 January 2022](/docs/containers?topic=containers-iks-release#20jan2022)
 
@@ -2904,13 +2906,13 @@ subcollection: containers
 
 * [Creating a secret for the object storage service credentials](/docs/containers?topic=containers-object_storage#create_cos_secret)
 
-* [Installing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#install_cos)
+* [Installing the IBM Cloud {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-object_storage#install_cos)
 
     * [Verifying your installation](/docs/containers?topic=containers-object_storage#cos-plugin)
 
-    * [Updating the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin)
+    * [Updating the IBM Cloud {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin)
 
-    * [Removing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#remove_cos_plugin)
+    * [Removing the IBM Cloud {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-object_storage#remove_cos_plugin)
 
 * [Deciding on the object storage configuration](/docs/containers?topic=containers-object_storage#configure_cos)
 
@@ -4346,6 +4348,8 @@ subcollection: containers
 
 * [Version 4.1](/docs/containers?topic=containers-vpc_bs_changelog#041_is_block)
 
+    * [Changelog for version 4.1.2_834, released 27 January 2022](/docs/containers?topic=containers-vpc_bs_changelog#412_834_is_block_relnote)
+
     * [Changelog for version 4.1.1_827, released 20 January 2022](/docs/containers?topic=containers-vpc_bs_changelog#0411837_is_block_relnote)
 
     * [Changelog for version 4.1.0_807, released 06 January 2022](/docs/containers?topic=containers-vpc_bs_changelog#41_is_block_relnote)
@@ -4374,7 +4378,9 @@ subcollection: containers
 
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
-[Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+[{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Changlog version 2.1.9, released 24 January 2022](/docs/containers?topic=containers-cos_plugin_changelog#0219_object_plugin)
 
 * [Changlog version 2.1.8, released 17 January 2022](/docs/containers?topic=containers-cos_plugin_changelog#0218_object_plugin)
 
@@ -5989,7 +5995,7 @@ subcollection: containers
 
 [Why can't the ownership of the mount path be changed?](/docs/containers?topic=containers-cos_mountpath_error#cos_mountpath_error)
 
-[Why does installing the Object storage plug-in fail?](/docs/containers?topic=containers-cos_plugin_fails#cos_plugin_fails)
+[Why does installing the {{site.data.keyword.cos_full_notm}} plug-in fail?](/docs/containers?topic=containers-cos_plugin_fails#cos_plugin_fails)
 
 [Why do I see wrong credentials or access denied messages when I create a PVC?](/docs/containers?topic=containers-cred_failure#cred_failure)
 
