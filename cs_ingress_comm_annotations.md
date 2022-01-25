@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-25"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -1004,8 +1004,12 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
     Secret name:  binding-<service_instance_name>
     ```
     {: screen}
+    
+4. Edit the ALB's ConfigMap (`kube-system/ibm-k8s-controller-config`) and change `allow-snippet-annotations: "false"` to `allow-snippet-annotations: "true"`.
+    Clusters created on or after 31 January 2022 by default no longer support server-snippet annotations in Ingress resources for the managed Kubernetes Ingress Controller (ALB). All new clusters are deployed with the `allow-server-snippets` configuration set to `false`, which prevents the ALB from correctly processing Ingress resources with the offending annotations. You must edit the ConfigMap manually to change this setting in order for the add-on to work.
+    {: note}
 
-4. Enable the ALB OAuth Proxy add-on in your cluster. This add-on creates and manages the following Kubernetes resources: an OAuth2-Proxy deployment for your {{site.data.keyword.appid_short_notm}} service instance, a secret that contains the configuration of the OAuth2-Proxy deployment, and an Ingress resource that configures ALBs to route incoming requests to the OAuth2-Proxy deployment for your {{site.data.keyword.appid_short_notm}} instance. The name of each of these resources begins with `oauth2-`.
+5. Enable the ALB OAuth Proxy add-on in your cluster. This add-on creates and manages the following Kubernetes resources: an OAuth2-Proxy deployment for your {{site.data.keyword.appid_short_notm}} service instance, a secret that contains the configuration of the OAuth2-Proxy deployment, and an Ingress resource that configures ALBs to route incoming requests to the OAuth2-Proxy deployment for your {{site.data.keyword.appid_short_notm}} instance. The name of each of these resources begins with `oauth2-`.
     1. Enable the `alb-oauth-proxy` add-on.
         ```sh
         ibmcloud ks cluster addon enable alb-oauth-proxy --cluster <cluster_name_or_ID>
@@ -1018,7 +1022,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
         ```
         {: pre}
 
-5. In the Ingress resources for apps where you want to add {{site.data.keyword.appid_short_notm}} authentication, add the following annotations to the `metadata.annotations` section.
+6. In the Ingress resources for apps where you want to add {{site.data.keyword.appid_short_notm}} authentication, add the following annotations to the `metadata.annotations` section.
     1. Add the following `auth-url` annotation. This annotation specifies the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance, which acts as the OIDC Relying Party (RP) for {{site.data.keyword.appid_short_notm}}. Note that all letters in the service instance name must be specified as lowercase.
         ```yaml
         ...
@@ -1066,17 +1070,17 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
         * If you specify this annotation, and the authentication for a client fails, the client is redirected to the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance. This OAuth2-Proxy, which acts as the OIDC Relying Party (RP) for {{site.data.keyword.appid_short_notm}}, redirects the client to your {{site.data.keyword.appid_short_notm}} login page for authentication.
         * If you don't specify this annotation, a client must authenticate with a valid bearer token. If the authentication for a client fails, the client's request is rejected with a `401 Unauthorized` error message.
 
-6. Re-apply your Ingress resources to enforce {{site.data.keyword.appid_short_notm}} authentication. After an Ingress resource with the appropriate annotations is re-applied, the ALB OAuth Proxy add-on deploys an OAuth2-Proxy deployment, creates a service for the deployment, and creates a separate Ingress resource to configure routing for the OAuth2-Proxy deployment messages. Do not delete these add-on resources.
+7. Re-apply your Ingress resources to enforce {{site.data.keyword.appid_short_notm}} authentication. After an Ingress resource with the appropriate annotations is re-applied, the ALB OAuth Proxy add-on deploys an OAuth2-Proxy deployment, creates a service for the deployment, and creates a separate Ingress resource to configure routing for the OAuth2-Proxy deployment messages. Do not delete these add-on resources.
     ```sh
     kubectl apply -f <app_ingress_resource>.yaml -n namespace
     ```
     {: pre}
 
-7. Verify that {{site.data.keyword.appid_short_notm}} authentication is enforced for your apps.
+8. Verify that {{site.data.keyword.appid_short_notm}} authentication is enforced for your apps.
     * If your apps supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy): Access your app's URL in a web browser. If {{site.data.keyword.appid_short_notm}} is correctly applied, you are redirected to an {{site.data.keyword.appid_short_notm}} authentication log-in page.
     * If your apps supports the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy): Specify your `Bearer` access token in the Authorization header of requests to the apps. To get your access token, see the [{{site.data.keyword.appid_short_notm}} documentation](/docs/appid?topic=appid-obtain-tokens). If {{site.data.keyword.appid_short_notm}} is correctly applied, the request is successfully authenticated and is routed to your app. If you send requests to your apps without an access token in the Authorization header, or if the access token is not accepted by {{site.data.keyword.appid_short_notm}}, then the request is rejected.
 
-8. Optional: You can customize the default behavior of the OAuth2-Proxy by creating a Kubernetes ConfigMap.
+9. Optional: You can customize the default behavior of the OAuth2-Proxy by creating a Kubernetes ConfigMap.
     1. Create a ConfigMap YAML file that specifies values for the OAuth2-Proxy settings that you want to change.
         ```yaml
         apiVersion: v1
@@ -1499,7 +1503,6 @@ Each ALB has NGINX worker processes that process the client connections and comm
 
 To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](/docs/containers?topic=containers-kernel). Worker nodes are automatically provisioned with optimized kernel tuning, so change these settings only if you have specific performance optimization requirements.
 {: shortdesc}
-
 
 
 
