@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-24"
+lastupdated: "2022-01-25"
 
 keywords: kubernetes, release notes
 
@@ -28,14 +28,26 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+
+### 25 January 2022
+{: #25jan2022}
+{: release-note}
+
+
+Kubernetes Ingress image
+:   Versions 1.1.1_1949_iks, 1.0.3_1933_iks, and 0.49.3_1941_iks of the [Kubernetes Ingress image](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) are released.
+  
+Kubernetes Ingress annotations
+:   Clusters created on or after 31 January 2022 by default no longer support server-snippet annotations in Ingress resources for the managed Kubernetes Ingress Controller (ALB). All new clusters are deployed with the `allow-server-snippets` configuration set to `false`, which prevents the ALB from correctly processing Ingress resources with the offending annotations. You must edit the ConfigMap manually to change this setting in order for the add-on to work. For more information, see [Adding App ID authentication to apps](/docs/openshift?topic=containers-comm-ingress-annotations#app-id).
+
+
+
 ### 24 January 2022
 {: #24jan2022}
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in
 :   Version `2.1.9` of the {{site.data.keyword.cos_full_notm}} plug-in is released. For more information, see the [{{site.data.keyword.cos_full_notm}} plug-in changelog](/docs/containers?topic=containers-cos_plugin_changelog).
-
-
 
 
 ### 20 January 2022
@@ -3942,8 +3954,5 @@ Reference topics
 
 Assigning infrastructure access
 :   Revised the [steps](/docs/containers?topic=containers-access-creds#infra_access) to assign IAM permissions for opening support cases.
-
-
-
 
 
