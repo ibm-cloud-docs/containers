@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-01-24"
+lastupdated: "2022-01-25"
 
 keywords: containers
 subcollection: containers
@@ -4050,9 +4050,15 @@ subcollection: containers
 
 * [Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
 
+* [Version 1.1.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_1)
+
+    * [Version 1.1.1_1949_iks (default), released on 25 January 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.1_1949_iks)
+
 * [Version 1.0.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_0_0)
 
-    * [Version 1.0.3_1831_iks (default), released on 19 November 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.3_1831_iks)
+    * [Version 1.0.3_1933_iks, released on 25 January 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.3_1933_iks)
+
+    * [Version 1.0.3_1831_iks, released on 19 November 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.3_1831_iks)
 
     * [Version 1.0.3_1730_iks, released on 20 October 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.3_1730_iks)
 
@@ -4061,6 +4067,8 @@ subcollection: containers
     * [Version 1.0.0_1645_iks, released on 14 September 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.0_1645_iks)
 
 * [Version 0.49.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_49_0)
+
+    * [Version 0.49.3_1941_iks, released on 22 January 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#0.49.3_1941_iks)
 
     * [Version 0.49.3_1830_iks, released on 19 November 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#0.49.3_1830_iks)
 
