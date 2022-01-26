@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-01-25"
+lastupdated: "2022-01-26"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [January 2022](/docs/containers?topic=containers-iks-release#release-jan-2022)
+
+    * [26 January 2022](/docs/containers?topic=containers-iks-release#26jan2022)
 
     * [25 January 2022](/docs/containers?topic=containers-iks-release#25jan2022)
 
@@ -4174,7 +4176,7 @@ subcollection: containers
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
-* [Version 1.12, released 7 December 2021](/docs/containers?topic=containers-istio-changelog#v112)
+* [Version 1.12](/docs/containers?topic=containers-istio-changelog#v112)
 
     * [Changelog for 1.12.1, released 13 January 2022](/docs/containers?topic=containers-istio-changelog#1121)
 
@@ -4434,11 +4436,15 @@ subcollection: containers
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
 
+    * [Version 2.0.0_923, released on 26 January 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_923)
+
     * [Version 2.0.0_755, released on 19 November 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_755)
 
     * [Version 2.0.0_704, released on 15 September 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_704)
 
 * [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0)
+
+    * [Version 1.0.0_924, released on 26 January 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_924)
 
     * [Version 1.0.0_756, released on 19 November 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_756)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-25"
 
 keywords: kubernetes, oauth proxy, add-on
 
@@ -26,6 +26,12 @@ View information for version updates to the [ALB OAuth Proxy add-on](/docs/conta
 ## Version 2.0.0
 {: #2_0_0}
 
+### Version 2.0.0_923, released on 26 January 2022.
+{: #2_0_0_923}
+
+- [CVE-2021-44716](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-44716){: external}
+- [CVE-2021-44717](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-44717){: external}
+
 ### Version 2.0.0_755, released on 19 November 2021.
 {: #2_0_0_755}
 
@@ -40,6 +46,12 @@ Version 2.0.0 of the add-on supports {{site.data.keyword.containerlong_notm}} cl
 
 ## Version 1.0.0
 {: #1_0_0}
+
+### Version 1.0.0_924, released on 26 January 2022.
+{: #1_0_0_924}
+
+- [CVE-2021-44716](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-44716){: external}
+- [CVE-2021-44717](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-44717){: external}
 
 ### Version 1.0.0_756, released on 19 November 2021.
 {: #1_0_0_756}
