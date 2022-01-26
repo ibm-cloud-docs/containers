@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-01-25"
+lastupdated: "2022-01-26"
 
 keywords: kubernetes, istio, add-on
 
@@ -39,12 +39,13 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 {: caption="Supported Istio versions" caption-side="top"}
 
 
-
-## Version 1.12, released 7 December 2021
+## Version 1.12
 {: #v112}
 
 Review the changes that are in version 1.12 of the managed Istio add-on.
 {: shortdesc}
+
+
 
 **Previous version**: 1.11.4
 **Current version**: 1.12.0  
