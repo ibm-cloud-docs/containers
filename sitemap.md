@@ -5874,6 +5874,8 @@ subcollection: containers
 
 * [Removing an ALB from DNS for debugging](/docs/containers?topic=containers-ingress-debug#one_alb)
 
+[Gathering Ingress logs](/docs/containers?topic=containers-ingress-must-gather#ingress-must-gather)
+
 [Classic clusters: Why can't my app connect via Ingress?](/docs/containers?topic=containers-cs_ingress_fails#cs_ingress_fails)
 
 [VPC clusters: Why can't my app connect via Ingress?](/docs/containers?topic=containers-vpc_ts_alb#vpc_ts_alb)
