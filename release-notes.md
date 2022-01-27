@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-25"
+lastupdated: "2022-01-27"
 
 keywords: kubernetes, release notes
 
@@ -25,6 +25,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## January 2022
 {: #release-jan-2022}
+
+
+
+### 27 January 2022
+{: #27jan2022}
+{: release-note}
+
+{{site.data.keyword.block_storage_is_short}} add-on.
+:   [Version 4.1.2_834](/docs/containers?topic=containers-vpc_bs_changelog) is released.
+
+**New!** Gathering Ingress logs
+:   When troubleshooting Ingress, follow the steps in [gathering Ingress logs](/docs/openshift?topic=openshift-ingress-must-gather) to retrieve useful debugging information.
 
 
 

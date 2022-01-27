@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-01-26"
+lastupdated: "2022-01-27"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [January 2022](/docs/containers?topic=containers-iks-release#release-jan-2022)
+
+    * [27 January 2022](/docs/containers?topic=containers-iks-release#27jan2022)
 
     * [26 January 2022](/docs/containers?topic=containers-iks-release#26jan2022)
 
@@ -5873,6 +5875,8 @@ subcollection: containers
 * [Step 5: Check your domain mappings and Ingress resource configuration](/docs/containers?topic=containers-ingress-debug#ts_ingress_config)
 
 * [Removing an ALB from DNS for debugging](/docs/containers?topic=containers-ingress-debug#one_alb)
+
+[Gathering Ingress logs](/docs/containers?topic=containers-ingress-must-gather#ingress-must-gather)
 
 [Classic clusters: Why can't my app connect via Ingress?](/docs/containers?topic=containers-cs_ingress_fails#cs_ingress_fails)
 
