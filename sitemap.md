@@ -5471,6 +5471,126 @@ subcollection: containers
 [IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: external}
 
 
+## VPC Gen 2 flavors
+{: #sitemap_vpc_gen_2_flavors}
+
+
+[VPC Gen 2 flavors](/docs/containers?topic=containers-vpc-gen2-flavors#vpc-gen2-flavors)
+
+* [au-syd-1](/docs/containers?topic=containers-vpc-gen2-flavors#au-syd-1)
+
+* [au-syd-2](/docs/containers?topic=containers-vpc-gen2-flavors#au-syd-2)
+
+* [au-syd-3](/docs/containers?topic=containers-vpc-gen2-flavors#au-syd-3)
+
+* [eu-de-1](/docs/containers?topic=containers-vpc-gen2-flavors#eu-de-1)
+
+* [eu-de-2](/docs/containers?topic=containers-vpc-gen2-flavors#eu-de-2)
+
+* [eu-de-3](/docs/containers?topic=containers-vpc-gen2-flavors#eu-de-3)
+
+* [eu-gb-1](/docs/containers?topic=containers-vpc-gen2-flavors#eu-gb-1)
+
+* [eu-gb-2](/docs/containers?topic=containers-vpc-gen2-flavors#eu-gb-2)
+
+* [eu-gb-3](/docs/containers?topic=containers-vpc-gen2-flavors#eu-gb-3)
+
+* [jp-tok-1](/docs/containers?topic=containers-vpc-gen2-flavors#jp-tok-1)
+
+* [jp-tok-2](/docs/containers?topic=containers-vpc-gen2-flavors#jp-tok-2)
+
+* [jp-tok-3](/docs/containers?topic=containers-vpc-gen2-flavors#jp-tok-3)
+
+* [us-east-1](/docs/containers?topic=containers-vpc-gen2-flavors#us-east-1)
+
+* [us-east-2](/docs/containers?topic=containers-vpc-gen2-flavors#us-east-2)
+
+* [us-east-3](/docs/containers?topic=containers-vpc-gen2-flavors#us-east-3)
+
+* [us-south-1](/docs/containers?topic=containers-vpc-gen2-flavors#us-south-1)
+
+* [us-south-2](/docs/containers?topic=containers-vpc-gen2-flavors#us-south-2)
+
+* [us-south-3](/docs/containers?topic=containers-vpc-gen2-flavors#us-south-3)
+
+
+## Classic flavors
+{: #sitemap_classic_flavors}
+
+
+[Classic flavors](/docs/containers?topic=containers-classic-flavors#classic-flavors)
+
+* [ams03](/docs/containers?topic=containers-classic-flavors#ams03)
+
+* [che01](/docs/containers?topic=containers-classic-flavors#che01)
+
+* [dal10](/docs/containers?topic=containers-classic-flavors#dal10)
+
+* [dal12](/docs/containers?topic=containers-classic-flavors#dal12)
+
+* [dal13](/docs/containers?topic=containers-classic-flavors#dal13)
+
+* [fra02](/docs/containers?topic=containers-classic-flavors#fra02)
+
+* [fra04](/docs/containers?topic=containers-classic-flavors#fra04)
+
+* [fra05](/docs/containers?topic=containers-classic-flavors#fra05)
+
+* [hkg02](/docs/containers?topic=containers-classic-flavors#hkg02)
+
+* [lon02](/docs/containers?topic=containers-classic-flavors#lon02)
+
+* [lon04](/docs/containers?topic=containers-classic-flavors#lon04)
+
+* [lon05](/docs/containers?topic=containers-classic-flavors#lon05)
+
+* [lon06](/docs/containers?topic=containers-classic-flavors#lon06)
+
+* [mex01](/docs/containers?topic=containers-classic-flavors#mex01)
+
+* [mil01](/docs/containers?topic=containers-classic-flavors#mil01)
+
+* [mon01](/docs/containers?topic=containers-classic-flavors#mon01)
+
+* [osa21](/docs/containers?topic=containers-classic-flavors#osa21)
+
+* [osa22](/docs/containers?topic=containers-classic-flavors#osa22)
+
+* [osa23](/docs/containers?topic=containers-classic-flavors#osa23)
+
+* [par01](/docs/containers?topic=containers-classic-flavors#par01)
+
+* [sao01](/docs/containers?topic=containers-classic-flavors#sao01)
+
+* [seo01](/docs/containers?topic=containers-classic-flavors#seo01)
+
+* [sjc03](/docs/containers?topic=containers-classic-flavors#sjc03)
+
+* [sjc04](/docs/containers?topic=containers-classic-flavors#sjc04)
+
+* [sng01](/docs/containers?topic=containers-classic-flavors#sng01)
+
+* [syd01](/docs/containers?topic=containers-classic-flavors#syd01)
+
+* [syd04](/docs/containers?topic=containers-classic-flavors#syd04)
+
+* [syd05](/docs/containers?topic=containers-classic-flavors#syd05)
+
+* [tok02](/docs/containers?topic=containers-classic-flavors#tok02)
+
+* [tok04](/docs/containers?topic=containers-classic-flavors#tok04)
+
+* [tok05](/docs/containers?topic=containers-classic-flavors#tok05)
+
+* [tor01](/docs/containers?topic=containers-classic-flavors#tor01)
+
+* [wdc04](/docs/containers?topic=containers-classic-flavors#wdc04)
+
+* [wdc06](/docs/containers?topic=containers-classic-flavors#wdc06)
+
+* [wdc07](/docs/containers?topic=containers-classic-flavors#wdc07)
+
+
 ## FAQs
 {: #sitemap_faqs}
 

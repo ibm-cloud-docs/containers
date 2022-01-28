@@ -299,6 +299,8 @@ toc:
               - link: 
                   label: IBM Developer - Kubernetes
                   href: https://developer.ibm.com/components/kubernetes/
+        - vpc-gen2-flavors.md
+        - classic-flavors.md
     - navgroup: 
         id: help
         topics:
