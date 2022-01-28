@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-28"
 
 keywords: kubernetes
 
@@ -111,10 +111,6 @@ Kubernetes version 1.20 or earlier: The OpenVPN connection between the master no
     {: pre}
 
 3. If you still see the same error message, then the worker node that the VPN pod is on might be unhealthy. To restart the VPN pod and reschedule it to a different worker node, [cordon, drain, and reboot the worker node](/docs/openshift?topic=openshift-kubernetes-service-cli#cs_worker_reboot) that the VPN pod is on.
-
-
-
-
 
 
 
