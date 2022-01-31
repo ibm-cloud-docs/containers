@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-01-05"
+lastupdated: "2022-01-31"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -132,7 +132,7 @@ The following table shows the changes that are in patch 1.9.10_1527.
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
 | {{site.data.keyword.cloud_notm}} Provider | v1.9.10-192 | v1.9.10-219 | Updated the documentation link in load balancer error messages. |
-| {{site.data.keyword.cloud_notm} file storage classes | N/A | N/A | Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node. Removed duplicate `reclaimPolicy` parameter in the IBM file storage classes.  \n Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass). |
+| {{site.data.keyword.cloud_notm}} file storage classes | N/A | N/A | Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node. Removed duplicate `reclaimPolicy` parameter in the IBM file storage classes.  \n Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass). |
 {: caption="Table 1. Changes since version 1.9.10_1523" caption-side="bottom"}
 
 
@@ -298,6 +298,6 @@ The following table shows the changes that are in patch 1.9.7_1510.
 | -------------- | -------------- | -------------- | ------------- |
 | Kubernetes | v1.9.3 | v1.9.7     | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.7]{: external} This release addresses  [CVE-2017-1002101](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101){: external} and [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102){: external}  vulnerabilities.  \n **Note**: Now `secret`, `configMap`, `downwardAPI`, and projected volumes are mounted as read-only. Previously, apps could write data to these volumes, but the system could automatically revert the data. If your apps rely on the previous insecure behavior, modify them accordingly. |
 | Kubernetes configuration | N/A | N/A | Added `admissionregistration.k8s.io/v1alpha1=true` to the `--runtime-config` option for the cluster's Kubernetes API server. |
-| {{site.data.keyword.cloud_notm}} Provider | v1.9.3-71 | v1.9.7-102 | `NodePort` and `LoadBalancer` services now suppor [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#lb_source_ip) by setting `service.spec.externalTrafficPolicy` to `Local`. |
+| {{site.data.keyword.cloud_notm}} Provider | v1.9.3-71 | v1.9.7-102 | `NodePort` and `LoadBalancer` services now support [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#lb_source_ip) by setting `service.spec.externalTrafficPolicy` to `Local`. |
 | General | N/A | N/A | Fix [edge node](/docs/containers?topic=containers-edge#edge) toleration setup for older clusters. |
 {: caption="Table 1. Changes since version 1.9.3_1506" caption-side="bottom"}
