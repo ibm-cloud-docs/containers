@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-31"
 
 keywords: kubernetes, logging, help, debug
 
@@ -15,6 +15,7 @@ content-type: troubleshoot
 
 # Why doesn't the Kubernetes dashboard display utilization graphs?
 {: #cs_dashboard_graphs}
+{: support}
 
 
 When you access the Kubernetes dashboard, utilization graphs don't display.

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-31"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -17,6 +17,7 @@ content-type: troubleshoot
 
 # Debugging cluster add-ons
 {: #debug_addons}
+{: support}
 
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting [managed add-ons](/docs/containers?topic=containers-managed-addons), such as Istio.
 {: shortdesc}

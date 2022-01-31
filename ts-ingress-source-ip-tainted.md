@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-31"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -15,6 +15,7 @@ content-type: troubleshoot
 
 # Classic clusters: Why does source IP preservation fail when using tainted nodes?
 {: #cs_source_ip_fails}
+{: support}
 
 **Infrastructure provider**:
 * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic

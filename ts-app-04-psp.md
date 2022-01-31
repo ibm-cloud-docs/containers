@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-31"
 
 keywords: kubernetes
 
@@ -15,6 +15,7 @@ content-type: troubleshoot
 
 # Why do my pods fail to deploy after applying a pod security policy?
 {: #ts-app-psp}
+{: support}
 
 **Infrastructure provider**:
 * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic

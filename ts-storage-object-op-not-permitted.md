@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-31"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -18,6 +18,7 @@ content-type: troubleshoot
 
 # Why does my app pod fail with an `Operation not permitted` error?
 {: #cos_operation_not_permitted}
+{: support}
 
 **Infrastructure provider**:
 * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
