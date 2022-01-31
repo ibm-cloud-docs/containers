@@ -28,6 +28,21 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## January 2022
 {: #release-jan-2022}
 
+### 31 January 2022
+{: #31jan2022}
+{: release-note}
+
+Version changelog
+:   Fix pack update.
+:   Kubernetes [1.22.6_1538](/docs/openshift?topic=containers-containers_changelog#1226_1538), [1.21.9_1548](/docs/openshift?topic=containers-containers_changelog#1219_1548), [1.20.15_1569](/docs/openshift?topic=containers-containers_changelog#12015_1569), [1.19.16_1576](/docs/openshift?topic=containers-containers_changelog#11916_1576).
+
+
+
+**New!** Worker node flavor reference
+:   View a list of all available worker node flavors by zone. For more information, see [VPC Gen 2 flavors](/docs/containers?topic=containers-classic-flavors) or [Classic flavors](/docs/containers?topic=containers-vpc-gen2-flavors).
+
+
+
 ### 29 January 2022
 {: #29jan2022}
 {: release-note}
