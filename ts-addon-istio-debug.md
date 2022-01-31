@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-31"
 
 keywords: kubernetes, help
 
@@ -16,6 +16,7 @@ content-type: troubleshoot
 
 # Debugging Istio
 {: #istio_debug_tool}
+{: support}
 
 **Infrastructure provider**:
 * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic

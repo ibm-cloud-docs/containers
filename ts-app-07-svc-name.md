@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-31"
 
 keywords: kubernetes
 
@@ -15,6 +15,7 @@ content-type: troubleshoot
 
 # Why does binding a service to a cluster result in a same name error?
 {: #ts-app-svc-bind-name}
+{: support}
 
 **Infrastructure provider**:
 * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic

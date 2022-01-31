@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-31"
 
 keywords: kubernetes, clusters
 
@@ -195,19 +195,19 @@ The Kubernetes master is accessible through the private cloud service endpoint i
             {: pre}
 
         2. Create the NLB and endpoint.
-            ```
+            ```sh
             kubectl apply -f kube-api-via-nlb.yaml
             ```
             {: pre}
 
         3. Verify that the `kube-api-via-nlb` NLB is created. In the output, note the `10.x.x.x` **EXTERNAL-IP** address. This IP address exposes the private cloud service endpoint for the Kubernetes master on the port that you specified in your YAML file.
-            ```
+            ```sh
             kubectl get svc -o wide
             ```
             {: pre}
 
             In this example output, the IP address for the private cloud service endpoint of the Kubernetes master is `10.186.92.42`.
-            ```
+            ```sh
             NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)          AGE   SELECTOR
             kube-api-via-nlb         LoadBalancer   172.21.150.118   10.186.92.42     443:32235/TCP    10m   <none>
             ...
@@ -216,13 +216,13 @@ The Kubernetes master is accessible through the private cloud service endpoint i
 
 4. On the client machines where you or your users run `kubectl` commands, add the NLB IP address and the private cloud service endpoint URL to the `/etc/hosts` file. Do not include any ports in the IP address and URL and don't include `https://` in the URL.
     * For macOS and Linux users:
-        ```
+        ```sh
         sudo nano /etc/hosts
         ```
         {: pre}
 
     * For Windows users:
-        ```
+        ```sh
         notepad C:\Windows\System32\drivers\etc\hosts
         ```
         {: pre}
@@ -231,7 +231,7 @@ The Kubernetes master is accessible through the private cloud service endpoint i
         {: tip}
 
         Example text to add
-        ```
+        ```sh
         10.186.92.42      c1.private.us-east.containers.cloud.ibm.com
         ```
         {: codeblock}
@@ -385,7 +385,7 @@ Note the following limitations for referencing the webhook app as an IP or DNS n
 
 - If the URL is a DNS, then this DNS must be a publicly registered DNS name. Private DNS configurations are not supported.
 - If the URL is an external IP, which means the webhook service is outside of the cluster, the control plane network is used to connect to the service. The control plane must be able to reach the IP. If, for example, the IP is from an on-premises network and the control plane can't reach the IP, the webhook service does not work.
-- If the URL is a cluster IP, which means the webhook service is inside of the cluster, the Kubernetes API needs to connect to cluster network.  If you have cluster version 1.21 and later, and your webhook uses the cluster IP, you must update your webhook to use a Kubernetes service instead.
+- If the URL is a cluster IP, which means the webhook service is inside of the cluster, the Kubernetes API needs to connect to cluster network. If you have cluster version 1.21 and later, and your webhook uses the cluster IP, you must update your webhook to use a Kubernetes service instead.
 
 
 ## Accessing private clusters by using the WireGuard VPN

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-01-28"
+lastupdated: "2022-01-31"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [January 2022](/docs/containers?topic=containers-iks-release#release-jan-2022)
+
+    * [31 January 2022](/docs/containers?topic=containers-iks-release#31jan2022)
 
     * [27 January 2022](/docs/containers?topic=containers-iks-release#27jan2022)
 
@@ -3752,6 +3754,10 @@ subcollection: containers
 
 * [Version 1.22 changelog](/docs/containers?topic=containers-changelog#122_changelog)
 
+    * [Change log for worker node fix pack 1.22.6_1538, released 31 January 2022](/docs/containers?topic=containers-changelog#1226_1538)
+
+    * [Changelog for fix pack 1.22.6_1537, released 26 January 2022](/docs/containers?topic=containers-changelog#1226_1537)
+
     * [Changelog for worker node fix pack 1.22.4_1536, released 18 January 2022](/docs/containers?topic=containers-changelog#1224_1536)
 
     * [Changelog for worker node fix pack 1.22.4_1534, released 4 January 2022](/docs/containers?topic=containers-changelog#1224_1534)
@@ -3775,6 +3781,10 @@ subcollection: containers
     * [Changelog for master fix pack 1.22.2_1522 and worker node fix pack 1.22.2_1523, released 29 Sept 2021](/docs/containers?topic=containers-changelog#1222_1522_and_1222_1523)
 
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog#121_changelog)
+
+    * [Change log for worker node fix pack 1.21.9_1548, released 31 January 2022](/docs/containers?topic=containers-changelog#1219_1548)
+
+    * [Changelog for fix pack 1.21.9_1547, released 26 January 2022](/docs/containers?topic=containers-changelog#1219_1547)
 
     * [Changelog for worker node fix pack 1.21.7_1546, released 18 January 2022](/docs/containers?topic=containers-changelog#1217_1546)
 
@@ -3825,6 +3835,10 @@ subcollection: containers
     * [Changelog for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1519)
 
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+
+    * [Change log for worker node fix pack 1.20.15_1569, released 31 January 2022](/docs/containers?topic=containers-changelog#12015_1569)
+
+    * [Changelog for fix pack 1.20.15_1568, released 26 January 2022](/docs/containers?topic=containers-changelog#12015_1568)
 
     * [Changelog for worker node fix pack 1.20.13_1567, released 18 January 2022](/docs/containers?topic=containers-changelog#12013_1567)
 
@@ -3901,6 +3915,10 @@ subcollection: containers
     * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 
 * [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+
+    * [Change log for worker node fix pack 1.22.6_1538, released 31 January 2022](/docs/containers?topic=containers-changelog#1226_1538)
+
+    * [Changelog for fix pack 1.19.16_1575, released 26 January 2022](/docs/containers?topic=containers-changelog#11916_1575)
 
     * [Changelog for worker node fix pack 1.19.16_1574, released 18 January 2022](/docs/containers?topic=containers-changelog#11916_1574)
 
@@ -5469,6 +5487,126 @@ subcollection: containers
 [IBM Developer - Containers](https://developer.ibm.com/technologies/containers/){: external}
 
 [IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: external}
+
+
+## VPC Gen 2 flavors
+{: #sitemap_vpc_gen_2_flavors}
+
+
+[VPC Gen 2 flavors](/docs/containers?topic=containers-vpc-gen2-flavors#vpc-gen2-flavors)
+
+* [au-syd-1](/docs/containers?topic=containers-vpc-gen2-flavors#au-syd-1)
+
+* [au-syd-2](/docs/containers?topic=containers-vpc-gen2-flavors#au-syd-2)
+
+* [au-syd-3](/docs/containers?topic=containers-vpc-gen2-flavors#au-syd-3)
+
+* [eu-de-1](/docs/containers?topic=containers-vpc-gen2-flavors#eu-de-1)
+
+* [eu-de-2](/docs/containers?topic=containers-vpc-gen2-flavors#eu-de-2)
+
+* [eu-de-3](/docs/containers?topic=containers-vpc-gen2-flavors#eu-de-3)
+
+* [eu-gb-1](/docs/containers?topic=containers-vpc-gen2-flavors#eu-gb-1)
+
+* [eu-gb-2](/docs/containers?topic=containers-vpc-gen2-flavors#eu-gb-2)
+
+* [eu-gb-3](/docs/containers?topic=containers-vpc-gen2-flavors#eu-gb-3)
+
+* [jp-tok-1](/docs/containers?topic=containers-vpc-gen2-flavors#jp-tok-1)
+
+* [jp-tok-2](/docs/containers?topic=containers-vpc-gen2-flavors#jp-tok-2)
+
+* [jp-tok-3](/docs/containers?topic=containers-vpc-gen2-flavors#jp-tok-3)
+
+* [us-east-1](/docs/containers?topic=containers-vpc-gen2-flavors#us-east-1)
+
+* [us-east-2](/docs/containers?topic=containers-vpc-gen2-flavors#us-east-2)
+
+* [us-east-3](/docs/containers?topic=containers-vpc-gen2-flavors#us-east-3)
+
+* [us-south-1](/docs/containers?topic=containers-vpc-gen2-flavors#us-south-1)
+
+* [us-south-2](/docs/containers?topic=containers-vpc-gen2-flavors#us-south-2)
+
+* [us-south-3](/docs/containers?topic=containers-vpc-gen2-flavors#us-south-3)
+
+
+## Classic flavors
+{: #sitemap_classic_flavors}
+
+
+[Classic flavors](/docs/containers?topic=containers-classic-flavors#classic-flavors)
+
+* [ams03](/docs/containers?topic=containers-classic-flavors#ams03)
+
+* [che01](/docs/containers?topic=containers-classic-flavors#che01)
+
+* [dal10](/docs/containers?topic=containers-classic-flavors#dal10)
+
+* [dal12](/docs/containers?topic=containers-classic-flavors#dal12)
+
+* [dal13](/docs/containers?topic=containers-classic-flavors#dal13)
+
+* [fra02](/docs/containers?topic=containers-classic-flavors#fra02)
+
+* [fra04](/docs/containers?topic=containers-classic-flavors#fra04)
+
+* [fra05](/docs/containers?topic=containers-classic-flavors#fra05)
+
+* [hkg02](/docs/containers?topic=containers-classic-flavors#hkg02)
+
+* [lon02](/docs/containers?topic=containers-classic-flavors#lon02)
+
+* [lon04](/docs/containers?topic=containers-classic-flavors#lon04)
+
+* [lon05](/docs/containers?topic=containers-classic-flavors#lon05)
+
+* [lon06](/docs/containers?topic=containers-classic-flavors#lon06)
+
+* [mex01](/docs/containers?topic=containers-classic-flavors#mex01)
+
+* [mil01](/docs/containers?topic=containers-classic-flavors#mil01)
+
+* [mon01](/docs/containers?topic=containers-classic-flavors#mon01)
+
+* [osa21](/docs/containers?topic=containers-classic-flavors#osa21)
+
+* [osa22](/docs/containers?topic=containers-classic-flavors#osa22)
+
+* [osa23](/docs/containers?topic=containers-classic-flavors#osa23)
+
+* [par01](/docs/containers?topic=containers-classic-flavors#par01)
+
+* [sao01](/docs/containers?topic=containers-classic-flavors#sao01)
+
+* [seo01](/docs/containers?topic=containers-classic-flavors#seo01)
+
+* [sjc03](/docs/containers?topic=containers-classic-flavors#sjc03)
+
+* [sjc04](/docs/containers?topic=containers-classic-flavors#sjc04)
+
+* [sng01](/docs/containers?topic=containers-classic-flavors#sng01)
+
+* [syd01](/docs/containers?topic=containers-classic-flavors#syd01)
+
+* [syd04](/docs/containers?topic=containers-classic-flavors#syd04)
+
+* [syd05](/docs/containers?topic=containers-classic-flavors#syd05)
+
+* [tok02](/docs/containers?topic=containers-classic-flavors#tok02)
+
+* [tok04](/docs/containers?topic=containers-classic-flavors#tok04)
+
+* [tok05](/docs/containers?topic=containers-classic-flavors#tok05)
+
+* [tor01](/docs/containers?topic=containers-classic-flavors#tor01)
+
+* [wdc04](/docs/containers?topic=containers-classic-flavors#wdc04)
+
+* [wdc06](/docs/containers?topic=containers-classic-flavors#wdc06)
+
+* [wdc07](/docs/containers?topic=containers-classic-flavors#wdc07)
 
 
 ## FAQs

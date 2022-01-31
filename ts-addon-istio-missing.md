@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-01-31"
 
 keywords: kubernetes, help
 
@@ -15,6 +15,7 @@ content-type: troubleshoot
 
 # Why are Istio components missing?
 {: #istio_control_plane}
+{: support}
 
 **Infrastructure provider**:
 * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
