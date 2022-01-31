@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-28"
+lastupdated: "2022-01-31"
 
 keywords: kubernetes, release notes
 
@@ -25,6 +25,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## January 2022
 {: #release-jan-2022}
+
+
+
+### 29 January 2022
+{: #29jan2022}
+{: release-note}
+
+Version changelog
+:   Fix pack update.
+:   Kubernetes [1.22.6.1537](/docs/containers?topic=containers-changelog#1226_1537), [1.21.9_1547](/docs/containers?topic=containers-changelog#1219_1547), [1.20.15_1568](/docs/containers?topic=containers-changelog#12015_1568), and [1.19.16_1575](/docs/containers?topic=containers-changelog#11916_1575).
 
 
 
