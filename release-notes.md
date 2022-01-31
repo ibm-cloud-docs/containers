@@ -30,6 +30,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ### 31 January 2022
 {: #31jan2022}
+
 {: release-note}
 
 Version changelog
@@ -40,18 +41,6 @@ Version changelog
 
 **New!** Worker node flavor reference
 :   View a list of all available worker node flavors by zone. For more information, see [VPC Gen 2 flavors](/docs/containers?topic=containers-classic-flavors) or [Classic flavors](/docs/containers?topic=containers-vpc-gen2-flavors).
-
-
-
-### 29 January 2022
-{: #29jan2022}
-{: release-note}
-
-Version changelog
-:   Fix pack update.
-:   Kubernetes [1.22.6.1537](/docs/containers?topic=containers-changelog#1226_1537), [1.21.9_1547](/docs/containers?topic=containers-changelog#1219_1547), [1.20.15_1568](/docs/containers?topic=containers-changelog#12015_1568), and [1.19.16_1575](/docs/containers?topic=containers-changelog#11916_1575).
-
-
 
 
 
