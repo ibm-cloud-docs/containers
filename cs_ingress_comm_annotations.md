@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-01"
+lastupdated: "2022-02-02"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -894,9 +894,9 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
         
         `logLevel`
         :   Specify the log level that you want to use. Choose from the following values. 
-        :   `--v=2`: Shows the details by using diff about the changes in the configuration in `NGINX`. 
-        :   `--v=3`: Shows the details about the service, Ingress rule, endpoint changes in JSON format.
-        :   `--v=5`: Configures `NGINX` in debug mode.
+        :   `2`: Shows the details by using diff about the changes in the configuration in `NGINX`. 
+        :   `3`: Shows the details about the service, Ingress rule, endpoint changes in JSON format.
+        :   `5`: Configures `NGINX` in debug mode.
         :   For more information about logging, see [Debug Logging](https://kubernetes.github.io/ingress-nginx/troubleshooting/#debug-logging){: external}.
         
         `replicas`
