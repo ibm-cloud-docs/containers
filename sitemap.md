@@ -2424,6 +2424,8 @@ subcollection: containers
 
     * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
 
+* [Changing load balancer subnets or zones](/docs/containers?topic=containers-vpc-lbaas#lbaas_change_subnets)
+
 * [Limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations)
 
 [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about#loadbalancer-about)
