@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-01-31"
+lastupdated: "2022-02-03"
 
 keywords: containers
 subcollection: containers
@@ -185,6 +185,10 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
+
+* [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
+
+    * [3 February 2022](/docs/containers?topic=containers-iks-release#3feb2022)
 
 * [January 2022](/docs/containers?topic=containers-iks-release#release-jan-2022)
 
@@ -2424,6 +2428,8 @@ subcollection: containers
 
     * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
 
+* [Changing load balancer subnets or zones](/docs/containers?topic=containers-vpc-lbaas#lbaas_change_subnets)
+
 * [Limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations)
 
 [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about#loadbalancer-about)
@@ -3756,7 +3762,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.22.6_1538, released 31 January 2022](/docs/containers?topic=containers-changelog#1226_1538)
 
-    * [Changelog for fix pack 1.22.6_1537, released 26 January 2022](/docs/containers?topic=containers-changelog#1226_1537)
+    * [Changelog for master fix pack 1.22.6_1537, released 26 January 2022](/docs/containers?topic=containers-changelog#1226_1537)
 
     * [Changelog for worker node fix pack 1.22.4_1536, released 18 January 2022](/docs/containers?topic=containers-changelog#1224_1536)
 
@@ -3784,7 +3790,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.21.9_1548, released 31 January 2022](/docs/containers?topic=containers-changelog#1219_1548)
 
-    * [Changelog for fix pack 1.21.9_1547, released 26 January 2022](/docs/containers?topic=containers-changelog#1219_1547)
+    * [Changelog for master fix pack 1.21.9_1547, released 26 January 2022](/docs/containers?topic=containers-changelog#1219_1547)
 
     * [Changelog for worker node fix pack 1.21.7_1546, released 18 January 2022](/docs/containers?topic=containers-changelog#1217_1546)
 
@@ -3838,7 +3844,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.20.15_1569, released 31 January 2022](/docs/containers?topic=containers-changelog#12015_1569)
 
-    * [Changelog for fix pack 1.20.15_1568, released 26 January 2022](/docs/containers?topic=containers-changelog#12015_1568)
+    * [Changelog for master fix pack 1.20.15_1568, released 26 January 2022](/docs/containers?topic=containers-changelog#12015_1568)
 
     * [Changelog for worker node fix pack 1.20.13_1567, released 18 January 2022](/docs/containers?topic=containers-changelog#12013_1567)
 
@@ -3918,7 +3924,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.22.6_1538, released 31 January 2022](/docs/containers?topic=containers-changelog#1226_1538)
 
-    * [Changelog for fix pack 1.19.16_1575, released 26 January 2022](/docs/containers?topic=containers-changelog#11916_1575)
+    * [Changelog for master fix pack 1.19.16_1575, released 26 January 2022](/docs/containers?topic=containers-changelog#11916_1575)
 
     * [Changelog for worker node fix pack 1.19.16_1574, released 18 January 2022](/docs/containers?topic=containers-changelog#11916_1574)
 
@@ -4197,6 +4203,8 @@ subcollection: containers
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
 * [Version 1.12](/docs/containers?topic=containers-istio-changelog#v112)
+
+    * [Changelog for 1.12.2, released 03 February 2021](/docs/containers?topic=containers-istio-changelog#1202)
 
     * [Changelog for 1.12.1, released 13 January 2022](/docs/containers?topic=containers-istio-changelog#1121)
 

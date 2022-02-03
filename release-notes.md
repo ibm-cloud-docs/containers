@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-31"
+lastupdated: "2022-02-03"
 
 keywords: kubernetes, release notes
 
@@ -22,6 +22,21 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: note}
+
+
+## February 2022
+{: #release-feb-2022}
+
+
+  
+### 3 February 2022
+{: #3feb2022}
+{: release-note}
+
+Istio add-on
+:   [Version `1.12.2`](/docs/containers?topic=containers-istio-changelog#1202)
+
+
 
 
 
