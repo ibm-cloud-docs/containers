@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-01-18"
+lastupdated: "2022-02-03"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -170,6 +170,8 @@ The following table shows the actions that you must take before you update the K
 
 | Type | Description|
 | --- | --- |
+| **Unsupported:** Beta versions of `PriorityClass` API | Migrate manifests and API clients to use the `scheduling.k8s.io/v1` API version, available since Kubernetes version 1.14. For more information, see [Deprecated API Migration Guide - v1.22](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-22){: external}. |
+| **Unsupported**:  Beta versions of `ClusterRole`, `ClusterRoleBinding`, `Role`, and `RoleBinding APIs` | Migrate manifests and API clients to use the `rbac.authorization.k8s.io/v1` API version, available since Kubernetes version 1.8. For more information, see [Deprecated API Migration Guide - v1.22](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-22){: external}. |
 | **Unsupported**:  Beta versions of `ValidatingWebhookConfiguration` and `MutatingWebhookConfiguration` APIs | Migrate manifests and API clients to use the `admissionregistration.k8s.io/v1` API version, available since Kubernetes version 1.16. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
 | **Unsupported**:  Beta version of `CustomResourceDefinition` API | Migrate manifests and API clients to use the `apiextensions.k8s.io/v1` API version, available since Kubernetes version 1.16. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
 | **Unsupported**:  Beta version of `APIService` API | Migrate manifests and API clients to use the `apiregistration.k8s.io/v1` API version, available since Kubernetes version 1.10. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
