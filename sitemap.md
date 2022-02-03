@@ -3762,7 +3762,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.22.6_1538, released 31 January 2022](/docs/containers?topic=containers-changelog#1226_1538)
 
-    * [Changelog for fix pack 1.22.6_1537, released 26 January 2022](/docs/containers?topic=containers-changelog#1226_1537)
+    * [Changelog for master fix pack 1.22.6_1537, released 26 January 2022](/docs/containers?topic=containers-changelog#1226_1537)
 
     * [Changelog for worker node fix pack 1.22.4_1536, released 18 January 2022](/docs/containers?topic=containers-changelog#1224_1536)
 
@@ -3790,7 +3790,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.21.9_1548, released 31 January 2022](/docs/containers?topic=containers-changelog#1219_1548)
 
-    * [Changelog for fix pack 1.21.9_1547, released 26 January 2022](/docs/containers?topic=containers-changelog#1219_1547)
+    * [Changelog for master fix pack 1.21.9_1547, released 26 January 2022](/docs/containers?topic=containers-changelog#1219_1547)
 
     * [Changelog for worker node fix pack 1.21.7_1546, released 18 January 2022](/docs/containers?topic=containers-changelog#1217_1546)
 
@@ -3844,7 +3844,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.20.15_1569, released 31 January 2022](/docs/containers?topic=containers-changelog#12015_1569)
 
-    * [Changelog for fix pack 1.20.15_1568, released 26 January 2022](/docs/containers?topic=containers-changelog#12015_1568)
+    * [Changelog for master fix pack 1.20.15_1568, released 26 January 2022](/docs/containers?topic=containers-changelog#12015_1568)
 
     * [Changelog for worker node fix pack 1.20.13_1567, released 18 January 2022](/docs/containers?topic=containers-changelog#12013_1567)
 
@@ -3924,7 +3924,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.22.6_1538, released 31 January 2022](/docs/containers?topic=containers-changelog#1226_1538)
 
-    * [Changelog for fix pack 1.19.16_1575, released 26 January 2022](/docs/containers?topic=containers-changelog#11916_1575)
+    * [Changelog for master fix pack 1.19.16_1575, released 26 January 2022](/docs/containers?topic=containers-changelog#11916_1575)
 
     * [Changelog for worker node fix pack 1.19.16_1574, released 18 January 2022](/docs/containers?topic=containers-changelog#11916_1574)
 

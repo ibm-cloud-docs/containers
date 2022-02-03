@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-01-31"
+lastupdated: "2022-02-03"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -48,7 +48,7 @@ Review the version 1.22 changelog.
 | Kubernetes | 1.22.4 | 1.22.6 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.6){: external}. |{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.20.13_1567" caption-side="top"}
 
-### Changelog for fix pack 1.22.6_1537, released 26 January 2022
+### Changelog for master fix pack 1.22.6_1537, released 26 January 2022
 {: #1226_1537}
 
 | Component | Previous | Current | Description |
@@ -58,16 +58,13 @@ Review the version 1.22 changelog.
 | {{site.data.keyword.IBM_notm}} Calico extension | 900 | 923 | Updated universal base image (UBI) to the `8.5-218` version to resolve CVEs. Updated to use `Go` version `1.16.13`.|
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.22.4-3 | v1.22.6-1 | Updated to support the Kubernetes `1.22.6` release and to use `Go` version `1.16.12`. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 402 | 404 | Updated universal base image (UBI) to the `8.5-218` version to resolve CVEs. Updated to use `Go` version `1.16.13`. |
-| {{site.data.keyword.cloud_notm}} RBAC Operator | 3430e0375cbdee272d49f4a0504b67850f14f6d9 | 0fc9949558a2f1f6982fd2fa142adb44a9c359fd | Updated universal base image (UBI) to the `8.5-218` version to resolve CVEs. Updated to use `Go` version `1.16.13`. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 3430e03 | 0fc9949 | Updated universal base image (UBI) to the `8.5-218` version to resolve CVEs. Updated to use `Go` version `1.16.13`. |
 | Key Management Service provider | v2.3.12 | v2.4.0 | Decrypted data encryption key is persisted in memory until the root key is changed, disabled, or rotated. Update multiple go dependencies. |
 | Konnectivity agent | v0.0.26_282_iks | v0.0.27_309_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.27).  Updated universal base image (UBI) to the `8.5-218` version to resolve CVEs. Updated to use `Go` version `1.17.5`. |
 | Konnectivity server | v0.0.26_282_iks | v0.0.27_309_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.27).  Updated universal base image (UBI) to the `8.5-218` version to resolve CVEs. Updated to use `Go` version `1.17.5`. |
 | Kubernetes | 1.22.4 | 1.22.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.6)
-| Kubernetes API server | v1.22.4 | v1.22.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.6). |
-| Kubernetes controller manager | v1.22.4 | v1.22.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.6). |
 | Kubernetes Metrics Server | v0.5.1 | v0.5.2 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.5.2). |
 | Kubernetes NodeLocal DNS cache | 1.21.1 | 1.21.3 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.21.3). |
-| Kubernetes scheduler | v1.22.4 | v1.22.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.6). |
 | Load balancer and load balancer monitor for IBM Cloud Provider | 1659 | 1747 | Updated the Alpine base image to the `3.15` version to resolve CVEs. Updated to use `Go` version `1.17.6`. |
 | Portieris admission controller | v0.12.1 | v0.12.2 | See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.12.2) |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
@@ -275,7 +272,7 @@ Review the version 1.21 changelog.
 | Kubernetes | 1.21.7 | 1.21.9 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.9){: external}. |{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.20.13_1567" caption-side="top"}
 
-### Changelog for fix pack 1.21.9_1547, released 26 January 2022
+### Changelog for master fix pack 1.21.9_1547, released 26 January 2022
 {: #1219_1547}
 
 | Component | Previous | Current | Description |
@@ -289,13 +286,10 @@ Review the version 1.21 changelog.
 | Key Management Service provider | v2.3.12 | v2.3.13 | Updated `Go` dependencies and golangci-lint |
 | Konnectivity agent | v0.0.26_282_iks | v0.0.27_309_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.27).  Updated universal base image (UBI) to the `8.5-218` version to resolve CVEs. Updated to use `Go` version `1.17.5`. |
 | Konnectivity server | v0.0.26_282_iks | v0.0.27_309_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.27).  Updated universal base image (UBI) to the `8.5-218` version to resolve CVEs. Updated to use `Go` version `1.17.5`. |
-| Kubernetes | 1.21.7 | 1.21.9 | 	See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.9)
-| Kubernetes API server | v1.21.7 | v1.21.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.9). |
+| Kubernetes | 1.21.7 | 1.21.9 | 	See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.9){: external}. |
 | Kubernetes configuration | N/A | N/A | Updated the [feature gate configuration](https://cloud.ibm.com/docs/containers?topic=containers-service-settings#feature-gates) |
-| Kubernetes controller manager | v1.21.7 | v1.21.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.9). |
 | Kubernetes Metrics Server | v0.4.4 | v0.4.5 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.4.5). |
 | Kubernetes NodeLocal DNS cache | 1.21.1 | 1.21.3 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.21.3). |
-| Kubernetes scheduler | v1.21.7 | v1.21.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.9). |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1659 | 1747 | Updated the Alpine base image to the `3.15` version to resolve CVEs. Updated to use `Go` version `1.17.6`. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.21.7_1541" caption-side="top"}
@@ -719,7 +713,7 @@ Review the version 1.20 changelog.
 | Kubernetes | 1.20.13 | 1.20.15 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.15){: external}. |{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.20.13_1567" caption-side="top"}
 
-### Changelog for fix pack 1.20.15_1568, released 26 January 2022
+### Changelog for master fix pack 1.20.15_1568, released 26 January 2022
 {: #12015_1568}
 
 | Component | Previous | Current | Description |
@@ -731,12 +725,9 @@ Review the version 1.20 changelog.
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 402 | 404 | Updated universal base image (UBI) to the `8.5-218` version to resolve CVEs. Updated to use `Go` version `1.16.13`. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 3430e03 | 0fc9949 | Updated universal base image (UBI) to the `8.5-218` version to resolve CVEs. Updated to use `Go` version `1.16.13`. |
 | Key Management Service provider | v2.3.12 | v2.3.13 | Updated `Go` dependencies and golangci-lint |
-| Kubernetes | 1.20.13 | 1.20.15 | 	See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.15)
-| Kubernetes API server | v1.20.13 | v1.20.15 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.15). |
-| Kubernetes controller manager | v1.20.13 | v1.20.15 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.15). |
+| Kubernetes | 1.20.13 | 1.20.15 | 	See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.15){: external}. |
 | Kubernetes Metrics Server | v0.4.4 | v0.4.5 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.4.5). |
 | Kubernetes NodeLocal DNS cache | 1.21.1 | 1.21.3 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.21.3). |
-| Kubernetes scheduler | v1.20.13 | v1.20.15 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.15). |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1659 | 1747 | Updated the Alpine base image to the `3.15` version to resolve CVEs. Updated to use `Go` version `1.17.6`. |
 | OpenVPN client | 2.4.6-r3-IKS-463 | 2.5.4-r0-IKS-556 | Update base image to alpine `3.15` to address CVEs, no longer set the --compress config option, updated scripts |
 | OpenVPN server | 2.4.6-r3-IKS-462 | 2.5.4-r0-IKS-555 | Update base image to alpine `3.15` to address CVEs, no longer set the --compress config option, updated scripts |
@@ -1365,7 +1356,7 @@ Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 31 J
 | Kubernetes | 1.22.4 | 1.22.6 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.6){: external}. |{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.20.13_1567" caption-side="top"}
 
-### Changelog for fix pack 1.19.16_1575, released 26 January 2022
+### Changelog for master fix pack 1.19.16_1575, released 26 January 2022
 {: #11916_1575}
 
 | Component | Previous | Current | Description |
