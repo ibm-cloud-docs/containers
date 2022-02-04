@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-02-03"
+lastupdated: "2022-02-04"
 
 keywords: containers
 subcollection: containers
@@ -3921,6 +3921,8 @@ subcollection: containers
     * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 
 * [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+
+    * [Changelog for fix pack 1.19.16_1576, released 31 January 2022](/docs/containers?topic=containers-changelog#11916_1576)
 
     * [Changelog for fix pack 1.19.16_1575, released 26 January 2022](/docs/containers?topic=containers-changelog#11916_1575)
 
