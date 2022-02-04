@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-03"
+lastupdated: "2022-02-04"
 
 keywords: kubernetes, release notes
 
@@ -50,7 +50,7 @@ Istio add-on
 
 Version changelog
 :   Fix pack update.
-:   Kubernetes [1.22.6_1538](/docs/openshift?topic=containers-containers_changelog#1226_1538), [1.21.9_1548](/docs/openshift?topic=containers-containers_changelog#1219_1548), [1.20.15_1569](/docs/openshift?topic=containers-containers_changelog#12015_1569), [1.19.16_1576](/docs/openshift?topic=containers-containers_changelog#11916_1576).
+:   Kubernetes [1.22.6_1538](/docs/containers?topic=containers-changelog#1226_1538), [1.21.9_1548](/docs/containers?topic=containers-changelog#1219_1548), [1.20.15_1569](/docs/containers?topic=containers-changelog#12015_1569, [1.19.16_1576](/docs/containers?topic=containers-changelog#11916_1576).
 
 
 
