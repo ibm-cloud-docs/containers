@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-01"
+lastupdated: "2022-02-07"
 
 keywords: kubernetes, clusters, worker nodes, worker pools
 
@@ -167,7 +167,7 @@ The following image walks you through choosing the setup that you want for your 
 
 
 
-Want to try out a free cluster first? See [Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs). ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Want to save on your classic worker node costs? [Create a reservation](/docs/containers?topic=containers-reservations) to lock in a discount over 1 or 3 year terms! Then, create your worker pool by using the reserved instances.
+Want to try out a free cluster first? See [Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs). ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Want to save on your classic worker node costs? [Create a reservation](/docs/containers?topic=containers-reservations) to lock in a discount over 1 or 3 year terms! Then, create your worker pool by using the reserved instances. Note that autoscaling can't be enable on worker pools that use reservations.
 {: tip}
 
 
