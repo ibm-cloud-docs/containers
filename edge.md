@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-02-07"
 
 keywords: kubernetes, affinity, taint
 
@@ -14,15 +14,15 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Classic: Restricting network traffic to edge worker nodes
+# Restricting network traffic to edge worker nodes on classic infrastructure
 {: #edge}
 
-Edge worker nodes can improve the security of your {{site.data.keyword.containerlong}} cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload.
+Edge worker nodes can improve the security of your {{site.data.keyword.containerlong}} cluster by allowing fewer worker nodes by isolating the networking workload.
 {: shortdesc}
 
-When these worker nodes are marked for networking only, other workloads can't consume the CPU or memory of the worker node and interfere with networking.
+When you mark these worker nodes for networking only, other workloads can't consume the CPU or memory of the worker node and interfere with networking.
 
-If you want to restrict network traffic to edge worker nodes in a multizone cluster, at least two edge worker nodes must be enabled per zone for high availability of load balancer or Ingress pods. Create an edge node worker pool that spans all the zones in your cluster, with at least two worker nodes per zone.
+If you want to restrict network traffic to edge worker nodes in a multizone cluster, you must have at least two edge worker nodes per zone for high availability of load balancer or Ingress pods. Create an edge node worker pool that spans all the zones in your cluster, with at least two worker nodes per zone.
 {: tip}
 
 ## Isolating networking workloads to edge nodes
@@ -80,7 +80,7 @@ To create an edge node worker pool,
     ```
     {: screen}
 
-4. Using the output from the previous step, run the following command for each NLB and ALB. This command redeploys the NLB or ALB to an edge worker node.You can deploy both public and private NLBs and ALBs to the edge worker nodes.
+4. Using the output from the previous step, run the following command for each NLB and ALB. This command redeploys the NLB or ALB to an edge worker node. You can deploy both public and private NLBs and ALBs to the edge worker nodes.
 
     ```sh
     kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
@@ -286,13 +286,13 @@ To create an edge node worker pool in a gateway-enabled classic cluster,
 
 4. Create a worker pool for your edge worker nodes. Your worker pool includes the machine type, the number of worker nodes that you want to have, and the edge labels that you want to add to the worker nodes. When you create the worker pool, your worker nodes are not yet provisioned. Continue with the next step to add worker nodes to your edge worker pool.
     ```sh
-    ibmcloud ks worker pool create classic --cluster <cluster_name_or_ID> --name edge --flavor <flavor> --size-per-zone 2 --labels dedicated=edge,node-role.kubernetes.io/edge=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
+    ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name edge --flavor <flavor> --size-per-zone 2 --labels dedicated=edge,node-role.kubernetes.io/edge=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
     ```
     {: pre}
 
 5. Deploy worker nodes in the `edge` worker pool by adding the zones that you previously retrieved to the worker pool. Repeat this command for each zone. All worker nodes in this `edge` pool are connected to a private VLAN only.
     ```sh
-    ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool edge --private-vlan <private_VLAN_ID>
+    ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool edge  --private-vlan <private_VLAN_ID> --private-only
     ```
     {: pre}
 

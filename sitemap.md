@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-02-04"
+lastupdated: "2022-02-07"
 
 keywords: containers
 subcollection: containers
@@ -1707,7 +1707,7 @@ subcollection: containers
 
 * [Updating IAM firewalls for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-firewall#iam_allowlist)
 
-[Classic: Restricting network traffic to edge worker nodes](/docs/containers?topic=containers-edge#edge)
+[Restricting network traffic to edge worker nodes on classic infrastructure](/docs/containers?topic=containers-edge#edge)
 
 * [Isolating networking workloads to edge nodes](/docs/containers?topic=containers-edge#edge_nodes)
 
