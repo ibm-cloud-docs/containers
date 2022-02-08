@@ -65,9 +65,9 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-* Latest: 1.22.4
-* Default: 1.21.6
-* Other: 1.22.3
+* Latest: 1.22.6
+* Default: 1.21.9
+* Other: 1.20.15
 
 **Deprecated and unsupported Kubernetes versions**:
 * Deprecated: 1.19
