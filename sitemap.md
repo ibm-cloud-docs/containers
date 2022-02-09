@@ -3760,7 +3760,11 @@ subcollection: containers
 
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 
-* [Version 1.22 changelog](/docs/containers?topic=containers-changelog#122_changelog)
+* [Version 1.23 change log](/docs/containers?topic=containers-changelog#123_changelog)
+
+    * [Changelog for master fix pack 1.23.3_1518 and worker node fix pack 1.23.2_1517, released 9 Feb 2022](/docs/containers?topic=containers-changelog#1233_1518_and_1232_1517)
+
+* [Version 1.22 change log](/docs/containers?topic=containers-changelog#122_changelog)
 
     * [Change log for worker node fix pack 1.22.6_1538, released 31 January 2022](/docs/containers?topic=containers-changelog#1226_1538)
 
