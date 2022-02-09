@@ -62,11 +62,9 @@ Istio add-on
 ### 31 January 2022
 {: #31jan2022}
 
-{: release-note}
-
 Version changelog
 :   Fix pack update.
-:   Kubernetes [1.22.6_1538](/docs/containers?topic=containers-changelog#1226_1538), [1.21.9_1548](/docs/containers?topic=containers-changelog#1219_1548), [1.20.15_1569](/docs/containers?topic=containers-changelog#12015_1569, [1.19.16_1576](/docs/containers?topic=containers-changelog#11916_1576).
+:   Kubernetes [1.22.6_1538](/docs/containers?topic=containers-changelog#1226_1538), [1.21.9_1548](/docs/containers?topic=containers-changelog#1219_1548), [1.20.15_1569](/docs/containers?topic=containers-changelog#12015_1569), [1.19.16_1576](/docs/containers?topic=containers-changelog#11916_1576).
 
 
 
