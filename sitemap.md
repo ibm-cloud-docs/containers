@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-02-07"
+lastupdated: "2022-02-09"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
+
+    * [9 February 2022](/docs/containers?topic=containers-iks-release#9feb2022)
 
     * [3 February 2022](/docs/containers?topic=containers-iks-release#3feb2022)
 
@@ -3700,6 +3702,12 @@ subcollection: containers
 
 * [Preparing to update](/docs/containers?topic=containers-cs_versions#prep-up)
 
+* [Version 1.23](/docs/containers?topic=containers-cs_versions#cs_v123)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions#update-before-master)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions#123_after)
+
 * [Version 1.22](/docs/containers?topic=containers-cs_versions#cs_v122)
 
     * [Update before master](/docs/containers?topic=containers-cs_versions#122_before)
@@ -3712,7 +3720,7 @@ subcollection: containers
 
     * [Update after master](/docs/containers?topic=containers-cs_versions#121_after)
 
-* [Version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120)
+* [Deprecated: Version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120)
 
     * [Update before master](/docs/containers?topic=containers-cs_versions#120_before)
 
@@ -3758,7 +3766,11 @@ subcollection: containers
 
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 
-* [Version 1.22 changelog](/docs/containers?topic=containers-changelog#122_changelog)
+* [Version 1.23 change log](/docs/containers?topic=containers-changelog#123_changelog)
+
+    * [Changelog for master fix pack 1.23.3_1518 and worker node fix pack 1.23.2_1517, released 9 Feb 2022](/docs/containers?topic=containers-changelog#1233_1518_and_1232_1517)
+
+* [Version 1.22 change log](/docs/containers?topic=containers-changelog#122_changelog)
 
     * [Change log for worker node fix pack 1.22.6_1538, released 31 January 2022](/docs/containers?topic=containers-changelog#1226_1538)
 
@@ -3840,7 +3852,7 @@ subcollection: containers
 
     * [Changelog for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1519)
 
-* [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+* [Deprecated Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
 
     * [Change log for worker node fix pack 1.20.15_1569, released 31 January 2022](/docs/containers?topic=containers-changelog#12015_1569)
 

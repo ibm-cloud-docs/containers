@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-04"
+lastupdated: "2022-02-09"
 
 keywords: kubernetes, release notes
 
@@ -27,8 +27,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## February 2022
 {: #release-feb-2022}
 
+### 9 February 2022
+{: #9feb2022}
+{: release-note}
+
+
+
+New! Kubernetes 1.23
+:   You can create or [update clusters to Kubernetes version 1.23](/docs/containers?topic=containers-cs_versions#cs_v123). With Kubernetes 1.23, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. 
+
+Deprecated and unsupported Kubernetes versions
+:   With the release of Kubernetes 1.23, clusters that run version 1.20 remain deprecated, with a tentative unsupported date of May 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions#cs_v121) as soon as possible.
+
+
+
 
   
+
+
 ### 3 February 2022
 {: #3feb2022}
 {: release-note}
@@ -46,11 +62,9 @@ Istio add-on
 ### 31 January 2022
 {: #31jan2022}
 
-{: release-note}
-
 Version changelog
 :   Fix pack update.
-:   Kubernetes [1.22.6_1538](/docs/containers?topic=containers-changelog#1226_1538), [1.21.9_1548](/docs/containers?topic=containers-changelog#1219_1548), [1.20.15_1569](/docs/containers?topic=containers-changelog#12015_1569, [1.19.16_1576](/docs/containers?topic=containers-changelog#11916_1576).
+:   Kubernetes [1.22.6_1538](/docs/containers?topic=containers-changelog#1226_1538), [1.21.9_1548](/docs/containers?topic=containers-changelog#1219_1548), [1.20.15_1569](/docs/containers?topic=containers-changelog#12015_1569), [1.19.16_1576](/docs/containers?topic=containers-changelog#11916_1576).
 
 
 
