@@ -115,10 +115,10 @@ Using both {{site.data.keyword.openshiftlong_notm}} and Ubuntu {{site.data.keywo
         ```
         {: pre}
 
-2. Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is {[kubeversions]}.
-    -   **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v{[kubeversions]}/bin/darwin/amd64/kubectl](https://storage.googleapis.com/kubernetes-release/release/v{[kubeversions]}/bin/darwin/amd64/kubectl){: external}
-    -   **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v{[kubeversions]}/bin/linux/amd64/kubectl](https://storage.googleapis.com/kubernetes-release/release/v{[kubeversions]}/bin/linux/amd64/kubectl){: external}
-    -   **Windows**: Install the Kubernetes CLI in the same directory as the {{site.data.keyword.cloud_notm}} CLI. This setup saves you some file path changes when you run commands later. [https://storage.googleapis.com/kubernetes-release/release/v{[kubeversions]}/bin/windows/amd64/kubectl.exe](https://storage.googleapis.com/kubernetes-release/release/v{[kubeversions]}/bin/windows/amd64/kubectl.exe){: external}
+2. Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.21.6.
+    -   **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.21.6/bin/darwin/amd64/kubectl](https://storage.googleapis.com/kubernetes-release/release/v1.21.6/bin/darwin/amd64/kubectl){: external}
+    -   **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.21.6/bin/linux/amd64/kubectl](https://storage.googleapis.com/kubernetes-release/release/v1.21.6/bin/linux/amd64/kubectl){: external}
+    -   **Windows**: Install the Kubernetes CLI in the same directory as the {{site.data.keyword.cloud_notm}} CLI. This setup saves you some file path changes when you run commands later. [https://storage.googleapis.com/kubernetes-release/release/v1.21.6/bin/windows/amd64/kubectl.exe](https://storage.googleapis.com/kubernetes-release/release/v1.21.6/bin/windows/amd64/kubectl.exe){: external}
 
 3. If you use OS X or Linux, move the executable file to the `/usr/local/bin` directory.
     ```sh
@@ -186,7 +186,7 @@ Before you begin, [install Docker for Mac](https://docs.docker.com/docker-for-ma
 You can use the commands that are provided with the Kubernetes CLI to manage clusters in {{site.data.keyword.cloud_notm}}.
 {: shortdesc}
 
-All `kubectl` commands that are available in Kubernetes {[kubeversions]} are supported for use with clusters in {{site.data.keyword.cloud_notm}}. After you create a cluster, set the context for your local CLI to that cluster with an environment variable. Then, you can run the Kubernetes `kubectl` commands to work with your cluster in {{site.data.keyword.cloud_notm}}.
+All `kubectl` commands that are available in Kubernetes 1.21.6 are supported for use with clusters in {{site.data.keyword.cloud_notm}}. After you create a cluster, set the context for your local CLI to that cluster with an environment variable. Then, you can run the Kubernetes `kubectl` commands to work with your cluster in {{site.data.keyword.cloud_notm}}.
 
 Before you can run `kubectl` commands:
 * [Install the required CLIs](#cs_cli_install).
@@ -384,7 +384,7 @@ Update the CLIs regularly to use new features.
 This task includes the information for updating the following CLIs:
 - {{site.data.keyword.cloud_notm}} CLI version 0.8.0 or later
 - {{site.data.keyword.containerlong_notm}} plug-in
-- Kubernetes CLI version {[kubeversions]} or later
+- Kubernetes CLI version 1.21.6 or later
 - {{site.data.keyword.registrylong_notm}} plug-in
 - {{site.data.keyword.containerlong_notm}} observability plug-in
 

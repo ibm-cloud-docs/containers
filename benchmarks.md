@@ -410,16 +410,16 @@ Review the following explanations and possible remediation actions that you can 
 | 1.2.1 | IKS utilizes RBAC for cluster protection, but allows anonymous discovery, which is considered reasonable per [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/). |
 | 1.2.10 | IKS does not enable the [*EventRateLimit*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit) admission controller since it is a Kubernetes alpha feature. |
 | 1.2.12 | IKS does not enable the [*AlwaysPullImages*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages) admission controller since it overrides a container's *imagePullPolicy* and may impact performance. |
-| 1.2.22 | IKS can optionally [enable Kubernetes API server auditing](https://cloud.ibm.com/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 1.2.23 | IKS can optionally [enable Kubernetes API server auditing](https://cloud.ibm.com/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 1.2.24 | IKS can optionally [enable Kubernetes API server auditing](https://cloud.ibm.com/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 1.2.25 | IKS can optionally [enable Kubernetes API server auditing](https://cloud.ibm.com/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 1.2.33 | IKS can optionally [enable a Kubernetes Key Management Service (KMS) provider](https://cloud.ibm.com/docs/containers?topic=containers-encryption#kms). |
-| 1.2.34 | IKS can optionally [enable a Kubernetes Key Management Service (KMS) provider](https://cloud.ibm.com/docs/containers?topic=containers-encryption#kms). |
+| 1.2.22 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
+| 1.2.23 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
+| 1.2.24 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
+| 1.2.25 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
+| 1.2.33 | IKS can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
+| 1.2.34 | IKS can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
 | 1.3.6 | IKS rotates certificates on every worker node reload or update. |
-| 3.2.1 | IKS can optionally [enable Kubernetes API server auditing](https://cloud.ibm.com/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 3.2.2 | IKS can optionally [enable Kubernetes API server auditing](https://cloud.ibm.com/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 4.2.6 | IKS does not protect kernel defaults in order to allow customers to [tune kernel parameters](https://cloud.ibm.com/docs/containers?topic=containers-kernel). |
+| 3.2.1 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
+| 3.2.2 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
+| 4.2.6 | IKS does not protect kernel defaults in order to allow customers to [tune kernel parameters](/docs/containers?topic=containers-kernel). |
 | 4.2.8 | IKS ensures that the hostname matches the name issued by the infrastructure. |
 | 4.2.11 | IKS rotates certificates on every worker node reload or update. |
 | 4.2.12 | IKS rotates certificates on every worker node reload or update. |
@@ -427,18 +427,18 @@ Review the following explanations and possible remediation actions that you can 
 | 5.1.3 | IKS deploys some system components that could have their Kubernetes resource access further restricted. |
 | 5.1.5 | IKS does not set [*automountServiceAccountToken: false*](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server) for each default service account. |
 | 5.1.6 | IKS deploys some system components that could set [*automountServiceAccountToken: false*](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server). |
-| 5.2.1 | IKS can optionally [configure pod security policies](https://cloud.ibm.com/docs/containers?topic=containers-psp). |
-| 5.2.2 | IKS can optionally [configure pod security policies](https://cloud.ibm.com/docs/containers?topic=containers-psp). |
-| 5.2.3 | IKS can optionally [configure pod security policies](https://cloud.ibm.com/docs/containers?topic=containers-psp). |
-| 5.2.4 | IKS can optionally [configure pod security policies](https://cloud.ibm.com/docs/containers?topic=containers-psp). |
-| 5.2.5 | IKS can optionally [configure pod security policies](https://cloud.ibm.com/docs/containers?topic=containers-psp). |
-| 5.2.6 | IKS can optionally [configure pod security policies](https://cloud.ibm.com/docs/containers?topic=containers-psp). |
-| 5.2.7 | IKS can optionally [configure pod security policies](https://cloud.ibm.com/docs/containers?topic=containers-psp). |
-| 5.2.8 | IKS can optionally [configure pod security policies](https://cloud.ibm.com/docs/containers?topic=containers-psp). |
-| 5.2.9 | IKS can optionally [configure pod security policies](https://cloud.ibm.com/docs/containers?topic=containers-psp). |
-| 5.3.2 | IKS has a set of [default Calico and Kubernetes network policies defined](https://cloud.ibm.com/docs/containers?topic=containers-network_policies#default_policy) and [additional network policies can optionally be added](https://cloud.ibm.com/docs/containers?topic=containers-network_policies#adding_network_policies). |
-| 5.4.2 | IKS can optionally [enable a Kubernetes Key Management Service (KMS) provider](https://cloud.ibm.com/docs/containers?topic=containers-encryption#kms). |
-| 5.5.1 | IKS can optionally [enable image security enforcement](https://cloud.ibm.com/docs/containers?topic=containers-images#portieris-image-sec). |
+| 5.2.1 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.2 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.3 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.4 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.5 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.6 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.7 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.8 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.9 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.3.2 | IKS has a set of [default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy) and [additional network policies can optionally be added](/docs/containers?topic=containers-network_policies#adding_network_policies). |
+| 5.4.2 | IKS can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
+| 5.5.1 | IKS can optionally [enable image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec). |
 | 5.6.2 | IKS does not annotate all pods with [seccomp profiles](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp). |
 | 5.6.3 | IKS deploys some system components that do not set a [pod or container *securityContext*](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/). |
 | 5.6.4 | IKS deploys some Kubernetes resources to the default names. |

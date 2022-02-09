@@ -395,8 +395,8 @@ The following instructions require public network access in your cluster to conn
     ```sh
     {
     "major": "1",
-    "minor": "{[kubeversions]}",
-    "gitVersion": "v{[kubeversions]}+IKS",
+    "minor": "1.21.6",
+    "gitVersion": "v1.21.6+IKS",
     "gitCommit": "c35166bd86eaa91d17af1c08289ffeab3e71e11e",
     "gitTreeState": "clean",
     "buildDate": "2019-03-21T10:08:03Z",
