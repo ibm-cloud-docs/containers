@@ -3702,6 +3702,12 @@ subcollection: containers
 
 * [Preparing to update](/docs/containers?topic=containers-cs_versions#prep-up)
 
+* [Version 1.23](/docs/containers?topic=containers-cs_versions#cs_v123)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions#update-before-master)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions#123_after)
+
 * [Version 1.22](/docs/containers?topic=containers-cs_versions#cs_v122)
 
     * [Update before master](/docs/containers?topic=containers-cs_versions#122_before)
@@ -3714,7 +3720,7 @@ subcollection: containers
 
     * [Update after master](/docs/containers?topic=containers-cs_versions#121_after)
 
-* [Version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120)
+* [Deprecated: Version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120)
 
     * [Update before master](/docs/containers?topic=containers-cs_versions#120_before)
 
@@ -3846,7 +3852,7 @@ subcollection: containers
 
     * [Changelog for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1519)
 
-* [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+* [Deprecated Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
 
     * [Change log for worker node fix pack 1.20.15_1569, released 31 January 2022](/docs/containers?topic=containers-changelog#12015_1569)
 

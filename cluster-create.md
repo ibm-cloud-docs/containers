@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-07"
+lastupdated: "2022-02-09"
 
 keywords: kubernetes, clusters, worker nodes, worker pools
 
@@ -64,7 +64,7 @@ ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor mb2c.
 
 Classic cluster with a gateway enabled.
 ```sh
-ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --gateway-enabled --version 1.22.4 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --public-service-endpoint --private-service-endpoint
+ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --gateway-enabled --version 1.23.3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --public-service-endpoint --private-service-endpoint
 ```
 {: pre}
 
@@ -185,7 +185,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
 2. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 3. Configure your cluster environment.
     1. Select the **Standard** cluster plan.
-    2. From the Kubernetes drop-down list, select the version that you want to use in your cluster, such as 1.21.6.
+    2. From the Kubernetes drop-down list, select the version that you want to use in your cluster, such as {[kubeversions]}.
     4. Select **Classic** infrastructure.
 4. Configure the **Location** details for your cluster.
     1. Select the **Resource group** that you want to create your cluster in.
@@ -382,7 +382,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
     When the provisioning of your Kubernetes master is completed, the **State** of your cluster changes to `normal`. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
     ```sh
     NAME         ID                         State      Created          Workers    Zone      Version     Resource Group Name   Provider
-    mycluster    blrs3b1d0p0p2f7haq0g       normal   20170201162433   3          dal10     1.21.6      Default             classic
+    mycluster    blrs3b1d0p0p2f7haq0g       normal   20170201162433   3          dal10     {[kubeversions]}      Default             classic
     ```
     {: screen}
 
@@ -398,7 +398,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
     When the worker nodes are ready, the worker node state changes to **normal** and the status changes to **Ready**. When the node status is **Ready**, you can then access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process. Note that if you created your cluster with a private VLAN only, no **Public IP** addresses are assigned to your worker nodes.
     ```sh
     ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.21.6
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   {[kubeversions]}
     ```
     {: screen}
 
@@ -485,7 +485,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
 
 8. Create your gateway-enabled cluster.
     ```sh
-    ibmcloud ks cluster create classic --zone <single_zone> --gateway-enabled --flavor <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --version 1.22.4 --private-service-endpoint --public-service-endpoint [--pod-subnet] [--service-subnet] [--disable-disk-encrypt]
+    ibmcloud ks cluster create classic --zone <single_zone> --gateway-enabled --flavor <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --version 1.23.3 --private-service-endpoint --public-service-endpoint [--pod-subnet] [--service-subnet] [--disable-disk-encrypt]
     ```
     {: pre}
 
@@ -550,7 +550,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
     When the provisioning of your Kubernetes master is completed, the **State** of your cluster changes to `normal`. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
     ```sh
     NAME          ID                                 State    Created         Workers   Location          Version                   Resource Group Name   Provider
-    mycluster     blbfcbhd0p6lse558lgg               normal   1 month ago     1         Dallas            1.21.6_1515               default               classic
+    mycluster     blbfcbhd0p6lse558lgg               normal   1 month ago     1         Dallas            {[kubeversions]}_1515               default               classic
     ```
     {: screen}
 
@@ -566,11 +566,11 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
     In the output, verify that the number of compute worker nodes that you specified in the `--workers` flag and two gateway worker nodes are provisioned. In the following example output, three compute and two gateway worker nodes are provisioned.
     ```sh
     ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.21.6
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.21.6
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000003d6   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.21.6
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.21.6
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000003d6   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.21.6
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   {[kubeversions]}
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   {[kubeversions]}
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000003d6   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   {[kubeversions]}
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   {[kubeversions]}
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000003d6   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   {[kubeversions]}
     ```
     {: screen}
 
@@ -761,7 +761,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     When the provisioning of your Kubernetes master is completed, the state of your cluster changes to **normal**. After the Kubernetes master is ready, your worker nodes are set up.
     ```sh
     NAME         ID                                   State      Created          Workers    Zone      Version     Resource Group Name   Provider
-    mycluster    aaf97a8843a29941b49a598f516da72101   normal   20170201162433   3          Dallas     1.21.6      Default               vpc-gen2
+    mycluster    aaf97a8843a29941b49a598f516da72101   normal   20170201162433   3          Dallas     {[kubeversions]}      Default               vpc-gen2
     ```
     {: screen}
 
@@ -777,7 +777,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     When the worker nodes are ready, the worker node **State** changes to `normal` and the **Status** changes to `Ready`. When the node **Status** changes to `Ready`, you can access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
     ```sh
     ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   b3c.4x16.encrypted  normal   Ready    dal10   1.21.6
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   b3c.4x16.encrypted  normal   Ready    dal10   {[kubeversions]}
     ```
     {: screen}
 

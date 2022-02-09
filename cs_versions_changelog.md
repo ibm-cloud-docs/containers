@@ -726,10 +726,12 @@ The following table shows the changes that are in the master fix pack patch upda
 
 
 
-## Version 1.20 changelog
+## Deprecated Version 1.20 changelog
 {: #120_changelog}
 
-Review the version 1.20 changelog.
+Kubernetes version 1.20 is deprecated, with a tentative unsupported date of May 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions#cs_v121) as soon as possible.
+{: deprecated}
+{: deprecated}
 {: shortdesc}
 
 ### Change log for worker node fix pack 1.20.15_1569, released 31 January 2022

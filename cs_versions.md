@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-03"
+lastupdated: "2022-02-09"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -21,9 +21,10 @@ Review information about supported Kubernetes versions for {{site.data.keyword.c
 {: shortdesc}
 
 For more information about the Kubernetes project versions, see the Kubernetes changelog.
-* [Kubernetes 1.22 release notes](https://kubernetes.io/releases/notes/.){: external}
+* [Kubernetes 1.23 release notes](https://kubernetes.io/releases/notes/.){: external}
+* [Kubernetes 1.22 release notes](https://v1-22.docs.kubernetes.io/releases/notes/){: external}
 * [Kubernetes 1.21 release notes](https://v1-21.docs.kubernetes.io/releases/notes/){: external}
-* [Kubernetes 1.20 release notes](https://v1-20.docs.kubernetes.io/docs/setup/release/notes/){: external}
+* **Deprecated**: [Kubernetes 1.20 release notes](https://v1-20.docs.kubernetes.io/docs/setup/release/notes/){: external}
 * **Deprecated**: [Kubernetes 1.19 release notes](https://v1-19.docs.kubernetes.io/docs/setup/release/notes/){: external}
 * [Kubernetes changelogs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG){: external}
 
@@ -42,7 +43,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch. As 
 
 Major and minor updates (1.x)
 :   First, [update your master node](/docs/containers?topic=containers-update#master) and then [update the worker nodes](/docs/containers?topic=containers-update#worker_node).
-:   You can't update a Kubernetes master two or more minor versions ahead (n+2). For example, if your current master is version 1.19 and you want to update to 1.21, you must update to 1.20 first.
+:   You can't update a Kubernetes master two or more minor versions ahead (n+2). For example, if your current master is version 1.20 and you want to update to 1.22, you must update to 1.21 first.
 :   Worker nodes can't run a Kubernetes major or minor version that is greater than the masters. Additionally, your worker nodes can be only up to two versions behind the master version (`n-2`).
 :   If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](/docs/containers?topic=containers-cs_cli_install#kubectl) up-to-date.
 
@@ -65,12 +66,12 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-* Latest: 1.22.4
+* Latest: 1.23.3
 * Default: 1.21.6
-* Other: 1.22.3
+* Other: 1.22.6
 
 **Deprecated and unsupported Kubernetes versions**:
-* Deprecated: 1.19
+* Deprecated: 1.20, 1.19
 * Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18
 
 
@@ -101,9 +102,10 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}}<br>release date | {{site.data.keyword.containerlong_notm}}<br>unsupported date |
 |------|------|----------|----------|
+| [1.23](#cs_v123) | Yes | 09 Feb 2022 | April 2023 `†` |
 | [1.22](#cs_v122) | Yes | 29 Sep 2021 | Nov 2022 `†` |
 | [1.21](#cs_v121) | Yes | 09 Jun 2021 | Aug 2022 `†` |
-| [1.20](#cs_v120) | Yes | 16 Feb 2021 | May 2022 `†` |
+| [1.20](#cs_v120) | Deprecated | 16 Feb 2021 | May 2022 `†` |
 | [1.19](#cs_v119) | Deprecated | 13 Oct 2020 | 14 Mar 2022 `†` |
 {: caption="Release history for {{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
@@ -133,7 +135,7 @@ Review the descriptions of each phase of a version's lifecycle.
 7. The version is unsupported. Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support.
 8. The cluster master runs two or more versions behind the oldest supported version. You can't update the cluster. Delete the cluster, and create a new one.
 
-If you wait until your cluster is two or more minor versions behind the oldest supported version, you can't update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster. To avoid this issue, update deprecated clusters to a supported version that is one or two behind the current version, such as 1.20 or 1.21 and then update to the latest version, 1.22. If the worker nodes run a version two or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support.<br><br>You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}.
+If you wait until your cluster is two or more minor versions behind the oldest supported version, you can't update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster. To avoid this issue, update deprecated clusters to a supported version that is one or two behind the current version, such as 1.21 or 1.22 and then update to the latest version, 1.23. If the worker nodes run a version two or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support.<br><br>You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}.
 {: important}
 
 
@@ -144,13 +146,45 @@ If you wait until your cluster is two or more minor versions behind the oldest s
 This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version. For a complete list of changes, review the [community Kubernetes changelogs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG), [IBM version changelogs](/docs/containers?topic=containers-changelog){: external}, and [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
 
+-  Version 1.23 [preparation actions](#cs_v123)
 -  Version 1.22 [preparation actions](#cs_v122).
 -  Version 1.21 [preparation actions](#cs_v121).
--  Version 1.20 [preparation actions](#cs_v120).
+-  **Deprecated**: Version 1.20 [preparation actions](#cs_v120).
 -  **Deprecated**: Version 1.19 [preparation actions](#cs_v119).
 -  [Archive](#k8s_version_archive) of unsupported versions.
 
 
+## Version 1.23
+{: #cs_v123}
+
+
+
+
+{{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.23 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
+
+Review changes that you might need to make when you update from the previous Kubernetes version to 1.23.
+{: shortdesc}
+
+**Warning:** Cluster autoscaler add-on does not yet support version 1.23. Do not update to version 1.23 if this add-on is installed on your cluster.
+
+### Update before master
+
+| Type | Description|
+| --- | --- |
+| Kubernetes service IP advertisement over BGP | If you are using Calico's [Kubernetes Service IP Advertisement over BGP feature](https://www.tigera.io/blog/advertising-kubernetes-service-ips-with-calico-and-bgp/){: external}, you need to [add the service IP CIDRs that you want to advertise to the default BGPConfiguration resource](https://projectcalico.docs.tigera.io/archive/v3.21/reference/resources/bgpconfig){: external}. In previous releases, the entire service IP range was advertised by setting an environment variable in the `calico-node` daemonset. |
+
+### Update after master
+{: #123_after}
+
+The following table shows the actions that you must take after you update the Kubernetes master.
+{: shortdesc}
+
+| Type | Description|
+| --- | --- |
+| Operator Lifecycle Manager (OLM) install no longer managed | OLM is no longer installed nor managed by IBM. Existing installs are left as-is and no longer managed after the update. If you are using the OLM components then you must manage updates. If unused, you may uninstall the OLM components. Please refer to the [opensource documentation](https://olm.operatorframework.io/){: external} for information on available resources including how to install a new instance of OLM on your cluster. |
+| Recreate volume snapshots | Volume snapshots must be recreated after the update. Run `kubectl get volumesnapshots -A` to get a list of volume snapshots. |
+{: caption="Changes to make after you update the master to Kubernetes 1.23" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 ## Version 1.22
 {: #cs_v122}
@@ -250,7 +284,7 @@ The following table shows the actions that you must take after you update the Ku
 
 
 
-## Version 1.20
+## Deprecated: Version 1.20
 {: #cs_v120}
 
 ![This badge indicates Kubernetes version 1.20 certification for {{site.data.keyword.containerlong_notm}}](images/certified_kubernetes_1x20.svg)
@@ -258,6 +292,7 @@ The following table shows the actions that you must take after you update the Ku
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.20 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.20.
+{: deprecated}
 {: shortdesc}
 
 ### Update before master
@@ -461,4 +496,3 @@ As of 4 April 2018, {{site.data.keyword.containerlong_notm}} clusters that run [
 {: shortdesc}
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
-
