@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-02-09"
 
-keywords: kubernetes, lb2.0, nlb
+keywords: kubernetes, lb2.0, nlb, app protocol, application protocol
 
 subcollection: containers
 
