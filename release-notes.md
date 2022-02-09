@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-04"
+lastupdated: "2022-02-09"
 
 keywords: kubernetes, release notes
 
@@ -26,6 +26,10 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## February 2022
 {: #release-feb-2022}
+
+### 9 February 2022
+{: #9feb2022}
+{: release-note}
 
 
   
