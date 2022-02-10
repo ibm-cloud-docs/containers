@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-02-09"
+lastupdated: "2022-02-10"
 
 keywords: containers
 subcollection: containers
@@ -1409,6 +1409,10 @@ subcollection: containers
 * [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
 
 * [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics)
+
+    * [Modify the `metrics-server-config` config map](/docs/containers?topic=containers-kernel#metrics-server-config)
+
+    * [Determining which resources to tune](/docs/containers?topic=containers-kernel#determine-resources)
 
 * [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
 
@@ -5772,6 +5776,8 @@ subcollection: containers
 * [Links to additional information](/docs/containers?topic=containers-ts-kubectl-exec-timeout#additional-link-info)
 
 [Why does my cluster master status say it is approaching its resource limit?](/docs/containers?topic=containers-master_resource_limit#master_resource_limit)
+
+[Debugging the `metrics-server`](/docs/containers?topic=containers-debug_metrics_server#debug_metrics_server)
 
 
 ### Worker nodes
