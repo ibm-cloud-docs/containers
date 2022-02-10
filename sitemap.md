@@ -188,6 +188,8 @@ subcollection: containers
 
 * [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
 
+    * [10 February 2022](/docs/containers?topic=containers-iks-release#10feb2022)
+
     * [9 February 2022](/docs/containers?topic=containers-iks-release#9feb2022)
 
     * [3 February 2022](/docs/containers?topic=containers-iks-release#3feb2022)
@@ -4479,6 +4481,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on changelog](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_981, released on 10 Febuary 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_981)
 
     * [Version 2.0.0_923, released on 26 January 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_923)
 
