@@ -28,19 +28,26 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #release-feb-2022}
 
 
-
 ### 10 February 2022
 {: #10feb2022}
 {: release-note}
 
+
+Certified Kubernetes
+:   Version [1.23](/docs/containers?topic=containers-cs_versions#cs_v123) release is now certified.
+
+
+  
 ALB OAuth Proxy add-on
 :   Versions 2.0.0_981 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) is released.
+
 
 
 
 ### 9 February 2022
 {: #9feb2022}
 {: release-note}
+
 
 
 
