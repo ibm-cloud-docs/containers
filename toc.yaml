@@ -327,6 +327,7 @@ toc:
                   - ts-cluster-access-resources.md
                   - ts-kubectl-exec-timeout.md
                   - ts-master-limits.md
+                  - ts-metrics-server.md
               - topicgroup:
                   label: Worker nodes
                   topics:

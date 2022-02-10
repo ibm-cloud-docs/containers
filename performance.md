@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-02-10"
 
 keywords: kubernetes, kernel
 
@@ -185,91 +185,204 @@ Before you begin, ensure you have the [**Manager** {{site.data.keyword.cloud_not
 ## Adjusting cluster metrics provider resources
 {: #metrics}
 
-Your cluster's metrics provider configurations are optimized for clusters with 30 or less pods per worker node. If your cluster has more pods per worker node, the metrics provider `metrics-server` container for the pod might restart frequently with an error message such as `OOMKilled`.
+Your cluster has a metrics service provided by the `metrics-server` deployment in the `kube-system` namespace.  The `metrics-server` resource requests are based on the number of nodes in the cluster and are optimized for clusters with 30 or less pods per worker node.  The metric service matches the memory and CPU limits of the resource requests. Containers can be "out-of-memory killed" if the memory requests are too low and can respond very slowly. They can also fail liveness and readiness probes, due to CPU throttling if the CPU requests are too low.
 {: shortdesc}
 
-The metrics provider pod also has a `nanny` container that scales the `metrics-server` container's resource requests and limits in response to the number of worker nodes in the cluster. You can change the default resources by editing the metrics provider's configmap.
+Memory use is driven by the number of pods in the cluster. CPU use is driven by the number of requests for metrics (HPAs, `kubectl top nodes / pods`, ...) and by API discovery requests. The `metrics-server` provides a Kubernetes API, so that clients such as `kubectl` that use API discovery place some load on the `metrics-server` even if they don't use metrics.
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+The following symptoms might indicate a need to adjust the `metrics-server` resources:
 
-1. Open the `metrics-server` configmap YAML.
+- The `metrics-server` is restarting frequently.
+
+- Deleting a namespace results in the namespace that is stuck in a `Terminating` state and `kubectl describe namespace` includes a condition reporting a metrics API discovery error.
+
+- `kubectl top pods`, `kubectl top nodes`, other `kubectl` commands, or applications that use the Kubernetes API to log Kubernetes errors such as:
+
     ```sh
-    kubectl edit configmap metrics-server-config -n kube-system
+    The server is currently unable to handle the request (get pods.metrics.k8s.io)
     ```
-    {: pre}
-
-    Example output
-
-    ```yaml
-    apiVersion: v1
-    data:
-      NannyConfiguration: |-
-        apiVersion: nannyconfig/v1alpha1
-        kind: NannyConfiguration
-    kind: ConfigMap
-    metadata:
-      annotations:
-        armada-service: cruiser-kube-addons
-        version: --
-      creationTimestamp: 2018-10-09T20:15:32Z
-      labels:
-        addonmanager.kubernetes.io/mode: EnsureExists
-        kubernetes.io/cluster-service: "true"
-      name: metrics-server-config
-      namespace: kube-system
-      resourceVersion: "1424"
-      selfLink: /api/v1/namespaces/kube-system/configmaps/metrics-server-config
-      uid: 11a1aaaa-bb22-33c3-4444-5e55e555e555
+    {: screen}
+    
+    ```sh
+    Discovery failed for some groups, 1 failing: unable to retrieve the complete list of server APIs: metrics.k8s.io/v1beta1: the server is currently unable to handle the request
     ```
     {: screen}
 
-2. Add the `memoryPerNode` field to the configmap in the `data.NannyConfiguration` section. The default value is set to `4Mi`.
-    ```yaml
-    apiVersion: v1
-    data:
-      NannyConfiguration: |-
-        apiVersion: nannyconfig/v1alpha1
-        kind: NannyConfiguration
-        memoryPerNode: 5Mi
-    kind: ConfigMap
-    ...
-    ```
-    {: codeblock}
+- HorizontalPodAutoscalers (HPAs) do not scale deployments.
 
-3. Save and close the file. Your changes are applied automatically.
+- Running `kubectl get apiservices v1beta1.metrics.k8s.io` results in a status like:
 
-4. Monitor the metrics provider pods.
-    * If containers continue to be restarted due to an `OOMKilled` error message, repeat these steps and increase the `memoryPerNode` size until the pod is stable. If the containers are now stable but metrics are often not available or are incomplete, continue to the next step to tune the `cpuPerNode` setting.
-    * If you see an error message similar to the following, or if the horizontal pod autoscaler is not scaling correctly, continue to the next step to tune the `cpuPerNode` setting.
-    ```
-    unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server is currently unable to handle the request (get pods.metrics.k8s.io)
+    ```sh
+    NAME                     SERVICE                      AVAILABLE                      AGE
+    v1beta1.metrics.k8s.io   kube-system/metrics-server   False (FailedDiscoveryCheck)   139d
     ```
     {: screen}
+    
+### Modify the `metrics-server-config` config map
+{: #metrics-server-config}
 
-5. Open the `metrics-server` configmap YAML.
-    ```sh
-    kubectl edit configmap metrics-server-config -n kube-system
-    ```
-    {: pre}
+Both CPU and memory have tunable "base" and "per node" settings used to compute a total request.
+{: shortdesc}
+- `baseCPU`
+- `cpuPerNode`
+- `baseMemory`
+- `memoryPerNode`
+    
+Where:
+```sh
+cpuRequest = baseCPU + cpuPerNode * number_of_nodes
+memoryRequest = baseMemory + memoryPerNode * number_of_nodes
+```    
+{: pre}
 
-6. Add the `cpuPerNode` field to the configmap in the `data.NannyConfiguration` section.
-    ```yaml
-    apiVersion: v1
-    data:
-      NannyConfiguration: |-
-        apiVersion: nannyconfig/v1alpha1
-        kind: NannyConfiguration
-        cpuPerNode: 5m
-    kind: ConfigMap
-    ...
-    ```
-    {: codeblock}
+The number of nodes in these calculations comes from a set of "bucket sizes" and has a minimum size of 16 nodes.
+{: note}
 
-7. Monitor the metrics provider pods for at least an hour. It can take several minutes for the metrics server to start collecting metrics.
-    * If metrics continue to be unavailable or incomplete, repeat these steps and increase the `cpuPerNode` size until the metrics are stable. If the load on a specific worker node is very high, the metrics provider might timeout waiting for metrics from that worker node, and continue to report unknown values for that worker node. Note that due to the timing of requests relative to other processing that occur in the `metrics-server`, you might not be able to get metrics for all your pods all the time.
+CPU is requested in cores, with value such as `1` or fractional values such as `100m` (100 millicores).
 
-Want to tune more settings? Check out the [Kubernetes Add-on resizer configuration docs](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration){: external} for more ideas.
-{: tip}
+Memory is requested in bytes with an optional suffix of:
+- base 2 (1Ki = 1024): `Ki` (kilobytes), `Mi` (megabytes), `Gi` (gigabytes)
+- metric (1k = 1000): `k`, `M`, `G`
+
+If the number of nodes in a cluster is expected to grow (or just change) over time, you might want to adjust the "per node" setting. If the number of nodes is static, adjust the "base" setting. In the end, the total CPU and memory values are set in the `metrics-server` deployment resource requests.
+
+You can change the default resources by editing the metrics provider's configmap. Do not modify the resource requests or limits directly in the `metrics-server` deployment, the values are overwritten by the `metrics-server-nanny` container.
+
+The default `metrics-server-config` configmap is:
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    addonmanager.kubernetes.io/mode: EnsureExists
+    kubernetes.io/cluster-service: "true"
+  name: metrics-server-config
+  namespace: kube-system
+data:
+  NannyConfiguration: |-
+    apiVersion: nannyconfig/v1alpha1
+    kind: NannyConfiguration
+```
+{: screen}
+
+This example shows a configmap with all values defined.
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    addonmanager.kubernetes.io/mode: EnsureExists
+    kubernetes.io/cluster-service: "true"
+  name: metrics-server-config
+  namespace: kube-system
+data:
+  NannyConfiguration: |-
+    apiVersion: nannyconfig/v1alpha1
+    kind: NannyConfiguration
+    baseCPU: 100m
+    cpuPerNode: 1m
+    baseMemory: 40Mi
+    memoryPerNode: 6Mi
+```
+{: screen}
+
+The default values are:
+```yaml
+baseCPU: 100m
+cpuPerNode: 1m
+baseMemory: 40Mi
+memoryPerNode: 6Mi
+```
+{: screen}
+
+#### Edit the configmap
+{: #edit-configmap}
+
+You can edit the configmap with the `kubectl edit` command:
+```sh
+kubectl edit cm metrics-server-config -n kube-system
+```
+{: pre}
+
+Add or edit the fields you want to change, then save the configmap and exit the editor.
+
+The {{site.data.keyword.cloud_notm}}-provided `metrics-server` monitors the configmap for changes and updates the deployment resource requests automatically. It can take up to 10 minutes for the `metrics-server` to detect the change and roll out a new set of pods based on the updated settings.
+
+#### Restore the default settings
+{: #restore-default}
+
+To restore the `metrics-server` to the default settings, delete the config map. It is recreated within a few minutes.
+```sh
+kubectl delete cm metrics-server-config -n kube-system
+```
+{: pre}
+
+### Determining which resources to tune
+{: #determine-resources}
+
+Use the `kubectl describe pod` command to get the pod definition, state information, and recent events:
+```sh
+kubectl get pod -n kube-system -l k8s-app=metrics-server
+NAME                             READY   STATUS    RESTARTS   AGE
+metrics-server-9fb4947d6-s6sgl   3/3     Running   0          2d4h
+
+kubectl describe pod -n kube-system metrics-server-9fb4947d6-s6sgl
+```
+{: pre}
+
+Example output
+```sh
+Containers:
+  metrics-server:
+    Container ID:  containerd://fe3d07c9a2541242d36da8097de3896f740c1363f6d2bfd01b8d96a641192b1b
+    Image:         registry.ng.bluemix.net/armada-master/metrics-server:v0.4.4
+    Image ID:      registry.ng.bluemix.net/armada-master/metrics-server@sha256:c2c63900d0e080c2413b5f35c5a59b5ed3b809099355728cf47527aa3f35477c
+    Port:          4443/TCP
+    Host Port:     0/TCP
+    Command:
+      /metrics-server
+      --metric-resolution=45s
+      --secure-port=4443
+      --tls-cert-file=/etc/metrics-server-certs/tls.crt
+      --tls-private-key-file=/etc/metrics-server-certs/tls.key
+    State:          Running
+      Started:      Fri, 10 Sep 2021 17:31:39 +0000
+    Last State:     Terminated
+      Reason:       OOMKilled
+      Exit Code:    137
+      Started:      Fri, 10 Sep 2021 05:59:51 +0000
+      Finished:     Fri, 10 Sep 2021 17:31:37 +0000
+    Ready:          True
+    Restart Count:  36
+```
+{: screen}
+
+If the `Last State` shows a `Reason` of `OOMKilled`, increase the memory requests in the `metrics-server-config` configmap.  Consider increasing the total CPU in 100 m increments or larger until the `metrics-server` is stable (runs for several hours or longer without being stopped due to out-of-memory).
+```sh
+    Last State:     Terminated
+      Reason:       OOMKilled
+      Exit Code:    137
+```
+{: screen}
+
+If the `Last state` shows a shows a `Reason` of `Error` and Events such as those in the following example, increase the memory requests in the `metrics-server-config` configmap.  Consider increasing the total memory in 100 Mi increments or larger until the metrics-server is stable (runs for several hours or longer without being stopped due to probe timeouts).
+```sh
+    Last State:     Terminated
+      Reason: Error
+      Exit Code: 137
+```
+{: screen}
+
+```sh
+Events:
+  Warning Unhealthy 46m (x5 over 80m) kubelet Liveness probe failed: Get "https://198.18.68.236:4443/livez": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+  Warning Unhealthy 26m (x65 over 89m) kubelet Liveness probe failed: Get "https://198.18.68.236:4443/livez": net/http: TLS handshake timeout
+  Warning Unhealthy 21m (x10 over 76m) kubelet Readiness probe failed: Get "https://198.18.68.236:4443/readyz": net/http: request canceled (Client.Timeout exceeded while awaiting headers)
+  Warning Unhealthy 115s (x93 over 90m) kubelet Readiness probe failed: Get "https://198.18.68.236:4443/readyz": net/http: TLS handshake timeout
+```
+{: screen}
+
+You might need to repeat this process a few times to reach a stable configuration, by first adjusting memory requests, and then adjusting CPU requests.
 
 
 
@@ -693,7 +806,3 @@ To disable the port map plug-in:
     kubectl rollout restart daemonset -n kube-system calico-node
     ```
     {: pre}
-
-
-
-

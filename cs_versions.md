@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-09"
+lastupdated: "2022-02-10"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -158,9 +158,10 @@ This information summarizes updates that are likely to have impact on deployed a
 {: #cs_v123}
 
 
-
-
+![This badge indicates Kubernetes version 1.23 certification for {{site.data.keyword.containerlong_notm}}](images/certified_kubernetes_1x23.svg)
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.23 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
+
+
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.23.
 {: shortdesc}

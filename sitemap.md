@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-02-09"
+lastupdated: "2022-02-10"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
+
+    * [10 February 2022](/docs/containers?topic=containers-iks-release#10feb2022)
 
     * [9 February 2022](/docs/containers?topic=containers-iks-release#9feb2022)
 
@@ -1409,6 +1411,10 @@ subcollection: containers
 * [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
 
 * [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics)
+
+    * [Modify the `metrics-server-config` config map](/docs/containers?topic=containers-kernel#metrics-server-config)
+
+    * [Determining which resources to tune](/docs/containers?topic=containers-kernel#determine-resources)
 
 * [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
 
@@ -2658,6 +2664,8 @@ subcollection: containers
 * [Customizing the Ingress class](/docs/containers?topic=containers-comm-ingress-annotations#-custom-ingress-class)
 
 * [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
+
+    * [Upgrading ALB OAuth Proxy add-on](/docs/containers?topic=containers-comm-ingress-annotations#upgrading-alb-oauth-proxy-add-on)
 
 * [Preserving the source IP address](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip)
 
@@ -3936,7 +3944,7 @@ subcollection: containers
 
     * [Changelog for fix pack 1.19.16_1576, released 31 January 2022](/docs/containers?topic=containers-changelog#11916_1576)
 
-    * [Changelog for fix pack 1.19.16_1575, released 26 January 2022](/docs/containers?topic=containers-changelog#11916_1575)
+    * [Changelog for master fix pack 1.19.16_1575, released 26 January 2022](/docs/containers?topic=containers-changelog#11916_1575)
 
     * [Changelog for worker node fix pack 1.19.16_1574, released 18 January 2022](/docs/containers?topic=containers-changelog#11916_1574)
 
@@ -4475,6 +4483,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on changelog](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_981, released on 10 Febuary 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_981)
 
     * [Version 2.0.0_923, released on 26 January 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_923)
 
@@ -5772,6 +5782,8 @@ subcollection: containers
 * [Links to additional information](/docs/containers?topic=containers-ts-kubectl-exec-timeout#additional-link-info)
 
 [Why does my cluster master status say it is approaching its resource limit?](/docs/containers?topic=containers-master_resource_limit#master_resource_limit)
+
+[Debugging the `metrics-server`](/docs/containers?topic=containers-debug_metrics_server#debug_metrics_server)
 
 
 ### Worker nodes
