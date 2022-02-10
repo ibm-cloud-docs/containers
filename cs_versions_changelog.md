@@ -43,17 +43,17 @@ Review the version 1.23 changelog.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.20.3 | v3.21.4 | For more information, see the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | v3.20.3 | v3.21.4 | For more information, see the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
 | Cluster health image | v1.2.21 | v1.3.0 | Added new health check for cluster autoscaler add-on. |
 | CoreDNS | 1.8.6 | 1.8.7 | See the [CoreDNS release notes](https://coredns.io/2021/12/09/coredns-1.8.7-release/){: external}. |
 | GPU device plug-in and installer | eefc4ae | 4a174aa | Updated image for [CVE-2020-26160](https://nvd.nist.gov/vuln/detail/CVE-2020-26160){: external} and [CVE-2021-3538](https://nvd.nist.gov/vuln/detail/CVE-2021-3538){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.22.6-1 | v1.23.3-4 | Updated to support the Kubernetes `1.23.3` release and to use `Go` version `1.17.6`.  Classic load balancers have been updated to improve availability during updates. In addition, creating a mixed protocol load balancer is not supported. |
 | Kubernetes (master) | v1.22.6 | v1.23.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.3){: external}. |
 | Kubernetes (worker node) | v1.22.6 | v1.23.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.2){: external}. |
-| Kubernetes configuration | N/A | N/A | Updated the [feature gate configuration](https://cloud.ibm.com/docs/containers?topic=containers-service-settings#feature-gates){: external}. |
+| Kubernetes configuration | N/A | N/A | Updated the [feature gate configuration](/docs/containers?topic=containers-service-settings#feature-gates){: external}. |
 | Kubernetes CSI snapshotter CRDs | v4.0.0 | v4.2.1 | See the [Kubernetes container storage interface (CSI) snapshotter release notes](https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v4.2.1){: external}. |
 | Kubernetes Dashboard | v2.3.1 | v2.4.0 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.4.0){: external}. |
-| Kubernetes Metrics Server | v0.5.2 | v0.6.0 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.6.0{: external}). |
+| Kubernetes Metrics Server | v0.5.2 | v0.6.0 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.6.0{: external}). |
 | Kubernetes NodeLocal DNS cache | 1.21.3 | 1.21.4 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.21.4){: external}. |
 | Operator Lifecycle Manager | 0.16.1-IKS-15 | None | Operator Lifecycle Manager is no longer installed nor managed by IBM. Existing installs are left as-is and no longer managed after an upgrade. |
 | Operator Lifecycle Manager Catalog | v1.15.3 | None | Operator Lifecycle Manager is no longer installed nor managed by IBM. Existing installs are left as-is and no longer managed after an upgrade. |
@@ -92,7 +92,7 @@ Review the version 1.22 changelog.
 | Konnectivity agent | v0.0.26_282_iks | v0.0.27_309_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.27).  Updated universal base image (UBI) to the `8.5-218` version to resolve CVEs. Updated to use `Go` version `1.17.5`. |
 | Konnectivity server | v0.0.26_282_iks | v0.0.27_309_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.27).  Updated universal base image (UBI) to the `8.5-218` version to resolve CVEs. Updated to use `Go` version `1.17.5`. |
 | Kubernetes | 1.22.4 | 1.22.6 | Changed the duration of worker node certificates from 3 years to 2 years. See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.6)
-| Kubernetes Metrics Server | v0.5.1 | v0.5.2 | Metrics server now dynamically reloads `NannyConfiguration` updates. See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.5.2). |
+| Kubernetes Metrics Server | v0.5.1 | v0.5.2 | Metrics server now dynamically reloads `NannyConfiguration` updates. See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.5.2). |
 | Kubernetes NodeLocal DNS cache | 1.21.1 | 1.21.3 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.21.3). |
 | Load balancer and load balancer monitor for IBM Cloud Provider | 1659 | 1747 | Updated the Alpine base image to the `3.15` version to resolve CVEs. Updated to use `Go` version `1.17.6`. |
 | Portieris admission controller | v0.12.1 | v0.12.2 | See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.12.2) |

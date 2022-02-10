@@ -65,7 +65,7 @@ Follow these steps to troubleshoot.
     ```
     {: pre}
 
-   If no pods are listed, there is likely a problem with an `admission-control` webhook. See [Why do cluster operations fail due to a broken webhook?](docs/containers?topic=containers-webhooks_update).
+   If no pods are listed, there is likely a problem with an `admission-control` webhook. See [Why do cluster operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update).
 
 2. Verify that the apiserver can connect to the `metrics-server`.
     ```sh
@@ -75,6 +75,6 @@ Follow these steps to troubleshoot.
 
   Replace `POD` with the pod name shown earlier. The content of any logs returned does not matter.
   
-  - If you get an error message that contains text such as `<workerIP>:10250: getsockopt: connection timed out`, see [`kubectl` commands time out](docs/containers?topic=containers-ts_clis#exec_logs_fail).
+  - If you get an error message that contains text such as `<workerIP>:10250: getsockopt: connection timed out`, see [`kubectl` commands time out](/docs/containers?topic=containers-ts_clis#exec_logs_fail).
   
-  - If the previous steps do not show a problem, adjust the resources for the `metrics-server`. See [Adjusting cluster metrics provider resources](docs/containers?topic=containers-kernel#metrics).
+  - If the previous steps do not show a problem, adjust the resources for the `metrics-server`. See [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics).
