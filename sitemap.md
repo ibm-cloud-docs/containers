@@ -2665,6 +2665,8 @@ subcollection: containers
 
 * [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
 
+    * [Upgrading ALB OAuth Proxy add-on](/docs/containers?topic=containers-comm-ingress-annotations#upgrading-alb-oauth-proxy-add-on)
+
 * [Preserving the source IP address](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip)
 
     * [Enabling the PROXY protocol in VPC clusters](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip_vpc)

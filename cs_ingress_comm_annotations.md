@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-02"
+lastupdated: "2022-02-10"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -18,6 +18,9 @@ subcollection: containers
 
 Modify default ALB settings and add annotations to your Ingress resources for ALBs that run the Kubernetes Ingress image.
 {: shortdesc}
+
+ALB OAuth Proxy add-on version 1.0.0 is deprecated and will become unsupported on 16 May 2022.
+{: important}
 
 From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains for all clusters in {{site.data.keyword.containerlong_notm}}. Review the following actions that you must make to your Ingress setup.
 {: important}
@@ -1136,6 +1139,32 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
 For the list of changes for each ALB OAuth Proxy add-on version, see the [{{site.data.keyword.cloud_notm}} ALB OAuth Proxy add-on changelog](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 {: tip}
 
+### Upgrading ALB OAuth Proxy add-on
+{: #upgrading-alb-oauth-proxy-add-on}
+
+To upgrade the ALB OAuth Proxy add-on, you must first disable the add-on, then re-enable the add-on and specify the desired version.
+{: shortdesc}
+
+The upgrade process is non-interruptive as the supervised OAuth2 Proxy instances remain on the cluster even when the add-on is disabled.
+{: note}
+
+1. Disable the add-on.
+    ```sh
+    ibmcloud ks cluster addon disable alb-oauth-proxy --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+1. List the available add-on versions and decide which version you want to use.
+    ```sh
+    ibmcloud ks cluster addon versions --addon alb-oauth-proxy
+    ```
+    {: pre}
+
+1. Enable the add-on and specify the `--version` option. If you don't specify a version, the default version is enabled.
+    ```sh
+    ibmcloud ks cluster addon enable alb-oauth-proxy --cluster <cluster_name_or_ID> [--version <version>]
+    ```
+    {: pre}
 
 
 ## Preserving the source IP address
@@ -1511,7 +1540,5 @@ Each ALB has NGINX worker processes that process the client connections and comm
 
 To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](/docs/containers?topic=containers-kernel). Worker nodes are automatically provisioned with optimized kernel tuning, so change these settings only if you have specific performance optimization requirements.
 {: shortdesc}
-
-
 
 
