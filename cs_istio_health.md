@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-02-11"
 
 keywords: kubernetes, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -37,9 +37,7 @@ To get started, set up logging for your cluster by following the steps in [Manag
 Gain operational visibility into the performance and health of your Istio-managed apps by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes to forward metrics to {{site.data.keyword.mon_full}}.
 {: shortdesc}
 
-The managed `istio` add-on installs Prometheus into your cluster. The `istio-mixer-telemetry` pods in your cluster are annotated with a Prometheus endpoint so that Prometheus can aggregate all telemetry data for your pods. When you deploy a monitoring agent to the worker nodes in your cluster, {{site.data.keyword.mon_short}} is already automatically enabled to detect and scrape the data from these Prometheus endpoints to display them in your {{site.data.keyword.cloud_notm}} monitoring dashboard.
-
-Because all the Prometheus work is done, all that is left for you to do is to deploy monitoring agents in your cluster.
+To deploy monitoring agents to your cluster, complete the following steps.
 
 1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observe/monitoring/create){: external}.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-04"
+lastupdated: "2022-02-11"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -251,9 +251,7 @@ After you finish testing your app and are ready to start directing live traffic 
 Use one of {{site.data.keyword.mon_short}}'s predefined Istio dashboards to monitor your BookInfo microservices.
 {: shortdesc}
 
-The managed `istio` add-on installs Prometheus into your cluster. The `istio-mixer-telemetry` pods in your cluster are annotated with a Prometheus endpoint so that Prometheus can aggregate all telemetry data for your pods. When you deploy a monitoring agent to the worker nodes in your cluster, {{site.data.keyword.mon_short}} is already automatically enabled to detect and scrape the data from these Prometheus endpoints to display them in your {{site.data.keyword.cloud_notm}} monitoring dashboard.
-
-Because all the Prometheus work is done, all that is left for you to do is to deploy monitoring agents in your cluster.
+To deploy monitoring agents to your cluster, complete the following steps.
 
 1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observe/monitoring/create){: external}.
 
