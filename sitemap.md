@@ -3239,7 +3239,7 @@ subcollection: containers
 
 * [ibmcloud ks logging](/docs/containers?topic=containers-icks_map#icks_map_logging)
 
-* [ibmcloud ks nlb-dns](/docs/containers?topic=containers-icks_map#ibmcloud-ks-nlb-dns)
+* [ibmcloud ks nlb-dns](/docs/containers?topic=containers-icks_map#icks_map_nlb-dns)
 
 * [ibmcloud ks webhook-create](/docs/containers?topic=containers-icks_map#icks_map_webhook-create)
 

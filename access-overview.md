@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-02-11"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -214,7 +214,7 @@ Resource group
 :   - Consider giving clusters unique names across resource groups and regions in your account to avoid naming conflicts. You can't rename a cluster.
     - You can assign users an access role to a resource group to grant permissions as described in the following scenarios. Note that unlike resource instances, you can't grant access to an individual instance within a resource group.
     - All {{site.data.keyword.cloud_notm}} IAM services in the resource group, including all clusters in {{site.data.keyword.containerlong_notm}} and images in {{site.data.keyword.registrylong_notm}}.</li>
-    - All instances within a service in the resource group, such as all the clusters in {{site.data.keyword.containerlong_notm}}.</li>
+    - All instances within a service in the resource group, such as all the clusters in {{site.data.keyword.containerlong_notm}}.
     - All instances within a region of a service in the resource group, such as all the clusters in the <strong>US South</strong> region of {{site.data.keyword.containerlong_notm}}.
 
 

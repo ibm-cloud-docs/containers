@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-02-11"
 
 keywords: kubernetes, deploy
 
@@ -383,6 +383,7 @@ For most services, add a selector to your service `.yaml` file so that it applie
 Sometimes, you don't want the service to use a label. For example, you might have an external database or want to point the service to another service in a different namespace within the cluster. When this happens, you have to manually add an endpoints object and link it to the service.
 
 
+
 ### How can I expose my services on the Internet?
 {: #services_expose_apps}
 
@@ -432,7 +433,7 @@ After you deploy your app, you can control who can access the app, and monitor t
 The account and cluster administrators can control access on many different levels: the cluster, Kubernetes namespace, pod, and container.
 {: shortdesc}
 
-With {{site.data.keyword.cloud_notm}} IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level.  You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](/docs/containers?topic=containers-users#users).
+With {{site.data.keyword.cloud_notm}} IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level. You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](/docs/containers?topic=containers-users#users).
 
 To control access at the pod level, you can configure [pod security policies (PSPs)](/docs/containers?topic=containers-psp).
 
