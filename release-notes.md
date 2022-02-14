@@ -37,6 +37,12 @@ Worker node fix pack
 
 
 
+{{site.data.keyword.cos_full_notm}} doc restructuring. 
+:   For more information, see [Storing data on {{site.data.keyword.cos_full_notm}}](/docs/openshift?topic=openshift-storage-cos-understand), [Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/openshift?topic=openshift-storage-cos-install), [Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/openshift?topic=openshift-storage-cos-vpc-ip), [Adding object storage to apps](/docs/openshift?topic=openshift-storage-cos-apps),, and [Storage class reference](/docs/openshift?topic=openshift-storage-cos-reference).
+
+
+
+
 ### 10 February 2022
 {: #10feb2022}
 {: release-note}
