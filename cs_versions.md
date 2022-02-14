@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-10"
+lastupdated: "2022-02-14"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -166,13 +166,17 @@ This information summarizes updates that are likely to have impact on deployed a
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.23.
 {: shortdesc}
 
-**Warning:** Cluster autoscaler add-on does not yet support version 1.23. Do not update to version 1.23 if this add-on is installed on your cluster.
+The cluster autoscaler add-on and the Istio add-on are not yet support version 1.23. Do not update to version 1.23 if you use these add-ons in your cluster. 
+{: important}
 
 ### Update before master
 
 | Type | Description|
 | --- | --- |
 | Kubernetes service IP advertisement over BGP | If you are using Calico's [Kubernetes Service IP Advertisement over BGP feature](https://www.tigera.io/blog/advertising-kubernetes-service-ips-with-calico-and-bgp/){: external}, you need to [add the service IP CIDRs that you want to advertise to the default BGPConfiguration resource](https://projectcalico.docs.tigera.io/archive/v3.21/reference/resources/bgpconfig){: external}. In previous releases, the entire service IP range was advertised by setting an environment variable in the `calico-node` daemonset. |
+{: caption="Changes to make after you update the master to Kubernetes 1.23" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+
 
 ### Update after master
 {: #123_after}
