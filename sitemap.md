@@ -2922,47 +2922,50 @@ subcollection: containers
 
     * [Cleaning up persistent storage](/docs/containers?topic=containers-vpc-block#storage_remove_block_vpc)
 
-[Storing data on {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#object_storage)
 
-* [Creating your object storage service instance](/docs/containers?topic=containers-object_storage#create_cos_service)
+### Storing data on IBM Cloud Object Storage
+{: #sitemap_storing_data_on_ibm_cloud_object_storage}
 
-* [Creating {{site.data.keyword.cos_full_notm}} service credentials](/docs/containers?topic=containers-object_storage#service_credentials)
 
-* [Creating a secret for the object storage service credentials](/docs/containers?topic=containers-object_storage#create_cos_secret)
+[Storing data on {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_understand#storage_cos_understand)
 
-* [Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-object_storage#install_cos)
+* [Creating your object storage service instance](/docs/containers?topic=containers-storage_cos_understand#create_cos_service)
 
-    * [Verifying your installation](/docs/containers?topic=containers-object_storage#cos-plugin)
+* [Creating {{site.data.keyword.cos_full_notm}} service credentials](/docs/containers?topic=containers-storage_cos_understand#service_credentials)
 
-    * [Updating the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin)
+* [Creating a secret for the object storage service credentials](/docs/containers?topic=containers-storage_cos_understand#create_cos_secret)
 
-    * [Removing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-object_storage#remove_cos_plugin)
+* [Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_understand#install_cos)
 
-* [Deciding on the object storage configuration](/docs/containers?topic=containers-object_storage#configure_cos)
+* [Verifying your installation](/docs/containers?topic=containers-storage_cos_understand#cos-plugin)
 
-* [VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#cos_auth_ip)
+* [Updating the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_understand#update_cos_plugin)
 
-* [Adding object storage to apps](/docs/containers?topic=containers-object_storage#add_cos)
+* [Removing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_understand#remove_cos_plugin)
 
-    * [Creating a deployment](/docs/containers?topic=containers-object_storage#create-cos-deployment-steps)
+* [Deciding on the object storage configuration](/docs/containers?topic=containers-storage_cos_understand#configure_cos)
 
-* [Using object storage in a stateful set](/docs/containers?topic=containers-object_storage#cos_statefulset)
+* [Limitations](/docs/containers?topic=containers-storage_cos_understand#cos_limitations)
 
-* [Backing up and restoring data](/docs/containers?topic=containers-object_storage#cos_backup_restore)
+[Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#storage_cos_install)
 
-* [Adding your {{site.data.keyword.cos_full_notm}} credentials to the default storage classes](/docs/containers?topic=containers-object_storage#storage_class_custom)
+[VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_vpc_ip#storage_cos_vpc_ip)
 
-* [Storage class reference](/docs/containers?topic=containers-object_storage#cos_storageclass_reference)
+[Adding object storage to apps](/docs/containers?topic=containers-storage_cos_apps#storage_cos_apps)
 
-    * [Standard](/docs/containers?topic=containers-object_storage#standard)
+* [Creating a deployment](/docs/containers?topic=containers-storage_cos_apps#create-cos-deployment-steps)
 
-    * [Vault](/docs/containers?topic=containers-object_storage#Vault)
+* [Using object storage in a stateful set](/docs/containers?topic=containers-storage_cos_apps#cos_statefulset)
 
-    * [Cold](/docs/containers?topic=containers-object_storage#cold)
+[Storage class reference](/docs/containers?topic=containers-storage_cos_reference#storage_cos_reference)
 
-    * [Flex](/docs/containers?topic=containers-object_storage#flex)
+* [Standard](/docs/containers?topic=containers-storage_cos_reference#standard)
 
-* [Limitations](/docs/containers?topic=containers-object_storage#cos_limitations)
+* [Vault](/docs/containers?topic=containers-storage_cos_reference#Vault)
+
+* [Cold](/docs/containers?topic=containers-storage_cos_reference#cold)
+
+* [Flex](/docs/containers?topic=containers-storage_cos_reference#flex)
 
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 
