@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-21"
+lastupdated: "2022-02-11"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -616,13 +616,13 @@ Verify your custom RBAC or synchronized IAM service access to RBAC roles in your
 {: #checking-rbac-ui}
 
 1. Log in to the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}.
-2. Click the cluster with the RBAC roles that you want to check.
-3. Click the **Kubernetes Dashboard**. 
+1. Click the cluster with the RBAC roles that you want to check.
+1. Click the **Kubernetes Dashboard**. 
 
     If you have a private network only cluster, you might not be able to open the dashboard unless you are on a VPN. See [Accessing clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se).
     {: note}
 
-4. From the **Cluster** section, review the **Cluster Role Bindings**, **Cluster Roles**, **Role Bindings**, and **Roles**.
+1. From the **Cluster** section, review the **Cluster Role Bindings**, **Cluster Roles**, **Role Bindings**, and **Roles**.
 
 #### Checking RBAC roles with the CLI
 {: #checking-rbac-cli}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-10"
+lastupdated: "2022-02-14"
 
 keywords: kubernetes, release notes
 
@@ -26,6 +26,23 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## February 2022
 {: #release-feb-2022}
+
+### 14 February 2022
+{: #14feb2022}
+{: release-note}
+
+Worker node fix pack
+:   Kubernetes [1.23.3_1519](/docs/containers?topic=containers-changelog#1233_1519), [1.22.6_1539](/docs/containers?topic=containers-changelog#1226_1539), [1.21.9_1549](/docs/containers?topic=containers-changelog#1219_1549), [1.20.15_1570](/docs/containers?topic=containers-changelog#12015_1570), and [1.19.16_1577](/docs/containers?topic=containers-changelog#11916_1577).
+
+
+
+
+{{site.data.keyword.cos_full_notm}} doc restructuring. 
+:   For more information, see [Storing data on {{site.data.keyword.cos_full_notm}}](/docs/openshift?topic=openshift-storage-cos-understand), [Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/openshift?topic=openshift-storage-cos-install), [Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/openshift?topic=openshift-storage-cos-vpc-ip), [Adding object storage to apps](/docs/openshift?topic=openshift-storage-cos-apps),, and [Storage class reference](/docs/openshift?topic=openshift-storage-cos-reference).
+
+
+{{site.data.keyword.block_storage_is_short}} add-on.
+:   [Version 4.1.3_846](/docs/containers?topic=containers-vpc_bs_changelog) is released.
 
 
 ### 10 February 2022

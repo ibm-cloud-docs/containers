@@ -11,7 +11,7 @@
       {
         "title": "See what's new",
         "description": "Read about the latest changes to IBM Cloud Kubernetes Service. ",
-        "href": "/docs/containers?topic=containers-rel-notes"
+        "href": "/docs/containers?topic=containers-iks-release"
       },  
       {
         "title": "Understand IBM Cloud Kubernetes Service",

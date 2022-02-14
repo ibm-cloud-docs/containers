@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-01-18"
+lastupdated: "2022-02-11"
 
 keywords: kubernetes
 
@@ -190,7 +190,7 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
 * [`ibmcloud ks logging refresh`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_refresh)
 
 ## ibmcloud ks nlb-dns
-{: icks_map_nlb-dns}
+{: #icks_map_nlb-dns}
 
 [Create and manage host names for network load balancer (NLB) IP addresses in a cluster and health check monitors for host names](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns).
 {: shortdesc}

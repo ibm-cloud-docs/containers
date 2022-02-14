@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-09"
+lastupdated: "2022-02-11"
 
 keywords: kubernetes
 
@@ -838,7 +838,8 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
      - `172.21.0.0 - 172.31.255.255`
      - `192.168.0.0 - 192.168.254.255`
      - `198.18.0.0 - 198.19.255.255`
-     Note that the pod and service subnets can't overlap. The service subnet is in the 172.21.0.0/16 range by default.
+     
+:    Note that the pod and service subnets can't overlap. The service subnet is in the 172.21.0.0/16 range by default.
 
 `--service-subnet *SUBNET`{: #service-subnet}
 :    All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.dl_full_notm}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your services.
@@ -847,7 +848,8 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
      - `172.21.0.0 - 172.31.255.255`
      - `192.168.0.0 - 192.168.254.255`
      - `198.18.0.0 - 198.19.255.255`
-     Note that the pod and service subnets can't overlap. The pod subnet is in the 172.30.0.0/16 range by default.
+     
+:    Note that the pod and service subnets can't overlap. The pod subnet is in the 172.30.0.0/16 range by default.
 
 `--skip-advance-permissions-check`
 :    Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you don't have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.
@@ -945,7 +947,8 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
      - `172.21.0.0 - 172.31.255.255`
      - `192.168.0.0 - 192.168.254.255`
      - `198.18.0.0 - 198.19.255.255`
-     Note that the pod and service subnets can't overlap. If you use custom-range subnets for your worker nodes, you must [ensure that your worker node subnets don't overlap with your cluster's pod subnet](/docs/containers?topic=containers-vpc-subnets#vpc-ip-range).
+     
+:    Note that the pod and service subnets can't overlap. If you use custom-range subnets for your worker nodes, you must [ensure that your worker node subnets don't overlap with your cluster's pod subnet](/docs/containers?topic=containers-vpc-subnets#vpc-ip-range).
 
 `--service-subnet SUBNET`
 :    All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.dl_full_notm}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your services.
@@ -954,7 +957,8 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
      - `172.21.0.0 - 172.31.255.255`
      - `192.168.0.0 - 192.168.254.255`
      - `198.18.0.0 - 198.19.255.255`
-     Note that the pod and service subnets can't overlap.
+     
+:    Note that the pod and service subnets can't overlap.
 
 `--skip-advance-permissions-check`
 :    Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you don't have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.
@@ -2566,7 +2570,7 @@ ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --flav
 :    Specifies that the disk is not encrypted. The default value is `false`.
 
 `-l, --label KEY1=VALUE1`
-:    Optional: Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple flags, such as `-l key1=value1 -l key2=value2`.</ul>
+:    Optional: Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple flags, such as `-l key1=value1 -l key2=value2`.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
