@@ -5802,6 +5802,12 @@ subcollection: containers
 
 [Debugging the `metrics-server`](/docs/containers?topic=containers-debug_metrics_server#debug_metrics_server)
 
+[Why does the Kubernetes dashboard terminate with an `OOMKilled` error?](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-kube-dashboord-oom)
+
+* [Changing the resource auto-refresh time interval from the Kubernetes dashboard](/docs/containers?topic=containers-ts-kube-dashboord-oom#changing-the-resource-auto-refresh-time-interval-from-the-kubernetes-dashboard)
+
+* [Changing the resource auto-refresh time interval from the command line](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-dashboard-auto-refresh-cli)
+
 
 ### Worker nodes
 {: #sitemap_worker_nodes}
