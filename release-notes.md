@@ -28,12 +28,20 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #release-feb-2022}
 
 
+### 16 February 2022
+{: #16feb2022}
+{: release-note}
+
+
+
+  
 ### 15 February 2022
 {: #15feb2022}
 {: release-note}
 
 Istio add-on
 :   [Version `1.11.6`](/docs/containers?topic=containers-istio-changelog#1116) of the managed Istio add-on is available. 
+
 
 
 ### 14 February 2022

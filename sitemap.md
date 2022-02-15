@@ -188,6 +188,8 @@ subcollection: containers
 
 * [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
 
+    * [16 February 2022](/docs/containers?topic=containers-iks-release#16feb2022)
+
     * [15 February 2022](/docs/containers?topic=containers-iks-release#15feb2022)
 
     * [14 February 2022](/docs/containers?topic=containers-iks-release#14feb2022)
