@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-09"
+lastupdated: "2022-02-15"
 
 keywords: file, debug, help
 
@@ -222,7 +222,7 @@ If you use a `kubectl` CLI version that does not match at least the major.minor 
 ## Checking and updating the {{site.data.keyword.cos_short}} plug-in
 {: #debug_storage_cos_plugin}
 
-[Follow the steps to update the {{site.data.keyword.cos_short}} plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin).
+[Follow the steps to update the {{site.data.keyword.cos_short}} plug-in](/docs/containers?topic=containers-storage_cos_understand#update_cos_plugin).
 
 
 

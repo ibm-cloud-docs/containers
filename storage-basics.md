@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-01-11"
+lastupdated: "2022-02-15"
 
 keywords: kubernetes
 
@@ -86,7 +86,7 @@ For more information about how to dynamically provision persistent storage, see:
 - [Classic File Storage](/docs/containers?topic=containers-file_storage#add_file)
 - [Classic Block Storage](/docs/containers?topic=containers-block_storage#add_block)
 - [VPC Block Storage](/docs/containers?topic=containers-vpc-block#vpc-block-add)
-- [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#add_cos)
+- [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_apps)
 - [Portworx](/docs/containers?topic=containers-portworx#add_portworx_storage)
 
 
@@ -126,7 +126,7 @@ For more information about how to statically provision storage, see:
 - [Classic File Storage](/docs/containers?topic=containers-file_storage#existing_file)
 - [Classic Block Storage](/docs/containers?topic=containers-block_storage#existing_block)
 - [VPC Block Storage](/docs/containers?topic=containers-vpc-block#vpc-block-static)
-- [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#add_cos)
+- [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_apps)
 - [Portworx](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/using-preprovisioned-volumes/#using-the-portworx-volume){: external}
 
 
@@ -182,7 +182,7 @@ If you can't use one of the provided storage classes, you can create your own cu
     - [Classic File Storage](/docs/containers?topic=containers-file_storage#add_file)
     - [Classic Block Storage](/docs/containers?topic=containers-block_storage#add_block)
     - [VPC Block Storage](/docs/containers?topic=containers-vpc-block#vpc-block-add)
-    - [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#add_cos)
+    - [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_apps)
     - [Portworx](/docs/containers?topic=containers-portworx#add_portworx_storage)
 
 5. Verify that your PVC is created and bound to a persistent volume (PV). This process might take a few minutes to complete.
