@@ -27,6 +27,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## February 2022
 {: #release-feb-2022}
 
+
+### 15 February 2022
+{: #15feb2022}
+{: release-note}
+
+Istio add-on
+:   [Version `1.11.6`](/docs/containers?topic=containers-istio-changelog#1116) of the managed Istio add-on is available. 
+
+
 ### 14 February 2022
 {: #14feb2022}
 {: release-note}
@@ -85,7 +94,7 @@ Deprecated and unsupported Kubernetes versions
 {: release-note}
 
 Istio add-on
-:   [Version `1.12.2`](/docs/containers?topic=containers-istio-changelog#1202)
+:   [Version `1.12.2`](/docs/containers?topic=containers-istio-changelog#1202) of the managed Istio add-on is available. 
 
 
 

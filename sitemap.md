@@ -188,6 +188,8 @@ subcollection: containers
 
 * [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
 
+    * [15 February 2022](/docs/containers?topic=containers-iks-release#15feb2022)
+
     * [14 February 2022](/docs/containers?topic=containers-iks-release#14feb2022)
 
     * [10 February 2022](/docs/containers?topic=containers-iks-release#10feb2022)
@@ -4242,6 +4244,8 @@ subcollection: containers
     * [Changelog for 1.12.1, released 13 January 2022](/docs/containers?topic=containers-istio-changelog#1121)
 
 * [Version 1.11](/docs/containers?topic=containers-istio-changelog#v111)
+
+    * [Changelog for 1.11.6, released 15 February 2022](/docs/containers?topic=containers-istio-changelog#1116)
 
     * [Changelog for 1.11.5, released 14 December 2021](/docs/containers?topic=containers-istio-changelog#1115)
 
