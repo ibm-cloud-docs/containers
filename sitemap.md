@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-02-14"
+lastupdated: "2022-02-15"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
+
+    * [15 February 2022](/docs/containers?topic=containers-iks-release#15feb2022)
 
     * [14 February 2022](/docs/containers?topic=containers-iks-release#14feb2022)
 
@@ -2929,27 +2931,25 @@ subcollection: containers
 {: #sitemap_storing_data_on_ibm_cloud_object_storage}
 
 
-[Storing data on {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_understand#storage_cos_understand)
+[Storing data on {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-understand#storage-cos-understand)
 
-* [Creating your object storage service instance](/docs/containers?topic=containers-storage_cos_understand#create_cos_service)
+* [Creating your object storage service instance](/docs/containers?topic=containers-storage-cos-understand#create_cos_service)
 
-* [Creating {{site.data.keyword.cos_full_notm}} service credentials](/docs/containers?topic=containers-storage_cos_understand#service_credentials)
+* [Creating {{site.data.keyword.cos_full_notm}} service credentials](/docs/containers?topic=containers-storage-cos-understand#service_credentials)
 
-* [Creating a secret for the object storage service credentials](/docs/containers?topic=containers-storage_cos_understand#create_cos_secret)
+* [Creating a secret for the object storage service credentials](/docs/containers?topic=containers-storage-cos-understand#create_cos_secret)
 
-* [Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_understand#install_cos)
-
-* [Verifying your installation](/docs/containers?topic=containers-storage_cos_understand#cos-plugin)
-
-* [Updating the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_understand#update_cos_plugin)
-
-* [Removing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_understand#remove_cos_plugin)
-
-* [Deciding on the object storage configuration](/docs/containers?topic=containers-storage_cos_understand#configure_cos)
-
-* [Limitations](/docs/containers?topic=containers-storage_cos_understand#cos_limitations)
+* [Limitations](/docs/containers?topic=containers-storage-cos-understand#cos_limitations)
 
 [Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#storage_cos_install)
+
+* [Updating the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#update_cos_plugin)
+
+* [Removing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#remove_cos_plugin)
+
+* [Deciding on the object storage configuration](/docs/containers?topic=containers-storage_cos_install#configure_cos)
+
+* [Verifying your installation](/docs/containers?topic=containers-storage_cos_install#cos-plugin)
 
 [VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_vpc_ip#storage_cos_vpc_ip)
 
@@ -4244,6 +4244,8 @@ subcollection: containers
     * [Changelog for 1.12.1, released 13 January 2022](/docs/containers?topic=containers-istio-changelog#1121)
 
 * [Version 1.11](/docs/containers?topic=containers-istio-changelog#v111)
+
+    * [Changelog for 1.11.6, released 15 February 2022](/docs/containers?topic=containers-istio-changelog#1116)
 
     * [Changelog for 1.11.5, released 14 December 2021](/docs/containers?topic=containers-istio-changelog#1115)
 

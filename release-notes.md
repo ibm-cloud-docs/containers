@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-14"
+lastupdated: "2022-02-15"
 
 keywords: kubernetes, release notes
 
@@ -27,6 +27,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## February 2022
 {: #release-feb-2022}
 
+
+### 15 February 2022
+{: #15feb2022}
+{: release-note}
+
+Istio add-on
+:   [Version `1.11.6`](/docs/containers?topic=containers-istio-changelog#1116) of the managed Istio add-on is available. 
+
+
 ### 14 February 2022
 {: #14feb2022}
 {: release-note}
@@ -38,7 +47,7 @@ Worker node fix pack
 
 
 {{site.data.keyword.cos_full_notm}} doc restructuring. 
-:   For more information, see [Storing data on {{site.data.keyword.cos_full_notm}}](/docs/openshift?topic=openshift-storage-cos-understand), [Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/openshift?topic=openshift-storage-cos-install), [Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/openshift?topic=openshift-storage-cos-vpc-ip), [Adding object storage to apps](/docs/openshift?topic=openshift-storage-cos-apps),, and [Storage class reference](/docs/openshift?topic=openshift-storage-cos-reference).
+:   For more information, see [Storing data on {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-understand), [Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage-cos-install), [Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-vpc-ip), [Adding object storage to apps](/docs/containers?topic=containers-storage-cos-apps), and [Storage class reference](/docs/containers?topic=containers-storage-cos-reference).
 
 
 {{site.data.keyword.block_storage_is_short}} add-on.
@@ -85,7 +94,7 @@ Deprecated and unsupported Kubernetes versions
 {: release-note}
 
 Istio add-on
-:   [Version `1.12.2`](/docs/containers?topic=containers-istio-changelog#1202)
+:   [Version `1.12.2`](/docs/containers?topic=containers-istio-changelog#1202) of the managed Istio add-on is available. 
 
 
 
@@ -1893,7 +1902,7 @@ Ingress classes
 
 
 {{site.data.keyword.cos_short}}
-:   Added steps to help you [decide on the object storage configuration](/docs/containers?topic=containers-object_storage#configure_cos) and added troubleshooting steps for when [app pods fail because of an `Operation not permitted` error](/docs/containers?topic=containers-cos_operation_not_permitted).
+:   Added steps to help you [decide on the object storage configuration](/docs/containers?topic=containers-storage_cos_install#configure_cos) and added troubleshooting steps for when [app pods fail because of an `Operation not permitted` error](/docs/containers?topic=containers-cos_operation_not_permitted).
 
 ### 13 October 2020
 {: #13oct2020}
@@ -3890,7 +3899,7 @@ Bringing your own Ingress controller
 :   Updated the [steps](/docs/containers?topic=containers-ingress-user_managed) to reflect changes to the default community controller and to require a health check for controller IP addresses in multizone clusters.
 
 {{site.data.keyword.cos_full_notm}}
-:   Updated the [steps](/docs/containers?topic=containers-object_storage#install_cos) to install the {{site.data.keyword.cos_full_notm}} plug-in with or without the Helm server, Tiller.
+:   Updated the [steps](/docs/containers?topic=containers-storage_cos_install) to install the {{site.data.keyword.cos_full_notm}} plug-in with or without the Helm server, Tiller.
 
 Ingress ALB changelog
 :   Updated the [ALB `nginx-ingress` image to build 467](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
