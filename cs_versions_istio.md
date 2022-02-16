@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-15"
+lastupdated: "2022-02-16"
 
 keywords: kubernetes, istio, add-on
 
@@ -28,7 +28,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 | --- | --- | --- |
 | 1.12 | Yes | 1.20, 1.21, 1.22 |
 | 1.11 | Yes | 1.19, 1.20, 1.21, 1.22 |
-| 1.10 | Yes | 1.18, 1.19, 1.20, 1.21 |
+| 1.10 | No| - |
 | 1.9 | No| - |
 | 1.8 | No | - |
 | 1.7 | No | - |
@@ -49,7 +49,7 @@ Review the changes that are in version 1.12 of the managed Istio add-on.
 {: shortdesc}
 
 
-### Changelog for 1.12.2, released 03 February 2021
+### Changelog for 1.12.2, released 03 February 2022
 {: #1202}
 
 
@@ -63,18 +63,6 @@ Review the changes that are included in version 1.12.2 of the managed Istio add-
 - See the Istio release notes for [Istio 1.12.2](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.2/){:external}. 
 - For more information, see the [Istio security bulletin 2022-001](https://istio.io/latest/news/security/istio-security-2022-001/){: external} and [Istio security bulletin 2022-002](https://istio.io/latest/news/security/istio-security-2022-002/){: external}.
 
-
-
-**Previous version**: 1.11.4
-**Current version**: 1.12.0  
-**Updates in this version:**  
-- See the Istio release notes for [Istio 1.12.0](https://istio.io/latest/news/releases/1.12.x/announcing-1.12/){: external}. 
-- Updates the `managed-istio` operator settings. This includes a `TERMINATION_DRAIN_DURATION` of 30 seconds which replaces an earlier prestop variable of 25 seconds. If you are already using a `TERMINATION_DRAIN_DURATION` you must increase the value by 30 seconds to account for this change. 
-- Updates the affinity rules in the `k8s.overlay` to `k8s.affinity`. If you are using custom gateways, review the updated configuration for the default gateways to see if you want to use the change in your custom gateways. 
-- Users can now increase the max horizontal pod autoscaler (HPA) pods for istiod. Do not change this value to less than the default of `5`. You can increase this value, but only in situations where you have a large service mesh.
-- Resolves the following CVEs:
-    - [usn-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
-
 ### Changelog for 1.12.1, released 13 January 2022
 {: #1121}
 
@@ -85,6 +73,19 @@ Review the changes that are included in version 1.12.1 of the managed Istio add-
 **Current version**: 1.12.1   
 **Updates in this version:**  
 - See the Istio release notes for [Istio 1.12.1](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.1/){:external}. 
+
+### Changelog for 1.12.0, released 08 December 2021
+{: #1200}
+
+**Previous version**: 1.11.4
+**Current version**: 1.12.0  
+**Updates in this version:**  
+- See the Istio release notes for [Istio 1.12.0](https://istio.io/latest/news/releases/1.12.x/announcing-1.12/){: external}. 
+- Updates the `managed-istio` operator settings. This includes a `TERMINATION_DRAIN_DURATION` of 30 seconds which replaces an earlier prestop variable of 25 seconds. If you are already using a `TERMINATION_DRAIN_DURATION` you must increase the value by 30 seconds to account for this change. 
+- Updates the affinity rules in the `k8s.overlay` to `k8s.affinity`. If you are using custom gateways, review the updated configuration for the default gateways to see if you want to use the change in your custom gateways. 
+- Users can now increase the max horizontal pod autoscaler (HPA) pods for istiod. Do not change this value to less than the default of `5`. You can increase this value, but only in situations where you have a large service mesh.
+- Resolves the following CVEs:
+    - [usn-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
 
 
 ## Version 1.11
