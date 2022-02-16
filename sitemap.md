@@ -188,8 +188,6 @@ subcollection: containers
 
 * [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
 
-    * [16 February 2022](/docs/containers?topic=containers-iks-release#16feb2022)
-
     * [15 February 2022](/docs/containers?topic=containers-iks-release#15feb2022)
 
     * [14 February 2022](/docs/containers?topic=containers-iks-release#14feb2022)
@@ -2953,13 +2951,13 @@ subcollection: containers
 
 * [Verifying your installation](/docs/containers?topic=containers-storage_cos_install#cos-plugin)
 
-[VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_vpc_ip#storage_cos_vpc_ip)
-
 [Adding object storage to apps](/docs/containers?topic=containers-storage_cos_apps#storage_cos_apps)
 
 * [Creating a deployment](/docs/containers?topic=containers-storage_cos_apps#create-cos-deployment-steps)
 
 * [Using object storage in a stateful set](/docs/containers?topic=containers-storage_cos_apps#cos_statefulset)
+
+[VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_vpc_ip#storage_cos_vpc_ip)
 
 [Storage class reference](/docs/containers?topic=containers-storage_cos_reference#storage_cos_reference)
 

@@ -28,11 +28,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #release-feb-2022}
 
 
-### 16 February 2022
-{: #16feb2022}
-{: release-note}
-
-
 
   
 ### 15 February 2022
@@ -50,8 +45,6 @@ Istio add-on
 
 Worker node fix pack
 :   Kubernetes [1.23.3_1519](/docs/containers?topic=containers-changelog#1233_1519), [1.22.6_1539](/docs/containers?topic=containers-changelog#1226_1539), [1.21.9_1549](/docs/containers?topic=containers-changelog#1219_1549), [1.20.15_1570](/docs/containers?topic=containers-changelog#12015_1570), and [1.19.16_1577](/docs/containers?topic=containers-changelog#11916_1577).
-
-
 
 
 {{site.data.keyword.cos_full_notm}} doc restructuring. 
