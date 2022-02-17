@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-11"
+lastupdated: "2022-02-17"
 
 keywords: kubernetes, containers
 
@@ -141,7 +141,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 ## Benchmark 1.5 results for Kubernetes versions 1.18 - 1.22
 {: #cis-benchmark-15}
 
-Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.5 CIS Kubernetes benchmark for clusters that run Kubernetes versions 1.18 - 1.22. For help understanding the benchmark, see [Using the benchmark](#cis-benchmark-use).
+Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.5 CIS Kubernetes benchmark for clusters that run Kubernetes versions 1.19 - 1.23. For help understanding the benchmark, see [Using the benchmark](#cis-benchmark-use).
 {: shortdesc}
 
 
