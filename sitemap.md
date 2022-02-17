@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-02-16"
+lastupdated: "2022-02-17"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
+
+    * [17 February 2022](/docs/containers?topic=containers-iks-release#17feb2022)
 
     * [15 February 2022](/docs/containers?topic=containers-iks-release#15feb2022)
 
@@ -4460,6 +4462,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Changlog version 2.1.10, released 17 February 2022](/docs/containers?topic=containers-cos_plugin_changelog#0219_object_plugin)
 
 * [Changlog version 2.1.9, released 24 January 2022](/docs/containers?topic=containers-cos_plugin_changelog#0219_object_plugin)
 
