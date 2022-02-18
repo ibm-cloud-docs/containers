@@ -138,12 +138,11 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 
 
-## Benchmark 1.5 results for Kubernetes versions 1.18 - 1.22
+## Benchmark 1.5 results for Kubernetes versions 1.19 - 1.23
 {: #cis-benchmark-15}
 
 Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.5 CIS Kubernetes benchmark for clusters that run Kubernetes versions 1.19 - 1.23. For help understanding the benchmark, see [Using the benchmark](#cis-benchmark-use).
 {: shortdesc}
-
 
 
 

@@ -4081,7 +4081,7 @@ subcollection: containers
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
 
-* [Benchmark 1.5 results for Kubernetes versions 1.18 - 1.22](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15)
+* [Benchmark 1.5 results for Kubernetes versions 1.19 - 1.23](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15)
 
     * [1.1 Master Node Configuration Files](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-1-1)
 
