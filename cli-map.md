@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-02-11"
+lastupdated: "2022-02-18"
 
 keywords: kubernetes
 
@@ -35,6 +35,7 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
     * [`ibmcloud ks cluster addon versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_addon_versions)
 * **`cluster ca`**: Manage the Certificate Authority (CA) certificates of a cluster.
     * [`ibmcloud ks cluster ca create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_create)
+    * [`ibmcloud ks cluster ca get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_get)
     * [`ibmcloud ks cluster ca rotate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_rotate)
     * [`ibmcloud ks cluster ca status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_status)
 * [`ibmcloud ks cluster config`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_config)
@@ -129,7 +130,7 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
 ## ibmcloud ks ingress
 {: #icks_map_ingress}
 
-**Beta** [View and modify Ingress services and settings](/docs/containers?topic=containers-kubernetes-service-cli#alb-commands).
+[View and modify Ingress services and settings](/docs/containers?topic=containers-kubernetes-service-cli#alb-commands).
 {: shortdesc}
 
 * **`ingress alb`**: View and configure an Ingress application load balancer (ALB).
@@ -200,6 +201,7 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
     * [`ibmcloud ks nlb-dns create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-create)
     * [`ibmcloud ks nlb-dns create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-create-vpc-gen2)
 * [`ibmcloud ks nlb-dns ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-ls)
+* [`ibmcloud ks nlb-dns get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-get)
 * **`nlb-dns monitor`**: Create and manage health check monitors for network load balancer (NLB) IP addresses and host names in a cluster.
     * [`ibmcloud ks nlb-dns monitor configure`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-configure)
     * [`ibmcloud ks nlb-dns monitor disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-disable)
