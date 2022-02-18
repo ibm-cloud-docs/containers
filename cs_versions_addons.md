@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-01-25"
+lastupdated: "2022-02-18"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 

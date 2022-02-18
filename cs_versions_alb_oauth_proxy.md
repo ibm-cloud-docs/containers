@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-10"
+lastupdated: "2022-02-18"
 
 keywords: kubernetes, oauth proxy, add-on
 

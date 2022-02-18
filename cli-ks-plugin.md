@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-11"
+lastupdated: "2022-02-18"
 
 keywords: kubernetes
 
@@ -41,7 +41,7 @@ The tables below list the `ibmcloud ks` command groups. For a complete list of a
 | [Worker commands](#worker_node_commands) | View and modify worker nodes for a cluster.  |
 | [Worker-pool commands](#worker-pool) | View and modify worker pools for a cluster. |
 | [Zone commands](#zone) | List availability zones and modify the zones attached to a worker pool. |
-| **Beta** [Ingress commands](#alb-commands) | View and modify Ingress services and settings. | 
+| [Ingress commands](#alb-commands) | View and modify Ingress services and settings. | 
 | [Logging commands](#logging_commands) | Forward logs from your cluster. | 
 | [Nlb-dns commands](#nlb-dns) | Create and manage host names for network load balancer (NLB) IP addresses in a cluster and health check monitors for host names. |
 | [Webhook-create commands](#cs_webhook_create) | Register a webhook in a cluster. |
@@ -627,6 +627,41 @@ ibmcloud ks cluster ca create --cluster CLUSTER [-f] [-q]
 **Example**:
 ```sh
 ibmcloud ks cluster ca create --cluster my_cluster
+```
+{: pre}
+
+### `ibmcloud ks cluster ca get`
+{: #cs_cluster_ca_get}
+
+View the details of a cluster's CA certificate. 
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster ca get --cluster CLUSTER [ --output OUTPUT] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+
+**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+`-c, --cluster CLUSTER`
+:    Required: The name or ID of the cluster.
+
+`--output json`
+:    Optional: Prints the command output in JSON format.
+
+`-q`
+:    Optional: Do not show the message of the day or update reminders.
+
+
+**Example**:
+```sh
+ibmcloud ks cluster ca get --cluster my_cluster
 ```
 {: pre}
 
@@ -3056,7 +3091,7 @@ After you create a classic cluster or worker pool, you can add a zone. When you 
 {: shortdesc}
 
 ```sh
-ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER --worker-pool WORKER_POOL --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [--private-only] [--output json] [-q]
+ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER [--worker-pool WORKER_POOL] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--output json] [-q]
 ```
 {: pre}
 
@@ -3199,7 +3234,7 @@ ibmcloud ks zone ls -l ap
 {: shortdesc}
 
 ```sh
-ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER --worker-pool WORKER_POOL --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [--private-only] [-f] [-q]
+ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER  --private-vlan PRIVATE_VLAN [--worker-pool WORKER_POOL] [--public-vlan PUBLIC_VLAN] [--private-only] [-f] [-q]
 ```
 {: pre}
 
@@ -3333,7 +3368,7 @@ View and configure Ingress application load balancers (ALBs).
 In CLI version 1.0.157 and later, the `ibmcloud ks alb` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress alb` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
 {: important}
 
-### `ibmcloud ks ingress alb autoupdate disable`
+###  `ibmcloud ks ingress alb autoupdate disable`
 {: #cs_alb_autoupdate_disable}
 
 Disable automatic updates of all Ingress ALB pods in a cluster.
@@ -3727,7 +3762,7 @@ ibmcloud ks ingress alb ls --cluster my_cluster
 {: pre}
 
 
-### Beta: `ibmcloud ks ingress alb migrate clean`
+### `ibmcloud ks ingress alb migrate clean`
 {: #cs_alb_migrate_clean}
 
 Clean up any Ingress resources and configmaps that you no longer need, such as after an Ingress migration.
@@ -3781,7 +3816,7 @@ ibmcloud ks ingress alb migrate clean -c my_cluster --reset-kube-controller-conf
 {: pre}
 
 
-### Beta: `ibmcloud ks ingress alb migrate start`
+### `ibmcloud ks ingress alb migrate start`
 {: #cs_alb_migrate_start}
 
 Start a migration of your Ingress configmap and resources that are formatted for use with ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress to instead use with ALBs that run the Kubernetes Ingress image. Note that this command helps you create all the resources for ALBs that run Kubernetes Ingress, but afterward you must still manually change your ALB from one type of image to another. For more information about how to prepare for a migration, see [Changing the image of existing ALBs](/docs/containers?topic=containers-ingress-types#alb-type-migration).
@@ -3820,7 +3855,7 @@ ibmcloud ks ingress alb migrate start --type test --cluster my_cluster
 {: pre}
 
 
-### Beta: `ibmcloud ks ingress alb migrate status`
+###  `ibmcloud ks ingress alb migrate status`
 {: #cs_alb_migrate_status}
 
 Check the status of a [migration of your Ingress configmap and resources](#cs_alb_migrate_start).
@@ -3936,7 +3971,7 @@ ibmcloud ks ingress alb versions [--output json] [-q]
 :    Optional: Do not show the message of the day or update reminders.
 
 
-### Beta: `ibmcloud ks ingress lb get`
+### `ibmcloud ks ingress lb get`
 {: #cs_ingress_lb_proxy-protocol_get}
 
 Get the configuration of load balancers that expose Ingress ALBs in your cluster.
@@ -3974,7 +4009,7 @@ ibmcloud ks ingress lb get --cluster mycluster
 ```
 {: pre}
 
-### Beta: `ibmcloud ks ingress lb proxy-protocol disable`
+### `ibmcloud ks ingress lb proxy-protocol disable`
 {: #cs_ingress_lb_proxy-protocol_disable}
 
 Disable the NGINX PROXY protocol for the load balancers in front of all Ingress ALBs in your cluster so that client connection information is no longer passed in request headers to ALBs.
@@ -4013,7 +4048,7 @@ ibmcloud ks ingress lb proxy-protocol disable --cluster mycluster
 {: pre}
 
 
-### Beta: `ibmcloud ks ingress lb proxy-protocol enable`
+### `ibmcloud ks ingress lb proxy-protocol enable`
 {: #cs_ingress_lb_proxy-protocol_enable}
 
 Enable the [NGINX PROXY protocol](https://docs.nginx.com/nginx/admin-guide/load-balancer/using-proxy-protocol/){: external} for all load balancers that expose Ingress ALBs in your cluster so that client connection information is passed in request headers to ALBs.
@@ -4060,7 +4095,7 @@ ibmcloud ks ingress lb proxy-protocol enable --cluster mycluster --cidr 1.1.1.1/
 {: pre}
 
 
-### Beta: `ibmcloud ks ingress secret create`
+### `ibmcloud ks ingress secret create`
 {: #cs_ingress_secret_create}
 
 Create an Ingress secret in a cluster for a certificate that is stored in {{site.data.keyword.cloudcerts_long}}.
@@ -4109,7 +4144,7 @@ ibmcloud ks ingress secret create --cert-crn crn:v1:staging:public:cloudcerts:us
 {: pre}
 
 
-### Beta: `ibmcloud ks ingress secret get`
+### `ibmcloud ks ingress secret get`
 {: #cs_ingress_secret_get}
 
 View information about Ingress secrets in your cluster, including secrets that you imported for a certificate from {{site.data.keyword.cloudcerts_long_notm}}.
@@ -4155,7 +4190,7 @@ ibmcloud ks ingress secret get --cluster my_cluster --name my_alb_secret --names
 {: pre}
 
 
-### Beta: `ibmcloud ks ingress secret ls`
+### `ibmcloud ks ingress secret ls`
 {: #cs_ingress_secret_ls}
 
 List Ingress secrets in your cluster, including secrets that you imported for a certificate from {{site.data.keyword.cloudcerts_long_notm}}.
@@ -4198,7 +4233,7 @@ ibmcloud ks ingress secret ls --cluster my_cluster
 {: pre}
 
 
-### Beta: `ibmcloud ks ingress secret rm`
+### `ibmcloud ks ingress secret rm`
 {: #cs_ingress_secret_rm}
 
 Delete an Ingress secret from your cluster. If you created a secret for a certificate from {{site.data.keyword.cloudcerts_long_notm}}, only the secret in the cluster is deleted and the certificate remains in your {{site.data.keyword.cloudcerts_long_notm}} instance.
@@ -4242,7 +4277,7 @@ ibmcloud ks ingress secret rm --cluster my_cluster --name my_alb_secret --namesp
 {: pre}
 
 
-### Beta: `ibmcloud ks ingress secret update`
+### `ibmcloud ks ingress secret update`
 {: #cs_ingress_secret_update}
 
 Update an Ingress secret for a certificate that is not hosted in the default {{site.data.keyword.cloudcerts_short}} instance that was created for your cluster.
@@ -5137,7 +5172,41 @@ ibmcloud ks nlb-dns create vpc-gen2 --cluster mycluster --lb-host 1234abcd-us-so
 
 
 
+### `ibmcloud ks nlb-dns get`
+{: #cs_nlb-dns-get}
 
+View the details of a registered NLB host name in a cluster.
+{: shortdesc}
+
+```sh
+ibmcloud ks nlb-dns get --cluster CLUSTER --nlb-subdomain SUBDOMAIN [--output OUTPUT] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+
+**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+`-c, --cluster CLUSTER`
+:    Required: The name or ID of the cluster.
+
+`--nlb-subdomain SUBDOMAIN`
+:   The DNS subdomain where your network load balancer (NLB) IP address is registered. To list NLBs, run `ibmcloud ks nlb-dns ls --cluster mycluster`.
+
+`--output json`
+:    Optional: Prints the command output in JSON format.
+
+`-q`
+:    Optional: Do not show the message of the day or update reminders.
+
+
+**Example**:
+```sh
+ibmcloud ks nlb-dns get --cluster mycluster --nlb-subdomain subDomain1
+```
+{: pre}
 
 ### `ibmcloud ks nlb-dns ls`
 {: #cs_nlb-dns-ls}
