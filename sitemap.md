@@ -1749,10 +1749,6 @@ subcollection: containers
 
 * [Controlling traffic between pods](/docs/containers?topic=containers-network_policies#isolate_services)
 
-    * [Isolate app services within a namespace](/docs/containers?topic=containers-network_policies#services_one_ns)
-
-    * [Isolate app services between namespaces](/docs/containers?topic=containers-network_policies#services_across_ns)
-
 * [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
 
 [VPC: Opening required ports and IP addresses in other network firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
@@ -1771,31 +1767,44 @@ subcollection: containers
 
     * [Allowing egress to a cluster from another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
 
-[VPC: Controlling traffic with ACLs, security groups, and network policies](/docs/containers?topic=containers-vpc-network-policy#vpc-network-policy)
 
-* [Overview](/docs/containers?topic=containers-vpc-network-policy#overview)
+### Controlling traffic with ACLs, security groups, and network policies
+{: #sitemap_controlling_traffic_with_acls,_security_groups,_and_network_policies}
 
-    * [Comparison of network security options](/docs/containers?topic=containers-vpc-network-policy#comparison)
 
-    * [Do I use ACLs or security groups?](/docs/containers?topic=containers-vpc-network-policy#acl-sg-compare)
+[Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#vpc-network-policy)
 
-* [Controlling traffic with the default security group](/docs/containers?topic=containers-vpc-network-policy#security_groups)
+* [Comparison of network security options](/docs/containers?topic=containers-vpc-network-policy#comparison)
 
-    * [Creating security group rules from the console](/docs/containers?topic=containers-vpc-network-policy#security_groups_ui)
+* [Access control lists (ACLs) or security groups?](/docs/containers?topic=containers-vpc-network-policy#acl-sg-compare)
 
-    * [Creating security group rules with the CLI](/docs/containers?topic=containers-vpc-network-policy#security_groups_cli)
+[Controlling traffic with the default security group](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
 
-* [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-network-policy#acls)
+* [Creating security group rules from the console](/docs/containers?topic=containers-vpc-security-group#security_groups_ui)
 
-    * [Creating ACLs from the console](/docs/containers?topic=containers-vpc-network-policy#acls_ui)
+    * [Creating inbound rules in the console](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-rules)
 
-    * [Creating ACLs with the CLI](/docs/containers?topic=containers-vpc-network-policy#acls_cli)
+    * [Creating security group rules with the CLI](/docs/containers?topic=containers-vpc-security-group#security_groups_cli)
 
-* [Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
+    * [Creating inbound rules by using the command line](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-cli)
 
-    * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#services_one_ns)
+    * [Creating outbound rules by using the command line](/docs/containers?topic=containers-vpc-security-group#security-group-cli-outbound)
 
-    * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#services_across_ns)
+* [Required inbound rules](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-rules)
+
+* [Required outbound rules](/docs/containers?topic=containers-vpc-security-group#security-group-outbound-rules)
+
+[Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
+
+* [Creating ACLs from the console](/docs/containers?topic=containers-vpc-acls#acls_ui)
+
+    * [Creating ACLs with the CLI](/docs/containers?topic=containers-vpc-acls#acls_cli)
+
+[Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-kube-policies#vpc-kube-policies)
+
+    * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-kube-policies#services_one_ns)
+
+    * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-kube-policies#services_across_ns)
 
 [Managing security and compliance with Kubernetes](/docs/containers?topic=containers-manage-security-compliance#manage-security-compliance)
 
