@@ -132,12 +132,12 @@ toc:
             - network-policy.md
             - vpc-firewall.md
             - topicgroup:
-              label: Controlling traffic with ACLs, security groups, and network policies
-              topics:
-              - vpc-network-policy.md
-              - vpc-security-group.md
-              - vpc-acls.md
-              - vpc-kube-policies.md
+                label: Controlling traffic with ACLs, security groups, and network policies
+                topics:
+                - vpc-network-policy.md
+                - vpc-security-group.md
+                - vpc-acls.md
+                - vpc-kube-policies.md
             - manage-scc.md
         - topicgroup:
             label: Managing the cluster network
