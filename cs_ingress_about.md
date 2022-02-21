@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-02-21"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -103,7 +103,7 @@ Before forwarding traffic to ALBs, the VPC load balancer also health checks the 
 
 Note that the VPC load balancer health checks only public ALBs and updates DNS lookup results for the Ingress subdomain. If you use only private ALBs, you must manually check their health and update DNS lookup results.
 
-If you set up [VPC security groups](/docs/containers?topic=containers-vpc-network-policy#security_groups) or [VPC access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy#acls) to secure your cluster network, ensure that you create the rules to allow the necessary traffic from the Kubernetes control plane IP addresses. Alternatively, to allow the inbound traffic for ALB healthchecks, you can create one rule to allow all incoming traffic on port 80.
+If you set up [VPC security groups](/docs/openshift?topic=openshift-vpc-security-group) or [VPC access control lists (ACLs)](/docs/openshift?topic=openshift-vpc-acls) to secure your cluster network, ensure that you create the rules to allow the necessary traffic from the Kubernetes control plane IP addresses. Alternatively, to allow the inbound traffic for ALB healthchecks, you can create one rule to allow all incoming traffic on port 80.
 {: note}
 
 

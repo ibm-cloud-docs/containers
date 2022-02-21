@@ -1124,45 +1124,135 @@ subcollection: containers
 
 [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters#plan_clusters)
 
-* [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#plan_vpc_basics)
+[Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_vpc_basics#plan_vpc_basics)
 
-    * [Worker-to-worker communication: VPC subnets](/docs/containers?topic=containers-plan_clusters#vpc-worker-worker)
+* [Worker-to-worker communication using VPC subnets](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-worker)
 
-    * [Worker-to-master and user-to-master communication: Virtual private endpoints or cloud service endpoints](/docs/containers?topic=containers-plan_clusters#vpc-workeruser-master)
+* [Worker-to-master and user-to-master communication using Virtual private endpoints or cloud service endpoints](/docs/containers?topic=containers-plan_vpc_basics#vpc-workeruser-master)
 
-    * [Worker-to-master communication](/docs/containers?topic=containers-plan_clusters#worker-to-master-comms)
+* [Worker-to-master communication in VPC clusters](/docs/containers?topic=containers-plan_vpc_basics#worker-to-master-comms)
 
-    * [User-to-master communication](/docs/containers?topic=containers-plan_clusters#user-to-master-comms)
+* [User-to-master communication in VPC clusters](/docs/containers?topic=containers-plan_vpc_basics#user-to-master-comms)
 
-    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_clusters#vpc-worker-services-onprem)
+* [Worker communication to other services or networks](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem)
 
-    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_clusters#vpc-external-workers)
+* [Communication with other {{site.data.keyword.cloud_notm}} services over the private or public network](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-cloud-service)
 
-* [Example scenarios for VPC cluster network setups](/docs/containers?topic=containers-plan_clusters#vpc-scenarios)
+* [Communication with resources in on-premises data centers](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-resources)
 
-    * [Scenario: Run internet-facing app workloads in a VPC cluster](/docs/containers?topic=containers-plan_clusters#vpc-no-pgw)
+    * [Communication with resources in other VPCs](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-other-vpcs)
 
-    * [Scenario: Run internet-facing app workloads in a VPC cluster with limited public egress](/docs/containers?topic=containers-plan_clusters#vpc-pgw)
+    * [Communication with {{site.data.keyword.cloud_notm}} classic resources](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-classic)
 
-    * [Extend your on-premises data center to a VPC cluster](/docs/containers?topic=containers-plan_clusters#vpc-vpn)
+* [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_vpc_basics#vpc-external-workers)
 
-* [Understanding network basics of classic clusters](/docs/containers?topic=containers-plan_clusters#plan_basics)
+* [Private traffic to cluster apps](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-apps-private)
 
-    * [Worker-to-worker communication: classic VLANs and subnets](/docs/containers?topic=containers-plan_clusters#worker-worker)
+* [Public traffic to cluster apps](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-apps-public)
 
-    * [Worker-to-master and user-to-master communication: Service endpoints](/docs/containers?topic=containers-plan_clusters#workeruser-master)
+* [Example scenarios for VPC cluster network setups](/docs/containers?topic=containers-plan_vpc_basics#vpc-scenarios)
 
-    * [Worker communication to other {{site.data.keyword.cloud_notm}} services or on-premises networks](/docs/containers?topic=containers-plan_clusters#worker-services-onprem)
+    * [Scenario: Run internet-facing app workloads in a VPC cluster](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw)
 
-    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_clusters#external-workers)
+    * [Worker-to-worker communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw-worker)
 
-* [Example scenarios for classic cluster network setups](/docs/containers?topic=containers-plan_clusters#classic-scenarios)
+    * [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw-master)
 
-    * [Running internet-facing app workloads in a classic cluster](/docs/containers?topic=containers-plan_clusters#internet-facing)
+    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw-services)
 
-    * [Extending your on-premises data center to a classic cluster and add limited public access](/docs/containers?topic=containers-plan_clusters#limited-public)
+    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw-external)
 
-    * [Scenario: Extend your on-premises data center to a classic cluster](/docs/containers?topic=containers-plan_clusters#private_clusters)
+* [Scenario: Run internet-facing app workloads in a VPC cluster with limited public egress](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw)
+
+    * [Worker-to-worker communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw-worker)
+
+    * [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw-master)
+
+    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw-services)
+
+    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw-external)
+
+* [Extend your on-premises data center to a VPC cluster](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn)
+
+    * [Worker-to-worker communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn-worker)
+
+    * [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn-master)
+
+    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn-services)
+
+    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn-external)
+
+[Understanding network basics of classic clusters](/docs/containers?topic=containers-plan_basics#plan_basics)
+
+* [Worker-to-worker communication: classic VLANs and subnets](/docs/containers?topic=containers-plan_basics#worker-worker)
+
+    * [VLAN connections for worker nodes](/docs/containers?topic=containers-plan_basics#worker-worker-nodes)
+
+    * [Worker node communication across subnets and VLANs](/docs/containers?topic=containers-plan_basics#worker-worker-subnets)
+
+* [Worker-to-master and user-to-master communication: Service endpoints](/docs/containers?topic=containers-plan_basics#workeruser-master)
+
+    * [Public service endpoint only](/docs/containers?topic=containers-plan_basics#workeruser-master-endpoint)
+
+    * [Public and private cloud service endpoints](/docs/containers?topic=containers-plan_basics#workeruser-master-pub-priv)
+
+    * [Private service endpoint only](/docs/containers?topic=containers-plan_basics#workeruser-master-private)
+
+    * [Worker communication to other {{site.data.keyword.cloud_notm}} services or on-premises networks](/docs/containers?topic=containers-plan_basics#worker-services-onprem)
+
+    * [Communication with other {{site.data.keyword.cloud_notm}} services over the private or public network](/docs/containers?topic=containers-plan_basics#worker-services-onprem-pub-priv)
+
+    * [{{site.data.keyword.BluDirectLink}} for communication over the private network with resources in on-premises data centers](/docs/containers?topic=containers-plan_basics#worker-services-onprem-direct-link)
+
+    * [strongSwan IPSec VPN connection for communication over the public network with resources in on-premises data centers](/docs/containers?topic=containers-plan_basics#worker-services-onprem-strongswan)
+
+    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#external-workers)
+
+    * [Private traffic to cluster apps](/docs/containers?topic=containers-plan_basics#external-workers-private)
+
+    * [Public traffic to cluster apps](/docs/containers?topic=containers-plan_basics#external-workers-public)
+
+* [Example scenarios for classic cluster network setups](/docs/containers?topic=containers-plan_basics#classic-scenarios)
+
+    * [Running internet-facing app workloads in a classic cluster](/docs/containers?topic=containers-plan_basics#internet-facing)
+
+    * [Worker-to-worker communication in classic clusters](/docs/containers?topic=containers-plan_basics#internet-facing-worker)
+
+    * [Worker-to-master and user-to-master communication in classic clusters](/docs/containers?topic=containers-plan_basics#internet-facing-master)
+
+    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_basics#internet-facing-services)
+
+    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#internet-facing-external)
+
+    * [Extending your on-premises data center to a classic cluster and add limited public access](/docs/containers?topic=containers-plan_basics#limited-public)
+
+    * [Using a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#gateway)
+
+    * [Worker-to-worker communication](/docs/containers?topic=containers-plan_basics#limited-public-worker)
+
+    * [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_basics#limited-public-master)
+
+    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_basics#limited-public-service)
+
+    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#limited-public-external)
+
+    * [Using a gateway appliance](/docs/containers?topic=containers-plan_basics#vyatta-gateway)
+
+    * [Worker-to-worker communication, worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_basics#limited-public-gw-worker)
+
+    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_basics#limited-public-gw-services)
+
+    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#limited-public-gw-external)
+
+    * [Scenario: Extend your on-premises data center to a classic cluster](/docs/containers?topic=containers-plan_basics#private_clusters)
+
+    * [Worker-to-worker communication](/docs/containers?topic=containers-plan_basics#private_clusters-worker)
+
+    * [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_basics#private_clusters-master)
+
+    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_basics#private_clusters-services)
+
+    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#private_clusters-external)
 
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
 
