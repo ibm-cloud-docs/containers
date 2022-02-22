@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-02-22"
 
 keywords: kubernetes, lb2.0, nlb, app protocol, application protocol
 
@@ -95,7 +95,7 @@ The following diagram shows how a network load balancer (NLB) 1.0 directs commun
 ### Traffic flow in a gateway-enabled cluster
 {: #v1_gateway}
 
-The following diagram shows how an NLB 1.0 directs communication from the internet to an app in a [gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway).
+The following diagram shows how an NLB 1.0 directs communication from the internet to an app in a [gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway).
 {: shortdesc}
 
 ![Expose an app in a gateway-enabled cluster by using an NLB 1.0](images/cs_loadbalancer_gateway1.png){: caption="Figure 3. Expose an app in a gateway-enabled cluster by using an NLB 1.0" caption-side="bottom"}
@@ -159,7 +159,7 @@ The following diagram shows how version 2.0 NLBs in each zone direct traffic fro
 ### Traffic flow in a gateway-enabled cluster
 {: #v2_gateway}
 
-The following diagram shows how an NLB 2.0 directs communication from the internet to an app in a [gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway).
+The following diagram shows how an NLB 2.0 directs communication from the internet to an app in a [gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway).
 {: shortdesc}
 
 

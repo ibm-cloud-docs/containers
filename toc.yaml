@@ -85,6 +85,8 @@ toc:
             topics:
             - kube-strategy.md
             - cluster-plan-network.md
+            - cluster-plan-network-vpc.md
+            - cluster-plan-network-classic.md
             - cluster-plan-ha.md
             - worker-plan.md
         - topicgroup:
@@ -131,7 +133,13 @@ toc:
             - edge.md
             - network-policy.md
             - vpc-firewall.md
-            - vpc-policy.md
+            - topicgroup:
+                label: Controlling traffic with ACLs, security groups, and network policies
+                topics:
+                - vpc-network-policy.md
+                - vpc-security-group.md
+                - vpc-acls.md
+                - vpc-kube-policies.md
             - manage-scc.md
         - topicgroup:
             label: Managing the cluster network
@@ -273,18 +281,18 @@ toc:
               - topicgroup:
                   label: Archived Kubernetes version changelogs
                   topics:
-                    - cs-version-118.md
-                    - cs-version-117.md
-                    - cs-version-116.md
-                    - cs-version-115.md
-                    - cs-version-114.md
-                    - cs-version-113.md
-                    - cs-version-112.md
-                    - cs-version-111.md
-                    - cs-version-110.md
-                    - cs-version-19.md
-                    - cs-version-18.md
-                    - cs-version-17.md
+                  - cs_version_changelog_118.md
+                  - cs_version_changelog_117.md
+                  - cs_version_changelog_116.md
+                  - cs_version_changelog_115.md
+                  - cs_version_changelog_114.md
+                  - cs_version_changelog_113.md
+                  - cs_version_changelog_112.md
+                  - cs_version_changelog_111.md
+                  - cs_version_changelog_110.md
+                  - cs_version_changelog_19.md
+                  - cs_version_changelog_18.md
+                  - cs_version_changelog_17.md
         - topicgroup:
             label: IAM and Activity Tracker events
             topics:

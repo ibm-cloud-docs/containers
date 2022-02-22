@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-02-22"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -103,7 +103,7 @@ Before forwarding traffic to ALBs, the VPC load balancer also health checks the 
 
 Note that the VPC load balancer health checks only public ALBs and updates DNS lookup results for the Ingress subdomain. If you use only private ALBs, you must manually check their health and update DNS lookup results.
 
-If you set up [VPC security groups](/docs/containers?topic=containers-vpc-network-policy#security_groups) or [VPC access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy#acls) to secure your cluster network, ensure that you create the rules to allow the necessary traffic from the Kubernetes control plane IP addresses. Alternatively, to allow the inbound traffic for ALB healthchecks, you can create one rule to allow all incoming traffic on port 80.
+If you set up [VPC security groups](/docs/openshift?topic=openshift-vpc-security-group) or [VPC access control lists (ACLs)](/docs/openshift?topic=openshift-vpc-acls) to secure your cluster network, ensure that you create the rules to allow the necessary traffic from the Kubernetes control plane IP addresses. Alternatively, to allow the inbound traffic for ALB healthchecks, you can create one rule to allow all incoming traffic on port 80.
 {: note}
 
 
@@ -154,7 +154,7 @@ If you set up [VPC security groups](/docs/containers?topic=containers-vpc-networ
 ### Gateway-enabled cluster
 {: #classic-gateway}
 
-![Classic infrastructure provider icon.](images/icon-classic-2.svg) The following diagram shows how Ingress directs communication from the internet to an app in a [classic gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway).
+![Classic infrastructure provider icon.](images/icon-classic-2.svg) The following diagram shows how Ingress directs communication from the internet to an app in a [classic gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway).
 {: shortdesc}
 
 ![Expose an app in a gateway-enabled cluster by using Ingress.](images/cs_ingress_gateway.png){: caption="Figure 1. Expose an app in a gateway-enabled cluster by using Ingress" caption-side="bottom"}

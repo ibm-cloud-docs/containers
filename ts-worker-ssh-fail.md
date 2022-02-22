@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-02-22"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -91,34 +91,34 @@ If you are unable to use the `kubectl debug node` command, you can create an Alp
     apiVersion: v1
     kind: Pod
     metadata:
-        name: debug-${NODE}
-    namespace: default
-      spec:
-        containers:
-        - args: ["-c", "apk add tcpdump mtr curl; sleep 1d"]
-          command: ["/bin/sh"]
-          image: docker.io/library/alpine:latest
-          imagePullPolicy: IfNotPresent
-          name: debug
-          resources: {}
-          securityContext:
-            privileged: true
-            runAsUser: 0
-          volumeMounts:
-          - mountPath: /host
-            name: host-volume
-        volumes:
-        - name: host-volume
-          hostPath:
-            path: /
-        dnsPolicy: ClusterFirst
-        hostNetwork: true
-        hostPID: true
-        nodeSelector:
-          kubernetes.io/hostname: ${NODE}
-        restartPolicy: Never
-        securityContext: {}
-      EOF
+      name: debug-${NODE}
+      namespace: default
+    spec:
+      containers:
+      - args: ["-c", "apk add tcpdump mtr curl; sleep 1d"]
+        command: ["/bin/sh"]
+        image: icr.io/armada-master/alpine:latest
+        imagePullPolicy: IfNotPresent
+        name: debug
+        resources: {}
+        securityContext:
+          privileged: true
+          runAsUser: 0
+        volumeMounts:
+        - mountPath: /host
+          name: host-volume
+      volumes:
+      - name: host-volume
+        hostPath:
+          path: /
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      hostPID: true
+      nodeSelector:
+        kubernetes.io/hostname: ${NODE}
+      restartPolicy: Never
+      securityContext: {}
+    EOF
     ```
     {: pre}
 
@@ -129,11 +129,26 @@ If you are unable to use the `kubectl debug node` command, you can create an Alp
     ```
     {: pre}
     
-    To get `/var/log/syslog`, `containerd.log`, `kubelet.log`, and `kern.log` on a worker node, use the `kubectl cp` command in the following format instead of the `kubectl exec` command:
+    
+    
+    You can use the `kubectl cp` command to get logs or other files from a worker node. The following example gets the `/var/log/syslog` file.
     ```sh
     kubectl cp default/debug-${NODE}:/host/var/log/syslog ./syslog
     ```
     {: pre}
+
+    Get the following logs to look for issues on the worker node.
+    ```sh
+    /var/log/syslog
+    /var/log/containerd.log
+    /var/log/kubelet.log
+    /var/log/kern.log
+    ```
+    {: screen}
+
+    
+    
+    
 
 5. Run debug commands to help you gather information and troubleshoot issues. Commands that you might use to debug, such as `ip`, `ifconfig`, `nc`, `ping`, and `ps`, are already available in the shell. You can also install other tools, such as `dig`, `tcpdump`, `mtr`, and `curl`, by running `apk add <tool>`. For example, to add `dig`, run `apk add bind-tools`.
 
