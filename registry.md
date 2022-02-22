@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-02-22"
 
 keywords: kubernetes, registry, pull secret, secrets
 
@@ -29,6 +29,7 @@ Plan and set up an image registry so that developers can create app containers i
 
 
 
+
 ## Planning image registries
 {: #planning_images}
 
@@ -41,9 +42,9 @@ You can use multiple registries with {{site.data.keyword.containerlong_notm}} to
 
 |Registry|Description|Benefit|
 |--------|-----------|-------|
-|[{{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-getting-started#getting-started)|With this option, you can set up your own secured Docker image repository in {{site.data.keyword.registrylong_notm}} where you can safely store and share images between cluster users.|<ul><li>Manage access to images in your account.</li><li>Use {{site.data.keyword.IBM_notm}} provided images and sample apps, such as {{site.data.keyword.IBM_notm}} Liberty, as a parent image and add your own app code to it.</li><li>Automatic scanning of images for potential vulnerabilities by Vulnerability Advisor, including OS specific recommendations to fix them.</li></ul>|
-|Any other private registry|Connect any existing private registry to your cluster by creating an [image pull secret](https://kubernetes.io/docs/concepts/containers/images/){: external}. The secret is used to securely save your registry URL and credentials in a Kubernetes secret.|<ul><li>Use existing private registries independent of their source (Docker Hub, organization owned registries, or other private Cloud registries).</li></ul>|
-|[Public Docker Hub](https://hub.docker.com/){: external}{: #dockerhub}|Use this option to use existing public images from Docker Hub directly in your [Kubernetes deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: external} when no Dockerfile changes are needed. <p>**Note:** Keep in mind that this option might not meet your organization's security requirements, like access management, vulnerability scanning, or app privacy.</p>|<ul><li>No additional setup is needed for your cluster.</li><li>Includes a variety of open-source applications.</li></ul>|
+|[{{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-getting-started#getting-started)|With this option, you can set up your own secured Docker image repository in {{site.data.keyword.registrylong_notm}} where you can safely store and share images between cluster users.| - Manage access to images in your account.  \n - Use {{site.data.keyword.IBM_notm}} provided images and sample apps, such as {{site.data.keyword.IBM_notm}} Liberty, as a parent image and add your own app code to it.  \n - Automatic scanning of images for potential vulnerabilities by Vulnerability Advisor, including OS specific recommendations to fix them.|
+|Any other private registry|Connect any existing private registry to your cluster by creating an [image pull secret](https://kubernetes.io/docs/concepts/containers/images/){: external}. The secret is used to securely save your registry URL and credentials in a Kubernetes secret.| Use existing private registries independent of their source (Docker Hub, organization owned registries, or other private Cloud registries).|
+|[Public Docker Hub](https://hub.docker.com/){: external}{: #dockerhub}|Use this option to use existing public images from Docker Hub directly in your [Kubernetes deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: external} when no Dockerfile changes are needed. **Note:** Keep in mind that this option might not meet your organization's security requirements, like access management, vulnerability scanning, or app privacy.| No additional setup is needed for your cluster.  \n - Includes a variety of open-source applications.|
 {: caption="Public and private image registry options" caption-side="top"}
 
 After you set up an image registry, cluster users can use the images to deploy apps to the cluster.

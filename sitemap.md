@@ -188,6 +188,8 @@ subcollection: containers
 
 * [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
 
+    * [23 February 2022](/docs/containers?topic=containers-iks-release#23feb2022)
+
     * [18 February 2022](/docs/containers?topic=containers-iks-release#18feb2022)
 
     * [17 February 2022](/docs/containers?topic=containers-iks-release#17feb2022)
@@ -2593,7 +2595,7 @@ subcollection: containers
 
     * [Unsupported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_unsupported)
 
-[Classic: Registering a DNS subdomain for an NLB](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname)
+[Registering a DNS subdomain for an NLB](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname)
 
 * [Registering NLB IPs with a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns)
 
@@ -2867,13 +2869,13 @@ subcollection: containers
 
 * [Using existing {{site.data.keyword.filestorage_short}} in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
 
-    * [Step 1: Preparing your existing storage.](/docs/containers?topic=containers-file_storage#existing-file-1)
+    * [Step 1: Preparing your existing storage](/docs/containers?topic=containers-file_storage#existing-file-1)
 
     * [Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-file_storage#existing-file-2)
 
 * [Using {{site.data.keyword.filestorage_short}} in a stateful set](/docs/containers?topic=containers-file_storage#file_statefulset)
 
-    * [Dynamic provisioning: Creating the PVC when you create a stateful set](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
+    * [Creating the PVC when you create a stateful set by using dynamic provisioning](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
 
     * [Static provisioning: Using an existing PVC with your stateful set](/docs/containers?topic=containers-file_storage#file_static_statefulset)
 
@@ -4347,6 +4349,8 @@ subcollection: containers
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
 * [Version 1.12](/docs/containers?topic=containers-istio-changelog#v112)
+
+    * [Changelog for 1.12.3, released 22 February 2021](/docs/containers?topic=containers-istio-changelog#1123)
 
     * [Changelog for 1.12.2, released 03 February 2022](/docs/containers?topic=containers-istio-changelog#1202)
 
