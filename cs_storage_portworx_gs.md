@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-02-22"
 
 keywords: kubernetes, local persistent storage
 
@@ -333,7 +333,7 @@ To access the storage from your app, you must mount the PVC to your app.
 4. Verify that you can write data to your Portworx cluster.
     1. Log in to the pod that mounts your PV.
         ```sh
-        kubectl exec <pod_name> -it bash
+        kubectl exec <pod_name> -it -- bash
         ```
         {: pre}
 
