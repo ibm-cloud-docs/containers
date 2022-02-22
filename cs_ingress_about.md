@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-21"
+lastupdated: "2022-02-22"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -154,7 +154,7 @@ If you set up [VPC security groups](/docs/openshift?topic=openshift-vpc-security
 ### Gateway-enabled cluster
 {: #classic-gateway}
 
-![Classic infrastructure provider icon.](images/icon-classic-2.svg) The following diagram shows how Ingress directs communication from the internet to an app in a [classic gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway).
+![Classic infrastructure provider icon.](images/icon-classic-2.svg) The following diagram shows how Ingress directs communication from the internet to an app in a [classic gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway).
 {: shortdesc}
 
 ![Expose an app in a gateway-enabled cluster by using Ingress.](images/cs_ingress_gateway.png){: caption="Figure 1. Expose an app in a gateway-enabled cluster by using Ingress" caption-side="bottom"}

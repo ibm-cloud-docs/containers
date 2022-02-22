@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-21"
+lastupdated: "2022-02-22"
 
 keywords: kubernetes, calico, egress, rules
 
@@ -49,7 +49,7 @@ A `HostEndpoint` resource with the `ibm.role: worker_private` label is also crea
 
 These default Calico host policies allow all outbound network traffic and allow inbound traffic to specific cluster components, such as Kubernetes NodePort, LoadBalancer, and Ingress services. Any other inbound network traffic from the internet to your worker nodes that isn't specified in the default policies gets blocked. The default policies don't affect pod to pod traffic.
 
-Trying out a [gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway)? The default Calico host policies apply to the worker nodes in the gateway worker pool because they're the only worker nodes attached to the public network.
+Trying out a [gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway)? The default Calico host policies apply to the worker nodes in the gateway worker pool because they're the only worker nodes attached to the public network.
 {: tip}
 
 Don't remove policies that apply to a host endpoint unless you fully understand the policy. Be sure that you don't need the traffic allowed by the policy.
@@ -348,7 +348,7 @@ When you apply the egress pod policies that are in this policy set, only network
 Whenever new locations for {{site.data.keyword.containerlong_notm}} and other {{site.data.keyword.cloud_notm}} are enabled, the subnets for these locations are added to the Calico policies. Be sure to [watch the GitHub repository](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/public-network-isolation){: external} for any updates to these policies and keep your local isolation policies up-to-date.
 {: note}
 
-Trying out a [gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway)? These Calico policies are applied only to the worker nodes in the `gateway` worker pool because they are the only worker nodes that have a host endpoint with the `ibm.role: worker_public` label.
+Trying out a [gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway)? These Calico policies are applied only to the worker nodes in the `gateway` worker pool because they are the only worker nodes that have a host endpoint with the `ibm.role: worker_public` label.
 {: tip}
 
 Before you begin, [install and configure the Calico CLI, and set the context for your cluster to run Calico commands](#cli_install).

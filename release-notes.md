@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-21"
+lastupdated: "2022-02-22"
 
 keywords: kubernetes, release notes
 
@@ -3406,7 +3406,7 @@ End of service of {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon
 New! Gateway-enabled classic clusters
 :   Keep your compute workloads private and allow limited public connectivity to your classic cluster by enabling a gateway. You can enable a gateway only on standard, Kubernetes clusters during cluster creation.
 :   When you enable a gateway on a classic cluster, the cluster is created with a `compute` worker pool of compute worker nodes that are connected to a private VLAN only, and a `gateway` worker pool of gateway worker nodes that are connected to public and private VLANs. Traffic into or out of the cluster is routed through the gateway worker nodes, which provide your cluster with limited public access. For more information, check out the following links.
-        - [Using a gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway)
+        - [Using a gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway)
         - [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_gateway)
         - Flow of traffic to apps when using an [NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_gateway), an [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#v2_gateway), or [Ingress ALBs](/docs/containers?topic=containers-ingress-about#classic-gateway)
 :   Ready to get started? [Create a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli).
@@ -3606,7 +3606,7 @@ New! Virtual Private Cloud
 :   With classic clusters in VPC, {{site.data.keyword.containerlong_notm}} introduces version 2 of the API, which supports multiple infrastructure providers for your clusters. Your cluster network setup also changes, from worker nodes that use public and private VLANs and the public cloud service endpoint to worker nodes that are on a private subnet only and have the private cloud service endpoint enabled. For more information, check out the following links.
     - [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)
     - [About the v2 API](/docs/containers?topic=containers-cs_api_install#api_about)
-    - [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#plan_vpc_basics)
+    - [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_vpc_basics)
     
 :   Ready to get started? Try out the [Creating a classic cluster in your VPC tutorial](/docs/containers?topic=containers-vpc_ks_tutorial).
 
