@@ -1632,10 +1632,6 @@ subcollection: containers
 
     * [How can I remove my information?](/docs/containers?topic=containers-service-arch#pi-removal)
 
-* [Dependencies to other {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-service-arch#dependencies-ibmcloud)
-
-* [Dependencies to 3rd party services](/docs/containers?topic=containers-service-arch#dependencies-3rd-party)
-
 
 ## Managing access control
 {: #sitemap_managing_access_control}
