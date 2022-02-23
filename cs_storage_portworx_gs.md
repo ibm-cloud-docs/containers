@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-22"
+lastupdated: "2022-02-23"
 
 keywords: kubernetes, local persistent storage
 
@@ -130,59 +130,61 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
     To view the details of a storage class, run `kubectl describe storageclass <storageclass_name>`.
     {: tip}
 
-2. If you don't want to use an existing storage class, create a customized storage class. For a full list of supported options that you can specify in your storage class, see [Using Dynamic Provisioning](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning){: external}.
-    1. Create a configuration file for your storage class.
-        ```yaml
-        kind: StorageClass
-        apiVersion: storage.k8s.io/v1
-        metadata:
-        name: <storageclass_name>
-        provisioner: kubernetes.io/portworx-volume
-        parameters:
-          repl: "<replication_factor>"
-          secure: "<true_or_false>"
-          priority_io: "<io_priority>"
-          shared: "<true_or_false>"
-        ```
-        {: codeblock}
+1. If you don't want to use an existing storage class, create a customized storage class. For a full list of supported options that you can specify in your storage class, see [Using Dynamic Provisioning](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning){: external}.
 
-        `metadata.name`
-        :    Enter a name for your storage class. 
-        
-        `parameters.repl`
-        :    Enter the number of replicas for your data that you want to store across different worker nodes. Allowed numbers are `1`,`2`, or `3`. For example, if you enter `3`, then your data is replicated across three different worker nodes in your Portworx cluster. To store your data highly available, use a multizone cluster and replicate your data across three worker nodes in different zones. 
-             You must have enough worker nodes to fulfill your replication requirement. For example, if you have two worker nodes, but you specify three replicas, then the creation of the PVC with this storage class fails.
-             {: note}
-             
-        `parameters.secure`
-        :    Specify whether you want to encrypt the data in your volume with {{site.data.keyword.keymanagementservicelong_notm}}. Choose between the following options: 
-             - **true**: Enter `true` to enable encryption for your Portworx volumes. To encrypt volumes, you must have an {{site.data.keyword.keymanagementservicelong_notm}} service instance and a Kubernetes secret that holds your customer root key. For more information about how to set up encryption for Portworx volumes, see [Encrypting your Portworx volumes](/docs/containers?topic=containers-portworx#encrypt_volumes). 
-             - **false**: When you enter `false`, your Portworx volumes are not encrypted.
-        :    If you don't specify this option, your Portworx volumes are not encrypted by default.
-        :    You can choose to enable volume encryption in your PVC, even if you disabled encryption in your storage class. The setting that you make in the PVC take precedence over the settings in the storage class.  
-        
-        `parameters.priority_io`
-        :    Enter the Portworx I/O priority that you want to request for your data. Available options are `high`, `medium`, and `low`. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on the network bandwidth of your worker node and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the slower network speed that comes with virtual worker nodes.
-        :    When you create a PVC with a storage class, the number of replicas that you specify in `parameters/repl` takes precedence over the I/O priority. For example, when you specify three replicas that you want to store on high-speed disks, but you have only one worker node with a high-speed disk in your cluster, then your PVC creation still succeeds. Your data is replicated across both high and low speed disks. 
-        
-        `parameters.shared`
-        :    Define whether you want to allow multiple pods to access the same volume. Choose between the following options: 
-             - **True:** If you set this option to `true`, then you can access the same volume by multiple pods that are distributed across worker nodes in different zones. 
-             - **False:** If you set this option to `false`, you can access the volume from multiple pods only if the pods are deployed onto the worker node that attaches the physical disk that backs the volume. If your pod is deployed onto a different worker node, the pod can't access the volume.
+1. Create a configuration file for your storage class.
 
-    2. Create the storage class.
-        ```sh
-        kubectl apply -f storageclass.yaml
-        ```
-        {: pre}
+    ```yaml
+    kind: StorageClass
+    apiVersion: storage.k8s.io/v1
+    metadata:
+    name: <storageclass_name>
+    provisioner: kubernetes.io/portworx-volume
+    parameters:
+      repl: "<replication_factor>"
+      secure: "<true_or_false>"
+      priority_io: "<io_priority>"
+      shared: "<true_or_false>"
+    ```
+    {: codeblock}
 
-    3. Verify that the storage class is created.
-        ```sh
-        kubectl get storageclasses
-        ```
-        {: pre}
+    `metadata.name`
+    :    Enter a name for your storage class. 
+    
+    `parameters.repl`
+    :    Enter the number of replicas for your data that you want to store across different worker nodes. Allowed numbers are `1`,`2`, or `3`. For example, if you enter `3`, then your data is replicated across three different worker nodes in your Portworx cluster. To store your data highly available, use a multizone cluster and replicate your data across three worker nodes in different zones. 
+         You must have enough worker nodes to fulfill your replication requirement. For example, if you have two worker nodes, but you specify three replicas, then the creation of the PVC with this storage class fails.
+         {: note}
+         
+    `parameters.secure`
+    :    Specify whether you want to encrypt the data in your volume with {{site.data.keyword.keymanagementservicelong_notm}}. Choose between the following options: 
+         - **true**: Enter `true` to enable encryption for your Portworx volumes. To encrypt volumes, you must have an {{site.data.keyword.keymanagementservicelong_notm}} service instance and a Kubernetes secret that holds your customer root key. For more information about how to set up encryption for Portworx volumes, see [Encrypting your Portworx volumes](/docs/containers?topic=containers-portworx#encrypt_volumes). 
+         - **false**: When you enter `false`, your Portworx volumes are not encrypted.
+    :    If you don't specify this option, your Portworx volumes are not encrypted by default.
+    :    You can choose to enable volume encryption in your PVC, even if you disabled encryption in your storage class. The setting that you make in the PVC take precedence over the settings in the storage class.  
+    
+    `parameters.priority_io`
+    :    Enter the Portworx I/O priority that you want to request for your data. Available options are `high`, `medium`, and `low`. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on the network bandwidth of your worker node and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the slower network speed that comes with virtual worker nodes.
+    :    When you create a PVC with a storage class, the number of replicas that you specify in `parameters/repl` takes precedence over the I/O priority. For example, when you specify three replicas that you want to store on high-speed disks, but you have only one worker node with a high-speed disk in your cluster, then your PVC creation still succeeds. Your data is replicated across both high and low speed disks. 
+    
+    `parameters.shared`
+    :    Define whether you want to allow multiple pods to access the same volume. Choose between the following options: 
+         - **True:** If you set this option to `true`, then you can access the same volume by multiple pods that are distributed across worker nodes in different zones. 
+         - **False:** If you set this option to `false`, you can access the volume from multiple pods only if the pods are deployed onto the worker node that attaches the physical disk that backs the volume. If your pod is deployed onto a different worker node, the pod can't access the volume.
 
-2. Create a persistent volume claim (PVC).
+1. Create the storage class.
+    ```sh
+    kubectl apply -f storageclass.yaml
+    ```
+    {: pre}
+
+1. Verify that the storage class is created.
+    ```sh
+    kubectl get storageclasses
+    ```
+    {: pre}
+
+1. Create a persistent volume claim (PVC).
     1. Create a configuration file for your PVC.
         ```yaml
         kind: PersistentVolumeClaim
@@ -200,7 +202,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
         {: codeblock}
 
         `metadata.name`
-        :    Enter a name for your PVC, such as <code>mypvc</code>. 
+        :    Enter a name for your PVC, such as `mypvc`. 
         
         
         `spec.accessModes`
@@ -317,7 +319,7 @@ To access the storage from your app, you must mount the PVC to your app.
     {: pre}
 
     The mount point is in the **Volume Mounts** field and the volume is in the **Volumes** field.
-    ```
+    ```sh
     Volume Mounts:
             /var/run/secrets/kubernetes.io/serviceaccount from default-token-tqp61 (ro)
             /volumemount from myvol (rw)
@@ -345,7 +347,7 @@ To access the storage from your app, you must mount the PVC to your app.
         {: pre}
 
     4. Read the file that you created.
-        ```
+        ```sh
         cat test.txt
         ```
         {: pre}

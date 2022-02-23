@@ -188,6 +188,8 @@ subcollection: containers
 
 * [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
 
+    * [24 February 2022](/docs/containers?topic=containers-iks-release#24feb2022)
+
     * [23 February 2022](/docs/containers?topic=containers-iks-release#23feb2022)
 
     * [18 February 2022](/docs/containers?topic=containers-iks-release#18feb2022)
@@ -2766,6 +2768,8 @@ subcollection: containers
 
 * [Customizing the ALB deployment](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy)
 
+    * [Create a configmap to customize the Ingress deployment](/docs/containers?topic=containers-comm-ingress-annotations#create-ingress-configmap-custom)
+
 * [Customizing the Ingress class](/docs/containers?topic=containers-comm-ingress-annotations#-custom-ingress-class)
 
 * [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
@@ -2994,6 +2998,8 @@ subcollection: containers
 * [Setting up encryption for {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block-encryption)
 
 * [Customizing the default storage settings](/docs/containers?topic=containers-vpc-block#vpc-customize-default)
+
+    * [Changing the default storage class](/docs/containers?topic=containers-vpc-block#vpc-block-default-edit)
 
     * [Creating a custom storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class)
 
