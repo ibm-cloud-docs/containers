@@ -3707,6 +3707,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version 1.0.374](/docs/containers?topic=containers-cs_cli_changelog#cli-10374)
+
 * [Version 1.0.372](/docs/containers?topic=containers-cs_cli_changelog#cli-10372)
 
 * [Version 1.0.353](/docs/containers?topic=containers-cs_cli_changelog#cli-10353)
