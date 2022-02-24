@@ -1880,7 +1880,7 @@ subcollection: containers
 
     * [Creating outbound rules by using the command line](/docs/containers?topic=containers-vpc-security-group#security-group-cli-outbound)
 
-* [Required inbound rules](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-rules)
+* [Required inbound rules](/docs/containers?topic=containers-vpc-security-group#required-group-inbound-rules)
 
 * [Required outbound rules](/docs/containers?topic=containers-vpc-security-group#security-group-outbound-rules)
 
@@ -3706,6 +3706,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.374](/docs/containers?topic=containers-cs_cli_changelog#cli-10374)
 
 * [Version 1.0.372](/docs/containers?topic=containers-cs_cli_changelog#cli-10372)
 
