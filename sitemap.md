@@ -1880,7 +1880,7 @@ subcollection: containers
 
     * [Creating outbound rules by using the command line](/docs/containers?topic=containers-vpc-security-group#security-group-cli-outbound)
 
-* [Required inbound rules](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-rules)
+* [Required inbound rules](/docs/containers?topic=containers-vpc-security-group#required-group-inbound-rules)
 
 * [Required outbound rules](/docs/containers?topic=containers-vpc-security-group#security-group-outbound-rules)
 

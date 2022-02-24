@@ -40,7 +40,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 **Deprecated and unsupported Kubernetes versions**:
 * Deprecated: [1.20](/docs/containers?topic=containers-cs_versions_120), [1.19](/docs/containers?topic=containers-cs_versions_119)
-* Unsupported: [1.5, 1.7, 1.8, 1.9, 1.10, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#k8s_version_archive)
+* Unsupported: [1.5, 1.7, 1.8, 1.9, 1.10, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
 
 To check the server version of a cluster, log in to the cluster and run the following command.
 ```sh
