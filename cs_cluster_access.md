@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-02-23"
 
 keywords: kubernetes, clusters
 
@@ -70,7 +70,7 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
         ```
         {: pre}
 
-        ```
+        ```sh
         Starting to serve on 127.0.0.1:8001
         ```
         {: screen}
@@ -148,7 +148,8 @@ The Kubernetes master is accessible through the private cloud service endpoint i
     ```
     {: screen}
 
-2. Create a YAML file that is named `kube-api-via-nlb.yaml`. This YAML creates a private `LoadBalancer` service and exposes the private cloud service endpoint through that NLB. Replace `<private_service_endpoint_port>` with the port you found in the previous step.
+2. Create a YAML file named `kube-api-via-nlb.yaml`. This YAML creates a private `LoadBalancer` service and exposes the private cloud service endpoint through that NLB. Replace `<private_service_endpoint_port>` with the port you found in the previous step.
+
     ```yaml
     apiVersion: v1
     kind: Service
@@ -222,17 +223,16 @@ The Kubernetes master is accessible through the private cloud service endpoint i
         {: pre}
 
     * For Windows users:
+    
         ```sh
         notepad C:\Windows\System32\drivers\etc\hosts
         ```
         {: pre}
-    
+        
         Depending on your local machine permissions, you might need to run Notepad as an administrator to edit the hosts file.
-        {: tip}
 
-        Example text to add
         ```sh
-        10.186.92.42      c1.private.us-east.containers.cloud.ibm.com
+        10.186.92.42  c1.private.us-east.containers.cloud.ibm.com
         ```
         {: codeblock}
 
@@ -360,6 +360,7 @@ In Kubernetes cluster versions 1.21 and later, Konnectivity replaced the OpenVPN
 You can configure a webhook by referencing the webhook app as a Kubernetes service, or by referencing the webhook app as an IP address or publicly registered DNS name.
 
 #### Example configuration for referencing the webhook app as a Kubernetes service
+{: #example-webhook-app-svc}
 
 ```sh
 clientConfig:
@@ -373,6 +374,7 @@ clientConfig:
 {: screen}
 
 #### Example configuration for referencing the webhook app as an IP address or publicly registered DNS name
+{: #example-webhook-app-dns}
 
 ```sh
 clientConfig:

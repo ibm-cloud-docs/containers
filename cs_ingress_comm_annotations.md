@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-02-23"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -727,7 +727,7 @@ ingress.bluemix.net/tcp-ports: "serviceName=app1 ingressPort=9000 servicePort=80
 ```
 {: screen}
 
-Kubernetes Ingress fields:
+
 1. Create a `tcp-services` configmap to specify your TCP port, such as the following example ports. For the requirements of the `tcp-services` configmap, see [this blog](https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/){: external}.
     ```yaml
     apiVersion: v1
@@ -838,6 +838,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 {: shortdesc}
 
 1. Get the names of the services that expose each ALB.
+
     * Classic clusters:
     
         ```sh
@@ -852,62 +853,63 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
         ```
         {: pre}
 
-2. Create a configmap to customize the Ingress deployment.
+### Create a configmap to customize the Ingress deployment
+{: #create-ingress-configmap-custom}
 
-    1. Create a YAML file for an `ibm-ingress-deploy-config` configmap. For each ALB ID, you can specify one or more of the following optional settings. Note that you can specify only the settings that you want to configure, and don't need to specify all the settings.
-        ```yaml
-        apiVersion: v1
-        kind: ConfigMap
-        metadata:
-          name: ibm-ingress-deploy-config
-          namespace: kube-system
-        data:
-          <alb1-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
-          <alb2-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>","logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
-          ...
-        ```
-        {: screen}
+1. Create a YAML file for an `ibm-ingress-deploy-config` configmap. For each ALB ID, you can specify one or more of the following optional settings. Note that you can specify only the settings that you want to configure, and don't need to specify all the settings.
 
-        `defaultBackendService`
-        :   Specify the name of an optional default service to receive requests when no host is configured or no matching host is found. This service replaces the IBM-provided default service that generates a `404` message. You might use this service to configure custom error pages or for testing connections.
-        
-       `defaultCertificate`
-        :   A secret for a default TLS certificate to apply to any subdomain that is configured with Ingress ALBs in the format `secret_namespace/secret_name`. To create a secret, you can run the [ibmcloud ks ingress secret create](/docs/containers?topic=containers-ingress-types#manage_certs) command. If a secret for a different TLS certificate is specified in the `spec.tls` section of an Ingress resource, and that secret exists in the same namespace as the Ingress resource, then that secret is applied instead of this default secret.
-        
-        `enableSslPassthrough`
-        :   Enable SSL passthrough for the ALB. The TLS connection is not terminated and passes through untouched.
-        
-        `httpPort`, `httpsPort`
-        :   Expose non-default ports for the Ingress ALB by adding the HTTP or HTTPS ports that you want to open.
-        
-        `ingressClass`
-        :   If you specified a class other than `public-iks-k8s-nginx` or `private-iks-k8s-nginx` in your Ingress resource, specify the class.
-        
-        `logLevel`
-        :   Specify the log level that you want to use. Choose from the following values. 
-        :   `2`: Shows the details by using diff about the changes in the configuration in `NGINX`. 
-        :   `3`: Shows the details about the service, Ingress rule, endpoint changes in JSON format.
-        :   `5`: Configures `NGINX` in debug mode.
-        :   For more information about logging, see [Debug Logging](https://kubernetes.github.io/ingress-nginx/troubleshooting/#debug-logging){: external}.
-        
-        `replicas`
-        :   By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods. For more information, see [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-types#scale_albs).
-        
-        `tcpServicesConfig`
-        :   Specify a configmap and the namespace that the configmap is in, such as [`kube-system/tcp-services`](#tcp-ports-non-standard), that contains information about accessing your app service through a non-standard TCP port.
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: ibm-ingress-deploy-config
+      namespace: kube-system
+    data:
+      <alb1-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
+      <alb2-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>","logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
+    ```
+    {: screen}
 
 
-    2. Create the `ibm-ingress-deploy-config` configmap in your cluster.
-        ```sh
-        kubectl create -f ibm-ingress-deploy-config.yaml
-        ```
-        {: pre}
+    `defaultBackendService`
+    :   Specify the name of an optional default service to receive requests when no host is configured or no matching host is found. This service replaces the IBM-provided default service that generates a `404` message. You might use this service to configure custom error pages or for testing connections.
+    
+   `defaultCertificate`
+    :   A secret for a default TLS certificate to apply to any subdomain that is configured with Ingress ALBs in the format `secret_namespace/secret_name`. To create a secret, you can run the [ibmcloud ks ingress secret create](/docs/containers?topic=containers-ingress-types#manage_certs) command. If a secret for a different TLS certificate is specified in the `spec.tls` section of an Ingress resource, and that secret exists in the same namespace as the Ingress resource, then that secret is applied instead of this default secret.
+    `enableSslPassthrough`
+    :   Enable SSL passthrough for the ALB. The TLS connection is not terminated and passes through untouched.
+    
+    `httpPort`, `httpsPort`
+    :   Expose non-default ports for the Ingress ALB by adding the HTTP or HTTPS ports that you want to open.
+    
+    `ingressClass`
+    :   If you specified a class other than `public-iks-k8s-nginx` or `private-iks-k8s-nginx` in your Ingress resource, specify the class.
+    
+    `logLevel`
+    :   Specify the log level that you want to use. Choose from the following values. 
+    :   `2`: Shows the details by using diff about the changes in the configuration in `NGINX`. 
+    :   `3`: Shows the details about the service, Ingress rule, endpoint changes in JSON format.
+    :   `5`: Configures `NGINX` in debug mode.
+    :   For more information about logging, see [Debug Logging](https://kubernetes.github.io/ingress-nginx/troubleshooting/#debug-logging){: external}.
+    
+    `replicas`
+    :   By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods. For more information, see [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-types#scale_albs).
+    
+    `tcpServicesConfig`
+    :   Specify a configmap and the namespace that the configmap is in, such as [`kube-system/tcp-services`](#tcp-ports-non-standard), that contains information about accessing your app service through a non-standard TCP port.
 
-    3. To pick up the changes, update your ALBs. Note that it might take up to 5 minutes for the changes to be applied to your ALBs.
-        ```sh
-        ibmcloud ks ingress alb update -c <cluster_name_or_ID>
-        ```
-        {: pre}
+
+2. Create the `ibm-ingress-deploy-config` configmap in your cluster.
+    ```sh
+    kubectl create -f ibm-ingress-deploy-config.yaml
+    ```
+    {: pre}
+
+3. To pick up the changes, update your ALBs. Note that it might take up to 5 minutes for the changes to be applied to your ALBs.
+    ```sh
+    ibmcloud ks ingress alb update -c <cluster_name_or_ID>
+    ```
+    {: pre}
 
 3. If you specified non-standard HTTP, HTTPS, or TCP ports, you must open the ports on each ALB service.
     1. For each ALB service that you found in step 1, edit the YAML file.

@@ -267,32 +267,64 @@ toc:
         - topicgroup:
             label: Version history
             topics:
-              - cs_versions.md
-              - cs_versions_changelog.md
-              - benchmarks.md
-              - cs_versions_addons.md
-              - cs_versions_istio.md
-              - versions-autoscaler.md
-              - versions-vpc-block-addon.md
-              - versions-object.md
-              - versions-static-route.md
-              - versions-backup-restore.md
-              - cs_versions_alb_oauth_proxy.md
-              - topicgroup:
-                  label: Archived Kubernetes version changelogs
-                  topics:
-                  - cs_version_changelog_118.md
-                  - cs_version_changelog_117.md
-                  - cs_version_changelog_116.md
-                  - cs_version_changelog_115.md
-                  - cs_version_changelog_114.md
-                  - cs_version_changelog_113.md
-                  - cs_version_changelog_112.md
-                  - cs_version_changelog_111.md
-                  - cs_version_changelog_110.md
-                  - cs_version_changelog_19.md
-                  - cs_version_changelog_18.md
-                  - cs_version_changelog_17.md
+                - cs_versions_overview.md
+                - cs_benchmarks_overview.md
+                - topicgroup:
+                    label: Version 1.23 
+                    topics:
+                    - cs_versions_123.md
+                    - cs_versions_changelog_123.md
+                    - cs_benchmarks_123.md
+                - topicgroup:
+                    label: Version 1.22 
+                    topics:
+                    - cs_versions_122.md
+                    - cs_versions_changelog_122.md
+                    - cs_benchmarks_122.md
+                - topicgroup:
+                    label: Version 1.21 
+                    topics:
+                    - cs_versions_121.md
+                    - cs_versions_changelog_121.md
+                    - cs_benchmarks_121.md
+                - topicgroup:
+                    label: (Deprecated) Version 1.20 
+                    topics:
+                    - cs_versions_120.md
+                    - cs_versions_changelog_120.md
+                    - cs_benchmarks_120.md
+                - topicgroup:
+                    label: (Deprecated) Version 1.19 
+                    topics:
+                    - cs_versions_119.md
+                    - cs_versions_changelog_119.md
+                    - cs_benchmarks_119.md   
+                - topicgroup:
+                    label: Archived Kubernetes version changelogs
+                    topics:
+                    - cs_versions_changelog_118.md
+                    - cs_versions_changelog_117.md
+                    - cs_versions_changelog_116.md
+                    - cs_versions_changelog_115.md
+                    - cs_versions_changelog_114.md
+                    - cs_versions_changelog_113.md
+                    - cs_versions_changelog_112.md
+                    - cs_versions_changelog_111.md
+                    - cs_versions_changelog_110.md
+                    - cs_versions_changelog_19.md
+                    - cs_versions_changelog_18.md
+                    - cs_versions_changelog_17.md
+                - topicgroup:
+                    label: Add-on version history
+                    topics:
+                    - cs_versions_addons.md
+                    - cs_versions_istio.md
+                    - versions-autoscaler.md
+                    - versions-vpc-block-addon.md
+                    - versions-object.md
+                    - versions-static-route.md
+                    - versions-backup-restore.md
+                    - cs_versions_alb_oauth_proxy.md
         - topicgroup:
             label: IAM and Activity Tracker events
             topics:

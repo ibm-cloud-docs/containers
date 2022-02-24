@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-02-23"
 
 keywords: kubernetes, helm
 
@@ -75,7 +75,6 @@ Example output
 Name            Version   Health State   Health Status
 debug-tool      2.0.0     normal         Addon Ready
 istio           1.4       -              Enabling
-kube-terminal   1.0.0     normal         Addon Ready
 ```
 {: screen}
 
