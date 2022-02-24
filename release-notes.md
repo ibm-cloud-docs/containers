@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-23"
+lastupdated: "2022-02-24"
 
 keywords: kubernetes, release notes
 
@@ -35,6 +35,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 {{site.data.keyword.block_storage_is_short}} add-on.
 :   [Version 4.2](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+
+
+
+Kubernetes Ingress image
+:   Versions 1.1.1_1996_iks, 1.0.3_1995_iks, and 0.49.3_1994_iks of the [Kubernetes Ingress image](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) are released.
+
+
 
 
 
