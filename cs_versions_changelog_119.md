@@ -3,7 +3,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-02-24"
+lastupdated: "2022-02-25"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.19
 
@@ -20,7 +20,7 @@ subcollection: containers
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters that run version 1.21. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}
 
-Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 14 Mar 2022. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions#cs_v121) as soon as possible.
+Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 14 Mar 2022. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
 {: deprecated}
 
 ## Overview
@@ -42,7 +42,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the version 1.19 changelog.
 {: shortdesc}
 
-Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 14 Mar 2022. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120) as soon as possible.
+Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 14 Mar 2022. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions_120) as soon as possible.
 {: deprecated}
 
 ### Change log for worker node fix pack 1.19.16_1577, released 14 February 2022

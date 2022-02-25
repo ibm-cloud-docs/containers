@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-02-25"
 
 keywords: kubernetes, upgrade, version
 
@@ -22,7 +22,7 @@ You can install updates to keep your Kubernetes clusters up-to-date in {{site.da
 ## Updating the Kubernetes master
 {: #master}
 
-Periodically, the Kubernetes project releases [major, minor, or patch updates](/docs/containers?topic=containers-cs_versions#version_types). Updates can affect the Kubernetes API server version or other components in your Kubernetes master. IBM updates the patch version, but you must update the master major and minor versions.
+Periodically, the Kubernetes project releases [major, minor, or patch updates](/docs/containers?topic=containers-cs_versions#update_types). Updates can affect the Kubernetes API server version or other components in your Kubernetes master. IBM updates the patch version, but you must update the master major and minor versions.
 {: shortdesc}
 
 ### About updating the master
