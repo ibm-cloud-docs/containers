@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-24"
+lastupdated: "2022-02-25"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -34,13 +34,30 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-* Latest: [1.23](/docs/containers?topic=containers-cs_versions_123)
-* Default: [1.21](/docs/containers?topic=containers-cs_versions_122)
-* Other: [1.22](/docs/containers?topic=containers-cs_versions_122)
+:    **Latest**: 1.23
+     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_123).
+     - [Change log](/docs/containers?topic=containers-changelog_123)
+   
+:    **Default**: 1.21
+     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_121).
+     - [Change log](/docs/containers?topic=containers-changelog_121)
 
-**Deprecated and unsupported Kubernetes versions**:
-* Deprecated: [1.20](/docs/containers?topic=containers-cs_versions_120), [1.19](/docs/containers?topic=containers-cs_versions_119)
-* Unsupported: [1.5, 1.7, 1.8, 1.9, 1.10, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
+:    **Other**: 1.22
+     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_122).
+     - [Change log](/docs/containers?topic=containers-changelog_122)
+
+**Deprecated Kubernetes versions**:
+:    1.20
+     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_120)
+     - [Change log](/docs/containers?topic=containers-changelog_120) 
+:    1.19
+     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_119)
+     - [Change log](/docs/containers?topic=containers-changelog_119)
+
+**Unsupported Kubernetes versions**: 
+:    1.5, 1.7, 1.8, 1.9, 1.10, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18
+     - [Archived change logs](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
+
 
 To check the server version of a cluster, log in to the cluster and run the following command.
 ```sh
@@ -79,7 +96,6 @@ Patch updates (x.x.4_1510)
 :   Patches can be for worker nodes, masters, or both.
     - **Worker node patches**: Check monthly to see whether an update is available, and use the [`ibmcloud ks worker update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) command or the [`ibmcloud ks worker reload`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) command to apply these security and operating system patches. During an update or reload, your worker node machine is reimaged, and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
     - **Master patches**: Master patches are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, as noted in the changelog, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply.
-
 
 ## Release history
 {: #release-history}
