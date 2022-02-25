@@ -3858,6 +3858,12 @@ subcollection: containers
 
     * [Version 1.5 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v1-5)
 
+[Kubernetes version changelogs](/docs/containers?topic=containers-changelog#changelog)
+
+* [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
+
+* [Version change logs](/docs/containers?topic=containers-changelog#version-change-logs)
+
 [CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark)
 
 * [Available benchmark versions](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-versions)
