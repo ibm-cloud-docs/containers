@@ -98,7 +98,7 @@ Istio add-on
 {: release-note}
 
 Worker node fix pack
-:   Kubernetes [1.23.3_1519](/docs/containers?topic=containers-changelog#1233_1519), [1.22.6_1539](/docs/containers?topic=containers-changelog#1226_1539), [1.21.9_1549](/docs/containers?topic=containers-changelog#1219_1549), [1.20.15_1570](/docs/containers?topic=containers-changelog#12015_1570), and [1.19.16_1577](/docs/containers?topic=containers-changelog#11916_1577).
+:   Kubernetes [1.23.3_1519](/docs/containers?topic=containers-changelog_123#1233_1519), [1.22.6_1539](/docs/containers?topic=containers-changelog_122#1226_1539), [1.21.9_1549](/docs/containers?topic=containers-changelog_121#1219_1549), [1.20.15_1570](/docs/containers?topic=containers-changelog_120#12015_1570), and [1.19.16_1577](/docs/containers?topic=containers-changelog_119#11916_1577).
 
 
 {{site.data.keyword.cos_full_notm}} doc restructuring. 
@@ -115,7 +115,7 @@ Worker node fix pack
 
 
 Certified Kubernetes
-:   Version [1.23](/docs/containers?topic=containers-cs_versions#cs_v123) release is now certified.
+:   Version [1.23](/docs/containers?topic=containers-cs_versions_123) release is now certified.
 
 
   
@@ -133,10 +133,10 @@ ALB OAuth Proxy add-on
 
 
 New! Kubernetes 1.23
-:   You can create or [update clusters to Kubernetes version 1.23](/docs/containers?topic=containers-cs_versions#cs_v123). With Kubernetes 1.23, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. 
+:   You can create or [update clusters to Kubernetes version 1.23](/docs/containers?topic=containers-cs_versions_123). With Kubernetes 1.23, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. 
 
 Deprecated and unsupported Kubernetes versions
-:   With the release of Kubernetes 1.23, clusters that run version 1.20 remain deprecated, with a tentative unsupported date of May 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions#cs_v121) as soon as possible.
+:   With the release of Kubernetes 1.23, clusters that run version 1.20 remain deprecated, with a tentative unsupported date of May 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
 
 
 
@@ -163,7 +163,7 @@ Istio add-on
 
 Version changelog
 :   Fix pack update.
-:   Kubernetes [1.22.6_1538](/docs/containers?topic=containers-changelog#1226_1538), [1.21.9_1548](/docs/containers?topic=containers-changelog#1219_1548), [1.20.15_1569](/docs/containers?topic=containers-changelog#12015_1569), [1.19.16_1576](/docs/containers?topic=containers-changelog#11916_1576).
+:   Kubernetes [1.22.6_1538](/docs/containers?topic=containers-changelog_122#1226_1538), [1.21.9_1548](/docs/containers?topic=containers-changelog_121#1219_1548), [1.20.15_1569](/docs/containers?topic=containers-changelog_120#12015_1569), [1.19.16_1576](/docs/containers?topic=containers-changelog_119#11916_1576).
 
 
 
@@ -248,7 +248,7 @@ Review the release notes for January 2022.
 
 Version changelog
 :   Worker node fix pack update.
-:   Kubernetes [1.22.4_1536](/docs/containers?topic=containers-changelog#1224_1536), [1.21.7_1546](/docs/containers?topic=containers-changelog#1217_1546), [1.20.13_1567](/docs/containers?topic=containers-changelog#12013_1567), and [1.19.16_1574](/docs/containers?topic=containers-changelog#11916_1574).
+:   Kubernetes [1.22.4_1536](/docs/containers?topic=containers-changelog_122#1224_1536), [1.21.7_1546](/docs/containers?topic=containers-changelog_121#1217_1546), [1.20.13_1567](/docs/containers?topic=containers-changelog_120#12013_1567), and [1.19.16_1574](/docs/containers?topic=containers-changelog_119#11916_1574).
 
 
 
@@ -291,7 +291,7 @@ Istio add-on
 {: release-note}
 
 Worker node fix pack update
-:   Changelog documentation is available for worker node versions [`1.22.4_1534`](/docs/containers?topic=containers-changelog#1224_1534), [`1.21.7_1544`](/docs/containers?topic=containers-changelog#1217_1544), [`1.20.13_1566`](/docs/containers?topic=containers-changelog#12013_1566), and [`1.19.16_1573`](/docs/containers?topic=containers-changelog#11916_1573).
+:   Changelog documentation is available for worker node versions [`1.22.4_1534`](/docs/containers?topic=containers-changelog_122#1224_1534), [`1.21.7_1544`](/docs/containers?topic=containers-changelog_121#1217_1544), [`1.20.13_1566`](/docs/containers?topic=containers-changelog_120#12013_1566), and [`1.19.16_1573`](/docs/containers?topic=containers-changelog_119#11916_1573).
 
 ## December 2021
 {: #release-dec-2021}
@@ -309,7 +309,7 @@ Review the release notes for December 2021.
 
   
 Deprecated and unsupported Kubernetes versions
-:   Clusters that run version 1.19 are deprecated, with a tentative unsupported date of 31 Jan 2022. Update your clusters to at least [version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120) as soon as possible.
+:   Clusters that run version 1.19 are deprecated, with a tentative unsupported date of 31 Jan 2022. Update your clusters to at least [version 1.20](/docs/containers?topic=containers-cs_versions_120) as soon as possible.
 
 
 ### 14 December 2021
@@ -332,7 +332,7 @@ Istio add-on
 :   [Version `1.12`](/docs/containers?topic=containers-istio-changelog#1102) of the Istio managed add-on is released.
 
 Master fix pack update
-:   Changelog documentation is available for version [`1.22.4_1531`](/docs/containers?topic=containers-changelog#1224_1531), [`1.21.7_1541`](/docs/containers?topic=containers-changelog#1217_1541), [`1.20.13_1563`](/docs/containers?topic=containers-changelog#12013_1563), and [`1.19.16_1570`](/docs/containers?topic=containers-changelog#11916_1570).
+:   Changelog documentation is available for version [`1.22.4_1531`](/docs/containers?topic=containers-changelog_122#1224_1531), [`1.21.7_1541`](/docs/containers?topic=containers-changelog_121#1217_1541), [`1.20.13_1563`](/docs/containers?topic=containers-changelog_120#12013_1563), and [`1.19.16_1570`](/docs/containers?topic=containers-changelog_119#11916_1570).
 
 
 
@@ -343,7 +343,7 @@ Master fix pack update
 
 
 Worker node fix pack update
-:   Changelog documentation is available for version [`1.22.4_1532`](/docs/containers?topic=containers-changelog#1224_1532), [`1.21.7_1542`](/docs/containers?topic=containers-changelog#1217_1542), [`1.20.13_1564`](/docs/containers?topic=containers-changelog#12013_1564), and [`1.19.16_1571`](/docs/containers?topic=containers-changelog#11916_1571).
+:   Changelog documentation is available for version [`1.22.4_1532`](/docs/containers?topic=containers-changelog_122#1224_1532), [`1.21.7_1542`](/docs/containers?topic=containers-changelog_121#1217_1542), [`1.20.13_1564`](/docs/containers?topic=containers-changelog_120#12013_1564), and [`1.19.16_1571`](/docs/containers?topic=containers-changelog_119#11916_1571).
 
 
 
@@ -354,7 +354,7 @@ Worker node fix pack update
 
 
 {{site.data.keyword.containershort}} default version update.
-:   [1.21](/docs/containers?topic=containers-cs_versions#version_types) is now the default version.
+:   [1.21](/docs/containers?topic=containers-cs_versions#cs_versions_available) is now the default version.
 
 
 
@@ -380,7 +380,7 @@ Container service CLI
 {: release-note}
 
 Worker node fix pack update
-:   Changelog documentation is available for version [`1.22.3_1530`](/docs/containers?topic=containers-changelog#1223_1530), [`1.21.6_1540`](/docs/containers?topic=containers-changelog#1216_1540), [`1.20.12_1562`](/docs/containers?topic=containers-changelog#12012_1562), and [`1.19.16_1569`](/docs/containers?topic=containers-changelog#11916_1569).
+:   Changelog documentation is available for version [`1.22.3_1530`](/docs/containers?topic=containers-changelog_122#1223_1530), [`1.21.6_1540`](/docs/containers?topic=containers-changelog_121#1216_1540), [`1.20.12_1562`](/docs/containers?topic=containers-changelog_120#12012_1562), and [`1.19.16_1569`](/docs/containers?topic=containers-changelog_119#11916_1569).
 
 {{site.data.keyword.block_storage_is_short}} add-on.
 :   [Version 4.0.3_793](/docs/containers?topic=containers-vpc_bs_changelog) is released.
@@ -419,7 +419,7 @@ Kubernetes Ingress image
 {: release-note}
 
 Worker node fix pack update
-:   Changelog documentation is available for version [`1.22.3_1529`](/docs/containers?topic=containers-changelog#1223_1529), [`1.21.6_1539`](/docs/containers?topic=containers-changelog#1216_1539), [`1.20.12_1561`](/docs/containers?topic=containers-changelog#12012_1561), and [`1.19.16_1568`](/docs/containers?topic=containers-changelog#11916_1568).
+:   Changelog documentation is available for version [`1.22.3_1529`](/docs/containers?topic=containers-changelog_122#1223_1529), [`1.21.6_1539`](/docs/containers?topic=containers-changelog_121#1216_1539), [`1.20.12_1561`](/docs/containers?topic=containers-changelog_120#12012_1561), and [`1.19.16_1568`](/docs/containers?topic=containers-changelog_119#11916_1568).
 
 
 ### 15 November 2021
@@ -434,14 +434,14 @@ CLI changelog
 {: release-note}
 
 Master fix pack updates
-:   Changelog documentation is available for version  [`1.22.2_1526`](/docs/containers?topic=containers-changelog#1222_1526), [`1.21.5_1536`](/docs/containers?topic=containers-changelog#1215_1536), [`1.20.11_1558`](/docs/containers?topic=containers-changelog#12011_1558), and [`1.19.15_1565`](/docs/containers?topic=containers-changelog#11915_1565).
+:   Changelog documentation is available for version  [`1.22.2_1526`](/docs/containers?topic=containers-changelog_122#1222_1526), [`1.21.5_1536`](/docs/containers?topic=containers-changelog_121#1215_1536), [`1.20.11_1558`](/docs/containers?topic=containers-changelog_120#12011_1558), and [`1.19.15_1565`](/docs/containers?topic=containers-changelog_119#11915_1565).
 
 ### 10 November 2021
 {: #10nov2021}
 {: release-note}
 
 Worker node fix pack update
-:   Changelog documentation is available for version [`1.22.2_1528`](/docs/containers?topic=containers-changelog#1222_1528), [`1.21.5_1538`](/docs/containers?topic=containers-changelog#1215_1538), [`1.20.11_1560`](/docs/containers?topic=containers-changelog#12011_1560), and [`1.19.15_1567`](/docs/containers?topic=containers-changelog#11915_1567).
+:   Changelog documentation is available for version [`1.22.2_1528`](/docs/containers?topic=containers-changelog_122#1222_1528), [`1.21.5_1538`](/docs/containers?topic=containers-changelog_121#1215_1538), [`1.20.11_1560`](/docs/containers?topic=containers-changelog_120#12011_1560), and [`1.19.15_1567`](/docs/containers?topic=containers-changelog_119#11915_1567).
 
 ### 8 November 2021
 {: #8nov2021}
@@ -493,7 +493,7 @@ CLI changelog
 {: release-note}
 
 Worker node fix pack update
-:   Changelog documentation is available for version [`1.22.2_1527`](/docs/containers?topic=containers-changelog#1222_1527), [`1.21.5_1537`](/docs/containers?topic=containers-changelog#1215_1537), [`1.20.11_1559`](/docs/containers?topic=containers-changelog#12011_1559), and [`1.19.15_1566`](/docs/containers?topic=containers-changelog#11915_1566).
+:   Changelog documentation is available for version [`1.22.2_1527`](/docs/containers?topic=containers-changelog_122#1222_1527), [`1.21.5_1537`](/docs/containers?topic=containers-changelog_121#1215_1537), [`1.20.11_1559`](/docs/containers?topic=containers-changelog_120#12011_1559), and [`1.19.15_1566`](/docs/containers?topic=containers-changelog_119#11915_1566).
 
 ### 22 October 2021
 {: #22oct2021}
@@ -537,7 +537,7 @@ Unsupported Kubernetes version 1.18
 
 
 Worker node fix pack update
-:   Changelog documentation is available for version [`1.22.2_1524`](/docs/containers?topic=containers-changelog#1222_1524), [`1.21.5_1533`](/docs/containers?topic=containers-changelog#1215_1533), [`1.20.11_1555`](/docs/containers?topic=containers-changelog#12011_1555), and [`1.19.15_1562`](/docs/containers?topic=containers-changelog#11915_1562).
+:   Changelog documentation is available for version [`1.22.2_1524`](/docs/containers?topic=containers-changelog_122#1222_1524), [`1.21.5_1533`](/docs/containers?topic=containers-changelog_121#1215_1533), [`1.20.11_1555`](/docs/containers?topic=containers-changelog_120#12011_1555), and [`1.19.15_1562`](/docs/containers?topic=containers-changelog_119#11915_1562).
 
 ### 7 October 2021
 {: #7oct2021}
@@ -585,13 +585,13 @@ Review the release notes for September 2021.
 
 
 New! Kubernetes 1.22
-:   You can create or [update clusters to Kubernetes version 1.22](/docs/containers?topic=containers-cs_versions#cs_v122). With Kubernetes 1.22, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. For more information, [see the blog announcement](https://www.ibm.com/cloud/blog/announcements/kubernetes-version-121-now-available-in-ibm-cloud-kubernetes-service){: external}.
+:   You can create or [update clusters to Kubernetes version 1.22](/docs/containers?topic=containers-cs_versions_122). With Kubernetes 1.22, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. For more information, [see the blog announcement](https://www.ibm.com/cloud/blog/announcements/kubernetes-version-121-now-available-in-ibm-cloud-kubernetes-service){: external}.
 
 Deprecated and unsupported Kubernetes versions
-:   With the release of Kubernetes 1.22, clusters that run version 1.18 remain deprecated, with a tentative unsupported date of 10 Oct 2021. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120) as soon as possible.
+:   With the release of Kubernetes 1.22, clusters that run version 1.18 remain deprecated, with a tentative unsupported date of 10 Oct 2021. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions_120) as soon as possible.
 
 Master fix pack and worker node fix pack update
-:   Change log documentation is available for Kubernetes version [`1.22.2_1522` and `1.22.2_1523`](/docs/containers?topic=containers-changelog#1222_1522_and_1222_1523).
+:   Change log documentation is available for Kubernetes version [`1.22.2_1522` and `1.22.2_1523`](/docs/containers?topic=containers-changelog_122#1222_1522_and_1222_1523).
 
 
 
@@ -602,11 +602,11 @@ Master fix pack and worker node fix pack update
 {: release-note}
 
 Master fix pack update
-:   Change log documentation is available for version [`1.21.5_1531`](/docs/containers?topic=containers-changelog#1215_1531), [`1.20.11_1553`](/docs/containers?topic=containers-changelog#12011_1553), [`1.19.15_1560`](/docs/containers?topic=containers-changelog#11915_1560), [`1.18.20_1565`](/docs/containers?topic=containers-118_changelog#11820_1565).
+:   Change log documentation is available for version [`1.21.5_1531`](/docs/containers?topic=containers-changelog_121#1215_1531), [`1.20.11_1553`](/docs/containers?topic=containers-changelog_120#12011_1553), [`1.19.15_1560`](/docs/containers?topic=containers-changelog_119#11915_1560), [`1.18.20_1565`](/docs/containers?topic=containers-118_changelog#11820_1565).
 
 
 Worker node fix pack update
-:   Change log documentation is available for version [`1.18.20_1566`](/docs/containers?topic=containers-118_changelog#11820_1566), [`1.19.15_1561`](/docs/containers?topic=containers-changelog#11915_1561), [`12011_1554`](/docs/containers?topic=containers-changelog#12011_1554), and [`1.21.5_1532`](/docs/containers?topic=containers-changelog#1215_1532).
+:   Change log documentation is available for version [`1.18.20_1566`](/docs/containers?topic=containers-118_changelog#11820_1566), [`1.19.15_1561`](/docs/containers?topic=containers-changelog_119#11915_1561), [`12011_1554`](/docs/containers?topic=containers-changelog_120#12011_1554), and [`1.21.5_1532`](/docs/containers?topic=containers-changelog_121#1215_1532).
 
 ### 23 September 2021
 {: #23sep2021}
@@ -660,7 +660,7 @@ Istio add-on change log
 {: release-note}
 
 Worker node fix pack update
-:   Change log documentation is available for version [`1.18.20_1564`](/docs/containers?topic=containers-118_changelog#11820_1564), [`1.19.14_1559`](/docs/containers?topic=containers-changelog#11914_1559), [`1.20.10_1552`](/docs/containers?topic=containers-changelog#12010_1552), and [`1.21.4_1530`](/docs/containers?topic=containers-changelog#12104_1530).
+:   Change log documentation is available for version [`1.18.20_1564`](/docs/containers?topic=containers-118_changelog#11820_1564), [`1.19.14_1559`](/docs/containers?topic=containers-changelog_119#11914_1559), [`1.20.10_1552`](/docs/containers?topic=containers-changelog_120#12010_1552), and [`1.21.4_1530`](/docs/containers?topic=containers-changelog_121#12104_1530).
 
 ### 9 September 2021
 {: #9sep2021}
@@ -717,7 +717,7 @@ Review the release notes for 30 August 2021.
 
 
 Worker node fix pack update
-:   Change log documentation is available for version [`1.17.17_1568`](/docs/containers?topic=containers-117_changelog#11717_1568), [`1.18.20_1563`](/docs/containers?topic=containers-118_changelog#11820_1563), [`1.19.14_1558`](/docs/containers?topic=containers-changelog#11914_1558), [`1.20.10_1551`](/docs/containers?topic=containers-changelog#12010_1551), and [`1.21.4_1529`](/docs/containers?topic=containers-changelog#12104_1529).
+:   Change log documentation is available for version [`1.17.17_1568`](/docs/containers?topic=containers-117_changelog#11717_1568), [`1.18.20_1563`](/docs/containers?topic=containers-118_changelog#11820_1563), [`1.19.14_1558`](/docs/containers?topic=containers-changelog_119#11914_1558), [`1.20.10_1551`](/docs/containers?topic=containers-changelog_120#12010_1551), and [`1.21.4_1529`](/docs/containers?topic=containers-changelog_121#12104_1529).
 
 
 
@@ -732,7 +732,7 @@ New! Create a cluster with a template
 :   Version `2.1.3` is [released](/docs/containers?topic=containers-cos_plugin_changelog).
 Master fix pack update changelog documentation
 
-:   Master fix pack update changelog documentation is available for version [1.21.4_ 1528](/docs/containers?topic=containers-changelog#1214_1528), [1.20.10_1550](/docs/containers?topic=containers-changelog#12010_1550), [1.19.14_1557](/docs/containers?topic=containers-changelog#11914_1557), and [1.18.20_1562](/docs/containers?topic=containers-118_changelog#11820_1562).
+:   Master fix pack update changelog documentation is available for version [1.21.4_ 1528](/docs/containers?topic=containers-changelog_121#1214_1528), [1.20.10_1550](/docs/containers?topic=containers-changelog_120#12010_1550), [1.19.14_1557](/docs/containers?topic=containers-changelog_119#11914_1557), and [1.18.20_1562](/docs/containers?topic=containers-118_changelog#11820_1562).
 
 ### 23 August 2021
 {: #23aug2021}
@@ -798,7 +798,7 @@ Ingress changelogs
 :   Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.47.0_1434_iks` and `0.45.0_1435_iks`. Version `0.35.0` is now unsupported. 
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.21.3_1526](/docs/containers?topic=containers-changelog#1213_1526), [1.20.9_1548](/docs/containers?topic=containers-changelog#1209_1548), [1.19.13_1555](/docs/containers?topic=containers-changelog#11913_1555), and [1.18.20_1560](/docs/containers?topic=containers-118_changelog#11820_1560).
+:   Worker node fix pack update changelog documentation is available for version [1.21.3_1526](/docs/containers?topic=containers-changelog_121#1213_1526), [1.20.9_1548](/docs/containers?topic=containers-changelog_120#1209_1548), [1.19.13_1555](/docs/containers?topic=containers-changelog_119#11913_1555), and [1.18.20_1560](/docs/containers?topic=containers-118_changelog#11820_1560).
 
 ## July 2021
 {: #jul21} 
@@ -811,7 +811,7 @@ New! IAM trusted profile support
 :   Link your cluster to a trusted profile in IAM so that the pods in your cluster can authenticate with IAM to use other {{site.data.keyword.cloud_notm}} services.
 
 Master versions
-:   Master fix pack update changelog documentation is available for version [1.21.3_1525](/docs/containers?topic=containers-changelog#1213_1525), [1.20.9_1547](/docs/containers?topic=containers-changelog#1209_1547), [1.19.13_1554](/docs/containers?topic=containers-changelog#11913_1554), and [1.18.20_1559](/docs/containers?topic=containers-118_changelog#11820_1559).
+:   Master fix pack update changelog documentation is available for version [1.21.3_1525](/docs/containers?topic=containers-changelog_121#1213_1525), [1.20.9_1547](/docs/containers?topic=containers-changelog_120#1209_1547), [1.19.13_1554](/docs/containers?topic=containers-changelog_119#11913_1554), and [1.18.20_1559](/docs/containers?topic=containers-118_changelog#11820_1559).
 
 ### 22 July 2021
 {: #22july2021}
@@ -827,7 +827,7 @@ Istio add-on changelog
 {: release-note}
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.21.2_1524](/docs/containers?topic=containers-changelog#1212_1524), [1.20.8_1546](/docs/containers?topic=containers-changelog#1208_1546), [1.19.12_1553](/docs/containers?topic=containers-changelog#11912_1553), [1.18.29_1558](/docs/containers?topic=containers-118_changelog#11829_1558), and [1.17.17_1568](/docs/containers?topic=containers-117_changelog#11717_1568).
+:   Worker node fix pack update changelog documentation is available for version [1.21.2_1524](/docs/containers?topic=containers-changelog_121#1212_1524), [1.20.8_1546](/docs/containers?topic=containers-changelog_120#1208_1546), [1.19.12_1553](/docs/containers?topic=containers-changelog_119#11912_1553), [1.18.29_1558](/docs/containers?topic=containers-118_changelog#11829_1558), and [1.17.17_1568](/docs/containers?topic=containers-117_changelog#11717_1568).
 
 ### 15 July 2021
 {: #15july2021}
@@ -845,7 +845,7 @@ Istio add-on changelog
 
 
 Snapshots
-:   Before updating to Kubernetes version `1.20` or `1.21`, snapshot CRDs must be changed to version `v1beta1`. For more information, see the [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#121_before).
+:   Before updating to Kubernetes version `1.20` or `1.21`, snapshot CRDs must be changed to version `v1beta1`. For more information, see the [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions_121#121_before).
 
 
 
@@ -857,7 +857,7 @@ Ingress changelogs
 :   Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.47.0_1376_iks`, `0.45.0_1375_iks`, and `0.35.0_1374_iks`.
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.21.2_1523](/docs/containers?topic=containers-changelog#1212_1523), [1.20.8_1545](/docs/containers?topic=containers-changelog#1208_1545), [1.19.12_1552](/docs/containers?topic=containers-changelog#11912_1552), [1.18.20_1557](/docs/containers?topic=containers-118_changelog#11820_1557), and [1.17.17_1567](/docs/containers?topic=containers-117_changelog#11717_1567_worker).
+:   Worker node fix pack update changelog documentation is available for version [1.21.2_1523](/docs/containers?topic=containers-changelog_121#1212_1523), [1.20.8_1545](/docs/containers?topic=containers-changelog_120#1208_1545), [1.19.12_1552](/docs/containers?topic=containers-changelog_119#11912_1552), [1.18.20_1557](/docs/containers?topic=containers-118_changelog#11820_1557), and [1.17.17_1567](/docs/containers?topic=containers-117_changelog#11717_1567_worker).
 
 ### 2 July 2021
 {: #02july2021}
@@ -885,7 +885,7 @@ From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai f
 {: release-note}
 
 Master versions
-:   Master fix pack update changelog documentation is available for version [1.21.2_1522](/docs/containers?topic=containers-changelog#1212_1522), [1.20.8_1544](/docs/containers?topic=containers-changelog#1208_1544), [1.19.12_1551](/docs/containers?topic=containers-changelog#11912_1551), [1.18.20_1556](/docs/containers?topic=containers-118_changelog#11820_1556), and [1.17.17_1567](/docs/containers?topic=containers-117_changelog#11717_1567).
+:   Master fix pack update changelog documentation is available for version [1.21.2_1522](/docs/containers?topic=containers-changelog_121#1212_1522), [1.20.8_1544](/docs/containers?topic=containers-changelog_120#1208_1544), [1.19.12_1551](/docs/containers?topic=containers-changelog_119#11912_1551), [1.18.20_1556](/docs/containers?topic=containers-118_changelog#11820_1556), and [1.17.17_1567](/docs/containers?topic=containers-117_changelog#11717_1567).
 
 ### 24 June 2021
 {: #24june2021}
@@ -909,7 +909,7 @@ Cluster autoscaler add-on
 :   Version `2.1.2` of the {{site.data.keyword.cos_full_notm}} plug-in is released. Update your clusters to use the latest version. For more information, see the [{{site.data.keyword.cos_full_notm}} plug-in changelog](/docs/containers?topic=containers-cos_plugin_changelog).
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.21.1_1521](/docs/containers?topic=containers-changelog#1211_1521), [1.20.7_1543](/docs/containers?topic=containers-changelog#1207_1543), [1.19.11_1550](/docs/containers?topic=containers-changelog#11911_1550), [1.18.19_1555](/docs/containers?topic=containers-118_changelog#11819_1555) and [1.17.17_1566](/docs/containers?topic=containers-117_changelog#11717_1566).
+:   Worker node fix pack update changelog documentation is available for version [1.21.1_1521](/docs/containers?topic=containers-changelog_121#1211_1521), [1.20.7_1543](/docs/containers?topic=containers-changelog_120#1207_1543), [1.19.11_1550](/docs/containers?topic=containers-changelog_119#11911_1550), [1.18.19_1555](/docs/containers?topic=containers-118_changelog#11819_1555) and [1.17.17_1566](/docs/containers?topic=containers-117_changelog#11717_1566).
 
 ### 21 June 2021
 {: #21june2021}
@@ -957,10 +957,10 @@ Ingress changelogs
 
 
 New! Kubernetes 1.21
-:   You can create or (/docs/containers?topic=containers-cs_versions#cs_v121)update your cluster to Kubernetes version 1.21. With Kubernetes 1.21, you get the latest stable enhancements from the community, such as stable `CronJob`, `EndpointSlice`, and `PodDisruptionBudget` resources. You also get enhancements to the {{site.data.keyword.cloud_notm}} product, such as a refreshed user interface experience. For more information, see the [blog announcement](https://www.ibm.com/cloud/blog/announcements/kubernetes-version-121-now-available-in-ibm-cloud-kubernetes-service){: external}.
+:   You can create or (/docs/containers?topic=containers-cs_versions_121)update your cluster to Kubernetes version 1.21. With Kubernetes 1.21, you get the latest stable enhancements from the community, such as stable `CronJob`, `EndpointSlice`, and `PodDisruptionBudget` resources. You also get enhancements to the {{site.data.keyword.cloud_notm}} product, such as a refreshed user interface experience. For more information, see the [blog announcement](https://www.ibm.com/cloud/blog/announcements/kubernetes-version-121-now-available-in-ibm-cloud-kubernetes-service){: external}.
 
 Deprecated Kubernetes 1.18
-:   With the release of Kubernetes 1.21, clusters that run version 1.18 are deprecated, with a tentative unsupported date of 10 October 2021. Update your cluster to at least [version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119) as soon as possible.
+:   With the release of Kubernetes 1.21, clusters that run version 1.18 are deprecated, with a tentative unsupported date of 10 October 2021. Update your cluster to at least [version 1.19](/docs/containers?topic=containers-cs_versions_119) as soon as possible.
 
 
 
@@ -976,7 +976,7 @@ Expanded Troubleshooting
 {: release-note}
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.20.7_1542](/docs/containers?topic=containers-changelog#1207_1542), [1.19.11_1549](/docs/containers?topic=containers-changelog#11911_1549), [1.18.19_1554](/docs/containers?topic=containers-118_changelog#11819_1554), and [1.17.17_1565](/docs/containers?topic=containers-117_changelog#11717_1565).
+:   Worker node fix pack update changelog documentation is available for version [1.20.7_1542](/docs/containers?topic=containers-changelog_120#1207_1542), [1.19.11_1549](/docs/containers?topic=containers-changelog_119#11911_1549), [1.18.19_1554](/docs/containers?topic=containers-118_changelog#11819_1554), and [1.17.17_1565](/docs/containers?topic=containers-117_changelog#11717_1565).
 
 ### 3 June 2021
 {: #03june2021}
@@ -1029,10 +1029,10 @@ Version 0.45.0 of the Kubernetes Ingress image
 
 
 Master versions
-:   Master fix pack update changelog documentation is available for version [1.20.7_1540](/docs/containers?topic=containers-changelog#1207_1540), [1.19.11_1547](/docs/containers?topic=containers-changelog#11911_1547), [1.18.19_1552](/docs/containers?topic=containers-118_changelog#11819_1552), and [1.17.17_1563](/docs/containers?topic=containers-117_changelog#11717_1563).
+:   Master fix pack update changelog documentation is available for version [1.20.7_1540](/docs/containers?topic=containers-changelog_120#1207_1540), [1.19.11_1547](/docs/containers?topic=containers-changelog_119#11911_1547), [1.18.19_1552](/docs/containers?topic=containers-118_changelog#11819_1552), and [1.17.17_1563](/docs/containers?topic=containers-117_changelog#11717_1563).
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.20.7_1541](/docs/containers?topic=containers-changelog#1207_1541), [1.19.11_1548](/docs/containers?topic=containers-changelog#11911_1548), [1.18.19_1553](/docs/containers?topic=containers-118_changelog#11819_1553), and [1.17.17_1564](/docs/containers?topic=containers-117_changelog#11717_1564).
+:   Worker node fix pack update changelog documentation is available for version [1.20.7_1541](/docs/containers?topic=containers-changelog_120#1207_1541), [1.19.11_1548](/docs/containers?topic=containers-changelog_119#11911_1548), [1.18.19_1553](/docs/containers?topic=containers-118_changelog#11819_1553), and [1.17.17_1564](/docs/containers?topic=containers-117_changelog#11717_1564).
 
 ### 17 May 2021
 {: #17may2021}
@@ -1066,7 +1066,7 @@ New! PX-Backup is now available
 
 
 Calico KDD update in 1.19
-:   Added a step to check for Calico `NetworkPolicy` resources that are scoped to non-existent namespaces before [updating your cluster to Kubernetes version 1.19](/docs/containers?topic=containers-cs_versions#119_before).
+:   Added a step to check for Calico `NetworkPolicy` resources that are scoped to non-existent namespaces before [updating your cluster to Kubernetes version 1.19](/docs/containers?topic=containers-cs_versions_119#119_before).
 
 
 
@@ -1077,14 +1077,14 @@ Cluster autoscaler add-on
 :   [Version `2.0.9`](/docs/containers?topic=containers-cos_plugin_changelog) of the {{site.data.keyword.cos_full_notm}} plug-in is available.
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.20.6_1539](/docs/containers?topic=containers-changelog#1206_1539), [1.19.10_1546](/docs/containers?topic=containers-changelog#11910_1546), [1.18.18_1551](/docs/containers?topic=containers-118_changelog#11818_1551), and [1.17.17_1562](/docs/containers?topic=containers-117_changelog#11717_1562).
+:   Worker node fix pack update changelog documentation is available for version [1.20.6_1539](/docs/containers?topic=containers-changelog_120#1206_1539), [1.19.10_1546](/docs/containers?topic=containers-changelog_119#11910_1546), [1.18.18_1551](/docs/containers?topic=containers-118_changelog#11818_1551), and [1.17.17_1562](/docs/containers?topic=containers-117_changelog#11717_1562).
 
 ### 4 May 2021
 {: #04may2021}
 {: release-note}
 
 Master versions
-:   Master fix pack update changelog documentation is available for version [1.20.5_1538](/docs/containers?topic=containers-changelog#1206_1538) and [1.19.10_1545](/docs/containers?topic=containers-changelog#11910_1545).
+:   Master fix pack update changelog documentation is available for version [1.20.5_1538](/docs/containers?topic=containers-changelog_120#1206_1538) and [1.19.10_1545](/docs/containers?topic=containers-changelog_119#11910_1545).
 
 ## April 2021
 {: #apr21}
@@ -1115,7 +1115,7 @@ Default version
 {: release-note}
 
 Master versions
-:   Master fix pack update changelog documentation is available for version [1.20.6_1536](/docs/containers?topic=containers-changelog#1206_1536), [1.19.10_1543](/docs/containers?topic=containers-changelog#11910_1543), [1.18.18_1549](/docs/containers?topic=containers-118_changelog#11818_1549), and [1.17.17_1560](/docs/containers?topic=containers-117_changelog#11717_1560).
+:   Master fix pack update changelog documentation is available for version [1.20.6_1536](/docs/containers?topic=containers-changelog_120#1206_1536), [1.19.10_1543](/docs/containers?topic=containers-changelog_119#11910_1543), [1.18.18_1549](/docs/containers?topic=containers-118_changelog#11818_1549), and [1.17.17_1560](/docs/containers?topic=containers-117_changelog#11717_1560).
 
 ### 26 April 2021
 {: #26april2021}
@@ -1130,7 +1130,7 @@ VPC NLB
 :   Adds steps for [registering a VPC network load balancer with a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_nlb_dns).
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.20.6_1537](/docs/containers?topic=containers-changelog#1206_1537), [1.19.10_1544](/docs/containers?topic=containers-changelog#11910_1544), [1.18.18_1550](/docs/containers?topic=containers-118_changelog#11818_1550), and [1.17.17_1561](/docs/containers?topic=containers-117_changelog#11717_1561).
+:   Worker node fix pack update changelog documentation is available for version [1.20.6_1537](/docs/containers?topic=containers-changelog_120#1206_1537), [1.19.10_1544](/docs/containers?topic=containers-changelog_119#11910_1544), [1.18.18_1550](/docs/containers?topic=containers-118_changelog#11818_1550), and [1.17.17_1561](/docs/containers?topic=containers-117_changelog#11717_1561).
 
 
   
@@ -1193,7 +1193,7 @@ Accessing VPC clusters
 {: release-note}
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.20.5_1535](/docs/containers?topic=containers-changelog#1205_1535), [1.19.9_1542](/docs/containers?topic=containers-changelog#1199_1542), [1.18.17_1548](/docs/containers?topic=containers-118_changelog#11817_1548), and [1.17.17_1559](/docs/containers?topic=containers-117_changelog#11717_1559).
+:   Worker node fix pack update changelog documentation is available for version [1.20.5_1535](/docs/containers?topic=containers-changelog_120#1205_1535), [1.19.9_1542](/docs/containers?topic=containers-changelog_119#1199_1542), [1.18.17_1548](/docs/containers?topic=containers-118_changelog#11817_1548), and [1.17.17_1559](/docs/containers?topic=containers-117_changelog#11717_1559).
 
 
 
@@ -1250,14 +1250,14 @@ Add-on changelogs
 :   Added version changelogs for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 
 Master versions
-:   Master fix pack update changelog documentation is available for version [1.20.5_1533](/docs/containers?topic=containers-changelog#1205_1533), [1.19.9_1540](/docs/containers?topic=containers-changelog#1199_1540), [1.18.17_1546](/docs/containers?topic=containers-118_changelog#11817_1546), and [1.17.17_1557](/docs/containers?topic=containers-117_changelog#11717_1557).
+:   Master fix pack update changelog documentation is available for version [1.20.5_1533](/docs/containers?topic=containers-changelog_120#1205_1533), [1.19.9_1540](/docs/containers?topic=containers-changelog_119#1199_1540), [1.18.17_1546](/docs/containers?topic=containers-118_changelog#11817_1546), and [1.17.17_1557](/docs/containers?topic=containers-117_changelog#11717_1557).
 
 ### 29 March 2021
 {: #29march2021}
 {: release-note}
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.20.5_1534](/docs/containers?topic=containers-changelog#1205_1534), [1.19.9_1541](/docs/containers?topic=containers-changelog#1199_1541), [1.18.17_1547](/docs/containers?topic=containers-118_changelog#11817_1547), and [1.17.17_1558](/docs/containers?topic=containers-117_changelog#11717_1558).
+:   Worker node fix pack update changelog documentation is available for version [1.20.5_1534](/docs/containers?topic=containers-changelog_120#1205_1534), [1.19.9_1541](/docs/containers?topic=containers-changelog_119#1199_1541), [1.18.17_1547](/docs/containers?topic=containers-118_changelog#11817_1547), and [1.17.17_1558](/docs/containers?topic=containers-117_changelog#11717_1558).
 
 ### 25 March 2021
 {: #25march2021}
@@ -1354,7 +1354,7 @@ Ingress ALB changelog
 {: release-note}
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.20.4_1532](/docs/containers?topic=containers-changelog#1204_1532), [1.19.8_1539](/docs/containers?topic=containers-changelog#1198_1539), [1.18.16_1545](/docs/containers?topic=containers-118_changelog#11816_1545), and [1.17.17_1556](/docs/containers?topic=containers-117_changelog#11717_1556).
+:   Worker node fix pack update changelog documentation is available for version [1.20.4_1532](/docs/containers?topic=containers-changelog_120#1204_1532), [1.19.8_1539](/docs/containers?topic=containers-changelog_119#1198_1539), [1.18.16_1545](/docs/containers?topic=containers-118_changelog#11816_1545), and [1.17.17_1556](/docs/containers?topic=containers-117_changelog#11717_1556).
 
 
 
@@ -1398,7 +1398,7 @@ Istio add-on
 
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.20.4_1531](/docs/containers?topic=containers-changelog#1204_1531), [1.19.8_1538](/docs/containers?topic=containers-changelog#1198_1538), [1.18.16_1544](/docs/containers?topic=containers-118_changelog#11816_1544), and [1.17.17_1555](/docs/containers?topic=containers-117_changelog#11717_1555_worker).
+:   Worker node fix pack update changelog documentation is available for version [1.20.4_1531](/docs/containers?topic=containers-changelog_120#1204_1531), [1.19.8_1538](/docs/containers?topic=containers-changelog_119#1198_1538), [1.18.16_1544](/docs/containers?topic=containers-118_changelog#11816_1544), and [1.17.17_1555](/docs/containers?topic=containers-117_changelog#11717_1555_worker).
 
 ## February 2021
 {: #feb21}
@@ -1408,7 +1408,7 @@ Worker node versions
 {: release-note}
 
 Master versions
-:   Master fix pack update changelog documentation is available for version [1.20.4_1531](/docs/containers?topic=containers-changelog#1204_1531_master), [1.19.8_1538](/docs/containers?topic=containers-changelog#1198_1538_master), and [1.18.16_1544](/docs/containers?topic=containers-118_changelog#11816_1544_master).
+:   Master fix pack update changelog documentation is available for version [1.20.4_1531](/docs/containers?topic=containers-changelog_120#1204_1531_master), [1.19.8_1538](/docs/containers?topic=containers-changelog_119#1198_1538_master), and [1.18.16_1544](/docs/containers?topic=containers-118_changelog#11816_1544_master).
 
 ### 26 February 2021
 {: #26feb2021}
@@ -1454,14 +1454,14 @@ VPE
 {: release-note}
 
 Master versions
-:   Master fix pack update changelog documentation is available for version [1.20.4_1530](/docs/containers?topic=containers-changelog#1204_1530), [1.19.8_1537](/docs/containers?topic=containers-changelog#1198_1537), [1.18.16_1543](/docs/containers?topic=containers-118_changelog#11816_1543), and [1.17.17_1555](/docs/containers?topic=containers-117_changelog#11717_1555).
+:   Master fix pack update changelog documentation is available for version [1.20.4_1530](/docs/containers?topic=containers-changelog_120#1204_1530), [1.19.8_1537](/docs/containers?topic=containers-changelog_119#1198_1537), [1.18.16_1543](/docs/containers?topic=containers-118_changelog#11816_1543), and [1.17.17_1555](/docs/containers?topic=containers-117_changelog#11717_1555).
 
 ### 20 February 2021
 {: #20feb2021}
 {: release-note}
 
 Certified Kubernetes
-:   Version [1.20](/docs/containers?topic=containers-cs_versions#cs_v120) release is now certified.
+:   Version [1.20](/docs/containers?topic=containers-cs_versions_120) release is now certified.
 
 ### 17 February 2021
 {: #17feb2021}
@@ -1470,7 +1470,7 @@ Certified Kubernetes
 
 
 New! Kubernetes 1.20
-:   You can create or [update](/docs/containers?topic=containers-cs_versions#cs_v120) your cluster to Kubernetes version 1.20. With Kubernetes 1.20, you get the latest stable enhancements from the community, as well as beta access to features such as [API server priority](/docs/containers?topic=containers-kubeapi-priority). For more information, see the [blog announcement](http://www.ibm.com/cloud/blog/announcements/kubernetes-version-120-now-available-in-ibm-cloud-kubernetes-service){: external}.
+:   You can create or [update](/docs/containers?topic=containers-cs_versions_120) your cluster to Kubernetes version 1.20. With Kubernetes 1.20, you get the latest stable enhancements from the community, as well as beta access to features such as [API server priority](/docs/containers?topic=containers-kubeapi-priority). For more information, see the [blog announcement](http://www.ibm.com/cloud/blog/announcements/kubernetes-version-120-now-available-in-ibm-cloud-kubernetes-service){: external}.
 
 Deprecated Kubernetes 1.17
 :   With the release of Kubernetes 1.20, clusters that run version 1.17 are deprecated, with a tentative unsupported date of 2 July 2021. Update your cluster to at least [version 1.18](/docs/containers?topic=containers-cs_versions#cs_v118) as soon as possible.
@@ -1485,7 +1485,7 @@ New! Osaka multizone region
 :   You can now create classic or VPC clusters in the Osaka, Japan (`jp-osa`) [location](/docs/containers?topic=containers-regions-and-zones).
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.19.7_1535](/docs/containers?topic=containers-changelog#1197_1535), [1.18.15_1541](/docs/containers?topic=containers-118_changelog#11815_1541), and [1.17.17_1553](/docs/containers?topic=containers-117_changelog#11717_1553).
+:   Worker node fix pack update changelog documentation is available for version [1.19.7_1535](/docs/containers?topic=containers-changelog_119#1197_1535), [1.18.15_1541](/docs/containers?topic=containers-118_changelog#11815_1541), and [1.17.17_1553](/docs/containers?topic=containers-117_changelog#11717_1553).
 
 ### 12 February 2021
 {: #12feb2021}
@@ -1532,7 +1532,7 @@ Worker node modifications
 {: release-note}
 
 Worker node versions
-:   A worker node fix pack for internal documentation updates is available for version [1.19.7_1534](/docs/containers?topic=containers-changelog#1197_1534), and [1.18.15_1540](/docs/containers?topic=containers-118_changelog#11815_1540).
+:   A worker node fix pack for internal documentation updates is available for version [1.19.7_1534](/docs/containers?topic=containers-changelog_119#1197_1534), and [1.18.15_1540](/docs/containers?topic=containers-118_changelog#11815_1540).
 
 
 
@@ -1544,7 +1544,7 @@ Unsupported: Kubernetes version 1.16
 :   Clusters that run Kubernetes version 1.16 are unsupported as of 31 January 2021. To continue receiving important security updates and support, you must [update the cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately.
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.19.7_1533](/docs/containers?topic=containers-changelog#1197_1533), [1.18.15_1539](/docs/containers?topic=containers-118_changelog#11815_1539), and [1.17.17_1552](/docs/containers?topic=containers-117_changelog#11717_1552).
+:   Worker node fix pack update changelog documentation is available for version [1.19.7_1533](/docs/containers?topic=containers-changelog_119#1197_1533), [1.18.15_1539](/docs/containers?topic=containers-118_changelog#11815_1539), and [1.17.17_1552](/docs/containers?topic=containers-117_changelog#11717_1552).
 
 ## January 2021
 {: #jan21}
@@ -1589,7 +1589,7 @@ Ingress ALB changelog
 :   Updated the [`nginx-ingress` build to 2424](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 Master versions
-:   Master fix pack update changelog documentation is available for version [1.19.7_1532](/docs/containers?topic=containers-changelog#1197_1532_master), [1.18.15_1538](/docs/containers?topic=containers-118_changelog#11815_1538_master), [1.17.17_1551](/docs/containers?topic=containers-117_changelog#11717_1551_master), and [1.16.15_1557](/docs/containers?topic=containers-116_changelog#11615_1557_master).
+:   Master fix pack update changelog documentation is available for version [1.19.7_1532](/docs/containers?topic=containers-changelog_119#1197_1532_master), [1.18.15_1538](/docs/containers?topic=containers-118_changelog#11815_1538_master), [1.17.17_1551](/docs/containers?topic=containers-117_changelog#11717_1551_master), and [1.16.15_1557](/docs/containers?topic=containers-116_changelog#11615_1557_master).
 
 ### 18 January 2021
 {: #18jan2021}
@@ -1599,7 +1599,7 @@ Knative add-on is unsupported
 :   The Knative add-on is automatically removed from your cluster. Instead, use the [Knative open source project](https://knative.dev/docs/install/){: external} or [{{site.data.keyword.codeenginefull}}](/docs/codeengine?topic=codeengine-getting-started), which includes Knative's open-source capabilities.
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for version [1.19.7_1532](/docs/containers?topic=containers-changelog#1197_1532), [1.18.15_1538](/docs/containers?topic=containers-118_changelog#11815_1538), [1.17.17_1551](/docs/containers?topic=containers-117_changelog#11717_1551), and [1.16.15_1557](/docs/containers?topic=containers-116_changelog#11615_1557).
+:   Worker node fix pack update changelog documentation is available for version [1.19.7_1532](/docs/containers?topic=containers-changelog_119#1197_1532), [1.18.15_1538](/docs/containers?topic=containers-118_changelog#11815_1538), [1.17.17_1551](/docs/containers?topic=containers-117_changelog#11717_1551), and [1.16.15_1557](/docs/containers?topic=containers-116_changelog#11615_1557).
 
 ### 14 January 2021
 {: #14jan2021}
@@ -1638,7 +1638,7 @@ Ingress ALB changelog
 
 Master versions
 :   Master fix pack update changelog documentation is available.
-:   [1.19.6_1531](/docs/containers?topic=containers-changelog#1196_1531), [1.18.14_1537](/docs/containers?topic=containers-118_changelog#11814_1537), [1.17.16_1550](/docs/containers?topic=containers-117_changelog#11716_1550), and [1.16.15_1556](/docs/containers?topic=containers-116_changelog#11615_1556).
+:   [1.19.6_1531](/docs/containers?topic=containers-changelog_119#1196_1531), [1.18.14_1537](/docs/containers?topic=containers-118_changelog#11814_1537), [1.17.16_1550](/docs/containers?topic=containers-117_changelog#11716_1550), and [1.16.15_1556](/docs/containers?topic=containers-116_changelog#11615_1556).
 
 ## December 2020
 {: #dec20}
@@ -1652,7 +1652,7 @@ Gateway firewalls and Calico policies
 
 Worker node versions
 :   Worker node fix pack update changelog documentation is available.
-:   [1.19.5_1530](/docs/containers?topic=containers-changelog#1195_1530), [1.18.13_1536](/docs/containers?topic=containers-118_changelog#11813_1536), [1.17.15_1549](/docs/containers?topic=containers-117_changelog#11715_1549), and [1.16.15_1555](/docs/containers?topic=containers-116_changelog#11615_1555).
+:   [1.19.5_1530](/docs/containers?topic=containers-changelog_119#1195_1530), [1.18.13_1536](/docs/containers?topic=containers-118_changelog#11813_1536), [1.17.15_1549](/docs/containers?topic=containers-117_changelog#11715_1549), and [1.16.15_1555](/docs/containers?topic=containers-116_changelog#11615_1555).
 
 ### 18 December 2020
 {: #18dec2020}
@@ -1707,7 +1707,7 @@ Ingress ALB changelog
 
 Master versions
 :   Master fix pack update changelog documentation is available.
-:   [1.19.5_1529](/docs/containers?topic=containers-changelog#1195_1529), [1.18.13_1535](/docs/containers?topic=containers-118_changelog#11813_1535), [1.17.15_1548](/docs/containers?topic=containers-117_changelog#11715_1548), and [1.16.15_1554](/docs/containers?topic=containers-116_changelog#11615_1554_master).
+:   [1.19.5_1529](/docs/containers?topic=containers-changelog_119#1195_1529), [1.18.13_1535](/docs/containers?topic=containers-118_changelog#11813_1535), [1.17.15_1548](/docs/containers?topic=containers-117_changelog#11715_1548), and [1.16.15_1554](/docs/containers?topic=containers-116_changelog#11615_1554_master).
 
 ### 11 December 2020
 {: #11dec2020}
@@ -1722,7 +1722,7 @@ strongSwan versions
 
 
 Worker node versions
-:   Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.4_1529](/docs/containers?topic=containers-changelog#1194_1529), [1.18.12_1535](/docs/containers?topic=containers-118_changelog#11812_1535), [1.17.14_1548](/docs/containers?topic=containers-117_changelog#11714_1548), and [1.16.15_1554](/docs/containers?topic=containers-116_changelog#11615_1554).
+:   Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.4_1529](/docs/containers?topic=containers-changelog_119#1194_1529), [1.18.12_1535](/docs/containers?topic=containers-118_changelog#11812_1535), [1.17.14_1548](/docs/containers?topic=containers-117_changelog#11714_1548), and [1.16.15_1554](/docs/containers?topic=containers-116_changelog#11615_1554).
 
 
 
@@ -1758,7 +1758,7 @@ Istio add-on
 
 Worker node versions
 :   Worker node fix pack update changelog documentation is available.
-:   Kubernetes version [1.19.4_1528](/docs/containers?topic=containers-changelog#1194_1528), [1.18.12_1534](/docs/containers?topic=containers-118_changelog#11812_1534), [1.17.14_1546](/docs/containers?topic=containers-117_changelog#11714_1546), and [1.16.15_1553](/docs/containers?topic=containers-116_changelog#11615_1553)..
+:   Kubernetes version [1.19.4_1528](/docs/containers?topic=containers-changelog_119#1194_1528), [1.18.12_1534](/docs/containers?topic=containers-118_changelog#11812_1534), [1.17.14_1546](/docs/containers?topic=containers-117_changelog#11714_1546), and [1.16.15_1553](/docs/containers?topic=containers-116_changelog#11615_1553)..
 
 ### 3 December 2020
 {: #03dec2020}
@@ -1799,7 +1799,7 @@ Default Kubernetes Ingress image
 
 Worker node versions
 :   Worker node fix pack update changelog documentation is available.
-:   Kubernetes version [1.19.4_1527](/docs/containers?topic=containers-changelog#1194_1527_worker), [1.18.12_1533](/docs/containers?topic=containers-118_changelog#11812_1533_worker), [1.17.14_1545](/docs/containers?topic=containers-117_changelog#11714_1545_worker), and [1.16.15_1552](/docs/containers?topic=containers-116_changelog#11615_1552_worker).
+:   Kubernetes version [1.19.4_1527](/docs/containers?topic=containers-changelog_119#1194_1527_worker), [1.18.12_1533](/docs/containers?topic=containers-118_changelog#11812_1533_worker), [1.17.14_1545](/docs/containers?topic=containers-117_changelog#11714_1545_worker), and [1.16.15_1552](/docs/containers?topic=containers-116_changelog#11615_1552_worker).
 
 ### 20 November 2020
 {: #20nov2020}
@@ -1844,7 +1844,7 @@ GPU worker nodes
 
   
 Master versions
-:   Master fix pack update changelog documentation is available for Kubernetes version [1.19.4_1527](/docs/containers?topic=containers-changelog#1194_1527), [1.18.12_1533](/docs/containers?topic=containers-118_changelog#11812_1533), [1.17.14_1545](/docs/containers?topic=containers-117_changelog#11714_1545), and [1.16.15_1552](/docs/containers?topic=containers-116_changelog#11615_1552)..
+:   Master fix pack update changelog documentation is available for Kubernetes version [1.19.4_1527](/docs/containers?topic=containers-changelog_119#1194_1527), [1.18.12_1533](/docs/containers?topic=containers-118_changelog#11812_1533), [1.17.14_1545](/docs/containers?topic=containers-117_changelog#11714_1545), and [1.16.15_1552](/docs/containers?topic=containers-116_changelog#11615_1552)..
 
 ### 13 November 2020
 {: #13nov2020}
@@ -1862,7 +1862,7 @@ Master versions
 Worker node versions
 :   Worker node fix pack update changelog documentation is available.
 
-:   Kubernetes version [1.19.3_1526](/docs/containers?topic=containers-changelog#1193_1526), [1.18.10_1532](/docs/containers?topic=containers-118_changelog#11810_1532), [1.17.13_1544](/docs/containers?topic=containers-117_changelog#11713_1544), and [1.16.15_1551](/docs/containers?topic=containers-116_changelog#11615_1551).
+:   Kubernetes version [1.19.3_1526](/docs/containers?topic=containers-changelog_119#1193_1526), [1.18.10_1532](/docs/containers?topic=containers-118_changelog#11810_1532), [1.17.13_1544](/docs/containers?topic=containers-117_changelog#11713_1544), and [1.16.15_1551](/docs/containers?topic=containers-116_changelog#11615_1551).
 
 ### 5 November 2020
 {: #05nov2020}
@@ -1915,11 +1915,11 @@ Persistent storage
 Master versions
 :   Master fix pack update changelog documentation is available.
 
-:   Kubernetes version [1.19.3_1525](/docs/containers?topic=containers-changelog#1193_1525), [1.18.10_1531](/docs/containers?topic=containers-118_changelog#11810_1531), [1.17.13_1543](/docs/containers?topic=containers-117_changelog#11713_1543), and [1.16.15_1550](/docs/containers?topic=containers-116_changelog#11615_1550).
+:   Kubernetes version [1.19.3_1525](/docs/containers?topic=containers-changelog_119#1193_1525), [1.18.10_1531](/docs/containers?topic=containers-118_changelog#11810_1531), [1.17.13_1543](/docs/containers?topic=containers-117_changelog#11713_1543), and [1.16.15_1550](/docs/containers?topic=containers-116_changelog#11615_1550).
 
 Worker node versions
 :   Worker node fix pack update changelog documentation is available.
-:   Kubernetes version [1.19.3_1525](/docs/containers?topic=containers-changelog#1193_1525_worker), [1.18.10_1531](/docs/containers?topic=containers-118_changelog#11810_1531_worker), [1.17.13_1543](/docs/containers?topic=containers-117_changelog#11713_1543_worker), and [1.16.15_1550](/docs/containers?topic=containers-116_changelog#11615_1550_worker).
+:   Kubernetes version [1.19.3_1525](/docs/containers?topic=containers-changelog_119#1193_1525_worker), [1.18.10_1531](/docs/containers?topic=containers-118_changelog#11810_1531_worker), [1.17.13_1543](/docs/containers?topic=containers-117_changelog#11713_1543_worker), and [1.16.15_1550](/docs/containers?topic=containers-116_changelog#11615_1550_worker).
 
 
 ### 22 October 2020
@@ -1932,7 +1932,7 @@ API key
 
 
 Benchmark for Kubernetes 1.19
-:   Review the [1.5 CIS Kubernetes benchmark results](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15) for clusters that run Kubernetes version 1.19.
+:   Review the [1.5 CIS Kubernetes benchmark results](/docs/containers?topic=containers-cis-benchmark-119) for clusters that run Kubernetes version 1.19.
 
 Huge pages
 :   In clusters that run Kubernetes 1.19 or later, you can [enable Kubernetes `HugePages` scheduling on your worker nodes](/docs/containers?topic=containers-kernel#huge-pages).
@@ -1968,7 +1968,7 @@ Ingress classes
 
 
 New! Certified Kubernetes version 1.19
-:   You can now create clusters that run Kubernetes version 1.19. To update an existing cluster, see the [Version 1.19 preparation actions](/docs/containers?topic=containers-cs_versions#cs_v119). The Kubernetes 1.19 release is also certified.
+:   You can now create clusters that run Kubernetes version 1.19. To update an existing cluster, see the [Version 1.19 preparation actions](/docs/containers?topic=containers-cs_versions_119). The Kubernetes 1.19 release is also certified.
 
 Deprecated: Kubernetes version 1.16
 :   With the release of version 1.19, clusters that run version 1.16 are deprecated. Update your clusters to at least [version 1.17](/docs/containers?topic=containers-cs_versions#cs_v117) today.
@@ -1979,7 +1979,7 @@ New! Network load balancer for VPC
 
 
 Version changelogs
-:   Changelog documentation is available for [1.19.2_1524](/docs/containers?topic=containers-changelog#1192_1524).
+:   Changelog documentation is available for [1.19.2_1524](/docs/containers?topic=containers-changelog_119#1192_1524).
 
 VPC load balancer
 :   Added support for setting the `service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-node-selector` and `service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-subnet` annotations when you create new VPC load balancers in clusters that run Kubernetes version 1.19.
@@ -2481,7 +2481,7 @@ VPC network security
 
 
 Kubernetes 1.17
-:   [Kubernetes 1.17](/docs/containers?topic=containers-cs_versions#version_types) is now the default version.
+:   [Kubernetes 1.17](/docs/containers?topic=containers-cs_versions#cs_versions_available) is now the default version.
 
 
 
@@ -2841,7 +2841,7 @@ Add-on troubleshooting
 :   Added a troubleshooting page for managed add-ons, including a topic for [reviewing add-on state and statuses](/docs/containers?topic=containers-debug_addons).
 
 Kubernetes 1.16
-:   [Kubernetes 1.16](/docs/containers?topic=containers-cs_versions#version_types) is now the default version.
+:   [Kubernetes 1.16](/docs/containers?topic=containers-cs_versions#cs_versions_available) is now the default version.
 
 Updating the {{site.data.keyword.block_storage_is_short}} add-on
 :   Added steps to update the {{site.data.keyword.block_storage_is_short}} add-on.
@@ -3031,7 +3031,7 @@ Back up and restore File and Block storage
 
 
 Kubernetes 1.15
-:   [Kubernetes 1.15](/docs/containers?topic=containers-cs_versions#version_types) is now the default version.
+:   [Kubernetes 1.15](/docs/containers?topic=containers-cs_versions#cs_versions_available) is now the default version.
 
 ### 21 January 2020
 {: #21jan2020}
@@ -3647,7 +3647,7 @@ New! Virtual Private Cloud
 :   Ready to get started? Try out the [Creating a classic cluster in your VPC tutorial](/docs/containers?topic=containers-vpc_ks_tutorial).
 
 Kubernetes 1.14
-:   [Kubernetes 1.14](/docs/containers?topic=containers-cs_versions#version_types) is now the default version.
+:   [Kubernetes 1.14](/docs/containers?topic=containers-cs_versions#cs_versions_available) is now the default version.
 
 
 
@@ -3754,7 +3754,7 @@ Fluentd changelog
 {: release-note}
 
 Version policy
-:   Increased the [version deprecation](/docs/containers?topic=containers-cs_versions#version_types) period from 30 to 45 days.
+:   Increased the [version deprecation](/docs/containers?topic=containers-cs_versions#cs_versions_available) period from 30 to 45 days.
 
 Version changelogs
 :   Updated the changelogs for [1.14.4_1526](/docs/containers?topic=containers-114_changelog#1144_1526_worker), [1.13.8_1529](/docs/containers?topic=containers-113_changelog#1138_1529_worker), and [1.12.10_1560](/docs/containers?topic=containers-112_changelog#11210_1560_worker) worker node patch updates.

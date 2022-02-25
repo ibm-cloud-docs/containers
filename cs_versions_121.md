@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-24"
+lastupdated: "2022-02-25"
 
 keywords: kubernetes, 1.21, versions, update, upgrade
 
@@ -42,7 +42,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}}<br>release date | {{site.data.keyword.containerlong_notm}}<br>unsupported date |
 |------|------|----------|----------|
-| [1.21](#cs_v121) | Yes | 09 Jun 2021 | Aug 2022 `†` |
+| 1.21 | Yes | 09 Jun 2021 | Aug 2022 `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.21" caption-side="top"}
 
 ## Preparing to update
