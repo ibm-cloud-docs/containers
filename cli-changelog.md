@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-24"
+lastupdated: "2022-02-25"
 
 keywords: kubernetes
 
@@ -33,7 +33,7 @@ Review the following changes for 1.0 versions of the CLI plug-in.
 ## Version 1.0.374
 {: #cli-10374}
 
-Version 1.0.372 of the CLI was released on 24 Feb 2022
+Version 1.0.372 of the CLI was released on 24 Feb 2022.
 :   Removes the default zone in the `ibmcloud ks cluster create satellite` command.
 
 ## Version 1.0.372
