@@ -5737,7 +5737,9 @@ subcollection: containers
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
 
-    * [Version 2.0.0_981, released on 10 Febuary 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_981)
+    * [Version 2.0.0_999, released on 28 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_999)
+
+    * [Version 2.0.0_981, released on 10 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_981)
 
     * [Version 2.0.0_923, released on 26 January 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_923)
 
@@ -5746,6 +5748,8 @@ subcollection: containers
     * [Version 2.0.0_704, released on 15 September 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_704)
 
 * [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0)
+
+    * [Version 1.0.0_1001, released on 28 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_1001)
 
     * [Version 1.0.0_924, released on 26 January 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_924)
 
