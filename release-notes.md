@@ -48,6 +48,10 @@ Cluster autoscaler
 :   Version [1.0.5_415](/docs/containers?topic=containers-ca_changelog) is available.
 
 
+Worker node fix pack
+: Kubernetes [1.23.4_1521](/docs/containers?topic=containers-changelog_123#1234_1521), [1.22.7_1524](/docs/containers?topic=containers-changelog_122#1227_1524), [1.21.10_1551](/docs/containers?topic=containers-changelog_121#12110_1551), [1.20.15_1572](/docs/containers?topic=containers-changelog_120#12015_1572), and [1.19.16_1579](/docs/containers?topic=containers-changelog_119#11916_1579).
+=======
+
 
 
 ### 24 February 2022
