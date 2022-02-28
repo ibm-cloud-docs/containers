@@ -82,7 +82,7 @@ See [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?top
 ## Running the worker node CIS Kubernetes benchmark
 {: #cis-worker-test}
 
-To review the results of the CIS Kubernetes benchmark for [Section 4: Worker node security configuration](#cis-benchmark-15-4), you can run the test yourself. Because you own the worker nodes and are partially [responsible](/docs/containers?topic=containers-responsibilities_iks) for their compliance, you might make configuration changes that you want to validate on your own.
+To review the results of the CIS Kubernetes benchmark for Section 4: Worker node security configuration, you can run the test yourself. Because you own the worker nodes and are partially [responsible](/docs/containers?topic=containers-responsibilities_iks) for their compliance, you might make configuration changes that you want to validate on your own.
 {: shortdesc}
 
 

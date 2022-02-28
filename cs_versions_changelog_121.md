@@ -40,7 +40,7 @@ Review the version 1.21 changelog.
 {: shortdesc}
 
 ### Change log for worker node fix pack 1.21.10_1551, released 28 February 2022
-{: #12110_1549}
+{: #12110_1551}
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
