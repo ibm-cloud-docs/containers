@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-02-25"
+lastupdated: "2022-02-28"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
+
+    * [28 February 2022](/docs/containers?topic=containers-iks-release#28feb2022)
 
     * [24 February 2022](/docs/containers?topic=containers-iks-release#24feb2022)
 
@@ -1892,9 +1894,9 @@ subcollection: containers
 
 [Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-kube-policies#vpc-kube-policies)
 
-    * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-kube-policies#services_one_ns)
+* [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-kube-policies#services_one_ns)
 
-    * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-kube-policies#services_across_ns)
+* [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-kube-policies#services_across_ns)
 
 [Managing security and compliance with Kubernetes](/docs/containers?topic=containers-manage-security-compliance#manage-security-compliance)
 
@@ -2995,6 +2997,8 @@ subcollection: containers
 
 * [Updating the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-block#vpc-addon-update)
 
+    * [Recreating custom storage classes after updating to version 4.2](/docs/containers?topic=containers-vpc-block#recreate-sc-42)
+
 * [Setting up encryption for {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block-encryption)
 
 * [Customizing the default storage settings](/docs/containers?topic=containers-vpc-block#vpc-customize-default)
@@ -3893,6 +3897,8 @@ subcollection: containers
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
 
+    * [Change log for worker node fix pack 1.23.4_1521, released 28 February 2022](/docs/containers?topic=containers-changelog_123#1234_1521)
+
     * [Change log for worker node fix pack 1.23.3_1519, released 14 February 2022](/docs/containers?topic=containers-changelog_123#1233_1519)
 
     * [Change log for master fix pack 1.23.3_1518 and worker node fix pack 1.23.2_1517, released 9 Feb 2022](/docs/containers?topic=containers-changelog_123#1233_1518_and_1232_1517)
@@ -3959,6 +3965,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.7_1542, released 28 February 2022](/docs/containers?topic=containers-changelog_122#1227_1542)
 
     * [Change log for worker node fix pack 1.22.6_1539, released 14 February 2022](/docs/containers?topic=containers-changelog_122#1226_1539)
 
@@ -4050,6 +4058,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview)
 
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog_121#121_changelog)
+
+    * [Change log for worker node fix pack 1.21.10_1551, released 28 February 2022](/docs/containers?topic=containers-changelog_121#12110_1551)
 
     * [Change log for worker node fix pack 1.21.9_1549, released 14 February 2022](/docs/containers?topic=containers-changelog_121#1219_1549)
 
@@ -4167,6 +4177,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_120#changelog_overview)
 
 * [Deprecated: Version 1.20 changelog](/docs/containers?topic=containers-changelog_120#120_changelog)
+
+    * [Change log for worker node fix pack 1.20.15_1572, released 28 February 2022](/docs/containers?topic=containers-changelog_120#12015_1572)
 
     * [Change log for worker node fix pack 1.20.15_1570, released 14 February 2022](/docs/containers?topic=containers-changelog_120#12015_1570)
 
@@ -4312,6 +4324,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_119#changelog_overview)
 
 * [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog_119#119_changelog)
+
+    * [Change log for worker node fix pack 1.19.16_1579, released 28 February 2022](/docs/containers?topic=containers-changelog_119#11916_1579)
 
     * [Change log for worker node fix pack 1.19.16_1577, released 14 February 2022](/docs/containers?topic=containers-changelog_119#11916_1577)
 
@@ -5601,7 +5615,13 @@ subcollection: containers
 
 [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
+* [Version 1.0.5](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
+
+    * [Change log for patch update 1.0.5_415, released 28 February 2022](/docs/containers?topic=containers-ca_changelog#104415_ca)
+
 * [Version 1.0.4](/docs/containers?topic=containers-ca_changelog#0104_ca_addon)
+
+    * [Change log for patch update 1.0.4_410, released 23 February 2022](/docs/containers?topic=containers-ca_changelog#104410_ca)
 
     * [Change log for patch update 1.0.4_403, released 20 January 2022](/docs/containers?topic=containers-ca_changelog#104403_ca)
 
@@ -5727,7 +5747,9 @@ subcollection: containers
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
 
-    * [Version 2.0.0_981, released on 10 Febuary 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_981)
+    * [Version 2.0.0_999, released on 28 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_999)
+
+    * [Version 2.0.0_981, released on 10 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_981)
 
     * [Version 2.0.0_923, released on 26 January 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_923)
 
@@ -5736,6 +5758,8 @@ subcollection: containers
     * [Version 2.0.0_704, released on 15 September 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_704)
 
 * [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0)
+
+    * [Version 1.0.0_1001, released on 28 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_1001)
 
     * [Version 1.0.0_924, released on 26 January 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_924)
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-25"
+lastupdated: "2022-02-28"
 
 keywords: kubernetes
 
@@ -665,7 +665,7 @@ Version 0.2.95 of the CLI was released on 3 April 2019.
 
 Version 0.2.80 of the CLI was released on 19 March 2019.
 
-- Adds support for enabling [master-to-worker communication with service endpoints](/docs/containers?topic=containers-plan_clusters#workeruser-master) in standard clusters in [VRF-enabled accounts](/docs/account?topic=account-vrf-service-endpoint#vrf). 
+- Adds support for enabling [master-to-worker communication with service endpoints](/docs/containers?topic=containers-plan_basics#workeruser-master) in standard clusters in [VRF-enabled accounts](/docs/account?topic=account-vrf-service-endpoint#vrf). 
 - Adds the `--private-service-endpoint` and `--public-service-endpoint` flags to the [`ibmcloud ks cluster-create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_create) command. 
 - Adds the **Public Service Endpoint URL** and **Private Service Endpoint URL** fields to the output of `ibmcloud ks cluster get`. 
 - Adds the [`ibmcloud ks cluster master private-service-endpoint enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_enable) command. 

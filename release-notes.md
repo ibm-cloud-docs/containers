@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-25"
+lastupdated: "2022-02-28"
 
 keywords: kubernetes, release notes
 
@@ -27,9 +27,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## February 2022
 {: #release-feb-2022}
 
+### 28 February 2022
+{: #28feb2022}
+{: release-note}
+
+{{site.data.keyword.block_storage_is_short}} add-on.
+:   [Version 4.2](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+
+Cluster autoscaler
+:   Version [1.0.5_415](/docs/containers?topic=containers-ca_changelog) is available.
 
 
+  
+ALB OAuth Proxy add-on
+:   Versions 1.0.0_1001 and 2.0.0_999 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) are released.
 
+
+Worker node fix pack
+:   Kubernetes [1.23.4_1521](/docs/containers?topic=containers-changelog_123#1234_1521), [1.22.7_1542](/docs/containers?topic=containers-changelog_122#1227_1542), [1.21.10_1551](/docs/containers?topic=containers-changelog_121#12110_1551), [1.20.15_1572](/docs/containers?topic=containers-changelog_120#12015_1572), and [1.19.16_1579](/docs/containers?topic=containers-changelog_119#11916_1579).
 
 
 ### 24 February 2022
@@ -120,7 +135,7 @@ Certified Kubernetes
 
   
 ALB OAuth Proxy add-on
-:   Versions 2.0.0_981 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) is released.
+:   Version 2.0.0_981 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) is released.
 
 
 
@@ -1054,7 +1069,7 @@ Deprecated Ubuntu 16 end of support date
 {: release-note}
 
 VPC cluster healthchecks
-:   If you set up [VPC security groups](/docs/openshift?topic=openshift-vpc-network-policy#security_groups) or [VPC access control lists (ACLs)](/docs/openshift?topic=openshift-vpc-network-policy#acls) to secure your cluster network, you can now create the rules to allow the necessary traffic from the control plane IP addresses and Akamai IPv4 IP addresses to health check your ALBs. Previously, a quota on the number of rules per security group or ACL prevented the ability to create all necessary rules for health checks.
+:   If you set up [VPC security groups](/docs/openshift?topic=openshift-vpc-network-policy#security_groups) or [VPC access control lists (ACLs)](/docs/openshift?topic=openshift-vpc-acls) to secure your cluster network, you can now create the rules to allow the necessary traffic from the control plane IP addresses and Akamai IPv4 IP addresses to health check your ALBs. Previously, a quota on the number of rules per security group or ACL prevented the ability to create all necessary rules for health checks.
 
 ### 10 May 2021
 {: #10may2021}
@@ -2772,8 +2787,6 @@ Ingress ALB changelog
 CLI changelog
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.15](/docs/containers?topic=containers-cs_cli_changelog#10).
 
-Service dependencies
-:   Added information about [dependencies on other {{site.data.keyword.cloud_notm}} and 3rd party services](/docs/containers?topic=containers-service-arch#dependencies-ibmcloud).
 
 ### 18 March 2020
 {: #18mar2020}

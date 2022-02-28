@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-22"
+lastupdated: "2022-02-28"
 
 keywords: kubernetes, containers
 
@@ -125,7 +125,7 @@ If you manually installed admission controllers and you don't want to use them a
 
 **What else can I do to secure my Kubernetes API server?**
 
-You can restrict connections to the master nodes by enabling the private cloud service endpoint, and creating a subnet allowlist. This combination provides the greatest degree of isolation.. Note that your options for service endpoints vary based on your cluster's infrastructure provider. For more information about service endpoints, see worker-to-master and user-to-master communication in [classic clusters](/docs/containers?topic=containers-plan_clusters#workeruser-master) and [VPC clusters](/docs/containers?topic=containers-plan_clusters#vpc-workeruser-master).
+You can restrict connections to the master nodes by enabling the private cloud service endpoint, and creating a subnet allowlist. This combination provides the greatest degree of isolation.. Note that your options for service endpoints vary based on your cluster's infrastructure provider. For more information about service endpoints, see worker-to-master and user-to-master communication in [classic clusters](/docs/containers?topic=containers-plan_basics#workeruser-master) and [VPC clusters](/docs/containers?topic=containers-plan_vpc_basics#vpc-workeruser-master).
 
 If you enable the private cloud service endpoint, you can create a subnet allowlist. Only authorized requests to your cluster master that originate from subnets in the allowlist are permitted through the cluster's private cloud service endpoint. For more information, see [Creating an allowlist for the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist).
 

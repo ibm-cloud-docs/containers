@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-25"
+lastupdated: "2022-02-28"
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
 
@@ -177,8 +177,8 @@ Keep in mind that some services such as Ingress might require multiple worker no
 
 **Supported Kubernetes versions**:
 *   Latest: 1.23.3
-*   Default: 1.21.6
-*   Other: 1.22.6
+*   Default: 1.22.7
+*   Other: 1.21.6
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
 

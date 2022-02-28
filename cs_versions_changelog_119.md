@@ -3,7 +3,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-02-25"
+lastupdated: "2022-02-28"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.19
 
@@ -17,7 +17,7 @@ subcollection: containers
 # (Deprecated) Kubernetes version 1.19 change log
 {: #changelog_119}
 
-View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters that run version 1.21. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
+View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.19. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}
 
 Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 14 Mar 2022. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
@@ -44,6 +44,17 @@ Review the version 1.19 changelog.
 
 Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 14 Mar 2022. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions_120) as soon as possible.
 {: deprecated}
+
+### Change log for worker node fix pack 1.19.16_1579, released 28 February 2022
+{: #11916_1579}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | 4.15.0-167-generic | 4.15.0-169-generic | Kernel and package updates for [CVE-2021-4083](https://nvd.nist.gov/vuln/detail/CVE-2021-4083){: external}, [CVE-2021-4155](https://nvd.nist.gov/vuln/detail/CVE-2021-4155){: external}, [CVE-2021-45960](https://nvd.nist.gov/vuln/detail/CVE-2021-45960){: external}, [CVE-2021-46143](https://nvd.nist.gov/vuln/detail/CVE-2021-46143){: external}, [CVE-2022-0330](https://nvd.nist.gov/vuln/detail/CVE-2022-0330){: external}, [CVE-2022-22822](https://nvd.nist.gov/vuln/detail/CVE-2022-22822){: external}, [CVE-2022-22823](https://nvd.nist.gov/vuln/detail/CVE-2022-22823){: external}, [CVE-2022-22824](https://nvd.nist.gov/vuln/detail/CVE-2022-22824){: external}, [CVE-2022-22825](https://nvd.nist.gov/vuln/detail/CVE-2022-22825){: external}, [CVE-2022-22826](https://nvd.nist.gov/vuln/detail/CVE-2022-22826){: external}, [CVE-2022-22827](https://nvd.nist.gov/vuln/detail/CVE-2022-22827){: external}, [CVE-2022-22942](https://nvd.nist.gov/vuln/detail/CVE-2022-22942){: external}, [CVE-2022-23852](https://nvd.nist.gov/vuln/detail/CVE-2022-23852){: external}, [CVE-2022-23990](https://nvd.nist.gov/vuln/detail/CVE-2022-23990){: external}, [CVE-2022-24407](https://nvd.nist.gov/vuln/detail/CVE-2022-24407){: external}, [CVE-2022-25235](https://nvd.nist.gov/vuln/detail/CVE-2022-25235){: external}, [CVE-2022-25236](https://nvd.nist.gov/vuln/detail/CVE-2022-25236){: external}. |
+| HA proxy | f6a2b3 | 15198fb | Contains fixes for [CVE-2022-24407](https://nvd.nist.gov/vuln/detail/CVE-2022-24407){: external}. | 
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.19.16_1577" caption-side="top"}
+
 
 ### Change log for worker node fix pack 1.19.16_1577, released 14 February 2022
 {: #11916_1577}
@@ -927,5 +938,4 @@ The following table shows the changes that are in the `1.19.2_1524` version upda
 | Operator Lifecycle Manager | 0.14.1-IKS-1 | 0.16.1 | See the [Operator Lifecycle Manager release notes](https://github.com/operator-framework/operator-lifecycle-manager/releases/tag/0.16.1){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.18.9_1528" caption-side="top"}
-
 

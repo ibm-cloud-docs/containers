@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-22"
+lastupdated: "2022-02-28"
 
 keywords: kubernetes
 
@@ -842,18 +842,18 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 
 `--private-only`
 :    Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and don't include the `--public-vlan` flag.
-     If worker nodes are set up with a private VLAN only, you must enable the private cloud service endpoint or configure a gateway appliance. For more information, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master).
+     If worker nodes are set up with a private VLAN only, you must enable the private cloud service endpoint or configure a gateway appliance. For more information, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_basics#workeruser-master).
      {: note}
 
 `--gateway-enabled`
 :    Create a cluster with a `gateway` worker pool of two gateway worker nodes that are connected to public and private VLANs to provide limited public access, and a `compute` worker pool of compute worker nodes that are connected to the private VLAN only. You can specify the number of compute nodes that are created in the `--workers` option. Note that you can later resize both the `compute` and `gateway` worker nodes by using the `ibmcloud ks worker-pool resize` command. For more information about gateway-enabled clusters, see [Using a gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway).
 
 `--private-service-endpoint`
-:    **Standard clusters in [accounts that are enabled with VRF and service endpoints](/docs/account?topic=account-vrf-service-endpoint)**: Enable the [private cloud service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) so that your Kubernetes master and the worker nodes communicate over the private VLAN. In addition, you can choose to enable the public cloud service endpoint by using the `--public-service-endpoint` flag to access your cluster over the internet. If you enable the private cloud service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private cloud service endpoint, you can't later disable it.
+:    **Standard clusters in [accounts that are enabled with VRF and service endpoints](/docs/account?topic=account-vrf-service-endpoint)**: Enable the [private cloud service endpoint](/docs/containers?topic=containers-plan_basics#workeruser-master) so that your Kubernetes master and the worker nodes communicate over the private VLAN. In addition, you can choose to enable the public cloud service endpoint by using the `--public-service-endpoint` flag to access your cluster over the internet. If you enable the private cloud service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private cloud service endpoint, you can't later disable it.
      After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 
 `--public-service-endpoint`
-:    Enable the [public cloud service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your command line. If you have an [account that is enabled with VRF and service endpoints](/docs/account?topic=account-vrf-service-endpoint) and also include the `--private-service-endpoint` flag, master-worker node communication goes over the private and the public network. You can later disable the public cloud service endpoint if you want a private-only cluster.
+:    Enable the [public cloud service endpoint](/docs/containers?topic=containers-plan_basics#workeruser-master) so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your command line. If you have an [account that is enabled with VRF and service endpoints](/docs/account?topic=account-vrf-service-endpoint) and also include the `--private-service-endpoint` flag, master-worker node communication goes over the private and the public network. You can later disable the public cloud service endpoint if you want a private-only cluster.
      After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 
 
@@ -1014,7 +1014,7 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
 
 **Example**:
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name mycluster --version 1.21.6 --zone us-south-1 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --subnet-id 1ab23c45-6789-0123-456d-789ef01gh234 --flavor bx2.4x16 --workers 3
+ibmcloud ks cluster create vpc-gen2 --name mycluster --version 1.22.7 --zone us-south-1 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --subnet-id 1ab23c45-6789-0123-456d-789ef01gh234 --flavor bx2.4x16 --workers 3
 ```
 {: pre}
 
@@ -1475,7 +1475,7 @@ ibmcloud ks cluster master private-service-endpoint allowlist rm --cluster myclu
 ### `ibmcloud ks cluster master private-service-endpoint disable`
 {: #cs_cluster_master_pse_disable}
 
-Disable the [private cloud service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) to remove private accessibility to your cluster master. 
+Disable the [private cloud service endpoint](/docs/containers?topic=containers-plan_basics#workeruser-master) to remove private accessibility to your cluster master. 
 {: shortdesc} 
 
 **Important**: Before you disable the private endpoint, you first must complete the following steps to enable the public cloud service endpoint:
@@ -1512,7 +1512,7 @@ ibmcloud ks cluster master private-service-endpoint disable --cluster my_cluster
 ### `ibmcloud ks cluster master private-service-endpoint enable`
 {: #cs_cluster_master_pse_enable}
 
-Enable the [private cloud service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) to make your cluster master privately accessible.
+Enable the [private cloud service endpoint](/docs/containers?topic=containers-plan_basics#workeruser-master) to make your cluster master privately accessible.
 {: shortdesc}
 
 To run this command:
@@ -1596,7 +1596,7 @@ ibmcloud ks cluster master public-service-endpoint disable --cluster my_cluster
 ### `ibmcloud ks cluster master public-service-endpoint enable`
 {: #cs_cluster_master_pub_se_enable}
 
-Enable the [public cloud service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) to make your cluster master publicly accessible.
+Enable the [public cloud service endpoint](/docs/containers?topic=containers-plan_basics#workeruser-master) to make your cluster master publicly accessible.
 {: shortdesc}
 
 
@@ -3124,7 +3124,7 @@ ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER [--worker-pool WORKER
 
 `--private-only`
 :    Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and don't include the `--public-vlan` flag.
-     If worker nodes are set up with a private VLAN only, you must enable the private cloud service endpoint or configure a gateway appliance. For more information, see [Planning your private cluster and worker node setup](/docs/containers?topic=containers-plan_clusters#private_clusters).
+     If worker nodes are set up with a private VLAN only, you must enable the private cloud service endpoint or configure a gateway appliance. For more information, see [Planning your private cluster and worker node setup](/docs/containers?topic=containers-plan_basics#private_clusters).
      {: pre}
 
 `--output json`
@@ -6291,7 +6291,7 @@ ibmcloud ks vlan ls --zone dal10
 View the VLAN spanning status for an IBM Cloud infrastructure account. VLAN spanning enables all devices on an account to communicate with each other through the private network, regardless of its assigned VLAN.
 {: shortdesc}
 
-The VLAN spanning option is disabled for clusters that are created in a VRF-enabled account. When VRF is enabled, all VLANs in the account can automatically communicate with each other over the private network. To check whether a VRF is enabled, use the `ibmcloud account show` command. For more information, see [Planning your cluster network setup: Worker-to-worker communication](/docs/containers?topic=containers-plan_clusters#worker-worker).
+The VLAN spanning option is disabled for clusters that are created in a VRF-enabled account. When VRF is enabled, all VLANs in the account can automatically communicate with each other over the private network. To check whether a VRF is enabled, use the `ibmcloud account show` command. For more information, see [Planning your cluster network setup: Worker-to-worker communication](/docs/containers?topic=containers-plan_basics#worker-worker).
 {: note}
 
 ```sh

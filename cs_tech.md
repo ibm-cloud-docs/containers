@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-23"
+lastupdated: "2022-02-28"
 
 keywords: kubernetes, docker, containers
 
@@ -28,7 +28,7 @@ Review sample cluster architectures and the components that are created in your 
 ### Non-VRF or VRF-enabled account with public cloud service endpoint only
 {: #no-vrf-public-endpoint}
 
-The following image shows the components of your cluster and how they interact in a non-VRF or VRF-enabled account when only the [public cloud service endpoint is enabled](/docs/containers?topic=containers-plan_clusters#workeruser-master).
+The following image shows the components of your cluster and how they interact in a non-VRF or VRF-enabled account when only the [public cloud service endpoint is enabled](/docs/containers?topic=containers-plan_basics#workeruser-master).
 {: shortdesc}
 
 ![{{site.data.keyword.containerlong_notm}} architecture when only the public cloud service endpoint is enabled](images/cs_org_ov_public_se.png)
@@ -36,7 +36,7 @@ The following image shows the components of your cluster and how they interact i
 ### VRF-enabled account with private and public cloud service endpoints
 {: #vrf-both-endpoints}
 
-The following image shows the components of your cluster and how they interact in a VRF-enabled account when the [public and private cloud service endpoints are enabled](/docs/containers?topic=containers-plan_clusters#workeruser-master).
+The following image shows the components of your cluster and how they interact in a VRF-enabled account when the [public and private cloud service endpoints are enabled](/docs/containers?topic=containers-plan_basics#workeruser-master).
 {: shortdesc}
 
 ![{{site.data.keyword.containerlong_notm}} architecture when public and private cloud service endpoints are enabled](images/cs_org_ov_both_ses.png)
