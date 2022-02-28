@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-02-25"
+lastupdated: "2022-02-28"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
+
+    * [28 February 2022](/docs/containers?topic=containers-iks-release#28feb2022)
 
     * [24 February 2022](/docs/containers?topic=containers-iks-release#24feb2022)
 
@@ -2995,6 +2997,8 @@ subcollection: containers
 
 * [Updating the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-block#vpc-addon-update)
 
+    * [Recreating custom storage classes after updating to version 4.2](/docs/containers?topic=containers-vpc-block#recreate-sc-42)
+
 * [Setting up encryption for {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block-encryption)
 
 * [Customizing the default storage settings](/docs/containers?topic=containers-vpc-block#vpc-customize-default)
@@ -5601,7 +5605,13 @@ subcollection: containers
 
 [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
+* [Version 1.0.5](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
+
+    * [Change log for patch update 1.0.5_415, released 28 February 2022](/docs/containers?topic=containers-ca_changelog#104410_ca)
+
 * [Version 1.0.4](/docs/containers?topic=containers-ca_changelog#0104_ca_addon)
+
+    * [Change log for patch update 1.0.4_410, released 23 February 2022](/docs/containers?topic=containers-ca_changelog#104410_ca)
 
     * [Change log for patch update 1.0.4_403, released 20 January 2022](/docs/containers?topic=containers-ca_changelog#104403_ca)
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-22"
+lastupdated: "2022-02-28"
 
 keywords: kubernetes, clusters, worker nodes, worker pools
 
