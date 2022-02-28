@@ -38,13 +38,13 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
      - [Version information and update actions](/docs/containers?topic=containers-cs_versions_123).
      - [Change log](/docs/containers?topic=containers-changelog_123)
    
-:    **Default**: 1.21
-     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_121).
-     - [Change log](/docs/containers?topic=containers-changelog_121)
-
-:    **Other**: 1.22
+:    **Default**: 1.22
      - [Version information and update actions](/docs/containers?topic=containers-cs_versions_122).
      - [Change log](/docs/containers?topic=containers-changelog_122)
+
+:    **Other**: 1.21
+     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_121).
+     - [Change log](/docs/containers?topic=containers-changelog_121)
 
 **Deprecated Kubernetes versions**:
 :    1.20
@@ -67,7 +67,7 @@ kubectl version  --short | grep -i server
 
 Example output
 ```sh
-Server Version: v1.21.6+IKS
+Server Version: v1.22.7+IKS
 ```
 {: screen}
 
