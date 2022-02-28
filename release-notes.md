@@ -37,8 +37,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {{site.data.keyword.block_storage_is_short}} add-on.
 :   [Version 4.2](/docs/containers?topic=containers-vpc_bs_changelog) is available.
 
+
+
+
+  
+ALB OAuth Proxy add-on
+:   Versions 1.0.0_1001 and 2.0.0_999 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) are released.
+
 Cluster autoscaler
 :   Version [1.0.5_415](/docs/containers?topic=containers-ca_changelog) is available.
+
 
 
 
@@ -130,7 +138,7 @@ Certified Kubernetes
 
   
 ALB OAuth Proxy add-on
-:   Versions 2.0.0_981 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) is released.
+:   Version 2.0.0_981 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) is released.
 
 
 
