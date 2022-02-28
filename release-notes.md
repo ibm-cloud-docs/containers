@@ -27,9 +27,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## February 2022
 {: #release-feb-2022}
 
-
-
-
 ### 28 February 2022
 {: #28feb2022}
 {: release-note}
@@ -37,21 +34,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {{site.data.keyword.block_storage_is_short}} add-on.
 :   [Version 4.2](/docs/containers?topic=containers-vpc_bs_changelog) is available.
 
-
+Cluster autoscaler
+:   Version [1.0.5_415](/docs/containers?topic=containers-ca_changelog) is available.
 
 
   
 ALB OAuth Proxy add-on
 :   Versions 1.0.0_1001 and 2.0.0_999 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) are released.
 
-Cluster autoscaler
-:   Version [1.0.5_415](/docs/containers?topic=containers-ca_changelog) is available.
-
 
 Worker node fix pack
-: Kubernetes [1.23.4_1521](/docs/containers?topic=containers-changelog_123#1234_1521), [1.22.7_1524](/docs/containers?topic=containers-changelog_122#1227_1524), [1.21.10_1551](/docs/containers?topic=containers-changelog_121#12110_1551), [1.20.15_1572](/docs/containers?topic=containers-changelog_120#12015_1572), and [1.19.16_1579](/docs/containers?topic=containers-changelog_119#11916_1579).
-=======
-
+:   Kubernetes [1.23.4_1521](/docs/containers?topic=containers-changelog_123#1234_1521), [1.22.7_1524](/docs/containers?topic=containers-changelog_122#1227_1524), [1.21.10_1551](/docs/containers?topic=containers-changelog_121#12110_1551), [1.20.15_1572](/docs/containers?topic=containers-changelog_120#12015_1572), and [1.19.16_1579](/docs/containers?topic=containers-changelog_119#11916_1579).
 
 
 ### 24 February 2022
