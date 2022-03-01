@@ -27,7 +27,7 @@ The cluster autoscaler Helm chart is available for standard classic and VPC clus
 Install the {{site.data.keyword.cloud_notm}} cluster autoscaler plug-in with a Helm chart to autoscale worker pools in your cluster.
 {: shortdesc}
 
-1. [Prepare your cluster for autoscaling](#ca_prepare_cluster).
+1. [Prepare your cluster for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc).
 2. [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the **Helm version 3** client on your local machine.
 3. Add and update the Helm repo where the cluster autoscaler Helm chart is.
 
@@ -363,7 +363,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: screen}
 
 
-    If you already deleted the Helm chart and see a message such as `iks-ca-configmap not found`, [redeploy the cluster autoscaler Helm chart](#ca_helm) to your cluster and try to remove it again.
+    If you already deleted the Helm chart and see a message such as `iks-ca-configmap not found`, [redeploy the cluster autoscaler Helm chart](#cluster-scaling-helm) to your cluster and try to remove it again.
     {: tip}
 
 3. Disable the add-on or uninstall the Helm chart.
@@ -402,7 +402,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 ## Cluster autoscaler Helm chart parameter reference
 {: #ca_helm_ref}
 
-This table refers to the cluster autoscaler Helm chart parameters. For add-on values, see [Cluster autoscaler add-on parameter reference](/docs/containers?topic=containers-cluster-scaling-install-addon-ca_addon_ref)
+This table refers to the cluster autoscaler Helm chart parameters. For add-on values, see [Cluster autoscaler add-on parameter reference](/docs/containers?topic=containers-cluster-scaling-install-addon#ca_addon_ref)
 {: note}
 
 
