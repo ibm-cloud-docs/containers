@@ -186,10 +186,6 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
-* [March 2022](/docs/containers?topic=containers-iks-release#release-march-2022)
-
-    * [1 March 2022](/docs/containers?topic=containers-iks-release#1mar2022)
-
 * [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
 
     * [28 February 2022](/docs/containers?topic=containers-iks-release#28feb2022)
@@ -1412,63 +1408,66 @@ subcollection: containers
 
 * [Automatically resolving issues for your worker nodes](/docs/containers?topic=containers-add_workers#planning_autorecovery)
 
-[Autoscaling clusters](/docs/containers?topic=containers-ca#ca)
 
-* [Understanding scale-up and scale-down](/docs/containers?topic=containers-ca#ca_about)
+### Autoscaling clusters
+{: #sitemap_autoscaling_clusters}
 
-* [Following scalable deployment practices](/docs/containers?topic=containers-ca#scalable-practices)
 
-    * [Can I autoscale multiple worker pools at once?](/docs/containers?topic=containers-ca#scalable-practices-multiple)
+[Preparing to autoscale classic and VPC Gen 2 clusters](/docs/containers?topic=containers-cluster-scaling-classic-vpc#cluster-scaling-classic-vpc)
 
-    * [How can I make sure that the cluster autoscaler responds to what resources my app needs?](/docs/containers?topic=containers-ca#scalable-practices-resrequests)
+* [Understanding scale-up and scale-down](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_about)
 
-    * [Can I scale down a worker pool to zero (0) nodes?](/docs/containers?topic=containers-ca#scalable-practices-zero)
+* [Following scalable deployment practices](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices)
 
-    * [Can I optimize my deployments for autoscaling?](/docs/containers?topic=containers-ca#scalable-practices-apps)
+    * [Can I autoscale multiple worker pools at once?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-multiple)
 
-    * [Can I use taints and tolerations with autoscaled worker pools?](/docs/containers?topic=containers-ca#scalable-practices-taints)
+    * [How can I make sure that the cluster autoscaler responds to what resources my app needs?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-resrequests)
 
-    * [Why are my autoscaled worker pools unbalanced?](/docs/containers?topic=containers-ca#scalable-practices-unbalanced)
+    * [Can I scale down a worker pool to zero (0) nodes?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-zero)
 
-    * [Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ca#scalable-practices-resize)
+    * [Can I optimize my deployments for autoscaling?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-apps)
 
-* [Preparing your cluster for autoscaling](/docs/containers?topic=containers-ca#ca_prepare_cluster)
+    * [Can I use taints and tolerations with autoscaled worker pools?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-taints)
 
-* [Installing the cluster autoscaler add-on in your cluster](/docs/containers?topic=containers-ca#ca_addon)
+* [Rebalancing or resizing autoscaled worker pools](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_update_worker_node_pool)
 
-* [Installing the cluster autoscaler Helm chart in your cluster](/docs/containers?topic=containers-ca#ca_helm)
+* [Preparing classic or VPC Gen 2 clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#prepare-autoscale-classic-vpc)
 
-* [Updating the cluster autoscaler configmap to enable scaling](/docs/containers?topic=containers-ca#ca_cm)
+[Enabling the cluster autoscaler add-on in your cluster](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-install-addon)
 
-* [Customizing the cluster autoscaler configuration values](/docs/containers?topic=containers-ca#ca_customize)
+* [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-update-addon)
 
-    * [Customizing the cluster autoscaler add-on configmap](/docs/containers?topic=containers-ca#ca_addon_values)
+* [Removing the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon#ca-addon-rm)
 
-    * [Customizing the cluster autoscaler Helm chart values](/docs/containers?topic=containers-ca#ca_chart_values)
+* [Cluster autoscaler add-on parameter reference](/docs/containers?topic=containers-cluster-scaling-install-addon#ca_addon_ref)
 
-* [Deploying apps to your autoscaled worker pools](/docs/containers?topic=containers-ca#ca_limit_pool)
+[Enabling autoscaling](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-enable)
 
-* [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-ca#ca_scaleup)
+* [Customizing the cluster autoscaler configuration values](/docs/containers?topic=containers-cluster-scaling-enable#ca_customize)
 
-    * [Pause pods](/docs/containers?topic=containers-ca#pause-pods-ca)
+[Customizing the cluster autoscaler add-on configmap](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-customize)
 
-    * [Horizontal pod autoscaling (HPA)](/docs/containers?topic=containers-ca#hpca)
+[Deploying apps to your autoscaled worker pools](/docs/containers?topic=containers-cluster-scaling-deploy-apps#cluster-scaling-deploy-apps)
 
-* [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-ca#ca_addon_up)
+* [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-cluster-scaling-deploy-apps#ca_scaleup)
 
-* [Rebalancing or resizing autoscaled worker pools](/docs/containers?topic=containers-ca#ca_update_worker_node_pool)
+* [Pause pods](/docs/containers?topic=containers-cluster-scaling-deploy-apps#pause-pods-ca)
 
-* [Upgrading a cluster autoscaler Helm chart release](/docs/containers?topic=containers-ca#ca_helm_up)
+* [Horizontal pod autoscaling (HPA)](/docs/containers?topic=containers-cluster-scaling-deploy-apps#hpca)
 
-    * [Prerequisites](/docs/containers?topic=containers-ca#ca_helm_up_prereqs)
+[(Deprecated) Installing the cluster autoscaler Helm chart in your cluster](/docs/containers?topic=containers-cluster-scaling-helm#cluster-scaling-helm)
 
-    * [Upgrading the cluster autoscaler release version](/docs/containers?topic=containers-ca#ca_helm_up_general)
+* [Customizing the cluster autoscaler Helm chart values](/docs/containers?topic=containers-cluster-scaling-helm#ca_chart_values)
 
-* [Removing the cluster autoscaler](/docs/containers?topic=containers-ca#ca_rm)
+* [Upgrading a cluster autoscaler Helm chart release](/docs/containers?topic=containers-cluster-scaling-helm#ca_helm_up)
 
-* [Cluster autoscaler add-on parameter reference](/docs/containers?topic=containers-ca#ca_addon_ref)
+    * [Prerequisites](/docs/containers?topic=containers-cluster-scaling-helm#ca_helm_up_prereqs)
 
-* [Cluster autoscaler Helm chart parameter reference](/docs/containers?topic=containers-ca#ca_helm_ref)
+    * [Upgrading the cluster autoscaler release version](/docs/containers?topic=containers-cluster-scaling-helm#ca_helm_up_general)
+
+* [Removing the cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-helm#ca_rm)
+
+* [Cluster autoscaler Helm chart parameter reference](/docs/containers?topic=containers-cluster-scaling-helm#ca_helm_ref)
 
 [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update#update)
 
@@ -6320,6 +6319,11 @@ subcollection: containers
 
     * [Cleaning up after debugging](/docs/containers?topic=containers-cs_ssh_worker#ssh-debug-cleanup)
 
+
+### Cluster autoscaler
+{: #sitemap_cluster_autoscaler}
+
+
 [Debugging the cluster autoscaler](/docs/containers?topic=containers-debug_cluster_autoscaler#debug_cluster_autoscaler)
 
 * [Step 1: Check the version](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-version)
@@ -6337,6 +6341,10 @@ subcollection: containers
 * [Step 6: Disable and reenable](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-disable)
 
 * [Step 8: Check if the issue is resolved](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-more)
+
+[Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ts-ca-resize#ts-ca-resize)
+
+[Why are my autoscaled worker pools unbalanced?](/docs/containers?topic=containers-ts-ca-unbalanced#ts-ca-unbalanced)
 
 
 ### Cluster network

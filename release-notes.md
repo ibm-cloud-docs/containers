@@ -24,17 +24,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: note}
 
 
-## March 2022
-{: #release-march-2022}
-
-### 1 March 2022
-{: #1mar2022}
-{: release-note}
-
-{{site.data.keyword.cos_full_notm}} plug-in
-:   Version `2.1.11` [is available](/docs/containers?topic=containers-cos_plugin_changelog).
-
-
 ## February 2022
 {: #release-feb-2022}
 
@@ -1791,7 +1780,7 @@ Worker node versions
 {: release-note}
 
 Cluster autoscaler add-on
-:   Patch update `1.0.1_146` is released. For more information, see the [Cluster autoscaler add-on changelog](/docs/openshift?topic=openshift-ca_changelog).
+:   Patch update `1.0.1_146` is released. For more information, see the [Cluster autoscaler add-on changelog](/docs/openshift?topic=openshift-cluster-scaling-classic-vpc_changelog).
 
 
 
