@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-01"
 
 keywords: kubernetes, release notes
 
@@ -36,6 +36,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 Cluster autoscaler
 :   Version [1.0.5_415](/docs/containers?topic=containers-ca_changelog) is available.
+:   New pages for [Preparing your cluster for autoscaling](/docs/openshift?topic=openshift-cluster-scaling-classic-vpc), [Installing the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon), and[Enabling autoscaling](/docs/containers?topic=containers-cluster-scaling-enable).
+:   New troubleshooting pages for [resizing worker pools](/docs/containers?topic=containers-ts-ca-resize) and updating [unbalanced worker pools](/docs/containers?topic=containers-ts-ca-unbalanced) in autoscaled clusters. 
 
 
   
@@ -1069,7 +1071,7 @@ Deprecated Ubuntu 16 end of support date
 {: release-note}
 
 VPC cluster healthchecks
-:   If you set up [VPC security groups](/docs/openshift?topic=openshift-vpc-network-policy#security_groups) or [VPC access control lists (ACLs)](/docs/openshift?topic=openshift-vpc-acls) to secure your cluster network, you can now create the rules to allow the necessary traffic from the control plane IP addresses and Akamai IPv4 IP addresses to health check your ALBs. Previously, a quota on the number of rules per security group or ACL prevented the ability to create all necessary rules for health checks.
+:   If you set up [VPC security groups](/docs/openshift?topic=openshift-vpc-security-group) or [VPC access control lists (ACLs)](/docs/openshift?topic=openshift-vpc-acls) to secure your cluster network, you can now create the rules to allow the necessary traffic from the control plane IP addresses and Akamai IPv4 IP addresses to health check your ALBs. Previously, a quota on the number of rules per security group or ACL prevented the ability to create all necessary rules for health checks.
 
 ### 10 May 2021
 {: #10may2021}
@@ -1587,8 +1589,8 @@ Reminder: VPC Gen 1 deprecation
 Istio add-on
 :   [Version 1.8.2 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#182) is released.
 
-New! {{site.data.keyword.openshiftshort}} Do (`odo`) CLI tutorial
-:   Looking to develop apps without using `kubectl` system admin commands or YAML configuration files? Check out the [Developing on clusters with the {{site.data.keyword.openshiftshort}} Do CLI](/docs/containers?topic=containers-odo-tutorial) tutorial for a quick guide on using `odo` to package and push your apps to your cluster. You no longer need an {{site.data.keyword.openshiftshort}} cluster to use `odo`, but can use `odo` with any Kubernetes cluster.
+New! {{site.data.keyword.redhat_openshift_notm}} Do (`odo`) CLI tutorial
+:   Looking to develop apps without using `kubectl` system admin commands or YAML configuration files? Check out the [Developing on clusters with the {{site.data.keyword.redhat_openshift_notm}} Do CLI](/docs/containers?topic=containers-odo-tutorial) tutorial for a quick guide on using `odo` to package and push your apps to your cluster. You no longer need an {{site.data.keyword.redhat_openshift_notm}} cluster to use `odo`, but can use `odo` with any Kubernetes cluster.
 
 New! Private service endpoint allowlists
 :   You can now control access to your private cloud service endpoint by [creating a subnet allowlist](/docs/containers?topic=containers-access_cluster#private-se-allowlist). Only authorized requests to your cluster master that originate from subnets in the allowlist are permitted through the cluster's private cloud service endpoint.
@@ -2284,8 +2286,8 @@ Versions
 {: #31july2020}
 {: release-note}
 
-{{site.data.keyword.openshiftshort}} version 4.4
-:   The [{{site.data.keyword.openshiftshort}} version 4.4 release](/docs/containers?topic=containers-cs_versions#cs_v118) is certified for Kubernetes version 1.17.
+{{site.data.keyword.redhat_openshift_notm}} version 4.4
+:   The [{{site.data.keyword.redhat_openshift_notm}} version 4.4 release](/docs/containers?topic=containers-cs_versions#cs_v118) is certified for Kubernetes version 1.17.
 
 ### 28 July 2020
 {: #28july2020}
@@ -3339,7 +3341,7 @@ New! Keep your own key (KYOK) support (beta)
 {: release-note}
 
 Version changelogs
-:   Worker node patch updates are available for Kubernetes [1.15.5_1521](/docs/containers?topic=containers-115_changelog#1155_1521), [1.14.8_1537](/docs/containers?topic=containers-114_changelog#1148_1537), [1.13.12_1540](/docs/containers?topic=containers-113_changelog#11312_1540), [1.12.10_1570](/docs/containers?topic=containers-112_changelog#11210_1570), and {{site.data.keyword.openshiftshort}} [3.11.153_1529_openshift](/docs/openshift?topic=openshift-openshift_changelog#311153_1529).
+:   Worker node patch updates are available for Kubernetes [1.15.5_1521](/docs/containers?topic=containers-115_changelog#1155_1521), [1.14.8_1537](/docs/containers?topic=containers-114_changelog#1148_1537), [1.13.12_1540](/docs/containers?topic=containers-113_changelog#11312_1540), [1.12.10_1570](/docs/containers?topic=containers-112_changelog#11210_1570), and {{site.data.keyword.redhat_openshift_notm}} [3.11.153_1529_openshift](/docs/openshift?topic=openshift-openshift_changelog#311153_1529).
 
 
 
@@ -3381,7 +3383,7 @@ Ingress annotations
 {: release-note}
 
 Version changelogs
-:   Master patch updates are available for Kubernetes [1.15.5_1520](/docs/containers?topic=containers-115_changelog#1155_1520), [1.14.8_1536](/docs/containers?topic=containers-114_changelog#1148_1536), [1.13.12_1539](/docs/containers?topic=containers-113_changelog#11312_1539), and {{site.data.keyword.openshiftshort}} [3.11.146_1528_openshift](/docs/openshift?topic=openshift-openshift_changelog#311146_1528).
+:   Master patch updates are available for Kubernetes [1.15.5_1520](/docs/containers?topic=containers-115_changelog#1155_1520), [1.14.8_1536](/docs/containers?topic=containers-114_changelog#1148_1536), [1.13.12_1539](/docs/containers?topic=containers-113_changelog#11312_1539), and {{site.data.keyword.redhat_openshift_notm}} [3.11.146_1528_openshift](/docs/openshift?topic=openshift-openshift_changelog#311146_1528).
 
 
 
@@ -3420,7 +3422,7 @@ Let's Encrypt rate limits for Ingress
 :   Added troubleshooting steps for when no subdomain or secret is generated for the Ingress ALB when you create or delete clusters of the same name.
 
 Version changelogs
-:   Worker node patch updates are available for Kubernetes [1.15.4_1519](/docs/containers?topic=containers-115_changelog#1154_1519_worker), [1.14.7_1535](/docs/containers?topic=containers-114_changelog#1147_1535_worker), [1.13.11_1538](/docs/containers?topic=containers-113_changelog#11311_1538_worker), [1.12.10_1569](/docs/containers?topic=containers-112_changelog#11210_1569_worker), and {{site.data.keyword.openshiftshort}} [3.11.146_1527_openshift](/docs/openshift?topic=openshift-openshift_changelog#311146_1527).
+:   Worker node patch updates are available for Kubernetes [1.15.4_1519](/docs/containers?topic=containers-115_changelog#1154_1519_worker), [1.14.7_1535](/docs/containers?topic=containers-114_changelog#1147_1535_worker), [1.13.11_1538](/docs/containers?topic=containers-113_changelog#11311_1538_worker), [1.12.10_1569](/docs/containers?topic=containers-112_changelog#11210_1569_worker), and {{site.data.keyword.redhat_openshift_notm}} [3.11.146_1527_openshift](/docs/openshift?topic=openshift-openshift_changelog#311146_1527).
 
 
 
@@ -3577,7 +3579,7 @@ New! {{site.data.keyword.containerlong_notm}} plug-in version `0.4`
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for multiple changes in the [release of version 0.4.1](/docs/containers?topic=containers-cs_cli_changelog).
 
 Version changelog
-:   Worker node patch updates are available for Kubernetes [1.15.3_1516](/docs/containers?topic=containers-115_changelog#1153_1516_worker), [1.14.6_1532](/docs/containers?topic=containers-114_changelog#1146_1532_worker), [1.13.10_1535](/docs/containers?topic=containers-113_changelog#11310_1535_worker), [1.12.10_1566](/docs/containers?topic=containers-112_changelog#11210_1566_worker), and {{site.data.keyword.openshiftshort}} [3.11.135_1523](/docs/openshift?topic=openshift-openshift_changelog#311135_1523_worker).
+:   Worker node patch updates are available for Kubernetes [1.15.3_1516](/docs/containers?topic=containers-115_changelog#1153_1516_worker), [1.14.6_1532](/docs/containers?topic=containers-114_changelog#1146_1532_worker), [1.13.10_1535](/docs/containers?topic=containers-113_changelog#11310_1535_worker), [1.12.10_1566](/docs/containers?topic=containers-112_changelog#11210_1566_worker), and {{site.data.keyword.redhat_openshift_notm}} [3.11.135_1523](/docs/openshift?topic=openshift-openshift_changelog#311135_1523_worker).
 
 ## August 2019
 {: #aug19}
@@ -3651,7 +3653,7 @@ Ingress ALB changelog
 {: release-note}
 
 New! Virtual Private Cloud
-:   You can create standard Kubernetes clusters on classic infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your Virtual Private Cloud. VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. Classic on VPC clusters are available for only standard, Kubernetes clusters and are not supported in free or {{site.data.keyword.openshiftshort}} clusters.
+:   You can create standard Kubernetes clusters on classic infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your Virtual Private Cloud. VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. Classic on VPC clusters are available for only standard, Kubernetes clusters and are not supported in free or {{site.data.keyword.redhat_openshift_notm}} clusters.
 :   With classic clusters in VPC, {{site.data.keyword.containerlong_notm}} introduces version 2 of the API, which supports multiple infrastructure providers for your clusters. Your cluster network setup also changes, from worker nodes that use public and private VLANs and the public cloud service endpoint to worker nodes that are on a private subnet only and have the private cloud service endpoint enabled. For more information, check out the following links.
     - [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)
     - [About the v2 API](/docs/containers?topic=containers-cs_api_install#api_about)
@@ -3901,7 +3903,7 @@ Version changelogs
 {: release-note}
 
 `kubectl` troubleshooting
-:   Added a [troubleshooting topic](/docs/containers?topic=containers-ts_clis#kubectl_fails) for when you have a `kubectl` client version that is 2 or more versions apart from the server version or the {{site.data.keyword.openshiftshort}} version of `kubectl`, which does not work with community Kubernetes clusters.
+:   Added a [troubleshooting topic](/docs/containers?topic=containers-ts_clis#kubectl_fails) for when you have a `kubectl` client version that is 2 or more versions apart from the server version or the {{site.data.keyword.redhat_openshift_notm}} version of `kubectl`, which does not work with community Kubernetes clusters.
 
 Tutorials landing page
 :   Replaced the related links page with a new tutorials landing page for all tutorials that are specific to {{site.data.keyword.containershort_notm}}.

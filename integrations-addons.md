@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-01"
 
 keywords: kubernetes, helm
 
@@ -39,7 +39,7 @@ To enable a managed add-on in your cluster from the CLI, use the [`ibmcloud ks c
 For more information about the prerequisites for each add-on, see:
 - [ALB OAuth Proxy](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
 - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)
-- [Cluster Autoscaler](/docs/openshift?topic=openshift-ca)
+- [Cluster Autoscaler](/docs/openshift?topic=openshift-cluster-scaling-classic-vpc)
 - [Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool)
 - [Istio](/docs/containers?topic=containers-istio)
 - **Deprecated**: [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web)

@@ -73,7 +73,7 @@ subcollection: containers
 
 * [Comparison of free and standard clusters](/docs/containers?topic=containers-cs_ov#cluster_types)
 
-* [Comparison between {{site.data.keyword.openshiftshort}} and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes)
+* [Comparison between {{site.data.keyword.redhat_openshift_notm}} and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes)
 
 [Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers)
 
@@ -1408,63 +1408,66 @@ subcollection: containers
 
 * [Automatically resolving issues for your worker nodes](/docs/containers?topic=containers-add_workers#planning_autorecovery)
 
-[Autoscaling clusters](/docs/containers?topic=containers-ca#ca)
 
-* [Understanding scale-up and scale-down](/docs/containers?topic=containers-ca#ca_about)
+### Autoscaling clusters
+{: #sitemap_autoscaling_clusters}
 
-* [Following scalable deployment practices](/docs/containers?topic=containers-ca#scalable-practices)
 
-    * [Can I autoscale multiple worker pools at once?](/docs/containers?topic=containers-ca#scalable-practices-multiple)
+[Preparing to autoscale classic and VPC Gen 2 clusters](/docs/containers?topic=containers-cluster-scaling-classic-vpc#cluster-scaling-classic-vpc)
 
-    * [How can I make sure that the cluster autoscaler responds to what resources my app needs?](/docs/containers?topic=containers-ca#scalable-practices-resrequests)
+* [Understanding scale-up and scale-down](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_about)
 
-    * [Can I scale down a worker pool to zero (0) nodes?](/docs/containers?topic=containers-ca#scalable-practices-zero)
+* [Following scalable deployment practices](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices)
 
-    * [Can I optimize my deployments for autoscaling?](/docs/containers?topic=containers-ca#scalable-practices-apps)
+    * [Can I autoscale multiple worker pools at once?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-multiple)
 
-    * [Can I use taints and tolerations with autoscaled worker pools?](/docs/containers?topic=containers-ca#scalable-practices-taints)
+    * [How can I make sure that the cluster autoscaler responds to what resources my app needs?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-resrequests)
 
-    * [Why are my autoscaled worker pools unbalanced?](/docs/containers?topic=containers-ca#scalable-practices-unbalanced)
+    * [Can I scale down a worker pool to zero (0) nodes?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-zero)
 
-    * [Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ca#scalable-practices-resize)
+    * [Can I optimize my deployments for autoscaling?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-apps)
 
-* [Preparing your cluster for autoscaling](/docs/containers?topic=containers-ca#ca_prepare_cluster)
+    * [Can I use taints and tolerations with autoscaled worker pools?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-taints)
 
-* [Installing the cluster autoscaler add-on in your cluster](/docs/containers?topic=containers-ca#ca_addon)
+* [Rebalancing or resizing autoscaled worker pools](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_update_worker_node_pool)
 
-* [Installing the cluster autoscaler Helm chart in your cluster](/docs/containers?topic=containers-ca#ca_helm)
+* [Preparing classic or VPC Gen 2 clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#prepare-autoscale-classic-vpc)
 
-* [Updating the cluster autoscaler configmap to enable scaling](/docs/containers?topic=containers-ca#ca_cm)
+[Enabling the cluster autoscaler add-on in your cluster](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-install-addon)
 
-* [Customizing the cluster autoscaler configuration values](/docs/containers?topic=containers-ca#ca_customize)
+* [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-update-addon)
 
-    * [Customizing the cluster autoscaler add-on configmap](/docs/containers?topic=containers-ca#ca_addon_values)
+* [Removing the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon#ca-addon-rm)
 
-    * [Customizing the cluster autoscaler Helm chart values](/docs/containers?topic=containers-ca#ca_chart_values)
+* [Cluster autoscaler add-on parameter reference](/docs/containers?topic=containers-cluster-scaling-install-addon#ca_addon_ref)
 
-* [Deploying apps to your autoscaled worker pools](/docs/containers?topic=containers-ca#ca_limit_pool)
+[Enabling autoscaling](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-enable)
 
-* [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-ca#ca_scaleup)
+* [Customizing the cluster autoscaler configuration values](/docs/containers?topic=containers-cluster-scaling-enable#ca_customize)
 
-    * [Pause pods](/docs/containers?topic=containers-ca#pause-pods-ca)
+[Customizing the cluster autoscaler add-on configmap](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-customize)
 
-    * [Horizontal pod autoscaling (HPA)](/docs/containers?topic=containers-ca#hpca)
+[Deploying apps to your autoscaled worker pools](/docs/containers?topic=containers-cluster-scaling-deploy-apps#cluster-scaling-deploy-apps)
 
-* [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-ca#ca_addon_up)
+* [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-cluster-scaling-deploy-apps#ca_scaleup)
 
-* [Rebalancing or resizing autoscaled worker pools](/docs/containers?topic=containers-ca#ca_update_worker_node_pool)
+* [Pause pods](/docs/containers?topic=containers-cluster-scaling-deploy-apps#pause-pods-ca)
 
-* [Upgrading a cluster autoscaler Helm chart release](/docs/containers?topic=containers-ca#ca_helm_up)
+* [Horizontal pod autoscaling (HPA)](/docs/containers?topic=containers-cluster-scaling-deploy-apps#hpca)
 
-    * [Prerequisites](/docs/containers?topic=containers-ca#ca_helm_up_prereqs)
+[(Deprecated) Installing the cluster autoscaler Helm chart in your cluster](/docs/containers?topic=containers-cluster-scaling-helm#cluster-scaling-helm)
 
-    * [Upgrading the cluster autoscaler release version](/docs/containers?topic=containers-ca#ca_helm_up_general)
+* [Customizing the cluster autoscaler Helm chart values](/docs/containers?topic=containers-cluster-scaling-helm#ca_chart_values)
 
-* [Removing the cluster autoscaler](/docs/containers?topic=containers-ca#ca_rm)
+* [Upgrading a cluster autoscaler Helm chart release](/docs/containers?topic=containers-cluster-scaling-helm#ca_helm_up)
 
-* [Cluster autoscaler add-on parameter reference](/docs/containers?topic=containers-ca#ca_addon_ref)
+    * [Prerequisites](/docs/containers?topic=containers-cluster-scaling-helm#ca_helm_up_prereqs)
 
-* [Cluster autoscaler Helm chart parameter reference](/docs/containers?topic=containers-ca#ca_helm_ref)
+    * [Upgrading the cluster autoscaler release version](/docs/containers?topic=containers-cluster-scaling-helm#ca_helm_up_general)
+
+* [Removing the cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-helm#ca_rm)
+
+* [Cluster autoscaler Helm chart parameter reference](/docs/containers?topic=containers-cluster-scaling-helm#ca_helm_ref)
 
 [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update#update)
 
@@ -5665,9 +5668,9 @@ subcollection: containers
 
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
 
-* [Version 4.2](/docs/containers?topic=containers-vpc_bs_changelog#041_is_block)
+* [Version 4.2](/docs/containers?topic=containers-vpc_bs_changelog#042_is_block)
 
-    * [Change log for version 4.2.0_890, released 24th February 2022](/docs/containers?topic=containers-vpc_bs_changelog#420_890_is_block_relnote)
+    * [Change log for version 4.2.0_890, released 28 February 2022](/docs/containers?topic=containers-vpc_bs_changelog#420_890_is_block_relnote)
 
 * [Version 4.1](/docs/containers?topic=containers-vpc_bs_changelog#041_is_block)
 
@@ -5705,37 +5708,39 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
-* [Changlog version 2.1.10, released 17 February 2022](/docs/containers?topic=containers-cos_plugin_changelog#02110_object_plugin)
+* [Change log for version 2.1.11, released 1 March 2022](/docs/containers?topic=containers-cos_plugin_changelog#02111_object_plugin)
 
-* [Changlog version 2.1.9, released 24 January 2022](/docs/containers?topic=containers-cos_plugin_changelog#0219_object_plugin)
+* [Change log for version 2.1.10, released 17 February 2022](/docs/containers?topic=containers-cos_plugin_changelog#02110_object_plugin)
 
-* [Changlog version 2.1.8, released 17 January 2022](/docs/containers?topic=containers-cos_plugin_changelog#0218_object_plugin)
+* [Change log for version 2.1.9, released 24 January 2022](/docs/containers?topic=containers-cos_plugin_changelog#0219_object_plugin)
 
-* [Changelog version 2.1.7, released 18 November 2021](/docs/containers?topic=containers-cos_plugin_changelog#0217_object_plugin)
+* [Change log for version 2.1.8, released 17 January 2022](/docs/containers?topic=containers-cos_plugin_changelog#0218_object_plugin)
 
-* [Changelog for version 2.1.6, released 22 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0216_object_plugin)
+* [Change log for version 2.1.7, released 18 November 2021](/docs/containers?topic=containers-cos_plugin_changelog#0217_object_plugin)
 
-* [Changelog for version 2.1.5, released 5 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0215_object_plugin)
+* [Change log for version 2.1.6, released 22 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0216_object_plugin)
 
-* [Changelog for version 2.1.4, released 1 September 2021](/docs/containers?topic=containers-cos_plugin_changelog#0214_object_plugin)
+* [Change log for version 2.1.5, released 5 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0215_object_plugin)
 
-* [Changelog for version 2.1.3, released 25 August 2021](/docs/containers?topic=containers-cos_plugin_changelog#0213_object_plugin)
+* [Change log for version 2.1.4, released 1 September 2021](/docs/containers?topic=containers-cos_plugin_changelog#0214_object_plugin)
 
-* [Changelog for version 2.1.2, released 22 June 2021](/docs/containers?topic=containers-cos_plugin_changelog#0212_object_plugin)
+* [Change log for version 2.1.3, released 25 August 2021](/docs/containers?topic=containers-cos_plugin_changelog#0213_object_plugin)
 
-* [Changelog for version 2.1.1, released 03 June 2021](/docs/containers?topic=containers-cos_plugin_changelog#0211_object_plugin)
+* [Change log for version 2.1.2, released 22 June 2021](/docs/containers?topic=containers-cos_plugin_changelog#0212_object_plugin)
 
-* [Changelog for version 2.1.0, released 26 May 2021](/docs/containers?topic=containers-cos_plugin_changelog#0210_object_plugin)
+* [Change log for version 2.1.1, released 03 June 2021](/docs/containers?topic=containers-cos_plugin_changelog#0211_object_plugin)
 
-* [Changelog for version 2.0.9, 10 May 2021](/docs/containers?topic=containers-cos_plugin_changelog#0209_object_plugin)
+* [Change log for version 2.1.0, released 26 May 2021](/docs/containers?topic=containers-cos_plugin_changelog#0210_object_plugin)
 
-* [Changelog for version 2.0.8, 19 April 2021](/docs/containers?topic=containers-cos_plugin_changelog#0208_object_plugin)
+* [Change log for version 2.0.9, 10 May 2021](/docs/containers?topic=containers-cos_plugin_changelog#0209_object_plugin)
 
-* [Changelog for version 2.0.7, 26 March 2021](/docs/containers?topic=containers-cos_plugin_changelog#0207_object_plugin)
+* [Change log for version 2.0.8, 19 April 2021](/docs/containers?topic=containers-cos_plugin_changelog#0208_object_plugin)
 
-* [Changelog for version 2.0.6, 18 December 2020](/docs/containers?topic=containers-cos_plugin_changelog#0206_object_plugin)
+* [Change log for version 2.0.7, 26 March 2021](/docs/containers?topic=containers-cos_plugin_changelog#0207_object_plugin)
 
-* [Changelog for version 2.0.5, released 25 November 2020](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
+* [Change log for version 2.0.6, 18 December 2020](/docs/containers?topic=containers-cos_plugin_changelog#0206_object_plugin)
+
+* [Change log for version 2.0.5, released 25 November 2020](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
 
 [Static route add-on version changelog](/docs/containers?topic=containers-static-route-changelog#static-route-changelog)
 
@@ -6314,6 +6319,11 @@ subcollection: containers
 
     * [Cleaning up after debugging](/docs/containers?topic=containers-cs_ssh_worker#ssh-debug-cleanup)
 
+
+### Cluster autoscaler
+{: #sitemap_cluster_autoscaler}
+
+
 [Debugging the cluster autoscaler](/docs/containers?topic=containers-debug_cluster_autoscaler#debug_cluster_autoscaler)
 
 * [Step 1: Check the version](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-version)
@@ -6331,6 +6341,10 @@ subcollection: containers
 * [Step 6: Disable and reenable](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-disable)
 
 * [Step 8: Check if the issue is resolved](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-more)
+
+[Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ts-ca-resize#ts-ca-resize)
+
+[Why are my autoscaled worker pools unbalanced?](/docs/containers?topic=containers-ts-ca-unbalanced#ts-ca-unbalanced)
 
 
 ### Cluster network

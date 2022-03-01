@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-01"
 
 keywords: kubernetes, clusters, worker nodes, worker pools
 
@@ -146,7 +146,7 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
 {: help}
 {: support}
 
-After you set up your account to create clusters, decide on the setup for your cluster. You must make these decisions every time that you create a cluster. You can click on the options in the following decision tree image for more information, such as comparisons of free and standard, Kubernetes and {{site.data.keyword.openshiftshort}}, or VPC and classic clusters.
+After you set up your account to create clusters, decide on the setup for your cluster. You must make these decisions every time that you create a cluster. You can click on the options in the following decision tree image for more information, such as comparisons of free and standard, Kubernetes and {{site.data.keyword.redhat_openshift_notm}}, or VPC and classic clusters.
 {: shortdesc}
 
 
@@ -178,7 +178,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
 ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Create your single zone or multizone classic Kubernetes cluster by using the {{site.data.keyword.cloud_notm}} console.
 {: shortdesc}
 
-{{site.data.keyword.openshiftlong_notm}} clusters are created with a public only or both a public and private service endpoint. Public service endpoints can't be disabled, and therefore, you can't convert a public {{site.data.keyword.openshiftshort}} cluster to a private one. If you want your cluster to remain private, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw).
+{{site.data.keyword.openshiftlong_notm}} clusters are created with a public only or both a public and private service endpoint. Public service endpoints can't be disabled, and therefore, you can't convert a public {{site.data.keyword.redhat_openshift_notm}} cluster to a private one. If you want your cluster to remain private, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw).
 {: important}
 
 1. Make sure that you complete the prerequisites to [prepare your account](#cluster_prepare) and decide on your [cluster setup](#prepare_cluster_level).

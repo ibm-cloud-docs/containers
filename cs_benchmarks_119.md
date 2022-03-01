@@ -3,7 +3,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-01"
 
 keywords: kubernetes, containers
 
@@ -339,7 +339,7 @@ Review information from IBM on the CIS Benchmark results.
 | 5.2.9 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
 | 5.3.2 | IKS has a set of [default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy) and [additional network policies can optionally be added](/docs/containers?topic=containers-network_policies#adding_network_policies).  |
 | 5.4.2 | IKS can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
-| 5.5.1 | IKS can optionally [enable enforcing image security](/docs/Registry?topic=Registry-security_enforce_portieris#security_enforce). |
+| 5.5.1 | IKS can optionally [enable enforcing image security](/docs/Registry?topic=Registry-security_enforce_portieris). |
 | 5.6.2 | IKS does not annotate all pods with [seccomp profiles](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp){: external}. |
 | 5.6.3 | IKS deploys some system components that do not set a pod or container *securityContext*. |
 | 5.6.4 | IKS deploys some Kubernetes resources to the default names. |

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-01"
 
 keywords: kubernetes, vlan
 
@@ -198,7 +198,7 @@ When you create a cluster, you choose whether to connect your worker nodes to a 
 {: shortdesc}
 
 - The worker pool VLANs in a zone run out of capacity, and you need to provision a new VLAN for your cluster worker nodes to use.
-- You have a cluster with worker nodes that are on both public and private VLANs, but you want to change to a [private-only cluster](/docs/containers?topic=containers-plan_clusters#private_clusters).
+- You have a cluster with worker nodes that are on both public and private VLANs, but you want to change to a [private-only cluster](/docs/containers?topic=containers-plan_basics#private_clusters).
 - You have a private-only cluster, but you want some worker nodes such as a worker pool of [edge nodes](/docs/containers?topic=containers-edge#edge) on the public VLAN to expose your apps on the internet.
 
 Trying to change the service endpoint for master-worker communication instead? Check out the topics to set up [public](#set-up-public-se) and [private](#set-up-private-se) service endpoints.

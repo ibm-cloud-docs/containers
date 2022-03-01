@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-01"
 
-keywords: kubernetes, help, network, connectivity
+keywords: kubernetes, help, network, connectivity, autoscaler
 
 subcollection: containers
 
@@ -139,7 +139,7 @@ Check the health of the cluster autoscaler pod.
     ```
     {: pre}
 
-3. Review the **Command** section to check that the [custom cluster autoscaler configuration](/docs/containers?topic=containers-ca#ca_chart_values) matches what you expect, such as the`scale-down-delay-after-add` value.
+3. Review the **Command** section to check that the [custom cluster autoscaler configuration](/docs/openshift?topic=openshift-cluster-scaling-enable) matches what you expect, such as the`scale-down-delay-after-add` value.
     ```sh
     Command:
         ./cluster-autoscaler
@@ -233,8 +233,6 @@ Optional: If you completed the debugging steps and your cluster still does not s
 {: #ca-debug-more}
 
 Monitor the cluster autoscaler activities in your cluster to see if the issue is resolved. If you still experience issues, see [Feedback, questions, and support](/docs/containers?topic=containers-get-help).
-
-
 
 
 

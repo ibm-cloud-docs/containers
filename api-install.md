@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-01"
 
 keywords: kubernetes, ic, ks, kubectl, api
 
@@ -17,7 +17,7 @@ subcollection: containers
 # Setting up the API
 {: #cs_api_install}
 
-You can use the {{site.data.keyword.containerlong}} API to create and manage your community Kubernetes or {{site.data.keyword.openshiftshort}} clusters. To use the CLI, see [Setting up the CLI](/docs/containers?topic=containers-cs_cli_install).
+You can use the {{site.data.keyword.containerlong}} API to create and manage your community Kubernetes or {{site.data.keyword.redhat_openshift_notm}} clusters. To use the CLI, see [Setting up the CLI](/docs/containers?topic=containers-cs_cli_install).
 {: shortdesc}
 
 ## About the API
@@ -43,8 +43,8 @@ API architectural style
 :    v2 API: Remote procedure calls (RPC) that focus on actions through only `GET` and `POST` HTTP methods.
 
 Supported container platforms
-:    v1 API: Use the {{site.data.keyword.containerlong_notm}} API to manage your {{site.data.keyword.cloud_notm}} infrastructure resources, such as worker nodes, for **both community Kubernetes and {{site.data.keyword.openshiftshort}} clusters**.
-:    v2 API: Use the {{site.data.keyword.containerlong_notm}} `v2` API to manage your {{site.data.keyword.cloud_notm}} infrastructure resources, such as worker nodes, for **both community Kubernetes and {{site.data.keyword.openshiftshort}} VPC clusters**.
+:    v1 API: Use the {{site.data.keyword.containerlong_notm}} API to manage your {{site.data.keyword.cloud_notm}} infrastructure resources, such as worker nodes, for **both community Kubernetes and {{site.data.keyword.redhat_openshift_notm}} clusters**.
+:    v2 API: Use the {{site.data.keyword.containerlong_notm}} `v2` API to manage your {{site.data.keyword.cloud_notm}} infrastructure resources, such as worker nodes, for **both community Kubernetes and {{site.data.keyword.redhat_openshift_notm}} VPC clusters**.
 
   
 Kubernetes API

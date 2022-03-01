@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-01"
 
 keywords: kubernetes
 
@@ -39,6 +39,7 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
     * [`ibmcloud ks cluster ca rotate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_rotate)
     * [`ibmcloud ks cluster ca status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_status)
 * [`ibmcloud ks cluster config`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_config)
+* [`ibmcloud ks cluster cos rotate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_cos_rotate)
 * **`cluster create`**: Create a classic or VPC cluster.
     * [`ibmcloud ks cluster create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_create)
     * [`ibmcloud ks cluster create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_cluster-create-vpc-gen2)
