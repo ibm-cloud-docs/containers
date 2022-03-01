@@ -101,11 +101,11 @@ toc:
             - topicgroup: 
               label: Autoscaling clusters
               topics:
-                - cluster-scaling-classic-vpc.md
-                - cluster-scaling-install-addon.md
-                - cluster-scaling-enable.md
-                - cluster-scaling-deploy-apps.md
-                - cluster-scaling-helm.md
+              - cluster-scaling-classic-vpc.md
+              - cluster-scaling-install-addon.md
+              - cluster-scaling-enable.md
+              - cluster-scaling-deploy-apps.md
+              - cluster-scaling-helm.md
             - cs_cluster_update.md
             - performance.md
             - cluster-remove.md
@@ -402,9 +402,9 @@ toc:
               - topicgroup:
                   label: Cluster autoscaler
                   topics:
-                    - ts-ca-debug.md
-                    - ts-ca-resize.md
-                    - ts-ca-unbalanced.md
+                  - ts-ca-debug.md
+                  - ts-ca-resize.md
+                  - ts-ca-unbalanced.md
               - topicgroup:
                   label: Cluster network
                   topics:
