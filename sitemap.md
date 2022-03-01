@@ -73,7 +73,7 @@ subcollection: containers
 
 * [Comparison of free and standard clusters](/docs/containers?topic=containers-cs_ov#cluster_types)
 
-* [Comparison between {{site.data.keyword.openshiftshort}} and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes)
+* [Comparison between {{site.data.keyword.redhat_openshift_notm}} and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes)
 
 [Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers)
 

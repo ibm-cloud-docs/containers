@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-01"
 
 keywords: kubernetes, containers
 
@@ -36,10 +36,10 @@ Ready to get started? Try out the [creating a Kubernetes cluster tutorial](/docs
 
 
 Choice of container platform provider
-:   Deploy clusters with **{{site.data.keyword.openshiftshort}}** or community **Kubernetes** installed as the container platform orchestrator.
-:   Choose the developer experience that fits your company, or run workloads across both {{site.data.keyword.openshiftshort}} or community Kubernetes clusters.
-:   Built-in integrations from the {{site.data.keyword.cloud_notm}} console to the Kubernetes dashboard or {{site.data.keyword.openshiftshort}} web console.
-:   Single view and management experience of all your {{site.data.keyword.openshiftshort}} or community Kubernetes clusters from {{site.data.keyword.cloud_notm}}. For more information, see Comparison between [{{site.data.keyword.openshiftshort}}](#openshift_kubernetes) and community Kubernetes clusters.
+:   Deploy clusters with **{{site.data.keyword.redhat_openshift_notm}}** or community **Kubernetes** installed as the container platform orchestrator.
+:   Choose the developer experience that fits your company, or run workloads across both {{site.data.keyword.redhat_openshift_notm}} or community Kubernetes clusters.
+:   Built-in integrations from the {{site.data.keyword.cloud_notm}} console to the Kubernetes dashboard or {{site.data.keyword.redhat_openshift_notm}} web console.
+:   Single view and management experience of all your {{site.data.keyword.redhat_openshift_notm}} or community Kubernetes clusters from {{site.data.keyword.cloud_notm}}. For more information, see Comparison between [{{site.data.keyword.redhat_openshift_notm}}](#openshift_kubernetes) and community Kubernetes clusters.
 
 
 Single-tenant Kubernetes clusters with compute, network, and storage infrastructure isolation
@@ -116,7 +116,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[User access management](/docs/containers?topic=containers-access-overview#access_policies)|Yes|Yes|
 |[{{site.data.keyword.cloud_notm}} service access from the cluster and apps](/docs/containers?topic=containers-service-binding#bind-services)|Yes|Yes|
 |[Disk space on worker node for non-persistent storage](/docs/containers?topic=containers-storage_planning#non_persistent_overview)|Yes|Yes|
-| [Provision {{site.data.keyword.openshiftshort}} clusters](/docs/openshift?topic=openshift-getting-started) | | Yes |
+| [Provision {{site.data.keyword.redhat_openshift_notm}} clusters](/docs/openshift?topic=openshift-getting-started) | | Yes |
 | [Create clusters in a Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial) | | Yes |
 |[Ability to create cluster in every {{site.data.keyword.containerlong_notm}} region](/docs/containers?topic=containers-regions-and-zones)| | Yes |
 |[Multizone clusters to increase app high availability](/docs/containers?topic=containers-ha_clusters#multizone)| |Yes|
@@ -134,13 +134,13 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 
 
 
-## Comparison between {{site.data.keyword.openshiftshort}} and community Kubernetes clusters
+## Comparison between {{site.data.keyword.redhat_openshift_notm}} and community Kubernetes clusters
 {: #openshift_kubernetes}
 
 Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerlong_notm}} clusters are production-ready container platforms that are tailored for enterprise workloads. The following table compares and contrasts some common characteristics that can help you choose which container platform is right for your use case.
 {: shortdesc}
 
-|Characteristics|Community Kubernetes clusters|{{site.data.keyword.openshiftshort}} clusters|
+|Characteristics|Community Kubernetes clusters|{{site.data.keyword.redhat_openshift_notm}} clusters|
 |---------------|-------------|-----------------|
 |Complete cluster management experience through the {{site.data.keyword.containerlong_notm}} automation tools (API, CLI, console)|Yes|Yes|
 |Worldwide availability in single and multizones|Yes|Yes|
@@ -161,7 +161,7 @@ Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerl
 |Supported operating system| Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated) |Red Hat Enterprise Linux 7|
 |Preferred external traffic networking| Ingress | Router |
 |Secured routes encrypted with {{site.data.keyword.hscrypto}} | | Yes |
-{: caption="Characteristics of community Kubernetes and {{site.data.keyword.openshiftshort}} clusters" caption-side="top"}
+{: caption="Characteristics of community Kubernetes and {{site.data.keyword.redhat_openshift_notm}} clusters" caption-side="top"}
 
 
 

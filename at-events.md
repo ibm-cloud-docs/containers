@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-01"
 
 keywords: kubernetes, audit
 
@@ -17,7 +17,7 @@ subcollection: containers
 # {{site.data.keyword.at_full_notm}} events
 {: #at_events}
 
-You can view, manage, and audit user-initiated activities in your {{site.data.keyword.containerlong}} community Kubernetes or {{site.data.keyword.openshiftshort}} cluster by using the {{site.data.keyword.at_full}} service.
+You can view, manage, and audit user-initiated activities in your {{site.data.keyword.containerlong}} community Kubernetes or {{site.data.keyword.redhat_openshift_notm}} cluster by using the {{site.data.keyword.at_full}} service.
 {: shortdesc}
 
 {{site.data.keyword.containerlong_notm}} automatically generates cluster management events and forwards these event logs to {{site.data.keyword.at_full_notm}}. To access these logs, you must [provision an instance of {{site.data.keyword.at_full_notm}}](/docs/activity-tracker?topic=activity-tracker-getting-started).

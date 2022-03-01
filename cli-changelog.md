@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-01"
 
 keywords: kubernetes
 
@@ -589,7 +589,7 @@ Version 0.3.47 of the CLI was released on 15 June 2019.
 Version 0.3.34 of the CLI was released on 31 May 2019.
 
 
-- Adds the `versions` command to list all supported Kubernetes and {{site.data.keyword.openshiftshort}} versions. 
+- Adds the `versions` command to list all supported Kubernetes and {{site.data.keyword.redhat_openshift_notm}} versions. 
 - Deprecates the `kube-versions` command.
 
 #### Version 0.3.33

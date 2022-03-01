@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-01"
 
 keywords: kubernetes, firewall
 
@@ -182,7 +182,7 @@ Keep in mind that in addition to any rules you create, you must also create the 
 | Allow all worker nodes in this cluster to communicate with each other. | ALL | - | Security group `<SG_name>` |
 | Kubernetes version < 1.19: Allow incoming traffic requests to apps that run on your worker nodes. | TCP | `30000` - `32767` | Any |
 | Kubernetes version < 1.19: If you require VPC VPN access or classic infrastructure access into this cluster, allow incoming traffic requests to apps that run on your worker nodes. | UDP | `30000` - `32767` | Any |
-| `*` For Classic clusters, allow access from the Kubernetes control plane IP addresses that are used to health check and report the overall status of your Ingress components. Create one rule for each [control plane CIDR for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}. For VPC clusters, if you use your own security group to the LBaaS for Ingress, set port 80 to allow access from the {{site.data.keyword.openshiftshort}} control plane IP addresses. | TCP | `80` | Each [control plane CIDR for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}. |
+| `*` For Classic clusters, allow access from the Kubernetes control plane IP addresses that are used to health check and report the overall status of your Ingress components. Create one rule for each [control plane CIDR for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}. For VPC clusters, if you use your own security group to the LBaaS for Ingress, set port 80 to allow access from the {{site.data.keyword.redhat_openshift_notm}} control plane IP addresses. | TCP | `80` | Each [control plane CIDR for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}. |
 {: caption="Table 2. Required inbound rules" caption-side="top"}
 {: summary="The table shows required inbound connectivity rules for your VPC security group. Rows are read from the left to right, with the purpose of the rule in column one, the protocol in column two, the required ports or values for the protocol in column in three, and the source type and a brief description of the service in column two."}
 
