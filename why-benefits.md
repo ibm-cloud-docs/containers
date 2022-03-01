@@ -20,8 +20,6 @@ subcollection: containers
 [{{site.data.keyword.containerlong}}](https://www.ibm.com/cloud/kubernetes-service){: external} delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts. For more information about certification, see [Compliance on the {{site.data.keyword.cloud_notm}}](https://www.ibm.com/cloud/compliance){: external}.
 {: shortdesc}
 
-Check out the following <a href="https://www.ibm.com/demos/collection/Containers-(Kubernetes)-on-IBM-Cloud/?lc=null">videos</a> to learn more about how you can use {{site.data.keyword.containerlong_notm}} to modernize and run containerized apps.
-{: tip}
 
 
 ## Benefits of using the service
@@ -93,7 +91,7 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.clou
 {{site.data.keyword.cloud_notm}} Public, off-premises
 :   With {{site.data.keyword.cloud_notm}} Public on [shared or dedicated](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) hardware or on bare metal machines, you can host your apps in clusters on the cloud by using {{site.data.keyword.containerlong_notm}}. You can also create a cluster with worker pools in multiple zones to increase high availability for your apps. {{site.data.keyword.containerlong_notm}} on {{site.data.keyword.cloud_notm}} Public delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts For more information, see [{{site.data.keyword.containerlong_notm}} technology](/docs/containers?topic=containers-service-arch).
 
-    You can also create your cluster in a Virtual Private Cloud (VPC), which gives you the security of a private cloud environment with isolated networking features along with the dynamic scalability of the public cloud. For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).
+:   You can also create your cluster in a Virtual Private Cloud (VPC), which gives you the security of a private cloud environment with isolated networking features along with the dynamic scalability of the public cloud. For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).
 
 {{site.data.keyword.cloud_notm}} Private, on-premises
 :   {{site.data.keyword.cloud_notm}} Private is an application platform that can be installed locally on your own machines. You might choose to use Kubernetes in {{site.data.keyword.cloud_notm}} Private when you need to develop and manage on-premises, containerized apps in your own controlled environment behind a firewall. For more information, see the [{{site.data.keyword.cloud_notm}} Private product documentation](https://www.ibm.com/docs/en/cloud-private/3.2.x).
@@ -116,8 +114,8 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[User access management](/docs/containers?topic=containers-access-overview#access_policies)|Yes|Yes|
 |[{{site.data.keyword.cloud_notm}} service access from the cluster and apps](/docs/containers?topic=containers-service-binding#bind-services)|Yes|Yes|
 |[Disk space on worker node for non-persistent storage](/docs/containers?topic=containers-storage_planning#non_persistent_overview)|Yes|Yes|
-| [Provision {{site.data.keyword.redhat_openshift_notm}} clusters](/docs/openshift?topic=openshift-getting-started) | | Yes |
-| [Create clusters in a Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial) | | Yes |
+|[Provision {{site.data.keyword.redhat_openshift_notm}} clusters](/docs/openshift?topic=openshift-getting-started) | | Yes |
+|[Create clusters in a Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial) | | Yes |
 |[Ability to create cluster in every {{site.data.keyword.containerlong_notm}} region](/docs/containers?topic=containers-regions-and-zones)| | Yes |
 |[Multizone clusters to increase app high availability](/docs/containers?topic=containers-ha_clusters#multizone)| |Yes|
 |Replicated masters for higher availability| | Yes |
