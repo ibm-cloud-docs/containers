@@ -14,6 +14,8 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
+
 # Classic: Opening required ports and IP addresses in your firewall
 {: #firewall}
 
@@ -600,6 +602,10 @@ Before you begin, the following steps require you to change the IAM allowlist fo
 7. For **Classic infrastructure**, enter the [CIDRs of the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/iam-firewall-ips){: external}. For VPC infrastructure, enter the CIDRs of the zones in the region where your cluster is located in your security group of ALB. To find the region that your cluster's zones are location in, see the `README` for the directory.
 8. Enter the CIDRs of the worker node subnets that you found in step 2.
 9. Click **Apply**.
+
+
+
+
 
 
 
