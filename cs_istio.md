@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-22"
+lastupdated: "2022-03-02"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
 
@@ -286,15 +286,13 @@ You can't revert your managed Istio add-on to a previous version. If you want to
 
 3. Review the changes that are in each version in the [Istio add-on changelog](/docs/containers?topic=containers-istio-changelog).
 
-4. Istio version 1.8: If you created a custom `IstioOperator` (IOP) resource, remove the `revision` field from the resource before you update your add-on to version 1.8 so that the custom gateways use version 1.8 of `istiod`.
-
-5. Update the Istio add-on.
+4. Update the Istio add-on.
     ```sh
     ibmcloud ks cluster addon update istio --version <version> -c <cluster_name_or_ID>
     ```
     {: pre}
 
-6. Before you proceed, verify that the update is complete.
+5. Before you proceed, verify that the update is complete.
 
     The update process can take up to 20 minutes to complete.
     {: note}
@@ -323,9 +321,7 @@ You can't revert your managed Istio add-on to a previous version. If you want to
         ```
         {: screen}
 
-7. Istio version 1.8 or later: If you created a custom `IstioOperator` (IOP) resource, update the tag for any custom gateways to the updated add-on version.
-
-8. [Update your `istioctl` client and sidecars](#update_client_sidecar).
+6. [Update your `istioctl` client and sidecars](#update_client_sidecar).
 
 ### Updating the `istioctl` client and sidecars
 {: #update_client_sidecar}
