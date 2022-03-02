@@ -1875,19 +1875,15 @@ subcollection: containers
 
 [Controlling traffic with the default security group](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
 
-* [Creating security group rules from the console](/docs/containers?topic=containers-vpc-security-group#security_groups_ui)
-
-    * [Creating inbound rules in the console](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-rules)
-
-    * [Creating security group rules with the CLI](/docs/containers?topic=containers-vpc-security-group#security_groups_cli)
-
-    * [Creating inbound rules by using the command line](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-cli)
-
-    * [Creating outbound rules by using the command line](/docs/containers?topic=containers-vpc-security-group#security-group-cli-outbound)
-
 * [Required inbound rules](/docs/containers?topic=containers-vpc-security-group#required-group-inbound-rules)
 
 * [Required outbound rules](/docs/containers?topic=containers-vpc-security-group#security-group-outbound-rules)
+
+* [Creating inbound and outbound rules in the console](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-rules)
+
+* [Creating security group rules in the command line](/docs/containers?topic=containers-vpc-security-group#security_groups_cli)
+
+    * [Creating outbound rules by using the command line](/docs/containers?topic=containers-vpc-security-group#security-group-cli-outbound)
 
 [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
 
