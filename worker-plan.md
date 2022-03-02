@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-02"
 
 keywords: kubernetes, hardware, flavor, machine type, vm, bm
 
@@ -70,7 +70,7 @@ Kubernetes limits the maximum number of worker nodes that you can have in a clus
 
 {{site.data.keyword.containerlong_notm}} also sets compute resource reserves that limit available compute resources on each worker node. For more information, see [worker node resource reserves](#resource_limit_node).
 
-Want to be sure that you always have enough worker nodes to cover your workload? Try out [the cluster autoscaler](/docs/containers?topic=containers-ca#ca).
+Want to be sure that you always have enough worker nodes to cover your workload? Try out [the cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc).
 {: tip}
 
 

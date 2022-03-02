@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-01"
+lastupdated: "2022-03-02"
 
 keywords: kubernetes, containers
 
@@ -119,7 +119,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Ability to create cluster in every {{site.data.keyword.containerlong_notm}} region](/docs/containers?topic=containers-regions-and-zones)| | Yes |
 |[Multizone clusters to increase app high availability](/docs/containers?topic=containers-ha_clusters#multizone)| |Yes|
 |Replicated masters for higher availability| | Yes |
-|[Scalable number of worker nodes to increase capacity](/docs/containers?topic=containers-ca)| |Yes|
+|[Scalable number of worker nodes to increase capacity](/docs/containers?topic=containers-cluster-scaling-classic-vpc)| |Yes|
 |[Persistent NFS file-based storage with volumes](/docs/containers?topic=containers-file_storage#file_storage)| |Yes|
 |[Public or private network app access by a network load balancer (NLB) service to a stable IP address](/docs/containers?topic=containers-loadbalancer)| |Yes|
 |[Public network app access by an Ingress service to a stable IP address and customizable URL](/docs/containers?topic=containers-ingress-about)| |Yes|
