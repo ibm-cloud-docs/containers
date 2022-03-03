@@ -30,6 +30,10 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #3mar2022}
 {: release-note}
 
+
+{{site.data.keyword.containershort}} default version update.
+:    [1.22](/docs/containers?topic=containers-cs_versions#cs_versions_available) is now the default version.
+
 Maintenance Windows for {{site.data.keyword.containershort}} ALBs
 :    You can now further control and manage your ALB updates by [creating a customized configmap](/docs/containers?topic=containers-ingress-types#alb_scheduled_updates) that specifies the time you want the updates to occur and the percentage of ALBs you want to update.
 
