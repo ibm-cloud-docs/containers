@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-03-02"
+lastupdated: "2022-03-03"
 
 keywords: containers
 subcollection: containers
@@ -1445,7 +1445,7 @@ subcollection: containers
 
 * [Customizing the cluster autoscaler configuration values](/docs/containers?topic=containers-cluster-scaling-enable#ca_customize)
 
-[Customizing the cluster autoscaler add-on configmap](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-customize)
+    * [Customizing the cluster autoscaler add-on configmap](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-customize)
 
 [Deploying apps to your autoscaled worker pools](/docs/containers?topic=containers-cluster-scaling-deploy-apps#cluster-scaling-deploy-apps)
 
