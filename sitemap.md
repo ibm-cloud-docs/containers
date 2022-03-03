@@ -186,6 +186,10 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
+* [March 2022](/docs/containers?topic=containers-iks-release#release-mar-2022)
+
+    * [3 March 2022](/docs/containers?topic=containers-iks-release#3mar2022)
+
 * [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
 
     * [28 February 2022](/docs/containers?topic=containers-iks-release#28feb2022)
@@ -2684,6 +2688,8 @@ subcollection: containers
     * [Choosing a supported image version](/docs/containers?topic=containers-ingress-types#alb-version-choose)
 
     * [Managing automatic updates](/docs/containers?topic=containers-ingress-types#autoupdate)
+
+    * [Scheduling maintenance windows for automatic updates](/docs/containers?topic=containers-ingress-types#alb_scheduled_updates)
 
     * [Reverting to an earlier version](/docs/containers?topic=containers-ingress-types#revert)
 
