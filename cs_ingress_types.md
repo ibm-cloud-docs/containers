@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-03"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -1114,6 +1114,40 @@ If automatic updates for the Ingress ALB add-on are disabled and you want to upd
     ```
     {: pre}
 
+### Scheduling maintenance windows for automatic updates
+{: #alb_scheduled_updates}
+
+You can enable automatic updates of all Ingress ALB pods in a cluster by enabling [autoupdate](#autoupdate). If you enable autoupdate for your ALBs, you can further control and manage your ALB updates by creating a customized configmap that specifies the time you want the updates to occur and the percentage of ALBs you want to update. For more information, see [Maintenance Windows for {{site.data.keyword.containershort}} ALBs](https://community.ibm.com/community/user/publiccloud/blogs/lucas-copi/2022/03/02/maintenance-windows-for-iks-albs){: external}.  
+{: shortdesc}
+
+To set a time frame for automatic updates, you set the `updateStartTime` and `updateEndTime` keys in the deployment configmap. Each key represents an assigned time in a 24 hour format (HH:MM). Note that this time is specified in coordinated universal time (UTC) rather than your local time. To specify a percentage of ALBs to update, you set the `updatePercentage` key as a whole number between 0 and 100. 
+
+**To manage your autoupdate settings with a customized configmap:**
+
+1. Create a YAML file for your configmap. Specify the `updatePercentage`, `updateStartTime`, and `updateEndTime` fields as key-value pairs in the `data` field.
+
+    The following example configmap sets the autoupdate function to update 35% of ALB pods in your cluster between 20:34 and 23:59 UTC.
+
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+        name: ingress-deploy-config
+        namespace: kube-system
+    data:
+        "updatePercentage": "35"
+        "updateStartTime": "20:34"
+        "updateEndTime": "23:59"
+    ```
+    {: codeblock}
+
+2. Deploy the configmap in your cluster. The new rules apply the next time an update takes place.
+
+```sh
+kubectl apply -f <filename>.yaml
+```
+{: pre}
+
 ### Reverting to an earlier version
 {: #revert}
 
@@ -1121,7 +1155,6 @@ If your ALB pods were recently updated, but a custom configuration for your ALBs
 {: shortdesc}
 
 The image version that you change your ALB to must be a supported image version that is listed in the output of `ibmcloud ks ingress alb versions`. Note that you can use this command to change your ALB image to a different version, but you can't use this command to change your ALB from one type of image to another. After you force a one-time update, automatic updates to your ALBs are disabled.
-
 
 
 ## Scaling ALBs

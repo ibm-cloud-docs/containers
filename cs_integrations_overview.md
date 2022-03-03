@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-02"
+lastupdated: "2022-03-03"
 
 keywords: kubernetes, helm
 
@@ -116,7 +116,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 |{{site.data.keyword.datashield_full_notm}}|You can use [{{site.data.keyword.datashield_short}}](/docs/data-shield?topic=data-shield-getting-started#getting-started){: external} to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.cloud_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.|Yes||
 |{{site.data.keyword.registrylong_notm}}|Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the [{{site.data.keyword.registrylong}} documentation](/docs/Registry?topic=Registry-getting-started){: external}.|Yes|Yes|
 |{{site.data.keyword.keymanagementservicefull_notm}}|Encrypt the Kubernetes secrets that are in your cluster by enabling {{site.data.keyword.keymanagementserviceshort}}. Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information. To set up, see [Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}](/docs/containers?topic=containers-encryption#keyprotect). For more information, see the [{{site.data.keyword.keymanagementserviceshort}} documentation](/docs/key-protect?topic=key-protect-getting-started-tutorial){: external}.|Yes|Yes|
-|NeuVector|Protect containers with a cloud-native firewall by using [NeuVector](https://neuvector.com/){: external}. For more information, see [NeuVector Container Security](https://www.ibm.com/us-en/marketplace/neuvector-container-security){: external}.|Yes|Yes|
+|NeuVector|Protect containers with a cloud-native firewall by using [NeuVector](https://neuvector.com/){: external}. For more information, see [NeuVector Container Security](https://cloud.ibm.com/catalog/services/neuvector-container-security-platform){: external}.|Yes|Yes|
 |Twistlock|As a supplement to [Vulnerability Advisor](/docs/va?topic=va-va_index){: external}, you can use [Twistlock](https://www.paloaltonetworks.com/prisma/cloud){: external} to manage firewalls, threat protection, and incident response. For more information, see [Twistlock on {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/blogs/cloud-archive/2017/07/twistlock-ibm-bluemix-container-service/){: external}.|Yes|Yes|
 {: caption="Security services"}
 {: summary="The table shows available services that you can add to your cluster to add extra security capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}

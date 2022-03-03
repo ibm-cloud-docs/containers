@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-01"
+lastupdated: "2022-03-03"
 
 keywords: kubernetes, node scaling, ca, autoscaler
 
@@ -116,7 +116,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
 *  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  [Install the `ibm-iks-cluster-autoscaler` add-on](/docs/containers?topic=containers-cluster-scaling-install-addon).
 
-# Customizing the cluster autoscaler add-on configmap
+### Customizing the cluster autoscaler add-on configmap
 {: #cluster-scaling-customize}
 
 When you modify a configmap parameter other than the worker pool `minSize`, `maxSize`, or if you enable or disable a worker pool, the cluster autoscaler pods are restarted.
