@@ -3951,8 +3951,8 @@ subcollection: containers
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-123#cis-benchmark-remediations-123)
 
 
-### Version 1.22
-{: #sitemap_version_122}
+### Version 1.22 (Default)
+{: #sitemap_version_122_default}
 
 
 [1.22 version information and update actions](/docs/containers?topic=containers-cs_versions_122#cs_versions_122)
@@ -4163,8 +4163,8 @@ subcollection: containers
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-121#cis-benchmark-remediations-121)
 
 
-### (Deprecated) Version 1.20
-{: #sitemap_deprecated_version_120}
+### Version 1.20
+{: #sitemap_version_120}
 
 
 [(Deprecated) 1.20 version information and update actions](/docs/containers?topic=containers-cs_versions_120#cs_versions_120)
@@ -4308,8 +4308,8 @@ subcollection: containers
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-120#cis-benchmark-remediations-120)
 
 
-### (Deprecated) Version 1.19
-{: #sitemap_deprecated_version_119}
+### Version 1.19
+{: #sitemap_version_119}
 
 
 [(Deprecated) 1.19 version information and update actions](/docs/containers?topic=containers-cs_versions_119#cs_versions_119)
