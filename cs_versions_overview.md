@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-03"
 
 keywords: kubernetes, versions, update, upgrade
 

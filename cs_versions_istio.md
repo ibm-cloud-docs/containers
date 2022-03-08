@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-22"
+lastupdated: "2022-03-08"
 
 keywords: kubernetes, istio, add-on
 
@@ -44,6 +44,21 @@ The Istio add-on is not yet supported on Kubernetes version 1.23. Do not update 
 
 ## Version 1.12
 {: #v112}
+
+### Changelog for 1.12.4, released 8 March 2022
+{: #1124}
+
+Review the changes that are included in version 1.12.4 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.12.3
+**Current version**: 1.12.4
+**Updates in this version:**
+- See the Istio release notes for [Istio 1.12.4](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.4/.){:external}.
+- Resolves the following CVEs:
+    - [CVE-2021-3995](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3995){: external}
+    - [CVE-2021-3996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3996){: external}
+- For more information, see the [Istio security bulletin 2022-003](https://istio.io/latest/news/security/istio-security-2022-003/){:external}.
 
 ### Changelog for 1.12.3, released 22 February 2021
 {: #1123}
@@ -103,6 +118,21 @@ Review the changes that are included in version 1.12.1 of the managed Istio add-
 
 ## Version 1.11
 {: #v111}
+
+### Changelog for 1.11.7, released 8 March 2022
+{: #1117}
+
+Review the changes that are included in version 1.11.7 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.11.6
+**Current version**: 1.11.7
+**Updates in this version:**
+- See the Istio release notes for [Istio 1.11.7](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.7/.){:external}.
+- Resolves the following CVEs:
+    - [CVE-2021-3995](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3995){: external}
+    - [CVE-2021-3996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3996){: external}
+- For more information, see the [Istio security bulletin 2022-003](https://istio.io/latest/news/security/istio-security-2022-003/){:external}.
 
 ### Changelog for 1.11.6, released 15 February 2022
 {: #1116}

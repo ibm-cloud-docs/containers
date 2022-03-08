@@ -3,7 +3,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-08"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -38,6 +38,25 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.22 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.22.7_1540, released 3 March 2022
+{: #1227_1540}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.20.3 | v3.20.4 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Cluster health image | v1.2.21 | v1.3.3 | Updated `golang.org/x/crypto` to `v0.0.0-20220214200702-86341886e292`. Adds fix for [CVE-2021-43565](https://www.whitesourcesoftware.com/vulnerability-database/CVE-2021-43565){: external}. Adds Golang dependency updates. |
+| Gateway-enabled cluster controller | 1586 | 1653 | Updated to use `Go` version `1.17.7` and updated `Go` modules to fix CVEs. |
+| GPU device plug-in and installer | eefc4ae | d7daae6 | Updated GPU images to resolve CVEs. |
+| IBM Calico extension | 923 | 929 | Updated universal base image (UBI) to the `8.5-230` version to resolve CVEs. Updated to use `Go` version `1.16.13`. |
+| IBM Cloud Controller Manager | v1.22.6-1 | v1.22.7-2 | Updated to support the Kubernetes `1.22.7` release and to use `Go` version `1.16.14`. |
+| IBM Cloud File Storage plug-in and monitor | 404 | 405 | Adds fix for [CVE-2021-3538](https://vuln.whitesourcesoftware.com/vulnerability/CVE-2021-3538){: external} and adds dependency updates. |
+| Key Management Service provider | v2.4.0 | v2.4.3 | Updated `golang.org/x/crypto` to `v0.0.0-20220214200702-86341886e292`. Adds fix for [CVE-2021-43565](https://www.whitesourcesoftware.com/vulnerability-database/CVE-2021-43565){: external}. Adds Golang dependency updates. |
+| Konnectivity agent | v0.0.27_309_iks | v0.0.27_a6b5248a_323_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.27){: external}.  Updated universal base image (UBI) to the `8.5-230` version to resolve CVEs. Updated to use `Go` version `1.17.5`. |
+| Konnectivity server | v0.0.27_309_iks | v0.0.27_a6b5248a_323_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.27){: external}.  Updated universal base image (UBI) to the `8.5-230` version to resolve CVEs. Updated to use `Go` version `1.17.5`. |
+| Kubernetes | v1.22.6 | v1.22.7 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.7){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.22.6_1537" caption-side="top"}
 
 ### Change log for worker node fix pack 1.22.7_1542, released 28 February 2022
 {: #1227_1542}
