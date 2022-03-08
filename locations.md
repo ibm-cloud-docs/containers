@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-03"
+lastupdated: "2022-03-08"
 
 keywords: kubernetes, mzr, szr, multizone, multi az
 
@@ -111,14 +111,6 @@ The following image is used as an example to explain how {{site.data.keyword.con
 `*` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.
 {: note}
 
-
-**Deprecated data centers**
-
-Oslo (osl01) is deprecated and becomes unsupported later this year. To prevent any interruption of service, [redeploy all your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your `osl01` clusters by **1 August 2021**. Before the unsupported date, you are blocked from adding new worker nodes and clusters starting on **1 July 2021**. For more information, see [Data center closures in 2021](/docs/get-support?topic=get-support-dc-closure).
-{: deprecated}
-
-Houston (hou02) is deprecated and becomes unsupported later this year. For more information, see [Data center closures in 2021](/docs/get-support?topic=get-support-dc-closure). To prevent any interruption of service, [redeploy all your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your `hou02` clusters by **1 August 2021**. Houston supports free clusters that are created in US South, and is not available for standard, production clusters.
-{: deprecated}
 
 ### VPC multizone regions
 {: #zones-vpc}

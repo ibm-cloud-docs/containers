@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-03"
+lastupdated: "2022-03-08"
 
 keywords: kubernetes, release notes
 
@@ -25,6 +25,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## March 2022
 {: #release-mar-2022}
+
+
+
+### 8 March 2022
+{: #8mar2022}
+{: release-note}
+
+Istio add-on
+:   [Version `1.12.4`](/docs/containers?topic=containers-istio-changelog#1124) and [Version `1.11.7`](/docs/containers?topic=containers-istio-changelog#1117) of the managed Istio add-on are available. 
+
+
 
 
 
