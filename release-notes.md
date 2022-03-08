@@ -26,6 +26,11 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## March 2022
 {: #release-mar-2022}
 
+Worker node fix pack update.
+:   Kubernetes [1.23.4_1520](/docs/containers?topic=containers-changelog_123#1234_1520), [1.22.7_1540](/docs/containers?topic=containers-changelog_122#1227_1540), [1.21.10_1550](/docs/containers?topic=containers-changelog_121#12110_1550), [1.20.15_1571](/docs/containers?topic=containers-changelog_120#12015_1571), and [1.19.16_1578](/docs/containers?topic=containers-changelog_119#11916_1578).
+
+
+
 
 
 ### 8 March 2022
@@ -291,8 +296,7 @@ Review the release notes for January 2022.
 {{site.data.keyword.containershort}} 1.19, 1.20, 1.21, and 1.22 unsupported date change
 :   The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#release-history) page has been updated with the new unsupported dates. 
 
-Version changelog
-:   Worker node fix pack update.
+Worker node fix pack update.
 :   Kubernetes [1.22.4_1536](/docs/containers?topic=containers-changelog_122#1224_1536), [1.21.7_1546](/docs/containers?topic=containers-changelog_121#1217_1546), [1.20.13_1567](/docs/containers?topic=containers-changelog_120#12013_1567), and [1.19.16_1574](/docs/containers?topic=containers-changelog_119#11916_1574).
 
 

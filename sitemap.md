@@ -3904,6 +3904,8 @@ subcollection: containers
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
 
+    * [Changelog for master fix pack 1.23.4_1520, released 3 March 2022](/docs/containers?topic=containers-changelog_123#1234_1520)
+
     * [Change log for worker node fix pack 1.23.4_1521, released 28 February 2022](/docs/containers?topic=containers-changelog_123#1234_1521)
 
     * [Change log for worker node fix pack 1.23.3_1519, released 14 February 2022](/docs/containers?topic=containers-changelog_123#1233_1519)
@@ -3972,6 +3974,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Changelog for master fix pack 1.22.7_1540, released 3 March 2022](/docs/containers?topic=containers-changelog_122#1227_1540)
 
     * [Change log for worker node fix pack 1.22.7_1542, released 28 February 2022](/docs/containers?topic=containers-changelog_122#1227_1542)
 
@@ -4065,6 +4069,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview)
 
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog_121#121_changelog)
+
+    * [Changelog for master fix pack 1.21.10_1550, released 3 March 2022](/docs/containers?topic=containers-changelog_121#12110_1550)
 
     * [Change log for worker node fix pack 1.21.10_1551, released 28 February 2022](/docs/containers?topic=containers-changelog_121#12110_1551)
 
@@ -4184,6 +4190,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_120#changelog_overview)
 
 * [Deprecated: Version 1.20 changelog](/docs/containers?topic=containers-changelog_120#120_changelog)
+
+    * [Changelog for master fix pack 1.20.15_1571, released 3 March 2022](/docs/containers?topic=containers-changelog_120#12015_1571)
 
     * [Change log for worker node fix pack 1.20.15_1572, released 28 February 2022](/docs/containers?topic=containers-changelog_120#12015_1572)
 
@@ -4331,6 +4339,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_119#changelog_overview)
 
 * [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog_119#119_changelog)
+
+    * [Changelog for master fix pack 1.19.16_1578, released 3 March 2022](/docs/containers?topic=containers-changelog_119#11916_1578)
 
     * [Change log for worker node fix pack 1.19.16_1579, released 28 February 2022](/docs/containers?topic=containers-changelog_119#11916_1579)
 
