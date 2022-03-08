@@ -26,16 +26,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## March 2022
 {: #release-mar-2022}
 
+### 8 March 2022
+{: #8mar2022}
+{: release-note}
+
 Worker node fix pack update.
 :   Kubernetes [1.23.4_1520](/docs/containers?topic=containers-changelog_123#1234_1520), [1.22.7_1540](/docs/containers?topic=containers-changelog_122#1227_1540), [1.21.10_1550](/docs/containers?topic=containers-changelog_121#12110_1550), [1.20.15_1571](/docs/containers?topic=containers-changelog_120#12015_1571), and [1.19.16_1578](/docs/containers?topic=containers-changelog_119#11916_1578).
 
 
 
-
-
-### 8 March 2022
-{: #8mar2022}
-{: release-note}
 
 Istio add-on
 :   [Version `1.12.4`](/docs/containers?topic=containers-istio-changelog#1124) and [Version `1.11.7`](/docs/containers?topic=containers-istio-changelog#1117) of the managed Istio add-on are available. 
