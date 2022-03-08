@@ -3829,9 +3829,11 @@ subcollection: containers
 {: #sitemap_version_history}
 
 
-[Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions)
+[Kubernetes version information](/docs/containers?topic=containers-cs_versions#cs_versions)
 
 * [Available {{site.data.keyword.containerlong}} versions](/docs/containers?topic=containers-cs_versions#cs_versions_available)
+
+* [Checking a cluster's Kubernetes server version](/docs/containers?topic=containers-cs_versions#checking-a-cluster's-kubernetes-server-version)
 
 * [Update types](/docs/containers?topic=containers-cs_versions#update_types)
 
