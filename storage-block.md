@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-03"
+lastupdated: "2022-03-08"
 
 keywords: kubernetes
 
@@ -1840,7 +1840,7 @@ To make your data even more highly available and protect your app from a zone fa
 ### Copying data to and from pods and containers
 {: #block-cp}
 
-You can use the `kubectl cp` [command](https://kubernetes.io/docs/reference/kubectl/overview/#cp){: external} to copy files and directories to and from pods or specific containers in your cluster.
+You can use the `kubectl cp` [command](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#cp){: external} to copy files and directories to and from pods or specific containers in your cluster.
 {: shortdesc}
 
 [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) 
