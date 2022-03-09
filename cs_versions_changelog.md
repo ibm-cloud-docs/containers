@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-03-03"
+lastupdated: "2022-03-09"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -33,7 +33,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 {: note}
 
 ## Version change logs
-{: change-logs-by-version}
+{: #change-logs-by-version}
 
 Review the change logs in the following list. 
 

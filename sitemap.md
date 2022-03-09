@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-03-08"
+lastupdated: "2022-03-09"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [March 2022](/docs/containers?topic=containers-iks-release#release-mar-2022)
+
+    * [9 March 2022](/docs/containers?topic=containers-iks-release#9mar2022)
 
     * [8 March 2022](/docs/containers?topic=containers-iks-release#8mar2022)
 
@@ -1888,8 +1890,6 @@ subcollection: containers
 * [Creating inbound and outbound rules in the console](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-rules)
 
 * [Creating security group rules in the command line](/docs/containers?topic=containers-vpc-security-group#security_groups_cli)
-
-    * [Creating outbound rules by using the command line](/docs/containers?topic=containers-vpc-security-group#security-group-cli-outbound)
 
 [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
 
@@ -3829,9 +3829,11 @@ subcollection: containers
 {: #sitemap_version_history}
 
 
-[Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions)
+[Kubernetes version information](/docs/containers?topic=containers-cs_versions#cs_versions)
 
 * [Available {{site.data.keyword.containerlong}} versions](/docs/containers?topic=containers-cs_versions#cs_versions_available)
+
+* [Checking a cluster's Kubernetes server version](/docs/containers?topic=containers-cs_versions#checking-a-cluster's-kubernetes-server-version)
 
 * [Update types](/docs/containers?topic=containers-cs_versions#update_types)
 
@@ -3873,7 +3875,7 @@ subcollection: containers
 
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 
-* [Version change logs](/docs/containers?topic=containers-changelog#version-change-logs)
+* [Version change logs](/docs/containers?topic=containers-changelog#change-logs-by-version)
 
 [CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark)
 
@@ -5485,6 +5487,10 @@ subcollection: containers
     * [01 January 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#01-jan-2019)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
+
+    * [Changelog for 1.13.1, released March 9th, 2021](/docs/containers?topic=containers-istio-changelog#1131)
 
 * [Version 1.12](/docs/containers?topic=containers-istio-changelog#v112)
 

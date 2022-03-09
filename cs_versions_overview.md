@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-03"
+lastupdated: "2022-03-08"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -14,7 +14,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Kubernetes version information and update actions  
+# Kubernetes version information  
 {: #cs_versions}
 
 Review this page for general information about {{site.data.keyword.containerlong}} versions and updating to newer versions. 
@@ -35,15 +35,15 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 **Supported Kubernetes versions**:
 :    **Latest**: 1.23
-     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_123).
+     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_123)
      - [Change log](/docs/containers?topic=containers-changelog_123)
    
 :    **Default**: 1.22
-     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_122).
+     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_122)
      - [Change log](/docs/containers?topic=containers-changelog_122)
 
 :    **Other**: 1.21
-     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_121).
+     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_121)
      - [Change log](/docs/containers?topic=containers-changelog_121)
 
 **Deprecated Kubernetes versions**:
@@ -58,8 +58,12 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 :    1.5, 1.7, 1.8, 1.9, 1.10, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18
      - [Archived change logs](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
 
+## Checking a cluster's Kubernetes server version
+{: cs_server_version}
 
 To check the server version of a cluster, log in to the cluster and run the following command.
+{: shortdesc}
+
 ```sh
 kubectl version  --short | grep -i server
 ```
@@ -70,7 +74,6 @@ Example output
 Server Version: v1.22.7+IKS
 ```
 {: screen}
-
 
 ## Update types
 {: #update_types}
