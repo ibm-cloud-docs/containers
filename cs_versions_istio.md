@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-08"
+lastupdated: "2022-03-09"
 
 keywords: kubernetes, istio, add-on
 
@@ -41,6 +41,19 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 The Istio add-on is not yet supported on Kubernetes version 1.23. Do not update to version 1.23 if this add-on is installed in your cluster. 
 {: important}
 
+## Version 1.13
+{: #v113}
+
+### Changelog for 1.13.1, released March 9th, 2021
+{: #1131}
+
+Review the changes that are included in version 1.13.1 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.12.4
+**Current version**: 1.13.1
+**Updates in this version:**
+- See the Istio release notes for [Istio 1.13.1](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.1/.){:external}.
 
 ## Version 1.12
 {: #v112}
@@ -77,8 +90,6 @@ See the Istio release notes for [Istio 1.12.3](https://istio.io/latest/news/rele
 
 ### Changelog for 1.12.2, released 03 February 2022
 {: #1202}
-
-
 
 
 Review the changes that are included in version 1.12.2 of the managed Istio add-on.

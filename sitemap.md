@@ -188,6 +188,8 @@ subcollection: containers
 
 * [March 2022](/docs/containers?topic=containers-iks-release#release-mar-2022)
 
+    * [9 March 2022](/docs/containers?topic=containers-iks-release#9mar2022)
+
     * [8 March 2022](/docs/containers?topic=containers-iks-release#8mar2022)
 
     * [3 March 2022](/docs/containers?topic=containers-iks-release#3mar2022)
@@ -3873,7 +3875,7 @@ subcollection: containers
 
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 
-* [Version change logs](/docs/containers?topic=containers-changelog#version-change-logs)
+* [Version change logs](/docs/containers?topic=containers-changelog#change-logs-by-version)
 
 [CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark)
 
@@ -5485,6 +5487,10 @@ subcollection: containers
     * [01 January 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#01-jan-2019)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
+
+    * [Changelog for 1.13.1, released March 9th, 2021](/docs/containers?topic=containers-istio-changelog#1131)
 
 * [Version 1.12](/docs/containers?topic=containers-istio-changelog#v112)
 
