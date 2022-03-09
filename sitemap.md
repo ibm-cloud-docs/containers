@@ -1889,8 +1889,6 @@ subcollection: containers
 
 * [Creating security group rules in the command line](/docs/containers?topic=containers-vpc-security-group#security_groups_cli)
 
-    * [Creating outbound rules by using the command line](/docs/containers?topic=containers-vpc-security-group#security-group-cli-outbound)
-
 [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
 
 * [Creating ACLs from the console](/docs/containers?topic=containers-vpc-acls#acls_ui)
