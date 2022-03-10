@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-02-21"
+lastupdated: "2022-03-10"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -352,7 +352,7 @@ The following table shows the changes that are in patch 1.10.8_1524.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Key Management Service Provider | N/A | N/A | Added the ability to use the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect), all your Kubernetes secrets are encrypted.  |
+| Key Management Service Provider | N/A | N/A | Added the ability to use the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} or a key management service (KMS) provider in your cluster](/docs/containers?topic=containers-encryption#keyprotect), all your Kubernetes secrets are encrypted.  |
 | Kubernetes | v1.10.7 | v1.10.8 | See the [Kubernetes release notes (https://github.com/kubernetes/kubernetes/releases/tag/v1.10.8){: external}.  |
 | Kubernetes DNS autoscaler | 1.1.2-r2 | 1.2.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.2.0){: external}.  |
 | {{site.data.keyword.cloud_notm}} Provider | v1.10.7-146 | v1.10.8-172 | Updated to support Kubernetes 1.10.8 release. Also, updated the documentation link in load balancer error messages.  |
