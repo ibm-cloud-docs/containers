@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-03"
+lastupdated: "2022-03-10"
 
 keywords: portworx, kubernetes
 
@@ -247,7 +247,7 @@ Databases for etcd is a managed etcd service that securely stores and replicates
         * **Initial disk allocation:** 128GB/member (384GB total)
         * **Initial CPU allocation:** 3 dedicated cores/member (9 cores total)
         * **Database version:** 3.3
-    6. Decide if you want to use the default {{site.data.keyword.keymanagementserviceshort}} service instance or your own.
+    6. Decide if you want to use the default {{site.data.keyword.keymanagementserviceshort}} service instance or your own key management service provider.
     7. Review the pricing plan.
     8. Click **Create** to set up your service instance. The setup might take a few minutes to complete.
 3. Create service credentials for your Databases for etcd service instance.

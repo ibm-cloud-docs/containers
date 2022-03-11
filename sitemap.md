@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-03-11"
 
 keywords: containers
 subcollection: containers
@@ -187,6 +187,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [March 2022](/docs/containers?topic=containers-iks-release#release-mar-2022)
+
+    * [11 March 2022](/docs/containers?topic=containers-iks-release#11mar2022)
 
     * [9 March 2022](/docs/containers?topic=containers-iks-release#9mar2022)
 
@@ -1421,7 +1423,7 @@ subcollection: containers
 {: #sitemap_autoscaling_clusters}
 
 
-[Preparing to autoscale classic and VPC Gen 2 clusters](/docs/containers?topic=containers-cluster-scaling-classic-vpc#cluster-scaling-classic-vpc)
+[Preparing classic and VPC Gen 2 clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#cluster-scaling-classic-vpc)
 
 * [Understanding scale-up and scale-down](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_about)
 
@@ -1449,13 +1451,13 @@ subcollection: containers
 
 * [Cluster autoscaler add-on parameter reference](/docs/containers?topic=containers-cluster-scaling-install-addon#ca_addon_ref)
 
-[Enabling autoscaling](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-enable)
+[Setting up autoscaling for your worker pools](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-enable)
 
 * [Customizing the cluster autoscaler configuration values](/docs/containers?topic=containers-cluster-scaling-enable#ca_customize)
 
     * [Customizing the cluster autoscaler add-on configmap](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-customize)
 
-[Deploying apps to your autoscaled worker pools](/docs/containers?topic=containers-cluster-scaling-deploy-apps#cluster-scaling-deploy-apps)
+[Deploying apps to worker pools where autoscaling is enabled](/docs/containers?topic=containers-cluster-scaling-deploy-apps#cluster-scaling-deploy-apps)
 
 * [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-cluster-scaling-deploy-apps#ca_scaleup)
 
@@ -3059,7 +3061,7 @@ subcollection: containers
 
 * [Limitations](/docs/containers?topic=containers-storage-cos-understand#cos_limitations)
 
-[Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#storage_cos_install)
+[Installing the {{site.data.keyword.cos_full_notm}} plug-in on VPC and classic clusters](/docs/containers?topic=containers-storage_cos_install#storage_cos_install)
 
 * [Updating the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#update_cos_plugin)
 
@@ -5731,6 +5733,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.1.12, released 11 March 2022](/docs/containers?topic=containers-cos_plugin_changelog#02112_object_plugin)
 
 * [Change log for version 2.1.11, released 1 March 2022](/docs/containers?topic=containers-cos_plugin_changelog#02111_object_plugin)
 

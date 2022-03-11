@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-03-11"
 
 keywords: kubernetes, istio, add-on
 
@@ -57,6 +57,9 @@ Review the changes that are included in version 1.13.1 of the managed Istio add-
 
 ## Version 1.12
 {: #v112}
+
+If you want to upgrade from Istio minor version 1.11 to version 1.12 and your Istio components were provisioned at version 1.10 or earlier, you **must** take steps to [set up your mutating and validating webhooks](/docs/containers?topic=containers-istio#istio_minor) before you upgrade. If you do not make these changes before upgrading to 1.12, the upgrade will stall.
+{: important}
 
 ### Changelog for 1.12.4, released 8 March 2022
 {: #1124}
