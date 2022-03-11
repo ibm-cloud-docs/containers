@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-03-11"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
 
@@ -278,21 +278,111 @@ You can't revert your managed Istio add-on to a previous version. If you want to
     ```
     {: pre}
 
-2. Review the available Istio add-on versions.
+1. Review the available Istio add-on versions.
     ```sh
     ibmcloud ks addon-versions
     ```
     {: pre}
 
-3. Review the changes that are in each version in the [Istio add-on changelog](/docs/containers?topic=containers-istio-changelog).
+1. Review the changes that are in each version in the [Istio add-on changelog](/docs/containers?topic=containers-istio-changelog).
 
-4. Update the Istio add-on.
+1. If you are upgrading from version 1.11 to version 1.12 and your Istio components were provisioned at version 1.10 or earlier:
+
+    1. Run the command to get the details of your mutating webhook configurations.
+        ```sh
+        kubectl get mutatingwebhookconfigurations
+        ```
+        {: pre}
+
+        Example output.
+
+        ```sh
+        NAME                     WEBHOOKS   AGE
+        istio-sidecar-injector   5          32m
+        ```
+        {: screen}
+
+    1. In the output, find the `istio-sidecar-injector` and review the **WEBHOOKS** column. If there are 5 or more webhooks, run the following command to delete the additional webhooks.
+    
+        ```sh
+        kubectl delete mutatingwebhookconfigurations istio-sidecar-injector && kubectl rollout restart deploy addon-istio-operator -n ibm-operators
+        ```
+        {: pre}
+
+        Example output.
+
+        ```sh
+        mutatingwebhookconfiguration.admissionregistration.k8s.io "istio-sidecar-injector" deleted
+        ```
+        {: screen}
+
+    1. Check that the additional webhooks were deleted. Get the details of your mutating webhook configurations and verify that there are 4 `istio-sidecar-injector` webhooks.
+
+        ```sh
+        kubectl get mutatingwebhookconfigurations
+        ```
+        {: pre}
+
+        Example output.
+
+        ```sh
+        NAME                     WEBHOOKS   AGE
+        istio-sidecar-injector   4          60s
+        ```
+        {: screen}
+    
+    1. Run the command to get the details of your validating webhook configuration.
+
+        ```sh
+        kubectl get validatingwebhookconfigurations istiod-istio-system
+        ```
+        {: pre}
+
+        Example output.
+
+        ```
+        NAME                           WEBHOOKS   AGE
+        istio-validator-istio-system   2          66s
+        istiod-istio-system            1          31m
+        ```
+        {: screen}
+    
+    1. Review the output. If the `istiod-istio-system` webhook is listed, run the following command to delete it.
+
+        ```sh
+        kubectl delete ValidatingWebhookConfiguration istiod-istio-system
+        ```
+        {: pre}
+
+        Example output.
+
+        ```sh
+        validatingwebhookconfiguration.admissionregistration.k8s.io "istiod-istio-system" deleted
+        ```
+        {: screen}
+
+    1. Verify that the `istiod-istio-system` webhook is no longer listed.
+
+        ```sh
+        kubectl get validatingwebhookconfigurations istiod-istio-system
+        ```
+        {: pre}
+
+        Example output.
+
+        ```sh
+        NAME                           WEBHOOKS   AGE
+        istio-validator-istio-system   2          2m
+        ```
+        {: screen}
+
+1. Update the Istio add-on.
     ```sh
     ibmcloud ks cluster addon update istio --version <version> -c <cluster_name_or_ID>
     ```
     {: pre}
 
-5. Before you proceed, verify that the update is complete.
+1. Before you proceed, verify that the update is complete.
 
     The update process can take up to 20 minutes to complete.
     {: note}
@@ -321,7 +411,7 @@ You can't revert your managed Istio add-on to a previous version. If you want to
         ```
         {: screen}
 
-6. [Update your `istioctl` client and sidecars](#update_client_sidecar).
+1. [Update your `istioctl` client and sidecars](#update_client_sidecar).
 
 ### Updating the `istioctl` client and sidecars
 {: #update_client_sidecar}
