@@ -33,7 +33,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 Worker node fix pack update.
-:   Kubernetes [1.23.4_1521](/docs/containers?topic=containers-changelog_123), [1.22.7_1542](/docs/containers?topic=containers-changelog_122), [1.21.10_1551](/docs/containers?topic=containers-changelog_121), [1.20.15_1572](/docs/containers?topic=containers-changelog_120), and [1.19.16_1579](/docs/containers?topic=containers-changelog_11).
+:   Kubernetes [1.23.4_1522](/docs/containers?topic=containers-changelog_123), [1.22.7_1543](/docs/containers?topic=containers-changelog_122), [1.21.10_1552](/docs/containers?topic=containers-changelog_121), [1.20.15_1573](/docs/containers?topic=containers-changelog_120), and [1.19.16_1579](/docs/containers?topic=containers-changelog_11).
 
 
 
