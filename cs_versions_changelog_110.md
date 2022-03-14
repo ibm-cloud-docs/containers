@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-03-10"
+lastupdated: "2022-03-14"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -20,7 +20,7 @@ Review the version 1.10 changelogs.
 {: shortdesc}
 
 
-## Changelog for worker node fix pack 1.10.13_1558, released 13 May 2019
+## Change log for worker node fix pack 1.10.13_1558, released 13 May 2019
 {: #11013_1558}
 
 The following table shows the changes that are in the worker node fix pack 1.10.13_1558.
@@ -32,7 +32,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 | Cluster master HA proxy | 1.9.6-alpine | 1.9.7-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.9/src/CHANGELOG){: external}. Update resolves [CVE-2019-6706](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706){: external}. 
 {: caption="Table 1. Changes since version 1.10.13_1557" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.10.13_1557, released 29 April 2019
+## Change log for worker node fix pack 1.10.13_1557, released 29 April 2019
 {: #11013_1557}
 
 The following table shows the changes that are in the worker node fix pack 1.10.13_1557.
@@ -45,7 +45,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 {: caption="Table 1. Changes since 1.10.13_1556" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.10.13_1556, released 15 April 2019
+## Change log for worker node fix pack 1.10.13_1556, released 15 April 2019
 {: #11013_1556}
 
 The following table shows the changes that are in the worker node fix pack 1.10.13_1556.
@@ -57,7 +57,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 | Ubuntu packages | N/A | N/A | Updates to installed Ubuntu packages including `systemd` for [CVE-2019-3842](https://ubuntu.com/security/CVE-2019-3842.html){: external}. |
 {: caption="Table 1. Changes since 1.10.13_1555" caption-side="bottom"}
 
-## Changelog for 1.10.13_1555, released 8 April 2019
+## Change log for 1.10.13_1555, released 8 April 2019
 {: #11013_1555}
 
 The following table shows the changes that are in the patch 1.10.13_1555.
@@ -73,7 +73,7 @@ The following table shows the changes that are in the patch 1.10.13_1555.
 | Ubuntu 18.04 kernel | 4.15.0-46-generic | 4.15.0-47-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://ubuntu.com/security/CVE-2019-9213.html){: external}. |
 {: caption="Table 1. Changes since version 1.10.13_1554" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.10.13_1554, released 1 April 2019
+## Change log for worker node fix pack 1.10.13_1554, released 1 April 2019
 {: #11013_1554}
 
 The following table shows the changes that are in the worker node fix 1.10.13_1554.
@@ -86,7 +86,7 @@ The following table shows the changes that are in the worker node fix 1.10.13_15
 
 
 
-## Changelog for master fix pack 1.10.13_1553, released 26 March 2019
+## Change log for master fix pack 1.10.13_1553, released 26 March 2019
 {: #11118_1553}
 
 The following table shows the changes that are in the master fix pack 1.10.13_1553.
@@ -101,7 +101,7 @@ The following table shows the changes that are in the master fix pack 1.10.13_15
 {: caption="Table 1. Changes since version 1.10.13_1551" caption-side="bottom"}
 
 
-## Changelog for 1.10.13_1551, released 20 March 2019
+## Change log for 1.10.13_1551, released 20 March 2019
 {: #11013_1551}
 
 The following table shows the changes that are in the patch 1.10.13_1551.
@@ -119,7 +119,7 @@ The following table shows the changes that are in the patch 1.10.13_1551.
 {: caption="Table 1. Changes since version 1.10.13_1548" caption-side="bottom"}
 
 
-## Changelog for 1.10.13_1548, released 4 March 2019
+## Change log for 1.10.13_1548, released 4 March 2019
 {: #11013_1548}
 
 The following table shows the changes that are in the patch 1.10.13_1548.
@@ -140,7 +140,7 @@ The following table shows the changes that are in the patch 1.10.13_1548.
 {: caption="Table 1. Changes since version 1.10.12_1546" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.10.12_1546, released 27 February 2019
+## Change log for worker node fix pack 1.10.12_1546, released 27 February 2019
 {: #11012_1546}
 
 The following table shows the changes that are in the worker node fix pack 1.10.12_1546.
@@ -153,7 +153,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 {: caption="Table 1. Changes since version 1.10.12_1544" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.10.12_1544, released 15 February 2019
+## Change log for worker node fix pack 1.10.12_1544, released 15 February 2019
 {: #11012_1544}
 
 The following table shows the changes that are in the worker node fix pack 1.10.12_1544.
@@ -168,7 +168,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 {: caption="Table 1. Changes since version 1.10.12_1543" caption-side="bottom"}
 
 
-## Changelog for 1.10.12_1543, released 5 February 2019
+## Change log for 1.10.12_1543, released 5 February 2019
 {: #11012_1543}
 
 The following table shows the changes that are in the patch 1.10.12_1543.
@@ -188,7 +188,7 @@ The following table shows the changes that are in the patch 1.10.12_1543.
 {: caption="Table 1. Changes since version 1.10.12_1541" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.10.12_1541, released 28 January 2019
+## Change log for worker node fix pack 1.10.12_1541, released 28 January 2019
 {: #11012_1541}
 
 The following table shows the changes that are in the worker node fix pack 1.10.12_1541.
@@ -201,7 +201,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 {: caption="Table 1. Changes since version 1.10.12_1540" caption-side="bottom"}
 
 
-## Changelog for 1.10.12_1540, released 21 January 2019
+## Change log for 1.10.12_1540, released 21 January 2019
 {: #11012_1540}
 
 The following table shows the changes that are in the patch 1.10.12_1540.
@@ -218,7 +218,7 @@ The following table shows the changes that are in the patch 1.10.12_1540.
 {: caption="Table 1. Changes since version 1.10.11_1538" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.10.11_1538, released 7 January 2019
+## Change log for worker node fix pack 1.10.11_1538, released 7 January 2019
 {: #11011_1538}
 
 The following table shows the changes that are in the worker node fix pack 1.10.11_1538.
@@ -232,7 +232,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 {: caption="Table 1. Changes since version 1.10.11_1537" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.10.11_1537, released 17 December 2018
+## Change log for worker node fix pack 1.10.11_1537, released 17 December 2018
 {: #11011_1537}
 
 The following table shows the changes that are in the worker node fix pack 1.10.11_1537.
@@ -245,7 +245,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 {: caption="Table 1. Changes since version 1.10.11_1536" caption-side="bottom"}
 
 
-## Changelog for 1.10.11_1536, released 4 December 2018
+## Change log for 1.10.11_1536, released 4 December 2018
 {: #11011_1536}
 
 The following table shows the changes that are in patch 1.10.11_1536.
@@ -262,7 +262,7 @@ The following table shows the changes that are in patch 1.10.11_1536.
 {: caption="Table 1. Changes since version 1.10.8_1532" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.10.8_1532, released 27 November 2018
+## Change log for worker node fix pack 1.10.8_1532, released 27 November 2018
 {: #1108_1532}
 
 The following table shows the changes that are in the worker node fix pack 1.10.8_1532.
@@ -273,7 +273,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 | Docker | 17.06.2 | 18.06.1 | See the [Docker release notes](https://docs.docker.com/engine/release-notes/#18061-ce){: external}. |
 {: caption="Table 1. Changes since version 1.10.8_1531" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.10.8_1531, released 19 November 2018
+## Change log for worker node fix pack 1.10.8_1531, released 19 November 2018
 {: #1108_1531}
 
 The following table shows the changes that are in the worker node fix pack 1.10.8_1531.
@@ -285,7 +285,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 | Kernel | 4.4.0-137 | 4.4.0-139 | Updated worker node images with kernel update for [CVE-2018-7755](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog){: external}. |
 {: caption="Table 1. Changes since version 1.10.8_1530" caption-side="bottom"}
 
-## Changelog for 1.10.8_1530, released 7 November 2018
+## Change log for 1.10.8_1530, released 7 November 2018
 {: #1108_1530_ha-master}
 
 The following table shows the changes that are in patch 1.10.8_1530.
@@ -303,7 +303,7 @@ The following table shows the changes that are in patch 1.10.8_1530.
 {: caption="Table 1. Changes since version 1.10.8_1528" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.10.8_1528, released 26 October 2018
+## Change log for worker node fix pack 1.10.8_1528, released 26 October 2018
 {: #1108_1528}
 
 The following table shows the changes that are in the worker node fix pack 1.10.8_1528.
@@ -315,7 +315,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 | OS interrupt handling | N/A | N/A | Replaced the interrupt request (IRQ) system daemon with a more performant interrupt handler. 
 {: caption="Table 1. Changes since version 1.10.8_1527" caption-side="bottom"}
 
-## Changelog for master fix pack 1.10.8_1527, released 15 October 2018
+## Change log for master fix pack 1.10.8_1527, released 15 October 2018
 {: #1108_1527}
 
 The following table shows the changes that are in the master fix pack 1.10.8_1527.
@@ -329,7 +329,7 @@ The following table shows the changes that are in the master fix pack 1.10.8_152
 {: caption="Table 1. Changes since version 1.10.8_1524" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.10.8_1525, released 10 October 2018
+## Change log for worker node fix pack 1.10.8_1525, released 10 October 2018
 {: #1108_1525}
 
 The following table shows the changes that are in the worker node fix pack 1.10.8_1525.
@@ -343,7 +343,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 {: caption="Table 1. Changes since version 1.10.8_1524" caption-side="bottom"}
 
 
-## Changelog for 1.10.8_1524, released 2 October 2018
+## Change log for 1.10.8_1524, released 2 October 2018
 {: #1108_1524}
 
 The following table shows the changes that are in patch 1.10.8_1524.
@@ -361,7 +361,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 {: caption="Table 1. Changes since version 1.10.7_1520" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.10.7_1521, released 20 September 2018
+## Change log for worker node fix pack 1.10.7_1521, released 20 September 2018
 {: #1107_1521}
 
 The following table shows the changes that are in the worker node fix pack 1.10.7_1521.
@@ -378,7 +378,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 {: caption="Table 1. Changes since version 1.10.7_1520" caption-side="bottom"}
 
 
-## Changelog for 1.10.7_1520, released 4 September 2018
+## Change log for 1.10.7_1520, released 4 September 2018
 {: #1107_1520}
 
 The following table shows the changes that are in patch 1.10.7_1520.
@@ -395,7 +395,7 @@ The following table shows the changes that are in patch 1.10.7_1520.
 {: caption="Table 1. Changes since version 1.10.5_1519" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.10.5_1519, released 23 August 2018
+## Change log for worker node fix pack 1.10.5_1519, released 23 August 2018
 {: #1105_1519}
 
 The following table shows the changes that are in the worker node fix pack 1.10.5_1519.
@@ -409,7 +409,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 {: caption="Table 1. Changes since version 1.10.5_1518" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.10.5_1518, released 13 August 2018
+## Change log for worker node fix pack 1.10.5_1518, released 13 August 2018
 {: #1105_1518}
 
 The following table shows the changes that are in the worker node fix pack 1.10.5_1518.
@@ -422,7 +422,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 {: caption="Table 1. Changes since version 1.10.5_1517" caption-side="bottom"}
 
 
-## Changelog for 1.10.5_1517, released 27 July 2018
+## Change log for 1.10.5_1517, released 27 July 2018
 {: #1105_1517}
 
 The following table shows the changes that are in patch 1.10.5_1517.
@@ -440,7 +440,7 @@ The following table shows the changes that are in patch 1.10.5_1517.
 | OpenVPN client | N/A | N/A | The OpenVPN client `vpn` deployment that runs in the `kube-system` namespace is now managed by the Kubernetes `addon-manager`. |
 {: caption="Table 1. Changes since version 1.10.3_1514" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.10.3_1514, released 3 July 2018
+## Change log for worker node fix pack 1.10.3_1514, released 3 July 2018
 {: #1103_1514}
 
 The following table shows the changes that are in the worker node fix pack 1.10.3_1514.
@@ -453,7 +453,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 {: caption="Table 1. Changes since version 1.10.3_1513" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.10.3_1513, released 21 June 2018
+## Change log for worker node fix pack 1.10.3_1513, released 21 June 2018
 {: #1103_1513}
 
 The following table shows the changes that are in the worker node fix pack 1.10.3_1513.
@@ -465,7 +465,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 | Docker | N/A | N/A | For non-encrypted flavors, the secondary disk is cleaned by getting a fresh file system when you reload or update the worker node. 
 {: caption="Table 1. Changes since version 1.10.3_1512" caption-side="bottom"}
 
-## Changelog for 1.10.3_1512, released 12 June 2018
+## Change log for 1.10.3_1512, released 12 June 2018
 {: #1103_1512}
 
 The following table shows the changes that are in patch 1.10.3_1512.
@@ -484,7 +484,7 @@ The following table shows the changes that are in patch 1.10.3_1512.
 
 
 
-## Changelog for worker node fix pack 1.10.1_1510, released 18 May 2018
+## Change log for worker node fix pack 1.10.1_1510, released 18 May 2018
 {: #1101_1510}
 
 The following table shows the changes that are in the worker node fix pack 1.10.1_1510.
@@ -497,7 +497,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 {: caption="Table 1. Changes since version 1.10.1_1509" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.10.1_1509, released 16 May 2018
+## Change log for worker node fix pack 1.10.1_1509, released 16 May 2018
 {: #1101_1509}
 
 The following table shows the changes that are in the worker node fix pack 1.10.1_1509.
@@ -510,7 +510,7 @@ The following table shows the changes that are in the worker node fix pack 1.10.
 {: caption="Table 1. Changes since version 1.10.1_1508" caption-side="bottom"}
 
 
-## Changelog for 1.10.1_1508, released 01 May 2018
+## Change log for 1.10.1_1508, released 01 May 2018
 {: #1101_1508}
 
 The following table shows the changes that are in patch 1.10.1_1508.

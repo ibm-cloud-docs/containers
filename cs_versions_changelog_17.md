@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-21"
+lastupdated: "2022-03-14"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -20,7 +20,7 @@ subcollection: containers
 Review the version 1.7 changelogs.
 {: shortdesc}
 
-## Changelog for worker node fix pack 1.7.16_1514, released 11 June 2018
+## Change log for worker node fix pack 1.7.16_1514, released 11 June 2018
 {: #1716_1514}
 
 | Component | Previous | Current | Description |
@@ -29,7 +29,7 @@ Review the version 1.7 changelogs.
 {: caption="Table 1. Changes since version 1.7.16_1513" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.7.16_1513, released 18 May 2018
+## Change log for worker node fix pack 1.7.16_1513, released 18 May 2018
 {: #1716_1513}
 
 | Component | Previous | Current | Description |
@@ -38,7 +38,7 @@ Review the version 1.7 changelogs.
 {: caption="Table 1. Changes since version 1.7.16_1512" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.7.16_1512, released 16 May 2018
+## Change log for worker node fix pack 1.7.16_1512, released 16 May 2018
 {: #1716_1512}
 
 | Component | Previous | Current | Description |
@@ -47,7 +47,7 @@ Review the version 1.7 changelogs.
 {: caption="Table 1. Changes since version 1.7.16_1511" caption-side="bottom"}
 
 
-## Changelog for 1.7.16_1511, released 19 April 2018
+## Change log for 1.7.16_1511, released 19 April 2018
 {: #1716_1511}
 
 | Component | Previous | Current | Description |

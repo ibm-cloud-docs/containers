@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-02-21"
+lastupdated: "2022-03-14"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -19,7 +19,7 @@ Review the version 1.9 changelogs.
 {: shortdesc}
 
 
-## Changelog for worker node fix pack 1.9.11_1539, released 17 December 2018
+## Change log for worker node fix pack 1.9.11_1539, released 17 December 2018
 {: #1911_1539}
 
 The following table shows the changes that are in the worker node fix pack 1.9.11_1539.
@@ -30,7 +30,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.1
 | Ubuntu packages | N/A | N/A | Updates to installed Ubuntu packages. |
 {: caption="Table 1. Changes since version 1.9.11_1538" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.9.11_1538, released 4 December 2018
+## Change log for worker node fix pack 1.9.11_1538, released 4 December 2018
 {: #1911_1538}
 
 The following table shows the changes that are in the worker node fix pack 1.9.11_1538.
@@ -41,7 +41,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.1
 {: caption="Table 1. Changes since version 1.9.11_1537" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.9.11_1537, released 27 November 2018
+## Change log for worker node fix pack 1.9.11_1537, released 27 November 2018
 {: #1911_1537}
 
 The following table shows the changes that are in the worker node fix pack 1.9.11_1537.
@@ -52,7 +52,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.1
 {: caption="Table 1. Changes since version 1.9.11_1536" caption-side="bottom"}
 
 
-## Changelog for 1.9.11_1536, released 19 November 2018
+## Change log for 1.9.11_1536, released 19 November 2018
 {: #1911_1536}
 
 The following table shows the changes that are in patch 1.9.11_1536.
@@ -69,7 +69,7 @@ The following table shows the changes that are in patch 1.9.11_1536.
 {: caption="Table 1. Changes since version 1.9.10_1532" caption-side="bottom"}
 
 
-## Changelog for worker node fix 1.9.10_1532, released 7 November 2018
+## Change log for worker node fix 1.9.10_1532, released 7 November 2018
 {: #1910_1532}
 
 The following table shows the changes that are in the worker node fix pack 1.9.11_1532.
@@ -81,7 +81,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.1
 | TPM-enabled kernel | N/A | N/A | Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-kubernetes-service-cli) on an existing cluster, you need to [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks flavors --zone` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types). |
 {: caption="Table 1. Changes since version 1.9.10_1531" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.9.10_1531, released 26 October 2018
+## Change log for worker node fix pack 1.9.10_1531, released 26 October 2018
 {: #1910_1531}
 
 The following table shows the changes that are in the worker node fix pack 1.9.10_1531.
@@ -94,7 +94,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.1
 {: caption="Table 1. Changes since version 1.9.10_1530" caption-side="bottom"}
 
 
-## Changelog for master fix pack 1.9.10_1530 released 15 October 2018
+## Change log for master fix pack 1.9.10_1530 released 15 October 2018
 {: #1910_1530}
 
 The following table shows the changes that are in the worker node fix pack 1.9.10_1530.
@@ -107,7 +107,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.1
 {: caption="Table 1. Changes since version 1.9.10_1527" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.9.10_1528, released 10 October 2018
+## Change log for worker node fix pack 1.9.10_1528, released 10 October 2018
 {: #1910_1528}
 
 The following table shows the changes that are in the worker node fix pack 1.9.10_1528.
@@ -122,7 +122,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.1
 
 
 
-## Changelog for 1.9.10_1527, released 2 October 2018
+## Change log for 1.9.10_1527, released 2 October 2018
 {: #1910_1527}
 
 The following table shows the changes that are in patch 1.9.10_1527.
@@ -136,7 +136,7 @@ The following table shows the changes that are in patch 1.9.10_1527.
 {: caption="Table 1. Changes since version 1.9.10_1523" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.9.10_1524, released 20 September 2018
+## Change log for worker node fix pack 1.9.10_1524, released 20 September 2018
 {: #1910_1524}
 
 The following table shows the changes that are in the worker node fix pack 1.9.10_1524.
@@ -153,7 +153,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.1
 {: caption="Table 1. Changes since version 1.9.10_1523" caption-side="bottom"}
 
 
-## Changelog for 1.9.10_1523, released 4 September 2018
+## Change log for 1.9.10_1523, released 4 September 2018
 {: #1910_1523}
 
 The following table shows the changes that are in patch 1.9.10_1523.
@@ -167,7 +167,7 @@ The following table shows the changes that are in patch 1.9.10_1523.
 | Kubernetes Heapster configuration | N/A | N/A | Increased resource limits for the `heapster-nanny` container. |
 {: caption="Table 1. Changes since version 1.9.9_1522" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.9.9_1522, released 23 August 2018
+## Change log for worker node fix pack 1.9.9_1522, released 23 August 2018
 {: #199_1522}
 
 The following table shows the changes that are in the worker node fix pack 1.9.9_1522.
@@ -181,7 +181,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.9
 {: caption="Table 1. Changes since version 1.9.9_1521" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.9.9_1521, released 13 August 2018
+## Change log for worker node fix pack 1.9.9_1521, released 13 August 2018
 {: #199_1521}
 
 The following table shows the changes that are in the worker node fix pack 1.9.9_1521.
@@ -193,7 +193,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.9
 | Ubuntu packages | N/A | N/A | Updates to installed Ubuntu packages. |
 {: caption="Table 1. Changes since version 1.9.9_1520" caption-side="bottom"}
 
-## Changelog for 1.9.9_1520, released 27 July 2018
+## Change log for 1.9.9_1520, released 27 July 2018
 {: #199_1520}
 
 The following table shows the changes that are in patch 1.9.9_1520.
@@ -209,7 +209,7 @@ The following table shows the changes that are in patch 1.9.9_1520.
 {: caption="Table 1. Changes since version 1.9.8_1517" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.9.8_1517, released 3 July 2018
+## Change log for worker node fix pack 1.9.8_1517, released 3 July 2018
 {: #198_1517}
 
 The following table shows the changes that are in the worker node fix pack 1.9.8_1517.
@@ -222,7 +222,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.8
 {: caption="Table 1. Changes since version 1.9.8_1516" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.9.8_1516, released 21 June 2018
+## Change log for worker node fix pack 1.9.8_1516, released 21 June 2018
 {: #198_1516}
 
 The following table shows the changes that are in the worker node fix pack 1.9.8_1516.
@@ -235,7 +235,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.8
 | Docker | N/A | N/A | For non-encrypted flavors, the secondary disk is cleaned by getting a fresh file system when you reload or update the worker node. |
 {: caption="Table 1. Changes since version 1.9.8_1515" caption-side="bottom"}
 
-## Changelog for 1.9.8_1515, released 19 June 2018
+## Change log for 1.9.8_1515, released 19 June 2018
 {: #198_1515}
 
 The following table shows the changes that are in patch 1.9.8_1515.
@@ -251,7 +251,7 @@ The following table shows the changes that are in patch 1.9.8_1515.
 {: caption="Table 1. Changes since version 1.9.7_1513" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.9.7_1513, released 11 June 2018
+## Change log for worker node fix pack 1.9.7_1513, released 11 June 2018
 {: #197_1513}
 
 The following table shows the changes that are in the worker node fix pack 1.9.7_1513.
@@ -263,7 +263,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.7
 | Kernel update | 4.4.0-116 | 4.4.0-127 | New worker node images with kernel update for [CVE-2018-3639](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639){: external} |
 {: caption="Table 1. Changes since version 1.9.7_1512" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.9.7_1512, released 18 May 2018
+## Change log for worker node fix pack 1.9.7_1512, released 18 May 2018
 {: #197_1512}
 
 The following table shows the changes that are in the worker node fix pack 1.9.7_1512.
@@ -275,7 +275,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.7
 | Kubelet | N/A | N/A | Fix to address a bug that occurred if you used the block storage plug-in. |
 {: caption="Table 1. Changes since version 1.9.7_1511" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.9.7_1511, released 16 May 2018
+## Change log for worker node fix pack 1.9.7_1511, released 16 May 2018
 {: #197_1511}
 
 The following table shows the changes that are in the worker node fix pack 1.9.7_1511.
@@ -287,7 +287,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.7
 | Kubelet | N/A | N/A | The data that you store in the `kubelet` root directory is now saved on the larger, secondary disk of your worker node machine. |
 {: caption="Table 1. Changes since version 1.9.7_1510" caption-side="bottom"}
 
-## Changelog for 1.9.7_1510, released 30 April 2018
+## Change log for 1.9.7_1510, released 30 April 2018
 {: #197_1510}
 
 The following table shows the changes that are in patch 1.9.7_1510.

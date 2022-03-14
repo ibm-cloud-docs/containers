@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-03-14"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -19,7 +19,7 @@ subcollection: containers
 Version 1.17 is unsupported. You can review the following archive of 1.17 changelogs.
 {: shortdesc}
 
-## Changelog for worker node fix pack 1.17.17_1568, released 19 July 2021
+## Change log for worker node fix pack 1.17.17_1568, released 19 July 2021
 {: #11717_1568}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1568`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -31,7 +31,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 18.04 packages | N/A | N/A| Updated worker node images with kernel package updates. | 
 {: caption="Changes since version 1.17.17_1567" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.17_1567, released 6 July 2021
+## Change log for worker node fix pack 1.17.17_1567, released 6 July 2021
 {: #11717_1567_worker}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1567`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -43,7 +43,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 18.04 packages | 4.15.0.144 | 4.15.0.147 | Updated worker node images with kernel package updates for [CVE-2021-23133](https://nvd.nist.gov/vuln/detail/CVE-2021-23133){: external}, [CVE-2021-3444](https://nvd.nist.gov/vuln/detail/CVE-2021-3444){: external}, and [CVE-2021-3600](https://nvd.nist.gov/vuln/detail/CVE-2021-3600){: external}. |
 {: caption="Changes since version 1.17.17_1566" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.17_1567, released 28 June 2021
+## Change log for master fix pack 1.17.17_1567, released 28 June 2021
 {: #11717_1567}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.17_1567`. Master patch updates are applied automatically.
@@ -58,7 +58,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Key Management Service provider | v1.0.14 | v1.0.15 | Updated to use `Go` version `1.15.12`. Updated image for [CVE-2021-33194](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33194){: external}. |
 {: caption="Changes since version 1.17.17_1563" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.17_1566, released 22 June 2021
+## Change log for worker node fix pack 1.17.17_1566, released 22 June 2021
 {: #11717_1566}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1566`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -71,7 +71,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 18.04 packages | N/A | N/A | Updated worker node images with package updates for [CVE-2017-8779](https://nvd.nist.gov/vuln/detail/CVE-2017-8779){: external}, [CVE-2017-8872](https://nvd.nist.gov/vuln/detail/CVE-2017-8872){: external}, [CVE-2018-16869](https://nvd.nist.gov/vuln/detail/CVE-2018-16869){: external}, [CVE-2019-20388](https://nvd.nist.gov/vuln/detail/CVE-2019-20388){: external}, [CVE-2020-24977](https://nvd.nist.gov/vuln/detail/CVE-2020-24977){: external}, [CVE-2021-3516](https://nvd.nist.gov/vuln/detail/CVE-2021-3516){: external}, [CVE-2021-3517](https://nvd.nist.gov/vuln/detail/CVE-2021-3517) [CVE-2021-3518](https://nvd.nist.gov/vuln/detail/CVE-2021-3518){: external}, [CVE-2021-3537](https://nvd.nist.gov/vuln/detail/CVE-2021-3537){: external}, [CVE-2021-3580](https://nvd.nist.gov/vuln/detail/CVE-2021-3580){: external}.|
 {: caption="Changes since version 1.17.17_1565" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.17_1565, released 7 June 2021
+## Change log for worker node fix pack 1.17.17_1565, released 7 June 2021
 {: #11717_1565}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1565`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -84,7 +84,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 18.04 packages | 4.15.0-143 | 4.15.0-144 | Updated worker node images with kernel package updates for [CVE-2021-25217](https://nvd.nist.gov/vuln/detail/CVE-2021-25217){: external}, [CVE-2021-31535](https://nvd.nist.gov/vuln/detail/CVE-2021-31535){: external}, [CVE-2021-32547](https://nvd.nist.gov/vuln/detail/CVE-2021-32547){: external}, [CVE-2021-32552](https://nvd.nist.gov/vuln/detail/CVE-2021-32552){: external}, [CVE-2021-32556](https://nvd.nist.gov/vuln/detail/CVE-2021-32556){: external}, [CVE-2021-32557](https://nvd.nist.gov/vuln/detail/CVE-2021-32557){: external}, [CVE-2021-3448](https://nvd.nist.gov/vuln/detail/CVE-2021-3448){: external}, and [CVE-2021-3520](https://nvd.nist.gov/vuln/detail/CVE-2021-3520){: external}.|
 {: caption="Changes since version 1.17.17_1564" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.17_1564, released 24 May 2021
+## Change log for worker node fix pack 1.17.17_1564, released 24 May 2021
 {: #11717_1564}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1564`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -97,7 +97,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages |N/A | N/A | Updated worker node images with package updates for [CVE-2009-5155](https://nvd.nist.gov/vuln/detail/CVE-2009-5155){: external} and [CVE-2020-6096](https://nvd.nist.gov/vuln/detail/CVE-2020-6096){: external}.|
 {: caption="Changes since version 1.17.17_1562" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.17_1563, released 24 May 2021
+## Change log for master fix pack 1.17.17_1563, released 24 May 2021
 {: #11717_1563}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.17_1563`. Master patch updates are applied automatically.
@@ -113,7 +113,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1274 | 1328 | Updated to use `Go` version 1.15.11. Updated image to implement additional IBM security controls and for [CVE-2021-28831](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28831){: external}, [CVE-2021-30139](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30139){: external}, [CVE-2021-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449){: external} and [CVE-2021-3450](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3450){: external}. |
 {: caption="Changes since version 1.17.17_1560" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.17_1562, released 10 May 2021
+## Change log for worker node fix pack 1.17.17_1562, released 10 May 2021
 {: #11717_1562}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1562`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -125,7 +125,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages |N/A | N/A | Updated worker node images with package updates for [CVE-2020-27350](https://nvd.nist.gov/vuln/detail/CVE-2020-27350){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2021-25214](https://nvd.nist.gov/vuln/detail/CVE-2021-25214){: external}, [CVE-2021-25215](https://nvd.nist.gov/vuln/detail/CVE-2021-25215){: external}, and [CVE-2021-25216](https://nvd.nist.gov/vuln/detail/CVE-2021-25216){: external}.|
 {: caption="Changes since version 1.17.17_1561" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.17_1560, released 27 April 2021
+## Change log for master fix pack 1.17.17_1560, released 27 April 2021
 {: #11717_1560}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.17_1560`. Master patch updates are applied automatically.
@@ -142,7 +142,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Operator Lifecycle Manager | 0.14.1-IKS-4 | 0.14.1-IKS-8 | Updated image for [CVE-2021-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449){: external}, [CVE-2021-3450](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3450){: external}, and [CVE-2021-30139](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30139){: external}. |
 {: caption="Changes since version 1.17.17_1557" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.17_1561, released 26 April 2021
+## Change log for worker node fix pack 1.17.17_1561, released 26 April 2021
 {: #11717_1561}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1561`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -155,7 +155,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages |4.4.0-206 | 4.4.0-210 | Updated worker node images with kernel and package updates for [[CVE-2015-1350](https://nvd.nist.gov/vuln/detail/CVE-2015-1350){: external}, [CVE-2017-15107](https://nvd.nist.gov/vuln/detail/CVE-2017-15107){: external}, [CVE-2017-5967](https://nvd.nist.gov/vuln/detail/CVE-2017-5967){: external}, [CVE-2018-13095](https://nvd.nist.gov/vuln/detail/CVE-2018-13095){: external}, [CVE-2018-5953](https://nvd.nist.gov/vuln/detail/CVE-2018-5953){: external}, [CVE-2019-14513](https://nvd.nist.gov/vuln/detail/CVE-2019-14513){: external}, [CVE-2019-16231](https://nvd.nist.gov/vuln/detail/CVE-2019-16231){: external}, [CVE-2019-16232](https://nvd.nist.gov/vuln/detail/CVE-2019-16232){: external}, [CVE-2019-19061](https://nvd.nist.gov/vuln/detail/CVE-2019-19061){: external}, [CVE-2021-20305](https://nvd.nist.gov/vuln/detail/CVE-2021-20305){: external}, and [CVE-2021-29154](https://nvd.nist.gov/vuln/detail/CVE-2021-29154){: external}.|
 {: caption="Changes since version 1.17.17_1559" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.17_1559, released 12 April 2021
+## Change log for worker node fix pack 1.17.17_1559, released 12 April 2021
 {: #11717_1559}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1559`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -168,7 +168,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | N/A | N/A | Updated worker node images with package updates for [CVE-2021-22876](https://nvd.nist.gov/vuln/detail/CVE-2021-22876){: external}.|
 {: caption="Changes since version 1.17.17_1558" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.17_1557, released 30 March 2021
+## Change log for master fix pack 1.17.17_1557, released 30 March 2021
 {: #11717_1557}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.17_1557`. Master patch updates are applied automatically.
@@ -184,7 +184,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1165 | 1274 | Fixed a bug that might cause version 2.0 network load balancers (NLBs) to crash and restart on load balancer updates. |
 {: caption="Changes since version 1.17.17_1555" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.17_1558, released 29 March 2021
+## Change log for worker node fix pack 1.17.17_1558, released 29 March 2021
 {: #11717_1558}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1558`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -196,7 +196,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | 4.4.0-203-generic | 4.4.0-206-generic | Updated worker node images with kernel and package updates for [CVE-2021-27363](https://nvd.nist.gov/vuln/detail/CVE-2021-27363){: external}, [CVE-2021-27365](https://nvd.nist.gov/vuln/detail/CVE-2021-27365){: external}, and [CVE-2021-28153](https://nvd.nist.gov/vuln/detail/CVE-2021-28153){: external}.|
 {: caption="Changes since version 1.17.17_1556" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.17_1556, released 12 March 2021
+## Change log for worker node fix pack 1.17.17_1556, released 12 March 2021
 {: #11717_1556}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1556`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -209,7 +209,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for{: external}, [CVE-2021-21300](https://nvd.nist.gov/vuln/detail/CVE-2021-21300){: external}, [CVE-2021-27218](https://nvd.nist.gov/vuln/detail/CVE-2021-27218){: external}, [CVE-2021-27219](https://nvd.nist.gov/vuln/detail/CVE-2021-27219){: external}, and [CVE-2021-3177](https://nvd.nist.gov/vuln/detail/CVE-2021-3177){: external}. |
 {: caption="Changes since version 1.17.17_1555" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.17_1555, released 1 March 2021
+## Change log for worker node fix pack 1.17.17_1555, released 1 March 2021
 {: #11717_1555_worker}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1555`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -221,7 +221,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | 4.4.0-201-generic | 4.4.0-203-generic | Updated worker node image with package updates for [CVE-2020-27619](https://nvd.nist.gov/vuln/detail/CVE-2020-27619){: external}, [CVE-2020-29372](https://nvd.nist.gov/vuln/detail/CVE-2020-29372){: external}, [CVE-2020-29374](https://nvd.nist.gov/vuln/detail/CVE-2020-29374){: external}, [CVE-2020-8625](https://nvd.nist.gov/vuln/detail/CVE-2020-8625){: external}, [CVE-2021-23840](https://nvd.nist.gov/vuln/detail/CVE-2021-23840){: external}, [CVE-2021-23841](https://nvd.nist.gov/vuln/detail/CVE-2021-23841){: external}, [CVE-2021-26937](https://nvd.nist.gov/vuln/detail/CVE-2021-26937){: external}, [CVE-2021-27212](https://nvd.nist.gov/vuln/detail/CVE-2021-27212){: external}, and [CVE-2021-3177](https://nvd.nist.gov/vuln/detail/CVE-2021-3177){: external}. |
 {: caption="Changes since version 1.17.17_1553" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.17_1555, released 22 February 2021
+## Change log for master fix pack 1.17.17_1555, released 22 February 2021
 {: #11717_1555}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.17_1555`. Master patch updates are applied automatically.
@@ -239,7 +239,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Operator Lifecycle Manager | 0.14.1-IKS-2 | 0.14.1-IKS-4 | Updated image for [CVE-2021-23839](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23839){: external}, [CVE-2021-23840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23840){: external}, and [CVE-2021-23841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23841){: external}. |
 {: caption="Changes since version 1.17.17_1551" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.17_1553, released 15 February 2021
+## Change log for worker node fix pack 1.17.17_1553, released 15 February 2021
 {: #11717_1553}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1553`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -252,7 +252,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 {: caption="Changes since version 1.17.17_1552" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.17.17_1552, released 1 February 2021
+## Change log for worker node fix pack 1.17.17_1552, released 1 February 2021
 {: #11717_1552}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1552`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -264,7 +264,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 18.04 packages | 4.15.0-132-generic | 4.15.0-135-generic | Updated worker node image with kernel and package updates for [CVE-2019-12761](https://nvd.nist.gov/vuln/detail/CVE-2019-12761){: external}, [CVE-2019-14834](https://nvd.nist.gov/vuln/detail/CVE-2019-14834){: external}, [CVE-2020-25681](https://nvd.nist.gov/vuln/detail/CVE-2020-25681){: external}, [CVE-2020-25682](https://nvd.nist.gov/vuln/detail/CVE-2020-25682){: external}, [CVE-2020-25683](https://nvd.nist.gov/vuln/detail/CVE-2020-25683){: external}, [CVE-2020-25684](https://nvd.nist.gov/vuln/detail/CVE-2020-25684){: external}, [CVE-2020-25685](https://nvd.nist.gov/vuln/detail/CVE-2020-25685){: external}, [CVE-2020-25686](https://nvd.nist.gov/vuln/detail/CVE-2020-25686){: external}, [CVE-2020-25687](https://nvd.nist.gov/vuln/detail/CVE-2020-25687){: external}, [CVE-2020-27777](https://nvd.nist.gov/vuln/detail/CVE-2020-27777){: external}, [CVE-2021-23239](https://nvd.nist.gov/vuln/detail/CVE-2021-23239){: external}, and [CVE-2021-3156](https://nvd.nist.gov/vuln/detail/CVE-2021-3156){: external}. |
 {: caption="Changes since version 1.17.17_1551" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.17_1551, released 19 January 2021
+## Change log for master fix pack 1.17.17_1551, released 19 January 2021
 {: #11717_1551_master}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.17_1551`. Master patch updates are applied automatically.
@@ -285,7 +285,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1004 | 1078 | Updated image for [CVE-2020-1971](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971){: external}. |
 {: caption="Changes since version 1.17.16_1550" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.17_1551, released 18 January 2021
+## Change log for worker node fix pack 1.17.17_1551, released 18 January 2021
 {: #11717_1551}
 
 The following table shows the changes that are in the worker node fix pack `1.17.17_1551`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -298,7 +298,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 18.04 packages | 4.15.0-128-generic | 4.15.0-132-generic | Updated worker node image with kernel and package updates for [CVE-2018-20482](https://nvd.nist.gov/vuln/detail/CVE-2018-20482){: external}, [CVE-2019-9923](https://nvd.nist.gov/vuln/detail/CVE-2019-9923){: external}, [CVE-2020-28374](https://nvd.nist.gov/vuln/detail/CVE-2020-28374){: external}, [CVE-2020-29361](https://nvd.nist.gov/vuln/detail/CVE-2020-29361){: external}, [CVE-2020-29362](https://nvd.nist.gov/vuln/detail/CVE-2020-29362){: external}, [CVE-2020-29363](https://nvd.nist.gov/vuln/detail/CVE-2020-29363){: external}, [CVE-2021-1052](https://nvd.nist.gov/vuln/detail/CVE-2021-1052){: external}, [CVE-2021-1053](https://nvd.nist.gov/vuln/detail/CVE-2021-1053){: external}, and [CVE-2019-19770](https://nvd.nist.gov/vuln/detail/CVE-2019-19770){: external}. |
 {: caption="Changes since version 1.17.15_1549" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.16_1550, released 6 January 2021
+## Change log for master fix pack 1.17.16_1550, released 6 January 2021
 {: #11716_1550}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.16_1550`. Master patch updates are applied automatically.
@@ -314,7 +314,7 @@ The following table shows the changes that are in the master fix pack patch upda
 {: caption="Changes since version 1.17.15_1548" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.17.15_1549, released 21 December 2020
+## Change log for worker node fix pack 1.17.15_1549, released 21 December 2020
 {: #11715_1549}
 
 The following table shows the changes that are in the worker node fix pack `1.17.15_1549`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -329,7 +329,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | HAProxy | db4e6d | 9b2dca | Image update for [CVE-2020-1971](https://nvd.nist.gov/vuln/detail/CVE-2020-1971){: external} and [CVE-2020-24659](https://nvd.nist.gov/vuln/detail/CVE-2020-24659){: external}. |
 {: caption="Changes since version 1.17.15_1548" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.15_1548, released 14 December 2020
+## Change log for master fix pack 1.17.15_1548, released 14 December 2020
 {: #11715_1548}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.15_1548`. Master patch updates are applied automatically.
@@ -353,7 +353,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | OpenVPN server | 2.4.6-r3-IKS-222 | 2.4.6-r3-IKS-301 | Updated image to implement additional IBM security controls. |
 {: caption="Changes since version 1.17.14_1545" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.14_1548, released 11 December 2020
+## Change log for worker node fix pack 1.17.14_1548, released 11 December 2020
 {: #11714_1548}
 
 The following table shows the changes that are in the worker node fix pack `1.17.14_1548`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -364,7 +364,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 18.04 bare metal kernel | 4.15.0-126-generic | 4.15.0-123-generic | **Bare metal worker nodes**: Reverted the kernel version for bare metal worker nodes while Canonical addresses issues with the previous version that prevented worker nodes from being reloaded or updated. |
 {: caption="Changes since version 1.17.14_1546" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.14_1546, released 7 December 2020
+## Change log for worker node fix pack 1.17.14_1546, released 7 December 2020
 {: #11714_1546}
 
 The following table shows the changes that are in the worker node fix pack `1.17.14_1546`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -378,7 +378,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | 4.4.0-194-generic | 4.4.0-197-generic | Updated worker node image with kernel and package updates for [CVE-2020-0427](https://nvd.nist.gov/vuln/detail/CVE-2020-0427){: external}, [CVE-2020-12352](https://nvd.nist.gov/vuln/detail/CVE-2020-12352){: external}, [CVE-2020-14351](https://nvd.nist.gov/vuln/detail/CVE-2020-14351){: external}, [CVE-2020-25645](https://nvd.nist.gov/vuln/detail/CVE-2020-25645){: external}, and [CVE-2020-4788](https://nvd.nist.gov/vuln/detail/CVE-2020-4788){: external}. |
 {: caption="Changes since version 1.17.14_1545" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.14_1545, released 23 November 2020
+## Change log for worker node fix pack 1.17.14_1545, released 23 November 2020
 {: #11714_1545_worker}
 
 The following table shows the changes that are in the worker node fix pack `1.17.14_1545`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -391,7 +391,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | 4.4.0-193-generic | 4.4.0-194-generic | Updated worker node image with kernel and package updates for [CVE-2020-25692](https://nvd.nist.gov/vuln/detail/CVE-2020-25692){: external}, [CVE-2020-25709](https://nvd.nist.gov/vuln/detail/CVE-2020-25709){: external}, [CVE-2020-25710](https://nvd.nist.gov/vuln/detail/CVE-2020-25710){: external}, [CVE-2020-28196](https://nvd.nist.gov/vuln/detail/CVE-2020-28196){: external}, and [CVE-2020-8694](https://nvd.nist.gov/vuln/detail/CVE-2020-8694){: external}. |
 {: caption="Changes since version 1.17.13_1544" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.14_1545, released 16 November 2020
+## Change log for master fix pack 1.17.14_1545, released 16 November 2020
 {: #11714_1545}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.14_1545`. Master patch updates are applied automatically.
@@ -407,7 +407,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Kubernetes | v1.17.13 | v1.17.14 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.17.14){: external}. |
 {: caption="Changes since version 1.17.13_1543" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.13_1544, released 9 November 2020
+## Change log for worker node fix pack 1.17.13_1544, released 9 November 2020
 {: #11713_1544}
 
 The following table shows the changes that are in the worker node fix pack `1.17.13_1544`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -419,7 +419,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 |Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2018-14036](https://nvd.nist.gov/vuln/detail/CVE-2018-14036){: external}, [CVE-2020-10543](https://nvd.nist.gov/vuln/detail/CVE-2020-10543){: external}, [CVE-2020-10878](https://nvd.nist.gov/vuln/detail/CVE-2020-10878){: external}, [CVE-2020-12723](https://nvd.nist.gov/vuln/detail/CVE-2020-12723){: external}, [CVE-2020-16126](https://nvd.nist.gov/vuln/detail/CVE-2020-16126){: external}, and [CVE-2020-25659](https://nvd.nist.gov/vuln/detail/CVE-2020-25659){: external}.|
 {: caption="Changes since version 1.17.13_1543" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.13_1543, released 26 October 2020
+## Change log for worker node fix pack 1.17.13_1543, released 26 October 2020
 {: #11713_1543_worker}
 
 The following table shows the changes that are in the worker node fix pack `1.17.13_1543`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -432,7 +432,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 |Ubuntu 16.04 packages | 4.4.0-190-generic | 4.4.0-193-generic | Updated worker node images with kernel and package updates for [CVE-2017-17087](https://nvd.nist.gov/vuln/detail/CVE-2017-17087){: external}, [CVE-2018-10322](https://nvd.nist.gov/vuln/detail/CVE-2018-10322){: external}, [CVE-2019-20807](https://nvd.nist.gov/vuln/detail/CVE-2019-20807){: external}, [CVE-2020-15999](https://nvd.nist.gov/vuln/detail/CVE-2020-15999){: external}, [CVE-2020-16119](https://nvd.nist.gov/vuln/detail/CVE-2020-16119){: external}, and [CVE-2020-26116](https://nvd.nist.gov/vuln/detail/CVE-2020-26116){: external}. |
 {: caption="Changes since version 1.17.12_1542" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.13_1543, released 26 October 2020
+## Change log for master fix pack 1.17.13_1543, released 26 October 2020
 {: #11713_1543}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.13_1543`. Master patch updates are applied automatically.
@@ -448,7 +448,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Kubernetes `NodeLocal` DNS cache | 1.15.13 | 1.15.14 | See the [Kubernetes `NodeLocal` DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.15.14){: external}. |
 {: caption="Changes since version 1.17.12_1540" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.12_1542, released 12 October 2020
+## Change log for worker node fix pack 1.17.12_1542, released 12 October 2020
 {: #11712_1542}
 
 The following table shows the changes that are in the worker node fix pack `1.17.12_1542`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -460,7 +460,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 |Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2020-14365](https://nvd.nist.gov/vuln/detail/CVE-2020-14365){: external} and [CVE-2020-26137](https://nvd.nist.gov/vuln/detail/CVE-2020-26137){: external}. |
 {: caption="Changes since version 1.17.12_1541" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.12_1541, released 28 September 2020
+## Change log for worker node fix pack 1.17.12_1541, released 28 September 2020
 {: #11712_1541}
 
 The following table shows the changes that are in the worker node fix pack `1.17.12_1541`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -473,7 +473,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | 4.4.0-189-generic | 4.4.0-190-generic | Updated worker node image with kernel and package updates for [CVE-2019-20811](https://nvd.nist.gov/vuln/detail/CVE-2019-20811){: external}, [CVE-2019-9453](https://nvd.nist.gov/vuln/detail/CVE-2019-9453){: external}, [CVE-2020-0067](https://nvd.nist.gov/vuln/detail/CVE-2020-0067){: external}, and [CVE-2020-1968](https://nvd.nist.gov/vuln/detail/CVE-2020-1968){: external}. |
 {: caption="Changes since version 1.17.11_1539" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.12_1540, released 21 September 2020
+## Change log for master fix pack 1.17.12_1540, released 21 September 2020
 {: #11712_1540}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.12_1540`. Master patch updates are applied automatically.
@@ -491,7 +491,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Kubernetes Dashboard | v2.0.3 | v2.0.4 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.4){: external}. |
 {: caption="Changes since version 1.17.11_1539" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.11_1539, released 14 September 2020
+## Change log for worker node fix pack 1.17.11_1539, released 14 September 2020
 {: #11711_1539}
 
 The following table shows the changes that are in the worker node fix pack `1.17.11_1539`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -504,7 +504,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | 4.4.0-187-generic | 4.4.0-189-generic | Updated worker node image with kernel and package updates for [CVE-2020-14344](https://nvd.nist.gov/vuln/detail/CVE-2020-14344){: external} and [CVE-2020-14363](https://nvd.nist.gov/vuln/detail/CVE-2020-14363){: external}. |
 {: caption="Changes since version 1.17.11_1538" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.11_1538, released 31 August 2020
+## Change log for worker node fix pack 1.17.11_1538, released 31 August 2020
 {: #11711_1538}
 
 The following table shows the changes that are in the worker node fix pack `1.17.11_1538`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -516,7 +516,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | 4.4.0-186-generic | 4.4.0-187-generic | Updated worker node image with kernel and package updates for [CVE-2020-8231](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8231){: external}, [CVE-2020-8622](https://nvd.nist.gov/vuln/detail/CVE-2020-8622){: external}, and [CVE-2020-8623](https://nvd.nist.gov/vuln/detail/CVE-2020-8623){: external}. |
 {: caption="Changes since version 1.17.11_1537" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.11_1537, released 18 August 2020
+## Change log for master fix pack 1.17.11_1537, released 18 August 2020
 {: #11711_1537_master}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.11_1537`. Master patch updates are applied automatically.
@@ -536,7 +536,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Kubernetes `NodeLocal` DNS cache configuration | N/A | N/A | Increased the pod termination grace period. |
 {: caption="Changes since version 1.17.9_1535" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.11_1537, released 17 August 2020
+## Change log for worker node fix pack 1.17.11_1537, released 17 August 2020
 {: #11711_1537}
 
 The following table shows the changes that are in the worker node fix pack `1.17.11_1537`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -549,7 +549,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2020-11936](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11936){: external}, [CVE-2020-15701](https://nvd.nist.gov/vuln/detail/CVE-2020-15701){: external}, [CVE-2020-15702](https://nvd.nist.gov/vuln/detail/CVE-2020-15702){: external}, and [CVE-2020-15709](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15709){: external}. |
 {: caption="Changes since version 1.17.9_1535" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.9_1535, released 3 August 2020
+## Change log for worker node fix pack 1.17.9_1535, released 3 August 2020
 {: #1179_1535}
 
 The following table shows the changes that are in the worker node fix pack `1.17.9_1535`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -561,7 +561,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | 4.4.0-185-generic | 4.4.0-186-generic | Updated worker node images with package updates for [CVE-2019-12380](https://nvd.nist.gov/vuln/detail/CVE-2019-12380){: external}, [CVE-2019-17514](https://nvd.nist.gov/vuln/detail/CVE-2019-17514){: external}, [CVE-2019-20907](https://nvd.nist.gov/vuln/detail/CVE-2019-20907){: external}, [CVE-2019-9674](https://nvd.nist.gov/vuln/detail/CVE-2019-9674){: external}, [CVE-2020-10713](https://nvd.nist.gov/vuln/detail/CVE-2020-10713){: external}, [CVE-2020-11935](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11935){: external}, [CVE-2020-14308](https://nvd.nist.gov/vuln/detail/CVE-2020-14308){: external}, [CVE-2020-14309](https://nvd.nist.gov/vuln/detail/CVE-2020-14309){: external}, [CVE-2020-14310](https://nvd.nist.gov/vuln/detail/CVE-2020-14310){: external}, [CVE-2020-14311](https://nvd.nist.gov/vuln/detail/CVE-2020-14311){: external}, [CVE-2020-14422](https://nvd.nist.gov/vuln/detail/CVE-2020-14422){: external}, [CVE-2020-15705](https://nvd.nist.gov/vuln/detail/CVE-2020-15705){: external}, [CVE-2020-15706](https://nvd.nist.gov/vuln/detail/CVE-2020-15706){: external}, and [CVE-2020-15707](https://nvd.nist.gov/vuln/detail/CVE-2020-15707){: external}. |
 {: caption="Changes since version 1.17.9_1532" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.9_1534, released 24 July 2020
+## Change log for master fix pack 1.17.9_1534, released 24 July 2020
 {: #1179_1534}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.9_1534`. Master patch updates are applied automatically.
@@ -573,7 +573,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 375 | 376 | Updated to use `Go` version 1.13.8. |
 {: caption="Changes since version 1.17.9_1533" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.9_1533, released 20 July 2020
+## Change log for master fix pack 1.17.9_1533, released 20 July 2020
 {: #1179_1533}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.9_1533`. Master patch updates are applied automatically.
@@ -592,7 +592,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Operator Lifecycle Manager | 0.14.1 | 0.14.1-IKS-1 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 {: caption="Changes since version 1.17.7_1530" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.9_1532, released 20 July 2020
+## Change log for worker node fix pack 1.17.9_1532, released 20 July 2020
 {: #1179_1532}
 
 The following table shows the changes that are in the worker node fix pack `1.17.9_1532`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -606,7 +606,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | 4.4.0-184-generic | 4.4.0-185-generic | Updated worker node images with package updates for [CVE-2017-12133](https://nvd.nist.gov/vuln/detail/CVE-2017-12133){: external}, [CVE-2017-18269](https://nvd.nist.gov/vuln/detail/CVE-2017-18269){: external}, [CVE-2018-11236](https://nvd.nist.gov/vuln/detail/CVE-2018-11236){: external}, [CVE-2018-11237](https://nvd.nist.gov/vuln/detail/CVE-2018-11237){: external}, [CVE-2018-6485](https://nvd.nist.gov/vuln/detail/CVE-2018-6485){: external}, [CVE-2019-19126](https://nvd.nist.gov/vuln/detail/CVE-2019-19126){: external}, [CVE-2019-9169](https://nvd.nist.gov/vuln/detail/CVE-2019-9169){: external}, [CVE-2020-0543](https://nvd.nist.gov/vuln/detail/CVE-2020-0543){: external}, [CVE-2020-10029](https://nvd.nist.gov/vuln/detail/CVE-2020-10029){: external}, [CVE-2020-10711](https://nvd.nist.gov/vuln/detail/CVE-2020-10711){: external}, [CVE-2020-13143](https://nvd.nist.gov/vuln/detail/CVE-2020-13143){: external}, [CVE-2020-1751](https://nvd.nist.gov/vuln/detail/CVE-2020-1751){: external}, and [CVE-2020-1752](https://nvd.nist.gov/vuln/detail/CVE-2020-1752){: external}. |
 {: caption="Changes since version 1.17.7_1530" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.7_1530, released 6 July 2020
+## Change log for worker node fix pack 1.17.7_1530, released 6 July 2020
 {: #1177_1530}
 
 The following table shows the changes that are in the worker node fix pack `1.17.7_1530`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -620,7 +620,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Worker node `drain` automation | N/A|N/A | Fixes a race condition that can cause worker node `drain` automation to fail. |
 {: caption="Changes since version 1.17.7_1529" caption-side="bottom"}
 
-## Changelog for 1.17.7_1529, released 22 June 2020
+## Change log for 1.17.7_1529, released 22 June 2020
 {: #1177_1529}
 
 The following table shows the changes that are in the master and worker node update `1.17.7_1529`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
@@ -642,7 +642,7 @@ The following table shows the changes that are in the master and worker node upd
 | Ubuntu 16.04 packages | Worker | 4.4.0-179-generic | 4.4.0-184-generic | Updated worker node images with package and kernel updates for [CVE-2020-12049](https://nvd.nist.gov/vuln/detail/CVE-2020-12049){: external}, [CVE-2020-0543](https://nvd.nist.gov/vuln/detail/CVE-2020-0543){: external}, [CVE-2020-12769](https://nvd.nist.gov/vuln/detail/CVE-2020-12769){: external}, [CVE-2020-1749](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1749){: external}, [CVE-2020-13434](https://nvd.nist.gov/vuln/detail/CVE-2020-13434){: external}, [CVE-2020-13630](https://nvd.nist.gov/vuln/detail/CVE-2020-13630){: external}, and[CVE-2020-13632](https://nvd.nist.gov/vuln/detail/CVE-2020-13632){: external}. |
 {: caption="Changes since version 1.17.6_1527" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.6_1527, released 8 June 2020
+## Change log for worker node fix pack 1.17.6_1527, released 8 June 2020
 {: #1176_1527}
 
 The following table shows the changes that are in the worker node fix pack `1.17.6_1527`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -654,7 +654,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | 4.4.0-178-generic | 4.4.0-179-generic | Updated worker node images with package and kernel updates for [CVE-2019-1547](https://nvd.nist.gov/vuln/detail/CVE-2019-1547){: external}, [CVE-2019-1551](https://nvd.nist.gov/vuln/detail/CVE-2019-1551){: external}, [CVE-2019-1563](https://nvd.nist.gov/vuln/detail/CVE-2019-1563){: external}, and [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}. |
 {: caption="Changes since version 1.17.6_1526" caption-side="bottom"}
 
-## Changelog for 1.17.6_1526, released 26 May 2020
+## Change log for 1.17.6_1526, released 26 May 2020
 {: #1176_1526}
 
 The following table shows the changes that are in the master and worker node update `1.17.6_1526`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
@@ -678,7 +678,7 @@ The following table shows the changes that are in the master and worker node upd
 | Ubuntu 16.04 packages | Worker | 4.4.0-178-generic | 4.4.0-179-generic | Updated worker node images with package and kernel updates for [CVE-2019-19060](https://nvd.nist.gov/vuln/detail/CVE-2019-19060){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-11608](https://nvd.nist.gov/vuln/detail/CVE-2020-11608){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616), and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
 {: caption="Changes since version 1.17.5_1524" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.5_1524, released 11 May 2020
+## Change log for worker node fix pack 1.17.5_1524, released 11 May 2020
 {: #1175_1524}
 
 The following table shows the changes that are in the worker node fix pack `1.17.5_1524`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -690,7 +690,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | 4.4.0-177-generic | 4.4.0-178-generic | Updated worker node images with package and kernel updates for [CVE-2019-19768](https://nvd.nist.gov/vuln/detail/CVE-2019-19768){: external} and [CVE-2020-12243](https://nvd.nist.gov/vuln/detail/CVE-2020-12243){: external}. |
 {: caption="Changes since version 1.17.4_1523" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.5_1523, released 27 April 2020
+## Change log for worker node fix pack 1.17.5_1523, released 27 April 2020
 {: #1175_1523}
 
 The following table shows the changes that are in the worker node fix pack `1.17.5_1523`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -705,7 +705,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | N/A | N/A | Updated worker node images with package updates for [CVE-2019-18348](https://nvd.nist.gov/vuln/detail/CVE-2019-18348){: external}, [CVE-2020-11008](https://nvd.nist.gov/vuln/detail/CVE-2020-11008){: external}, [CVE-2020-5260](https://nvd.nist.gov/vuln/detail/CVE-2020-5260){: external}, and [CVE-2020-8492](https://nvd.nist.gov/vuln/detail/CVE-2020-8492){: external}. |
 {: caption="Changes since version 1.17.4_1521" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.5_1522, released 23 April 2020
+## Change log for master fix pack 1.17.5_1522, released 23 April 2020
 {: #1175_1522}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.5_1522`. Master patch updates are applied automatically.
@@ -718,7 +718,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Kubernetes | v1.17.4 | v1.17.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.17.5){: external}. The update resolves CVE-2020-8555 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6220220){: external}). |
 {: caption="Changes since version 1.17.4_1521" caption-side="bottom"}
 
-## Changelog for master fix pack 1.17.4_1521, released 17 April 2020
+## Change log for master fix pack 1.17.4_1521, released 17 April 2020
 {: #1174_1521_master}
 
 The following table shows the changes that are in the master fix pack patch update `1.17.4_1521`. Master patch updates are applied automatically.
@@ -737,7 +737,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Operator Lifecycle Manager Catalog | v1.5.11 | v1.6.1 | See the [Operator Lifecycle Manager Catalog release notes](https://github.com/operator-framework/operator-registry/releases/tag/v1.6.1){: external}. |
 {: caption="Changes since version 1.17.4_1520" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.4_1521, released 13 April 2020
+## Change log for worker node fix pack 1.17.4_1521, released 13 April 2020
 {: #1174_1521}
 
 The following table shows the changes that are in the worker node fix pack `1.17.4_1521`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -750,7 +750,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages | 4.4.0-176-generic | 4.4.0-177-generic | Updated worker node images with package and kernel updates for [CVE-2020-8831](https://nvd.nist.gov/vuln/detail/CVE-2020-8831){: external}, [CVE-2020-8833](https://nvd.nist.gov/vuln/detail/CVE-2020-8833){: external}, and [CVE-2020-8428](https://nvd.nist.gov/vuln/detail/CVE-2020-8428){: external}. |
 {: caption="Changes since version 1.17.4_1520" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.4_1520, released 30 March 2020
+## Change log for worker node fix pack 1.17.4_1520, released 30 March 2020
 {: #1174_1520}
 
 The following table shows the changes that are in the worker node fix pack `1.17.4_1520`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -762,7 +762,7 @@ The following table shows the changes that are in the worker node fix pack `1.17
 | Ubuntu 16.04 packages |4.4.0-174-generic | 4.4.0-176-generic | Updated worker node images with package updates for [CVE-2020-10531](https://nvd.nist.gov/vuln/detail/CVE-2020-10531){: external}, [CVE-2020-2732](https://nvd.nist.gov/vuln/detail/CVE-2020-2732){: external}, [CVE-2017-11109](https://nvd.nist.gov/vuln/detail/CVE-2017-11109){: external}, [CVE-2017-6349](https://nvd.nist.gov/vuln/detail/CVE-2017-6349), and [CVE-2017-6350](https://nvd.nist.gov/vuln/detail/CVE-2017-6350){: external}.|
 {: caption="Changes since version 1.17.4_1519" caption-side="bottom"}
 
-## Changelog for 1.17.4_1519, released 16 March 2020
+## Change log for 1.17.4_1519, released 16 March 2020
 {: #1174_1519}
 
 The following table shows the changes that are in the master and worker node update `1.17.4_1519`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
@@ -779,7 +779,7 @@ The following table shows the changes that are in the master and worker node upd
 | Ubuntu 16.04 packages | Worker |N/A | N/A | Updated worker node images with package updates for [CVE-2019-13734](https://nvd.nist.gov/vuln/detail/CVE-2019-13734){: external}, [CVE-2019-13750](https://nvd.nist.gov/vuln/detail/CVE-2019-13750){: external}, [CVE-2019-13751](https://nvd.nist.gov/vuln/detail/CVE-2019-13751){: external}, [CVE-2019-13752](https://nvd.nist.gov/vuln/detail/CVE-2019-13752){: external}, [CVE-2019-13753](https://nvd.nist.gov/vuln/detail/CVE-2019-13753){: external}, [CVE-2019-19926](https://nvd.nist.gov/vuln/detail/CVE-2019-19926){: external}, and [CVE-2019-20218](https://nvd.nist.gov/vuln/detail/CVE-2019-20218){: external}. |
 {: caption="Changes since version 1.17.3_1518" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.17.3_1518, released 2 March 2020
+## Change log for worker node fix pack 1.17.3_1518, released 2 March 2020
 {: #1173_1518}
 
 The following table shows the changes that are in the worker node fix pack 1.17.3_1518. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -792,7 +792,7 @@ The following table shows the changes that are in the worker node fix pack 1.17.
 | Ubuntu 16.04 packages | 4.4.0-173-generic | 4.4.0-174-generic | Updated worker node images with kernel and package updates for [CVE-2019-20096](https://nvd.nist.gov/vuln/detail/CVE-2019-20096){: external}, [CVE-2016-9840](https://nvd.nist.gov/vuln/detail/CVE-2016-9840){: external}, [CVE-2016-9841](https://nvd.nist.gov/vuln/detail/CVE-2016-9841){: external}, [CVE-2016-9842](https://nvd.nist.gov/vuln/detail/CVE-2016-9842){: external}, and [CVE-2016-9843](https://nvd.nist.gov/vuln/detail/CVE-2016-9843){: external}.|
 {: caption="Changes since version 1.17.3_1516" caption-side="bottom"}
 
-## Changelog for fix pack 1.17.3_1516, released 17 February 2020
+## Change log for fix pack 1.17.3_1516, released 17 February 2020
 {: #1173_1516}
 
 The following table shows the changes that are in the master and worker node fix pack update `1.17.3_1516`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
@@ -810,7 +810,7 @@ The following table shows the changes that are in the master and worker node fix
 | Ubuntu 16.04 packages | Worker | N/A | N/A | Updated worker node images with package updates for [CVE-2019-19956](https://nvd.nist.gov/vuln/detail/CVE-2019-19956){: external}, [CVE-2020-7595](https://nvd.nist.gov/vuln/detail/CVE-2020-7595){: external}, [CVE-2019-18634](https://nvd.nist.gov/vuln/detail/CVE-2019-18634){: external}, [CVE-2018-16888](https://nvd.nist.gov/vuln/detail/CVE-2018-16888){: external}, [CVE-2019-20386](https://nvd.nist.gov/vuln/detail/CVE-2019-20386){: external}, and [CVE-2020-1712](https://nvd.nist.gov/vuln/detail/CVE-2020-1712){: external}.|
 {: caption="Changes since version 1.17.2_1515" caption-side="bottom"}
 
-## Changelog for 1.17.2_1515, released 10 February 2020
+## Change log for 1.17.2_1515, released 10 February 2020
 {: #1172_1515}
 
 The following table shows the changes that are in patch update 1.17.2_1515.
