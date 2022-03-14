@@ -3837,7 +3837,7 @@ subcollection: containers
 
 * [Available {{site.data.keyword.containerlong}} versions](/docs/containers?topic=containers-cs_versions#cs_versions_available)
 
-* [Checking a cluster's Kubernetes server version](/docs/containers?topic=containers-cs_versions#checking-a-cluster's-kubernetes-server-version)
+* [Checking a cluster's Kubernetes server version](/docs/containers?topic=containers-cs_versions#cs_server_version)
 
 * [Update types](/docs/containers?topic=containers-cs_versions#update_types)
 
@@ -4354,7 +4354,7 @@ subcollection: containers
 
 * [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog_119#119_changelog)
 
-    * [Change log for worker node fix pack 1.19.16_1579, released 14 March 2022](/docs/containers?topic=containers-changelog_119#11916_1579)
+    * [Change log for worker node fix pack 1.19.16_1579, released 14 March 2022](/docs/containers?topic=containers-changelog_119#11916_1579-1)
 
     * [Change log for master fix pack 1.19.16_1578, released 3 March 2022](/docs/containers?topic=containers-changelog_119#11916_1578)
 

@@ -46,7 +46,7 @@ Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 14 M
 {: deprecated}
 
 ### Change log for worker node fix pack 1.19.16_1579, released 14 March 2022
-{: #11916_1579}
+{: #11916_1579-1}
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
