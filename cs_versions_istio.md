@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-11"
+lastupdated: "2022-03-14"
 
 keywords: kubernetes, istio, add-on
 
@@ -44,7 +44,7 @@ The Istio add-on is not yet supported on Kubernetes version 1.23. Do not update 
 ## Version 1.13
 {: #v113}
 
-### Changelog for 1.13.1, released March 9th, 2021
+### Change log for 1.13.1, released March 9th, 2021
 {: #1131}
 
 Review the changes that are included in version 1.13.1 of the managed Istio add-on.
@@ -61,7 +61,7 @@ Review the changes that are included in version 1.13.1 of the managed Istio add-
 If you want to upgrade from Istio minor version 1.11 to version 1.12 and your Istio components were provisioned at version 1.10 or earlier, you **must** take steps to [set up your mutating and validating webhooks](/docs/containers?topic=containers-istio#istio_minor) before you upgrade. If you do not make these changes before upgrading to 1.12, the upgrade will stall.
 {: important}
 
-### Changelog for 1.12.4, released 8 March 2022
+### Change log for 1.12.4, released 8 March 2022
 {: #1124}
 
 Review the changes that are included in version 1.12.4 of the managed Istio add-on.
@@ -76,7 +76,7 @@ Review the changes that are included in version 1.12.4 of the managed Istio add-
     - [CVE-2021-3996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3996){: external}
 - For more information, see the [Istio security bulletin 2022-003](https://istio.io/latest/news/security/istio-security-2022-003/){:external}.
 
-### Changelog for 1.12.3, released 22 February 2021
+### Change log for 1.12.3, released 22 February 2021
 {: #1123}
 
 
@@ -91,7 +91,7 @@ See the Istio release notes for [Istio 1.12.3](https://istio.io/latest/news/rele
 
 
 
-### Changelog for 1.12.2, released 03 February 2022
+### Change log for 1.12.2, released 03 February 2022
 {: #1202}
 
 
@@ -105,7 +105,7 @@ Review the changes that are included in version 1.12.2 of the managed Istio add-
 - See the Istio release notes for [Istio 1.12.2](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.2/){:external}. 
 - For more information, see the [Istio security bulletin 2022-001](https://istio.io/latest/news/security/istio-security-2022-001/){: external} and [Istio security bulletin 2022-002](https://istio.io/latest/news/security/istio-security-2022-002/){: external}.
 
-### Changelog for 1.12.1, released 13 January 2022
+### Change log for 1.12.1, released 13 January 2022
 {: #1121}
 
 Review the changes that are included in version 1.12.1 of the managed Istio add-on.
@@ -116,7 +116,7 @@ Review the changes that are included in version 1.12.1 of the managed Istio add-
 **Updates in this version:**  
 - See the Istio release notes for [Istio 1.12.1](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.1/){:external}. 
 
-### Changelog for 1.12.0, released 08 December 2021
+### Change log for 1.12.0, released 08 December 2021
 {: #1200}
 
 **Previous version**: 1.11.4
@@ -133,7 +133,7 @@ Review the changes that are included in version 1.12.1 of the managed Istio add-
 ## Version 1.11
 {: #v111}
 
-### Changelog for 1.11.7, released 8 March 2022
+### Change log for 1.11.7, released 8 March 2022
 {: #1117}
 
 Review the changes that are included in version 1.11.7 of the managed Istio add-on.
@@ -148,7 +148,7 @@ Review the changes that are included in version 1.11.7 of the managed Istio add-
     - [CVE-2021-3996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3996){: external}
 - For more information, see the [Istio security bulletin 2022-003](https://istio.io/latest/news/security/istio-security-2022-003/){:external}.
 
-### Changelog for 1.11.6, released 15 February 2022
+### Change log for 1.11.6, released 15 February 2022
 {: #1116}
 
 
@@ -160,7 +160,7 @@ Review the changes that are included in version 1.11.6 of the managed Istio add-
 **Updates in this version:**
 - See the Istio release notes for [Istio 1.11.6](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.6/.){: external}.
 
-### Changelog for 1.11.5, released 14 December 2021
+### Change log for 1.11.5, released 14 December 2021
 {: #1115}
 
 Review the changes that are in version 1.11.5 of the managed Istio add-on.
@@ -174,7 +174,7 @@ Review the changes that are in version 1.11.5 of the managed Istio add-on.
     - [USN-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
 
 
-### Changelog for 1.11.4, released 2 November 2021
+### Change log for 1.11.4, released 2 November 2021
 {: #1114}
 
 Review the changes that are in version 1.11.4 of the managed Istio add-on.
@@ -185,7 +185,7 @@ Review the changes that are in version 1.11.4 of the managed Istio add-on.
 **Updates in this version:**  
 - See the Istio release notes for [Istio 1.11.4](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.4/){: external}.
 
-### Changelog for 1.11.3, released 7 October 2021
+### Change log for 1.11.3, released 7 October 2021
 {: #1113}
 
 Review the changes that are in version 1.11.3 of the managed Istio add-on.
@@ -203,7 +203,7 @@ Review the changes that are in version 1.11.3 of the managed Istio add-on.
     - [CVE-2021-40528](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-40528){: external}
 - For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
-### Changelog for 1.11.2, released 23 September 2021
+### Change log for 1.11.2, released 23 September 2021
 {: #1112}
 
 Review the changes that are in version 1.11.2 of the managed Istio add-on.
@@ -218,7 +218,7 @@ Review the changes that are in version 1.11.2 of the managed Istio add-on.
     - [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}
     - [CVE-2021-3634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3634){: external}
     
-### Changelog for 1.11.1, released 31 August 2021
+### Change log for 1.11.1, released 31 August 2021
 {: #1111}
 
 Review the changes that are in version 1.11.1 of the managed Istio add-on.
@@ -241,7 +241,7 @@ Review the changes that are in version 1.11.1 of the managed Istio add-on.
 Review the changes that are in version 1.10 of the managed Istio add-on.
 {: shortdesc}
 
-### Changelog for 1.10.6, released 13 January 2022
+### Change log for 1.10.6, released 13 January 2022
 {: #1106}
 
 Review the changes that are included in version 1.10.6 of the managed Istio add-on.
@@ -252,7 +252,7 @@ Review the changes that are included in version 1.10.6 of the managed Istio add-
 **Updates in this version:**  
 - See the Istio release notes for [Istio 1.10.6](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.6/){:external}. 
 
-### Changelog for 1.10.5, released 28 October 2021
+### Change log for 1.10.5, released 28 October 2021
 {: #1105}
 
 Review the changes that are in version 1.10.5 of the managed Istio add-on.
@@ -274,7 +274,7 @@ Review the changes that are in version 1.10.5 of the managed Istio add-on.
     - [usn-5079-3](https://ubuntu.com/security/notices/USN-5079-1){: external}
 - For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
-### Changelog for 1.10.4, released 14 September 2021
+### Change log for 1.10.4, released 14 September 2021
 {: #1104}
 
 Review the changes that are in version 1.10.4 of the managed Istio add-on.
@@ -290,7 +290,7 @@ Review the changes that are in version 1.10.4 of the managed Istio add-on.
     - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
 - For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
-### Changelog for 1.10.3, released 5 August 2021
+### Change log for 1.10.3, released 5 August 2021
 {: #1103}
 
 Review the changes that are in version 1.10.3 of the managed Istio add-on.
@@ -301,7 +301,7 @@ Review the changes that are in version 1.10.3 of the managed Istio add-on.
 **Updates in this version:**  
 - See the Istio release notes for [Istio 1.10.3](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.3/.){: external}. 
 
-### Changelog for 1.10.2, released 15 July 2021
+### Change log for 1.10.2, released 15 July 2021
 {: #1102}
 
 Review the changes that are in version 1.10.2 of the managed Istio add-on.
@@ -329,7 +329,7 @@ Review the changes that are in version 1.10.2 of the managed Istio add-on.
 Version 1.9 of the managed Istio add-on is unsupported.
 (: deprecated)
 
-### Changelog for 1.9.8, released 14 September 2021
+### Change log for 1.9.8, released 14 September 2021
 {: #198}
 
 Review the changes that are in version 1.9.8 of the managed Istio add-on.
@@ -345,7 +345,7 @@ Review the changes that are in version 1.9.8 of the managed Istio add-on.
     - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
 - For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
-### Changelog for 1.9.7, released 12 August 2021
+### Change log for 1.9.7, released 12 August 2021
 {: #197}
 
 Review the changes that are in version 1.9.7 of the managed Istio add-on.
@@ -356,7 +356,7 @@ Review the changes that are in version 1.9.7 of the managed Istio add-on.
 **Updates in this version:**  
 See the Istio release notes for [Istio 1.9.7](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.7/.){: external}.
 
-### Changelog for 1.9.6, released 22 July 2021
+### Change log for 1.9.6, released 22 July 2021
 {: #196}
 
 Review the changes that are in version 1.9.6 of the managed Istio add-on.
@@ -371,7 +371,7 @@ Review the changes that are in version 1.9.6 of the managed Istio add-on.
     - [CVE-2018-16869](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16869){: external}.
     - [CVE-2021-3580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3580){: external}.
 
-### Changelog for 1.9.5, released 27 May 2021
+### Change log for 1.9.5, released 27 May 2021
 {: #195}
 
 Review the changes that are in version 1.9.5 of the managed Istio add-on.
@@ -383,7 +383,7 @@ Review the changes that are in version 1.9.5 of the managed Istio add-on.
 - See the Istio release notes for [Istio 1.9.5](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.5/){: external}. 
 - Resolves [CVE-2021-20305](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-20305){: external}.
 
-### Changelog for 1.9.4, released 17 May 2021
+### Change log for 1.9.4, released 17 May 2021
 {: #194}
 
 Review the changes that are in version 1.9.4 of the managed Istio add-on.
@@ -395,7 +395,7 @@ Review the changes that are in version 1.9.4 of the managed Istio add-on.
 See the Istio release notes for [Istio 1.9.4](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.4/){: external}.
 
 
-### Changelog for 1.9.3, released 29 April 2021
+### Change log for 1.9.3, released 29 April 2021
 {: #193}
 
 Review the changes that are in version 1.9.3 of the managed Istio add-on.
@@ -417,7 +417,7 @@ Review the changes that are in version 1.9.3 of the managed Istio add-on.
 - For more information, see the [Istio security bulletin 2021-003](https://istio.io/latest/news/security/istio-security-2021-003/){: external}.
 
 
-### Changelog for 1.9.2, released 1 April 2021
+### Change log for 1.9.2, released 1 April 2021
 {: #192}
 
 Review the changes that are in version 1.9.2 of the managed Istio add-on.
@@ -439,7 +439,7 @@ Review the changes that are in version 1.9.2 of the managed Istio add-on.
 Version 1.8 of the managed Istio add-on is unsupported.
 (: deprecated)
 
-### Changelog for 1.8.6, released 27 May 2021
+### Change log for 1.8.6, released 27 May 2021
 {: #186}
 
 Review the changes that are in version 1.8.6 of the managed Istio add-on.
@@ -452,7 +452,7 @@ Review the changes that are in version 1.8.6 of the managed Istio add-on.
 - Resolves[CVE-2021-20305](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-20305){: external}. 
 
 
-### Changelog for 1.8.5, released 29 April 2021
+### Change log for 1.8.5, released 29 April 2021
 {: #185}
 
 Review the changes that are in version 1.8.5 of the managed Istio add-on.
@@ -477,7 +477,7 @@ Review the changes that are in version 1.8.5 of the managed Istio add-on.
 - For more information, see the [Istio security bulletin 2021-003](https://istio.io/latest/news/security/istio-security-2021-003/).
 
 
-### Changelog for 1.8.4, released 23 March 2021
+### Change log for 1.8.4, released 23 March 2021
 {: #184}
 
 Review the changes that are in version 1.8.4 of the managed Istio add-on.
@@ -494,7 +494,7 @@ Review the changes that are in version 1.8.4 of the managed Istio add-on.
     - [CVE-2021-3177](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3177){: external}
 
 
-### Changelog for 1.8.3, released 1 March 2021
+### Change log for 1.8.3, released 1 March 2021
 {: #183}
 
 Review the changes that are in version 1.8.3 of the managed Istio add-on.
@@ -511,7 +511,7 @@ Review the changes that are in version 1.8.3 of the managed Istio add-on.
     - [CVE-2021-3156](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3156){: external}
 
 
-### Changelog for 1.8.2, released 25 January 2021
+### Change log for 1.8.2, released 25 January 2021
 {: #182}
 
 Review the changes that are in version 1.8.2 of the managed Istio add-on.
@@ -534,7 +534,7 @@ Review the changes that are in version 1.8.2 of the managed Istio add-on.
     - [usn-4677-1](https://ubuntu.com/security/notices/USN-4677-1){: external}.
 
 
-### Changelog for 1.8.1, released 16 December 2020
+### Change log for 1.8.1, released 16 December 2020
 {: #181}
 
 Review the changes that are in version 1.8.1 of the managed Istio add-on.
@@ -546,7 +546,7 @@ Review the changes that are in version 1.8.1 of the managed Istio add-on.
 See the Istio release notes for [Istio 1.8.1](https://istio.io/latest/news/releases/1.8.x/announcing-1.8.1/){: external}. 
 
 
-### Changelog for 1.8.0, released 9 December 2020
+### Change log for 1.8.0, released 9 December 2020
 {: #180}
 
 Review the changes that are in version 1.8.0 of the managed Istio add-on.
@@ -569,7 +569,7 @@ Review the changes that are in version 1.8.0 of the managed Istio add-on.
 Version 1.7 of the managed Istio add-on is unsupported.
 (: deprecated)
 
-### Changelog for 1.7.8, released 10 March 2021
+### Change log for 1.7.8, released 10 March 2021
 {: #178}
 
 Review the changes that are in version 1.7.8 of the managed Istio add-on.
@@ -584,7 +584,7 @@ Review the changes that are in version 1.7.8 of the managed Istio add-on.
     - [CVE-2021-23841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-23841){: external}
 
 
-### Changelog for 1.7.7, released 8 February 2021
+### Change log for 1.7.7, released 8 February 2021
 {: #177}
 
 Review the changes that are in version 1.7.7 of the managed Istio add-on.
@@ -610,7 +610,7 @@ Review the changes that are in version 1.7.7 of the managed Istio add-on.
     - [CVE-2019-9923](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9923){: external}
 
 
-### Changelog for 1.7.6, released 16 December 2020
+### Change log for 1.7.6, released 16 December 2020
 {: #176}
 
 Review the changes that are in version 1.7.6 of the managed Istio add-on.
@@ -623,7 +623,7 @@ Review the changes that are in version 1.7.6 of the managed Istio add-on.
 - Resolves [CVE-2020-28196](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28196){: external}. 
 
 
-### Changelog for 1.7.5, released 3 December 2020
+### Change log for 1.7.5, released 3 December 2020
 {: #175}
 
 Review the changes that are in version 1.7.5 of the managed Istio add-on.
@@ -635,7 +635,7 @@ Review the changes that are in version 1.7.5 of the managed Istio add-on.
 See the Istio release notes for [Istio 1.7.5](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.5/){: external}.
 
 
-### Changelog for 1.7.4, released 5 November 2020
+### Change log for 1.7.4, released 5 November 2020
 {: #174}
 
 Review the changes that are in version 1.7.4 of the managed Istio add-on.
@@ -650,7 +650,7 @@ Review the changes that are in version 1.7.4 of the managed Istio add-on.
     - [usn-4581-1](https://ubuntu.com/security/notices/USN-4581-1){: external} 
 
 
-### Changelog for 1.7.3, released 06 October 2020
+### Change log for 1.7.3, released 06 October 2020
 {: #173}
 
 Review the changes that are in version 1.7.3 of the managed Istio add-on.
@@ -668,7 +668,7 @@ Review the changes that are in version 1.7.3 of the managed Istio add-on.
 - For more information, see the [Istio security bulletin 2020-010](https://istio.io/latest/news/security/istio-security-2020-010/){: external}.  
 
 
-### Changelog for 1.7.2, released 23 September 2020
+### Change log for 1.7.2, released 23 September 2020
 {: #172}
 
 Review the changes that are in version 1.7.2 of the managed Istio add-on.
@@ -680,7 +680,7 @@ Review the changes that are in version 1.7.2 of the managed Istio add-on.
 See the Istio release notes for [Istio 1.7.2](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.2/){: external}.
 
 
-### Changelog for 1.7.1, released 14 September 2020
+### Change log for 1.7.1, released 14 September 2020
 {: #171}
 
 Review the changes that are in version 1.7.1 of the managed Istio add-on.
@@ -691,7 +691,7 @@ Review the changes that are in version 1.7.1 of the managed Istio add-on.
 **Updates in this version**  
 See the Istio release notes for [Istio 1.7.1](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.1/){: external}. 
 
-### Changelog for 1.7.0, released 02 September 2020
+### Change log for 1.7.0, released 02 September 2020
 {: #170}
 
 Review the changes that are in version 1.7.0 of the managed Istio add-on.
@@ -730,7 +730,7 @@ To see options for changing settings in the managed version of Istio, see [Custo
 | Envoy sidecar proxy lifecycle pre-stop | In the managed Istio add-on, a sleep time of 25 seconds is added to allow traffic connections to close before an Envoy sidecar is removed from an app pod. |
 {: caption="Table 1. Differences between the managed {{site.data.keyword.containerlong_notm}} Istio and the community Istio" caption-side="bottom"}
 
-### Changelog for 1.6.14, released 3 December 2020
+### Change log for 1.6.14, released 3 December 2020
 {: #1614}
 
 Review the changes that are in version 1.6.14 of the managed Istio add-on.
@@ -742,7 +742,7 @@ Review the changes that are in version 1.6.14 of the managed Istio add-on.
 - See the Istio release notes for [Istio 1.6.14](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.14/){: external}. 
 - Resolves [CVE-2020-28196](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28196){: external}. 
 
-### Changelog for 1.6.13, released 5 November 2020
+### Change log for 1.6.13, released 5 November 2020
 {: #1613}
 
 Review the changes that are in version 1.6.13 of the managed Istio add-on.
@@ -757,7 +757,7 @@ Review the changes that are in version 1.6.13 of the managed Istio add-on.
     - [usn-4581-1](https://ubuntu.com/security/notices/USN-4581-1){: external}.
 
 
-### Changelog for 1.6.12, released 22 October 2020
+### Change log for 1.6.12, released 22 October 2020
 {: #1612}
 
 Review the changes that are in version 1.6.12 of the managed Istio add-on.
@@ -768,7 +768,7 @@ Review the changes that are in version 1.6.12 of the managed Istio add-on.
 **Updates in this version** 
 See the Istio release notes for [Istio 1.6.12](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.12/){: external}. 
 
-### Changelog for 1.6.11, released 06 October 2020
+### Change log for 1.6.11, released 06 October 2020
 {: #1611}
 
 Review the changes that are in version 1.6.11 of the managed Istio add-on.
@@ -788,7 +788,7 @@ Review the changes that are in version 1.6.11 of the managed Istio add-on.
 - For more information, see the [Istio security bulletin 2020-010](https://istio.io/latest/news/security/istio-security-2020-010/){: external}.
 
 
-### Changelog for 1.6.9, released 14 September 2020
+### Change log for 1.6.9, released 14 September 2020
 {: #169}
 
 Review the changes that are in version 1.6.9 of the managed Istio add-on.
@@ -804,7 +804,7 @@ Review the changes that are in version 1.6.9 of the managed Istio add-on.
 - For more information, see the [Istio security bulletin 2020-009](https://istio.io/latest/news/security/istio-security-2020-009/){: external}.
 
 
-### Changelog for 1.6.8, released 12 August 2020
+### Change log for 1.6.8, released 12 August 2020
 {: #168}
 
 Review the changes that are in version 1.6.8 of the managed Istio add-on.
@@ -818,7 +818,7 @@ Review the changes that are in version 1.6.8 of the managed Istio add-on.
 - For more information, see the [Istio security bulletin 2020-009](https://istio.io/latest/news/security/istio-security-2020-009/){: external}
 
 
-### Changelog for 1.6.7, released 04 August 2020
+### Change log for 1.6.7, released 04 August 2020
 {: #167}
 
 Review the changes that are in version 1.6.7 of the managed Istio add-on.
@@ -838,7 +838,7 @@ Review the changes that are in version 1.6.7 of the managed Istio add-on.
     - [usn-4428-1](https://ubuntu.com/security/notices/USN-4428-1){: external}
 
 
-### Changelog for 1.6.5, released 17 July 2020
+### Change log for 1.6.5, released 17 July 2020
 {: #165}
 
 Review the changes that are in version 1.6.5 of the managed Istio add-on.
@@ -864,7 +864,7 @@ Review the changes that are in version 1.6.5 of the managed Istio add-on.
 - For more information, see the [Istio security bulletin 2020-008](https://istio.io/latest/news/security/istio-security-2020-008/){: external}
 
 
-### Changelog for 1.6, released 08 July 2020
+### Change log for 1.6, released 08 July 2020
 {: #16}
 
 Review the changes that are in version 1.6 of the managed Istio add-on.
@@ -900,7 +900,7 @@ To see options for changing settings in the managed version of Istio, see [Custo
 | `values.global.pilot.enableProtocolSniffingForInbound` and `values.global.pilot.enableProtocolSniffingForOutbound` | In the managed Istio add-on, protocol sniffing is disabled by default until the feature becomes more stable in the community Istio.
 {: caption="Table 1. Differences between the managed {{site.data.keyword.containerlong_notm}} Istio and the community Istio" caption-side="bottom"}
 
-### Changelog for 1.5.10, released 1 September 2020
+### Change log for 1.5.10, released 1 September 2020
 {: #1510}
 
 Review the changes that are in version 1.5.10 of the managed Istio add-on.
@@ -912,7 +912,7 @@ Review the changes that are in version 1.5.10 of the managed Istio add-on.
 See the Istio release notes for [Istio 1.5.10](https://istio.io/latest/news/releases/1.5.x/announcing-1.5.10/){: external}.
 
 
-### Changelog for 1.5.9, released 12 August 2020
+### Change log for 1.5.9, released 12 August 2020
 {: #159}
 
 Review the changes that are in version 1.6.8 of the managed Istio add-on.
@@ -931,7 +931,7 @@ Review the changes that are in version 1.6.8 of the managed Istio add-on.
 - For more information, see the [Istio security bulletin 2020-009](https://istio.io/latest/news/security/istio-security-2020-009/){: external}.
 
 
-### Changelog for 1.5.8, released 16 July 2020
+### Change log for 1.5.8, released 16 July 2020
 {: #158}
 
 Review the changes that are in version 1.5.8 of the managed Istio add-on.
@@ -957,7 +957,7 @@ Review the changes that are in version 1.5.8 of the managed Istio add-on.
 - For more information, see the [Istio security bulletin 2020-008](https://istio.io/latest/news/security/istio-security-2020-008/){: external}. 
 
 
-### Changelog for 1.5.7, released 8 July 2020
+### Change log for 1.5.7, released 8 July 2020
 {: #157}
 
 Review the changes that are in version 1.5.7 of the managed Istio add-on.
@@ -978,7 +978,7 @@ Review the changes that are in version 1.5.7 of the managed Istio add-on.
 - For more information, see the [Istio security bulletin 2020-007](https://istio.io/latest/news/security/istio-security-2020-007/){: external}. 
 
 
-### Changelog for 1.5.6, released 23 June 2020
+### Change log for 1.5.6, released 23 June 2020
 {: #156}
 
 Review the changes that are in version 1.5.6 of the managed Istio add-on.
@@ -1012,7 +1012,7 @@ Review the changes that are in version 1.5.6 of the managed Istio add-on.
     - [usn-4394-1](https://ubuntu.com/security/notices/USN-4394-1/){: external}
 - For more information, see the [Istio security bulletin 2020-006](https://istio.io/latest/news/security/istio-security-2020-006/){: external}
 
-### Changelog for 1.5, released 19 May 2020
+### Change log for 1.5, released 19 May 2020
 {: #15}
 
 Review the changes that are in version 1.5 of the managed Istio add-on.
@@ -1036,7 +1036,7 @@ Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes ve
 Version 1.4 of the managed Istio add-on is unsupported.
 (: deprecated)
 
-## Changelog for 1.4.9, released 18 May 2020
+## Change log for 1.4.9, released 18 May 2020
 {: #149}
 
 Review the changes that are in version 1.4.9 of the managed Istio add-on.
@@ -1054,7 +1054,7 @@ Review the changes that are in version 1.4.9 of the managed Istio add-on.
     - [usn-4333-1](https://ubuntu.com/security/notices/USN-4333-1/){: external}
 - For more information, see the [Istio security bulletin](https://istio.io/latest/news/security/istio-security-2020-005/){: external}
 
-## Changelog for 1.4.8, released 30 April 2020
+## Change log for 1.4.8, released 30 April 2020
 {: #148}
 
 Review the changes that are in version 1.4.8 of the managed Istio add-on.
@@ -1077,7 +1077,7 @@ Review the changes that are in version 1.4.8 of the managed Istio add-on.
     - [CVE-2017-18258](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19880){: external}
     - [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}
 
-## Changelog for 1.4.7, released 01 April 2020
+## Change log for 1.4.7, released 01 April 2020
 {: #147}
 
 Review the changes that are in version 1.4.7 of the managed Istio add-on.
@@ -1103,7 +1103,7 @@ Review the changes that are in version 1.4.7 of the managed Istio add-on.
     - [CVE-2019-13734](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13734){: external}
     - [CVE-2019-19880](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19880){: external}
 
-## Changelog for 1.4.6, released 09 March 2020
+## Change log for 1.4.6, released 09 March 2020
 {: #146}
 
 Review the changes that are in version 1.4.6 of the managed Istio add-on.
@@ -1119,7 +1119,7 @@ Review the changes that are in version 1.4.6 of the managed Istio add-on.
     - [CVE-2020-8661](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8661){: external}
     - [CVE-2020-8664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8664){: external}
 
-## Changelog for 1.4.5, released 21 February 2020
+## Change log for 1.4.5, released 21 February 2020
 {: #145}
 
 Review the changes that are in version 1.4.5 of the managed Istio add-on.
@@ -1146,7 +1146,7 @@ Review the changes that are in version 1.4.5 of the managed Istio add-on.
     - [usn-4269-1](https://ubuntu.com/security/notices/USN-4269-1/){: external}
     - [usn-4246-1](https://ubuntu.com/security/notices/USN-4246-1/){: external}
 
-## Changelog for 1.4.4, released 14 February 2020
+## Change log for 1.4.4, released 14 February 2020
 {: #144}
 
 Review the changes that are in version 1.4.4 of the managed Istio add-on.
@@ -1204,7 +1204,7 @@ Review the changes that are in version 1.4.4 of the managed Istio add-on.
     - [CVE-2017-16808](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-16808){: external}
 - For more information, see the [Istio security bulletin 2020-001](https://istio.io/latest/news/security/istio-security-2020-001/){: external}
 
-## Changelog for 1.4.3, released 16 January 2020
+## Change log for 1.4.3, released 16 January 2020
 {: #143}
 
 Review the changes that are in version 1.4.3 of the managed Istio add-on.
@@ -1217,7 +1217,7 @@ Review the changes that are in version 1.4.3 of the managed Istio add-on.
 - Disables [protocol sniffing and detection](https://istio.io/latest/docs/ops/configuration/traffic-management/protocol-selection/).
 - Improves the termination sequence for rolling updates of ingress and egress gateways. 
 
-## Changelog for 1.4.2, released 16 December 2020
+## Change log for 1.4.2, released 16 December 2020
 {: #142}
 
 Review the changes that are in version 1.4.2 of the managed Istio add-on.

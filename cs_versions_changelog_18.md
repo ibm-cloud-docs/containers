@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-02-21"
+lastupdated: "2022-03-14"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -18,7 +18,7 @@ subcollection: containers
 Review the version 1.8 changelogs.
 {: shortdesc}
 
-## Changelog for worker node fix pack 1.8.15_1521, released 20 September 2018
+## Change log for worker node fix pack 1.8.15_1521, released 20 September 2018
 {: #1815_1521}
 
 | Component | Previous | Current | Description |
@@ -30,7 +30,7 @@ Review the version 1.8 changelogs.
 {: caption="Table 1. Changes since version 1.8.15_1520" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.8.15_1520, released 23 August 2018
+## Change log for worker node fix pack 1.8.15_1520, released 23 August 2018
 {: #1815_1520}
 
 | Component | Previous | Current | Description |
@@ -40,7 +40,7 @@ Review the version 1.8 changelogs.
 {: caption="Table 1. Changes since version 1.8.15_1519" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.8.15_1519, released 13 August 2018
+## Change log for worker node fix pack 1.8.15_1519, released 13 August 2018
 {: #1815_1519}
 
 | Component | Previous | Current | Description |
@@ -49,7 +49,7 @@ Review the version 1.8 changelogs.
 {: caption="Table 1. Changes since version 1.8.15_1518" caption-side="bottom"}
 
 
-## Changelog for 1.8.15_1518, released 27 July 2018
+## Change log for 1.8.15_1518, released 27 July 2018
 {: #1815_1518}
 
 | Component | Previous | Current | Description |
@@ -62,7 +62,7 @@ Review the version 1.8 changelogs.
 {: caption="Table 1. Changes since version 1.8.13_1516" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.8.13_1516, released 3 July 2018
+## Change log for worker node fix pack 1.8.13_1516, released 3 July 2018
 {: #1813_1516}
 
 | Component | Previous | Current | Description |
@@ -71,7 +71,7 @@ Review the version 1.8 changelogs.
 {: caption="Table 1. Changes since version 1.8.13_1515" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.8.13_1515, released 21 June 2018
+## Change log for worker node fix pack 1.8.13_1515, released 21 June 2018
 {: #1813_1515}
 
 | Component | Previous | Current | Description |
@@ -92,7 +92,7 @@ Review the version 1.8 changelogs.
 {: caption="Table 1. Changes since version 1.8.11_1512" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.8.11_1512, released 11 June 2018
+## Change log for worker node fix pack 1.8.11_1512, released 11 June 2018
 {: #1811_1512}
 
 | Component | Previous | Current | Description |
@@ -101,7 +101,7 @@ Review the version 1.8 changelogs.
 {: caption="Table 1. Changes since version 1.8.11_1511" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.8.11_1511, released 18 May 2018
+## Change log for worker node fix pack 1.8.11_1511, released 18 May 2018
 {: #1811_1511}
 
 | Component | Previous | Current | Description |
@@ -110,7 +110,7 @@ Review the version 1.8 changelogs.
 {: caption="Table 1. Changes since version 1.8.11_1510" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.8.11_1510, released 16 May 2018
+## Change log for worker node fix pack 1.8.11_1510, released 16 May 2018
 {: #1811_1510}
 
 | Component | Previous | Current | Description |
@@ -119,7 +119,7 @@ Review the version 1.8 changelogs.
 {: caption="Table 1. Changes since version 1.8.11_1509" caption-side="bottom"}
 
 
-## Changelog for 1.8.11_1509, released 19 April 2018
+## Change log for 1.8.11_1509, released 19 April 2018
 {: #1811_1509}
 
 | Component | Previous | Current | Description |

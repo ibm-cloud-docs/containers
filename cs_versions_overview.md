@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-03-14"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -59,7 +59,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
      - [Archived change logs](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
 
 ## Checking a cluster's Kubernetes server version
-{: cs_server_version}
+{: #cs_server_version}
 
 To check the server version of a cluster, log in to the cluster and run the following command.
 {: shortdesc}

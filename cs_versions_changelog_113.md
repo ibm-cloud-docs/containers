@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-02-21"
+lastupdated: "2022-03-14"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -19,7 +19,7 @@ subcollection: containers
 Version 1.13 is unsupported. You can review the following archive of 1.13 changelogs.
 {: shortdesc}
 
-## Changelog for fix pack 1.13.12_1550, released 17 February 2020
+## Change log for fix pack 1.13.12_1550, released 17 February 2020
 {: #11312_1550}
 
 The following table shows the changes that are in the master and worker node fix pack update `1.13.12_1550`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
@@ -35,7 +35,7 @@ The following table shows the changes that are in the master and worker node fix
 | Ubuntu 16.04 packages | Worker | N/A | N/A | Updated worker node images with package updates for [CVE-2019-19956](https://nvd.nist.gov/vuln/detail/CVE-2019-19956){: external}, [CVE-2020-7595](https://nvd.nist.gov/vuln/detail/CVE-2020-7595){: external}, [CVE-2019-18634](https://nvd.nist.gov/vuln/detail/CVE-2019-18634){: external}, [CVE-2018-16888](https://nvd.nist.gov/vuln/detail/CVE-2018-16888){: external}, [CVE-2019-20386](https://nvd.nist.gov/vuln/detail/CVE-2019-20386){: external}, and [CVE-2020-1712](https://nvd.nist.gov/vuln/detail/CVE-2020-1712). |
 {: caption="Changes since version 1.13.12_1549" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.13.12_1549, released 3 February 2020
+## Change log for worker node fix pack 1.13.12_1549, released 3 February 2020
 {: #11312_1549}
 
 The following table shows the changes that are in the worker node fix pack 1.13.12_1549.
@@ -47,7 +47,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 | Ubuntu 16.04 packages | 4.4.0-171-generic | 4.4.0-173-generic | Updated worker node images with package updates for [CVE-2019-19906](https://nvd.nist.gov/vuln/detail/CVE-2019-19906){: external}, [CVE-2019-5188](https://nvd.nist.gov/vuln/detail/CVE-2019-5188){: external}, [CVE-2019-20367](https://nvd.nist.gov/vuln/detail/CVE-2019-20367){: external}, [CVE-2019-14615](https://nvd.nist.gov/vuln/detail/CVE-2019-14615){: external}, [CVE-2019-18885](https://nvd.nist.gov/vuln/detail/CVE-2019-18885){: external}, [CVE-2019-19332](https://nvd.nist.gov/vuln/detail/CVE-2019-19332){: external}, [CVE-2019-19062](https://nvd.nist.gov/vuln/detail/CVE-2019-19062){: external}, [CVE-2019-15796](https://nvd.nist.gov/vuln/detail/CVE-2019-15796){: external}, [CVE-2019-15795](https://nvd.nist.gov/vuln/detail/CVE-2019-15795){: external}, [CVE-2017-16808](https://nvd.nist.gov/vuln/detail/CVE-2017-16808){: external}, [CVE-2018-10103](https://nvd.nist.gov/vuln/detail/CVE-2018-10103){: external}, [CVE-2018-10105](https://nvd.nist.gov/vuln/detail/CVE-2018-10105){: external}, [CVE-2018-14461](https://nvd.nist.gov/vuln/detail/CVE-2018-14461){: external}, [CVE-2018-14462](https://nvd.nist.gov/vuln/detail/CVE-2018-14462){: external}, [CVE-2018-14463](https://nvd.nist.gov/vuln/detail/CVE-2018-14463){: external}, [CVE-2018-14464](https://nvd.nist.gov/vuln/detail/CVE-2018-14464){: external}, [CVE-2018-14465](https://nvd.nist.gov/vuln/detail/CVE-2018-14465){: external}, [CVE-2018-14466](https://nvd.nist.gov/vuln/detail/CVE-2018-14466){: external}, [CVE-2018-14467](https://nvd.nist.gov/vuln/detail/CVE-2018-14467){: external}, [CVE-2018-14468](https://nvd.nist.gov/vuln/detail/CVE-2018-14468){: external}, [CVE-2018-14469](https://nvd.nist.gov/vuln/detail/CVE-2018-14469){: external}, [CVE-2018-14470](https://nvd.nist.gov/vuln/detail/CVE-2018-14470){: external}, [CVE-2018-14879](https://nvd.nist.gov/vuln/detail/CVE-2018-14879){: external}, [CVE-2018-14880](https://nvd.nist.gov/vuln/detail/CVE-2018-14880){: external}, [CVE-2018-14881](https://nvd.nist.gov/vuln/detail/CVE-2018-14881){: external}, [CVE-2018-14882](https://nvd.nist.gov/vuln/detail/CVE-2018-14882){: external}, [CVE-2018-16227](https://nvd.nist.gov/vuln/detail/CVE-2018-16227){: external}, [CVE-2018-16228](https://nvd.nist.gov/vuln/detail/CVE-2018-16228){: external}, [CVE-2018-16229](https://nvd.nist.gov/vuln/detail/CVE-2018-16229){: external}, [CVE-2018-16230](https://nvd.nist.gov/vuln/detail/CVE-2018-16230){: external}, [CVE-2018-16300](https://nvd.nist.gov/vuln/detail/CVE-2018-16300){: external}, [CVE-2018-16451](https://nvd.nist.gov/vuln/detail/CVE-2018-16451){: external}, [CVE-2018-16452](https://nvd.nist.gov/vuln/detail/CVE-2018-16452){: external}, [CVE-2018-19519](https://nvd.nist.gov/vuln/detail/CVE-2018-19519){: external}, [CVE-2019-1010220](https://nvd.nist.gov/vuln/detail/CVE-2019-1010220){: external}, [CVE-2019-15166](https://nvd.nist.gov/vuln/detail/CVE-2019-15166){: external}, [CVE-2019-15167](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-15167){: external){: external}, [CVE-2016-9840](https://nvd.nist.gov/vuln/detail/CVE-2016-9840){: external}, [CVE-2016-9841](https://nvd.nist.gov/vuln/detail/CVE-2016-9841){: external}, [CVE-2016-9842](https://nvd.nist.gov/vuln/detail/CVE-2016-9842){: external}, and [CVE-2016-9843](https://nvd.nist.gov/vuln/detail/CVE-2016-9843){: external}. |
 {: caption="Changes since version 1.13.12_1548" caption-side="bottom"}
 
-## Changelog for 1.13.12_1548, released 20 January 2020
+## Change log for 1.13.12_1548, released 20 January 2020
 {: #11312_1548}
 
 The following table shows the changes that are in the master and worker node patch update 1.13.12_1548. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
@@ -66,7 +66,7 @@ The following table shows the changes that are in the master and worker node pat
 | Ubuntu 16.04 packages | 4.4.0-170-generic | 4.4.0-171-generic | Updated worker node images with package updates for [CVE-2019-13627](https://nvd.nist.gov/vuln/detail/CVE-2019-13627){: external}, [CVE-2019-14901](https://nvd.nist.gov/vuln/detail/CVE-2019-14901){: external}, [CVE-2019-14896](https://nvd.nist.gov/vuln/detail/CVE-2019-14896){: external}, [CVE-2019-14897](https://nvd.nist.gov/vuln/detail/CVE-2019-14897){: external}, [CVE-2019-14895](https://nvd.nist.gov/vuln/detail/CVE-2019-14895){: external}, [CVE-2019-18660](https://nvd.nist.gov/vuln/detail/CVE-2019-18660){: external}, and [CVE-2018-12327](https://nvd.nist.gov/vuln/detail/CVE-2018-12327){: external}. |
 {: caption="Changes since version 1.13.12_1547" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.13.12_1547, released 23 December 2019
+## Change log for worker node fix pack 1.13.12_1547, released 23 December 2019
 {: #11312_1547}
 
 The following table shows the changes that are in the worker node fix pack 1.13.12_1547.
@@ -78,7 +78,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 | Ubuntu 16.04 packages | N/A | N/A | Updated worker node images with package updates for [CVE-2019-1348](https://nvd.nist.gov/vuln/detail/CVE-2019-1348){: external}, [CVE-2019-1349](https://nvd.nist.gov/vuln/detail/CVE-2019-1349){: external}, [CVE-2019-1350](https://nvd.nist.gov/vuln/detail/CVE-2019-1350){: external}, [CVE-2019-1351](https://nvd.nist.gov/vuln/detail/CVE-2019-1351){: external}, [CVE-2019-1352](https://nvd.nist.gov/vuln/detail/CVE-2019-1352){: external}, [CVE-2019-1353](https://nvd.nist.gov/vuln/detail/CVE-2019-1353){: external}, [CVE-2019-1354](https://nvd.nist.gov/vuln/detail/CVE-2019-1354){: external}, [CVE-2019-1387](https://nvd.nist.gov/vuln/detail/CVE-2019-1387){: external}, [CVE-2019-19604](https://nvd.nist.gov/vuln/detail/CVE-2019-19604){: external}, and [CVE-2019-15165](https://nvd.nist.gov/vuln/detail/CVE-2019-15165){: external}. |
 {: caption="Changes since version 1.13.12_1545" caption-side="bottom"}
 
-### Changelog for master fix pack 1.13.12_1546, released 17 December 2019
+### Change log for master fix pack 1.13.12_1546, released 17 December 2019
 {: #11312_1546}
 
 The following table shows the changes that are in the master fix pack 1.13.12_1546.
@@ -90,7 +90,7 @@ The following table shows the changes that are in the master fix pack 1.13.12_15
 | Key Management Service provider | 254 | 270 | Improves performance of secret management by minimizing the number of data encryption keys (DEKs) that are used to unwrap secrets in the cluster. In addition, the {{site.data.keyword.keymanagementservicelong_notm}} Go client is updated. |
 {: caption="Changes since version 1.13.12_1545" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.13.12_1545, released 9 December 2019
+## Change log for worker node fix pack 1.13.12_1545, released 9 December 2019
 {: #11312_1545_worker}
 
 The following table shows the changes that are in the worker node fix pack 1.13.12_1545.
@@ -103,7 +103,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 | Ubuntu 18.04 kernel and packages | 4.15.0-70-generic | 4.15.0-72-generic | Updated worker node images with a kernel and package updates for [CVE-2019-11745](https://nvd.nist.gov/vuln/detail/CVE-2019-11745){: external}, [CVE-2019-16168](https://nvd.nist.gov/vuln/detail/CVE-2019-16168){: external}, [CVE-2019-19330](https://nvd.nist.gov/vuln/detail/CVE-2019-19330){: external}, and [CVE-2019-5827](https://nvd.nist.gov/vuln/detail/CVE-2019-5827){: external}.|
 {: caption="Changes since version 1.13.12_1544" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.13.12_1544, released 25 November 2019
+## Change log for worker node fix pack 1.13.12_1544, released 25 November 2019
 {: #11312_1544_worker}
 
 The following table shows the changes that are in the worker node fix pack 1.13.12_1544.
@@ -115,7 +115,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 | Ubuntu 18.04 kernel and packages | 4.15.0-66-generic | 4.15.0-70-generic | Updated worker node images with a kernel fix for unexpected configure fair group scheduler (CFS) throttling. The kernel and package updates resolve [CVE-2018-12207](https://nvd.nist.gov/vuln/detail/CVE-2018-12207){: external}, [CVE-2019-0154](https://nvd.nist.gov/vuln/detail/CVE-2019-0154){: external}, [CVE-2019-0155](https://nvd.nist.gov/vuln/detail/CVE-2019-0155){: external}, [CVE-2019-11135](https://nvd.nist.gov/vuln/detail/CVE-2019-11135){: external}, [CVE-2019-15098](https://nvd.nist.gov/vuln/detail/CVE-2019-15098){: external}, [CVE-2019-17666](https://nvd.nist.gov/vuln/detail/CVE-2019-17666){: external}, and [CVE-2019-6477](https://nvd.nist.gov/vuln/detail/CVE-2019-6477){: external}. |
 {: caption="Changes since version 1.13.12_1541" caption-side="bottom"}
 
-## Changelog for master fix pack 1.13.12_1544, released 21 November 2019
+## Change log for master fix pack 1.13.12_1544, released 21 November 2019
 {: #11312_1544}
 
 The following table shows the changes that are in the master fix pack 1.13.12_1544.
@@ -128,7 +128,7 @@ The following table shows the changes that are in the master fix pack 1.13.12_15
 | Key Management Service provider | 237 | 254 | Updated to use `Go` version 1.12.13. |
 {: caption="Changes since version 1.13.12_1541" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.13.12_1541, released 11 November 2019
+## Change log for worker node fix pack 1.13.12_1541, released 11 November 2019
 {: #11312_1541_worker}
 
 The following table shows the changes that are in the worker node fix pack 1.13.12_1541.
@@ -140,7 +140,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 | Ubuntu 18.04 packages | N/A | N/A | Updated worker node images with package updates for [CVE-2019-11481](https://nvd.nist.gov/vuln/detail/CVE-2019-11481){: external}, [CVE-2019-11482](https://nvd.nist.gov/vuln/detail/CVE-2019-11482){: external}, [CVE-2019-11483](https://nvd.nist.gov/vuln/detail/CVE-2019-11483){: external}, [CVE-2019-11485](https://nvd.nist.gov/vuln/detail/CVE-2019-11485){: external}, [CVE-2019-12290](https://nvd.nist.gov/vuln/detail/CVE-2019-12290){: external}, [CVE-2019-14866](https://nvd.nist.gov/vuln/detail/CVE-2019-14866){: external}, [CVE-2019-15790](https://nvd.nist.gov/vuln/detail/CVE-2019-15790){: external}, [CVE-2019-18218](https://nvd.nist.gov/vuln/detail/CVE-2019-18218){: external}, [CVE-2019-18224](https://nvd.nist.gov/vuln/detail/CVE-2019-18224){: external}, and [CVE-2019-18277](https://nvd.nist.gov/vuln/detail/CVE-2019-18277){: external}.|
 {: caption="Changes since version 1.13.12_1540" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.13.12_1540, released 28 October 2019
+## Change log for worker node fix pack 1.13.12_1540, released 28 October 2019
 {: #11312_1540}
 
 The following table shows the changes that are in the worker node fix pack `1.13.12_1540`.
@@ -153,7 +153,7 @@ The following table shows the changes that are in the worker node fix pack `1.13
 | Ubuntu 16.04 packages and kernel | 4.4.0-165-generic | 4.4.0-166-generic | Updated worker node images with kernel and package updates for [CVE-2017-18232](https://nvd.nist.gov/vuln/detail/CVE-2017-18232){: external}, [CVE-2018-21008](https://nvd.nist.gov/vuln/detail/CVE-2018-21008){: external}, [CVE-2019-13117](https://nvd.nist.gov/vuln/detail/CVE-2019-13117){: external}, [CVE-2019-13118](https://nvd.nist.gov/vuln/detail/CVE-2019-13118){: external}, [CVE-2019-14287](https://nvd.nist.gov/vuln/detail/CVE-2019-14287){: external}, [CVE-2019-14821](https://nvd.nist.gov/vuln/detail/CVE-2019-14821){: external}, and [CVE-2019-18197](https://nvd.nist.gov/vuln/detail/CVE-2019-18197){: external}. |
 {: caption="Changes since version 1.13.12_1539" caption-side="bottom"}
 
-## Changelog for master fix pack 1.13.12_1539, released 22 October 2019
+## Change log for master fix pack 1.13.12_1539, released 22 October 2019
 {: #11312_1539}
 
 The following table shows the changes that are in the master fix pack `1.13.12_1539`.
@@ -170,7 +170,7 @@ The following table shows the changes that are in the master fix pack `1.13.12_1
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 153 | 159 | Updated image for [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}, and [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276){: external}. |
 {: caption="Changes since version 1.13.11_1538" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.13.11_1538, released 14 October 2019
+## Change log for worker node fix pack 1.13.11_1538, released 14 October 2019
 {: #11311_1538_worker}
 
 The following table shows the changes that are in the worker node fix pack 1.13.11_1538.
@@ -185,7 +185,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 {: caption="Table 1. Changes since version 1.13.11_1537" caption-side="bottom"}
 
 
-## Changelog for 1.13.11_1537, released 1 October 2019
+## Change log for 1.13.11_1537, released 1 October 2019
 {: #11311_1537}
 
 The following table shows the changes that are in the patch 1.13.11_1537.
@@ -207,7 +207,7 @@ The following table shows the changes that are in the patch 1.13.11_1537.
 |Ubuntu 16.04 kernel and packages|4.4.0-161-generic|4.4.0-164-generic|Updated worker node images with kernel and package updates for [CVE-2019-14835](https://nvd.nist.gov/vuln/detail/CVE-2019-14835). |
 {: caption="Changes since version 1.13.10_1536" caption-side="top"}
 
-## Changelog for worker node fix pack 1.13.10_1536, released 16 September 2019
+## Change log for worker node fix pack 1.13.10_1536, released 16 September 2019
 {: #11310_1536_worker}
 
 The following table shows the changes that are in the worker node fix pack 1.13.10_1536.
@@ -221,7 +221,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 | Ubuntu 18.04 packages and kernel | 4.15.0-58-generic | 4.15.0-62-generic | Updated worker node images with kernel and package updates for [CVE-2019-5481](https://nvd.nist.gov/vuln/detail/CVE-2019-5481){: external}, [CVE-2019-5482](https://nvd.nist.gov/vuln/detail/CVE-2019-5482){: external}, [CVE-2019-15903](https://nvd.nist.gov/vuln/detail/CVE-2019-15903){: external}, [CVE-2019-14283](https://nvd.nist.gov/vuln/detail/CVE-2019-14283){: external}, [CVE-2019-14284](https://nvd.nist.gov/vuln/detail/CVE-2019-14284){: external}, [CVE-2018-20852](https://nvd.nist.gov/vuln/detail/CVE-2018-20852){: external}, [CVE-2019-5010](https://nvd.nist.gov/vuln/detail/CVE-2019-5010){: external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){: external}, [CVE-2019-9740](https://nvd.nist.gov/vuln/detail/CVE-2019-9740){: external}, [CVE-2019-9947](https://nvd.nist.gov/vuln/detail/CVE-2019-9947){: external}, [CVE-2019-9948](https://nvd.nist.gov/vuln/detail/CVE-2019-9948){: external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){: external}, [CVE-2019-10160](https://nvd.nist.gov/vuln/detail/CVE-2019-10160){: external}, and [CVE-2019-15718](https://nvd.nist.gov/vuln/detail/CVE-2019-15718){: external}. |
 {: caption="Table 1. Changes since version 1.13.10_1535" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.13.10_1535, released 3 September 2019
+## Change log for worker node fix pack 1.13.10_1535, released 3 September 2019
 {: #11310_1535_worker}
 
 The following table shows the changes that are in the worker node fix pack 1.13.10_1535.
@@ -236,7 +236,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 | Ubuntu 18.04 packages | N/A | N/A | Updated worker node images with package updates for [CVE-2019-10222](https://nvd.nist.gov/vuln/detail/CVE-2019-10222){: external} and [CVE-2019-11922](https://nvd.nist.gov/vuln/detail/CVE-2019-11922){: external}. |
 {: caption="Table 1. Changes since version 1.13.9_1533" caption-side="bottom"}
 
-## Changelog for master fix pack 1.13.10_1534, released 28 August 2019
+## Change log for master fix pack 1.13.10_1534, released 28 August 2019
 {: #11310_1534}
 
 The following table shows the changes that are in the master fix pack 1.13.10_1534.
@@ -255,7 +255,7 @@ The following table shows the changes that are in the master fix pack 1.13.10_15
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 147 | 148 | Image updated for [CVE-2019-9512](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512){: external}, [CVE-2019-9514](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514){: external}, and [CVE-2019-14809](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809){: external}. |
 {: caption="Table 1. Changes since version 1.13.9_1533" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.13.9_1533, released 19 August 2019
+## Change log for worker node fix pack 1.13.9_1533, released 19 August 2019
 {: #1139_1533_worker}
 
 The following table shows the changes that are in the worker node fix pack 1.13.9_1533.
@@ -270,7 +270,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 | Ubuntu 18.04 kernel and packages | 4.15.0-55-generic | 4.15.0-58-generic | Updated worker node images with package updates for [CVE-2019-1125](https://nvd.nist.gov/vuln/detail/CVE-2019-1125){: external}, [CVE-2019-2101](https://nvd.nist.gov/vuln/detail/CVE-2019-2101){: external}, [CVE-2018-5383](https://nvd.nist.gov/vuln/detail/CVE-2018-5383){: external}, [CVE-2019-13233](https://nvd.nist.gov/vuln/detail/CVE-2019-13233){: external}, [CVE-2019-13272](https://nvd.nist.gov/vuln/detail/CVE-2019-13272){: external}, [CVE-2019-10126](https://nvd.nist.gov/vuln/detail/CVE-2019-10126){: external}, [CVE-2019-3846](https://nvd.nist.gov/vuln/detail/CVE-2019-3846){: external}, [CVE-2019-12818](https://nvd.nist.gov/vuln/detail/CVE-2019-12818){: external}, [CVE-2019-12984](https://nvd.nist.gov/vuln/detail/CVE-2019-12984){: external}, and [CVE-2019-12819](https://nvd.nist.gov/vuln/detail/CVE-2019-12819){: external}. |
 {: caption="Table 1. Changes since version 1.13.8_1530" caption-side="bottom"}
 
-## Changelog for master fix pack 1.13.9_1533, released 17 August 2019
+## Change log for master fix pack 1.13.9_1533, released 17 August 2019
 {: #1139_1533}
 
 The following table shows the changes that are in the master fix pack 1.13.9_1533.
@@ -283,7 +283,7 @@ The following table shows the changes that are in the master fix pack 1.13.9_153
 {: caption="Table 1. Changes since version 1.13.9_1532" caption-side="bottom"}
 
 
-## Changelog for master fix pack 1.13.9_1532, released 15 August 2019
+## Change log for master fix pack 1.13.9_1532, released 15 August 2019
 {: #1139_1532}
 
 The following table shows the changes that are in the master fix pack 1.13.9_1532.
@@ -304,7 +304,7 @@ The following table shows the changes that are in the master fix pack 1.13.9_153
 {: caption="Table 1. Changes since version 1.13.8_1530" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.13.8_1530, released 5 August 2019
+## Change log for worker node fix pack 1.13.8_1530, released 5 August 2019
 {: #1138_1530_worker}
 
 The following table shows the changes that are in the worker node fix pack 1.13.8_1530.
@@ -318,7 +318,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 {: caption="Table 1. Changes since version 1.13.8_1529" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.13.8_1529, released 22 July 2019
+## Change log for worker node fix pack 1.13.8_1529, released 22 July 2019
 {: #1138_1529_worker}
 
 The following table shows the changes that are in the worker node fix pack 1.13.8_1529.
@@ -332,7 +332,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 {: caption="Table 1. Changes since version 1.13.7_1528" caption-side="bottom"}
 
 
-## Changelog for master fix pack 1.13.8_1529, released 15 July 2019
+## Change log for master fix pack 1.13.8_1529, released 15 July 2019
 {: #1138_1529}
 
 The following table shows the changes that are in the master fix pack 1.13.8_1529.
@@ -349,7 +349,7 @@ The following table shows the changes that are in the master fix pack 1.13.8_152
 {: caption="Table 1. Changes since version 1.13.7_1528" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.13.7_1528, released 8 July 2019
+## Change log for worker node fix pack 1.13.7_1528, released 8 July 2019
 {: #1137_1528}
 
 The following table shows the changes that are in the worker node patch 1.13.7_1528.
@@ -364,7 +364,7 @@ The following table shows the changes that are in the worker node patch 1.13.7_1
 
 
 
-## Changelog for worker node fix pack 1.13.7_1527, released 24 June 2019
+## Change log for worker node fix pack 1.13.7_1527, released 24 June 2019
 {: #1137_1527}
 
 The following table shows the changes that are in the worker node patch 1.13.7_1527.
@@ -379,7 +379,7 @@ The following table shows the changes that are in the worker node patch 1.13.7_1
 | Max pods | N/A | N/A | Increased the limit of maximum number of pods for worker nodes with more than 11 CPU cores to be 10 pods per core, up to a maximum of 250 pods per worker node. |
 {: caption="Table 1. Changes since version 1.13.7_1526" caption-side="bottom"}
 
-## Changelog for 1.13.7_1526, released 17 June 2019
+## Change log for 1.13.7_1526, released 17 June 2019
 {: #1137_1526}
 
 The following table shows the changes that are in the patch 1.13.7_1526.
@@ -399,7 +399,7 @@ The following table shows the changes that are in the patch 1.13.7_1526.
 
 
 
-## Changelog for 1.13.6_1524, released 4 June 2019
+## Change log for 1.13.6_1524, released 4 June 2019
 {: #1136_1524}
 
 The following table shows the changes that are in the patch 1.13.6_1524.
@@ -416,7 +416,7 @@ The following table shows the changes that are in the patch 1.13.6_1524.
 | Trusted compute agent | 13c7ef0 | e8c6d72 | Updated image for [CVE-2018-10844](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844){: external}, [CVE-2018-10845](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845){: external}, [CVE-2018-10846](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846){: external}, [CVE-2019-3829](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829){: external}, [CVE-2019-3836](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836){: external}, [CVE-2019-9893](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893){: external}, [CVE-2019-5435](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435){: external}, and [CVE-2019-5436](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436){: external}. |
 {: caption="Table 1. Changes since version 1.13.6_1522" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.13.6_1522, released 20 May 2019
+## Change log for worker node fix pack 1.13.6_1522, released 20 May 2019
 {: #1136_1522}
 
 The following table shows the changes that are in the patch 1.13.6_1522.
@@ -430,7 +430,7 @@ The following table shows the changes that are in the patch 1.13.6_1522.
 {: caption="Table 1. Changes since version 1.13.6_1521" caption-side="bottom"}
 
 
-## Changelog for 1.13.6_1521, released 13 May 2019
+## Change log for 1.13.6_1521, released 13 May 2019
 {: #1136_1521}
 
 The following table shows the changes that are in the patch 1.13.6_1521.
@@ -449,7 +449,7 @@ The following table shows the changes that are in the patch 1.13.6_1521.
 {: caption="Table 1. Changes since version 1.13.5_1519" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.13.5_1519, released 29 April 2019
+## Change log for worker node fix pack 1.13.5_1519, released 29 April 2019
 {: #1135_1519}
 
 The following table shows the changes that are in the worker node fix pack 1.13.5_1519.
@@ -463,7 +463,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 {: caption="Table 1. Changes since version 1.13.5_1518" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.13.5_1518, released 15 April 2019
+## Change log for worker node fix pack 1.13.5_1518, released 15 April 2019
 {: #1135_1518}
 
 The following table shows the changes that are in the worker node fix pack 1.13.5_1518.
@@ -476,7 +476,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 {: caption="Table 1. Changes since version 1.13.5_1517" caption-side="bottom"}
 
 
-## Changelog for 1.13.5_1517, released 8 April 2019
+## Change log for 1.13.5_1517, released 8 April 2019
 {: #1135_1517}
 
 The following table shows the changes that are in the patch 1.13.5_1517.
@@ -495,7 +495,7 @@ The following table shows the changes that are in the patch 1.13.5_1517.
 {: caption="Table 1. Changes since version 1.13.4_1516" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.13.4_1516, released 1 April 2019
+## Change log for worker node fix pack 1.13.4_1516, released 1 April 2019
 {: #1134_1516}
 
 The following table shows the changes that are in the worker node fix pack 1.13.4_1516.
@@ -508,7 +508,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 | Worker node resource utilization | N/A | N/A | Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node). |
 {: caption="Table 1. Changes since version 1.13.4_1515" caption-side="bottom"}
 
-## Changelog for master fix pack 1.13.4_1515, released 26 March 2019
+## Change log for master fix pack 1.13.4_1515, released 26 March 2019
 {: #1134_1515}
 
 The following table shows the changes that are in the master fix pack 1.13.4_1515.
@@ -526,7 +526,7 @@ The following table shows the changes that are in the master fix pack 1.13.4_151
 
 
 
-## Changelog for 1.13.4_1513, released 20 March 2019
+## Change log for 1.13.4_1513, released 20 March 2019
 {: #1134_1513}
 
 The following table shows the changes that are in the patch 1.13.4_1513.
@@ -549,7 +549,7 @@ The following table shows the changes that are in the patch 1.13.4_1513.
 
 
 
-## Changelog for 1.13.4_1510, released 4 March 2019
+## Change log for 1.13.4_1510, released 4 March 2019
 {: #1134_1510}
 
 The following table shows the changes that are in the patch 1.13.4_1510.
@@ -571,7 +571,7 @@ The following table shows the changes that are in the patch 1.13.4_1510.
 {: caption="Table 1. Changes since version 1.13.2_1509" caption-side="bottom"}
 
 
-## Changelog for worker node fix pack 1.13.2_1509, released 27 February 2019
+## Change log for worker node fix pack 1.13.2_1509, released 27 February 2019
 {: #1132_1509}
 
 The following table shows the changes that are in the worker node fix pack 1.13.2_1509.
@@ -584,7 +584,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 | Kernel | 4.4.0-141 | 4.4.0-142 | Updated worker node images with kernel update for [CVE-2018-19407](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog){: external}. |
 {: caption="Table 1. Changes since version 1.13.2_1508" caption-side="bottom"}
 
-## Changelog for worker node fix pack 1.13.2_1508, released 15 February 2019
+## Change log for worker node fix pack 1.13.2_1508, released 15 February 2019
 {: #1132_1508}
 
 The following table shows the changes that are in the worker node fix pack 1.13.2_1508.
@@ -598,7 +598,7 @@ The following table shows the changes that are in the worker node fix pack 1.13.
 | Kubernetes `kubelet` configuration | N/A | N/A | Enabled the `ExperimentalCriticalPodAnnotation` feature gate to prevent critical static pod eviction. Set the `event-qps` option to `0` to prevent rate limiting event creation. |
 {: caption="Table 1. Changes since version 1.13.2_1507" caption-side="bottom"}
 
-## Changelog for 1.13.2_1507, released 5 February 2019
+## Change log for 1.13.2_1507, released 5 February 2019
 {: #1132_1507}
 
 The following table shows the changes that are in the patch 1.13.2_1507.

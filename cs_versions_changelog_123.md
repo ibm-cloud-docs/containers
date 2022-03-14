@@ -3,7 +3,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-03-14"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -39,7 +39,17 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the version 1.23 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.23.4_1520, released 3 March 2022
+### Change log for worker node fix pack 1.23.4_1522, released 14 March 2022
+{: #1234_1522}
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | 4.15.0-169-generic | 4.15.0-171-generic | Kernel and package updates for [CVE-2016-10228](https://nvd.nist.gov/vuln/detail/CVE-2016-10228){: external), [CVE-2019-25013](https://nvd.nist.gov/vuln/detail/CVE-2019-25013){: external), [CVE-2020-27618](https://nvd.nist.gov/vuln/detail/CVE-2020-27618){: external), [CVE-2020-29562](https://nvd.nist.gov/vuln/detail/CVE-2020-29562){: external), [CVE-2020-6096](https://nvd.nist.gov/vuln/detail/CVE-2020-6096){: external), [CVE-2021-3326](https://nvd.nist.gov/vuln/detail/CVE-2021-3326){: external), [CVE-2021-35942](https://nvd.nist.gov/vuln/detail/CVE-2021-35942){: external), [CVE-2021-3999](https://nvd.nist.gov/vuln/detail/CVE-2021-3999){: external), [CVE-2022-0001](https://nvd.nist.gov/vuln/detail/CVE-2022-0001){: external), [CVE-2022-23218](https://nvd.nist.gov/vuln/detail/CVE-2022-23218){: external), [CVE-2022-23219](https://nvd.nist.gov/vuln/detail/CVE-2022-23219){: external), [CVE-2022-25313](https://nvd.nist.gov/vuln/detail/CVE-2022-25313){: external), [CVE-2022-25314](https://nvd.nist.gov/vuln/detail/CVE-2022-25314){: external), [CVE-2022-25315](https://nvd.nist.gov/vuln/detail/CVE-2022-25315){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.23.4_1521" caption-side="top"}
+
+### Change log for master fix pack 1.23.4_1520, released 3 March 2022
 {: #1234_1520}
 
 | Component | Previous | Current | Description |
