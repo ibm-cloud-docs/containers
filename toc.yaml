@@ -1,6 +1,7 @@
 toc:
   properties:
     subcollection: containers
+    service-name: containers-kubernetes
     category: containers
     audience: service
     href: /docs/containers
