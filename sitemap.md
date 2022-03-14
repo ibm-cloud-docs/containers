@@ -3028,7 +3028,7 @@ subcollection: containers
 
 * [Setting up volume expansion](/docs/containers?topic=containers-vpc-block#vpc-block-volume-expand)
 
-    * [Expanding existing volumes](/docs/containers?topic=containers-vpc-block#expanding-existing-volumes)
+    * [Manually expanding volumes prior to add-on version 4.2](/docs/containers?topic=containers-vpc-block#expanding-existing-volumes)
 
 * [Backing up and restoring data](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
 
