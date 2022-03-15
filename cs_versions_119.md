@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-15"
 
 keywords: kubernetes, 1.19, versions, update, upgrade
 
@@ -11,7 +11,7 @@ subcollection: containers
 
 ---
 
-# (Deprecated) 1.19 version information and update actions
+# 1.19 version information and update actions (unsupported)
 {: #cs_versions_119}
 
 {{site.data.keyword.attribute-definition-list}}
@@ -19,8 +19,8 @@ subcollection: containers
 Review information about version 1.19 of {{site.data.keyword.containerlong}}, released 13 Oct 2020.
 {: shortdesc}
 
-Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 14 Mar 2022. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions_120) as soon as possible.
-{: deprecated}
+Kubernetes version 1.19 is unsupported.
+{: important}
 
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
 {: tip}

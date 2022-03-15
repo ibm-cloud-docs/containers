@@ -3,7 +3,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-03-15"
 
 keywords: kubernetes, containers
 
@@ -15,7 +15,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# (Deprecated) Version 1.19 CIS Kubernetes Benchmark
+# Version 1.19 CIS Kubernetes Benchmark (unsupported)
 {: #cis-benchmark-119}
 
 The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external} as a framework of specific steps to configure Kubernetes more securely and with standards that are commensurate to various industry regulations. This document contains the results of the version 1.5 CIS Kubernetes benchmark for clusters that run Kubernetes version 1.19. For more information or help understanding the benchmark, see [Using the benchmark](/docs/containers?topic=containers-cis-benchmark).

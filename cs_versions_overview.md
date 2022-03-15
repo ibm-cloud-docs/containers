@@ -52,8 +52,8 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
      - [Change log](/docs/containers?topic=containers-changelog_120)
 
 **Unsupported Kubernetes versions**: 
-:    1.5, 1.7, 1.8, 1.9, 1.10, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19
-     - [Archived change logs](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
+:    [1.19](/docs/containers?topic=containers-cs_versions_119), [1.18](/docs/containers?topic=containers-118_changelog), [1.17](/docs/containers?topic=containers-117_changelog), [1.16](/docs/containers?topic=containers-116_changelog), [1.15](/docs/containers?topic=containers-115_changelog), [1.14](/docs/containers?topic=containers-114_changelog), [1.13](/docs/containers?topic=containers-113_changelog), [1.12](/docs/containers?topic=containers-112_changelog), [1.11](/docs/containers?topic=containers-111_changelog), [1.10](/docs/containers?topic=containers-110_changelog), [1.9](/docs/containers?topic=containers-19_changelog), [1.8](/docs/containers?topic=containers-18_changelog), [1.7](/docs/containers?topic=containers-17_changelog), 1.6, 1.5
+
 
 ## Checking a cluster's Kubernetes server version
 {: #cs_server_version}
