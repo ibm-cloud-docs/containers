@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-14"
+lastupdated: "2022-03-15"
 
 keywords: kubernetes, release notes
 
@@ -25,6 +25,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## March 2022
 {: #release-mar-2022}
 
+
+
+### 15 March 2022
+{: #15mar2022}
+{: release-note}
+
+Version 1.19 unsupported 
+:   Clusters that run version 1.19 are unsupported. Update your clusters to at least [version 1.20](/docs/containers?topic=containers-cs_versions_120) as soon as possible.
 
 
 ### 14 March 2022
@@ -1039,7 +1047,7 @@ New! Kubernetes 1.21
 :   You can create or (/docs/containers?topic=containers-cs_versions_121)update your cluster to Kubernetes version 1.21. With Kubernetes 1.21, you get the latest stable enhancements from the community, such as stable `CronJob`, `EndpointSlice`, and `PodDisruptionBudget` resources. You also get enhancements to the {{site.data.keyword.cloud_notm}} product, such as a refreshed user interface experience. For more information, see the [blog announcement](https://www.ibm.com/cloud/blog/announcements/kubernetes-version-121-now-available-in-ibm-cloud-kubernetes-service){: external}.
 
 Deprecated Kubernetes 1.18
-:   With the release of Kubernetes 1.21, clusters that run version 1.18 are deprecated, with a tentative unsupported date of 10 October 2021. Update your cluster to at least [version 1.19](/docs/containers?topic=containers-cs_versions_119) as soon as possible.
+:   With the release of Kubernetes 1.21, clusters that run version 1.18 are deprecated, with a tentative unsupported date of 10 October 2021. Update your cluster to at least [version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119) as soon as possible.
 
 
 
@@ -1145,7 +1153,7 @@ New! PX-Backup is now available
 
 
 Calico KDD update in 1.19
-:   Added a step to check for Calico `NetworkPolicy` resources that are scoped to non-existent namespaces before [updating your cluster to Kubernetes version 1.19](/docs/containers?topic=containers-cs_versions_119#119_before).
+:   Added a step to check for Calico `NetworkPolicy` resources that are scoped to non-existent namespaces before [updating your cluster to Kubernetes version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119).
 
 
 
@@ -2011,7 +2019,7 @@ API key
 
 
 Benchmark for Kubernetes 1.19
-:   Review the [1.5 CIS Kubernetes benchmark results](/docs/containers?topic=containers-cis-benchmark-119) for clusters that run Kubernetes version 1.19.
+:   Review the [1.5 CIS Kubernetes benchmark results](/docs/containers?topic=containers-cis-benchmark) for clusters that run Kubernetes version 1.19.
 
 Huge pages
 :   In clusters that run Kubernetes 1.19 or later, you can [enable Kubernetes `HugePages` scheduling on your worker nodes](/docs/containers?topic=containers-kernel#huge-pages).
@@ -2047,7 +2055,7 @@ Ingress classes
 
 
 New! Certified Kubernetes version 1.19
-:   You can now create clusters that run Kubernetes version 1.19. To update an existing cluster, see the [Version 1.19 preparation actions](/docs/containers?topic=containers-cs_versions_119). The Kubernetes 1.19 release is also certified.
+:   You can now create clusters that run Kubernetes version 1.19. To update an existing cluster, see the [Version 1.19 preparation actions](/docs/containers?topic=containers-cs_versions#cs_v119). The Kubernetes 1.19 release is also certified.
 
 Deprecated: Kubernetes version 1.16
 :   With the release of version 1.19, clusters that run version 1.16 are deprecated. Update your clusters to at least [version 1.17](/docs/containers?topic=containers-cs_versions#cs_v117) today.

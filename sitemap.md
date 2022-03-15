@@ -208,6 +208,8 @@ subcollection: containers
 
 * [March 2022](/docs/containers?topic=containers-iks-release#release-mar-2022)
 
+    * [15 March 2022](/docs/containers?topic=containers-iks-release#15mar2022)
+
     * [14 March 2022](/docs/containers?topic=containers-iks-release#14mar2022)
 
     * [11 March 2022](/docs/containers?topic=containers-iks-release#11mar2022)
@@ -3869,31 +3871,33 @@ subcollection: containers
 
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
 
-    * [Version 1.18 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v118)
+    * [Version 1.19 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v119)
 
-    * [Version 1.17 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v117)
+    * [Version 1.18 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v118)
 
-    * [Version 1.16 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v116)
+    * [Version 1.17 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v117)
 
-    * [Version 1.15 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v115)
+    * [Version 1.16 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v116)
 
-    * [Version 1.14 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v114)
+    * [Version 1.15 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v115)
 
-    * [Version 1.13 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v113)
+    * [Version 1.14 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v114)
 
-    * [Version 1.12 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v112)
+    * [Version 1.13 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v113)
 
-    * [Version 1.11 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v111)
+    * [Version 1.12 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v112)
 
-    * [Version 1.10 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v110)
+    * [Version 1.11 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v111)
 
-    * [Version 1.9 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v19)
+    * [Version 1.10 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v110)
 
-    * [Version 1.8 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v18)
+    * [Version 1.9 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v19)
 
-    * [Version 1.7 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v17)
+    * [Version 1.8 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v18)
 
-    * [Version 1.5 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v1-5)
+    * [Version 1.7 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v17)
+
+    * [Version 1.5 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v1-5)
 
 [Kubernetes version changelogs](/docs/containers?topic=containers-changelog#changelog)
 
@@ -4352,23 +4356,11 @@ subcollection: containers
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-120#cis-benchmark-remediations-120)
 
 
-### Version 1.19
-{: #sitemap_version_119}
+### Archived Kubernetes version changelogs
+{: #sitemap_archived_kubernetes_version_changelogs}
 
 
-[(Deprecated) 1.19 version information and update actions](/docs/containers?topic=containers-cs_versions_119#cs_versions_119)
-
-* [Release timeline](/docs/containers?topic=containers-cs_versions_119#release_timeline_119)
-
-* [Preparing to update](/docs/containers?topic=containers-cs_versions_119#prep-up-119)
-
-    * [Update before master](/docs/containers?topic=containers-cs_versions_119#119_before)
-
-    * [Update after master](/docs/containers?topic=containers-cs_versions_119#119_after)
-
-    * [Update after worker nodes](/docs/containers?topic=containers-cs_versions_119#119_after_worker)
-
-[(Deprecated) Kubernetes version 1.19 change log](/docs/containers?topic=containers-changelog_119#changelog_119)
+[Kubernetes version 1.19 change log (unsupported as of 14 March 2022)](/docs/containers?topic=containers-changelog_119#changelog_119)
 
 * [Overview](/docs/containers?topic=containers-changelog_119#changelog_overview)
 
@@ -4490,54 +4482,7 @@ subcollection: containers
 
     * [Change log for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog_119#1192_1524)
 
-[(Deprecated) Version 1.19 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-119)
-
-* [1 Master Node Security Configuration](/docs/containers?topic=containers-cis-benchmark-119#cis-section-1-119)
-
-    * [1.1 Master Node Configuration Files](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-11-119)
-
-    * [1.2 API Server](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-12-119)
-
-    * [1.3 Controller Manager](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-13-119)
-
-    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-14-119)
-
-* [2 Etcd Node Configuration](/docs/containers?topic=containers-cis-benchmark-119#cis-section-2-119)
-
-* [3 Control Plane Configuration](/docs/containers?topic=containers-cis-benchmark-119#cis-section-3-119)
-
-    * [3.1 Authentication and Authorization](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-31-119)
-
-    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-32-119)
-
-* [4 Worker Node Security Configuration](/docs/containers?topic=containers-cis-benchmark-119#cis-section-4-119)
-
-    * [4.1 Worker Node Configuration Files](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-41-119)
-
-    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-42-119)
-
-* [5 Kubernetes Policies](/docs/containers?topic=containers-cis-benchmark-119#cis-section-5-119)
-
-    * [5.1 RBAC and Service Accounts](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-51-119)
-
-    * [5.2 Pod Security Policies](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-52-119)
-
-    * [5.3 Network Policies and CNI](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-53-119)
-
-    * [5.4 Secrets Management](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-54-119)
-
-    * [5.5 Extensible Admission Control](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-55-119)
-
-    * [5.6 General Policies](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-56-119)
-
-* [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-remediations-119)
-
-
-### Archived Kubernetes version changelogs
-{: #sitemap_archived_kubernetes_version_changelogs}
-
-
-[Version 1.18 changelog (Unsupported as of 10 October 2021)](/docs/containers?topic=containers-118_changelog#118_changelog)
+[Version 1.18 changelog (unsupported as of 10 October 2021)](/docs/containers?topic=containers-118_changelog#118_changelog)
 
 * [Change log for worker node fix pack 1.18.20_1566, released 27 September 2021](/docs/containers?topic=containers-118_changelog#11820_1566)
 

@@ -3,7 +3,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-03-14"
+lastupdated: "2022-03-15"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.19
 
@@ -14,14 +14,11 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# (Deprecated) Kubernetes version 1.19 change log
+# Kubernetes version 1.19 change log (unsupported as of 14 March 2022)
 {: #changelog_119}
 
-View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.19. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
+Version 1.19 is unsupported. You can review the following archive of 1.19 change logs.
 {: shortdesc}
-
-Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 14 Mar 2022. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
-{: deprecated}
 
 ## Overview
 {: #changelog_overview}

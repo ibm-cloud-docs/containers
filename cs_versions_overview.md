@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-14"
+lastupdated: "2022-03-15"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -49,13 +49,10 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 **Deprecated Kubernetes versions**:
 :    1.20
      - [Version information and update actions](/docs/containers?topic=containers-cs_versions_120)
-     - [Change log](/docs/containers?topic=containers-changelog_120) 
-:    1.19
-     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_119)
-     - [Change log](/docs/containers?topic=containers-changelog_119)
+     - [Change log](/docs/containers?topic=containers-changelog_120)
 
 **Unsupported Kubernetes versions**: 
-:    1.5, 1.7, 1.8, 1.9, 1.10, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18
+:    1.5, 1.7, 1.8, 1.9, 1.10, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19
      - [Archived change logs](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
 
 ## Checking a cluster's Kubernetes server version
@@ -119,7 +116,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 | [1.22](/docs/containers?topic=containers-cs_versions_122) | Yes | 29 Sep 2021 | Nov 2022 `†` |
 | [1.21](/docs/containers?topic=containers-cs_versions_121) | Yes | 09 Jun 2021 | Aug 2022 `†` |
 | [1.20](/docs/containers?topic=containers-cs_versions_120) | Deprecated | 16 Feb 2021 | May 2022 `†` |
-| [1.19](/docs/containers?topic=containers-cs_versions_119) | Deprecated | 13 Oct 2020 | 14 Mar 2022 `†` |
 {: caption="Release history for {{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
 Earlier versions of {{site.data.keyword.containerlong_notm}} are [unsupported](#k8s_version_archive).
@@ -160,11 +156,9 @@ If you wait until your cluster is two or more minor versions behind the oldest s
 
 See the list below for actions you should take before and after updating to specific versions:
 -  Version 1.23 [preparation actions](/docs/containers?topic=containers-cs_versions_123#prep-up-123)
--  Version 1.22 [preparation actions](/docs/containers?topic=containers-cs_versions_122#prep-up-122).
--  Version 1.21 [preparation actions](/docs/containers?topic=containers-cs_versions_121#prep-up-121).
--  **Deprecated**: Version 1.20 [preparation actions](/docs/containers?topic=containers-cs_versions_120#prep-up-120).
--  **Deprecated**: Version 1.19 [preparation actions](/docs/containers?topic=containers-cs_versions_119#prep-up-119).
--  [Archive](#k8s_version_archive) of unsupported versions.
+-  Version 1.22 [preparation actions](/docs/containers?topic=containers-cs_versions_122#prep-up-122)
+-  Version 1.21 [preparation actions](/docs/containers?topic=containers-cs_versions_121#prep-up-121)
+-  **Deprecated**: Version 1.20 [preparation actions](/docs/containers?topic=containers-cs_versions_120#prep-up-120)
 
 
 ## Archive
@@ -173,15 +167,23 @@ See the list below for actions you should take before and after updating to spec
 Find an overview of Kubernetes versions that are unsupported in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-### Version 1.18 (Unsupported)
+### Version 1.19 (unsupported)
+{: #cs_v119}
+
+As of 14 Mar 2022, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.19](/docs/containers?topic=containers-changelog_119) are unsupported.
+{: shortdesc}
+
+Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support.
+
+### Version 1.18 (unsupported)
 {: #cs_v118}
 
 As of 10 October 2021, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.18](/docs/containers?topic=containers-118_changelog) are unsupported.
 {: shortdesc}
 
-Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support.
+Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
 
-### Version 1.17 (Unsupported)
+### Version 1.17 (unsupported)
 {: #cs_v117}
 
 As of 2 July 2021, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.17](/docs/containers?topic=containers-117_changelog) are unsupported.
@@ -189,7 +191,7 @@ As of 2 July 2021, {{site.data.keyword.containerlong_notm}} clusters that run [K
 
 {[unsupported_n-2]
 
-### Version 1.16 (Unsupported)
+### Version 1.16 (unsupported)
 {: #cs_v116}
 
 As of 31 January 2021, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.16](/docs/containers?topic=containers-116_changelog) are unsupported.
@@ -197,7 +199,7 @@ As of 31 January 2021, {{site.data.keyword.containerlong_notm}} clusters that ru
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
 
-### Version 1.15 (Unsupported)
+### Version 1.15 (unsupported)
 {: #cs_v115}
 
 As of 22 September 2020, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.15](/docs/containers?topic=containers-115_changelog) are unsupported.
@@ -205,7 +207,7 @@ As of 22 September 2020, {{site.data.keyword.containerlong_notm}} clusters that 
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
 
-### Version 1.14 (Unsupported)
+### Version 1.14 (unsupported)
 {: #cs_v114}
 
 As of 31 May 2020, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.14](/docs/containers?topic=containers-114_changelog) are unsupported.
@@ -213,7 +215,7 @@ As of 31 May 2020, {{site.data.keyword.containerlong_notm}} clusters that run [K
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
 
-### Version 1.13 (Unsupported)
+### Version 1.13 (unsupported)
 {: #cs_v113}
 
 As of 22 February 2020, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.13](/docs/containers?topic=containers-113_changelog) are unsupported.
@@ -221,7 +223,7 @@ As of 22 February 2020, {{site.data.keyword.containerlong_notm}} clusters that r
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
 
-### Version 1.12 (Unsupported)
+### Version 1.12 (unsupported)
 {: #cs_v112}
 
 As of 3 November 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.12](/docs/containers?topic=containers-112_changelog) are unsupported.
@@ -229,7 +231,7 @@ As of 3 November 2019, {{site.data.keyword.containerlong_notm}} clusters that ru
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
 
-### Version 1.11 (Unsupported)
+### Version 1.11 (unsupported)
 {: #cs_v111}
 
 As of 20 July 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.11](/docs/containers?topic=containers-111_changelog) are unsupported.
@@ -237,7 +239,7 @@ As of 20 July 2019, {{site.data.keyword.containerlong_notm}} clusters that run [
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
 
-### Version 1.10 (Unsupported)
+### Version 1.10 (unsupported)
 {: #cs_v110}
 
 As of 16 May 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.10](/docs/containers?topic=containers-110_changelog) are unsupported.
@@ -245,7 +247,7 @@ As of 16 May 2019, {{site.data.keyword.containerlong_notm}} clusters that run [K
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
 
-### Version 1.9 (Unsupported)
+### Version 1.9 (unsupported)
 {: #cs_v19}
 
 As of 27 December 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.9](/docs/containers?topic=containers-19_changelog) are unsupported.
@@ -253,7 +255,7 @@ As of 27 December 2018, {{site.data.keyword.containerlong_notm}} clusters that r
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
 
-### Version 1.8 (Unsupported)
+### Version 1.8 (unsupported)
 {: #cs_v18}
 
 As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.8](/docs/containers?topic=containers-18_changelog) are unsupported.
@@ -261,7 +263,7 @@ As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that 
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
 
-### Version 1.7 (Unsupported)
+### Version 1.7 (unsupported)
 {: #cs_v17}
 
 As of 21 June 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.7](/docs/containers?topic=containers-17_changelog) are unsupported.
@@ -269,7 +271,7 @@ As of 21 June 2018, {{site.data.keyword.containerlong_notm}} clusters that run [
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes. To continue running your apps in {{site.data.keyword.containerlong_notm}}, [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
 
-### Version 1.5 (Unsupported)
+### Version 1.5 (unsupported)
 {: #cs_v1-5}
 
 As of 4 April 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.5.md) are unsupported.
