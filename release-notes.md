@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-14"
+lastupdated: "2022-03-15"
 
 keywords: kubernetes, release notes
 
@@ -25,6 +25,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## March 2022
 {: #release-mar-2022}
 
+
+
+### 15 March 2022
+{: #15mar2022}
+{: release-note}
+
+Version 1.19 unsupported 
+:   Clusters that run version 1.19 are unsupported. Update your clusters to at least [version 1.20](/docs/containers?topic=containers-cs_versions_120) as soon as possible.
 
 
 ### 14 March 2022

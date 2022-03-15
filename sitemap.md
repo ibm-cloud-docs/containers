@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-03-14"
+lastupdated: "2022-03-15"
 
 keywords: containers
 subcollection: containers
@@ -106,31 +106,51 @@ subcollection: containers
 
 * [Mortgage company trims costs and accelerates regulatory compliance](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage)
 
+    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage_ibmcloud)
+
 * [Payment tech company streamlines developer productivity, deploying AI-enabled tools to their partners 4 times faster](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech)
+
+    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech_ibmcloud)
 
 [Healthcare use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_health#cs_uc_health)
 
 * [Healthcare provider migrates workloads from inefficient VMs to Ops-friendly containers for reporting and patient systems](/docs/containers?topic=containers-cs_uc_health#uc_migrate)
 
+    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_health#uc_migrate_ibmcloud)
+
 * [Research nonprofit securely hosts sensitive data while it grows research with partners](/docs/containers?topic=containers-cs_uc_health#uc_research)
+
+    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_health#uc_research_ibmcloud)
 
 [Retail use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_retail#cs_uc_retail)
 
 * [Brick-and-mortar retailer shares data, by using APIs with global business partners to drive omnichannel sales](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)
 
+    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_retail#uc_data-share_ibmcloud)
+
 * [Traditional grocer increases customer traffic and sales with digital insights](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)
+
+    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_retail#uc_grocer_ibmcloud)
 
 [Transportation use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_transport#cs_uc_transport)
 
 * [Shipping company increases availability of worldwide systems for business partner ecosystem](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)
 
+    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_transport#uc_shipping_ibmcloud)
+
 * [Airline delivers innovative Human Resources (HR) benefits site in under 3 weeks](/docs/containers?topic=containers-cs_uc_transport#uc_airline)
+
+    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_transport#uc_airline_ibmcloud)
 
 [Government use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_gov#cs_uc_gov)
 
 * [Regional government improves collaboration and velocity with community Developers who combine public-private data](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup)
 
+    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_ibmcloud)
+
 * [Large public port secures exchange of port data and shipping manifests that connect public and private organizations](/docs/containers?topic=containers-cs_uc_gov#uc_port)
+
+    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_gov#uc_port_ibmcloud)
 
 
 ## Learning paths
@@ -187,6 +207,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [March 2022](/docs/containers?topic=containers-iks-release#release-mar-2022)
+
+    * [15 March 2022](/docs/containers?topic=containers-iks-release#15mar2022)
 
     * [14 March 2022](/docs/containers?topic=containers-iks-release#14mar2022)
 
@@ -3849,31 +3871,33 @@ subcollection: containers
 
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
 
-    * [Version 1.18 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v118)
+    * [Version 1.19 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v119)
 
-    * [Version 1.17 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v117)
+    * [Version 1.18 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v118)
 
-    * [Version 1.16 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v116)
+    * [Version 1.17 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v117)
 
-    * [Version 1.15 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v115)
+    * [Version 1.16 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v116)
 
-    * [Version 1.14 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v114)
+    * [Version 1.15 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v115)
 
-    * [Version 1.13 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v113)
+    * [Version 1.14 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v114)
 
-    * [Version 1.12 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v112)
+    * [Version 1.13 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v113)
 
-    * [Version 1.11 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v111)
+    * [Version 1.12 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v112)
 
-    * [Version 1.10 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v110)
+    * [Version 1.11 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v111)
 
-    * [Version 1.9 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v19)
+    * [Version 1.10 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v110)
 
-    * [Version 1.8 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v18)
+    * [Version 1.9 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v19)
 
-    * [Version 1.7 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v17)
+    * [Version 1.8 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v18)
 
-    * [Version 1.5 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v1-5)
+    * [Version 1.7 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v17)
+
+    * [Version 1.5 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v1-5)
 
 [Kubernetes version changelogs](/docs/containers?topic=containers-changelog#changelog)
 
@@ -3963,7 +3987,7 @@ subcollection: containers
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-123#cis-benchmark-remediations-123)
 
 
-### Version 1.22 (Default)
+### Version 1.22 (default)
 {: #sitemap_version_122_default}
 
 
@@ -4332,11 +4356,11 @@ subcollection: containers
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-120#cis-benchmark-remediations-120)
 
 
-### Version 1.19
-{: #sitemap_version_119}
+### Version 1.19 (unsupported)
+{: #sitemap_version_119_unsupported}
 
 
-[(Deprecated) 1.19 version information and update actions](/docs/containers?topic=containers-cs_versions_119#cs_versions_119)
+[1.19 version information and update actions (unsupported)](/docs/containers?topic=containers-cs_versions_119#cs_versions_119)
 
 * [Release timeline](/docs/containers?topic=containers-cs_versions_119#release_timeline_119)
 
@@ -4348,7 +4372,7 @@ subcollection: containers
 
     * [Update after worker nodes](/docs/containers?topic=containers-cs_versions_119#119_after_worker)
 
-[(Deprecated) Kubernetes version 1.19 change log](/docs/containers?topic=containers-changelog_119#changelog_119)
+[Kubernetes version 1.19 change log (unsupported as of 14 March 2022)](/docs/containers?topic=containers-changelog_119#changelog_119)
 
 * [Overview](/docs/containers?topic=containers-changelog_119#changelog_overview)
 
@@ -4470,7 +4494,7 @@ subcollection: containers
 
     * [Change log for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog_119#1192_1524)
 
-[(Deprecated) Version 1.19 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-119)
+[Version 1.19 CIS Kubernetes Benchmark (unsupported)](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-119)
 
 * [1 Master Node Security Configuration](/docs/containers?topic=containers-cis-benchmark-119#cis-section-1-119)
 
@@ -4513,11 +4537,11 @@ subcollection: containers
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-remediations-119)
 
 
-### Archived Kubernetes version changelogs
-{: #sitemap_archived_kubernetes_version_changelogs}
+### Archived Kubernetes version changelogs (1.18 and earlier)
+{: #sitemap_archived_kubernetes_version_changelogs_118_and_earlier}
 
 
-[Version 1.18 changelog (Unsupported as of 10 October 2021)](/docs/containers?topic=containers-118_changelog#118_changelog)
+[Version 1.18 changelog (unsupported as of 10 October 2021)](/docs/containers?topic=containers-118_changelog#118_changelog)
 
 * [Change log for worker node fix pack 1.18.20_1566, released 27 September 2021](/docs/containers?topic=containers-118_changelog#11820_1566)
 

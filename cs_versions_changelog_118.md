@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-03-14"
+lastupdated: "2022-03-15"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -13,7 +13,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Version 1.18 changelog (Unsupported as of 10 October 2021)
+# Version 1.18 changelog (unsupported as of 10 October 2021)
 {: #118_changelog}
 
 Version 1.18 is unsupported. You can review the following archive of 1.18 changelogs.

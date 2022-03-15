@@ -285,7 +285,7 @@ toc:
                     - cs_versions_changelog_123.md
                     - cs_benchmarks_123.md
                 - topicgroup:
-                    label: Version 1.22 (Default)
+                    label: Version 1.22 (default)
                     topics:
                     - cs_versions_122.md
                     - cs_versions_changelog_122.md
@@ -303,13 +303,13 @@ toc:
                     - cs_versions_changelog_120.md
                     - cs_benchmarks_120.md
                 - topicgroup:
-                    label: Version 1.19 
+                    label: Version 1.19 (unsupported)
                     topics:
                     - cs_versions_119.md
                     - cs_versions_changelog_119.md
                     - cs_benchmarks_119.md   
                 - topicgroup:
-                    label: Archived Kubernetes version changelogs
+                    label: Archived Kubernetes version changelogs (1.18 and earlier)
                     topics:
                     - cs_versions_changelog_118.md
                     - cs_versions_changelog_117.md
