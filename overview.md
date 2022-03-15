@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-03-15"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -45,7 +45,7 @@ With {{site.data.keyword.containerlong_notm}}, you can create your cluster of co
 
 [Classic clusters](/docs/containers?topic=containers-getting-started) are created on your choice of virtual or bare metal worker nodes that are connected to VLANs. If you require additional local disks, you can also choose one of the bare metal flavors that are designed for software-defined storage solutions, such as Portworx. Depending on the level of hardware isolation that you need, virtual worker nodes can be set up as shared or dedicated nodes, whereas bare metal machines are always set up as dedicated nodes.
 
-[VPC clusters](/docs/containers?topic=containers-getting-started) are created in your own Virtual Private Cloud that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. You use network access control lists to protect the subnets that your worker nodes are connected to. VPC clusters can be provisioned on shared virtual infrastructure only.
+[VPC clusters](/docs/containers?topic=containers-getting-started) are created in your own Virtual Private Cloud that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. You use network access control lists to protect the subnets that your worker nodes are connected to. Worker nodes on VPC clusters are created as virtual machines using either shared infrastructure or dedicated hosts.
 
 For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers). 
 
@@ -156,7 +156,6 @@ Review how you can learn about Kubernetes concepts and the terminology.
 
 * Familiarize yourself with the product by completing the [Creating clusters tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
 * Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this [course](https://cognitiveclass.ai/courses/kubernetes-course).
-
 
 
 
