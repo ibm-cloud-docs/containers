@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-03-15"
+lastupdated: "2022-03-16"
 
 keywords: containers
 subcollection: containers
@@ -207,6 +207,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [March 2022](/docs/containers?topic=containers-iks-release#release-mar-2022)
+
+    * [16 March 2022](/docs/containers?topic=containers-iks-release#16mar2022)
 
     * [15 March 2022](/docs/containers?topic=containers-iks-release#15mar2022)
 
@@ -1777,7 +1779,7 @@ subcollection: containers
 
     * [Features and limitations of KMS providers](/docs/containers?topic=containers-encryption#kms-keyprotect-features)
 
-* [Encrypting the Kubernetes master's local disk and secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect)
+* [Encrypting the Kubernetes secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect)
 
     * [Prerequisites](/docs/containers?topic=containers-encryption#kms_prereqs)
 
@@ -5558,7 +5560,7 @@ subcollection: containers
 
     * [Change log for 1.11.1, released 31 August 2021](/docs/containers?topic=containers-istio-changelog#1111)
 
-* [Version 1.10](/docs/containers?topic=containers-istio-changelog#v110)
+* [Version 1.10 (unsupported)](/docs/containers?topic=containers-istio-changelog#v110)
 
     * [Change log for 1.10.6, released 13 January 2022](/docs/containers?topic=containers-istio-changelog#1106)
 
@@ -5679,6 +5681,10 @@ subcollection: containers
 * [Change log for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
 
 [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog#ca_changelog)
+
+* [Version 1.1.0](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
+
+    * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
 
 * [Version 1.0.5](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
 

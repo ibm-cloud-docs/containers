@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-15"
+lastupdated: "2022-03-16"
 
 keywords: kubernetes, istio, add-on
 
@@ -133,6 +133,9 @@ Review the changes that are included in version 1.12.1 of the managed Istio add-
 ## Version 1.11
 {: #v111}
 
+The unsupported date for version 1.11 of the managed Istio add-on is tentatively set for 21 April 2022. Update your Istio components to at least version 1.12 as soon as possible. 
+{: important}
+
 ### Change log for 1.11.7, released 8 March 2022
 {: #1117}
 
@@ -235,11 +238,14 @@ Review the changes that are in version 1.11.1 of the managed Istio add-on.
 - Adds a postStart to the sidecar to enable the holdApplicationUntilProxyStarts option. Since the sidecar is normally last this doesn't impact default behavior where Istio places the sidecar as the last container. If you are adding containers to your pods, verify that they get added before the sidecar or are okay waiting for the sidecar to start.
 - For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
-## Version 1.10
+## Version 1.10 (unsupported)
 {: #v110}
 
 Review the changes that are in version 1.10 of the managed Istio add-on.
 {: shortdesc}
+
+Version 1.10 of the managed Istio add-on is unsupported. 
+{: deprecated}
 
 ### Change log for 1.10.6, released 13 January 2022
 {: #1106}
