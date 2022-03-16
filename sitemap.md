@@ -1779,7 +1779,7 @@ subcollection: containers
 
     * [Features and limitations of KMS providers](/docs/containers?topic=containers-encryption#kms-keyprotect-features)
 
-* [Encrypting the Kubernetes master's local disk and secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect)
+* [Encrypting the Kubernetes secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect)
 
     * [Prerequisites](/docs/containers?topic=containers-encryption#kms_prereqs)
 
