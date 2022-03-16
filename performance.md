@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-03-16"
 
 keywords: kubernetes, kernel
 
@@ -357,7 +357,7 @@ Containers:
 ```
 {: screen}
 
-If the `Last State` shows a `Reason` of `OOMKilled`, increase the memory requests in the `metrics-server-config` configmap.  Consider increasing the total CPU in 100 m increments or larger until the `metrics-server` is stable (runs for several hours or longer without being stopped due to out-of-memory).
+If the `Last State` shows a `Reason` of `OOMKilled`, increase the memory requests in the `metrics-server-config` ConfigMap in 100Mi increments or larger until the metrics-server is stable and runs for several hours or longer without being `OOMkilled`.
 ```sh
     Last State:     Terminated
       Reason:       OOMKilled
@@ -365,7 +365,7 @@ If the `Last State` shows a `Reason` of `OOMKilled`, increase the memory request
 ```
 {: screen}
 
-If the `Last state` shows a shows a `Reason` of `Error` and Events such as those in the following example, increase the memory requests in the `metrics-server-config` configmap.  Consider increasing the total memory in 100 Mi increments or larger until the metrics-server is stable (runs for several hours or longer without being stopped due to probe timeouts).
+If the `Last state` shows a shows a `Reason` of `Error` and Events such as those in the following example, increase the CPU requests in the `metrics-server-config` configmap in 100m increments or larger until the metrics-server is stable and runs for several hours or longer without being killed due to probe timeouts.
 ```sh
     Last State:     Terminated
       Reason: Error
