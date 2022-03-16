@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-03-16"
 
 keywords: kubernetes
 
@@ -34,7 +34,19 @@ Review the options to debug your clusters and find the root causes for failures.
     ```
     {: pre}
 
-2. Review the `State` of your cluster. If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, start [debugging the worker nodes](/docs/containers?topic=containers-debug_worker_nodes).
+1. Review the `State` of your cluster. If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time. For more information, see [cluster states](/docs/containers?topic=containers-cluster-states-reference). 
+
+1. Review the state of each worker node. For more information, see [worker node states](/docs/containers?topic=containers-worker-node-state-reference).
+    ```sh
+    ibmcloud ks worker ls -c CLUSTER
+    ```
+    {: pre}
+
+1. Review the [common worker node issues](/docs/containers?topic=containers-common_worker_nodes_issues). 
+
+1. Start [debugging the worker nodes](/docs/containers?topic=containers-debug_worker_nodes).
+
+1. Review the site map for additional [troubleshooting information](/docs/containers?topic=openshift-sitemap#sitemap_troubleshooting).
 
 
 
