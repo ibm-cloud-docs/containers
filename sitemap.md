@@ -5560,7 +5560,7 @@ subcollection: containers
 
     * [Change log for 1.11.1, released 31 August 2021](/docs/containers?topic=containers-istio-changelog#1111)
 
-* [Version 1.10](/docs/containers?topic=containers-istio-changelog#v110)
+* [Version 1.10 (unsupported)](/docs/containers?topic=containers-istio-changelog#v110)
 
     * [Change log for 1.10.6, released 13 January 2022](/docs/containers?topic=containers-istio-changelog#1106)
 
