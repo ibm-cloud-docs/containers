@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-03-16"
+lastupdated: "2022-03-17"
 
 keywords: containers
 subcollection: containers
@@ -207,6 +207,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [March 2022](/docs/containers?topic=containers-iks-release#release-mar-2022)
+
+    * [17 March 2022](/docs/containers?topic=containers-iks-release#17mar2022)
 
     * [16 March 2022](/docs/containers?topic=containers-iks-release#16mar2022)
 
@@ -5737,6 +5739,8 @@ subcollection: containers
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
 
 * [Version 4.2](/docs/containers?topic=containers-vpc_bs_changelog#042_is_block)
+
+    * [Change log for version 4.2.1_895, released 17 March 2022](/docs/containers?topic=containers-vpc_bs_changelog#421_895_is_block_relnote)
 
     * [Change log for version 4.2.0_890, released 28 February 2022](/docs/containers?topic=containers-vpc_bs_changelog#420_890_is_block_relnote)
 

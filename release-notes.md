@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-15"
+lastupdated: "2022-03-17"
 
 keywords: kubernetes, release notes
 
@@ -24,6 +24,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## March 2022
 {: #release-mar-2022}
+
+
+
+### 17 March 2022
+{: #17mar2022}
+{: release-note}
+
+{{site.data.keyword.block_storage_is_short}} add-on.
+:   [Version 4.2.1_895](/docs/containers?topic=containers-vpc_bs_changelog) is available.
 
 
   
@@ -48,7 +57,7 @@ Version 1.19 unsupported
 
 
 Worker node fix pack update.
-:   Kubernetes [1.23.4_1522](/docs/containers?topic=containers-changelog_123), [1.22.7_1543](/docs/containers?topic=containers-changelog_122), [1.21.10_1552](/docs/containers?topic=containers-changelog_121), [1.20.15_1573](/docs/containers?topic=containers-changelog_120), and [1.19.16_1579](/docs/containers?topic=containers-changelog_11).
+:   Kubernetes [1.23.4_1522](/docs/containers?topic=containers-changelog_123), [1.22.7_1543](/docs/containers?topic=containers-changelog_122), [1.21.10_1552](/docs/containers?topic=containers-changelog_121), [1.20.15_1573](/docs/containers?topic=containers-changelog_120), and [1.19.16_1579](/docs/containers?topic=containers-changelog_119).
 
 
 
