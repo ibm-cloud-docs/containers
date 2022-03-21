@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-03-18"
+lastupdated: "2022-03-21"
 
 keywords: containers
 subcollection: containers
@@ -207,6 +207,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [March 2022](/docs/containers?topic=containers-iks-release#release-mar-2022)
+
+    * [21 March 2022](/docs/containers?topic=containers-iks-release#21mar2022)
 
     * [17 March 2022](/docs/containers?topic=containers-iks-release#17mar2022)
 
@@ -3747,6 +3749,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.384](/docs/containers?topic=containers-cs_cli_changelog#cli-10384)
 
 * [Version 1.0.374](/docs/containers?topic=containers-cs_cli_changelog#cli-10374)
 

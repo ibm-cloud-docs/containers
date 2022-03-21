@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-23"
+lastupdated: "2022-03-21"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -963,6 +963,9 @@ For more information, see [Customizing the Ingress class](/docs/containers?topic
 Enforce authentication for your apps by configuring Ingress with [{{site.data.keyword.appid_full_notm}}](https://cloud.ibm.com/catalog/services/app-id){: external}.
 {: shortdesc}
 
+ALB OAuth Proxy add-on version 1.0.0 uses configuration snippet annotations (`nginx.ingress.kubernetes.io/configuration-snippet`) as part of the normal operation which is no longer supported by default for clusters created on or after 31 January 2022. All new clusters are deployed with `allow-snippet-annotations: "false"` configuration in the ALB's ConfigMap that prevents processing of Ingress resources having snippet annotations. You must upgrade the add-on to version 2.0.0 or edit the ALB's ConfigMap (`kube-system/ibm-k8s-controller-config`) and change `allow-snippet-annotations: "false"` to `allow-snippet-annotations: "true"`.
+{: important}
+
 1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.
 
     An {{site.data.keyword.appid_short_notm}} instance can be used in only one namespace in your cluster. If you want to configure {{site.data.keyword.appid_short_notm}} for Ingress resources in multiple namespaces, repeat the steps in this section to specify a unique {{site.data.keyword.appid_short_notm}} instance for the Ingress resources in each namespace.
@@ -997,17 +1000,8 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
     Secret name:  binding-<service_instance_name>
     ```
     {: screen}
-    
-4. Edit the ALB's ConfigMap (`kube-system/ibm-k8s-controller-config`) and change `allow-snippet-annotations: "false"` to `allow-snippet-annotations: "true"`.
-    ```sh
-    kubectl edit cm ibm-k8s-controller-config -n kube-system
-    ```
-    {: pre}
-        
-    Clusters created on or after 31 January 2022 by default no longer support server-snippet annotations in Ingress resources for the managed Kubernetes Ingress Controller (ALB). All new clusters are deployed with the `allow-server-snippets` configuration set to `false`, which prevents the ALB from correctly processing Ingress resources with the offending annotations. You must edit the ConfigMap manually to change this setting in order for the add-on to work.
-    {: note}
 
-5. Enable the ALB OAuth Proxy add-on in your cluster. This add-on creates and manages the following Kubernetes resources: an OAuth2-Proxy deployment for your {{site.data.keyword.appid_short_notm}} service instance, a secret that contains the configuration of the OAuth2-Proxy deployment, and an Ingress resource that configures ALBs to route incoming requests to the OAuth2-Proxy deployment for your {{site.data.keyword.appid_short_notm}} instance. The name of each of these resources begins with `oauth2-`.
+4. Enable the ALB OAuth Proxy add-on in your cluster. This add-on creates and manages the following Kubernetes resources: an OAuth2-Proxy deployment for your {{site.data.keyword.appid_short_notm}} service instance, a secret that contains the configuration of the OAuth2-Proxy deployment, and an Ingress resource that configures ALBs to route incoming requests to the OAuth2-Proxy deployment for your {{site.data.keyword.appid_short_notm}} instance. The name of each of these resources begins with `oauth2-`.
     1. Enable the `alb-oauth-proxy` add-on.
         ```sh
         ibmcloud ks cluster addon enable alb-oauth-proxy --cluster <cluster_name_or_ID>
@@ -1020,7 +1014,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
         ```
         {: pre}
 
-6. In the Ingress resources for apps where you want to add {{site.data.keyword.appid_short_notm}} authentication, add the following annotations to the `metadata.annotations` section.
+5. In the Ingress resources for apps where you want to add {{site.data.keyword.appid_short_notm}} authentication, add the following annotations to the `metadata.annotations` section.
     1. Add the following `auth-url` annotation. This annotation specifies the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance, which acts as the OIDC Relying Party (RP) for {{site.data.keyword.appid_short_notm}}. Note that all letters in the service instance name must be specified as lowercase.
         ```yaml
         ...
@@ -1064,21 +1058,24 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
             ```
             {: codeblock}
 
+        Kubernetes Ingress Controllers (ALBs) on clusters created on or after 31 January 2022 do not process Ingress resources having snippet annotations (e.g. `nginx.ingress.kubernetes.io/configuration-snippet`) by default as all new clusters are deployed with `allow-snippet-annotations: "false"` configuration in the ALB's ConfigMap. If you want to customize the `Authorization` header using the above configuration snippets, you need to edit the ALB's ConfigMap (`kube-system/ibm-k8s-controller-config`) and change `allow-snippet-annotations: "false"` to `allow-snippet-annotations: "true"`.
+        {: note}
+
     3. Optional: If your app supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy) in addition to or instead of the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy), add the `nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2-<App_ID_service_instance_name>/start?rd=$escaped_request_uri` annotation. Note that all letters in the service instance name must specified as lowercase.
         * If you specify this annotation, and the authentication for a client fails, the client is redirected to the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance. This OAuth2-Proxy, which acts as the OIDC Relying Party (RP) for {{site.data.keyword.appid_short_notm}}, redirects the client to your {{site.data.keyword.appid_short_notm}} login page for authentication.
         * If you don't specify this annotation, a client must authenticate with a valid bearer token. If the authentication for a client fails, the client's request is rejected with a `401 Unauthorized` error message.
 
-7. Re-apply your Ingress resources to enforce {{site.data.keyword.appid_short_notm}} authentication. After an Ingress resource with the appropriate annotations is re-applied, the ALB OAuth Proxy add-on deploys an OAuth2-Proxy deployment, creates a service for the deployment, and creates a separate Ingress resource to configure routing for the OAuth2-Proxy deployment messages. Do not delete these add-on resources.
+6. Re-apply your Ingress resources to enforce {{site.data.keyword.appid_short_notm}} authentication. After an Ingress resource with the appropriate annotations is re-applied, the ALB OAuth Proxy add-on deploys an OAuth2-Proxy deployment, creates a service for the deployment, and creates a separate Ingress resource to configure routing for the OAuth2-Proxy deployment messages. Do not delete these add-on resources.
     ```sh
     kubectl apply -f <app_ingress_resource>.yaml -n namespace
     ```
     {: pre}
 
-8. Verify that {{site.data.keyword.appid_short_notm}} authentication is enforced for your apps.
+7. Verify that {{site.data.keyword.appid_short_notm}} authentication is enforced for your apps.
     * If your apps supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy): Access your app's URL in a web browser. If {{site.data.keyword.appid_short_notm}} is correctly applied, you are redirected to an {{site.data.keyword.appid_short_notm}} authentication log-in page.
     * If your apps supports the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy): Specify your `Bearer` access token in the Authorization header of requests to the apps. To get your access token, see the [{{site.data.keyword.appid_short_notm}} documentation](/docs/appid?topic=appid-obtain-tokens). If {{site.data.keyword.appid_short_notm}} is correctly applied, the request is successfully authenticated and is routed to your app. If you send requests to your apps without an access token in the Authorization header, or if the access token is not accepted by {{site.data.keyword.appid_short_notm}}, then the request is rejected.
 
-9. Optional: You can customize the default behavior of the OAuth2-Proxy by creating a Kubernetes ConfigMap.
+8. Optional: You can customize the default behavior of the OAuth2-Proxy by creating a Kubernetes ConfigMap.
     1. Create a ConfigMap YAML file that specifies values for the OAuth2-Proxy settings that you want to change.
         ```yaml
         apiVersion: v1
