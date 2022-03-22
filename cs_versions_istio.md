@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-16"
+lastupdated: "2022-03-22"
 
 keywords: kubernetes, istio, add-on
 
@@ -26,6 +26,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | --- | --- | --- |
+| 1.13 | Yes | 1.21, 1.22, 1.23 |
 | 1.12 | Yes | 1.20, 1.21, 1.22 |
 | 1.11 | Yes | 1.20, 1.21, 1.22 |
 | 1.10 | No| - |
@@ -44,6 +45,30 @@ The Istio add-on is not yet supported on Kubernetes version 1.23. Do not update 
 ## Version 1.13
 {: #v113}
 
+### Changelog for 1.13.2, released 22 March 2022
+{: #1132}
+
+Review the changes that are included in version 1.13.2 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.13.1
+**Current version**: 1.13.2
+**Updates in this version:**
+- See the Istio release notes for [Istio 1.13.2](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.2/.){:external}.
+    - [CVE-2016-10228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10228){: external}
+    - [CVE-2019-25013](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-25013){: external}
+    - [CVE-2020-27618](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27618){: external}
+    - [CVE-2020-29562](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29562){: external}
+    - [CVE-2020-6096 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-6096 ){: external}
+    - [CVE-2021-27645](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27645){: external}
+    - [CVE-2021-3326](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3326){: external}
+    - [CVE-2021-35942](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-35942){: external}
+    - [CVE-2021-3998](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3998){: external}
+    - [CVE-2021-3999 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3999 ){: external}
+    - [CVE-2022-23218](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23218){: external}
+    - [CVE-2022-23219](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23219){: external}
+- For more information, see the [Istio security bulletin 2022-004](https://istio.io/latest/news/security/istio-security-2022-004/).
+
 ### Change log for 1.13.1, released March 9th, 2021
 {: #1131}
 
@@ -60,6 +85,31 @@ Review the changes that are included in version 1.13.1 of the managed Istio add-
 
 If you want to upgrade from Istio minor version 1.11 to version 1.12 and your Istio components were provisioned at version 1.10 or earlier, you **must** take steps to [set up your mutating and validating webhooks](/docs/containers?topic=containers-istio#istio_minor) before you upgrade. If you do not make these changes before upgrading to 1.12, the upgrade will stall.
 {: important}
+
+### Changelog for 1.12.5, released 22 March 2022
+{: #1125}
+
+Review the changes that are included in version 1.12.5 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.12.4
+**Current version**: 1.12.5
+**Updates in this version:**
+- See the Istio release notes for [Istio 1.12.5](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.5/.){:external}.
+- Resolves the following CVEs:
+    - [CVE-2016-10228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10228){: external}
+    - [CVE-2019-25013](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-25013){: external}
+    - [CVE-2020-27618](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27618){: external}
+    - [CVE-2020-29562](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29562){: external}
+    - [CVE-2020-6096 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-6096 ){: external}
+    - [CVE-2021-27645](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27645){: external}
+    - [CVE-2021-3326](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3326){: external}
+    - [CVE-2021-35942](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-35942){: external}
+    - [CVE-2021-3998](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3998){: external}
+    - [CVE-2021-3999 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3999 ){: external}
+    - [CVE-2022-23218](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23218){: external}
+    - [CVE-2022-23219](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23219){: external}
+- For more information, see the [Istio security bulletin 2022-004](https://istio.io/latest/news/security/istio-security-2022-004/).
 
 ### Change log for 1.12.4, released 8 March 2022
 {: #1124}
@@ -135,6 +185,35 @@ Review the changes that are included in version 1.12.1 of the managed Istio add-
 
 The unsupported date for version 1.11 of the managed Istio add-on is tentatively set for 21 April 2022. Update your Istio components to at least version 1.12 as soon as possible. 
 {: important}
+
+### Changelog for 1.11.8, released 22 March 2022
+{: #1118}
+
+Review the changes that are included in version 1.11.8 of the managed Istio add-on.
+{: shortdesc}
+
+This is the final update for version 1.11, which becomes unsupported on 21 April 2022. You can update the minor version of the addon from 1.10 to 1.11 for as long as 1.11 is supported. You can update the minor version of the addon from 1.11 to 1.12 for as long as 1.12 is supported. For more information, see [Upgrading the Istio add-on](/docs/containers?topic=containers-istio#istio_update).
+{: important}
+
+**Previous version**: 1.11.7
+**Current version**: 1.11.8
+**Updates in this version:**
+- See the Istio release notes for [Istio 1.11.8](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.8/.){:external}.
+- Resolves the following CVEs:
+    - [CVE-2016-10228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10228){: external}
+    - [CVE-2019-25013](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-25013){: external}
+    - [CVE-2020-27618](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27618){: external}
+    - [CVE-2020-29562](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29562){: external}
+    - [CVE-2020-6096 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-6096 ){: external}
+    - [CVE-2021-27645](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27645){: external}
+    - [CVE-2021-3326](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3326){: external}
+    - [CVE-2021-35942](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-35942){: external}
+    - [CVE-2021-3998](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3998){: external}
+    - [CVE-2021-3999 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3999 ){: external}
+    - [CVE-2022-23218](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23218){: external}
+    - [CVE-2022-23219](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23219){: external}
+- For more information, see the [Istio security bulletin 2022-004](https://istio.io/latest/news/security/istio-security-2022-004/){: external}.
+
 
 ### Change log for 1.11.7, released 8 March 2022
 {: #1117}
