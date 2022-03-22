@@ -104,7 +104,7 @@ Istio add-on
 {: release-note}
 
 Master fix pack update.
-:   Kubernetes [1.23.4_1520](/docs/containers?topic=containers-changelog_123#1234_1520), [1.22.7_1540](/docs/containers?topic=containers-changelog_122#1227_1540), [1.21.10_1550](/docs/containers?topic=containers-changelog_121#12110_1550), [1.20.15_1571](/docs/containers?topic=containers-changelog_120#12015_1571), and [1.19.16_1578](/docs/containers?topic=containers-changelog_119#11916_1578).
+:   Kubernetes [1.23.4_1520](/docs/containers?topic=containers-changelog_123#1234_1520), [1.22.7_1541](/docs/containers?topic=containers-changelog_122#1227_1541), [1.21.10_1550](/docs/containers?topic=containers-changelog_121#12110_1550), [1.20.15_1571](/docs/containers?topic=containers-changelog_120#12015_1571), and [1.19.16_1578](/docs/containers?topic=containers-changelog_119#11916_1578).
 
 
 
