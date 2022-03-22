@@ -4019,7 +4019,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.22.7_1543, released 14 March 2022](/docs/containers?topic=containers-changelog_122#1227_1543)
 
-    * [Change log for master fix pack 1.22.7_1540, released 3 March 2022](/docs/containers?topic=containers-changelog_122#1227_1540)
+    * [Change log for master fix pack 1.22.7_1541, released 3 March 2022](/docs/containers?topic=containers-changelog_122#1227_1541)
 
     * [Change log for worker node fix pack 1.22.7_1542, released 28 February 2022](/docs/containers?topic=containers-changelog_122#1227_1542)
 

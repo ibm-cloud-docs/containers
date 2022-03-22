@@ -49,8 +49,8 @@ Review the version 1.22 changelog.
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.22.7_1542" caption-side="top"}
 
-### Change log for master fix pack 1.22.7_1540, released 3 March 2022
-{: #1227_1540}
+### Change log for master fix pack 1.22.7_1541, released 3 March 2022
+{: #1227_1541}
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
