@@ -34,6 +34,9 @@ Hong Kong (`HKG01`) and Seoul (`SEO01`) are deprecated and become unsupported la
 Ingress ALB changelog updates
 :   Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog) for versions `1.1.2_2050_iks`, `1.1.1_1996_iks`, and `0.49.3_1994_iks`.
 
+Istio add-on
+:   Versions [`1.13.2`](/docs/containers?topic=containers-istio-changelog#1132), [`1.12.5`](/docs/containers?topic=containers-istio-changelog#1125), and [`1.11.8`](/docs/containers?topic=containers-istio-changelog#1118) are available. Note that this is the final update for version 1.11. 
+
 
 ### 21 March 2022
 {: #21mar2022}
