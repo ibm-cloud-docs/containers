@@ -277,7 +277,7 @@ toc:
             topics:
                 - cs_versions_overview.md
                 - cs_versions_changelog.md
-                - cs_benchmarks_overview.md
+                - benchmarks_overview.md
                 - topicgroup:
                     label: Version 1.23 
                     topics:
