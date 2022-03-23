@@ -25,6 +25,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## March 2022
 {: #release-mar-2022}
 
+## 24 March 2022
+{: #24mar2022}
+{: release-note}
+
+  
+ALB OAuth Proxy add-on
+:   Versions 1.0.0_1024 and 2.0.0_1023 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) are released.
+
+
 ### 22 March 2022
 {: #22mar2022}
 {: release-note}
