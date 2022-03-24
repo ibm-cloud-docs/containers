@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-23"
+lastupdated: "2022-03-24"
 
 keywords: kubernetes, release notes
 
@@ -25,13 +25,21 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## March 2022
 {: #release-mar-2022}
 
-## 24 March 2022
+
+### 24 March 2022
 {: #24mar2022}
 {: release-note}
+
+{{site.data.keyword.cos_full_notm}} plug-in
+:   Version `2.1.13` of the {{site.data.keyword.cos_full_notm}} plug-in [is available](/docs/containers?topic=containers-cos_plugin_changelog).
+
+{{site.data.keyword.block_storage_is_short}} add-on.
+:   [Version 4.2.2_900](/docs/containers?topic=containers-vpc_bs_changelog) is available.
 
   
 ALB OAuth Proxy add-on
 :   Versions 1.0.0_1024 and 2.0.0_1023 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) are released.
+
 
 
 ### 22 March 2022

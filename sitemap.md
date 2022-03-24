@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-03-23"
+lastupdated: "2022-03-24"
 
 keywords: containers
 subcollection: containers
@@ -208,7 +208,7 @@ subcollection: containers
 
 * [March 2022](/docs/containers?topic=containers-iks-release#release-mar-2022)
 
-* [24 March 2022](/docs/containers?topic=containers-iks-release#24mar2022)
+    * [24 March 2022](/docs/containers?topic=containers-iks-release#24mar2022)
 
     * [22 March 2022](/docs/containers?topic=containers-iks-release#22mar2022)
 
@@ -5762,6 +5762,8 @@ subcollection: containers
 
 * [Version 4.2](/docs/containers?topic=containers-vpc_bs_changelog#042_is_block)
 
+    * [Change log for version 4.2.2_900, released 24 March 2022](/docs/containers?topic=containers-vpc_bs_changelog#422_900_is_block_relnote)
+
     * [Change log for version 4.2.1_895, released 17 March 2022](/docs/containers?topic=containers-vpc_bs_changelog#421_895_is_block_relnote)
 
     * [Change log for version 4.2.0_890, released 28 February 2022](/docs/containers?topic=containers-vpc_bs_changelog#420_890_is_block_relnote)
@@ -5801,6 +5803,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.1.13, release 24 March 2022](/docs/containers?topic=containers-cos_plugin_changelog#02113_object_plugin)
 
 * [Change log for version 2.1.12, released 11 March 2022](/docs/containers?topic=containers-cos_plugin_changelog#02112_object_plugin)
 
