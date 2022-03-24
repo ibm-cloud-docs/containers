@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-23"
 
 keywords: kubernetes, oauth proxy, add-on
 
@@ -25,6 +25,13 @@ View information for version updates to the [ALB OAuth Proxy add-on](/docs/conta
 
 ## Version 2.0.0
 {: #2_0_0}
+
+### Version 2.0.0_1023, released on 24 March 2022.
+{: #2_0_0_1023}
+
+The add-on logic has changed. It does not add a configuration snippet annotation to the Ingress resources anymore. This change makes the add-on compatible with the default ALB configuration that disables the usage of snippet annotations.
+
+Resolves [CVE-2022-24921](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2022-24921){: external}
 
 ### Version 2.0.0_999, released on 28 February 2022.
 {: #2_0_0_999}
@@ -58,6 +65,11 @@ Version 2.0.0 of the add-on supports {{site.data.keyword.containerlong_notm}} cl
 
 ## Version 1.0.0
 {: #1_0_0}
+
+### Version 1.0.0_1024, released on 24 March 2022.
+{: #1_0_0_1024}
+
+Resolves [CVE-2022-24921](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2022-24921){: external}
 
 ### Version 1.0.0_1001, released on 28 February 2022.
 {: #1_0_0_1001}

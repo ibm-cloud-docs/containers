@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-03-23"
+lastupdated: "2022-03-24"
 
 keywords: containers
 subcollection: containers
@@ -207,6 +207,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-iks-release#iks-release)
 
 * [March 2022](/docs/containers?topic=containers-iks-release#release-mar-2022)
+
+    * [24 March 2022](/docs/containers?topic=containers-iks-release#24mar2022)
 
     * [22 March 2022](/docs/containers?topic=containers-iks-release#22mar2022)
 
@@ -5760,6 +5762,8 @@ subcollection: containers
 
 * [Version 4.2](/docs/containers?topic=containers-vpc_bs_changelog#042_is_block)
 
+    * [Change log for version 4.2.2_900, released 24 March 2022](/docs/containers?topic=containers-vpc_bs_changelog#422_900_is_block_relnote)
+
     * [Change log for version 4.2.1_895, released 17 March 2022](/docs/containers?topic=containers-vpc_bs_changelog#421_895_is_block_relnote)
 
     * [Change log for version 4.2.0_890, released 28 February 2022](/docs/containers?topic=containers-vpc_bs_changelog#420_890_is_block_relnote)
@@ -5799,6 +5803,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.1.13, release 24 March 2022](/docs/containers?topic=containers-cos_plugin_changelog#02113_object_plugin)
 
 * [Change log for version 2.1.12, released 11 March 2022](/docs/containers?topic=containers-cos_plugin_changelog#02112_object_plugin)
 
@@ -5850,6 +5856,8 @@ subcollection: containers
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
 
+    * [Version 2.0.0_1023, released on 24 March 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1023)
+
     * [Version 2.0.0_999, released on 28 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_999)
 
     * [Version 2.0.0_981, released on 10 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_981)
@@ -5861,6 +5869,8 @@ subcollection: containers
     * [Version 2.0.0_704, released on 15 September 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_704)
 
 * [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0)
+
+    * [Version 1.0.0_1024, released on 24 March 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_1024)
 
     * [Version 1.0.0_1001, released on 28 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_1001)
 
