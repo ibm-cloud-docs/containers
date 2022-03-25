@@ -2,19 +2,20 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-24"
+lastupdated: "2022-03-25"
 
 keywords: kubernetes, release notes
 
 subcollection: containers
 
+content-type: release-note
 
 ---
 
 {{site.data.keyword.attribute-definition-list}}
 
 # Release notes
-{: #iks-release}
+{: #containers-relnotes}
 
 Use the release notes to learn about the latest changes to the documentation that are grouped by month.
 {: shortdesc}
@@ -23,11 +24,11 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: note}
 
 ## March 2022
-{: #release-mar-2022}
+{: #containers-mar22}
 
 
 ### 24 March 2022
-{: #24mar2022}
+{: #containers-mar2422}
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in
@@ -43,10 +44,10 @@ ALB OAuth Proxy add-on
 
 
 ### 22 March 2022
-{: #22mar2022}
+{: #containers-mar2222}
 {: release-note}
 
-Hong Kong (`HKG01`) and Seoul (`SEO01`) are deprecated and become unsupported later this year. To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your Hong Kong (`HKG01`) and Seoul (`SEO01`) clusters by 28 September 2022. Clusters remaining in these data centers after 28 September 2022 will be removed. Cluster creation in these locations will be stopped on 29 April 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/get-support?topic=get-support-dc-closure).
+Hong Kong (`HKG02`) and Seoul (`SEO01`) are deprecated and become unsupported later this year. To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your Hong Kong (`HKG02`) and Seoul (`SEO01`) clusters by 28 September 2022. Clusters remaining in these data centers after 28 September 2022 will be removed. Cluster creation in these locations will be stopped on 29 April 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/get-support?topic=get-support-dc-closure).
 
 Ingress ALB changelog updates
 :   Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog) for versions `1.1.2_2050_iks`, `1.1.1_1996_iks`, and `0.49.3_1994_iks`.
@@ -56,14 +57,14 @@ Istio add-on
 
 
 ### 21 March 2022
-{: #21mar2022}
+{: #containers-mar2122}
 {: release-note}
 
 CLI changelog update
 :   The [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.384.
 
 ### 17 March 2022
-{: #17mar2022}
+{: #containers-mar1722}
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on.
@@ -72,14 +73,14 @@ CLI changelog update
 
   
 ### 16 March 2022
-{: #16mar2022}
+{: #containers-mar1622}
 {: release-note}
 
 Cluster autoscaler add-on
 :   Version [1.1.0_429](/docs/containers?topic=containers-ca_changelog) is available.
 
 ### 15 March 2022
-{: #15mar2022}
+{: #containers-mar1522}
 {: release-note}
 
 Version 1.19 unsupported 
@@ -87,7 +88,7 @@ Version 1.19 unsupported
 
 
 ### 14 March 2022
-{: #14mar2022}
+{: #containers-mar1422}
 {: release-note}
 
 
@@ -98,7 +99,7 @@ Worker node fix pack update.
 
 
 ### 11 March 2022
-{: #11mar2022}
+{: #containers-mar1122}
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in
@@ -107,7 +108,7 @@ Worker node fix pack update.
 
 
 ### 9 March 2022
-{: #9mar2022}
+{: #containers-mar922}
 {: release-note}
 
 Istio add-on
@@ -117,7 +118,7 @@ Istio add-on
 
 
 ### 8 March 2022
-{: #8mar2022}
+{: #containers-mar822}
 {: release-note}
 
 Master fix pack update.
@@ -134,7 +135,7 @@ Istio add-on
 
 
 ### 3 March 2022
-{: #3mar2022}
+{: #containers-mar322}
 {: release-note}
 
 
@@ -147,10 +148,10 @@ Maintenance Windows for {{site.data.keyword.containershort}} ALBs
 
 
 ## February 2022
-{: #release-feb-2022}
+{: #containers-feb22}
 
 ### 28 February 2022
-{: #28feb2022}
+{: #containers-feb2822}
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on.
@@ -172,7 +173,7 @@ Worker node fix pack
 
 
 ### 24 February 2022
-{: #24feb2022}
+{: #containers-feb2422}
 {: release-note}
 
 
@@ -190,7 +191,7 @@ Kubernetes Ingress image
 
 
 ### 23 February 2022
-{: #23feb2022}
+{: #containers-feb2322}
 {: release-note}
 
 Cluster autoscaler
@@ -205,7 +206,7 @@ Istio add-on
 
 
 ### 18 February 2022
-{: #18feb2022}
+{: #containers-feb1822}
 {: release-note}
 
 Container service CLI 
@@ -213,7 +214,7 @@ Container service CLI
 
 
 ### 17 February 2022
-{: #17feb2022}
+{: #containers-feb1722}
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in
@@ -224,7 +225,7 @@ Container service CLI
 
   
 ### 15 February 2022
-{: #15feb2022}
+{: #containers-feb1522}
 {: release-note}
 
 Istio add-on
@@ -233,7 +234,7 @@ Istio add-on
 
 
 ### 14 February 2022
-{: #14feb2022}
+{: #containers-feb1422}
 {: release-note}
 
 Worker node fix pack
@@ -249,7 +250,7 @@ Worker node fix pack
 
 
 ### 10 February 2022
-{: #10feb2022}
+{: #containers-feb1022}
 {: release-note}
 
 
@@ -265,7 +266,7 @@ ALB OAuth Proxy add-on
 
 
 ### 9 February 2022
-{: #9feb2022}
+{: #containers-feb922}
 {: release-note}
 
 
@@ -284,7 +285,7 @@ Deprecated and unsupported Kubernetes versions
 
 
 ### 3 February 2022
-{: #3feb2022}
+{: #containers-feb322}
 {: release-note}
 
 Istio add-on
@@ -295,10 +296,10 @@ Istio add-on
 
 
 ## January 2022
-{: #release-jan-2022}
+{: #containers-jan22}
 
 ### 31 January 2022
-{: #31jan2022}
+{: #containers-jan3122}
 
 Version changelog
 :   Fix pack update.
@@ -312,7 +313,7 @@ Version changelog
 
 
 ### 27 January 2022
-{: #27jan2022}
+{: #containers-jan2722}
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on.
@@ -326,7 +327,7 @@ Version changelog
 
 
 ### 26 January 2022
-{: #26jan2022}
+{: #containers-jan2622}
 {: release-note}
 
 ALB OAuth Proxy add-on
@@ -335,7 +336,7 @@ ALB OAuth Proxy add-on
 
 
 ### 25 January 2022
-{: #25jan2022}
+{: #containers-jan2522}
 {: release-note}
 
 
@@ -348,7 +349,7 @@ Kubernetes Ingress annotations
 
 
 ### 24 January 2022
-{: #24jan2022}
+{: #containers-jan2422}
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in
@@ -356,7 +357,7 @@ Kubernetes Ingress annotations
 
 
 ### 20 January 2022
-{: #20jan2022}
+{: #containers-jan2022}
 {: release-note}
 
 Cluster autoscaler add-on.
@@ -373,7 +374,7 @@ OpenShift Data Foundation
 
 
 ### 18 January 2022
-{: #18jan2022}
+{: #containers-jan1822}
 {: release-note}
 
 Review the release notes for January 2022.
@@ -391,7 +392,7 @@ Worker node fix pack update.
 
 
 ### 17 January 2022
-{: #17jan2022}
+{: #containers-jan1722}
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in
@@ -400,7 +401,7 @@ Worker node fix pack update.
 
 
 ### 13 January 2022
-{: #13jan2021}
+{: #containers-jan1321}
 {: release-note}
 
 Istio add-on
@@ -425,20 +426,20 @@ Istio add-on
 
 
 ### 4 January 2022
-{: #4jan2022}
+{: #containers-jan422}
 {: release-note}
 
 Worker node fix pack update
 :   Changelog documentation is available for worker node versions [`1.22.4_1534`](/docs/containers?topic=containers-changelog_122#1224_1534), [`1.21.7_1544`](/docs/containers?topic=containers-changelog_121#1217_1544), [`1.20.13_1566`](/docs/containers?topic=containers-changelog_120#12013_1566), and [`1.19.16_1573`](/docs/containers?topic=containers-changelog_119#11916_1573).
 
 ## December 2021
-{: #release-dec-2021}
+{: #containers-dec21}
 
 Review the release notes for December 2021.
 {: shortdesc}
 
 ### 20 December 2021
-{: #20dec2021}
+{: #containers-dec2021}
 {: release-note}
 
 
@@ -451,7 +452,7 @@ Deprecated and unsupported Kubernetes versions
 
 
 ### 14 December 2021
-{: #14dec2021}
+{: #containers-dec1421}
 {: release-note}
 
 
@@ -461,7 +462,7 @@ Istio add-on
 
 
 ### 7 December 2021
-{: #7dec2021}
+{: #containers-dec721}
 {: release-note}
 
 
@@ -475,7 +476,7 @@ Master fix pack update
 
 
 ### 6 December 2021
-{: #6dec2021}
+{: #containers-dec621}
 {: release-note}
 
 
@@ -486,7 +487,7 @@ Worker node fix pack update
 
 
 ### 2 December 2021
-{: #2dec2021}
+{: #containers-dec221}
 {: release-note}
 
 
@@ -498,14 +499,14 @@ Worker node fix pack update
 
 
 ## November 2021
-{: #release-nov-2021}
+{: #containers-nov21}
 
 Review the release notes for November 2021.
 {: shortdesc}
 
 
 ### 29 November 2021
-{: #29nov2021}
+{: #containers-nov2921}
 {: release-note}
 
 Container service CLI 
@@ -514,7 +515,7 @@ Container service CLI
 
 
 ### 22 November 2021
-{: #22nov2021}
+{: #containers-nov2221}
 {: release-note}
 
 Worker node fix pack update
@@ -528,7 +529,7 @@ Cluster autoscaler add-on.
 
 
 ### 19 November 2021
-{: #19nov2021}
+{: #containers-nov1921}
 {: release-note}
 
 
@@ -542,7 +543,7 @@ Kubernetes Ingress image
 
 
 ### 18 November 2021
-{: #18nov2021}
+{: #containers-nov1821}
 {: release-note}
 
 {{site.data.keyword.cloudaccesstraillong_notm}} and {{site.data.keyword.at_full_notm}}
@@ -553,7 +554,7 @@ Kubernetes Ingress image
 
   
 ### 17 November 2021
-{: #17nov2021}
+{: #containers-nov1721}
 {: release-note}
 
 Worker node fix pack update
@@ -561,28 +562,28 @@ Worker node fix pack update
 
 
 ### 15 November 2021
-{: #15nov2021}
+{: #containers-nov1521}
 {: release-note}
 
 CLI changelog
 :   The [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.344. 
 
 ### 12 November 2021
-{: #12nov2021}
+{: #containers-nov1221}
 {: release-note}
 
 Master fix pack updates
 :   Changelog documentation is available for version  [`1.22.2_1526`](/docs/containers?topic=containers-changelog_122#1222_1526), [`1.21.5_1536`](/docs/containers?topic=containers-changelog_121#1215_1536), [`1.20.11_1558`](/docs/containers?topic=containers-changelog_120#12011_1558), and [`1.19.15_1565`](/docs/containers?topic=containers-changelog_119#11915_1565).
 
 ### 10 November 2021
-{: #10nov2021}
+{: #containers-nov1021}
 {: release-note}
 
 Worker node fix pack update
 :   Changelog documentation is available for version [`1.22.2_1528`](/docs/containers?topic=containers-changelog_122#1222_1528), [`1.21.5_1538`](/docs/containers?topic=containers-changelog_121#1215_1538), [`1.20.11_1560`](/docs/containers?topic=containers-changelog_120#12011_1560), and [`1.19.15_1567`](/docs/containers?topic=containers-changelog_119#11915_1567).
 
 ### 8 November 2021
-{: #8nov2021}
+{: #containers-nov821}
 {: release-note}
 
 Update commands to use `docker build`
@@ -590,7 +591,7 @@ Update commands to use `docker build`
 
 
 ### 4 November 2021
-{: #4nov2021}
+{: #containers-nov421}
 {: release-note}
 
 IAM trusted profiles for pod authorization
@@ -598,7 +599,7 @@ IAM trusted profiles for pod authorization
 
 
 ### 2 November 2021
-{: #2nov2021}
+{: #containers-nov221}
 {: release-note}
 
 Istio add-on change log
@@ -607,48 +608,48 @@ Istio add-on change log
 
 
 ## October 2021
-{: #release-oct-2021}
+{: #containers-oct21}
 
 Review the release notes for October 2021.
 {: shortdesc}
 
 ### 28 October 2021
-{: #28oct2021}
+{: #containers-oct2821}
 {: release-note}
 
 Istio add-on change log
 :   [Version `1.10.5`](/docs/containers?topic=containers-istio-changelog#1105) of the Istio managed add-on is released.
 
 ### 26 October 2021
-{: #26oct2021}
+{: #containers-oct2621}
 {: release-note}
 
 CLI changelog
 :   The [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.334. 
 
 ### 25 October 2021
-{: #25oct2021}
+{: #containers-oct2521}
 {: release-note}
 
 Worker node fix pack update
 :   Changelog documentation is available for version [`1.22.2_1527`](/docs/containers?topic=containers-changelog_122#1222_1527), [`1.21.5_1537`](/docs/containers?topic=containers-changelog_121#1215_1537), [`1.20.11_1559`](/docs/containers?topic=containers-changelog_120#12011_1559), and [`1.19.15_1566`](/docs/containers?topic=containers-changelog_119#11915_1566).
 
 ### 22 October 2021
-{: #22oct2021}
+{: #containers-oct2221}
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in.
 :   [Version 2.1.6](/docs/containers?topic=containers-cos_plugin_changelog) is released.
 
 ### 19 October 2021
-{: #19oct2021}
+{: #containers-oct1921}
 {: release-note}
 
 Ingress ALB changelog updates
 :   Updated the [Ingress ALB changelog](/docs/containers?topic=containers-iks-release) for versions `0.49.3_1745_iks` and `1.0.3_1730_iks`.
 
 ### 18 October 2021
-{: #18oct2021}
+{: #containers-oct1821}
 {: release-note}
 
 New troubleshooting topic
@@ -657,14 +658,14 @@ New troubleshooting topic
 
 
 ### 13 October 2021
-{: #13oct2021}
+{: #containers-oct1321}
 {: release-note}
 
 CLI changelog
 :   The [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.331. 
 
 ### 11 October 2021
-{: #11oct2021}
+{: #containers-oct1121}
 {: release-note}
 
 
@@ -678,7 +679,7 @@ Worker node fix pack update
 :   Changelog documentation is available for version [`1.22.2_1524`](/docs/containers?topic=containers-changelog_122#1222_1524), [`1.21.5_1533`](/docs/containers?topic=containers-changelog_121#1215_1533), [`1.20.11_1555`](/docs/containers?topic=containers-changelog_120#12011_1555), and [`1.19.15_1562`](/docs/containers?topic=containers-changelog_119#11915_1562).
 
 ### 7 October 2021
-{: #7oct2021}
+{: #containers-oct721}
 {: release-note}
 
 Istio add-on change log
@@ -690,7 +691,7 @@ Cluster autoscaler add-on.
 
 
 ### 6 October 2021
-{: #6oct2021}
+{: #containers-oct621}
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on.
@@ -698,7 +699,7 @@ Cluster autoscaler add-on.
 
 
 ### 5 October 2021
-{: #5oct2021}
+{: #containers-oct521}
 {: release-note}
 
 Updated supported, deprecated, and unsupported versions for strongSwan Helm chart.
@@ -711,13 +712,13 @@ Updated supported, deprecated, and unsupported versions for strongSwan Helm char
 
 
 ## September 2021
-{: #release-sep-2021}
+{: #containers-sep21}
 
 Review the release notes for September 2021.
 {: shortdesc}
 
 ### 29 September 2021
-{: #29sep2021}
+{: #containers-sep2921}
 {: release-note}
 
 
@@ -736,7 +737,7 @@ Master fix pack and worker node fix pack update
 
 
 ### 27 September 2021
-{: #27sep2021}
+{: #containers-sep2721}
 {: release-note}
 
 Master fix pack update
@@ -747,7 +748,7 @@ Worker node fix pack update
 :   Change log documentation is available for version [`1.18.20_1566`](/docs/containers?topic=containers-118_changelog#11820_1566), [`1.19.15_1561`](/docs/containers?topic=containers-changelog_119#11915_1561), [`12011_1554`](/docs/containers?topic=containers-changelog_120#12011_1554), and [`1.21.5_1532`](/docs/containers?topic=containers-changelog_121#1215_1532).
 
 ### 23 September 2021
-{: #23sep2021}
+{: #containers-sep2321}
 {: release-note}
 
 Review the release notes for 23 September 2021.
@@ -757,7 +758,7 @@ Istio add-on change log
 :   [Version `1.11.2`](/docs/containers?topic=containers-istio-changelog#1112) of the Istio managed add-on is released.
 
 ### 22 September 2021
-{: #22sep2021}
+{: #containers-sep2221}
 {: release-note}
 
 Review the release notes for 22 September 2021.
@@ -770,7 +771,7 @@ Ingress ALB version change log
 
 
 ### 16 September 2021
-{: #16sep2021}
+{: #containers-sep1621}
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on  
@@ -780,7 +781,7 @@ Ingress ALB version change log
 
 
 ### 14 September 2021
-{: #14sep2021}
+{: #containers-sep1421}
 {: release-note}
 
 Review the release notes for 14 September 2021.
@@ -794,14 +795,14 @@ Istio add-on change log
 
 
 ### 13 September 2021
-{: #13sep2021}
+{: #containers-sep1321}
 {: release-note}
 
 Worker node fix pack update
 :   Change log documentation is available for version [`1.18.20_1564`](/docs/containers?topic=containers-118_changelog#11820_1564), [`1.19.14_1559`](/docs/containers?topic=containers-changelog_119#11914_1559), [`1.20.10_1552`](/docs/containers?topic=containers-changelog_120#12010_1552), and [`1.21.4_1530`](/docs/containers?topic=containers-changelog_121#12104_1530).
 
 ### 9 September 2021
-{: #9sep2021}
+{: #containers-sep921}
 {: release-note}
 
 Ingress ALB changelog
@@ -810,7 +811,7 @@ Ingress ALB changelog
 
 
 ### 1 September 2021
-{: #1sep2021}
+{: #containers-sep121}
 {: release-note}
 
 Review the release notes for 1 September 2021.
@@ -824,13 +825,13 @@ Review the release notes for 1 September 2021.
 
 
 ## August 2021
-{: #aug21}
+{: #containers-aug21}
 
 Review the release notes for August 2021.
 {: shortdesc}
 
 ### 31 August 2021
-{: #31aug2021}
+{: #containers-aug3121}
 {: release-note}
 
 Review the release notes for 31 August 2021.
@@ -846,7 +847,7 @@ New! Sao Paulo multizone region
 :   Now, you can manage the encryption for the disk on your VPC worker nodes. For more information, see [VPC worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-vpc).
 
 ### 30 August 2021
-{: #30aug2021}
+{: #containers-aug3021}
 {: release-note}
 
 Review the release notes for 30 August 2021.
@@ -860,7 +861,7 @@ Worker node fix pack update
 
 
 ### 25 August 2021
-{: #26aug2021}
+{: #containers-aug2621}
 {: release-note}
 
 New! Create a cluster with a template
@@ -873,7 +874,7 @@ Master fix pack update changelog documentation
 :   Master fix pack update changelog documentation is available for version [1.21.4_ 1528](/docs/containers?topic=containers-changelog_121#1214_1528), [1.20.10_1550](/docs/containers?topic=containers-changelog_120#12010_1550), [1.19.14_1557](/docs/containers?topic=containers-changelog_119#11914_1557), and [1.18.20_1562](/docs/containers?topic=containers-118_changelog#11820_1562).
 
 ### 23 August 2021
-{: #23aug2021}
+{: #containers-aug2321}
 {: release-note}
 
 Registry token update
@@ -890,7 +891,7 @@ ALB OAuth Proxy
 
 
 ### 16 August 2021
-{: #16aug2021}
+{: #containers-aug1621}
 {: release-note}
 
 Worker node versions
@@ -899,7 +900,7 @@ Worker node versions
 
   
 ### 12 August 2021
-{: #12aug2021}
+{: #containers-aug1221}
 {: release-note}
 
 Istio add-on changelog
@@ -908,7 +909,7 @@ Istio add-on changelog
 
 
 ### 10 August 2021
-{: #10aug2021}
+{: #containers-aug1021}
 {: release-note}
 
 Ingress changelogs
@@ -922,14 +923,14 @@ ALB OAuth Proxy
  
 
 ### 9 August 2021
-{: #09aug2021}
+{: #containers-aug0921}
 {: release-note}
 
 CLI changelog
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.312](/docs/containers?topic=containers-cs_cli_changelog).
 
 ### 2 August 2021
-{: #02aug2021}
+{: #containers-aug0221}
 {: release-note}
 
 Ingress changelogs
@@ -939,10 +940,10 @@ Worker node versions
 :   Worker node fix pack update changelog documentation is available for version [1.21.3_1526](/docs/containers?topic=containers-changelog_121#1213_1526), [1.20.9_1548](/docs/containers?topic=containers-changelog_120#1209_1548), [1.19.13_1555](/docs/containers?topic=containers-changelog_119#11913_1555), and [1.18.20_1560](/docs/containers?topic=containers-118_changelog#11820_1560).
 
 ## July 2021
-{: #jul21} 
+{: #containers-jul21} 
 
 ### 27 July 2021
-{: #27july2021}
+{: #containers-july2721}
 {: release-note}
 
 New! IAM trusted profile support
@@ -952,7 +953,7 @@ Master versions
 :   Master fix pack update changelog documentation is available for version [1.21.3_1525](/docs/containers?topic=containers-changelog_121#1213_1525), [1.20.9_1547](/docs/containers?topic=containers-changelog_120#1209_1547), [1.19.13_1554](/docs/containers?topic=containers-changelog_119#11913_1554), and [1.18.20_1559](/docs/containers?topic=containers-118_changelog#11820_1559).
 
 ### 22 July 2021
-{: #22july2021}
+{: #containers-july2221}
 {: release-note}
 
 Istio add-on changelog
@@ -961,14 +962,14 @@ Istio add-on changelog
 
 
 ### 19 July 2021
-{: #19july2021}
+{: #containers-july1921}
 {: release-note}
 
 Worker node versions
 :   Worker node fix pack update changelog documentation is available for version [1.21.2_1524](/docs/containers?topic=containers-changelog_121#1212_1524), [1.20.8_1546](/docs/containers?topic=containers-changelog_120#1208_1546), [1.19.12_1553](/docs/containers?topic=containers-changelog_119#11912_1553), [1.18.29_1558](/docs/containers?topic=containers-118_changelog#11829_1558), and [1.17.17_1568](/docs/containers?topic=containers-117_changelog#11717_1568).
 
 ### 15 July 2021
-{: #15july2021}
+{: #containers-july1521}
 {: release-note}
 
 Istio add-on changelog
@@ -977,7 +978,7 @@ Istio add-on changelog
 
 
 ### 12 July 2021
-{: #12july2021}
+{: #containers-july1221}
 {: release-note}
 
 
@@ -988,7 +989,7 @@ Snapshots
 
 
 ### 6 July 2021
-{: #06july2021}
+{: #containers-july0621}
 {: release-note}
 
 Ingress changelogs
@@ -998,14 +999,14 @@ Worker node versions
 :   Worker node fix pack update changelog documentation is available for version [1.21.2_1523](/docs/containers?topic=containers-changelog_121#1212_1523), [1.20.8_1545](/docs/containers?topic=containers-changelog_120#1208_1545), [1.19.12_1552](/docs/containers?topic=containers-changelog_119#11912_1552), [1.18.20_1557](/docs/containers?topic=containers-118_changelog#11820_1557), and [1.17.17_1567](/docs/containers?topic=containers-117_changelog#11717_1567_worker).
 
 ### 2 July 2021
-{: #02july2021}
+{: #containers-july0221}
 {: release-note}
 
 Unsupported Kubernetes version 1.17
 :   To continue receiving important security updates and support, you must [update the cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately.
 
 ## June 2021
-{: #jun21}
+{: #containers-jun21}
 
 From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains for all clusters in {{site.data.keyword.containerlong_notm}}. Review the following actions that you must make to your Ingress setup.
 {: important}
@@ -1019,28 +1020,28 @@ From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai f
 - During the migration, an Akamai Global Traffic Management (GTM) health check was automatically created for any subdomains that had a Cloudflare health check. If you previously created a Cloudflare health check for a subdomain, and you create an Akamai health check for the subdomain after the migration, the two Akamai health checks might conflict. Note that Akamai GTM configurations don't support nested subdomains. In these cases, you can use the `ibmcloud ks nlb-dns monitor disable` command to disable the Akamai health check that the migration automatically configured for your subdomain.
 
 ### 28 June 2021
-{: #28june2021}
+{: #containers-june2821}
 {: release-note}
 
 Master versions
 :   Master fix pack update changelog documentation is available for version [1.21.2_1522](/docs/containers?topic=containers-changelog_121#1212_1522), [1.20.8_1544](/docs/containers?topic=containers-changelog_120#1208_1544), [1.19.12_1551](/docs/containers?topic=containers-changelog_119#11912_1551), [1.18.20_1556](/docs/containers?topic=containers-118_changelog#11820_1556), and [1.17.17_1567](/docs/containers?topic=containers-117_changelog#11717_1567).
 
 ### 24 June 2021
-{: #24june2021}
+{: #containers-june2421}
 {: release-note}
 
 CLI changelog
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.295](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 ### 23 June 2021
-{: #23june2021}
+{: #containers-june2321}
 {: release-note}
 
 Cluster autoscaler add-on
 :   [Version `1.0.3`](/docs/containers?topic=containers-ca_changelog) of the cluster autoscaler add-on is available.
 
 ### 22 June 2021
-{: #22june2021}
+{: #containers-june2221}
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in
@@ -1050,7 +1051,7 @@ Worker node versions
 :   Worker node fix pack update changelog documentation is available for version [1.21.1_1521](/docs/containers?topic=containers-changelog_121#1211_1521), [1.20.7_1543](/docs/containers?topic=containers-changelog_120#1207_1543), [1.19.11_1550](/docs/containers?topic=containers-changelog_119#11911_1550), [1.18.19_1555](/docs/containers?topic=containers-118_changelog#11819_1555) and [1.17.17_1566](/docs/containers?topic=containers-117_changelog#11717_1566).
 
 ### 21 June 2021
-{: #21june2021}
+{: #containers-june2121}
 {: release-note}
 
 Ingress changelogs
@@ -1062,7 +1063,7 @@ New! The `addon options` command is now available
 
 
 ### 17 June 2021
-{: #17june2021}
+{: #containers-june1721}
 {: release-note}
 
 
@@ -1073,14 +1074,14 @@ ALB OAuth Proxy
 
 
 ### 15 June 2021
-{: #15june2021}
+{: #containers-june1521}
 {: release-note}
 
 New! Private VPC NLB
 :   You can now create [private Network Load Balancers for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_priv) to expose apps in clusters that run version 1.19 and later.
 
 ### 10 June 2021
-{: #10june2021}
+{: #containers-june1021}
 {: release-note}
 
 Ingress changelogs
@@ -1089,7 +1090,7 @@ Ingress changelogs
 
 
 ### 9 June 2021
-{: #09june2021}
+{: #containers-june0921}
 {: release-note}
 
 
@@ -1110,21 +1111,21 @@ Expanded Troubleshooting
     - [Portworx](/docs/openshift?topic=openshift-debug_storage_px)
 
 ### 07 June 2021
-{: #07june2021}
+{: #containers-june0721}
 {: release-note}
 
 Worker node versions
 :   Worker node fix pack update changelog documentation is available for version [1.20.7_1542](/docs/containers?topic=containers-changelog_120#1207_1542), [1.19.11_1549](/docs/containers?topic=containers-changelog_119#11911_1549), [1.18.19_1554](/docs/containers?topic=containers-118_changelog#11819_1554), and [1.17.17_1565](/docs/containers?topic=containers-117_changelog#11717_1565).
 
 ### 3 June 2021
-{: #03june2021}
+{: #containers-june0321}
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in
 :   Version `2.0.8` of the {{site.data.keyword.cos_full_notm}} plug-in is released. Update your clusters to use the latest version. For more information, see the [{{site.data.keyword.cos_full_notm}} plug-in changelog](/docs/containers?topic=containers-cos_plugin_changelog).
 
 ### 2 June 2021
-{: #02june2021}
+{: #containers-june0221}
 {: release-note}
 
 
@@ -1135,14 +1136,14 @@ End of support for custom IBM Ingress image
 
 
 ## May 2021
-{: #may21}
+{: #containers-may21}
 
 
 
 
   
 ### 27 May 2021
-{: #27may2021}
+{: #containers-may2721}
 {: release-note}
 
 Istio add-on changelog
@@ -1151,7 +1152,7 @@ Istio add-on changelog
 
 
 ### 26 May 2021
-{: #26may2021}
+{: #containers-may2621}
 {: release-note}
 
 CLI changelog
@@ -1161,7 +1162,7 @@ Version 0.45.0 of the Kubernetes Ingress image
 :   Due to a [regression in the community Kubernetes Ingress NGINX code](https://github.com/kubernetes/ingress-nginx/issues/6931){: external}, trailing slashes (`/`) are removed from subdomains during TLS redirects.
 
 ### 24 May 2021
-{: #24may2021}
+{: #containers-may2421}
 {: release-note}
 
 
@@ -1173,7 +1174,7 @@ Worker node versions
 :   Worker node fix pack update changelog documentation is available for version [1.20.7_1541](/docs/containers?topic=containers-changelog_120#1207_1541), [1.19.11_1548](/docs/containers?topic=containers-changelog_119#11911_1548), [1.18.19_1553](/docs/containers?topic=containers-118_changelog#11819_1553), and [1.17.17_1564](/docs/containers?topic=containers-117_changelog#11717_1564).
 
 ### 17 May 2021
-{: #17may2021}
+{: #containers-may1721}
 {: release-note}
 
 Deprecated: Kubernetes web terminal.
@@ -1188,14 +1189,14 @@ Deprecated Ubuntu 16 end of support date
 :   The Ubuntu 16 worker node flavors were deprecated 1 December 2020, with an initial unsupported date of April 2021. To give customers more time to migrate to a newer Ubuntu version, the end of support date is extended to 31 December 2021. Before 31 December 2021, [update the worker pools in your cluster to run Ubuntu 18](/docs/containers?topic=containers-update#machine_type). For more information, see the [{{site.data.keyword.cloud_notm}} blog](https://www.ibm.com/cloud/blog/announcements/new-bare-metal-servers-available-for-kubernetes-and-openshift-clusters){: external}.
 
 ### 11 May 2021
-{: #11may2021}
+{: #containers-may1121}
 {: release-note}
 
 VPC cluster healthchecks
 :   If you set up [VPC security groups](/docs/openshift?topic=openshift-vpc-security-group) or [VPC access control lists (ACLs)](/docs/openshift?topic=openshift-vpc-acls) to secure your cluster network, you can now create the rules to allow the necessary traffic from the control plane IP addresses and Akamai IPv4 IP addresses to health check your ALBs. Previously, a quota on the number of rules per security group or ACL prevented the ability to create all necessary rules for health checks.
 
 ### 10 May 2021
-{: #10may2021}
+{: #containers-may1021}
 {: release-note}
 
 New! PX-Backup is now available
@@ -1218,19 +1219,19 @@ Worker node versions
 :   Worker node fix pack update changelog documentation is available for version [1.20.6_1539](/docs/containers?topic=containers-changelog_120#1206_1539), [1.19.10_1546](/docs/containers?topic=containers-changelog_119#11910_1546), [1.18.18_1551](/docs/containers?topic=containers-118_changelog#11818_1551), and [1.17.17_1562](/docs/containers?topic=containers-117_changelog#11717_1562).
 
 ### 4 May 2021
-{: #04may2021}
+{: #containers-may0421}
 {: release-note}
 
 Master versions
 :   Master fix pack update changelog documentation is available for version [1.20.5_1538](/docs/containers?topic=containers-changelog_120#1206_1538) and [1.19.10_1545](/docs/containers?topic=containers-changelog_119#11910_1545).
 
 ## April 2021
-{: #apr21}
+{: #containers-apr21}
 
 
 
 ### 29 April 2021
-{: #29april2021}
+{: #containers-april2921}
 {: release-note}
 
 Custom IOPs for Istio
@@ -1242,21 +1243,21 @@ Istio add-on changelog
 
 
 ### 28 April 2021
-{: #28april2021}
+{: #containers-april2821}
 {: release-note}
 
 Default version
 :   The default version for new clusters is now 1.20.
 
 ### 27 April 2021
-{: #27april2021}
+{: #containers-april2721}
 {: release-note}
 
 Master versions
 :   Master fix pack update changelog documentation is available for version [1.20.6_1536](/docs/containers?topic=containers-changelog_120#1206_1536), [1.19.10_1543](/docs/containers?topic=containers-changelog_119#11910_1543), [1.18.18_1549](/docs/containers?topic=containers-118_changelog#11818_1549), and [1.17.17_1560](/docs/containers?topic=containers-117_changelog#11717_1560).
 
 ### 26 April 2021
-{: #26april2021}
+{: #containers-april2621}
 {: release-note}
 
 CLI changelog
@@ -1273,7 +1274,7 @@ Worker node versions
 
   
 ### 23 April 2021
-{: #23april2021}
+{: #containers-april2321}
 {: release-note}
 
 Ingress changelogs
@@ -1282,14 +1283,14 @@ Ingress changelogs
 
 
 ### 20 April 2021
-{: #20april2021}
+{: #containers-april2021}
 {: release-note}
 
 New! Toronto multizone region for VPC
 :   You can now create clusters on VPC infrastructure in the Toronto, Canada (`ca-tor`) [location](/docs/containers?topic=containers-regions-and-zones).
 
 ### 19 April 2021
-{: #19april2021}
+{: #containers-april1921}
 {: release-note}
 
 Add-on changelogs
@@ -1309,14 +1310,14 @@ Ingress changelogs
 
 
 ### 16 April 2021
-{: #16april2021}
+{: #containers-april1621}
 {: release-note}
 
 New fields and events for {{site.data.keyword.at_short}}
 :   To align with event auditing standards across {{site.data.keyword.cloud_notm}}, the [previously deprecated cluster fields and events](#deprecated-at-events) are now replaced by new fields and events. For an updated list of events, see [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events).
 
 ### 15 April 2021
-{: #15april2021}
+{: #containers-april1521}
 {: release-note}
 
 
@@ -1327,7 +1328,7 @@ Accessing VPC clusters
 
 
 ### 12 April 2021
-{: #12april2021}
+{: #containers-april1221}
 {: release-note}
 
 Worker node versions
@@ -1341,14 +1342,14 @@ Ingress changelogs
 
 
 ### 5 April 2021
-{: #05april2021}
+{: #containers-april0521}
 {: release-note}
 
 Deprecated data centers for classic clusters
 :   Houston (`hou02`) and Oslo (`osl01`) are deprecated and become unsupported later this year. To prevent any interruption of service, [redeploy all your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your `osl01` or `hou02` clusters by **1 August 2021**. Before the unsupported date, you are blocked from adding new worker nodes and clusters starting on **1 July 2021**. For more information, see [Data center closures in 2021](/docs/get-support?topic=get-support-dc-closure).
 
 ### 2 April 2021
-{: #02april2021}
+{: #containers-april0221}
 {: release-note}
 
 
@@ -1359,7 +1360,7 @@ Istio add-on
 
 
 ### 1 April 2021
-{: #01april2021}
+{: #containers-april0121}
 {: release-note}
 
 Cluster autoscaler add-on
@@ -1376,12 +1377,12 @@ New! image security add-on
 
 
 ## March 2021
-{: #mar21}
+{: #containers-mar21}
 
 
 
 ### 30 March 2021
-{: #30march2021}
+{: #containers-march3021}
 {: release-note}
 
 Add-on changelogs
@@ -1391,14 +1392,14 @@ Master versions
 :   Master fix pack update changelog documentation is available for version [1.20.5_1533](/docs/containers?topic=containers-changelog_120#1205_1533), [1.19.9_1540](/docs/containers?topic=containers-changelog_119#1199_1540), [1.18.17_1546](/docs/containers?topic=containers-118_changelog#11817_1546), and [1.17.17_1557](/docs/containers?topic=containers-117_changelog#11717_1557).
 
 ### 29 March 2021
-{: #29march2021}
+{: #containers-march2921}
 {: release-note}
 
 Worker node versions
 :   Worker node fix pack update changelog documentation is available for version [1.20.5_1534](/docs/containers?topic=containers-changelog_120#1205_1534), [1.19.9_1541](/docs/containers?topic=containers-changelog_119#1199_1541), [1.18.17_1547](/docs/containers?topic=containers-118_changelog#11817_1547), and [1.17.17_1558](/docs/containers?topic=containers-117_changelog#11717_1558).
 
 ### 25 March 2021
-{: #25march2021}
+{: #containers-march2521}
 {: release-note}
 
  
@@ -1409,7 +1410,7 @@ Worker node versions
 
   
 ### 23 March 2021
-{: #23march2021}
+{: #containers-march2321}
 {: release-note}
 
 Istio add-on
@@ -1418,7 +1419,7 @@ Istio add-on
 
 
 ### 22 March 2021
-{: #22march2021}
+{: #containers-march2221}
 {: release-note}
 
 
@@ -1481,14 +1482,14 @@ Deprecated fields across events
     - The `target.typeURI` values are updated for consistency. All values now have a prefix of `containers-kubernetes/` instead of `container/`. For example, `container/cluster` is now `containers-kubernetes/cluster` and `container/worker` is now `containers-kubernetes/worker`.
 
 ### 16 March 2021
-{: #16march2021}
+{: #containers-march1621}
 {: release-note}
 
 Ingress ALB changelog
 :   Updated the [`nginx-ingress` build to 2458](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 ### 12 March 2021
-{: #12march2021}
+{: #containers-march1221}
 {: release-note}
 
 Worker node versions
@@ -1497,7 +1498,7 @@ Worker node versions
 
 
 ### 1 March 2021
-{: #26march2021}
+{: #containers-march2621}
 {: release-note}
 
 Istio add-on
@@ -1506,7 +1507,7 @@ Istio add-on
 
 
 ### 9 March 2021
-{: #09march2021}
+{: #containers-march0921}
 {: release-note}
 
 Cluster autoscaler add-on
@@ -1515,14 +1516,14 @@ Cluster autoscaler add-on
 
 
 ### 5 March 2021
-{: #05march2021}
+{: #containers-march0521}
 {: release-note}
 
 Trusted images
 :   You can now [set up trusted content for container images](/docs/containers?topic=containers-images#trusted_images) that are signed and stored in {{site.data.keyword.registrylong_notm}}.
 
 ### 1 March 2021
-{: #01march2021}
+{: #containers-march0121}
 {: release-note}
 
 CLI changelog
@@ -1539,17 +1540,17 @@ Worker node versions
 :   Worker node fix pack update changelog documentation is available for version [1.20.4_1531](/docs/containers?topic=containers-changelog_120#1204_1531), [1.19.8_1538](/docs/containers?topic=containers-changelog_119#1198_1538), [1.18.16_1544](/docs/containers?topic=containers-118_changelog#11816_1544), and [1.17.17_1555](/docs/containers?topic=containers-117_changelog#11717_1555_worker).
 
 ## February 2021
-{: #feb21}
+{: #containers-feb21}
 
 ### 27 February 2021
-{: #27feb2021}
+{: #containers-feb2721}
 {: release-note}
 
 Master versions
 :   Master fix pack update changelog documentation is available for version [1.20.4_1531](/docs/containers?topic=containers-changelog_120#1204_1531_master), [1.19.8_1538](/docs/containers?topic=containers-changelog_119#1198_1538_master), and [1.18.16_1544](/docs/containers?topic=containers-118_changelog#11816_1544_master).
 
 ### 26 February 2021
-{: #26feb2021}
+{: #containers-feb2621}
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on
@@ -1563,7 +1564,7 @@ End of service of VPC Gen 1
 
 
 ### 25 February 2021
-{: #25feb2021}
+{: #containers-feb2521}
 {: release-note}
 
 CLI changelog
@@ -1572,7 +1573,7 @@ CLI changelog
 
   
 ### 24 February 2021
-{: #24feb2021}
+{: #containers-feb2421}
 {: release-note}
 
 Default version
@@ -1581,28 +1582,28 @@ Default version
 
 
 ### 23 February 2021
-{: #23feb2021}
+{: #containers-feb2321}
 {: release-note}
 
 VPE
 :   In VPC clusters that run Kubernetes version 1.20 or later, worker node communication to the Kubernetes master is now established over the [VPC virtual private endpoint (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe).
 
 ### 22 February 2021
-{: #22feb2021}
+{: #containers-feb2221}
 {: release-note}
 
 Master versions
 :   Master fix pack update changelog documentation is available for version [1.20.4_1530](/docs/containers?topic=containers-changelog_120#1204_1530), [1.19.8_1537](/docs/containers?topic=containers-changelog_119#1198_1537), [1.18.16_1543](/docs/containers?topic=containers-118_changelog#11816_1543), and [1.17.17_1555](/docs/containers?topic=containers-117_changelog#11717_1555).
 
 ### 20 February 2021
-{: #20feb2021}
+{: #containers-feb2021}
 {: release-note}
 
 Certified Kubernetes
 :   Version [1.20](/docs/containers?topic=containers-cs_versions_120) release is now certified.
 
 ### 17 February 2021
-{: #17feb2021}
+{: #containers-feb1721}
 {: release-note}
 
 
@@ -1616,7 +1617,7 @@ Deprecated Kubernetes 1.17
 
 
 ### 15 February 2021
-{: #15feb2021}
+{: #containers-feb1521}
 {: release-note}
 
 New! Osaka multizone region
@@ -1626,14 +1627,14 @@ Worker node versions
 :   Worker node fix pack update changelog documentation is available for version [1.19.7_1535](/docs/containers?topic=containers-changelog_119#1197_1535), [1.18.15_1541](/docs/containers?topic=containers-118_changelog#11815_1541), and [1.17.17_1553](/docs/containers?topic=containers-117_changelog#11717_1553).
 
 ### 12 February 2021
-{: #12feb2021}
+{: #containers-feb1221}
 {: release-note}
 
 Gateway firewalls and Calico policies
 :   For classic clusters in Frankfurt, updated the required IP addresses and ports that you must open in a [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private) or [Calico private network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation/calico-v3/eu-de).
 
 ### 10 February 2021
-{: #10feb2021}
+{: #containers-feb1021}
 {: release-note}
 
 Ingress ALB changelog
@@ -1643,7 +1644,7 @@ Gateway firewalls and Calico policies
 :   For classic clusters in Dallas, Washington D.C., and Frankfurt, updated the required IP addresses and ports that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound), [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private), or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies){: external}.
 
 ### 8 February 2021
-{: #08feb2021}
+{: #containers-feb0821}
 {: release-note}
 
 CLI changelog
@@ -1657,7 +1658,7 @@ Istio add-on
 
 
 ### 4 February 2021
-{: #04feb2021}
+{: #containers-feb0421}
 {: release-note}
 
 Worker node modifications
@@ -1666,7 +1667,7 @@ Worker node modifications
 
 
 ### 3 February 2021
-{: #03feb2021}
+{: #containers-feb0321}
 {: release-note}
 
 Worker node versions
@@ -1675,7 +1676,7 @@ Worker node versions
 
 
 ### 1 February 2021
-{: #01feb2021}
+{: #containers-feb0121}
 {: release-note}
 
 Unsupported: Kubernetes version 1.16
@@ -1685,10 +1686,10 @@ Worker node versions
 :   Worker node fix pack update changelog documentation is available for version [1.19.7_1533](/docs/containers?topic=containers-changelog_119#1197_1533), [1.18.15_1539](/docs/containers?topic=containers-118_changelog#11815_1539), and [1.17.17_1552](/docs/containers?topic=containers-117_changelog#11717_1552).
 
 ## January 2021
-{: #jan21}
+{: #containers-jan21}
 
 ### 27 January 2021
-{: #27jan2021}
+{: #containers-jan2721}
 {: release-note}
 
 Block Storage for VPC add-on
@@ -1702,7 +1703,7 @@ Reminder: VPC Gen 1 deprecation
 
 
 ### 25 January 2021
-{: #25jan2021}
+{: #containers-jan2521}
 {: release-note}
 
 
@@ -1720,7 +1721,7 @@ Private Kubernetes Ingress
 :   Added steps for [privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private).
 
 ### 19 January 2021
-{: #19jan2021}
+{: #containers-jan1921}
 {: release-note}
 
 Ingress ALB changelog
@@ -1730,7 +1731,7 @@ Master versions
 :   Master fix pack update changelog documentation is available for version [1.19.7_1532](/docs/containers?topic=containers-changelog_119#1197_1532_master), [1.18.15_1538](/docs/containers?topic=containers-118_changelog#11815_1538_master), [1.17.17_1551](/docs/containers?topic=containers-117_changelog#11717_1551_master), and [1.16.15_1557](/docs/containers?topic=containers-116_changelog#11615_1557_master).
 
 ### 18 January 2021
-{: #18jan2021}
+{: #containers-jan1821}
 {: release-note}
 
 Knative add-on is unsupported
@@ -1740,14 +1741,14 @@ Worker node versions
 :   Worker node fix pack update changelog documentation is available for version [1.19.7_1532](/docs/containers?topic=containers-changelog_119#1197_1532), [1.18.15_1538](/docs/containers?topic=containers-118_changelog#11815_1538), [1.17.17_1551](/docs/containers?topic=containers-117_changelog#11717_1551), and [1.16.15_1557](/docs/containers?topic=containers-116_changelog#11615_1557).
 
 ### 14 January 2021
-{: #14jan2021}
+{: #containers-jan1421}
 {: release-note}
 
 Cluster autoscaler
 :   Cluster autoscaler add-on patch update `1.0.1_210` is released. For more information, see the [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog).
 
 ### 12 January 2021
-{: #12jan2021}
+{: #containers-jan1221}
 {: release-note}
 
 Ingress resources
@@ -1762,7 +1763,7 @@ Removal of data center support
 
   
 ### 7 January 2021
-{: #07jan2021}
+{: #containers-jan0721}
 {: release-note}
 
 Ingress ALB changelog
@@ -1771,7 +1772,7 @@ Ingress ALB changelog
 
 
 ### 6 January 2021
-{: #06jan2021}
+{: #containers-jan0621}
 {: release-note}
 
 Master versions
@@ -1779,10 +1780,10 @@ Master versions
 :   [1.19.6_1531](/docs/containers?topic=containers-changelog_119#1196_1531), [1.18.14_1537](/docs/containers?topic=containers-118_changelog#11814_1537), [1.17.16_1550](/docs/containers?topic=containers-117_changelog#11716_1550), and [1.16.15_1556](/docs/containers?topic=containers-116_changelog#11615_1556).
 
 ## December 2020
-{: #dec20}
+{: #containers-dec20}
 
 ### 21 December 2020
-{: #21dec2020}
+{: #containers-dec2120}
 {: release-note}
 
 Gateway firewalls and Calico policies
@@ -1793,7 +1794,7 @@ Worker node versions
 :   [1.19.5_1530](/docs/containers?topic=containers-changelog_119#1195_1530), [1.18.13_1536](/docs/containers?topic=containers-118_changelog#11813_1536), [1.17.15_1549](/docs/containers?topic=containers-117_changelog#11715_1549), and [1.16.15_1555](/docs/containers?topic=containers-116_changelog#11615_1555).
 
 ### 18 December 2020
-{: #18dec2020}
+{: #containers-dec1820}
 {: release-note}
 
 CLI changelog
@@ -1803,7 +1804,7 @@ CLI changelog
 :   Version `2.0.6` of the {{site.data.keyword.cos_full_notm}} plug-in is released. For more information, see the [{{site.data.keyword.cos_full_notm}} plug-in changelog](/docs/containers?topic=containers-cos_plugin_changelog).
 
 ### 17 December 2020
-{: #17dec2020}
+{: #containers-dec1720}
 {: release-note}
 
 Audit documentation
@@ -1820,21 +1821,21 @@ Ingress ALB changelog
 
   
 ### 16 December 2020
-{: #16dec2020}
+{: #containers-dec1620}
 {: release-note}
 
 Istio add-on
 :   Versions [1.8.1](/docs/containers?topic=containers-istio-changelog#181) and [1.7.6](/docs/containers?topic=containers-istio-changelog#176) of the Istio managed add-on are released. Version 1.6 is unsupported.
 
 ### 15 December 2020
-{: #15dec2020}
+{: #containers-dec1520}
 {: release-note}
 
 Cluster autoscaler
 :   Cluster autoscaler add-on patch update `1.0.1_205` is released. For more information, see the [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog).
 
 ### 14 December 2020
-{: #14dec2020}
+{: #containers-dec1420}
 {: release-note}
 
 
@@ -1848,7 +1849,7 @@ Master versions
 :   [1.19.5_1529](/docs/containers?topic=containers-changelog_119#1195_1529), [1.18.13_1535](/docs/containers?topic=containers-118_changelog#11813_1535), [1.17.15_1548](/docs/containers?topic=containers-117_changelog#11715_1548), and [1.16.15_1554](/docs/containers?topic=containers-116_changelog#11615_1554_master).
 
 ### 11 December 2020
-{: #11dec2020}
+{: #containers-dec1120}
 {: release-note}
 
 Storage add-ons
@@ -1865,7 +1866,7 @@ Worker node versions
 
 
 ### 9 December 2020
-{: #09dec2020}
+{: #containers-dec0920}
 {: release-note}
 
 Accessing clusters
@@ -1888,7 +1889,7 @@ Istio add-on
 
 
 ### 7 December 2020
-{: #07dec2020}
+{: #containers-dec0720}
 {: release-note}
 
 {{site.data.keyword.keymanagementserviceshort}} enhancements
@@ -1899,7 +1900,7 @@ Worker node versions
 :   Kubernetes version [1.19.4_1528](/docs/containers?topic=containers-changelog_119#1194_1528), [1.18.12_1534](/docs/containers?topic=containers-118_changelog#11812_1534), [1.17.14_1546](/docs/containers?topic=containers-117_changelog#11714_1546), and [1.16.15_1553](/docs/containers?topic=containers-116_changelog#11615_1553)..
 
 ### 3 December 2020
-{: #03dec2020}
+{: #containers-dec0320}
 {: release-note}
 
 Cluster autoscaler add-on
@@ -1913,26 +1914,26 @@ Istio add-on
 
 
 ### 1 December 2020
-{: #01dec2020}
+{: #containers-dec0120}
 {: release-note}
 
 Default Kubernetes Ingress image
 :   In all new {{site.data.keyword.containerlong_notm}} clusters, default application load balancers (ALBs) now run the Kubernetes Ingress image. In existing clusters, ALBs continue to run the previously supported {{site.data.keyword.containerlong_notm}} Ingress image, which is now deprecated. For more information and migration actions, see [Setting up Kubernetes Ingress](/docs/containers?topic=containers-ingress-types).
 
 ## November 2020
-{: #nov20}
+{: #containers-nov20}
 
 
 
 ### 24 November 2020
-{: #24nov2020}
+{: #containers-nov2420}
 {: release-note}
 
 ![Classic infrastructure provider icon.](images/icon-classic-2.svg) New! Reservations to reduce classic worker node costs
 :   Create a reservation with contracts for 1 or 3 year terms for classic worker nodes to lock in a reduced cost for the life of the contract. Typical savings range between 30-50% compared to on-demand worker node costs. Reservations can be created in the {{site.data.keyword.cloud_notm}} console for classic infrastructure only. For more information, see [Reserving instances to reduce classic worker node costs](/docs/containers?topic=containers-reservations).
 
 ### 23 November 2020
-{: #23nov2020}
+{: #containers-nov2320}
 {: release-note}
 
 Worker node versions
@@ -1940,21 +1941,21 @@ Worker node versions
 :   Kubernetes version [1.19.4_1527](/docs/containers?topic=containers-changelog_119#1194_1527_worker), [1.18.12_1533](/docs/containers?topic=containers-118_changelog#11812_1533_worker), [1.17.14_1545](/docs/containers?topic=containers-117_changelog#11714_1545_worker), and [1.16.15_1552](/docs/containers?topic=containers-116_changelog#11615_1552_worker).
 
 ### 20 November 2020
-{: #20nov2020}
+{: #containers-nov2020}
 {: release-note}
 
 New! Portieris for image security enforcement
 :   With the [open source Portieris project](https://github.com/IBM/portieris){: external}, you can set up a Kubernetes admission controller to enforce image security policies by namespace or cluster. Use [Portieris](/docs/Registry?topic=Registry-security_enforce_portieris) instead of the deprecated Container Image Security Enforcement Helm chart.
 
 ### 19 November 2020
-{: #19nov2020}
+{: #containers-nov1920}
 {: release-note}
 
 Ingress ALB changelog
 :   Updated the [`nginx-ingress` build to 653 and the `ingress-auth` build to 425](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 ### 18 November 2020
-{: #18nov2020}
+{: #containers-nov1820}
 {: release-note}
 
 CLI changelog
@@ -1971,7 +1972,7 @@ New! {{site.data.keyword.block_storage_is_short}} changelog
 :   Added a [changelog](/docs/containers?topic=containers-vpc_bs_changelog) for the {{site.data.keyword.block_storage_is_short}} add-on.
 
 ### 16 November 2020
-{: #16nov2020}
+{: #containers-nov1620}
 {: release-note}
 
 
@@ -1985,14 +1986,14 @@ Master versions
 :   Master fix pack update changelog documentation is available for Kubernetes version [1.19.4_1527](/docs/containers?topic=containers-changelog_119#1194_1527), [1.18.12_1533](/docs/containers?topic=containers-118_changelog#11812_1533), [1.17.14_1545](/docs/containers?topic=containers-117_changelog#11714_1545), and [1.16.15_1552](/docs/containers?topic=containers-116_changelog#11615_1552)..
 
 ### 13 November 2020
-{: #13nov2020}
+{: #containers-nov1320}
 {: release-note}
 
 {{site.data.keyword.at_full_notm}} and IAM events
 :   Added [IAM actions and {{site.data.keyword.cloudaccesstrailshort}} events](/docs/containers?topic=containers-api-at-iam#ks-ingress) for the Ingress secret, Ingress ALB, and NLB DNS APIs.
 
 ### 9 November 2020
-{: #09nov2020}
+{: #containers-nov0920}
 {: release-note}
 
 
@@ -2003,7 +2004,7 @@ Worker node versions
 :   Kubernetes version [1.19.3_1526](/docs/containers?topic=containers-changelog_119#1193_1526), [1.18.10_1532](/docs/containers?topic=containers-118_changelog#11810_1532), [1.17.13_1544](/docs/containers?topic=containers-117_changelog#11713_1544), and [1.16.15_1551](/docs/containers?topic=containers-116_changelog#11615_1551).
 
 ### 5 November 2020
-{: #05nov2020}
+{: #containers-nov0520}
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}}
@@ -2025,7 +2026,7 @@ Istio add-on
 
 
 ### 2 November 2020
-{: #02nov2020}
+{: #containers-nov0220}
 {: release-note}
 
 
@@ -2044,10 +2045,10 @@ Persistent storage
 
 
 ## October 2020
-{: #oct20}
+{: #containers-oct20}
 
 ### 26 October 2020
-{: #26oct2020}
+{: #containers-oct2620}
 {: release-note}
 
 Master versions
@@ -2061,7 +2062,7 @@ Worker node versions
 
 
 ### 22 October 2020
-{: #22oct2020}
+{: #containers-oct2220}
 {: release-note}
 
 API key
@@ -2081,7 +2082,7 @@ Istio add-on
 
   
 ### 16 October 2020
-{: #16oct2020}
+{: #containers-oct1620}
 {: release-note}
 
 Gateway firewalls and Calico policies
@@ -2100,7 +2101,7 @@ Ingress classes
 
 
 ### 13 October 2020
-{: #13oct2020}
+{: #containers-oct1320}
 {: release-note}
 
 
@@ -2129,7 +2130,7 @@ VPC security groups
 :   Added support for authorized IP addresses in {{site.data.keyword.cos_full_notm}} for VPC Gen 2. For more information, see [Allowing IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_vpc_ip).
 
 ### 12 October 2020
-{: #12oct2020}
+{: #containers-oct1220}
 {: release-note}
 
 Versions
@@ -2138,14 +2139,14 @@ Versions
 
 
 ### 8 October 2020
-{: #08oct2020}
+{: #containers-oct0820}
 {: release-note}
 
 Ingress ALB changelog
 :   Updated the [Kubernetes Ingress image build to `0.35.0_474_iks`](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0).
 
 ### 6 October 2020
-{: #06oct2020}
+{: #containers-oct0620}
 {: release-note}
 
 CLI changelog
@@ -2162,7 +2163,7 @@ Istio add-on
 
 
 ### 1 October 2020
-{: #01oct2020}
+{: #containers-oct0120}
 {: release-note}
 
 Default version
@@ -2172,19 +2173,19 @@ Ingress ALB changelog
 :   Updated the [`nginx-ingress` build to 652 and the `ingress-auth` build to 424](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 ## September 2020
-{: #sep20}
+{: #containers-sep20}
 
 
 
 ### 29 September 2020
-{: #29sept2020}
+{: #containers-sept2920}
 {: release-note}
 
 :   Gateway firewalls and Calico policies
 For classic clusters in London or Dallas, updated the required IP addresses and ports that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound), [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private), or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies){: external}.
 
 ### 26 September 2020
-{: #26sept2020}
+{: #containers-sept2620}
 {: release-note}
 
 Versions
@@ -2193,14 +2194,14 @@ Versions
 
 
 ### 24 September 2020
-{: #24sept2020}
+{: #containers-sept2420}
 {: release-note}
 
 CLI changelog
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.171](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 ### 23 September 2020
-{: #23sept2020}
+{: #containers-sept2320}
 {: release-note}
 
 Ingress ALB changelog
@@ -2214,14 +2215,14 @@ Istio add-on
 
 
 ### 22 September 2020
-{: #22sept2020}
+{: #containers-sept2220}
 {: release-note}
 
 Unsupported: Kubernetes version 1.15
 :   Clusters that run version 1.15 are unsupported. To continue receiving important security updates and support, you must [update the cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately.
 
 ### 21 September 2020
-{: #21sept2020}
+{: #containers-sept2120}
 {: release-note}
 
 Versions
@@ -2245,7 +2246,7 @@ VPC load balancer
 :   In version 1.18 and later VPC clusters, added the `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "proxy-protocol"` annotation to preserve the source IP address of requests to apps in your cluster.
   
 ### 4 September 2020
-{: #04sept2020}
+{: #containers-sept0420}
 {: release-note}
 
 New! CIS Kubernetes Benchmark
@@ -2254,7 +2255,7 @@ New! CIS Kubernetes Benchmark
 
 
 ### 3 September 2020
-{: #03sept2020}
+{: #containers-sept0320}
 {: release-note}
 
 CA certificate rotation
@@ -2263,14 +2264,14 @@ CA certificate rotation
 
   
 ### 2 September 2020
-{: #02sept2020}
+{: #containers-sept0220}
 {: release-note}
 
 Istio add-on
 :   [Version 1.7 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#v17) is released.
 
 ### 1 September 2020
-{: #1sept2020}
+{: #containers-sept120}
 {: release-note}
 
 Deprecation of VPC Gen 1 compute
@@ -2283,10 +2284,10 @@ Istio add-on
 
 
 ## August 2020
-{: #aug20}
+{: #containers-aug20}
 
 ### 31 August 2020
-{: #31aug2020}
+{: #containers-aug3120}
 {: release-note}
 
 Versions
@@ -2295,7 +2296,7 @@ Versions
 
 
 ### 27 August 2020
-{: #27aug2020}
+{: #containers-aug2720}
 {: release-note}
 
 Observability CLI plug-in
@@ -2310,7 +2311,7 @@ New! Worker node flavors
 :   You can create worker nodes with new [bare metal](/docs/containers?topic=containers-planning_worker_nodes#bm-table) and [bare metal SDS](/docs/containers?topic=containers-planning_worker_nodes#sds-table) flavors in the `me4c` and `mb4c` flavors. These flavors include 2nd Generation Intel® Xeon® Scalable Processors chip sets for better performance for workloads such as machine learning, AI, and IoT.
 
 ### 24 August 2020
-{: #24aug2020}
+{: #containers-aug2420}
 {: release-note}
 
 CLI changelog
@@ -2328,7 +2329,7 @@ New! Default {{site.data.keyword.cloudcerts_long}} instances
 
 
 ### 18 August 2020
-{: #18aug2020}
+{: #containers-aug1820}
 {: release-note}
 
 Versions
@@ -2337,7 +2338,7 @@ Versions
 
 
 ### 17 August 2020
-{: #17aug2020}
+{: #containers-aug1720}
 {: release-note}
 
 Locations
@@ -2355,7 +2356,7 @@ VPC Gen 2
 
   
 ### 12 August 2020
-{: #12aug2020}
+{: #containers-aug1220}
 {: release-note}
 
 Istio add-on
@@ -2364,14 +2365,14 @@ Istio add-on
 
 
 ### 6 August 2020
-{: #06aug2020}
+{: #containers-aug0620}
 {: release-note}
 
 CLI changelog
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.143](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 ### 5 August 2020
-{: #05aug2020}
+{: #containers-aug0520}
 {: release-note}
 
 Ingress ALB changelog
@@ -2380,7 +2381,7 @@ Ingress ALB changelog
 
   
 ### 4 August 2020
-{: #04aug2020}
+{: #containers-aug0420}
 {: release-note}
 
 Istio add-on
@@ -2389,7 +2390,7 @@ Istio add-on
 
 
 ### 3 August 2020
-{: #03aug2020}
+{: #containers-aug0320}
 {: release-note}
 
 Gateway appliance firewalls
@@ -2401,17 +2402,17 @@ Versions
 
 
 ## July 2020
-{: #july20}
+{: #containers-july20}
 
 ### 31 July 2020
-{: #31july2020}
+{: #containers-july3120}
 {: release-note}
 
 {{site.data.keyword.redhat_openshift_notm}} version 4.4
 :   The [{{site.data.keyword.redhat_openshift_notm}} version 4.4 release](/docs/containers?topic=containers-cs_versions#cs_v118) is certified for Kubernetes version 1.17.
 
 ### 28 July 2020
-{: #28july2020}
+{: #containers-july2820}
 {: release-note}
 
 Ingress ALB versions
@@ -2421,7 +2422,7 @@ UI for creating clusters
 :   Updated getting started and task topics for the updated process for the [Kubernetes cluster creation console](https://cloud.ibm.com/kubernetes/catalog/create){: external}.
 
 ### 24 July 2020
-{: #24july2020}
+{: #containers-july2420}
 {: release-note}
 
 Minimum cluster size
@@ -2438,7 +2439,7 @@ Worker node replacement
 
 
 ### 20 July 2020
-{: #20july2020}
+{: #containers-july2020}
 {: release-note}
 
 Master versions
@@ -2454,7 +2455,7 @@ Worker node versions
 
   
 ### 17 July 2020
-{: #17july2020}
+{: #containers-july1720}
 {: release-note}
 
 Istio add-on
@@ -2463,7 +2464,7 @@ Istio add-on
 
 
 ### 16 July 2020
-{: #16july2020}
+{: #containers-july1620}
 {: release-note}
 
 Ingress ALB changelog
@@ -2484,7 +2485,7 @@ Pod and service subnets
 
 
 ### 8 July 2020
-{: #08july2020}
+{: #containers-july0820}
 {: release-note}
 
 Istio add-on
@@ -2496,14 +2497,14 @@ Knative add-on
 
 
 ### 7 July 2020
-{: #07july2020}
+{: #containers-july0720}
 {: release-note}
 
 CLI changelog
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.118](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 ### 6 July 2020
-{: #06july2020}
+{: #containers-july0620}
 {: release-note}
 
 Version changelogs
@@ -2512,7 +2513,7 @@ Version changelogs
 
 
 ### 2 July 2020
-{: #02july2020}
+{: #containers-july0220}
 {: release-note}
 
 
@@ -2521,10 +2522,10 @@ VPC load balancer
 :   Added support for specifying the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation in the [configuration file for VPC load balancers](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb).
 
 ## June 2020
-{: #june20}
+{: #containers-june20}
 
 ### 24 June 2020
-{: #24june2020}
+{: #containers-june2420}
 {: release-note}
 
 Gateway appliance firewalls
@@ -2534,7 +2535,7 @@ Ingress ALB changelog
 :   Updated the [`ingress-auth` image build to 413](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 23 June 2020
-{: #23june2020}
+{: #containers-june2320}
 {: release-note}
 
 
@@ -2545,7 +2546,7 @@ Istio add-on
 
 
 ### 22 June 2020
-{: #22june2020}
+{: #containers-june2220}
 {: release-note}
 
 Version changelogs
@@ -2554,14 +2555,14 @@ Version changelogs
 
 
 ### 18 June 2020
-{: #18june2020}
+{: #containers-june1820}
 {: release-note}
 
 Ingress ALB changelog
 :   Updated the [`ingress-auth` image build to 413](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 16 June 2020
-{: #16june2020}
+{: #containers-june1620}
 {: release-note}
 
 
@@ -2570,7 +2571,7 @@ CLI changelog
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.99](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 ### 9 June 2020
-{: #09june2020}
+{: #containers-june0920}
 {: release-note}
 
 CLI changelog
@@ -2583,7 +2584,7 @@ New! Static routes add-on
 :   Added information about creating static routes on your worker nodes by enabling the [static routes cluster add-on](/docs/containers?topic=containers-static-routes).
 
 ### 8 June 2020
-{: #08june2020}
+{: #containers-june0820}
 {: release-note}
 
 Version changelogs
@@ -2592,7 +2593,7 @@ Version changelogs
 
 
 ### 4 June 2020
-{: #04june2020}
+{: #containers-june0420}
 {: release-note}
 
 
@@ -2613,7 +2614,7 @@ VPC network security
 :   Expanded information about your options for using access control lists (ACLs), security groups, and other network policies to [control traffic to and from your VPC cluster](/docs/containers?topic=containers-vpc-network-policy).
 
 ### 1 June 2020
-{: #01june2020}
+{: #containers-june0120}
 {: release-note}
 
 
@@ -2628,12 +2629,12 @@ VPC ACLs
 
 
 ## May 2020
-{: #may20}
+{: #containers-may20}
 
 
 
 ### 31 May 2020
-{: #31may2020}
+{: #containers-may3120}
 {: release-note}
 
 Unsupported: Kubernetes version 1.14
@@ -2642,7 +2643,7 @@ Unsupported: Kubernetes version 1.14
 
 
 ### 26 May 2020
-{: #26may2020}
+{: #containers-may2620}
 {: release-note}
 
 CLI changelog
@@ -2668,7 +2669,7 @@ Version changelogs
 
   
 ### 20 May 2020
-{: #20may2020}
+{: #containers-may2020}
 {: release-note}
 
 New! Virtual Private Cloud Generation 2
@@ -2683,7 +2684,7 @@ New! Virtual Private Cloud Generation 2
 :   Ready to get started? Try out the [Creating a cluster in your VPC on generation 2 compute tutorial](/docs/containers?topic=containers-vpc_ks_tutorial).
 
 ### 19 May 2020
-{: #19may2020}
+{: #containers-may1920}
 {: release-note}
 
 
@@ -2694,7 +2695,7 @@ Istio add-on
 
 
 ### 18 May 2020
-{: #18may2020}
+{: #containers-may1820}
 {: release-note}
 
 Ingress ALB changelog
@@ -2703,7 +2704,7 @@ Ingress ALB changelog
 
   
 ### 14 May 2020
-{: #14may2020}
+{: #containers-may1420}
 {: release-note}
 
 Kubernetes version 1.18
@@ -2714,7 +2715,7 @@ Kubernetes version 1.18
 
 
 ### 11 May 2020
-{: #11may2020}
+{: #containers-may1120}
 {: release-note}
 
 
@@ -2737,7 +2738,7 @@ Version changelogs
 
 
 ### 8 May 2020
-{: #08may2020}
+{: #containers-may0820}
 {: release-note}
 
 CLI changelog
@@ -2746,7 +2747,7 @@ CLI changelog
 
 
 ### 6 May 2020
-{: #06may2020}
+{: #containers-may0620}
 {: release-note}
 
 New! {{site.data.keyword.containerlong_notm}} observability plug-in
@@ -2755,7 +2756,7 @@ New! {{site.data.keyword.containerlong_notm}} observability plug-in
 
 
 ### 4 May 2020
-{: #04may2020}
+{: #containers-may0420}
 {: release-note}
 
 Gateway appliance firewalls
@@ -2765,17 +2766,17 @@ Ingress troubleshooting
 :   Added a [troubleshooting topic](/docs/containers?topic=containers-alb-pod-affinity) for when ALB pods don't deploy correctly to worker nodes.
 
 ## April 2020
-{: #apr20}
+{: #containers-apr20}
 
 ### 30 April 2020
-{: #30april2020}
+{: #containers-april3020}
 {: release-note}
 
 Cluster and worker node quotas
 :   Now, each region in your {{site.data.keyword.cloud_notm}} account has quotas for {{site.data.keyword.containershort}} clusters and workers. You can have **100 clusters** and **500 worker nodes** across clusters per region and per [infrastructure provider](/docs/containers?topic=containers-infrastructure_providers). With quotas in place, your account is better protected from accidental requests or billing surprises. Need more clusters? No problem, just [contact IBM Support](/docs/get-support?topic=get-support-using-avatar). In the support case, include the new cluster or worker node quota limit for the region and infrastructure provider that you want. For more information, see the [Service limitations](/docs/containers?topic=containers-limitations).
 
 ### 29 April 2020
-{: #29april2020}
+{: #containers-april2920}
 {: release-note}
 
 ALB pod scaling
@@ -2792,7 +2793,7 @@ VPC cluster master access
 
 
 ### 27 April 2020
-{: #27april2020}
+{: #containers-april2720}
 {: release-note}
 
 Ingress ALB changelog
@@ -2803,7 +2804,7 @@ Version changelogs
 
 
 ### 23 April 2020
-{: #23april2020}
+{: #containers-april2320}
 {: release-note}
 
 Version changelogs
@@ -2811,7 +2812,7 @@ Version changelogs
 
 
 ### 22 April 2020
-{: #22april2020}
+{: #containers-april2220}
 {: release-note}
 
  
@@ -2822,7 +2823,7 @@ Private network connection to registry
 
 
 ### 17 April 2020
-{: #17april2020}
+{: #containers-april1720}
 {: release-note}
 
 Version changelog
@@ -2831,14 +2832,14 @@ Version changelog
 
 
 ### 16 April 2020
-{: #16april2020}
+{: #containers-april1620}
 {: release-note}
 
 Ingress ALB changelog
 :   Updated the [`ingress-auth` image build to 394](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 13 April 2020
-{: #13april2020}
+{: #containers-april1320}
 {: release-note}
 
 Gateway appliance firewalls
@@ -2852,7 +2853,7 @@ Version changelogs
 
 
 ### 6 April 2020
-{: #06april2020}
+{: #containers-april0620}
 {: release-note}
 
 CLI changelog
@@ -2864,7 +2865,7 @@ Kubernetes cluster context
 :   Added topics for [Setting the Kubernetes context for multiple clusters](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple) and [Creating a temporary `kubeconfig` file](/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig).
 
 ### 1 April 2020
-{: #01april2020}
+{: #containers-april0120}
 {: release-note}
 
 Istio add-on
@@ -2873,10 +2874,10 @@ Istio add-on
 
 
 ## March 2020
-{: #mar20}
+{: #containers-mar20}
 
 ### 30 March 2020
-{: #30mar2020}
+{: #containers-mar3020}
 {: release-note}
 
 Version changelogs
@@ -2888,14 +2889,14 @@ File storage classes
 :   Added `gid` file storage classes to specify a supplemental group ID that you can assign to a non-root user ID so that the non-root user can read and write to the file storage instance. For more information, see the storage class [reference](/docs/containers?topic=containers-file_storage#file_storageclass_reference). 
 
 ### 27 March 2020
-{: #27mar2020}
+{: #containers-mar2720}
 {: release-note}
 
 Tech overview
 :   Added an [Overview of personal and sensitive data storage and removal options](/docs/containers?topic=containers-service-arch#ibm-data).
 
 ### 25 March 2020
-{: #25mar2020}
+{: #containers-mar2520}
 {: release-note}
 
 
@@ -2904,7 +2905,7 @@ Ingress ALB changelog
 :   Updated the [`nginx-ingress` image build to 627](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 24 March 2020
-{: #24mar2020}
+{: #containers-mar2420}
 {: release-note}
 
 CLI changelog
@@ -2912,7 +2913,7 @@ CLI changelog
 
 
 ### 18 March 2020
-{: #18mar2020}
+{: #containers-mar1820}
 {: release-note}
 
 
@@ -2921,7 +2922,7 @@ IAM issuer details
 :   Added a [reference topic](/docs/containers?topic=containers-access_reference#iam_issuer_users) for the IAM issuer details of RBAC users.
 
 ### 16 March 2020
-{: #16mar2020}
+{: #containers-mar1620}
 {: release-note}
 
 New! CLI 1.0
@@ -2945,7 +2946,7 @@ Version changelogs
 
 
 ### 12 March 2020
-{: #12mar2020}
+{: #containers-mar1220}
 {: release-note}
 
 
@@ -2956,7 +2957,7 @@ Version update policy
 :   Now, you can update your cluster master version only to the next version (`n+1`). For example, if your cluster runs Kubernetes version 1.15 and you want to update to the latest version, 1.17, you must first update to 1.16.
 
 ### 10 March 2020
-{: #10mar2020}
+{: #containers-mar1020}
 {: release-note}
 
 Istio add-on
@@ -2965,7 +2966,7 @@ Istio add-on
 
 
 ### 9 March 2020
-{: #09mar2020}
+{: #containers-mar0920}
 {: release-note}
 
 Managing Ingress ALBs
@@ -2985,7 +2986,7 @@ Updating the {{site.data.keyword.block_storage_is_short}} add-on
 
 
 ### 4 March 2020
-{: #04mar2020}
+{: #containers-mar0420}
 {: release-note}
 
 CLI changelog
@@ -2995,7 +2996,7 @@ Ingress ALB changelog
 :   Updated the [`ingress-auth` image build to 390](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 2 March 2020
-{: #02mar2020}
+{: #containers-mar0220}
 {: release-note}
 
 Version changelogs
@@ -3004,19 +3005,19 @@ Version changelogs
 
 
 ## February 2020
-{: #feb20}
+{: #containers-feb20}
 
 
 
 ### 28 February 2020
-{: #28feb2020}
+{: #containers-feb2820}
 {: release-note}
 
 VPC clusters
 :   You can create VPC generation 1 compute clusters in the [**Washington DC** location (`us-east` region)](/docs/containers?topic=containers-regions-and-zones#zones-vpc).
 
 ### 22 February 2020
-{: #22feb2020}
+{: #containers-feb2220}
 {: release-note}
 
 Unsupported: Kubernetes version 1.13
@@ -3025,7 +3026,7 @@ Unsupported: Kubernetes version 1.13
 
 
 ### 19 February 2020
-{: #19feb2020}
+{: #containers-feb1920}
 {: release-note}
 
 CLI changelog
@@ -3055,7 +3056,7 @@ Firewall subnets
 
 
 ### 17 February 2020
-{: #17feb2020}
+{: #containers-feb1720}
 {: release-note}
 
 
@@ -3071,7 +3072,7 @@ Version changelogs
 
   
 ### 14 February 2020
-{: #14feb2020}
+{: #containers-feb1420}
 {: release-note}
 
 Istio add-on
@@ -3080,7 +3081,7 @@ Istio add-on
 
 
 ### 10 February 2020
-{: #10feb2020}
+{: #containers-feb1020}
 {: release-note}
 
 
@@ -3100,7 +3101,7 @@ Knative changelogs
 
 
 ### 6 February 2020
-{: #06feb2020}
+{: #containers-feb0620}
 {: release-note}
 
 Cluster autoscaler
@@ -3115,7 +3116,7 @@ VPC security groups
 :   [Modify the security group rules](/docs/openshift?topic=openshift-vpc-security-group)for VPC Gen 2 clusters to allow traffic requests that are routed to node ports on your worker nodes.
 
 ### 3 February 2020
-{: #03feb2020}
+{: #containers-feb0320}
 {: release-note}
 
 Version changelog
@@ -3137,17 +3138,17 @@ Expanded troubleshooting
 
 
 ## January 2020
-{: #jan20}
+{: #containers-jan20}
 
 ### 30 January 2020
-{: #30jan2020}
+{: #containers-jan3020}
 {: release-note}
 
 Ingress ALB changelog
 :   Updated the [`nginx-ingress` image build to 625](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 27 January 2020
-{: #27jan2020}
+{: #containers-jan2720}
 {: release-note}
 
 
@@ -3161,7 +3162,7 @@ Back up and restore File and Block storage
 :   Added steps for deploying the [`ibmcloud-backup-restore` Helm chart](/docs/containers?topic=containers-utilities#ibmcloud-backup-restore).
 
 ### 22 January 2020
-{: #22jan2020}
+{: #containers-jan2220}
 {: release-note}
 
 
@@ -3170,7 +3171,7 @@ Kubernetes 1.15
 :   [Kubernetes 1.15](/docs/containers?topic=containers-cs_versions#cs_versions_available) is now the default version.
 
 ### 21 January 2020
-{: #21jan2020}
+{: #containers-jan2120}
 {: release-note}
 
 Default {{site.data.keyword.containerlong_notm}} settings
@@ -3179,7 +3180,7 @@ Default {{site.data.keyword.containerlong_notm}} settings
 
 
 ### 20 January 2020
-{: #20jan2020}
+{: #containers-jan2020}
 {: release-note}
 
 Helm version 3
@@ -3196,21 +3197,21 @@ Version changelog
 
   
 ### 13 January 2020
-{: #13jan2020}
+{: #containers-jan1320}
 {: release-note}
 
 {{site.data.keyword.blockstorageshort}}
 :   Added steps for [adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes](/docs/containers?topic=containers-utilities#vpc_api_attach).
 
 ### 6 January 2020
-{: #06jan2020}
+{: #containers-jan0620}
 {: release-note}
 
 Ingress ALB changelog
 :   Updated the [`ingress-auth` image to build 373](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 3 January 2020
-{: #03jan2020}
+{: #containers-jan0320}
 {: release-note}
 
 Version changelog
@@ -3219,17 +3220,17 @@ Version changelog
 
 
 ## December 2019
-{: #dec19}
+{: #containers-dec19}
 
 ### 18 December 2019
-{: #18dec2019}
+{: #containers-dec1819}
 {: release-note}
 
 Ingress ALB changelog
 :   Updated the [`nginx-ingress` image build to 615 and the `ingress-auth` image to build 372](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 17 December 2019
-{: #17dec2019}
+{: #containers-dec1719}
 {: release-note}
 
 Version changelog
@@ -3250,7 +3251,7 @@ Assigning access
 
 
 ### 12 December 2019
-{: #12dec2019}
+{: #containers-dec1219}
 {: release-note}
 
 Setting up a service mesh with Istio
@@ -3263,7 +3264,7 @@ Setting up a service mesh with Istio
 
 
 ### 11 December 2019
-{: #11dec2019}
+{: #containers-dec1119}
 {: release-note}
 
 CLI changelog
@@ -3285,7 +3286,7 @@ Managed Knative add-on
 
 
 ### 9 December 2019
-{: #09dec2019}
+{: #containers-dec0919}
 {: release-note}
 
 Version changelog
@@ -3294,7 +3295,7 @@ Version changelog
 
 
 ### 4 December 2019
-{: #04dec2019}
+{: #containers-dec0419}
 {: release-note}
 
 Exposing apps with load balancers or Ingress ALBs
@@ -3317,10 +3318,10 @@ Use the internal KVDB in Portworx
 :   Automatically set up a key-value database (KVDB) during the Portworx installation to store your Portworx metadata. For more information, see [Using the Portworx KVDB](/docs/containers?topic=containers-portworx#portworx-kvdb).
 
 ## November 2019
-{: #nov19}
+{: #containers-nov19}
 
 ### 26 November 2019
-{: #26nov2019}
+{: #containers-nov2619}
 {: release-note}
 
 CLI changelog
@@ -3338,7 +3339,7 @@ Version changelog
 
 
 ### 22 November 2019
-{: #22nov2019}
+{: #containers-nov2219}
 {: release-note}
 
 Bring your own DNS for load balancers
@@ -3352,7 +3353,7 @@ Ingress ALB subdomain format
 
 
 ### 21 November 2019
-{: #21nov2019}
+{: #containers-nov2119}
 {: release-note}
 
 Ingress ALB changelog
@@ -3365,7 +3366,7 @@ Version changelog
 
 
 ### 19 November 2019
-{: #19nov2019}
+{: #containers-nov1919}
 {: release-note}
 
 Fluentd component changes
@@ -3382,7 +3383,7 @@ Bringing your own Ingress controller in VPC clusters
 
 
 ### 14 November 2019
-{: #14nov2019}
+{: #containers-nov1419}
 {: release-note}
 
 New! Diagnostics and Debug Tool add-on
@@ -3391,7 +3392,7 @@ New! Diagnostics and Debug Tool add-on
 
 
 ### 11 November 2019
-{: #11nov2019}
+{: #containers-nov1119}
 {: release-note}
 
 Exposing apps that are external to your cluster by using Ingress
@@ -3411,7 +3412,7 @@ Version changelog
 
 
 ### 7 November 2019
-{: #07nov2019}
+{: #containers-nov0719}
 {: release-note}
 
 CLI changelog
@@ -3424,14 +3425,14 @@ Ingress ALB changelog
 
 
 ### 5 November 2019
-{: #05nov2019}
+{: #containers-nov0519}
 {: release-note}
 
 New! Adding classic infrastructure servers to gateway-enabled classic clusters (Beta)
 :   If you have non-containerized workloads on a classic IBM Cloud infrastructure virtual server or bare metal server, you can connect those workloads to the workloads in your gateway-enabled classic cluster by [adding the server instance to your cluster network](/docs/containers?topic=containers-add_workers#gateway_vsi).
 
 ### 4 November 2019
-{: #04nov2019}
+{: #containers-nov0419}
 {: release-note}
 
 New! Kubernetes version 1.16
@@ -3444,7 +3445,7 @@ Unsupported: Kubernetes version 1.12
 :   With the release of version 1.16, clusters that run version 1.12 are unsupported. To continue receiving important security updates and support, you must [update the cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately.
 
 ### 1 November 2019
-{: #01nov2019}
+{: #containers-nov0119}
 {: release-note}
 
 New! Keep your own key (KYOK) support (beta)
@@ -3453,12 +3454,12 @@ New! Keep your own key (KYOK) support (beta)
 
 
 ## October 2019
-{: #oct19}
+{: #containers-oct19}
 
 
 
 ### 28 October 2019
-{: #28oct2019}
+{: #containers-oct2819}
 {: release-note}
 
 Version changelogs
@@ -3472,7 +3473,7 @@ New! Resource groups for VPC clusters
 
 
 ### 24 October 2019
-{: #24oct2019}
+{: #containers-oct2419}
 {: release-note}
 
 CLI changelog
@@ -3490,7 +3491,7 @@ Ingress subdomain troubleshooting
     
 
 ### 23 October 2019
-{: #23oct2019}
+{: #containers-oct2319}
 {: release-note}
 
 Ingress ALB changelog
@@ -3500,7 +3501,7 @@ Ingress annotations
 :   Added the [`proxy-ssl-verify-depth` and `proxy-ssl-name` optional parameters to the `ssl-services` annotation](/docs/containers?topic=containers-comm-ingress-annotations#ssl-services-support).
 
 ### 22 October 2019
-{: #22oct2019}
+{: #containers-oct2219}
 {: release-note}
 
 Version changelogs
@@ -3509,7 +3510,7 @@ Version changelogs
 
 
 ### 17 October 2019
-{: #17oct2019}
+{: #containers-oct1719}
 {: release-note}
 
 New! Cluster autoscaler
@@ -3521,7 +3522,7 @@ New DevOps tutorial
 
 
 ### 14 October 2019
-{: #14oct2019}
+{: #containers-oct1419}
 {: release-note}
 
 CLI changelog
@@ -3548,7 +3549,7 @@ Version changelogs
 
 
 ### 3 October 2019
-{: #03oct2019}
+{: #containers-oct0319}
 {: release-note}
 
 Ingress ALB changelog
@@ -3567,7 +3568,7 @@ Security for VPC clusters
     
 
 ### 1 October 2019
-{: #01oct2019}
+{: #containers-oct0119}
 {: release-note}
 
 End of service of {{site.data.keyword.la_full_notm}} and {{site.data.keyword.monitoringlong_notm}}
@@ -3591,12 +3592,12 @@ Version changelogs
     
 
 ## September 2019
-{: #sept19}
+{: #containers-sept19}
 
 
 
 ### 27 September 2019
-{: #27sept2019}
+{: #containers-sept2719}
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} supported in VPC clusters
@@ -3605,7 +3606,7 @@ Version changelogs
 
 
 ### 24 September 2019
-{: #24sept2019}
+{: #containers-sept2419}
 {: release-note}
 
 CLI changelog
@@ -3625,7 +3626,7 @@ Customizing PVC settings for VPC Block Storage
     
 
 ### 19 September 2019
-{: #19sept2019}
+{: #containers-sept1919}
 {: release-note}
 
 Sending custom Ingress certificates to legacy clients
@@ -3634,7 +3635,7 @@ Sending custom Ingress certificates to legacy clients
 
 
 ### 16 September 2019
-{: #16sept2019}
+{: #containers-sept1619}
 {: release-note}
 
 CLI changelog
@@ -3652,7 +3653,7 @@ Version changelogs
     
 
 ### 13 September 2019
-{: #13sept2019}
+{: #containers-sept1319}
 {: release-note}
 
 
@@ -3665,7 +3666,7 @@ Entitled software
     
 
 ### 12 September 2019
-{: #12sept2019}
+{: #containers-sept1219}
 {: release-note}
 
 Ingress ALB changelog
@@ -3674,14 +3675,14 @@ Ingress ALB changelog
 
 
 ### 5 September 2019
-{: #05sept2019}
+{: #containers-sept0519}
 {: release-note}
 
 Ingress ALB changelog
 :   Updated the ALB [`ingress-auth` image to build 340](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 4 September 2019
-{: #04sept2019}
+{: #containers-sept0419}
 {: release-note}
 
 CLI changelog
@@ -3693,7 +3694,7 @@ IAM allowlists
 
 
 ### 3 September 2019
-{: #03sept2019}
+{: #containers-sept0319}
 {: release-note}
 
 New! {{site.data.keyword.containerlong_notm}} plug-in version `0.4`
@@ -3703,19 +3704,19 @@ Version changelog
 :   Worker node patch updates are available for Kubernetes [1.15.3_1516](/docs/containers?topic=containers-115_changelog#1153_1516_worker), [1.14.6_1532](/docs/containers?topic=containers-114_changelog#1146_1532_worker), [1.13.10_1535](/docs/containers?topic=containers-113_changelog#11310_1535_worker), [1.12.10_1566](/docs/containers?topic=containers-112_changelog#11210_1566_worker), and {{site.data.keyword.redhat_openshift_notm}} [3.11.135_1523](/docs/openshift?topic=openshift-openshift_changelog_311#311135_1523_worker).
 
 ## August 2019
-{: #aug19}
+{: #containers-aug19}
 
 
 
 ### 29 August 2019
-{: #29aug2019}
+{: #containers-aug2919}
 {: release-note}
 
 Forwarding Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}
 :   Added steps to [create an audit webhook in your cluster](/docs/containers?topic=containers-health-audit) to collect Kubernetes API audit logs from your cluster and forward them to {{site.data.keyword.la_full_notm}}.
 
 ### 28 August 2019
-{: #28aug2019}
+{: #containers-aug2819}
 {: release-note}
 
 CLI changelog
@@ -3731,7 +3732,7 @@ Version changelogs
     
 
 ### 26 August 2019
-{: #26aug2019}
+{: #containers-aug2619}
 {: release-note}
 
 Cluster autoscaler
@@ -3743,7 +3744,7 @@ Ingress ALB changelog
 
 
 ### 23 August 2019
-{: #23aug2019}
+{: #containers-aug2319}
 {: release-note}
 
 
@@ -3761,7 +3762,7 @@ Remove bound services from cluster
 
 
 ### 20 August 2019
-{: #20aug2019}
+{: #containers-aug2019}
 {: release-note}
 
 Ingress ALB changelog
@@ -3770,7 +3771,7 @@ Ingress ALB changelog
 
 
 ### 19 August 2019
-{: #19aug2019}
+{: #containers-aug1919}
 {: release-note}
 
 New! Virtual Private Cloud
@@ -3788,7 +3789,7 @@ Kubernetes 1.14
 
 
 ### 17 August 2019
-{: #17aug2019}
+{: #containers-aug1719}
 {: release-note}
 
 {{site.data.keyword.at_full}}
@@ -3802,7 +3803,7 @@ Version changelogs
 
 
 ### 15 August 2019
-{: #15aug2019}
+{: #containers-aug1519}
 {: release-note}
 
 
@@ -3825,7 +3826,7 @@ Version changelogs
 
 
 ### 12 August 2019
-{: #12aug2019}
+{: #containers-aug1219}
 {: release-note}
 
 CLI changelog
@@ -3835,7 +3836,7 @@ Ingress ALB changelog
 :   Updated the ALB `ingress-auth` image to build 335 for [`musl libc` vulnerabilities](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 5 August 2019
-{: #05aug2019}
+{: #containers-aug0519}
 {: release-note}
 
 CLI changelog
@@ -3859,10 +3860,10 @@ Version changelogs
 
 
 ## July 2019
-{: #jul19}
+{: #containers-jul19}
 
 ### 30 July 2019
-{: #30july2019}
+{: #containers-july3019}
 {: release-note}
 
 CLI changelog
@@ -3877,7 +3878,7 @@ Removing subnets from a cluster
 
 
 ### 23 July 2019
-{: #23july2019}
+{: #containers-july2319}
 {: release-note}
 
 Fluentd changelog
@@ -3886,7 +3887,7 @@ Fluentd changelog
 
 
 ### 22 July 2019
-{: #22july2019}
+{: #containers-july2219}
 {: release-note}
 
 Version policy
@@ -3902,7 +3903,7 @@ Version changelog
 
 
 ### 17 July 2019
-{: #17july2019}
+{: #containers-july1719}
 {: release-note} 
 
 Ingress ALB changelog
@@ -3910,7 +3911,7 @@ Ingress ALB changelog
     
 
 ### 15 July 2019
-{: #15july2019}
+{: #containers-july1519}
 {: release-note}
 
 
@@ -3934,7 +3935,7 @@ Version changelogs
 :   Updated the changelogs for [1.14.4_1526](/docs/containers?topic=containers-114_changelog#1144_1526), [1.13.8_1529](/docs/containers?topic=containers-113_changelog#1138_1529), and [1.12.10_1560](/docs/containers?topic=containers-112_changelog#11210_1560) master fix pack updates.
 
 ### 8 July 2019
-{: #08july2019}
+{: #containers-july0819}
 {: release-note}
 
 Version changelogs
@@ -3943,14 +3944,14 @@ Version changelogs
 
 
 ### 2 July 2019
-{: #02july2019}
+{: #containers-july0219}
 {: release-note}
 
 CLI changelog
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.3.58](/docs/containers?topic=containers-cs_cli_changelog).
 
 ### 1 July 2019
-{: #01july2019}
+{: #containers-july0119}
 {: release-note}
 
 Infrastructure permissions
@@ -3963,10 +3964,10 @@ strongSwan VPN service
 
 
 ## June 2019
-{: #jun19}
+{: #containers-jun19}
 
 ### 24 June 2019
-{: #24june2019}
+{: #containers-june2419}
 {: release-note}
 
 Calico network policies
@@ -3987,7 +3988,7 @@ Version changelogs
     
 
 ### 21 June 2019
-{: #21june2019}
+{: #containers-june2119}
 {: release-note}
 
 
@@ -3997,7 +3998,7 @@ Accessing the Kubernetes master through the private cloud service endpoint
     
 
 ### 18 June 2019
-{: #18june2019}
+{: #containers-june1819}
 {: release-note}
 
 CLI changelog
@@ -4020,7 +4021,7 @@ Version changelogs
     
 
 ### 14 June 2019
-{: #14june2019}
+{: #containers-june1419}
 {: release-note}
 
 `kubectl` troubleshooting
@@ -4037,14 +4038,14 @@ Using existing subnets to create a cluster
     
 
 ### 12 June 2019
-{: #12june2019}
+{: #containers-june1219}
 {: release-note}
 
 Aggregating cluster roles
 :   Added steps for [extending users' existing permissions by aggregating cluster roles](/docs/containers?topic=containers-users#rbac_aggregate).
 
 ### 7 June 2019
-{: #07june2019}
+{: #containers-june0719}
 {: release-note}
 
 Access to the Kubernetes master through the private cloud service endpoint
@@ -4058,7 +4059,7 @@ Ingress ALB changelog
     
 
 ### 6 June 2019
-{: #06june2019}
+{: #containers-june0619}
 {: release-note}
 
 Fluentd changelog
@@ -4069,7 +4070,7 @@ Ingress ALB changelog
     
 
 ### 5 June 2019
-{: #05june2019}
+{: #containers-june0519}
 {: release-note}
 
 CLI reference
@@ -4078,14 +4079,14 @@ CLI reference
 
 
 ### 4 June 2019
-{: #04june2019}
+{: #containers-june0419}
 {: release-note}
 
 Version changelogs
 :   Updated the changelogs for the [1.14.2_1521](/docs/containers?topic=containers-114_changelog#1142_1521), [1.13.6_1524](/docs/containers?topic=containers-113_changelog#1136_1524), [1.12.9_1555](/docs/containers?topic=containers-112_changelog#1129_1555), and [1.11.10_1561](/docs/containers?topic=containers-111_changelog#11110_1561) patch releases.
 
 ### 3 June 2019
-{: #03june2019}
+{: #containers-june0319}
 {: release-note}
 
 Bringing your own Ingress controller
@@ -4104,10 +4105,10 @@ Razee
 :   Added [Razee](https://github.com/razee-io/Razee){: external} to the supported integrations to visualize deployment information in the cluster and to automate the deployment of Kubernetes resources. 
 
 ## May 2019
-{: #may19}
+{: #containers-may19}
 
 ### 30 May 2019
-{: #30may2019}
+{: #containers-may3019}
 {: release-note}
 
 CLI reference
@@ -4118,7 +4119,7 @@ Troubleshooting storage
     - Added a block storage troubleshooting topic for when [an app can't access or write to PVC](/docs/containers?topic=containers-block_app_failures). 
 
 ### 28 May 2019
-{: #28may2019}
+{: #containers-may2819}
 {: release-note}
 
 Cluster add-ons changelog
@@ -4132,7 +4133,7 @@ Troubleshooting storage
     - Added a troubleshooting topic for [PVC creation failures due to missing permissions](/docs/containers?topic=containers-missing_permissions).
 
 ### 23 May 2019
-{: #23may2019}
+{: #containers-may2319}
 {: release-note}
 
 CLI reference
@@ -4165,14 +4166,14 @@ Popular topics
     
 
 ### 20 May 2019
-{: #20may2019}
+{: #containers-may2019}
 {: release-note}
 
 Version changelogs
 :   Added [worker node fix pack changelogs](/docs/containers?topic=containers-changelog).
 
 ### 16 May 2019
-{: #16may2019}
+{: #containers-may1619}
 {: release-note}
 
 CLI reference
@@ -4183,7 +4184,7 @@ Unsupported: Kubernetes version 1.10
     
 
 ### 15 May 2019
-{: #15may2019}
+{: #containers-may1519}
 {: release-note}
 
 Default Kubernetes version
@@ -4193,7 +4194,7 @@ Service limits
 :   Added a [service limitations topic](/docs/containers?topic=containers-limitations#tech_limits).
     
 ### 13 May 2019
-{: #13may2019}
+{: #containers-may1319}
 {: release-note}
 
 Version changelogs
@@ -4203,7 +4204,7 @@ Worker node flavors
 :   Removed all [virtual machine worker node flavors](/docs/containers?topic=containers-planning_worker_nodes#vm) that are 48 or more cores. You can still provision [bare metal worker nodes](/docs/containers?topic=containers-planning_worker_nodes#bm) with 48 or more cores.
 
 ### 8 May 2019
-{: #08may2019}
+{: #containers-may0819}
 {: release-note}
 
 API
@@ -4222,7 +4223,7 @@ Reference topics
 :   Updated information for various service binding, `logging`, and `nlb` operations in the [user access](/docs/containers?topic=containers-access_reference) and [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli) pages.
 
 ### 7 May 2019
-{: #07may2019}
+{: #containers-may0719}
 {: release-note}
 
 Cluster DNS provider
@@ -4253,7 +4254,7 @@ Reference topics
 :   To support new features such as Kubernetes 1.14, [changelog reference](/docs/containers?topic=containers-changelog#changelog) pages are updated.
 
 ### 1 May 2019
-{: #01may2019}
+{: #containers-may0119}
 {: release-note}
 
 Assigning infrastructure access

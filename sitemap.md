@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-03-24"
+lastupdated: "2022-03-25"
 
 keywords: containers
 subcollection: containers
@@ -204,751 +204,2043 @@ subcollection: containers
 {: #sitemap_release_notes}
 
 
-[Release notes](/docs/containers?topic=containers-iks-release#iks-release)
+[Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
-* [March 2022](/docs/containers?topic=containers-iks-release#release-mar-2022)
+* [March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar22)
 
-    * [24 March 2022](/docs/containers?topic=containers-iks-release#24mar2022)
+    * [24 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar2422)
 
-    * [22 March 2022](/docs/containers?topic=containers-iks-release#22mar2022)
+        * {{site.data.keyword.cos_full_notm}} plug-in
 
-    * [21 March 2022](/docs/containers?topic=containers-iks-release#21mar2022)
+        * {{site.data.keyword.block_storage_is_short}} add-on.
 
-    * [17 March 2022](/docs/containers?topic=containers-iks-release#17mar2022)
+        * ALB OAuth Proxy add-on
 
-    * [16 March 2022](/docs/containers?topic=containers-iks-release#16mar2022)
+    * [22 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar2222)
 
-    * [15 March 2022](/docs/containers?topic=containers-iks-release#15mar2022)
+        * Hong Kong (`HKG02`) and Seoul (`SEO01`) are deprecated and become unsupported later this year. To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your Hong Kong (`HKG02`) and Seoul (`SEO01`) clusters by 28 September 2022. Clusters remaining in these data centers after 28 September 2022 will be removed. Cluster creation in these locations will be stopped on 29 April 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/get-support?topic=get-support-dc-closure).
 
-    * [14 March 2022](/docs/containers?topic=containers-iks-release#14mar2022)
+        * Ingress ALB changelog updates
 
-    * [11 March 2022](/docs/containers?topic=containers-iks-release#11mar2022)
+        * Istio add-on
 
-    * [9 March 2022](/docs/containers?topic=containers-iks-release#9mar2022)
+    * [21 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar2122)
 
-    * [8 March 2022](/docs/containers?topic=containers-iks-release#8mar2022)
+        * CLI changelog update
 
-    * [3 March 2022](/docs/containers?topic=containers-iks-release#3mar2022)
+    * [17 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar1722)
 
-* [February 2022](/docs/containers?topic=containers-iks-release#release-feb-2022)
+        * {{site.data.keyword.block_storage_is_short}} add-on.
 
-    * [28 February 2022](/docs/containers?topic=containers-iks-release#28feb2022)
+    * [16 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar1622)
 
-    * [24 February 2022](/docs/containers?topic=containers-iks-release#24feb2022)
+        * Cluster autoscaler add-on
 
-    * [23 February 2022](/docs/containers?topic=containers-iks-release#23feb2022)
+    * [15 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar1522)
 
-    * [18 February 2022](/docs/containers?topic=containers-iks-release#18feb2022)
+        * Version 1.19 unsupported 
 
-    * [17 February 2022](/docs/containers?topic=containers-iks-release#17feb2022)
+    * [14 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar1422)
 
-    * [15 February 2022](/docs/containers?topic=containers-iks-release#15feb2022)
+        * Worker node fix pack update.
 
-    * [14 February 2022](/docs/containers?topic=containers-iks-release#14feb2022)
+    * [11 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar1122)
 
-    * [10 February 2022](/docs/containers?topic=containers-iks-release#10feb2022)
+        * {{site.data.keyword.cos_full_notm}} plug-in
 
-    * [9 February 2022](/docs/containers?topic=containers-iks-release#9feb2022)
+    * [9 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar922)
 
-    * [3 February 2022](/docs/containers?topic=containers-iks-release#3feb2022)
+        * Istio add-on
 
-* [January 2022](/docs/containers?topic=containers-iks-release#release-jan-2022)
+    * [8 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar822)
 
-    * [31 January 2022](/docs/containers?topic=containers-iks-release#31jan2022)
+        * Master fix pack update.
 
-    * [27 January 2022](/docs/containers?topic=containers-iks-release#27jan2022)
+        * Istio add-on
 
-    * [26 January 2022](/docs/containers?topic=containers-iks-release#26jan2022)
+    * [3 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar322)
 
-    * [25 January 2022](/docs/containers?topic=containers-iks-release#25jan2022)
+        * {{site.data.keyword.containershort}} default version update.
 
-    * [24 January 2022](/docs/containers?topic=containers-iks-release#24jan2022)
+        * Maintenance Windows for {{site.data.keyword.containershort}} ALBs
 
-    * [20 January 2022](/docs/containers?topic=containers-iks-release#20jan2022)
+* [February 2022](/docs/containers?topic=containers-containers-relnotes#containers-feb22)
 
-    * [18 January 2022](/docs/containers?topic=containers-iks-release#18jan2022)
+    * [28 February 2022](/docs/containers?topic=containers-containers-relnotes#containers-feb2822)
 
-    * [17 January 2022](/docs/containers?topic=containers-iks-release#17jan2022)
+        * {{site.data.keyword.block_storage_is_short}} add-on.
 
-    * [13 January 2022](/docs/containers?topic=containers-iks-release#13jan2021)
+        * Cluster autoscaler
 
-    * [06 January 2022](/docs/containers?topic=containers-iks-release#jan0622)
+        * ALB OAuth Proxy add-on
 
-    * [4 January 2022](/docs/containers?topic=containers-iks-release#4jan2022)
+        * Worker node fix pack
 
-* [December 2021](/docs/containers?topic=containers-iks-release#release-dec-2021)
+    * [24 February 2022](/docs/containers?topic=containers-containers-relnotes#containers-feb2422)
 
-    * [20 December 2021](/docs/containers?topic=containers-iks-release#20dec2021)
+        * Container service CLI 
 
-    * [14 December 2021](/docs/containers?topic=containers-iks-release#14dec2021)
+        * Kubernetes Ingress image
 
-    * [7 December 2021](/docs/containers?topic=containers-iks-release#7dec2021)
+    * [23 February 2022](/docs/containers?topic=containers-containers-relnotes#containers-feb2322)
 
-    * [6 December 2021](/docs/containers?topic=containers-iks-release#6dec2021)
+        * Cluster autoscaler
 
-    * [2 December 2021](/docs/containers?topic=containers-iks-release#2dec2021)
+        * Istio add-on
 
-* [November 2021](/docs/containers?topic=containers-iks-release#release-nov-2021)
+    * [18 February 2022](/docs/containers?topic=containers-containers-relnotes#containers-feb1822)
 
-    * [29 November 2021](/docs/containers?topic=containers-iks-release#29nov2021)
+        * Container service CLI 
 
-    * [22 November 2021](/docs/containers?topic=containers-iks-release#22nov2021)
+    * [17 February 2022](/docs/containers?topic=containers-containers-relnotes#containers-feb1722)
 
-    * [19 November 2021](/docs/containers?topic=containers-iks-release#19nov2021)
+        * {{site.data.keyword.cos_full_notm}} plug-in
 
-    * [18 November 2021](/docs/containers?topic=containers-iks-release#18nov2021)
+    * [15 February 2022](/docs/containers?topic=containers-containers-relnotes#containers-feb1522)
 
-    * [17 November 2021](/docs/containers?topic=containers-iks-release#17nov2021)
+        * Istio add-on
 
-    * [15 November 2021](/docs/containers?topic=containers-iks-release#15nov2021)
+    * [14 February 2022](/docs/containers?topic=containers-containers-relnotes#containers-feb1422)
 
-    * [12 November 2021](/docs/containers?topic=containers-iks-release#12nov2021)
+        * Worker node fix pack
 
-    * [10 November 2021](/docs/containers?topic=containers-iks-release#10nov2021)
+        * {{site.data.keyword.cos_full_notm}} doc restructuring. 
 
-    * [8 November 2021](/docs/containers?topic=containers-iks-release#8nov2021)
+        * {{site.data.keyword.block_storage_is_short}} add-on.
 
-    * [4 November 2021](/docs/containers?topic=containers-iks-release#4nov2021)
+    * [10 February 2022](/docs/containers?topic=containers-containers-relnotes#containers-feb1022)
 
-    * [2 November 2021](/docs/containers?topic=containers-iks-release#2nov2021)
+        * Certified Kubernetes
 
-* [October 2021](/docs/containers?topic=containers-iks-release#release-oct-2021)
+        * ALB OAuth Proxy add-on
 
-    * [28 October 2021](/docs/containers?topic=containers-iks-release#28oct2021)
+    * [9 February 2022](/docs/containers?topic=containers-containers-relnotes#containers-feb922)
 
-    * [26 October 2021](/docs/containers?topic=containers-iks-release#26oct2021)
+        * New! Kubernetes 1.23
 
-    * [25 October 2021](/docs/containers?topic=containers-iks-release#25oct2021)
+        * Deprecated and unsupported Kubernetes versions
 
-    * [22 October 2021](/docs/containers?topic=containers-iks-release#22oct2021)
+    * [3 February 2022](/docs/containers?topic=containers-containers-relnotes#containers-feb322)
 
-    * [19 October 2021](/docs/containers?topic=containers-iks-release#19oct2021)
+        * Istio add-on
 
-    * [18 October 2021](/docs/containers?topic=containers-iks-release#18oct2021)
+* [January 2022](/docs/containers?topic=containers-containers-relnotes#containers-jan22)
 
-    * [13 October 2021](/docs/containers?topic=containers-iks-release#13oct2021)
+    * [31 January 2022](/docs/containers?topic=containers-containers-relnotes#containers-jan3122)
 
-    * [11 October 2021](/docs/containers?topic=containers-iks-release#11oct2021)
+        * Version changelog
 
-    * [7 October 2021](/docs/containers?topic=containers-iks-release#7oct2021)
+        * **New!** Worker node flavor reference
 
-    * [6 October 2021](/docs/containers?topic=containers-iks-release#6oct2021)
+    * [27 January 2022](/docs/containers?topic=containers-containers-relnotes#containers-jan2722)
 
-    * [5 October 2021](/docs/containers?topic=containers-iks-release#5oct2021)
+        * {{site.data.keyword.block_storage_is_short}} add-on.
 
-* [September 2021](/docs/containers?topic=containers-iks-release#release-sep-2021)
+        * **New!** Gathering Ingress logs
 
-    * [29 September 2021](/docs/containers?topic=containers-iks-release#29sep2021)
+    * [26 January 2022](/docs/containers?topic=containers-containers-relnotes#containers-jan2622)
 
-    * [27 September 2021](/docs/containers?topic=containers-iks-release#27sep2021)
+        * ALB OAuth Proxy add-on
 
-    * [23 September 2021](/docs/containers?topic=containers-iks-release#23sep2021)
+    * [25 January 2022](/docs/containers?topic=containers-containers-relnotes#containers-jan2522)
 
-    * [22 September 2021](/docs/containers?topic=containers-iks-release#22sep2021)
+        * Kubernetes Ingress image
 
-    * [16 September 2021](/docs/containers?topic=containers-iks-release#16sep2021)
+        * Kubernetes Ingress annotations
 
-    * [14 September 2021](/docs/containers?topic=containers-iks-release#14sep2021)
+    * [24 January 2022](/docs/containers?topic=containers-containers-relnotes#containers-jan2422)
 
-    * [13 September 2021](/docs/containers?topic=containers-iks-release#13sep2021)
+        * {{site.data.keyword.cos_full_notm}} plug-in
 
-    * [9 September 2021](/docs/containers?topic=containers-iks-release#9sep2021)
+    * [20 January 2022](/docs/containers?topic=containers-containers-relnotes#containers-jan2022)
 
-    * [1 September 2021](/docs/containers?topic=containers-iks-release#1sep2021)
+        * Cluster autoscaler add-on.
 
-* [August 2021](/docs/containers?topic=containers-iks-release#aug21)
+        * {{site.data.keyword.block_storage_is_short}} add-on.
 
-    * [31 August 2021](/docs/containers?topic=containers-iks-release#31aug2021)
+        * OpenShift Data Foundation
 
-    * [30 August 2021](/docs/containers?topic=containers-iks-release#30aug2021)
+    * [18 January 2022](/docs/containers?topic=containers-containers-relnotes#containers-jan1822)
 
-    * [25 August 2021](/docs/containers?topic=containers-iks-release#26aug2021)
+        * Review the release notes for January 2022.
 
-    * [23 August 2021](/docs/containers?topic=containers-iks-release#23aug2021)
+        * **New!** {{site.data.keyword.containerlong_notm}} CLI Map
 
-    * [16 August 2021](/docs/containers?topic=containers-iks-release#16aug2021)
+        * {{site.data.keyword.containershort}} 1.19, 1.20, 1.21, and 1.22 unsupported date change
 
-    * [12 August 2021](/docs/containers?topic=containers-iks-release#12aug2021)
+        * Worker node fix pack update.
 
-    * [10 August 2021](/docs/containers?topic=containers-iks-release#10aug2021)
+    * [17 January 2022](/docs/containers?topic=containers-containers-relnotes#containers-jan1722)
 
-    * [9 August 2021](/docs/containers?topic=containers-iks-release#09aug2021)
+        * {{site.data.keyword.cos_full_notm}} plug-in
 
-    * [2 August 2021](/docs/containers?topic=containers-iks-release#02aug2021)
+    * [13 January 2022](/docs/containers?topic=containers-containers-relnotes#containers-jan1321)
 
-* [July 2021](/docs/containers?topic=containers-iks-release#jul21)
+        * Istio add-on
 
-    * [27 July 2021](/docs/containers?topic=containers-iks-release#27july2021)
+    * [06 January 2022](/docs/containers?topic=containers-containers-relnotes#jan0622)
 
-    * [22 July 2021](/docs/containers?topic=containers-iks-release#22july2021)
+        * {{site.data.keyword.block_storage_is_short}} add-on.
 
-    * [19 July 2021](/docs/containers?topic=containers-iks-release#19july2021)
+        * {{site.data.keyword.containershort}} 1.20 end of support date change
 
-    * [15 July 2021](/docs/containers?topic=containers-iks-release#15july2021)
+    * [4 January 2022](/docs/containers?topic=containers-containers-relnotes#containers-jan422)
 
-    * [12 July 2021](/docs/containers?topic=containers-iks-release#12july2021)
+        * Worker node fix pack update
 
-    * [6 July 2021](/docs/containers?topic=containers-iks-release#06july2021)
+* [December 2021](/docs/containers?topic=containers-containers-relnotes#containers-dec21)
 
-    * [2 July 2021](/docs/containers?topic=containers-iks-release#02july2021)
+    * Review the release notes for December 2021.
 
-* [June 2021](/docs/containers?topic=containers-iks-release#jun21)
+    * [20 December 2021](/docs/containers?topic=containers-containers-relnotes#containers-dec2021)
 
-    * [28 June 2021](/docs/containers?topic=containers-iks-release#28june2021)
+        * Deprecated and unsupported Kubernetes versions
 
-    * [24 June 2021](/docs/containers?topic=containers-iks-release#24june2021)
+    * [14 December 2021](/docs/containers?topic=containers-containers-relnotes#containers-dec1421)
 
-    * [23 June 2021](/docs/containers?topic=containers-iks-release#23june2021)
+        * Istio add-on
 
-    * [22 June 2021](/docs/containers?topic=containers-iks-release#22june2021)
+    * [7 December 2021](/docs/containers?topic=containers-containers-relnotes#containers-dec721)
 
-    * [21 June 2021](/docs/containers?topic=containers-iks-release#21june2021)
+        * Istio add-on
 
-    * [17 June 2021](/docs/containers?topic=containers-iks-release#17june2021)
+        * Master fix pack update
 
-    * [15 June 2021](/docs/containers?topic=containers-iks-release#15june2021)
+    * [6 December 2021](/docs/containers?topic=containers-containers-relnotes#containers-dec621)
 
-    * [10 June 2021](/docs/containers?topic=containers-iks-release#10june2021)
+        * Worker node fix pack update
 
-    * [9 June 2021](/docs/containers?topic=containers-iks-release#09june2021)
+    * [2 December 2021](/docs/containers?topic=containers-containers-relnotes#containers-dec221)
 
-    * [07 June 2021](/docs/containers?topic=containers-iks-release#07june2021)
+        * {{site.data.keyword.containershort}} default version update.
 
-    * [3 June 2021](/docs/containers?topic=containers-iks-release#03june2021)
+* [November 2021](/docs/containers?topic=containers-containers-relnotes#containers-nov21)
 
-    * [2 June 2021](/docs/containers?topic=containers-iks-release#02june2021)
+    * Review the release notes for November 2021.
 
-* [May 2021](/docs/containers?topic=containers-iks-release#may21)
+    * [29 November 2021](/docs/containers?topic=containers-containers-relnotes#containers-nov2921)
 
-    * [27 May 2021](/docs/containers?topic=containers-iks-release#27may2021)
+        * Container service CLI 
 
-    * [26 May 2021](/docs/containers?topic=containers-iks-release#26may2021)
+    * [22 November 2021](/docs/containers?topic=containers-containers-relnotes#containers-nov2221)
 
-    * [24 May 2021](/docs/containers?topic=containers-iks-release#24may2021)
+        * Worker node fix pack update
 
-    * [17 May 2021](/docs/containers?topic=containers-iks-release#17may2021)
+        * {{site.data.keyword.block_storage_is_short}} add-on.
 
-    * [11 May 2021](/docs/containers?topic=containers-iks-release#11may2021)
+        * Cluster autoscaler add-on.
 
-    * [10 May 2021](/docs/containers?topic=containers-iks-release#10may2021)
+    * [19 November 2021](/docs/containers?topic=containers-containers-relnotes#containers-nov1921)
 
-    * [4 May 2021](/docs/containers?topic=containers-iks-release#04may2021)
+        * ALB OAuth Proxy add-on
 
-* [April 2021](/docs/containers?topic=containers-iks-release#apr21)
+        * Kubernetes Ingress image
 
-    * [29 April 2021](/docs/containers?topic=containers-iks-release#29april2021)
+    * [18 November 2021](/docs/containers?topic=containers-containers-relnotes#containers-nov1821)
 
-    * [28 April 2021](/docs/containers?topic=containers-iks-release#28april2021)
+        * {{site.data.keyword.cloudaccesstraillong_notm}} and {{site.data.keyword.at_full_notm}}
 
-    * [27 April 2021](/docs/containers?topic=containers-iks-release#27april2021)
+        * {{site.data.keyword.cos_full_notm}}
 
-    * [26 April 2021](/docs/containers?topic=containers-iks-release#26april2021)
+    * [17 November 2021](/docs/containers?topic=containers-containers-relnotes#containers-nov1721)
 
-    * [23 April 2021](/docs/containers?topic=containers-iks-release#23april2021)
+        * Worker node fix pack update
 
-    * [20 April 2021](/docs/containers?topic=containers-iks-release#20april2021)
+    * [15 November 2021](/docs/containers?topic=containers-containers-relnotes#containers-nov1521)
 
-    * [19 April 2021](/docs/containers?topic=containers-iks-release#19april2021)
+        * CLI changelog
 
-    * [16 April 2021](/docs/containers?topic=containers-iks-release#16april2021)
+    * [12 November 2021](/docs/containers?topic=containers-containers-relnotes#containers-nov1221)
 
-    * [15 April 2021](/docs/containers?topic=containers-iks-release#15april2021)
+        * Master fix pack updates
 
-    * [12 April 2021](/docs/containers?topic=containers-iks-release#12april2021)
+    * [10 November 2021](/docs/containers?topic=containers-containers-relnotes#containers-nov1021)
 
-    * [5 April 2021](/docs/containers?topic=containers-iks-release#05april2021)
+        * Worker node fix pack update
 
-    * [2 April 2021](/docs/containers?topic=containers-iks-release#02april2021)
+    * [8 November 2021](/docs/containers?topic=containers-containers-relnotes#containers-nov821)
 
-    * [1 April 2021](/docs/containers?topic=containers-iks-release#01april2021)
+        * Update commands to use `docker build`
 
-* [March 2021](/docs/containers?topic=containers-iks-release#mar21)
+    * [4 November 2021](/docs/containers?topic=containers-containers-relnotes#containers-nov421)
 
-    * [30 March 2021](/docs/containers?topic=containers-iks-release#30march2021)
+        * IAM trusted profiles for pod authorization
 
-    * [29 March 2021](/docs/containers?topic=containers-iks-release#29march2021)
+    * [2 November 2021](/docs/containers?topic=containers-containers-relnotes#containers-nov221)
 
-    * [25 March 2021](/docs/containers?topic=containers-iks-release#25march2021)
+        * Istio add-on change log
 
-    * [23 March 2021](/docs/containers?topic=containers-iks-release#23march2021)
+* [October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct21)
 
-    * [22 March 2021](/docs/containers?topic=containers-iks-release#22march2021)
+    * Review the release notes for October 2021.
 
-    * [17 March 2021](/docs/containers?topic=containers-iks-release#deprecated-at-events)
+    * [28 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct2821)
 
-    * [16 March 2021](/docs/containers?topic=containers-iks-release#16march2021)
+        * Istio add-on change log
 
-    * [12 March 2021](/docs/containers?topic=containers-iks-release#12march2021)
+    * [26 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct2621)
 
-    * [1 March 2021](/docs/containers?topic=containers-iks-release#26march2021)
+        * CLI changelog
 
-    * [9 March 2021](/docs/containers?topic=containers-iks-release#09march2021)
+    * [25 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct2521)
 
-    * [5 March 2021](/docs/containers?topic=containers-iks-release#05march2021)
+        * Worker node fix pack update
 
-    * [1 March 2021](/docs/containers?topic=containers-iks-release#01march2021)
+    * [22 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct2221)
 
-* [February 2021](/docs/containers?topic=containers-iks-release#feb21)
+        * {{site.data.keyword.cos_full_notm}} plug-in.
 
-    * [27 February 2021](/docs/containers?topic=containers-iks-release#27feb2021)
+    * [19 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct1921)
 
-    * [26 February 2021](/docs/containers?topic=containers-iks-release#26feb2021)
+        * Ingress ALB changelog updates
 
-    * [25 February 2021](/docs/containers?topic=containers-iks-release#25feb2021)
+    * [18 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct1821)
 
-    * [24 February 2021](/docs/containers?topic=containers-iks-release#24feb2021)
+        * New troubleshooting topic
 
-    * [23 February 2021](/docs/containers?topic=containers-iks-release#23feb2021)
+    * [13 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct1321)
 
-    * [22 February 2021](/docs/containers?topic=containers-iks-release#22feb2021)
+        * CLI changelog
 
-    * [20 February 2021](/docs/containers?topic=containers-iks-release#20feb2021)
+    * [11 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct1121)
 
-    * [17 February 2021](/docs/containers?topic=containers-iks-release#17feb2021)
+        * Unsupported Kubernetes version 1.18
 
-    * [15 February 2021](/docs/containers?topic=containers-iks-release#15feb2021)
+        * Worker node fix pack update
 
-    * [12 February 2021](/docs/containers?topic=containers-iks-release#12feb2021)
+    * [7 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct721)
 
-    * [10 February 2021](/docs/containers?topic=containers-iks-release#10feb2021)
+        * Istio add-on change log
 
-    * [8 February 2021](/docs/containers?topic=containers-iks-release#08feb2021)
+        * Cluster autoscaler add-on.
 
-    * [4 February 2021](/docs/containers?topic=containers-iks-release#04feb2021)
+    * [6 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct621)
 
-    * [3 February 2021](/docs/containers?topic=containers-iks-release#03feb2021)
+        * {{site.data.keyword.block_storage_is_short}} add-on.
 
-    * [1 February 2021](/docs/containers?topic=containers-iks-release#01feb2021)
+    * [5 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct521)
 
-* [January 2021](/docs/containers?topic=containers-iks-release#jan21)
+        * Updated supported, deprecated, and unsupported versions for strongSwan Helm chart.
 
-    * [27 January 2021](/docs/containers?topic=containers-iks-release#27jan2021)
+        * {{site.data.keyword.cos_full_notm}} plug-in.
 
-    * [25 January 2021](/docs/containers?topic=containers-iks-release#25jan2021)
+* [September 2021](/docs/containers?topic=containers-containers-relnotes#containers-sep21)
 
-    * [19 January 2021](/docs/containers?topic=containers-iks-release#19jan2021)
+    * Review the release notes for September 2021.
 
-    * [18 January 2021](/docs/containers?topic=containers-iks-release#18jan2021)
+    * [29 September 2021](/docs/containers?topic=containers-containers-relnotes#containers-sep2921)
 
-    * [14 January 2021](/docs/containers?topic=containers-iks-release#14jan2021)
+        * New! Kubernetes 1.22
 
-    * [12 January 2021](/docs/containers?topic=containers-iks-release#12jan2021)
+        * Deprecated and unsupported Kubernetes versions
 
-    * [7 January 2021](/docs/containers?topic=containers-iks-release#07jan2021)
+        * Master fix pack and worker node fix pack update
 
-    * [6 January 2021](/docs/containers?topic=containers-iks-release#06jan2021)
+    * [27 September 2021](/docs/containers?topic=containers-containers-relnotes#containers-sep2721)
 
-* [December 2020](/docs/containers?topic=containers-iks-release#dec20)
+        * Master fix pack update
 
-    * [21 December 2020](/docs/containers?topic=containers-iks-release#21dec2020)
+        * Worker node fix pack update
 
-    * [18 December 2020](/docs/containers?topic=containers-iks-release#18dec2020)
+    * [23 September 2021](/docs/containers?topic=containers-containers-relnotes#containers-sep2321)
 
-    * [17 December 2020](/docs/containers?topic=containers-iks-release#17dec2020)
+        * Review the release notes for 23 September 2021.
 
-    * [16 December 2020](/docs/containers?topic=containers-iks-release#16dec2020)
+        * Istio add-on change log
 
-    * [15 December 2020](/docs/containers?topic=containers-iks-release#15dec2020)
+    * [22 September 2021](/docs/containers?topic=containers-containers-relnotes#containers-sep2221)
 
-    * [14 December 2020](/docs/containers?topic=containers-iks-release#14dec2020)
+        * Review the release notes for 22 September 2021.
 
-    * [11 December 2020](/docs/containers?topic=containers-iks-release#11dec2020)
+        * Ingress ALB version change log
 
-    * [9 December 2020](/docs/containers?topic=containers-iks-release#09dec2020)
+    * [16 September 2021](/docs/containers?topic=containers-containers-relnotes#containers-sep1621)
 
-    * [7 December 2020](/docs/containers?topic=containers-iks-release#07dec2020)
+        * {{site.data.keyword.block_storage_is_short}} add-on  
 
-    * [3 December 2020](/docs/containers?topic=containers-iks-release#03dec2020)
+    * [14 September 2021](/docs/containers?topic=containers-containers-relnotes#containers-sep1421)
 
-    * [1 December 2020](/docs/containers?topic=containers-iks-release#01dec2020)
+        * Review the release notes for 14 September 2021.
 
-* [November 2020](/docs/containers?topic=containers-iks-release#nov20)
+        * Ingress ALB version change log
 
-    * [24 November 2020](/docs/containers?topic=containers-iks-release#24nov2020)
+        * Istio add-on change log
 
-    * [23 November 2020](/docs/containers?topic=containers-iks-release#23nov2020)
+    * [13 September 2021](/docs/containers?topic=containers-containers-relnotes#containers-sep1321)
 
-    * [20 November 2020](/docs/containers?topic=containers-iks-release#20nov2020)
+        * Worker node fix pack update
 
-    * [19 November 2020](/docs/containers?topic=containers-iks-release#19nov2020)
+    * [9 September 2021](/docs/containers?topic=containers-containers-relnotes#containers-sep921)
 
-    * [18 November 2020](/docs/containers?topic=containers-iks-release#18nov2020)
+        * Ingress ALB changelog
 
-    * [16 November 2020](/docs/containers?topic=containers-iks-release#16nov2020)
+    * [1 September 2021](/docs/containers?topic=containers-containers-relnotes#containers-sep121)
 
-    * [13 November 2020](/docs/containers?topic=containers-iks-release#13nov2020)
+        * Review the release notes for 1 September 2021.
 
-    * [9 November 2020](/docs/containers?topic=containers-iks-release#09nov2020)
+        * {{site.data.keyword.block_storage_is_short}} add-on
 
-    * [5 November 2020](/docs/containers?topic=containers-iks-release#05nov2020)
+        * {{site.data.keyword.cos_full_notm}} plug-in 
 
-    * [2 November 2020](/docs/containers?topic=containers-iks-release#02nov2020)
+* [August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug21)
 
-* [October 2020](/docs/containers?topic=containers-iks-release#oct20)
+    * Review the release notes for August 2021.
 
-    * [26 October 2020](/docs/containers?topic=containers-iks-release#26oct2020)
+    * [31 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug3121)
 
-    * [22 October 2020](/docs/containers?topic=containers-iks-release#22oct2020)
+        * Review the release notes for 31 August 2021.
 
-    * [16 October 2020](/docs/containers?topic=containers-iks-release#16oct2020)
+        * Istio add-on changelog
 
-    * [13 October 2020](/docs/containers?topic=containers-iks-release#13oct2020)
+        * New! Sao Paulo multizone region
 
-    * [12 October 2020](/docs/containers?topic=containers-iks-release#12oct2020)
+    * [30 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug3021)
 
-    * [8 October 2020](/docs/containers?topic=containers-iks-release#08oct2020)
+        * Review the release notes for 30 August 2021.
 
-    * [6 October 2020](/docs/containers?topic=containers-iks-release#06oct2020)
+        * Worker node fix pack update
 
-    * [1 October 2020](/docs/containers?topic=containers-iks-release#01oct2020)
+    * [25 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug2621)
 
-* [September 2020](/docs/containers?topic=containers-iks-release#sep20)
+        * New! Create a cluster with a template
 
-    * [29 September 2020](/docs/containers?topic=containers-iks-release#29sept2020)
+        * {{site.data.keyword.cos_full_notm}} plug-in
 
-    * [26 September 2020](/docs/containers?topic=containers-iks-release#26sept2020)
+        * Master fix pack update changelog documentation
 
-    * [24 September 2020](/docs/containers?topic=containers-iks-release#24sept2020)
+    * [23 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug2321)
 
-    * [23 September 2020](/docs/containers?topic=containers-iks-release#23sept2020)
+        * Registry token update
 
-    * [22 September 2020](/docs/containers?topic=containers-iks-release#22sept2020)
+        * Ingress changelogs
 
-    * [21 September 2020](/docs/containers?topic=containers-iks-release#21sept2020)
+        * ALB OAuth Proxy
 
-    * [4 September 2020](/docs/containers?topic=containers-iks-release#04sept2020)
+    * [16 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug1621)
 
-    * [3 September 2020](/docs/containers?topic=containers-iks-release#03sept2020)
+        * Worker node versions
 
-    * [2 September 2020](/docs/containers?topic=containers-iks-release#02sept2020)
+    * [12 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug1221)
 
-    * [1 September 2020](/docs/containers?topic=containers-iks-release#1sept2020)
+        * Istio add-on changelog
 
-* [August 2020](/docs/containers?topic=containers-iks-release#aug20)
+    * [10 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug1021)
 
-    * [31 August 2020](/docs/containers?topic=containers-iks-release#31aug2020)
+        * Ingress changelogs
 
-    * [27 August 2020](/docs/containers?topic=containers-iks-release#27aug2020)
+        * ALB OAuth Proxy
 
-    * [24 August 2020](/docs/containers?topic=containers-iks-release#24aug2020)
+    * [9 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug0921)
 
-    * [18 August 2020](/docs/containers?topic=containers-iks-release#18aug2020)
+        * CLI changelog
 
-    * [17 August 2020](/docs/containers?topic=containers-iks-release#17aug2020)
+    * [2 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug0221)
 
-    * [12 August 2020](/docs/containers?topic=containers-iks-release#12aug2020)
+        * Ingress changelogs
 
-    * [6 August 2020](/docs/containers?topic=containers-iks-release#06aug2020)
+        * Worker node versions
 
-    * [5 August 2020](/docs/containers?topic=containers-iks-release#05aug2020)
+* [July 2021](/docs/containers?topic=containers-containers-relnotes#containers-jul21)
 
-    * [4 August 2020](/docs/containers?topic=containers-iks-release#04aug2020)
+    * [27 July 2021](/docs/containers?topic=containers-containers-relnotes#containers-july2721)
 
-    * [3 August 2020](/docs/containers?topic=containers-iks-release#03aug2020)
+        * New! IAM trusted profile support
 
-* [July 2020](/docs/containers?topic=containers-iks-release#july20)
+        * Master versions
 
-    * [31 July 2020](/docs/containers?topic=containers-iks-release#31july2020)
+    * [22 July 2021](/docs/containers?topic=containers-containers-relnotes#containers-july2221)
 
-    * [28 July 2020](/docs/containers?topic=containers-iks-release#28july2020)
+        * Istio add-on changelog
 
-    * [24 July 2020](/docs/containers?topic=containers-iks-release#24july2020)
+    * [19 July 2021](/docs/containers?topic=containers-containers-relnotes#containers-july1921)
 
-    * [20 July 2020](/docs/containers?topic=containers-iks-release#20july2020)
+        * Worker node versions
 
-    * [17 July 2020](/docs/containers?topic=containers-iks-release#17july2020)
+    * [15 July 2021](/docs/containers?topic=containers-containers-relnotes#containers-july1521)
 
-    * [16 July 2020](/docs/containers?topic=containers-iks-release#16july2020)
+        * Istio add-on changelog
 
-    * [8 July 2020](/docs/containers?topic=containers-iks-release#08july2020)
+    * [12 July 2021](/docs/containers?topic=containers-containers-relnotes#containers-july1221)
 
-    * [7 July 2020](/docs/containers?topic=containers-iks-release#07july2020)
+        * Snapshots
 
-    * [6 July 2020](/docs/containers?topic=containers-iks-release#06july2020)
+    * [6 July 2021](/docs/containers?topic=containers-containers-relnotes#containers-july0621)
 
-    * [2 July 2020](/docs/containers?topic=containers-iks-release#02july2020)
+        * Ingress changelogs
 
-* [June 2020](/docs/containers?topic=containers-iks-release#june20)
+        * Worker node versions
 
-    * [24 June 2020](/docs/containers?topic=containers-iks-release#24june2020)
+    * [2 July 2021](/docs/containers?topic=containers-containers-relnotes#containers-july0221)
 
-    * [23 June 2020](/docs/containers?topic=containers-iks-release#23june2020)
+        * Unsupported Kubernetes version 1.17
 
-    * [22 June 2020](/docs/containers?topic=containers-iks-release#22june2020)
+* [June 2021](/docs/containers?topic=containers-containers-relnotes#containers-jun21)
 
-    * [18 June 2020](/docs/containers?topic=containers-iks-release#18june2020)
+    * From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains for all clusters in {{site.data.keyword.containerlong_notm}}. Review the following actions that you must make to your Ingress setup.
 
-    * [16 June 2020](/docs/containers?topic=containers-iks-release#16june2020)
+    * - If you currently allow inbound traffic to your classic cluster from the Cloudflare source IP addresses, you must also allow inbound traffic from the [Akamai source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} before 07 July. After the migration completes on 31 July, you can remove the Cloudflare IP address rules.
 
-    * [9 June 2020](/docs/containers?topic=containers-iks-release#09june2020)
+    * - The Akamai health check does not support verification of the body of the health check response. Update any custom health check rules that you configured for Cloudflare that use verification of the body of the health check responses.
 
-    * [8 June 2020](/docs/containers?topic=containers-iks-release#08june2020)
+    * - Cluster subdomains that were health checked in Cloudflare are now registered in the Akamai DNS as CNAME records. These CNAME records point to an Akamai Global Traffic Management domain that health checks the subdomains. When a client runs a DNS query for a health checked subdomain, a CNAME record is returned to the client, as opposed to Cloudflare, in which an A record was returned. If your client expects an A record for a subdomain that was health checked in Cloudflare, update your logic to accept a CNAME record.
 
-    * [4 June 2020](/docs/containers?topic=containers-iks-release#04june2020)
+    * - During the migration, an Akamai Global Traffic Management (GTM) health check was automatically created for any subdomains that had a Cloudflare health check. If you previously created a Cloudflare health check for a subdomain, and you create an Akamai health check for the subdomain after the migration, the two Akamai health checks might conflict. Note that Akamai GTM configurations don't support nested subdomains. In these cases, you can use the `ibmcloud ks nlb-dns monitor disable` command to disable the Akamai health check that the migration automatically configured for your subdomain.
 
-    * [1 June 2020](/docs/containers?topic=containers-iks-release#01june2020)
+    * [28 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june2821)
 
-* [May 2020](/docs/containers?topic=containers-iks-release#may20)
+        * Master versions
 
-    * [31 May 2020](/docs/containers?topic=containers-iks-release#31may2020)
+    * [24 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june2421)
 
-    * [26 May 2020](/docs/containers?topic=containers-iks-release#26may2020)
+        * CLI changelog
 
-    * [20 May 2020](/docs/containers?topic=containers-iks-release#20may2020)
+    * [23 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june2321)
 
-    * [19 May 2020](/docs/containers?topic=containers-iks-release#19may2020)
+        * Cluster autoscaler add-on
 
-    * [18 May 2020](/docs/containers?topic=containers-iks-release#18may2020)
+    * [22 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june2221)
 
-    * [14 May 2020](/docs/containers?topic=containers-iks-release#14may2020)
+        * {{site.data.keyword.cos_full_notm}} plug-in
 
-    * [11 May 2020](/docs/containers?topic=containers-iks-release#11may2020)
+        * Worker node versions
 
-    * [8 May 2020](/docs/containers?topic=containers-iks-release#08may2020)
+    * [21 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june2121)
 
-    * [6 May 2020](/docs/containers?topic=containers-iks-release#06may2020)
+        * Ingress changelogs
 
-    * [4 May 2020](/docs/containers?topic=containers-iks-release#04may2020)
+        * New! The `addon options` command is now available
 
-* [April 2020](/docs/containers?topic=containers-iks-release#apr20)
+    * [17 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june1721)
 
-    * [30 April 2020](/docs/containers?topic=containers-iks-release#30april2020)
+        * ALB OAuth Proxy
 
-    * [29 April 2020](/docs/containers?topic=containers-iks-release#29april2020)
+    * [15 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june1521)
 
-    * [27 April 2020](/docs/containers?topic=containers-iks-release#27april2020)
+        * New! Private VPC NLB
 
-    * [23 April 2020](/docs/containers?topic=containers-iks-release#23april2020)
+    * [10 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june1021)
 
-    * [22 April 2020](/docs/containers?topic=containers-iks-release#22april2020)
+        * Ingress changelogs
 
-    * [17 April 2020](/docs/containers?topic=containers-iks-release#17april2020)
+    * [9 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june0921)
 
-    * [16 April 2020](/docs/containers?topic=containers-iks-release#16april2020)
+        * New! Kubernetes 1.21
 
-    * [13 April 2020](/docs/containers?topic=containers-iks-release#13april2020)
+        * Deprecated Kubernetes 1.18
 
-    * [6 April 2020](/docs/containers?topic=containers-iks-release#06april2020)
+        * Expanded Troubleshooting
 
-    * [1 April 2020](/docs/containers?topic=containers-iks-release#01april2020)
+    * [07 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june0721)
 
-* [March 2020](/docs/containers?topic=containers-iks-release#mar20)
+        * Worker node versions
 
-    * [30 March 2020](/docs/containers?topic=containers-iks-release#30mar2020)
+    * [3 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june0321)
 
-    * [27 March 2020](/docs/containers?topic=containers-iks-release#27mar2020)
+        * {{site.data.keyword.cos_full_notm}} plug-in
 
-    * [25 March 2020](/docs/containers?topic=containers-iks-release#25mar2020)
+    * [2 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june0221)
 
-    * [24 March 2020](/docs/containers?topic=containers-iks-release#24mar2020)
+        * End of support for custom IBM Ingress image
 
-    * [18 March 2020](/docs/containers?topic=containers-iks-release#18mar2020)
+* [May 2021](/docs/containers?topic=containers-containers-relnotes#containers-may21)
 
-    * [16 March 2020](/docs/containers?topic=containers-iks-release#16mar2020)
+    * [27 May 2021](/docs/containers?topic=containers-containers-relnotes#containers-may2721)
 
-    * [12 March 2020](/docs/containers?topic=containers-iks-release#12mar2020)
+        * Istio add-on changelog
 
-    * [10 March 2020](/docs/containers?topic=containers-iks-release#10mar2020)
+    * [26 May 2021](/docs/containers?topic=containers-containers-relnotes#containers-may2621)
 
-    * [9 March 2020](/docs/containers?topic=containers-iks-release#09mar2020)
+        * CLI changelog
 
-    * [4 March 2020](/docs/containers?topic=containers-iks-release#04mar2020)
+        * Version 0.45.0 of the Kubernetes Ingress image
 
-    * [2 March 2020](/docs/containers?topic=containers-iks-release#02mar2020)
+    * [24 May 2021](/docs/containers?topic=containers-containers-relnotes#containers-may2421)
 
-* [February 2020](/docs/containers?topic=containers-iks-release#feb20)
+        * Master versions
 
-    * [28 February 2020](/docs/containers?topic=containers-iks-release#28feb2020)
+        * Worker node versions
 
-    * [22 February 2020](/docs/containers?topic=containers-iks-release#22feb2020)
+    * [17 May 2021](/docs/containers?topic=containers-containers-relnotes#containers-may1721)
 
-    * [19 February 2020](/docs/containers?topic=containers-iks-release#19feb2020)
+        * Deprecated: Kubernetes web terminal.
 
-    * [17 February 2020](/docs/containers?topic=containers-iks-release#17feb2020)
+        * Istio add-on
 
-    * [14 February 2020](/docs/containers?topic=containers-iks-release#14feb2020)
+        * Deprecated Ubuntu 16 end of support date
 
-    * [10 February 2020](/docs/containers?topic=containers-iks-release#10feb2020)
+    * [11 May 2021](/docs/containers?topic=containers-containers-relnotes#containers-may1121)
 
-    * [6 February 2020](/docs/containers?topic=containers-iks-release#06feb2020)
+        * VPC cluster healthchecks
 
-    * [3 February 2020](/docs/containers?topic=containers-iks-release#03feb2020)
+    * [10 May 2021](/docs/containers?topic=containers-containers-relnotes#containers-may1021)
 
-* [January 2020](/docs/containers?topic=containers-iks-release#jan20)
+        * New! PX-Backup is now available
 
-    * [30 January 2020](/docs/containers?topic=containers-iks-release#30jan2020)
+        * Calico KDD update in 1.19
 
-    * [27 January 2020](/docs/containers?topic=containers-iks-release#27jan2020)
+        * Cluster autoscaler add-on
 
-    * [22 January 2020](/docs/containers?topic=containers-iks-release#22jan2020)
+        * {{site.data.keyword.cos_full_notm}} plug-in
 
-    * [21 January 2020](/docs/containers?topic=containers-iks-release#21jan2020)
+        * Worker node versions
 
-    * [20 January 2020](/docs/containers?topic=containers-iks-release#20jan2020)
+    * [4 May 2021](/docs/containers?topic=containers-containers-relnotes#containers-may0421)
 
-    * [13 January 2020](/docs/containers?topic=containers-iks-release#13jan2020)
+        * Master versions
 
-    * [6 January 2020](/docs/containers?topic=containers-iks-release#06jan2020)
+* [April 2021](/docs/containers?topic=containers-containers-relnotes#containers-apr21)
 
-    * [3 January 2020](/docs/containers?topic=containers-iks-release#03jan2020)
+    * [29 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april2921)
 
-* [December 2019](/docs/containers?topic=containers-iks-release#dec19)
+        * Custom IOPs for Istio
 
-    * [18 December 2019](/docs/containers?topic=containers-iks-release#18dec2019)
+        * Istio add-on changelog
 
-    * [17 December 2019](/docs/containers?topic=containers-iks-release#17dec2019)
+    * [28 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april2821)
 
-    * [12 December 2019](/docs/containers?topic=containers-iks-release#12dec2019)
+        * Default version
 
-    * [11 December 2019](/docs/containers?topic=containers-iks-release#11dec2019)
+    * [27 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april2721)
 
-    * [9 December 2019](/docs/containers?topic=containers-iks-release#09dec2019)
+        * Master versions
 
-    * [4 December 2019](/docs/containers?topic=containers-iks-release#04dec2019)
+    * [26 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april2621)
 
-* [November 2019](/docs/containers?topic=containers-iks-release#nov19)
+        * CLI changelog
 
-    * [26 November 2019](/docs/containers?topic=containers-iks-release#26nov2019)
+        * VPC NLB
 
-    * [22 November 2019](/docs/containers?topic=containers-iks-release#22nov2019)
+        * Worker node versions
 
-    * [21 November 2019](/docs/containers?topic=containers-iks-release#21nov2019)
+    * [23 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april2321)
 
-    * [19 November 2019](/docs/containers?topic=containers-iks-release#19nov2019)
+        * Ingress changelogs
 
-    * [14 November 2019](/docs/containers?topic=containers-iks-release#14nov2019)
+    * [20 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april2021)
 
-    * [11 November 2019](/docs/containers?topic=containers-iks-release#11nov2019)
+        * New! Toronto multizone region for VPC
 
-    * [7 November 2019](/docs/containers?topic=containers-iks-release#07nov2019)
+    * [19 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april1921)
 
-    * [5 November 2019](/docs/containers?topic=containers-iks-release#05nov2019)
+        * Add-on changelogs
 
-    * [4 November 2019](/docs/containers?topic=containers-iks-release#04nov2019)
+        * Cluster autoscaler add-on
 
-    * [1 November 2019](/docs/containers?topic=containers-iks-release#01nov2019)
+        * {{site.data.keyword.cos_full_notm}} plug-in
 
-* [October 2019](/docs/containers?topic=containers-iks-release#oct19)
+        * Ingress changelogs
 
-    * [28 October 2019](/docs/containers?topic=containers-iks-release#28oct2019)
+    * [16 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april1621)
 
-    * [24 October 2019](/docs/containers?topic=containers-iks-release#24oct2019)
+        * New fields and events for {{site.data.keyword.at_short}}
 
-    * [23 October 2019](/docs/containers?topic=containers-iks-release#23oct2019)
+    * [15 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april1521)
 
-    * [22 October 2019](/docs/containers?topic=containers-iks-release#22oct2019)
+        * Accessing VPC clusters
 
-    * [17 October 2019](/docs/containers?topic=containers-iks-release#17oct2019)
+    * [12 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april1221)
 
-    * [14 October 2019](/docs/containers?topic=containers-iks-release#14oct2019)
+        * Worker node versions
 
-    * [3 October 2019](/docs/containers?topic=containers-iks-release#03oct2019)
+        * Ingress changelogs
 
-    * [1 October 2019](/docs/containers?topic=containers-iks-release#01oct2019)
+    * [5 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april0521)
 
-* [September 2019](/docs/containers?topic=containers-iks-release#sept19)
+        * Deprecated data centers for classic clusters
 
-    * [27 September 2019](/docs/containers?topic=containers-iks-release#27sept2019)
+    * [2 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april0221)
 
-    * [24 September 2019](/docs/containers?topic=containers-iks-release#24sept2019)
+        * Istio add-on
 
-    * [19 September 2019](/docs/containers?topic=containers-iks-release#19sept2019)
+    * [1 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april0121)
 
-    * [16 September 2019](/docs/containers?topic=containers-iks-release#16sept2019)
+        * Cluster autoscaler add-on
 
-    * [13 September 2019](/docs/containers?topic=containers-iks-release#13sept2019)
+        * {{site.data.keyword.block_storage_is_short}} add-on
 
-    * [12 September 2019](/docs/containers?topic=containers-iks-release#12sept2019)
+        * {{site.data.keyword.block_storage_is_short}} driver
 
-    * [5 September 2019](/docs/containers?topic=containers-iks-release#05sept2019)
+        * New! image security add-on
 
-    * [4 September 2019](/docs/containers?topic=containers-iks-release#04sept2019)
+* [March 2021](/docs/containers?topic=containers-containers-relnotes#containers-mar21)
 
-    * [3 September 2019](/docs/containers?topic=containers-iks-release#03sept2019)
+    * [30 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march3021)
 
-* [August 2019](/docs/containers?topic=containers-iks-release#aug19)
+        * Add-on changelogs
 
-    * [29 August 2019](/docs/containers?topic=containers-iks-release#29aug2019)
+        * Master versions
 
-    * [28 August 2019](/docs/containers?topic=containers-iks-release#28aug2019)
+    * [29 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march2921)
 
-    * [26 August 2019](/docs/containers?topic=containers-iks-release#26aug2019)
+        * Worker node versions
 
-    * [23 August 2019](/docs/containers?topic=containers-iks-release#23aug2019)
+    * [25 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march2521)
 
-    * [20 August 2019](/docs/containers?topic=containers-iks-release#20aug2019)
+        * {{site.data.keyword.cloudcerts_short}} instances
 
-    * [19 August 2019](/docs/containers?topic=containers-iks-release#19aug2019)
+    * [23 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march2321)
 
-    * [17 August 2019](/docs/containers?topic=containers-iks-release#17aug2019)
+        * Istio add-on
 
-    * [15 August 2019](/docs/containers?topic=containers-iks-release#15aug2019)
+    * [22 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march2221)
 
-    * [12 August 2019](/docs/containers?topic=containers-iks-release#12aug2019)
+        * Ingress ALB changelog
 
-    * [5 August 2019](/docs/containers?topic=containers-iks-release#05aug2019)
+    * [17 March 2021](/docs/containers?topic=containers-containers-relnotes#deprecated-at-events)
 
-* [July 2019](/docs/containers?topic=containers-iks-release#jul19)
+        * Deprecated events to be replaced for {{site.data.keyword.at_short}}
 
-    * [30 July 2019](/docs/containers?topic=containers-iks-release#30july2019)
+        * Deprecated fields across events
 
-    * [23 July 2019](/docs/containers?topic=containers-iks-release#23july2019)
+    * [16 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march1621)
 
-    * [22 July 2019](/docs/containers?topic=containers-iks-release#22july2019)
+        * Ingress ALB changelog
 
-    * [17 July 2019](/docs/containers?topic=containers-iks-release#17july2019)
+    * [12 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march1221)
 
-    * [15 July 2019](/docs/containers?topic=containers-iks-release#15july2019)
+        * Worker node versions
 
-    * [8 July 2019](/docs/containers?topic=containers-iks-release#08july2019)
+    * [1 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march2621)
 
-    * [2 July 2019](/docs/containers?topic=containers-iks-release#02july2019)
+        * Istio add-on
 
-    * [1 July 2019](/docs/containers?topic=containers-iks-release#01july2019)
+    * [9 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march0921)
 
-* [June 2019](/docs/containers?topic=containers-iks-release#jun19)
+        * Cluster autoscaler add-on
 
-    * [24 June 2019](/docs/containers?topic=containers-iks-release#24june2019)
+    * [5 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march0521)
 
-    * [21 June 2019](/docs/containers?topic=containers-iks-release#21june2019)
+        * Trusted images
 
-    * [18 June 2019](/docs/containers?topic=containers-iks-release#18june2019)
+    * [1 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march0121)
 
-    * [14 June 2019](/docs/containers?topic=containers-iks-release#14june2019)
+        * CLI changelog
 
-    * [12 June 2019](/docs/containers?topic=containers-iks-release#12june2019)
+        * Istio add-on
 
-    * [7 June 2019](/docs/containers?topic=containers-iks-release#07june2019)
+        * Worker node versions
 
-    * [6 June 2019](/docs/containers?topic=containers-iks-release#06june2019)
+* [February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb21)
 
-    * [5 June 2019](/docs/containers?topic=containers-iks-release#05june2019)
+    * [27 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb2721)
 
-    * [4 June 2019](/docs/containers?topic=containers-iks-release#04june2019)
+        * Master versions
 
-    * [3 June 2019](/docs/containers?topic=containers-iks-release#03june2019)
+    * [26 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb2621)
 
-* [May 2019](/docs/containers?topic=containers-iks-release#may19)
+        * {{site.data.keyword.block_storage_is_short}} add-on
 
-    * [30 May 2019](/docs/containers?topic=containers-iks-release#30may2019)
+        * End of service of VPC Gen 1
 
-    * [28 May 2019](/docs/containers?topic=containers-iks-release#28may2019)
+    * [25 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb2521)
 
-    * [23 May 2019](/docs/containers?topic=containers-iks-release#23may2019)
+        * CLI changelog
 
-    * [20 May 2019](/docs/containers?topic=containers-iks-release#20may2019)
+    * [24 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb2421)
 
-    * [16 May 2019](/docs/containers?topic=containers-iks-release#16may2019)
+        * Default version
 
-    * [15 May 2019](/docs/containers?topic=containers-iks-release#15may2019)
+    * [23 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb2321)
 
-    * [13 May 2019](/docs/containers?topic=containers-iks-release#13may2019)
+        * VPE
 
-    * [8 May 2019](/docs/containers?topic=containers-iks-release#08may2019)
+    * [22 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb2221)
 
-    * [7 May 2019](/docs/containers?topic=containers-iks-release#07may2019)
+        * Master versions
 
-    * [1 May 2019](/docs/containers?topic=containers-iks-release#01may2019)
+    * [20 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb2021)
+
+        * Certified Kubernetes
+
+    * [17 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb1721)
+
+        * New! Kubernetes 1.20
+
+        * Deprecated Kubernetes 1.17
+
+    * [15 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb1521)
+
+        * New! Osaka multizone region
+
+        * Worker node versions
+
+    * [12 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb1221)
+
+        * Gateway firewalls and Calico policies
+
+    * [10 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb1021)
+
+        * Ingress ALB changelog
+
+        * Gateway firewalls and Calico policies
+
+    * [8 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb0821)
+
+        * CLI changelog
+
+        * Istio add-on
+
+    * [4 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb0421)
+
+        * Worker node modifications
+
+    * [3 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb0321)
+
+        * Worker node versions
+
+    * [1 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb0121)
+
+        * Unsupported: Kubernetes version 1.16
+
+        * Worker node versions
+
+* [January 2021](/docs/containers?topic=containers-containers-relnotes#containers-jan21)
+
+    * [27 January 2021](/docs/containers?topic=containers-containers-relnotes#containers-jan2721)
+
+        * Block Storage for VPC add-on
+
+        * Reminder: VPC Gen 1 deprecation
+
+    * [25 January 2021](/docs/containers?topic=containers-containers-relnotes#containers-jan2521)
+
+        * Istio add-on
+
+        * New! {{site.data.keyword.redhat_openshift_notm}} Do (`odo`) CLI tutorial
+
+        * New! Private service endpoint allowlists
+
+        * Private Kubernetes Ingress
+
+    * [19 January 2021](/docs/containers?topic=containers-containers-relnotes#containers-jan1921)
+
+        * Ingress ALB changelog
+
+        * Master versions
+
+    * [18 January 2021](/docs/containers?topic=containers-containers-relnotes#containers-jan1821)
+
+        * Knative add-on is unsupported
+
+        * Worker node versions
+
+    * [14 January 2021](/docs/containers?topic=containers-containers-relnotes#containers-jan1421)
+
+        * Cluster autoscaler
+
+    * [12 January 2021](/docs/containers?topic=containers-containers-relnotes#containers-jan1221)
+
+        * Ingress resources
+
+        * Kubernetes benchmarks
+
+        * Removal of data center support
+
+    * [7 January 2021](/docs/containers?topic=containers-containers-relnotes#containers-jan0721)
+
+        * Ingress ALB changelog
+
+    * [6 January 2021](/docs/containers?topic=containers-containers-relnotes#containers-jan0621)
+
+        * Master versions
+
+* [December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec20)
+
+    * [21 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec2120)
+
+        * Gateway firewalls and Calico policies
+
+        * Worker node versions
+
+    * [18 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1820)
+
+        * CLI changelog
+
+        * {{site.data.keyword.cos_full_notm}} plug-in
+
+    * [17 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1720)
+
+        * Audit documentation
+
+        * Back up and restore
+
+        * Ingress ALB changelog
+
+    * [16 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1620)
+
+        * Istio add-on
+
+    * [15 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1520)
+
+        * Cluster autoscaler
+
+    * [14 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1420)
+
+        * Ingress ALB changelog
+
+        * Master versions
+
+    * [11 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1120)
+
+        * Storage add-ons
+
+        * strongSwan versions
+
+        * Worker node versions
+
+    * [9 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec0920)
+
+        * Accessing clusters
+
+        * CLI changelog
+
+        * Proxy protocol for Ingress
+
+        * Helm version 2 unsupported
+
+        * Istio add-on
+
+    * [7 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec0720)
+
+        * {{site.data.keyword.keymanagementserviceshort}} enhancements
+
+        * Worker node versions
+
+    * [3 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec0320)
+
+        * Cluster autoscaler add-on
+
+        * Istio add-on
+
+    * [1 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec0120)
+
+        * Default Kubernetes Ingress image
+
+* [November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov20)
+
+    * [24 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov2420)
+
+        * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) New! Reservations to reduce classic worker node costs
+
+    * [23 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov2320)
+
+        * Worker node versions
+
+    * [20 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov2020)
+
+        * New! Portieris for image security enforcement
+
+    * [19 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov1920)
+
+        * Ingress ALB changelog
+
+    * [18 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov1820)
+
+        * CLI changelog
+
+        * Knative add-on deprecation
+
+        * New! {{site.data.keyword.block_storage_is_short}} changelog
+
+    * [16 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov1620)
+
+        * GPU worker nodes
+
+        * Master versions
+
+    * [13 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov1320)
+
+        * {{site.data.keyword.at_full_notm}} and IAM events
+
+    * [9 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov0920)
+
+        * Worker node versions
+
+    * [5 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov0520)
+
+        * {{site.data.keyword.block_storage_is_short}}
+
+        * Classic-enabled VPCs
+
+        * Gateway firewalls and Calico policies
+
+        * Istio add-on
+
+    * [2 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov0220)
+
+        * General availability of Kubernetes Ingress support
+
+        * Persistent storage
+
+* [October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct20)
+
+    * [26 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct2620)
+
+        * Master versions
+
+        * Worker node versions
+
+    * [22 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct2220)
+
+        * API key
+
+        * Benchmark for Kubernetes 1.19
+
+        * Huge pages
+
+        * Istio add-on
+
+    * [16 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct1620)
+
+        * Gateway firewalls and Calico policies
+
+        * Ingress classes
+
+        * {{site.data.keyword.cos_short}}
+
+    * [13 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct1320)
+
+        * New! Certified Kubernetes version 1.19
+
+        * Deprecated: Kubernetes version 1.16
+
+        * New! Network load balancer for VPC
+
+        * Version changelogs
+
+        * VPC load balancer
+
+        * VPC security groups
+
+        * {{site.data.keyword.cos_short}} in VPC Gen 2
+
+    * [12 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct1220)
+
+        * Versions
+
+    * [8 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct0820)
+
+        * Ingress ALB changelog
+
+    * [6 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct0620)
+
+        * CLI changelog
+
+        * Ingress secret expiration synchronization
+
+        * Istio add-on
+
+    * [1 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct0120)
+
+        * Default version
+
+        * Ingress ALB changelog
+
+* [September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sep20)
+
+    * [29 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2920)
+
+        * For classic clusters in London or Dallas, updated the required IP addresses and ports that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound), [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private), or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies){: external}.
+
+    * [26 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2620)
+
+        * Versions
+
+    * [24 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2420)
+
+        * CLI changelog
+
+    * [23 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2320)
+
+        * Ingress ALB changelog
+
+        * Istio add-on
+
+    * [22 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2220)
+
+        * Unsupported: Kubernetes version 1.15
+
+    * [21 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2120)
+
+        * Versions
+
+        * Versions
+
+        * Istio add-on
+
+        * VPC load balancer
+
+    * [4 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept0420)
+
+        * New! CIS Kubernetes Benchmark
+
+    * [3 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept0320)
+
+        * CA certificate rotation
+
+    * [2 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept0220)
+
+        * Istio add-on
+
+    * [1 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept120)
+
+        * Deprecation of VPC Gen 1 compute
+
+        * Istio add-on
+
+* [August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug20)
+
+    * [31 August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug3120)
+
+        * Versions
+
+    * [27 August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug2720)
+
+        * Observability CLI plug-in
+
+        * New! Worker node flavors
+
+    * [24 August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug2420)
+
+        * CLI changelog
+
+        * Cluster autoscaler
+
+        * New! Community Kubernetes Ingress support
+
+        * New! Default {{site.data.keyword.cloudcerts_long}} instances
+
+    * [18 August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug1820)
+
+        * Versions
+
+    * [17 August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug1720)
+
+        * Locations
+
+        * Versions
+
+        * .
+
+        * VPC Gen 2
+
+    * [12 August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug1220)
+
+        * Istio add-on
+
+    * [6 August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug0620)
+
+        * CLI changelog
+
+    * [5 August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug0520)
+
+        * Ingress ALB changelog
+
+    * [4 August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug0420)
+
+        * Istio add-on
+
+    * [3 August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug0320)
+
+        * Gateway appliance firewalls
+
+        * Versions
+
+* [July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july20)
+
+    * [31 July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july3120)
+
+        * {{site.data.keyword.redhat_openshift_notm}} version 4.4
+
+    * [28 July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july2820)
+
+        * Ingress ALB versions
+
+        * UI for creating clusters
+
+    * [24 July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july2420)
+
+        * Minimum cluster size
+
+        * Versions
+
+        * Worker node replacement
+
+    * [20 July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july2020)
+
+        * Master versions
+
+        * Worker node versions
+
+    * [17 July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july1720)
+
+        * Istio add-on
+
+    * [16 July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july1620)
+
+        * Ingress ALB changelog
+
+        * Istio add-on
+
+        * Istio ports
+
+        * Pod and service subnets
+
+    * [8 July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july0820)
+
+        * Istio add-on
+
+        * Knative add-on
+
+    * [7 July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july0720)
+
+        * CLI changelog
+
+    * [6 July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july0620)
+
+        * Version changelogs
+
+    * [2 July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july0220)
+
+        * VPC load balancer
+
+* [June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june20)
+
+    * [24 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june2420)
+
+        * Gateway appliance firewalls
+
+        * Ingress ALB changelog
+
+    * [23 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june2320)
+
+        * Istio add-on
+
+    * [22 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june2220)
+
+        * Version changelogs
+
+    * [18 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june1820)
+
+        * Ingress ALB changelog
+
+    * [16 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june1620)
+
+        * CLI changelog
+
+    * [9 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june0920)
+
+        * CLI changelog
+
+        * Permissions
+
+        * New! Static routes add-on
+
+    * [8 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june0820)
+
+        * Version changelogs
+
+    * [4 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june0420)
+
+        * Gateway appliance firewalls
+
+        * Istio mTLS
+
+        * Ingress ALB changelog
+
+        * VPC network security
+
+    * [1 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june0120)
+
+        * Kubernetes 1.17
+
+        * VPC ACLs
+
+* [May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may20)
+
+    * [31 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may3120)
+
+        * Unsupported: Kubernetes version 1.14
+
+    * [26 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may2620)
+
+        * CLI changelog
+
+        * Image pull secrets
+
+        * Ingress status
+
+        * NodeLocal DNS cache
+
+        * Version changelogs
+
+    * [20 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may2020)
+
+        * New! Virtual Private Cloud Generation 2
+
+    * [19 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may1920)
+
+        * Istio add-on
+
+    * [18 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may1820)
+
+        * Ingress ALB changelog
+
+    * [14 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may1420)
+
+        * Kubernetes version 1.18
+
+    * [11 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may1120)
+
+        * New! Kubernetes version 1.18
+
+        * Deprecated: Kubernetes version 1.15
+
+        * NodeLocal DNS cache
+
+        * Zone-aware DNS beta
+
+        * Version changelogs
+
+    * [8 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may0820)
+
+        * CLI changelog
+
+    * [6 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may0620)
+
+        * New! {{site.data.keyword.containerlong_notm}} observability plug-in
+
+    * [4 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may0420)
+
+        * Gateway appliance firewalls
+
+        * Ingress troubleshooting
+
+* [April 2020](/docs/containers?topic=containers-containers-relnotes#containers-apr20)
+
+    * [30 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april3020)
+
+        * Cluster and worker node quotas
+
+    * [29 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april2920)
+
+        * ALB pod scaling
+
+        * VPC cluster architecture
+
+        * VPC cluster master access
+
+    * [27 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april2720)
+
+        * Ingress ALB changelog
+
+        * Version changelogs
+
+    * [23 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april2320)
+
+        * Version changelogs
+
+    * [22 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april2220)
+
+        * Private network connection to registry
+
+    * [17 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april1720)
+
+        * Version changelog
+
+    * [16 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april1620)
+
+        * Ingress ALB changelog
+
+    * [13 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april1320)
+
+        * Gateway appliance firewalls
+
+        * Version changelogs
+
+    * [6 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april0620)
+
+        * CLI changelog
+
+        * Kubernetes cluster context
+
+    * [1 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april0120)
+
+        * Istio add-on
+
+* [March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar20)
+
+    * [30 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar3020)
+
+        * Version changelogs
+
+        * File storage classes
+
+    * [27 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar2720)
+
+        * Tech overview
+
+    * [25 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar2520)
+
+        * Ingress ALB changelog
+
+    * [24 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar2420)
+
+        * CLI changelog
+
+    * [18 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar1820)
+
+        * IAM issuer details
+
+    * [16 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar1620)
+
+        * New! CLI 1.0
+
+        * Installing SGX drivers
+
+        * Sizing workloads
+
+        * Version changelogs
+
+    * [12 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar1220)
+
+        * Version update policy
+
+    * [10 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar1020)
+
+        * Istio add-on
+
+    * [9 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar0920)
+
+        * Managing Ingress ALBs
+
+        * Add-on troubleshooting
+
+        * Kubernetes 1.16
+
+        * Updating the {{site.data.keyword.block_storage_is_short}} add-on
+
+    * [4 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar0420)
+
+        * CLI changelog
+
+        * Ingress ALB changelog
+
+    * [2 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar0220)
+
+        * Version changelogs
+
+* [February 2020](/docs/containers?topic=containers-containers-relnotes#containers-feb20)
+
+    * [28 February 2020](/docs/containers?topic=containers-containers-relnotes#containers-feb2820)
+
+        * VPC clusters
+
+    * [22 February 2020](/docs/containers?topic=containers-containers-relnotes#containers-feb2220)
+
+        * Unsupported: Kubernetes version 1.13
+
+    * [19 February 2020](/docs/containers?topic=containers-containers-relnotes#containers-feb1920)
+
+        * CLI changelog
+
+        * Developing and deploying apps
+
+        * Learning paths
+
+        * Setting up image build pipelines
+
+        * Firewall subnets
+
+    * [17 February 2020](/docs/containers?topic=containers-containers-relnotes#containers-feb1720)
+
+        * Kubernetes version 1.17
+
+        * Version changelogs
+
+    * [14 February 2020](/docs/containers?topic=containers-containers-relnotes#containers-feb1420)
+
+        * Istio add-on
+
+    * [10 February 2020](/docs/containers?topic=containers-containers-relnotes#containers-feb1020)
+
+        * New! Kubernetes version 1.17
+
+        * Deprecated: Kubernetes version 1.14
+
+        * VPC cluster creation troubleshooting
+
+        * Knative changelogs
+
+    * [6 February 2020](/docs/containers?topic=containers-containers-relnotes#containers-feb0620)
+
+        * Cluster autoscaler
+
+        * Tags
+
+        * VPC security groups
+
+    * [3 February 2020](/docs/containers?topic=containers-containers-relnotes#containers-feb0320)
+
+        * Version changelog
+
+        * Expanded troubleshooting
+
+* [January 2020](/docs/containers?topic=containers-containers-relnotes#containers-jan20)
+
+    * [30 January 2020](/docs/containers?topic=containers-containers-relnotes#containers-jan3020)
+
+        * Ingress ALB changelog
+
+    * [27 January 2020](/docs/containers?topic=containers-containers-relnotes#containers-jan2720)
+
+        * Istio changelog
+
+        * Back up and restore File and Block storage
+
+    * [22 January 2020](/docs/containers?topic=containers-containers-relnotes#containers-jan2220)
+
+        * Kubernetes 1.15
+
+    * [21 January 2020](/docs/containers?topic=containers-containers-relnotes#containers-jan2120)
+
+        * Default {{site.data.keyword.containerlong_notm}} settings
+
+    * [20 January 2020](/docs/containers?topic=containers-containers-relnotes#containers-jan2020)
+
+        * Helm version 3
+
+        * Ingress ALB changelog
+
+        * Version changelog
+
+    * [13 January 2020](/docs/containers?topic=containers-containers-relnotes#containers-jan1320)
+
+        * {{site.data.keyword.blockstorageshort}}
+
+    * [6 January 2020](/docs/containers?topic=containers-containers-relnotes#containers-jan0620)
+
+        * Ingress ALB changelog
+
+    * [3 January 2020](/docs/containers?topic=containers-containers-relnotes#containers-jan0320)
+
+        * Version changelog
+
+* [December 2019](/docs/containers?topic=containers-containers-relnotes#containers-dec19)
+
+    * [18 December 2019](/docs/containers?topic=containers-containers-relnotes#containers-dec1819)
+
+        * Ingress ALB changelog
+
+    * [17 December 2019](/docs/containers?topic=containers-containers-relnotes#containers-dec1719)
+
+        * Version changelog
+
+        * Adding classic infrastructure servers to gateway-enabled clusters
+
+        * Assigning access
+
+    * [12 December 2019](/docs/containers?topic=containers-containers-relnotes#containers-dec1219)
+
+        * Setting up a service mesh with Istio
+
+    * [11 December 2019](/docs/containers?topic=containers-containers-relnotes#containers-dec1119)
+
+        * CLI changelog
+
+        * Configuring VPC subnets
+
+        * Kubernetes version lifecycles
+
+        * Managed Knative add-on
+
+    * [9 December 2019](/docs/containers?topic=containers-containers-relnotes#containers-dec0919)
+
+        * Version changelog
+
+    * [4 December 2019](/docs/containers?topic=containers-containers-relnotes#containers-dec0419)
+
+        * Exposing apps with load balancers or Ingress ALBs
+
+        * Kubernetes web terminal for VPC clusters
+
+        * Monitoring Istio
+
+        * Tuning network performance
+
+        * Use the internal KVDB in Portworx
+
+* [November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov19)
+
+    * [26 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov2619)
+
+        * CLI changelog
+
+        * Cluster autoscaling for VPC clusters
+
+        * New! Reservations and limits for PIDs
+
+        * Version changelog
+
+    * [22 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov2219)
+
+        * Bring your own DNS for load balancers
+
+        * Gateway appliance firewalls
+
+        * Ingress ALB subdomain format
+
+    * [21 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov2119)
+
+        * Ingress ALB changelog
+
+        * Version changelog
+
+    * [19 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov1919)
+
+        * Fluentd component changes
+
+        * Istio managed add-on GA
+
+        * Bringing your own Ingress controller in VPC clusters
+
+    * [14 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov1419)
+
+        * New! Diagnostics and Debug Tool add-on
+
+    * [11 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov1119)
+
+        * Exposing apps that are external to your cluster by using Ingress
+
+        * Accessing your cluster
+
+        * Version changelog
+
+    * [7 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov0719)
+
+        * CLI changelog
+
+        * Ingress ALB changelog
+
+    * [5 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov0519)
+
+        * New! Adding classic infrastructure servers to gateway-enabled classic clusters (Beta)
+
+    * [4 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov0419)
+
+        * New! Kubernetes version 1.16
+
+        * Deprecated: Kubernetes version 1.13
+
+        * Unsupported: Kubernetes version 1.12
+
+    * [1 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov0119)
+
+        * New! Keep your own key (KYOK) support (beta)
+
+* [October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct19)
+
+    * [28 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct2819)
+
+        * Version changelogs
+
+        * New! Resource groups for VPC clusters
+
+    * [24 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct2419)
+
+        * CLI changelog
+
+        * Scaling down file storage
+
+        * Ingress subdomain troubleshooting
+
+    * [23 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct2319)
+
+        * Ingress ALB changelog
+
+        * Ingress annotations
+
+    * [22 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct2219)
+
+        * Version changelogs
+
+    * [17 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct1719)
+
+        * New! Cluster autoscaler
+
+        * New DevOps tutorial
+
+    * [14 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct1419)
+
+        * CLI changelog
+
+        * Calico MTU
+
+        * Creating DNS subdomains for VPC load balancers and private Ingress ALBs
+
+        * Let's Encrypt rate limits for Ingress
+
+        * Version changelogs
+
+    * [3 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct0319)
+
+        * Ingress ALB changelog
+
+        * DevOps toolchain
+
+        * Security for VPC clusters
+
+    * [1 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct0119)
+
+        * End of service of {{site.data.keyword.la_full_notm}} and {{site.data.keyword.monitoringlong_notm}}
+
+        * New! Gateway-enabled classic clusters
+
+        * Version changelogs
+
+* [September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept19)
+
+    * [27 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept2719)
+
+        * {{site.data.keyword.cos_full_notm}} supported in VPC clusters
+
+    * [24 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept2419)
+
+        * CLI changelog
+
+        * Ingress ALB changelog
+
+        * Managing cluster network traffic for VPC clusters
+
+        * Customizing PVC settings for VPC Block Storage
+
+    * [19 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept1919)
+
+        * Sending custom Ingress certificates to legacy clients
+
+    * [16 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept1619)
+
+        * CLI changelog
+
+        * {{site.data.keyword.at_full_notm}} events
+
+        * Version changelogs
+
+    * [13 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept1319)
+
+        * Entitled software
+
+        * `script update` command
+
+    * [12 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept1219)
+
+        * Ingress ALB changelog
+
+    * [5 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept0519)
+
+        * Ingress ALB changelog
+
+    * [4 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept0419)
+
+        * CLI changelog
+
+        * IAM allowlists
+
+    * [3 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept0319)
+
+        * New! {{site.data.keyword.containerlong_notm}} plug-in version `0.4`
+
+        * Version changelog
+
+* [August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug19)
+
+    * [29 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug2919)
+
+        * Forwarding Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}
+
+    * [28 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug2819)
+
+        * CLI changelog
+
+        * Version changelogs
+
+    * [26 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug2619)
+
+        * Cluster autoscaler
+
+        * Ingress ALB changelog
+
+    * [23 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug2319)
+
+        * App networking in VPC
+
+        * Istio in VPC
+
+        * Remove bound services from cluster
+
+    * [20 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug2019)
+
+        * Ingress ALB changelog
+
+    * [19 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug1919)
+
+        * New! Virtual Private Cloud
+
+        * Kubernetes 1.14
+
+    * [17 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug1719)
+
+        * {{site.data.keyword.at_full}}
+
+        * Version changelogs
+
+    * [15 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug1519)
+
+        * App deployments
+
+        * FAQs
+
+        * Istio
+
+        * Knative
+
+        * Version changelogs
+
+    * [12 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug1219)
+
+        * CLI changelog
+
+        * Ingress ALB changelog
+
+    * [5 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug0519)
+
+        * CLI changelog
+
+        * New! `NodeLocal` DNS caching (beta)
+
+        * New! Version 1.15
+
+        * Deprecated: Version 1.12
+
+        * Version changelogs
+
+* [July 2019](/docs/containers?topic=containers-containers-relnotes#containers-jul19)
+
+    * [30 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july3019)
+
+        * CLI changelog
+
+        * Ingress ALB changelog
+
+        * Removing subnets from a cluster
+
+    * [23 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july2319)
+
+        * Fluentd changelog
+
+    * [22 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july2219)
+
+        * Version policy
+
+        * Version changelogs
+
+        * Version changelog
+
+    * [17 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july1719)
+
+        * Ingress ALB changelog
+
+    * [15 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july1519)
+
+        * Cluster and worker node ID
+
+        * Ingress ALB changelog
+
+        * Troubleshooting clusters
+
+        * Version changelogs
+
+    * [8 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july0819)
+
+        * Version changelogs
+
+    * [2 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july0219)
+
+        * CLI changelog
+
+    * [1 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july0119)
+
+        * Infrastructure permissions
+
+        * strongSwan VPN service
+
+* [June 2019](/docs/containers?topic=containers-containers-relnotes#containers-jun19)
+
+    * [24 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june2419)
+
+        * Calico network policies
+
+        * Ingress ALB changelog
+
+        * Service limitations
+
+        * Version changelogs
+
+    * [21 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june2119)
+
+        * Accessing the Kubernetes master through the private cloud service endpoint
+
+    * [18 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june1819)
+
+        * CLI changelog
+
+        * Ingress ALB changelog
+
+        * Managed add-on versions
+
+        * Removing persistent storage
+
+        * Service bindings with private endpoint
+
+        * Version changelogs
+
+    * [14 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june1419)
+
+        * `kubectl` troubleshooting
+
+        * Tutorials landing page
+
+        * Tutorial to create a cluster and deploy an app
+
+        * Using existing subnets to create a cluster
+
+    * [12 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june1219)
+
+        * Aggregating cluster roles
+
+    * [7 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june0719)
+
+        * Access to the Kubernetes master through the private cloud service endpoint
+
+        * {{site.data.keyword.BluDirectLink}}
+
+        * Ingress ALB changelog
+
+    * [6 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june0619)
+
+        * Fluentd changelog
+
+        * Ingress ALB changelog
+
+    * [5 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june0519)
+
+        * CLI reference
+
+    * [4 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june0419)
+
+        * Version changelogs
+
+    * [3 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june0319)
+
+        * Bringing your own Ingress controller
+
+        * {{site.data.keyword.cos_full_notm}}
+
+        * Ingress ALB changelog
+
+        * Kustomize
+
+        * Razee
+
+* [May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may19)
+
+    * [30 May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may3019)
+
+        * CLI reference
+
+        * Troubleshooting storage
+
+    * [28 May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may2819)
+
+        * Cluster add-ons changelog
+
+        * Troubleshooting registry
+
+        * Troubleshooting storage
+
+    * [23 May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may2319)
+
+        * CLI reference
+
+        * Cluster add-ons changelog
+
+        * Cluster and worker states
+
+        * Cluster planning and creation
+
+        * Cluster version updates
+
+        * Istio
+
+        * Popular topics
+
+    * [20 May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may2019)
+
+        * Version changelogs
+
+    * [16 May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may1619)
+
+        * CLI reference
+
+        * Unsupported: Kubernetes version 1.10
+
+    * [15 May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may1519)
+
+        * Default Kubernetes version
+
+        * Service limits
+
+    * [13 May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may1319)
+
+        * Version changelogs
+
+        * Worker node flavors
+
+    * [8 May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may0819)
+
+        * API
+
+        * Cloud Object Storage
+
+        * Kubernetes strategy
+
+        * Kubernetes version 1.14
+
+        * Reference topics
+
+    * [7 May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may0719)
+
+        * Cluster DNS provider
+
+        * Edge nodes
+
+        * Free clusters
+
+        * New! Integrations
+
+        * New! Kubernetes version 1.14
+
+        * Deprecated Kubernetes version 1.11
+
+        * Permissions
+
+        * Worker pools
+
+        * Reference topics
+
+    * [1 May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may0119)
+
+        * Assigning infrastructure access
 
 
 ## Tutorials library for Kubernetes Service
