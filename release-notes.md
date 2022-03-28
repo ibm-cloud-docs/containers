@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-25"
+lastupdated: "2022-03-28"
 
 keywords: kubernetes, release notes
 
@@ -25,6 +25,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## March 2022
 {: #containers-mar22}
+
+
+### 28 March 2022
+{: #containers-mar22}
+{: release-note}
+
+Worker node fix pack update.
+:   Kubernetes [1.23.5_1524](/docs/containers?topic=containers-changelog_123), [1.22.8_1546](/docs/containers?topic=containers-changelog_122), [1.21.11_1552](/docs/containers?topic=containers-changelog_121), [1.20.15_1575](/docs/containers?topic=containers-changelog_120), and [1.19.16_1579](/docs/containers?topic=containers-changelog_119).
 
 
 ### 24 March 2022
@@ -646,7 +654,7 @@ Worker node fix pack update
 {: release-note}
 
 Ingress ALB changelog updates
-:   Updated the [Ingress ALB changelog](/docs/containers?topic=containers-iks-release) for versions `0.49.3_1745_iks` and `1.0.3_1730_iks`.
+:   Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog) for versions `0.49.3_1745_iks` and `1.0.3_1730_iks`.
 
 ### 18 October 2021
 {: #containers-oct1821}
