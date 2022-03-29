@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-03-29"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -203,7 +203,7 @@ Review changes that you might need to make when you update from the previous Kub
 {: shortdesc}
 
 ### Update before master
-{: #122_before}
+{: #before_master}
 
 The following table shows the actions that you must take before you update the Kubernetes master.
 {: shortdesc}

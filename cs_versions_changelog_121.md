@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-03-28"
+lastupdated: "2022-03-29"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.21
 
@@ -38,7 +38,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the version 1.21 changelog.
 {: shortdesc}
 
-### Change log for worker node fix pack 1.21.11_1554, released 18 March 2022
+### Change log for worker node fix pack 1.21.11_1554, released 28 March 2022
 {: #12110_1554}
 
 | Component | Previous | Current | Description |

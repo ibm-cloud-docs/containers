@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-25"
+lastupdated: "2022-03-29"
 
 keywords: kubernetes, 1.22, versions, update, upgrade
 
@@ -40,7 +40,7 @@ For the release history and timeline of all current {{site.data.keyword.containe
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-|  Version | Supported? | {{site.data.keyword.containerlong_notm}}<br>release date | {{site.data.keyword.containerlong_notm}}<br>unsupported date |
+|  Version | Supported? | {{site.data.keyword.containerlong_notm}} release date | {{site.data.keyword.containerlong_notm}} unsupported date |
 |------|------|----------|----------|
 | 1.22 | Yes | 29 Sep 2021 | Nov 2022 `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.22" caption-side="top"}
@@ -59,6 +59,7 @@ The following table shows the actions that you must take before you update the K
 
 | Type | Description|
 | --- | --- |
+| Endpoint Security Mitigation | Kubernetes ClusterRole `system:aggregate-to-edit` has removed endpoints from being edited as a security measure as a part of [CVE-2021-25740](https://nvd.nist.gov/vuln/detail/CVE-2021-25740){: external}. Please ensure the Kubernetes reconciler is enabled before updating or refreshing master components. You can enable it with the `kubectl annotate --overwrite clusterrole/system:aggregate-to-edit rbac.authorization.kubernetes.io/autoupdate=true` command. | 
 | **Unsupported:** Beta versions of `PriorityClass` API | Migrate manifests and API clients to use the `scheduling.k8s.io/v1` API version, available since Kubernetes version 1.14. For more information, see [Deprecated API Migration Guide - v1.22](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-22){: external}. |
 | **Unsupported**:  Beta versions of `ClusterRole`, `ClusterRoleBinding`, `Role`, and `RoleBinding APIs` | Migrate manifests and API clients to use the `rbac.authorization.k8s.io/v1` API version, available since Kubernetes version 1.8. For more information, see [Deprecated API Migration Guide - v1.22](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-22){: external}. |
 | **Unsupported**:  Beta versions of `ValidatingWebhookConfiguration` and `MutatingWebhookConfiguration` APIs | Migrate manifests and API clients to use the `admissionregistration.k8s.io/v1` API version, available since Kubernetes version 1.16. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
