@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-28"
+lastupdated: "2022-03-30"
 
 keywords: kubernetes, release notes
 
@@ -27,8 +27,21 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-mar22}
 
 
+  
+### 30 March 2022
+{: #containers-mar30}
+{: release-note}
+
+Cluster autoscaler add-on
+:   Version [1.1.0_475](/docs/containers?topic=containers-ca_changelog) is available.
+
+{{site.data.keyword.containershort}} 1.20 end of support date change
+:   The end of support date of {{site.data.keyword.containershort}} 1.20 is now 15 June 2022. The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#release-history) page has been updated with the new date. 
+
+
+
 ### 28 March 2022
-{: #containers-mar22}
+{: #containers-mar2822}
 {: release-note}
 
 Worker node fix pack update.

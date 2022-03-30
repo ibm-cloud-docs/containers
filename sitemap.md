@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-03-29"
+lastupdated: "2022-03-30"
 
 keywords: containers
 subcollection: containers
@@ -208,7 +208,13 @@ subcollection: containers
 
 * [March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar22)
 
-    * [28 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar22)
+    * [30 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar30)
+
+        * Cluster autoscaler add-on
+
+        * {{site.data.keyword.containershort}} 1.20 end of support date change
+
+    * [28 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar2822)
 
         * Worker node fix pack update.
 
@@ -7011,6 +7017,8 @@ subcollection: containers
 [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
 * [Version 1.1.0](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
+
+    * [Change log for patch update 1.1.0_475, released 30 March 2022](/docs/containers?topic=containers-ca_changelog#110475_ca)
 
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
 
