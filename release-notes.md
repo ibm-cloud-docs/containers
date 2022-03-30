@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-28"
+lastupdated: "2022-03-30"
 
 keywords: kubernetes, release notes
 
@@ -25,6 +25,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## March 2022
 {: #containers-mar22}
+
+
+  
+### 30 March 2022
+{: #containers-mar30}
+{: release-note}
+
+Cluster autoscaler add-on
+:   Version [1.1.0_475](/docs/containers?topic=containers-ca_changelog) is available.
+
 
 
 ### 28 March 2022
