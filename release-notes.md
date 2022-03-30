@@ -35,6 +35,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 Cluster autoscaler add-on
 :   Version [1.1.0_475](/docs/containers?topic=containers-ca_changelog) is available.
 
+{{site.data.keyword.containershort}} 1.20 end of support date change
+:   The end of support date of {{site.data.keyword.containershort}} 1.20 is now 15 June 2022. The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#release-history) page has been updated with the new date. 
+
 
 
 ### 28 March 2022

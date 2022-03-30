@@ -212,6 +212,8 @@ subcollection: containers
 
         * Cluster autoscaler add-on
 
+        * {{site.data.keyword.containershort}} 1.20 end of support date change
+
     * [28 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar22)
 
         * Worker node fix pack update.
