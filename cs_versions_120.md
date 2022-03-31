@@ -19,7 +19,7 @@ subcollection: containers
 Review information about version 1.20 of {{site.data.keyword.containerlong}}, released 16 Feb 2021.
 {: shortdesc}
 
-Kubernetes version 1.20 is deprecated, with a tentative unsupported date of May 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
+Kubernetes version 1.20 is deprecated, with a tentative unsupported date of 15 Jun 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
 {: deprecated}
 
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
