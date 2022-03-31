@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-03-22"
+lastupdated: "2022-03-31"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -566,7 +566,7 @@ The following table shows the changes that are in the patch 1.14.1_1516.
 | CoreDNS | 1.2.6 | 1.3.1 | See the [CoreDNS release notes](https://coredns.io/2019/01/13/coredns-1.3.1-release/){: external}. The update includes the addition of a [metrics port](https://coredns.io/plugins/metrics/){: external} on the cluster DNS service.  \n CoreDNS is now the only supported cluster DNS provider. If you update a cluster to Kubernetes version 1.14 from an earlier version and used KubeDNS, KubeDNS is automatically migrated to CoreDNS during the cluster update. For more information or to test out CoreDNS before you update, see [Configure the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns). |
 | GPU device plug-in and installer | 9ff3fda | ed0dafc | Updated image for [CVE-2019-1543](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543){: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | v1.13.5-107 | v1.14.1-71 | Updated to support the Kubernetes 1.14.1 release. Additionally, `calicoctl` version is updated to 3.6.1. Fixed updates to version 2.0 network load balancers (NLBs) with only one available worker node for the load balancer pods. Private load balancers now support running on [private edge workers nodes](/docs/containers?topic=containers-edge#edge). |
-| IBM pod security policies | N/A | N/A | [IBM pod security policies](/docs/containers?topic=containers-psp#ibm_psp) are updated to support the Kubernetes [RunAsGroup](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#users-and-groups){: external} feature. |
+| IBM pod security policies | N/A | N/A | [IBM pod security policies](/docs/containers?topic=containers-psp#ibm_psp) are updated to support the Kubernetes [RunAsGroup](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external} feature. |
 | `kubelet` configuration | N/A | N/A | Set the `--pod-max-pids` option to `14336` to prevent a single pod from consuming all process IDs on a worker node. |
 | Kubernetes | v1.13.5 | v1.14.1 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.1){: external} and [Kubernetes 1.14 blog](https://kubernetes.io/blog/2019/03/25/kubernetes-1-14-release-announcement/){: external}.  \n The Kubernetes default role-based access control (RBAC) policies no longer grant access to [discovery and permission-checking APIs to unauthenticated users](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles){: external}. This change applies only to new version 1.14 clusters. If you update a cluster from a prior version, unauthenticated users still have access to the discovery and permission-checking APIs. |
 | Kubernetes admission controllers configuration | N/A | N/A |  - Added `NodeRestriction` to the `--enable-admission-plugins` option for the cluster's Kubernetes API server and configured the related cluster resources to support this security enhancement. \n - Removed `Initializers` from the `--enable-admission-plugins` option and `admissionregistration.k8s.io/v1alpha1=true` from the `--runtime-config` option for the cluster's Kubernetes API server because these APIs are no longer supported. Instead, you can use [Kubernetes admission webhooks](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external}. |
