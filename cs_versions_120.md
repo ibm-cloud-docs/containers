@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-03-31"
 
 keywords: kubernetes, 1.20, versions, update, upgrade
 
@@ -44,7 +44,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}}<br>release date | {{site.data.keyword.containerlong_notm}}<br>unsupported date |
 |------|------|----------|----------|
-| 1.20 | Deprecated | 16 Feb 2021 | May 2022 `†` |
+| 1.20 | Deprecated | 16 Feb 2021 | 15 Jun 2022 `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.20" caption-side="top"}
 
 ## Preparing to update

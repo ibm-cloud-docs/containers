@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-03-28"
+lastupdated: "2022-03-31"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.20
 
@@ -38,7 +38,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 ## Deprecated: Version 1.20 changelog
 {: #120_changelog}
 
-Kubernetes version 1.20 is deprecated, with a tentative unsupported date of May 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
+Kubernetes version 1.20 is deprecated, with a tentative unsupported date of 15 June 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
 {: deprecated}
 
 ### Change log for worker node fix pack 1.20.15_1575, released 28 March 2022
