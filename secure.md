@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-10"
+lastupdated: "2022-03-31"
 
 keywords: kubernetes, containers
 
@@ -566,7 +566,7 @@ By default, any pod has access to any other pod in the cluster. Additionally, an
 
 **How can I control pod permissions?**
 
-By default, every cluster enables the [Kubernetes pod security policy admission controller](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) that you can use to define what requirements a pod must meet to get deployed in a namespace. With pod security policies, you can control the usage of privileged containers, root namespaces, host networking and ports, volume types, host file systems, and Linux permissions such as read-only or group IDs. For more information, see [Configuring pod security policies](/docs/containers?topic=containers-psp).
+By default, every cluster enables the [Kubernetes pod security policy admission controller](https://kubernetes.io/docs/concepts/security/pod-security-policy/) that you can use to define what requirements a pod must meet to get deployed in a namespace. With pod security policies, you can control the usage of privileged containers, root namespaces, host networking and ports, volume types, host file systems, and Linux permissions such as read-only or group IDs. For more information, see [Configuring pod security policies](/docs/containers?topic=containers-psp).
 
 **What else can I do to protect my container?**
 

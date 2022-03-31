@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-03-31"
 
 keywords: kubernetes
 
@@ -16,7 +16,7 @@ subcollection: containers
 # Configuring pod security policies
 {: #psp}
 
-With [pod security policies (PSPs)](https://kubernetes.io/docs/concepts/policy/pod-security-policy/){: external}, you can
+With [pod security policies (PSPs)](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}, you can
 configure policies to authorize who can create and update pods in {{site.data.keyword.containerlong}}.
 
 **Why do I set pod security policies?**
@@ -124,7 +124,7 @@ When you modify the default configuration, you can prevent important cluster act
     ```
     {: codeblock}
 
-3. Edit the cluster role binding `.yaml` file. To understand what you can edit, review the [Kubernetes documentation](https://kubernetes.io/docs/concepts/policy/pod-security-policy/){: external}. Example actions:
+3. Edit the cluster role binding `.yaml` file. To understand what you can edit, review the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. Example actions:
 
     - **Service accounts**: You might want to authorize service accounts so that deployments can occur only in specific namespaces. For example, if you scope the policy to allow actions within the `default` namespace, the service account can deploy privileged pods in that namespace. However, actions in other namespaces are no longer authorized because you changed the scope from service accounts generally to service accounts specifically in the `default` namespace.
 
@@ -198,7 +198,7 @@ To delete the RBAC resources,
 ### Creating your own pod security policy
 {: #creating_security_policy}
 
-To create your own pod security policy resource and authorize users with RBAC, review the [Kubernetes documentation](https://kubernetes.io/docs/concepts/policy/pod-security-policy/){: external}.
+To create your own pod security policy resource and authorize users with RBAC, review the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}.
 
 Make sure that you modified the existing policies so that the new policy that you create does not conflict with the existing policy. For example, the existing policy permits users to create and update privileged pods. If you create a policy that does not permit users to create or update privileged pods, the conflict between the existing and the new policy might cause unexpected results.
 
