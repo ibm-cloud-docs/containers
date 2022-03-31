@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-03-30"
+lastupdated: "2022-03-31"
 
 keywords: containers
 subcollection: containers
@@ -388,7 +388,7 @@ subcollection: containers
 
         * Istio add-on
 
-    * [06 January 2022](/docs/containers?topic=containers-containers-relnotes#jan0622)
+    * [06 January 2022](/docs/containers?topic=containers-containers-relnotes#containers-jan0622)
 
         * {{site.data.keyword.block_storage_is_short}} add-on.
 
@@ -896,7 +896,7 @@ subcollection: containers
 
         * Ingress ALB changelog
 
-    * [17 March 2021](/docs/containers?topic=containers-containers-relnotes#deprecated-at-events)
+    * [17 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-mar1721)
 
         * Deprecated events to be replaced for {{site.data.keyword.at_short}}
 
