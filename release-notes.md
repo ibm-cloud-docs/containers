@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-31"
+lastupdated: "2022-04-01"
 
 keywords: kubernetes, release notes
 
@@ -39,6 +39,9 @@ Cluster autoscaler add-on
 
 {{site.data.keyword.containershort}} 1.20 end of support date change
 :   The end of support date of {{site.data.keyword.containershort}} 1.20 is now 15 June 2022. The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#release-history) page has been updated with the new date. 
+
+Master fix pack update
+:   Kubernetes [1.23.5_1523](/docs/containers?topic=containers-changelog_123#1235_1523), [1.22.8_1545](/docs/containers?topic=containers-changelog_122#1228_1545), [1.21.11_1553](/docs/containers?topic=containers-changelog_121#12111_1553), and [1.20.15_1574](/docs/containers?topic=containers-changelog_120#12015_1574).
 
 
 
