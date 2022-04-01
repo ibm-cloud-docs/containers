@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-03-31"
+lastupdated: "2022-04-01"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.20
 
@@ -19,7 +19,7 @@ subcollection: containers
 View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.20. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}
 
-Kubernetes version 1.20 is deprecated, with a tentative unsupported date of May 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
+Kubernetes version 1.20 is deprecated, with a tentative unsupported date of 15 June 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
 {: deprecated}
 
 ## Overview
@@ -40,6 +40,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Kubernetes version 1.20 is deprecated, with a tentative unsupported date of 15 June 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
 {: deprecated}
+
+### Change log for master fix pack 1.20.15_1574, released 30 March 2022
+{: #12015_1574}
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.3 | v1.3.5 | Updated image to fix CVEs [CVE-2021-3999](https://nvd.nist.gov/vuln/detail/CVE-2021-3999), [CVE-2022-23218](https://nvd.nist.gov/vuln/detail/CVE-2022-23218), [CVE-2022-23219](https://nvd.nist.gov/vuln/detail/CVE-2022-23219).  Updated golang dependencies. |
+| Gateway-enabled cluster controller | 1653 | 1669 | Updated to use `Go` version `1.17.8`. |
+| GPU device plug-in and installer | d7daae6 | 13677d2 | Updated GPU images to resolve CVEs. |
+| IBM Calico extension | 929 | 950 | Updated to use `Go` version `1.17.8`. Updated universal base image (UBI) to resolve CVEs. |
+| IBM Cloud File Storage plug-in and monitor | 405 | 407 | Updated `Go` to version `1.16.14`.  Updated `UBI` image to version `8.5-240`. |
+| IBM Cloud RBAC Operator | 0fc9949 | 6c43ef1 | Upgraded `Go` packages to resolve vulnerabilities |
+| Key Management Service provider | v2.4.3 | v2.5.3 | Updated to use `Go` version `1.17.8`. Updated golang dependencies.  Fixed CVE [CVE-2022-24407](https://nvd.nist.gov/vuln/detail/CVE-2022-24407) |
+| Load balancer and Load balancer monitor for IBM Cloud Provider | 1747 | 1865 | Updated the image to resolve CVEs. Updated to use `Go` version `1.17.8`. Set gratuitous arp at the right time on LBv1. |
+| OpenVPN client | 2.5.4-r0-IKS-556 | 2.5.4-r0-IKS-579 | Updated `Go` to version `1.16.15`. |
+| OpenVPN server | 2.5.4-r0-IKS-555 | 2.5.4-r0-IKS-578 | Updated `Go` to version `1.16.15`. |
+| Operator Lifecycle Manager | 0.16.1-IKS-15 | 0.16.1-IKS-16 | Resolve [CVE-2022-0778](https://nvd.nist.gov/vuln/detail/CVE-2022-0778). |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.20.15_1571" caption-side="top"}
 
 ### Change log for worker node fix pack 1.20.15_1575, released 28 March 2022
 {: #12015_1575}
