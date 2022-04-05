@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-04-05"
 
-keywords: containers, vpc, block storage
+keywords: containers, block storage
 
 subcollection: containers
 

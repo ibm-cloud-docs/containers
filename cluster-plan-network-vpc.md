@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-03-10"
+lastupdated: "2022-04-05"
 
-keywords: kubernetes network, vpc
+keywords: kubernetes network
 
 subcollection: containers
 
