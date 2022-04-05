@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-04-05"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -189,6 +189,7 @@ Depending on the size of your cluster, consider setting up alerts on the followi
 
 
 
+
 Set up [autorecovery](#autorecovery) on your worker nodes to enable your cluster to automatically resolve issues.
 {: tip}
 
@@ -351,6 +352,7 @@ Review the following example thresholds for creating alerts at the cluster level
 
 You might set up an alert for when the maximum number of clusters per account is reaching the limit. For example, 100 per region/infrastructure provider.
 {: shortdesc}
+
 
 
 ## Monitoring worker node health in with Autorecovery
