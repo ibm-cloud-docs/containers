@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-17"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes
 
@@ -115,9 +115,9 @@ Then, Developers can experiment easily, pushing changes to Development and Test 
 
 Key technologies:
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
-* [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/architecture/toolchains/)
-* [Fraud prevention with {{site.data.keyword.watson}} AI](https://www.ibm.com/cloud/watson-studio)
-* [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/architecture/toolchains/)
+* [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/architecture/toolchains/){: external}
+* [Fraud prevention with {{site.data.keyword.watson}} AI](https://www.ibm.com/cloud/watson-studio){: external}
+* [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/architecture/toolchains/){: external}
 * [SDK for Node.js](/docs/cloud-foundry-public?topic=cloud-foundry-public-getting-started-node)
 * [Sign-on capability without changing app code by using {{site.data.keyword.appid_short_notm}}](/docs/appid?topic=appid-getting-started)
 

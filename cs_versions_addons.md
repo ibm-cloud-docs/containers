@@ -249,7 +249,7 @@ Updates to support arbitrary controller values in the Ingress classes.
 ### Version 0.47.0_1434_iks, released on 02 August 2021
 {: #0.47.0_1434_iks}
 
-- [CVE-2021-3541](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3541){: extenral}
+- [CVE-2021-3541](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3541){: external}{: extenral}
 - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
 - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
 
@@ -277,7 +277,7 @@ This image is no longer available.
 ### Version 0.45.0_1435_iks, released on 02 August 2021
 {: #0.45.0_1435_iks}
 
-- [CVE-2021-3541](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3541){: extenral}
+- [CVE-2021-3541](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3541){: external}{: extenral}
 - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
 - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
 

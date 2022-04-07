@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes, networking
 
@@ -67,7 +67,7 @@ The following image demonstrates how Kubernetes forwards public network traffic 
 Kubernetes supports four basic types of network services: `ClusterIP`, `NodePort`, `LoadBalancer`, and `Ingress`. `ClusterIP` services make your apps accessible internally to allow communication between pods in your cluster only. `NodePort`, `LoadBalancer`, and `Ingress` services make your apps externally accessible from the public internet or a private network.
 {: shortdesc}
 
-[ClusterIP](https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service)
+[ClusterIP](https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service){: external}
 :   You can expose apps only as cluster IP services on the private network. A `clusterIP` service provides an in-cluster IP address that is accessible by other pods and services inside the cluster only. No external IP address is created for the app. To access a pod behind a cluster service, other apps in the cluster can either use the in-cluster IP address of the service or send a request by using the name of the service. When a request reaches the service, the service forwards requests to the pods equally, independent of pods' in-cluster IP addresses and the worker node that they are deployed to. Note that if you don't specify a `type` in a service's YAML configuration file, the `ClusterIP` type is created by default.
 
 [NodePort](/docs/containers?topic=containers-nodeport)

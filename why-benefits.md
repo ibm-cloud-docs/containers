@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes, containers
 
@@ -94,7 +94,7 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.clou
 :   You can also create your cluster in a Virtual Private Cloud (VPC), which gives you the security of a private cloud environment with isolated networking features along with the dynamic scalability of the public cloud. For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).
 
 {{site.data.keyword.cloud_notm}} Private, on-premises
-:   {{site.data.keyword.cloud_notm}} Private is an application platform that can be installed locally on your own machines. You might choose to use Kubernetes in {{site.data.keyword.cloud_notm}} Private when you need to develop and manage on-premises, containerized apps in your own controlled environment behind a firewall. For more information, see the [{{site.data.keyword.cloud_notm}} Private product documentation](https://www.ibm.com/docs/en/cloud-private/3.2.x).
+:   {{site.data.keyword.cloud_notm}} Private is an application platform that can be installed locally on your own machines. You might choose to use Kubernetes in {{site.data.keyword.cloud_notm}} Private when you need to develop and manage on-premises, containerized apps in your own controlled environment behind a firewall. For more information, see the [{{site.data.keyword.cloud_notm}} Private product documentation](https://www.ibm.com/docs/en/cloud-private/3.2.x){: external}.
 
 
 

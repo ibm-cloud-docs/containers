@@ -3,7 +3,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-31"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes, containers
 
@@ -298,9 +298,9 @@ Review information from IBM on the CIS Benchmark results.
 
 | Section | Remediation/Explanation |
 | --- | --- |
-| 1.2.1 | IKS utilizes RBAC for cluster protection, but allows anonymous discovery, which is considered reasonable per [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/). |
-| 1.2.10 | IKS does not enable the [*EventRateLimit*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit) admission controller since it is a Kubernetes alpha feature. |
-| 1.2.12 | IKS does not enable the [*AlwaysPullImages*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages) admission controller since it overrides a container's *imagePullPolicy* and may impact performance. |
+| 1.2.1 | IKS utilizes RBAC for cluster protection, but allows anonymous discovery, which is considered reasonable per [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external}. |
+| 1.2.10 | IKS does not enable the [*EventRateLimit*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit){: external} admission controller since it is a Kubernetes alpha feature. |
+| 1.2.12 | IKS does not enable the [*AlwaysPullImages*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages){: external} admission controller since it overrides a container's *imagePullPolicy* and may impact performance. |
 | 1.2.22 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 1.2.23 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 1.2.24 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
@@ -316,8 +316,8 @@ Review information from IBM on the CIS Benchmark results.
 | 4.2.12 | IKS rotates certificates on every worker node reload or update. |
 | 5.1.2 | IKS deploys some system components that could have their Kubernetes secret access further restricted. |
 | 5.1.3 | IKS deploys some system components that could have their Kubernetes resource access further restricted. |
-| 5.1.5 | IKS does not set [*automountServiceAccountToken: false*](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server) for each default service account. |
-| 5.1.6 | IKS deploys some system components that could set [*automountServiceAccountToken: false*](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server). |
+| 5.1.5 | IKS does not set [*automountServiceAccountToken: false*](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server){: external} for each default service account. |
+| 5.1.6 | IKS deploys some system components that could set [*automountServiceAccountToken: false*](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server){: external}. |
 | 5.2.1 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
 | 5.2.2 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
 | 5.2.3 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
@@ -330,8 +330,8 @@ Review information from IBM on the CIS Benchmark results.
 | 5.3.2 | IKS has a set of [default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy) and [additional network policies can optionally be added](/docs/containers?topic=containers-network_policies#adding_network_policies). |
 | 5.4.2 | IKS can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
 | 5.5.1 | IKS can optionally [enable image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec). |
-| 5.6.2 | IKS does not annotate all pods with [seccomp profiles](https://kubernetes.io/docs/concepts/security/pod-security-policy/). |
-| 5.6.3 | IKS deploys some system components that do not set a [pod or container *securityContext*](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/). |
+| 5.6.2 | IKS does not annotate all pods with [seccomp profiles](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
+| 5.6.3 | IKS deploys some system components that do not set a [pod or container *securityContext*](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
 | 5.6.4 | IKS deploys some Kubernetes resources to the default names. |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column contains details on the remediation actions."}
 {: caption="Explanation and remediation" caption-side="top"}

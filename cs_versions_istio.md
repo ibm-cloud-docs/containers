@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-22"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes, istio, add-on
 
@@ -54,7 +54,7 @@ Review the changes that are included in version 1.13.2 of the managed Istio add-
 **Previous version**: 1.13.1
 **Current version**: 1.13.2
 **Updates in this version:**
-- See the Istio release notes for [Istio 1.13.2](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.2/.){:external}.
+- See the Istio release notes for [Istio 1.13.2](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.2/.){: external}{:external}.
     - [CVE-2016-10228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10228){: external}
     - [CVE-2019-25013](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-25013){: external}
     - [CVE-2020-27618](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27618){: external}
@@ -67,7 +67,7 @@ Review the changes that are included in version 1.13.2 of the managed Istio add-
     - [CVE-2021-3999 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3999 ){: external}
     - [CVE-2022-23218](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23218){: external}
     - [CVE-2022-23219](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23219){: external}
-- For more information, see the [Istio security bulletin 2022-004](https://istio.io/latest/news/security/istio-security-2022-004/).
+- For more information, see the [Istio security bulletin 2022-004](https://istio.io/latest/news/security/istio-security-2022-004/){: external}.
 
 ### Change log for 1.13.1, released March 9th, 2021
 {: #1131}
@@ -78,7 +78,7 @@ Review the changes that are included in version 1.13.1 of the managed Istio add-
 **Previous version**: 1.12.4
 **Current version**: 1.13.1
 **Updates in this version:**
-- See the Istio release notes for [Istio 1.13.1](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.1/.){:external}.
+- See the Istio release notes for [Istio 1.13.1](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.1/.){: external}{:external}.
 
 ## Version 1.12
 {: #v112}
@@ -95,7 +95,7 @@ Review the changes that are included in version 1.12.5 of the managed Istio add-
 **Previous version**: 1.12.4
 **Current version**: 1.12.5
 **Updates in this version:**
-- See the Istio release notes for [Istio 1.12.5](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.5/.){:external}.
+- See the Istio release notes for [Istio 1.12.5](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.5/.){: external}{:external}.
 - Resolves the following CVEs:
     - [CVE-2016-10228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10228){: external}
     - [CVE-2019-25013](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-25013){: external}
@@ -109,7 +109,7 @@ Review the changes that are included in version 1.12.5 of the managed Istio add-
     - [CVE-2021-3999 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3999 ){: external}
     - [CVE-2022-23218](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23218){: external}
     - [CVE-2022-23219](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23219){: external}
-- For more information, see the [Istio security bulletin 2022-004](https://istio.io/latest/news/security/istio-security-2022-004/).
+- For more information, see the [Istio security bulletin 2022-004](https://istio.io/latest/news/security/istio-security-2022-004/){: external}.
 
 ### Change log for 1.12.4, released 8 March 2022
 {: #1124}
@@ -120,11 +120,11 @@ Review the changes that are included in version 1.12.4 of the managed Istio add-
 **Previous version**: 1.12.3
 **Current version**: 1.12.4
 **Updates in this version:**
-- See the Istio release notes for [Istio 1.12.4](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.4/.){:external}.
+- See the Istio release notes for [Istio 1.12.4](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.4/.){: external}{:external}.
 - Resolves the following CVEs:
     - [CVE-2021-3995](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3995){: external}
     - [CVE-2021-3996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3996){: external}
-- For more information, see the [Istio security bulletin 2022-003](https://istio.io/latest/news/security/istio-security-2022-003/){:external}.
+- For more information, see the [Istio security bulletin 2022-003](https://istio.io/latest/news/security/istio-security-2022-003/){: external}{:external}.
 
 ### Change log for 1.12.3, released 22 February 2021
 {: #1123}
@@ -152,7 +152,7 @@ Review the changes that are included in version 1.12.2 of the managed Istio add-
 **Previous version**: 1.12.1  
 **Current version**: 1.12.2   
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.12.2](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.2/){:external}. 
+- See the Istio release notes for [Istio 1.12.2](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.2/){: external}{:external}. 
 - For more information, see the [Istio security bulletin 2022-001](https://istio.io/latest/news/security/istio-security-2022-001/){: external} and [Istio security bulletin 2022-002](https://istio.io/latest/news/security/istio-security-2022-002/){: external}.
 
 ### Change log for 1.12.1, released 13 January 2022
@@ -164,7 +164,7 @@ Review the changes that are included in version 1.12.1 of the managed Istio add-
 **Previous version**: 1.12.0  
 **Current version**: 1.12.1   
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.12.1](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.1/){:external}. 
+- See the Istio release notes for [Istio 1.12.1](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.1/){: external}{:external}. 
 
 ### Change log for 1.12.0, released 08 December 2021
 {: #1200}
@@ -198,7 +198,7 @@ This is the final update for version 1.11, which becomes unsupported on 21 April
 **Previous version**: 1.11.7
 **Current version**: 1.11.8
 **Updates in this version:**
-- See the Istio release notes for [Istio 1.11.8](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.8/.){:external}.
+- See the Istio release notes for [Istio 1.11.8](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.8/.){: external}{:external}.
 - Resolves the following CVEs:
     - [CVE-2016-10228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10228){: external}
     - [CVE-2019-25013](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-25013){: external}
@@ -224,11 +224,11 @@ Review the changes that are included in version 1.11.7 of the managed Istio add-
 **Previous version**: 1.11.6
 **Current version**: 1.11.7
 **Updates in this version:**
-- See the Istio release notes for [Istio 1.11.7](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.7/.){:external}.
+- See the Istio release notes for [Istio 1.11.7](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.7/.){: external}{:external}.
 - Resolves the following CVEs:
     - [CVE-2021-3995](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3995){: external}
     - [CVE-2021-3996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3996){: external}
-- For more information, see the [Istio security bulletin 2022-003](https://istio.io/latest/news/security/istio-security-2022-003/){:external}.
+- For more information, see the [Istio security bulletin 2022-003](https://istio.io/latest/news/security/istio-security-2022-003/){: external}{:external}.
 
 ### Change log for 1.11.6, released 15 February 2022
 {: #1116}
@@ -335,7 +335,7 @@ Review the changes that are included in version 1.10.6 of the managed Istio add-
 **Previous version**: 1.10.5  
 **Current version**: 1.10.6 
 **Updates in this version:**  
-- See the Istio release notes for [Istio 1.10.6](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.6/){:external}. 
+- See the Istio release notes for [Istio 1.10.6](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.6/){: external}{:external}. 
 
 ### Change log for 1.10.5, released 28 October 2021
 {: #1105}
@@ -559,7 +559,7 @@ Review the changes that are in version 1.8.5 of the managed Istio add-on.
     - [usn-4760-1](https://ubuntu.com/security/notices/USN-4760-1/){: external}
     - [usn-4891-1](https://ubuntu.com/security/notices/USN-4891-1/){: external}
     - [usn-4898-1](https://ubuntu.com/security/notices/USN-4898-1/){: external}. 
-- For more information, see the [Istio security bulletin 2021-003](https://istio.io/latest/news/security/istio-security-2021-003/).
+- For more information, see the [Istio security bulletin 2021-003](https://istio.io/latest/news/security/istio-security-2021-003/){: external}.
 
 
 ### Change log for 1.8.4, released 23 March 2021
@@ -1241,7 +1241,7 @@ Review the changes that are in version 1.4.4 of the managed Istio add-on.
 **Current version**: 1.4.4  
 **Updates in this version:**  
 - See the Istio release notes for [Istio 1.4.4](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.4/){: external}. 
-- Disables [protocol sniffing and detection](https://istio.io/latest/docs/ops/configuration/traffic-management/protocol-selection/).
+- Disables [protocol sniffing and detection](https://istio.io/latest/docs/ops/configuration/traffic-management/protocol-selection/){: external}.
 - Improves the termination sequence for rolling updates of ingress and egress gateways. 
 - Resolves the following CVEs:
     - [CVE-2020-8595](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8595){: external}
@@ -1299,7 +1299,7 @@ Review the changes that are in version 1.4.3 of the managed Istio add-on.
 **Current version**: 1.4.3  
 **Updates in this version:**  
 - See the Istio release notes for [Istio 1.4.3](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.3/){: external}. 
-- Disables [protocol sniffing and detection](https://istio.io/latest/docs/ops/configuration/traffic-management/protocol-selection/).
+- Disables [protocol sniffing and detection](https://istio.io/latest/docs/ops/configuration/traffic-management/protocol-selection/){: external}.
 - Improves the termination sequence for rolling updates of ingress and egress gateways. 
 
 ## Change log for 1.4.2, released 16 December 2020

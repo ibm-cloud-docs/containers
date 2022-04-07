@@ -4132,7 +4132,7 @@ ibmcloud ks ingress secret create --cert-crn CERTIFICATE_CRN --cluster CLUSTER -
 :    Optional: Specify the namespace that your Ingress resource is deployed to. If your ALB runs the Kubernetes Ingress image, this value is required, because the ALB can identify secrets only in the same namespace as your Ingress resource. If your ALB runs the {{site.data.keyword.containerlong_notm}} Ingress image, and you don't specify a namespace, the certificate secret is created in a namespace called `ibm-cert-store`. A reference to this secret is then created in the `default` namespace, which any Ingress resource in any namespace can access. While processing requests, the ALB follows the reference to pick up and use the certificate secret from the `ibm-cert-store` namespace.
 
 `--persist`
-:    Optional: Persist the secret data in your cluster. If the secret is later deleted from the CLI or {{site.data.keyword.redhat_openshift_notm}} web console, the secret is automatically re-created in your cluster. To permanently delete the secret, you must use the [`/ingress/v2/secret/deleteSecret` API](https://containers.cloud.ibm.com/global/swagger-global-api/#/beta/DeleteIngressSecret).
+:    Optional: Persist the secret data in your cluster. If the secret is later deleted from the CLI or {{site.data.keyword.redhat_openshift_notm}} web console, the secret is automatically re-created in your cluster. To permanently delete the secret, you must use the [`/ingress/v2/secret/deleteSecret` API](https://containers.cloud.ibm.com/global/swagger-global-api/#/beta/DeleteIngressSecret){: external}.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.

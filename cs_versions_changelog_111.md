@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-03-14"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -405,7 +405,7 @@ The following table shows the changes that are in the master fix pack 1.11.3_153
 | -------------- | -------------- | -------------- | ------------- |
 | Cluster master | N/A | N/A | Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with a highly available (HA) configuration, with each master deployed on separate physical hosts. |
 | Cluster master HA proxy | N/A | 1.8.12-alpine | Added an `ibm-master-proxy-*` pod for client-side load balancing on all worker nodes, so that each worker node client can route requests to an available HA master replica. |
-| etcd | v3.2.18 | v3.3.1 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.1)(https://github.com/etcd-io/etcd/releases/v3.3.1]{: external}. |
+| etcd | v3.2.18 | v3.3.1 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.1){: external}(https://github.com/etcd-io/etcd/releases/v3.3.1]{: external}. |
 | Encrypting data in etcd | N/A | N/A | Previously, etcd data was stored on a master’s NFS file storage instance that is encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect). |
 {: caption="Changes since version 1.11.3_1527" caption-side="bottom"}
 

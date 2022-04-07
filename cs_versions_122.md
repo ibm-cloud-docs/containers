@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-29"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes, 1.22, versions, update, upgrade
 
@@ -27,7 +27,7 @@ Looking for general information on updating {{site.data.keyword.containerlong}} 
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.22 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
-For more information about Kubernetes project version 1.22, see the [Kubernetes change log](https://v1-22.docs.kubernetes.io/releases/notes/).
+For more information about Kubernetes project version 1.22, see the [Kubernetes change log](https://v1-22.docs.kubernetes.io/releases/notes/){: external}.
 
 ## Release timeline
 {: #release_timeline_122}

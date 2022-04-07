@@ -3,7 +3,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-31"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes, containers
 
@@ -307,9 +307,9 @@ Review information from IBM on the CIS Benchmark results.
 
 | Section | Remediation/Explanation |
 | --- | --- |
-| 1.2.1 | IKS utilizes RBAC for cluster protection, but allows anonymous discovery, which is considered reasonable per [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/). |
-| 1.2.10 | IKS does not enable the [*EventRateLimit*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit) admission controller since it is a Kubernetes alpha feature. |
-| 1.2.12 | IKS does not enable the [*AlwaysPullImages*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages) admission controller since it overrides a container's *imagePullPolicy* and may impact performance. |
+| 1.2.1 | IKS utilizes RBAC for cluster protection, but allows anonymous discovery, which is considered reasonable per [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external}. |
+| 1.2.10 | IKS does not enable the [*EventRateLimit*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit){: external} admission controller since it is a Kubernetes alpha feature. |
+| 1.2.12 | IKS does not enable the [*AlwaysPullImages*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages){: external} admission controller since it overrides a container's *imagePullPolicy* and may impact performance. |
 | 1.2.21 | IKS enables profiling for cluster administrator troubleshooting purposes. |
 | 1.2.22 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 1.2.23 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |

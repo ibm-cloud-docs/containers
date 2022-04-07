@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-15"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -155,7 +155,7 @@ Review how you can learn about Kubernetes concepts and the terminology.
 {: shortdesc}
 
 * Familiarize yourself with the product by completing the [Creating clusters tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
-* Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this [course](https://cognitiveclass.ai/courses/kubernetes-course).
+* Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this [course](https://cognitiveclass.ai/courses/kubernetes-course){: external}.
 
 
 
