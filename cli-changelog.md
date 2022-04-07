@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-21"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes
 
@@ -29,6 +29,13 @@ Refer to the following changelogs for a summary of changes for each version of t
 
 Review the following changes for 1.0 versions of the CLI plug-in.
 {: shortdesc}
+
+## Version 1.0.394
+{: #cli-10394}
+
+Version 1.0.394 of the CLI was released on 7 April 2022.
+:   Adds the `--cluster-security-group` option to the `ibmcloud ks cluster create vpc-gen2` command.
+:   Adds the `--operating-system` label to `ibmcloud ks worker-pool create satellite` and `ibmcloud ks cluster create satellite`.
 
 ## Version 1.0.384
 {: #cli-10384}

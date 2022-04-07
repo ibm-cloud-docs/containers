@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
 
@@ -182,7 +182,7 @@ Keep in mind that some services such as Ingress might require multiple worker no
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
 
-Have an [{{site.data.keyword.redhat_openshift_notm}} cluster](/docs/openshift?topic=openshift-openshift_tutorial)? The supported {{site.data.keyword.redhat_openshift_notm}} version is 4.8, which includes Kubernetes 1.21.
+Have an [{{site.data.keyword.redhat_openshift_notm}} cluster](/docs/openshift?topic=openshift-openshift_tutorial)? The supported {{site.data.keyword.redhat_openshift_notm}} version is 4.9, which includes Kubernetes 1.21.
 {: note}
 
 
