@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-04-01"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes, release notes
 
@@ -25,13 +25,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+## April 2022
+{: #containers-apr22}
+
+### 7 April 2022
+{: #containers-apr0722}
+
+{{site.data.keyword.containerlong_notm}} clusters in Mexico City (MEX01) are deprecated and become unsupported later this year. To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your MEX01 clusters by 31 October 2022. Clusters remaining in these data centers after 31 October 2022 will be removed. You cannot create clusters in this location after 07 May 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/get-support?topic=get-support-dc-closure).
+
+
+
+
 ## March 2022
 {: #containers-mar22}
 
 
   
 ### 30 March 2022
-{: #containers-mar30}
+{: #containers-mar3022}
 {: release-note}
 
 Cluster autoscaler add-on
