@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-04-06"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -245,7 +245,7 @@ ingress.bluemix.net/proxy-add-headers: |
 ```
 {: screen}
 
-Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-set-headers):
+Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-set-headers){: external}:
 
 ```sh
 proxy-set-headers: "ingress-nginx/custom-headers"

@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-03-14"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -61,7 +61,7 @@ The following table shows the changes that are in patch 1.9.11_1536.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v2.6.5 | v2.6.12 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/) {: external} Update resolves [Tigera Technical Advisory TTA-2018-001](https://www.tigera.io/security-bulletins/){: external} |
+| Calico | v2.6.5 | v2.6.12 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/){: external} {: external} Update resolves [Tigera Technical Advisory TTA-2018-001](https://www.tigera.io/security-bulletins/){: external} |
 | Kernel | 4.4.0-137 | 4.4.0-139 | Updated worker node images with kernel update for  [CVE-2018-7755](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog){: external} |
 | Kubernetes | v1.9.10 | v1.9.11 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.11){: external} |
 | {{site.data.keyword.cloud_notm}} | v1.9.10-219 | v1.9.11-249 | Updated to support the Kubernetes 1.9.11 release. |
@@ -116,7 +116,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.1
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Kernel | 4.4.0-133 | 4.4.0-137 | Updated worker node images with kernel update for [CVE-2018-14633, CVE-2018-17182](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-137.163/changelog) {: external} |
+| Kernel | 4.4.0-133 | 4.4.0-137 | Updated worker node images with kernel update for [CVE-2018-14633, CVE-2018-17182](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-137.163/changelog){: external} {: external} |
 | Inactive session timeout | N/A | N/A | Set the inactive session timeout to 5 minutes for compliance reasons. |
 {: caption="Table 1. Changes since version 1.9.10_1527" caption-side="bottom"}
 
@@ -203,7 +203,7 @@ The following table shows the changes that are in patch 1.9.9_1520.
 | Component | Previous | Current | Description || -------------- | -------------- | -------------- | ------------- |
 | {{site.data.keyword.cloud_notm}} Provider | v1.9.8-141 | v1.9.9-167 | Updated to support Kubernetes 1.9.9 release. In addition, LoadBalancer service `create failure` events now include any portable subnet errors. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in | 320 | 334 | Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes. |
-| Kubernetes | v1.9.8 | v1.9.9 | See the Kubernetes [release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.9) {: external} |
+| Kubernetes | v1.9.8 | v1.9.9 | See the Kubernetes [release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.9){: external} {: external} |
 | Kernel | N/A | N/A | Minor improvements to worker node network settings for high performance networking workloads. |
 | OpenVPN client | N/A | N/A | The OpenVPN client `vpn` deployment that runs in the `kube-system` namespace is now managed by the Kubernetes `addon-manager`. |
 {: caption="Table 1. Changes since version 1.9.8_1517" caption-side="bottom"}
