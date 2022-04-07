@@ -212,6 +212,8 @@ subcollection: containers
 
         * {{site.data.keyword.containerlong_notm}} clusters in Mexico City (MEX01) are deprecated and become unsupported later this year. To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your MEX01 clusters by 31 October 2022. Clusters remaining in these data centers after 31 October 2022 will be removed. You cannot create clusters in this location after 07 May 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/get-support?topic=get-support-dc-closure).
 
+        * Ingress ALB changelog updates
+
 * [March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar22)
 
     * [30 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar3022)
@@ -6738,9 +6740,13 @@ subcollection: containers
 
 * [Version 1.1.2](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_2)
 
-    * [Version 1.1.2_2050_iks (default), released on 22 March 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2050_iks)
+    * [Version 1.1.2_2084_iks (default), released on 7 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2084_iks)
+
+    * [Version 1.1.2_2050_iks, released on 22 March 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2050_iks)
 
 * [Version 1.1.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_1)
+
+    * [Version 1.1.1_2085_iks, released on 7 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.1_2085_iks)
 
     * [Version 1.1.1_2054_iks, released on 22 March 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.1_2054_iks)
 
@@ -6763,6 +6769,8 @@ subcollection: containers
     * [Version 1.0.0_1645_iks, released on 14 September 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.0_1645_iks)
 
 * [Version 0.49.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_49_0)
+
+    * [Version 0.49.3_2083_iks, released on 7 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#0.49.3_2083_iks)
 
     * [Version 0.49.3_2051_iks, released on 22 March 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#0.49.3_2051_iks)
 
