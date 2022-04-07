@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -61,6 +61,7 @@ Before you begin, make sure that you have the **Manager** service access role in
     /var/log/kubelet.log
     /var/log/kube-proxy.log
     /var/log/syslog
+    
     ```
     {: screen}
 
@@ -96,7 +97,6 @@ Before you begin, make sure that you have the **Manager** service access role in
         {: pre}
         
     6. After you identify the workload that causes the issue, continue with [Debugging app deployments](/docs/containers?topic=containers-debug_apps).
-
 
 
 
