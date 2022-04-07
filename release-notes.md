@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-04-01"
+lastupdated: "2022-04-07"
 
 keywords: kubernetes, release notes
 
@@ -25,13 +25,37 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+
+## April 2022
+{: #containers-apr22}
+
+### 7 April 2022
+{: #containers-apr0722}
+
+{{site.data.keyword.containerlong_notm}} clusters in Mexico City (MEX01) are deprecated and become unsupported later this year. To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your MEX01 clusters by 31 October 2022. Clusters remaining in these data centers after 31 October 2022 will be removed. You cannot create clusters in this location after 07 May 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/get-support?topic=get-support-dc-closure).
+
+
+Ingress ALB changelog updates
+:   Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog) for versions `1.1.2_2084_iks`, `1.1.1_2085_iks`, and `0.49.3_2083_iks`.
+
+
+
+
+CLI changelog update
+:   The [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.394.
+
+### 6 April 2022
+{: #{[subcollection]-apr0622}}
+
+Master fix pack update
+:   Kubernetes [1.23.5_1525](/docs/containers?topic=containers-changelog_123), [1.22.8_1547](/docs/containers?topic=containers-changelog_122), [1.21.11_1555](/docs/containers?topic=containers-changelog_121), and [1.20.15_1576](/docs/containers?topic=containers-changelog_120).
+
+
 ## March 2022
 {: #containers-mar22}
 
-
-  
 ### 30 March 2022
-{: #containers-mar30}
+{: #containers-mar3022}
 {: release-note}
 
 Cluster autoscaler add-on
@@ -42,8 +66,6 @@ Cluster autoscaler add-on
 
 Master fix pack update
 :   Kubernetes [1.23.5_1523](/docs/containers?topic=containers-changelog_123#1235_1523), [1.22.8_1545](/docs/containers?topic=containers-changelog_122#1228_1545), [1.21.11_1553](/docs/containers?topic=containers-changelog_121#12111_1553), and [1.20.15_1574](/docs/containers?topic=containers-changelog_120#12015_1574).
-
-
 
 ### 28 March 2022
 {: #containers-mar2822}
