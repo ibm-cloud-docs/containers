@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-04-07"
+lastupdated: "2022-04-11"
 
 keywords: kubernetes, release notes
 
@@ -24,10 +24,29 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: note}
 
 
-
-
 ## April 2022
 {: #containers-apr22}
+
+  
+### 11 April 2022
+{: #containers-apr1122}
+
+
+
+New! {{site.data.keyword.secrets-manager_full}}
+:    With the deprecation of {{site.data.keyword.cloudcerts_long}}, you can now manage certificates and secrets with {{site.data.keyword.secrets-manager_full}}. You can integrate your own {{site.data.keyword.secrets-manager_short}} instances with your Kubernetes clusters. {{site.data.keyword.secrets-manager_short}} instances can be used across multiple clusters, and a single cluster can have more than one instance. For more information, see [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr)
+
+
+
+{{site.data.keyword.block_storage_is_short}} add-on.
+:   [Version 4.2.3_983](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+
+Worker node fix pack
+:   Kubernetes [1.23.5_1526](/docs/containers?topic=containers-changelog_123), [1.22.8_1548](/docs/containers?topic=containers-changelog_122), [1.21.11_1556](/docs/containers?topic=containers-changelog_121), [1.20.15_1577](/docs/containers?topic=containers-changelog_120).
+
+
+
+
 
 ### 7 April 2022
 {: #containers-apr0722}
@@ -45,10 +64,12 @@ CLI changelog update
 :   The [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.394.
 
 ### 6 April 2022
-{: #{[subcollection]-apr0622}}
+{: #containers-apr0622}}
 
 Master fix pack update
 :   Kubernetes [1.23.5_1525](/docs/containers?topic=containers-changelog_123), [1.22.8_1547](/docs/containers?topic=containers-changelog_122), [1.21.11_1555](/docs/containers?topic=containers-changelog_121), and [1.20.15_1576](/docs/containers?topic=containers-changelog_120).
+
+
 
 
 
@@ -1364,7 +1385,7 @@ Ingress changelogs
 {: release-note}
 
 New fields and events for {{site.data.keyword.at_short}}
-:   To align with event auditing standards across {{site.data.keyword.cloud_notm}}, the [previously deprecated cluster fields and events](#deprecated-at-events) are now replaced by new fields and events. For an updated list of events, see [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events).
+:   To align with event auditing standards across {{site.data.keyword.cloud_notm}}, the previously deprecated cluster fields and events are now replaced by new fields and events. For an updated list of events, see [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events).
 
 ### 15 April 2021
 {: #containers-april1521}

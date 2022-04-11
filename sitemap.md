@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-04-07"
+lastupdated: "2022-04-11"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,14 @@ subcollection: containers
 
 * [April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr22)
 
+    * [11 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr1122)
+
+        * New! {{site.data.keyword.secrets-manager_full}}
+
+        * {{site.data.keyword.block_storage_is_short}} add-on.
+
+        * Worker node fix pack
+
     * [7 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr0722)
 
         * {{site.data.keyword.containerlong_notm}} clusters in Mexico City (MEX01) are deprecated and become unsupported later this year. To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your MEX01 clusters by 31 October 2022. Clusters remaining in these data centers after 31 October 2022 will be removed. You cannot create clusters in this location after 07 May 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/get-support?topic=get-support-dc-closure).
@@ -216,7 +224,7 @@ subcollection: containers
 
         * CLI changelog update
 
-    * [6 April 2022](/docs/containers?topic=containers-containers-relnotes#{[subcollection]-apr0622)
+    * [6 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr0622)
 
         * Master fix pack update
 
@@ -4023,13 +4031,23 @@ subcollection: containers
 
     * [Step 3: Change ALB images](/docs/containers?topic=containers-ingress-types#alb-migrate-3)
 
-* [Managing TLS certificates and secrets](/docs/containers?topic=containers-ingress-types#manage_certs)
+* [Managing TLS certificates and secrets with {{site.data.keyword.cloudcerts_long}}](/docs/containers?topic=containers-ingress-types#manage_certs)
 
     * [Using your default {{site.data.keyword.cloudcerts_short}} instance](/docs/containers?topic=containers-ingress-types#manager_certs_about)
 
     * [Using the default TLS certificate for the IBM-provided Ingress subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_ibm)
 
     * [Using a TLS certificate for a custom subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_custom)
+
+* [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_full}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr)
+
+    * [Registering a {{site.data.keyword.secrets-manager_short}} instance to a cluster](/docs/containers?topic=containers-ingress-types#register-secrets-mgr)
+
+    * [Setting a {{site.data.keyword.secrets-manager_short}} instance as the default instance](/docs/containers?topic=containers-ingress-types#default-secrets-mgr)
+
+* [Migrating from {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr)
+
+    * [Using the {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}} migration script](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr-script)
 
 * [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
 
@@ -4916,6 +4934,18 @@ subcollection: containers
 
     * [`ibmcloud ks ingress alb versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_versions)
 
+    * [`ibmcloud ks instance default set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_default_set)
+
+    * [`ibmcloud ks instance default unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_default_unset)
+
+    * [`ibmcloud ks ingress instance get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_get)
+
+    * [`ibmcloud ks ingress instance ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_ls)
+
+    * [`ibmcloud ks ingress instance register`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_register)
+
+    * [`ibmcloud ks ingress instance unregister`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_unregister)
+
     * [`ibmcloud ks ingress lb get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_get)
 
     * [`ibmcloud ks ingress lb proxy-protocol disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_disable)
@@ -4923,6 +4953,12 @@ subcollection: containers
     * [`ibmcloud ks ingress lb proxy-protocol enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_enable)
 
     * [`ibmcloud ks ingress secret create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create)
+
+    * [`ibmcloud ks ingress secret field add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_add)
+
+    * [`ibmcloud ks ingress secret field ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_ls)
+
+    * [`ibmcloud ks ingress secret field rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_rm)
 
     * [`ibmcloud ks ingress secret get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_get)
 
@@ -5266,6 +5302,8 @@ subcollection: containers
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
 
+    * [Change log for worker node fix pack 1.23.5_1526, released 11 April 2022](/docs/containers?topic=containers-changelog_123#1235_1526)
+
     * [Change log for master fix pack 1.23.5_1525, released 6 April 2022](/docs/containers?topic=containers-changelog_123#1223_1525)
 
     * [Change log for master fix pack 1.23.5_1523, released 30 March 2022](/docs/containers?topic=containers-changelog_123#1235_1523)
@@ -5344,6 +5382,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.8_1548, released 11 April 2022](/docs/containers?topic=containers-changelog_122#1228_1548)
 
     * [Change log for master fix pack 1.22.8_1547, released 6 April 2022](/docs/containers?topic=containers-changelog_122#1228_1547)
 
@@ -5447,6 +5487,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview)
 
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog_121#121_changelog)
+
+    * [Change log for worker node fix pack 1.21.11_1556, released 11 April 2022](/docs/containers?topic=containers-changelog_121#12111_1556)
 
     * [Change log for master fix pack 1.21.11_1555, released 6 April 2022](/docs/containers?topic=containers-changelog_121#12111_1555)
 
@@ -5576,6 +5618,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_120#changelog_overview)
 
 * [Deprecated: Version 1.20 changelog](/docs/containers?topic=containers-changelog_120#120_changelog)
+
+    * [Change log for worker node fix pack 1.20.15_1577, released 11 April 2022](/docs/containers?topic=containers-changelog_120#12015_1577)
 
     * [Change log for master fix pack 1.20.15_1576, released 6 April 2022](/docs/containers?topic=containers-changelog_120#12015_1576)
 
@@ -7113,6 +7157,8 @@ subcollection: containers
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
 
 * [Version 4.2](/docs/containers?topic=containers-vpc_bs_changelog#042_is_block)
+
+    * [Change log for version 4.2.3_983, released 11 April 2022](/docs/containers?topic=containers-vpc_bs_changelog#423_983_is_block_relnote)
 
     * [Change log for version 4.2.2_900, released 24 March 2022](/docs/containers?topic=containers-vpc_bs_changelog#422_900_is_block_relnote)
 
