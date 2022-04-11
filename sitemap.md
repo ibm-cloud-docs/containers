@@ -208,7 +208,7 @@ subcollection: containers
 
 * [April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr22)
 
-    * [11 April 2022](/docs/containers?topic=containers-containers-relnotes#11-april-2022)
+    * [11 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr1122)
 
         * {{site.data.keyword.block_storage_is_short}} add-on.
 
