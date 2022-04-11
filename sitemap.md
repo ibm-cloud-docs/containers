@@ -4027,13 +4027,23 @@ subcollection: containers
 
     * [Step 3: Change ALB images](/docs/containers?topic=containers-ingress-types#alb-migrate-3)
 
-* [Managing TLS certificates and secrets](/docs/containers?topic=containers-ingress-types#manage_certs)
+* [Managing TLS certificates and secrets with {{site.data.keyword.cloudcerts_long}}](/docs/containers?topic=containers-ingress-types#manage_certs)
 
     * [Using your default {{site.data.keyword.cloudcerts_short}} instance](/docs/containers?topic=containers-ingress-types#manager_certs_about)
 
     * [Using the default TLS certificate for the IBM-provided Ingress subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_ibm)
 
     * [Using a TLS certificate for a custom subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_custom)
+
+* [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_full}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr)
+
+    * [Registering a {{site.data.keyword.secrets-manager_short}} instance to a cluster](/docs/containers?topic=containers-ingress-types#register-secrets-mgr)
+
+    * [Setting a {{site.data.keyword.secrets-manager_short}} instance as the default instance](/docs/containers?topic=containers-ingress-types#default-secrets-mgr)
+
+* [Migrating from {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr)
+
+    * [Using the {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}} migration script](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr-script)
 
 * [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
 
@@ -4920,6 +4930,18 @@ subcollection: containers
 
     * [`ibmcloud ks ingress alb versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_versions)
 
+    * [`ibmcloud ks instance default set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_default_set)
+
+    * [`ibmcloud ks instance default unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_default_unset)
+
+    * [`ibmcloud ks ingress instance get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_get)
+
+    * [`ibmcloud ks ingress instance ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_ls)
+
+    * [`ibmcloud ks ingress instance register`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_register)
+
+    * [`ibmcloud ks ingress instance unregister`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_unregister)
+
     * [`ibmcloud ks ingress lb get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_get)
 
     * [`ibmcloud ks ingress lb proxy-protocol disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_disable)
@@ -4927,6 +4949,12 @@ subcollection: containers
     * [`ibmcloud ks ingress lb proxy-protocol enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_enable)
 
     * [`ibmcloud ks ingress secret create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create)
+
+    * [`ibmcloud ks ingress secret field add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_add)
+
+    * [`ibmcloud ks ingress secret field ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_ls)
+
+    * [`ibmcloud ks ingress secret field rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_rm)
 
     * [`ibmcloud ks ingress secret get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_get)
 
