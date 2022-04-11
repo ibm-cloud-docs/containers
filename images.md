@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-04-11"
 
 keywords: kubernetes, registry, pull secret, secrets
 
@@ -200,7 +200,7 @@ For more information, see the [Portieris documentation](https://github.com/IBM/p
 There is a [known issue](https://github.com/IBM/portieris/issues/350){: external} when updating a cluster from {{site.data.keyword.redhat_openshift_notm}} 4.7 to {{site.data.keyword.redhat_openshift_notm}} 4.8. Do not upgrade your cluster to from version 4.7 to version 4.8 if it has image security enforcement enabled. 
 {: important}
 
-**Mutated images**: By default, Portieris uses the `MutatingAdmissionWebhook` admission controller to mutate your image to refer to the image by a digest instead of a tag. However, you might have some deployment technology that rejects a mutated image. If so, you can use the [image mutation option](https://github.com/IBM/portieris/blob/master/README.md#image-mutation-option){: external} and [policy](https://github.com/IBM/portieris/blob/master/POLICIES.md#image-mutation-option){: external} to change the default behavior.
+**Mutated images**: By default, Portieris uses the `MutatingAdmissionWebhook` admission controller to mutate your image to refer to the image by a digest instead of a tag. However, you might have some deployment technology that rejects a mutated image. If so, you can use the [image mutation option](https://github.com/IBM/portieris/blob/main/README.md#image-mutation-option){: external} and [policy](https://github.com/IBM/portieris/blob/main/POLICIES.md#image-mutation-option){: external} to change the default behavior.
 {: note}
 
 ### Enabling or disabling image security enforcement
@@ -237,14 +237,14 @@ Before you begin
 
 [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1. List the image policies that apply globally to the cluster. For an example configuration, see the [Portieris policy documentation](https://github.com/IBM/portieris/blob/master/helm/portieris/templates/policies.yaml#L66){: external}.
+1. List the image policies that apply globally to the cluster. For an example configuration, see the [Portieris policy documentation](https://github.com/IBM/portieris/blob/main/helm/portieris/templates/policies.yaml#L66){: external}.
 
     ```sh
     kubectl get ClusterImagePolicy
     ```
     {: pre}
 
-2. List the image policies that apply to particular namespaces within the cluster. For an example configuration, see the [Portieris policy documentation](https://github.com/IBM/portieris/blob/master/helm/portieris/templates/policies.yaml#L14){: external}.
+2. List the image policies that apply to particular namespaces within the cluster. For an example configuration, see the [Portieris policy documentation](https://github.com/IBM/portieris/blob/main/helm/portieris/templates/policies.yaml#L14){: external}.
 
     ```sh
     kubectl get ImagePolicy --all-namespaces
