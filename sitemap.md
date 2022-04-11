@@ -5298,6 +5298,8 @@ subcollection: containers
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
 
+    * [Change log for worker node fix pack 1.23.5_1526, released 11 April 2022](/docs/containers?topic=containers-changelog_123#1235_1526)
+
     * [Change log for master fix pack 1.23.5_1525, released 6 April 2022](/docs/containers?topic=containers-changelog_123#1223_1525)
 
     * [Change log for master fix pack 1.23.5_1523, released 30 March 2022](/docs/containers?topic=containers-changelog_123#1235_1523)
@@ -5376,6 +5378,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.8_1548, released 11 April 2022](/docs/containers?topic=containers-changelog_122#1228_1548)
 
     * [Change log for master fix pack 1.22.8_1547, released 6 April 2022](/docs/containers?topic=containers-changelog_122#1228_1547)
 
@@ -5479,6 +5483,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview)
 
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog_121#121_changelog)
+
+    * [Change log for worker node fix pack 1.21.11_1556, released 11 April 2022](/docs/containers?topic=containers-changelog_121#12111_1556)
 
     * [Change log for master fix pack 1.21.11_1555, released 6 April 2022](/docs/containers?topic=containers-changelog_121#12111_1555)
 
@@ -5608,6 +5614,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_120#changelog_overview)
 
 * [Deprecated: Version 1.20 changelog](/docs/containers?topic=containers-changelog_120#120_changelog)
+
+    * [Change log for worker node fix pack 1.20.15_1577, released 11 April 2022](/docs/containers?topic=containers-changelog_120#12015_1577)
 
     * [Change log for master fix pack 1.20.15_1576, released 6 April 2022](/docs/containers?topic=containers-changelog_120#12015_1576)
 
