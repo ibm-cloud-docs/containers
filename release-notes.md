@@ -64,7 +64,7 @@ CLI changelog update
 :   The [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.394.
 
 ### 6 April 2022
-{: #{[subcollection]-apr0622}}
+{: #containers-apr0622}}
 
 Master fix pack update
 :   Kubernetes [1.23.5_1525](/docs/containers?topic=containers-changelog_123), [1.22.8_1547](/docs/containers?topic=containers-changelog_122), [1.21.11_1555](/docs/containers?topic=containers-changelog_121), and [1.20.15_1576](/docs/containers?topic=containers-changelog_120).

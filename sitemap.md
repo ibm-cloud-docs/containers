@@ -224,7 +224,7 @@ subcollection: containers
 
         * CLI changelog update
 
-    * [6 April 2022](/docs/containers?topic=containers-containers-relnotes#{[subcollection]-apr0622)
+    * [6 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr0622)
 
         * Master fix pack update
 
