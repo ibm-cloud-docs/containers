@@ -24,14 +24,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: note}
 
 
-
-
 ## April 2022
 {: #containers-apr22}
 
   
 ### 11 April 2022
 {: #containers-apr1122}
+
+
 
 
 
