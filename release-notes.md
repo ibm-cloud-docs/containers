@@ -38,6 +38,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {{site.data.keyword.block_storage_is_short}} add-on.
 :   [Version 4.2.3_983](/docs/containers?topic=containers-vpc_bs_changelog) is available.
 
+Worker node fix pack
+:   Kubernetes [1.23.5_1526](/docs/containers?topic=containers-changelog_123), [1.22.8_1548](/docs/containers?topic=containers-changelog_122), [1.21.11_1556](/docs/containers?topic=containers-changelog_121), [1.20.15_1577](/docs/containers?topic=containers-changelog_120).
+
+
+
+
 
 ### 7 April 2022
 {: #containers-apr0722}
@@ -59,6 +65,8 @@ CLI changelog update
 
 Master fix pack update
 :   Kubernetes [1.23.5_1525](/docs/containers?topic=containers-changelog_123), [1.22.8_1547](/docs/containers?topic=containers-changelog_122), [1.21.11_1555](/docs/containers?topic=containers-changelog_121), and [1.20.15_1576](/docs/containers?topic=containers-changelog_120).
+
+
 
 
 
