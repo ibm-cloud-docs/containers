@@ -33,6 +33,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+**New! {{site.data.keyword.secrets-manager_full}}**
+:    With the deprecation of {{site.data.keyword.cloudcerts_long}}, you can now manage certificates and secrets with {{site.data.keyword.secrets-manager_full}}. You can integrate your own {{site.data.keyword.secrets-manager_short}} instances with your Kubernetes clusters. {{site.data.keyword.secrets-manager_short}} instances can be used across multiple clusters, and a single cluster can have more than one instance. For more information, see [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr)
+
 
 
 {{site.data.keyword.block_storage_is_short}} add-on.

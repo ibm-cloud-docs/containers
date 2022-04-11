@@ -210,6 +210,8 @@ subcollection: containers
 
     * [11 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr1122)
 
+        * **New! {{site.data.keyword.secrets-manager_full}}**
+
         * {{site.data.keyword.block_storage_is_short}} add-on.
 
         * Worker node fix pack
