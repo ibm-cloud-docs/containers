@@ -238,7 +238,7 @@ Maintenance Windows for {{site.data.keyword.containershort}} ALBs
 
 Cluster autoscaler
 :   Version [1.0.5_415](/docs/containers?topic=containers-ca_changelog) is available.
-:   New pages for [Preparing your cluster for autoscaling](/docs/openshift?topic=openshift-cluster-scaling-classic-vpc), [Installing the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon), and[Enabling autoscaling](/docs/containers?topic=containers-cluster-scaling-enable).
+:   New pages for [Preparing your cluster for autoscaling](/docs/openshift?topic=openshift-cluster-scaling-classic-vpc), [Installing the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon), and [Enabling autoscaling](/docs/containers?topic=containers-cluster-scaling-enable).
 :   New troubleshooting pages for [resizing worker pools](/docs/containers?topic=containers-ts-ca-resize) and updating [unbalanced worker pools](/docs/containers?topic=containers-ts-ca-unbalanced) in autoscaled clusters. 
 
 
