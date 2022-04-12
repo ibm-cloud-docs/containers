@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-04-11"
+lastupdated: "2022-04-12"
 
 keywords: kubernetes, release notes
 
@@ -26,6 +26,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## April 2022
 {: #containers-apr22}
+
+### 12 April 2022
+{: #containers-apr1222}
+
+
+
+Create and manage dedicated hosts in VPC Gen 2.
+:   You can now create clusters on dedicated hosts in VPC Gen 2. Note that support for dedicated hosts is available only for allowlisted accounts. For more information, see [Creating and managing dedicated hosts](/docs/openshift?topic=openshift-dedicated-hosts).
 
   
 ### 11 April 2022
