@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-04-11"
+lastupdated: "2022-04-12"
 
 keywords: containers
 subcollection: containers
@@ -207,6 +207,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr22)
+
+    * [12 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr1222)
+
+        * Create and manage dedicated hosts in VPC Gen 2.
 
     * [11 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr1122)
 
@@ -2689,6 +2693,8 @@ subcollection: containers
 
     * [Creating standard VPC clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpcg2_cli)
 
+* [Creating a cluster on dedicated host infrastructure](/docs/containers?topic=containers-clusters#cluster_dedicated_host_cli)
+
 * [Next steps](/docs/containers?topic=containers-clusters#next_steps)
 
 [Accessing clusters](/docs/containers?topic=containers-access_cluster#access_cluster)
@@ -2777,6 +2783,16 @@ subcollection: containers
 * [Adding labels to existing worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels)
 
 * [Automatically resolving issues for your worker nodes](/docs/containers?topic=containers-add_workers#planning_autorecovery)
+
+[Creating and managing dedicated hosts on VPC Gen 2 infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
+
+* [Setting up dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#setup-dedicated-host-cli)
+
+* [Removing worker nodes from a dedicated host in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-worker-nodes-cli)
+
+* [Removing dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-hosts-cli)
+
+* [Removing dedicated hosts pools in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-host-pool-cli)
 
 
 ### Autoscaling clusters
@@ -7794,6 +7810,8 @@ subcollection: containers
 * [Unable to create or delete worker nodes due to endpoints error](/docs/containers?topic=containers-worker_infra_errors#vpe-ts)
 
 * [Unable to create or delete worker nodes due to paid account or one time password error](/docs/containers?topic=containers-worker_infra_errors#cs_totp)
+
+[VPC: Why can't I create worker nodes on dedicated hosts?](/docs/containers?topic=containers-ts-worker-dedicated#ts-worker-dedicated)
 
 [VPC: Why doesn't replacing a worker node create a worker node?](/docs/containers?topic=containers-auto-rebalance-off#auto-rebalance-off)
 
