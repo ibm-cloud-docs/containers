@@ -7222,7 +7222,7 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
-* [Change log for version 2.1.14, released 13 April 2022](/docs/containers?topic=containers-cos_plugin_changelog#02113_object_plugin)
+* [Change log for version 2.1.14, released 13 April 2022](/docs/containers?topic=containers-cos_plugin_changelog#02114_object_plugin)
 
 * [Change log for version 2.1.13, released 24 March 2022](/docs/containers?topic=containers-cos_plugin_changelog#02113_object_plugin)
 
