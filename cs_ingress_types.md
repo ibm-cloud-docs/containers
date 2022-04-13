@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-04-12"
+lastupdated: "2022-04-13"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -813,7 +813,7 @@ If you choose to change your existing ALBs to the Kubernetes Ingress image, an A
 As of 24 August 2020, an [{{site.data.keyword.cloudcerts_long}}](/docs/certificate-manager?topic=certificate-manager-about-certificate-manager) instance is automatically created for each cluster that you can use to manage the cluster's Ingress TLS certificates.
 {: shortdesc}
 
-{{site.data.keyword.cloudcerts_short}} is deprecated. Support for the service in Kubernetes clusters is set to end in late 2022. Any remaining {{site.data.keyword.cloudcerts_short}} instances are set to be deleted on 31 Dec 2022 and any certificates set to be written only to the cluster. Migrate your certificates to IBM Cloud Secrets Manager as soon as possible.
+{{site.data.keyword.cloudcerts_short}} is deprecated. Automatic provisioning of {{site.data.keyword.cloudcerts_short}} instances in new clusters ends on 23 September 2022. Support for {{site.data.keyword.cloudcerts_short}} ends on 1 December 2022 and any remaining {{site.data.keyword.cloudcerts_short}} instances are set to be deleted on 31 Dec 2022. After this date, certificates are set to be written only to the cluster unless you set up a Secrets Manager instance. Migrate your certificates to IBM Cloud Secrets Manager as soon as possible.
 {: deprecated}
 
 ### Using your default {{site.data.keyword.cloudcerts_short}} instance
@@ -1511,7 +1511,6 @@ Note that all public ALBs in your cluster share the same IBM-assigned Ingress su
     {: screen}
 
 7. Optional: If you no longer need the subnets on the old VLANs, you can [remove them](/docs/containers?topic=containers-subnets#remove-subnets).
-
 
 
 
