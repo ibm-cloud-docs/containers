@@ -4954,9 +4954,9 @@ subcollection: containers
 
     * [`ibmcloud ks ingress alb versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_versions)
 
-    * [`ibmcloud ks instance default set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_default_set)
+    * [`ibmcloud ks ingress instance default set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_default_set)
 
-    * [`ibmcloud ks instance default unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_default_unset)
+    * [`ibmcloud ks ingress instance default unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_default_unset)
 
     * [`ibmcloud ks ingress instance get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_get)
 
