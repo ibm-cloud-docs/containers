@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-04-13"
+lastupdated: "2022-04-18"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -1228,7 +1228,7 @@ If automatic updates for the Ingress ALB add-on are disabled and you want to upd
 ### Scheduling maintenance windows for automatic updates
 {: #alb_scheduled_updates}
 
-You can enable automatic updates of all Ingress ALB pods in a cluster by enabling [autoupdate](#autoupdate). If you enable autoupdate for your ALBs, you can further control and manage your ALB updates by creating a customized configmap that specifies the time you want the updates to occur and the percentage of ALBs you want to update. For more information, see [Maintenance Windows for {{site.data.keyword.containershort}} ALBs](https://community.ibm.com/community/user/publiccloud/blogs/lucas-copi/2022/03/02/maintenance-windows-for-iks-albs){: external}.  
+You can enable automatic updates of all Ingress ALB pods in a cluster by enabling [autoupdate](#autoupdate). If you enable autoupdate for your ALBs, you can further control and manage your ALB updates by creating a customized configmap that specifies the time you want the updates to occur and the percentage of ALBs you want to update.  
 {: shortdesc}
 
 To set a time frame for automatic updates, you set the `updateStartTime` and `updateEndTime` keys in the deployment configmap. Each key represents an assigned time in a 24 hour format (HH:MM). Note that this time is specified in coordinated universal time (UTC) rather than your local time. To specify a percentage of ALBs to update, you set the `updatePercentage` key as a whole number between 0 and 100. 
