@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-04-13"
+lastupdated: "2022-04-19"
 
 keywords: containers
 subcollection: containers
@@ -3263,15 +3263,31 @@ subcollection: containers
 
 * [Access control lists (ACLs) or security groups?](/docs/containers?topic=containers-vpc-network-policy#acl-sg-compare)
 
-[Controlling traffic with the default security group](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
+[Controlling traffic with VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
 
-* [Required inbound rules](/docs/containers?topic=containers-vpc-security-group#required-group-inbound-rules)
+* [VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-security-groups-details)
 
-* [Required outbound rules](/docs/containers?topic=containers-vpc-security-group#security-group-outbound-rules)
+    * [Security groups applied to cluster workers](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cluster-workers)
 
-* [Creating inbound and outbound rules in the console](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-rules)
+    * [Security groups applied to VPE gateways and VPC ALBs](/docs/containers?topic=containers-vpc-security-group#vpc-sg-vpe-alb)
 
-* [Creating security group rules in the command line](/docs/containers?topic=containers-vpc-security-group#security_groups_cli)
+* [Viewing the VPC security groups](/docs/containers?topic=containers-vpc-security-group#viewing-the-vpc-security-groups)
+
+    * [Viewing VPC security groups in the CLI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cli)
+
+    * [Viewing the default VPC security groups in the UI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-ui)
+
+* [Minimum inbound and outbound requirements](/docs/containers?topic=containers-vpc-security-group#vpc-sg-inbound-outbound)
+
+    * [Required inbound and outbound rules for cluster workers](/docs/containers?topic=containers-vpc-security-group#required-group-rules-workers)
+
+    * [Required inbound and outbound rules for VPC ALBs](/docs/containers?topic=containers-vpc-security-group#required-group-rules-alb)
+
+* [Creating security group rules](/docs/containers?topic=containers-vpc-security-group#vpc-sg-create-rules)
+
+    * [Creating rules in the console](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-rules)
+
+    * [Creating security group rules in the command line](/docs/containers?topic=containers-vpc-security-group#security_groups_cli)
 
 [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
 

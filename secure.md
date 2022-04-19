@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-04-12"
+lastupdated: "2022-04-19"
 
 keywords: kubernetes, containers
 
@@ -329,13 +329,14 @@ To protect your network and limit the range of damage that a user can do when ac
 
 **What network traffic is allowed for my cluster by default?**
 
-By default, worker nodes are connected to [VPC subnets](/docs/containers?topic=containers-vpc-subnets) on the private network only and don't have a public network interface. All public ingress to and egress from your worker nodes is blocked.
-
+By default, worker nodes are connected to [VPC subnets](/docs/containers?topic=containers-vpc-subnets) on the private network only and don't have a public network interface. All public ingress to your worker nodes is blocked. Public egress from your worker nodes is only allowed if the workers are connected to a VPC subnet that has a public gateway.
 
 If your worker nodes must access a public endpoint outside of the cluster, you can attach a [public gateway](/docs/vpc?topic=vpc-about-networking-for-vpc#public-gateway-for-external-connectivity) to the VPC subnet that the worker nodes are deployed to. For example, your VPC cluster can automatically connect to other [{{site.data.keyword.cloud_notm}} services that support private cloud service endpoints](/docs/account?topic=account-vrf-service-endpoint), such as {{site.data.keyword.registrylong_notm}}. However, if you need to access {{site.data.keyword.cloud_notm}} services that support only public cloud service endpoints, you can attach a public gateway to the subnet so that your pods can send requests over the public network. All egress is permitted for worker nodes on a subnet with an attached public gateway, but all ingress is still blocked.
 
+If you deploy apps in your cluster that must receive traffic requests from the internet, you can [create a VPC load balancer](/docs/containers?topic=containers-vpc-lbaas) to expose your apps. To allow ingress network traffic to your apps, you must configure your VPC load balancer for the ingress network traffic that you want to receive. 
 
-If you deploy apps in your cluster that must receive traffic requests from the internet, you can [create a VPC load balancer](/docs/containers?topic=containers-vpc-lbaas) to expose your apps. To allow ingress network traffic to your apps, you must configure your VPC load balancer for the ingress network traffic that you want to receive.
+Security groups are applied to your VPC instance and VPC ALBs by defualt. For more information, see [Controlling traffic with VPC security groups](/docs/containers?topic=containers-vpc-security-group).
+{: note}
 
 **What is network segmentation and how can I set it up for a cluster?**
 
