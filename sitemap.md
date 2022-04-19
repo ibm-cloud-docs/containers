@@ -3275,7 +3275,7 @@ subcollection: containers
 
     * [Security groups applied to VPE gateways and VPC ALBs](/docs/containers?topic=containers-vpc-security-group#vpc-sg-vpe-alb)
 
-* [Viewing the VPC security groups](/docs/containers?topic=containers-vpc-security-group#viewing-the-vpc-security-groups)
+* [Viewing the VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-sg-view)
 
     * [Viewing VPC security groups in the CLI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cli)
 
