@@ -43,7 +43,7 @@ The Istio add-on is not yet supported on Kubernetes version 1.23. Do not update 
 {: important}
 
 ## Version 1.13
-{: #v113}
+{: #v113} 
 
 ### Changelog for 1.13.2, released 22 March 2022
 {: #1132}
@@ -140,7 +140,7 @@ Review the changes that are included in version 1.12.4 of the managed Istio add-
 - Resolves the following CVEs:
     - [CVE-2021-3995](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3995){: external}
     - [CVE-2021-3996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3996){: external}
-- For more information, see the [Istio security bulletin 2022-003](https://istio.io/latest/news/security/istio-security-2022-003/){: external}{:external}.
+- For more information, see the [Istio security bulletin 2022-003](https://istio.io/latest/news/security/istio-security-2022-003/){: external}.
 
 ### Change log for 1.12.3, released 22 February 2021
 {: #1123}
