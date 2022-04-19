@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-04-13"
+lastupdated: "2022-04-19"
 
 keywords: containers
 subcollection: containers
@@ -207,6 +207,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr22)
+
+    * [19 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr1922)
+
+        * Istio add-on
 
     * [13 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr1322)
 
@@ -3263,15 +3267,31 @@ subcollection: containers
 
 * [Access control lists (ACLs) or security groups?](/docs/containers?topic=containers-vpc-network-policy#acl-sg-compare)
 
-[Controlling traffic with the default security group](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
+[Controlling traffic with VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
 
-* [Required inbound rules](/docs/containers?topic=containers-vpc-security-group#required-group-inbound-rules)
+* [VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-security-groups-details)
 
-* [Required outbound rules](/docs/containers?topic=containers-vpc-security-group#security-group-outbound-rules)
+    * [Security groups applied to cluster workers](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cluster-workers)
 
-* [Creating inbound and outbound rules in the console](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-rules)
+    * [Security groups applied to VPE gateways and VPC ALBs](/docs/containers?topic=containers-vpc-security-group#vpc-sg-vpe-alb)
 
-* [Creating security group rules in the command line](/docs/containers?topic=containers-vpc-security-group#security_groups_cli)
+* [Viewing the VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-sg-view)
+
+    * [Viewing VPC security groups in the CLI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cli)
+
+    * [Viewing the default VPC security groups in the UI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-ui)
+
+* [Minimum inbound and outbound requirements](/docs/containers?topic=containers-vpc-security-group#vpc-sg-inbound-outbound)
+
+    * [Required inbound and outbound rules for cluster workers](/docs/containers?topic=containers-vpc-security-group#required-group-rules-workers)
+
+    * [Required inbound and outbound rules for VPC ALBs](/docs/containers?topic=containers-vpc-security-group#required-group-rules-alb)
+
+* [Creating security group rules](/docs/containers?topic=containers-vpc-security-group#vpc-sg-create-rules)
+
+    * [Creating rules in the console](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-rules)
+
+    * [Creating security group rules in the command line](/docs/containers?topic=containers-vpc-security-group#security_groups_cli)
 
 [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
 
@@ -6967,6 +6987,8 @@ subcollection: containers
     * [Change log for 1.13.1, released March 9th, 2021](/docs/containers?topic=containers-istio-changelog#1131)
 
 * [Version 1.12](/docs/containers?topic=containers-istio-changelog#v112)
+
+    * [Changelog for 1.12.6, released 19 April 2022](/docs/containers?topic=containers-istio-changelog#1206)
 
     * [Changelog for 1.12.5, released 22 March 2022](/docs/containers?topic=containers-istio-changelog#1125)
 
