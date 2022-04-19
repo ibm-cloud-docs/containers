@@ -208,6 +208,10 @@ subcollection: containers
 
 * [April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr22)
 
+    * [19 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr1922)
+
+        * Istio add-on
+
     * [13 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr1322)
 
         * {{site.data.keyword.cos_full_notm}} plug-in
@@ -6983,6 +6987,8 @@ subcollection: containers
     * [Change log for 1.13.1, released March 9th, 2021](/docs/containers?topic=containers-istio-changelog#1131)
 
 * [Version 1.12](/docs/containers?topic=containers-istio-changelog#v112)
+
+    * [Changelog for 1.12.6, released 19 April 2022](/docs/containers?topic=containers-istio-changelog#1206)
 
     * [Changelog for 1.12.5, released 22 March 2022](/docs/containers?topic=containers-istio-changelog#1125)
 
