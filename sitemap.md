@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-04-19"
+lastupdated: "2022-04-21"
 
 keywords: containers
 subcollection: containers
@@ -4086,8 +4086,6 @@ subcollection: containers
     * [Setting a {{site.data.keyword.secrets-manager_short}} instance as the default instance](/docs/containers?topic=containers-ingress-types#default-secrets-mgr)
 
 * [Migrating from {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr)
-
-    * [Using the {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}} migration script](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr-script)
 
 * [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
 
