@@ -4091,6 +4091,8 @@ subcollection: containers
 
 * [Migrating from {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr)
 
+    * [Migrating certificates stored with custom domains](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr-custom)
+
 * [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
 
     * [Default Ingress classes for public and private ALBs](/docs/containers?topic=containers-ingress-types#ingress-class-default)
