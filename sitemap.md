@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-04-19"
+lastupdated: "2022-04-21"
 
 keywords: containers
 subcollection: containers
@@ -207,6 +207,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr22)
+
+    * [21 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2122)
+
+        * Ingress ALB changelog updates
 
     * [19 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr1922)
 
@@ -4087,7 +4091,7 @@ subcollection: containers
 
 * [Migrating from {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr)
 
-    * [Using the {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}} migration script](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr-script)
+    * [Migrating certificates stored with custom domains](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr-custom)
 
 * [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
 
@@ -6840,11 +6844,15 @@ subcollection: containers
 
 * [Version 1.1.2](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_2)
 
-    * [Version 1.1.2_2084_iks (default), released on 7 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2084_iks)
+    * [Version 1.1.2_2121_iks (default), released on 21 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2121_iks)
+
+    * [Version 1.1.2_2084_iks, released on 7 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2084_iks)
 
     * [Version 1.1.2_2050_iks, released on 22 March 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2050_iks)
 
 * [Version 1.1.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_1)
+
+    * [Version 1.1.1_2119_iks, released on 21 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.1_2119_iks)
 
     * [Version 1.1.1_2085_iks, released on 7 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.1_2085_iks)
 
@@ -6869,6 +6877,8 @@ subcollection: containers
     * [Version 1.0.0_1645_iks, released on 14 September 2021](/docs/containers?topic=containers-cluster-add-ons-changelog#1.0.0_1645_iks)
 
 * [Version 0.49.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_49_0)
+
+    * [Version 0.49.3_2120_iks, released on 21 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#0.49.3_2120_iks)
 
     * [Version 0.49.3_2083_iks, released on 7 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#0.49.3_2083_iks)
 
