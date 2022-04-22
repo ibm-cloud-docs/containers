@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-04-11"
+lastupdated: "2022-04-22"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -144,7 +144,7 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.23.2_1517" caption-side="top"}
 
-### Change log for master fix pack 1.23.3_1518 and worker node fix pack 1.23.2_1517, released 9 Feb 2022
+### Change log for master fix pack 1.23.3_1518 and worker node fix pack 1.23.2_1517, released 9 February 2022
 {: #1233_1518_and_1232_1517}
 
 | Component | Previous | Current | Description |

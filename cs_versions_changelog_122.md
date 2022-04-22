@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-04-11"
+lastupdated: "2022-04-22"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -343,7 +343,7 @@ The following table shows the changes that are in the worker node fix pack patch
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.22.2_1523" caption-side="top"}
 
-### Change log for master fix pack 1.22.2_1522 and worker node fix pack 1.22.2_1523, released 29 Sept 2021
+### Change log for master fix pack 1.22.2_1522 and worker node fix pack 1.22.2_1523, released 29 September 2021
 {: #1222_1522_and_1222_1523}
 
 The following table shows the changes that are in the master fix pack `1.22.2_1522` and the worker node fix pack patch update `1.22.2_1523`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.

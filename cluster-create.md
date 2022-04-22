@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-04-12"
+lastupdated: "2022-04-22"
 
 keywords: kubernetes, clusters, worker nodes, worker pools
 
@@ -697,7 +697,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     * For more information, see [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}: Subnets](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets).
 4. Create the cluster in your VPC. You can use the `ibmcloud ks cluster create vpc-gen2` command to create a single zone cluster in your VPC with worker nodes that are connected to one VPC subnet only. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#vpc_add_zone) to your cluster after the cluster is created. The cluster takes a few minutes to provision.
     ```sh
-    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] [--kms-instance <KMS_instance_ID> --crk <root_key_ID>]
+    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>]  [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] [--kms-instance <KMS_instance_ID> --crk <root_key_ID>]
     ```
     {: pre}
 
@@ -790,7 +790,11 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 
 8. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](/docs/containers?topic=containers-access_cluster).
 
-9. Kubernetes version 1.18 or earlier only: To allow any traffic requests to apps that you deploy on your worker nodes, modify the VPC's default security group.
+9. Kubernetes version 1.18 or earlier only: To allow any traffic requests to apps that you deploy on your worker nodes, you can modify the VPC's default security group. 
+
+    If you modify the default VPC security group, you must make sure that the [minimum traffic rules](/docs/containers?topic=containers-vpc-security-group#required-group-rules-workers) are still covered.
+    {: note}
+
     1. List your security groups. For the **VPC** that you created, note the ID of the default security group.
         ```sh
         ibmcloud is security-groups
