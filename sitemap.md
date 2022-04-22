@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-04-21"
+lastupdated: "2022-04-22"
 
 keywords: containers
 subcollection: containers
@@ -5362,7 +5362,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.23.3_1519, released 14 February 2022](/docs/containers?topic=containers-changelog_123#1233_1519)
 
-    * [Change log for master fix pack 1.23.3_1518 and worker node fix pack 1.23.2_1517, released 9 Feb 2022](/docs/containers?topic=containers-changelog_123#1233_1518_and_1232_1517)
+    * [Change log for master fix pack 1.23.3_1518 and worker node fix pack 1.23.2_1517, released 9 February 2022](/docs/containers?topic=containers-changelog_123#1233_1518_and_1232_1517)
 
 [Version 1.23 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-123#cis-benchmark-123)
 
@@ -5467,7 +5467,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.22.2_1524, released 11 October 2021](/docs/containers?topic=containers-changelog_122#1222_1524)
 
-    * [Change log for master fix pack 1.22.2_1522 and worker node fix pack 1.22.2_1523, released 29 Sept 2021](/docs/containers?topic=containers-changelog_122#1222_1522_and_1222_1523)
+    * [Change log for master fix pack 1.22.2_1522 and worker node fix pack 1.22.2_1523, released 29 September 2021](/docs/containers?topic=containers-changelog_122#1222_1522_and_1222_1523)
 
 [Version 1.22 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-122)
 
