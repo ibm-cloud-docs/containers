@@ -3295,7 +3295,7 @@ subcollection: containers
 
     * [Creating rules in the console](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-rules)
 
-    * [Creating security group rules in the command line](/docs/containers?topic=containers-vpc-security-group#security_groups_cli)
+    * [Creating rules in the command line](/docs/containers?topic=containers-vpc-security-group#security_groups_cli)
 
 [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
 
