@@ -28,11 +28,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-apr22}
 
 
+
 ### 26 April 2022
 {: #containers-apr2622}
 
 Ingress ALB changelog updates
 :   Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog) for version `1.2.0_2131_iks`. Version `1.1.1` is no longer available.
+
 
 
 ### 25 April 2022
