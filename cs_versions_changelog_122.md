@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-04-22"
+lastupdated: "2022-04-25"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -35,8 +35,22 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 ## Version 1.22 change log
 {: #122_changelog}
 
-Review the version 1.22 changelog.
+Review the version 1.22 change log.
 {: shortdesc}
+
+### Change log for worker node fix pack 1.22.9_1550, released 25 April 2022
+{: #1229_1550}
+
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | 4.15.0-175-generic | 4.15.0-176-generic | Kernel and package updates for [CVE-2018-16301](https://nvd.nist.gov/vuln/detail/CVE-2018-16301){: external}, [CVE-2019-18276](https://nvd.nist.gov/vuln/detail/CVE-2019-18276){: external}, [CVE-2020-8037](https://nvd.nist.gov/vuln/detail/CVE-2020-8037){: external}, [CVE-2021-31870](https://nvd.nist.gov/vuln/detail/CVE-2021-31870){: external}, [CVE-2021-31871](https://nvd.nist.gov/vuln/detail/CVE-2021-31871){: external}, [CVE-2021-31872](https://nvd.nist.gov/vuln/detail/CVE-2021-31872){: external}, [CVE-2021-31873](https://nvd.nist.gov/vuln/detail/CVE-2021-31873){: external}, [CVE-2021-43975](https://nvd.nist.gov/vuln/detail/CVE-2021-43975){: external}, [CVE-2022-1271](https://nvd.nist.gov/vuln/detail/CVE-2022-1271){: external}, [CVE-2022-24765](https://nvd.nist.gov/vuln/detail/CVE-2022-24765){: external}. |
+| Kubernetes | v1.22.8 | v1.22.9 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.9){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.22.8_1548" caption-side="top"}
+
 
 ### Change log for worker node fix pack 1.22.8_1548, released 11 April 2022
 {: #1228_1548}

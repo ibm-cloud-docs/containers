@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-04-11"
+lastupdated: "2022-04-25"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.21
 
@@ -32,15 +32,26 @@ Check the [Security Bulletins on {{site.data.keyword.cloud_notm}} Status](https:
 Some change logs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) to ensure security compliance for your worker nodes. These worker node fix packs can be at a higher version than the master because some build fix packs are specific to worker nodes. Other change logs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update). For more information about patch types, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: note}
 
-## Version 1.21 changelog
+## Version 1.21 change log
 {: #121_changelog}
 
-Review the version 1.21 changelog.
+Review the version 1.21 change log.
 {: shortdesc}
 
 
 
+### Change log for worker node fix pack 1.21.12_1558, released 25 April 2022
+{: #12112_1558}
 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | 4.15.0-175-generic | 4.15.0-176-generic | Kernel and package updates for [CVE-2018-16301](https://nvd.nist.gov/vuln/detail/CVE-2018-16301){: external}, [CVE-2019-18276](https://nvd.nist.gov/vuln/detail/CVE-2019-18276){: external}, [CVE-2020-8037](https://nvd.nist.gov/vuln/detail/CVE-2020-8037){: external}, [CVE-2021-31870](https://nvd.nist.gov/vuln/detail/CVE-2021-31870){: external}, [CVE-2021-31871](https://nvd.nist.gov/vuln/detail/CVE-2021-31871){: external}, [CVE-2021-31872](https://nvd.nist.gov/vuln/detail/CVE-2021-31872){: external}, [CVE-2021-31873](https://nvd.nist.gov/vuln/detail/CVE-2021-31873){: external}, [CVE-2021-43975](https://nvd.nist.gov/vuln/detail/CVE-2021-43975){: external}, [CVE-2022-1271](https://nvd.nist.gov/vuln/detail/CVE-2022-1271){: external}, [CVE-2022-24765](https://nvd.nist.gov/vuln/detail/CVE-2022-24765){: external}. |
+| Kubernetes | v1.21.11 | v1.21.12 | See [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.12){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.21.11_1556" caption-side="top"}
 
 
 

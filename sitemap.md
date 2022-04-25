@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-04-22"
+lastupdated: "2022-04-25"
 
 keywords: containers
 subcollection: containers
@@ -207,6 +207,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr22)
+
+    * [25 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2522)
+
+        * Worker node fix pack
 
     * [21 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2122)
 
@@ -4059,9 +4063,11 @@ subcollection: containers
 
 * [Publicly exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create)
 
-    * [IBM-provided domain](/docs/containers?topic=containers-ingress-types#alb-com-create-ibm-domain)
+    * [Step 1: Create an app service and select a domain](/docs/containers?topic=containers-ingress-types#alb-comm-create-service-domain)
 
-    * [Custom domain](/docs/containers?topic=containers-ingress-types#alb-comm-create-custom)
+    * [Step 2: Set up the Ingress domain](/docs/containers?topic=containers-ingress-types#alb-com-setup-domain)
+
+    * [Step 3: Create the Ingress resource](/docs/containers?topic=containers-ingress-types#alb-comm-create-ingress-resource)
 
 * [Privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private)
 
@@ -5346,6 +5352,8 @@ subcollection: containers
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
 
+    * [Change log for worker node fix pack 1.23.6_1528, released 25 April 2022](/docs/containers?topic=containers-changelog_123#1236_1528)
+
     * [Change log for worker node fix pack 1.23.5_1526, released 11 April 2022](/docs/containers?topic=containers-changelog_123#1235_1526)
 
     * [Change log for master fix pack 1.23.5_1525, released 6 April 2022](/docs/containers?topic=containers-changelog_123#1223_1525)
@@ -5426,6 +5434,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.9_1550, released 25 April 2022](/docs/containers?topic=containers-changelog_122#1229_1550)
 
     * [Change log for worker node fix pack 1.22.8_1548, released 11 April 2022](/docs/containers?topic=containers-changelog_122#1228_1548)
 
@@ -5530,7 +5540,9 @@ subcollection: containers
 
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview)
 
-* [Version 1.21 changelog](/docs/containers?topic=containers-changelog_121#121_changelog)
+* [Version 1.21 change log](/docs/containers?topic=containers-changelog_121#121_changelog)
+
+    * [Change log for worker node fix pack 1.21.12_1558, released 25 April 2022](/docs/containers?topic=containers-changelog_121#12112_1558)
 
     * [Change log for worker node fix pack 1.21.11_1556, released 11 April 2022](/docs/containers?topic=containers-changelog_121#12111_1556)
 
@@ -5661,7 +5673,9 @@ subcollection: containers
 
 * [Overview](/docs/containers?topic=containers-changelog_120#changelog_overview)
 
-* [Deprecated: Version 1.20 changelog](/docs/containers?topic=containers-changelog_120#120_changelog)
+* [Deprecated: Version 1.20 change log](/docs/containers?topic=containers-changelog_120#120_changelog)
+
+    * [Change log for worker node fix pack 1.20.15_1579, released 25 April 2022](/docs/containers?topic=containers-changelog_120#12015_1579)
 
     * [Change log for worker node fix pack 1.20.15_1577, released 11 April 2022](/docs/containers?topic=containers-changelog_120#12015_1577)
 
@@ -8153,6 +8167,10 @@ subcollection: containers
 [{{site.data.keyword.block_storage_is_short}} PVC creation fails after API key reset](/docs/containers?topic=containers-vpc-block-api-key-reset-ts#vpc-block-api-key-reset-ts)
 
 [Why do I get a `Volume not attached` error when trying to expand a {{site.data.keyword.block_storage_is_short}} volume?](/docs/containers?topic=containers-block_not_attached_vpc#block_not_attached_vpc)
+
+[Debugging {{site.data.keyword.block_storage_is_short}} metrics](/docs/containers?topic=containers-debug_monitoring#debug_monitoring)
+
+    * [Manually viewing storage metrics in the CLI](/docs/containers?topic=containers-debug_monitoring#manual-monitor-metrics)
 
 
 ### Object Storage

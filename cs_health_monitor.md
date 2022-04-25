@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-04-07"
+lastupdated: "2022-04-25"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -227,10 +227,6 @@ To set up monitoring for these conditions, configure alerts based on the followi
 | Workloads that are in an unknown state. | `(kube_workload_status_unavailable)` | Greater than or equal to one. Note that this query is a `promQL` query. |
 {: caption="App level metrics"}
 {: summary="The table shows the app metrics that you can configure. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
-
-
-
-
 
 ### Worker node alerts
 {: #worker-node-level-alerts}
