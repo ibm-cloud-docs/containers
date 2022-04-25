@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-04-22"
+lastupdated: "2022-04-25"
 
 keywords: containers
 subcollection: containers
@@ -8153,6 +8153,10 @@ subcollection: containers
 [{{site.data.keyword.block_storage_is_short}} PVC creation fails after API key reset](/docs/containers?topic=containers-vpc-block-api-key-reset-ts#vpc-block-api-key-reset-ts)
 
 [Why do I get a `Volume not attached` error when trying to expand a {{site.data.keyword.block_storage_is_short}} volume?](/docs/containers?topic=containers-block_not_attached_vpc#block_not_attached_vpc)
+
+[Debugging {{site.data.keyword.block_storage_is_short}} metrics](/docs/containers?topic=containers-debug_monitoring#debug_monitoring)
+
+    * [Manually viewing storage metrics in the CLI](/docs/containers?topic=containers-debug_monitoring#manual-monitor-metrics)
 
 
 ### Object Storage
