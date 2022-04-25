@@ -4063,9 +4063,11 @@ subcollection: containers
 
 * [Publicly exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create)
 
-    * [IBM-provided domain](/docs/containers?topic=containers-ingress-types#alb-com-create-ibm-domain)
+    * [Step 1: Create an app service and select a domain](/docs/containers?topic=containers-ingress-types#alb-comm-create-service-domain)
 
-    * [Custom domain](/docs/containers?topic=containers-ingress-types#alb-comm-create-custom)
+    * [Step 2: Set up the Ingress domain](/docs/containers?topic=containers-ingress-types#alb-com-setup-domain)
+
+    * [Step 3: Create the Ingress resource](/docs/containers?topic=containers-ingress-types#alb-comm-create-ingress-resource)
 
 * [Privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private)
 
