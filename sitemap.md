@@ -208,6 +208,10 @@ subcollection: containers
 
 * [April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr22)
 
+    * [26 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2622)
+
+        * Ingress ALB changelog updates
+
     * [25 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2522)
 
         * Worker node fix pack
@@ -6854,7 +6858,11 @@ subcollection: containers
 
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 
-* [Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
+* [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
+
+* [Version 1.2.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_0)
+
+    * [Version 1.2.0_2131_iks, released 26 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.0_2131_iks)
 
 * [Version 1.1.2](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_2)
 
