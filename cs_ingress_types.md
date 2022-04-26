@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-04-25"
+lastupdated: "2022-04-26"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -454,6 +454,9 @@ Change your ALBs from the {{site.data.keyword.containerlong_notm}} Ingress image
 {: shortdesc}
 
 The following steps use the Ingress resource migration tool to help you create Ingress resources, including annotations, for the Kubernetes Ingress format. The migration tool also creates a new configmap resource that is formatted for the Kubernetes Ingress implementation. Then, you change the version of your ALBs to use the community Kubernetes Ingress image.
+
+{{site.data.keyword.containerlong_notm}} Ingress ALBs are deprecated and become unsupported on 1 September 2022. Make sure to migrate your ALBs to use the Kubernetes Ingress before 1 September 2022.
+{: important}
 
 The migration tool is intended to help you prepare your Ingress resources and configmap. However, you must verify, test, and modify your Ingress resources and configmap to ensure that they work correctly with the Kubernetes Ingress image.
 {: important}
@@ -1537,7 +1540,6 @@ Note that all public ALBs in your cluster share the same IBM-assigned Ingress su
     {: screen}
 
 7. Optional: If you no longer need the subnets on the old VLANs, you can [remove them](/docs/containers?topic=containers-subnets#remove-subnets).
-
 
 
 
