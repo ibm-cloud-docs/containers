@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-04-25"
+lastupdated: "2022-04-26"
 
 keywords: kubernetes, release notes
 
@@ -27,15 +27,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## April 2022
 {: #containers-apr22}
 
-
-
 ### 26 April 2022
 {: #containers-apr2622}
 
 Ingress ALB changelog updates
 :   Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog) for version `1.2.0_2131_iks`. Version `1.1.1` is no longer available.
 
-
+CLI changelog update
+:   The [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.404.
 
 ### 25 April 2022
 {: #containers-apr2522}  

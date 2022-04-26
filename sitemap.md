@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-04-25"
+lastupdated: "2022-04-26"
 
 keywords: containers
 subcollection: containers
@@ -211,6 +211,8 @@ subcollection: containers
     * [26 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2622)
 
         * Ingress ALB changelog updates
+
+        * CLI changelog update
 
     * [25 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2522)
 
@@ -5161,6 +5163,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.404](/docs/containers?topic=containers-cs_cli_changelog#cli-10404)
 
 * [Version 1.0.394](/docs/containers?topic=containers-cs_cli_changelog#cli-10394)
 
