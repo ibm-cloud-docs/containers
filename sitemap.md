@@ -212,6 +212,8 @@ subcollection: containers
 
         * Ingress ALB changelog updates
 
+        * CLI changelog update
+
     * [25 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2522)
 
         * Worker node fix pack
