@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-04-21"
+lastupdated: "2022-04-25"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -22,7 +22,7 @@ Check the [Security Bulletins on {{site.data.keyword.cloud_notm}} Status](https:
 
 For more information about managing updates for Fluentd and Ingress ALBs, see [Updating cluster components](/docs/containers?topic=containers-update#components).
 
-## Kubernetes Ingress image changelog
+## Kubernetes Ingress image change log
 {: #kube_ingress_changelog}
 
 View version changes for Ingress application load balancers (ALBs) that run the [community Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types).
@@ -38,10 +38,19 @@ The Kubernetes Ingress version follows the format `<community_version>_<ibm_buil
 
 When automatic updates are enabled for ALBs, your ALBs are updated to the most recent build of the version that is marked as `default`. If you want to use a version other than the default, you must [disable automatic updates](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable). Typically, the latest version becomes the default version one month after the latest version is released by the Kubernetes community. Actual availability and release dates of versions are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 
+## Version 1.2.0
+{: #1_2_0}
+
+### Version 1.2.0_2131_iks, released 26 April 2022
+{: #1.2.0_2131_iks}
+
+- Initial release of `1.2.0`.
+- Resolves [CVE-2021-25745](){: external} and [CVE-2021-25746](){: external}. 
+
 ## Version 1.1.2 
 {: #1_1_2}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following table for a summary of changes for each build of version 1.1.2 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following table for a summary of changes for each build of version 1.1.2 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 ### Version 1.1.2_2121_iks (default), released on 21 April 2022
@@ -65,8 +74,11 @@ Resolves [CVE-2022-1271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022
 ## Version 1.1.1 
 {: #1_1_1}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following table for a summary of changes for each build of version 1.1.1 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following table for a summary of changes for each build of version 1.1.1 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
+
+
+
 
 ### Version 1.1.1_2119_iks, released on 21 April 2022
 {: #1.1.1_2119_iks}
