@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-10"
+lastupdated: "2022-04-27"
 
 keywords: kubernetes, clusters
 
@@ -475,7 +475,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
         ```
         {: pre}
 
-    3. Display the public and the private key that you created. </br>
+    3. Display the public and the private key that you created. 
         **Private key**:
         ```sh
         cat /etc/wireguard/keys/server.key
@@ -502,7 +502,7 @@ Before you begin, make sure that you have a Kubernetes cluster with a private-on
     {: screen}
 
 6. Create the WireGuard server configuration.
-    1. Open the WireGuard server configuration. The configuration is intially empty.
+    1. Open the WireGuard server configuration. The configuration is initially empty.
         ```sh
         nano /etc/wireguard/wg0.conf
         ```

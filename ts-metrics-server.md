@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-04-27"
 
 keywords: kubernetes, help
 
@@ -77,4 +77,4 @@ Follow these steps to troubleshoot.
   
   - If you get an error message that contains text such as `<workerIP>:10250: getsockopt: connection timed out`, see [`kubectl` commands time out](/docs/containers?topic=containers-ts_clis#exec_logs_fail).
   
-  - If the previous steps do not show a problem, adjust the resources for the `metrics-server`. See [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics).
+3. If the previous steps do not show a problem, adjust the resources for the `metrics-server`. See [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics).
