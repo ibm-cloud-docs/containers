@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-04-26"
+lastupdated: "2022-04-27"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -18,7 +18,7 @@ subcollection: containers
 Your {{site.data.keyword.containerlong}} cluster comes with components, such as the Fluentd and Ingress ALB components, that are updated automatically by IBM. You can also disable automatic updates for some components and manually update them separately from the master and worker nodes. Refer to the tables in the following sections for a summary of changes for each version.
 {: shortdesc}
 
-Check the [Security Bulletins on {{site.data.keyword.cloud_notm}} Status](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security) for security vulnerabilities that affect {{site.data.keyword.containerlong_notm}}. You can filter the results to view only Kubernetes Cluster security bulletins that are relevant to {{site.data.keyword.containerlong_notm}}. {{site.data.keyword.containerlong_notm}}. Changelog entries that address other security vulnerabilities but don't also refer to an IBM Security Bulletin are for vulnerabilities that are not known to affect {{site.data.keyword.containerlong_notm}} in normal usage. If you run privileged containers, run commands on the workers, or execute untrusted code, then you might be at risk.
+Check the [Security Bulletins on {{site.data.keyword.cloud_notm}} Status](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security) for security vulnerabilities that affect {{site.data.keyword.containerlong_notm}}. You can filter the results to view only Kubernetes Cluster security bulletins that are relevant to {{site.data.keyword.containerlong_notm}}. {{site.data.keyword.containerlong_notm}}. Change log entries that address other security vulnerabilities but don't also refer to an IBM Security Bulletin are for vulnerabilities that are not known to affect {{site.data.keyword.containerlong_notm}} in normal usage. If you run privileged containers, run commands on the workers, or execute untrusted code, then you might be at risk.
 
 For more information about managing updates for Fluentd and Ingress ALBs, see [Updating cluster components](/docs/containers?topic=containers-update#components).
 
@@ -45,7 +45,7 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 {: #1.2.0_2131_iks}
 
 - Initial release of `1.2.0`.
-- Resolves [CVE-2021-25745](https://access.redhat.com/security/cve/cve-2021-25745){: external} and [CVE-2021-25746](https://access.redhat.com/security/cve/cve-2021-25746){: external}. For more information, see the [security bulletin](https://supportcontent.ibm.com/support/pages/node/6575101){: external}.
+- Resolves [CVE-2021-25745](https://access.redhat.com/security/cve/cve-2021-25745){: external} and [CVE-2021-25746](https://access.redhat.com/security/cve/cve-2021-25746){: external}. For more information, see the [security bulletin](https://www.ibm.com/support/pages/node/6575101){: external}.
 
 ## Version 1.1.2 
 {: #1_1_2}
