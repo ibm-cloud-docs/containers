@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-04-26"
+lastupdated: "2022-04-28"
 
 keywords: containers
 subcollection: containers
@@ -207,6 +207,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr22)
+
+    * [28 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2822)
+
+        * CLI changelog update
+
+        * Cluster security groups
 
     * [26 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2622)
 
@@ -3307,6 +3313,22 @@ subcollection: containers
 
     * [Creating rules in the command line](/docs/containers?topic=containers-vpc-security-group#security_groups_cli)
 
+* [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cluster)
+
+    * [If you only want the default VPC and cluster security groups and no additional security groups](/docs/containers?topic=containers-vpc-security-group#default-sgs-only)
+
+    * [If you only want the cluster security group and not the default VPC security group](/docs/containers?topic=containers-vpc-security-group#cluster-sg-only)
+
+    * [If you want the cluster security group and your own additional security groups](/docs/containers?topic=containers-vpc-security-group#cluster-customer-sgs)
+
+    * [If you only want your own security groups](/docs/containers?topic=containers-vpc-security-group#customer-sgs-only)
+
+* [Adding security groups to worker pools at worker pool create time](/docs/containers?topic=containers-vpc-security-group#vpc-sg-worker-pool)
+
+    * [If you do not want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group#no-worker-sgs)
+
+* [If you do want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group#worker-sgs)
+
 [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
 
 * [Creating ACLs from the console](/docs/containers?topic=containers-vpc-acls#acls_ui)
@@ -5163,6 +5185,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.404](/docs/containers?topic=containers-cs_cli_changelog#cli-10404)
 
 * [Version 1.0.403](/docs/containers?topic=containers-cs_cli_changelog#cli-10403)
 

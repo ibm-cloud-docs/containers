@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-04-27"
+lastupdated: "2022-04-28"
 
 keywords: kubernetes, release notes
 
@@ -27,10 +27,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## April 2022
 {: #containers-apr22}
 
+### 28 April 2022
+{: #containers-apr2822}
+
+CLI changelog update
+:   The [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.404.
 
 
-
-
+Cluster security groups
+:    You can now specify up to five security groups to attach to workers when you create a VPC cluster. For more information, see [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group##vpc-sg-cluster).
 
 ### 26 April 2022
 {: #containers-apr2622}
