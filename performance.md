@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-16"
+lastupdated: "2022-04-28"
 
 keywords: kubernetes, kernel
 
@@ -185,8 +185,11 @@ Before you begin, ensure you have the [**Manager** {{site.data.keyword.cloud_not
 ## Adjusting cluster metrics provider resources
 {: #metrics}
 
-Your cluster has a metrics service provided by the `metrics-server` deployment in the `kube-system` namespace.  The `metrics-server` resource requests are based on the number of nodes in the cluster and are optimized for clusters with 30 or less pods per worker node.  The metric service matches the memory and CPU limits of the resource requests. Containers can be "out-of-memory killed" if the memory requests are too low and can respond very slowly. They can also fail liveness and readiness probes, due to CPU throttling if the CPU requests are too low.
+Your cluster has a metrics service provided by the `metrics-server` deployment in the `kube-system` namespace. The `metrics-server` resource requests are based on the number of nodes in the cluster and are optimized for clusters with 30 or less pods per worker node. The metric service matches the memory and CPU limits of the resource requests.
 {: shortdesc}
+
+The metrics-service containers can be "out-of-memory killed" if the memory requests are too low. They might respond very slowly or fail liveness and readiness probes, due to CPU throttling if the CPU requests are too low.
+{: note}
 
 Memory use is driven by the number of pods in the cluster. CPU use is driven by the number of requests for metrics (HPAs, `kubectl top nodes / pods`, ...) and by API discovery requests. The `metrics-server` provides a Kubernetes API, so that clients such as `kubectl` that use API discovery place some load on the `metrics-server` even if they don't use metrics.
 
