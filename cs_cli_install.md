@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-01"
+lastupdated: "2022-04-29"
 
 keywords: kubernetes, ic, ks, kubectl
 
@@ -260,7 +260,8 @@ Before you begin:
 
 * To make sure that you have an {{site.data.keyword.cloud_notm}} account and other prerequisite settings, see [Configuring the CLI to run `kubectl`](#cs_cli_configure)
 
-To set the Kubernetes context for multiple clusters:
+To set the Kubernetes context for multiple clusters.
+
 1. Get the **Name** or **ID** of the clusters that you want to set the Kubernetes context for.
     ```sh
     ibmcloud ks cluster ls

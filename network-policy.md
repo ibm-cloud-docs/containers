@@ -96,43 +96,43 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
             ```
             {: pre}
 
-        2. Set the `DATASTORE_TYPE` environment variable to `kubernetes`.
+        1. Set the `DATASTORE_TYPE` environment variable to `kubernetes`.
             ```sh
             export DATASTORE_TYPE=kubernetes
             ```
             {: pre}
 
-2. If corporate network policies use proxies or firewalls to prevent access from your local system to public endpoints, [allow TCP access for Calico commands](/docs/containers?topic=containers-firewall#firewall).
+1. If corporate network policies use proxies or firewalls to prevent access from your local system to public endpoints, [allow TCP access for Calico commands](/docs/containers?topic=containers-firewall#firewall).
 
-3. Follow the steps to install the `calicoctl` command line tool.
+1. Follow the steps to install the `calicoctl` command line tool.
     * Linux and OS X
         1. [Download the version of the Calico CLI that matches your operating system](https://github.com/projectcalico/calicoctl/releases){: external}. For OS X, you might need to manually allow the downloaded file to be opened and run by navigating to **System Preferences** > **Security & Privacy** > **General**.
 
-        2. Move the file to the `/usr/local/bin` directory.
+        1. Move the file to the `/usr/local/bin` directory.
             ```sh
             mv <filepath>/<filename> /usr/local/bin/calicoctl
             ```
             {: pre}
 
-        3. Make the file an executable file.
+        1. Make the file an executable file.
             ```sh
             chmod +x /usr/local/bin/calicoctl
             ```
             {: pre}
 
-        4. Ensure there isn't an old Calico configuration file `calicoctl.cfg` in the `/etc/calico` directory. If the `/etc/calico/calicoctl.cfg` file exists, delete it.
+        1. Ensure there isn't an old Calico configuration file `calicoctl.cfg` in the `/etc/calico` directory. If the `/etc/calico/calicoctl.cfg` file exists, delete it.
 
     * Windows
         1. [Download the Calico CLI](https://github.com/projectcalico/calicoctl/releases){: external}. When you save the file, rename it to `calicoctl.exe` and save it in the same directory as the {{site.data.keyword.cloud_notm}} CLI. This setup saves you some file path changes when you run commands later.
   
-        2. Set the `KUBECONFIG` environment variable to the appropriate configuration file Kubernetes version 1.19 and later: Set the environment variable to the configuration file for your cluster.
+        1. Set the `KUBECONFIG` environment variable to the appropriate configuration file Kubernetes version 1.19 and later: Set the environment variable to the configuration file for your cluster.
 
             ```sh
             export KUBECONFIG=./.bluemix/plugins/container-service/clusters/<cluster_name>-<hash>/kube-config.yaml
             ```
             {: pre}
 
-4. Verify that the Calico configuration is working correctly.
+1. Verify that the Calico configuration is working correctly.
     ```sh
     calicoctl get nodes
     ```
@@ -169,7 +169,7 @@ Before you begin, [install and configure the Calico CLI, and set the context for
     ```
     {: pre}
 
-2. View all the Calico network policies that were created for the cluster. This list includes policies that might not apply to any pods or hosts yet. For a Calico policy to be enforced, a Kubernetes pod or Calico `HostEndpoint` must exist that matches the selector that in the Calico network policy.
+1. View all the Calico network policies that were created for the cluster. This list includes policies that might not apply to any pods or hosts yet. For a Calico policy to be enforced, a Kubernetes pod or Calico `HostEndpoint` must exist that matches the selector that in the Calico network policy.
 
     [Network policies](https://projectcalico.docs.tigera.io/reference/resources/networkpolicy){: external} are scoped to specific namespaces:
     ```sh
@@ -183,13 +183,13 @@ Before you begin, [install and configure the Calico CLI, and set the context for
     ```
     {: pre}
 
-3. View details for a network policy.
+1. View details for a network policy.
     ```sh
     calicoctl get NetworkPolicy -o yaml <policy_name> --namespace <policy_namespace>
     ```
     {: pre}
 
-4. View the details of all global network policies for the cluster.
+1. View the details of all global network policies for the cluster.
     ```sh
     calicoctl get GlobalNetworkPolicy -o yaml
     ```
@@ -208,7 +208,7 @@ To create Calico policies, use the following steps. Before you begin, [install a
 
 1. Define your Calico [network policy](https://projectcalico.docs.tigera.io/reference/resources/networkpolicy){: external} or [global network policy](https://projectcalico.docs.tigera.io/reference/resources/globalnetworkpolicy){: external} by creating a configuration script (`.yaml`) with Calico v3 policy syntax. These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. See these [sample Calico policies](https://projectcalico.docs.tigera.io/security/tutorials/kubernetes-policy-advanced){: external} to help you create your own.
 
-2. Apply the policies to the cluster. If you have a Windows system, include the `--config=<filepath>/calicoctl.cfg` flag.
+1. Apply the policies to the cluster. If you have a Windows system, include the `--config=<filepath>/calicoctl.cfg` flag.
     ```sh
     calicoctl apply -f policy.yaml [--config=<filepath>/calicoctl.cfg]
     ```
@@ -269,16 +269,16 @@ Before you begin, [install and configure the Calico CLI, and set the context for
     ```
     {: pre}
 
-2. Change directories to the public policy directory for the region that your cluster is in. Example command for a cluster in US South:
+1. Change directories to the public policy directory for the region that your cluster is in. Example command for a cluster in US South:
 
     ```sh
     cd <filepath>/IBM-Cloud/kube-samples/calico-policies/public-network-isolation/us-south
     ```
     {: pre}
 
-3. Review each policy for any changes you might need to make. For example, if you specified a custom subnet when you created your cluster that provides the private IP addresses for your pods, you must specify that CIDR instead of the `172.30.0.0/16` CIDR in the `allow-ibm-ports-public.yaml` policy. Also review these policies for any connections you might not want to allow. For example, if a certain port listed in the policy is described as only being needed for Istio, and you are not deploying Istio in your cluster, you can remove that port.
+1. Review each policy for any changes you might need to make. For example, if you specified a custom subnet when you created your cluster that provides the private IP addresses for your pods, you must specify that CIDR instead of the `172.30.0.0/16` CIDR in the `allow-ibm-ports-public.yaml` policy. Also review these policies for any connections you might not want to allow. For example, if a certain port listed in the policy is described as only being needed for Istio, and you are not deploying Istio in your cluster, you can remove that port.
 
-4. Apply the public or private policies that you want to use.
+1. Apply the public or private policies that you want to use.
 
     ```sh
     calicoctl apply -f allow-egress-pods-public.yaml
@@ -289,7 +289,7 @@ Before you begin, [install and configure the Calico CLI, and set the context for
     ```
     {: pre}
 
-5. Optional: To allow your worker nodes to access other {{site.data.keyword.cloud_notm}} services over the public network, apply the `allow-public-services.yaml` and `allow-public-services-pods.yaml` policies. The policy allows access to the IP addresses for {{site.data.keyword.registrylong_notm}}, and if the services are available in the region, {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon_full_notm}}. To access other {{site.data.keyword.cloud_notm}} services, you must manually add the subnets for those services to this policy.
+1. Optional: To allow your worker nodes to access other {{site.data.keyword.cloud_notm}} services over the public network, apply the `allow-public-services.yaml` and `allow-public-services-pods.yaml` policies. The policy allows access to the IP addresses for {{site.data.keyword.registrylong_notm}}, and if the services are available in the region, {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon_full_notm}}. To access other {{site.data.keyword.cloud_notm}} services, you must manually add the subnets for those services to this policy.
 
     ```sh
     calicoctl apply -f allow-public-services.yaml
@@ -297,14 +297,14 @@ Before you begin, [install and configure the Calico CLI, and set the context for
     ```
     {: pre}
 
-6. Verify that the policies are applied.
+1. Verify that the policies are applied.
 
     ```sh
     calicoctl get GlobalNetworkPolicies -o yaml
     ```
     {: pre}
 
-7. Optional: If you must allow traffic that is not specified by these policies, [create and apply Calico policies](#adding_network_policies) to allow this traffic. For example, if you use any in-cluster webhooks, you must add policies to ensure that the webhooks can make the required connections. You also must create policies for any non-local services that extend the Kubernetes API. You can find these services by running `kubectl get apiservices`.
+1. Optional: If you must allow traffic that is not specified by these policies, [create and apply Calico policies](#adding_network_policies) to allow this traffic. For example, if you use any in-cluster webhooks, you must add policies to ensure that the webhooks can make the required connections. You also must create policies for any non-local services that extend the Kubernetes API. You can find these services by running `kubectl get apiservices`.
 
 
 ### Applying private network policies
@@ -331,16 +331,16 @@ Before you begin, [install and configure the Calico CLI, and set the context for
     ```
     {: pre}
 
-2. Go to the `calico-v3` private policy directory for the region that your cluster is in. Example command for a cluster in US South:
+1. Go to the `calico-v3` private policy directory for the region that your cluster is in. Example command for a cluster in US South:
 
     ```sh
     cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3/us-south
     ```
     {: pre}
 
-3. Review each policy for any changes you might need to make. For example, if you specified a custom subnet when you created your cluster that provides the private IP addresses for your pods, you must specify that CIDR instead of the `172.30.0.0/16` CIDR in the `allow-all-workers-private.yaml` policy.
+1. Review each policy for any changes you might need to make. For example, if you specified a custom subnet when you created your cluster that provides the private IP addresses for your pods, you must specify that CIDR instead of the `172.30.0.0/16` CIDR in the `allow-all-workers-private.yaml` policy.
 
-4. Apply the policies.
+1. Apply the policies.
 
     ```sh
     calicoctl apply -f allow-all-workers-private.yaml
@@ -353,7 +353,7 @@ Before you begin, [install and configure the Calico CLI, and set the context for
     ```
     {: pre}
 
-6. Optional: To allow your workers and pods to access {{site.data.keyword.registrylong_notm}} over the private network, apply the `allow-private-services.yaml` and `allow-private-services-pods.yaml` policies. To access other {{site.data.keyword.cloud_notm}} services that support private cloud service endpoints, you must manually add the subnets for those services to this policy.
+1. Optional: To allow your workers and pods to access {{site.data.keyword.registrylong_notm}} over the private network, apply the `allow-private-services.yaml` and `allow-private-services-pods.yaml` policies. To access other {{site.data.keyword.cloud_notm}} services that support private cloud service endpoints, you must manually add the subnets for those services to this policy.
 
     ```sh
     calicoctl apply -f allow-private-services.yaml
@@ -361,7 +361,7 @@ Before you begin, [install and configure the Calico CLI, and set the context for
     ```
     {: pre}
 
-7. Optional: To expose your apps with private network load balancers (NLBs) or Ingress application load balancers (ALBs), you must open the VRRP protocol by applying the `allow-vrrp-private` policy.
+1. Optional: To expose your apps with private network load balancers (NLBs) or Ingress application load balancers (ALBs), you must open the VRRP protocol by applying the `allow-vrrp-private` policy.
 
     ```sh
     calicoctl apply -f allow-vrrp-private.yaml
@@ -371,14 +371,14 @@ Before you begin, [install and configure the Calico CLI, and set the context for
     You can further control access to networking services by creating [Calico pre-DNAT policies](/docs/containers?topic=containers-network_policies#block_ingress). In the pre-DNAT policy, ensure that you use `selector: ibm.role=='worker_private'` to apply the policy to the workers' private host endpoints.
     {: tip}
 
-8. Verify that the policies are applied.
+1. Verify that the policies are applied.
 
     ```sh
     calicoctl get GlobalNetworkPolicies -o yaml
     ```
     {: pre}
 
-9. Optional: If you must allow traffic that is not specified by these policies, [create and apply Calico policies](#adding_network_policies) to allow this traffic. For example, if you use any in-cluster webhooks, you must add policies to ensure that the webhooks can make the required connections. You also must create policies for any non-local services that extend the Kubernetes API. You can find these services by running `kubectl get apiservices`.
+1. Optional: If you must allow traffic that is not specified by these policies, [create and apply Calico policies](#adding_network_policies) to allow this traffic. For example, if you use any in-cluster webhooks, you must add policies to ensure that the webhooks can make the required connections. You also must create policies for any non-local services that extend the Kubernetes API. You can find these services by running `kubectl get apiservices`.
 
 
 ## Controlling traffic between pods

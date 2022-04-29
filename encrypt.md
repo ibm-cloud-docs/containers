@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-22"
+lastupdated: "2022-04-29"
 
 keywords: kubernetes, encrypt, security, kms, root key, crk
 
@@ -230,10 +230,10 @@ You can enable a KMS provider, update the KMS provider instance, or update the r
     ```
     {: screen}
 
-  After the KMS provider is enabled in the cluster, all cluster secrets are automatically encrypted.
+    After the KMS provider is enabled in the cluster, all cluster secrets are automatically encrypted.
     {: note}
 
-7. Optional: [Verify that your secrets are encrypted](#verify_kms).
+8. Optional: [Verify that your secrets are encrypted](#verify_kms).
 
 Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and can't be recovered. When you rotate a root key, you can't reuse a previous root key for the same cluster. Similarly, if you disable a root key, operations that rely on reading secrets fail. Unlike deleting a root key, however, you can reenable a disabled key to make your cluster usable again.
 {: important}
