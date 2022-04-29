@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-28"
+lastupdated: "2022-04-29"
 
 keywords: kubernetes
 
@@ -18,7 +18,7 @@ completion-time: 60m
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Using Calico network policies to block traffic
+# Using Calico network policies to control traffic on Classic clusters
 {: #policy_tutorial}
 {: toc-content-type="tutorial"}
 {: toc-services="containers"}
@@ -26,6 +26,9 @@ completion-time: 60m
 
 Learn how to use Calico policies to allow network traffic from and to certain IP addresses.
 {: shortdesc}
+
+Note that the follow steps are for Classic clusters with Classic LoadBalancers.
+{: note}
 
 By default, Kubernetes NodePort, LoadBalancer, and Ingress services make your app available on all public and private cluster network interfaces. The `allow-node-port-dnat` default Calico policy permits incoming traffic from NodePort, network load balancer (NLB), and Ingress application load balancer (ALB) services to the app pods that those services expose. Kubernetes uses destination network address translation (DNAT) to forward service requests to the correct pods.
 
@@ -243,7 +246,7 @@ To secure the PR firm's cluster, you must block public access to both the NLB se
 
 The following image shows how traffic is permitted to the NLB but not to node ports at the end of Lesson 2:
 
-![At the end of Lesson 2, the webserver app is exposed to the internet by public NLB only.](images/cs_tutorial_policies_Lesson2.png "The webserver app is exposed to the internet by public NLB only"){: caption="Figure 2. The webserver app is exposed to the internet by public NLB only." caption-side="bottom"}
+![At the end of Lesson 2, the web server app is exposed to the internet by public NLB only.](images/cs_tutorial_policies_Lesson2.png "The web server app is exposed to the internet by public NLB only"){: caption="Figure 2. The webserver app is exposed to the internet by public NLB only." caption-side="bottom"}
 
 1. In a text editor, create a high-order Pre-DNAT policy called `deny-nodeports.yaml` to deny incoming TCP and UDP traffic from any source IP to all node ports.
     ```yaml
@@ -360,7 +363,7 @@ You now decide to completely lock down traffic to the PR firm's cluster and test
 
 First, in addition to the node ports, you must block all incoming traffic to the NLB exposing the app. Then, you can create a policy that allows your system's IP address. At the end of Lesson 3, all traffic to the public node ports and NLB is blocked and only traffic from your allowed system IP is allowed.
 
-![The webserver app is exposed by public NLB to your system IP only.](images/cs_tutorial_policies_L3.png "The webserver app is exposed by public NLB to your system IP only."){: caption="Figure 3. The webserver app is exposed by public NLB to your system IP only." caption-side="bottom"}
+![The web server app is exposed by public NLB to your system IP only.](images/cs_tutorial_policies_L3.png "The we bserver app is exposed by public NLB to your system IP only."){: caption="Figure 3. The webserver app is exposed by public NLB to your system IP only." caption-side="bottom"}
 
 1. In a text editor, create a high-order Pre-DNAT policy called `deny-lb-port-80.yaml` to deny all incoming TCP and UDP traffic from any source IP to the NLB IP address and port. Replace `<loadbalancer_IP>` with the NLB public IP address from your cheat sheet.
 
@@ -486,7 +489,7 @@ In the previous lesson, you blocked all traffic and allowed only a few IPs. That
 
 In this lesson, block traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports is blocked, and all traffic to the public NLB is allowed. Only traffic from your specific system IP to the NLB is blocked.
 
-![The webserver app is exposed by public NLB to the internet. Only traffic from your system IP is blocked.](images/cs_tutorial_policies_L4.png "The webserver app is exposed by public NLB to the internet. Only traffic from your system IP is blocked."){: caption="Figure 4. The webserver app is exposed by public NLB to the internet." caption-side="bottom"}
+![The web server app is exposed by public NLB to the internet. Only traffic from your system IP is blocked.](images/cs_tutorial_policies_L4.png "The web server app is exposed by public NLB to the internet. Only traffic from your system IP is blocked."){: caption="Figure 4. The webserver app is exposed by public NLB to the internet." caption-side="bottom"}
 
 1. Clean up the allowlist policies you created in the previous lesson.
     - Linux:
