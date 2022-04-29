@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-04-28"
+lastupdated: "2022-04-29"
 
 keywords: containers
 subcollection: containers
@@ -2420,11 +2420,11 @@ subcollection: containers
 [Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: external}
 
 
-## Controlling traffic to apps in clusters
-{: #sitemap_controlling_traffic_to_apps_in_clusters}
+## Controlling traffic to apps
+{: #sitemap_controlling_traffic_to_apps}
 
 
-[Using Calico network policies to block traffic](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
+[Using Calico network policies to control traffic on Classic clusters](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
 
 * [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
 
@@ -3252,9 +3252,11 @@ subcollection: containers
 
 * [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress)
 
-* [Isolating clusters on the public network](/docs/containers?topic=containers-network_policies#isolate_workers_public)
+* [Example Calico policies to restrict public or private network traffic](/docs/containers?topic=containers-network_policies#isolate_workers_public)
 
-* [Isolating clusters on the private network](/docs/containers?topic=containers-network_policies#isolate_workers)
+    * [Applying public network policies](/docs/containers?topic=containers-network_policies#calico-public)
+
+    * [Applying private network policies](/docs/containers?topic=containers-network_policies#isolate_workers)
 
 * [Controlling traffic between pods](/docs/containers?topic=containers-network_policies#isolate_services)
 

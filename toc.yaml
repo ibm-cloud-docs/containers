@@ -67,7 +67,7 @@ toc:
                 label: Continuous Deployment to Kubernetes
                 href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes
         - topicgroup:
-            label: Controlling traffic to apps in clusters
+            label: Controlling traffic to apps
             topics:
             - cs_tutorials_policies.md
             - link:
