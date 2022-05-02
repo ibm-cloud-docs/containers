@@ -1074,9 +1074,10 @@ After migrating to {{site.data.keyword.secrets-manager_short}}, a user can opt t
         ibmcloud ks ingress secret ls --cluster <cluster_name_or_id>
         ```
         {: pre}
+        
     4. Enabled service-to-service between your cluster and {{site.data.keyword.secrets-manager_short}}.
 
-2. Get the {site.data.keyword.cloudcerts_short}} instances registered to the cluster. The instance name will be prepended with `kube-certmgr-` or `kube-certmgr-` and have a type of `cloudcerts`.
+2. Get the {{site.data.keyword.cloudcerts_short}} instances registered to the cluster. The instance name will be prepended with `kube-certmgr-` or `kube-certmgr-` and have a type of `cloudcerts`.
 
     ```sh
     ibmcloud ks ingress instance ls --cluster <cluster_name_or_id>
