@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-04-28"
+lastupdated: "2022-05-03"
 
 keywords: kubernetes
 
@@ -3769,6 +3769,9 @@ ibmcloud ks ingress alb ls --cluster my_cluster
 Clean up any Ingress resources and configmaps that you no longer need, such as after an Ingress migration.
 {: shortdesc}
 
+This command is deprecated and becomes unsupported soon.
+{: deprecated}
+
 ```sh
 ibmcloud ks ingress alb migrate clean --cluster CLUSTER [--generated-resources] [--iks-ingresses] [--kube-ingresses] [--reset-kube-controller-configmap] [--test-ingresses] [-f] [--output json] [-q]
 ```
@@ -3823,6 +3826,9 @@ ibmcloud ks ingress alb migrate clean -c my_cluster --reset-kube-controller-conf
 Start a migration of your Ingress configmap and resources that are formatted for use with ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress to instead use with ALBs that run the Kubernetes Ingress image. Note that this command helps you create all the resources for ALBs that run Kubernetes Ingress, but afterward you must still manually change your ALB from one type of image to another. For more information about how to prepare for a migration, see [Changing the image of existing ALBs](/docs/containers?topic=containers-ingress-types#alb-type-migration).
 {: shortdesc}
 
+This command is deprecated and becomes unsupported soon.
+{: deprecated}
+
 ```sh
 ibmcloud ks ingress alb migrate start --cluster CLUSTER --type (test | test-with-private | production) [-f] [-q]
 ```
@@ -3861,6 +3867,9 @@ ibmcloud ks ingress alb migrate start --type test --cluster my_cluster
 
 Check the status of a [migration of your Ingress configmap and resources](#cs_alb_migrate_start).
 {: shortdesc}
+
+This command is deprecated and becomes unsupported soon.
+{: deprecated}
 
 ```sh
 ibmcloud ks ingress alb migrate status --cluster CLUSTER [--output json] [-q]

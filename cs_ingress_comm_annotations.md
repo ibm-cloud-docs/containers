@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-04-07"
+lastupdated: "2022-05-03"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -876,6 +876,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
     
    `defaultCertificate`
     :   A secret for a default TLS certificate to apply to any subdomain that is configured with Ingress ALBs in the format `secret_namespace/secret_name`. To create a secret, you can run the [ibmcloud ks ingress secret create](/docs/containers?topic=containers-ingress-types#manage_certs) command. If a secret for a different TLS certificate is specified in the `spec.tls` section of an Ingress resource, and that secret exists in the same namespace as the Ingress resource, then that secret is applied instead of this default secret.
+    
     `enableSslPassthrough`
     :   Enable SSL passthrough for the ALB. The TLS connection is not terminated and passes through untouched.
     
