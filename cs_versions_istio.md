@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-04-19"
+lastupdated: "2022-05-03"
 
 keywords: kubernetes, istio, add-on
 
@@ -43,7 +43,36 @@ The Istio add-on is not yet supported on Kubernetes version 1.23. Do not update 
 {: important}
 
 ## Version 1.13
-{: #v113} 
+{: #v113}
+
+
+### Changelog for 1.13.3, released 3 May 2021
+{: #1133}
+
+Review the changes that are included in version 1.13.3 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.13.2
+
+Current version
+:   1.13.3 
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.13.3](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.3/.){:external}.
+:   Resolves the following CVEs: 
+    - [usn-5378-1](https://ubuntu.com/security/notices/USN-5378-1){: external}
+        - Includes: [CVE-2022-1271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1271){: external}
+    - [usn-5328-1](https://ubuntu.com/security/notices/USN-5328-1){: external}
+        - Includes: [CVE-2022-0778](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0778){: external}
+    - [usn-5329-1](https://ubuntu.com/security/notices/USN-5329-1){: external}
+        - Includes: [CVE-2021-20193](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-20193){: external}
+    - [usn-5331-2](https://ubuntu.com/security/notices/USN-5331-2){: external}
+        - Includes: [CVE-2018-16301](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16301){: external} and [CVE-2020-8037](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8037){: external}
+    - [usn-5355-1](https://ubuntu.com/security/notices/USN-5355-1){: external}
+        - Includes: [CVE-2018-25032](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-25032){: external}
+
+
 
 ### Changelog for 1.13.2, released 22 March 2022
 {: #1132}

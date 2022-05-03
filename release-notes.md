@@ -23,6 +23,14 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
+## May 2022
+{: #containers-may22}
+
+### 3 May 2022
+{: #containers-may0322}
+
+Istio add-on
+:   Version [`1.13.3`](/docs/containers?topic=containers-istio-changelog#1133) is available. 
 
 ## April 2022
 {: #containers-apr22}

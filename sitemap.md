@@ -206,6 +206,12 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may22)
+
+    * [3 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may0322)
+
+        * Istio add-on
+
 * [April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr22)
 
     * [28 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2822)
@@ -7047,6 +7053,8 @@ subcollection: containers
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
 * [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
+
+    * [Changelog for 1.13.3, released 3 May 2021](/docs/containers?topic=containers-istio-changelog#1133)
 
     * [Changelog for 1.13.2, released 22 March 2022](/docs/containers?topic=containers-istio-changelog#1132)
 
