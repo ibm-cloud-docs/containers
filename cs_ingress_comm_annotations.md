@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-04-07"
+lastupdated: "2022-05-03"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -865,17 +865,21 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
       name: ibm-ingress-deploy-config
       namespace: kube-system
     data:
-      <alb1-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
-      <alb2-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>","logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
+      <alb1-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
+      <alb2-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>","logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
     ```
     {: screen}
 
+    `deepInspect`
+    :   Enable or disable Ingress object security deep inspector. When enabled, ALBs inspect configuration values in Ingress resources before processing. For more information, see [the ingress-nginx source code](https://github.com/kubernetes/ingress-nginx/tree/main/internal/ingress/inspector){: external}.
+    :   This feature is available for ALB versions 1.2.0 and above and enabled by default.
 
     `defaultBackendService`
     :   Specify the name of an optional default service to receive requests when no host is configured or no matching host is found. This service replaces the IBM-provided default service that generates a `404` message. You might use this service to configure custom error pages or for testing connections.
     
    `defaultCertificate`
     :   A secret for a default TLS certificate to apply to any subdomain that is configured with Ingress ALBs in the format `secret_namespace/secret_name`. To create a secret, you can run the [ibmcloud ks ingress secret create](/docs/containers?topic=containers-ingress-types#manage_certs) command. If a secret for a different TLS certificate is specified in the `spec.tls` section of an Ingress resource, and that secret exists in the same namespace as the Ingress resource, then that secret is applied instead of this default secret.
+    
     `enableSslPassthrough`
     :   Enable SSL passthrough for the ALB. The TLS connection is not terminated and passes through untouched.
     
@@ -1527,5 +1531,4 @@ Each ALB has NGINX worker processes that process the client connections and comm
 
 To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](/docs/containers?topic=containers-kernel). Worker nodes are automatically provisioned with optimized kernel tuning, so change these settings only if you have specific performance optimization requirements.
 {: shortdesc}
-
 
