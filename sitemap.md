@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-05-02"
+lastupdated: "2022-05-03"
 
 keywords: containers
 subcollection: containers
@@ -210,15 +210,15 @@ subcollection: containers
 
     * [28 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2822)
 
-        * CLI changelog update
+        * CLI change log update
 
         * Cluster security groups
 
     * [26 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2622)
 
-        * Ingress ALB changelog updates
+        * Ingress ALB change log updates
 
-        * CLI changelog update
+        * CLI change log update
 
     * [25 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2522)
 
@@ -226,7 +226,7 @@ subcollection: containers
 
     * [21 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr2122)
 
-        * Ingress ALB changelog updates
+        * Ingress ALB change log updates
 
     * [19 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr1922)
 
@@ -252,9 +252,9 @@ subcollection: containers
 
         * {{site.data.keyword.containerlong_notm}} clusters in Mexico City (MEX01) are deprecated and become unsupported later this year. 
 
-        * Ingress ALB changelog updates
+        * Ingress ALB change log updates
 
-        * CLI changelog update
+        * CLI change log update
 
     * [6 April 2022](/docs/containers?topic=containers-containers-relnotes#containers-apr0622)
 
@@ -286,13 +286,13 @@ subcollection: containers
 
         * Hong Kong (`HKG02`) and Seoul (`SEO01`) are deprecated and become unsupported later this year.
 
-        * Ingress ALB changelog updates
+        * Ingress ALB change log updates
 
         * Istio add-on
 
     * [21 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar2122)
 
-        * CLI changelog update
+        * CLI change log update
 
     * [17 March 2022](/docs/containers?topic=containers-containers-relnotes#containers-mar1722)
 
@@ -558,7 +558,7 @@ subcollection: containers
 
     * [19 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct1921)
 
-        * Ingress ALB changelog updates
+        * Ingress ALB change log updates
 
     * [18 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct1821)
 
