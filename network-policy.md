@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-04-29"
+lastupdated: "2022-05-03"
 
 keywords: kubernetes, calico, egress, rules
 
@@ -33,6 +33,7 @@ Calico network policies
     - Allow or block network traffic on specific network interfaces regardless of the Kubernetes pod source or destination IP address or CIDR.
     - Allow or block network traffic for pods across namespaces.
     - [Block inbound traffic to Kubernetes LoadBalancer or NodePort services](#block_ingress).
+
 
 Calico enforces these policies, including any Kubernetes network policies, by setting up Iptables rules serve as a firewall for the worker node to define the characteristics that the network traffic must meet to be forwarded to the targeted resource.
 
@@ -285,6 +286,7 @@ Before you begin, [install and configure the Calico CLI, and set the context for
     calicoctl apply -f allow-ibm-ports-public.yaml
     calicoctl apply -f allow-public-service-endpoint.yaml
     calicoctl apply -f deny-all-outbound-public.yaml
+    calicoctl apply -f allow-k8s-master-to-dashboard.yaml
     
     ```
     {: pre}

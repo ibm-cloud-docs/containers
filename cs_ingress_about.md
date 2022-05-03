@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-22"
+lastupdated: "2022-05-03"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -60,11 +60,13 @@ The application load balancer (ALB) is an external load balancer that listens fo
 
 When you create a standard cluster, {{site.data.keyword.containerlong_notm}} automatically creates a highly available ALB in each zone where you have worker nodes and assigns a unique public domain which all public ALBs share. You can find the public domain for your cluster by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>` and looking for the **Ingress subdomain** in the format `mycluster-<hash>0001.us-south.containers.appdomain.cloud`. One default private ALB is also automatically created in each zone of your cluster, but the private ALBs are not automatically enabled and don't use the Ingress subdomain. Note that classic clusters with workers that are connected to private VLANs only are not assigned an IBM-provided Ingress subdomain.
 
-![Classic infrastructure provider icon.](images/icon-classic-2.svg) **Classic clusters: ALB IP addresses**
+####  Classic cluster ALB IP addresses
+{: #classic-alb-ips}
 
 In classic clusters, the Ingress subdomain for your cluster is linked to the public ALB IP addresses. You can find the IP address of each public ALB by running `ibmcloud ks ingress alb ls --cluster <cluster_name_or_ID>` and looking for the **ALB IP** field. The portable public and private ALB IP addresses are provisioned into your IBM Cloud infrastructure account during cluster creation and are static floating IPs that don't change for the life of the cluster. If the worker node is removed, Kubernetes deployment manager reschedules the ALB pods that were on that worker to another worker node in that zone. The rescheduled ALB pods retain the same static IP address. However, if you remove a zone from a cluster, then the ALB IP address for that zone is removed.
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) **VPC clusters: ALB hostnames**
+#### VPC cluster ALB hostnames
+{: #vpc-alb-ips}
 
 When you create a VPC cluster, one public VPC load balancer is automatically created outside of your cluster in your VPC. The public VPC load balancer puts the public IP addresses of your public ALBs behind one hostname. In VPC clusters, a hostname is assigned to the ALBs because the ALB IP addresses are not static and might change over time. Note that this ALB hostname is different than the Ingress subdomain for your cluster.
 
@@ -79,7 +81,8 @@ Do not delete the services that expose your ALBs on public or private IP address
 Depending on whether you have a classic or VPC cluster, an Akamai multizone load balancer (MZLB) or a Load Balancer for VPC health checks your ALBs. An Akamai multizone load balancer (MZLB) health checks your ALBs.
 {: shortdesc}
 
-![Classic infrastructure provider icon.](images/icon-classic-2.svg) **Classic clusters: Multizone load balancer (MZLB)**
+#### Classic cluster multizone load balancer (MZLB)
+{: #classic-mz-alb-ips}
 
 Whenever you create a multizone cluster or [add a zone to a single zone cluster](/docs/containers?topic=containers-add_workers#add_zone), an Akamai multizone load balancer (MZLB) is automatically created and deployed so that 1 MZLB exists for each region. The MZLB puts the IP addresses of your ALBs behind the same subdomain and enables health checks on these IP addresses to determine whether they are available or not.
 
@@ -93,7 +96,9 @@ If you use Calico pre-DNAT network policies or another custom firewall to block 
 {: note}
 
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) **VPC clusters: Load Balancer for VPC**
+#### Load Balancer for VPC clusters
+{: #loadbalancer-for-vpc-clus}
+
 
 When you create a VPC cluster, one public and one private VPC load balancer are automatically created outside of your cluster in your VPC. The public VPC load balancer puts the public IP addresses of your public ALBs behind one hostname, and the private VPC load balancer puts the private IP addresses of your private ALBs behind one hostname. In VPC clusters, a hostname is assigned to the ALBs because the ALB IP addresses are not static and might change over time.
 
