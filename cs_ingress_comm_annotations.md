@@ -865,11 +865,14 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
       name: ibm-ingress-deploy-config
       namespace: kube-system
     data:
-      <alb1-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
-      <alb2-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>","logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
+      <alb1-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
+      <alb2-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>","logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
     ```
     {: screen}
 
+    `deepInspect`
+    :   Enable or disable Ingress object security deep inspector. When enabled, ALBs inspect configuration values in Ingress resources before processing. For more information, see [the ingress-nginx source code](https://github.com/kubernetes/ingress-nginx/tree/main/internal/ingress/inspector){: external}.
+    :   This feature is available for ALB versions 1.2.0 and above and enabled by default.
 
     `defaultBackendService`
     :   Specify the name of an optional default service to receive requests when no host is configured or no matching host is found. This service replaces the IBM-provided default service that generates a `404` message. You might use this service to configure custom error pages or for testing connections.
@@ -1528,5 +1531,4 @@ Each ALB has NGINX worker processes that process the client connections and comm
 
 To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](/docs/containers?topic=containers-kernel). Worker nodes are automatically provisioned with optimized kernel tuning, so change these settings only if you have specific performance optimization requirements.
 {: shortdesc}
-
 
