@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-22"
+lastupdated: "2022-05-03"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -60,7 +60,7 @@ If you need to use the latest version of Istio or customize your Istio installat
 ## What comes with the Istio add-on?
 {: #istio_ov_components}
 
-In Kubernetes clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.13.2.
+In Kubernetes clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.13.3.
 {: shortdesc}
 
 The Istio add-on installs the core components of Istio. For more information about any of the following control plane components, see the [Istio documentation](https://istio.io/latest/about/service-mesh/){: external}.
