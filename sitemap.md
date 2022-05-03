@@ -2606,7 +2606,7 @@ subcollection: containers
 
     * [Private service endpoint only](/docs/containers?topic=containers-plan_basics#workeruser-master-private)
 
-    * [Worker communication to other {{site.data.keyword.cloud_notm}} services or on-premises networks](/docs/containers?topic=containers-plan_basics#worker-services-onprem)
+* [Worker communication to other {{site.data.keyword.cloud_notm}} services or on-premises networks](/docs/containers?topic=containers-plan_basics#worker-services-onprem)
 
     * [Communication with other {{site.data.keyword.cloud_notm}} services over the private or public network](/docs/containers?topic=containers-plan_basics#worker-services-onprem-pub-priv)
 
@@ -2614,53 +2614,49 @@ subcollection: containers
 
     * [strongSwan IPSec VPN connection for communication over the public network with resources in on-premises data centers](/docs/containers?topic=containers-plan_basics#worker-services-onprem-strongswan)
 
-    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#external-workers)
+* [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#external-workers)
 
     * [Private traffic to cluster apps](/docs/containers?topic=containers-plan_basics#external-workers-private)
 
     * [Public traffic to cluster apps](/docs/containers?topic=containers-plan_basics#external-workers-public)
 
-* [Example scenarios for classic cluster network setups](/docs/containers?topic=containers-plan_basics#classic-scenarios)
+* [Scenario: Running internet-facing app workloads in a classic cluster](/docs/containers?topic=containers-plan_basics#internet-facing)
 
-    * [Running internet-facing app workloads in a classic cluster](/docs/containers?topic=containers-plan_basics#internet-facing)
+    * [Worker-to-worker communication in classic clusters with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-worker)
 
-    * [Worker-to-worker communication in classic clusters](/docs/containers?topic=containers-plan_basics#internet-facing-worker)
+    * [Worker-to-master and user-to-master communication in classic clusters with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-master)
 
-    * [Worker-to-master and user-to-master communication in classic clusters](/docs/containers?topic=containers-plan_basics#internet-facing-master)
+    * [Worker communication to other services or networks with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-services)
 
-    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_basics#internet-facing-services)
+    * [External communication to apps that run on worker nodes with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-external)
 
-    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#internet-facing-external)
+* [Scenario: Extend your on-premises data center with a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#gateway)
 
-    * [Extending your on-premises data center to a classic cluster and add limited public access](/docs/containers?topic=containers-plan_basics#limited-public)
+    * [Worker-to-worker communication in a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#limited-public-worker)
 
-    * [Using a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#gateway)
+    * [Worker-to-master and user-to-master communication in a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#limited-public-master)
 
-    * [Worker-to-worker communication](/docs/containers?topic=containers-plan_basics#limited-public-worker)
+    * [Worker communication to other services or networks in a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#limited-public-service)
 
-    * [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_basics#limited-public-master)
+    * [External communication to apps that run on worker nodes in a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#limited-public-external)
 
-    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_basics#limited-public-service)
+* [Scenario: Allow limited public connectivity with a gateway appliance](/docs/containers?topic=containers-plan_basics#vyatta-gateway)
 
-    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#limited-public-external)
+    * [Worker-to-worker communication, worker-to-master and user-to-master communication with a gateway appliance](/docs/containers?topic=containers-plan_basics#limited-public-gw-worker)
 
-    * [Using a gateway appliance](/docs/containers?topic=containers-plan_basics#vyatta-gateway)
+    * [Worker communication to other services or networks with a gateway appliance](/docs/containers?topic=containers-plan_basics#limited-public-gw-services)
 
-    * [Worker-to-worker communication, worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_basics#limited-public-gw-worker)
+    * [External communication to apps that run on worker nodes with a gateway appliance](/docs/containers?topic=containers-plan_basics#limited-public-gw-external)
 
-    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_basics#limited-public-gw-services)
+* [Scenario: Extend your on-premises data center to a classic cluster](/docs/containers?topic=containers-plan_basics#private_clusters)
 
-    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#limited-public-gw-external)
+    * [Worker-to-worker communication for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-worker)
 
-    * [Scenario: Extend your on-premises data center to a classic cluster](/docs/containers?topic=containers-plan_basics#private_clusters)
+    * [Worker-to-master and user-to-master communication for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-master)
 
-    * [Worker-to-worker communication](/docs/containers?topic=containers-plan_basics#private_clusters-worker)
+    * [Worker communication to other services or networks for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-services)
 
-    * [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_basics#private_clusters-master)
-
-    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_basics#private_clusters-services)
-
-    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#private_clusters-external)
+    * [External communication to apps that run on worker nodes for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-external)
 
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
 
