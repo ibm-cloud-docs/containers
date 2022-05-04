@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-15"
+lastupdated: "2022-05-04"
 
 keywords: kubernetes, 1.19, versions, update, upgrade
 
@@ -29,7 +29,6 @@ Looking for general information on updating {{site.data.keyword.containerlong}} 
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.19 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
-For more information about Kubernetes project version 1.19, see the [Kubernetes change log](https://v1-19.docs.kubernetes.io/){: external}.
 
 ## Release timeline
 {: #release_timeline_119}
