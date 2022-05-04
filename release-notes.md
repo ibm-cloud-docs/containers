@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-03"
+lastupdated: "2022-05-04"
 
 keywords: kubernetes, release notes
 
@@ -25,6 +25,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## May 2022
 {: #containers-may22}
+
+### 4 May 2022
+{: #containers-may0422}
+
+  
+ALB OAuth Proxy add-on
+:   Version 2.0.0_1064 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) is released.
+Ingress ALB change log updates
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for versions `1.2.0_2147_iks`, `1.1.2_2146_iks`, and `0.49.3_2145_iks`.
+
+
+
 
 ### 3 May 2022
 {: #containers-may0322}
