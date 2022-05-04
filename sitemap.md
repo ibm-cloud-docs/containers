@@ -4129,13 +4129,13 @@ subcollection: containers
 
 * [Migrating from {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr)
 
+    * [Removing the {{site.data.keyword.cloudcerts_short}} instance from the cluster](/docs/containers?topic=containers-ingress-types#unregister-secret-instance)
+
 * [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_full}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr)
 
     * [Registering a {{site.data.keyword.secrets-manager_short}} instance to a cluster](/docs/containers?topic=containers-ingress-types#register-secrets-mgr)
 
     * [Setting a {{site.data.keyword.secrets-manager_short}} instance as the default instance](/docs/containers?topic=containers-ingress-types#default-secrets-mgr)
-
-    * [Removing the {{site.data.keyword.cloudcerts_short}} instance from the cluster](/docs/containers?topic=containers-ingress-types#unregister-secret-instance)
 
 * [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
 
