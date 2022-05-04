@@ -45,7 +45,6 @@ The Istio add-on is not yet supported on Kubernetes version 1.23. Do not update 
 ## Version 1.13
 {: #v113}
 
-
 ### Changelog for 1.13.3, released 3 May 2021
 {: #1133}
 
@@ -54,23 +53,25 @@ Review the changes that are included in version 1.13.3 of the managed Istio add-
 
 Previous version
 :   1.13.2
+
 Current version
 :   1.13.3 
+
 Updates in this version
-:   See the Istio release notes for [Istio 1.13.3](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.3/.){:external}.
+:   See the Istio release notes for [Istio 1.13.3](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.3/.){: external}.
+
 :   Resolves the following CVEs: 
-     - [usn-5378-1](https://ubuntu.com/security/notices/USN-5378-1){: external}
-        - Includes: [CVE-2022-1271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1271){: external}
-     - [usn-5328-1](https://ubuntu.com/security/notices/USN-5328-1){: external}
-        - Includes: [CVE-2022-0778](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0778){: external}
-     - [usn-5329-1](https://ubuntu.com/security/notices/USN-5329-1){: external}
-        - Includes: [CVE-2021-20193](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-20193){: external}
-     - [usn-5331-2](https://ubuntu.com/security/notices/USN-5331-2){: external}
-        - Includes: [CVE-2018-16301](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16301){: external} and [CVE-2020-8037](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8037){: external}
-     - [usn-5355-1](https://ubuntu.com/security/notices/USN-5355-1){: external}
-        - Includes: [CVE-2018-25032](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-25032){: external}
-
-
+    - [CVE-2022-1271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1271){: external}
+    - [CVE-2022-0778](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0778){: external}
+    - [CVE-2021-20193](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-20193){: external}
+    - [CVE-2018-16301](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16301){: external} 
+    - [CVE-2020-8037](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8037){: external}
+    - [CVE-2018-25032](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-25032){: external}
+    - [usn-5378-1](https://ubuntu.com/security/notices/USN-5378-1){: external}
+    - [usn-5328-1](https://ubuntu.com/security/notices/USN-5328-1){: external}
+    - [usn-5329-1](https://ubuntu.com/security/notices/USN-5329-1){: external}
+    - [usn-5331-2](https://ubuntu.com/security/notices/USN-5331-2){: external}
+    - [usn-5355-1](https://ubuntu.com/security/notices/USN-5355-1){: external}
 
 ### Changelog for 1.13.2, released 22 March 2022
 {: #1132}
@@ -80,23 +81,27 @@ Review the changes that are included in version 1.13.2 of the managed Istio add-
 
 Previous version
 :   1.13.1
+
 Current version
 :   1.13.2
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.13.2](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.2/.){: external}.
+
 :   Resolves the following CVEs
-      - [CVE-2016-10228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10228){: external}
-      - [CVE-2019-25013](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-25013){: external}
-      - [CVE-2020-27618](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27618){: external}
-      - [CVE-2020-29562](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29562){: external}
-      - [CVE-2020-6096 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-6096 ){: external}
-      - [CVE-2021-27645](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27645){: external}
-      - [CVE-2021-3326](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3326){: external}
-      - [CVE-2021-35942](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-35942){: external}
-      - [CVE-2021-3998](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3998){: external}
-      - [CVE-2021-3999 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3999 ){: external}
-      - [CVE-2022-23218](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23218){: external}
-      - [CVE-2022-23219](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23219){: external}
+    - [CVE-2016-10228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10228){: external}
+    - [CVE-2019-25013](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-25013){: external}
+    - [CVE-2020-27618](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27618){: external}
+    - [CVE-2020-29562](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29562){: external}
+    - [CVE-2020-6096 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-6096 ){: external}
+    - [CVE-2021-27645](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27645){: external}
+    - [CVE-2021-3326](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3326){: external}
+    - [CVE-2021-35942](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-35942){: external}
+    - [CVE-2021-3998](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3998){: external}
+    - [CVE-2021-3999 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3999 ){: external}
+    - [CVE-2022-23218](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23218){: external}
+    - [CVE-2022-23219](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23219){: external}
+
 :   For more information, see the [Istio security bulletin 2022-004](https://istio.io/latest/news/security/istio-security-2022-004/){: external}.
 
 ### Change log for 1.13.1, released March 9th, 2021
@@ -107,8 +112,10 @@ Review the changes that are included in version 1.13.1 of the managed Istio add-
 
 Previous version
 :   1.12.4
+
 Current version
 :   1.13.1
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.13.1](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.1/.){: external}.
 
@@ -126,15 +133,18 @@ Review the changes that are included in version 1.12.6 of the managed Istio add-
 
 Previous version
 :   1.12.5
+
 Current version
 :   1.12.6
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.12.6](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.6/.){:external}.
+
 :   Resolves the following CVEs
-     - [CVE-2022-0778](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0778){: external}
-     - [CVE-2021-20193](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-20193){: external}
-     - [usn-5328-1](https://ubuntu.com/security/notices/USN-5328-1){: external}
-     - [usn-5329-1](https://ubuntu.com/security/notices/USN-5329-1){: external}
+    - [CVE-2022-0778](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0778){: external}
+    - [CVE-2021-20193](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-20193){: external}
+    - [usn-5328-1](https://ubuntu.com/security/notices/USN-5328-1){: external}
+    - [usn-5329-1](https://ubuntu.com/security/notices/USN-5329-1){: external}
 
 ### Changelog for 1.12.5, released 22 March 2022
 {: #1125}
@@ -144,23 +154,27 @@ Review the changes that are included in version 1.12.5 of the managed Istio add-
 
 Previous version
 :   1.12.4
+
 Current version
 :   1.12.5
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.12.5](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.5/.){: external}.
+
 :   Resolves the following CVEs
-     - [CVE-2016-10228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10228){: external}
-     - [CVE-2019-25013](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-25013){: external}
-     - [CVE-2020-27618](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27618){: external}
-     - [CVE-2020-29562](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29562){: external}
-     - [CVE-2020-6096 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-6096 ){: external}
-     - [CVE-2021-27645](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27645){: external}
-     - [CVE-2021-3326](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3326){: external}
-     - [CVE-2021-35942](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-35942){: external}
-     - [CVE-2021-3998](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3998){: external}
-     - [CVE-2021-3999 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3999 ){: external}
-     - [CVE-2022-23218](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23218){: external}
-     - [CVE-2022-23219](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23219){: external}
+    - [CVE-2016-10228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10228){: external}
+    - [CVE-2019-25013](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-25013){: external}
+    - [CVE-2020-27618](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27618){: external}
+    - [CVE-2020-29562](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29562){: external}
+    - [CVE-2020-6096](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-6096 ){: external}
+    - [CVE-2021-27645](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27645){: external}
+    - [CVE-2021-3326](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3326){: external}
+    - [CVE-2021-35942](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-35942){: external}
+    - [CVE-2021-3998](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3998){: external}
+    - [CVE-2021-3999](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3999 ){: external}
+    - [CVE-2022-23218](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23218){: external}
+    - [CVE-2022-23219](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23219){: external}
+
 :   For more information, see the [Istio security bulletin 2022-004](https://istio.io/latest/news/security/istio-security-2022-004/){: external}.
 
 ### Change log for 1.12.4, released 8 March 2022
@@ -171,13 +185,17 @@ Review the changes that are included in version 1.12.4 of the managed Istio add-
 
 Previous version
 :   1.12.3
+
 Current version
 :   1.12.4
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.12.4](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.4/.){: external}.
+
 :   Resolves the following CVEs
-     - [CVE-2021-3995](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3995){: external}
-     - [CVE-2021-3996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3996){: external}
+    - [CVE-2021-3995](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3995){: external}
+    - [CVE-2021-3996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3996){: external}
+
 :   For more information, see the [Istio security bulletin 2022-003](https://istio.io/latest/news/security/istio-security-2022-003/){: external}.
 
 ### Change log for 1.12.3, released 22 February 2021
@@ -188,26 +206,28 @@ Review the changes that are included in version 1.12.3 of the managed Istio add-
 
 Previous version
 :   1.12.2
+
 Current version
 :   1.12.3
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.12.3](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.3/.){: external}.
-
 
 ### Change log for 1.12.2, released 03 February 2022
 {: #1202}
 
-
 Review the changes that are included in version 1.12.2 of the managed Istio add-on.
 {: shortdesc}
 
-
 Previous version
-:   1.12.1  
+:   1.12.1
+
 Current version
-:   1.12.2   
+:   1.12.2
+
 Updates in this version   
-See the Istio release notes for [Istio 1.12.2](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.2/){: external}. 
+:   See the Istio release notes for [Istio 1.12.2](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.2/){: external}. 
+
 :   For more information, see the [Istio security bulletin 2022-001](https://istio.io/latest/news/security/istio-security-2022-001/){: external} and [Istio security bulletin 2022-002](https://istio.io/latest/news/security/istio-security-2022-002/){: external}.
 
 ### Change log for 1.12.1, released 13 January 2022
@@ -217,26 +237,34 @@ Review the changes that are included in version 1.12.1 of the managed Istio add-
 {: shortdesc}
 
 Previous version
-:   1.12.0  
+:   1.12.0
+
 Current version
-:   1.12.1   
+:   1.12.1
+
 Updates in this version
-See the Istio release notes for [Istio 1.12.1](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.1/){: external}. 
+:   See the Istio release notes for [Istio 1.12.1](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.1/){: external}. 
 
 ### Change log for 1.12.0, released 08 December 2021
 {: #1200}
 
 Previous version
 :   1.11.4
+
 Current version
-:   1.12.0  
+:   1.12.0
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.12.0](https://istio.io/latest/news/releases/1.12.x/announcing-1.12/){: external}. 
-     - Updates the `managed-istio` operator settings. This includes a `TERMINATION_DRAIN_DURATION` of 30 seconds which replaces an earlier prestop variable of 25 seconds. If you are already using a `TERMINATION_DRAIN_DURATION` you must increase the value by 30 seconds to account for this change. 
-     - Updates the affinity rules in the `k8s.overlay` to `k8s.affinity`. If you are using custom gateways, review the updated configuration for the default gateways to see if you want to use the change in your custom gateways. 
-     - Users can now increase the max horizontal pod autoscaler (HPA) pods for istiod. Do not change this value to less than the default of `5`. You can increase this value, but only in situations where you have a large service mesh.
+
+:   Updates the `managed-istio` operator settings. This includes a `TERMINATION_DRAIN_DURATION` of 30 seconds which replaces an earlier prestop variable of 25 seconds. If you are already using a `TERMINATION_DRAIN_DURATION` you must increase the value by 30 seconds to account for this change. 
+
+:   Updates the affinity rules in the `k8s.overlay` to `k8s.affinity`. If you are using custom gateways, review the updated configuration for the default gateways to see if you want to use the change in your custom gateways. 
+
+:   Users can now increase the max horizontal pod autoscaler (HPA) pods for istiod. Do not change this value to less than the default of `5`. You can increase this value, but only in situations where you have a large service mesh.
+
 :   Resolves the following CVEs
-     - [usn-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
+    - [usn-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
 
 
 ## Version 1.11
@@ -256,23 +284,27 @@ This is the final update for version 1.11, which becomes unsupported on 21 April
 
 Previous version
 :   1.11.7
+
 Current version
 :   1.11.8
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.11.8](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.8/.){: external}.
+
 :   Resolves the following CVEs
-     - [CVE-2016-10228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10228){: external}
-     - [CVE-2019-25013](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-25013){: external}
-     - [CVE-2020-27618](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27618){: external}
-     - [CVE-2020-29562](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29562){: external}
-     - [CVE-2020-6096 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-6096 ){: external}
-     - [CVE-2021-27645](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27645){: external}
-     - [CVE-2021-3326](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3326){: external}
-     - [CVE-2021-35942](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-35942){: external}
-     - [CVE-2021-3998](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3998){: external}
-     - [CVE-2021-3999 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3999 ){: external}
-     - [CVE-2022-23218](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23218){: external}
-     - [CVE-2022-23219](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23219){: external}
+    - [CVE-2016-10228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10228){: external}
+    - [CVE-2019-25013](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-25013){: external}
+    - [CVE-2020-27618](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27618){: external}
+    - [CVE-2020-29562](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29562){: external}
+    - [CVE-2020-6096](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-6096 ){: external}
+    - [CVE-2021-27645](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27645){: external}
+    - [CVE-2021-3326](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3326){: external}
+    - [CVE-2021-35942](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-35942){: external}
+    - [CVE-2021-3998](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3998){: external}
+    - [CVE-2021-3999](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3999 ){: external}
+    - [CVE-2022-23218](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23218){: external}
+    - [CVE-2022-23219](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23219){: external}
+    
 :   For more information, see the [Istio security bulletin 2022-004](https://istio.io/latest/news/security/istio-security-2022-004/){: external}.
 
 
@@ -284,26 +316,31 @@ Review the changes that are included in version 1.11.7 of the managed Istio add-
 
 Previous version
 :   1.11.6
+
 Current version
 :   1.11.7
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.11.7](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.7/.){: external}.
+
 :   Resolves the following CVEs
-     - [CVE-2021-3995](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3995){: external}
-     - [CVE-2021-3996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3996){: external}
+    - [CVE-2021-3995](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3995){: external}
+    - [CVE-2021-3996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3996){: external}
+
 :   For more information, see the [Istio security bulletin 2022-003](https://istio.io/latest/news/security/istio-security-2022-003/){: external}.
 
 ### Change log for 1.11.6, released 15 February 2022
 {: #1116}
-
 
 Review the changes that are included in version 1.11.6 of the managed Istio add-on.
 {: shortdesc}
 
 Previous version
 :   1.11.5
+
 Current version
 :   1.11.6
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.11.6](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.6/.){: external}.
 
@@ -315,12 +352,15 @@ Review the changes that are in version 1.11.5 of the managed Istio add-on.
 
 Previous version
 :   1.11.4  
+
 Current version
-:   1.11.5   
+:   1.11.5 
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.11.5](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.5/.){: external}. 
+
 :   Resolves the following CVE:
-     - [USN-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
+    - [USN-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
 
 
 ### Change log for 1.11.4, released 2 November 2021
@@ -331,10 +371,12 @@ Review the changes that are in version 1.11.4 of the managed Istio add-on.
 
 Previous version
 :   1.11.3  
+
 Current version
 :   1.11.4  
+
 Updates in this version
-See the Istio release notes for [Istio 1.11.4](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.4/){: external}.
+:   See the Istio release notes for [Istio 1.11.4](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.4/){: external}.
 
 ### Change log for 1.11.3, released 7 October 2021
 {: #1113}
@@ -344,16 +386,20 @@ Review the changes that are in version 1.11.3 of the managed Istio add-on.
 
 Previous version
 :   1.11.2  
+
 Current version
 :   1.11.3   
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.11.3](https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2021-22945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22945){: external}
-     - [CVE-2021-22946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22946){: external}
-     - [CVE-2021-22947](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22947){: external}
-     - [CVE-2021-33560](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33560){: external}
-     - [CVE-2021-40528](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-40528){: external}
+    - [CVE-2021-22945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22945){: external}
+    - [CVE-2021-22946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22946){: external}
+    - [CVE-2021-22947](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22947){: external}
+    - [CVE-2021-33560](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33560){: external}
+    - [CVE-2021-40528](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-40528){: external}
+
 :   For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
 ### Change log for 1.11.2, released 23 September 2021
@@ -364,14 +410,17 @@ Review the changes that are in version 1.11.2 of the managed Istio add-on.
 
 Previous version
 :   1.11.1
+
 Current version
 :   1.11.2  
+
 Updates in this version
-See the Istio release notes for [Istio 1.11.2](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.2/){: external}.
+:   See the Istio release notes for [Istio 1.11.2](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.2/){: external}.
+
 :   Resolves the following CVEs
-     - [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711){: external}
-     - [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}
-     - [CVE-2021-3634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3634){: external}
+    - [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711){: external}
+    - [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}
+    - [CVE-2021-3634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3634){: external}
     
 ### Change log for 1.11.1, released 31 August 2021
 {: #1111}
@@ -381,15 +430,19 @@ Review the changes that are in version 1.11.1 of the managed Istio add-on.
 
 Previous version
 :   1.10.3
+
 Current version
-:   1.11.1   
+:   1.11.1  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.11.0](https://istio.io/latest/news/releases/1.11.x/announcing-1.11/){: external} and [Istio 1.11.1](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.1/.){: external}.
-     - Adds a postStart to the sidecar to enable the holdApplicationUntilProxyStarts option. Since the sidecar is normally last this doesn't impact default behavior where Istio places the sidecar as the last container. If you are adding containers to your pods, verify that they get added before the sidecar or are okay waiting for the sidecar to start.
+
+:   Adds a postStart to the sidecar to enable the holdApplicationUntilProxyStarts option. Since the sidecar is normally last this doesn't impact default behavior where Istio places the sidecar as the last container. If you are adding containers to your pods, verify that they get added before the sidecar or are okay waiting for the sidecar to start.
+
 :   Resolves the following CVEs
-     - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
-     - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
-     - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
+    - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
+    - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
+    - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
 
 :   For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
@@ -410,8 +463,10 @@ Review the changes that are included in version 1.10.6 of the managed Istio add-
 
 Previous version
 :   1.10.5  
+
 Current version
 :   1.10.6 
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.10.6](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.6/){: external}. 
 
@@ -423,20 +478,24 @@ Review the changes that are in version 1.10.5 of the managed Istio add-on.
 
 Previous version
 :   1.10.4  
+
 Current version
 :   1.10.5  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.10.5](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.5/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2021-22945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22945){: external}
-     - [CVE-2021-22946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22946){: external}
-     - [CVE-2021-22947](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22947){: external}
-     - [CVE-2021-33560](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33560){: external}
-     - [CVE-2021-40528](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-40528){: external}
-     - [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33560){: external}
-     - [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-40528){: external}
-     - [usn-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
-     - [usn-5079-3](https://ubuntu.com/security/notices/USN-5079-1){: external}
+    - [CVE-2021-22945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22945){: external}
+    - [CVE-2021-22946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22946){: external}
+    - [CVE-2021-22947](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22947){: external}
+    - [CVE-2021-33560](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33560){: external}
+    - [CVE-2021-40528](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-40528){: external}
+    - [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33560){: external}
+    - [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-40528){: external}
+    - [usn-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
+    - [usn-5079-3](https://ubuntu.com/security/notices/USN-5079-1){: external}
+
 :   For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
 ### Change log for 1.10.4, released 14 September 2021
@@ -446,15 +505,19 @@ Review the changes that are in version 1.10.4 of the managed Istio add-on.
 {: shortdesc}
 
 Previous version
-:   1.10.3  
+:   1.10.3 
+
 Current version
-:   1.10.4   
+:   1.10.4 
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.10.4](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.4/.){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
-     - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
-     - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
+    - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
+    - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
+    - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
+
 :   For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
 ### Change log for 1.10.3, released 5 August 2021
@@ -465,8 +528,10 @@ Review the changes that are in version 1.10.3 of the managed Istio add-on.
 
 Previous version
 :   1.10.2  
+
 Current version
 :   1.10.3   
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.10.3](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.3/.){: external}. 
 
@@ -478,20 +543,26 @@ Review the changes that are in version 1.10.2 of the managed Istio add-on.
 
 Previous version
 :   1.9.5  
+
 Current version
 :   1.10.2  
+
 Updates in this version
 :   See the Istio release notes for:
-     - [Istio 1.10.0](https://istio.io/latest/news/releases/1.10.x/announcing-1.10/){: external}
-     - [Istio 1.10.1](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.1/){: external}
-     - [Istio 1.10.2](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.2/){: external}. 
+    - [Istio 1.10.0](https://istio.io/latest/news/releases/1.10.x/announcing-1.10/){: external}
+    - [Istio 1.10.1](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.1/){: external}
+    - [Istio 1.10.2](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.2/){: external}. 
+
 :   The API version of the `IstioOperator` (IOP) custom resource definition is updated from `v1beta1` to `v1`. Although this update does not impact existing custom IOP resources, you can optionally back up your IOP resources before upgrading to Istio version 1.10. 
-:   The `IstioOperator` deployment is now created by the Istio add-on instead of the Operator Lifecycle Manager (OLM). If you choose to uninstall the add-on, steps are included to uninstall the [deployment resources for the operator](/docs/containers?topic=containers-istio#uninstall_resources). 
+
+:   The `IstioOperator` deployment is now created by the Istio add-on instead of the Operator Lifecycle Manager (OLM). If you choose to uninstall the add-on, steps are included to uninstall the [deployment resources for the operator](/docs/containers?topic=containers-istio#uninstall_resources).
+
 :   In multizone clusters, the zone labels for default Istio ingress gateways are now sorted in reverse order to improve resiliency. This change does not affect any ingress gateways that are already enabled and assigned a zone label in the `managed-istio-custom` configmap. 
+
 :   Resolves the following CVEs
-     - [CVE-2021-3520](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3520){: external}.
-     - [CVE-2018-16869](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16869){: external}.
-     - [CVE-2021-3580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3580){: external}. 
+    - [CVE-2021-3520](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3520){: external}.
+    - [CVE-2018-16869](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16869){: external}.
+    - [CVE-2021-3580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3580){: external}. 
   
   
 ## Version 1.9 (unsupported)
@@ -508,14 +579,18 @@ Review the changes that are in version 1.9.8 of the managed Istio add-on.
 
 Previous version
 :   1.9.7  
+
 Current version
 :   1.9.8   
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.9.8](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.8/.){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
-     - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
-     - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
+    - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
+    - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
+    - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
+
 :   For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
 ### Change log for 1.9.7, released 12 August 2021
@@ -526,8 +601,10 @@ Review the changes that are in version 1.9.7 of the managed Istio add-on.
 
 Previous version
 :   1.9.6  
+
 Current version
 :   1.9.7  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.9.7](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.7/.){: external}.
 
@@ -539,14 +616,17 @@ Review the changes that are in version 1.9.6 of the managed Istio add-on.
 
 Previous version
 :   1.9.5  
+
 Current version
 :   1.9.6  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.9.6](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.6/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2021-3520](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3520){: external}.
-     - [CVE-2018-16869](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16869){: external}.
-     - [CVE-2021-3580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3580){: external}.
+    - [CVE-2021-3520](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3520){: external}.
+    - [CVE-2018-16869](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16869){: external}.
+    - [CVE-2021-3580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3580){: external}.
 
 ### Change log for 1.9.5, released 27 May 2021
 {: #195}
@@ -556,10 +636,13 @@ Review the changes that are in version 1.9.5 of the managed Istio add-on.
 
 Previous version
 :   1.9.4  
+
 Current version
 :   1.9.5  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.9.5](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.5/){: external}. 
+
 :   Resolves [CVE-2021-20305](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-20305){: external}.
 
 ### Change log for 1.9.4, released 17 May 2021
@@ -570,8 +653,10 @@ Review the changes that are in version 1.9.4 of the managed Istio add-on.
 
 Previous version
 :   1.9.3  
+
 Current version
 :   1.9.4  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.9.4](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.4/){: external}.
 
@@ -584,19 +669,23 @@ Review the changes that are in version 1.9.3 of the managed Istio add-on.
 
 Previous version
 :   1.9.2  
+
 Current version
 :   1.9.3  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.9.3](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.3/){: external}.
+
 :   Resolves the following CVEs
-     - [CVE-2021-28683](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28683){: external}
-     - [CVE-2021-28682](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28682){: external}
-     - [CVE-2021-29258](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-29258){: external}
-     - [CVE-2021-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449){: external}
-     - [CVE-2021-22876](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22876){: external}
-     - [CVE-2021-22890](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22890){: external}
-     - [usn-4891-1](https://ubuntu.com/security/notices/USN-4891-1/){: external}
-     - [usn-4898-1](https://ubuntu.com/security/notices/USN-4898-1/){: external}. 
+    - [CVE-2021-28683](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28683){: external}
+    - [CVE-2021-28682](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28682){: external}
+    - [CVE-2021-29258](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-29258){: external}
+    - [CVE-2021-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449){: external}
+    - [CVE-2021-22876](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22876){: external}
+    - [CVE-2021-22890](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22890){: external}
+    - [usn-4891-1](https://ubuntu.com/security/notices/USN-4891-1/){: external}
+    - [usn-4898-1](https://ubuntu.com/security/notices/USN-4898-1/){: external}. 
+
 :   For more information, see the [Istio security bulletin 2021-003](https://istio.io/latest/news/security/istio-security-2021-003/){: external}.
 
 
@@ -608,13 +697,16 @@ Review the changes that are in version 1.9.2 of the managed Istio add-on.
 
 Previous version
 :   1.8.4  
+
 Current version
 :   1.9.2  
+
 Updates in this version
 :   See the Istio release notes for:
-     - [Istio 1.9.0](https://istio.io/latest/news/releases/1.9.x/announcing-1.9/){: external}
-     - [Istio 1.9.1](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.1/){: external}
-     - [Istio 1.9.2](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.2/){: external}. 
+    - [Istio 1.9.0](https://istio.io/latest/news/releases/1.9.x/announcing-1.9/){: external}
+    - [Istio 1.9.1](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.1/){: external}
+    - [Istio 1.9.2](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.2/){: external}. 
+
 :   The `istio-components-pilot-requests-cpu` setting is added to the `managed-istio-custom` configmap resource to change the default CPU request of `500` for `istiod`.
 
   
@@ -632,12 +724,14 @@ Review the changes that are in version 1.8.6 of the managed Istio add-on.
 
 Previous version
 :   1.8.5  
+
 Current version
 :   1.8.6  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.8.6](https://istio.io/latest/news/releases/1.8.x/announcing-1.8.6/){: external}. 
-:   Resolves[CVE-2021-20305](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-20305){: external}. 
 
+:   Resolves[CVE-2021-20305](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-20305){: external}. 
 
 ### Change log for 1.8.5, released 29 April 2021
 {: #185}
@@ -647,22 +741,26 @@ Review the changes that are in version 1.8.5 of the managed Istio add-on.
 
 Previous version
 :   1.8.4  
+
 Current version
 :   1.8.5  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.8.5](https://istio.io/latest/news/releases/1.8.x/announcing-1.8.5/){: external}.
+
 :   Resolves the following CVEs
-     - [CVE-2021-28683](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28683){: external}
-     - [CVE-2021-28682](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28682){: external}
-     - [CVE-2021-29258](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-29258){: external}
-     - [CVE-2021-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449){: external}
-     - [CVE-2021-22876](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22876){: external}
-     - [CVE-2021-22890](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22890){: external}
-     - [CVE-2021-24031](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-24031){: external}
-     - [CVE-2021-24032](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-24032){: external}
-     - [usn-4760-1](https://ubuntu.com/security/notices/USN-4760-1/){: external}
-     - [usn-4891-1](https://ubuntu.com/security/notices/USN-4891-1/){: external}
-     - [usn-4898-1](https://ubuntu.com/security/notices/USN-4898-1/){: external}. 
+    - [CVE-2021-28683](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28683){: external}
+    - [CVE-2021-28682](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28682){: external}
+    - [CVE-2021-29258](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-29258){: external}
+    - [CVE-2021-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449){: external}
+    - [CVE-2021-22876](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22876){: external}
+    - [CVE-2021-22890](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22890){: external}
+    - [CVE-2021-24031](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-24031){: external}
+    - [CVE-2021-24032](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-24032){: external}
+    - [usn-4760-1](https://ubuntu.com/security/notices/USN-4760-1/){: external}
+    - [usn-4891-1](https://ubuntu.com/security/notices/USN-4891-1/){: external}
+    - [usn-4898-1](https://ubuntu.com/security/notices/USN-4898-1/){: external}. 
+
 :   For more information, see the [Istio security bulletin 2021-003](https://istio.io/latest/news/security/istio-security-2021-003/){: external}.
 
 
@@ -674,15 +772,18 @@ Review the changes that are in version 1.8.4 of the managed Istio add-on.
 
 Previous version
 :   1.8.3  
+
 Current version
 :   1.8.4 
+
 Updates in this version
-:   See the Istio release notes for [Istio 1.8.4](https://istio.io/latest/news/releases/1.8.x/announcing-1.8.4/){: external}. 
+:   See the Istio release notes for [Istio 1.8.4](https://istio.io/latest/news/releases/1.8.x/announcing-1.8.4/){: external}.
+
 :   Resolves the following CVEs
-     - [CVE-2021-23840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23840){: external}
-     - [CVE-2021-23841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23841){: external}
-     - [CVE-2020-27619](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27619){: external}
-     - [CVE-2021-3177](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3177){: external}
+    - [CVE-2021-23840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23840){: external}
+    - [CVE-2021-23841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23841){: external}
+    - [CVE-2020-27619](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27619){: external}
+    - [CVE-2021-3177](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3177){: external}
 
 
 ### Change log for 1.8.3, released 1 March 2021
@@ -693,15 +794,18 @@ Review the changes that are in version 1.8.3 of the managed Istio add-on.
 
 Previous version
 :   1.8.2   
+
 Current version
 :   1.8.3  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.8.3](https://istio.io/latest/news/releases/1.8.x/announcing-1.8.3/){: external}. 
+
 :   Resolves the following CVEs 
-     - [CVE-2018-20482](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20482){: external}
-     - [CVE-2019-9923](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9923){: external}
-     - [CVE-2021-23239](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23239){: external}
-     - [CVE-2021-3156](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3156){: external}
+    - [CVE-2018-20482](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20482){: external}
+    - [CVE-2019-9923](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9923){: external}
+    - [CVE-2021-23239](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23239){: external}
+    - [CVE-2021-3156](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3156){: external}
 
 
 ### Change log for 1.8.2, released 25 January 2021
@@ -712,21 +816,24 @@ Review the changes that are in version 1.8.2 of the managed Istio add-on.
 
 Previous version
 :   1.8.1  
+
 Current version
 :   1.8.2  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.8.2](https://istio.io/latest/news/releases/1.8.x/announcing-1.8.2/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2020-27350](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27350){: external}
-     - [CVE-2020-8231](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8231){: external}
-     - [CVE-2020-8284](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8284){: external}
-     - [CVE-2020-8285](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8285){: external}
-     - [CVE-2020-8286](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8286){: external}
-     - [CVE-2020-1971](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971){: external}
-     - [usn-4662-1](https://ubuntu.com/security/notices/USN-4662-1){: external}
-     - [usn-4665-1](https://ubuntu.com/security/notices/USN-4665-1/){: external}
-     - [usn-4667-1](https://ubuntu.com/security/notices/USN-4667-1){: external}
-     - [usn-4677-1](https://ubuntu.com/security/notices/USN-4677-1){: external}.
+    - [CVE-2020-27350](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27350){: external}
+    - [CVE-2020-8231](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8231){: external}
+    - [CVE-2020-8284](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8284){: external}
+    - [CVE-2020-8285](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8285){: external}
+    - [CVE-2020-8286](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8286){: external}
+    - [CVE-2020-1971](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971){: external}
+    - [usn-4662-1](https://ubuntu.com/security/notices/USN-4662-1){: external}
+    - [usn-4665-1](https://ubuntu.com/security/notices/USN-4665-1/){: external}
+    - [usn-4667-1](https://ubuntu.com/security/notices/USN-4667-1){: external}
+    - [usn-4677-1](https://ubuntu.com/security/notices/USN-4677-1){: external}.
 
 
 ### Change log for 1.8.1, released 16 December 2020
@@ -737,11 +844,12 @@ Review the changes that are in version 1.8.1 of the managed Istio add-on.
 
 Previous version
 :   1.8.0 
+
 Current version
 :   1.8.1  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.8.1](https://istio.io/latest/news/releases/1.8.x/announcing-1.8.1/){: external}. 
-
 
 ### Change log for 1.8.0, released 9 December 2020
 {: #180}
@@ -751,16 +859,15 @@ Review the changes that are in version 1.8.0 of the managed Istio add-on.
 
 Previous version
 :   1.8.0  
+
 Current version
 :   1.7.5  
+
 Updates in this version
-See the Istio release notes for [Istio 1.8](https://istio.io/latest/news/releases/1.8.x/announcing-1.8/){: external}. 
+:   See the Istio release notes for [Istio 1.8](https://istio.io/latest/news/releases/1.8.x/announcing-1.8/){: external}. 
+
 :   If you created a custom `IstioOperator` (IOP) resource, remove the `revision` field from the resource before you update your add-on to version 1.8 so that the custom gateways use version 1.8 of `istiod`. After you update your Istio add-on, update the tag for any custom gateways to 1.8. All `istio-monitoring` support is removed, and in the `managed-istio-custom` configmap, the `istio-monitoring-components` and `istio-kiali-dashboard-viewOnlyMode` options are unsupported. To use monitoring with Istio, you must install the Kiali, Prometheus, Jaeger, and Grafana components separately from the Istio add-on. For more information, see the [Istio documentation](https://istio.io/latest/docs/ops/integrations/){: external}. 
 :   The `istio-meshConfig-enableTracing` and `istio-egressgateway-public-1-enabled` optional settings are added to the [`managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize). 
-
-  
-  
-  
 
 ## Version 1.7 (unsupported)
 {: #v17}
@@ -776,13 +883,16 @@ Review the changes that are in version 1.7.8 of the managed Istio add-on.
 
 Previous version
 :   1.7.7 
+
 Current version
 :   1.7.8  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.7.8](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.8/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2021-23840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23840){: external}
-     - [CVE-2021-23841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-23841){: external}
+    - [CVE-2021-23840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23840){: external}
+    - [CVE-2021-23841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-23841){: external}
 
 
 ### Change log for 1.7.7, released 8 February 2021
@@ -793,24 +903,27 @@ Review the changes that are in version 1.7.7 of the managed Istio add-on.
 
 Previous version
 :   1.7.6 
+
 Current version
 :   1.7.7  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.7.7](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.7/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2020-27350](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27350){: external}
-     - [CVE-2020-8231](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8231){: external}
-     - [CVE-2020-8284](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8284){: external}
-     - [CVE-2020-8285](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8285){: external}
-     - [CVE-2020-8286](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8286){: external}
-     - [CVE-2021-23239](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23239){: external}
-     - [CVE-2021-3156](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3156){: external}
-     - [CVE-2020-29361](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29361){: external}
-     - [CVE-2020-29362](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29362){: external}
-     - [CVE-2020-29363](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29363){: external}
-     - [CVE-2020-1971](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971){: external}
-     - [CVE-2018-20482](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20482){: external}
-     - [CVE-2019-9923](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9923){: external}
+    - [CVE-2020-27350](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27350){: external}
+    - [CVE-2020-8231](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8231){: external}
+    - [CVE-2020-8284](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8284){: external}
+    - [CVE-2020-8285](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8285){: external}
+    - [CVE-2020-8286](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8286){: external}
+    - [CVE-2021-23239](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23239){: external}
+    - [CVE-2021-3156](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3156){: external}
+    - [CVE-2020-29361](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29361){: external}
+    - [CVE-2020-29362](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29362){: external}
+    - [CVE-2020-29363](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29363){: external}
+    - [CVE-2020-1971](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971){: external}
+    - [CVE-2018-20482](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20482){: external}
+    - [CVE-2019-9923](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9923){: external}
 
 
 ### Change log for 1.7.6, released 16 December 2020
@@ -821,10 +934,13 @@ Review the changes that are in version 1.7.6 of the managed Istio add-on.
 
 Previous version
 :   1.7.5 
+
 Current version
 :   1.7.6  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.7.6](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.6/){: external}. 
+
 :   Resolves [CVE-2020-28196](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28196){: external}. 
 
 
@@ -836,8 +952,10 @@ Review the changes that are in version 1.7.5 of the managed Istio add-on.
 
 Previous version
 :   1.7.4 
+
 Current version
 :   1.7.5  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.7.5](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.5/){: external}.
 
@@ -850,13 +968,16 @@ Review the changes that are in version 1.7.4 of the managed Istio add-on.
 
 Previous version
 :   1.7.3 
+
 Current version
 :   1.7.4  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.7.4](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.4/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2020-26116](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-26116){: external}
-     - [usn-4581-1](https://ubuntu.com/security/notices/USN-4581-1){: external} 
+    - [CVE-2020-26116](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-26116){: external}
+    - [usn-4581-1](https://ubuntu.com/security/notices/USN-4581-1){: external} 
 
 
 ### Change log for 1.7.3, released 06 October 2020
@@ -867,15 +988,20 @@ Review the changes that are in version 1.7.3 of the managed Istio add-on.
 
 Previous version
 :   1.7.2 
+
 Current version
 :   1.7.3  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.7.3](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.3/){: external}. 
+
 :   Updates Prometheus to version 2.21.0 and Jaeger to version 1.20.0. Note that these components are deprecated in version 1.7 of the Istio add-on and are automatically removed in [version 1.8 of the Istio add-on](https://istio.io/latest/docs/ops/integrations/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2020-25017](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25017){: external}
-     - [CVE-2018-7738](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7738){: external}
-     - [usn-4512-1](https://ubuntu.com/security/notices/USN-4512-1){: external}. 
+    - [CVE-2020-25017](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25017){: external}
+    - [CVE-2018-7738](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7738){: external}
+    - [usn-4512-1](https://ubuntu.com/security/notices/USN-4512-1){: external}. 
+
 :   For more information, see the [Istio security bulletin 2020-010](https://istio.io/latest/news/security/istio-security-2020-010/){: external}.  
 
 
@@ -887,8 +1013,10 @@ Review the changes that are in version 1.7.2 of the managed Istio add-on.
 
 Previous version
 :   1.7.1 
+
 Current version
 :   1.7.2  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.7.2](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.2/){: external}.
 
@@ -901,8 +1029,10 @@ Review the changes that are in version 1.7.1 of the managed Istio add-on.
 
 Previous version
 :   1.7.0 
+
 Current version
 :   1.7.1  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.7.1](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.1/){: external}. 
 
@@ -914,16 +1044,20 @@ Review the changes that are in version 1.7.0 of the managed Istio add-on.
 
 Previous version
 :   1.6.8 
+
 Current version
 :   1.7.0  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.7](https://istio.io/latest/news/releases/1.7.x/announcing-1.7/){: external}. 
+
 :   All `istio-monitoring` support is deprecated in version 1.7 of the Istio add-on and is automatically removed in version 1.8 of the Istio add-on. To use monitoring with Istio, you must install the components separately from the Istio add-on. 
+
 :   For more information, see the [Istio documentation](https://istio.io/latest/docs/ops/integrations/){: external}. 
+
 :   The `istio-ingressgateway-public-(n)-enabled` and `istio-ingressgateway-zone-(n)` options in the [`managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize) are generally available for production use. 
   
-  
-  
+
   
 ## Version 1.6 (unsupported)
 {: #v16}
@@ -955,10 +1089,13 @@ Review the changes that are in version 1.6.14 of the managed Istio add-on.
 
 Previous version
 :   1.6.13  
+
 Current version
 :   1.6.14  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.6.14](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.14/){: external}. 
+
 :   Resolves [CVE-2020-28196](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28196){: external}. 
 
 ### Change log for 1.6.13, released 5 November 2020
@@ -969,13 +1106,16 @@ Review the changes that are in version 1.6.13 of the managed Istio add-on.
 
 Previous version
 :   1.6.12  
+
 Current version
 :   1.6.13  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.6.13](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.13/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2020-26116](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-26116){: external}
-     - [usn-4581-1](https://ubuntu.com/security/notices/USN-4581-1){: external}.
+    - [CVE-2020-26116](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-26116){: external}
+    - [usn-4581-1](https://ubuntu.com/security/notices/USN-4581-1){: external}.
 
 
 ### Change log for 1.6.12, released 22 October 2020
@@ -986,8 +1126,10 @@ Review the changes that are in version 1.6.12 of the managed Istio add-on.
 
 Previous version
 :   1.6.11  
+
 Current version
 :   1.6.12  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.6.12](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.12/){: external}. 
 
@@ -999,17 +1141,22 @@ Review the changes that are in version 1.6.11 of the managed Istio add-on.
 
 Previous version
 :   1.6.9  
+
 Current version
 :   1.6.11  
+
 Updates in this version
 :   See the Istio release notes for:
-     - [Istio 1.6.10](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.10/){: external}
-     - [Istio 1.6.11](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.11/){: external}. 
+    - [Istio 1.6.10](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.10/){: external}
+    - [Istio 1.6.11](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.11/){: external}. 
+
 :   Updates Prometheus to version 2.21.0 and Jaeger to version 1.20.0. Note that these components are deprecated in version 1.7 of the Istio add-on and are automatically removed in [version 1.8 of the Istio add-on](https://istio.io/latest/docs/ops/integrations/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2020-25017](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25017){: external}
-     - [CVE-2018-7738](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7738){: external}
-     - [usn-4512-1](https://ubuntu.com/security/notices/USN-4512-1){: external}.
+    - [CVE-2020-25017](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25017){: external}
+    - [CVE-2018-7738](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7738){: external}
+    - [usn-4512-1](https://ubuntu.com/security/notices/USN-4512-1){: external}.
+
 :   For more information, see the [Istio security bulletin 2020-010](https://istio.io/latest/news/security/istio-security-2020-010/){: external}.
 
 
@@ -1021,13 +1168,17 @@ Review the changes that are in version 1.6.9 of the managed Istio add-on.
 
 Previous version
 :   1.6.8  
+
 Current version
 :   1.6.9  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.6.9](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.9/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2020-8231](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8231){: external}
-     - [usn-4466-1](https://ubuntu.com/security/notices/USN-4466-1){: external}
+    - [CVE-2020-8231](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8231){: external}
+    - [usn-4466-1](https://ubuntu.com/security/notices/USN-4466-1){: external}
+
 :   For more information, see the [Istio security bulletin 2020-009](https://istio.io/latest/news/security/istio-security-2020-009/){: external}.
 
 
@@ -1039,11 +1190,15 @@ Review the changes that are in version 1.6.8 of the managed Istio add-on.
 
 Previous version
 :   1.6.7  
+
 Current version
 :   1.6.8  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.6.8](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.6/){: external}. 
+
 :   Resolves [CVE-2020-16844](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-16844){: external}. 
+
 :   For more information, see the [Istio security bulletin 2020-009](https://istio.io/latest/news/security/istio-security-2020-009/){: external}
 
 
@@ -1055,18 +1210,21 @@ Review the changes that are in version 1.6.7 of the managed Istio add-on.
 
 Previous version
 :   1.6.5  
+
 Current version
 :   1.6.7  
+
 Updates in this version
 :   See the Istio release notes for:
-     - [Istio 1.6.6](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.6/){: external}
-     - [Istio 1.6.7](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.7/){: external}
+    - [Istio 1.6.6](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.6/){: external}
+    - [Istio 1.6.7](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.7/){: external}
+
 :   Resolves the following CVEs
-     - [CVE-2019-17514](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17514){: external}
-     - [CVE-2019-20907](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20907){: external}
-     - [CVE-2019-9674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9674){: external}
-     - [CVE-2020-14422](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14422){: external}
-     - [usn-4428-1](https://ubuntu.com/security/notices/USN-4428-1){: external}
+    - [CVE-2019-17514](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17514){: external}
+    - [CVE-2019-20907](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20907){: external}
+    - [CVE-2019-9674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9674){: external}
+    - [CVE-2020-14422](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14422){: external}
+    - [usn-4428-1](https://ubuntu.com/security/notices/USN-4428-1){: external}
 
 
 ### Change log for 1.6.5, released 17 July 2020
@@ -1077,23 +1235,27 @@ Review the changes that are in version 1.6.5 of the managed Istio add-on.
 
 Previous version
 :   1.6  
+
 Current version
 :   1.6.5  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.6.5](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.5/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2020-15104](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15104){: external}
-     - [CVE-2017-12133](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12133){: external}
-     - [CVE-2017-18269](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-18269){: external}
-     - [CVE-2018-11236](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-11236){: external}
-     - [CVE-2018-11237](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-11237){: external}
-     - [CVE-2018-19591](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19591){: external}
-     - [CVE-2018-6485](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6485){: external}
-     - [CVE-2019-19126](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19126){: external}
-     - [CVE-2019-9169](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9169){: external}
-     - [CVE-2020-10029](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10029){: external}
-     - [CVE-2020-1751](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1751){: external}
-     - [CVE-2020-1752](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1752){: external}. 
+    - [CVE-2020-15104](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15104){: external}
+    - [CVE-2017-12133](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12133){: external}
+    - [CVE-2017-18269](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-18269){: external}
+    - [CVE-2018-11236](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-11236){: external}
+    - [CVE-2018-11237](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-11237){: external}
+    - [CVE-2018-19591](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19591){: external}
+    - [CVE-2018-6485](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6485){: external}
+    - [CVE-2019-19126](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19126){: external}
+    - [CVE-2019-9169](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9169){: external}
+    - [CVE-2020-10029](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10029){: external}
+    - [CVE-2020-1751](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1751){: external}
+    - [CVE-2020-1752](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1752){: external}. 
+
 :   For more information, see the [Istio security bulletin 2020-008](https://istio.io/latest/news/security/istio-security-2020-008/){: external}
 
 
@@ -1105,10 +1267,13 @@ Review the changes that are in version 1.6 of the managed Istio add-on.
 
 Previous version
 :   1.5.7  
+
 Current version
 :   1.6  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.6](https://istio.io/latest/news/releases/1.6.x/announcing-1.6/){: external}. 
+
 :   Support is added for the `istio-knative-cluster-local-gateway-enabled` and `istio-monitoring-telemetry` options in the [`managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize). You can use these options to manage inclusion of Knative apps in the service mesh and the Istio telemetry enablement. Support for {{site.data.keyword.mon_full_notm}} is enabled for Istio by default.
   
   
@@ -1144,11 +1309,12 @@ Review the changes that are in version 1.5.10 of the managed Istio add-on.
 
 Previous version
 :   1.5.9  
+
 Current version
 :   1.5.10  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.5.10](https://istio.io/latest/news/releases/1.5.x/announcing-1.5.10/){: external}.
-
 
 ### Change log for 1.5.9, released 12 August 2020
 {: #159}
@@ -1158,17 +1324,21 @@ Review the changes that are in version 1.6.8 of the managed Istio add-on.
 
 Previous version
 :   1.5.8  
+
 Current version
 :   1.5.9  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.5.9](https://istio.io/latest/news/releases/1.5.x/announcing-1.5.9/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2019-17514](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17514){: external}
-     - [CVE-2019-20907](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20907){: external}
-     - [CVE-2019-9674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9674){: external}
-     - [CVE-2020-14422](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14422){: external}
-     - [CVE-2020-16844](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-16844){: external}
-     - [usn-4428-1](https://ubuntu.com/security/notices/USN-4428-1){: external}. 
+    - [CVE-2019-17514](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17514){: external}
+    - [CVE-2019-20907](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20907){: external}
+    - [CVE-2019-9674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9674){: external}
+    - [CVE-2020-14422](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14422){: external}
+    - [CVE-2020-16844](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-16844){: external}
+    - [usn-4428-1](https://ubuntu.com/security/notices/USN-4428-1){: external}. 
+
 :   For more information, see the [Istio security bulletin 2020-009](https://istio.io/latest/news/security/istio-security-2020-009/){: external}.
 
 
@@ -1180,23 +1350,27 @@ Review the changes that are in version 1.5.8 of the managed Istio add-on.
 
 Previous version
 :   1.5.7  
+
 Current version
 :   1.5.8  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.5.8](https://istio.io/latest/news/releases/1.5.x/announcing-1.5.8/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2020-15104](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15104){: external}
-     - [CVE-2017-12133](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12133){: external}
-     - [CVE-2017-18269](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-18269){: external}
-     - [CVE-2018-11236](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-11236){: external}
-     - [CVE-2018-11237](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-11237){: external}
-     - [CVE-2018-19591](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19591){: external}
-     - [CVE-2018-6485](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6485){: external}
-     - [CVE-2019-19126](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19126){: external}
-     - [CVE-2019-9169](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9169){: external}
-     - [CVE-2020-10029](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10029){: external}
-     - [CVE-2020-1751](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1751){: external}
-     - [CVE-2020-1752](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1752){: external}. 
+    - [CVE-2020-15104](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15104){: external}
+    - [CVE-2017-12133](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12133){: external}
+    - [CVE-2017-18269](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-18269){: external}
+    - [CVE-2018-11236](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-11236){: external}
+    - [CVE-2018-11237](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-11237){: external}
+    - [CVE-2018-19591](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19591){: external}
+    - [CVE-2018-6485](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6485){: external}
+    - [CVE-2019-19126](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19126){: external}
+    - [CVE-2019-9169](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9169){: external}
+    - [CVE-2020-10029](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10029){: external}
+    - [CVE-2020-1751](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1751){: external}
+    - [CVE-2020-1752](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1752){: external}. 
+
 :   For more information, see the [Istio security bulletin 2020-008](https://istio.io/latest/news/security/istio-security-2020-008/){: external}. 
 
 
@@ -1208,18 +1382,22 @@ Review the changes that are in version 1.5.7 of the managed Istio add-on.
 
 Previous version
 :   1.5.6  
+
 Current version
 :   1.5.7  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.5.7](https://istio.io/latest/news/releases/1.5.x/announcing-1.5.7/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2020-12603](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12603){: external}
-     - [CVE-2020-12605](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12605){: external}
-     - [CVE-2020-8663](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8663){: external}
-     - [CVE-2020-12604](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12604){: external}
-     - [CVE-2020-8169](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8169){: external}
-     - [CVE-2020-8177](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8177){: external}
-     - [usn-4402-1](https://ubuntu.com/security/notices/USN-4402-1){: external}
+    - [CVE-2020-12603](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12603){: external}
+    - [CVE-2020-12605](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12605){: external}
+    - [CVE-2020-8663](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8663){: external}
+    - [CVE-2020-12604](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12604){: external}
+    - [CVE-2020-8169](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8169){: external}
+    - [CVE-2020-8177](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8177){: external}
+    - [usn-4402-1](https://ubuntu.com/security/notices/USN-4402-1){: external}
+
 :   For more information, see the [Istio security bulletin 2020-007](https://istio.io/latest/news/security/istio-security-2020-007/){: external}. 
 
 
@@ -1231,32 +1409,35 @@ Review the changes that are in version 1.5.6 of the managed Istio add-on.
 
 Previous version
 :   1.5.4  
+
 Current version
 :   1.5.6  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.5.5](https://istio.io/latest/news/releases/1.5.x/announcing-1.5.6/){: external} and [Istio 1.5.6](https://istio.io/latest/news/releases/1.5.x/announcing-1.5.6/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2020-11080](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11080){: external}
-     - [CVE-2018-8740](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-8740){: external}
-     - [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external} 
-     - [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}
-     - [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}
-     - [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external} 
-     - [CVE-2019-19603](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19603){: external} 
-     - [CVE-2019-19645](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19645){: external} 
-     - [CVE-2019-20795](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20795){: external}
-     - [CVE-2020-11655](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11655){: external}
-     - [CVE-2020-13434](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13434){: external}
-     - [CVE-2020-13435](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13435){: external}
-     - [CVE-2020-13630](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13630){: external}
-     - [CVE-2020-13631](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13631){: external}
-     - [CVE-2020-13632,](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13632,){: external}
-     - [CVE-2020-3810](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-3810){: external}
-     - [usn-4357-1](https://ubuntu.com/security/notices/USN-4357-1/){: external}
-     - [usn-4359-1](https://ubuntu.com/security/notices/USN-4359-1/){: external}
-     - [usn-4376-1](https://ubuntu.com/security/notices/USN-4376-1/){: external}
-     - [usn-4377-1](https://ubuntu.com/security/notices/USN-4377-1/){: external}
-     - [usn-4394-1](https://ubuntu.com/security/notices/USN-4394-1/){: external}
+    - [CVE-2020-11080](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11080){: external}
+    - [CVE-2018-8740](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-8740){: external}
+    - [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external} 
+    - [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}
+    - [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}
+    - [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external} 
+    - [CVE-2019-19603](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19603){: external} 
+    - [CVE-2019-19645](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19645){: external} 
+    - [CVE-2019-20795](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20795){: external}
+    - [CVE-2020-11655](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11655){: external}
+    - [CVE-2020-13434](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13434){: external}
+    - [CVE-2020-13435](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13435){: external}
+    - [CVE-2020-13630](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13630){: external}
+    - [CVE-2020-13631](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13631){: external}
+    - [CVE-2020-13632,](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13632,){: external}
+    - [CVE-2020-3810](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-3810){: external}
+    - [usn-4357-1](https://ubuntu.com/security/notices/USN-4357-1/){: external}
+    - [usn-4359-1](https://ubuntu.com/security/notices/USN-4359-1/){: external}
+    - [usn-4376-1](https://ubuntu.com/security/notices/USN-4376-1/){: external}
+    - [usn-4377-1](https://ubuntu.com/security/notices/USN-4377-1/){: external}
+    - [usn-4394-1](https://ubuntu.com/security/notices/USN-4394-1/){: external}
 :   For more information, see the [Istio security bulletin 2020-006](https://istio.io/latest/news/security/istio-security-2020-006/){: external}
 
 ### Change log for 1.5, released 19 May 2020
@@ -1270,15 +1451,16 @@ Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes ve
 
 Previous version
 :   1.4.9  
+
 Current version
 :   1.5  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.5](https://istio.io/latest/news/releases/1.5.x/announcing-1.5/change-notes/){: external}. 
+
 :   The Citadel secret discovery service (SDS) is now enabled by default to provide identity provisioning and certification for workloads in the service mesh. [With the `managed-istio-custom` configmap resource, you can customize a set of Istio configuration options](/docs/containers?topic=containers-istio#customize). These settings include extra control over monitoring, logging, and networking in your control plane and service mesh. Beta: By default, one public Istio load balancer, `istio-ingressgateway`, is enabled in your cluster. To achieve higher availability, you can now enable an Istio load balancer in each zone of your cluster. For more information, see [Enabling or disabling public Istio load balancers](/docs/containers?topic=containers-istio-mesh#config-gateways). The Prometheus, Grafana, Jaeger, and Kiali monitoring components are disabled by default due to current security concerns in the community release of Istio that can't be adequately addressed for a production environment. If you use {{site.data.keyword.mon_full_notm}} to monitor your Istio-managed apps, update the `sysdig-agent` configmap so that sidecar metrics are tracked. Changes can't be made to the Kiali dashboard in view-only mode by default. You can change this setting by [editing the `managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize). Your cluster must have a secret with credentials to Grafana to access the Grafana dashboard. 
   
   
-  
-
 ## Version 1.4 (unsupported)
 {: #v14}
 
@@ -1293,16 +1475,20 @@ Review the changes that are in version 1.4.9 of the managed Istio add-on.
 
 Previous version
 :   1.4.8  
+
 Current version
 :   1.4.9  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.4.9](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.9/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2019-18348](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18348){: external}
-     - [CVE-2020-3810](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-3810){: external}
-     - [CVE-2020-8492](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8492){: external}
-     - [usn-4359-1](https://ubuntu.com/security/notices/USN-4359-1/){: external}
-     - [usn-4333-1](https://ubuntu.com/security/notices/USN-4333-1/){: external}
+    - [CVE-2019-18348](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18348){: external}
+    - [CVE-2020-3810](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-3810){: external}
+    - [CVE-2020-8492](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8492){: external}
+    - [usn-4359-1](https://ubuntu.com/security/notices/USN-4359-1/){: external}
+    - [usn-4333-1](https://ubuntu.com/security/notices/USN-4333-1/){: external}
+
 :   For more information, see the [Istio security bulletin](https://istio.io/latest/news/security/istio-security-2020-005/){: external}
 
 ## Change log for 1.4.8, released 30 April 2020
@@ -1313,22 +1499,25 @@ Review the changes that are in version 1.4.8 of the managed Istio add-on.
 
 Previous version
 :   1.4.7  
+
 Current version
 :   1.4.8  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.4.8](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.8/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2017-15412](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-15412){: external}
-     - [CVE-2016-5131](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5131){: external}
-     - [CVE-2018-14404](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14404){: external}
-     - [CVE-2015-8035](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-8035){: external}
-     - [CVE-2019-5436](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436){: external}
-     - [CVE-2019-3820](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3820){: external}
-     - [CVE-2019-9924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924){: external}
-     - [CVE-2018-14567](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14567){: external}
-     - [CVE-2015-2716](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2716){: external}
-     - [CVE-2017-18258](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19880){: external}
-     - [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}
+    - [CVE-2017-15412](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-15412){: external}
+    - [CVE-2016-5131](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5131){: external}
+    - [CVE-2018-14404](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14404){: external}
+    - [CVE-2015-8035](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-8035){: external}
+    - [CVE-2019-5436](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436){: external}
+    - [CVE-2019-3820](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3820){: external}
+    - [CVE-2019-9924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924){: external}
+    - [CVE-2018-14567](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14567){: external}
+    - [CVE-2015-2716](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2716){: external}
+    - [CVE-2017-18258](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19880){: external}
+    - [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}
 
 ## Change log for 1.4.7, released 01 April 2020
 {: #147}
@@ -1338,25 +1527,28 @@ Review the changes that are in version 1.4.7 of the managed Istio add-on.
 
 Previous version
 :   1.4.6  
+
 Current version
 :   1.4.7  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.4.7](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.7/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2020-1764](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1764){: external}
-     - [CVE-2019-19925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19925){: external}
-     - [CVE-2019-13750](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13750){: external}
-     - [CVE-2019-13752](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13752){: external}
-     - [CVE-2019-19959](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19959){: external}
-     - [CVE-2019-19926](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19926){: external}
-     - [CVE-2019-13753](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13753){: external}
-     - [CVE-2019-13751](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13751){: external}
-     - [CVE-2019-19923](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19923){: external}
-     - [CVE-2019-19924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19924){: external}
-     - [CVE-2019-20218](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20218){: external}
-     - [CVE-2020-9327](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9327){: external}
-     - [CVE-2019-13734](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13734){: external}
-     - [CVE-2019-19880](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19880){: external}
+    - [CVE-2020-1764](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1764){: external}
+    - [CVE-2019-19925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19925){: external}
+    - [CVE-2019-13750](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13750){: external}
+    - [CVE-2019-13752](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13752){: external}
+    - [CVE-2019-19959](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19959){: external}
+    - [CVE-2019-19926](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19926){: external}
+    - [CVE-2019-13753](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13753){: external}
+    - [CVE-2019-13751](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13751){: external}
+    - [CVE-2019-19923](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19923){: external}
+    - [CVE-2019-19924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19924){: external}
+    - [CVE-2019-20218](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20218){: external}
+    - [CVE-2020-9327](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9327){: external}
+    - [CVE-2019-13734](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13734){: external}
+    - [CVE-2019-19880](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19880){: external}
 
 ## Change log for 1.4.6, released 09 March 2020
 {: #146}
@@ -1366,15 +1558,18 @@ Review the changes that are in version 1.4.6 of the managed Istio add-on.
 
 Previous version
 :   1.4.5  
+
 Current version
 :   1.4.6  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.4.6](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.6/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2020-8659](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8659){: external}
-     - [CVE-2020-8660](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8660){: external}
-     - [CVE-2020-8661](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8661){: external}
-     - [CVE-2020-8664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8664){: external}
+    - [CVE-2020-8659](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8659){: external}
+    - [CVE-2020-8660](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8660){: external}
+    - [CVE-2020-8661](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8661){: external}
+    - [CVE-2020-8664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8664){: external}
 
 ## Change log for 1.4.5, released 21 February 2020
 {: #145}
@@ -1384,26 +1579,29 @@ Review the changes that are in version 1.4.5 of the managed Istio add-on.
 
 Previous version
 :   1.4.4  
+
 Current version
 :   1.4.5  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.4.5](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.5/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2019-18634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18634){: external}
-     - [CVE-2019-3843](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3843){: external}
-     - [CVE-2016-9840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9840){: external}
-     - [CVE-2019-5188](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5188){: external}
-     - [CVE-2020-1712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1712){: external}
-     - [CVE-2018-16888](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16888){: external}
-     - [CVE-2019-3844](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3844){: external}
-     - [CVE-2019-20386](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20386){: external}
-     - [CVE-2016-9843](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9843){: external}
-     - [CVE-2016-9841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9841){: external}
-     - [CVE-2016-9842](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9842){: external}
-     - [usn-4263-1](https://ubuntu.com/security/notices/USN-4263-1/){: external}
-     - [usn-4249-1](https://ubuntu.com/security/notices/USN-4249-1/){: external}
-     - [usn-4269-1](https://ubuntu.com/security/notices/USN-4269-1/){: external}
-     - [usn-4246-1](https://ubuntu.com/security/notices/USN-4246-1/){: external}
+    - [CVE-2019-18634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18634){: external}
+    - [CVE-2019-3843](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3843){: external}
+    - [CVE-2016-9840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9840){: external}
+    - [CVE-2019-5188](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5188){: external}
+    - [CVE-2020-1712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1712){: external}
+    - [CVE-2018-16888](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16888){: external}
+    - [CVE-2019-3844](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3844){: external}
+    - [CVE-2019-20386](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20386){: external}
+    - [CVE-2016-9843](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9843){: external}
+    - [CVE-2016-9841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9841){: external}
+    - [CVE-2016-9842](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9842){: external}
+    - [usn-4263-1](https://ubuntu.com/security/notices/USN-4263-1/){: external}
+    - [usn-4249-1](https://ubuntu.com/security/notices/USN-4249-1/){: external}
+    - [usn-4269-1](https://ubuntu.com/security/notices/USN-4269-1/){: external}
+    - [usn-4246-1](https://ubuntu.com/security/notices/USN-4246-1/){: external}
 
 ## Change log for 1.4.4, released 14 February 2020
 {: #144}
@@ -1413,56 +1611,62 @@ Review the changes that are in version 1.4.4 of the managed Istio add-on.
 
 Previous version
 :   1.4.3  
+
 Current version
 :   1.4.4  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.4.4](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.4/){: external}. 
+
 :   Disables [protocol sniffing and detection](https://istio.io/latest/docs/ops/configuration/traffic-management/protocol-selection/){: external}.
+
 :   Improves the termination sequence for rolling updates of ingress and egress gateways. 
+
 :   Resolves the following CVEs
-     - [CVE-2020-8595](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8595){: external}
-     - [CVE-2019-13627](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13627){: external}
-     - [CVE-2019-15166](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-15166){: external}
-     - [CVE-2019-1010220](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1010220){: external}
-     - [CVE-2019-19906](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19906){: external}
-     - [CVE-2019-15167](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-15167){: external}
-     - [CVE-2019-20386](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20386){: external}
-     - [CVE-2019-13627](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13627){: external}
-     - [CVE-2019-13734](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13734){: external}
-     - [CVE-2019-3843](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3843){: external}
-     - [CVE-2019-3844](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3844){: external}
-     - [CVE-2019-11729](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11729){: external}
-     - [CVE-2019-11745](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11745){: external}
-     - [CVE-2019-1543](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543){: external}
-     - [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}
-     - [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}
-     - [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}
-     - [CVE-2019-5094](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094){: external}
-     - [CVE-2018-14882](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14882){: external}
-     - [CVE-2018-19519](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19519){: external}
-     - [CVE-2018-14467](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14467){: external}
-     - [CVE-2018-16451](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16451){: external}
-     - [CVE-2018-14464](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14464){: external}
-     - [CVE-2018-14463](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14463){: external}
-     - [CVE-2018-14468](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14468){: external}
-     - [CVE-2018-14879](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14879){: external}
-     - [CVE-2018-14462](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14462){: external}
-     - [CVE-2018-14881](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14881){: external}
-     - [CVE-2018-14470](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14470){: external}
-     - [CVE-2018-14469](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14469){: external}
-     - [CVE-2018-16227](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16227){: external}
-     - [CVE-2018-16452](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16452){: external}
-     - [CVE-2018-14466](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14466){: external}
-     - [CVE-2018-14880](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14880){: external}
-     - [CVE-2018-10105](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10105){: external}
-     - [CVE-2018-16229](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16229){: external}
-     - [CVE-2018-16230](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16230){: external}
-     - [CVE-2018-10103](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10103){: external}
-     - [CVE-2018-14461](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14461){: external}
-     - [CVE-2018-16300](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16300){: external}
-     - [CVE-2018-16228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16228){: external}
-     - [CVE-2018-14465](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14465){: external}
-     - [CVE-2017-16808](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-16808){: external}
+    - [CVE-2020-8595](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8595){: external}
+    - [CVE-2019-13627](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13627){: external}
+    - [CVE-2019-15166](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-15166){: external}
+    - [CVE-2019-1010220](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1010220){: external}
+    - [CVE-2019-19906](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19906){: external}
+    - [CVE-2019-15167](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-15167){: external}
+    - [CVE-2019-20386](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20386){: external}
+    - [CVE-2019-13627](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13627){: external}
+    - [CVE-2019-13734](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13734){: external}
+    - [CVE-2019-3843](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3843){: external}
+    - [CVE-2019-3844](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3844){: external}
+    - [CVE-2019-11729](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11729){: external}
+    - [CVE-2019-11745](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11745){: external}
+    - [CVE-2019-1543](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543){: external}
+    - [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}
+    - [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}
+    - [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}
+    - [CVE-2019-5094](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094){: external}
+    - [CVE-2018-14882](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14882){: external}
+    - [CVE-2018-19519](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19519){: external}
+    - [CVE-2018-14467](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14467){: external}
+    - [CVE-2018-16451](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16451){: external}
+    - [CVE-2018-14464](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14464){: external}
+    - [CVE-2018-14463](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14463){: external}
+    - [CVE-2018-14468](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14468){: external}
+    - [CVE-2018-14879](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14879){: external}
+    - [CVE-2018-14462](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14462){: external}
+    - [CVE-2018-14881](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14881){: external}
+    - [CVE-2018-14470](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14470){: external}
+    - [CVE-2018-14469](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14469){: external}
+    - [CVE-2018-16227](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16227){: external}
+    - [CVE-2018-16452](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16452){: external}
+    - [CVE-2018-14466](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14466){: external}
+    - [CVE-2018-14880](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14880){: external}
+    - [CVE-2018-10105](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10105){: external}
+    - [CVE-2018-16229](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16229){: external}
+    - [CVE-2018-16230](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16230){: external}
+    - [CVE-2018-10103](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10103){: external}
+    - [CVE-2018-14461](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14461){: external}
+    - [CVE-2018-16300](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16300){: external}
+    - [CVE-2018-16228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16228){: external}
+    - [CVE-2018-14465](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14465){: external}
+    - [CVE-2017-16808](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-16808){: external}
+
 :   For more information, see the [Istio security bulletin 2020-001](https://istio.io/latest/news/security/istio-security-2020-001/){: external}
 
 ## Change log for 1.4.3, released 16 January 2020
@@ -1473,11 +1677,15 @@ Review the changes that are in version 1.4.3 of the managed Istio add-on.
 
 Previous version
 :   1.4.2  
+
 Current version
 :   1.4.3  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.4.3](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.3/){: external}. 
+
 :   Disables [protocol sniffing and detection](https://istio.io/latest/docs/ops/configuration/traffic-management/protocol-selection/){: external}.
+
 :   Improves the termination sequence for rolling updates of ingress and egress gateways. 
 
 ## Change log for 1.4.2, released 16 December 2020
@@ -1488,13 +1696,17 @@ Review the changes that are in version 1.4.2 of the managed Istio add-on.
 
 Previous version
 :   1.4.0  
+
 Current version
 :   1.4.2  
+
 Updates in this version
 :   See the Istio release notes for [Istio 1.4.2](https://istio.io/latest/news/releases/1.4.x/announcing-1.4.2/){: external}. 
+
 :   Resolves the following CVEs
-     - [CVE-2019-18801](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18801){: external}
-     - [CVE-2019-18802](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18802){: external}
-     - [CVE-2019-18838](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18838){: external}
+    - [CVE-2019-18801](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18801){: external}
+    - [CVE-2019-18802](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18802){: external}
+    - [CVE-2019-18838](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18838){: external}
+
 :   For more information, see the [Istio security bulletin](https://istio.io/latest/news/security/istio-security-2019-007/){: external}.
   
