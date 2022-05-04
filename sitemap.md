@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-05-03"
+lastupdated: "2022-05-04"
 
 keywords: containers
 subcollection: containers
@@ -7627,8 +7627,6 @@ subcollection: containers
 
 * [fra05](/docs/containers?topic=containers-classic-flavors#fra05)
 
-* [hkg02](/docs/containers?topic=containers-classic-flavors#hkg02)
-
 * [lon02](/docs/containers?topic=containers-classic-flavors#lon02)
 
 * [lon04](/docs/containers?topic=containers-classic-flavors#lon04)
@@ -7652,8 +7650,6 @@ subcollection: containers
 * [par01](/docs/containers?topic=containers-classic-flavors#par01)
 
 * [sao01](/docs/containers?topic=containers-classic-flavors#sao01)
-
-* [seo01](/docs/containers?topic=containers-classic-flavors#seo01)
 
 * [sjc03](/docs/containers?topic=containers-classic-flavors#sjc03)
 
