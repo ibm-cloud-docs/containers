@@ -208,6 +208,12 @@ subcollection: containers
 
 * [May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may22)
 
+    * [4 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may0422)
+
+        * ALB OAuth Proxy add-on
+
+        * Ingress ALB change log updates
+
     * [3 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may0322)
 
         * Istio add-on
