@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-05-03"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 # {{site.data.keyword.containerlong_notm}} CLI Map
 {: #icks_map}

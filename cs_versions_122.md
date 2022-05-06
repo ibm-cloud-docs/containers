@@ -17,6 +17,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 Review information about version 1.22 of {{site.data.keyword.containerlong}}, released 29 Sep 2021.
 {: shortdesc}
 

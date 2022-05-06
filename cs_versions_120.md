@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-31"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, 1.20, versions, update, upgrade
 
@@ -15,6 +15,7 @@ subcollection: containers
 {: #cs_versions_120}
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 Review information about version 1.20 of {{site.data.keyword.containerlong}}, released 16 Feb 2021.
 {: shortdesc}

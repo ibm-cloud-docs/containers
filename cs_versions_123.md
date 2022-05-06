@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-04-07"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, 1.23, versions, update, upgrade
 
@@ -12,6 +12,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 # 1.23 version information and update actions
 {: #cs_versions_123}

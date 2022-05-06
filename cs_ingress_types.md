@@ -12,6 +12,7 @@ subcollection: containers
 
 {{site.data.keyword.attribute-definition-list}}
 
+
 # Setting up Kubernetes Ingress
 {: #ingress-types}
 

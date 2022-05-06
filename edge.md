@@ -14,6 +14,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Restricting network traffic to edge worker nodes on classic infrastructure
 {: #edge}
 

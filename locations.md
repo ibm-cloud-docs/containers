@@ -14,6 +14,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Locations
 {: #regions-and-zones}
 

@@ -13,6 +13,7 @@ content-type: troubleshoot
 
 {{site.data.keyword.attribute-definition-list}}
 
+
 # Classic: Why can't I access resources in my cluster?
 {: #cs_firewall}
 {: support}

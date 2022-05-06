@@ -14,6 +14,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}
 {: #storage_cos_vpc_ip}
 

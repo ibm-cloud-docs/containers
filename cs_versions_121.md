@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-04-07"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, 1.21, versions, update, upgrade
 
@@ -15,6 +15,7 @@ subcollection: containers
 {: #cs_versions_121}
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 Review information about version 1.21 of {{site.data.keyword.containerlong}}, released 09 Jun 2021.

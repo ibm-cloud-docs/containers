@@ -15,6 +15,7 @@ content-type: troubleshoot
 
 
 
+
 # Why are the `ibm-cloud-provider-ip` pods for the Istio ingress gateway stuck in `pending`?
 {: #istio_gateway_affinity}
 {: support}

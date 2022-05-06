@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, kubectl, exec, timeout
 
@@ -12,6 +12,7 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 # Why doesn't the `kubectl exec` command automatically timeout?
 {: #ts-kubectl-exec-timeout}

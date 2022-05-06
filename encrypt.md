@@ -14,6 +14,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Protecting sensitive information in your cluster
 {: #encryption}
 

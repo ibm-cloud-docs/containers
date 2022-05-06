@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-04-07"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.19
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Kubernetes version 1.19 change log (unsupported as of 14 March 2022)
