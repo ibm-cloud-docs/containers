@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-03"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -1167,7 +1167,7 @@ By default, the source IP addresses of client requests are not preserved by the 
 ### Enabling the PROXY protocol in VPC clusters
 {: #preserve_source_ip_vpc}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) To preserve the source IP address of the client request in a VPC cluster, you can enable the [NGINX PROXY protocol](https://docs.nginx.com/nginx/admin-guide/load-balancer/using-proxy-protocol/){: external} for all load balancers that expose Ingress ALBs in your cluster.
+![VPC](../icons/vpc.svg "VPC") To preserve the source IP address of the client request in a VPC cluster, you can enable the [NGINX PROXY protocol](https://docs.nginx.com/nginx/admin-guide/load-balancer/using-proxy-protocol/){: external} for all load balancers that expose Ingress ALBs in your cluster.
 {: shortdesc}
 
 The PROXY protocol enables load balancers to pass client connection information that is contained in headers on the client request, including the client IP address, the proxy server IP address, and both port numbers, to ALBs.
@@ -1194,7 +1194,7 @@ The PROXY protocol enables load balancers to pass client connection information 
 ### Changing the `externalTrafficPolicy` in classic clusters
 {: #preserve_source_ip_classic}
 
-![Classic infrastructure provider icon.](images/icon-classic-2.svg) Preserve the source IP address for client requests in a classic cluster.
+![Classic](../icons/classic.svg "Classic") Preserve the source IP address for client requests in a classic cluster.
 {: shortdesc}
 
 By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod runs.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-02"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, containers
 
@@ -28,7 +28,7 @@ To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {
 ## Creating a free classic cluster
 {: #clusters_gs}
 
-![Classic infrastructure provider icon.](images/icon-classic-2.svg) Set up your free classic cluster with one worker node by using the {{site.data.keyword.cloud_notm}} console. For more information about free clusters, such as expiration and limited capabilities, see the [FAQ](/docs/containers?topic=containers-faqs#faq_free).
+![Classic](../icons/classic.svg "Classic") Set up your free classic cluster with one worker node by using the {{site.data.keyword.cloud_notm}} console. For more information about free clusters, such as expiration and limited capabilities, see the [FAQ](/docs/containers?topic=containers-faqs#faq_free).
 {: shortdesc}
 
 1. In the [{{site.data.keyword.cloud_notm}} **Catalog**](https://cloud.ibm.com/catalog?category=containers){: external}, select **Kubernetes Service**. A cluster configuration page opens.
@@ -43,7 +43,7 @@ The worker node can take a few minutes to provision, but you can see the progres
 ## Creating a VPC cluster
 {: #vpc-gen2-gs}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) Create a standard VPC cluster by using the {{site.data.keyword.cloud_notm}} console. For more detailed information about your cluster customization options, see [Creating a standard VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2).
+![VPC](../icons/vpc.svg "VPC") Create a standard VPC cluster by using the {{site.data.keyword.cloud_notm}} console. For more detailed information about your cluster customization options, see [Creating a standard VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2).
 {: shortdesc}
 
 VPC clusters can be created as standard clusters only, and as such incur costs. Be sure to review the order summary at the end of this tutorial to review the costs for your cluster. To keep your costs to a minimum, set up your cluster as a single zone cluster with one worker node only.

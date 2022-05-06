@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-03"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -79,7 +79,7 @@ Before you get started with Ingress, review the following prerequisites.
 {: shortdesc}
 
 - Classic clusters: Enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). When a VRF or VLAN spanning is enabled, the ALB can route packets to various subnets in the account.
-- ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters: Ensure that traffic requests that are routed by Ingress to node ports on your worker nodes are permitted in [VPC security groups](/docs/openshift?topic=openshift-vpc-security-group).
+- ![VPC](../icons/vpc.svg "VPC") VPC clusters: Ensure that traffic requests that are routed by Ingress to node ports on your worker nodes are permitted in [VPC security groups](/docs/openshift?topic=openshift-vpc-security-group).
 - Setting up Ingress requires the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms):
     - **Administrator** platform access role for the cluster
     - **Manager** service access role in all namespaces
@@ -648,7 +648,7 @@ Create new ALBs that run the Kubernetes Ingress image. After you create the new 
     ```
     {: pre}
 
-2. ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Optional for classic clusters: If you don't want traffic to immediately be routed to the ALBs that you create in the next step, you can first remove the new ALBs from the DNS registration for the ALB health check subdomain.
+2. ![Classic](../icons/classic.svg "Classic") Optional for classic clusters: If you don't want traffic to immediately be routed to the ALBs that you create in the next step, you can first remove the new ALBs from the DNS registration for the ALB health check subdomain.
 
     1. Open the health check resource for ALBs that run the Kubernetes Ingress image.
 
@@ -703,7 +703,7 @@ Create new ALBs that run the Kubernetes Ingress image. After you create the new 
     ```
     {: pre}
 
-8. ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Optional for classic clusters: If you changed the ALB health check subdomain in step 2, remove the added character to ensure that the new ALBs are in the DNS registration again.
+8. ![Classic](../icons/classic.svg "Classic") Optional for classic clusters: If you changed the ALB health check subdomain in step 2, remove the added character to ensure that the new ALBs are in the DNS registration again.
 
     1. Open the health check resource for ALBs that run the Kubernetes Ingress image.
 
@@ -982,6 +982,39 @@ When migrating from {{site.data.keyword.cloudcerts_short}} to {{site.data.keywor
 **Removing the registered Certificate Manager instance**:
 :    Once you have successfully migrated to Secrets Manager, you can unregister the Certificate Manager instance that was provisioned with your cluster by running `ibmcloud ks ingress instance unregister`.
 
+### Removing the {{site.data.keyword.cloudcerts_short}} instance from the cluster
+{: #unregister-secret-instance}
+
+After migrating to {{site.data.keyword.secrets-manager_short}}, a user can opt to remove the {{site.data.keyword.cloudcerts_short}} instance that is provisioned with the lifecycle of the cluster. Once this instance is removed, the callback functionality provided by {{site.data.keyword.cloudcerts_short}} is no longer available for the cluster.
+
+Before you begin, verify that you have completed the following {{site.data.keyword.secrets-manager_short}} migration and setup steps.
+
+1. [Registered a default {{site.data.keyword.secrets-manager_short}} instance](#default-secrets-mgr).
+2. [Regenerated all nlb-dns subdomains and updated all non-IBM managed secrets with the new CRNs](#default-secrets-mgr).
+3. Listed all secrets in the cluster and verified that no CRNs have `:cloudcert` in the CRN. If there are any, migrate and update as needed.
+    ```sh
+    ibmcloud ks ingress secret ls --cluster <cluster_name_or_id>
+    ```
+    {: pre}
+4. [Enabled service-to-service between your cluster and {{site.data.keyword.secrets-manager_short}}](/docs/secrets-manager?topic=secrets-manager-integrations#create-authorization).
+
+To remove the instance:
+
+1. List the {{site.data.keyword.cloudcerts_short}} instances registered to the cluster. The instance name begins with `kube-certmgr-` or `kube-` and is of type `cloudcerts`.
+
+    ```sh
+    ibmcloud ks ingress instance ls --cluster <cluster_name_or_id>
+    ```
+    {: pre}
+
+2. Unregister the {{site.data.keyword.cloudcerts_short}} instance from the cluster.
+
+    ```sh
+    ibmcloud ks ingress instance unregister --cluster <cluster_name_or_id> --name <instance_name>
+    ```
+    {: pre}
+
+3. **Optional**: Delete the instance in the IBM Cloud Dashboard. If you do not delete the instance, it is automatically deleted when the {{site.data.keyword.cloudcerts_short}} service is deprecated.
 
 ## Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_full}}
 {: #manage_certs_secrets_mgr}
@@ -1025,31 +1058,46 @@ When you set a new default {{site.data.keyword.secrets-manager_short}} instance,
     ```
     {: pre}
 
-2. Regenerate your secrets to upload them to the new default instance.
+2. Regenerate your secrets. Any secrets that are managed by IBM are uploaded to the new default instance. 
 
     ```sh
     ibmcloud ks nlb-dns secret regenerate --cluster <cluster_name_or_id> --nlb-subdomain <nlb_subdomain>
     ```
     {: pre}
 
-3. List your secrets to see the secrets updated with the new CRN in {{site.data.keyword.secrets-manager_short}}.
+3. If the subdomain you specified in the `ibmcloud ks nlb-dns secret regenerate` command also corresponds to any secret that is not managed by IBM, you must manually update the CRN of that secret.
 
-    ```sh
-    ibmcloud ks ingress secret ls --cluster <cluster_name_or_id>
-    ```
-    {: pre}
+    To check whether or not a secret is managed by IBM Cloud, run `ibmcloud ks ingress secret get` to view the details of the secret. In the output, if **User Managed** is marked **false**, the secret is managed by IBM Cloud. If it is marked **true**, the secret is not managed by IBM Cloud.
+    {: tip}
 
-4. Update any non-managed IBM secrets correlated with that CRN to match the CRN located in the new default instance.
+    1. List the secrets in the cluster and note the CRN of the updated secrets that correspond with the subdomain. 
 
-If you previously created a secret with a managed Ingress certificate CRN in a different namespace or using a different name, you must also update those secrets with the CRN of the new {{site.data.keyword.secrets-manager_short}} instance.
-{: important}
+        ```sh
+        ibmcloud ks ingress secret ls --cluster <cluster_name_or_id>
+        ```
+        {: pre}
 
-To check whether or not a secret is managed by IBM Cloud, run `ibmcloud ks ingress secret get` to view the details of the secret. In the output, if **User Managed** is marked **false**, the secret is managed by IBM Cloud. If it is marked **true**, the secret is not managed by IBM Cloud.
+        Example output.
 
-```sh
-ibmcloud ks ingress secret update --cluster <cluster_name_or_id> --name <secret_name> --namespace <namespace> --cert-crn <updated_cert_crn>
-```
-{: pre}
+        ```sh
+        Name                                                             Namespace        CRN                                                                                                                                                              Expires On                 Domain                                                                                                  Status    Type   
+        pvg-classic-111aaaaa1aaa-1a1111aa11a111a1aaa1aaa111111a11-000   default          crn:v1:staging:public:cloudcerts:us-south:a/1a11a1a111aa11aa111aa1a1111aa1a1:a111a1aa-1aa1-111-aa11-a1a1a111aa1a:certificate:1aaa1aaa1a111a1a1111a11a111a11a1    2022-08-01T08:49:42+0000   pvg-classic-111aaaaa1aaa-1a1111aa11a111a1aaa1aaa111111a11-000.us-east.stg.containers.appdomain.cloud   created   TLS   
+        pvg-classic-111aaaaa1aaa-1a1111aa11a111a1aaa1aaa111111a11-000   ibm-cert-store   crn:v1:staging:public:cloudcerts:us-south:a/1a11a1a111aa11aa111aa1a1111aa1a1:a111a1aa-1aa1-111-aa11-a1a1a111aa1a:certificate:1aaa1aaa1a111a1a1111a11a111a11a1   2022-08-01T08:49:42+0000   pvg-classic-111aaaaa1aaa-1a1111aa11a111a1aaa1aaa111111a11-000.us-east.stg.containers.appdomain.cloud   created   TLS   
+        pvg-classic-111aaaaa1aaa-1a1111aa11a111a1aaa1aaa111111a11-000   kube-system      crn:v1:staging:public:cloudcerts:us-south:a/1a11a1a111aa11aa111aa1a1111aa1a1:a111a1aa-1aa1-111-aa11-a1a1a111aa1a:certificate:1aaa1aaa1a111a1a1111a11a111a11a1   2022-08-01T08:49:42+0000   pvg-classic-111aaaaa1aaa-1a1111aa11a111a1aaa1aaa111111a11-000.us-east.stg.containers.appdomain.cloud   created   TLS  
+
+        ```
+        {: screen}
+
+    2. Update the non-IBM managed secrets with the CRN of the matching subdomain you found earlier. 
+
+        ```sh
+        ibmcloud ks ingress secret update --cluster <cluster_name_or_id> --name <secret_name> --namespace <namespace> --cert-crn <updated_crn>
+        ```
+        {: pre}
+    
+
+#### Removing a {{site.data.keyword.secrets-manager_short}} instance as the default instance
+{: secret-mgr-remove-default}
 
 To remove a {{site.data.keyword.secrets-manager_short}} instance as the default instance of a cluster, run the following command. Note that if no default instance is set, your secrets are only written directly to the cluster and are not uploaded to any {{site.data.keyword.secrets-manager_short}} instance.
 
@@ -1058,40 +1106,6 @@ ibmcloud ks ingress instance default unset --cluster <cluster_name_or_id> --crn 
 ```
 {: pre}
 
-### Removing the {{site.data.keyword.cloudcerts_short}} instance from the cluster
-{: #unregister-secret-instance}
-
-After migrating to {{site.data.keyword.secrets-manager_short}}, a user can opt to remove the {{site.data.keyword.cloudcerts_short}} instance that is provisioned with the lifecycle of the cluster. Once this instance is removed, the callback functionality provided by {{site.data.keyword.cloudcerts_short}} will no longer exist with the cluster.
-
-1. Verify you have completed the migration to {{site.data.keyword.secrets-manager_short}}
-
-    1. Registered a default {{site.data.keyword.secrets-manager_short}} instance.
-
-    2. Regenerated all nlb-dns subdomains and updated all non-IBM managed secrets with the new CRNs.
-
-    3. Listed all secrets in the cluster and verified that no CRNs have `:cloudcert` in the CRN. If there are any, migrate and update as needed.
-        ```sh
-        ibmcloud ks ingress secret ls --cluster <cluster_name_or_id>
-        ```
-        {: pre}
-
-    4. Enabled service-to-service between your cluster and {{site.data.keyword.secrets-manager_short}}.
-
-2. Get the {{site.data.keyword.cloudcerts_short}} instances registered to the cluster. The instance name will be prepended with `kube-certmgr-` or `kube-` and have a type of `cloudcerts`.
-
-    ```sh
-    ibmcloud ks ingress instance ls --cluster <cluster_name_or_id>
-    ```
-    {: pre}
-
-3. Unregister the {{site.data.keyword.cloudcerts_short}} instance from the cluster.
-
-    ```sh
-    ibmcloud ks ingress instance unregister --cluster <cluster_name_or_id> --name <instance_name>
-    ```
-    {: pre}
-
-4. A user can optionally choose to delete the instance in the IBM Cloud Dashboard. However, if it is not deleted, Certificate Manager will delete it automatically when the service is deprecated.
 
 ## Customizing the Ingress class
 {: #ingress-class}
@@ -1378,7 +1392,7 @@ For example, if you have worker nodes in `dal10`, a default public ALB exists in
 You can also use these steps to create more ALBs across zones in your cluster. When you create a multizone cluster, a default public ALB is created in each zone where you have worker nodes. However, default public ALBs are created in only up to three zones. If, for example, you later remove one of these original three zones and add workers in a different zone, a default public ALB is not created in that new zone. You can manually create an ALB to process connections in that new zone.
 {: tip}
 
-![Classic infrastructure provider icon.](images/icon-classic-2.svg) **Classic clusters:**
+![Classic](../icons/classic.svg "Classic") **Classic clusters:**
 
 1. In each zone where you have worker nodes, create an ALB. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_create).
 
@@ -1416,7 +1430,7 @@ You can also use these steps to create more ALBs across zones in your cluster. W
 
 
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) **VPC clusters:**
+![VPC](../icons/vpc.svg "VPC") **VPC clusters:**
 
 1. In each zone where you have worker nodes, create an ALB. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb-create-vpc-gen2).
 
@@ -1457,7 +1471,7 @@ You can also use these steps to create more ALBs across zones in your cluster. W
 ## Moving ALBs across VLANs
 {: #migrate-alb-vlan}
 
-![Classic infrastructure provider icon.](images/icon-classic-2.svg) The information in this topic is specific to classic clusters only.
+![Classic](../icons/classic.svg "Classic") The information in this topic is specific to classic clusters only.
 {: note}
 
 When you [change your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans), the worker nodes are connected to the new VLAN and assigned new public or private IP addresses. However, ALBs can't automatically migrate to the new VLAN because they are assigned a stable, portable public or private IP address from a subnet that belongs to the old VLAN. When your worker nodes and ALBs are connected to different VLANs, the ALBs can't forward incoming network traffic to app pods to your worker nodes. To move your ALBs to a different VLAN, you must create an ALB on the new VLAN and disable the ALB on the old VLAN.

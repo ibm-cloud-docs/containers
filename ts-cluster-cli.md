@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes
 
@@ -24,8 +24,8 @@ Review the following common reasons for CLI connection issues or command failure
 {: shortdesc}
 
 **Infrastructure provider**:
-* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
-* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+* ![Classic](../icons/classic.svg "Classic") Classic
+* ![VPC](../icons/vpc.svg "VPC") VPC
 
 ## Firewall prevents running CLI commands
 {: #ts_firewall_clis}
@@ -53,7 +53,7 @@ This task requires the [**Administrator** {{site.data.keyword.cloud_notm}} IAM p
 When you run `kubectl` commands against your cluster, your commands fail with an error message similar to the following.
 {: tsSymptoms}
 
-```
+```sh
 No resources found.
 Error from server (NotAcceptable): unknown (get nodes)
 ```
@@ -64,7 +64,7 @@ invalid object doesn't have additional properties
 ```
 {: screen}
 
-```
+```sh
 error: No Auth Provider found for name "oidc"
 ```
 {: screen}

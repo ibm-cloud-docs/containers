@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-04-29"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes network
 
@@ -15,7 +15,7 @@ subcollection: containers
 # Understanding network basics of VPC clusters
 {: #plan_vpc_basics}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) When you create your cluster, you must choose a networking setup so that certain cluster components can communicate with each other and with networks or services outside of the cluster.
+![VPC](../icons/vpc.svg "VPC") When you create your cluster, you must choose a networking setup so that certain cluster components can communicate with each other and with networks or services outside of the cluster.
 {: shortdesc}
 
 * [Worker-to-worker communication](#vpc-worker-worker): All worker nodes must be able to communicate with each other on the private network through VPC subnets.
@@ -27,7 +27,7 @@ subcollection: containers
 ## Worker-to-worker communication using VPC subnets
 {: #vpc-worker-worker}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) Before you create a VPC cluster for the first time, you must [create a VPC subnet](https://cloud.ibm.com/vpc/provision/network){: external} in each zone where you want to deploy worker nodes. A VPC subnet is a specified private IP address range (CIDR block) and configures a group of worker nodes and pods as if they are attached to the same physical wire.
+![VPC](../icons/vpc.svg "VPC") Before you create a VPC cluster for the first time, you must [create a VPC subnet](https://cloud.ibm.com/vpc/provision/network){: external} in each zone where you want to deploy worker nodes. A VPC subnet is a specified private IP address range (CIDR block) and configures a group of worker nodes and pods as if they are attached to the same physical wire.
 {: shortdesc}
 
 When you create a cluster, you specify an existing VPC subnet for each zone. Each worker node that you add in a cluster is deployed with a private IP address from the VPC subnet in that zone. After the worker node is provisioned, the worker node IP address persists after a `reboot` operation, but the worker node IP address changes after `replace` and `update` operations.
@@ -60,7 +60,7 @@ When you create VPC subnets for your clusters, keep in mind the following featur
 ## Worker-to-master and user-to-master communication using Virtual private endpoints or cloud service endpoints
 {: #vpc-workeruser-master}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) {{site.data.keyword.containerlong_notm}} uses different types of service endpoints to establish a connection from authorized cluster users and worker nodes to the Kubernetes master. Authorized cluster users communicate with the Kubernetes master through cloud service endpoints. Depending on your cluster version, worker nodes communicate with the Kubernetes master through cloud service endpoints or VPC virtual private endpoints.
+![VPC](../icons/vpc.svg "VPC") {{site.data.keyword.containerlong_notm}} uses different types of service endpoints to establish a connection from authorized cluster users and worker nodes to the Kubernetes master. Authorized cluster users communicate with the Kubernetes master through cloud service endpoints. Depending on your cluster version, worker nodes communicate with the Kubernetes master through cloud service endpoints or VPC virtual private endpoints.
 {: shortdesc}
 
 Before you create a cluster, you must enable your account to use service endpoints. To enable service endpoints, run `ibmcloud account update --service-endpoint-enable true`.
@@ -95,7 +95,7 @@ You can secure access to your private cloud service endpoint by creating a subne
 ## Worker communication to other services or networks
 {: #vpc-worker-services-onprem}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) Allow your worker nodes to securely communicate with other {{site.data.keyword.cloud_notm}} services, on-premises networks, other VPCs, and {{site.data.keyword.cloud_notm}} classic infrastructure resources.
+![VPC](../icons/vpc.svg "VPC") Allow your worker nodes to securely communicate with other {{site.data.keyword.cloud_notm}} services, on-premises networks, other VPCs, and {{site.data.keyword.cloud_notm}} classic infrastructure resources.
 {: shortdesc}
 
 ## Communication with other {{site.data.keyword.cloud_notm}} services over the private or public network
@@ -140,7 +140,7 @@ If you need to connect your cluster to resources in your {{site.data.keyword.clo
 ## External communication to apps that run on worker nodes
 {: #vpc-external-workers}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) Allow private or public traffic requests from outside the cluster to your apps that run on worker nodes.
+![VPC](../icons/vpc.svg "VPC") Allow private or public traffic requests from outside the cluster to your apps that run on worker nodes.
 {: shortdesc}
 
 ## Private traffic to cluster apps
@@ -172,13 +172,13 @@ Note that a public gateway is not required on your subnets to allow inbound netw
 ## Example scenarios for VPC cluster network setups
 {: #vpc-scenarios}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) Now that you understand the basics of cluster networking, check out some example scenarios in which various VPC cluster network setups can meet your workload needs.
+![VPC](../icons/vpc.svg "VPC") Now that you understand the basics of cluster networking, check out some example scenarios in which various VPC cluster network setups can meet your workload needs.
 {: shortdesc}
 
 ### Scenario: Run internet-facing app workloads in a VPC cluster
 {: #vpc-no-pgw}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) In this scenario, you run workloads in a VPC cluster that are accessible to requests from the Internet. Public access is controlled by security groups so that end users can access your apps while unwanted public requests to your apps are denied. Additionally, your workers have automatic access to any {{site.data.keyword.cloud_notm}} services that support private cloud service endpoints.
+![VPC](../icons/vpc.svg "VPC") In this scenario, you run workloads in a VPC cluster that are accessible to requests from the Internet. Public access is controlled by security groups so that end users can access your apps while unwanted public requests to your apps are denied. Additionally, your workers have automatic access to any {{site.data.keyword.cloud_notm}} services that support private cloud service endpoints.
 {: shortdesc}
 
 
@@ -213,7 +213,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 ## Scenario: Run internet-facing app workloads in a VPC cluster with limited public egress
 {: #vpc-pgw}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) In this scenario, you run workloads in a VPC cluster that are accessible to requests from the Internet. Public access is controlled so that end users can access your apps while unwanted public requests to your apps are denied. However, you might need to also provide limited public egress from your worker nodes to a public endpoint, and want to ensure that this public egress is controlled and isolated in your cluster. For example, you might need your app pods to access an {{site.data.keyword.cloud_notm}} service that does not support private cloud service endpoints, and must be accessed over the public network.
+![VPC](../icons/vpc.svg "VPC") In this scenario, you run workloads in a VPC cluster that are accessible to requests from the Internet. Public access is controlled so that end users can access your apps while unwanted public requests to your apps are denied. However, you might need to also provide limited public egress from your worker nodes to a public endpoint, and want to ensure that this public egress is controlled and isolated in your cluster. For example, you might need your app pods to access an {{site.data.keyword.cloud_notm}} service that does not support private cloud service endpoints, and must be accessed over the public network.
 {: shortdesc}
 
 ![Network setup for a cluster that allows limited, secure public access.](images/cs_org_ov_vpc.png){: caption="Figure 1. Network setup for a VPC cluster that allows limited, secure public access" caption-side="bottom"}
@@ -251,7 +251,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 ## Extend your on-premises data center to a VPC cluster
 {: #vpc-vpn}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) In this scenario, you run workloads in a VPC cluster. However, you want these workloads to be accessible only to services, databases, or other resources in your private networks in an on-premises data center. Your cluster workloads might need to access a few other {{site.data.keyword.cloud_notm}} services that support communication over the private network.
+![VPC](../icons/vpc.svg "VPC") In this scenario, you run workloads in a VPC cluster. However, you want these workloads to be accessible only to services, databases, or other resources in your private networks in an on-premises data center. Your cluster workloads might need to access a few other {{site.data.keyword.cloud_notm}} services that support communication over the private network.
 {: shortdesc}
 
 ![Network setup for a VPC cluster that extends an on-prem data center.](images/vpc_extend.png){: caption="Figure 1.Network setup for a VPC cluster that extends an on-prem data center" caption-side="bottom"}

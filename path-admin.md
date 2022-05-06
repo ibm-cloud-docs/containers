@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-04-07"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, containers
 
@@ -80,7 +80,7 @@ Review the following optional topics to manage the network connectivity of your 
 - **Subnets, service endpoints, and VLANs**:
     - Add or change the available subnets and IP addresses for your [classic cluster](/docs/containers?topic=containers-subnets) or [VPC cluster](/docs/containers?topic=containers-vpc-subnets).
     - Change the [service endpoints that your Kubernetes master is accessible through](/docs/containers?topic=containers-cs_network_cluster).
-    - ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters: Change the [VLAN connections for your worker nodes](/docs/containers?topic=containers-cs_network_cluster#change-vlans).
+    - ![Classic](../icons/classic.svg "Classic") Classic clusters: Change the [VLAN connections for your worker nodes](/docs/containers?topic=containers-cs_network_cluster#change-vlans).
 
 
 
@@ -92,10 +92,10 @@ Use built-in security features to protect your cluster infrastructure and networ
 
 1. **Security strategy**: Start by reviewing all [security options](/docs/containers?topic=containers-security) that are available for your cluster.
 2. **Network security**:
-    - ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters:
+    - ![Classic](../icons/classic.svg "Classic") Classic clusters:
         1. To isolate networking workloads, you can restrict network traffic to [edge worker nodes](/docs/containers?topic=containers-edge).
         2. Set up a firewall by using a [gateway appliance](/docs/containers?topic=containers-firewall#vyatta_firewall) or [Calico network policies](/docs/containers?topic=containers-network_policies).
-    - ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters: Control traffic to and from your cluster with [VPC security groups](/docs/containers?topic=containers-vpc-network-policy).
+    - ![VPC](../icons/vpc.svg "VPC") VPC clusters: Control traffic to and from your cluster with [VPC security groups](/docs/containers?topic=containers-vpc-network-policy).
 3. **Workload security**:
     1. [Encrypt sensitive information](/docs/containers?topic=containers-encryption) in the cluster, such as the master's local disk and secrets.
     2. Set up a [private image registry](/docs/containers?topic=containers-security#images_registry) for your developers, such as the one provided by {{site.data.keyword.registryshort}}, to control access to the registry and the image content that can be pushed.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-03"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -172,13 +172,13 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 {: shortdesc}
 
 1. Register the IP address in classic clusters or the hostname in VPC clusters for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic:
+    * ![Classic](../icons/classic.svg "Classic") Classic:
         ```sh
         ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --cluster <cluster_name_or_id>
         ```
         {: pre}
 
-    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC:
+    * ![VPC](../icons/vpc.svg "VPC") VPC:
         ```sh
         ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
         ```
@@ -223,13 +223,13 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 {: shortdesc}
 
 1. Register the IP address in classic clusters or the hostname in VPC clusters for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic:
+    * ![Classic](../icons/classic.svg "Classic") Classic:
         ```sh
         ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --secret-namespace istio-system --cluster <cluster_name_or_id>
         ```
         {: pre}
 
-    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC:
+    * ![VPC](../icons/vpc.svg "VPC") VPC:
         ```sh
         ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --secret-namespace istio-system --cluster <cluster_name_or_id>
         ```
@@ -608,13 +608,13 @@ To publicly expose apps:
     {: screen}
 
 6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters:
+    * ![Classic](../icons/classic.svg "Classic") Classic clusters:
         ```sh
         ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
         ```
         {: pre}
 
-    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters:
+    * ![VPC](../icons/vpc.svg "VPC") VPC clusters:
         ```sh
         ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname>
         ```
@@ -644,7 +644,7 @@ mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cl
 
 **Next steps** Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
 
-```
+```sh
 http://<host_name>/<service_path>
 ```
 {: codeblock}
@@ -669,13 +669,13 @@ Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-a
 To publicly expose apps:
 
 1. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
-    * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic clusters:
+    * ![Classic](../icons/classic.svg "Classic") Classic clusters:
         ```sh
         ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
         ```
         {: pre}
 
-    * ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters:
+    * ![VPC](../icons/vpc.svg "VPC") VPC clusters:
         ```sh
         ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname>
         ```

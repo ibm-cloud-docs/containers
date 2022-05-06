@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-04-29"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, app access
 
@@ -59,7 +59,7 @@ If you don't already have an app ready, you can use a Kubernetes example app cal
 Before you begin
 
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters: [Allow traffic requests that are routed to node ports on your worker nodes](/docs/openshift?topic=openshift-vpc-security-group).
+* ![VPC](../icons/vpc.svg "VPC") VPC clusters: [Allow traffic requests that are routed to node ports on your worker nodes](/docs/openshift?topic=openshift-vpc-security-group).
 
 To use a NodePort,
 

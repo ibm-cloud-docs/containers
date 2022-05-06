@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-05-04"
+lastupdated: "2022-05-06"
 
 keywords: containers
 subcollection: containers
@@ -207,6 +207,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may22)
+
+    * [6 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may0622)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in
 
     * [4 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may0422)
 
@@ -1198,7 +1202,7 @@ subcollection: containers
 
     * [24 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov2420)
 
-        * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) New! Reservations to reduce classic worker node costs
+        * ![Classic](../icons/classic.svg "Classic") New! Reservations to reduce classic worker node costs
 
     * [23 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov2320)
 
@@ -2814,7 +2818,7 @@ subcollection: containers
 
     * [Adding tags to clusters with the console](/docs/containers?topic=containers-add_workers#add-tags-console)
 
-    * [Adding tags to clusters with the CLI](/docs/containers?topic=containers-add_workers#adding-tags-to-clusters-with-the-cli)
+    * [Adding tags to clusters with the CLI](/docs/containers?topic=containers-add_workers#add-tags-cli)
 
 * [Adding labels to existing worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels)
 
@@ -4129,13 +4133,13 @@ subcollection: containers
 
 * [Migrating from {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr)
 
+    * [Removing the {{site.data.keyword.cloudcerts_short}} instance from the cluster](/docs/containers?topic=containers-ingress-types#unregister-secret-instance)
+
 * [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_full}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr)
 
     * [Registering a {{site.data.keyword.secrets-manager_short}} instance to a cluster](/docs/containers?topic=containers-ingress-types#register-secrets-mgr)
 
     * [Setting a {{site.data.keyword.secrets-manager_short}} instance as the default instance](/docs/containers?topic=containers-ingress-types#default-secrets-mgr)
-
-    * [Removing the {{site.data.keyword.cloudcerts_short}} instance from the cluster](/docs/containers?topic=containers-ingress-types#unregister-secret-instance)
 
 * [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
 
@@ -5195,6 +5199,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.408](/docs/containers?topic=containers-cs_cli_changelog#cli-10408)
 
 * [Version 1.0.404](/docs/containers?topic=containers-cs_cli_changelog#cli-10404)
 
@@ -7330,6 +7336,8 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
+* [Change log for version 2.1.15, released 6 May 2022](/docs/containers?topic=containers-cos_plugin_changelog#02115_object_plugin)
+
 * [Change log for version 2.1.14, released 13 April 2022](/docs/containers?topic=containers-cos_plugin_changelog#02114_object_plugin)
 
 * [Change log for version 2.1.13, released 24 March 2022](/docs/containers?topic=containers-cos_plugin_changelog#02113_object_plugin)
@@ -8230,7 +8238,7 @@ subcollection: containers
 
 [Debugging {{site.data.keyword.block_storage_is_short}} metrics](/docs/containers?topic=containers-debug_monitoring#debug_monitoring)
 
-    * [Manually viewing storage metrics in the CLI](/docs/containers?topic=containers-debug_monitoring#manual-monitor-metrics)
+* [Manually viewing storage metrics in the CLI](/docs/containers?topic=containers-debug_monitoring#manual-monitor-metrics)
 
 
 ### Object Storage
@@ -8272,6 +8280,8 @@ subcollection: containers
 [Why does my PVC remain in a pending state?](/docs/containers?topic=containers-cos_pvc_pending#cos_pvc_pending)
 
 [Why does PVC or pod creation fail due to not finding the Kubernetes secret?](/docs/containers?topic=containers-cos_secret_access_fails#cos_secret_access_fails)
+
+[Why is the transport endpoint not connected?](/docs/containers?topic=containers-cos_transport_ts_connect#cos_transport_ts_connect)
 
 
 ### Portworx Storage
