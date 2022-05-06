@@ -8,16 +8,12 @@ keywords: kubernetes add-ons, cluster addon
 
 subcollection: containers
 
-
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
-
-
 # Cluster add-on versions
-{: #access-creds}
+{: #supported-cluster-addon-versions}
 
 Review the following list of supported cluster add-ons.
 {: shortdesc}

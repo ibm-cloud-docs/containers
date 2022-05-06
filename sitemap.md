@@ -6908,7 +6908,7 @@ subcollection: containers
 {: #sitemap_add-on_version_history}
 
 
-[Cluster add-on versions](/docs/containers?topic=containers-access-creds#access-creds)
+[Cluster add-on versions](/docs/containers?topic=containers-supported-cluster-addon-versions#supported-cluster-addon-versions)
 
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 
