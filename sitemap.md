@@ -208,6 +208,10 @@ subcollection: containers
 
 * [May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may22)
 
+    * [6 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may0622)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in
+
     * [4 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may0422)
 
         * ALB OAuth Proxy add-on
@@ -7331,6 +7335,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.1.15, released 6 May 2022](/docs/containers?topic=containers-cos_plugin_changelog#02115_object_plugin)
 
 * [Change log for version 2.1.14, released 13 April 2022](/docs/containers?topic=containers-cos_plugin_changelog#02114_object_plugin)
 
