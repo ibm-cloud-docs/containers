@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-04-27"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, docker, containers
 
@@ -22,7 +22,7 @@ Review sample cluster architectures and the components that are created in your 
 ## Classic cluster
 {: #architecture_classic}
 
-![Classic infrastructure provider icon.](images/icon-classic-2.svg) The following architectural overviews are specific to the classic infrastructure provider. For an architectural overview for the VPC infrastructure provider, see [VPC cluster architecture](#architecture_vpc).
+![Classic](../icons/classic.svg "Classic") The following architectural overviews are specific to the classic infrastructure provider. For an architectural overview for the VPC infrastructure provider, see [VPC cluster architecture](#architecture_vpc).
 {: note}
 
 ### Non-VRF or VRF-enabled account with public cloud service endpoint only
@@ -143,7 +143,7 @@ App pods and services
 The following diagram and table describe the default components that are set up in an {{site.data.keyword.containerlong_notm}} VPC cluster architecture.
 {: shortdesc}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) The following architectural overviews are specific to the VPC infrastructure provider. For an architectural overview for the classic infrastructure provider, see [Classic cluster architecture](#architecture_classic).
+![VPC](../icons/vpc.svg "VPC") The following architectural overviews are specific to the VPC infrastructure provider. For an architectural overview for the classic infrastructure provider, see [Classic cluster architecture](#architecture_classic).
 {: note}
 
 ![Kubernetes cluster in a VPC](images/cs_org_ov_vpc.png)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -18,7 +18,7 @@ content-type: troubleshoot
 {: support}
 
 **Infrastructure provider**:
-* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+* ![Classic](../icons/classic.svg "Classic") Classic
 
 
 You [enabled source IP preservation for an Ingress ALB](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip_classic) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the back-end service for your app.

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-04-28"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, kernel
 
@@ -404,8 +404,8 @@ You can reboot the worker node and the huge pages configuration persists. Howeve
 {: important}
 
 **Supported infrastructure providers and required permissions**:
-* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
-* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+* ![Classic](../icons/classic.svg "Classic") Classic
+* ![VPC](../icons/vpc.svg "VPC") VPC
 * **Operator** platform access role and **Manager** service access role for the cluster in {{site.data.keyword.cloud_notm}} IAM
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -543,13 +543,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         {: pre}
 
     3. Verify that your pod can view the sizes of the huge pages.
-        ```
+        ```sh
         ls /sys/kernel/mm/hugepages
         ```
         {: pre}
 
         Example output
-        ```
+        ```sh
         hugepages-1048576kB  hugepages-2048kB
         ```
         {: screen}

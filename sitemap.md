@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-05-04"
+lastupdated: "2022-05-06"
 
 keywords: containers
 subcollection: containers
@@ -1198,7 +1198,7 @@ subcollection: containers
 
     * [24 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov2420)
 
-        * ![Classic infrastructure provider icon.](images/icon-classic-2.svg) New! Reservations to reduce classic worker node costs
+        * ![Classic](../icons/classic.svg "Classic") New! Reservations to reduce classic worker node costs
 
     * [23 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov2320)
 
@@ -2814,7 +2814,7 @@ subcollection: containers
 
     * [Adding tags to clusters with the console](/docs/containers?topic=containers-add_workers#add-tags-console)
 
-    * [Adding tags to clusters with the CLI](/docs/containers?topic=containers-add_workers#adding-tags-to-clusters-with-the-cli)
+    * [Adding tags to clusters with the CLI](/docs/containers?topic=containers-add_workers#add-tags-cli)
 
 * [Adding labels to existing worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels)
 
@@ -8230,7 +8230,7 @@ subcollection: containers
 
 [Debugging {{site.data.keyword.block_storage_is_short}} metrics](/docs/containers?topic=containers-debug_monitoring#debug_monitoring)
 
-    * [Manually viewing storage metrics in the CLI](/docs/containers?topic=containers-debug_monitoring#manual-monitor-metrics)
+* [Manually viewing storage metrics in the CLI](/docs/containers?topic=containers-debug_monitoring#manual-monitor-metrics)
 
 
 ### Object Storage
@@ -8272,6 +8272,8 @@ subcollection: containers
 [Why does my PVC remain in a pending state?](/docs/containers?topic=containers-cos_pvc_pending#cos_pvc_pending)
 
 [Why does PVC or pod creation fail due to not finding the Kubernetes secret?](/docs/containers?topic=containers-cos_secret_access_fails#cos_secret_access_fails)
+
+[Why is the transport endpoint not connected?](/docs/containers?topic=containers-cos_transport_ts_connect#cos_transport_ts_connect)
 
 
 ### Portworx Storage

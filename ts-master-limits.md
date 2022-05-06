@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, iks, limits
 
@@ -20,8 +20,8 @@ content-type: troubleshoot
 {: support}
 
 **Infrastructure provider**:
-* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
-* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+* ![Classic](../icons/classic.svg "Classic") Classic
+* ![VPC](../icons/vpc.svg "VPC") VPC
 
 
 You see a master status similar to the following example.
@@ -44,7 +44,7 @@ You have a few options when it comes to dealing with this.
 - Identify the cause of the high resource usage and make changes to lower the usage.
     - Look for applications that may be generating high load against your master. You can [collect the master logs](/docs/containers?topic=containers-health#collect_master) to help determine which app is making many requests.
     - Reduce the number of resources, such as secrets, configmaps, and replicasets.  If a cluster contains a high number of resources, then the queries can cause the master to be overloaded. Use the **`kubectl get raw`** command to find the top resources by count. For example, run 
-        ```
+        ```sh
         kubectl get --raw /metrics | grep ^etcd_object_counts | sort -n -k2
         ```
         {: pre}

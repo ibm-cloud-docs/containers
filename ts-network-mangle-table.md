@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -18,8 +18,8 @@ content-type: troubleshoot
 {: support}
 
 **Infrastructure provider**:
-- ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
-- ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+- ![Classic](../icons/classic.svg "Classic") Classic
+- ![VPC](../icons/vpc.svg "VPC") VPC
 
 You find that your {{site.data.keyword.containerlong_notm}} workers are dropping certain invalid packets or ingress packets while on a public VLAN with private source addresses. For example, you create an application load balancer (ALB) for your cluster, but can't connect to it. You receive a message similar to `Unable to connect to <ALB>`. 
 {: tsSymptoms}

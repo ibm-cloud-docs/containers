@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes
 
@@ -20,8 +20,8 @@ content-type: troubleshoot
 {: support}
 
 **Infrastructure provider**:
-* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
-* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+* ![Classic](../icons/classic.svg "Classic") Classic
+* ![VPC](../icons/vpc.svg "VPC") VPC
 
 You are not able to find a cluster. When you run `ibmcloud ks cluster ls`, the cluster is not listed in the output.
 {: tsSymptoms}

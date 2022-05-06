@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -19,7 +19,7 @@ content-type: troubleshoot
 {: #cs_source_ip_fails_lb}
 {: support}
 
-**Infrastructure provider**: ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+**Infrastructure provider**: ![Classic](../icons/classic.svg "Classic") Classic
 
 
 In a classic cluster, you enabled source IP preservation for a [version 1.0 load balancer](/docs/containers?topic=containers-loadbalancer#lb_source_ip) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file.

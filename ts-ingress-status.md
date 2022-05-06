@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -20,8 +20,8 @@ content-type: troubleshoot
 {: support}
 
 **Infrastructure provider**:
-* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
-* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+* ![Classic](../icons/classic.svg "Classic") Classic
+* ![VPC](../icons/vpc.svg "VPC") VPC
 
 ## Getting the status and message
 {: #check_status}
@@ -85,7 +85,7 @@ The Ingress Message provides details of what operation is in progress or informa
 |`Could not upload certificates to Certificate Manager instance. Ensure you have the correct IAM service permissions.` |The TLS certificate for your cluster's default Ingress subdomain is created, but can't be stored in the default {{site.data.keyword.cloudcerts_long_notm}} instance for your cluster. The API key for the resource group and region that your cluster is in does not have the correct IAM permissions for {{site.data.keyword.cloudcerts_short}}. For troubleshooting steps, see [Why does no Ingress secret exist after cluster creation?](/docs/containers?topic=containers-ingress_secret).|
 |`Ingress is not supported for free clusters` |In a free cluster, you can expose your app only by using a [NodePort service](/docs/containers?topic=containers-nodeport).|
 |`Ingress subdomain is unreachable` |Your cluster is assigned an Ingress subdomain in the format `<cluster_name>.<region>.containers.mybluemix.net` that can't be reached. For troubleshooting information, see [Ping the ALB subdomain and public IP addresses](/docs/containers?topic=containers-ingress-debug#ping).|
-|`Load balancer service for ALB or router is not ready` |<ul><li>VPC clusters: The VPC load balancer that routes requests to the apps that your ALBs expose either might still be creating or did not correctly deploy to your VPC. For troubleshooting information, see <a href="/docs/containers?topic=containers-vpc_ts_alb">VPC clusters: Why can't my app connect via Ingress?</a>.</li><li>Classic clusters: The load balancer service that exposes your ALB did not correctly deploy to your cluster. For troubleshooting information, see <a href="/docs/containers?topic=containers-cs_subnet_limit">Classic clusters: Why does the ALB not deploy in a zone?</a>.</li></ul>|
+|`Load balancer service for ALB or router is not ready` | - VPC clusters: The VPC load balancer that routes requests to the apps that your ALBs expose either might still be creating or did not correctly deploy to your VPC. For troubleshooting information, see [VPC clusters: Why can't my app connect via Ingress?](/docs/containers?topic=containers-vpc_ts_alb).  \n - Classic clusters: The load balancer service that exposes your ALB did not correctly deploy to your cluster. For troubleshooting information, see [Classic clusters: Why does the ALB not deploy in a zone?](/docs/containers?topic=containers-cs_subnet_limit).  \n - |
 |`No workers found in this zone` | ALB pods can't deploy to a zone because no worker nodes match the pod affinity requirements. To ensure that you have the minimum required worker nodes per zone, see [Why do ALB pods not deploy to worker nodes?](/docs/containers?topic=containers-alb-pod-affinity).|
 |`One or more ALBs are unhealthy` |The external IP address for one or more of your ALBs was reported as unhealthy. For troubleshooting information, see [Ping the ALB subdomain and public IP addresses](/docs/containers?topic=containers-ingress-debug#ping).|
 |`Pending update or enable operation for ALB in progress` |Your ALB is currently updating to a new version, or your ALB that was previously disabled is enabling. For information about updating ALBs, see [Updating ALBs](/docs/containers?topic=containers-ingress-types#alb-update). For information about enabling ALBs, see the [`ibmcloud ks ingress alb enable` CLI command reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure).|

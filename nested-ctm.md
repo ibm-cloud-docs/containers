@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, help, network, dns, health check
 
@@ -20,7 +20,7 @@ content-type: troubleshoot
 {: support}
 
 **Supported infrastructure provider**:
-* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
+* ![Classic](../icons/classic.svg "Classic") Classic
 
 
 When you try to include Ingress subdomains that have health checks enabled in your Akamai Global Traffic Managment (GTM) configuration, the health checks fail.

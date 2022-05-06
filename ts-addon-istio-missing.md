@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, help
 
@@ -18,8 +18,8 @@ content-type: troubleshoot
 {: support}
 
 **Infrastructure provider**:
-* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
-* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+* ![Classic](../icons/classic.svg "Classic") Classic
+* ![VPC](../icons/vpc.svg "VPC") VPC
 
 
 One or more of the Istio control plane components, such as `istiod`, does not exist in your cluster.

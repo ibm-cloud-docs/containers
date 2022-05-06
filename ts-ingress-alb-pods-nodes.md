@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -18,15 +18,15 @@ content-type: troubleshoot
 {: support}
 
 **Infrastructure provider**:
-* ![Classic infrastructure provider icon.](images/icon-classic-2.svg) Classic
-* ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC
+* ![Classic](../icons/classic.svg "Classic") Classic
+* ![VPC](../icons/vpc.svg "VPC") VPC
 
 
 When you run `kubectl get pods -n kube-system | grep alb`, either no ALB pods or only some ALB pods successfully deployed to your worker nodes.
 {: tsSymptoms}
 
 When you describe an ALB pod by running `kubectl describe pod -n kube-system <pod_name>`, you see a message similar to the following in the **Events** section of the output.
-```
+```sh
 0/3 nodes are available: 1 node(s) didn’t match pod affinity/anti-affinity, 2 node(s) didn’t match node selector.
 ```
 {: screen}

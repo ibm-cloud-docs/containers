@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, app protocol, application protocol
 
@@ -20,7 +20,7 @@ subcollection: containers
 Set up a Load Balancer for VPC to expose your app on the public or private network.
 {: shortdesc}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC load balancers can be created for VPC clusters only, and can't be created for classic clusters. To load balance in classic clusters, see [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about).
+![VPC](../icons/vpc.svg "VPC") VPC load balancers can be created for VPC clusters only, and can't be created for classic clusters. To load balance in classic clusters, see [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about).
 
 ## About VPC load balancing in {{site.data.keyword.containerlong_notm}}
 {: #lbaas_about}
@@ -522,7 +522,7 @@ Before you begin
 
 - Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for the namespace in which you deploy the Kubernetes `LoadBalancer` service for the VPC NLB.
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- ![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC clusters that run Kubernetes version 1.18 or earlier only: [Allow traffic requests that are routed by the VPC ALB to node ports on your worker nodes](/docs/openshift?topic=openshift-vpc-security-group).
+- ![VPC](../icons/vpc.svg "VPC") VPC clusters that run Kubernetes version 1.18 or earlier only: [Allow traffic requests that are routed by the VPC ALB to node ports on your worker nodes](/docs/openshift?topic=openshift-vpc-security-group).
 - To view VPC ALBs, install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
     ```sh
     ibmcloud plugin install infrastructure-service

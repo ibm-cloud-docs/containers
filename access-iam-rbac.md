@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -688,10 +688,10 @@ subjects:
 ### Checking infrastructure roles
 {: #checking-infra}
 
-![Classic infrastructure provider icon.](images/icon-classic-2.svg) Check your {{site.data.keyword.cloud_notm}} classic infrastructure roles. For more information, see [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-access-creds#understand_infra).
+![Classic](../icons/classic.svg "Classic") Check your {{site.data.keyword.cloud_notm}} classic infrastructure roles. For more information, see [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-access-creds#understand_infra).
 {: shortdesc}
 
-![VPC infrastructure provider icon.](images/icon-vpc-2.svg) VPC infrastructure permissions are managed with [IAM platform and service access roles](#checking-iam).
+![VPC](../icons/vpc.svg "VPC") VPC infrastructure permissions are managed with [IAM platform and service access roles](#checking-iam).
 {: note}
 
 If you are an administrator for the region and resource group, you might want to [check if the user's credentials are used for infrastructure permissions](#removing_check_infra), especially before removing the user.
