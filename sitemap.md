@@ -209,6 +209,10 @@ subcollection: containers
 
 * [May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may22)
 
+    * [9 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may0922)
+
+        * Worker node fix pack
+
     * [6 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may0622)
 
         * {{site.data.keyword.cos_full_notm}} plug-in
