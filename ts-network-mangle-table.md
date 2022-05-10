@@ -13,6 +13,7 @@ content-type: troubleshoot
 
 {{site.data.keyword.attribute-definition-list}}
 
+
 # Why are certain packets dropped on the public VLAN?
 {: #mangle-table}
 {: support}

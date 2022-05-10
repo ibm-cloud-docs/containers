@@ -18,6 +18,7 @@ completion-time: 30m
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Creating a cluster in your Virtual Private Cloud (VPC)
 {: #vpc_ks_tutorial}
 {: toc-content-type="tutorial"}

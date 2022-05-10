@@ -13,6 +13,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Deploying Kubernetes-native apps in clusters
 {: #deploy_app}
 

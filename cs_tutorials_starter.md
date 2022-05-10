@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-02-18"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes
 
@@ -16,6 +16,7 @@ completion-time: 45m
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Deploy a starter kit app to a Kubernetes cluster

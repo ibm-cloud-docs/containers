@@ -15,6 +15,7 @@ content-type: troubleshoot
 
 
 
+
 # Why does no Ingress subdomain exist after cluster creation?
 {: #ingress_subdomain}
 {: troubleshoot}

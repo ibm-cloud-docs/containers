@@ -13,6 +13,7 @@ content-type: troubleshoot
 
 {{site.data.keyword.attribute-definition-list}}
 
+
 # Why can't I upgrade to version 1.12 of the managed Istio add-on?
 {: #istio_control_plane}
 {: support}

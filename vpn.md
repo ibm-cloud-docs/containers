@@ -14,6 +14,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Setting up classic VPN connectivity
 {: #vpn}
 

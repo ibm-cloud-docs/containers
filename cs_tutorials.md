@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-03-09"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes
 
@@ -16,6 +16,7 @@ completion-time: 60m
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Creating Kubernetes clusters

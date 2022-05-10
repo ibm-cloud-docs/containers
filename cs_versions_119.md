@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-04"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, 1.19, versions, update, upgrade
 
@@ -15,6 +15,7 @@ subcollection: containers
 {: #cs_versions_119}
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 Review information about version 1.19 of {{site.data.keyword.containerlong}}, released 13 Oct 2020.
 {: shortdesc}

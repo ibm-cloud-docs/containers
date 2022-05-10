@@ -13,6 +13,7 @@ content-type: troubleshoot
 
 {{site.data.keyword.attribute-definition-list}}
 
+
 # Classic clusters: Why does enabling Ingress ALBs result in subnet errors?
 {: #cs_alb_subnet}
 {: support}

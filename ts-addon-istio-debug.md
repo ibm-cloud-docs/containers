@@ -14,6 +14,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Debugging Istio
 {: #istio_debug_tool}
 {: support}

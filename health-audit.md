@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-04-26"
+lastupdated: "2022-05-09"
 
 keywords: kubernetes, logmet, logs, metrics, audit, events
 
@@ -13,6 +13,7 @@ subcollection: containers
 
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Reviewing service, API server, and worker node logs
@@ -374,4 +375,5 @@ See [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/d
 {: #audit-service}
 
 By default, {{site.data.keyword.containerlong_notm}} generates and sends events to {{site.data.keyword.at_full_notm}}. To see these events, you must create an {{site.data.keyword.at_full_notm}} instance. For more information, see [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events).
+
 

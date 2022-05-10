@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-04"
+lastupdated: "2022-05-06"
 
 keywords: kubernetes, istio, add-on
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 # Istio add-on version changelog
 {: #istio-changelog}
@@ -126,7 +127,7 @@ If you want to upgrade from Istio minor version 1.11 to version 1.12 and your Is
 {: important}
 
 ### Changelog for 1.12.6, released 19 April 2022
-{: #1206}
+{: #1126}
 
 Review the changes that are included in version 1.12.6 of the managed Istio add-on.
 {: shortdesc}
@@ -214,7 +215,7 @@ Updates in this version
 :   See the Istio release notes for [Istio 1.12.3](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.3/.){: external}.
 
 ### Change log for 1.12.2, released 03 February 2022
-{: #1202}
+{: #1122}
 
 Review the changes that are included in version 1.12.2 of the managed Istio add-on.
 {: shortdesc}
@@ -246,7 +247,7 @@ Updates in this version
 :   See the Istio release notes for [Istio 1.12.1](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.1/){: external}. 
 
 ### Change log for 1.12.0, released 08 December 2021
-{: #1200}
+{: #1120}
 
 Previous version
 :   1.11.4

@@ -12,6 +12,7 @@ subcollection: containers
 
 {{site.data.keyword.attribute-definition-list}}
 
+
 # Creating and managing dedicated hosts on VPC Gen 2 infrastructure
 {: #dedicated-hosts}
 

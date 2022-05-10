@@ -13,6 +13,7 @@ content-type: troubleshoot
 
 {{site.data.keyword.attribute-definition-list}}
 
+
 # Why does ALB secret creation or deletion fail?
 {: #cs_albsecret_fails}
 {: support}

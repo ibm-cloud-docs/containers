@@ -13,6 +13,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
 # Architecture and dependencies of the service
 {: #service-arch}
 
