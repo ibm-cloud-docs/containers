@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-10"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -42,6 +42,22 @@ Review the version 1.23 change log.
 
 
 
+
+
+### Change log for worker node fix pack 1.23.6_1529, released 09 May 2022
+{: #1236_1529}
+
+The following table shows the changes that are in the worker node fix pack 1.23.6_1529. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | N/A | N/A | Worker node package updates for [CVE-2021-36084](https://nvd.nist.gov/vuln/detail/CVE-2021-36084){: external}, [CVE-2021-36085](https://nvd.nist.gov/vuln/detail/CVE-2021-36085){: external}, [CVE-2021-36086](https://nvd.nist.gov/vuln/detail/CVE-2021-36086){: external}, [CVE-2021-36087](https://nvd.nist.gov/vuln/detail/CVE-2021-36087){: external}, [CVE-2022-1292](https://nvd.nist.gov/vuln/detail/CVE-2022-1292){: external}, [CVE-2022-22576](https://nvd.nist.gov/vuln/detail/CVE-2022-22576){: external}, [CVE-2022-27774](https://nvd.nist.gov/vuln/detail/CVE-2022-27774){: external}, [CVE-2022-27775](https://nvd.nist.gov/vuln/detail/CVE-2022-27775){: external}, [CVE-2022-27776](https://nvd.nist.gov/vuln/detail/CVE-2022-27776){: external}, [CVE-2022-29799](https://nvd.nist.gov/vuln/detail/CVE-2022-29799){: external}, [CVE-2022-29800](https://nvd.nist.gov/vuln/detail/CVE-2022-29800){: external}. |
+| Kubernetes | N/A | N/A | N/A |
+| Haproxy | f53b22 | 36b030 | [CVE-2022-1271](https://nvd.nist.gov/vuln/detail/CVE-2022-1271){: external}, [CVE-2022-1154](https://nvd.nist.gov/vuln/detail/CVE-2022-1154){: external}, [CVE-2018-25032](https://nvd.nist.gov/vuln/detail/CVE-2018-25032){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.23.6_1528" caption-side="top"}
+
 ### Change log for master fix pack 1.23.6_1527, released 26 April 2022
 {: #1236_1527}
 
@@ -65,6 +81,8 @@ The following table shows the changes that are in the master fix pack 1.23.6_152
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.23.5_1525" caption-side="top"}
 
+
+
 ### Change log for worker node fix pack 1.23.6_1528, released 25 April 2022
 {: #1236_1528}
 
@@ -77,6 +95,8 @@ The following table shows the changes that are in the master fix pack 1.23.6_152
 | Kubernetes | v1.23.5 | v1.23.6 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.6){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.23.5_1526" caption-side="top"}
+
+
 
 
 
@@ -96,6 +116,8 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 
 
 
+
+
 ### Change log for master fix pack 1.23.5_1525, released 6 April 2022
 {: #1223_1525}
 
@@ -104,6 +126,8 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1865 | 1899 | Revert setting gratuitous arp on LBv1. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.23.5_1523" caption-side="top"}
+
+
 
 
 
@@ -132,6 +156,8 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 
 
 
+
+
 ### Change log for worker node fix pack 1.23.5_1524, released 28 March 2022
 {: #1235_1524}
 
@@ -145,6 +171,8 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 
 
 
+
+
 ### Change log for worker node fix pack 1.23.4_1522, released 14 March 2022
 {: #1234_1522}
 
@@ -154,6 +182,8 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 | Ubuntu 18.04 packages | 4.15.0-169-generic | 4.15.0-171-generic | Kernel and package updates for [CVE-2016-10228](https://nvd.nist.gov/vuln/detail/CVE-2016-10228){: external}, [CVE-2019-25013](https://nvd.nist.gov/vuln/detail/CVE-2019-25013){: external}, [CVE-2020-27618](https://nvd.nist.gov/vuln/detail/CVE-2020-27618){: external}, [CVE-2020-29562](https://nvd.nist.gov/vuln/detail/CVE-2020-29562){: external}, [CVE-2020-6096](https://nvd.nist.gov/vuln/detail/CVE-2020-6096){: external}, [CVE-2021-3326](https://nvd.nist.gov/vuln/detail/CVE-2021-3326){: external}, [CVE-2021-35942](https://nvd.nist.gov/vuln/detail/CVE-2021-35942){: external}, [CVE-2021-3999](https://nvd.nist.gov/vuln/detail/CVE-2021-3999){: external}, [CVE-2022-0001](https://nvd.nist.gov/vuln/detail/CVE-2022-0001){: external}, [CVE-2022-23218](https://nvd.nist.gov/vuln/detail/CVE-2022-23218){: external}, [CVE-2022-23219](https://nvd.nist.gov/vuln/detail/CVE-2022-23219){: external}, [CVE-2022-25313](https://nvd.nist.gov/vuln/detail/CVE-2022-25313){: external}, [CVE-2022-25314](https://nvd.nist.gov/vuln/detail/CVE-2022-25314){: external}, [CVE-2022-25315](https://nvd.nist.gov/vuln/detail/CVE-2022-25315){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.23.4_1521" caption-side="top"}
+
+
 
 
 
@@ -177,6 +207,8 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 
 
 
+
+
 ### Change log for worker node fix pack 1.23.4_1521, released 28 February 2022
 {: #1234_1521}
 
@@ -191,6 +223,8 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 
 
 
+
+
 ### Change log for worker node fix pack 1.23.3_1519, released 14 February 2022
 {: #1233_1519}
 
@@ -200,6 +234,8 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 | HA proxy | d38fa1 | f6a2b3 | [CVE-2021-3521](https://nvd.nist.gov/vuln/detail/CVE-2021-3521){: external}   [CVE-2021-4122](https://nvd.nist.gov/vuln/detail/CVE-2021-4122){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.23.2_1517" caption-side="top"}
+
+
 
 
 
