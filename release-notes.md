@@ -467,7 +467,7 @@ Deprecated and unsupported Kubernetes versions
 {: release-note}
 
 Istio add-on
-:   [Version `1.12.2`](/docs/containers?topic=containers-istio-changelog#1202) of the managed Istio add-on is available. 
+:   [Version `1.12.2`](/docs/containers?topic=containers-istio-changelog#1122) of the managed Istio add-on is available. 
 
 
 
