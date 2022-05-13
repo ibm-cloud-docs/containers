@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-13"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -46,7 +46,7 @@ To get host access to worker nodes for debugging and troubleshooting purposes, r
 Use the `kubectl debug node` command to deploy a pod with a privileged `securityContext` to a worker node that you want to troubleshoot.
 {: shortdesc}
 
-The debug pod is deployed with an interactive shell so that you can access the worker node immediately after the pod is created. For more information about how the `kubectl debug node` command works, see [](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#debug){: external}{: external}.
+The debug pod is deployed with an interactive shell so that you can access the worker node immediately after the pod is created. For more information about how the `kubectl debug node` command works, see [**`debug`** command in Kubernetes reference](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#debug){: external}{: external}.
 
 1. Get the name of the worker node that you want to access. The worker node name is its private IP address.
     ```sh
