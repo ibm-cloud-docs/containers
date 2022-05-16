@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-16"
 
 keywords: kubernetes, nginx, multiple ingress controllers, byo controller
 
@@ -27,6 +27,9 @@ Looking to use the community Kubernetes implementation of the NGINX Ingress cont
 
 If you choose to bring your own Ingress controller, IBM does not provide support for your Ingress deployment. You are responsible for configuring, updating, and managing your Ingress system. The following sections help you get started, but you are responsible for any changes that you must make to the steps.
 {: important}
+
+DNS microservice updates are asynchronous and might take several minutes to apply. Note that if you run an `ibmcloud ks nlb-dns` command and receive a 200 confirmation message, you might still have to wait for your changes to be implemented. To check the status of your subdomain, run `ibmcloud ks nlb-dns ls` and find the `Status` column in the output.
+{: tip}
 
 ## Classic clusters: Exposing your Ingress controller by creating an NLB and a hostname
 {: #user_managed_nlb}
@@ -101,7 +104,6 @@ In classic clusters, bringing your own Ingress controller is supported only for 
 
 If you plan to continue to use IBM-provided ALBs concurrently with your custom Ingress controller in one cluster, you must create a new DNS hostname.
 {: shortdesc}
-
 
 1. Register the NLB IP address with a DNS hostname.
 
