@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-16"
 
 keywords: kubernetes
 
@@ -47,7 +47,7 @@ Review the options to debug your clusters and find the root causes for failures.
 
 1. Start [debugging the worker nodes](/docs/containers?topic=containers-debug_worker_nodes).
 
-1. Review the site map for additional [troubleshooting information](/docs/containers?topic=openshift-sitemap#sitemap_troubleshooting).
+1. Review the site map for additional [troubleshooting information](/docs/containers?topic=containers-cs_sitemap#sitemap_troubleshooting).
 
 
 
