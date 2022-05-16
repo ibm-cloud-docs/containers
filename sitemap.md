@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-05-12"
+lastupdated: "2022-05-16"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may22)
+
+    * [16 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may1622)
+
+        * Cluster autoscaler add-on
 
     * [12 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may1222)
 
@@ -7255,11 +7259,15 @@ subcollection: containers
 
 * [Version 1.1.0](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
 
+    * [Change log for patch update 1.1.0_615, released 16 May 2022](/docs/containers?topic=containers-ca_changelog#110615_ca)
+
     * [Change log for patch update 1.1.0_475, released 30 March 2022](/docs/containers?topic=containers-ca_changelog#110475_ca)
 
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
 
 * [Version 1.0.5](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
+
+    * [Change log for patch update 1.0.5_628, released 16 May 2022](/docs/containers?topic=containers-ca_changelog#105628_ca)
 
     * [Change log for patch update 1.0.5_415, released 28 February 2022](/docs/containers?topic=containers-ca_changelog#104415_ca)
 
