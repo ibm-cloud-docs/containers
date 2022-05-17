@@ -453,6 +453,7 @@ toc:
                     - ts-lb-tainted-nodes.md
                     - ts-lb-vpc-app.md
                     - ts-lb-vpc-no-ips.md
+                    - ts-lb-sync-failed.md
               - topicgroup:
                   label: Ingress
                   topics:

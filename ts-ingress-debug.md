@@ -55,7 +55,7 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
 
 3. On the Diagnostics and Debug Tool card, click **Install**.
 
-4. In the dialog box, click **Install**. Note that it can take a few minutes for the add-on to be installed. <p class="tip">To resolve some common issues that you might encounter during the add-on deployment, see [Reviewing add-on state and statuses](/docs/containers?topic=containers-debug_addons).</p>
+4. In the dialog box, click **Install**. Note that it can take a few minutes for the add-on to be installed. To resolve some common issues that you might encounter during the add-on deployment, see [Reviewing add-on state and statuses](/docs/containers?topic=containers-debug_addons).</p>
 
 5. On the Diagnostics and Debug Tool card, click **Dashboard**.
 
@@ -64,7 +64,7 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
 7. Click **Run**.
 
 8. Check the results of each test.
-    * If any test fails, click the information icon next to the test's name in the left-hand column for information about how to resolve the issue.
+    * If any test fails, click the information icon next to the test's name in the left column for information about how to resolve the issue.
     * You can also use the results of tests that only gather information while you debug your Ingress service in the following sections.
 
 ## Step 3: Check for error messages in your Ingress deployment and the ALB pod logs
@@ -147,13 +147,13 @@ Start by checking for error messages in the Ingress resource deployment events a
         ```
         {: pre}
 
-    2. Get the logs for the `nginx-ingress` container on each ALB pod.
+    1. Get the logs for the `nginx-ingress` container on each ALB pod.
         ```sh
         kubectl logs <ingress_pod_ID> nginx-ingress -n kube-system
         ```
         {: pre}
 
-    2. Look for error messages in the ALB logs.
+    1. Look for error messages in the ALB logs.
 
 ## Step 4: Ping the ALB subdomain and public IP addresses
 {: #ping}
@@ -182,9 +182,9 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
 
 2. Verify that your ALB IP addresses are reachable by the ALB health check.
     
-    * ![Classic](../icons/classic.svg "Classic") **Classic**: If you use Calico pre-DNAT network policies or another custom firewall to block incoming traffic to your cluster, you must allow inbound access on port 80 from the Kubernetes control plane and Akamai's IPv4 IP addresses to the IP addresses of your ALBs so that the Kubernetes control plane can check the health of your ALBs. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALB IP addresses from [Akamai's source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} on port 80 and the [control plane subnets for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}.
+    * ![Classic](../icons/classic.svg "Classic") **Classic**: If you use Calico pre-DNAT network policies or another custom firewall to block incoming traffic to your cluster, you must allow inbound access on port 80 or 443 from the Kubernetes control plane and Akamai's IPv4 IP addresses to the IP addresses of your ALBs so that the Kubernetes control plane can check the health of your ALBs. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALB IP addresses from [Akamai's source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} on port 80 and the [control plane subnets for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}.
     
-    * ![VPC](../icons/vpc.svg "VPC") **VPC**: If you set up [VPC security groups](/docs/openshift?topic=openshift-vpc-security-group) or [VPC access control lists (ACLs)](/docs/openshift?topic=openshift-vpc-acls) to secure your cluster network, ensure that you create the rules to allow the necessary traffic from the Kubernetes control plane IP addresses. Alternatively, to allow the inbound traffic for ALB healthchecks, you can create one rule to allow all incoming traffic on port 80.
+    * ![VPC](../icons/vpc.svg "VPC") **VPC**: If you have a custom security group on the VPC LBaaS (LoadBalancer-as-a-Service) instances for the cluster ingress, ensure that the security group rules allow the necessary health-check traffic from the Kubernetes [control plane IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external} to port 80 or 443. Alternatively, you can allow all ingress traffic on either port 80 or 443.
 
 3. Check the health of your ALB IPs (classic) or hostname (VPC).
 

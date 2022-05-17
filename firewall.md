@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-17"
 
 keywords: kubernetes, firewall, vyatta, ips
 
@@ -246,6 +246,9 @@ ibmcloud ks worker ls --cluster <cluster_name_or_ID>
 
 To allow worker nodes to communicate with the cluster master over the public cloud service endpoint, allow outgoing network traffic from the source *<each_worker_node_publicIP>* to the destination TCP/UDP port range 30000-32767 and port 443, and the following IP addresses and network groups.
 
+This table is moving. For the latest IP lists and continued updates, see the public network isolation folder in the `IBM/kube-samples` [repo](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/public-network-isolation){: external}. You can **Watch** pull requests in the repo for updates.
+{: important}
+
 - `TCP/UDP port range 30000-32767, port 443 FROM <each_worker_node_publicIP> TO <public_IPs>`
 - Replace *<public_IPs>* with the public IP addresses of the region that your cluster is located.
 
@@ -348,6 +351,9 @@ Before you begin
 {: #firewall_private_worker}
 
 To allow worker nodes to communicate with the cluster master over the private cloud service endpoint, allow outgoing network traffic from the source *<each_worker_node_privateIP>* to the destination TCP/UDP port range 30000-32767 and port 443, and the following IP addresses and network groups.
+
+This table is moving. For the latest IP lists and continued updates, see the private network isolation folder in the `IBM/kube-samples` [repo](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation){: external}. You can **Watch** pull requests in the repo for updates.
+{: important}
 
 - `TCP/UDP port range 30000-32767, port 443 FROM <each_worker_node_privateIP> TO <private_IPs>`
 - Replace *<private_IPs>* with the private IP addresses of the region where your cluster is located.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-05-16"
+lastupdated: "2022-05-17"
 
 keywords: containers
 subcollection: containers
@@ -4588,6 +4588,10 @@ subcollection: containers
 
 * [Creating raw, unformatted, and unmounted block storage for VPC and non-SDS classic worker nodes](/docs/containers?topic=containers-portworx#create_block_storage)
 
+    * [Classic clusters](/docs/containers?topic=containers-portworx#px-create-classic-volumes)
+
+    * [VPC clusters](/docs/containers?topic=containers-portworx#vpc-clusters)
+
 * [Private only clusters: Copying the `ImagePullSecret` to the `kube-system` namespace from the Kubernetes dashboard](/docs/containers?topic=containers-portworx#vpc-image-pull-px)
 
 * [Setting up a key-value store for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
@@ -8123,6 +8127,8 @@ subcollection: containers
 [VPC clusters: Why can't my app connect via load balancer?](/docs/containers?topic=containers-vpc_ts_lb#vpc_ts_lb)
 
 [VPC clusters: Why does a Kubernetes `LoadBalancer` service fail with no IPs?](/docs/containers?topic=containers-vpc_no_lb#vpc_no_lb)
+
+[Why do I see `SyncLoadBalancerFailed` errors when creating a VPC cluster?](/docs/containers?topic=containers-ts-loadbalancer-sync-failed#ts-loadbalancer-sync-failed)
 
 
 ### Ingress
