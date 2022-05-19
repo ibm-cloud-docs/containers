@@ -127,7 +127,7 @@ If you want to upgrade from Istio minor version 1.11 to version 1.12 and your Is
 {: important}
 
 ### Changelog for 1.12.7, released 19 May 2022
-{: 1127}
+{: #1127}
 
 Review the changes that are included in version 1.12.7 of the managed Istio add-on.
 {: shortdesc}
