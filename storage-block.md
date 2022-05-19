@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-18"
 
 keywords: kubernetes
 
@@ -359,17 +359,17 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-4. Upgrade the {{site.data.keyword.cloud_notm}} Block Storage plug-in to the latest version.
+4. Upgrade the {{site.data.keyword.cloud_notm}} Block Storage plug-in to the latest version. Include the release name and the namespace that you retrieved earlier.
 
     ```sh
-    helm upgrade <name> iks-charts/ibmcloud-block-storage-plugin -n kube-system
+    helm upgrade RELEASE-NAME iks-charts/ibmcloud-block-storage-plugin -n NAMESPACE
     ```
     {: pre}
 
 5. Optional: When you update the plug-in, the `default` storage class is unset. If you want to set the default storage class to a storage class of your choice, run the following command.
 
     ```sh
-    kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+    kubectl patch storageclass STORAGECLASS -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
     ```
     {: pre}
 
@@ -406,7 +406,7 @@ To remove the plug-in:
 2. Delete the {{site.data.keyword.cloud_notm}} Block Storage plug-in.
 
     ```sh
-    helm uninstall <name> -n kube-system
+    helm uninstall NAME -n kube-system
     ```
     {: pre}
 
@@ -468,7 +468,7 @@ Make sure to choose your storage configuration carefully to have enough capacity
 2. Review the configuration of a storage class.
 
     ```sh
-    kubectl describe storageclass <storageclass_name>
+    kubectl describe storageclass STORAGECLASS
     ```
     {: pre}
 

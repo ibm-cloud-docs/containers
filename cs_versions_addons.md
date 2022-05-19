@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-19"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -42,6 +42,11 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ## Version 1.2.0
 {: #1_2_0}
 
+### Version 1.2.0_2251_iks (default), released 19 May 2022
+{: #1.2.0_2251_iks}
+
+Resolves [CVE-2022-29824](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29824){: external}
+
 ### Version 1.2.0_2147_iks, released 4 May 2022
 {: #1.2.0_2147_iks}
 
@@ -65,7 +70,12 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following table for a summary of changes for each build of version 1.1.2 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
-### Version 1.1.2_2146_iks (default), released on 4 May 2022
+### Version 1.1.2_2252_iks, released on 19 May 2022
+{: #1.1.2_2252_iks}
+
+Resolves [CVE-2022-29824](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29824){: external}
+
+### Version 1.1.2_2146_iks, released on 4 May 2022
 {: #1.1.2_2146_iks}
 
 - [CVE-2022-22576](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22576){: external}
@@ -185,6 +195,11 @@ Initial release of version 1.0.0.
 
 For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following sections for a summary of changes for each build of version 0.49.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
+
+### Version 0.49.3_2253_iks, released on 19 May 2022
+{: #0.49.3_2253_iks}
+
+Resolves [CVE-2022-29824](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29824){: external}
 
 ### Version 0.49.3_2145_iks, released on 4 May 2022
 {: #0.49.3_2145_iks}
