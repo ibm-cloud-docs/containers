@@ -211,6 +211,8 @@ subcollection: containers
 
     * [19 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may1922)
 
+        * Istio add-on
+
         * Ingress ALB change log updates
 
     * [16 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may1622)
@@ -7116,6 +7118,8 @@ subcollection: containers
     * [Change log for 1.13.1, released March 9th, 2021](/docs/containers?topic=containers-istio-changelog#1131)
 
 * [Version 1.12](/docs/containers?topic=containers-istio-changelog#v112)
+
+    * [Changelog for 1.12.7, released 19 May 2022](/docs/containers?topic=containers-istio-changelog#changelog-for-1127,-released-19-may-2022)
 
     * [Changelog for 1.12.6, released 19 April 2022](/docs/containers?topic=containers-istio-changelog#1126)
 

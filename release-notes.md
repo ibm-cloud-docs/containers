@@ -30,6 +30,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ### 19 May 2022
 {: #containers-may1922}
 
+Istio add-on
+:   Version [`1.12.7`](/docs/containers?topic=containers-istio-changelog#1127) is available.
+
 Ingress ALB change log updates
 :   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for versions `1.2.0_2251_iks`, `1.1.2_2252_iks`, and `0.49.3_2253_iks`.
 
