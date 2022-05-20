@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-20"
 
 keywords: kubernetes, 1.22, versions, update, upgrade
 
@@ -57,6 +57,9 @@ This information summarizes updates that are likely to have and impact on deploy
 
 The following table shows the actions that you must take before you update the Kubernetes master.
 {: shortdesc}
+
+Review the [{{site.data.keyword.containerlong_notm}} is affected by an endpoint resource security design flaw in Kubernetes (CVE-2021-25740)](https://www.ibm.com/support/pages/node/6574821){: external} security bulletin before updating.
+{: important}
 
 | Type | Description|
 | --- | --- |
