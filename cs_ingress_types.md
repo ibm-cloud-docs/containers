@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-20"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -997,6 +997,7 @@ Before you begin, verify that you have completed the following {{site.data.keywo
     ibmcloud ks ingress secret ls --cluster <cluster_name_or_id>
     ```
     {: pre}
+    
 4. [Enabled service-to-service between your cluster and {{site.data.keyword.secrets-manager_short}}](/docs/secrets-manager?topic=secrets-manager-integrations#create-authorization).
 
 To remove the instance:
@@ -1098,7 +1099,7 @@ When you set a new default {{site.data.keyword.secrets-manager_short}} instance,
     
 
 #### Removing a {{site.data.keyword.secrets-manager_short}} instance as the default instance
-{: secret-mgr-remove-default}
+{: #secret-mgr-remove-default}
 
 To remove a {{site.data.keyword.secrets-manager_short}} instance as the default instance of a cluster, run the following command. Note that if no default instance is set, your secrets are only written directly to the cluster and are not uploaded to any {{site.data.keyword.secrets-manager_short}} instance.
 

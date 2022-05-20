@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-16"
+lastupdated: "2022-05-20"
 
 keywords: kubernetes
 
@@ -102,10 +102,10 @@ ibmcloud ks cluster addon disable alb-oauth-proxy --cluster CLUSTER
 
 
 **Example**:
-    ```sh
-    ibmcloud ks cluster addon disable alb-oauth-proxy --cluster my_cluster
-    ```
-    {: pre}
+```sh
+ibmcloud ks cluster addon disable alb-oauth-proxy --cluster my_cluster
+```
+{: pre}
 
 #### `ibmcloud ks cluster addon disable debug-tool`
 {: #cs_cluster_addon_disable_debug}
@@ -314,10 +314,10 @@ ibmcloud ks cluster addon enable alb-oauth-proxy --cluster CLUSTER [--version VE
 
 
 **Example**:
-    ```sh
-    ibmcloud ks cluster addon enable alb-oauth-proxy --cluster my_cluster
-    ```
-    {: pre}
+```sh
+ibmcloud ks cluster addon enable alb-oauth-proxy --cluster my_cluster
+```
+{: pre}
 
 #### `ibmcloud ks cluster addon enable debug-tool`
 {: #cs_cluster_addon_enable_debug}
@@ -346,10 +346,10 @@ ibmcloud ks cluster addon enable debug-tool --cluster CLUSTER [--version VERSION
 
 
 **Example**:
-    ```sh
-    ibmcloud ks cluster addon enable debug-tool --cluster my_cluster
-    ```
-    {: pre}
+```sh
+ibmcloud ks cluster addon enable debug-tool --cluster my_cluster
+```
+{: pre}
 
 #### `ibmcloud ks cluster addon enable istio`
 {: #cs_cluster_addon_enable_istio}
@@ -1085,10 +1085,10 @@ ibmcloud ks cluster image-security disable --cluster CLUSTER [-q]
 
 
 **Example**:
-    ```sh
-    ibmcloud ks cluster image-security disable --cluster my_cluster
-    ```
-    {: pre}
+```sh
+ibmcloud ks cluster image-security disable --cluster my_cluster
+```
+{: pre}
 
 ### `ibmcloud ks cluster image-security enable`
 {: #cs-image-security-enable}
@@ -1120,10 +1120,10 @@ ibmcloud ks cluster image-security enable --cluster CLUSTER [-f] [-q]
 
 
 **Example**:
-    ```sh
-    ibmcloud ks cluster image-security enable --cluster my_cluster
-    ```
-    {: pre}
+```sh
+ibmcloud ks cluster image-security enable --cluster my_cluster
+```
+{: pre}
 
 ### `ibmcloud ks cluster ls`
 {: #cs_clusters}
