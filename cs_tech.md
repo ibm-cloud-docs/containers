@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-23"
 
 keywords: kubernetes, docker, containers
 
@@ -174,7 +174,7 @@ For each cluster that you create with {{site.data.keyword.containerlong_notm}}, 
 |-------|----------|
 |Personal information|The email address of the {{site.data.keyword.cloud_notm}} account that created the cluster.|
 |Sensitive information|  - The TLS certificate and secret that is used for the assigned Ingress subdomain.  \n - The certificate authority that is used for the TLS certificate.  \n - The certificate authority, private keys, and TLS certificates for the Kubernetes master components, including the Kubernetes API server, etcd data store, and VPN.  \n - A customer root key in {{site.data.keyword.keymanagementservicelong_notm}} for each {{site.data.keyword.cloud_notm}} account that is used to encrypt personal and sensitive information.|
-
+{: caption="Table 1. Information that is stored with IBM" caption-side="bottom"}
 
 ### How is my information stored and encrypted?
 {: #pi-storage}

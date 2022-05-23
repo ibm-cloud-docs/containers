@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-23"
 
 keywords: kubernetes, containers
 
@@ -60,13 +60,13 @@ Kubernetes provides security controls and limits access to protect these compone
 By default, Kubernetes requires every request to go through several stages before access to the API server is granted.
 
 Authentication
-: Validates the identity of a registered user or service account.
+:   Validates the identity of a registered user or service account.
 
 Authorization
-: Limits the permissions of authenticated users and service accounts to ensure that they can access and operate only the cluster components that you want them to.
+:   Limits the permissions of authenticated users and service accounts to ensure that they can access and operate only the cluster components that you want them to.
 
 Admission control
-: Validates or mutates requests before they are processed by the Kubernetes API server. Many Kubernetes features require admission controllers in order to properly function.
+:   Validates or mutates requests before they are processed by the Kubernetes API server. Many Kubernetes features require admission controllers in order to properly function.
 
 **What does {{site.data.keyword.containerlong_notm}} do to secure my Kubernetes API server and etcd data store?**
 
@@ -79,21 +79,21 @@ The following image shows the default cluster security settings that address aut
 Review the following security features for Kubernetes API server and etcd.
 
 Fully managed and dedicated Kubernetes master
-: Every cluster in {{site.data.keyword.containerlong_notm}} is controlled by a dedicated Kubernetes master that is managed by IBM in an IBM-owned {{site.data.keyword.cloud_notm}} account. The Kubernetes master is set up with the following dedicated components that are not shared with other IBM customers.
-  - **etcd data store:** Stores all Kubernetes resources of a cluster, such as `Services`, `Deployments`, and `Pods`. Kubernetes `ConfigMaps` and `Secrets` are app data that is stored as key value pairs so that they can be used by an app that runs in a pod. Data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. You can choose to enable encryption for your etcd data on the local disk of your Kubernetes master by [enabling {{site.data.keyword.keymanagementservicelong_notm}} encryption](/docs/containers?topic=containers-encryption#keyprotect) for your cluster. When etcd data is sent to a pod, data is encrypted via TLS to ensure data protection and integrity.
-  - **kube-apiserver:** Serves as the main entry point for all cluster management requests from the worker node to the Kubernetes master. The API server validates and processes requests that change the state of cluster resources, such as pods or services, and stores this state in the etcd data store.
-  - **kube-scheduler:** Decides where to deploy pods, considering the capacity and performance needs, hardware and software policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster.
-  - **kube-controller-manager:** Responsible for monitoring replica sets, and creating corresponding pods to achieve the specified state.
-  - **OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later):** {{site.data.keyword.containerlong_notm}}-specific component to provide secured network connectivity for all Kubernetes master to worker node communication. The OpenVPN or Konnectivity server works with the OpenVPN client or Konnectivity agent to securely connect the master to the worker node. This connection supports `apiserver proxy` requests to your pods and services, and `kubectl top`, `exec`, `attach`, and `logs` requests to the kubelet. The connection from the worker nodes to the master is automatically secured with TLS certificates.
+:   Every cluster in {{site.data.keyword.containerlong_notm}} is controlled by a dedicated Kubernetes master that is managed by IBM in an IBM-owned {{site.data.keyword.cloud_notm}} account. The Kubernetes master is set up with the following dedicated components that are not shared with other IBM customers.
+    - **etcd data store:** Stores all Kubernetes resources of a cluster, such as `Services`, `Deployments`, and `Pods`. Kubernetes `ConfigMaps` and `Secrets` are app data that is stored as key value pairs so that they can be used by an app that runs in a pod. Data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. You can choose to enable encryption for your etcd data on the local disk of your Kubernetes master by [enabling {{site.data.keyword.keymanagementservicelong_notm}} encryption](/docs/containers?topic=containers-encryption#keyprotect) for your cluster. When etcd data is sent to a pod, data is encrypted via TLS to ensure data protection and integrity.
+    - **kube-apiserver:** Serves as the main entry point for all cluster management requests from the worker node to the Kubernetes master. The API server validates and processes requests that change the state of cluster resources, such as pods or services, and stores this state in the etcd data store.
+    - **kube-scheduler:** Decides where to deploy pods, considering the capacity and performance needs, hardware and software policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster.
+    - **kube-controller-manager:** Responsible for monitoring replica sets, and creating corresponding pods to achieve the specified state.
+    - **OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later):** {{site.data.keyword.containerlong_notm}}-specific component to provide secured network connectivity for all Kubernetes master to worker node communication. The OpenVPN or Konnectivity server works with the OpenVPN client or Konnectivity agent to securely connect the master to the worker node. This connection supports `apiserver proxy` requests to your pods and services, and `kubectl top`, `exec`, `attach`, and `logs` requests to the kubelet. The connection from the worker nodes to the master is automatically secured with TLS certificates.
 
 Continuous monitoring by IBM Site Reliability Engineers (SREs)
-: The Kubernetes master, including all the master components, compute, networking, and storage resources are continuously monitored by IBM Site Reliability Engineers (SREs). The SREs apply the latest security standards, detect and remediate malicious activities, and work to ensure reliability and availability of {{site.data.keyword.containerlong_notm}}.
+:   The Kubernetes master, including all the master components, compute, networking, and storage resources are continuously monitored by IBM Site Reliability Engineers (SREs). The SREs apply the latest security standards, detect and remediate malicious activities, and work to ensure reliability and availability of {{site.data.keyword.containerlong_notm}}.
 
 CIS Kubernetes master benchmark
-: To configure {{site.data.keyword.containerlong_notm}}, IBM engineers follow relevant cybersecurity practices from the Kubernetes master benchmark that is published by the [Center of Internet Security (CIS)](https://www.cisecurity.org/benchmark/kubernetes/){: external}. The cluster master and all worker nodes are deployed with images that meet the benchmark.
+:   To configure {{site.data.keyword.containerlong_notm}}, IBM engineers follow relevant cybersecurity practices from the Kubernetes master benchmark that is published by the [Center of Internet Security (CIS)](https://www.cisecurity.org/benchmark/kubernetes/){: external}. The cluster master and all worker nodes are deployed with images that meet the benchmark.
 
 Secure communication via TLS
-: To use {{site.data.keyword.containerlong_notm}}, you must authenticate with the service by using your credentials. When you are authenticated, {{site.data.keyword.containerlong_notm}} generates TLS certificates that encrypt the communication to and from the Kubernetes API server and etcd data store to ensure a secure end-to-end communication between the worker nodes and the Kubernetes master. These certificates are never shared across clusters or across Kubernetes master components.
+:   To use {{site.data.keyword.containerlong_notm}}, you must authenticate with the service by using your credentials. When you are authenticated, {{site.data.keyword.containerlong_notm}} generates TLS certificates that encrypt the communication to and from the Kubernetes API server and etcd data store to ensure a secure end-to-end communication between the worker nodes and the Kubernetes master. These certificates are never shared across clusters or across Kubernetes master components.
 
     Need to revoke existing certificates and create new certificates for your cluster? Check out [Rotating CA certificates in your cluster](#cert-rotate).
     {: tip}
@@ -103,7 +103,6 @@ OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version
 
 Fine-grained access control
 :   As the account administrator you can [grant access to other users for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-users#users) by using {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM). {{site.data.keyword.cloud_notm}} IAM provides secure authentication with the {{site.data.keyword.cloud_notm}} platform, {{site.data.keyword.containerlong_notm}}, and all the resources in your account. Setting up proper user roles and permissions is key to limiting who can access your resources and to limiting the damage that a user can do when legitimate permissions are misused. You can select from the following pre-defined user roles that determine the set of actions that the user can perform: 
-    
     - **Platform access roles:** Determine the cluster and worker node management-related actions that a user can perform in {{site.data.keyword.containerlong_notm}}.  
     - **Service access roles:** Determine the [Kubernetes RBAC role](https://kubernetes.io/docs/reference/access-authn-authz/rbac/){: external} that is assigned to the user and the actions that a user can run against the Kubernetes API server. With RBAC roles, users can create Kubernetes resources, such as  app deployments, namespaces, or configmaps.  For more information about the corresponding RBAC roles that are assigned to a user and associated permissions, see [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service). 
     - **Classic infrastructure:** Enables access to your classic {{site.data.keyword.cloud_notm}} infrastructure resources. Example actions that are permitted by classic infrastructure roles are viewing the details of cluster worker node machines or editing networking and storage resources.
@@ -240,13 +239,12 @@ The image does not include components that ensure secure end-to-end communicatio
 
 
 CIS-compliant Linux image
-: Every worker node is set up with an Ubuntu operating system that implements the benchmarks that are published by the Center of Internet Security (CIS). The user or the owner of the machine can't change this operating system to another operating system. To review the current Ubuntu version, run `kubectl get nodes -o wide`. IBM works with internal and external security advisory teams to address potential security compliance vulnerabilities. Security updates and patches for the operating system are made available through {{site.data.keyword.containerlong_notm}} and must be installed by the user to keep the worker node secure.
-
-  {{site.data.keyword.containerlong_notm}} uses an Ubuntu Linux kernel for worker nodes. You can run containers based on any Linux distribution in {{site.data.keyword.containerlong_notm}}. Check with your container image vendor to verify that your container images can run on an Ubuntu kernel.
-  {: important}
+:   Every worker node is set up with an Ubuntu operating system that implements the benchmarks that are published by the Center of Internet Security (CIS). The user or the owner of the machine can't change this operating system to another operating system. To review the current Ubuntu version, run `kubectl get nodes -o wide`. IBM works with internal and external security advisory teams to address potential security compliance vulnerabilities. Security updates and patches for the operating system are made available through {{site.data.keyword.containerlong_notm}} and must be installed by the user to keep the worker node secure.
+    {{site.data.keyword.containerlong_notm}} uses an Ubuntu Linux kernel for worker nodes. You can run containers based on any Linux distribution in {{site.data.keyword.containerlong_notm}}. Check with your container image vendor to verify that your container images can run on an Ubuntu kernel.
+    {: important}
 
 Continuous monitoring by Site Reliability Engineers (SREs)
-: The image that is installed on your worker nodes is continuously monitored by IBM Site Reliability Engineers (SREs) to detect vulnerabilities and security compliance issues. To address vulnerabilities, SREs create security patches and fix packs for your worker nodes. Make sure to apply these patches when they are available to ensure a secure environment for your worker nodes and the apps that you run on top of them.
+:   The image that is installed on your worker nodes is continuously monitored by IBM Site Reliability Engineers (SREs) to detect vulnerabilities and security compliance issues. To address vulnerabilities, SREs create security patches and fix packs for your worker nodes. Make sure to apply these patches when they are available to ensure a secure environment for your worker nodes and the apps that you run on top of them.
 
 CIS Kubernetes worker node benchmark
 :   To configure {{site.data.keyword.containerlong_notm}}, IBM engineers follow relevant cybersecurity practices from the Kubernetes worker node benchmark that is published by the [Center of Internet Security (CIS)](https://www.cisecurity.org/benchmark/kubernetes/){: external}. You can review the compliance of worker nodes against [CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test) standards.
@@ -255,24 +253,23 @@ Compute isolation
 :   Worker nodes are dedicated to a cluster and don't host workloads of other clusters. When you create a standard classic cluster, you can choose to provision your worker nodes as [physical machines (bare metal) or as virtual machines](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) that run on shared or dedicated physical hardware. Worker nodes in a free classic cluster or in a standard VPC compute cluster can be provisioned as virtual machines on shared infrastructure only.</td>
 
 Option to deploy bare metal on classic</td>
-: If you create a standard classic cluster, you can choose to provision your worker nodes on bare metal physical servers (instead of virtual server instances). With bare metal machines, you have additional control over the compute host, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Bare metal servers are dedicated to you, with all its resources available for cluster usage.
+:   If you create a standard classic cluster, you can choose to provision your worker nodes on bare metal physical servers (instead of virtual server instances). With bare metal machines, you have additional control over the compute host, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Bare metal servers are dedicated to you, with all its resources available for cluster usage.
 
 Encrypted disks {: #encrypted_disk}
-: By default, every worker node is provisioned with two local SSD, AES 256-bit encrypted data partitions. The first partition contains the kernel image that is used to boot the worker node and is not encrypted. The second partition holds the container file system and is unlocked by using LUKS encryption keys. Each worker node in a cluster has its own unique LUKS encryption key, managed by {{site.data.keyword.containerlong_notm}}. When you create a cluster or add a worker node to an existing cluster, the keys are pulled securely and then discarded after the encrypted disk is unlocked.
-
-  Encryption can impact disk I/O performance. For workloads that require high-performance disk I/O, test a cluster with encryption both enabled and disabled to help you decide whether to turn off encryption.
-  {: note}
+:   By default, every worker node is provisioned with two local SSD, AES 256-bit encrypted data partitions. The first partition contains the kernel image that is used to boot the worker node and is not encrypted. The second partition holds the container file system and is unlocked by using LUKS encryption keys. Each worker node in a cluster has its own unique LUKS encryption key, managed by {{site.data.keyword.containerlong_notm}}. When you create a cluster or add a worker node to an existing cluster, the keys are pulled securely and then discarded after the encrypted disk is unlocked.
+    Encryption can impact disk I/O performance. For workloads that require high-performance disk I/O, test a cluster with encryption both enabled and disabled to help you decide whether to turn off encryption.
+    {: note}
 
 Expert AppArmor policies
-: Every worker node is set up with security and access policies that are enforced by [AppArmor](https://wiki.ubuntu.com/AppArmor){: external} profiles that are loaded into the worker node during bootstrapping. AppArmor profiles can't be changed by the user or owner of the machine. 
+:   Every worker node is set up with security and access policies that are enforced by [AppArmor](https://wiki.ubuntu.com/AppArmor){: external} profiles that are loaded into the worker node during bootstrapping. AppArmor profiles can't be changed by the user or owner of the machine. 
 
 SSH disabled
-: By default, SSH access is disabled on the worker node to protect your cluster from malicious attacks. When SSH access is disabled, access to the cluster is forced via the Kubernetes API server. The Kubernetes API server requires every request to be checked against the policies that are set in the authentication, authorization, and admission control module before the request is executed in the cluster.
-  
-  If you have a standard cluster and you want to install more features on your worker node, you can choose between the add-ons that are provided by {{site.data.keyword.containerlong_notm}} or use [Kubernetes daemon sets](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/){: external} for everything that you want to run on every worker node. For any one-time action that you must execute, use [Kubernetes jobs](https://kubernetes.io/docs/concepts/workloads/controllers/job/){: external}.
+:   By default, SSH access is disabled on the worker node to protect your cluster from malicious attacks. When SSH access is disabled, access to the cluster is forced via the Kubernetes API server. The Kubernetes API server requires every request to be checked against the policies that are set in the authentication, authorization, and admission control module before the request is executed in the cluster.
+:   If you have a standard cluster and you want to install more features on your worker node, you can choose between the add-ons that are provided by {{site.data.keyword.containerlong_notm}} or use [Kubernetes daemon sets](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/){: external} for everything that you want to run on every worker node. For any one-time action that you must execute, use [Kubernetes jobs](https://kubernetes.io/docs/concepts/workloads/controllers/job/){: external}.
 
 ## Network
 {: #network}
+
 The classic approach to protect a company's network is to set up a firewall and block any unwanted network traffic to your apps. While this is still true, research shows that many malicious attacks come from insiders or authorized users who misuse their assigned permissions.
 {: shortdesc}
 
@@ -287,6 +284,7 @@ To protect your network and limit the range of damage that a user can do when ac
 All containers are protected by [predefined Calico network policy settings](/docs/containers?topic=containers-network_policies#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked with the following exceptions:
 - **NodePort**: The [Kubernetes NodePort range](https://kubernetes.io/docs/concepts/services-networking/service/#nodeport){: external} is opened by default so that you can expose apps with [NodePort services](/docs/containers?topic=containers-nodeport). To block inbound network traffic on NodePorts in your cluster, see [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 - **IBM monitoring ports**: By default, IBM opens a few ports on your cluster so that network traffic can be monitored by IBM and for IBM to automatically install security updates for the Kubernetes master.
+
 Access from the Kubernetes master to the worker node's kubelet is secured by an OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later) tunnel. For more information, see the [{{site.data.keyword.containerlong_notm}} architecture](/docs/containers?topic=containers-service-arch).
 
 **What is network segmentation and how can I set it up for a cluster?**
@@ -490,14 +488,11 @@ Research shows that most malicious attacks leverage known software vulnerabiliti
 
 To protect your apps, consider to address the following areas:
 
-1. **Automate the build process and limit permissions**: 
-Automate the process to build your container image from your source code to eliminate source code variations and defects. By integrating the build process into your CI/CD pipeline, you can ensure that your image is scanned and built only if the image passes the security checks that you specified. To avoid that developers apply hot fixes to sensitive images, limit the number of people in your organization who have access to the build process.
+1. **Automate the build process and limit permissions**: Automate the process to build your container image from your source code to eliminate source code variations and defects. By integrating the build process into your CI/CD pipeline, you can ensure that your image is scanned and built only if the image passes the security checks that you specified. To avoid that developers apply hot fixes to sensitive images, limit the number of people in your organization who have access to the build process.
 
-2. **Scan images before they deploy into production:**
-Make sure to scan every image before you deploy a container from it. For example, if you use {{site.data.keyword.registrylong_notm}}, all images are automatically scanned for vulnerabilities when you push the image to your namespace. If vulnerabilities are found, consider eliminating the vulnerabilities or block deployment for those images. Find a person or team in your organization who is responsible for monitoring and removing vulnerabilities. Depending on your organizational structure, this person might be part of a security, operations, or deployment team. Enable [content trust](/docs/Registry?topic=Registry-registry_trustedcontent#registry_trustedcontent) so that images must be approved by a trusted signer before they can be pushed to the container registry. Then, [install the open source Portieris project](https://github.com/IBM/portieris){: external} admission controller to block container deployments from unsigned images.
+2. **Scan images before they deploy into production:**  Make sure to scan every image before you deploy a container from it. For example, if you use {{site.data.keyword.registrylong_notm}}, all images are automatically scanned for vulnerabilities when you push the image to your namespace. If vulnerabilities are found, consider eliminating the vulnerabilities or block deployment for those images. Find a person or team in your organization who is responsible for monitoring and removing vulnerabilities. Depending on your organizational structure, this person might be part of a security, operations, or deployment team. Enable [content trust](/docs/Registry?topic=Registry-registry_trustedcontent#registry_trustedcontent) so that images must be approved by a trusted signer before they can be pushed to the container registry. Then, [install the open source Portieris project](https://github.com/IBM/portieris){: external} admission controller to block container deployments from unsigned images.
 
-3. **Regularly scan running containers:**
-Even if you deployed a container from an image that passes the vulnerability check, the operating system or binaries that run in the container might get vulnerable over time. To protect your app, you must ensure that running containers are regularly scanned so that you can detect and remediate vulnerabilities. Depending on the app, to add extra security, you can establish a process that takes down vulnerable containers after they are detected.
+3. **Regularly scan running containers:**. Even if you deployed a container from an image that passes the vulnerability check, the operating system or binaries that run in the container might get vulnerable over time. To protect your app, you must ensure that running containers are regularly scanned so that you can detect and remediate vulnerabilities. Depending on the app, to add extra security, you can establish a process that takes down vulnerable containers after they are detected.
 
 **How can {{site.data.keyword.registrylong_notm}} help me to protect my images and deployment process?**  
 
@@ -539,8 +534,6 @@ For every namespace that you have in the cluster, make sure to set up proper [RB
 
 In a single-tenant cluster, you create one cluster for every group of people that must run workloads in a cluster. Usually, this team is responsible to manage the cluster and to properly configure and secure it. Multi-tenant clusters use multiple namespaces to isolate tenants and their workloads.
 
-<img src="images/cs_single_multitenant.png" width="600" alt="Single tenant vs. multi-tenant cluster" style="width:600px; border-style: none"/>
-
 ![Deciding between a single tenant or a multi-tenant cluster.](images/cs_single_multitenant.png "Single tenant vs. multi-tenant cluster"){: caption="Figure 1. Single tenant vs. multi-tenant cluster" caption-side="bottom"}
 
 Deciding between single-tenant and multi-tenant clusters depends on the number of teams that must run workloads in a cluster, their service requirements, the size of the service, and the level of isolation that you want to achieve for your workloads.
@@ -572,22 +565,20 @@ By default, every cluster enables the [Kubernetes pod security policy admission 
 **What else can I do to protect my container?**
 
 Limit the number of privileged containers
-: Containers run as a separate Linux process on the compute host that is isolated from other processes. Although users have root access inside the container, the permissions of this user are limited outside the container to protect other Linux processes, the host file system, and host devices. Some apps require access to the host file system or advanced permissions to run properly. You can run containers in privileged mode to allow the container the same access as the processes running on the compute host.
-
-  Keep in mind that privileged containers can cause huge damage to the cluster and the underlying compute host if they become compromised. Try to limit the number of containers that run in privileged mode and consider changing the configuration for your app so that the app can run without advanced permissions. If you want to block privileged containers from running in your cluster, consider setting up custom [pod security policies](/docs/containers?topic=containers-psp#customize_psp).
-  {: important}
+:   Containers run as a separate Linux process on the compute host that is isolated from other processes. Although users have root access inside the container, the permissions of this user are limited outside the container to protect other Linux processes, the host file system, and host devices. Some apps require access to the host file system or advanced permissions to run properly. You can run containers in privileged mode to allow the container the same access as the processes running on the compute host.
+:   Keep in mind that privileged containers can cause huge damage to the cluster and the underlying compute host if they become compromised. Try to limit the number of containers that run in privileged mode and consider changing the configuration for your app so that the app can run without advanced permissions. If you want to block privileged containers from running in your cluster, consider setting up custom [pod security policies](/docs/containers?topic=containers-psp#customize_psp).
+    {: important}
 
 Apply OS security settings to pods
-: You can add the [`securityContext` section](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external} to your pods to control the user ID and group ID that can run inside the container, or the user ID and group ID that owns the volume mount path. Setting a specific user ID helps facilitate a least privilege model. If the security context does not specify a user, Kubernetes automatically uses the user that is specified in the container image. 
-  
-    If you want to use `securityContext` to set the `runAsUser` user ID or `fsGroup` group ID, consider using block storage when you [create persistent storage](/docs/containers?topic=containers-block_storage#add_block). NFS storage does not support `fsGroup`, and `runAsUser`must be set at the container level, not the pod level.
+:   You can add the [`securityContext` section](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external} to your pods to control the user ID and group ID that can run inside the container, or the user ID and group ID that owns the volume mount path. Setting a specific user ID helps facilitate a least privilege model. If the security context does not specify a user, Kubernetes automatically uses the user that is specified in the container image. 
+:   If you want to use `securityContext` to set the `runAsUser` user ID or `fsGroup` group ID, consider using block storage when you [create persistent storage](/docs/containers?topic=containers-block_storage#add_block). NFS storage does not support `fsGroup`, and `runAsUser`must be set at the container level, not the pod level.
     {: tip}
 
 Set CPU and memory limits for containers
-: Every container requires a specific amount of CPU and memory to properly start and to continue to run. You can define [Kubernetes resource requests and resource limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/){: external} for your containers or pods to limit the amount of CPU and memory that they can consume. If no limits for CPU and memory are set, and the container is busy, the container uses all the resources that are available. This high consumption of resources might affect other containers on the worker node that don't have enough resources to properly start or run, and puts your worker node at risk for denial-of-service attacks.
+:   Every container requires a specific amount of CPU and memory to properly start and to continue to run. You can define [Kubernetes resource requests and resource limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/){: external} for your containers or pods to limit the amount of CPU and memory that they can consume. If no limits for CPU and memory are set, and the container is busy, the container uses all the resources that are available. This high consumption of resources might affect other containers on the worker node that don't have enough resources to properly start or run, and puts your worker node at risk for denial-of-service attacks.
 
 Enforce policy-driven authentication
-: You can add an Ingress annotation to your deployments to control access to your services and APIs. By using {{site.data.keyword.appid_short_notm}} and declarative security, you can ensure user authentication and token validation.
+:   You can add an Ingress annotation to your deployments to control access to your services and APIs. By using {{site.data.keyword.appid_short_notm}} and declarative security, you can ensure user authentication and token validation.
 
 
 
@@ -598,13 +589,13 @@ You are responsible for ensuring the security of your personal information in Ku
 {: shortdesc}
 
 Use a Kubernetes secret to store personal information
-: Store personal information only in Kubernetes resources that are designed to hold personal information. For example, don't use your name in the name of a Kubernetes namespace, deployment, service, or config map. For proper protection and encryption, store personal information in [secrets](https://kubernetes.io/docs/concepts/configuration/secret/){: external} instead.
+:   Store personal information only in Kubernetes resources that are designed to hold personal information. For example, don't use your name in the name of a Kubernetes namespace, deployment, service, or config map. For proper protection and encryption, store personal information in [secrets](https://kubernetes.io/docs/concepts/configuration/secret/){: external} instead.
 
-  For centralized management of all your secrets across clusters and injection at application runtime, try [{{site.data.keyword.secrets-manager_full_notm}}](/docs/secrets-manager?topic=secrets-manager-tutorial-kubernetes-secrets).
-  {: tip}
+:   For centralized management of all your secrets across clusters and injection at application runtime, try [{{site.data.keyword.secrets-manager_full_notm}}](/docs/secrets-manager?topic=secrets-manager-tutorial-kubernetes-secrets).
+    {: tip}
 
-Use a Kubernetes <code>imagePullSecret</code> to store image registry credentials
-: Do not store personal information in container images or registry namespaces. For proper protection and encryption, store registry credentials in [Kubernetes `imagePullSecrets`](/docs/containers?topic=containers-registry#other) and other personal information in [secrets](https://kubernetes.io/docs/concepts/configuration/secret/){: external} instead. Remember that if personal information is stored in a previous layer of an image, deleting an image might not be sufficient to delete this personal information.
+Use a Kubernetes `imagePullSecret` to store image registry credentials
+:   Do not store personal information in container images or registry namespaces. For proper protection and encryption, store registry credentials in [Kubernetes `imagePullSecrets`](/docs/containers?topic=containers-registry#other) and other personal information in [secrets](https://kubernetes.io/docs/concepts/configuration/secret/){: external} instead. Remember that if personal information is stored in a previous layer of an image, deleting an image might not be sufficient to delete this personal information.
 
 To set up encryption for your secrets, see [Encrypting Kubernetes secrets by using  a key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect).
 

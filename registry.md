@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-23"
 
 keywords: kubernetes, registry, pull secret, secrets
 
@@ -162,7 +162,8 @@ Yes, if you [sign your images for trusted content](/docs/Registry?topic=Registry
 New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image pull secrets to authorize access to {{site.data.keyword.registrylong_notm}}](#cluster_registry_auth). With these image pull secrets, you can deploy containers from images that are stored in the `icr.io` registry domains. You can add the image pull secrets to your cluster if your cluster was not created with the secrets. For clusters that were created before **25 February 2019**, you must update your cluster to store an API key instead of a registry token in the image pull secret.
 {: shortdesc}
 
-**Before you begin**
+Before you begin
+
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 2. Make sure that you have the following permissions: {{site.data.keyword.cloud_notm}} IAM **Operator or Administrator** platform access role for {{site.data.keyword.containerlong_notm}}. The account owner can give you the role by running the following command.
 
@@ -171,16 +172,17 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image
     ```
     {: pre}
 
-2. {{site.data.keyword.cloud_notm}} IAM **Administrator** platform access role for {{site.data.keyword.registrylong_notm}}, across all regions and resource groups. The policy can't be scoped to a particular region or resource group. The account owner can give you the role by running the following command.
+3. {{site.data.keyword.cloud_notm}} IAM **Administrator** platform access role for {{site.data.keyword.registrylong_notm}}, across all regions and resource groups. The policy can't be scoped to a particular region or resource group. The account owner can give you the role by running the following command.
 
-    ```sh
+    ```shfVerify that the secret was created successfully
+    
     ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
     ```
     {: pre}
 
- 3. If your account [restricts service ID creation](/docs/account?topic=account-restrict-service-id-create), add the **Service ID creator** role to **Identity and Access Management** in the console (`iam-identity` in the API or CLI).
+4. If your account [restricts service ID creation](/docs/account?topic=account-restrict-service-id-create), add the **Service ID creator** role to **Identity and Access Management** in the console (`iam-identity` in the API or CLI).
  
-4. If your account [restricts API key creation](/docs/account?topic=account-allow-api-create), add the **User API key creator** role to **Identity and Access Management** in the console (`iam-identity` in the API or CLI).<
+5. If your account [restricts API key creation](/docs/account?topic=account-allow-api-create), add the **User API key creator** role to **Identity and Access Management** in the console (`iam-identity` in the API or CLI).
 
 ### Updating your image pull secret
 {: #update-pull-secret}
@@ -433,7 +435,7 @@ The following steps create an API key that stores the credentials of an {{site.d
     `--docker-email <docker-email>`
     :   Required. If you have one, enter your Docker email address. If you don't, enter a fictional email address, such as `a@b.c`. This email is required to create a Kubernetes secret, but is not used after creation.
 
-7. Verify that the secret was created successfully. Replace <em>&lt;namespace&gt;</em> with the namespace where you created the image pull secret.
+7. Verify that the secret was created successfully. Replace <namespace> with the namespace where you created the image pull secret.
 
     ```sh
     kubectl get secrets --namespace <namespace>

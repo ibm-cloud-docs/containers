@@ -4381,7 +4381,7 @@ subcollection: containers
 
     * [Setting up periodic snapshots](/docs/containers?topic=containers-file_storage#file-snapshots)
 
-    * [Replicating snapshots to another zone](/docs/containers?topic=containers-file_storage#replicating-snapshots-to-another-zone)
+    * [Replicating snapshots to another zone](/docs/containers?topic=containers-file_storage#file-replicate-snapshot-diff-zone)
 
     * [Duplicating storage](/docs/containers?topic=containers-file_storage#file-dupe-storage)
 
@@ -4596,7 +4596,7 @@ subcollection: containers
 
     * [Classic clusters](/docs/containers?topic=containers-portworx#px-create-classic-volumes)
 
-    * [VPC clusters](/docs/containers?topic=containers-portworx#vpc-clusters)
+    * [VPC clusters](/docs/containers?topic=containers-portworx#px-create-vpc-volumes)
 
 * [Private only clusters: Copying the `ImagePullSecret` to the `kube-system` namespace from the Kubernetes dashboard](/docs/containers?topic=containers-portworx#vpc-image-pull-px)
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-17"
+lastupdated: "2022-05-23"
 
 keywords: portworx, kubernetes
 
@@ -149,7 +149,7 @@ Keep in mind that the networking of non-SDS worker nodes in classic clusters is 
 6. Continue with your Portworx setup by [Setting up a key-value store for Portworx metadata](#portworx_database).
 
 ### VPC clusters
-{: px-create-vpc-volumes}
+{: #px-create-vpc-volumes}
 
 1. Follow the [steps](/docs/containers?topic=containers-utilities#vpc_cli_attach) to create the {{site.data.keyword.block_storage_is_short}} instances and attach these to each worker node that you want to add to the Portworx storage layer. For highly available data storage, Portworx requires at least 3 worker nodes with raw and unformatted block storage.
 2. If you want to use [journal devices](https://docs.portworx.com/install-with-other/operate-and-maintain/performance-and-tuning/tuning/){: external}, choose from the following options.
@@ -793,7 +793,8 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
             - `false`: When you enter `false`, your Portworx volumes are not encrypted. If you don't specify this option, your Portworx volumes are not encrypted by default. You can choose to enable volume encryption in your PVC, even if you disabled encryption in your storage class. The setting that you make in the PVC take precedence over the settings in the storage class.
 
         `parameters.priority_io`
-        :   Enter the Portworx I/O priority that you want to request for your data. Available options are `high`, `medium`, and `low`. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on the network bandwidth of your worker node and the type of storage device. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes. <br> When you create a PVC with a storage class, the number of replicas that you specify in `parameters/repl` overrides the I/O priority. For example, when you specify three replicas that you want to store on high-speed disks, but you have only one worker node with a high-speed disk in your cluster, then your PVC creation still succeeds. Your data is replicated across both high and low speed disks.
+        :   Enter the Portworx I/O priority that you want to request for your data. Available options are `high`, `medium`, and `low`. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on the network bandwidth of your worker node and the type of storage device. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes. 
+        :   When you create a PVC with a storage class, the number of replicas that you specify in `parameters/repl` overrides the I/O priority. For example, when you specify three replicas that you want to store on high-speed disks, but you have only one worker node with a high-speed disk in your cluster, then your PVC creation still succeeds. Your data is replicated across both high and low speed disks.
         
         `parameters.shared`
         :   Define whether you want to allow multiple pods to access the same volume. Choose between the following options:
@@ -1066,17 +1067,17 @@ Verify that PX-Backup is correctly installed on your cluster.
 From the console
 
 1. From the {{site.data.keyword.cloud_notm}} [Resource list](https://cloud.ibm.com/resources){: external}, find the PX-Backup service that you created.
-2. Review the **Status** column to see if the installation succeeded or failed. The status might take a few minutes to update.
-3. If the status changes to **Active**, verify that the PX-Backup pods, services and jobs are running in your cluster.
+1. Review the **Status** column to see if the installation succeeded or failed. The status might take a few minutes to update.
+1. If the status changes to **Active**, verify that the PX-Backup pods, services and jobs are running in your cluster.
     1. From the {{site.data.keyword.cloud_notm}} [Resource list](https://cloud.ibm.com/resources){: external}, select the cluster where you installed PX-Backup.
-    2. Open the Kubernetes dashboard.
-    3. Select the namespace where you installed the PX-Backup service components.
-    4. Find the **Pods** table.
-    5. Verify that the **Status** of all pods is **Running**.
-    6. Click on **Services**.
-    7. Find the **px-backup-ui** service and verify that a URL is present in the **External Endpoints** column.
-    8. Click on **Jobs**.
-    9. Find the **pxcentral-post-install-hook** job and verify that it is complete.
+    1. Open the Kubernetes dashboard.
+    1. Select the namespace where you installed the PX-Backup service components.
+    1. Find the **Pods** table.
+    1. Verify that the **Status** of all pods is **Running**.
+    1. Click on **Services**.
+    1. Find the **px-backup-ui** service and verify that a URL is present in the **External Endpoints** column.
+    1. Click on **Jobs**.
+    1. Find the **pxcentral-post-install-hook** job and verify that it is complete.
 
 From the CLI
 
@@ -1107,10 +1108,10 @@ Access the PX-Backup console through the URL supplied in the {{site.data.keyword
 For VPC clusters
 
 1. From the {{site.data.keyword.cloud_notm}} [Resource list](https://cloud.ibm.com/resources){: external}, select the cluster where you installed PX-Backup.
-2. Open the Kubernetes dashboard.
-3. Select the namespace where you installed the PX-Backup service components.
-4. In the **Services** section, find the **px-backup-ui** service and locate the URL in the **Public Endpoints** column. Click this URL to open the PX-Backup console.
-7. Log in to the PX-Backup console. If you are the first user to access the console, you must log in in with the username `admin` and the password `admin`. You are redirected to a registration page to set a unique username and password. Subsequent users must register a new account to access the console.
+1. Open the Kubernetes dashboard.
+1. Select the namespace where you installed the PX-Backup service components.
+1. In the **Services** section, find the **px-backup-ui** service and locate the URL in the **Public Endpoints** column. Click this URL to open the PX-Backup console.
+1. Log in to the PX-Backup console. If you are the first user to access the console, you must log in in with the username `admin` and the password `admin`. You are redirected to a registration page to set a unique username and password. Subsequent users must register a new account to access the console.
 
 
 For public classic clusters
