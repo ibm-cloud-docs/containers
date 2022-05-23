@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-20"
 
 keywords: kubernetes, ic, ks, kubectl
 
@@ -43,7 +43,7 @@ To install the CLIs:
     Plan to use the CLI often? Try [Enabling autocompletion for the {{site.data.keyword.cloud_notm}} CLI (Linux/macOS only)](/docs/cli/reference/ibmcloud?topic=cli-shell-autocomplete#shell-autocomplete-linux).
     {: tip}
 
-2. Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
+1. Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
     ```sh
     ibmcloud login
     ```
@@ -52,25 +52,25 @@ To install the CLIs:
     If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your username and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
     {: tip}
 
-4. Install the {{site.data.keyword.cloud_notm}} plug-in for {{site.data.keyword.containerlong_notm}} (`ibmcloud ks`). Use this plug-in to create and manage {{site.data.keyword.containerlong_notm}} resources such as clusters, worker nodes, or network load balancers.
+1. Install the {{site.data.keyword.cloud_notm}} plug-in for {{site.data.keyword.containerlong_notm}} (`ibmcloud ks`). Use this plug-in to create and manage {{site.data.keyword.containerlong_notm}} resources such as clusters, worker nodes, or network load balancers.
     ```sh
     ibmcloud plugin install container-service
     ```
     {: pre}
 
-5. Install the {{site.data.keyword.cloud_notm}} plug-in for {{site.data.keyword.registrylong_notm}} (`ibmcloud cr`). Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster.
+1. Install the {{site.data.keyword.cloud_notm}} plug-in for {{site.data.keyword.registrylong_notm}} (`ibmcloud cr`). Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster.
     ```sh
     ibmcloud plugin install container-registry
     ```
     {: pre}
 
-6. To create a logging configuration for {{site.data.keyword.la_full_notm}} or a monitoring configuration for {{site.data.keyword.mon_full_notm}} for your cluster, install the {{site.data.keyword.containerlong_notm}} observability plug-in (`ibmcloud ob`).
+1. To create a logging configuration for {{site.data.keyword.la_full_notm}} or a monitoring configuration for {{site.data.keyword.mon_full_notm}} for your cluster, install the {{site.data.keyword.containerlong_notm}} observability plug-in (`ibmcloud ob`).
     ```sh
     ibmcloud plugin install observe-service
     ```
     {: pre}
 
-7. Verify that the plug-ins are installed correctly.
+1. Verify that the plug-ins are installed correctly.
     ```sh
     ibmcloud plugin list
     ```
@@ -494,21 +494,21 @@ To uninstall the CLIs:
     ```
     {: pre}
 
-2. Uninstall the {{site.data.keyword.registrylong_notm}} plug-in.
+1. Uninstall the {{site.data.keyword.registrylong_notm}} plug-in.
 
     ```sh
     ibmcloud plugin uninstall container-registry
     ```
     {: pre}
 
-3. Uninstall the {{site.data.keyword.containerlong_notm}} observability plug-in.
+1. Uninstall the {{site.data.keyword.containerlong_notm}} observability plug-in.
 
     ```sh
     ibmcloud plugin uninstall ob
     ```
     {: pre}
 
-4. Verify the plug-ins were uninstalled by running the following command and checking the list of the plug-ins that are installed.
+1. Verify the plug-ins were uninstalled by running the following command and checking the list of the plug-ins that are installed.
 
     ```sh
     ibmcloud plugin list
@@ -517,9 +517,9 @@ To uninstall the CLIs:
 
     The `kubernetes-service` and the `container-registry` plug-in are not displayed in the results.
 
-5. [Uninstall the {{site.data.keyword.cloud_notm}} CLI.](/docs/cli?topic=cli-uninstall-ibmcloud-cli)
+1. [Uninstall the {{site.data.keyword.cloud_notm}} CLI.](/docs/cli?topic=cli-uninstall-ibmcloud-cli)
 
-6. Uninstall the Kubernetes CLI.
+1. Uninstall the Kubernetes CLI.
     ```sh
     sudo rm /usr/local/bin/kubectl
     ```
@@ -551,7 +551,7 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
         ```
         {: pre}
 
-    2. Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
+    1. Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
         ```sh
         kubectl config current-context
         ```

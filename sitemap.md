@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-05-20"
+lastupdated: "2022-05-23"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may22)
+
+    * Worker node fix pack
 
     * [19 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may1922)
 
@@ -4381,7 +4383,7 @@ subcollection: containers
 
     * [Setting up periodic snapshots](/docs/containers?topic=containers-file_storage#file-snapshots)
 
-    * [Replicating snapshots to another zone](/docs/containers?topic=containers-file_storage#replicating-snapshots-to-another-zone)
+    * [Replicating snapshots to another zone](/docs/containers?topic=containers-file_storage#file-replicate-snapshot-diff-zone)
 
     * [Duplicating storage](/docs/containers?topic=containers-file_storage#file-dupe-storage)
 
@@ -4596,7 +4598,7 @@ subcollection: containers
 
     * [Classic clusters](/docs/containers?topic=containers-portworx#px-create-classic-volumes)
 
-    * [VPC clusters](/docs/containers?topic=containers-portworx#vpc-clusters)
+    * [VPC clusters](/docs/containers?topic=containers-portworx#px-create-vpc-volumes)
 
 * [Private only clusters: Copying the `ImagePullSecret` to the `kube-system` namespace from the Kubernetes dashboard](/docs/containers?topic=containers-portworx#vpc-image-pull-px)
 
@@ -5423,6 +5425,8 @@ subcollection: containers
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
 
+    * [Change log for worker node fix pack 1.23.6_1530, released 23 May 2022](/docs/containers?topic=containers-changelog_123#1236_1530)
+
     * [Change log for worker node fix pack 1.23.6_1529, released 09 May 2022](/docs/containers?topic=containers-changelog_123#1236_1529)
 
     * [Change log for master fix pack 1.23.6_1527, released 26 April 2022](/docs/containers?topic=containers-changelog_123#1236_1527)
@@ -5509,6 +5513,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.9_1552, released 23 May 2022](/docs/containers?topic=containers-changelog_122#1229_1552)
 
     * [Change log for worker node fix pack 1.22.9_1551, released 09 May 2022](/docs/containers?topic=containers-changelog_122#1229_1551)
 
@@ -5620,6 +5626,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview)
 
 * [Version 1.21 change log](/docs/containers?topic=containers-changelog_121#121_changelog)
+
+    * [Change log for worker node fix pack 1.21.12_1560, released 23 May 2022](/docs/containers?topic=containers-changelog_121#12112_1560)
 
     * [Change log for worker node fix pack 1.21.12_1559, released 09 May 2022](/docs/containers?topic=containers-changelog_121#12112_1559)
 
@@ -5757,6 +5765,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_120#changelog_overview)
 
 * [Deprecated: Version 1.20 change log](/docs/containers?topic=containers-changelog_120#120_changelog)
+
+    * [Change log for worker node fix pack 1.20.15_1581, released 23 May 2022](/docs/containers?topic=containers-changelog_120#12015_1581)
 
     * [Change log for worker node fix pack 1.20.15_1580, released 09 May 2022](/docs/containers?topic=containers-changelog_120#12015_1580)
 

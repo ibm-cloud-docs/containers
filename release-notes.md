@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-20"
+lastupdated: "2022-05-23"
 
 keywords: kubernetes, release notes
 
@@ -27,6 +27,10 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## May 2022
 {: #containers-may22}
 
+Worker node fix pack
+:   Kubernetes [1.20.15_1581](/docs/containers?topic=containers-changelog_120), [1.21.12_1560](/docs/containers?topic=containers-changelog_121), [1.22.9_1552](/docs/containers?topic=containers-changelog_122), [1.23.6_1530](/docs/containers?topic=containers-changelog_123).
+
+
 
 
 ### 19 May 2022
@@ -42,7 +46,7 @@ Ingress ALB change log updates
 {: #containers-may1622}
 
 Cluster autoscaler add-on
-:   Versions `1.0.5_628` and `1.1.0_615` are available. See [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog).
+:   Versions `1.0.5_628` and `1.1.0_615` are available. See [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
 
 ### 12 May 2022
 {: #containers-may1222}

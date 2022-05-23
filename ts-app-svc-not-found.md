@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-23"
 
 keywords: kubernetes
 
@@ -28,7 +28,7 @@ content-type: troubleshoot
 When you run `ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`, you see the following message.
 {: tsSymptoms}
 
-```
+```sh
 Binding service to a namespace...
 FAILED
 

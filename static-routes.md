@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-23"
 
 keywords: kubernetes, vyatta, strongswan, ipsec, on-premises, vpn, gateway, static route, routing table
 
@@ -46,9 +46,10 @@ The static route cluster add-on can be used to apply and manage static routes on
 To get started with static routes in {{site.data.keyword.containerlong_notm}}, enable the static route add-on.
 {: shortdesc}
 
-**Before you begin**
-* Ensure that you have the [**Administrator** IAM platform access role for the cluster in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-users#checking-perms).
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin
+
+- Ensure that you have the [**Administrator** IAM platform access role for the cluster in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-users#checking-perms).
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### Enabling the static route add-on from the console
 {: #enable-add-on-console}
