@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-05-24"
+lastupdated: "2022-05-25"
 
 keywords: containers
 subcollection: containers
@@ -7361,7 +7361,7 @@ subcollection: containers
 
 * [Version 4.2](/docs/containers?topic=containers-vpc_bs_changelog#042_is_block)
 
-    * [Change log for version 4.2.6_1161, released 12 May 2022](/docs/containers?topic=containers-vpc_bs_changelog#425_1106_is_block_relnote)
+    * [Change log for version 4.2.6_1161, released 12 May 2022](/docs/containers?topic=containers-vpc_bs_changelog#426_1161_is_block_relnote)
 
     * [Change log for version 4.2.5_1106, released 12 May 2022](/docs/containers?topic=containers-vpc_bs_changelog#425_1106_is_block_relnote)
 
@@ -7409,7 +7409,7 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
-* [Change log for version 2.1.16, released 25 May 2022](/docs/containers?topic=containers-cos_plugin_changelog#02115_object_plugin)
+* [Change log for version 2.1.16, released 25 May 2022](/docs/containers?topic=containers-cos_plugin_changelog#02116_object_plugin)
 
 * [Change log for version 2.1.15, released 6 May 2022](/docs/containers?topic=containers-cos_plugin_changelog#02115_object_plugin)
 
