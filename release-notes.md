@@ -54,8 +54,6 @@ Worker node fix pack
 :   Kubernetes [1.20.15_1581](/docs/containers?topic=containers-changelog_120), [1.21.12_1560](/docs/containers?topic=containers-changelog_121), [1.22.9_1552](/docs/containers?topic=containers-changelog_122), [1.23.6_1530](/docs/containers?topic=containers-changelog_123).
 
 
-
-
 ### 19 May 2022
 {: #containers-may1922}
 
