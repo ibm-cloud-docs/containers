@@ -3372,7 +3372,7 @@ subcollection: containers
 
     * [If you do not want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group#no-worker-sgs)
 
-* [If you do want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group#worker-sgs)
+    * [If you do want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group#worker-sgs)
 
 [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
 
@@ -4032,6 +4032,10 @@ subcollection: containers
     * [Setting up a public or private VPC ALB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_alb_pub_priv)
 
     * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
+
+* [Health checks for load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_health)
+
+    * [Enabling TCP health checks for UDP load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_health_udp)
 
 * [Changing load balancer subnets or zones](/docs/containers?topic=containers-vpc-lbaas#lbaas_change_subnets)
 
