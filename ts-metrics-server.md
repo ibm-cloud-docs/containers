@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, help
 
@@ -62,7 +62,7 @@ Follow these steps to troubleshoot.
 
 1. Verify that metrics-server pods exist.
     ```sh
-    $ kubectl get pod -n kube-system -l k8s-app=metrics-server
+    kubectl get pod -n kube-system -l k8s-app=metrics-server
     ```
     {: pre}
 
@@ -74,8 +74,8 @@ Follow these steps to troubleshoot.
     ```
     {: pre}
 
-  Replace `POD` with the pod name shown earlier. The content of any logs returned does not matter.
+    Replace `POD` with the pod name shown earlier. The content of any logs returned does not matter.
   
-  - If you get an error message that contains text such as `<workerIP>:10250: getsockopt: connection timed out`, see [`kubectl` commands time out](/docs/containers?topic=containers-ts_clis#exec_logs_fail).
+    If you get an error message that contains text such as `<workerIP>:10250: getsockopt: connection timed out`, see [`kubectl` commands time out](/docs/containers?topic=containers-ts_clis#exec_logs_fail).
   
 3. If the previous steps do not show a problem, adjust the resources for the `metrics-server`. See [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics).

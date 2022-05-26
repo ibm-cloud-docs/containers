@@ -1,9 +1,8 @@
-
 ---
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, 1.19, versions, update, upgrade
 
@@ -42,7 +41,7 @@ For the release history and timeline of all current {{site.data.keyword.containe
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-|  Version | Supported? | {{site.data.keyword.containerlong_notm}}<br>release date | {{site.data.keyword.containerlong_notm}}<br>unsupported date |
+|  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
 | 1.19 | Deprecated | 13 Oct 2020 | 14 Mar 2022 `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.19" caption-side="top"}

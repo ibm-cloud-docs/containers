@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes
 
@@ -26,7 +26,7 @@ content-type: troubleshoot
 When you run `ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`, you see the following message.
 {: tsSymptoms}
 
-```
+```txt
 Multiple services with the same name were found.
 Run 'ibmcloud service list' to view available Bluemix service instances...
 ```

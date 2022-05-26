@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-23"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes
 
@@ -83,7 +83,8 @@ First, check for and release individual IP addresses that were not cleanly remov
 
 1. Follow the steps in [Installing and configuring the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install) to download version 3.18 or later of the `calicoctl` client, use the correct Calico configuration for your cluster, and verify that the Calico configuration is working correctly for your targeted cluster. Note that even if you cluster runs an older version of Calico, you can still use `calicoctl` version 3.18 to run the commands in the following steps.
 
-    <p class="note">If you recently updated your classic cluster from Kubernetes version 1.18 to 1.19, the cluster uses the KDD datastore for Calico. Ensure that you follow the steps for 1.19 clusters to set the `DATASTORE_TYPE` environment variable to `kubernetes` and the `KUBECONFIG` environment variable to the `kube-config` file for your cluster. The old `calicoctl.cfg` points to outdated data in etcd that does not work with the following steps.</p>
+    If you recently updated your classic cluster from Kubernetes version 1.18 to 1.19, the cluster uses the KDD datastore for Calico. Ensure that you follow the steps for 1.19 clusters to set the `DATASTORE_TYPE` environment variable to `kubernetes` and the `KUBECONFIG` environment variable to the `kube-config` file for your cluster. The old `calicoctl.cfg` points to outdated data in etcd that does not work with the following steps.
+    {: note}
 
 2. Check for any IP addresses that are incorrectly detected as in use by the Calico IPAM.
     ```sh

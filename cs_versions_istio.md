@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-19"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, istio, add-on
 
@@ -94,12 +94,12 @@ Updates in this version
     - [CVE-2019-25013](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-25013){: external}
     - [CVE-2020-27618](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27618){: external}
     - [CVE-2020-29562](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29562){: external}
-    - [CVE-2020-6096 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-6096 ){: external}
+    - [CVE-2020-6096](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-6096 ){: external}
     - [CVE-2021-27645](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27645){: external}
     - [CVE-2021-3326](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3326){: external}
     - [CVE-2021-35942](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-35942){: external}
     - [CVE-2021-3998](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3998){: external}
-    - [CVE-2021-3999 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3999 ){: external}
+    - [CVE-2021-3999](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3999 ){: external}
     - [CVE-2022-23218](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23218){: external}
     - [CVE-2022-23219](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23219){: external}
 
@@ -1471,6 +1471,7 @@ Updates in this version
     - [usn-4376-1](https://ubuntu.com/security/notices/USN-4376-1/){: external}
     - [usn-4377-1](https://ubuntu.com/security/notices/USN-4377-1/){: external}
     - [usn-4394-1](https://ubuntu.com/security/notices/USN-4394-1/){: external}
+
 :   For more information, see the [Istio security bulletin 2020-006](https://istio.io/latest/news/security/istio-security-2020-006/){: external}
 
 ### Change log for 1.5, released 19 May 2020

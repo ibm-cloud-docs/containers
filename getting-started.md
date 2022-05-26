@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, containers
 
@@ -36,7 +36,7 @@ To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {
 2. From the plan dropdown, select the **Free** cluster option.
 3. Give your cluster a unique name, such as `mycluster-free`.
 4. Select a resource group to create the cluster in, such as `default`.
-3. In the **Summary** pane, review the order summary and then click **Create**. A worker pool is created that contains one worker node in the default resource group.
+5. In the **Summary** pane, review the order summary and then click **Create**. A worker pool is created that contains one worker node in the default resource group.
 
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
 

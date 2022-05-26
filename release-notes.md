@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-24"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, release notes
 
@@ -27,6 +27,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## May 2022
 {: #containers-may22}
 
+
+### 26 May 2022
+{: #containers-may2622}
+
+CLI change log update
+:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.415.
+
+
 ### 25 May 2022
 {: #containers-may2522}
 
@@ -44,8 +52,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 Worker node fix pack
 :   Kubernetes [1.20.15_1581](/docs/containers?topic=containers-changelog_120), [1.21.12_1560](/docs/containers?topic=containers-changelog_121), [1.22.9_1552](/docs/containers?topic=containers-changelog_122), [1.23.6_1530](/docs/containers?topic=containers-changelog_123).
-
-
 
 
 ### 19 May 2022
@@ -1711,8 +1717,8 @@ Worker node versions
 
 
 
-### 1 March 2021
-{: #containers-march2621}
+### 10 March 2021
+{: #containers-march1021}
 {: release-note}
 
 Istio add-on
@@ -1845,7 +1851,7 @@ Worker node versions
 {: release-note}
 
 Gateway firewalls and Calico policies
-:   For classic clusters in Frankfurt, updated the required IP addresses and ports that you must open in a [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private) or [Calico private network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation/calico-v3/eu-de){: external}.
+:   For classic clusters in Frankfurt, updated the required IP addresses and ports that you must open in a [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private) or [Calico private network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation/eu-de){: external}.
 
 ### 10 February 2021
 {: #containers-feb1021}
@@ -3796,6 +3802,7 @@ New! Gateway-enabled classic clusters
         - [Using a gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway)
         - [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_gateway)
         - Flow of traffic to apps when using an [NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_gateway), an [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#v2_gateway), or [Ingress ALBs](/docs/containers?topic=containers-ingress-about#classic-gateway)
+
 :   Ready to get started? [Create a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli).
 
 

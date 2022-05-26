@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -36,7 +36,7 @@ To help the CoreDNS pods terminate more gracefully, you can edit the `coredns` c
 
 In the `health` plug-in configuration of the main Corefile, add `lameduck 10s`. For more information on customizing CoreDNS, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize). The resulting customization looks like the following example.
 
-```
+```txt
 health {
     lameduck 10s
 }

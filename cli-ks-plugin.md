@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-20"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes
 
@@ -3370,7 +3370,7 @@ View and configure Ingress application load balancers (ALBs).
 In CLI version 1.0.157 and later, the `ibmcloud ks alb` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress alb` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
 {: important}
 
-###  `ibmcloud ks ingress alb autoupdate disable`
+### `ibmcloud ks ingress alb autoupdate disable`
 {: #cs_alb_autoupdate_disable}
 
 Disable automatic updates of all Ingress ALB pods in a cluster.
@@ -3863,7 +3863,7 @@ ibmcloud ks ingress alb migrate start --type test --cluster my_cluster
 {: pre}
 
 
-###  `ibmcloud ks ingress alb migrate status`
+### `ibmcloud ks ingress alb migrate status`
 {: #cs_alb_migrate_status}
 
 Check the status of a [migration of your Ingress configmap and resources](#cs_alb_migrate_start).

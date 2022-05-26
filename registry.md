@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-23"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, registry, pull secret, secrets
 
@@ -373,7 +373,7 @@ The following steps create an API key that stores the credentials of an {{site.d
     {: pre}
 
     `cluster_service_ID`
-    :   Required. Replace with the `<cluster_name>-<kube_namespace>-id` service ID that you previously created for your Kubernetes cluster.</td>
+    :   Required. Replace with the `<cluster_name>-<kube_namespace>-id` service ID that you previously created for your Kubernetes cluster.
     
     `--service-name container-registry`
     :   Required. Enter `container-registry` so that the IAM policy is for {{site.data.keyword.registrylong_notm}}.
@@ -435,7 +435,7 @@ The following steps create an API key that stores the credentials of an {{site.d
     `--docker-email <docker-email>`
     :   Required. If you have one, enter your Docker email address. If you don't, enter a fictional email address, such as `a@b.c`. This email is required to create a Kubernetes secret, but is not used after creation.
 
-7. Verify that the secret was created successfully. Replace <namespace> with the namespace where you created the image pull secret.
+7. Verify that the secret was created successfully. Replace `<namespace>` with the `namespace` where you created the image pull secret.
 
     ```sh
     kubectl get secrets --namespace <namespace>

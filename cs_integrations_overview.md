@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, helm
 
@@ -44,8 +44,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 |{{site.data.keyword.secrets-manager_full_notm}}| Ingress secrets and certificates| You can use {{site.data.keyword.secrets-manager_short}} to store and manage your Ingress secrets and certificates. For more information, see [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_full_notm}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr).|Yes|Yes|
 |{{site.data.keyword.bplong_notm}}/ Terraform|Infrastructure and {{site.data.keyword.cloud_notm}} service automation|Terraform is an open-source software that enables predictable and consistent provisioning of {{site.data.keyword.cloud_notm}} platform, classic infrastructure, and VPC infrastructure resources by using a high-level scripting language. {{site.data.keyword.bplong_notm}} delivers Terraform-as-a-Service so that you can model the resources that you want in your {{site.data.keyword.cloud_notm}} environment, and enable Infrastructure as Code (IaC). For more information about how to use native Terraform to create a cluster, see [Creating single and multizone Kubernetes and OpenShift clusters](/docs/ibm-cloud-provider-for-terraform?topic=ibm-cloud-provider-for-terraform-tutorial-tf-clusters).|Yes|Yes|
 {: summary="The table shows available services that you can add to your cluster and that are popular among {{site.data.keyword.containerlong_notm}} users. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
-{: caption="Popular integrations"}
-
+{: caption="Table 1. Popular integrations" caption-side="bottom"}
 
 
 ## DevOps services
@@ -63,7 +62,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 |Razee|[Razee](https://razee.io/){: external} is an open-source project that automates and manages the deployment of Kubernetes resources across clusters, environments, and cloud providers, and helps you to visualize deployment information for your resources so that you can monitor the rollout process and find deployment issues more quickly. For more information about Razee and how to set up Razee in your cluster to automate your deployment process, see the [Razee documentation](https://github.com/razee-io/Razee){: external}.|Yes|Yes|
 |{{site.data.keyword.bplong_notm}}|[{{site.data.keyword.bplong_notm}}](/docs/schematics?topic=schematics-about-schematics) is a managed Terraform service where you can use native Terraform capabilities, but you don't have to worry about setting up and maintaining the Terraform CLI and {{site.data.keyword.cloud_notm}} Provider plug-in. For more information about how to use Terraform to create a cluster, see [Creating single and multizone Kubernetes and OpenShift clusters](/docs/ibm-cloud-provider-for-terraform?topic=ibm-cloud-provider-for-terraform-tutorial-tf-clusters).|Yes|Yes|
 |Terraform|[Terraform](https://www.terraform.io/docs/){: external} is an open-source software that enables predictable and consistent provisioning of {{site.data.keyword.cloud_notm}} platform, classic infrastructure, and VPC infrastructure resources by using a high-level scripting language. For more information about how to use native Terraform to create a cluster, see [Creating single and multizone Kubernetes and OpenShift clusters](/docs/ibm-cloud-provider-for-terraform?topic=ibm-cloud-provider-for-terraform-tutorial-tf-clusters).|Yes|Yes|
-{: caption="DevOps services"}
+{: caption="Table 2. DevOps services" caption-side="bottom"}
 {: summary="The table shows available services that you can add to your cluster to add extra DevOps capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 
@@ -77,7 +76,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 |{{site.data.keyword.dl_short}}|With [{{site.data.keyword.dl_full}}](/docs/dl?topic=dl-dl-about), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet. The {{site.data.keyword.dl_short}} offerings are useful when you must implement hybrid workloads, cross-provider workloads, large or frequent data transfers, or private workloads. To choose a {{site.data.keyword.dl_short}} offering and set up a {{site.data.keyword.dl_short}} connection, see [Get Started with {{site.data.keyword.dl_full_notm}} (2.0)](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl).|Yes|Yes|
 |strongSwan IPSec VPN Service|Set up a [strongSwan IPSec VPN service](https://www.strongswan.org/about.html){: external} that securely connects your Kubernetes cluster with an on-premises network. The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite. To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) directly in a pod in your cluster.|Yes| |
 |{{site.data.keyword.tg_short}}|Use {{site.data.keyword.tg_full_notm}} to manage access between your VPCs. {{site.data.keyword.tg_short}} instances can be configured to route between VPCs that are in the same region (local routing) or VPCs that are in different regions (global routing). Additionally, you can use {{site.data.keyword.tg_short}} to manage access between your VPCs in multiple regions to resources in your {{site.data.keyword.cloud_notm}} classic infrastructure. To get started, see the [{{site.data.keyword.tg_short}} documentation](/docs/transit-gateway?topic=transit-gateway-getting-started).||Yes|
-{: caption="Hybrid cloud services"}
+{: caption="Table 3. Hybrid cloud services" caption-side="bottom"}
 {: summary="The table shows available services that you can use to connect your cluster to on-premises data centers. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 
@@ -97,7 +96,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 |Sematext|View metrics and logs for your containerized applications by using [Sematext](https://sematext.com/){: external}. For more information, see [Monitoring and logging for containers with Sematext](https://www.ibm.com/cloud/blog/monitoring-logging-ibm-bluemix-container-service-sematext){: external}.|Yes|Yes|
 |Splunk|Import and search your Kubernetes logging, object, and metrics data in Splunk by using Splunk Connect for Kubernetes. Splunk Connect for Kubernetes is a collection of Helm charts that deploy a Splunk-supported deployment of Fluentd to your Kubernetes cluster, a Splunk-built Fluentd HTTP Event Collector (HEC) plug-in to send logs and metadata, and a metrics deployment that captures your cluster metrics. For more information, see [Solving Business Problems with Splunk on {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/cloud/blog/solving-business-problems-with-splunk-on-ibm-cloud-kubernetes-service){: external}.|Yes|Yes|
 |Weave Scope|[Weave Scope](https://www.weave.works/oss/scope/){: external} provides a visual diagram of your resources within a Kubernetes cluster, including services, pods, containers, processes, nodes, and more. Weave Scope provides interactive metrics for CPU and memory and also provides tools to tail and exec into a container.|Yes|Yes|
-{: caption="Logging and monitoring services"}
+{: caption="Table 4. Logging and monitoring services" caption-side="bottom"}
 {: summary="The table shows available services that you can add to your cluster to add extra logging and monitoring capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 
@@ -119,7 +118,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 |NeuVector|Protect containers with a cloud-native firewall by using [NeuVector](https://neuvector.com/){: external}. For more information, see [NeuVector Container Security](https://cloud.ibm.com/catalog/services/neuvector-container-security-platform){: external}.|Yes|Yes|
 |{{site.data.keyword.secrets-manager_full_notm}}| Ingress secrets and certificates| You can use {{site.data.keyword.secrets-manager_short}} to store and manage your Ingress secrets and certificates. For more information, see [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_full_notm}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr).|Yes|Yes|
 |Twistlock|As a supplement to [Vulnerability Advisor](/docs/va?topic=va-va_index){: external}, you can use [Twistlock](https://www.paloaltonetworks.com/prisma/cloud){: external} to manage firewalls, threat protection, and incident response. For more information, see [Twistlock on {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/blogs/cloud-archive/2017/07/twistlock-ibm-bluemix-container-service/){: external}.|Yes|Yes|
-{: caption="Security services"}
+{: caption="Table 5. Security services" caption-side="bottom"}
 {: summary="The table shows available services that you can add to your cluster to add extra security capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 
@@ -136,7 +135,8 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 |{{site.data.keyword.cos_full_notm}}|Data that is stored with {{site.data.keyword.cos_short}} is encrypted and dispersed across multiple geographic locations, and accessed over HTTP by using a REST API. You can use the [ibm-backup-restore image](/docs/containers?topic=containers-utilities#ibmcloud-backup-restore) to configure the service to make one-time or scheduled backups for data in your clusters. For more information about the service, see the [{{site.data.keyword.cos_short}} documentation](/docs/cloud-object-storage?topic=cloud-object-storage-getting-started-cloud-object-storage){: external}.|Yes|Yes|
 |{{site.data.keyword.cloud_notm}} Classic {{site.data.keyword.filestorage_short}}|[{{site.data.keyword.cloud_notm}} Classic {{site.data.keyword.filestorage_short}}](/docs/FileStorage?topic=FileStorage-getting-started#getting-started) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage).|Yes||
 |Portworx|[Portworx](https://portworx.com/products/portworx-enterprise//){: external} is a highly available software-defined storage solution that you can use to manage persistent storage for your containerized databases and other stateful apps, or to share data between pods across multiple zones. You can install Portworx with a Helm chart and provision storage for your apps by using Kubernetes persistent volumes. For more information about how to set up Portworx in your cluster, see [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx).|Yes|Yes|
-{: caption="Storage services"}
+Security services
+{: caption="Table 6. Storage services" caption-side="bottom"}
 {: summary="The table shows available services that you can add to your cluster to add persistent storage capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 
@@ -148,7 +148,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 |----|----|----|----|
 |{{site.data.keyword.blockchainfull_notm}} Platform v2|Deploy and manage your own {{site.data.keyword.blockchainfull_notm}} Platform on {{site.data.keyword.containerlong_notm}}. With {{site.data.keyword.blockchainfull_notm}} Platform v2, you can host {{site.data.keyword.blockchainfull_notm}} networks or create organizations that can join other {{site.data.keyword.blockchainfull_notm}} v2 networks. For more information about how to set up {{site.data.keyword.blockchainfull_notm}} in {{site.data.keyword.containerlong_notm}}, see [About {{site.data.keyword.blockchainfull_notm}} Platform](/docs/blockchain-sw-213?topic=blockchain-sw-213-get-started-console-ocp).|Yes| |
 |Cloud databases|You can choose between various {{site.data.keyword.cloud_notm}} database services, such as {{site.data.keyword.composeForMongoDB_full}} or {{site.data.keyword.cloudantfull}} to deploy highly available and scalable database solutions in your cluster. For a list of available cloud databases, see the [{{site.data.keyword.cloud_notm}} catalog](https://cloud.ibm.com/catalog?category=databases){: external}.|Yes|Yes|
-{: caption="Database services"}
+{: caption="Table 7. Database services" caption-side="bottom"}
 {: summary="The table shows available services that you can add to your cluster to add database capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 

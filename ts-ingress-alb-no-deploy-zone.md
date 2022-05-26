@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -25,7 +25,7 @@ content-type: troubleshoot
 When you have a multizone classic cluster and run `ibmcloud ks ingress alb ls --cluster <cluster>`, no ALB is deployed in a zone. For example, if you have worker nodes in 3 zones, you might see an output similar to the following in which a public ALB did not deploy to the third zone.
 {: tsSymptoms}
 
-```
+```txt
 ALB ID                                            Enabled    Status     Type      ALB IP           Zone    Build                          ALB VLAN ID   NLB Version
 private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false      disabled   private   -                dal10   ingress:0.47.0_1434_iks   2294021       -
 private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false      disabled   private   -                dal12   ingress:0.47.0_1434_iks   2234947       -
@@ -55,7 +55,8 @@ Option 2: If you have another VLAN that is available, you can [set up VLAN spann
 
 Option 3: If you are not using all the subnets in the VLAN, you can reuse subnets on the VLAN by adding them to your cluster.
 1. Check that the subnet that you want to use is available.
-    <p class="note">The infrastructure account that you use might be shared across multiple {{site.data.keyword.cloud_notm}} accounts. In this case, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.</p>
+    The infrastructure account that you use might be shared across multiple {{site.data.keyword.cloud_notm}} accounts. In this case, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.
+    {: note}
 
 2. Use the [`ibmcloud ks cluster subnet add` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_add) to make an existing subnet available to your cluster.
 
@@ -66,7 +67,7 @@ Option 3: If you are not using all the subnets in the VLAN, you can reuse subnet
     {: pre}
 
     In this example output, a second subnet was added to the `2234945` public VLAN:
-    ```
+    ```txt
     Subnet VLANs
     VLAN ID   Subnet CIDR          Public   User-managed
     2234947   10.xxx.xx.xxx/29     false    false

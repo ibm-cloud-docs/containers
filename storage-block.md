@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-23"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes
 
@@ -210,7 +210,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 1. [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the Helm version 3 client on your local machine.
 
 
-2. Add the {{site.data.keyword.cloud_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in.
+1. Add the {{site.data.keyword.cloud_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in.
 
     If you enabled [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint) in your {{site.data.keyword.cloud_notm}} account, you can use the private {{site.data.keyword.cloud_notm}} Helm repository to keep your image pull traffic on the private network. If you can't enable VRF or service endpoints in your account, use the public registry domain: `helm repo add iks-charts https://icr.io/helm/iks-charts`.
     {: note}
@@ -220,14 +220,14 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: pre}
 
-3. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
+1. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
 
     ```sh
     helm repo update
     ```
     {: pre}
 
-4. Install the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in and give your installation a name, for example: `block-storage-plugin`. When you install the plug-in, pre-defined block storage classes are added to your cluster.
+1. Install the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in and give your installation a name, for example: `block-storage-plugin`. When you install the plug-in, pre-defined block storage classes are added to your cluster.
 
     ```sh
     helm install <name> iks-charts/ibmcloud-block-storage-plugin -n <namespace>
@@ -279,7 +279,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-5. Verify the installation.
+1. Verify the installation.
 
     ```sh
     kubectl get pod -n <namespace> | grep block
@@ -296,7 +296,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
     The installation is successful when you see one `ibmcloud-block-storage-plugin` pod and one or more `ibmcloud-block-storage-driver` pods. The number of `ibmcloud-block-storage-driver` pods equals the number of worker nodes in your cluster. All pods must be in a **Running** state.
 
-6. Verify the storage classes for {{site.data.keyword.blockstorageshort}} were added to your cluster.
+1. Verify the storage classes for {{site.data.keyword.blockstorageshort}} were added to your cluster.
 
     ```sh
     kubectl get storageclasses | grep block
@@ -317,7 +317,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-7. Repeat these steps for every cluster where you want to provision block storage.
+1. Repeat these steps for every cluster where you want to provision block storage.
 
 You can now continue to [create a PVC](#add_block) to provision block storage for your app.
 

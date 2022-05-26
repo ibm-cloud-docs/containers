@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes
 
@@ -31,7 +31,7 @@ You can resolve this issue by changing the `resource auto-refresh` time interval
 
 
 ## Changing the resource auto-refresh time interval from the Kubernetes dashboard
-{: ts-dashboard-auto-refresh}
+{: #ts-dashboard-auto-refresh}
 
 
 1. Select *Settings* in the left side navigation pane.

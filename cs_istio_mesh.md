@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -99,6 +99,8 @@ Get the public address for the `istio-ingressgateway` load balancer that exposes
 {: shortdesc}
 
 ### Creating a gateway URL in Classic clusters
+{: #istio_create_gatewayURL_classic}
+
 1. Set the Istio ingress host.
     ```sh
     export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
@@ -143,7 +145,7 @@ Get the public address for the `istio-ingressgateway` load balancer that exposes
 
 
 ### Viewing the BookInfo web page in a browser
-{: viewing-bookinfo}
+{: #viewing-bookinfo}
 
 Run the following command based on your operating to view the BookInfo app in your browser.
 {: shortdesc}
@@ -629,7 +631,7 @@ To publicly expose apps:
 
 **Example output for classic clusters**:
 
-```
+```txt
 Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
 mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
 ```
@@ -637,7 +639,7 @@ mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cl
 
 **Example output for VPC clusters**:
 
-```
+```txt
 Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
 mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
 ```
@@ -782,7 +784,7 @@ To publicly expose apps:
 
 
 1. Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
-    ```
+    ```txt
     https://<host_name>/<service_path>
     ```
     {: codeblock}

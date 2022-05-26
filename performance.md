@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, kernel
 
@@ -227,6 +227,7 @@ The following symptoms might indicate a need to adjust the `metrics-server` reso
 
 Both CPU and memory have tunable "base" and "per node" settings used to compute a total request.
 {: shortdesc}
+
 - `baseCPU`
 - `cpuPerNode`
 - `baseMemory`

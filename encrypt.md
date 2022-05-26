@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, encrypt, security, kms, root key, crk
 
@@ -210,15 +210,15 @@ You can enable a KMS provider, update the KMS provider instance, or update the r
 {: shortdesc}
 
 1. Complete the [prerequisite steps](#kms_prereqs) to create a KMS instance and root key.
-2. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster that you want to enable encryption for.
-3. From the **Overview** tab, in the **Summary > Key management service** section, click **Enable**. If you already enabled the KMS provider, click **Update**.
-4. Select the **Key management service instance** and **Root key** that you want to use for the encryption.
+1. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster that you want to enable encryption for.
+1. From the **Overview** tab, in the **Summary > Key management service** section, click **Enable**. If you already enabled the KMS provider, click **Update**.
+1. Select the **Key management service instance** and **Root key** that you want to use for the encryption.
 
     During the enablement, you might not be able to access the Kubernetes master such as to update YAML configurations for deployments.
     {: important}
     
-5. Click **Enable** (or **Update**).
-6. Verify that the KMS enablement process is finished. From the **Summary > Master status** section, you can check the progress.
+1. Click **Enable** (or **Update**).
+1. Verify that the KMS enablement process is finished. From the **Summary > Master status** section, you can check the progress.
     Example output when the enablement is in progress.
     ```sh
     Master status   KMS feature enablement in progress.  
@@ -234,7 +234,7 @@ You can enable a KMS provider, update the KMS provider instance, or update the r
     After the KMS provider is enabled in the cluster, all cluster secrets are automatically encrypted.
     {: note}
 
-8. Optional: [Verify that your secrets are encrypted](#verify_kms).
+1. Optional: [Verify that your secrets are encrypted](#verify_kms).
 
 Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and can't be recovered. When you rotate a root key, you can't reuse a previous root key for the same cluster. Similarly, if you disable a root key, operations that rely on reading secrets fail. Unlike deleting a root key, however, you can reenable a disabled key to make your cluster usable again.
 {: important}

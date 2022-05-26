@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, clusters
 
@@ -356,7 +356,7 @@ See [Cluster can't update because of broken webhook](/docs/containers?topic=cont
 
 
 ### Setting up admission controller webhooks
-{: configure-webhooks-122}
+{: #configure-webhooks-122}
 
 In Kubernetes cluster versions 1.21 and later, Konnectivity replaced the OpenVPN solution. If you have cluster version 1.21 and later, and your webhook uses the ClusterIP, you must update your webhook to use a Kubernetes service instead.
 {: shortdesc}

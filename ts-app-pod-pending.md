@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes
 
@@ -59,7 +59,7 @@ If this cluster is an existing one, check your cluster capacity.
 
 2. Open the Kubernetes dashboard.
 
-    ```
+    ```txt
     http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
     ```
     {: pre}

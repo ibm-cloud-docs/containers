@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -165,7 +165,7 @@ In the following image, you can see the location of the sources that you can con
 
 1. `worker`: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In `auth.log` you can find information on the authentication requests that are made to the OS.
     
-    **Paths**
+    Paths
     - `/var/log/syslog`
     - `/var/log/auth.log`
 
@@ -393,7 +393,7 @@ With {{site.data.keyword.containerlong_notm}}, you can take a snapshot of your m
 
 Because Kubernetes API Server logs are automatically streamed, they're also automatically deleted to make room for the new logs coming in. By keeping a snapshot of logs at a specific point in time, you can better troubleshoot issues, look into usage differences, and find patterns to help maintain more secure applications.
 
-**Before you begin**
+Before you begin
 
 - [Provision an instance](/docs/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.cloud_notm}} catalog.
 - Ensure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the cluster.

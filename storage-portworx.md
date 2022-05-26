@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-23"
+lastupdated: "2022-05-26"
 
 keywords: portworx, kubernetes
 
@@ -1117,11 +1117,11 @@ For VPC clusters
 For public classic clusters
 
 1. From the {{site.data.keyword.cloud_notm}} [Resource list](https://cloud.ibm.com/resources){: external}, select the cluster where you installed PX-Backup.
-2. Open the Kubernetes dashboard.
-3. Select the namespace where you installed the PX-Backup service components.
-4. In the **Services** section, find the **px-backup-ui** service and note the IP address and node port under **External Endpoints**.
-5. Copy and paste the IP address and node port into your web browser to open the PX-Backup console.
-9. Log in to the PX-Backup console. If you are the first user to access the console, you must log in in with the username `admin` and the password `admin`. You are redirected to a registration page to set a unique username and password. Subsequent users must register a new account to access the console.
+1. Open the Kubernetes dashboard.
+1. Select the namespace where you installed the PX-Backup service components.
+1. In the **Services** section, find the **px-backup-ui** service and note the IP address and node port under **External Endpoints**.
+1. Copy and paste the IP address and node port into your web browser to open the PX-Backup console.
+1. Log in to the PX-Backup console. If you are the first user to access the console, you must log in in with the username `admin` and the password `admin`. You are redirected to a registration page to set a unique username and password. Subsequent users must register a new account to access the console.
 
 
 For private classic clusters, [expose the **px-backup-ui** service on your private cluster to access the PX-Backup console](/docs/containers?topic=containers-ingress-types#alb-comm-create-private).

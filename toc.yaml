@@ -8,7 +8,7 @@ toc:
     path: containers
     label: Kubernetes service
     version: 2
-    console-page: /containers
+    console-page: /kubernetes/overview
     product-page: https://www.ibm.com/cloud/containers
   entries: 
     - navgroup: 
