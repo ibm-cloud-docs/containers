@@ -209,6 +209,10 @@ subcollection: containers
 
 * [May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may22)
 
+    * [26 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may2622)
+
+        * CLI change log update
+
     * [25 May 2022](/docs/containers?topic=containers-containers-relnotes#containers-may2522)
 
         * {{site.data.keyword.cos_full_notm}} plug-in
@@ -5238,6 +5242,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.415](/docs/containers?topic=containers-cs_cli_changelog#cli-10415)
 
 * [Version 1.0.408](/docs/containers?topic=containers-cs_cli_changelog#cli-10408)
 

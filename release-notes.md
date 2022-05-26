@@ -27,6 +27,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## May 2022
 {: #containers-may22}
 
+
+### 26 May 2022
+{: #containers-may2622}
+
+CLI change log update
+:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.415.
+
+
 ### 25 May 2022
 {: #containers-may2522}
 
