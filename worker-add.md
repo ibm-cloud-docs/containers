@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-23"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, delete
 
@@ -118,13 +118,13 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     ```
     {: pre}
 
-1.For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#vm).
+1. For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#vm).
     ```sh
     ibmcloud ks flavors --zone <ZONE> --provider vpc-gen2
     ```
     {: pre}
 
-1.Optional: To encrypt the local disk of each worker node in the worker pool, get the details of your key management service (KMS) provider.
+1. Optional: To encrypt the local disk of each worker node in the worker pool, get the details of your key management service (KMS) provider.
     1. Complete the steps in [VPC worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-vpc) to create your KMS instance and to authorize your service in IAM. 
 
     1. List available KMS instances and note the **ID**.
@@ -141,7 +141,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
         ```
         {: pre}
 
-1.Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. Include the `--vpc-id` option if the worker pool is the first in the cluster. Optionally include the `--kms-instance` and `--crk` flags with the values you previously retrieved. To attach additional security groups to the workers in the worker pool, [specify the security group IDs with the `--security-group` option](/docs/containers?topic=containers-vpc-security-group#vpc-sg-worker-pool). For more options, see the [CLI documentation](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2).  Note that the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
+1. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. Include the `--vpc-id` option if the worker pool is the first in the cluster. Optionally include the `--kms-instance` and `--crk` flags with the values you previously retrieved. To attach additional security groups to the workers in the worker pool, [specify the security group IDs with the `--security-group` option](/docs/containers?topic=containers-vpc-security-group#vpc-sg-worker-pool). For more options, see the [CLI documentation](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2).  Note that the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
     If you want to create your worker pool on dedicated hosts, make sure to specify the `--dedicated-host-pool` option.
     {: note}
 
@@ -425,8 +425,8 @@ To add a zone with worker nodes to your worker pool:
 ![Classic](../icons/classic.svg "Classic") By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. These pools are created with specific labels for compute or gateway functionality. Add compute or gateway worker nodes, depending on your use case.
 {: shortdesc}
 
-* Compute: If you need more compute resources to run your app workloads, [resize](#resize_pool) or [add zones](#add_gateway_zone) to the `compute` worker pool. Only create a new compute worker pool if you need worker nodes of a different flavor than the existing compute worker nodes.
-* Gateway: If you need more network throughput for your cluster, you can [resize](#resize_pool) or [add zones](#add_gateway_zone) to the `gateway` worker pool. Only create new gateway worker pool if you need worker nodes of a different flavor than the existing gateway worker nodes, which are created on shared virtual machines with the `u3c.2x4` flavor by default.
+- Compute: If you need more compute resources to run your app workloads, [resize](#resize_pool) or [add zones](#add_gateway_zone) to the `compute` worker pool. Only create a new compute worker pool if you need worker nodes of a different flavor than the existing compute worker nodes.
+- Gateway: If you need more network throughput for your cluster, you can [resize](#resize_pool) or [add zones](#add_gateway_zone) to the `gateway` worker pool. Only create new gateway worker pool if you need worker nodes of a different flavor than the existing gateway worker nodes, which are created on shared virtual machines with the `u3c.2x4` flavor by default.
 
 ### Adding a zone to compute and gateway worker pools
 {: #add_gateway_zone}
@@ -439,8 +439,8 @@ When you add a zone to a worker pool, the worker nodes that are defined in your 
 If you have multiple worker pools in your cluster, add the zone to all them so that worker nodes are spread evenly across your cluster. Note that when you add worker nodes to your cluster, the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
 
 Before you begin:
-* To add a zone to your worker pools, your compute and gateway worker pools must be in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones-mz). If your worker pools are not in a multizone-capable zone, consider [creating a new compute worker pool](#gateway_compute) and [creating a new gateway worker pool](#gateway_replace).
-* Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/openshift?topic=openshift-users).
+- To add a zone to your worker pools, your compute and gateway worker pools must be in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones-mz). If your worker pools are not in a multizone-capable zone, consider [creating a new compute worker pool](#gateway_compute) and [creating a new gateway worker pool](#gateway_replace).
+- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/openshift?topic=openshift-users).
 
 To add a zone to your worker pool:
 
@@ -664,9 +664,9 @@ To connect your cluster and the server instance, you create an `ibm-external-com
 
 Before you begin, review the following limitations and considerations.
 
-* Although the virtual or bare metal server instance is added to your cluster's private pod network, the server instance is not managed by the cluster master and is not schedulable for workloads by the cluster master. You must continue to manage your server instance separately from your cluster's worker nodes by using the classic infrastructure [console](https://cloud.ibm.com/classic/devices), `ibmcloud sl` CLI, or API.
-* Every time that your cluster master is updated, including both minor version updates that you apply manually and master patches that are applied automatically, you must also update your server instance connection by following the steps in [Updating the server instance connection](#update_connection).
-* You can add virtual or bare metal server to only one gateway-enabled classic cluster per private VLAN.
+- Although the virtual or bare metal server instance is added to your cluster's private pod network, the server instance is not managed by the cluster master and is not schedulable for workloads by the cluster master. You must continue to manage your server instance separately from your cluster's worker nodes by using the classic infrastructure [console](https://cloud.ibm.com/classic/devices), `ibmcloud sl` CLI, or API.
+- Every time that your cluster master is updated, including both minor version updates that you apply manually and master patches that are applied automatically, you must also update your server instance connection by following the steps in [Updating the server instance connection](#update_connection).
+- You can add virtual or bare metal server to only one gateway-enabled classic cluster per private VLAN.
 
 ### Step 1: Create the virtual or bare metal server
 {: #vsi_1}
@@ -677,10 +677,10 @@ Set up a virtual or bare metal server that can be added to the private network o
 **Before you begin**:
 
 The server instance that you attach to your cluster's network must have the following characteristics:
-* Deployed in one of the zones that your cluster is deployed to
-* Deployed onto one of the VLANs and subnets that your worker nodes are attached to
-* Accessible on the private network only
-* Stores the public key of an SSH key for the root user
+- Deployed in one of the zones that your cluster is deployed to
+- Deployed onto one of the VLANs and subnets that your worker nodes are attached to
+- Accessible on the private network only
+- Stores the public key of an SSH key for the root user
 
 If you have an existing virtual or bare metal server that meets all these requirements, you can skip steps 2 - 6. Otherwise, follow steps 2 - 6 to create a new virtual or bare metal server.
 

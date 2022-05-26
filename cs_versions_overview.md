@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -110,7 +110,7 @@ The following table records {{site.data.keyword.containerlong_notm}} version rel
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-|  Version | Supported? | {{site.data.keyword.containerlong_notm}}<br>release date | {{site.data.keyword.containerlong_notm}}<br>unsupported date |
+|  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
 | [1.23](/docs/containers?topic=containers-cs_versions_123) | Yes | 09 Feb 2022 | April 2023 `†` |
 | [1.22](/docs/containers?topic=containers-cs_versions_122) | Yes | 29 Sep 2021 | Nov 2022 `†` |
@@ -131,7 +131,7 @@ Each supported version of {{site.data.keyword.containerlong_notm}} goes through 
 Estimated days and versions are provided for general understanding. Actual availability and release dates are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 {: note}
 
-![Diagram of the lifecycle of community Kubernetes and supported {{site.data.keyword.cloud_notm}} releases across time](images/version_flowchart_kube.svg)
+![Diagram of the lifecycle of community Kubernetes and supported {{site.data.keyword.cloud_notm}} releases across time](images/version_flowchart_kube.svg){: caption="Figure 1. Lifecycle of community Kubernetes and supported releases across time" caption-side="bottom"}
 
 Review the descriptions of each phase of a version's lifecycle. 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, networking
 
@@ -191,9 +191,9 @@ Istio
 :   **Load-balancing method**: Basic load balancing that exposes the app with a hostname and uses Istio routing rules
 :   **Use case**: Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public hostname.
 :   **Implementation**: 
-        1. Install the <a href="/docs/containers?topic=containers-istio#istio_install">managed Istio add-on</a>.
-        2. Include your app in the <a href="/docs/containers?topic=containers-istio-mesh#istio_sidecar">Istio service mesh.
-        3. Register the default Istio load balancer with <a href="/docs/containers?topic=containers-istio-mesh#istio_expose">a hostname.
+        1. Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).
+        2. Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar).
+        3. Register the default Istio load balancer with [a hostname](/docs/containers?topic=containers-istio-mesh#istio_expose).
         
         
 Ingress ALB

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -76,10 +76,10 @@ If the Ingress subdomain and secret are still unavailable after your cluster is 
 
 2. Verify that the prerequisite steps for your ALB creation are completed.
     * ![Classic](../icons/classic.svg "Classic") **Classic clusters**: Get the details of the `ibm-cloud-provider-vlan-ip-config` config map.
-    ```sh
-    kubectl describe cm ibm-cloud-provider-vlan-ip-config -n kube-system
-    ```
-    {: pre}
+        ```sh
+        kubectl describe cm ibm-cloud-provider-vlan-ip-config -n kube-system
+        ```
+        {: pre}
 
     * If the config map shows IP addresses, continue to the next step.
     * If the **Events** section shows a warning message similar to `ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN`, see the [VLAN capacity troubleshooting topic](/docs/containers?topic=containers-cs_subnet_limit).
@@ -161,12 +161,13 @@ If the Ingress subdomain and secret are still unavailable after your cluster is 
     {: screen}
 
     * ![VPC](../icons/vpc.svg "VPC") **VPC clusters**: Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer **Name** that starts with `kube-<cluster_ID>`. If you did not install the `infrastructure-service` plug-in, install it by running `ibmcloud plugin install infrastructure-service`.
-    ```sh
-    ibmcloud is load-balancers
-    ```
-    {: pre}
+        ```sh
+        ibmcloud is load-balancers
+        ```
+        {: pre}
 
-    <p class="note">Even though the VPC load balancer is listed, its DNS entry might still be registering. When a VPC load balancer is created, the hostname is registered through a public DNS. Sometimes, it can take several minutes for this DNS entry to be replicated to the specific DNS that your client is using.</p>
+    Even though the VPC load balancer is listed, its DNS entry might still be registering. When a VPC load balancer is created, the hostname is registered through a public DNS. Sometimes, it can take several minutes for this DNS entry to be replicated to the specific DNS that your client is using.
+    {: note}
 
 3. Check whether an ALB exists for your cluster and that the ALB has an IP address (classic clusters) or hostname (VPC clusters) assigned.
     ```sh
@@ -186,26 +187,26 @@ If the Ingress subdomain and secret are still unavailable after your cluster is 
     * If a public ALB is listed and is assigned an IP address (classic clusters) or hostname (VPC clusters), continue to the next step.
     * If a public ALB is listed and but is not assigned an IP address (classic clusters) or hostname (VPC clusters), try to disable and re-enable the ALBs.
         * ![Classic](../icons/classic.svg "Classic") Classic clusters:
-        ```sh
-        ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
-        ```
-        {: pre}
+            ```sh
+            ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
+            ```
+            {: pre}
 
-        ```sh
-        ibmcloud ks ingress alb enable classic --alb <ALB_ID> -c <cluster_name_or_ID>
-        ```
-        {: pre}
+            ```sh
+            ibmcloud ks ingress alb enable classic --alb <ALB_ID> -c <cluster_name_or_ID>
+            ```
+            {: pre}
 
-    * ![VPC](../icons/vpc.svg "VPC") VPC clusters:
-        ```sh
-        ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
-        ```
-        {: pre}
+        * ![VPC](../icons/vpc.svg "VPC") VPC clusters:
+            ```sh
+            ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
+            ```
+            {: pre}
 
-        ```sh
-        ibmcloud ks ingress alb enable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID>
-        ```
-        {: pre}
+            ```sh
+            ibmcloud ks ingress alb enable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID>
+            ```
+            {: pre}
 
     * If no ALBs are created after several minutes, [review ways to get help](/docs/containers?topic=containers-get-help).
 

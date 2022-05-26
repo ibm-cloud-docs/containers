@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-20"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, clusters, worker nodes, worker pools
 
@@ -186,8 +186,8 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
 2. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 3. Configure your cluster environment.
     1. Select the **Standard** cluster plan.
-    2. From the Kubernetes drop-down list, select the version that you want to use in your cluster, such as 1.22.7.
-    4. Select **Classic** infrastructure.
+    1. From the Kubernetes drop-down list, select the version that you want to use in your cluster, such as 1.22.7.
+    1. Select **Classic** infrastructure.
 4. Configure the **Location** details for your cluster.
     1. Select the **Resource group** that you want to create your cluster in.
         * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.

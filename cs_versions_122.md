@@ -1,9 +1,8 @@
-
 ---
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-20"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, 1.22, versions, update, upgrade
 
@@ -41,7 +40,7 @@ For the release history and timeline of all current {{site.data.keyword.containe
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-|  Version | Supported? | {{site.data.keyword.containerlong_notm}} release date | {{site.data.keyword.containerlong_notm}} unsupported date |
+|  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
 | 1.22 | Yes | 29 Sep 2021 | Nov 2022 `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.22" caption-side="top"}

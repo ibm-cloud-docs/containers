@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes
 
@@ -83,6 +83,7 @@ TLS cipher support
     - `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`
     - `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
     - `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256`
+
 :   TLS version 1.3 (Kubernetes version 1.19 and later):
     - `TLS_AES_128_GCM_SHA256`
     - `TLS_CHACHA20_POLY1305_SHA256`
@@ -113,6 +114,7 @@ TLS cipher support
     - `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`
     - `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
     - `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256`
+
 :   TLS version 1.3 (Kubernetes version 1.19 and later):
     - `TLS_AES_128_GCM_SHA256`
     - `TLS_CHACHA20_POLY1305_SHA256`
@@ -172,6 +174,7 @@ TLS cipher support
     - `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`
     - `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
     - `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256`
+
 :   TLS version 1.3 (Kubernetes version 1.19 and later): 
     - `TLS_AES_128_GCM_SHA256`
     - `TLS_CHACHA20_POLY1305_SHA256`
@@ -192,6 +195,7 @@ TLS cipher support
     - `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`
     - `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
     - `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256`
+
 :   TLS version 1.3 (Kubernetes version 1.19 and later):
     - `TLS_AES_128_GCM_SHA256`
     - `TLS_CHACHA20_POLY1305_SHA256`

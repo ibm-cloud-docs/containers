@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -916,7 +916,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
     ```
     {: pre}
 
-3. If you specified non-standard HTTP, HTTPS, or TCP ports, you must open the ports on each ALB service.
+4. If you specified non-standard HTTP, HTTPS, or TCP ports, you must open the ports on each ALB service.
     1. For each ALB service that you found in step 1, edit the YAML file.
         ```sh
         kubectl edit svc -n kube-system <alb_svc_name>
@@ -948,7 +948,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 
     3. Save and close the file. Your changes are applied automatically.
 
-4. If you use {{site.data.keyword.blockchainfull}}, you must [re-establish connectivity between the {{site.data.keyword.blockchain}} management console and your cluster](/docs/blockchain?topic=blockchain-ibp-console-manage-console#ibp-console-refresh).
+5. If you use {{site.data.keyword.blockchainfull}}, you must [re-establish connectivity between the {{site.data.keyword.blockchain}} management console and your cluster](/docs/blockchain?topic=blockchain-ibp-console-manage-console#ibp-console-refresh).
 
 
 
@@ -1432,6 +1432,7 @@ Keepalive connections can have a major impact on performance by reducing the CPU
 2. Change the values of `keep-alive-requests` and `keep-alive`.
     * `keep-alive-requests`: The number of keepalive client connections that can stay open to the Ingress ALB. The default is `100`.
     * `keep-alive`: The timeout, in seconds, during which the keepalive client connection stays open to the Ingress ALB. The default is `75`.
+
     ```yaml
     apiVersion: v1
     data:

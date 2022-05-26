@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-05-25"
+lastupdated: "2022-05-26"
 
 keywords: containers
 subcollection: containers
@@ -1013,7 +1013,7 @@ subcollection: containers
 
         * Worker node versions
 
-    * [1 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march2621)
+    * [10 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march1021)
 
         * Istio add-on
 
@@ -2792,7 +2792,7 @@ subcollection: containers
 
     * [I need help with a broken webhook. What can I do?](/docs/containers?topic=containers-access_cluster#access_webhooks-help)
 
-    * [Setting up admission controller webhooks](/docs/containers?topic=containers-access_cluster#setting-up-admission-controller-webhooks)
+    * [Setting up admission controller webhooks](/docs/containers?topic=containers-access_cluster#configure-webhooks-122)
 
 * [Accessing private clusters by using the WireGuard VPN](/docs/containers?topic=containers-access_cluster#access_vpn_containers)
 
@@ -3078,7 +3078,7 @@ subcollection: containers
 
     * [Worker node components](/docs/containers?topic=containers-service-arch#worker-components)
 
-    * [ `kube-system` namespace](/docs/containers?topic=containers-service-arch#kube-system-ns-resources)
+    * [`kube-system` namespace](/docs/containers?topic=containers-service-arch#kube-system-ns-resources)
 
     * [`ibm-system` namespace](/docs/containers?topic=containers-service-arch#ibm-system-ns-resources)
 
@@ -3911,11 +3911,11 @@ subcollection: containers
 
 * [Publicly accessing BookInfo](/docs/containers?topic=containers-istio-mesh#istio_access_bookinfo)
 
-    * [Creating a gateway URL in Classic clusters](/docs/containers?topic=containers-istio-mesh#creating-a-gateway-url-in-classic-clusters)
+    * [Creating a gateway URL in Classic clusters](/docs/containers?topic=containers-istio-mesh#istio_create_gatewayURL_classic)
 
     * [Creating a gateway URL in VPC clusters](/docs/containers?topic=containers-istio-mesh#create-gateway-vpc)
 
-    * [Viewing the BookInfo web page in a browser](/docs/containers?topic=containers-istio-mesh#viewing-the-bookinfo-web-page-in-a-browser)
+    * [Viewing the BookInfo web page in a browser](/docs/containers?topic=containers-istio-mesh#viewing-bookinfo)
 
     * [Exposing BookInfo by using an IBM-provided subdomain without TLS](/docs/containers?topic=containers-istio-mesh#istio_expose_bookinfo)
 
@@ -3955,7 +3955,7 @@ subcollection: containers
 
 * [Controlling custom gateway updates and versions](/docs/containers?topic=containers-istio-custom-gateway#custom-gateway-version)
 
-* [Additional gateway customizations](/docs/containers?topic=containers-istio-custom-gateway#additional-gateway-customizations)
+* [Additional gateway customizations](/docs/containers?topic=containers-istio-custom-gateway#custom-gateway-options)
 
 * [Creating a custom egress gateway](/docs/containers?topic=containers-istio-custom-gateway#custom-egress-gateway)
 
@@ -5031,7 +5031,7 @@ subcollection: containers
 
 * [`ingress` commands](/docs/containers?topic=containers-kubernetes-service-cli#alb-commands)
 
-    * [ `ibmcloud ks ingress alb autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable)
+    * [`ibmcloud ks ingress alb autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable)
 
     * [`ibmcloud ks ingress alb autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_enable)
 
@@ -5055,7 +5055,7 @@ subcollection: containers
 
     * [`ibmcloud ks ingress alb migrate start`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_start)
 
-    * [ `ibmcloud ks ingress alb migrate status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_status)
+    * [`ibmcloud ks ingress alb migrate status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_status)
 
     * [`ibmcloud ks ingress alb update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_update)
 
@@ -7921,7 +7921,7 @@ subcollection: containers
 
 [Why does the Kubernetes dashboard terminate with an `OOMKilled` error?](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-kube-dashboord-oom)
 
-* [Changing the resource auto-refresh time interval from the Kubernetes dashboard](/docs/containers?topic=containers-ts-kube-dashboord-oom#changing-the-resource-auto-refresh-time-interval-from-the-kubernetes-dashboard)
+* [Changing the resource auto-refresh time interval from the Kubernetes dashboard](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-dashboard-auto-refresh)
 
 * [Changing the resource auto-refresh time interval from the command line](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-dashboard-auto-refresh-cli)
 

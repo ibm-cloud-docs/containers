@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, ic, ks, kubectl, api
 
@@ -317,6 +317,7 @@ The following instructions require public network access in your cluster to conn
          - `Authorization: Basic a3ViZTprdWJl`
               `a3ViZTprdWJl` equals the URL-encoded authorization for the username **`kube`** and the password **`kube`**.
          - `cache-control: no-cache`
+
     Body
     :    - `refresh_token`: Your {{site.data.keyword.cloud_notm}} IAM delegated refresh token.
          - `grant_type: urn:ibm:params:oauth:grant-type:delegated-refresh-token`

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes
 
@@ -140,7 +140,7 @@ Create a Kubernetes deployment to deploy a single app instance as a pod to your 
 
 The components that you deploy by completing this lesson are shown in the following diagram.
 
-![Deployment setup](images/cs_app_tutorial_mz-components1.png)
+![Deployment setup](images/cs_app_tutorial_mz-components1.png){: caption="Figure 1. Components of the deployment setup" caption-side="bottom"}
 
 To deploy the app:
 
@@ -350,7 +350,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     | `--target-port=*<8080>*` | The port that your app listens on and to which the service directs incoming network traffic. In this example, the `target-port` is the same as the `port`, but other apps that you create might use a different port. |
     {: caption="Table 2. Information about the command options." caption-side="top"}
 
-2. Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When you create the Kubernetes `LoadBalancer` service, a VPC load balancer is automatically created for you. The VPC load balancer assigns a hostname to your Kubernetes LoadBalancer service that you can see in the **LoadBalancer Ingress** field of your CLI output.<p class="note">The VPC load balancer takes a few minutes to provision in your VPC. Until the VPC load balancer is ready, you can't access the Kubernetes `LoadBalancer` service through its hostname.</p>
+2. Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When you create the Kubernetes `LoadBalancer` service, a VPC load balancer is automatically created for you. The VPC load balancer assigns a hostname to your Kubernetes LoadBalancer service that you can see in the **LoadBalancer Ingress** field of your CLI output. The VPC load balancer takes a few minutes to provision in your VPC. Until the VPC load balancer is ready, you can't access the Kubernetes `LoadBalancer` service through its hostname.
 
     ```sh
     kubectl describe service hw-lb-svc

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
 
@@ -206,7 +206,7 @@ Deploy the [BookInfo sample application for Istio](https://istio.io/latest/docs/
     {: pre}
 
 6. Using the IP address (classic) or hostname (VPC) that you found for the `service/custom-ingressgateway` load balancer in the previous section, open the product page for the BookInfo app in a browser.
-    ```
+    ```sh
     http://<IP_OR_HOSTNAME>/productpage
     ```
     {: codeblock}
@@ -335,7 +335,7 @@ Update your custom gateway pods as soon as possible after a version is released.
 
 
 ## Additional gateway customizations
-{: custom-gateway-options}
+{: #custom-gateway-options}
 
 Custom ingress gateways can be configured with additional customizations, including deploying the gateway load balancer to a specific zone, specifying the minimum number of gateway pod replicas, scheduling custom gateway pods onto [edge nodes](/docs/containers?topic=containers-edge), adding `preStop` lifecycle hooks for graceful shutdowns, and specifying anti-affinity and worker node affinity.
 {: shortdesc}

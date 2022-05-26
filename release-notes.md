@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-24"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, release notes
 
@@ -1711,8 +1711,8 @@ Worker node versions
 
 
 
-### 1 March 2021
-{: #containers-march2621}
+### 10 March 2021
+{: #containers-march1021}
 {: release-note}
 
 Istio add-on
@@ -3796,6 +3796,7 @@ New! Gateway-enabled classic clusters
         - [Using a gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway)
         - [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_gateway)
         - Flow of traffic to apps when using an [NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_gateway), an [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#v2_gateway), or [Ingress ALBs](/docs/containers?topic=containers-ingress-about#classic-gateway)
+
 :   Ready to get started? [Create a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli).
 
 

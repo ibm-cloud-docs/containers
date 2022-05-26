@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
 
@@ -163,7 +163,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
     :   Default value: `"ALLOW_ANY"`
     :   By default, all outbound traffic from the service mesh is permitted. To block outbound traffic from the service mesh to any host that is not defined in the service registry or that does not have a `ServiceEntry` within the service mesh, set to `REGISTRY_ONLY`.
     
-    `istio-egressgateway-public-1-enabled `
+    `istio-egressgateway-public-1-enabled`
     :   Default value: `"true"`
     :   To disable the default Istio egress gateway, set to `"false"`. For example, you might [create a custom egress gateway](/docs/containers?topic=containers-istio-custom-gateway#custom-egress-gateway) instead.
 
@@ -342,7 +342,7 @@ You can't revert your managed Istio add-on to a previous version. If you want to
 
         Example output.
 
-        ```
+        ```txt
         NAME                           WEBHOOKS   AGE
         istio-validator-istio-system   2          66s
         istiod-istio-system            1          31m
@@ -469,6 +469,7 @@ For example, the patch version of your add-on might be updated automatically by 
 3. In the output of step 1, compare the `pilot version` to the `data plane version` for each data plane pod.
     * If the `pilot version` and the `data plane version` match, no further updates are required.
     * If the `pilot version` and the `data plane version` don't match, restart your deployments for the data plane pods that run the old version. The pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"1.8.4"}`.
+
     ```sh
     kubectl rollout restart deployment <deployment> -n <namespace>
     ```

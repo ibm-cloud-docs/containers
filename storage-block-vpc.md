@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-23"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes
 
@@ -1596,14 +1596,14 @@ To clean up persistent data:
     ```
     {: pre}
 
-2. Remove the physical storage instance.
+1. Remove the physical storage instance.
 
     ```sh
     ibmcloud is volume-delete <vpc_block_id>
     ```
     {: pre}
 
-3. Verify that the physical storage instance is removed.
+1. Verify that the physical storage instance is removed.
 
     The deletion process might take up to 72 hours to complete.
     {: important}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-05-26"
 
 keywords: kubernetes
 
@@ -25,29 +25,29 @@ When the worker nodes in your cluster can't communicate on the private network, 
 {: tsSymptoms}
 
 - Sample error message when you run `kubectl exec`, `attach`, `logs`, `proxy`, or `port-forward`:
-    ```
+    ```txt
     Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out
     ```
     {: screen}
 
 - Sample error message when `kubectl proxy` succeeds, but the Kubernetes dashboard is not available:
-    ```
+    ```txt
     timeout on 172.xxx.xxx.xxx
     ```
     {: screen}
 
 - Sample error message when `kubectl proxy` fails or the connection to your service fails:
-    ```
+    ```txt
     Connection refused
     ```
     {: screen}
 
-    ```
+    ```txt
     Connection timed out
     ```
     {: screen}
 
-    ```
+    ```txt
     Unable to connect to the server: net/http: TLS handshake timeout
     ```
     {: screen}
