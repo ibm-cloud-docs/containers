@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-05-31"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -19,9 +19,6 @@ subcollection: containers
 
 Modify default ALB settings and add annotations to your Ingress resources for ALBs that run the Kubernetes Ingress image.
 {: shortdesc}
-
-ALB OAuth Proxy add-on version 1.0.0 is deprecated and will become unsupported on 16 May 2022.
-{: important}
 
 ## Customizing routing with annotations
 {: #annotations}
