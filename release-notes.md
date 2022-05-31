@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-05-31"
 
 keywords: kubernetes, release notes
 
@@ -68,6 +68,9 @@ Ingress ALB change log updates
 
 Cluster autoscaler add-on
 :   Versions `1.0.5_628` and `1.1.0_615` are available. See [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
+
+ALB OAuth Proxy add-on
+:   Verion 1.0.0 is no longer supported. For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 
 ### 12 May 2022
 {: #containers-may1222}
