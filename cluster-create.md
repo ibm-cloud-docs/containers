@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-31"
+lastupdated: "2022-06-01"
 
 keywords: kubernetes, clusters, worker nodes, worker pools
 
@@ -700,7 +700,7 @@ By default, your cluster is provisioned with a VPC security group and a cluster-
     * For more information, see [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}: Subnets](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets).
 4. Create the cluster in your VPC. You can use the `ibmcloud ks cluster create vpc-gen2` command to create a single zone cluster in your VPC with worker nodes that are connected to one VPC subnet only. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#vpc_add_zone) to your cluster after the cluster is created. The cluster takes a few minutes to provision.
     ```sh
-    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>] [--cluster-security-group <group_ID>] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] [[--kms-account-ID <kms_account_ID>] --kms-instance <KMS_instance_ID> --crk <root_key_ID>]
+    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>] [--cluster-security-group <group_ID>] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] [--kms-instance <KMS_instance_ID> --crk <root_key_ID>]
     ```
     {: pre}
 
@@ -751,11 +751,6 @@ By default, your cluster is provisioned with a VPC security group and a cluster-
     `--disable-public-service-endpoint`
     :   Include this option in your command to create your VPC cluster with a private cloud service endpoint only. If you don't include this option, your cluster is set up with a public and a private cloud service endpoint. The service endpoint determines how your Kubernetes master and the worker nodes communicate, how your cluster access other {{site.data.keyword.cloud_notm}} services and apps outside the cluster, and how your users connect to your cluster. For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
         
-
-    `--kms-account-ID <KMS_acount_ID>`
-    :   Optional: Must be included if the `--kms-instance-id` and `--crk` flags are provided and the KMS instance resides in an account different from the cluster's account, otherwise it can be omitted.
-    {: note}
-
 
     `--kms-instance <KMS_instance_ID>`
     :   Optional: Include the ID of a key management service (KMS) instance to use to encrypt the local disk on the worker nodes in the `default` worker pool. To list available KMS instances, run `ibmcloud ks kms instance ls`. If you include this option, you must also include the `--crk` option.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-06-01"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -180,6 +180,9 @@ The **Master Status** provides details of what operation from the master state i
 When you set up alerts, make sure to allow your cluster enough time to self-heal. Because Kubernetes has self healing capabilities, configure your alerts only for the issues that arise over time. By observing your cluster over time, you can learn which issues Kubernetes can resolve itself and which issues require alerts to avoid downtime.
 {: shortdesc}
 
+On 15 June 2022, the naming convention for {{site.data.keyword.mon_full}} alerts is changing to a Prometheus compatible format. For more information, see the [Sysdig release notes](https://docs.sysdig.com/en/docs/release-notes/enhanced-metric-store/#new-features-and-enhancements){: external}, [Mapping Legacy Sysdig Kubernetes Metrics with Prometheus Metrics](https://docs.sysdig.com/en/docs/sysdig-monitor/metrics-dictionary/metrics-and-label-mapping/mapping-legacy-sysdig-kubernetes-metrics-with-prometheus-metrics/#mapping-legacy-sysdig-kubernetes-metrics-with-prometheus-metrics){: external}, and [Mapping Between Classic Metrics and PromQL Metrics](https://docs.sysdig.com/en/docs/sysdig-monitor/metrics-dictionary/metrics-and-label-mapping/mapping-classic-metrics-with-promql-metrics/#mapping-between-classic-metrics-and-promql-metrics){: external}.
+{: important}
+
 Depending on the size of your cluster, consider setting up alerts on the following levels:
 
 - [Apps](#app-level-alerts)
@@ -187,7 +190,7 @@ Depending on the size of your cluster, consider setting up alerts on the followi
 - [Cluster](#cluster-level-alerts)
 - [Zone](#zone-level-alerts)
 - [Account](#account-level-alerts)
-
+- [{{site.data.keyword.block_storage_is_short}}](#vpc-block-storage-alerts)
 
 
 
@@ -219,11 +222,15 @@ The underlying issues for these symptoms include things such as,
 To set up monitoring for these conditions, configure alerts based on the following {{site.data.keyword.mon_full_notm}} metrics. Note that your alert thresholds might change depending on your cluster configuration.
 
 | Metric | {{site.data.keyword.mon_full_notm}} metric | Alert threshold |
-| --- | --- | --- |
+| --- | --- | --- |<alert-names-old>
 | Multiple restarts of a pod in a short amount of time. | `kubernetes.pod.restart.count` | Greater than 4 for the last 10 minutes |
 | No running replicas in a ReplicaSet. | `kubernetes.replicaSet.replicas.running` in `kubernetes.deployment.name` | Less than one. |
 | More than 5 pods pending in cluster. | `kubernetes.namespace.pod.status.name` | Status equals `pending` greater than five.|
-| No replicas in a deployment available. | `kubernets.deployment.replicas.available` | Less than one. |
+| No replicas in a deployment available. | `kubernets.deployment.replicas.available` | Less than one. |</alert-names-old><alert-names-new>
+| Multiple restarts of a pod in a short amount of time. | `kubernetes_pod_restart_count` | Greater than 4 for the last 10 minutes |
+| No running replicas in a ReplicaSet. | `kube_replicaset_status_replicas` in `kubernetes_deployment_name` | Less than one. |
+| More than 5 pods pending in cluster. | `kube_pod_container_status_waiting` | Status equals `pending` greater than five.|
+| No replicas in a deployment available. | `kubernets_deployment_replicas_available` | Less than one. |</alert-names-new>
 | Number of pods per node reaching threshold of 110. | Count by `(kube_cluster_name,kube_node_name)(kube_pod_container_info)` | Greater than or equal to 100. Note that this query is a `promQL` query. |
 | Workloads that are in an unknown state. | `(kube_workload_status_unavailable)` | Greater than or equal to one. Note that this query is a `promQL` query. |
 {: caption="App level metrics"}
@@ -236,7 +243,7 @@ Review the following thresholds and alerts for worker nodes.
 {: shortdesc}
 
 |Metric| {{site.data.keyword.mon_full_notm}} metric | Alert threshold |
-| --- | --- | --- |
+| --- | --- | --- |<alert-names-old>
 | CPU utilization of the worker node over threshold. | `cpu.used.percent` | Greater than 80% for 1 hour. |
 | CPU utilization of the worker node over threshold. | `cpu.used.percent` | Greater than 65% for 24 hours. |
 | Memory utilization of the worker node over threshold. | `memory.used.percent` | Greater than 80 % for 1 hour. |
@@ -246,7 +253,14 @@ Review the following thresholds and alerts for worker nodes.
 | Nodes with disk pressure exist. | `kubernetes.node.diskPressure` | Greater than or equal to 1 for 10 minutes. |
 | Nodes without disk space exist. | `kubernetes.nodes.outOfDisk` | Greater than or equal to 1. |
 | Average free disk space. | `fs.free.percent` | Less than 20% for 1 hour. |
-| Kubernetes nodes not ready exist. | `kubernetes.node.ready >= 1` |
+| Kubernetes nodes not ready exist. | `kubernetes.node.ready >= 1` |</alert-names-old><alert-names-new>
+| CPU utilization of the worker node over threshold. | `cpu_used_percent` | Greater than 80% for 1 hour. |
+| CPU utilization of the worker node over threshold. | `cpu_used_percent` | Greater than 65% for 24 hours. |
+| Memory utilization of the worker node over threshold. | `memory_used_percent` | Greater than 80 % for 1 hour. |
+| Memory utilization of the worker node over threshold. | `memory_used_percent` | Greater than 65% for 24 hours. |
+| Amount of memory used over threshold. | `memory_bytes_used` | Greater than `NUMBER_OF_BYBTES`. |
+| Nodes with disk pressure exist. | `kube_node_status_condition` | Greater than or equal to 1 for 10 minutes. |
+| Kubernetes nodes not ready exist. | `kube_node_status_ready >= 1` |</alert-names-new>
 {: caption="Worker node metrics"}
 
 #### Resolving worker node alerts
@@ -280,8 +294,6 @@ Reloading or rebooting the worker can resolve the issue. However, you might need
 
     1. [Reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker node.
 
-All worker nodes in a zone are reaching capacity threshold of 80% (Solution: Add worker nodes in that zone so that load goes below 70%)
-More than 2 worker nodes in one zone are not ready (label: label_failure_domain_beta_kubernetes_io_zone)
 
 ### Zone alerts
 {: #zone-level-alerts}

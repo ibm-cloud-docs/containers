@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-06-01"
 
 keywords: kubernetes, istio, add-on
 
@@ -40,11 +40,40 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 {: summary="The rows are read from left to right. The first column is the Istio add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the Istio version is supported for."}
 {: caption="Supported Istio versions" caption-side="top"}
 
-The Istio add-on is not yet supported on Kubernetes version 1.23. Do not update to version 1.23 if this add-on is installed in your cluster. 
-{: important}
-
 ## Version 1.13
 {: #v113}
+
+### Changelog for 1.13.4, released 1 June 2022
+{: #1134}
+
+Review the changes that are included in version 1.13.4 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.13.3
+
+Current version
+:   1.13.4
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.13.4](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.4/.){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2022-27780](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27780){: external}
+    - [CVE-2022-27781](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27781){: external}
+    - [CVE-2022-27782](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27782){: external}
+    - [CVE-2022-22576](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22576){: external}
+    - [CVE-2022-27774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27774){: external}
+    - [CVE-2022-27775](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27775){: external}
+    - [CVE-2022-27776](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27776){: external}
+    - [CVE-2022-1292](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1292){: external}   
+    - [CVE-2022-1343](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1343){: external}
+    - [CVE-2022-1434](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1434){: external}
+    - [CVE-2022-27776 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1473){: external}
+    - [CVE-2021-36084](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36084){: external}
+    - [CVE-2021-36085](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36085){: external}
+    - [CVE-2021-36086](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36086 ){: external}
+    - [CVE-2021-36087](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36087){: external}
+    - [CVE-2019-18276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18276){: external}
 
 ### Changelog for 1.13.3, released 3 May 2021
 {: #1133}
