@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-31"
+lastupdated: "2022-06-01"
 
 keywords: kubernetes, release notes
 
@@ -23,6 +23,16 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+
+## June 2022
+{: #containers-jun22}
+
+### 1 June 2022
+{: #containers-jun122}
+
+Istio add-on
+:   Version [`1.13.4`](/docs/containers?topic=containers-istio-changelog#1134) is available.
 
 ## May 2022
 {: #containers-may22}
@@ -62,6 +72,7 @@ Istio add-on
 
 Ingress ALB change log updates
 :   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for versions `1.2.0_2251_iks`, `1.1.2_2252_iks`, and `0.49.3_2253_iks`.
+
 
 ### 16 May 2022
 {: #containers-may1622}
