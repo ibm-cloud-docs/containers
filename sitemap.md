@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-01"
+lastupdated: "2022-06-02"
 
 keywords: containers
 subcollection: containers
@@ -7954,13 +7954,17 @@ subcollection: containers
 
 [Debugging worker nodes](/docs/containers?topic=containers-debug_worker_nodes#debug_worker_nodes)
 
-* [Step 1: Get the worker node state](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-get-state)
+* [Quick steps to resolve worker node issues](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-quick)
 
-* [Step 2: Review the worker node state](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-rev-state)
+* [Debugging your worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-steps)
 
-* [Step 3: Get the details for each worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-get-details)
+    * [Step 1: Get the worker node state](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-get-state)
 
-* [Step 4: Review the infrastructure provider for the worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-rev-infra)
+    * [Step 2: Review the worker node state](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-rev-state)
+
+    * [Step 3: Get the details for each worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-get-details)
+
+    * [Step 4: Review the infrastructure provider for the worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-rev-infra)
 
 [Debugging worker nodes with Kubernetes API](/docs/containers?topic=containers-debug-kube-nodes#debug-kube-nodes)
 
