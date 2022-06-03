@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-01"
+lastupdated: "2022-06-02"
 
 keywords: containers
 subcollection: containers
@@ -7691,6 +7691,18 @@ subcollection: containers
 
 * [au-syd-3](/docs/containers?topic=containers-vpc-gen2-flavors#au-syd-3)
 
+* [br-sao-1](/docs/containers?topic=containers-vpc-gen2-flavors#br-sao-1)
+
+* [br-sao-2](/docs/containers?topic=containers-vpc-gen2-flavors#br-sao-2)
+
+* [br-sao-3](/docs/containers?topic=containers-vpc-gen2-flavors#br-sao-3)
+
+* [ca-tor-1](/docs/containers?topic=containers-vpc-gen2-flavors#ca-tor-1)
+
+* [ca-tor-2](/docs/containers?topic=containers-vpc-gen2-flavors#ca-tor-2)
+
+* [ca-tor-3](/docs/containers?topic=containers-vpc-gen2-flavors#ca-tor-3)
+
 * [eu-de-1](/docs/containers?topic=containers-vpc-gen2-flavors#eu-de-1)
 
 * [eu-de-2](/docs/containers?topic=containers-vpc-gen2-flavors#eu-de-2)
@@ -7702,6 +7714,12 @@ subcollection: containers
 * [eu-gb-2](/docs/containers?topic=containers-vpc-gen2-flavors#eu-gb-2)
 
 * [eu-gb-3](/docs/containers?topic=containers-vpc-gen2-flavors#eu-gb-3)
+
+* [jp-osa-1](/docs/containers?topic=containers-vpc-gen2-flavors#jp-osa-1)
+
+* [jp-osa-2](/docs/containers?topic=containers-vpc-gen2-flavors#jp-osa-2)
+
+* [jp-osa-3](/docs/containers?topic=containers-vpc-gen2-flavors#jp-osa-3)
 
 * [jp-tok-1](/docs/containers?topic=containers-vpc-gen2-flavors#jp-tok-1)
 
@@ -7954,13 +7972,17 @@ subcollection: containers
 
 [Debugging worker nodes](/docs/containers?topic=containers-debug_worker_nodes#debug_worker_nodes)
 
-* [Step 1: Get the worker node state](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-get-state)
+* [Quick steps to resolve worker node issues](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-quick)
 
-* [Step 2: Review the worker node state](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-rev-state)
+* [Debugging your worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-steps)
 
-* [Step 3: Get the details for each worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-get-details)
+    * [Step 1: Get the worker node state](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-get-state)
 
-* [Step 4: Review the infrastructure provider for the worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-rev-infra)
+    * [Step 2: Review the worker node state](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-rev-state)
+
+    * [Step 3: Get the details for each worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-get-details)
+
+    * [Step 4: Review the infrastructure provider for the worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-rev-infra)
 
 [Debugging worker nodes with Kubernetes API](/docs/containers?topic=containers-debug-kube-nodes#debug-kube-nodes)
 
