@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-01"
+lastupdated: "2022-06-06"
 
 keywords: kubernetes, release notes
 
@@ -24,9 +24,17 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
-
 ## June 2022
 {: #containers-jun22}
+
+### 6 June 2022
+{: #containers-jun622}
+
+Worker node fix pack
+:   Kubernetes [1.20.15_1583](/docs/containers?topic=containers-changelog_120), [1.21.13_1562](/docs/containers?topic=containers-changelog_121), [1.22.10_1554](/docs/containers?topic=containers-changelog_122), [1.23.7_1532](/docs/containers?topic=containers-changelog_123).
+
+
+
 
 ### 1 June 2022
 {: #containers-jun122}
