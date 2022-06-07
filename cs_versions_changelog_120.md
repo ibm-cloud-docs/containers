@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-06-06"
+lastupdated: "2022-06-07"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.20
 
@@ -48,7 +48,7 @@ Kubernetes version 1.20 is deprecated, with a tentative unsupported date of 15 J
 
 
 
-### Change log for worker node fix pack 1.20.15_1583, released 06 June 2022
+### Change log for worker node fix pack 1.20.15_1583, released 07 June 2022
 {: #12015_1583}
 
 The following table shows the changes that are in the worker node fix pack 1.20.15_1583. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
