@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-06"
+lastupdated: "2022-06-07"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
+
+    * [7 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun722)
+
+        * CLI change log update
 
     * [6 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun622)
 
@@ -3648,6 +3652,8 @@ subcollection: containers
 
     * [Account alerts](/docs/containers?topic=containers-health-monitor#account-level-alerts)
 
+    * [{{site.data.keyword.block_storage_is_short}} alerts](/docs/containers?topic=containers-health-monitor#vpc-block-storage-alerts)
+
 * [Monitoring worker node health in with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
 
     * [Understanding the configmap components](/docs/containers?topic=containers-health-monitor#configmap-components)
@@ -5255,6 +5261,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version 1.0.419](/docs/containers?topic=containers-cs_cli_changelog#cli-10419)
+
 * [Version 1.0.415](/docs/containers?topic=containers-cs_cli_changelog#cli-10415)
 
 * [Version 1.0.408](/docs/containers?topic=containers-cs_cli_changelog#cli-10408)
@@ -5457,7 +5465,7 @@ subcollection: containers
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
 
-    * [Change log for worker node fix pack 1.23.7_1532, released 06 June 2022](/docs/containers?topic=containers-changelog_123#1237_1532)
+    * [Change log for worker node fix pack 1.23.7_1532, released 07 June 2022](/docs/containers?topic=containers-changelog_123#1237_1532)
 
     * [Change log for worker node fix pack 1.23.6_1530, released 23 May 2022](/docs/containers?topic=containers-changelog_123#1236_1530)
 
@@ -5548,7 +5556,7 @@ subcollection: containers
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
 
-    * [Change log for worker node fix pack 1.22.10_1554, released 06 June 2022](/docs/containers?topic=containers-changelog_122#12210_1554)
+    * [Change log for worker node fix pack 1.22.10_1554, released 07 June 2022](/docs/containers?topic=containers-changelog_122#12210_1554)
 
     * [Change log for worker node fix pack 1.22.9_1552, released 23 May 2022](/docs/containers?topic=containers-changelog_122#1229_1552)
 
@@ -5663,7 +5671,7 @@ subcollection: containers
 
 * [Version 1.21 change log](/docs/containers?topic=containers-changelog_121#121_changelog)
 
-    * [Change log for worker node fix pack 1.21.13_1562, released 06 June 2022](/docs/containers?topic=containers-changelog_121#12113_1562)
+    * [Change log for worker node fix pack 1.21.13_1562, released 07 June 2022](/docs/containers?topic=containers-changelog_121#12113_1562)
 
     * [Change log for worker node fix pack 1.21.12_1560, released 23 May 2022](/docs/containers?topic=containers-changelog_121#12112_1560)
 
@@ -5804,7 +5812,7 @@ subcollection: containers
 
 * [Deprecated: Version 1.20 change log](/docs/containers?topic=containers-changelog_120#120_changelog)
 
-    * [Change log for worker node fix pack 1.20.15_1583, released 06 June 2022](/docs/containers?topic=containers-changelog_120#12015_1583)
+    * [Change log for worker node fix pack 1.20.15_1583, released 07 June 2022](/docs/containers?topic=containers-changelog_120#12015_1583)
 
     * [Change log for worker node fix pack 1.20.15_1581, released 23 May 2022](/docs/containers?topic=containers-changelog_120#12015_1581)
 

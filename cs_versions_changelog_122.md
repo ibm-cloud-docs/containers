@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-06-06"
+lastupdated: "2022-06-07"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -49,7 +49,7 @@ Review the version 1.22 change log.
 
 
 
-### Change log for worker node fix pack 1.22.10_1554, released 06 June 2022
+### Change log for worker node fix pack 1.22.10_1554, released 07 June 2022
 {: #12210_1554}
 
 The following table shows the changes that are in the worker node fix pack 1.22.10_1554. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
