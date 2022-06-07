@@ -209,6 +209,10 @@ subcollection: containers
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
 
+    * [7 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun722)
+
+        * CLI change log update
+
     * [6 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun622)
 
         * Worker node fix pack
@@ -5256,6 +5260,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.419](/docs/containers?topic=containers-cs_cli_changelog#cli-10419)
 
 * [Version 1.0.415](/docs/containers?topic=containers-cs_cli_changelog#cli-10415)
 
