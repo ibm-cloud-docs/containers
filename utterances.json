@@ -338,8 +338,6 @@
   ],
   "smallest_cluster": [  
     "create a Kubernetes cluster in account",
-    "how to create a cluster",
-    "how to add cluster",
     "create a cluster",
     "want to create a cluster",
     "how to get standard cluster",
@@ -349,6 +347,7 @@
     "creating kubernetes cloud clusters",
     "smallest size cluster that I can make",
     "smallest size cluster that I can create",
+    "size of a cluster",
     "i want to create a IKS cluster",
     "how to make a kubernetes cluster",
     "how to provision a cluster",
@@ -597,6 +596,4 @@
     "getting started with Kubernetes"
   ]
 }
-
-
 
