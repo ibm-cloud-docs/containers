@@ -3648,6 +3648,8 @@ subcollection: containers
 
     * [Account alerts](/docs/containers?topic=containers-health-monitor#account-level-alerts)
 
+    * [{{site.data.keyword.block_storage_is_short}} alerts](/docs/containers?topic=containers-health-monitor#vpc-block-storage-alerts)
+
 * [Monitoring worker node health in with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
 
     * [Understanding the configmap components](/docs/containers?topic=containers-health-monitor#configmap-components)

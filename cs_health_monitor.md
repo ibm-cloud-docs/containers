@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-01"
+lastupdated: "2022-06-07"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -361,6 +361,41 @@ Review the following example thresholds for creating alerts at the cluster level
 
 You might set up an alert for when the maximum number of clusters per account is reaching the limit. For example, 100 per region/infrastructure provider.
 {: shortdesc}
+
+    
+### {{site.data.keyword.block_storage_is_short}} alerts
+{: #vpc-block-storage-alerts}
+
+The following metrics are available for {{site.data.keyword.block_storage_is_short}} alerts:
+- `kubelet_volume_stats_available_bytes`
+- `kubelet_volume_stats_capacity_bytes`
+- `kubelet_volume_stats_inodes`
+- `kubelet_volume_stats_inodes_free`
+- `kubelet_volume_stats_inodes_used`
+
+1. Create a monitoring instance for {{site.data.keyword.block_storage_is_short}} alerts. See instructions in [Forwarding cluster and app metrics to IBM Cloud Monitoring](/docs/containers?topic=containers-health-monitor#monitoring).
+
+2. Install the `syslog` agent.
+    1. [In the {{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com){: external}, select **Observability** from the left menu.
+    2. Select **Monitoring**.
+    3. In the row of the instance for {{site.data.keyword.block_storage_is_short}} alerts, select **Open dashboard**.
+    4. From the left menu, select **Get started**.
+    5. Under the **Install the Agent** section, select **Add Sources**.
+    6. Follow the instructions to install the agent.
+    7. Make sure the agent is running by using the `kubectl get pods -n CLUSTER_NAME | grep syslog` command.
+
+3. Configure the notification channels.
+    1. In the {{site.data.keyword.cloud_notm}} Monitoring dashboard, select **Monitoring Operations > Settings**.
+    2. Select **Notification Channels** > **Add Notification Channel** and pick one of the available notification methods.
+    3. Complete the settings for the new channel and click **Save**.
+    4. Optional: Repeat the previous steps to add more channels.
+
+4. Create an alert.
+    1. In the {{site.data.keyword.cloud_notm}} Monitoring dashboard, select **Alerts** > **Library**.
+    2. Choose one of the templates and select **Enable Alert**. For example, you can search for `PVC storage` and enable the `PVC Storage Usage Is Reaching The Limit` alert.
+    3. Customize the alert settings on the template and select **Enable Alert** to apply your settings.
+If your {{site.data.keyword.block_storage_is_short}} volumes are reaching capacity, you can [set up volume expansion](/docs/containers?topic=containers-vpc-block#vpc-block-volume-expand).
+{: tip}
 
 
 
