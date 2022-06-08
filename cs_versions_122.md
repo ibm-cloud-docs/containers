@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-06-08"
 
 keywords: kubernetes, 1.22, versions, update, upgrade
 
@@ -62,7 +62,6 @@ Review the [{{site.data.keyword.containerlong_notm}} is affected by an endpoint 
 
 | Type | Description|
 | --- | --- |
-| Endpoint Security Mitigation | Kubernetes ClusterRole `system:aggregate-to-edit` has removed endpoints from being edited as a security measure as a part of [CVE-2021-25740](https://nvd.nist.gov/vuln/detail/CVE-2021-25740){: external}. Please ensure the Kubernetes reconciler is enabled before updating or refreshing master components. You can enable it with the `kubectl annotate --overwrite clusterrole/system:aggregate-to-edit rbac.authorization.kubernetes.io/autoupdate=true` command. | 
 | **Unsupported:** Beta versions of `PriorityClass` API | Migrate manifests and API clients to use the `scheduling.k8s.io/v1` API version, available since Kubernetes version 1.14. For more information, see [Deprecated API Migration Guide - v1.22](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-22){: external}. |
 | **Unsupported**:  Beta versions of `ClusterRole`, `ClusterRoleBinding`, `Role`, and `RoleBinding APIs` | Migrate manifests and API clients to use the `rbac.authorization.k8s.io/v1` API version, available since Kubernetes version 1.8. For more information, see [Deprecated API Migration Guide - v1.22](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-22){: external}. |
 | **Unsupported**:  Beta versions of `ValidatingWebhookConfiguration` and `MutatingWebhookConfiguration` APIs | Migrate manifests and API clients to use the `admissionregistration.k8s.io/v1` API version, available since Kubernetes version 1.16. For more information, see [Kubernetes API and Feature Removals In 1.22: Here’s What You Need To Know](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/){: external}. |
@@ -87,9 +86,9 @@ The following table shows the actions that you must take after you update the Ku
 
 | Type | Description|
 | --- | --- |
+| Endpoint Security Mitigation | Kubernetes cluster role `system:aggregate-to-edit` has removed `endpoints` permissions as a security mitigation for [CVE-2021-25740](https://nvd.nist.gov/vuln/detail/CVE-2021-25740){: external}. If your cluster does not require any customizations to the `system:aggregate-to-edit` cluster role, besides removing the `endpoints` permission, allow Kubernetes to reconcile the permissions by running the `kubectl annotate --overwrite clusterrole/system:aggregate-to-edit rbac.authorization.kubernetes.io/autoupdate=true` command. Subsequent cluster master operations (e.g. `ibmcloud ks cluster master refresh`) will then ensure the permissions are reconciled by Kubernetes. |
 | **Unsupported**:  `kubectl autoscale` removes `--generator` flag | The `kubectl austoscale` no longer uses the deprecated `--generator` flag. If your scripts rely on this flag, update them. |
 | **Unsupported**: `kubectl create deployment` removes `--generator` flag | The `kubectl create deployment` command no longer uses the deprecated `--generator` flag. If your scripts rely on this flag, update them. |
 | `system:aggregate-to-edit` write access for Endpoints API | The `system:aggregate-to-edit` role no longer includes write access to the Endpoints API. Existing clusters that are upgraded to Kubernetes 1.22 are not impacted. However, in new Kubernetes 1.22 clusters, the Editor and Administrator roles don't have write access to the Endpoints API. For more information on retaining this access in newly created 1.22 clusters, see [Write access for Endpoints](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#write-access-for-endpoints){: external}. This update is a mitigation for [CVE-2021-25740](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-25740){: external}. |
 {: caption="Changes to make after you update the master to Kubernetes 1.22" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
-
