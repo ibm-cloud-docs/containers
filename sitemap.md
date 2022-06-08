@@ -8391,6 +8391,8 @@ subcollection: containers
 
 * [Manually viewing storage metrics in the CLI](/docs/containers?topic=containers-debug_monitoring#manual-monitor-metrics)
 
+[Why am I still seeing charges for block storage devices after deleting my cluster?](/docs/containers?topic=containers-ts_storage_clean_volume#ts_storage_clean_volume)
+
 
 ### Object Storage
 {: #sitemap_object_storage}
