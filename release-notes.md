@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-07"
+lastupdated: "2022-06-08"
 
 keywords: kubernetes, release notes
 
@@ -38,6 +38,14 @@ CLI change log update
 
 Worker node fix pack
 :   Kubernetes [1.20.15_1583](/docs/containers?topic=containers-changelog_120), [1.21.13_1562](/docs/containers?topic=containers-changelog_121), [1.22.10_1554](/docs/containers?topic=containers-changelog_122), [1.23.7_1532](/docs/containers?topic=containers-changelog_123).
+
+
+### 3 June 2022
+{: #containers-jun322}
+
+Master fix pack update
+:   Kubernetes [1.23.7_1531](/docs/containers?topic=containers-changelog_123), [1.22.10_1553](/docs/containers?topic=containers-changelog_122), [1.21.13_1561](/docs/containers?topic=containers-changelog_121), and [1.20.15_1582](/docs/containers?topic=containers-changelog_120).
+
 
 
 

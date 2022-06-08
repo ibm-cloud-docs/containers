@@ -217,6 +217,10 @@ subcollection: containers
 
         * Worker node fix pack
 
+    * [3 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun322)
+
+        * Master fix pack update
+
     * [1 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun122)
 
         * Istio add-on
