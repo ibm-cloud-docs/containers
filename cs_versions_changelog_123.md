@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-06-07"
+lastupdated: "2022-06-08"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -47,6 +47,8 @@ Review the version 1.23 change log.
 
 
 
+
+
 ### Change log for worker node fix pack 1.23.7_1532, released 07 June 2022
 {: #1237_1532}
 
@@ -58,6 +60,27 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 | Ubuntu 18.04 packages | 4.15.0-177 | 4.15.0-180 | Worker node kernel & package updates for [CVE-2019-13050](https://nvd.nist.gov/vuln/detail/CVE-2019-13050){: external}, [CVE-2022-1664](https://nvd.nist.gov/vuln/detail/CVE-2022-1664){: external}, [CVE-2022-29581](https://nvd.nist.gov/vuln/detail/CVE-2022-29581){: external}
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.23.6_1530" caption-side="top"}
+
+### Change log for master fix pack 1.23.7_1531, released 3 June 2022
+{: #1237_1531}
+
+The following table shows the changes that are in the master fix pack 1.23.7_1531. Master patch updates are applied automatically. 
+{: shortdesc}
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.6 | v1.3.7 | Updated Go to version 1.17.10 and also updated the dependencies. Update registry base image version to `104` |
+| GPU device plug-in and installer | 9485e14 | 382ada9 | Updated `Go` to version `1.17.9` |
+| {{site.data.keyword.IBM_notm}} Calico extension | 954 | 980 | Updated to use `Go` version `1.17.10`. Updated minimal UBI to version `8.5`. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.23.5-9 | v1.23.7-4 | Updated to support the Kubernetes `1.23.7` release and `Go` version `1.17.10` |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 408 | 410 | Updated universal base image (UBI) to version `8.6-751` to resolve CVEs. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 8c8c82b | 8c96932 | Updated `Go` to version `1.18.1` |
+| Key Management Service provider | v2.5.4 | v2.5.5 | Updated `Go` to version `1.17.10` and updated the golang dependencies. |
+| Kubernetes | v1.23.6 | v1.23.7 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.7){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1916 | 1998 | Updated `Go` to version `1.17.10` and updated dependencies. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.23.6_1527" caption-side="top"}
 
 ### Change log for worker node fix pack 1.23.6_1530, released 23 May 2022
 {: #1236_1530}
