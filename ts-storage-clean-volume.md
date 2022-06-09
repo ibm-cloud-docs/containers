@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-06-08"
+lastupdated: "2022-06-09"
 
 keywords: kubernetes, help, storage
 
@@ -40,7 +40,8 @@ Delete the storage volumes from your account.
     ibmcloud ks cluster ls
     ```
     {: pre}
-1. Find the remaining volumes that are associated with the deleted cluster.
+    
+2. Find the remaining volumes that are associated with the deleted cluster.
 
     Classic clusters:
     ```sh
@@ -61,7 +62,7 @@ Delete the storage volumes from your account.
     ```
     {: pre}
 
-2. Remove the volumes.
+3. Remove the volumes.
     
     Classic clusters:
     ```sh
@@ -75,7 +76,7 @@ Delete the storage volumes from your account.
     ```
     {: pre}
 
-3. Optional: Verify there are no more volumes associated with the deleted cluster.
+4. Optional: Verify there are no more volumes associated with the deleted cluster.
     
     Classic clusters:
     ```sh
