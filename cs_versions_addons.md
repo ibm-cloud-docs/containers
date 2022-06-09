@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-19"
+lastupdated: "2022-06-09"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -39,10 +39,19 @@ The Kubernetes Ingress version follows the format `<community_version>_<ibm_buil
 
 When automatic updates are enabled for ALBs, your ALBs are updated to the most recent build of the version that is marked as `default`. If you want to use a version other than the default, you must [disable automatic updates](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable). Typically, the latest version becomes the default version one month after the latest version is released by the Kubernetes community. Actual availability and release dates of versions are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 
+## Version 1.2.1
+{: #1_2_1}
+
+### Version 1.2.1_2337_iks (default), released 10 Jun 2022
+{: #1.2.1_2337_iks}
+
+- Initial release of `1.2.1`
+- Resolves [CVE-2021-25748](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-25748){: external}
+
 ## Version 1.2.0
 {: #1_2_0}
 
-### Version 1.2.0_2251_iks (default), released 19 May 2022
+### Version 1.2.0_2251_iks, released 19 May 2022
 {: #1.2.0_2251_iks}
 
 Resolves [CVE-2022-29824](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29824){: external}
