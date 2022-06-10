@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-06-08"
+lastupdated: "2022-06-10"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.21
 
@@ -13,11 +13,14 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Kubernetes version 1.21 change log
+# (Deprecated) Kubernetes version 1.21 change log
 {: #changelog_121}
 
 View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.21. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}
+
+Kubernetes version 1.21 is deprecated, with a tentative unsupported date of 31 August 2022. Update your cluster to at least [version 1.22](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
+{: deprecated}
 
 ## Overview
 {: #changelog_overview}
@@ -42,7 +45,7 @@ Review the version 1.21 change log.
 
 
 
-### Change log for worker node fix pack 1.21.13_1562, released 07 June 2022
+### Change log for worker node fix pack 1.21.13_1562, released 7 June 2022
 {: #12113_1562}
 
 The following table shows the changes that are in the worker node fix pack 1.21.13_1562. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -72,6 +75,7 @@ The following table shows the changes that are in the master fix pack 1.21.13_15
 | Key Management Service provider | v2.5.4 | v2.5.5 | Updated `Go` to version `1.17.10` and updated the golang dependencies. |
 | Kubernetes | v1.21.12 | v1.21.13 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.13){: external}. |
 | Kubernetes add-on resizer | 1.8.13 | 1.8.14 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.14){: external}. |
+| Kubernetes Dashboard | v2.3.1 | v2.3.1 | The **default** Kubernetes Dashboard settings found in the `kubernetes-dashboard-settings` config map in the `kube-system` namespace have been updated to set `resourceAutoRefreshTimeInterval` to `60`. This default change is only applied to new clusters. The previous default value was `5`. If your cluster has Kubernetes Dashboard performance problems, see the steps for [changing the auto-refresh time interval](https://cloud.ibm.com/docs/containers?topic=containers-ts-kube-dashboord-oom). | 
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1916 | 1998 | Updated `Go` to version `1.17.10` and updated dependencies. |
 | Portieris admission controller | v0.10.3 | v0.12.4 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.12.4){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}

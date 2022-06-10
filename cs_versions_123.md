@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-06-10"
 
 keywords: kubernetes, 1.23, versions, update, upgrade
 
@@ -41,7 +41,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
-| 1.23 | Yes | 09 Feb 2022 | April 2023 `†` |
+| 1.23 | Yes | 09 Feb 2022 |  26 April 2023 `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.23" caption-side="top"}
 
 ## Preparing to update

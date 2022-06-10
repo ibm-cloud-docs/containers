@@ -934,6 +934,7 @@ Review the following default settings and limitations.
 * You can register up to 128 subdomains for VPC load balancer hostnames. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-using-avatar).
 * Kubernetes 1.20 or later: Subdomains that you register for VPC load balancers are limited to 130 characters or fewer.
 * VPC ALB listens on the same VPC subnets that the cluster worker nodes are allocated on unless the Kubernetes load balancer service is created with the annotation: `service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-subnets` or `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone`. If you add more zones to the cluster, the VPC ALB is not updated to listen for incoming traffic on the new zone(s). The subnets and zones of the VPC ALB can't be changed once the ALB is created. Incoming traffic can be routed to all backend worker nodes in the cluster across all zones, but the VPC subnets that the VPC ALB is listening on can not be updated. The VPC NLB is limited to the VPC subnets in a single zone. It can't be configured to listen on VPC subnets located in multiple zones.
+* Disabling load balancer NodePort allocation is not supported for VPC load balancers. 
 
 
 

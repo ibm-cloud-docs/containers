@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-06-10"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -34,7 +34,11 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-:    **Latest**: 1.23
+:    **Latest**: 1.24
+     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_124)
+     - [Change log](/docs/containers?topic=containers-changelog_124)
+
+:    **Other**: 1.23
      - [Version information and update actions](/docs/containers?topic=containers-cs_versions_123)
      - [Change log](/docs/containers?topic=containers-changelog_123)
    
@@ -42,11 +46,11 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
      - [Version information and update actions](/docs/containers?topic=containers-cs_versions_122)
      - [Change log](/docs/containers?topic=containers-changelog_122)
 
-:    **Other**: 1.21
+**Deprecated Kubernetes versions**:
+:    1.21
      - [Version information and update actions](/docs/containers?topic=containers-cs_versions_121)
      - [Change log](/docs/containers?topic=containers-changelog_121)
 
-**Deprecated Kubernetes versions**:
 :    1.20
      - [Version information and update actions](/docs/containers?topic=containers-cs_versions_120)
      - [Change log](/docs/containers?topic=containers-changelog_120)
@@ -81,13 +85,13 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch. As 
 |Update type|Examples of version labels|Updated by|Impact
 |-----|-----|-----|-----|
 |Major|1.x.x|You|Operation changes for clusters, including scripts or deployments.|
-|Minor|x.21.x|You|Operation changes for clusters, including scripts or deployments.|
+|Minor|x.22.x|You|Operation changes for clusters, including scripts or deployments.|
 |Patch|x.x.4_1510|IBM and you|Kubernetes patches, as well as other {{site.data.keyword.cloud_notm}} Provider component updates such as security and operating system patches. IBM updates masters automatically, but you apply patches to worker nodes. See more about patches in the following section.|
 {: caption="Impacts of Kubernetes updates" caption-side="top"}
 
 Major and minor updates (1.x)
 :   First, [update your master node](/docs/containers?topic=containers-update#master) and then [update the worker nodes](/docs/containers?topic=containers-update#worker_node).
-    - You can't update a Kubernetes master two or more minor versions ahead (n+2). For example, if your current master is version 1.20 and you want to update to 1.22, you must update to 1.21 first.
+    - You can't update a Kubernetes master two or more minor versions ahead (n+2). For example, if your current master is version 1.22 and you want to update to 1.24, you must update to 1.23 first.
     - Worker nodes can't run a Kubernetes major or minor version that is greater than the masters. Additionally, your worker nodes can be only up to two versions behind the master version (`n-2`).
     - If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](/docs/containers?topic=containers-cs_cli_install#kubectl) up-to-date.
 
@@ -112,9 +116,10 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
-| [1.23](/docs/containers?topic=containers-cs_versions_123) | Yes | 09 Feb 2022 | April 2023 `†` |
-| [1.22](/docs/containers?topic=containers-cs_versions_122) | Yes | 29 Sep 2021 | Nov 2022 `†` |
-| [1.21](/docs/containers?topic=containers-cs_versions_121) | Yes | 09 Jun 2021 | Aug 2022 `†` |
+| [1.24](/docs/containers?topic=containers-cs_versions_124) | Yes | 09 Jun 2022 | 29 Nov 2023 `†` |
+| [1.23](/docs/containers?topic=containers-cs_versions_123) | Yes | 09 Feb 2022 | 26 Apr 2023 `†` |
+| [1.22](/docs/containers?topic=containers-cs_versions_122) | Yes | 29 Sep 2021 | 30 Nov 2022 `†` |
+| [1.21](/docs/containers?topic=containers-cs_versions_121) | Deprecated | 09 Jun 2021 | 31 Aug 2022 `†` |
 | [1.20](/docs/containers?topic=containers-cs_versions_120) | Deprecated | 16 Feb 2021 | 15 Jun 2022 `†` |
 {: caption="Release history for {{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
@@ -155,9 +160,10 @@ If you wait until your cluster is two or more minor versions behind the oldest s
 {: shortdesc}
 
 See the list below for actions you should take before and after updating to specific versions:
+-  Version 1.24 [preparation actions](/docs/containers?topic=containers-cs_versions_124#prep-up-124)
 -  Version 1.23 [preparation actions](/docs/containers?topic=containers-cs_versions_123#prep-up-123)
 -  Version 1.22 [preparation actions](/docs/containers?topic=containers-cs_versions_122#prep-up-122)
--  Version 1.21 [preparation actions](/docs/containers?topic=containers-cs_versions_121#prep-up-121)
+-  **Deprecated**: Version 1.21 [preparation actions](/docs/containers?topic=containers-cs_versions_121#prep-up-121)
 -  **Deprecated**: Version 1.20 [preparation actions](/docs/containers?topic=containers-cs_versions_120#prep-up-120)
 
 
