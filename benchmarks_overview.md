@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-06-10"
 
 keywords: kubernetes, containers
 
@@ -29,9 +29,10 @@ When a new [Kubernetes version](/docs/containers?topic=containers-cs_versions) i
 Use the list below to find CIS Kubernetes Benchmark results for available versions.
 
 
+- [Version 1.24](/docs/containers?topic=containers-cis-benchmark-124)
 - [Version 1.23](/docs/containers?topic=containers-cis-benchmark-123)
 - [Version 1.22](/docs/containers?topic=containers-cis-benchmark-122)
-- [Version 1.21](/docs/containers?topic=containers-cis-benchmark-121)
+- [(Deprecated) Version 1.21](/docs/containers?topic=containers-cis-benchmark-121)
 - [(Deprecated) Version 1.20](/docs/containers?topic=containers-cis-benchmark-120)
 
 
@@ -78,8 +79,6 @@ Next, decide whether the component falls within your responsibility. If so, you 
 **What else can I do to increase the security and compliance of my cluster?**
 
 See [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security).
-
-
 
 ## Running the worker node CIS Kubernetes benchmark
 {: #cis-worker-test}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-08"
+lastupdated: "2022-06-10"
 
 keywords: kubernetes
 
@@ -179,6 +179,9 @@ You've successfully created a deployment that uses {{site.data.keyword.blockstor
 
 Install the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in with a Helm chart to set up pre-defined storage classes for {{site.data.keyword.blockstorageshort}}. You can use these storage classes to create a PVC to provision {{site.data.keyword.blockstorageshort}} for your apps.
 {: shortdesc}
+
+Classic clusters that run {{site.data.keyword.containerlong_notm}} version 1.24 or later do not need to install the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in. The driver and plug-in are installed on these clusters by default.
+{: tip}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 

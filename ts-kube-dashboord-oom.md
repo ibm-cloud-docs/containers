@@ -26,7 +26,7 @@ When listing pods in large clusters, the dashboard interface performs poorly and
 The Kubernetes dashboard for your cluster requires a large amount of memory.
 {: ts_causes}
 
-You can resolve this issue by changing the `resource auto-refresh` time interval to `0` for the Kubernetes dashboard. 
+You can resolve this issue by changing the `resource auto-refresh` time interval to `60` for the Kubernetes dashboard. 
 {: ts_resolve}
 
 
@@ -35,7 +35,7 @@ You can resolve this issue by changing the `resource auto-refresh` time interval
 
 
 1. Select *Settings* in the left side navigation pane.
-1. Set `Resource auto-refresh` time interval to `0`.
+1. Set `Resource auto-refresh` time interval to `60`.
 1. `Save`
 
 ## Changing the resource auto-refresh time interval from the command line
@@ -49,12 +49,12 @@ You can resolve this issue by changing the `resource auto-refresh` time interval
     ```
     {: pre}
 
-1. In the `data._global` field, set the `resourceAutoRefreshTimeInterval` to `0`.
-    Example configmap with `resourceAutoRefreshTimeInterval` set to `0`. 
+1. In the `data._global` field, set the `resourceAutoRefreshTimeInterval` to `60`.
+    Example configmap with `resourceAutoRefreshTimeInterval` set to `60`. 
     ```sh
     apiVersion: v1
     data:
-    _global: '{"clusterName":"mycluster","itemsPerPage":10,"logsAutoRefreshTimeInterval":5,"resourceAutoRefreshTimeInterval":0}'
+    _global: '{"clusterName":"mycluster","itemsPerPage":10,"logsAutoRefreshTimeInterval":5,"resourceAutoRefreshTimeInterval":60}'
     kind: ConfigMap
     metadata:
     creationTimestamp: "2021-06-08T04:23:35Z"

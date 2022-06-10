@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-08"
+lastupdated: "2022-06-10"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,20 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
+
+    * [10 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1022)
+
+        * {{site.data.keyword.loganalysisshort}} and {{site.data.keyword.at_full_notm}} changes
+
+        * Ingress ALB change log updates
+
+        * {{site.data.keyword.block_storage_is_short}} add-on.
+
+    * [9 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun922)
+
+        * New! Kubernetes 1.24
+
+        * Deprecated and unsupported Kubernetes versions
 
     * [7 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun722)
 
@@ -2972,6 +2986,8 @@ subcollection: containers
 
     * [Updating VPC worker nodes in the CLI](/docs/containers?topic=containers-update#vpc_worker_cli)
 
+    * [Updating VPC Gen2 worker nodes that use software-defined storage](/docs/containers?topic=containers-update#vpc_odf_cli)
+
     * [Updating VPC worker nodes in the console](/docs/containers?topic=containers-update#vpc_worker_ui)
 
 * [Updating flavors (machine types)](/docs/containers?topic=containers-update#machine_type)
@@ -5449,6 +5465,71 @@ subcollection: containers
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
 
 
+### Version 1.24
+{: #sitemap_version_124}
+
+
+[1.24 version information and update actions](/docs/containers?topic=containers-cs_versions_124#cs_versions_124)
+
+* [Release timeline](/docs/containers?topic=containers-cs_versions_124#release_timeline_124)
+
+* [Preparing to update](/docs/containers?topic=containers-cs_versions_124#prep-up-124)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions_124#before_124)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions_124#124_after)
+
+[Kubernetes version 1.24 change log](/docs/containers?topic=containers-changelog_124#changelog_124)
+
+* [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview)
+
+* [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Changelog for master fix pack 1.24.1_1523 and worker node fix pack 1.24.1_1522, released 9 June 2022](/docs/containers?topic=containers-changelog_124#changelog-for-master-fix-pack-1241_1523-and-worker-node-fix-pack-1241_1522,-released-9-june-2022)
+
+[Version 1.24 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-124)
+
+* [1 Master Node Security Configuration](/docs/containers?topic=containers-cis-benchmark-124#cis-section-1-124)
+
+    * [1.1 Master Node Configuration Files](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-11-124)
+
+    * [1.2 API Server](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-12-124)
+
+    * [1.3 Controller Manager](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-13-124)
+
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-14-124)
+
+* [2 Etcd Node Configuration](/docs/containers?topic=containers-cis-benchmark-124#cis-section-2-124)
+
+* [3 Control Plane Configuration](/docs/containers?topic=containers-cis-benchmark-124#cis-section-3-124)
+
+    * [3.1 Authentication and Authorization](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-31-124)
+
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-32-124)
+
+* [4 Worker Node Security Configuration](/docs/containers?topic=containers-cis-benchmark-124#cis-section-4-122)
+
+    * [4.1 Worker Node Configuration Files](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-41-124)
+
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-42-124)
+
+* [5 Kubernetes Policies](/docs/containers?topic=containers-cis-benchmark-124#cis-section-5-124)
+
+    * [5.1 RBAC and Service Accounts](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-51-124)
+
+    * [5.2 Pod Security Policies](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-52-124)
+
+    * [5.3 Network Policies and CNI](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-53-124)
+
+    * [5.4 Secrets Management](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-54-124)
+
+    * [5.5 Extensible Admission Control](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-55-124)
+
+    * [5.6 General Policies](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-56-124)
+
+* [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-remediations-124)
+
+
 ### Version 1.23
 {: #sitemap_version_123}
 
@@ -5469,7 +5550,7 @@ subcollection: containers
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
 
-    * [Change log for worker node fix pack 1.23.7_1532, released 07 June 2022](/docs/containers?topic=containers-changelog_123#1237_1532)
+    * [Change log for worker node fix pack 1.23.7_1532, released 7 June 2022](/docs/containers?topic=containers-changelog_123#1237_1532)
 
     * [Change log for master fix pack 1.23.7_1531, released 3 June 2022](/docs/containers?topic=containers-changelog_123#1237_1531)
 
@@ -5562,7 +5643,7 @@ subcollection: containers
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
 
-    * [Change log for worker node fix pack 1.22.10_1554, released 07 June 2022](/docs/containers?topic=containers-changelog_122#12210_1554)
+    * [Change log for worker node fix pack 1.22.10_1554, released 7 June 2022](/docs/containers?topic=containers-changelog_122#12210_1554)
 
     * [Change log for master fix pack 1.22.10_1553, released 3 June 2022](/docs/containers?topic=containers-changelog_122#12210_1553)
 
@@ -5663,7 +5744,7 @@ subcollection: containers
 {: #sitemap_version_121}
 
 
-[1.21 version information and update actions](/docs/containers?topic=containers-cs_versions_121#cs_versions_121)
+[(Deprecated) 1.21 version information and update actions](/docs/containers?topic=containers-cs_versions_121#cs_versions_121)
 
 * [Release timeline](/docs/containers?topic=containers-cs_versions_121#release_timeline_121)
 
@@ -5673,13 +5754,13 @@ subcollection: containers
 
     * [Update after master](/docs/containers?topic=containers-cs_versions_121#121_after)
 
-[Kubernetes version 1.21 change log](/docs/containers?topic=containers-changelog_121#changelog_121)
+[(Deprecated) Kubernetes version 1.21 change log](/docs/containers?topic=containers-changelog_121#changelog_121)
 
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview)
 
 * [Version 1.21 change log](/docs/containers?topic=containers-changelog_121#121_changelog)
 
-    * [Change log for worker node fix pack 1.21.13_1562, released 07 June 2022](/docs/containers?topic=containers-changelog_121#12113_1562)
+    * [Change log for worker node fix pack 1.21.13_1562, released 7 June 2022](/docs/containers?topic=containers-changelog_121#12113_1562)
 
     * [Change log for master fix pack 1.21.13_1561, released 3 June 2022](/docs/containers?topic=containers-changelog_121#12113_1561)
 
@@ -5759,7 +5840,7 @@ subcollection: containers
 
     * [Change log for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog_121#1211_1519_new)
 
-[Version 1.21 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-121#cis-benchmark-121)
+[(Deprecated) Version 1.21 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-121#cis-benchmark-121)
 
 * [1 Master Node Security Configuration](/docs/containers?topic=containers-cis-benchmark-121#cis-section-1-121)
 
@@ -5822,7 +5903,7 @@ subcollection: containers
 
 * [Deprecated: Version 1.20 change log](/docs/containers?topic=containers-changelog_120#120_changelog)
 
-    * [Change log for worker node fix pack 1.20.15_1583, released 07 June 2022](/docs/containers?topic=containers-changelog_120#12015_1583)
+    * [Change log for worker node fix pack 1.20.15_1583, released 7 June 2022](/docs/containers?topic=containers-changelog_120#12015_1583)
 
     * [Change log for master fix pack 1.20.15_1582, released 3 June 2022](/docs/containers?topic=containers-changelog_120#12015_1582)
 
@@ -7015,9 +7096,13 @@ subcollection: containers
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
 
+* [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
+
+    * [Version 1.2.1_2337_iks (default), released 10 Jun 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2337_iks)
+
 * [Version 1.2.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_0)
 
-    * [Version 1.2.0_2251_iks (default), released 19 May 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.0_2251_iks)
+    * [Version 1.2.0_2251_iks, released 19 May 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.0_2251_iks)
 
     * [Version 1.2.0_2147_iks, released 4 May 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.0_2147_iks)
 
@@ -7406,6 +7491,10 @@ subcollection: containers
     * [Change log for patch update 1.0.1_114, released 10 September 2020](/docs/containers?topic=containers-ca_changelog#101114_ca)
 
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
+
+* [Version 5.0 (Beta)](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
+
+    * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
 
 * [Version 4.3](/docs/containers?topic=containers-vpc_bs_changelog#043_is_block)
 

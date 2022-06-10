@@ -1,23 +1,20 @@
----
+# `Version change log` page template
+Use this template when creating a new version information page when a new version is relesed  
 
-copyright:
- years: 2014, 2022
-lastupdated: "2022-06-10"
+Link structure: https://cloud.ibm.com/docs/containers?topic=containers-changelog_1XX
+File name: cs_versions_changelog_1XX.md
 
-keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
-
-subcollection: containers
-
----
-
-{{site.data.keyword.attribute-definition-list}}
+* Replace the `XX` with the new minor version. 
 
 
+## IKS Template
 
-# Kubernetes version changelogs
-{: #changelog}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
 
-View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
+# Kubernetes version 1.XX change log
+{: #changelog_1XX}
+
+View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.XX. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}
 
 ## Overview
@@ -33,20 +30,8 @@ Check the [Security Bulletins on {{site.data.keyword.cloud_notm}} Status](https:
 Some change logs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) to ensure security compliance for your worker nodes. These worker node fix packs can be at a higher version than the master because some build fix packs are specific to worker nodes. Other change logs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update). For more information about patch types, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: note}
 
-## Version change logs
-{: #change-logs-by-version}
+## Version 1.XX change log
+{: #1XX_changelog}
 
-Review the change logs in the following list. 
-
-**Supported Kubernetes versions**:
-- [1.24 change log](/docs/containers?topic=containers-changelog_124)
-- [1.23 change log](/docs/containers?topic=containers-changelog_123)
-- [1.22 change log](/docs/containers?topic=containers-changelog_122)
-
-**Deprecated Kubernetes versions**:
-- [1.21 change log](/docs/containers?topic=containers-changelog_121)
-- [1.20 change log](/docs/containers?topic=containers-changelog_120) 
-
-**Unsupported Kubernetes versions**: 
-- [Archived change logs](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
-
+Review the version 1.XX change log.
+{: shortdesc}

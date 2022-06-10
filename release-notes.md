@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-08"
+lastupdated: "2022-06-10"
 
 keywords: kubernetes, release notes
 
@@ -26,6 +26,27 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## June 2022
 {: #containers-jun22}
+
+### 10 June 2022
+{: #containers-jun1022}
+
+{{site.data.keyword.loganalysisshort}} and {{site.data.keyword.at_full_notm}} changes
+:   {{site.data.keyword.containerlong_notm}} clusters running in Washington, D.C. (`us-east`) now send logs to {{site.data.keyword.loganalysisshort}} and {{site.data.keyword.at_full_notm}} instances in the same region, Washington, D.C. (`us-east`). For more information, see [{{site.data.keyword.at_full_notm}}](/docs/containers?topic=containers-at_events).
+
+Ingress ALB change log updates
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for version `1.2.1_2337_iks`.
+
+{{site.data.keyword.block_storage_is_short}} add-on.
+:   [Version 5.0.0-beta_1125](/docs/containers?topic=containers-vpc_bs_changelog) is available for allowlisted accounts.
+
+### 9 June 2022
+{: #containers-jun922}
+
+New! Kubernetes 1.24
+:   You can create or [update clusters to Kubernetes version 1.24](/docs/containers?topic=containers-cs_versions_124). With Kubernetes 1.24, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. 
+
+Deprecated and unsupported Kubernetes versions
+:   With the release of Kubernetes 1.24, clusters that run version 1.21 are deprecated, with a tentative unsupported date of 31 Aug 2022. Update your cluster to at least [version 1.22](/docs/containers?topic=containers-cs_versions_122) as soon as possible.
 
 ### 7 June 2022
 {: #containers-jun722}
