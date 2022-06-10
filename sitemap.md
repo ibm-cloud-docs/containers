@@ -215,6 +215,8 @@ subcollection: containers
 
         * Ingress ALB change log updates
 
+        * {{site.data.keyword.block_storage_is_short}} add-on.
+
     * [9 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun922)
 
         * New! Kubernetes 1.24

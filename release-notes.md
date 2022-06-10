@@ -36,6 +36,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 Ingress ALB change log updates
 :   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for version `1.2.1_2337_iks`.
 
+{{site.data.keyword.block_storage_is_short}} add-on.
+:   [Version 5.0.0-beta_1125](/docs/containers?topic=containers-vpc_bs_changelog) is available for allowlisted accounts.
+
 ### 9 June 2022
 {: #containers-jun922}
 
