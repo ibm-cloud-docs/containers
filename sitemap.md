@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-09"
+lastupdated: "2022-06-10"
 
 keywords: containers
 subcollection: containers
@@ -210,6 +210,8 @@ subcollection: containers
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
 
     * [10 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1022)
+
+        * {{site.data.keyword.loganalysisshort}} and {{site.data.keyword.at_full_notm}} changes
 
         * Ingress ALB change log updates
 

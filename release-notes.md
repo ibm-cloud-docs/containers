@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-09"
+lastupdated: "2022-06-10"
 
 keywords: kubernetes, release notes
 
@@ -29,6 +29,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ### 10 June 2022
 {: #containers-jun1022}
+
+{{site.data.keyword.loganalysisshort}} and {{site.data.keyword.at_full_notm}} changes
+:   {{site.data.keyword.containerlong_notm}} clusters running in Washington, D.C. (`us-east`) now send logs to {{site.data.keyword.loganalysisshort}} and {{site.data.keyword.at_full_notm}} instances in the same region, Washington, D.C. (`us-east`). For more information, see [{{site.data.keyword.at_full_notm}}](/docs/containers?topic=containers-at_events).
 
 Ingress ALB change log updates
 :   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for version `1.2.1_2337_iks`.
