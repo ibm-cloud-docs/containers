@@ -209,6 +209,10 @@ subcollection: containers
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
 
+    * [13 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1322)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on.
+
     * [10 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1022)
 
         * {{site.data.keyword.loganalysisshort}} and {{site.data.keyword.at_full_notm}} changes
@@ -7495,6 +7499,10 @@ subcollection: containers
 * [Version 5.0 (Beta)](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
 
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
+
+* [Version 4.4](/docs/containers?topic=containers-vpc_bs_changelog#044_is_block)
+
+    * [Change log for version 4.4.5_1371, released 13 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#445_1371_is_block_relnote)
 
 * [Version 4.3](/docs/containers?topic=containers-vpc_bs_changelog#043_is_block)
 
