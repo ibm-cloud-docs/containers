@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-10"
+lastupdated: "2022-06-13"
 
 keywords: kubernetes, release notes
 
@@ -26,6 +26,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## June 2022
 {: #containers-jun22}
+
+### 13 June 2022
+{: #containers-jun1322}
+
+
+{{site.data.keyword.block_storage_is_short}} add-on.
+:   [Version 4.4.5_1371](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+
+
 
 ### 10 June 2022
 {: #containers-jun1022}

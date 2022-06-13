@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-10"
+lastupdated: "2022-06-13"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
+
+    * [13 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1322)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on.
 
     * [10 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1022)
 
@@ -5485,7 +5489,7 @@ subcollection: containers
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
 
-    * [Changelog for master fix pack 1.24.1_1523 and worker node fix pack 1.24.1_1522, released 9 June 2022](/docs/containers?topic=containers-changelog_124#changelog-for-master-fix-pack-1241_1523-and-worker-node-fix-pack-1241_1522,-released-9-june-2022)
+    * [Changelog for master fix pack 1.24.1_1523 and worker node fix pack 1.24.1_1522, released 9 June 2022](/docs/containers?topic=containers-changelog_124#1241_1522)
 
 [Version 1.24 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-124)
 
@@ -6233,8 +6237,8 @@ subcollection: containers
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-remediations-119)
 
 
-### Archived Kubernetes version changelogs (1.18 and earlier)
-{: #sitemap_archived_kubernetes_version_changelogs_118_and_earlier}
+## Archived version history
+{: #sitemap_archived_version_history}
 
 
 [Version 1.18 changelog (unsupported as of 10 October 2021)](/docs/containers?topic=containers-118_changelog#118_changelog)
@@ -7086,7 +7090,7 @@ subcollection: containers
 * [Change log for 1.7.16_1511, released 19 April 2018](/docs/containers?topic=containers-17_changelog#1716_1511)
 
 
-### Add-on version history
+## Add-on version history
 {: #sitemap_add-on_version_history}
 
 
@@ -7495,6 +7499,10 @@ subcollection: containers
 * [Version 5.0 (Beta)](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
 
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
+
+* [Version 4.4](/docs/containers?topic=containers-vpc_bs_changelog#044_is_block)
+
+    * [Change log for version 4.4.5_1371, released 13 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#445_1371_is_block_relnote)
 
 * [Version 4.3](/docs/containers?topic=containers-vpc_bs_changelog#043_is_block)
 

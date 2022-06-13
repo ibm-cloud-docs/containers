@@ -315,33 +315,33 @@ toc:
                     - cs_versions_119.md
                     - cs_versions_changelog_119.md
                     - cs_benchmarks_119.md   
-                - topicgroup:
-                    label: Archived Kubernetes version changelogs (1.18 and earlier)
-                    topics:
-                    - cs_versions_changelog_118.md
-                    - cs_versions_changelog_117.md
-                    - cs_versions_changelog_116.md
-                    - cs_versions_changelog_115.md
-                    - cs_versions_changelog_114.md
-                    - cs_versions_changelog_113.md
-                    - cs_versions_changelog_112.md
-                    - cs_versions_changelog_111.md
-                    - cs_versions_changelog_110.md
-                    - cs_versions_changelog_19.md
-                    - cs_versions_changelog_18.md
-                    - cs_versions_changelog_17.md
-                - topicgroup:
-                    label: Add-on version history
-                    topics:
-                    - add-on-versions.md 
-                    - cs_versions_addons.md
-                    - cs_versions_istio.md
-                    - versions-autoscaler.md
-                    - versions-vpc-block-addon.md
-                    - versions-object.md
-                    - versions-static-route.md
-                    - versions-backup-restore.md
-                    - cs_versions_alb_oauth_proxy.md
+        - topicgroup:
+            label: Archived version history
+            topics:
+            - cs_versions_changelog_118.md
+            - cs_versions_changelog_117.md
+            - cs_versions_changelog_116.md
+            - cs_versions_changelog_115.md
+            - cs_versions_changelog_114.md
+            - cs_versions_changelog_113.md
+            - cs_versions_changelog_112.md
+            - cs_versions_changelog_111.md
+            - cs_versions_changelog_110.md
+            - cs_versions_changelog_19.md
+            - cs_versions_changelog_18.md
+            - cs_versions_changelog_17.md
+        - topicgroup:
+            label: Add-on version history
+            topics:
+            - add-on-versions.md 
+            - cs_versions_addons.md
+            - cs_versions_istio.md
+            - versions-autoscaler.md
+            - versions-vpc-block-addon.md
+            - versions-object.md
+            - versions-static-route.md
+            - versions-backup-restore.md
+            - cs_versions_alb_oauth_proxy.md
         - topicgroup:
             label: IAM and Activity Tracker events
             topics:
