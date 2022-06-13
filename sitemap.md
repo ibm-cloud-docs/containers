@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-10"
+lastupdated: "2022-06-13"
 
 keywords: containers
 subcollection: containers
@@ -6233,8 +6233,8 @@ subcollection: containers
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-remediations-119)
 
 
-### Archived Kubernetes version changelogs (1.18 and earlier)
-{: #sitemap_archived_kubernetes_version_changelogs_118_and_earlier}
+## Archived version history
+{: #sitemap_archived_version_history}
 
 
 [Version 1.18 changelog (unsupported as of 10 October 2021)](/docs/containers?topic=containers-118_changelog#118_changelog)
@@ -7086,7 +7086,7 @@ subcollection: containers
 * [Change log for 1.7.16_1511, released 19 April 2018](/docs/containers?topic=containers-17_changelog#1716_1511)
 
 
-### Add-on version history
+## Add-on version history
 {: #sitemap_add-on_version_history}
 
 
