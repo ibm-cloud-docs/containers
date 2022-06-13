@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-06-13"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -276,7 +276,7 @@ To set infrastructure account credentials to access the IBM Cloud infrastructure
 
     2. Set the infrastructure API credentials to use.
         ```sh
-        ibmcloud ks credential set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
+        ibmcloud ks credential set classic --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
         ```
         {: pre}
 
