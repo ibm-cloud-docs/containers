@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-13"
+lastupdated: "2022-06-15"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
+
+    * [15 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1522)
+
+        * {{site.data.keyword.mon_full_notm}} metrics and label updates
+
+        * {{site.data.keyword.block_storage_is_short}} add-on.
 
     * [13 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1322)
 
@@ -7498,6 +7504,8 @@ subcollection: containers
 
 * [Version 5.0 (Beta)](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
 
+    * [Change log for version 5.0.1-beta_1411, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1411_is_block_relnote)
+
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
 
 * [Version 4.4](/docs/containers?topic=containers-vpc_bs_changelog#044_is_block)
@@ -8508,6 +8516,10 @@ subcollection: containers
 * [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_cli)
 
 * [Checking and updating the {{site.data.keyword.cos_short}} plug-in](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_plugin)
+
+* [Checking driver logs and the driver version installed](/docs/containers?topic=containers-debug_storage_cos#debug-storage-logs)
+
+* [Updating the Helm chart](/docs/containers?topic=containers-debug_storage_cos#debug-helm-update)
 
 [Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails#cos_access_bucket_fails)
 

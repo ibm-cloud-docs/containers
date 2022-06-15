@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-06-15"
 
 keywords: kubernetes
 
@@ -95,14 +95,52 @@ If you have multiple clusters at different Kubernetes versions or different cont
 If you run commands such as `kubectl exec`, `kubectl attach`, `kubectl proxy`, `kubectl port-forward`, or `kubectl logs`, you see the following message.
 {: tsSymptoms}
 
-    ```
-    <workerIP>:10250: getsockopt: connection timed out
-    ```
-    {: screen}
+```sh
+<workerIP>:10250: getsockopt: connection timed out
+```
+{: screen}
 
+```sh
+kubectl -n kube-system logs metrics-server-65fc69c6b7-f682d -c metrics-server
+Error from server: Get “https://10.38.193.213:10250/containerLogs/kube-system/metrics-server-65fc69c6b7-f682d/metrics-server”: EOF
+```
+{: screen}
 
-Kubernetes version 1.20 or earlier: The OpenVPN connection between the master node and worker nodes is not functioning properly.
+```sh
+kubectl -n kube-system exec -it metrics-server-65fc69c6b7-f682d -c metrics-server -- sh
+Error from server: error dialing backend: EOF
+```
+{: screen}
+
+Review and complete the following the steps for your cluster version.
 {: tsResolve}
+
+Kubernetes version 1.21 and later
+:   The Konnectivity VPN connection between the master node and worker nodes is not functioning properly.
+
+- You are updating an existing classic cluster to Kubernetes version 1.21 or are deploying a new classic cluster.
+- The cluster has both private and public service endpoints enabled.
+- Service endpoints or VRF are not enabled in the account.
+
+To determine if VRF and service endpoints are enabled in your account, run `ibmcloud account show`. Look for the following output.
+
+```sh
+VRF Enabled:                        true
+Service Endpoint Enabled:           true
+```
+{: screen}
+
+To determine if your classic cluster has both public and private service endpoint enabled, run `ibmcloud ks cluster get -c <cluster_id>`. Look for output similar to the following.
+
+```sh
+Public Service Endpoint URL:    https://c105.<REGION>.containers.cloud.ibm.com:<port> 
+Private Service Endpoint URL:   https://c105.private.<REGION>.containers.cloud.ibm.com:<port> 
+```
+
+If your cluster meets these conditions, [enable service endpoints and VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui#vrf) for the account.
+
+Kubernetes version 1.20 or earlier
+:   The OpenVPN connection between the master node and worker nodes is not functioning properly.
 
 1. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
 2. Restart the OpenVPN client pod.
