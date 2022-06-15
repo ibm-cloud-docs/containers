@@ -209,6 +209,12 @@ subcollection: containers
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
 
+    * [15 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1522)
+
+        * {{site.data.keyword.mon_full_notm}} metrics and label updates
+
+        * {{site.data.keyword.block_storage_is_short}} add-on.
+
     * [13 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1322)
 
         * {{site.data.keyword.block_storage_is_short}} add-on.
