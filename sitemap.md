@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-13"
+lastupdated: "2022-06-15"
 
 keywords: containers
 subcollection: containers
@@ -8508,6 +8508,10 @@ subcollection: containers
 * [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_cli)
 
 * [Checking and updating the {{site.data.keyword.cos_short}} plug-in](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_plugin)
+
+* [Checking driver logs and the driver version installed](/docs/containers?topic=containers-debug_storage_cos#debug-storage-logs)
+
+* [Updating the Helm chart](/docs/containers?topic=containers-debug_storage_cos#debug-helm-update)
 
 [Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails#cos_access_bucket_fails)
 
