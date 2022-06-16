@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-06-13"
+lastupdated: "2022-06-16"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.20
 
@@ -14,14 +14,14 @@ subcollection: containers
 
 
 
-# (Deprecated) Kubernetes version 1.20 change log
+# Kubernetes version 1.20 change log
 {: #changelog_120}
 
 View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.20. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}
 
-Kubernetes version 1.20 is deprecated, with a tentative unsupported date of 15 June 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
-{: deprecated}
+Kubernetes version 1.20 is unsupported date as of 16 June 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
+{: important}
 
 ## Overview
 {: #changelog_overview}
@@ -36,11 +36,11 @@ Check the [Security Bulletins on {{site.data.keyword.cloud_notm}} Status](https:
 Some change logs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) to ensure security compliance for your worker nodes. These worker node fix packs can be at a higher version than the master because some build fix packs are specific to worker nodes. Other change logs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update). For more information about patch types, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: note}
 
-## Deprecated: Version 1.20 change log
+## Version 1.20 change log
 {: #120_changelog}
 
-Kubernetes version 1.20 is deprecated, with a tentative unsupported date of 15 June 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
-{: deprecated}
+Kubernetes version 1.20 is unsupported as of 16 June 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
+{: important}
 
 
 

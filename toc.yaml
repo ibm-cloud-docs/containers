@@ -302,22 +302,22 @@ toc:
                     topics:
                     - cs_versions_121.md
                     - cs_versions_changelog_121.md
-                    - cs_benchmarks_121.md
-                - topicgroup:
-                    label: Version 1.20 
-                    topics:
-                    - cs_versions_120.md
-                    - cs_versions_changelog_120.md
-                    - cs_benchmarks_120.md
-                - topicgroup:
-                    label: Version 1.19 (unsupported)
-                    topics:
-                    - cs_versions_119.md
-                    - cs_versions_changelog_119.md
-                    - cs_benchmarks_119.md   
+                    - cs_benchmarks_121.md   
         - topicgroup:
             label: Archived version history
             topics:
+            - topicgroup:
+                label: Version 1.20 
+                topics:
+                - cs_versions_120.md
+                - cs_versions_changelog_120.md
+                - cs_benchmarks_120.md
+            - topicgroup:
+                label: Version 1.19
+                topics:
+                - cs_versions_119.md
+                - cs_versions_changelog_119.md
+                - cs_benchmarks_119.md
             - cs_versions_changelog_118.md
             - cs_versions_changelog_117.md
             - cs_versions_changelog_116.md

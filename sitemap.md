@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-15"
+lastupdated: "2022-06-16"
 
 keywords: containers
 subcollection: containers
@@ -207,7 +207,15 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
-* [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
+* [June 2022](/docs/containers?topic=containers-containers-relnotes#june-2022)
+
+    * [16 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1622)
+
+        * Certified Kubernetes
+
+        * Version 1.20 is unsupported
+
+        * Istio add-on
 
     * [15 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1522)
 
@@ -5893,11 +5901,16 @@ subcollection: containers
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-121#cis-benchmark-remediations-121)
 
 
+## Archived version history
+{: #sitemap_archived_version_history}
+
+
+
 ### Version 1.20
 {: #sitemap_version_120}
 
 
-[(Deprecated) 1.20 version information and update actions](/docs/containers?topic=containers-cs_versions_120#cs_versions_120)
+[1.20 version information and update actions](/docs/containers?topic=containers-cs_versions_120#cs_versions_120)
 
 * [Release timeline](/docs/containers?topic=containers-cs_versions_120#release_timeline_120)
 
@@ -5907,11 +5920,11 @@ subcollection: containers
 
     * [Update after master](/docs/containers?topic=containers-cs_versions_120#120_after)
 
-[(Deprecated) Kubernetes version 1.20 change log](/docs/containers?topic=containers-changelog_120#changelog_120)
+[Kubernetes version 1.20 change log](/docs/containers?topic=containers-changelog_120#changelog_120)
 
 * [Overview](/docs/containers?topic=containers-changelog_120#changelog_overview)
 
-* [Deprecated: Version 1.20 change log](/docs/containers?topic=containers-changelog_120#120_changelog)
+* [Version 1.20 change log](/docs/containers?topic=containers-changelog_120#120_changelog)
 
     * [Change log for worker node fix pack 1.20.15_1583, released 7 June 2022](/docs/containers?topic=containers-changelog_120#12015_1583)
 
@@ -6062,8 +6075,8 @@ subcollection: containers
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-120#cis-benchmark-remediations-120)
 
 
-### Version 1.19 (unsupported)
-{: #sitemap_version_119_unsupported}
+### Version 1.19
+{: #sitemap_version_119}
 
 
 [1.19 version information and update actions (unsupported)](/docs/containers?topic=containers-cs_versions_119#cs_versions_119)
@@ -6241,11 +6254,6 @@ subcollection: containers
     * [5.6 General Policies](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-56-119)
 
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-remediations-119)
-
-
-## Archived version history
-{: #sitemap_archived_version_history}
-
 
 [Version 1.18 changelog (unsupported as of 10 October 2021)](/docs/containers?topic=containers-118_changelog#118_changelog)
 
@@ -7273,6 +7281,10 @@ subcollection: containers
     * [01 January 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#01-jan-2019)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
+
+    * [Change log for 1.14.1, released 16 June 2022](/docs/containers?topic=containers-istio-changelog#1141)
 
 * [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
 

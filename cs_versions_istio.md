@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-01"
+lastupdated: "2022-06-16"
 
 keywords: kubernetes, istio, add-on
 
@@ -27,6 +27,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | --- | --- | --- |
+| 1.14 | Yes | 1.21, 1.22, 1.23, 1.24
 | 1.13 | Yes | 1.21, 1.22, 1.23 |
 | 1.12 | Yes | 1.20, 1.21, 1.22 |
 | 1.11 | No| - |
@@ -39,6 +40,24 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 | 1.4 | No| - |
 {: summary="The rows are read from left to right. The first column is the Istio add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the Istio version is supported for."}
 {: caption="Supported Istio versions" caption-side="top"}
+
+## Version 1.14
+{: #v114}
+
+### Change log for 1.14.1, released 16 June 2022
+{: #1141}
+
+Review the changes that are included in version 1.14.1 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.13.4
+
+Current version
+:   1.14.1
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.14.1](https://istio.io/latest/news/releases/1.14.x/announcing-1.14.1/.){: external}.
 
 ## Version 1.13
 {: #v113}

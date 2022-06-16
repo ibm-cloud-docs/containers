@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-15"
+lastupdated: "2022-06-16"
 
 keywords: kubernetes, release notes
 
@@ -25,10 +25,28 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: tip}
 
 ## June 2022
-{: #containers-jun22}
+
+
+
+### 16 June 2022
+{: #containers-jun1622}
+{: release-note}
+
+Certified Kubernetes
+:   Version [1.24](/docs/containers?topic=containers-cs_versions_124) release is now certified.
+
+Version 1.20 is unsupported
+:   Update your cluster to a supported as soon as possible. For more information, see the 1.20 [release information](/docs/containers?topic=containers-cs_versions_120) and [change log](/docs/containers?topic=containers-changelog_120). For more information about the supported releases, see the [version information](/docs/containers?topic=containers-cs_versions).
+
+Istio add-on
+:   Version [`1.14.1`](/docs/containers?topic=containers-istio-changelog#1141) is available.
+
+
+
 
 ### 15 June 2022
 {: #containers-jun1522}
+{: release-note}
 
 {{site.data.keyword.mon_full_notm}} metrics and label updates
 :   Metrics and labels are now stored and displayed in a Prometheus compatible naming convention. Some metrics and labels are deprecated. For more information, see [Discontinued Metrics and Labels](https://docs.sysdig.com/en/docs/release-notes/enhanced-metric-store/#discontinued-metrics-and-labels){: external} and [removed features](https://docs.sysdig.com/en/docs/release-notes/enhanced-metric-store/#removed-featurees){: external}.
@@ -38,8 +56,10 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+
 ### 13 June 2022
 {: #containers-jun1322}
+{: release-note}
 
 
 {{site.data.keyword.block_storage_is_short}} add-on.
@@ -49,6 +69,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ### 10 June 2022
 {: #containers-jun1022}
+{: release-note}
 
 {{site.data.keyword.loganalysisshort}} and {{site.data.keyword.at_full_notm}} changes
 :   {{site.data.keyword.containerlong_notm}} clusters running in Washington, D.C. (`us-east`) now send logs to {{site.data.keyword.loganalysisshort}} and {{site.data.keyword.at_full_notm}} instances in the same region, Washington, D.C. (`us-east`). For more information, see [{{site.data.keyword.at_full_notm}}](/docs/containers?topic=containers-at_events).
@@ -61,6 +82,7 @@ Ingress ALB change log updates
 
 ### 9 June 2022
 {: #containers-jun922}
+{: release-note}
 
 New! Kubernetes 1.24
 :   You can create or [update clusters to Kubernetes version 1.24](/docs/containers?topic=containers-cs_versions_124). With Kubernetes 1.24, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. 
@@ -70,12 +92,14 @@ Deprecated and unsupported Kubernetes versions
 
 ### 7 June 2022
 {: #containers-jun722}
+{: release-note}
 
 CLI change log update
 :   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.419.
 
 ### 6 June 2022
 {: #containers-jun622}
+{: release-note}
 
 Worker node fix pack
 :   Kubernetes [1.20.15_1583](/docs/containers?topic=containers-changelog_120), [1.21.13_1562](/docs/containers?topic=containers-changelog_121), [1.22.10_1554](/docs/containers?topic=containers-changelog_122), [1.23.7_1532](/docs/containers?topic=containers-changelog_123).
@@ -83,6 +107,7 @@ Worker node fix pack
 
 ### 3 June 2022
 {: #containers-jun322}
+{: release-note}
 
 Master fix pack update
 :   Kubernetes [1.23.7_1531](/docs/containers?topic=containers-changelog_123), [1.22.10_1553](/docs/containers?topic=containers-changelog_122), [1.21.13_1561](/docs/containers?topic=containers-changelog_121), and [1.20.15_1582](/docs/containers?topic=containers-changelog_120).
@@ -93,12 +118,14 @@ Master fix pack update
 
 ### 1 June 2022
 {: #containers-jun122}
+{: release-note}
 
 Istio add-on
 :   Version [`1.13.4`](/docs/containers?topic=containers-istio-changelog#1134) is available.
 
 ## May 2022
 {: #containers-may22}
+{: release-note}
 
 
 ### 26 May 2022
@@ -110,6 +137,7 @@ CLI change log update
 
 ### 25 May 2022
 {: #containers-may2522}
+{: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in
 :   Version `2.1.16` of the {{site.data.keyword.cos_full_notm}} plug-in [is available](/docs/containers?topic=containers-cos_plugin_changelog).
@@ -122,6 +150,7 @@ CLI change log update
 
 ### 20 May 2022
 {: #containers-may2022}
+{: release-note}
 
 Worker node fix pack
 :   Kubernetes [1.20.15_1581](/docs/containers?topic=containers-changelog_120), [1.21.12_1560](/docs/containers?topic=containers-changelog_121), [1.22.9_1552](/docs/containers?topic=containers-changelog_122), [1.23.6_1530](/docs/containers?topic=containers-changelog_123).
@@ -129,6 +158,7 @@ Worker node fix pack
 
 ### 19 May 2022
 {: #containers-may1922}
+{: release-note}
 
 Istio add-on
 :   Version [`1.12.7`](/docs/containers?topic=containers-istio-changelog#1127) is available.
@@ -139,6 +169,7 @@ Ingress ALB change log updates
 
 ### 16 May 2022
 {: #containers-may1622}
+{: release-note}
 
 Cluster autoscaler add-on
 :   Versions `1.0.5_628` and `1.1.0_615` are available. See [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
@@ -148,12 +179,14 @@ ALB OAuth Proxy add-on
 
 ### 12 May 2022
 {: #containers-may1222}
+{: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on.
 :   [Version 4.2.5_1106](/docs/containers?topic=containers-vpc_bs_changelog) is available.
 
 ### 9 May 2022
 {: #containers-may0922}
+{: release-note}
 
 Worker node fix pack
 :   Kubernetes [1.20.15_1580](/docs/containers?topic=containers-changelog_120), [1.21.12_1559](/docs/containers?topic=containers-changelog_121), [1.22.9_1551](/docs/containers?topic=containers-changelog_122), [1.23.6_1529](/docs/containers?topic=containers-changelog_123).
@@ -162,12 +195,14 @@ Worker node fix pack
 
 ### 6 May 2022
 {: #containers-may0622}
+{: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in
 :   Version `2.1.15` of the {{site.data.keyword.cos_full_notm}} plug-in [is available](/docs/containers?topic=containers-cos_plugin_changelog).
 
 ### 4 May 2022
 {: #containers-may0422}
+{: release-note}
 
   
 ALB OAuth Proxy add-on
@@ -180,15 +215,18 @@ Ingress ALB change log updates
 
 ### 3 May 2022
 {: #containers-may0322}
+{: release-note}
 
 Istio add-on
 :   Version [`1.13.3`](/docs/containers?topic=containers-istio-changelog#1133) is available. 
 
 ## April 2022
 {: #containers-apr22}
+{: release-note}
 
 ### 28 April 2022
 {: #containers-apr2822}
+{: release-note}
 
 CLI change log update
 :   The [CLI change log(/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.404.
@@ -200,7 +238,7 @@ Cluster security groups
 
 ### 26 April 2022
 {: #containers-apr2622}
-
+{: release-note}
 
 Ingress ALB change log updates
 :   Updated the [Ingress ALB change log(/docs/containers?topic=containers-cluster-add-ons-changelog) for version `1.2.0_2131_iks`. Version `1.1.1` is no longer available.
