@@ -213,6 +213,8 @@ subcollection: containers
 
         * Certified Kubernetes
 
+        * Version 1.20 is unsupported
+
     * [15 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1522)
 
         * {{site.data.keyword.mon_full_notm}} metrics and label updates
@@ -5897,11 +5899,16 @@ subcollection: containers
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-121#cis-benchmark-remediations-121)
 
 
+## Archived version history
+{: #sitemap_archived_version_history}
+
+
+
 ### Version 1.20
 {: #sitemap_version_120}
 
 
-[(Deprecated) 1.20 version information and update actions](/docs/containers?topic=containers-cs_versions_120#cs_versions_120)
+[1.20 version information and update actions](/docs/containers?topic=containers-cs_versions_120#cs_versions_120)
 
 * [Release timeline](/docs/containers?topic=containers-cs_versions_120#release_timeline_120)
 
@@ -5911,11 +5918,11 @@ subcollection: containers
 
     * [Update after master](/docs/containers?topic=containers-cs_versions_120#120_after)
 
-[(Deprecated) Kubernetes version 1.20 change log](/docs/containers?topic=containers-changelog_120#changelog_120)
+[Kubernetes version 1.20 change log](/docs/containers?topic=containers-changelog_120#changelog_120)
 
 * [Overview](/docs/containers?topic=containers-changelog_120#changelog_overview)
 
-* [Deprecated: Version 1.20 change log](/docs/containers?topic=containers-changelog_120#120_changelog)
+* [Version 1.20 change log](/docs/containers?topic=containers-changelog_120#120_changelog)
 
     * [Change log for worker node fix pack 1.20.15_1583, released 7 June 2022](/docs/containers?topic=containers-changelog_120#12015_1583)
 
@@ -6066,8 +6073,8 @@ subcollection: containers
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-120#cis-benchmark-remediations-120)
 
 
-### Version 1.19 (unsupported)
-{: #sitemap_version_119_unsupported}
+### Version 1.19
+{: #sitemap_version_119}
 
 
 [1.19 version information and update actions (unsupported)](/docs/containers?topic=containers-cs_versions_119#cs_versions_119)
@@ -6245,11 +6252,6 @@ subcollection: containers
     * [5.6 General Policies](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-56-119)
 
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-remediations-119)
-
-
-## Archived version history
-{: #sitemap_archived_version_history}
-
 
 [Version 1.18 changelog (unsupported as of 10 October 2021)](/docs/containers?topic=containers-118_changelog#118_changelog)
 

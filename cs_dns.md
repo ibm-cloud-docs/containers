@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-06-16"
 
 keywords: kubernetes, coredns, kubedns, dns
 
@@ -532,9 +532,6 @@ By default, your cluster is set up with cluster-wide DNS resources, not zone-awa
 
 Do not use the [DNS cache label](#dns_cache) when you use zone-aware DNS in your cluster.
 {: important}
-
-Zone-aware DNS is generally available in clusters that run Kubernetes 1.21 or later. For Kubernetes 1.20 and earlier, zone-aware DNS is a beta feature that is subject to change.
-{: preview}
 
 ### Deploying and enabling zone-aware DNS
 {: #dns_zone_aware_deploy}

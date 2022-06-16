@@ -29,12 +29,20 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+
 ### 16 June 2022
 {: #containers-jun1622}
 {: release-note}
 
 Certified Kubernetes
 :   Version [1.24](/docs/containers?topic=containers-cs_versions_124) release is now certified.
+
+
+
+Version 1.20 is unsupported
+:   Update your cluster to a supported as soon as possible. For more information, see the 1.20 [release information](/docs/containers?topic=containers-cs_versions_120) and [change log](/docs/containers?topic=containers-changelog_120). For more information about the supported releases, see the [version information](/docs/containers?topic=containers-containers_versions).
+
+
 
 
 
