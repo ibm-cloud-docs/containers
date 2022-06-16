@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-15"
+lastupdated: "2022-06-16"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
+
+    * [16 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1622)
+
+        * Certified Kubernetes
 
     * [15 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1522)
 
