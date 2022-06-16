@@ -207,13 +207,15 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
-* [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
+* [June 2022](/docs/containers?topic=containers-containers-relnotes#june-2022)
 
     * [16 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1622)
 
         * Certified Kubernetes
 
         * Version 1.20 is unsupported
+
+        * Istio add-on
 
     * [15 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1522)
 
@@ -7279,6 +7281,10 @@ subcollection: containers
     * [01 January 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#01-jan-2019)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
+
+    * [Change log for 1.14.1, released 16 June 2022](/docs/containers?topic=containers-istio-changelog#1141)
 
 * [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
 

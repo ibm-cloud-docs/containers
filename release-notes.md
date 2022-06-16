@@ -25,8 +25,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: tip}
 
 ## June 2022
-{: #containers-jun22}
-
 
 
 
@@ -37,11 +35,11 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 Certified Kubernetes
 :   Version [1.24](/docs/containers?topic=containers-cs_versions_124) release is now certified.
 
-
-
 Version 1.20 is unsupported
 :   Update your cluster to a supported as soon as possible. For more information, see the 1.20 [release information](/docs/containers?topic=containers-cs_versions_120) and [change log](/docs/containers?topic=containers-changelog_120). For more information about the supported releases, see the [version information](/docs/containers?topic=containers-containers_versions).
 
+Istio add-on
+:   Version [`1.14.1`](/docs/containers?topic=containers-istio-changelog#1141) is available.
 
 
 
@@ -55,6 +53,7 @@ Version 1.20 is unsupported
 
 {{site.data.keyword.block_storage_is_short}} add-on.
 :   [Version version 5.0.1-beta_1411](/docs/containers?topic=containers-vpc_bs_changelog) is available for allowlisted accounts.
+
 
 
 
