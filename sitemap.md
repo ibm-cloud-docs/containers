@@ -217,7 +217,7 @@ subcollection: containers
 
         * Certified Kubernetes
 
-        * Version 1.20 is unsupported
+        * Version 1.20 is unsupported as of 19 June 2022
 
         * Istio add-on
 

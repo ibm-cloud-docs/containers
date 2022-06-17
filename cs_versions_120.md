@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-16"
+lastupdated: "2022-06-17"
 
 keywords: kubernetes, 1.20, versions, update, upgrade
 
@@ -19,7 +19,7 @@ subcollection: containers
 Review information about version 1.20 of {{site.data.keyword.containerlong}}, released 16 Feb 2021.
 {: shortdesc}
 
-Kubernetes version 1.20 is unsupported as of 16 Jun 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
+Kubernetes version 1.20 is unsupported as of 19 June 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
 {: important}
 
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
@@ -44,7 +44,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
-| 1.20 | Unsupported | 16 Feb 2021 | 16 Jun 2022 |
+| 1.20 | Unsupported | 16 Feb 2021 | 19 June 2022 |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.20" caption-side="top"}
 
 ## Preparing to update
