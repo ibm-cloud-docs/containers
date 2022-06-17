@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-15"
+lastupdated: "2022-06-17"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -380,6 +380,7 @@ The following metrics are available for {{site.data.keyword.block_storage_is_sho
     1. In the {{site.data.keyword.cloud_notm}} Monitoring dashboard, select **Alerts** > **Library**.
     2. Choose one of the templates and select **Enable Alert**. For example, you can search for `PVC storage` and enable the `PVC Storage Usage Is Reaching The Limit` alert.
     3. Customize the alert settings on the template and select **Enable Alert** to apply your settings.
+
 If your {{site.data.keyword.block_storage_is_short}} volumes are reaching capacity, you can [set up volume expansion](/docs/containers?topic=containers-vpc-block#vpc-block-volume-expand).
 {: tip}
 

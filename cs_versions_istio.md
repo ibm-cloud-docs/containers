@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-16"
+lastupdated: "2022-06-17"
 
 keywords: kubernetes, istio, add-on
 
@@ -87,7 +87,7 @@ Updates in this version
     - [CVE-2022-1292](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1292){: external}   
     - [CVE-2022-1343](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1343){: external}
     - [CVE-2022-1434](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1434){: external}
-    - [CVE-2022-27776 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1473){: external}
+    - [CVE-2022-27776](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1473){: external}
     - [CVE-2021-36084](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36084){: external}
     - [CVE-2021-36085](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36085){: external}
     - [CVE-2021-36086](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36086 ){: external}
