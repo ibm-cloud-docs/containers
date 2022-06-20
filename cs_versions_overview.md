@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-10"
+lastupdated: "2022-06-20"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -120,7 +120,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 | [1.23](/docs/containers?topic=containers-cs_versions_123) | Yes | 09 Feb 2022 | 26 Apr 2023 `†` |
 | [1.22](/docs/containers?topic=containers-cs_versions_122) | Yes | 29 Sep 2021 | 30 Nov 2022 `†` |
 | [1.21](/docs/containers?topic=containers-cs_versions_121) | Deprecated | 09 Jun 2021 | 31 Aug 2022 `†` |
-| [1.20](/docs/containers?topic=containers-cs_versions_120) | Deprecated | 16 Feb 2021 | 15 Jun 2022 `†` |
+| [1.20](/docs/containers?topic=containers-cs_versions_120) | Unsupported | 16 Feb 2021 | 19 Jun 2022 |
 {: caption="Release history for {{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
 Earlier versions of {{site.data.keyword.containerlong_notm}} are [unsupported](#k8s_version_archive).
