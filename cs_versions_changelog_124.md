@@ -52,7 +52,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.1_1522" caption-side="top"}
 
-### Changelog for master fix pack 1.24.1_1523 and worker node fix pack 1.24.1_1522, released 9 June 2022
+### Change log for master fix pack 1.24.1_1523 and worker node fix pack 1.24.1_1522, released 9 June 2022
 {: #1241_1522}
 
 | Component | Previous | Current | Description |
