@@ -217,6 +217,10 @@ subcollection: containers
 
         * {{site.data.keyword.block_storage_is_short}} add-on.
 
+    * [21 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1622)
+
+        * Istio add-on
+
     * [16 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1622)
 
         * Certified Kubernetes
@@ -7280,6 +7284,8 @@ subcollection: containers
 
 * [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
 
+    * [Changelog for 1.13.5, released 21 June 2022](/docs/containers?topic=containers-istio-changelog#1135)
+
     * [Changelog for 1.13.4, released 1 June 2022](/docs/containers?topic=containers-istio-changelog#1134)
 
     * [Changelog for 1.13.3, released 3 May 2021](/docs/containers?topic=containers-istio-changelog#1133)
@@ -7289,6 +7295,8 @@ subcollection: containers
     * [Change log for 1.13.1, released March 9th, 2021](/docs/containers?topic=containers-istio-changelog#1131)
 
 * [Version 1.12](/docs/containers?topic=containers-istio-changelog#v112)
+
+    * [Changelog for 1.12.8, released 21 June 2022](/docs/containers?topic=containers-istio-changelog#1128)
 
     * [Changelog for 1.12.7, released 19 May 2022](/docs/containers?topic=containers-istio-changelog#1127)
 

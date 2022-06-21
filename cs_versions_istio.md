@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-17"
+lastupdated: "2022-06-21"
 
 keywords: kubernetes, istio, add-on
 
@@ -61,6 +61,29 @@ Updates in this version
 
 ## Version 1.13
 {: #v113}
+
+### Changelog for 1.13.5, released 21 June 2022
+{: #1135}
+
+Review the changes that are included in version 1.13.5 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.13.4
+
+Current version
+:   1.13.5
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.13.5](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.5/.){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2022-31045](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-31045){: external}
+    - [CVE-2022-1664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1664){: external}
+    - [CVE-2019-20838](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20838){: external}
+    - [CVE-2020-14155](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14155){: external}
+    - [usn-5446-1](https://ubuntu.com/security/notices/USN-5446-1){: external}
+    - [usn-5425-1](https://ubuntu.com/security/notices/USN-5425-1){: external}
+:   For more information, see the [Istio security bulletin 2022-005/](https://istio.io/latest/news/security/istio-security-2022-005/){: external}
 
 ### Changelog for 1.13.4, released 1 June 2022
 {: #1134}
@@ -173,6 +196,38 @@ Updates in this version
 
 If you want to upgrade from Istio minor version 1.11 to version 1.12 and your Istio components were provisioned at version 1.10 or earlier, you **must** take steps to [set up your mutating and validating webhooks](/docs/containers?topic=containers-istio#istio_minor) before you upgrade. If you do not make these changes before upgrading to 1.12, the upgrade will stall.
 {: important}
+
+### Changelog for 1.12.8, released 21 June 2022
+{: #1128}
+
+Review the changes that are included in version 1.12.8 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.12.7
+
+Current version
+:   1.12.8
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.12.8](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.8/.){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2022-31045](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-31045){: external}
+    - [CVE-2022-1664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1664){: external}
+    - [CVE-2019-20838](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20838){: external}
+    - [CVE-2020-14155](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14155){: external}
+    - [CVE-2022-27780](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27780){: external}
+    - [CVE-2022-27781](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27781){: external}
+    - [CVE-2022-27782](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27782){: external}
+    - [CVE-2022-1292](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1292){: external}
+    - [CVE-2022-1343](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1343){: external}
+    - [CVE-2022-1434](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1434){: external}
+    - [CVE-2022-1473](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1473){: external}
+    - [usn-5446-1](https://ubuntu.com/security/notices/USN-5446-1){: external}
+    - [usn-5425-1](https://ubuntu.com/security/notices/USN-5425-1){: external}
+    - [usn-5412-1](https://ubuntu.com/security/notices/USN-5412-1){: external}
+    - [usn-5402-1](https://ubuntu.com/security/notices/USN-5402-1){: external}
+:   For more information, see the [Istio security bulletin 2022-005/](https://istio.io/latest/news/security/istio-security-2022-005/){: external}
 
 ### Changelog for 1.12.7, released 19 May 2022
 {: #1127}
