@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-20"
+lastupdated: "2022-06-21"
 
 keywords: containers
 subcollection: containers
@@ -2429,30 +2429,6 @@ subcollection: containers
 ## Creating clusters
 {: #sitemap_creating_clusters}
 
-
-[Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
-
-* [Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
-
-* [Audience](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_audience)
-
-* [Prerequisites](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_prereqs)
-
-* [Set up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
-
-* [Add an {{site.data.keyword.cloud_notm}} service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
-
-* [Deploy single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
-
-* [Deploy and update apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
-
-* [Deploy and update the {{site.data.keyword.watson}} Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
-
-    * [Step 5a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
-
-    * [Step 5b: Updating the running {{site.data.keyword.watson}} Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
-
-* [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
 
 [Creating a cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial)
 
