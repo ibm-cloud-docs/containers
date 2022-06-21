@@ -46,7 +46,6 @@ toc:
         - topicgroup: 
             label: Creating clusters
             topics:
-            - cs_tutorials.md
             - cs_tutorial_vpc.md
         - topicgroup: 
             label: Migrating environments to clusters

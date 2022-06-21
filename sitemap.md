@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-17"
+lastupdated: "2022-06-21"
 
 keywords: containers
 subcollection: containers
@@ -209,9 +209,17 @@ subcollection: containers
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
 
+    * [20 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2022)
+
+        * Worker node fix pack
+
     * [17 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1722)
 
         * {{site.data.keyword.block_storage_is_short}} add-on.
+
+    * [21 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1622)
+
+        * Istio add-on
 
     * [16 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1622)
 
@@ -2425,30 +2433,6 @@ subcollection: containers
 ## Creating clusters
 {: #sitemap_creating_clusters}
 
-
-[Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
-
-* [Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
-
-* [Audience](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_audience)
-
-* [Prerequisites](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_prereqs)
-
-* [Set up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
-
-* [Add an {{site.data.keyword.cloud_notm}} service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
-
-* [Deploy single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
-
-* [Deploy and update apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
-
-* [Deploy and update the {{site.data.keyword.watson}} Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
-
-    * [Step 5a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
-
-    * [Step 5b: Updating the running {{site.data.keyword.watson}} Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
-
-* [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
 
 [Creating a cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial)
 
@@ -5507,7 +5491,9 @@ subcollection: containers
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
 
-    * [Changelog for master fix pack 1.24.1_1523 and worker node fix pack 1.24.1_1522, released 9 June 2022](/docs/containers?topic=containers-changelog_124#1241_1522)
+    * [Change log for worker node fix pack 1.24.2_1526, released 20 June 2022](/docs/containers?topic=containers-changelog_124#1242_1526)
+
+    * [Change log for master fix pack 1.24.1_1523 and worker node fix pack 1.24.1_1522, released 9 June 2022](/docs/containers?topic=containers-changelog_124#1241_1522)
 
 [Version 1.24 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-124)
 
@@ -5571,6 +5557,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for worker node fix pack 1.23.8_1534, released 20 June 2022](/docs/containers?topic=containers-changelog_123#1238_1534)
 
     * [Change log for worker node fix pack 1.23.7_1532, released 7 June 2022](/docs/containers?topic=containers-changelog_123#1237_1532)
 
@@ -5664,6 +5652,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.11_1556, released 20 June 2022](/docs/containers?topic=containers-changelog_122#12211_1556)
 
     * [Change log for worker node fix pack 1.22.10_1554, released 7 June 2022](/docs/containers?topic=containers-changelog_122#12210_1554)
 
@@ -5781,6 +5771,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview)
 
 * [Version 1.21 change log](/docs/containers?topic=containers-changelog_121#121_changelog)
+
+    * [Change log for worker node fix pack 1.21.14_1564, released 20 June 2022](/docs/containers?topic=containers-changelog_121#12114_1564)
 
     * [Change log for worker node fix pack 1.21.13_1562, released 7 June 2022](/docs/containers?topic=containers-changelog_121#12113_1562)
 
@@ -7292,6 +7284,8 @@ subcollection: containers
 
 * [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
 
+    * [Changelog for 1.13.5, released 21 June 2022](/docs/containers?topic=containers-istio-changelog#1135)
+
     * [Changelog for 1.13.4, released 1 June 2022](/docs/containers?topic=containers-istio-changelog#1134)
 
     * [Changelog for 1.13.3, released 3 May 2021](/docs/containers?topic=containers-istio-changelog#1133)
@@ -7301,6 +7295,8 @@ subcollection: containers
     * [Change log for 1.13.1, released March 9th, 2021](/docs/containers?topic=containers-istio-changelog#1131)
 
 * [Version 1.12](/docs/containers?topic=containers-istio-changelog#v112)
+
+    * [Changelog for 1.12.8, released 21 June 2022](/docs/containers?topic=containers-istio-changelog#1128)
 
     * [Changelog for 1.12.7, released 19 May 2022](/docs/containers?topic=containers-istio-changelog#1127)
 
@@ -7520,11 +7516,9 @@ subcollection: containers
 
 * [Version 5.0 (Beta)](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
 
-    * [Change log for version 5.0.1-beta_1411, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-beta_1411_is_block_relnote)
+    * [Change log for version 5.0.1-beta_1411, released 15 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-beta_1411_is_block_relnote)
 
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
-
-* [Version 4.4](/docs/containers?topic=containers-vpc_bs_changelog#044_is_block)
 
     * [Change log for version 4.4.5_1371, released 13 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#445_1371_is_block_relnote)
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-17"
+lastupdated: "2022-06-21"
 
 keywords: kubernetes, release notes
 
@@ -27,12 +27,33 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## June 2022
 {: #containers-jun22}
 
+
+### 20 June 2022
+{: #containers-jun2022}
+{: release-note}
+
+Worker node fix pack
+:   Kubernetes [1.21.14_1564](/docs/containers?topic=containers-changelog_121), [1.22.11_1556](/docs/containers?topic=containers-changelog_122), [1.23.8_1534](/docs/containers?topic=containers-changelog_123) and [1.24.2_1526](/docs/containers?topic=containers-changelog_124).
+
+
 ### 17 June 2022
 {: #containers-jun1722}
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on.
 :   [Version version 4.3.2_1441](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+
+
+
+
+### 21 June 2022
+{: #containers-jun1622}
+{: release-note}
+
+Istio add-on
+:   Version [`1.13.5`](/docs/containers?topic=containers-istio-changelog#1135) and [`1.12.8`](/docs/containers?topic=containers-istio-changelog#1128) is available.
+
+
 
 
 
