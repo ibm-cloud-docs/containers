@@ -209,6 +209,10 @@ subcollection: containers
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
 
+    * [22 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2222)
+
+        * New! Portworx Cloud Drive support
+
     * [20 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2022)
 
         * Worker node fix pack
