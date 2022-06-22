@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-20"
+lastupdated: "2022-06-22"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -164,7 +164,6 @@ See the list below for actions you should take before and after updating to spec
 -  Version 1.23 [preparation actions](/docs/containers?topic=containers-cs_versions_123#prep-up-123)
 -  Version 1.22 [preparation actions](/docs/containers?topic=containers-cs_versions_122#prep-up-122)
 -  **Deprecated**: Version 1.21 [preparation actions](/docs/containers?topic=containers-cs_versions_121#prep-up-121)
--  **Deprecated**: Version 1.20 [preparation actions](/docs/containers?topic=containers-cs_versions_120#prep-up-120)
 
 
 ## Archive
@@ -173,10 +172,15 @@ See the list below for actions you should take before and after updating to spec
 Find an overview of Kubernetes versions that are unsupported in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
+### Version 1.20 (unsupported)
+{: #cs_v120} 
+
+As of 19 June 2022, {{site.data.keyword.containerlong_notm}} clusters that run [Version 1.20](/docs/containers?topic=containers-cs_versions_120#prep-up-120) are unsupported.
+
 ### Version 1.19 (unsupported)
 {: #cs_v119}
 
-As of 14 Mar 2022, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.19](/docs/containers?topic=containers-changelog_119) are unsupported.
+As of 14 March 2022, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.19](/docs/containers?topic=containers-changelog_119) are unsupported.
 {: shortdesc}
 
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support.
