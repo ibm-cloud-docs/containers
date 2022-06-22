@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-21"
+lastupdated: "2022-06-22"
 
 keywords: containers
 subcollection: containers
@@ -5427,6 +5427,8 @@ subcollection: containers
 * [Preparing to update](/docs/containers?topic=containers-cs_versions#prep-up)
 
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
+
+    * [Version 1.20 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v120)
 
     * [Version 1.19 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v119)
 
