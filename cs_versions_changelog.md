@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-06-10"
+lastupdated: "2022-06-23"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -44,8 +44,7 @@ Review the change logs in the following list.
 - [1.22 change log](/docs/containers?topic=containers-changelog_122)
 
 **Deprecated Kubernetes versions**:
-- [1.21 change log](/docs/containers?topic=containers-changelog_121)
-- [1.20 change log](/docs/containers?topic=containers-changelog_120) 
+- [1.21 change log](/docs/containers?topic=containers-changelog_121) 
 
 **Unsupported Kubernetes versions**: 
 - [Archived change logs](/docs/containers?topic=containers-cs_versions#k8s_version_archive)

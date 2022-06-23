@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-10"
+lastupdated: "2022-06-23"
 
 keywords: kubernetes, containers
 
@@ -33,7 +33,6 @@ Use the list below to find CIS Kubernetes Benchmark results for available versio
 - [Version 1.23](/docs/containers?topic=containers-cis-benchmark-123)
 - [Version 1.22](/docs/containers?topic=containers-cis-benchmark-122)
 - [(Deprecated) Version 1.21](/docs/containers?topic=containers-cis-benchmark-121)
-- [(Deprecated) Version 1.20](/docs/containers?topic=containers-cis-benchmark-120)
 
 
 
