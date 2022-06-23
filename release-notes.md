@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-22"
+lastupdated: "2022-06-23"
 
 keywords: kubernetes, release notes
 
@@ -35,6 +35,18 @@ New! Portworx Cloud Drive support
 :   You can now dynamically provision storage for Portworx during installation by using Portworx Cloud Drives. For more information, see [Getting started with Portworx](/docs/containers?topic=containers-portworx).
 
 
+
+
+### 21 June 2022
+{: #containers-jun2122}
+{: release-note}
+
+Istio add-on
+:   Version [`1.13.5`](/docs/containers?topic=containers-istio-changelog#1135) and [`1.12.8`](/docs/containers?topic=containers-istio-changelog#1128) is available.
+
+
+
+
 ### 20 June 2022
 {: #containers-jun2022}
 {: release-note}
@@ -49,18 +61,6 @@ Worker node fix pack
 
 {{site.data.keyword.block_storage_is_short}} add-on.
 :   [Version version 4.3.2_1441](/docs/containers?topic=containers-vpc_bs_changelog) is available.
-
-
-
-
-### 21 June 2022
-{: #containers-jun1622}
-{: release-note}
-
-Istio add-on
-:   Version [`1.13.5`](/docs/containers?topic=containers-istio-changelog#1135) and [`1.12.8`](/docs/containers?topic=containers-istio-changelog#1128) is available.
-
-
 
 
 
