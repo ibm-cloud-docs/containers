@@ -1,6 +1,6 @@
 ---
 
-copyright: 
+copyright:
   years: 2014, 2022
 lastupdated: "2022-06-08"
 
@@ -46,11 +46,11 @@ First time using {{site.data.keyword.filestorage_short}} in your cluster? Come b
            zone: # Example: dal13
     spec:
      accessModes:
-        - ReadWriteMany
-       resources:
-         requests:
-           storage: 24Gi
-       storageClassName: ibmc-file-silver
+     - ReadWriteMany
+     resources:
+       requests:
+         storage: 24Gi
+     storageClassName: ibmc-file-silver
     ```
     {: codeblock}
 
@@ -128,7 +128,7 @@ To decide on a storage configuration:
     {: pre}
 
     Example output
-    
+
     ```sh
     NAME                         TYPE
     ibmc-file-bronze (default)   ibm.io/ibmc-file
@@ -151,10 +151,10 @@ To decide on a storage configuration:
 
     For more information about each storage class, see the [storage class reference](#file_storageclass_reference). If you don't find what you are looking for, consider creating your own customized storage class. To get started, check out the [customized storage class samples](#file_custom_storageclass).
     {: tip}
-    
+
 3. Choose the file storage [type](#file-types), [IOPS](#file-iops), [reclaim policy](#file-reclaim), and [billing](#file-billing) that you want to use.
 
-### File storage types 
+### File storage types
 {: #file-types}
 
 Choose the [type of {{site.data.keyword.filestorage_short}}](/docs/FileStorage?topic=FileStorage-getting-started#prereqs) that you want to provision.
@@ -167,14 +167,14 @@ Custom storage class
 :    This storage class provisions Performance storage. With performance storage, you have more control over the size of the storage and the IOPS.
 
 ### IOPS
-{: #file-iops} 
+{: #file-iops}
 
 Choose the size and IOPS for your {{site.data.keyword.filestorage_short}}. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more total IOPS your storage has, the faster it processes read and write operations.
 {: shordesc}
 
 Bronze, silver, and gold storage classes
 :    These storage classes come with a fixed number of IOPS per gigabyte and are provisioned on SSD hard disks. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi {{site.data.keyword.filestorage_short}} size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS.
-            
+
 | Storage class |IOPS per gigabyte | Size range in gigabytes |
 | --- | --- | --- |
 | Bronze | 2 IOPS/GB | 20-12000 Gi |
@@ -186,7 +186,7 @@ Bronze, silver, and gold storage classes
 Custom storage class
 :    When you choose this storage class, you have more control over the size and IOPS that you want. For the size, you can select any whole number of gigabyte within the allowed size range. The size that you choose determines the IOPS range that is available to you. You can choose an IOPS that is a multiple of 100 that is in the specified range. The IOPS that you choose is static and does not scale with the size of the storage. For example, if you choose 40Gi with 100 IOPS, your total IOPS remains 100.
 :    The IOPS to gigabyte ratio also determines the type of hard disk that is provisioned for you. For example, if you have 500Gi at 100 IOPS, your IOPS to gigabyte ratio is 0.2. Storage with a ratio of less than or equal to 0.3 is provisioned on SATA hard disks. If your ratio is greater than 0.3, then your storage is provisioned on SSD hard disks.  
-            
+
 | Size range in gigabytes | IOPS range in multiples of 100 |
 | --- | --- |
 | 20-39 Gi | 100-1000 IOPS |
@@ -205,7 +205,7 @@ Custom storage class
 
 
 ### Reclaim policy
-{: #file-reclaim} 
+{: #file-reclaim}
 
 Choose if you want to keep your data after the cluster or the persistent volume claim (PVC) is deleted.
 {: shortdesc}
@@ -217,7 +217,7 @@ Choose if you want to keep your data after the cluster or the persistent volume 
 ### Billing type
 {: #file-billing}
 
-Choose hourly or monthly. Review the [pricing](https://www.ibm.com/cloud/file-storage/pricing){: external} for more information. 
+Choose hourly or monthly. Review the [pricing](https://www.ibm.com/cloud/file-storage/pricing){: external} for more information.
 {: shortdesc}
 
 
@@ -245,7 +245,7 @@ To add {{site.data.keyword.filestorage_short}}:
 1. Create a configuration file to define your persistent volume claim (PVC) and save the configuration as a `.yaml` file.
 
     Example for bronze, silver, gold storage classes.
-    
+
     The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-file-silver"` storage class, billed `"monthly"`, with a gigabyte size of `24Gi`.
 
     ```yaml
@@ -268,7 +268,7 @@ To add {{site.data.keyword.filestorage_short}}:
     {: codeblock}
 
     Example for using the custom storage class.
-    
+
     The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-file-retain-custom`, billed `"hourly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`.
 
     ```yaml
@@ -293,28 +293,28 @@ To add {{site.data.keyword.filestorage_short}}:
 
     `name`
     :   Enter the name of the PVC.
-    
+
     `billingType`
     :   Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". If you don't specify a billing type, the storage is provisioned with an hourly billing type.
-    
+
     `region`
     :   Optional: Specify the region where you want to provision your {{site.data.keyword.filestorage_short}}. To connect to your storage, create the storage in the same region that your cluster is in. If you specify the region, you must also specify a zone. If you don't specify a region, or the specified region is not found, the storage is created in the same region as your cluster. To get the region for your cluster, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>` and look for the region prefix in the **Master URL**, such as `eu-de` in `https://c2.eu-de.containers.cloud.ibm.com:11111`. Instead of specifying the region and zone in the PVC, you can also specify these values in a [customized storage class](#file_multizone_yaml). Then, use your storage class in the `metadata.annotations.volume.beta.kubernetes.io/storage-class` section of your PVC. If the region and zone are specified in the storage class and the PVC, the values in the PVC take precedence.
-    
+
     `zone`
     :   Optional: Specify the zone where you want to provision your {{site.data.keyword.filestorage_short}}. To use your storage in an app, create the storage in the same zone that your worker node is in. To view the zone of your worker node, run `ibmcloud ks worker ls --cluster <cluster_name_or_ID>` and review the **Zone** column of your CLI output. If you specify the zone, you must also specify a region. If you don't specify a zone or the specified zone is not found in a multizone cluster, the zone is selected on a round-robin basis. Instead of specifying the region and zone in the PVC, you can also specify these values in a [customized storage class](#file_multizone_yaml). Then, use your storage class in the `metadata.annotations.volume.beta.kubernetes.io/storage-class` section of your PVC. If the region and zone are specified in the storage class and the PVC, the values in the PVC take precedence.
-    
+
     `accessMode`
     :   Specify one of the following options.
         - `ReadWriteMany`: The PVC can be mounted by multiple pods. All pods can read from and write to the volume.
         - `ReadOnlyMany`: The PVC can be mounted by multiple pods. All pods have read-only access.
         - `ReadWriteOnce`: The PVC can be mounted by one pod only. This pod can read from and write to the volume.
-    
+
     `storage`
     :   Enter the size of the {{site.data.keyword.filestorage_short}}, in gigabytes (Gi). After your storage is provisioned, you can't change the size of your {{site.data.keyword.filestorage_short}}. Make sure to specify a size that matches the amount of data that you want to store.
-    
+
     `iops`
     :   This option is available for the custom storage classes only (`ibmc-file-custom / ibmc-file-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. If you choose an IOPS other than one that is listed, the IOPS is rounded up.
-    
+
     `storageClassName`
     :   The name of the storage class that you want to use to provision {{site.data.keyword.filestorage_short}}. You can choose to use one of the [IBM-provided storage classes](#file_storageclass_reference) or [create your own storage class](#file_custom_storageclass). If you don't specify a storage class, the PV is created with the default storage class `ibmc-file-bronze`. Want to set your own default? See [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass).
 
@@ -358,7 +358,7 @@ To add {{site.data.keyword.filestorage_short}}:
     {: screen}
 
 4. To mount the storage to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV. {: #file_app_volume_mount}
-    
+
     If you have an app that requires a non-root user to write to the persistent storage, or an app that requires that the mount path is owned by the root user, see [Adding non-root user access to NFS {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-nonroot).
     {: tip}
 
@@ -393,26 +393,26 @@ To add {{site.data.keyword.filestorage_short}}:
 
     `app`
     :   In the metadata section, enter a label for the deployment.
-     
+
     `matchLabels.app` and `labels.app`
     :   In the spec selector and template metadata sections, enter label for your app.
-    
+
     `image`
     :   The name of the container image that you want to use. To list available images in your {{site.data.keyword.registrylong_notm}} account, run `ibmcloud cr image-list`.
-    
+
     `name`
     :   The name of the container that you want to deploy to your cluster.
-    
+
     `mountPath`
     :   In the container volume mounts section, enter the absolute path of the directory to where the volume is mounted inside the container. Data that is written to the mount path is stored under the `root` directory in your physical {{site.data.keyword.filestorage_short}} instance. If you want to share a volume between different apps, you can specify [volume sub paths](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath){: external} for each of your apps.
-    
+
     `name`
     :   In the container volume mounts section, enter the name of the volume to mount to your pod.
-    
+
     `name`
-    :   In the volumes section, enter the name of the volume to mount to your pod. Typically this name is the same as 
+    :   In the volumes section, enter the name of the volume to mount to your pod. Typically this name is the same as
     `volumeMounts.name`.
-    
+
     `claimName`
     :   In the volumes persistent volume claim section, enter the name of the PVC that binds the PV that you want to use.
 
@@ -684,7 +684,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-2. View the **Pods Status** of each stateful set to ensure that the deployment of the stateful set is finished. 
+2. View the **Pods Status** of each stateful set to ensure that the deployment of the stateful set is finished.
 
     ```sh
     kubectl describe statefulset <statefulset_name>
@@ -873,38 +873,38 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
     `name`
     :   In the metadata, enter a name for your stateful set. The name that you enter is used to create the name for your PVC in the format: `<volume_name>-<statefulset_name>-<replica_number>`.
-    
+
     `serviceName`
     :   In the spec section, enter the name of the service that you want to use to expose your stateful set.
-    
+
     `replicas`
     :   Enter the number of replicas for your stateful set.
-    
+
     `podManagementPolicy`
     :   Enter the pod management policy that you want to use for your stateful set. Choose between the following options.
         - `OrderedReady`: With this option, stateful set replicas are deployed one after another. For example, if you specified 3 replicas, then Kubernetes creates the PVC for your first replica, waits until the PVC is bound, deploys the stateful set replica, and mounts the PVC to the replica. After the deployment is finished, the second replica is deployed. For more information about this option, see [OrderedReady Pod Management](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management){: external}.
-        - `Parallel`: With this option, the deployment of all stateful set replicas is started at the same time. If your app supports parallel deployment of replicas, then use this option to save deployment time for your PVCs and stateful set replicas. 
-    
+        - `Parallel`: With this option, the deployment of all stateful set replicas is started at the same time. If your app supports parallel deployment of replicas, then use this option to save deployment time for your PVCs and stateful set replicas.
+
     `matchLabels`
-    :   In the spec selector section, enter all labels that you want to include in your stateful set and your PVC. Labels that you include in the `volumeClaimTemplates` of your stateful set are not recognized by Kubernetes. Review the following sample labels. 
+    :   In the spec selector section, enter all labels that you want to include in your stateful set and your PVC. Labels that you include in the `volumeClaimTemplates` of your stateful set are not recognized by Kubernetes. Review the following sample labels.
         - `region` and `zone`: If you want all your stateful set replicas and PVCs to be created in one specific zone, add both labels. You can also specify the zone and region in the storage class that you use. If you don't specify a zone and region and you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones.
         - `billingType`: Enter the billing type that you want to use for your PVCs. Choose between `hourly` or `monthly`. If you don't specify this label, all PVCs are created with an hourly billing type.
-    
+
     `labels`
     :   In the spec template metadata section, enter the same labels that you added to the `spec.selector.matchLabels` section.
-    
+
     `affinity`
-    :   In the spec template spec affinity section, specify your anti-affinity rule to ensure that your stateful set pods are distributed across worker nodes and zones. The example shows an anti-affinity rule where the stateful set pod prefers not to be scheduled on a worker node where a pod runs that has the `app: nginx` label. The `topologykey: failure-domain.beta.kubernetes.io/zone` restricts this anti-affinity rule even more and prevents the pod to be scheduled on a worker node if the worker node is in the same zone as a pod that has the `app: nginx` label. By using this anti-affinity rule, you can achieve anti-affinity across worker nodes and zones. 
-    
+    :   In the spec template spec affinity section, specify your anti-affinity rule to ensure that your stateful set pods are distributed across worker nodes and zones. The example shows an anti-affinity rule where the stateful set pod prefers not to be scheduled on a worker node where a pod runs that has the `app: nginx` label. The `topologykey: failure-domain.beta.kubernetes.io/zone` restricts this anti-affinity rule even more and prevents the pod to be scheduled on a worker node if the worker node is in the same zone as a pod that has the `app: nginx` label. By using this anti-affinity rule, you can achieve anti-affinity across worker nodes and zones.
+
     `name`
     :   In the spec volume claim templates metadata section, enter a name for your volume. Use the same name that you defined in the `spec.containers.volumeMount.name` section. The name that you enter here is used to create the name for your PVC in the format: `<volume_name>-<statefulset_name>-<replica_number>`.
-    
+
     `storage`
     :   In the spec volume claim templates spec resources requests section, enter the size of the {{site.data.keyword.filestorage_short}} in gigabytes (Gi).
-    
+
     `iops`
     :   In the spec volume claim templates spec resources requests section, if you want to provision [performance storage](#file_predefined_storageclass), enter the number of IOPS. If you use an endurance storage class and specify a number of IOPS, the number of IOPS is ignored. Instead, the IOPS that is specified in your storage class is used.
-    
+
     `storageClassName`
     :   In the spec volume claim templates spec section, enter the storage class that you want to use. To list existing storage classes, run `kubectl get storageclasses | grep file`. If you don't specify a storage class, the PVC is created with the default storage class that is set in your cluster. Make sure that the default storage class uses the `ibm.io/ibmc-file` provisioner so that your stateful set is provisioned with {{site.data.keyword.filestorage_short}}.
 
@@ -940,10 +940,10 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
     `<volume_name>`
     :    Use the name that you want to specify in the `spec.volumeClaimTemplates.metadata.name` section of your stateful set, such as `nginxvol`.
-    
+
     `<statefulset_name>`
     :   Use the name that you want to specify in the `metadata.name` section of your stateful set, such as `nginx_statefulset`.
-    
+
     `<replica_number>`
     :   Enter the number of your replica starting with 0.
 
@@ -956,10 +956,10 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
     `spec.volumeClaimTemplates.metadata.name`
     :   Enter the `<volume_name>` of your PVC name.
-    
+
     `metadata.name`
     :   Enter the `<statefulset_name>` of your PVC name.
-    
+
     `spec.replicas`
     :   Enter the number of replicas that you want to create for your stateful set. The number of replicas must equal the number of PVCs that you created earlier.
 
@@ -1066,13 +1066,13 @@ For questions about billing and to find the steps for how to use the {{site.data
 
     `volume_ID`  
     :   Enter the ID of the volume that you retrieved earlier.  
-    
+
     `new-size`  
     :   Enter the new size in gigabytes (Gi) for your volume. For valid sizes, see [Deciding on the {{site.data.keyword.filestorage_short}} configuration](#file_predefined_storageclass). The size that you enter must be greater than or equal to the current size of your volume. If you don't specify a new size, the current size of the volume is used.  
-    
+
     `new-iops`  
     :   For performance storage only. Enter the new number of IOPS that you want. For valid IOPS, see [Deciding on the {{site.data.keyword.filestorage_short}} configuration](#file_predefined_storageclass). If you don't specify the IOPS, the current IOPS is used. If the original IOPS/GB ratio for the volume is less than 0.3, the new IOPS/GB ratio must be less than 0.3. If the original IOPS/GB ratio for the volume is greater than or equal to 0.3, the new IOPS/GB ratio for the volume must be greater than or equal to 0.3.  
-    
+
     `new-tier`  
     :   For endurance storage only. Enter the new number of IOPS per GB that you want. For valid IOPS, see [Deciding on the {{site.data.keyword.filestorage_short}} configuration](#file_predefined_storageclass). If you don't specify the IOPS, the current IOPS is used. If the original IOPS/GB ratio for the volume is less than 0.25, the new IOPS/GB ratio must be less than 0.25. If the original IOPS/GB ratio for the volume is greater than or equal to 0.25, the new IOPS/GB ratio for the volume must be greater than or equal to 0.25.  
 
@@ -1099,7 +1099,7 @@ For questions about billing and to find the steps for how to use the {{site.data
     ```
     {: pre}
 
-        
+
 5. Log in to your pod.
 
     ```sh
@@ -1304,14 +1304,14 @@ You can [set up periodic snapshots for your {{site.data.keyword.filestorage_shor
 Complete the following steps to create a snapshot for your volume.
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-2. Log in to the `ibmcloud sl` CLI. 
+2. Log in to the `ibmcloud sl` CLI.
 
     ```sh
     ibmcloud sl init
     ```
     {: pre}
-    
-3. List existing PVs in your cluster. 
+
+3. List existing PVs in your cluster.
 
     ```sh
     kubectl get pv
@@ -1324,14 +1324,14 @@ Complete the following steps to create a snapshot for your volume.
     kubectl describe pv <pv_name>
     ```
     {: pre}  
-    
-5. Create the snapshot size for your existing volume with the parameters that you retrieved in the previous step. 
+
+5. Create the snapshot size for your existing volume with the parameters that you retrieved in the previous step.
 
     ```sh
     ibmcloud sl file snapshot-order <volume_ID> --size <size> --tier <iops>
     ```
     {: pre}
-    
+
 6. Wait for the snapshot size to create. The snapshot size is successfully provisioned when the **Snapshot Size (GB)**in your CLI output changes from 0 to the size that you ordered.
 
     ```sh
@@ -1339,14 +1339,14 @@ Complete the following steps to create a snapshot for your volume.
     ```
     {: pre}
 
-7. Create the snapshot for your volume and note the ID of the snapshot that is created for you. 
+7. Create the snapshot for your volume and note the ID of the snapshot that is created for you.
 
     ```sh
     ibmcloud sl file snapshot-create <volume_ID>
     ```
     {: pre}
-    
-8. Verify that the snapshot is created successfully. 
+
+8. Verify that the snapshot is created successfully.
 
     ```sh
     ibmcloud sl file snapshot-list <volume_ID>
@@ -1363,7 +1363,7 @@ Complete the following steps to create a snapshot for your volume.
 ### Replicating snapshots to another zone
 {: #file-replicate-snapshot-diff-zone}
 
-To protect your data from a zone failure, you can [replicate snapshots](/docs/FileStorage?topic=FileStorage-replication#replication) to a {{site.data.keyword.filestorage_short}} instance that is set up in another zone. 
+To protect your data from a zone failure, you can [replicate snapshots](/docs/FileStorage?topic=FileStorage-replication#replication) to a {{site.data.keyword.filestorage_short}} instance that is set up in another zone.
 {: shortdesc}
 
 Data can be replicated from the primary storage to the backup storage only. You can't mount a replicated {{site.data.keyword.filestorage_short}} instance to a cluster. When your primary storage fails, you can manually set your replicated backup storage to be the primary one. Then, you can mount it to your cluster. After your primary storage is restored, you can restore the data from the backup storage.
@@ -1696,7 +1696,7 @@ parameters:
 ## Removing persistent storage from a cluster
 {: #cleanup_file}
 
-When you set up persistent storage in your cluster, you have three main components: the Kubernetes persistent volume claim (PVC) that requests storage, the Kubernetes persistent volume (PV) that is mounted to a pod and described in the PVC, and the IBM Cloud infrastructure instance, such as classic file or block storage. Depending on how you created your storage, you might need to delete all three components separately. 
+When you set up persistent storage in your cluster, you have three main components: the Kubernetes persistent volume claim (PVC) that requests storage, the Kubernetes persistent volume (PV) that is mounted to a pod and described in the PVC, and the IBM Cloud infrastructure instance, such as classic file or block storage. Depending on how you created your storage, you might need to delete all three components separately.
 {: shortdesc}
 
 ### Understanding your storage removal options
@@ -1764,7 +1764,7 @@ To clean up persistent data:
     {: pre}
 
     Example output
-    
+
     ```sh
     NAME                  STATUS    VOLUME                                     CAPACITY   ACCESSMODES   STORAGECLASS            AGE
     claim1-block-bronze   Bound     pvc-06886b77-102b-11e8-968a-f6612bb731fb   20Gi       RWO           ibmc-block-bronze       78d
@@ -1840,7 +1840,7 @@ To clean up persistent data:
     kubectl get pv
     ```
     {: pre}
-    
+
 1. List the physical storage instance that your PV pointed to and note the **`id`** of the physical storage instance. {: #sl_delete_storage}
 
     ```sh
@@ -1856,28 +1856,28 @@ To clean up persistent data:
     ```
     {: screen}
 
-    
+
     `"plugin":"ibm-file-plugin-5b55b7b77b-55bb7"`
     :   The storage plug-in that the cluster uses.
-    
+
     `"region":"us-south"`
     :   The region that your cluster is in.
-    
+
     `"cluster":"aa1a11a1a11b2b2bb22b22222c3c3333"`
     :   The cluster ID that is associated with the storage instance.
-    
+
     `"type":"Endurance"`
     :   The type of file or block storage, either `Endurance` or `Performance`.
-    
+
     `"ns":"default"`
     :   The namespace that the storage instance is deployed to.
-    
+
     `"pvc":"mypvc"`
     :   The name of the PVC that is associated with the storage instance.
-    
+
     `"pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7"`
     :   The PV that is associated with the storage instance.
-    
+
     `"storageclass":"ibmc-file-gold"`
     :   The type of storage class: bronze, silver, gold, or custom.
 
@@ -1897,9 +1897,3 @@ To clean up persistent data:
 
 The deletion process might take up to 72 hours to complete.
 {: important}
-    
-    
-    
-
-
-
