@@ -209,6 +209,10 @@ subcollection: containers
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
 
+    * [24 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2422)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on.
+
     * [22 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2222)
 
         * New! Portworx Cloud Drive support
@@ -7525,6 +7529,10 @@ subcollection: containers
     * [Change log for version 5.0.1-beta_1411, released 15 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-beta_1411_is_block_relnote)
 
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
+
+* [Version 4.4](/docs/containers?topic=containers-vpc_bs_changelog#044_is_block)
+
+    * [Change log for version 4.4.6_1446, released 24 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.4.6_1446_is_block_relnote)
 
     * [Change log for version 4.4.5_1371, released 13 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#445_1371_is_block_relnote)
 
