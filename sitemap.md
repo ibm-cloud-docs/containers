@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-22"
+lastupdated: "2022-06-23"
 
 keywords: containers
 subcollection: containers
@@ -213,6 +213,10 @@ subcollection: containers
 
         * New! Portworx Cloud Drive support
 
+    * [21 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2122)
+
+        * Istio add-on
+
     * [20 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2022)
 
         * Worker node fix pack
@@ -220,10 +224,6 @@ subcollection: containers
     * [17 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1722)
 
         * {{site.data.keyword.block_storage_is_short}} add-on.
-
-    * [21 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1622)
-
-        * Istio add-on
 
     * [16 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun1622)
 
@@ -7530,7 +7530,7 @@ subcollection: containers
 
 * [Version 4.3](/docs/containers?topic=containers-vpc_bs_changelog#043_is_block)
 
-    * [Change log for version 4.3.2_1441, released 17 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#430_1163_is_block_relnote)
+    * [Change log for version 4.3.2_1441, released 17 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#432_1441_is_block_relnote)
 
     * [Change log for version 4.3.0_1163, released 25 May 2022](/docs/containers?topic=containers-vpc_bs_changelog#430_1163_is_block_relnote)
 
