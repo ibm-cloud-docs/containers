@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-23"
+lastupdated: "2022-06-24"
 
 keywords: containers
 subcollection: containers
@@ -210,6 +210,8 @@ subcollection: containers
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
 
     * [24 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2422)
+
+        * {{site.data.keyword.block_storage_is_short}}
 
         * {{site.data.keyword.block_storage_is_short}} add-on.
 
