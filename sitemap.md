@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-23"
+lastupdated: "2022-06-24"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
+
+    * [24 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2422)
+
+        * {{site.data.keyword.block_storage_is_short}}
+
+        * {{site.data.keyword.block_storage_is_short}} add-on.
 
     * [22 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2222)
 
@@ -4638,6 +4644,43 @@ subcollection: containers
 
 * [Flex](/docs/containers?topic=containers-storage_cos_reference#flex)
 
+
+### Storing data on IBM Cloud VPC Block Storage
+{: #sitemap_storing_data_on_ibm_cloud_vpc_block_storage}
+
+
+[Storing data on {{site.data.keyword.block_storage_is_short}} for unmanaged clusters](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-storage-driver-unmanaged)
+
+* [Prerequisites](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-prereq)
+
+    * [Labelling your worker nodes](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-label-um)
+
+    * [Retrieving IAM and VPC details](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-driver-get-details)
+
+* [Creating the image pull secret in your cluster](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-create-storage-secret)
+
+* [Creating the {{site.data.keyword.block_storage_is_short}} driver deployment](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-deploy-cm)
+
+* [Deploying a stateful set that uses {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-stateful-set-deploy)
+
+* [Removing the {{site.data.keyword.block_storage_is_short}} driver](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#removing-the-block-storage-for-vpc-driver)
+
+* [Config map reference](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-cm-ref)
+
+    * [RHEL or CentOS configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-rhel-cm)
+
+    * [Ubuntu configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
+
+[Setting up snapshots with {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
+
+* [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-addon-enable)
+
+* [Creating a deployment](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-deployment)
+
+* [Creating a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-create-snapshot)
+
+* [Restoring from a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-restore-from-snapshot)
+
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 
 * [About Portworx](/docs/containers?topic=containers-portworx#about-portworx)
@@ -4729,28 +4772,6 @@ subcollection: containers
     * [Gathering logs](/docs/containers?topic=containers-portworx#portworx_logs)
 
 * [Limitations](/docs/containers?topic=containers-portworx#portworx_limitations)
-
-[Storing data on {{site.data.keyword.block_storage_is_short}} for unmanaged clusters](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-storage-driver-unmanaged)
-
-* [Prerequisites](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-prereq)
-
-    * [Labelling your worker nodes](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-label-um)
-
-    * [Retrieving IAM and VPC details](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-driver-get-details)
-
-* [Creating the image pull secret in your cluster](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-create-storage-secret)
-
-* [Creating the {{site.data.keyword.block_storage_is_short}} driver deployment](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-deploy-cm)
-
-* [Deploying a stateful set that uses {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-stateful-set-deploy)
-
-* [Removing the {{site.data.keyword.block_storage_is_short}} driver](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#removing-the-block-storage-for-vpc-driver)
-
-* [Config map reference](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-cm-ref)
-
-    * [RHEL or CentOS configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-rhel-cm)
-
-    * [Ubuntu configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
 
 [Backing up and restoring storage data](/docs/containers?topic=containers-storage_br#storage_br)
 
@@ -7525,6 +7546,10 @@ subcollection: containers
     * [Change log for version 5.0.1-beta_1411, released 15 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-beta_1411_is_block_relnote)
 
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
+
+* [Version 4.4](/docs/containers?topic=containers-vpc_bs_changelog#044_is_block)
+
+    * [Change log for version 4.4.6_1446, released 24 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.4.6_1446_is_block_relnote)
 
     * [Change log for version 4.4.5_1371, released 13 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#445_1371_is_block_relnote)
 
