@@ -231,8 +231,12 @@ toc:
                 - storage-cos-apps.md
                 - storage-cos-vpc-ip.md
                 - storage-cos-reference.md
+            - topicgroup:   
+                label: Storing data on IBM Cloud VPC Block Storage
+                topics: 
+                - storage-vpc-block-driver.md
+                - vpc-volume-snapshot.md
             - storage-portworx.md
-            - storage-vpc-block-driver.md
             - storage-br.md
             - storage-utilities.md
         - topicgroup:
