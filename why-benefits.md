@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-06-27"
 
 keywords: kubernetes, containers
 
@@ -28,10 +28,12 @@ subcollection: containers
 
 
 
+
 Clusters are deployed on compute hosts that provide native Kubernetes and {{site.data.keyword.IBM_notm}}-specific capabilities.
 {: shortdesc}
 
-Ready to get started? Try out the [creating a Kubernetes cluster tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
+
+
 
 
 Choice of container platform provider

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-06-27"
 
 keywords: kubernetes, containers
 
@@ -153,7 +153,7 @@ Great job! You just deployed your first app in your Kubernetes cluster.
 {: #whats-next}
 
 Go through a tutorial to install the CLI, create a private image registry, set up your cluster environment, add an {{site.data.keyword.cloud_notm}} service to the cluster, and deploy an app.
-- [Classic clusters tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
+
 - [VPC clusters tutorial](/docs/containers?topic=containers-vpc_ks_tutorial)
 
 Set up the right environment for your workloads.
