@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-24"
+lastupdated: "2022-06-27"
 
 keywords: kubernetes, release notes
 
@@ -395,7 +395,7 @@ Cluster autoscaler add-on
 :   Version [1.1.0_475](/docs/containers?topic=containers-ca_changelog) is available.
 
 {{site.data.keyword.containershort}} 1.20 end of support date change
-:   The end of support date of {{site.data.keyword.containershort}} 1.20 is now 15 June 2022. The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#release-history) page has been updated with the new date. 
+:   The end of support date of {{site.data.keyword.containershort}} 1.20 is now 15 June 2022. The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions_available) page has been updated with the new date. 
 
 Master fix pack update
 :   Kubernetes [1.23.5_1523](/docs/containers?topic=containers-changelog_123#1235_1523), [1.22.8_1545](/docs/containers?topic=containers-changelog_122#1228_1545), [1.21.11_1553](/docs/containers?topic=containers-changelog_121#12111_1553), and [1.20.15_1574](/docs/containers?topic=containers-changelog_120#12015_1574).
@@ -766,7 +766,7 @@ Review the release notes for January 2022.
 :   The [{{site.data.keyword.containerlong_notm}} CLI Map](/docs/containers?topic=containers-icks_map) lists all `ibmcloud ks` commands as they are structured in the CLI. Use this page as a visual reference for how ibmcloud ks commands are organized, or to quickly find a specific command. 
 
 {{site.data.keyword.containershort}} 1.19, 1.20, 1.21, and 1.22 unsupported date change
-:   The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#release-history) page has been updated with the new unsupported dates. 
+:   The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions_available) page has been updated with the new unsupported dates. 
 
 Worker node fix pack update.
 :   Kubernetes [1.22.4_1536](/docs/containers?topic=containers-changelog_122#1224_1536), [1.21.7_1546](/docs/containers?topic=containers-changelog_121#1217_1546), [1.20.13_1567](/docs/containers?topic=containers-changelog_120#12013_1567), and [1.19.16_1574](/docs/containers?topic=containers-changelog_119#11916_1574).
@@ -804,7 +804,7 @@ Istio add-on
 
 
 {{site.data.keyword.containershort}} 1.20 end of support date change
-:   The end of support date of {{site.data.keyword.containershort}} 1.20 is now March 2022. The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#release-history) page has been updated with the new date. 
+:   The end of support date of {{site.data.keyword.containershort}} 1.20 is now March 2022. The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions_available) page has been updated with the new date. 
 
 
 ### 4 January 2022
@@ -1994,7 +1994,7 @@ New! Kubernetes 1.20
 :   You can create or [update](/docs/containers?topic=containers-cs_versions_120) your cluster to Kubernetes version 1.20. With Kubernetes 1.20, you get the latest stable enhancements from the community, as well as beta access to features such as [API server priority](/docs/containers?topic=containers-kubeapi-priority). For more information, see the [blog announcement](http://www.ibm.com/cloud/blog/announcements/kubernetes-version-120-now-available-in-ibm-cloud-kubernetes-service){: external}.
 
 Deprecated Kubernetes 1.17
-:   With the release of Kubernetes 1.20, clusters that run version 1.17 are deprecated, with a tentative unsupported date of 2 July 2021. Update your cluster to at least [version 1.18](/docs/containers?topic=containers-cs_versions#cs_v118) as soon as possible.
+:   With the release of Kubernetes 1.20, clusters that run version 1.17 are deprecated, with a tentative unsupported date of 2 July 2021. Update your cluster to at least [version 1.18](/docs/containers?topic=containers-cs_versions#k8s_version_archive) as soon as possible.
 
 
 
@@ -2492,7 +2492,7 @@ New! Certified Kubernetes version 1.19
 :   You can now create clusters that run Kubernetes version 1.19. To update an existing cluster, see the [Version 1.19 preparation actions](/docs/containers?topic=containers-cs_versions_119). The Kubernetes 1.19 release is also certified.
 
 Deprecated: Kubernetes version 1.16
-:   With the release of version 1.19, clusters that run version 1.16 are deprecated. Update your clusters to at least [version 1.17](/docs/containers?topic=containers-cs_versions#cs_v117) today.
+:   With the release of version 1.19, clusters that run version 1.16 are deprecated. Update your clusters to at least [version 1.17](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#k8s_version_archive) today.
 
 New! Network load balancer for VPC
 :   In VPC Gen 2 clusters that run Kubernetes version 1.19, you can now create a layer 4 Network Load Balancer for VPC. VPC network load balancers offer source IP preservation and increased performance through direct server return (DSR). For more information, see [About VPC load balancing in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-lbaas#lbaas_about).
@@ -2791,7 +2791,7 @@ Versions
 {: release-note}
 
 {{site.data.keyword.redhat_openshift_notm}} version 4.4
-:   The [{{site.data.keyword.redhat_openshift_notm}} version 4.4 release](/docs/containers?topic=containers-cs_versions#cs_v118) is certified for Kubernetes version 1.17.
+:   The [{{site.data.keyword.redhat_openshift_notm}} version 4.4 release](/docs/containers?topic=containers-cs_versions#k8s_version_archive) is certified for Kubernetes version 1.17.
 
 ### 28 July 2020
 {: #containers-july2820}
@@ -3090,7 +3090,7 @@ Ingress ALB changelog
 {: release-note}
 
 Kubernetes version 1.18
-:   [Kubernetes 1.18 release](/docs/containers?topic=containers-cs_versions#cs_v118) is certified.
+:   [Kubernetes 1.18 release](/docs/containers?topic=containers-cs_versions#k8s_version_archive) is certified.
 
 
 
@@ -3103,10 +3103,10 @@ Kubernetes version 1.18
 
 
 New! Kubernetes version 1.18
-:   You can now create clusters that run Kubernetes version 1.18. To update an existing cluster, see the [Version 1.18 preparation actions](/docs/containers?topic=containers-cs_versions#cs_v118).
+:   You can now create clusters that run Kubernetes version 1.18. To update an existing cluster, see the [Version 1.18 preparation actions](/docs/containers?topic=containers-cs_versions#k8s_version_archive).
 
 Deprecated: Kubernetes version 1.15
-:   With the release of version 1.18, clusters that run version 1.15 are deprecated. Consider [updating to at least version 1.16](/docs/containers?topic=containers-cs_versions#cs_v116) today.
+:   With the release of version 1.18, clusters that run version 1.15 are deprecated. Consider [updating to at least version 1.16](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#k8s_version_archive) today.
 
 NodeLocal DNS cache
 :   [NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_cache) is generally available for clusters that run Kubernetes 1.18, but still not enabled by default.
@@ -3444,7 +3444,7 @@ Firewall subnets
 
 
 Kubernetes version 1.17
-:   [Kubernetes 1.17 release is certified](/docs/containers?topic=containers-cs_versions#cs_v117).
+:   [Kubernetes 1.17 release is certified](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#k8s_version_archive).
 
 
 
@@ -3469,10 +3469,10 @@ Istio add-on
 
 
 New! Kubernetes version 1.17
-:   You can now create clusters that run Kubernetes version 1.17. To update an existing cluster, see the [Version 1.17 preparation actions](/docs/containers?topic=containers-cs_versions#cs_v117).
+:   You can now create clusters that run Kubernetes version 1.17. To update an existing cluster, see the [Version 1.17 preparation actions](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#k8s_version_archive).
 
 Deprecated: Kubernetes version 1.14
-:   With the release of version 1.17, clusters that run version 1.14 are deprecated. Consider [updating to at least version 1.15](/docs/containers?topic=containers-cs_versions#cs_v115) today.
+:   With the release of version 1.17, clusters that run version 1.14 are deprecated. Consider [updating to at least version 1.15](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#k8s_version_archive) today.
 
 VPC cluster creation troubleshooting
 :   Added [troubleshooting steps](/docs/containers?topic=containers-ts_no_vpc) for when no VPCs are listed when you try to create a VPC cluster in the console.
@@ -3818,10 +3818,10 @@ New! Adding classic infrastructure servers to gateway-enabled classic clusters (
 {: release-note}
 
 New! Kubernetes version 1.16
-:   You can now create clusters that run Kubernetes version 1.16. To update an existing cluster, see the [Version 1.16 preparation actions](/docs/containers?topic=containers-cs_versions#cs_v116).
+:   You can now create clusters that run Kubernetes version 1.16. To update an existing cluster, see the [Version 1.16 preparation actions](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#k8s_version_archive).
 
 Deprecated: Kubernetes version 1.13
-:   With the release of version 1.16, clusters that run version 1.13 are deprecated. Consider [updating to 1.14](/docs/containers?topic=containers-cs_versions#cs_v114) today.
+:   With the release of version 1.16, clusters that run version 1.13 are deprecated. Consider [updating to 1.14](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#k8s_version_archive) today.
 
 Unsupported: Kubernetes version 1.12
 :   With the release of version 1.16, clusters that run version 1.12 are unsupported. To continue receiving important security updates and support, you must [update the cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately.
@@ -4231,7 +4231,7 @@ New! `NodeLocal` DNS caching (beta)
 :   For clusters that run Kubernetes 1.15 or later, you can set up improved cluster DNS performance with [`NodeLocal` DNS caching](/docs/containers?topic=containers-cluster_dns#dns_cache).
 
 New! Version 1.15
-:   You can create community Kubernetes clusters that run version 1.15. To update from a previous version, review the [1.15 changes](/docs/containers?topic=containers-cs_versions#cs_v115).
+:   You can create community Kubernetes clusters that run version 1.15. To update from a previous version, review the [1.15 changes](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#k8s_version_archive).
 
 Deprecated: Version 1.12
 :   Kubernetes version 1.12 is deprecated. Review the [changes across versions](/docs/containers?topic=containers-cs_versions), and update to a more recent version.
@@ -4563,7 +4563,7 @@ CLI reference
 :   Updated the [CLI reference page](/docs/containers?topic=containers-kubernetes-service-cli) to add COS endpoints for `logging collect` commands and to clarify that `cluster master refresh` restarts the Kubernetes master components.
 
 Unsupported: Kubernetes version 1.10
-:   [Kubernetes version 1.10](/docs/containers?topic=containers-cs_versions#cs_v114) is now unsupported.
+:   [Kubernetes version 1.10](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#k8s_version_archive) is now unsupported.
     
 
 ### 15 May 2019
@@ -4600,7 +4600,7 @@ Kubernetes strategy
 :   Added a topic about [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#knowledge).
 
 Kubernetes version 1.14
-:   Added that the [Kubernetes 1.14 release](/docs/containers?topic=containers-cs_versions#cs_v114) is certified.
+:   Added that the [Kubernetes 1.14 release](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#k8s_version_archive) is certified.
 
 Reference topics
 :   Updated information for various service binding, `logging`, and `nlb` operations in the [user access](/docs/containers?topic=containers-access_reference) and [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli) pages.
@@ -4622,10 +4622,10 @@ New! Integrations
 :   Added and restructure information about [{{site.data.keyword.cloud_notm}} services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations), [popular integrations](/docs/containers?topic=containers-supported_integrations), and [partnerships](/docs/containers?topic=containers-service-partners).
 
 New! Kubernetes version 1.14
-:   Create or update your clusters to [Kubernetes 1.14](/docs/containers?topic=containers-cs_versions#cs_v114).
+:   Create or update your clusters to [Kubernetes 1.14](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#k8s_version_archive).
 
 Deprecated Kubernetes version 1.11
-:   [Update any clusters](/docs/containers?topic=containers-update) that run [Kubernetes 1.11](/docs/containers?topic=containers-cs_versions#cs_v111) before they become unsupported.
+:   [Update any clusters](/docs/containers?topic=containers-update) that run [Kubernetes 1.11](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#k8s_version_archive) before they become unsupported.
 
 Permissions
 :   Added an FAQ, [What access policies do I give my cluster users?](/docs/containers?topic=containers-faqs#faq_access)

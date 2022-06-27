@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-06-27"
 
 keywords: kubernetes, 1.19, versions, update, upgrade
 
@@ -10,17 +10,17 @@ subcollection: containers
 
 ---
 
-# 1.19 version information and update actions (unsupported)
-{: #cs_versions_119}
-
 {{site.data.keyword.attribute-definition-list}}
 
 
-Review information about version 1.19 of {{site.data.keyword.containerlong}}, released 13 Oct 2020.
-{: shortdesc}
+# 1.19 version information and update actions 
+{: #cs_versions_119}
 
 Kubernetes version 1.19 is unsupported.
 {: important}
+
+Review information about version 1.19 of {{site.data.keyword.containerlong}}, released 13 Oct 2020.
+{: shortdesc}
 
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
 {: tip}
@@ -35,8 +35,6 @@ Looking for general information on updating {{site.data.keyword.containerlong}} 
 
 The following table includes the expected release timeline for version 1.19 of {{site.data.keyword.containerlong}}. You can use this information for planning purposes, such as to estimate the general time that the version might become unsupported. 
 {: shortdesc}
-
-For the release history and timeline of all current {{site.data.keyword.containerlong}} versions, see [Release history](/docs/containers?topic=containers-cs_versions#release-history).
 
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}

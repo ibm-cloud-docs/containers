@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-24"
+lastupdated: "2022-06-27"
 
 keywords: containers
 subcollection: containers
@@ -5445,43 +5445,11 @@ subcollection: containers
 
 * [Update types](/docs/containers?topic=containers-cs_versions#update_types)
 
-* [Release history](/docs/containers?topic=containers-cs_versions#release-history)
-
 * [Release lifecycle](/docs/containers?topic=containers-cs_versions#release_lifecycle)
 
 * [Preparing to update](/docs/containers?topic=containers-cs_versions#prep-up)
 
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
-
-    * [Version 1.20 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v120)
-
-    * [Version 1.19 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v119)
-
-    * [Version 1.18 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v118)
-
-    * [Version 1.17 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v117)
-
-    * [Version 1.16 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v116)
-
-    * [Version 1.15 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v115)
-
-    * [Version 1.14 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v114)
-
-    * [Version 1.13 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v113)
-
-    * [Version 1.12 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v112)
-
-    * [Version 1.11 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v111)
-
-    * [Version 1.10 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v110)
-
-    * [Version 1.9 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v19)
-
-    * [Version 1.8 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v18)
-
-    * [Version 1.7 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v17)
-
-    * [Version 1.5 (unsupported)](/docs/containers?topic=containers-cs_versions#cs_v1-5)
 
 [Kubernetes version changelogs](/docs/containers?topic=containers-changelog#changelog)
 
@@ -5783,7 +5751,7 @@ subcollection: containers
 {: #sitemap_version_121}
 
 
-[(Deprecated) 1.21 version information and update actions](/docs/containers?topic=containers-cs_versions_121#cs_versions_121)
+[1.21 version information and update actions](/docs/containers?topic=containers-cs_versions_121#cs_versions_121)
 
 * [Release timeline](/docs/containers?topic=containers-cs_versions_121#release_timeline_121)
 
@@ -5881,7 +5849,7 @@ subcollection: containers
 
     * [Change log for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog_121#1211_1519_new)
 
-[(Deprecated) Version 1.21 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-121#cis-benchmark-121)
+[Version 1.21 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-121#cis-benchmark-121)
 
 * [1 Master Node Security Configuration](/docs/containers?topic=containers-cis-benchmark-121#cis-section-1-121)
 
@@ -6055,7 +6023,7 @@ subcollection: containers
 
     * [Change log for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog_120#1202_1528)
 
-[(Deprecated) Version 1.20 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-120#cis-benchmark-120)
+[Version 1.20 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-120#cis-benchmark-120)
 
 * [1 Master Node Security Configuration](/docs/containers?topic=containers-cis-benchmark-120#cis-section-1-120)
 
@@ -6102,7 +6070,7 @@ subcollection: containers
 {: #sitemap_version_119}
 
 
-[1.19 version information and update actions (unsupported)](/docs/containers?topic=containers-cs_versions_119#cs_versions_119)
+[1.19 version information and update actions](/docs/containers?topic=containers-cs_versions_119#cs_versions_119)
 
 * [Release timeline](/docs/containers?topic=containers-cs_versions_119#release_timeline_119)
 
@@ -6114,7 +6082,7 @@ subcollection: containers
 
     * [Update after worker nodes](/docs/containers?topic=containers-cs_versions_119#119_after_worker)
 
-[Kubernetes version 1.19 change log (unsupported as of 14 March 2022)](/docs/containers?topic=containers-changelog_119#changelog_119)
+[Kubernetes version 1.19 change log](/docs/containers?topic=containers-changelog_119#changelog_119)
 
 * [Overview](/docs/containers?topic=containers-changelog_119#changelog_overview)
 
@@ -6236,7 +6204,7 @@ subcollection: containers
 
     * [Change log for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog_119#1192_1524)
 
-[Version 1.19 CIS Kubernetes Benchmark (unsupported)](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-119)
+[Version 1.19 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-119)
 
 * [1 Master Node Security Configuration](/docs/containers?topic=containers-cis-benchmark-119#cis-section-1-119)
 
@@ -6278,7 +6246,7 @@ subcollection: containers
 
 * [IBM Remediations and Explanations](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-remediations-119)
 
-[Version 1.18 changelog (unsupported as of 10 October 2021)](/docs/containers?topic=containers-118_changelog#118_changelog)
+[Version 1.18 changelog](/docs/containers?topic=containers-118_changelog#118_changelog)
 
 * [Change log for worker node fix pack 1.18.20_1566, released 27 September 2021](/docs/containers?topic=containers-118_changelog#11820_1566)
 
