@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-05-10"
+lastupdated: "2022-06-27"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -14,12 +14,11 @@ subcollection: containers
 
 
 
-# Version 1.18 changelog (unsupported as of 10 October 2021)
+# Version 1.18 changelog 
 {: #118_changelog}
 
 Version 1.18 is unsupported. You can review the following archive of 1.18 changelogs.
 {: shortdesc}
-
 
 ## Change log for worker node fix pack 1.18.20_1566, released 27 September 2021
 {: #11820_1566}
@@ -854,7 +853,7 @@ The following table shows the changes that are in the master and worker node upd
 ## Change log for 1.18.2_1512, released 11 May 2020
 {: #1182_1512}
 
-The following table shows the changes that are in patch update 1.18.2_1512. If you update your cluster from Kubernetes 1.17, review the [preparation actions](/docs/containers?topic=containers-cs_versions#cs_v118).
+The following table shows the changes that are in patch update 1.18.2_1512. If you update your cluster from Kubernetes 1.17, review the [preparation actions](/docs/containers?topic=containers-cs_versions#k8s_version_archive).
 {: shortdesc}
 
 | Component | Previous | Current | Description |

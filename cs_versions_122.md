@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-16"
+lastupdated: "2022-06-27"
 
 keywords: kubernetes, 1.22, versions, update, upgrade
 
@@ -34,8 +34,6 @@ For more information about Kubernetes project version 1.22, see the [Kubernetes 
 
 The following table includes the expected release timeline for version 1.22 of {{site.data.keyword.containerlong}}. You can use this information for planning purposes, such as to estimate the general time that the version might become unsupported. 
 {: shortdesc}
-
-For the release history and timeline of all current {{site.data.keyword.containerlong}} versions, see [Release history](/docs/containers?topic=containers-cs_versions#release-history).
 
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
