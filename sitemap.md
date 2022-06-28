@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-27"
+lastupdated: "2022-06-28"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
+
+    * [28 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2822)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in
 
     * [27 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2722)
 
@@ -2304,8 +2308,6 @@ subcollection: containers
         * `kubectl` troubleshooting
 
         * Tutorials landing page
-
-        * Tutorial to create a cluster and deploy an app
 
         * Using existing subnets to create a cluster
 
@@ -4555,56 +4557,6 @@ subcollection: containers
 
     * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
 
-[Storing data on {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block)
-
-* [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc_block_qs)
-
-* [Adding {{site.data.keyword.block_storage_is_short}} to your apps](/docs/containers?topic=containers-vpc-block#vpc-block-add)
-
-* [Using an existing {{site.data.keyword.block_storage_is_short}} instance](/docs/containers?topic=containers-vpc-block#vpc-block-static)
-
-* [Updating the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-block#vpc-addon-update)
-
-    * [Recreating custom storage classes after updating to version 4.2](/docs/containers?topic=containers-vpc-block#recreate-sc-42)
-
-* [Setting up encryption for {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block-encryption)
-
-* [Customizing the default storage settings](/docs/containers?topic=containers-vpc-block#vpc-customize-default)
-
-    * [Changing the default storage class](/docs/containers?topic=containers-vpc-block#vpc-block-default-edit)
-
-    * [Creating a custom storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class)
-
-    * [Verifying your {{site.data.keyword.block_storage_is_short}} file system](/docs/containers?topic=containers-vpc-block#vpc-block-fs-verify)
-
-    * [Storing your custom PVC settings in a Kubernetes secret](/docs/containers?topic=containers-vpc-block#vpc-block-storageclass-secret)
-
-    * [Enabling every user to customize the default PVC settings](/docs/containers?topic=containers-vpc-block#customize-with-secret)
-
-    * [Enforcing base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key CRN](/docs/containers?topic=containers-vpc-block#static-secret)
-
-* [Setting up volume expansion](/docs/containers?topic=containers-vpc-block#vpc-block-volume-expand)
-
-    * [Manually expanding volumes prior to add-on version 4.2](/docs/containers?topic=containers-vpc-block#expanding-existing-volumes)
-
-* [Backing up and restoring data](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
-
-* [Storage class reference](/docs/containers?topic=containers-vpc-block#vpc-block-reference)
-
-    * [10 IOPs tier](/docs/containers?topic=containers-vpc-block#10iops-sc-vpc-block)
-
-    * [5 IOPs tier](/docs/containers?topic=containers-vpc-block#5iops-sc-vpc-block)
-
-    * [Custom](/docs/containers?topic=containers-vpc-block#custom-sc-vpc-block)
-
-    * [General purpose](/docs/containers?topic=containers-vpc-block#gen-purp-sc-vpc-block)
-
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup_block_vpc)
-
-    * [Understanding your storage removal options](/docs/containers?topic=containers-vpc-block#storage_delete_options_block_vpc)
-
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-vpc-block#storage_remove_block_vpc)
-
 
 ### Storing data on IBM Cloud Object Storage
 {: #sitemap_storing_data_on_ibm_cloud_object_storage}
@@ -4713,11 +4665,11 @@ subcollection: containers
 
 * [Restoring from a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-restore-from-snapshot)
 
-[Setting up trusted profiles for the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles.md#storage-block-vpc-trusted-profiles.md)
+[Setting up trusted profiles for the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#storage-block-vpc-trusted-profiles)
 
-* [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles.md#vpc-addon-enable-trusted)
+* [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#vpc-addon-enable-trusted)
 
-* [Setting up trusted profiles](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles.md#vpc-block-setup-trusted)
+* [Setting up trusted profiles](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#vpc-block-setup-trusted)
 
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 
@@ -7614,6 +7566,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.1.17, released 28 June 2022](/docs/containers?topic=containers-cos_plugin_changelog#02117_object_plugin)
 
 * [Change log for version 2.1.16, released 25 May 2022](/docs/containers?topic=containers-cos_plugin_changelog#02116_object_plugin)
 

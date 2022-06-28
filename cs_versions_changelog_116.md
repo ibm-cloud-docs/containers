@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-06-27"
+lastupdated: "2022-06-28"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -676,7 +676,7 @@ The following table shows the changes that are in the worker node fix pack 1.16.
 ## Change log for 1.16.2_1514, released 4 November 2019
 {: #1162_1514}
 
-The following tables show the changes that are in the patch `1.16.2_1514`. If you update to this version from an earlier version, you choose when to update your cluster master and worker nodes. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types) and [Version 1.16](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#k8s_version_archive).
+The following tables show the changes that are in the patch `1.16.2_1514`. If you update to this version from an earlier version, you choose when to update your cluster master and worker nodes. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types) and [Version 1.16](/docs/containers?topic=containers-cs_versions#k8s_version_archive).
 {: shortdesc}
 
 ### Master patch

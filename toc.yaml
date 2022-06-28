@@ -222,7 +222,6 @@ toc:
             - storage-basics.md
             - storage-file.md
             - storage-block.md
-            - storage-block-vpc.md
             - topicgroup:
                 label: Storing data on IBM Cloud Object Storage
                 topics:
