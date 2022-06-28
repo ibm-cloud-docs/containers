@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-27"
+lastupdated: "2022-06-28"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
+
+    * [28 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2822)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in
 
     * [27 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2722)
 
@@ -4713,11 +4717,11 @@ subcollection: containers
 
 * [Restoring from a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-restore-from-snapshot)
 
-[Setting up trusted profiles for the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles.md#storage-block-vpc-trusted-profiles.md)
+[Setting up trusted profiles for the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#storage-block-vpc-trusted-profiles)
 
-* [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles.md#vpc-addon-enable-trusted)
+* [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#vpc-addon-enable-trusted)
 
-* [Setting up trusted profiles](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles.md#vpc-block-setup-trusted)
+* [Setting up trusted profiles](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#vpc-block-setup-trusted)
 
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 
@@ -7614,6 +7618,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.1.17, released 28 June 2022](/docs/containers?topic=containers-cos_plugin_changelog#02117_object_plugin)
 
 * [Change log for version 2.1.16, released 25 May 2022](/docs/containers?topic=containers-cos_plugin_changelog#02116_object_plugin)
 
