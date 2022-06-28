@@ -2309,8 +2309,6 @@ subcollection: containers
 
         * Tutorials landing page
 
-        * Tutorial to create a cluster and deploy an app
-
         * Using existing subnets to create a cluster
 
     * [12 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june1219)
@@ -4558,56 +4556,6 @@ subcollection: containers
     * [Understanding your storage removal options](/docs/containers?topic=containers-block_storage#storage_delete_options_block)
 
     * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
-
-[Storing data on {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block)
-
-* [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc_block_qs)
-
-* [Adding {{site.data.keyword.block_storage_is_short}} to your apps](/docs/containers?topic=containers-vpc-block#vpc-block-add)
-
-* [Using an existing {{site.data.keyword.block_storage_is_short}} instance](/docs/containers?topic=containers-vpc-block#vpc-block-static)
-
-* [Updating the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-block#vpc-addon-update)
-
-    * [Recreating custom storage classes after updating to version 4.2](/docs/containers?topic=containers-vpc-block#recreate-sc-42)
-
-* [Setting up encryption for {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block-encryption)
-
-* [Customizing the default storage settings](/docs/containers?topic=containers-vpc-block#vpc-customize-default)
-
-    * [Changing the default storage class](/docs/containers?topic=containers-vpc-block#vpc-block-default-edit)
-
-    * [Creating a custom storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class)
-
-    * [Verifying your {{site.data.keyword.block_storage_is_short}} file system](/docs/containers?topic=containers-vpc-block#vpc-block-fs-verify)
-
-    * [Storing your custom PVC settings in a Kubernetes secret](/docs/containers?topic=containers-vpc-block#vpc-block-storageclass-secret)
-
-    * [Enabling every user to customize the default PVC settings](/docs/containers?topic=containers-vpc-block#customize-with-secret)
-
-    * [Enforcing base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key CRN](/docs/containers?topic=containers-vpc-block#static-secret)
-
-* [Setting up volume expansion](/docs/containers?topic=containers-vpc-block#vpc-block-volume-expand)
-
-    * [Manually expanding volumes prior to add-on version 4.2](/docs/containers?topic=containers-vpc-block#expanding-existing-volumes)
-
-* [Backing up and restoring data](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
-
-* [Storage class reference](/docs/containers?topic=containers-vpc-block#vpc-block-reference)
-
-    * [10 IOPs tier](/docs/containers?topic=containers-vpc-block#10iops-sc-vpc-block)
-
-    * [5 IOPs tier](/docs/containers?topic=containers-vpc-block#5iops-sc-vpc-block)
-
-    * [Custom](/docs/containers?topic=containers-vpc-block#custom-sc-vpc-block)
-
-    * [General purpose](/docs/containers?topic=containers-vpc-block#gen-purp-sc-vpc-block)
-
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup_block_vpc)
-
-    * [Understanding your storage removal options](/docs/containers?topic=containers-vpc-block#storage_delete_options_block_vpc)
-
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-vpc-block#storage_remove_block_vpc)
 
 
 ### Storing data on IBM Cloud Object Storage
