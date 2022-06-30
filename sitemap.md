@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-29"
+lastupdated: "2022-06-30"
 
 keywords: containers
 subcollection: containers
@@ -4674,6 +4674,8 @@ subcollection: containers
 * [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#vpc-addon-enable-trusted)
 
 * [Setting up trusted profiles](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#vpc-block-setup-trusted)
+
+    * [Automatically creating a secret by using a Shell script](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#secret-create-truted-profile)
 
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 
