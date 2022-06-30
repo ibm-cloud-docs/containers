@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-28"
+lastupdated: "2022-06-30"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
+
+    * [30 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun3022)
+
+        * Cluster autoscaler add-on
 
     * [28 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun2822)
 
@@ -4671,6 +4675,8 @@ subcollection: containers
 
 * [Setting up trusted profiles](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#vpc-block-setup-trusted)
 
+    * [Automatically creating a secret by using a Shell script](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#secret-create-truted-profile)
+
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 
 * [About Portworx](/docs/containers?topic=containers-portworx#about-portworx)
@@ -7441,6 +7447,8 @@ subcollection: containers
 
 * [Version 1.1.0](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
 
+    * [Change log for patch update 1.1.0_682, released 30 June 2022](/docs/containers?topic=containers-ca_changelog#110682_ca)
+
     * [Change log for patch update 1.1.0_615, released 16 May 2022](/docs/containers?topic=containers-ca_changelog#110615_ca)
 
     * [Change log for patch update 1.1.0_475, released 30 March 2022](/docs/containers?topic=containers-ca_changelog#110475_ca)
@@ -7448,6 +7456,8 @@ subcollection: containers
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
 
 * [Version 1.0.5](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
+
+    * [Change log for patch update 1.0.5_694, released 30 June 2022](/docs/containers?topic=containers-ca_changelog#105694_ca)
 
     * [Change log for patch update 1.0.5_628, released 16 May 2022](/docs/containers?topic=containers-ca_changelog#105628_ca)
 
