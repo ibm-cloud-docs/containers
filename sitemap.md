@@ -5510,7 +5510,7 @@ subcollection: containers
 
     * [Change log for master fix pack 1.24.1_1523 and worker node fix pack 1.24.1_1522, released 9 June 2022](/docs/containers?topic=containers-changelog_124#1241_1522)
 
-[Version 1.24 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-124)
+[Version 1.24 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-124)
 
 * [1 Master Node Security Configuration](/docs/containers?topic=containers-cis-benchmark-124#cis-section-1-124)
 
@@ -6049,7 +6049,7 @@ subcollection: containers
 
     * [Change log for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog_120#1202_1528)
 
-[Version 1.20 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-120#cis-benchmark-120)
+[Version 1.20 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-120#cis-benchmark-120)
 
 * [1 Master Node Security Configuration](/docs/containers?topic=containers-cis-benchmark-120#cis-section-1-120)
 

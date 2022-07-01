@@ -14,7 +14,7 @@ subcollection: containers
 
 
 
-# Version 1.20 CIS Kubernetes Benchmark
+# Version 1.20 CIS Kubernetes benchmark
 {: #cis-benchmark-120}
 
 Kubernetes version 1.20 is deprecated, with a tentative unsupported date of 31 August 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
