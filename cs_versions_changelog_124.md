@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-06-30"
+lastupdated: "2022-07-01"
 
 keywords: kubernetes, containers
 
@@ -37,6 +37,23 @@ Review the version 1.24 change log.
 {: shortdesc}
 
 
+
+
+
+### Change log for master fix pack 1.24.2_1526, released 22 June 2022
+{: #1242_1526}
+
+The following table shows the changes that are in the master fix pack 1.24.2_1526. Master patch updates are applied automatically. 
+{: shortdesc}
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.2.4 | v2.2.6 | Bug fixes for the driver installation. Block plugin base images were updated to `ubi`: `8.6-751.1655117800` for CVE-2022-1271 |
+| Kubernetes | v1.24.1 | v1.24.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.2){: external}. |
+| Kubernetes add-on resizer | 1.8.14 | 1.8.15 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.15){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.24.1_1523" caption-side="top"}
 
 ### Change log for worker node fix pack 1.24.2_1526, released 20 June 2022
 {: #1242_1526}

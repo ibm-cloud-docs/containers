@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-06-30"
+lastupdated: "2022-07-01"
 
 keywords: containers
 subcollection: containers
@@ -4677,6 +4677,28 @@ subcollection: containers
 
     * [Automatically creating a secret by using a Shell script](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#secret-create-truted-profile)
 
+[Storing data on {{site.data.keyword.block_storage_is_short}} for unmanaged clusters](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-storage-driver-unmanaged)
+
+* [Prerequisites](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-prereq)
+
+    * [Labelling your worker nodes](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-label-um)
+
+    * [Retrieving IAM and VPC details](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-driver-get-details)
+
+* [Creating the image pull secret in your cluster](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-create-storage-secret)
+
+* [Creating the {{site.data.keyword.block_storage_is_short}} driver deployment](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-deploy-cm)
+
+* [Deploying a stateful set that uses {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-stateful-set-deploy)
+
+* [Removing the {{site.data.keyword.block_storage_is_short}} driver](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#removing-the-block-storage-for-vpc-driver)
+
+* [Config map reference](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-cm-ref)
+
+    * [RHEL or CentOS configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-rhel-cm)
+
+    * [Ubuntu configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
+
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 
 * [About Portworx](/docs/containers?topic=containers-portworx#about-portworx)
@@ -5482,6 +5504,8 @@ subcollection: containers
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
 
+    * [Change log for master fix pack 1.24.2_1526, released 22 June 2022](/docs/containers?topic=containers-changelog_124#1242_1526)
+
     * [Change log for worker node fix pack 1.24.2_1526, released 20 June 2022](/docs/containers?topic=containers-changelog_124#1242_1526)
 
     * [Change log for master fix pack 1.24.1_1523 and worker node fix pack 1.24.1_1522, released 9 June 2022](/docs/containers?topic=containers-changelog_124#1241_1522)
@@ -5548,6 +5572,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for master fix pack 1.23.8_1534, released 22 June 2022](/docs/containers?topic=containers-changelog_123#1238_1534)
 
     * [Change log for worker node fix pack 1.23.8_1534, released 20 June 2022](/docs/containers?topic=containers-changelog_123#1238_1534)
 
@@ -5643,6 +5669,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for master fix pack 1.22.11_1556, released 22 June 2022](/docs/containers?topic=containers-changelog_122#12211_1556)
 
     * [Change log for worker node fix pack 1.22.11_1556, released 20 June 2022](/docs/containers?topic=containers-changelog_122#12211_1556)
 
@@ -5762,6 +5790,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview)
 
 * [Version 1.21 change log](/docs/containers?topic=containers-changelog_121#121_changelog)
+
+    * [Change log for master fix pack 1.21.14_1564, released 22 June 2022](/docs/containers?topic=containers-changelog_121#12114_1564)
 
     * [Change log for worker node fix pack 1.21.14_1564, released 20 June 2022](/docs/containers?topic=containers-changelog_121#12114_1564)
 

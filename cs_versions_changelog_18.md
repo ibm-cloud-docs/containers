@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-06-30"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -37,7 +37,7 @@ Review the version 1.8 changelogs.
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
 | `systemd` | 229 | 230 | Updated `systemd` to fix `cgroup` leak. |
-| Kernel | 4.4.0-127 | 4.4.0-133 | Updated worker node images with kernel update for  [CVE-2018-3620,CVE-2018-3646](https://ubuntu.com/security/notices/USN-3741-1/){: external} |
+| Kernel | 4.4.0-127 | 4.4.0-133 | Updated worker node images with kernel update for  [CVE-2018-3620,CVE-2018-3646](https://ubuntu.com/security/notices/USN-3741-1){: external} |
 {: caption="Table 1. Changes since version 1.8.15_1519" caption-side="bottom"}
 
 

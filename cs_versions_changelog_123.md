@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-06-30"
+lastupdated: "2022-07-01"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -39,6 +39,26 @@ Review the version 1.23 change log.
 {: shortdesc}
 
 
+
+
+
+### Change log for master fix pack 1.23.8_1534, released 22 June 2022
+{: #1238_1534}
+
+The following table shows the changes that are in the master fix pack 1.23.8_1534. Master patch updates are applied automatically. 
+{: shortdesc}
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.7 | v1.3.8 | Updated `Go` to version `1.17.11` and also updated the dependencies. |
+| GPU device plug-in and installer | 382ada9 | 2b0b6d1 | Updated universal base image (UBI) to version `8.6-751`. Updated `Go` to version `1.17.10`. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.23.7-4 | v1.23.7-7 | Update module `github.com/{{site.data.keyword.IBM_notm}}/vpc-go-sdk` to `v0.20.0`. Update module `github.com/stretchr/testify` to `v1.7.2`. |
+| Key Management Service provider | v2.5.5 | v2.5.6 | Updated `Go` to version `1.17.11` and also updated the dependencies. |
+| Kubernetes | v1.23.7 | v1.23.8 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.8){: external}. |
+| Kubernetes add-on resizer | 1.8.14 | 1.8.15 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.15){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.23.7_1531" caption-side="top"}
 
 ### Change log for worker node fix pack 1.23.8_1534, released 20 June 2022
 {: #1238_1534}

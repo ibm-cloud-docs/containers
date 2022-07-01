@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-27"
+lastupdated: "2022-07-01"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -36,7 +36,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 **Supported Kubernetes versions**:
 :    **Latest**: 1.24
      - Release date: 09 Jun 2022
-     - Tentative unsupported date: 29 Nov 2023 `†`
+     - Tentative unsupported date: 8 Nov 2023 `†`
      - [Version information and update actions](/docs/containers?topic=containers-cs_versions_124)
      - [Change log](/docs/containers?topic=containers-changelog_124)
 
