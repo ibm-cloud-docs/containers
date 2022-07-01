@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-07-01"
 
 keywords: kubernetes, registry, pull secret, secrets
 
@@ -388,9 +388,9 @@ The following steps create an API key that stores the credentials of an {{site.d
     :   Optional. If you want to limit access to only images in certain [{{site.data.keyword.registrylong_notm}} namespaces](/docs/Registry?topic=Registry-registry_setup_cli_namespace#registry_setup_cli_namespace_plan), enter `namespace` for the resource type and specify the `<registry_namespace>`. To list registry namespaces, run `ibmcloud cr namespaces`.
 
 4. Create an API key for the service ID. Name the API key similar to your service ID, and include the service ID that you previously created,
-    `<cluster_name>-<kube_namespace>-id`. Be sure to give the API key a description that helps you retrieve the key later
-    
-    ```sh
+    `<cluster_name>-<kube_namespace>-id`. Be sure to give the API key a description that helps you retrieve the key later.
+  
+      ```sh
     ibmcloud iam service-api-key-create <cluster_name>-<namespace>-key <cluster_name>-<namespace>-id --description "API key for service ID <service_id> in Kubernetes cluster <cluster_name> namespace <namespace>"
     ```
     {: pre}
