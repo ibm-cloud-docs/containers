@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-16"
+lastupdated: "2022-07-05"
 
 keywords: kubernetes, coredns, kubedns, dns
 
@@ -573,20 +573,12 @@ kubectl get networkpolicy --all-namespaces -o yaml
 
 1. If you [customized stub domains and upstream DNS servers for CoreDNS](#dns_customize), you must also [customize the `NodeLocal` DNS cache](#dns_nodelocal_customize) with these stub domains and upstream DNS servers.
 2. Set an environment variable for the zones of the cluster.
-
-    **Kubernetes 1.19 or later**:
     
     ```sh
     ZONES=$(kubectl get nodes --no-headers --ignore-not-found=true -o jsonpath='{range .items[*]}{.metadata.labels.topology\.kubernetes\.io/zone}{"\n"}{end}' | uniq)
     ```
     {: pre}
 
-    **Kubernetes 1.18**:
-    
-    ```sh
-    ZONES=$(kubectl get nodes --no-headers --ignore-not-found=true -o jsonpath='{range .items[*]}{.metadata.labels.failure-domain\.beta\.kubernetes\.io/zone}{"\n"}{end}' | uniq)
-    ```
-    {: pre}
 
 3. Start the CoreDNS and CoreDNS autoscaler pods in all zones.
 
@@ -636,18 +628,9 @@ To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of 
 
 1. Remove the `ibm-cloud.kubernetes.io/zone-aware-dns-enabled=true` [label from your worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels).
 2. Set an environment variable for the zones in the cluster.
-
-    **Kubernetes 1.19 or later**:
     
     ```sh
     ZONES=$(kubectl get nodes --no-headers --ignore-not-found=true -o jsonpath='{range .items[*]}{.metadata.labels.topology\.kubernetes\.io/zone}{"\n"}{end}' | uniq)
-    ```
-    {: pre}
-
-    **Kubernetes 1.18**:
-    
-    ```sh
-    ZONES=$(kubectl get nodes --no-headers --ignore-not-found=true -o jsonpath='{range .items[*]}{.metadata.labels.failure-domain\.beta\.kubernetes\.io/zone}{"\n"}{end}' | uniq)
     ```
     {: pre}
 

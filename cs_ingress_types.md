@@ -221,10 +221,10 @@ Create the Ingress resource to define the routing rules that the Ingress control
     Kubernetes 1.19 and later only: `pathType`
     :   The URL path matching method. Supported values are `ImplementationSpecific`, `Exact`, or `Prefix`. For more information about and examples of each path type, see the [community Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types){: external}.
 
-    `service.name` (Kubernetes 1.19 or later) or `serviceName` (Kubernetes 1.18 or earlier)
+    `service.name`
     :   Replace `app1_service` and `app2_service`, and so on, with the name of the services you created to expose your apps.
 
-    `service.port.number` (Kubernetes 1.19 or later)`servicePort` (Kubernetes 1.18 or earlier)
+    `service.port.number`
     :   The port that your service listens to. Use the same port that you defined when you created the Kubernetes service for your app.
 
 2. Create the Ingress resource for your cluster. Ensure that the resource deploys into the same namespace as the app services that you specified in the resource.
@@ -329,68 +329,38 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
 
     1. Define an Ingress resource file that uses your custom domain to route incoming network traffic to the services that you created earlier. Note that the format of the Ingress resource definition varies based on your cluster's Kubernetes version, because API version `networking.k8s.io/v1beta1` is unsupported as of Kubernetes 1.22.
 
-        * **Kubernetes version 1.19 and later**:
-            ```yaml
-            apiVersion: networking.k8s.io/v1
-            kind: Ingress
-            metadata:
-            name: community-ingress-resource
-            annotations:
-                kubernetes.io/ingress.class: "private-iks-k8s-nginx"
-            spec:
-            tls:
-            - hosts:
-                - <domain>
-                secretName: <tls_secret_name>
-            rules:
-            - host: <domain>
-                http:
-                paths:
-                - path: /<app1_path>
-                    pathType: Prefix
-                    backend:
-                    service:
-                        name: <app1_service>
-                        port:
-                        number: 80
-                - path: /<app2_path>
-                    pathType: Prefix
-                    backend:
-                    service:
-                        name: <app2_service>
-                        port:
-                        number: 80
-            ```
-            {: codeblock}
-
-        * **Kubernetes version 1.18 and earlier**:
-
-            ```yaml
-            apiVersion: networking.k8s.io/v1beta1
-            kind: Ingress
-            metadata:
-            name: community-ingress-resource
-            annotations:
-                kubernetes.io/ingress.class: "private-iks-k8s-nginx"
-            spec:
-            tls:
-            - hosts:
-                - <domain>
-                secretName: <tls_secret_name>
-            rules:
-            - host: <domain>
-                http:
-                paths:
-                - path: /<app1_path>
-                    backend:
-                    serviceName: <app1_service>
-                    servicePort: 80
-                - path: /<app2_path>
-                    backend:
-                    serviceName: <app2_service>
-                    servicePort: 80
-            ```
-            {: codeblock}
+        ```yaml
+        apiVersion: networking.k8s.io/v1
+        kind: Ingress
+        metadata:
+        name: community-ingress-resource
+        annotations:
+            kubernetes.io/ingress.class: "private-iks-k8s-nginx"
+        spec:
+        tls:
+        - hosts:
+            - <domain>
+            secretName: <tls_secret_name>
+        rules:
+        - host: <domain>
+            http:
+            paths:
+            - path: /<app1_path>
+                pathType: Prefix
+                backend:
+                service:
+                    name: <app1_service>
+                    port:
+                      number: 80
+            - path: /<app2_path>
+                pathType: Prefix
+                backend:
+                service:
+                    name: <app2_service>
+                    port:
+                      number: 80
+        ```
+        {: codeblock}
 
         `annotations`
         :   `kubernetes.io/ingress.class: "public-iks-k8s-nginx"`: Apply this Ingress resource to the private ALBs that run the Kubernetes Ingress image in your cluster. For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, don't specify this annotation. Instead, find the Ingress class for your configuration, and specify that class in a `spec.ingressClassName: <class_name>` field. You must also specify this custom class in an [`IngressClass`](#ingress-class-custom) resource and a `ibm-ingress-deploy-config` configmap. To customize routing for Ingress, you can add [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`). Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are not supported.
@@ -410,10 +380,10 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
         Kubernetes 1.19 and later only: `pathType`
         The URL path matching method. Supported values are `ImplementationSpecific`, `Exact`, or `Prefix`. For more information about and examples of each path type, see the [community Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types){: external}.
 
-        `service.name` (Kubernetes 1.19 or later) or `serviceName` (Kubernetes 1.18 or earlier)
+        `service.name`
         :   Replace `app1_service` and `app2_service`, and so on, with the name of the services you created to expose your apps.
 
-        `service.port.number` (Kubernetes 1.19 or later)`servicePort` (Kubernetes 1.18 or earlier)
+        `service.port.number`
         :   The port that your service listens to. Use the same port that you defined when you created the Kubernetes service for your app.
 
     2. Create the Ingress resource for your cluster. Ensure that the resource deploys into the same namespace as the app services that you specified in the resource.
