@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-16"
+lastupdated: "2022-07-05"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -221,10 +221,10 @@ Create the Ingress resource to define the routing rules that the Ingress control
     Kubernetes 1.19 and later only: `pathType`
     :   The URL path matching method. Supported values are `ImplementationSpecific`, `Exact`, or `Prefix`. For more information about and examples of each path type, see the [community Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types){: external}.
 
-    `service.name` (Kubernetes 1.19 or later) or `serviceName` (Kubernetes 1.18 or earlier)
+    `service.name`
     :   Replace `app1_service` and `app2_service`, and so on, with the name of the services you created to expose your apps.
 
-    `service.port.number` (Kubernetes 1.19 or later)`servicePort` (Kubernetes 1.18 or earlier)
+    `service.port.number`
     :   The port that your service listens to. Use the same port that you defined when you created the Kubernetes service for your app.
 
 2. Create the Ingress resource for your cluster. Ensure that the resource deploys into the same namespace as the app services that you specified in the resource.
@@ -329,68 +329,38 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
 
     1. Define an Ingress resource file that uses your custom domain to route incoming network traffic to the services that you created earlier. Note that the format of the Ingress resource definition varies based on your cluster's Kubernetes version, because API version `networking.k8s.io/v1beta1` is unsupported as of Kubernetes 1.22.
 
-        * **Kubernetes version 1.19 and later**:
-            ```yaml
-            apiVersion: networking.k8s.io/v1
-            kind: Ingress
-            metadata:
-            name: community-ingress-resource
-            annotations:
-                kubernetes.io/ingress.class: "private-iks-k8s-nginx"
-            spec:
-            tls:
-            - hosts:
-                - <domain>
-                secretName: <tls_secret_name>
-            rules:
-            - host: <domain>
-                http:
-                paths:
-                - path: /<app1_path>
-                    pathType: Prefix
-                    backend:
-                    service:
-                        name: <app1_service>
-                        port:
-                        number: 80
-                - path: /<app2_path>
-                    pathType: Prefix
-                    backend:
-                    service:
-                        name: <app2_service>
-                        port:
-                        number: 80
-            ```
-            {: codeblock}
-
-        * **Kubernetes version 1.18 and earlier**:
-
-            ```yaml
-            apiVersion: networking.k8s.io/v1beta1
-            kind: Ingress
-            metadata:
-            name: community-ingress-resource
-            annotations:
-                kubernetes.io/ingress.class: "private-iks-k8s-nginx"
-            spec:
-            tls:
-            - hosts:
-                - <domain>
-                secretName: <tls_secret_name>
-            rules:
-            - host: <domain>
-                http:
-                paths:
-                - path: /<app1_path>
-                    backend:
-                    serviceName: <app1_service>
-                    servicePort: 80
-                - path: /<app2_path>
-                    backend:
-                    serviceName: <app2_service>
-                    servicePort: 80
-            ```
-            {: codeblock}
+        ```yaml
+        apiVersion: networking.k8s.io/v1
+        kind: Ingress
+        metadata:
+        name: community-ingress-resource
+        annotations:
+            kubernetes.io/ingress.class: "private-iks-k8s-nginx"
+        spec:
+        tls:
+        - hosts:
+            - <domain>
+            secretName: <tls_secret_name>
+        rules:
+        - host: <domain>
+            http:
+            paths:
+            - path: /<app1_path>
+                pathType: Prefix
+                backend:
+                service:
+                    name: <app1_service>
+                    port:
+                      number: 80
+            - path: /<app2_path>
+                pathType: Prefix
+                backend:
+                service:
+                    name: <app2_service>
+                    port:
+                      number: 80
+        ```
+        {: codeblock}
 
         `annotations`
         :   `kubernetes.io/ingress.class: "public-iks-k8s-nginx"`: Apply this Ingress resource to the private ALBs that run the Kubernetes Ingress image in your cluster. For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, don't specify this annotation. Instead, find the Ingress class for your configuration, and specify that class in a `spec.ingressClassName: <class_name>` field. You must also specify this custom class in an [`IngressClass`](#ingress-class-custom) resource and a `ibm-ingress-deploy-config` configmap. To customize routing for Ingress, you can add [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`). Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are not supported.
@@ -410,10 +380,10 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
         Kubernetes 1.19 and later only: `pathType`
         The URL path matching method. Supported values are `ImplementationSpecific`, `Exact`, or `Prefix`. For more information about and examples of each path type, see the [community Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types){: external}.
 
-        `service.name` (Kubernetes 1.19 or later) or `serviceName` (Kubernetes 1.18 or earlier)
+        `service.name`
         :   Replace `app1_service` and `app2_service`, and so on, with the name of the services you created to expose your apps.
 
-        `service.port.number` (Kubernetes 1.19 or later)`servicePort` (Kubernetes 1.18 or earlier)
+        `service.port.number`
         :   The port that your service listens to. Use the same port that you defined when you created the Kubernetes service for your app.
 
     2. Create the Ingress resource for your cluster. Ensure that the resource deploys into the same namespace as the app services that you specified in the resource.
@@ -997,7 +967,7 @@ Before you begin, verify that you have completed the following {{site.data.keywo
     ibmcloud ks ingress secret ls --cluster <cluster_name_or_id>
     ```
     {: pre}
-    
+
 4. [Enabled service-to-service between your cluster and {{site.data.keyword.secrets-manager_short}}](/docs/secrets-manager?topic=secrets-manager-integrations#create-authorization).
 
 To remove the instance:
@@ -1053,14 +1023,14 @@ When you set a default {{site.data.keyword.secrets-manager_short}} instance, all
 When you set a new default {{site.data.keyword.secrets-manager_short}} instance, any existing secrets that are not managed by IBM Cloud must have their certificate CRN manually updated to match the CRN of the new default instance. To update the CRN, use the `ibmcloud ks ingress secret update` command. If you do not update the CRN, these user-managed secrets do not update at the next scheduled certificate renewal.
 {: important}
 
-1. Run the command to set the new default.
+1. Run the command to set the new default instance.
 
     ```sh
-    ibmcloud ks ingress instance default set --cluster <cluster_name_or_id> --crn <instance_crn> --name <instance_name>
+    ibmcloud ks ingress instance default set --cluster <cluster_name_or_id> --name <instance_name> 
     ```
     {: pre}
 
-2. Regenerate your secrets. Any secrets that are managed by IBM are uploaded to the new default instance. 
+2. Regenerate your secrets. Any secrets that are managed by IBM are uploaded to the new default instance.
 
     ```sh
     ibmcloud ks nlb-dns secret regenerate --cluster <cluster_name_or_id> --nlb-subdomain <nlb_subdomain>
@@ -1072,7 +1042,7 @@ When you set a new default {{site.data.keyword.secrets-manager_short}} instance,
     To check whether or not a secret is managed by IBM Cloud, run `ibmcloud ks ingress secret get` to view the details of the secret. In the output, if **User Managed** is marked **false**, the secret is managed by IBM Cloud. If it is marked **true**, the secret is not managed by IBM Cloud.
     {: tip}
 
-    1. List the secrets in the cluster and note the CRN of the updated secrets that correspond with the subdomain. 
+    1. List the secrets in the cluster and note the CRN of the updated secrets that correspond with the subdomain.
 
         ```sh
         ibmcloud ks ingress secret ls --cluster <cluster_name_or_id>
@@ -1090,13 +1060,13 @@ When you set a new default {{site.data.keyword.secrets-manager_short}} instance,
         ```
         {: screen}
 
-    2. Update the non-IBM managed secrets with the CRN of the matching subdomain you found earlier. 
+    2. Update the non-IBM managed secrets with the CRN of the matching subdomain you found earlier.
 
         ```sh
         ibmcloud ks ingress secret update --cluster <cluster_name_or_id> --name <secret_name> --namespace <namespace> --cert-crn <updated_crn>
         ```
         {: pre}
-    
+
 
 #### Removing a {{site.data.keyword.secrets-manager_short}} instance as the default instance
 {: #secret-mgr-remove-default}
@@ -1107,7 +1077,6 @@ To remove a {{site.data.keyword.secrets-manager_short}} instance as the default 
 ibmcloud ks ingress instance default unset --cluster <cluster_name_or_id> --crn <instance_crn> --name <instance_name>
 ```
 {: pre}
-
 
 ## Customizing the Ingress class
 {: #ingress-class}

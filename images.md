@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-07-05"
 
 keywords: kubernetes, registry, pull secret, secrets
 
@@ -207,7 +207,7 @@ There is a [known issue](https://github.com/IBM/portieris/issues/350){: external
 ### Enabling or disabling image security enforcement
 {: #portieris-enable}
 
-**Kubernetes version 1.18 or later**: You can enable or disable image security enforcement for your cluster from the CLI or console. For earlier versions, see the [Portieris documentation](https://github.com/IBM/portieris){: external}.
+You can enable or disable image security enforcement for your cluster from the CLI or console. For earlier versions, see the [Portieris documentation](https://github.com/IBM/portieris){: external}.
 {: shortdesc}
 
 #### Enabling or disabling image security enforcement with the CLI

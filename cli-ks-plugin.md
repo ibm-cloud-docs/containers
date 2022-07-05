@@ -1,8 +1,8 @@
 ---
 
-copyright: 
+copyright:
   years: 2014, 2022
-lastupdated: "2022-06-29"
+lastupdated: "2022-07-05"
 
 keywords: kubernetes
 
@@ -36,7 +36,7 @@ Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registrylong_no
 The tables below list the `ibmcloud ks` command groups. For a complete list of all `ibmcloud ks` commands as they are structured in the CLI, see the [{{site.data.keyword.containerlong_notm}} CLI map](/docs/containers?topic=containers-icks_map).
 {: shortdesc}
 
-| Command group | Description | 
+| Command group | Description |
 | --- | --- |
 | [Cluster commands](#cluster) | Create, view, and modify clusters and cluster settings, such as add-on, subnet, and master settings. |
 | [Worker commands](#worker_node_commands) | View and modify worker nodes for a cluster.  |
@@ -58,10 +58,10 @@ The tables below list the `ibmcloud ks` command groups. For a complete list of a
 | [Locations commands](#cs_supported-locations) | List the locations that are supported by IBM Cloud Kubernetes Service. |
 | [Messages commands](#cs_messages) | View the current user messages. |
 | [Versions commands](#cs_versions_command) | List the container platform versions that are available for IBM Cloud Kubernetes Service clusters. |
-| **Deprecated** [API commands](#cs_cli_api) | View or target the API endpoint and API version for the service. | 
-| **Deprecated** [Init commands](#cs_init) | Initialize the IBM Cloud Kubernetes Service plug-in or specify the region where you want to create or access Kubernetes clusters. | 
-| [Script commands](#script) | Rewrite scripts that call IBM Cloud Kubernetes Service plug-in commands. | 
-| **Beta** [Storage commands](#cs_storage) | View and modify storage resources. | 
+| **Deprecated** [API commands](#cs_cli_api) | View or target the API endpoint and API version for the service. |
+| **Deprecated** [Init commands](#cs_init) | Initialize the IBM Cloud Kubernetes Service plug-in or specify the region where you want to create or access Kubernetes clusters. |
+| [Script commands](#script) | Rewrite scripts that call IBM Cloud Kubernetes Service plug-in commands. |
+| **Beta** [Storage commands](#cs_storage) | View and modify storage resources. |
 {: summary="The rows are read from left to right. The first column is the command group. The second column is a description of the command group."}
 {: caption="{{site.data.keyword.containerlong_notm}} CLI command groups" caption-side="top"}
 
@@ -634,7 +634,7 @@ ibmcloud ks cluster ca create --cluster my_cluster
 ### `ibmcloud ks cluster ca get`
 {: #cs_cluster_ca_get}
 
-View the details of a cluster's CA certificate. 
+View the details of a cluster's CA certificate.
 {: shortdesc}
 
 ```sh
@@ -772,7 +772,7 @@ ibmcloud ks cluster config --cluster CLUSTER [--admin] [--endpoint ENDPOINT_TYPE
      - `private`: If the private cloud service endpoint is enabled for your cluster, set to `private` to use the private cloud service endpoint for your cluster context. Note you must be in your {{site.data.keyword.cloud_notm}} private network or connected to the private network through a [VPC VPN connection](/docs/vpc?topic=vpc-vpn-onprem-example), or for classic infrastructure, a [classic VPN connection](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl).
 
 `--network`
-:    Optional: Download the Calico configuration file, TLS certificates, and permission files that are required to run `calicoctl` commands in your cluster. 
+:    Optional: Download the Calico configuration file, TLS certificates, and permission files that are required to run `calicoctl` commands in your cluster.
      This option can't be used with the `--yaml` option.
      {: note}
 
@@ -875,7 +875,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
      - `172.21.0.0 - 172.31.255.255`
      - `192.168.0.0 - 192.168.254.255`
      - `198.18.0.0 - 198.19.255.255`
-     
+
 :    Note that the pod and service subnets can't overlap. The service subnet is in the 172.21.0.0/16 range by default.
 
 `--service-subnet *SUBNET`{: #service-subnet}
@@ -885,7 +885,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
      - `172.21.0.0 - 172.31.255.255`
      - `192.168.0.0 - 192.168.254.255`
      - `198.18.0.0 - 198.19.255.255`
-     
+
 :    Note that the pod and service subnets can't overlap. The pod subnet is in the 172.30.0.0/16 range by default.
 
 `--skip-advance-permissions-check`
@@ -987,7 +987,7 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
      - `172.21.0.0 - 172.31.255.255`
      - `192.168.0.0 - 192.168.254.255`
      - `198.18.0.0 - 198.19.255.255`
-     
+
 :    Note that the pod and service subnets can't overlap. If you use custom-range subnets for your worker nodes, you must [ensure that your worker node subnets don't overlap with your cluster's pod subnet](/docs/containers?topic=containers-vpc-subnets#vpc-ip-range).
 
 `--service-subnet SUBNET`
@@ -997,7 +997,7 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
      - `172.21.0.0 - 172.31.255.255`
      - `192.168.0.0 - 192.168.254.255`
      - `198.18.0.0 - 198.19.255.255`
-     
+
 :    Note that the pod and service subnets can't overlap.
 
 `--skip-advance-permissions-check`
@@ -1480,8 +1480,8 @@ ibmcloud ks cluster master private-service-endpoint allowlist rm --cluster myclu
 ### `ibmcloud ks cluster master private-service-endpoint disable`
 {: #cs_cluster_master_pse_disable}
 
-Disable the [private cloud service endpoint](/docs/containers?topic=containers-plan_basics#workeruser-master) to remove private accessibility to your cluster master. 
-{: shortdesc} 
+Disable the [private cloud service endpoint](/docs/containers?topic=containers-plan_basics#workeruser-master) to remove private accessibility to your cluster master.
+{: shortdesc}
 
 **Important**: Before you disable the private endpoint, you first must complete the following steps to enable the public cloud service endpoint:
 1. Enable the public cloud service endpoint by running `ibmcloud ks cluster master public-service-endpoint enable --cluster <cluster_name>`.
@@ -1489,11 +1489,11 @@ Disable the [private cloud service endpoint](/docs/containers?topic=containers-p
 3. [Reload all the worker nodes in your cluster to pick up the public endpoint configuration.](#cs_worker_reload)
 
 ```sh
-ibmcloud ks cluster master private-service-endpoint disable --cluster CLUSTER [-f] [-q] [-y] 
+ibmcloud ks cluster master private-service-endpoint disable --cluster CLUSTER [-f] [-q] [-y]
 ```
 {: pre}
 
-**Supported infrastructure provider**: ![Classic](../icons/classic.svg "Classic") Classic. 
+**Supported infrastructure provider**: ![Classic](../icons/classic.svg "Classic") Classic.
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3990,7 +3990,7 @@ ibmcloud ks ingress alb versions [--output json] [-q]
 Set a registered an IBM Cloud {{site.data.keyword.secrets-manager_short}} instance to default. If an existing default instance exists, it will be unset from default.
 {: shortdesc}
 
-When you set a new default {{site.data.keyword.secrets-manager_short}} instance, any existing secrets that are not managed by IBM Cloud must have their certificate CRN manually updated to match the CRN of the new default instance. To update the CRN, use the `ibmcloud ks ingress secret update` command. If you do not update the CRN, these secrets do not update at the next scheduled certificate renewal. 
+When you set a new default {{site.data.keyword.secrets-manager_short}} instance, any existing secrets that are not managed by IBM Cloud must have their certificate CRN manually updated to match the CRN of the new default instance. To update the CRN, use the `ibmcloud ks ingress secret update` command. If you do not update the CRN, these secrets do not update at the next scheduled certificate renewal.
 {: important}
 
 ```sh
@@ -4031,7 +4031,7 @@ ibmcloud ks ingress instance default set --cluster --cluster a111aaa11a1aaaaaaa1
 Remove a {{site.data.keyword.secrets-manager_short}} instance as the default instance.
 {: shortdesc}
 
-If no default instance is set, your secrets are only written directly to the cluster and are not written to any {{site.data.keyword.secrets-manager_short}} instance. 
+If no default instance is set, your secrets are only written directly to the cluster and are not written to any {{site.data.keyword.secrets-manager_short}} instance.
 {: important}
 
 ```sh
@@ -4100,7 +4100,7 @@ ibmcloud ks ingress instance get --cluster CLUSTER --name NAME [--output OUTPUT]
 **Example**:
 
 ```sh
-ibmcloud ks ingress instance get --cluster my-cluster --name my-secrets-manager 
+ibmcloud ks ingress instance get --cluster my-cluster --name my-secrets-manager
 ```
 {: pre}
 
@@ -4145,11 +4145,11 @@ ibmcloud ks ingress instance ls --cluster my-cluster --show-deleted
 ### `ibmcloud ks ingress instance register`
 {: #cs_ingress_instance_register}
 
-Register a {{site.data.keyword.secrets-manager_short}} instance to a cluster. 
+Register a {{site.data.keyword.secrets-manager_short}} instance to a cluster.
 {: shortdesc}
 
 ```sh
-ibmcloud ks ingress instance register --cluster CLUSTER --crn CRN [--is-default] [-q] 
+ibmcloud ks ingress instance register --cluster CLUSTER --crn CRN [--is-default]   [-q]
 ```
 {: pre}
 
@@ -4183,7 +4183,7 @@ ibmcloud ks ingress instance register --cluster my-cluster --crn crn:v1:staging:
 ### `ibmcloud ks ingress instance unregister`
 {: #cs_ingress_instance_unregister}
 
-Remove a {{site.data.keyword.secrets-manager_short}} instance from a cluster. 
+Remove a {{site.data.keyword.secrets-manager_short}} instance from a cluster.
 {: shortdesc}
 
 ```sh
@@ -4203,7 +4203,7 @@ ibmcloud ks ingress instance unregister --cluster CLUSTER --name NAME [-q]
 :    Required. The name or ID of the cluster.
 
 `--name`
-:    Required. The name of the {{site.data.keyword.secrets-manager_short}} instance to remove. 
+:    Required. The name of the {{site.data.keyword.secrets-manager_short}} instance to remove.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
@@ -4348,7 +4348,7 @@ The previous alias for this command, `ibmcloud ks ingress alb cert deploy`, is d
 {: note}
 
 ```sh
-ibmcloud ks ingress secret create --cert-crn CERTIFICATE_CRN --cluster CLUSTER --name SECRET_NAME [--namespace NAMESPACE] [--persist] [--type] [-q] 
+ibmcloud ks ingress secret create --cert-crn CERTIFICATE_CRN --cluster CLUSTER --name SECRET_NAME [--namespace NAMESPACE] [--persist] [--type] [-q]
 ```
 {: pre}
 
@@ -4392,7 +4392,7 @@ ibmcloud ks ingress secret create --cert-crn crn:v1:staging:public:cloudcerts:us
 ### `ibmcloud ks ingress secret field add`
 {: #cs_ingress_secret_field_add}
 
-Add a non-certificate CRN field to an Opaque secret. 
+Add a non-certificate CRN field to an Opaque secret.
 {: shortdesc}
 
 ```sh
@@ -4425,14 +4425,14 @@ ibmcloud ks ingress secret field add --cluster CLUSTER --name SECRET_NAME --fiel
 
 **Example**:
 ```sh
-ibmcloud ks ingress secret field add --cluster a111aaa11a1aaaaaaa1 --name my-secret --namespace default --field prefix=crn:v1:staging:public:secrets-manager:eu-gb:a/1a11a1a111aa11aa111aa1a1111aa1a1:1aaa1a1a-aaaa-11aa-1a11-a11aaa1a11a1:secret:a1a11a11-111a-11a1-aa11-11aaa1a11a11 
+ibmcloud ks ingress secret field add --cluster a111aaa11a1aaaaaaa1 --name my-secret --namespace default --field prefix=crn:v1:staging:public:secrets-manager:eu-gb:a/1a11a1a111aa11aa111aa1a1111aa1a1:1aaa1a1a-aaaa-11aa-1a11-a11aaa1a11a1:secret:a1a11a11-111a-11a1-aa11-11aaa1a11a11
 ```
 {: pre}
 
 ### `ibmcloud ks ingress secret field ls`
 {: #cs_ingress_secret_field_ls}
 
-View the CRN fields of an Ingress secret. This command applies only to Opaque secrets. 
+View the CRN fields of an Ingress secret. This command applies only to Opaque secrets.
 {: shortdesc}
 
 ```sh
@@ -6351,7 +6351,7 @@ ibmcloud ks infra-permissions get --region REGION [--output json] [-q]
 **Command options**:
 
 `--region REGION`
-:    Required: Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-osa`, `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`. 
+:    Required: Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-osa`, `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.
 
 `--output json`
 :    Optional: Prints the command output in JSON format.
@@ -6899,7 +6899,7 @@ ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-
 
 `--endpoint ENDPOINT`
     :    The {{site.data.keyword.containerlong_notm}} API endpoint. **Note**: This endpoint is different than the {{site.data.keyword.cloud_notm}} endpoints. This value is required to set the API endpoint.
-    
+
 
 `--insecure`
 :    Allow an insecure HTTP connection. This flag is optional.

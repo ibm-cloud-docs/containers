@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-07-01"
+lastupdated: "2022-07-05"
 
 keywords: kubernetes, containers
 
@@ -39,6 +39,22 @@ Review the version 1.24 change log.
 
 
 
+
+
+
+### Change log for worker node fix pack 1.24.2_1527, released 05 July 2022
+{: #1242_1527}
+
+The following table shows the changes that are in the worker node fix pack 1.24.2_1527. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | 4.15.0-187 | 4.15.0-188 | Worker node kernel & package updates for [CVE-2022-1292](https://nvd.nist.gov/vuln/detail/CVE-2022-1292){: external},[CVE-2022-2068](https://nvd.nist.gov/vuln/detail/CVE-2022-2068){: external},[CVE-2022-2084](https://nvd.nist.gov/vuln/detail/CVE-2022-2084){: external},[CVE-2022-28388](https://nvd.nist.gov/vuln/detail/CVE-2022-28388){: external},[CVE-2022-32206](https://nvd.nist.gov/vuln/detail/CVE-2022-32206){: external},[CVE-2022-32208](https://nvd.nist.gov/vuln/detail/CVE-2022-32208){: external}. |
+| Kubernetes |N/A|N/A|N/A|
+
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.24.2_1526" caption-side="top"}
 
 ### Change log for master fix pack 1.24.2_1526, released 22 June 2022
 {: #1242_1526}
@@ -91,4 +107,3 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | Pause container image | 3.6 | 3.7 | See the [pause container image release notes](https://github.com/kubernetes/kubernetes/blob/master/build/pause/CHANGELOG.md){: external}. | 
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.23.7_1531 (master) and 1.23.7_1532 (worker node)" caption-side="top"}
-

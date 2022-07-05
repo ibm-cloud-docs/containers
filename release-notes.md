@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-29"
+lastupdated: "2022-07-05"
 
 keywords: kubernetes, release notes
 
@@ -23,6 +23,20 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+## July 2022
+{: #containers-july22}
+
+### 5 July 2022
+{: #containers-july0522}
+{: release-note}
+
+Worker node fix pack
+:   Kubernetes [1.21.14_1565](/docs/containers?topic=containers-changelog_121), [1.22.11_1557](/docs/containers?topic=containers-changelog_122), [1.23.8_1535](/docs/containers?topic=containers-changelog_123) and [1.24.2_1527](/docs/containers?topic=containers-changelog_124).
+
+
+Ingress ALB change log updates
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for version `1.1.2_2368_iks`. Version `0.49.3` is no longer supported.
 
 ## June 2022
 {: #containers-jun22}
