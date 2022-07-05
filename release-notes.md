@@ -35,6 +35,9 @@ Worker node fix pack
 :   Kubernetes [1.21.14_1565](/docs/containers?topic=containers-changelog_121), [1.22.11_1557](/docs/containers?topic=containers-changelog_122), [1.23.8_1535](/docs/containers?topic=containers-changelog_123) and [1.24.2_1527](/docs/containers?topic=containers-changelog_124).
 
 
+Ingress ALB change log updates
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for version `1.1.2_2368_iks`. Version `0.49.3` is no longer supported.
+
 ## June 2022
 {: #containers-jun22}
 

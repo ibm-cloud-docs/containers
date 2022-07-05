@@ -213,6 +213,8 @@ subcollection: containers
 
         * Worker node fix pack
 
+        * Ingress ALB change log updates
+
 * [June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun22)
 
     * [30 June 2022](/docs/containers?topic=containers-containers-relnotes#containers-jun3022)
@@ -7158,6 +7160,8 @@ subcollection: containers
     * [Version 1.2.0_2131_iks, released 26 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.0_2131_iks)
 
 * [Version 1.1.2](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_2)
+
+    * [Version 1.1.2_2368_iks, released on 5 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2368_iks)
 
     * [Version 1.1.2_2252_iks, released on 19 May 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2252_iks)
 
