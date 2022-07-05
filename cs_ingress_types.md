@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-16"
+lastupdated: "2022-07-05"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -997,7 +997,7 @@ Before you begin, verify that you have completed the following {{site.data.keywo
     ibmcloud ks ingress secret ls --cluster <cluster_name_or_id>
     ```
     {: pre}
-    
+
 4. [Enabled service-to-service between your cluster and {{site.data.keyword.secrets-manager_short}}](/docs/secrets-manager?topic=secrets-manager-integrations#create-authorization).
 
 To remove the instance:
@@ -1053,14 +1053,14 @@ When you set a default {{site.data.keyword.secrets-manager_short}} instance, all
 When you set a new default {{site.data.keyword.secrets-manager_short}} instance, any existing secrets that are not managed by IBM Cloud must have their certificate CRN manually updated to match the CRN of the new default instance. To update the CRN, use the `ibmcloud ks ingress secret update` command. If you do not update the CRN, these user-managed secrets do not update at the next scheduled certificate renewal.
 {: important}
 
-1. Run the command to set the new default.
+1. Run the command to set the new default instance.
 
     ```sh
-    ibmcloud ks ingress instance default set --cluster <cluster_name_or_id> --crn <instance_crn> --name <instance_name>
+    ibmcloud ks ingress instance default set --cluster <cluster_name_or_id> --name <instance_name> 
     ```
     {: pre}
 
-2. Regenerate your secrets. Any secrets that are managed by IBM are uploaded to the new default instance. 
+2. Regenerate your secrets. Any secrets that are managed by IBM are uploaded to the new default instance.
 
     ```sh
     ibmcloud ks nlb-dns secret regenerate --cluster <cluster_name_or_id> --nlb-subdomain <nlb_subdomain>
@@ -1072,7 +1072,7 @@ When you set a new default {{site.data.keyword.secrets-manager_short}} instance,
     To check whether or not a secret is managed by IBM Cloud, run `ibmcloud ks ingress secret get` to view the details of the secret. In the output, if **User Managed** is marked **false**, the secret is managed by IBM Cloud. If it is marked **true**, the secret is not managed by IBM Cloud.
     {: tip}
 
-    1. List the secrets in the cluster and note the CRN of the updated secrets that correspond with the subdomain. 
+    1. List the secrets in the cluster and note the CRN of the updated secrets that correspond with the subdomain.
 
         ```sh
         ibmcloud ks ingress secret ls --cluster <cluster_name_or_id>
@@ -1090,13 +1090,13 @@ When you set a new default {{site.data.keyword.secrets-manager_short}} instance,
         ```
         {: screen}
 
-    2. Update the non-IBM managed secrets with the CRN of the matching subdomain you found earlier. 
+    2. Update the non-IBM managed secrets with the CRN of the matching subdomain you found earlier.
 
         ```sh
         ibmcloud ks ingress secret update --cluster <cluster_name_or_id> --name <secret_name> --namespace <namespace> --cert-crn <updated_crn>
         ```
         {: pre}
-    
+
 
 #### Removing a {{site.data.keyword.secrets-manager_short}} instance as the default instance
 {: #secret-mgr-remove-default}
@@ -1107,7 +1107,6 @@ To remove a {{site.data.keyword.secrets-manager_short}} instance as the default 
 ibmcloud ks ingress instance default unset --cluster <cluster_name_or_id> --crn <instance_crn> --name <instance_name>
 ```
 {: pre}
-
 
 ## Customizing the Ingress class
 {: #ingress-class}
