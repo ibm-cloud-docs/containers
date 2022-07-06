@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-07-05"
+lastupdated: "2022-07-06"
 
 keywords: containers
 subcollection: containers
@@ -8296,6 +8296,8 @@ subcollection: containers
 * [Step 6: Disable and reenable](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-disable)
 
 * [Step 8: Check if the issue is resolved](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-more)
+
+[Autoscaling fails after API key reset](/docs/containers?topic=containers-ts-storage-ca-apikey-reset#ts-storage-ca-apikey-reset)
 
 [Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ts-ca-resize#ts-ca-resize)
 
