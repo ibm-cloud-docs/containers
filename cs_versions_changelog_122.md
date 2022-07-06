@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-07-05"
+lastupdated: "2022-07-06"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -62,7 +62,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 {: caption="Changes since version 1.22.11_1556" caption-side="top"}
 
 ### Change log for master fix pack 1.22.11_1556, released 22 June 2022
-{: #12211_1556}
+{: #master_12211_1556}
 
 The following table shows the changes that are in the master fix pack 1.22.11_1556. Master patch updates are applied automatically. 
 {: shortdesc}
@@ -76,7 +76,7 @@ The following table shows the changes that are in the master fix pack 1.22.11_15
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.22.10-1 | v1.22.10-3 | Update prometheus/client_golang@v1.11.0 to `v1.11.1`. |
 | Key Management Service provider | v2.5.5 | v2.5.6 | Updated `Go` to version `1.17.11` and also updated the dependencies. |
 | Kubernetes | v1.22.10 | v1.22.11 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.11){: external}. |
-| Kubernetes add-on resizer | 1.8.14 | 1.8.15 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.15){: external}. |
+| Kubernetes add-on resizer | 1.8.14 | 1.8.15 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.18.15){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.22.10_1553" caption-side="top"}
 

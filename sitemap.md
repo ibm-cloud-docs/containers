@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-07-05"
+lastupdated: "2022-07-06"
 
 keywords: containers
 subcollection: containers
@@ -5338,6 +5338,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version 1.0.426](/docs/containers?topic=containers-cs_cli_changelog#cli-10426)
+
 * [Version 1.0.419](/docs/containers?topic=containers-cs_cli_changelog#cli-10419)
 
 * [Version 1.0.415](/docs/containers?topic=containers-cs_cli_changelog#cli-10415)
@@ -5514,7 +5516,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.24.2_1527, released 05 July 2022](/docs/containers?topic=containers-changelog_124#1242_1527)
 
-    * [Change log for master fix pack 1.24.2_1526, released 22 June 2022](/docs/containers?topic=containers-changelog_124#1242_1526)
+    * [Change log for master fix pack 1.24.2_1526, released 22 June 2022](/docs/containers?topic=containers-changelog_124#master_1242_1526)
 
     * [Change log for worker node fix pack 1.24.2_1526, released 20 June 2022](/docs/containers?topic=containers-changelog_124#1242_1526)
 
@@ -5585,7 +5587,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.23.8_1535, released 05 July 2022](/docs/containers?topic=containers-changelog_123#1238_1535)
 
-    * [Change log for master fix pack 1.23.8_1534, released 22 June 2022](/docs/containers?topic=containers-changelog_123#1238_1534)
+    * [Change log for master fix pack 1.23.8_1534, released 22 June 2022](/docs/containers?topic=containers-changelog_123#master_1238_1534)
 
     * [Change log for worker node fix pack 1.23.8_1534, released 20 June 2022](/docs/containers?topic=containers-changelog_123#1238_1534)
 
@@ -5684,7 +5686,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.22.11_1557, released 05 July 2022](/docs/containers?topic=containers-changelog_122#12211_1557)
 
-    * [Change log for master fix pack 1.22.11_1556, released 22 June 2022](/docs/containers?topic=containers-changelog_122#12211_1556)
+    * [Change log for master fix pack 1.22.11_1556, released 22 June 2022](/docs/containers?topic=containers-changelog_122#master_12211_1556)
 
     * [Change log for worker node fix pack 1.22.11_1556, released 20 June 2022](/docs/containers?topic=containers-changelog_122#12211_1556)
 
@@ -5807,7 +5809,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.21.14_1565, released 05 July 2022](/docs/containers?topic=containers-changelog_121#12114_1565)
 
-    * [Change log for master fix pack 1.21.14_1564, released 22 June 2022](/docs/containers?topic=containers-changelog_121#12114_1564)
+    * [Change log for master fix pack 1.21.14_1564, released 22 June 2022](/docs/containers?topic=containers-changelog_121#master_12114_1564)
 
     * [Change log for worker node fix pack 1.21.14_1564, released 20 June 2022](/docs/containers?topic=containers-changelog_121#12114_1564)
 
@@ -8296,6 +8298,8 @@ subcollection: containers
 * [Step 6: Disable and reenable](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-disable)
 
 * [Step 8: Check if the issue is resolved](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-more)
+
+[Autoscaling fails after API key reset](/docs/containers?topic=containers-ts-storage-ca-apikey-reset#ts-storage-ca-apikey-reset)
 
 [Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ts-ca-resize#ts-ca-resize)
 
