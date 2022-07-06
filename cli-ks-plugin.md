@@ -3994,7 +3994,7 @@ When you set a new default {{site.data.keyword.secrets-manager_short}} instance,
 {: important}
 
 ```sh
-ibmcloud ks ingress instance default set --cluster CLUSTER --crn CRN --name NAME [-q] 
+ibmcloud ks ingress instance default set --cluster CLUSTER --crn CRN --name NAME [-q] [--secret-group GROUP]
 ```
 {: pre}
 
@@ -4018,10 +4018,13 @@ ibmcloud ks ingress instance default set --cluster CLUSTER --crn CRN --name NAME
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
+`--secret-group GROUP`
+:    Secret Group ID of the IBM Cloud Secret Manager instance where the secrets are persisted.
+
 **Example**:
 
 ```sh
-ibmcloud ks ingress instance default set --cluster --cluster a111aaa11a1aaaaaaa1 --crn crn:v1:staging:public:secrets-manager:eu-gb:a/1a11a1a111aa11aa111aa1a1111aa1a1:1aaa1a1a-aaaa-11aa-1a11-a11aaa1a11a1:secret:a1a11a11-111a-11a1-aa11-11aaa1a11a11 --name my-secret-manager --namespace default 
+ibmcloud ks ingress instance default set --cluster --cluster a111aaa11a1aaaaaaa1 --crn crn:v1:staging:public:secrets-manager:eu-gb:a/1a11a1a111aa11aa111aa1a1111aa1a1:1aaa1a1a-aaaa-11aa-1a11-a11aaa1a11a1:secret:a1a11a11-111a-11a1-aa11-11aaa1a11a11 --name my-secret-manager --namespace default --secret-group 90e059dd-d04e-a32b-010f-4d303b9050b8
 ```
 {: pre}
 
@@ -4149,7 +4152,7 @@ Register a {{site.data.keyword.secrets-manager_short}} instance to a cluster.
 {: shortdesc}
 
 ```sh
-ibmcloud ks ingress instance register --cluster CLUSTER --crn CRN [--is-default]   [-q]
+ibmcloud ks ingress instance register --cluster CLUSTER --crn CRN [--is-default] [--secret-group GROUP] [-q]
 ```
 {: pre}
 
@@ -4173,10 +4176,13 @@ ibmcloud ks ingress instance register --cluster CLUSTER --crn CRN [--is-default]
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
+`--secret-group GROUP`
+:    Secret Group ID of the IBM Cloud Secret Manager instance where the secrets are persisted.
+
 **Example**:
 
 ```sh
-ibmcloud ks ingress instance register --cluster my-cluster --crn crn:v1:staging:public:secrets-manager:eu-gb:a/1a11a1a111aa11aa111aa1a1111aa1a1:1aaa1a1a-aaaa-11aa-1a11-a11aaa1a11a1:secret:a1a11a11-111a-11a1-aa11-11aaa1a11a11 
+ibmcloud ks ingress instance register --cluster my-cluster --crn crn:v1:staging:public:secrets-manager:eu-gb:a/1a11a1a111aa11aa111aa1a1111aa1a1:1aaa1a1a-aaaa-11aa-1a11-a11aaa1a11a1:secret:a1a11a11-111a-11a1-aa11-11aaa1a11a11 --secret-group 90e059dd-d04e-a32b-010f-4d303b9050b8
 ```
 {: pre}
 
