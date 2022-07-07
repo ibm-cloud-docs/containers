@@ -2820,7 +2820,7 @@ subcollection: containers
 
 [Creating clusters](/docs/containers?topic=containers-clusters#clusters)
 
-* [Sample commands](/docs/containers?topic=containers-clusters#cluster_create_samples)
+* [Sample CLI commands](/docs/containers?topic=containers-clusters#cluster_create_samples)
 
 * [Preparing to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare)
 
@@ -2840,7 +2840,7 @@ subcollection: containers
 
     * [Creating standard VPC clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpcg2_cli)
 
-* [Creating a cluster on dedicated host infrastructure](/docs/containers?topic=containers-clusters#cluster_dedicated_host_cli)
+* [Creating a cluster on dedicated host infrastructure in the CLI](/docs/containers?topic=containers-clusters#cluster_dedicated_host_cli)
 
 * [Next steps](/docs/containers?topic=containers-clusters#next_steps)
 
