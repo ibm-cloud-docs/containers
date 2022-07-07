@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-07-07"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -335,8 +335,8 @@ The following table shows the changes that are in the patch 1.12.7_1548.
 | {{site.data.keyword.cloud_notm}} Provider | v1.12.6-157 | v1.12.7-180 | Updated to support the Kubernetes 1.12.7 and Calico 3.3.6 releases. |
 | Kubernetes | v1.12.6 | v1.12.7 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.7){: external}. |
 | Trusted compute agent | a02f765 | e132aa4 | Updated image for [CVE-2017-12447](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447){: external}. |
-| Ubuntu 16.04 kernel | 4.4.0-143-generic | 4.4.0-145-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://ubuntu.com/security/CVE-2019-9213.html){: external}. |
-| Ubuntu 18.04 kernel | 4.15.0-46-generic | 4.15.0-47-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://ubuntu.com/security/CVE-2019-9213.html){: external}. |
+| Ubuntu 16.04 kernel | 4.4.0-143-generic | 4.4.0-145-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9213){: external}. |
+| Ubuntu 18.04 kernel | 4.15.0-46-generic | 4.15.0-47-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9213){: external}. |
 {: caption="Changes since version 1.12.6_1547" caption-side="bottom"}
 
 ## Change log for worker node fix pack 1.12.6_1547, released 1 April 2019
