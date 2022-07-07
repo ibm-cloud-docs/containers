@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-01"
+lastupdated: "2022-07-07"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, delete
 
@@ -303,7 +303,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     * The new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
 
     ```sh
-    ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone_min_1> [--label key=value]
+    ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone_min_1>  [--label key=value]
     ```
     {: pre}
 
