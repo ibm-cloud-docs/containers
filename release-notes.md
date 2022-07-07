@@ -25,14 +25,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: tip}
 
 ## July 2022
-{: #containers-july22} 
+{: #containers-july22}
 
 ### 7 July 2022
 {: #containers-july0722}
-{: release-note}
+{: release-note} 
  
 ALB OAuth Proxy add-on
 :   Version 2.0.0_1187 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) is released. 
+
+
+
 
 ### 5 July 2022
 {: #containers-july0522}
