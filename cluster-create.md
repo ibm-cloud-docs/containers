@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-29"
+lastupdated: "2022-07-07"
 
 keywords: kubernetes, clusters, worker nodes, worker pools
 
@@ -29,8 +29,9 @@ After [getting started](/docs/containers?topic=containers-getting-started), you 
 
 
 
-## Sample commands
+## Sample CLI commands
 {: #cluster_create_samples}
+{: cli}
 
 Have you created a cluster before and are just looking for quick example commands? Try these examples.
 {: shortdesc}
@@ -176,6 +177,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
 
 ### Creating a standard classic cluster in the console
 {: #clusters_ui}
+{: ui}
 
 ![Classic](../icons/classic.svg "Classic") Create your single zone or multizone classic Kubernetes cluster by using the {{site.data.keyword.cloud_notm}} console.
 {: shortdesc}
@@ -237,6 +239,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
 
 ### Creating a standard classic cluster in the CLI
 {: #clusters_cli_steps}
+{: cli}
 
 ![Classic](../icons/classic.svg "Classic") Create your single zone or multizone classic cluster by using the {{site.data.keyword.cloud_notm}} CLI.
 {: shortdesc}
@@ -418,6 +421,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 
 ### Creating a standard classic cluster with a gateway in the CLI
 {: #gateway_cluster_cli}
+{: cli}
 
 ![Classic](../icons/classic.svg "Classic") Use the {{site.data.keyword.cloud_notm}} CLI to create a standard, gateway-enabled cluster on classic infrastructure.
 {: shortdesc}
@@ -596,6 +600,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 
 ### Creating a standard VPC cluster in the console
 {: #clusters_vpcg2_ui}
+{: ui}
 
 ![VPC](../icons/vpc.svg "VPC") Create your single zone or multizone VPC cluster by using the {{site.data.keyword.cloud_notm}} console.
 {: shortdesc}
@@ -670,6 +675,7 @@ By default, your cluster is provisioned with a VPC security group and a cluster-
 
 ### Creating standard VPC clusters from the CLI
 {: #cluster_vpcg2_cli}
+{: cli}
 
 ![VPC](../icons/vpc.svg "VPC") Create your single zone or multizone VPC cluster by using the {{site.data.keyword.cloud_notm}} CLI.
 {: shortdesc}
@@ -832,8 +838,9 @@ By default, your cluster is provisioned with a VPC security group and a cluster-
 
 Your cluster is ready for your workloads! You might also want to [add a tag to your cluster](/docs/containers?topic=containers-add_workers#cluster_tags), such as the team or billing department that uses the cluster, to help manage {{site.data.keyword.cloud_notm}} resources. For more ideas of what to do with your cluster, review the [Next steps](/docs/containers?topic=containers-clusters#next_steps). 
 
-## Creating a cluster on dedicated host infrastructure
+## Creating a cluster on dedicated host infrastructure in the CLI
 {: #cluster_dedicated_host_cli}
+{: cli}
 
 Follow the steps to create a dedicated host in a dedicated host pool. Then, provision a cluster on your dedicated host infrastructure.
 {: shortdesc}
@@ -845,7 +852,7 @@ Follow the steps to create a dedicated host in a dedicated host pool. Then, prov
     ```
     {: pre}
 
-    Example output. 
+    Example output.
 
     ```sh
     OK
