@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-06-30"
+lastupdated: "2022-07-07"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -149,8 +149,8 @@ The following table shows the changes that are in the patch 1.11.9_1554.
 | Kubernetes | v1.11.8 | v1.11.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.9){: external}. |
 | Kubernetes DNS | 1.14.10 | 1.14.13 | See the [Kubernetes DNS release notes](https://github.com/kubernetes/dns/releases/tag/1.14.13){: external}. |
 | Trusted compute agent | a02f765 | e132aa4 | Updated image for [CVE-2017-12447](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447){: external}. |
-| Ubuntu 16.04 kernel | 4.4.0-143-generic | 4.4.0-145-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://ubuntu.com/security/CVE-2019-9213.html){: external}. |
-| Ubuntu 18.04 kernel | 4.15.0-46-generic | 4.15.0-47-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://ubuntu.com/security/CVE-2019-9213.html){: external}. |
+| Ubuntu 16.04 kernel | 4.4.0-143-generic | 4.4.0-145-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9213){: external}. |
+| Ubuntu 18.04 kernel | 4.15.0-46-generic | 4.15.0-47-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9213){: external}. |
 {: caption="Changes since version 1.11.8_1553" caption-side="bottom"}
 
 ## Change log for worker node fix pack 1.11.8_1553, released 1 April 2019

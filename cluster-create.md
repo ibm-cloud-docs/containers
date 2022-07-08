@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-07-07"
+lastupdated: "2022-07-08"
 
 keywords: kubernetes, clusters, worker nodes, worker pools
 
@@ -74,12 +74,12 @@ ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4
 ```
 {: pre}
 
+
 For a classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-mz), [add zones](/docs/containers?topic=containers-add_workers#add_zone):
 ```sh
 ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
 ```
 {: pre}
-
 
 
 ![VPC](../icons/vpc.svg "VPC") **VPC clusters**
@@ -189,7 +189,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
 2. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 3. Configure your cluster environment.
     1. Select the **Standard** cluster plan.
-    1. From the Kubernetes drop-down list, select the version that you want to use in your cluster, such as 1.22.7.
+    1. From the Kubernetes drop-down list, select the version that you want to use in your cluster, such as 1.23.
     1. Select **Classic** infrastructure.
 4. Configure the **Location** details for your cluster.
     1. Select the **Resource group** that you want to create your cluster in.
@@ -210,16 +210,13 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
             2. For the public VLAN, select **None**.
 5. Configure your **Worker pool** setup. Worker pools are groups of worker nodes that share the same configuration. You can always add more worker pools to your cluster later.
     1. If you want a larger size for your worker nodes, click **Change flavor**. The flavor defines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to the containers. Available bare metal and virtual machines types vary by the zone in which you deploy the cluster. For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). After you create your cluster, you can add different flavors by adding a worker pool to the cluster.
-        Default
-        :   The default flavor is **Virtual - shared, Ubuntu 18**, which comes with **4 vCPUs** of computing power and **16 GB** of memory. This virtual flavor is billed hourly. Other types of flavors include the following.
-        Bare metal
-        :   Bare metal servers are provisioned manually by IBM Cloud infrastructure after you order, and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control. Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by mistake, you are still charged the full month.
-        Virtual - shared
-        :   Infrastructure resources, such as the hypervisor and physical hardware, are shared across you and other IBM customers, but each worker node is accessible only by you. Although this option is less expensive and sufficient in most cases, you might want to verify your performance and infrastructure requirements with your company policies. Virtual machines are billed hourly.
-        Virtual - dedicated
-        :   Your worker nodes are hosted on infrastructure that is devoted to your account. Your physical resources are completely isolated. Virtual machines are billed hourly.
+            * **Default**: The default flavor is **Virtual - shared, Ubuntu 18**, which comes with **4 vCPUs** of computing power and **16 GB** of memory. This virtual flavor is billed hourly. Other types of flavors include the following.
+            * **Bare metal**: Bare metal servers are provisioned manually by IBM Cloud infrastructure after you order, and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control. Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by mistake, you are still charged the full month.
+            * **Virtual - shared**: Infrastructure resources, such as the hypervisor and physical hardware, are shared across you and other IBM customers, but each worker node is accessible only by you. Although this option is less expensive and sufficient in most cases, you might want to verify your performance and infrastructure requirements with your company policies. Virtual machines are billed hourly.
+            * **Virtual - dedicated**: Your worker nodes are hosted on infrastructure that is devoted to your account. Your physical resources are completely isolated. Virtual machines are billed hourly.
     2. Set how many worker nodes to create per zone, such as **3**. For example, if you selected 2 zones and want to create 3 worker nodes, a total of 6 worker nodes are provisioned in your cluster with 3 worker nodes in each zone. You must set at least 1 worker node. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
     3. Toggle disk encryption. By default, [worker nodes feature AES 256-bit disk encryption](/docs/containers?topic=containers-security#workernodes).
+
     
 6. Configure your cluster with a private, public, or both a public and a private cloud service endpoint by setting the **Master service endpoint**. For more information about what setup is required to run internet-facing apps, or to keep your cluster private, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw).
 
@@ -344,6 +341,8 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
 
     `--workers <number>`
     :   Specify the number of worker nodes to include in the cluster. If you don't specify this option, a cluster with the minimum value of 1 is created.  For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
+    
+    
 
     `--version <major.minor.patch>`
     :   The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run `ibmcloud ks versions`.
@@ -386,7 +385,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
     When the provisioning of your Kubernetes master is completed, the **State** of your cluster changes to `normal`. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
     ```sh
     NAME         ID                         State      Created          Workers    Zone      Version     Resource Group Name   Provider
-    mycluster    blrs3b1d0p0p2f7haq0g       normal   20170201162433   3          dal10     1.22.7      Default             classic
+    mycluster    blrs3b1d0p0p2f7haq0g       normal   20170201162433   3          dal10     1.23      Default             classic
     ```
     {: screen}
 
@@ -402,7 +401,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
     When the worker nodes are ready, the worker node state changes to **normal** and the status changes to **Ready**. When the node status is **Ready**, you can then access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process. Note that if you created your cluster with a private VLAN only, no **Public IP** addresses are assigned to your worker nodes.
     ```sh
     ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.22.7
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.23
     ```
     {: screen}
 
@@ -517,6 +516,8 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
 
     `--workers <number>`
     :   Specify the number of compute worker nodes to include in the `compute` worker pool. If the `--workers` option is not specified, one compute worker node is created. Note that the `gateway` worker pool is created with two gateway worker nodes by default.
+    
+    
 
     `--version <major.minor.patch>`
     :   The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run `ibmcloud ks versions`.
@@ -555,7 +556,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
     When the provisioning of your Kubernetes master is completed, the **State** of your cluster changes to `normal`. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
     ```sh
     NAME          ID                                 State    Created         Workers   Location          Version                   Resource Group Name   Provider
-    mycluster     blbfcbhd0p6lse558lgg               normal   1 month ago     1         Dallas            1.22.7_1515               default               classic
+    mycluster     blbfcbhd0p6lse558lgg               normal   1 month ago     1         Dallas            1.23_1515               default               classic
     ```
     {: screen}
 
@@ -571,11 +572,11 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
     In the output, verify that the number of compute worker nodes that you specified in the `--workers` flag and two gateway worker nodes are provisioned. In the following example output, three compute and two gateway worker nodes are provisioned.
     ```sh
     ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.22.7
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.22.7
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000003d6   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.22.7
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.22.7
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000003d6   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.22.7
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.23
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.23
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000003d6   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.23
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.23
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000003d6   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.23
     ```
     {: screen}
 
@@ -707,7 +708,7 @@ By default, your cluster is provisioned with a VPC security group and a cluster-
     * For more information, see [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}: Subnets](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets).
 4. Create the cluster in your VPC. You can use the `ibmcloud ks cluster create vpc-gen2` command to create a single zone cluster in your VPC with worker nodes that are connected to one VPC subnet only. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#vpc_add_zone) to your cluster after the cluster is created. The cluster takes a few minutes to provision.
     ```sh
-    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>] [--cluster-security-group <group_ID>] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] [--kms-instance <KMS_instance_ID> --crk <root_key_ID>]
+    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>]  [--cluster-security-group <group_ID>] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] [--kms-instance <KMS_instance_ID> --crk <root_key_ID>]
     ```
     {: pre}
 
@@ -733,7 +734,9 @@ By default, your cluster is provisioned with a VPC security group and a cluster-
     `--workers <number>`
     :   Specify the number of worker nodes to include in the cluster. If you don't specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster). This value is optional.
 
-    `--cluster-security-group <group_ID>`
+    
+
+   `--cluster-security-group <group_ID>`
     :   Optional. Specify additional security group IDs to apply to all workers on the cluster. You must include a separate `--cluster-security-group` option for each individual security group you want to add. To apply the IBM-created `kube-clusterID`, use `--cluster-security-group cluster`. If no value is specified, only the `kube-clusterID` and the default VPC security group are applied. A maximum of five security groups can be applied to workers, including the default security groups. Note that the VPC security group is only applied if no other security groups are specified. For more information, see [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cluster).
     
     The security groups applied to a cluster cannot be changed once the cluster is created. You can [change the rules of the security groups](/docs/containers?topic=containers-vpc-security-group#vpc-sg-create-rules) that are applied to the cluster, but you cannot add or remove security groups at the cluster level. If you apply the incorrect security groups at cluster create time, you must delete the cluster and create a new one. See [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cluster) for more details before adding security groups to your cluster. 
@@ -779,7 +782,7 @@ By default, your cluster is provisioned with a VPC security group and a cluster-
     When the provisioning of your Kubernetes master is completed, the state of your cluster changes to **normal**. After the Kubernetes master is ready, your worker nodes are set up.
     ```sh
     NAME         ID                                   State      Created          Workers    Zone      Version     Resource Group Name   Provider
-    mycluster    aaf97a8843a29941b49a598f516da72101   normal   20170201162433   3          Dallas     1.22.7      Default               vpc-gen2
+    mycluster    aaf97a8843a29941b49a598f516da72101   normal   20170201162433   3          Dallas     1.23      Default               vpc-gen2
     ```
     {: screen}
 
@@ -795,7 +798,7 @@ By default, your cluster is provisioned with a VPC security group and a cluster-
     When the worker nodes are ready, the worker node **State** changes to `normal` and the **Status** changes to `Ready`. When the node **Status** changes to `Ready`, you can access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
     ```sh
     ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   b3c.4x16.encrypted  normal   Ready    dal10   1.22.7
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   b3c.4x16.encrypted  normal   Ready    dal10   1.23
     ```
     {: screen}
 

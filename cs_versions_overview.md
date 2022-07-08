@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-01"
+lastupdated: "2022-07-08"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -40,13 +40,13 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
      - [Version information and update actions](/docs/containers?topic=containers-cs_versions_124)
      - [Change log](/docs/containers?topic=containers-changelog_124)
 
-:    **Other**: 1.23
+:    **Default**: 1.23
      - Release date: 09 Feb 2022
      - Tentative unsupported date: 26 Apr 2023 `†`
      - [Version information and update actions](/docs/containers?topic=containers-cs_versions_123)
      - [Change log](/docs/containers?topic=containers-changelog_123)
    
-:    **Default**: 1.22
+:    **Other**: 1.22
      - Release date: 29 Sep 2021
      - Tentative unsupported date: 30 Nov 2022 `†`
      - [Version information and update actions](/docs/containers?topic=containers-cs_versions_122)
@@ -77,7 +77,7 @@ kubectl version  --short | grep -i server
 
 Example output
 ```sh
-Server Version: v1.22.7+IKS
+Server Version: v1.23+IKS
 ```
 {: screen}
 

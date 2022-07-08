@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-01"
+lastupdated: "2022-07-08"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, delete
 
@@ -65,10 +65,10 @@ To resize the worker pool, change the number of worker nodes that the worker poo
     Example output for a worker pool that is in two zones, `dal10` and `dal12`, and is resized to two worker nodes per zone:
     ```sh
     ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.22.7
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.22.7
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.22.7
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.22.7
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.23
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.23
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.23
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.23
     ```
     {: screen}
 
@@ -173,7 +173,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     ```sh
     ID                                                     Primary IP     Flavor   State          Status                                        Zone       Version   
     kube-<ID_string>-<cluster_name>-<pool_name>-00000002   10.xxx.xx.xxx   c2.2x4   provisioning   Infrastructure instance status is 'pending'   us-south-1   -   
-    kube-<ID_string>-<cluster_name>-<pool_name>-00000003   10.xxx.xx.xxx   c2.2x4   normal   Ready   us-south-1   1.22.7_1511   
+    kube-<ID_string>-<cluster_name>-<pool_name>-00000003   10.xxx.xx.xxx   c2.2x4   normal   Ready   us-south-1   1.23_1511   
     ```
     {: screen}
 
@@ -303,7 +303,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     * The new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
 
     ```sh
-    ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone_min_1> [--label key=value]
+    ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone_min_1>  [--label key=value]
     ```
     {: pre}
 
@@ -329,8 +329,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
     ```sh
     ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.22.7
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.22.7
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.23
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.23
     ```
     {: screen}
 
@@ -410,7 +410,7 @@ To add a zone with worker nodes to your worker pool:
     Ingress Secret:                 mycluster-<hash>-0000
     Workers:                        6
     Worker Zones:                   dal10, dal12
-    Version:                        1.22.7_1524
+    Version:                        1.23_1524
     Owner:                          owner@email.com
     Resource Group ID:              a8a12accd63b437bbd6d58fb6a462ca7
     Resource Group Name:            Default
@@ -566,8 +566,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
     ```sh
     ID                                                     Public IP     Private IP      Machine Type      State    Status  Zone    Version
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.22.7
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.22.7
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.23
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.23
     ```
     {: screen}
 
@@ -633,8 +633,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
     ```sh
     ID                                                     Public IP        Private IP      Machine Type      State    Status  Zone    Version
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.22.7
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.22.7
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.23
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.23
     ```
     {: screen}
 
@@ -975,7 +975,7 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
         ```sh
         start_time: "Tue Dec 17 15:19:23 UTC 2019"
         config:
-          kubernetes_version: 1.22.7
+          kubernetes_version: 1.23
           pod_name: ibm-external-compute-job-wk9xc
           image_url: us.icr.io/armada-master/stranger:v1.0.0
           prepare_host: True

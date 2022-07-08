@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-06-30"
+lastupdated: "2022-07-07"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -70,8 +70,8 @@ The following table shows the changes that are in the patch 1.10.13_1555.
 | Cluster master HA proxy | 1.8.12-alpine | 1.9.6-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.9/src/CHANGELOG){: external}. Update resolves [CVE-2018-0732](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732){: external}, [CVE-2018-0734](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734){: external}, [CVE-2018-0737](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737){: external}, [CVE-2018-5407](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407){: external}, [CVE-2019-1543](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543){: external}, and [CVE-2019-1559](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559){: external}.  |
 | Kubernetes DNS | 1.14.10 | 1.14.13 | See the [Kubernetes DNS release notes](https://github.com/kubernetes/dns/releases/tag/1.14.13){: external}.  |
 | Trusted compute agent | a02f765 | e132aa4 | Updated image for [CVE-2017-12447](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12447){: external}.  |
-| Ubuntu 16.04 kernel | 4.4.0-143-generic | 4.4.0-145-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://ubuntu.com/security/CVE-2019-9213.html){: external}.  |
-| Ubuntu 18.04 kernel | 4.15.0-46-generic | 4.15.0-47-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://ubuntu.com/security/CVE-2019-9213.html){: external}. |
+| Ubuntu 16.04 kernel | 4.4.0-143-generic | 4.4.0-145-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9213){: external}.  |
+| Ubuntu 18.04 kernel | 4.15.0-46-generic | 4.15.0-47-generic | Updated worker node images with kernel update for [CVE-2019-9213](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9213){: external}. |
 {: caption="Table 1. Changes since version 1.10.13_1554" caption-side="bottom"}
 
 ## Change log for worker node fix pack 1.10.13_1554, released 1 April 2019

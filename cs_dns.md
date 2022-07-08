@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-05"
+lastupdated: "2022-07-08"
 
 keywords: kubernetes, coredns, kubedns, dns
 
@@ -253,7 +253,7 @@ The following steps update DNS pods that run on particular worker nodes. You can
         
         ```sh
         NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.22.7+IKS   true
+        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.23+IKS   true
         ```
         {: screen}
 
@@ -308,7 +308,7 @@ You can disable the `NodeLocal` DNS cache for one or more worker nodes.
         
         ```sh
         NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.22.7+IKS   
+        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.23+IKS   
         ```
         {: screen}
 
