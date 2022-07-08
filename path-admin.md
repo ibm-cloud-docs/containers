@@ -18,7 +18,7 @@ subcollection: containers
 # Learning path for administrators
 {: #learning-path-admin}
 
-Following a curated learning path through {{site.data.keyword.containerlong}} to create a Kubernetes cluster, manage the cluster's resources and lifecycle, and use the powerful tools of {{site.data.keyword.containerlong_notm}} to secure, manage, and monitor your cluster workloads.
+Following a curated learning path through {{site.data.keyword.containerlong}} to create a cluster, manage the cluster's resources and lifecycle, and use the powerful tools of {{site.data.keyword.containerlong_notm}} to secure, manage, and monitor your cluster workloads.
 {: shortdesc}
 
 
