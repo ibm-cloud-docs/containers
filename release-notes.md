@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-07-12"
+lastupdated: "2022-07-14"
 
 keywords: kubernetes, release notes
 
@@ -26,6 +26,30 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## July 2022
 {: #containers-july22}
+
+
+
+### 14 July 2022
+{: #containers-july1422}
+
+Cross-account encryption
+:   You can now set up cross-account encryption. Note that this feature is available for allowlisted accounts only. For more infomration see, [Encrypting the Kubernetes secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect).
+
+{{site.data.keyword.cos_full_notm}} plug-in
+:   Version `2.1.18` of the {{site.data.keyword.cos_full_notm}} plug-in [is available](/docs/containers?topic=containers-cos_plugin_changelog).
+
+{{site.data.keyword.block_storage_is_short}} add-on.
+:   Version [5.0.1-beta_1411](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+
+
+
+### 13 July 2022
+{: #containers-july1322}
+
+CLI change log update
+:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.430.
+
+
 
 
 
@@ -82,7 +106,7 @@ Cluster autoscaler add-on
 :   You can now [create snapshots of your PVCs](/docs/containers?topic=containers-vpc-volume-snapshot) by using version `5.0.0-beta` of the {{site.data.keyword.block_storage_is_short}} add-on.
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version version 4.4.6_1446](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+:   [Version 4.4.6_1446](/docs/containers?topic=containers-vpc_bs_changelog) is available.
 
 ### 22 June 2022
 {: #containers-jun2222}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-07-06"
+lastupdated: "2022-07-14"
 
 keywords: kubernetes
 
@@ -29,6 +29,12 @@ Refer to the following changelogs for a summary of changes for each version of t
 
 Review the following changes for 1.0 versions of the CLI plug-in.
 {: shortdesc}
+
+## Version 1.0.430
+{: #cli-10430}
+
+Version 1.0.430 of the CLI was released on 13 Jul 2022.
+:   Adds the `--kms-account-id ID` option to various commands to support cross-account encryption for KMS enablement, VPC cluster, and worker pool creation.
 
 ## Version 1.0.426
 {: #cli-10426}
@@ -91,7 +97,7 @@ Version 1.0.374 of the CLI was released on 24 February 2022.
 
 Version 1.0.372 of the CLI was released on 18 February 2022.
 
-:   Modifies relevant commands to accept either the `--worker-pool` or `-p` flags for worker pool arguments.
+:   Modifies relevant commands to accept either the `--worker-pool` or `-p` flags for worker pool options.
 :   Updates JSON outputs to include additional resources, such as addons, VLANs, and subnets. 
 :   Makes `ibmcloud ks ingress` commands generally available.
 :   Updates the `ibmcloud ks ingress alb get` command output to include ALB status. 
@@ -352,7 +358,7 @@ Version 1.0.84 of the CLI was released on 26 May 2020.
 
 Version 1.0.57 of the CLI was released on 7 May 2020.
 
-- Adds a check for deprecated positional arguments. 
+- Adds a check for deprecated positional options. 
 - Updates the macOS DNS resolver to fix network issues when you use the CLI plug-in with a VPN connection. 
 - Help documentation updates: 
     - Adds instructions for enabling or disabling an add-on to the help text for the `ibmcloud ks addon-versions` command. 
@@ -410,8 +416,8 @@ Check out the following syntax and behavior changes between each version of the 
 | Supported? | Deprecated | Deprecated | Deprecated | Default |
 | `ibmcloud ks help` output structure  \n -  Legacy: Alphabetical list of commands  \n -  Latest: Categories of commands | Legacy | Legacy | Latest | Latest |
 | Command structure  \n -  Legacy: Hyphenated structure (`ibmcloud ks cluster-get`)  \n -  Latest: Spaced structure (`ibmcloud ks cluster get`) | Legacy and latest | Legacy and latest | Legacy and latest | Latest |
-| Positional arguments  \n -  Legacy: Arguments specified by position (`cluster-get mycluster`)  \n -  Latest: Arguments specified by flags (`cluster get --cluster mycluster`) | Legacy and latest | Legacy and latest | Legacy and latest | Latest |
-| Repeated arguments  \n -  Legacy: Comma-delineated values (`--worker-pools pool1,pool2,pool3 ...`)  \n -  Latest: Repeated flags for each value with optional shorthand flag aliases (`-p pool1 -p pool2 ...`) | Legacy | Legacy | Legacy and latest | Latest |
+| Positional options  \n -  Legacy: options specified by position (`cluster-get mycluster`)  \n -  Latest: options specified by flags (`cluster get --cluster mycluster`) | Legacy and latest | Legacy and latest | Legacy and latest | Latest |
+| Repeated options  \n -  Legacy: Comma-delineated values (`--worker-pools pool1,pool2,pool3 ...`)  \n -  Latest: Repeated flags for each value with optional shorthand flag aliases (`-p pool1 -p pool2 ...`) | Legacy | Legacy | Legacy and latest | Latest |
 | Flag format  \n -  Legacy: Camel-case (`--showResources`)  \n -  Latest: Dashed (`--show-resources`) | Legacy | Legacy | Legacy and latest | Latest |
 | Cluster context provided by `ibmcloud ks cluster-config`  \n -  Legacy: Provides a command that you must copy and paste to set the new `kubeconfig` file as your current `KUBECONFIG` environment variable. You must set your environment variable before you can interact with your cluster.  \n -  Latest: Appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the [last file that is set by the `KUBECONFIG` environment variable](/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig). After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately, and quickly [change the context to other clusters in the Kubernetes context](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple). | Legacy | Legacy | Legacy | Latest |
 | API endpoint  \n -  Legacy: [Target a region and use a regional endpoint to work with resources in that region](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).  \n -  Latest: [Use the global endpoint to work with resources in any location](/docs/containers?topic=containers-regions-and-zones#bluemix_regions). | Legacy | Latest | Latest | Latest |
