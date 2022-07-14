@@ -209,6 +209,10 @@ subcollection: containers
 
 * [July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july22)
 
+    * [14 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1422)
+
+        * Cross-account encryption
+
     * [13 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1322)
 
         * CLI change log update

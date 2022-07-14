@@ -29,6 +29,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+### 14 July 2022
+{: #containers-july1422}
+
+Cross-account encryption
+:   You can now set up cross-account encryption. Note that this feature is available for allowlisted accounts only. For more infomration see, [Encrypting the Kubernetes secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect).
+
+
+
+
 ### 13 July 2022
 {: #containers-july1322}
 
