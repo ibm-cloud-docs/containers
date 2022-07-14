@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-07-14"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -224,7 +224,7 @@ The following table shows the different options that you have when you configure
 | Parameter | Description |
 | --- | ---------- |
 | `<cluster_name_or_ID>` | The name or ID of the cluster. |
-| `--logsource` | The source that you want to forward logs from. Accepted values are `container`, `application`, `worker`, `kubernetes`, `ingress`, and `storage`. This argument supports a comma-separated list of log sources to apply to the configuration. If you don't provide a log source, logging configurations are created for `container` and `ingress` log sources. |
+| `--logsource` | The source that you want to forward logs from. Accepted values are `container`, `application`, `worker`, `kubernetes`, `ingress`, and `storage`. This option supports a comma-separated list of log sources to apply to the configuration. If you don't provide a log source, logging configurations are created for `container` and `ingress` log sources. |
 | `--type syslog` | The value `syslog` forwards your logs to an external server. |
 | `--namespace` | Optional: The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the `ibm-system` and `kube-system` Kubernetes namespaces. This value is valid only for the `container` log source. If you don't specify a namespace, then all namespaces in the cluster use this configuration. |
 | `--hostname` | Specify the hostname or IP address of the log collector service. |
