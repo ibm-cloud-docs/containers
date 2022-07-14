@@ -213,6 +213,10 @@ subcollection: containers
 
         * Cross-account encryption
 
+        * {{site.data.keyword.cos_full_notm}} plug-in
+
+        * {{site.data.keyword.block_storage_is_short}} add-on.
+
     * [13 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1322)
 
         * CLI change log update
@@ -7574,6 +7578,8 @@ subcollection: containers
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
 
 * [Version 5.0 (Beta)](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
+
+    * [Change log for version 5.0.1-beta_1411, released 14 July 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.4-beta_1556_is_block_relnote)
 
     * [Change log for version 5.0.1-beta_1411, released 15 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-beta_1411_is_block_relnote)
 
