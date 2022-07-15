@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-14"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -467,7 +467,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 #### Version update, released on 25 March 2021
 {: #version-update}
 
-In the `ibm-k8s-controller-config` configmap, sets the `server-tokens` field to `False` so that the NGINX version is not returned in response headers. 
+In the `ibm-k8s-controller-config` ConfigMap, sets the `server-tokens` field to `False` so that the NGINX version is not returned in response headers. 
 
 #### Version 0.35.0_1094_iks, released on 22 March 2021
 {: #0.35.0_1094_iks}
@@ -531,7 +531,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 #### Version update, released on 25 March 2021
 {: #version-update-34}
 
-In the `ibm-k8s-controller-config` configmap, sets the `server-tokens` field to `False` so that the NGINX version is not returned in response headers.
+In the `ibm-k8s-controller-config` ConfigMap, sets the `server-tokens` field to `False` so that the NGINX version is not returned in response headers.
 
 #### Version 0.34.1_1096_iks, released on 22 March 2021
 {: #0.34.1_1096_iks}
@@ -583,7 +583,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 #### Version updates, released on 25 March 2021
 {: #version-updates-33}
 
-In the `ibm-k8s-controller-config` configmap, sets the `server-tokens` field to `False` so that the NGINX version is not returned in response headers.
+In the `ibm-k8s-controller-config` ConfigMap, sets the `server-tokens` field to `False` so that the NGINX version is not returned in response headers.
 
 #### Version 0.33.0_1097_iks, released on 22 March 2021
 {: #0.33.0_1097_iks}
@@ -622,7 +622,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 #### Version update, released on 22 September 2021
 {: #version-update-32}
 
-In the `ibm-k8s-controller-config` configmap, sets the `server-tokens` field to `False` so that the NGINX version is not returned in response headers.
+In the `ibm-k8s-controller-config` ConfigMap, sets the `server-tokens` field to `False` so that the NGINX version is not returned in response headers.
 
 #### Version 0.32.0_392_iks, released on 24 August 2020
 {: #0.32.0_392_iks}

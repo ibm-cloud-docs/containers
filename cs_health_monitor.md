@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-08"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -120,7 +120,7 @@ To set up a monitoring configuration for your cluster:
 
         The number of daemon set instances that are deployed equals the number of worker nodes in your cluster.
 
-    3. Review the configmap that was created for your {{site.data.keyword.mon_short}} agent.
+    3. Review the ConfigMap that was created for your {{site.data.keyword.mon_short}} agent.
         ```sh
         kubectl describe configmap -n ibm-observe
         ```
@@ -284,10 +284,10 @@ Reloading or rebooting the worker can resolve the issue. However, you might need
 ### Zone alerts
 {: #zone-level-alerts}
 
-To set up zone level alerts, edit the `sysdig-agent` configmap to include the required label filters.
+To set up zone level alerts, edit the `sysdig-agent` ConfigMap to include the required label filters.
 {: shortdesc}
 
-1. Edit the configmap by running the following command.
+1. Edit the ConfigMap by running the following command.
     ```sh
     kubectl edit configmap sysdig-agent -n ibm-observe
     ```
@@ -523,7 +523,6 @@ Review the following table for information on the individual components of healt
 | `Enabled`| Enter `true` to enable the check or `false` to disable the check.|
 |`Namespace`| Optional: To restrict `checkpod.json` to checking only pods in one namespace, add the `Namespace` field and enter the namespace.|
 {: caption="Health check components"}
-
 
 
 

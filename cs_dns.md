@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-08"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, coredns, kubedns, dns
 
@@ -25,7 +25,7 @@ The cluster DNS provider is [CoreDNS](https://coredns.io/){: external}, which is
 ## Autoscaling the cluster DNS provider
 {: #dns_autoscale}
 
-By default, CoreDNS includes a deployment to autoscale the CoreDNS pods in response to the number of worker nodes and cores within the cluster. You can fine-tune the CoreDNS autoscaler parameters by editing the CoreDNS autoscaling configmap. For example, if your apps heavily use the cluster DNS provider, you might need to increase the minimum number of CoreDNS pods to support the app. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/){: external}.
+By default, CoreDNS includes a deployment to autoscale the CoreDNS pods in response to the number of worker nodes and cores within the cluster. You can fine-tune the CoreDNS autoscaler parameters by editing the CoreDNS autoscaling ConfigMap. For example, if your apps heavily use the cluster DNS provider, you might need to increase the minimum number of CoreDNS pods to support the app. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/){: external}.
 {: shortdesc}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -67,7 +67,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 ## Customizing the cluster DNS provider
 {: #dns_customize}
 
-You can customize CoreDNS by editing the CoreDNS configmap. For example, you might want to configure stub domains and upstream DNS servers to resolve services that point to external hosts. Additionally, you can configure multiple [Corefiles](https://coredns.io/2017/07/23/corefile-explained/){: external} within the CoreDNS configmap. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/){: external}.
+You can customize CoreDNS by editing the CoreDNS ConfigMap. For example, you might want to configure stub domains and upstream DNS servers to resolve services that point to external hosts. Additionally, you can configure multiple [Corefiles](https://coredns.io/2017/07/23/corefile-explained/){: external} within the CoreDNS ConfigMap. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/){: external}.
 {: shortdesc}
 
 `NodeLocal` DNS caching relies on CoreDNS to maintain the cache of DNS resolutions. Keep applicable `NodeLocal` DNS cache and CoreDNS configurations such as stub domains the same to maintain DNS resolution consistency.
@@ -90,9 +90,9 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-2. Edit the default settings for the CoreDNS configmap. Use a Corefile in the `data` section of the configmap to customize stub domains and upstream DNS servers. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns){: external}.
+2. Edit the default settings for the CoreDNS ConfigMap. Use a Corefile in the `data` section of the ConfigMap to customize stub domains and upstream DNS servers. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns){: external}.
 
-    The CoreDNS `proxy` plug-in is deprecated and replaced with the `forward` plug-in. If you update the CoreDNS configmap, make sure to replace all `proxy` instances with `forward`.
+    The CoreDNS `proxy` plug-in is deprecated and replaced with the `forward` plug-in. If you update the CoreDNS ConfigMap, make sure to replace all `proxy` instances with `forward`.
     {: note}
 
     ```sh
@@ -139,9 +139,9 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-3. Optional: Add custom Corefiles to the CoreDNS configmap. In the following example, include the `import <MyCoreFile>` in the `data.Corefile` section, and fill out the `data.<MyCorefile>` section with your custom Corefile information. For more information, see [the Corefile import documentation](https://coredns.io/plugins/import/){: external}.
+3. Optional: Add custom Corefiles to the CoreDNS ConfigMap. In the following example, include the `import <MyCoreFile>` in the `data.Corefile` section, and fill out the `data.<MyCorefile>` section with your custom Corefile information. For more information, see [the Corefile import documentation](https://coredns.io/plugins/import/){: external}.
 
-    The CoreDNS `proxy` plug-in is deprecated and replaced with the `forward` plug-in. If you update the CoreDNS configmap, make sure to replace all `proxy` instances with `forward`.
+    The CoreDNS `proxy` plug-in is deprecated and replaced with the `forward` plug-in. If you update the CoreDNS ConfigMap, make sure to replace all `proxy` instances with `forward`.
     {: note}
 
     ```sh
@@ -184,7 +184,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-4. After a few minutes, the CoreDNS pods pick up the configmap changes.
+4. After a few minutes, the CoreDNS pods pick up the ConfigMap changes.
 
 
 
@@ -336,16 +336,16 @@ You can disable the `NodeLocal` DNS cache for one or more worker nodes.
 You can customize the `NodeLocal` DNS cache by editing either of the two configmaps. 
 {: shortdesc}
 
-* [**`node-local-dns` configmap**](#dns_nodelocal_customize_configmap): Customize the `NodeLocal` DNS cache configuration.
-* [**`node-local-dns-config` configmap**](#dns_nodelocal_customize_stub_upstream): Extend the `NodeLocal` DNS cache configuration by customizing stub domains or upstream DNS servers to resolve services that point to external hosts. 
+* [**`node-local-dns` ConfigMap**](#dns_nodelocal_customize_configmap): Customize the `NodeLocal` DNS cache configuration.
+* [**`node-local-dns-config` ConfigMap**](#dns_nodelocal_customize_stub_upstream): Extend the `NodeLocal` DNS cache configuration by customizing stub domains or upstream DNS servers to resolve services that point to external hosts. 
 
 `NodeLocal` DNS caching relies on CoreDNS to maintain the cache of DNS resolutions. Keep applicable `NodeLocal` DNS cache and CoreDNS configurations such as stub domains the same to maintain DNS resolution consistency.
 {: note}
 
-### Editing the `node-local-dns` configmap for general configuration updates
+### Editing the `node-local-dns` ConfigMap for general configuration updates
 {: #dns_nodelocal_customize_configmap}
 
-Edit the `node-local-dns` configmap to customize the `NodeLocal` DNS cache configuration.
+Edit the `node-local-dns` ConfigMap to customize the `NodeLocal` DNS cache configuration.
 {: shortdesc}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -365,7 +365,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-2. Edit the default settings or add custom Corefiles to the `NodeLocal` DNS cache configmap. Each Corefile that you import must use the `coredns` path. For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns){: external}.
+2. Edit the default settings or add custom Corefiles to the `NodeLocal` DNS cache ConfigMap. Each Corefile that you import must use the `coredns` path. For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns){: external}.
 
     Only a limited set of [plug-ins](https://coredns.io/plugins/){: external} is supported for the `NodeLocal` DNS cache.
     {: important}
@@ -441,12 +441,12 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-3. After a few minutes, the `NodeLocal` DNS cache pods pick up the configmap changes.
+3. After a few minutes, the `NodeLocal` DNS cache pods pick up the ConfigMap changes.
 
-### Editing the `node-local-dns-config` configmap to extend with stub domains or upstream servers
+### Editing the `node-local-dns-config` ConfigMap to extend with stub domains or upstream servers
 {: #dns_nodelocal_customize_stub_upstream}
 
-Edit the `node-local-dns-config` configmap to extend the `NodeLocal` DNS cache configuration such as by customizing stub domains or upstream DNS servers. For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns){: external}.
+Edit the `node-local-dns-config` ConfigMap to extend the `NodeLocal` DNS cache configuration such as by customizing stub domains or upstream DNS servers. For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns){: external}.
 {: shortdesc}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -466,23 +466,23 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-2. Confirm that the `NodeLocal` DNS cache has a configmap.
+2. Confirm that the `NodeLocal` DNS cache has a ConfigMap.
 
-    1. Determine if the `NodeLocal` DNS cache configmap exists.
+    1. Determine if the `NodeLocal` DNS cache ConfigMap exists.
     
         ```sh
         kubectl get cm -n kube-system node-local-dns-config
         ```
         {: pre}
 
-        Example output if no configmap exists
+        Example output if no ConfigMap exists
         
         ```sh
-        Error from server (NotFound): configmaps "node-local-dns-config" not found
+        Error from server (NotFound): ConfigMaps "node-local-dns-config" not found
         ```
         {: screen}
 
-    2. If the configmap does not exist, create a `NodeLocal` DNS cache configmap.
+    2. If the ConfigMap does not exist, create a `NodeLocal` DNS cache ConfigMap.
     
         ```sh
         kubectl create cm -n kube-system node-local-dns-config
@@ -496,7 +496,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         ```
         {: screen}
 
-3. Edit the `NodeLocal` DNS cache configmap. The configmap uses the KubeDNS syntax to customize stub domains and upstream DNS servers. For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns){: external}.
+3. Edit the `NodeLocal` DNS cache ConfigMap. The ConfigMap uses the KubeDNS syntax to customize stub domains and upstream DNS servers. For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns){: external}.
 
     ```sh
     kubectl edit cm -n kube-system node-local-dns-config
@@ -517,7 +517,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-4. After a few minutes, the `NodeLocal` DNS cache pods pick up the configmap changes.
+4. After a few minutes, the `NodeLocal` DNS cache pods pick up the ConfigMap changes.
 
 
 
@@ -548,7 +548,7 @@ kubectl get networkpolicy --all-namespaces -o yaml
 
 **Step 1: Deploy zone-aware DNS resources:**
 
-1. Add the `ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true` label to the `coredns` configmap in the `kube-system` namespace.
+1. Add the `ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true` label to the `coredns` ConfigMap in the `kube-system` namespace.
 
     ```sh
     kubectl label cm -n kube-system coredns --overwrite "ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true"
@@ -670,7 +670,7 @@ To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of 
 
 **Step 2: Delete zone-aware DNS resources:**
 
-1. Remove the `ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true` label from the `coredns` configmap in the `kube-system` namespace.
+1. Remove the `ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true` label from the `coredns` ConfigMap in the `kube-system` namespace.
 
     ```sh
     kubectl label cm -n kube-system coredns --overwrite "ibm-cloud.kubernetes.io/deploy-zone-aware-dns-"
@@ -690,8 +690,6 @@ To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of 
     ibmcloud ks cluster get -c <cluster_name_or_ID>
     ```
     {: pre}
-
-
 
 
 

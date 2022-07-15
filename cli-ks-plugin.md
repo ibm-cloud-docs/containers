@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-14"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes
 
@@ -3789,7 +3789,7 @@ This command is deprecated and becomes unsupported soon.
 {: deprecated}
 
 ```sh
-ibmcloud ks ingress alb migrate clean --cluster CLUSTER [--generated-resources] [--iks-ingresses] [--kube-ingresses] [--reset-kube-controller-configmap] [--test-ingresses] [-f] [--output json] [-q]
+ibmcloud ks ingress alb migrate clean --cluster CLUSTER [--generated-resources] [--iks-ingresses] [--kube-ingresses] [--reset-kube-controller-ConfigMap] [--test-ingresses] [-f] [--output json] [-q]
 ```
 {: pre}
 
@@ -3813,8 +3813,8 @@ ibmcloud ks ingress alb migrate clean --cluster CLUSTER [--generated-resources] 
 `--kube-ingresses`
 :    Delete automatically generated and manually created Ingress resources of class `public-iks-k8s-nginx` or `private-iks-k8s-nginx` for public or private ALBs that run the Kubernetes Ingress image.
 
-`--reset-kube-controller-configmap`
-:    Reset the `ibm-k8s-controller-config` configmap to the default settings. The configmap is deleted and redeployed.
+`--reset-kube-controller-ConfigMap`
+:    Reset the `ibm-k8s-controller-config` ConfigMap to the default settings. The ConfigMap is deleted and redeployed.
 
 `--test-ingresses`
 :    Delete automatically generated and manually created Ingress resources of class `test` for the test ALB service running the Kubernetes Ingress image.
@@ -3839,7 +3839,7 @@ ibmcloud ks ingress alb migrate clean -c my_cluster --reset-kube-controller-conf
 ### `ibmcloud ks ingress alb migrate start`
 {: #cs_alb_migrate_start}
 
-Start a migration of your Ingress configmap and resources that are formatted for use with ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress to instead use with ALBs that run the Kubernetes Ingress image. Note that this command helps you create all the resources for ALBs that run Kubernetes Ingress, but afterward you must still manually change your ALB from one type of image to another. For more information about how to prepare for a migration, see [Changing the image of existing ALBs](/docs/containers?topic=containers-ingress-types#alb-type-migration).
+Start a migration of your Ingress ConfigMap and resources that are formatted for use with ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress to instead use with ALBs that run the Kubernetes Ingress image. Note that this command helps you create all the resources for ALBs that run Kubernetes Ingress, but afterward you must still manually change your ALB from one type of image to another. For more information about how to prepare for a migration, see [Changing the image of existing ALBs](/docs/containers?topic=containers-ingress-types#alb-type-migration).
 {: shortdesc}
 
 This command is deprecated and becomes unsupported soon.
@@ -3859,7 +3859,7 @@ ibmcloud ks ingress alb migrate start --cluster CLUSTER --type (test | test-with
 **Command options**:
 
 `-c, --cluster CLUSTER`
-:    Required: The name or ID of the cluster where you want to start a migration of the Ingress configmap and resources.
+:    Required: The name or ID of the cluster where you want to start a migration of the Ingress ConfigMap and resources.
 
 `--type (test | test-with-private | production)`
 :    The type of migration: a test migration for public Ingress routing, a test migration with private Ingress routing, or a production migration of all Ingress routing. To see the resources that are created by and the processes for each type of migration, see [Changing the image of existing ALBs](/docs/containers?topic=containers-ingress-types#alb-type-migration).
@@ -3881,7 +3881,7 @@ ibmcloud ks ingress alb migrate start --type test --cluster my_cluster
 ### `ibmcloud ks ingress alb migrate status`
 {: #cs_alb_migrate_status}
 
-Check the status of a [migration of your Ingress configmap and resources](#cs_alb_migrate_start).
+Check the status of a [migration of your Ingress ConfigMap and resources](#cs_alb_migrate_start).
 {: shortdesc}
 
 This command is deprecated and becomes unsupported soon.
@@ -4751,7 +4751,7 @@ Disable automatic updates of all Fluentd pods in a cluster.
 
 ![Classic](../icons/classic.svg "Classic") ![VPC](../icons/vpc.svg "VPC") This command works for both classic and VPC clusters.
 
-Disable automatic updates of your Fluentd pods in a specific cluster. When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Fluentd configmap, but does not change the image version of your Fluentd for logging add-on. You are responsible for checking the compatibility of the latest Kubernetes versions and your add-on images.
+Disable automatic updates of your Fluentd pods in a specific cluster. When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Fluentd ConfigMap, but does not change the image version of your Fluentd for logging add-on. You are responsible for checking the compatibility of the latest Kubernetes versions and your add-on images.
 
 ```sh
 ibmcloud ks logging autoupdate disable --cluster CLUSTER [-q]

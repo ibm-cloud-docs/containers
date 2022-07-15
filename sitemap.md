@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-07-14"
+lastupdated: "2022-07-15"
 
 keywords: containers
 subcollection: containers
@@ -2996,7 +2996,7 @@ subcollection: containers
 
 * [Customizing the cluster autoscaler configuration values](/docs/containers?topic=containers-cluster-scaling-enable#ca_customize)
 
-    * [Customizing the cluster autoscaler add-on configmap](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-customize)
+    * [Customizing the cluster autoscaler add-on ConfigMap](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-customize)
 
 [Deploying apps to worker pools where autoscaling is enabled](/docs/containers?topic=containers-cluster-scaling-deploy-apps#cluster-scaling-deploy-apps)
 
@@ -3669,9 +3669,9 @@ subcollection: containers
 
 * [Customizing NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize)
 
-    * [Editing the `node-local-dns` configmap for general configuration updates](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_configmap)
+    * [Editing the `node-local-dns` ConfigMap for general configuration updates](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_configmap)
 
-    * [Editing the `node-local-dns-config` configmap to extend with stub domains or upstream servers](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_stub_upstream)
+    * [Editing the `node-local-dns-config` ConfigMap to extend with stub domains or upstream servers](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_stub_upstream)
 
 * [Setting up zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
 
@@ -4376,7 +4376,7 @@ subcollection: containers
 
 * [Customizing the ALB deployment](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy)
 
-    * [Create a configmap to customize the Ingress deployment](/docs/containers?topic=containers-comm-ingress-annotations#create-ingress-configmap-custom)
+    * [Create a ConfigMap to customize the Ingress deployment](/docs/containers?topic=containers-comm-ingress-annotations#create-ingress-configmap-custom)
 
 * [Customizing the Ingress class](/docs/containers?topic=containers-comm-ingress-annotations#-custom-ingress-class)
 
@@ -4727,9 +4727,9 @@ subcollection: containers
 
 * [Config map reference](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-cm-ref)
 
-    * [RHEL or CentOS configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-rhel-cm)
+    * [RHEL or CentOS ConfigMap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-rhel-cm)
 
-    * [Ubuntu configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
+    * [Ubuntu ConfigMap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
 
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 

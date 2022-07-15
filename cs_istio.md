@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-16"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
 
@@ -129,16 +129,16 @@ Install the `istioctl` CLI client. For more information, see the [`istioctl` com
 ## Customizing the Istio installation
 {: #customize}
 
-You can customize a set of Istio configuration options by editing the `managed-istio-custom` configmap resource. These settings include extra control over monitoring, logging, and networking in your control plane and service mesh.
+You can customize a set of Istio configuration options by editing the `managed-istio-custom` ConfigMap resource. These settings include extra control over monitoring, logging, and networking in your control plane and service mesh.
 {: shortdesc}
 
-1. Describe the `managed-istio-custom` configmap resource to review its contents and the in-line documentation.
+1. Describe the `managed-istio-custom` ConfigMap resource to review its contents and the in-line documentation.
     ```sh
     kubectl describe cm managed-istio-custom -n ibm-operators
     ```
     {: pre}
 
-2. Edit the `managed-istio-custom` configmap resource.
+2. Edit the `managed-istio-custom` ConfigMap resource.
     ```sh
     kubectl edit cm managed-istio-custom -n ibm-operators
     ```
@@ -195,7 +195,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
     :   Default value: `"5"`
     :   By default, Istio sets the default horizontal pod autoscaler (HPA) max pods for istiod to 5. Do not increase this value unless you have a large service mesh where istiod needs increased resources to update the configurations.
 
-    For example, your configmap might look like the following example.
+    For example, your ConfigMap might look like the following example.
     ```yaml
     apiVersion: v1
     data:
@@ -208,7 +208,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
     ```
     {: screen}
 
-    Don't see an option from this table in your configmap? Because your configmap contains user-defined values, the configmap is not updated with any options that are released over time. Instead, you can back up a copy of your configmap and delete the configmap from your cluster. After about 5 minutes, a default configmap that contains the new options is created in your cluster. Then, you can copy your previously configured settings from your backup to this default configmap, configure any new settings, and apply the changes.
+    Don't see an option from this table in your ConfigMap? Because your ConfigMap contains user-defined values, the ConfigMap is not updated with any options that are released over time. Instead, you can back up a copy of your ConfigMap and delete the ConfigMap from your cluster. After about 5 minutes, a default ConfigMap that contains the new options is created in your cluster. Then, you can copy your previously configured settings from your backup to this default ConfigMap, configure any new settings, and apply the changes.
     {: tip}
 
 4. Save and close the configuration file.
@@ -240,11 +240,11 @@ You can customize a set of Istio configuration options by editing the `managed-i
         ```
         {: pre}
 
-**Want to change a configmap setting?**: If you want to change a setting that you added to the configmap, you can use a patch script. For example, if you added the `istio-global-proxy-accessLogFile: "/dev/stdout"` setting and later want to change it back to `""`, you can run `kubectl patch cm managed-istio-custom -n ibm-operators --type='json' -p='[{"op": "add", "path": "/data/istio-global-proxy-accessLogFile", "value":""}]'`. 
+**Want to change a ConfigMap setting?**: If you want to change a setting that you added to the ConfigMap, you can use a patch script. For example, if you added the `istio-global-proxy-accessLogFile: "/dev/stdout"` setting and later want to change it back to `""`, you can run `kubectl patch cm managed-istio-custom -n ibm-operators --type='json' -p='[{"op": "add", "path": "/data/istio-global-proxy-accessLogFile", "value":""}]'`. 
 **Need to debug your customization setup?**: Check the logs for the `addon-istio-operator` (Istio version 1.10 or later) or `managed-istio-operator` (Istio version 1.9 or earlier) pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`. The Istio operator validates and reconciles any custom Istio changes that you make.
 {: tip}
 
-If you disable the Istio add-on, the `managed-istio-custom` configmap is not removed during uninstallation. When you re-enable the Istio add-on, your customized configmap is applied during installation. If you don't want to re-use your custom settings in a later installation of Istio, you must delete the configmap after you disable the Istio add-on by running `kubectl delete cm -n ibm-operators managed-istio-custom`. When you re-enable the Istio add-on, the default configmap is applied during installation.
+If you disable the Istio add-on, the `managed-istio-custom` ConfigMap is not removed during uninstallation. When you re-enable the Istio add-on, your customized ConfigMap is applied during installation. If you don't want to re-use your custom settings in a later installation of Istio, you must delete the ConfigMap after you disable the Istio add-on by running `kubectl delete cm -n ibm-operators managed-istio-custom`. When you re-enable the Istio add-on, the default ConfigMap is applied during installation.
 {: note}
 
 
@@ -506,7 +506,7 @@ Review the following optional steps for saving or deleting custom Istio resource
 
     3. Save the Kubernetes resources that were automatically generated by these CRDs to a YAML file on your local machine.
 
-2. The `managed-istio-custom` configmap is not removed during uninstallation. If you later re-enable the Istio add-on, any [customized settings that you made to the configmap](#customize) are applied during installation. If you don't want to re-use your custom settings in a later installation of Istio, you must delete the configmap.
+2. The `managed-istio-custom` ConfigMap is not removed during uninstallation. If you later re-enable the Istio add-on, any [customized settings that you made to the ConfigMap](#customize) are applied during installation. If you don't want to re-use your custom settings in a later installation of Istio, you must delete the ConfigMap.
 
     ```sh
     kubectl delete cm -n ibm-operators managed-istio-custom

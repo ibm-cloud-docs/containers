@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-16"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -474,7 +474,7 @@ The app pods are now integrated into your Istio service mesh because they have t
 By default, one public Istio load balancer, `istio-ingressgateway`, is enabled in your cluster to load balance incoming requests from the internet to your Istio-managed apps. You can achieve higher availability by enabling an Istio load balancer in each zone of your cluster.
 {: shortdesc}
 
-1. Edit the `managed-istio-custom` configmap resource.
+1. Edit the `managed-istio-custom` ConfigMap resource.
     ```sh
     kubectl edit cm managed-istio-custom -n ibm-operators
     ```
@@ -655,7 +655,7 @@ http://<host_name>/<service_path>
 Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules`](https://istio.io/latest/docs/reference/config/networking/destination-rule/){: external}.
 {: tip}
 
-Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers. If you notice that the `ibm-cloud-provider-ip` pod for a gateway is stuck in `pending`, see [this troubleshooting topic](/docs/containers?topic=containers-istio_gateway_affinity).
+Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` ConfigMap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers. If you notice that the `ibm-cloud-provider-ip` pod for a gateway is stuck in `pending`, see [this troubleshooting topic](/docs/containers?topic=containers-istio_gateway_affinity).
 {: tip}
 
 
@@ -795,7 +795,7 @@ The certificates for the NLB DNS host secret expires every 90 days. The secret i
 Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules`](https://istio.io/latest/docs/reference/config/networking/destination-rule/){: external}.
 {: tip}
 
-Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers. If you notice that the `ibm-cloud-provider-ip` pod for a gateway is stuck in `pending`, see [this troubleshooting topic](/docs/containers?topic=containers-istio_gateway_affinity).
+Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` ConfigMap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers. If you notice that the `ibm-cloud-provider-ip` pod for a gateway is stuck in `pending`, see [this troubleshooting topic](/docs/containers?topic=containers-istio_gateway_affinity).
 {: tip}
 
 ## Securing in-cluster traffic by enabling mTLS

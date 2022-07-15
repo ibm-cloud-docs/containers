@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -220,7 +220,7 @@ You can modify default ALB settings and add annotations to your Ingress resource
 {: shortdesc}
 
 * To manage how requests are routed to your app, specify [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`) in your Ingress resources.
-* To modify default Ingress settings, such as to enable source IP preservation or configure SSL protocols, [change the `ibm-cloud-provider-ingress-cm`, `ibm-k8s-controller-config`, or `ibm-ingress-deploy-config` configmap resources](/docs/containers?topic=containers-comm-ingress-annotations) for your Ingress ALBs.
+* To modify default Ingress settings, such as to enable source IP preservation or configure SSL protocols, [change the `ibm-cloud-provider-ingress-cm`, `ibm-k8s-controller-config`, or `ibm-ingress-deploy-config` ConfigMap resources](/docs/containers?topic=containers-comm-ingress-annotations) for your Ingress ALBs.
 
 
 

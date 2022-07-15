@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-07-07"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -183,7 +183,7 @@ The following table shows the changes that are in the patch 1.10.12_1543.
 | {{site.data.keyword.filestorage_full_notm}} plug-in | 338 | 342 | The file storage plug-in is updated as follows: \n - Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers?topic=containers-file_storage#file-topology). \n - Ignores persistent volume claim (PVC) delete errors if the storage is already deleted. \n - Adds a failure message annotation to failed PVCs. \n - Optimizes the storage provisioner controller's leader election and resync period settings, and increases the provisioning timeout from 30 minutes to 1 hour. \n - Checks user permissions before starting the provisioning. |
 | Key Management Service provider | 111 | 122 | Added retry logic to avoid temporary failures when Kubernetes secrets are managed by {{site.data.keyword.keymanagementservicefull_notm}}.  |
 | Kubernetes configuration | N/A | N/A | The Kubernetes API server audit policy configuration is updated to include logging metadata for `cluster-admin` requests and logging the request body of workload `create`, `update`, and `patch` requests.  |
-| OpenVPN client | 2.4.6-r3-IKS-8 | 2.4.6-r3-IKS-13 | Updated image for [CVE-2018-0734](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734){: external} and [CVE-2018-5407](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407){: external}. Additionally, the pod configuration is now obtained from a secret instead of from a configmap.  |
+| OpenVPN client | 2.4.6-r3-IKS-8 | 2.4.6-r3-IKS-13 | Updated image for [CVE-2018-0734](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734){: external} and [CVE-2018-5407](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407){: external}. Additionally, the pod configuration is now obtained from a secret instead of from a ConfigMap.  |
 | OpenVPN server | 2.4.6-r3-IKS-8 | 2.4.6-r3-IKS-13 | Updated image for [CVE-2018-0734](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734){: external} and [CVE-2018-5407](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407){: external}.  |
 | `systemd` | 230 | 229 | Security patch for [CVE-2018-16864](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864){: external}. |
 {: caption="Table 1. Changes since version 1.10.12_1541" caption-side="bottom"}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-14"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -68,7 +68,7 @@ Review the following important differences between the {{site.data.keyword.conta
 |Annotation class| Only [custom {{site.data.keyword.containerlong_notm}} annotations](/docs/containers?topic=containers-comm-ingress-annotations) (`ingress.bluemix.net/<annotation>`) are supported. | Only [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations){: external} (`nginx.ingress.kubernetes.io/<annotation>`) are supported.|
 |Annotation application to services| Within the annotation, you can specify the app service name that you want to apply the annotation to. | Annotations are always applied to all service paths in the resource, and you can't specify service names within the annotations.|
 |Protocols| HTTP/2 and gRPC protocols are not supported.|HTTP/2 and gRPC protocols are supported.|
-|TLS secrets| The ALB can access a TLS secret in the `default` namespace, in the `ibm-cert-store` namespace, or in the same namespace where you deploy the Ingress resource.| The ALB can access a TLS secret in the same namespace where you deploy the Ingress resource only, and can't access secrets in any other namespaces. Alternatively, the ALB can access a secret in another namespace if you set the secret as the `defaultCertificate` in the [`ibm-ingress-deploy-config` configmap](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy) for all registered subdomains. |
+|TLS secrets| The ALB can access a TLS secret in the `default` namespace, in the `ibm-cert-store` namespace, or in the same namespace where you deploy the Ingress resource.| The ALB can access a TLS secret in the same namespace where you deploy the Ingress resource only, and can't access secrets in any other namespaces. Alternatively, the ALB can access a secret in another namespace if you set the secret as the `defaultCertificate` in the [`ibm-ingress-deploy-config` ConfigMap](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy) for all registered subdomains. |
 {: caption="Differences between Ingress images"}
 
 
@@ -138,7 +138,7 @@ Complete the steps to use an IBM-provided or custom domain.
     ```
     {: screen}
 
-2. If you want to use TLS and your apps are deployed in a namespace other than `default`, you must re-create the secret in the namespace where your apps exist. To find the CRN for the default Ingress secret, run `ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default`. Alternatively, you can set the secret as the `defaultCertificate` in the [`ibm-ingress-deploy-config` configmap](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy). For more information, see [Managing TLS certificates and secrets](#manage_certs).
+2. If you want to use TLS and your apps are deployed in a namespace other than `default`, you must re-create the secret in the namespace where your apps exist. To find the CRN for the default Ingress secret, run `ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default`. Alternatively, you can set the secret as the `defaultCertificate` in the [`ibm-ingress-deploy-config` ConfigMap](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy). For more information, see [Managing TLS certificates and secrets](#manage_certs).
 
     ```sh
     ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace <namespace>
@@ -363,7 +363,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
         {: codeblock}
 
         `annotations`
-        :   `kubernetes.io/ingress.class: "public-iks-k8s-nginx"`: Apply this Ingress resource to the private ALBs that run the Kubernetes Ingress image in your cluster. For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, don't specify this annotation. Instead, find the Ingress class for your configuration, and specify that class in a `spec.ingressClassName: <class_name>` field. You must also specify this custom class in an [`IngressClass`](#ingress-class-custom) resource and a `ibm-ingress-deploy-config` configmap. To customize routing for Ingress, you can add [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`). Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are not supported.
+        :   `kubernetes.io/ingress.class: "public-iks-k8s-nginx"`: Apply this Ingress resource to the private ALBs that run the Kubernetes Ingress image in your cluster. For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, don't specify this annotation. Instead, find the Ingress class for your configuration, and specify that class in a `spec.ingressClassName: <class_name>` field. You must also specify this custom class in an [`IngressClass`](#ingress-class-custom) resource and a `ibm-ingress-deploy-config` ConfigMap. To customize routing for Ingress, you can add [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`). Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are not supported.
 
         `tls.hosts`
         :   To use TLS, replace `domain` with your custom domain.
@@ -424,9 +424,9 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
 Change your ALBs from the {{site.data.keyword.containerlong_notm}} Ingress image to the Kubernetes Ingress image.
 {: shortdesc}
 
-The following steps use the Ingress resource migration tool to help you create Ingress resources, including annotations, for the Kubernetes Ingress format. The migration tool also creates a new configmap resource that is formatted for the Kubernetes Ingress implementation. Then, you change the version of your ALBs to use the community Kubernetes Ingress image.
+The following steps use the Ingress resource migration tool to help you create Ingress resources, including annotations, for the Kubernetes Ingress format. The migration tool also creates a new ConfigMap resource that is formatted for the Kubernetes Ingress implementation. Then, you change the version of your ALBs to use the community Kubernetes Ingress image.
 
-{{site.data.keyword.containerlong_notm}} Ingress migration tools are deprecated and become unsupported on 1 September 2022. Make sure to migrate your ALBs to use the Kubernetes Ingress before the migration tools become unsupported. The migration tool is intended to help you prepare your Ingress resources and configmap. However, you must verify, test, and modify your Ingress resources and configmap to ensure that they work correctly with the Kubernetes Ingress image.
+{{site.data.keyword.containerlong_notm}} Ingress migration tools are deprecated and become unsupported on 1 September 2022. Make sure to migrate your ALBs to use the Kubernetes Ingress before the migration tools become unsupported. The migration tool is intended to help you prepare your Ingress resources and ConfigMap. However, you must verify, test, and modify your Ingress resources and ConfigMap to ensure that they work correctly with the Kubernetes Ingress image.
 {: important}
 
 ### Migration FAQs
@@ -443,7 +443,7 @@ The migration tool creates one new Ingress resource for each service path that w
 
 **How do I proceed with migration warnings?**
 
-The migration tool attempts to convert the {{site.data.keyword.containerlong_notm}} Ingress annotations and configmap parameters into Kubernetes Ingress annotations and parameters that result in the same behavior. When the migration tool can't convert an annotation or parameter automatically, or when the resulting behavior is slightly different, the tool generates a warning for the corresponding resource. The warning message contains the description of the problem and links to the appropriate {{site.data.keyword.containerlong_notm}} or NGINX documentation for remediation steps.
+The migration tool attempts to convert the {{site.data.keyword.containerlong_notm}} Ingress annotations and ConfigMap parameters into Kubernetes Ingress annotations and parameters that result in the same behavior. When the migration tool can't convert an annotation or parameter automatically, or when the resulting behavior is slightly different, the tool generates a warning for the corresponding resource. The warning message contains the description of the problem and links to the appropriate {{site.data.keyword.containerlong_notm}} or NGINX documentation for remediation steps.
 
 ### Step 1: Copy TLS secrets
 {: #alb-migrate-1}
@@ -453,7 +453,7 @@ To use TLS termination, re-create your TLS secrets.
 
 In the Kubernetes Ingress implementation, the ALB can't access secrets that are in a different namespace than the Ingress resource. If you use the default Ingress secret and your Ingress resources are deployed in namespaces other than `default`, or if you import a secret from {{site.data.keyword.cloudcerts_long_notm}} and your Ingress resources are deployed in namespaces other than `ibm-cert-store`, you must re-create the secret in those namespaces. For more information, see [Managing TLS certificates and secrets](#manage_certs).
 
-Want to specify a default secret to apply to any subdomain? Instead of following these steps to copy the secret to each namespace where you have apps, you can set the secret as the `defaultCertificate` in the [`ibm-ingress-deploy-config` configmap](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy).
+Want to specify a default secret to apply to any subdomain? Instead of following these steps to copy the secret to each namespace where you have apps, you can set the secret as the `defaultCertificate` in the [`ibm-ingress-deploy-config` ConfigMap](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy).
 {: tip}
 
 1. Get the CRN of the Ingress secret for your default Ingress subdomain. To get the name of the default secret, run `ibmcloud ks cluster get -c <cluster> | grep Ingress`.
@@ -484,9 +484,9 @@ Want to specify a default secret to apply to any subdomain? Instead of following
         * For each subdomain in your Ingress resource file, a subdomain based on the test Ingress subdomain is created. For example, if you list `example.com` in your Ingress resource, the subdomain `8e7n6j5k.mycluster-a1b2cdef345678g9hi012j3kl4567890-m000.containers.appdomain.cloud` is created in the test copy. Or, if you list `*.example.com`, the subdomain `*.wc-8e7n6j5k.myCluster-a1b2cdef345678g9hi012j3kl4567890-m000.containers.appdomain.cloud` is created, for example.
         * If your Ingress resource files included TLS sections, a secret for the test subdomain is also created and is listed in the test copies.
         * If your Ingress resource files defined more than one service per file, multiple test copies are created so that only one service is defined per file.
-    * A test configmap:
+    * A test ConfigMap:
         * Formatted for the Kubernetes Ingress implementation
-        * Includes any fields that you configured in the `ibm-cloud-provider-ingress-cm` configmap
+        * Includes any fields that you configured in the `ibm-cloud-provider-ingress-cm` ConfigMap
 
     ```sh
     ibmcloud ks ingress alb migrate start --type (test | test-with-private) -c <cluster_name_or_ID>
@@ -507,7 +507,7 @@ Want to specify a default secret to apply to any subdomain? Instead of following
     ```
     {: pre}
 
-4. In the output of the previous step, review the **Resource migrations warnings** for each Ingress resource or configmap. These messages indicate fields or configurations, such as annotations, that were not migrated, and the steps to manually change the field for compatibility with the Kubernetes Ingress implementation. To resolve warnings, edit the manifest for each resource or configmap. Some differences between the images can't be migrated by this tool and must be migrated manually. To see a comparison between annotations for each image type, see [Customizing Kubernetes Ingress routing with annotations and configmaps](/docs/containers?topic=containers-comm-ingress-annotations#annotations).
+4. In the output of the previous step, review the **Resource migrations warnings** for each Ingress resource or ConfigMap. These messages indicate fields or configurations, such as annotations, that were not migrated, and the steps to manually change the field for compatibility with the Kubernetes Ingress implementation. To resolve warnings, edit the manifest for each resource or ConfigMap. Some differences between the images can't be migrated by this tool and must be migrated manually. To see a comparison between annotations for each image type, see [Customizing Kubernetes Ingress routing with annotations and configmaps](/docs/containers?topic=containers-comm-ingress-annotations#annotations).
 
     * Ingress resources
 
@@ -544,7 +544,7 @@ Want to specify a default secret to apply to any subdomain? Instead of following
     ```
     {: codeblock}
 
-6. After you verify that your test Ingress system is working properly, make local copies of your changes to the test Ingress resources, test configmap, and test ALB service. When you run the migration tool in production, any previously generated test resources are overwritten, and any changes that you made to your test copies must also be made for the production copies. Locally retaining any changes you made to your test copies can help you quickly make changes to your production copies.
+6. After you verify that your test Ingress system is working properly, make local copies of your changes to the test Ingress resources, test ConfigMap, and test ALB service. When you run the migration tool in production, any previously generated test resources are overwritten, and any changes that you made to your test copies must also be made for the production copies. Locally retaining any changes you made to your test copies can help you quickly make changes to your production copies.
 
 7. Optional: After you copy your changes, clean up the test resources.
 
@@ -555,7 +555,7 @@ Want to specify a default secret to apply to any subdomain? Instead of following
         ```
         {: pre}
 
-    * Test configmap
+    * Test ConfigMap
 
         ```sh
         kubectl delete cm ibm-k8s-controller-config-test -n kube-system
@@ -632,7 +632,7 @@ Create new ALBs that run the Kubernetes Ingress image. After you create the new 
 
     3. Save and close the file. Your changes are applied automatically.
 
-3. Create at least one ALB in each zone that runs the Kubernetes Ingress image. These ALBs read only the Ingress resources and configmap that are formatted for Kubernetes Ingress, and begin to forward traffic according to those resources. In VPC clusters, one VPC load balancer exposes all ALBs in your cluster. When you run one of the following commands to create an ALB, the new ALB immediately begins to receive traffic that is routed by the VPC load balancer. Consider creating only one ALB that runs the Kubernetes Ingres image and testing that ALB in the following steps before you create more ALBs.
+3. Create at least one ALB in each zone that runs the Kubernetes Ingress image. These ALBs read only the Ingress resources and ConfigMap that are formatted for Kubernetes Ingress, and begin to forward traffic according to those resources. In VPC clusters, one VPC load balancer exposes all ALBs in your cluster. When you run one of the following commands to create an ALB, the new ALB immediately begins to receive traffic that is routed by the VPC load balancer. Consider creating only one ALB that runs the Kubernetes Ingres image and testing that ALB in the following steps before you create more ALBs.
 
     ```sh
     ibmcloud ks ingress alb create <classic|vpc-gen2> --cluster <cluster_name_or_ID> --type <public_or_private> --zone <zone> --vlan <VLAN_ID> --version 1.2.1_2337_iks
@@ -712,7 +712,7 @@ Create new ALBs that run the Kubernetes Ingress image. After you create the new 
         ```
         {: pre}
 
-    * Original {{site.data.keyword.containerlong_notm}} Ingress configmap.
+    * Original {{site.data.keyword.containerlong_notm}} Ingress ConfigMap.
 
         ```sh
         kubectl delete cm ibm-cloud-provider-ingress-cm -n kube-system
@@ -727,7 +727,7 @@ Create new ALBs that run the Kubernetes Ingress image. After you create the new 
 If you choose to change your existing ALBs to the Kubernetes Ingress image, an ALB must first be disabled, and traffic to your apps might be disrupted. Make sure that you have at least two worker nodes per zone or [add more ALBs in a zone](#create_alb) so that other ALBs can continue to route traffic while one ALB is disabled at a time.
 {: important}
 
-1. Change the image type of one ALB to test traffic flow. When you change the ALB's image type, the ALB now only reads the Ingress resources and configmap that are formatted for Kubernetes Ingress, and begins to forward traffic according to those resources. List your ALB IDs. In the output, copy the ID and IP address for one ALB.
+1. Change the image type of one ALB to test traffic flow. When you change the ALB's image type, the ALB now only reads the Ingress resources and ConfigMap that are formatted for Kubernetes Ingress, and begins to forward traffic according to those resources. List your ALB IDs. In the output, copy the ID and IP address for one ALB.
 
     ```sh
     ibmcloud ks ingress alb ls -c <cluster>
@@ -869,7 +869,7 @@ The TLS certificate is stored as a Kubernetes secret in the `default` namespace.
     ```
     {: pre}
 
-3. Copy the secret to other namespaces. In the Kubernetes Ingress implementation, ALBs can access TLS secrets only in the same namespace that the Ingress resource is deployed to. If your Ingress resources are deployed in namespaces other than `default`, you must create a secret for the default TLS certificate in those namespaces. Alternatively, you can set the secret as the `defaultCertificate` in the [`ibm-ingress-deploy-config` configmap](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy).
+3. Copy the secret to other namespaces. In the Kubernetes Ingress implementation, ALBs can access TLS secrets only in the same namespace that the Ingress resource is deployed to. If your Ingress resources are deployed in namespaces other than `default`, you must create a secret for the default TLS certificate in those namespaces. Alternatively, you can set the secret as the `defaultCertificate` in the [`ibm-ingress-deploy-config` ConfigMap](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy).
 
     ```sh
     ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace <namespace>
@@ -1166,7 +1166,7 @@ You can configure your own classes by creating custom `IngressClass` resources a
     ```
     {: pre}
 
-3. If you want the Kubernetes Ingress ALBs in your cluster to process Ingress resources of this class, [specify the custom class in an `ibm-ingress-deploy-config` configmap and update your ALBs to pick up the changes](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy).
+3. If you want the Kubernetes Ingress ALBs in your cluster to process Ingress resources of this class, [specify the custom class in an `ibm-ingress-deploy-config` ConfigMap and update your ALBs to pick up the changes](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy).
 
 4. In your Ingress resources, specify the `ingressClassName: "<class_name>"` field in the `spec` section of your Ingress resource. Do not include the deprecated `kubernetes.io/ingress.class` annotation. Note that if you don't specify an Ingress class in an Ingress resource, then the default class is applied.
 
@@ -1179,7 +1179,7 @@ You can modify default ALB settings and add annotations to your Ingress resource
 {: shortdesc}
 
 * To manage how requests are routed to your app, specify [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`) in your Ingress resources.
-* To modify default Ingress settings, such as to enable source IP preservation or configure SSL protocols, [change the `ibm-cloud-provider-ingress-cm`, `ibm-k8s-controller-config`, or `ibm-ingress-deploy-config` configmap resources](/docs/containers?topic=containers-comm-ingress-annotations) for your Ingress ALBs.
+* To modify default Ingress settings, such as to enable source IP preservation or configure SSL protocols, [change the `ibm-cloud-provider-ingress-cm`, `ibm-k8s-controller-config`, or `ibm-ingress-deploy-config` ConfigMap resources](/docs/containers?topic=containers-comm-ingress-annotations) for your Ingress ALBs.
 
 ## Updating ALBs
 {: #alb-update}
@@ -1257,16 +1257,16 @@ If automatic updates for the Ingress ALB add-on are disabled and you want to upd
 ### Scheduling maintenance windows for automatic updates
 {: #alb_scheduled_updates}
 
-You can enable automatic updates of all Ingress ALB pods in a cluster by enabling [autoupdate](#autoupdate). If you enable autoupdate for your ALBs, you can further control and manage your ALB updates by creating a customized configmap that specifies the time you want the updates to occur and the percentage of ALBs you want to update.  
+You can enable automatic updates of all Ingress ALB pods in a cluster by enabling [autoupdate](#autoupdate). If you enable autoupdate for your ALBs, you can further control and manage your ALB updates by creating a customized ConfigMap that specifies the time you want the updates to occur and the percentage of ALBs you want to update.  
 {: shortdesc}
 
-To set a time frame for automatic updates, you set the `updateStartTime` and `updateEndTime` keys in the deployment configmap. Each key represents an assigned time in a 24 hour format (HH:MM). Note that this time is specified in coordinated universal time (UTC) rather than your local time. To specify a percentage of ALBs to update, you set the `updatePercentage` key as a whole number between 0 and 100.
+To set a time frame for automatic updates, you set the `updateStartTime` and `updateEndTime` keys in the deployment ConfigMap. Each key represents an assigned time in a 24 hour format (HH:MM). Note that this time is specified in coordinated universal time (UTC) rather than your local time. To specify a percentage of ALBs to update, you set the `updatePercentage` key as a whole number between 0 and 100.
 
-**To manage your autoupdate settings with a customized configmap:**
+**To manage your autoupdate settings with a customized ConfigMap:**
 
-1. Create a YAML file for your configmap. Specify the `updatePercentage`, `updateStartTime`, and `updateEndTime` fields as key-value pairs in the `data` field.
+1. Create a YAML file for your ConfigMap. Specify the `updatePercentage`, `updateStartTime`, and `updateEndTime` fields as key-value pairs in the `data` field.
 
-    The following example configmap sets the autoupdate function to update 35% of ALB pods in your cluster between 20:34 and 23:59 UTC.
+    The following example ConfigMap sets the autoupdate function to update 35% of ALB pods in your cluster between 20:34 and 23:59 UTC.
 
     ```yaml
     apiVersion: v1
@@ -1281,7 +1281,7 @@ To set a time frame for automatic updates, you set the `updateStartTime` and `up
     ```
     {: codeblock}
 
-2. Deploy the configmap in your cluster. The new rules apply the next time an update takes place.
+2. Deploy the ConfigMap in your cluster. The new rules apply the next time an update takes place.
 
 ```sh
 kubectl apply -f <filename>.yaml
@@ -1319,7 +1319,7 @@ By default, periodic Ingress version updates are automatically rolled out to you
     ```
     {: pre}
 
-2. Create a YAML file for an `ibm-ingress-deploy-config` configmap. For each ALB, add `'{"replicas":<number_of_replicas>}'`. Example for increasing the number of ALB pods to 4 replicas.
+2. Create a YAML file for an `ibm-ingress-deploy-config` ConfigMap. For each ALB, add `'{"replicas":<number_of_replicas>}'`. Example for increasing the number of ALB pods to 4 replicas.
 
     ```yaml
     apiVersion: v1
@@ -1334,7 +1334,7 @@ By default, periodic Ingress version updates are automatically rolled out to you
     ```
     {: codeblock}
 
-3. Create the `ibm-ingress-deploy-config` configmap in your cluster.
+3. Create the `ibm-ingress-deploy-config` ConfigMap in your cluster.
 
     ```sh
     kubectl create -f ibm-ingress-deploy-config.yaml
