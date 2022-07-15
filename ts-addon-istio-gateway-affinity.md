@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-08"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, help
 
@@ -89,7 +89,7 @@ To resolve this issue, you can either move the `istio-ingressgateway` pod to the
 Move the `istio-ingressgateway` pod to the same zone as the `ibm-cloud-provider-ip` pod.
 {: shortdesc}
 
-1. Edit the `managed-istio-custom` configmap resource.
+1. Edit the `managed-istio-custom` ConfigMap resource.
     ```sh
     kubectl edit cm managed-istio-custom -n ibm-operators
     ```
@@ -105,13 +105,13 @@ Move the `istio-ingressgateway` pod to the same zone as the `ibm-cloud-provider-
 Move the `ibm-cloud-provider-ip` pod to the same zone as the `istio-ingressgateway` pod.
 {: shortdesc}
 
-1. Edit the `managed-istio-custom` configmap resource.
+1. Edit the `managed-istio-custom` ConfigMap resource.
     ```sh
     kubectl edit cm managed-istio-custom -n ibm-operators
     ```
     {: pre}
 
-2. Note the name of the `istio-ingressgateway-zone-<1|2|3>` setting for the gateway. In this example configmap, to move the `ibm-cloud-provider-ip` pod for the gateway that exists in `dal10`, note the key called `istio-ingressgateway-zone-1`.
+2. Note the name of the `istio-ingressgateway-zone-<1|2|3>` setting for the gateway. In this example ConfigMap, to move the `ibm-cloud-provider-ip` pod for the gateway that exists in `dal10`, note the key called `istio-ingressgateway-zone-1`.
     ```yaml
     apiVersion: v1
     data:
@@ -125,7 +125,7 @@ Move the `ibm-cloud-provider-ip` pod to the same zone as the `istio-ingressgatew
     ```
     {: screen}
 
-3. Temporarily disable the gateway by changing the corresponding `istio-ingressgateway-public-<1|2|3>-enabled` setting to `"false"`. In this example configmap, to move the `ibm-cloud-provider-ip` pod for the gateway that exists in `dal10`, change `istio-ingressgateway-public-1-enabled` to `"false"`.
+3. Temporarily disable the gateway by changing the corresponding `istio-ingressgateway-public-<1|2|3>-enabled` setting to `"false"`. In this example ConfigMap, to move the `ibm-cloud-provider-ip` pod for the gateway that exists in `dal10`, change `istio-ingressgateway-public-1-enabled` to `"false"`.
     ```yaml
     apiVersion: v1
     data:
@@ -147,7 +147,7 @@ Move the `ibm-cloud-provider-ip` pod to the same zone as the `istio-ingressgatew
     ```
     {: pre}
 
-6. Open the `managed-istio-custom` configmap resource.
+6. Open the `managed-istio-custom` ConfigMap resource.
     ```sh
     kubectl edit cm managed-istio-custom -n ibm-operators
     ```

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-07-14"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, delete
 
@@ -1326,8 +1326,6 @@ Critical components, such as `containerd`, `kubelet`, `kube-proxy`, and `calico`
 {: shortdesc}
 
 You can [configure health checks for your worker node and enable Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog](https://www.ibm.com/cloud/blog/autorecovery-utilizes-consistent-hashing-high-availability){: external}.
-
-
 
 
 

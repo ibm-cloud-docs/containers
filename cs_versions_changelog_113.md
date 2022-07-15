@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-07-07"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -620,7 +620,7 @@ The following table shows the changes that are in the patch 1.13.2_1507.
 | Kubernetes | v1.12.4 | v1.13.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.2){: external}.
 | Kubernetes configuration | N/A | N/A | The Kubernetes API server audit policy configuration is updated to include logging metadata for `cluster-admin` requests and logging the request body of workload `create`, `update`, and `patch` requests. |
 | Kubernetes DNS autoscaler | 1.2.0 | 1.3.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.3.0){: external}. |
-| OpenVPN client | 2.4.6-r3-IKS-8 | 2.4.6-r3-IKS-13 | Updated image for [CVE-2018-0734](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734){: external} and [CVE-2018-5407](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407){: external}. Added `CriticalAddonsOnly` toleration to the `vpn` deployment in the `kube-system` namespace. Additionally, the pod configuration is now obtained from a secret instead of from a configmap. |
+| OpenVPN client | 2.4.6-r3-IKS-8 | 2.4.6-r3-IKS-13 | Updated image for [CVE-2018-0734](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734){: external} and [CVE-2018-5407](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407){: external}. Added `CriticalAddonsOnly` toleration to the `vpn` deployment in the `kube-system` namespace. Additionally, the pod configuration is now obtained from a secret instead of from a ConfigMap. |
 | OpenVPN server | 2.4.6-r3-IKS-8 | 2.4.6-r3-IKS-13 | Updated image for [CVE-2018-0734](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734){: external} and [CVE-2018-5407](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407){: external}. |
 | systemd | 230 | 229 | Security patch for [CVE-2018-16864](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864){: external}. |
 {: caption="Table 1. Changes since version 1.12.4_1535" caption-side="bottom"}

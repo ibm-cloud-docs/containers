@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-07-14"
+lastupdated: "2022-07-15"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july22)
+
+    * [15 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1522)
+
+        * CLI change log update
+
+        * Cluster autoscaler add-on
 
     * [14 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1422)
 
@@ -2990,7 +2996,7 @@ subcollection: containers
 
 * [Customizing the cluster autoscaler configuration values](/docs/containers?topic=containers-cluster-scaling-enable#ca_customize)
 
-    * [Customizing the cluster autoscaler add-on configmap](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-customize)
+    * [Customizing the cluster autoscaler add-on ConfigMap](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-customize)
 
 [Deploying apps to worker pools where autoscaling is enabled](/docs/containers?topic=containers-cluster-scaling-deploy-apps#cluster-scaling-deploy-apps)
 
@@ -3060,7 +3066,9 @@ subcollection: containers
 
     * [Hardware changes](/docs/containers?topic=containers-kernel#worker-default-hw)
 
-* [Modifying default worker node settings to optimize performance](/docs/containers?topic=containers-kernel#worker)
+* [Modifying worker node settings to optimize performance](/docs/containers?topic=containers-kernel#worker)
+
+    * [Modifying worker node kernel settings](/docs/containers?topic=containers-kernel#worker-kernel-ds)
 
 * [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
 
@@ -3661,9 +3669,9 @@ subcollection: containers
 
 * [Customizing NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize)
 
-    * [Editing the `node-local-dns` configmap for general configuration updates](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_configmap)
+    * [Editing the `node-local-dns` ConfigMap for general configuration updates](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_configmap)
 
-    * [Editing the `node-local-dns-config` configmap to extend with stub domains or upstream servers](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_stub_upstream)
+    * [Editing the `node-local-dns-config` ConfigMap to extend with stub domains or upstream servers](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_stub_upstream)
 
 * [Setting up zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
 
@@ -4368,7 +4376,7 @@ subcollection: containers
 
 * [Customizing the ALB deployment](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy)
 
-    * [Create a configmap to customize the Ingress deployment](/docs/containers?topic=containers-comm-ingress-annotations#create-ingress-configmap-custom)
+    * [Create a ConfigMap to customize the Ingress deployment](/docs/containers?topic=containers-comm-ingress-annotations#create-ingress-configmap-custom)
 
 * [Customizing the Ingress class](/docs/containers?topic=containers-comm-ingress-annotations#-custom-ingress-class)
 
@@ -4719,9 +4727,9 @@ subcollection: containers
 
 * [Config map reference](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-cm-ref)
 
-    * [RHEL or CentOS configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-rhel-cm)
+    * [RHEL or CentOS ConfigMap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-rhel-cm)
 
-    * [Ubuntu configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
+    * [Ubuntu ConfigMap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
 
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 
@@ -5353,6 +5361,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.431](/docs/containers?topic=containers-cs_cli_changelog#cli-10431)
 
 * [Version 1.0.430](/docs/containers?topic=containers-cs_cli_changelog#cli-10430)
 
@@ -7522,6 +7532,10 @@ subcollection: containers
     * [Change log for patch update 1.1.0_475, released 30 March 2022](/docs/containers?topic=containers-ca_changelog#110475_ca)
 
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
+
+* [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
+
+    * [Change log for patch update 1.0.6_742, released 15 July 2022](/docs/containers?topic=containers-ca_changelog#105694_ca)
 
 * [Version 1.0.5](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
 

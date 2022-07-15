@@ -26,8 +26,6 @@ content-type: troubleshoot
 * ![VPC](../icons/vpc.svg "VPC") VPC
 
 
-
-
 When you install the {{site.data.keyword.cos_full_notm}} `ibmc` Helm plug-in, the installation fails with one of the following errors:
 {: tsSymptoms}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, help
 
@@ -36,7 +36,7 @@ Review the following possible causes:
 To verify the control plane components installation:
 {: tsResolve}
 
-1. Check the values of any customizations that you specified in the customization configmap. For example, if the value of the `istio-components-pilot-requests-cpu` setting is too high, control plane components might not be scheduled.
+1. Check the values of any customizations that you specified in the customization ConfigMap. For example, if the value of the `istio-components-pilot-requests-cpu` setting is too high, control plane components might not be scheduled.
     ```sh
     kubectl describe cm managed-istio-custom -n ibm-operators
     ```sh
@@ -48,7 +48,7 @@ To verify the control plane components installation:
     ```
     {: pre}
 
-3. Optional: To refresh your `managed-istio-custom` configmap resource, delete the configmap from your cluster. After about 5 minutes, a default configmap that contains the original installation settings is created in your cluster. The Istio operator reconciles the installation of Istio to the original add-on settings, including the core components of the Istio control plane.
+3. Optional: To refresh your `managed-istio-custom` ConfigMap resource, delete the ConfigMap from your cluster. After about 5 minutes, a default ConfigMap that contains the original installation settings is created in your cluster. The Istio operator reconciles the installation of Istio to the original add-on settings, including the core components of the Istio control plane.
     ```sh
     kubectl delete cm managed-istio-custom -n ibm-operators
     ```

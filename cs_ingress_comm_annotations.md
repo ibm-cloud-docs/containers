@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-31"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -26,7 +26,7 @@ Modify default ALB settings and add annotations to your Ingress resources for AL
 To customize routing for Ingress, you can add [Kubernetes NGINX annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/){: external} (`nginx.ingress.kubernetes.io/<annotation>`). Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are **not** supported.
 {: shortdesc}
 
-The following sections compares the custom {{site.data.keyword.containerlong_notm}} annotations with equivalent Kubernetes NGINX annotations. If no equivalent Kubernetes NGINX annotation exists, alternate options, such as configuring a field in the `ibm-k8s-controller-config` configmap or the `ibm-ingress-deploy-config` configmap, are listed.
+The following sections compares the custom {{site.data.keyword.containerlong_notm}} annotations with equivalent Kubernetes NGINX annotations. If no equivalent Kubernetes NGINX annotation exists, alternate options, such as configuring a field in the `ibm-k8s-controller-config` ConfigMap or the `ibm-ingress-deploy-config` ConfigMap, are listed.
 
 Kubernetes NGINX annotations are always applied to all service paths in the resource, and you can't specify service names within the annotations.
 {: note}
@@ -44,7 +44,7 @@ ingress.bluemix.net/add-host-port: "enabled=true serviceName=app1"
 ```
 {: screen}
 
-Kubernetes Ingress field: No equivalent annotation exists. Configure proxying external services in a [server snippet annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-snippet){: external} or as an `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-set-headers){: external}.
+Kubernetes Ingress field: No equivalent annotation exists. Configure proxying external services in a [server snippet annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-snippet){: external} or as an `ibm-k8s-controller-config` ConfigMap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-set-headers){: external}.
 
 
 ### ALB ID
@@ -214,7 +214,7 @@ public-ports: "80;443;9443"
 #### Kubernetes Ingress fields
 {: #kube-ingress-fields}
 
-1. `ibm-ingress-deploy-config` configmap [fields](#comm-customize-deploy).
+1. `ibm-ingress-deploy-config` ConfigMap [fields](#comm-customize-deploy).
 
     ```sh
     httpPort=8080
@@ -250,7 +250,7 @@ proxy-set-headers: "ingress-nginx/custom-headers"
 ```
 {: screen}
 
-For the `custom-headers` configmap requirements, see [this example](https://github.com/kubernetes/ingress-nginx/blob/main/docs/examples/customization/custom-headers/custom-headers.yaml){: external}.
+For the `custom-headers` ConfigMap requirements, see [this example](https://github.com/kubernetes/ingress-nginx/blob/main/docs/examples/customization/custom-headers/custom-headers.yaml){: external}.
 
 
 ### Custom response header
@@ -308,7 +308,7 @@ ingress.bluemix.net/redirect-to-https: "True"
 
 Kubernetes Ingress fields: HTTP redirects to HTTPS by default. To disable:
 
-* `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#server-side-https-enforcement-through-redirect){: external}:
+* `ibm-k8s-controller-config` ConfigMap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#server-side-https-enforcement-through-redirect){: external}:
     ```sh
     ssl-redirect: "false"
     ```
@@ -556,7 +556,7 @@ ingress.bluemix.net/proxy-next-upstream-config: "serviceName=app1 retries=3 time
 {: screen}
 
 Kubernetes Ingress fields:
-* Global setting: `ibm-k8s-controller-config` configmap [fields](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream){: external}:
+* Global setting: `ibm-k8s-controller-config` ConfigMap [fields](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream){: external}:
     ```sh
     retry-non-idempotent: true
     proxy-next-upstream: error timeout http_500
@@ -606,7 +606,7 @@ ingress.bluemix.net/response-remove-headers: |
 ```
 {: screen}
 
-Kubernetes Ingress field: No equivalent annotation exists. Configure response header removal in a [location snippet](https://github.com/openresty/headers-more-nginx-module#more_clear_headers){: external}, or use the [`proxy_hide_header` field](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header){: external} as a [configuration snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external} in the `ibm-k8s-controller-config` configmap.
+Kubernetes Ingress field: No equivalent annotation exists. Configure response header removal in a [location snippet](https://github.com/openresty/headers-more-nginx-module#more_clear_headers){: external}, or use the [`proxy_hide_header` field](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header){: external} as a [configuration snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external} in the `ibm-k8s-controller-config` ConfigMap.
 
 
 ### Rewrite paths
@@ -726,7 +726,7 @@ ingress.bluemix.net/tcp-ports: "serviceName=app1 ingressPort=9000 servicePort=80
 {: screen}
 
 
-1. Create a `tcp-services` configmap to specify your TCP port, such as the following example ports. For the requirements of the `tcp-services` configmap, see [this blog](https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/){: external}.
+1. Create a `tcp-services` ConfigMap to specify your TCP port, such as the following example ports. For the requirements of the `tcp-services` ConfigMap, see [this blog](https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/){: external}.
     ```yaml
     apiVersion: v1
     kind: ConfigMap
@@ -738,14 +738,14 @@ ingress.bluemix.net/tcp-ports: "serviceName=app1 ingressPort=9000 servicePort=80
     ```
     {: codeblock}
 
-2. Create the configmap in the `kube-system` namespace.
+2. Create the ConfigMap in the `kube-system` namespace.
 
     ```sh
     kubectl apply -f tcp-services.yaml -n kube-system
     ```
     {: pre}
 
-3. Specify the `tcp-services` configmap as a field in the [`ibm-ingress-deploy-config` configmap](#comm-customize-deploy).
+3. Specify the `tcp-services` ConfigMap as a field in the [`ibm-ingress-deploy-config` ConfigMap](#comm-customize-deploy).
 
     ```sh
     "tcpServicesConfig":"kube-system/tcp-services"
@@ -783,7 +783,7 @@ ingress.bluemix.net/upstream-keepalive: "serviceName=app1 requests=32”
 ```
 {: screen}
 
-Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#upstream-keepalive-requests){: external}:
+Kubernetes `ibm-k8s-controller-config` ConfigMap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#upstream-keepalive-requests){: external}:
 
 ```sh
 upstream-keepalive-requests: 32
@@ -832,7 +832,7 @@ Kubernetes Ingress field: Currently, no configuration option for the Kubernetes 
 ## Customizing the ALB deployment
 {: #comm-customize-deploy}
 
-Customize the deployment for ALBs that run the Kubernetes Ingress image by creating an `ibm-ingress-deploy-config` configmap.
+Customize the deployment for ALBs that run the Kubernetes Ingress image by creating an `ibm-ingress-deploy-config` ConfigMap.
 {: shortdesc}
 
 1. Get the names of the services that expose each ALB.
@@ -851,10 +851,10 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
         ```
         {: pre}
 
-### Create a configmap to customize the Ingress deployment
+### Create a ConfigMap to customize the Ingress deployment
 {: #create-ingress-configmap-custom}
 
-1. Create a YAML file for an `ibm-ingress-deploy-config` configmap. For each ALB ID, you can specify one or more of the following optional settings. Note that you can specify only the settings that you want to configure, and don't need to specify all the settings.
+1. Create a YAML file for an `ibm-ingress-deploy-config` ConfigMap. For each ALB ID, you can specify one or more of the following optional settings. Note that you can specify only the settings that you want to configure, and don't need to specify all the settings.
 
     ```yaml
     apiVersion: v1
@@ -898,10 +898,10 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
     :   By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods. For more information, see [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-types#scale_albs).
     
     `tcpServicesConfig`
-    :   Specify a configmap and the namespace that the configmap is in, such as [`kube-system/tcp-services`](#tcp-ports-non-standard), that contains information about accessing your app service through a non-standard TCP port.
+    :   Specify a ConfigMap and the namespace that the ConfigMap is in, such as [`kube-system/tcp-services`](#tcp-ports-non-standard), that contains information about accessing your app service through a non-standard TCP port.
 
 
-2. Create the `ibm-ingress-deploy-config` configmap in your cluster.
+2. Create the `ibm-ingress-deploy-config` ConfigMap in your cluster.
     ```sh
     kubectl create -f ibm-ingress-deploy-config.yaml
     ```
@@ -1289,7 +1289,7 @@ To enable source IP preservation, edit the load balancer service that exposes an
 ## Configuring SSL protocols and SSL ciphers at the HTTP level
 {: #ssl_protocols_ciphers}
 
-Enable SSL protocols and ciphers at the global HTTP level by editing the `ibm-k8s-controller-config` configmap.
+Enable SSL protocols and ciphers at the global HTTP level by editing the `ibm-k8s-controller-config` ConfigMap.
 {: shortdesc}
 
 For example, if you still have legacy clients that require TLS 1.0 or 1.1 support, you must manually enable these TLS versions to override the default setting of TLS 1.2 and TLS 1.3 only.
@@ -1297,9 +1297,9 @@ For example, if you still have legacy clients that require TLS 1.0 or 1.1 suppor
 When you specify the enabled protocols for all hosts, the TLSv1.1 and TLSv1.2 parameters (1.1.13, 1.0.12) work only when OpenSSL 1.0.1 or higher is used. The TLSv1.3 parameter (1.13.0) works only when OpenSSL 1.1.1 built with TLSv1.3 support is used.
 {: note}
 
-To edit the configmap to enable SSL protocols and ciphers:
+To edit the ConfigMap to enable SSL protocols and ciphers:
 
-1. Edit the configuration file for the `ibm-k8s-controller-config` configmap resource.
+1. Edit the configuration file for the `ibm-k8s-controller-config` ConfigMap resource.
 
     ```sh
     kubectl edit cm ibm-k8s-controller-config -n kube-system
@@ -1322,7 +1322,7 @@ To edit the configmap to enable SSL protocols and ciphers:
 
 3. Save the configuration file.
 
-4. Verify that the configmap changes were applied. The changes are applied to your ALBs automatically.
+4. Verify that the ConfigMap changes were applied. The changes are applied to your ALBs automatically.
 
     ```sh
     kubectl get cm ibm-k8s-controller-config -n kube-system -o yaml
@@ -1381,10 +1381,10 @@ To optimize performance of your Ingress ALBs, you can change the default setting
 ### Enabling log buffering and flush timeout
 {: #access-log}
 
-By default, the Ingress ALB logs each request as it arrives. If you have an environment that is heavily used, logging each request as it arrives can greatly increase disk I/O utilization. To avoid continuous disk I/O, you can enable log buffering and flush timeout for the ALB by editing the `ibm-k8s-controller-config` Ingress configmap. When buffering is enabled, instead of performing a separate write operation for each log entry, the ALB buffers a series of entries and writes them to the file together in a single operation.
+By default, the Ingress ALB logs each request as it arrives. If you have an environment that is heavily used, logging each request as it arrives can greatly increase disk I/O utilization. To avoid continuous disk I/O, you can enable log buffering and flush timeout for the ALB by editing the `ibm-k8s-controller-config` Ingress ConfigMap. When buffering is enabled, instead of performing a separate write operation for each log entry, the ALB buffers a series of entries and writes them to the file together in a single operation.
 {: shortdesc}
 
-1. Edit the `ibm-k8s-controller-config` configmap.
+1. Edit the `ibm-k8s-controller-config` ConfigMap.
     ```sh
     kubectl edit cm ibm-k8s-controller-config -n kube-system
     ```
@@ -1420,7 +1420,7 @@ By default, the Ingress ALB logs each request as it arrives. If you have an envi
 Keepalive connections can have a major impact on performance by reducing the CPU and network usage that is needed to open and close connections. To optimize the performance of your ALBs, you can change the maximum number of keepalive connections between the ALB and the client and how long the keepalive connections can last.
 {: shortdesc}
 
-1. Edit the `ibm-k8s-controller-config` configmap.
+1. Edit the `ibm-k8s-controller-config` ConfigMap.
     ```sh
     kubectl edit cm ibm-k8s-controller-config -n kube-system
     ```
@@ -1444,7 +1444,7 @@ Keepalive connections can have a major impact on performance by reducing the CPU
 
 3. Save and close the configuration file. The changes are applied to your ALBs automatically.
 
-4. Verify that the configmap changes were applied.
+4. Verify that the ConfigMap changes were applied.
     ```sh
     kubectl get cm ibm-k8s-controller-config -n kube-system -o yaml
     ```
@@ -1461,7 +1461,7 @@ Each ALB has NGINX worker processes that process the client connections and comm
 * The `max-worker-connections` field sets the maximum number of simultaneous connections that can be handled by the NGINX worker processes for one ALB. The default value is `16384`. Note that the `max-worker-connections` parameter includes all connections that the ALB proxies, not just connections with clients. Additionally, the actual number of simultaneous connections can't exceed the [limit on the maximum number of open files](#max-worker-files), which is set by the `max-worker-open-files` parameter. If you set the value of `max-worker-connections` to `0`, the value for `max-worker-open-files` is used instead.
 * The `worker-processes` field sets the maximum number of NGINX worker processes for one ALB. The default value is `"auto"`, which indicates that the number of worker processes matches the number of cores on the worker node where the ALB is deployed. You can change this value to a number if your worker processes must perform high levels of I/0 operations.
 
-1. Edit the `ibm-k8s-controller-config` configmap.
+1. Edit the `ibm-k8s-controller-config` ConfigMap.
     ```sh
     kubectl edit cm ibm-k8s-controller-config -n kube-system
     ```
@@ -1483,7 +1483,7 @@ Each ALB has NGINX worker processes that process the client connections and comm
 
 3. Save the configuration file. The changes are applied to your ALBs automatically.
 
-4. Verify that the configmap changes were applied.
+4. Verify that the ConfigMap changes were applied.
     ```sh
     kubectl get cm ibm-k8s-controller-config -n kube-system -o yaml
     ```
@@ -1497,7 +1497,7 @@ Change the default maximum for the number of files that can be opened by each wo
 
 Each ALB has NGINX worker processes that process the client connections and communicate with the upstream servers for the apps that the ALB exposes. If your worker processes are hitting the maximum number of files that can be opened, you might see a `Too many open files` error in your NGINX logs. By default, the `max-worker-open-files` parameter is set to `0`, which indicates that the value from the following formula is used: `system limit of maximum open files / worker-processes - 1024`. If you change the value to another integer, the formula no longer applies.
 
-1. Edit the `ibm-k8s-controller-config` configmap.
+1. Edit the `ibm-k8s-controller-config` ConfigMap.
     ```sh
     kubectl edit cm ibm-k8s-controller-config -n kube-system
     ```
@@ -1518,7 +1518,7 @@ Each ALB has NGINX worker processes that process the client connections and comm
 
 3. Save the configuration file. The changes are applied to your ALBs automatically.
 
-4. Verify that the configmap changes were applied.
+4. Verify that the ConfigMap changes were applied.
 
     ```sh
     kubectl get cm ibm-k8s-controller-config -n kube-system -o yaml
@@ -1530,4 +1530,3 @@ Each ALB has NGINX worker processes that process the client connections and comm
 
 To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](/docs/containers?topic=containers-kernel). Worker nodes are automatically provisioned with optimized kernel tuning, so change these settings only if you have specific performance optimization requirements.
 {: shortdesc}
-

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-07-14"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-july22}
 
 
+
+### 15 July 2022
+{: #containers-july1522}
+
+CLI change log update
+:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.431.
+
+Cluster autoscaler add-on
+:   Versions `1.0.6_742` is available. See [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
 
 ### 14 July 2022
 {: #containers-july1422}
@@ -596,7 +605,7 @@ Istio add-on
 :   [1.22](/docs/containers?topic=containers-cs_versions#cs_versions_available) is now the default version.
 
 Maintenance Windows for {{site.data.keyword.containershort}} ALBs
-:   You can now further control and manage your ALB updates by [creating a customized configmap](/docs/containers?topic=containers-ingress-types#alb_scheduled_updates) that specifies the time you want the updates to occur and the percentage of ALBs you want to update.
+:   You can now further control and manage your ALB updates by [creating a customized ConfigMap](/docs/containers?topic=containers-ingress-types#alb_scheduled_updates) that specifies the time you want the updates to occur and the percentage of ALBs you want to update.
 
 
 
@@ -2165,7 +2174,7 @@ Istio add-on
 :   [Version 1.8.2 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#182) is released.
 
 New! {{site.data.keyword.redhat_openshift_notm}} Do (`odo`) CLI tutorial
-:   Looking to develop apps without using `kubectl` system admin commands or YAML configuration files? Check out the [Developing on clusters with the {{site.data.keyword.redhat_openshift_notm}} Do CLI](/docs/containers?topic=containers-odo-tutorial) tutorial for a quick guide on using `odo` to package and push your apps to your cluster. You no longer need an {{site.data.keyword.redhat_openshift_notm}} cluster to use `odo`, but can use `odo` with any Kubernetes cluster.
+:   Looking to develop apps without using `kubectl` system admin commands or YAML configuration files? Check out the [Developing on clusters with the {{site.data.keyword.redhat_openshift_notm}} Do CLI](/docs/containers?topic=containers-odo-tutorial) tutorial for a quick guide on using `odo` to package and push your apps to your cluster. You no longer need a {{site.data.keyword.redhat_openshift_notm}} cluster to use `odo`, but can use `odo` with any Kubernetes cluster.
 
 New! Private service endpoint allowlists
 :   You can now control access to your private cloud service endpoint by [creating a subnet allowlist](/docs/containers?topic=containers-access_cluster#private-se-allowlist). Only authorized requests to your cluster master that originate from subnets in the allowlist are permitted through the cluster's private cloud service endpoint.

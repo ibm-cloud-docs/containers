@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-16"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
 
@@ -35,7 +35,7 @@ Before you begin, review the following considerations for using custom gateways.
 {: shortdesc}
 
 * The managed Istio add-on does not manage or reconcile any custom gateways that you create. You are responsible for creating, managing, and maintaining these resources.
-* If you need to debug your custom ingress or egress gateway setups, check the logs for the `addon-istio-operator` (Istio version 1.10 or later) or `managed-istio-operator` (Istio version 1.9 or earlier) pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`. The Istio operator validates and reconciles any custom Istio operator (IOP) changes that you make. Additionally, ensure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers.
+* If you need to debug your custom ingress or egress gateway setups, check the logs for the `addon-istio-operator` (Istio version 1.10 or later) or `managed-istio-operator` (Istio version 1.9 or earlier) pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`. The Istio operator validates and reconciles any custom Istio operator (IOP) changes that you make. Additionally, ensure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` ConfigMap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers.
 
 ## Creating a custom ingress gateway for public traffic
 {: #custom-ingress-gateway-public}
@@ -443,7 +443,7 @@ If you don't need the default `istio-ingressgateway` or `istio-egressgateway` de
 If you want you apps to be accessible to clients, ensure that at least one gateway load balancer is enabled and configured to route traffic to your apps. If you disable the default gateway load balancers in all zones, your app is no longer exposed and can't be accessed externally.
 {: note}
 
-1. Edit the `managed-istio-custom` configmap resource.
+1. Edit the `managed-istio-custom` ConfigMap resource.
     ```sh
     kubectl edit cm managed-istio-custom -n ibm-operators
     ```

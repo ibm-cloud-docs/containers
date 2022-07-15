@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-21"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, istio, add-on
 
@@ -693,7 +693,7 @@ Updates in this version
 
 :   The `IstioOperator` deployment is now created by the Istio add-on instead of the Operator Lifecycle Manager (OLM). If you choose to uninstall the add-on, steps are included to uninstall the [deployment resources for the operator](/docs/containers?topic=containers-istio#uninstall_resources).
 
-:   In multizone clusters, the zone labels for default Istio ingress gateways are now sorted in reverse order to improve resiliency. This change does not affect any ingress gateways that are already enabled and assigned a zone label in the `managed-istio-custom` configmap. 
+:   In multizone clusters, the zone labels for default Istio ingress gateways are now sorted in reverse order to improve resiliency. This change does not affect any ingress gateways that are already enabled and assigned a zone label in the `managed-istio-custom` ConfigMap. 
 
 :   Resolves the following CVEs
     - [CVE-2021-3520](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3520){: external}.
@@ -843,7 +843,7 @@ Updates in this version
     - [Istio 1.9.1](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.1/){: external}
     - [Istio 1.9.2](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.2/){: external}. 
 
-:   The `istio-components-pilot-requests-cpu` setting is added to the `managed-istio-custom` configmap resource to change the default CPU request of `500` for `istiod`.
+:   The `istio-components-pilot-requests-cpu` setting is added to the `managed-istio-custom` ConfigMap resource to change the default CPU request of `500` for `istiod`.
 
   
 ## Version 1.8 (unsupported)
@@ -1002,8 +1002,8 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.8](https://istio.io/latest/news/releases/1.8.x/announcing-1.8/){: external}. 
 
-:   If you created a custom `IstioOperator` (IOP) resource, remove the `revision` field from the resource before you update your add-on to version 1.8 so that the custom gateways use version 1.8 of `istiod`. After you update your Istio add-on, update the tag for any custom gateways to 1.8. All `istio-monitoring` support is removed, and in the `managed-istio-custom` configmap, the `istio-monitoring-components` and `istio-kiali-dashboard-viewOnlyMode` options are unsupported. To use monitoring with Istio, you must install the Kiali, Prometheus, Jaeger, and Grafana components separately from the Istio add-on. For more information, see the [Istio documentation](https://istio.io/latest/docs/ops/integrations/){: external}. 
-:   The `istio-meshConfig-enableTracing` and `istio-egressgateway-public-1-enabled` optional settings are added to the [`managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize). 
+:   If you created a custom `IstioOperator` (IOP) resource, remove the `revision` field from the resource before you update your add-on to version 1.8 so that the custom gateways use version 1.8 of `istiod`. After you update your Istio add-on, update the tag for any custom gateways to 1.8. All `istio-monitoring` support is removed, and in the `managed-istio-custom` ConfigMap, the `istio-monitoring-components` and `istio-kiali-dashboard-viewOnlyMode` options are unsupported. To use monitoring with Istio, you must install the Kiali, Prometheus, Jaeger, and Grafana components separately from the Istio add-on. For more information, see the [Istio documentation](https://istio.io/latest/docs/ops/integrations/){: external}. 
+:   The `istio-meshConfig-enableTracing` and `istio-egressgateway-public-1-enabled` optional settings are added to the [`managed-istio-custom` ConfigMap resource](/docs/containers?topic=containers-istio#customize). 
 
 ## Version 1.7 (unsupported)
 {: #v17}
@@ -1191,7 +1191,7 @@ Updates in this version
 
 :   For more information, see the [Istio documentation](https://istio.io/latest/docs/ops/integrations/){: external}. 
 
-:   The `istio-ingressgateway-public-(n)-enabled` and `istio-ingressgateway-zone-(n)` options in the [`managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize) are generally available for production use. 
+:   The `istio-ingressgateway-public-(n)-enabled` and `istio-ingressgateway-zone-(n)` options in the [`managed-istio-custom` ConfigMap resource](/docs/containers?topic=containers-istio#customize) are generally available for production use. 
   
 
   
@@ -1410,7 +1410,7 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.6](https://istio.io/latest/news/releases/1.6.x/announcing-1.6/){: external}. 
 
-:   Support is added for the `istio-knative-cluster-local-gateway-enabled` and `istio-monitoring-telemetry` options in the [`managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize). You can use these options to manage inclusion of Knative apps in the service mesh and the Istio telemetry enablement. Support for {{site.data.keyword.mon_full_notm}} is enabled for Istio by default.
+:   Support is added for the `istio-knative-cluster-local-gateway-enabled` and `istio-monitoring-telemetry` options in the [`managed-istio-custom` ConfigMap resource](/docs/containers?topic=containers-istio#customize). You can use these options to manage inclusion of Knative apps in the service mesh and the Istio telemetry enablement. Support for {{site.data.keyword.mon_full_notm}} is enabled for Istio by default.
   
   
 
@@ -1595,7 +1595,7 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.5](https://istio.io/latest/news/releases/1.5.x/announcing-1.5/change-notes/){: external}. 
 
-:   The Citadel secret discovery service (SDS) is now enabled by default to provide identity provisioning and certification for workloads in the service mesh. [With the `managed-istio-custom` configmap resource, you can customize a set of Istio configuration options](/docs/containers?topic=containers-istio#customize). These settings include extra control over monitoring, logging, and networking in your control plane and service mesh. Beta: By default, one public Istio load balancer, `istio-ingressgateway`, is enabled in your cluster. To achieve higher availability, you can now enable an Istio load balancer in each zone of your cluster. For more information, see [Enabling or disabling public Istio load balancers](/docs/containers?topic=containers-istio-mesh#config-gateways). The Prometheus, Grafana, Jaeger, and Kiali monitoring components are disabled by default due to current security concerns in the community release of Istio that can't be adequately addressed for a production environment. If you use {{site.data.keyword.mon_full_notm}} to monitor your Istio-managed apps, update the `sysdig-agent` configmap so that sidecar metrics are tracked. Changes can't be made to the Kiali dashboard in view-only mode by default. You can change this setting by [editing the `managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize). Your cluster must have a secret with credentials to Grafana to access the Grafana dashboard. 
+:   The Citadel secret discovery service (SDS) is now enabled by default to provide identity provisioning and certification for workloads in the service mesh. [With the `managed-istio-custom` ConfigMap resource, you can customize a set of Istio configuration options](/docs/containers?topic=containers-istio#customize). These settings include extra control over monitoring, logging, and networking in your control plane and service mesh. Beta: By default, one public Istio load balancer, `istio-ingressgateway`, is enabled in your cluster. To achieve higher availability, you can now enable an Istio load balancer in each zone of your cluster. For more information, see [Enabling or disabling public Istio load balancers](/docs/containers?topic=containers-istio-mesh#config-gateways). The Prometheus, Grafana, Jaeger, and Kiali monitoring components are disabled by default due to current security concerns in the community release of Istio that can't be adequately addressed for a production environment. If you use {{site.data.keyword.mon_full_notm}} to monitor your Istio-managed apps, update the `sysdig-agent` ConfigMap so that sidecar metrics are tracked. Changes can't be made to the Kiali dashboard in view-only mode by default. You can change this setting by [editing the `managed-istio-custom` ConfigMap](/docs/containers?topic=containers-istio#customize). Your cluster must have a secret with credentials to Grafana to access the Grafana dashboard. 
   
   
 ## Version 1.4 (unsupported)

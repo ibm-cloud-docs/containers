@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, vlan
 
@@ -51,7 +51,7 @@ Did you create a cluster with only a private cloud service endpoint before you e
     ```
     {: pre}
 
-5. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the configmap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
+5. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the ConfigMap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
 6. Update all the worker nodes in your cluster to pick up the private cloud service endpoint configuration.
 
     By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must [reload the worker nodes manually](/docs/containers?topic=containers-kubernetes-service-cli). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.
@@ -98,7 +98,7 @@ If you previously disabled the public endpoint, you can re-enable it.
     ```
     {: pre}
 
-3. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the configmap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
+3. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the ConfigMap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
 4. Update all the worker nodes in your cluster to remove the public cloud service endpoint configuration.
     ```sh
     ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
@@ -130,7 +130,7 @@ To disable the public cloud service endpoint, you must first enable the private 
     ```
     {: pre}
 
-4. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the configmap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
+4. [Create a ConfigMap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the ConfigMap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
 
 5. Update all the worker nodes in your cluster to remove the public cloud service endpoint configuration.
     By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually with the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.
@@ -171,7 +171,7 @@ Note that you can't disable the private cloud service endpoint after you enable 
     ```
     {: pre}
 
-5. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the configmap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
+5. [Create a ConfigMap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the ConfigMap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
 
 6. Update all the worker nodes in your cluster to pick up the private cloud service endpoint configuration.
 

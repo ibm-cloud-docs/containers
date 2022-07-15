@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-14"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, ic, ks, kubectl
 
@@ -116,8 +116,7 @@ Using both {{site.data.keyword.openshiftlong_notm}} and Ubuntu {{site.data.keywo
         ```
         {: pre}
 
-2. Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.23.
-- [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/)
+2. Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.23. [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/).
 
 3. If you use OS X or Linux, move the executable file to the `/usr/local/bin` directory.
     ```sh
@@ -543,7 +542,7 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
 1. In the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/){: external} menu bar, click the {{site.data.keyword.cloud-shell_short}} icon ![{{site.data.keyword.cloud-shell_notm}} icon](../icons/terminal-cloud-shell.svg).
 2. A session starts and automatically logs you in to the {{site.data.keyword.cloud_notm}} CLI with your current account credentials.
 3. Target your session context to the cluster that you want to work with so that you can manage the cluster with `kubectl` commands.
-    1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable. To access an {{site.data.keyword.redhat_openshift_notm}} cluster from the {{site.data.keyword.cloud-shell_notm}}, see [Using the {{site.data.keyword.cloud-shell_notm}} in your browser](/docs/openshift?topic=openshift-openshift-cli#cloud-shell).
+    1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable. To access a {{site.data.keyword.redhat_openshift_notm}} cluster from the {{site.data.keyword.cloud-shell_notm}}, see [Using the {{site.data.keyword.cloud-shell_notm}} in your browser](/docs/openshift?topic=openshift-openshift-cli#cloud-shell).
         ```sh
         ibmcloud ks cluster config --cluster <cluster_name_or_ID>
         ```
@@ -560,7 +559,6 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
         <cluster_name>/<cluster_ID>
         ```
         {: screen}
-
 
 
 

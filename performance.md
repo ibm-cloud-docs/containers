@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, kernel
 
@@ -51,8 +51,14 @@ To change the compute hardware, such as the CPU and memory per worker node, choo
 * [Create a worker pool](/docs/containers?topic=containers-add_workers). The instructions vary depending on the type of infrastructure for the cluster, such as classic, VPC, or gateway clusters.
 * [Update the flavor](/docs/containers?topic=containers-update#machine_type) in your cluster by creating a worker pool and removing the previous worker pool.
 
-## Modifying default worker node settings to optimize performance
+## Modifying worker node settings to optimize performance
 {: #worker}
+
+
+
+
+### Modifying worker node kernel settings
+{: #worker-kernel-ds}
 
 If you have specific performance optimization requirements, you can change the default settings for the Linux kernel `sysctl` parameters on worker nodes.
 {: shortdesc}
@@ -122,15 +128,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: codeblock}
 
-2. Apply the daemon set to your worker nodes. The changes are applied immediately.
+1. Apply the daemon set to your worker nodes. The changes are applied immediately.
     ```sh
     kubectl apply -f worker-node-kernel-settings.yaml
     ```
     {: pre}
 
-
-
-To revert your worker nodes' `sysctl` parameters to the default values set by {{site.data.keyword.containerlong_notm}}:
+To revert your worker nodes `sysctl` parameters to the default values, follow these steps.
 
 1. Delete the daemon set. The `initContainers` that applied the custom settings are removed.
     ```sh
@@ -138,7 +142,7 @@ To revert your worker nodes' `sysctl` parameters to the default values set by {{
     ```
     {: pre}
 
-2. [Reboot all worker nodes in the cluster](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot). The worker nodes come back online with the default values applied.
+1. [Reboot all worker nodes in the cluster](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot). The worker nodes come back online with the default values applied.
 
 
 
@@ -270,7 +274,7 @@ data:
 ```
 {: screen}
 
-This example shows a configmap with all values defined.
+This example shows a ConfigMap with all values defined.
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -303,15 +307,15 @@ memoryPerNode: 6Mi
 #### Edit the configmap
 {: #edit-configmap}
 
-You can edit the configmap with the `kubectl edit` command:
+You can edit the ConfigMap with the `kubectl edit` command:
 ```sh
 kubectl edit cm metrics-server-config -n kube-system
 ```
 {: pre}
 
-Add or edit the fields you want to change, then save the configmap and exit the editor.
+Add or edit the fields you want to change, then save the ConfigMap and exit the editor.
 
-The {{site.data.keyword.cloud_notm}}-provided `metrics-server` monitors the configmap for changes and updates the deployment resource requests automatically. It can take up to 10 minutes for the `metrics-server` to detect the change and roll out a new set of pods based on the updated settings.
+The {{site.data.keyword.cloud_notm}}-provided `metrics-server` monitors the ConfigMap for changes and updates the deployment resource requests automatically. It can take up to 10 minutes for the `metrics-server` to detect the change and roll out a new set of pods based on the updated settings.
 
 #### Restore the default settings
 {: #restore-default}
@@ -370,7 +374,7 @@ If the `Last State` shows a `Reason` of `OOMKilled`, increase the memory request
 ```
 {: screen}
 
-If the `Last state` shows a shows a `Reason` of `Error` and Events such as those in the following example, increase the CPU requests in the `metrics-server-config` configmap in 100m increments or larger until the metrics-server is stable and runs for several hours or longer without being killed due to probe timeouts.
+If the `Last state` shows a shows a `Reason` of `Error` and Events such as those in the following example, increase the CPU requests in the `metrics-server-config` ConfigMap in 100m increments or larger until the metrics-server is stable and runs for several hours or longer without being killed due to probe timeouts.
 ```sh
     Last State:     Terminated
       Reason: Error
@@ -645,7 +649,7 @@ spec:
 
 
 
-1. Edit the `calico-config` configmap resource.
+1. Edit the `calico-config` ConfigMap resource.
     ```sh
     kubectl edit cm calico-config -n kube-system
     ```
@@ -653,7 +657,7 @@ spec:
 
 2. In the `data` section, add a `calico_mtu_override: "<new_MTU>"` field and specify the new MTU value for Calico. Note that the quotation marks (`"`) around the new MTU value are required.
 
-    Do not change the values of `mtu` or `veth_mtu`. Changing any other settings besides the `calico_mtu_override` field for the Calico plug-in in this configmap is not supported.
+    Do not change the values of `mtu` or `veth_mtu`. Changing any other settings besides the `calico_mtu_override` field for the Calico plug-in in this ConfigMap is not supported.
     {: important}
 
     ```yaml
@@ -759,7 +763,7 @@ If you must use `hostPorts`, don't disable the port map plug-in.
 
 To disable the port map plug-in:
 
-1. Edit the `calico-config` configmap resource.
+1. Edit the `calico-config` ConfigMap resource.
     ```sh
     kubectl edit cm calico-config -n kube-system
     ```
@@ -803,7 +807,7 @@ To disable the port map plug-in:
     ```
     {: codeblock}
 
-    Changing any other settings for the Calico plug-in in this configmap is not supported.
+    Changing any other settings for the Calico plug-in in this ConfigMap is not supported.
     {: important}
 
 3. Apply the change to your cluster by restarting all `calico-node` pods.

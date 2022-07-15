@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes
 
@@ -43,14 +43,14 @@ You can resolve this issue by changing the `resource auto-refresh` time interval
 
 
 [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-1. Edit your Kubernetes dashboard configmap.
+1. Edit your Kubernetes dashboard ConfigMap.
     ```sh
     kubectl -n kube-system edit configmap kubernetes-dashboard-settings
     ```
     {: pre}
 
 1. In the `data._global` field, set the `resourceAutoRefreshTimeInterval` to `60`.
-    Example configmap with `resourceAutoRefreshTimeInterval` set to `60`. 
+    Example ConfigMap with `resourceAutoRefreshTimeInterval` set to `60`. 
     ```sh
     apiVersion: v1
     data:
