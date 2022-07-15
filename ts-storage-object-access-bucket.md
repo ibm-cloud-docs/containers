@@ -27,7 +27,6 @@ content-type: troubleshoot
 
 
 
-
 When you create the PVC, the bucket in {{site.data.keyword.cos_full_notm}} can't be accessed. You see an error message similar to the following:
 {: tsSymptoms}
 

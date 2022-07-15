@@ -213,6 +213,8 @@ subcollection: containers
 
         * CLI change log update
 
+        * Cluster autoscaler add-on
+
     * [14 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1422)
 
         * Cross-account encryption
@@ -3064,7 +3066,9 @@ subcollection: containers
 
     * [Hardware changes](/docs/containers?topic=containers-kernel#worker-default-hw)
 
-* [Modifying default worker node settings to optimize performance](/docs/containers?topic=containers-kernel#worker)
+* [Modifying worker node settings to optimize performance](/docs/containers?topic=containers-kernel#worker)
+
+    * [Modifying worker node kernel settings](/docs/containers?topic=containers-kernel#worker-kernel-ds)
 
 * [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
 
@@ -7528,6 +7532,10 @@ subcollection: containers
     * [Change log for patch update 1.1.0_475, released 30 March 2022](/docs/containers?topic=containers-ca_changelog#110475_ca)
 
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
+
+* [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
+
+    * [Change log for patch update 1.0.6_742, released 15 July 2022](/docs/containers?topic=containers-ca_changelog#105694_ca)
 
 * [Version 1.0.5](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
 

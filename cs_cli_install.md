@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-14"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, ic, ks, kubectl
 
@@ -116,8 +116,7 @@ Using both {{site.data.keyword.openshiftlong_notm}} and Ubuntu {{site.data.keywo
         ```
         {: pre}
 
-2. Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.23.
-- [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/)
+2. Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.23. [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/).
 
 3. If you use OS X or Linux, move the executable file to the `/usr/local/bin` directory.
     ```sh
@@ -560,7 +559,6 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
         <cluster_name>/<cluster_ID>
         ```
         {: screen}
-
 
 
 

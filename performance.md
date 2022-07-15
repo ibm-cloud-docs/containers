@@ -51,8 +51,14 @@ To change the compute hardware, such as the CPU and memory per worker node, choo
 * [Create a worker pool](/docs/containers?topic=containers-add_workers). The instructions vary depending on the type of infrastructure for the cluster, such as classic, VPC, or gateway clusters.
 * [Update the flavor](/docs/containers?topic=containers-update#machine_type) in your cluster by creating a worker pool and removing the previous worker pool.
 
-## Modifying default worker node settings to optimize performance
+## Modifying worker node settings to optimize performance
 {: #worker}
+
+
+
+
+### Modifying worker node kernel settings
+{: #worker-kernel-ds}
 
 If you have specific performance optimization requirements, you can change the default settings for the Linux kernel `sysctl` parameters on worker nodes.
 {: shortdesc}
@@ -122,15 +128,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: codeblock}
 
-2. Apply the daemon set to your worker nodes. The changes are applied immediately.
+1. Apply the daemon set to your worker nodes. The changes are applied immediately.
     ```sh
     kubectl apply -f worker-node-kernel-settings.yaml
     ```
     {: pre}
 
-
-
-To revert your worker nodes' `sysctl` parameters to the default values set by {{site.data.keyword.containerlong_notm}}:
+To revert your worker nodes `sysctl` parameters to the default values, follow these steps.
 
 1. Delete the daemon set. The `initContainers` that applied the custom settings are removed.
     ```sh
@@ -138,7 +142,7 @@ To revert your worker nodes' `sysctl` parameters to the default values set by {{
     ```
     {: pre}
 
-2. [Reboot all worker nodes in the cluster](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot). The worker nodes come back online with the default values applied.
+1. [Reboot all worker nodes in the cluster](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot). The worker nodes come back online with the default values applied.
 
 
 

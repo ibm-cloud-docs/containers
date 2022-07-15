@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-07-15"
 
 keywords: kubernetes, docker, containers
 
@@ -40,7 +40,7 @@ The following image shows the components of your cluster and how they interact i
 The following image shows the components of your cluster and how they interact in a VRF-enabled account when the [public and private cloud service endpoints are enabled](/docs/containers?topic=containers-plan_basics#workeruser-master).
 {: shortdesc}
 
-![{{site.data.keyword.containerlong_notm}} architecture when public and private cloud service endpoints are enabled](images/cs_org_ov_both_ses.png){: caption="Figure 1. Cluster architecture when public and private cloud service endpoints are enabled" caption-side="bottom"}
+![{{site.data.keyword.containerlong_notm}} architecture when public and private cloud service endpoints are enabled](images/cs_org_ov_both_ses.svg){: caption="Figure 1. Cluster architecture when public and private cloud service endpoints are enabled" caption-side="bottom"}
 
 ### Kubernetes master components
 {: #master-components}
