@@ -7547,9 +7547,9 @@ subcollection: containers
 
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
 
-* [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
+* [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0106_ca_addon)
 
-    * [Change log for patch update 1.0.6_742, released 15 July 2022](/docs/containers?topic=containers-ca_changelog#105694_ca)
+    * [Change log for patch update 1.0.6_742, released 15 July 2022](/docs/containers?topic=containers-ca_changelog#106742_ca)
 
 * [Version 1.0.5](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
 
