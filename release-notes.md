@@ -31,9 +31,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-july1922}
 {: release-note}
 
+
+
+Ingress ALB change log updates
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for versions `1.1.2_2368_iks` and `1.2.1_2415_iks`.
+
+
+
+Cluster autoscaler add-on
+:   Version `1.0.5_728` is available. See [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
+
 Node Tuning Operator
 :   You can apply custom profiles to your worker nodes to improve performance. For more information, see [Modifying worker node settings by using the Node Tuning Operator](/docs/openshift?topic=openshift-kernel#worker-nto).
-
 
 ### 18 July 2022
 {: #containers-july1822}
@@ -98,7 +107,7 @@ Worker node fix pack
 
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for version `1.1.2_2368_iks`. Version `0.49.3` is no longer supported.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for version `1.1.2_2305_iks`. Version `0.49.3` is no longer supported.
 
 ## June 2022
 {: #containers-jun22}

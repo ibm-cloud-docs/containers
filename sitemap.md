@@ -211,6 +211,10 @@ subcollection: containers
 
     * [19 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1922)
 
+        * Ingress ALB change log updates
+
+        * Cluster autoscaler add-on
+
         * Node Tuning Operator
 
     * [18 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1822)
@@ -7197,7 +7201,9 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
-    * [Version 1.2.1_2337_iks (default), released 10 Jun 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2337_iks)
+    * [Version 1.2.1_2415_iks (default), released 19 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2415_iks)
+
+    * [Version 1.2.1_2337_iks, released 10 Jun 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2337_iks)
 
 * [Version 1.2.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_0)
 
@@ -7209,7 +7215,9 @@ subcollection: containers
 
 * [Version 1.1.2](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_2)
 
-    * [Version 1.1.2_2368_iks, released on 5 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2368_iks)
+    * [Version 1.1.2_2368_iks, released on 19 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2368_iks)
+
+    * [Version 1.1.2_2305_iks, released on 5 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2305_iks)
 
     * [Version 1.1.2_2252_iks, released on 19 May 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2252_iks)
 
