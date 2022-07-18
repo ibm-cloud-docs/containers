@@ -209,6 +209,10 @@ subcollection: containers
 
 * [July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july22)
 
+    * [19 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1922)
+
+        * Node Tuning Operator
+
     * [18 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1822)
 
         * {{site.data.keyword.block_storage_is_short}} add-on.

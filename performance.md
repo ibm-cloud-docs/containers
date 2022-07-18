@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-07-15"
+lastupdated: "2022-07-18"
 
 keywords: kubernetes, kernel
 
@@ -53,6 +53,8 @@ To change the compute hardware, such as the CPU and memory per worker node, choo
 
 ## Modifying worker node settings to optimize performance
 {: #worker}
+
+
 
 
 
