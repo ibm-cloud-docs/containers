@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-07-15"
+lastupdated: "2022-07-18"
 
 keywords: kubernetes, release notes
 
@@ -27,6 +27,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## July 2022
 {: #containers-july22}
 
+
+### 18 July 2022
+{: #containers-july1822}
+{: release-note}
+
+{{site.data.keyword.block_storage_is_short}} add-on.
+:   [Version 4.3.4_1551](/docs/containers?topic=containers-vpc_bs_changelog) and [Version 4.4.8_1550](/docs/containers?topic=containers-vpc_bs_changelog) are available.
+
+Worker node fix pack
+:   Kubernetes [1.21.14_1572](/docs/containers?topic=containers-changelog_121), [1.22.11_1562](/docs/containers?topic=containers-changelog_122), [1.23.8_1537](/docs/containers?topic=containers-changelog_123) and [1.24.2_1529](/docs/containers?topic=containers-changelog_124).
 
 
 ### 15 July 2022
