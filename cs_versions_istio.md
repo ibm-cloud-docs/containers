@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-15"
+lastupdated: "2022-07-19"
 
 keywords: kubernetes, istio, add-on
 
@@ -193,6 +193,9 @@ Updates in this version
 
 ## Version 1.12
 {: #v112}
+
+Version 1.12 becomes unsupported on 28 July 2022. Update the [istio sidecar](/docs/containers?topic=containers-istio#update_client_sidecar), your `istioctl` client, and your [Istio components](/docs/containers?topic=containers-istio#istio_minor) to the latest patch of version 1.13 of Istio that is supported by {{site.data.keyword.containerlong_notm}}.
+{: important}
 
 If you want to upgrade from Istio minor version 1.11 to version 1.12 and your Istio components were provisioned at version 1.10 or earlier, you **must** take steps to [set up your mutating and validating webhooks](/docs/containers?topic=containers-istio#istio_minor) before you upgrade. If you do not make these changes before upgrading to 1.12, the upgrade will stall.
 {: important}

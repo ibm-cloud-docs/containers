@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-07-18"
+lastupdated: "2022-07-19"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july22)
+
+    * [19 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1922)
+
+        * Ingress ALB change log updates
+
+        * Cluster autoscaler add-on
 
     * [18 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1822)
 
@@ -7193,7 +7199,9 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
-    * [Version 1.2.1_2337_iks (default), released 10 Jun 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2337_iks)
+    * [Version 1.2.1_2415_iks (default), released 19 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2415_iks)
+
+    * [Version 1.2.1_2337_iks, released 10 Jun 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2337_iks)
 
 * [Version 1.2.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_0)
 
@@ -7205,7 +7213,9 @@ subcollection: containers
 
 * [Version 1.1.2](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_2)
 
-    * [Version 1.1.2_2368_iks, released on 5 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2368_iks)
+    * [Version 1.1.2_2368_iks, released on 19 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2368_iks)
+
+    * [Version 1.1.2_2305_iks, released on 5 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2305_iks)
 
     * [Version 1.1.2_2252_iks, released on 19 May 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2252_iks)
 
@@ -7553,6 +7563,8 @@ subcollection: containers
 
 * [Version 1.0.5](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
 
+    * [Change log for patch update 1.0.5_728, released 19 July 2022](/docs/containers?topic=containers-ca_changelog#105728_ca)
+
     * [Change log for patch update 1.0.5_694, released 30 June 2022](/docs/containers?topic=containers-ca_changelog#105694_ca)
 
     * [Change log for patch update 1.0.5_628, released 16 May 2022](/docs/containers?topic=containers-ca_changelog#105628_ca)
@@ -7607,7 +7619,7 @@ subcollection: containers
 
 * [Version 5.0 (Beta)](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
 
-    * [Change log for version 5.0.1-beta_1566, released 14 July 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.4-beta_1556_is_block_relnote)
+    * [Change log for version 5.0.4-beta_1566, released 14 July 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.4-beta_1556_is_block_relnote)
 
     * [Change log for version 5.0.1-beta_1411, released 15 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-beta_1411_is_block_relnote)
 
