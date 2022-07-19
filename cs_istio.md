@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-15"
+lastupdated: "2022-07-19"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
 
@@ -255,6 +255,9 @@ Update your Istio add-on to the latest version, which is tested by {{site.data.k
 {: shortdesc}
 
 Do not use `istioctl` to update the version of Istio that is installed by the managed add-on. Only use the following steps to update your managed Istio add-on, which includes an update of the Istio version.
+{: important}
+
+Version 1.12 becomes unsupported on 28 July 2022. Follow the steps to update your [Istio components](/docs/containers?topic=containers-istio#istio_minor) to the latest patch version of Istio 1.13 that is supported by {{site.data.keyword.containerlong_notm}}.
 {: important}
 
 ### Updating the minor version of the Istio add-on
@@ -530,6 +533,7 @@ Uninstall the add-on from the console or CLI.
 
 #### Uninstalling the Istio add-on from the console
 {: #istio_uninstall_ui}
+{: ui}
 
 1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to remove the Istio add-on.
 
@@ -543,6 +547,7 @@ Uninstall the add-on from the console or CLI.
 
 #### Uninstalling managed Istio add-ons from the CLI
 {: #istio_uninstall_cli}
+{: cli}
 
 If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras` add-ons, skip steps 1 and 2.
 {: tip}
@@ -643,7 +648,6 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 
 To resolve some common issues that you might encounter when you use the managed Istio add-on, see [Troubleshooting managed add-ons](/docs/containers?topic=containers-debug_addons).
 {: shortdesc}
-
 
 
 
