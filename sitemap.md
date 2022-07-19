@@ -215,8 +215,6 @@ subcollection: containers
 
         * Cluster autoscaler add-on
 
-        * Node Tuning Operator
-
     * [18 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1822)
 
         * {{site.data.keyword.block_storage_is_short}} add-on.
