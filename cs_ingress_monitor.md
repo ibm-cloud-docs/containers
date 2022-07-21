@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-07-20"
 
 keywords: kubernetes, iks, ingress, monitoring
 
@@ -39,9 +39,9 @@ Gain operational visibility into the performance and health of your Kubernetes I
 
 3. In the [Monitoring console](https://cloud.ibm.com/observe/monitoring){: external}, click **Open Dashboard** for the instance that you provisioned.
 
-4. In the {{site.data.keyword.mon_short}} UI, click **Dashboards** > **Applications** > **NGINX Ingress**. Note that the **NGINX Ingress** dashboard does not appear until there is data available. This process can take some time.
-
-    The **NGINX Ingress** dashboard is visible only when the monitoring agent finds `nginx_ingress_controller_requests metrics`. These metrics are exposed when you send queries to the hosts that are defined in your Ingress resources.
+4. In the {{site.data.keyword.mon_short}} UI, click **Dashboards** > **Applications** > **NGINX Ingress**. Note that the **NGINX Ingress** dashboard does not appear until there is data available. This process can take some time. The **NGINX Ingress** dashboard is visible only when the monitoring agent finds `nginx_ingress_controller_requests metrics` value. These metrics are exposed when you send queries to the hosts that are defined in your Ingress resources.
+    
+    The default Ingress monitoring filters can produce a high volume of metrics, which can incur additional billing. Add the filter `exclude: nginx_ingress*bucket` to reduce costs by excluding some metrics while retaining the default metrics needed for the NGINX dashboard.
     {: note}
 
 For more information about {{site.data.keyword.mon_full_notm}}, see [Getting started tutorial](/docs/monitoring?topic=monitoring-getting-started).

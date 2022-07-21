@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-07-14"
+lastupdated: "2022-07-21"
 
 keywords: kubernetes, containers
 
@@ -35,7 +35,7 @@ Review the master node security configuration results of the version 1.5 CIS Kub
 | --- | --- | --- | --- | --- | --- |
 | 1.1.1 | Ensure that the API server pod specification file permissions are set to `644` or more restrictive. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.1.2 | Ensure that the API server pod specification file ownership is set to `root:root`. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
-| 1.1.3 | Ensure that the controller manager pod specification file permissions are set to` 644` or more restrictive. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
+| 1.1.3 | Ensure that the controller manager pod specification file permissions are set to `644` or more restrictive. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.1.4 | Ensure that the controller manager pod specification file ownership is set to `root:root`. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.1.5 | Ensure that the scheduler pod specification file permissions are set to `644` or more restrictive. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.1.6 | Ensure that the scheduler pod specification file ownership is set to `root:root`. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
