@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-19"
+lastupdated: "2022-07-21"
 
 keywords: kubernetes, istio, add-on
 
@@ -83,6 +83,7 @@ Updates in this version
     - [CVE-2020-14155](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14155){: external}
     - [usn-5446-1](https://ubuntu.com/security/notices/USN-5446-1){: external}
     - [usn-5425-1](https://ubuntu.com/security/notices/USN-5425-1){: external}
+
 :   For more information, see the [Istio security bulletin 2022-005/](https://istio.io/latest/news/security/istio-security-2022-005/){: external}
 
 ### Changelog for 1.13.4, released 1 June 2022
@@ -230,6 +231,7 @@ Updates in this version
     - [usn-5425-1](https://ubuntu.com/security/notices/USN-5425-1){: external}
     - [usn-5412-1](https://ubuntu.com/security/notices/USN-5412-1){: external}
     - [usn-5402-1](https://ubuntu.com/security/notices/USN-5402-1){: external}
+
 :   For more information, see the [Istio security bulletin 2022-005/](https://istio.io/latest/news/security/istio-security-2022-005/){: external}
 
 ### Changelog for 1.12.7, released 19 May 2022
