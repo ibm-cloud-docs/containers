@@ -1,6 +1,6 @@
 ---
 
-copyright: 
+copyright:
   years: 2014, 2022
 lastupdated: "2022-07-14"
 
@@ -457,16 +457,16 @@ Follow these steps to set up encryption for your Portworx volumes.
 
         `metadata.name`
         :   Enter `px-ibm` as the name for your Kubernetes secret. If you use a different name, Portworx does not recognize the secret during installation.
-        
+
         `data.IBM_SERVICE_API_KEY`
         :   Enter the base64 encoded {{site.data.keyword.keymanagementservicelong_notm}} or {{site.data.keyword.hscrypto}} API key that you retrieved earlier.
-        
+
         `data.IBM_INSTANCE_ID`
         :   Enter the base64 encoded service instance GUID that you retrieved earlier.
-        
+
         `data.IBM_CUSTOMER_ROOT_KEY`
         :   Enter the base64 encoded root key that you retrieved earlier.
-        
+
         `data.IBM_BASE_URL`
         :   {{site.data.keyword.keymanagementservicelong_notm}}: Enter the base64 encoded API endpoint of your service instance.
         :   {{site.data.keyword.hscrypto}}: Enter the base64 encoded Key Management public endpoint.
@@ -605,20 +605,20 @@ To install Portworx:
 1. Open the Portworx service from the [{{site.data.keyword.cloud_notm}} catalog](https://cloud.ibm.com/catalog/services/portworx-enterprise){: external} and complete the fields as follows:
 
     1. Select the region where your {{site.data.keyword.containerlong_notm}} cluster is located.
-    
+
     1.  Review the Portworx pricing information.
-    
+
     1. Enter a name for your Portworx service instance.
-    
+
     1. Select the resource group that your cluster is in.
-    
+
     1. In the **Tag** field, enter the name of the cluster where you want to install Portworx. After you create the Portworx service instance, you can't see the cluster that you installed Portworx into. To find the cluster more easily later, make sure that you enter the cluster name and any additional information as tags.
-    
+
     1. Enter an {{site.data.keyword.cloud_notm}} API key to retrieve the list of clusters that you have access to. If you don't have an API key, see [Managing user API keys](/docs/account?topic=account-userapikey). After you enter the API key, the **Kubernetes or OpenShift cluster name** field appears.
     1. Enter a unique **Portworx cluster name**.
     1. In the **Cloud Drives** menu:
         1. Select **Use Cloud Drives** (VPC Clusters only) to dynamically provision {{site.data.keyword.block_storage_is_short}} for Portworx. After selecting **Use Cloud Drives**, select the **Storage class name** and the **Size** of the block storage drives that you want to provision.
-        1. Select **Use Already Attached Drives** (Classic, VPC, or Satellite) to use the block storage that is already attached to your worker nodes. 
+        1. Select **Use Already Attached Drives** (Classic, VPC, or Satellite) to use the block storage that is already attached to your worker nodes.
     1. From the **Portworx metadata key-value store** drop down, choose the type of key-value store that you want to use to store Portworx metadata. Select **Portworx KVDB** to automatically create a key-value store during the Portworx installation, or select **Databases for etcd** if you want to use an existing Databases for etcd instance. If you choose **Databases for etcd**, the **Etcd API endpoints** and **Etcd secret name** fields appear.
     1. **Required for Databases for etcd only**: Enter the information of your Databases for etcd service instance.
         1. [Retrieve the etcd endpoint, and the name of the Kubernetes secret](#databases_credentials) that you created for your Databases for etcd service instance.
@@ -629,7 +629,7 @@ To install Portworx:
         - **Kubernetes Secret**: Choose this option if you want to store your own custom key to encrypt your volumes in a Kubernetes Secret in your cluster. The secret must not be present before you install Portworx. You can create the secret after you install Portworx. For more information, see the [Portworx documentation](https://docs.portworx.com/key-management/kubernetes-secrets/#configuring-kubernetes-secrets-with-portworx){: external}.
         - **{{site.data.keyword.keymanagementservicelong_notm}}**: Choose this option if you want to use root keys in {{site.data.keyword.keymanagementservicelong_notm}} to encrypt your volumes. Make sure that you follow the [instructions](#setup_encryption) to create your {{site.data.keyword.keymanagementservicelong_notm}} service instance, and to store the credentials for how to access your service instance in a Kubernetes secret in the `portworx` namespace before you install Portworx.
     1. **Optional**: If you want to set up a journal device or KVDB devices, enter the device details in the **Advanced Options** field. Choose from the following options for journal devices.
-        
+
         - Enter `j;auto` to allow Portworx to automatically create a 3 GB partition on one of your block storage devices to use for the journal.
         - Enter `j;</device/path>` to use a specific device for the journal. For example, enter `j;/dev/vde` to use the disk located at `/dev/vde`. To find the path of the device that you want to use for the journal, log in to a worker node and run `lsblk`.
         - Enter `kvdb_dev;<device path>` to specify the device where you want to store internal KVDB data. For example, `kvdb_dev;/dev/vdd`. To find the path of the device that you want to use, log in to a worker node and run `lsblk`. To use a specific device for KVDB data, you must have an available storage device of 3GB or on at least 3 worker nodes. The devices must also and on the same path on each worker node. For example: `/dev/vdd`.
@@ -707,7 +707,7 @@ To install Portworx:
         {: pre}
 
         Example output
-        
+
         ```sh
         NODE        NODE STATUS    POOL    POOL STATUS    IO_PRIORITY    SIZE    AVAILABLE    USED    PROVISIONED    RESERVEFACTOR    ZONE    REGION        RACK
         10.184.58.11    Up        0    Online        LOW        20 GiB    17 GiB        3.0 GiB    0 B        0        dal12    us-south    default
@@ -783,21 +783,21 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
 
         `metadata.name`
         :   Enter a name for your storage class.
-        
+
         `parameters.repl`
         :   Enter the number of replicas for your data that you want to store across different worker nodes. Allowed numbers are `1`,`2`, or `3`. For example, if you enter `3`, then your data is replicated across three different worker nodes in your Portworx cluster. To store your data highly available, use a multizone cluster and replicate your data across three worker nodes in different zones.
             You must have enough worker nodes to fulfill your replication requirement. For example, if you have two worker nodes, but you specify three replicas, then the creation of the PVC with this storage class fails.
             {: note}
-        
+
         `parameters.secure`
         :   Specify whether you want to encrypt the data in your volume with {{site.data.keyword.keymanagementservicelong_notm}}. Choose between the following options.
-            - `true`: Enter `true` to enable encryption for your Portworx volumes. To encrypt volumes, you must have an {{site.data.keyword.keymanagementservicelong_notm}} service instance and a Kubernetes secret that holds your customer root key. For more information about how to set up encryption for Portworx volumes, see [Encrypting your Portworx volumes](#encrypt_volumes). 
+            - `true`: Enter `true` to enable encryption for your Portworx volumes. To encrypt volumes, you must have an {{site.data.keyword.keymanagementservicelong_notm}} service instance and a Kubernetes secret that holds your customer root key. For more information about how to set up encryption for Portworx volumes, see [Encrypting your Portworx volumes](#encrypt_volumes).
             - `false`: When you enter `false`, your Portworx volumes are not encrypted. If you don't specify this option, your Portworx volumes are not encrypted by default. You can choose to enable volume encryption in your PVC, even if you disabled encryption in your storage class. The setting that you make in the PVC take precedence over the settings in the storage class.
 
         `parameters.priority_io`
-        :   Enter the Portworx I/O priority that you want to request for your data. Available options are `high`, `medium`, and `low`. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on the network bandwidth of your worker node and the type of storage device. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes. 
+        :   Enter the Portworx I/O priority that you want to request for your data. Available options are `high`, `medium`, and `low`. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on the network bandwidth of your worker node and the type of storage device. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes.
         :   When you create a PVC with a storage class, the number of replicas that you specify in `parameters/repl` overrides the I/O priority. For example, when you specify three replicas that you want to store on high-speed disks, but you have only one worker node with a high-speed disk in your cluster, then your PVC creation still succeeds. Your data is replicated across both high and low speed disks.
-        
+
         `parameters.shared`
         :   Define whether you want to allow multiple pods to access the same volume. Choose between the following options:
             - True: If you set this option to `true`, then you can access the same volume by multiple pods that are distributed across worker nodes in different zones.
@@ -834,13 +834,13 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
 
         `metadata.name`
         :   Enter a name for your PVC, such as `mypvc`.
-        
+
         `spec.accessModes`
         :   Enter the [Kubernetes access mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes){: external} that you want to use.
-        
+
         `resources.requests.storage`
         :   Enter the amount of storage in gigabytes that you want to assign from your Portworx cluster. For example, to assign 2 gigabytes from your Portworx cluster, enter `2Gi`. The amount of storage that you can specify is limited by the amount of storage that is available in your Portworx cluster. If you specified a replication factor in your storage class higher than 1, then the amount of storage that you specify in your PVC is reserved on multiple worker nodes.
-        
+
         `spec.storageClassName`
         :   Enter the name of the storage class that you chose or created earlier and that you want to use to provision your PV. The example YAML file uses the `portworx-shared-sc` storage class.
 
@@ -856,7 +856,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
         ```
         {: pre}
 
-        
+
 
 ## Mounting the volume to your app
 {: #mount_pvc}
@@ -903,34 +903,34 @@ To access the storage from your app, you must mount the PVC to your app.
 
     `metadata.labels.app`
     :   A label for the deployment.
-    
+
     `spec.selector.matchLabels.app` and `spec.template.metadata.labels.app`
     :   A label for your app.
-    
+
     `template.metadata.labels.app`
     :   A label for the deployment.
-    
+
     `spec.schedulerName`</td>
     :   Use [Stork](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/){: external} as the scheduler for your Portworx cluster. With Stork, you can co-locate pods with their data, provides seamless migration of pods in case of storage errors and makes it easier to create and restore snapshots of Portworx volumes.
-    
+
     `spec.containers.image`
     :   The name of the image that you want to use. To list available images in your {{site.data.keyword.registrylong_notm}} account, run `ibmcloud cr image-list`.
-    
+
     `spec.containers.name`
     :   The name of the container that you want to deploy to your cluster.
-    
+
     `spec.containers.securityContext.fsGroup`
     :   Optional: To access your storage with a non-root user, specify the [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external} for your pod and define the set of users that you want to grant access in the `fsGroup` section on your deployment YAML. For more information, see [Accessing Portworx volumes with a non-root user](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users/){: external}.
-    
+
     `spec.containers.volumeMounts.mountPath`
     :   The absolute path of the directory to where the volume is mounted inside the container. If you want to share a volume between different apps, you can specify [volume sub paths](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath){: external} for each of your apps.
-    
+
     `spec.containers.volumeMounts.name`
     :   The name of the volume to mount to your pod.
-    
+
     `volumes.name`
     :   The name of the volume to mount to your pod. Typically this name is the same as `volumeMounts/name`.
-    
+
     `volumes.persistentVolumeClaim.claimName`
     :   The name of the PVC that binds the PV that you want to use.
 
@@ -980,7 +980,7 @@ To access the storage from your app, you must mount the PVC to your app.
         ```
         {: pre}
 
-        
+
 
 
 
@@ -1039,7 +1039,7 @@ Install PX-Backup on an {{site.data.keyword.containerlong_notm}} cluster in your
 {: shortdesc}
 
 Before you begin:
-- Make sure that your cluster meets the [minimum Portworx requirements](https://docs.portworx.com/start-here-installation/){: external}. 
+- Make sure that your cluster meets the [minimum Portworx requirements](https://docs.portworx.com/start-here-installation/){: external}.
 - [Install or update the {{site.data.keyword.cloud_notm}} Block Storage plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block).
 - Provision and attach 320Gi of block storage to your cluster. See [Storing data on classic {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage) or [Storing data on Block Storage for VPC](/docs/containers?topic=containers-vpc-block).
 
@@ -1248,10 +1248,10 @@ If a cluster that you want to back up with PX-Backup does not have Portworx Ente
 To back up data from your cluster or to restore data to your cluster, refer to the [PX-Backup documentation](https://backup.docs.portworx.com/use-px-backup/backup-restore/){: external}.
 {: shortdesc}
 
-**Back up apps and data from your cluster to {{site.data.keyword.cos_full_notm}}**: 
+**Back up apps and data from your cluster to {{site.data.keyword.cos_full_notm}}**:
 You can back up an entire cluster namespace, single apps, and the data that is stored in your persistent volumes to the {{site.data.keyword.cos_full_notm}} service instance that you set up as your backup location. Note that in order to back up data in persistent volumes, you must have a CSI snapshot storage class in your cluster. PX-Backup uses this storage class to first take a snapshot of your data and then sends this data to your {{site.data.keyword.cos_full_notm}} backup location. For more information, see the [PX-Backup documentation](https://backup.docs.portworx.com/use-px-backup/backup-restore/create-backup/perform-backup/){: external}.
 
-**Restore any backup that you created to another cluster**: 
+**Restore any backup that you created to another cluster**:
 You can restore an entire namespace, your apps, or your data to any cluster that you added to the PX-Backup service. Use this PX-Backup capability if you want to migrate apps and data from one cluster to another. For more information, see the [PX-Backup documentation](https://backup.docs.portworx.com/use-px-backup/backup-restore/restore-backup/){: external}.
 
 ### Upgrading PX-Backup
@@ -1281,7 +1281,7 @@ To include your cluster in a Portworx disaster recovery configuration:
 
 1. [Choose the disaster recovery configuration that works for your cluster setup](https://docs.portworx.com/portworx-install-with-kubernetes/disaster-recovery/){: external}.
 2. Review the prerequisites for the [**Metro DR**](https://docs.portworx.com/portworx-install-with-kubernetes/disaster-recovery/px-metro/1-install-px/#prerequisites){: external} and [**Asynchronous DR**](https://docs.portworx.com/portworx-install-with-kubernetes/disaster-recovery/async-dr/#pre-requisites){: external} configuration.
-3. Configure disaster recovery for your cluster. 
+3. Configure disaster recovery for your cluster.
     **Metro DR**:
     1. Choose at least two Kubernetes clusters that are located in the same metro location. If you have one cluster only, you can still configure this cluster for metro disaster recovery, but Portworx can't do a proper failover until a second cluster is configured.
     2. Make sure that all your clusters have sufficient [raw and unformatted block storage](#create_block_storage) so that you can build your Portworx storage layer.
@@ -1540,7 +1540,7 @@ To stop billing for Portworx, you must remove the Portworx Helm installation fro
 ## Getting help and support
 {: #portworx_help_sup}
 
-If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://pure1.purestorage.com/support){: external}. You can also submit a request by sending an e-mail to `support@purestorage.com`. If you don't have an account on the Portworx Service Portal, send an e-mail to `support@purestorage.com` or see [requeset access](https://purestorage.force.com/customers/CustomerAccessRequest){: external}. You can also [gather logging information](/docs/containers?topic=containers-portworx#portworx_logs) before opening a support ticket.
+If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://pure1.purestorage.com/support){: external}. You can also submit a request by sending an e-mail to `support@purestorage.com`. If you don't have an account on the Portworx Service Portal, send an e-mail to `support@purestorage.com` or see [request access](https://purestorage.force.com/customers/CustomerAccessRequest){: external}. You can also [gather logging information](/docs/containers?topic=containers-portworx#portworx_logs) before opening a support ticket.
 
 ### Gathering logs
 {: #portworx_logs}
@@ -1560,7 +1560,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 2. Navigate to the `px_logcollector` directory.
     ```sh
-    cd ibmcloud-storage-utilities/px_utils/px_logcollector/ 
+    cd ibmcloud-storage-utilities/px_utils/px_logcollector/
     ```
     {: pre}
 
@@ -1594,6 +1594,3 @@ Review the following Portworx limitations.
 | Private clusters | To install Portworx in a cluster that doesn't have VRF or access to private CSEs, you must create a rule in the default security group to allow inbound and outbound traffic for the following IP addresses: `166.9.24.81`, `166.9.22.100`, and `166.9.20.178`. For more information, see [Updating the default security group](/docs/vpc?topic=vpc-updating-the-default-security-group#updating-the-default-security-group). |
 {: summary="This table contains information on limitations for Portworx on {{site.data.keyword.containerlong_notm}} clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="Portworx limitations"}
-
-
-
