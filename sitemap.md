@@ -209,7 +209,9 @@ subcollection: containers
 
 * [July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july22)
 
-    * Cluster autoscaler add-on
+    * [22 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july2222)
+
+        * Cluster autoscaler add-on
 
     * [19 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1922)
 

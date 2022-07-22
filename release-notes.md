@@ -30,6 +30,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+### 22 July 2022
+{: #containers-july2222}
+{: release-note}
+
+
+
 
 Cluster autoscaler add-on
 :   Version `1.1.0_729` is available. See [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
