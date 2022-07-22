@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-07-21"
+lastupdated: "2022-07-22"
 
 keywords: containers
 subcollection: containers
@@ -209,9 +209,7 @@ subcollection: containers
 
 * [July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july22)
 
-    * [21 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july2122)
-
-        * Cluster autoscaler add-on
+    * Cluster autoscaler add-on
 
     * [19 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july1922)
 
@@ -855,7 +853,7 @@ subcollection: containers
 
         * {{site.data.keyword.cos_full_notm}} plug-in
 
-        * Master fix pack update changelog documentation
+        * Master fix pack update change log documentation
 
     * [23 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug2321)
 
