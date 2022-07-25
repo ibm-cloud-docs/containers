@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-07-22"
+lastupdated: "2022-07-25"
 
 keywords: containers
 subcollection: containers
@@ -5117,6 +5117,30 @@ subcollection: containers
     * [Deprecated: `ibmcloud ks cluster user-subnet add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_user_subnet_add)
 
     * [Deprecated: `ibmcloud ks cluster user-subnet rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_user_subnet_rm)
+
+* [Beta: `dedicated` commands](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_commands)
+
+    * [Beta: `ibmcloud ks dedicated flavors`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_flavors)
+
+    * [Beta: `ibmcloud ks dedicated host create`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_create)
+
+    * [Beta: `ibmcloud ks dedicated host get`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_get)
+
+    * [Beta: `ibmcloud ks dedicated host ls`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_ls)
+
+    * [Beta: `ibmcloud ks dedicated host placement disable`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_placement_disable)
+
+    * [Beta: `ibmcloud ks dedicated host placement enable`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_placement_enable)
+
+    * [Beta: `ibmcloud ks dedicated host rm`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_rm)
+
+    * [Beta: `ibmcloud ks dedicated pool create`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_create)
+
+    * [Beta: `ibmcloud ks dedicated pool get`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_get)
+
+    * [Beta: `ibmcloud ks dedicated pool ls`](/docs/containers?topic=containers-kubernetes-service-cli#dedicate_pool_ls)
+
+    * [Beta: `ibmcloud ks dedicated pool rm`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_rm)
 
 * [`worker` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker_node_commands)
 
