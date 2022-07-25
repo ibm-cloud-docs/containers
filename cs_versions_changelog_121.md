@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-07-18"
+lastupdated: "2022-07-25"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.21
 
@@ -16,7 +16,7 @@ subcollection: containers
 # (Deprecated) Kubernetes version 1.21 change log
 {: #changelog_121}
 
-Kubernetes version 1.21 is deprecated, with a tentative unsupported date of 31 August 2022. Update your cluster to at least [version 1.22](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
+Kubernetes version 1.21 becomes unsupported on 7 September 2022. Update your cluster to at least [version 1.22](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
 {: deprecated}
 
 View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.21. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.

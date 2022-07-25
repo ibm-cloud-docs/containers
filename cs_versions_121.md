@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-06-27"
+lastupdated: "2022-07-25"
 
 keywords: kubernetes, 1.21, versions, update, upgrade
 
@@ -15,7 +15,7 @@ subcollection: containers
 # 1.21 version information and update actions
 {: #cs_versions_121}
 
-Kubernetes version 1.21 is deprecated, with a tentative unsupported date of 31 August 2022. Update your cluster to at least [version 1.22](/docs/containers?topic=containers-cs_versions_122) as soon as possible.
+Kubernetes version 1.21 becomes unsupported on 7 September 2022. Update your cluster to at least [version 1.22](/docs/containers?topic=containers-cs_versions_122) as soon as possible.
 {: deprecated}
 
 Review information about version 1.21 of {{site.data.keyword.containerlong}}, released 09 Jun 2021.
@@ -42,7 +42,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
-| 1.21 | Yes | 09 Jun 2021 |  31 Aug 2022 `†` |
+| 1.21 | Yes | 09 June 2021 | 7 September 2022 |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.21" caption-side="top"}
 
 ## Preparing to update
@@ -87,4 +87,3 @@ The following table shows the actions that you must take after you update the Ku
 | Ingress resource API version | The support for `networking.k8s.io/v1beta1` and `extensions/v1beta1` API versions in Ingress resources are deprecated and are planned for removal in Kubernetes version 1.22. The `networking.k8s.io/v1` API version is supported instead. Although not required in version 1.21, you can begin converting your existing resources in preparation for the removal of the API versions before version 1.22. |
 {: caption="Changes to make after you update the master to Kubernetes 1.21" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
-
