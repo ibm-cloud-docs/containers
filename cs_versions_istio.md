@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-21"
+lastupdated: "2022-07-26"
 
 keywords: kubernetes, istio, add-on
 
@@ -13,7 +13,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Istio add-on version changelog
+# Istio add-on version change log
 {: #istio-changelog}
 
 View information for patch and minor version updates to the [managed Istio add-on](/docs/containers?topic=containers-istio-about#istio_ov_addon) in your {{site.data.keyword.containerlong}} Kubernetes clusters.
@@ -62,7 +62,7 @@ Updates in this version
 ## Version 1.13
 {: #v113}
 
-### Changelog for 1.13.5, released 21 June 2022
+### Change log for 1.13.5, released 21 June 2022
 {: #1135}
 
 Review the changes that are included in version 1.13.5 of the managed Istio add-on.
@@ -86,7 +86,7 @@ Updates in this version
 
 :   For more information, see the [Istio security bulletin 2022-005/](https://istio.io/latest/news/security/istio-security-2022-005/){: external}
 
-### Changelog for 1.13.4, released 1 June 2022
+### Change log for 1.13.4, released 1 June 2022
 {: #1134}
 
 Review the changes that are included in version 1.13.4 of the managed Istio add-on.
@@ -118,7 +118,7 @@ Updates in this version
     - [CVE-2021-36087](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36087){: external}
     - [CVE-2019-18276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18276){: external}
 
-### Changelog for 1.13.3, released 3 May 2021
+### Change log for 1.13.3, released 3 May 2021
 {: #1133}
 
 Review the changes that are included in version 1.13.3 of the managed Istio add-on.
@@ -146,7 +146,7 @@ Updates in this version
     - [usn-5331-2](https://ubuntu.com/security/notices/USN-5331-2){: external}
     - [usn-5355-1](https://ubuntu.com/security/notices/USN-5355-1){: external}
 
-### Changelog for 1.13.2, released 22 March 2022
+### Change log for 1.13.2, released 22 March 2022
 {: #1132}
 
 Review the changes that are included in version 1.13.2 of the managed Istio add-on.
@@ -195,13 +195,42 @@ Updates in this version
 ## Version 1.12
 {: #v112}
 
+
 Version 1.12 becomes unsupported on 28 July 2022. Update the [istio sidecar](/docs/containers?topic=containers-istio#update_client_sidecar), your `istioctl` client, and your [Istio components](/docs/containers?topic=containers-istio#istio_minor) to the latest patch of version 1.13 of Istio that is supported by {{site.data.keyword.containerlong_notm}}.
 {: important}
 
 If you want to upgrade from Istio minor version 1.11 to version 1.12 and your Istio components were provisioned at version 1.10 or earlier, you **must** take steps to [set up your mutating and validating webhooks](/docs/containers?topic=containers-istio#istio_minor) before you upgrade. If you do not make these changes before upgrading to 1.12, the upgrade will stall.
 {: important}
 
-### Changelog for 1.12.8, released 21 June 2022
+### Change log for 1.12.9, released 26 July 2022
+{: #1129}
+
+Review the changes that are included in version 1.12.9 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.12.8
+
+Current version
+:   1.12.9
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.12.9](https://istio.io/latest/news/releases/1.12.x/announcing-1.12.9/.){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2022-32205](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32205){: external}
+    - [CVE-2022-32206](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32206){: external}
+    - [CVE-2022-32207](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32207){: external}
+    - [CVE-2022-32208](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32208){: external}
+    - [CVE-2022-1304](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1304){: external}
+    - [CVE-2022-2097](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2097){: external}
+    - [CVE-2022-2068](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2068){: external}
+    - [usn-5473-1](https://ubuntu.com/security/notices/USN-5473-1){: external}
+    - [usn-5495-1](https://ubuntu.com/security/notices/USN-5495-1){: external}
+    - [usn-5464-1](https://ubuntu.com/security/notices/USN-5464-1){: external}
+    - [usn-5502-1](https://ubuntu.com/security/notices/USN-5502-1){: external}
+    - [usn-5488-1](https://ubuntu.com/security/notices/USN-5488-1){: external}
+
+### Change log for 1.12.8, released 21 June 2022
 {: #1128}
 
 Review the changes that are included in version 1.12.8 of the managed Istio add-on.
@@ -234,7 +263,7 @@ Updates in this version
 
 :   For more information, see the [Istio security bulletin 2022-005/](https://istio.io/latest/news/security/istio-security-2022-005/){: external}
 
-### Changelog for 1.12.7, released 19 May 2022
+### Change log for 1.12.7, released 19 May 2022
 {: #1127}
 
 Review the changes that are included in version 1.12.7 of the managed Istio add-on.
@@ -266,7 +295,7 @@ Updates in this version
 
 :   For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}
 
-### Changelog for 1.12.6, released 19 April 2022
+### Change log for 1.12.6, released 19 April 2022
 {: #1126}
 
 Review the changes that are included in version 1.12.6 of the managed Istio add-on.
@@ -287,7 +316,7 @@ Updates in this version
     - [usn-5328-1](https://ubuntu.com/security/notices/USN-5328-1){: external}
     - [usn-5329-1](https://ubuntu.com/security/notices/USN-5329-1){: external}
 
-### Changelog for 1.12.5, released 22 March 2022
+### Change log for 1.12.5, released 22 March 2022
 {: #1125}
 
 Review the changes that are included in version 1.12.5 of the managed Istio add-on.
@@ -408,13 +437,16 @@ Updates in this version
     - [usn-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}
 
 
-## Version 1.11
+## Version 1.11 (unsupported)
 {: #v111}
 
-The unsupported date for version 1.11 of the managed Istio add-on is tentatively set for 21 April 2022. Update your Istio components to at least version 1.12 as soon as possible. 
+Review the changes that are in version 1.11 of the managed Istio add-on.
+{: shortdesc}
+
+Version 1.11 of the managed Istio add-on is unsupported. 
 {: important}
 
-### Changelog for 1.11.8, released 22 March 2022
+### Change log for 1.11.8, released 22 March 2022
 {: #1118}
 
 Review the changes that are included in version 1.11.8 of the managed Istio add-on.

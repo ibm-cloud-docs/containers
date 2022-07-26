@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-07-25"
+lastupdated: "2022-07-26"
 
 keywords: containers
 subcollection: containers
@@ -7397,7 +7397,7 @@ subcollection: containers
 
     * [01 January 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#01-jan-2019)
 
-[Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+[Istio add-on version change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
 * [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
 
@@ -7405,25 +7405,27 @@ subcollection: containers
 
 * [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
 
-    * [Changelog for 1.13.5, released 21 June 2022](/docs/containers?topic=containers-istio-changelog#1135)
+    * [Change log for 1.13.5, released 21 June 2022](/docs/containers?topic=containers-istio-changelog#1135)
 
-    * [Changelog for 1.13.4, released 1 June 2022](/docs/containers?topic=containers-istio-changelog#1134)
+    * [Change log for 1.13.4, released 1 June 2022](/docs/containers?topic=containers-istio-changelog#1134)
 
-    * [Changelog for 1.13.3, released 3 May 2021](/docs/containers?topic=containers-istio-changelog#1133)
+    * [Change log for 1.13.3, released 3 May 2021](/docs/containers?topic=containers-istio-changelog#1133)
 
-    * [Changelog for 1.13.2, released 22 March 2022](/docs/containers?topic=containers-istio-changelog#1132)
+    * [Change log for 1.13.2, released 22 March 2022](/docs/containers?topic=containers-istio-changelog#1132)
 
     * [Change log for 1.13.1, released March 9th, 2021](/docs/containers?topic=containers-istio-changelog#1131)
 
 * [Version 1.12](/docs/containers?topic=containers-istio-changelog#v112)
 
-    * [Changelog for 1.12.8, released 21 June 2022](/docs/containers?topic=containers-istio-changelog#1128)
+    * [Change log for 1.12.9, released 26 July 2022](/docs/containers?topic=containers-istio-changelog#1129)
 
-    * [Changelog for 1.12.7, released 19 May 2022](/docs/containers?topic=containers-istio-changelog#1127)
+    * [Change log for 1.12.8, released 21 June 2022](/docs/containers?topic=containers-istio-changelog#1128)
 
-    * [Changelog for 1.12.6, released 19 April 2022](/docs/containers?topic=containers-istio-changelog#1126)
+    * [Change log for 1.12.7, released 19 May 2022](/docs/containers?topic=containers-istio-changelog#1127)
 
-    * [Changelog for 1.12.5, released 22 March 2022](/docs/containers?topic=containers-istio-changelog#1125)
+    * [Change log for 1.12.6, released 19 April 2022](/docs/containers?topic=containers-istio-changelog#1126)
+
+    * [Change log for 1.12.5, released 22 March 2022](/docs/containers?topic=containers-istio-changelog#1125)
 
     * [Change log for 1.12.4, released 8 March 2022](/docs/containers?topic=containers-istio-changelog#1124)
 
@@ -7435,9 +7437,9 @@ subcollection: containers
 
     * [Change log for 1.12.0, released 08 December 2021](/docs/containers?topic=containers-istio-changelog#1120)
 
-* [Version 1.11](/docs/containers?topic=containers-istio-changelog#v111)
+* [Version 1.11 (unsupported)](/docs/containers?topic=containers-istio-changelog#v111)
 
-    * [Changelog for 1.11.8, released 22 March 2022](/docs/containers?topic=containers-istio-changelog#1118)
+    * [Change log for 1.11.8, released 22 March 2022](/docs/containers?topic=containers-istio-changelog#1118)
 
     * [Change log for 1.11.7, released 8 March 2022](/docs/containers?topic=containers-istio-changelog#1117)
 
