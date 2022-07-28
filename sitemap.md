@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-07-26"
+lastupdated: "2022-07-28"
 
 keywords: containers
 subcollection: containers
@@ -7419,7 +7419,7 @@ subcollection: containers
 
     * [Change log for 1.13.1, released March 9th, 2021](/docs/containers?topic=containers-istio-changelog#1131)
 
-* [Version 1.12](/docs/containers?topic=containers-istio-changelog#v112)
+* [Version 1.12 (unsupported)](/docs/containers?topic=containers-istio-changelog#v112)
 
     * [Change log for 1.12.9, released 26 July 2022](/docs/containers?topic=containers-istio-changelog#1129)
 
