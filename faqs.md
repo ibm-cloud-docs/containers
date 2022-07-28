@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-07-25"
+lastupdated: "2022-07-28"
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
 
@@ -237,8 +237,6 @@ For a list of supported services, see [Integrating services](/docs/containers?to
 {: faq}
 
 See the [IBM Open Source and Third Party policy](https://www.ibm.com/support/pages/node/737271){: external}.
-
-
 
 ## What am I charged for? Can I estimate and control costs in my cluster?
 {: #charges}

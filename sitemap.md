@@ -209,6 +209,10 @@ subcollection: containers
 
 * [July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july22)
 
+    * [27 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july2722)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.1.19` is available.
+
     * [22 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july2222)
 
         * Cluster autoscaler add-on
@@ -7722,6 +7726,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.1.19, released 27 July 2022](/docs/containers?topic=containers-cos_plugin_changelog#02119_object_plugin)
 
 * [Change log for version 2.1.18, released 14 July 2022](/docs/containers?topic=containers-cos_plugin_changelog#02118_object_plugin)
 
