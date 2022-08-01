@@ -207,11 +207,17 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
+
 * [July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july22)
 
     * [27 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july2722)
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.1.19` is available.
+
+    * [26 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july2622)
+
+        * Master fix pack update
 
     * [22 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july2222)
 

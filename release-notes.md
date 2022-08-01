@@ -26,6 +26,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+## August 2022
+{: #containers-aug22}
+
+
+
+
 ## July 2022
 {: #containers-july22}
 
@@ -37,6 +43,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {{site.data.keyword.cos_full_notm}} plug-in version `2.1.19` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
+### 26 July 2022
+{: #containers-july2622}
+{: release-note}
+
+Master fix pack update
+:   Kubernetes [1.24.3_1531](/docs/containers?topic=containers-changelog_124), [1.23.9_1539](/docs/containers?topic=containers-changelog_123), [1.22.12_1564](/docs/containers?topic=containers-changelog_122), and [1.21.14_1574](/docs/containers?topic=containers-changelog_121).
 
 
 
