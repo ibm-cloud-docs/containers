@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-07-29"
+lastupdated: "2022-08-01"
 
 keywords: kubernetes, release notes
 
@@ -23,19 +23,6 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
-
-
-
-## August 2022
-{: #containers-aug22}
-
-
-### 1 August 2022
-{: #containers-aug0122}
-{: release-note}
-
-Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for versions `1.2.1_2426_iks` and `1.1.2_2411_iks`.
 
 
 
