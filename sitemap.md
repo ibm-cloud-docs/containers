@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-07-29"
+lastupdated: "2022-08-01"
 
 keywords: containers
 subcollection: containers
@@ -4406,7 +4406,7 @@ subcollection: containers
 
 * [Customizing the Ingress class](/docs/containers?topic=containers-comm-ingress-annotations#-custom-ingress-class)
 
-* [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
+* [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](/docs/containers?topic=containers-comm-ingress-annotations#app-id-auth)
 
     * [Upgrading ALB OAuth Proxy add-on](/docs/containers?topic=containers-comm-ingress-annotations#upgrading-alb-oauth-proxy-add-on)
 
@@ -5588,7 +5588,7 @@ subcollection: containers
 
 [Kubernetes version 1.24 change log](/docs/containers?topic=containers-changelog_124#changelog_124)
 
-* [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview)
+* [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
 
@@ -5622,7 +5622,7 @@ subcollection: containers
 
     * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-32-124)
 
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-124#cis-section-4-122)
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-124#cis-section-4-124)
 
     * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-41-124)
 
@@ -5661,7 +5661,7 @@ subcollection: containers
 
 [Kubernetes version 1.23 change log](/docs/containers?topic=containers-changelog_123#changelog_123)
 
-* [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview)
+* [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
 
@@ -5723,7 +5723,7 @@ subcollection: containers
 
     * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-123#cis-benchmark-32-123)
 
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-123#cis-section-4-122)
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-123#cis-section-4-123)
 
     * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-123#cis-benchmark-41-123)
 
@@ -5762,7 +5762,7 @@ subcollection: containers
 
 [Kubernetes version 1.22 change log](/docs/containers?topic=containers-changelog_122#changelog_122)
 
-* [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview)
+* [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview_122)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
 
@@ -5887,7 +5887,7 @@ subcollection: containers
 
 [(Deprecated) Kubernetes version 1.21 change log](/docs/containers?topic=containers-changelog_121#changelog_121)
 
-* [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview)
+* [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview_121)
 
 * [Version 1.21 change log](/docs/containers?topic=containers-changelog_121#121_changelog)
 
@@ -6043,7 +6043,7 @@ subcollection: containers
 
 [Kubernetes version 1.20 change log](/docs/containers?topic=containers-changelog_120#changelog_120)
 
-* [Overview](/docs/containers?topic=containers-changelog_120#changelog_overview)
+* [Overview](/docs/containers?topic=containers-changelog_120#changelog_overview_120)
 
 * [Version 1.20 change log](/docs/containers?topic=containers-changelog_120#120_changelog)
 
@@ -6214,7 +6214,7 @@ subcollection: containers
 
 [Kubernetes version 1.19 change log](/docs/containers?topic=containers-changelog_119#changelog_119)
 
-* [Overview](/docs/containers?topic=containers-changelog_119#changelog_overview)
+* [Overview](/docs/containers?topic=containers-changelog_119#changelog_overview_119)
 
 * [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog_119#119_changelog)
 
@@ -7817,7 +7817,7 @@ subcollection: containers
 
     * [Version 2.0.0_704, released on 15 September 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_704)
 
-* [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0)
+* [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0-oauth)
 
     * [Version 1.0.0_1024, released on 24 March 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_1024)
 

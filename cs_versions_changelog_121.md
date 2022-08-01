@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-07-25"
+lastupdated: "2022-08-01"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.21
 
@@ -24,7 +24,7 @@ View information about version changes for major, minor, and patch updates that 
 
 
 ## Overview
-{: #changelog_overview}
+{: #changelog_overview_121}
 
 Unless otherwise noted in the change logs, the {{site.data.keyword.containerlong_notm}} provider version enables Kubernetes APIs and features that are at beta. Kubernetes alpha features, which are subject to change, are disabled.
 
