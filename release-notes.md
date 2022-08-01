@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-07-26"
+lastupdated: "2022-08-01"
 
 keywords: kubernetes, release notes
 
@@ -24,6 +24,22 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
+
+
+## August 2022
+{: #containers-aug22}
+
+
+
+
+### 1 August 2022
+{: #containers-aug0122}
+{: release-note}
+
+Worker node fix pack
+:   Kubernetes [1.21.14_1575](/docs/containers?topic=containers-changelog_121), [1.22.12_1565](/docs/containers?topic=containers-changelog_122), [1.23.9_1540](/docs/containers?topic=containers-changelog_123) and [1.24.3_1532](/docs/containers?topic=containers-changelog_124).
+
+
 ## July 2022
 {: #containers-july22}
 
@@ -35,6 +51,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {{site.data.keyword.cos_full_notm}} plug-in version `2.1.19` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
+### 26 July 2022
+{: #containers-july2622}
+{: release-note}
+
+Master fix pack update
+:   Kubernetes [1.24.3_1531](/docs/containers?topic=containers-changelog_124), [1.23.9_1539](/docs/containers?topic=containers-changelog_123), [1.22.12_1564](/docs/containers?topic=containers-changelog_122), and [1.21.14_1574](/docs/containers?topic=containers-changelog_121).
 
 
 

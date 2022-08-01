@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-07"
+lastupdated: "2022-08-01"
 
 keywords: kubernetes, oauth proxy, add-on
 
@@ -18,7 +18,7 @@ subcollection: containers
 # ALB OAuth Proxy add-on change log
 {: #alb-oauth-proxy-changelog}
 
-View information for version updates to the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-comm-ingress-annotations#app-id).
+View information for version updates to the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-comm-ingress-annotations#app-id-auth).
 {: shortdesc}
 
 * **Patch updates**: {{site.data.keyword.cloud_notm}} keeps all your add-on components up-to-date by automatically rolling out patch updates to the most recent version of the ALB OAuth Proxy that is offered by {{site.data.keyword.containerlong_notm}}.
@@ -77,7 +77,7 @@ Version 2.0.0 of the add-on supports {{site.data.keyword.containerlong_notm}} cl
 
 
 ## Version 1.0.0
-{: #1_0_0}
+{: #1_0_0-oauth}
 
 As of 16 May 2022, version 1.0.0 of the add-on is no longer supported.
 {: important}

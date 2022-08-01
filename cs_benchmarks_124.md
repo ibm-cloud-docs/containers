@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-07-14"
+lastupdated: "2022-08-01"
 
 keywords: kubernetes, containers
 
@@ -159,7 +159,7 @@ Review the Control Plane Configuration results of the version 1.5 CIS Kubernetes
 {: caption="Section 3.2 Logging benchmark results" caption-side="top"}
 
 ## 4 Worker node security configuration
-{: #cis-section-4-122}
+{: #cis-section-4-124}
 
 Review the Worker Node Security Configuration results of the version 1.5 CIS Kubernetes benchmark.
 {: shortdesc}

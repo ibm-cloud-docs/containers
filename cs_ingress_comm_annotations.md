@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-15"
+lastupdated: "2022-08-01"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -960,7 +960,7 @@ For more information, see [Customizing the Ingress class](/docs/containers?topic
 
 
 ## Adding {{site.data.keyword.appid_short_notm}} authentication to apps
-{: #app-id}
+{: #app-id-auth}
 
 Enforce authentication for your apps by configuring Ingress with [{{site.data.keyword.appid_full_notm}}](https://cloud.ibm.com/catalog/services/app-id){: external}.
 {: shortdesc}

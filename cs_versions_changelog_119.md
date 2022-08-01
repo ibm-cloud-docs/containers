@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-06-27"
+lastupdated: "2022-08-01"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.19
 
@@ -21,7 +21,7 @@ Version 1.19 is unsupported. You can review the following archive of 1.19 change
 {: shortdesc}
 
 ## Overview
-{: #changelog_overview}
+{: #changelog_overview_119}
 
 Unless otherwise noted in the change logs, the {{site.data.keyword.containerlong_notm}} provider version enables Kubernetes APIs and features that are at beta. Kubernetes alpha features, which are subject to change, are disabled.
 

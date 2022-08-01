@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-07-28"
+lastupdated: "2022-08-01"
 
 keywords: containers
 subcollection: containers
@@ -207,11 +207,21 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
+
+    * [1 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug0122)
+
+        * Worker node fix pack
+
 * [July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july22)
 
     * [27 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july2722)
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.1.19` is available.
+
+    * [26 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july2622)
+
+        * Master fix pack update
 
     * [22 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july2222)
 
@@ -4400,7 +4410,7 @@ subcollection: containers
 
 * [Customizing the Ingress class](/docs/containers?topic=containers-comm-ingress-annotations#-custom-ingress-class)
 
-* [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
+* [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](/docs/containers?topic=containers-comm-ingress-annotations#app-id-auth)
 
     * [Upgrading ALB OAuth Proxy add-on](/docs/containers?topic=containers-comm-ingress-annotations#upgrading-alb-oauth-proxy-add-on)
 
@@ -5582,9 +5592,13 @@ subcollection: containers
 
 [Kubernetes version 1.24 change log](/docs/containers?topic=containers-changelog_124#changelog_124)
 
-* [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview)
+* [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.3_1532, released 01 August 2022](/docs/containers?topic=containers-changelog_124#1243_1532)
+
+    * [Change log for master fix pack 1.24.3_1531, released 26 July 2022](/docs/containers?topic=containers-changelog_124#1243_1531)
 
     * [Change log for worker node fix pack 1.24.2_1529, released 18 July 2022](/docs/containers?topic=containers-changelog_124#1242_1529)
 
@@ -5616,7 +5630,7 @@ subcollection: containers
 
     * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-32-124)
 
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-124#cis-section-4-122)
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-124#cis-section-4-124)
 
     * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-41-124)
 
@@ -5655,9 +5669,13 @@ subcollection: containers
 
 [Kubernetes version 1.23 change log](/docs/containers?topic=containers-changelog_123#changelog_123)
 
-* [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview)
+* [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for worker node fix pack 1.23.9_1540, released 01 August 2022](/docs/containers?topic=containers-changelog_123#1239_1540)
+
+    * [Change log for master fix pack 1.23.9_1539, released 26 July 2022](/docs/containers?topic=containers-changelog_123#1239_1539)
 
     * [Change log for worker node fix pack 1.23.8_1537, released 18 July 2022](/docs/containers?topic=containers-changelog_123#1238_1537)
 
@@ -5717,7 +5735,7 @@ subcollection: containers
 
     * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-123#cis-benchmark-32-123)
 
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-123#cis-section-4-122)
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-123#cis-section-4-123)
 
     * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-123#cis-benchmark-41-123)
 
@@ -5756,9 +5774,13 @@ subcollection: containers
 
 [Kubernetes version 1.22 change log](/docs/containers?topic=containers-changelog_122#changelog_122)
 
-* [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview)
+* [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview_122)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.12_1565, released 01 August 2022](/docs/containers?topic=containers-changelog_122#12212_1565)
+
+    * [Change log for master fix pack 1.22.12_1564, released 26 July 2022](/docs/containers?topic=containers-changelog_122#12212_1564)
 
     * [Change log for worker node fix pack 1.22.11_1562, released 18 July 2022](/docs/containers?topic=containers-changelog_122#12211_1562)
 
@@ -5881,9 +5903,13 @@ subcollection: containers
 
 [(Deprecated) Kubernetes version 1.21 change log](/docs/containers?topic=containers-changelog_121#changelog_121)
 
-* [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview)
+* [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview_121)
 
 * [Version 1.21 change log](/docs/containers?topic=containers-changelog_121#121_changelog)
+
+    * [Change log for worker node fix pack 1.21.14_1575, released 01 August 2022](/docs/containers?topic=containers-changelog_121#12114_1575)
+
+    * [Change log for master fix pack 1.21.14_1574, released 26 July 2022](/docs/containers?topic=containers-changelog_121#12114_1574)
 
     * [Change log for worker node fix pack 1.21.14_1572, released 18 July 2022](/docs/containers?topic=containers-changelog_121#12114_1572)
 
@@ -6037,7 +6063,7 @@ subcollection: containers
 
 [Kubernetes version 1.20 change log](/docs/containers?topic=containers-changelog_120#changelog_120)
 
-* [Overview](/docs/containers?topic=containers-changelog_120#changelog_overview)
+* [Overview](/docs/containers?topic=containers-changelog_120#changelog_overview_120)
 
 * [Version 1.20 change log](/docs/containers?topic=containers-changelog_120#120_changelog)
 
@@ -6208,7 +6234,7 @@ subcollection: containers
 
 [Kubernetes version 1.19 change log](/docs/containers?topic=containers-changelog_119#changelog_119)
 
-* [Overview](/docs/containers?topic=containers-changelog_119#changelog_overview)
+* [Overview](/docs/containers?topic=containers-changelog_119#changelog_overview_119)
 
 * [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog_119#119_changelog)
 
@@ -7231,7 +7257,7 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
-    * [Version 1.2.1_2415_iks (default), released 19 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2415_iks)
+    * [Version 1.2.1_2415_iks, released 19 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2415_iks)
 
     * [Version 1.2.1_2337_iks, released 10 Jun 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2337_iks)
 
@@ -7807,7 +7833,7 @@ subcollection: containers
 
     * [Version 2.0.0_704, released on 15 September 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_704)
 
-* [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0)
+* [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0-oauth)
 
     * [Version 1.0.0_1024, released on 24 March 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_1024)
 
