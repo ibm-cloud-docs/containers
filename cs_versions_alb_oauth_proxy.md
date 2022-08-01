@@ -18,7 +18,7 @@ subcollection: containers
 # ALB OAuth Proxy add-on change log
 {: #alb-oauth-proxy-changelog}
 
-View information for version updates to the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-comm-ingress-annotations#app-id).
+View information for version updates to the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-comm-ingress-annotations#app-id-auth).
 {: shortdesc}
 
 * **Patch updates**: {{site.data.keyword.cloud_notm}} keeps all your add-on components up-to-date by automatically rolling out patch updates to the most recent version of the ALB OAuth Proxy that is offered by {{site.data.keyword.containerlong_notm}}.

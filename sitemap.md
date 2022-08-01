@@ -209,6 +209,10 @@ subcollection: containers
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
 
+    * [1 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug0122)
+
+        * Worker node fix pack
+
 * [July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july22)
 
     * [27 July 2022](/docs/containers?topic=containers-containers-relnotes#containers-july2722)

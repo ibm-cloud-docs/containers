@@ -32,6 +32,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+### 1 August 2022
+{: #containers-aug0122}
+{: release-note}
+
+Worker node fix pack
+:   Kubernetes [1.21.14_1575](/docs/containers?topic=containers-changelog_121), [1.22.12_1565](/docs/containers?topic=containers-changelog_122), [1.23.9_1540](/docs/containers?topic=containers-changelog_123) and [1.24.3_1532](/docs/containers?topic=containers-changelog_124).
+
+
 ## July 2022
 {: #containers-july22}
 

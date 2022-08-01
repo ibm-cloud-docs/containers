@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-08-01"
 
 keywords: kubernetes, helm
 
@@ -38,7 +38,7 @@ Billing
 To enable a managed add-on in your cluster from the CLI, use the [`ibmcloud ks cluster addon enable` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable). To enable a managed add-on in your cluster in the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, use the **Add-ons** pane of the cluster details page. When you enable the managed add-on, a supported version of the tool, including all Kubernetes resources are automatically installed in your cluster. Refer to the documentation of each managed add-on to find the prerequisites that your cluster must meet before you install the managed add-on.
 
 For more information about the prerequisites for each add-on, see:
-- [ALB OAuth Proxy](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
+- [ALB OAuth Proxy](/docs/containers?topic=containers-comm-ingress-annotations#app-id-auth)
 - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)
 - [Cluster Autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc)
 - [Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool)
