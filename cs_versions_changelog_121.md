@@ -56,6 +56,21 @@ Review the version 1.21 change log.
 
 
 
+
+
+### Change log for worker node fix pack 1.21.14_1575, released 01 August 2022
+{: #12114_1575}
+
+The following table shows the changes that are in the worker node fix pack 1.21.14_1575. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2022-27404](https://nvd.nist.gov/vuln/detail/CVE-2022-27404){: external},[CVE-2022-27405](https://nvd.nist.gov/vuln/detail/CVE-2022-27405){: external},[CVE-2022-27406](https://nvd.nist.gov/vuln/detail/CVE-2022-27406){: external},[CVE-2022-29217](https://nvd.nist.gov/vuln/detail/CVE-2022-29217){: external},[CVE-2022-31782](https://nvd.nist.gov/vuln/detail/CVE-2022-31782){: external}. |
+| Kubernetes |N/A|N/A|N/A|
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.21.14_1572" caption-side="top"}
+
 ### Change log for master fix pack 1.21.14_1574, released 26 July 2022
 {: #12114_1574}
 

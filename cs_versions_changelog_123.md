@@ -48,6 +48,21 @@ Review the version 1.23 change log.
 
 
 
+
+
+### Change log for worker node fix pack 1.23.9_1540, released 01 August 2022
+{: #1239_1540}
+
+The following table shows the changes that are in the worker node fix pack 1.23.9_1540. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2022-27404](https://nvd.nist.gov/vuln/detail/CVE-2022-27404){: external},[CVE-2022-27405](https://nvd.nist.gov/vuln/detail/CVE-2022-27405){: external},[CVE-2022-27406](https://nvd.nist.gov/vuln/detail/CVE-2022-27406){: external},[CVE-2022-29217](https://nvd.nist.gov/vuln/detail/CVE-2022-29217){: external},[CVE-2022-31782](https://nvd.nist.gov/vuln/detail/CVE-2022-31782){: external}. |
+| Kubernetes | 1.23.8 | 1.23.9 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.9){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.23.8_1537" caption-side="top"}
+
 ### Change log for master fix pack 1.23.9_1539, released 26 July 2022
 {: #1239_1539}
 
