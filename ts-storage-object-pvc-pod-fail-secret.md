@@ -21,9 +21,9 @@ content-type: troubleshoot
 {: #cos_secret_access_fails}
 {: support}
 
-**Infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 
 

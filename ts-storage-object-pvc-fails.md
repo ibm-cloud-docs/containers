@@ -21,9 +21,9 @@ content-type: troubleshoot
 {: #cred_failure}
 {: support}
 
-**Infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 
 

@@ -19,9 +19,9 @@ content-type: troubleshoot
 {: #istio_debug_tool}
 {: support}
 
-**Infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 To further troubleshoot the [managed Istio add-on](/docs/containers?topic=containers-istio), consider the following debugging tools.
 {: shortdesc}

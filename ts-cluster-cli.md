@@ -24,9 +24,9 @@ content-type: troubleshoot
 Review the following common reasons for CLI connection issues or command failures.
 {: shortdesc}
 
-**Infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 ## Firewall prevents running CLI commands
 {: #ts_firewall_clis}

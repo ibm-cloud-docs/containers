@@ -18,9 +18,9 @@ content-type: troubleshoot
 {: #ts-app-psp}
 {: support}
 
-**Infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 
 After creating a pod or running `kubectl get events` to check on a pod deployment, you see an error message similar to the following.

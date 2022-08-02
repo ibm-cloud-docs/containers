@@ -20,9 +20,9 @@ content-type: troubleshoot
 {: #istio_gateway_affinity}
 {: support}
 
-**Infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 * Multizone clusters only
 
 

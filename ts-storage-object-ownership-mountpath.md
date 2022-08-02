@@ -21,9 +21,9 @@ content-type: troubleshoot
 {: #cos_mountpath_error}
 {: support}
 
-**Infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 
 

@@ -20,9 +20,9 @@ content-type: troubleshoot
 {: #ingress_secret}
 {: support}
 
-**Infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 
 When you run `ibmcloud ks ingress status -c <cluster_name_or_ID>`, one of the following messages continues to be displayed:

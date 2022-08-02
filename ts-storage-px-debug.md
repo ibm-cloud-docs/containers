@@ -21,9 +21,9 @@ content-type: troubleshoot
 {: #debug-portworx}
 {: support}
 
-**Infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 
 

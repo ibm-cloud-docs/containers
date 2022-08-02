@@ -21,9 +21,9 @@ content-type: troubleshoot
 {: #cos_pvc_pending}
 {: support}
 
-**Infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 
 

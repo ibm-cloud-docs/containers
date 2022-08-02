@@ -18,8 +18,8 @@ content-type: troubleshoot
 {: #cs_source_ip_fails}
 {: support}
 
-**Infrastructure provider**:
-* Classic
+Supported infrastructure provider
+:   Classic
 
 
 You [enabled source IP preservation for an Ingress ALB](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip_classic) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the back-end service for your app.

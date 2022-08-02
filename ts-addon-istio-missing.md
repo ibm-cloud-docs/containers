@@ -18,9 +18,9 @@ content-type: troubleshoot
 {: #istio_control_plane}
 {: support}
 
-**Infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 
 One or more of the Istio control plane components, such as `istiod`, does not exist in your cluster.

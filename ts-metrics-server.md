@@ -19,9 +19,9 @@ content-type: troubleshoot
 {: #debug_metrics_server}
 {: support}
 
-**Infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 The following symptoms might indicate a need to adjust the `metrics-server` resources:
 {: tsSymptoms}

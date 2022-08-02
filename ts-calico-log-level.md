@@ -21,9 +21,9 @@ content-type: troubleshoot
 {: troubleshoot}
 {: support}
 
-**Infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 These instructions apply to {{site.data.keyword.containerlong_notm}} 1.19 or later.
 {: note}

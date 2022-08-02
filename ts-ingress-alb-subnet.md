@@ -18,8 +18,8 @@ content-type: troubleshoot
 {: #cs_alb_subnet}
 {: support}
 
-**Infrastructure provider**:
-* Classic
+Supported infrastructure provider
+:   Classic
 
 
 When you try to enable an Ingress ALB by running the `ibmcloud ks ingress alb enable` command, you see the following error:

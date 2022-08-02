@@ -18,9 +18,9 @@ content-type: troubleshoot
 {: #istio_control_plane}
 {: support}
 
-**Infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 When you upgrade your managed Istio components from version 1.11 to version 1.12, the upgrade does not complete. 
 {: tsSymptoms}
