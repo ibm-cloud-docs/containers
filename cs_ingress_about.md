@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-15"
+lastupdated: "2022-08-02"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -120,7 +120,7 @@ If you set up [VPC security groups](/docs/openshift?topic=openshift-vpc-security
 ### Single-zone cluster
 {: #classic-single}
 
-![Classic](../icons/classic.svg "Classic") The following diagram shows how Ingress directs communication from the internet to an app in a classic single-zone cluster.
+The following diagram shows how Ingress directs communication from the internet to an app in a classic single-zone cluster.
 {: shortdesc}
 
 ![Expose an app in a single-zone cluster by using Ingress.](images/cs_ingress_singlezone.png){: caption="Figure 1. Expose an app in a single-zone cluster by using Ingress" caption-side="bottom"}
@@ -140,7 +140,7 @@ If you set up [VPC security groups](/docs/openshift?topic=openshift-vpc-security
 ### Multizone cluster
 {: #classic-multi}
 
-![Classic](../icons/classic.svg "Classic") The following diagram shows how Ingress directs communication from the internet to an app in a classic multizone cluster.
+The following diagram shows how Ingress directs communication from the internet to an app in a classic multizone cluster.
 {: shortdesc}
 
 ![Expose an app in a multizone cluster by using Ingress.](images/cs_ingress_multizone.png){: caption="Figure 1. Expose an app in a multizone cluster by using Ingress" caption-side="bottom"}
@@ -160,7 +160,7 @@ If you set up [VPC security groups](/docs/openshift?topic=openshift-vpc-security
 ### Gateway-enabled cluster
 {: #classic-gateway}
 
-![Classic](../icons/classic.svg "Classic") The following diagram shows how Ingress directs communication from the internet to an app in a [classic gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway).
+The following diagram shows how Ingress directs communication from the internet to an app in a [classic gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway).
 {: shortdesc}
 
 ![Expose an app in a gateway-enabled cluster by using Ingress.](images/cs_ingress_gateway.png){: caption="Figure 1. Expose an app in a gateway-enabled cluster by using Ingress" caption-side="bottom"}
@@ -184,7 +184,7 @@ This diagram shows the traffic flow through a single-zone, gateway-enabled clust
 ## How does a request get to my app in a VPC cluster?
 {: #architecture-vpc}
 
-![VPC](../icons/vpc.svg "VPC") The following diagram shows how Ingress directs communication from the internet to an app in a VPC multizone cluster.
+The following diagram shows how Ingress directs communication from the internet to an app in a VPC multizone cluster.
 {: shortdesc}
 
 ![Expose an app in a VPC cluster by using Ingress.](images/cs_ingress_vpc.png){: caption="Figure 1. Expose an app in a VPC cluster by using Ingress" caption-side="bottom"}

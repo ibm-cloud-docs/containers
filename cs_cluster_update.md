@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-28"
+lastupdated: "2022-08-02"
 
 keywords: kubernetes, upgrade, version
 
@@ -118,7 +118,7 @@ When the master update is complete, you can update your worker nodes, depending 
 You notice that an update is available for your worker nodes in a [classic infrastructure](/docs/containers?topic=containers-infrastructure_providers) cluster. What does that mean? As security updates and patches are put in place for the API server and other master components, you must be sure that the worker nodes remain in sync. You can make two types of updates: updating only the patch version, or updating the `major.minor` version with the patch version.
 {: shortdesc}
 
-![Classic](../icons/classic.svg "Classic") Applies to only classic clusters. Have a VPC cluster? See [Updating VPC worker nodes](#vpc_worker_node) instead.
+Applies to only classic clusters. Have a VPC cluster? See [Updating VPC worker nodes](#vpc_worker_node) instead.
 {: note}
 
 For the latest security patches and fixes, make sure to update your worker nodes to the latest patch as soon as possible after it is available. For more information about the latest updates, review the [Changelog](/docs/containers?topic=containers-changelog).
@@ -325,7 +325,7 @@ If you have Portworx installed in your cluster, you must restart the Portworx po
 You notice that an update is available for your worker nodes in a [VPC infrastructure cluster](/docs/containers?topic=containers-infrastructure_providers). What does that mean? As security updates and patches are put in place for the API server and other master components, you must be sure that the worker nodes remain in sync. You can make two types of updates: updating only the patch version, or updating the `major.minor` version with the patch version.
 {: shortdesc}
 
-![VPC](../icons/vpc.svg "VPC")  Applies to only VPC clusters. Have a classic cluster? See [Updating classic worker nodes](#worker_node) instead.
+ Applies to only VPC clusters. Have a classic cluster? See [Updating classic worker nodes](#worker_node) instead.
 {: note}
 
 If you have Portworx deployed in your cluster, follow the steps to [update VPC worker nodes with Portworx volumes](/docs/containers?topic=containers-portworx#portworx_vpc_up).
@@ -603,13 +603,13 @@ To update flavors:
 3. Create a worker node with the new machine type.
     - **For worker nodes in a worker pool**:
         1. Create a worker pool with the number of worker nodes that you want to replace.
-            * ![Classic](../icons/classic.svg "Classic") Classic clusters:
+            * Classic clusters:
                 ```sh
                 ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
                 ```
                 {: pre}
 
-            * ![VPC](../icons/vpc.svg "VPC") VPC Generation 2 clusters:
+            * VPC Generation 2 clusters:
                 ```sh
                 ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
                 ```
@@ -622,13 +622,13 @@ To update flavors:
             {: pre}
 
         3. Add the zone to your worker pool that you retrieved earlier. When you add a zone, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. If you want to spread your worker nodes across multiple zones, choose a [classic](/docs/containers?topic=containers-regions-and-zones#zones-mz) or [VPC](/docs/containers?topic=containers-regions-and-zones#zones-vpc) multizone location.
-            * ![Classic](../icons/classic.svg "Classic") Classic clusters:
+            * Classic clusters:
                 ```sh
                 ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
                 ```
                 {: pre}
 
-            * ![VPC](../icons/vpc.svg "VPC") VPC Generation 2 clusters:
+            * VPC Generation 2 clusters:
                 ```sh
                 ibmcloud ks zone add vpc-gen2 --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <vpc_subnet_id>
                 ```
@@ -754,7 +754,7 @@ Managed {{site.data.keyword.containerlong_notm}} add-ons are an easy way to enha
 With the introduction of multizone clusters, worker nodes with the same configuration, such as the machine type, are grouped in worker pools. When you create a new cluster, a worker pool that is named `default` is automatically created for you.
 {: shortdesc}
 
-![Classic](../icons/classic.svg "Classic") Applies to only classic clusters. VPC clusters always use worker pools.
+Applies to only classic clusters. VPC clusters always use worker pools.
 {: note}
 
 You can use worker pools to spread worker nodes evenly across zones and build a balanced cluster. Balanced clusters are more available and resilient to failures. If a worker node is removed from a zone, you can rebalance the worker pool and automatically provision new worker nodes to that zone. Worker pools are also used to install Kubernetes version updates to all your worker nodes.  

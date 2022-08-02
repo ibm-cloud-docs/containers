@@ -78,13 +78,13 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 ## Adding worker nodes in VPC clusters
 {: #vpc_pools}
 
-![VPC](../icons/vpc.svg "VPC") Add worker nodes to your VPC cluster.
+Add worker nodes to your VPC cluster.
 {: shortdesc}
 
 ### Creating a new worker pool
 {: #vpc_add_pool}
 
-![VPC](../icons/vpc.svg "VPC") You can add worker nodes to your VPC cluster by creating a new worker pool.
+You can add worker nodes to your VPC cluster by creating a new worker pool.
 {: shortdesc}
 
 
@@ -181,7 +181,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 ### Adding a zone to a worker pool
 {: #vpc_add_zone}
 
-![VPC](../icons/vpc.svg "VPC") You can span your VPC cluster across multiple zones within one region by adding a zone to your existing worker pool.
+You can span your VPC cluster across multiple zones within one region by adding a zone to your existing worker pool.
 {: shortdesc}
 
 When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the new zone and considered for future workload scheduling. {{site.data.keyword.containerlong_notm}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.
@@ -255,16 +255,16 @@ If you have multiple worker pools in your cluster, add the zone to all them so t
 ## Adding worker nodes in classic clusters
 {: #classic_pools}
 
-![Classic](../icons/classic.svg "Classic") Add worker nodes to your classic cluster.
+Add worker nodes to your classic cluster.
 {: shortdesc}
 
-![Classic](../icons/classic.svg "Classic") Want to save on your classic worker node costs? [Create a reservation](/docs/containers?topic=containers-reservations) to lock in a discount over 1 or 3 year terms! Then, create your worker pool by using the reserved instances. Note that autoscaling can't be enable on worker pools that use reservations.
+Want to save on your classic worker node costs? [Create a reservation](/docs/containers?topic=containers-reservations) to lock in a discount over 1 or 3 year terms! Then, create your worker pool by using the reserved instances. Note that autoscaling can't be enable on worker pools that use reservations.
 {: tip}
 
 ### Creating a new worker pool
 {: #add_pool}
 
-![Classic](../icons/classic.svg "Classic") You can add worker nodes to your classic cluster by creating a new worker pool.
+You can add worker nodes to your classic cluster by creating a new worker pool.
 {: shortdesc}
 
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/openshift?topic=openshift-users).
@@ -339,7 +339,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 ### Adding a zone to a worker pool
 {: #add_zone}
 
-![Classic](../icons/classic.svg "Classic") You can span your classic cluster across multiple zones within one region by adding a zone to your existing worker pool.
+You can span your classic cluster across multiple zones within one region by adding a zone to your existing worker pool.
 {: shortdesc}
 
 When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the new zone and considered for future workload scheduling. {{site.data.keyword.containerlong_notm}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.
@@ -422,7 +422,7 @@ To add a zone with worker nodes to your worker pool:
 ## Adding worker nodes in gateway-enabled classic clusters
 {: #gateway_pools}
 
-![Classic](../icons/classic.svg "Classic") By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. These pools are created with specific labels for compute or gateway functionality. Add compute or gateway worker nodes, depending on your use case.
+By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. These pools are created with specific labels for compute or gateway functionality. Add compute or gateway worker nodes, depending on your use case.
 {: shortdesc}
 
 - Compute: If you need more compute resources to run your app workloads, [resize](#resize_pool) or [add zones](#add_gateway_zone) to the `compute` worker pool. Only create a new compute worker pool if you need worker nodes of a different flavor than the existing compute worker nodes.
@@ -507,7 +507,7 @@ To add a zone to your worker pool:
 ### Creating a new compute worker pool
 {: #gateway_compute}
 
-![Classic](../icons/classic.svg "Classic") By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. After cluster creation, you can add more compute worker nodes by creating a new compute worker pool.
+By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. After cluster creation, you can add more compute worker nodes by creating a new compute worker pool.
 {: shortdesc}
 
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/openshift?topic=openshift-users).
@@ -574,7 +574,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 ### Creating a new gateway worker pool
 {: #gateway_replace}
 
-![Classic](../icons/classic.svg "Classic") By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. If you need more network throughput for your cluster after cluster creation, you can [resize](#resize_pool) or [add zones](#add_gateway_zone) to the `gateway` worker pool. Only create new gateway worker pool if you need worker nodes of a different flavor than the existing gateway worker nodes, which are created on shared virtual machines with the `u3c.2x4` flavor by default.
+By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. If you need more network throughput for your cluster after cluster creation, you can [resize](#resize_pool) or [add zones](#add_gateway_zone) to the `gateway` worker pool. Only create new gateway worker pool if you need worker nodes of a different flavor than the existing gateway worker nodes, which are created on shared virtual machines with the `u3c.2x4` flavor by default.
 {: shortdesc}
 
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/openshift?topic=openshift-users).
@@ -649,7 +649,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 ## Adding classic infrastructure servers to gateway-enabled classic clusters
 {: #gateway_vsi}
 
-![Classic](../icons/classic.svg "Classic") If you have non-containerized workloads on a classic IBM Cloud infrastructure [virtual server](https://cloud.ibm.com/gen1/infrastructure/provision/vs) or [bare metal server](https://cloud.ibm.com/gen1/infrastructure/provision/bm), you can connect those workloads to the workloads in your gateway-enabled classic cluster by adding the server instance to your cluster network.
+If you have non-containerized workloads on a classic IBM Cloud infrastructure [virtual server](https://cloud.ibm.com/gen1/infrastructure/provision/vs) or [bare metal server](https://cloud.ibm.com/gen1/infrastructure/provision/bm), you can connect those workloads to the workloads in your gateway-enabled classic cluster by adding the server instance to your cluster network.
 {: shortdesc}
 
 This feature is deprecated. 

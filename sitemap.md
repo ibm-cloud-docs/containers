@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-01"
+lastupdated: "2022-08-02"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
+
+    * [2 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug0222)
+
+        * Ingress ALB change log updates
 
     * [1 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug0122)
 
@@ -1383,7 +1387,7 @@ subcollection: containers
 
     * [24 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov2420)
 
-        * ![Classic](../icons/classic.svg "Classic") New! Reservations to reduce classic worker node costs
+        * New! Reservations to reduce classic worker node costs
 
     * [23 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov2320)
 
@@ -7257,6 +7261,8 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
+    * [Version 1.2.1_2426_iks (default), released 2 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2426_iks)
+
     * [Version 1.2.1_2415_iks, released 19 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2415_iks)
 
     * [Version 1.2.1_2337_iks, released 10 Jun 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2337_iks)
@@ -7270,6 +7276,8 @@ subcollection: containers
     * [Version 1.2.0_2131_iks, released 26 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.0_2131_iks)
 
 * [Version 1.1.2](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_2)
+
+    * [Version 1.1.2_2411_iks, released on 2 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2411_iks)
 
     * [Version 1.1.2_2368_iks, released on 19 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2368_iks)
 
