@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-08-01"
+lastupdated: "2022-08-02"
 
 keywords: kubernetes, release notes
 
@@ -29,6 +29,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## August 2022
 {: #containers-aug22}
 
+
+
+
+
+### 2 August 2022
+{: #containers-aug0222}
+{: release-note}
+
+Ingress ALB change log updates
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for versions `1.2.1_2426_iks` and `1.1.2_2411_iks`.
 
 
 
@@ -874,7 +884,7 @@ Kubernetes Ingress image
 :   Versions 1.1.1_1949_iks, 1.0.3_1933_iks, and 0.49.3_1941_iks of the [Kubernetes Ingress image](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) are released.
   
 Kubernetes Ingress annotations
-:   Clusters created on or after 31 January 2022 by default no longer support server-snippet annotations in Ingress resources for the managed Kubernetes Ingress Controller (ALB). All new clusters are deployed with the `allow-server-snippets` configuration set to `false`, which prevents the ALB from correctly processing Ingress resources with the offending annotations. You must edit the ConfigMap manually to change this setting in order for the add-on to work. For more information, see [Adding App ID authentication to apps](/docs/openshift?topic=containers-comm-ingress-annotations#app-id).
+:   Clusters created on or after 31 January 2022 by default no longer support server-snippet annotations in Ingress resources for the managed Kubernetes Ingress Controller (ALB). All new clusters are deployed with the `allow-server-snippets` configuration set to `false`, which prevents the ALB from correctly processing Ingress resources with the offending annotations. You must edit the ConfigMap manually to change this setting in order for the add-on to work.
 
 
 
@@ -2459,7 +2469,7 @@ Default Kubernetes Ingress image
 {: #containers-nov2420}
 {: release-note}
 
-![Classic](../icons/classic.svg "Classic") New! Reservations to reduce classic worker node costs
+New! Reservations to reduce classic worker node costs
 :   Create a reservation with contracts for 1 or 3 year terms for classic worker nodes to lock in a reduced cost for the life of the contract. Typical savings range between 30-50% compared to on-demand worker node costs. Reservations can be created in the {{site.data.keyword.cloud_notm}} console for classic infrastructure only. For more information, see [Reserving instances to reduce classic worker node costs](/docs/containers?topic=containers-reservations).
 
 ### 23 November 2020

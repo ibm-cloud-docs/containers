@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-08-02"
 
 keywords: kubernetes, containers
 
@@ -145,10 +145,10 @@ Publicly expose an app in your cluster to the internet or privately expose an ap
     2. [Choose an app exposure service](/docs/containers?topic=containers-cs_network_planning) that fits your requirements for incoming traffic to the app.
 2. **Expose your app**:
     - Load balancers:
-        - ![Classic](../icons/classic.svg "Classic") Classic clusters:
+        - Classic clusters:
             1. Create an [NLB 1.0](/docs/containers?topic=containers-loadbalancer) or [NLB 2.0](/docs/containers?topic=containers-loadbalancer-v2).
             2. [Register a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname) for the NLB.
-        - ![VPC](../icons/vpc.svg "VPC") VPC clusters: Set up a [VPC load balancer](/docs/containers?topic=containers-vpc-lbaas).
+        - VPC clusters: Set up a [VPC load balancer](/docs/containers?topic=containers-vpc-lbaas).
 
     - Ingress: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress-types#alb-comm-create) or the [private network](/docs/containers?topic=containers-ingress-types#alb-comm-create-private).
 

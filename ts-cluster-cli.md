@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-15"
+lastupdated: "2022-08-02"
 
 keywords: kubernetes
 
@@ -24,9 +24,9 @@ content-type: troubleshoot
 Review the following common reasons for CLI connection issues or command failures.
 {: shortdesc}
 
-**Infrastructure provider**:
-* ![Classic](../icons/classic.svg "Classic") Classic
-* ![VPC](../icons/vpc.svg "VPC") VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 ## Firewall prevents running CLI commands
 {: #ts_firewall_clis}

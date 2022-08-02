@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-08-02"
 
 keywords: kubernetes, help
 
@@ -19,9 +19,9 @@ content-type: troubleshoot
 {: #istio_debug_tool}
 {: support}
 
-**Infrastructure provider**:
-* ![Classic](../icons/classic.svg "Classic") Classic
-* ![VPC](../icons/vpc.svg "VPC") VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 To further troubleshoot the [managed Istio add-on](/docs/containers?topic=containers-istio), consider the following debugging tools.
 {: shortdesc}

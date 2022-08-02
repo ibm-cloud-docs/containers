@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-08-02"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -21,7 +21,7 @@ content-type: troubleshoot
 {: support}
 
 
-**Infrastructure provider**: ![Classic](../icons/classic.svg "Classic") Classic
+**Infrastructure provider**: Classic
 
 
 When you use `ibmcloud ks worker` commands with your bare metal worker node, you see a message similar to the following.

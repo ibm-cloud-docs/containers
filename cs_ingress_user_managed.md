@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-16"
+lastupdated: "2022-08-02"
 
 keywords: kubernetes, nginx, multiple ingress controllers, byo controller
 
@@ -34,7 +34,7 @@ DNS microservice updates are asynchronous and might take several minutes to appl
 ## Classic clusters: Exposing your Ingress controller by creating an NLB and a hostname
 {: #user_managed_nlb}
 
-![Classic](../icons/classic.svg "Classic") Create a network load balancer (NLB) to expose your custom Ingress controller deployment, and then create a hostname for the NLB IP address.
+Create a network load balancer (NLB) to expose your custom Ingress controller deployment, and then create a hostname for the NLB IP address.
 {: shortdesc}
 
 In classic clusters, bringing your own Ingress controller is supported only for providing public external access to your apps and is not supported for providing private external access.
@@ -216,7 +216,7 @@ If you plan to continue to use IBM-provided ALBs concurrently with your custom I
 ## VPC clusters: Exposing your Ingress controller by creating a VPC load balancer and subdomain
 {: #user_managed_vpc}
 
-![VPC](../icons/vpc.svg "VPC") Expose your custom Ingress controller deployment to the public or to the private network by setting up a Kubernetes `LoadBalancer` service in your cluster. A VPC load balancer which routes requests to your app is automatically created for you in your VPC outside of your cluster.
+Expose your custom Ingress controller deployment to the public or to the private network by setting up a Kubernetes `LoadBalancer` service in your cluster. A VPC load balancer which routes requests to your app is automatically created for you in your VPC outside of your cluster.
 {: shortdesc}
 
 1. Get the configuration file for your Ingress controller ready. For example, you can use the [cloud-generic NGINX community Ingress controller]( https://github.com/kubernetes/ingress-nginx/blob/main/deploy/static/provider/cloud/deploy.yaml){: external}. If you use the community controller, edit the `deploy.yaml` file by following these steps.

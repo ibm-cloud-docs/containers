@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-07-15"
+lastupdated: "2022-08-02"
 
 keywords: kubernetes, subnets, ips, vlans, networking
 
@@ -21,7 +21,7 @@ subcollection: containers
 Change the pool of available portable public or private IP addresses by adding subnets to your {{site.data.keyword.containerlong}} cluster.
 {: shortdesc}
 
-![Classic](../icons/classic.svg "Classic") The content on this page is specific to classic clusters. For information about VPC clusters, see [Configuring subnets and IP addresses for VPC clusters](/docs/containers?topic=containers-vpc-subnets).
+The content on this page is specific to classic clusters. For information about VPC clusters, see [Configuring subnets and IP addresses for VPC clusters](/docs/containers?topic=containers-vpc-subnets).
 {: note}
 
 

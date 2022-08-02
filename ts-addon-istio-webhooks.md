@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-08-02"
 
 keywords: kubernetes, help
 
@@ -18,9 +18,9 @@ content-type: troubleshoot
 {: #istio_control_plane}
 {: support}
 
-**Infrastructure provider**:
-* ![Classic](../icons/classic.svg "Classic") Classic
-* ![VPC](../icons/vpc.svg "VPC") VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 When you upgrade your managed Istio components from version 1.11 to version 1.12, the upgrade does not complete. 
 {: tsSymptoms}

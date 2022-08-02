@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-07-18"
+lastupdated: "2022-08-02"
 
 keywords: kubernetes, kernel
 
@@ -412,8 +412,8 @@ You can reboot the worker node and the huge pages configuration persists. Howeve
 {: important}
 
 **Supported infrastructure providers and required permissions**:
-* ![Classic](../icons/classic.svg "Classic") Classic
-* ![VPC](../icons/vpc.svg "VPC") VPC
+* Classic
+* VPC
 * **Operator** platform access role and **Manager** service access role for the cluster in {{site.data.keyword.cloud_notm}} IAM
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)

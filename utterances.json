@@ -316,19 +316,13 @@
   ],
   "faq_free": [
     "Can I have a free kubernetes cluster",
-    "How many free kubernetes cluster can I have?",
-    "What is the requirements to create a free kubernetes cluster?",
-    "WANT TO CREATE A FREE KUBERNETES CLUSTER WITH THIS ACCOUNT",
     "create free Kubernetes cluster in account",
     "want to provision free Kubernetes cluster",
-    "kubernete free cluster",
-    "add create a free cluster",
     "how to add a free cluster",
     "can I create a free cluster",
     "provision a free cluster",
     "provisioning a free cluster",
     "not able to create  free k8s cluster",
-    "want to create a free cluster",
     "Why am I unable to create a free cluster",
     "I can not create Kubernetes cluster even the free version",
     "not able to create free cluster for kubernetes",
@@ -338,15 +332,11 @@
     "trying to create a free Kubernetes Cluster",
     "not able to create my free cluster",
     "free kubernetes cluster",
-    "unable to launch kube free tier",
     "provision a free Kubernetes cluster",
     "unable to use free Kubernetes service",
     "want to learn free kubernetes",
-    "why can't I create container with lite account",
     "Trying to create a kubernetes service with the free pricing plan",
-    "create a cluster with Lite account",
     "How to transfer from free kubernetes cluster to paid cluster?",
-    "What the difference between free and paid kubernetes cluster",
     "need a kubernetes cluster for free"
   ],
   "smallest_cluster": [  
@@ -437,8 +427,7 @@
   ],
   "faq_access": [
     "What roles to I need to access kubernetes cluster?",
-    "What access policies do I give my kubernetes cluster users",
-    
+    "What access policies do I give my kubernetes cluster users", 
     "permission needed to create a kubernetes cluster",
     "grant access to users to my kubernetes cluster",
     "give some one access to my cluster",
@@ -556,24 +545,7 @@
     "kubectl error invalid object doesn't have additional properties",
     "Kubectl fails with error no resources found"
   ],
-  "standards": [
-    "standards does the kubernetes service comply to",
-    "What is IBM Cloud compliance",
-    "provide compliance reports for kubernetes",
-    "How can I get info about GDPR for kubes",
-    "How to request compliance reports for kubernetes",
-    "compliance report for kubernetes"
-  ],
-  "supported_regions": [
-    "Where is the kubernetes service available?",
-    "Where can I create standard kubernetes clusters",
-    "Do you have datacenter local for kubernetes customers",
-    "available data centers for kubernetes",
-    "is kubernetes service available worldwide",
-    "Kubernetes Service locations",
-    "locations available for kubernetes"
-  ],
-  "cs_strongswan_release": [
+"cs_strongswan_release": [
     "can't establish VPN connectivity with the strongSwan Helm chart",
     "Can't install a new strongSwan heml chart release",
     "How to delete previous release of strongSwan",
@@ -597,16 +569,6 @@
     "Your cluster can't pull images from Container Registry 'icr.io'",
     "What permission needed to pull image to my cluster",
     "Not able to pull an image from registry into my cluster"
-  ],
-  "faq_benefits": [
-    "What is kubernetes",
-    "want to know about kubernetes",
-    "Tell me more about Kubernetes services",
-    "let me try kubernetes",
-    "benefits of kubernetes",
-    "start with Kubernetes",
-    "get started using kubernetes",
-    "getting started with Kubernetes"
   ]
 }
 

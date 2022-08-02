@@ -18,7 +18,7 @@ subcollection: containers
 # Overview of network security options
 {: #vpc-network-policy}
 
-![VPC](../icons/vpc.svg "VPC") This information is specific to VPC clusters. For network policy information for classic clusters, see [Classic: Controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
+This information is specific to VPC clusters. For network policy information for classic clusters, see [Classic: Controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
 {: note}
 
 Control traffic to and from your cluster and traffic between pods in your cluster by creating network rules and policies.

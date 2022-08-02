@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-26"
+lastupdated: "2022-08-02"
 
 keywords: kubernetes
 
@@ -18,7 +18,7 @@ content-type: troubleshoot
 {: #cs_firewall}
 {: support}
 
-**Infrastructure provider**: ![Classic](../icons/classic.svg "Classic") Classic
+**Infrastructure provider**: Classic
 
 
 When the worker nodes in your cluster can't communicate on the private network, you might see various different symptoms.
