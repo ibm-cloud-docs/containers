@@ -339,26 +339,26 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
         spec:
         tls:
         - hosts:
-            - <domain>
-            secretName: <tls_secret_name>
+          - <domain>
+          secretName: <tls_secret_name>
         rules:
-        - host: <domain>
+        - host: <hostname>
             http:
             paths:
-            - path: /<app1_path>
+            - path: / <app_path_1>
                 pathType: Prefix
                 backend:
                 service:
-                    name: <app1_service>
-                    port:
-                      number: 80
-            - path: /<app2_path>
+                  name: <servicename>
+                  port:
+                  number: 80
+             - path: / <app_path_2>
                 pathType: Prefix
                 backend:
                 service:
-                    name: <app2_service>
-                    port:
-                      number: 80
+                  name: <servicename>
+                  port:
+                  number: 80
         ```
         {: codeblock}
 
