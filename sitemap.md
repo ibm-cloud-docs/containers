@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-08-03"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
+
+    * [3 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-august0322)
+
+        * New! {{site.data.keyword.filestorage_vpc_full_notm}} CSI Driver (Beta)
 
     * [2 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug0222)
 
@@ -4358,6 +4362,110 @@ subcollection: containers
 
     * [Deploying additional resources for your custom Ingress controller](/docs/containers?topic=containers-ingress-user_managed#deploy-resources-custom-ingress-vpc)
 
+[Kubernetes Ingress annotations](/docs/containers?topic=containers-comm-ingress-annotations#comm-ingress-annotations)
+
+* [Customizing routing with annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations)
+
+    * [Add server port to host header](/docs/containers?topic=containers-comm-ingress-annotations#add-sport-hheader)
+
+    * [ALB ID](/docs/containers?topic=containers-comm-ingress-annotations#alb_id_anno)
+
+    * [{{site.data.keyword.appid_short_notm}} authentication](/docs/containers?topic=containers-comm-ingress-annotations#app-id-authentication)
+
+    * [Client request body size](/docs/containers?topic=containers-comm-ingress-annotations#client-request-bodysize)
+
+    * [Client response data buffering](/docs/containers?topic=containers-comm-ingress-annotations#client-response-data-buffering)
+
+    * [Custom connect and read timeouts](/docs/containers?topic=containers-comm-ingress-annotations#custom-connect-read-timeouts)
+
+    * [Custom error actions](/docs/containers?topic=containers-comm-ingress-annotations#custom-error-actions)
+
+    * [Custom HTTP and HTTPS ports](/docs/containers?topic=containers-comm-ingress-annotations#custom-http-https-ports)
+
+    * [Custom request header](/docs/containers?topic=containers-comm-ingress-annotations#custom-request-header)
+
+    * [Custom response header](/docs/containers?topic=containers-comm-ingress-annotations#custom-response-header)
+
+    * [External services](/docs/containers?topic=containers-comm-ingress-annotations#external-services-path)
+
+    * [HTTP redirects to HTTPS](/docs/containers?topic=containers-comm-ingress-annotations#http-redirects-https)
+
+    * [HTTP Strict Transport Security](/docs/containers?topic=containers-comm-ingress-annotations#http-strict-transport-security)
+
+    * [Keepalive requests](/docs/containers?topic=containers-comm-ingress-annotations#keepalive-requests)
+
+    * [Keepalive request timeout](/docs/containers?topic=containers-comm-ingress-annotations#keepalive-request-timeout)
+
+    * [Large client header buffers](/docs/containers?topic=containers-comm-ingress-annotations#large-client-header-buffers)
+
+    * [Location modifier](/docs/containers?topic=containers-comm-ingress-annotations#location-modifier)
+
+    * [Location snippets](/docs/containers?topic=containers-comm-ingress-annotations#location-snippets)
+
+    * [Mutual authentication](/docs/containers?topic=containers-comm-ingress-annotations#mutual-authentication)
+
+    * [Proxy buffer size](/docs/containers?topic=containers-comm-ingress-annotations#proxy-buffer-size)
+
+    * [Proxy buffers](/docs/containers?topic=containers-comm-ingress-annotations#config-proxy-buffers)
+
+    * [Proxy busy buffers size](/docs/containers?topic=containers-comm-ingress-annotations#proxy-busy-buffer-size)
+
+    * [Proxy next upstream](/docs/containers?topic=containers-comm-ingress-annotations#proxy-next-upstream)
+
+    * [Rate limiting](/docs/containers?topic=containers-comm-ingress-annotations#rate-limiting)
+
+    * [Response header removal](/docs/containers?topic=containers-comm-ingress-annotations#response-header-removal)
+
+    * [Rewrite paths](/docs/containers?topic=containers-comm-ingress-annotations#alb-rewrite-paths)
+
+    * [Server snippets](/docs/containers?topic=containers-comm-ingress-annotations#server-snippets-custom)
+
+    * [Session affinity with cookies](/docs/containers?topic=containers-comm-ingress-annotations#session-affinity-cookies)
+
+    * [SSL services support](/docs/containers?topic=containers-comm-ingress-annotations#ssl-services-support)
+
+    * [TCP ports](/docs/containers?topic=containers-comm-ingress-annotations#tcp-ports-non-standard)
+
+    * [Upstream fail timeout](/docs/containers?topic=containers-comm-ingress-annotations#upstream-fail-timeout)
+
+    * [Upstream keepalive requests](/docs/containers?topic=containers-comm-ingress-annotations#upstream-keepalive-requests)
+
+    * [Upstream keepalive timeout](/docs/containers?topic=containers-comm-ingress-annotations#upstream-keepalive-timeout)
+
+    * [Upstream max fails](/docs/containers?topic=containers-comm-ingress-annotations#upstream-max-fails)
+
+* [Customizing the ALB deployment](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy)
+
+    * [Create a ConfigMap to customize the Ingress deployment](/docs/containers?topic=containers-comm-ingress-annotations#create-ingress-configmap-custom)
+
+* [Customizing the Ingress class](/docs/containers?topic=containers-comm-ingress-annotations#-custom-ingress-class)
+
+* [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](/docs/containers?topic=containers-comm-ingress-annotations#app-id-auth)
+
+    * [Upgrading ALB OAuth Proxy add-on](/docs/containers?topic=containers-comm-ingress-annotations#upgrading-alb-oauth-proxy-add-on)
+
+* [Preserving the source IP address](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip)
+
+    * [Enabling the PROXY protocol in VPC clusters](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip_vpc)
+
+    * [Changing the `externalTrafficPolicy` in classic clusters](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip_classic)
+
+* [Configuring SSL protocols and SSL ciphers at the HTTP level](/docs/containers?topic=containers-comm-ingress-annotations#ssl_protocols_ciphers)
+
+* [Sending your custom certificate to legacy clients](/docs/containers?topic=containers-comm-ingress-annotations#default_server_cert)
+
+* [Tuning ALB performance](/docs/containers?topic=containers-comm-ingress-annotations#perf_tuning)
+
+    * [Enabling log buffering and flush timeout](/docs/containers?topic=containers-comm-ingress-annotations#access-log)
+
+    * [Changing the number or duration of keepalive connections](/docs/containers?topic=containers-comm-ingress-annotations#keepalive_time)
+
+    * [Changing the number of simultaneous connections or worker processes](/docs/containers?topic=containers-comm-ingress-annotations#worker_processes_connections)
+
+    * [Changing the number of open files for worker processes](/docs/containers?topic=containers-comm-ingress-annotations#max-worker-files)
+
+    * [Tuning kernel performance](/docs/containers?topic=containers-comm-ingress-annotations#ingress_kernel)
+
 
 ## Storing data on persistent storage
 {: #sitemap_storing_data_on_persistent_storage}
@@ -4391,7 +4499,7 @@ subcollection: containers
 
 [Storing data on classic IBM Cloud {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
 
-* [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
+* [Quickstart for {{site.data.keyword.cloud_notm}} Classic {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
 
 * [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
 
@@ -4660,6 +4768,27 @@ subcollection: containers
     * [RHEL or CentOS ConfigMap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-rhel-cm)
 
     * [Ubuntu ConfigMap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
+
+
+### Storing data on IBM Cloud File Storage for VPC
+{: #sitemap_storing_data_on_ibm_cloud_file_storage_for_vpc}
+
+
+[Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} add-on](/docs/containers?topic=containers-storage-file-vpc-install#storage-file-vpc-install)
+
+[Adding {{site.data.keyword.filestorage_vpc_short}} to apps](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps)
+
+* [Deploying an app that uses {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file)
+
+[Managing {{site.data.keyword.filestorage_vpc_full_notm}}](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-managing)
+
+* [Creating a custom storage class](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-custom-sc)
+
+* [Updating the {{site.data.keyword.filestorage_vpc_short}} add-on](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-update)
+
+* [Understanding your storage removal options](/docs/containers?topic=containers-storage-file-vpc-managing#vpc_storage_delete_options_file)
+
+* [Cleaning up persistent storage](/docs/containers?topic=containers-storage-file-vpc-managing#vpc-storage-remove-file)
 
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 

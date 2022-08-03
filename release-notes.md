@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-08-03"
 
 keywords: kubernetes, release notes
 
@@ -25,11 +25,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: tip}
 
 
-
 ## August 2022
 {: #containers-aug22}
 
+### 3 August 2022
+{: #containers-august0322}
+{: release-note}
 
+New! {{site.data.keyword.filestorage_vpc_full_notm}} CSI Driver (Beta)
+:    You can now enable the {{site.data.keyword.filestorage_vpc_full_notm}} add-on in your clusters. For more information, see [Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} add-on](/docs/containers?topic=containers-storage-file-vpc-install). 
 
 
 
@@ -48,6 +52,7 @@ Ingress ALB change log updates
 
 Worker node fix pack
 :   Kubernetes [1.21.14_1575](/docs/containers?topic=containers-changelog_121), [1.22.12_1565](/docs/containers?topic=containers-changelog_122), [1.23.9_1540](/docs/containers?topic=containers-changelog_123) and [1.24.3_1532](/docs/containers?topic=containers-changelog_124).
+
 
 
 ## July 2022
