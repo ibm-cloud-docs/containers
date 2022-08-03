@@ -4790,6 +4790,8 @@ subcollection: containers
 
 * [Cleaning up persistent storage](/docs/containers?topic=containers-storage-file-vpc-managing#vpc-storage-remove-file)
 
+[Storage class reference](/docs/containers?topic=containers-storage-file-vpc-sc-ref#storage-file-vpc-sc-ref)
+
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 
 * [About Portworx](/docs/containers?topic=containers-portworx#about-portworx)
