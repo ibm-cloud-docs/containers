@@ -209,6 +209,10 @@ subcollection: containers
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
 
+    * [3 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-august0322)
+
+        * New! {{site.data.keyword.filestorage_vpc_full_notm}} CSI Driver (Beta)
+
     * [2 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug0222)
 
         * Ingress ALB change log updates
@@ -4495,7 +4499,7 @@ subcollection: containers
 
 [Storing data on classic IBM Cloud {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
 
-* [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
+* [Quickstart for {{site.data.keyword.cloud_notm}} Classic {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
 
 * [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
 
@@ -4764,6 +4768,27 @@ subcollection: containers
     * [RHEL or CentOS ConfigMap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-rhel-cm)
 
     * [Ubuntu ConfigMap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
+
+
+### Storing data on IBM Cloud File Storage for VPC
+{: #sitemap_storing_data_on_ibm_cloud_file_storage_for_vpc}
+
+
+[Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} add-on](/docs/containers?topic=containers-storage-file-vpc-install#storage-file-vpc-install)
+
+[Adding {{site.data.keyword.filestorage_vpc_short}} to apps](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps)
+
+* [Deploying an app that uses {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file)
+
+[Managing {{site.data.keyword.filestorage_vpc_full_notm}}](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-managing)
+
+* [Creating a custom storage class](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-custom-sc)
+
+* [Updating the {{site.data.keyword.filestorage_vpc_short}} add-on](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-update)
+
+* [Understanding your storage removal options](/docs/containers?topic=containers-storage-file-vpc-managing#vpc_storage_delete_options_file)
+
+* [Cleaning up persistent storage](/docs/containers?topic=containers-storage-file-vpc-managing#vpc-storage-remove-file)
 
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 
