@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-08-04"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -80,7 +80,7 @@ ingress.bluemix.net/appid-auth: "bindSecret=bind_secret namespace=default reques
 ```
 {: screen}
 
-Kubernetes Ingress field: See [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](#app-id).
+Kubernetes Ingress field: See [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](#app-id-auth).
 
 
 ### Client request body size

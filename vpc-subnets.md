@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-07-28"
+lastupdated: "2022-08-04"
 
 keywords: kubernetes, ips, vlans, networking, public gateway
 
@@ -426,24 +426,24 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
 
     - If you already have a public gateway in a zone where you have workers and in the VPC that your cluster is in, note the gateway's **ID**.
     - If you don't have a public gateway in a zone where you have workers and in the VPC that your cluster is in, create a public gateway. Consider naming the public gateway in the format `<cluster>-<zone>-gateway`. In the output, note the public gateway's **ID**.
-    ```sh
-    ibmcloud is public-gateway-create <gateway_name> <VPC_ID> <zone>
-    ```
-    {: pre}
+        ```sh
+        ibmcloud is public-gateway-create <gateway_name> <VPC_ID> <zone>
+        ```
+        {: pre}
 
-    Example output
+        Example output
 
-    ```sh
-    ID               26466378-6065-4716-a90b-ac7ed7917c63
-    Name             mycluster-us-south-1-gateway
-    Floating IP      169.xx.xx.xxx(26466378-6065-4716-a90b-ac7ed7917c63)
-    Status           pending
-    Created          2019-09-20T16:27:32-05:00
-    Zone             us-south-1
-    VPC              myvpc(36c8f522-4f0d-400c-8226-299f0b8198cf)
-    Resource group   -
-    ```
-    {: screen}
+        ```sh
+        ID               26466378-6065-4716-a90b-ac7ed7917c63
+        Name             mycluster-us-south-1-gateway
+        Floating IP      169.xx.xx.xxx(26466378-6065-4716-a90b-ac7ed7917c63)
+        Status           pending
+        Created          2019-09-20T16:27:32-05:00
+        Zone             us-south-1
+        VPC              myvpc(36c8f522-4f0d-400c-8226-299f0b8198cf)
+        Resource group   -
+        ```
+        {: screen}
 
 3. List the worker nodes in your cluster. For the zone where you enabled the public gateway, note the **Primary IP** of one worker node.
     ```sh

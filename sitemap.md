@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-03"
+lastupdated: "2022-08-04"
 
 keywords: containers
 subcollection: containers
@@ -2877,6 +2877,12 @@ subcollection: containers
 [Creating clusters](/docs/containers?topic=containers-clusters#clusters)
 
 * [Sample CLI commands](/docs/containers?topic=containers-clusters#cluster_create_samples)
+
+    * [Free cluster](/docs/containers?topic=containers-clusters#cluster_create_free)
+
+    * [Classic clusters](/docs/containers?topic=containers-clusters#cluster_create_classic)
+
+    * [VPC clusters](/docs/containers?topic=containers-clusters#cluster_create_vpc)
 
 * [Preparing to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare)
 
