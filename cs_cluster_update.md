@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-08-04"
 
 keywords: kubernetes, upgrade, version
 
@@ -764,7 +764,7 @@ If you created clusters before multizone clusters became available, your worker 
 
 Review the following image to see how your cluster setup changes when you move from stand-alone worker nodes to worker pools.
 
-![Update your cluster from stand-alone worker nodes to worker pools](images/cs_cluster_migrate.png)
+![Update your cluster from stand-alone worker nodes to worker pools](images/cs_cluster_migrate.png){: caption="Figure 1. Update your cluster from stand-alone worker nodes to worker pools" caption-side="bottom"}
 
 Before you begin:
 - Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the cluster.
