@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-05"
+lastupdated: "2022-08-10"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
+
+    * [11 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug0522)
+
+        * Dynamically provision {{site.data.keyword.cos_full_notm}} buckets with quotas enabled
 
     * [5 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug0522)
 
@@ -4671,6 +4675,28 @@ subcollection: containers
 * [Creating a deployment](/docs/containers?topic=containers-storage_cos_apps#create-cos-deployment-steps)
 
 * [Using object storage in a stateful set](/docs/containers?topic=containers-storage_cos_apps#cos_statefulset)
+
+[Setting capacity quotas for apps that use {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-tutorial-quota)
+
+* [Objectives](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-objectives)
+
+* [Prerequisites](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-prereqs)
+
+* [Creating a set of service credentials](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-credentials)
+
+* [Creating a secret to store your credentials](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-secret)
+
+* [Installing the plug-in](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-install)
+
+* [Dynamically provisioning a bucket with a quota](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-bucket)
+
+* [Uploading a file to your bucket](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-file)
+
+* [Creating an app that mounts the bucket](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-app)
+
+* [Review](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-app)
+
+* [Next steps](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-app)
 
 [VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_vpc_ip#storage_cos_vpc_ip)
 

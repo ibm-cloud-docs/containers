@@ -228,6 +228,7 @@ toc:
                 - storage-cos-understand.md
                 - storage-cos-install.md 
                 - storage-cos-apps.md
+                - storage-cos-tutorial-quota.md
                 - storage-cos-vpc-ip.md
                 - storage-cos-reference.md
             - topicgroup:   
