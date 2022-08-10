@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-08-09"
 
 keywords: kubernetes, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -42,7 +42,7 @@ To deploy monitoring agents to your cluster, complete the following steps.
 
 1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observe/monitoring/create){: external}.
 
-2. [Configure a monitoring agent in your cluster.](/docs/monitoring?topic=monitoring-config_agent#config_agent_kube_script)
+2. [Configure a monitoring agent in your cluster.](/docs/monitoring?topic=monitoring-kubernetes_cluster)
 
 3. In the [Monitoring console](https://cloud.ibm.com/observe/monitoring){: external}, click **Open Dashboard** for the instance that you provisioned.
 
