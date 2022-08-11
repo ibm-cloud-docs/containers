@@ -9,7 +9,7 @@ keywords: kubernetes
 subcollection: containers
 
 content-type: tutorial
-services: containers,
+services: containers,cloud-object-storage
 account-plan: paid
 completion-time: 45m
 
