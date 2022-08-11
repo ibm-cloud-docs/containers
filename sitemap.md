@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-10"
+lastupdated: "2022-08-11"
 
 keywords: containers
 subcollection: containers
@@ -212,6 +212,8 @@ subcollection: containers
     * [11 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug0522)
 
         * Dynamically provision {{site.data.keyword.cos_full_notm}} buckets with quotas enabled
+
+        * Ingress ALB change log updates
 
     * [5 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug0522)
 
@@ -7326,7 +7328,11 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
-    * [Version 1.2.1_2426_iks (default), released 2 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2426_iks)
+    * [Version 1.2.1_2488_iks (default), released 11 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2488_iks)
+
+    * [Version 1.2.1_2487_iks, released 11 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2487_iks)
+
+    * [Version 1.2.1_2426_iks, released 2 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2426_iks)
 
     * [Version 1.2.1_2415_iks, released 19 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2415_iks)
 
