@@ -29,7 +29,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-aug22}
 
 ### 11 August 2022
-{: #containers-aug0522}
+{: #containers-aug1122}
 {: release-note}
 
 Dynamically provision {{site.data.keyword.cos_full_notm}} buckets with quotas enabled

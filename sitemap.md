@@ -209,7 +209,7 @@ subcollection: containers
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
 
-    * [11 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug0522)
+    * [11 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug1122)
 
         * Dynamically provision {{site.data.keyword.cos_full_notm}} buckets with quotas enabled
 
@@ -4696,9 +4696,9 @@ subcollection: containers
 
 * [Creating an app that mounts the bucket](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-app)
 
-* [Review](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-app)
+* [Review](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-review)
 
-* [Next steps](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-app)
+* [Next steps](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-next)
 
 [VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_vpc_ip#storage_cos_vpc_ip)
 
