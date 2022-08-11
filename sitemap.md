@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-05"
+lastupdated: "2022-08-11"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
+
+    * [11 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug1122)
+
+        * Dynamically provision {{site.data.keyword.cos_full_notm}} buckets with quotas enabled
+
+        * Ingress ALB change log updates
 
     * [5 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug0522)
 
@@ -4672,6 +4678,28 @@ subcollection: containers
 
 * [Using object storage in a stateful set](/docs/containers?topic=containers-storage_cos_apps#cos_statefulset)
 
+[Setting capacity quotas for apps that use {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-tutorial-quota)
+
+* [Objectives](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-objectives)
+
+* [Prerequisites](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-prereqs)
+
+* [Creating a set of service credentials](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-credentials)
+
+* [Creating a secret to store your credentials](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-secret)
+
+* [Installing the plug-in](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-install)
+
+* [Dynamically provisioning a bucket with a quota](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-bucket)
+
+* [Uploading a file to your bucket](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-file)
+
+* [Creating an app that mounts the bucket](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-app)
+
+* [Review](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-review)
+
+* [Next steps](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-next)
+
 [VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_vpc_ip#storage_cos_vpc_ip)
 
 [Storage class reference](/docs/containers?topic=containers-storage_cos_reference#storage_cos_reference)
@@ -7300,7 +7328,11 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
-    * [Version 1.2.1_2426_iks (default), released 2 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2426_iks)
+    * [Version 1.2.1_2488_iks (default), released 11 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2488_iks)
+
+    * [Version 1.2.1_2487_iks, released 11 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2487_iks)
+
+    * [Version 1.2.1_2426_iks, released 2 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2426_iks)
 
     * [Version 1.2.1_2415_iks, released 19 July 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2415_iks)
 
