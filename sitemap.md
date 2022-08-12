@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-11"
+lastupdated: "2022-08-12"
 
 keywords: containers
 subcollection: containers
@@ -2691,7 +2691,7 @@ subcollection: containers
 
     * [What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?](/docs/containers?topic=containers-strategy#app_kinds)
 
-    * [What about serverless apps?](/docs/containers?topic=containers-strategy#apps_serverless)
+    * [What about serverless apps?](/docs/containers?topic=containers-strategy#apps_serverless-strategy)
 
     * [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#knowledge)
 
@@ -8338,7 +8338,7 @@ subcollection: containers
 
 * [`kubectl` commands time out](/docs/containers?topic=containers-ts_clis#exec_logs_fail)
 
-[Why can't I create or delete clusters?](/docs/containers?topic=containers-cluster_infra_errors#cluster_infra_errors)
+[Why can't I create or delete clusters or worker nodes?](/docs/containers?topic=containers-cluster_infra_errors#cluster_infra_errors)
 
 * [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-cluster_infra_errors#cs_credentials)
 
@@ -8448,16 +8448,6 @@ subcollection: containers
 * [Hard reboot](/docs/containers?topic=containers-common_worker_nodes_issues#hard-reboot)
 
 * [Instance can't be found](/docs/containers?topic=containers-common_worker_nodes_issues#instance-not-found)
-
-[Why can't I create or delete worker nodes?](/docs/containers?topic=containers-worker_infra_errors#worker_infra_errors)
-
-* [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-worker_infra_errors#cs_credentials)
-
-* [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-worker_infra_errors#orphaned)
-
-* [Unable to create or delete worker nodes due to endpoints error](/docs/containers?topic=containers-worker_infra_errors#vpe-ts)
-
-* [Unable to create or delete worker nodes due to paid account or one time password error](/docs/containers?topic=containers-worker_infra_errors#cs_totp)
 
 [VPC: Why can't I create worker nodes on dedicated hosts?](/docs/containers?topic=containers-ts-worker-dedicated#ts-worker-dedicated)
 

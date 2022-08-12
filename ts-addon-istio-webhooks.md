@@ -15,7 +15,7 @@ content-type: troubleshoot
 
 
 # Why can't I upgrade to version 1.12 of the managed Istio add-on?
-{: #istio_control_plane}
+{: #ts-addon-istio-webhooks}
 {: support}
 
 Supported infrastructure providers
