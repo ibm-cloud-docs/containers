@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-12"
+lastupdated: "2022-08-15"
 
 keywords: containers
 subcollection: containers
@@ -8601,6 +8601,8 @@ subcollection: containers
 * [Moving the `ibm-cloud-provider-ip` pod](/docs/containers?topic=containers-istio_gateway_affinity#move-ip-pod)
 
 [Why are Istio components missing?](/docs/containers?topic=containers-istio_control_plane#istio_control_plane)
+
+[How do I delete Operator Lifecycle Manager components?](/docs/containers?topic=containers-ts-delete-olm#ts-delete-olm)
 
 
 ### Load balancers
