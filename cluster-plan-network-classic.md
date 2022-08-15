@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-08-15"
 
 keywords: kubernetes network, classic
 
@@ -191,6 +191,8 @@ Ready to get started with a cluster for this scenario? After you plan your [high
   
 ## Scenario: Extend your on-premises data center with a gateway-enabled classic cluster
 {: #gateway}
+
+
 
 In this scenario, you want to run workloads in a classic cluster that are accessible to services, databases, or other resources in your on-premises data center. However, you might need to provide limited public access to your cluster, and want to ensure that any public access is controlled and isolated in your cluster. For example, you might need your workers to access an {{site.data.keyword.cloud_notm}} service that does not support private cloud service endpoints, and must be accessed over the public network. Or you might need to provide limited public access to an app that runs in your cluster. To achieve this cluster setup, you can create a firewall by creating a gateway-enabled cluster.
 {: shortdesc}
