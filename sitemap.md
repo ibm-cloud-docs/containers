@@ -209,6 +209,12 @@ subcollection: containers
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
 
+    * [16 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug1622)
+
+        * Worker node fix pack
+
+        * Istio add-on
+
     * [11 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug1122)
 
         * Dynamically provision {{site.data.keyword.cos_full_notm}} buckets with quotas enabled
