@@ -7951,6 +7951,15 @@ subcollection: containers
     * [Version 1.0.0_574, released on 30 March 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_574)
 
 
+## Ingress ConfigMap change log
+{: #sitemap_ingress_configmap_change_log}
+
+
+[Ingress ConfigMap change log](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ibm-k8s-controller-config-change-log)
+
+* [17 August 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-17-aug-2022)
+
+
 ## IAM and Activity Tracker events
 {: #sitemap_iam_and_activity_tracker_events}
 
