@@ -7524,9 +7524,13 @@ subcollection: containers
 
 * [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
 
+    * [Changelog for 1.14.3, released 16 August 2022](/docs/containers?topic=containers-istio-changelog#changelog-for-1143,-released-16-august-2022)
+
     * [Change log for 1.14.1, released 16 June 2022](/docs/containers?topic=containers-istio-changelog#1141)
 
 * [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
+
+    * [Changelog for 1.13.7, released 16 August 2022](/docs/containers?topic=containers-istio-changelog#1137)
 
     * [Change log for 1.13.5, released 21 June 2022](/docs/containers?topic=containers-istio-changelog#1135)
 

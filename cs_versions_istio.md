@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-28"
+lastupdated: "2022-08-16"
 
 keywords: kubernetes, istio, add-on
 
@@ -44,6 +44,34 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 ## Version 1.14
 {: #v114}
 
+### Changelog for 1.14.3, released 16 August 2022
+{:#1143}
+
+Review the changes that are included in version 1.14.3 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.14.1
+
+Current version
+:   1.14.3
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.14.3](https://istio.io/latest/news/releases/1.14.x/announcing-1.14.3/){: external}.
+:   Resolves the following CVEs:
+    - [usn-5464-1](https://ubuntu.com/security/notices/USN-5464-1){: external}
+    - [usn-5473-1](https://ubuntu.com/security/notices/USN-5473-1){: external}
+    - [usn-5488-1](https://ubuntu.com/security/notices/USN-5488-1){: external}
+    - [usn-5495-1](https://ubuntu.com/security/notices/USN-5495-1){: external}
+    - [usn-5502-1](https://ubuntu.com/security/notices/USN-5502-1){: external}
+    - [CVE-2022-32205](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32205){: external}
+    - [CVE-2022-32206](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32206){: external}
+    - [CVE-2022-32207](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32207){: external}
+    - [CVE-2022-32208](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32208){: externa}
+    - [CVE-2022-1304](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1304){: external}
+    - [CVE-2022-2097](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2097){: externa}
+    - [CVE-2022-2068](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2068){: external}
+
 ### Change log for 1.14.1, released 16 June 2022
 {: #1141}
 
@@ -61,6 +89,30 @@ Updates in this version
 
 ## Version 1.13
 {: #v113}
+
+### Changelog for 1.13.7, released 16 August 2022
+{: #1137}
+
+Review the changes that are included in version 1.13.7 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.13.5
+
+Current version
+:   1.13.7
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.13.7](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.7/.){: external}.
+:   Resolves the following CVEs:
+    - [usn-5473-1](https://ubuntu.com/security/notices/USN-5473-1){: external}
+    - [CVE-2022-32205](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32205){: external}
+    - [CVE-2022-32206](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32206){: external}
+    - [CVE-2022-32207](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32207){: external}
+    - [CVE-2022-32208](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32208){: externa}
+    - [CVE-2022-1304](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1304){: external}
+    - [CVE-2022-2097 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2097){: externa}
+    - [CVE-2022-2068](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2068){: external}
 
 ### Change log for 1.13.5, released 21 June 2022
 {: #1135}
