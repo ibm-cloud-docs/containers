@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-08-04"
+lastupdated: "2022-08-12"
 
 keywords: kubernetes, 1.23, versions, update, upgrade
 
@@ -69,7 +69,7 @@ The following table shows the actions that you must take after you update the Ku
 
 | Type | Description|
 | --- | --- |
-| Operator Lifecycle Manager (OLM) install no longer managed | OLM is no longer installed nor managed by IBM. Existing installs are left as-is and no longer managed after the update. If you are using the OLM components then you must manage updates. If unused, you may uninstall the OLM components. Please refer to the [opensource documentation](https://olm.operatorframework.io/){: external} for information on available resources including how to install a new instance of OLM on your cluster. |
+| Operator Lifecycle Manager (OLM) install no longer managed | OLM is no longer installed nor managed by IBM. Existing installs are left as-is and no longer managed after the update. If you are using the OLM components then you must manage updates. If unused, you may [uninstall the OLM components](/docs/containers?topic=containers-ts-delete-olm). Refer to the [opensource documentation](https://olm.operatorframework.io/){: external} for information on available resources including how to install a new instance of OLM on your cluster. |
 | Recreate volume snapshots | Volume snapshots must be recreated after the update. Run `kubectl get volumesnapshots -A` to get a list of volume snapshots. |
 {: caption="Changes to make after you update the master to Kubernetes 1.23" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}

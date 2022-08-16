@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-11"
+lastupdated: "2022-08-16"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
+
+    * [16 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug1622)
+
+        * Worker node fix pack
+
+        * Istio add-on
 
     * [11 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug1122)
 
@@ -2691,7 +2697,7 @@ subcollection: containers
 
     * [What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?](/docs/containers?topic=containers-strategy#app_kinds)
 
-    * [What about serverless apps?](/docs/containers?topic=containers-strategy#apps_serverless)
+    * [What about serverless apps?](/docs/containers?topic=containers-strategy#apps_serverless-strategy)
 
     * [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#knowledge)
 
@@ -5667,6 +5673,8 @@ subcollection: containers
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
 
+    * [Change log for worker node fix pack 1.24.3_1533, released 16 August 2022](/docs/containers?topic=containers-changelog_124#1243_1533)
+
     * [Change log for worker node fix pack 1.24.3_1532, released 01 August 2022](/docs/containers?topic=containers-changelog_124#1243_1532)
 
     * [Change log for master fix pack 1.24.3_1531, released 26 July 2022](/docs/containers?topic=containers-changelog_124#1243_1531)
@@ -5743,6 +5751,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for worker node fix pack 1.23.9_1541, released 16 August 2022](/docs/containers?topic=containers-changelog_123#1239_1541)
 
     * [Change log for worker node fix pack 1.23.9_1540, released 01 August 2022](/docs/containers?topic=containers-changelog_123#1239_1540)
 
@@ -5848,6 +5858,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview_122)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.12_1566, released 16 August 2022](/docs/containers?topic=containers-changelog_122#12212_1566)
 
     * [Change log for worker node fix pack 1.22.12_1565, released 01 August 2022](/docs/containers?topic=containers-changelog_122#12212_1565)
 
@@ -5977,6 +5989,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview_121)
 
 * [Version 1.21 change log](/docs/containers?topic=containers-changelog_121#121_changelog)
+
+    * [Change log for worker node fix pack 1.21.14_1576, released 16 August 2022](/docs/containers?topic=containers-changelog_121#12114_1576)
 
     * [Change log for worker node fix pack 1.21.14_1575, released 01 August 2022](/docs/containers?topic=containers-changelog_121#12114_1575)
 
@@ -7510,9 +7524,13 @@ subcollection: containers
 
 * [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
 
+    * [Changelog for 1.14.3, released 16 August 2022](/docs/containers?topic=containers-istio-changelog#changelog-for-1143,-released-16-august-2022)
+
     * [Change log for 1.14.1, released 16 June 2022](/docs/containers?topic=containers-istio-changelog#1141)
 
 * [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
+
+    * [Changelog for 1.13.7, released 16 August 2022](/docs/containers?topic=containers-istio-changelog#1137)
 
     * [Change log for 1.13.5, released 21 June 2022](/docs/containers?topic=containers-istio-changelog#1135)
 
@@ -7933,6 +7951,15 @@ subcollection: containers
     * [Version 1.0.0_574, released on 30 March 2021.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0_574)
 
 
+## Ingress ConfigMap change log
+{: #sitemap_ingress_configmap_change_log}
+
+
+[Ingress ConfigMap change log](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ibm-k8s-controller-config-change-log)
+
+* [17 August 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-17-aug-2022)
+
+
 ## IAM and Activity Tracker events
 {: #sitemap_iam_and_activity_tracker_events}
 
@@ -8338,7 +8365,7 @@ subcollection: containers
 
 * [`kubectl` commands time out](/docs/containers?topic=containers-ts_clis#exec_logs_fail)
 
-[Why can't I create or delete clusters?](/docs/containers?topic=containers-cluster_infra_errors#cluster_infra_errors)
+[Why can't I create or delete clusters or worker nodes?](/docs/containers?topic=containers-cluster_infra_errors#cluster_infra_errors)
 
 * [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-cluster_infra_errors#cs_credentials)
 
@@ -8448,16 +8475,6 @@ subcollection: containers
 * [Hard reboot](/docs/containers?topic=containers-common_worker_nodes_issues#hard-reboot)
 
 * [Instance can't be found](/docs/containers?topic=containers-common_worker_nodes_issues#instance-not-found)
-
-[Why can't I create or delete worker nodes?](/docs/containers?topic=containers-worker_infra_errors#worker_infra_errors)
-
-* [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-worker_infra_errors#cs_credentials)
-
-* [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-worker_infra_errors#orphaned)
-
-* [Unable to create or delete worker nodes due to endpoints error](/docs/containers?topic=containers-worker_infra_errors#vpe-ts)
-
-* [Unable to create or delete worker nodes due to paid account or one time password error](/docs/containers?topic=containers-worker_infra_errors#cs_totp)
 
 [VPC: Why can't I create worker nodes on dedicated hosts?](/docs/containers?topic=containers-ts-worker-dedicated#ts-worker-dedicated)
 
@@ -8611,6 +8628,8 @@ subcollection: containers
 * [Moving the `ibm-cloud-provider-ip` pod](/docs/containers?topic=containers-istio_gateway_affinity#move-ip-pod)
 
 [Why are Istio components missing?](/docs/containers?topic=containers-istio_control_plane#istio_control_plane)
+
+[How do I delete Operator Lifecycle Manager components?](/docs/containers?topic=containers-ts-delete-olm#ts-delete-olm)
 
 
 ### Load balancers

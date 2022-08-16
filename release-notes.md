@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-08-11"
+lastupdated: "2022-08-16"
 
 keywords: kubernetes, release notes
 
@@ -27,6 +27,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## August 2022
 {: #containers-aug22}
+
+### 16 August 2022
+{: #containers-aug1622}
+{: release-note}
+
+Worker node fix pack
+:   Kubernetes [1.21.14_1576](/docs/containers?topic=containers-changelog_121), [1.22.12_1566](/docs/containers?topic=containers-changelog_122), [1.23.9_1541](/docs/containers?topic=containers-changelog_123) and [1.24.3_1533](/docs/containers?topic=containers-changelog_124).
+
+
+Istio add-on
+:   Version [`1.14.3`](/docs/containers?topic=containers-istio-changelog#1143) and [`1.13.7`](/docs/containers?topic=containers-istio-changelog#1137) is available.
 
 ### 11 August 2022
 {: #containers-aug1122}

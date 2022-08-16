@@ -354,6 +354,7 @@ toc:
             - versions-static-route.md
             - versions-backup-restore.md
             - cs_versions_alb_oauth_proxy.md
+        - ibm-k8s-controller-config-change-log.md
         - topicgroup:
             label: IAM and Activity Tracker events
             topics:
@@ -412,7 +413,6 @@ toc:
                     - ts-worker-debug-kube-api.md
                     - states-workers.md
                     - ts-worker-common-issues.md
-                    - ts-worker-create-delete.md
                     - ts-worker-dedicated.md
                     - ts-worker-autorebalance.md
                     - ts-worker-bm-instance-id.md
@@ -464,6 +464,7 @@ toc:
                     - ts-addon-istio-debug.md
                     - ts-addon-istio-gateway-affinity.md
                     - ts-addon-istio-missing.md
+                    - ts-delete-olm.md
               - topicgroup:
                   label: Load balancers
                   topics:
