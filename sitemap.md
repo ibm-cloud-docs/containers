@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-16"
+lastupdated: "2022-08-17"
 
 keywords: containers
 subcollection: containers
@@ -3253,6 +3253,48 @@ subcollection: containers
     * [Where is my information stored?](/docs/containers?topic=containers-service-arch#pi-location)
 
     * [How can I remove my information?](/docs/containers?topic=containers-service-arch#pi-removal)
+
+[Protecting {{site.data.keyword.containerlong_notm}} resources with context-based restrictions](/docs/containers?topic=containers-cbr#cbr)
+
+* [How {{site.data.keyword.containerlong_notm}} integrates with context-based restrictions](/docs/containers?topic=containers-cbr#cbr-overview)
+
+    * [Protecting {{site.data.keyword.containerlong_notm}} resources](/docs/containers?topic=containers-cbr#resources-types-cbr)
+
+    * [Protecting specific APIs](/docs/containers?topic=containers-cbr#protect-api-types-cbr)
+
+    * [Allowing {{site.data.keyword.containerlong_notm}} to access other {{site.data.keyword.cloud_notm}} resources by using CBR](/docs/containers?topic=containers-cbr#cbr-integrations)
+
+* [Creating network zones](/docs/containers?topic=containers-cbr#create-cbr-network-zone-containers)
+
+    * [Creating network zones from the API](/docs/containers?topic=containers-cbr#create-network-zone-api)
+
+    * [Creating network zones from the CLI](/docs/containers?topic=containers-cbr#create-network-zone-cli)
+
+* [Creating rules](/docs/containers?topic=containers-cbr#create-cbr-rule-containers)
+
+    * [Creating rules by using the API](/docs/containers?topic=containers-cbr#create-cbr-rule-api)
+
+    * [Creating rules from the CLI](/docs/containers?topic=containers-cbr#create-cbr-rule-cli)
+
+* [Limitations](/docs/containers?topic=containers-cbr#cbr-limitations)
+
+[Example context-based restrictions scenarios](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial)
+
+* [Understanding the scenario](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-scenario)
+
+* [Prerequisites](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-prereqs)
+
+* [Creating your network zone](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-create-zone)
+
+* [Creating your CBR rule](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-create-rule)
+
+* [Testing your context-based restrictions](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-create-test)
+
+* [Additional scenarios](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-create-additional-scenarios)
+
+    * [Allowing different IPs to access the public and private service endpoints](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-scenarios-pub-priv-one-ip)
+
+    * [Allowing different IPs to access different API types over the public and private service endpoints](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-scenarios-pub-priv-api-types)
 
 
 ## Managing access control
