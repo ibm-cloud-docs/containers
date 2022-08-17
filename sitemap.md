@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-16"
+lastupdated: "2022-08-17"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
+
+    * [17 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug1722)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.1.20` is available.
+
+        * Cluster autoscaler add-on
 
     * [16 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug1622)
 
@@ -2910,8 +2916,6 @@ subcollection: containers
 
     * [Creating a standard classic cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps)
 
-    * [Creating a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli)
-
 * [Creating a standard VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2)
 
     * [Creating a standard VPC cluster in the console](/docs/containers?topic=containers-clusters#clusters_vpcg2_ui)
@@ -3253,6 +3257,48 @@ subcollection: containers
     * [Where is my information stored?](/docs/containers?topic=containers-service-arch#pi-location)
 
     * [How can I remove my information?](/docs/containers?topic=containers-service-arch#pi-removal)
+
+[Protecting {{site.data.keyword.containerlong_notm}} resources with context-based restrictions](/docs/containers?topic=containers-cbr#cbr)
+
+* [How {{site.data.keyword.containerlong_notm}} integrates with context-based restrictions](/docs/containers?topic=containers-cbr#cbr-overview)
+
+    * [Protecting {{site.data.keyword.containerlong_notm}} resources](/docs/containers?topic=containers-cbr#resources-types-cbr)
+
+    * [Protecting specific APIs](/docs/containers?topic=containers-cbr#protect-api-types-cbr)
+
+    * [Allowing {{site.data.keyword.containerlong_notm}} to access other {{site.data.keyword.cloud_notm}} resources by using CBR](/docs/containers?topic=containers-cbr#cbr-integrations)
+
+* [Creating network zones](/docs/containers?topic=containers-cbr#create-cbr-network-zone-containers)
+
+    * [Creating network zones from the API](/docs/containers?topic=containers-cbr#create-network-zone-api)
+
+    * [Creating network zones from the CLI](/docs/containers?topic=containers-cbr#create-network-zone-cli)
+
+* [Creating rules](/docs/containers?topic=containers-cbr#create-cbr-rule-containers)
+
+    * [Creating rules by using the API](/docs/containers?topic=containers-cbr#create-cbr-rule-api)
+
+    * [Creating rules from the CLI](/docs/containers?topic=containers-cbr#create-cbr-rule-cli)
+
+* [Limitations](/docs/containers?topic=containers-cbr#cbr-limitations)
+
+[Example context-based restrictions scenarios](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial)
+
+* [Understanding the scenario](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-scenario)
+
+* [Prerequisites](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-prereqs)
+
+* [Creating your network zone](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-create-zone)
+
+* [Creating your CBR rule](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-create-rule)
+
+* [Testing your context-based restrictions](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-create-test)
+
+* [Additional scenarios](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-create-additional-scenarios)
+
+    * [Allowing different IPs to access the public and private service endpoints](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-scenarios-pub-priv-one-ip)
+
+    * [Allowing different IPs to access different API types over the public and private service endpoints](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-scenarios-pub-priv-api-types)
 
 
 ## Managing access control
@@ -7718,9 +7764,13 @@ subcollection: containers
 
 * [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0106_ca_addon)
 
+    * [Change log for patch update 1.0.6_763, released 17 August 2022](/docs/containers?topic=containers-ca_changelog#106763_ca)
+
     * [Change log for patch update 1.0.6_742, released 15 July 2022](/docs/containers?topic=containers-ca_changelog#106742_ca)
 
 * [Version 1.0.5](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
+
+    * [Change log for patch update 1.0.5_754, released 17 August 2022](/docs/containers?topic=containers-ca_changelog#105754_ca)
 
     * [Change log for patch update 1.0.5_728, released 19 July 2022](/docs/containers?topic=containers-ca_changelog#105728_ca)
 
@@ -7849,6 +7899,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.1.20, released 17 August 2022](/docs/containers?topic=containers-cos_plugin_changelog#02120_object_plugin)
 
 * [Change log for version 2.1.19, released 27 July 2022](/docs/containers?topic=containers-cos_plugin_changelog#02119_object_plugin)
 

@@ -120,6 +120,8 @@ toc:
             topics:
             - secure.md
             - cs_tech.md
+            - cbr.md
+            - cbr-tutorial.md
         - topicgroup:
             label: Managing access control
             topics:
