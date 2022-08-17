@@ -2914,8 +2914,6 @@ subcollection: containers
 
     * [Creating a standard classic cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps)
 
-    * [Creating a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli)
-
 * [Creating a standard VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2)
 
     * [Creating a standard VPC cluster in the console](/docs/containers?topic=containers-clusters#clusters_vpcg2_ui)
