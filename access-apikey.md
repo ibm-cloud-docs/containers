@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-13"
+lastupdated: "2022-08-19"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -255,7 +255,7 @@ Instead of using the default linked IBM Cloud infrastructure account to order in
 You can manually set infrastructure credentials to a different account only for classic clusters, not for VPC clusters.
 {: note}
 
-The IBM Cloud infrastructure credentials that are set by the `ibmcloud ks credential set` command persist after your session ends. If you remove IBM Cloud infrastructure credentials that were manually set with the [`ibmcloud ks credential unset --region <region>`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credentials_unset) command, the credentials of the Pay-As-You-Go or Subscription account are used instead. However, this change in infrastructure account credentials might cause [orphaned clusters](/docs/containers?topic=containers-worker_infra_errors#orphaned).
+The IBM Cloud infrastructure credentials that are set by the `ibmcloud ks credential set` command persist after your session ends. If you remove IBM Cloud infrastructure credentials that were manually set with the [`ibmcloud ks credential unset --region <region>`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credentials_unset) command, the credentials of the Pay-As-You-Go or Subscription account are used instead. However, this change in infrastructure account credentials might cause [orphaned clusters](/docs/containers?topic=containers-cluster_infra_errors).
 {: important}
 
 **Before you begin**:

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-08-17"
+lastupdated: "2022-08-19"
 
 keywords: kubernetes, release notes
 
@@ -4514,7 +4514,7 @@ Ingress ALB changelog
 :   Updated the ALB `nginx-ingress` image to build 497.
 
 Troubleshooting clusters
-:   Added [troubleshooting steps](/docs/containers?topic=containers-worker_infra_errors#cs_totp) for when you can't manage clusters and worker nodes because the time-based one-time passcode (TOTP) option is enabled for your account.
+:   Added [troubleshooting steps](/docs/containers?topic=containers-common_worker_nodes_issues) for when you can't manage clusters and worker nodes because the time-based one-time passcode (TOTP) option is enabled for your account.
 
 
 
