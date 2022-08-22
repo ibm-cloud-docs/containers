@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-08-16"
+lastupdated: "2022-08-22"
 
 keywords: kubernetes, istio, add-on
 
@@ -45,7 +45,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 {: #v114}
 
 ### Changelog for 1.14.3, released 16 August 2022
-{:#1143}
+{: #1143}
 
 Review the changes that are included in version 1.14.3 of the managed Istio add-on.
 {: shortdesc}
@@ -111,7 +111,7 @@ Updates in this version
     - [CVE-2022-32207](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32207){: external}
     - [CVE-2022-32208](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32208){: externa}
     - [CVE-2022-1304](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1304){: external}
-    - [CVE-2022-2097 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2097){: externa}
+    - [CVE-2022-2097](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2097){: externa}
     - [CVE-2022-2068](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2068){: external}
 
 ### Change log for 1.13.5, released 21 June 2022

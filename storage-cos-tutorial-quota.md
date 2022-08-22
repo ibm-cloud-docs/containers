@@ -2,14 +2,14 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-08-11"
+lastupdated: "2022-08-22"
 
 keywords: kubernetes
 
 subcollection: containers
 
 content-type: tutorial
-services: containers,cloud-object-storage
+services: containers, cloud-object-storage
 account-plan: paid
 completion-time: 45m
 

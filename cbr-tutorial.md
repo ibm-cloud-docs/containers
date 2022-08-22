@@ -2,14 +2,14 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-08-19"
+lastupdated: "2022-08-22"
 
 keywords: cbr, context based restrictions, security, cbr scenario, containerscbr
 
 subcollection: containers
 
 content-type: tutorial
-services: containers,
+services: containers
 account-plan: paid
 completion-time: 30m
 
