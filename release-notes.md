@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-08-19"
+lastupdated: "2022-08-22"
 
 keywords: kubernetes, release notes
 
@@ -4169,7 +4169,7 @@ New! Gateway-enabled classic clusters
         - [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_gateway)
         - Flow of traffic to apps when using an [NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_gateway), an [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#v2_gateway), or [Ingress ALBs](/docs/containers?topic=containers-ingress-about#classic-gateway)
 
-:   Ready to get started? [Create a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli).
+:   Ready to get started? [Create a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters&interface=cli#clusters_cli_steps).
 
 
 

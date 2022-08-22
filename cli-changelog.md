@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-08-05"
+lastupdated: "2022-08-22"
 
 keywords: kubernetes
 
@@ -542,7 +542,7 @@ Version 0.4.38 of the CLI was released on 14 October 2019.
 Version 0.4.31 of the CLI was released on 24 September 2019.
 
 
-- Adds the `--gateway-enabled` flag to the `ibmcloud ks cluster create classic` command to create a gateway-enabled cluster. You can enable a gateway only on standard, Kubernetes clusters during cluster creation. For more information, see [Creating a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli).
+- Adds the `--gateway-enabled` flag to the `ibmcloud ks cluster create classic` command to create a gateway-enabled cluster. You can enable a gateway only on standard, Kubernetes clusters during cluster creation.
 - Removes the deprecated `region get`, `region set`, and `region ls` commands from help output. 
 - Updates command structure to the new spaced format in help output. 
 - Adds a warning to the output of legacy `cluster config` behavior. For more information, see the [version 1.0 plug-in documentation](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta). 

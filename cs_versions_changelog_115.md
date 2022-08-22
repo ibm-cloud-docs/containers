@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-08-22"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -476,8 +476,8 @@ The following table shows the changes that are in the patch 1.15.4_1518. Master 
 |Calico|v3.8.1|v3.8.2|See the [Calico release notes)](https://projectcalico.docs.tigera.io/archive/v3.8/release-notes/){: external}.|
 |Cluster master HA configuration|N/A|N/A|Updated configuration to improve performance of master update operations.|
 |Default IBM file storage class|N/A|N/A|Fixed a bug that might cause cluster master operations such as patch updates to clear the default IBM file storage class.|
-|Gateway-enabled cluster controller|N/A|844|New! For [classic clusters with a gateway enabled](/docs/containers?topic=containers-clusters#gateway_cluster_cli), a `DaemonSet` is installed to configure settings for routing network traffic to worker nodes.|
-|{{site.data.keyword.cloud_notm}} Provider|v1.15.3-112|v1.15.4-136|Updated to support the Kubernetes 1.15.4 release. In addition, version 1.0 and 2.0 network load balancers (NLBs) were updated to support [classic clusters with a gateway enabled](/docs/containers?topic=containers-clusters#gateway_cluster_cli).|
+|Gateway-enabled cluster controller|N/A|844|New! For classic clusters with a gateway enabled, a `DaemonSet` is installed to configure settings for routing network traffic to worker nodes.|
+|{{site.data.keyword.cloud_notm}} Provider|v1.15.3-112|v1.15.4-136|Updated to support the Kubernetes 1.15.4 release. In addition, version 1.0 and 2.0 network load balancers (NLBs) were updated to support classic clusters with a gateway enabled.|
 |Key Management Service provider|212|221|Improved Kubernetes [key management service provider](/docs/containers?topic=containers-encryption#keyprotect) caching of {{site.data.keyword.cloud_notm}} IAM tokens. In addition, fixed a problem with Kubernetes secret decryption when the cluster's root key is rotated.|
 |Kubernetes|v1.15.3|v1.15.4|See the [Kubernetes release notes)](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.4){: external}.|
 |Kubernetes Metrics Server|v0.3.3|v0.3.4|See the [Kubernetes Metrics Server release notes)](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.4){: external}.|
