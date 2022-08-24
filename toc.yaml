@@ -248,6 +248,8 @@ toc:
                 - storage-file-vpc-managing.md
                 - storage-file-vpc-sc-ref.md 
             - storage-portworx.md
+            - cs_storage_portworx_backup_gs.md
+            - cs_storage_portworx_gs.md
             - storage-br.md
             - storage-utilities.md
         - topicgroup:
@@ -293,6 +295,7 @@ toc:
                 - cs_versions_overview.md
                 - cs_versions_changelog.md
                 - benchmarks_overview.md
+                - benchmark-comparison.md
                 - topicgroup:
                     label: Version 1.24 
                     topics:
@@ -467,6 +470,7 @@ toc:
                     - ts-addon-istio-debug.md
                     - ts-addon-istio-gateway-affinity.md
                     - ts-addon-istio-missing.md
+                    - ts-addon-istio-webhooks.md
                     - ts-delete-olm.md
               - topicgroup:
                   label: Load balancers

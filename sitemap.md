@@ -4980,6 +4980,26 @@ subcollection: containers
 
 * [Limitations](/docs/containers?topic=containers-portworx#portworx_limitations)
 
+[Getting started with PX-Backup](/docs/containers?topic=containers-getting-started-with-px-backup#getting-started-with-px-backup)
+
+* [Getting help and support](/docs/containers?topic=containers-getting-started-with-px-backup#portworx_help)
+
+[Getting started with Portworx](/docs/containers?topic=containers-getting-started-with-portworx#getting-started-with-portworx)
+
+* [Verifying your Portworx installation](/docs/containers?topic=containers-getting-started-with-portworx#px-verify-installation-px)
+
+* [Creating a Portworx volume](/docs/containers?topic=containers-getting-started-with-portworx#px-add-storage)
+
+* [Mounting the volume to your app](/docs/containers?topic=containers-getting-started-with-portworx#px-mount-pvc)
+
+* [Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-getting-started-with-portworx#portworx_cleanup_volumes)
+
+    * [Removing Portworx volumes from apps](/docs/containers?topic=containers-getting-started-with-portworx#remove_pvc)
+
+    * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-getting-started-with-portworx#remove_storage_node_cluster)
+
+* [Getting help and support](/docs/containers?topic=containers-getting-started-with-portworx#portworx_help_and_support)
+
 [Backing up and restoring storage data](/docs/containers?topic=containers-storage_br#storage_br)
 
 [IBM Cloud storage utilities](/docs/containers?topic=containers-utilities#utilities)
@@ -5703,6 +5723,12 @@ subcollection: containers
 * [Using the benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-use)
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
+
+[Comparing the CIS Kubernetes and the compliance operator benchmarks](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison)
+
+* [Major differences](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison-major)
+
+* [Minor differences](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison-minor)
 
 
 ### Version 1.24
@@ -8692,6 +8718,8 @@ subcollection: containers
 * [Moving the `ibm-cloud-provider-ip` pod](/docs/containers?topic=containers-istio_gateway_affinity#move-ip-pod)
 
 [Why are Istio components missing?](/docs/containers?topic=containers-istio_control_plane#istio_control_plane)
+
+[Why can't I upgrade to version 1.12 of the managed Istio add-on?](/docs/containers?topic=containers-ts-addon-istio-webhooks#ts-addon-istio-webhooks)
 
 [How do I delete Operator Lifecycle Manager components?](/docs/containers?topic=containers-ts-delete-olm#ts-delete-olm)
 
