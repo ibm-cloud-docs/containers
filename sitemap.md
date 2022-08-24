@@ -8465,6 +8465,8 @@ subcollection: containers
 
 * [Changing the resource auto-refresh time interval from the command line](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-dashboard-auto-refresh-cli)
 
+[Why can't I create a new admin certificate?](/docs/containers?topic=containers-ts_admin-cert#ts_admin-cert)
+
 
 ### Worker nodes
 {: #sitemap_worker_nodes}

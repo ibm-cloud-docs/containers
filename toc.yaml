@@ -408,6 +408,7 @@ toc:
                   - ts-master-limits.md
                   - ts-metrics-server.md
                   - ts-kube-dashboord-oom.md
+                  - ts-admin-cert.md
               - topicgroup:
                   label: Worker nodes
                   topics:
