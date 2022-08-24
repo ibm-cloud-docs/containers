@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-22"
+lastupdated: "2022-08-24"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
+
+    * [24 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug2422)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on version 4.3.5_1563 is available.
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.1.21` is available.
 
     * [17 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug1722)
 
@@ -4974,6 +4980,26 @@ subcollection: containers
 
 * [Limitations](/docs/containers?topic=containers-portworx#portworx_limitations)
 
+[Getting started with PX-Backup](/docs/containers?topic=containers-getting-started-with-px-backup#getting-started-with-px-backup)
+
+* [Getting help and support](/docs/containers?topic=containers-getting-started-with-px-backup#portworx_help)
+
+[Getting started with Portworx](/docs/containers?topic=containers-getting-started-with-portworx#getting-started-with-portworx)
+
+* [Verifying your Portworx installation](/docs/containers?topic=containers-getting-started-with-portworx#px-verify-installation-px)
+
+* [Creating a Portworx volume](/docs/containers?topic=containers-getting-started-with-portworx#px-add-storage)
+
+* [Mounting the volume to your app](/docs/containers?topic=containers-getting-started-with-portworx#px-mount-pvc)
+
+* [Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-getting-started-with-portworx#portworx_cleanup_volumes)
+
+    * [Removing Portworx volumes from apps](/docs/containers?topic=containers-getting-started-with-portworx#remove_pvc)
+
+    * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-getting-started-with-portworx#remove_storage_node_cluster)
+
+* [Getting help and support](/docs/containers?topic=containers-getting-started-with-portworx#portworx_help_and_support)
+
 [Backing up and restoring storage data](/docs/containers?topic=containers-storage_br#storage_br)
 
 [IBM Cloud storage utilities](/docs/containers?topic=containers-utilities#utilities)
@@ -5697,6 +5723,12 @@ subcollection: containers
 * [Using the benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-use)
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
+
+[Comparing the CIS Kubernetes and the compliance operator benchmarks](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison)
+
+* [Major differences](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison-major)
+
+* [Minor differences](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison-minor)
 
 
 ### Version 1.24
@@ -7844,6 +7876,8 @@ subcollection: containers
 
 * [Version 4.3](/docs/containers?topic=containers-vpc_bs_changelog#043_is_block)
 
+    * [Change log for version 4.3.5_1563, released 24 August 2022](/docs/containers?topic=containers-vpc_bs_changelog#435_1563_is_block_relnote)
+
     * [Change log for version 4.3.4_1551, released 18 July 2022](/docs/containers?topic=containers-vpc_bs_changelog#434_1551_is_block_relnote)
 
     * [Change log for version 4.3.2_1441, released 17 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#432_1441_is_block_relnote)
@@ -7899,6 +7933,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.1.21, released 24 August 2022](/docs/containers?topic=containers-cos_plugin_changelog#02121_object_plugin)
 
 * [Change log for version 2.1.20, released 17 August 2022](/docs/containers?topic=containers-cos_plugin_changelog#02120_object_plugin)
 
@@ -8455,6 +8491,8 @@ subcollection: containers
 
 * [Changing the resource auto-refresh time interval from the command line](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-dashboard-auto-refresh-cli)
 
+[Why can't I create a new admin certificate?](/docs/containers?topic=containers-ts_admin-cert#ts_admin-cert)
+
 
 ### Worker nodes
 {: #sitemap_worker_nodes}
@@ -8680,6 +8718,8 @@ subcollection: containers
 * [Moving the `ibm-cloud-provider-ip` pod](/docs/containers?topic=containers-istio_gateway_affinity#move-ip-pod)
 
 [Why are Istio components missing?](/docs/containers?topic=containers-istio_control_plane#istio_control_plane)
+
+[Why can't I upgrade to version 1.12 of the managed Istio add-on?](/docs/containers?topic=containers-ts-addon-istio-webhooks#ts-addon-istio-webhooks)
 
 [How do I delete Operator Lifecycle Manager components?](/docs/containers?topic=containers-ts-delete-olm#ts-delete-olm)
 
