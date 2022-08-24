@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-22"
+lastupdated: "2022-08-24"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
+
+    * [24 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug2422)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on version 4.3.5_1563 is available.
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.1.21` is available.
 
     * [17 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug1722)
 
@@ -7844,6 +7850,8 @@ subcollection: containers
 
 * [Version 4.3](/docs/containers?topic=containers-vpc_bs_changelog#043_is_block)
 
+    * [Change log for version 4.3.5_1563, released 24 August 2022](/docs/containers?topic=containers-vpc_bs_changelog#435_1563_is_block_relnote)
+
     * [Change log for version 4.3.4_1551, released 18 July 2022](/docs/containers?topic=containers-vpc_bs_changelog#434_1551_is_block_relnote)
 
     * [Change log for version 4.3.2_1441, released 17 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#432_1441_is_block_relnote)
@@ -7899,6 +7907,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.1.21, released 24 August 2022](/docs/containers?topic=containers-cos_plugin_changelog#02121_object_plugin)
 
 * [Change log for version 2.1.20, released 17 August 2022](/docs/containers?topic=containers-cos_plugin_changelog#02120_object_plugin)
 
