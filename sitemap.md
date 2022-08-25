@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-24"
+lastupdated: "2022-08-25"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
+
+    * [25 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug2522)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on version 4.4.9_1566 is available.
+
+        * Ingress ALB change log updates
 
     * [24 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug2422)
 
@@ -7420,7 +7426,9 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
-    * [Version 1.2.1_2488_iks (default), released 11 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2488_iks)
+    * [Version 1.2.1_2506_iks (default), released 25 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2506_iks)
+
+    * [Version 1.2.1_2488_iks, released 11 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2488_iks)
 
     * [Version 1.2.1_2487_iks, released 11 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2487_iks)
 
@@ -7439,6 +7447,8 @@ subcollection: containers
     * [Version 1.2.0_2131_iks, released 26 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.0_2131_iks)
 
 * [Version 1.1.2](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_2)
+
+    * [Version 1.1.2_2507_iks, released on 25 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2507_iks)
 
     * [Version 1.1.2_2411_iks, released on 2 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2411_iks)
 
@@ -7867,6 +7877,8 @@ subcollection: containers
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
 
 * [Version 4.4](/docs/containers?topic=containers-vpc_bs_changelog#044_is_block)
+
+    * [Change log for version 4.4.9_1566, released 25 August 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.4.9_1566_is_block_relnote)
 
     * [Change log for version 4.4.8_1550, released 18 July 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.4.8_1550_is_block_relnote)
 
