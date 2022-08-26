@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-25"
+lastupdated: "2022-08-26"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
+
+    * [26 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug2622)
+
+        * CLI change log update
 
     * [25 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug2522)
 
@@ -5383,6 +5387,12 @@ subcollection: containers
 
     * [`ibmcloud ks ingress alb get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_get)
 
+    * [`ibmcloud ks ingress alb health-checker disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_healthchecker_disable)
+
+    * [`ibmcloud ks ingress alb health-checker enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_healthchecker_enable)
+
+    * [`ibmcloud ks ingress alb health-checker get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_healthchecker_get)
+
     * [`ibmcloud ks ingress alb ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_albs)
 
     * [`ibmcloud ks ingress alb migrate clean`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_clean)
@@ -5568,6 +5578,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.439](/docs/containers?topic=containers-cs_cli_changelog#cli-10439)
 
 * [Version 1.0.433](/docs/containers?topic=containers-cs_cli_changelog#cli-10433)
 
