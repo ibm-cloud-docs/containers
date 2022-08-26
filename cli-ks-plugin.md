@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-08-17"
+lastupdated: "2022-08-26"
 
 keywords: kubernetes
 
@@ -4122,7 +4122,104 @@ ibmcloud ks ingress alb get --alb public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
 ```
 {: pre}
 
+### `ibmcloud ks ingress alb health-checker disable`
+{: #cs_alb_healthchecker_disable}
 
+Disable the health checker for an Ingress ALB in a cluster.
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress alb health-checker disable --cluster CLUSTER [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+* Classic
+* VPC
+
+**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+`-c, --cluster CLUSTER`
+:    The name or ID of the cluster.
+
+`-q`
+:    Optional: Do not show the message of the day or update reminders.
+
+
+**Example**:
+```sh
+ibmcloud ks ingress alb health-checker disable --cluster mycluster
+```
+{: pre}
+
+### `ibmcloud ks ingress alb health-checker enable`
+{: #cs_alb_healthchecker_enable}
+
+Enable the health checker for an Ingress ALB in a cluster.
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress alb health-checker enable --cluster CLUSTER [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+* Classic
+* VPC
+
+**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+`-c, --cluster CLUSTER`
+:    The name or ID of the cluster.
+
+`-q`
+:    Optional: Do not show the message of the day or update reminders.
+
+
+**Example**:
+```sh
+ibmcloud ks ingress alb health-checker enable --cluster mycluster
+```
+{: pre}
+
+### `ibmcloud ks ingress alb health-checker get`
+{: #cs_alb_healthchecker_get}
+
+View the details of the health checker for an Ingress ALB in a cluster.
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress alb health-checker get --cluster CLUSTER [--output OUTPUT] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+* Classic
+* VPC
+
+**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+`-c, --cluster CLUSTER`
+:    The name or ID of the cluster.
+
+`--output json`
+:    Optional: Prints the command output in JSON format.
+
+`-q`
+:    Optional: Do not show the message of the day or update reminders.
+
+
+**Example**:
+```sh
+ibmcloud ks ingress alb health-checker get --cluster mycluster
+```
+{: pre}
 
 ### `ibmcloud ks ingress alb ls`
 {: #cs_albs}
