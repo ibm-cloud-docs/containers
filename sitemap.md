@@ -209,6 +209,10 @@ subcollection: containers
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
 
+    * [29 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug2922)
+
+        * Worker node fix pack
+
     * [26 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug2622)
 
         * CLI change log update
