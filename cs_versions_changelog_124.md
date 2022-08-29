@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-08-16"
+lastupdated: "2022-08-29"
 
 keywords: kubernetes, containers
 
@@ -49,6 +49,22 @@ Review the version 1.24 change log.
 
 
 
+
+
+
+### Change log for worker node fix pack 1.24.4_1535, released 29 August 2022
+{: #1244_1535}
+
+The following table shows the changes that are in the worker node fix pack 1.24.4_1535. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2019-5815](https://nvd.nist.gov/vuln/detail/CVE-2019-5815){: external},[CVE-2021-30560](https://nvd.nist.gov/vuln/detail/CVE-2021-30560){: external},[CVE-2022-31676](https://nvd.nist.gov/vuln/detail/CVE-2022-31676){: external},[CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external}. |
+| Kubernetes | 1.24.3 | 1.24.4 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.4){: external}. | 
+| HAPROXY | 6514a2 | c1634f | [CVE-2022-32206](https://nvd.nist.gov/vuln/detail/CVE-2022-32206){: external},[CVE-2022-32208](https://nvd.nist.gov/vuln/detail/CVE-2022-32208){: external}
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.24.3_1533" caption-side="top"}
 
 ### Change log for worker node fix pack 1.24.3_1533, released 16 August 2022
 {: #1243_1533}
