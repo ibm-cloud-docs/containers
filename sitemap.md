@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-29"
+lastupdated: "2022-08-31"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
+
+    * [31 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug3122)
+
+        * Cluster autoscaler add-on
 
     * [29 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug2922)
 
@@ -7816,7 +7820,17 @@ subcollection: containers
 
 [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
-* [Version 1.1.0](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
+* [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0106_ca_addon)
+
+    * [Change log for patch update 1.0.6_774, released 31 August 2022](/docs/containers?topic=containers-ca_changelog#106774_ca)
+
+    * [Change log for patch update 1.0.6_763, released 17 August 2022](/docs/containers?topic=containers-ca_changelog#106763_ca)
+
+    * [Change log for patch update 1.0.6_742, released 15 July 2022](/docs/containers?topic=containers-ca_changelog#106742_ca)
+
+* [Version 1.1.0 (Beta)](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
+
+    * [Change log for patch update 1.1.0_776, released 31 August 2022](/docs/containers?topic=containers-ca_changelog#110776_ca)
 
     * [Change log for patch update 1.1.0_729, released 21 July 2022](/docs/containers?topic=containers-ca_changelog#110729_ca)
 
@@ -7828,13 +7842,9 @@ subcollection: containers
 
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
 
-* [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0106_ca_addon)
-
-    * [Change log for patch update 1.0.6_763, released 17 August 2022](/docs/containers?topic=containers-ca_changelog#106763_ca)
-
-    * [Change log for patch update 1.0.6_742, released 15 July 2022](/docs/containers?topic=containers-ca_changelog#106742_ca)
-
 * [Version 1.0.5](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
+
+    * [Change log for patch update 1.0.5_775, released 31 August 2022](/docs/containers?topic=containers-ca_changelog#105775_ca)
 
     * [Change log for patch update 1.0.5_754, released 17 August 2022](/docs/containers?topic=containers-ca_changelog#105754_ca)
 

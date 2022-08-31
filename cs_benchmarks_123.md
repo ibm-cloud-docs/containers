@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-08-01"
+lastupdated: "2022-08-30"
 
 keywords: kubernetes, containers
 
@@ -284,41 +284,41 @@ Review information from IBM on the CIS Benchmark results.
 
 | Section | Remediation/Explanation |
 | --- | --- |
-| 1.2.1 | IKS utilizes RBAC for cluster protection, but allows anonymous discovery, which is considered reasonable per [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external}. |
-| 1.2.10 | IKS does not enable the [*EventRateLimit*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit){: external} admission controller since it is a Kubernetes alpha feature. |
-| 1.2.12 | IKS does not enable the [*AlwaysPullImages*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages){: external} admission controller since it overrides a container's *imagePullPolicy* and may impact performance. |
-| 1.2.22 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 1.2.23 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 1.2.24 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 1.2.25 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 1.2.33 | IKS can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
-| 1.2.34 | IKS can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
-| 1.3.6 | IKS rotates certificates on every worker node reload or update. |
-| 3.2.1 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 3.2.2 | IKS can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 4.2.6 | IKS does not protect kernel defaults in order to allow customers to [tune kernel parameters](/docs/containers?topic=containers-kernel). |
-| 4.2.8 | IKS ensures that the hostname matches the name issued by the infrastructure. |
-| 4.2.11 | IKS rotates certificates on every worker node reload or update. |
-| 4.2.12 | IKS rotates certificates on every worker node reload or update. |
-| 5.1.2 | IKS deploys some system components that could have their Kubernetes secret access further restricted. |
-| 5.1.3 | IKS deploys some system components that could have their Kubernetes resource access further restricted. |
-| 5.1.5 | IKS does not set [*automountServiceAccountToken: false*](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server){: external} for each default service account. |
-| 5.1.6 | IKS deploys some system components that could set [*automountServiceAccountToken: false*](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server){: external}. |
-| 5.2.1 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.2 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.3 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.4 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.5 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.6 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.7 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.8 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.9 | IKS can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.3.2 | IKS has a set of [default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy) and [additional network policies can optionally be added](/docs/containers?topic=containers-network_policies#adding_network_policies). |
-| 5.4.2 | IKS can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
-| 5.5.1 | IKS can optionally [enable image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec). |
-| 5.6.2 | IKS does not annotate all pods with [seccomp profiles](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
-| 5.6.3 | IKS deploys some system components that do not set a [pod or container *securityContext*](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
-| 5.6.4 | IKS deploys some Kubernetes resources to the default names. |
+| 1.2.1 | {{site.data.keyword.containerlong_notm}} utilizes RBAC for cluster protection, but allows anonymous discovery, which is considered reasonable per [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external}. |
+| 1.2.10 | {{site.data.keyword.containerlong_notm}} does not enable the [*EventRateLimit*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit){: external} admission controller since it is a Kubernetes alpha feature. |
+| 1.2.12 | {{site.data.keyword.containerlong_notm}} does not enable the [*AlwaysPullImages*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages){: external} admission controller since it overrides a container's *imagePullPolicy* and may impact performance. |
+| 1.2.22 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
+| 1.2.23 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
+| 1.2.24 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
+| 1.2.25 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
+| 1.2.33 | {{site.data.keyword.containerlong_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
+| 1.2.34 | {{site.data.keyword.containerlong_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
+| 1.3.6 | {{site.data.keyword.containerlong_notm}} rotates certificates on every worker node reload or update. |
+| 3.2.1 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
+| 3.2.2 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
+| 4.2.6 | {{site.data.keyword.containerlong_notm}} does not protect kernel defaults in order to allow customers to [tune kernel parameters](/docs/containers?topic=containers-kernel). |
+| 4.2.8 | {{site.data.keyword.containerlong_notm}} ensures that the hostname matches the name issued by the infrastructure. |
+| 4.2.11 | {{site.data.keyword.containerlong_notm}} rotates certificates on every worker node reload or update. |
+| 4.2.12 | {{site.data.keyword.containerlong_notm}} rotates certificates on every worker node reload or update. |
+| 5.1.2 | {{site.data.keyword.containerlong_notm}} deploys some system components that could have their Kubernetes secret access further restricted. |
+| 5.1.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that could have their Kubernetes resource access further restricted. |
+| 5.1.5 | {{site.data.keyword.containerlong_notm}} does not set [*automountServiceAccountToken: false*](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server){: external} for each default service account. |
+| 5.1.6 | {{site.data.keyword.containerlong_notm}} deploys some system components that could set [*automountServiceAccountToken: false*](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server){: external}. |
+| 5.2.1 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.2 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.3 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.4 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.5 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.6 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.7 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.8 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.9 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.3.2 | {{site.data.keyword.containerlong_notm}} has a set of [default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy) and [additional network policies can optionally be added](/docs/containers?topic=containers-network_policies#adding_network_policies). |
+| 5.4.2 | {{site.data.keyword.containerlong_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
+| 5.5.1 | {{site.data.keyword.containerlong_notm}} can optionally [enable image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec). |
+| 5.6.2 | {{site.data.keyword.containerlong_notm}} does not annotate all pods with [seccomp profiles](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
+| 5.6.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that do not set a [pod or container *securityContext*](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
+| 5.6.4 | {{site.data.keyword.containerlong_notm}} deploys some Kubernetes resources to the default names. |
 {: caption="Explanation and remediation" caption-side="top"}
 
 
