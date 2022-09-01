@@ -215,7 +215,6 @@ toc:
                 - cs_ingress_about.md
                 - cs_ingress_types.md
                 - cs_ingress_monitor.md
-                - cs_ingress_user_managed.md
                 - ingress-annotations.md
         - topicgroup:
             label: Storing data on persistent storage
