@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-08-31"
+lastupdated: "2022-09-01"
 
 keywords: containers
 subcollection: containers
@@ -4378,16 +4378,6 @@ subcollection: containers
 
 * [Privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private)
 
-* [Migrating your existing Ingress ALB setup to run Kubernetes Ingress](/docs/containers?topic=containers-ingress-types#alb-type-migration)
-
-    * [Migration FAQs](/docs/containers?topic=containers-ingress-types#alb-migrate-faqs)
-
-    * [Step 1: Copy TLS secrets](/docs/containers?topic=containers-ingress-types#alb-migrate-1)
-
-    * [Step 2: Update Ingress resources](/docs/containers?topic=containers-ingress-types#alb-migrate-2)
-
-    * [Step 3: Change ALB images](/docs/containers?topic=containers-ingress-types#alb-migrate-3)
-
 * [Managing TLS certificates and secrets with {{site.data.keyword.cloudcerts_long}}](/docs/containers?topic=containers-ingress-types#manage_certs)
 
     * [Using your default {{site.data.keyword.cloudcerts_short}} instance](/docs/containers?topic=containers-ingress-types#manager_certs_about)
@@ -4435,24 +4425,6 @@ subcollection: containers
 [Observing Kubernetes Ingress](/docs/containers?topic=containers-cs_ingress_monitor#cs_ingress_monitor)
 
 * [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-cs_ingress_monitor#ingress_health_mon)
-
-[Bringing your own Ingress controller](/docs/containers?topic=containers-ingress-user_managed#ingress-user_managed)
-
-* [Classic clusters: Exposing your Ingress controller by creating an NLB and a hostname](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
-
-    * [Registering the load balancer IP address by creating a DNS hostname](/docs/containers?topic=containers-ingress-user_managed#register-lb-ip-dns)
-
-    * [Registering the load balancer IP address by using the existing Ingress subdomain for your cluster](/docs/containers?topic=containers-ingress-user_managed#register-lb-ip-ingress-subdomain)
-
-    * [Deploying additional resources for your custom Ingress controller](/docs/containers?topic=containers-ingress-user_managed#deploy-resources-custom-ingress)
-
-* [VPC clusters: Exposing your Ingress controller by creating a VPC load balancer and subdomain](/docs/containers?topic=containers-ingress-user_managed#user_managed_vpc)
-
-    * [Registering the load balancer IP address by creating a DNS hostname](/docs/containers?topic=containers-ingress-user_managed#register-lb-ip-dns-vpc)
-
-    * [Registering the load balancer IP address by using the existing Ingress subdomain for your cluster](/docs/containers?topic=containers-ingress-user_managed#register-lb-ip-ingress-subdomain-vpc)
-
-    * [Deploying additional resources for your custom Ingress controller](/docs/containers?topic=containers-ingress-user_managed#deploy-resources-custom-ingress-vpc)
 
 [Kubernetes Ingress annotations](/docs/containers?topic=containers-comm-ingress-annotations#comm-ingress-annotations)
 
