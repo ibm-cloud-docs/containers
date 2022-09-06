@@ -207,12 +207,6 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
-* [September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep22)
-
-    * [6 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep0622)
-
-        * CLI change log update
-
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
 
     * [31 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug3122)
@@ -5381,6 +5375,12 @@ subcollection: containers
 
     * [`ibmcloud ks ingress alb ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_albs)
 
+    * [`ibmcloud ks ingress alb migrate clean`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_clean)
+
+    * [`ibmcloud ks ingress alb migrate start`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_start)
+
+    * [`ibmcloud ks ingress alb migrate status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_status)
+
     * [`ibmcloud ks ingress alb update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_update)
 
     * [`ibmcloud ks ingress alb versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_versions)
@@ -5558,8 +5558,6 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
-
-* [Version 1.0.443](/docs/containers?topic=containers-cs_cli_changelog#cli-10443)
 
 * [Version 1.0.439](/docs/containers?topic=containers-cs_cli_changelog#cli-10439)
 
