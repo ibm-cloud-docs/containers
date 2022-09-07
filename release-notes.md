@@ -2669,7 +2669,7 @@ Istio add-on
 
 
 General availability of Kubernetes Ingress support
-:   The Kubernetes Ingress image, which is built on the community Kubernetes project's implementation of the NGINX Ingress controller, is now generally available for the Ingress ALBs in your cluster. To get started, see [Creating ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create) or [Changing existing ALBs to run Kubernetes Ingress](/docs/containers?topic=containers-ingress-types#alb-type-migration).
+:   The Kubernetes Ingress image, which is built on the community Kubernetes project's implementation of the NGINX Ingress controller, is now generally available for the Ingress ALBs in your cluster.
 
 
 
@@ -2958,7 +2958,7 @@ Cluster autoscaler
 :   The [cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc) is available as a managed add-on. The cluster autoscaler Helm chart is deprecated. Migrate your autoscaled worker pools to use the add-on.
 
 New! Community Kubernetes Ingress support
-:   The Ingress ALBs in your cluster can now run the Kubernetes Ingress image, which is built on the community Kubernetes project's implementation of the NGINX Ingress controller. To use the Kubernetes Ingress image, you create your Ingress resources and configmaps according to the Kubernetes Ingress format, including community Kubernetes Ingress annotations instead of custom {{site.data.keyword.containerlong_notm}} annotations. For more information about the differences between the {{site.data.keyword.containerlong_notm}} Ingress image and the Kubernetes Ingress image, see the [Comparison of the ALB image types](/docs/containers?topic=containers-ingress-types#about-alb-images). To get started, see [Creating ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create) or [Changing existing ALBs to run Kubernetes Ingress](/docs/containers?topic=containers-ingress-types#alb-type-migration).
+:   The Ingress ALBs in your cluster can now run the Kubernetes Ingress image, which is built on the community Kubernetes project's implementation of the NGINX Ingress controller. To use the Kubernetes Ingress image, you create your Ingress resources and ConfigMaps according to the Kubernetes Ingress format, including community Kubernetes Ingress annotations instead of custom {{site.data.keyword.containerlong_notm}} annotations. For more information about the differences between the {{site.data.keyword.containerlong_notm}} Ingress image and the Kubernetes Ingress image, see the [Comparison of the ALB image types](/docs/containers?topic=containers-ingress-types#about-alb-images).
 
 New! Default {{site.data.keyword.cloudcerts_long}} instances
 :   A {{site.data.keyword.cloudcerts_long_notm}} service instance is now created by default for all new and existing standard clusters. The {{site.data.keyword.cloudcerts_short}} service instance, which is named in the format `kube-crtmgr-<cluster_ID>`, stores the TLS certificate for your cluster's default Ingress subdomain. You can also upload your own TLS certificates for custom Ingress domains to this {{site.data.keyword.cloudcerts_short}} instance and use the new [**`ibmcloud ks ingress secret`** commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create) to create secrets for these certificates in your cluster. To ensure that a {{site.data.keyword.cloudcerts_short}} instance is automatically created for your new or existing cluster, [verify that the API key for the region and resource group that the cluster is created in has the correct {{site.data.keyword.cloudcerts_short}} permissions](/docs/containers?topic=containers-ingress-types#manage_certs).
@@ -4015,7 +4015,7 @@ Istio managed add-on GA
 :   The Istio managed add-on is generally available for Kubernetes version 1.16 clusters. In Kubernetes version 1.16 clusters, you can install the Istio add-on or [update your existing beta add-on to the latest version](/docs/containers?topic=containers-istio#istio_update).
 
 Bringing your own Ingress controller in VPC clusters
-:   Added [steps](/docs/containers?topic=containers-ingress-user_managed#user_managed_vpc) for exposing your Ingress controller by creating a VPC load balancer and subdomain.
+:   Added steps for exposing your Ingress controller by creating a VPC load balancer and subdomain.
 
 
 
@@ -4725,7 +4725,7 @@ Version changelogs
 {: release-note}
 
 Bringing your own Ingress controller
-:   Updated the [steps](/docs/containers?topic=containers-ingress-user_managed) to reflect changes to the default community controller and to require a health check for controller IP addresses in multizone clusters.
+:   Updated the steps to reflect changes to the default community controller and to require a health check for controller IP addresses in multizone clusters.
 
 {{site.data.keyword.cos_full_notm}}
 :   Updated the [steps](/docs/containers?topic=containers-storage_cos_install) to install the {{site.data.keyword.cos_full_notm}} plug-in with or without the Helm server, Tiller.

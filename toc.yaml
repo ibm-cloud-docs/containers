@@ -60,9 +60,6 @@ toc:
             - tutorial-odo.md
             - cs_tutorials_starter.md
             - link:
-                label: Developing a Kubernetes app toolchain with Code Risk Analyzer
-                href: https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer)
-            - link:
                 label: Continuous Deployment to Kubernetes
                 href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes
         - topicgroup:

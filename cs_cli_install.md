@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-06"
+lastupdated: "2022-09-07"
 
 keywords: kubernetes, ic, ks, kubectl
 
@@ -158,7 +158,7 @@ For more information about the Kubernetes CLI, see the [`kubectl` reference docs
 Instead of installing each of the CLIs individually on your computer, you can install the CLIs into a container that runs on your computer.
 {: shortdesc}
 
-Before you begin, [install Docker for Mac](https://docs.docker.com/docker-for-mac/install/){: external} or [Windows](https://docs.docker.com/docker-for-windows/install/){: external} to build and run images locally. If you are using Windows 8 or earlier, you can install the [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/){: external} instead.
+Before you begin, [install Docker for Mac](https://docs.docker.com/desktop/install/mac-install/){: external} or [Windows](https://docs.docker.com/docker-for-windows/install/){: external} to build and run images locally. If you are using Windows 8 or earlier, you can install the [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/){: external} instead.
 
 1. Create an image from the provided Dockerfile.
 
