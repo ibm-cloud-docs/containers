@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-06"
+lastupdated: "2022-09-07"
 
 keywords: containers
 subcollection: containers
@@ -5749,6 +5749,8 @@ subcollection: containers
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
 
+    * [Change log for master fix pack 1.24.4_1536, released 1 September 2022](/docs/containers?topic=containers-changelog_124#1244_1536)
+
     * [Change log for worker node fix pack 1.24.4_1535, released 29 August 2022](/docs/containers?topic=containers-changelog_124#1244_1535)
 
     * [Change log for worker node fix pack 1.24.3_1533, released 16 August 2022](/docs/containers?topic=containers-changelog_124#1243_1533)
@@ -5829,6 +5831,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for master fix pack 1.23.10_1544, released 1 September 2022](/docs/containers?topic=containers-changelog_123#12310_1544)
 
     * [Change log for worker node fix pack 1.23.10_1543, released 29 August 2022](/docs/containers?topic=containers-changelog_123#12310_1543)
 
@@ -5938,6 +5942,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview_122)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for master fix pack 1.22.13_1570, released 1 September 2022](/docs/containers?topic=containers-changelog_122#12213_1570)
 
     * [Change log for worker node fix pack 1.22.13_1568, released 29 August 2022](/docs/containers?topic=containers-changelog_122#12213_1568)
 
@@ -6071,6 +6077,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview_121)
 
 * [Version 1.21 change log](/docs/containers?topic=containers-changelog_121#121_changelog)
+
+    * [Change log for master fix pack 1.21.14_1579, released 1 September 2022](/docs/containers?topic=containers-changelog_121#12114_1579)
 
     * [Change log for worker node fix pack 1.21.14_1578, released 29 August 2022](/docs/containers?topic=containers-changelog_121#12114_1578)
 

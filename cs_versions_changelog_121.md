@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-08-29"
+lastupdated: "2022-09-07"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.21
 
@@ -41,6 +41,35 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.21 change log.
 {: shortdesc}
+
+
+
+### Change log for master fix pack 1.21.14_1579, released 1 September 2022
+{: #12114_1579}
+
+The following table shows the changes that are in the master fix pack 1.21.14_1579. Master patch updates are applied automatically. 
+{: shortdesc}
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.20.5 | v3.20.6 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.20/release-notes/#v3206){: external}. |
+| Cluster health image | v1.3.9 | v1.3.10 | Updated `Go` dependencies and to `Go` version `1.18.5`. |
+| CoreDNS | 1.8.7 | 1.8.6 | See the [CoreDNS release notes](https://coredns.io/2021/10/07/coredns-1.8.6-release/){: external}. |
+| Gateway-enabled cluster controller | 1792 | 1823 | Updated to `Go` version `1.17.13`. |
+| GPU device plug-in and installer | d8f1be0 | c58c299 | Enable DRM module and update `Go` to version `1.18.5`. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 997 | 1006 | Updated to `Go` version `1.17.13`. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.21.14-3 | v1.21.14-4 | Updated `vpcctl` binary to version `3367`. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 412 | 414 | Updated to `Go` version `1.18.5`. Updated universal base image (UBI) to version `8.6-902` to resolve CVEs. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 0a187a4 | dc1725a | Updated `Go` dependencies and to `Go` version `1.18.3`. |
+| Key Management Service provider | v2.5.7 | v2.5.8 | Updated `Go` dependencies. |
+| Konnectivity agent and server | v0.0.30_331_iks | v0.0.32_363_iks | Updated to `Go` version `1.17.13` and to `Konnectivity` version `v0.0.32`. |
+| Kubernetes NodeLocal DNS cache | 1.21.4 | 1.22.6 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.6){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2058 | 2110 | Updated `Go` dependencies and to `Go` version `1.17.13`. |
+| Operator Lifecycle Manager | 0.16.1-IKS-18 | 0.16.1-IKS-19 | Update image for [CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external}. |
+| Portieris admission controller | v0.12.5 | v0.12.6 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.12.6){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.21.14_1576" caption-side="top"}
 
 ### Change log for worker node fix pack 1.21.14_1578, released 29 August 2022
 {: #12114_1578}
