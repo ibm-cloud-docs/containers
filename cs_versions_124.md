@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-06-27"
+lastupdated: "2022-09-07"
 
 keywords: kubernetes, containers
 
@@ -22,6 +22,7 @@ Review information about version 1.24 of {{site.data.keyword.containerlong}}, re
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
 {: tip}
 
+![This badge indicates Kubernetes version 1.24 certification for {{site.data.keyword.containerlong_notm}}](images/certified_kubernetes_versionless.svg){: caption="Figure 1. Kubernetes version 1.24 certification badge" caption-side="bottom"} 
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.24 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 

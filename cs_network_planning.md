@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-09-07"
 
 keywords: kubernetes, networking
 
@@ -161,11 +161,6 @@ Ingress ALB
 :   **Implementation**:
         1. Create an [Ingress service](/docs/containers?topic=containers-ingress-types#alb-comm-create) for the public ALB.
         2. Customize ALB routing rules with [annotations](/docs/containers?topic=containers-comm-ingress-annotations).
-
-Bring your own Ingress controller + NLB subdomain
-:   **Load-balancing method**: HTTPS load balancing with a custom Ingress controller that exposes the app with the IBM-provided ALB subdomain and uses custom routing rules.
-:   **Use case**: Implement custom routing rules or other specific requirements for custom tuning for multiple apps.
-:   **Implementation**: [Deploy your Ingress controller and leverage an IBM-provided subdomain](/docs/containers?topic=containers-ingress-user_managed).
 
 
 
