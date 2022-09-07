@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-09-07"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -179,8 +179,8 @@ If the Ingress subdomain and secret are still unavailable after your cluster is 
 
     ```sh
     ALB ID                                Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
-    private-crbmnj1b1d09lpvv3oof0g-alb1   false     disabled   private   -               dal10   ingress:1.2.1_2337_iks   2234947       2.0
-    public-crbmnj1b1d09lpvv3oof0g-alb1    true      enabled    public    169.XX.XXX.XX   dal10   ingress:1.2.1_2337_iks   2234945       2.0
+    private-crbmnj1b1d09lpvv3oof0g-alb1   false     disabled   private   -               dal10   ingress:1.1.2_2507_iks   2234947       2.0
+    public-crbmnj1b1d09lpvv3oof0g-alb1    true      enabled    public    169.XX.XXX.XX   dal10   ingress:1.1.2_2507_iks   2234945       2.0
     ```
     {: screen}
 
