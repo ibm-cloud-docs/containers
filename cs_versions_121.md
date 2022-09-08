@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-08-04"
+lastupdated: "2022-09-08"
 
 keywords: kubernetes, 1.21, versions, update, upgrade
 
@@ -15,7 +15,7 @@ subcollection: containers
 # 1.21 version information and update actions
 {: #cs_versions_121}
 
-Kubernetes version 1.21 becomes unsupported on 7 September 2022. Update your cluster to at least [version 1.22](/docs/containers?topic=containers-cs_versions_122) as soon as possible.
+Kubernetes version 1.21 becomes unsupported on 14 September 2022. Update your cluster to at least [version 1.22](/docs/containers?topic=containers-cs_versions_122) as soon as possible.
 {: deprecated}
 
 Review information about version 1.21 of {{site.data.keyword.containerlong}}, released 09 Jun 2021.
@@ -42,7 +42,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
-| 1.21 | Yes | 09 June 2021 | 7 September 2022 |
+| 1.21 | Yes | 09 June 2021 | 14 September 2022 |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.21" caption-side="top"}
 
 ## Preparing to update
