@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-07"
+lastupdated: "2022-09-08"
 
 keywords: containers
 subcollection: containers
@@ -3507,7 +3507,7 @@ subcollection: containers
 
 * [Preventing app workloads from running on edge worker nodes](/docs/containers?topic=containers-edge#edge_workloads)
 
-* [Isolating ALB proxy workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_gateway)
+* [Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge#sysdig-edge)
 
 [Controlling traffic with network policies on classic clusters](/docs/containers?topic=containers-network_policies#network_policies)
 

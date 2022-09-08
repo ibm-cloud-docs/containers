@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-09-08"
 
 keywords: kubernetes, affinity, taint
 
@@ -32,8 +32,7 @@ If you want to restrict network traffic to edge worker nodes in a multizone clus
 Add the `dedicated=edge` label to worker nodes on each public or private VLAN in your cluster. The labels ensure that network load balancers (NLBs) and Ingress application load balancers (ALBs) are deployed to those worker nodes only. For NLBs, ensure that two or more worker nodes per zone are edge nodes. For ALBs, ensure that three or more worker nodes per zone are edge nodes. Both public and private NLBs and ALBs can deploy to edge worker nodes.
 {: shortdesc}
 
-Using a gateway-enabled cluster? See [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](#edge_gateway) instead.
-{: tip}
+
 
 Before you begin
 
@@ -214,14 +213,14 @@ A benefit of edge worker nodes is that they can be specified to run networking s
 Using the `dedicated=edge` toleration means that all network load balancer (NLB) and Ingress application load balancer (ALB) services are deployed to the labeled worker nodes only. However, to prevent other workloads from running on edge worker nodes and consuming worker node resources, you must use [Kubernetes taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external}.
 
 
-Using a gateway-enabled cluster? See [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](#edge_gateway) instead.
-{: tip}
-
 Before you begin
 - Ensure you that have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service access role for all namespaces](/docs/containers?topic=containers-users#checking-perms).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-To prevent other workloads from running on edge worker nodes,
+Complete the following steps to prevent other workloads from running on edge worker nodes.
+
+If you want to allow the Sysdig agent to run on your edge nodes, see [Deploying the Sysdig agent to edge worker nodes](#sysdig-edge).
+{: tip}
 
 1. Apply a taint to the worker nodes with the `dedicated=edge` label. The taint prevents pods from running on the worker node and removes pods that don't have the `dedicated=edge` label from the worker node. The pods that are removed are redeployed to other worker nodes with capacity.
 
@@ -270,142 +269,18 @@ To prevent other workloads from running on edge worker nodes,
     kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-
     ```
     {: pre}
+    
+## Deploying the Sysdig agent on edge worker nodes
+{: #sysdig-edge}
 
-## Isolating ALB proxy workloads to edge nodes in classic gateway-enabled clusters
-{: #edge_gateway}
+To allow the Sysdig agent pods to be deployed to your edge worker nodes, run the following `kubectl patch` command to update the `sysdig-agent` DaemonSet. This command applies the `NoExecute` toleration to the DaemonSet to ensure that the agent pods don't get evicted from the node.
 
-Create a worker pool of edge nodes in your gateway-enabled cluster to ensure that Ingress application load balancers (ALB) pods are deployed to those worker nodes only.
-{: shortdesc}
+```sh
+kubectl patch ds sysdig-agent -n ibm-observe --type merge --type='json' -p='[{"op": "add", "path": "/spec/template/spec/tolerations/-", "value": {"operator": Exists, "effect": NoExecute}}]'
+```
+{: pre}
 
-When you create a [classic cluster with a gateway](/docs/containers?topic=containers-plan_basics#gateway), the cluster is created with a `compute` worker pool of compute worker nodes that are connected to a private VLAN only, and a `gateway` worker pool of gateway worker nodes that are connected to public and private VLANs. Gateway worker nodes help you achieve network connectivity separation between the internet or an on-premises data center and the compute workload that runs in your cluster. By default, all network load balancer (NLB) and Ingress application load balancer (ALB) pods deploy to the gateway worker nodes, which are also tainted so that no compute workloads can be scheduled onto them.
-
-To ensure that ALB pods are always scheduled to gateway worker nodes if they are present and not scheduled to non-gateway worker nodes, you must create or use an existing worker pool that has at least two gateway worker nodes per zone. If you have only one gateway node per zone, the ALB pods will be scheduled on a non-gateway worker node. When two gateway nodes are present in a zone, the new ALB pod can be scheduled to the second gateway node.
-{: important}
-
-If you want to provide another level of network separation between the public network and workloads in your compute worker nodes, you can optionally create a worker pool of edge nodes. As opposed to gateway nodes, the edge nodes have only private network connectivity and can't be accessed directly from the public network. NLB pods remain deployed to the gateway worker nodes, but ALB pods are deployed to only edge nodes. By deploying only ALBs to edge nodes, all layer 7 proxy management is kept separate from the gateway worker nodes so that TLS termination and HTTP request routing is completed by the ALBs on the private network only. The edge nodes are also tainted so that no compute workloads can be scheduled onto them.
-
-If you use Ingress ALBs to expose your apps, requests to the path for your app are first routed to the load balancer that exposes your ALBs in the gateway worker pool. The traffic is then load balanced over the private network to one of the ALB pods that is deployed in the edge worker pool. Finally, the ALB in the edge worker pool proxies the request to one of your app pods in your worker pools of compute worker nodes. For more information about the flow of traffic through Ingress ALBs in gateway-enabled clusters, see the [Ingress architecture diagram](/docs/containers?topic=containers-ingress-about#classic-gateway).
-
-Before you begin
-
-* Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms) for {{site.data.keyword.containerlong_notm}}:
-    * Any platform access role for the cluster
-    * **Writer** or **Manager** service access role for all namespaces
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-
-To create an edge node worker pool in a gateway-enabled classic cluster,
-
-1. Retrieve all the **Worker Zones** that your existing worker nodes are connected to.
-    ```sh
-    ibmcloud ks cluster get --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-    Example output
-
-    ```sh
-    ...
-    Worker Zones:                   dal10, dal12
-    ```
-    {: screen}
-
-2. For each zone, list available private VLANs. Note the private VLAN ID that you want to use.
-    ```sh
-    ibmcloud ks vlan ls --zone <zone>
-    ```
-    {: pre}
-
-3. For each zone, review the available [flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
-    ```sh
-    ibmcloud ks flavors --zone <zone>
-    ```
-    {: pre}
-
-4. Create a worker pool for your edge worker nodes. Your worker pool includes the machine type, the number of worker nodes that you want to have, and the edge labels that you want to add to the worker nodes. When you create the worker pool, your worker nodes are not yet provisioned. Continue with the next step to add worker nodes to your edge worker pool.
-    ```sh
-    ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name edge --flavor <flavor> --size-per-zone 2 --labels dedicated=edge,node-role.kubernetes.io/edge=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
-    ```
-    {: pre}
-
-5. Deploy worker nodes in the `edge` worker pool by adding the zones that you previously retrieved to the worker pool. Repeat this command for each zone. All worker nodes in this `edge` pool are connected to a private VLAN only.
-    ```sh
-    ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool edge  --private-vlan <private_VLAN_ID> --private-only
-    ```
-    {: pre}
-
-6. Verify that the worker pool and worker nodes are provisioned and have the `dedicated=edge` label.
-    * To check the worker pool:
-        ```sh
-        ibmcloud ks worker-pool get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
-        ```
-        {: pre}
-
-    * To check individual worker nodes, review the **Labels** field of the output of the following command. Your edge nodes are ready when the **Status** is `Ready`.
-        ```sh
-        kubectl describe node <worker_node_private_IP>
-        ```
-        {: pre}
-
-7. Retrieve all existing ALBs in the cluster. Review the command output. For each ALB that has a **Status** of **enabled**, note the **ALB ID** and **Build**.
-
-    ```sh
-    ibmcloud ks ingress alb ls --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-    Example output
-
-    ```sh
-    ALB ID                                Enabled   State     Type      Load Balancer Hostname                      Zone         Build                                  Status
-    private-crc81nk5l10gfhdql4i3qg-alb1   true      enabled   private   e9dd35e6-us-south.lb.test.appdomain.cloud   us-south-3   ingress:1.1.1_1949_iks/ingress-auth:   enabled
-    public-crc81nk5l10gfhdql4i3qg-alb1    true      enabled   public    38daf55c-us-south.lb.test.appdomain.cloud   us-south-3   ingress:1.1.1_1949_iks/ingress-auth:   healthy
-    ```
-    {: screen}
-
-8. Using the output from the previous step, run the `ibmcloud ks ingress alb update` command for each enabled ALB. This command redeploys the ALB to an edge worker node. For the `--version` flag, use the version listed under **Build** in the output from the previous step. 
-
-    When you run this command to redeploy the ALB to an edge worker node, the ALB also updates to the latest version. If you do not want to update the ALB to the latest version, include the `--version` flag and specify the version listed under **Build** in the output from the previous step. 
-    {: tip}
-
-    ```sh
-    ibmcloud ks ingress alb update -c <cluster_name_or_ID> --version <build_version> --alb <ALB_ID> 
-    ```
-    {: pre}
-
-    Example output
-
-    ```sh
-    Updating ALB pods for private-crc81nk5l10gfhdql4i3qg-alb1 to version '1.1.1_1949_iks' in cluster c81nk5l10gfhdql4i3qg...
-    OK
-    ```
-    {: screen}
-
-9. Verify that ALB pods are scheduled onto edge nodes and are not scheduled onto compute nodes.
-    1. Confirm that all ALB pods are deployed to edge nodes. Each public and private ALB that is enabled in your cluster has two pods.
-        ```sh
-        kubectl describe nodes -l dedicated=edge | grep alb
-        ```
-        {: pre}
-
-        Example output
-
-        ```sh
-        kube-system                private-crdf253b6025d64944ab99ed63bb4567b6-alb1-d5dd478db-27pv4    0 (0%)        0 (0%)      0 (0%)           0 (0%)
-        kube-system                private-crdf253b6025d64944ab99ed63bb4567b6-alb1-d5dd478db-7p9q6    0 (0%)        0 (0%)      0 (0%)           0 (0%)
-        kube-system                public-crdf253b6025d64944ab99ed63bb4567b6-alb1-5ff8cdff89-s77z6    0 (0%)        0 (0%)      0 (0%)           0 (0%)
-        kube-system                public-crdf253b6025d64944ab99ed63bb4567b6-alb1-5ff8cdff89-kvs9f    0 (0%)        0 (0%)      0 (0%)           0 (0%)
-        ```
-        {: screen}
-
-    2. Confirm that no ALB pods are deployed to non-edge nodes.
-        ```sh
-        kubectl describe nodes -l dedicated!=edge | grep alb
-        ```
-        {: pre}
-
-        If the ALB pods are correctly deployed to edge nodes, no ALB pods are returned. Your ALBs are successfully rescheduled onto only edge worker nodes.
-
-
-
+If you used pod labels such as `dedicated=edge`, you can also apply this label to any pods that you want to allow on your edge nodes.
+{: tip}
 
 
