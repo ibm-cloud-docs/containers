@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-09-06"
+lastupdated: "2022-09-08"
 
 keywords: kubernetes
 
@@ -29,6 +29,14 @@ Refer to the following changelogs for a summary of changes for each version of t
 
 Review the following changes for 1.0 versions of the CLI plug-in.
 {: shortdesc}
+
+## Version 1.0.444
+{: #cli-10444}
+
+Version 1.0.444 of the CLI was released on 8 September 2022.
+:   Adds secret manager registration to cluster create flow. 
+:   Adds worker-pool OS support.
+:   Removes Ingress migration command support.
 
 ## Version 1.0.439
 {: #cli-10439}
