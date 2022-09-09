@@ -53,7 +53,7 @@ toc:
             - cs_tutorials_cf.md
             - link:
                 label: Moving a VM-based application to Kubernetes
-                href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes
+                href: /docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes
         - topicgroup:
             label: Developing apps in clusters
             topics:
@@ -61,14 +61,14 @@ toc:
             - cs_tutorials_starter.md
             - link:
                 label: Continuous Deployment to Kubernetes
-                href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes
+                href: /docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes
         - topicgroup:
             label: Controlling traffic to apps
             topics:
             - cs_tutorials_policies.md
             - link:
                 label: Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services
-                href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis
+                href: /docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis
     - navgroup: 
         id: howto
         topics:

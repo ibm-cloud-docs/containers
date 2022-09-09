@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-02"
+lastupdated: "2022-09-09"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -227,7 +227,7 @@ To set up monitoring for these conditions, configure alerts based on the followi
 | Multiple restarts of a pod in a short amount of time. | `kubernetes_pod_restart_count` | Greater than 4 for the last 10 minutes |
 | No running replicas in a ReplicaSet. | `kube_replicaset_status_replicas` in `kubernetes_deployment_name` | Less than one. |
 | More than 5 pods pending in cluster. | `kube_pod_container_status_waiting` | Status equals `pending` greater than five.|
-| No replicas in a deployment available. | `kubernets_deployment_replicas_available` | Less than one. |
+| No replicas in a deployment available. | `kubernetes_deployment_replicas_available` | Less than one. |
 | Number of pods per node reaching threshold of 110. | Count by `(kube_cluster_name,kube_node_name)(kube_pod_container_info)` | Greater than or equal to 100. Note that this query is a `promQL` query. |
 | Workloads that are in an unknown state. | `(kube_workload_status_unavailable)` | Greater than or equal to one. Note that this query is a `promQL` query. |
 {: caption="App level metrics"}
