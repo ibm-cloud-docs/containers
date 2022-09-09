@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-08"
+lastupdated: "2022-09-09"
 
 keywords: containers
 subcollection: containers
@@ -3169,6 +3169,8 @@ subcollection: containers
 * [Changing the Calico maximum transmission unit (MTU)](/docs/containers?topic=containers-kernel#calico-mtu)
 
 * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
+
+    * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap-43)
 
 [Removing clusters](/docs/containers?topic=containers-remove#remove)
 
