@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-08-26"
+lastupdated: "2022-09-09"
 
 keywords: kubernetes
 
@@ -152,10 +152,6 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
         * [`ibmcloud ks ingress alb health-checker enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_healthchecker_enable)
         * [`ibmcloud ks ingress alb health-checker get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_healthchecker_get)
     * [`ibmcloud ks ingress alb ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_albs)
-    * **`ingress alb migrate`**: Migrate your IBM Cloud Ingress configmap and resources to the Kubernetes Ingress format. The `ingress alb migrate` commands are deprecated and become unsupported soon.
-        * [`ibmcloud ks ingress alb migrate clean`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_clean)
-        * [`ibmcloud ks ingress alb migrate start`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_start)
-        * [`ibmcloud ks ingress alb migrate status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_status)
     * [`ibmcloud ks ingress alb update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_update)
     * [`ibmcloud ks ingress alb versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_versions)
 * **`ingress lb`**: Modify load balancers that expose Ingress ALBs in your cluster.

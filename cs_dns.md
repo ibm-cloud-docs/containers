@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-15"
+lastupdated: "2022-09-09"
 
 keywords: kubernetes, coredns, kubedns, dns
 
@@ -386,7 +386,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     data:
       Corefile: |
         # Add your NodeLocal DNS customizations as import files under ./coredns directory.
-        # Refer to https://cloud.ibm.com/docs/containers?topic=containers-cluster_dns for details.
+        # Refer to /docs/containers?topic=containers-cluster_dns for details.
         import ./coredns/<MyCorefile>
         cluster.local:53 abc.com:53 {
             errors

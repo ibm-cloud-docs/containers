@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-09-09"
 
 keywords: kubernetes, mzr, szr, multizone, multi az
 
@@ -25,6 +25,8 @@ You can deploy {{site.data.keyword.containerlong}} clusters worldwide. When you 
 
 ![{{site.data.keyword.containerlong_notm}} locations](images/locations.svg){: caption="Figure 1. {{site.data.keyword.containerlong_notm}} locations" caption-side="bottom"}
 
+This image is an artistic representation and does not reflect actual political or geographic boundaries.
+{: note}
 
 
 

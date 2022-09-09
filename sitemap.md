@@ -2603,7 +2603,7 @@ subcollection: containers
 
 * [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
-[Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
+[Moving a VM-based application to Kubernetes](/docs/docs?topic=solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes)
 
 
 ## Developing apps in clusters
@@ -2640,7 +2640,7 @@ subcollection: containers
 
 * [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
 
-[Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: external}
+[Continuous Deployment to Kubernetes](/docs/docs?topic=solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes)
 
 
 ## Controlling traffic to apps
@@ -2667,7 +2667,7 @@ subcollection: containers
 
 * [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
 
-[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
+[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](/docs/docs?topic=solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis)
 
 
 ## Installing the CLI and API
