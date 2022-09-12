@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-08"
+lastupdated: "2022-09-12"
 
 keywords: kubernetes
 
@@ -839,10 +839,10 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 :    By default, a public and a private portable subnet are created on the VLAN associated with the cluster. Include the `--no-subnet` flag to avoid creating subnets with the cluster. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster later.
 
 `--sm-group GROUP`
-:    The Secret Group ID of the {{site.data.keyword.cloud_notm}} Secrets Manager instance where your secrets are persisted.
+:    The secret group ID of the {{site.data.keyword.secrets-manager_short}} instance where your secrets are persisted. To get a secret group ID, see the [Secrets Manager CLI reference](/docs/secrets-manager?topic=secrets-manager-cli-plugin-secrets-manager-cli#secrets-manager-cli-secret-groups-command).
 
-`--sm-group GROUP`
-:    The CRN of the {{site.data.keyword.cloud_notm}} Secrets Manager instance.
+`--sm-instance INSTANCE`
+:    The CRN of the {{site.data.keyword.secrets-manager_short}} instance. To get the CRN of an instance, run [`ibmcloud ks ingress instance ls --cluster CLUSTER`](#cs_ingress_instance_ls).
 
 `--private-vlan PRIVATE_VLAN`
 :    This parameter is not available for free clusters. If this standard cluster is the first standard cluster that you create in this zone, don't include this flag. A private VLAN is created for you when the cluster is created. If you created a standard cluster before in this zone or created a private VLAN in IBM Cloud infrastructure before, you must specify that private VLAN. Private VLAN routers always begin with `bcr` (back-end router) and public VLAN routers always begin with `fcr` (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match.
@@ -1032,10 +1032,10 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
      {: note}
      
 `--sm-group GROUP`
-:    The Secret Group ID of the {{site.data.keyword.cloud_notm}} Secrets Manager instance where your secrets are persisted.
+:    The secret group ID of the {{site.data.keyword.secrets-manager_short}} instance where your secrets are persisted. To get a secret group ID, see the [Secrets Manager CLI reference](/docs/secrets-manager?topic=secrets-manager-cli-plugin-secrets-manager-cli#secrets-manager-cli-secret-groups-command).
 
-`--sm-group GROUP`
-:    The CRN of the {{site.data.keyword.cloud_notm}} Secrets Manager instance.
+`--sm-instance INSTANCE`
+:    The CRN of the {{site.data.keyword.secrets-manager_short}} instance. To get the CRN of an instance, run [`ibmcloud ks ingress instance ls --cluster CLUSTER`](#cs_ingress_instance_ls).
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
@@ -4393,7 +4393,7 @@ ibmcloud ks ingress instance default set --cluster CLUSTER --crn CRN --name NAME
 :    Optional: Do not show the message of the day or update reminders.
 
 `--secret-group GROUP`
-:    Secret Group ID of the IBM Cloud Secret Manager instance where the secrets are persisted.
+:    Secret group ID of the IBM Cloud Secret Manager instance where the secrets are persisted. To get a secret group ID, see the [Secrets Manager CLI reference](/docs/secrets-manager?topic=secrets-manager-cli-plugin-secrets-manager-cli#secrets-manager-cli-secret-groups-command).
 
 **Example**:
 
@@ -4551,7 +4551,7 @@ ibmcloud ks ingress instance register --cluster CLUSTER --crn CRN [--is-default]
 :    Optional: Do not show the message of the day or update reminders.
 
 `--secret-group GROUP`
-:    Secret Group ID of the IBM Cloud Secret Manager instance where the secrets are persisted.
+:    Secret group ID of the IBM Cloud Secret Manager instance where the secrets are persisted. To get a secret group ID, see the [Secrets Manager CLI reference](/docs/secrets-manager?topic=secrets-manager-cli-plugin-secrets-manager-cli#secrets-manager-cli-secret-groups-command).
 
 **Example**:
 
