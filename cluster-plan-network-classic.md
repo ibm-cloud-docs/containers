@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-08-22"
+lastupdated: "2022-09-12"
 
 keywords: kubernetes network, classic
 
@@ -202,7 +202,7 @@ In this scenario, you want to run workloads in a classic cluster that are access
 ### Worker-to-worker communication in a gateway-enabled classic cluster
 {: #limited-public-worker}
 
-With this setup, you create a cluster that is connected to a public VLAN and a private VLAN and has an enabled gateway. The cluster is created with a `compute` worker pool of compute worker nodes that are connected to a private VLAN only, and a `gateway` worker pool of gateway worker nodes that are connected to public and private VLANs. Gateway worker nodes help you achieve network connectivity separation between the internet or an on-premises data center and the compute workload that runs in your cluster. After your cluster is created, if you want to provide another level of network separation between the public network and your worker pools of compute worker nodes, you can optionally [create an edge worker pool](/docs/containers?topic=containers-edge#edge_gateway), which is connected to a private VLAN only. Only ALB pods are deployed to the edge worker nodes.
+With this setup, you create a cluster that is connected to a public VLAN and a private VLAN and has an enabled gateway. The cluster is created with a `compute` worker pool of compute worker nodes that are connected to a private VLAN only, and a `gateway` worker pool of gateway worker nodes that are connected to public and private VLANs. Gateway worker nodes help you achieve network connectivity separation between the internet or an on-premises data center and the compute workload that runs in your cluster. After your cluster is created, if you want to provide another level of network separation between the public network and your worker pools of compute worker nodes, you can optionally [create an edge worker pool](/docs/containers?topic=containers-edge#edge_nodes), which is connected to a private VLAN only. Only ALB pods are deployed to the edge worker nodes.
 
 ### Worker-to-master and user-to-master communication in a gateway-enabled classic cluster
 {: #limited-public-master}

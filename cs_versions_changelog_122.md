@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-09-07"
+lastupdated: "2022-09-12"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -42,6 +42,21 @@ Review the version 1.22 change log.
 {: shortdesc}
 
 
+
+
+
+### Change log for worker node fix pack 1.22.13_1571, released 12 September 2022
+{: #12213_1571}
+
+The following table shows the changes that are in the worker node fix pack 1.22.13_1571. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | 4.15.0-191 | 4.15.0-192 | Worker node kernel & package updates for [CVE-2021-33656](https://nvd.nist.gov/vuln/detail/CVE-2021-33656){: external},[CVE-2022-35252](https://nvd.nist.gov/vuln/detail/CVE-2022-35252){: external}. |
+| Kubernetes |N/A|N/A|N/A| 
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.22.13_1568" caption-side="top"}
 
 ### Change log for master fix pack 1.22.13_1570, released 1 September 2022
 {: #12213_1570}

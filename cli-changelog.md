@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-09-08"
+lastupdated: "2022-09-12"
 
 keywords: kubernetes
 
@@ -29,6 +29,12 @@ Refer to the following changelogs for a summary of changes for each version of t
 
 Review the following changes for 1.0 versions of the CLI plug-in.
 {: shortdesc}
+
+## Version 1.0.446
+{: #cli-10446}
+
+Version 1.0.446 of the CLI was released on 12 September 2022.
+:   Adds `--pod-network-interface-selection` option to location create flow.
 
 ## Version 1.0.444
 {: #cli-10444}
@@ -298,7 +304,7 @@ Version 1.0.157 of the CLI was released on 24 August 2020.
 **Added commands**: The following commands are added. 
 - Adds the [`ibmcloud ks cluster ca create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_create), [`ibmcloud ks cluster ca rotate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_rotate), and [`ibmcloud ks cluster ca status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_status) commands to manage the rotation of certificate authority (CA) certificates for your cluster components. 
 - Adds the [`ibmcloud ks ingress secret`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create) set of beta commands to manage Ingress secrets in your cluster, such as creating secrets for TLS certificates that are stored in {{site.data.keyword.cloudcerts_long_notm}}. 
-- Adds the [`ibmcloud ks ingress alb migrate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_migrate_start) set of beta commands to migrate resources that are formatted for ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress image to resources that are formatted for ALBs that run the Kubernetes Ingress image. 
+- Adds the `ibmcloud ks ingress alb migrate` set of beta commands to migrate resources that are formatted for ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress image to resources that are formatted for ALBs that run the Kubernetes Ingress image. 
 - Adds the [`ibmcloud ks ingress alb enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure) and [`ibmcloud ks ingress alb disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_disable) commands. 
 - Adds the optional `--version` flag to the `ibmcloud ks ingress alb create` command to specify the {{site.data.keyword.containerlong_notm}} Ingress image version or Kubernetes Ingress image version for the ALB.
 

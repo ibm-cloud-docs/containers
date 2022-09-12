@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-09"
+lastupdated: "2022-09-12"
 
 keywords: containers
 subcollection: containers
@@ -4388,6 +4388,8 @@ subcollection: containers
 
 * [Migrating from {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr)
 
+* [Enabling service-to-service communication for your {{site.data.keyword.secrets-manager_short}} instance](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr-s2s)
+
     * [Removing the {{site.data.keyword.cloudcerts_short}} instance from the cluster](/docs/containers?topic=containers-ingress-types#unregister-secret-instance)
 
 * [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_full}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr)
@@ -5553,6 +5555,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version 1.0.446](/docs/containers?topic=containers-cs_cli_changelog#cli-10446)
+
 * [Version 1.0.444](/docs/containers?topic=containers-cs_cli_changelog#cli-10444)
 
 * [Version 1.0.439](/docs/containers?topic=containers-cs_cli_changelog#cli-10439)
@@ -5745,6 +5749,8 @@ subcollection: containers
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
 
+    * [Change log for worker node fix pack 1.24.4_1537, released 12 September 2022](/docs/containers?topic=containers-changelog_124#1244_1537)
+
     * [Change log for master fix pack 1.24.4_1536, released 1 September 2022](/docs/containers?topic=containers-changelog_124#1244_1536)
 
     * [Change log for worker node fix pack 1.24.4_1535, released 29 August 2022](/docs/containers?topic=containers-changelog_124#1244_1535)
@@ -5827,6 +5833,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for worker node fix pack 1.23.10_1545, released 12 September 2022](/docs/containers?topic=containers-changelog_123#12310_1545)
 
     * [Change log for master fix pack 1.23.10_1544, released 1 September 2022](/docs/containers?topic=containers-changelog_123#12310_1544)
 
@@ -5938,6 +5946,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview_122)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.13_1571, released 12 September 2022](/docs/containers?topic=containers-changelog_122#12213_1571)
 
     * [Change log for master fix pack 1.22.13_1570, released 1 September 2022](/docs/containers?topic=containers-changelog_122#12213_1570)
 
@@ -6073,6 +6083,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview_121)
 
 * [Version 1.21 change log](/docs/containers?topic=containers-changelog_121#121_changelog)
+
+    * [Change log for worker node fix pack 1.21.14_1578, released 12 September 2022](/docs/containers?topic=containers-changelog_121#12114_1578)
 
     * [Change log for master fix pack 1.21.14_1579, released 1 September 2022](/docs/containers?topic=containers-changelog_121#12114_1579)
 
@@ -7898,6 +7910,8 @@ subcollection: containers
 
 * [Version 4.3](/docs/containers?topic=containers-vpc_bs_changelog#043_is_block)
 
+    * [Change log for version 4.3.6_1579, released 12 September 2022](/docs/containers?topic=containers-vpc_bs_changelog#436_1579_is_block_relnote)
+
     * [Change log for version 4.3.5_1563, released 24 August 2022](/docs/containers?topic=containers-vpc_bs_changelog#435_1563_is_block_relnote)
 
     * [Change log for version 4.3.4_1551, released 18 July 2022](/docs/containers?topic=containers-vpc_bs_changelog#434_1551_is_block_relnote)
@@ -7955,6 +7969,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.0, released 12 September 2022](/docs/containers?topic=containers-cos_plugin_changelog#0220_object_plugin)
 
 * [Change log for version 2.1.21, released 24 August 2022](/docs/containers?topic=containers-cos_plugin_changelog#02121_object_plugin)
 
@@ -8023,6 +8039,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_1214, released on 12 September 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1214)
 
     * [Version 2.0.0_1187, released on 7 July 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1187)
 
@@ -8331,8 +8349,6 @@ subcollection: containers
 * [par01](/docs/containers?topic=containers-classic-flavors#par01)
 
 * [sao01](/docs/containers?topic=containers-classic-flavors#sao01)
-
-* [seo01](/docs/containers?topic=containers-classic-flavors#seo01)
 
 * [sjc03](/docs/containers?topic=containers-classic-flavors#sjc03)
 
