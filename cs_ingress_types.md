@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-12"
+lastupdated: "2022-09-13"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -33,44 +33,7 @@ Expose multiple apps in your {{site.data.keyword.containerlong}} cluster by crea
 Not ready to switch your ALBs to the Kubernetes Ingress image yet? The custom {{site.data.keyword.containerlong_notm}} Ingress image is available as an [open source project](https://github.com/IBM-Cloud/iks-ingress-controller/){: external}. Note that this project is not officially supported by {{site.data.keyword.cloud_notm}}. You are responsible for deploying, managing, and maintaining the Ingress controllers in your cluster.
 {: tip}
 
-For a comparison of the Kubernetes Ingress image and the unsupported IBM Ingress image, review the following tables.
-
 If you use the [Kubernetes Ingress controller](https://github.com/kubernetes/ingress-nginx){: external}, Prometheus metrics are enabled by default, which might result in additional billing.
-
-## Comparison of the ALB image types
-{: #about-alb-images}
-
-Review the following similarities are differences between the {{site.data.keyword.containerlong_notm}} Ingress and the Kubernetes Ingress images.
-{: shortdesc}
-
-### Similarities between Ingress images
-{: #alb-image-same}
-
-Review the following similarities between the {{site.data.keyword.containerlong_notm}} Ingress and the Kubernetes Ingress images.
-{: shortdesc}
-
-|Characteristic|Comparison|
-|--------------|----------|
-|Ingress components| Regardless of which image type your ALBs use, [Ingress still consists of the same three components](/docs/containers?topic=containers-ingress-about#ingress_components) in your cluster: Ingress resources, application load balancers (ALBs), and the multizone load balancer (MZLB) for classic clusters or the VPC load balancer for VPC clusters.|
-|Traffic flow| Both ALB images implement the NGINX Ingress controller. In that sense, [the way that ALBs function in your cluster to route traffic to your apps](/docs/containers?topic=containers-ingress-about#architecture-classic) is similar for both image types.|
-|ALB management| The image type does not affect how you manage the lifecycle of ALBs in your cluster. All ALBs can be managed by using `ibmcloud ks ingress alb` CLI commands. Additionally, IBM manages the [automatic updates of ALB versions](/docs/containers?topic=containers-ingress-types#alb-update). |
-{: caption="Similarities between Ingress images"}
-
-### Differences between Ingress images
-{: #alb-image-diff}
-
-Review the following important differences between the {{site.data.keyword.containerlong_notm}} Ingress and the Kubernetes Ingress images.
-{: shortdesc}
-
-|Characteristic|Custom {{site.data.keyword.containerlong_notm}} image|Kubernetes image|
-|--------------|----------------------------|--------------------|
-|Annotation class| Only [custom {{site.data.keyword.containerlong_notm}} annotations](/docs/containers?topic=containers-comm-ingress-annotations) (`ingress.bluemix.net/<annotation>`) are supported. | Only [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations){: external} (`nginx.ingress.kubernetes.io/<annotation>`) are supported.|
-|Annotation application to services| Within the annotation, you can specify the app service name that you want to apply the annotation to. | Annotations are always applied to all service paths in the resource, and you can't specify service names within the annotations.|
-|Protocols| HTTP/2 and gRPC protocols are not supported.|HTTP/2 and gRPC protocols are supported.|
-|TLS secrets| The ALB can access a TLS secret in the `default` namespace, in the `ibm-cert-store` namespace, or in the same namespace where you deploy the Ingress resource.| The ALB can access a TLS secret in the same namespace where you deploy the Ingress resource only, and can't access secrets in any other namespaces. Alternatively, the ALB can access a secret in another namespace if you set the secret as the `defaultCertificate` in the [`ibm-ingress-deploy-config` ConfigMap](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy) for all registered subdomains. |
-{: caption="Differences between Ingress images"}
-
-
 
 ## Prerequisites
 {: #config_prereqs}
@@ -828,7 +791,7 @@ You can modify default ALB settings and add annotations to your Ingress resource
 {: shortdesc}
 
 * To manage how requests are routed to your app, specify [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`) in your Ingress resources.
-* To modify default Ingress settings, such as to enable source IP preservation or configure SSL protocols, [change the `ibm-cloud-provider-ingress-cm`, `ibm-k8s-controller-config`, or `ibm-ingress-deploy-config` ConfigMap resources](/docs/containers?topic=containers-comm-ingress-annotations) for your Ingress ALBs.
+* To modify default Ingress settings, such as to enable source IP preservation or configure SSL protocols, [change the `ibm-k8s-controller-config` `ibm-ingress-deploy-config` ConfigMap resources](/docs/containers?topic=containers-comm-ingress-annotations) for your Ingress ALBs.
 
 ## Updating ALBs
 {: #alb-update}

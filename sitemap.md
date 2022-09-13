@@ -4386,12 +4386,6 @@ subcollection: containers
 
 [Setting up Kubernetes Ingress](/docs/containers?topic=containers-ingress-types#ingress-types)
 
-* [Comparison of the ALB image types](/docs/containers?topic=containers-ingress-types#about-alb-images)
-
-    * [Similarities between Ingress images](/docs/containers?topic=containers-ingress-types#alb-image-same)
-
-    * [Differences between Ingress images](/docs/containers?topic=containers-ingress-types#alb-image-diff)
-
 * [Prerequisites](/docs/containers?topic=containers-ingress-types#config_prereqs)
 
 * [Publicly exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create)
@@ -4518,13 +4512,9 @@ subcollection: containers
 
     * [TCP ports](/docs/containers?topic=containers-comm-ingress-annotations#tcp-ports-non-standard)
 
-    * [Upstream fail timeout](/docs/containers?topic=containers-comm-ingress-annotations#upstream-fail-timeout)
-
     * [Upstream keepalive requests](/docs/containers?topic=containers-comm-ingress-annotations#upstream-keepalive-requests)
 
     * [Upstream keepalive timeout](/docs/containers?topic=containers-comm-ingress-annotations#upstream-keepalive-timeout)
-
-    * [Upstream max fails](/docs/containers?topic=containers-comm-ingress-annotations#upstream-max-fails)
 
 * [Customizing the ALB deployment](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy)
 
