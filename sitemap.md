@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-12"
+lastupdated: "2022-09-13"
 
 keywords: containers
 subcollection: containers
@@ -7899,6 +7899,8 @@ subcollection: containers
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
 
 * [Version 4.4](/docs/containers?topic=containers-vpc_bs_changelog#044_is_block)
+
+    * [Change log for version 4.4.10_1578, released 13 September 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.4.10_1578_is_block_relnote)
 
     * [Change log for version 4.4.9_1566, released 25 August 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.4.9_1566_is_block_relnote)
 
