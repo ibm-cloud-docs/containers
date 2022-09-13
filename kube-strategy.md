@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-08-12"
+lastupdated: "2022-09-13"
 
 keywords: kubernetes, containers
 
@@ -48,7 +48,8 @@ With {{site.data.keyword.cloud_notm}}, you have flexibility to create Kubernetes
 | Business apps such as CRM, HCM, ERP, and E-commerce | Yes | |
 | Collaboration and social tools such as email | Yes | |
 | Linux and x86 workloads | Yes | |
-| Bare metal and GPU compute resources | Yes | Yes |
+| Bare metal | Yes | Yes |
+| GPU compute resources | Yes | Yes |
 | PCI and HIPAA-compliant workloads | Yes | Yes |
 | Legacy apps with platform and infrastructure constraints and dependencies | | Yes |
 | Proprietary apps with strict designs, licensing, or heavy regulations | | Yes |

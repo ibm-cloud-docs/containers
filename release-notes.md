@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-09-12"
+lastupdated: "2022-09-13"
 
 keywords: kubernetes, release notes
 
@@ -24,6 +24,50 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
+
+
+## September 2022
+{: #containers-sep22}
+
+### 13 September 2022
+{: #containers-sep1322}
+
+{{site.data.keyword.block_storage_is_short}} add-on version 4.4.10_1578 is available.
+:   For more information, see [version 4.4.10_1578](/docs/containers?topic=containers-vpc_bs_changelog).
+
+New! vGPU worker node flavors are now available for VPC Gen 2.
+:   For more information about the available worker node flavors, see [VPC Gen 2 flavors](/docs/containers?topic=containers-vpc-gen2-flavors). Worker node flavors with vGPU support are the `gx2` flavor class, for example: `gx2.16x128.2v100`.
+
+### 12 September 2022
+{: #containers-sep1222}
+
+{{site.data.keyword.block_storage_is_short}} add-on version 4.3.6_1579 is available.
+:   For more information, see [version 4.3.6_1579](/docs/containers?topic=containers-vpc_bs_changelog)
+
+{{site.data.keyword.cos_full_notm}} plug-in version `2.2.0` is available.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
+CLI change log update
+:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.446.
+
+
+
+ALB OAuth Proxy add-on
+:   Version 2.0.0_1214 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) is released. 
+
+### 8 September 2022
+{: #containers-sep0822}
+{: release-note}
+
+CLI change log update
+:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.444.
+
+### 7 September 2022
+{: #containers-sep722}
+{: release-note}
+
+Master fix pack update
+:   Kubernetes [1.24.4_1536](/docs/containers?topic=containers-changelog_124), [1.23.10_1544](/docs/containers?topic=containers-changelog_123), [1.22.13_1570](/docs/containers?topic=containers-changelog_122), and [1.21.14_1579](/docs/containers?topic=containers-changelog_121).
 
 
 ## August 2022

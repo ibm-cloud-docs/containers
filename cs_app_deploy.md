@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-08-01"
+lastupdated: "2022-09-13"
 
 keywords: kubernetes
 
@@ -303,13 +303,11 @@ To deploy apps to specific worker nodes,
 ## Deploying an app on a GPU machine
 {: #gpu_app}
 
-If you have a [bare metal graphics processing unit (GPU) machine type](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes), you can schedule mathematically intensive workloads onto the worker node. For example, you might run a 3D app that uses the Compute Unified Device Architecture (CUDA) platform to share the processing load across the GPU and CPU to increase performance.
+If you have a [GPU machine type](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes), you can schedule mathematically intensive workloads onto the worker node. For example, you might run a 3D app that uses the Compute Unified Device Architecture (CUDA) platform to share the processing load across the GPU and CPU to increase performance.
 {: shortdesc}
 
 In the following steps, you learn how to deploy workloads that require the GPU. You can also deploy apps that don't need to process their workloads across both the GPU and CPU. After, you might find it useful to play around with mathematically intensive workloads such as the [TensorFlow](https://www.tensorflow.org/){: external} machine learning framework with [this Kubernetes demo](https://github.com/pachyderm/pachyderm/tree/master/examples/ml/tensorflow){: external}.
 
-GPU machines are available only for clusters on classic infrastructure.
-{: note}
 
 Before you begin
 - Create a [cluster](/docs/containers?topic=containers-clusters#clusters_standard) or [worker pool](/docs/containers?topic=containers-add_workers#add_pool) that uses a GPU bare metal flavor. Keep in mind that setting up a bare metal machine can take more than one business day to complete.
