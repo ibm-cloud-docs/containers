@@ -207,6 +207,30 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep22)
+
+    * [13 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep1322)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on version 4.4.10_1578 is available.
+
+    * [12 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep1222)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on version 4.3.6_1579 is available.
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.0` is available.
+
+        * CLI change log update
+
+        * ALB OAuth Proxy add-on
+
+    * [8 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep0822)
+
+        * CLI change log update
+
+    * [7 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep722)
+
+        * Master fix pack update
+
 * [August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug22)
 
     * [31 August 2022](/docs/containers?topic=containers-containers-relnotes#containers-aug3122)
