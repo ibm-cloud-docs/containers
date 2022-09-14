@@ -300,7 +300,7 @@ toc:
                     - cs_versions_changelog_124.md
                     - cs_benchmarks_124.md                
                 - topicgroup:
-                    label: Version 1.23 (Default)
+                    label: Version 1.23
                     topics:
                     - cs_versions_123.md
                     - cs_versions_changelog_123.md

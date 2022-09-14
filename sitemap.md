@@ -5840,8 +5840,8 @@ subcollection: containers
 * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-124#cis-benchmark-remediations-124)
 
 
-### Version 1.23 (Default)
-{: #sitemap_version_123_default}
+### Version 1.23
+{: #sitemap_version_123}
 
 
 [1.23 version information and update actions](/docs/containers?topic=containers-cs_versions_123#cs_versions_123)
