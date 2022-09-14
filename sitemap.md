@@ -3200,16 +3200,6 @@ subcollection: containers
 
 [Removing clusters](/docs/containers?topic=containers-remove#remove)
 
-[Preparing for host maintenance updates](/docs/containers?topic=containers-host-maintenance#host-maintenance)
-
-* [Identifying your affected workers](/docs/containers?topic=containers-host-maintenance#worker-maintenance-list)
-
-* [Actions to take before the maintenance period](/docs/containers?topic=containers-host-maintenance#worker-maintenance-actions)
-
-    * [Workers in Classic clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-classic)
-
-    * [Workers in VPC clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-vpc)
-
 
 ## Managing cluster costs
 {: #sitemap_managing_cluster_costs}

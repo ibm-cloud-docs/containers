@@ -107,7 +107,6 @@ toc:
             - cs_cluster_update.md
             - performance.md
             - cluster-remove.md
-            - host-maintenance.md
         - topicgroup:
             label: Managing cluster costs
             topics:
