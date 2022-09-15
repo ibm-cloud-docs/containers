@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-09-13"
+lastupdated: "2022-09-15"
 
 keywords: kubernetes, release notes
 
@@ -25,9 +25,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: tip}
 
 
-
 ## September 2022
 {: #containers-sep22}
+
+
+
+### 15 September 2022
+{: #containers-sep1522}
+
+Istio add-on
+:   Version [`1.15.0`](/docs/containers?topic=containers-istio-changelog#1150) is available.
+
+
 
 ### 13 September 2022
 {: #containers-sep1322}

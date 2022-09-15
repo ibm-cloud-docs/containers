@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-08-22"
+lastupdated: "2022-09-15"
 
 keywords: kubernetes, istio, add-on
 
@@ -27,7 +27,8 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | --- | --- | --- |
-| 1.14 | Yes | 1.21, 1.22, 1.23, 1.24
+| 1.15 | Yes | 1.22, 1.23, 1.24 |
+| 1.14 | Yes | 1.21, 1.22, 1.23, 1.24 |
 | 1.13 | Yes | 1.21, 1.22, 1.23 |
 | 1.12 | No | - |
 | 1.11 | No | - |
@@ -40,6 +41,28 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 | 1.4 | No| - |
 {: summary="The rows are read from left to right. The first column is the Istio add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the Istio version is supported for."}
 {: caption="Supported Istio versions" caption-side="top"}
+
+## Version 1.15
+{: #v115}
+
+### Change log for 1.15.0, released 15 September 2022
+{: #1150}
+
+Review the changes that are included in version 1.15.0 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.14.3
+
+Current version
+:   1.15.0
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.15.0](https://istio.io/latest/news/releases/1.15.x/announcing-1.15/){: external}.
+:   Resolves the following CVEs:
+    - [usn-5550-1](https://ubuntu.com/security/notices/USN-5550-1){: external}
+    - [CVE-2021-4209](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-4209){: external}
+    - [CVE-2022-2509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2509){: external}
 
 ## Version 1.14
 {: #v114}

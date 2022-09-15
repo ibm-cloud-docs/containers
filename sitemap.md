@@ -209,6 +209,10 @@ subcollection: containers
 
 * [September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep22)
 
+    * [15 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep1522)
+
+        * Istio add-on
+
     * [13 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep1322)
 
         * {{site.data.keyword.block_storage_is_short}} add-on version 4.4.10_1578 is available.
@@ -7651,6 +7655,10 @@ subcollection: containers
     * [01 January 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#01-jan-2019)
 
 [Istio add-on version change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.15](/docs/containers?topic=containers-istio-changelog#v115)
+
+    * [Change log for 1.15.0, released 15 September 2022](/docs/containers?topic=containers-istio-changelog#1150)
 
 * [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
 
