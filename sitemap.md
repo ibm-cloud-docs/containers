@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-14"
+lastupdated: "2022-09-15"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep22)
+
+    * [15 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep1522)
+
+        * Istio add-on
 
     * [13 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep1322)
 
@@ -3199,6 +3203,16 @@ subcollection: containers
     * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap-43)
 
 [Removing clusters](/docs/containers?topic=containers-remove#remove)
+
+[Preparing for host maintenance updates](/docs/containers?topic=containers-host-maintenance#host-maintenance)
+
+* [Identifying your affected workers](/docs/containers?topic=containers-host-maintenance#worker-maintenance-list)
+
+* [Actions to take before the maintenance period](/docs/containers?topic=containers-host-maintenance#worker-maintenance-actions)
+
+    * [Workers in Classic clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-classic)
+
+    * [Workers in VPC clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-vpc)
 
 
 ## Managing cluster costs
@@ -7641,6 +7655,10 @@ subcollection: containers
     * [01 January 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#01-jan-2019)
 
 [Istio add-on version change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.15](/docs/containers?topic=containers-istio-changelog#v115)
+
+    * [Change log for 1.15.0, released 15 September 2022](/docs/containers?topic=containers-istio-changelog#1150)
 
 * [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
 
