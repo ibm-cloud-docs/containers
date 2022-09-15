@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-14"
+lastupdated: "2022-09-15"
 
 keywords: containers
 subcollection: containers
@@ -3199,6 +3199,16 @@ subcollection: containers
     * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap-43)
 
 [Removing clusters](/docs/containers?topic=containers-remove#remove)
+
+[Preparing for host maintenance updates](/docs/containers?topic=containers-host-maintenance#host-maintenance)
+
+* [Identifying your affected workers](/docs/containers?topic=containers-host-maintenance#worker-maintenance-list)
+
+* [Actions to take before the maintenance period](/docs/containers?topic=containers-host-maintenance#worker-maintenance-actions)
+
+    * [Workers in Classic clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-classic)
+
+    * [Workers in VPC clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-vpc)
 
 
 ## Managing cluster costs
