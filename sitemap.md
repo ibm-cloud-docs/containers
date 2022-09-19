@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-15"
+lastupdated: "2022-09-19"
 
 keywords: containers
 subcollection: containers
@@ -8958,6 +8958,8 @@ subcollection: containers
 * [Manually viewing storage metrics in the CLI](/docs/containers?topic=containers-debug_monitoring#manual-monitor-metrics)
 
 [Why am I still seeing charges for block storage devices after deleting my cluster?](/docs/containers?topic=containers-ts_storage_clean_volume#ts_storage_clean_volume)
+
+[Why does mounting {{site.data.keyword.blockstorageshort}} fail with an `fsck` error?](/docs/containers?topic=containers-ts-storage-fsck#ts-storage-fsck)
 
 
 ### Object Storage
