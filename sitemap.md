@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-15"
+lastupdated: "2022-09-20"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep22)
+
+    * [20 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep2022)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.1` is available.
 
     * [15 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep1522)
 
@@ -8006,6 +8010,8 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
+* [Change log for version 2.2.1, released 20 September 2022](/docs/containers?topic=containers-cos_plugin_changelog#0221_object_plugin)
+
 * [Change log for version 2.2.0, released 12 September 2022](/docs/containers?topic=containers-cos_plugin_changelog#0220_object_plugin)
 
 * [Change log for version 2.1.21, released 24 August 2022](/docs/containers?topic=containers-cos_plugin_changelog#02121_object_plugin)
@@ -8958,6 +8964,8 @@ subcollection: containers
 * [Manually viewing storage metrics in the CLI](/docs/containers?topic=containers-debug_monitoring#manual-monitor-metrics)
 
 [Why am I still seeing charges for block storage devices after deleting my cluster?](/docs/containers?topic=containers-ts_storage_clean_volume#ts_storage_clean_volume)
+
+[Why does mounting {{site.data.keyword.blockstorageshort}} fail with an `fsck` error?](/docs/containers?topic=containers-ts-storage-fsck#ts-storage-fsck)
 
 
 ### Object Storage
