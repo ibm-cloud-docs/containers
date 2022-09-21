@@ -209,11 +209,9 @@ subcollection: containers
 
 * [September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep22)
 
-    * [21 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep2022)
+    * [21 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep2122)
 
         * CLI change log update
-
-        * =======
 
         * Ingress ALB change log updates
 
