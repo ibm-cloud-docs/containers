@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-20"
+lastupdated: "2022-09-21"
 
 keywords: containers
 subcollection: containers
@@ -4565,6 +4565,12 @@ subcollection: containers
     * [Changing the number of open files for worker processes](/docs/containers?topic=containers-comm-ingress-annotations#max-worker-files)
 
     * [Tuning kernel performance](/docs/containers?topic=containers-comm-ingress-annotations#ingress_kernel)
+
+[Migrating from {{site.data.keyword.cloudcerts_long_notm}} to {{site.data.keyword.secrets-manager_full_notm}}](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr-migration)
+
+* [Migration FAQ](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_migration_faq)
+
+* [Timeline for {{site.data.keyword.cloudcerts_short}} end of support](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_timeline)
 
 
 ## Storing data on persistent storage
