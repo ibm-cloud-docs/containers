@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-20"
+lastupdated: "2022-09-21"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep22)
+
+    * [21 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep2122)
+
+        * CLI change log update
+
+        * Ingress ALB change log updates
 
     * [20 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep2022)
 
@@ -4566,6 +4572,12 @@ subcollection: containers
 
     * [Tuning kernel performance](/docs/containers?topic=containers-comm-ingress-annotations#ingress_kernel)
 
+[Migrating from {{site.data.keyword.cloudcerts_long_notm}} to {{site.data.keyword.secrets-manager_full_notm}}](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr-migration)
+
+* [Migration FAQ](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_migration_faq)
+
+* [Timeline for {{site.data.keyword.cloudcerts_short}} end of support](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_timeline)
+
 
 ## Storing data on persistent storage
 {: #sitemap_storing_data_on_persistent_storage}
@@ -5588,6 +5600,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.452](/docs/containers?topic=containers-cs_cli_changelog#cli-10452)
 
 * [Version 1.0.446](/docs/containers?topic=containers-cs_cli_changelog#cli-10446)
 
@@ -7476,7 +7490,9 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
-    * [Version 1.2.1_2506_iks (default), released 25 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2506_iks)
+    * [Version 1.2.1_2558_iks (default), released 21 September 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2558_iks)
+
+    * [Version 1.2.1_2506_iks, released 25 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2506_iks)
 
     * [Version 1.2.1_2488_iks, released 11 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2488_iks)
 
@@ -7497,6 +7513,8 @@ subcollection: containers
     * [Version 1.2.0_2131_iks, released 26 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.0_2131_iks)
 
 * [Version 1.1.2](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_2)
+
+    * [Version 1.1.2_2586_iks, released on 21 September 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2586_iks)
 
     * [Version 1.1.2_2507_iks, released on 25 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2507_iks)
 
