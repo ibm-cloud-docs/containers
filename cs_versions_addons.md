@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-07"
+lastupdated: "2022-09-21"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -42,7 +42,13 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ## Version 1.2.1
 {: #1_2_1}
 
-### Version 1.2.1_2506_iks (default), released 25 August 2022
+### Version 1.2.1_2558_iks (default), released 21 September 2022
+{: #1.2.1_2558_iks}
+
+- [CVE-2022-35252](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35252){: external}
+- [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664){: external}
+
+### Version 1.2.1_2506_iks, released 25 August 2022
 {: #1.2.1_2506_iks}
 
 - [CVE-2022-3209](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3209){: external}
@@ -113,6 +119,12 @@ Resolves [CVE-2022-29824](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-202
 
 For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following table for a summary of changes for each build of version 1.1.2 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
+
+### Version 1.1.2_2586_iks, released on 21 September 2022
+{: #1.1.2_2586_iks}
+
+- [CVE-2022-35252](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35252){: external}
+- [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664){: external}
 
 ### Version 1.1.2_2507_iks, released on 25 August 2022
 {: #1.1.2_2507_iks}

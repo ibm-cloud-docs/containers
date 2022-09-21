@@ -209,6 +209,10 @@ subcollection: containers
 
 * [September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep22)
 
+    * [21 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep2122)
+
+        * Ingress ALB change log updates
+
     * [20 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep2022)
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.1` is available.
@@ -7482,7 +7486,9 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
-    * [Version 1.2.1_2506_iks (default), released 25 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2506_iks)
+    * [Version 1.2.1_2558_iks (default), released 21 September 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2558_iks)
+
+    * [Version 1.2.1_2506_iks, released 25 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2506_iks)
 
     * [Version 1.2.1_2488_iks, released 11 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2488_iks)
 
@@ -7503,6 +7509,8 @@ subcollection: containers
     * [Version 1.2.0_2131_iks, released 26 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.0_2131_iks)
 
 * [Version 1.1.2](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_2)
+
+    * [Version 1.1.2_2586_iks, released on 21 September 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2586_iks)
 
     * [Version 1.1.2_2507_iks, released on 25 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2507_iks)
 
