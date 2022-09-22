@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-09-09"
+lastupdated: "2022-09-22"
 
 keywords: kubernetes
 
@@ -164,8 +164,8 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
     * [`ibmcloud ks ingress secret get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_get)
     * [`ibmcloud ks ingress secret ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_ls)
     * [`ibmcloud ks ingress secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_rm)
-    * [`ibmcloud ks ingress secret update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_update)
-* [`ibmcloud ks ingress status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status)
+    
+    
 
 ## ibmcloud ks logging
 {: #icks_map_logging}

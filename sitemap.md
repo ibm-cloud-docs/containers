@@ -5467,8 +5467,6 @@ subcollection: containers
 
     * [`ibmcloud ks ingress secret update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_update)
 
-    * [`ibmcloud ks ingress status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status)
-
 * [`logging` commands](/docs/containers?topic=containers-kubernetes-service-cli#logging_commands)
 
     * [`ibmcloud ks logging autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_disable)
