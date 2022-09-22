@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-21"
+lastupdated: "2022-09-22"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep22)
+
+    * [22 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep2222)
+
+        * Cluster autoscaler add-on versions `1.1.0_798`, `1.0.6_800`, and `1.0.5_779`.
+
+        * {{site.data.keyword.block_storage_is_short}} add-on version `4.3.7_1613`.
 
     * [21 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep2122)
 
@@ -4114,6 +4120,8 @@ subcollection: containers
 
 * [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
 
+* [Restricting NodePort service access](/docs/containers?topic=containers-nodeport#nodeport-restrict-access)
+
 [Managing the app lifecycle](/docs/containers?topic=containers-update_app#update_app)
 
 * [Update strategies](/docs/containers?topic=containers-update_app#updating_apps)
@@ -5460,8 +5468,6 @@ subcollection: containers
     * [`ibmcloud ks ingress secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_rm)
 
     * [`ibmcloud ks ingress secret update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_update)
-
-    * [`ibmcloud ks ingress status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status)
 
 * [`logging` commands](/docs/containers?topic=containers-kubernetes-service-cli#logging_commands)
 
@@ -7864,15 +7870,9 @@ subcollection: containers
 
 [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
-* [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0106_ca_addon)
-
-    * [Change log for patch update 1.0.6_774, released 31 August 2022](/docs/containers?topic=containers-ca_changelog#106774_ca)
-
-    * [Change log for patch update 1.0.6_763, released 17 August 2022](/docs/containers?topic=containers-ca_changelog#106763_ca)
-
-    * [Change log for patch update 1.0.6_742, released 15 July 2022](/docs/containers?topic=containers-ca_changelog#106742_ca)
-
 * [Version 1.1.0 (Beta)](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
+
+    * [Change log for patch update 1.1.0_798, released 22 September 2022](/docs/containers?topic=containers-ca_changelog#110798_ca)
 
     * [Change log for patch update 1.1.0_776, released 31 August 2022](/docs/containers?topic=containers-ca_changelog#110776_ca)
 
@@ -7886,7 +7886,19 @@ subcollection: containers
 
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
 
+* [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0106_ca_addon)
+
+    * [Change log for patch update 1.0.6_800, released 22 September 2022](/docs/containers?topic=containers-ca_changelog#106800_ca)
+
+    * [Change log for patch update 1.0.6_774, released 31 August 2022](/docs/containers?topic=containers-ca_changelog#106774_ca)
+
+    * [Change log for patch update 1.0.6_763, released 17 August 2022](/docs/containers?topic=containers-ca_changelog#106763_ca)
+
+    * [Change log for patch update 1.0.6_742, released 15 July 2022](/docs/containers?topic=containers-ca_changelog#106742_ca)
+
 * [Version 1.0.5](/docs/containers?topic=containers-ca_changelog#0105_ca_addon)
+
+    * [Change log for patch update 1.0.5_779, released 22 September 2022](/docs/containers?topic=containers-ca_changelog#105779_ca)
 
     * [Change log for patch update 1.0.5_775, released 31 August 2022](/docs/containers?topic=containers-ca_changelog#105775_ca)
 
@@ -7967,6 +7979,8 @@ subcollection: containers
     * [Change log for version 4.4.5_1371, released 13 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#445_1371_is_block_relnote)
 
 * [Version 4.3](/docs/containers?topic=containers-vpc_bs_changelog#043_is_block)
+
+    * [Change log for version 4.3.7_1613, released 22 September 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.3.7_1613_is_block_relnote)
 
     * [Change log for version 4.3.6_1579, released 12 September 2022](/docs/containers?topic=containers-vpc_bs_changelog#436_1579_is_block_relnote)
 
@@ -8495,6 +8509,8 @@ subcollection: containers
 * [Feedback and questions](/docs/containers?topic=containers-get-help#feedback-qs)
 
 * [Contacting support](/docs/containers?topic=containers-get-help#help-support)
+
+* [Requesting access to allowlisted features](/docs/containers?topic=containers-get-help#allowlist-access-request)
 
 [Running tests with the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool#debug-tool)
 

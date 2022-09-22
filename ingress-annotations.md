@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-14"
+lastupdated: "2022-09-22"
 
 keywords: kubernetes, nginx, ingress controller
 
