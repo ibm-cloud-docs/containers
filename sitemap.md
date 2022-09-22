@@ -4120,6 +4120,8 @@ subcollection: containers
 
 * [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
 
+* [Restricting NodePort service access](/docs/containers?topic=containers-nodeport#nodeport-restrict-access)
+
 [Managing the app lifecycle](/docs/containers?topic=containers-update_app#update_app)
 
 * [Update strategies](/docs/containers?topic=containers-update_app#updating_apps)
