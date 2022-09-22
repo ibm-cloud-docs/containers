@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-21"
+lastupdated: "2022-09-22"
 
 keywords: containers
 subcollection: containers
@@ -8495,6 +8495,8 @@ subcollection: containers
 * [Feedback and questions](/docs/containers?topic=containers-get-help#feedback-qs)
 
 * [Contacting support](/docs/containers?topic=containers-get-help#help-support)
+
+* [Requesting access to allowlisted features](/docs/containers?topic=containers-get-help#allowlist-access-request)
 
 [Running tests with the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool#debug-tool)
 
