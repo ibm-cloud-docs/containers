@@ -209,6 +209,10 @@ subcollection: containers
 
 * [September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep22)
 
+    * [26 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep2622)
+
+        * Worker node fix pack
+
     * [23 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep2322)
 
         * {{site.data.keyword.block_storage_is_short}} add-on version `4.4.11_1614`.
