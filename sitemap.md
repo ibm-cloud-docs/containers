@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-23"
+lastupdated: "2022-09-26"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep22)
+
+    * [26 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep2622)
+
+        * Worker node fix pack
 
     * [23 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep2322)
 
@@ -3026,6 +3030,22 @@ subcollection: containers
 
 * [Accessing private clusters by using the WireGuard VPN](/docs/containers?topic=containers-access_cluster#access_vpn_containers)
 
+[Accessing the cluster master with admission controllers and webhooks](/docs/containers?topic=containers-access_webhooks#access_webhooks)
+
+* [What are the default admission controllers in my cluster?](/docs/containers?topic=containers-access_webhooks#)
+
+* [Can I create my own admission controllers?](/docs/containers?topic=containers-access_webhooks#access_webhooks_create_controllers)
+
+* [What are the best practices for using webhooks?](/docs/containers?topic=containers-access_webhooks#webhook-best-practice)
+
+* [What other types of apps use admission controllers?](/docs/containers?topic=containers-access_webhooks#access_webhooks-app-use-controllers)
+
+    * [Setting up admission controller webhooks](/docs/containers?topic=containers-access_webhooks#configure-webhooks-122)
+
+* [I need help with a broken webhook. What can I do?](/docs/containers?topic=containers-access_webhooks#access_webhooks-help)
+
+[Accessing private clusters by using the WireGuard VPN](/docs/containers?topic=containers-cluster-access-wireguard#cluster-access-wireguard)
+
 
 ## Managing the cluster and worker node lifecycle
 {: #sitemap_managing_the_cluster_and_worker_node_lifecycle}
@@ -5807,6 +5827,8 @@ subcollection: containers
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
 
+    * [Change log for worker node fix pack 1.24.6_1539, released 26 September 2022](/docs/containers?topic=containers-changelog_124#1246_1539)
+
     * [Change log for worker node fix pack 1.24.4_1537, released 12 September 2022](/docs/containers?topic=containers-changelog_124#1244_1537)
 
     * [Change log for master fix pack 1.24.4_1536, released 1 September 2022](/docs/containers?topic=containers-changelog_124#1244_1536)
@@ -5891,6 +5913,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for worker node fix pack 1.23.12_1547, released 26 September 2022](/docs/containers?topic=containers-changelog_123#12312_1547)
 
     * [Change log for worker node fix pack 1.23.10_1545, released 12 September 2022](/docs/containers?topic=containers-changelog_123#12310_1545)
 
@@ -6004,6 +6028,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview_122)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.15_1573, released 26 September 2022](/docs/containers?topic=containers-changelog_122#12215_1573)
 
     * [Change log for worker node fix pack 1.22.13_1571, released 12 September 2022](/docs/containers?topic=containers-changelog_122#12213_1571)
 
@@ -6141,6 +6167,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview_121)
 
 * [Version 1.21 change log](/docs/containers?topic=containers-changelog_121#121_changelog)
+
+    * [Change log for worker node fix pack 1.21.14_1578, released 26 September 2022](/docs/containers?topic=containers-changelog_121#12114_1578)
 
     * [Change log for worker node fix pack 1.21.14_1578, released 12 September 2022](/docs/containers?topic=containers-changelog_121#12114_1578_2)
 
@@ -8530,6 +8558,12 @@ subcollection: containers
 
 
 [Debugging clusters](/docs/containers?topic=containers-debug_clusters#debug_clusters)
+
+[Debugging webhooks](/docs/containers?topic=containers-ts-webhook-debug#ts-webhook-debug)
+
+* [Reviewing the service that the webhook is calling](/docs/containers?topic=containers-ts-webhook-debug#review-webhook-service)
+
+* [Disabling or removing a webhook](/docs/containers?topic=containers-ts-webhook-debug#webhook-disable-rm)
 
 [Reviewing master health](/docs/containers?topic=containers-debug_master#debug_master)
 
