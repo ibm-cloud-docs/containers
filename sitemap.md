@@ -3030,6 +3030,22 @@ subcollection: containers
 
 * [Accessing private clusters by using the WireGuard VPN](/docs/containers?topic=containers-access_cluster#access_vpn_containers)
 
+[Accessing the cluster master with admission controllers and webhooks](/docs/containers?topic=containers-access_webhooks#access_webhooks)
+
+* [What are the default admission controllers in my cluster?](/docs/containers?topic=containers-access_webhooks#)
+
+* [Can I create my own admission controllers?](/docs/containers?topic=containers-access_webhooks#access_webhooks_create_controllers)
+
+* [What are the best practices for using webhooks?](/docs/containers?topic=containers-access_webhooks#webhook-best-practice)
+
+* [What other types of apps use admission controllers?](/docs/containers?topic=containers-access_webhooks#access_webhooks-app-use-controllers)
+
+    * [Setting up admission controller webhooks](/docs/containers?topic=containers-access_webhooks#configure-webhooks-122)
+
+* [I need help with a broken webhook. What can I do?](/docs/containers?topic=containers-access_webhooks#access_webhooks-help)
+
+[Accessing private clusters by using the WireGuard VPN](/docs/containers?topic=containers-cluster-access-wireguard#cluster-access-wireguard)
+
 
 ## Managing the cluster and worker node lifecycle
 {: #sitemap_managing_the_cluster_and_worker_node_lifecycle}
@@ -8542,6 +8558,12 @@ subcollection: containers
 
 
 [Debugging clusters](/docs/containers?topic=containers-debug_clusters#debug_clusters)
+
+[Debugging webhooks](/docs/containers?topic=containers-ts-webhook-debug#ts-webhook-debug)
+
+* [Reviewing the service that the webhook is calling](/docs/containers?topic=containers-ts-webhook-debug#review-webhook-service)
+
+* [Disabling or removing a webhook](/docs/containers?topic=containers-ts-webhook-debug#webhook-disable-rm)
 
 [Reviewing master health](/docs/containers?topic=containers-debug_master#debug_master)
 
