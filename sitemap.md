@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-26"
+lastupdated: "2022-09-27"
 
 keywords: containers
 subcollection: containers
@@ -4454,20 +4454,6 @@ subcollection: containers
 
 * [Privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private)
 
-* [Managing TLS certificates and secrets with {{site.data.keyword.cloudcerts_long}}](/docs/containers?topic=containers-ingress-types#manage_certs)
-
-    * [Using your default {{site.data.keyword.cloudcerts_short}} instance](/docs/containers?topic=containers-ingress-types#manager_certs_about)
-
-    * [Using the default TLS certificate for the IBM-provided Ingress subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_ibm)
-
-    * [Using a TLS certificate for a custom subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_custom)
-
-* [Migrating from {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr)
-
-* [Enabling service-to-service communication for your {{site.data.keyword.secrets-manager_short}} instance](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr-s2s)
-
-    * [Removing the {{site.data.keyword.cloudcerts_short}} instance from the cluster](/docs/containers?topic=containers-ingress-types#unregister-secret-instance)
-
 * [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_full}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr)
 
     * [Registering a {{site.data.keyword.secrets-manager_short}} instance to a cluster](/docs/containers?topic=containers-ingress-types#register-secrets-mgr)
@@ -4605,6 +4591,24 @@ subcollection: containers
     * [Tuning kernel performance](/docs/containers?topic=containers-comm-ingress-annotations#ingress_kernel)
 
 [Migrating from {{site.data.keyword.cloudcerts_long_notm}} to {{site.data.keyword.secrets-manager_full_notm}}](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr-migration)
+
+* [Setting up your Secrets Manager instance](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup)
+
+    * [Step 1: Enable service-to-service communication](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_s2s)
+
+    * [Step 2: Creating a {{site.data.keyword.secrets-manager_short}} instance](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_create)
+
+    * [Step 3: Registering your {{site.data.keyword.secrets-manager_short}} instance to your cluster](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_register)
+
+    * [Step 4: Set a default {{site.data.keyword.secrets-manager_short}} instance and regenerate your secrets](/docs/containers?topic=containers-certs-mgr-migration#step-4-set-a-default--instance-and-regenerate-your-secrets)
+
+    * [Step 5: Update the CRNs of secrets that are not managed by IBM](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_crn)
+
+    * [Step 6: Unregister your {{site.data.keyword.cloudcerts_short}} instance](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_unregister)
+
+    * [Step 7: Optional. Delete the {{site.data.keyword.cloudcerts_short}} instance.](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_delete)
+
+* [Migrating your secrets without using {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_alt)
 
 * [Migration FAQ](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_migration_faq)
 
