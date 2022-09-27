@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-09-26"
+lastupdated: "2022-09-27"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -43,6 +43,29 @@ Review the version 1.23 change log.
 
 
 
+
+
+
+### Change log for master fix pack 1.23.12_1546, released 26 September 2022
+{: #12312_1546}
+
+The following table shows the changes that are in the master fix pack 1.23.12_1546. Master patch updates are applied automatically. 
+{: shortdesc}
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.10 | v1.3.11 | Updated `Go` dependencies and to `Go` version `1.18.6`. |
+| CoreDNS | 1.8.6 | 1.9.3 | See the [CoreDNS release notes](https://coredns.io/2022/05/27/coredns-1.9.3-release/){: external}. |
+| GPU device plug-in and installer | c58c299 | 373bb9f | Updated to `Go` version `1.19.1`. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1006 | 1096 | Updated image for [CVE-2022-2526](https://nvd.nist.gov/vuln/detail/CVE-2022-2526){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.23.9-3 | v1.23.11-1 | Updated `Go` dependencies and to use `Go` version `1.17.13`. Updated to support the Kubernetes `1.23.11` release. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 414 | 416 | Updated to `Go` version `1.18.6`. Updated universal base image (UBI) to version `8.6-941` to resolve CVEs. |
+| Key Management Service Provider | v2.5.8 | v2.5.9 | Updated `Go` dependencies and to `Go` version `1.18.6`. |
+| Kubernetes | v1.23.10 | v1.23.12 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.12){: external}. |
+| Kubernetes NodeLocal DNS cache | 1.22.6 | 1.22.11 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.11){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.23.101544" caption-side="top"}
 
 ### Change log for worker node fix pack 1.23.12_1547, released 26 September 2022
 {: #12312_1547}

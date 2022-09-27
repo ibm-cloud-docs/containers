@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-09-19"
+lastupdated: "2022-09-27"
 
 keywords: kubernetes, node scaling, ca, autoscaler
 
@@ -18,6 +18,8 @@ subcollection: containers
 {: #classic-flavors}
 
 Review the classic worker node flavors by zone.
+
+
 
 
 

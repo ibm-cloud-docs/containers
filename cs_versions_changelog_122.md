@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-09-26"
+lastupdated: "2022-09-27"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -46,6 +46,29 @@ Review the version 1.22 change log.
 
 
 
+
+
+
+### Change log for master fix pack 1.22.15_1572, released 26 September 2022
+{: #12215_1572}
+
+The following table shows the changes that are in the master fix pack 1.22.15_1572. Master patch updates are applied automatically. 
+{: shortdesc}
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | N/A | N/A | Updated the Calico custom resource definitions to include `preserveUnknownFields: false`. |
+| Cluster health image | v1.3.10 | v1.3.11 | Updated `Go` dependencies and to `Go` version `1.18.6`. |
+| GPU device plug-in and installer | c58c299 | 373bb9f | Updated to `Go` version `1.19.1`. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1006 | 1096 | Updated image for [CVE-2022-2526](https://nvd.nist.gov/vuln/detail/CVE-2022-2526){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.22.13-1 | v1.22.14-2 | Updated to support the Kubernetes `1.22.14` release. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 414 | 416 | Updated to `Go` version `1.18.6`. Updated universal base image (UBI) to version `8.6-941` to resolve CVEs. |
+| Key Management Service Provider | v2.5.8 | v2.5.9 | Updated `Go` dependencies and to `Go` version `1.18.6`. |
+| Kubernetes | v1.22.13 | v1.22.15 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.15){: external}. |
+| Kubernetes NodeLocal DNS cache | 1.22.6 | 1.22.11 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.11){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.22.131570" caption-side="top"}
 
 ### Change log for worker node fix pack 1.22.15_1573, released 26 September 2022
 {: #12215_1573}
