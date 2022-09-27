@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-09-08"
+lastupdated: "2022-09-27"
 
 keywords: kubernetes, containers
 
@@ -61,7 +61,6 @@ The following table shows the actions that you must take before you update the K
 
 | Type | Description|
 | --- | --- |
-| **Unsupported:** CoreDNS wildcard queries via Kubernetes plugin | CoreDNS no longer supports wildcard DNS queries via the Kubernetes plugin. Applications using such queries must be updated to use an alternative DNS query method. You can run the following command against a version 1.23 cluster to determine if your cluster apps are performing such queries: `kubectl logs -n kube-system -l k8s-app=kube-dns --tail=-1 \| grep "deprecated wildcard queries received"`. |
 | IBM Cloud Block Storage driver and plug-in installation | The IBM Cloud Block Storage driver and plug-in component is now installed on clusters running classic infrastructure. If you installed the [IBM Cloud Block Storage driver and plug-in via the Helm chart](/docs/containers?topic=containers-block_storage#install_block), you must [uninstall the Helm chart](/docs/containers?topic=containers-block_storage#rm_block) before continuing the master update. Note that your existing persistent volume claims (PVCs) will continue to work after the Helm chart is uninstalled, but you are not able to provision new PVCs until the master update is completed. |
 {: caption="Changes to make after you update the master to Kubernetes 1.24" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
