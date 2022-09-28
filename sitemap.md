@@ -4582,7 +4582,7 @@ subcollection: containers
 
     * [Tuning kernel performance](/docs/containers?topic=containers-comm-ingress-annotations#ingress_kernel)
 
-[Using Secrets Manager with your {{site.data.keyword.containershort}} cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr)
+[Setting up {{site.data.keyword.secrets-manager_short}} in your {{site.data.keyword.containershort}} cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr)
 
 * [About Secrets Manager](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about)
 

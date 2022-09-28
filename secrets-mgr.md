@@ -13,7 +13,7 @@ subcollection: containers, openshift
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Using Secrets Manager with your {{site.data.keyword.containershort}} cluster
+# Setting up {{site.data.keyword.secrets-manager_short}} in your {{site.data.keyword.containershort}} cluster
 {: #secrets-mgr}
 
 When you integrate {{site.data.keyword.secrets-manager_full_notm}} with your {{site.data.keyword.containerlong_notm}} cluster, you can centrally manage Ingress subdomain certificates and other secrets. 
