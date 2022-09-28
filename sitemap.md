@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-27"
+lastupdated: "2022-09-28"
 
 keywords: containers
 subcollection: containers
@@ -15,8 +15,6 @@ subcollection: containers
 
 # Site map
 {: #cs_sitemap}
-
-
 
 
 
@@ -2657,7 +2655,7 @@ subcollection: containers
 
 * [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
-[Moving a VM-based application to Kubernetes](/docs/docs?topic=solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes)
+[Moving a VM-based application to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes)
 
 
 ## Developing apps in clusters
@@ -2694,7 +2692,7 @@ subcollection: containers
 
 * [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
 
-[Continuous Deployment to Kubernetes](/docs/docs?topic=solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes)
+[Continuous Deployment to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes)
 
 
 ## Controlling traffic to apps
@@ -2721,7 +2719,7 @@ subcollection: containers
 
 * [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
 
-[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](/docs/docs?topic=solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis)
+[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis)
 
 
 ## Installing the CLI and API
@@ -4454,12 +4452,6 @@ subcollection: containers
 
 * [Privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private)
 
-* [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_full}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr)
-
-    * [Registering a {{site.data.keyword.secrets-manager_short}} instance to a cluster](/docs/containers?topic=containers-ingress-types#register-secrets-mgr)
-
-    * [Setting a {{site.data.keyword.secrets-manager_short}} instance as the default instance](/docs/containers?topic=containers-ingress-types#default-secrets-mgr)
-
 * [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
 
     * [Default Ingress classes for public and private ALBs](/docs/containers?topic=containers-ingress-types#ingress-class-default)
@@ -4589,6 +4581,30 @@ subcollection: containers
     * [Changing the number of open files for worker processes](/docs/containers?topic=containers-comm-ingress-annotations#max-worker-files)
 
     * [Tuning kernel performance](/docs/containers?topic=containers-comm-ingress-annotations#ingress_kernel)
+
+[Setting up {{site.data.keyword.secrets-manager_short}} in your {{site.data.keyword.containershort}} cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr)
+
+* [About Secrets Manager](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about)
+
+    * [What functionality can I gain with {{site.data.keyword.secrets-manager_short}}?](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about_functionality)
+
+    * [What types of secrets are supported with {{site.data.keyword.secrets-manager_short}}?](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about_types)
+
+    * [What is the difference between the `ibmcloud ks ingress instance` CLI commands and the `ibmcloud ks ingress secret` CLI commands?](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about_cli)
+
+* [Setting up your Secrets Manager instance](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_setup)
+
+    * [Enable service-to-service communication](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_setup_s2s)
+
+    * [Create a {{site.data.keyword.secrets-manager_short}} instance](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_setup_create)
+
+    * [Register your {{site.data.keyword.secrets-manager_short}} instance to your cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_setup_register)
+
+    * [Set a default {{site.data.keyword.secrets-manager_short}} instance and regenerate your secrets](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_setup_default)
+
+* [Controlling access to your secrets with secret groups](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_groups)
+
+* [Registering a {{site.data.keyword.secrets-manager_short}} instance when creating a cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_cluster_create)
 
 [Migrating from {{site.data.keyword.cloudcerts_long_notm}} to {{site.data.keyword.secrets-manager_full_notm}}](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr-migration)
 

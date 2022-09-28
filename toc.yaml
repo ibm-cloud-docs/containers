@@ -216,6 +216,7 @@ toc:
                 - cs_ingress_types.md
                 - cs_ingress_monitor.md
                 - ingress-annotations.md
+                - secrets-mgr.md
                 - certs-mgr-migration.md
         - topicgroup:
             label: Storing data on persistent storage

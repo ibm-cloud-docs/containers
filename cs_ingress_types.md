@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-27"
+lastupdated: "2022-09-28"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -376,99 +376,6 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
     ```
     {: pre}
 
-
-## Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_full}}
-{: #manage_certs_secrets_mgr}
-
-As of 11 April 2022, you can integrate your own {{site.data.keyword.secrets-manager_full_notm}} instances with your Kubernetes clusters. You can use {{site.data.keyword.secrets-manager_short}} instances across multiple clusters, and a single cluster can have more than one instance. For each cluster, you set one instance as a default where all Ingress subdomain certificates are uploaded. With the [`ibmcloud ks ingress secret` commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create), you can also utilize {{site.data.keyword.secrets-manager_short}} to easily create and manage TLS or Opaque secrets that are stored in your Kubernetes cluster.
-{: shortdesc}
-
-What secret types are supported with {{site.data.keyword.secrets-manager_short}}?
-:   {{site.data.keyword.secrets-manager_short}} supports IAM credentials, key-value secrets, user credentials, arbitrary secrets, and Kubernetes secrets. For more information on supported secrets, see [Working with secrets of different types](/docs/secrets-manager?topic=secrets-manager-what-is-secret#secret-types).
-:    For Kubernetes secrets, {{site.data.keyword.secrets-manager_short}} supports both TLS and Opaque secret types. For TLS secrets, you can specify one certificate CRN. For Opaque secrets, you can specify multiple fields to pull non-certificate secrets. If you do not specify a secret type, TLS is applied by default.  
-
-Is a {{site.data.keyword.secrets-manager_short}} instance automatically generated in my cluster?
-:   No. You must [create a {{site.data.keyword.secrets-manager_short}} instance](/docs/secrets-manager?topic=secrets-manager-create-instance&interface=ui) and then [register your instance to your cluster](#register-secrets-mgr).
-
-### Registering a {{site.data.keyword.secrets-manager_short}} instance to a cluster
-{: #register-secrets-mgr}
-
-After you have created a {{site.data.keyword.secrets-manager_short}} instance, you must register the instance to a cluster. After you have registered the instance to a cluster, an update to secret values in the instance also updates any secrets with a corresponding CRN.
-
-```sh
-ibmcloud ks ingress instance register --cluster <cluster_name_or_id> --crn <instance_crn>
-```
-{: pre}
-
-If you want to register an instance to a cluster and also [set it as the default instance](#default-secrets-mgr), include the `--is-default` option. Otherwise, you can set a default instance with the `ibmcloud ks ingress instance set` command.
-{: tip}
-
-You can specify a {{site.data.keyword.secrets-manager_short}} instance and a secret group when you [create a cluster](/docs/containers?topic=containers-clusters&interface=cli) with the [`ibmcloud ks cluster create classic`](/docs/containers?topic=containers-kubernetes-service-cli&interface=cli#cs_cluster_create) or [`{{icks}} cluster create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli&interface=cli#cli_cluster-create-vpc-gen2) commands. Use the `--sm-instance` option to register an instance to the cluster and the `--sm-group` option to specify a secret group that can access the secrets on the cluster.
-{: tip} 
-
-### Setting a {{site.data.keyword.secrets-manager_short}} instance as the default instance
-{: #default-secrets-mgr}
-
-When you set a default {{site.data.keyword.secrets-manager_short}} instance, all new Ingress subdomain certificates are stored in that instance. If a previous default instance had already been set, it is removed as the default.
-{: shortdesc}
-
-When you set a new default {{site.data.keyword.secrets-manager_short}} instance, any existing secrets that are not managed by IBM Cloud must have their certificate CRN manually updated to match the CRN of the new default instance. To update the CRN, use the `ibmcloud ks ingress secret update` command. If you do not update the CRN, these user-managed secrets do not update at the next scheduled certificate renewal.
-{: important}
-
-1. Run the command to set the new default instance and optionally specify a [secret group](/docs/secrets-manager?topic=secrets-manager-secret-groups) that is allowed access.
-
-    ```sh
-    ibmcloud ks ingress instance default set --cluster <cluster_name_or_id> --name <instance_name> --secret-group <secret_group_id>
-    ```
-    {: pre}
-
-2. Regenerate your secrets. Any secrets that are managed by IBM are uploaded to the new default instance.
-
-    ```sh
-    ibmcloud ks nlb-dns secret regenerate --cluster <cluster_name_or_id> --nlb-subdomain <nlb_subdomain>
-    ```
-    {: pre}
-
-3. If the subdomain you specified in the `ibmcloud ks nlb-dns secret regenerate` command also corresponds to any secret that is not managed by IBM, you must manually update the CRN of that secret.
-
-    To check whether or not a secret is managed by IBM Cloud, run `ibmcloud ks ingress secret get` to view the details of the secret. In the output, if **User Managed** is marked **false**, the secret is managed by IBM Cloud. If it is marked **true**, the secret is not managed by IBM Cloud.
-    {: tip}
-
-    1. List the secrets in the cluster and note the CRN of the updated secrets that correspond with the subdomain.
-
-        ```sh
-        ibmcloud ks ingress secret ls --cluster <cluster_name_or_id>
-        ```
-        {: pre}
-
-        Example output.
-
-        ```sh
-        Name                                                             Namespace        CRN                                                                                                                                                              Expires On                 Domain                                                                                                  Status    Type   
-        pvg-classic-111aaaaa1aaa-1a1111aa11a111a1aaa1aaa111111a11-000   default          crn:v1:staging:public:cloudcerts:us-south:a/1a11a1a111aa11aa111aa1a1111aa1a1:a111a1aa-1aa1-111-aa11-a1a1a111aa1a:certificate:1aaa1aaa1a111a1a1111a11a111a11a1    2022-08-01T08:49:42+0000   pvg-classic-111aaaaa1aaa-1a1111aa11a111a1aaa1aaa111111a11-000.us-east.stg.containers.appdomain.cloud   created   TLS   
-        pvg-classic-111aaaaa1aaa-1a1111aa11a111a1aaa1aaa111111a11-000   ibm-cert-store   crn:v1:staging:public:cloudcerts:us-south:a/1a11a1a111aa11aa111aa1a1111aa1a1:a111a1aa-1aa1-111-aa11-a1a1a111aa1a:certificate:1aaa1aaa1a111a1a1111a11a111a11a1   2022-08-01T08:49:42+0000   pvg-classic-111aaaaa1aaa-1a1111aa11a111a1aaa1aaa111111a11-000.us-east.stg.containers.appdomain.cloud   created   TLS   
-        pvg-classic-111aaaaa1aaa-1a1111aa11a111a1aaa1aaa111111a11-000   kube-system      crn:v1:staging:public:cloudcerts:us-south:a/1a11a1a111aa11aa111aa1a1111aa1a1:a111a1aa-1aa1-111-aa11-a1a1a111aa1a:certificate:1aaa1aaa1a111a1a1111a11a111a11a1   2022-08-01T08:49:42+0000   pvg-classic-111aaaaa1aaa-1a1111aa11a111a1aaa1aaa111111a11-000.us-east.stg.containers.appdomain.cloud   created   TLS  
-
-        ```
-        {: screen}
-
-    2. Update the non-IBM managed secrets with the CRN of the matching subdomain you found earlier.
-
-        ```sh
-        ibmcloud ks ingress secret update --cluster <cluster_name_or_id> --name <secret_name> --namespace <namespace> --cert-crn <updated_crn>
-        ```
-        {: pre}
-
-
-#### Removing a {{site.data.keyword.secrets-manager_short}} instance as the default instance
-{: #secret-mgr-remove-default}
-
-To remove a {{site.data.keyword.secrets-manager_short}} instance as the default instance of a cluster, run the following command. Note that if no default instance is set, your secrets are only written directly to the cluster and are not uploaded to any {{site.data.keyword.secrets-manager_short}} instance.
-
-```sh
-ibmcloud ks ingress instance default unset --cluster <cluster_name_or_id> --crn <instance_crn> --name <instance_name>
-```
-{: pre}
 
 ## Customizing the Ingress class
 {: #ingress-class}
