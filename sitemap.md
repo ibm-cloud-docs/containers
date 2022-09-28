@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-27"
+lastupdated: "2022-09-28"
 
 keywords: containers
 subcollection: containers
@@ -2657,7 +2657,7 @@ subcollection: containers
 
 * [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
-[Moving a VM-based application to Kubernetes](/docs/docs?topic=solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes)
+[Moving a VM-based application to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes)
 
 
 ## Developing apps in clusters
@@ -2694,7 +2694,7 @@ subcollection: containers
 
 * [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
 
-[Continuous Deployment to Kubernetes](/docs/docs?topic=solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes)
+[Continuous Deployment to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes)
 
 
 ## Controlling traffic to apps
@@ -2721,7 +2721,7 @@ subcollection: containers
 
 * [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
 
-[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](/docs/docs?topic=solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis)
+[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis)
 
 
 ## Installing the CLI and API
