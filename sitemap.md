@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-28"
+lastupdated: "2022-09-29"
 
 keywords: containers
 subcollection: containers
@@ -4452,6 +4452,26 @@ subcollection: containers
 
 * [Privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private)
 
+* [Managing TLS certificates and secrets with {{site.data.keyword.cloudcerts_long}}](/docs/containers?topic=containers-ingress-types#manage_certs)
+
+    * [Using your default {{site.data.keyword.cloudcerts_short}} instance](/docs/containers?topic=containers-ingress-types#manager_certs_about)
+
+    * [Using the default TLS certificate for the IBM-provided Ingress subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_ibm)
+
+    * [Using a TLS certificate for a custom subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_custom)
+
+* [Migrating from {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr)
+
+* [Enabling service-to-service communication for your {{site.data.keyword.secrets-manager_short}} instance](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr-s2s)
+
+    * [Removing the {{site.data.keyword.cloudcerts_short}} instance from the cluster](/docs/containers?topic=containers-ingress-types#unregister-secret-instance)
+
+* [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_full}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr)
+
+    * [Registering a {{site.data.keyword.secrets-manager_short}} instance to a cluster](/docs/containers?topic=containers-ingress-types#register-secrets-mgr)
+
+    * [Setting a {{site.data.keyword.secrets-manager_short}} instance as the default instance](/docs/containers?topic=containers-ingress-types#default-secrets-mgr)
+
 * [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
 
     * [Default Ingress classes for public and private ALBs](/docs/containers?topic=containers-ingress-types#ingress-class-default)
@@ -4616,7 +4636,7 @@ subcollection: containers
 
     * [Step 3: Registering your {{site.data.keyword.secrets-manager_short}} instance to your cluster](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_register)
 
-    * [Step 4: Set a default {{site.data.keyword.secrets-manager_short}} instance and regenerate your secrets](/docs/containers?topic=containers-certs-mgr-migration#step-4-set-a-default--instance-and-regenerate-your-secrets)
+    * [Step 4: Set a default {{site.data.keyword.secrets-manager_short}} instance and regenerate your secrets](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_default)
 
     * [Step 5: Update the CRNs of secrets that are not managed by IBM](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_crn)
 
@@ -6188,7 +6208,7 @@ subcollection: containers
 
     * [Update after master](/docs/containers?topic=containers-cs_versions_121#121_after)
 
-[(Deprecated) Kubernetes version 1.21 change log](/docs/containers?topic=containers-changelog_121#changelog_121)
+[Kubernetes version 1.21 change log](/docs/containers?topic=containers-changelog_121#changelog_121)
 
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview_121)
 
@@ -6200,7 +6220,7 @@ subcollection: containers
 
     * [Change log for master fix pack 1.21.14_1579, released 1 September 2022](/docs/containers?topic=containers-changelog_121#12114_1579)
 
-    * [Change log for worker node fix pack 1.21.14_1578, released 29 August 2022](/docs/containers?topic=containers-changelog_121#12114_1578)
+    * [Change log for worker node fix pack 1.21.14_1578, released 29 August 2022](/docs/containers?topic=containers-changelog_121#12114_1578_3)
 
     * [Change log for worker node fix pack 1.21.14_1576, released 16 August 2022](/docs/containers?topic=containers-changelog_121#12114_1576)
 

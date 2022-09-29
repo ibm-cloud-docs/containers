@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-13"
+lastupdated: "2022-09-29"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -209,7 +209,7 @@ To load balance incoming HTTPS connections to your subdomain, you can configure 
 
 When you configure the public ALB, you choose the domain that your apps are accessible through. If you use the IBM-provided domain, such as `mycluster-<hash>-0000.us-south.containers.appdomain.cloud/myapp`, you can use the default TLS certificate that is created for the Ingress subdomain. If you set up a CNAME record to map a custom domain to the IBM-provided domain, you can provide your own TLS certificate for your custom domain.
 
-TLS secret configuration depends on the type of Ingress controller image that your ALB runs. For information about how to manage TLS certificates and secrets for Ingress, see the [Kubernetes Ingress image TLS documentation](/docs/containers?topic=containers-ingress-types#manage_certs) or [{{site.data.keyword.containerlong_notm}} Ingress image TLS documentation](/docs/containers?topic=containers-ingress-types#manage_certs).
+TLS secret configuration depends on the type of Ingress controller image that your ALB runs. For information about how to manage TLS certificates and secrets for Ingress, see the [Setting up {{site.data.keyword.secrets-manager_short}} in your Kubernetes Service cluster](/docs/containers?topic=containers-secrets-mgr).
 
 
 
@@ -229,7 +229,6 @@ You can modify default ALB settings and add annotations to your Ingress resource
 
 Ingress ALBs are managed by {{site.data.keyword.containerlong_notm}}. To further modify and manage your ALBs, such as to manage version updates for your ALBs or to scale up ALB replicas, you can use `ibmcloud ks ingress alb` commands. For more information, see [Updating ALBs](/docs/containers?topic=containers-ingress-types#alb-update).
 {: shortdesc}
-
 
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-22"
+lastupdated: "2022-09-29"
 
 keywords: kubernetes
 
@@ -3074,9 +3074,6 @@ ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <clu
 :    Optional: Include the ID of the root key in the KMS instance to use to encrypt the local disk on the worker nodes in this worker pool. To list available root keys, run `ibmcloud ks kms crk ls --instance-id`. If you include this option, you must also include the `--kms-instance` option.
      Before you can use KMS encryption, you must create a KMS instance and set up the required service authorization in IAM. See [Managing encryption for the worker nodes in your cluster](/docs/containers?topic=containers-encryption#worker-encryption).
      {: note}
-     
-`--operating-system SYSTEM`
-:    Specifies the operating system.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
@@ -6493,7 +6490,7 @@ Create an {{site.data.keyword.cloud_notm}} IAM API key that impersonates the use
 If you use the {{site.data.keyword.block_storage_is_short}} or cluster autoscaler add-ons in your cluster, you must re-create the add-on controller pods after you reset your API key. For more information, see [{{site.data.keyword.block_storage_is_short}} PVC creation fails after API key reset](/docs/openshift?topic=openshift-vpc-block-api-key-reset-ts) and [Autoscaling fails after API key reset](/docs/openshift?topic=openshift-ts-storage-ca-apikey-reset).
 {: important}
 
-Before you use this command, make sure that the user who runs this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure permissions](/docs/containers?topic=containers-access_reference#cluster_create_permissions). Target the resource group and region that you want to set the API key for. When the API key is reset, the previous API key that was used, if any, for the region and resource group is now obsolete. You can then delete the old API key from your list of API keys. Before you reset the API key, check whether you have other services that use the existing API key, such as a [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) or the [default {{site.data.keyword.cloudcerts_long}} service instance for your cluster](/docs/containers?topic=containers-ingress-types#manage_certs).
+Before you use this command, make sure that the user who runs this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure permissions](/docs/containers?topic=containers-access_reference#cluster_create_permissions). Target the resource group and region that you want to set the API key for. When the API key is reset, the previous API key that was used, if any, for the region and resource group is now obsolete. You can then delete the old API key from your list of API keys. Before you reset the API key, check whether you have other services that use the existing API key, such as a [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) or [{{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr).
 {: important}
 
 ```sh
@@ -7661,3 +7658,5 @@ ibmcloud ks storage volume ls [--cluster CLUSTER_ID] [--provider PROVIDER] [--zo
 ibmcloud ks storage volume ls --cluster aa1111aa11aaaaa11aa1
 ```
 {: pre}
+
+

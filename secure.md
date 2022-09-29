@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-09-12"
+lastupdated: "2022-09-29"
 
 keywords: kubernetes, containers
 
@@ -465,7 +465,7 @@ By default, {{site.data.keyword.containerlong_notm}} provides many features for 
 
 4. **{{site.data.keyword.compliance_long}}**: When you enable {{site.data.keyword.compliance_long}}, you can view reports about suspicious incoming and outgoing network traffic. For more information, see [What is {{site.data.keyword.compliance_long}}?](/docs/security-compliance?topic=security-compliance-getting-started).
 
-5. **{{site.data.keyword.secrets-manager_full}}**: You can store your Ingress and Kubernetes secrets in {{site.data.keyword.secrets-manager_full}}. When you integrate {{site.data.keyword.secrets-manager_short}} into your cluster, you set a default {{site.data.keyword.secrets-manager_short}} instance where all Ingress subdomain secrets are uploaded. For more information, see [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_full}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr).
+5. **{{site.data.keyword.secrets-manager_full}}**: You can store your Ingress and Kubernetes secrets in {{site.data.keyword.secrets-manager_full}}. When you integrate {{site.data.keyword.secrets-manager_short}} into your cluster, you set a default {{site.data.keyword.secrets-manager_short}} instance where all Ingress subdomain secrets are uploaded. For more information, see [Setting up {{site.data.keyword.secrets-manager_short}} in your Kubernetes Service cluster](/docs/containers?topic=containers-secrets-mgr).
 
 
 

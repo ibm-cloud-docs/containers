@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-09-26"
+lastupdated: "2022-09-29"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.21
 
@@ -13,11 +13,11 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# (Deprecated) Kubernetes version 1.21 change log
+# Kubernetes version 1.21 change log
 {: #changelog_121}
 
-Kubernetes version 1.21 becomes unsupported on 7 September 2022. Update your cluster to at least [version 1.22](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
-{: deprecated}
+Kubernetes version 1.21 is unsupported as of 14 September 2022. Update your cluster to at least [version 1.22](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
+{: note}
 
 View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.21. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}
@@ -104,7 +104,7 @@ The following table shows the changes that are in the master fix pack 1.21.14_15
 {: caption="Changes since version 1.21.14_1576" caption-side="top"}
 
 ### Change log for worker node fix pack 1.21.14_1578, released 29 August 2022
-{: #12114_1578}
+{: #12114_1578_3}
 
 The following table shows the changes that are in the worker node fix pack 1.21.14_1578. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}

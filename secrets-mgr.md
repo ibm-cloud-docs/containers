@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-09-28"
+lastupdated: "2022-09-29"
 
 keywords: secrets manager, secrets, certificates, secret group, CRN
 
@@ -123,7 +123,7 @@ Follow the steps to register your {{site.data.keyword.secrets-manager_short}} in
 
 2. Register the instance to your cluster. Specify the instance CRN found in the previous step.
 
-    If you want to register an instance to a cluster and also [set it as the default instance](#default-secrets-mgr), include the `--is-default` option. Otherwise, you can set a default instance with the `ibmcloud ks ingress instance default set` command.
+    If you want to register an instance to a cluster and also [set it as the default instance](#secrets-mgr_setup_default), include the `--is-default` option. Otherwise, you can set a default instance with the `ibmcloud ks ingress instance default set` command.
     {: tip}
 
     ```sh

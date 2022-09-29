@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-09-26"
+lastupdated: "2022-09-29"
 
 keywords: kubernetes, release notes
 
@@ -702,7 +702,7 @@ Create and manage dedicated hosts in VPC Gen 2.
 
 
 New! {{site.data.keyword.secrets-manager_full}}
-:   With the deprecation of {{site.data.keyword.cloudcerts_long}}, you can now manage certificates and secrets with {{site.data.keyword.secrets-manager_full}}. You can integrate your own {{site.data.keyword.secrets-manager_short}} instances with your Kubernetes clusters. {{site.data.keyword.secrets-manager_short}} instances can be used across multiple clusters, and a single cluster can have more than one instance. For more information, see [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr)
+:   With the deprecation of {{site.data.keyword.cloudcerts_long}}, you can now manage certificates and secrets with {{site.data.keyword.secrets-manager_full}}. You can integrate your own {{site.data.keyword.secrets-manager_short}} instances with your Kubernetes clusters. {{site.data.keyword.secrets-manager_short}} instances can be used across multiple clusters, and a single cluster can have more than one instance. For more information, see [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr)
 
 
 
@@ -3065,7 +3065,7 @@ New! Community Kubernetes Ingress support
 :   The Ingress ALBs in your cluster can now run the Kubernetes Ingress image, which is built on the community Kubernetes project's implementation of the NGINX Ingress controller. To use the Kubernetes Ingress image, you create your Ingress resources and ConfigMaps according to the Kubernetes Ingress format, including community Kubernetes Ingress annotations instead of custom {{site.data.keyword.containerlong_notm}} annotations. For more information about the differences between the {{site.data.keyword.containerlong_notm}} Ingress image and the Kubernetes Ingress image, see the [Choosing a supported image version](/docs/containers?topic=containers-ingress-types#alb-version-choose).
 
 New! Default {{site.data.keyword.cloudcerts_long}} instances
-:   A {{site.data.keyword.cloudcerts_long_notm}} service instance is now created by default for all new and existing standard clusters. The {{site.data.keyword.cloudcerts_short}} service instance, which is named in the format `kube-crtmgr-<cluster_ID>`, stores the TLS certificate for your cluster's default Ingress subdomain. You can also upload your own TLS certificates for custom Ingress domains to this {{site.data.keyword.cloudcerts_short}} instance and use the new [**`ibmcloud ks ingress secret`** commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create) to create secrets for these certificates in your cluster. To ensure that a {{site.data.keyword.cloudcerts_short}} instance is automatically created for your new or existing cluster, [verify that the API key for the region and resource group that the cluster is created in has the correct {{site.data.keyword.cloudcerts_short}} permissions](/docs/containers?topic=containers-ingress-types#manage_certs).
+:   A {{site.data.keyword.cloudcerts_long_notm}} service instance is now created by default for all new and existing standard clusters. The {{site.data.keyword.cloudcerts_short}} service instance, which is named in the format `kube-crtmgr-<cluster_ID>`, stores the TLS certificate for your cluster's default Ingress subdomain. You can also upload your own TLS certificates for custom Ingress domains to this {{site.data.keyword.cloudcerts_short}} instance and use the new [**`ibmcloud ks ingress secret`** commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create) to create secrets for these certificates in your cluster. To ensure that a {{site.data.keyword.cloudcerts_short}} instance is automatically created for your new or existing cluster, verify that the API key for the region and resource group that the cluster is created in has the correct {{site.data.keyword.cloudcerts_short}} permissions.
 
 
 
