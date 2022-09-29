@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-07-21"
+lastupdated: "2022-09-29"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, delete
 
@@ -809,7 +809,7 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
     ams03, fra02, fra04, fra05, par01, mil01
     :   `de.icr.io`
     
-    che01, hkg02, seo01, sng01, tok02, tok04, tok05
+    che01, seo01, sng01, tok02, tok04, tok05
     :   `jp.icr.io`
     
     lon04, lon05, lon06
