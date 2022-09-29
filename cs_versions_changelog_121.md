@@ -13,11 +13,11 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# (Deprecated) Kubernetes version 1.21 change log
+# Kubernetes version 1.21 change log
 {: #changelog_121}
 
-Kubernetes version 1.21 becomes unsupported on 7 September 2022. Update your cluster to at least [version 1.22](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
-{: deprecated}
+Kubernetes version 1.21 is unsupported as of 14 September 2022. Update your cluster to at least [version 1.22](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
+{: note}
 
 View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.21. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-08"
+lastupdated: "2022-09-29"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -26,43 +26,39 @@ For more information about the Kubernetes project versions, see the [Kubernetes 
 {: #cs_versions_available}
 
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (`n`) is released, versions up to 2 behind (`n-2`) are supported. Versions more than 2 behind the latest (`n-3`) are first deprecated and then unsupported. To continue receiving important security patch updates, make sure that your clusters always run a supported Kubernetes version. Deprecated clusters might not receive security updates. For more information, see [Release lifecycle](#release_lifecycle).
-{: shortdesc}
+
 
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-**Supported Kubernetes versions**:
+Supported Kubernetes versions:
 :    **Latest**: 1.24
-     - Release date: 09 Jun 2022
-     - Tentative unsupported date: 8 Nov 2023 `†`
-     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_124)
-     - [Change log](/docs/containers?topic=containers-changelog_124)
+    - Release date: 09 Jun 2022
+    - Tentative unsupported date: 8 Nov 2023 `†`
+    - [Version information and update actions](/docs/containers?topic=containers-cs_versions_124)
+    - [Change log](/docs/containers?topic=containers-changelog_124)
 
-:    **Default**: 1.23
-     - Release date: 09 Feb 2022
-     - Tentative unsupported date: 26 Apr 2023 `†`
-     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_123)
-     - [Change log](/docs/containers?topic=containers-changelog_123)
+:   **Default**: 1.23
+    - Release date: 09 Feb 2022
+    - Tentative unsupported date: 26 Apr 2023 `†`
+    - [Version information and update actions](/docs/containers?topic=containers-cs_versions_123)
+    - [Change log](/docs/containers?topic=containers-changelog_123)
    
-:    **Other**: 1.22
-     - Release date: 29 Sep 2021
-     - Tentative unsupported date: 30 Nov 2022 `†`
-     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_122)
-     - [Change log](/docs/containers?topic=containers-changelog_122)
-
-**Deprecated Kubernetes versions**:
-:    1.21
-     - Release date: 09 Jun 2021
-     - Unsupported date: 14 September 2022
-     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_121)
-     - [Change log](/docs/containers?topic=containers-changelog_121)
+:   **Other**: 1.22
+    - Release date: 29 Sep 2021
+    - Tentative unsupported date: 30 Nov 2022 `†`
+    - [Version information and update actions](/docs/containers?topic=containers-cs_versions_122)
+    - [Change log](/docs/containers?topic=containers-changelog_122)
 
 
-**Unsupported Kubernetes versions**: 
 
-:   [1.20](/docs/containers?topic=containers-cs_versions_120), [1.19](/docs/containers?topic=containers-cs_versions_119), [1.18](/docs/containers?topic=containers-118_changelog), [1.17](/docs/containers?topic=containers-117_changelog), [1.16](/docs/containers?topic=containers-116_changelog), [1.15](/docs/containers?topic=containers-115_changelog), [1.14](/docs/containers?topic=containers-114_changelog), [1.13](/docs/containers?topic=containers-113_changelog), [1.12](/docs/containers?topic=containers-112_changelog), [1.11](/docs/containers?topic=containers-111_changelog), [1.10](/docs/containers?topic=containers-110_changelog), [1.9](/docs/containers?topic=containers-19_changelog), [1.8](/docs/containers?topic=containers-18_changelog), [1.7](/docs/containers?topic=containers-17_changelog), 1.6, 1.5
+     - 
+
+
+Unsupported Kubernetes versions
+:   [1.21](/docs/containers?topic=containers-changelog_121), [1.20](/docs/containers?topic=containers-cs_versions_120), [1.19](/docs/containers?topic=containers-cs_versions_119), [1.18](/docs/containers?topic=containers-118_changelog), [1.17](/docs/containers?topic=containers-117_changelog), [1.16](/docs/containers?topic=containers-116_changelog), [1.15](/docs/containers?topic=containers-115_changelog), [1.14](/docs/containers?topic=containers-114_changelog), [1.13](/docs/containers?topic=containers-113_changelog), [1.12](/docs/containers?topic=containers-112_changelog), [1.11](/docs/containers?topic=containers-111_changelog), [1.10](/docs/containers?topic=containers-110_changelog), [1.9](/docs/containers?topic=containers-19_changelog), [1.8](/docs/containers?topic=containers-18_changelog), [1.7](/docs/containers?topic=containers-17_changelog), 1.6, 1.5
 
 ## Checking a cluster's Kubernetes server version
 {: #cs_server_version}

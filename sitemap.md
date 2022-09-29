@@ -6208,7 +6208,7 @@ subcollection: containers
 
     * [Update after master](/docs/containers?topic=containers-cs_versions_121#121_after)
 
-[(Deprecated) Kubernetes version 1.21 change log](/docs/containers?topic=containers-changelog_121#changelog_121)
+[Kubernetes version 1.21 change log](/docs/containers?topic=containers-changelog_121#changelog_121)
 
 * [Overview](/docs/containers?topic=containers-changelog_121#changelog_overview_121)
 
