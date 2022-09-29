@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-28"
+lastupdated: "2022-09-29"
 
 keywords: containers
 subcollection: containers
@@ -4616,7 +4616,7 @@ subcollection: containers
 
     * [Step 3: Registering your {{site.data.keyword.secrets-manager_short}} instance to your cluster](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_register)
 
-    * [Step 4: Set a default {{site.data.keyword.secrets-manager_short}} instance and regenerate your secrets](/docs/containers?topic=containers-certs-mgr-migration#step-4-set-a-default--instance-and-regenerate-your-secrets)
+    * [Step 4: Set a default {{site.data.keyword.secrets-manager_short}} instance and regenerate your secrets](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_default)
 
     * [Step 5: Update the CRNs of secrets that are not managed by IBM](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_crn)
 
@@ -6200,7 +6200,7 @@ subcollection: containers
 
     * [Change log for master fix pack 1.21.14_1579, released 1 September 2022](/docs/containers?topic=containers-changelog_121#12114_1579)
 
-    * [Change log for worker node fix pack 1.21.14_1578, released 29 August 2022](/docs/containers?topic=containers-changelog_121#12114_1578)
+    * [Change log for worker node fix pack 1.21.14_1578, released 29 August 2022](/docs/containers?topic=containers-changelog_121#12114_1578_3)
 
     * [Change log for worker node fix pack 1.21.14_1576, released 16 August 2022](/docs/containers?topic=containers-changelog_121#12114_1576)
 

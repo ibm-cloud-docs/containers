@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-09-29"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -82,9 +82,6 @@ Also, if you used the same cluster name repeatedly, you might have a rate limiti
     ibmcloud ks ingress secret ls -c <cluster_name_or_ID>
     ```
     {: pre}
-
-
-For more information, see [Managing TLS certificates and secrets](/docs/containers?topic=containers-ingress-types#manage_certs).
 
 
 

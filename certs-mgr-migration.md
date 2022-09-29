@@ -3,7 +3,7 @@
 copyright:
 
   years: 2022, 2022
-lastupdated: "2022-09-27"
+lastupdated: "2022-09-29"
 
 keywords: certificate manager, certificates, secrets, migration, secrets manager
 
@@ -58,7 +58,7 @@ To create a {{site.data.keyword.secrets-manager_short}} instance in the CLI or t
 {: shortdesc}
 
 - [Create a {{site.data.keyword.secrets-manager_short}} instance in CLI](/docs/secrets-manager?topic=secrets-manager-create-instance&interface=cli).
-- [Create a {{site.data.keyword.secrets-manager_short}} instance in the UI](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-create-instance&interface=ui).
+- [Create a {{site.data.keyword.secrets-manager_short}} instance in the UI](/docs/secrets-manager?topic=secrets-manager-create-instance&interface=ui).
 
 When you create a {{site.data.keyword.secrets-manager_short}} instance, it is not provisioned directly in your cluster. You must register your new {{site.data.keyword.secrets-manager_short}} instance to your cluster in the next step. 
 {: note}
@@ -97,7 +97,7 @@ Follow the steps to register your {{site.data.keyword.secrets-manager_short}} in
 
 2. Register the instance to your cluster. Specify the instance CRN found in the previous step.
 
-    If you want to register an instance to a cluster and also [set it as the default instance](#default-secrets-mgr), include the `--is-default` option. Otherwise, you can set a default instance with the `ibmcloud ks ingress instance set` command.
+    If you want to register an instance to a cluster and also [set it as the default instance](#certs-mgr_setup_default), include the `--is-default` option. Otherwise, you can set a default instance with the `ibmcloud ks ingress instance set` command.
     {: tip}
 
     ```sh
@@ -126,7 +126,7 @@ You can specify a {{site.data.keyword.secrets-manager_short}} instance and a sec
 
 
 ### Step 4: Set a default {{site.data.keyword.secrets-manager_short}} instance and regenerate your secrets
-{: certs-mgr_setup_default}
+{: #certs-mgr_setup_default}
 
 When you set a default {{site.data.keyword.secrets-manager_short}} instance, all new Ingress subdomain certificates are stored in that instance.
 {: shortdesc}
