@@ -207,6 +207,10 @@ subcollection: containers
 
 * [September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep22)
 
+    * [30 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep3022)
+
+        * New! Enabling Flow logs for VPC components
+
     * [26 September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep2622)
 
         * Worker node fix pack
