@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-29"
+lastupdated: "2022-09-30"
 
 keywords: containers
 subcollection: containers
@@ -8862,6 +8862,12 @@ subcollection: containers
 [Why doesn't the Kubernetes dashboard display utilization graphs?](/docs/containers?topic=containers-cs_dashboard_graphs#cs_dashboard_graphs)
 
 [Why are my log lines so long?](/docs/containers?topic=containers-long_lines#long_lines)
+
+[Enabling Flow Logs for VPC cluster components](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log)
+
+* [Configuring a flow log collector](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log_create)
+
+* [Viewing worker node flow logs](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log_view)
 
 
 ### Apps and services
