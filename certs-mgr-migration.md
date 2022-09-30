@@ -3,7 +3,7 @@
 copyright:
 
   years: 2022, 2022
-lastupdated: "2022-09-29"
+lastupdated: "2022-09-30"
 
 keywords: certificate manager, certificates, secrets, migration, secrets manager
 
@@ -140,44 +140,44 @@ When you set a default {{site.data.keyword.secrets-manager_short}} instance, all
 
 2. Regenerate your secrets. Any secrets that are managed by IBM, such as your default Ingress secrets, are uploaded to the new default instance. These secrets are automatically updated and the CRN is changed to reference the {{site.data.keyword.secrets-manager_short}} instance.
 
-  1. List the nlb-dns subdomains in your cluster.
+    1. List the nlb-dns subdomains in your cluster.
 
-      ```sh
-      ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
-      ```
-      {: pre}
+        ```sh
+        ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
+        ```
+        {: pre}
   
-  2. For each subdomain in your cluster, run the command to regenerate your IBM-managed secrets. This updates the CRN of these secrets to reference the CRN of the default {{site.data.keyword.secrets-manager_short}} instance.
+    2. For each subdomain in your cluster, run the command to regenerate your IBM-managed secrets. This updates the CRN of these secrets to reference the CRN of the default {{site.data.keyword.secrets-manager_short}} instance.
 
-    Regenerating your secrets is rate-limited to five times per week. Follow the steps in this document carefully, as repeating them might cause you to reach the limit.
-    {: important}
-
-
-      ```sh
-      ibmcloud ks nlb-dns secret regenerate --cluster <cluster_name_or_id> --nlb-subdomain <nlb_subdomain>
-      ```
-      {: pre}
+      Regenerating your secrets is rate-limited to five times per week. Follow the steps in this document carefully, as repeating them might cause you to reach the limit.
+      {: important}
 
 
-  3. Verify that your default Ingress secrets regenerated. In the output, the CRN of the default Ingress secrets should contain `secrets-manager`. Note that some of your secret CRNs might contain `cloudcerts` instead. These secrets are updated in the next step. 
+        ```sh
+        ibmcloud ks nlb-dns secret regenerate --cluster <cluster_name_or_id> --nlb-subdomain <nlb_subdomain>
+        ```
+        {: pre}
 
-      It might take several minutes for your secrets to regenerate. During this process, the **Status** column in the output says `regenerating` and switches to `created` when the regeneration is complete. 
-      {: note}
 
-      ```sh
-      ibmcloud ks ingress secret ls --cluster <cluster_name_or_id>
-      ```
-      {: pre}
+    3. Verify that your default Ingress secrets regenerated. In the output, the CRN of the default Ingress secrets should contain `secrets-manager`. Note that some of your secret CRNs might contain `cloudcerts` instead. These secrets are updated in the next step. 
 
-      Example output.
+        It might take several minutes for your secrets to regenerate. During this process, the **Status** column in the output says `regenerating` and switches to `created` when the regeneration is complete. 
+        {: note}
 
-      ```sh
-      Name                                         Namespace           CRN                                                                                                                                                                  Expires On                 Domain                                                                           Status    Type   
-      secret-11111aa1a1a11aa1111111a11a1a11a-000  default   crn:v1:bluemix:public:secrets-manager:us-south:a/1aa111aa1a11111aaa1a1111aa1aa111:111a1111-11a1-111a-1111-1a1a1a1111a1:secret:a111aa11-11a1-1111-a111-11a11aa111a1   2022-12-21T19:52:29+0000   secret-11111aa1a1a11aa1111111a11a1a11a-000.us-south.containers.appdomain.cloud   created   TLS   
-      secret-22222aa2a2a22aa2222222a22a2a22a-000  default   crn:v1:bluemix:public:secrets-manager:us-south:a/2aa222aa2a22222aaa2a2222aa2aa222:222a2222-22a2-222a-2222-2a2a2a2a2:secret:a222aa22-22a2-2222-a222-22a22aa222a2   2022-12-21T19:52:29+0000   secret-22222aa2a2a22aa2222222a22a2a22a-000.us-south.containers.appdomain.cloud   created   TLS  
-      secret-11111aa1a1a11aa1111111a11a1a11a-000  istio-system   crn:v1:bluemix:public:cloudcerts:us-south:a/1aa111aa1a11111aaa1a1111aa1aa111:111a1111-11a1-111a-1111-1a1a1a1111a1:secret:a111aa11-11a1-1111-a111-11a11aa111a1  
-      ```
-      {: screen}
+        ```sh
+        ibmcloud ks ingress secret ls --cluster <cluster_name_or_id>
+        ```
+        {: pre}
+
+        Example output.
+
+        ```sh
+        Name                                         Namespace           CRN                                                                                                                                                                  Expires On                 Domain                                                                           Status    Type   
+        secret-11111aa1a1a11aa1111111a11a1a11a-000  default   crn:v1:bluemix:public:secrets-manager:us-south:a/1aa111aa1a11111aaa1a1111aa1aa111:111a1111-11a1-111a-1111-1a1a1a1111a1:secret:a111aa11-11a1-1111-a111-11a11aa111a1   2022-12-21T19:52:29+0000   secret-11111aa1a1a11aa1111111a11a1a11a-000.us-south.containers.appdomain.cloud   created   TLS   
+        secret-22222aa2a2a22aa2222222a22a2a22a-000  default   crn:v1:bluemix:public:secrets-manager:us-south:a/2aa222aa2a22222aaa2a2222aa2aa222:222a2222-22a2-222a-2222-2a2a2a2a2:secret:a222aa22-22a2-2222-a222-22a22aa222a2   2022-12-21T19:52:29+0000   secret-22222aa2a2a22aa2222222a22a2a22a-000.us-south.containers.appdomain.cloud   created   TLS  
+        secret-11111aa1a1a11aa1111111a11a1a11a-000  istio-system   crn:v1:bluemix:public:cloudcerts:us-south:a/1aa111aa1a11111aaa1a1111aa1aa111:111a1111-11a1-111a-1111-1a1a1a1111a1:secret:a111aa11-11a1-1111-a111-11a11aa111a1  
+        ```
+        {: screen}
 
 ### Step 5: Update the CRNs of secrets that are not managed by IBM
 {: #certs-mgr_setup_crn}
@@ -276,22 +276,22 @@ Follow the steps to migrate your secrets without creating a {{site.data.keyword.
 
 3. Manually regenerate your secrets to remove them from the {{site.data.keyword.cloudcerts_short}} instance.
 
-  1. List the nlb-dns subdomains in your cluster.
+   1. List the nlb-dns subdomains in your cluster.
 
-      ```sh
-      ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
-      ```
-      {: pre}
+       ```sh
+       ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
+       ```
+       {: pre}
   
-  2. For each subdomain in your cluster, run the command to regenerate the secrets.
+   2. For each subdomain in your cluster, run the command to regenerate the secrets.
 
-    Regenerating your secrets is rate-limited to five times per week. Follow the steps in this document carefully, as repeating them might cause you to reach the limit.
-    {: important}
+       Regenerating your secrets is rate-limited to five times per week. Follow the steps in this document carefully, as repeating them might cause you to reach the limit.
+       {: important}
 
-      ```sh
-      ibmcloud ks nlb-dns secret regenerate --cluster <cluster_name_or_id> --nlb-subdomain <nlb_subdomain>
-      ```
-      {: pre}
+       ```sh
+       ibmcloud ks nlb-dns secret regenerate --cluster <cluster_name_or_id> --nlb-subdomain <nlb_subdomain>
+       ```
+       {: pre}
 
 4. Verify that the secrets are removed from the {{site.data.keyword.cloudcerts_short}} instance. List the secrets in your cluster and check that the value in the **CRN** column contains `NO_DEFAULT_INSTANCE`. 
 
@@ -310,7 +310,7 @@ Follow the steps to migrate your secrets without creating a {{site.data.keyword.
     {: screen}
 
 
-4. Optional. Follow the steps to [delete the {{site.data.keyword.cloudcerts_short}} instance](#certs-mgr_delete). If you do not delete the instance now, it is automatically deleted when {{site.data.keyword.cloudcerts_short}} becomes unsupported in December 2022.
+5. Optional. Follow the steps to [delete the {{site.data.keyword.cloudcerts_short}} instance](#certs-mgr_delete). If you do not delete the instance now, it is automatically deleted when {{site.data.keyword.cloudcerts_short}} becomes unsupported in December 2022.
 
 
 

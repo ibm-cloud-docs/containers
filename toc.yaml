@@ -452,6 +452,7 @@ toc:
                   topics:
                     - ts-health-iks-kube-db-graphs.md
                     - ts-health-loglines.md
+                    - vpc-flow-logs.md
               - topicgroup:
                   label: Apps and services
                   topics:
