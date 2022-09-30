@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-29"
+lastupdated: "2022-09-30"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -134,7 +134,8 @@ Kubernetes Ingress field: See the [`custom-http-errors` documentation](https://k
 Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress fields
+Previous {{site.data.keyword.containerlong_notm}} Ingress fields.
+
 #### Kubernetes Ingress fields
 {: #kube-ingress-fields}
 
