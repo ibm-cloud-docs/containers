@@ -820,6 +820,8 @@ ALB OAuth Proxy add-on version 1.0.0 uses configuration snippet annotations (`ng
           # The name of a secret that contains the server-side TLS certificate and key to enable TLS between the OAuth2-Proxy and the Ingress ALB. By default, the TLS secret defined in your Ingress resources is used.
           whitelist_domains:
           # Allowed domains for redirection after authentication. Default: "". Example: example.com,*.example2.com For more info, see: https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview/ 
+          oidc_extra_audiences:
+          # Additional audiences which are allowed to pass verification. 
           
         ```
         {: codeblock}
