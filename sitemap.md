@@ -8210,6 +8210,8 @@ subcollection: containers
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
 
+    * [Version 2.0.0_1265, released on 3 October 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1265)
+
     * [Version 2.0.0_1214, released on 12 September 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1214)
 
     * [Version 2.0.0_1187, released on 7 July 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1187)
