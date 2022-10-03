@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-09-30"
+lastupdated: "2022-10-03"
 
 keywords: kubernetes, release notes
 
@@ -31,6 +31,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-oct0322}
 
 
+Ingress ConfigMap change log updates
+:   Updated the [Ingress ConfigMap change log](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log).
 
 Ingress ALB change log updates
 :   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for versions `1.2.1_2646_iks` and `1.1.2_2645_iks`.

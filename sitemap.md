@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-30"
+lastupdated: "2022-10-03"
 
 keywords: containers
 subcollection: containers
@@ -208,6 +208,8 @@ subcollection: containers
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
 
     * [3 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct0322)
+
+        * Ingress ConfigMap change log updates
 
         * Ingress ALB change log updates
 
@@ -8256,6 +8258,8 @@ subcollection: containers
 
 
 [Ingress ConfigMap change log](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ibm-k8s-controller-config-change-log)
+
+* [3 October 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-3-oct-2022)
 
 * [17 August 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-17-aug-2022)
 
