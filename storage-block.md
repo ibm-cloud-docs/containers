@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-09-09"
+lastupdated: "2022-10-03"
 
 keywords: kubernetes
 
@@ -1779,58 +1779,65 @@ To store the snapshot, you must request snapshot space on your block storage. Sn
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-2. Log in to the `ibmcloud sl` CLI. 
+1. Log in to the `ibmcloud sl` CLI. 
 
     ```sh
     ibmcloud sl init
     ```
     {: pre}
 
-3. List existing PVs in your cluster.
-    
+1. List existing PVs in your cluster.
+
     ```sh
     kubectl get pv
     ```
     {: pre}
 
-4. Get the details for the PV for which you want to create snapshot space and note the volume ID, the size, and the IOPS. The size and IOPS are shown in the **Labels** section of your CLI output.
-    
+1. Get the details for the PV for which you want to create snapshot space and note the volume ID, the size, and the IOPS. The size and IOPS are shown in the **Labels** section of your CLI output.
+
     ```sh
     kubectl describe pv <pv_name>
     ```
     {: pre}
 
-5. To find the volume ID, review the `ibm.io/network-storage-id` annotation of your CLI output.
+1. To find the volume ID, review the `ibm.io/network-storage-id` annotation of your CLI output.
 
-6. Create the snapshot size for your existing volume with the parameters that you retrieved in the previous step.
+1. Create the snapshot size for your existing volume with the parameters that you retrieved in the previous step.
 
     ```sh
     ibmcloud sl block snapshot-order <volume_ID> --size <size> --tier <iops>
     ```
     {: pre}
     
-7. Wait for the snapshot size to create. The snapshot size is successfully provisioned when the **Snapshot Size (GB)** in your CLI output changes from 0 to the size that you ordered.
+1. Wait for the snapshot size to create. The snapshot size is successfully provisioned when the **Snapshot Size (GB)** in your CLI output changes from 0 to the size that you ordered.
 
     ```sh
     ibmcloud sl block volume-detail <volume_ID>
     ```
     {: pre}
 
-8. Create the snapshot for your volume and note the ID of the snapshot that is created for you. 
+1. Create the snapshot for your volume and note the ID of the snapshot that is created for you. 
 
     ```sh
     ibmcloud sl block snapshot-create <volume_ID>
     ```
     {: pre}
     
-9. Verify that the snapshot is created successfully.
+1. Verify that the snapshot is created successfully.
 
     ```sh
     ibmcloud sl block snapshot-list <volume_ID>
     ```
     {: pre}
 
-10. To restore data from a snapshot to an existing volume, run the following command.
+1. Set the snapshot schedule. For more information on the options available for your snapshot schedule, refer to the [CLI documentation](/docs/cli?topic=cli-sl-block-storage#sl_block_snapshot_enable). 
+
+    ```sh
+    ibmcloud sl block snapshot-enable VOLUME_ID <OPTIONS>
+    ```
+
+1. To restore data from a snapshot to an existing volume, run the following command.
+
     ```sh
     ibmcloud sl block snapshot-restore <volume_ID> <snapshot_ID>
     ```
