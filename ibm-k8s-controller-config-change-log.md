@@ -2,7 +2,7 @@
 
 copyright:
  years: 2022, 2022
-lastupdated: "2022-08-17"
+lastupdated: "2022-10-03"
 
 keywords: kubernetes, ingress, change log, configmap
 
@@ -20,10 +20,13 @@ The {{site.data.keyword.containerlong_notm}} `ibm-k8s-controller-config` ConfigM
 
 For more information about ALBs, see [About Ingress](/docs/containers?topic=containers-ingress-about). For more information about the possible configuration values, see the [nginx-ingress documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/){: external}.
 
+## 3 October 2022
+{: #ingress-cm-3-oct-2022}
 
+Removed managed contents from the `http-snippet` field. See the ConfigMap in the `IBM-Cloud/kube-samples` [repo](https://github.com/IBM-Cloud/kube-samples/blob/170e36cef314dd18823dfb016b041650126d3672/ingress-config/ibm-k8s-controller-config.yaml){: external}.
 
 ## 17 August 2022
 {: #ingress-cm-17-aug-2022}
 
-Added the ConfigMap to the `IBM/kube-samples` [repo](https://github.com/IBM-Cloud/kube-samples/blob/8f765f825552449746dc2ab1ee7d62ca718119c0/ingress-config/ibm-k8s-controller-config.yaml).
+Added the ConfigMap to the `IBM-Cloud/kube-samples` [repo](https://github.com/IBM-Cloud/kube-samples/blob/8f765f825552449746dc2ab1ee7d62ca718119c0/ingress-config/ibm-k8s-controller-config.yaml){: external}.
 

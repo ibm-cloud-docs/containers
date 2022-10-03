@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-06-10"
+lastupdated: "2022-10-03"
 
 keywords: kubernetes
 
@@ -230,15 +230,16 @@ Review the feature gates that are applied to all master and worker node componen
 
 
 
+
 1.24
-:    `CustomCPUCFSQuotaPeriod=true`
-:    `LegacyServiceAccountTokenNoAutoGeneration=false`
-:    `PodSecurity=false`
+:   `CustomCPUCFSQuotaPeriod=true`
+:   `LegacyServiceAccountTokenNoAutoGeneration=false`
+:   `PodSecurity=false`
 
 1.23
-:    `CustomCPUCFSQuotaPeriod=true`
-:    `ServiceLBNodePortControl=false`
-:    `PodSecurity=false`
+:   `CustomCPUCFSQuotaPeriod=true`
+:   `ServiceLBNodePortControl=false`
+:   `PodSecurity=false`
 
 1.22
 :   `ServiceLBNodePortControl=false`

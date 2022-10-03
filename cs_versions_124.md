@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-09-27"
+lastupdated: "2022-10-03"
 
 keywords: kubernetes, containers
 
@@ -41,7 +41,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
-| 1.24 | Yes | 09 Jun 2022 | 29 Nov 2023 `†` |
+| 1.24 | Yes | 09 Jun 2022 | 06 Sept 2023 `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.24" caption-side="top"}
 
 ## Preparing to update

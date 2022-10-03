@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-09-30"
+lastupdated: "2022-10-03"
 
 keywords: kubernetes, release notes
 
@@ -23,6 +23,23 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+## October 2022
+{: #containers-oct22}
+
+### 3 October 2022
+{: #containers-oct0322}
+
+
+Ingress ConfigMap change log updates
+:   Updated the [Ingress ConfigMap change log](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log).
+
+Ingress ALB change log updates
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for versions `1.2.1_2646_iks` and `1.1.2_2645_iks`.
+
+ALB OAuth Proxy add-on
+:   Version 2.0.0_1265 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) is released. 
+
 
 
 ## September 2022

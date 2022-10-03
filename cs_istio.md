@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-15"
+lastupdated: "2022-10-03"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
 
@@ -22,6 +22,8 @@ Istio on {{site.data.keyword.containerlong}} provides a seamless installation of
 {: shortdesc}
 
 With one click, you can get all Istio core components up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on so that {{site.data.keyword.cloud_notm}} automatically keeps all your Istio components up-to-date.
+
+
 
 ## Installing the Istio add-on
 {: #istio_install}

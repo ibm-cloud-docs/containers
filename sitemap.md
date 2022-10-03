@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-09-30"
+lastupdated: "2022-10-03"
 
 keywords: containers
 subcollection: containers
@@ -204,6 +204,16 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
+
+    * [3 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct0322)
+
+        * Ingress ConfigMap change log updates
+
+        * Ingress ALB change log updates
+
+        * ALB OAuth Proxy add-on
 
 * [September 2022](/docs/containers?topic=containers-containers-relnotes#containers-sep22)
 
@@ -2970,39 +2980,38 @@ subcollection: containers
 * [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)
 
 
-## Creating and accessing clusters
-{: #sitemap_creating_and_accessing_clusters}
+## Creating clusters
+{: #sitemap_creating_clusters1}
 
 
 [Creating clusters](/docs/containers?topic=containers-clusters#clusters)
-
-* [Sample CLI commands](/docs/containers?topic=containers-clusters#cluster_create_samples)
-
-    * [Free cluster](/docs/containers?topic=containers-clusters#cluster_create_free)
-
-    * [Classic clusters](/docs/containers?topic=containers-clusters#cluster_create_classic)
-
-    * [VPC clusters](/docs/containers?topic=containers-clusters#cluster_create_vpc)
 
 * [Preparing to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare)
 
 * [Deciding on your cluster setup](/docs/containers?topic=containers-clusters#prepare_cluster_level)
 
-* [Creating a standard classic cluster](/docs/containers?topic=containers-clusters#clusters_standard)
-
-    * [Creating a standard classic cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui)
-
-    * [Creating a standard classic cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps)
-
-* [Creating a standard VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2)
-
-    * [Creating a standard VPC cluster in the console](/docs/containers?topic=containers-clusters#clusters_vpcg2_ui)
-
-    * [Creating standard VPC clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpcg2_cli)
-
-* [Creating a cluster on dedicated host infrastructure in the CLI](/docs/containers?topic=containers-clusters#cluster_dedicated_host_cli)
-
 * [Next steps](/docs/containers?topic=containers-clusters#next_steps)
+
+[Creating classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster-create-classic)
+
+* [Creating a classic cluster in the console](/docs/containers?topic=containers-cluster-create-classic#clusters_ui)
+
+* [Creating a standard classic cluster in the CLI](/docs/containers?topic=containers-cluster-create-classic#clusters_cli_steps)
+
+* [Example commands to create classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster_create_classic)
+
+[Creating VPC Gen 2 clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-gen2)
+
+* [Creating a standard VPC cluster in the console](/docs/containers?topic=containers-cluster-create-vpc-gen2#clusters_vpcg2_ui)
+
+* [Creating standard VPC clusters from the CLI](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_vpcg2_cli)
+
+* [Example commands to create VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_create_vpc)
+
+
+## Accessing clusters
+{: #sitemap_accessing_clusters}
+
 
 [Accessing clusters](/docs/containers?topic=containers-access_cluster#access_cluster)
 
@@ -3561,29 +3570,31 @@ subcollection: containers
 {: #sitemap_securing_the_cluster_network}
 
 
-[Classic: Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-firewall#firewall)
+[Classic: Opening required ports and IP addresses in your allowlist](/docs/containers?topic=containers-firewall#firewall)
 
-* [Opening ports in a corporate firewall](/docs/containers?topic=containers-firewall#corporate)
+* [Opening ports in a corporate allowlist](/docs/containers?topic=containers-firewall#corporate)
 
-    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_bx)
+    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_bx)
 
-    * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_kubectl)
+    * [Running `kubectl` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_kubectl)
 
-    * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_calicoctl)
+    * [Running `calicoctl` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_calicoctl)
 
-* [Opening ports in gateway appliance firewalls](/docs/containers?topic=containers-firewall#vyatta_firewall)
+* [Opening ports in gateway appliance allowlists](/docs/containers?topic=containers-firewall#vyatta_firewall)
 
-    * [Opening required ports in a public firewall](/docs/containers?topic=containers-firewall#firewall_outbound)
+    * [Opening required ports in a public allowlist](/docs/containers?topic=containers-firewall#firewall_outbound)
 
-    * [Opening required ports in a private firewall](/docs/containers?topic=containers-firewall#firewall_private)
+    * [Opening required ports in a private allowlist](/docs/containers?topic=containers-firewall#firewall_private)
 
-    * [Opening ports in a public or private firewall for inbound traffic to NodePort, load balancer, and Ingress services](/docs/containers?topic=containers-firewall#firewall_inbound)
+    * [Opening ports in a public or private allowlist for inbound traffic to NodePort, load balancer, and Ingress services](/docs/containers?topic=containers-firewall#firewall_inbound)
 
 * [Allowing the cluster to access resources through Calico network policies](/docs/containers?topic=containers-firewall#firewall_calico_egress)
 
-* [Allowing traffic from your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-firewall#allowlist_workers)
+* [Allowing traffic from your cluster in other services' allowlists or in on-premises allowlists](/docs/containers?topic=containers-firewall#firewall_workers)
 
-* [Updating IAM firewalls for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-firewall#iam_allowlist)
+* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-firewall#iam_firewall)
+
+    * [Getting your {{site.data.keyword.containershort}} subnet IP addresses](/docs/containers?topic=containers-firewall#iam_cidr_ip)
 
 [Restricting network traffic to edge worker nodes on classic infrastructure](/docs/containers?topic=containers-edge#edge)
 
@@ -3615,21 +3626,23 @@ subcollection: containers
 
 * [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
 
-[VPC: Opening required ports and IP addresses in other network firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
+[VPC: Opening required ports and IP addresses in other network allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
 
-* [Opening ports in a corporate firewall](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
+* [Opening ports in a corporate allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
 
-    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
+    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
 
-    * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
+    * [Running `kubectl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
 
-    * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
+    * [Running `calicoctl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
 
-* [Allowing traffic from your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers)
+* [Allowing traffic from your cluster in other services' allowlists or in on-premises allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers)
 
     * [Allowing ingress from a cluster to another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_ingress)
 
     * [Allowing egress to a cluster from another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
+
+* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-vpc-firewall#iam_allowlist_vpc)
 
 
 ### Controlling traffic with ACLs, security groups, and network policies
@@ -7578,7 +7591,9 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
-    * [Version 1.2.1_2558_iks (default), released 21 September 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2558_iks)
+    * [Version 1.2.1_2646_iks (default), released 3 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2646_iks)
+
+    * [Version 1.2.1_2558_iks, released 21 September 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2558_iks)
 
     * [Version 1.2.1_2506_iks, released 25 August 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2506_iks)
 
@@ -7601,6 +7616,8 @@ subcollection: containers
     * [Version 1.2.0_2131_iks, released 26 April 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.0_2131_iks)
 
 * [Version 1.1.2](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_2)
+
+    * [Version 1.1.2_2645_ikss, released on 3 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2645_iks)
 
     * [Version 1.1.2_2586_iks, released on 21 September 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2586_iks)
 
@@ -8198,6 +8215,8 @@ subcollection: containers
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
 
+    * [Version 2.0.0_1265, released on 3 October 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1265)
+
     * [Version 2.0.0_1214, released on 12 September 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1214)
 
     * [Version 2.0.0_1187, released on 7 July 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1187)
@@ -8242,6 +8261,8 @@ subcollection: containers
 
 
 [Ingress ConfigMap change log](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ibm-k8s-controller-config-change-log)
+
+* [3 October 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-3-oct-2022)
 
 * [17 August 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-17-aug-2022)
 
@@ -8835,6 +8856,8 @@ subcollection: containers
 [Why does DNS resolution fail when CoreDNS pods are restarted?](/docs/containers?topic=containers-coredns_lameduck#coredns_lameduck)
 
 [Why can't I establish VPN connectivity with the strongSwan Helm chart?](/docs/containers?topic=containers-cs_vpn_fails#cs_vpn_fails)
+
+[Why does my worker node show a `NetworkUnavailable` error?](/docs/containers?topic=containers-ts-network-calico-node#ts-network-calico-node)
 
 [Why can't I install a new strongSwan Helm chart release?](/docs/containers?topic=containers-cs_strongswan_release#cs_strongswan_release)
 
