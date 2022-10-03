@@ -30,6 +30,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ### 3 October 2022
 {: #containers-oct0322}
 
+CLI change log update
+:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.454.
+
 
 Ingress ConfigMap change log updates
 :   Updated the [Ingress ConfigMap change log](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log).

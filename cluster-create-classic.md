@@ -192,8 +192,6 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
 
     `--workers <number>`
     :   Specify the number of worker nodes to include in the cluster. If you don't specify this option, a cluster with the minimum value of 1 is created.  For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
-    
-    
 
     `--version <major.minor.patch>`
     :   The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run `ibmcloud ks versions`.
