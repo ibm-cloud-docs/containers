@@ -3029,20 +3029,6 @@ subcollection: containers
 
     * [Creating an allowlist for the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist)
 
-* [Accessing the cluster master via admission controllers and webhooks](/docs/containers?topic=containers-access_cluster#access_webhooks)
-
-    * [What are the default admission controllers in my cluster?](/docs/containers?topic=containers-access_cluster#)
-
-    * [Can I create my own admission controllers?](/docs/containers?topic=containers-access_cluster#access_webhooks_create_controllers)
-
-    * [What other types of apps use admission controllers?](/docs/containers?topic=containers-access_cluster#access_webhooks-app-use-controllers)
-
-    * [I need help with a broken webhook. What can I do?](/docs/containers?topic=containers-access_cluster#access_webhooks-help)
-
-    * [Setting up admission controller webhooks](/docs/containers?topic=containers-access_cluster#configure-webhooks-122)
-
-* [Accessing private clusters by using the WireGuard VPN](/docs/containers?topic=containers-access_cluster#access_vpn_containers)
-
 [Accessing the cluster master with admission controllers and webhooks](/docs/containers?topic=containers-access_webhooks#access_webhooks)
 
 * [What are the default admission controllers in my cluster?](/docs/containers?topic=containers-access_webhooks#)
