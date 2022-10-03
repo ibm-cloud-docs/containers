@@ -87,9 +87,15 @@ toc:
             - cluster-plan-ha.md
             - worker-plan.md
         - topicgroup:
-            label: Creating and accessing clusters
+            label: Creating clusters
             topics:
             - cluster-create.md
+            - cluster-create-classic.md
+            - cluster-create-vpc-gen2.md
+            - cluster create-dedidcated-hosts.md
+        - topicgroup:
+            label: Accessing clusters
+            topics:
             - cs_cluster_access.md
             - cluster-access-admission-control.md
             - cluster-access-wireguard.md
@@ -441,6 +447,8 @@ toc:
                   topics:
                     - ts-network-iks-coredns-restart.md
                     - ts-network-strongswan-vpn.md
+                    - ts-network-calico-node.md
+                    - ts-network-egress-124.md
                     - ts-network-strongswan-install-new.md
                     - ts-network-strongswan-network-nodes.md
                     - ts-network-classic121.md

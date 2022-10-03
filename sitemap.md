@@ -2980,39 +2980,38 @@ subcollection: containers
 * [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)
 
 
-## Creating and accessing clusters
-{: #sitemap_creating_and_accessing_clusters}
+## Creating clusters
+{: #sitemap_creating_clusters1}
 
 
 [Creating clusters](/docs/containers?topic=containers-clusters#clusters)
-
-* [Sample CLI commands](/docs/containers?topic=containers-clusters#cluster_create_samples)
-
-    * [Free cluster](/docs/containers?topic=containers-clusters#cluster_create_free)
-
-    * [Classic clusters](/docs/containers?topic=containers-clusters#cluster_create_classic)
-
-    * [VPC clusters](/docs/containers?topic=containers-clusters#cluster_create_vpc)
 
 * [Preparing to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare)
 
 * [Deciding on your cluster setup](/docs/containers?topic=containers-clusters#prepare_cluster_level)
 
-* [Creating a standard classic cluster](/docs/containers?topic=containers-clusters#clusters_standard)
-
-    * [Creating a standard classic cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui)
-
-    * [Creating a standard classic cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps)
-
-* [Creating a standard VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2)
-
-    * [Creating a standard VPC cluster in the console](/docs/containers?topic=containers-clusters#clusters_vpcg2_ui)
-
-    * [Creating standard VPC clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpcg2_cli)
-
-* [Creating a cluster on dedicated host infrastructure in the CLI](/docs/containers?topic=containers-clusters#cluster_dedicated_host_cli)
-
 * [Next steps](/docs/containers?topic=containers-clusters#next_steps)
+
+[Creating classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster-create-classic)
+
+* [Creating a classic cluster in the console](/docs/containers?topic=containers-cluster-create-classic#clusters_ui)
+
+* [Creating a standard classic cluster in the CLI](/docs/containers?topic=containers-cluster-create-classic#clusters_cli_steps)
+
+* [Example commands to create classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster_create_classic)
+
+[Creating VPC Gen 2 clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-gen2)
+
+* [Creating a standard VPC cluster in the console](/docs/containers?topic=containers-cluster-create-vpc-gen2#clusters_vpcg2_ui)
+
+* [Creating standard VPC clusters from the CLI](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_vpcg2_cli)
+
+* [Example commands to create VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_create_vpc)
+
+
+## Accessing clusters
+{: #sitemap_accessing_clusters}
+
 
 [Accessing clusters](/docs/containers?topic=containers-access_cluster#access_cluster)
 
@@ -8853,6 +8852,8 @@ subcollection: containers
 [Why does DNS resolution fail when CoreDNS pods are restarted?](/docs/containers?topic=containers-coredns_lameduck#coredns_lameduck)
 
 [Why can't I establish VPN connectivity with the strongSwan Helm chart?](/docs/containers?topic=containers-cs_vpn_fails#cs_vpn_fails)
+
+[Why does my worker node show a `NetworkUnavailable` error?](/docs/containers?topic=containers-ts-network-calico-node#ts-network-calico-node)
 
 [Why can't I install a new strongSwan Helm chart release?](/docs/containers?topic=containers-cs_strongswan_release#cs_strongswan_release)
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-09-09"
+lastupdated: "2022-10-03"
 
 keywords: kubernetes, kernel
 
@@ -588,7 +588,11 @@ By default, the Calico network plug-in in your {{site.data.keyword.containerlong
 * If you have a VPN connection set up for your cluster, some VPN connections require a smaller Calico MTU than the default. Check with the VPN service provider to determine whether a smaller Calico MTU is required.
 * If your cluster's worker nodes exist on different subnets, increasing the MTU value for the worker nodes and for the Calico MTU can allow pods to use the full bandwidth capability of the worker nodes.
 
-**Before you begin**: If your bare metal worker nodes still run the default MTU value, increase the MTU value for your worker nodes first before you increase the MTU value for the Calico plug-in. For example, you can apply the following daemon set to change the MTU for your worker nodes's jumbo frames to 9000 bytes.
+
+Before you begin
+:   If your worker nodes still run the default MTU value, increase the MTU value for your worker nodes first before you increase the MTU value for the Calico plug-in. For example, you can apply the following daemon set to change the MTU for your worker nodes's jumbo frames to 9000 bytes. Note the interface names that are used in the **`ip link`** command vary depending on the type of your worker nodes.
+    - Example command for Bare Metal worker nodes: `ip link set dev bond0 mtu 9000;ip link set dev bond1 mtu 9000;`
+    - Example command VPC Gen 2 worker nodes: `ip link set dev eth0 mtu 9000;`
 
 ```yaml
 apiVersion: apps/v1
@@ -617,7 +621,7 @@ spec:
         - command:
             - sh
             - -c
-            - ip link set dev bond0 mtu 9000;ip link set dev bond1 mtu 9000;
+            - ip link set dev bond0 mtu 9000;ip link set dev bond1 mtu 9000; # Update this command based on your worker node type.
           image: alpine:3.6
           imagePullPolicy: IfNotPresent
           name: iplink
@@ -696,4 +700,3 @@ If you must use `hostPorts`, don't disable the port map plug-in.
     {: screen}
 
 3. Save and close the file. Your changes are automatically applied.
-
