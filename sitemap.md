@@ -3570,29 +3570,31 @@ subcollection: containers
 {: #sitemap_securing_the_cluster_network}
 
 
-[Classic: Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-firewall#firewall)
+[Classic: Opening required ports and IP addresses in your allowlist](/docs/containers?topic=containers-firewall#firewall)
 
-* [Opening ports in a corporate firewall](/docs/containers?topic=containers-firewall#corporate)
+* [Opening ports in a corporate allowlist](/docs/containers?topic=containers-firewall#corporate)
 
-    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_bx)
+    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_bx)
 
-    * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_kubectl)
+    * [Running `kubectl` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_kubectl)
 
-    * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_calicoctl)
+    * [Running `calicoctl` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_calicoctl)
 
-* [Opening ports in gateway appliance firewalls](/docs/containers?topic=containers-firewall#vyatta_firewall)
+* [Opening ports in gateway appliance allowlists](/docs/containers?topic=containers-firewall#vyatta_firewall)
 
-    * [Opening required ports in a public firewall](/docs/containers?topic=containers-firewall#firewall_outbound)
+    * [Opening required ports in a public allowlist](/docs/containers?topic=containers-firewall#firewall_outbound)
 
-    * [Opening required ports in a private firewall](/docs/containers?topic=containers-firewall#firewall_private)
+    * [Opening required ports in a private allowlist](/docs/containers?topic=containers-firewall#firewall_private)
 
-    * [Opening ports in a public or private firewall for inbound traffic to NodePort, load balancer, and Ingress services](/docs/containers?topic=containers-firewall#firewall_inbound)
+    * [Opening ports in a public or private allowlist for inbound traffic to NodePort, load balancer, and Ingress services](/docs/containers?topic=containers-firewall#firewall_inbound)
 
 * [Allowing the cluster to access resources through Calico network policies](/docs/containers?topic=containers-firewall#firewall_calico_egress)
 
-* [Allowing traffic from your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-firewall#allowlist_workers)
+* [Allowing traffic from your cluster in other services' allowlists or in on-premises allowlists](/docs/containers?topic=containers-firewall#firewall_workers)
 
-* [Updating IAM firewalls for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-firewall#iam_allowlist)
+* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-firewall#iam_firewall)
+
+    * [Getting your {{site.data.keyword.containershort}} subnet IP addresses](/docs/containers?topic=containers-firewall#iam_cidr_ip)
 
 [Restricting network traffic to edge worker nodes on classic infrastructure](/docs/containers?topic=containers-edge#edge)
 
@@ -3624,21 +3626,23 @@ subcollection: containers
 
 * [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
 
-[VPC: Opening required ports and IP addresses in other network firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
+[VPC: Opening required ports and IP addresses in other network allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
 
-* [Opening ports in a corporate firewall](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
+* [Opening ports in a corporate allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
 
-    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
+    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
 
-    * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
+    * [Running `kubectl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
 
-    * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
+    * [Running `calicoctl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
 
-* [Allowing traffic from your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers)
+* [Allowing traffic from your cluster in other services' allowlists or in on-premises allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers)
 
     * [Allowing ingress from a cluster to another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_ingress)
 
     * [Allowing egress to a cluster from another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
+
+* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-vpc-firewall#iam_allowlist_vpc)
 
 
 ### Controlling traffic with ACLs, security groups, and network policies
