@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-08-19"
+lastupdated: "2022-10-03"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -266,21 +266,20 @@ To set infrastructure account credentials to access the IBM Cloud infrastructure
 
 1. Get the infrastructure account that you want to use to access the IBM Cloud infrastructure portfolio. You have different options that depend on your [current account type](#understand_infra).
 
-2. Set the infrastructure API credentials with the user for the correct account.
 
-    1. Get the user's infrastructure API credentials. Note that the credentials differ from the IBMid.
+1. Find and record your `infrastructure username`, it will be used when you set API credentials. 
+    ```sh
+    ibmcloud ks ibmcloud sl user list
+    ```
+    {: pre}   
 
-        1. From the [{{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/){: external} console, select **Manage** > **Access (IAM)** > **Users** table and click the username.
-
-        2. In the **API Keys** section, find or create a classic infrastructure API key.   
-
-    2. Set the infrastructure API credentials to use.
+    1. Set the infrastructure API credentials to use.
         ```sh
         ibmcloud ks credential set classic --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
         ```
         {: pre}
 
-    3. Verify that the correct credentials are set.
+    1. Verify that the correct credentials are set.
         ```sh
         ibmcloud ks credential get --region <region>
         ```
@@ -292,12 +291,12 @@ To set infrastructure account credentials to access the IBM Cloud infrastructure
         ```
         {: screen}
 
-3. [Create a cluster](/docs/containers?topic=containers-clusters). To create the cluster, the infrastructure credentials that you set for the region and resource group are used.
+1. [Create a cluster](/docs/containers?topic=containers-clusters). To create the cluster, the infrastructure credentials that you set for the region and resource group are used.
 
-4. Verify that your cluster uses the infrastructure account credentials that you set.
+1. Verify that your cluster uses the infrastructure account credentials that you set.
     1. Open the [{{site.data.keyword.cloud_notm}} clusters console](https://cloud.ibm.com/kubernetes/clusters){: external} and select your cluster. 
-    2. In the Overview tab, look for an **Infrastructure User** field. 
-    3. If you see that field, you don't use the default infrastructure credentials that come with your Pay-As-You-Go or Subscription account in this region. Instead, the region is set to use the different infrastructure account credentials that you set.
+    1. In the Overview tab, look for an **Infrastructure User** field. 
+    1. If you see that field, you don't use the default infrastructure credentials that come with your Pay-As-You-Go or Subscription account in this region. Instead, the region is set to use the different infrastructure account credentials that you set.
 
 
 ## Customizing classic infrastructure permissions
