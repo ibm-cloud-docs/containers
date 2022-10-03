@@ -209,6 +209,8 @@ subcollection: containers
 
     * [3 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct0322)
 
+        * CLI change log update
+
         * Ingress ConfigMap change log updates
 
         * Ingress ALB change log updates
@@ -5550,6 +5552,18 @@ subcollection: containers
 
     * [`ibmcloud ks ingress secret update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_update)
 
+    * [`ibmcloud ks ingress status-report disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_disable)
+
+    * [`ibmcloud ks ingress status-report enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_enable)
+
+    * [`ibmcloud ks ingress status-report get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_get)
+
+    * [`ibmcloud ks ingress status-report ignore add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_add)
+
+    * [`ibmcloud ks ingress status-report ignore ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_ls)
+
+    * [`ibmcloud ks ingress status-report ignore rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_rm)
+
 * [`logging` commands](/docs/containers?topic=containers-kubernetes-service-cli#logging_commands)
 
     * [`ibmcloud ks logging autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_disable)
@@ -5687,6 +5701,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.454](/docs/containers?topic=containers-cs_cli_changelog#cli-10452)
 
 * [Version 1.0.452](/docs/containers?topic=containers-cs_cli_changelog#cli-10452)
 

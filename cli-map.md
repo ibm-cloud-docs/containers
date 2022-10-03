@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-09-22"
+lastupdated: "2022-10-03"
 
 keywords: kubernetes
 
@@ -164,7 +164,15 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
     * [`ibmcloud ks ingress secret get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_get)
     * [`ibmcloud ks ingress secret ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_ls)
     * [`ibmcloud ks ingress secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_rm)
-    
+    * [`ibmcloud ks ingress secret update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_update) 
+* **`ingress status-report`**: View and manage ingress status reporting.
+    * [`ibmcloud ks ingress status-report disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_disable)
+    * [`ibmcloud ks ingress status-report enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_enable)
+    * [`ibmcloud ks ingress status-report get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_get)
+* **`ibmcloud ks ingress status-report ignore`**: Manage warnings to be ignored by ingress status reports.
+    * [`ibmcloud ks ingress status-report ignore add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_add)
+    * [`ibmcloud ks ingress status-report ignore ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_ls)
+    * [`ibmcloud ks ingress status-report ignore rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_rm)
     
 
 ## ibmcloud ks logging
