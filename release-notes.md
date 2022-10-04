@@ -29,6 +29,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+
+
+### 4 October 2022
+{: #containers-oct0422}
+
+Istio add-on
+:   Version [`1.14.4`](/docs/containers?topic=containers-istio-changelog#1144) and version [`1.13.8`](/docs/containers?topic=containers-istio-changelog#1138) are available.
+
+
+
 ### 3 October 2022
 {: #containers-oct0322}
 
