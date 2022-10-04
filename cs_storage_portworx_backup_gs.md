@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-10-04"
 
 keywords: kubernetes, portworx, sds, px-backup, px backup, portworx backup, backup and restore
 subcollection: containers
@@ -28,7 +28,16 @@ Follow these links to verify your installation, configure your PX-Backup service
 ## Getting help and support
 {: #portworx_help}
 
-If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://pure1.purestorage.com/support){: external}. You can also submit a request by sending an e-mail to `support@purestorage.com`. If you don't have an account on the Portworx Service Portal, send an e-mail to `support@purestorage.com`.
+Contact Portworx support by using one of the following methods.
+
+- Sending an e-mail to `support@purestorage.com`.
+
+- Calling `+1 (866) 244-7121` or `+1 (650) 729-4088` in the United States or one of the [International numbers](https://support.purestorage.com/Pure_Storage_Technical_Services/Technical_Services_Information/Contact_Us)
+
+- Opening an issue in the [Portworx Service Portal](https://pure1.purestorage.com/support){: external}. If you don't have an account, see [Request access](https://purestorage.force.com/customers/CustomerAccessRequest){: external}
+
+You can also [gather logging information](/docs/containers?topic=containers-portworx#portworx_logs) before opening a support ticket.
+{: tip}
 
 
 
