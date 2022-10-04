@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-08"
+lastupdated: "2022-10-04"
 
 keywords: kubernetes
 
@@ -47,7 +47,7 @@ Cloud Foundry app developers.
 {: #cf_prereqs}
 
 - [Create a private image registry in {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-getting-started).
-- [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
+- [Create a cluster](/docs/containers?topic=containers-clusters).
 - [Target your CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Ensure you have the following {{site.data.keyword.cloud_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
     - [Any platform access role](/docs/containers?topic=containers-users#checking-perms)

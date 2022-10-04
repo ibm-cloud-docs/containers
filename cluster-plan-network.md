@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-10-04"
 
 keywords: kubernetes, subnets, ips, vlans, networking
 
@@ -27,7 +27,7 @@ Get started by planning your setup for a VPC or a classic cluster.
 
 
 
-Review the following cluster configurations and take the appropriate action in your account before provisioning your clusters. For more information, see [Preparing to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare).
+Review the following cluster configurations and take the appropriate action in your account before provisioning your clusters. For more information, see [Preparing to create clusters at the account level](/docs/containers?topic=containers-clusters&interface=ui).
 
 - For VPC Clusters that don't require Classic Infrastructure Access, no account changes are required.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-10-04"
 
 keywords: kubernetes, containers
 
@@ -44,7 +44,7 @@ The worker node can take a few minutes to provision, but you can see the progres
 ## Creating a VPC cluster
 {: #vpc-gen2-gs}
 
-Create a standard VPC cluster by using the {{site.data.keyword.cloud_notm}} console. For more detailed information about your cluster customization options, see [Creating a standard VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2).
+Create a standard VPC cluster by using the {{site.data.keyword.cloud_notm}} console. For more detailed information about your cluster customization options, see [Creating a standard VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
 {: shortdesc}
 
 VPC clusters can be created as standard clusters only, and as such incur costs. Be sure to review the order summary at the end of this tutorial to review the costs for your cluster. To keep your costs to a minimum, set up your cluster as a single zone cluster with one worker node only.
