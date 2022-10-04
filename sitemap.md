@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-03"
+lastupdated: "2022-10-04"
 
 keywords: containers
 subcollection: containers
@@ -4942,6 +4942,8 @@ subcollection: containers
 
 [Setting up snapshots with {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
 
+* [Optional: Deploying the snapshot controller](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-controller)
+
 * [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-addon-enable)
 
 * [Creating a deployment](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-deployment)
@@ -8059,7 +8061,7 @@ subcollection: containers
 
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
 
-* [Version 5.0 (Beta)](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
+* [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
 
     * [Change log for version 5.0.4-beta_1566, released 14 July 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.4-beta_1556_is_block_relnote)
 
@@ -8589,6 +8591,8 @@ subcollection: containers
 * [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster)
 
 * [Which Kubernetes versions does the service support?](/docs/containers?topic=containers-faqs#supported_kube_versions)
+
+* [Which worker node operating systems does the service support?](/docs/containers?topic=containers-faqs#supported_os_versions)
 
 * [Where is the service available?](/docs/containers?topic=containers-faqs#supported_regions)
 
@@ -9121,6 +9125,10 @@ subcollection: containers
 [Why am I still seeing charges for block storage devices after deleting my cluster?](/docs/containers?topic=containers-ts_storage_clean_volume#ts_storage_clean_volume)
 
 [Why does mounting {{site.data.keyword.blockstorageshort}} fail with an `fsck` error?](/docs/containers?topic=containers-ts-storage-fsck#ts-storage-fsck)
+
+[Why can't I delete my {{site.data.keyword.block_storage_is_short}} `volumesnapshot` resources?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
+
+[Why can't I create {{site.data.keyword.block_storage_is_short}} snapshots?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
 
 
 ### Object Storage

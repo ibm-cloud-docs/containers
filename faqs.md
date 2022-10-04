@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-03"
+lastupdated: "2022-10-04"
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
 
@@ -177,12 +177,18 @@ Keep in mind that some services such as Ingress might require multiple worker no
 {: faq}
 {: support}
 
-{{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. 
+{{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a new version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. 
 
-For more information about supported versions and update actions that you must take to move from one version to another, see [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
 
-Have an [{{site.data.keyword.redhat_openshift_notm}} cluster](/docs/openshift?topic=openshift-openshift_tutorial)? The supported {{site.data.keyword.redhat_openshift_notm}} version is 4.9, which includes Kubernetes 1.22.
-{: note}
+For more information about supported versions and update actions that you must take to move from one version to another, see [Kubernetes version information](/docs/containers?topic=containers-cs_versions)
+
+## Which worker node operating systems does the service support?
+{: #supported_os_versions}
+{: faq}
+{: support}
+
+For a list of supported worker node operated systems by cluster version, see [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
+
 
 
 
