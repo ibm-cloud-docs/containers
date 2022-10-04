@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-03"
+lastupdated: "2022-10-04"
 
 keywords: containers
 subcollection: containers
@@ -206,6 +206,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
+
+    * [4 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct0422)
+
+        * Istio add-on
 
     * [3 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct0322)
 
@@ -4465,18 +4469,6 @@ subcollection: containers
 
     * [Using a TLS certificate for a custom subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_custom)
 
-* [Migrating from {{site.data.keyword.cloudcerts_short}} to {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr)
-
-* [Enabling service-to-service communication for your {{site.data.keyword.secrets-manager_short}} instance](/docs/containers?topic=containers-ingress-types#migrate-secrets-mgr-s2s)
-
-    * [Removing the {{site.data.keyword.cloudcerts_short}} instance from the cluster](/docs/containers?topic=containers-ingress-types#unregister-secret-instance)
-
-* [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_full}}](/docs/containers?topic=containers-ingress-types#manage_certs_secrets_mgr)
-
-    * [Registering a {{site.data.keyword.secrets-manager_short}} instance to a cluster](/docs/containers?topic=containers-ingress-types#register-secrets-mgr)
-
-    * [Setting a {{site.data.keyword.secrets-manager_short}} instance as the default instance](/docs/containers?topic=containers-ingress-types#default-secrets-mgr)
-
 * [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
 
     * [Default Ingress classes for public and private ALBs](/docs/containers?topic=containers-ingress-types#ingress-class-default)
@@ -4941,6 +4933,8 @@ subcollection: containers
     * [Cleaning up persistent storage](/docs/containers?topic=containers-vpc-block#storage_remove_block_vpc)
 
 [Setting up snapshots with {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
+
+* [Optional: Deploying the snapshot controller](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-controller)
 
 * [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-addon-enable)
 
@@ -7791,11 +7785,15 @@ subcollection: containers
 
 * [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
 
+    * [Changelog for 1.14.4, released 4 October 2022](/docs/containers?topic=containers-istio-changelog#1144)
+
     * [Changelog for 1.14.3, released 16 August 2022](/docs/containers?topic=containers-istio-changelog#1143)
 
     * [Change log for 1.14.1, released 16 June 2022](/docs/containers?topic=containers-istio-changelog#1141)
 
 * [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
+
+    * [Change log for 1.13.8, released 4 October 2022](/docs/containers?topic=containers-istio-changelog#1138)
 
     * [Changelog for 1.13.7, released 16 August 2022](/docs/containers?topic=containers-istio-changelog#1137)
 
@@ -8059,7 +8057,7 @@ subcollection: containers
 
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
 
-* [Version 5.0 (Beta)](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
+* [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
 
     * [Change log for version 5.0.4-beta_1566, released 14 July 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.4-beta_1556_is_block_relnote)
 
@@ -8589,6 +8587,8 @@ subcollection: containers
 * [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster)
 
 * [Which Kubernetes versions does the service support?](/docs/containers?topic=containers-faqs#supported_kube_versions)
+
+* [Which worker node operating systems does the service support?](/docs/containers?topic=containers-faqs#supported_os_versions)
 
 * [Where is the service available?](/docs/containers?topic=containers-faqs#supported_regions)
 
@@ -9121,6 +9121,10 @@ subcollection: containers
 [Why am I still seeing charges for block storage devices after deleting my cluster?](/docs/containers?topic=containers-ts_storage_clean_volume#ts_storage_clean_volume)
 
 [Why does mounting {{site.data.keyword.blockstorageshort}} fail with an `fsck` error?](/docs/containers?topic=containers-ts-storage-fsck#ts-storage-fsck)
+
+[Why can't I delete my {{site.data.keyword.block_storage_is_short}} `volumesnapshot` resources?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
+
+[Why can't I create {{site.data.keyword.block_storage_is_short}} snapshots?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
 
 
 ### Object Storage

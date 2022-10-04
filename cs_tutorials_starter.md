@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-10-04"
 
 keywords: kubernetes
 
@@ -51,7 +51,7 @@ This tutorial is intended for software developers who want to learn how to creat
 
 - Create a **Java + Spring** app by using a [starter kit](/docs/apps/tutorials?topic=apps-tutorial-starterkit).
 - Install the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started#idt-prereq).
-- Create a [classic](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC](/docs/containers?topic=containers-clusters#clusters_vpcg2) cluster.
+- Create a [classic](/docs/containers?topic=containers-cluster-create-classic&interface=ui) or [VPC](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui) cluster.
 
 ## Add services to your app
 {: #resources-starterkit-kube}
@@ -76,7 +76,7 @@ Attach a DevOps toolchain to your starter kit app, and configure a delivery pipe
 
 1. On the **App details** page, click **Deploy your app**.
 2. On the **Deploy your app** page, select **IBM Cloud Kubernetes Service**.
-3. Select the region and the name of the cluster, for which you want to set up a continuous delivery pipeline. If you don't have a cluster, click **Create cluster**. For more information about creating a cluster, see the instructions for creating a [classic cluster](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2).
+3. Select the region and the name of the cluster, for which you want to set up a continuous delivery pipeline. If you don't have a cluster, click **Create cluster**. For more information about creating a cluster, see the instructions for creating a [classic cluster](/docs/containers?topic=containers-cluster-create-classic&interface=ui) or [VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
 4. Provide a name for your toolchain.
 5. Select the region to create your toolchain in, and then select the [resource group](/docs/ContinuousDelivery?topic=ContinuousDelivery-toolchains-iam-security) that provides access to your new toolchain.
 6. Click **Create**. The **App details** page is displayed, along with deployment information about your toolchain.

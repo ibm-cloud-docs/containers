@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-03"
+lastupdated: "2022-10-04"
 
 keywords: kubernetes, release notes
 
@@ -26,6 +26,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2022
 {: #containers-oct22}
+
+
+
+
+
+### 4 October 2022
+{: #containers-oct0422}
+
+Istio add-on
+:   Version [`1.14.4`](/docs/containers?topic=containers-istio-changelog#1144) and version [`1.13.8`](/docs/containers?topic=containers-istio-changelog#1138) are available.
+
+
 
 ### 3 October 2022
 {: #containers-oct0322}
@@ -547,7 +559,6 @@ Master fix pack update
 
 
 
-
 ### 1 June 2022
 {: #containers-jun122}
 {: release-note}
@@ -728,7 +739,7 @@ Create and manage dedicated hosts in VPC Gen 2.
 
 
 New! {{site.data.keyword.secrets-manager_full}}
-:   With the deprecation of {{site.data.keyword.cloudcerts_long}}, you can now manage certificates and secrets with {{site.data.keyword.secrets-manager_full}}. You can integrate your own {{site.data.keyword.secrets-manager_short}} instances with your Kubernetes clusters. {{site.data.keyword.secrets-manager_short}} instances can be used across multiple clusters, and a single cluster can have more than one instance. For more information, see [Managing TLS and Opaque certificates and secrets with {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr)
+:   With the deprecation of {{site.data.keyword.cloudcerts_long}}, you can now manage certificates and secrets with {{site.data.keyword.secrets-manager_full}}. You can integrate your own {{site.data.keyword.secrets-manager_short}} instances with your Kubernetes clusters. {{site.data.keyword.secrets-manager_short}} instances can be used across multiple clusters, and a single cluster can have more than one instance. For more information, see [Migrating from IBM Cloud Certificate Manager to IBM Cloud Secrets Manager](/docs/containers?topic=containers-certs-mgr-migration).
 
 
 
@@ -2326,7 +2337,7 @@ Master versions
 
 
 End of service of VPC Gen 1
-:   Removed steps for using VPC Gen 1 compute. You can now [create new VPC clusters on Generation 2 compute only](/docs/containers?topic=containers-clusters#clusters_vpcg2). Move any remaining workloads from VPC Gen 1 clusters to VPC Gen 2 clusters before 01 March 2021, when any remaining VPC Gen 1 worker nodes are automatically deleted.
+:   Removed steps for using VPC Gen 1 compute. You can now [create new VPC clusters on Generation 2 compute only](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui). Move any remaining workloads from VPC Gen 1 clusters to VPC Gen 2 clusters before 01 March 2021, when any remaining VPC Gen 1 worker nodes are automatically deleted.
 
 
 
@@ -2465,7 +2476,7 @@ Block Storage for VPC add-on
 
 
 Reminder: VPC Gen 1 deprecation
-:   You can continue to use VPC Gen 1 resources only until 26 February 2021, when all service for VPC Gen 1 ends. On 01 March 2021, any remaining VPC Gen 1 worker nodes are automatically deleted. To ensure continued support, [create new VPC clusters on Generation 2 compute only](/docs/containers?topic=containers-clusters#clusters_vpcg2), and move your workloads from existing VPC Gen 1 clusters to VPC Gen 2 clusters.
+:   You can continue to use VPC Gen 1 resources only until 26 February 2021, when all service for VPC Gen 1 ends. On 01 March 2021, any remaining VPC Gen 1 worker nodes are automatically deleted. To ensure continued support, [create new VPC clusters on Generation 2 compute only](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui), and move your workloads from existing VPC Gen 1 clusters to VPC Gen 2 clusters.
 
 
 
@@ -4350,7 +4361,7 @@ New! Gateway-enabled classic clusters
         - [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_nodes)
         - Flow of traffic to apps when using an [NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_gateway), an [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#v2_gateway), or [Ingress ALBs](/docs/containers?topic=containers-ingress-about#classic-gateway)
 
-:   Ready to get started? [Create a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters&interface=cli#clusters_cli_steps).
+:   Ready to get started? [Create a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-cluster-create-classic&interface=ui).
 
 
 

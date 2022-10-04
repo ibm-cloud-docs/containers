@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-13"
+lastupdated: "2022-10-04"
 
 keywords: kubernetes, ic, ks, kubectl
 
@@ -145,7 +145,7 @@ Using both {{site.data.keyword.openshiftlong_notm}} and Ubuntu {{site.data.keywo
 6. If you have clusters that run different versions of Kubernetes, such as 1.23.10 and 1.22.16, download each `kubectl` version binary file to a separate directory. Then, you can set up an alias in your local command-line interface profile to point to the `kubectl` binary file directory that matches the `kubectl` version of the cluster that you want to work with, or [run the CLI from a container](#cs_cli_container).
 7. **Optional**: [Enable autocompletion for `kubectl` commands](https://kubernetes.io/docs/tasks/tools/#enabling-shell-autocompletion){: external}. The steps vary depending on the shell that you use.
 
-Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters#clusters_cli_steps).
+Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters&interface=ui).
 
 For more information about the Kubernetes CLI, see the [`kubectl` reference docs](https://kubectl.docs.kubernetes.io/){: external}.
 {: note}
@@ -188,7 +188,7 @@ All `kubectl` commands that are available in Kubernetes 1.23 are supported for u
 
 Before you can run `kubectl` commands:
 * [Install the required CLIs](#cs_cli_install).
-* [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli_steps).
+* [Create a cluster](/docs/containers?topic=containers-clusters&interface=ui).
 * Make sure that you have a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources. If you have only a service access role but no platform access role, you need the cluster admin to give you the cluster name and ID, or the **Viewer** platform access role to list clusters.
 
 To run `kubectl` commands to manage your cluster:
