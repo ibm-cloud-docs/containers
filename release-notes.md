@@ -549,7 +549,6 @@ Master fix pack update
 
 
 
-
 ### 1 June 2022
 {: #containers-jun122}
 {: release-note}
