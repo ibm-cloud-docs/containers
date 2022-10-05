@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-04"
+lastupdated: "2022-10-05"
 
 ---
 
@@ -10,7 +10,7 @@ lastupdated: "2022-10-04"
 
 
 
-[Logo](images/logo-ibm-cloud-kubernetes-service-light.svg)
+![Logo](images/logo-ibm-cloud-kubernetes-service-light.svg)
 
 
 
