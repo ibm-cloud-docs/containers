@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-09-27"
+lastupdated: "2022-10-05"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -65,7 +65,7 @@ The following table shows the changes that are in the master fix pack 1.22.15_15
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.22.13-1 | v1.22.14-2 | Updated to support the Kubernetes `1.22.14` release. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 414 | 416 | Updated to `Go` version `1.18.6`. Updated universal base image (UBI) to version `8.6-941` to resolve CVEs. |
 | Key Management Service Provider | v2.5.8 | v2.5.9 | Updated `Go` dependencies and to `Go` version `1.18.6`. |
-| Kubernetes | v1.22.13 | v1.22.15 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.15){: external}. |
+| Kubernetes | v1.22.13 | v1.22.15 | This update resolves [CVE-2022-3172](https://nvd.nist.gov/vuln/detail/CVE-2022-3172){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6823785){: external}. See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.15){: external}. |
 | Kubernetes NodeLocal DNS cache | 1.22.6 | 1.22.11 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.11){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.22.131570" caption-side="top"}
