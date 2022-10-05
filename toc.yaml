@@ -92,7 +92,7 @@ toc:
             - cluster-create.md
             - cluster-create-classic.md
             - cluster-create-vpc-gen2.md
-            - cluster create-dedidcated-hosts.md
+            - cluster-create-dedidcated-hosts.md
         - topicgroup:
             label: Accessing clusters
             topics:
