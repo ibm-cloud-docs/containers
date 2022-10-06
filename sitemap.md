@@ -207,6 +207,14 @@ subcollection: containers
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
 
+    * [6 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct0622)
+
+        * New! Kubernetes 1.25
+
+        * Master fix pack
+
+        * Worker node fix pack
+
     * [4 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct0422)
 
         * Istio add-on

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-04"
+lastupdated: "2022-10-06"
 
 keywords: kubernetes, release notes
 
@@ -26,6 +26,22 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2022
 {: #containers-oct22}
+
+
+
+
+
+### 6 October 2022
+{: #containers-oct0622}
+
+New! Kubernetes 1.25
+:   You can create or [update clusters to Kubernetes version 1.25](/docs/containers?topic=containers-cs_versions_125). With Kubernetes 1.25, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. 
+
+Master fix pack
+:   Kubernetes [1.25.2_1517](/docs/containers?topic=containers-changelog_125).
+
+Worker node fix pack
+:   Kubernetes [1.25.2_1516](/docs/containers?topic=containers-changelog_125)
 
 
 
