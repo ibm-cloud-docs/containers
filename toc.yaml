@@ -304,6 +304,12 @@ toc:
                 - benchmarks_overview.md
                 - benchmark-comparison.md
                 - topicgroup:
+                    label: Version 1.25
+                    topics:
+                    - cs_versions_125.md
+                    - cs_versions_changelog_125.md
+                    - cs_benchmarks_125.md
+                - topicgroup:
                     label: Version 1.24 
                     topics:
                     - cs_versions_124.md
@@ -409,6 +415,7 @@ toc:
                   - ts-cluster-cli.md
                   - ts-cluster-create-delete.md
                   - ts-cluster-no-vpc.md
+                  - ts-pod-security-125.md
                   - ts-cluster-icr-pull-img.md
                   - ts-cluster-webhook.md
                   - ts-cluster-portieris.md
@@ -448,6 +455,7 @@ toc:
                     - ts-network-iks-coredns-restart.md
                     - ts-network-strongswan-vpn.md
                     - ts-network-calico-node.md
+                    - ts-network-snat-125.md
                     - ts-network-egress-124.md
                     - ts-network-strongswan-install-new.md
                     - ts-network-strongswan-network-nodes.md
