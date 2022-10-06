@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-04"
+lastupdated: "2022-10-06"
 
 keywords: containers
 subcollection: containers
@@ -206,6 +206,14 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
+
+    * [6 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct0622)
+
+        * New! Kubernetes 1.25
+
+        * Master fix pack
+
+        * Worker node fix pack
 
     * [4 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct0422)
 
@@ -5858,6 +5866,71 @@ subcollection: containers
 * [Major differences](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison-major)
 
 * [Minor differences](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison-minor)
+
+
+### Version 1.25
+{: #sitemap_version_125}
+
+
+[1.25 version information and update actions](/docs/containers?topic=containers-cs_versions_125#cs_versions_125)
+
+* [Release timeline](/docs/containers?topic=containers-cs_versions_125#release_timeline_125)
+
+* [Preparing to update](/docs/containers?topic=containers-cs_versions_125#prep-up-125)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions_125#before_125)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions_125#125_after)
+
+[Kubernetes version 1.25 change log](/docs/containers?topic=containers-changelog_125#changelog_125)
+
+* [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
+
+* [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for master fix pack 1.25.2_1517 and worker node fix pack 1.25.2_1516, released 6 October 2022](/docs/containers?topic=containers-changelog_125#1252_1517_and_1252_1516)
+
+[Version 1.25 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-125)
+
+* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-125#cis-section-1-125)
+
+    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-11-125)
+
+    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-12-125)
+
+    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-13-125)
+
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-14-125)
+
+* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-125#cis-section-2-125)
+
+* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-125#cis-section-3-125)
+
+    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-31-125)
+
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-32-125)
+
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-125#cis-section-4-125)
+
+    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-41-125)
+
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-42-125)
+
+* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-125#cis-section-5-125)
+
+    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-51-125)
+
+    * [5.2 Pod Security Policies](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-52-125)
+
+    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-53-125)
+
+    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-54-125)
+
+    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-55-125)
+
+    * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-56-125)
+
+* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-125#cis-benchmark-remediations-125)
 
 
 ### Version 1.24
