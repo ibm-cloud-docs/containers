@@ -207,6 +207,10 @@ subcollection: containers
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
 
+    * [7 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct0722)
+
+        * Kubernetes version 1.25 certification
+
     * [6 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct0622)
 
         * New! Kubernetes 1.25
