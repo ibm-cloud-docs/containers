@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-06"
+lastupdated: "2022-10-07"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -34,7 +34,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
 Supported Kubernetes versions:
-:    **Latest**: 1.25
+:   **Latest**: 1.25
     - Release date: 06 October 2022
     - Tentative unsupported date: 13 Dec 2023 `†`
     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_125)
@@ -53,8 +53,8 @@ Supported Kubernetes versions:
     - [Change log](/docs/containers?topic=containers-changelog_123)
 
 
-**Deprecated Kubernetes versions**:
-    1.22
+Deprecated Kubernetes versions
+:   1.22
     - Release date: 29 September 2021
     - Tentative unsupported date: 14 December 2022 `†`
     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_122)
@@ -144,6 +144,6 @@ Unsupported clusters are not provided with security and patch updates and are no
 {: shortdesc}
 
 **Unsupported Kubernetes versions**: 
-:    [1.21](/docs/containers?topic=containers-cs_versions_121), [1.20](/docs/containers?topic=containers-cs_versions_120), [1.19](/docs/containers?topic=containers-cs_versions_119), [1.18](/docs/containers?topic=containers-118_changelog), [1.17](/docs/containers?topic=containers-117_changelog), [1.16](/docs/containers?topic=containers-116_changelog), [1.15](/docs/containers?topic=containers-115_changelog), [1.14](/docs/containers?topic=containers-114_changelog), [1.13](/docs/containers?topic=containers-113_changelog), [1.12](/docs/containers?topic=containers-112_changelog), [1.11](/docs/containers?topic=containers-111_changelog), [1.10](/docs/containers?topic=containers-110_changelog), [1.9](/docs/containers?topic=containers-19_changelog), [1.8](/docs/containers?topic=containers-18_changelog), [1.7](/docs/containers?topic=containers-17_changelog), 1.6, 1.5
+:   [1.21](/docs/containers?topic=containers-cs_versions_121), [1.20](/docs/containers?topic=containers-cs_versions_120), [1.19](/docs/containers?topic=containers-cs_versions_119), [1.18](/docs/containers?topic=containers-118_changelog), [1.17](/docs/containers?topic=containers-117_changelog), [1.16](/docs/containers?topic=containers-116_changelog), [1.15](/docs/containers?topic=containers-115_changelog), [1.14](/docs/containers?topic=containers-114_changelog), [1.13](/docs/containers?topic=containers-113_changelog), [1.12](/docs/containers?topic=containers-112_changelog), [1.11](/docs/containers?topic=containers-111_changelog), [1.10](/docs/containers?topic=containers-110_changelog), [1.9](/docs/containers?topic=containers-19_changelog), [1.8](/docs/containers?topic=containers-18_changelog), [1.7](/docs/containers?topic=containers-17_changelog), 1.6, 1.5
 
 

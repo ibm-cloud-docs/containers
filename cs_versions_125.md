@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-06"
+lastupdated: "2022-10-07"
 
 keywords: kubernetes, containers, 125, version 125, 125 update actions
 
@@ -39,7 +39,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 | Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
-| 1.25 | Yes | 03 October 2022 | 13 December 2023 |
+| 1.25 | Yes | 06 October 2022 | 13 December 2023 |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.25" caption-side="top"}
 
 ## Preparing to update
@@ -59,7 +59,7 @@ The cluster autoscaler add-on doesn't support {{site.data.keyword.containerlong_
 
 The following table shows the actions that you must take before you update the Kubernetes master.
 
-[Pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external} are scheduled for removal in Kubernetes version 1.25.  See the Kubernetes [Deprecated API migration guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#psp-v125){: external} for more information. Customers will have the option to replace Pod Security Policies with [Pod security admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/){: external} or a [third party admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external}. IBM Cloud Kubernetes Service will make a beta version of Pod Security available in version 1.24 to aid in the migration, but this support is not yet available.
+[Pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external} have been removed in Kubernetes version 1.25.  See the Kubernetes [Deprecated API migration guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#psp-v125){: external} for more information. Customers will have the option to replace Pod Security Policies with [Pod security admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/){: external} or a [third party admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external}. IBM Cloud Kubernetes Service will make a beta version of Pod Security available in version 1.24 to aid in the migration, but this support is not yet available.
 {: important}
 
 
@@ -77,7 +77,7 @@ The following table shows the actions that you must take before you update the K
 | **Unsupported:** Select Kubernetes API server metrics removed | The following Kubernetes API service metrics were removed: `priority_level_seat_count_watermarks`, `priority_level_request_count_watermarks` and `read_vs_write_request_count_watermarks`. If you rely on these removed metrics, update accordingly. |
 | **Unsupported:** Select Kubernetes API server metrics replaced | The following Kubernetes API service metrics were replaced: `priority_level_seat_count_samples` is replaced by `priority_level_seat_utilization`, `priority_level_request_count_samples` is replaced by `priority_level_request_utilization` and `read_vs_write_request_count_samples` is replaced by `read_vs_write_current_requests`. If you rely on these replaced metrics, update accordingly. |
 | Service account tokens are not automatically generated | The `LegacyServiceAccountTokenNoAutoGeneration` feature gate has been enabled. As a result, secrets containing service account tokens are no longer automatically generated. Use the `TokenRequest` API to acquire service account tokens. Or if a non-expiring service account token is required, follow the [Service account token Secrets guide](https://kubernetes.io/docs/concepts/configuration/secret/#service-account-token-secrets){: external} to create one. During an upgrade to IKS version 1.25, existing service account token secrets remain in the cluster and continue to function as expected. |
-| Application updates required for `natPortRange` changes. | Updates might be required if your app makes a lot of egress network connections from `pod-network` pods out to something external to the cluster. For example, if your app or has either 30,000+ of egress connections open on a single worker node at once, or opens over 30,000 egress connections on a single worker node within a few minutes of each other. For more information, see [Why am I running out of SNAT ports for egress connections from pods in my cluster?](/docs/containers?topic=containers-ts-network-felixconfiguration-125){: external}.
+| Application updates required for `natPortRange` changes. | Updates might be required if your app makes a lot of egress network connections from `pod-network` pods out to something external to the cluster. For example, if your app or has either 30,000+ of egress connections open on a single worker node at once, or opens over 30,000 egress connections on a single worker node within a few minutes of each other. For more information, see [Why am I running out of SNAT ports for egress connections from pods in my cluster?](/docs/containers?topic=containers-ts-network-snat-125).
 {: caption="Changes to make after you update the master to Kubernetes 1.25"}
 
 
@@ -88,6 +88,7 @@ The following table shows the actions that you must take after you update the Ku
 {: shortdesc}
 
 | Type | Description|
+| --- | --- |
 | `kubectl diff` ignores managed fields by default | The `kubectl diff` command was changed to ignore managed fields by default. A new `--show-managed-fields` flag has been added to allow you to include managed fields in the diff. If your scripts rely on the previous behavior, update them. |
 {: caption="Changes to make after you update the master to Kubernetes 1.25"}
 
