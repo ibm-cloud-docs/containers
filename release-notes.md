@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-06"
+lastupdated: "2022-10-07"
 
 keywords: kubernetes, release notes
 
@@ -30,6 +30,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+
+### 7 October 2022
+{: #containers-oct0722}
+
+
+Kubernetes version 1.25 certification
+:   Version [1.25](/docs/containers?topic=containers-cs_versions_125) release is now certified.
 
 ### 6 October 2022
 {: #containers-oct0622}
