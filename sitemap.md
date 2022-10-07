@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-06"
+lastupdated: "2022-10-07"
 
 keywords: containers
 subcollection: containers
@@ -4940,17 +4940,19 @@ subcollection: containers
 
     * [Cleaning up persistent storage](/docs/containers?topic=containers-vpc-block#storage_remove_block_vpc)
 
-[Setting up snapshots with {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
-
-* [Optional: Deploying the snapshot controller](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-controller)
+[Setting up snapshots with the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
 
 * [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-addon-enable)
+
+* [Optional: Deploying the snapshot validation webhook](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-validation)
 
 * [Creating a deployment](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-deployment)
 
 * [Creating a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-create-snapshot)
 
 * [Restoring from a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-restore-from-snapshot)
+
+* [Troubleshooting snapshots](/docs/containers?topic=containers-vpc-volume-snapshot#ts-snapshot-vpc-block-addon-next)
 
 [Setting up trusted profiles for the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#storage-block-vpc-trusted-profiles)
 
@@ -8934,6 +8936,8 @@ subcollection: containers
 
 [Why does my worker node show a `NetworkUnavailable` error?](/docs/containers?topic=containers-ts-network-calico-node#ts-network-calico-node)
 
+[Why am I running out of SNAT ports for egress connections from pods in my cluster?](/docs/containers?topic=containers-ts-network-snat-125#ts-network-snat-125)
+
 [Why can't I install a new strongSwan Helm chart release?](/docs/containers?topic=containers-cs_strongswan_release#cs_strongswan_release)
 
 [Why does strongSwan VPN connectivity fail after I add or delete worker nodes?](/docs/containers?topic=containers-cs_vpn_fails_worker_add#cs_vpn_fails_worker_add)
@@ -9197,7 +9201,7 @@ subcollection: containers
 
 [Why can't I delete my {{site.data.keyword.block_storage_is_short}} `volumesnapshot` resources?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
 
-[Why can't I create {{site.data.keyword.block_storage_is_short}} snapshots?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
+[Why can't I create {{site.data.keyword.block_storage_is_short}} snapshots?](/docs/containers?topic=containers-ts-storage-snapshotfails#ts-storage-snapshotfails)
 
 
 ### Object Storage

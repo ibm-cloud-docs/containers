@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-03"
+lastupdated: "2022-10-07"
 
 keywords: kubernetes
 
@@ -229,6 +229,10 @@ Review the feature gates that are applied to all master and worker node componen
 
 
 
+
+
+1.25
+:   `CustomCPUCFSQuotaPeriod=true`
 
 
 1.24
