@@ -4940,17 +4940,19 @@ subcollection: containers
 
     * [Cleaning up persistent storage](/docs/containers?topic=containers-vpc-block#storage_remove_block_vpc)
 
-[Setting up snapshots with {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
-
-* [Optional: Deploying the snapshot controller](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-controller)
+[Setting up snapshots with the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
 
 * [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-addon-enable)
+
+* [Optional: Deploying the snapshot validation webhook](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-validation)
 
 * [Creating a deployment](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-deployment)
 
 * [Creating a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-create-snapshot)
 
 * [Restoring from a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-restore-from-snapshot)
+
+* [Troubleshooting snapshots](/docs/containers?topic=containers-vpc-volume-snapshot#ts-snapshot-vpc-block-addon-next)
 
 [Setting up trusted profiles for the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#storage-block-vpc-trusted-profiles)
 
@@ -9199,7 +9201,7 @@ subcollection: containers
 
 [Why can't I delete my {{site.data.keyword.block_storage_is_short}} `volumesnapshot` resources?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
 
-[Why can't I create {{site.data.keyword.block_storage_is_short}} snapshots?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
+[Why can't I create {{site.data.keyword.block_storage_is_short}} snapshots?](/docs/containers?topic=containers-ts-storage-snapshotfails#ts-storage-snapshotfails)
 
 
 ### Object Storage
