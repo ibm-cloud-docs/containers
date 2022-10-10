@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-07"
+lastupdated: "2022-10-10"
 
 keywords: containers
 subcollection: containers
@@ -206,6 +206,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
+
+    * [10 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct1022)
+
+        * Worker node fix pack
+
+        * Cluster autoscaler add-on version `1.0.6_828`.
 
     * [7 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct0722)
 
@@ -3002,7 +3008,7 @@ subcollection: containers
 {: #sitemap_creating_clusters1}
 
 
-[Creating clusters](/docs/containers?topic=containers-clusters#clusters)
+[Preparing to create clusters](/docs/containers?topic=containers-clusters#clusters)
 
 * [Preparing to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare)
 
@@ -3252,6 +3258,8 @@ subcollection: containers
 * [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
 
 * [Changing the Calico maximum transmission unit (MTU)](/docs/containers?topic=containers-kernel#calico-mtu)
+
+    * [Updating the Calico ConfigMap](/docs/containers?topic=containers-kernel#calico-cm-mtu-update)
 
 * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
 
@@ -5696,7 +5704,7 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
-* [Version 1.0.454](/docs/containers?topic=containers-cs_cli_changelog#cli-10452)
+* [Version 1.0.454](/docs/containers?topic=containers-cs_cli_changelog#cli-10454)
 
 * [Version 1.0.452](/docs/containers?topic=containers-cs_cli_changelog#cli-10452)
 
@@ -5959,6 +5967,8 @@ subcollection: containers
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
 
+    * [Change log for worker node fix pack 1.24.6_1540, released 10 October 2022](/docs/containers?topic=containers-changelog_124#1246_1540)
+
     * [Change log for master fix pack 1.24.6_1538, released 26 September 2022](/docs/containers?topic=containers-changelog_124#1246_1538)
 
     * [Change log for worker node fix pack 1.24.6_1539, released 26 September 2022](/docs/containers?topic=containers-changelog_124#1246_1539)
@@ -6047,6 +6057,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for worker node fix pack 1.23.12_1548, released 10 October 2022](/docs/containers?topic=containers-changelog_123#12312_1548)
 
     * [Change log for master fix pack 1.23.12_1546, released 26 September 2022](/docs/containers?topic=containers-changelog_123#12312_1546)
 
@@ -6164,6 +6176,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview_122)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.15_1574, released 10 October 2022](/docs/containers?topic=containers-changelog_122#12215_1574)
 
     * [Change log for master fix pack 1.22.15_1572, released 26 September 2022](/docs/containers?topic=containers-changelog_122#12215_1572)
 
@@ -8046,7 +8060,7 @@ subcollection: containers
 
 * [Change log for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
 
-[Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog#ca_changelog)
+[Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
 * [Version 1.1.0 (Beta)](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
 
@@ -8065,6 +8079,8 @@ subcollection: containers
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
 
 * [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0106_ca_addon)
+
+    * [Change log for patch update 1.0.6_828, released 10 October 2022](/docs/containers?topic=containers-ca_changelog#106828_ca)
 
     * [Change log for patch update 1.0.6_800, released 22 September 2022](/docs/containers?topic=containers-ca_changelog#106800_ca)
 
