@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-05"
+lastupdated: "2022-10-10"
 
 keywords: kubernetes, containers
 
@@ -59,6 +59,23 @@ Review the version 1.24 change log.
 
 
 
+
+
+
+### Change log for worker node fix pack 1.24.6_1540, released 10 October 2022
+{: #1246_1540}
+
+The following table shows the changes that are in the worker node fix pack 1.24.6_1540. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages |N/A|N/A|N/A|
+| Kubernetes |N/A|N/A|N/A|
+| RHEL 7 Packages |N/A|N/A|N/A|
+| RHEL 8 Packages |N/A|N/A|N/A|
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.24.6_1539" caption-side="top"}
 
 ### Change log for master fix pack 1.24.6_1538, released 26 September 2022
 {: #1246_1538}
