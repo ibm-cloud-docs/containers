@@ -3008,7 +3008,7 @@ subcollection: containers
 {: #sitemap_creating_clusters1}
 
 
-[Creating clusters](/docs/containers?topic=containers-clusters#clusters)
+[Preparing to create clusters](/docs/containers?topic=containers-clusters#clusters)
 
 * [Preparing to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare)
 
@@ -5704,7 +5704,7 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
-* [Version 1.0.454](/docs/containers?topic=containers-cs_cli_changelog#cli-10452)
+* [Version 1.0.454](/docs/containers?topic=containers-cs_cli_changelog#cli-10454)
 
 * [Version 1.0.452](/docs/containers?topic=containers-cs_cli_changelog#cli-10452)
 
