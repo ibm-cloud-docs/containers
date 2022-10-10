@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-05"
+lastupdated: "2022-10-10"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2
 
@@ -16,11 +16,14 @@ subcollection: containers
 
 
 
-# Creating VPC Gen 2 clusters
+# Creating VPC clusters
 {: #cluster-create-vpc-gen2}
 
 Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_notm}} console to create a standard VPC cluster, and customize your cluster to meet the high availability and security requirements of your apps.
 {: shortdesc}
+
+Supported infrastructure providers
+:   VPC
 
 ## Creating a standard VPC cluster in the console
 {: #clusters_vpcg2_ui}

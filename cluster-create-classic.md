@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-05"
+lastupdated: "2022-10-10"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, classic, create
 
@@ -18,6 +18,9 @@ subcollection: containers
 
 Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_notm}} console to create a fully-customizable standard cluster with your choice of hardware isolation and access to features like multiple worker nodes for a highly available environment.
 {: shortdesc}
+
+Supported infrastructure providers
+:   Classic
 
 
 

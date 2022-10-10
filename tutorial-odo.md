@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-08-23"
+lastupdated: "2022-10-10"
 
 keywords: kubernetes, odo
 
@@ -214,7 +214,7 @@ Now that you have a microservice running in your cluster, you might wonder what 
     Don't want to remember to push each time? Try the `odo watch` command to monitor for local file changes and automatically push the saved updates to your cluster.
     {: tip}
 
-* **Learn more about OpenShift Do**: Learn more about the features of `odo` by visiting the [{{site.data.keyword.redhat_openshift_notm}} Do CLI Documentation](https://docs.openshift.com/container-platform/4.9/cli_reference/developer_cli_odo/understanding-odo.html){: external}.
+* **Learn more about OpenShift Do**: Learn more about the features of `odo` by visiting the [{{site.data.keyword.redhat_openshift_notm}} Do CLI Documentation](https://docs.openshift.com/container-platform/4.10/cli_reference/developer_cli_odo/understanding-odo.html){: external}.
 
 
 
