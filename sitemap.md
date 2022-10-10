@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-07"
+lastupdated: "2022-10-10"
 
 keywords: containers
 subcollection: containers
@@ -3252,6 +3252,8 @@ subcollection: containers
 * [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
 
 * [Changing the Calico maximum transmission unit (MTU)](/docs/containers?topic=containers-kernel#calico-mtu)
+
+    * [Updating the Calico ConfigMap](/docs/containers?topic=containers-kernel#calico-cm-mtu-update)
 
 * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
 
