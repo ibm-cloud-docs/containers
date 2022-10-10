@@ -207,6 +207,12 @@ subcollection: containers
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
 
+    * [10 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct1022)
+
+        * Worker node fix pack
+
+        * Cluster autoscaler add-on version `1.0.6_828`.
+
     * [7 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct0722)
 
         * Kubernetes version 1.25 certification
@@ -8054,7 +8060,7 @@ subcollection: containers
 
 * [Change log for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
 
-[Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog#ca_changelog)
+[Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
 * [Version 1.1.0 (Beta)](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
 
@@ -8073,6 +8079,8 @@ subcollection: containers
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
 
 * [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0106_ca_addon)
+
+    * [Change log for patch update 1.0.6_828, released 10 October 2022](/docs/containers?topic=containers-ca_changelog#106828_ca)
 
     * [Change log for patch update 1.0.6_800, released 22 September 2022](/docs/containers?topic=containers-ca_changelog#106800_ca)
 

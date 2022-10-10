@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-07"
+lastupdated: "2022-10-10"
 
 keywords: kubernetes, release notes
 
@@ -30,9 +30,23 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+### 10 October 2022
+{: #containers-oct1022}
+{: release-note}
+
+
+Worker node fix pack
+:   Kubernetes [1.22.15_1574](/docs/containers?topic=containers-changelog_122), [1.23.12_1548](/docs/containers?topic=containers-changelog_123) and [1.24.6_1540](/docs/containers?topic=containers-changelog_124).
+
+
+Cluster autoscaler add-on version `1.0.6_828`.
+:   For more information, see [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
+
+
 
 ### 7 October 2022
 {: #containers-oct0722}
+{: release-note}
 
 
 Kubernetes version 1.25 certification
@@ -40,6 +54,7 @@ Kubernetes version 1.25 certification
 
 ### 6 October 2022
 {: #containers-oct0622}
+{: release-note}
 
 New! Kubernetes 1.25
 :   You can create or [update clusters to Kubernetes version 1.25](/docs/containers?topic=containers-cs_versions_125). With Kubernetes 1.25, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. 
@@ -56,6 +71,7 @@ Worker node fix pack
 
 ### 4 October 2022
 {: #containers-oct0422}
+{: release-note}
 
 Istio add-on
 :   Version [`1.14.4`](/docs/containers?topic=containers-istio-changelog#1144) and version [`1.13.8`](/docs/containers?topic=containers-istio-changelog#1138) are available.
@@ -64,6 +80,7 @@ Istio add-on
 
 ### 3 October 2022
 {: #containers-oct0322}
+{: release-note}
 
 CLI change log update
 :   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.454.
@@ -82,9 +99,11 @@ ALB OAuth Proxy add-on
 
 ## September 2022
 {: #containers-sep22}
+{: release-note}
 
 ### 30 September 2022
 {: #containers-sep3022}
+{: release-note}
 
 New! Enabling Flow logs for VPC components
 :    Flow logs gather information about the traffic entering or leaving your VPC cluster worker nodes.  For more information, see [Enabling Flow Logs for VPC cluster components](/docs/containers?topic=containers-vpc-flow-log).
@@ -92,6 +111,7 @@ New! Enabling Flow logs for VPC components
 
 ### 26 September 2022
 {: #containers-sep2622}
+{: release-note}
 
 
 Worker node fix pack
@@ -102,6 +122,7 @@ Worker node fix pack
 
 ### 23 September 2022
 {: #containers-sep2322}
+{: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on version `4.4.11_1614`.
 :   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
@@ -111,6 +132,7 @@ Worker node fix pack
 
 ### 22 September 2022
 {: #containers-sep2222}
+{: release-note}
 
 Cluster autoscaler add-on versions `1.1.0_798`, `1.0.6_800`, and `1.0.5_779`.
 :   For more information, see [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
@@ -121,6 +143,7 @@ Cluster autoscaler add-on versions `1.1.0_798`, `1.0.6_800`, and `1.0.5_779`.
 
 ### 21 September 2022
 {: #containers-sep2122}
+{: release-note}
 
 CLI change log update
 :   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.452.
@@ -136,6 +159,7 @@ Ingress ALB change log updates
 
 ### 20 September 2022
 {: #containers-sep2022}
+{: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.1` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
@@ -144,6 +168,7 @@ Ingress ALB change log updates
 
 ### 15 September 2022
 {: #containers-sep1522}
+{: release-note}
 
 Istio add-on
 :   Version [`1.15.0`](/docs/containers?topic=containers-istio-changelog#1150) is available.
@@ -152,6 +177,7 @@ Istio add-on
 
 ### 13 September 2022
 {: #containers-sep1322}
+{: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on version 4.4.10_1578 is available.
 :   For more information, see [version 4.4.10_1578](/docs/containers?topic=containers-vpc_bs_changelog).
@@ -161,6 +187,7 @@ New! vGPU worker node flavors are now available for VPC Gen 2.
 
 ### 12 September 2022
 {: #containers-sep1222}
+{: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on version 4.3.6_1579 is available.
 :   For more information, see [version 4.3.6_1579](/docs/containers?topic=containers-vpc_bs_changelog)
