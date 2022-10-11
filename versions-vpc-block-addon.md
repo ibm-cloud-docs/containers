@@ -37,14 +37,6 @@ ibmcloud ks cluster addon versions --addon vpc-block-csi-driver
 To view a list of add-ons and the supported cluster versions, see the [Supported cluster add-ons table](/docs/containers?topic=containers-supported-cluster-addon-versions).
 
 
-
-
-If you have a {{site.data.keyword.containerlong_notm}} cluster version 1.22, 1.23, or 1.24 and want to use snapshotting, you must first [deploy the snapshot controller](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-controller). The snapshot controller is deployed by default beginning with cluster version 1.25.
-{: important}
-
-
-
-
 ## Version 5.0
 {: #050_is_block}
 
