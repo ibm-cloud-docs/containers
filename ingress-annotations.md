@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-03"
+lastupdated: "2022-10-11"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -13,100 +13,67 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-
-# Kubernetes Ingress annotations
+# Customizing ALB routing 
 {: #comm-ingress-annotations}
 
-Modify default ALB settings and add annotations to your Ingress resources for ALBs that run the Kubernetes Ingress image.
+Modify the default settings for ALBs that run the Kubernetes Ingress image.
 {: shortdesc}
 
-## Customizing routing with annotations
-{: #annotations}
-
-To customize routing for Ingress, you can add [Kubernetes NGINX annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/){: external} (`nginx.ingress.kubernetes.io/<annotation>`). Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are **not** supported.
-{: shortdesc}
-
-The following sections compares the custom {{site.data.keyword.containerlong_notm}} annotations with equivalent Kubernetes NGINX annotations. If no equivalent Kubernetes NGINX annotation exists, alternate options, such as configuring a field in the `ibm-k8s-controller-config` ConfigMap or the `ibm-ingress-deploy-config` ConfigMap, are listed.
-
-Kubernetes NGINX annotations are always applied to all service paths in the resource, and you can't specify service names within the annotations.
+In some cases, you can customize routing for Ingress by adding [Kubernetes NGINX annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/){: external} (`nginx.ingress.kubernetes.io/<annotation>`). Kubernetes NGINX annotations are always applied to all service paths in the resource, and you can't specify service names within the annotations. Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are **not** supported.
 {: note}
 
-### Add server port to host header
+## Adding a server port to a host header
 {: #add-sport-hheader}
 
-Add a server port to the client request before the request is forwarded to your back-end app.
+To add a server port to the client request before the request is forwarded to your back-end app, configure proxying external services in a [server snippet annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-snippet){: external} or as an `ibm-k8s-controller-config` ConfigMap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-set-headers){: external}.
 {: shortdesc}
 
-Kubernetes Ingress field: No equivalent annotation exists. Configure proxying external services in a [server snippet annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-snippet){: external} or as an `ibm-k8s-controller-config` ConfigMap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-set-headers){: external}.
 
-
-### ALB ID
+## Routing incoming requests with a private ALB
 {: #alb_id_anno}
 
-Route incoming requests to your apps with a private ALB.
+To route incoming requests to your apps with a private ALB, use the following Kubernetes Ingress resource [annotation](/docs/containers?topic=containers-ingress-types#alb-comm-create-private). Private ALBs are configured to use resources with this class.
 {: shortdesc}
-
-
-Kubernetes Ingress resource [annotation](/docs/containers?topic=containers-ingress-types#alb-comm-create): Private ALBs are configured to use resources with this class.
 
 ```sh
 kubernetes.io/ingress.class: "private-iks-k8s-nginx"
 ```
 {: screen}
 
-### {{site.data.keyword.appid_short_notm}} authentication
+## Authenticating apps with {{site.data.keyword.appid_short_notm}} 
 {: #app-id-authentication}
 
-Configure Ingress with [{{site.data.keyword.appid_full_notm}}](https://cloud.ibm.com/catalog/services/app-id){: external} to enforce authentication for your apps.
+Configure Ingress with [{{site.data.keyword.appid_full_notm}}](https://cloud.ibm.com/catalog/services/app-id){: external} to enforce authentication for your apps by changing specific Kubernetes Ingress fields. See [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](#app-id-auth) for more information.
 {: shortdesc}
 
-
-Kubernetes Ingress field: See [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](#app-id-auth).
-
-
-### Client request body size
+## Setting the maximum client request body size
 {: #client-request-bodysize}
 
-Set the maximum size of the body that the client can send as part of a request.
+To set the maximum size of the body that the client can send as part of a request, use the following Kuberenetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-max-body-size){: external}. 
 {: shortdesc}
-
-
-Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-max-body-size){: external}:
 
 ```sh
 nginx.ingress.kubernetes.io/proxy-body-size: 8m
 ```
 {: screen}
 
-Or, Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-body-size){: external}:
-
-```sh
-proxy-body-size: 200m
-```
-{: screen}
-
-
-### Client response data buffering
+## Enabling and disabling client response data buffering
 {: #client-response-data-buffering}
 
-Disable or enable the storage of response data on the ALB while the data is sent to the client.
+You can disable or enable the storage of response data on the ALB while the data is sent to the client. This setting is disabled by default. To enable, set the following Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#rewrite){: external}.
 {: shortdesc}
-
-Kubernetes Ingress field: Disabled by default. To enable, set the Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#rewrite){: external}:
 
 ```sh
 nginx.ingress.kubernetes.io/proxy-buffering: "on"
 ```
 {: screen}
 
-
-### Custom connect and read timeouts
+## Customizing connect and read timeouts
 {: #custom-connect-read-timeouts}
 
-Set the time that the ALB waits to connect to and read from the back-end app before the back-end app is considered unavailable.
+To set the amount of time that the ALB waits to connect to and read from the back-end app before the back-end app is considered unavailable, use the following [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-timeouts){: external}.
 {: shortdesc}
 
-Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-timeouts){: external}:
 
 ```sh
 nginx.ingress.kubernetes.io/proxy-connect-timeout: 62
@@ -119,44 +86,31 @@ nginx.ingress.kubernetes.io/proxy-read-timeout: 62
 {: screen}
 
 
-### Custom error actions
+## Customizing error actions
 {: #custom-error-actions}
 
-Indicate custom actions that the ALB can take for specific HTTP errors.
+To indicate custom actions that the ALB can take for specific HTTP errors, set the `custom-http-errors` [field]((https://kubernetes.github.io/ingress-nginx/examples/customization/custom-errors/){: external}.
 {: shortdesc}
 
-
-Kubernetes Ingress field: See the [`custom-http-errors` documentation](https://kubernetes.github.io/ingress-nginx/examples/customization/custom-errors/){: external}.
-
-### Custom HTTP and HTTPS ports
+## Changing the default HTTP and HTTPS ports
 {: #custom-http-https-ports}
 
-Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic.
+To change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic, [modify each ALB service](#comm-customize-deploy) with the following Kubernetes Ingress `ibm-ingress-deploy-config` ConfigMap [fields](#comm-customize-deploy).
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress fields.
+Example field setting.
 
-#### Kubernetes Ingress fields
-{: #kube-ingress-fields}
+```sh
+httpPort=8080
+httpsPort=8443
+```
+{: screen}
 
-1. `ibm-ingress-deploy-config` ConfigMap [fields](#comm-customize-deploy).
-
-    ```sh
-    httpPort=8080
-    httpsPort=8443
-    ```
-    {: screen}
-
-2. [Modify each ALB service](#comm-customize-deploy) to add the ports.
-
-
-### Custom request header
+## Customizing the request header
 {: #custom-request-header}
 
-Add header information to a client request before forwarding the request to your back-end app.
+To add header information to a client request before forwarding the request to your back-end app, use the following Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-set-headers){: external}
 {: shortdesc}
-
-Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-set-headers){: external}:
 
 ```sh
 proxy-set-headers: "ingress-nginx/custom-headers"
@@ -166,13 +120,11 @@ proxy-set-headers: "ingress-nginx/custom-headers"
 For the `custom-headers` ConfigMap requirements, see [this example](https://github.com/kubernetes/ingress-nginx/blob/main/docs/examples/customization/custom-headers/custom-headers.yaml){: external}.
 
 
-### Custom response header
+## Customizing the response header
 {: #custom-response-header}
 
-Add header information to a client response before sending it to the client.
+To add header information to a client response before sending it to the client, use the following [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external}.
 {: shortdesc}
-
-Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external}:
 
 ```sh
 nginx.ingress.kubernetes.io/configuration-snippet: |
@@ -180,25 +132,19 @@ nginx.ingress.kubernetes.io/configuration-snippet: |
 ```
 {: screen}
 
-
-### External services
+## Adding path definitions to external services
 {: #external-services-path}
 
-Add path definitions to external services, such as services hosted in IBM Cloud.
+To add path definitions to external services, such as services hosted in IBM Cloud, configure proxying external services in a [location snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external}. Or, replace proxying with a [permanent redirect to external services](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#permanent-redirect){: external}.
 {: shortdesc}
 
-Kubernetes Ingress field: No equivalent annotation exists. Configure proxying external services in a [location snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external} or replace proxying with a [permanent redirect to external services](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#permanent-redirect){: external}.
-
-
-### HTTP redirects to HTTPS
+## Redirecting insecure requests 
 {: #http-redirects-https}
 
-Convert insecure HTTP client requests to HTTPS.
+By default, insecure HTTP client requests redirect to HTTPS. To disable this setting, use the following field and annotation.
 {: shortdesc}
 
-Kubernetes Ingress fields: HTTP redirects to HTTPS by default. To disable:
-
-* `ibm-k8s-controller-config` ConfigMap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#server-side-https-enforcement-through-redirect){: external}:
+* `ibm-k8s-controller-config` ConfigMap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#server-side-https-enforcement-through-redirect){: external}
     ```sh
     ssl-redirect: "false"
     ```
@@ -211,13 +157,12 @@ Kubernetes Ingress fields: HTTP redirects to HTTPS by default. To disable:
     {: screen}
 
 
-### HTTP Strict Transport Security
+## Enabling and disabling HTTP Strict Transport Security
 {: #http-strict-transport-security}
 
-Set the browser to access the domain only by using HTTPS.
+Set the browser to access the domain only by using HTTPS. This option is enabled by default. 
 {: shortdesc}
 
-Kubernetes Ingress fields: HSTS is enabled by default.
 * To add max age and subdomain granularity, see [this NGINX blog](https://www.nginx.com/blog/http-strict-transport-security-hsts-and-nginx/){: external}.
 * To disable, set the `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#hsts){: external}.
     ```sh
@@ -226,13 +171,11 @@ Kubernetes Ingress fields: HSTS is enabled by default.
     {: screen}
 
 
-### Keepalive requests
+## Setting a maximum nunber of keepalive requests
 {: #keepalive-requests}
 
-Set the maximum number of requests that can be served through one keepalive connection.
+To set the maximum number of requests that can be served through one keepalive connection, use the following Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#keep-alive-requests){: external}.
 {: shortdesc}
-
-Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#keep-alive-requests){: external}:
 
 ```sh
 keep-alive-requests: 100
@@ -242,39 +185,33 @@ keep-alive-requests: 100
 The default value for `keep-alive-requests` in Kubernetes Ingress is `100`, which is much lower than the default value of `4096` in {{site.data.keyword.containerlong_notm}} Ingress. If you migrated your Ingress setup from {{site.data.keyword.containerlong_notm}} Ingress to Kubernetes Ingress, you might need to change `keep-alive-requests` to pass existing performance tests.
 {: note}
 
-### Keepalive request timeout
+## Setting a maximum keepalive request timeout
 {: #keepalive-request-timeout}
 
-Set the maximum time that a keepalive connection stays open between the client and the ALB proxy server.
+To set the maximum time that a keepalive connection stays open between the client and the ALB proxy server, use the following Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#keep-alive){: external}.
 {: shortdesc}
-
-Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#keep-alive){: external}:
 
 ```sh
 keep-alive: 60
 ```
 {: screen}
 
-### Large client header buffers
+## Setting a maximum number of large client header buffers
 {: #large-client-header-buffers}
 
-Set the maximum number and size of buffers that read large client request headers.
+To set the maximum number and size of buffers that read large client request headers, use the following Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#large-client-header-buffers){: external}.
 {: shortdesc}
-
-Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#large-client-header-buffers){: external}:
 
 ```sh
 large-client-header-buffers: 4 8k
 ```
 {: screen}
 
-### Location modifier
+## Modifying how the ALB matches the request URI
 {: #location-modifier}
 
-Modify the way the ALB matches the request URI against the app path.
+To modify the way the ALB matches the request URI against the app path, use the following Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#use-regex){: external}.
 {: shortdesc}
-
-Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#use-regex){: external}:
 
 ```sh
 nginx.ingress.kubernetes.io/use-regex: "true"
@@ -284,13 +221,11 @@ nginx.ingress.kubernetes.io/use-regex: "true"
 For more info, see [this blog](https://kubernetes.github.io/ingress-nginx/user-guide/ingress-path-matching/#ingress-path-matching){: external}.
 
 
-### Location snippets
+## Adding custom location block configurations
 {: #location-snippets}
 
-Add a custom location block configuration for a service.
+To add a custom location block configuration for a service, use the following Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external}.
 {: shortdesc}
-
-Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external}:
 
 ```sh
 nginx.ingress.kubernetes.io/configuration-snippet: |
@@ -299,13 +234,11 @@ nginx.ingress.kubernetes.io/configuration-snippet: |
 {: screen}
 
 
-### Mutual authentication
+## Configuring mutual authentication
 {: #mutual-authentication}
 
-Configure mutual authentication for the ALB.
+To configure mutual authentication for the ALB, use the following Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#client-certificate-authentication){: external}. Note that mutual authentication can't be applied to custom ports and must be applied to the HTTPS port.
 {: shortdesc}
-
-Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#client-certificate-authentication){: external}:
 
 ```sh
 nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
@@ -316,16 +249,11 @@ nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "true"
 ```
 {: screen}
 
-Note that mutual authentication can't be applied to custom ports and must be applied to the HTTPS port.
-
-
-### Proxy buffer size
+## Configuring proxy buffer size
 {: #proxy-buffer-size}
 
-Configure the size of the proxy buffer that reads the first part of the response.
+To configure the size of the proxy buffer that reads the first part of the response, use the following Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#proxy-buffer-size){: external}.
 {: shortdesc}
-
-Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#proxy-buffer-size){: external}:
 
 ```sh
 nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
@@ -333,37 +261,30 @@ nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
 {: screen}
 
 
-### Proxy buffers
+## Configruing proxy buffer numbers
 {: #config-proxy-buffers}
 
-Configure the number and size of proxy buffers for the ALB.
+To configure the number of proxy buffers for the ALB, use the following Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#proxy-buffering){: external}.
 {: shortdesc}
-
-Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#proxy-buffering){: external}:
 
 ```sh
 nginx.ingress.kubernetes.io/proxy-buffers-number: "4"
-nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
 ```
 {: screen}
 
 
-### Proxy busy buffers size
+## Configuring busy proxy buffer size
 {: #proxy-busy-buffer-size}
 
-Configure the size of proxy buffers that can be busy.
+To configure the size of proxy buffers that can be busy, use a [location snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external}. For more info, see the [NGINX docs](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_busy_buffers_size){: external}.
 {: shortdesc}
 
-Kubernetes Ingress field: No equivalent annotation exists. Configure proxying external services in a [location snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external}. For more info, see the [NGINX docs](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_busy_buffers_size){: external}.
-
-
-### Proxy next upstream
+## Configuring when an ALB can pass a request
 {: #proxy-next-upstream}
 
-Set when the ALB can pass a request to the next upstream server.
+To set when the ALB can pass a request to the next upstream server, use the following Kubernetes Ingress fields.
 {: shortdesc}
 
-Kubernetes Ingress fields:
 * Global setting: `ibm-k8s-controller-config` ConfigMap [fields](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream){: external}:
     ```sh
     retry-non-idempotent: true
@@ -381,31 +302,23 @@ Kubernetes Ingress fields:
     {: screen}
 
 
-### Rate limiting
+## Rate limiting
 {: #rate-limiting}
 
-Limit the request processing rate and number of connections per a defined key for all or specific services.
+To limit the request processing rate and number of connections per a defined key for services, use the Ingress resource [annotations for rate limiting](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#rate-limiting){: external}.
 {: shortdesc}
 
-Kubernetes Ingress field: No directly equivalent annotation exists, but several Ingress resource [annotations for rate limiting](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#rate-limiting){: external} are available.
-
-
-### Response header removal
+## Removing the response header 
 {: #response-header-removal}
 
-Remove header information that is included in the client response from the back-end end app before the response is sent to the client.
+You can remove header information that is included in the client response from the back-end end app before the response is sent to the client. Configure the response header removal in a [location snippet](https://github.com/openresty/headers-more-nginx-module#more_clear_headers){: external}, or use the [`proxy_hide_header` field](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header){: external} as a [configuration snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external} in the `ibm-k8s-controller-config` ConfigMap.
 {: shortdesc}
 
-Kubernetes Ingress field: No equivalent annotation exists. Configure response header removal in a [location snippet](https://github.com/openresty/headers-more-nginx-module#more_clear_headers){: external}, or use the [`proxy_hide_header` field](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header){: external} as a [configuration snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external} in the `ibm-k8s-controller-config` ConfigMap.
-
-
-### Rewrite paths
+## Rewriting paths
 {: #alb-rewrite-paths}
 
-Route incoming network traffic on an ALB domain path to a different path that your back-end app listens on.
+To route incoming network traffic on an ALB domain path to a different path that your back-end app listens on, use the following Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#rewrite){: external}. 
 {: shortdesc}
-
-Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#rewrite){: external}:
 
 ```sh
 nginx.ingress.kubernetes.io/rewrite-target: /newpath
@@ -413,13 +326,11 @@ nginx.ingress.kubernetes.io/rewrite-target: /newpath
 {: screen}
 
 
-### Server snippets
+## Customizing server block configurations
 {: #server-snippets-custom}
 
-Add a custom server block configuration.
+To add a custom server block configuration, use the following Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-snippet){: external}.
 {: shortdesc}
-
-Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-snippet){: external}:
 
 ```sh
 nginx.ingress.kubernetes.io/server-snippet: |
@@ -430,14 +341,11 @@ nginx.ingress.kubernetes.io/server-snippet: |
 ```
 {: screen}
 
-
-### Session affinity with cookies
+## Routing incoming network traffic
 {: #session-affinity-cookies}
 
-Always route incoming network traffic to the same upstream server by using a sticky cookie.
+To always route incoming network traffic to the same upstream server by using a sticky cookie, use the following Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#session-affinity){: external}.
 {: shortdesc}
-
-Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#session-affinity){: external}:
 
 ```sh
 nginx.ingress.kubernetes.io/affinity: "cookie"
@@ -450,15 +358,13 @@ nginx.ingress.kubernetes.io/configuration-snippet: |
 {: screen}
 
 The Kubernetes Ingress controller adds the `Secure` and `HttpOnly` attributes to the sticky cookies by default, which can't be changed.
+{: note}
 
-
-### SSL services support
+## Allowing SSL services support to encrypt traffic
 {: #ssl-services-support}
 
-Allow SSL services support to encrypt traffic to your upstream apps that require HTTPS.
+To allow SSL services support to encrypt traffic to your upstream apps that require HTTPS, use the Kubernetes Ingress resource [backend protocol annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#backend-protocol){: external} and the [backend certificate authentication annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#backend-certificate-authentication){: external}.
 {: shortdesc}
-
-Kubernetes Ingress resource [backend protocol annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#backend-protocol){: external} and [backend certificate authentication annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#backend-certificate-authentication){: external}:
 
 ```sh
 nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
@@ -470,10 +376,10 @@ nginx.ingress.kubernetes.io/proxy-ssl-verify: true
 {: screen}
 
 
-### TCP ports
+## Accessing apps with non-standard TCP ports
 {: #tcp-ports-non-standard}
 
-Access an app via a non-standard TCP port.
+To access an app via a non-standard TCP port, follow these steps.
 {: shortdesc}
 
 1. Create a `tcp-services` ConfigMap to specify your TCP port, such as the following example ports. For the requirements of the `tcp-services` ConfigMap, see [this blog](https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/){: external}.
@@ -504,13 +410,11 @@ Access an app via a non-standard TCP port.
 
 4. [Modify each ALB service](#comm-customize-deploy) to add the ports.
 
-### Upstream keepalive requests
+## Setting a maximum number of upstream keepalive requests
 {: #upstream-keepalive-requests}
 
-Set the maximum number of requests that can be served through one keepalive connection.
+To set the maximum number of requests that can be served through one keepalive connection, use the following Kubernetes `ibm-k8s-controller-config` ConfigMap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#upstream-keepalive-requests){: external}.
 {: shortdesc}
-
-Kubernetes `ibm-k8s-controller-config` ConfigMap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#upstream-keepalive-requests){: external}:
 
 ```sh
 upstream-keepalive-requests: 32
@@ -518,13 +422,11 @@ upstream-keepalive-requests: 32
 {: screen}
 
 
-### Upstream keepalive timeout
+## Setting the maximum upstream keepalive timeout
 {: #upstream-keepalive-timeout}
 
-Set the maximum time that a keepalive connection stays open between the ALB proxy server and your app's upstream server.
+To set the maximum time that a keepalive connection stays open between the ALB proxy server and your app's upstream server, use the following Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#upstream-keepalive-timeout){: external}.
 {: shortdesc}
-
-Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#upstream-keepalive-timeout){: external}:
 
 ```sh
 upstream-keepalive-timeout: 32
@@ -553,7 +455,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
         ```
         {: pre}
 
-### Create a ConfigMap to customize the Ingress deployment
+### Creating a ConfigMap to customize the Ingress deployment
 {: #create-ingress-configmap-custom}
 
 1. Create a YAML file for an `ibm-ingress-deploy-config` ConfigMap. For each ALB ID, you can specify one or more of the following optional settings. Note that you can specify only the settings that you want to configure, and don't need to specify all the settings.
@@ -658,7 +560,6 @@ An Ingress class associates a class name with an Ingress controller type. Use th
 {: shortdesc}
 
 For more information, see [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class).
-
 
 
 ## Adding {{site.data.keyword.appid_short_notm}} authentication to apps
