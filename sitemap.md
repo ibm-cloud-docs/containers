@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-10"
+lastupdated: "2022-10-11"
 
 keywords: containers
 subcollection: containers
@@ -206,6 +206,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
+
+    * [11 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct1122)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on version `5.0`.
 
     * [10 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct1022)
 
@@ -3024,7 +3028,7 @@ subcollection: containers
 
 * [Example commands to create classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster_create_classic)
 
-[Creating VPC Gen 2 clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-gen2)
+[Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-gen2)
 
 * [Creating a standard VPC cluster in the console](/docs/containers?topic=containers-cluster-create-vpc-gen2#clusters_vpcg2_ui)
 
@@ -4519,77 +4523,75 @@ subcollection: containers
 
 * [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-cs_ingress_monitor#ingress_health_mon)
 
-[Kubernetes Ingress annotations](/docs/containers?topic=containers-comm-ingress-annotations#comm-ingress-annotations)
+[Customizing ALB routing](/docs/containers?topic=containers-comm-ingress-annotations#comm-ingress-annotations)
 
-* [Customizing routing with annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations)
+* [Adding a server port to a host header](/docs/containers?topic=containers-comm-ingress-annotations#add-sport-hheader)
 
-    * [Add server port to host header](/docs/containers?topic=containers-comm-ingress-annotations#add-sport-hheader)
+* [Routing incoming requests with a private ALB](/docs/containers?topic=containers-comm-ingress-annotations#alb_id_anno)
 
-    * [ALB ID](/docs/containers?topic=containers-comm-ingress-annotations#alb_id_anno)
+* [Authenticating apps with {{site.data.keyword.appid_short_notm}}](/docs/containers?topic=containers-comm-ingress-annotations#app-id-authentication)
 
-    * [{{site.data.keyword.appid_short_notm}} authentication](/docs/containers?topic=containers-comm-ingress-annotations#app-id-authentication)
+* [Setting the maximum client request body size](/docs/containers?topic=containers-comm-ingress-annotations#client-request-bodysize)
 
-    * [Client request body size](/docs/containers?topic=containers-comm-ingress-annotations#client-request-bodysize)
+* [Enabling and disabling client response data buffering](/docs/containers?topic=containers-comm-ingress-annotations#client-response-data-buffering)
 
-    * [Client response data buffering](/docs/containers?topic=containers-comm-ingress-annotations#client-response-data-buffering)
+* [Customizing connect and read timeouts](/docs/containers?topic=containers-comm-ingress-annotations#custom-connect-read-timeouts)
 
-    * [Custom connect and read timeouts](/docs/containers?topic=containers-comm-ingress-annotations#custom-connect-read-timeouts)
+* [Customizing error actions](/docs/containers?topic=containers-comm-ingress-annotations#custom-error-actions)
 
-    * [Custom error actions](/docs/containers?topic=containers-comm-ingress-annotations#custom-error-actions)
+* [Changing the default HTTP and HTTPS ports](/docs/containers?topic=containers-comm-ingress-annotations#custom-http-https-ports)
 
-    * [Custom HTTP and HTTPS ports](/docs/containers?topic=containers-comm-ingress-annotations#custom-http-https-ports)
+* [Customizing the request header](/docs/containers?topic=containers-comm-ingress-annotations#custom-request-header)
 
-    * [Custom request header](/docs/containers?topic=containers-comm-ingress-annotations#custom-request-header)
+* [Customizing the response header](/docs/containers?topic=containers-comm-ingress-annotations#custom-response-header)
 
-    * [Custom response header](/docs/containers?topic=containers-comm-ingress-annotations#custom-response-header)
+* [Adding path definitions to external services](/docs/containers?topic=containers-comm-ingress-annotations#external-services-path)
 
-    * [External services](/docs/containers?topic=containers-comm-ingress-annotations#external-services-path)
+* [Redirecting insecure requests](/docs/containers?topic=containers-comm-ingress-annotations#http-redirects-https)
 
-    * [HTTP redirects to HTTPS](/docs/containers?topic=containers-comm-ingress-annotations#http-redirects-https)
+* [Enabling and disabling HTTP Strict Transport Security](/docs/containers?topic=containers-comm-ingress-annotations#http-strict-transport-security)
 
-    * [HTTP Strict Transport Security](/docs/containers?topic=containers-comm-ingress-annotations#http-strict-transport-security)
+* [Setting a maximum nunber of keepalive requests](/docs/containers?topic=containers-comm-ingress-annotations#keepalive-requests)
 
-    * [Keepalive requests](/docs/containers?topic=containers-comm-ingress-annotations#keepalive-requests)
+* [Setting a maximum keepalive request timeout](/docs/containers?topic=containers-comm-ingress-annotations#keepalive-request-timeout)
 
-    * [Keepalive request timeout](/docs/containers?topic=containers-comm-ingress-annotations#keepalive-request-timeout)
+* [Setting a maximum number of large client header buffers](/docs/containers?topic=containers-comm-ingress-annotations#large-client-header-buffers)
 
-    * [Large client header buffers](/docs/containers?topic=containers-comm-ingress-annotations#large-client-header-buffers)
+* [Modifying how the ALB matches the request URI](/docs/containers?topic=containers-comm-ingress-annotations#location-modifier)
 
-    * [Location modifier](/docs/containers?topic=containers-comm-ingress-annotations#location-modifier)
+* [Adding custom location block configurations](/docs/containers?topic=containers-comm-ingress-annotations#location-snippets)
 
-    * [Location snippets](/docs/containers?topic=containers-comm-ingress-annotations#location-snippets)
+* [Configuring mutual authentication](/docs/containers?topic=containers-comm-ingress-annotations#mutual-authentication)
 
-    * [Mutual authentication](/docs/containers?topic=containers-comm-ingress-annotations#mutual-authentication)
+* [Configuring proxy buffer size](/docs/containers?topic=containers-comm-ingress-annotations#proxy-buffer-size)
 
-    * [Proxy buffer size](/docs/containers?topic=containers-comm-ingress-annotations#proxy-buffer-size)
+* [Configruing proxy buffer numbers](/docs/containers?topic=containers-comm-ingress-annotations#config-proxy-buffers)
 
-    * [Proxy buffers](/docs/containers?topic=containers-comm-ingress-annotations#config-proxy-buffers)
+* [Configuring busy proxy buffer size](/docs/containers?topic=containers-comm-ingress-annotations#proxy-busy-buffer-size)
 
-    * [Proxy busy buffers size](/docs/containers?topic=containers-comm-ingress-annotations#proxy-busy-buffer-size)
+* [Configuring when an ALB can pass a request](/docs/containers?topic=containers-comm-ingress-annotations#proxy-next-upstream)
 
-    * [Proxy next upstream](/docs/containers?topic=containers-comm-ingress-annotations#proxy-next-upstream)
+* [Rate limiting](/docs/containers?topic=containers-comm-ingress-annotations#rate-limiting)
 
-    * [Rate limiting](/docs/containers?topic=containers-comm-ingress-annotations#rate-limiting)
+* [Removing the response header](/docs/containers?topic=containers-comm-ingress-annotations#response-header-removal)
 
-    * [Response header removal](/docs/containers?topic=containers-comm-ingress-annotations#response-header-removal)
+* [Rewriting paths](/docs/containers?topic=containers-comm-ingress-annotations#alb-rewrite-paths)
 
-    * [Rewrite paths](/docs/containers?topic=containers-comm-ingress-annotations#alb-rewrite-paths)
+* [Customizing server block configurations](/docs/containers?topic=containers-comm-ingress-annotations#server-snippets-custom)
 
-    * [Server snippets](/docs/containers?topic=containers-comm-ingress-annotations#server-snippets-custom)
+* [Routing incoming network traffic](/docs/containers?topic=containers-comm-ingress-annotations#session-affinity-cookies)
 
-    * [Session affinity with cookies](/docs/containers?topic=containers-comm-ingress-annotations#session-affinity-cookies)
+* [Allowing SSL services support to encrypt traffic](/docs/containers?topic=containers-comm-ingress-annotations#ssl-services-support)
 
-    * [SSL services support](/docs/containers?topic=containers-comm-ingress-annotations#ssl-services-support)
+* [Accessing apps with non-standard TCP ports](/docs/containers?topic=containers-comm-ingress-annotations#tcp-ports-non-standard)
 
-    * [TCP ports](/docs/containers?topic=containers-comm-ingress-annotations#tcp-ports-non-standard)
+* [Setting a maximum number of upstream keepalive requests](/docs/containers?topic=containers-comm-ingress-annotations#upstream-keepalive-requests)
 
-    * [Upstream keepalive requests](/docs/containers?topic=containers-comm-ingress-annotations#upstream-keepalive-requests)
-
-    * [Upstream keepalive timeout](/docs/containers?topic=containers-comm-ingress-annotations#upstream-keepalive-timeout)
+* [Setting the maximum upstream keepalive timeout](/docs/containers?topic=containers-comm-ingress-annotations#upstream-keepalive-timeout)
 
 * [Customizing the ALB deployment](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy)
 
-    * [Create a ConfigMap to customize the Ingress deployment](/docs/containers?topic=containers-comm-ingress-annotations#create-ingress-configmap-custom)
+    * [Creating a ConfigMap to customize the Ingress deployment](/docs/containers?topic=containers-comm-ingress-annotations#create-ingress-configmap-custom)
 
 * [Customizing the Ingress class](/docs/containers?topic=containers-comm-ingress-annotations#-custom-ingress-class)
 
@@ -8153,6 +8155,8 @@ subcollection: containers
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
+
+    * [Change log for version 5.0, released 11 October 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0_is_block_relnote)
 
     * [Change log for version 5.0.4-beta_1566, released 14 July 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.4-beta_1556_is_block_relnote)
 

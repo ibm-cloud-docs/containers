@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-04"
+lastupdated: "2022-10-11"
 
 keywords: kubernetes, local persistent storage
 
@@ -20,9 +20,7 @@ subcollection: containers
 Review the following information to verify your Portworx installation and get started with adding highly available local persistent storage to your containerized apps.
 {: shortdesc}
 
-- [Verifying your Portworx installation](#px-verify-installation-px)
-- [Creating a Portworx volume](#px-add-storage)
-- [Mounting the volume to your app](#px-mount-pvc)
+
 
 ## Verifying your Portworx installation
 {: #px-verify-installation-px}

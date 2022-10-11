@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-07"
+lastupdated: "2022-10-11"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -56,7 +56,7 @@ Supported Kubernetes versions:
 Deprecated Kubernetes versions
 :   1.22
     - Release date: 29 September 2021
-    - Tentative unsupported date: 14 December 2022 `†`
+    - Unsupported date: 14 December 2022
     - [Version information and update actions](/docs/containers?topic=containers-cs_versions_122)
     - [Change log](/docs/containers?topic=containers-changelog_122)
 

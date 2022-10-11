@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-06"
+lastupdated: "2022-10-11"
 
 keywords: kubernetes, containers, benchmarks, 1.25, CIS benchmarks
 
@@ -70,10 +70,10 @@ Review the Master node security configuration results of the version 1.5 CIS Kub
 | 1.2.10 | Ensure that the admission control plug-in `EventRateLimit` is set. | Not Scored | 1 | [Fail](#cis-benchmark-remediations-125) | {{site.data.keyword.IBM_notm}} |
 | 1.2.11 | Ensure that the admission control plug-in `AlwaysAdmit` is not set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.2.12 | Ensure that the admission control plug-in `AlwaysPullImages` is set. | Not Scored | 1 | [Fail](#cis-benchmark-remediations-125) | {{site.data.keyword.IBM_notm}} |
-| 1.2.13 | Ensure that the admission control plug-in `SecurityContextDeny` is set if `PodSecurityPolicy` is not used. | Not Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
+| 1.2.13 | Ensure that the admission control plug-in `SecurityContextDeny` is set if `PodSecurityPolicy` is not used. | Not Scored | 1 | [Pass](#cis-benchmark-remediations-125) | {{site.data.keyword.IBM_notm}} |
 | 1.2.14 | Ensure that the admission control plug-in `ServiceAccount` is set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.2.15 | Ensure that the admission control plug-in `NamespaceLifecycle` is set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
-| 1.2.16 | Ensure that the admission control plug-in `PodSecurityPolicy` is set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
+| 1.2.16 | Ensure that the admission control plug-in `PodSecurityPolicy` is set. | Scored | 1 | [Pass](#cis-benchmark-remediations-125) | {{site.data.keyword.IBM_notm}} |
 | 1.2.17 | Ensure that the admission control plug-in `NodeRestriction` is set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.2.18 | Ensure that the `--insecure-bind-address` option is not set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.2.19 | Ensure that the `--insecure-port` option is set to `0`. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
@@ -284,6 +284,8 @@ Review information from IBM on the CIS Benchmark results.
 | 1.2.1 | {{site.data.keyword.containerlong_notm}} utilizes RBAC for cluster protection, but allows anonymous discovery, which is considered reasonable per [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external}. |
 | 1.2.10 | {{site.data.keyword.containerlong_notm}} does not enable the [*EventRateLimit*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit){: external} admission controller since it is a Kubernetes alpha feature. |
 | 1.2.12 | {{site.data.keyword.containerlong_notm}} does not enable the [*AlwaysPullImages*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages){: external} admission controller since it overrides a container's *imagePullPolicy* and may impact performance. |
+| 1.2.13 | {{site.data.keyword.containerlong_notm}} supports [Kubernetes pod security admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/){: external}, which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
+| 1.2.16 | {{site.data.keyword.containerlong_notm}} supports [Kubernetes pod security admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/){: external}, which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
 | 1.2.22 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 1.2.23 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 1.2.24 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
