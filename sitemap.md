@@ -5009,6 +5009,8 @@ subcollection: containers
 
 [Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} add-on](/docs/containers?topic=containers-storage-file-vpc-install#storage-file-vpc-install)
 
+* [Prerequisites](/docs/containers?topic=containers-storage-file-vpc-install#prereqs)
+
 [Adding {{site.data.keyword.filestorage_vpc_short}} to apps](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps)
 
 * [Deploying an app that uses {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file)
