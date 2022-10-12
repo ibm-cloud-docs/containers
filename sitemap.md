@@ -5566,11 +5566,11 @@ subcollection: containers
 
     * [`ibmcloud ks ingress status-report get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_get)
 
-    * [`ibmcloud ks ingress status-report ignore add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_add)
+    * [`ibmcloud ks ingress status-report ignore-errors add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_add)
 
-    * [`ibmcloud ks ingress status-report ignore ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_ls)
+    * [`ibmcloud ks ingress status-report ignore-errors ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_ls)
 
-    * [`ibmcloud ks ingress status-report ignore rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_rm)
+    * [`ibmcloud ks ingress status-report ignore-errors rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_rm)
 
 * [`logging` commands](/docs/containers?topic=containers-kubernetes-service-cli#logging_commands)
 

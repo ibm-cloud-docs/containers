@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-04"
+lastupdated: "2022-10-12"
 
 keywords: kubernetes
 
@@ -5158,13 +5158,13 @@ ibmcloud ks ingress status-report get --cluster mycluster
 ```
 {: pre}
 
-### `ibmcloud ks ingress status-report ignore add`
+### `ibmcloud ks ingress status-report ignore-errors add`
 {: #cs_ingress_status_report_add}
 
 Add warnings to be ignored by Ingress status for a cluster.
 
 ```sh
-ibmcloud ks ingress status-report ignore add --cluster CLUSTER --code CODE [--code CODE ...] [--output OUTPUT] [-q]
+ibmcloud ks ingress status-report ignore-errors add --cluster CLUSTER --code CODE [--code CODE ...] [--output OUTPUT] [-q]
 ```
 {: pre}
 
@@ -5191,17 +5191,17 @@ ibmcloud ks ingress status-report ignore add --cluster CLUSTER --code CODE [--co
 
 **Example**:
 ```sh
-ibmcloud ks ingress status-report ignore add --cluster mycluster
+ibmcloud ks ingress status-report ignore-errors add --cluster mycluster
 ```
 {: pre}
 
-### `ibmcloud ks ingress status-report ignore ls`
+### `ibmcloud ks ingress status-report ignore-errors ls`
 {: #cs_ingress_status_report_ignore_ls}
 
 List warnings that are currently ignored by Ingress status for a cluster.
 
 ```sh
-ibmcloud ks ingress status-report ignore ls --cluster CLUSTER [--output OUTPUT] [-q]
+ibmcloud ks ingress status-report ignore-errors ls --cluster CLUSTER [--output OUTPUT] [-q]
 ```
 {: pre}
 
@@ -5224,17 +5224,17 @@ ibmcloud ks ingress status-report ignore ls --cluster CLUSTER [--output OUTPUT] 
 
 **Example**:
 ```sh
-ibmcloud ks ingress status-report ignore ls --cluster mycluster
+ibmcloud ks ingress status-report ignore-errors ls --cluster mycluster
 ```
 {: pre}
 
-### `ibmcloud ks ingress status-report ignore rm`
+### `ibmcloud ks ingress status-report ignore-errors rm`
 {: #cs_ingress_status_report_ignore_rm}
 
 Remove warnings that are currently ignored by Ingress status for a cluster. Once removed, these warnings are no longer ignored. 
 
 ```sh
-ibmcloud ks ingress status-report ignore rm --cluster CLUSTER --code CODE [--code CODE ...] [--output OUTPUT] [-q]
+ibmcloud ks ingress status-report ignore-errors rm --cluster CLUSTER --code CODE [--code CODE ...] [--output OUTPUT] [-q]
 ```
 {: pre}
 
@@ -5261,7 +5261,7 @@ ibmcloud ks ingress status-report ignore rm --cluster CLUSTER --code CODE [--cod
 
 **Example**:
 ```sh
-ibmcloud ks ingress status-report ignore rm --cluster mycluster
+ibmcloud ks ingress status-report ignore-errors rm --cluster mycluster
 ```
 {: pre}
 
