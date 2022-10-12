@@ -14,7 +14,7 @@ content-type: troubleshoot
 
 
 # Why am I seeing egress connection failures from pods?
-{: ts-network-egress-124}
+{: #ts-network-egress-124}
 {: support}
 
 

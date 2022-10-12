@@ -43,10 +43,7 @@ toc:
         - link: 
             label: Tutorials library for Kubernetes Service
             href: https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20
-        - topicgroup: 
-            label: Creating clusters
-            topics:
-            - cs_tutorial_vpc.md
+        - cs_tutorial_vpc.md
         - topicgroup: 
             label: Migrating environments to clusters
             topics:

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-29"
+lastupdated: "2022-10-12"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -219,7 +219,7 @@ TLS secret configuration depends on the type of Ingress controller image that yo
 You can modify default ALB settings and add annotations to your Ingress resources.
 {: shortdesc}
 
-* To manage how requests are routed to your app, specify [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`) in your Ingress resources.
+* To manage how requests are routed to your app, specify [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations) (`nginx.ingress.kubernetes.io/<annotation>`) in your Ingress resources.
 * To modify default Ingress settings, such as to enable source IP preservation or configure SSL protocols, [change the `ibm-k8s-controller-config` or `ibm-ingress-deploy-config` ConfigMap resources](/docs/containers?topic=containers-comm-ingress-annotations) for your Ingress ALBs.
 
 
