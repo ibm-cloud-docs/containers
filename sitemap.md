@@ -2662,8 +2662,8 @@ subcollection: containers
 [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
 
 
-## Creating clusters
-{: #sitemap_creating_clusters}
+## Creating a cluster in your Virtual Private Cloud (VPC)
+{: #sitemap_creating_a_cluster_in_your_virtual_private_cloud_vpc}
 
 
 [Creating a cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial)
@@ -3013,7 +3013,7 @@ subcollection: containers
 
 
 ## Creating clusters
-{: #sitemap_creating_clusters1}
+{: #sitemap_creating_clusters}
 
 
 [Preparing to create clusters](/docs/containers?topic=containers-clusters#clusters)
@@ -8969,6 +8969,8 @@ subcollection: containers
 [Why does my worker node show a `NetworkUnavailable` error?](/docs/containers?topic=containers-ts-network-calico-node#ts-network-calico-node)
 
 [Why am I running out of SNAT ports for egress connections from pods in my cluster?](/docs/containers?topic=containers-ts-network-snat-125#ts-network-snat-125)
+
+[Why am I seeing egress connection failures from pods?](/docs/containers?topic=containers-ts-network-egress-124#ts-network-egress-124)
 
 [Why can't I install a new strongSwan Helm chart release?](/docs/containers?topic=containers-cs_strongswan_release#cs_strongswan_release)
 

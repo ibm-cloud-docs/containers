@@ -62,6 +62,7 @@ Updates in this version
 :   Resolves the following CVEs:
     - [CVE-2022-35252](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35252){: external}
     - [usn-5587-1](https://ubuntu.com/security/notices/USN-5587-1){: external}
+
 :   For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
 
 ### Change log for 1.15.0, released 15 September 2022
