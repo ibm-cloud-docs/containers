@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-12"
+lastupdated: "2022-10-13"
 
 keywords: containers
 subcollection: containers
@@ -5076,6 +5076,8 @@ subcollection: containers
 * [Installing Portworx in your cluster](/docs/containers?topic=containers-portworx#install_portworx)
 
     * [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx)
+
+* [Updating Portworx to a specific version](/docs/containers?topic=containers-portworx#px-update-specific)
 
 * [Creating a Portworx volume](/docs/containers?topic=containers-portworx#add_portworx_storage)
 
