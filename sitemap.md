@@ -4450,6 +4450,8 @@ subcollection: containers
 
 * [Setting up an NLB 2.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)
 
+* [Setting up an NLB using port range](/docs/containers?topic=containers-loadbalancer-v2#nlb-setup-portrange)
+
 * [Setting up an NLB 2.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)
 
 * [Scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling)
