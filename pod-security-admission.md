@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-13"
+lastupdated: "2022-10-14"
 
 keywords: kubernetes, deploy, pod security admission, pod security, security profiles
 
@@ -154,6 +154,7 @@ Full functionality for v1.25 is not yet available: Administrators cannot configu
 | Optionally disable Pod Security Policies in v1.24 to support migration process. | 4Q 2022 | 
 | Provide migration guide. | 4Q 2022 |
 | Customize the cluster wide Pod Security Admission plugin configuration. | 1Q 2023 |
+{: caption="Table 1. Availability for 1.25 functions" caption-side="bottom"}
 
 
 

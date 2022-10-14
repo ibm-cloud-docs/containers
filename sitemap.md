@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-13"
+lastupdated: "2022-10-14"
 
 keywords: containers
 subcollection: containers
@@ -3605,9 +3605,9 @@ subcollection: containers
 
     * [Verifying the `privileged-psp-user` cluster role binding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
 
-    * [Verifying the `restricted-psp-user` ClusterRoleBinding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#verifying-the-restricted-psp-user-clusterrolebinding-is-using-default-configuration)
+    * [Verifying the `restricted-psp-user` ClusterRoleBinding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-crb-verify)
 
-    * [References](/docs/containers?topic=containers-pod-security-admission-migration#references)
+    * [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
 
 
 ## Securing the cluster network
