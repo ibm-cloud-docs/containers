@@ -3603,9 +3603,9 @@ subcollection: containers
 
 * [Checking for pods not using `ibm-privileged-psp`](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-pod-check)
 
-    * [Verifying the `privileged-psp-user` cluster role binding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
+* [Verifying the `privileged-psp-user` cluster role binding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
 
-    * [Verifying the `restricted-psp-user` ClusterRoleBinding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-crb-verify)
+* [Verifying the `restricted-psp-user` ClusterRoleBinding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-crb-verify)
 
     * [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
 
