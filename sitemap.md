@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-12"
+lastupdated: "2022-10-13"
 
 keywords: containers
 subcollection: containers
@@ -3585,6 +3585,30 @@ subcollection: containers
 
     * [Viewing {{site.data.keyword.containerlong_notm}} created priority level configurations](/docs/containers?topic=containers-kubeapi-priority#kube-api-prioritylevelconfig)
 
+[Pod security admission](/docs/containers?topic=containers-pod-security-admission#pod-security-admission)
+
+* [Understanding security profiles](/docs/containers?topic=containers-pod-security-admission#pod_security_profiles)
+
+* [What if Pod Security Admission isn't the right choice for me?](/docs/containers?topic=containers-pod-security-admission#what-if-psa)
+
+* [Configuring Pod Security admission namespace labels](/docs/containers?topic=containers-pod-security-admission#psa-namespace-labels)
+
+* [Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config)
+
+* [Pod Security Admission roadmap](/docs/containers?topic=containers-pod-security-admission#psa-roadmap)
+
+[Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration#pod-security-admission-migration)
+
+* [Checking for non-IBM PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-check-psp)
+
+* [Checking for pods not using `ibm-privileged-psp`](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-pod-check)
+
+    * [Verifying the `privileged-psp-user` cluster role binding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
+
+    * [Verifying the `restricted-psp-user` ClusterRoleBinding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#verifying-the-restricted-psp-user-clusterrolebinding-is-using-default-configuration)
+
+    * [References](/docs/containers?topic=containers-pod-security-admission-migration#references)
+
 
 ## Securing the cluster network
 {: #sitemap_securing_the_cluster_network}
@@ -5076,6 +5100,8 @@ subcollection: containers
 * [Installing Portworx in your cluster](/docs/containers?topic=containers-portworx#install_portworx)
 
     * [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx)
+
+* [Updating Portworx to a specific version](/docs/containers?topic=containers-portworx#px-update-specific)
 
 * [Creating a Portworx volume](/docs/containers?topic=containers-portworx#add_portworx_storage)
 
@@ -8798,6 +8824,28 @@ subcollection: containers
 * [Unable to create or delete worker nodes due to paid account or one time password error](/docs/containers?topic=containers-cluster_infra_errors#cs_totp)
 
 [VPC: Why is no VPC available when I create a cluster in the console?](/docs/containers?topic=containers-ts_no_vpc#ts_no_vpc)
+
+[Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-ts-app-pod-security#ts-app-pod-security)
+
+* [Could not get `PodSecurityPolicies`](/docs/containers?topic=containers-ts-app-pod-security#could-not-get-psps)
+
+* [Found non-IBM `PodSecurityPolicy`](/docs/containers?topic=containers-ts-app-pod-security#non-ibm-psp)
+
+* [Could not get ClusterRoleBinding privileged-psp-user](/docs/containers?topic=containers-ts-app-pod-security#psp-user-not-get)
+
+* [ClusterRoleBinding `privileged-psp-user` does not have expected roleRef](/docs/containers?topic=containers-ts-app-pod-security#unexpected-role-ref)
+
+* [ClusterRoleBinding privileged-psp-user does not have expected subjects](/docs/containers?topic=containers-ts-app-pod-security#psp-privilieged-unexpected-subjects)
+
+* [Could not get ClusterRoleBinding `restricted-psp-user`](/docs/containers?topic=containers-ts-app-pod-security#psp-restrictred-user-missing)
+
+* [ClusterRoleBinding `restricted-psp-user` does not have expected roleRef](/docs/containers?topic=containers-ts-app-pod-security#psp-restricted-role-ref)
+
+* [ClusterRoleBinding restricted-psp-user does not have expected subjects](/docs/containers?topic=containers-ts-app-pod-security#psp-restricted-subjects)
+
+* [Creating or updating the `privileged-psp-user` ClusterRoleBinding](/docs/containers?topic=containers-ts-app-pod-security#create-privileged-psp-user)
+
+* [Creating the `restricted-psp-user` cluster role binding](/docs/containers?topic=containers-ts-app-pod-security#create-restricted-psp-user)
 
 [Why can't the cluster pull images from {{site.data.keyword.registrylong_notm}} during creation?](/docs/containers?topic=containers-ts_image_pull_create#ts_image_pull_create)
 

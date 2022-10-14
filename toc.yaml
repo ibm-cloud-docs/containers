@@ -139,6 +139,8 @@ toc:
             - cs_psp.md
             - pod-priority.md
             - kubeapi-priority.md
+            - pod-security-admission.md
+            - pod-security-admission-migration.md
         - topicgroup:
             label: Securing the cluster network
             topics:
