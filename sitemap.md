@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-14"
+lastupdated: "2022-10-17"
 
 keywords: containers
 subcollection: containers
@@ -3409,11 +3409,15 @@ subcollection: containers
 
     * [Creating network zones from the CLI](/docs/containers?topic=containers-cbr#create-network-zone-cli)
 
+    * [Creating network zones from the console](/docs/containers?topic=containers-cbr#create-network-zone-console)
+
 * [Creating rules](/docs/containers?topic=containers-cbr#create-cbr-rule-containers)
 
     * [Creating rules by using the API](/docs/containers?topic=containers-cbr#create-cbr-rule-api)
 
     * [Creating rules from the CLI](/docs/containers?topic=containers-cbr#create-cbr-rule-cli)
+
+    * [Creating rules from the console](/docs/containers?topic=containers-cbr#create-cbr-rule-console)
 
 * [Limitations](/docs/containers?topic=containers-cbr#cbr-limitations)
 
