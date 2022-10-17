@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-13"
+lastupdated: "2022-10-14"
 
 keywords: containers
 subcollection: containers
@@ -3603,11 +3603,11 @@ subcollection: containers
 
 * [Checking for pods not using `ibm-privileged-psp`](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-pod-check)
 
-    * [Verifying the `privileged-psp-user` cluster role binding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
+* [Verifying the `privileged-psp-user` cluster role binding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
 
-    * [Verifying the `restricted-psp-user` ClusterRoleBinding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#verifying-the-restricted-psp-user-clusterrolebinding-is-using-default-configuration)
+* [Verifying the `restricted-psp-user` ClusterRoleBinding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-crb-verify)
 
-    * [References](/docs/containers?topic=containers-pod-security-admission-migration#references)
+    * [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
 
 
 ## Securing the cluster network
@@ -4449,6 +4449,8 @@ subcollection: containers
 * [Prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision)
 
 * [Setting up an NLB 2.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)
+
+* [Setting up an NLB using port range](/docs/containers?topic=containers-loadbalancer-v2#nlb-setup-portrange)
 
 * [Setting up an NLB 2.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)
 

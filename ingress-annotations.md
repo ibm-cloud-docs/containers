@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-11"
+lastupdated: "2022-10-14"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -49,7 +49,7 @@ Configure Ingress with [{{site.data.keyword.appid_full_notm}}](https://cloud.ibm
 ## Setting the maximum client request body size
 {: #client-request-bodysize}
 
-To set the maximum size of the body that the client can send as part of a request, use the following Kuberenetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-max-body-size){: external}. 
+To set the maximum size of the body that the client can send as part of a request, use the following Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-max-body-size){: external}. 
 {: shortdesc}
 
 ```sh

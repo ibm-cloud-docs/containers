@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-13"
+lastupdated: "2022-10-14"
 
 keywords: kubernetes, deploy, pod security admission, pod security, security profiles
 
@@ -79,8 +79,6 @@ By default, {{site.data.keyword.containerlong_notm}} adds the `privileged` Pod S
 - `kube-system` 
 - `ibm-system`
 - `ibm-operators`
-- `calico-system`
-- `tigera-operator`
 
 
 Do not remove or change the labels for these namespaces.
@@ -150,10 +148,11 @@ Full functionality for v1.25 is not yet available: Administrators cannot configu
 | Provide default Pod Security Admission plugin configuration that enforces the `privileged` profile.  | Available |
 | Support upgrade from v1.24 to v1.25 for clusters with only the default IBM PSPs and associated RBAC. | Available |
 | Cancel upgrades for clusters not using the default IBM PSPs and associated RBAC. | Available |
-| Optionally enable Pod Security Admission in v1.24 to support migration | process. | 4Q 2022 |
+| Optionally enable Pod Security Admission in v1.24 to support migration process. | 4Q 2022 |
 | Optionally disable Pod Security Policies in v1.24 to support migration process. | 4Q 2022 | 
 | Provide migration guide. | 4Q 2022 |
 | Customize the cluster wide Pod Security Admission plugin configuration. | 1Q 2023 |
+{: caption="Table 1. Availability for 1.25 functions" caption-side="bottom"}
 
 
 
