@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-14"
+lastupdated: "2022-10-17"
 
 keywords: containers
 subcollection: containers
@@ -3409,11 +3409,15 @@ subcollection: containers
 
     * [Creating network zones from the CLI](/docs/containers?topic=containers-cbr#create-network-zone-cli)
 
+    * [Creating network zones from the console](/docs/containers?topic=containers-cbr#create-network-zone-console)
+
 * [Creating rules](/docs/containers?topic=containers-cbr#create-cbr-rule-containers)
 
     * [Creating rules by using the API](/docs/containers?topic=containers-cbr#create-cbr-rule-api)
 
     * [Creating rules from the CLI](/docs/containers?topic=containers-cbr#create-cbr-rule-cli)
+
+    * [Creating rules from the console](/docs/containers?topic=containers-cbr#create-cbr-rule-console)
 
 * [Limitations](/docs/containers?topic=containers-cbr#cbr-limitations)
 
@@ -5596,11 +5600,11 @@ subcollection: containers
 
     * [`ibmcloud ks ingress status-report get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_get)
 
-    * [`ibmcloud ks ingress status-report ignore-errors add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_add)
+    * [`ibmcloud ks ingress status-report ignored-errors add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_add)
 
-    * [`ibmcloud ks ingress status-report ignore-errors ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_ls)
+    * [`ibmcloud ks ingress status-report ignored-errors ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_ls)
 
-    * [`ibmcloud ks ingress status-report ignore-errors rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_rm)
+    * [`ibmcloud ks ingress status-report ignored-errors rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_rm)
 
 * [`logging` commands](/docs/containers?topic=containers-kubernetes-service-cli#logging_commands)
 
@@ -7710,13 +7714,15 @@ subcollection: containers
 
 [Supported cluster add-on versions](/docs/containers?topic=containers-supported-cluster-addon-versions#supported-cluster-addon-versions)
 
-[Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
+[Ingress ALB and Fluentd version change log](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
-    * [Version 1.2.1_2646_iks (default), released 3 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2646_iks)
+    * [1.2.1_2714_iks (default), released 13 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2714_iks)
+
+    * [Version 1.2.1_2646_iks, released 3 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2646_iks)
 
     * [Version 1.2.1_2558_iks, released 21 September 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2558_iks)
 

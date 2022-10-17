@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-30"
+lastupdated: "2022-10-17"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -13,7 +13,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Ingress ALB and Fluentd version changelog
+# Ingress ALB and Fluentd version change log
 {: #cluster-add-ons-changelog}
 
 Your {{site.data.keyword.containerlong}} cluster comes with components, such as the Fluentd and Ingress ALB components, that are updated automatically by IBM. You can also disable automatic updates for some components and manually update them separately from the master and worker nodes. Refer to the tables in the following sections for a summary of changes for each version.
@@ -42,7 +42,12 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ## Version 1.2.1
 {: #1_2_1}
 
-### Version 1.2.1_2646_iks (default), released 3 October 2022
+### 1.2.1_2714_iks (default), released 13 October 2022
+{: #1.2.1_2714_iks}
+
+Updated the NGINX base image.
+
+### Version 1.2.1_2646_iks, released 3 October 2022
 {: #1.2.1_2646_iks}
 
 - Managed configuration changes. For more information, see [Ingress ConfigMap change log](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log).
