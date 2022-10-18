@@ -178,6 +178,7 @@ toc:
             - cs_health_log.md
             - cs_health_monitor.md
             - health-audit.md
+            - vpc-flow-logs.md
         - topicgroup:
             label: Setting up an image build pipeline
             topics:
@@ -467,7 +468,6 @@ toc:
                   topics:
                     - ts-health-iks-kube-db-graphs.md
                     - ts-health-loglines.md
-                    - vpc-flow-logs.md
               - topicgroup:
                   label: Apps and services
                   topics:

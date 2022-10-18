@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-11"
+lastupdated: "2022-10-18"
 
 keywords: kubernetes, containers, benchmarks, 1.25, CIS benchmarks
 
@@ -284,8 +284,8 @@ Review information from IBM on the CIS Benchmark results.
 | 1.2.1 | {{site.data.keyword.containerlong_notm}} utilizes RBAC for cluster protection, but allows anonymous discovery, which is considered reasonable per [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external}. |
 | 1.2.10 | {{site.data.keyword.containerlong_notm}} does not enable the [*EventRateLimit*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit){: external} admission controller since it is a Kubernetes alpha feature. |
 | 1.2.12 | {{site.data.keyword.containerlong_notm}} does not enable the [*AlwaysPullImages*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages){: external} admission controller since it overrides a container's *imagePullPolicy* and may impact performance. |
-| 1.2.13 | {{site.data.keyword.containerlong_notm}} supports [Kubernetes pod security admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/){: external}, which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
-| 1.2.16 | {{site.data.keyword.containerlong_notm}} supports [Kubernetes pod security admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/){: external}, which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
+| 1.2.13 | {{site.data.keyword.containerlong_notm}} can optionally configure [Pod security admission](/docs/containers?topic=containers-pod-security-admission), which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
+| 1.2.16 | {{site.data.keyword.containerlong_notm}} can optionally configure [Pod security admission](/docs/containers?topic=containers-pod-security-admission), which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
 | 1.2.22 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 1.2.23 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 1.2.24 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
@@ -303,7 +303,7 @@ Review information from IBM on the CIS Benchmark results.
 | 5.1.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that could have their Kubernetes resource access further restricted. |
 | 5.1.5 | {{site.data.keyword.containerlong_notm}} does not set [*automountServiceAccountToken: false*](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server){: external} for each default service account. |
 | 5.1.6 | {{site.data.keyword.containerlong_notm}} deploys some system components that could set [*automountServiceAccountToken: false*](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server){: external}. |
-| 5.2.1 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.1 | {{site.data.keyword.containerlong_notm}} can optionally configure [Pod security admission](/docs/containers?topic=containers-pod-security-admission), which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
 | 5.2.2 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
 | 5.2.3 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
 | 5.2.4 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
@@ -311,7 +311,7 @@ Review information from IBM on the CIS Benchmark results.
 | 5.2.6 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
 | 5.2.7 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
 | 5.2.8 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.9 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.9 | {{site.data.keyword.containerlong_notm}} can optionally configure [Pod security admission](/docs/containers?topic=containers-pod-security-admission), which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
 | 5.3.2 | {{site.data.keyword.containerlong_notm}} has a set of [default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy) and [additional network policies can optionally be added](/docs/containers?topic=containers-network_policies#adding_network_policies). |
 | 5.4.2 | {{site.data.keyword.containerlong_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
 | 5.5.1 | {{site.data.keyword.containerlong_notm}} can optionally [enable image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec). |

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-17"
+lastupdated: "2022-10-18"
 
 keywords: containers
 subcollection: containers
@@ -4028,6 +4028,12 @@ subcollection: containers
     * [Taking a snapshot of API server logs](/docs/containers?topic=containers-health-audit#audit-api-server-snapshot)
 
 * [Service audit logs](/docs/containers?topic=containers-health-audit#audit-service)
+
+[Enabling Flow Logs for VPC cluster components](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log)
+
+* [Configuring a flow log collector](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log_create)
+
+* [Viewing worker node flow logs](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log_view)
 
 
 ## Setting up an image build pipeline
@@ -9058,12 +9064,6 @@ subcollection: containers
 [Why doesn't the Kubernetes dashboard display utilization graphs?](/docs/containers?topic=containers-cs_dashboard_graphs#cs_dashboard_graphs)
 
 [Why are my log lines so long?](/docs/containers?topic=containers-long_lines#long_lines)
-
-[Enabling Flow Logs for VPC cluster components](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log)
-
-* [Configuring a flow log collector](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log_create)
-
-* [Viewing worker node flow logs](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log_view)
 
 
 ### Apps and services
