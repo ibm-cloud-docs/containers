@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-12"
+lastupdated: "2022-10-18"
 
 keywords: kubernetes, istio, add-on
 
@@ -62,8 +62,7 @@ Updates in this version
 :   Resolves the following CVEs:
     - [CVE-2022-35252](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35252){: external}
     - [usn-5587-1](https://ubuntu.com/security/notices/USN-5587-1){: external}
-
-:   For more information, see the [Istio security bulletin 2021-008](https://istio.io/latest/news/security/istio-security-2021-008/){: external}.
+:   Fixes the Istio operator memory leak issue.
 
 ### Change log for 1.15.0, released 15 September 2022
 {: #1150}
@@ -107,6 +106,7 @@ Updates in this version
     - [usn-5550-1](https://ubuntu.com/security/notices/USN-5550-1){: external}
     - [CVE-2021-4209](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-4209){: external}
     - [CVE-2022-2509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2509){: external}
+:   Adds a 1G memory limit and a 100M memory request to the `add-on-istio-operator` deployment. This addition resolves an error in which a reconcile loop increased memory usage over time. As a result of this change, your Istio operator pod might restart frequently. However, the frequent operator pod restarts do not affect Istio on the cluster and your Kubernetes deployment still matches what was specified in the IOPs. 
 
 ### Changelog for 1.14.3, released 16 August 2022
 {: #1143}
