@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-19"
+lastupdated: "2022-10-20"
 
 keywords: containers
 subcollection: containers
@@ -4404,6 +4404,8 @@ subcollection: containers
 
     * [Setting up a public VPC NLB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_pub)
 
+    * [Setting up an NLB using port range](/docs/containers?topic=containers-vpc-lbaas#nlb-setup-portrange)
+
     * [Setting up a private VPC NLB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_priv)
 
     * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_nlb_dns)
@@ -4459,8 +4461,6 @@ subcollection: containers
 * [Prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision)
 
 * [Setting up an NLB 2.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)
-
-* [Setting up an NLB using port range](/docs/containers?topic=containers-loadbalancer-v2#nlb-setup-portrange)
 
 * [Setting up an NLB 2.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)
 
