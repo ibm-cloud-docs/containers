@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-09-30"
+lastupdated: "2022-10-19"
 
 keywords: kubernetes, mzr, szr, multizone, multi az
 
@@ -88,7 +88,7 @@ The following image is used as an example to explain how {{site.data.keyword.con
 **Classic single zone**: If you create a classic cluster in a single zone region, you can create multiple worker nodes but you can't spread them across data centers (zones). The highly available master includes three replicas on separate hosts, but is not spread across zones.
 {: shortdesc}
 
-Hong Kong (`HKG02`) and Seoul (`SEO01`) are deprecated and become unsupported later this year. To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your Hong Kong (`HKG02`) and Seoul (`SEO01`) clusters by 28 September 2022. Clusters remaining in these data centers after 28 September 2022 will be removed. Cluster creation in these locations will be stopped on 29 April 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/get-support?topic=get-support-dc-closure).
+Hong Kong (`HKG02`) is deprecated and become unsupported later this year. To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your Hong Kong (`HKG02`) clusters by 28 September 2022. Clusters remaining after 28 September 2022 will be removed. Cluster creation in this location was stopped on 29 April 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/get-support?topic=get-support-dc-closure).
 {: important}
 
 
@@ -101,7 +101,6 @@ Mexico City (MEX01) is deprecated and becomes unsupported later this year. To pr
 | Asia Pacific | India | Chennai | che01 | AP North (`ap-north`, `jp-tok`) |
 | Asia Pacific | Japan | Osaka | osa21, osa22, osa23 | `jp-osa` |
 | Asia Pacific | Japan | Tokyo | tok02, tok04, tok05 | AP North (`ap-north`, `jp-tok`) |
-| Asia Pacific | Korea | Seoul | seo01 | AP North (`ap-north`, `jp-tok`) |
 | Asia Pacific | Singapore | Singapore | sng01 | AP North (`ap-north`, `jp-tok`) |
 | Europe | France | Paris | par01 | EU Central (`eu-central`, `eu-de`) |
 | Europe | Germany | Frankfurt | fra02, fra04, fra05 | EU Central (`eu-central`, `eu-de`) |
@@ -171,6 +170,9 @@ In a multizone cluster, your cluster's resources are spread across multiple zone
     *   [Increasing the availability of your app](/docs/containers?topic=containers-app).
 
 3. When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-kubernetes-service-cli), basic information about the cluster (such as name, ID, user, the command) is routed through the global endpoint.
+
+
+
 
 
 ### Free clusters
@@ -297,7 +299,6 @@ To switch regions, use the `ibmcloud ks init` [command](/docs/containers?topic=c
 | US East (standard clusters only) | Washington DC | mon01, tor01, **wdc04, wdc06, wdc07** |
 | US South | Dallas | **dal10, dal12, dal13**, mex01, sjc03, sjc04, sao01 |
 {: caption="Corresponding {{site.data.keyword.containershort}} and {{site.data.keyword.cloud_notm}} regions, with zones. Multizone-capable zones are in bold." caption-side="top"}
-
 
 
 

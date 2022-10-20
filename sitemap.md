@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-18"
+lastupdated: "2022-10-20"
 
 keywords: containers
 subcollection: containers
@@ -4404,6 +4404,8 @@ subcollection: containers
 
     * [Setting up a public VPC NLB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_pub)
 
+    * [Setting up an NLB using port range](/docs/containers?topic=containers-vpc-lbaas#nlb-setup-portrange)
+
     * [Setting up a private VPC NLB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_priv)
 
     * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_nlb_dns)
@@ -4459,8 +4461,6 @@ subcollection: containers
 * [Prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision)
 
 * [Setting up an NLB 2.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)
-
-* [Setting up an NLB using port range](/docs/containers?topic=containers-loadbalancer-v2#nlb-setup-portrange)
 
 * [Setting up an NLB 2.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)
 
@@ -4663,7 +4663,7 @@ subcollection: containers
 
 [Setting up {{site.data.keyword.secrets-manager_short}} in your {{site.data.keyword.containershort}} cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr)
 
-* [About Secrets Manager](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about)
+* [About {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about)
 
     * [What functionality can I gain with {{site.data.keyword.secrets-manager_short}}?](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about_functionality)
 
@@ -4671,7 +4671,7 @@ subcollection: containers
 
     * [What is the difference between the `ibmcloud ks ingress instance` CLI commands and the `ibmcloud ks ingress secret` CLI commands?](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about_cli)
 
-* [Setting up your Secrets Manager instance](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_setup)
+* [Setting up your {{site.data.keyword.secrets-manager_short}} instance](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_setup)
 
     * [Enable service-to-service communication](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_setup_s2s)
 
@@ -4687,7 +4687,7 @@ subcollection: containers
 
 [Migrating from {{site.data.keyword.cloudcerts_long_notm}} to {{site.data.keyword.secrets-manager_full_notm}}](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr-migration)
 
-* [Setting up your Secrets Manager instance](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup)
+* [Setting up your {{site.data.keyword.secrets-manager_short}} instance](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup)
 
     * [Step 1: Enable service-to-service communication](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_s2s)
 
