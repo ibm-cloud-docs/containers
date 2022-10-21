@@ -207,6 +207,10 @@ subcollection: containers
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
 
+    * [21 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2122)
+
+        * CLI change log update
+
     * [12 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct1222)
 
         * Istio add-on
@@ -5753,6 +5757,8 @@ subcollection: containers
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.459](/docs/containers?topic=containers-cs_cli_changelog#cli-10459)
 
 * [Version 1.0.454](/docs/containers?topic=containers-cs_cli_changelog#cli-10454)
 
