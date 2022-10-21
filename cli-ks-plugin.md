@@ -4723,6 +4723,9 @@ Create an Ingress secret in a cluster for a certificate that is stored in {{site
 The previous alias for this command, `ibmcloud ks ingress alb cert deploy`, is deprecated. In CLI version 1.0.157 and later, the `ibmcloud ks ingress alb cert` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress secret` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
 {: note}
 
+To use the `ibmcloud ks ingress secret create` command, you must have a default [{{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr) instance registered to your cluster. If you do not have a {{site.data.keyword.secrets-manager_short}} instance and your secrets are instead written directly to your cluster, your secrets do not have the required CRN value and you must manage them with `kubectl` commands. 
+{: important}
+
 ```sh
 ibmcloud ks ingress secret create --cert-crn CERTIFICATE_CRN --cluster CLUSTER --name SECRET_NAME [--namespace NAMESPACE] [--persist] [--type] [-q]
 ```
@@ -5043,7 +5046,7 @@ ibmcloud ks ingress secret update --cluster CLUSTER --name SECRET_NAME --namespa
 :    Required: The namespace that the secret is deployed to. To see the secret namespace, run `ibmcloud ks ingress secret get --cluster cluster_name_or_ID <--name secret_name> --namespace <namespace>`.
 
 `--cert-crn CERTIFICATE_CRN`
-:    Optional: The certificate CRN. To see the secret CRN, run `ibmcloud ks ingress secret get --cluster <cluster_name_or_ID> --name secret_name> --namespace <namespace>`.
+:    Optional: The certificate CRN. To see the secret CRN, run `ibmcloud ks ingress secret get --cluster <cluster_name_or_ID> --name secret_name> --namespace <namespace>`. This option requires a default [{{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about) instance in your cluster.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
