@@ -463,6 +463,7 @@ toc:
                     - ts-network-mangle-table.md
                     - ts-letsencrypt.md
                     - ts-calico-log-level.md
+                    - ts-ip-whitelist-annotation.md
               - topicgroup:
                   label: Logging and monitoring
                   topics:
