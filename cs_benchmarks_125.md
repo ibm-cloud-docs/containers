@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-18"
+lastupdated: "2022-10-25"
 
 keywords: kubernetes, containers, benchmarks, 1.25, CIS benchmarks
 
@@ -304,13 +304,13 @@ Review information from IBM on the CIS Benchmark results.
 | 5.1.5 | {{site.data.keyword.containerlong_notm}} does not set [*automountServiceAccountToken: false*](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server){: external} for each default service account. |
 | 5.1.6 | {{site.data.keyword.containerlong_notm}} deploys some system components that could set [*automountServiceAccountToken: false*](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server){: external}. |
 | 5.2.1 | {{site.data.keyword.containerlong_notm}} can optionally configure [Pod security admission](/docs/containers?topic=containers-pod-security-admission), which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
-| 5.2.2 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.3 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.4 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.5 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.6 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.7 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.8 | {{site.data.keyword.containerlong_notm}} can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.2 | {{site.data.keyword.containerlong_notm}} can optionally configure [Pod security admission](/docs/containers?topic=containers-pod-security-admission), which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
+| 5.2.3 | {{site.data.keyword.containerlong_notm}} can optionally configure [Pod security admission](/docs/containers?topic=containers-pod-security-admission), which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
+| 5.2.4 | {{site.data.keyword.containerlong_notm}} can optionally configure [Pod security admission](/docs/containers?topic=containers-pod-security-admission), which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
+| 5.2.5 | {{site.data.keyword.containerlong_notm}} can optionally configure [Pod security admission](/docs/containers?topic=containers-pod-security-admission), which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}.  |
+| 5.2.6 | {{site.data.keyword.containerlong_notm}} can optionally configure [Pod security admission](/docs/containers?topic=containers-pod-security-admission), which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
+| 5.2.7 | {{site.data.keyword.containerlong_notm}} can optionally configure [Pod security admission](/docs/containers?topic=containers-pod-security-admission), which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
+| 5.2.8 | {{site.data.keyword.containerlong_notm}} can optionally configure [Pod security admission](/docs/containers?topic=containers-pod-security-admission), which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
 | 5.2.9 | {{site.data.keyword.containerlong_notm}} can optionally configure [Pod security admission](/docs/containers?topic=containers-pod-security-admission), which is similar to the unsupported [Kubernetes pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}. |
 | 5.3.2 | {{site.data.keyword.containerlong_notm}} has a set of [default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy) and [additional network policies can optionally be added](/docs/containers?topic=containers-network_policies#adding_network_policies). |
 | 5.4.2 | {{site.data.keyword.containerlong_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |

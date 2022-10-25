@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-24"
+lastupdated: "2022-10-25"
 
 keywords: containers
 subcollection: containers
@@ -206,6 +206,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
+
+    * [25 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2522)
+
+        * Istio add-on
 
     * [24 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2422)
 
@@ -7740,11 +7744,11 @@ subcollection: containers
 
 * [Version 1.3.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_0)
 
-    * [1.3.0_2847_iks (default), released 24 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2847_iks)
+    * [1.3.0_2847_iks (default), released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2847_iks)
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
-    * [1.2.1_2809_iks, released 24 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2809_iks)
+    * [1.2.1_2809_iks, released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2809_iks)
 
     * [1.2.1_2714_iks, released 13 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2714_iks)
 
@@ -7774,7 +7778,7 @@ subcollection: containers
 
 * [Version 1.1.2](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_2)
 
-    * [Version 1.1.2_2808_iks, released on 24 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2808_iks)
+    * [Version 1.1.2_2808_iks, released on 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2808_iks)
 
     * [Version 1.1.2_2645_iks, released on 3 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2645_iks)
 
@@ -7944,11 +7948,15 @@ subcollection: containers
 
 * [Version 1.15](/docs/containers?topic=containers-istio-changelog#v115)
 
+    * [Changelog for 1.15.2, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1152)
+
     * [Changelog for 1.15.1, released 11 October 2022](/docs/containers?topic=containers-istio-changelog#1151)
 
     * [Change log for 1.15.0, released 15 September 2022](/docs/containers?topic=containers-istio-changelog#1150)
 
 * [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
+
+    * [Changelog for 1.14.5, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1145)
 
     * [Changelog for 1.14.4, released 4 October 2022](/docs/containers?topic=containers-istio-changelog#1144)
 
@@ -7957,6 +7965,8 @@ subcollection: containers
     * [Change log for 1.14.1, released 16 June 2022](/docs/containers?topic=containers-istio-changelog#1141)
 
 * [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
+
+    * [Changelog for 1.13.9, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1139)
 
     * [Change log for 1.13.8, released 4 October 2022](/docs/containers?topic=containers-istio-changelog#1138)
 
@@ -9144,6 +9154,8 @@ subcollection: containers
 [Why are Istio components missing?](/docs/containers?topic=containers-istio_control_plane#istio_control_plane)
 
 [Why can't I upgrade to version 1.12 of the managed Istio add-on?](/docs/containers?topic=containers-ts-addon-istio-webhooks#ts-addon-istio-webhooks)
+
+[Why does my custom gateway Istio operator have a reconcile loop error?](/docs/containers?topic=containers-istio_control_plane#istio_control_plane)
 
 [How do I delete Operator Lifecycle Manager components?](/docs/containers?topic=containers-ts-delete-olm#ts-delete-olm)
 

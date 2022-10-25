@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-12"
+lastupdated: "2022-10-25"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
 
@@ -35,7 +35,8 @@ Before you begin, review the following considerations for using custom gateways.
 {: shortdesc}
 
 * The managed Istio add-on does not manage or reconcile any custom gateways that you create. You are responsible for creating, managing, and maintaining these resources.
-* If you need to debug your custom ingress or egress gateway setups, check the logs for the `addon-istio-operator` (Istio version 1.10 or later) or `managed-istio-operator` (Istio version 1.9 or earlier) pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`. The Istio operator validates and reconciles any custom Istio operator (IOP) changes that you make. Additionally, ensure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` ConfigMap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers.
+* After you deploy your custom gateway, check the Istio operator pod logs for syntax errors by running `kubectl logs -n ibm-operators -l name=addon-istio-operator`. The Istio operator validates and reconciles any custom `IstioOperator` (IOP) changes that you make. If you notice a reoncile loop, indicated by the `info installer Reconciling IstioOperator` repeating in the logs, follow the steps [to find the line in the configuration that is causing the loop error](/docs/containers?topic=containers-ts-addon-istio-iop.md).
+* Additionally, ensure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` ConfigMap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers.
 
 ## Creating a custom ingress gateway for public traffic
 {: #custom-ingress-gateway-public}
@@ -61,7 +62,7 @@ Use an `IstioOperator` (IOP) to create a custom ingress gateway deployment and p
     spec:
       profile: empty
       hub: icr.io/ext/istio
-      # tag: 1.15.1
+      # tag: 1.15.2
       components:
         ingressGateways:
           - name: custom-ingressgateway
@@ -319,7 +320,7 @@ Note the following considerations:
 Manually update and control the managed Istio version of custom ingress gateways.
 {: shortdesc}
 
-{{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio that is supported by {{site.data.keyword.containerlong_notm}}. For example, when patch version 1.15.1 is released, all ingress gateway pods are automatically updated to this latest patch version. Patch versions are completed by using the rolling update strategy to avoid downtime for your apps. However, you might want to prevent automatic updates of custom gateway pods, such as if you want to test for any potential regressions with the latest patch version.
+{{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio that is supported by {{site.data.keyword.containerlong_notm}}. For example, when patch version 1.15.2 is released, all ingress gateway pods are automatically updated to this latest patch version. Patch versions are completed by using the rolling update strategy to avoid downtime for your apps. However, you might want to prevent automatic updates of custom gateway pods, such as if you want to test for any potential regressions with the latest patch version.
 
 To manage updates for your custom ingress gateways, you might use the following rollout strategy:
 1. [Create a custom ingress gateway IOPs](#custom-ingress-gateway-public). In the `tag` field, specify a patch version that is the same or earlier than the control plane version. You can find the control plane version by running `istioctl version`.
@@ -350,7 +351,7 @@ metadata:
 spec:
   profile: empty
   hub: icr.io/ext/istio
-  # tag: 1.15.1 # Force the gateway to a specific managed Istio version
+  # tag: 1.15.2 # Force the gateway to a specific managed Istio version
   components:
     ingressGateways:
       - name: custom-ingressgateway
@@ -419,7 +420,7 @@ metadata:
 spec:
   profile: empty
   hub: icr.io/ext/istio
-  # tag: 1.15.1 # Force the Gateway to a specific version
+  # tag: 1.15.2 # Force the Gateway to a specific version
   components:
     egressGateways:
       - name: custom-egressgateway
