@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-12"
+lastupdated: "2022-10-25"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
 
@@ -35,7 +35,8 @@ Before you begin, review the following considerations for using custom gateways.
 {: shortdesc}
 
 * The managed Istio add-on does not manage or reconcile any custom gateways that you create. You are responsible for creating, managing, and maintaining these resources.
-* If you need to debug your custom ingress or egress gateway setups, check the logs for the `addon-istio-operator` (Istio version 1.10 or later) or `managed-istio-operator` (Istio version 1.9 or earlier) pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`. The Istio operator validates and reconciles any custom Istio operator (IOP) changes that you make. Additionally, ensure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` ConfigMap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers.
+* After you deploy your custom gateway, check the Istio operator pod logs for syntax errors by running `kubectl logs -n ibm-operators -l name=addon-istio-operator`. The Istio operator validates and reconciles any custom `IstioOperator` (IOP) changes that you make. If you notice a reoncile loop, indicated by the `info installer Reconciling IstioOperator` repeating in the logs, follow the steps [to find the line in the configuration that is causing the loop error](/docs/containers?topic=containers-ts-addon-istio-iop.md).
+* Additionally, ensure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` ConfigMap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers.
 
 ## Creating a custom ingress gateway for public traffic
 {: #custom-ingress-gateway-public}
