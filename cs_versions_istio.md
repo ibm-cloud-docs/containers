@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-18"
+lastupdated: "2022-10-25"
 
 keywords: kubernetes, istio, add-on
 
@@ -44,6 +44,27 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 ## Version 1.15
 {: #v115}
+
+### Changelog for 1.15.2, released 25 October 2022
+{: #1152}
+
+Review the changes that are included in version 1.15.2 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.15.1
+
+Current version
+:   1.15.2
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.15.2](https://istio.io/latest/news/releases/1.15.x/announcing-1.15.2/){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2022-35252](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35252){: external}
+    - [CVE-2022-1586](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1586){: external}
+    - [CVE-2022-1587](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1587){: external}
+    - [usn-5587-1](https://ubuntu.com/security/notices/USN-5587-1){: external}
+    - [usn-5627-1](https://ubuntu.com/security/notices/USN-5627-1){: external}
 
 ### Changelog for 1.15.1, released 11 October 2022
 {: #1151}
@@ -87,6 +108,28 @@ Updates in this version
 
 ## Version 1.14
 {: #v114}
+
+### Changelog for 1.14.5, released 25 October 2022
+{: #1145}
+
+Review the changes that are included in version 1.14.5 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.14.4
+
+Current version
+:   1.14.5
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.14.5](https://istio.io/latest/news/releases/1.14.x/announcing-1.14.5/){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2022-35252](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35252){: external}
+    - [CVE-2022-1586](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1586){: external}
+    - [CVE-2022-1587](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1587){: external}
+    - [usn-5587-1](https://ubuntu.com/security/notices/USN-5587-1){: external}
+    - [usn-5627-1](https://ubuntu.com/security/notices/USN-5627-1){: external}
+:   The istio operator memory leak is fixed in 1.14.5.
 
 ### Changelog for 1.14.4, released 4 October 2022
 {: #1144}
@@ -153,6 +196,28 @@ Updates in this version
 
 ## Version 1.13
 {: #v113}
+
+### Changelog for 1.13.9, released 25 October 2022
+{: #1139}
+
+Review the changes that are included in version 1.13.9 of the managed Istio add-on.
+{: shortdesc}
+
+This is the final update for version 1.13, which becomes unsupported on 17 Nov 2022. You can update the minor version of the addon from 1.12 to 1.13 for as long as 1.13 is supported. You can update the minor version of the addon from 1.13 to 1.14 for as long as 1.14 is supported. For more information, see [Upgrading the Istio add-on](/docs/containers?topic=containers-istio#istio_update).
+{: important}
+
+Previous version
+:   1.13.8
+
+Current version
+:   1.13.9
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.13.9](https://istio.io/latest/news/releases/1.13.x/announcing-1.13.9/){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2022-1586](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1586){: external}
+    - [CVE-2022-1587](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1587){: external}
+    - [usn-5627-1](https://ubuntu.com/security/notices/USN-5627-1){: external}
 
 ### Change log for 1.13.8, released 4 October 2022
 {: #1138}

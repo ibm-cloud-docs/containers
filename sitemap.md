@@ -207,6 +207,10 @@ subcollection: containers
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
 
+    * [25 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2522)
+
+        * Istio add-on
+
     * [24 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2422)
 
         * Ingress ALB change log updates
@@ -7944,11 +7948,15 @@ subcollection: containers
 
 * [Version 1.15](/docs/containers?topic=containers-istio-changelog#v115)
 
+    * [Changelog for 1.15.2, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1152)
+
     * [Changelog for 1.15.1, released 11 October 2022](/docs/containers?topic=containers-istio-changelog#1151)
 
     * [Change log for 1.15.0, released 15 September 2022](/docs/containers?topic=containers-istio-changelog#1150)
 
 * [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
+
+    * [Changelog for 1.14.5, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1145)
 
     * [Changelog for 1.14.4, released 4 October 2022](/docs/containers?topic=containers-istio-changelog#1144)
 
@@ -7957,6 +7965,8 @@ subcollection: containers
     * [Change log for 1.14.1, released 16 June 2022](/docs/containers?topic=containers-istio-changelog#1141)
 
 * [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
+
+    * [Changelog for 1.13.9, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1139)
 
     * [Change log for 1.13.8, released 4 October 2022](/docs/containers?topic=containers-istio-changelog#1138)
 
