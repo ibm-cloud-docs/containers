@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-24"
+lastupdated: "2022-10-25"
 
 keywords: containers
 subcollection: containers
@@ -7740,11 +7740,11 @@ subcollection: containers
 
 * [Version 1.3.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_0)
 
-    * [1.3.0_2847_iks (default), released 24 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2847_iks)
+    * [1.3.0_2847_iks (default), released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2847_iks)
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
-    * [1.2.1_2809_iks, released 24 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2809_iks)
+    * [1.2.1_2809_iks, released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2809_iks)
 
     * [1.2.1_2714_iks, released 13 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2714_iks)
 
@@ -7774,7 +7774,7 @@ subcollection: containers
 
 * [Version 1.1.2](/docs/containers?topic=containers-cluster-add-ons-changelog#1_1_2)
 
-    * [Version 1.1.2_2808_iks, released on 24 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2808_iks)
+    * [Version 1.1.2_2808_iks, released on 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2808_iks)
 
     * [Version 1.1.2_2645_iks, released on 3 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.1.2_2645_iks)
 
