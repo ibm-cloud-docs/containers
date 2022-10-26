@@ -207,6 +207,10 @@ subcollection: containers
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
 
+    * [26 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2622)
+
+        * Worker node fix pack 1.22.15_1575, 1.23.12_1549, 1.24.6_1541, and 1.25.2_1519
+
     * [25 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2522)
 
         * Istio add-on
