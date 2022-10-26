@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-25"
+lastupdated: "2022-10-26"
 
 keywords: containers
 subcollection: containers
@@ -5914,6 +5914,8 @@ subcollection: containers
 [Kubernetes version information](/docs/containers?topic=containers-cs_versions#cs_versions)
 
 * [Available {{site.data.keyword.containerlong}} versions](/docs/containers?topic=containers-cs_versions#cs_versions_available)
+
+* [Available operating systems](/docs/containers?topic=containers-cs_versions#available-operating-systems)
 
 * [Checking a cluster's Kubernetes server version](/docs/containers?topic=containers-cs_versions#cs_server_version)
 
