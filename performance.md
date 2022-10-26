@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-10"
+lastupdated: "2022-10-26"
 
 keywords: kubernetes, kernel
 
@@ -187,6 +187,61 @@ Before you begin, ensure you have the [**Manager** {{site.data.keyword.cloud_not
 
 3. If you changed the `net.core.somaxconn` value in the kernel settings, most apps can automatically use the updated value. However, some apps might require you to manually change the corresponding value in your app code to match the kernel value. For example, if you're tuning the performance of a pod where an NGINX app runs, you must change the value of the `backlog` field in the NGINX app code to match. For more information, see this [NGINX blog post](https://www.nginx.com/blog/tuning-nginx/){: external}.
 
+
+
+## Optimizing network keepalive `sysctl` settings
+{: #keepalive-iks}
+
+If a pod has long running TCP connections that are occasionally disconnected when they are idle for a period of time, it might help to change the `sysctl` keepalive settings for the pod. 
+{: shortdesc}
+
+These scenarios and suggested settings are also described in the [Troubleshooting Outgoing Connection Issues with IBM VPC Public and Service Gateways](https://www.ibm.com/cloud/blog/troubleshooting-outgoing-connection-issues-with-ibm-vpc-public-and-service-gateways){: external} blog.
+{: tip}
+
+The following `sysctl` network values can be set on all worker nodes in a cluster by using the daemonset described in the [Modifying worker node kernel settings](#worker-kernel-ds) section. However, there currently isn't a way to set these `sysctl` keepalive settings on all pods by default in a cluster. The best way to modify the settings on all pods is to use a privileged `initContainer`. Review the following example of how to set up an `initContainer` for a deployment in a `test-ns` namespace.
+
+
+
+Deploy the following example `initContainer`. Remember to change the `containers:` section to your own application containers. The `initContainer` then sets the `sysctl` settings for all the regular containers in the pod because they all share the same network namespace.
+
+    ```
+    kubectl apply -f - << EOF
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: test-sysctl
+      namespace: test-ns
+      labels:
+        run: test-sysctl
+    spec:
+      replicas: 2
+      selector:
+        matchLabels:
+          run: test-sysctl
+      template:
+        metadata:
+          labels:
+            run: test-sysctl
+        spec:
+          initContainers:
+          - command:
+            - sh
+            - -c
+            - sysctl -e -w net.ipv4.tcp_keepalive_time=40; sysctl -e -w net.ipv4.tcp_keepalive_intvl=15; sysctl -e -w net.ipv4.tcp_keepalive_probes=6;
+            image: us.icr.io/armada-master/alpine:latest
+            imagePullPolicy: IfNotPresent
+            name: sysctl-init
+            resources: {}
+            securityContext:
+              privileged: true
+          containers:
+          - name: test-sysctl
+            image: us.icr.io/armada-master/alpine:latest
+            command: ["sleep", "2592000"]
+      EOF
+      ```
+      {: pre}
+      
 
 
 ## Adjusting cluster metrics provider resources

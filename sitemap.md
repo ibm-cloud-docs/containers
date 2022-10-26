@@ -3269,6 +3269,8 @@ subcollection: containers
 
 * [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
 
+* [Optimizing network keepalive `sysctl` settings](/docs/containers?topic=containers-kernel#keepalive-iks)
+
 * [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics)
 
     * [Modify the `metrics-server-config` config map](/docs/containers?topic=containers-kernel#metrics-server-config)
@@ -9097,6 +9099,8 @@ subcollection: containers
 * [Increasing the log level for the `calico-kube-controllers` components](/docs/containers?topic=containers-calico_log_level#calico-increase-logging-kube-controllers)
 
 * [Gathering Calico logs](/docs/containers?topic=containers-calico_log_level#calico-log-gather)
+
+[Why does my pod with long running TCP connections get disconnected?](/docs/containers?topic=containers-ts-keepalive-sysctl#ts-keepalive-sysctl)
 
 
 ### Logging and monitoring
