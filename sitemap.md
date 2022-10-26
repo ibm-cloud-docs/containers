@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-25"
+lastupdated: "2022-10-26"
 
 keywords: containers
 subcollection: containers
@@ -206,6 +206,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
+
+    * [26 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2622)
+
+        * Worker node fix pack 1.22.15_1575, 1.23.12_1549, 1.24.6_1541, and 1.25.2_1519
 
     * [25 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2522)
 
@@ -3269,6 +3273,8 @@ subcollection: containers
 
 * [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
 
+* [Optimizing network keepalive `sysctl` settings](/docs/containers?topic=containers-kernel#keepalive-iks)
+
 * [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics)
 
     * [Modify the `metrics-server-config` config map](/docs/containers?topic=containers-kernel#metrics-server-config)
@@ -5915,6 +5921,8 @@ subcollection: containers
 
 * [Available {{site.data.keyword.containerlong}} versions](/docs/containers?topic=containers-cs_versions#cs_versions_available)
 
+* [Available operating systems](/docs/containers?topic=containers-cs_versions#available-operating-systems)
+
 * [Checking a cluster's Kubernetes server version](/docs/containers?topic=containers-cs_versions#cs_server_version)
 
 * [Update types](/docs/containers?topic=containers-cs_versions#update_types)
@@ -5965,6 +5973,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for worker node fix pack 1.25.2_1519, released 25 October 2022](/docs/containers?topic=containers-changelog_125#1252_1519)
 
     * [Change log for master fix pack 1.25.2_1517 and worker node fix pack 1.25.2_1516, released 6 October 2022](/docs/containers?topic=containers-changelog_125#1252_1517_and_1252_1516)
 
@@ -6030,6 +6040,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.6_1541, released 25 October 2022](/docs/containers?topic=containers-changelog_124#1246_1541)
 
     * [Change log for worker node fix pack 1.24.6_1540, released 10 October 2022](/docs/containers?topic=containers-changelog_124#1246_1540)
 
@@ -6121,6 +6133,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for worker node fix pack 1.23.12_1549, released 25 October 2022](/docs/containers?topic=containers-changelog_123#12312_1549)
 
     * [Change log for worker node fix pack 1.23.12_1548, released 10 October 2022](/docs/containers?topic=containers-changelog_123#12312_1548)
 
@@ -6240,6 +6254,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview_122)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.15_1575, released 25 October 2022](/docs/containers?topic=containers-changelog_122#12215_1575)
 
     * [Change log for worker node fix pack 1.22.15_1574, released 10 October 2022](/docs/containers?topic=containers-changelog_122#12215_1574)
 
@@ -9087,6 +9103,8 @@ subcollection: containers
 * [Increasing the log level for the `calico-kube-controllers` components](/docs/containers?topic=containers-calico_log_level#calico-increase-logging-kube-controllers)
 
 * [Gathering Calico logs](/docs/containers?topic=containers-calico_log_level#calico-log-gather)
+
+[Why does my pod with long running TCP connections get disconnected?](/docs/containers?topic=containers-ts-keepalive-sysctl#ts-keepalive-sysctl)
 
 
 ### Logging and monitoring

@@ -464,6 +464,7 @@ toc:
                     - ts-letsencrypt.md
                     - ts-calico-log-level.md
                     - ts-ip-whitelist-annotation.md
+                    - ts-keepalive-sysctl.md
               - topicgroup:
                   label: Logging and monitoring
                   topics:
