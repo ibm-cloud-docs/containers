@@ -5909,7 +5909,7 @@ subcollection: containers
 
 * [Available {{site.data.keyword.containerlong}} versions](/docs/containers?topic=containers-cs_versions#cs_versions_available)
 
-* [Available operating systems](/docs/containers?topic=containers-cs_versions#available-operating-systems)
+* [Available operating systems](/docs/containers?topic=containers-cs_versions#available-os)
 
 * [Checking a cluster's Kubernetes server version](/docs/containers?topic=containers-cs_versions#cs_server_version)
 
