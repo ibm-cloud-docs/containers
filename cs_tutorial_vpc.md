@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-10-27"
 
 keywords: kubernetes
 
@@ -140,7 +140,13 @@ Create a Kubernetes deployment to deploy a single app instance as a pod to your 
 
 The components that you deploy by completing this lesson are shown in the following diagram.
 
+
+
+
+
 ![Deployment setup](images/cs_app_tutorial_mz-components1.png){: caption="Figure 1. Components of the deployment setup" caption-side="bottom"}
+
+
 
 To deploy the app:
 
