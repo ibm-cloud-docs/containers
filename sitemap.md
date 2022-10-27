@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-26"
+lastupdated: "2022-10-27"
 
 keywords: containers
 subcollection: containers
@@ -206,6 +206,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
+
+    * [27 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2722)
+
+        * ALB OAuth Proxy add-on version 2.0.0_1297
 
     * [26 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2622)
 
@@ -8409,6 +8413,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_1297, released on 27 October 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1297)
 
     * [Version 2.0.0_1265, released on 3 October 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1265)
 

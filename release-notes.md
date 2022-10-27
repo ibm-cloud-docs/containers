@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-26"
+lastupdated: "2022-10-27"
 
 keywords: kubernetes, release notes
 
@@ -26,6 +26,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2022
 {: #containers-oct22}
+
+### 27 October 2022
+{: #containers-oct2722}
+{: release-note}
+
+
+
+ALB OAuth Proxy add-on version 2.0.0_1297
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+
+ 
+
 
 
 ### 26 October 2022
