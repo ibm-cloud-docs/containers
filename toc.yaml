@@ -44,28 +44,15 @@ toc:
             label: Tutorials library for Kubernetes Service
             href: https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20
         - cs_tutorial_vpc.md
-        - topicgroup: 
-            label: Migrating environments to clusters
-            topics:
-            - cs_tutorials_cf.md
-            - link:
-                label: Moving a VM-based application to Kubernetes
-                href: /docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes
-        - topicgroup:
-            label: Developing apps in clusters
-            topics:
-            - tutorial-odo.md
-            - cs_tutorials_starter.md
-            - link:
-                label: Continuous Deployment to Kubernetes
-                href: /docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes
-        - topicgroup:
-            label: Controlling traffic to apps
-            topics:
-            - cs_tutorials_policies.md
-            - link:
-                label: Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services
-                href: /docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis
+        - cs_tutorials_cf.md
+        - link:
+            label: Moving a VM-based application to Kubernetes
+            href: /docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes
+        - cs_tutorials_starter.md
+        - cs_tutorials_policies.md
+        - link:
+            label: Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services
+            href: /docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis
     - navgroup: 
         id: howto
         topics:
