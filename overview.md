@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-09-08"
+lastupdated: "2022-10-27"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -122,7 +122,13 @@ The open source project that is named Kubernetes combines running a containerize
 Learn more about the key concepts of Kubernetes as illustrated in the following image.
 {: shortdesc}
 
+
+
+
+
 ![Deployment setup of key concepts](images/cs_app_tutorial_mz-components1.png "Deployment setup"){: caption="Figure 2. A description of key concepts for Kubernetes" caption-side="bottom"}
+
+
 
 Account
 :   Your account refers to your {{site.data.keyword.cloud_notm}} account.
@@ -157,6 +163,5 @@ Review how you can learn about Kubernetes concepts and the terminology.
 
 
 * Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this [course](https://cognitiveclass.ai/courses/kubernetes-course){: external}.
-
 
 

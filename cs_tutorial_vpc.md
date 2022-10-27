@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-10-27"
 
 keywords: kubernetes
 
@@ -137,12 +137,6 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
 
 Create a Kubernetes deployment to deploy a single app instance as a pod to your worker node in your VPC cluster.
 {: shortdesc}
-
-The components that you deploy by completing this lesson are shown in the following diagram.
-
-![Deployment setup](images/cs_app_tutorial_mz-components1.png){: caption="Figure 1. Components of the deployment setup" caption-side="bottom"}
-
-To deploy the app:
 
 1. Clone the source code for the [Hello world app](https://github.com/IBM/container-service-getting-started-wt){: external} to your user home directory. The repository contains different versions of a similar app in folders that each start with `Lab`. Each version contains the following files:
     * `Dockerfile`: The build definitions for the image.

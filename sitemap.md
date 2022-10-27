@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-26"
+lastupdated: "2022-10-27"
 
 keywords: containers
 subcollection: containers
@@ -206,6 +206,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
+
+    * [27 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2722)
+
+        * ALB OAuth Proxy add-on version 2.0.0_1297
 
     * [26 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2622)
 
@@ -2699,8 +2703,8 @@ subcollection: containers
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
 
-## Migrating environments to clusters
-{: #sitemap_migrating_environments_to_clusters}
+## Migrating an app from Cloud Foundry to a cluster
+{: #sitemap_migrating_an_app_from_cloud_foundry_to_a_cluster}
 
 
 [Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
@@ -2720,23 +2724,9 @@ subcollection: containers
 [Moving a VM-based application to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes)
 
 
-## Developing apps in clusters
-{: #sitemap_developing_apps_in_clusters}
+## Deploy a starter kit app to a Kubernetes cluster
+{: #sitemap_deploy_a_starter_kit_app_to_a_kubernetes_cluster}
 
-
-[Developing in clusters with the OpenShift Do CLI](/docs/containers?topic=containers-odo-tutorial#odo-tutorial)
-
-* [Objectives](/docs/containers?topic=containers-odo-tutorial#odo-objectives)
-
-* [Audience](/docs/containers?topic=containers-odo-tutorial#odo-audience)
-
-* [Prerequisites](/docs/containers?topic=containers-odo-tutorial#odo-prereqs)
-
-* [Create a microservice](/docs/containers?topic=containers-odo-tutorial#odo-new-microservice)
-
-* [Push a microservice to the cluster](/docs/containers?topic=containers-odo-tutorial#odo-push-microservice)
-
-* [What's next?](/docs/containers?topic=containers-odo-tutorial#odo-next-steps)
 
 [Deploy a starter kit app to a Kubernetes cluster](/docs/containers?topic=containers-tutorial-starterkit-kube#tutorial-starterkit-kube)
 
@@ -2754,11 +2744,9 @@ subcollection: containers
 
 * [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
 
-[Continuous Deployment to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes)
 
-
-## Controlling traffic to apps
-{: #sitemap_controlling_traffic_to_apps}
+## Using Calico network policies to control traffic on Classic clusters
+{: #sitemap_using_calico_network_policies_to_control_traffic_on_classic_clusters}
 
 
 [Using Calico network policies to control traffic on Classic clusters](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
@@ -5921,7 +5909,7 @@ subcollection: containers
 
 * [Available {{site.data.keyword.containerlong}} versions](/docs/containers?topic=containers-cs_versions#cs_versions_available)
 
-* [Available operating systems](/docs/containers?topic=containers-cs_versions#available-operating-systems)
+* [Available operating systems](/docs/containers?topic=containers-cs_versions#available-os)
 
 * [Checking a cluster's Kubernetes server version](/docs/containers?topic=containers-cs_versions#cs_server_version)
 
@@ -8409,6 +8397,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_1297, released on 27 October 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1297)
 
     * [Version 2.0.0_1265, released on 3 October 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1265)
 

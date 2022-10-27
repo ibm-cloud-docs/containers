@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-26"
+lastupdated: "2022-10-27"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -37,6 +37,9 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 ## Available operating systems
+{: #available-os}
+
+
 
 **Latest**: 1.25
 - Release date: 06 October 2022
