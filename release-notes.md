@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-27"
+lastupdated: "2022-10-28"
 
 keywords: kubernetes, release notes
 
@@ -37,7 +37,6 @@ ALB OAuth Proxy add-on version 2.0.0_1297
 :   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 
  
-
 
 
 ### 26 October 2022

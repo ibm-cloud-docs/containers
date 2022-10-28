@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-27"
+lastupdated: "2022-10-28"
 
 keywords: containers
 subcollection: containers
@@ -2721,7 +2721,11 @@ subcollection: containers
 
 * [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
-[Moving a VM-based application to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes)
+
+## Moving a VM-based application to Kubernetes
+{: #sitemap_moving-a-vm-based-application-to-kubernetes}
+
+[Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
 
 
 ## Deploy a starter kit app to a Kubernetes cluster
@@ -2769,7 +2773,11 @@ subcollection: containers
 
 * [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
 
-[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis)
+
+## Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services
+{: #sitemap_resilient-and-secure-multi-region-kubernetes-clusters-with-ibm-cloud-internet-services}
+
+[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
 
 
 ## Installing the CLI and API

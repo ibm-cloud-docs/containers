@@ -11,551 +11,554 @@ toc:
     console-page: /kubernetes/overview
     product-page: https://www.ibm.com/cloud/containers
   entries: 
-    - navgroup: 
-        id: learn
-        topics:
-        - getting-started.md
-        - topicgroup:
-            label: About
-            topics:
-            - overview.md
-            - why-benefits.md
-            - providers.md
-            - responsibilities.md
-        - topicgroup:
-            label: Use cases
-            topics:
-            - cs_uc_intro.md
-            - uc-finance.md
-            - uc-health.md
-            - uc-retail.md
-            - uc-transport.md
-            - uc-gov.md
-        - topicgroup:
-            label: Learning paths
-            topics:
-            - path-admin.md
-            - path-dev.md
-        - release-notes.md
-    - navgroup:
-        id: tutorial
-        topics:
-        - link: 
-            label: Tutorials library for Kubernetes Service
-            href: https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20
-        - cs_tutorial_vpc.md
-        - cs_tutorials_cf.md
-        - link:
-            label: Moving a VM-based application to Kubernetes
-            href: /docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes
-        - cs_tutorials_starter.md
-        - cs_tutorials_policies.md
-        - link:
-            label: Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services
-            href: /docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis
-    - navgroup: 
-        id: howto
-        topics:
-        - topicgroup:
-            label: Installing the CLI and API
-            topics:
-            - cs_cli_install.md
-            - api-install.md
-        - topicgroup:
-            label: Planning your cluster environment
-            topics:
-            - kube-strategy.md
-            - cluster-plan-network.md
-            - cluster-plan-network-vpc.md
-            - cluster-plan-network-classic.md
-            - cluster-plan-ha.md
-            - worker-plan.md
-        - topicgroup:
-            label: Creating clusters
-            topics:
-            - cluster-create.md
-            - cluster-create-classic.md
-            - cluster-create-vpc-gen2.md
-            - cluster-create-dedidcated-hosts.md
-        - topicgroup:
-            label: Accessing clusters
-            topics:
-            - cs_cluster_access.md
-            - cluster-access-admission-control.md
-            - cluster-access-wireguard.md
-        - topicgroup:
-            label: Managing the cluster and worker node lifecycle
-            topics:
-            - worker-add.md
-            - dedicated-hosts.md
-            - topicgroup: 
-                label: Autoscaling clusters
-                topics:
-                - cluster-scaling-classic-vpc.md
-                - cluster-scaling-install-addon.md
-                - cluster-scaling-enable.md
-                - cluster-scaling-deploy-apps.md
-                - cluster-scaling-helm.md
-            - cs_cluster_update.md
-            - performance.md
-            - cluster-remove.md
-            - host-maintenance.md
-        - topicgroup:
-            label: Managing cluster costs
-            topics:
-            - costs.md
-            - costs-reserved.md
-        - topicgroup:
-            label: Enhancing security
-            topics:
-            - secure.md
-            - cs_tech.md
-            - cbr.md
-            - cbr-tutorial.md
-        - topicgroup:
-            label: Managing access control
-            topics:
-            - access-overview.md
-            - access-apikey.md
-            - access-iam-rbac.md
-            - access-pod-identity.md
-        - topicgroup:
-            label: Securing cluster workloads
-            topics:
-            - encrypt.md
-            - cs_psp.md
-            - pod-priority.md
-            - kubeapi-priority.md
-            - pod-security-admission.md
-            - pod-security-admission-migration.md
-        - topicgroup:
-            label: Securing the cluster network
-            topics:
-            - firewall.md
-            - edge.md
-            - network-policy.md
-            - vpc-firewall.md
-            - topicgroup:
-                label: Controlling traffic with ACLs, security groups, and network policies
-                topics:
-                - vpc-network-policy.md
-                - vpc-security-group.md
-                - vpc-acls.md
-                - vpc-kube-policies.md
-            - manage-scc.md
-        - topicgroup:
-            label: Managing the cluster network
-            topics:
-            - topicgroup:
-                label: Classic clusters
-                topics:
-                  - subnets.md
-                  - network-cluster.md
-                  - vpn.md
-            - topicgroup:
-                label: VPC clusters
-                topics:
-                - vpc-subnets.md
-                - vpc-vpn.md
-            - static-routes.md
-            - cs_dns.md
-        - topicgroup:
-            label: Logging and monitoring
-            topics:
-            - cs_health_log.md
-            - cs_health_monitor.md
-            - health-audit.md
-            - vpc-flow-logs.md
-        - topicgroup:
-            label: Setting up an image build pipeline
-            topics:
-            - registry.md
-            - cicd.md
-        - topicgroup:
-            label: Developing and deploying apps
-            topics:
-            - app-plan.md
-            - images.md
-            - cs_app.md
-            - cs_app_deploy.md
-            - nodeport.md
-            - app-update.md
-        - topicgroup:
-            label: Setting up a service mesh with Istio
-            topics:
-            - cs_istio_qs.md
-            - cs_istio_about.md
-            - cs_istio.md
-            - cs_istio_mesh.md
-            - cs_istio_custom_gateway.md
-            - cs_istio_health.md
-        - topicgroup:
-            label: Exposing apps
-            topics:
-            - cs_network_planning.md
-            - topicgroup:
-                label: Exposing apps with load balancers
-                topics:
-                - lb-quickstart.md
-                - vpc_lbaas.md
-                - lb-about.md
-                - lb.md
-                - lb-v2.md
-                - lb-dns.md
-            - topicgroup:
-                label: Exposing apps with Ingress ALBs
-                topics:
-                - cs_ingress_about.md
-                - cs_ingress_types.md
-                - cs_ingress_monitor.md
-                - ingress-annotations.md
-                - secrets-mgr.md
-                - certs-mgr-migration.md
-        - topicgroup:
-            label: Storing data on persistent storage
-            topics:
-            - storage-plan.md
-            - storage-basics.md
-            - storage-file.md
-            - storage-block.md
-            - topicgroup:
-                label: Storing data on IBM Cloud Object Storage
-                topics:
-                - storage-cos-understand.md
-                - storage-cos-install.md 
-                - storage-cos-apps.md
-                - storage-cos-tutorial-quota.md
-                - storage-cos-vpc-ip.md
-                - storage-cos-reference.md
-            - topicgroup:   
-                label: Storing data on IBM Cloud VPC Block Storage
-                topics:
-                - storage-block-vpc.md
-                - storage-block-vpc-snapshot.md
-                - storage-block-vpc-trusted-profiles.md
-                - storage-block-vpc-unmanaged.md
-            - topicgroup:
-                label: Storing data on IBM Cloud File Storage for VPC
-                topics: 
-                - storage-file-vpc-install.md 
-                - storage-file-vpc-apps.md
-                - storage-file-vpc-managing.md
-                - storage-file-vpc-sc-ref.md 
-            - storage-portworx.md
-            - cs_storage_portworx_backup_gs.md
-            - cs_storage_portworx_gs.md
-            - storage-br.md
-            - storage-utilities.md
-        - topicgroup:
-            label: Enhancing cluster capabilities with integrations
-            topics:
-            - integrations-partnerships.md
-            - integrations-ibm-third-party.md
-            - integrations-addons.md
-            - integrations-helm.md
-            - integrations-svcbind.md
-            - ha.md
-    - navgroup:
-        id: reference
-        topics:
-        - topicgroup:
-            label: API reference
-            topics:
-            - link:
-                label: IBM Cloud Kubernetes Service API
-                href: https://containers.cloud.ibm.com/global/swagger-global-api/#/
-            - link:
-                label: IBM Cloud Kubernetes Service API JSON
-                href: https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json
-            - link:
-                label: IBM Cloud Container Registry API
-                href: https://cloud.ibm.com/apidocs/container-registry
-            - link: 
-                label: IBM Cloud Vulnerability Advisor API
-                href: https://cloud.ibm.com/apidocs/container-registry/va
-            - link: 
-                label: Community Kubernetes API
-                href: https://kubernetes.io/docs/reference/
-        - topicgroup:
-            label: CLI plug-in reference
-            topics:
-            - cli-map.md
-            - cli-ks-plugin.md
-            - cli-changelog.md
-            - observability-reference.md
-        - topicgroup:
-            label: Version history
-            topics:
-                - cs_versions_overview.md
-                - cs_versions_changelog.md
-                - benchmarks_overview.md
-                - benchmark-comparison.md
-                - topicgroup:
-                    label: Version 1.25
-                    topics:
-                    - cs_versions_125.md
-                    - cs_versions_changelog_125.md
-                    - cs_benchmarks_125.md
-                - topicgroup:
-                    label: Version 1.24 
-                    topics:
-                    - cs_versions_124.md
-                    - cs_versions_changelog_124.md
-                    - cs_benchmarks_124.md                
-                - topicgroup:
-                    label: Version 1.23
-                    topics:
-                    - cs_versions_123.md
-                    - cs_versions_changelog_123.md
-                    - cs_benchmarks_123.md
-                - topicgroup:
-                    label: Version 1.22
-                    topics:
-                    - cs_versions_122.md
-                    - cs_versions_changelog_122.md
-                    - cs_benchmarks_122.md
-                - topicgroup:
-                    label: Version 1.21 
-                    topics:
-                    - cs_versions_121.md
-                    - cs_versions_changelog_121.md
-                    - cs_benchmarks_121.md   
-        - topicgroup:
-            label: Archived version history
-            topics:
-            - topicgroup:
-                label: Version 1.20 
-                topics:
-                - cs_versions_120.md
-                - cs_versions_changelog_120.md
-                - cs_benchmarks_120.md
-            - topicgroup:
-                label: Version 1.19
-                topics:
-                - cs_versions_119.md
-                - cs_versions_changelog_119.md
-                - cs_benchmarks_119.md
-            - cs_versions_changelog_118.md
-            - cs_versions_changelog_117.md
-            - cs_versions_changelog_116.md
-            - cs_versions_changelog_115.md
-            - cs_versions_changelog_114.md
-            - cs_versions_changelog_113.md
-            - cs_versions_changelog_112.md
-            - cs_versions_changelog_111.md
-            - cs_versions_changelog_110.md
-            - cs_versions_changelog_19.md
-            - cs_versions_changelog_18.md
-            - cs_versions_changelog_17.md
-        - topicgroup:
-            label: Add-on version history
-            topics:
-            - add-on-versions.md 
-            - cs_versions_addons.md
-            - cs_versions_istio.md
-            - versions-autoscaler.md
-            - versions-vpc-block-addon.md
-            - versions-object.md
-            - versions-static-route.md
-            - versions-backup-restore.md
-            - cs_versions_alb_oauth_proxy.md
-        - ibm-k8s-controller-config-change-log.md
-        - topicgroup:
-            label: IAM and Activity Tracker events
-            topics:
-            - users-access-ref.md
-            - at-events.md
-            - api-at-iam.md
-        - locations.md
-        - cs_integrations_overview.md
-        - service-settings.md
-        - topicgroup:
-            label: Related links
-            topics:
-              - link: 
-                  label: Community Kubernetes documentation
-                  href: https://kubernetes.io/docs/home/
-              - link: 
-                  label: IBM Developer - Containers
-                  href: https://developer.ibm.com/technologies/containers/
-              - link: 
-                  label: IBM Developer - Kubernetes
-                  href: https://developer.ibm.com/components/kubernetes/
-        - vpc-gen2-flavors.md
-        - classic-flavors.md
-    - navgroup: 
-        id: help
-        topics:
-          - faqs.md
-          - topicgroup:
-              label: Troubleshooting
+  - navgroup: 
+      id: learn
+      topics:
+      - getting-started.md
+      - topicgroup:
+          label: About
+          topics:
+          - overview.md
+          - why-benefits.md
+          - providers.md
+          - responsibilities.md
+      - topicgroup:
+          label: Use cases
+          topics:
+          - cs_uc_intro.md
+          - uc-finance.md
+          - uc-health.md
+          - uc-retail.md
+          - uc-transport.md
+          - uc-gov.md
+      - topicgroup:
+          label: Learning paths
+          topics:
+          - path-admin.md
+          - path-dev.md
+      - release-notes.md
+
+  - navgroup:
+      id: tutorial
+      topics:
+      - link: 
+          label: Tutorials library for Kubernetes Service
+          href: https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20
+      - cs_tutorial_vpc.md
+      - cs_tutorials_cf.md
+      - link:
+          label: Moving a VM-based application to Kubernetes
+          href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes
+      - cs_tutorials_starter.md
+      - cs_tutorials_policies.md
+      - link:
+          label: Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services
+          href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis
+
+  - navgroup: 
+      id: howto
+      topics:
+      - topicgroup:
+          label: Installing the CLI and API
+          topics:
+          - cs_cli_install.md
+          - api-install.md
+      - topicgroup:
+          label: Planning your cluster environment
+          topics:
+          - kube-strategy.md
+          - cluster-plan-network.md
+          - cluster-plan-network-vpc.md
+          - cluster-plan-network-classic.md
+          - cluster-plan-ha.md
+          - worker-plan.md
+      - topicgroup:
+          label: Creating clusters
+          topics:
+          - cluster-create.md
+          - cluster-create-classic.md
+          - cluster-create-vpc-gen2.md
+          - cluster-create-dedidcated-hosts.md
+      - topicgroup:
+          label: Accessing clusters
+          topics:
+          - cs_cluster_access.md
+          - cluster-access-admission-control.md
+          - cluster-access-wireguard.md
+      - topicgroup:
+          label: Managing the cluster and worker node lifecycle
+          topics:
+          - worker-add.md
+          - dedicated-hosts.md
+          - topicgroup: 
+              label: Autoscaling clusters
               topics:
-              - get-help.md
-              - ts-debug-tool.md
-              - topicgroup:
-                  label: Clusters and masters
-                  topics:
-                  - ts-cluster-debug.md
-                  - ts-webhook-debug.md
-                  - ts-cluster-master.md
-                  - states-cluster.md
-                  - ts-cluster-cli.md
-                  - ts-cluster-create-delete.md
-                  - ts-cluster-no-vpc.md
-                  - ts-pod-security-125.md
-                  - ts-cluster-icr-pull-img.md
-                  - ts-cluster-webhook.md
-                  - ts-cluster-portieris.md
-                  - ts-cluster-pending.md
-                  - ts-cluster-view-work.md
-                  - ts-cluster-access-resources.md
-                  - ts-kubectl-exec-timeout.md
-                  - ts-master-limits.md
-                  - ts-metrics-server.md
-                  - ts-kube-dashboord-oom.md
-                  - ts-admin-cert.md
-              - topicgroup:
-                  label: Worker nodes
-                  topics:
-                    - ts-worker-debug.md
-                    - ts-worker-debug-kube-api.md
-                    - states-workers.md
-                    - ts-worker-common-issues.md
-                    - ts-worker-dedicated.md
-                    - ts-worker-autorebalance.md
-                    - ts-worker-bm-instance-id.md
-                    - ts-worker-delete-pods-fail.md
-                    - ts-worker-dupe-nodes.md
-                    - ts-worker-invalid-vlan.md
-                    - ts-worker-pod-timeout.md
-                    - ts-worker-ssh-fail.md
-              - topicgroup:
-                  label: Cluster autoscaler
-                  topics:
-                  - ts-ca-debug.md
-                  - ts-storage-ca-apikey-reset.md
-                  - ts-ca-resize.md
-                  - ts-ca-unbalanced.md
-              - topicgroup:
-                  label: Cluster network
-                  topics:
-                    - ts-network-iks-coredns-restart.md
-                    - ts-network-strongswan-vpn.md
-                    - ts-network-calico-node.md
-                    - ts-network-snat-125.md
-                    - ts-network-egress-124.md
-                    - ts-network-strongswan-install-new.md
-                    - ts-network-strongswan-network-nodes.md
-                    - ts-network-classic121.md
-                    - ts-network-mangle-table.md
-                    - ts-letsencrypt.md
-                    - ts-calico-log-level.md
-                    - ts-ip-whitelist-annotation.md
-                    - ts-keepalive-sysctl.md
-              - topicgroup:
-                  label: Logging and monitoring
-                  topics:
-                    - ts-health-iks-kube-db-graphs.md
-                    - ts-health-loglines.md
-              - topicgroup:
-                  label: Apps and services
-                  topics:
-                    - ts-app-01-debug.md
-                    - ts-app-02-imgpull.md
-                    - ts-app-container-start.md
-                    - ts-app-04-psp.md
-                    - ts-app-pod-pending.md
-                    - ts-app-pod-fail.md
-                    - ts-app-07-svc-name.md
-                    - ts-app-svc-not-found.md
-                    - ts-app-svc-key.md
-                    - ts-app-helm-install.md
-              - topicgroup:
-                  label: Managed add-ons
-                  topics:
-                    - ts-addon-debug.md
-                    - ts-addon-istio-debug.md
-                    - ts-addon-istio-gateway-affinity.md
-                    - ts-addon-istio-missing.md
-                    - ts-addon-istio-webhooks.md
-                    - ts-addon-istio-iop.md
-                    - ts-delete-olm.md
-              - topicgroup:
-                  label: Load balancers
-                  topics:
-                    - ts-lb-app.md
-                    - ts-lb-deploy.md
-                    - ts-lb-tainted-nodes.md
-                    - ts-lb-vpc-app.md
-                    - ts-lb-vpc-no-ips.md
-                    - ts-lb-sync-failed.md
-              - topicgroup:
-                  label: Ingress
-                  topics:
-                    - ts-ingress-status.md
-                    - ts-ingress-debug.md
-                    - ts-ingress-must-gather.md
-                    - ts-ingress-app.md
-                    - ts-ingress-vpc-app.md
-                    - ts-ingress-iks-no-subdomain-create.md
-                    - ts-ingress-subdomain-dupe-name.md
-                    - ts-ingress-no-secret.md
-                    - ts-ingress-secret-expiry.md
-                    - ts-ingress-alb-secret.md
-                    - ts-ingress-alb-pods-nodes.md
-                    - ts-ingress-alb-no-deploy-zone.md
-                    - ts-ingress-source-ip-tainted.md
-                    - ts-ingress-alb-subnet.md
-                    - ts-ingress-websocket.md
-                    - nested-ctm.md
-              - topicgroup:
-                  label: File Storage
-                  topics:
-                    - ts-storage-debug.md
-                    - ts-storage-debug-file.md
-                    - ts-storage-pvc-fail-permissions.md
-                    - ts-storage-file-block-pvc-pending.md
-                    - ts-storage-file-app.md
-                    - ts-storage-file-group-id-fail.md
-                    - ts-storage-file-nonroot-nfs-mount.md
-                    - ts-storage-file-nonroot.md
-                    - ts-storage-file-readonly.md
-                    - ts-storage-feedback.md
-              - topicgroup:
-                  label: Block Storage
-                  topics:
-                    - ts-storage-debug-block.md
-                    - ts-storage-block-app-pvc.md
-                    - ts-storage-block-mount-wrong-fs.md
-                    - ts-storage-block-read-only.md
-                    - ts-storage-block-throttling.md
-                    - ts-storage-vpc-block-api-key.md
-                    - ts-storage-block-not-attached.md
-                    - ts-storage-vpc-block-monitoring.md
-                    - ts-storage-clean-volume.md
-                    - ts-storage-fsck.md
-                    - ts-storage-volumesnapshot-delete.md
-                    - ts-storage-snapshot-fails.md
-              - topicgroup:
-                  label: Object Storage
-                  topics:
-                    - ts-storage-debug-cos.md
-                    - ts-storage-object-access-bucket.md
-                    - ts-storage-object-helm-fails.md
-                    - ts-storage-object-nonroot.md
-                    - ts-storage-object-op-not-permitted.md
-                    - ts-storage-object-ownership-mountpath.md
-                    - ts-storage-object-plugin-fails.md
-                    - ts-storage-object-pvc-fails.md
-                    - ts-storage-object-pvc-fails-s3fs-iam-ep.md
-                    - ts-storage-object-pvc-pending.md
-                    - ts-storage-object-pvc-pod-fail-secret.md
-                    - ts-storage-object-transport-ep.md
-              - topicgroup:
-                  label: Portworx Storage
-                  topics:
-                    - ts-storage-debug-portworx.md
-                    - ts-storage-px-debug.md
-                    - ts-storage-px-encryption-fails.md
-          - limitations.md
-          - sitemap.md
+              - cluster-scaling-classic-vpc.md
+              - cluster-scaling-install-addon.md
+              - cluster-scaling-enable.md
+              - cluster-scaling-deploy-apps.md
+              - cluster-scaling-helm.md
+          - cs_cluster_update.md
+          - performance.md
+          - cluster-remove.md
+          - host-maintenance.md
+      - topicgroup:
+          label: Managing cluster costs
+          topics:
+          - costs.md
+          - costs-reserved.md
+      - topicgroup:
+          label: Enhancing security
+          topics:
+          - secure.md
+          - cs_tech.md
+          - cbr.md
+          - cbr-tutorial.md
+      - topicgroup:
+          label: Managing access control
+          topics:
+          - access-overview.md
+          - access-apikey.md
+          - access-iam-rbac.md
+          - access-pod-identity.md
+      - topicgroup:
+          label: Securing cluster workloads
+          topics:
+          - encrypt.md
+          - cs_psp.md
+          - pod-priority.md
+          - kubeapi-priority.md
+          - pod-security-admission.md
+          - pod-security-admission-migration.md
+      - topicgroup:
+          label: Securing the cluster network
+          topics:
+          - firewall.md
+          - edge.md
+          - network-policy.md
+          - vpc-firewall.md
+          - topicgroup:
+              label: Controlling traffic with ACLs, security groups, and network policies
+              topics:
+              - vpc-network-policy.md
+              - vpc-security-group.md
+              - vpc-acls.md
+              - vpc-kube-policies.md
+          - manage-scc.md
+      - topicgroup:
+          label: Managing the cluster network
+          topics:
+          - topicgroup:
+              label: Classic clusters
+              topics:
+              - subnets.md
+              - network-cluster.md
+              - vpn.md
+          - topicgroup:
+              label: VPC clusters
+              topics:
+              - vpc-subnets.md
+              - vpc-vpn.md
+          - static-routes.md
+          - cs_dns.md
+      - topicgroup:
+          label: Logging and monitoring
+          topics:
+          - cs_health_log.md
+          - cs_health_monitor.md
+          - health-audit.md
+          - vpc-flow-logs.md
+      - topicgroup:
+          label: Setting up an image build pipeline
+          topics:
+          - registry.md
+          - cicd.md
+      - topicgroup:
+          label: Developing and deploying apps
+          topics:
+          - app-plan.md
+          - images.md
+          - cs_app.md
+          - cs_app_deploy.md
+          - nodeport.md
+          - app-update.md
+      - topicgroup:
+          label: Setting up a service mesh with Istio
+          topics:
+          - cs_istio_qs.md
+          - cs_istio_about.md
+          - cs_istio.md
+          - cs_istio_mesh.md
+          - cs_istio_custom_gateway.md
+          - cs_istio_health.md
+      - topicgroup:
+          label: Exposing apps
+          topics:
+          - cs_network_planning.md
+          - topicgroup:
+              label: Exposing apps with load balancers
+              topics:
+              - lb-quickstart.md
+              - vpc_lbaas.md
+              - lb-about.md
+              - lb.md
+              - lb-v2.md
+              - lb-dns.md
+          - topicgroup:
+              label: Exposing apps with Ingress ALBs
+              topics:
+              - cs_ingress_about.md
+              - cs_ingress_types.md
+              - cs_ingress_monitor.md
+              - ingress-annotations.md
+              - secrets-mgr.md
+              - certs-mgr-migration.md
+      - topicgroup:
+          label: Storing data on persistent storage
+          topics:
+          - storage-plan.md
+          - storage-basics.md
+          - storage-file.md
+          - storage-block.md
+          - topicgroup:
+              label: Storing data on IBM Cloud Object Storage
+              topics:
+              - storage-cos-understand.md
+              - storage-cos-install.md 
+              - storage-cos-apps.md
+              - storage-cos-tutorial-quota.md
+              - storage-cos-vpc-ip.md
+              - storage-cos-reference.md
+          - topicgroup:   
+              label: Storing data on IBM Cloud VPC Block Storage
+              topics:
+              - storage-block-vpc.md
+              - storage-block-vpc-snapshot.md
+              - storage-block-vpc-trusted-profiles.md
+              - storage-block-vpc-unmanaged.md
+          - topicgroup:
+              label: Storing data on IBM Cloud File Storage for VPC
+              topics: 
+              - storage-file-vpc-install.md 
+              - storage-file-vpc-apps.md
+              - storage-file-vpc-managing.md
+              - storage-file-vpc-sc-ref.md 
+          - storage-portworx.md
+          - cs_storage_portworx_backup_gs.md
+          - cs_storage_portworx_gs.md
+          - storage-br.md
+          - storage-utilities.md
+      - topicgroup:
+          label: Enhancing cluster capabilities with integrations
+          topics:
+          - integrations-partnerships.md
+          - integrations-ibm-third-party.md
+          - integrations-addons.md
+          - integrations-helm.md
+          - integrations-svcbind.md
+          - ha.md
+
+  - navgroup:
+      id: reference
+      topics:
+      - topicgroup:
+          label: API reference
+          topics:
+          - link:
+              label: IBM Cloud Kubernetes Service API
+              href: https://containers.cloud.ibm.com/global/swagger-global-api/#/
+          - link:
+              label: IBM Cloud Kubernetes Service API JSON
+              href: https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json
+          - link:
+              label: IBM Cloud Container Registry API
+              href: https://cloud.ibm.com/apidocs/container-registry
+          - link: 
+              label: IBM Cloud Vulnerability Advisor API
+              href: https://cloud.ibm.com/apidocs/container-registry/va
+          - link: 
+              label: Community Kubernetes API
+              href: https://kubernetes.io/docs/reference/
+      - topicgroup:
+          label: CLI plug-in reference
+          topics:
+          - cli-map.md
+          - cli-ks-plugin.md
+          - cli-changelog.md
+          - observability-reference.md
+      - topicgroup:
+          label: Version history
+          topics:
+          - cs_versions_overview.md
+          - cs_versions_changelog.md
+          - benchmarks_overview.md
+          - benchmark-comparison.md
+          - topicgroup:
+              label: Version 1.25
+              topics:
+              - cs_versions_125.md
+              - cs_versions_changelog_125.md
+              - cs_benchmarks_125.md
+          - topicgroup:
+              label: Version 1.24 
+              topics:
+              - cs_versions_124.md
+              - cs_versions_changelog_124.md
+              - cs_benchmarks_124.md                
+          - topicgroup:
+              label: Version 1.23
+              topics:
+              - cs_versions_123.md
+              - cs_versions_changelog_123.md
+              - cs_benchmarks_123.md
+          - topicgroup:
+              label: Version 1.22
+              topics:
+              - cs_versions_122.md
+              - cs_versions_changelog_122.md
+              - cs_benchmarks_122.md
+          - topicgroup:
+              label: Version 1.21 
+              topics:
+              - cs_versions_121.md
+              - cs_versions_changelog_121.md
+              - cs_benchmarks_121.md   
+      - topicgroup:
+          label: Archived version history
+          topics:
+          - topicgroup:
+              label: Version 1.20 
+              topics:
+              - cs_versions_120.md
+              - cs_versions_changelog_120.md
+              - cs_benchmarks_120.md
+          - topicgroup:
+              label: Version 1.19
+              topics:
+              - cs_versions_119.md
+              - cs_versions_changelog_119.md
+              - cs_benchmarks_119.md
+          - cs_versions_changelog_118.md
+          - cs_versions_changelog_117.md
+          - cs_versions_changelog_116.md
+          - cs_versions_changelog_115.md
+          - cs_versions_changelog_114.md
+          - cs_versions_changelog_113.md
+          - cs_versions_changelog_112.md
+          - cs_versions_changelog_111.md
+          - cs_versions_changelog_110.md
+          - cs_versions_changelog_19.md
+          - cs_versions_changelog_18.md
+          - cs_versions_changelog_17.md
+      - topicgroup:
+          label: Add-on version history
+          topics:
+          - add-on-versions.md 
+          - cs_versions_addons.md
+          - cs_versions_istio.md
+          - versions-autoscaler.md
+          - versions-vpc-block-addon.md
+          - versions-object.md
+          - versions-static-route.md
+          - versions-backup-restore.md
+          - cs_versions_alb_oauth_proxy.md
+      - ibm-k8s-controller-config-change-log.md
+      - topicgroup:
+          label: IAM and Activity Tracker events
+          topics:
+          - users-access-ref.md
+          - at-events.md
+          - api-at-iam.md
+      - locations.md
+      - cs_integrations_overview.md
+      - service-settings.md
+      - topicgroup:
+          label: Related links
+          topics:
+          - link: 
+              label: Community Kubernetes documentation
+              href: https://kubernetes.io/docs/home/
+          - link: 
+              label: IBM Developer - Containers
+              href: https://developer.ibm.com/technologies/containers/
+          - link: 
+              label: IBM Developer - Kubernetes
+              href: https://developer.ibm.com/components/kubernetes/
+      - vpc-gen2-flavors.md
+      - classic-flavors.md
+  - navgroup: 
+      id: help
+      topics:
+      - faqs.md
+      - topicgroup:
+          label: Troubleshooting
+          topics:
+          - get-help.md
+          - ts-debug-tool.md
+          - topicgroup:
+              label: Clusters and masters
+              topics:
+              - ts-cluster-debug.md
+              - ts-webhook-debug.md
+              - ts-cluster-master.md
+              - states-cluster.md
+              - ts-cluster-cli.md
+              - ts-cluster-create-delete.md
+              - ts-cluster-no-vpc.md
+              - ts-pod-security-125.md
+              - ts-cluster-icr-pull-img.md
+              - ts-cluster-webhook.md
+              - ts-cluster-portieris.md
+              - ts-cluster-pending.md
+              - ts-cluster-view-work.md
+              - ts-cluster-access-resources.md
+              - ts-kubectl-exec-timeout.md
+              - ts-master-limits.md
+              - ts-metrics-server.md
+              - ts-kube-dashboord-oom.md
+              - ts-admin-cert.md
+          - topicgroup:
+              label: Worker nodes
+              topics:
+              - ts-worker-debug.md
+              - ts-worker-debug-kube-api.md
+              - states-workers.md
+              - ts-worker-common-issues.md
+              - ts-worker-dedicated.md
+              - ts-worker-autorebalance.md
+              - ts-worker-bm-instance-id.md
+              - ts-worker-delete-pods-fail.md
+              - ts-worker-dupe-nodes.md
+              - ts-worker-invalid-vlan.md
+              - ts-worker-pod-timeout.md
+              - ts-worker-ssh-fail.md
+          - topicgroup:
+              label: Cluster autoscaler
+              topics:
+              - ts-ca-debug.md
+              - ts-storage-ca-apikey-reset.md
+              - ts-ca-resize.md
+              - ts-ca-unbalanced.md
+          - topicgroup:
+              label: Cluster network
+              topics:
+              - ts-network-iks-coredns-restart.md
+              - ts-network-strongswan-vpn.md
+              - ts-network-calico-node.md
+              - ts-network-snat-125.md
+              - ts-network-egress-124.md
+              - ts-network-strongswan-install-new.md
+              - ts-network-strongswan-network-nodes.md
+              - ts-network-classic121.md
+              - ts-network-mangle-table.md
+              - ts-letsencrypt.md
+              - ts-calico-log-level.md
+              - ts-ip-whitelist-annotation.md
+              - ts-keepalive-sysctl.md
+          - topicgroup:
+              label: Logging and monitoring
+              topics:
+              - ts-health-iks-kube-db-graphs.md
+              - ts-health-loglines.md
+          - topicgroup:
+              label: Apps and services
+              topics:
+              - ts-app-01-debug.md
+              - ts-app-02-imgpull.md
+              - ts-app-container-start.md
+              - ts-app-04-psp.md
+              - ts-app-pod-pending.md
+              - ts-app-pod-fail.md
+              - ts-app-07-svc-name.md
+              - ts-app-svc-not-found.md
+              - ts-app-svc-key.md
+              - ts-app-helm-install.md
+          - topicgroup:
+              label: Managed add-ons
+              topics:
+              - ts-addon-debug.md
+              - ts-addon-istio-debug.md
+              - ts-addon-istio-gateway-affinity.md
+              - ts-addon-istio-missing.md
+              - ts-addon-istio-webhooks.md
+              - ts-addon-istio-iop.md
+              - ts-delete-olm.md
+          - topicgroup:
+              label: Load balancers
+              topics:
+              - ts-lb-app.md
+              - ts-lb-deploy.md
+              - ts-lb-tainted-nodes.md
+              - ts-lb-vpc-app.md
+              - ts-lb-vpc-no-ips.md
+              - ts-lb-sync-failed.md
+          - topicgroup:
+              label: Ingress
+              topics:
+              - ts-ingress-status.md
+              - ts-ingress-debug.md
+              - ts-ingress-must-gather.md
+              - ts-ingress-app.md
+              - ts-ingress-vpc-app.md
+              - ts-ingress-iks-no-subdomain-create.md
+              - ts-ingress-subdomain-dupe-name.md
+              - ts-ingress-no-secret.md
+              - ts-ingress-secret-expiry.md
+              - ts-ingress-alb-secret.md
+              - ts-ingress-alb-pods-nodes.md
+              - ts-ingress-alb-no-deploy-zone.md
+              - ts-ingress-source-ip-tainted.md
+              - ts-ingress-alb-subnet.md
+              - ts-ingress-websocket.md
+              - nested-ctm.md
+          - topicgroup:
+              label: File Storage
+              topics:
+              - ts-storage-debug.md
+              - ts-storage-debug-file.md
+              - ts-storage-pvc-fail-permissions.md
+              - ts-storage-file-block-pvc-pending.md
+              - ts-storage-file-app.md
+              - ts-storage-file-group-id-fail.md
+              - ts-storage-file-nonroot-nfs-mount.md
+              - ts-storage-file-nonroot.md
+              - ts-storage-file-readonly.md
+              - ts-storage-feedback.md
+          - topicgroup:
+              label: Block Storage
+              topics:
+              - ts-storage-debug-block.md
+              - ts-storage-block-app-pvc.md
+              - ts-storage-block-mount-wrong-fs.md
+              - ts-storage-block-read-only.md
+              - ts-storage-block-throttling.md
+              - ts-storage-vpc-block-api-key.md
+              - ts-storage-block-not-attached.md
+              - ts-storage-vpc-block-monitoring.md
+              - ts-storage-clean-volume.md
+              - ts-storage-fsck.md
+              - ts-storage-volumesnapshot-delete.md
+              - ts-storage-snapshot-fails.md
+          - topicgroup:
+              label: Object Storage
+              topics:
+              - ts-storage-debug-cos.md
+              - ts-storage-object-access-bucket.md
+              - ts-storage-object-helm-fails.md
+              - ts-storage-object-nonroot.md
+              - ts-storage-object-op-not-permitted.md
+              - ts-storage-object-ownership-mountpath.md
+              - ts-storage-object-plugin-fails.md
+              - ts-storage-object-pvc-fails.md
+              - ts-storage-object-pvc-fails-s3fs-iam-ep.md
+              - ts-storage-object-pvc-pending.md
+              - ts-storage-object-pvc-pod-fail-secret.md
+              - ts-storage-object-transport-ep.md
+          - topicgroup:
+              label: Portworx Storage
+              topics:
+              - ts-storage-debug-portworx.md
+              - ts-storage-px-debug.md
+              - ts-storage-px-encryption-fails.md
+      - limitations.md
+      - sitemap.md
