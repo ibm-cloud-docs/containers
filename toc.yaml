@@ -48,12 +48,12 @@ toc:
       - cs_tutorials_cf.md
       - link:
           label: Moving a VM-based application to Kubernetes
-          href: /docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes
+          href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes
       - cs_tutorials_starter.md
       - cs_tutorials_policies.md
       - link:
           label: Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services
-          href: /docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis
+          href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis
 
   - navgroup: 
       id: howto
