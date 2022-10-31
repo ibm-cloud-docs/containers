@@ -171,7 +171,7 @@ ALB OAuth Proxy add-on
 
 ## September 2022
 {: #containers-sep22}
-{: release-note}
+
 
 ### 30 September 2022
 {: #containers-sep3022}
@@ -690,7 +690,6 @@ Istio add-on
 
 ## May 2022
 {: #containers-may22}
-{: release-note}
 
 
 ### 26 May 2022
@@ -787,7 +786,7 @@ Istio add-on
 
 ## April 2022
 {: #containers-apr22}
-{: release-note}
+
 
 ### 28 April 2022
 {: #containers-apr2822}
@@ -3078,8 +3077,8 @@ Ingress ALB changelog
 {: #containers-sept2920}
 {: release-note}
 
-:   Gateway firewalls and Calico policies
-For classic clusters in London or Dallas, updated the required IP addresses and ports that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound), [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private), or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies){: external}.
+Gateway firewalls and Calico policies
+:   For classic clusters in London or Dallas, updated the required IP addresses and ports that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound), [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private), or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies){: external}.
 
 ### 26 September 2020
 {: #containers-sept2620}
@@ -3580,11 +3579,11 @@ New! Virtual Private Cloud Generation 2
     
 :   Ready to get started? Try out the [Creating a cluster in your VPC on generation 2 compute tutorial](/docs/containers?topic=containers-vpc_ks_tutorial).
 
+
+
 ### 19 May 2020
 {: #containers-may1920}
 {: release-note}
-
-
 
 Istio add-on
 :   [Version 1.5 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#15) is released.

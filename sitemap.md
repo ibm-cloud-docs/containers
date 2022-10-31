@@ -1679,7 +1679,7 @@ subcollection: containers
 
     * [29 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2920)
 
-        * For classic clusters in London or Dallas, updated the required IP addresses and ports that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound), [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private), or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies){: external}.
+        * Gateway firewalls and Calico policies
 
     * [26 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2620)
 
