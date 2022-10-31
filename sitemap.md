@@ -215,6 +215,8 @@ subcollection: containers
 
         * ALB OAuth Proxy add-on version 2.0.0_1297
 
+        * Master fix pack 1.22.15_1576, 1.23.13_1550, 1.24.7_1542, and 1.25.3_1520
+
     * [26 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2622)
 
         * Worker node fix pack 1.22.15_1575, 1.23.12_1549, 1.24.6_1541, and 1.25.2_1519
@@ -1444,8 +1446,6 @@ subcollection: containers
     * [25 January 2021](/docs/containers?topic=containers-containers-relnotes#containers-jan2521)
 
         * Istio add-on
-
-        * New! {{site.data.keyword.redhat_openshift_notm}} Do (`odo`) CLI tutorial
 
         * New! Private service endpoint allowlists
 
@@ -5768,7 +5768,7 @@ subcollection: containers
 
     * [`ibmcloud ks storage volume ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_ls_2)
 
-[CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
+[CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
@@ -5933,7 +5933,7 @@ subcollection: containers
 
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
 
-[Kubernetes version changelogs](/docs/containers?topic=containers-changelog#changelog)
+[Kubernetes version change logs](/docs/containers?topic=containers-changelog#changelog)
 
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 
@@ -5974,7 +5974,9 @@ subcollection: containers
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
 
-    * [Change log for Master fix pack 1.25.3_1520 released 27 October 2022](/docs/containers?topic=containers-changelog_125#1253_1520)
+    * [Change log for master fix pack 1.25.3_1520, released 27 October 2022](/docs/containers?topic=containers-changelog_125#1253_1520)
+
+    * [Change log for worker node fix pack 1.25.2_1519, released 25 October 2022](/docs/containers?topic=containers-changelog_125#1252_1519)
 
     * [Change log for master fix pack 1.25.2_1517 and worker node fix pack 1.25.2_1516, released 6 October 2022](/docs/containers?topic=containers-changelog_125#1252_1517_and_1252_1516)
 
@@ -6041,7 +6043,9 @@ subcollection: containers
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
 
-    * [Change log for Master fix pack 1.24.7_1542 released 27 October 2022](/docs/containers?topic=containers-changelog_124#1247_1542)
+    * [Change log for master fix pack 1.24.7_1542, released 27 October 2022](/docs/containers?topic=containers-changelog_124#1247_1542)
+
+    * [Change log for worker node fix pack 1.24.6_1541, released 25 October 2022](/docs/containers?topic=containers-changelog_124#1246_1541)
 
     * [Change log for worker node fix pack 1.24.6_1540, released 10 October 2022](/docs/containers?topic=containers-changelog_124#1246_1540)
 
@@ -6134,7 +6138,9 @@ subcollection: containers
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
 
-    * [Change log for Master fix pack 1.23.13_1550 released 27 October 2022](/docs/containers?topic=containers-changelog_123#12313_1550)
+    * [Change log for master fix pack 1.23.13_1550, released 27 October 2022](/docs/containers?topic=containers-changelog_123#12313_1550)
+
+    * [Change log for worker node fix pack 1.23.12_1549, released 25 October 2022](/docs/containers?topic=containers-changelog_123#12312_1549)
 
     * [Change log for worker node fix pack 1.23.12_1548, released 10 October 2022](/docs/containers?topic=containers-changelog_123#12312_1548)
 
@@ -6255,7 +6261,9 @@ subcollection: containers
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
 
-    * [Change log for Master fix pack 1.22.15_1576 released 27 October 2022](/docs/containers?topic=containers-changelog_122#12215_1576)
+    * [Change log for master fix pack 1.22.15_1576, released 27 October 2022](/docs/containers?topic=containers-changelog_122#12215_1576)
+
+    * [Change log for worker node fix pack 1.22.15_1575, released 25 October 2022](/docs/containers?topic=containers-changelog_122#12215_1575)
 
     * [Change log for worker node fix pack 1.22.15_1574, released 10 October 2022](/docs/containers?topic=containers-changelog_122#12215_1574)
 
@@ -9081,6 +9089,8 @@ subcollection: containers
 [Why can't I establish VPN connectivity with the strongSwan Helm chart?](/docs/containers?topic=containers-cs_vpn_fails#cs_vpn_fails)
 
 [Why does my worker node show a `NetworkUnavailable` error?](/docs/containers?topic=containers-ts-network-calico-node#ts-network-calico-node)
+
+* [Workarounds for `calico-node`](/docs/containers?topic=containers-ts-network-calico-node#ts-network-calico-node-work)
 
 [Why am I running out of SNAT ports for egress connections from pods in my cluster?](/docs/containers?topic=containers-ts-network-snat-125#ts-network-snat-125)
 

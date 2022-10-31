@@ -37,34 +37,7 @@ Review the version 1.24 change log.
 {: shortdesc}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Change log for Master fix pack 1.24.7_1542 released 27 October 2022
+### Change log for master fix pack 1.24.7_1542, released 27 October 2022
 {: #1247_1542}
 
 The following table shows the changes that are in the master fix pack 1.24.7_1542. Master patch updates are applied automatically. 
@@ -79,8 +52,9 @@ The following table shows the changes that are in the master fix pack 1.24.7_154
 | Key Management Service provider | v2.5.9 | v2.5.10 | Updated `Go` dependencies and to `Go` version `1.19.2`. |
 | Kubernetes | v1.24.6 | v1.24.7 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.7){: external}. |
 | Konnectivity agent and server | v0.0.32_363_iks | v0.0.33_418_iks | Updated Konnectivity to version v0.0.33 and added s390x functionality. See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.33){: external}. |
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
-{: caption="Changes since version 1.24.61538" caption-side="top"}### Change log for worker node fix pack 1.24.6_1541, released 25 October 2022
+{: caption="Changes since version 1.24.6_1538" caption-side="top"}
+
+### Change log for worker node fix pack 1.24.6_1541, released 25 October 2022
 {: #1246_1541}
 
 The following table shows the changes that are in the worker node fix pack 1.24.6_1541. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -90,7 +64,6 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-193 | 4.15.0-194 | Worker node kernel & package updates for [CVE-2018-16860](https://nvd.nist.gov/vuln/detail/CVE-2018-16860){: external}, [CVE-2019-12098](https://nvd.nist.gov/vuln/detail/CVE-2019-12098){: external}, [CVE-2020-16156](https://nvd.nist.gov/vuln/detail/CVE-2020-16156){: external}, [CVE-2021-3671](https://nvd.nist.gov/vuln/detail/CVE-2021-3671){: external}, [CVE-2021-43618](https://nvd.nist.gov/vuln/detail/CVE-2021-43618){: external}, [CVE-2022-3116](https://nvd.nist.gov/vuln/detail/CVE-2022-3116){: external}, [CVE-2022-3515](https://nvd.nist.gov/vuln/detail/CVE-2022-3515){: external}, [CVE-2022-39253](https://nvd.nist.gov/vuln/detail/CVE-2022-39253){: external}, [CVE-2022-39260](https://nvd.nist.gov/vuln/detail/CVE-2022-39260){: external}. |
 | Kubernetes |N/A|N/A|N/A|
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.6_1540" caption-side="top"}
 
 ### Change log for worker node fix pack 1.24.6_1540, released 10 October 2022
@@ -105,7 +78,6 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | Kubernetes |N/A|N/A|N/A|
 | RHEL 7 Packages |N/A|N/A|N/A|
 | RHEL 8 Packages |N/A|N/A|N/A|
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.6_1539" caption-side="top"}
 
 ### Change log for master fix pack 1.24.6_1538, released 26 September 2022
@@ -126,7 +98,6 @@ The following table shows the changes that are in the master fix pack 1.24.6_153
 | Key Management Service Provider | v2.5.8 | v2.5.9 | Updated `Go` dependencies and to `Go` version `1.18.6`. |
 | Kubernetes | v1.24.4 | v1.24.6 | This update resolves [CVE-2022-3172](https://nvd.nist.gov/vuln/detail/CVE-2022-3172){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6823785){: external}. See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.6){: external}. |
 | Kubernetes NodeLocal DNS cache | 1.22.6 | 1.22.11 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.11){: external}. |
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.41536" caption-side="top"}
 
 ### Change log for worker node fix pack 1.24.6_1539, released 26 September 2022
@@ -141,7 +112,6 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | Kubernetes | 1.24.4 | 1.24.6 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.6){: external}. |
 | RHEL 7 Packages |N/A|N/A|N/A|
 | RHEL 8 Packages | 4.18.0-372.19.1 | 4.18.0-372.26.1 |N/A|
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.4_1537" caption-side="top"}
 
 ### Change log for worker node fix pack 1.24.4_1537, released 12 September 2022
@@ -154,7 +124,6 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-191 | 4.15.0-192 | Worker node kernel & package updates for [CVE-2021-33656](https://nvd.nist.gov/vuln/detail/CVE-2021-33656){: external},[CVE-2022-35252](https://nvd.nist.gov/vuln/detail/CVE-2022-35252){: external}. |
 | Kubernetes |N/A|N/A|N/A| 
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.4_1535" caption-side="top"}
 
 ### Change log for master fix pack 1.24.4_1536, released 1 September 2022
@@ -182,7 +151,6 @@ The following table shows the changes that are in the master fix pack 1.24.4_153
 | Kubernetes NodeLocal DNS cache | 1.22.5 | 1.22.6 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.6){: external}. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2058 | 2110 | Updated `Go` dependencies and to `Go` version `1.17.13`. |
 | Portieris admission controller | v0.12.5 | v0.12.6 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.12.6){: external}. |
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.3_1531" caption-side="top"}
 
 ### Change log for worker node fix pack 1.24.4_1535, released 29 August 2022
@@ -196,7 +164,6 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | Ubuntu 18.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2019-5815](https://nvd.nist.gov/vuln/detail/CVE-2019-5815){: external},[CVE-2021-30560](https://nvd.nist.gov/vuln/detail/CVE-2021-30560){: external},[CVE-2022-31676](https://nvd.nist.gov/vuln/detail/CVE-2022-31676){: external},[CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external}. |
 | Kubernetes | 1.24.3 | 1.24.4 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.4){: external}. | 
 | HAPROXY | 6514a2 | c1634f | [CVE-2022-32206](https://nvd.nist.gov/vuln/detail/CVE-2022-32206){: external},[CVE-2022-32208](https://nvd.nist.gov/vuln/detail/CVE-2022-32208){: external}
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.3_1533" caption-side="top"}
 
 ### Change log for worker node fix pack 1.24.3_1533, released 16 August 2022
@@ -210,7 +177,6 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | Ubuntu 18.04 packages | 4.15.0-189 | 4.15.0-191 | Worker node kernel & package updates for [CVE-2016-3709](https://nvd.nist.gov/vuln/detail/CVE-2016-3709){: external},[CVE-2021-4209](https://nvd.nist.gov/vuln/detail/CVE-2021-4209){: external},[CVE-2022-1652](https://nvd.nist.gov/vuln/detail/CVE-2022-1652){: external},[CVE-2022-1679](https://nvd.nist.gov/vuln/detail/CVE-2022-1679){: external},[CVE-2022-1734](https://nvd.nist.gov/vuln/detail/CVE-2022-1734){: external},[CVE-2022-2509](https://nvd.nist.gov/vuln/detail/CVE-2022-2509){: external},[CVE-2022-2586](https://nvd.nist.gov/vuln/detail/CVE-2022-2586){: external},[CVE-2022-2588](https://nvd.nist.gov/vuln/detail/CVE-2022-2588){: external},[CVE-2022-34918](https://nvd.nist.gov/vuln/detail/CVE-2022-34918){: external}. |
 | Kubernetes |N/A|N/A|N/A| 
 | containerd | 1.6.6 | 1.6.8 | For more information, see the [change log](https://github.com/containerd/containerd/releases/tag/v1.6.8){: external}. |
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.3_1532" caption-side="top"}
 
 ### Change log for worker node fix pack 1.24.3_1532, released 01 August 2022
@@ -223,7 +189,6 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2022-27404](https://nvd.nist.gov/vuln/detail/CVE-2022-27404){: external},[CVE-2022-27405](https://nvd.nist.gov/vuln/detail/CVE-2022-27405){: external},[CVE-2022-27406](https://nvd.nist.gov/vuln/detail/CVE-2022-27406){: external},[CVE-2022-29217](https://nvd.nist.gov/vuln/detail/CVE-2022-29217){: external},[CVE-2022-31782](https://nvd.nist.gov/vuln/detail/CVE-2022-31782){: external}. |
 | Kubernetes | 1.24.2 | 1.24.3 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.3){: external}. |
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.2_1529" caption-side="top"}
 
 ### Change log for master fix pack 1.24.3_1531, released 26 July 2022
@@ -249,7 +214,6 @@ The following table shows the changes that are in the master fix pack 1.24.3_153
 | Kubernetes NodeLocal DNS cache | 1.22.2 | 1.22.5 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.5){: external}. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1998 | 2058 | Updated image for [CVE-2022-2097](https://nvd.nist.gov/vuln/detail/CVE-2022-2097){: external}. |
 | Portieris admission controller | v0.12.4 | v0.12.5 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.12.5){: external}. |
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.2_1526" caption-side="top"}
 
 ### Change log for worker node fix pack 1.24.2_1529, released 18 July 2022
@@ -262,7 +226,6 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-188 | 4.15.0-189 | Worker node kernel & package updates for [CVE-2015-20107](https://nvd.nist.gov/vuln/detail/CVE-2015-20107){: external}, [CVE-2022-2097](https://nvd.nist.gov/vuln/detail/CVE-2022-2097){: external},[CVE-2022-22747](https://nvd.nist.gov/vuln/detail/CVE-2022-22747){: external}, [CVE-2022-24765](https://nvd.nist.gov/vuln/detail/CVE-2022-24765){: external}, [CVE-2022-29187](https://nvd.nist.gov/vuln/detail/CVE-2022-29187){: external},[CVE-2022-34480](https://nvd.nist.gov/vuln/detail/CVE-2022-34480){: external},[CVE-2022-34903](https://nvd.nist.gov/vuln/detail/CVE-2022-34903){: external}. |
 | Kubernetes |N/A|N/A|N/A|
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.2_1527" caption-side="top"}
 
 ### Change log for worker node fix pack 1.24.2_1527, released 05 July 2022
@@ -275,7 +238,6 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-187 | 4.15.0-188 | Worker node kernel & package updates for [CVE-2022-1292](https://nvd.nist.gov/vuln/detail/CVE-2022-1292){: external},[CVE-2022-2068](https://nvd.nist.gov/vuln/detail/CVE-2022-2068){: external},[CVE-2022-2084](https://nvd.nist.gov/vuln/detail/CVE-2022-2084){: external},[CVE-2022-28388](https://nvd.nist.gov/vuln/detail/CVE-2022-28388){: external},[CVE-2022-32206](https://nvd.nist.gov/vuln/detail/CVE-2022-32206){: external},[CVE-2022-32208](https://nvd.nist.gov/vuln/detail/CVE-2022-32208){: external}. |
 | Kubernetes |N/A|N/A|N/A|
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.2_1526" caption-side="top"}
 
 ### Change log for master fix pack 1.24.2_1526, released 22 June 2022
@@ -290,7 +252,6 @@ The following table shows the changes that are in the master fix pack 1.24.2_152
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.2.4 | v2.2.6 | Bug fixes for the driver installation. Block plugin base images were updated to `ubi`: `8.6-751.1655117800` for CVE-2022-1271 |
 | Kubernetes | v1.24.1 | v1.24.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.2){: external}. |
 | Kubernetes add-on resizer | 1.8.14 | 1.8.15 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.18.15){: external}. |
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.1_1523" caption-side="top"}
 
 ### Change log for worker node fix pack 1.24.2_1526, released 20 June 2022
@@ -305,7 +266,6 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | Haproxy | 468c09 | 04f862 | [CVE-2022-1271](https://nvd.nist.gov/vuln/detail/CVE-2022-1271){: external}. |
 | containerd | v1.6.4 | v1.6.6 | See the [change log](https://github.com/containerd/containerd/releases/tag/v1.6.6){: external}, the [security bulletin](https://www.ibm.com/support/pages/node/6597989){: external} for [CVE-2022-31030](https://nvd.nist.gov/vuln/detail/CVE-2022-31030){: external}, and the [security bulletin](https://www.ibm.com/support/pages/node/6598049){: external} for [CVE-2022-29162](https://nvd.nist.gov/vuln/detail/CVE-2022-29162){: external}. |
 | Kubernetes | 1.24.1 | 1.24.2 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.2){: external}. | 
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.24.1_1522" caption-side="top"}
 
 ### Change log for master fix pack 1.24.1_1523 and worker node fix pack 1.24.1_1522, released 9 June 2022
@@ -327,5 +287,4 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | Kubernetes Metrics Server | v0.6.0 | v0.6.0 | Updated to run with a highly available configuration. For more information on this configuration, see the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.6.0){: external}. |
 | Kubernetes NodeLocal DNS cache | 1.21.4 | 1.22.2 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.2){: external}. |
 | Pause container image | 3.6 | 3.7 | See the [pause container image release notes](https://github.com/kubernetes/kubernetes/blob/master/build/pause/CHANGELOG.md){: external}. | 
-{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.23.7_1531 (master) and 1.23.7_1532 (worker node)" caption-side="top"}

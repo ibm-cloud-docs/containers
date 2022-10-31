@@ -47,6 +47,9 @@ Ingress ALB change log updates
 ALB OAuth Proxy add-on version 2.0.0_1297
 :   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 
+Master fix pack 1.22.15_1576, 1.23.13_1550, 1.24.7_1542, and 1.25.3_1520
+:   For more information, see the change logs: [1.22](/docs/containers?topic=containers-changelog_122), [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), and [1.25](/docs/containers?topic=containers-changelog_125).
+
  
 
 
@@ -2607,9 +2610,6 @@ Reminder: VPC Gen 1 deprecation
 
 Istio add-on
 :   [Version 1.8.2 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#182) is released.
-
-New! {{site.data.keyword.redhat_openshift_notm}} Do (`odo`) CLI tutorial
-:   Looking to develop apps without using `kubectl` system admin commands or YAML configuration files? Check out the [Developing on clusters with the {{site.data.keyword.redhat_openshift_notm}} Do CLI](/docs/containers?topic=containers-odo-tutorial) tutorial for a quick guide on using `odo` to package and push your apps to your cluster. You no longer need a {{site.data.keyword.redhat_openshift_notm}} cluster to use `odo`, but can use `odo` with any Kubernetes cluster.
 
 New! Private service endpoint allowlists
 :   You can now control access to your private cloud service endpoint by [creating a subnet allowlist](/docs/containers?topic=containers-access_cluster#private-se-allowlist). Only authorized requests to your cluster master that originate from subnets in the allowlist are permitted through the cluster's private cloud service endpoint.
