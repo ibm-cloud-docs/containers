@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-26"
+lastupdated: "2022-10-31"
 
 keywords: kubernetes, containers
 
@@ -64,7 +64,23 @@ Review the version 1.24 change log.
 
 
 
-### Change log for worker node fix pack 1.24.6_1541, released 25 October 2022
+### Change log for Master fix pack 1.24.7_1542 released 27 October 2022
+{: #1247_1542}
+
+The following table shows the changes that are in the master fix pack 1.24.7_1542. Master patch updates are applied automatically. 
+{: shortdesc}
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.11 | v1.3.12 | Updated `Go` dependencies, golangci-lint, and to `Go` version 1.19.2. Updated base image version to 109. Excluded ingress status from cluster status calculation. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.24.5-1 | v1.24.7-1 | Updated to support the `Kubernetes 1.24.7` release. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | dc1725a | 778ef2b | Updated to `Go` version `1.18.6`. |
+| Key Management Service provider | v2.5.9 | v2.5.10 | Updated `Go` dependencies and to `Go` version `1.19.2`. |
+| Kubernetes | v1.24.6 | v1.24.7 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.7){: external}. |
+| Konnectivity agent and server | v0.0.32_363_iks | v0.0.33_418_iks | Updated Konnectivity to version v0.0.33 and added s390x functionality. See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.33){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.24.61538" caption-side="top"}### Change log for worker node fix pack 1.24.6_1541, released 25 October 2022
 {: #1246_1541}
 
 The following table shows the changes that are in the worker node fix pack 1.24.6_1541. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.

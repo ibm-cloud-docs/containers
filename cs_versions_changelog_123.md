@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-10-26"
+lastupdated: "2022-10-31"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -50,7 +50,23 @@ Review the version 1.23 change log.
 
 
 
-### Change log for worker node fix pack 1.23.12_1549, released 25 October 2022
+### Change log for Master fix pack 1.23.13_1550 released 27 October 2022
+{: #12313_1550}
+
+The following table shows the changes that are in the master fix pack 1.23.13_1550. Master patch updates are applied automatically. 
+{: shortdesc}
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.11 | v1.3.12 | Updated `Go` dependencies, golangci-lint, and to `Go` version 1.19.2. Updated base image version to 109. Excluded ingress status from cluster status calculation. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.23.11-1 | v1.23.13-1 | Updated to support the `Kubernetes 1.23.13` release. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | dc1725a | 778ef2b | Updated to `Go` version `1.18.6`. |
+| Key Management Service provider | v2.5.9 | v2.5.10 | Updated `Go` dependencies and to `Go` version `1.19.2`. |
+| Kubernetes | v1.23.12 | v1.23.13 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.13){: external}. |
+| Konnectivity agent and server | v0.0.32_363_iks | v0.0.33_418_iks | Updated Konnectivity to version v0.0.33 and added s390x functionality. See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.33){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.23.121546" caption-side="top"}### Change log for worker node fix pack 1.23.12_1549, released 25 October 2022
 {: #12312_1549}
 
 The following table shows the changes that are in the worker node fix pack 1.23.12_1549. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
