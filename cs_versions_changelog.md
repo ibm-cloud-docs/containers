@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-06-23"
+lastupdated: "2022-10-31"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -14,7 +14,7 @@ subcollection: containers
 
 
 
-# Kubernetes version changelogs
+# Kubernetes version change logs
 {: #changelog}
 
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.

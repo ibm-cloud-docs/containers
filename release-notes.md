@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-28"
+lastupdated: "2022-10-31"
 
 keywords: kubernetes, release notes
 
@@ -27,6 +27,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## October 2022
 {: #containers-oct22}
 
+
+
+### 31 October 2022
+{: #containers-oct3122}
+{: release-note}
+
+Ingress ALB change log updates
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog) for version `1.3.0_2907_iks`.
+
+
+
 ### 27 October 2022
 {: #containers-oct2722}
 {: release-note}
@@ -35,6 +46,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ALB OAuth Proxy add-on version 2.0.0_1297
 :   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+
+Master fix pack 1.22.15_1576, 1.23.13_1550, 1.24.7_1542, and 1.25.3_1520
+:   For more information, see the change logs: [1.22](/docs/containers?topic=containers-changelog_122), [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), and [1.25](/docs/containers?topic=containers-changelog_125).
 
  
 
@@ -157,7 +171,7 @@ ALB OAuth Proxy add-on
 
 ## September 2022
 {: #containers-sep22}
-{: release-note}
+
 
 ### 30 September 2022
 {: #containers-sep3022}
@@ -676,7 +690,6 @@ Istio add-on
 
 ## May 2022
 {: #containers-may22}
-{: release-note}
 
 
 ### 26 May 2022
@@ -773,7 +786,7 @@ Istio add-on
 
 ## April 2022
 {: #containers-apr22}
-{: release-note}
+
 
 ### 28 April 2022
 {: #containers-apr2822}
@@ -2597,9 +2610,6 @@ Reminder: VPC Gen 1 deprecation
 Istio add-on
 :   [Version 1.8.2 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#182) is released.
 
-New! {{site.data.keyword.redhat_openshift_notm}} Do (`odo`) CLI tutorial
-:   Looking to develop apps without using `kubectl` system admin commands or YAML configuration files? Check out the [Developing on clusters with the {{site.data.keyword.redhat_openshift_notm}} Do CLI](/docs/containers?topic=containers-odo-tutorial) tutorial for a quick guide on using `odo` to package and push your apps to your cluster. You no longer need a {{site.data.keyword.redhat_openshift_notm}} cluster to use `odo`, but can use `odo` with any Kubernetes cluster.
-
 New! Private service endpoint allowlists
 :   You can now control access to your private cloud service endpoint by [creating a subnet allowlist](/docs/containers?topic=containers-access_cluster#private-se-allowlist). Only authorized requests to your cluster master that originate from subnets in the allowlist are permitted through the cluster's private cloud service endpoint.
 
@@ -3067,8 +3077,8 @@ Ingress ALB changelog
 {: #containers-sept2920}
 {: release-note}
 
-:   Gateway firewalls and Calico policies
-For classic clusters in London or Dallas, updated the required IP addresses and ports that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound), [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private), or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies){: external}.
+Gateway firewalls and Calico policies
+:   For classic clusters in London or Dallas, updated the required IP addresses and ports that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound), [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private), or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies){: external}.
 
 ### 26 September 2020
 {: #containers-sept2620}
@@ -3569,11 +3579,11 @@ New! Virtual Private Cloud Generation 2
     
 :   Ready to get started? Try out the [Creating a cluster in your VPC on generation 2 compute tutorial](/docs/containers?topic=containers-vpc_ks_tutorial).
 
+
+
 ### 19 May 2020
 {: #containers-may1920}
 {: release-note}
-
-
 
 Istio add-on
 :   [Version 1.5 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#15) is released.

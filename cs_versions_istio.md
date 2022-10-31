@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-27"
+lastupdated: "2022-10-31"
 
 keywords: kubernetes, istio, add-on
 
@@ -80,10 +80,10 @@ Current version
 
 Updates in this version
 :   See the Istio release notes for [Istio 1.15.1](https://istio.io/latest/news/releases/1.15.x/announcing-1.15.1/.){: external}.
+:   Fixes the Istio operator memory leak issue.
 :   Resolves the following CVEs:
     - [CVE-2022-35252](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35252){: external}
     - [usn-5587-1](https://ubuntu.com/security/notices/USN-5587-1){: external}
-:   Fixes the Istio operator memory leak issue.
 
 
 
@@ -125,13 +125,13 @@ Current version
 
 Updates in this version
 :   See the Istio release notes for [Istio 1.14.5](https://istio.io/latest/news/releases/1.14.x/announcing-1.14.5/){: external}.
+:   The istio operator memory leak is fixed in 1.14.5.
 :   Resolves the following CVEs:
     - [CVE-2022-35252](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35252){: external}
     - [CVE-2022-1586](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1586){: external}
     - [CVE-2022-1587](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1587){: external}
     - [usn-5587-1](https://ubuntu.com/security/notices/USN-5587-1){: external}
     - [usn-5627-1](https://ubuntu.com/security/notices/USN-5627-1){: external}
-:   The istio operator memory leak is fixed in 1.14.5.
 
 
 
@@ -149,12 +149,11 @@ Current version
 
 Updates in this version
 :   See the Istio release notes for [Istio 1.14.4](https://istio.io/latest/news/releases/1.14.x/announcing-1.14.4/){: external}.
+:   Adds a 1G memory limit and a 100M memory request to the `add-on-istio-operator` deployment. This addition resolves an error in which a reconcile loop increased memory usage over time. As a result of this change, your Istio operator pod might restart frequently. However, the frequent operator pod restarts do not affect Istio on the cluster and your Kubernetes deployment still matches what was specified in the IOPs.
 :   Resolves the following CVEs:
     - [usn-5550-1](https://ubuntu.com/security/notices/USN-5550-1){: external}
     - [CVE-2021-4209](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-4209){: external}
     - [CVE-2022-2509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2509){: external}
-:   Adds a 1G memory limit and a 100M memory request to the `add-on-istio-operator` deployment. This addition resolves an error in which a reconcile loop increased memory usage over time. As a result of this change, your Istio operator pod might restart frequently. However, the frequent operator pod restarts do not affect Istio on the cluster and your Kubernetes deployment still matches what was specified in the IOPs.
-
 
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-28"
+lastupdated: "2022-10-31"
 
 keywords: containers
 subcollection: containers
@@ -207,9 +207,15 @@ subcollection: containers
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
 
+    * [31 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct3122)
+
+        * Ingress ALB change log updates
+
     * [27 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2722)
 
         * ALB OAuth Proxy add-on version 2.0.0_1297
+
+        * Master fix pack 1.22.15_1576, 1.23.13_1550, 1.24.7_1542, and 1.25.3_1520
 
     * [26 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2622)
 
@@ -1441,8 +1447,6 @@ subcollection: containers
 
         * Istio add-on
 
-        * New! {{site.data.keyword.redhat_openshift_notm}} Do (`odo`) CLI tutorial
-
         * New! Private service endpoint allowlists
 
         * Private Kubernetes Ingress
@@ -1675,7 +1679,7 @@ subcollection: containers
 
     * [29 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2920)
 
-        * For classic clusters in London or Dallas, updated the required IP addresses and ports that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound), [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private), or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies){: external}.
+        * Gateway firewalls and Calico policies
 
     * [26 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2620)
 
@@ -5764,7 +5768,7 @@ subcollection: containers
 
     * [`ibmcloud ks storage volume ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_ls_2)
 
-[CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
+[CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
@@ -5929,7 +5933,7 @@ subcollection: containers
 
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
 
-[Kubernetes version changelogs](/docs/containers?topic=containers-changelog#changelog)
+[Kubernetes version change logs](/docs/containers?topic=containers-changelog#changelog)
 
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 
@@ -5969,6 +5973,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for master fix pack 1.25.3_1520, released 27 October 2022](/docs/containers?topic=containers-changelog_125#1253_1520)
 
     * [Change log for worker node fix pack 1.25.2_1519, released 25 October 2022](/docs/containers?topic=containers-changelog_125#1252_1519)
 
@@ -6036,6 +6042,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for master fix pack 1.24.7_1542, released 27 October 2022](/docs/containers?topic=containers-changelog_124#1247_1542)
 
     * [Change log for worker node fix pack 1.24.6_1541, released 25 October 2022](/docs/containers?topic=containers-changelog_124#1246_1541)
 
@@ -6129,6 +6137,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for master fix pack 1.23.13_1550, released 27 October 2022](/docs/containers?topic=containers-changelog_123#12313_1550)
 
     * [Change log for worker node fix pack 1.23.12_1549, released 25 October 2022](/docs/containers?topic=containers-changelog_123#12312_1549)
 
@@ -6250,6 +6260,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview_122)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for master fix pack 1.22.15_1576, released 27 October 2022](/docs/containers?topic=containers-changelog_122#12215_1576)
 
     * [Change log for worker node fix pack 1.22.15_1575, released 25 October 2022](/docs/containers?topic=containers-changelog_122#12215_1575)
 
@@ -7756,7 +7768,9 @@ subcollection: containers
 
 * [Version 1.3.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_0)
 
-    * [1.3.0_2847_iks (default), released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2847_iks)
+    * [1.3.0_2907_iks (default), released 31 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2907_iks)
+
+    * [1.3.0_2847_iks, released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2847_iks)
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
@@ -9075,6 +9089,8 @@ subcollection: containers
 [Why can't I establish VPN connectivity with the strongSwan Helm chart?](/docs/containers?topic=containers-cs_vpn_fails#cs_vpn_fails)
 
 [Why does my worker node show a `NetworkUnavailable` error?](/docs/containers?topic=containers-ts-network-calico-node#ts-network-calico-node)
+
+* [Workarounds for `calico-node`](/docs/containers?topic=containers-ts-network-calico-node#ts-network-calico-node-work)
 
 [Why am I running out of SNAT ports for egress connections from pods in my cluster?](/docs/containers?topic=containers-ts-network-snat-125#ts-network-snat-125)
 
