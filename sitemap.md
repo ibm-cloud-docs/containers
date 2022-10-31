@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-28"
+lastupdated: "2022-10-31"
 
 keywords: containers
 subcollection: containers
@@ -206,6 +206,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
+
+    * [31 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct3122)
+
+        * Ingress ALB change log updates
 
     * [27 October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct2722)
 
@@ -7756,7 +7760,9 @@ subcollection: containers
 
 * [Version 1.3.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_0)
 
-    * [1.3.0_2847_iks (default), released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2847_iks)
+    * [1.3.0_2907_iks (default), released 31 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2907_iks)
+
+    * [1.3.0_2847_iks, released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2847_iks)
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
