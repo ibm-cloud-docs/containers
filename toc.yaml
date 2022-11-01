@@ -78,7 +78,7 @@ toc:
           - cluster-create.md
           - cluster-create-classic.md
           - cluster-create-vpc-gen2.md
-          - cluster-create-dedidcated-hosts.md
+          - cluster-create-dedicated-hosts.md
       - topicgroup:
           label: Accessing clusters
           topics:
@@ -453,7 +453,6 @@ toc:
               - ts-network-mangle-table.md
               - ts-letsencrypt.md
               - ts-calico-log-level.md
-              - ts-ip-whitelist-annotation.md
               - ts-keepalive-sysctl.md
           - topicgroup:
               label: Logging and monitoring
