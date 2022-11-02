@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-11-01"
+lastupdated: "2022-11-02"
 
 keywords: containers
 subcollection: containers
@@ -94,7 +94,7 @@ subcollection: containers
 
 * [Storage](/docs/containers?topic=containers-infrastructure_providers#infra-storage)
 
-* [User access](/docs/containers?topic=containers-infrastructure_providers#user-access)
+* [User access](/docs/containers?topic=containers-infrastructure_providers#infra-user-access)
 
 * [Integrations](/docs/containers?topic=containers-infrastructure_providers#infra-integrations)
 
