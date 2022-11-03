@@ -40,7 +40,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
-| 1.22 | Yes | 29 Sep 2021 | 30 Nov 2022 `†` |
+| 1.22 | Yes | 29 Sep 2021 | 14 Dec 2022 `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.22" caption-side="bottom"}
 
 ## Preparing to update
