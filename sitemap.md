@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-10-31"
+lastupdated: "2022-11-03"
 
 keywords: containers
 subcollection: containers
@@ -75,6 +75,38 @@ subcollection: containers
 * [Comparison between {{site.data.keyword.redhat_openshift_notm}} and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes)
 
 [Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers)
+
+* [Compute and worker node resources](/docs/containers?topic=containers-infrastructure_providers#infra-compute)
+
+* [Security](/docs/containers?topic=containers-infrastructure_providers#infra-security)
+
+* [High availability](/docs/containers?topic=containers-infrastructure_providers#infra-high-availability)
+
+* [Reservations](/docs/containers?topic=containers-infrastructure_providers#infar-reservations)
+
+* [Cluster administration](/docs/containers?topic=containers-infrastructure_providers#infra-cluster-admin)
+
+* [Cluster networking](/docs/containers?topic=containers-infrastructure_providers#infra-cluster-networking)
+
+* [Apps and container platform](/docs/containers?topic=containers-infrastructure_providers#infra-apps-cp)
+
+* [App networking](/docs/containers?topic=containers-infrastructure_providers#infra-app-networking)
+
+* [Storage](/docs/containers?topic=containers-infrastructure_providers#infra-storage)
+
+* [User access](/docs/containers?topic=containers-infrastructure_providers#infra-user-access)
+
+* [Integrations](/docs/containers?topic=containers-infrastructure_providers#infra-integrations)
+
+* [Locations and versions](/docs/containers?topic=containers-infrastructure_providers#infra-locations)
+
+* [Service interface](/docs/containers?topic=containers-infrastructure_providers#infra-interface)
+
+* [Service compliance](/docs/containers?topic=containers-infrastructure_providers#infra-compliance)
+
+* [Service limitations](/docs/containers?topic=containers-infrastructure_providers#infra-limitations)
+
+* [Troubleshooting and support](/docs/containers?topic=containers-infrastructure_providers#infra-troubleshoot)
 
 [Your responsibilities with using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
 
@@ -204,6 +236,14 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov22)
+
+    * [3 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov0322)
+
+        * Changes to the Portworx update process beginning with version `2.12`.
+
+        * Cluster autoscaler add-on version `1.0.7_883`.
 
 * [October 2022](/docs/containers?topic=containers-containers-relnotes#containers-oct22)
 
@@ -2997,11 +3037,37 @@ subcollection: containers
 
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
 
-* [Single zone cluster](/docs/containers?topic=containers-ha_clusters#single_zone)
+* [Single zone clusters](/docs/containers?topic=containers-ha_clusters#single_zone)
 
-* [Multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone)
+    * [Is my master highly available in a single zone cluster?](/docs/containers?topic=containers-ha_clusters#sz-master-ha)
 
-* [Multiple public clusters connected with a global load balancer](/docs/containers?topic=containers-ha_clusters#multiple_clusters)
+    * [How can I protect my workloads against a single zone failure?](/docs/containers?topic=containers-ha_clusters#sz-workload-failover)
+
+* [Multizone cluster](/docs/containers?topic=containers-ha_clusters#mz-clusters)
+
+    * [Why do I need worker nodes in three zones?](/docs/containers?topic=containers-ha_clusters#mz-cluster-zones)
+
+    * [How is my {{site.data.keyword.containerlong_notm}} master set up?](/docs/containers?topic=containers-ha_clusters#mz-master-setup)
+
+    * [Do I have to do anything so that the master can communicate with the workers across zones?](/docs/containers?topic=containers-ha_clusters#mz-master-communication)
+
+    * [Can I convert my single zone cluster to a multizone cluster?](/docs/containers?topic=containers-ha_clusters#convert-sz-to-mz)
+
+    * [Do my apps automatically spread across zones?](/docs/containers?topic=containers-ha_clusters#multizone-apps-faq)
+
+* [Multiple public clusters connected with a global load balancer](/docs/containers?topic=containers-ha_clusters#multiple-clusters-glb)
+
+    * [Why do I need 3 clusters in three zones?](/docs/containers?topic=containers-ha_clusters#multicluster-three-zones)
+
+    * [What if I want to set up multiple clusters across regions?](/docs/containers?topic=containers-ha_clusters#multiple-regions-setup)
+
+    * [What options do I have to load balance workloads across multiple clusters?](/docs/containers?topic=containers-ha_clusters#multiple-cluster-lb-options)
+
+    * [Setting up a CIS global load balancer](/docs/containers?topic=containers-ha_clusters#cis-global-lb-setup)
+
+    * [Setting up your own global load balancer](/docs/containers?topic=containers-ha_clusters#byo-global-lb-setup)
+
+    * [What if I want to load balance workloads on the private network?](/docs/containers?topic=containers-ha_clusters#glb-private)
 
 [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 
@@ -3055,6 +3121,8 @@ subcollection: containers
 * [Creating standard VPC clusters from the CLI](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_vpcg2_cli)
 
 * [Example commands to create VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_create_vpc)
+
+[Creating clusters on dedicated hosts](/docs/containers?topic=containers-cluster-create-dedicated-hosts#cluster-create-dedicated-hosts)
 
 
 ## Accessing clusters
@@ -5921,8 +5989,6 @@ subcollection: containers
 
 * [Available {{site.data.keyword.containerlong}} versions](/docs/containers?topic=containers-cs_versions#cs_versions_available)
 
-* [Available operating systems](/docs/containers?topic=containers-cs_versions#available-os)
-
 * [Checking a cluster's Kubernetes server version](/docs/containers?topic=containers-cs_versions#cs_server_version)
 
 * [Update types](/docs/containers?topic=containers-cs_versions#update_types)
@@ -8188,6 +8254,8 @@ subcollection: containers
 
 * [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0106_ca_addon)
 
+    * [Change log for patch update 1.0.7_883, released 3 November 2022](/docs/containers?topic=containers-ca_changelog#107883_ca)
+
     * [Change log for patch update 1.0.6_828, released 10 October 2022](/docs/containers?topic=containers-ca_changelog#106828_ca)
 
     * [Change log for patch update 1.0.6_800, released 22 September 2022](/docs/containers?topic=containers-ca_changelog#106800_ca)
@@ -8474,25 +8542,9 @@ subcollection: containers
 * [17 August 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-17-aug-2022)
 
 
-## IAM and Activity Tracker events
-{: #sitemap_iam_and_activity_tracker_events}
+## Activity Tracker events
+{: #sitemap_activity_tracker_events}
 
-
-[User access permissions](/docs/containers?topic=containers-access_reference#access_reference)
-
-* [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions)
-
-* [{{site.data.keyword.cloud_notm}} IAM platform access roles](/docs/containers?topic=containers-access_reference#iam_platform)
-
-* [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service)
-
-* [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
-
-* [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-access_reference#iam_issuer_users)
-
-* [Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)
-
-* [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
 
 [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events#at_events)
 
@@ -8547,6 +8599,41 @@ subcollection: containers
 * [Storage](/docs/containers?topic=containers-api-at-iam#ks-storage)
 
 * [Worker nodes and worker pools](/docs/containers?topic=containers-api-at-iam#ks-workers)
+
+
+## IAM and user access permissions
+{: #sitemap_iam_and_user_access_permissions}
+
+
+[Understanding user access permissions](/docs/containers?topic=containers-access_reference#access_reference)
+
+* [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions)
+
+[IAM platform access roles](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles)
+
+* [No role defined](/docs/containers?topic=containers-iam-platform-access-roles#no-iam-platform-role)
+
+* [Viewer](/docs/containers?topic=containers-iam-platform-access-roles#viewer-iam-platform-role)
+
+* [Editor](/docs/containers?topic=containers-iam-platform-access-roles#editor-iam-platform-role)
+
+* [Operator](/docs/containers?topic=containers-iam-platform-access-roles#operator-iam-platform-role)
+
+* [Administrator](/docs/containers?topic=containers-iam-platform-access-roles#admin-iam-platform-role)
+
+[IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles#iam-service-access-roles)
+
+* [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-iam-service-access-roles#rbac_ref)
+
+* [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-iam-service-access-roles#iam-issuer-users)
+
+[Classic infrastructure roles](/docs/containers?topic=containers-classic-roles#classic-roles)
+
+* [Required classic infrastructure permissions](/docs/containers?topic=containers-classic-roles#required-classic-rbac)
+
+* [Suggested classic infrastructure permissions](/docs/containers?topic=containers-classic-roles#classic-rbac-suggested)
+
+[Cloud Foundry roles](/docs/containers?topic=containers-cloud-foundry-roles#cloud-foundry-roles)
 
 
 ## Locations

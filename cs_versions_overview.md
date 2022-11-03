@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-28"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -35,39 +35,33 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 
-
-## Available operating systems
-{: #available-os}
-
-
-
 **Latest**: 1.25
 - Release date: 06 October 2022
 - End of support: 13 December 2023`†`
 - Supported operating systems: `UBUNTU_18_64`
-- [Version information and update actions](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions_125)
-- [Change log](https://cloud.ibm.com/docs/containers?topic=containers-changelog_125)
+- [Version information and update actions](/docs/containers?topic=containers-cs_versions_125)
+- [Change log](/docs/containers?topic=containers-changelog_125)
 
 **Default**: 1.24
 - Release date: 09 June 2022
 - End of support: 6 September 2023`†`
 - Supported operating systems: `UBUNTU_18_64`
-- [Version information and update actions](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions_124)
-- [Change log](https://cloud.ibm.com/docs/containers?topic=containers-changelog_124)
+- [Version information and update actions](/docs/containers?topic=containers-cs_versions_124)
+- [Change log](/docs/containers?topic=containers-changelog_124)
 
 1.23
 - Release date: 09 February 2022
 - End of support: 26 April 2023`†`
 - Supported operating systems: `UBUNTU_18_64`
-- [Version information and update actions](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions_123)
-- [Change log](https://cloud.ibm.com/docs/containers?topic=containers-changelog_123)
+- [Version information and update actions](/docs/containers?topic=containers-cs_versions_123)
+- [Change log](/docs/containers?topic=containers-changelog_123)
 
 1.22
 - Release date: None
 - End of support: 14 December 2022
 - Supported operating systems: `UBUNTU_18_64`
-- [Version information and update actions](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions_122)
-- [Change log](https://cloud.ibm.com/docs/containers?topic=containers-changelog_122)
+- [Version information and update actions](/docs/containers?topic=containers-cs_versions_122)
+- [Change log](/docs/containers?topic=containers-changelog_122)
 
 
 
@@ -104,7 +98,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch. As 
 |Major|1.x.x|You|Operation changes for clusters, including scripts or deployments.|
 |Minor|x.22.x|You|Operation changes for clusters, including scripts or deployments.|
 |Patch|x.x.4_1510|IBM and you|Kubernetes patches, as well as other {{site.data.keyword.cloud_notm}} Provider component updates such as security and operating system patches. IBM updates masters automatically, but you apply patches to worker nodes. See more about patches in the following section.|
-{: caption="Impacts of Kubernetes updates" caption-side="top"}
+{: caption="Impacts of Kubernetes updates" caption-side="bottom"}
 
 Major and minor updates (1.x)
 :   First, [update your master node](/docs/containers?topic=containers-update#master) and then [update the worker nodes](/docs/containers?topic=containers-update#worker_node).

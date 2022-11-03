@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-21"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, registry, pull secret, secrets
 
@@ -46,7 +46,7 @@ You can use multiple registries with {{site.data.keyword.containerlong_notm}} to
 |[{{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-getting-started#getting-started)|With this option, you can set up your own secured Docker image repository in {{site.data.keyword.registrylong_notm}} where you can safely store and share images between cluster users.| - Manage access to images in your account.  \n - Use {{site.data.keyword.IBM_notm}} provided images and sample apps, such as {{site.data.keyword.IBM_notm}} Liberty, as a parent image and add your own app code to it.  \n - Automatic scanning of images for potential vulnerabilities by Vulnerability Advisor, including OS specific recommendations to fix them.|
 |Any other private registry|Connect any existing private registry to your cluster by creating an [image pull secret](https://kubernetes.io/docs/concepts/containers/images/){: external}. The secret is used to securely save your registry URL and credentials in a Kubernetes secret.| Use existing private registries independent of their source (Docker Hub, organization owned registries, or other private Cloud registries).|
 |[Public Docker Hub](https://hub.docker.com/){: external}{: #dockerhub}|Use this option to use existing public images from Docker Hub directly in your [Kubernetes deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: external} when no Dockerfile changes are needed. **Note:** Keep in mind that this option might not meet your organization's security requirements, like access management, vulnerability scanning, or app privacy.| No additional setup is needed for your cluster.  \n - Includes a variety of open-source applications.|
-{: caption="Public and private image registry options" caption-side="top"}
+{: caption="Public and private image registry options" caption-side="bottom"}
 
 After you set up an image registry, cluster users can use the images to deploy apps to the cluster.
 

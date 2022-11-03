@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-03"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes
 
@@ -1448,7 +1448,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 | Billing | Hourly|
 | Pricing | [Pricing information](https://www.ibm.com/cloud/file-storage/pricing){: external}|
 {: class="simple-tab-table"}
-{: caption="Bronze" caption-side="top"}
+{: caption="Bronze" caption-side="bottom"}
 {: #simpletabtable1}
 {: tab-title="Bronze"}
 {: tab-group="Class"}
@@ -1466,7 +1466,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 | Billing | Hourly|
 | Pricing | [Pricing information](https://www.ibm.com/cloud/file-storage/pricing){: external}|
 {: class="simple-tab-table"}
-{: caption="Silver" caption-side="top"}
+{: caption="Silver" caption-side="bottom"}
 {: #simpletabtable2}
 {: tab-title="Silver"}
 {: tab-group="Class"}
@@ -1484,7 +1484,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 | Billing | Hourly|
 | Pricing | [Pricing information](https://www.ibm.com/cloud/file-storage/pricing){: external}|
 {: class="simple-tab-table"}
-{: caption="Gold" caption-side="top"}
+{: caption="Gold" caption-side="bottom"}
 {: #simpletabtable3}
 {: tab-title="Gold"}
 {: tab-group="Class"}
@@ -1501,7 +1501,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 | Pricing | [Pricing information](https://www.ibm.com/cloud/file-storage/pricing){: external}|
 {: class="simple-tab-table"}
 {: tab-title="Custom"}
-{: caption="Custom" caption-side="top"}
+{: caption="Custom" caption-side="bottom"}
 {: #simpletabtable4}
 {: tab-group="Class"}
 

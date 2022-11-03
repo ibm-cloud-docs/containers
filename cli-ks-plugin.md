@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-21"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes
 
@@ -65,7 +65,7 @@ The tables below list the `ibmcloud ks` command groups. For a complete list of a
 | [Script commands](#script) | Rewrite scripts that call IBM Cloud Kubernetes Service plug-in commands. |
 | **Beta** [Storage commands](#cs_storage) | View and modify storage resources. |
 {: summary="The rows are read from left to right. The first column is the command group. The second column is a description of the command group."}
-{: caption="{{site.data.keyword.containerlong_notm}} CLI command groups" caption-side="top"}
+{: caption="{{site.data.keyword.containerlong_notm}} CLI command groups" caption-side="bottom"}
 
 ## `cluster` commands
 {: #cluster}
@@ -779,7 +779,7 @@ ibmcloud ks cluster config --cluster CLUSTER [--admin] [--endpoint ENDPOINT_TYPE
      {: note}
 
 `--skip-rbac`
-:    Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.cloud_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service) to manage all your RBAC users, don't include this option.
+:    Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.cloud_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles) to manage all your RBAC users, don't include this option.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
@@ -6873,9 +6873,9 @@ If the infrastructure credentials for the region and resource group are missing 
 *   **Required**: These permissions are needed to successfully order and manage infrastructure resources such as worker nodes. If the infrastructure credentials are missing one of these permissions, common actions such as `worker reload` can fail for all clusters in the region and resource group.
 *   **Suggested**: These permissions are helpful to include in your infrastructure permissions, and might be necessary in certain use cases. For example, the `Add Compute with Public Network Port` infrastructure permission is suggested because if you want public networking, you need this permission. However, if your use case is a cluster on the private VLAN only, the permission is not needed so it is not considered `required`.
 
-For a list of common use cases by permission, see [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra).
+For a list of common use cases by permission, see [Infrastructure roles](/docs/containers?topic=containers-classic-roles).
 
-**What if I see an infrastructure permission that I can't find in the console or [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra) table?**
+**What if I see an infrastructure permission that I can't find in the console or [Infrastructure roles](/docs/containers?topic=containers-classic-roles) table?**
 
 `Support Case` permissions are managed in a different part of the console than infrastructure permissions. See step 8 of [Customizing infrastructure permissions](/docs/containers?topic=containers-access-creds#infra_access).
 
@@ -6887,7 +6887,7 @@ For most use cases, [set up the API key](/docs/containers?topic=containers-acces
 
 **How do I control what actions the users can perform?**
 
-After infrastructure credentials are set up, you can control what actions your users can perform by assigning them [{{site.data.keyword.cloud_notm}} IAM platform access roles](/docs/containers?topic=containers-access_reference#iam_platform).
+After infrastructure credentials are set up, you can control what actions your users can perform by assigning them [{{site.data.keyword.cloud_notm}} IAM platform access roles](/docs/containers?topic=containers-iam-platform-access-roles).
 
 ```sh
 ibmcloud ks infra-permissions get --region REGION [--output json] [-q]

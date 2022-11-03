@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-07"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, networking
 
@@ -99,7 +99,7 @@ The following table compares the features of each network service type.
 |TLS termination| | | | |Yes|
 |Custom routing rules| | | | |Yes|
 |Multiple apps per service| | | | |Yes|
-{: caption="Characteristics of Kubernetes network service types" caption-side="top"}
+{: caption="Characteristics of Kubernetes network service types" caption-side="bottom"}
 
 `*` An SSL certificate for HTTPS load balancing is provided by `ibmcloud ks nlb-dns` commands. In classic clusters, these commands are supported for public NLBs only.
 {: note}

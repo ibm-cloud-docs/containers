@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes
 
@@ -75,7 +75,7 @@ To scale your apps,
     | `--cpu-percent` | The average CPU utilization that is maintained by the Horizontal Pod Autoscaler, which is specified as a percentage. |
     | `--min` | The minimum number of deployed pods that are used to maintain the specified CPU utilization percentage. |
     | `--max` | The maximum number of deployed pods that are used to maintain the specified CPU utilization percentage. |
-    {: caption="Table 2. Understanding your command options" caption-side="top"}
+    {: caption="Table 2. Understanding your command options" caption-side="bottom"}
     
 ## Managing rolling deployments to update your apps
 {: #app_rolling}

@@ -78,7 +78,7 @@ toc:
           - cluster-create.md
           - cluster-create-classic.md
           - cluster-create-vpc-gen2.md
-          - cluster-create-dedidcated-hosts.md
+          - cluster-create-dedicated-hosts.md
       - topicgroup:
           label: Accessing clusters
           topics:
@@ -364,11 +364,18 @@ toc:
           - cs_versions_alb_oauth_proxy.md
       - ibm-k8s-controller-config-change-log.md
       - topicgroup:
-          label: IAM and Activity Tracker events
+          label: Activity Tracker events
           topics:
-          - users-access-ref.md
           - at-events.md
           - api-at-iam.md
+      - topicgroup:
+          label: IAM and user access permissions
+          topics:
+          - users-access-ref.md
+          - iam-platform-access-roles.md
+          - iam-service-access-roles.md
+          - classic-roles.md
+          - cloud-foundry-roles.md
       - locations.md
       - cs_integrations_overview.md
       - service-settings.md
@@ -453,7 +460,6 @@ toc:
               - ts-network-mangle-table.md
               - ts-letsencrypt.md
               - ts-calico-log-level.md
-              - ts-ip-whitelist-annotation.md
               - ts-keepalive-sysctl.md
           - topicgroup:
               label: Logging and monitoring

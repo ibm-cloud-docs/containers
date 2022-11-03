@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-26"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, mzr, szr, multizone, multi az
 
@@ -76,7 +76,7 @@ The following image is used as an example to explain how {{site.data.keyword.con
 | Europe | United Kingdom | London | lon04, lon05`*`, lon06 | UK South (`uk-south`, `eu-gb`) |
 | North America | United States | Dallas | dal10, dal12, dal13 | US South (`us-south`) |
 | North America | United States | Washington, D.C. | wdc04, wdc06, wdc07 | US East (`us-east`) |
-{: caption="Available multizone metro locations for classic clusters in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
+{: caption="Available multizone metro locations for classic clusters in {{site.data.keyword.containerlong_notm}}." caption-side="bottom"}
 {: summary="The rows are read from left to right. The first column is the IBM Cloud geography of the location. The second column is where the country of the location. The third column is the metro that the location is in. The fourth column is the data center of the location. The fifth column is the name of the IBM Cloud region that the location is in."}
 
 `*` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.
@@ -116,7 +116,7 @@ Mexico City (MEX01) is deprecated and becomes unsupported later this year. To pr
 | North America | United States | San Jose | sjc03, sjc04 | US South (`us-south`) |
 | North America | United States | Washington, D.C. | wdc04, wdc06, wdc07 | US East (`us-east`) |
 | South America | Brazil | São Paulo | sao01 | US South (`us-south`) |
-{: caption="Available single zone data center locations for classic clusters in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
+{: caption="Available single zone data center locations for classic clusters in {{site.data.keyword.containerlong_notm}}." caption-side="bottom"}
 {: summary="The rows are read from left to right. The first column is the IBM Cloud geography of the location. The second column is where the country of the location. The third column is the metro that the location is in. The fourth column is the data center of the location. The fifth column is the name of the IBM Cloud region that the location is in."}
 
 `*` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.
@@ -140,7 +140,7 @@ Mexico City (MEX01) is deprecated and becomes unsupported later this year. To pr
 | North America | United States | Dallas | us-south | us-south-1  \n us-south-2  \n us-south-3 | Dallas 1  \n Dallas 2  \n Dallas 3|
 | North America | United States | Washington DC | us-east | us-east-1  \n us-east-2  \n us-east-3 | Washington DC 1  \n Washington DC 2  \n Washington DC 3|
 | South America | Brazil | `†` São Paulo | br-sao | br-sao-1  \n br-sao-2  \n br-sao-3 | São Paulo 1  \n São Paulo 2  \n São Paulo 3|
-{: caption="Available multizone metro locations for VPC clusters in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
+{: caption="Available multizone metro locations for VPC clusters in {{site.data.keyword.containerlong_notm}}." caption-side="bottom"}
 {: summary="The rows are read from left to right. The first column is the IBM Cloud geography of the location. The second column is where the country of the location. The third column is the metro that the location is in. The fourth column is the zone of the location. The fifth column is the name of the location."}
 
 `†` **Toronto and São Paulo multizone regions**: Toronto and São Paulo are available as multizone regions for clusters on VPC infrastructure only.
@@ -300,7 +300,7 @@ To switch regions, use the `ibmcloud ks init` [command](/docs/containers?topic=c
 | UK South | London | lon02, **lon04, lon05, lon06** |
 | US East (standard clusters only) | Washington DC | mon01, tor01, **wdc04, wdc06, wdc07** |
 | US South | Dallas | **dal10, dal12, dal13**, mex01, sjc03, sjc04, sao01 |
-{: caption="Corresponding {{site.data.keyword.containershort}} and {{site.data.keyword.cloud_notm}} regions, with zones. Multizone-capable zones are in bold." caption-side="top"}
+{: caption="Corresponding {{site.data.keyword.containershort}} and {{site.data.keyword.cloud_notm}} regions, with zones. Multizone-capable zones are in bold." caption-side="bottom"}
 
 
 

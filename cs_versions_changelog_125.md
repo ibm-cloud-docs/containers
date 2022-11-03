@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-31"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -54,7 +54,7 @@ The following table shows the changes that are in the master fix pack 1.25.3_152
 | Kubernetes | v1.25.2 | v1.25.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.3){: external}. |
 | Konnectivity agent and server | v0.0.32_363_iks | v0.0.33_418_iks | Updated Konnectivity to version v0.0.33 and added s390x functionality. See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.33){: external}. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | dc1725a | 778ef2b | Updated to `Go` version `1.18.6`. |
-{: caption="Changes since version 1.25.21517" caption-side="top"}
+{: caption="Changes since version 1.25.21517" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.25.2_1519, released 25 October 2022
 {: #1252_1519}
@@ -66,7 +66,7 @@ The following table shows the changes that are in the worker node fix pack 1.25.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-193 | 4.15.0-194 | Worker node kernel & package updates for [CVE-2018-16860](https://nvd.nist.gov/vuln/detail/CVE-2018-16860){: external}, [CVE-2019-12098](https://nvd.nist.gov/vuln/detail/CVE-2019-12098){: external}, [CVE-2020-16156](https://nvd.nist.gov/vuln/detail/CVE-2020-16156){: external}, [CVE-2021-3671](https://nvd.nist.gov/vuln/detail/CVE-2021-3671){: external}, [CVE-2021-43618](https://nvd.nist.gov/vuln/detail/CVE-2021-43618){: external}, [CVE-2022-3116](https://nvd.nist.gov/vuln/detail/CVE-2022-3116){: external}, [CVE-2022-3515](https://nvd.nist.gov/vuln/detail/CVE-2022-3515){: external}, [CVE-2022-39253](https://nvd.nist.gov/vuln/detail/CVE-2022-39253){: external}, [CVE-2022-39260](https://nvd.nist.gov/vuln/detail/CVE-2022-39260){: external}. | 
 | Kubernetes |N/A|N/A|N/A|
-{: caption="Changes since version 1.25.2_1518" caption-side="top"}
+{: caption="Changes since version 1.25.2_1518" caption-side="bottom"}
 
 ### Change log for master fix pack 1.25.2_1517 and worker node fix pack 1.25.2_1516, released 6 October 2022
 {: #1252_1517_and_1252_1516}

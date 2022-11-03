@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-14"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, containers, 125, version 125, 125 update actions
 
@@ -46,7 +46,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 | Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
 | 1.25 | Yes | 06 October 2022 | 13 December 2023 |
-{: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.25" caption-side="top"}
+{: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.25" caption-side="bottom"}
 
 ## Preparing to update
 {: #prep-up-125}

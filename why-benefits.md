@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-04"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, containers
 
@@ -61,7 +61,7 @@ Multizone clusters to increase high availability
 
 Highly available masters
 :   Reduce cluster downtime such as during master updates with highly available masters that are provisioned automatically when you create a cluster.
-:   Spread your masters across zones in a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone) to protect your cluster from zonal failures.
+:   Spread your masters across zones in a [multizone cluster](/docs/containers?topic=containers-ha_clusters#mz-clusters) to protect your cluster from zonal failures.
 
 Image security compliance with Vulnerability Advisor
 :   Set up your own repo in our secured Docker private image registry where images are stored and shared by all users in the organization.
@@ -129,7 +129,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Portable public IP addresses](/docs/containers?topic=containers-subnets#review_ip)| |Yes|
 |[Logging and monitoring](/docs/containers?topic=containers-health#logging)| |Yes|
 |[Option to provision your worker nodes on physical (bare metal) servers](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)| |Yes|
-{: caption="Characteristics of free and standard clusters" caption-side="top"}
+{: caption="Characteristics of free and standard clusters" caption-side="bottom"}
 
 
 
@@ -162,6 +162,6 @@ Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerl
 |Supported operating system| Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated) | Red Hat Enterprise Linux 7  |
 |Preferred external traffic networking| Ingress | Router |
 |Secured routes encrypted with {{site.data.keyword.hscrypto}} | | Yes |
-{: caption="Characteristics of community Kubernetes and {{site.data.keyword.redhat_openshift_notm}} clusters" caption-side="top"}
+{: caption="Characteristics of community Kubernetes and {{site.data.keyword.redhat_openshift_notm}} clusters" caption-side="bottom"}
 
 

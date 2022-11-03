@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, static route, add-on
 
@@ -29,7 +29,7 @@ Review the supported versions of the static route add-on. In the CLI, you can ru
 | --- | --- | --- |
 | 1.00 | Yes | 1.19, 1.20, 1.21, 1.22 |
 {: summary="The rows are read from left to right. The first column is the static route add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the static route add-on version is supported for."}
-{: caption="Supported static route add-on versions" caption-side="top"}
+{: caption="Supported static route add-on versions" caption-side="bottom"}
 
 ## Version 1.0.0
 {: #v100}

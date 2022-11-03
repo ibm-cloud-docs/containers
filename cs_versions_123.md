@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-27"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, 1.23, versions, update, upgrade
 
@@ -40,7 +40,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
 | 1.23 | Yes | 09 Feb 2022 |  26 April 2023 `†` |
-{: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.23" caption-side="top"}
+{: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.23" caption-side="bottom"}
 
 ## Preparing to update
 {: #prep-up-123}
@@ -58,7 +58,7 @@ The following table shows the actions that you must take before you update the K
 | --- | --- |
 | **Unsupported:** CoreDNS wildcard queries via Kubernetes plugin | CoreDNS no longer supports wildcard DNS queries via the Kubernetes plugin. Applications using such queries must be updated to use an alternative DNS query method.|
 | Kubernetes service IP advertisement over BGP | If you are using Calico's [Kubernetes Service IP Advertisement over BGP feature](https://www.tigera.io/blog/advertising-kubernetes-service-ips-with-calico-and-bgp/){: external}, you need to [add the service IP CIDRs that you want to advertise to the default BGPConfiguration resource](https://projectcalico.docs.tigera.io/archive/v3.21/reference/resources/bgpconfig){: external}. In previous releases, the entire service IP range was advertised by setting an environment variable in the `calico-node` daemonset. |
-{: caption="Changes to make after you update the master to Kubernetes 1.23" caption-side="top"}
+{: caption="Changes to make after you update the master to Kubernetes 1.23" caption-side="bottom"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 
@@ -72,7 +72,7 @@ The following table shows the actions that you must take after you update the Ku
 | --- | --- |
 | Operator Lifecycle Manager (OLM) install no longer managed | OLM is no longer installed nor managed by IBM. Existing installs are left as-is and no longer managed after the update. If you are using the OLM components then you must manage updates. If unused, you may [uninstall the OLM components](/docs/containers?topic=containers-ts-delete-olm). Refer to the [opensource documentation](https://olm.operatorframework.io/){: external} for information on available resources including how to install a new instance of OLM on your cluster. |
 | Recreate volume snapshots | Volume snapshots must be recreated after the update. Run `kubectl get volumesnapshots -A` to get a list of volume snapshots. |
-{: caption="Changes to make after you update the master to Kubernetes 1.23" caption-side="top"}
+{: caption="Changes to make after you update the master to Kubernetes 1.23" caption-side="bottom"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 

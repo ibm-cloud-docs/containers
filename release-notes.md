@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-31"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, release notes
 
@@ -23,6 +23,19 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+## November 2022
+{: #containers-nov22}
+
+### 3 November 2022
+{: #containers-nov0322}
+{: release-note}
+
+Changes to the Portworx update process beginning with version `2.12`.
+:   Beginning with version `2.12` Portworx uses an operator-based deployment model instead of the Helm based model use in version `2.11` and earlier. If you want to update from Portworx `2.11` to version `2.12`, follow the migration steps in the [Portworx documentation](https://docs.portworx.com/operations/operate-kubernetes/migrate-daemonset/){: external}.
+
+Cluster autoscaler add-on version `1.0.7_883`.
+:   For more information, see [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
 
 ## October 2022
 {: #containers-oct22}
@@ -3815,7 +3828,7 @@ CLI changelog
 
 
 IAM issuer details
-:   Added a [reference topic](/docs/containers?topic=containers-access_reference#iam_issuer_users) for the IAM issuer details of RBAC users.
+:   Added a [reference topic](/docs/containers?topic=containers-access_reference#iam-issuer-users) for the IAM issuer details of RBAC users.
 
 ### 16 March 2020
 {: #containers-mar1620}
@@ -4852,7 +4865,7 @@ CLI changelog
 {: release-note}
 
 Infrastructure permissions
-:   Updated the [classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra) required for common use cases.
+:   Updated the [classic infrastructure roles](/docs/containers?topic=containers-classic-roles) required for common use cases.
 
 
 

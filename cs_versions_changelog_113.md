@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-07-15"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -206,7 +206,7 @@ The following table shows the changes that are in the patch 1.13.11_1537.
 |Kubernetes|v1.13.10|v1.13.11|See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.11){: external}. |
 |Ubuntu 18.04 kernel and packages|4.15.0-62-generic|4.15.0-64-generic|Updated worker node images with kernel and package updates for [CVE-2019-15031](https://nvd.nist.gov/vuln/detail/CVE-2019-15031){: external}, [CVE-2019-15030](https://nvd.nist.gov/vuln/detail/CVE-2019-15030){: external}, and [CVE-2019-14835](https://nvd.nist.gov/vuln/detail/CVE-2019-14835){: external}. |
 |Ubuntu 16.04 kernel and packages|4.4.0-161-generic|4.4.0-164-generic|Updated worker node images with kernel and package updates for [CVE-2019-14835](https://nvd.nist.gov/vuln/detail/CVE-2019-14835){: external}. |
-{: caption="Changes since version 1.13.10_1536" caption-side="top"}
+{: caption="Changes since version 1.13.10_1536" caption-side="bottom"}
 
 ## Change log for worker node fix pack 1.13.10_1536, released 16 September 2019
 {: #11310_1536_worker}
