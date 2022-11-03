@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-08"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, 1.22, versions, update, upgrade
 
@@ -41,7 +41,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
 | 1.22 | Yes | 29 Sep 2021 | 30 Nov 2022 `†` |
-{: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.22" caption-side="top"}
+{: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.22" caption-side="bottom"}
 
 ## Preparing to update
 {: #prep-up-122}
@@ -73,7 +73,7 @@ Review the [{{site.data.keyword.containerlong_notm}} is affected by an endpoint 
 | **Unsupported**: IBM Cloud Kubernetes Ingress Controller | As of 1 Jun 2021, the IBM Cloud Kubernetes Ingress Controller is no longer supported on {{site.data.keyword.containerlong_notm}}. Migrate your IBM Cloud Kubernetes Ingress Controller based ALBs to the Kubernetes Ingress Controller. |
 | Ingress | Kubernetes 1.22 supports Ingress and IngressClass resources with `networking.k8s.io/v1` version, which is only available on Kubernetes Ingress Controller version 1.0.0 and newer. Kubernetes Ingress Controller version 1.0.0 is supported on {{site.data.keyword.containerlong_notm}} cluster versions 1.19 or newer.  \n - **Cluster versions 1.19, 1.20, and 1.21**: Ingress and IngressClass resources that were created on clusters that run on Kubernetes versions 1.19, 1.20 or 1.21 and Ingress Controller version 1.0.0 are automatically updated during the cluster update to 1.22. The Kubernetes API Server dynamically manages the conversion from the earlier `extensions/v1beta1` and `networking.k8s.io/v1beta1` Ingresses to the new `networking.k8s.io/v1`.  \n - **External Ingress resources**: For Ingress resources that are stored outside of Kubernetes clusters, such as in a version control system or any other external storage, the `extensions/v1beta1` and `networking.k8s.io/v1beta1` descriptors can't be used with Kubernetes 1.22. Convert these descriptors to `networking.k8s.io/v1` Ingresses and IngressClasses.  \n - If you have ALB auto updates enabled, you don't need to manually update your ALBs.  \n - If you have ALB auto updates disabled, you must update your Kubernetes Ingress Controller based ALBs to a supported 0.4.x version before updating to 1.0.0 or newer. To check your auto update settings, run the `ibmcloud ks ingress alb autoupdate` get command.  \n - **ALB OAuth-Proxy add-on**: `networking.k8s.io/v1beta1` is compatible with ALB OAuth-Proxy add-on version 2.0.0 only. If you use the ALB OAuth-Proxy add-on you must update the add-on to version 2.0.0 before updating your cluster to 1.22. |
 | **Unsupported**: Service `service.alpha.kubernetes.io/tolerate-unready-endpoints` annotation | Services no longer support the `service.alpha.kubernetes.io/tolerate-unready-endpoints` annotation. The annotation has been deprecated since Kubernetes version 1.11 and has been replaced by the `spec.publishNotReadyAddresses` field. If your services rely on this annotation, update them to use the `spec.publishNotReadyAddresses` field instead. For more information on this field, see [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/){: external}. |
-{: caption="Changes to make before you update the master to Kubernetes 1.22" caption-side="top"}
+{: caption="Changes to make before you update the master to Kubernetes 1.22" caption-side="bottom"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 ### Update after master
@@ -88,5 +88,5 @@ The following table shows the actions that you must take after you update the Ku
 | **Unsupported**:  `kubectl autoscale` removes `--generator` flag | The `kubectl austoscale` no longer uses the deprecated `--generator` flag. If your scripts rely on this flag, update them. |
 | **Unsupported**: `kubectl create deployment` removes `--generator` flag | The `kubectl create deployment` command no longer uses the deprecated `--generator` flag. If your scripts rely on this flag, update them. |
 | `system:aggregate-to-edit` write access for Endpoints API | The `system:aggregate-to-edit` role no longer includes write access to the Endpoints API. Existing clusters that are upgraded to Kubernetes 1.22 are not impacted. However, in new Kubernetes 1.22 clusters, the Editor and Administrator roles don't have write access to the Endpoints API. For more information on retaining this access in newly created 1.22 clusters, see [Write access for Endpoints](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#write-access-for-endpoints){: external}. This update is a mitigation for [CVE-2021-25740](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-25740){: external}. |
-{: caption="Changes to make after you update the master to Kubernetes 1.22" caption-side="top"}
+{: caption="Changes to make after you update the master to Kubernetes 1.22" caption-side="bottom"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}

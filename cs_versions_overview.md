@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-01"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -98,7 +98,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch. As 
 |Major|1.x.x|You|Operation changes for clusters, including scripts or deployments.|
 |Minor|x.22.x|You|Operation changes for clusters, including scripts or deployments.|
 |Patch|x.x.4_1510|IBM and you|Kubernetes patches, as well as other {{site.data.keyword.cloud_notm}} Provider component updates such as security and operating system patches. IBM updates masters automatically, but you apply patches to worker nodes. See more about patches in the following section.|
-{: caption="Impacts of Kubernetes updates" caption-side="top"}
+{: caption="Impacts of Kubernetes updates" caption-side="bottom"}
 
 Major and minor updates (1.x)
 :   First, [update your master node](/docs/containers?topic=containers-update#master) and then [update the worker nodes](/docs/containers?topic=containers-update#worker_node).

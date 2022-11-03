@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-03"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, containers
 
@@ -42,7 +42,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
 | 1.24 | Yes | 09 Jun 2022 | 06 Sept 2023 `†` |
-{: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.24" caption-side="top"}
+{: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.24" caption-side="bottom"}
 
 ## Preparing to update
 {: #prep-up-124}
@@ -62,7 +62,7 @@ The following table shows the actions that you must take before you update the K
 | Type | Description|
 | --- | --- |
 | IBM Cloud Block Storage driver and plug-in installation | The IBM Cloud Block Storage driver and plug-in component is now installed on clusters running classic infrastructure. If you installed the [IBM Cloud Block Storage driver and plug-in via the Helm chart](/docs/containers?topic=containers-block_storage#install_block), you must [uninstall the Helm chart](/docs/containers?topic=containers-block_storage#rm_block) before continuing the master update. Note that your existing persistent volume claims (PVCs) will continue to work after the Helm chart is uninstalled, but you are not able to provision new PVCs until the master update is completed. |
-{: caption="Changes to make after you update the master to Kubernetes 1.24" caption-side="top"}
+{: caption="Changes to make after you update the master to Kubernetes 1.24" caption-side="bottom"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 
@@ -76,6 +76,6 @@ The following table shows the actions that you must take after you update the Ku
 | --- | --- |
 | **Unsupported:** `kubectl expose` removes `--container-port` and `--generator` flags | The `kubectl expose` command no longer supports the deprecated `--container-port` and `--generator` flags. If your scripts rely on these flags, update them. |
 | **Unsupported:** `kubectl run` removes several flags | The `kubectl run` command no longer supports the deprecated `--serviceaccount`, `--hostport`, `--requests` and `--limits` flags. If your scripts rely on these flags, update them. |
-{: caption="Changes to make after you update the master to Kubernetes 1.24" caption-side="top"}
+{: caption="Changes to make after you update the master to Kubernetes 1.24" caption-side="bottom"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 

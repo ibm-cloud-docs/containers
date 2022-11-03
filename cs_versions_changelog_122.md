@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-10-31"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -52,7 +52,7 @@ The following table shows the changes that are in the master fix pack 1.22.15_15
 | {{site.data.keyword.cloud_notm}} RBAC Operator | dc1725a | 778ef2b | Updated to `Go` version `1.18.6`. |
 | Key Management Service provider | v2.5.9 | v2.5.10 | Updated `Go` dependencies and to `Go` version `1.19.2`. |
 | Konnectivity agent and server | v0.0.32_363_iks | v0.0.33_418_iks | Updated Konnectivity to version v0.0.33 and added s390x functionality. See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.33){: external}. |
-{: caption="Changes since version 1.22.151572" caption-side="top"}
+{: caption="Changes since version 1.22.151572" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.15_1575, released 25 October 2022
 {: #12215_1575}
@@ -64,7 +64,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-193 | 4.15.0-194 | Worker node kernel & package updates for [CVE-2018-16860](https://nvd.nist.gov/vuln/detail/CVE-2018-16860){: external}, [CVE-2019-12098](https://nvd.nist.gov/vuln/detail/CVE-2019-12098){: external}, [CVE-2020-16156](https://nvd.nist.gov/vuln/detail/CVE-2020-16156){: external}, [CVE-2021-3671](https://nvd.nist.gov/vuln/detail/CVE-2021-3671){: external}, [CVE-2021-43618](https://nvd.nist.gov/vuln/detail/CVE-2021-43618){: external}, [CVE-2022-3116](https://nvd.nist.gov/vuln/detail/CVE-2022-3116){: external}, [CVE-2022-3515](https://nvd.nist.gov/vuln/detail/CVE-2022-3515){: external}, [CVE-2022-39253](https://nvd.nist.gov/vuln/detail/CVE-2022-39253){: external}, [CVE-2022-39260](https://nvd.nist.gov/vuln/detail/CVE-2022-39260){: external}. | 
 | Kubernetes |N/A|N/A|N/A|
-{: caption="Changes since version 1.22.15_1574" caption-side="top"}
+{: caption="Changes since version 1.22.15_1574" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.15_1574, released 10 October 2022
 {: #12215_1574}
@@ -78,7 +78,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | Kubernetes |N/A|N/A|N/A|
 | RHEL 7 Packages |N/A|N/A|N/A|
 | RHEL 8 Packages |N/A|N/A|N/A|
-{: caption="Changes since version 1.22.15_1573" caption-side="top"}
+{: caption="Changes since version 1.22.15_1573" caption-side="bottom"}
 
 ### Change log for master fix pack 1.22.15_1572, released 26 September 2022
 {: #12215_1572}
@@ -98,7 +98,7 @@ The following table shows the changes that are in the master fix pack 1.22.15_15
 | Key Management Service Provider | v2.5.8 | v2.5.9 | Updated `Go` dependencies and to `Go` version `1.18.6`. |
 | Kubernetes | v1.22.13 | v1.22.15 | This update resolves [CVE-2022-3172](https://nvd.nist.gov/vuln/detail/CVE-2022-3172){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6823785){: external}. See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.15){: external}. |
 | Kubernetes NodeLocal DNS cache | 1.22.6 | 1.22.11 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.11){: external}. |
-{: caption="Changes since version 1.22.131570" caption-side="top"}
+{: caption="Changes since version 1.22.131570" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.15_1573, released 26 September 2022
 {: #12215_1573}
@@ -112,7 +112,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | Kubernetes | 1.22.13 | 1.22.15 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.15){: external}. |
 | RHEL 7 Packages |N/A|N/A|N/A|
 | RHEL 8 Packages | 4.18.0-372.19.1 | 4.18.0-372.26.1 |N/A|
-{: caption="Changes since version 1.22.13_1571" caption-side="top"}
+{: caption="Changes since version 1.22.13_1571" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.13_1571, released 12 September 2022
 {: #12213_1571}
@@ -124,7 +124,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-191 | 4.15.0-192 | Worker node kernel & package updates for [CVE-2021-33656](https://nvd.nist.gov/vuln/detail/CVE-2021-33656){: external},[CVE-2022-35252](https://nvd.nist.gov/vuln/detail/CVE-2022-35252){: external}. |
 | Kubernetes |N/A|N/A|N/A| 
-{: caption="Changes since version 1.22.13_1568" caption-side="top"}
+{: caption="Changes since version 1.22.13_1568" caption-side="bottom"}
 
 ### Change log for master fix pack 1.22.13_1570, released 1 September 2022
 {: #12213_1570}
@@ -152,7 +152,7 @@ The following table shows the changes that are in the master fix pack 1.22.13_15
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2058 | 2110 | Updated `Go` dependencies and to `Go` version `1.17.13`. |
 | Operator Lifecycle Manager | 0.16.1-IKS-18 | 0.16.1-IKS-19 | Update image for [CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external}. |
 | Portieris admission controller | v0.12.5 | v0.12.6 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.12.6){: external}. |
-{: caption="Changes since version 1.22.12_1566" caption-side="top"}
+{: caption="Changes since version 1.22.12_1566" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.13_1568, released 29 August 2022
 {: #12213_1568}
@@ -165,7 +165,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | Ubuntu 18.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2019-5815](https://nvd.nist.gov/vuln/detail/CVE-2019-5815){: external},[CVE-2021-30560](https://nvd.nist.gov/vuln/detail/CVE-2021-30560){: external},[CVE-2022-31676](https://nvd.nist.gov/vuln/detail/CVE-2022-31676){: external},[CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external}. |
 | Kubernetes | 1.22.12 | 1.22.13 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.13){: external}. | 
 | HAPROXY | 6514a2 | c1634f | [CVE-2022-32206](https://nvd.nist.gov/vuln/detail/CVE-2022-32206){: external},[CVE-2022-32208](https://nvd.nist.gov/vuln/detail/CVE-2022-32208){: external}
-{: caption="Changes since version 1.22.12_1566" caption-side="top"}
+{: caption="Changes since version 1.22.12_1566" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.12_1566, released 16 August 2022
 {: #12212_1566}
@@ -178,7 +178,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | Ubuntu 18.04 packages | 4.15.0-189 | 4.15.0-191 | Worker node kernel & package updates for [CVE-2016-3709](https://nvd.nist.gov/vuln/detail/CVE-2016-3709){: external},[CVE-2021-4209](https://nvd.nist.gov/vuln/detail/CVE-2021-4209){: external},[CVE-2022-1652](https://nvd.nist.gov/vuln/detail/CVE-2022-1652){: external},[CVE-2022-1679](https://nvd.nist.gov/vuln/detail/CVE-2022-1679){: external},[CVE-2022-1734](https://nvd.nist.gov/vuln/detail/CVE-2022-1734){: external},[CVE-2022-2509](https://nvd.nist.gov/vuln/detail/CVE-2022-2509){: external},[CVE-2022-2586](https://nvd.nist.gov/vuln/detail/CVE-2022-2586){: external},[CVE-2022-2588](https://nvd.nist.gov/vuln/detail/CVE-2022-2588){: external},[CVE-2022-34918](https://nvd.nist.gov/vuln/detail/CVE-2022-34918){: external}. |
 | Kubernetes |N/A|N/A|N/A| 
 | containerd | 1.6.6 | 1.6.8 | For more information, see the [change log](https://github.com/containerd/containerd/releases/tag/v1.6.8){: external}. |
-{: caption="Changes since version 1.22.12_1565" caption-side="top"}
+{: caption="Changes since version 1.22.12_1565" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.12_1565, released 01 August 2022
 {: #12212_1565}
@@ -190,7 +190,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2022-27404](https://nvd.nist.gov/vuln/detail/CVE-2022-27404){: external},[CVE-2022-27405](https://nvd.nist.gov/vuln/detail/CVE-2022-27405){: external},[CVE-2022-27406](https://nvd.nist.gov/vuln/detail/CVE-2022-27406){: external},[CVE-2022-29217](https://nvd.nist.gov/vuln/detail/CVE-2022-29217){: external},[CVE-2022-31782](https://nvd.nist.gov/vuln/detail/CVE-2022-31782){: external}. |
 | Kubernetes | 1.22.11 | 1.22.12 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.12){: external}. |
-{: caption="Changes since version 1.22.11_1562" caption-side="top"}
+{: caption="Changes since version 1.22.11_1562" caption-side="bottom"}
 
 ### Change log for master fix pack 1.22.12_1564, released 26 July 2022
 {: #12212_1564}
@@ -213,7 +213,7 @@ The following table shows the changes that are in the master fix pack 1.22.12_15
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1998 | 2058 | Updated image for [CVE-2022-2097](https://nvd.nist.gov/vuln/detail/CVE-2022-2097){: external}. |
 | Operator Lifecycle Manager | 0.16.1-IKS-17 | 0.16.1-IKS-18 | Updated image for [CVE-2022-2097](https://nvd.nist.gov/vuln/detail/CVE-2022-2097){: external}. |
 | Portieris admission controller | v0.12.4 | v0.12.5 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.12.5){: external}. |
-{: caption="Changes since version 1.22.11_1556" caption-side="top"}
+{: caption="Changes since version 1.22.11_1556" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.11_1562, released 18 July 2022
 {: #12211_1562}
@@ -225,7 +225,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-188 | 4.15.0-189 | Worker node kernel & package updates for [CVE-2015-20107](https://nvd.nist.gov/vuln/detail/CVE-2015-20107){: external}, [CVE-2022-2097](https://nvd.nist.gov/vuln/detail/CVE-2022-2097){: external},[CVE-2022-22747](https://nvd.nist.gov/vuln/detail/CVE-2022-22747){: external}, [CVE-2022-24765](https://nvd.nist.gov/vuln/detail/CVE-2022-24765){: external}, [CVE-2022-29187](https://nvd.nist.gov/vuln/detail/CVE-2022-29187){: external},[CVE-2022-34480](https://nvd.nist.gov/vuln/detail/CVE-2022-34480){: external},[CVE-2022-34903](https://nvd.nist.gov/vuln/detail/CVE-2022-34903){: external}. |
 | Kubernetes |N/A|N/A|N/A|
-{: caption="Changes since version 1.22.11_1557" caption-side="top"}
+{: caption="Changes since version 1.22.11_1557" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.11_1557, released 05 July 2022
 {: #12211_1557}
@@ -237,7 +237,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-187 | 4.15.0-188 | Worker node kernel & package updates for [CVE-2022-1292](https://nvd.nist.gov/vuln/detail/CVE-2022-1292){: external},[CVE-2022-2068](https://nvd.nist.gov/vuln/detail/CVE-2022-2068){: external},[CVE-2022-2084](https://nvd.nist.gov/vuln/detail/CVE-2022-2084){: external},[CVE-2022-28388](https://nvd.nist.gov/vuln/detail/CVE-2022-28388){: external},[CVE-2022-32206](https://nvd.nist.gov/vuln/detail/CVE-2022-32206){: external},[CVE-2022-32208](https://nvd.nist.gov/vuln/detail/CVE-2022-32208){: external}. |
 | Kubernetes |N/A|N/A|N/A|
-{: caption="Changes since version 1.22.11_1556" caption-side="top"}
+{: caption="Changes since version 1.22.11_1556" caption-side="bottom"}
 
 ### Change log for master fix pack 1.22.11_1556, released 22 June 2022
 {: #master_12211_1556}
@@ -255,7 +255,7 @@ The following table shows the changes that are in the master fix pack 1.22.11_15
 | Key Management Service provider | v2.5.5 | v2.5.6 | Updated `Go` to version `1.17.11` and also updated the dependencies. |
 | Kubernetes | v1.22.10 | v1.22.11 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.11){: external}. |
 | Kubernetes add-on resizer | 1.8.14 | 1.8.15 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.18.15){: external}. |
-{: caption="Changes since version 1.22.10_1553" caption-side="top"}
+{: caption="Changes since version 1.22.10_1553" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.11_1556, released 20 June 2022
 {: #12211_1556}
@@ -269,7 +269,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | Haproxy | 468c09 | 04f862 | [CVE-2022-1271](https://nvd.nist.gov/vuln/detail/CVE-2022-1271){: external}. |
 | containerd | v1.5.11 | v1.5.13 | See the [change log](https://github.com/containerd/containerd/releases/tag/v1.5.13){: external}, the [security bulletin](https://www.ibm.com/support/pages/node/6597989){: external} for [CVE-2022-31030](https://nvd.nist.gov/vuln/detail/CVE-2022-31030){: external}, and the [security bulletin](https://www.ibm.com/support/pages/node/6598049){: external} for [CVE-2022-29162](https://nvd.nist.gov/vuln/detail/CVE-2022-29162){: external}. |
 | Kubernetes | 1.22.10 | 1.22.11 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.11){: external}. |
-{: caption="Changes since version 1.22.10_1554" caption-side="top"}
+{: caption="Changes since version 1.22.10_1554" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.10_1554, released 7 June 2022
 {: #12210_1554}
@@ -280,7 +280,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-177 | 4.15.0-180 | Worker node kernel & package updates for [CVE-2019-13050](https://nvd.nist.gov/vuln/detail/CVE-2019-13050){: external}, [CVE-2022-1664](https://nvd.nist.gov/vuln/detail/CVE-2022-1664){: external}, [CVE-2022-29581](https://nvd.nist.gov/vuln/detail/CVE-2022-29581){: external}. |
-{: caption="Changes since version 1.22.9_1552" caption-side="top"}
+{: caption="Changes since version 1.22.9_1552" caption-side="bottom"}
 
 ### Change log for master fix pack 1.22.10_1553, released 3 June 2022
 {: #12210_1553}
@@ -301,7 +301,7 @@ The following table shows the changes that are in the master fix pack 1.22.10_15
 | Kubernetes | v1.22.9 | v1.22.10 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.10){: external}. |
 | Kubernetes Dashboard | v2.3.1 | v2.3.1 | The **default** Kubernetes Dashboard settings found in the `kubernetes-dashboard-settings` config map in the `kube-system` namespace have been updated to set `resourceAutoRefreshTimeInterval` to `60`. This default change is only applied to new clusters. The previous default value was `5`. If your cluster has Kubernetes Dashboard performance problems, see the steps for [changing the auto-refresh time interval](/docs/containers?topic=containers-ts-kube-dashboord-oom). | 
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1916 | 1998 | Updated `Go` to version `1.17.10` and updated dependencies. |
-{: caption="Changes since version 1.22.9_1549" caption-side="top"}
+{: caption="Changes since version 1.22.9_1549" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.9_1552, released 23 May 2022
 {: #1229_1552}
@@ -313,7 +313,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-176 | 4.15.0-177 | Worker node kernel & package updates for [CVE-2019-20838](https://nvd.nist.gov/vuln/detail/CVE-2019-20838){: external}, [CVE-2020-14155](https://nvd.nist.gov/vuln/detail/CVE-2020-14155){: external}, [CVE-2020-25648](https://nvd.nist.gov/vuln/detail/CVE-2020-25648){: external}, [CVE-2020-35512](https://nvd.nist.gov/vuln/detail/CVE-2020-35512){: external}, [CVE-2021-26401](https://nvd.nist.gov/vuln/detail/CVE-2021-26401){: external}, [CVE-2022-0001](https://nvd.nist.gov/vuln/detail/CVE-2022-0001){: external}, [CVE-2022-0934](https://nvd.nist.gov/vuln/detail/CVE-2022-0934){: external}, [CVE-2022-26490](https://nvd.nist.gov/vuln/detail/CVE-2022-26490){: external}, [CVE-2022-27223](https://nvd.nist.gov/vuln/detail/CVE-2022-27223){: external}, [CVE-2022-27781](https://nvd.nist.gov/vuln/detail/CVE-2022-27781){: external}, [CVE-2022-27782](https://nvd.nist.gov/vuln/detail/CVE-2022-27782){: external}, [CVE-2022-28657](https://nvd.nist.gov/vuln/detail/CVE-2022-28657){: external}, [CVE-2022-29155](https://nvd.nist.gov/vuln/detail/CVE-2022-29155){: external}, [CVE-2022-29824](https://nvd.nist.gov/vuln/detail/CVE-2022-29824){: external}, [CVE-2017-9525](https://nvd.nist.gov/vuln/detail/CVE-2017-9525){: external}, [CVE-2022-28654](https://nvd.nist.gov/vuln/detail/CVE-2022-28654){: external}, [CVE-2022-28656](https://nvd.nist.gov/vuln/detail/CVE-2022-28656){: external}, [CVE-2022-28655](https://nvd.nist.gov/vuln/detail/CVE-2022-28655){: external}, [CVE-2022-28652](https://nvd.nist.gov/vuln/detail/CVE-2022-28652){: external}, [CVE-2022-1242](https://nvd.nist.gov/vuln/detail/CVE-2022-1242){: external}, [CVE-2022-28658](https://nvd.nist.gov/vuln/detail/CVE-2022-28658){: external}, [CVE-2021-3899](https://nvd.nist.gov/vuln/detail/CVE-2021-3899){: external}. |
 | HA proxy | 36b0307 | 468c09 | [CVE-2021-3634](https://nvd.nist.gov/vuln/detail/CVE-2021-3634){: external}. |
-{: caption="Changes since version 1.22.9_1551" caption-side="top"}
+{: caption="Changes since version 1.22.9_1551" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.9_1551, released 09 May 2022
 {: #1229_1551}
@@ -326,7 +326,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | Ubuntu 18.04 packages | N/A | N/A | Worker node package updates for [CVE-2021-36084](https://nvd.nist.gov/vuln/detail/CVE-2021-36084){: external}, [CVE-2021-36085](https://nvd.nist.gov/vuln/detail/CVE-2021-36085){: external}, [CVE-2021-36086](https://nvd.nist.gov/vuln/detail/CVE-2021-36086){: external}, [CVE-2021-36087](https://nvd.nist.gov/vuln/detail/CVE-2021-36087){: external}, [CVE-2022-1292](https://nvd.nist.gov/vuln/detail/CVE-2022-1292){: external}, [CVE-2022-22576](https://nvd.nist.gov/vuln/detail/CVE-2022-22576){: external}, [CVE-2022-27774](https://nvd.nist.gov/vuln/detail/CVE-2022-27774){: external}, [CVE-2022-27775](https://nvd.nist.gov/vuln/detail/CVE-2022-27775){: external}, [CVE-2022-27776](https://nvd.nist.gov/vuln/detail/CVE-2022-27776){: external}, [CVE-2022-29799](https://nvd.nist.gov/vuln/detail/CVE-2022-29799){: external}, [CVE-2022-29800](https://nvd.nist.gov/vuln/detail/CVE-2022-29800){: external}. |
 | Kubernetes | N/A | N/A | N/A |
 | Haproxy | f53b22 | 36b030 | [CVE-2022-1271](https://nvd.nist.gov/vuln/detail/CVE-2022-1271){: external}, [CVE-2022-1154](https://nvd.nist.gov/vuln/detail/CVE-2022-1154){: external}, [CVE-2018-25032](https://nvd.nist.gov/vuln/detail/CVE-2018-25032){: external}. |
-{: caption="Changes since version 1.22.9_1550" caption-side="top"}
+{: caption="Changes since version 1.22.9_1550" caption-side="bottom"}
 
 ### Change log for master fix pack 1.22.9_1549, released 26 April 2022
 {: #1229_1549}
@@ -350,7 +350,7 @@ The following table shows the changes that are in the master fix pack 1.22.9_154
 | Kubernetes NodeLocal DNS cache | 1.21.3 | 1.21.4 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.21.4){: external}. |
 | Load balancer and Load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1899 | 1916 | Updated the image to resolve CVEs. |
 | Portieris admission controller | v0.12.3 | v0.12.4 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.12.4){: external}. |
-{: caption="Changes since version 1.22.8_1547" caption-side="top"}
+{: caption="Changes since version 1.22.8_1547" caption-side="bottom"}
 
 
 
@@ -362,7 +362,7 @@ The following table shows the changes that are in the master fix pack 1.22.9_154
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-175-generic | 4.15.0-176-generic | Kernel and package updates for [CVE-2018-16301](https://nvd.nist.gov/vuln/detail/CVE-2018-16301){: external}, [CVE-2019-18276](https://nvd.nist.gov/vuln/detail/CVE-2019-18276){: external}, [CVE-2020-8037](https://nvd.nist.gov/vuln/detail/CVE-2020-8037){: external}, [CVE-2021-31870](https://nvd.nist.gov/vuln/detail/CVE-2021-31870){: external}, [CVE-2021-31871](https://nvd.nist.gov/vuln/detail/CVE-2021-31871){: external}, [CVE-2021-31872](https://nvd.nist.gov/vuln/detail/CVE-2021-31872){: external}, [CVE-2021-31873](https://nvd.nist.gov/vuln/detail/CVE-2021-31873){: external}, [CVE-2021-43975](https://nvd.nist.gov/vuln/detail/CVE-2021-43975){: external}, [CVE-2022-1271](https://nvd.nist.gov/vuln/detail/CVE-2022-1271){: external}, [CVE-2022-24765](https://nvd.nist.gov/vuln/detail/CVE-2022-24765){: external}. |
 | Kubernetes | v1.22.8 | v1.22.9 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.9){: external}. |
-{: caption="Changes since version 1.22.8_1548" caption-side="top"}
+{: caption="Changes since version 1.22.8_1548" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.22.8_1548, released 11 April 2022
@@ -375,7 +375,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | --- | --- | --- | --- |
 | Containerd | v1.5.10 | v1.5.11 | See the [change log](https://github.com/containerd/containerd/releases/tag/v1.5.11){: external} and the [security bulletin](https://www.ibm.com/support/pages/node/6572257){: external}. |
 | Ubuntu 18.04 packages | 4.15.0-173-generic | 4.15.0-175-generic | Kernel and package updates for [CVE-2018-25032](https://nvd.nist.gov/vuln/detail/CVE-2018-25032) [CVE-2021-3426](https://nvd.nist.gov/vuln/detail/CVE-2021-3426) [CVE-2021-4189](https://nvd.nist.gov/vuln/detail/CVE-2021-4189) [CVE-2022-0391](https://nvd.nist.gov/vuln/detail/CVE-2022-0391) [CVE-2022-21712](https://nvd.nist.gov/vuln/detail/CVE-2022-21712) [CVE-2022-21716](https://nvd.nist.gov/vuln/detail/CVE-2022-21716) [CVE-2022-25308](https://nvd.nist.gov/vuln/detail/CVE-2022-25308) [CVE-2022-25309](https://nvd.nist.gov/vuln/detail/CVE-2022-25309) [CVE-2022-25310](https://nvd.nist.gov/vuln/detail/CVE-2022-25310) [CVE-2022-27666](https://nvd.nist.gov/vuln/detail/CVE-2022-27666). | 
-{: caption="Changes since version 1.22.8_1546" caption-side="top"}
+{: caption="Changes since version 1.22.8_1546" caption-side="bottom"}
 
 
 ### Change log for master fix pack 1.22.8_1547, released 6 April 2022
@@ -384,7 +384,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1865 | 1899 | Revert setting gratuitous arp on LBv1. |
-{: caption="Changes since version 1.22.8_1545" caption-side="top"}
+{: caption="Changes since version 1.22.8_1545" caption-side="bottom"}
 
 
 ### Change log for master fix pack 1.22.8_1545, released 30 March 2022
@@ -407,7 +407,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | Load balancer and Load balancer monitor for IBM Cloud Provider | 1747 | 1865 | Updated the image to resolve CVEs. Updated to use `Go` version `1.17.8`. Set gratuitous arp at the right time on LBv1. |
 | Operator Lifecycle Manager | 0.16.1-IKS-15 | 0.16.1-IKS-16 | Resolve [CVE-2022-0778](https://nvd.nist.gov/vuln/detail/CVE-2022-0778){: external}. |
 | Portieris admission controller | v0.12.2 | v0.12.3 | See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.12.3){: external} |
-{: caption="Changes since version 1.22.7_1541" caption-side="top"}
+{: caption="Changes since version 1.22.7_1541" caption-side="bottom"}
 
 
 
@@ -420,7 +420,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-171-generic | 4.15.0-173-generic | Kernel and package updates for [CVE-2021-20193](https://nvd.nist.gov/vuln/detail/CVE-2021-20193){: external}, [CVE-2021-25220](https://nvd.nist.gov/vuln/detail/CVE-2021-25220){: external}, [CVE-2021-3506](https://nvd.nist.gov/vuln/detail/CVE-2021-3506){: external}, [CVE-2022-0435](https://nvd.nist.gov/vuln/detail/CVE-2022-0435){: external}, [CVE-2022-0492](https://nvd.nist.gov/vuln/detail/CVE-2022-0492){: external}, [CVE-2022-0778](https://nvd.nist.gov/vuln/detail/CVE-2022-0778){: external}, [CVE-2022-0847](https://nvd.nist.gov/vuln/detail/CVE-2022-0847){: external}, [CVE-2022-23308](https://nvd.nist.gov/vuln/detail/CVE-2022-23308){: external}. |
 | HA proxy | 15198f | b40c07 | [CVE-2021-45960](https://nvd.nist.gov/vuln/detail/CVE-2021-45960){: external}, [CVE-2021-46143](https://nvd.nist.gov/vuln/detail/CVE-2021-46143){: external}, [CVE-2022-22822](https://nvd.nist.gov/vuln/detail/CVE-2022-22822){: external}, [CVE-2022-22823](https://nvd.nist.gov/vuln/detail/CVE-2022-22823){: external}, [CVE-2022-22824](https://nvd.nist.gov/vuln/detail/CVE-2022-22824){: external}, [CVE-2022-22825](https://nvd.nist.gov/vuln/detail/CVE-2022-22825){: external}, [CVE-2022-22826](https://nvd.nist.gov/vuln/detail/CVE-2022-22826){: external}, [CVE-2022-22827](https://nvd.nist.gov/vuln/detail/CVE-2022-22827){: external}, [CVE-2022-23852](https://nvd.nist.gov/vuln/detail/CVE-2022-23852){: external}, [CVE-2022-25235](https://nvd.nist.gov/vuln/detail/CVE-2022-25235){: external}, [CVE-2022-25236](https://nvd.nist.gov/vuln/detail/CVE-2022-25236){: external}, [CVE-2022-25315](https://nvd.nist.gov/vuln/detail/CVE-2022-25315){: external}, [CVE-2021-3999](https://nvd.nist.gov/vuln/detail/CVE-2021-3999){: external}, [CVE-2022-23218](https://nvd.nist.gov/vuln/detail/CVE-2022-23218){: external}, [CVE-2022-23219](https://nvd.nist.gov/vuln/detail/CVE-2022-23219){: external}, [CVE-2022-23308](https://nvd.nist.gov/vuln/detail/CVE-2022-23308){: external}, [CVE-2021-23177](https://nvd.nist.gov/vuln/detail/CVE-2021-23177){: external}, [CVE-2021-31566](https://nvd.nist.gov/vuln/detail/CVE-2021-31566){: external}. | Kubernetes | 1.22.7 | 1.22.8 | See [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.8){: external}. |
-{: caption="Changes since version 1.22.7_1543" caption-side="top"}
+{: caption="Changes since version 1.22.7_1543" caption-side="bottom"}
 
 
 
@@ -433,7 +433,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | --- | --- | --- | --- |
 | Containerd | v1.5.9 | v1.5.10 | See the [change log](https://github.com/containerd/containerd/releases/tag/v1.5.10){: external} and the [security bulletin](https://www.ibm.com/support/pages/node/6564653){: external}. |
 | Ubuntu 18.04 packages | 4.15.0-169-generic | 4.15.0-171-generic | Kernel and package updates for [CVE-2016-10228](https://nvd.nist.gov/vuln/detail/CVE-2016-10228){: external}, [CVE-2019-25013](https://nvd.nist.gov/vuln/detail/CVE-2019-25013){: external}, [CVE-2020-27618](https://nvd.nist.gov/vuln/detail/CVE-2020-27618){: external}, [CVE-2020-29562](https://nvd.nist.gov/vuln/detail/CVE-2020-29562){: external}, [CVE-2020-6096](https://nvd.nist.gov/vuln/detail/CVE-2020-6096){: external}, [CVE-2021-3326](https://nvd.nist.gov/vuln/detail/CVE-2021-3326){: external}, [CVE-2021-35942](https://nvd.nist.gov/vuln/detail/CVE-2021-35942){: external}, [CVE-2021-3999](https://nvd.nist.gov/vuln/detail/CVE-2021-3999){: external}, [CVE-2022-0001](https://nvd.nist.gov/vuln/detail/CVE-2022-0001){: external}, [CVE-2022-23218](https://nvd.nist.gov/vuln/detail/CVE-2022-23218){: external}, [CVE-2022-23219](https://nvd.nist.gov/vuln/detail/CVE-2022-23219){: external}, [CVE-2022-25313](https://nvd.nist.gov/vuln/detail/CVE-2022-25313){: external}, [CVE-2022-25314](https://nvd.nist.gov/vuln/detail/CVE-2022-25314){: external}, [CVE-2022-25315](https://nvd.nist.gov/vuln/detail/CVE-2022-25315){: external}. |
-{: caption="Changes since version 1.22.7_1542" caption-side="top"}
+{: caption="Changes since version 1.22.7_1542" caption-side="bottom"}
 
 
 ### Change log for master fix pack 1.22.7_1541, released 3 March 2022
@@ -452,7 +452,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | Konnectivity agent | v0.0.27_309_iks | v0.0.27_a6b5248a_323_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.27){: external}.  Updated universal base image (UBI) to the `8.5-230` version to resolve CVEs. Updated to use `Go` version `1.17.5`. |
 | Konnectivity server | v0.0.27_309_iks | v0.0.27_a6b5248a_323_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.27){: external}.  Updated universal base image (UBI) to the `8.5-230` version to resolve CVEs. Updated to use `Go` version `1.17.5`. |
 | Kubernetes | v1.22.6 | v1.22.7 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.7){: external}. |
-{: caption="Changes since version 1.22.6_1537" caption-side="top"}
+{: caption="Changes since version 1.22.6_1537" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.22.7_1542, released 28 February 2022
@@ -463,7 +463,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | Ubuntu 18.04 packages | 4.15.0-167-generic | 4.15.0-169-generic | Kernel and package updates for [CVE-2021-4083](https://nvd.nist.gov/vuln/detail/CVE-2021-4083){: external}, [CVE-2021-4155](https://nvd.nist.gov/vuln/detail/CVE-2021-4155){: external}, [CVE-2021-45960](https://nvd.nist.gov/vuln/detail/CVE-2021-45960){: external}, [CVE-2021-46143](https://nvd.nist.gov/vuln/detail/CVE-2021-46143){: external}, [CVE-2022-0330](https://nvd.nist.gov/vuln/detail/CVE-2022-0330){: external}, [CVE-2022-22822](https://nvd.nist.gov/vuln/detail/CVE-2022-22822){: external}, [CVE-2022-22823](https://nvd.nist.gov/vuln/detail/CVE-2022-22823){: external}, [CVE-2022-22824](https://nvd.nist.gov/vuln/detail/CVE-2022-22824){: external}, [CVE-2022-22825](https://nvd.nist.gov/vuln/detail/CVE-2022-22825){: external}, [CVE-2022-22826](https://nvd.nist.gov/vuln/detail/CVE-2022-22826){: external}, [CVE-2022-22827](https://nvd.nist.gov/vuln/detail/CVE-2022-22827){: external}, [CVE-2022-22942](https://nvd.nist.gov/vuln/detail/CVE-2022-22942){: external}, [CVE-2022-23852](https://nvd.nist.gov/vuln/detail/CVE-2022-23852){: external}, [CVE-2022-23990](https://nvd.nist.gov/vuln/detail/CVE-2022-23990){: external}, [CVE-2022-24407](https://nvd.nist.gov/vuln/detail/CVE-2022-24407){: external}, [CVE-2022-25235](https://nvd.nist.gov/vuln/detail/CVE-2022-25235){: external}, [CVE-2022-25236](https://nvd.nist.gov/vuln/detail/CVE-2022-25236){: external}. |
 | Kubernetes | v1.22.6 | v1.22.7 | For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.7){: external}. |
 | HA proxy | f6a2b3 | 15198fb | Contains fixes for [CVE-2022-24407](https://nvd.nist.gov/vuln/detail/CVE-2022-24407){: external}. | 
-{: caption="Changes since version 1.22.6_1539" caption-side="top"}
+{: caption="Changes since version 1.22.6_1539" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.22.6_1539, released 14 February 2022
@@ -474,7 +474,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | Ubuntu 18.04 packages | N/A | N/A | N/A |
 | Kubernetes | N/A | N/A | N/A |
 | HA proxy | d38fa1 | f6a2b3 | [CVE-2021-3521](https://nvd.nist.gov/vuln/detail/CVE-2021-3521){: external} and [CVE-2021-4122](https://nvd.nist.gov/vuln/detail/CVE-2021-4122){: external}. |
-{: caption="Changes since version 1.22.6_1538" caption-side="top"}
+{: caption="Changes since version 1.22.6_1538" caption-side="bottom"}
 
 
 
@@ -487,7 +487,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | --------- | -------- | ------- | ----------- |
 | Ubuntu 18.04 packages | N/A | N/A | Updated worker node images with package updates for [CVE-2018-7169](https://nvd.nist.gov/vuln/detail/CVE-2018-7169){: external}, [CVE-2021-3984](https://nvd.nist.gov/vuln/detail/CVE-2021-3984){: external}, [CVE-2021-4019](https://nvd.nist.gov/vuln/detail/CVE-2021-4019){: external}, [CVE-2021-4034](https://nvd.nist.gov/vuln/detail/CVE-2021-4034){: external}, [CVE-2021-4069](https://nvd.nist.gov/vuln/detail/CVE-2021-4069){: external}. |
 | Kubernetes | 1.22.4 | 1.22.6 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.6){: external}. |
-{: caption="Changes since version 1.20.13_1567" caption-side="top"}
+{: caption="Changes since version 1.20.13_1567" caption-side="bottom"}
 
 
 ### Change log for master fix pack 1.22.6_1537, released 26 January 2022
@@ -510,7 +510,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | Kubernetes NodeLocal DNS cache | 1.21.1 | 1.21.3 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.21.3){: external}. |
 | Load balancer and load balancer monitor for IBM Cloud Provider | 1659 | 1747 | Updated the Alpine base image to the `3.15` version to resolve CVEs. Updated to use `Go` version `1.17.6`. |
 | Portieris admission controller | v0.12.1 | v0.12.2 | See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.12.2){: external} |
-{: caption="Changes since version 1.22.4_1531" caption-side="top"}
+{: caption="Changes since version 1.22.4_1531" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.22.4_1536, released 18 January 2022
@@ -520,7 +520,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-163-generic | 4.15.0-166-generic | Kernel and package updates for [CVE-2018-25020](https://nvd.nist.gov/vuln/detail/CVE-2018-25020){: external} and [CVE-2021-4002](https://nvd.nist.gov/vuln/detail/CVE-2021-4002){: external}. |
 | Containerd | v1.5.8 | v1.5.9 | See the [change log](https://github.com/containerd/containerd/releases/tag/v1.5.9){: external}. |
-{: caption="Changes since version 1.22.4_1534" caption-side="top"}
+{: caption="Changes since version 1.22.4_1534" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.4_1534, released 4 January 2022
 {: #1224_1534}
@@ -532,7 +532,7 @@ The following table shows the changes that are in the worker node fix pack patch
 | --- | --- | --- | --- |
 | HA proxy | 3b8663 | d38fa1 | Contains fixes for [CVE-2021-3712](https://nvd.nist.gov/vuln/detail/CVE-2021-3712){: external}. |
 | Ubuntu 18.04 packages | N/A | N/A | Updated worker node image packages for [CVE-2019-19449](https://nvd.nist.gov/vuln/detail/CVE-2019-19449){: external}, [CVE-2020-16592](https://nvd.nist.gov/vuln/detail/CVE-2020-16592){: external}, [CVE-2020-21913](https://nvd.nist.gov/vuln/detail/CVE-2020-21913){: external}, [CVE-2020-27781](https://nvd.nist.gov/vuln/detail/CVE-2020-27781){: external}, [CVE-2020-36322](https://nvd.nist.gov/vuln/detail/CVE-2020-36322){: external}, [CVE-2020-36385](https://nvd.nist.gov/vuln/detail/CVE-2020-36385){: external}, [CVE-2021-25219](https://nvd.nist.gov/vuln/detail/CVE-2021-25219){: external}, [CVE-2021-28831](https://nvd.nist.gov/vuln/detail/CVE-2021-28831){: external}, [CVE-2021-28950](https://nvd.nist.gov/vuln/detail/CVE-2021-28950){: external}, [CVE-2021-3487](https://nvd.nist.gov/vuln/detail/CVE-2021-3487){: external}, [CVE-2021-3524](https://nvd.nist.gov/vuln/detail/CVE-2021-3524){: external}, [CVE-2021-3531](https://nvd.nist.gov/vuln/detail/CVE-2021-3531){: external}, [CVE-2021-3733](https://nvd.nist.gov/vuln/detail/CVE-2021-3733){: external}, [CVE-2021-3737](https://nvd.nist.gov/vuln/detail/CVE-2021-3737){: external}, [CVE-2021-3759](https://nvd.nist.gov/vuln/detail/CVE-2021-3759){: external}, [CVE-2021-3778](https://nvd.nist.gov/vuln/detail/CVE-2021-3778){: external}, [CVE-2021-3796](https://nvd.nist.gov/vuln/detail/CVE-2021-3796){: external}, [CVE-2021-3800](https://nvd.nist.gov/vuln/detail/CVE-2021-3800){: external}, [CVE-2021-38199](https://nvd.nist.gov/vuln/detail/CVE-2021-38199){: external}, [CVE-2021-3903](https://nvd.nist.gov/vuln/detail/CVE-2021-3903){: external}, [CVE-2021-3927](https://nvd.nist.gov/vuln/detail/CVE-2021-3927){: external}, [CVE-2021-3928](https://nvd.nist.gov/vuln/detail/CVE-2021-3928){: external}, [CVE-2021-40490](https://nvd.nist.gov/vuln/detail/CVE-2021-40490){: external}, [CVE-2021-42374](https://nvd.nist.gov/vuln/detail/CVE-2021-42374){: external}, [CVE-2021-42378](https://nvd.nist.gov/vuln/detail/CVE-2021-42378){: external}, [CVE-2021-42384](https://nvd.nist.gov/vuln/detail/CVE-2021-42384){: external}, and [CVE-2021-43527](https://nvd.nist.gov/vuln/detail/CVE-2021-43527){: external}. |
-{: caption="Changes since version 1.22.4_1532" caption-side="top"}
+{: caption="Changes since version 1.22.4_1532" caption-side="bottom"}
 
 
 ### Change log for master fix pack 1.22.4_1531, released 7 December 2021
@@ -559,7 +559,7 @@ The following table shows the changes that are in the master fix pack update `1.
 | Load balancer and load balancer monitor for {{site.data.keyword.IBM_notm}} Cloud Provider | 1590 | 1659 | Updated Alpine base image to the latest `3.14` version to resolve CVEs. Updated to use `Go` version `1.16.10`. |
 | Operator Lifecycle Manager | 0.16.1-IKS-14 | 0.16.1-IKS-15 | Updated image for [CVE-2021-42374](https://nvd.nist.gov/vuln/detail/CVE-2021-42374){: external}, [CVE-2021-42375](https://nvd.nist.gov/vuln/detail/CVE-2021-42375){: external}, [CVE-2021-42378](https://nvd.nist.gov/vuln/detail/CVE-2021-42378){: external}, [CVE-2021-42379](https://nvd.nist.gov/vuln/detail/CVE-2021-42379){: external}, [CVE-2021-42380](https://nvd.nist.gov/vuln/detail/CVE-2021-42380){: external}, [CVE-2021-42381](https://nvd.nist.gov/vuln/detail/CVE-2021-42381){: external}, [CVE-2021-42382](https://nvd.nist.gov/vuln/detail/CVE-2021-42382){: external}, [CVE-2021-42383](https://nvd.nist.gov/vuln/detail/CVE-2021-42383){: external}, [CVE-2021-42384](https://nvd.nist.gov/vuln/detail/CVE-2021-42384){: external}, [CVE-2021-42385](https://nvd.nist.gov/vuln/detail/CVE-2021-42385){: external} and [CVE-2021-42386](https://nvd.nist.gov/vuln/detail/CVE-2021-42386){: external}. |
 | Portieris admission controller | v0.12.0 | v0.12.1 | See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.12.1){: external}. |
-{: caption="Changes since version 1.22.3_1529" caption-side="top"}
+{: caption="Changes since version 1.22.3_1529" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.22.4_1532, released 6 December 2021
 {: #1224_1532}
@@ -572,7 +572,7 @@ The following table shows the changes that are in the worker node fix pack patch
 | Ubuntu 18.04 packages | 4.15.0-162 | 4.15.0-163 | Updated worker node images and kernel with package updates. Contains fixes for [CVE-2021-43527](https://nvd.nist.gov/vuln/detail/CVE-2021-43527){: external} |
 | Kubernetes | 1.22.3 | 1.22.4 | See the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.4){: external}. | 
 | Containerd | v1.5.7 | v1.5.8 | See the [change log](https://github.com/containerd/containerd/releases/tag/v1.5.8){: external} and the [security bulletin](https://www.ibm.com/support/pages/node/6524974){: external} | 
-{: caption="Changes since version 1.22.3_1530" caption-side="top"}
+{: caption="Changes since version 1.22.3_1530" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.22.3_1530, released 22 November 2021
@@ -586,7 +586,7 @@ The following table shows the changes that are in the worker node fix pack patch
 | Kubernetes | 1.22.2 | 1.22.3 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.3){: external}. | 
 | HA proxy | 07f1e9e | 3b8663 | Contains fixes for [CVE-2021-20231](https://nvd.nist.gov/vuln/detail/CVE-2021-20231){: external}, [CVE-2021-20232](https://nvd.nist.gov/vuln/detail/CVE-2021-20232){: external}, [CVE-2021-3580](https://nvd.nist.gov/vuln/detail/CVE-2021-3580){: external}, [CVE-2021-22946](https://nvd.nist.gov/vuln/detail/CVE-2021-22946){: external}, [CVE-2021-22947](https://nvd.nist.gov/vuln/detail/CVE-2021-22947){: external}, [CVE-2021-22876](https://nvd.nist.gov/vuln/detail/CVE-2021-22876){: external}, [CVE-2021-22898](https://nvd.nist.gov/vuln/detail/CVE-2021-22898){: external}, [CVE-2021-22925](https://nvd.nist.gov/vuln/detail/CVE-2021-22925){: external}, [CVE-2019-20838](https://nvd.nist.gov/vuln/detail/CVE-2019-20838){: external}, [CVE-2020-14155](https://nvd.nist.gov/vuln/detail/CVE-2020-14155){: external}, [CVE-2018-20673](https://nvd.nist.gov/vuln/detail/CVE-2018-20673){: external}, [CVE-2021-42574](https://nvd.nist.gov/vuln/detail/CVE-2021-42574){: external}, [CVE-2019-17594](https://nvd.nist.gov/vuln/detail/CVE-2019-17594){: external}, [CVE-2019-17595](https://nvd.nist.gov/vuln/detail/CVE-2019-17595){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-16135](https://nvd.nist.gov/vuln/detail/CVE-2020-16135){: external}, [CVE-2021-3445](https://nvd.nist.gov/vuln/detail/CVE-2021-3445){: external}, [CVE-2021-36084](https://nvd.nist.gov/vuln/detail/CVE-2021-36084){: external}, [CVE-2021-36085](https://nvd.nist.gov/vuln/detail/CVE-2021-36085){: external}, [CVE-2021-36086](https://nvd.nist.gov/vuln/detail/CVE-2021-36086){: external}, [CVE-2021-36087](https://nvd.nist.gov/vuln/detail/CVE-2021-36087){: external}, [CVE-2021-20266](https://nvd.nist.gov/vuln/detail/CVE-2021-20266){: external}, [CVE-2019-18218](https://nvd.nist.gov/vuln/detail/CVE-2019-18218){: external}, [CVE-2021-23840](https://nvd.nist.gov/vuln/detail/CVE-2021-23840){: external}, [CVE-2021-23841](https://nvd.nist.gov/vuln/detail/CVE-2021-23841){: external}, [CVE-2021-27645](https://nvd.nist.gov/vuln/detail/CVE-2021-27645){: external}, [CVE-2021-33574](https://nvd.nist.gov/vuln/detail/CVE-2021-33574){: external}, [CVE-2021-35942](https://nvd.nist.gov/vuln/detail/CVE-2021-35942){: external}, [CVE-2021-33560](https://nvd.nist.gov/vuln/detail/CVE-2021-33560){: external}, [CVE-2019-13750](https://nvd.nist.gov/vuln/detail/CVE-2019-13750){: external}, [CVE-2019-13751](https://nvd.nist.gov/vuln/detail/CVE-2019-13751){: external}, [CVE-2019-19603](https://nvd.nist.gov/vuln/detail/CVE-2019-19603){: external}, [CVE-2019-5827](https://nvd.nist.gov/vuln/detail/CVE-2019-5827){: external}, [CVE-2020-13435](https://nvd.nist.gov/vuln/detail/CVE-2020-13435){: external}, [CVE-2020-24370](https://nvd.nist.gov/vuln/detail/CVE-2020-24370){: external}, [CVE-2021-28153](https://nvd.nist.gov/vuln/detail/CVE-2021-28153){: external}, [CVE-2021-3800](https://nvd.nist.gov/vuln/detail/CVE-2021-3800){: external}, [CVE-2021-33928](https://nvd.nist.gov/vuln/detail/CVE-2021-33928){: external}, [CVE-2021-33929](https://nvd.nist.gov/vuln/detail/CVE-2021-33929){: external}, [CVE-2021-33930](https://nvd.nist.gov/vuln/detail/CVE-2021-33930){: external}, [CVE-2021-33938](https://nvd.nist.gov/vuln/detail/CVE-2021-33938){: external}, and[CVE-2021-3200](https://nvd.nist.gov/vuln/detail/CVE-2021-3200){: external} |
 | Ubuntu 18.04 packages | 4.15.0-161 | 4.15.0-162  | Updated worker node images and kernel with package fixes for[CVE-2019-19449](https://nvd.nist.gov/vuln/detail/CVE-2019-1944){: external}, [CVE-2020-36322](https://nvd.nist.gov/vuln/detail/CVE-2020-3632){: external}, [CVE-2020-36385](https://nvd.nist.gov/vuln/detail/CVE-2020-3638){: external}, [CVE-2021-28950](https://nvd.nist.gov/vuln/detail/CVE-2021-2895){: external}, [CVE-2021-3759](https://nvd.nist.gov/vuln/detail/CVE-2021-3759){: external}, [CVE-2021-38199](https://nvd.nist.gov/vuln/detail/CVE-2021-38199){: external}, [CVE-2021-3903](https://nvd.nist.gov/vuln/detail/CVE-2021-3903){: external}, [CVE-2021-3927](https://nvd.nist.gov/vuln/detail/CVE-2021-3927){: external}, and [CVE-2021-3928](https://nvd.nist.gov/vuln/detail/CVE-2021-3928){: external}. |
-{: caption="Changes since version 1.22.2_1528" caption-side="top"}
+{: caption="Changes since version 1.22.2_1528" caption-side="bottom"}
 
 
 
@@ -611,7 +611,7 @@ The following table shows the changes that are in the master fix pack update `1.
 | Konnectivity server | v0.0.24_262_iks | v0.0.24_268_iks | Update to use `Go` version `1.16.9`. |
 | Kubernetes | v1.22.2 | v1.22.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.3){: external}. Changed the duration of the Kubernetes API server certificate from 825 days to 365 days. Changed the duration of the cluster CA certificate from 30 to 10 years. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1547 | 1590 | Updated to use `Go` version `1.16.9`. |
-{: caption="Changes since version 1.22.2_1526" caption-side="top"}
+{: caption="Changes since version 1.22.2_1526" caption-side="bottom"}
 
 
 
@@ -626,7 +626,7 @@ The following table shows the changes that are in the worker node fix pack patch
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | N/A | N/A | Updated worker node image packages for [CVE-2020-16592](https://nvd.nist.gov/vuln/detail/CVE-2020-16592){: external}, [CVE-2020-27781](https://nvd.nist.gov/vuln/detail/CVE-2020-27781){: external}, [CVE-2021-25219](https://nvd.nist.gov/vuln/detail/CVE-2021-25219){: external}, [CVE-2021-3487](https://nvd.nist.gov/vuln/detail/CVE-2021-3487){: external}, [CVE-2021-3524](https://nvd.nist.gov/vuln/detail/CVE-2021-3524){: external}, [CVE-2021-3531](https://nvd.nist.gov/vuln/detail/CVE-2021-3531){: external}, and [CVE-2021-40490](https://nvd.nist.gov/vuln/detail/CVE-2021-40490){: external}. |
-{: caption="Changes since version 1.22.2_1527" caption-side="top"}
+{: caption="Changes since version 1.22.2_1527" caption-side="bottom"}
 
 
 
@@ -652,7 +652,7 @@ The following table shows the changes that are in the master fix pack update `1.
 | Kubernetes Metrics Server | v0.5.0 | v0.5.1 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.5.1){: external}. |
 | Kubernetes NodeLocal DNS cache | 1.20.0 | 1.21.1 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.21.1){: external}. |
 | Portieris admission controller | v0.11.0 | v0.12.0 | See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.12.0){: external} |
-{: caption="Changes since version 1.22.2_1522" caption-side="top"}
+{: caption="Changes since version 1.22.2_1522" caption-side="bottom"}
 
 
 
@@ -668,7 +668,7 @@ The following table shows the changes that are in the worker node fix pack patch
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | N/A | N/A | Updated worker node images with package updates. Contains fix for cloud-init performance problem. |
 | Worker-pool taint automation | N/A | N/A | Fixes known issue related to worker-pool taint automation that prevents workers from getting providerID. |
-{: caption="Changes since version 1.22.2_1524" caption-side="top"}
+{: caption="Changes since version 1.22.2_1524" caption-side="bottom"}
 
 
 
@@ -684,7 +684,7 @@ The following table shows the changes that are in the worker node fix pack patch
 | --- | --- | --- | --- |
 | Containerd | v1.5.5 | v1.5.7 | See the [security bulletin](https://www.ibm.com/support/pages/node/6501867){: external} and the [change log](https://github.com/containerd/containerd/releases/tag/v1.5.7){: external}. |
 | Ubuntu 18.04 packages | 4.15.0-158 | 4.15.0-159 | Updated worker node images and kernel with package updates [CVE-2021-3778](https://nvd.nist.gov/vuln/detail/CVE-2021-3778){: external} and [CVE-2021-3796](https://nvd.nist.gov/vuln/detail/CVE-2021-3796){: external}. |
-{: caption="Changes since version 1.22.2_1523" caption-side="top"}
+{: caption="Changes since version 1.22.2_1523" caption-side="bottom"}
 
 
 
@@ -709,4 +709,4 @@ The following table shows the changes that are in the master fix pack `1.22.2_15
 | Kubernetes Metrics Server | v0.4.4 | v0.5.0 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.5.0){: external}. The `metrics-server-nanny` container configuration has been updated to use a 30 second poll period (previously 5 minutes) in order to allow faster scaling of the metrics server. |
 | Kubernetes NodeLocal DNS cache | 1.17.3 | 1.20.0 | Increased memory resource requests from `5Mi` to `10Mi` to better align with normal resource utilization. See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.20.0){: external}. |
 | Portieris admission controller | v0.10.3 | v0.11.0 | See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.11.0){: external}. |
-{: caption="Changes since version 1.21.5_1531 (master) and 1.21.5_1532 (worker node)." caption-side="top"}
+{: caption="Changes since version 1.21.5_1531 (master) and 1.21.5_1532 (worker node)." caption-side="bottom"}

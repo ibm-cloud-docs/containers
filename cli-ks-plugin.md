@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-21"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes
 
@@ -65,7 +65,7 @@ The tables below list the `ibmcloud ks` command groups. For a complete list of a
 | [Script commands](#script) | Rewrite scripts that call IBM Cloud Kubernetes Service plug-in commands. |
 | **Beta** [Storage commands](#cs_storage) | View and modify storage resources. |
 {: summary="The rows are read from left to right. The first column is the command group. The second column is a description of the command group."}
-{: caption="{{site.data.keyword.containerlong_notm}} CLI command groups" caption-side="top"}
+{: caption="{{site.data.keyword.containerlong_notm}} CLI command groups" caption-side="bottom"}
 
 ## `cluster` commands
 {: #cluster}

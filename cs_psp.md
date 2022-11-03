@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes
 
@@ -63,7 +63,7 @@ By default, your cluster contains the following RBAC resources that enable clust
 |---|---|---|---|
 | `privileged-psp-user` | All | `ClusterRoleBinding` | Enables cluster administrators, authenticated users, service accounts, and nodes to use `ibm-privileged-psp` pod security policy. |
 | `restricted-psp-user` | All | `ClusterRoleBinding` | Enables cluster administrators, authenticated users, service accounts, and nodes to use `ibm-restricted-psp` pod security policy. |
-{: caption="Default RBAC resources that you can modify" caption-side="top"}
+{: caption="Default RBAC resources that you can modify" caption-side="bottom"}
 
 You can modify these RBAC roles to remove or add administrators, users, services, or nodes to the policy. These modifications don't prevent cluster administrators, service accounts, and nodes from using the privileged pod security policy in the `kube-system`, `ibm-system`, and `ibm-operators` namespaces. Do not modify these system namespaces, which are privileged namespaces.
 
@@ -230,7 +230,7 @@ You must not delete or modify these resources.
 | `ibm-privileged-psp-user` | `kube-system` | `RoleBinding` | Enables cluster administrators, service accounts, and nodes to use `ibm-privileged-psp` pod security policy in the `kube-system` namespace. |
 | `ibm-restricted-psp` | All | `PodSecurityPolicy` | Policy for unprivileged, or restricted, pod creation. |
 | `ibm-restricted-psp-user` | All | `ClusterRole` | Cluster role that allows the use of `ibm-restricted-psp` pod security policy. |
-{: caption="IBM pod security policies resources that you must not modify" caption-side="top"}
+{: caption="IBM pod security policies resources that you must not modify" caption-side="bottom"}
 
 
 

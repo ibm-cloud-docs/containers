@@ -129,7 +129,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Portable public IP addresses](/docs/containers?topic=containers-subnets#review_ip)| |Yes|
 |[Logging and monitoring](/docs/containers?topic=containers-health#logging)| |Yes|
 |[Option to provision your worker nodes on physical (bare metal) servers](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)| |Yes|
-{: caption="Characteristics of free and standard clusters" caption-side="top"}
+{: caption="Characteristics of free and standard clusters" caption-side="bottom"}
 
 
 
@@ -162,6 +162,6 @@ Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerl
 |Supported operating system| Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated) | Red Hat Enterprise Linux 7  |
 |Preferred external traffic networking| Ingress | Router |
 |Secured routes encrypted with {{site.data.keyword.hscrypto}} | | Yes |
-{: caption="Characteristics of community Kubernetes and {{site.data.keyword.redhat_openshift_notm}} clusters" caption-side="top"}
+{: caption="Characteristics of community Kubernetes and {{site.data.keyword.redhat_openshift_notm}} clusters" caption-side="bottom"}
 
 

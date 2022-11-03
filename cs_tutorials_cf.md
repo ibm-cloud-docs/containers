@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-04"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes
 
@@ -146,7 +146,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
     | `-t registry.<region>.icr.io/namespace/cf-py` | Your private registry path, which includes your unique namespace and the name of the image. For this example, the same name is used for the image as the app directory, but you can choose any name for the image in your private registry. If you are unsure what your namespace is, run the `ibmcloud cr namespaces` command to find it. |
     | `.` | The location of the Dockerfile. If you are running the build command from the directory that includes the Dockerfile, enter a period (.). Otherwise, use the relative path to the Dockerfile. | 
     {: summary="The columns are read from left to right. The first column has the option of the command. The second column describes the option."}
-    {: caption="Table 1. Understanding this command's components" caption-side="top"}
+    {: caption="Table 1. Understanding this command's components" caption-side="bottom"}
 
     The image is created in your private registry. You can run the `ibmcloud cr images` command to verify that the image was created.
 
@@ -210,7 +210,7 @@ Deploy your app as a container in a Kubernetes cluster.
     | `image` | In `us.icr.io/<registry_namespace>/cf-py:latest`, replace <registry_namespace> with the namespace of your private image registry. If you are unsure what your namespace is, run the `ibmcloud cr namespaces` command to find it. | 
     | `nodePort` | Expose your app by creating a Kubernetes service of type NodePort. NodePorts are in the range of 30000 - 32767. You use this port to test your app in a browser later. |
     {: summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter."}
-    {: caption="Table 2. Understanding the YAML file components" caption-side="top"}
+    {: caption="Table 2. Understanding the YAML file components" caption-side="bottom"}
 
 2. Apply the configuration file to create the deployment and the service in your cluster.
 

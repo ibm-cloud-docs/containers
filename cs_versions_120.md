@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-08"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, 1.20, versions, update, upgrade
 
@@ -40,7 +40,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
 | 1.20 | Unsupported | 16 Feb 2021 | 19 June 2022 |
-{: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.20" caption-side="top"}
+{: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.20" caption-side="bottom"}
 
 ## Preparing to update
 {: #prep-up-120}
@@ -61,7 +61,7 @@ The following table shows the actions that you must take before you update the K
 | Resolve non-deterministic behavior of owner references | Kubernetes garbage collector is updated to resolve non-deterministic behavior of owner references. Before you update your cluster, review the [Kubernetes community recommendation](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.20.md#urgent-upgrade-notes){: external} that you run the [kubectl-check-ownerreferences](https://github.com/kubernetes-sigs/kubectl-check-ownerreferences){: external} tool to locate existing objects with invalid owner references. |
 | **Unsupported**: Service `service.alpha.kubernetes.io/tolerate-unready-endpoints` annotation | Services no longer support the `service.alpha.kubernetes.io/tolerate-unready-endpoints` annotation. The annotation has been deprecated since Kubernetes version 1.11 and has been replaced by the `spec.publishNotReadyAddresses` field. If your services rely on this annotation, update them to use the `spec.publishNotReadyAddresses` field instead. For more information on this field, see [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/){: external}. |
 | VPC clusters: App URL character length | DNS resolution is managed by the cluster's [virtual private endpoint (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe), which can resolve URLs up to 130 characters. If you expose apps in your cluster with URLs, such as the Ingress subdomain, ensure that the URLs are 130 characters or fewer. |
-{: caption="Changes to make before you update the master to Kubernetes 1.20" caption-side="top"}
+{: caption="Changes to make before you update the master to Kubernetes 1.20" caption-side="bottom"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 ### Update after master
@@ -73,5 +73,5 @@ The following table shows the actions that you must take after you update the Ku
 | Type | Description|
 | --- | --- |
 | **Unsupported:** `kubectl autoscale --generator` removed | The deprecated `--generator` flag is removed from the `kubectl autoscale` command. If your scripts rely on this flag, update them. |
-{: caption="Changes to make after you update the master to Kubernetes 1.20" caption-side="top"}
+{: caption="Changes to make after you update the master to Kubernetes 1.20" caption-side="bottom"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-11-03"
 
 keywords: back up, restore, changelog, kubernetes
 
@@ -26,7 +26,7 @@ Refer to the following tables for a summary of changes for each version of the [
 | `ibmcloud-backup-restore` Helm chart version | Supported? | Cluster version support |
 | -------------------- | -----------|--------------------------- |
 | 2.0.5 | Yes | 1.15 - 1.20 |
-{: caption="Back up and restore Helm chart versions" caption-side="top"}
+{: caption="Back up and restore Helm chart versions" caption-side="bottom"}
 {: summary="The rows are read from left to right. The first column is the back up and restore Helm chart version. The second column is the version's supported state. The third column is the cluster version of your cluster that the back up and restore Helm chart version is supported for."}
 
 

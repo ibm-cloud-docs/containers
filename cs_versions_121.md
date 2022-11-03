@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-08"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, 1.21, versions, update, upgrade
 
@@ -43,7 +43,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
 | 1.21 | Yes | 09 June 2021 | 14 September 2022 |
-{: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.21" caption-side="top"}
+{: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.21" caption-side="bottom"}
 
 ## Preparing to update
 {: #prep-up-121}
@@ -69,7 +69,7 @@ The following table shows the actions that you must take before you update the K
 | OpenVPN replaced by Konnectivity | [Konnectivity](https://kubernetes.io/docs/tasks/extend-kubernetes/setup-konnectivity/){: external} replaces OpenVPN as the network proxy that is used to secure the communication of the Kubernetes API server master to worker nodes in the cluster. If your apps rely on the OpenVPN implementation of Kubernetes master to worker node communication, update them to support [Konnectivity](https://kubernetes.io/docs/tasks/extend-kubernetes/setup-konnectivity/){: external}. |
 | Pod access via service account token | For clusters that run Kubernetes 1.21 and later, the service account tokens that pods use to communicate with the Kubernetes API server are time-limited, automatically refreshed, scoped to a particular audience of users (the pod), and invalidated after the pod is deleted. To continue communicating with the API server, you must design your apps to read the refreshed token value on a regular basis, such as every minute. For applications that invoke the `setuid` internally, you must [manually set the `fsGroup` in the pod security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod){: external}. For more information, see [Bound Service Account Tokens](https://github.com/kubernetes/enhancements/blob/master/keps/sig-auth/1205-bound-service-account-tokens/README.md){: external}. |
 | **Unsupported**: Service `service.alpha.kubernetes.io/tolerate-unready-endpoints` annotation | Services no longer support the `service.alpha.kubernetes.io/tolerate-unready-endpoints` annotation. The annotation has been deprecated since Kubernetes version 1.11 and has been replaced by the `Service` `spec.publishNotReadyAddresses` field. If your services rely on this annotation, update them to use the `spec.publishNotReadyAddresses` field instead. For more information on this field, see [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/){: external} |
-{: caption="Changes to make before you update the master to Kubernetes 1.21" caption-side="top"}
+{: caption="Changes to make before you update the master to Kubernetes 1.21" caption-side="bottom"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 ### Update after master
@@ -85,5 +85,5 @@ The following table shows the actions that you must take after you update the Ku
 | `kubectl get` removes `managedFields` by default  | Now, the `kubectl get` command omits `managedFields` in the `-o json` or `-o yaml` output by default. If you use `kubectl get` to retrieve `managedFields` by using `-o json` or `-o yaml` output, update your `kubectl get` calls to include the `--show-managed-fields=true` flag.  |
 | **Unsupported**: Select `kubelet` metrics | The following cAdvisor `kubelet` metrics are removed: `/stats/container`, `/stats/<pod_name>/<container_name>`, and `/stats/<namespace>/<pod_name>/<pod_uid>/<container_name>`. Stop using these metrics. |
 | Ingress resource API version | The support for `networking.k8s.io/v1beta1` and `extensions/v1beta1` API versions in Ingress resources are deprecated and are planned for removal in Kubernetes version 1.22. The `networking.k8s.io/v1` API version is supported instead. Although not required in version 1.21, you can begin converting your existing resources in preparation for the removal of the API versions before version 1.22. |
-{: caption="Changes to make after you update the master to Kubernetes 1.21" caption-side="top"}
+{: caption="Changes to make after you update the master to Kubernetes 1.21" caption-side="bottom"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}

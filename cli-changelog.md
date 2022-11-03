@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-10-31"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes
 
@@ -473,7 +473,7 @@ Check out the following syntax and behavior changes between each version of the 
 | Flag format  \n -  Legacy: Camel-case (`--showResources`)  \n -  Latest: Dashed (`--show-resources`) | Legacy | Legacy | Legacy and latest | Latest |
 | Cluster context provided by `ibmcloud ks cluster-config`  \n -  Legacy: Provides a command that you must copy and paste to set the new `kubeconfig` file as your current `KUBECONFIG` environment variable. You must set your environment variable before you can interact with your cluster.  \n -  Latest: Appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the [last file that is set by the `KUBECONFIG` environment variable](/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig). After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately, and quickly [change the context to other clusters in the Kubernetes context](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple). | Legacy | Legacy | Legacy | Latest |
 | API endpoint  \n -  Legacy: [Target a region and use a regional endpoint to work with resources in that region](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).  \n -  Latest: [Use the global endpoint to work with resources in any location](/docs/containers?topic=containers-regions-and-zones#bluemix_regions). | Legacy | Latest | Latest | Latest |
-{: caption="Latest versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in" caption-side="top"}
+{: caption="Latest versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in" caption-side="bottom"}
 
 ### Version 0.4
 {: #04}

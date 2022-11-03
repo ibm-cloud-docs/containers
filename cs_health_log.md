@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-07-15"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -235,7 +235,7 @@ The following table shows the different options that you have when you configure
 | `--ca-cert` | Required: When the logging type is `syslog` and the protocol is `tls`, the Kubernetes secret name that contains the certificate authority certificate. |
 | `--verify-mode` | When the logging type is `syslog` and the protocol is `tls`, the verification mode. Supported values are `verify-peer` and the default `verify-none`. |
 | `--skip-validation` | Optional: Skip the validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration will not correctly forward logs. |
-{: caption="Table 1. Understanding logging configuration options" caption-side="top"}
+{: caption="Table 1. Understanding logging configuration options" caption-side="bottom"}
 
 
 ### Forwarding logs to your own server over the `udp` or `tcp` protocols
@@ -310,7 +310,7 @@ You can choose which logs to forward to your external server by filtering out sp
 | `<filter_ID>` | Optional: The ID of the log filter. |
 | `--show-matching-configs` | Optional: Show the logging configurations that each filter applies to. |
 | `--all` | Optional: Delete all your log forwarding filters. |
-{: caption="Table 2. Understanding the options for log filtering" caption-side="top"}
+{: caption="Table 2. Understanding the options for log filtering" caption-side="bottom"}
 
 1. Create a logging filter.
     ```sh
@@ -422,7 +422,7 @@ Before you begin
     | `--cos-endpoint <location_of_COS_bucket>` | The regional, cross regional, or single data center {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. For available endpoints, see [Endpoints and storage locations](/docs/cloud-object-storage/basics?topic=cloud-object-storage-endpoints) in the {{site.data.keyword.cos_short}} documentation. |
     | `--hmac-key-id <HMAC_access_key_ID>` | The unique ID for your HMAC credentials for your {{site.data.keyword.cos_short}} instance. |
     | `--hmac-key <HMAC_access_key>` | The HMAC key for your {{site.data.keyword.cos_short}} instance. |
-    {: caption="Table 2. Understanding the options for log filtering" caption-side="top"}
+    {: caption="Table 2. Understanding the options for log filtering" caption-side="bottom"}
 
     Example command and response
 

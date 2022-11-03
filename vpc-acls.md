@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-11-03"
 
 keywords: kubernetes, firewall
 
@@ -68,7 +68,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
     | To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers. For example, for Ingress listening on `TCP/443`)  | Allow | TCP | Any | Any | Any | 443 | After 4 |
     | `*` Allow access from the Kubernetes control plane IP addresses that are used to health check and report the overall status of your Ingress components. Create one rule for each [control plane CIDR for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}  | Allow | TCP | Each [control plane CIDR for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external} | - | Any | `80` | After 5 |
     | Deny all other traffic that does not match the previous rules.  | Deny | ALL | Any | - | Any | - | Set to bottom |
-    {: caption="Table 4. Required inbound rules" caption-side="top"}
+    {: caption="Table 4. Required inbound rules" caption-side="bottom"}
 
     
     
@@ -88,7 +88,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
     | To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers.  | Allow | TCP | Any | `443` | Any | Any | After 4 |
     | `*` Allow access from the Kubernetes control plane IP addresses that are used to health check and report the overall status of your Ingress components. Create one rule for each [control plane CIDR for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}. | Allow | TCP | Any | `80` | Each [control plane CIDR for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}. | Any | After 5 |
     | Deny all other traffic that does not match the previous rules.  | Deny | ALL | Any | - | Any | - | Set to bottom |
-    {: caption="Table 6. Required outbound rules" caption-side="top"}
+    {: caption="Table 6. Required outbound rules" caption-side="bottom"}
 
     
     
