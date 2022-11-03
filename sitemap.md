@@ -8540,25 +8540,9 @@ subcollection: containers
 * [17 August 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-17-aug-2022)
 
 
-## IAM and Activity Tracker events
-{: #sitemap_iam_and_activity_tracker_events}
+## Activity Tracker events
+{: #sitemap_activity_tracker_events}
 
-
-[User access permissions](/docs/containers?topic=containers-access_reference#access_reference)
-
-* [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions)
-
-* [{{site.data.keyword.cloud_notm}} IAM platform access roles](/docs/containers?topic=containers-access_reference#iam_platform)
-
-* [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service)
-
-* [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
-
-* [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-access_reference#iam_issuer_users)
-
-* [Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)
-
-* [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
 
 [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events#at_events)
 
@@ -8613,6 +8597,143 @@ subcollection: containers
 * [Storage](/docs/containers?topic=containers-api-at-iam#ks-storage)
 
 * [Worker nodes and worker pools](/docs/containers?topic=containers-api-at-iam#ks-workers)
+
+
+## IAM and user access permissions
+{: #sitemap_iam_and_user_access_permissions}
+
+
+[Understanding user access permissions](/docs/containers?topic=containers-access_reference#access_reference)
+
+* [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions)
+
+[IAM platform access roles](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles)
+
+* [No role defined](/docs/containers?topic=containers-iam-platform-access-roles#no-iam-platform-role)
+
+* [Viewer](/docs/containers?topic=containers-iam-platform-access-roles#viewer-iam-platform-role)
+
+* [Editor](/docs/containers?topic=containers-iam-platform-access-roles#editor-iam-platform-role)
+
+* [Operator](/docs/containers?topic=containers-iam-platform-access-roles#operator-iam-platform-role)
+
+* [Administrator](/docs/containers?topic=containers-iam-platform-access-roles#admin-iam-platform-role)
+
+[IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles#iam-service-access-roles)
+
+* [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-iam-service-access-roles#rbac_ref)
+
+    * [`bindings`](/docs/containers?topic=containers-iam-service-access-roles#rbac-bindings)
+
+    * [`configmaps`](/docs/containers?topic=containers-iam-service-access-roles#rbac-configmaps)
+
+    * [`cronjobs.batch`](/docs/containers?topic=containers-iam-service-access-roles#rbac-cronjobs)
+
+    * [`daemonsets.apps`](/docs/containers?topic=containers-iam-service-access-roles#rbac-ds-apps)
+
+    * [`daemonsets.extensions`](/docs/containers?topic=containers-iam-service-access-roles#rbac-ds-extensions)
+
+    * [`deployments.apps`](/docs/containers?topic=containers-iam-service-access-roles#rbac-dep-apps)
+
+    * [`deployments.apps/rollback`](/docs/containers?topic=containers-iam-service-access-roles#rbac-dep-rollback)
+
+    * [`deployments.apps/scale`](/docs/containers?topic=containers-iam-service-access-roles#rbac-dep-apps-scale)
+
+    * [`deployments.extensions`](/docs/containers?topic=containers-iam-service-access-roles#rbac-dep-extensions)
+
+    * [`deployments.extensions/rollback`](/docs/containers?topic=containers-iam-service-access-roles#deploymentsextensionsrollback)
+
+    * [`deployments.extensions/scale`](/docs/containers?topic=containers-iam-service-access-roles#rbac-dep-extensions-scale)
+
+    * [`endpoints`](/docs/containers?topic=containers-iam-service-access-roles#rbac-endpoints)
+
+    * [`events`](/docs/containers?topic=containers-iam-service-access-roles#rbac-events)
+
+    * [`horizontalpodautoscalers.autoscaling`](/docs/containers?topic=containers-iam-service-access-roles#rbac-hpas)
+
+    * [`ingresses.extensions`](/docs/containers?topic=containers-iam-service-access-roles#rbac-configmaps)
+
+    * [`jobs.batch`](/docs/containers?topic=containers-iam-service-access-roles#rbac-jobs-batch)
+
+    * [`limitranges`](/docs/containers?topic=containers-iam-service-access-roles#rbac-limitranges)
+
+    * [`localsubjectaccessreviews`](/docs/containers?topic=containers-iam-service-access-roles#rbac-localsubjectaccessreviews)
+
+    * [`namespaces`](/docs/containers?topic=containers-iam-service-access-roles#rbac-namespaces)
+
+    * [`namespaces/status`](/docs/containers?topic=containers-iam-service-access-roles#rbac-namespaces-status)
+
+    * [`networkpolicies`](/docs/containers?topic=containers-iam-service-access-roles#rbac-networkpolicies)
+
+    * [`networkpolicies.extensions`](/docs/containers?topic=containers-iam-service-access-roles#rbac-networkpolicies-extensions)
+
+    * [`node`](/docs/containers?topic=containers-iam-service-access-roles#rbac-node)
+
+    * [`persistentvolume`](/docs/containers?topic=containers-iam-service-access-roles#rbac-persistentvolume)
+
+    * [`persistentvolumeclaims`](/docs/containers?topic=containers-iam-service-access-roles#rbac-persistentvolumeclaims)
+
+    * [`poddisruptionbudgets.policy`](/docs/containers?topic=containers-iam-service-access-roles#rbac-poddisruptionbudgets-policy)
+
+    * [`pods`](/docs/containers?topic=containers-iam-service-access-roles#rbac-pods)
+
+    * [`pods/attach`](/docs/containers?topic=containers-iam-service-access-roles#rbac-pods-attach)
+
+    * [`pods/exec`](/docs/containers?topic=containers-iam-service-access-roles#rbac-pods-exec)
+
+    * [`pods/log`](/docs/containers?topic=containers-iam-service-access-roles#rbac-pods-log)
+
+    * [`pods/portforward`](/docs/containers?topic=containers-iam-service-access-roles#rbac-pods-portforward)
+
+    * [`pods/proxy`](/docs/containers?topic=containers-iam-service-access-roles#rbac-pods-proxy)
+
+    * [`pods/status`](/docs/containers?topic=containers-iam-service-access-roles#rbac-pods-status)
+
+    * [`replicasets.apps`](/docs/containers?topic=containers-iam-service-access-roles#rbac-replicasets-apps)
+
+    * [`replicasets.apps/scale`](/docs/containers?topic=containers-iam-service-access-roles#rbac-replicasets-apps-scale)
+
+    * [`replicasets.extensions`](/docs/containers?topic=containers-iam-service-access-roles#rbac-replicasets-extensions)
+
+    * [`replicasets.extensions/scale`](/docs/containers?topic=containers-iam-service-access-roles#rbac-replicasets-extensions-scale)
+
+    * [`replicationcontrollers`](/docs/containers?topic=containers-iam-service-access-roles#rbac-replicationcontrollers)
+
+    * [`replicationcontrollers/scale`](/docs/containers?topic=containers-iam-service-access-roles#rbac-replicationcontrollers-scale)
+
+    * [`replicationcontrollers/status`](/docs/containers?topic=containers-iam-service-access-roles#rbac-replicationcontrollers-status)
+
+    * [`replicationcontrollers.extensions/scale`](/docs/containers?topic=containers-iam-service-access-roles#rbac-replicationcontrollers-extensions-scale)
+
+    * [`resourcequotas`](/docs/containers?topic=containers-iam-service-access-roles#rbac-resourcequotas)
+
+    * [`resourcequotas/status`](/docs/containers?topic=containers-iam-service-access-roles#rbac-resourcequotas-status)
+
+    * [`rolebindings`](/docs/containers?topic=containers-iam-service-access-roles#rbac-rolebindings)
+
+    * [`roles`](/docs/containers?topic=containers-iam-service-access-roles#rbac-roles)
+
+    * [`secrets`](/docs/containers?topic=containers-iam-service-access-roles#rbac-secrets)
+
+    * [`serviceaccounts`](/docs/containers?topic=containers-iam-service-access-roles#rbac-serviceaccounts)
+
+    * [`services`](/docs/containers?topic=containers-iam-service-access-roles#rbac-services)
+
+    * [`services/proxy`](/docs/containers?topic=containers-iam-service-access-roles#rbac-services-proxy)
+
+    * [`statefulsets.apps`](/docs/containers?topic=containers-iam-service-access-roles#rbac-statefulsets-apps)
+
+    * [`statefulsets.apps/scale`](/docs/containers?topic=containers-iam-service-access-roles#rbac-statefulsets-apps-scale)
+
+* [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-iam-service-access-roles#iam-issuer-users)
+
+[Classic infrastructure roles](/docs/containers?topic=containers-classic-roles#classic-roles)
+
+* [Required classic infrastructure permissions](/docs/containers?topic=containers-classic-roles#required-classic-rbac)
+
+* [Suggested classic infrastructure permissions](/docs/containers?topic=containers-classic-roles#classic-rbac-suggested)
+
+[Cloud Foundry roles](/docs/containers?topic=containers-cloud-foundry-roles#cloud-foundry-roles)
 
 
 ## Locations
