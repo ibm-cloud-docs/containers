@@ -3825,7 +3825,7 @@ CLI changelog
 
 
 IAM issuer details
-:   Added a [reference topic](/docs/containers?topic=containers-access_reference#iam_issuer_users) for the IAM issuer details of RBAC users.
+:   Added a [reference topic](/docs/containers?topic=containers-access_reference#iam-issuer-users) for the IAM issuer details of RBAC users.
 
 ### 16 March 2020
 {: #containers-mar1620}
@@ -4862,7 +4862,7 @@ CLI changelog
 {: release-note}
 
 Infrastructure permissions
-:   Updated the [classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra) required for common use cases.
+:   Updated the [classic infrastructure roles](/docs/containers?topic=containers-classic-roles) required for common use cases.
 
 
 

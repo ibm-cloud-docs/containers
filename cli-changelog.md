@@ -814,7 +814,7 @@ Version 0.2.53 of the CLI was released on 19 February 2019.
 
 Version 0.2.44 of the CLI was released on 8 February 2019.
 
-- Adds `--skip-rbac` option to the `ibmcloud ks cluster config` command to skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.cloud_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service) to manage all your RBAC users, don't include this option. - Updates the Go version to 1.11.5.
+- Adds `--skip-rbac` option to the `ibmcloud ks cluster config` command to skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.cloud_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles) to manage all your RBAC users, don't include this option. - Updates the Go version to 1.11.5.
 
 #### Version 0.2.40
 {: #cli-0240}
