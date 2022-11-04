@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-11-03"
+lastupdated: "2022-11-04"
 
 keywords: kubernetes, containers, 125, version 125, 125 update actions
 
@@ -55,9 +55,6 @@ This information summarizes updates that are likely to have and impact on deploy
 {: shortdesc}
 
 The Istio add-on doesn't support {{site.data.keyword.containerlong_notm}} version 1.25. Don't update your cluster to version 1.25 if you have this add-on installed.
-{: important}
-
-The cluster autoscaler add-on doesn't support {{site.data.keyword.containerlong_notm}} version 1.25. Don't update your cluster to version 1.25 if you have this add-on installed.
 {: important}
 
 ### Update before master

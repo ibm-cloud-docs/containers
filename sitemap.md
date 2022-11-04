@@ -76,35 +76,9 @@ subcollection: containers
 
 [Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers)
 
-* [Compute and worker node resources](/docs/containers?topic=containers-infrastructure_providers#infra-compute)
+* [Virtual Private Cloud (VPC)](/docs/containers?topic=containers-infrastructure_providers#vpc-gen2-infra-overview)
 
-* [Security](/docs/containers?topic=containers-infrastructure_providers#infra-security)
-
-* [High availability](/docs/containers?topic=containers-infrastructure_providers#infra-high-availability)
-
-* [Reservations](/docs/containers?topic=containers-infrastructure_providers#infar-reservations)
-
-* [Cluster administration](/docs/containers?topic=containers-infrastructure_providers#infra-cluster-admin)
-
-* [Cluster networking](/docs/containers?topic=containers-infrastructure_providers#infra-cluster-networking)
-
-* [Apps and container platform](/docs/containers?topic=containers-infrastructure_providers#infra-apps-cp)
-
-* [App networking](/docs/containers?topic=containers-infrastructure_providers#infra-app-networking)
-
-* [Storage](/docs/containers?topic=containers-infrastructure_providers#infra-storage)
-
-* [User access](/docs/containers?topic=containers-infrastructure_providers#infra-user-access)
-
-* [Integrations](/docs/containers?topic=containers-infrastructure_providers#infra-integrations)
-
-* [Locations and versions](/docs/containers?topic=containers-infrastructure_providers#infra-locations)
-
-* [Service interface](/docs/containers?topic=containers-infrastructure_providers#infra-interface)
-
-* [Service compliance](/docs/containers?topic=containers-infrastructure_providers#infra-compliance)
-
-* [Service limitations](/docs/containers?topic=containers-infrastructure_providers#infra-limitations)
+* [Classic](/docs/containers?topic=containers-infrastructure_providers#classic-infra-overview)
 
 * [Troubleshooting and support](/docs/containers?topic=containers-infrastructure_providers#infra-troubleshoot)
 
