@@ -31,6 +31,7 @@ Virtual private cloud (VPC)
 Classic
 :   Create your cluster on a classic compute, networking, and storage environment in IBM Cloud infrastructure.
 
+
 ## Virtual Private Cloud (VPC)
 {: #vpc-gen2-infra-overview}
 
@@ -50,7 +51,7 @@ Classic
 | Locations and versions | VPC clusters are available worldwide in the [multizone location](/docs/containers?topic=containers-regions-and-zones#zones-vpc).
 | Service interface | VPC clusters are supported by the [next version (`v2`) of the {{site.data.keyword.containerlong_notm}} API](/docs/containers?topic=containers-cs_api_install), and you can manage your VPC clusters through the same CLI and console as classic clusters.| 
 | Service compliance | See the VPC section in [What standards does the service comply to?](/docs/containers?topic=containers-faqs#standards).
-| Service limitations | See [Service limitations](/docs/containers?topic=containers-limitations#tech_limits). For VPC-specific limitations in {{site.data.keyword.containerlong_notm}}, see [VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits). For general VPC infrastructure provider limitations, see [Limitations](/docs/vpc?topic=vpc-limitations). |
+| Service limitations | See [Service limitations](/docs/containers?topic=containers-limitations#tech_limits). For VPC-specific limitations in {{site.data.keyword.containerlong_notm}}, see [VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits). For general VPC infrastructure provider limitations, see [Limitations](/docs/vpc?topic=vpc-limitations).  |
 {: caption="Table 1. VPC infrastructure overview." caption-side="bottom"}
 
 

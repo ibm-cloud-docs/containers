@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-03"
+lastupdated: "2022-11-04"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -35,14 +35,13 @@ Wondering which access roles to assign to your cluster users? Use the examples i
 
 | Use case | Example roles and scope |
 | --- | --- |
-| App auditor | [Viewer platform access role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#iam_platform), [Reader service access role for a cluster, region, or resource group](/docs/containers?topic=containers-iam-service-access-roles). |
-| App developers | [Editor platform access role for a cluster](/docs/containers?topic=containers-access_reference#iam_platform), [Writer service access role scoped to a namespace](/docs/containers?topic=containers-iam-service-access-roles), [Cloud Foundry developer space role](/docs/containers?topic=containers-cloud-foundry-roles). |
-| Billing | [Viewer platform access role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#iam_platform). |
-| Create a cluster | See [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions).|
-| Cluster administrator | [Administrator platform access role for a cluster](/docs/containers?topic=containers-access_reference#iam_platform), [Manager service access role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-iam-service-access-roles).|
-| DevOps operator | [Operator platform access role for a cluster](/docs/containers?topic=containers-access_reference#iam_platform), [Writer service access role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-iam-service-access-roles), [Cloud Foundry developer space role](/docs/containers?topic=containers-cloud-foundry-roles).  |
-| Operator or site reliability engineer | [Administrator platform access role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#iam_platform), [Reader service access role for a cluster or region](/docs/containers?topic=containers-iam-service-access-roles) or [Manager service access role for all cluster namespaces](/docs/containers?topic=containers-iam-service-access-roles) to be able to use `kubectl top nodes,pods` commands. |
-{: summary="The first column contains the use case, which is typically the role of a user. The second column is the example role and scope of the role that you assign the user in {{site.data.keyword.cloud_notm}} IAM."}
+| App auditor | [Viewer platform access role for a cluster, region, or resource group](/docs/containers?topic=containers-iam-platform-access-roles#viewer-iam-platform-role), [Reader service access role for a cluster, region, or resource group](/docs/containers?topic=containers-iam-service-access-roles). |
+| App developers | [Editor platform access role for a cluster](/docs/containers?topic=containers-iam-platform-access-roles#editor-iam-platform-role), [Writer service access role scoped to a namespace]((/docs/containers?topic=containers-iam-service-access-roles), [Cloud Foundry developer space role](/docs/containers?topic=containers-cloud-foundry-roles). |
+| Billing | [Viewer platform access role for a cluster, region, or resource group](/docs/containers?topic=containers-iam-platform-access-roles#viewer-iam-platform-role). |
+| Create a cluster | See [Permissions to create a cluster]((/docs/containers?topic=containers-access_reference#cluster_create_permissions).|
+| Cluster administrator | [Administrator platform access role for a cluster](/docs/containers?topic=containers-iam-platform-access-roles#admin-iam-platform-role), [Manager service access role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-iam-service-access-roles).|
+| DevOps operator | [Operator platform access role for a cluster](/docs/containers?topic=containers-iam-platform-access-roles#operator-iam-platform-role), [Writer service access role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-iam-service-access-roles), [Cloud Foundry developer space role](/docs/containers?topic=containers-cloud-foundry-roles).  |
+| Operator or site reliability engineer | [Administrator platform access role for a cluster, region, or resource group](/docs/containers?topic=containers-iam-platform-access-roles#admin-iam-platform-role), [Reader service access role for a cluster or region](/docs/containers?topic=containers-iam-service-access-roles) or [Manager service access role for all cluster namespaces](/docs/containers?topic=containers-iam-service-access-roles) to be able to use `kubectl top nodes,pods` commands. |
 {: caption="Types of roles you might assign to meet different use cases." caption-side="bottom"}
 
 
@@ -314,7 +313,7 @@ Cluster role bindings apply RBAC cluster roles to all namespaces in the cluster.
 
 If you want users to be able to interact with Kubernetes resources from within a cluster, you must assign user access to one or more namespaces through [{{site.data.keyword.cloud_notm}} IAM service access roles](#add_users). Every user who is assigned a service access role is automatically assigned a corresponding RBAC cluster role. These RBAC cluster roles are predefined and permit users to interact with Kubernetes resources in your cluster. Additionally, a role binding is created to apply the cluster role to a specific namespace, or a cluster role binding is created to apply the cluster role to all namespaces.
 
-To learn more about the actions permitted by each RBAC role, check out the [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles) reference topic. To see the permissions that are granted by each RBAC role to individual Kubernetes resources, check out [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref).
+To learn more about the actions permitted by each RBAC role, check out the [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles) reference topic. To see the permissions that are granted by each RBAC role to individual Kubernetes resources, check out [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-iam-service-access-roles#rbac_ref).
 
 **Can I create custom roles or cluster roles?**
 
@@ -499,7 +498,7 @@ For example, a user with the namespace-scoped `admin` cluster role can't use the
 
 **What are some common operations that I might want to extend permissions for a default cluster role?**
 
-Review [the operations that each default RBAC cluster role permits](/docs/containers?topic=containers-access_reference#rbac_ref) to get a good idea of what your users can do, and then compare the permitted operations to what you want them to be able to do.
+Review [the operations that each default RBAC cluster role permits](/docs/containers?topic=containers-iam-service-access-roles#rbac_ref) to get a good idea of what your users can do, and then compare the permitted operations to what you want them to be able to do.
 
 If your users in the same cluster role encounter errors similar to the following for the same type of operation, you might want to extend the cluster role to include this operation.
 
