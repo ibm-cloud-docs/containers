@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-14"
+lastupdated: "2022-11-04"
 
 keywords: kubernetes, upgrade, version
 
@@ -814,7 +814,7 @@ To update stand-alone worker nodes to worker pools:
         ```
         {: pre}
 
-    3. **To add multiple zones to your worker pools**: Repeat the `ibmcloud ks zone add classic` command with a different zone and specify the worker pools that you want to provision in that zone. By adding more zones to your cluster, you change your cluster from a single zone cluster to a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone).
+    3. **To add multiple zones to your worker pools**: Repeat the `ibmcloud ks zone add classic` command with a different zone and specify the worker pools that you want to provision in that zone. By adding more zones to your cluster, you change your cluster from a single zone cluster to a [multizone cluster](/docs/containers?topic=containers-ha_clusters#mz-clusters).
 
 6. Wait for the worker nodes to be deployed in each zone.
     ```sh

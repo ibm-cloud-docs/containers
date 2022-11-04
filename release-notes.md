@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-03"
+lastupdated: "2022-11-04"
 
 keywords: kubernetes, release notes
 
@@ -3828,7 +3828,7 @@ CLI changelog
 
 
 IAM issuer details
-:   Added a [reference topic](/docs/containers?topic=containers-access_reference#iam-issuer-users) for the IAM issuer details of RBAC users.
+:   Added a [reference topic](/docs/containers?topic=containers-access_reference) for the IAM issuer details of RBAC users.
 
 ### 16 March 2020
 {: #containers-mar1620}

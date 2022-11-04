@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-03"
+lastupdated: "2022-11-04"
 
 keywords: kubernetes, containers
 
@@ -120,7 +120,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Provision {{site.data.keyword.redhat_openshift_notm}} clusters](/docs/openshift?topic=openshift-getting-started) | | Yes |
 |[Create clusters in a Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial) | | Yes |
 |[Ability to create cluster in every {{site.data.keyword.containerlong_notm}} region](/docs/containers?topic=containers-regions-and-zones)| | Yes |
-|[Multizone clusters to increase app high availability](/docs/containers?topic=containers-ha_clusters#multizone)| |Yes|
+|[Multizone clusters to increase app high availability](/docs/containers?topic=containers-ha_clusters#mz-clusters)| |Yes|
 |Replicated masters for higher availability| | Yes |
 |[Scalable number of worker nodes to increase capacity](/docs/containers?topic=containers-cluster-scaling-classic-vpc)| |Yes|
 |[Persistent NFS file-based storage with volumes](/docs/containers?topic=containers-file_storage#file_storage)| |Yes|

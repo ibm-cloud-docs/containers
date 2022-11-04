@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-11-03"
+lastupdated: "2022-11-04"
 
 keywords: containers
 subcollection: containers
@@ -76,35 +76,9 @@ subcollection: containers
 
 [Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers)
 
-* [Compute and worker node resources](/docs/containers?topic=containers-infrastructure_providers#infra-compute)
+* [Virtual Private Cloud (VPC)](/docs/containers?topic=containers-infrastructure_providers#vpc-gen2-infra-overview)
 
-* [Security](/docs/containers?topic=containers-infrastructure_providers#infra-security)
-
-* [High availability](/docs/containers?topic=containers-infrastructure_providers#infra-high-availability)
-
-* [Reservations](/docs/containers?topic=containers-infrastructure_providers#infar-reservations)
-
-* [Cluster administration](/docs/containers?topic=containers-infrastructure_providers#infra-cluster-admin)
-
-* [Cluster networking](/docs/containers?topic=containers-infrastructure_providers#infra-cluster-networking)
-
-* [Apps and container platform](/docs/containers?topic=containers-infrastructure_providers#infra-apps-cp)
-
-* [App networking](/docs/containers?topic=containers-infrastructure_providers#infra-app-networking)
-
-* [Storage](/docs/containers?topic=containers-infrastructure_providers#infra-storage)
-
-* [User access](/docs/containers?topic=containers-infrastructure_providers#infra-user-access)
-
-* [Integrations](/docs/containers?topic=containers-infrastructure_providers#infra-integrations)
-
-* [Locations and versions](/docs/containers?topic=containers-infrastructure_providers#infra-locations)
-
-* [Service interface](/docs/containers?topic=containers-infrastructure_providers#infra-interface)
-
-* [Service compliance](/docs/containers?topic=containers-infrastructure_providers#infra-compliance)
-
-* [Service limitations](/docs/containers?topic=containers-infrastructure_providers#infra-limitations)
+* [Classic](/docs/containers?topic=containers-infrastructure_providers#classic-infra-overview)
 
 * [Troubleshooting and support](/docs/containers?topic=containers-infrastructure_providers#infra-troubleshoot)
 
@@ -8252,9 +8226,11 @@ subcollection: containers
 
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
 
-* [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0106_ca_addon)
+* [Version 1.0.7](/docs/containers?topic=containers-ca_changelog#0107_ca_addon)
 
     * [Change log for patch update 1.0.7_883, released 3 November 2022](/docs/containers?topic=containers-ca_changelog#107883_ca)
+
+* [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0106_ca_addon)
 
     * [Change log for patch update 1.0.6_828, released 10 October 2022](/docs/containers?topic=containers-ca_changelog#106828_ca)
 

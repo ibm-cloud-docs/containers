@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-03"
+lastupdated: "2022-11-04"
 
 keywords: kubernetes, istio, add-on
 
@@ -27,8 +27,8 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | --- | --- | --- |
-| 1.15 | Yes | 1.22, 1.23, 1.24 |
-| 1.14 | Yes | 1.21, 1.22, 1.23, 1.24 |
+| 1.15 | Yes | 1.22, 1.23, 1.24, 1.25 |
+| 1.14 | Yes | 1.21, 1.22, 1.23, 1.24, 1.25 |
 | 1.13 | Yes | 1.21, 1.22, 1.23 |
 | 1.12 | No | - |
 | 1.11 | No | - |
