@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-10-21"
+lastupdated: "2022-11-07"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -531,6 +531,8 @@ By storing custom TLS certificates in {{site.data.keyword.cloudcerts_long_notm}}
     {: pre}
 
 6. Specify the secret name in the `spec.tls` section of your [Ingress resource](/docs/containers?topic=containers-ingress-types#alb-comm-create).
+
+
 
 ## Customizing the Ingress class
 {: #ingress-class}
