@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-07"
+lastupdated: "2022-11-10"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -532,6 +532,133 @@ By storing custom TLS certificates in {{site.data.keyword.cloudcerts_long_notm}}
 
 6. Specify the secret name in the `spec.tls` section of your [Ingress resource](/docs/containers?topic=containers-ingress-types#alb-comm-create).
 
+## Managing non-TLS secrets
+{: #non-tls}
+
+To manage non-TLS secrets, you can use the `ibmcloud ks ingress secret` commands. 
+{: shortdesc}
+
+### Creating a non-TLS secret in your cluster
+{: #non-tls-create}
+
+Create a non-TLS secret by specifying the `--type Opaque` option in the `ibmcloud ks ingress secret create` command. With the `Opaque` type, you can include multiple non-certificate CRN values. If the `--type` option is not specified, TLS is applied by default. For more information and additional command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#alb-commands).
+{: shortdesc}
+
+The following example command creates a non-TLS secret. Note that the secret type must be formatted as `Opaque`.
+
+```sh
+ibmcloud ks ingress secret create -c cluster-test --name example-secret --namespace default --field prefix=crn:v1:staging:public:secrets-manager:eu-gb:a/8c18c7b678fb46db900ea9f5815ac2e2:d151bd36-2815-45e5-92b8-5b70dcdad684:secret:4def714d-49a3-444a-476b-279437b517f3 --type Opaque 
+```
+{: pre}
+
+To verify that the secret is created, list all secrets in the namespace.
+
+```sh
+kubectl get secret -n default
+```
+{: pre}
+
+The following example shows the output.
+```sh
+NAME                   TYPE                                  DATA   AGE
+all-icr-io             kubernetes.io/dockerconfigjson        1      41h
+default-token-8t6xw    kubernetes.io/service-account-token   3      41h
+example-secret         Opaque                                        3m
+```
+{: screen}
+
+### Managing non-TLS secret fields
+{: #non-tls-field}
+
+A secret field is a key-value pair that is stored in a non-TLS secret. Refer to the examples to view, add, update, or remove non-TLS secret fields.
+{: shortdesc}
+
+#### Viewing field values
+{: #non-tls-field-view}
+
+You can view the values of a secret's fields by getting the details of the secret.
+{: shortdesc}
+
+```sh
+kubectl get secret -n default example-secret -o yaml
+```
+{: pre} 
+
+The following example output shows the secret fields and their values in the `data` section.
+
+```sh
+apiVersion: v1
+data:
+  arbitraryFVT: YXJiaXRyYXJ5LXZhbHVl
+  userCredsFVT_password: cGFzc3dvcmQ=
+  userCredsFVT_username: dXNlcg==
+kind: Secret
+metadata:
+  annotations:
+    ingress.cloud.ibm.com/cert-source: ibm
+    razee.io/build-url: https://travis.ibm.com/alchemy-containers/armada-ingress-secret-mgr/builds/78876583
+    razee.io/source-url: https://github.ibm.com/alchemy-containers/armada-ingress-secret-mgr/commit/651fa822632128163cf638c47f0a14b1e0e2915a
+  creationTimestamp: "2022-11-08T19:45:05Z"
+  name: example-secret
+  namespace: default
+  resourceVersion: "119039"
+  uid: 4eac5419-2e74-458a-b8e8-62983e6d1e1e
+type: Opaque
+```
+{: screen}
+
+You can also list the fields in a secret with the `ibmcloud ks ingress secret field ls` and `ibmcloud ks ingress secret get` commands, but the outputs include only the field name and not the value associated with it. 
+
+#### Adding a secret field
+{: #non-tls-field-add}
+
+Add a secret field to a non-TLS secret. For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_add).
+{: shortdesc}
+
+To pull in the secret without specifying the name, use `--field <crn>`. To specify the field name, use `--field name=<crn>`. To use the IBM Cloud {{site.data.keyword.secrets-manager_short}} secret as the prefix, use `--field prefix=<crn>`. You can specify more than one field at a time.
+
+The following example command adds a secret field.
+
+```sh
+ibmcloud ks ingress secret field add --cluster example-cluster --name example-secret --namespace default --field crn:v1:staging:public:secrets-manager:eu-gb:a/8c18c7b678fb46db900ea9f5815ac2e2:d151bd36-2815-45e5-92b8-5b70dcdad684:secret:a9d986a0-c9d2-d6d4-768b-5d5da825516c
+```
+{: pre}
+
+You can verify that the field is added by checking the `data` block of the secret's details. 
+
+```sh
+kubectl get secret -n default example-secret -o yaml
+```
+{: pre} 
+
+#### Updating secret fields
+{: #non-tls-field-update}
+
+Run the **`ingress secret update`** command to update a secret field's values. Note that this does not update the CRN. For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_update).
+{: #shortdesc}
+
+```sh
+ibmcloud ks ingress secret update --cluster example-cluster --name example-secret --namespace default
+```
+{: pre}
+
+#### Removing a secret field
+{: #non-tls-field-rm}
+
+You can remove a secret field from a non-TLS secret. For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_add).
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress secret field rm -c example-cluster --name example-secret --namespace default --field-name example-Field
+```
+{: pre}
+
+You can verify that the field is removed by checking the `data` block of the secret's details. 
+
+```sh
+kubectl get secret -n default example-secret -o yaml
+```
+{: pre} 
 
 
 ## Customizing the Ingress class

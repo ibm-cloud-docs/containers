@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-11-09"
+lastupdated: "2022-11-10"
 
 keywords: containers
 subcollection: containers
@@ -3694,9 +3694,9 @@ subcollection: containers
 
 * [Opening ports in a corporate allowlist](/docs/containers?topic=containers-firewall#corporate)
 
-    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_bx)
+    * [Running `{[ic]}`, `{[icks]}`, and `{[iccr]}` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_bx)
 
-    * [Running `kubectl` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_kubectl)
+    * [Running `{[kubectl]}` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_kubectl)
 
     * [Running `calicoctl` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_calicoctl)
 
@@ -4604,6 +4604,12 @@ subcollection: containers
     * [Using the default TLS certificate for the IBM-provided Ingress subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_ibm)
 
     * [Using a TLS certificate for a custom subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_custom)
+
+* [Managing non-TLS secrets](/docs/containers?topic=containers-ingress-types#non-tls)
+
+    * [Creating a non-TLS secret in your cluster](/docs/containers?topic=containers-ingress-types#non-tls-create)
+
+    * [Managing non-TLS secret fields](/docs/containers?topic=containers-ingress-types#non-tls-field)
 
 * [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
 
