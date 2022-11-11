@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-03"
+lastupdated: "2022-11-11"
 
 keywords: kubernetes, 1.22, versions, update, upgrade
 
@@ -14,6 +14,7 @@ subcollection: containers
 {: #cs_versions_122}
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 

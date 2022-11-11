@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-11-10"
+lastupdated: "2022-11-11"
 
 keywords: containers
 subcollection: containers
@@ -11,6 +11,7 @@ subcollection: containers
 
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 
@@ -3113,7 +3114,7 @@ subcollection: containers
 
 * [Example commands to create VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_create_vpc)
 
-[Creating clusters on dedicated hosts](/docs/containers?topic=containers-cluster-create-dedicated-hosts#cluster-create-dedicated-hosts)
+[Creating clusters on dedicated hosts for VPC](/docs/containers?topic=containers-cluster-create-dedicated-hosts#cluster-create-dedicated-hosts)
 
 
 ## Accessing clusters

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-09-09"
+lastupdated: "2022-11-11"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 

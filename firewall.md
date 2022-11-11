@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-10"
+lastupdated: "2022-11-11"
 
 keywords: kubernetes, allowlist, firewall, vyatta, ips
 
@@ -13,6 +13,7 @@ subcollection: containers
 
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 # Classic: Opening required ports and IP addresses in your allowlist
 {: #firewall}

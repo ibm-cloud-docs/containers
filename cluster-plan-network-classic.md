@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-04"
+lastupdated: "2022-11-11"
 
 keywords: kubernetes network, classic
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Understanding network basics of classic clusters

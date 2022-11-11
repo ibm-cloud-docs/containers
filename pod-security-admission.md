@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-14"
+lastupdated: "2022-11-11"
 
 keywords: kubernetes, deploy, pod security admission, pod security, security profiles
 
@@ -12,6 +12,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 # Pod security admission
 {: #pod-security-admission}

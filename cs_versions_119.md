@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-03"
+lastupdated: "2022-11-11"
 
 keywords: kubernetes, 1.19, versions, update, upgrade
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # 1.19 version information and update actions 

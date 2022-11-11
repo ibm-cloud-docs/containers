@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-11-03"
+lastupdated: "2022-11-11"
 
 keywords: kubernetes, containers
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 # Version 1.24 CIS Kubernetes benchmark
 {: #cis-benchmark-124}
