@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-10-25"
+lastupdated: "2022-11-11"
 
 keywords: custom gateway, reconcile loop, istio, IOP, help
 
@@ -12,6 +12,7 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 # Why does my custom gateway Istio operator have a reconcile loop error?
 {: #istio_control_plane}

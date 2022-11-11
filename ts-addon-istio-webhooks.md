@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-11-11"
 
 keywords: kubernetes, help
 
@@ -12,6 +12,7 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Why can't I upgrade to version 1.12 of the managed Istio add-on?

@@ -2,7 +2,7 @@
 
 copyright:
  years: 2022, 2022
-lastupdated: "2022-10-03"
+lastupdated: "2022-11-11"
 
 keywords: kubernetes, ingress, change log, configmap
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Ingress ConfigMap change log
