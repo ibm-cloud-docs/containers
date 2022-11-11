@@ -215,6 +215,10 @@ subcollection: containers
 
 * [November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov22)
 
+    * [11 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1122)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on version `4.3.8_1705`
+
     * [10 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1022)
 
         * Istio add-on version `1.15.3`
@@ -8340,11 +8344,11 @@ subcollection: containers
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
 
+    * [Change log for version 5.0.1_1695, released 9 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#change-log-for-version-501_1695,-released-9-november-2022)
+
     * [Change log for version 5.0, released 11 October 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0_is_block_relnote)
 
     * [Change log for version 5.0.4-beta_1566, released 14 July 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.4-beta_1556_is_block_relnote)
-
-    * [Change log for version 5.0.1_1695, released 9 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#change-log-for-version-501_1695,-released-9-november-2022)
 
     * [Change log for version 5.0.1-beta_1411, released 15 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-beta_1411_is_block_relnote)
 
@@ -8367,6 +8371,8 @@ subcollection: containers
     * [Change log for version 4.4.5_1371, released 13 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#445_1371_is_block_relnote)
 
 * [Version 4.3](/docs/containers?topic=containers-vpc_bs_changelog#043_is_block)
+
+    * [Change log for version 4.3.8_1705 released 11 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.3.8_1705_is_block_relnote)
 
     * [Change log for version 4.3.7_1613, released 22 September 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.3.7_1613_is_block_relnote)
 
