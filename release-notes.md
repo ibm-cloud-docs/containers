@@ -37,6 +37,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 :   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
 
 
+
 ### 10 November 2022
 {: #containers-nov1022}
 {: release-note}
