@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-14"
 
 keywords: custom gateway, reconcile loop, istio, IOP, help
 
@@ -41,7 +41,7 @@ In a test cluster, parse through the IOP resource configuration to find the line
 
 2. Create a new YAML file to test each section of the IOP resource. Consider naming it `iop-test.yaml`. 
 
-3. Copy and paste a section from the top of your IOP resource configuration into the test file. 
+3. Copy and paste a section from your IOP resource configuration into the test file. 
 
 4. Apply the test file in a test cluster.
 

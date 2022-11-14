@@ -1,0 +1,77 @@
+---
+
+copyright:
+  years: 2022, 2022
+lastupdated: "2022-11-14"
+
+keywords: containers, ingress, troubleshoot ingress, errahcf
+
+subcollection: containers
+content-type: troubleshoot
+
+---
+
+{{site.data.keyword.attribute-definition-list}}
+
+
+# Why is my ALB not responding to health check requests?
+{: #ts-ingress-errahcf}
+{: troubleshoot}
+{: support}
+
+Supported infrastructure providers
+:   Classic
+:   VPC
+
+You can use the the `ibmcloud ks ingress status-report ignored-errors add` command to add an error to the ignored-errors list. Ignored errors still appear in the output of the `ibmcloud ks ingress status-report get` command, but are ignored when calculating the overall Ingress Status.
+{: tip}
+
+When you check the status of your cluster's Ingress components by running the `ibmcloud ks ingress status-report get` command, you see an error similar to the following example.
+{: tsSymptoms}
+
+```sh
+The ALB is unable to respond to health requests (ERRAHCF).
+```
+{: screen}
+
+{{site.data.keyword.containerlong_notm}} deploys an application into your cluster that checks whether your ALBs can respond to HTTPS requests. The application reports problems getting replies from one or more ALBs on your cluster.
+{: tsCauses}
+
+Review your access control lists to make sure that health traffic is allowed.
+{: tsResolve}
+
+1. List your cluster ALBs using the following command. 
+
+    ```sh
+    ibmcloud ks ingress alb ls
+    ```
+    {: pre}
+
+1. Make a note of the load balancer address.
+    - **VPC clusters**: Make a note of the address in the `Load Balancer Hostname` column.
+    - **Classic clusters**: Make a note of the address in the `ALB IP` column.
+
+1. Get your cluster details running the following command. Make a note of your Ingress subdomain.
+    ```sh
+    ibmcloud ks cluster get
+    ```
+    {: pre }
+    
+
+1. Check that the ALB responds to health requests by running the following command. Enter the load balancer address and Ingress subdomain that you retrieved earlier.
+    ```sh
+    curl https://LOAD-BALANCER-ADDRESS -H "Host: albhealth.INGRESS-SUBDOMAIN"
+    ```
+    {: pre}
+
+1. Ensure that no firewall rules or access control lists are blocking communication between the health checker application and your ALBs.
+    - **VPC clusters**: Health check traffic originates from one of the worker nodes, flows through a VPC Public Gateway and arrives to the public side of the VPC Load Balancer instance. Configure your VPC Security Groups to allow this communication. For more information, see [Controlling traffic with VPC security groups](/docs/containers?topic=containers-vpc-security-group).
+    - **Classic clusters**: Health check traffic does not leave the cluster but might be sent from one node to another. Ensure your network policies do not block this traffic. For more information, see [Controlling traffic with network policies on classic clusters](/docs/containers?topic=containers-network_policies).
+
+1. Wait 10-15 minutes to see if the issue is resolved.
+
+1. If the issue persists, contact support. Open a [support case](/docs/get-support?topic=get-support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
+
+If you don't want to use the ALB health check, you can remove the health checker application using running the **`ibmcloud ks ingress alb health-checker disable`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_healthchecker_disable).
+{: tip}
+

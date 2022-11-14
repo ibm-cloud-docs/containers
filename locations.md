@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-14"
 
 keywords: kubernetes, mzr, szr, multizone, multi az
 
@@ -112,7 +112,6 @@ Mexico City (MEX01) is deprecated and becomes unsupported later this year. To pr
 | Europe | United Kingdom | London | lon02`*`, lon04, lon05`*`, lon06 | UK South (`uk-south`, `eu-gb`) |
 | North America | Canada | Montreal | mon01 | US East (`us-east`) |
 | North America | Canada | Toronto | tor01 | US East (`us-east`) |
-| North America | Mexico | Mexico City | mex01 | US South (`us-south`) |
 | North America | United States | Dallas | dal10, dal12, dal13 | US South (`us-south`) |
 | North America | United States | San Jose | sjc03, sjc04 | US South (`us-south`) |
 | North America | United States | Washington, D.C. | wdc04, wdc06, wdc07 | US East (`us-east`) |
@@ -300,7 +299,7 @@ To switch regions, use the `ibmcloud ks init` [command](/docs/containers?topic=c
 | EU Central | Frankfurt | ams03, **fra02, fra04, fra05**, mil01, par01 |
 | UK South | London | lon02, **lon04, lon05, lon06** |
 | US East (standard clusters only) | Washington DC | mon01, tor01, **wdc04, wdc06, wdc07** |
-| US South | Dallas | **dal10, dal12, dal13**, mex01, sjc03, sjc04, sao01 |
+| US South | Dallas | **dal10, dal12, dal13**, sjc03, sjc04, sao01 |
 {: caption="Corresponding {{site.data.keyword.containershort}} and {{site.data.keyword.cloud_notm}} regions, with zones. Multizone-capable zones are in bold." caption-side="bottom"}
 
 

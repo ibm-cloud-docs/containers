@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-14"
 
 keywords: kubernetes, helm
 
@@ -52,7 +52,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 
 |Service|Description|Classic|VPC|
 |----|------------|----|----|
-|Cloud Foundry Public|Deploy and manage your own Cloud Foundry platform on top of a Kubernetes cluster to develop, package, deploy, and manage cloud-native apps, and leverage the {{site.data.keyword.cloud_notm}} ecosystem to bind additional services to your apps. When you create an Cloud Foundry Public instance, you must configure your Kubernetes cluster by choosing the flavor and VLANs for your worker nodes. Your cluster is then provisioned with {{site.data.keyword.containerlong_notm}} and Cloud Foundry Public is automatically deployed to your cluster. For more information about how to set up Cloud Foundry Public, see the [Getting started tutorial](/docs/cloud-foundry-public?topic=cloud-foundry-public-getting-started).|Yes| |
+|Cloud Foundry Public|Deploy and manage your own Cloud Foundry platform on a Kubernetes cluster to develop, package, deploy, and manage cloud-native apps, and leverage the {{site.data.keyword.cloud_notm}} ecosystem to bind additional services to your apps. When you create an Cloud Foundry Public instance, you must configure your Kubernetes cluster by choosing the flavor and VLANs for your worker nodes. Your cluster is then provisioned with {{site.data.keyword.containerlong_notm}} and Cloud Foundry Public is automatically deployed to your cluster. For more information about how to set up Cloud Foundry Public, see the [Getting started tutorial](/docs/cloud-foundry-public?topic=cloud-foundry-public-getting-started).|Yes| |
 |Codeship|You can use [Codeship](https://www.cloudbees.com/products/codeship){: external} for the continuous integration and delivery of containers. For more information, see [Using Codeship Pro To Deploy Workloads to {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/cloud/blog/using-codeship-pro-deploy-workloads-ibm-container-service){: external}.|Yes|Yes|
 |Grafeas|[Grafeas](https://grafeas.io){: external} is an open source CI/CD service that provides a common way for how to retrieve, store, and exchange metadata during the software supply chain process. For example, if you integrate Grafeas into your app build process, Grafeas can store information about the initiator of the build request, vulnerability scan results, and quality assurance sign-off so that you can make an informed decision if an app can be deployed to production. You can use this metadata in audits or to prove compliance for your software supply chain.|Yes|Yes|
 |Helm|[Helm](https://helm.sh){: external} is a Kubernetes package manager. You can create new Helm charts or use preexisting Helm charts to define, install, and upgrade complex Kubernetes applications that run in {{site.data.keyword.containerlong_notm}} clusters. For more information, see [Setting up Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-helm).|Yes|Yes|

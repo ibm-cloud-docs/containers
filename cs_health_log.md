@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-14"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -251,7 +251,7 @@ The following table shows the different options that you have when you configure
 
     :  Run syslog from a container. For example, you can use this [deployment .yaml file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml){: external} to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
 
-    You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the top of your `etc/rsyslog.conf` file where your rsyslog server runs: `$template customFormat,"%msg%\n"$ActionFileDefaultTemplate customFormat`
+    You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the beginning your `etc/rsyslog.conf` file where your rsyslog server runs: `$template customFormat,"%msg%\n"$ActionFileDefaultTemplate customFormat`
     {: tip}
 
 4. Create a log forwarding configuration. For more information about the parameters, see the [Understanding logging configuration options table](#enable-forwarding).
