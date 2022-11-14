@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-14"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, delete
 
@@ -816,7 +816,7 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
     lon04, lon05, lon06
     :   `uk.icr.io`
     
-    dal10, dal12, dal13, mex01, mon01, sao01, sjc03, sjc04, tor01, wdc04, wdc06, wdc07
+    dal10, dal12, dal13, mon01, sao01, sjc03, sjc04, tor01, wdc04, wdc06, wdc07
     :   `us.icr.io`
 
 1. Set the namespace in your cluster where you want the Kubernetes job to create a headless Kubernetes service. This service provides a DNS entry for the server instance's hostname so that the workloads in your cluster can access the server instance.
