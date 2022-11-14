@@ -98,7 +98,6 @@ The Ingress message provides details of what operation is in progress or informa
 
 |Ingress message|Description|
 |--- |--- |
-
 | `The load balancer service is missing (ERRSNF).` | For more information, see [Why is the LoadBalancer service missing from my cluster?](/docs/containers?topic=containers-ts-ingress-errsnf).|
 | `The ingress controller configmap is not found on the cluster (ERRICCNF).` | For more information, see [Why is the Ingress controller ConfigMap missing from my cluster?](/docs/containers?topic=containers-ts-ingress-erriccnf).|
 | `The ALB version is no longer supported (ERRAVUS).` | For more information, see [Why does the Ingress status show an ERRAVUS error?](/docs/containers?topic=containers-ts-ingress-erravus).|
