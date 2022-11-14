@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-14"
 
 keywords: kubernetes, istio, add-on
 
@@ -59,7 +59,7 @@ Current version
 :   1.15.3
 
 Updates in this version
-:   See the Istio release notes for [Istio 1.15.3](https://istio.io/latest/news/releases/1.15.x/announcing-1.15.3/){:external}.
+:   See the Istio release notes for [Istio 1.15.3](https://istio.io/latest/news/releases/1.15.x/announcing-1.15.3/){: external}.
 
 ### Changelog for 1.15.2, released 25 October 2022
 {: #1152}

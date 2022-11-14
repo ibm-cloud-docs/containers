@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-14"
 
 keywords: kubernetes, classic
 
@@ -76,7 +76,7 @@ Classic
 | Locations and versions | Classic clusters are available in multizone and single zone locations [worldwide](/docs/containers?topic=containers-regions-and-zones#locations). |
 | Service interface | Classic clusters are fully supported in the {{site.data.keyword.containershort_notm}} [`v1` API](https://containers.cloud.ibm.com/global/swagger-global-api/#/){: external}, [CLI](/docs/containers?topic=containers-kubernetes-service-cli), and [console](https://cloud.ibm.com/kubernetes/clusters).|
 | Service compliance | See the classic section in [What standards does the service comply to?](/docs/containers?topic=containers-faqs#standards). |
-Service limitations | See [Service limitations](/docs/containers?topic=containers-limitations#tech_limits). Feature-specific limitations are documented by section. |
+| Service limitations | See [Service limitations](/docs/containers?topic=containers-limitations#tech_limits). Feature-specific limitations are documented by section. |
 {: caption="Table 3. Classic infrastructure overview." caption-side="bottom"}
 
 ## Troubleshooting and support
