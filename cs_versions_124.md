@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-14"
 
 keywords: kubernetes, containers
 
@@ -54,7 +54,7 @@ This information summarizes updates that are likely to have and impact on deploy
 ### Update before master
 {: #before_124}
 
-[Pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/) are scheduled for removal in Kubernetes version 1.25.  See the Kubernetes [Deprecated API migration guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#psp-v125){: external} for more information. Customers will have the option to replace Pod Security Policies with [Pod security admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/){: external} or a [third party admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external}. IBM Cloud Kubernetes Service will make a beta version of Pod Security available in version 1.24 to aid in the migration, but this support is not yet available.
+[Pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/) are scheduled for removal in Kubernetes version 1.25. See the Kubernetes [Deprecated API migration guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#psp-v125){: external} for more information. Customers will have the option to replace Pod Security Policies with [Pod security admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/){: external} or a [third party admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external}. IBM Cloud Kubernetes Service will make a beta version of Pod Security available in version 1.24 to aid in the migration, but this support is not yet available.
 {: important}
 
 The following table shows the actions that you must take before you update the Kubernetes master.
@@ -62,10 +62,37 @@ The following table shows the actions that you must take before you update the K
 
 | Type | Description|
 | --- | --- |
-| IBM Cloud Block Storage driver and plug-in installation | The IBM Cloud Block Storage driver and plug-in component is now installed on clusters running classic infrastructure. If you installed the [IBM Cloud Block Storage driver and plug-in via the Helm chart](/docs/containers?topic=containers-block_storage#install_block), you must [uninstall the Helm chart](/docs/containers?topic=containers-block_storage#rm_block) before continuing the master update. Note that your existing persistent volume claims (PVCs) will continue to work after the Helm chart is uninstalled, but you are not able to provision new PVCs until the master update is completed. |
+| IBM Cloud Block Storage driver and plug-in installation | The IBM Cloud Block Storage driver and plug-in component is now installed on clusters running classic infrastructure. If you installed the IBM Cloud Block Storage driver and plug-in via the Helm chart, you must uninstall the Helm chart before continuing the master update. Note that your existing persistent volume claims (PVCs) will continue to work after the Helm chart is uninstalled, but you are not able to provision new PVCs until the master update is completed. To uninstall the Helm chart, see [Removing the Block Storage Helm chart](#124-rm-block-helm). |
 {: caption="Changes to make after you update the master to Kubernetes 1.24" caption-side="bottom"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
+#### Removing the Block Storage Helm chart
+{: #124-rm-block-helm}
+
+1. Add the `iks-charts` repo and update it.
+    ```sh
+    helm repo add iks-charts https://icr.io/helm/iks-charts && helm repo update
+    ```
+    {: pre}
+
+1. Search the repo for the Block Storage plug-in. Note that you will see versions for block `v2.x`.
+    ```sh
+    helm search repo block
+    ```
+    {: pre}
+    
+    
+1. Save the chart that you found in the previous step to a file.
+    ```sh
+    helm template iks-charts/ibmcloud-block-storage-plugin > block-plugin.yaml
+    ```
+    {: pre}
+    
+    
+1. Delete the plug-in from your cluster by using the file you saved in the previous step.
+    ```sh
+    kubectl delete -f block-plugin.yaml
+    ```
+    {: pre}
 
 ### Update after master
 {: #124_after}
@@ -78,5 +105,5 @@ The following table shows the actions that you must take after you update the Ku
 | **Unsupported:** `kubectl expose` removes `--container-port` and `--generator` flags | The `kubectl expose` command no longer supports the deprecated `--container-port` and `--generator` flags. If your scripts rely on these flags, update them. |
 | **Unsupported:** `kubectl run` removes several flags | The `kubectl run` command no longer supports the deprecated `--serviceaccount`, `--hostport`, `--requests` and `--limits` flags. If your scripts rely on these flags, update them. |
 {: caption="Changes to make after you update the master to Kubernetes 1.24" caption-side="bottom"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+
 
