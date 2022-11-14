@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-05-06"
+lastupdated: "2022-11-14"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -13,6 +13,7 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 
@@ -33,7 +34,7 @@ Run the following commands to gather the required logs for debugging Ingress.
 1. Get the Ingress status.
 
     ```sh
-    ibmcloud ks ingress status -c CLUSTERID
+    ibmcloud ks ingress status report-get -c CLUSTERID
     ```
     {: pre}
     

@@ -3536,7 +3536,7 @@ subcollection: containers
 
 * [Understanding IAM access policies and roles](/docs/containers?topic=containers-access-overview#access_policies)
 
-    * [Pick the right access policy and role for your users](/docs/containers?topic=containers-access-overview#access_roles)
+    * [Pick the correct access policy and role for your users](/docs/containers?topic=containers-access-overview#access_roles)
 
     * [Assign access roles to individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-access-overview#iam_individuals_groups)
 
@@ -4209,7 +4209,7 @@ subcollection: containers
 
 * [Setting up service discovery](/docs/containers?topic=containers-plan_deploy#service_discovery)
 
-    * [How can I make sure that my services are connected to the right deployments and ready to go?](/docs/containers?topic=containers-plan_deploy#services_connected)
+    * [How can I make sure that my services are connected to the correct deployments and ready to go?](/docs/containers?topic=containers-plan_deploy#services_connected)
 
     * [How can I expose my services on the Internet?](/docs/containers?topic=containers-plan_deploy#services_expose_apps)
 
@@ -8350,6 +8350,8 @@ subcollection: containers
 
     * [Change log for version 5.0.4-beta_1566, released 14 July 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.4-beta_1556_is_block_relnote)
 
+    * [Change log for version 5.0.1_1695, released 9 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-1695_is_block_relnote)
+
     * [Change log for version 5.0.1-beta_1411, released 15 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-beta_1411_is_block_relnote)
 
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
@@ -9373,6 +9375,44 @@ subcollection: containers
 [Classic clusters: Why does enabling Ingress ALBs result in subnet errors?](/docs/containers?topic=containers-cs_alb_subnet#cs_alb_subnet)
 
 [Why does a connection via WebSocket close after 60 seconds?](/docs/containers?topic=containers-cs_ingress_websocket#cs_ingress_websocket)
+
+[Why is the Ingress LoadBalancer service missing from my cluster?](/docs/containers?topic=containers-ts-ingress-errsnf#ts-ingress-errsnf)
+
+[Why does the Ingress status show an ERRADNF error?](/docs/containers?topic=containers-ts-ingress-erradnf#ts-ingress-erradnf)
+
+[Why does the Ingress status show an `ERRAVUS` error?](/docs/containers?topic=containers-ts-ingress-erravus#ts-ingress-erravus)
+
+[Why is the Ingress controller ConfigMap missing from my cluster?](/docs/containers?topic=containers-ts-ingress-erriccnf#ts-ingress-erriccnf)
+
+[Why does the Ingress status show an ERRSAM error?](/docs/containers?topic=containers-ts-ingress-errsam#ts-ingress-errsam)
+
+[Why is my ALB not responding to health check requests?](/docs/containers?topic=containers-ts-ingress-errahcf#ts-ingress-errahcf)
+
+[Why is the ALB health check service missing from my cluster?](/docs/containers?topic=containers-ts-ingress-errahsnf#ts-ingress-errahsnf)
+
+[Why is the health check Ingress resource missing from my cluster?](/docs/containers?topic=containers-ts-ingress-errahinf#ts-ingress-errahinf)
+
+[Why does the Ingress status show an `ERRADRUH` error?](/docs/containers?topic=containers-ts-ingress-erradruh#ts-ingress-erradruh)
+
+[Why does the Ingress status show an ERRDSIA error?](/docs/containers?topic=containers-ts-ingress-errdsia#ts-ingress-errdsia)
+
+[Why does the Ingress status show an ERRDSISS error?](/docs/containers?topic=containers-ts-ingress-errdsiss#ts-ingress-errdsiss)
+
+[Why does the Ingress status show an ERRDRISS error?](/docs/containers?topic=containers-ts-ingress-errdriss#ts-ingress-errdriss)
+
+[Why does the Ingress status show an ESSSMI error?](/docs/containers?topic=containers-ts-ingress-esssmi#ts-ingress-esssmi)
+
+[Why does the Ingress status show an ESSSMG error?](/docs/containers?topic=containers-ts-ingress-esssmg#ts-ingress-esssmg)
+
+[Why does the Ingress status show an ESSVC error?](/docs/containers?topic=containers-ts-ingress-essvc#ts-ingress-essvc)
+
+[Why does the Ingress status show an ESSEC error?](/docs/containers?topic=containers-ts-ingress-essec#ts-ingress-essec)
+
+[Why does the Ingress status show an ESSEF error?](/docs/containers?topic=containers-ts-ingress-essef#ts-ingress-essef)
+
+[Why does the Ingress status show an ESSWS error?](/docs/containers?topic=containers-ts-ingress-essws#ts-ingress-essws)
+
+[Why does the Ingress status show an ESSDNE error?](/docs/containers?topic=containers-ts-ingress-essdne#ts-ingress-essdne)
 
 [Ingress health checks fail on Akamai Global Load Balancer (GLB) configurations](/docs/containers?topic=containers-cs_ingress_health_check_ctm#cs_ingress_health_check_ctm)
 

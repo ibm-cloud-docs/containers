@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-14"
 
 keywords: kubernetes, disaster recovery, dr, ha, hadr
 
@@ -73,7 +73,7 @@ See [Deploying highly available apps](/docs/containers?topic=containers-plan_dep
 ### 2. Worker node availability
 {: #ha-worker}
 
-A worker node is a VM that runs on top of physical hardware. Worker node failures include hardware outages, such as power, cooling, or networking, and issues on the VM itself. You can account for a worker node failure by setting up multiple worker nodes in your cluster.
+A worker node is a VM that runs on physical hardware. Worker node failures include hardware outages, such as power, cooling, or networking, and issues on the VM itself. You can account for a worker node failure by setting up multiple worker nodes in your cluster.
 {: shortdesc}
 
 See [Creating clusters with multiple worker nodes](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_create).
