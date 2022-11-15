@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-11-14"
+lastupdated: "2022-11-15"
 
 keywords: containers
 subcollection: containers
@@ -5133,7 +5133,7 @@ subcollection: containers
 
 [Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} add-on](/docs/containers?topic=containers-storage-file-vpc-install#storage-file-vpc-install)
 
-* [Prerequisites](/docs/containers?topic=containers-storage-file-vpc-install#prereqs)
+* [Prerequisites](/docs/containers?topic=containers-storage-file-vpc-install#prereqs-store-file-vpc)
 
 [Adding {{site.data.keyword.filestorage_vpc_short}} to apps](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps)
 
@@ -8350,8 +8350,6 @@ subcollection: containers
 
     * [Change log for version 5.0.4-beta_1566, released 14 July 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.4-beta_1556_is_block_relnote)
 
-    * [Change log for version 5.0.1_1695, released 9 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-1695_is_block_relnote)
-
     * [Change log for version 5.0.1-beta_1411, released 15 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-beta_1411_is_block_relnote)
 
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
@@ -9294,7 +9292,7 @@ subcollection: containers
 
 * [Moving the `ibm-cloud-provider-ip` pod](/docs/containers?topic=containers-istio_gateway_affinity#move-ip-pod)
 
-[Why are Istio components missing?](/docs/containers?topic=containers-istio_control_plane#istio_control_plane)
+[Why are Istio components missing?](/docs/containers?topic=containers-istio_components_missing#istio_components_missing)
 
 [Why can't I upgrade to version 1.12 of the managed Istio add-on?](/docs/containers?topic=containers-ts-addon-istio-webhooks#ts-addon-istio-webhooks)
 
