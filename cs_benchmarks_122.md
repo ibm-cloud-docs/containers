@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-15"
 
 keywords: kubernetes, containers
 
@@ -296,7 +296,7 @@ Review information from IBM on the CIS Benchmark results.
 | 1.3.6 | {{site.data.keyword.containerlong_notm}} rotates certificates on every worker node reload or update. |
 | 3.2.1 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 3.2.2 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 4.2.6 | {{site.data.keyword.containerlong_notm}} does not protect kernel defaults in order to allow customers to [tune kernel parameters](/docs/containers?topic=containers-kernel). |
+| 4.2.6 | {{site.data.keyword.containerlong_notm}} does not protect kernel defaults to allow customers to [tune kernel parameters](/docs/containers?topic=containers-kernel). |
 | 4.2.8 | {{site.data.keyword.containerlong_notm}} ensures that the hostname matches the name issued by the infrastructure. |
 | 4.2.11 | {{site.data.keyword.containerlong_notm}} rotates certificates on every worker node reload or update. |
 | 4.2.12 | {{site.data.keyword.containerlong_notm}} rotates certificates on every worker node reload or update. |

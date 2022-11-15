@@ -3548,7 +3548,7 @@ subcollection: containers
 
 [Setting up API key credentials so the service can access the infrastructure and other cloud services](/docs/containers?topic=containers-access-creds#access-creds)
 
-* [Setting up the API key in most cases](/docs/containers?topic=containers-access-creds#api_key_most_cases)
+* [Setting up the API key for most use cases](/docs/containers?topic=containers-access-creds#api_key_most_cases)
 
 * [Understanding other options than the API key](/docs/containers?topic=containers-access-creds#api_key_other)
 
@@ -5066,7 +5066,7 @@ subcollection: containers
 
 * [Setting up volume expansion](/docs/containers?topic=containers-vpc-block#vpc-block-volume-expand)
 
-    * [Manually expanding volumes prior to add-on version 4.2](/docs/containers?topic=containers-vpc-block#expanding-existing-volumes)
+    * [Manually expanding volumes before add-on version 4.2](/docs/containers?topic=containers-vpc-block#expanding-existing-volumes)
 
 * [Backing up and restoring data](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
 

@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-15"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -215,7 +215,7 @@ The following table shows the changes that are in the patch 1.11.8_1547.
 | Key Management Service provider | 122 | 136 | Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486){: external}. |
 | Kubernetes | v1.11.7 | v1.11.8 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.8){: external}. Update resolves [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486){: external} and [CVE-2019-1002100](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100){: external}. |
 | Kubernetes configuration | N/A | N/A | Added `ExperimentalCriticalPodAnnotation=true` to the `--feature-gates` option. This setting helps migrate pods from the deprecated `scheduler.alpha.kubernetes.io/critical-pod` annotation to [Kubernetes pod priority support](/docs/containers?topic=containers-pod_priority#pod_priority). |
-| Kubernetes DNS | N/A | N/A | Increased Kubernetes DNS pod memory limit from `170Mi` to `400Mi` in order to handle more cluster services. |
+| Kubernetes DNS | N/A | N/A | Increased Kubernetes DNS pod memory limit from `170Mi` to `400Mi` to handle more cluster services. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 132 | 143 | Updated image for [CVE-2019-6486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486){: external}. |
 | OpenVPN client and server | 2.4.6-r3-IKS-13 | 2.4.6-r3-IKS-25 | Updated image for [CVE-2019-1559](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559){: external}. |
 | Trusted compute agent | 1ea5ad3 | 5f3d092 | Updated image for [CVE-2019-6454](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454){: external}. |
