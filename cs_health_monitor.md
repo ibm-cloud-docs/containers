@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-15"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -391,7 +391,7 @@ If your {{site.data.keyword.block_storage_is_short}} volumes are reaching capaci
 ## Monitoring worker node health in with Autorecovery
 {: #autorecovery}
 
-The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like rebooting a VPC worker node or reloading the operating system in a classic worker node. Only one worker node undergoes a corrective action at a time. The worker node must successfully complete the corrective action before any other worker node undergoes a corrective action. For more information, see this [Autorecovery blog post](https://www.ibm.com/cloud/blog/autorecovery-utilizes-consistent-hashing-high-availability){: external}.
+The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like rebooting a VPC worker node or reloading the operating system in a classic worker node. Only one worker node undergoes a corrective action at a time. The worker node must complete the corrective action before any other worker node undergoes a corrective action. For more information, see this [Autorecovery blog post](https://www.ibm.com/cloud/blog/autorecovery-utilizes-consistent-hashing-high-availability){: external}.
 {: shortdesc}
 
 Autorecovery requires at least one healthy worker node to function properly. Configure Autorecovery with active checks only in clusters with two or more worker nodes.
