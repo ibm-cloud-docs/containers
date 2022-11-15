@@ -32,6 +32,10 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-nov1522}
 {: release-note}
 
+New Ingress status messages
+:   You can now use the **`ibmcloud ks ingress status-report get`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_get) to view your Ingress status. For more information, see [Checking the status of Ingress components](/docs/containers?topic=containers-ingress-status).
+
+
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.3` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 

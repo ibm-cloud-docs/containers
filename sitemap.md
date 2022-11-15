@@ -217,6 +217,8 @@ subcollection: containers
 
     * [15 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1522)
 
+        * New Ingress status messages
+
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.3` is available.
 
     * [11 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1122)
