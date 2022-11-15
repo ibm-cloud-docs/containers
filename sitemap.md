@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-11-14"
+lastupdated: "2022-11-15"
 
 keywords: containers
 subcollection: containers
@@ -214,6 +214,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov22)
+
+    * [15 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1522)
+
+        * New Ingress status messages
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.3` is available.
 
     * [11 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1122)
 
@@ -3544,7 +3550,7 @@ subcollection: containers
 
 [Setting up API key credentials so the service can access the infrastructure and other cloud services](/docs/containers?topic=containers-access-creds#access-creds)
 
-* [Setting up the API key in most cases](/docs/containers?topic=containers-access-creds#api_key_most_cases)
+* [Setting up the API key for most use cases](/docs/containers?topic=containers-access-creds#api_key_most_cases)
 
 * [Understanding other options than the API key](/docs/containers?topic=containers-access-creds#api_key_other)
 
@@ -5062,7 +5068,7 @@ subcollection: containers
 
 * [Setting up volume expansion](/docs/containers?topic=containers-vpc-block#vpc-block-volume-expand)
 
-    * [Manually expanding volumes prior to add-on version 4.2](/docs/containers?topic=containers-vpc-block#expanding-existing-volumes)
+    * [Manually expanding volumes before add-on version 4.2](/docs/containers?topic=containers-vpc-block#expanding-existing-volumes)
 
 * [Backing up and restoring data](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
 
@@ -5133,7 +5139,7 @@ subcollection: containers
 
 [Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} add-on](/docs/containers?topic=containers-storage-file-vpc-install#storage-file-vpc-install)
 
-* [Prerequisites](/docs/containers?topic=containers-storage-file-vpc-install#prereqs)
+* [Prerequisites](/docs/containers?topic=containers-storage-file-vpc-install#prereqs-store-file-vpc)
 
 [Adding {{site.data.keyword.filestorage_vpc_short}} to apps](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps)
 
@@ -8350,8 +8356,6 @@ subcollection: containers
 
     * [Change log for version 5.0.4-beta_1566, released 14 July 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.4-beta_1556_is_block_relnote)
 
-    * [Change log for version 5.0.1_1695, released 9 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-1695_is_block_relnote)
-
     * [Change log for version 5.0.1-beta_1411, released 15 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-beta_1411_is_block_relnote)
 
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
@@ -8437,6 +8441,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.3, released 15 November 2022](/docs/containers?topic=containers-cos_plugin_changelog#0223_object_plugin)
 
 * [Change log for version 2.2.2, released 8 November 2022](/docs/containers?topic=containers-cos_plugin_changelog#0222_object_plugin)
 
@@ -9294,7 +9300,7 @@ subcollection: containers
 
 * [Moving the `ibm-cloud-provider-ip` pod](/docs/containers?topic=containers-istio_gateway_affinity#move-ip-pod)
 
-[Why are Istio components missing?](/docs/containers?topic=containers-istio_control_plane#istio_control_plane)
+[Why are Istio components missing?](/docs/containers?topic=containers-istio_components_missing#istio_components_missing)
 
 [Why can't I upgrade to version 1.12 of the managed Istio add-on?](/docs/containers?topic=containers-ts-addon-istio-webhooks#ts-addon-istio-webhooks)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-15"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -124,7 +124,7 @@ Each supported version of {{site.data.keyword.containerlong_notm}} goes through 
 Estimated days and versions are provided for general understanding. Actual availability and release dates are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 {: note}
 
-1. **Community release**: The Kubernetes community releases the new version. IBM engineers begin a process of testing and hardening the community version in preparation to release a supported {{site.data.keyword.containerlong_notm}} version.
+1. **Community release**: The Kubernetes community releases the new version. IBM engineers begin testing and hardening the community version in preparation to release a supported {{site.data.keyword.containerlong_notm}} version.
 2. **Latest supported version**: The version is released as the latest supported {{site.data.keyword.containerlong_notm}} version.
 3. **Default version**: The version becomes the default supported {{site.data.keyword.containerlong_notm}} version.
 4. **Supported version**: The version remains supported but is no longer the default version.

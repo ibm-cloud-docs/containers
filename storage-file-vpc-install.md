@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-12"
+lastupdated: "2022-11-15"
 
 keywords: kubernetes
 
@@ -12,6 +12,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 # Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} add-on
 {: #storage-file-vpc-install}
@@ -27,7 +28,7 @@ Supported infrastructure providers
 {: important}
 
 ## Prerequisites
-{: #prereqs}
+{: #prereqs-store-file-vpc}
 
 1. Update the `container-service` plug in to the most recent version. You can update the plug in by running the `ibmcloud ks plugin update container-service` command. 
 
