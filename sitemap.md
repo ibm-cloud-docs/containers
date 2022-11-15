@@ -215,6 +215,10 @@ subcollection: containers
 
 * [November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov22)
 
+    * [15 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1522)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.3` is available.
+
     * [11 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1122)
 
         * {{site.data.keyword.block_storage_is_short}} add-on version `4.3.8_1705`
@@ -8435,6 +8439,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.3, released 15 November 2022](/docs/containers?topic=containers-cos_plugin_changelog#0223_object_plugin)
 
 * [Change log for version 2.2.2, released 8 November 2022](/docs/containers?topic=containers-cos_plugin_changelog#0222_object_plugin)
 
