@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2021, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2022-11-16"
 
 keywords: kubernetes
 
@@ -16,6 +16,7 @@ content-type: troubleshoot
 
 
 
+
 # Debugging Calico components
 {: #calico_log_level}
 {: troubleshoot}
@@ -24,10 +25,6 @@ content-type: troubleshoot
 Supported infrastructure providers
 :   Classic
 :   VPC
-
-These instructions apply to {{site.data.keyword.containerlong_notm}} 1.19 or later.
-{: note}
-
 
 You experience issues with Calico components such as pods that don't deploy or intermittent networking issues. 
 {: tsSymptoms}
@@ -44,11 +41,9 @@ Complete the following steps to increase the log level for the `calico-typha` co
 1. Run the following command to edit the `calico-typha` deployment. 
 
     ```sh
-    kubectl edit deploy -n kube-system calico-typha
+    kubectl edit deploy calico-typha -n kube-system
     ```
     {: pre}
-
-
     
 2. Change the `TYPHA_LOGSEVERITYSCREEN` environment variable from `info` to `debug`.
     ```sh
@@ -112,7 +107,7 @@ Complete the following steps to increase the log level for the `calico-node` com
 1. Run the following command: 
     
     ```sh
-    kubectl edit ds -n kube-system calico-node
+    kubectl edit ds calico-node -n kube-system
     ```
     {: pre}
     
@@ -135,7 +130,7 @@ Complete the following steps to increase the log level for the `calico-kube-cont
 1. Edit the daemonset by running the following command. 
     
     ```sh
-    kubectl edit ds -n kube-system calico-node
+    kubectl edit ds calico-node -n kube-system
     ```
     {: pre}
     
@@ -154,7 +149,7 @@ Complete the following steps to increase the log level for the `calico-kube-cont
 ## Gathering Calico logs
 {: #calico-log-gather}
 
-1. List the pods and nodes in your cluster and make a node of the pod name, pod IP address, and worker note where the issue occured.
+1. List the pods and nodes in your cluster and make a node of the pod name, pod IP address, and worker node that has the issue.
 2. Get the logs for the `calico-node` pod on the worker node where the problem occurred.
 
     ```sh
