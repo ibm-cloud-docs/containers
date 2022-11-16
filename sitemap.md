@@ -215,6 +215,10 @@ subcollection: containers
 
 * [November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov22)
 
+    * [17 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1722)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.13_1712` and `5.0.2_1713`
+
     * [16 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1622)
 
         * ALB OAuth Proxy add-on version 2.0.0_1315
@@ -8354,6 +8358,8 @@ subcollection: containers
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
 
+    * [Changelog for version 5.0.2_1713, released 17 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.2-1713_is_block_relnote)
+
     * [Change log for version 5.0.1_1695, released 9 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-1695_is_block_relnote)
 
     * [Change log for version 5.0, released 11 October 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0_is_block_relnote)
@@ -8365,6 +8371,8 @@ subcollection: containers
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
 
 * [Version 4.4](/docs/containers?topic=containers-vpc_bs_changelog#044_is_block)
+
+    * [Changelog for version 4.4.13_1712, released 17 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.4.13_1712_is_block_relnote)
 
     * [Changelog for version 4.4.12_1700, released 9 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.4.12_1700_is_block_relnote)
 
