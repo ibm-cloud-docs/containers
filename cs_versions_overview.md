@@ -58,7 +58,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 - [Change log](/docs/containers?topic=containers-changelog_123)
 
 1.22
-- Release date: None
+- Release date: 29 September 2021
 - End of support: 14 December 2022
 - Supported operating systems: `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_122)
