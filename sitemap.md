@@ -4113,7 +4113,7 @@ subcollection: containers
 
     * [Forwarding Kubernetes API audit logs to a resource in the {{site.data.keyword.cloud_notm}} private network](/docs/containers?topic=containers-health-audit#audit-api-server-priv)
 
-    * [Forwarding Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health-audit#audit-api-server-external)
+    * [Forwarding Kubernetes API audit logs to an external server on the public Internet](/docs/containers?topic=containers-health-audit#audit-api-server-external)
 
     * [Managing API server log forwarding](/docs/containers?topic=containers-health-audit#audit-api-server-manage)
 
