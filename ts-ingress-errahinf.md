@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-11-14"
+lastupdated: "2022-11-16"
 
 keywords: containers, ingress status, troubleshoot ingress, errahinf
 
@@ -81,7 +81,7 @@ Manually create the health service.
     ```
     {: pre}
     
-1. Wait 10-15 minutes, then retry the **`ibmcloud ks ingress status`** command to see if the issue is resolved.
+1. Wait 10-15 minutes, then retry the **`ibmcloud ks ingress status-report get`** command to see if the issue is resolved.
 
 1. If the issue persists, contact support. Open a [support case](/docs/get-support?topic=get-support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-11-15"
+lastupdated: "2022-11-16"
 
 keywords: containers
 subcollection: containers
@@ -214,6 +214,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov22)
+
+    * [16 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1622)
+
+        * ALB OAuth Proxy add-on version 2.0.0_1315
 
     * [15 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1522)
 
@@ -4109,7 +4113,7 @@ subcollection: containers
 
     * [Forwarding Kubernetes API audit logs to a resource in the {{site.data.keyword.cloud_notm}} private network](/docs/containers?topic=containers-health-audit#audit-api-server-priv)
 
-    * [Forwarding Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health-audit#audit-api-server-external)
+    * [Forwarding Kubernetes API audit logs to an external server on the public Internet](/docs/containers?topic=containers-health-audit#audit-api-server-external)
 
     * [Managing API server log forwarding](/docs/containers?topic=containers-health-audit#audit-api-server-manage)
 
@@ -8517,6 +8521,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_1315, released on 16 November 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1315)
 
     * [Version 2.0.0_1297, released on 27 October 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1297)
 
