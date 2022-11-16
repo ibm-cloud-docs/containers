@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-16"
 
 keywords: kubernetes, help
 
@@ -70,10 +70,10 @@ To verify that the `ibm-cloud-provider-ip` and `istio-ingressgateway` pods don't
     Example output
 
     ```sh
-    10.176.48.106   Ready   <none>   529d    v1.23+IKS   dal10
-    10.176.48.107   Ready   <none>   196d    v1.23+IKS   dal10
-    10.184.58.23    Ready   <none>   2y38d   v1.23+IKS   dal12
-    10.184.58.42    Ready   <none>   529d    v1.23+IKS   dal12
+    10.176.48.106   Ready   <none>   529d    v1.24+IKS   dal10
+    10.176.48.107   Ready   <none>   196d    v1.24+IKS   dal10
+    10.184.58.23    Ready   <none>   2y38d   v1.24+IKS   dal12
+    10.184.58.42    Ready   <none>   529d    v1.24+IKS   dal12
     ```
     {: screen}
 

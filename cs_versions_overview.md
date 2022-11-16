@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-15"
+lastupdated: "2022-11-16"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -84,7 +84,7 @@ kubectl version  --short | grep -i server
 
 Example output
 ```sh
-Server Version: v1.23+IKS
+Server Version: v1.24+IKS
 ```
 {: screen}
 
