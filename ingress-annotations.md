@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-16"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -694,6 +694,10 @@ ALB OAuth Proxy add-on version 1.0.0 uses configuration snippet annotations (`ng
           # Log all authentication attempts.
           auth_logging_format:
           # Format for authentication logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration#auth-log-format
+          cookie_csrf_expire: "15m"
+          # Expiration timeframe for CSRF cookie. Default is "15m".
+          cookie_csrf_per_request: <true|false>
+          # Enable multiple CSRF cookies per request, making it possible to have parallel requests. Default is "false".
           cookie_domains:
           # A list of optional domains to force cookies to. The longest domain that matches the request’s host is used. If there is no match for the request’s host, the shortest domain is used. Example: sub.domain.com,example.com
           cookie_expire: "168h0m0s"
