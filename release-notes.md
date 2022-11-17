@@ -29,6 +29,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-nov22}
 
 
+### 17 November 2022
+{: #containers-nov1722}
+{: release-note}
+
+{{site.data.keyword.block_storage_is_short}} add-on versions `4.4.13_1712` and `5.0.2_1713`
+:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
+
+
 
 ### 16 November 2022
 {: #containers-nov1622}
@@ -37,6 +46,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ALB OAuth Proxy add-on version 2.0.0_1315
 :   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
   
+
 
 
 ### 15 November 2022

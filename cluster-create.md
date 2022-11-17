@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-16"
+lastupdated: "2022-11-17"
 
 keywords: kubernetes, clusters, worker nodes, worker pools
 
@@ -82,19 +82,6 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
 After you set up your account to create clusters, decide on the setup for your cluster. You must make these decisions every time that you create a cluster. You can click on the options in the following decision tree image for more information, such as comparisons of free and standard, Kubernetes and {{site.data.keyword.redhat_openshift_notm}}, or VPC and classic clusters.
 {: shortdesc}
 
-
-
-The following images walk you through choosing the setup that you want for your cluster.
-
-
-
-![Planning your cluster setup](images/cluster-plan-intro.svg "Planning your cluster setup"){: caption="Figure 1. Planning your cluster setup" caption-side="bottom"}
-
-![Setting up your cluster](images/cluster-plan-1.svg "Setting up your cluster"){: caption="Figure 2. Setting up your cluster" caption-side="bottom"}
-
-![Setting up your cluster](images/cluster-plan-2.svg "Setting up your cluster"){: caption="Figure 3. Setting up your cluster" caption-side="bottom"}
-
-![Setting up your cluster](images/cluster-plan-3.svg "Setting up your cluster"){: caption="Figure 4. Setting up your cluster" caption-side="bottom"}
 
 
 
