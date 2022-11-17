@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-16"
+lastupdated: "2022-11-17"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -59,7 +59,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 1.22
 - Release date: 29 September 2021
-- End of support: 14 December 2022
+- End of support: 18 January 2023
 - Supported operating systems: `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_122)
 - [Change log](/docs/containers?topic=containers-changelog_122)
