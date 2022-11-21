@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-16"
+lastupdated: "2022-11-21"
 
 keywords: kubernetes, ic, ks, kubectl
 
@@ -143,7 +143,7 @@ Using both {{site.data.keyword.openshiftlong_notm}} and Ubuntu {{site.data.keywo
     ```
     {: pre}
 
-6. If you have clusters that run different versions of Kubernetes, such as 1.24.7 and 1.23.16, download each `kubectl` version binary file to a separate directory. Then, you can set up an alias in your local command-line interface profile to point to the `kubectl` binary file directory that matches the `kubectl` version of the cluster that you want to work with, or [run the CLI from a container](#cs_cli_container).
+6. If you have clusters that run different versions of Kubernetes, such as 1.24.8 and 1.23.16, download each `kubectl` version binary file to a separate directory. Then, you can set up an alias in your local command-line interface profile to point to the `kubectl` binary file directory that matches the `kubectl` version of the cluster that you want to work with, or [run the CLI from a container](#cs_cli_container).
 7. **Optional**: [Enable autocompletion for `kubectl` commands](https://kubernetes.io/docs/tasks/tools/#enabling-shell-autocompletion){: external}. The steps vary depending on the shell that you use.
 
 Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters&interface=ui).
