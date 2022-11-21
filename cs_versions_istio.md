@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-14"
+lastupdated: "2022-11-21"
 
 keywords: kubernetes, istio, add-on
 
@@ -30,7 +30,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 | --- | --- | --- |
 | 1.15 | Yes | 1.22, 1.23, 1.24, 1.25 |
 | 1.14 | Yes | 1.21, 1.22, 1.23, 1.24, 1.25 |
-| 1.13 | Yes | 1.21, 1.22, 1.23 |
+| 1.13 | No | - |
 | 1.12 | No | - |
 | 1.11 | No | - |
 | 1.10 | No| - |
@@ -46,7 +46,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 ## Version 1.15
 {: #v115}
 
-### Changelog for 1.15.3, released 10 November 2022
+### Change log for 1.15.3, released 10 November 2022
 {: #1153}
 
 Review the changes that are included in version 1.15.3 of the managed Istio add-on.
@@ -61,7 +61,7 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.15.3](https://istio.io/latest/news/releases/1.15.x/announcing-1.15.3/){: external}.
 
-### Changelog for 1.15.2, released 25 October 2022
+### Change log for 1.15.2, released 25 October 2022
 {: #1152}
 
 Review the changes that are included in version 1.15.2 of the managed Istio add-on.
@@ -82,7 +82,7 @@ Updates in this version
     - [usn-5587-1](https://ubuntu.com/security/notices/USN-5587-1){: external}
     - [usn-5627-1](https://ubuntu.com/security/notices/USN-5627-1){: external}
 
-### Changelog for 1.15.1, released 11 October 2022
+### Change log for 1.15.1, released 11 October 2022
 {: #1151}
 
 Review the changes that are included in version 1.15.1 of the managed Istio add-on.
@@ -127,7 +127,7 @@ Updates in this version
 ## Version 1.14
 {: #v114}
 
-### Changelog for 1.14.5, released 25 October 2022
+### Change log for 1.14.5, released 25 October 2022
 {: #1145}
 
 Review the changes that are included in version 1.14.5 of the managed Istio add-on.
@@ -151,7 +151,7 @@ Updates in this version
 
 
 
-### Changelog for 1.14.4, released 4 October 2022
+### Change log for 1.14.4, released 4 October 2022
 {: #1144}
 
 Review the changes that are included in version 1.14.4 of the managed Istio add-on.
@@ -173,7 +173,7 @@ Updates in this version
 
 
 
-### Changelog for 1.14.3, released 16 August 2022
+### Change log for 1.14.3, released 16 August 2022
 {: #1143}
 
 Review the changes that are included in version 1.14.3 of the managed Istio add-on.
@@ -219,7 +219,10 @@ Updates in this version
 ## Version 1.13
 {: #v113}
 
-### Changelog for 1.13.9, released 25 October 2022
+Version 1.13 of the managed Istio add-on is unsupported. 
+{: important}
+
+### Change log for 1.13.9, released 25 October 2022
 {: #1139}
 
 Review the changes that are included in version 1.13.9 of the managed Istio add-on.
@@ -262,7 +265,7 @@ Updates in this version
     - [CVE-2022-2509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2509){: external}
     - [CVE-2022-35252](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35252){: external}
 
-### Changelog for 1.13.7, released 16 August 2022
+### Change log for 1.13.7, released 16 August 2022
 {: #1137}
 
 Review the changes that are included in version 1.13.7 of the managed Istio add-on.

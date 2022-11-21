@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-21"
 
 keywords: webhooks, admission control, containers,
 
@@ -20,7 +20,7 @@ subcollection: containers
 Admission controllers intercept authorized API requests from various Kubernetes resources before the requests reach the API server that runs in your {{site.data.keyword.containerlong_notm}} cluster master. Mutating admission webhooks might modify the request, and validating admission webhooks check the request. If either webhook rejects a request, the entire request fails. Advanced features, whether built-in or added on, often require admission controllers as a security precaution and to control what requests are sent to the API server. For more information, see [Using Admission Controllers](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/){: external} and [Dynamic Admission Control](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} in the Kubernetes documentation.
 
 ## What are the default admission controllers in my cluster?
- {: #access_webhooks-default-controllers}
+{: #access_webhooks-default-controllers}
 
 Review the order of default admission controllers by cluster version in the [`kube-apiserver` component reference information](/docs/containers?topic=containers-service-settings#kube-apiserver).
 
@@ -40,7 +40,7 @@ Keep in mind the following best practices and considerations when you configure 
 
 - Create [replica pods](/docs/containers?topic=containers-app#replicaset) for the webhook so that if one pod goes down, the webhook can still process requests from your resources. Spread the replica pods across zones, if possible.
 - Set an appropriate `failurePolicy` option, such as whether your webhook fails or ignores connection failures or timeouts. You might set the `failurePolicy` to `Ignore` if you want your webhook to ignore connection errors an timeouts. Note that this does not change how the `apiserver` behaves if the webhook rejects a request.
-- Review the `timeoutSeconds` interval. Older webhooks that use the `v1beta1.admissionregistration.k8s.io` API have a default timeout of 30 seconds. The `v1` API uses a default of 10 seconds. If the webhook's failure policy is Ignore and the current `timeoutSeconds` is 30, consider reducing the timeout to 10 seconds. 
+- Review the `timeoutSeconds` interval. Older webhooks that use the `v1beta1.admissionregistration.k8s.io` API have a default timeout of 30 seconds. The `v1` API uses a default of 10 seconds. If the webhook failure policy is Ignore and the current `timeoutSeconds` is 30, consider reducing the timeout to 10 seconds. 
 - Set appropriate CPU and memory [resource requests and limits](/docs/containers?topic=containers-app#resourcereq) for your webhook.
 - Add [liveness and readiness probes](/docs/containers?topic=containers-app#probe) to help make sure your webhook container is running and ready to serve requests.
 - Set pod [anti-affinity scheduling rules](/docs/containers?topic=containers-app#affinity) to prefer that your webhook pods run on different worker nodes and zones when possible. In clusters that run Kubernetes version 1.18 or later, you might use [pod topology](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/){: external} instead. However, avoid [taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} or forced affinity that might restrict where the webhook pods can be scheduled.

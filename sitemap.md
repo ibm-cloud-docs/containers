@@ -3155,7 +3155,7 @@ subcollection: containers
 
 [Accessing the cluster master with admission controllers and webhooks](/docs/containers?topic=containers-access_webhooks#access_webhooks)
 
-* [What are the default admission controllers in my cluster?](/docs/containers?topic=containers-access_webhooks#)
+* [What are the default admission controllers in my cluster?](/docs/containers?topic=containers-access_webhooks#access_webhooks-default-controllers)
 
 * [Can I create my own admission controllers?](/docs/containers?topic=containers-access_webhooks#access_webhooks_create_controllers)
 
@@ -4999,7 +4999,7 @@ subcollection: containers
 
 * [Deciding on the object storage configuration](/docs/containers?topic=containers-storage_cos_install#configure_cos)
 
-* [Verifying your installation](/docs/containers?topic=containers-storage_cos_install#cos-plugin)
+* [Verifying your installation](/docs/containers?topic=containers-storage_cos_install#cos-plugin-verify)
 
 [Adding object storage to apps](/docs/containers?topic=containers-storage_cos_apps#storage_cos_apps)
 
@@ -5100,7 +5100,7 @@ subcollection: containers
 
 * [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-addon-enable)
 
-* [Optional: Deploying the snapshot validation webhook](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-validation)
+* [Optional: Deploying the snapshot validation webhook](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-validation-webhook)
 
 * [Creating a deployment](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-deployment)
 
@@ -8064,31 +8064,31 @@ subcollection: containers
 
 * [Version 1.15](/docs/containers?topic=containers-istio-changelog#v115)
 
-    * [Changelog for 1.15.3, released 10 November 2022](/docs/containers?topic=containers-istio-changelog#1153)
+    * [Change log for 1.15.3, released 10 November 2022](/docs/containers?topic=containers-istio-changelog#1153)
 
-    * [Changelog for 1.15.2, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1152)
+    * [Change log for 1.15.2, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1152)
 
-    * [Changelog for 1.15.1, released 11 October 2022](/docs/containers?topic=containers-istio-changelog#1151)
+    * [Change log for 1.15.1, released 11 October 2022](/docs/containers?topic=containers-istio-changelog#1151)
 
     * [Change log for 1.15.0, released 15 September 2022](/docs/containers?topic=containers-istio-changelog#1150)
 
 * [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
 
-    * [Changelog for 1.14.5, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1145)
+    * [Change log for 1.14.5, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1145)
 
-    * [Changelog for 1.14.4, released 4 October 2022](/docs/containers?topic=containers-istio-changelog#1144)
+    * [Change log for 1.14.4, released 4 October 2022](/docs/containers?topic=containers-istio-changelog#1144)
 
-    * [Changelog for 1.14.3, released 16 August 2022](/docs/containers?topic=containers-istio-changelog#1143)
+    * [Change log for 1.14.3, released 16 August 2022](/docs/containers?topic=containers-istio-changelog#1143)
 
     * [Change log for 1.14.1, released 16 June 2022](/docs/containers?topic=containers-istio-changelog#1141)
 
 * [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
 
-    * [Changelog for 1.13.9, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1139)
+    * [Change log for 1.13.9, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1139)
 
     * [Change log for 1.13.8, released 4 October 2022](/docs/containers?topic=containers-istio-changelog#1138)
 
-    * [Changelog for 1.13.7, released 16 August 2022](/docs/containers?topic=containers-istio-changelog#1137)
+    * [Change log for 1.13.7, released 16 August 2022](/docs/containers?topic=containers-istio-changelog#1137)
 
     * [Change log for 1.13.5, released 21 June 2022](/docs/containers?topic=containers-istio-changelog#1135)
 
