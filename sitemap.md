@@ -215,6 +215,10 @@ subcollection: containers
 
 * [November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov22)
 
+    * [21 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov2122)
+
+        * Worker node fix pack 1.22.16_1579, 1.23.14_1553, 1.24.8_1545, and 1.25.4_1523
+
     * [17 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1722)
 
         * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.13_1712` and `5.0.2_1713`

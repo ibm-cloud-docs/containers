@@ -28,6 +28,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## November 2022
 {: #containers-nov22}
 
+### 21 November 2022
+{: #containers-nov2122}
+{: release-note}
+
+
+Worker node fix pack 1.22.16_1579, 1.23.14_1553, 1.24.8_1545, and 1.25.4_1523
+:   For more information, see the change logs: [1.22.16_1579](/docs/containers?topic=containers-changelog_122), [1.23.14_1553](/docs/containers?topic=containers-changelog_123), [1.24.8_1545](/docs/containers?topic=containers-changelog_124), and [1.25.4_1523](/docs/containers?topic=containers-changelog_125).
+
+
+
 
 ### 17 November 2022
 {: #containers-nov1722}
