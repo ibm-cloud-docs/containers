@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-11-17"
+lastupdated: "2022-11-21"
 
 keywords: containers
 subcollection: containers
@@ -214,6 +214,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov22)
+
+    * [21 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov2122)
+
+        * Worker node fix pack 1.22.16_1579, 1.23.14_1553, 1.24.8_1545, and 1.25.4_1523
 
     * [17 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1722)
 
@@ -3155,7 +3159,7 @@ subcollection: containers
 
 [Accessing the cluster master with admission controllers and webhooks](/docs/containers?topic=containers-access_webhooks#access_webhooks)
 
-* [What are the default admission controllers in my cluster?](/docs/containers?topic=containers-access_webhooks#)
+* [What are the default admission controllers in my cluster?](/docs/containers?topic=containers-access_webhooks#access_webhooks-default-controllers)
 
 * [Can I create my own admission controllers?](/docs/containers?topic=containers-access_webhooks#access_webhooks_create_controllers)
 
@@ -4999,7 +5003,7 @@ subcollection: containers
 
 * [Deciding on the object storage configuration](/docs/containers?topic=containers-storage_cos_install#configure_cos)
 
-* [Verifying your installation](/docs/containers?topic=containers-storage_cos_install#cos-plugin)
+* [Verifying your installation](/docs/containers?topic=containers-storage_cos_install#cos-plugin-verify)
 
 [Adding object storage to apps](/docs/containers?topic=containers-storage_cos_apps#storage_cos_apps)
 
@@ -5100,7 +5104,7 @@ subcollection: containers
 
 * [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-addon-enable)
 
-* [Optional: Deploying the snapshot validation webhook](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-validation)
+* [Optional: Deploying the snapshot validation webhook](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-validation-webhook)
 
 * [Creating a deployment](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-deployment)
 
@@ -6056,6 +6060,8 @@ subcollection: containers
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
 
+    * [Change log for worker node fix pack 1.25.4_1523, released 21 November 2022](/docs/containers?topic=containers-changelog_125#1254_1523)
+
     * [Change log for worker node fix pack 1.25.3_1521, released 07 November 2022](/docs/containers?topic=containers-changelog_125#1253_1521)
 
     * [Change log for master fix pack 1.25.3_1520, released 27 October 2022](/docs/containers?topic=containers-changelog_125#1253_1520)
@@ -6126,6 +6132,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.8_1545, released 21 November 2022](/docs/containers?topic=containers-changelog_124#1248_1545)
 
     * [Change log for worker node fix pack 1.24.7_1543, released 07 November 2022](/docs/containers?topic=containers-changelog_124#1247_1543)
 
@@ -6223,6 +6231,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for worker node fix pack 1.23.14_1553, released 21 November 2022](/docs/containers?topic=containers-changelog_123#12314_1553)
 
     * [Change log for worker node fix pack 1.23.13_1551, released 07 November 2022](/docs/containers?topic=containers-changelog_123#12313_1551)
 
@@ -6348,6 +6358,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview_122)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.16_1579, released 21 November 2022](/docs/containers?topic=containers-changelog_122#12216_1579)
 
     * [Change log for worker node fix pack 1.22.15_1577, released 07 November 2022](/docs/containers?topic=containers-changelog_122#12215_1577)
 
@@ -8064,31 +8076,31 @@ subcollection: containers
 
 * [Version 1.15](/docs/containers?topic=containers-istio-changelog#v115)
 
-    * [Changelog for 1.15.3, released 10 November 2022](/docs/containers?topic=containers-istio-changelog#1153)
+    * [Change log for 1.15.3, released 10 November 2022](/docs/containers?topic=containers-istio-changelog#1153)
 
-    * [Changelog for 1.15.2, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1152)
+    * [Change log for 1.15.2, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1152)
 
-    * [Changelog for 1.15.1, released 11 October 2022](/docs/containers?topic=containers-istio-changelog#1151)
+    * [Change log for 1.15.1, released 11 October 2022](/docs/containers?topic=containers-istio-changelog#1151)
 
     * [Change log for 1.15.0, released 15 September 2022](/docs/containers?topic=containers-istio-changelog#1150)
 
 * [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
 
-    * [Changelog for 1.14.5, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1145)
+    * [Change log for 1.14.5, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1145)
 
-    * [Changelog for 1.14.4, released 4 October 2022](/docs/containers?topic=containers-istio-changelog#1144)
+    * [Change log for 1.14.4, released 4 October 2022](/docs/containers?topic=containers-istio-changelog#1144)
 
-    * [Changelog for 1.14.3, released 16 August 2022](/docs/containers?topic=containers-istio-changelog#1143)
+    * [Change log for 1.14.3, released 16 August 2022](/docs/containers?topic=containers-istio-changelog#1143)
 
     * [Change log for 1.14.1, released 16 June 2022](/docs/containers?topic=containers-istio-changelog#1141)
 
 * [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
 
-    * [Changelog for 1.13.9, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1139)
+    * [Change log for 1.13.9, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1139)
 
     * [Change log for 1.13.8, released 4 October 2022](/docs/containers?topic=containers-istio-changelog#1138)
 
-    * [Changelog for 1.13.7, released 16 August 2022](/docs/containers?topic=containers-istio-changelog#1137)
+    * [Change log for 1.13.7, released 16 August 2022](/docs/containers?topic=containers-istio-changelog#1137)
 
     * [Change log for 1.13.5, released 21 June 2022](/docs/containers?topic=containers-istio-changelog#1135)
 
