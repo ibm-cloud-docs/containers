@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-22"
 
 keywords: kubernetes, 1.21, versions, update, upgrade
 
@@ -71,7 +71,6 @@ The following table shows the actions that you must take before you update the K
 | Pod access via service account token | For clusters that run Kubernetes 1.21 and later, the service account tokens that pods use to communicate with the Kubernetes API server are time-limited, automatically refreshed, scoped to a particular audience of users (the pod), and invalidated after the pod is deleted. To continue communicating with the API server, you must design your apps to read the refreshed token value on a regular basis, such as every minute. For applications that invoke the `setuid` internally, you must [manually set the `fsGroup` in the pod security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod){: external}. For more information, see [Bound Service Account Tokens](https://github.com/kubernetes/enhancements/blob/master/keps/sig-auth/1205-bound-service-account-tokens/README.md){: external}. |
 | **Unsupported**: Service `service.alpha.kubernetes.io/tolerate-unready-endpoints` annotation | Services no longer support the `service.alpha.kubernetes.io/tolerate-unready-endpoints` annotation. The annotation has been deprecated since Kubernetes version 1.11 and has been replaced by the `Service` `spec.publishNotReadyAddresses` field. If your services rely on this annotation, update them to use the `spec.publishNotReadyAddresses` field instead. For more information on this field, see [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/){: external} |
 {: caption="Changes to make before you update the master to Kubernetes 1.21" caption-side="bottom"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 ### Update after master
 {: #121_after}
@@ -87,4 +86,4 @@ The following table shows the actions that you must take after you update the Ku
 | **Unsupported**: Select `kubelet` metrics | The following cAdvisor `kubelet` metrics are removed: `/stats/container`, `/stats/<pod_name>/<container_name>`, and `/stats/<namespace>/<pod_name>/<pod_uid>/<container_name>`. Stop using these metrics. |
 | Ingress resource API version | The support for `networking.k8s.io/v1beta1` and `extensions/v1beta1` API versions in Ingress resources are deprecated and are planned for removal in Kubernetes version 1.22. The `networking.k8s.io/v1` API version is supported instead. Although not required in version 1.21, you can begin converting your existing resources in preparation for the removal of the API versions before version 1.22. |
 {: caption="Changes to make after you update the master to Kubernetes 1.21" caption-side="bottom"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-11-21"
+lastupdated: "2022-11-22"
 
 keywords: containers
 subcollection: containers
@@ -3086,6 +3086,20 @@ subcollection: containers
 [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 
 * [Available hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)
+
+    * [What flavors are available to me?](/docs/containers?topic=containers-planning_worker_nodes#available-flavors)
+
+    * [Can I combine different flavors in a cluster?](/docs/containers?topic=containers-planning_worker_nodes#combine-flavors)
+
+    * [How can I change worker node flavors?](/docs/containers?topic=containers-planning_worker_nodes#change-flavors)
+
+    * [Are the worker nodes encrypted?](/docs/containers?topic=containers-planning_worker_nodes#encrypted-flavors)
+
+    * [How do I manage my worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#flavor-manage)
+
+    * [What limitations do I need to be aware of?](/docs/containers?topic=containers-planning_worker_nodes#flavor-limitations)
+
+    * [How can I check the operating system that my worker nodes run?](/docs/containers?topic=containers-planning_worker_nodes#flavor-os-check)
 
 * [Virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm)
 

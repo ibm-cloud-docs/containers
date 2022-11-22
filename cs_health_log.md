@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-14"
+lastupdated: "2022-11-22"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -158,9 +158,8 @@ When you create a logging configuration for a source in your cluster to forward 
 As of 14 November 2019, a Fluentd component is created for your cluster only if you create a logging configuration to forward logs to a syslog server. If no logging configurations for syslog exist in your cluster, the Fluentd component is removed automatically. If you don't forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, [automatic updates to Fluentd must be enabled](/docs/containers?topic=containers-update#logging-up).
 {: important}
 
-**What are the sources that I can configure log forwarding for?**
-
-In the following image, you can see the location of the sources that you can configure logging for.
+What are the sources that I can configure log forwarding for?
+:   In the following image, you can see the location of the sources that you can configure logging for.
 
 ![Log sources in your cluster.](images/log_sources.png "Log sources in your cluster"){: caption="Figure 1. Log sources in your cluster" caption-side="bottom"}
 

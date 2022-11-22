@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-22"
 
 keywords: kubernetes, 1.19, versions, update, upgrade
 
@@ -65,7 +65,6 @@ The following table shows the actions that you must take before you update the K
 | **Unsupported:** Select CoreDNS metrics | CoreDNS version 1.7 and later [metrics changed](https://coredns.io/2020/06/15/coredns-1.7.0-release/#metric-changes){: external}. If you rely on these changed metrics, update accordingly. For example, you might update a Prometheus query of CoreDNS metrics to handle both the old and new metrics. |
 | **Unsupported:** Select Kubernetes API server metrics | The following Kubernetes API service metric label names for `kubernetes_build_info` changed. These metrics, available via the `/metrics` endpoint, changed as follows. If you rely on these changed metrics, update accordingly.  \n - From `gitVersion` to `git_version`  \n - From `gitCommit` to `git_commit`  \n - From `gitTreeState` to `git_tree_state`  \n - From `buildDate` to `build_date`  \n - From `goVersion` to `go_version`. |
 {: caption="Changes to make before you update the master to Kubernetes 1.19" caption-side="bottom"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 ### Update after master
 {: #119_after}
@@ -87,7 +86,6 @@ The following table shows the actions that you must take after you update the Ku
 | **Unsupported:** Select `kubelet` metrics | The following `kubelet` metrics that were available via the `/metrics` and `/metrics/resource` endpoints are unsupported and removed. If you use any of these removed and deprecated `kubelet` metrics, change to use the available replacement metric.  \n - From `kubelet_running_container_count` to `kubelet_running_containers`  \n - From `kubelet_running_pod_count` to `kubelet_running_pods`  \n - From `node_cpu_usage_seconds` to `node_cpu_usage_seconds_total`  \n - From `container_cpu_usage_seconds` to `container_cpu_usage_seconds_total`. |
 | **Unsupported:** Select `kube-proxy` metrics | The following `kube-proxy` metric label names for `kubernetes_build_info`, available via the `/metrics` endpoint, are changed. If you rely on these changed metrics, update accordingly.  \n - From `gitVersion` to `git_version`  \n - From `gitCommit` to `git_commit`  \n - From `gitTreeState` to `git_tree_state`  \n - From `buildDate` to `build_date`  \n - From `goVersion` to `go_version` |
 {: caption="Changes to make after you update the master to Kubernetes 1.19" caption-side="bottom"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 ### Update after worker nodes
 {: #119_after_worker}
@@ -99,6 +97,6 @@ The following table shows the actions that you must take after you update your w
 | ---- | ---------- |
 | **Deprecated:** Beta worker node labels | The following beta worker node labels are deprecated and replaced. For now, both sets of labels are supported, but update your workloads to use the new labels, such as in affinity rules for deployments.  \n - From `beta.kubernetes.io/os` to `kubernetes.io/os`  \n - From `beta.kubernetes.io/arch` to `kubernetes.io/arch`  \n - From `failure-domain.beta.kubernetes.io/zone` to `topology.kubernetes.io/zone`  \n - From `failure-domain.beta.kubernetes.io/region` to `topology.kubernetes.io/region`  \n - From `beta.kubernetes.io/instance-type` to `node.kubernetes.io/instance-type` |
 {: caption="Changes to make after you update the worker nodes to Kubernetes 1.19" caption-side="bottom"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+
 
 
