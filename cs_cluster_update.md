@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-21"
+lastupdated: "2022-11-22"
 
 keywords: kubernetes, upgrade, version
 
@@ -30,13 +30,11 @@ Periodically, the Kubernetes project releases [major, minor, or patch updates](/
 ### About updating the master
 {: #master-about}
 
-**How do I know when to update the master?**
+How do I know when to update the master?
+:   You are notified in the {{site.data.keyword.cloud_notm}} console and CLI when updates are available, and can also check the [supported versions](/docs/containers?topic=containers-cs_versions) page.
 
-You are notified in the {{site.data.keyword.cloud_notm}} console and CLI when updates are available, and can also check the [supported versions](/docs/containers?topic=containers-cs_versions) page.
-
-**How many versions behind the latest can the master be?**
-
-IBM generally supports three versions of Kubernetes at a time. You can update the Kubernetes API server only to the next version ahead of its current version (`n+1`). Additionally, your worker nodes can be up to two versions behind the master version (`n-2`).
+How many versions behind the latest can the master be?
+:   IBM generally supports three versions of Kubernetes at a time. You can update the Kubernetes API server only to the next version ahead of its current version (`n+1`). Additionally, your worker nodes can be up to two versions behind the master version (`n-2`).
 
 For example, if your current Kubernetes API server version is 1.18 (`n`) and you want to update to 1.20, you must first update to 1.19 (`n+1`) and then to 1.20 (`n+2`). Next, you can update the worker nodes up to two version ahead, such as 1.18 to 1.20 (`n+2`).
 
@@ -841,9 +839,8 @@ To update stand-alone worker nodes to worker pools:
     3. Repeat these steps until all your stand-alone worker nodes are removed.
 
 
-**What's next?**
-
-Now that you updated your cluster to use worker pools, you can, improve availability by adding more zones to your cluster. Adding more zones to your cluster changes your cluster from a single zone cluster to a [multizone cluster](/docs/containers?topic=containers-ha_clusters#ha_clusters). When you change your single zone cluster to a multizone cluster, your Ingress domain changes from `<cluster_name>.<region>.containers.mybluemix.net` to `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. The existing Ingress domain is still valid and can be used to send requests to your apps.
+What's next?
+:   Now that you updated your cluster to use worker pools, you can, improve availability by adding more zones to your cluster. Adding more zones to your cluster changes your cluster from a single zone cluster to a [multizone cluster](/docs/containers?topic=containers-ha_clusters#ha_clusters). When you change your single zone cluster to a multizone cluster, your Ingress domain changes from `<cluster_name>.<region>.containers.mybluemix.net` to `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. The existing Ingress domain is still valid and can be used to send requests to your apps.
 
 
 

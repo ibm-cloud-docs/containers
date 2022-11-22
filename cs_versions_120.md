@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-03"
+lastupdated: "2022-11-22"
 
 keywords: kubernetes, 1.20, versions, update, upgrade
 
@@ -62,7 +62,6 @@ The following table shows the actions that you must take before you update the K
 | **Unsupported**: Service `service.alpha.kubernetes.io/tolerate-unready-endpoints` annotation | Services no longer support the `service.alpha.kubernetes.io/tolerate-unready-endpoints` annotation. The annotation has been deprecated since Kubernetes version 1.11 and has been replaced by the `spec.publishNotReadyAddresses` field. If your services rely on this annotation, update them to use the `spec.publishNotReadyAddresses` field instead. For more information on this field, see [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/){: external}. |
 | VPC clusters: App URL character length | DNS resolution is managed by the cluster's [virtual private endpoint (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe), which can resolve URLs up to 130 characters. If you expose apps in your cluster with URLs, such as the Ingress subdomain, ensure that the URLs are 130 characters or fewer. |
 {: caption="Changes to make before you update the master to Kubernetes 1.20" caption-side="bottom"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 ### Update after master
 {: #120_after}
@@ -74,4 +73,4 @@ The following table shows the actions that you must take after you update the Ku
 | --- | --- |
 | **Unsupported:** `kubectl autoscale --generator` removed | The deprecated `--generator` flag is removed from the `kubectl autoscale` command. If your scripts rely on this flag, update them. |
 {: caption="Changes to make after you update the master to Kubernetes 1.20" caption-side="bottom"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+

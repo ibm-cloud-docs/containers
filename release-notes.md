@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-21"
+lastupdated: "2022-11-22"
 
 keywords: kubernetes, release notes
 
@@ -53,9 +53,15 @@ Worker node fix pack 1.22.16_1579, 1.23.14_1553, 1.24.8_1545, and 1.25.4_1523
 {: #containers-nov1622}
 {: release-note}
 
+
+
 ALB OAuth Proxy add-on version 2.0.0_1315
 :   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
   
+Master fix pack 1.22.16_1578, 1.23.14_1552, 1.24.8_1544, and 1.25.4_1522
+:   For more information, see the change logs: [1.22](/docs/containers?topic=containers-changelog_122), [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), and [1.25](/docs/containers?topic=containers-changelog_125).
+
+ 
 
 
 

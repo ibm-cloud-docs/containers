@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-16"
+lastupdated: "2022-11-22"
 
 keywords: kubernetes, coredns, kubedns, dns
 
@@ -214,15 +214,13 @@ Enable `NodeLocal` DNS cache for one or more worker nodes in your Kubernetes clu
 The following steps update DNS pods that run on particular worker nodes. You can also [label the worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels) so that future nodes inherit the label.
 {: note}
 
-**Before you begin**: Update any [DNS egress network policies](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/nodelocaldns#network-policy-and-dns-connectivity){: external} that are impacted by this feature, such as policies that rely on pod or namespace selectors for DNS egress.
+Before you begin, update any [DNS egress network policies](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/nodelocaldns#network-policy-and-dns-connectivity){: external} that are impacted by this feature, such as policies that rely on pod or namespace selectors for DNS egress.
 
-    ```sh
-    kubectl get networkpolicy --all-namespaces -o yaml
-    ```
-    {: pre}
+```sh
+kubectl get networkpolicy --all-namespaces -o yaml
+```
+{: pre}
 
-
-**To enable NodeLocal DNS cache**:
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 2. If you [customized stub domains and upstream DNS servers for CoreDNS](#dns_customize), you must also [customize the `NodeLocal` DNS cache](#dns_nodelocal_customize) with these stub domains and upstream DNS servers.

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-22"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -118,7 +118,6 @@ You might use this information if you build automation tooling within the cluste
 | 1.17 | `https://iam.cloud.ibm.com/identity` | `sub_<account_ID>` | lowercase |
 | 1.10 - 1.16 | `https://iam.bluemix.net/identity` | `sub_<account_ID>` | lowercase |
 | 1.9 or earlier | `https://iam.ng.bluemix.net/kubernetes` | `sub` | camel case |
-{: summary="The rows are read from left to right. The first column is the Kubernetes version of the cluster. The second column is the {{site.data.keyword.cloud_notm}} IAM Issuer ID. The third column is the subject identifier claim. The fourth column is the casing style of the username."}
 {: caption="{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users" caption-side="bottom"}
 
 `*`: An example of lowercase is `user.name@company.com`. An example of camel case is `User.Name@company.com`.

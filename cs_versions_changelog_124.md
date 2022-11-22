@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-11-21"
+lastupdated: "2022-11-22"
 
 keywords: kubernetes, containers
 
@@ -52,6 +52,29 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | HAPROXY | 3a1392 | c619f4 | [CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external},[CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external},[CVE-2020-35525](https://nvd.nist.gov/vuln/detail/CVE-2020-35525){: external},[CVE-2020-35527](https://nvd.nist.gov/vuln/detail/CVE-2020-35527){: external},[CVE-2022-3515](https://nvd.nist.gov/vuln/detail/CVE-2022-3515){: external},[CVE-2022-2509](https://nvd.nist.gov/vuln/detail/CVE-2022-2509){: external}. |
 | CUDA | 576234 | cce0cf | [CVE-2022-3515](https://nvd.nist.gov/vuln/detail/CVE-2022-3515){: external},[CVE-2022-2509](https://nvd.nist.gov/vuln/detail/CVE-2022-2509){: external},[CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external},[CVE-2020-35525](https://nvd.nist.gov/vuln/detail/CVE-2020-35525){: external},[CVE-2020-35527](https://nvd.nist.gov/vuln/detail/CVE-2020-35527){: external}. |
 {: caption="Changes since version 1.24.7_1543" caption-side="top"}
+
+
+### Change log for master fix pack 1.24.8_1544, released 16 November 2022
+{: #1248_1544}
+
+The following table shows the changes that are in the master fix pack 1.24.8_1544. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.23.3 | v3.24.5 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.24/release-notes/#v3245){: external}. |
+| Cluster health image | v1.3.12 | v1.3.13 | Updated Go dependencies, golangci-lint, gosec, and to `Go` version 1.19.3. Updated base image version to 116. |
+| etcd | v3.5.4 | v3.5.5 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.5){: external}. |
+| Gateway-enabled cluster controller | 1823 | 1902 | `Go` module updates. |
+| GPU device plug-in and installer | 373bb9f | cce0cfa | Updated the GPU driver 470 minor version |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1096 | 1213 | Updated image to fix the following CVEs: [CVE-2020-35525](https://nvd.nist.gov/vuln/detail/CVE-2020-35525){: external}, [CVE-2020-35527](https://nvd.nist.gov/vuln/detail/CVE-2020-35527){: external}, [CVE-2022-3515](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3515){: external}, [CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external}, [CVE-2022-2509](https://nvd.nist.gov/vuln/detail/CVE-2022-2509){: external}, [CVE-2022-32149](https://nvd.nist.gov/vuln/detail/CVE-2022-32149){: external}. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.3.1 | v2.3.3 | Updated universal base image (UBI) to version `8.7-923` to resolve CVEs. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.24.7-1 | v1.24.7-10 | Key rotation and updated `Go` dependencies. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 416 | 420 | Updated universal base image (UBI) to version `8.7-923` to resolve CVEs. |
+| Key Management Service provider | v2.5.10 | v2.5.11 | Updated `Go` dependencies and to `Go` version `1.19.3`. |
+| Kubernetes | v1.24.7 | v1.24.8 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.8){: external}. |
+{: caption="Changes since version 1.24.7_1542" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.24.7_1543, released 07 November 2022
