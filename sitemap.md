@@ -3584,6 +3584,22 @@ subcollection: containers
 
 * [Understanding how the API key works](/docs/containers?topic=containers-access-creds#api_key_about)
 
+    * [What is the API key used for?](/docs/containers?topic=containers-access-creds#api-key-uses)
+
+    * [How many API keys do I need?](/docs/containers?topic=containers-access-creds#how-many-apikeys)
+
+    * [How do I set up the API key?](/docs/containers?topic=containers-access-creds#howto-api-key-setup)
+
+    * [What permissions does the user who sets the API key need? How do I give the user these permissions?](/docs/containers?topic=containers-access-creds#what-perms-api-key)
+
+    * [If users have access to the portfolio through an {{site.data.keyword.cloud_notm}} IAM token, how do I limit which commands a user can run?](/docs/containers?topic=containers-access-creds#limit-apikey-scopes)
+
+    * [What if I don't want to assign the API key owner or credentials owner the Super User infrastructure role?](/docs/containers?topic=containers-access-creds#non-superuser)
+
+    * [What happens if the user who set up the API key for a region and resource group leaves the company?](/docs/containers?topic=containers-access-creds#apikey-user-leaves)
+
+    * [How can I lock down my cluster if my API key becomes compromised?](/docs/containers?topic=containers-access-creds#apikey-lockdown)
+
 * [Ensuring that the API key or infrastructure credentials owner has the correct permissions](/docs/containers?topic=containers-access-creds#owner_permissions)
 
 * [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-access-creds#understand_infra)
@@ -3612,9 +3628,21 @@ subcollection: containers
 
 * [Understanding RBAC permissions](/docs/containers?topic=containers-users#understand-rbac)
 
+    * [What are the types of RBAC roles?](/docs/containers?topic=containers-users#rbac-types)
+
+    * [What are RBAC role bindings and cluster role bindings?](/docs/containers?topic=containers-users#what-is-rbac)
+
+    * [What do these roles look like in my cluster?](/docs/containers?topic=containers-users#what-do-roles-look-like)
+
+    * [Can I create custom roles or cluster roles?](/docs/containers?topic=containers-users#create-custom-rbac-roles)
+
+    * [When do I need to use cluster role bindings and role bindings that are not tied to the IAM permissions that I set?](/docs/containers?topic=containers-users#when-do-i-use-custom-rbac)
+
 * [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac)
 
 * [Extending existing permissions by aggregating cluster roles](/docs/containers?topic=containers-users#rbac_aggregate)
+
+    * [What are some common operations that I might want to extend permissions for a default cluster role?](/docs/containers?topic=containers-users#common-rbac-operations)
 
 * [Checking user permissions](/docs/containers?topic=containers-users#checking-perms)
 
@@ -4221,7 +4249,7 @@ subcollection: containers
 
     * [What if I want my app configuration to use variables? How do I add these to the YAML?](/docs/containers?topic=containers-plan_deploy#variables)
 
-    * [How can I make sure that my app has the right resources?](/docs/containers?topic=containers-plan_deploy#resources)
+    * [How can I make sure that my app has the correct resources?](/docs/containers?topic=containers-plan_deploy#resources)
 
     * [How can I add capabilities to my app configuration?](/docs/containers?topic=containers-plan_deploy#capabilities)
 
@@ -6046,6 +6074,16 @@ subcollection: containers
 * [Available benchmark versions](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-versions)
 
 * [Using the benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-use)
+
+    * [What does the benchmark cover?](/docs/containers?topic=containers-cis-benchmark#benchmark-scope)
+
+    * [What do the benchmark recommendations mean?](/docs/containers?topic=containers-cis-benchmark#benchmark-meaning)
+
+    * [What parts of the benchmark am I responsible for?](/docs/containers?topic=containers-cis-benchmark#bencmark-resp)
+
+    * [What if some part of the service fails to comply with a recommendation?](/docs/containers?topic=containers-cis-benchmark#bencmark-service-compliance)
+
+    * [What else can I do to increase the security and compliance of my cluster?](/docs/containers?topic=containers-cis-benchmark#benchmark-what-else)
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
 

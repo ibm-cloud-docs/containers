@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-15"
+lastupdated: "2022-11-22"
 
 keywords: kubernetes, containers
 
@@ -44,11 +44,13 @@ Use the list below to find CIS Kubernetes Benchmark results for available versio
 As a security administrator or auditor, you might want to compare your company's internal standards and external regulatory requirements with the CIS Kubernetes Benchmark. The benchmark recommendations are provided by the Center for Internet Security, not by IBM. IBM might not configure default settings in a way that meets every recommendation, but documents whether the recommendation is met to help you in your review. For example, you might use the benchmark in an audit to confirm that basic security measures are in place, and to identify areas where you might enhance your security.
 {: shortdesc}
 
-**What does the benchmark cover?**
+### What does the benchmark cover?
+{: #benchmark-scope}
 
 The benchmark covers recommendations for master components, etcd, control plane configurations, worker nodes, and policies such as for users, network, and pod security. 
 
-**What do the benchmark recommendations mean?**
+### What do the benchmark recommendations mean?
+{: #benchmark-meaning}
 
 The benchmark recommendations have scoring, levels, result status, and responsibilities as follows.
 
@@ -65,11 +67,13 @@ The benchmark recommendations have scoring, levels, result status, and responsib
     * IBM: IBM is responsible for configuring the setting that the benchmark recommends.
     * Shared: You and IBM share responsibility for configuring the setting that the benchmark recommends.
 
-**What parts of the benchmark am I responsible for?**
+### What parts of the benchmark am I responsible for?
+{: #bencmark-resp}
 
 Because {{site.data.keyword.containerlong_notm}} is a managed offering, IBM already configures many security settings for you. For example, IBM manages and automatically applies updates to your cluster master. For your worker nodes, IBM provides security and version updates, but you must apply the updates. You are also responsible for your workload applications and data. For more information, see [Your responsibilities while using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks).
 
-**What if some part of the service fails to comply with a recommendation?**
+### What if some part of the service fails to comply with a recommendation?
+{: #bencmark-service-compliance}
 
 First, check the explanation of the failure for any remediation steps.
 
@@ -77,7 +81,8 @@ Then, determine whether the failure is acceptable according to your security req
 
 Next, decide whether the component falls within your responsibility. If so, you might need to change how you configure that component. For example, you might configure pod security policies for all your app deployments. For components that are not directly within your responsibility, assess whether you can use another {{site.data.keyword.cloud_notm}} service to meet the recommendation.
 
-**What else can I do to increase the security and compliance of my cluster?**
+### What else can I do to increase the security and compliance of my cluster?
+{: #benchmark-what-else}
 
 See [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security).
 
