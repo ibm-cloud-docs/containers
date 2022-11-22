@@ -4394,6 +4394,10 @@ subcollection: containers
 
 * [What is Istio on {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-istio-about#istio_ov_addon)
 
+    * [What does this look like in my cluster?](/docs/containers?topic=containers-istio-about#istio-addon-resources)
+
+    * [How does the update process work?](/docs/containers?topic=containers-istio-about#istio-addon-update)
+
 * [What comes with the Istio add-on?](/docs/containers?topic=containers-istio-about#istio_ov_components)
 
 * [Limitations](/docs/containers?topic=containers-istio-about#istio_limitations)

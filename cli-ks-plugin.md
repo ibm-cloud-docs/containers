@@ -6867,27 +6867,22 @@ The `ibmcloud ks infra-permissions` commands check only classic IBM Cloud infras
 Check whether the credentials that allow [access to the IBM Cloud infrastructure portfolio](/docs/containers?topic=containers-access-creds) for the targeted resource group and region are missing suggested or required infrastructure permissions.
 {: shortdesc}
 
-**What do `required` and `suggested` infrastructure permissions mean?**
-
 If the infrastructure credentials for the region and resource group are missing any permissions, the output of this command returns a list of `required` and `suggested` permissions.
 *   **Required**: These permissions are needed to successfully order and manage infrastructure resources such as worker nodes. If the infrastructure credentials are missing one of these permissions, common actions such as `worker reload` can fail for all clusters in the region and resource group.
 *   **Suggested**: These permissions are helpful to include in your infrastructure permissions, and might be necessary in certain use cases. For example, the `Add Compute with Public Network Port` infrastructure permission is suggested because if you want public networking, you need this permission. However, if your use case is a cluster on the private VLAN only, the permission is not needed so it is not considered `required`.
 
 For a list of common use cases by permission, see [Infrastructure roles](/docs/containers?topic=containers-classic-roles).
 
-**What if I see an infrastructure permission that I can't find in the console or [Infrastructure roles](/docs/containers?topic=containers-classic-roles) table?**
+What if I see an infrastructure permission that I can't find in the console or [Infrastructure roles](/docs/containers?topic=containers-classic-roles) table?
+:   `Support Case` permissions are managed in a different part of the console than infrastructure permissions. See step 8 of [Customizing infrastructure permissions](/docs/containers?topic=containers-access-creds#infra_access).
 
-`Support Case` permissions are managed in a different part of the console than infrastructure permissions. See step 8 of [Customizing infrastructure permissions](/docs/containers?topic=containers-access-creds#infra_access).
-
-**Which infrastructure permissions do I assign?**
-
-If your company's policies for permissions are strict, you might need to limit the `suggested` permissions for your cluster's use case. Otherwise, make sure that your infrastructure credentials for the region and resource group include all the `required` and `suggested` permissions.
+Which infrastructure permissions do I assign?
+:   If your company's policies for permissions are strict, you might need to limit the `suggested` permissions for your cluster's use case. Otherwise, make sure that your infrastructure credentials for the region and resource group include all the `required` and `suggested` permissions.
 
 For most use cases, [set up the API key](/docs/containers?topic=containers-access-creds) for the region and resource group with the appropriate infrastructure permissions. If you need to use another infrastructure account that differs from your current account, [set up manual credentials](/docs/containers?topic=containers-access-creds#credentials).
 
-**How do I control what actions the users can perform?**
-
-After infrastructure credentials are set up, you can control what actions your users can perform by assigning them [{{site.data.keyword.cloud_notm}} IAM platform access roles](/docs/containers?topic=containers-iam-platform-access-roles).
+How do I control what actions the users can perform?
+:   After infrastructure credentials are set up, you can control what actions your users can perform by assigning them [{{site.data.keyword.cloud_notm}} IAM platform access roles](/docs/containers?topic=containers-iam-platform-access-roles).
 
 ```sh
 ibmcloud ks infra-permissions get --region REGION [--output json] [-q]
