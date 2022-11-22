@@ -227,6 +227,8 @@ subcollection: containers
 
         * ALB OAuth Proxy add-on version 2.0.0_1315
 
+        * Master fix pack 1.22.16_1578, 1.23.14_1552, 1.24.8_1544, and 1.25.4_1522
+
     * [15 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov1522)
 
         * New Ingress status messages
