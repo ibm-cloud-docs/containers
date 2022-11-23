@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-22"
+lastupdated: "2022-11-23"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -329,7 +329,7 @@ Making your own custom RBAC policies? Be sure not to edit the existing IBM role 
 
 
 
-### When do I need to use cluster role bindings and role bindings that are not tied to the IAM permissions that I set?
+### When do I need to use custom cluster role bindings and role bindings?
 {: #when-do-i-use-custom-rbac}
 
 You might want to authorize who can create and update pods in your cluster. With [pod security policies (PSPs)](/docs/containers?topic=containers-psp), you can use existing cluster role bindings that come with your cluster, or create your own.
