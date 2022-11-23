@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-22"
 
 keywords: kubernetes
 
@@ -56,9 +56,8 @@ Other cluster role bindings or namespace-scoped role bindings might give you oth
 To prevent unauthorized pod actions, you can modify existing pod security policy resources or create your own. You must be a cluster admin to customize policies.
 {: shortdesc}
 
-**What existing policies can I modify?**
-
-By default, your cluster contains the following RBAC resources that enable cluster administrators, authenticated users, service accounts, and nodes to use the `ibm-privileged-psp` and `ibm-restricted-psp` pod security policies. These policies allow the users to create and update privileged and unprivileged (restricted) pods.
+What existing policies can I modify?
+:   By default, your cluster contains the following RBAC resources that enable cluster administrators, authenticated users, service accounts, and nodes to use the `ibm-privileged-psp` and `ibm-restricted-psp` pod security policies. These policies allow the users to create and update privileged and unprivileged (restricted) pods.
 
 | Name | Namespace | Type | Purpose |
 |---|---|---|---|

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-11-22"
+lastupdated: "2022-11-23"
 
 keywords: containers
 subcollection: containers
@@ -3412,6 +3412,8 @@ subcollection: containers
 
     * [Worker nodes](/docs/containers?topic=containers-costs#nodes)
 
+    * [What is the difference between virtual and physical machines?](/docs/containers?topic=containers-costs#physical-vs-virtual)
+
     * [Public bandwidth](/docs/containers?topic=containers-costs#bandwidth)
 
     * [Subnet IP addresses](/docs/containers?topic=containers-costs#subnet_ips)
@@ -3455,17 +3457,47 @@ subcollection: containers
 
 * [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver)
 
+    * [How is access to my API server granted?](/docs/containers?topic=containers-security#api-server-access)
+
+    * [What does {{site.data.keyword.containerlong_notm}} do to secure my API server and etcd data store?](/docs/containers?topic=containers-security#secure-api-server)
+
+    * [What else can I do to secure my API server?](/docs/containers?topic=containers-security#api-server-what-else)
+
     * [Rotating CA certificates in your cluster](/docs/containers?topic=containers-security#cert-rotate)
 
 * [Worker node](/docs/containers?topic=containers-security#workernodes)
+
+    * [Who owns the worker node and am I responsible to secure it?](/docs/containers?topic=containers-security#worker-node-owner)
+
+    * [How does my worker node setup look?](/docs/containers?topic=containers-security#worker-node-setup)
 
 * [Network](/docs/containers?topic=containers-security#network)
 
     * [Network segmentation and privacy for classic clusters](/docs/containers?topic=containers-security#network_segmentation)
 
+    * [What network traffic is allowed for my cluster by default?](/docs/containers?topic=containers-security#default-network-traffic-allowed)
+
+    * [What is network segmentation and how can I set it up for a cluster?](/docs/containers?topic=containers-security#network-segmentation-setup)
+
+    * [What else can I do to reduce the surface for external attacks?](/docs/containers?topic=containers-security#external-what-else)
+
+    * [What if I want to connect my cluster to an on-prem data center?](/docs/containers?topic=containers-security#onprem-network-setup)
+
     * [Network segmentation and privacy for VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc)
 
+    * [What network traffic is allowed for my cluster by default?](/docs/containers?topic=containers-security#vpc-network-traffic-default)
+
+    * [What is network segmentation and how can I set it up for a cluster?](/docs/containers?topic=containers-security#network-segment-what-is)
+
+    * [What else can I do to reduce the surface for external attacks?](/docs/containers?topic=containers-security#vpc-external-what-else)
+
     * [Securely expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
+
+    * [Can I use security groups to manage my cluster's network traffic?](/docs/containers?topic=containers-security#can-i-use-security-groups)
+
+    * [How can I secure the source IP within the cluster?](/docs/containers?topic=containers-security#secure-source-ip-cluster)
+
+    * [How can I do TLS termination with LoadBalancer and Ingress services?](/docs/containers?topic=containers-security#tls-termination-lb)
 
 * [Persistent storage](/docs/containers?topic=containers-security#storage)
 
@@ -3474,6 +3506,8 @@ subcollection: containers
 * [Image and registry](/docs/containers?topic=containers-security#images_registry)
 
 * [Container isolation and security](/docs/containers?topic=containers-security#container)
+
+    * [Should I set up a single-tenant or a multi-tenant cluster?](/docs/containers?topic=containers-security#single-tenant-or-multi)
 
 * [Storing personal information](/docs/containers?topic=containers-security#pi)
 
@@ -3592,7 +3626,7 @@ subcollection: containers
 
     * [What permissions does the user who sets the API key need? How do I give the user these permissions?](/docs/containers?topic=containers-access-creds#what-perms-api-key)
 
-    * [If users have access to the portfolio through an {{site.data.keyword.cloud_notm}} IAM token, how do I limit which commands a user can run?](/docs/containers?topic=containers-access-creds#limit-apikey-scopes)
+    * [How do I limit which commands a user can run?](/docs/containers?topic=containers-access-creds#limit-apikey-scopes)
 
     * [What if I don't want to assign the API key owner or credentials owner the Super User infrastructure role?](/docs/containers?topic=containers-access-creds#non-superuser)
 
@@ -3636,7 +3670,7 @@ subcollection: containers
 
     * [Can I create custom roles or cluster roles?](/docs/containers?topic=containers-users#create-custom-rbac-roles)
 
-    * [When do I need to use cluster role bindings and role bindings that are not tied to the IAM permissions that I set?](/docs/containers?topic=containers-users#when-do-i-use-custom-rbac)
+    * [When do I need to use custom cluster role bindings and role bindings?](/docs/containers?topic=containers-users#when-do-i-use-custom-rbac)
 
 * [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac)
 
@@ -4393,6 +4427,10 @@ subcollection: containers
 * [What is Istio?](/docs/containers?topic=containers-istio-about#istio_ov_what_is)
 
 * [What is Istio on {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-istio-about#istio_ov_addon)
+
+    * [What does this look like in my cluster?](/docs/containers?topic=containers-istio-about#istio-addon-resources)
+
+    * [How does the update process work?](/docs/containers?topic=containers-istio-about#istio-addon-update)
 
 * [What comes with the Istio add-on?](/docs/containers?topic=containers-istio-about#istio_ov_components)
 
