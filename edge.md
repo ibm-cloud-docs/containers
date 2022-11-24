@@ -16,7 +16,7 @@ subcollection: containers
 
 
 
-# Restricting network traffic to edge worker nodes on classic infrastructure
+# Restricting network traffic to edge worker nodes
 {: #edge}
 
 Edge worker nodes can improve the security of your {{site.data.keyword.containerlong}} cluster by allowing fewer worker nodes by isolating the networking workload.
