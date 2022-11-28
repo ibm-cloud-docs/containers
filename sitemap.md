@@ -3475,7 +3475,7 @@ subcollection: containers
 
     * [Network segmentation and privacy for classic clusters](/docs/containers?topic=containers-security#network_segmentation)
 
-    * [What network traffic is allowed for my cluster by default?](/docs/containers?topic=containers-security#default-network-traffic-allowed)
+    * [What network traffic is allowed for my Classic cluster by default?](/docs/containers?topic=containers-security#default-network-traffic-allowed)
 
     * [What is network segmentation and how can I set it up for a cluster?](/docs/containers?topic=containers-security#network-segmentation-setup)
 
@@ -3485,7 +3485,7 @@ subcollection: containers
 
     * [Network segmentation and privacy for VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc)
 
-    * [What network traffic is allowed for my cluster by default?](/docs/containers?topic=containers-security#vpc-network-traffic-default)
+    * [What network traffic is allowed for my VPC cluster by default?](/docs/containers?topic=containers-security#vpc-network-traffic-default)
 
     * [What is network segmentation and how can I set it up for a cluster?](/docs/containers?topic=containers-security#network-segment-what-is)
 
@@ -3822,7 +3822,7 @@ subcollection: containers
 
     * [Getting your {{site.data.keyword.containershort}} subnet IP addresses](/docs/containers?topic=containers-firewall#iam_cidr_ip)
 
-[Restricting network traffic to edge worker nodes on classic infrastructure](/docs/containers?topic=containers-edge#edge)
+[Restricting network traffic to edge worker nodes](/docs/containers?topic=containers-edge#edge)
 
 * [Isolating networking workloads to edge nodes](/docs/containers?topic=containers-edge#edge_nodes)
 
@@ -6949,7 +6949,7 @@ subcollection: containers
 
 * [Overview](/docs/containers?topic=containers-changelog_119#changelog_overview_119)
 
-* [Deprecated: Version 1.19 change log](/docs/containers?topic=containers-changelog_119#119_changelog)
+* [Version 1.19 change log](/docs/containers?topic=containers-changelog_119#119_changelog)
 
     * [Change log for worker node fix pack 1.19.16_1579, released 14 March 2022](/docs/containers?topic=containers-changelog_119#11916_1579-1)
 

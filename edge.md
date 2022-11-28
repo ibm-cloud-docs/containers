@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-28"
 
 keywords: kubernetes, affinity, taint
 
@@ -16,7 +16,7 @@ subcollection: containers
 
 
 
-# Restricting network traffic to edge worker nodes on classic infrastructure
+# Restricting network traffic to edge worker nodes
 {: #edge}
 
 Edge worker nodes can improve the security of your {{site.data.keyword.containerlong}} cluster by allowing fewer worker nodes by isolating the networking workload.
