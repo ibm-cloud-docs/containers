@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-11-23"
+lastupdated: "2022-11-28"
 
 keywords: containers
 subcollection: containers
@@ -6949,7 +6949,7 @@ subcollection: containers
 
 * [Overview](/docs/containers?topic=containers-changelog_119#changelog_overview_119)
 
-* [Deprecated: Version 1.19 changelog](/docs/containers?topic=containers-changelog_119#119_changelog)
+* [Deprecated: Version 1.19 change log](/docs/containers?topic=containers-changelog_119#119_changelog)
 
     * [Change log for worker node fix pack 1.19.16_1579, released 14 March 2022](/docs/containers?topic=containers-changelog_119#11916_1579-1)
 

@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-11-22"
+lastupdated: "2022-11-28"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.19
 
@@ -34,10 +34,10 @@ Check the [Security Bulletins on {{site.data.keyword.cloud_notm}} Status](https:
 Some change logs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) to ensure security compliance for your worker nodes. These worker node fix packs can be at a higher version than the master because some build fix packs are specific to worker nodes. Other change logs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update). For more information about patch types, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: note}
 
-## Deprecated: Version 1.19 changelog
+## Deprecated: Version 1.19 change log
 {: #119_changelog}
 
-Review the version 1.19 changelog.
+Review the version 1.19 change log.
 {: shortdesc}
 
 Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 14 Mar 2022. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions_120) as soon as possible.
@@ -208,7 +208,7 @@ The following table shows the changes that are in the worker node fix pack patch
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Ubuntu 18.04 packages | N/A | N/A | Updated worker node image packages for [CVE-2020-16592](https://nvd.nist.gov/vuln/detail/CVE-2020-16592){: external}, [CVE-2020-27781](https://nvd.nist.gov/vuln/detail/CVE-2020-27781){: external}, [CVE-2021-25219](https://nvd.nist.gov/vuln/detail/CVE-2021-25219){: external}, [CVE-2021-3487](https://nvd.nist.gov/vuln/detail/CVE-2021-3487){: external}, [CVE-2021-3524](https://nvd.nist.gov/vuln/detail/CVE-2021-3524){: external}, [CVE-2021-3531](https://nvd.nist.gov/vuln/detail/CVE-2021-3531){: external}, and [CVE-2021-40490](https://nvd.nist.gov/vuln/detail/CVE-2021-40490){: external}. |
+| Ubuntu 18.04 packages | N/A | N/A | Updated worker node image packages for [CVE-2020-16592](https://nvd.nist.gov/vuln/detail/CVE-2020-16592){: external}, [CVE-2020-27781](https://nvd.nist.gov/vuln/detail/CVE-2020-27781){: external}, [CVE-2021-25219](https://nvd.nist.gov/vuln/detail/CVE-2021-25219){: external}, [CVE-2021-3487](https://nvd.nist.gov/vuln/detail/CVE-2021-3487){: external}, [CVE-2021-3524](https://nvd.nist.gov/vuln/detail/CVE-2021-3524){: external}, [CVE-2021-3531](https://nvd.nist.gov/vuln/detail/CVE-2021-3531){: external}, and [CVE-2021-40490](https://nvd.nist.gov/vuln/detail/CVE-2021-40490){: external}.| 
 {: caption="Changes since version 1.19.15_1566" caption-side="bottom"}
 
 ### Change log for master fix pack 1.19.15_1565, released 29 October 2021
