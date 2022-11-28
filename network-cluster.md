@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-28"
 
 keywords: kubernetes, vlan
 
@@ -208,6 +208,9 @@ When you create a cluster, you choose whether to connect your worker nodes to a 
 
 Trying to change the service endpoint for master-worker communication instead? Check out the topics to set up [public](#set-up-public-se) and [private](#set-up-private-se) service endpoints.
 {: tip}
+
+Removing all workers from a VLAN removes the IP address of the Ingress ALB in the VLAN's zone.
+{: note}
 
 
 
