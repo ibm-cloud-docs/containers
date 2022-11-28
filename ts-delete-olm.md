@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-28"
 
 keywords: kubernetes, OLM, operator lifecycle manager, delete olm, delete operator lifecycle manager components
 
@@ -25,7 +25,7 @@ If you want to continue using OLM components in your cluster, or you want to ins
 {: note} 
 
 
-1. Confirm whether or not you have the OLM operator installed. 
+1. Confirm that you have the OLM operator installed. 
 
     ```sh
     kubectl get deploy -n ibm-system olm-operator
