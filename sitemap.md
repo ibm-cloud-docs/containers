@@ -3401,6 +3401,10 @@ subcollection: containers
 
     * [Workers in VPC clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-vpc)
 
+[Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
+
+    * [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
+
 
 ## Managing cluster costs
 {: #sitemap_managing_cluster_costs}

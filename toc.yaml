@@ -102,6 +102,7 @@ toc:
           - performance.md
           - cluster-remove.md
           - host-maintenance.md
+          - ubuntu-migrate.md
       - topicgroup:
           label: Managing cluster costs
           topics:
