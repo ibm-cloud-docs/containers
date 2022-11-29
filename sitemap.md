@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-11-28"
+lastupdated: "2022-11-29"
 
 keywords: containers
 subcollection: containers
@@ -3403,7 +3403,7 @@ subcollection: containers
 
 [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
 
-    * [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
+* [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
 
 
 ## Managing cluster costs
@@ -3481,9 +3481,9 @@ subcollection: containers
 
     * [What network traffic is allowed for my Classic cluster by default?](/docs/containers?topic=containers-security#default-network-traffic-allowed)
 
-    * [What is network segmentation and how can I set it up for a cluster?](/docs/containers?topic=containers-security#network-segmentation-setup)
+    * [What is network segmentation and how can I set it up for a Classic cluster?](/docs/containers?topic=containers-security#network-segmentation-setup)
 
-    * [What else can I do to reduce the surface for external attacks?](/docs/containers?topic=containers-security#external-what-else)
+    * [What else can I do to reduce the surface for external attacks for Classic clusters?](/docs/containers?topic=containers-security#external-what-else)
 
     * [What if I want to connect my cluster to an on-prem data center?](/docs/containers?topic=containers-security#onprem-network-setup)
 
@@ -3491,9 +3491,9 @@ subcollection: containers
 
     * [What network traffic is allowed for my VPC cluster by default?](/docs/containers?topic=containers-security#vpc-network-traffic-default)
 
-    * [What is network segmentation and how can I set it up for a cluster?](/docs/containers?topic=containers-security#network-segment-what-is)
+    * [What is network segmentation and how can I set it up for a VPC cluster?](/docs/containers?topic=containers-security#network-segment-what-is)
 
-    * [What else can I do to reduce the surface for external attacks?](/docs/containers?topic=containers-security#vpc-external-what-else)
+    * [What else can I do to reduce the surface for external attacks for VPC clusters?](/docs/containers?topic=containers-security#vpc-external-what-else)
 
     * [Securely expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
 
@@ -3816,7 +3816,7 @@ subcollection: containers
 
     * [Opening required ports in a private allowlist](/docs/containers?topic=containers-firewall#firewall_private)
 
-    * [Opening ports in a public or private allowlist for inbound traffic to NodePort, load balancer, and Ingress services](/docs/containers?topic=containers-firewall#firewall_inbound)
+    * [Opening ports in a public or private allowlist for inbound traffic](/docs/containers?topic=containers-firewall#firewall_inbound)
 
 * [Allowing the cluster to access resources through Calico network policies](/docs/containers?topic=containers-firewall#firewall_calico_egress)
 
@@ -4240,7 +4240,7 @@ subcollection: containers
 
     * [Copying an existing image pull secret](/docs/containers?topic=containers-registry#copy_imagePullSecret)
 
-    * [Creating an image pull secret with different IAM API key credentials for more control or access to images in other {{site.data.keyword.cloud_notm}} accounts](/docs/containers?topic=containers-registry#other_registry_accounts)
+    * [Creating an image pull secret with different IAM API key credentials](/docs/containers?topic=containers-registry#other_registry_accounts)
 
     * [Accessing images that are stored in other private registries](/docs/containers?topic=containers-registry#private_images)
 

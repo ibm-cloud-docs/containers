@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-29"
 
 keywords: kubernetes, calico, egress, rules
 
@@ -70,7 +70,8 @@ Review the following default Calico host policies that are automatically applied
 |`allow-sys-mgmt`|Allows incoming connections for specific IBM Cloud infrastructure systems that are used to manage the worker nodes.|
 |`allow-vrrp`|Allows VRRP packets, which monitor and move virtual IP addresses between worker nodes.|
 {: caption="Default Calico host policies for each cluster"}
-{: summary="The first row in the table spans both columns. Read the rest of the rows from left to right, with the Calico policy in column one and the description in column two."}
+
+
 
 Default Kubernetes policies that limits access to the Kubernetes Dashboard are also created. Kubernetes policies don't apply to the host endpoint, but at the pod-level instead, and to all classic and VPC clusters.
 
@@ -79,7 +80,8 @@ Default Kubernetes policies that limits access to the Kubernetes Dashboard are a
 | `dashboard-metrics-scraper` | **Kubernetes 1.20 or later**: Provided in the `kube-system` namespace: Blocks all pods from accessing the Kubernetes Dashboard metrics scraper. This policy doesn't prevent the Kubernetes Dashboard from accessing the dashboard metrics. Further, this policy doesn't impact accessing the dashboard metrics from the {{site.data.keyword.cloud_notm}} console or from using `kubectl proxy`. If a pod requires access to the dashboard metrics scraper, deploy the pod in a namespace that has the `dashboard-metrics-scraper-policy: allow` label. |
 |`kubernetes-dashboard`|Provided in the `kube-system` namespace: Blocks all pods from accessing the Kubernetes Dashboard. This policy doesn't impact accessing the dashboard from the {{site.data.keyword.cloud_notm}} console or by using `kubectl proxy`. If a pod requires access to the dashboard, deploy the pod in a namespace that has the `kubernetes-dashboard-policy: allow` label.|
 {: caption="Default Kubernetes policies for each cluster"}
-{: summary="The first row in the table spans both columns. Read the rest of the rows from left to right, with the Kubernetes policy in column one and the description in column two."}
+
+
 
 
 
@@ -219,7 +221,7 @@ To create Calico policies, use the following steps. Before you begin, [install a
     
 Note that Calico and Kubernetes network policies only block new connections, they don't interrupt connections that existed before the policy was applied. So, after applying a new or changed policy, to test that it is working and not blocking more than it should, do the following:
 
-1. Restart any pods that might be affected by the policy. Better yet, restart all pods, just in case you don't have your selector quite right and it affects more than you think it will.
+1. Restart any pods that might be affected by the policy. Better yet, restart all pods, just in case you don't have your selector correct and it affects more than you think it will.
 
 1. Run `ibmcloud ks cluster master refresh -c CLUSTER-ID` to restart your cluster master pods. This will interrupt existing connections from kubelet and other components to the master and force them to reconnect. This will show you if the new and changed policies block any necessary connections to your master components.
 

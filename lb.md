@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-22"
+lastupdated: "2022-11-29"
 
 keywords: kubernetes, lb1.0, nlb
 
@@ -35,7 +35,7 @@ Expose a port and use a portable IP address for a Layer 4 network load balancer 
 * Ensure you have the required number of worker nodes:
     * Classic clusters: If you restrict network traffic to edge worker nodes, ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge#edge) are enabled in each zone so that NLBs deploy uniformly.
     * Gateway-enabled classic clusters: Ensure that at least two gateway worker nodes in the `gateway` worker pool are enabled in each zone so that NLBs deploy uniformly.
-* When cluster nodes are reloaded or when a cluster master update includes a new `keepalived` image,  the load balancer virtual IP is moved to the network interface of a new node. When this occurs, any long-lasting connections to your load balancer must be re-established. Consider including retry logic in your application so that attempts to re-establish the connection are made in a timely manner. 
+* When cluster nodes are reloaded or when a cluster master update includes a new `keepalived` image,  the load balancer virtual IP is moved to the network interface of a new node. When this occurs, any long-lasting connections to your load balancer must be re-established. Consider including retry logic in your application so that attempts to re-establish the connection are made quickly. 
 
 
 To set up an NLB 1.0 service in a multizone cluster:
@@ -172,7 +172,7 @@ Next, you can [register an NLB subdomain](/docs/containers?topic=containers-load
 **Before you begin**:
 * You must have an available portable public or private IP address to assign to the network load balancer (NLB) service. For more information, see [Configuring subnets for clusters](/docs/containers?topic=containers-subnets).
 * Ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for the `default` namespace.
-* When cluster nodes are reloaded or when a cluster master update includes a new `keepalived` image,  the load balancer virtual IP is moved to the network interface of a new node. When this occurs, any long-lasting connections to your load balancer must be re-established. Consider including retry logic in your application so that attempts to re-establish the connection are made in a timely manner. 
+* When cluster nodes are reloaded or when a cluster master update includes a new `keepalived` image,  the load balancer virtual IP is moved to the network interface of a new node. When this occurs, any long-lasting connections to your load balancer must be re-established. Consider including retry logic in your application so that attempts to re-establish the connection are made quickly. 
 
 
 To create an NLB 1.0 service in a single-zone cluster:

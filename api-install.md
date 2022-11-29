@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-16"
+lastupdated: "2022-11-29"
 
 keywords: kubernetes, ic, ks, kubectl, api
 
@@ -296,7 +296,7 @@ The following instructions require public network access in your cluster to conn
          - `receiver_client_ids: kube`
          - `response_type: delegated_refresh_token`
          - `refresh_token`: Your {{site.data.keyword.cloud_notm}} IAM refresh token.
-         - `grant_type`: refresh_token
+         - `grant_type: refresh_token`
 
     The following example shows output from the previous API request.
 
@@ -307,7 +307,7 @@ The following instructions require public network access in your cluster to conn
     ```
     {: screen}
 
-3. Retrieve an {{site.data.keyword.cloud_notm}} IAM ID, IAM access, and IAM refresh token by using the delegated refresh token from the previous step. In your API output, you can find the IAM ID token in the **id_token** field, the IAM access token in the **access_token** field, and the IAM refresh token in the **refresh_token** field.
+3. Retrieve an {{site.data.keyword.cloud_notm}} IAM ID, IAM access, and IAM refresh token by using the delegated refresh token from the previous step. In your API output, you can find the IAM ID token in the `id_token` field, the IAM access token in the `access_token` field, and the IAM refresh token in the `refresh_token` field.
     ```sh
     POST https://iam.cloud.ibm.com/identity/token
     ```
@@ -316,7 +316,7 @@ The following instructions require public network access in your cluster to conn
     Header
     :    - `Content-Type: application/x-www-form-urlencoded` 
          - `Authorization: Basic a3ViZTprdWJl`
-              `a3ViZTprdWJl` equals the URL-encoded authorization for the username **`kube`** and the password **`kube`**.
+              `a3ViZTprdWJl` equals the URL-encoded authorization for the username `kube` and the password `kube`.
          - `cache-control: no-cache`
 
     Body

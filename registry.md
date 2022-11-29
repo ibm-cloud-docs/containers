@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-29"
 
 keywords: kubernetes, registry, pull secret, secrets
 
@@ -324,7 +324,7 @@ You can copy an image pull secret, such as the one that is automatically created
 
 5. To deploy containers, [add the image pull secret](#use_imagePullSecret) to each deployment or to the service account of the namespace so that any deployment in the namespace can pull images from the registry.
 
-### Creating an image pull secret with different IAM API key credentials for more control or access to images in other {{site.data.keyword.cloud_notm}} accounts
+### Creating an image pull secret with different IAM API key credentials
 {: #other_registry_accounts}
 
 You can assign {{site.data.keyword.cloud_notm}} IAM access policies to users or a service ID to restrict permissions to specific registry image namespaces or actions (such as `push` or `pull`). Then, create an API key and store these registry credentials in an image pull secret for your cluster.
