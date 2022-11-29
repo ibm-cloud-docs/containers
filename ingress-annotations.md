@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-16"
+lastupdated: "2022-11-29"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -20,7 +20,7 @@ subcollection: containers
 Modify the default settings for ALBs that run the Kubernetes Ingress image.
 {: shortdesc}
 
-In some cases, you can customize routing for Ingress by adding [Kubernetes NGINX annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/){: external} (`nginx.ingress.kubernetes.io/<annotation>`). Kubernetes NGINX annotations are always applied to all service paths in the resource, and you can't specify service names within the annotations. Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are **not** supported.
+Sometimes, you can customize routing for Ingress by adding [Kubernetes NGINX annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/){: external} (`nginx.ingress.kubernetes.io/<annotation>`). Kubernetes NGINX annotations are always applied to all service paths in the resource, and you can't specify service names within the annotations. Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are **not** supported.
 {: note}
 
 ## Adding a server port to a host header

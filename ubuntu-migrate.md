@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-11-28"
+lastupdated: "2022-11-29"
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
 
@@ -26,7 +26,7 @@ To migrate your worker nodes to a new Ubuntu version, you must provision a new w
 
 For more information about creating worker pools and adding worker nodes, see [Adding worker nodes in classic clusters](/docs/containers?topic=containers-add_workers) or [Adding worker nodes in VPC clusters](/docs/containers?topic=containers-add_workers#vpc_pools).
 
-### Migration steps
+## Migration steps
 {: #ubuntu-migrate-steps}
 
 Migrate your worker nodes to use Ubuntu 20. These steps apply to all supported cluster versions.
@@ -48,24 +48,24 @@ Migrate your worker nodes to use Ubuntu 20. These steps apply to all supported c
     ```
     {: pre}
 
-3. Verify that the worker pool is created.
+1. Verify that the worker pool is created.
 
     ```sh
     ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-4. Add a zone to your worker pool. When you add a zone, the number of worker nodes you specified with the `--size-per-zone` option are added to the zone. These worker nodes run the Ubuntu 20 operating system. 
+1. Add a zone to your worker pool. When you add a zone, the number of worker nodes you specified with the `--size-per-zone` option are added to the zone. These worker nodes run the Ubuntu 20 operating system. 
     * [Adding a zone to a worker pool in a classic cluster](/docs/containers?topic=containers-add_workers#add_zone)
     * [Adding a zone to a worker pool in a VPC cluster](/docs/containers?topic=containers-add_workers#vpc_add_zone)
 
-5. Verify that worker nodes are available in your new worker pool. In the output, find the listing for the new worker pool and check the number in the **Workers** column.
+1. Verify that worker nodes are available in your new worker pool. In the output, find the listing for the new worker pool and check the number in the **Workers** column.
     ```sh
     ibmcloud ks worker-pool ls --cluster <cluster_name_or-ID>
     ```
     {: pre}
 
-6. [Remove the worker pool](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_rm) that contains the Ubuntu 18 worker nodes. 
+1. [Remove the worker pool](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_rm) that contains the Ubuntu 18 worker nodes. 
 
     Consider scaling down your Ubuntu 18 worker pool and keeping it for several days before you remove it. This way, you can scale the worker pool back up if your workload experiences disruptions during the migration process. When you have determined that your workload is stable and functions normally, you can remove the Ubuntu 18 worker pool.
     {: important}
@@ -76,7 +76,7 @@ Migrate your worker nodes to use Ubuntu 20. These steps apply to all supported c
         ```
         {: pre}
 
-    2. Run the command to remove the worker pool.
+    1. Run the command to remove the worker pool.
         ```sh
         ibmcloud ks worker-pool rm --worker-pool <worker_pool_name> --cluster <cluster_name>
         ```

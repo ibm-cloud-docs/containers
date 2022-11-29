@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-11-14"
+lastupdated: "2022-11-29"
 
 keywords: custom gateway, reconcile loop, istio, IOP, help
 
@@ -66,7 +66,7 @@ In a test cluster, parse through the IOP resource configuration to find the line
 
 7. Debug the line to resolve the error. 
 
-8. Repeat the process with the remaining sections until you have copied all of the original IOP configuration into the test file and determined that no errors remain. 
+8. Repeat the process with the remaining sections until you have copied all the original IOP configuration into the test file and determined that no errors remain. 
 
 9. Remove the test file.
     ```sh

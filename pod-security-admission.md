@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-29"
 
 keywords: kubernetes, deploy, pod security admission, pod security, security profiles
 
@@ -87,7 +87,7 @@ Do not remove or change the labels for these namespaces.
 
 
 
-A namespace can be labeled to set the pod security profile for any or all of the Pod Security Admission `modes`. 
+A namespace can be labeled to set the pod security profile for any or all the Pod Security Admission `modes`. 
 
 For example, you can label a namespace to enforce the `privileged` profile in additon to using `warn` or `audit` by using the `baseline` profile.
 
