@@ -3483,7 +3483,7 @@ subcollection: containers
 
     * [What is network segmentation and how can I set it up for a Classic cluster?](/docs/containers?topic=containers-security#network-segmentation-setup)
 
-    * [What else can I do to reduce the surface for external attacks?](/docs/containers?topic=containers-security#external-what-else)
+    * [What else can I do to reduce the surface for external attacks for Classic clusters?](/docs/containers?topic=containers-security#external-what-else)
 
     * [What if I want to connect my cluster to an on-prem data center?](/docs/containers?topic=containers-security#onprem-network-setup)
 
@@ -3493,7 +3493,7 @@ subcollection: containers
 
     * [What is network segmentation and how can I set it up for a VPC cluster?](/docs/containers?topic=containers-security#network-segment-what-is)
 
-    * [What else can I do to reduce the surface for external attacks?](/docs/containers?topic=containers-security#vpc-external-what-else)
+    * [What else can I do to reduce the surface for external attacks for VPC clusters?](/docs/containers?topic=containers-security#vpc-external-what-else)
 
     * [Securely expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
 
