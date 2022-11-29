@@ -6,7 +6,7 @@ lastupdated: "2022-11-29"
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
 
-subcollection: openshift
+subcollection: containers
 
 ---
 
@@ -18,8 +18,6 @@ subcollection: openshift
 
 Support for Ubuntu 20 is available on 6 December 2022. This information is available as a preview for the steps that are required to migrate your worker nodes after that date. 
 {: note}
-
-
 
 To migrate your worker nodes to a new Ubuntu version, you must provision a new worker pool. Then, add worker nodes to the new pool and remove the original worker pool. 
 {: shortdesc}
