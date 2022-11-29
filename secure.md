@@ -303,7 +303,7 @@ All containers are protected by [predefined Calico network policy settings](/doc
 
 Access from the Kubernetes master to the worker node's kubelet is secured by an OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later) tunnel. For more information, see the [{{site.data.keyword.containerlong_notm}} architecture](/docs/containers?topic=containers-service-arch).
 
-### What is network segmentation and how can I set it up for a cluster?
+### What is network segmentation and how can I set it up for a Classic cluster?
 {: #network-segmentation-setup}
 
 Network segmentation describes the approach to divide a network into multiple subnetworks. You can group apps and related data to be accessed by a specific group in your organization. Apps that run in one subnetwork can't see or access apps in another subnetwork. Network segmentation also limits the access that is provided to an insider or third-party software and can limit the range of malicious activities.   
@@ -357,7 +357,7 @@ If you deploy apps in your cluster that must receive traffic requests from the i
 Security groups are applied to your VPC instance and VPC ALBs by defualt. For more information, see [Controlling traffic with VPC security groups](/docs/containers?topic=containers-vpc-security-group).
 {: note}
 
-### What is network segmentation and how can I set it up for a cluster?
+### What is network segmentation and how can I set it up for a VPC cluster?
 {: #network-segment-what-is}
 
 Network segmentation describes the approach to divide a network into multiple subnetworks. You can group apps and related data to be accessed by a specific group in your organization. Apps that run in one subnetwork can't see or access apps in another subnetwork. Network segmentation also limits the access that is provided to an insider or third-party software and can limit the range of malicious activities.  

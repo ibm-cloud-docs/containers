@@ -3481,7 +3481,7 @@ subcollection: containers
 
     * [What network traffic is allowed for my Classic cluster by default?](/docs/containers?topic=containers-security#default-network-traffic-allowed)
 
-    * [What is network segmentation and how can I set it up for a cluster?](/docs/containers?topic=containers-security#network-segmentation-setup)
+    * [What is network segmentation and how can I set it up for a Classic cluster?](/docs/containers?topic=containers-security#network-segmentation-setup)
 
     * [What else can I do to reduce the surface for external attacks?](/docs/containers?topic=containers-security#external-what-else)
 
@@ -3491,7 +3491,7 @@ subcollection: containers
 
     * [What network traffic is allowed for my VPC cluster by default?](/docs/containers?topic=containers-security#vpc-network-traffic-default)
 
-    * [What is network segmentation and how can I set it up for a cluster?](/docs/containers?topic=containers-security#network-segment-what-is)
+    * [What is network segmentation and how can I set it up for a VPC cluster?](/docs/containers?topic=containers-security#network-segment-what-is)
 
     * [What else can I do to reduce the surface for external attacks?](/docs/containers?topic=containers-security#vpc-external-what-else)
 
