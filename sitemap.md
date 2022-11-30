@@ -3177,6 +3177,8 @@ subcollection: containers
 
     * [Creating an allowlist for the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist)
 
+* [Accessing VPC clusters through the Virtual Private Endpoint Gateway](/docs/containers?topic=containers-access_cluster#vpc_vpe)
+
 [Accessing the cluster master with admission controllers and webhooks](/docs/containers?topic=containers-access_webhooks#access_webhooks)
 
 * [What are the default admission controllers in my cluster?](/docs/containers?topic=containers-access_webhooks#access_webhooks-default-controllers)
@@ -7976,13 +7978,19 @@ subcollection: containers
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
 
+* [Version 1.3.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_1)
+
+    * [1.3.1_3108_iks, released 30 November 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3108_iks)
+
 * [Version 1.3.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_0)
 
-    * [1.3.0_2907_iks (default), released 31 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2907_iks)
+    * [1.3.0_2907_iks, released 31 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2907_iks)
 
     * [1.3.0_2847_iks, released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2847_iks)
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
+
+    * [1.2.1_3111_iks, released 30 November 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_3111_iks)
 
     * [1.2.1_2809_iks, released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2809_iks)
 
