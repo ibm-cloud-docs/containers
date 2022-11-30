@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-22"
+lastupdated: "2022-11-30"
 
 keywords: kubernetes, istio, add-on
 
@@ -28,6 +28,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | --- | --- | --- |
+| 1.16 | Yes | 1.23, 1.24, 1.25, 1.26 |
 | 1.15 | Yes | 1.22, 1.23, 1.24, 1.25 |
 | 1.14 | Yes | 1.21, 1.22, 1.23, 1.24, 1.25 |
 | 1.13 | No | - |
@@ -41,6 +42,40 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 | 1.5 | No | - |
 | 1.4 | No| - |
 {: caption="Supported Istio versions" caption-side="bottom"}
+
+## Version 1.16
+{: #v116}
+
+### Change log for 1.16.0, released November 30th, 2022
+{: #1160}
+
+Review the changes that are included in version 1.16.0 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.15.3
+
+Current version
+:   1.16.0
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.16.0](https://istio.io/latest/news/releases/1.16.x/announcing-1.16/){: external}.
+:   Resolves the following CVEs:
+    - [usn-5702-1](https://ubuntu.com/security/notices/USN-5702-1){: external}
+    - [CVE-2022-32221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32221){: external}
+    - [CVE-2022-35260](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35260){: external}
+    - [CVE-2022-42915](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42915){: external}
+    - [CVE-2022-42916](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42916){: external}
+    - [usn-5704-1](https://ubuntu.com/security/notices/USN-5704-1){: external}
+    - [CVE-2022-42010](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42010){: external}
+    - [CVE-2022-42011](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42011){: external}
+    - [CVE-2022-42012](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42012){: external}
+    - [usn-5710-1](https://ubuntu.com/security/notices/USN-5710-1){: external}
+    - [CVE-2022-3358](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3508){: external}
+    - [CVE-2022-3602](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3602){: external}
+    - [CVE-2022-3786](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3786){: external}
+:   The [Gateway API resource](https://istio.io/latest/news/releases/1.16.x/announcing-1.16/upgrade-notes/#gateway-api-resources) is currently unsupported on the managed Istio add-on. Work is in progress to add support for this feature. 
+
 
 ## Version 1.15
 {: #v115}
