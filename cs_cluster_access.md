@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-30"
 
 keywords: kubernetes, clusters
 
@@ -34,7 +34,7 @@ After your {{site.data.keyword.containerlong}} cluster is created, you can begin
     *  **Public Service Endpoint URL only**: Continue with [Accessing clusters through the public cloud service endpoint](#access_public_se).
     *  **Private Service Endpoint URL only**: Continue with [Accessing clusters through the private cloud service endpoint](#access_private_se).
     *  **Both service endpoint URLs**: You can access your cluster either through the [public](#access_public_se) or the [private](#access_private_se) service endpoint.
-
+6. You can also access your VPC cluster through the [Virtual Private Endpoint](#vpc_vpe).
 
 
 ## Accessing clusters through the public cloud service endpoint
@@ -120,7 +120,6 @@ The Kubernetes master is accessible through the private cloud service endpoint i
     <cluster_name>/<cluster_ID>
     ```
     {: screen}
-
 
 ### Accessing classic clusters through the private cloud service endpoint
 {: #classic_private_se}
@@ -310,13 +309,48 @@ To create a private cloud service endpoint allowlist:
 
 Your authorized users can now continue with [Accessing clusters through the private cloud service endpoint](#access_private_se).
 
+## Accessing VPC clusters through the Virtual Private Endpoint Gateway
+{: #vpc_vpe}
 
+[Virtual Private Endpoint Gateway](docs/vpc?topic=vpc-about-vpe) is created for VPC clusters automatically. The Kubernetes master is accessible through this Virtual Private Endpoint gateway if authorized cluster users are connected to the same VPC where the cluster is deployed, such as through a [{{site.data.keyword.vpc_short}} VPN](/docs/vpc?topic=vpc-vpn-overview). In this case, the `kubeconfig` is configured with the Virtual Private Endpoint (VPE) URL which is private DNS name and could be resolved only by the {{site.data.keyword.vpc_short}} Private DNS service. The {{site.data.keyword.vpc_short}} Private DNS server addresses are `161.26.0.7` and `161.26.0.8`.
+{: shortdesc}
 
+1. Set up your {{site.data.keyword.vpc_short}} VPN and connect to your VPC through VPN.
+vpc?topic=vpc-vpn-client-to-site-overview
+    1. Configure a [client-to-site](/docs/vpc?topic=vpc-vpn-client-to-site-overview) or [site-to-site](/docs/vpc?topic=vpc-vpn-onprem-example#configuring-onprem-gateway) VPN to your VPC. For example, you might choose to set up a client-to-site connection with an OpenVPN Client.
+    2. In case of client-to-site VPN for {{site.data.keyword.vpc_short}} service, you must specify the {{site.data.keyword.vpc_short}} Private DNS service addresses when you provision the VPN server as mentioned in the [considerations](/docs/vpc?topic=vpc-client-to-site-vpn-planning#existing-vpc-configuration-considerations), and you must create a VPN route after the VPN server is provisioned, with destination `161.26.0.0/16` and action `translate`.
+    3. In case of site-to-site VPN for {{site.data.keyword.vpc_short}} service, you must follow the [Accessing service endpoints through VPN guide](/docs/vpc?topic=vpc-build-se-connectivity-using-vpn) and configure the {{site.data.keyword.vpc_short}} Private DNS service addresses.
+    4. Verify that you are connected to the VPC through your {{site.data.keyword.vpc_short}} VPN connection.
 
+2. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
+    ```sh
+    ibmcloud ks cluster config -c <cluster_name_or_ID> --endpoint vpe
+    ```
+    {: pre}
 
+3. Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
+    ```sh
+    kubectl config current-context
+    ```
+    {: pre}
 
+    Example output
 
+    ```sh
+    <cluster_name>/<cluster_ID>
+    ```
+    {: screen}
 
+    ```sh
+    kubectl version
+    ```
+    {: pre}
 
+    Example output
 
-
+    ```sh
+    Client Version: v1.25.3
+    Kustomize Version: v4.5.7
+    Server Version: v1.25.4+IKS
+    ```
+    {: screen}

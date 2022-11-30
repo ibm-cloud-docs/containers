@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-11-30"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -40,10 +40,21 @@ The Kubernetes Ingress version follows the format `<community_version>_<ibm_buil
 
 When automatic updates are enabled for ALBs, your ALBs are updated to the most recent build of the version that is marked as `default`. If you want to use a version other than the default, you must [disable automatic updates](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable). Typically, the latest version becomes the default version one month after the latest version is released by the Kubernetes community. Actual availability and release dates of versions are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 
+## Version 1.3.1
+{: #1_3_1}
+
+### 1.3.1_3108_iks, released 30 November 2022
+{: #1.3.1_3108_iks}
+
+Initial release of `1.3.1`
+
+
 ## Version 1.3.0
 {: #1_3_0}
 
-### 1.3.0_2907_iks (default), released 31 October 2022
+Version 1.3.0 is no longer available. For more information, see the security bulletin
+
+### 1.3.0_2907_iks, released 31 October 2022
 {: #1.3.0_2907_iks}
 
 - [CVE-2022-32221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32221){: external}
@@ -57,6 +68,11 @@ Initial release of `1.3.0`
 
 ## Version 1.2.1
 {: #1_2_1}
+
+### 1.2.1_3111_iks, released 30 November 2022
+{: #1.2.1_3111_iks}
+
+Metadata changes.
 
 ### 1.2.1_2809_iks, released 25 October 2022
 {: #1.2.1_2809_iks}
@@ -152,6 +168,8 @@ Resolves [CVE-2022-29824](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-202
 
 For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following table for a summary of changes for each build of version 1.1.2 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
+
+Version 1.1.2 is no longer available. For more information, see the security bulletin
 
 ### Version 1.1.2_2808_iks, released on 25 October 2022
 {: #1.1.2_2808_iks}
