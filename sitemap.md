@@ -219,6 +219,8 @@ subcollection: containers
 
         * Istio add-on version `1.16.0`
 
+        * Ingress ALB change log updates
+
     * [21 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov2122)
 
         * Worker node fix pack 1.22.16_1579, 1.23.14_1553, 1.24.8_1545, and 1.25.4_1523
