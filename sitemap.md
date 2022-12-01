@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-11-30"
+lastupdated: "2022-12-01"
 
 keywords: containers
 subcollection: containers
@@ -8216,7 +8216,7 @@ subcollection: containers
 
     * [Change log for 1.14.1, released 16 June 2022](/docs/containers?topic=containers-istio-changelog#1141)
 
-* [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
+* [Unsupported: Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
 
     * [Change log for 1.13.9, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1139)
 
@@ -9092,8 +9092,6 @@ subcollection: containers
 * [Requesting access to allowlisted features](/docs/containers?topic=containers-get-help#allowlist-access-request)
 
 [Running tests with the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool#debug-tool)
-
-* [Prerequisites](/docs/containers?topic=containers-debug-tool#debug-tool-prereqs)
 
 * [Enabling the Diagnostics and Debug Tool add-on](/docs/containers?topic=containers-debug-tool#debug-tool-enable)
 

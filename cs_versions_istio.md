@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-30"
+lastupdated: "2022-12-01"
 
 keywords: kubernetes, istio, add-on
 
@@ -250,7 +250,7 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.14.1](https://istio.io/latest/news/releases/1.14.x/announcing-1.14.1/.){: external}.
 
-## Version 1.13
+## Unsupported: Version 1.13
 {: #v113}
 
 Version 1.13 of the managed Istio add-on is unsupported. 
