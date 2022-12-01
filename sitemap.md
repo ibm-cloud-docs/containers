@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-11-30"
+lastupdated: "2022-12-01"
 
 keywords: containers
 subcollection: containers
@@ -213,11 +213,19 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec22)
+
+    * [1 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec0122)
+
+        * CLI version 1.0.471 change log update
+
 * [November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov22)
 
     * [30 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov3022)
 
         * Istio add-on version `1.16.0`
+
+        * Ingress ALB change log updates
 
     * [21 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov2122)
 
@@ -3177,6 +3185,8 @@ subcollection: containers
 
     * [Creating an allowlist for the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist)
 
+* [Accessing VPC clusters through the Virtual Private Endpoint Gateway](/docs/containers?topic=containers-access_cluster#vpc_vpe)
+
 [Accessing the cluster master with admission controllers and webhooks](/docs/containers?topic=containers-access_webhooks#access_webhooks)
 
 * [What are the default admission controllers in my cluster?](/docs/containers?topic=containers-access_webhooks#access_webhooks-default-controllers)
@@ -5950,6 +5960,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version 1.0.471](/docs/containers?topic=containers-cs_cli_changelog#cli-10471)
+
 * [Version 1.0.459](/docs/containers?topic=containers-cs_cli_changelog#cli-10459)
 
 * [Version 1.0.454](/docs/containers?topic=containers-cs_cli_changelog#cli-10454)
@@ -7976,13 +7988,19 @@ subcollection: containers
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
 
+* [Version 1.3.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_1)
+
+    * [1.3.1_3108_iks, released 30 November 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3108_iks)
+
 * [Version 1.3.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_0)
 
-    * [1.3.0_2907_iks (default), released 31 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2907_iks)
+    * [1.3.0_2907_iks, released 31 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2907_iks)
 
     * [1.3.0_2847_iks, released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2847_iks)
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
+
+    * [1.2.1_3111_iks, released 30 November 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_3111_iks)
 
     * [1.2.1_2809_iks, released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2809_iks)
 
@@ -8206,7 +8224,7 @@ subcollection: containers
 
     * [Change log for 1.14.1, released 16 June 2022](/docs/containers?topic=containers-istio-changelog#1141)
 
-* [Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
+* [Unsupported: Version 1.13](/docs/containers?topic=containers-istio-changelog#v113)
 
     * [Change log for 1.13.9, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1139)
 
@@ -9082,8 +9100,6 @@ subcollection: containers
 * [Requesting access to allowlisted features](/docs/containers?topic=containers-get-help#allowlist-access-request)
 
 [Running tests with the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool#debug-tool)
-
-* [Prerequisites](/docs/containers?topic=containers-debug-tool#debug-tool-prereqs)
 
 * [Enabling the Diagnostics and Debug Tool add-on](/docs/containers?topic=containers-debug-tool#debug-tool-enable)
 

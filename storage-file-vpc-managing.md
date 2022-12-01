@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-10-12"
+lastupdated: "2022-12-01"
 
 keywords: kubernetes
 
@@ -12,6 +12,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Managing {{site.data.keyword.filestorage_vpc_full_notm}}
