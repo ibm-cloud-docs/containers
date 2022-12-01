@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-12-01"
 
 keywords: kubernetes, vyatta, strongswan, ipsec, on-premises, vpn, gateway, static route, routing table
 

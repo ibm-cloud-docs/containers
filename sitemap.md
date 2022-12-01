@@ -9093,6 +9093,8 @@ subcollection: containers
 
 [Running tests with the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool#debug-tool)
 
+* [Prerequisites](/docs/containers?topic=containers-debug-tool#debug-tool-prereqs)
+
 * [Enabling the Diagnostics and Debug Tool add-on](/docs/containers?topic=containers-debug-tool#debug-tool-enable)
 
 
