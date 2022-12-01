@@ -213,6 +213,12 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec22)
+
+    * [1 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec0122)
+
+        * CLI version 1.0.471 change log update
+
 * [November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov22)
 
     * [30 November 2022](/docs/containers?topic=containers-containers-relnotes#containers-nov3022)
@@ -5954,6 +5960,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version 1.0.471](/docs/containers?topic=containers-cs_cli_changelog#cli-10471)
+
 * [Version 1.0.459](/docs/containers?topic=containers-cs_cli_changelog#cli-10459)
 
 * [Version 1.0.454](/docs/containers?topic=containers-cs_cli_changelog#cli-10454)
@@ -9092,8 +9100,6 @@ subcollection: containers
 * [Requesting access to allowlisted features](/docs/containers?topic=containers-get-help#allowlist-access-request)
 
 [Running tests with the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool#debug-tool)
-
-* [Prerequisites](/docs/containers?topic=containers-debug-tool#debug-tool-prereqs)
 
 * [Enabling the Diagnostics and Debug Tool add-on](/docs/containers?topic=containers-debug-tool#debug-tool-enable)
 
