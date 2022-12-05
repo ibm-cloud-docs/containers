@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-05"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -68,6 +68,11 @@ Initial release of `1.3.0`
 
 ## Version 1.2.1
 {: #1_2_1}
+
+### 1.2.1_3186_iks, released 5 December 2022
+{: #1.2.1_3186_iks}
+
+Updated the golang version to 1.19.3.
 
 ### 1.2.1_3111_iks, released 30 November 2022
 {: #1.2.1_3111_iks}

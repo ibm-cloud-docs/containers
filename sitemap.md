@@ -219,6 +219,8 @@ subcollection: containers
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.4` is available.
 
+        * Ingress ALB version `1.2.1_3186_iks` change log updates
+
     * [1 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec0122)
 
         * CLI version 1.0.471 change log update
@@ -8003,6 +8005,8 @@ subcollection: containers
     * [1.3.0_2847_iks, released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2847_iks)
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
+
+    * [1.2.1_3186_iks, released 5 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_3186_iks)
 
     * [1.2.1_3111_iks, released 30 November 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_3111_iks)
 
