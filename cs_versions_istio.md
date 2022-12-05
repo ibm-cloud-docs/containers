@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-05"
 
 keywords: kubernetes, istio, add-on
 
@@ -60,6 +60,7 @@ Current version
 
 Updates in this version
 :   See the Istio release notes for [Istio 1.16.0](https://istio.io/latest/news/releases/1.16.x/announcing-1.16/){: external}.
+:   The [Gateway API resource](https://istio.io/latest/news/releases/1.16.x/announcing-1.16/upgrade-notes/#gateway-api-resources) is currently unsupported on the managed Istio add-on. Work is in progress to add support for this feature. 
 :   Resolves the following CVEs:
     - [usn-5702-1](https://ubuntu.com/security/notices/USN-5702-1){: external}
     - [CVE-2022-32221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32221){: external}
@@ -74,7 +75,7 @@ Updates in this version
     - [CVE-2022-3358](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3508){: external}
     - [CVE-2022-3602](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3602){: external}
     - [CVE-2022-3786](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3786){: external}
-:   The [Gateway API resource](https://istio.io/latest/news/releases/1.16.x/announcing-1.16/upgrade-notes/#gateway-api-resources) is currently unsupported on the managed Istio add-on. Work is in progress to add support for this feature. 
+
 
 
 ## Version 1.15
