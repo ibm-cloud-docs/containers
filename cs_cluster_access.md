@@ -163,8 +163,8 @@ The Kubernetes master is accessible through the private cloud service endpoint i
       type: LoadBalancer
       ports:
       - protocol: TCP
-        port: <private_service_endpoint_port>
-        targetPort: <private_service_endpoint_port>
+        port: 8080
+        targetPort: 8080 # Optional. By default, the `targetPort` is set to match the `port` value unless specified otherwise. 
     ---
     kind: Endpoints
     apiVersion: v1
