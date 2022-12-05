@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-05"
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
 
@@ -214,7 +214,7 @@ For the latest HA service level agreement terms, refer to the [{{site.data.keywo
 
 {{site.data.keyword.cloud_notm}} is built by following many data, finance, health, insurance, privacy, security, technology, and other international compliance standards. For more information, see [{{site.data.keyword.cloud_notm}} compliance](/docs/overview?topic=overview-compliance).
 
-To view detailed system requirements, you can run a [software product compatibility report for {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/software/reports/compatibility/clarity-reports/report/html/softwareReqsForProduct?deliverableId=4440E450C2C811E6A98AAE81A233E762){: external}. Note that compliance depends on the underlying [infrastructure provider](/docs/containers?topic=containers-infrastructure_providers) for the cluster worker nodes, networking, and storage resources.
+To view detailed system requirements, you can run a [software product compatibility report for {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/software/reports/compatibility/clarity/softwareReqsForProduct.html){: external}. Note that compliance depends on the underlying [infrastructure provider](/docs/containers?topic=containers-infrastructure_providers) for the cluster worker nodes, networking, and storage resources.
 
 **Classic infrastructure**: {{site.data.keyword.containerlong_notm}} implements controls commensurate with the following security standards:
 - EU-US Privacy Shield and Swiss-US Privacy Shield Framework
