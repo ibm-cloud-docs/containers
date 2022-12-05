@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-11-22"
+lastupdated: "2022-12-05"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.20
 
@@ -13,15 +13,10 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-
-
 # Kubernetes version 1.20 change log
 {: #changelog_120}
 
-Kubernetes version 1.20 is unsupported as of 19 June 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
-{: important}
-
-View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.20. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
+Version 1.20 is unsupported. You can review the following archive of 1.20 change logs.
 {: shortdesc}
 
 ## Overview

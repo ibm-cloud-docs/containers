@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-05"
 
 keywords: containers
 subcollection: containers
@@ -214,6 +214,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec22)
+
+    * [5 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec0522)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.4` is available.
+
+        * Ingress ALB version `1.2.1_3186_iks` change log updates
 
     * [1 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec0122)
 
@@ -6172,6 +6178,8 @@ subcollection: containers
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
 
+    * [Change log for worker node fix pack 1.25.4_1524, released 05 December 2022](/docs/containers?topic=containers-changelog_125#1254_1524)
+
     * [Change log for worker node fix pack 1.25.4_1523, released 21 November 2022](/docs/containers?topic=containers-changelog_125#1254_1523)
 
     * [Change log for master fix pack 1.25.4_1522, released 16 November 2022](/docs/containers?topic=containers-changelog_125#1254_1522)
@@ -6246,6 +6254,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.8_1546, released 05 December 2022](/docs/containers?topic=containers-changelog_124#1248_1546)
 
     * [Change log for worker node fix pack 1.24.8_1545, released 21 November 2022](/docs/containers?topic=containers-changelog_124#1248_1545)
 
@@ -6347,6 +6357,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for worker node fix pack 1.23.14_1554, released 05 December 2022](/docs/containers?topic=containers-changelog_123#12314_1554)
 
     * [Change log for worker node fix pack 1.23.14_1553, released 21 November 2022](/docs/containers?topic=containers-changelog_123#12314_1553)
 
@@ -6476,6 +6488,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview_122)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.16_1580, released 05 December 2022](/docs/containers?topic=containers-changelog_122#12216_1580)
 
     * [Change log for worker node fix pack 1.22.16_1579, released 21 November 2022](/docs/containers?topic=containers-changelog_122#12216_1579)
 
@@ -8000,6 +8014,8 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
+    * [1.2.1_3186_iks, released 5 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_3186_iks)
+
     * [1.2.1_3111_iks, released 30 November 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_3111_iks)
 
     * [1.2.1_2809_iks, released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_2809_iks)
@@ -8595,6 +8611,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.4, released 5 December 2022](/docs/containers?topic=containers-cos_plugin_changelog#0224_object_plugin)
 
 * [Change log for version 2.2.3, released 15 November 2022](/docs/containers?topic=containers-cos_plugin_changelog#0223_object_plugin)
 
