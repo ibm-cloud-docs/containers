@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-06"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -264,7 +264,7 @@ The following table shows the different options that you have when you configure
 ### Forwarding logs to your own server over the `tls` protocol
 {: #enable-forwarding-tls}
 
-The following steps are general instructions. Prior to using the container in a production environment, be sure that any security requirements that you need, are met.
+The following steps are general instructions. Before you use the container in a production environment, be sure that any security requirements are met.
 {: tip}
 
 1. Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms):

@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-05"
+lastupdated: "2022-12-06"
 
-keywords: kubernetes, istio, add-on
+keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
 subcollection: containers
 
@@ -157,7 +157,7 @@ Updates in this version
     - [CVE-2021-4209](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-4209){: external}
     - [CVE-2022-2509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2509){: external}
 
-:   Adds a 1G memory limit and a 100M memory request to the `add-on-istio-operator` deployment. This addition resolves an error in which a reconcile loop increased memory usage over time. As a result of this change, your Istio operator pod might restart frequently. However, the frequent operator pod restarts do not affect Istio on the cluster and your Kubernetes deployment still matches what was specified in the IOPs. 
+:   Adds a 1G memory limit and a 100M memory request to the `add-on-istio-operator` deployment. This addition resolves an error in which a reconcile loop increased memory usage over time. Because of this change, your Istio operator pod might restart frequently. However, the frequent operator pod restarts do not affect Istio on the cluster and your Kubernetes deployment still matches what was specified in the IOPs. 
 
 ## Version 1.14
 {: #v114}
@@ -200,7 +200,7 @@ Current version
 
 Updates in this version
 :   See the Istio release notes for [Istio 1.14.4](https://istio.io/latest/news/releases/1.14.x/announcing-1.14.4/){: external}.
-:   Adds a 1G memory limit and a 100M memory request to the `add-on-istio-operator` deployment. This addition resolves an error in which a reconcile loop increased memory usage over time. As a result of this change, your Istio operator pod might restart frequently. However, the frequent operator pod restarts do not affect Istio on the cluster and your Kubernetes deployment still matches what was specified in the IOPs.
+:   Adds a 1G memory limit and a 100M memory request to the `add-on-istio-operator` deployment. This addition resolves an error in which a reconcile loop increased memory usage over time. Because of this change, your Istio operator pod might restart frequently. However, the frequent operator pod restarts do not affect Istio on the cluster and your Kubernetes deployment still matches what was specified in the IOPs.
 :   Resolves the following CVEs:
     - [usn-5550-1](https://ubuntu.com/security/notices/USN-5550-1){: external}
     - [CVE-2021-4209](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-4209){: external}
@@ -263,7 +263,7 @@ Version 1.13 of the managed Istio add-on is unsupported.
 Review the changes that are included in version 1.13.9 of the managed Istio add-on.
 {: shortdesc}
 
-This is the final update for version 1.13, which becomes unsupported on 17 Nov 2022. You can update the minor version of the addon from 1.12 to 1.13 for as long as 1.13 is supported. You can update the minor version of the addon from 1.13 to 1.14 for as long as 1.14 is supported. For more information, see [Upgrading the Istio add-on](/docs/containers?topic=containers-istio#istio_update).
+This is the final update for version 1.13, which becomes unsupported on 17 Nov 2022. You can update the minor version of the add-on from 1.12 to 1.13 for as long as 1.13 is supported. You can update the minor version of the add-on from 1.13 to 1.14 for as long as 1.14 is supported. For more information, see [Upgrading the Istio add-on](/docs/containers?topic=containers-istio#istio_update).
 {: important}
 
 Previous version
@@ -713,7 +713,7 @@ Version 1.11 of the managed Istio add-on is unsupported.
 Review the changes that are included in version 1.11.8 of the managed Istio add-on.
 {: shortdesc}
 
-This is the final update for version 1.11, which becomes unsupported on 21 April 2022. You can update the minor version of the addon from 1.10 to 1.11 for as long as 1.11 is supported. You can update the minor version of the addon from 1.11 to 1.12 for as long as 1.12 is supported. For more information, see [Upgrading the Istio add-on](/docs/containers?topic=containers-istio#istio_update).
+This is the final update for version 1.11, which becomes unsupported on 21 April 2022. You can update the minor version of the add-on from 1.10 to 1.11 for as long as 1.11 is supported. You can update the minor version of the add-on from 1.11 to 1.12 for as long as 1.12 is supported. For more information, see [Upgrading the Istio add-on](/docs/containers?topic=containers-istio#istio_update).
 {: important}
 
 Previous version

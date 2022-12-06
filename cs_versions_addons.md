@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-05"
+lastupdated: "2022-12-06"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -290,7 +290,7 @@ Resolves [CVE-2022-1271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022
 ### Version 1.1.1_1949_iks, released on 25 January 2022
 {: #1.1.1_1949_iks}
 
-Version 1.1.1_1949_iks is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto-update enabled, your ALBs automatically update to use this image. 
+Version 1.1.1_1949_iks is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. 
 
 - [CVE-2021-44716](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44716){: external}
 - [CVE-2021-44717](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44717){: external}

@@ -377,7 +377,7 @@ The following table shows the changes that are in the master fix pack 1.23.7_153
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 8c8c82b | 8c96932 | Updated `Go` to version `1.18.1` |
 | Key Management Service provider | v2.5.4 | v2.5.5 | Updated `Go` to version `1.17.10` and updated the golang dependencies. |
 | Kubernetes | v1.23.6 | v1.23.7 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.7){: external}. |
-| Kubernetes Dashboard | v2.4.0 | v2.4.0 | The **default** Kubernetes Dashboard settings found in the `kubernetes-dashboard-settings` config map in the `kube-system` namespace have been updated to set `resourceAutoRefreshTimeInterval` to `60`. This default change is only applied to new clusters. The previous default value was `5`. If your cluster has Kubernetes Dashboard performance problems, see the steps for [changing the auto-refresh time interval](/docs/containers?topic=containers-ts-kube-dashboord-oom). |
+| Kubernetes Dashboard | v2.4.0 | v2.4.0 | The **default** Kubernetes Dashboard settings found in the `kubernetes-dashboard-settings` config map in the `kube-system` namespace have been updated to set `resourceAutoRefreshTimeInterval` to `60`. This default change is only applied to new clusters. The previous default value was `5`. If your cluster has Kubernetes Dashboard performance problems, see the steps for [changing the auto refresh time interval](/docs/containers?topic=containers-ts-kube-dashboord-oom). |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1916 | 1998 | Updated `Go` to version `1.17.10` and updated dependencies. |
 {: caption="Changes since version 1.23.6_1527" caption-side="bottom"}
 

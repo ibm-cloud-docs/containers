@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-12-06"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -32,7 +32,7 @@ Your app's DNS request was sent to a CoreDNS pod that was in the process of term
 {: tsCauses}
 
 
-To help the CoreDNS pods terminate more gracefully, you can edit the `coredns` configmap in the `kube-system` namespace.
+To help the CoreDNS pods terminate without disruption, you can edit the `coredns` configmap in the `kube-system` namespace.
 {: tsResolve}
 
 In the `health` plug-in configuration of the main Corefile, add `lameduck 10s`. For more information on customizing CoreDNS, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize). The resulting customization looks like the following example.
