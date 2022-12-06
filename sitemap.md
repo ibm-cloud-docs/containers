@@ -3763,8 +3763,6 @@ subcollection: containers
 
     * [VPC worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-vpc)
 
-* [Encrypting data in classic clusters by using IBM Cloud Data Shield](/docs/containers?topic=containers-encryption#datashield)
-
 [Configuring pod security policies](/docs/containers?topic=containers-psp#psp)
 
 * [Customizing pod security policies](/docs/containers?topic=containers-psp#customize_psp)
