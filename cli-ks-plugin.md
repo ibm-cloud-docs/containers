@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-02"
+lastupdated: "2022-12-06"
 
 keywords: kubernetes
 
@@ -1689,8 +1689,6 @@ ibmcloud ks cluster master refresh --cluster CLUSTER [-q]
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
-
-
 
 ### `ibmcloud ks cluster master update`
 {: #cs_cluster_update}

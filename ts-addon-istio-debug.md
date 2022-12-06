@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-11"
+lastupdated: "2022-12-06"
 
-keywords: kubernetes, help
+keywords: kubernetes, help, debug istio, troubleshoot istio, istio add-on debug
 
 subcollection: containers
 content-type: troubleshoot
@@ -39,7 +39,7 @@ To further troubleshoot the [managed Istio add-on](/docs/containers?topic=contai
     5. On the Diagnostics and Debug Tool card, click **Dashboard**.
     6. In the debug tool dashboard, select the **istio_control_plane** or **istio_resources**  group of tests. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
     7. Click **Run**.
-    8. Check the results of each test. If any test fails, click the information icon next to the test's name in the left-hand column for information about how to resolve the issue.
+    8. Check the results of each test. If any test fails, click the information icon next to the test's name in the left column for information about how to resolve the issue.
 
 
 

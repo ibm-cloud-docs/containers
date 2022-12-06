@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-12-05"
+lastupdated: "2022-12-06"
 
 keywords: containers
 subcollection: containers
@@ -3762,8 +3762,6 @@ subcollection: containers
     * [Classic worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-classic)
 
     * [VPC worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-vpc)
-
-* [Encrypting data in classic clusters by using IBM Cloud Data Shield](/docs/containers?topic=containers-encryption#datashield)
 
 [Configuring pod security policies](/docs/containers?topic=containers-psp#psp)
 
@@ -9232,9 +9230,9 @@ subcollection: containers
 
 [Why does the Kubernetes dashboard terminate with an `OOMKilled` error?](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-kube-dashboord-oom)
 
-* [Changing the resource auto-refresh time interval from the Kubernetes dashboard](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-dashboard-auto-refresh)
+* [Changing the resource auto refresh time interval from the Kubernetes dashboard](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-dashboard-auto-refresh)
 
-* [Changing the resource auto-refresh time interval from the command line](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-dashboard-auto-refresh-cli)
+* [Changing the resource auto refresh time interval from the command line](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-dashboard-auto-refresh-cli)
 
 [Why can't I create a new admin certificate?](/docs/containers?topic=containers-ts_admin-cert#ts_admin-cert)
 

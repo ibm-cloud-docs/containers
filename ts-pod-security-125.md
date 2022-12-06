@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-06"
 
 keywords: kubernetes, 1.25, help, cluster master operations error, CAE009
 
@@ -34,7 +34,7 @@ Version update cancelled. CAE009: Cannot complete cluster master operations beca
 The Kubernetes `PodSecurityPolicy` admission controller was removed in Kubernetes 1.25 and replaced with a new Pod Security Admission controller.
 {: tsCauses}
 
-To safely upgrade a {{site.data.keyword.containerlong_notm}} cluster from version 1.24 to version 1.25, the cluster `PodSecurityPolicies` (PSP) and associated role-based access control must satisfy the following prerequisites.
+To safely upgrade {{site.data.keyword.containerlong_notm}} clusters from version 1.24 to version 1.25, the cluster `PodSecurityPolicies` (PSP) and associated role-based access control must satisfy the following prerequisites.
 
 - No PSPs beyond the 5 {{site.data.keyword.cloud_notm}} defined PSPs can exist.
 - The {{site.data.keyword.cloud_notm}} defined cluster role bindings that give all users and service accounts authority to use the {{site.data.keyword.cloud_notm}} defined privileged and restricted PSPs must exist.

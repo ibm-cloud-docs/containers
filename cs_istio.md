@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-06"
 
-keywords: kubernetes, envoy, sidecar, mesh, bookinfo
+keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
 subcollection: containers
 
@@ -185,7 +185,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
     
     `istio-ingressgateway-zone-1|2|3`
     :   Default value: `"<zone>"`
-    :   The zones where your worker nodes are deployed, which are automatically populated when you install the add-on and whenever you apply an Istio patch update. These fields apply your cluster's zones to the `istio-ingressgateway-public-1|2|3-enabled` fields. Note that if the zones that are listed in this setting are out of sync with your cluster zones, you can restart the auto-population job by running `kubectl delete pod -n ibm-system -l addon.cleanup=istio` and `kubectl delete job -n ibm-system -l addon.cleanup=istio`.
+    :   The zones where your worker nodes are deployed, which are automatically populated when you install the add-on and whenever you apply an Istio patch update. These fields apply your cluster's zones to the `istio-ingressgateway-public-1|2|3-enabled` fields. Note that if the zones that are listed in this setting are out of sync with your cluster zones, you can restart the autopopulation job by running `kubectl delete pod -n ibm-system -l addon.cleanup=istio` and `kubectl delete job -n ibm-system -l addon.cleanup=istio`.
     
     `istio-monitoring-telemetry`
     :   Default value: `"true"`

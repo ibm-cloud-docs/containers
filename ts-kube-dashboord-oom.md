@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-06"
 
 keywords: kubernetes
 
@@ -31,7 +31,7 @@ You can resolve this issue by changing the `resource auto-refresh` time interval
 {: ts_resolve}
 
 
-## Changing the resource auto-refresh time interval from the Kubernetes dashboard
+## Changing the resource auto refresh time interval from the Kubernetes dashboard
 {: #ts-dashboard-auto-refresh}
 
 
@@ -39,7 +39,7 @@ You can resolve this issue by changing the `resource auto-refresh` time interval
 1. Set `Resource auto-refresh` time interval to `60`.
 1. `Save`
 
-## Changing the resource auto-refresh time interval from the command line
+## Changing the resource auto refresh time interval from the command line
 {: #ts-dashboard-auto-refresh-cli}
 
 
