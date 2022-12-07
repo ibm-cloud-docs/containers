@@ -5323,8 +5323,6 @@ subcollection: containers
 
     * [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx)
 
-* [Updating Portworx to a specific version](/docs/containers?topic=containers-portworx#px-update-specific)
-
 * [Creating a Portworx volume](/docs/containers?topic=containers-portworx#add_portworx_storage)
 
 * [Mounting the volume to your app](/docs/containers?topic=containers-portworx#mount_pvc)
