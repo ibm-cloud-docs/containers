@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-07"
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
 
@@ -16,8 +16,8 @@ subcollection: containers
 # Migrating to a new Ubuntu version
 {: #ubuntu-migrate}
 
-Support for Ubuntu 20 is available on 6 December 2022. This information is available as a preview for the steps that are required to migrate your worker nodes after that date. 
-{: note}
+Support for Ubuntu 20 is not yet available. This information is provided as a preview for the steps required to migrate your worker nodes at a later date. 
+{: preview}
 
 To migrate your worker nodes to a new Ubuntu version, you must provision a new worker pool. Then, add worker nodes to the new pool and remove the original worker pool. 
 {: shortdesc}
