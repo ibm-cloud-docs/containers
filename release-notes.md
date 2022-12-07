@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-05"
+lastupdated: "2022-12-07"
 
 keywords: kubernetes, release notes
 
