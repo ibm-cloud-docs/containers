@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-08"
 
 keywords: kubernetes, containers
 
@@ -136,7 +136,7 @@ Follow the steps to deploy an example `websphere-liberty` to your standard clust
         - **Protocol**: `TCP`
 5. Click **Deploy**. During the deployment, the cluster downloads the `websphere-liberty` container image from Docker Hub and deploys the app in your cluster. Your app is exposed by a Layer 4, version 1.0 network load balancer (NLB) so that it can be accessed by other users internally or externally. For other ways to expose an app such as Ingress, see [Planning in-cluster and external networking for apps](/docs/containers?topic=containers-cs_network_planning).
 6. From the **Pods** menu, click your `liberty` pod and check that its status is **Running**.
-7. From the **Services** menu, click the **External Endpoint** of your `liberty` service. For example, `169.xx.xxx.xxx:80` for classic clusters or `http://&lt;hash&gt;-&lt;region&gt;.lb.appdomain.cloud/` for VPC clusters. The **Welcome to Liberty** page is displayed.
+7. From the **Services** menu, click the **External Endpoint** of your `liberty` service. For example, `169.xx.xxx.xxx:80` for classic clusters or `http://<hash>-<region>.lb.appdomain.cloud/` for VPC clusters. The **Welcome to Liberty** page is displayed.
 
 
 

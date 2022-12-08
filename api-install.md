@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-08"
 
 keywords: kubernetes, ic, ks, kubectl, api
 
@@ -388,7 +388,7 @@ The following instructions require public network access in your cluster to conn
     {: codeblock}
 
     Header
-    :    - `Authorization: bearer &lt;id_token&gt;`</td>
+    :    - `Authorization: bearer <id_token>`</td>
     
     Path
     :    - `<masterURL>`: The service endpoint of your Kubernetes master that you retrieved in the previous step.
