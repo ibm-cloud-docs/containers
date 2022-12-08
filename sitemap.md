@@ -9263,37 +9263,37 @@ subcollection: containers
 
 [Worker node states](/docs/containers?topic=containers-worker-node-state-reference#worker-node-state-reference)
 
-* [Critical](/docs/containers?topic=containers-worker-node-state-reference#worker-node-critical)
+* [Critical state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-critical)
 
-* [Deleting](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleting)
+* [Deleting state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleting)
 
-* [Deleted](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleted)
+* [Deleted state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleted)
 
-* [Deployed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deployed)
+* [Deployed state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deployed)
 
-* [Deploying](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploying)
+* [Deploying state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploying)
 
-* [Deploy_failed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploy-failed)
+* [Deploy_failed state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploy-failed)
 
-* [Normal](/docs/containers?topic=containers-worker-node-state-reference#worker-node-normal)
+* [Normal state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-normal)
 
-* [Provisioned](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioned)
+* [Provisioned state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioned)
 
-* [Provisioning](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioning)
+* [Provisioning state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioning)
 
-* [Provision pending](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-pending)
+* [Provision pending state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-pending)
 
-* [Provision_failed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-failed)
+* [Provision_failed state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-failed)
 
-* [Reloading](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading)
+* [Reloading state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading)
 
-* [Reloading_failed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading-failed)
+* [Reloading_failed state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading-failed)
 
-* [Reload_pending](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reload-pending)
+* [Reload_pending state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reload-pending)
 
-* [Unknown](/docs/containers?topic=containers-worker-node-state-reference#worker-node-unknown)
+* [Unknown state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-unknown)
 
-* [Warning](/docs/containers?topic=containers-worker-node-state-reference#worker-node-warning)
+* [Warning state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-warning)
 
 [Common issues with worker nodes](/docs/containers?topic=containers-common_worker_nodes_issues#common_worker_nodes_issues)
 

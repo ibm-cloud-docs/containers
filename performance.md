@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-08"
 
 keywords: kubernetes, kernel
 
@@ -254,7 +254,7 @@ Your cluster has a metrics service provided by the `metrics-server` deployment i
 The metrics-service containers can be "out-of-memory killed" if the memory requests are too low. They might respond very slowly or fail liveness and readiness probes, due to CPU throttling if the CPU requests are too low.
 {: note}
 
-Memory use is driven by the number of pods in the cluster. CPU use is driven by the number of requests for metrics (HPAs, `kubectl top nodes / pods`, ...) and by API discovery requests. The `metrics-server` provides a Kubernetes API, so that clients such as `kubectl` that use API discovery place some load on the `metrics-server` even if they don't use metrics.
+Memory use is driven by the number of pods in the cluster. CPU use is driven by the number of requests for metrics (HPAs, `kubectl top nodes / pods`, and so on) and by API discovery requests. The `metrics-server` provides a Kubernetes API, so that clients such as `kubectl` that use API discovery place some load on the `metrics-server` even if they don't use metrics.
 
 The following symptoms might indicate a need to adjust the `metrics-server` resources:
 
