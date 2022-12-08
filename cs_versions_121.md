@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-22"
+lastupdated: "2022-12-08"
 
 keywords: kubernetes, 1.21, versions, update, upgrade
 
@@ -55,6 +55,8 @@ This information summarizes updates that are likely to have and impact on deploy
 
 There is a known issue when updating an existing classic cluster to version 1.21. If your classic cluster has both private and public service endpoints enabled, but you don't have both VRF and Service Endpoint enabled in your account, don't update to 1.21. For more information, see [After upgrading my classic cluster to version 1.21, I'm finding connectivity issues](/docs/containers?topic=containers-ts-network-classic121).
 {: note}
+
+
 
 ### Update before master
 {: #121_before}

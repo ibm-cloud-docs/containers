@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-06"
+lastupdated: "2022-12-08"
 
 keywords: kubernetes, 1.22, versions, update, upgrade
 
@@ -50,14 +50,16 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 This information summarizes updates that are likely to have and impact on deployed apps when you update a cluster to version 1.22. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.22.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_122) for version 1.22. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}. 
 {: shortdesc}
 
+Review [Security Bulletin: IBM Cloud Kubernetes Service is affected by an endpoint resource security design flaw in Kubernetes (CVE-2021-25740)](https://www.ibm.com/support/pages/node/6574821){: external}before updating.
+{: important}
+
+
+
 ### Update before master
 {: #122_before}
 
 The following table shows the actions that you must take before you update the Kubernetes master.
 {: shortdesc}
-
-Review the [{{site.data.keyword.containerlong_notm}} is affected by an endpoint resource security design flaw in Kubernetes (CVE-2021-25740)](https://www.ibm.com/support/pages/node/6574821){: external} security bulletin before updating.
-{: important}
 
 | Type | Description|
 | --- | --- |
