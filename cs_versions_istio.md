@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-06"
+lastupdated: "2022-12-08"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -871,7 +871,7 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.11.0](https://istio.io/latest/news/releases/1.11.x/announcing-1.11/){: external} and [Istio 1.11.1](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.1/.){: external}.
 
-:   Adds a postStart to the sidecar to enable the holdApplicationUntilProxyStarts option. Since the sidecar is normally last this doesn't impact default behavior where Istio places the sidecar as the last container. If you are adding containers to your pods, verify that they get added before the sidecar or are okay waiting for the sidecar to start.
+:   Adds a postStart to the sidecar to enable the holdApplicationUntilProxyStarts option. Since the sidecar is normally last this doesn't impact default behavior where Istio places the sidecar as the last container. If you are adding containers to your pods, verify that they get added before the sidecar or can wait for the sidecar to start.
 
 :   Resolves the following CVEs
     - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}

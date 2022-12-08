@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-12-06"
+lastupdated: "2022-12-08"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -87,7 +87,7 @@ The following table shows the changes that are in the master fix pack 1.23.14_15
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.23.13-1 | v1.23.13-5 | Key rotation and updated `Go` dependencies. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 416 | 420 | Updated universal base image (UBI) to version `8.7-923` to resolve CVEs. |
 | Key Management Service provider | v2.5.10 | v2.5.11 | Updated `Go` dependencies and to `Go` version `1.19.3`. |
-| Kubernetes | v1.23.13 | v1.23.14 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.14){: external}. |
+| Kubernetes | v1.23.13 | v1.23.14 | [CVE-2022-3294](https://nvd.nist.gov/vuln/detail/CVE-2022-2294){: external} and [CVE-2022-3162](https://nvd.nist.gov/vuln/detail/CVE-2022-3162){: external}. For more information, see [{{site.data.keyword.containerlong_notm}} is affected by Kubernetes API server security vulnerabilities CVE-2022-3294 and CVE-2022-3162](https://www.ibm.com/support/pages/node/6844715){: external}. See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.14){: external}. |
 {: caption="Changes since version 1.23.13_1550" caption-side="bottom"}
 
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-11-14"
+lastupdated: "2022-12-08"
 
 keywords: kubernetes, containers
 
@@ -50,6 +50,8 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 This information summarizes updates that are likely to have and impact on deployed apps when you update a cluster to version 1.24. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.24.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_124) for version 1.24. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}. 
 {: shortdesc}
+
+
 
 ### Update before master
 {: #before_124}

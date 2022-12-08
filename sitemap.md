@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-12-07"
+lastupdated: "2022-12-08"
 
 keywords: containers
 subcollection: containers
@@ -214,6 +214,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec22)
+
+    * [8 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec0822)
+
+        * Ingress ALB version `1.3.1_3192_iks` change log updates
 
     * [5 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec0522)
 
@@ -3164,9 +3168,9 @@ subcollection: containers
 
 [Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-gen2)
 
-* [Creating a standard VPC cluster in the console](/docs/containers?topic=containers-cluster-create-vpc-gen2#clusters_vpcg2_ui)
+* [Creating VPC cluster in the console](/docs/containers?topic=containers-cluster-create-vpc-gen2#clusters_vpcg2_ui)
 
-* [Creating standard VPC clusters from the CLI](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_vpcg2_cli)
+* [Creating VPC clusters from the CLI](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_vpcg2_cli)
 
 * [Example commands to create VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_create_vpc)
 
@@ -8000,6 +8004,8 @@ subcollection: containers
 
 * [Version 1.3.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_1)
 
+    * [1.3.1_3192_iks (default), released 8 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3192_iks)
+
     * [1.3.1_3108_iks, released 30 November 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3108_iks)
 
 * [Version 1.3.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_0)
@@ -9257,37 +9263,37 @@ subcollection: containers
 
 [Worker node states](/docs/containers?topic=containers-worker-node-state-reference#worker-node-state-reference)
 
-* [Critical](/docs/containers?topic=containers-worker-node-state-reference#worker-node-critical)
+* [Critical state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-critical)
 
-* [Deleting](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleting)
+* [Deleting state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleting)
 
-* [Deleted](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleted)
+* [Deleted state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleted)
 
-* [Deployed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deployed)
+* [Deployed state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deployed)
 
-* [Deploying](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploying)
+* [Deploying state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploying)
 
-* [Deploy_failed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploy-failed)
+* [Deploy_failed state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploy-failed)
 
-* [Normal](/docs/containers?topic=containers-worker-node-state-reference#worker-node-normal)
+* [Normal state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-normal)
 
-* [Provisioned](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioned)
+* [Provisioned state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioned)
 
-* [Provisioning](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioning)
+* [Provisioning state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioning)
 
-* [Provision pending](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-pending)
+* [Provision pending state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-pending)
 
-* [Provision_failed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-failed)
+* [Provision_failed state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-failed)
 
-* [Reloading](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading)
+* [Reloading state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading)
 
-* [Reloading_failed](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading-failed)
+* [Reloading_failed state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading-failed)
 
-* [Reload_pending](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reload-pending)
+* [Reload_pending state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reload-pending)
 
-* [Unknown](/docs/containers?topic=containers-worker-node-state-reference#worker-node-unknown)
+* [Unknown state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-unknown)
 
-* [Warning](/docs/containers?topic=containers-worker-node-state-reference#worker-node-warning)
+* [Warning state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-warning)
 
 [Common issues with worker nodes](/docs/containers?topic=containers-common_worker_nodes_issues#common_worker_nodes_issues)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-06"
+lastupdated: "2022-12-08"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -539,16 +539,26 @@ By storing custom TLS certificates in {{site.data.keyword.cloudcerts_long_notm}}
 To manage non-TLS secrets, you can use the `ibmcloud ks ingress secret` commands. 
 {: shortdesc}
 
+There are 4 types of non-TLS secrets:
+- **Arbitrary secrets** hold one string value. 
+- **IAM credentials** hold an IAM API key.
+- **Username and password secrets** hold a username and password as two separate values.
+- **Key values** hold JSON values. 
+
+Learn how you can centrally manage your non-TLS secrets with [{{site.data.keyword.secrets-manager_full_notm}}](/docs/containers?topic=containers-secrets-mgr). With {{site.data.keyword.secrets-manager_short}}, you can create managed Kubernetes secrets, have your secrets automatically updated, create secret groups that control who has access to the secrets in your cluster, and more.
+{: tip} 
+
+
 ### Creating a non-TLS secret in your cluster
 {: #non-tls-create}
 
 Create a non-TLS secret by specifying the `--type Opaque` option in the `ibmcloud ks ingress secret create` command. With the `Opaque` type, you can include multiple non-certificate CRN values. If the `--type` option is not specified, TLS is applied by default. For more information and additional command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#alb-commands).
 {: shortdesc}
 
-The following example command creates a non-TLS secret. Note that the secret type must be formatted as `Opaque`.
+The following example command creates a non-TLS secret with the `Opaque` type specified. Non-TLS secrets require at least one secret [field](#non-tls-field-add). Note that how you specify the `--field` option varies [based on the type of secret you create](#non-tls-field-add). 
 
 ```sh
-ibmcloud ks ingress secret create -c cluster-test --name example-secret --namespace default --field prefix=crn:v1:staging:public:secrets-manager:eu-gb:a/8c18c7b678fb46db900ea9f5815ac2e2:d151bd36-2815-45e5-92b8-5b70dcdad684:secret:4def714d-49a3-444a-476b-279437b517f3 --type Opaque 
+ibmcloud ks ingress secret create -c cluster-test --name example-secret --namespace default --field crn:v1:bluemix:public:secrets-manager:us-south:a/1aa111aa1a11111aaa1a1111aa1aa111:111a1111-11a1 --type Opaque 
 ```
 {: pre}
 
@@ -613,24 +623,38 @@ You can also list the fields in a secret with the `ibmcloud ks ingress secret fi
 #### Adding a secret field
 {: #non-tls-field-add}
 
-Add a secret field to a non-TLS secret. For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_add).
+Add a secret field to a non-TLS secret by running the [`ibmcloud ks ingress secret field add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_add) command with the `--field` option. You can also use this option to add fields when you create a secret with the [`ibmcloud ks ingress secret create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create) command. This option is not supported for TLS secrets. 
 {: shortdesc}
 
-To pull in the secret without specifying the name, use `--field <crn>`. To specify the field name, use `--field name=<crn>`. To use the IBM Cloud {{site.data.keyword.secrets-manager_short}} secret as the prefix, use `--field prefix=<crn>`. You can specify more than one field at a time.
+There are three ways to specify the `--field` option. The one you choose depends on the secret type and how you want to name the field in the secret.
 
-The following example command adds a secret field.
+| Option | Format | Description | Supported secret types |
+| ------ | ------ | ----------- | ---------------------- |
+| Default | `--field <crn>` | The field name applied is the default field name for the secret type. | All non-TLS secret types |
+| Named | `--field <name>=<crn>` | The field name applied is the value specified for `<name>`. This option allows you to specify a custom name. | - Arbitrary /n  - IAM credentials |
+| Prefixed | `--field <prefix>=<crn>` | The field name applied is the secret name in {{site.data.keyword.secrets-manager_short}}, followed by an underscore and the default field name for the secret type. | - IAM credentials /n  - username/password /n  - key/value |
+{: caption="Options for adding fields to non-TLS secrets"}
+{: summary="The columns are read from left to right. The first column is the field type. The second column is a description of the field type. The third column is the secret types that are supported for the field type."}
+
+The default field names are `arbitrary` for arbitray secrets, `api_key` for IAM credentials, `username` or `password` for username and password secrets, and `key` for key values.
+
+Review the example command to add a field and get the field details. This example adds a default, named, and prefixed field to a set of IAM credentials. You can [view the fields](#non-tls-field-view) added to a secret by running `kubectl get secret` and viewing the `data` block of the output. 
 
 ```sh
-ibmcloud ks ingress secret field add --cluster example-cluster --name example-secret --namespace default --field crn:v1:staging:public:secrets-manager:eu-gb:a/8c18c7b678fb46db900ea9f5815ac2e2:d151bd36-2815-45e5-92b8-5b70dcdad684:secret:a9d986a0-c9d2-d6d4-768b-5d5da825516c
+ibmcloud ks ingress secret field add --cluster example-cluster --name example-iam-secret --namespace default  --field crn:v1:bluemix:public:secrets-manager:us-south:a/1aa111aa1a11111aaa1a1111aa1aa111:111a1111-11a1 --field custom_iam_name=crn:v1:bluemix:public:secrets-manager:us-south:a/1aa111aa1a11111aaa1a1111aa1aa111:111a1111-11a1 --field prefix=crn:v1:bluemix:public:secrets-manager:us-south:a/1aa111aa1a11111aaa1a1111aa1aa111:111a1111-11a1
 ```
 {: pre}
 
-You can verify that the field is added by checking the `data` block of the secret's details. 
+Example fields listed in the `data` block of the secret details. 
 
 ```sh
-kubectl get secret -n default example-secret -o yaml
+data:
+  api_key: bmZrUHR1VS1fNVpMOExsTmIxeTdQcXFTSENMc2pTUjRsNTQyTzZkZ2ZQMkk=  # Default field type using the default `api_key` field name
+  custom_iam_name: bmZrUHR1VS1fNVpMOExsTmIxeTdQcXFTSENMc2pTUjRsNTQyTzZkZ2ZQMkk=  # Named field type using the specified `custom_iam_name` field name.
+  iam_api_key: bmZrUHR1VS1fNVpMOExsTmIxeTdQcXFTSENMc2pTUjRsNTQyTzZkZ2ZQMkk= # Prefixed field type using the `iam` name in Secrets Manager followed by the `api_key` default name.
 ```
-{: pre} 
+{: pre}
+
 
 #### Updating secret fields
 {: #non-tls-field-update}

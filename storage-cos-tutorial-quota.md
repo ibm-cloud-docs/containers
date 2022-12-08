@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-08"
 
 keywords: kubernetes
 
@@ -47,7 +47,7 @@ Before beginning this tutorial make sure you have created or installed the follo
 
 - An {{site.data.keyword.cloud_notm}} account. For more information, see [Creating an account](/docs/account?topic=account-account-getting-started).
 - The CLI tools including the {{site.data.keyword.cloud_notm}} CLI, the Containers service CLI plug-in, and the Helm CLI. For more information, see [Getting started with the {{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started).
-- A {{site.data.keyword.containerlong_notm}} cluster. If you have a VPC cluster, make sure your VPC has a public gateway attached. For more information, see [Creating clusters](/docs/containers?topic=containers-clusters)
+- An {{site.data.keyword.containerlong_notm}} cluster. If you have a VPC cluster, make sure your VPC has a public gateway attached. For more information, see [Creating clusters](/docs/containers?topic=containers-clusters)
 - An {{site.data.keyword.cos_short}} instance in the same region as your cluster. For more information, see [Provision an instance of {{site.data.keyword.cos_short}}](/docs/cloud-object-storage?topic=cloud-object-storage-provision).
 
 
