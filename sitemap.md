@@ -215,6 +215,10 @@ subcollection: containers
 
 * [December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec22)
 
+    * [9 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec0922)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.5` is available.
+
     * [8 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec0822)
 
         * Ingress ALB version `1.3.1_3192_iks` change log updates
@@ -8613,6 +8617,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.5, released 9 December 2022](/docs/containers?topic=containers-cos_plugin_changelog#0225_object_plugin)
 
 * [Change log for version 2.2.4, released 5 December 2022](/docs/containers?topic=containers-cos_plugin_changelog#0224_object_plugin)
 
