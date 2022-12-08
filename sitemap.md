@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-12-07"
+lastupdated: "2022-12-08"
 
 keywords: containers
 subcollection: containers
@@ -214,6 +214,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec22)
+
+    * [8 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec0822)
+
+        * Ingress ALB version `1.3.1_3192_iks` change log updates
 
     * [5 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec0522)
 
@@ -7999,6 +8003,8 @@ subcollection: containers
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
 
 * [Version 1.3.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_1)
+
+    * [1.3.1_3192_iks (default), released 8 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3192_iks)
 
     * [1.3.1_3108_iks, released 30 November 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3108_iks)
 

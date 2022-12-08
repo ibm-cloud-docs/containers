@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-06"
+lastupdated: "2022-12-08"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -42,6 +42,11 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 
 ## Version 1.3.1
 {: #1_3_1}
+
+### 1.3.1_3192_iks (default), released 8 December 2022
+{: #1.3.1_3192_iks}
+
+Updated the golang version to 1.19.3.
 
 ### 1.3.1_3108_iks, released 30 November 2022
 {: #1.3.1_3108_iks}

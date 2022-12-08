@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-07"
+lastupdated: "2022-12-08"
 
 keywords: kubernetes, release notes
 
@@ -27,6 +27,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## December 2022
 {: #containers-dec22}
+
+
+
+### 8 December 2022
+{: #containers-dec0822}
+{: release-note}
+
+Ingress ALB version `1.3.1_3192_iks` change log updates
+:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
 
 ### 5 December 2022
 {: #containers-dec0522}
