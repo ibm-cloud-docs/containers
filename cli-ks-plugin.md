@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-08"
+lastupdated: "2022-12-09"
 
 keywords: kubernetes
 
@@ -36,7 +36,7 @@ Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registrylong_no
 ## {{site.data.keyword.containerlong_notm}} commands
 {: #cli_commands}
 
-The tables below list the `ibmcloud ks` command groups. For a complete list of all `ibmcloud ks` commands as they are structured in the CLI, see the [{{site.data.keyword.containerlong_notm}} CLI map](/docs/containers?topic=containers-icks_map).
+The following tables list the `ibmcloud ks` command groups. For a complete list of all `ibmcloud ks` commands as they are structured in the CLI, see the [{{site.data.keyword.containerlong_notm}} CLI map](/docs/containers?topic=containers-icks_map).
 {: shortdesc}
 
 | Command group | Description |

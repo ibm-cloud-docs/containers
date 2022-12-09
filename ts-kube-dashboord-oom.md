@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-06"
+lastupdated: "2022-12-09"
 
 keywords: kubernetes
 
@@ -35,7 +35,7 @@ You can resolve this issue by changing the `resource auto-refresh` time interval
 {: #ts-dashboard-auto-refresh}
 
 
-1. Select *Settings* in the left side navigation pane.
+1. Select *Settings* in the navigation pane.
 1. Set `Resource auto-refresh` time interval to `60`.
 1. `Save`
 

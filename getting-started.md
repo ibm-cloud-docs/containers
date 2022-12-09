@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-08"
+lastupdated: "2022-12-09"
 
 keywords: kubernetes, containers
 
@@ -151,7 +151,7 @@ Go through a tutorial to install the CLI, create a private image registry, set u
 
 - [VPC clusters tutorial](/docs/containers?topic=containers-vpc_ks_tutorial)
 
-Set up the right environment for your workloads.
+Set up the correct environment for your workloads.
 - Plan your [cluster network setup](/docs/containers?topic=containers-plan_clusters), develop a [highly available architecture](/docs/containers?topic=containers-ha_clusters), and [set up autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc) for your cluster.
 - Create [image pull secrets](/docs/containers?topic=containers-registry#other) to [deploy apps](/docs/containers?topic=containers-app) to Kubernetes namespaces other than `default`.
 - Decide what type of [file, block, object, database, or software-defined storage](/docs/containers?topic=containers-storage_planning) you want to integrate with your apps.

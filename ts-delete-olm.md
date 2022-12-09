@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-12-06"
+lastupdated: "2022-12-09"
 
 keywords: kubernetes, OLM, operator lifecycle manager, delete olm, delete operator lifecycle manager components
 
@@ -72,7 +72,7 @@ If you want to continue using OLM components in your cluster, or you want to ins
         {: pre}
 
 
-3. If you determined that OLM is not used by the Istio add-on or any additional operators, run each command below individually to delete OLM resources.
+3. If you determined that OLM is not used by the Istio add-on or any additional operators, run each command individually to delete OLM resources.
     ```sh
     kubectl delete clusterrole aggregate-olm-edit 
     kubectl delete clusterrole aggregate-olm-view

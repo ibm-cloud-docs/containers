@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-09"
 
 keywords: kubernetes
 
@@ -103,10 +103,10 @@ The type of load balancer that is automatically created varies depending on the 
 ### Storage
 {: #persistent_storage}
 
-When you provision storage, you can choose the storage type and storage class that is right for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. Some storage solutions, such as file and block storage offer hourly and monthly rates that you can choose from.
+When you provision storage, you can choose the storage type and storage class that is correct for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. Some storage solutions, such as file and block storage offer hourly and monthly rates that you can choose from.
 {: shortdesc}
 
-To choose the right storage solution, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning). For more information, see:
+To choose the correct storage solution, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning). For more information, see:
 * [NFS file storage pricing](https://www.ibm.com/cloud/file-storage/pricing){: external}
 * [Block storage pricing](https://www.ibm.com/cloud/block-storage/pricing){: external}
 * [Object storage plans](https://cloud.ibm.com/objectstorage/create#pricing){: external}
