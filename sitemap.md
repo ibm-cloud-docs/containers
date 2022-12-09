@@ -5289,7 +5289,7 @@ subcollection: containers
 
     * [How does Portworx work?](/docs/containers?topic=containers-portworx#about-px-work)
 
-    * [What worker node flavor in {{site.data.keyword.containerlong_notm}} is the right one for Portworx?](/docs/containers?topic=containers-portworx#about-px-flavors)
+    * [What worker node flavor in {{site.data.keyword.containerlong_notm}} is the correct one for Portworx?](/docs/containers?topic=containers-portworx#about-px-flavors)
 
     * [What if I want to run Portworx in a classic cluster with non-SDS worker nodes?](/docs/containers?topic=containers-portworx#about-px-non-sds)
 

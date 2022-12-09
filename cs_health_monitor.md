@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-09"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -232,7 +232,7 @@ To set up monitoring for these conditions, configure alerts based on the followi
 | Number of pods per node reaching threshold of 110. | Count by `(kube_cluster_name,kube_node_name)(kube_pod_container_info)` | Greater than or equal to 100. Note that this query is a `promQL` query. |
 | Workloads that are in an unknown state. | `(kube_workload_status_unavailable)` | Greater than or equal to one. Note that this query is a `promQL` query. |
 {: caption="App level metrics"}
-{: summary="The table shows the app metrics that you can configure. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
+
 
 ### Worker node alerts
 {: #worker-node-level-alerts}
@@ -364,10 +364,10 @@ The following metrics are available for {{site.data.keyword.block_storage_is_sho
 1. Create a monitoring instance for {{site.data.keyword.block_storage_is_short}} alerts. See instructions in [Forwarding cluster and app metrics to IBM Cloud Monitoring](/docs/containers?topic=containers-health-monitor#monitoring).
 
 2. Install the `syslog` agent.
-    1. [In the {{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com){: external}, select **Observability** from the left menu.
+    1. [In the {{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com){: external}, select **Observability** from the menu.
     2. Select **Monitoring**.
     3. In the row of the instance for {{site.data.keyword.block_storage_is_short}} alerts, select **Open dashboard**.
-    4. From the left menu, select **Get started**.
+    4. From the menu, select **Get started**.
     5. Under the **Install the Agent** section, select **Add Sources**.
     6. Follow the instructions to install the agent.
     7. Make sure the agent is running by using the `kubectl get pods -n CLUSTER_NAME | grep syslog` command.

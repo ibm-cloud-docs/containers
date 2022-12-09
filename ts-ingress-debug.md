@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-09"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -65,7 +65,7 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
 7. Click **Run**.
 
 8. Check the results of each test.
-    * If any test fails, click the information icon next to the test's name in the left column for information about how to resolve the issue.
+    * If any test fails, click the information icon next to the test's name for information about how to resolve the issue.
     * You can also use the results of tests that only gather information while you debug your Ingress service in the following sections.
 
 ## Step 3: Check for error messages in your Ingress deployment and the ALB pod logs

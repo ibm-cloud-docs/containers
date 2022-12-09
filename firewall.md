@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-09"
 
 keywords: kubernetes, allowlist, firewall, vyatta, ips
 
@@ -411,7 +411,6 @@ To create persistent volume claims in a cluster where worker nodes are connected
 | File storage | Kubernetes version `1.13.4_1512`, `1.12.6_1544`, `1.11.8_1550`, `1.10.13_1551`, or later
 | Block storage | {{site.data.keyword.cloud_notm}} Block Storage plug-in version 1.3.0 or later |
 | Object storage | {{site.data.keyword.cos_full_notm}} plug-in version 1.0.3 or later, {{site.data.keyword.cos_full_notm}} service set up with HMAC authentication |
-{: summary="The columns are read from left to right. The first column has the parameter of the type of storage. The second column describes the required version for the type of storage."}
 {: caption="Table 5. Overview of required Kubernetes or {{site.data.keyword.cloud_notm}} storage plug-in versions for private clusters" caption-side="bottom"}
 
 If you must use a Kubernetes version or {{site.data.keyword.cloud_notm}} storage plug-in version that does not support network communication over the private network, or if you want to use {{site.data.keyword.cos_full_notm}} without HMAC authentication, allow egress access through your allowlist to IBM Cloud infrastructure and {{site.data.keyword.cloud_notm}} Identity and Access Management:

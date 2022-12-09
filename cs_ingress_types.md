@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-08"
+lastupdated: "2022-12-09"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -634,9 +634,9 @@ There are three ways to specify the `--field` option. The one you choose depends
 | Named | `--field <name>=<crn>` | The field name applied is the value specified for `<name>`. This option allows you to specify a custom name. | - Arbitrary /n  - IAM credentials |
 | Prefixed | `--field <prefix>=<crn>` | The field name applied is the secret name in {{site.data.keyword.secrets-manager_short}}, followed by an underscore and the default field name for the secret type. | - IAM credentials /n  - username/password /n  - key/value |
 {: caption="Options for adding fields to non-TLS secrets"}
-{: summary="The columns are read from left to right. The first column is the field type. The second column is a description of the field type. The third column is the secret types that are supported for the field type."}
 
-The default field names are `arbitrary` for arbitray secrets, `api_key` for IAM credentials, `username` or `password` for username and password secrets, and `key` for key values.
+
+The default field names are `arbitrary` for arbitrary secrets, `api_key` for IAM credentials, `username` or `password` for username and password secrets, and `key` for key values.
 
 Review the example command to add a field and get the field details. This example adds a default, named, and prefixed field to a set of IAM credentials. You can [view the fields](#non-tls-field-view) added to a secret by running `kubectl get secret` and viewing the `data` block of the output. 
 
