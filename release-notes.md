@@ -29,6 +29,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## December 2022
 {: #containers-dec22}
 
+### 9 December 2022
+{: #containers-dec0922}
+{: release-note}
+
+{{site.data.keyword.cos_full_notm}} plug-in version `2.2.5` is available.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
 
 
 ### 8 December 2022
@@ -37,6 +44,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 Ingress ALB version `1.3.1_3192_iks` change log updates
 :   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
 
 
 

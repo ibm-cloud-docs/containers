@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-12-08"
+lastupdated: "2022-12-09"
 
 keywords: containers
 subcollection: containers
@@ -214,6 +214,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec22)
+
+    * [9 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec0922)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.5` is available.
 
     * [8 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec0822)
 
@@ -3168,7 +3172,7 @@ subcollection: containers
 
 [Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-gen2)
 
-* [Creating VPC cluster in the console](/docs/containers?topic=containers-cluster-create-vpc-gen2#clusters_vpcg2_ui)
+* [Creating a VPC cluster in the console](/docs/containers?topic=containers-cluster-create-vpc-gen2#clusters_vpcg2_ui)
 
 * [Creating VPC clusters from the CLI](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_vpcg2_cli)
 
@@ -8613,6 +8617,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.5, released 9 December 2022](/docs/containers?topic=containers-cos_plugin_changelog#0225_object_plugin)
 
 * [Change log for version 2.2.4, released 5 December 2022](/docs/containers?topic=containers-cos_plugin_changelog#0224_object_plugin)
 
