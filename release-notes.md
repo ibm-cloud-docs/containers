@@ -35,6 +35,10 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-dec1222}
 {: release-note}
 
+
+
+
+
 Ingress ALB version `1.4.0_3212_iks` change log updates
 :   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
