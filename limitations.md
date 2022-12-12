@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-09"
+lastupdated: "2022-12-12"
 
 keywords: kubernetes, infrastructure, rbac, policy, http2, quota, app protocol, application protocol
 

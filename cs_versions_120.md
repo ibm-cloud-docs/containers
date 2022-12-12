@@ -71,6 +71,6 @@ The following table shows the actions that you must take after you update the Ku
 
 | Type | Description|
 | --- | --- |
-| **Unsupported:** `kubectl autoscale --generator` removed | The deprecated `--generator` option is removed from the `kubectl autoscale` command. If your scripts rely on this flag, update them. |
+| **Unsupported:** `kubectl autoscale --generator` removed | The deprecated `--generator` option is removed from the `kubectl autoscale` command. If your scripts rely on this option, update them. |
 {: caption="Changes to make after you update the master to Kubernetes 1.20" caption-side="bottom"}
 

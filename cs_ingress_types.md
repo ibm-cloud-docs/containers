@@ -807,7 +807,7 @@ Choose the image type and image version for your ALBs, and keep the image versio
 * Any ALBs with the unsupported image continue to run, but are not supported by IBM.
 
 You can manage the versions of your ALBs in the following ways:
-* When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` flag.
+* When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` option.
 * To specify a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command.
 * If you omit the `--version` option when you enable or update an existing ALB, the ALB runs the default version of the same image that the ALB previously ran: either the Kubernetes Ingress image or the {{site.data.keyword.containerlong_notm}} Ingress image.
 

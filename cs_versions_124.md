@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-12-08"
+lastupdated: "2022-12-12"
 
 keywords: kubernetes, containers
 
@@ -104,8 +104,8 @@ The following table shows the actions that you must take after you update the Ku
 
 | Type | Description|
 | --- | --- |
-| **Unsupported:** `kubectl expose` removes `--container-port` and `--generator` flags | The `kubectl expose` command no longer supports the deprecated `--container-port` and `--generator` flags. If your scripts rely on these flags, update them. |
-| **Unsupported:** `kubectl run` removes several flags | The `kubectl run` command no longer supports the deprecated `--serviceaccount`, `--hostport`, `--requests` and `--limits` flags. If your scripts rely on these flags, update them. |
+| **Unsupported:** `kubectl expose` removes `--container-port` and `--generator` options | The `kubectl expose` command no longer supports the deprecated `--container-port` and `--generator` options. If your scripts rely on these options, update them. |
+| **Unsupported:** `kubectl run` removes several options | The `kubectl run` command no longer supports the deprecated `--serviceaccount`, `--hostport`, `--requests` and `--limits` options. If your scripts rely on these options, update them. |
 {: caption="Changes to make after you update the master to Kubernetes 1.24" caption-side="bottom"}
 
 

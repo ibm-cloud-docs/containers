@@ -406,7 +406,7 @@ To see how Fluentd is used, see [Understanding log forwarding to an external ser
 
 Before you begin, ensure that you reviewed the [considerations and prerequisites](#prereqs-apiserver-logs). Note that [log filters](/docs/containers?topic=containers-health#filter-logs) are not supported.
 
-1. Set up the webhook. If you don't provide any information in the flags, a default configuration is used.
+1. Set up the webhook. If you don't provide any information in the options, a default configuration is used.
 
     ```sh
     ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server <server_URL_or_IP> --ca-cert <CA_cert_path> --client-cert <client_cert_path> --client-key <client_key_path>
