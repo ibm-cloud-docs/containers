@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-08"
+lastupdated: "2022-12-12"
 
 keywords: kubernetes, 1.21, versions, update, upgrade
 
@@ -83,8 +83,8 @@ The following table shows the actions that you must take after you update the Ku
 | Type | Description|
 | --- | --- |
 | **Unsupported:** `kubect alpha debug` removed | The `kubectl alpha debug` command is removed. Instead, use the `kubectl debug` command. |
-| **Unsupported:** `kubectl run` removed deprecated flags | The `kubectl run` command removes the following deprecated flags: `--generator`, `--replicas`, `--service-generator`, `--service-overrides` and `--schedule`. If your scripts use `kubectl run` to create resources other than pods, such as deployments, or if your scripts use the removed flags, update the scripts to use the `kubectl create` or `kubectl apply` commands instead. |
-| `kubectl get` removes `managedFields` by default  | Now, the `kubectl get` command omits `managedFields` in the `-o json` or `-o yaml` output by default. If you use `kubectl get` to retrieve `managedFields` by using `-o json` or `-o yaml` output, update your `kubectl get` calls to include the `--show-managed-fields=true` flag.  |
+| **Unsupported:** `kubectl run` removed deprecated options | The `kubectl run` command removes the following deprecated flags: `--generator`, `--replicas`, `--service-generator`, `--service-overrides` and `--schedule`. If your scripts use `kubectl run` to create resources other than pods, such as deployments, or if your scripts use the removed options, update the scripts to use the `kubectl create` or `kubectl apply` commands instead. |
+| `kubectl get` removes `managedFields` by default  | Now, the `kubectl get` command omits `managedFields` in the `-o json` or `-o yaml` output by default. If you use `kubectl get` to retrieve `managedFields` by using `-o json` or `-o yaml` output, update your `kubectl get` calls to include the `--show-managed-fields=true` option.  |
 | **Unsupported**: Select `kubelet` metrics | The following cAdvisor `kubelet` metrics are removed: `/stats/container`, `/stats/<pod_name>/<container_name>`, and `/stats/<namespace>/<pod_name>/<pod_uid>/<container_name>`. Stop using these metrics. |
 | Ingress resource API version | The support for `networking.k8s.io/v1beta1` and `extensions/v1beta1` API versions in Ingress resources are deprecated and are planned for removal in Kubernetes version 1.22. The `networking.k8s.io/v1` API version is supported instead. Although not required in version 1.21, you can begin converting your existing resources in preparation for the removal of the API versions before version 1.22. |
 {: caption="Changes to make after you update the master to Kubernetes 1.21" caption-side="bottom"}

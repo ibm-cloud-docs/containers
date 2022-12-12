@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-08"
+lastupdated: "2022-12-12"
 
 keywords: kubernetes, kernel
 
@@ -552,7 +552,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         ```
         {: pre}
 
-    2. Reboot the worker nodes. You can reboot multiple worker nodes by including multiple `-w` flags, but make sure to leave enough worker nodes running at the same time for your apps to avoid an outage.
+    2. Reboot the worker nodes. You can reboot multiple worker nodes by including multiple `-w` options, but make sure to leave enough worker nodes running at the same time for your apps to avoid an outage.
         ```sh
         ibmcloud ks worker reboot -c <cluster_name_or_ID> -w <worker1_ID> -w <worker2_ID>
         ```

@@ -198,7 +198,7 @@ Create your single zone or multizone VPC cluster by using the {{site.data.keywor
         
 
     `--kms-account-id <KMS_acount_ID>`
-    :   Optional: Must be included if the `--kms-instance-id` and `--crk` flags are provided and the KMS instance resides in an account different from the cluster's account, otherwise it can be omitted.
+    :   Optional: Must be included if the `--kms-instance-id` and `--crk` options are provided and the KMS instance resides in an account different from the cluster's account, otherwise it can be omitted.
         Setting up encryption by using a KMS from a different account is available for allowlisted accounts only. To get added to the allowlist, [open a case](https://cloud.ibm.com/unifiedsupport/cases/form){: external} with support.
         {: note}
 

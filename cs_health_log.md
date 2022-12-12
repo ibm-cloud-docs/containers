@@ -216,7 +216,7 @@ Yes. For example, if you have a particularly chatty pod, you might want to preve
 ### Forwarding cluster and app logs
 {: #enable-forwarding}
 
-Create a configuration for cluster and app logging. You can differentiate between the different logging options by using flags.
+Create a configuration for cluster and app logging. You can differentiate between the different logging options by using options.
 {: shortdesc}
 
 The following table shows the different options that you have when you configure logging and their descriptions.
@@ -280,7 +280,7 @@ The following steps are general instructions. Before you use the container in a 
 
 4. Save your certificate authority certificate to a file named `ca-cert`. It must be that exact name.
 
-5. Create a secret in the `kube-system` namespace for the `ca-cert` file. When you create your logging configuration, use the secret name for the `--ca-cert` flag.
+5. Create a secret in the `kube-system` namespace for the `ca-cert` file. When you create your logging configuration, use the secret name for the `--ca-cert` option.
     ```sh
     kubectl -n kube-system create secret generic --from-file=ca-cert
     ```
@@ -295,7 +295,7 @@ The following steps are general instructions. Before you use the container in a 
 ### Filtering logs that are forwarded
 {: #filter-logs}
 
-You can choose which logs to forward to your external server by filtering out specific logs for a period of time. You can differentiate between the different filtering options by using flags.
+You can choose which logs to forward to your external server by filtering out specific logs for a period of time. You can differentiate between the different filtering options by using options.
 {: shortdesc}
 
 | Parameter | Description |

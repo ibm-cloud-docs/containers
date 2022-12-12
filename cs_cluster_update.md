@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-12"
 
 keywords: kubernetes, upgrade, version
 
@@ -334,7 +334,7 @@ To update {{site.data.keyword.satelliteshort}} worker nodes, see [Updating hosts
 {: tip}
 
 * **Patch**: A worker node patch update includes security fixes. You can update the VPC worker node to the latest patch by using the `ibmcloud ks worker replace` command.
-* **Major.minor**: A `major.minor` update moves up the Kubernetes version of the worker node to the same version as the master. This type of update often includes changes to the Kubernetes API or other behaviors that you must prepare your cluster for. Remember that your worker nodes can be only up to two versions behind the master version (`n-2`). You can update the VPC worker node to the same patch by using the `ibmcloud ks worker replace` command with the `--update` flag.
+* **Major.minor**: A `major.minor` update moves up the Kubernetes version of the worker node to the same version as the master. This type of update often includes changes to the Kubernetes API or other behaviors that you must prepare your cluster for. Remember that your worker nodes can be only up to two versions behind the master version (`n-2`). You can update the VPC worker node to the same patch by using the `ibmcloud ks worker replace` command with the `--update` option.
 
 For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 
@@ -380,13 +380,13 @@ Before you update your VPC worker nodes, review the prerequisite steps.
     {: pre}
 
 4. Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
-    *  To update the worker node to the same `major.minor` version as the master, such as from 1.23 to 1.24, include the `--update` flag.
+    *  To update the worker node to the same `major.minor` version as the master, such as from 1.23 to 1.24, include the `--update` option.
         ```sh
         ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID> --update
         ```
         {: pre}
 
-    *  To update the worker node to the latest patch version at the same `major.minor` version, such as from 1.23.8_1530 to 1.23.9_1533, don't include the `--update` flag.
+    *  To update the worker node to the latest patch version at the same `major.minor` version, such as from 1.23.8_1530 to 1.23.9_1533, don't include the `--update` option.
         ```sh
         ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID>
         ```
