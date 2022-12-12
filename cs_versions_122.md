@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-09"
+lastupdated: "2022-12-12"
 
 keywords: kubernetes, 1.22, versions, update, upgrade
 
@@ -88,8 +88,8 @@ The following table shows the actions that you must take after you update the Ku
 | Type | Description|
 | --- | --- |
 | Endpoint Security Mitigation | Kubernetes cluster role `system:aggregate-to-edit` has removed `endpoints` permissions as a security mitigation for [CVE-2021-25740](https://nvd.nist.gov/vuln/detail/CVE-2021-25740){: external}. If your cluster does not require any customizations to the `system:aggregate-to-edit` cluster role, besides removing the `endpoints` permission, allow Kubernetes to reconcile the permissions by running the `kubectl annotate --overwrite clusterrole/system:aggregate-to-edit rbac.authorization.kubernetes.io/autoupdate=true` command. Subsequent cluster master operations (for example, `ibmcloud ks cluster master refresh`) will then ensure the permissions are reconciled by Kubernetes. |
-| **Unsupported**:  `kubectl autoscale` removes `--generator` flag | The `kubectl austoscale` no longer uses the deprecated `--generator` flag. If your scripts rely on this flag, update them. |
-| **Unsupported**: `kubectl create deployment` removes `--generator` flag | The `kubectl create deployment` command no longer uses the deprecated `--generator` flag. If your scripts rely on this flag, update them. |
+| **Unsupported**:  `kubectl autoscale` removes `--generator` option | The `kubectl austoscale` no longer uses the deprecated `--generator` flag. If your scripts rely on this flag, update them. |
+| **Unsupported**: `kubectl create deployment` removes `--generator` option | The `kubectl create deployment` command no longer uses the deprecated `--generator` flag. If your scripts rely on this flag, update them. |
 | `system:aggregate-to-edit` write access for Endpoints API | The `system:aggregate-to-edit` role no longer includes write access to the Endpoints API. Existing clusters that are upgraded to Kubernetes 1.22 are not impacted. However, in new Kubernetes 1.22 clusters, the Editor and Administrator roles don't have write access to the Endpoints API. For more information on retaining this access in newly created 1.22 clusters, see [Write access for Endpoints](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#write-access-for-endpoints){: external}. This update is a mitigation for [CVE-2021-25740](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-25740){: external}. |
 {: caption="Changes to make after you update the master to Kubernetes 1.22" caption-side="bottom"}
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-12-09"
+lastupdated: "2022-12-12"
 
 keywords: kubernetes, containers, 125, version 125, 125 update actions
 
@@ -93,7 +93,7 @@ The following table shows the actions that you must take after you update the Ku
 
 | Type | Description|
 | --- | --- |
-| `kubectl diff` ignores managed fields by default | The `kubectl diff` command was changed to ignore managed fields by default. A new `--show-managed-fields` flag has been added to allow you to include managed fields in the diff. If your scripts rely on the previous behavior, update them. |
+| `kubectl diff` ignores managed fields by default | The `kubectl diff` command was changed to ignore managed fields by default. A new `--show-managed-fields` option has been added to allow you to include managed fields in the diff. If your scripts rely on the previous behavior, update them. |
 {: caption="Changes to make after you update the master to Kubernetes 1.25"}
 
 

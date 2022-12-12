@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-11-29"
+lastupdated: "2022-12-12"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -591,7 +591,7 @@ ALB OAuth Proxy add-on version 1.0.0 uses configuration snippet annotations (`ng
     If you use the [{{site.data.keyword.appid_full_notm}} logout function](/docs/appid?topic=appid-cd-sso#cd-sso-log-out), you must append `/sign_out` to your domain in the format `https://<hostname>/oauth2-<App_ID_service_instance_name>/sign_out` and include this URL in the redirect URLs list. If you want to use a custom logout page, you must set `whitelist_domains` in the ConfigMap for OAuth2-Proxy. Call the `https://<hostname>/oauth2-<App_ID_service_instance_name>/sign_out` endpoint with the `rd` query parameter or set the `X-Auth-Request-Redirect` header with your custom logout page. For more details, see [Sign out](https://oauth2-proxy.github.io/oauth2-proxy/docs/features/endpoints/#sign-out){: external}.
     {: note}
 
-3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials. Be sure to bind the service instance to the same namespace that your Ingress resources exist in. Note that all letters in the service instance name must specified as lowercase.
+3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster. The command creates a service key for the service instance, or you can include the `--key` option to use existing service key credentials. Be sure to bind the service instance to the same namespace that your Ingress resources exist in. Note that all letters in the service instance name must specified as lowercase.
     ```sh
     ibmcloud ks cluster service bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <App_ID_service_instance_name> [--key <service_instance_key>]
     ```

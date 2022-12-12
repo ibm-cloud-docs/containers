@@ -157,7 +157,7 @@ ibmcloud ks cluster addon disable istio --cluster CLUSTER [-f]
 :    Required: The name or ID of the cluster.
 
 `-f`
-:    Optional: This Istio add-on is a dependency for the `istio-extras` and `istio-sample-bookinfo` managed add-ons. Include this flag to also disable those add-ons.
+:    Optional: This Istio add-on is a dependency for the `istio-extras` and `istio-sample-bookinfo` managed add-ons. Include this option to also disable those add-ons.
 
 
 #### `ibmcloud ks cluster addon disable istio-extras`
@@ -182,7 +182,7 @@ ibmcloud ks cluster addon disable istio-extras --cluster CLUSTER [-f]
 :    Required: The name or ID of the cluster.
 
 `-f`
-:    Optional: This Istio add-on is a dependency for the `istio-sample-bookinfo` managed add-on. Include this flag to also disable that add-on.
+:    Optional: This Istio add-on is a dependency for the `istio-sample-bookinfo` managed add-on. Include this option to also disable that add-on.
 
 
 #### `ibmcloud ks cluster addon disable istio-sample-bookinfo`
@@ -838,7 +838,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 :    Optional: The Kubernetes version for the cluster master node. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run `ibmcloud ks versions`.
 
 `--no-subnet`
-:    By default, a public and a private portable subnet are created on the VLAN associated with the cluster. Include the `--no-subnet` flag to avoid creating subnets with the cluster. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster later.
+:    By default, a public and a private portable subnet are created on the VLAN associated with the cluster. Include the `--no-subnet` option to avoid creating subnets with the cluster. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster later.
 
 `--sm-group GROUP`
 :    The secret group ID of the {{site.data.keyword.secrets-manager_short}} instance where your secrets are persisted. To get a secret group ID, see the [{{site.data.keyword.secrets-manager_short}} CLI reference](/docs/secrets-manager?topic=secrets-manager-cli-plugin-secrets-manager-cli#secrets-manager-cli-secret-groups-command).
@@ -855,7 +855,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 :    To find out whether you already have a public VLAN for a specific zone or to find the name of an existing public VLAN, run `ibmcloud ks vlan ls --zone ZONE`. 
 
 `--private-only`
-:    Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and don't include the `--public-vlan` flag.
+:    Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` option and don't include the `--public-vlan` flag.
      If worker nodes are set up with a private VLAN only, you must enable the private cloud service endpoint or configure a gateway appliance. For more information, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_basics#workeruser-master).
      {: note}
 
@@ -868,7 +868,7 @@ Gateway-enabled clusters are deprecated and become unsupported soon. If you have
 
 
 `--private-service-endpoint`
-:    **Standard clusters in [accounts that are enabled with VRF and service endpoints](/docs/account?topic=account-vrf-service-endpoint)**: Enable the [private cloud service endpoint](/docs/containers?topic=containers-plan_basics#workeruser-master) so that your Kubernetes master and the worker nodes communicate over the private VLAN. In addition, you can choose to enable the public cloud service endpoint by using the `--public-service-endpoint` flag to access your cluster over the internet. If you enable the private cloud service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private cloud service endpoint, you can't later disable it.
+:    **Standard clusters in [accounts that are enabled with VRF and service endpoints](/docs/account?topic=account-vrf-service-endpoint)**: Enable the [private cloud service endpoint](/docs/containers?topic=containers-plan_basics#workeruser-master) so that your Kubernetes master and the worker nodes communicate over the private VLAN. In addition, you can choose to enable the public cloud service endpoint by using the `--public-service-endpoint` option to access your cluster over the internet. If you enable the private cloud service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private cloud service endpoint, you can't later disable it.
      After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 
 `--public-service-endpoint`
@@ -994,7 +994,7 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
       {: important}
 
 `--disable-public-service-endpoint`
-:    To ensure that worker nodes and authorized cluster users communicate with the master through the private cloud service endpoint only, include this flag to create the cluster without the public cloud service endpoint.
+:    To ensure that worker nodes and authorized cluster users communicate with the master through the private cloud service endpoint only, include this option to create the cluster without the public cloud service endpoint.
 
 `--pod-subnet SUBNET`
 :    In the first cluster that you create in a VPC, the default pod subnet is `172.17.0.0/18`. In the second cluster that you create in that VPC, the default pod subnet is `172.17.64.0/18`. In each subsequent cluster, the pod subnet range is the next available, non-overlapping `/18` subnet. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.BluDirectLink}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your pods.
@@ -1179,7 +1179,7 @@ Supported infrastructure providers
 :    Optional: Filter output based on infrastructure provider type.
 
 `-l, --location LOCATION`
-:    Filter output by a specific location. To see supported locations, run `ibmcloud ks locations`. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.
+:    Filter output by a specific location. To see supported locations, run `ibmcloud ks locations`. To specify multiple locations, use one option for each location, such as `-l dal -l seo`.
 
 `--output json`
 :    Optional: Prints the command output in JSON format. **Note**: If you don't include the `--provider` flag, only classic clusters are returned.
@@ -2867,7 +2867,7 @@ Supported infrastructure providers
 :    Required: The name or ID of a worker node.
 
 `--update`
-:    Include this flag to update the worker node to the same major and minor version of the master and the latest patch.
+:    Include this option to update the worker node to the same major and minor version of the master and the latest patch.
 
 `-f`
 :    Optional: Force the command to run with no user prompts.
@@ -3059,7 +3059,7 @@ ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <clu
 :    Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a VPC zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-gen2`.
 
 `--vpc-id VPC_ID`
-:    Optional: Specify the ID of the VPC in which to create the worker pool's worker nodes. The value must match the VPC ID that the cluster is in. To list the cluster's VPC ID, run `ibmcloud ks cluster get -c <cluster_name_or_ID>`. If this flag is not provided, then the worker pool defaults to the VPC ID of existing worker pools in the cluster.
+:    Optional: Specify the ID of the VPC in which to create the worker pool's worker nodes. The value must match the VPC ID that the cluster is in. To list the cluster's VPC ID, run `ibmcloud ks cluster get -c <cluster_name_or_ID>`. If this option is not provided, then the worker pool defaults to the VPC ID of existing worker pools in the cluster.
 
 `-l, --label KEY1=VALUE1`
 :    Optional: Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple flags, such as `-l key1=value1 -l key2=value2`.
@@ -3536,7 +3536,7 @@ ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER [--worker-pool WORKER
      {: note}
 
 `--private-only`
-:    Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and don't include the `--public-vlan` flag.
+:    Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` option and don't include the `--public-vlan` flag.
      If worker nodes are set up with a private VLAN only, you must enable the private cloud service endpoint or configure a gateway appliance. For more information, see [Planning your private cluster and worker node setup](/docs/containers?topic=containers-plan_basics#private_clusters).
      {: pre}
 
@@ -3618,10 +3618,10 @@ ibmcloud ks zone ls --provider (classic | vpc-gen2) [--location LOCATION] [--reg
 **Command options**:
 
 `--provider (classic | vpc-gen2)`
-:    The infrastructure provider type to list zones for. This flag is required.
+:    The infrastructure provider type to list zones for. This option is required.
 
 `-l, --location LOCATION`
-:    Filter output by a specific location. To see supported locations, run `ibmcloud ks locations`. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.
+:    Filter output by a specific location. To see supported locations, run `ibmcloud ks locations`. To specify multiple locations, use one option for each location, such as `-l dal -l seo`.
 
 `--region-only`
 :    Optional: List multizones only within the region that you are logged in to.
@@ -5584,13 +5584,13 @@ Supported infrastructure providers
 :    Required: The name or ID of the cluster.
 
 `-n, --namespace NAMESPACE`
-:    The namespace you want to remove the log forwarding configuration from. If there is more than one config for the same namespace, use the `--id <logging_configuration_ID>` flag instead.
+:    The namespace you want to remove the log forwarding configuration from. If there is more than one config for the same namespace, use the `--id <logging_configuration_ID>` option instead.
 
 `--id LOG_CONFIG_ID`
 :    If you want to remove a single logging configuration, the logging configuration ID.
 
 `--all`
-:    The flag to remove all logging configurations in a cluster.
+:    The option to remove all logging configurations in a cluster.
 
 `--force-update`
 :    Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version to change your logging configurations.
@@ -5708,16 +5708,16 @@ Supported infrastructure providers
 :    The type of logs that you want to apply the filter to. Currently `all`, `container`, and `host` are supported.
 
 `-lc, --logging-config CONFIG`
-:    Optional: The logging configuration ID. If not provided, the filter is applied to all the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` flag with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`.
+:    Optional: The logging configuration ID. If not provided, the filter is applied to all the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` option with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`.
 
 `-n, --namespace KUBERNETES_NAMESPACE`
 :    Optional: The Kubernetes namespace from which you want to filter logs.
 
 `--container CONTAINER_NAME`
-:    Optional: The name of the container from which you want to filter out logs. This flag applies only when you are using log type `container`.
+:    Optional: The name of the container from which you want to filter out logs. This option applies only when you are using log type `container`.
 
 `--level LOGGING_LEVEL`
-:    Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output `{"log": "hello", "level": "info"}`
+:    Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. **Note**: You can use this option only when log messages are in JSON format and contain a level field. Example output `{"log": "hello", "level": "info"}`
 
 `--message MESSAGE`
 :    Optional: Filters out any logs that contain a specified message anywhere in the log. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".
@@ -5866,16 +5866,16 @@ Supported infrastructure providers
 :    The type of logs that you want to apply the filter to. Currently `all`, `container`, and `host` are supported.
 
 `-lc, --logging-config CONFIG`
-:    Optional: The logging configuration ID. If not provided, the filter is applied to all the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` flag with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`.
+:    Optional: The logging configuration ID. If not provided, the filter is applied to all the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` option with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`.
 
 `-n, --namespace KUBERNETES_NAMESPACE`
 :    Optional: The Kubernetes namespace from which you want to filter logs.
 
 `--container CONTAINER_NAME`
-:    Optional: The name of the container from which you want to filter out logs. This flag applies only when you are using log type `container`.
+:    Optional: The name of the container from which you want to filter out logs. This option applies only when you are using log type `container`.
 
 `--level LOGGING_LEVEL`
-:    Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output `{"log": "hello", "level": "info"}`
+:    Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. **Note**: You can use this option only when log messages are in JSON format and contain a level field. Example output `{"log": "hello", "level": "info"}`
 
 `--message MESSAGE`
 :    Optional: Filters out any logs that contain a specified message anywhere in the log. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".
@@ -6172,7 +6172,7 @@ ibmcloud ks nlb-dns ls --cluster mycluster
 Configure and optionally enable a health check monitor for an existing NLB subdomain in a cluster. When you enable a monitor for your subdomain, the monitor health checks the NLB IP in each zone and keeps the DNS lookup results updated based on these health checks.
 {: shortdesc}
 
-You can use this command to create and enable a health check monitor, or to update the settings for an existing health check monitor. To create a new monitor, include the `--enable` flag and the flags for all settings that you want to configure.
+You can use this command to create and enable a health check monitor, or to update the settings for an existing health check monitor. To create a new monitor, include the `--enable` option and the flags for all settings that you want to configure.
 
 To update an existing monitor, you must include all the flags for the settings that you want, including existing settings.
 {: note}
@@ -6195,7 +6195,7 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host SUBDOMAIN [--
 :    The subdomain to configure a health check monitor for. To list subdomains, run `ibmcloud ks nlb-dns ls --cluster CLUSTER`.
 
 `--enable`
-:    Include this flag to enable a new health check monitor for a subdomain.
+:    Include this option to enable a new health check monitor for a subdomain.
 
 `--description DESCRIPTION`
 :    A description of the health monitor.
@@ -6222,7 +6222,7 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host SUBDOMAIN [--
 :    The port number to connect to for the health check. When `type` is `TCP`, this parameter is required. When `type` is `HTTP` or `HTTPS`, define the port only if you use a port other than 80 for HTTP or 443 for HTTPS. Default for TCP: `0`. Default for HTTP: `80`. Default for HTTPS: `443`.
 
 `--header HEADER`
-:    Required when `type` is `HTTP` or `HTTPS`: HTTP request headers to send in the health check, such as a Host header. The User-Agent header can't be overridden. This flag is valid only for type 'HTTP' or 'HTTPS'. To add more than one header to the requests, specify this flag multiple times. This flag accepts values in the following format: '--header Header-Name=value'. When updating a monitor, the existing headers are replaced by the ones you specify. To delete all existing headers specify the flag with an empty value '--header ""'.
+:    Required when `type` is `HTTP` or `HTTPS`: HTTP request headers to send in the health check, such as a Host header. The User-Agent header can't be overridden. This option is valid only for type 'HTTP' or 'HTTPS'. To add more than one header to the requests, specify this option multiple times. This option accepts values in the following format: '--header Header-Name=value'. When updating a monitor, the existing headers are replaced by the ones you specify. To delete all existing headers specify the option with an empty value '--header ""'.
 
 `--expected-body BODY STRING`
 :    When `type` is `HTTP` or `HTTPS`: A case-insensitive substring that the health check looks for in the response body. If this string is not found, the IP is considered unhealthy.
@@ -7129,16 +7129,16 @@ Supported infrastructure providers
 **Command options**:
 
 `--provider (classic | vpc-gen2)`
-:    The infrastructure provider type to list subnets for. This flag is required to list VPC subnets.
+:    The infrastructure provider type to list subnets for. This option is required to list VPC subnets.
 
 `--vpc-id VPC_ID`
-:    The ID of the VPC to list subnets for. This flag is required when you specify the `vpc-gen2` provider type. To list VPC IDs, run `ibmcloud ks vpcs`.
+:    The ID of the VPC to list subnets for. This option is required when you specify the `vpc-gen2` provider type. To list VPC IDs, run `ibmcloud ks vpcs`.
 
 `--zone VPC_ZONE`
-:    The zone to list VPC subnets for. This flag is required when you specify a VPC provider type.
+:    The zone to list VPC subnets for. This option is required when you specify a VPC provider type.
 
 `-l, --location LOCATION`
-:    Filter output by a specific location. To see supported locations, run `ibmcloud ks locations`. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.
+:    Filter output by a specific location. To see supported locations, run `ibmcloud ks locations`. To specify multiple locations, use one option for each location, such as `-l dal -l seo`.
 
 `--output json`
 :    Optional: Prints the command output in JSON format.
@@ -7492,10 +7492,10 @@ Supported infrastructure providers
 
 
 `--insecure`
-:    Allow an insecure HTTP connection. This flag is optional.
+:    Allow an insecure HTTP connection. This option is optional.
 
 `--skip-ssl-validation`
-:    Allow insecure SSL certificates. This flag is optional.
+:    Allow insecure SSL certificates. This option is optional.
 
 `--api-version VALUE`
 :    Optional: Specify the API version of the service that you want to use.
@@ -7616,7 +7616,7 @@ Supported infrastructure providers
 
 
 `--in-place`
-:    Optional: Rewrite the source file with the updated command structure. If this flag is not specified, you can see a summary of the changes to the script file in STDOUT.
+:    Optional: Rewrite the source file with the updated command structure. If this option is not specified, you can see a summary of the changes to the script file in STDOUT.
 
 `FILE [FILE ...]`
 :    The file that contains the scripts that you want to update.

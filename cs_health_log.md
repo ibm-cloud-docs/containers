@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-06"
+lastupdated: "2022-12-12"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -303,9 +303,9 @@ You can choose which logs to forward to your external server by filtering out sp
 | `<cluster_name_or_ID>` | Required: The name or ID of the cluster that you want to filter logs for. |
 | `<log_type>` | The type of logs that you want to apply the filter to. Currently `all`, `container`, and `host` are supported. |
 | `<configs>` | Optional: A comma-separated list of your logging configuration IDs. If not provided, the filter is applied to all the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` option. | 
-| `<kubernetes_namespace>` | Optional: The Kubernetes namespace that you want to forward logs from. This flag applies only when you are using log type `container`. |
+| `<kubernetes_namespace>` | Optional: The Kubernetes namespace that you want to forward logs from. This option applies only when you are using log type `container`. |
 | `<container_name>` | Optional: The name of the container from which you want to filter logs. |
-| `<logging_level>` | Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. To display your messages in JSON, append the `--output json` flag to the command. |
+| `<logging_level>` | Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. **Note**: You can use this option only when log messages are in JSON format and contain a level field. To display your messages in JSON, append the `--output json` option to the command. |
 | `<message>` | Optional: Filters out logs that contain a specified message that is written as a regular expression. |
 | `<filter_ID>` | Optional: The ID of the log filter. |
 | `--show-matching-configs` | Optional: Show the logging configurations that each filter applies to. |
