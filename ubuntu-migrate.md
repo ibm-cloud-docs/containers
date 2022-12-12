@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-12-07"
+lastupdated: "2022-12-12"
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
 
@@ -16,11 +16,11 @@ subcollection: containers
 # Migrating to a new Ubuntu version
 {: #ubuntu-migrate}
 
-Support for Ubuntu 20 is not yet available. This information is provided as a preview for the steps required to migrate your worker nodes at a later date. 
-{: preview}
-
 To migrate your worker nodes to a new Ubuntu version, you must provision a new worker pool. Then, add worker nodes to the new pool and remove the original worker pool. 
 {: shortdesc}
+
+Support for Ubuntu 20 is not yet available. This information is provided as a preview for the steps required to migrate your worker nodes at a later date. 
+{: preview}
 
 For more information about creating worker pools and adding worker nodes, see [Adding worker nodes in classic clusters](/docs/containers?topic=containers-add_workers) or [Adding worker nodes in VPC clusters](/docs/containers?topic=containers-add_workers#vpc_pools).
 
