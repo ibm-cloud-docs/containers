@@ -215,6 +215,10 @@ subcollection: containers
 
 * [December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec22)
 
+    * [12 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1222)
+
+        * Ingress ALB version `1.4.0_3212_iks` change log updates
+
     * [9 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec0922)
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.5` is available.
@@ -8005,6 +8009,10 @@ subcollection: containers
 [Ingress ALB and Fluentd version change log](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
+
+* [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
+
+    * [1.4.0_3212_iks, released 12 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3212_iks)
 
 * [Version 1.3.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_1)
 
