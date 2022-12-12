@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-09"
+lastupdated: "2022-12-12"
 
 keywords: kubernetes
 
@@ -91,9 +91,9 @@ ibmcloud ks cluster addon disable alb-oauth-proxy --cluster CLUSTER
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -120,9 +120,9 @@ ibmcloud ks cluster addon disable debug-tool --cluster CLUSTER [-f]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -157,7 +157,7 @@ ibmcloud ks cluster addon disable istio --cluster CLUSTER [-f]
 :    Required: The name or ID of the cluster.
 
 `-f`
-:    Optional: This Istio add-on is a dependency for the `istio-extras` and `istio-sample-bookinfo` managed add-ons. Include this flag to also disable those add-ons.
+:    Optional: This Istio add-on is a dependency for the `istio-extras` and `istio-sample-bookinfo` managed add-ons. Include this option to also disable those add-ons.
 
 
 #### `ibmcloud ks cluster addon disable istio-extras`
@@ -182,7 +182,7 @@ ibmcloud ks cluster addon disable istio-extras --cluster CLUSTER [-f]
 :    Required: The name or ID of the cluster.
 
 `-f`
-:    Optional: This Istio add-on is a dependency for the `istio-sample-bookinfo` managed add-on. Include this flag to also disable that add-on.
+:    Optional: This Istio add-on is a dependency for the `istio-sample-bookinfo` managed add-on. Include this option to also disable that add-on.
 
 
 #### `ibmcloud ks cluster addon disable istio-sample-bookinfo`
@@ -221,9 +221,9 @@ ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER [-f]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -247,9 +247,9 @@ ibmcloud ks cluster addon disable static-route --cluster CLUSTER
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -300,9 +300,9 @@ ibmcloud ks cluster addon enable alb-oauth-proxy --cluster CLUSTER [--version VE
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -332,9 +332,9 @@ ibmcloud ks cluster addon enable debug-tool --cluster CLUSTER [--version VERSION
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -389,9 +389,9 @@ ibmcloud ks cluster addon enable static-route --cluster CLUSTER [--version VERSI
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -443,9 +443,9 @@ ibmcloud ks get --addon ADDON --cluster CLUSTER [--output OUTPUT] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -475,9 +475,9 @@ ibmcloud ks cluster addon ls --cluster CLUSTER
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -501,9 +501,9 @@ ibmcloud ks cluster addon options --addon ADDON [--output OUTPUT] [-q] [--versio
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -533,9 +533,9 @@ ibmcloud ks cluster addon update --addon ADD-ON_NAME --cluster CLUSTER [-f] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: None
 
@@ -568,9 +568,9 @@ ibmcloud ks cluster addon versions [--addon ADD-ON_NAME] [--output json] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: None
 
@@ -609,9 +609,9 @@ ibmcloud ks cluster ca create --cluster CLUSTER [-f] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -644,9 +644,9 @@ ibmcloud ks cluster ca get --cluster CLUSTER [ --output OUTPUT] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -682,9 +682,9 @@ ibmcloud ks cluster ca rotate --cluster CLUSTER [-f] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -718,9 +718,9 @@ ibmcloud ks cluster ca status --cluster CLUSTER [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -753,9 +753,9 @@ ibmcloud ks cluster config --cluster CLUSTER [--admin] [--endpoint ENDPOINT_TYPE
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** or **Reader** {{site.data.keyword.cloud_notm}} IAM service access role for the cluster in {{site.data.keyword.containerlong_notm}}. Further, if you have only a platform access role or only a service access role, additional constraints apply.
 * **Platform**: If you have only a platform access role, you can perform this command, but you need a [service access role](/docs/containers?topic=containers-users#checking-perms) or a [custom RBAC policy](/docs/containers?topic=containers-access-overview#role-binding) to perform Kubernetes actions in the cluster.
@@ -772,6 +772,7 @@ ibmcloud ks cluster config --cluster CLUSTER [--admin] [--endpoint ENDPOINT_TYPE
 `--endpoint ENDPOINT_TYPE`
 :    Optional: Specify the type of endpoint to use to connect to the cluster. If you don't specify this flag, the default service endpoint for your cluster is used.
      - `private`: If the private cloud service endpoint is enabled for your cluster, set to `private` to use the private cloud service endpoint for your cluster context. Note you must be in your {{site.data.keyword.cloud_notm}} private network or connected to the private network through a [VPC VPN connection](/docs/vpc?topic=vpc-vpn-onprem-example), or for classic infrastructure, a [classic VPN connection](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl).
+        
      - `vpe`: If it is a VPC cluster, set to `vpe` to use the Virtual Private Endpoint gateway for your cluster context. Note you must be connected to the same VPC where the cluster is deployed through [VPC VPN connection](/docs/vpc?topic=vpc-vpn-overview).
 
 `--network`
@@ -837,7 +838,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 :    Optional: The Kubernetes version for the cluster master node. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run `ibmcloud ks versions`.
 
 `--no-subnet`
-:    By default, a public and a private portable subnet are created on the VLAN associated with the cluster. Include the `--no-subnet` flag to avoid creating subnets with the cluster. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster later.
+:    By default, a public and a private portable subnet are created on the VLAN associated with the cluster. Include the `--no-subnet` option to avoid creating subnets with the cluster. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster later.
 
 `--sm-group GROUP`
 :    The secret group ID of the {{site.data.keyword.secrets-manager_short}} instance where your secrets are persisted. To get a secret group ID, see the [{{site.data.keyword.secrets-manager_short}} CLI reference](/docs/secrets-manager?topic=secrets-manager-cli-plugin-secrets-manager-cli#secrets-manager-cli-secret-groups-command).
@@ -854,7 +855,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 :    To find out whether you already have a public VLAN for a specific zone or to find the name of an existing public VLAN, run `ibmcloud ks vlan ls --zone ZONE`. 
 
 `--private-only`
-:    Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and don't include the `--public-vlan` flag.
+:    Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` option and don't include the `--public-vlan` flag.
      If worker nodes are set up with a private VLAN only, you must enable the private cloud service endpoint or configure a gateway appliance. For more information, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_basics#workeruser-master).
      {: note}
 
@@ -867,7 +868,7 @@ Gateway-enabled clusters are deprecated and become unsupported soon. If you have
 
 
 `--private-service-endpoint`
-:    **Standard clusters in [accounts that are enabled with VRF and service endpoints](/docs/account?topic=account-vrf-service-endpoint)**: Enable the [private cloud service endpoint](/docs/containers?topic=containers-plan_basics#workeruser-master) so that your Kubernetes master and the worker nodes communicate over the private VLAN. In addition, you can choose to enable the public cloud service endpoint by using the `--public-service-endpoint` flag to access your cluster over the internet. If you enable the private cloud service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private cloud service endpoint, you can't later disable it.
+:    **Standard clusters in [accounts that are enabled with VRF and service endpoints](/docs/account?topic=account-vrf-service-endpoint)**: Enable the [private cloud service endpoint](/docs/containers?topic=containers-plan_basics#workeruser-master) so that your Kubernetes master and the worker nodes communicate over the private VLAN. In addition, you can choose to enable the public cloud service endpoint by using the `--public-service-endpoint` option to access your cluster over the internet. If you enable the private cloud service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private cloud service endpoint, you can't later disable it.
      After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 
 `--public-service-endpoint`
@@ -993,7 +994,7 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
       {: important}
 
 `--disable-public-service-endpoint`
-:    To ensure that worker nodes and authorized cluster users communicate with the master through the private cloud service endpoint only, include this flag to create the cluster without the public cloud service endpoint.
+:    To ensure that worker nodes and authorized cluster users communicate with the master through the private cloud service endpoint only, include this option to create the cluster without the public cloud service endpoint.
 
 `--pod-subnet SUBNET`
 :    In the first cluster that you create in a VPC, the default pod subnet is `172.17.0.0/18`. In the second cluster that you create in that VPC, the default pod subnet is `172.17.64.0/18`. In each subsequent cluster, the pod subnet range is the next available, non-overlapping `/18` subnet. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.BluDirectLink}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your pods.
@@ -1059,9 +1060,9 @@ ibmcloud ks cluster get --cluster CLUSTER [--show-resources] [--output json] [-q
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1097,9 +1098,9 @@ ibmcloud ks cluster image-security disable --cluster CLUSTER [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1129,9 +1130,9 @@ ibmcloud ks cluster image-security enable --cluster CLUSTER [-f] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1166,9 +1167,9 @@ ibmcloud ks cluster ls [--provider (classic | vpc-gen2)] [--location LOCATION] [
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1178,7 +1179,7 @@ ibmcloud ks cluster ls [--provider (classic | vpc-gen2)] [--location LOCATION] [
 :    Optional: Filter output based on infrastructure provider type.
 
 `-l, --location LOCATION`
-:    Filter output by a specific location. To see supported locations, run `ibmcloud ks locations`. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.
+:    Filter output by a specific location. To see supported locations, run `ibmcloud ks locations`. To specify multiple locations, use one option for each location, such as `-l dal -l seo`.
 
 `--output json`
 :    Optional: Prints the command output in JSON format. **Note**: If you don't include the `--provider` flag, only classic clusters are returned.
@@ -1330,9 +1331,9 @@ ibmcloud ks cluster master private-service-endpoint allowlist add --cluster CLUS
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1367,9 +1368,9 @@ ibmcloud ks cluster master private-service-endpoint allowlist disable --cluster 
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1404,9 +1405,9 @@ ibmcloud ks cluster master private-service-endpoint allowlist enable --cluster C
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1441,9 +1442,9 @@ ibmcloud ks cluster master private-service-endpoint allowlist get --cluster CLUS
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1475,9 +1476,9 @@ ibmcloud ks cluster master private-service-endpoint allowlist rm --cluster CLUST
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1597,9 +1598,9 @@ ibmcloud ks cluster master public-service-endpoint disable --cluster CLUSTER [-q
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1637,9 +1638,9 @@ ibmcloud ks cluster master public-service-endpoint enable --cluster CLUSTER [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1676,9 +1677,9 @@ ibmcloud ks cluster master refresh --cluster CLUSTER [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1706,9 +1707,9 @@ ibmcloud ks cluster master update --cluster CLUSTER [--version MAJOR.MINOR.PATCH
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1754,9 +1755,9 @@ ibmcloud ks cluster pull-secret apply --cluster CLUSTER
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**:
 *  **Operator or Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -1780,9 +1781,9 @@ ibmcloud ks cluster rm --cluster CLUSTER [--force-delete-storage] [--skip-advanc
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1824,9 +1825,9 @@ ibmcloud ks cluster service bind --cluster CLUSTER --namespace KUBERNETES_NAMESP
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
 
@@ -1870,9 +1871,9 @@ ibmcloud ks cluster service ls --cluster CLUSTER [--namespace KUBERNETES_NAMESPA
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1915,9 +1916,9 @@ ibmcloud ks cluster service unbind --cluster CLUSTER --namespace KUBERNETES_NAME
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
 
@@ -2529,9 +2530,9 @@ ibmcloud ks worker add --cluster CLUSTER [--hardware HARDWARE] --flavor FLAVOR -
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2585,9 +2586,9 @@ ibmcloud ks worker get --cluster CLUSTER_NAME_OR_ID --worker WORKER_NODE_ID [--o
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2624,9 +2625,9 @@ ibmcloud ks worker ls --cluster CLUSTER [--worker-pool POOL] [--show-pools] [--s
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2705,9 +2706,9 @@ ibmcloud ks worker reboot [--hard] --cluster CLUSTER --worker WORKER_ID [--skip-
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2851,9 +2852,9 @@ ibmcloud ks worker replace --cluster CLUSTER_NAME_OR_ID --worker WORKER_ID [--up
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
@@ -2866,7 +2867,7 @@ ibmcloud ks worker replace --cluster CLUSTER_NAME_OR_ID --worker WORKER_ID [--up
 :    Required: The name or ID of a worker node.
 
 `--update`
-:    Include this flag to update the worker node to the same major and minor version of the master and the latest patch.
+:    Include this option to update the worker node to the same major and minor version of the master and the latest patch.
 
 `-f`
 :    Optional: Force the command to run with no user prompts.
@@ -2893,9 +2894,9 @@ ibmcloud ks worker rm --cluster CLUSTER --worker WORKER [-f] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3058,7 +3059,7 @@ ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <clu
 :    Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a VPC zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-gen2`.
 
 `--vpc-id VPC_ID`
-:    Optional: Specify the ID of the VPC in which to create the worker pool's worker nodes. The value must match the VPC ID that the cluster is in. To list the cluster's VPC ID, run `ibmcloud ks cluster get -c <cluster_name_or_ID>`. If this flag is not provided, then the worker pool defaults to the VPC ID of existing worker pools in the cluster.
+:    Optional: Specify the ID of the VPC in which to create the worker pool's worker nodes. The value must match the VPC ID that the cluster is in. To list the cluster's VPC ID, run `ibmcloud ks cluster get -c <cluster_name_or_ID>`. If this option is not provided, then the worker pool defaults to the VPC ID of existing worker pools in the cluster.
 
 `-l, --label KEY1=VALUE1`
 :    Optional: Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple flags, such as `-l key1=value1 -l key2=value2`.
@@ -3102,9 +3103,9 @@ ibmcloud ks worker-pool get --worker-pool WORKER_POOL --cluster CLUSTER [--outpu
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3144,9 +3145,9 @@ ibmcloud ks worker-pool label rm --cluster CLUSTER --worker-pool POOL [-f] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3183,9 +3184,9 @@ ibmcloud ks worker-pool label set --cluster CLUSTER --label LABEL [--label LABEL
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3225,9 +3226,9 @@ ibmcloud ks worker-pool ls --cluster CLUSTER [--output json] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3261,9 +3262,9 @@ ibmcloud ks worker-pool rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3297,9 +3298,9 @@ ibmcloud ks worker-pool resize --cluster CLUSTER --worker-pool WORKER_POOL --siz
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3338,9 +3339,9 @@ ibmcloud ks worker-pool rm --worker-pool WORKER_POOL --cluster CLUSTER [-q] [-f]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3386,9 +3387,9 @@ ibmcloud ks worker-pool taint set --worker-pool WORKER_POOL --cluster CLUSTER --
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3428,9 +3429,9 @@ ibmcloud ks worker-pool taint rm --worker-pool WORKER_POOL --cluster CLUSTER [-f
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3464,9 +3465,9 @@ ibmcloud ks worker-pool zones --worker-pool WORKER_POOL --cluster CLUSTER [-q] [
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3535,7 +3536,7 @@ ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER [--worker-pool WORKER
      {: note}
 
 `--private-only`
-:    Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and don't include the `--public-vlan` flag.
+:    Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` option and don't include the `--public-vlan` flag.
      If worker nodes are set up with a private VLAN only, you must enable the private cloud service endpoint or configure a gateway appliance. For more information, see [Planning your private cluster and worker node setup](/docs/containers?topic=containers-plan_basics#private_clusters).
      {: pre}
 
@@ -3617,10 +3618,10 @@ ibmcloud ks zone ls --provider (classic | vpc-gen2) [--location LOCATION] [--reg
 **Command options**:
 
 `--provider (classic | vpc-gen2)`
-:    The infrastructure provider type to list zones for. This flag is required.
+:    The infrastructure provider type to list zones for. This option is required.
 
 `-l, --location LOCATION`
-:    Filter output by a specific location. To see supported locations, run `ibmcloud ks locations`. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.
+:    Filter output by a specific location. To see supported locations, run `ibmcloud ks locations`. To specify multiple locations, use one option for each location, such as `-l dal -l seo`.
 
 `--region-only`
 :    Optional: List multizones only within the region that you are logged in to.
@@ -3739,9 +3740,9 @@ ibmcloud ks zone rm --cluster CLUSTER --zone ZONE [--worker-pool WORKER_POOL] [-
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3795,9 +3796,9 @@ ibmcloud ks ingress alb autoupdate disable --cluster CLUSTER [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3830,9 +3831,9 @@ ibmcloud ks ingress alb autoupdate enable --cluster CLUSTER [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3856,9 +3857,9 @@ ibmcloud ks ingress alb autoupdate get --cluster CLUSTER [--output json] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3976,9 +3977,9 @@ ibmcloud ks ingress alb disable --alb ALB_ID --cluster CLUSTER [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4107,9 +4108,9 @@ ibmcloud ks ingress alb get --alb ALB_ID --cluster CLUSTER [--output json] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4145,9 +4146,9 @@ ibmcloud ks ingress alb health-checker disable --cluster CLUSTER [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4177,9 +4178,9 @@ ibmcloud ks ingress alb health-checker enable --cluster CLUSTER [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4209,9 +4210,9 @@ ibmcloud ks ingress alb health-checker get --cluster CLUSTER [--output OUTPUT] [
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4247,9 +4248,9 @@ ibmcloud ks ingress alb ls --cluster CLUSTER [--output json] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4287,9 +4288,9 @@ ibmcloud ks ingress alb update --cluster CLUSTER [--alb ALB1_ID --alb ALB2_ID ..
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4339,9 +4340,9 @@ ibmcloud ks ingress alb versions [--output json] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
 
@@ -4367,9 +4368,9 @@ ibmcloud ks ingress instance default set --cluster CLUSTER --crn CRN --name NAME
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4411,9 +4412,9 @@ ibmcloud ks ingress instance default unset --cluster CLUSTER --crn CRN --name NA
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4449,9 +4450,9 @@ ibmcloud ks ingress instance get --cluster CLUSTER --name NAME [--output OUTPUT]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4487,9 +4488,9 @@ ibmcloud ks ingress instance ls --cluster CLUSTER [--output OUTPUT] [-q] [--show
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4525,9 +4526,9 @@ ibmcloud ks ingress instance register --cluster CLUSTER --crn CRN [--is-default]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4566,9 +4567,9 @@ ibmcloud ks ingress instance unregister --cluster CLUSTER --name NAME [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4603,9 +4604,9 @@ ibmcloud ks ingress lb get --cluster CLUSTER [--output OUTPUT] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4730,9 +4731,9 @@ ibmcloud ks ingress secret create --cert-crn CERTIFICATE_CRN --cluster CLUSTER -
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4784,9 +4785,9 @@ ibmcloud ks ingress secret field add --cluster CLUSTER --name SECRET_NAME --fiel
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4827,9 +4828,9 @@ ibmcloud ks ingress secret field ls --cluster CLUSTER --name SECRET_NAME --names
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4865,9 +4866,9 @@ ibmcloud ks ingress secret field rm --cluster CLUSTER --name NAME --namespace NA
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4905,9 +4906,9 @@ ibmcloud ks ingress secret get --cluster CLUSTER --name SECRET_NAME --namespace 
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4950,9 +4951,9 @@ ibmcloud ks ingress secret ls --cluster CLUSTER [--show-deleted] [--output json]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4993,9 +4994,9 @@ ibmcloud ks ingress secret rm --cluster CLUSTER --name SECRET_NAME --namespace N
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5036,9 +5037,9 @@ ibmcloud ks ingress secret update --cluster CLUSTER --name SECRET_NAME --namespa
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5080,9 +5081,9 @@ ibmcloud ks ingress status-report disable --cluster CLUSTER [--output json] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5113,9 +5114,9 @@ ibmcloud ks ingress status-report enable --cluster CLUSTER [--output json] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5146,9 +5147,9 @@ ibmcloud ks ingress status-report get --cluster CLUSTER [--output json] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5179,9 +5180,9 @@ ibmcloud ks ingress status-report ignored-errors add --cluster CLUSTER --code CO
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5216,9 +5217,9 @@ ibmcloud ks ingress status-report ignored-errors ls --cluster CLUSTER [--output 
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5249,9 +5250,9 @@ ibmcloud ks ingress status-report ignored-errors rm --cluster CLUSTER --code COD
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5368,9 +5369,9 @@ ibmcloud ks logging collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-end
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5416,9 +5417,9 @@ ibmcloud ks logging collect-status --cluster CLUSTER [--output json]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5449,9 +5450,9 @@ ibmcloud ks logging config create --cluster CLUSTER --logsource LOG_SOURCE --typ
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster
 
@@ -5529,9 +5530,9 @@ ibmcloud ks logging config get --cluster CLUSTER [--logsource LOG_SOURCE] [--out
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5571,9 +5572,9 @@ ibmcloud ks logging config rm --cluster CLUSTER (--namespace NAMESPACE --id LOG_
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster
 
@@ -5583,13 +5584,13 @@ ibmcloud ks logging config rm --cluster CLUSTER (--namespace NAMESPACE --id LOG_
 :    Required: The name or ID of the cluster.
 
 `-n, --namespace NAMESPACE`
-:    The namespace you want to remove the log forwarding configuration from. If there is more than one config for the same namespace, use the `--id <logging_configuration_ID>` flag instead.
+:    The namespace you want to remove the log forwarding configuration from. If there is more than one config for the same namespace, use the `--id <logging_configuration_ID>` option instead.
 
 `--id LOG_CONFIG_ID`
 :    If you want to remove a single logging configuration, the logging configuration ID.
 
 `--all`
-:    The flag to remove all logging configurations in a cluster.
+:    The option to remove all logging configurations in a cluster.
 
 `--force-update`
 :    Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version to change your logging configurations.
@@ -5615,9 +5616,9 @@ ibmcloud ks logging config update --cluster CLUSTER --id LOG_CONFIG_ID --type LO
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5692,9 +5693,9 @@ ibmcloud ks logging filter create --cluster CLUSTER --type LOG_TYPE [--logging-c
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5707,16 +5708,16 @@ ibmcloud ks logging filter create --cluster CLUSTER --type LOG_TYPE [--logging-c
 :    The type of logs that you want to apply the filter to. Currently `all`, `container`, and `host` are supported.
 
 `-lc, --logging-config CONFIG`
-:    Optional: The logging configuration ID. If not provided, the filter is applied to all the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` flag with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`.
+:    Optional: The logging configuration ID. If not provided, the filter is applied to all the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` option with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`.
 
 `-n, --namespace KUBERNETES_NAMESPACE`
 :    Optional: The Kubernetes namespace from which you want to filter logs.
 
 `--container CONTAINER_NAME`
-:    Optional: The name of the container from which you want to filter out logs. This flag applies only when you are using log type `container`.
+:    Optional: The name of the container from which you want to filter out logs. This option applies only when you are using log type `container`.
 
 `--level LOGGING_LEVEL`
-:    Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output `{"log": "hello", "level": "info"}`
+:    Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. **Note**: You can use this option only when log messages are in JSON format and contain a level field. Example output `{"log": "hello", "level": "info"}`
 
 `--message MESSAGE`
 :    Optional: Filters out any logs that contain a specified message anywhere in the log. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".
@@ -5760,9 +5761,9 @@ ibmcloud ks logging filter get --cluster CLUSTER [--id FILTER_ID] [--show-matchi
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5805,9 +5806,9 @@ ibmcloud ks logging filter rm --cluster CLUSTER [--id FILTER_ID] [--all] [--forc
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5847,9 +5848,9 @@ ibmcloud ks logging filter update --cluster CLUSTER --id FILTER_ID --type LOG_TY
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5865,16 +5866,16 @@ ibmcloud ks logging filter update --cluster CLUSTER --id FILTER_ID --type LOG_TY
 :    The type of logs that you want to apply the filter to. Currently `all`, `container`, and `host` are supported.
 
 `-lc, --logging-config CONFIG`
-:    Optional: The logging configuration ID. If not provided, the filter is applied to all the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` flag with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`.
+:    Optional: The logging configuration ID. If not provided, the filter is applied to all the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the `--show-matching-configs` option with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`.
 
 `-n, --namespace KUBERNETES_NAMESPACE`
 :    Optional: The Kubernetes namespace from which you want to filter logs.
 
 `--container CONTAINER_NAME`
-:    Optional: The name of the container from which you want to filter out logs. This flag applies only when you are using log type `container`.
+:    Optional: The name of the container from which you want to filter out logs. This option applies only when you are using log type `container`.
 
 `--level LOGGING_LEVEL`
-:    Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output `{"log": "hello", "level": "info"}`
+:    Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. **Note**: You can use this option only when log messages are in JSON format and contain a level field. Example output `{"log": "hello", "level": "info"}`
 
 `--message MESSAGE`
 :    Optional: Filters out any logs that contain a specified message anywhere in the log. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".
@@ -5921,9 +5922,9 @@ ibmcloud ks logging refresh --cluster CLUSTER [--force-update] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -6104,9 +6105,9 @@ ibmcloud ks nlb-dns get --cluster CLUSTER --nlb-subdomain SUBDOMAIN [--output OU
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -6140,9 +6141,9 @@ ibmcloud ks nlb-dns ls --cluster CLUSTER [--output json] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -6171,7 +6172,7 @@ ibmcloud ks nlb-dns ls --cluster mycluster
 Configure and optionally enable a health check monitor for an existing NLB subdomain in a cluster. When you enable a monitor for your subdomain, the monitor health checks the NLB IP in each zone and keeps the DNS lookup results updated based on these health checks.
 {: shortdesc}
 
-You can use this command to create and enable a health check monitor, or to update the settings for an existing health check monitor. To create a new monitor, include the `--enable` flag and the flags for all settings that you want to configure.
+You can use this command to create and enable a health check monitor, or to update the settings for an existing health check monitor. To create a new monitor, include the `--enable` option and the flags for all settings that you want to configure.
 
 To update an existing monitor, you must include all the flags for the settings that you want, including existing settings.
 {: note}
@@ -6194,7 +6195,7 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host SUBDOMAIN [--
 :    The subdomain to configure a health check monitor for. To list subdomains, run `ibmcloud ks nlb-dns ls --cluster CLUSTER`.
 
 `--enable`
-:    Include this flag to enable a new health check monitor for a subdomain.
+:    Include this option to enable a new health check monitor for a subdomain.
 
 `--description DESCRIPTION`
 :    A description of the health monitor.
@@ -6221,7 +6222,7 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host SUBDOMAIN [--
 :    The port number to connect to for the health check. When `type` is `TCP`, this parameter is required. When `type` is `HTTP` or `HTTPS`, define the port only if you use a port other than 80 for HTTP or 443 for HTTPS. Default for TCP: `0`. Default for HTTP: `80`. Default for HTTPS: `443`.
 
 `--header HEADER`
-:    Required when `type` is `HTTP` or `HTTPS`: HTTP request headers to send in the health check, such as a Host header. The User-Agent header can't be overridden. This flag is valid only for type 'HTTP' or 'HTTPS'. To add more than one header to the requests, specify this flag multiple times. This flag accepts values in the following format: '--header Header-Name=value'. When updating a monitor, the existing headers are replaced by the ones you specify. To delete all existing headers specify the flag with an empty value '--header ""'.
+:    Required when `type` is `HTTP` or `HTTPS`: HTTP request headers to send in the health check, such as a Host header. The User-Agent header can't be overridden. This option is valid only for type 'HTTP' or 'HTTPS'. To add more than one header to the requests, specify this option multiple times. This option accepts values in the following format: '--header Header-Name=value'. When updating a monitor, the existing headers are replaced by the ones you specify. To delete all existing headers specify the option with an empty value '--header ""'.
 
 `--expected-body BODY STRING`
 :    When `type` is `HTTP` or `HTTPS`: A case-insensitive substring that the health check looks for in the response body. If this string is not found, the IP is considered unhealthy.
@@ -6533,9 +6534,9 @@ ibmcloud ks nlb-dns secret regenerate --cluster CLUSTER --nlb-subdomain SUBDOMAI
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -6574,9 +6575,9 @@ ibmcloud ks nlb-dns secret rm --cluster CLUSTER --nlb-subdomain SUBDOMAIN [-f] [
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -6618,9 +6619,9 @@ ibmcloud ks webhook-create --cluster CLUSTER --level LEVEL --type slack --url UR
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -6673,9 +6674,9 @@ ibmcloud ks api-key info --cluster CLUSTER [--output json] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -6716,9 +6717,9 @@ ibmcloud ks api-key reset --region REGION [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -6964,9 +6965,9 @@ ibmcloud ks kms crk ls --instance-id KMS_INSTANCE_ID [--output json] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role in {{site.data.keyword.containerlong_notm}}
 
@@ -7002,9 +7003,9 @@ ibmcloud ks kms enable --cluster CLUSTER_NAME_OR_ID --instance-id KMS_INSTANCE_I
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -7046,9 +7047,9 @@ ibmcloud ks kms instance ls [--output json] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role in {{site.data.keyword.containerlong_notm}}
 
@@ -7084,9 +7085,9 @@ ibmcloud ks quota ls [--provider PROVIDER] [--output json]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
 
@@ -7119,25 +7120,25 @@ ibmcloud ks subnets [--provider (classic | vpc-gen2)] [--vpc-id <VPC_ID> --zone 
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
 `--provider (classic | vpc-gen2)`
-:    The infrastructure provider type to list subnets for. This flag is required to list VPC subnets.
+:    The infrastructure provider type to list subnets for. This option is required to list VPC subnets.
 
 `--vpc-id VPC_ID`
-:    The ID of the VPC to list subnets for. This flag is required when you specify the `vpc-gen2` provider type. To list VPC IDs, run `ibmcloud ks vpcs`.
+:    The ID of the VPC to list subnets for. This option is required when you specify the `vpc-gen2` provider type. To list VPC IDs, run `ibmcloud ks vpcs`.
 
 `--zone VPC_ZONE`
-:    The zone to list VPC subnets for. This flag is required when you specify a VPC provider type.
+:    The zone to list VPC subnets for. This option is required when you specify a VPC provider type.
 
 `-l, --location LOCATION`
-:    Filter output by a specific location. To see supported locations, run `ibmcloud ks locations`. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.
+:    Filter output by a specific location. To see supported locations, run `ibmcloud ks locations`. To specify multiple locations, use one option for each location, such as `-l dal -l seo`.
 
 `--output json`
 :    Optional: Prints the command output in JSON format.
@@ -7296,9 +7297,9 @@ ibmcloud ks flavor get --flavor FLAVOR --provider PROVIDER --zone ZONE [--output
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: None
 
@@ -7336,9 +7337,9 @@ ibmcloud ks flavor ls --zone ZONE [--output OUTPUT] [--provider PROVIDER] [-q] [
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: None
 
@@ -7376,9 +7377,9 @@ ibmcloud ks messages
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: None
 
@@ -7397,9 +7398,9 @@ ibmcloud ks locations [--output json]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: None
 
@@ -7425,9 +7426,9 @@ ibmcloud ks versions [--show-version (KUBERNETES|OPENSHIFT)] [--output json] [-q
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: None
 
@@ -7478,9 +7479,9 @@ ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: None
 
@@ -7491,10 +7492,10 @@ ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-
 
 
 `--insecure`
-:    Allow an insecure HTTP connection. This flag is optional.
+:    Allow an insecure HTTP connection. This option is optional.
 
 `--skip-ssl-validation`
-:    Allow insecure SSL certificates. This flag is optional.
+:    Allow insecure SSL certificates. This option is optional.
 
 `--api-version VALUE`
 :    Optional: Specify the API version of the service that you want to use.
@@ -7548,9 +7549,9 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: None
 
@@ -7605,9 +7606,9 @@ ibmcloud ks script update [--in-place] FILE [FILE ...]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: None
 
@@ -7615,7 +7616,7 @@ ibmcloud ks script update [--in-place] FILE [FILE ...]
 
 
 `--in-place`
-:    Optional: Rewrite the source file with the updated command structure. If this flag is not specified, you can see a summary of the changes to the script file in STDOUT.
+:    Optional: Rewrite the source file with the updated command structure. If this option is not specified, you can see a summary of the changes to the script file in STDOUT.
 
 `FILE [FILE ...]`
 :    The file that contains the scripts that you want to update.
@@ -7678,9 +7679,9 @@ Create, get, list, or remove storage volume attachments.
 The `storage` commands are available in beta.
 {: beta}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 ### `ibmcloud ks storage attachment create`
 {: #cs_storage_att_cr}
@@ -7836,9 +7837,9 @@ ibmcloud ks storage attachment rm --cluster aa1111aa11aaaaa11aa1 --attachment 01
 List storage volumes for your classic clusters.
 {: shortdesc}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -7871,9 +7872,9 @@ ibmcloud ks storage volume get --volume 111111111
 Get a list of storage volumes.
 {: shortdesc}
 
-**Supported infrastructure provider**:
-* Classic
-* VPC
+Supported infrastructure providers
+:   Classic
+:   VPC
 
 **Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 

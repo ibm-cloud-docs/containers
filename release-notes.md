@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-08"
+lastupdated: "2022-12-12"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,21 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## December 2022
 {: #containers-dec22}
+
+
+  
+### 12 December 2022
+{: #containers-dec1222}
+{: release-note}
+
+
+
+
+
+Ingress ALB version `1.4.0_3212_iks` change log updates
+:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
 
 ### 9 December 2022
 {: #containers-dec0922}
@@ -2932,7 +2947,7 @@ Worker node versions
 {: release-note}
 
 Accessing clusters
-:   Updated the steps for [accessing clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se) to use the `--endpoint private` flag in the **`ibmcloud ks cluster config`** command.
+:   Updated the steps for [accessing clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se) to use the `--endpoint private` option in the **`ibmcloud ks cluster config`** command.
 
 CLI changelog
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.206](/docs/containers?topic=containers-cs_cli_changelog#10).
