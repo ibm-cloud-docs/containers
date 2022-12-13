@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-12"
+lastupdated: "2022-12-13"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -183,7 +183,7 @@ keep-alive-requests: 100
 ```
 {: screen}
 
-The default value for `keep-alive-requests` in Kubernetes Ingress is `100`, which is much lower than the default value of `4096` in {{site.data.keyword.containerlong_notm}} Ingress. If you migrated your Ingress setup from {{site.data.keyword.containerlong_notm}} Ingress to Kubernetes Ingress, you might need to change `keep-alive-requests` to pass existing performance tests.
+The default value for `keep-alive-requests` in Kubernetes Ingress is `100`, which is much less than the default value of `4096` in {{site.data.keyword.containerlong_notm}} Ingress. If you migrated your Ingress setup from {{site.data.keyword.containerlong_notm}} Ingress to Kubernetes Ingress, you might need to change `keep-alive-requests` to pass existing performance tests.
 {: note}
 
 ## Setting a maximum keepalive request timeout
