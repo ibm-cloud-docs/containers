@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-13"
 
 keywords: containers, ingress status, troubleshoot ingress, errahinf
 
@@ -41,6 +41,10 @@ Manually create the health service.
 {: tsResolve}
 
 1. Run the following command and make a note of your **Ingress subdomain** and **Ingress secret**.
+    ```sh
+    ibmcloud ks cluster get -c CLUSTER
+    ```
+    {: pre}
 
 1. Copy the following service configuration and save it to a file called `ingress.yaml`. 
 
