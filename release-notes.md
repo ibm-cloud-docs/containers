@@ -33,6 +33,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-dec1422}
 {: release-note}
 
+
+
+Ubuntu 20 is now available for {{site.data.keyword.containerlong_notm}} clusters
+:   You can now create {{site.data.keyword.containerlong_notm}} clusters using Ubuntu 20 worker nodes. To review the migration guide, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate). To review operating system support by cluster version, see [{{site.data.keyword.containerlong_notm}} version information](/docs/containers?topic=containers-cs_versions).
+
+
+
 CLI version 1.0.480 change log update
 :   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.480.
   

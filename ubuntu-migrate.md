@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-12-12"
+lastupdated: "2022-12-14"
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
 
@@ -19,8 +19,11 @@ subcollection: containers
 To migrate your worker nodes to a new Ubuntu version, you must provision a new worker pool. Then, add worker nodes to the new pool and remove the original worker pool. 
 {: shortdesc}
 
-Support for Ubuntu 20 is not yet available. This information is provided as a preview for the steps required to migrate your worker nodes at a later date. 
-{: preview}
+Starting in February 2023, Ubuntu 20 becomes the default operating system for all supported {{site.data.keyword.containerlong_notm}} cluster versions. Ubuntu 18 becomes unsupported on 30 April 2023. To avoid disruptions to your workload, migrate your worker nodes from Ubuntu 18 to Ubuntu 20 as soon as possible.
+{: note}
+
+With the release of Ubuntu 20, some worker node flavors are deprecated. If you have worker nodes with these flavors, you must provision worker nodes with a new flavor during the migration process. The deprecated flavors are: `mb3c.4x32, mb3c.16x64, ms3c.4x32.1.9tb.ssd, ms3c.16x64.1.9tb.ssd, ms3c.28x256.3.8tb.ssd, ms3c.28x512.4x3.8tb.ssd, mr3c.28x512, md3c.16x64.4x4tb, md3c.28x512.4x4tb, mg3c.16x128, mg3c.28x256`.
+{: important}
 
 For more information about creating worker pools and adding worker nodes, see [Adding worker nodes in classic clusters](/docs/containers?topic=containers-add_workers) or [Adding worker nodes in VPC clusters](/docs/containers?topic=containers-add_workers#vpc_pools).
 
@@ -31,6 +34,9 @@ Migrate your worker nodes to use Ubuntu 20. These steps apply to all supported c
 {: shortdesc}
 
 1. In your cluster, create a new worker pool for the Ubuntu 20 worker nodes. Include the `--operating-system` option and specify `UBUNTU_20_64`. Make sure that the number of nodes specified with the `--size-per-zone` option matches the number of Ubuntu 20 worker nodes that are to be replaced.
+
+    With the release of Ubuntu 20, some worker node flavors are deprecated. If you have worker nodes with these flavors, you must specify a supported flavor when creating your worker pool. The deprecated flavors are: `mb3c.4x32, mb3c.16x64, ms3c.4x32.1.9tb.ssd, ms3c.16x64.1.9tb.ssd, ms3c.28x256.3.8tb.ssd, ms3c.28x512.4x3.8tb.ssd, mr3c.28x512, md3c.16x64.4x4tb, md3c.28x512.4x4tb, mg3c.16x128, mg3c.28x256`. To list supported worker node flavors, run the `ibmcloud ks flavors --zone <zone>` command. For more information, see [Updating flavors](/docs/containers?topic=containers-update#machine_type).
+    {: note}
 
     **For classic clusters**. See the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_create) for command details.
 
