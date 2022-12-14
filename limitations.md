@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-12"
+lastupdated: "2022-12-14"
 
 keywords: kubernetes, infrastructure, rbac, policy, http2, quota, app protocol, application protocol
 
@@ -43,7 +43,7 @@ To view quota limits on cluster-related resources in your {{site.data.keyword.cl
 | Kubernetes | Make sure to review the [Kubernetes project limitations](https://kubernetes.io/docs/setup/best-practices/cluster-large/){: external}. |
 | KMS provider | Customizing the IP addresses that are allowed to connect to your {{site.data.keyword.keymanagementservicefull}} instance is not supported.|
 | Kubernetes pod logs | To check the logs for individual app pods, you can use the command line to run `kubectl logs <pod name>`. Do not use the Kubernetes dashboard to stream logs for your pods, which might cause a disruption in your access to the Kubernetes dashboard. |
-| Load balancers | **Kubernetes 1.20 or later**: Although the Kubernetes [SCTP protocol](https://kubernetes.io/docs/concepts/services-networking/service/#sctp){: external} and [application protocol](https://kubernetes.io/docs/concepts/services-networking/service/#application-protocol){: external} features are generally available in the community release, creating load balancers that use these protocols is not supported in {{site.data.keyword.containerlong_notm}} clusters. \n  Mixed protocol load balancer services are not currently supported in IBM Cloud Kubernetes Service. You cannot specify both TCP and UDP ports in your load balancer definition.|
+| Load balancers | **Kubernetes 1.23 or later**: Although the Kubernetes [SCTP protocol](https://kubernetes.io/docs/concepts/services-networking/service/#sctp){: external} is generally available in the Kubernetes community release, creating load balancers that use this protocol is not supported in {{site.data.keyword.containerlong_notm}} clusters. |
 | Operating system | Worker nodes must run RHEL 7 . You can't create a cluster with worker nodes that run different types of operating systems, such as {{site.data.keyword.redhat_openshift_notm}} on Red Hat Enterprise Linux and community Kubernetes on Ubuntu.Ubuntu 16 is deprecated. Before the end of support on 31 December 2021, [update the worker pools in your cluster to run Ubuntu 18](/docs/containers?topic=containers-update#machine_type). For more information, see the [{{site.data.keyword.cloud_notm}} blog](https://www.ibm.com/cloud/blog/announcements/new-bare-metal-servers-available-for-kubernetes-and-openshift-clusters){: external}.</p>|
 | Pod instances | You can run 110 pods per worker node. If you have worker nodes with 11 CPU cores or more, you can support 10 pods per core, up to a limit of 250 pods per worker node. The number of pods includes `kube-system` and `ibm-system` pods that run on the worker node. For improved performance, consider limiting the number of pods that you run per compute core so that you don't overuse the worker node. For example, on a worker node with a `b3c.4x16` flavor, you might run 10 pods per core that use no more than 75% of the worker node total capacity. |
 | Worker node quota | You can't exceed 500 worker nodes across all clusters in a region, per [infrastructure provider](/docs/containers?topic=containers-infrastructure_providers). If you need more of the resource, [contact IBM Support](/docs/get-support?topic=get-support-using-avatar). In the support case, include the new quota limit for the region and infrastructure provider that you want.|
