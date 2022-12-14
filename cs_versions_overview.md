@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-14"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -39,28 +39,28 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 **Latest**: 1.25
 - Release date: 06 October 2022
 - End of support: 13 December 2023`†`
-- Supported operating systems: `UBUNTU_18_64`
+- Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_125)
 - [Change log](/docs/containers?topic=containers-changelog_125)
 
 **Default**: 1.24
 - Release date: 09 June 2022
 - End of support: 6 September 2023`†`
-- Supported operating systems: `UBUNTU_18_64`
+- Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_124)
 - [Change log](/docs/containers?topic=containers-changelog_124)
 
 1.23
 - Release date: 09 February 2022
 - End of support: 26 April 2023`†`
-- Supported operating systems: `UBUNTU_18_64`
+- Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_123)
 - [Change log](/docs/containers?topic=containers-changelog_123)
 
 1.22
 - Release date: 29 September 2021
 - End of support: 18 January 2023
-- Supported operating systems: `UBUNTU_18_64`
+- Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_122)
 - [Change log](/docs/containers?topic=containers-changelog_122)
 
