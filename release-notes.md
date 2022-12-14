@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-12"
+lastupdated: "2022-12-14"
 
 keywords: kubernetes, release notes
 
@@ -29,7 +29,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## December 2022
 {: #containers-dec22}
 
+### 14 December 2022
+{: #containers-dec1422}
+{: release-note}
 
+CLI version 1.0.480 change log update
+:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.480.
   
 ### 12 December 2022
 {: #containers-dec1222}

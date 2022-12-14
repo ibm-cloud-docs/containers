@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-12-13"
+lastupdated: "2022-12-14"
 
 keywords: containers
 subcollection: containers
@@ -214,6 +214,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec22)
+
+    * [14 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1422)
+
+        * CLI version 1.0.480 change log update
 
     * [12 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1222)
 
@@ -5973,6 +5977,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.480](/docs/containers?topic=containers-cs_cli_changelog#cli-10480)
 
 * [Version 1.0.471](/docs/containers?topic=containers-cs_cli_changelog#cli-10471)
 
