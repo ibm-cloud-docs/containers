@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-12"
+lastupdated: "2022-12-15"
 
 keywords: kubernetes, release notes
 
@@ -29,7 +29,36 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## December 2022
 {: #containers-dec22}
 
+### 15 December 2022
+{: #containers-dec1522}
+{: release-note}
 
+{{site.data.keyword.cos_full_notm}} plug-in version `2.2.6` is available.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
+
+
+Ingress ALB version `1.2.1_3299_iks`, `1.3.1_3298_iks`, and `1.4.0_3297_iks`
+:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+ALB OAuth Proxy add-on version 2.0.0_1354
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+
+
+
+### 14 December 2022
+{: #containers-dec1422}
+{: release-note}
+
+
+
+Ubuntu 20 is now available for {{site.data.keyword.containerlong_notm}} clusters
+:   You can now create {{site.data.keyword.containerlong_notm}} clusters using Ubuntu 20 worker nodes. To review the migration guide, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate). To review operating system support by cluster version, see [{{site.data.keyword.containerlong_notm}} version information](/docs/containers?topic=containers-cs_versions).
+
+
+
+CLI version 1.0.480 change log update
+:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.480.
   
 ### 12 December 2022
 {: #containers-dec1222}

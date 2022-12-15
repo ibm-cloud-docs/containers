@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-15"
 
 keywords: kubernetes, containers
 
@@ -139,7 +139,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 ## Comparison between {{site.data.keyword.redhat_openshift_notm}} and community Kubernetes clusters
 {: #openshift_kubernetes}
 
-Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerlong_notm}} clusters are production-ready container platforms that are tailored for enterprise workloads. The following table compares and contrasts some common characteristics that can help you choose which container platform is right for your use case.
+Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerlong_notm}} clusters are production-ready container platforms that are tailored for enterprise workloads. The following table compares and contrasts some common characteristics that can help you choose which container platform is best for your use case.
 {: shortdesc}
 
 |Characteristics|Community Kubernetes clusters|{{site.data.keyword.redhat_openshift_notm}} clusters|

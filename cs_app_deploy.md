@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-15"
 
 keywords: kubernetes
 
@@ -123,7 +123,7 @@ To deploy your app,
 
 1. Open the Kubernetes [dashboard](#cli_dashboard) and click **+ Create**.
 2. Enter your app details in 1 of 2 ways.
-    - Select **Specify app details below** and enter the details.
+    - Select **Specify app details** and enter the details.
     - Select **Upload a YAML or JSON file** to upload your app [configuration file](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/){: external}.
 
     Need help with your configuration file? Check out this [example YAML file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml){: external}. In this example, a container is deployed from the **ibmliberty** image in the US-South region. Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.

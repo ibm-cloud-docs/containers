@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-12-13"
+lastupdated: "2022-12-15"
 
 keywords: containers
 subcollection: containers
@@ -214,6 +214,20 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec22)
+
+    * [15 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1522)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.6` is available.
+
+        * Ingress ALB version `1.2.1_3299_iks`, `1.3.1_3298_iks`, and `1.4.0_3297_iks`
+
+        * ALB OAuth Proxy add-on version 2.0.0_1354
+
+    * [14 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1422)
+
+        * Ubuntu 20 is now available for {{site.data.keyword.containerlong_notm}} clusters
+
+        * CLI version 1.0.480 change log update
 
     * [12 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1222)
 
@@ -5974,6 +5988,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version 1.0.480](/docs/containers?topic=containers-cs_cli_changelog#cli-10480)
+
 * [Version 1.0.471](/docs/containers?topic=containers-cs_cli_changelog#cli-10471)
 
 * [Version 1.0.459](/docs/containers?topic=containers-cs_cli_changelog#cli-10459)
@@ -8012,9 +8028,13 @@ subcollection: containers
 
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
 
+    * [1.4.0_3297_iks, released 15 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3297_iks)
+
     * [1.4.0_3212_iks, released 12 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3212_iks)
 
 * [Version 1.3.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_1)
+
+    * [1.3.1_3298_iks, released 15 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3298_iks)
 
     * [1.3.1_3192_iks (default), released 8 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3192_iks)
 
@@ -8027,6 +8047,8 @@ subcollection: containers
     * [1.3.0_2847_iks, released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2847_iks)
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
+
+    * [1.2.1_3299_iks, released 15 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_3299_iks)
 
     * [1.2.1_3186_iks, released 5 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_3186_iks)
 
@@ -8626,6 +8648,8 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
+* [Change log for version 2.2.6, released 15 December 2022](/docs/containers?topic=containers-cos_plugin_changelog#0226_object_plugin)
+
 * [Change log for version 2.2.5, released 9 December 2022](/docs/containers?topic=containers-cos_plugin_changelog#0225_object_plugin)
 
 * [Change log for version 2.2.4, released 5 December 2022](/docs/containers?topic=containers-cos_plugin_changelog#0224_object_plugin)
@@ -8705,6 +8729,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_1354, released on 15 December 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1354)
 
     * [Version 2.0.0_1315, released on 16 November 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1315)
 
