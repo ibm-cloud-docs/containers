@@ -217,6 +217,8 @@ subcollection: containers
 
     * [15 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1522)
 
+        * Ingress ALB version `1.2.1_3299_iks`, `1.3.1_3298_iks`, and `1.4.0_3297_iks`
+
         * ALB OAuth Proxy add-on version 2.0.0_1354
 
     * [14 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1422)
@@ -8024,9 +8026,13 @@ subcollection: containers
 
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
 
+    * [1.4.0_3297_iks, released 15 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3297_iks)
+
     * [1.4.0_3212_iks, released 12 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3212_iks)
 
 * [Version 1.3.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_1)
+
+    * [1.3.1_3298_iks, released 15 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3298_iks)
 
     * [1.3.1_3192_iks (default), released 8 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3192_iks)
 
@@ -8039,6 +8045,8 @@ subcollection: containers
     * [1.3.0_2847_iks, released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2847_iks)
 
 * [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
+
+    * [1.2.1_3299_iks, released 15 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_3299_iks)
 
     * [1.2.1_3186_iks, released 5 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_3186_iks)
 

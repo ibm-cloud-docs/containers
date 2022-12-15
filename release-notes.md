@@ -35,6 +35,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+Ingress ALB version `1.2.1_3299_iks`, `1.3.1_3298_iks`, and `1.4.0_3297_iks`
+:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
 ALB OAuth Proxy add-on version 2.0.0_1354
 :   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 

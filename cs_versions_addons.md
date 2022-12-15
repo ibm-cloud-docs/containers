@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-12"
+lastupdated: "2022-12-15"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -43,6 +43,11 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ## Version 1.4.0
 {: #1_4_0}
 
+### 1.4.0_3297_iks, released 15 December 2022
+{: #1.4.0_3297_iks}
+
+[CVE-2022-41717](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41717){: external}
+
 ### 1.4.0_3212_iks, released 12 December 2022
 {: #1.4.0_3212_iks}
 
@@ -50,6 +55,11 @@ Initial release of `1.4.0`
 
 ## Version 1.3.1
 {: #1_3_1}
+
+### 1.3.1_3298_iks, released 15 December 2022
+{: #1.3.1_3298_iks}
+
+[CVE-2022-41717](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41717){: external}
 
 ### 1.3.1_3192_iks (default), released 8 December 2022
 {: #1.3.1_3192_iks}
@@ -81,6 +91,11 @@ Initial release of `1.3.0`
 
 ## Version 1.2.1
 {: #1_2_1}
+
+### 1.2.1_3299_iks, released 15 December 2022
+{: #1.2.1_3299_iks}
+
+[CVE-2022-41717](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41717){: external}
 
 ### 1.2.1_3186_iks, released 5 December 2022
 {: #1.2.1_3186_iks}
