@@ -33,6 +33,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-dec1522}
 {: release-note}
 
+{{site.data.keyword.cos_full_notm}} plug-in version `2.2.6` is available.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
 
 
 Ingress ALB version `1.2.1_3299_iks`, `1.3.1_3298_iks`, and `1.4.0_3297_iks`

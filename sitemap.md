@@ -217,6 +217,8 @@ subcollection: containers
 
     * [15 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1522)
 
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.6` is available.
+
         * Ingress ALB version `1.2.1_3299_iks`, `1.3.1_3298_iks`, and `1.4.0_3297_iks`
 
         * ALB OAuth Proxy add-on version 2.0.0_1354
@@ -8645,6 +8647,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.6, released 15 December 2022](/docs/containers?topic=containers-cos_plugin_changelog#0226_object_plugin)
 
 * [Change log for version 2.2.5, released 9 December 2022](/docs/containers?topic=containers-cos_plugin_changelog#0225_object_plugin)
 
