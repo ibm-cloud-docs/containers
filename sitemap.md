@@ -2920,7 +2920,7 @@ subcollection: containers
 
 * [Working with your cluster by using the Kubernetes API](/docs/containers?topic=containers-cs_api_install#kube_api)
 
-* [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
+* [Refreshing IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
 
 * [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_cli_refresh)
 
@@ -4978,7 +4978,7 @@ subcollection: containers
 
 [Storing data on classic IBM Cloud {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
 
-* [Quickstart for {{site.data.keyword.cloud_notm}} Classic {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
+* [Quick start for {{site.data.keyword.cloud_notm}} Classic {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
 
 * [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
 
@@ -4994,9 +4994,9 @@ subcollection: containers
 
 * [Using existing {{site.data.keyword.filestorage_short}} in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
 
-    * [Step 1: Preparing your existing storage](/docs/containers?topic=containers-file_storage#existing-file-1)
+    * [Preparing your existing storage](/docs/containers?topic=containers-file_storage#existing-file-1)
 
-    * [Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-file_storage#existing-file-2)
+    * [Creating a persistent volume and a persistent volume claim](/docs/containers?topic=containers-file_storage#existing-file-2)
 
 * [Using {{site.data.keyword.filestorage_short}} in a stateful set](/docs/containers?topic=containers-file_storage#file_statefulset)
 
@@ -5070,7 +5070,7 @@ subcollection: containers
 
     * [Creating the PVC by using dynamic provisioning when you create a stateful set](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
 
-    * [Static provisioning: Using existing PVCs with a stateful set](/docs/containers?topic=containers-block_storage#block_static_statefulset)
+    * [Static provisioning by using existing PVCs with a stateful set](/docs/containers?topic=containers-block_storage#block_static_statefulset)
 
 * [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-block_storage#block_change_storage_configuration)
 
@@ -5182,7 +5182,7 @@ subcollection: containers
 
 [Storing data on {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block)
 
-* [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc_block_qs)
+* [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc_block_qs)
 
 * [Adding {{site.data.keyword.block_storage_is_short}} to your apps](/docs/containers?topic=containers-vpc-block#vpc-block-add)
 
@@ -5524,23 +5524,11 @@ subcollection: containers
 
 * [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
 
-[Understanding high availability and disaster recovery for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#ha)
+[Understanding high availability and disaster recovery](/docs/containers?topic=containers-ha#ha)
 
 * [About high availability](/docs/containers?topic=containers-ha#ha-about)
 
 * [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
-
-    * [1. Container or pod availability](/docs/containers?topic=containers-ha#ha-container)
-
-    * [2. Worker node availability](/docs/containers?topic=containers-ha#ha-worker)
-
-    * [3. Cluster availability](/docs/containers?topic=containers-ha#ha-cluster)
-
-    * [4. Zone availability](/docs/containers?topic=containers-ha#ha-zone)
-
-    * [5. Region availability](/docs/containers?topic=containers-ha#ha-region)
-
-    * [6. Storage availability](/docs/containers?topic=containers-ha#ha-storage)
 
 
 ## API reference

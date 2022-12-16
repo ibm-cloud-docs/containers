@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-08"
+lastupdated: "2022-12-16"
 
 keywords: kubernetes, ic, ks, kubectl, api
 
@@ -28,7 +28,7 @@ You can use the {{site.data.keyword.containerlong}} API to create and manage you
 The {{site.data.keyword.containerlong_notm}} API automates the provisioning and management of {{site.data.keyword.cloud_notm}} infrastructure resources for your clusters so that your apps have the compute, networking, and storage resources that they need to serve your users.
 {: shortdesc}
 
-The API is versioned to support the different infrastructure providers that are available for you to create clusters. For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).
+The API supports the different infrastructure providers that are available for you to create clusters. For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).
 
 You can use the version two (`v2`) API to manage both classic and VPC clusters. The `v2` API is designed to avoid breaking existing functionality when possible. However, make sure that you review the following differences between the `v1` and `v2` API.    
 
@@ -149,9 +149,9 @@ Federated ID
     ```
     {: screen}
 
-    You can find the {{site.data.keyword.cloud_notm}} IAM token in the **access_token** field of your API output. Note the {{site.data.keyword.cloud_notm}} IAM token to retrieve additional header information in the next steps.
+    You can find the {{site.data.keyword.cloud_notm}} IAM token in the `access_token` field of your API output. Note the {{site.data.keyword.cloud_notm}} IAM token to retrieve additional header information in the next steps.
 
-2. Retrieve the ID of the {{site.data.keyword.cloud_notm}} account that you want to work with. Replace `<iam_access_token>` with the {{site.data.keyword.cloud_notm}} IAM token that you retrieved from the **access_token** field of your API output in the previous step. In your API output, you can find the ID of your {{site.data.keyword.cloud_notm}} account in the **resources.metadata.guid** field.
+2. Retrieve the ID of the {{site.data.keyword.cloud_notm}} account that you want to work with. Replace `TOKEN` with the {{site.data.keyword.cloud_notm}} IAM token that you retrieved from the `access_token` field of your API output in the previous step. In your API output, you can find the ID of your {{site.data.keyword.cloud_notm}} account in the **resources.metadata.guid** field.
 
     ```sh
     GET https://accounts.cloud.ibm.com/coe/v2/accounts
@@ -160,7 +160,7 @@ Federated ID
     
     Header
     :    - `Content-Type: application/json`
-         - `Authorization: bearer <iam_access_token>`
+         - `Authorization: bearer TOKEN`
          - `Accept: application/json`
 
     The following example shows the output of the previous request.
@@ -238,10 +238,10 @@ Federated ID
     ```
     {: screen}
 
-    You can find the {{site.data.keyword.cloud_notm}} IAM token in the **access_token** and the refresh token in the **refresh_token** field of your API output.
+    You can find the {{site.data.keyword.cloud_notm}} IAM token in the `access_token` and the refresh token in the `refresh_token` field of your API output.
 
 4. List all classic or VPC clusters in your account. If you want to [run Kubernetes API requests against a cluster](#kube_api), make sure to note the name or ID of the cluster that you want to work with.
-    * **Classic**
+        Example request to list Classic clusters.
     
         ```sh
         GET https://containers.cloud.ibm.com/global/v2/classic/getClusters
@@ -251,7 +251,7 @@ Federated ID
         Header
         :    `Authorization: bearer <iam_token>`
 
-    * **VPC**
+        Example command to list VPC clusters.
     
         ```sh
         GET https://containers.cloud.ibm.com/global/v2/vpc/getClusters?provider=vpc-gen2
@@ -361,7 +361,7 @@ The following instructions require public network access in your cluster to conn
     "etcdPort": "31593",
     "masterURL": "https://c2.us-south.containers.cloud.ibm.com:30422",
     "ingress": {
-        ...
+        ...}
     ```
     {: screen}
 
@@ -371,7 +371,7 @@ The following instructions require public network access in your cluster to conn
     "etcdPort": "31593",
     "masterURL": "https://c2.private.us-south.containers.cloud.ibm.com:30422",
     "ingress": {
-        ...
+        ...}
     ```
     {: screen}
 
@@ -414,7 +414,7 @@ The following instructions require public network access in your cluster to conn
 
 
 
-## Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the API
+## Refreshing IAM access tokens and obtaining new refresh tokens with the API
 {: #cs_api_refresh}
 
 Every {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) access token that is issued via the API expires after one hour. You must refresh your access token regularly to assure access to the {{site.data.keyword.cloud_notm}} API. You can use the same steps to obtain a new refresh token.
@@ -475,7 +475,7 @@ Use the following steps if you want to create an {{site.data.keyword.cloud_notm}
     ```
     {: screen}
 
-    You can find your new {{site.data.keyword.cloud_notm}} IAM token in the **access_token**, and the refresh token in the **refresh_token** field of your API output.
+    You can find your new {{site.data.keyword.cloud_notm}} IAM token in the `access_token`, and the refresh token in the `refresh_token` field of your API output.
 
 2. Continue working with the [{{site.data.keyword.containerlong_notm}} API documentation](https://containers.cloud.ibm.com/global/swagger-global-api/#/){: external} by using the token from the previous step.
 
