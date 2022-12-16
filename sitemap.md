@@ -225,6 +225,8 @@ subcollection: containers
 
     * [14 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1422)
 
+        * Master fix pack `1.22.17_1582`, `1.23.15_1555`, `1.24.9_1547`, and `1.25.5_1525`
+
         * Ubuntu 20 is now available for {{site.data.keyword.containerlong_notm}} clusters
 
         * CLI version 1.0.480 change log update
