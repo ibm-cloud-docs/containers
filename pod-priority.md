@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-09"
+lastupdated: "2022-12-16"
 
 keywords: kubernetes
 
@@ -49,13 +49,11 @@ To understand how pod priority and Kubernetes scheduler work together, consider 
 
 For more information, see the Kubernetes documentation about [pod priority and preemption](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/){: external}.
 
-**Can I disable the pod priority admission controller?**
+Can I disable the pod priority admission controller?
+:   No. If you don't want to use pod priority, don't set a `globalDefault` or include a priority class in your pod deployments. Every pod defaults to zero, except the cluster-critical pods that IBM deploys with the [default priority classes](#default_priority_class). Because pod priority is relative, this basic setup ensures that the cluster-critical pods are prioritized for resources, and schedules any other pods by following the existing scheduling policies that you have in place.
 
-No. If you don't want to use pod priority, don't set a `globalDefault` or include a priority class in your pod deployments. Every pod defaults to zero, except the cluster-critical pods that IBM deploys with the [default priority classes](#default_priority_class). Because pod priority is relative, this basic setup ensures that the cluster-critical pods are prioritized for resources, and schedules any other pods by following the existing scheduling policies that you have in place.
-
-**How do resource quotas affect pod priority?**
-
-You can use pod priority in combination with resource quotas, including [quota scopes](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes){: external}. With quota scopes, you can set up your resource quotas to account for pod priority. Higher priority pods get to consume system resources that are limited by the resource quota before lower priority pods.
+How do resource quotas affect pod priority?
+:   You can use pod priority in combination with resource quotas, including [quota scopes](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes){: external}. With quota scopes, you can set up your resource quotas to account for pod priority. Higher priority pods get to consume system resources that are limited by the resource quota before lower priority pods.
 
 
 ## Understanding default priority classes
@@ -93,25 +91,23 @@ Before you begin:
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for the `default` namespace.
 
-To use a priority class:
 
-1. Optional: Use an existing priority class as a template for the new class.
 
-    1. List existing priority classes.
+1. List existing priority classes. You can use an existing priority class as a template for the new class.
 
-        ```sh
-        kubectl get priorityclasses
-        ```
-        {: pre}
+    ```sh
+    kubectl get priorityclasses
+    ```
+    {: pre}
 
-    2. Choose the priority class that you want to copy and create a local YAML file.
+2. Choose the priority class that you want to copy and create a local YAML file.
 
-        ```sh
-        kubectl get priorityclass <priority_class> -o yaml > Downloads/priorityclass.yaml
-        ```
-        {: pre}
+    ```sh
+    kubectl get priorityclass <priority_class> -o yaml > Downloads/priorityclass.yaml
+    ```
+    {: pre}
 
-2. Make your priority class YAML file.
+1. Make your priority class YAML file.
 
     ```yaml
     apiVersion: scheduling.k8s.io/v1alpha1
@@ -132,14 +128,14 @@ To use a priority class:
     | `description` | Optional: Tell users why to use this priority class. Enclose the string in quotations (`""`). |
     {: caption="Understanding the YAML file components" caption-side="bottom"}
 
-3. Create the priority class in your cluster.
+1. Create the priority class in your cluster.
 
     ```sh
     kubectl apply -f filepath/priorityclass.yaml
     ```
     {: pre}
 
-4. Verify that the priority class is created.
+1. Verify that the priority class is created.
 
     ```sh
     kubectl get priorityclasses
@@ -159,32 +155,31 @@ Before you begin:
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) in the namespace that you want to deploy the pods to.
 * [Understand how priority scheduling works](#priority_scheduling), as priority can preempt existing pods and affect how your cluster's resources are consumed.
 
-To assign priority to your pods:
 
-1. Check the importance of other deployed pods so that you can choose the correct priority class for your pods in relation to what already is deployed.
+Complete the following steps to check the importance of other deployed pods so that you can choose the correct priority class for your pods in relation to what already is deployed.
 
-    1. View the priority classes that other pods in the namespace use.
+1. View the priority classes that other pods in the namespace use.
 
-        ```sh
-        kubectl get pods -n <namespace> -o custom-columns=NAME:.metadata.name,PRIORITY:.spec.priorityClassName
-        ```
-        {: pre}
+    ```sh
+    kubectl get pods -n <namespace> -o custom-columns=NAME:.metadata.name,PRIORITY:.spec.priorityClassName
+    ```
+    {: pre}
 
-    2. Get the details of the priority class and note the **value** number. Pods with higher numbers are prioritized before pods with lower numbers. Repeat this step for each priority class that you want to review.
+1. Get the details of the priority class and note the **value** number. Pods with higher numbers are prioritized before pods with lower numbers. Repeat this step for each priority class that you want to review.
 
-        ```sh
-        kubectl describe priorityclass <priorityclass_name>
-        ```
-        {: pre}
+    ```sh
+    kubectl describe priorityclass <priorityclass_name>
+    ```
+    {: pre}
 
-2. Get the priority class that you want to use, or [create your own priority class](#create_priority_class).
+1. Get the priority class that you want to use, or [create your own priority class](#create_priority_class).
 
     ```sh
     kubectl get priorityclasses
     ```
     {: pre}
 
-3. In your pod spec, add the `priorityClassName` field with the name of the priority class that you retrieved in the previous step.
+1. In your pod spec, add the `priorityClassName` field with the name of the priority class that you retrieved in the previous step.
 
     ```yaml
     apiVersion: apps/v1
@@ -210,7 +205,7 @@ To assign priority to your pods:
     ```
     {: codeblock}
 
-4. Create your prioritized pods in the namespace that you want to deploy them to.
+1. Create your prioritized pods in the namespace that you want to deploy them to.
 
     ```sh
     kubectl apply -f filepath/pod-deployment.yaml

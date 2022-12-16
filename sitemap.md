@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-12-15"
+lastupdated: "2022-12-16"
 
 keywords: containers
 subcollection: containers
@@ -224,6 +224,8 @@ subcollection: containers
         * ALB OAuth Proxy add-on version 2.0.0_1354
 
     * [14 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1422)
+
+        * Master fix pack `1.22.17_1582`, `1.23.15_1555`, `1.24.9_1547`, and `1.25.5_1525`
 
         * Ubuntu 20 is now available for {{site.data.keyword.containerlong_notm}} clusters
 
@@ -2920,7 +2922,7 @@ subcollection: containers
 
 * [Working with your cluster by using the Kubernetes API](/docs/containers?topic=containers-cs_api_install#kube_api)
 
-* [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
+* [Refreshing IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
 
 * [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_cli_refresh)
 
@@ -4978,7 +4980,7 @@ subcollection: containers
 
 [Storing data on classic IBM Cloud {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
 
-* [Quickstart for {{site.data.keyword.cloud_notm}} Classic {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
+* [Quick start for {{site.data.keyword.cloud_notm}} Classic {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
 
 * [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
 
@@ -4994,9 +4996,9 @@ subcollection: containers
 
 * [Using existing {{site.data.keyword.filestorage_short}} in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
 
-    * [Step 1: Preparing your existing storage](/docs/containers?topic=containers-file_storage#existing-file-1)
+    * [Preparing your existing storage](/docs/containers?topic=containers-file_storage#existing-file-1)
 
-    * [Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-file_storage#existing-file-2)
+    * [Creating a persistent volume and a persistent volume claim](/docs/containers?topic=containers-file_storage#existing-file-2)
 
 * [Using {{site.data.keyword.filestorage_short}} in a stateful set](/docs/containers?topic=containers-file_storage#file_statefulset)
 
@@ -5070,7 +5072,7 @@ subcollection: containers
 
     * [Creating the PVC by using dynamic provisioning when you create a stateful set](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
 
-    * [Static provisioning: Using existing PVCs with a stateful set](/docs/containers?topic=containers-block_storage#block_static_statefulset)
+    * [Static provisioning by using existing PVCs with a stateful set](/docs/containers?topic=containers-block_storage#block_static_statefulset)
 
 * [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-block_storage#block_change_storage_configuration)
 
@@ -5182,7 +5184,7 @@ subcollection: containers
 
 [Storing data on {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block)
 
-* [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc_block_qs)
+* [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc_block_qs)
 
 * [Adding {{site.data.keyword.block_storage_is_short}} to your apps](/docs/containers?topic=containers-vpc-block#vpc-block-add)
 
@@ -5524,23 +5526,11 @@ subcollection: containers
 
 * [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
 
-[Understanding high availability and disaster recovery for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#ha)
+[Understanding high availability and disaster recovery](/docs/containers?topic=containers-ha#ha)
 
 * [About high availability](/docs/containers?topic=containers-ha#ha-about)
 
 * [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
-
-    * [1. Container or pod availability](/docs/containers?topic=containers-ha#ha-container)
-
-    * [2. Worker node availability](/docs/containers?topic=containers-ha#ha-worker)
-
-    * [3. Cluster availability](/docs/containers?topic=containers-ha#ha-cluster)
-
-    * [4. Zone availability](/docs/containers?topic=containers-ha#ha-zone)
-
-    * [5. Region availability](/docs/containers?topic=containers-ha#ha-region)
-
-    * [6. Storage availability](/docs/containers?topic=containers-ha#ha-storage)
 
 
 ## API reference
@@ -6202,6 +6192,8 @@ subcollection: containers
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
 
+    * [Change log for master fix pack 1.25.5_1525, released 14 December 2022](/docs/containers?topic=containers-changelog_125#1255_1525)
+
     * [Change log for worker node fix pack 1.25.4_1524, released 05 December 2022](/docs/containers?topic=containers-changelog_125#1254_1524)
 
     * [Change log for worker node fix pack 1.25.4_1523, released 21 November 2022](/docs/containers?topic=containers-changelog_125#1254_1523)
@@ -6278,6 +6270,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for master fix pack 1.24.9_1547, released 14 December 2022](/docs/containers?topic=containers-changelog_124#1249_1547)
 
     * [Change log for worker node fix pack 1.24.8_1546, released 05 December 2022](/docs/containers?topic=containers-changelog_124#1248_1546)
 
@@ -6381,6 +6375,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for master fix pack 1.23.15_1555, released 14 December 2022](/docs/containers?topic=containers-changelog_123#12315_1555)
 
     * [Change log for worker node fix pack 1.23.14_1554, released 05 December 2022](/docs/containers?topic=containers-changelog_123#12314_1554)
 
@@ -6512,6 +6508,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview_122)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for master fix pack 1.22.17_1582, released 14 December 2022](/docs/containers?topic=containers-changelog_122#12217_1582)
 
     * [Change log for worker node fix pack 1.22.16_1580, released 05 December 2022](/docs/containers?topic=containers-changelog_122#12216_1580)
 

@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-12-15"
+lastupdated: "2022-12-16"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -38,6 +38,27 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.22 change log.
 {: shortdesc}
+
+### Change log for master fix pack 1.22.17_1582, released 14 December 2022
+{: #12217_1582}
+
+The following table shows the changes that are in the master fix pack 1.22.17_1582. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.13 | v1.3.14 | Updated `Go` dependencies. Exclude ingress status from cluster status aggregation. |
+| etcd | v3.4.21 | v3.4.22 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.22){: external}. |
+| GPU device plug-in and installer | cce0cfa | 03fd318 | Update GPU images with `Go` version `1.19.2` to resolve vulnerabilities |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1213 | 1257 | Updated universal base image (UBI) to resolve: [CVE-2022-1304](https://nvd.nist.gov/vuln/detail/cve-2022-1304){: external}, [CVE-2016-3709](https://nvd.nist.gov/vuln/detail/CVE-2016-3709){: external}, [CVE-2022-42898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42898){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.22.15-7 | v1.22.16-1 | Updated to support the `Kubernetes 1.22.16` release. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 420 | 421 | Updated universal base image (UBI) to resolve [CVE-2022-42898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42898){: external}. Updated `Go` to version `1.18.8` |
+| Key Management Service provider | v2.5.11 | v2.5.12 | Updated `Go` dependencies. |
+| Kubernetes | v1.22.16 | v1.22.17 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.17){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2110 | 2325 | Update `Go` to version `1.19.1` and update dependencies. |
+{: caption="Changes since version 1.22.16_1578" caption-side="bottom"}
+
 
 ### Change log for worker node fix pack 1.22.16_1580, released 05 December 2022
 {: #12216_1580}

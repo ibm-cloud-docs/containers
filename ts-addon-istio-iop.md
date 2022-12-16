@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-16"
 
 keywords: custom gateway, reconcile loop, istio, IOP, help
 
@@ -62,7 +62,7 @@ In a test cluster, parse through the IOP resource configuration to find the line
     ```
     {: pre}
 
-6. After you have determined which section in the IOP resource configuration caused the reconcile loop error, repeat the above process with each individual line in the section until you determine the line that is causing the error. 
+6. After you have determined which section in the IOP resource configuration caused the reconcile loop error, repeat the steps with each individual line in the section until you determine the line that is causing the error. 
 
 7. Debug the line to resolve the error. 
 
