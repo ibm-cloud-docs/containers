@@ -215,6 +215,10 @@ subcollection: containers
 
 * [December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec22)
 
+    * [19 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1922)
+
+        * Worker node fix packs `1.22.17_1583`, `1.23.15_1556`, `1.24.9_1548`, and `1.25.5_1526`
+
     * [15 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1522)
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.6` is available.
