@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-19"
 
 keywords: kubernetes, coredns, kubedns, dns
 
@@ -136,7 +136,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             cache 30
             loop
             forward . 1.2.3.4
-          }
+            }
     ```
     {: screen}
 
