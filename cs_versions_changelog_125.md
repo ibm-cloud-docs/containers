@@ -39,6 +39,20 @@ Review the version 1.25 change log.
 
 
 
+### Change log for worker node fix pack 1.25.5_1526, released 19 December 2022
+{: #1255_1526}
+
+The following table shows the changes that are in the worker node fix pack 1.25.5_1526. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | 4.15.0-197 | 4.15.0-200 | Worker node kernel & package updates for [CVE-2022-2309](https://nvd.nist.gov/vuln/detail/CVE-2022-2309){: external},[CVE-2022-38533](https://nvd.nist.gov/vuln/detail/CVE-2022-38533){: external},[CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external},[CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40304){: external},[CVE-2022-41916](https://nvd.nist.gov/vuln/detail/CVE-2022-41916){: external},[CVE-2022-45061](https://nvd.nist.gov/vuln/detail/CVE-2022-45061){: external}. |
+| Ubuntu 20.04 packages | 5.4.0-132 | 5.4.0-135 | Worker node kernel & package updates for [CVE-2022-2309](https://nvd.nist.gov/vuln/detail/CVE-2022-2309){: external},[CVE-2022-38533](https://nvd.nist.gov/vuln/detail/CVE-2022-38533){: external},[CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external},[CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40304){: external},[CVE-2022-41916](https://nvd.nist.gov/vuln/detail/CVE-2022-41916){: external}. |
+| Kubernetes | 1.25.4 | 1.25.5 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.5){: external}. |
+{: caption="Changes since version 1.25.4_1524" caption-side="top"}
+
+
 ### Change log for master fix pack 1.25.5_1525, released 14 December 2022
 {: #1255_1525}
 
