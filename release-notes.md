@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-16"
+lastupdated: "2022-12-19"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## December 2022
 {: #containers-dec22}
+
+### 19 December 2022
+{: #containers-dec1922}
+{: release-note}
+
+
+
+Worker node fix packs `1.22.17_1583`, `1.23.15_1556`, `1.24.9_1548`, and `1.25.5_1526`
+:   For more information, see the change logs: [1.22](/docs/containers?topic=containers-changelog_122), [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), and [1.25](/docs/containers?topic=containers-changelog_125).
+
+
 
 ### 15 December 2022
 {: #containers-dec1522}

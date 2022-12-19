@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-12"
+lastupdated: "2022-12-19"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -392,7 +392,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
 ## Managing TLS certificates and secrets with {{site.data.keyword.cloudcerts_long}}
 {: #manage_certs}
 
-Previously a [{{site.data.keyword.cloudcerts_long}}](/docs/certificate-manager?topic=certificate-manager-about-certificate-manager) instance was automatically created for each cluster.  This functionality is no longer provided. However, you can use the information in this section to manage existing {{site.data.keyword.cloudcerts_long}} instances until they become fully unsupported in December 2022. 
+Previously a [{{site.data.keyword.cloudcerts_long}}](/docs/certificate-manager?topic=certificate-manager-about-certificate-manager) instance was automatically created for each cluster. This functionality is no longer provided. However, you can use the information in this section to manage existing {{site.data.keyword.cloudcerts_long}} instances until they become fully unsupported in December 2022. 
 {: shortdesc}
 
 {{site.data.keyword.cloudcerts_short}} is deprecated and instances are no longer automatically provisioned in new clusters. Support for {{site.data.keyword.cloudcerts_short}} ends on 1 December 2022 and any remaining {{site.data.keyword.cloudcerts_short}} instances are set to be deleted on 31 Dec 2022. After this date, certificates are set to be written only to the cluster unless you set up a {{site.data.keyword.secrets-manager_short}} instance. [Migrate your certificates to IBM Cloud {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-certs-mgr-migration) as soon as possible.

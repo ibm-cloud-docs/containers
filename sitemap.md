@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2022
-lastupdated: "2022-12-16"
+lastupdated: "2022-12-19"
 
 keywords: containers
 subcollection: containers
@@ -214,6 +214,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec22)
+
+    * [19 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1922)
+
+        * Worker node fix packs `1.22.17_1583`, `1.23.15_1556`, `1.24.9_1548`, and `1.25.5_1526`
 
     * [15 December 2022](/docs/containers?topic=containers-containers-relnotes#containers-dec1522)
 
@@ -6192,6 +6196,8 @@ subcollection: containers
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
 
+    * [Change log for worker node fix pack 1.25.5_1526, released 19 December 2022](/docs/containers?topic=containers-changelog_125#1255_1526)
+
     * [Change log for master fix pack 1.25.5_1525, released 14 December 2022](/docs/containers?topic=containers-changelog_125#1255_1525)
 
     * [Change log for worker node fix pack 1.25.4_1524, released 05 December 2022](/docs/containers?topic=containers-changelog_125#1254_1524)
@@ -6270,6 +6276,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.9_1548, released 19 December 2022](/docs/containers?topic=containers-changelog_124#1249_1548)
 
     * [Change log for master fix pack 1.24.9_1547, released 14 December 2022](/docs/containers?topic=containers-changelog_124#1249_1547)
 
@@ -6375,6 +6383,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for worker node fix pack 1.23.15_1556, released 19 December 2022](/docs/containers?topic=containers-changelog_123#12315_1556)
 
     * [Change log for master fix pack 1.23.15_1555, released 14 December 2022](/docs/containers?topic=containers-changelog_123#12315_1555)
 
@@ -6508,6 +6518,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview_122)
 
 * [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
+
+    * [Change log for worker node fix pack 1.22.17_1583, released 19 December 2022](/docs/containers?topic=containers-changelog_122#12217_1583)
 
     * [Change log for master fix pack 1.22.17_1582, released 14 December 2022](/docs/containers?topic=containers-changelog_122#12217_1582)
 

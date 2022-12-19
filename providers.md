@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-09"
+lastupdated: "2022-12-19"
 
 keywords: kubernetes, classic
 
@@ -26,7 +26,7 @@ Virtual private cloud (VPC)
 
 
 {{site.data.keyword.satelliteshort}}
-:   Create your cluster on your own hardware, {{site.data.keyword.cloud_notm}} Classic or VPC, or on vritual servers in another cloud provider like AWS or Azure.
+:   Create your cluster on your own hardware, {{site.data.keyword.cloud_notm}} Classic or VPC, or on virtual servers in another cloud provider like AWS or Azure.
 
 
 Classic

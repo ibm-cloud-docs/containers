@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-15"
+lastupdated: "2022-12-19"
 
 keywords: kubernetes
 
@@ -164,7 +164,7 @@ To deploy your app,
     ```
     {: pre}
 
-3. If you made your app publicly available by using a nodeport service, a load balancer service, or Ingress, verify that you can access the app.
+3. If you made your app publicly available by using a NodePort service, a load balancer service, or Ingress, verify that you can access the app.
 
 ## Deploying apps to specific worker nodes by using labels
 {: #node_affinity}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2022
-lastupdated: "2022-12-12"
+lastupdated: "2022-12-19"
 
 keywords: kubernetes, containers, 125, version 125, 125 update actions
 
@@ -62,7 +62,7 @@ This information summarizes updates that are likely to have and impact on deploy
 
 The following table shows the actions that you must take before you update the Kubernetes master.
 
-[Pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external} have been removed in Kubernetes version 1.25.  See the Kubernetes [Deprecated API migration guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#psp-v125){: external} for more information. Customers will have the option to replace Pod Security Policies with [Pod security admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/){: external} or a [third party admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external}. For more information, see  [Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration). Note that {{site.data.keyword.containerlong_notm}} will make a beta version of Pod Security available in version 1.24 to aid in the migration, but this support is not yet available.
+[Pod security policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external} have been removed in Kubernetes version 1.25. See the Kubernetes [Deprecated API migration guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#psp-v125){: external} for more information. Customers have the option to replace Pod Security Policies with [Pod security admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/){: external} or a [third party admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external}. For more information, see  [Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration). Note that {{site.data.keyword.containerlong_notm}} makes a beta version of Pod Security available in version 1.24 to aid in the migration, but this support is not yet available.
 {: important}
 
 

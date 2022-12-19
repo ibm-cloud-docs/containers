@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2022
-lastupdated: "2022-12-16"
+lastupdated: "2022-12-19"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -38,6 +38,20 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.22 change log.
 {: shortdesc}
+
+### Change log for worker node fix pack 1.22.17_1583, released 19 December 2022
+{: #12217_1583}
+
+The following table shows the changes that are in the worker node fix pack 1.22.17_1583. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | 4.15.0-197 | 4.15.0-200 | Worker node kernel & package updates for [CVE-2022-2309](https://nvd.nist.gov/vuln/detail/CVE-2022-2309){: external},[CVE-2022-38533](https://nvd.nist.gov/vuln/detail/CVE-2022-38533){: external},[CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external},[CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40304){: external},[CVE-2022-41916](https://nvd.nist.gov/vuln/detail/CVE-2022-41916){: external},[CVE-2022-45061](https://nvd.nist.gov/vuln/detail/CVE-2022-45061){: external}. |
+| Ubuntu 20.04 packages | 5.4.0-132 | 5.4.0-135 | Worker node kernel & package updates for [CVE-2022-2309](https://nvd.nist.gov/vuln/detail/CVE-2022-2309){: external},[CVE-2022-38533](https://nvd.nist.gov/vuln/detail/CVE-2022-38533){: external},[CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external},[CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40304){: external},[CVE-2022-41916](https://nvd.nist.gov/vuln/detail/CVE-2022-41916){: external}. |
+| Kubernetes | 1.22.16 | 1.22.17 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.17){: external}. |
+{: caption="Changes since version 1.22.16_1580" caption-side="top"}
+
 
 ### Change log for master fix pack 1.22.17_1582, released 14 December 2022
 {: #12217_1582}
@@ -108,7 +122,7 @@ The following table shows the changes that are in the master fix pack 1.22.16_15
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.22.15-3 | v1.22.15-7 | Key rotation and updated `Go` dependencies. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 416 | 420 | Updated universal base image (UBI) to version `8.7-923` to resolve CVEs. |
 | Key Management Service provider | v2.5.10 | v2.5.11 | Updated `Go` dependencies and to `Go` version `1.19.3`. |
-| Kubernetes | v1.22.15 | v1.22.16 | [CVE-2022-3294](https://nvd.nist.gov/vuln/detail/CVE-2022-2294){: external} and [CVE-2022-3162](https://nvd.nist.gov/vuln/detail/CVE-2022-3162){: external}. For more information, see [{{site.data.keyword.containerlong_notm}} is affected by Kubernetes API server security vulnerabilities CVE-2022-3294 and CVE-2022-3162](https://www.ibm.com/support/pages/node/6844715){: external}. See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.16){: external}. |
+| Kubernetes | v1.22.15 | v1.22.16 | [CVE-2022-3294](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3294){: external} and [CVE-2022-3162](https://nvd.nist.gov/vuln/detail/CVE-2022-3162){: external}. For more information, see [{{site.data.keyword.containerlong_notm}} is affected by Kubernetes API server security vulnerabilities CVE-2022-3294 and CVE-2022-3162](https://www.ibm.com/support/pages/node/6844715){: external}. See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.16){: external}. |
 {: caption="Changes since version 1.22.15_1576" caption-side="bottom"}
 
 
