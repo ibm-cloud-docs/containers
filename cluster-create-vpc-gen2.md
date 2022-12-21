@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-15"
+lastupdated: "2022-12-21"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2
 
@@ -163,7 +163,11 @@ Create your single zone or multizone VPC cluster by using the {{site.data.keywor
     
     
     `--workers <number>`
-    :   Specify the number of worker nodes to include in the cluster. If you don't specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster). This value is optional.
+    :   Specify the number of worker nodes to include in the cluster. If you don't specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster). This value is optional.<openshift>
+
+    `--operating-system SYSTEM`
+    :   Optional. The operating system of the worker nodes you want to provision in your cluster. For a list of available operating systems by cluster version, see [{{site.data.keyword.containerlong_notm}} version information](/docs/containers?topic=containers-cs_versions).
+    :   If no option is specified, the default [operating system version that corresponds to the cluster version is used.
 
 
    `--cluster-security-group <group_ID>`
