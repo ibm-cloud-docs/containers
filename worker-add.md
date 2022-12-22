@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-19"
+lastupdated: "2022-12-21"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, delete
 
@@ -304,7 +304,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     * The new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
 
     ```sh
-    ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone_min_1>  [--label key=value]
+    ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone_min_1> [--operating-system UBUNTU_20_64|UBUNTU_18_64] [--label key=value]
     ```
     {: pre}
 
@@ -541,7 +541,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 1. Create a worker pool. Ensure that you include the `--labels node-role.kubernetes.io/compute=true,ibm-cloud.kubernetes.io/private-cluster-role=worker` option to create a worker pool with compute functionality. If you provision a bare metal worker pool or dedicated VM, specify `--hardware dedicated`. Note that when you add worker nodes to your cluster, the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
     ```sh
-    ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --labels node-role.kubernetes.io/compute=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
+    ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> [--operating-system UBUNTU_20_64|UBUNTU_18_64] --labels node-role.kubernetes.io/compute=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
     ```
     {: pre}
 
@@ -608,7 +608,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 1. Create a worker pool. Ensure that you include the `--labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway` option of following command to create a worker pool with gateway functionality. If you provision a bare metal or dedicated VM worker pool, specify `--hardware dedicated`. Note that when you add worker nodes to your cluster, the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
     ```sh
-    ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway
+    ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> [--operating-system UBUNTU_20_64|UBUNTU_18_64] --labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway
     ```
     {: pre}
 

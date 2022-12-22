@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2022
-lastupdated: "2022-12-01"
+lastupdated: "2022-12-21"
 
 keywords: kubernetes, dedicated hosts
 
@@ -17,8 +17,8 @@ subcollection: containers
 # Creating and managing dedicated hosts on VPC Gen 2 infrastructure
 {: #dedicated-hosts}
 
-**Supported infrastructure provider**: VPC
-
+Supported infrastructure providers
+:   VPC
 Dedicated hosts are single-tenant managed hypervisors that can only be used to deploy {{site.data.keyword.containerlong_notm}} clusters. 
 
 Dedicated hosts, including those with instance storage, are available in Beta for allowlisted accounts only. [Contact support](/docs/containers?topic=containers-get-help) for information about how to get added to the allowlist. Additionally, if you want to use dedicated hosts with instance storage, include this in your support case.
