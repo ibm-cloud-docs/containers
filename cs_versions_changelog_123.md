@@ -1,8 +1,8 @@
 ---
 
 copyright:
- years: 2014, 2022
-lastupdated: "2022-12-19"
+ years: 2014, 2023
+lastupdated: "2023-01-02"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -38,6 +38,20 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.23 change log.
 {: shortdesc}
+
+
+### Change log for worker node fix pack 1.23.15_1557, released 02 January 2023
+{: #12315_1557}
+
+The following table shows the changes that are in the worker node fix pack 1.23.15_1557. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages |N/A|N/A|N/A|
+| Ubuntu 20.04 packages |N/A|N/A|N/A|
+| Kubernetes |N/A|N/A|N/A|
+{: caption="Changes since version 1.23.15_1556" caption-side="top"}
 
 
 ### Change log for worker node fix pack 1.23.15_1556, released 19 December 2022
