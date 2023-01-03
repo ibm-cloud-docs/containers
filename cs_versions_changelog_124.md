@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-01-02"
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, containers
 
@@ -75,7 +75,7 @@ The following table shows the changes that are in the master fix pack 1.24.9_154
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.3.13 | v1.3.14 | Updated `Go` dependencies. Exclude ingress status from cluster status aggregation. |
-| etcd | v3.5.5 | v3.5.6 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.6){: external}. |
+| etcd | v3.5.5 | v3.5.6 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.6){: external}. |
 | GPU device plug-in and installer | cce0cfa | 03fd318 | Update GPU images with `Go` version `1.19.2` to resolve vulnerabilities |
 | {{site.data.keyword.IBM_notm}} Calico extension | 1213 | 1257 | Updated universal base image (UBI) to resolve: [CVE-2022-1304](https://nvd.nist.gov/vuln/detail/cve-2022-1304){: external}, [CVE-2016-3709](https://nvd.nist.gov/vuln/detail/CVE-2016-3709){: external}, [CVE-2022-42898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42898){: external}. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.3.3 | v2.3.4 | Updated universal base image (UBI) to resolve CVEs. Updated `Go` to version `1.18.6` |
