@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-21"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes
 
@@ -95,7 +95,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -103,7 +104,9 @@ Supported infrastructure providers
 :    Required: The name or ID of the cluster.
 
 
-**Example**:
+##### Example `addon disable alb-oauth-proxy` command
+{: #addon-disable-alb-oauth-proxy}
+
 ```sh
 ibmcloud ks cluster addon disable alb-oauth-proxy --cluster my_cluster
 ```
@@ -124,7 +127,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -146,10 +150,11 @@ ibmcloud ks cluster addon disable istio --cluster CLUSTER [-f]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
+Supported infrastructure provider
+:   Classic
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -171,10 +176,11 @@ ibmcloud ks cluster addon disable istio-extras --cluster CLUSTER [-f]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
+Supported infrastructure provider
+:   Classic
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -196,10 +202,11 @@ ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster CLUSTER
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
+Supported infrastructure provider
+:   Classic
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -225,7 +232,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -251,7 +259,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 
 
@@ -266,10 +275,11 @@ ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster CLUSTER [-f]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
+Supported infrastructure provider
+:   Classic
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -304,7 +314,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -315,7 +326,9 @@ Supported infrastructure providers
 :    Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.
 
 
-**Example**:
+##### Example `addon enable alb-oauth-proxy` command
+{: #addon-enable-alb-oauth-proxy}
+
 ```sh
 ibmcloud ks cluster addon enable alb-oauth-proxy --cluster my_cluster
 ```
@@ -336,7 +349,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -347,7 +361,9 @@ Supported infrastructure providers
 :    Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.
 
 
-**Example**:
+##### Example `addon enable debug-tool` command
+{: #addon-enable-debug-tool}
+
 ```sh
 ibmcloud ks cluster addon enable debug-tool --cluster my_cluster
 ```
@@ -364,10 +380,11 @@ ibmcloud ks cluster addon enable istio --cluster CLUSTER [--version VERSION]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
+Supported infrastructure providers
+:   Classic
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -393,7 +410,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -420,7 +438,8 @@ ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster CLUSTER [--versi
 Supported infrastructure providers
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -448,7 +467,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -480,7 +500,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -506,7 +527,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -538,7 +560,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: None
+Minimum required permissions
+:   None
 
 **Command options**:
 
@@ -573,7 +596,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: None
+Minimum required permissions
+:   None
 
 **Command options**:
 
@@ -587,7 +611,8 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `addon versions` command
+{: #addon-versions-example}
 
 ```sh
 ibmcloud ks cluster addon versions --addon istio
@@ -614,7 +639,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -628,7 +654,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster ca create` command
+{: #cluster-ca-create-example}
+
 ```sh
 ibmcloud ks cluster ca create --cluster my_cluster
 ```
@@ -649,7 +677,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -663,7 +692,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster ca get` command
+{: #cluster-ca-get-example}
+
 ```sh
 ibmcloud ks cluster ca get --cluster my_cluster
 ```
@@ -687,7 +718,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -701,7 +733,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster ca rotate` command
+{: #cluster-ca-rotate-example}
+
 ```sh
 ibmcloud ks cluster ca rotate --cluster my_cluster
 ```
@@ -723,7 +757,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -734,7 +769,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster ca status` command
+{: #cluster-ca-status-example}
+
 ```sh
 ibmcloud ks cluster ca status --cluster my_cluster
 ```
@@ -758,7 +795,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** or **Reader** {{site.data.keyword.cloud_notm}} IAM service access role for the cluster in {{site.data.keyword.containerlong_notm}}. Further, if you have only a platform access role or only a service access role, additional constraints apply.
+Minimum required permissions
+:   **Viewer** or **Reader** {{site.data.keyword.cloud_notm}} IAM service access role for the cluster in {{site.data.keyword.containerlong_notm}}. Further, if you have only a platform access role or only a service access role, additional constraints apply.
 * **Platform**: If you have only a platform access role, you can perform this command, but you need a [service access role](/docs/containers?topic=containers-users#checking-perms) or a [custom RBAC policy](/docs/containers?topic=containers-access-overview#role-binding) to perform Kubernetes actions in the cluster.
 * **Service**: If you have only a service access role, you can perform this command. However, your cluster admin must give you the cluster name and ID because you can't run the `ibmcloud ks cluster ls` command or open the {{site.data.keyword.containerlong_notm}} console to view clusters. After you receive the cluster name and ID, you can [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-deploy_app#db_cli) and work with Kubernetes.
 
@@ -791,7 +829,9 @@ Supported infrastructure providers
 :    Optional: Prints the command output in YAML format.
 
 
-**Example**:
+#### Example `cluster config` command
+{: #cluster-config-example}
+
 ```sh
 ibmcloud ks cluster config --cluster my_cluster
 ```
@@ -809,12 +849,16 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 ```
 {: pre}
 
-**Supported infrastructure provider**: Classic. To create a VPC cluster, use the [`ibmcloud ks cluster create vpc-gen2` command](#cli_cluster-create-vpc-gen2) instead.
+Supported infrastructure providers
+:   Classic. 
 
-**Minimum required permissions**:
-* **Administrator** platform access role for {{site.data.keyword.containerlong_notm}} at the account level
-* **Administrator** platform access role for {{site.data.keyword.registrylong_notm}} at the account level
-* **Super User** role for IBM Cloud infrastructure
+To create a VPC cluster, use the [`ibmcloud ks cluster create vpc-gen2` command](#cli_cluster-create-vpc-gen2) instead.
+{: note}
+
+Minimum required permissions
+:   **Administrator** platform access role for {{site.data.keyword.containerlong_notm}} at the account level
+:   **Administrator** platform access role for {{site.data.keyword.registrylong_notm}} at the account level
+:   **Super User** role for IBM Cloud infrastructure
 
 **Command options**:
 
@@ -916,7 +960,9 @@ Gateway-enabled clusters are deprecated and become unsupported soon. If you have
 
 
 
-**Examples**:
+#### Example `cluster create classic` commands
+{: #cluster-create-classic-examples}
+
 
 
 **Create a free cluster**: Specify the cluster name only; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
@@ -963,11 +1009,11 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
 Supported infrastructure providers
 :   VPC
 
-**Minimum required permissions**:
-* [**Administrator** platform access role for VPC Infrastructure](/docs/vpc?topic=vpc-iam-getting-started).
-* [**Administrator** platform access role](/docs/containers?topic=containers-users#checking-perms) for {{site.data.keyword.containerlong_notm}} at the account level.
-* [**Writer** or **Manager** service access role](/docs/containers?topic=containers-users#checking-perms) for {{site.data.keyword.containerlong_notm}}.
-* [**Administrator** platform access role](/docs/containers?topic=containers-users#checking-perms) for {{site.data.keyword.registrylong_notm}} at the account level.
+Minimum required permissions
+:   [**Administrator** platform access role for VPC Infrastructure](/docs/vpc?topic=vpc-iam-getting-started).
+:   [**Administrator** platform access role](/docs/containers?topic=containers-users#checking-perms) for {{site.data.keyword.containerlong_notm}} at the account level.
+:   [**Writer** or **Manager** service access role](/docs/containers?topic=containers-users#checking-perms) for {{site.data.keyword.containerlong_notm}}.
+:   [**Administrator** platform access role](/docs/containers?topic=containers-users#checking-perms) for {{site.data.keyword.registrylong_notm}} at the account level.
 
 **Command options**:
 
@@ -1047,7 +1093,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster create vpc-gen2` command
+{: #cluster-create-vpc-gen2-example}
+
 ```sh
 ibmcloud ks cluster create vpc-gen2 --name mycluster --version 1.24 --zone us-south-1 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --subnet-id 1ab23c45-6789-0123-456d-789ef01gh234 --flavor bx2.4x16 --workers 3
 ```
@@ -1068,7 +1116,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1085,7 +1134,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster get` command
+{: #cluster-get-example}
+
 ```sh
 ibmcloud ks cluster get --cluster my_cluster --show-resources
 ```
@@ -1106,7 +1157,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1117,7 +1169,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster image-security disable` command
+{: #cluster-image-security-disable-example}
+
 ```sh
 ibmcloud ks cluster image-security disable --cluster my_cluster
 ```
@@ -1138,7 +1192,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1152,7 +1207,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster image-security enable` command
+{: #cluster-image-security-enable-example}
+
 ```sh
 ibmcloud ks cluster image-security enable --cluster my_cluster
 ```
@@ -1175,7 +1232,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1191,8 +1249,9 @@ Supported infrastructure providers
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
+#### Example `cluster ls` command
+{: #cluster-ls-example}
 
-**Example**:
 ```sh
 ibmcloud ks cluster ls -l ams03 -l wdc -l ap
 ```
@@ -1220,10 +1279,11 @@ ibmcloud ks cluster master audit-webhook get --cluster CLUSTER [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
+Supported infrastructure providers
+:   Classic
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1248,10 +1308,11 @@ ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server 
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
+Supported infrastructure provider
+:   Classic
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1280,7 +1341,9 @@ The `verbose` policy option is supported on {{site.data.keyword.containershort}}
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+##### Example `cluster master audit-webhook set` command
+{: #cluster-master-audit-webhook-set-example}
+
 ```sh
 ibmcloud ks cluster master audit-webhook set --cluster my_cluster --remote-server https://audit.example.com/audit --ca-cert /mnt/etc/kubernetes/apiserver audit/ca.pem --client-cert /mnt/etc/kubernetes/apiserver audit/cert.pem --client-key /mnt/etc/kubernetes/apiserver audit/key.pem
 ```
@@ -1298,10 +1361,11 @@ ibmcloud ks cluster master audit-webhook unset --cluster CLUSTER [-q]
 ```
 {: pre}
 
-**Supported infrastructure provider**:
-* Classic
+Supported infrastructure provider
+:   Classic
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1339,7 +1403,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1353,7 +1418,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+##### Example `cluster master private-service-endpoint allowlist add` command
+{: #cluster-master-private-service-endpoint-allowlist-add-example}
+
 ```sh
 ibmcloud ks cluster master private-service-endpoint allowlist add --cluster mycluster --subnet 1.1.1.1/16
 ```
@@ -1376,7 +1443,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1390,7 +1458,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+##### Example `cluster master private-service-endpoint allowlist disable` command
+{: #cluster-master-private-service-endpoint-allowlist-disable-example}
+
 ```sh
 ibmcloud ks cluster master private-service-endpoint allowlist disable --cluster mycluster
 ```
@@ -1413,7 +1483,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1427,7 +1498,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+##### Example `cluster master private-service-endpoint allowlist enable` command
+{: #cluster-master-private-service-endpoint-allowlist-enable-example}
+
 ```sh
 ibmcloud ks cluster master private-service-endpoint allowlist enable --cluster mycluster
 ```
@@ -1450,7 +1523,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1461,7 +1535,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+##### Example `cluster master private-service-endpoint allowlist add` command
+{: #cluster-master-private-service-endpoint-allowlist-add-example}
+
 ```sh
 ibmcloud ks cluster master private-service-endpoint allowlist add --cluster mycluster
 ```
@@ -1484,7 +1560,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1501,9 +1578,12 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+### Example `cluster master private-service-endpoint allowlist rm --cluster mycluster` command
+{: #cluster master private-service-endpoint allowlist rm --cluster mycluster}
+
 ```sh
-ibmcloud ks cluster master private-service-endpoint allowlist rm --cluster mycluster --subnet 1.1.1.1/16
+ibmcloud ks cluster master private-service-endpoint allowlist rm --cluster mycluster
+ --subnet 1.1.1.1/16
 ```
 {: pre}
 
@@ -1525,7 +1605,8 @@ ibmcloud ks cluster master private-service-endpoint disable --cluster CLUSTER [-
 
 **Supported infrastructure provider**: Classic.
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1538,7 +1619,9 @@ ibmcloud ks cluster master private-service-endpoint disable --cluster CLUSTER [-
 `-y`
 :   Optional: Refresh the cluster master and reload worker nodes with no user prompts.
 
-**Example**:
+#### Example `cluster master private-service-endpoint disable` command
+{: #cluster-master-private-service-endpoint-disable-example}
+
 ```sh
 ibmcloud ks cluster master private-service-endpoint disable --cluster my_cluster
 ```
@@ -1564,7 +1647,8 @@ ibmcloud ks cluster master private-service-endpoint enable --cluster CLUSTER [-q
 
 **Supported infrastructure provider**: Classic. The private cloud service endpoint is permanently enabled by default for VPC clusters.
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1578,7 +1662,9 @@ ibmcloud ks cluster master private-service-endpoint enable --cluster CLUSTER [-q
 :    Optional: Refresh the cluster master and reload worker nodes with no user prompts.
 
 
-**Example**:
+#### Example `cluster master private-service-endpoint enable` command
+{: #cluster-master-private-service-endpoint-enable-example}
+
 ```sh
 ibmcloud ks cluster master private-service-endpoint enable --cluster my_cluster
 ```
@@ -1606,7 +1692,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1620,7 +1707,9 @@ Supported infrastructure providers
 :    Optional: Refresh the cluster master and reload worker nodes with no user prompts.
 
 
-**Example**:
+#### Example `cluster master public-service-endpoint disable` command
+{: #cluster-master-public-service-endpoint disable-example}
+
 ```sh
 ibmcloud ks cluster master public-service-endpoint disable --cluster my_cluster
 ```
@@ -1646,7 +1735,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1660,7 +1750,9 @@ Supported infrastructure providers
 :    Optional: Refresh the cluster master with no user prompts.
 
 
-**Example**:
+#### Example `cluster master public-service-endpoint enable` command
+{: #cluster-master-public-service-endpoint enable-example}
+
 ```sh
 ibmcloud ks cluster master public-service-endpoint enable --cluster my_cluster
 ```
@@ -1685,7 +1777,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1715,7 +1808,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1735,7 +1829,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster master update` command
+{: #cluster-master-update-example}
+
 ```sh
 ibmcloud ks cluster master update --cluster my_cluster
 ```
@@ -1789,7 +1885,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1809,7 +1906,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster rm` command
+{: #cluster-rm-example}
+
 ```sh
 ibmcloud ks cluster rm --cluster my_cluster
 ```
@@ -1833,7 +1932,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
 
 **Command options**:
 
@@ -1857,7 +1957,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster service bind` command
+{: #cluster-service-bind-example}
+
 ```sh
 ibmcloud ks cluster service bind --cluster my_cluster --namespace my_namespace --service my_service_instance
 ```
@@ -1879,7 +1981,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1899,7 +2002,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster service ls` command
+{: #cluster-service-ls-example}
+
 ```sh
 ibmcloud ks cluster service ls --cluster my_cluster --namespace my_namespace
 ```
@@ -1924,7 +2029,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
 
 **Command options**:
 
@@ -1941,7 +2047,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster service unbind` command
+{: #cluster-service-unbind}
+
 ```sh
 ibmcloud ks cluster service unbind --cluster my_cluster --namespace my_namespace --service 8567221
 ```
@@ -1965,7 +2073,8 @@ ibmcloud ks cluster subnet add --cluster CLUSTER --subnet-id SUBNET [-q]
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1979,7 +2088,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster subnet add` command
+{: #cluster-subnet-add-example}
+
 ```sh
 ibmcloud ks cluster subnet add --cluster my_cluster --subnet-id 1643389
 ```
@@ -2003,7 +2114,8 @@ ibmcloud ks cluster subnet create --cluster CLUSTER --size SIZE --vlan VLAN_ID [
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -2022,7 +2134,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster subnet create` command
+{: #cluster-subnet-create-example}
+
 ```sh
 ibmcloud ks cluster subnet create --cluster my_cluster --size 8 --vlan 1764905
 ```
@@ -2042,7 +2156,8 @@ ibmcloud ks cluster subnet detach --cluster CLUSTER --subnet-id SUBNET_ID [-f] [
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -2059,7 +2174,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `cluster subnet detach` command
+{: #cluster-subnet-detach-example}
+
 ```sh
 ibmcloud ks cluster subnet detach --cluster my_cluster --subnet-id 1602829
 ```
@@ -2086,7 +2203,8 @@ ibmcloud ks cluster user-subnet add --cluster CLUSTER --subnet-cidr SUBNET_CIDR 
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -2100,7 +2218,9 @@ Supported infrastructure providers
 :    Required: The ID of the private VLAN. The ID must be for a private VLAN in the cluster that one or more of the worker nodes are on. To see private VLANs in your cluster, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID> --show-resources`. In the **Subnet VLANs** section of the output, look for VLANs that have a **Public** value of `false`.
 
 
-**Example**:
+#### Example `cluster user-subnet add` command
+{: #cluster-user-subnet-add-example}
+
 ```sh
 ibmcloud ks cluster user-subnet add --cluster my_cluster --subnet-cidr 169.xx.xxx.xxx/29 --private-vlan 1502175
 ```
@@ -2124,7 +2244,8 @@ ibmcloud ks cluster user-subnet rm --cluster CLUSTER --subnet-cidr SUBNET_CIDR -
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -2138,7 +2259,9 @@ Supported infrastructure providers
 :    The ID of the private VLAN. This value is required, and must match the VLAN ID that was set by the `ibmcloud ks cluster user-subnet add` [command](#cs_cluster_user_subnet_add).
 
 
-**Example**:
+#### Example `cluster user-subnet rm` command
+{: #cluster-user-subnet-rm-example}
+
 ```sh
 ibmcloud ks cluster user-subnet rm --cluster my_cluster --subnet-cidr 169.xx.xxx.xxx/29 --private-vlan 1502175
 ```
@@ -2166,7 +2289,8 @@ ibmcloud ks dedicated flavors --zone ZONE --provider PROVIDER
 
 **Supported infrastructure provider**: * VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Command options**:
 
@@ -2199,7 +2323,8 @@ ibmcloud ks dedicated host create --flavor FLAVOR --pool POOL --zone ZONE [--out
 
 **Supported infrastructure provider**: * VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Command options**:
 
@@ -2235,7 +2360,8 @@ ibmcloud ks dedicated host get --host HOST --pool POOL [--output OUTPUT] [-q]
 
 **Supported infrastructure provider**: * VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Command options**:
 
@@ -2271,7 +2397,8 @@ ibmcloud ks dedicated host ls --pool POOL [--output OUTPUT] [-q]
 
 **Supported infrastructure provider**: * VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Command options**:
 
@@ -2302,7 +2429,8 @@ ibmcloud ks dedicated host placement disable --host HOST --pool POOL
 
 **Supported infrastructure provider**: * VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Command options**:
 
@@ -2335,7 +2463,8 @@ ibmcloud ks dedicated host placement enable --host HOST --pool POOL
 
 **Supported infrastructure provider**: * VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Command options**:
 
@@ -2368,7 +2497,8 @@ ibmcloud ks dedicated host rm --host HOST --pool POOL [-q]
 
 **Supported infrastructure provider**: * VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Command options**:
 
@@ -2401,7 +2531,8 @@ ibmcloud ks dedicated pool create --flavor-class CLASS --metro METRO --name NAME
 
 **Supported infrastructure provider**: * VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Command options**:
 
@@ -2440,7 +2571,8 @@ ibmcloud ks dedicated pool get --pool POOL [--output OUTPUT] [-q]
 
 **Supported infrastructure provider**: * VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Command options**:
 
@@ -2472,7 +2604,8 @@ ibmcloud ks dedicated pool ls [--output OUTPUT] [-q]
 
 **Supported infrastructure provider**: * VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Command options**:
 
@@ -2502,7 +2635,8 @@ ibmcloud ks dedicated pool rm --pool POOL [-q]
 
 **Supported infrastructure provider**: * VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Command options**:
 
@@ -2543,7 +2677,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -2579,7 +2714,9 @@ Supported infrastructure providers
 
 
 
-**Example**:
+#### Example `worker add` command
+{: #worker-add-example}
+
 ```sh
 ibmcloud ks worker add --cluster my_cluster --workers 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --flavor b3c.4x16 --hardware shared
 ```
@@ -2601,7 +2738,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -2618,7 +2756,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `worker get` command
+{: #worker-get-example}
+
 ```sh
 ibmcloud ks worker get --cluster my_cluster --worker kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1
 ```
@@ -2640,7 +2780,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -2663,7 +2804,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `worker ls` command
+{: #worker-ls-example}
+
 ```sh
 ibmcloud ks worker ls --cluster my_cluster
 ```
@@ -2721,7 +2864,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -2744,7 +2888,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `worker reboot` command
+{: #worker-reboot-example}
+
 ```sh
 ibmcloud ks worker reboot --cluster my_cluster -w kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 -w kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
 ```
@@ -2789,7 +2935,8 @@ ibmcloud ks worker reload --cluster CLUSTER --worker WORKER_ID [--skip-master-he
 
 **Supported infrastructure provider**: Classic. To reload a worker node in a VPC cluster, use the [`ibmcloud ks worker replace` command](#cli_worker_replace) instead.
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -2809,7 +2956,9 @@ ibmcloud ks worker reload --cluster CLUSTER --worker WORKER_ID [--skip-master-he
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `worker reload` command
+{: #worker-reload-example}
+
 ```sh
 ibmcloud ks worker reload --cluster my_cluster -w kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 -w kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
 ```
@@ -2867,7 +3016,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Command options**:
 
@@ -2887,7 +3037,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `worker replace` command
+{: #worker-replace-example}
+
 ```sh
 ibmcloud ks worker replace --cluster my_cluster --worker kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1
 ```
@@ -2909,7 +3061,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -2926,7 +3079,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `worker rm` command
+{: #worker-rm-example}
+
 ```sh
 ibmcloud ks worker rm --cluster my_cluster -w kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 -w kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
 ```
@@ -2954,7 +3109,8 @@ ibmcloud ks worker update --cluster CLUSTER --worker WORKER_ID [-f] [-q]
 
 **Supported infrastructure provider**: Classic. To update a worker node in a VPC cluster, use the [`ibmcloud ks worker replace` command](#cli_worker_replace) instead.
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -2971,7 +3127,9 @@ ibmcloud ks worker update --cluster CLUSTER --worker WORKER_ID [-f] [-q]
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `worker update` command
+{: #worker-update-example}
+
 ```sh
 ibmcloud ks worker update --cluster my_cluster -w kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 -w kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
 ```
@@ -2998,7 +3156,8 @@ ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --flav
 
 **Supported infrastructure provider**: Classic. To create a worker pool in a VPC cluster, use the [`ibmcloud ks worker-pool create vpc-gen2` command](#cli_worker_pool_create_vpc_gen2).
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3033,7 +3192,9 @@ ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --flav
 :    Optional: Prints the command output in JSON format.
 
 
-**Example**:
+#### Example `worker-pool create classic` command
+{: #worker-pool-create-classic-example}
+
 ```sh
 ibmcloud ks worker-pool create classic --name my_pool --cluster my_cluster --flavor b3c.4x16 --size-per-zone 6
 ```
@@ -3054,7 +3215,8 @@ ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <clu
 Supported infrastructure providers
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Command options**:
 
@@ -3102,7 +3264,9 @@ Supported infrastructure providers
 
 
 
-**Example**:
+#### Example `worker-pool create vpc-gen2` command
+{: #worker-pool-create-vpc-gen2-example}
+
 ```sh
 ibmcloud ks worker-pool create vpc-gen2 --name my_pool --cluster my_cluster --flavor bx2.4x16 --size-per-zone 3
 ```
@@ -3123,7 +3287,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3140,7 +3305,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `worker-pool get` command
+{: #worker-pool-get-example}
+
 ```sh
 ibmcloud ks worker-pool get --worker-pool pool1 --cluster my_cluster
 ```
@@ -3165,7 +3332,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3182,7 +3350,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `worker-pool label rm` command
+{: #worker-pool-label-rm-example}
+
 ```sh
 ibmcloud ks worker-pool label rm --worker-pool pool1 --cluster my_cluster
 ```
@@ -3204,7 +3374,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3224,7 +3395,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `worker-pool label set` command
+{: #worker-pool-label-set-example}
+
 ```sh
 ibmcloud ks worker-pool label set --worker-pool pool1 --cluster my_cluster --label app=dev
 ```
@@ -3246,7 +3419,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3260,7 +3434,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `worker-pool ls` command
+{: #worker-pool-ls-example}
+
 ```sh
 ibmcloud ks worker-pool ls --cluster my_cluster
 ```
@@ -3282,7 +3458,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3296,7 +3473,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `worker-pool rebalance` command
+{: #worker-pool-rebalance-example}
+
 ```sh
 ibmcloud ks worker-pool rebalance --cluster my_cluster --worker-pool my_pool
 ```
@@ -3318,7 +3497,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3337,7 +3517,9 @@ Supported infrastructure providers
 
 
 
-**Example**:
+#### Example `worker-pool resize` command
+{: #worker-pool-resize-example}
+
 ```sh
 ibmcloud ks worker-pool resize --cluster my_cluster --worker-pool my_pool --size-per-zone 3
 ```
@@ -3359,7 +3541,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3376,7 +3559,9 @@ Supported infrastructure providers
 :    Optional: Force the command to run with no user prompts.
 
 
-**Example**:
+#### Example `worker-pool rm` command
+{: #worker-pool-rm-example}
+
 ```sh
 ibmcloud ks worker-pool rm --cluster my_cluster --worker-pool pool1
 ```
@@ -3407,7 +3592,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3424,7 +3610,9 @@ Supported infrastructure providers
 :    Optional: Force the command to run with no user prompts.
 
 
-**Example**:
+#### Example `worker-pool taint set` command
+{: #worker-pool-taint-set-example}
+
 ```sh
 ibmcloud ks worker-pool taint set --cluster my_cluster --worker-pool pool1 --taint env=prod:NoSchedule
 ```
@@ -3449,7 +3637,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3463,7 +3652,9 @@ Supported infrastructure providers
 :    Optional: Force the command to run with no user prompts.
 
 
-**Example**:
+#### Example `worker-pool taint rm` command
+{: #worker-pool-taint-rm-example}
+
 ```sh
 ibmcloud ks worker-pool taint rm --cluster my_cluster --worker-pool pool1
 ```
@@ -3485,7 +3676,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3502,7 +3694,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `worker-pool zones` command
+{: #worker-pool-zones-example}
+
 ```sh
 ibmcloud ks worker-pool zones --cluster my_cluster --worker-pool pool1
 ```
@@ -3526,7 +3720,8 @@ ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER [--worker-pool WORKER
 
 **Supported infrastructure provider**: Classic. To add a zone to worker pools in a VPC cluster, use the [`ibmcloud ks zone add vpc-gen2` command](#cli_zone-add-vpc-gen2).
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3563,7 +3758,9 @@ ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER [--worker-pool WORKER
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `zone add classic` command
+{: #zone-add-classic-example}
+
 ```sh
 ibmcloud ks zone add classic --zone dal10 --cluster my_cluster -p pool1 -w pool2 --private-vlan 2294021
 ```
@@ -3584,7 +3781,8 @@ ibmcloud ks zone add vpc-gen2 --zone ZONE --subnet-id VPC_SUBNET_ID --cluster CL
 Supported infrastructure providers
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3607,7 +3805,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `zone add vpc-gen2` command
+{: #zone-add-vpc-gen2-example}
+
 ```sh
 ibmcloud ks zone add vpc-gen2 --zone us-south-3 --cluster my_cluster -p pool1 -w pool2
 ```
@@ -3671,7 +3871,8 @@ ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER  --private-vlan PRIVA
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3737,7 +3938,9 @@ Supported infrastructure providers
 
 3. If you don't have any VLANs available, you can [order new VLANs](/docs/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
 
-**Example**:
+#### Example `zone network-set` command
+{: #zone-network-set-example}
+
 ```sh
 ibmcloud ks zone network-set --zone dal10 -c my_cluster -p pool1 -p pool2 --private-vlan 2294021
 ```
@@ -3762,7 +3965,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3782,7 +3986,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `zone rm` command
+{: #zone-rm-example}
+
 ```sh
 ibmcloud ks zone rm --zone dal10 --cluster my_cluster
 ```
@@ -3818,7 +4024,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3829,7 +4036,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress alb autoupdate disable` command
+{: #ingress-alb-autoupdate-disable-example}
+
 ```sh
 ibmcloud ks ingress alb autoupdate disable --cluster mycluster
 ```
@@ -3853,7 +4062,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3879,7 +4089,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3907,7 +4118,8 @@ ibmcloud ks ingress alb create classic --cluster CLUSTER --type (PUBLIC|PRIVATE)
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3933,7 +4145,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress alb create classic` command
+{: #ingress-alb-create-classic-example}
+
 ```sh
 ibmcloud ks ingress alb create classic --cluster mycluster --type public --vlan 2234945 --zone dal10 --ip 1.1.1.1 --version 1.1.2_2507_iks
 ```
@@ -3955,7 +4169,8 @@ ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER --type PUBLIC|PRIVATE 
 Supported infrastructure providers
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -3975,7 +4190,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress alb create vpc-gen2` command
+{: #ingress-alb-create-vpc-gen2-example}
+
 ```sh
 ibmcloud ks ingress alb create vpc-gen2 --cluster mycluster --type public --zone us-south-1 --version 1.1.2_2507_iks
 ```
@@ -4001,7 +4218,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4015,7 +4233,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress alb disable` command
+{: #ingress-alb-disable-example}
+
 ```sh
 ibmcloud ks ingress alb disable --alb public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster
 ```
@@ -4042,7 +4262,8 @@ ibmcloud ks ingress alb enable classic --alb ALB_ID --cluster CLUSTER [--ip IP_A
 
 **Supported infrastructure provider**: Classic.
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4064,7 +4285,9 @@ ibmcloud ks ingress alb enable classic --alb ALB_ID --cluster CLUSTER [--ip IP_A
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress alb enable classic` command
+{: #ingress-alb-enable-classic-example}
+
 ```sh
 ibmcloud ks ingress alb enable classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --ip 169.XX.XXX.XX --version 1.1.2_2507_iks
 ```
@@ -4093,7 +4316,8 @@ ibmcloud ks ingress alb enable vpc-gen2 --alb ALB_ID --cluster CLUSTER [--versio
 Supported infrastructure providers
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4110,7 +4334,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress alb enable vpc-gen2` command
+{: #ingress-alb-enable-vpc-gen2-example}
+
 ```sh
 ibmcloud ks ingress alb enable vpc-gen2 --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 1.1.2_2507_iks
 ```
@@ -4133,7 +4359,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4150,7 +4377,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress alb get` command
+{: #ingress-alb-get-example}
+
 ```sh
 ibmcloud ks ingress alb get --alb public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster
 ```
@@ -4171,7 +4400,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4182,7 +4412,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress alb health-checker disable` command
+{: #ingress-alb-health-checker-disable-example}
+
 ```sh
 ibmcloud ks ingress alb health-checker disable --cluster mycluster
 ```
@@ -4203,7 +4435,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4214,7 +4447,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress alb health-checker enable` command
+{: #ingress-alb-health-checker-enable-example}
+
 ```sh
 ibmcloud ks ingress alb health-checker enable --cluster mycluster
 ```
@@ -4235,7 +4470,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4249,7 +4485,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress alb health-checker get` command
+{: #ingress-alb-health-checker-get-example}
+
 ```sh
 ibmcloud ks ingress alb health-checker get --cluster mycluster
 ```
@@ -4273,7 +4511,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4287,7 +4526,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress alb ls` command
+{: #ingress-alb-ls-example}
+
 ```sh
 ibmcloud ks ingress alb ls --cluster my_cluster
 ```
@@ -4313,7 +4554,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4365,7 +4607,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4393,7 +4636,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4437,7 +4681,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4475,7 +4720,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4513,7 +4759,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4551,7 +4798,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4592,7 +4840,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4629,7 +4878,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4644,7 +4894,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress lb get` command
+{: #ingress-lb-get-example}
+
 ```sh
 ibmcloud ks ingress lb get --cluster mycluster
 ```
@@ -4667,7 +4919,8 @@ ibmcloud ks ingress lb proxy-protocol disable --cluster CLUSTER [-f] [-q]
 Supported infrastructure providers
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4683,7 +4936,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress lb proxy-protocol disable` command
+{: #ingress-lb-proxy-protocol-disable-example}
+
 ```sh
 ibmcloud ks ingress lb proxy-protocol disable --cluster mycluster
 ```
@@ -4709,7 +4964,8 @@ ibmcloud ks ingress lb proxy-protocol enable --cluster CLUSTER [--cidr CIDR ...]
 Supported infrastructure providers
 :   VPC
 
-**Minimum required permissions**: **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4730,7 +4986,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress lb proxy-protocol enable` command
+{: #ingress-lb-proxy-protocol-enable-example}
+
 ```sh
 ibmcloud ks ingress lb proxy-protocol enable --cluster mycluster --cidr 1.1.1.1/16
 ```
@@ -4758,7 +5016,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4791,7 +5050,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress secret create` command
+{: #ingress-secret-create-example}
+
 ```sh
 ibmcloud ks ingress secret create --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff --cluster my_cluster --type tls --name my_alb_secret --namespace demo_ns
 ```
@@ -4812,7 +5073,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4855,7 +5117,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4874,7 +5137,9 @@ Supported infrastructure providers
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example `ingress secret field ls` command
+{: #ingress-secret-field-ls-example}
+
 ```sh
 ibmcloud ks ingress secret field ls --cluster a11a11a11a111a1a111a --name my-secret --namespace default
 ```
@@ -4893,7 +5158,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4909,7 +5175,9 @@ Supported infrastructure providers
 `--field-name NAME`
 :    The name of the field to remove. To see a list of fields, run [`ibmcloud ks ingress secret field ls`](#cs_ingress_secret_field_ls).
 
-**Example**:
+#### Example `ingress secret field rm` command
+{: #ingress-secret-field-rm-example}
+
 ```sh
 ibmcloud ks ingress secret field rm --cluster a11a11a11a111a1a111a --name my-secret --namespace default --field-name test-field-name
 ```
@@ -4933,7 +5201,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4953,7 +5222,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress secret get` command
+{: #ingress-secret-get-example}
+
 ```sh
 ibmcloud ks ingress secret get --cluster my_cluster --name my_alb_secret --namespace demo_ns
 ```
@@ -4978,7 +5249,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -4996,7 +5268,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress secret ls` command
+{: #ingress-secret-ls-example}
+
 ```sh
 ibmcloud ks ingress secret ls --cluster my_cluster
 ```
@@ -5021,7 +5295,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5040,7 +5315,9 @@ Supported infrastructure providers
 
 
 
-**Example**:
+#### Example `ingress secret rm` command
+{: #ingress-secret-rm-example}
+
 ```sh
 ibmcloud ks ingress secret rm --cluster my_cluster --name my_alb_secret --namespace demo_ns
 ```
@@ -5064,7 +5341,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5085,7 +5363,9 @@ Supported infrastructure providers
 
 
 
-**Example**:
+#### Example `ingress secret update` command
+{: #ingress-secret-update-example}
+
 ```sh
 ibmcloud ks ingress secret update --cluster my_cluster --name my_alb_secret --namespace demo_ns
 ```
@@ -5108,7 +5388,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5121,7 +5402,9 @@ Supported infrastructure providers
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example `ingress status-report disable` command
+{: #ingress-status-report-disable-example}
+
 ```sh
 ibmcloud ks ingress status-report disable --cluster mycluster
 ```
@@ -5141,7 +5424,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5154,7 +5438,9 @@ Supported infrastructure providers
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example `ingress status-report enable` command
+{: #ingress-status-report-enable-example}
+
 ```sh
 ibmcloud ks ingress status-report enable --cluster mycluster
 ```
@@ -5174,7 +5460,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5187,7 +5474,9 @@ Supported infrastructure providers
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example `ingress status-report get` command
+{: #ingress-status-report-get-example}
+
 ```sh
 ibmcloud ks ingress status-report get --cluster mycluster
 ```
@@ -5207,7 +5496,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5224,9 +5514,11 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress status-report ignored-errors add` command
+{: #ingress-status-report-ignored-errors-add-example}
+
 ```sh
-ibmcloud ks ingress status-report ignored-errors add --cluster mycluster
+ibmcloud ks ingress status-report ignored-errors add --cluster mycluster --code CODE
 ```
 {: pre}
 
@@ -5244,7 +5536,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5257,7 +5550,9 @@ Supported infrastructure providers
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example `ingress status-report ignored-errors ls` command
+{: #ingress-status-report-ignored-errors-ls-example}
+
 ```sh
 ibmcloud ks ingress status-report ignored-errors ls --cluster mycluster
 ```
@@ -5277,7 +5572,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5294,7 +5590,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `ingress status-report ignored-errors rm` command
+{: #ingress-status-report-ignored-errors-rm-example}
+
 ```sh
 ibmcloud ks ingress status-report ignored-errors rm --cluster mycluster
 ```
@@ -5396,7 +5694,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5444,7 +5743,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5477,7 +5777,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster
+Minimum required permissions
+:   **Editor** platform access role for the cluster
 
 **Command options**:
 
@@ -5557,7 +5858,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5577,7 +5879,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `logging config get` command
+{: #logging-config-get-example}
+
 ```sh
 ibmcloud ks logging config get --cluster my_cluster --logsource worker
 ```
@@ -5599,7 +5903,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster
+Minimum required permissions
+:   **Editor** platform access role for the cluster
 
 **Command options**:
 
@@ -5622,7 +5927,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `logging config rm` command
+{: #logging-config-rm-example}
+
 ```sh
 ibmcloud ks logging config rm --cluster my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e
 ```
@@ -5643,7 +5950,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5720,7 +6028,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5788,7 +6097,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5811,7 +6121,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `logging filter get` command
+{: #logging-filter-get-example}
+
 ```sh
 ibmcloud ks logging filter get --cluster mycluster --id 885732 --show-matching-configs
 ```
@@ -5833,7 +6145,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5853,7 +6166,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `logging filter rm` command
+{: #logging-filter-rm-example}
+
 ```sh
 ibmcloud ks logging filter rm --cluster mycluster --id 885732
 ```
@@ -5875,7 +6190,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5949,7 +6265,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -5963,7 +6280,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `logging refresh` command
+{: #logging-refresh-example}
+
 ```sh
 ibmcloud ks logging refresh --cluster my_cluster
 ```
@@ -5996,7 +6315,8 @@ ibmcloud ks nlb-dns add --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP2 --ip NLB3_I
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6016,7 +6336,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `nlb-dns add` command
+{: #nlb-dns-add-example}
+
 ```sh
 ibmcloud ks nlb-dns add --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
@@ -6037,7 +6359,8 @@ ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP -
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6063,7 +6386,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `nlb-dns create classic` command
+{: #nlb-dns-create-classic-example}
+
 ```sh
 ibmcloud ks nlb-dns create classic --cluster mycluster --ip 1.1.1.1
 ```
@@ -6086,7 +6411,8 @@ ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER (--lb-host VPC_ALB_HOSTNAM
 Supported infrastructure providers
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6112,7 +6438,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `nlb-dns create vpc-gen2` command
+{: #nlb-dns-create-vpc-gen2-example}
+
 ```sh
 ibmcloud ks nlb-dns create vpc-gen2 --cluster mycluster --lb-host 1234abcd-us-south.lb.appdomain.cloud --type public
 ```
@@ -6135,7 +6463,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 `-c, --cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6150,7 +6479,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `nlb-dns get` command
+{: #nlb-dns-get-example}
+
 ```sh
 ibmcloud ks nlb-dns get --cluster mycluster --nlb-subdomain subDomain1
 ```
@@ -6171,7 +6502,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6185,7 +6517,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `nlb-dns ls` command
+{: #nlb-dns-ls-example}
+
 ```sh
 ibmcloud ks nlb-dns ls --cluster mycluster
 ```
@@ -6211,7 +6545,8 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host SUBDOMAIN [--
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6270,7 +6605,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `nlb-dns monitor configure` command
+{: #nlb-dns-monitor-configure-example}
+
 ```sh
 ibmcloud ks nlb-dns monitor configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --description "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60  --expected-body "healthy" --expected-codes 2xx --follows-redirects true
 ```
@@ -6290,7 +6627,8 @@ ibmcloud ks nlb-dns monitor disable --cluster CLUSTER --nlb-host SUBDOMAIN [--ou
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6307,7 +6645,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `nlb-dns monitor disable` command
+{: #nlb-dns-monitor-disable-example}
+
 ```sh
 ibmcloud ks nlb-dns monitor disable --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
@@ -6331,7 +6671,8 @@ ibmcloud ks nlb-dns monitor enable --cluster CLUSTER --nlb-host SUBDOMAIN [--out
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6348,7 +6689,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `nlb-dns monitor enable` command
+{: #nlb-dns-monitor-enable-example}
+
 ```sh
 ibmcloud ks nlb-dns monitor enable --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
@@ -6369,7 +6712,8 @@ ibmcloud ks nlb-dns monitor get --cluster CLUSTER --nlb-host SUBDOMAIN [--output
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6386,7 +6730,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `nlb-dns monitor get` command
+{: #nlb-dns-monitor-get-example}
+
 ```sh
 ibmcloud ks nlb-dns monitor get --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
@@ -6407,7 +6753,8 @@ ibmcloud ks nlb-dns monitor ls --cluster CLUSTER [--output json] [-q]
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6421,7 +6768,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `nlb-dns monitor ls` command
+{: #nlb-dns-monitor-ls-example}
+
 ```sh
 ibmcloud ks nlb-dns monitor ls --cluster mycluster
 ```
@@ -6442,7 +6791,8 @@ ibmcloud ks nlb-dns replace --cluster CLUSTER --lb-host NEW_LB_HOSTNAME --nlb-su
 Supported infrastructure providers
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6462,7 +6812,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `nlb-dns replace` command
+{: #nlb-dns-replace-example}
+
 ```sh
 ibmcloud ks nlb-dns replace --cluster mycluster --lb-host 1234abcd-us-south.lb.appdomain.cloud nlb-subdomain mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
@@ -6483,7 +6835,8 @@ ibmcloud ks nlb-dns rm classic --cluster CLUSTER --ip IP --nlb-host SUBDOMAIN [-
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6503,7 +6856,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `nlb-dns rm classic` command
+{: #nlb-dns-rm-classic-example}
+
 ```sh
 ibmcloud ks nlb-dns rm classic --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
@@ -6526,7 +6881,8 @@ ibmcloud ks nlb-dns rm vpc-gen2 --cluster CLUSTER --nlb-subdomain SUBDOMAIN [ --
 Supported infrastructure providers
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6546,7 +6902,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `nlb-dns rm vpc-gen2` command
+{: #nlb-dns-rm-vpc-gen2-example}
+
 ```sh
 ibmcloud ks nlb-dns rm vpc-gen2 --cluster mycluster --nlb-subdomain mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
@@ -6572,7 +6930,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6589,7 +6948,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `nlb-dns secret regenerate` command
+{: #nlb-dns-secret-regenerate-example}
+
 ```sh
 ibmcloud ks nlb-dns secret regenerate --cluster mycluster --nlb-subdomain mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
@@ -6613,7 +6974,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6633,7 +6995,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+### Example `nlb-dns secret rm` command
+{: #nlb-dns-secret-rm-example}
+
 ```sh
 ibmcloud ks nlb-dns secret rm --cluster mycluster --nlb-subdomain mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
@@ -6658,7 +7022,8 @@ Supported infrastructure providers
 :   VPC
 
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6678,7 +7043,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+### Example `webhook-create` command
+{: #webhook-create-example}
+
 ```sh
 ibmcloud ks webhook-create --cluster my_cluster --level Normal --type slack --url http://github.com/mywebhook
 ```
@@ -6712,7 +7079,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6727,7 +7095,9 @@ Supported infrastructure providers
 
 
 
-**Example**:
+#### Example `api-key info` command
+{: #api-key-info-example}
+
 ```sh
 ibmcloud ks api-key info --cluster my_cluster
 ```
@@ -6755,7 +7125,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6766,7 +7137,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `api-key reset` command
+{: #api-key-reset-example}
+
 ```sh
 ibmcloud ks api-key reset --region us-south
 ```
@@ -6796,7 +7169,8 @@ ibmcloud ks credential get --region REGION [-q] [--output json]
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6810,7 +7184,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `credential get` command
+{: #credential-get-example}
+
 ```sh
 ibmcloud ks credential get --region us-south
 ```
@@ -6839,7 +7215,8 @@ ibmcloud ks credential set classic --infrastructure-api-key API_KEY --infrastruc
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6856,7 +7233,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `credential set classic` command
+{: #credential-set-classic-example}
+
 ```sh
 ibmcloud ks credential set classic --infrastructure-api-key <api_key> --infrastructure-username dbmanager --region us-south
 ```
@@ -6879,7 +7258,8 @@ ibmcloud ks credential unset --region REGION [-q]
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6890,7 +7270,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `credential unset` command
+{: #credential-unset-example}
+
 ```sh
 ibmcloud ks credential unset --region us-south
 ```
@@ -6938,7 +7320,8 @@ ibmcloud ks infra-permissions get --region REGION [--output json] [-q]
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6952,7 +7335,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `infra-permissions get` command
+{: #infra-permissions get-example}
+
 ```sh
 ibmcloud ks infra-permissions get --region us-south
 ```
@@ -7007,7 +7392,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -7021,7 +7407,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `kms crk ls` command
+{: #kms-crk-ls-example}
+
 ```sh
 ibmcloud ks kms crk ls --instance-id 1aa1a111-1111-1111-a111-a1aaaa1a1a1a
 ```
@@ -7045,7 +7433,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -7068,7 +7457,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `kms enable` command
+{: #kms-enable-example}
+
 ```sh
 ibmcloud ks kms enable -c mycluster --instance-id a11aa11a-bbb2-3333-d444-e5e555e5ee5 --crk 1a111a1a-bb22-3c3c-4d44-55e555e55e55
 ```
@@ -7089,7 +7480,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -7127,7 +7519,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -7162,7 +7555,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -7233,7 +7627,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `vlan ls` command
+{: #vlan-ls-example}
+
 ```sh
 ibmcloud ks vlan ls --zone dal10
 ```
@@ -7257,7 +7653,8 @@ ibmcloud ks vlan spanning get --region REGION [--output json] [-q]
 Supported infrastructure providers
 :   Classic
 
-**Minimum required permissions**: **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -7271,7 +7668,9 @@ Supported infrastructure providers
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example `vlan spanning get` command
+{: #vlan-spanning-get-example}
+
 ```sh
 ibmcloud ks vlan spanning get --region us-south
 ```
@@ -7341,7 +7740,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: None
+Minimum required permissions
+:   None
 
 **Command options**:
 
@@ -7360,7 +7760,9 @@ Supported infrastructure providers
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example `flavor get` command
+{: #flavor-get-example}
+
 ```sh
 ibmcloud ks flavor get --zone us-south-1 --provider vpc-gen2 --flavor bx2d.48x192.900gb
 ```
@@ -7381,7 +7783,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: None
+Minimum required permissions
+:   None
 
 **Command options**:
 
@@ -7400,7 +7803,9 @@ Supported infrastructure providers
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example `flavor ls` command
+{: #flavor-ls-example}
+
 ```sh
 ibmcloud ks flavor ls --zone us-south-1 --provider vpc-gen2 --show-storage
 ```
@@ -7421,7 +7826,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: None
+Minimum required permissions
+:   None
 
 **Command options**: None
 
@@ -7442,7 +7848,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: None
+Minimum required permissions
+:   None
 
 **Command options**:
 
@@ -7470,7 +7877,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: None
+Minimum required permissions
+:   None
 
 **Command options**:
 
@@ -7523,7 +7931,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: None
+Minimum required permissions
+:   None
 
 **Command options**:
 
@@ -7593,7 +8002,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: None
+Minimum required permissions
+:   None
 
 **Command options**:
 
@@ -7650,7 +8060,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: None
+Minimum required permissions
+:   None
 
 **Command options**:
 
@@ -7733,7 +8144,8 @@ Attach a storage volume to a worker node in your cluster.
 
 * VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 ```sh
 ibmcloud ks storage attachment create --cluster CLUSTER_ID --volume VOLUME --worker WORKER [--output json]
@@ -7772,7 +8184,8 @@ Get the details of a storage volume attachment in your cluster.
 Supported infrastructure providers
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 ```sh
 ibmcloud ks storage attachment get --cluster CLUSTER_ID --attachment ATTACHMENT --worker WORKER [--output json]
@@ -7809,7 +8222,8 @@ List the storage volume attachments for a worker node in your cluster.
 Supported infrastructure providers
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 ```sh
 ibmcloud ks storage attachment ls --cluster CLUSTER_ID --worker WORKER [--output json]
@@ -7844,7 +8258,8 @@ Remove a storage volume from a worker node in your cluster.
 Supported infrastructure providers
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 ```sh
 ibmcloud ks storage attachment rm --cluster CLUSTER_ID --attachment ATTACHMENT --worker WORKER [--output json]
@@ -7884,7 +8299,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 ```sh
 ibmcloud ks storage volume get --volume VOLUME
@@ -7919,7 +8335,8 @@ Supported infrastructure providers
 :   Classic
 :   VPC
 
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 ```sh
 ibmcloud ks storage volume ls [--cluster CLUSTER_ID] [--provider PROVIDER] [--zone ZONE] [--output json]
