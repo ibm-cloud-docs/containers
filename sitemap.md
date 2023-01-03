@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-01-02"
+lastupdated: "2023-01-03"
 
 keywords: containers
 subcollection: containers
@@ -214,6 +214,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan23)
+
+    * [3 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan0323)
+
+        * Ingress ALB version `1.3.1_3538_iks`, and `1.4.0_3537_iks`
 
     * [2 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan0223)
 
@@ -1143,7 +1147,7 @@ subcollection: containers
 
         * Review the release notes for 31 August 2021.
 
-        * Istio add-on changelog
+        * Istio add-on change log
 
         * New! Sao Paulo multizone region
 
@@ -1175,7 +1179,7 @@ subcollection: containers
 
     * [12 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug1221)
 
-        * Istio add-on changelog
+        * Istio add-on change log
 
     * [10 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug1021)
 
@@ -1203,7 +1207,7 @@ subcollection: containers
 
     * [22 July 2021](/docs/containers?topic=containers-containers-relnotes#containers-july2221)
 
-        * Istio add-on changelog
+        * Istio add-on change log
 
     * [19 July 2021](/docs/containers?topic=containers-containers-relnotes#containers-july1921)
 
@@ -1211,7 +1215,7 @@ subcollection: containers
 
     * [15 July 2021](/docs/containers?topic=containers-containers-relnotes#containers-july1521)
 
-        * Istio add-on changelog
+        * Istio add-on change log
 
     * [12 July 2021](/docs/containers?topic=containers-containers-relnotes#containers-july1221)
 
@@ -1299,7 +1303,7 @@ subcollection: containers
 
     * [27 May 2021](/docs/containers?topic=containers-containers-relnotes#containers-may2721)
 
-        * Istio add-on changelog
+        * Istio add-on change log
 
     * [26 May 2021](/docs/containers?topic=containers-containers-relnotes#containers-may2621)
 
@@ -1347,7 +1351,7 @@ subcollection: containers
 
         * Custom IOPs for Istio
 
-        * Istio add-on changelog
+        * Istio add-on change log
 
     * [28 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april2821)
 
@@ -1375,7 +1379,7 @@ subcollection: containers
 
     * [19 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april1921)
 
-        * Add-on changelogs
+        * add-on change logs
 
         * Cluster autoscaler add-on
 
@@ -1419,7 +1423,7 @@ subcollection: containers
 
     * [30 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march3021)
 
-        * Add-on changelogs
+        * add-on change logs
 
         * Master versions
 
@@ -8050,7 +8054,13 @@ subcollection: containers
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
 
+* [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
+
+    * [1.5.1_3536_iks, released 3 January 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3536_iks)
+
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
+
+    * [1.4.0_3537_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3537_iks)
 
     * [1.4.0_3297_iks, released 15 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3297_iks)
 
@@ -8058,9 +8068,11 @@ subcollection: containers
 
 * [Version 1.3.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_1)
 
+    * [1.3.1_3538_iks (default), released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3538_iks)
+
     * [1.3.1_3298_iks, released 15 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3298_iks)
 
-    * [1.3.1_3192_iks (default), released 8 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3192_iks)
+    * [1.3.1_3192_iks, released 8 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3192_iks)
 
     * [1.3.1_3108_iks, released 30 November 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3108_iks)
 
@@ -8070,7 +8082,7 @@ subcollection: containers
 
     * [1.3.0_2847_iks, released 25 October 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.0_2847_iks)
 
-* [Version 1.2.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
+* [Version 1.2.1 (Unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#1_2_1)
 
     * [1.2.1_3299_iks, released 15 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.2.1_3299_iks)
 
@@ -8274,7 +8286,7 @@ subcollection: containers
 
     * [01 January 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#01-jan-2019)
 
-[Istio add-on version change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+[Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
 * [Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
 
@@ -8572,7 +8584,7 @@ subcollection: containers
 
     * [Change log for patch update 1.0.1_114, released 10 September 2020](/docs/containers?topic=containers-ca_changelog#101114_ca)
 
-[{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
+[{{site.data.keyword.block_storage_is_short}} add-on change log](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
 
@@ -8740,7 +8752,7 @@ subcollection: containers
 
 * [Change log for version 2.0.5, released 25 November 2020](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
 
-[Static route add-on version changelog](/docs/containers?topic=containers-static-route-changelog#static-route-changelog)
+[Static route add-on change log](/docs/containers?topic=containers-static-route-changelog#static-route-changelog)
 
 * [Version 1.0.0](/docs/containers?topic=containers-static-route-changelog#v100)
 

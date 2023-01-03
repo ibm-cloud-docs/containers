@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -22,7 +22,7 @@ subcollection: containers
 Get started with the managed Istio add-on in {{site.data.keyword.containerlong}}. In this set of steps, you deploy the BookInfo sample app to practice using several of Istio's service mesh capabilities.
 {: shortdesc}
 
-Before you begin, review the [Istio add-on changelog](/docs/containers?topic=containers-istio-changelog) for version information.
+Before you begin, review the [Istio add-on change log](/docs/containers?topic=containers-istio-changelog) for version information.
 
 ## Step 1: Enable the Istio add-on
 {: #istio-qs-1}

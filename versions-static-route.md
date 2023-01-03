@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, static route, add-on
 
@@ -16,7 +16,7 @@ subcollection: containers
 
 
 
-# Static route add-on version changelog
+# Static route add-on change log
 {: #static-route-changelog}
 
 For deployment steps, see the [managed static route add-on](/docs/containers?topic=containers-static-routes) docs.

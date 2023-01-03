@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-16"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -738,7 +738,7 @@ ALB OAuth Proxy add-on version 1.0.0 uses configuration snippet annotations (`ng
         ```
         {: pre}
 
-For the list of changes for each ALB OAuth Proxy add-on version, see the [{{site.data.keyword.cloud_notm}} ALB OAuth Proxy add-on changelog](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+For the list of changes for each ALB OAuth Proxy add-on version, see the [{{site.data.keyword.cloud_notm}} ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 {: tip}
 
 ### Upgrading ALB OAuth Proxy add-on

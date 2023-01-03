@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-06"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -297,7 +297,7 @@ You can't revert your managed Istio add-on to a previous version. If you want to
     ```
     {: pre}
 
-1. Review the changes that are in each version in the [Istio add-on changelog](/docs/containers?topic=containers-istio-changelog).
+1. Review the changes that are in each version in the [Istio add-on change log](/docs/containers?topic=containers-istio-changelog).
 
 1. If you are upgrading from version 1.11 to version 1.12 and your Istio components were provisioned at version 1.10 or earlier:
 

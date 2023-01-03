@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-08"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -14,7 +14,7 @@ subcollection: containers
 
 
 
-# Istio add-on version change log
+# Istio add-on change log
 {: #istio-changelog}
 
 View information for patch and minor version updates to the [managed Istio add-on](/docs/containers?topic=containers-istio-about#istio_ov_addon) in your {{site.data.keyword.containerlong}} Kubernetes clusters.
