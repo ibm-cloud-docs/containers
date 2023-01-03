@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-19"
+  years: 2014, 2023
+lastupdated: "2023-01-02"
 
 keywords: kubernetes, release notes
 
@@ -24,6 +24,19 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+## January 2023
+{: #containers-jan23}
+
+### 2 January 2023
+{: #containers-jan0223}
+{: release-note}
+
+
+
+Worker node fix packs `1.22.17_1584`, `1.23.15_1557`, `1.24.9_1549`, and `1.25.5_1527`
+:   For more information, see the change logs: [1.22](/docs/containers?topic=containers-changelog_122), [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), and [1.25](/docs/containers?topic=containers-changelog_125).
+
 
 
 ## December 2022
