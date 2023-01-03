@@ -454,7 +454,7 @@ Resolves [CVE-2022-1271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022
 ### Version 0.49.3_1745_iks, released on 20 October 2021
 {: #0.49.3_1745_iks}
 
-**As of 14 Sep 2021, this is the only image supported for Kubernetes version 1.18 clusters**. 
+As of 14 Sep 2021, this is the only image supported for Kubernetes version 1.18 clusters. 
 
 ## Version 0.48.0 
 {: #0_48_0}

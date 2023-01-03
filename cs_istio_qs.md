@@ -133,7 +133,7 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
         ```
         {: screen}
 
-2. Get the public address for the `istio-ingressgateway` load balancer that exposes BookInfo.
+1. Get the public address for the `istio-ingressgateway` load balancer that exposes BookInfo.
     * **Classic clusters**
         1. Set the Istio ingress IP address as an environment variable.
             ```sh
@@ -159,13 +159,13 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
         ```
         {: pre}
 
-3. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
+1. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
     ```sh
     curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/productpage
     ```
     {: pre}
 
-4. View the BookInfo web page in a browser.
+1. View the BookInfo web page in a browser.
 
     Mac OS or Linux
 
@@ -181,7 +181,7 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
     ```
     {: pre}
 
-**Next steps** Try refreshing the page several times. Different versions of the reviews section round-robin through no stars (`v1` of `reviews`), black stars (`v2`), and red stars (`v3`).
+1. Try refreshing the page several times. Different versions of the reviews section round-robin through no stars (`v1` of `reviews`), black stars (`v2`), and red stars (`v3`).
 
 For more information about how routing works in Istio, see [Understanding what happened](/docs/containers?topic=containers-istio-mesh#istio_bookinfo_understanding).
 

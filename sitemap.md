@@ -3807,6 +3807,16 @@ subcollection: containers
 
 [Configuring pod security policies](/docs/containers?topic=containers-psp#psp)
 
+* [FAQs](/docs/containers?topic=containers-psp#faqs)
+
+    * [Why do I set pod security policies?](/docs/containers?topic=containers-psp#why-set-psps)
+
+    * [Are any policies set by default? What can I add?](/docs/containers?topic=containers-psp#psp-defaults)
+
+    * [How does policy authorization work?](/docs/containers?topic=containers-psp#psp-auth)
+
+    * [Why can I still create privileged pods when I am not part of the `privileged-psp-user` cluster role binding?](/docs/containers?topic=containers-psp#psp-role-binding)
+
 * [Customizing pod security policies](/docs/containers?topic=containers-psp#customize_psp)
 
     * [Modifying the RBAC resources](/docs/containers?topic=containers-psp#modify_rbac)
@@ -5662,6 +5672,8 @@ subcollection: containers
 
     * [`ibmcloud ks cluster master private-service-endpoint allowlist`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist)
 
+    * [Example `cluster master private-service-endpoint allowlist rm` command](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-private-service-endpoint-allowlist-rm)
+
     * [`ibmcloud ks cluster master private-service-endpoint disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_disable)
 
     * [`ibmcloud ks cluster master private-service-endpoint enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_enable)
@@ -5912,7 +5924,11 @@ subcollection: containers
 
     * [Experimental: `ibmcloud ks nlb-dns secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-rm)
 
+    * [Example `nlb-dns secret rm` command](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns-secret-rm-example)
+
 * [`webhook-create` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_webhook_create)
+
+    * [Example `webhook-create` command](/docs/containers?topic=containers-kubernetes-service-cli#webhook-create-example)
 
 * [`api-key` commands](/docs/containers?topic=containers-kubernetes-service-cli#api_key-commands)
 
@@ -9610,6 +9626,10 @@ subcollection: containers
 
 [Why does no Ingress subdomain exist after cluster creation?](/docs/containers?topic=containers-ingress_subdomain#ingress_subdomain)
 
+* [Classic clusters](/docs/containers?topic=containers-ingress_subdomain#no-ingress-subdomain-classic)
+
+    * [VPC clusters](/docs/containers?topic=containers-ingress_subdomain#vpc-clusters)
+
 [Why does no Ingress subdomain exist after I create clusters of the same or similar name?](/docs/containers?topic=containers-cs_rate_limit#cs_rate_limit)
 
 [Why does no Ingress secret exist after cluster creation?](/docs/containers?topic=containers-ingress_secret#ingress_secret)
@@ -9862,3 +9882,4 @@ subcollection: containers
     * [Networking](/docs/containers?topic=containers-limitations#vpc_gen2_networking_limit)
 
     * [Storage](/docs/containers?topic=containers-limitations#vpc_gen2_storage_limit)
+

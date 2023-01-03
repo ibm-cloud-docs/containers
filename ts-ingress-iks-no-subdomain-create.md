@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -34,7 +34,8 @@ You create a cluster and run `ibmcloud ks cluster get --cluster <cluster>` to ch
 Even if the cluster is in a `normal` state, the Ingress subdomain and secret might still be in progress. The Ingress subdomain and secret creation might take more than 15 minutes to complete.
 {: tsCauses}
 
-**Classic clusters**:
+## Classic clusters
+{: #no-ingress-subdomain-classic}
 
 1. When worker nodes are fully deployed and ready on the VLANs, a portable public and a portable private subnet for the VLANs are ordered.
 2. After the portable subnet orders are successfully fulfilled, the `ibm-cloud-provider-vlan-ip-config` config map is updated with the portable public and portable private IP addresses.
@@ -45,7 +46,8 @@ Even if the cluster is in a `normal` state, the Ingress subdomain and secret mig
 If you create a classic cluster that is connected to private VLANs only, or if you create a free cluster, no Ingress subdomain or secret are created.
 {: note}
 
-**VPC clusters**:
+### VPC clusters
+{: no-ingress-subdomain-vpc}
 
 1. When you create a VPC cluster, one public and one private VPC load balancer are automatically created outside of your cluster in your VPC.
 2. One public ALB per zone is triggered for creation.

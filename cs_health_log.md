@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-19"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -204,13 +204,11 @@ What are the sources that I can configure log forwarding for?
 7. `kube-audit`: Information about cluster-related actions that is sent to the Kubernetes API server, including the time, the user, and the affected resource. The `kube-audit` source can be configured with a webhook. For more information, see [Forwarding Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health-audit#audit-api-server-external).
 
 
-**Am I responsible for keeping Fluentd updated?**
+Am I responsible for keeping Fluentd updated?
+:   To change your logging or filter configurations, the Fluentd logging component must be at the latest version. By default, automatic updates to the add-on are enabled. To disable automatic updates, see [Updating cluster components: Fluentd for logging](/docs/containers?topic=containers-update#logging-up).
 
-To change your logging or filter configurations, the Fluentd logging component must be at the latest version. By default, automatic updates to the add-on are enabled. To disable automatic updates, see [Updating cluster components: Fluentd for logging](/docs/containers?topic=containers-update#logging-up).
-
-**Can I forward some logs, but not others, from one source in my cluster?**
-
-Yes. For example, if you have a particularly chatty pod, you might want to prevent logs from that pod from taking up log storage space, while still allowing other pods' logs to be forwarded. To prevent logs from a specific pod from being forwarded, see [Filtering logs](#filter-logs).
+Can I forward some logs, but not others, from one source in my cluster?
+:   Yes. For example, if you have a particularly chatty pod, you might want to prevent logs from that pod from taking up log storage space, while still allowing other pods' logs to be forwarded. To prevent logs from a specific pod from being forwarded, see [Filtering logs](#filter-logs).
 
 
 ### Forwarding cluster and app logs
