@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-15"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, containers, kubernetes environment, moving to kubernetes, moving to containers, clusters, cluster sizing
 
@@ -56,13 +56,11 @@ With {{site.data.keyword.cloud_notm}}, you have flexibility to create Kubernetes
 | Proprietary apps with strict designs, licensing, or heavy regulations | | Yes |
 {: caption="{{site.data.keyword.cloud_notm}} implementations support your workloads" caption-side="bottom"}
 
-**Ready to run workloads off-premises in {{site.data.keyword.containerlong_notm}}?**
+Ready to run workloads off-premises in {{site.data.keyword.containerlong_notm}}?
+:   Great! You're already in our public cloud documentation. Keep reading for more strategy ideas, or hit the ground running by [creating a cluster now](/docs/containers?topic=containers-getting-started).
 
-Great! You're already in our public cloud documentation. Keep reading for more strategy ideas, or hit the ground running by [creating a cluster now](/docs/containers?topic=containers-getting-started).
-
-**Want to run workloads in both on-premises and off-premises clouds?**
-
-Explore [{{site.data.keyword.satellitelong_notm}}](/docs/satellite?topic=satellite-faqs) to extend the flexibility and scalability of {{site.data.keyword.cloud_notm}} into your on-premises, edge, or other cloud provider environments.
+Want to run workloads in both on-premises and off-premises clouds?
+:   Explore [{{site.data.keyword.satellitelong_notm}}](/docs/satellite?topic=satellite-faqs) to extend the flexibility and scalability of {{site.data.keyword.cloud_notm}} into your on-premises, edge, or other cloud provider environments.
 
 ### Can I automate my infrastructure deployments?
 {: #infra_packaging}
@@ -90,26 +88,23 @@ You can run serverless apps and jobs through the [{{site.data.keyword.codeengine
 Kubernetes is designed to provide capabilities to two main personas, the cluster admin and the app developer. Each persona uses different technical skills to successfully run and deploy apps to a cluster.
 {: shortdesc}
 
-**What are a cluster admin's main tasks and technical knowledge?**
-
-As a cluster admin, you are responsible to set up, operate, secure, and manage the {{site.data.keyword.cloud_notm}} infrastructure of your cluster. Typical tasks include:
-- Size the cluster to provide enough capacity for your workloads.
-- Design a cluster to meet the high availability, disaster recovery, and compliance standards of your company.
-- Secure the cluster by setting up user permissions and limiting actions within the cluster to protect your compute resources, your network, and data.
-- Plan and manage network communication between infrastructure components to ensure network security, segmentation, and compliance.
-- Plan persistent storage options to meet data residency and data protection requirements.
+What are a cluster admin's main tasks and technical knowledge?
+:   As a cluster admin, you are responsible to set up, operate, secure, and manage the {{site.data.keyword.cloud_notm}} infrastructure of your cluster. Typical tasks include:
+    - Size the cluster to provide enough capacity for your workloads.
+    - Design a cluster to meet the high availability, disaster recovery, and compliance standards of your company.
+    - Secure the cluster by setting up user permissions and limiting actions within the cluster to protect your compute resources, your network, and data.
+    - Plan and manage network communication between infrastructure components to ensure network security, segmentation, and compliance.
+    - Plan persistent storage options to meet data residency and data protection requirements.
 
 The cluster admin persona must have a broad knowledge that includes compute, network, storage, security, and compliance. In a typical company, this knowledge is spread across multiple specialists, such as System Engineers, System Administrators, Network Engineers, Network Architects, IT Managers, or Security and Compliance Specialists. Consider assigning the cluster admin role to multiple people in your company so that you have the required knowledge to successfully operate your cluster.
 
-**What are an app developer's main tasks and technical skills?**
-
-As a developer, you design, create, secure, deploy, test, run, and monitor cloud-native, containerized apps in an Kubernetes cluster. To create and run these apps, you must be familiar with the concept of microservices, the [12-factor app](/docs/containers?topic=containers-plan_deploy#12factor) guidelines, [Docker and containerization principles](https://www.docker.com/){: external}, and available [Kubernetes deployment options](/docs/containers?topic=containers-plan_deploy).
+What are an app developer's main tasks and technical skills?
+:   As a developer, you design, create, secure, deploy, test, run, and monitor cloud-native, containerized apps in an Kubernetes cluster. To create and run these apps, you must be familiar with the concept of microservices, the [12-factor app](/docs/containers?topic=containers-plan_deploy#12factor) guidelines, [Docker and containerization principles](https://www.docker.com/){: external}, and available [Kubernetes deployment options](/docs/containers?topic=containers-plan_deploy).
 
 Kubernetes and {{site.data.keyword.containerlong_notm}} provide multiple options for how to [expose an app and keep an app private](/docs/containers?topic=containers-cs_network_planning), [add persistent storage](/docs/containers?topic=containers-storage_planning), [integrate other services](/docs/containers?topic=containers-ibm-3rd-party-integrations), and how you can [secure your workloads and protect sensitive data](/docs/containers?topic=containers-security#container). Before you move your app to a cluster in {{site.data.keyword.containerlong_notm}}, verify that you can run your app as a containerized app on the supported RHEL 7  operating system and that Kubernetes and {{site.data.keyword.containerlong_notm}} provide the capabilities that your workload needs.
 
-**Do cluster administrators and developers interact with each other?**
-
-Yes. Cluster administrators and developers must interact frequently so that cluster administrators understand workload requirements to provide this capability in the cluster, and so that developers know about available limitations, integrations, and security principles that they must consider in their app development process.
+Do cluster administrators and developers interact with each other?
+:   Yes. Cluster administrators and developers must interact frequently so that cluster administrators understand workload requirements to provide this capability in the cluster, and so that developers know about available limitations, integrations, and security principles that they must consider in their app development process.
 
 ## Sizing your Kubernetes cluster to support your workload
 {: #sizing}

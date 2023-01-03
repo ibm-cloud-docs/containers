@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-02"
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, release notes
 
@@ -25,8 +25,21 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
+
+
 ## January 2023
 {: #containers-jan23}
+
+
+
+### 3 January 2023
+{: #containers-jan0323}
+{: release-note}
+
+Ingress ALB version `1.3.1_3538_iks`, and `1.4.0_3537_iks`
+:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
 
 ### 2 January 2023
 {: #containers-jan0223}
@@ -1978,7 +1991,7 @@ Review the release notes for August 2021.
 Review the release notes for 31 August 2021.
 {: shortdesc}
 
-Istio add-on changelog
+Istio add-on change log
 :   [Version 1.11.1](/docs/containers?topic=containers-istio-changelog#1111) of the Istio managed add-on is released.
 
 New! Sao Paulo multizone region
@@ -2044,7 +2057,7 @@ Worker node versions
 {: #containers-aug1221}
 {: release-note}
 
-Istio add-on changelog
+Istio add-on change log
 :   [Version 1.9.7](/docs/containers?topic=containers-istio-changelog#196) of the Istio managed add-on is released.
 
 
@@ -2097,7 +2110,7 @@ Master versions
 {: #containers-july2221}
 {: release-note}
 
-Istio add-on changelog
+Istio add-on change log
 :   [Version 1.9.6](/docs/containers?topic=containers-istio-changelog#196) of the Istio managed add-on is released.
 
 
@@ -2113,7 +2126,7 @@ Worker node versions
 {: #containers-july1521}
 {: release-note}
 
-Istio add-on changelog
+Istio add-on change log
 :   [Version 1.10.2](/docs/containers?topic=containers-istio-changelog#v110) of the Istio managed add-on is released. 
 
 
@@ -2287,7 +2300,7 @@ End of support for custom IBM Ingress image
 {: #containers-may2721}
 {: release-note}
 
-Istio add-on changelog
+Istio add-on change log
 :   [Version 1.9.5](/docs/containers?topic=containers-istio-changelog#v19) and version [1.8.6](/docs/containers?topic=containers-istio-changelog#v18) of the Istio managed add-on are released.
 
 
@@ -2378,7 +2391,7 @@ Master versions
 Custom IOPs for Istio
 :   Added a page for creating a custom Istio ingress and egress gateways for the managed Istio add-on by [using `IstioOperator`](/docs/containers?topic=containers-istio-custom-gateway).
 
-Istio add-on changelog
+Istio add-on change log
 :   [Version 1.9.3](/docs/containers?topic=containers-istio-changelog#v19) and version [1.8.5](/docs/containers?topic=containers-istio-changelog#v18) of the Istio managed add-on are released.
 
 
@@ -2434,7 +2447,7 @@ New! Toronto multizone region for VPC
 {: #containers-april1921}
 {: release-note}
 
-Add-on changelogs
+add-on change logs
 :   Updated version changelogs for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 
 Cluster autoscaler add-on
@@ -2526,7 +2539,7 @@ New! image security add-on
 {: #containers-march3021}
 {: release-note}
 
-Add-on changelogs
+add-on change logs
 :   Added version changelogs for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 
 Master versions

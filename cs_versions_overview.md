@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-14"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -149,7 +149,7 @@ For actions you should take before and after updating your cluster, see the vers
 Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. If your cluster master is two or more versions behind the oldest supported version, you must [make a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
 {: shortdesc}
 
-**Unsupported Kubernetes versions**: 
+Unsupported Kubernetes versions
 :   [1.21](/docs/containers?topic=containers-cs_versions_121), [1.20](/docs/containers?topic=containers-cs_versions_120), [1.19](/docs/containers?topic=containers-cs_versions_119), [1.18](/docs/containers?topic=containers-118_changelog), [1.17](/docs/containers?topic=containers-117_changelog), [1.16](/docs/containers?topic=containers-116_changelog), [1.15](/docs/containers?topic=containers-115_changelog), [1.14](/docs/containers?topic=containers-114_changelog), [1.13](/docs/containers?topic=containers-113_changelog), [1.12](/docs/containers?topic=containers-112_changelog), [1.11](/docs/containers?topic=containers-111_changelog), [1.10](/docs/containers?topic=containers-110_changelog), [1.9](/docs/containers?topic=containers-19_changelog), [1.8](/docs/containers?topic=containers-18_changelog), [1.7](/docs/containers?topic=containers-17_changelog), 1.6, 1.5
 
 

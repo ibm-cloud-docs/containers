@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-12-16"
+lastupdated: "2022-08-02"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -738,7 +738,7 @@ ALB OAuth Proxy add-on version 1.0.0 uses configuration snippet annotations (`ng
         ```
         {: pre}
 
-For the list of changes for each ALB OAuth Proxy add-on version, see the [{{site.data.keyword.cloud_notm}} ALB OAuth Proxy add-on changelog](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+For the list of changes for each ALB OAuth Proxy add-on version, see the [{{site.data.keyword.cloud_notm}} ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 {: tip}
 
 ### Upgrading ALB OAuth Proxy add-on
@@ -814,7 +814,8 @@ To preserve the original source IP address of the client request, you can enable
 
 When source IP preservation is enabled, load balancers shift from forwarding traffic to an app pod on a different worker node to an app pod on the same worker node. Your apps might experience downtime during this shift. If you [disable an ALB](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure), any source IP changes you make to the load balancer service that exposes the ALB are lost. When you re-enable the ALB, you must enable source IP again.
 
-**Before you begin**: If you configured edge nodes in your cluster, ALB pods are deployed to edge nodes and can only forward traffic to app pods that are also deployed to those edge nodes. Ensure that you have [at least three edge worker nodes per zone](/docs/containers?topic=containers-edge#edge_nodes).
+If you configured edge nodes in your cluster, ALB pods are deployed to edge nodes and can only forward traffic to app pods that are also deployed to those edge nodes. Ensure that you have [at least three edge worker nodes per zone](/docs/containers?topic=containers-edge#edge_nodes).
+{: important}
 
 To enable source IP preservation, edit the load balancer service that exposes an Ingress ALB:
 

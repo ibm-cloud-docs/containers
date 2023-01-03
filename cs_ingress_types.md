@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-19"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -866,7 +866,6 @@ You can enable automatic updates of all Ingress ALB pods in a cluster by enablin
 
 To set a timeframe for automatic updates, you set the `updateStartTime` and `updateEndTime` keys in the deployment ConfigMap. Each key represents an assigned time in a 24 hour format (HH:MM). Note that this time is specified in coordinated universal time (UTC) rather than your local time. To specify a percentage of ALBs to update, you set the `updatePercentage` key as a whole number between 0 and 100.
 
-**To manage your autoupdate settings with a customized ConfigMap:**
 
 1. Create a YAML file for your ConfigMap. Specify the `updatePercentage`, `updateStartTime`, and `updateEndTime` fields as key-value pairs in the `data` field.
 
@@ -970,7 +969,8 @@ For example, if you have worker nodes in `dal10`, a default public ALB exists in
 You can also use these steps to create more ALBs across zones in your cluster. When you create a multizone cluster, a default public ALB is created in each zone where you have worker nodes. However, default public ALBs are created in only up to three zones. If, for example, you later remove one of these original three zones and add workers in a different zone, a default public ALB is not created in that new zone. You can manually create an ALB to process connections in that new zone.
 {: tip}
 
-**Classic clusters:**
+#### Creating more ALBs for Classic clusters
+{: #alb-more-classic}
 
 1. In each zone where you have worker nodes, create an ALB. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_create).
 
@@ -1008,7 +1008,8 @@ You can also use these steps to create more ALBs across zones in your cluster. W
 
 
 
-**VPC clusters:**
+#### Creating more ALBs for VPC clusters
+{: #more-albs-vpc}
 
 1. In each zone where you have worker nodes, create an ALB. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb-create-vpc-gen2).
 

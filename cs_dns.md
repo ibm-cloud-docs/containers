@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-19"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, coredns, kubedns, dns
 
@@ -538,14 +538,15 @@ Do not use the [DNS cache label](#dns_cache) when you use zone-aware DNS in your
 To use zone-aware DNS, you must first deploy zone-aware DNS resources in your multizone cluster. Then, you can enable zone-aware DNS in each zone.
 {: shortdesc}
 
-**Before you begin:** Update any [DNS egress network policies](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/nodelocaldns#network-policy-and-dns-connectivity){: external} that are impacted by zone-aware DNS, such as policies that rely on pod or namespace selectors for DNS egress.
+Before you begin, update any [DNS egress network policies](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/nodelocaldns#network-policy-and-dns-connectivity){: external} that are impacted by zone-aware DNS, such as policies that rely on pod or namespace selectors for DNS egress.
+{: note}
 
 ```sh
 kubectl get networkpolicy --all-namespaces -o yaml
 ```
 {: pre}
 
-**Step 1: Deploy zone-aware DNS resources:**
+1. Deploy zone-aware DNS resources.
 
 1. Add the `ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true` label to the `coredns` ConfigMap in the `kube-system` namespace.
 
@@ -554,24 +555,22 @@ kubectl get networkpolicy --all-namespaces -o yaml
     ```
     {: pre}
 
-2. [Refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh) to the deploy zone-aware DNS resources.
+1. [Refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh) to the deploy zone-aware DNS resources.
 
     ```sh
     ibmcloud ks cluster master refresh -c <cluster_name_or_ID>
     ```
     {: pre}
 
-3. Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_get).
+1. Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_get).
 
     ```sh
     ibmcloud ks cluster get -c <cluster_name_or_ID>
     ```
     {: pre}
 
-**Step 2: Enable zone-aware DNS:**
-
 1. If you [customized stub domains and upstream DNS servers for CoreDNS](#dns_customize), you must also [customize the `NodeLocal` DNS cache](#dns_nodelocal_customize) with these stub domains and upstream DNS servers.
-2. Set an environment variable for the zones of the cluster.
+1. Set an environment variable for the zones of the cluster.
     
     ```sh
     ZONES=$(kubectl get nodes --no-headers --ignore-not-found=true -o jsonpath='{range .items[*]}{.metadata.labels.topology\.kubernetes\.io/zone}{"\n"}{end}' | uniq)
@@ -579,7 +578,7 @@ kubectl get networkpolicy --all-namespaces -o yaml
     {: pre}
 
 
-3. Start the CoreDNS and CoreDNS autoscaler pods in all zones.
+1. Start the CoreDNS and CoreDNS autoscaler pods in all zones.
 
     ```sh
     for ZONE in ${ZONES}; do
@@ -588,7 +587,7 @@ kubectl get networkpolicy --all-namespaces -o yaml
     ```
     {: pre}
 
-4. Verify that the CoreDNS and CoreDNS autoscaler pods are running in all zones.
+1. Verify that the CoreDNS and CoreDNS autoscaler pods are running in all zones.
 
     ```sh
     for ZONE in ${ZONES}; do
@@ -598,14 +597,14 @@ kubectl get networkpolicy --all-namespaces -o yaml
     ```
     {: pre}
 
-5. Start the `NodeLocal` DNS cache pods on all workers nodes.
+1. Start the `NodeLocal` DNS cache pods on all workers nodes.
 
     ```sh
     kubectl label nodes --all --overwrite "ibm-cloud.kubernetes.io/zone-aware-dns-enabled=true"
     ```
     {: pre}
 
-6. Verify that the `NodeLocal` DNS cache pods are running on all workers nodes.
+1. Verify that the `NodeLocal` DNS cache pods are running on all workers nodes.
 
     ```sh
     for ZONE in ${ZONES}; do
@@ -614,7 +613,7 @@ kubectl get networkpolicy --all-namespaces -o yaml
     ```
     {: pre}
 
-7. [Label your worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels) so that future worker nodes inherit the `ibm-cloud.kubernetes.io/zone-aware-dns-enabled=true` label.
+1. [Label your worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels) so that future worker nodes inherit the `ibm-cloud.kubernetes.io/zone-aware-dns-enabled=true` label.
 
 
 ### Disabling and deleting zone-aware DNS
@@ -623,24 +622,23 @@ kubectl get networkpolicy --all-namespaces -o yaml
 To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of your multizone cluster. Then, delete the zone-aware DNS resources.
 {: shortdesc}
 
-**Step 1: Disable zone-aware DNS:**
 
 1. Remove the `ibm-cloud.kubernetes.io/zone-aware-dns-enabled=true` [label from your worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels).
-2. Set an environment variable for the zones in the cluster.
+1. Set an environment variable for the zones in the cluster.
     
     ```sh
     ZONES=$(kubectl get nodes --no-headers --ignore-not-found=true -o jsonpath='{range .items[*]}{.metadata.labels.topology\.kubernetes\.io/zone}{"\n"}{end}' | uniq)
     ```
     {: pre}
 
-3. Stop the `NodeLocal` DNS cache pods on all worker nodes.
+1. Stop the `NodeLocal` DNS cache pods on all worker nodes.
 
     ```sh
     kubectl label nodes --all --overwrite "ibm-cloud.kubernetes.io/zone-aware-dns-enabled-"
     ```
     {: pre}
 
-4. Stop the CoreDNS autoscaler pods in all zones.
+1. Stop the CoreDNS autoscaler pods in all zones.
 
     ```sh
     for ZONE in ${ZONES}; do
@@ -649,7 +647,7 @@ To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of 
     ```
     {: pre}
 
-5. Verify that the CoreDNS autoscaler pods are no longer running in all zones.
+1. Verify that the CoreDNS autoscaler pods are no longer running in all zones.
 
     ```sh
     for ZONE in ${ZONES}; do
@@ -658,7 +656,7 @@ To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of 
     ```
     {: pre}
 
-6. Stop the CoreDNS pods in all zones.
+1. Stop the CoreDNS pods in all zones.
 
     ```sh
     for ZONE in ${ZONES}; do
@@ -667,8 +665,6 @@ To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of 
     ```
     {: pre}
 
-**Step 2: Delete zone-aware DNS resources:**
-
 1. Remove the `ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true` label from the `coredns` ConfigMap in the `kube-system` namespace.
 
     ```sh
@@ -676,14 +672,14 @@ To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of 
     ```
     {: pre}
 
-2. [Refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh) to the delete zone-aware DNS resources.
+1. [Refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh) to the delete zone-aware DNS resources.
 
     ```sh
     ibmcloud ks cluster master refresh --cluster <cluster-name-or-id>
     ```
     {: pre}
 
-3. Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_get).
+1. Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_get).
 
     ```sh
     ibmcloud ks cluster get -c <cluster_name_or_ID>

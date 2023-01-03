@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes
 
@@ -21,7 +21,11 @@ subcollection: containers
 With [pod security policies (PSPs)](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}, you can
 configure policies to authorize who can create and update pods in {{site.data.keyword.containerlong}}.
 
-**Why do I set pod security policies?**
+## FAQs
+{: psp-faqs}
+
+### Why do I set pod security policies?
+{: #why-set-psps}
 
 As a cluster admin, you want to control what happens in your cluster, especially actions that affect the cluster's security or readiness. Pod security policies can help you control usage of privileged containers, root privileges, host networking and ports, volume types, host file systems, Linux capabilities, and more.
 
@@ -30,7 +34,8 @@ With the `PodSecurityPolicy` admission controller, pod creation is controlled by
 Trying to control which users have access to the {{site.data.keyword.containerlong_notm}}? See [Assigning cluster access](/docs/containers?topic=containers-users#users) to set {{site.data.keyword.cloud_notm}} IAM and infrastructure permissions.
 {: tip}
 
-**Are any policies set by default? What can I add?**
+### Are any policies set by default? What can I add?
+{: #psp-defaults}
 
 By default, {{site.data.keyword.containerlong_notm}} configures the `PodSecurityPolicy` admission controller with [resources for {{site.data.keyword.IBM_notm}} cluster management](#ibm_psp) that you can't delete or modify. You also can't disable the admission controller.
 
@@ -38,7 +43,8 @@ Pod actions are not locked down by default. Instead, two role-based access contr
 
 If you want to prevent certain users from creating or updating pods, you can [modify these RBAC resources or create your own](#customize_psp).
 
-**How does policy authorization work?**
+### How does policy authorization work?
+{: #psp-auth}
 
 When you as a user create a pod directly and not by using a controller such as a deployment, your credentials are validated against the pod security policies that you are authorized to use. If no policy supports the pod security requirements, the pod is not created.
 
@@ -46,7 +52,8 @@ When you create a pod by using a resource controller such as a deployment, Kuber
 
 For common error messages, see [Pods fail to deploy because of a pod security policy](/docs/containers?topic=containers-psp).
 
-**Why can I still create privileged pods when I am not part of the `privileged-psp-user` cluster role binding?**
+### Why can I still create privileged pods when I am not part of the `privileged-psp-user` cluster role binding?
+{: #psp-role-binding}
 
 Other cluster role bindings or namespace-scoped role bindings might give you other pod security policies that authorize you to create privileged pods. Additionally by default, cluster administrators have access to all resources, including pod security policies, and so can add themselves to PSPs or create privileged resources.
 

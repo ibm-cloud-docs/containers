@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-15"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -40,8 +40,23 @@ The Kubernetes Ingress version follows the format `<community_version>_<ibm_buil
 
 When automatic updates are enabled for ALBs, your ALBs are updated to the most recent build of the version that is marked as `default`. If you want to use a version other than the default, you must [disable automatic updates](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable). Typically, the latest version becomes the default version one month after the latest version is released by the Kubernetes community. Actual availability and release dates of versions are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 
+
+## Version 1.5.1
+{: #1_5_1}
+
+### 1.5.1_3536_iks, released 3 January 2022
+{: #1.5.1_3536_iks}
+
+
+
 ## Version 1.4.0
 {: #1_4_0}
+
+### 1.4.0_3537_iks, released 3 January 2023
+{: #1.4.0_3537_iks}
+
+- [CVE-2022-43551](https://nvd.nist.gov/vuln/detail/CVE-2022-43551){: external}
+- [CVE-2022-43552](https://nvd.nist.gov/vuln/detail/CVE-2022-43552){: external}
 
 ### 1.4.0_3297_iks, released 15 December 2022
 {: #1.4.0_3297_iks}
@@ -56,12 +71,18 @@ Initial release of `1.4.0`
 ## Version 1.3.1
 {: #1_3_1}
 
+### 1.3.1_3538_iks (default), released 3 January 2023
+{: #1.3.1_3538_iks}
+
+- [CVE-2022-43551](https://nvd.nist.gov/vuln/detail/CVE-2022-43551){: external}
+- [CVE-2022-43552](https://nvd.nist.gov/vuln/detail/CVE-2022-43552){: external}
+
 ### 1.3.1_3298_iks, released 15 December 2022
 {: #1.3.1_3298_iks}
 
 [CVE-2022-41717](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41717){: external}
 
-### 1.3.1_3192_iks (default), released 8 December 2022
+### 1.3.1_3192_iks, released 8 December 2022
 {: #1.3.1_3192_iks}
 
 Updated the golang version to 1.19.3.
@@ -75,7 +96,7 @@ Initial release of `1.3.1`
 ## Version 1.3.0
 {: #1_3_0}
 
-Version 1.3.0 is no longer available. For more information, see the security bulletin
+Version 1.3.0 is no longer supported.
 
 ### 1.3.0_2907_iks, released 31 October 2022
 {: #1.3.0_2907_iks}
@@ -89,8 +110,10 @@ Version 1.3.0 is no longer available. For more information, see the security bul
 
 Initial release of `1.3.0`
 
-## Version 1.2.1
+## Version 1.2.1 (Unsupported)
 {: #1_2_1}
+
+Version 1.3.0 is no longer supported.
 
 ### 1.2.1_3299_iks, released 15 December 2022
 {: #1.2.1_3299_iks}
@@ -202,7 +225,7 @@ Resolves [CVE-2022-29824](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-202
 For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following table for a summary of changes for each build of version 1.1.2 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
-Version 1.1.2 is no longer available. For more information, see the security bulletin
+Version 1.1.2 is no longer available.
 
 ### Version 1.1.2_2808_iks, released on 25 October 2022
 {: #1.1.2_2808_iks}
@@ -327,7 +350,7 @@ Version 1.1.1_1949_iks is now the default version for all ALBs that run the Kube
 ## Version 1.0.0 
 {: #1_0_0}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following table for a summary of changes for each build of version 1.0.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following table for a summary of changes for each build of version 1.0.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 ### Version 1.0.3_1995_iks, released on 24 February 2022
@@ -369,7 +392,7 @@ Initial release of version 1.0.0.
 ## Version 0.49.0
 {: #0_49_0}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following sections for a summary of changes for each build of version 0.49.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100){: external}. Refer to the following sections for a summary of changes for each build of version 0.49.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 ### Version 0.49.3_2253_iks, released on 19 May 2022
@@ -431,12 +454,12 @@ Resolves [CVE-2022-1271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022
 ### Version 0.49.3_1745_iks, released on 20 October 2021
 {: #0.49.3_1745_iks}
 
-**As of 14 Sep 2021, this is the only image supported for Kubernetes version 1.18 clusters**. 
+As of 14 Sep 2021, this is the only image supported for Kubernetes version 1.18 clusters. 
 
 ## Version 0.48.0 
 {: #0_48_0}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0480){: external}. Refer to the following table for a summary of changes for each build of version 0.48.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0480){: external}. Refer to the following table for a summary of changes for each build of version 0.48.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 ### Version 0.48.1_1698_iks, released on 22 September 2021
@@ -472,7 +495,7 @@ Updates to support arbitrary controller values in the Ingress classes.
 ## Version 0.47.0 
 {: #0_47_0}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0470){: external}. Refer to the following table for a summary of changes for each build of version 0.47.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0470){: external}. Refer to the following table for a summary of changes for each build of version 0.47.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 
@@ -520,7 +543,7 @@ Updates to support arbitrary controller values in the Ingress classes.
 ## Version 0.45.0
 {: #0_45_0}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0450){: external}. Refer to the following table for a summary of changes for each build of version 0.45.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0450){: external}. Refer to the following table for a summary of changes for each build of version 0.45.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 ### Version 0.45.0_1482_iks, released on 10 August 2021
@@ -556,7 +579,7 @@ Due to a [regression in the community Kubernetes Ingress NGINX code](https://git
 ## Version 0.43.0
 {: #0_43_0}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0430){: external}. Refer to the following table for a summary of changes for each build of version 0.43.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0430){: external}. Refer to the following table for a summary of changes for each build of version 0.43.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 ### Version 0.43.0_1697_iks, released on 22 September 2021
@@ -595,7 +618,7 @@ Updates to support arbitrary controller values in the Ingress classes.
 Kubernetes Ingress controller version 0.35.0 is no longer supported.
 {: important}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0350){: external}. Refer to the following table for a summary of changes for each build of version 0.35.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0350){: external}. Refer to the following table for a summary of changes for each build of version 0.35.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 #### Version 0.35.0_1374_iks, released on 06 July 2021
@@ -664,7 +687,7 @@ In the `ibm-k8s-controller-config` ConfigMap, sets the `server-tokens` field to 
 ### Version 0.34.1 (unsupported)
 {: #0_34_1}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0341){: external}. Refer to the following table for a summary of changes for each build of version 0.34.1 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0341){: external}. Refer to the following table for a summary of changes for each build of version 0.34.1 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 #### Version 0.34.1_1331_iks, released on 21 June 2021
@@ -725,7 +748,7 @@ In the `ibm-k8s-controller-config` ConfigMap, sets the `server-tokens` field to 
 ### Version 0.33.0 (unsupported)
 {: #0_33_0}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0330){: external}. Refer to the following table for a summary of changes for each build of version 0.33.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0330){: external}. Refer to the following table for a summary of changes for each build of version 0.33.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 #### Version 0.33.0_1198_iks, released on 19 April 2021
@@ -777,7 +800,7 @@ In the `ibm-k8s-controller-config` ConfigMap, sets the `server-tokens` field to 
 ### Version 0.32.0 (unsupported)
 {: #0_32_0}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0320){: external}. Refer to the following table for a summary of changes for each build of version 0.32.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community change log for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0320){: external}. Refer to the following table for a summary of changes for each build of version 0.32.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 #### Version update, released on 22 September 2021

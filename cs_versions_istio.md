@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-08"
+  years: 2014, 2023
+lastupdated: "2023-01-03"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -14,7 +14,7 @@ subcollection: containers
 
 
 
-# Istio add-on version change log
+# Istio add-on change log
 {: #istio-changelog}
 
 View information for patch and minor version updates to the [managed Istio add-on](/docs/containers?topic=containers-istio-about#istio_ov_addon) in your {{site.data.keyword.containerlong}} Kubernetes clusters.
@@ -31,16 +31,6 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 | 1.16 | Yes | 1.23, 1.24, 1.25, 1.26 |
 | 1.15 | Yes | 1.22, 1.23, 1.24, 1.25 |
 | 1.14 | Yes | 1.21, 1.22, 1.23, 1.24, 1.25 |
-| 1.13 | No | - |
-| 1.12 | No | - |
-| 1.11 | No | - |
-| 1.10 | No| - |
-| 1.9 | No| - |
-| 1.8 | No | - |
-| 1.7 | No | - |
-| 1.6 | No | - |
-| 1.5 | No | - |
-| 1.4 | No| - |
 {: caption="Supported Istio versions" caption-side="bottom"}
 
 ## Version 1.16
@@ -60,7 +50,7 @@ Current version
 
 Updates in this version
 :   See the Istio release notes for [Istio 1.16.0](https://istio.io/latest/news/releases/1.16.x/announcing-1.16/){: external}.
-:   The [Gateway API resource](https://istio.io/latest/news/releases/1.16.x/announcing-1.16/upgrade-notes/#gateway-api-resources) is currently unsupported on the managed Istio add-on. Work is in progress to add support for this feature. 
+:   The [Gateway API resource](https://istio.io/latest/news/releases/1.16.x/announcing-1.16/upgrade-notes/#gateway-api-resources) is now supported. 
 :   Resolves the following CVEs:
     - [usn-5702-1](https://ubuntu.com/security/notices/USN-5702-1){: external}
     - [CVE-2022-32221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32221){: external}
