@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-03"
+lastupdated: "2023-01-04"
 
 keywords: kubernetes
 
@@ -1535,11 +1535,11 @@ Minimum required permissions
 :    Optional: Do not show the message of the day or update reminders.
 
 
-##### Example `cluster master private-service-endpoint allowlist add` command
-{: #cluster-master-private-service-endpoint-allowlist-add-example}
+##### Example `cluster master private-service-endpoint allowlist get` command
+{: #cluster-master-private-service-endpoint-allowlist-get-example}
 
 ```sh
-ibmcloud ks cluster master private-service-endpoint allowlist add --cluster mycluster
+ibmcloud ks cluster master private-service-endpoint allowlist get --cluster mycluster
 ```
 {: pre}
 
@@ -4575,7 +4575,6 @@ Minimum required permissions
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example commands:**
 * To update all ALB pods in the cluster:
     ```sh
     ibmcloud ks ingress alb update -c mycluster --version 1.1.2_2507_iks

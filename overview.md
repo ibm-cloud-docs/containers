@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-09"
+  years: 2014, 2023
+lastupdated: "2023-01-04"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -29,32 +29,39 @@ Learn more about [{{site.data.keyword.containerlong}}](https://www.ibm.com/cloud
 Review frequently asked questions and key technologies that {{site.data.keyword.containerlong_notm}} uses.
 {: shortdesc}
 
-**What is {{site.data.keyword.containerlong_notm}} and how does it work?**
+### What is {{site.data.keyword.containerlong_notm}} and how does it work?
+{: #what-is-overview}
 
 {{site.data.keyword.containerlong_notm}} is a managed offering to create your own Kubernetes cluster of compute hosts to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management for your apps. Combined with an intuitive user experience, built-in security and isolation, and advanced tools to secure, manage, and monitor your cluster workloads, you can rapidly deliver highly available and secure containerized apps in the public cloud.
 
-**What is Kubernetes?**
+### What is Kubernetes?
+{: #what-is-kube-overview}
 
 Kubernetes is an open source platform for managing containerized workloads and services across multiple hosts, and offers management tools for deploying, automating, monitoring, and scaling containerized apps with minimal to no manual intervention. For an overview of key Kubernetes concepts, see [Kubernetes clusters](#kubernetes_basics). To dive deeper into Kubernetes, see the [Kubernetes documentation](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational){: external}.
 
-**What are containers?**
+### What are containers?
+{: #what-are-containers-overview}
 
 Containers provide a standard way to package your application's code, configurations, and dependencies into a single unit that can run as a resource-isolated process on a compute server. To run your app in Kubernetes on {{site.data.keyword.containerlong_notm}}, you must first containerize your app by creating a container image that you store in a container registry. For an overview of key Docker concepts and benefits, see [Docker containers](#docker_containers). To dive deeper into Docker, see the [Docker documentation](https://docs.docker.com/){: external}.
 
-**What compute host infrastructure does the service offer?**
+### What compute host infrastructure does the service offer?
+{: #what-compute-infra-is-offered}
 
 With {{site.data.keyword.containerlong_notm}}, you can create your cluster of compute hosts on classic {{site.data.keyword.cloud_notm}} infrastructure or VPC infrastructure.
 
+[VPC clusters](/docs/containers?topic=containers-getting-started) are created in your own Virtual Private Cloud that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. You use network access control lists to protect the subnets that your worker nodes are connected to. Worker nodes on VPC clusters are created as virtual machines using either shared infrastructure or dedicated hosts.
+
+{{site.data.keyword.satelliteshort}}
+:   Create your cluster on your own hardware, {{site.data.keyword.cloud_notm}} Classic or VPC, or on virtual servers in another cloud provider like AWS or Azure.
+
 [Classic clusters](/docs/containers?topic=containers-getting-started) are created on your choice of virtual or bare metal worker nodes that are connected to VLANs. If you require additional local disks, you can also choose one of the bare metal flavors that are designed for software-defined storage solutions, such as Portworx. Depending on the level of hardware isolation that you need, virtual worker nodes can be set up as shared or dedicated nodes, whereas bare metal machines are always set up as dedicated nodes.
 
-[VPC clusters](/docs/containers?topic=containers-getting-started) are created in your own Virtual Private Cloud that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. You use network access control lists to protect the subnets that your worker nodes are connected to. Worker nodes on VPC clusters are created as virtual machines using either shared infrastructure or dedicated hosts.
 
 For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).
 
 
-**Where can I learn more about the service?**
-
-Review the following links to find out more about the benefits and responsibilities when you use {{site.data.keyword.containerlong_notm}}.
+Where can I learn more about the service?
+:   Review the following links to find out more about the benefits and responsibilities when you use {{site.data.keyword.containerlong_notm}}.
 
 - [Benefits of using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov)
 - [Comparison of free and standard clusters](/docs/containers?topic=containers-cs_ov#cluster_types)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-01-03"
+lastupdated: "2023-01-04"
 
 keywords: containers
 subcollection: containers
@@ -53,6 +53,14 @@ subcollection: containers
 [Overview](/docs/containers?topic=containers-iks-overview#iks-overview)
 
 * [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-iks-overview#service-concepts)
+
+    * [What is {{site.data.keyword.containerlong_notm}} and how does it work?](/docs/containers?topic=containers-iks-overview#what-is-overview)
+
+    * [What is Kubernetes?](/docs/containers?topic=containers-iks-overview#what-is-kube-overview)
+
+    * [What are containers?](/docs/containers?topic=containers-iks-overview#what-are-containers-overview)
+
+    * [What compute host infrastructure does the service offer?](/docs/containers?topic=containers-iks-overview#what-compute-infra-is-offered)
 
 * [Docker containers](/docs/containers?topic=containers-iks-overview#docker_containers)
 
@@ -2957,7 +2965,7 @@ subcollection: containers
 
     * [What about serverless apps?](/docs/containers?topic=containers-strategy#apps_serverless-strategy)
 
-    * [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#knowledge)
+    * [What skills should I have before I move my apps to a cluster?](/docs/containers?topic=containers-strategy#knowledge)
 
 * [Sizing your Kubernetes cluster to support your workload](/docs/containers?topic=containers-strategy#sizing)
 
@@ -5033,6 +5041,10 @@ subcollection: containers
 * [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-file_storage#file_change_storage_configuration)
 
 * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version)
+
+    * [Creating a customized storage class with a specific NFS version](/docs/containers?topic=containers-file_storage#custom-sc-nfs-creat)
+
+    * [Changing your existing PV to use a different NFS version](/docs/containers?topic=containers-file_storage#changing-pv-nfs)
 
 * [Scaling down the default {{site.data.keyword.filestorage_short}} plug-in](/docs/containers?topic=containers-file_storage#file_scaledown_plugin)
 
@@ -9280,6 +9292,10 @@ subcollection: containers
 
 * [Unable to create or delete worker nodes due to paid account or one time password error](/docs/containers?topic=containers-cluster_infra_errors#cs_totp)
 
+    * [Disabling TOTP MFA for the account](/docs/containers?topic=containers-cluster_infra_errors#disable-totp-mfa-account)
+
+    * [Using TOTP MFA to create an infrastructure API key for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cluster_infra_errors#create-api-key-totp-mfa)
+
 [VPC: Why is no VPC available when I create a cluster in the console?](/docs/containers?topic=containers-ts_no_vpc#ts_no_vpc)
 
 [Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-ts-app-pod-security#ts-app-pod-security)
@@ -9546,6 +9562,10 @@ subcollection: containers
 [Why does binding a service to a cluster result in a same name error?](/docs/containers?topic=containers-ts-app-svc-bind-name#ts-app-svc-bind-name)
 
 [Why does binding a service to a cluster results in service not found error?](/docs/containers?topic=containers-ts-app-svc-bind-not-found#ts-app-svc-bind-not-found)
+
+* [Cluster user](/docs/containers?topic=containers-ts-app-svc-bind-not-found#service-bind-cluster-user)
+
+* [As the account admin](/docs/containers?topic=containers-ts-app-svc-bind-not-found#service-bind-account-admin)
 
 [Why does binding a service to a cluster results in service does not support service keys error?](/docs/containers?topic=containers-ts-app-svc-key#ts-app-svc-key)
 
