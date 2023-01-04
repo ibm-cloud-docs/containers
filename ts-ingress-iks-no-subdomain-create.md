@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-03"
+lastupdated: "2023-01-04"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -47,7 +47,7 @@ If you create a classic cluster that is connected to private VLANs only, or if y
 {: note}
 
 ### VPC clusters
-{: no-ingress-subdomain-vpc}
+{: #no-ingress-subdomain-vpc}
 
 1. When you create a VPC cluster, one public and one private VPC load balancer are automatically created outside of your cluster in your VPC.
 2. One public ALB per zone is triggered for creation.

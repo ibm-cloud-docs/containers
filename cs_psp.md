@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-03"
+lastupdated: "2023-01-04"
 
 keywords: kubernetes
 
@@ -22,7 +22,9 @@ With [pod security policies (PSPs)](https://kubernetes.io/docs/concepts/security
 configure policies to authorize who can create and update pods in {{site.data.keyword.containerlong}}.
 
 ## FAQs
-{: psp-faqs}
+{: #psp-faqs}
+
+Learn about some common FAQs for configuring your pod security policies.
 
 ### Why do I set pod security policies?
 {: #why-set-psps}

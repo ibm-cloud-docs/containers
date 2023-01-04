@@ -3815,7 +3815,7 @@ subcollection: containers
 
 [Configuring pod security policies](/docs/containers?topic=containers-psp#psp)
 
-* [FAQs](/docs/containers?topic=containers-psp#faqs)
+* [FAQs](/docs/containers?topic=containers-psp#psp-faqs)
 
     * [Why do I set pod security policies?](/docs/containers?topic=containers-psp#why-set-psps)
 
@@ -9648,7 +9648,7 @@ subcollection: containers
 
 * [Classic clusters](/docs/containers?topic=containers-ingress_subdomain#no-ingress-subdomain-classic)
 
-    * [VPC clusters](/docs/containers?topic=containers-ingress_subdomain#vpc-clusters)
+    * [VPC clusters](/docs/containers?topic=containers-ingress_subdomain#no-ingress-subdomain-vpc)
 
 [Why does no Ingress subdomain exist after I create clusters of the same or similar name?](/docs/containers?topic=containers-cs_rate_limit#cs_rate_limit)
 
