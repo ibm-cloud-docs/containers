@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-01-04"
+lastupdated: "2023-01-05"
 
 keywords: containers
 subcollection: containers
@@ -222,6 +222,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan23)
+
+    * [5 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan0523)
+
+        * Istio add-on versions `1.14.6`, `1.15.4`, and `1.16.1`
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.7` is available.
 
     * [3 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan0323)
 
@@ -3815,7 +3821,7 @@ subcollection: containers
 
 [Configuring pod security policies](/docs/containers?topic=containers-psp#psp)
 
-* [FAQs](/docs/containers?topic=containers-psp#faqs)
+* [FAQs](/docs/containers?topic=containers-psp#psp-faqs)
 
     * [Why do I set pod security policies?](/docs/containers?topic=containers-psp#why-set-psps)
 
@@ -4580,9 +4586,9 @@ subcollection: containers
 
 * [Exposing the Istio ingress gateway with DNS](/docs/containers?topic=containers-istio-mesh#istio_expose)
 
-    * [Exposing the Istio ingress gateway with DNS without TLS termination](/docs/containers?topic=containers-istio-mesh#no-tls)
+    * [Exposing the Istio ingress gateway with DNS without TLS termination](/docs/containers?topic=containers-istio-mesh#istio-no-tls)
 
-    * [Exposing the Istio ingress gateway with DNS with TLS termination](/docs/containers?topic=containers-istio-mesh#tls)
+    * [Exposing the Istio ingress gateway with DNS with TLS termination](/docs/containers?topic=containers-istio-mesh#istio_tls)
 
 * [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
 
@@ -4861,7 +4867,7 @@ subcollection: containers
 
 * [Enabling and disabling HTTP Strict Transport Security](/docs/containers?topic=containers-comm-ingress-annotations#http-strict-transport-security)
 
-* [Setting a maximum nunber of keepalive requests](/docs/containers?topic=containers-comm-ingress-annotations#keepalive-requests)
+* [Setting a maximum number of keepalive requests](/docs/containers?topic=containers-comm-ingress-annotations#keepalive-requests)
 
 * [Setting a maximum keepalive request timeout](/docs/containers?topic=containers-comm-ingress-annotations#keepalive-request-timeout)
 
@@ -4875,7 +4881,7 @@ subcollection: containers
 
 * [Configuring proxy buffer size](/docs/containers?topic=containers-comm-ingress-annotations#proxy-buffer-size)
 
-* [Configruing proxy buffer numbers](/docs/containers?topic=containers-comm-ingress-annotations#config-proxy-buffers)
+* [Configuring proxy buffer numbers](/docs/containers?topic=containers-comm-ingress-annotations#config-proxy-buffers)
 
 * [Configuring busy proxy buffer size](/docs/containers?topic=containers-comm-ingress-annotations#proxy-busy-buffer-size)
 
@@ -8318,9 +8324,13 @@ subcollection: containers
 
 * [Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
 
+    * [Change log for 1.16.1, released 5 January 2023](/docs/containers?topic=containers-istio-changelog#1161)
+
     * [Change log for 1.16.0, released November 30th, 2022](/docs/containers?topic=containers-istio-changelog#1160)
 
 * [Version 1.15](/docs/containers?topic=containers-istio-changelog#v115)
+
+    * [Change log for 1.15.4, released 5 January 2023](/docs/containers?topic=containers-istio-changelog#1154)
 
     * [Change log for 1.15.3, released 10 November 2022](/docs/containers?topic=containers-istio-changelog#1153)
 
@@ -8331,6 +8341,8 @@ subcollection: containers
     * [Change log for 1.15.0, released 15 September 2022](/docs/containers?topic=containers-istio-changelog#1150)
 
 * [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
+
+    * [Change log for 1.14.6, released 5 January 2023](/docs/containers?topic=containers-istio-changelog#1146)
 
     * [Change log for 1.14.5, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1145)
 
@@ -8711,6 +8723,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.7, released 5 January 2023](/docs/containers?topic=containers-cos_plugin_changelog#0227_object_plugin)
 
 * [Change log for version 2.2.6, released 15 December 2022](/docs/containers?topic=containers-cos_plugin_changelog#0226_object_plugin)
 
@@ -9648,7 +9662,7 @@ subcollection: containers
 
 * [Classic clusters](/docs/containers?topic=containers-ingress_subdomain#no-ingress-subdomain-classic)
 
-    * [VPC clusters](/docs/containers?topic=containers-ingress_subdomain#vpc-clusters)
+    * [VPC clusters](/docs/containers?topic=containers-ingress_subdomain#no-ingress-subdomain-vpc)
 
 [Why does no Ingress subdomain exist after I create clusters of the same or similar name?](/docs/containers?topic=containers-cs_rate_limit#cs_rate_limit)
 

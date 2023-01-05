@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-03"
+lastupdated: "2023-01-05"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -528,7 +528,7 @@ In the following steps, you set up a subdomain through which your users can acce
 
 
 ### Exposing the Istio ingress gateway with DNS without TLS termination
-{: #no-tls}
+{: #istio-no-tls}
 
 1. [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
 2. [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
@@ -660,7 +660,7 @@ Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-a
 
 
 ### Exposing the Istio ingress gateway with DNS with TLS termination
-{: #tls}
+{: #istio_tls}
 
 
 1. [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
