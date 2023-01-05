@@ -4867,7 +4867,7 @@ subcollection: containers
 
 * [Enabling and disabling HTTP Strict Transport Security](/docs/containers?topic=containers-comm-ingress-annotations#http-strict-transport-security)
 
-* [Setting a maximum nunber of keepalive requests](/docs/containers?topic=containers-comm-ingress-annotations#keepalive-requests)
+* [Setting a maximum number of keepalive requests](/docs/containers?topic=containers-comm-ingress-annotations#keepalive-requests)
 
 * [Setting a maximum keepalive request timeout](/docs/containers?topic=containers-comm-ingress-annotations#keepalive-request-timeout)
 
@@ -4881,7 +4881,7 @@ subcollection: containers
 
 * [Configuring proxy buffer size](/docs/containers?topic=containers-comm-ingress-annotations#proxy-buffer-size)
 
-* [Configruing proxy buffer numbers](/docs/containers?topic=containers-comm-ingress-annotations#config-proxy-buffers)
+* [Configuring proxy buffer numbers](/docs/containers?topic=containers-comm-ingress-annotations#config-proxy-buffers)
 
 * [Configuring busy proxy buffer size](/docs/containers?topic=containers-comm-ingress-annotations#proxy-busy-buffer-size)
 

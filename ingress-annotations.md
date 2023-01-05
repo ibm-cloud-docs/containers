@@ -90,7 +90,7 @@ nginx.ingress.kubernetes.io/proxy-read-timeout: 62
 ## Customizing error actions
 {: #custom-error-actions}
 
-To indicate custom actions that the ALB can take for specific HTTP errors, set the `custom-http-errors` [field]((https://kubernetes.github.io/ingress-nginx/examples/customization/custom-errors/){: external}.
+To indicate custom actions that the ALB can take for specific HTTP errors, set the `custom-http-errors` [field](https://kubernetes.github.io/ingress-nginx/examples/customization/custom-errors/){: external}.
 {: shortdesc}
 
 ## Changing the default HTTP and HTTPS ports
@@ -172,7 +172,7 @@ Set the browser to access the domain only by using HTTPS. This option is enabled
     {: screen}
 
 
-## Setting a maximum nunber of keepalive requests
+## Setting a maximum number of keepalive requests
 {: #keepalive-requests}
 
 To set the maximum number of requests that can be served through one keepalive connection, use the following Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#keep-alive-requests){: external}.
@@ -262,7 +262,7 @@ nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
 {: screen}
 
 
-## Configruing proxy buffer numbers
+## Configuring proxy buffer numbers
 {: #config-proxy-buffers}
 
 To configure the number of proxy buffers for the ALB, use the following Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#proxy-buffering){: external}.
@@ -459,6 +459,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 ### Creating a ConfigMap to customize the Ingress deployment
 {: #create-ingress-configmap-custom}
 
+
 1. Create a YAML file for an `ibm-ingress-deploy-config` ConfigMap. For each ALB ID, you can specify one or more of the following optional settings. Note that you can specify only the settings that you want to configure, and don't need to specify all the settings.
 
     ```yaml
@@ -468,7 +469,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
       name: ibm-ingress-deploy-config
       namespace: kube-system
     data:
-      <alb1-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
+      <alb1-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "defaultConfig":"<namespace>/<configmap-name>","enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
       <alb2-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>","logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
     ```
     {: screen}
@@ -476,12 +477,16 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
     `deepInspect`
     :   Enable or disable Ingress object security deep inspector. When enabled, ALBs inspect configuration values in Ingress resources before processing. For more information, see [the ingress-nginx source code](https://github.com/kubernetes/ingress-nginx/tree/main/internal/ingress/inspector){: external}.
     :   This feature is available for ALB versions 1.2.0 and later and enabled by default.
+    
 
     `defaultBackendService`
     :   Specify the name of an optional default service to receive requests when no host is configured or no matching host is found. This service replaces the IBM-provided default service that generates a `404` message. You might use this service to configure custom error pages or for testing connections.
     
    `defaultCertificate`
     :   A secret for a default TLS certificate to apply to any subdomain that is configured with Ingress ALBs in the format `secret_namespace/secret_name`. To create a secret, you can run the [ibmcloud ks ingress secret create](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create) command. If a secret for a different TLS certificate is specified in the `spec.tls` section of an Ingress resource, and that secret exists in the same namespace as the Ingress resource, then that secret is applied instead of this default secret.
+    
+    `defaultConfig`
+    :   Specify a default configmap for your ALBs. Enter the location of the configmap you want to use in the format `namespace/configmap-name`. For example, `kube-system/ibm-k8s-controller-config`.
     
     `enableSslPassthrough`
     :   Enable SSL passthrough for the ALB. The TLS connection is not terminated and passes through untouched.
