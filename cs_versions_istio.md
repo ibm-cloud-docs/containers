@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-03"
+lastupdated: "2023-01-05"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -35,6 +35,27 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 ## Version 1.16
 {: #v116}
+
+### Change log for 1.16.1, released 5 January 2023
+{: #1161}
+
+Review the changes that are included in version 1.16.1 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.16.0
+
+Current version
+:   1.16.1
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.16.1](https://istio.io/latest/news/releases/1.16.x/announcing-1.16.1/){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2013-4235](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4235){: external}
+    - [usn-5761-1](https://ubuntu.com/security/notices/USN-5761-1){: external}
+    - [usn-5745-1](https://ubuntu.com/security/notices/USN-5745-1){: external}
+:   Fixes a `podAntiAffinity` label bug where the value was incorrect. 
+:   Adds support for [Gateway API resource](https://istio.io/latest/news/releases/1.16.x/announcing-1.16/upgrade-notes/#gateway-api-resources).
 
 ### Change log for 1.16.0, released November 30th, 2022
 {: #1160}
@@ -70,6 +91,40 @@ Updates in this version
 
 ## Version 1.15
 {: #v115}
+
+### Change log for 1.15.4, released 5 January 2023
+{: #1154}
+
+Review the changes that are included in version 1.15.4 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.15.3
+
+Current version
+:   1.15.4
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.15.4](https://istio.io/latest/news/releases/1.15.x/announcing-1.15.4/){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2022-32221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32221){: external}
+    - [CVE-2022-35260](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35260){: external}
+    - [CVE-2022-42915](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42915){: external} 
+    - [CVE-2022-42916](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42916){: external}
+    - [CVE-2022-42010](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42010){: external}  
+    - [CVE-2022-42011](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42011){: external}
+    - [CVE-2022-42012](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42012){: external}
+    - [CVE-2022-3358](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3358){: external}
+    - [CVE-2022-3602](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3602){: external}
+    - [CVE-2022-3786](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3786){: external}
+    - [CVE-2013-4235](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4235){: external}
+    - [usn-5761-1](https://ubuntu.com/security/notices/USN-5761-1){: external}
+    - [usn-5702-1](https://ubuntu.com/security/notices/USN-5702-1){: external}
+    - [usn-5704-1](https://ubuntu.com/security/notices/USN-5704-1){: external}
+    - [usn-5710-1](https://ubuntu.com/security/notices/USN-5710-1){: external}
+    - [usn-5745-1](https://ubuntu.com/security/notices/USN-5745-1){: external}
+:   Fixes a `podAntiAffinity` label bug where the value was incorrect. 
+
 
 ### Change log for 1.15.3, released 10 November 2022
 {: #1153}
@@ -151,6 +206,45 @@ Updates in this version
 
 ## Version 1.14
 {: #v114}
+
+### Change log for 1.14.6, released 5 January 2023
+{: #1146}
+
+Review the changes that are included in version 1.14.6 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.14.5
+
+Current version
+:   1.14.6
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.14.6](https://istio.io/latest/news/releases/1.14.x/announcing-1.14.6/){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2022-32221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32221){: external}
+    - [CVE-2022-35260](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35260){: external}
+    - [CVE-2022-42915](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42915){: external} 
+    - [CVE-2022-42916](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42916){: external}
+    - [CVE-2021-43618](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43618){: external}  
+    - [CVE-2018-16860](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16860){: external}
+    - [CVE-2019-12098](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12098){: external}
+    - [CVE-2021-3671](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3671){: external}
+    - [CVE-2022-3116](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3116){: external}
+    - [CVE-2022-35737](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35737){: external}
+    - [CVE-2022-41916](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41916){: external}
+    - [CVE-2013-4235](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4235){: external}
+    - [CVE-2022-37434](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37434){: external}
+    - [usn-5761-1](https://ubuntu.com/security/notices/USN-5761-1){: external}
+    - [usn-5745-2](https://ubuntu.com/security/notices/USN-5745-2){: external}
+    - [usn-5766-1](https://ubuntu.com/security/notices/USN-5766-1){: external}
+    - [usn-5745-1](https://ubuntu.com/security/notices/USN-5745-1){: external}
+    - [usn-5716-1](https://ubuntu.com/security/notices/USN-5716-1){: external}
+    - [usn-5702-1](https://ubuntu.com/security/notices/USN-5702-1){: external}
+    - [usn-5675-1](https://ubuntu.com/security/notices/USN-5675-1){: external}
+    - [usn-5672-1](https://ubuntu.com/security/notices/USN-5672-1){: external}
+    - [usn-5570-2](https://ubuntu.com/security/notices/USN-5570-2){: external}
+:   Fixes a `podAntiAffinity` label bug where the value was incorrect. 
 
 ### Change log for 1.14.5, released 25 October 2022
 {: #1145}

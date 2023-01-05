@@ -34,8 +34,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-jan0523}
 {: release-note}
 
+
+Istio add-on versions `1.14.6`, `1.15.4`, and `1.16.1`
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog#1161).
+
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.7` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
 
 
 
@@ -173,7 +178,7 @@ CLI version 1.0.471 change log update
 {: release-note}
 
 Istio add-on version `1.16.0`
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog#1160) is available.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog#1160).
 
 
 Ingress ALB change log updates
@@ -247,7 +252,7 @@ New Ingress status messages
 {: release-note}
 
 Istio add-on version `1.15.3`
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog#1153) is available.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog#1153).
 
 
 ### 9 November 2022
