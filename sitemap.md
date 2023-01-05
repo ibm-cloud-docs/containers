@@ -4586,9 +4586,9 @@ subcollection: containers
 
 * [Exposing the Istio ingress gateway with DNS](/docs/containers?topic=containers-istio-mesh#istio_expose)
 
-    * [Exposing the Istio ingress gateway with DNS without TLS termination](/docs/containers?topic=containers-istio-mesh#no-tls)
+    * [Exposing the Istio ingress gateway with DNS without TLS termination](/docs/containers?topic=containers-istio-mesh#istio-no-tls)
 
-    * [Exposing the Istio ingress gateway with DNS with TLS termination](/docs/containers?topic=containers-istio-mesh#tls)
+    * [Exposing the Istio ingress gateway with DNS with TLS termination](/docs/containers?topic=containers-istio-mesh#istio_tls)
 
 * [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
 
