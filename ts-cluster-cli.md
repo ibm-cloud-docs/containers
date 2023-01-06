@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-01-06"
 
 keywords: kubernetes
 
@@ -22,12 +22,11 @@ content-type: troubleshoot
 {: troubleshoot}
 {: support}
 
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
+
 Review the following common reasons for CLI connection issues or command failures.
 {: shortdesc}
 
-Supported infrastructure providers
-:   Classic
-:   VPC
 
 ## Firewall prevents running CLI commands
 {: #ts_firewall_clis}

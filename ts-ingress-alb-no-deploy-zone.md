@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-01-06"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -19,8 +19,8 @@ content-type: troubleshoot
 {: #cs_subnet_limit}
 {: support}
 
-Supported infrastructure provider
-:   Classic
+[Classic infrastructure]{: tag-classic-inf}
+
 
 
 When you have a multizone classic cluster and run `ibmcloud ks ingress alb ls --cluster <cluster>`, no ALB is deployed in a zone. For example, if you have worker nodes in 3 zones, you might see an output similar to the following in which a public ALB did not deploy to the third zone.

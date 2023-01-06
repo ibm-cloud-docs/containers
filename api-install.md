@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-16"
+  years: 2014, 2023
+lastupdated: "2023-01-06"
 
 keywords: kubernetes, ic, ks, kubectl, api
 
@@ -53,7 +53,7 @@ Kubernetes API
 :    v1 API: To use the Kubernetes API to manage Kubernetes resources within the cluster, such as pods or namespaces, see [Working with your cluster by using the Kubernetes API](#kube_api).
 :    v2 API: Same as `v1`; see [Working with your cluster by using the Kubernetes API](#kube_api).
 
-Supported infrastructure providers
+Supported APIs by infrastructure type
 :    v1 API: `classic`
 :    v2 API: `vpc` and `classic`
      - The `vpc` provider is designed to support multiple VPC subproviders. The supported VPC subprovider is `vpc-gen2`, which corresponds to a VPC cluster for Generation 2 compute resources.

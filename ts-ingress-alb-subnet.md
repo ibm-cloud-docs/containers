@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-01-06"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -19,8 +19,8 @@ content-type: troubleshoot
 {: #cs_alb_subnet}
 {: support}
 
-Supported infrastructure provider
-:   Classic
+[Classic infrastructure]{: tag-classic-inf}
+
 
 
 When you try to enable an Ingress ALB by running the `ibmcloud ks ingress alb enable` command, you see the following error:

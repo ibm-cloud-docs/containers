@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-05"
+lastupdated: "2023-01-06"
 
 keywords: kubernetes, release notes
 
@@ -3438,7 +3438,7 @@ Istio add-on
 {: release-note}
 
 Deprecation of VPC Gen 1 compute
-:   VPC Generation 1 is deprecated. If you did not create any VPC Gen 1 resources before 01 September 2020, you can no longer provision any VPC Gen 1 resources. If you created any VPC Gen 1 resources before 01 September 2020, you can continue to provision and use VPC Gen 1 resources until 26 February 2021, when all service for VPC Gen 1 ends and all remaining VPC Gen 1 resources are deleted. To ensure continued support, create new VPC clusters on Generation 2 compute only, and move your workloads from existing VPC Gen 1 clusters to VPC Gen 2 clusters.
+:   Virtual Private Cloud Generation 1 is deprecated. If you did not create any VPC Gen 1 resources before 01 September 2020, you can no longer provision any VPC Gen 1 resources. If you created any VPC Gen 1 resources before 01 September 2020, you can continue to provision and use VPC Gen 1 resources until 26 February 2021, when all service for VPC Gen 1 ends and all remaining VPC Gen 1 resources are deleted. To ensure continued support, create new VPC clusters on Generation 2 compute only, and move your workloads from existing VPC Gen 1 clusters to VPC Gen 2 clusters.
 
 Istio add-on
 :   [Version 1.5.10](/docs/containers?topic=containers-istio-changelog#1510) of the Istio managed add-on is released.
