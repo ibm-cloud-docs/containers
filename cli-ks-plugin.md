@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-06"
+lastupdated: "2023-01-09"
 
 keywords: kubernetes
 
@@ -1663,7 +1663,7 @@ Minimum required permissions
 
 
 #### Example `cluster master public-service-endpoint disable` command
-{: #cluster-master-public-service-endpoint disable-example}
+{: #cluster-master-public-service-endpoint-disable-example}
 
 ```sh
 ibmcloud ks cluster master public-service-endpoint disable --cluster my_cluster
@@ -1704,7 +1704,7 @@ Minimum required permissions
 
 
 #### Example `cluster master public-service-endpoint enable` command
-{: #cluster-master-public-service-endpoint enable-example}
+{: #cluster-master-public-service-endpoint-enable-example}
 
 ```sh
 ibmcloud ks cluster master public-service-endpoint enable --cluster my_cluster

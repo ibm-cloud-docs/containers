@@ -41,10 +41,6 @@ Cluster autoscaler add-on versions `1.0.5_898`, `1.0.6_899`, `1.0.7_900`, and `1
 {: #containers-jan0523}
 {: release-note}
 
-
-Istio add-on versions `1.14.6`, `1.15.4`, and `1.16.1`
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog#1161).
-
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.7` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
@@ -4986,7 +4982,7 @@ FAQs
 :   Added an FAQ about [free clusters](/docs/containers?topic=containers-faqs#faq_free).
 
 Istio
-:   Added steps for [exposing Istio-managed apps with TLS termination](/docs/containers?topic=containers-istio-mesh#tls), [securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls), and [Updating the Istio add-ons](/docs/containers?topic=containers-istio#istio_update).
+:   Added steps for [exposing Istio-managed apps with TLS termination](/docs/containers?topic=containers-istio-mesh#istio_expose_bookinfo_tls), [securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls), and [Updating the Istio add-ons](/docs/containers?topic=containers-istio#istio_update).
 
 Knative
 :   Added instructions for how to use volumes to access secrets and config maps, pull images from a private registry, scale apps based on CPU usage, change the default container port, and change the `scale-to-zero-grace-period`.

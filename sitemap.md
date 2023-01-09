@@ -229,8 +229,6 @@ subcollection: containers
 
     * [5 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan0523)
 
-        * Istio add-on versions `1.14.6`, `1.15.4`, and `1.16.1`
-
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.7` is available.
 
     * [3 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan0323)
