@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2022
-lastupdated: "2022-11-11"
+  years: 2022, 2023
+lastupdated: "2023-01-06"
 
 keywords: kubernetes, help
 
@@ -20,9 +20,7 @@ content-type: troubleshoot
 {: #debug_metrics_server}
 {: support}
 
-Supported infrastructure providers
-:   Classic
-:   VPC
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
 The following symptoms might indicate a need to adjust the `metrics-server` resources:
 {: tsSymptoms}

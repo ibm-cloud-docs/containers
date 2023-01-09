@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-01-06"
 
 keywords: kubernetes, help
 
@@ -21,10 +21,9 @@ content-type: troubleshoot
 {: #istio_gateway_affinity}
 {: support}
 
-Supported infrastructure providers
-:   Classic
-:   VPC
-* Multizone clusters only
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
+
+Multizone clusters only
 
 
 When you run `kubectl get pod -n ibm-system`, the `ibm-cloud-provider-ip` pod that provides the external IP address for your Istio ingress gateway is stuck in the `pending` status.

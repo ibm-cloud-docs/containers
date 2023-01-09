@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-01-06"
 
 keywords: kubernetes
 
@@ -19,9 +19,7 @@ content-type: troubleshoot
 {: #ts-app-psp}
 {: support}
 
-Supported infrastructure providers
-:   Classic
-:   VPC
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
 
 After creating a pod or running `kubectl get events` to check on a pod deployment, you see an error message similar to the following.

@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-13"
+  years: 2014, 2023
+lastupdated: "2023-01-06"
 
 keywords: kubernetes, kernel
 
@@ -456,6 +456,8 @@ You might need to repeat this process a few times to reach a stable configuratio
 ## Enabling huge pages
 {: #huge-pages}
 
+[Classic infrastructure]{: tag-classic-inf} [Virtual Private Cloud]{: tag-vpc}
+
 You can enable the [Kubernetes `HugePages` scheduling](https://kubernetes.io/docs/tasks/manage-hugepages/scheduling-hugepages/){: external} in clusters that run Kubernetes version 1.19 or later. The only supported page size is 2 MB per page, which is the default size of the Kubernetes feature gate.
 {: shortdesc}
 
@@ -467,9 +469,7 @@ By default, the CPU of your worker nodes allocates RAM in chunks, or pages, of 4
 You can reboot the worker node and the huge pages configuration persists. However, the huge pages configuration does **not** persist across any other worker node life cycle operations. You must repeat the enablement steps each time that you update, reload, replace, or add worker nodes.
 {: important}
 
-**Supported infrastructure providers and required permissions**:
-* Classic
-* VPC
+
 * **Operator** platform access role and **Manager** service access role for the cluster in {{site.data.keyword.cloud_notm}} IAM
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)

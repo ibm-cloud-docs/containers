@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2022
-lastupdated: "2022-12-16"
+  years: 2022, 2023
+lastupdated: "2023-01-06"
 
 keywords: custom gateway, reconcile loop, istio, IOP, help
 
@@ -18,9 +18,7 @@ content-type: troubleshoot
 {: #istio_control_plane}
 {: support}
 
-Supported infrastructure providers
-:   Classic
-:   VPC
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
 
 When you check your IstioOperator (IOP) logs, you notice a reconcile loop, indicated by the following line repeating in the logs.

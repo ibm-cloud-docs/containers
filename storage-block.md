@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-04"
+lastupdated: "2023-01-06"
 
 keywords: kubernetes
 
@@ -33,7 +33,8 @@ If your cluster can't access the public network, such as a private cluster behin
 
 {{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
-**Supported infrastructure**: Classic clusters only
+[Classic infrastructure]{: tag-classic-inf}
+
 
 The steps on this page apply to classic clusters only. On VPC clusters, the {{site.data.keyword.block_storage_is_short}} add-on is installed by default. For more information, see [Storing data on Storing data on {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block).
 {: important}

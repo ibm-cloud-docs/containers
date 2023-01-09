@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2022
-lastupdated: "2022-12-01"
+  years: 2022, 2023
+lastupdated: "2023-01-06"
 
 keywords: kubernetes, help
 
@@ -19,9 +19,7 @@ content-type: troubleshoot
 {: #ts-addon-istio-webhooks}
 {: support}
 
-Supported infrastructure providers
-:   Classic
-:   VPC
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
 When you upgrade your managed Istio components from version 1.11 to version 1.12, the upgrade does not complete. 
 {: tsSymptoms}

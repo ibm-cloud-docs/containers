@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-12"
+  years: 2014, 2023
+lastupdated: "2023-01-06"
 
 keywords: kubernetes, encrypt, security, kms, root key, crk
 
@@ -112,8 +112,6 @@ If KMS was enabled before this version, [update your cluster](/docs/containers?t
 
 
 Enable a [key management service (KMS) provider](#kms) to encrypt the Kubernetes secrets in your cluster.
-
-
 
 
 ### Prerequisites

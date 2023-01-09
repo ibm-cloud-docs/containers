@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-06"
+  years: 2014, 2023
+lastupdated: "2023-01-06"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -19,9 +19,7 @@ content-type: troubleshoot
 {: #coredns_lameduck}
 {: support}
 
-Supported infrastructure providers
-:   Classic
-:   VPC
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
 
 Your app sometimes fails to resolve DNS names for cluster services around the same time that one or more CoreDNS pods are restarted, such as during a worker reload or patch update.
