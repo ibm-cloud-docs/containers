@@ -4369,11 +4369,11 @@ subcollection: containers
 
     * [I thought that I needed to put my app in a container. Now what's all this stuff about pods?](/docs/containers?topic=containers-plan_deploy#deploy_pods)
 
-    * [So if I can just use a pod, why do I need all these different types of objects?](/docs/containers?topic=containers-plan_deploy#deploy_objects)
+    * [So if I can use a pod, why do I need all these different types of objects?](/docs/containers?topic=containers-plan_deploy#deploy_objects)
 
     * [What type of Kubernetes objects can I make for my app?](/docs/containers?topic=containers-plan_deploy#object)
 
-    * [What if I want my app configuration to use variables? How do I add these to the YAML?](/docs/containers?topic=containers-plan_deploy#variables)
+    * [What if I want my app configuration to use variables? How do I add these variables to the YAML?](/docs/containers?topic=containers-plan_deploy#variables)
 
     * [How can I make sure that my app has the correct resources?](/docs/containers?topic=containers-plan_deploy#resources)
 
