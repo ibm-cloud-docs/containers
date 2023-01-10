@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-01-09"
+lastupdated: "2023-01-10"
 
 keywords: containers
 subcollection: containers
@@ -222,6 +222,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan23)
+
+    * [10 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan1023)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.15_1764` and `5.0.4_1773`
+
+        * Istio add-on versions `1.14.6`, `1.15.4`, and `1.16.1`
 
     * [9 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan0923)
 
@@ -8326,9 +8332,13 @@ subcollection: containers
 
 * [Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
 
+    * [Change log for 1.16.1, released 10 January 2023](/docs/containers?topic=containers-istio-changelog#1161)
+
     * [Change log for 1.16.0, released November 30th, 2022](/docs/containers?topic=containers-istio-changelog#1160)
 
 * [Version 1.15](/docs/containers?topic=containers-istio-changelog#v115)
+
+    * [Change log for 1.15.4, released 10 January 2023](/docs/containers?topic=containers-istio-changelog#1154)
 
     * [Change log for 1.15.3, released 10 November 2022](/docs/containers?topic=containers-istio-changelog#1153)
 
@@ -8339,6 +8349,8 @@ subcollection: containers
     * [Change log for 1.15.0, released 15 September 2022](/docs/containers?topic=containers-istio-changelog#1150)
 
 * [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
+
+    * [Change log for 1.14.6, released 10 January 2023](/docs/containers?topic=containers-istio-changelog#1146)
 
     * [Change log for 1.14.5, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1145)
 
@@ -8632,7 +8644,9 @@ subcollection: containers
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
 
-    * [Changelog for version 5.0.2_1713, released 17 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.2-1713_is_block_relnote)
+    * [Change log for version 5.0.4_1773, released 10 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.4-1773_is_block_relnote)
+
+    * [Change log for version 5.0.2_1713, released 17 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.2-1713_is_block_relnote)
 
     * [Change log for version 5.0.1_1695, released 9 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.1-1695_is_block_relnote)
 
@@ -8646,9 +8660,11 @@ subcollection: containers
 
 * [Version 4.4](/docs/containers?topic=containers-vpc_bs_changelog#044_is_block)
 
-    * [Changelog for version 4.4.13_1712, released 17 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.4.13_1712_is_block_relnote)
+    * [Change log for version 4.4.15_1764, released 10 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#4.4.15_1764_is_block_relnote)
 
-    * [Changelog for version 4.4.12_1700, released 9 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.4.12_1700_is_block_relnote)
+    * [Change log for version 4.4.13_1712, released 17 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.4.13_1712_is_block_relnote)
+
+    * [Change log for version 4.4.12_1700, released 9 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.4.12_1700_is_block_relnote)
 
     * [Change log for version 4.4.11_1614, released 23 September 2022](/docs/containers?topic=containers-vpc_bs_changelog#4.4.11_1614_is_block_relnote)
 
