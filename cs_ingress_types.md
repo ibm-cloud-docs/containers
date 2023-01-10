@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-03"
+lastupdated: "2023-01-10"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -392,7 +392,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
 ## Managing TLS certificates and secrets with {{site.data.keyword.cloudcerts_long}}
 {: #manage_certs}
 
-Previously a [{{site.data.keyword.cloudcerts_long}}](/docs/certificate-manager?topic=certificate-manager-about-certificate-manager) instance was automatically created for each cluster. This functionality is no longer provided. However, you can use the information in this section to manage existing {{site.data.keyword.cloudcerts_long}} instances until they become fully unsupported in December 2022. 
+Previously a {{site.data.keyword.cloudcerts_long}} instance was automatically created for each cluster. This functionality is no longer provided. However, you can use the information in this section to manage existing {{site.data.keyword.cloudcerts_long}} instances until they become fully unsupported in December 2022. 
 {: shortdesc}
 
 {{site.data.keyword.cloudcerts_short}} is deprecated and instances are no longer automatically provisioned in new clusters. Support for {{site.data.keyword.cloudcerts_short}} ends on 1 December 2022 and any remaining {{site.data.keyword.cloudcerts_short}} instances are set to be deleted on 31 Dec 2022. After this date, certificates are set to be written only to the cluster unless you set up a {{site.data.keyword.secrets-manager_short}} instance. [Migrate your certificates to IBM Cloud {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-certs-mgr-migration) as soon as possible.
@@ -499,7 +499,7 @@ By storing custom TLS certificates in {{site.data.keyword.cloudcerts_long_notm}}
     You can store TLS certificates for your cluster in any {{site.data.keyword.cloudcerts_short}} instance your account, not just in the automatically generated {{site.data.keyword.cloudcerts_short}} instance for your cluster.
     {: tip}
 
-2. [Import](/docs/certificate-manager?topic=certificate-manager-managing-certificates-from-the-dashboard#importing-a-certificate) or [order](/docs/certificate-manager?topic=certificate-manager-ordering-certificates) a secret for your custom domain to {{site.data.keyword.cloudcerts_short}}. Keep in mind the following certificate considerations.
+2. Import or order a secret for your custom domain to {{site.data.keyword.cloudcerts_short}}. Keep in mind the following certificate considerations.
 
     * TLS certificates that contain pre-shared keys (TLS-PSK) are not supported.
     * If your custom domain is registered as a wildcard domain such as `*.custom_domain.net`, you must get a wildcard TLS certificate.
