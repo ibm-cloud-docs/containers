@@ -186,15 +186,6 @@
     "How to see the hostnames for your public and private ALBs",
     "see the hostnames for your public and private ALBs in kubes"
   ],
-  "ingress-debug": [
-    "How to debug Ingress",
-    "debugging Ingress in kubernetes",
-    "How to fix Ingress setup",
-    "need to debug ingress",
-    "using the debug tool for Ingress",
-    "What IBM Cloud IAM access policies are required for Ingress",
-    "How to use the debug tool in Ingress"
-  ],
   "one_alb": [
     "Issues with accessing your app through a specific ALB IP",
     "How to get the name of the ALB with the unreachable IP address.",
