@@ -227,6 +227,8 @@ subcollection: containers
 
         * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.15_1764` and `5.0.4_1773`
 
+        * Istio add-on versions `1.14.6`, `1.15.4`, and `1.16.1`
+
     * [9 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan0923)
 
         * Cluster autoscaler add-on versions `1.0.5_898`, `1.0.6_899`, `1.0.7_900`, and `1.1.0_897`.
@@ -8330,9 +8332,13 @@ subcollection: containers
 
 * [Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
 
+    * [Change log for 1.16.1, released 10 January 2023](/docs/containers?topic=containers-istio-changelog#1161)
+
     * [Change log for 1.16.0, released November 30th, 2022](/docs/containers?topic=containers-istio-changelog#1160)
 
 * [Version 1.15](/docs/containers?topic=containers-istio-changelog#v115)
+
+    * [Change log for 1.15.4, released 10 January 2023](/docs/containers?topic=containers-istio-changelog#1154)
 
     * [Change log for 1.15.3, released 10 November 2022](/docs/containers?topic=containers-istio-changelog#1153)
 
@@ -8343,6 +8349,8 @@ subcollection: containers
     * [Change log for 1.15.0, released 15 September 2022](/docs/containers?topic=containers-istio-changelog#1150)
 
 * [Version 1.14](/docs/containers?topic=containers-istio-changelog#v114)
+
+    * [Change log for 1.14.6, released 10 January 2023](/docs/containers?topic=containers-istio-changelog#1146)
 
     * [Change log for 1.14.5, released 25 October 2022](/docs/containers?topic=containers-istio-changelog#1145)
 
