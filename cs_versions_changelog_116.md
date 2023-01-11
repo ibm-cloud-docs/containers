@@ -1,8 +1,8 @@
 ---
 
 copyright:
- years: 2014, 2022
-lastupdated: "2022-12-01"
+ years: 2014, 2023
+lastupdated: "2023-01-11"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -17,6 +17,7 @@ subcollection: containers
 
 # Version 1.16 changelog (unsupported as of 31 January 2021)
 {: #116_changelog}
+
 
 Version 1.16 is unsupported. You can review the following archive of 1.16 changelogs.
 {: shortdesc}

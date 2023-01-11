@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-03"
+lastupdated: "2023-01-11"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -26,6 +26,7 @@ For more information about managing updates for Fluentd and Ingress ALBs, see [U
 
 ## Kubernetes Ingress image change log
 {: #kube_ingress_changelog}
+
 
 View version changes for Ingress application load balancers (ALBs) that run the [community Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types).
 {: shortdesc}
@@ -815,6 +816,7 @@ In the `ibm-k8s-controller-config` ConfigMap, sets the `server-tokens` field to 
 
 ## Fluentd for logging changelog
 {: #fluentd_changelog}
+
 
 View image version changes for the Fluentd component for logging in your {{site.data.keyword.containerlong_notm}} clusters.
 {: shortdesc}
