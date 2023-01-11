@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-01-03"
+lastupdated: "2023-01-11"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -36,6 +36,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 ## Version 1.22 change log
 {: #122_changelog}
 
+
 Review the version 1.22 change log.
 {: shortdesc}
 
@@ -61,6 +62,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
+|Containerd|1.5.14|1.5.16|See the [1.5.16 change log](https://github.com/containerd/containerd/releases/tag/v1.5.16){: external} and the [1.5.15 change log](https://github.com/containerd/containerd/releases/tag/v1.5.15), the security bulletin for [CVE-2022-23471](https://www.ibm.com/support/pages/node/6850799){: external}. |
 | Ubuntu 18.04 packages | 4.15.0-197 | 4.15.0-200 | Worker node kernel & package updates for [CVE-2022-2309](https://nvd.nist.gov/vuln/detail/CVE-2022-2309){: external},[CVE-2022-38533](https://nvd.nist.gov/vuln/detail/CVE-2022-38533){: external},[CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external},[CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40304){: external},[CVE-2022-41916](https://nvd.nist.gov/vuln/detail/CVE-2022-41916){: external},[CVE-2022-45061](https://nvd.nist.gov/vuln/detail/CVE-2022-45061){: external}. |
 | Ubuntu 20.04 packages | 5.4.0-132 | 5.4.0-135 | Worker node kernel & package updates for [CVE-2022-2309](https://nvd.nist.gov/vuln/detail/CVE-2022-2309){: external},[CVE-2022-38533](https://nvd.nist.gov/vuln/detail/CVE-2022-38533){: external},[CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external},[CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40304){: external},[CVE-2022-41916](https://nvd.nist.gov/vuln/detail/CVE-2022-41916){: external}. |
 | Kubernetes | 1.22.16 | 1.22.17 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.17){: external}. |
@@ -96,6 +98,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
+|Containerd|1.5.13|1.5.14|See the [change log](https://github.com/containerd/containerd/releases/tag/v1.5.14){: external}. |
 | Ubuntu 18.04 packages |N/A|N/A| Worker node package updates for [CVE-2013-4235](https://nvd.nist.gov/vuln/detail/CVE-2013-4235){: external},[CVE-2022-3239](https://nvd.nist.gov/vuln/detail/CVE-2022-3239){: external},[CVE-2022-3524](https://nvd.nist.gov/vuln/detail/CVE-2022-3524){: external},[CVE-2022-3564](https://nvd.nist.gov/vuln/detail/CVE-2022-3564){: external},[CVE-2022-3565](https://nvd.nist.gov/vuln/detail/CVE-2022-3565){: external},[CVE-2022-3566](https://nvd.nist.gov/vuln/detail/CVE-2022-3566){: external},[CVE-2022-3567](https://nvd.nist.gov/vuln/detail/CVE-2022-3567){: external},[CVE-2022-3594](https://nvd.nist.gov/vuln/detail/CVE-2022-3594){: external},[CVE-2022-3621](https://nvd.nist.gov/vuln/detail/CVE-2022-3621){: external},[CVE-2022-42703](https://nvd.nist.gov/vuln/detail/CVE-2022-42703){: external}. |
 | Kubernetes |N/A|N/A|N/A|
 | HAPROXY | c619f4 | 508bf6 | [CVE-2016-3709](https://nvd.nist.gov/vuln/detail/CVE-2016-3709){: external}, [CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external}, [CVE-2022-1304](https://nvd.nist.gov/vuln/detail/CVE-2022-1304){: external}. |
@@ -298,7 +301,6 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-189 | 4.15.0-191 | Worker node kernel & package updates for [CVE-2016-3709](https://nvd.nist.gov/vuln/detail/CVE-2016-3709){: external},[CVE-2021-4209](https://nvd.nist.gov/vuln/detail/CVE-2021-4209){: external},[CVE-2022-1652](https://nvd.nist.gov/vuln/detail/CVE-2022-1652){: external},[CVE-2022-1679](https://nvd.nist.gov/vuln/detail/CVE-2022-1679){: external},[CVE-2022-1734](https://nvd.nist.gov/vuln/detail/CVE-2022-1734){: external},[CVE-2022-2509](https://nvd.nist.gov/vuln/detail/CVE-2022-2509){: external},[CVE-2022-2586](https://nvd.nist.gov/vuln/detail/CVE-2022-2586){: external},[CVE-2022-2588](https://nvd.nist.gov/vuln/detail/CVE-2022-2588){: external},[CVE-2022-34918](https://nvd.nist.gov/vuln/detail/CVE-2022-34918){: external}. |
 | Kubernetes |N/A|N/A|N/A| 
-| containerd | 1.6.6 | 1.6.8 | For more information, see the [change log](https://github.com/containerd/containerd/releases/tag/v1.6.8){: external}. |
 {: caption="Changes since version 1.22.12_1565" caption-side="bottom"}
 
 
