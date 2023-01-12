@@ -9062,65 +9062,65 @@ subcollection: containers
 [IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: external}
 
 
-## VPC Gen 2 flavors
-{: #sitemap_vpc_gen_2_flavors}
+## VPC flavors
+{: #sitemap_vpc_flavors}
 
 
-[VPC Gen 2 flavors](/docs/containers?topic=containers-vpc-gen2-flavors#vpc-gen2-flavors)
+[VPC flavors](/docs/containers?topic=containers-vpc-flavors#vpc-flavors)
 
-* [au-syd-1](/docs/containers?topic=containers-vpc-gen2-flavors#au-syd-1)
+* [au-syd-1](/docs/containers?topic=containers-vpc-flavors#au-syd-1)
 
-* [au-syd-2](/docs/containers?topic=containers-vpc-gen2-flavors#au-syd-2)
+* [au-syd-2](/docs/containers?topic=containers-vpc-flavors#au-syd-2)
 
-* [au-syd-3](/docs/containers?topic=containers-vpc-gen2-flavors#au-syd-3)
+* [au-syd-3](/docs/containers?topic=containers-vpc-flavors#au-syd-3)
 
-* [br-sao-1](/docs/containers?topic=containers-vpc-gen2-flavors#br-sao-1)
+* [br-sao-1](/docs/containers?topic=containers-vpc-flavors#br-sao-1)
 
-* [br-sao-2](/docs/containers?topic=containers-vpc-gen2-flavors#br-sao-2)
+* [br-sao-2](/docs/containers?topic=containers-vpc-flavors#br-sao-2)
 
-* [br-sao-3](/docs/containers?topic=containers-vpc-gen2-flavors#br-sao-3)
+* [br-sao-3](/docs/containers?topic=containers-vpc-flavors#br-sao-3)
 
-* [ca-tor-1](/docs/containers?topic=containers-vpc-gen2-flavors#ca-tor-1)
+* [ca-tor-1](/docs/containers?topic=containers-vpc-flavors#ca-tor-1)
 
-* [ca-tor-2](/docs/containers?topic=containers-vpc-gen2-flavors#ca-tor-2)
+* [ca-tor-2](/docs/containers?topic=containers-vpc-flavors#ca-tor-2)
 
-* [ca-tor-3](/docs/containers?topic=containers-vpc-gen2-flavors#ca-tor-3)
+* [ca-tor-3](/docs/containers?topic=containers-vpc-flavors#ca-tor-3)
 
-* [eu-de-1](/docs/containers?topic=containers-vpc-gen2-flavors#eu-de-1)
+* [eu-de-1](/docs/containers?topic=containers-vpc-flavors#eu-de-1)
 
-* [eu-de-2](/docs/containers?topic=containers-vpc-gen2-flavors#eu-de-2)
+* [eu-de-2](/docs/containers?topic=containers-vpc-flavors#eu-de-2)
 
-* [eu-de-3](/docs/containers?topic=containers-vpc-gen2-flavors#eu-de-3)
+* [eu-de-3](/docs/containers?topic=containers-vpc-flavors#eu-de-3)
 
-* [eu-gb-1](/docs/containers?topic=containers-vpc-gen2-flavors#eu-gb-1)
+* [eu-gb-1](/docs/containers?topic=containers-vpc-flavors#eu-gb-1)
 
-* [eu-gb-2](/docs/containers?topic=containers-vpc-gen2-flavors#eu-gb-2)
+* [eu-gb-2](/docs/containers?topic=containers-vpc-flavors#eu-gb-2)
 
-* [eu-gb-3](/docs/containers?topic=containers-vpc-gen2-flavors#eu-gb-3)
+* [eu-gb-3](/docs/containers?topic=containers-vpc-flavors#eu-gb-3)
 
-* [jp-osa-1](/docs/containers?topic=containers-vpc-gen2-flavors#jp-osa-1)
+* [jp-osa-1](/docs/containers?topic=containers-vpc-flavors#jp-osa-1)
 
-* [jp-osa-2](/docs/containers?topic=containers-vpc-gen2-flavors#jp-osa-2)
+* [jp-osa-2](/docs/containers?topic=containers-vpc-flavors#jp-osa-2)
 
-* [jp-osa-3](/docs/containers?topic=containers-vpc-gen2-flavors#jp-osa-3)
+* [jp-osa-3](/docs/containers?topic=containers-vpc-flavors#jp-osa-3)
 
-* [jp-tok-1](/docs/containers?topic=containers-vpc-gen2-flavors#jp-tok-1)
+* [jp-tok-1](/docs/containers?topic=containers-vpc-flavors#jp-tok-1)
 
-* [jp-tok-2](/docs/containers?topic=containers-vpc-gen2-flavors#jp-tok-2)
+* [jp-tok-2](/docs/containers?topic=containers-vpc-flavors#jp-tok-2)
 
-* [jp-tok-3](/docs/containers?topic=containers-vpc-gen2-flavors#jp-tok-3)
+* [jp-tok-3](/docs/containers?topic=containers-vpc-flavors#jp-tok-3)
 
-* [us-east-1](/docs/containers?topic=containers-vpc-gen2-flavors#us-east-1)
+* [us-east-1](/docs/containers?topic=containers-vpc-flavors#us-east-1)
 
-* [us-east-2](/docs/containers?topic=containers-vpc-gen2-flavors#us-east-2)
+* [us-east-2](/docs/containers?topic=containers-vpc-flavors#us-east-2)
 
-* [us-east-3](/docs/containers?topic=containers-vpc-gen2-flavors#us-east-3)
+* [us-east-3](/docs/containers?topic=containers-vpc-flavors#us-east-3)
 
-* [us-south-1](/docs/containers?topic=containers-vpc-gen2-flavors#us-south-1)
+* [us-south-1](/docs/containers?topic=containers-vpc-flavors#us-south-1)
 
-* [us-south-2](/docs/containers?topic=containers-vpc-gen2-flavors#us-south-2)
+* [us-south-2](/docs/containers?topic=containers-vpc-flavors#us-south-2)
 
-* [us-south-3](/docs/containers?topic=containers-vpc-gen2-flavors#us-south-3)
+* [us-south-3](/docs/containers?topic=containers-vpc-flavors#us-south-3)
 
 
 ## Classic flavors

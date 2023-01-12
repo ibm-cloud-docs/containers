@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-10"
+lastupdated: "2023-01-12"
 
 keywords: kubernetes, release notes
 
@@ -535,7 +535,7 @@ Istio add-on
 :   For more information, see [version 4.4.10_1578](/docs/containers?topic=containers-vpc_bs_changelog).
 
 New! vGPU worker node flavors are now available for VPC Gen 2.
-:   For more information about the available worker node flavors, see [VPC Gen 2 flavors](/docs/containers?topic=containers-vpc-gen2-flavors). Worker node flavors with vGPU support are the `gx2` flavor class, for example: `gx2.16x128.2v100`.
+:   For more information about the available worker node flavors, see [VPC Gen 2 flavors](/docs/containers?topic=containers-vpc-flavors). Worker node flavors with vGPU support are the `gx2` flavor class, for example: `gx2.16x128.2v100`.
 
 ### 12 September 2022
 {: #containers-sep1222}
@@ -1487,7 +1487,7 @@ Version changelog
 
 
 **New!** Worker node flavor reference
-:   View a list of all available worker node flavors by zone. For more information, see [VPC Gen 2 flavors](/docs/containers?topic=containers-classic-flavors) or [Classic flavors](/docs/containers?topic=containers-vpc-gen2-flavors).
+:   View a list of all available worker node flavors by zone. For more information, see [VPC Gen 2 flavors](/docs/containers?topic=containers-classic-flavors) or [Classic flavors](/docs/containers?topic=containers-vpc-flavors).
 
 
 
