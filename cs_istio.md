@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-03"
+lastupdated: "2023-01-13"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -46,6 +46,7 @@ Before you begin
 
 ### Installing the Istio add-on from the console
 {: #istio_install-console}
+{: ui}
 
 1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the Istio add-on.
 
@@ -59,6 +60,7 @@ Before you begin
 
 ### Installing the Istio add-on with the CLI
 {: #istio_install-cli}
+{: cli}
 
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
@@ -105,6 +107,7 @@ Before you begin
 
 ## Installing the `istioctl` CLI
 {: #istioctl}
+{: cli}
 
 Install the `istioctl` CLI client. For more information, see the [`istioctl` command reference](https://istio.io/latest/docs/reference/commands/istioctl/){: external}.
 

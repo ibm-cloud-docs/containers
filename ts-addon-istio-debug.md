@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-06"
+lastupdated: "2023-01-13"
 
 keywords: kubernetes, help, debug istio, troubleshoot istio, istio add-on debug
 
@@ -31,13 +31,12 @@ To further troubleshoot the [managed Istio add-on](/docs/containers?topic=contai
 
 3. Use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Istio tests and gather pertinent information about the Istio add-on in your cluster. To use the debug tool, you can enable the add-on in your cluster.
     1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the debug tool add-on.
-    2. Click the **Add-ons** tab.
-    3. On the Diagnostics and Debug Tool card, click **Install**.
-    4. In the dialog box, click **Install**. Note that it can take a few minutes for the add-on to be installed.
-    5. On the Diagnostics and Debug Tool card, click **Dashboard**.
-    6. In the debug tool dashboard, select the **istio_control_plane** or **istio_resources**  group of tests. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
-    7. Click **Run**.
-    8. Check the results of each test. If any test fails, click the information icon next to the test's name for information about how to resolve the issue.
+    1. On the Diagnostics and Debug Tool card, click **Install**.
+    1. In the dialog box, click **Install**. Note that it can take a few minutes for the add-on to be installed.
+    1. On the Diagnostics and Debug Tool card, click **Dashboard**.
+    1. In the debug tool dashboard, select the **istio_control_plane** or **istio_resources**  group of tests. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
+    1. Click **Run**.
+    1. Check the results of each test. If any test fails, click the information icon next to the test's name for information about how to resolve the issue.
 
 
 
