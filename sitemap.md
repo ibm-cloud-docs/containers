@@ -223,6 +223,10 @@ subcollection: containers
 
 * [January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan23)
 
+    * [17 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan1723)
+
+        * Worker node fix packs `1.22.17_1584`, `1.23.15_1558`, `1.24.9_1550`, and `1.25.5_1528`
+
     * [10 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan1023)
 
         * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.15_1764` and `5.0.4_1773`
@@ -907,7 +911,7 @@ subcollection: containers
 
     * [31 January 2022](/docs/containers?topic=containers-containers-relnotes#containers-jan3122)
 
-        * Version changelog
+        * Version change log
 
         * **New!** Worker node flavor reference
 

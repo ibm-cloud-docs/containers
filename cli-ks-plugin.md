@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-11"
+lastupdated: "2023-01-17"
 
 keywords: kubernetes
 
@@ -5656,7 +5656,7 @@ Minimum required permissions
 :    Optional: The name of the Cloud Foundry org that the space is in. This value is valid only for log type `ibm` and is required if you specified a space.
 
 `-p, --app-path`
-:    The path on the container that the apps are logging to. To forward logs with source type `application`, you must provide a path. Wildcards, such as '/var/log/*.log', can be used, but recursive globs, such as '/var/log/**/test.log', can't be used. To specify more than one path, use multiple options, such as `-p /var/log/myApp1/&ast; -p /var/log/myApp2/&ast;`. This value is required for log source `application`.
+:    The path on the container that the apps are logging to. To forward logs with source type `application`, you must provide a path. Wildcards, such as `/var/log/*.log`, can be used, but recursive globs, such as `/var/log/**/test.log`, can't be used. To specify more than one path, use multiple options, such as `-p /var/log/myApp1/&ast; -p /var/log/myApp2/&ast;`. This value is required for log source `application`.
 
 `--syslog-protocol`
 :    The transfer layer protocol that is used when the logging type is `syslog`. Supported values are `tcp`, `tls`, and the default `udp`. When forwarding to a rsyslog server with the `udp` protocol, logs that are over 1 KB are truncated.
@@ -5823,7 +5823,7 @@ Minimum required permissions
 :    Optional: The name of the Cloud Foundry org that the space is in. This value is valid only for log type `ibm` and is required if you specified a space.
 
 `-p, --app-path`
-:    The path on the container that the apps are logging to. To forward logs with source type `application`, you must provide a path. Wildcards, such as '/var/log/*.log', can be used, but recursive globs, such as '/var/log/**/test.log', can't be used. To specify more than one path, use multiple options, such as `-p /var/log/myApp1/&ast; -p /var/log/myApp2/&ast;`. This value is required for log source `application`.
+:    The path on the container that the apps are logging to. To forward logs with source type `application`, you must provide a path. Wildcards, such as `/var/log/*.log`, can be used, but recursive globs, such as `/var/log/**/test.log`, can't be used. To specify more than one path, use multiple options, such as `-p /var/log/myApp1/&ast; -p /var/log/myApp2/&ast;`. This value is required for log source `application`.
 
 `-C, --app-container`
 :    To forward logs from apps, you can specify the name of the container that contains your app. To specify more than one container, use multiple options, such as `-C /var/log/myApp1/&ast; -C /var/log/myApp2/&ast;`. If no containers are specified, logs are forwarded from all the containers that contain the paths that you provided. This option is only valid for log source `application`.
