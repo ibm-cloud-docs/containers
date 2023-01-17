@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-12"
+lastupdated: "2023-01-17"
 
 keywords: kubernetes, release notes
 
@@ -29,6 +29,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## January 2023
 {: #containers-jan23}
+
+### 16 January 2023
+{: #containers-jan1723}
+{: release-note}
+
+
+
+Worker node fix packs `1.23.15_1558`, `1.24.9_1550`, and `1.25.5_1528`.
+:   For more information, see the change logs: [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), and [1.25](/docs/containers?topic=containers-changelog_125).
+
+
 
 ### 10 January 2023
 {: #containers-jan1023}
@@ -1480,7 +1491,7 @@ Istio add-on
 ### 31 January 2022
 {: #containers-jan3122}
 
-Version changelog
+Version change log
 :   Fix pack update.
 :   Kubernetes [1.22.6_1538](/docs/containers?topic=containers-changelog_122#1226_1538), [1.21.9_1548](/docs/containers?topic=containers-changelog_121#1219_1548), [1.20.15_1569](/docs/containers?topic=containers-changelog_120#12015_1569), [1.19.16_1576](/docs/containers?topic=containers-changelog_119#11916_1576).
 
