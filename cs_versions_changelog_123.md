@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-01-12"
+lastupdated: "2023-01-17"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -39,6 +39,20 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.23 change log.
 {: shortdesc}
+
+
+### Change log for worker node fix pack 1.23.15_1558, released 16 January 2023
+{: #12315_1558}
+
+The following table shows the changes that are in the worker node fix pack 1.23.15_1558. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | 4.15.0-200 | 4.15.0-202 | Worker node kernel & package updates for [CVE-2021-44758](https://nvd.nist.gov/vuln/detail/CVE-2021-44758){: external},[CVE-2022-0392](https://nvd.nist.gov/vuln/detail/CVE-2022-0392){: external},[CVE-2022-2663](https://nvd.nist.gov/vuln/detail/CVE-2022-2663){: external},[CVE-2022-3061](https://nvd.nist.gov/vuln/detail/CVE-2022-3061){: external},[CVE-2022-3437](https://nvd.nist.gov/vuln/detail/CVE-2022-3437){: external},[CVE-2022-3643](https://nvd.nist.gov/vuln/detail/CVE-2022-3643){: external},[CVE-2022-42896](https://nvd.nist.gov/vuln/detail/CVE-2022-42896){: external},[CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external},[CVE-2022-43552](https://nvd.nist.gov/vuln/detail/CVE-2022-43552){: external},[CVE-2022-43945](https://nvd.nist.gov/vuln/detail/CVE-2022-43945){: external},[CVE-2022-44640](https://nvd.nist.gov/vuln/detail/CVE-2022-44640){: external},[CVE-2022-45934](https://nvd.nist.gov/vuln/detail/CVE-2022-45934){: external},[CVE-2022-47629](https://nvd.nist.gov/vuln/detail/CVE-2022-47629){: external}. |
+| Ubuntu 20.04 packages | 5.4.0-135 | 5.4.0-137 | Worker node kernel & package updates for [CVE-2021-44758](https://nvd.nist.gov/vuln/detail/CVE-2021-44758){: external},[CVE-2022-0392](https://nvd.nist.gov/vuln/detail/CVE-2022-0392){: external},[CVE-2022-0417](https://nvd.nist.gov/vuln/detail/CVE-2022-0417){: external},[CVE-2022-2663](https://nvd.nist.gov/vuln/detail/CVE-2022-2663){: external},[CVE-2022-3061](https://nvd.nist.gov/vuln/detail/CVE-2022-3061){: external},[CVE-2022-3437](https://nvd.nist.gov/vuln/detail/CVE-2022-3437){: external},[CVE-2022-3643](https://nvd.nist.gov/vuln/detail/CVE-2022-3643){: external},[CVE-2022-42896](https://nvd.nist.gov/vuln/detail/CVE-2022-42896){: external},[CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external},[CVE-2022-43552](https://nvd.nist.gov/vuln/detail/CVE-2022-43552){: external},[CVE-2022-43945](https://nvd.nist.gov/vuln/detail/CVE-2022-43945){: external},[CVE-2022-44640](https://nvd.nist.gov/vuln/detail/CVE-2022-44640){: external},[CVE-2022-45934](https://nvd.nist.gov/vuln/detail/CVE-2022-45934){: external},[CVE-2022-47629](https://nvd.nist.gov/vuln/detail/CVE-2022-47629){: external}. |
+| Kubernetes |N/A|N/A|N/A|
+{: caption="Changes since version 1.23.15_1557" caption-side="top"}
 
 
 ### Change log for worker node fix pack 1.23.15_1557, released 02 January 2023
