@@ -30,14 +30,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## January 2023
 {: #containers-jan23}
 
-### 17 January 2023
+### 16 January 2023
 {: #containers-jan1723}
 {: release-note}
 
 
 
-Worker node fix packs `1.22.17_1584`, `1.23.15_1558`, `1.24.9_1550`, and `1.25.5_1528`
-:   For more information, see the change logs: [1.22](/docs/containers?topic=containers-changelog_122), [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), and [1.25](/docs/containers?topic=containers-changelog_125).
+Worker node fix packs `1.23.15_1558`, `1.24.9_1550`, and `1.25.5_1528`.
+:   For more information, see the change logs: [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), and [1.25](/docs/containers?topic=containers-changelog_125).
 
 
 
