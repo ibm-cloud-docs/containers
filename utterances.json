@@ -330,24 +330,6 @@
     "How to transfer from free kubernetes cluster to paid cluster?",
     "need a kubernetes cluster for free"
   ],
-  "smallest_cluster": [  
-    "create a Kubernetes cluster in account",
-    "create a cluster",
-    "want to create a cluster",
-    "how to get standard cluster",
-    "provision a kubernetes cluster",
-    "provisioning a cluster for kubernetes",
-    "how do I create my kubernetes cloud cluster",
-    "creating kubernetes cloud clusters",
-    "smallest size cluster that I can make",
-    "smallest size cluster that I can create",
-    "size of a cluster",
-    "i want to create a IKS cluster",
-    "how to make a kubernetes cluster",
-    "how to provision a cluster",
-    "How many worker nodes in a cluster",
-    "worker nodes per cluster"
-    ],
   "charges": [
     "how much is Kubernetes",
     "how much does kubernetes cost",
