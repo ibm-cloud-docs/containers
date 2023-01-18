@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-01-17"
+lastupdated: "2023-01-18"
 
 keywords: containers
 subcollection: containers
@@ -2849,52 +2849,6 @@ subcollection: containers
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
 
-## Migrating an app from Cloud Foundry to a cluster
-{: #sitemap_migrating_an_app_from_cloud_foundry_to_a_cluster}
-
-
-[Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
-
-* [Objectives](/docs/containers?topic=containers-cf_tutorial#cf_objectives)
-
-* [Audience](/docs/containers?topic=containers-cf_tutorial#cf_audience)
-
-* [Prerequisites](/docs/containers?topic=containers-cf_tutorial#cf_prereqs)
-
-* [Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
-
-* [Create a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
-
-* [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
-
-
-## Moving a VM-based application to Kubernetes
-{: #sitemap_moving-a-vm-based-application-to-kubernetes}
-
-[Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
-
-
-## Deploy a starter kit app to a Kubernetes cluster
-{: #sitemap_deploy_a_starter_kit_app_to_a_kubernetes_cluster}
-
-
-[Deploy a starter kit app to a Kubernetes cluster](/docs/containers?topic=containers-tutorial-starterkit-kube#tutorial-starterkit-kube)
-
-* [Objectives](/docs/containers?topic=containers-tutorial-starterkit-kube#objectives-starterkit-kube)
-
-* [Audience](/docs/containers?topic=containers-tutorial-starterkit-kube#audience-starterkit-kube)
-
-* [Prerequisites](/docs/containers?topic=containers-tutorial-starterkit-kube#prereqs-starterkit-kube)
-
-* [Add services to your app](/docs/containers?topic=containers-tutorial-starterkit-kube#resources-starterkit-kube)
-
-* [Deploy your app by using a DevOps toolchain](/docs/containers?topic=containers-tutorial-starterkit-kube#deploy-starterkit-kube)
-
-* [Explore the toolchain tools, logs, and history](/docs/containers?topic=containers-tutorial-starterkit-kube#view-logs-starterkit-kube)
-
-* [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
-
-
 ## Using Calico network policies to control traffic on Classic clusters
 {: #sitemap_using_calico_network_policies_to_control_traffic_on_classic_clusters}
 
@@ -2918,12 +2872,6 @@ subcollection: containers
 * [Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
 
 * [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
-
-
-## Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services
-{: #sitemap_resilient-and-secure-multi-region-kubernetes-clusters-with-ibm-cloud-internet-services}
-
-[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
 
 
 ## Installing the CLI and API
@@ -4490,8 +4438,6 @@ subcollection: containers
 * [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
 
 * [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
-
-* [Restricting NodePort service access](/docs/containers?topic=containers-nodeport#nodeport-restrict-access)
 
 [Managing the app lifecycle](/docs/containers?topic=containers-update_app#update_app)
 

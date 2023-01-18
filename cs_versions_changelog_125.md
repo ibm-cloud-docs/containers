@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-01-17"
+lastupdated: "2023-01-18"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -222,5 +222,4 @@ The following table shows the changes that are in the worker node fix pack 1.25.
 | Kubernetes DNS autoscaler | 1.8.5 | 1.8.6 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.8.6){: external}. In addition, CPU resource requests were reduced from `5m` to `1m` to better align with normal resource utilization. |
 | Pause container image | 3.7 | 3.8 | See the [pause container image release notes](https://github.com/kubernetes/kubernetes/blob/master/build/pause/CHANGELOG.md){: external}. |
 {: caption="Changes since version 1.24.6_1538 master and 1.24.6_1539 worker node."}
-
 
