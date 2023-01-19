@@ -45,16 +45,7 @@ toc:
           label: Tutorials library for Kubernetes Service
           href: https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20
       - cs_tutorial_vpc.md
-      - cs_tutorials_cf.md
-      - link:
-          label: Moving a VM-based application to Kubernetes
-          href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes
-      - cs_tutorials_starter.md
       - cs_tutorials_policies.md
-      - link:
-          label: Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services
-          href: https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis
-
   - navgroup: 
       id: howto
       topics:
@@ -258,7 +249,6 @@ toc:
           - integrations-helm.md
           - integrations-svcbind.md
           - ha.md
-
   - navgroup:
       id: reference
       topics:
@@ -293,7 +283,7 @@ toc:
           - cs_versions_overview.md
           - cs_versions_changelog.md
           - benchmarks_overview.md
-          - benchmark-comparison.md
+          - benchmark-comparison.md  
           - topicgroup:
               label: Version 1.25
               topics:

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-01-17"
+lastupdated: "2023-01-19"
 
 keywords: containers
 subcollection: containers
@@ -121,51 +121,99 @@ subcollection: containers
 
 * [Mortgage company trims costs and accelerates regulatory compliance](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage)
 
-    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage_ibmcloud)
+    * [Context](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage_context)
+
+    * [Solution](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage_solution)
+
+    * [Results](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage_results)
 
 * [Payment tech company streamlines developer productivity, deploying AI-enabled tools to their partners 4 times faster](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech)
 
-    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech_ibmcloud)
+    * [Context](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech_context)
+
+    * [Solution](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech_solution)
+
+    * [Results](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech_results)
 
 [Healthcare use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_health#cs_uc_health)
 
 * [Healthcare provider migrates workloads from inefficient VMs to Ops-friendly containers for reporting and patient systems](/docs/containers?topic=containers-cs_uc_health#uc_migrate)
 
-    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_health#uc_migrate_ibmcloud)
+    * [Context](/docs/containers?topic=containers-cs_uc_health#uc_migrate_context)
+
+    * [Solution](/docs/containers?topic=containers-cs_uc_health#uc_migrate_solution_model)
+
+    * [Results](/docs/containers?topic=containers-cs_uc_health#uc_migrate_results)
 
 * [Research nonprofit securely hosts sensitive data while it grows research with partners](/docs/containers?topic=containers-cs_uc_health#uc_research)
 
-    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_health#uc_research_ibmcloud)
+    * [Context](/docs/containers?topic=containers-cs_uc_health#uc_research_context)
+
+    * [Solution](/docs/containers?topic=containers-cs_uc_health#uc_research_solution)
+
+    * [Solution](/docs/containers?topic=containers-cs_uc_health#uc_research_the_solution)
+
+    * [Step 1: Containerize apps by using microservices](/docs/containers?topic=containers-cs_uc_health#uc_research_step1)
+
+    * [Step 2: Use secure and performance driven compute](/docs/containers?topic=containers-cs_uc_health#uc_research_step2)
+
+    * [Step 3: Ensure global availability](/docs/containers?topic=containers-cs_uc_health#uc_research_step3)
+
+    * [Step 4: Data sharing](/docs/containers?topic=containers-cs_uc_health#uc_research_step4)
+
+    * [Results](/docs/containers?topic=containers-cs_uc_health#uc_research_results)
 
 [Retail use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_retail#cs_uc_retail)
 
 * [Brick-and-mortar retailer shares data, by using APIs with global business partners to drive omnichannel sales](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)
 
-    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_retail#uc_data-share_ibmcloud)
+    * [Context](/docs/containers?topic=containers-cs_uc_retail#uc_data-share_context)
+
+    * [Solution](/docs/containers?topic=containers-cs_uc_retail#uc_data-share_solution)
+
+    * [Results](/docs/containers?topic=containers-cs_uc_retail#uc_data-share_results)
 
 * [Traditional grocer increases customer traffic and sales with digital insights](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)
 
-    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_retail#uc_grocer_ibmcloud)
+    * [Context](/docs/containers?topic=containers-cs_uc_retail#uc_grocer_context)
+
+    * [Results](/docs/containers?topic=containers-cs_uc_retail#uc_grocer_results)
 
 [Transportation use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_transport#cs_uc_transport)
 
 * [Shipping company increases availability of worldwide systems for business partner ecosystem](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)
 
-    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_transport#uc_shipping_ibmcloud)
+    * [Context](/docs/containers?topic=containers-cs_uc_transport#uc_shipping_context)
+
+    * [Solution](/docs/containers?topic=containers-cs_uc_transport#uc_shipping_solution)
+
+    * [Results](/docs/containers?topic=containers-cs_uc_transport#uc_shipping_results)
 
 * [Airline delivers innovative Human Resources (HR) benefits site in under 3 weeks](/docs/containers?topic=containers-cs_uc_transport#uc_airline)
 
-    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_transport#uc_airline_ibmcloud)
+    * [Context](/docs/containers?topic=containers-cs_uc_transport#uc_airline_context)
+
+    * [Solution](/docs/containers?topic=containers-cs_uc_transport#uc_airline_solution)
+
+    * [Results](/docs/containers?topic=containers-cs_uc_transport#uc_airline_results)
 
 [Government use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_gov#cs_uc_gov)
 
 * [Regional government improves collaboration and velocity with community Developers who combine public-private data](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup)
 
-    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_ibmcloud)
+    * [Context](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_context)
+
+    * [Solution](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_solution)
+
+    * [Results](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_results)
 
 * [Large public port secures exchange of port data and shipping manifests that connect public and private organizations](/docs/containers?topic=containers-cs_uc_gov#uc_port)
 
-    * [Why {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_gov#uc_port_ibmcloud)
+    * [Context](/docs/containers?topic=containers-cs_uc_gov#uc_port_context)
+
+    * [Solution](/docs/containers?topic=containers-cs_uc_gov#uc_port_solution)
+
+    * [Results](/docs/containers?topic=containers-cs_uc_gov#uc_port_results)
 
 
 ## Learning paths
@@ -2849,52 +2897,6 @@ subcollection: containers
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
 
-## Migrating an app from Cloud Foundry to a cluster
-{: #sitemap_migrating_an_app_from_cloud_foundry_to_a_cluster}
-
-
-[Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
-
-* [Objectives](/docs/containers?topic=containers-cf_tutorial#cf_objectives)
-
-* [Audience](/docs/containers?topic=containers-cf_tutorial#cf_audience)
-
-* [Prerequisites](/docs/containers?topic=containers-cf_tutorial#cf_prereqs)
-
-* [Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
-
-* [Create a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
-
-* [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
-
-
-## Moving a VM-based application to Kubernetes
-{: #sitemap_moving-a-vm-based-application-to-kubernetes}
-
-[Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
-
-
-## Deploy a starter kit app to a Kubernetes cluster
-{: #sitemap_deploy_a_starter_kit_app_to_a_kubernetes_cluster}
-
-
-[Deploy a starter kit app to a Kubernetes cluster](/docs/containers?topic=containers-tutorial-starterkit-kube#tutorial-starterkit-kube)
-
-* [Objectives](/docs/containers?topic=containers-tutorial-starterkit-kube#objectives-starterkit-kube)
-
-* [Audience](/docs/containers?topic=containers-tutorial-starterkit-kube#audience-starterkit-kube)
-
-* [Prerequisites](/docs/containers?topic=containers-tutorial-starterkit-kube#prereqs-starterkit-kube)
-
-* [Add services to your app](/docs/containers?topic=containers-tutorial-starterkit-kube#resources-starterkit-kube)
-
-* [Deploy your app by using a DevOps toolchain](/docs/containers?topic=containers-tutorial-starterkit-kube#deploy-starterkit-kube)
-
-* [Explore the toolchain tools, logs, and history](/docs/containers?topic=containers-tutorial-starterkit-kube#view-logs-starterkit-kube)
-
-* [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
-
-
 ## Using Calico network policies to control traffic on Classic clusters
 {: #sitemap_using_calico_network_policies_to_control_traffic_on_classic_clusters}
 
@@ -2918,12 +2920,6 @@ subcollection: containers
 * [Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
 
 * [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
-
-
-## Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services
-{: #sitemap_resilient-and-secure-multi-region-kubernetes-clusters-with-ibm-cloud-internet-services}
-
-[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
 
 
 ## Installing the CLI and API
@@ -4490,8 +4486,6 @@ subcollection: containers
 * [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
 
 * [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
-
-* [Restricting NodePort service access](/docs/containers?topic=containers-nodeport#nodeport-restrict-access)
 
 [Managing the app lifecycle](/docs/containers?topic=containers-update_app#update_app)
 
