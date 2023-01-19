@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-11-29"
+  years: 2014, 2023
+lastupdated: "2023-01-19"
 
 keywords: kubernetes
 
@@ -38,8 +38,8 @@ Healthcare
 :   Securely host sensitive data while you [grow research with partners](/docs/containers?topic=containers-cs_uc_health#uc_research).
 
 Retail
-:   Share data via APIs with global business partners to [drive omnichannel sales](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)
-:   Optimize inventory expenses with [digital insights to sales behavior](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)
+:   Share data via APIs with global business partners to [drive omnichannel sales](/docs/containers?topic=containers-cs_uc_retail#uc_data-share).
+:   Optimize inventory expenses with [digital insights to sales behavior](/docs/containers?topic=containers-cs_uc_retail#uc_grocer).
 
 Transportation
 Build and deploy HR site with AI [in less than 3 weeks](/docs/containers?topic=containers-cs_uc_transport#uc_airline).
