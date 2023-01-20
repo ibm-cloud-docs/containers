@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-10"
+lastupdated: "2023-01-20"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -70,10 +70,10 @@ Start by creating a `ClusterIP` service for your app. Then, determine which type
 
 1. For each app deployment that you want to expose, create a Kubernetes `ClusterIP` service. Your app must be exposed by a Kubernetes service to be included in the Ingress load balancing.
 
-    ```sh
-    kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
-    ```
-    {: pre}
+```sh
+kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
+```
+{: pre}
     
 2. Choose a domain and set up TLS for your apps. You can use the IBM-provided domain, such as `mycluster-<hash>-0000.us-south.containers.appdomain.cloud/myapp`, or define a custom domain.
 
@@ -253,10 +253,10 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
 
 1. For each app deployment that you want to expose, create a Kubernetes `ClusterIP` service. Your app must be exposed by a Kubernetes service to be included in the Ingress load balancing.
 
-    ```sh
-    kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
-    ```
-    {: pre}
+```sh
+kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
+```
+{: pre}
     
 2. Verify that you have at least one private ALB in each zone that runs the Kubernetes Ingress image. Look for ALBs with a **Type** of `private` and a **Build** version in the `<community_version>_<ibm_build>_iks` Kubernetes Ingress format.
 
