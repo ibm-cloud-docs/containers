@@ -4920,8 +4920,6 @@ subcollection: containers
 
 * [Migration FAQ](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_migration_faq)
 
-* [Timeline for {{site.data.keyword.cloudcerts_short}} end of support](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_timeline)
-
 
 ## Storing data on persistent storage
 {: #sitemap_storing_data_on_persistent_storage}
