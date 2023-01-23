@@ -271,6 +271,12 @@ subcollection: containers
 
 * [January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan23)
 
+    * [24 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan2423)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.16_1779` and `5.0.5_1784`.
+
+        * Cluster autoscaler add-on version `1.0.7_940`.
+
     * [23 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan2323)
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.8` is available.
@@ -8512,6 +8518,8 @@ subcollection: containers
 
 * [Version 1.0.7](/docs/containers?topic=containers-ca_changelog#0107_ca_addon)
 
+    * [Change log for patch update 1.0.7_940, released 24 January 2023:](/docs/containers?topic=containers-ca_changelog#107940_ca)
+
     * [Change log for patch update 1.0.7_900, released 9 January 2023](/docs/containers?topic=containers-ca_changelog#107900_ca)
 
     * [Change log for patch update 1.0.7_883, released 3 November 2022](/docs/containers?topic=containers-ca_changelog#107883_ca)
@@ -8596,6 +8604,8 @@ subcollection: containers
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
 
+    * [Change log for version 5.0.5_1784, released 24 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.5-1784_is_block_relnote)
+
     * [Change log for version 5.0.4_1773, released 10 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.4-1773_is_block_relnote)
 
     * [Change log for version 5.0.2_1713, released 17 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.2-1713_is_block_relnote)
@@ -8611,6 +8621,8 @@ subcollection: containers
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
 
 * [Version 4.4](/docs/containers?topic=containers-vpc_bs_changelog#044_is_block)
+
+    * [Change log for version 4.4.16_1779, released 24 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#4.4.16_1779_is_block_relnote)
 
     * [Change log for version 4.4.15_1764, released 10 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#4.4.15_1764_is_block_relnote)
 
