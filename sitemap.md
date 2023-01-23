@@ -4759,93 +4759,9 @@ subcollection: containers
     * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
 
 
-### Exposing apps with Ingress ALBs
-{: #sitemap_exposing_apps_with_ingress_albs}
+### Exposing apps with Ingress
+{: #sitemap_exposing_apps_with_ingress}
 
-
-[About Ingress](/docs/containers?topic=containers-ingress-about#ingress-about)
-
-* [What are the components of Ingress?](/docs/containers?topic=containers-ingress-about#ingress_components)
-
-    * [Ingress resource](/docs/containers?topic=containers-ingress-about#ingress-resource)
-
-    * [Application load balancer (ALB)](/docs/containers?topic=containers-ingress-about#alb-about)
-
-    * [Multizone load balancer (MZLB) or Load Balancer for VPC](/docs/containers?topic=containers-ingress-about#mzlb)
-
-* [How does a request get to my app in a classic cluster?](/docs/containers?topic=containers-ingress-about#architecture-classic)
-
-    * [Single-zone cluster](/docs/containers?topic=containers-ingress-about#classic-single)
-
-    * [Multizone cluster](/docs/containers?topic=containers-ingress-about#classic-multi)
-
-    * [Gateway-enabled cluster](/docs/containers?topic=containers-ingress-about#classic-gateway)
-
-* [How does a request get to my app in a VPC cluster?](/docs/containers?topic=containers-ingress-about#architecture-vpc)
-
-* [How can I enable TLS certificates?](/docs/containers?topic=containers-ingress-about#enable-certs)
-
-* [How can I customize routing?](/docs/containers?topic=containers-ingress-about#custom-routing)
-
-* [How do I manage the lifecycle of my ALBs?](/docs/containers?topic=containers-ingress-about#alb-lifecycle)
-
-[Setting up Kubernetes Ingress](/docs/containers?topic=containers-ingress-types#ingress-types)
-
-* [Prerequisites](/docs/containers?topic=containers-ingress-types#config_prereqs)
-
-* [Publicly exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create)
-
-    * [Step 1: Create an app service and select a domain](/docs/containers?topic=containers-ingress-types#alb-comm-create-service-domain)
-
-    * [Step 2: Set up the Ingress domain](/docs/containers?topic=containers-ingress-types#alb-com-setup-domain)
-
-    * [Step 3: Create the Ingress resource](/docs/containers?topic=containers-ingress-types#alb-comm-create-ingress-resource)
-
-* [Privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private)
-
-* [Managing TLS certificates and secrets with {{site.data.keyword.cloudcerts_long}}](/docs/containers?topic=containers-ingress-types#manage_certs)
-
-    * [Using your default {{site.data.keyword.cloudcerts_short}} instance](/docs/containers?topic=containers-ingress-types#manager_certs_about)
-
-    * [Using the default TLS certificate for the IBM-provided Ingress subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_ibm)
-
-    * [Using a TLS certificate for a custom subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_custom)
-
-* [Managing non-TLS secrets](/docs/containers?topic=containers-ingress-types#non-tls)
-
-    * [Creating a non-TLS secret in your cluster](/docs/containers?topic=containers-ingress-types#non-tls-create)
-
-    * [Managing non-TLS secret fields](/docs/containers?topic=containers-ingress-types#non-tls-field)
-
-* [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
-
-    * [Default Ingress classes for public and private ALBs](/docs/containers?topic=containers-ingress-types#ingress-class-default)
-
-    * [Custom Ingress classes](/docs/containers?topic=containers-ingress-types#ingress-class-custom)
-
-* [Customizing routing and settings by using annotations and configmaps](/docs/containers?topic=containers-ingress-types#cm-annotations)
-
-* [Updating ALBs](/docs/containers?topic=containers-ingress-types#alb-update)
-
-    * [Choosing a supported image version](/docs/containers?topic=containers-ingress-types#alb-version-choose)
-
-    * [Managing automatic updates](/docs/containers?topic=containers-ingress-types#autoupdate)
-
-    * [Scheduling maintenance windows for automatic updates](/docs/containers?topic=containers-ingress-types#alb_scheduled_updates)
-
-    * [Reverting to an earlier version](/docs/containers?topic=containers-ingress-types#revert)
-
-* [Scaling ALBs](/docs/containers?topic=containers-ingress-types#scale_albs)
-
-    * [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-types#alb_replicas)
-
-    * [Creating more ALBs](/docs/containers?topic=containers-ingress-types#create_alb)
-
-* [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-types#migrate-alb-vlan)
-
-[Observing Kubernetes Ingress](/docs/containers?topic=containers-cs_ingress_monitor#cs_ingress_monitor)
-
-* [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-cs_ingress_monitor#ingress_health_mon)
 
 [Customizing ALB routing](/docs/containers?topic=containers-comm-ingress-annotations#comm-ingress-annotations)
 
@@ -4944,6 +4860,15 @@ subcollection: containers
     * [Changing the number of open files for worker processes](/docs/containers?topic=containers-comm-ingress-annotations#max-worker-files)
 
     * [Tuning kernel performance](/docs/containers?topic=containers-comm-ingress-annotations#ingress_kernel)
+
+[Observing Kubernetes Ingress](/docs/containers?topic=containers-cs_ingress_monitor#cs_ingress_monitor)
+
+* [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-cs_ingress_monitor#ingress_health_mon)
+
+
+### Managing certificates and secrets
+{: #sitemap_managing_certificates_and_secrets}
+
 
 [Setting up {{site.data.keyword.secrets-manager_short}} in your {{site.data.keyword.containershort}} cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr)
 
