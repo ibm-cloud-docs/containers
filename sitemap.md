@@ -271,6 +271,10 @@ subcollection: containers
 
 * [January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan23)
 
+    * [23 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan2323)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.8` is available.
+
     * [16 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan1723)
 
         * Worker node fix packs `1.23.15_1558`, `1.24.9_1550`, and `1.25.5_1528`.
@@ -8674,6 +8678,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.8, released 23 January 2023](/docs/containers?topic=containers-cos_plugin_changelog#0228_object_plugin)
 
 * [Change log for version 2.2.7, released 5 January 2023](/docs/containers?topic=containers-cos_plugin_changelog#0227_object_plugin)
 
