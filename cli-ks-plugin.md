@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-17"
+lastupdated: "2023-01-23"
 
 keywords: kubernetes
 
@@ -976,7 +976,7 @@ Free clusters are not available in VPC.
 
 
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--cluster-security-group GROUP_ID] [--operating-system UBUNTU_20_64|UBUNTU_18_64] [--version MAJOR.MINOR.PATCH] [--workers NUMBER_WORKERS_PER_ZONE]  [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--kms-account-id ID] [--kms-instance KMS_INSTANCE_ID] [--crk ROOT_KEY_ID][--skip-advance-permissions-check] [--sm-group GROUP] [--sm-instance INSTANCE] [-q]
+ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--cluster-security-group GROUP_ID] [--operating-system UBUNTU_20_64|UBUNTU_18_64] [--version MAJOR.MINOR.PATCH] [--workers NUMBER_WORKERS_PER_ZONE]  [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--kms-account-id ID] [--kms-instance KMS_INSTANCE_ID] [--crk ROOT_KEY_ID][--skip-advance-permissions-check] [--sm-group GROUP] [--sm-instance INSTANCE] [-q] 
 ```
 {: pre}
 
@@ -1058,7 +1058,7 @@ Minimum required permissions
 :    The secret group ID of the {{site.data.keyword.secrets-manager_short}} instance where your secrets are persisted. To get a secret group ID, see the [{{site.data.keyword.secrets-manager_short}} CLI reference](/docs/secrets-manager?topic=secrets-manager-cli-plugin-secrets-manager-cli#secrets-manager-cli-secret-groups-command).
 
 `--sm-instance INSTANCE`
-:    The CRN of the {{site.data.keyword.secrets-manager_short}} instance. To get the CRN of an instance, run [`ibmcloud ks ingress instance ls --cluster CLUSTER`](#cs_ingress_instance_ls).
+:    The CRN of the {{site.data.keyword.secrets-manager_short}} instance. To find the CRN of an instance, run [`ibmcloud ks ingress instance ls --cluster CLUSTER`](#cs_ingress_instance_ls).
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
