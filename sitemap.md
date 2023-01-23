@@ -2926,6 +2926,25 @@ subcollection: containers
 * [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
 
 
+## Migrating an app from Cloud Foundry to a cluster
+{: #sitemap_migrating_an_app_from_cloud_foundry_to_a_cluster}
+
+
+[Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
+
+* [Objectives](/docs/containers?topic=containers-cf_tutorial#cf_objectives)
+
+* [Audience](/docs/containers?topic=containers-cf_tutorial#cf_audience)
+
+* [Prerequisites](/docs/containers?topic=containers-cf_tutorial#cf_prereqs)
+
+* [Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
+
+* [Create a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
+
+* [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
+
+
 ## Installing the CLI and API
 {: #sitemap_installing_the_cli_and_api}
 

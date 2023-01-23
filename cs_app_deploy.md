@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-19"
+  years: 2014, 2023
+lastupdated: "2023-01-23"
 
 keywords: kubernetes
 
@@ -22,9 +22,6 @@ You can use Kubernetes techniques in {{site.data.keyword.containerlong}} to depl
 {: shortdesc}
 
 For more information about creating a configuration file for your application, see [Configuration Best Practices](https://kubernetes.io/docs/concepts/configuration/overview/){: external}.
-
-Try out the [deploying apps tutorial](/docs/containers?topic=containers-tutorial-starterkit-kube).
-{: tip}
 
 ![Basic deployment process.](images/basic_app_deployment_process.png "Basic deployment process"){: caption="Figure 1. Basic deployment process" caption-side="bottom"}
 

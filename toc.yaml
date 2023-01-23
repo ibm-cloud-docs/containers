@@ -46,6 +46,7 @@ toc:
           href: https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20
       - cs_tutorial_vpc.md
       - cs_tutorials_policies.md
+      - cs_tutorials_cf.md
   - navgroup: 
       id: howto
       topics:
