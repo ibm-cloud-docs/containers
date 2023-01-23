@@ -46,6 +46,7 @@ toc:
           href: https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20
       - cs_tutorial_vpc.md
       - cs_tutorials_policies.md
+      - cs_tutorials_cf.md
   - navgroup: 
       id: howto
       topics:
@@ -197,12 +198,17 @@ toc:
               - lb-v2.md
               - lb-dns.md
           - topicgroup:
-              label: Exposing apps with Ingress ALBs
+              label: Exposing apps with Ingress
               topics:
-              - cs_ingress_about.md
-              - cs_ingress_types.md
-              - cs_ingress_monitor.md
+              - cs_managed_ingress_about.md
+              - cs_managed_ingress_setup.md
+              - cs_managed_ingress_alb.md
               - ingress-annotations.md
+              - cs_ingress_monitor.md
+          - topicgroup:
+              label: Managing certificates and secrets
+              topics:
+              - secrets.md
               - secrets-mgr.md
               - certs-mgr-migration.md
       - topicgroup:

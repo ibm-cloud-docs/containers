@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-01-19"
+lastupdated: "2023-01-23"
 
 keywords: containers
 subcollection: containers
@@ -270,6 +270,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan23)
+
+    * [23 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan2323)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.8` is available.
 
     * [16 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan1723)
 
@@ -2922,6 +2926,25 @@ subcollection: containers
 * [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
 
 
+## Migrating an app from Cloud Foundry to a cluster
+{: #sitemap_migrating_an_app_from_cloud_foundry_to_a_cluster}
+
+
+[Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
+
+* [Objectives](/docs/containers?topic=containers-cf_tutorial#cf_objectives)
+
+* [Audience](/docs/containers?topic=containers-cf_tutorial#cf_audience)
+
+* [Prerequisites](/docs/containers?topic=containers-cf_tutorial#cf_prereqs)
+
+* [Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
+
+* [Create a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
+
+* [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
+
+
 ## Installing the CLI and API
 {: #sitemap_installing_the_cli_and_api}
 
@@ -3227,6 +3250,8 @@ subcollection: containers
 * [Example commands to create classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster_create_classic)
 
 [Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-gen2)
+
+* [Prerequisites and notes](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-prereq)
 
 * [Creating a VPC cluster in the console](/docs/containers?topic=containers-cluster-create-vpc-gen2#clusters_vpcg2_ui)
 
@@ -4757,93 +4782,9 @@ subcollection: containers
     * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
 
 
-### Exposing apps with Ingress ALBs
-{: #sitemap_exposing_apps_with_ingress_albs}
+### Exposing apps with Ingress
+{: #sitemap_exposing_apps_with_ingress}
 
-
-[About Ingress](/docs/containers?topic=containers-ingress-about#ingress-about)
-
-* [What are the components of Ingress?](/docs/containers?topic=containers-ingress-about#ingress_components)
-
-    * [Ingress resource](/docs/containers?topic=containers-ingress-about#ingress-resource)
-
-    * [Application load balancer (ALB)](/docs/containers?topic=containers-ingress-about#alb-about)
-
-    * [Multizone load balancer (MZLB) or Load Balancer for VPC](/docs/containers?topic=containers-ingress-about#mzlb)
-
-* [How does a request get to my app in a classic cluster?](/docs/containers?topic=containers-ingress-about#architecture-classic)
-
-    * [Single-zone cluster](/docs/containers?topic=containers-ingress-about#classic-single)
-
-    * [Multizone cluster](/docs/containers?topic=containers-ingress-about#classic-multi)
-
-    * [Gateway-enabled cluster](/docs/containers?topic=containers-ingress-about#classic-gateway)
-
-* [How does a request get to my app in a VPC cluster?](/docs/containers?topic=containers-ingress-about#architecture-vpc)
-
-* [How can I enable TLS certificates?](/docs/containers?topic=containers-ingress-about#enable-certs)
-
-* [How can I customize routing?](/docs/containers?topic=containers-ingress-about#custom-routing)
-
-* [How do I manage the lifecycle of my ALBs?](/docs/containers?topic=containers-ingress-about#alb-lifecycle)
-
-[Setting up Kubernetes Ingress](/docs/containers?topic=containers-ingress-types#ingress-types)
-
-* [Prerequisites](/docs/containers?topic=containers-ingress-types#config_prereqs)
-
-* [Publicly exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create)
-
-    * [Step 1: Create an app service and select a domain](/docs/containers?topic=containers-ingress-types#alb-comm-create-service-domain)
-
-    * [Step 2: Set up the Ingress domain](/docs/containers?topic=containers-ingress-types#alb-com-setup-domain)
-
-    * [Step 3: Create the Ingress resource](/docs/containers?topic=containers-ingress-types#alb-comm-create-ingress-resource)
-
-* [Privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private)
-
-* [Managing TLS certificates and secrets with {{site.data.keyword.cloudcerts_long}}](/docs/containers?topic=containers-ingress-types#manage_certs)
-
-    * [Using your default {{site.data.keyword.cloudcerts_short}} instance](/docs/containers?topic=containers-ingress-types#manager_certs_about)
-
-    * [Using the default TLS certificate for the IBM-provided Ingress subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_ibm)
-
-    * [Using a TLS certificate for a custom subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_custom)
-
-* [Managing non-TLS secrets](/docs/containers?topic=containers-ingress-types#non-tls)
-
-    * [Creating a non-TLS secret in your cluster](/docs/containers?topic=containers-ingress-types#non-tls-create)
-
-    * [Managing non-TLS secret fields](/docs/containers?topic=containers-ingress-types#non-tls-field)
-
-* [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
-
-    * [Default Ingress classes for public and private ALBs](/docs/containers?topic=containers-ingress-types#ingress-class-default)
-
-    * [Custom Ingress classes](/docs/containers?topic=containers-ingress-types#ingress-class-custom)
-
-* [Customizing routing and settings by using annotations and configmaps](/docs/containers?topic=containers-ingress-types#cm-annotations)
-
-* [Updating ALBs](/docs/containers?topic=containers-ingress-types#alb-update)
-
-    * [Choosing a supported image version](/docs/containers?topic=containers-ingress-types#alb-version-choose)
-
-    * [Managing automatic updates](/docs/containers?topic=containers-ingress-types#autoupdate)
-
-    * [Scheduling maintenance windows for automatic updates](/docs/containers?topic=containers-ingress-types#alb_scheduled_updates)
-
-    * [Reverting to an earlier version](/docs/containers?topic=containers-ingress-types#revert)
-
-* [Scaling ALBs](/docs/containers?topic=containers-ingress-types#scale_albs)
-
-    * [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-types#alb_replicas)
-
-    * [Creating more ALBs](/docs/containers?topic=containers-ingress-types#create_alb)
-
-* [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-types#migrate-alb-vlan)
-
-[Observing Kubernetes Ingress](/docs/containers?topic=containers-cs_ingress_monitor#cs_ingress_monitor)
-
-* [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-cs_ingress_monitor#ingress_health_mon)
 
 [Customizing ALB routing](/docs/containers?topic=containers-comm-ingress-annotations#comm-ingress-annotations)
 
@@ -4943,6 +4884,15 @@ subcollection: containers
 
     * [Tuning kernel performance](/docs/containers?topic=containers-comm-ingress-annotations#ingress_kernel)
 
+[Observing Kubernetes Ingress](/docs/containers?topic=containers-cs_ingress_monitor#cs_ingress_monitor)
+
+* [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-cs_ingress_monitor#ingress_health_mon)
+
+
+### Managing certificates and secrets
+{: #sitemap_managing_certificates_and_secrets}
+
+
 [Setting up {{site.data.keyword.secrets-manager_short}} in your {{site.data.keyword.containershort}} cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr)
 
 * [About {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about)
@@ -4988,8 +4938,6 @@ subcollection: containers
 * [Migrating your secrets without using {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_alt)
 
 * [Migration FAQ](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_migration_faq)
-
-* [Timeline for {{site.data.keyword.cloudcerts_short}} end of support](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_timeline)
 
 
 ## Storing data on persistent storage
@@ -8747,6 +8695,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.8, released 23 January 2023](/docs/containers?topic=containers-cos_plugin_changelog#0228_object_plugin)
 
 * [Change log for version 2.2.7, released 5 January 2023](/docs/containers?topic=containers-cos_plugin_changelog#0227_object_plugin)
 

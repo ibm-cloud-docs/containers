@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-17"
+lastupdated: "2023-01-23"
 
 keywords: kubernetes, release notes
 
@@ -29,6 +29,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## January 2023
 {: #containers-jan23}
+
+### 23 January 2023
+{: #containers-jan2323}
+{: release-note}
+
+{{site.data.keyword.cos_full_notm}} plug-in version `2.2.8` is available.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 ### 16 January 2023
 {: #containers-jan1723}
