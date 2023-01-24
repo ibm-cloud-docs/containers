@@ -263,6 +263,8 @@ subcollection: containers
 
     * [24 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan2423)
 
+        * CLI version 1.0.487 change log update
+
         * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.16_1779` and `5.0.5_1784`.
 
         * Cluster autoscaler add-on version `1.0.7_940`.
@@ -5977,6 +5979,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version 1.0.487](/docs/containers?topic=containers-cs_cli_changelog#cli-10487)
 
 * [Version 1.0.480](/docs/containers?topic=containers-cs_cli_changelog#cli-10480)
 

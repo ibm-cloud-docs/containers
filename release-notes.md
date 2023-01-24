@@ -35,6 +35,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-jan2423}
 {: release-note}
 
+CLI version 1.0.487 change log update
+:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.487.
+
 {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.16_1779` and `5.0.5_1784`.
 :   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
 
