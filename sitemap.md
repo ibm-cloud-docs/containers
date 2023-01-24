@@ -9252,6 +9252,8 @@ subcollection: containers
 
 * [Critical](/docs/containers?topic=containers-cluster-states-reference#cluster-state-critical)
 
+* [Create failed](/docs/containers?topic=containers-cluster-states-reference#cluster-state-create-failed)
+
 * [Delete failed](/docs/containers?topic=containers-cluster-states-reference#cluster-state-delete-failed)
 
 * [Deleted](/docs/containers?topic=containers-cluster-states-reference#cluster-state-deleted)
