@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-01-23"
+lastupdated: "2023-01-24"
 
 keywords: containers
 subcollection: containers
@@ -151,16 +151,6 @@ subcollection: containers
 
     * [Solution](/docs/containers?topic=containers-cs_uc_health#uc_research_solution)
 
-    * [Solution](/docs/containers?topic=containers-cs_uc_health#uc_research_the_solution)
-
-    * [Step 1: Containerize apps by using microservices](/docs/containers?topic=containers-cs_uc_health#uc_research_step1)
-
-    * [Step 2: Use secure and performance driven compute](/docs/containers?topic=containers-cs_uc_health#uc_research_step2)
-
-    * [Step 3: Ensure global availability](/docs/containers?topic=containers-cs_uc_health#uc_research_step3)
-
-    * [Step 4: Data sharing](/docs/containers?topic=containers-cs_uc_health#uc_research_step4)
-
     * [Results](/docs/containers?topic=containers-cs_uc_health#uc_research_results)
 
 [Retail use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_retail#cs_uc_retail)
@@ -270,6 +260,16 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan23)
+
+    * [24 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan2423)
+
+        * CLI version 1.0.487 change log update
+
+        * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.16_1779` and `5.0.5_1784`.
+
+        * Cluster autoscaler add-on version `1.0.7_940`.
+
+        * Ingress ALB version `1.3.1_3685_iks`, `1.4.0_3684_iks`, and `1.5.1_3683_iks`
 
     * [23 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan2323)
 
@@ -5980,6 +5980,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version 1.0.487](/docs/containers?topic=containers-cs_cli_changelog#cli-10487)
+
 * [Version 1.0.480](/docs/containers?topic=containers-cs_cli_changelog#cli-10480)
 
 * [Version 1.0.471](/docs/containers?topic=containers-cs_cli_changelog#cli-10471)
@@ -8050,9 +8052,13 @@ subcollection: containers
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
 
+    * [1.5.1_3683_iks, released 24 January 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3683_iks)
+
     * [1.5.1_3536_iks, released 3 January 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3536_iks)
 
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
+
+    * [1.4.0_3684_iks, released 24 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3684_iks)
 
     * [1.4.0_3537_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3537_iks)
 
@@ -8062,7 +8068,9 @@ subcollection: containers
 
 * [Version 1.3.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_1)
 
-    * [1.3.1_3538_iks (default), released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3538_iks)
+    * [1.3.1_3685_iks (default), released 24 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3685_iks)
+
+    * [1.3.1_3538_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3538_iks)
 
     * [1.3.1_3298_iks, released 15 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3298_iks)
 
@@ -8512,6 +8520,8 @@ subcollection: containers
 
 * [Version 1.0.7](/docs/containers?topic=containers-ca_changelog#0107_ca_addon)
 
+    * [Change log for patch update 1.0.7_940, released 24 January 2023:](/docs/containers?topic=containers-ca_changelog#107940_ca)
+
     * [Change log for patch update 1.0.7_900, released 9 January 2023](/docs/containers?topic=containers-ca_changelog#107900_ca)
 
     * [Change log for patch update 1.0.7_883, released 3 November 2022](/docs/containers?topic=containers-ca_changelog#107883_ca)
@@ -8596,6 +8606,8 @@ subcollection: containers
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
 
+    * [Change log for version 5.0.5_1784, released 24 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.5-1784_is_block_relnote)
+
     * [Change log for version 5.0.4_1773, released 10 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.4-1773_is_block_relnote)
 
     * [Change log for version 5.0.2_1713, released 17 November 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.2-1713_is_block_relnote)
@@ -8611,6 +8623,8 @@ subcollection: containers
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
 
 * [Version 4.4](/docs/containers?topic=containers-vpc_bs_changelog#044_is_block)
+
+    * [Change log for version 4.4.16_1779, released 24 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#4.4.16_1779_is_block_relnote)
 
     * [Change log for version 4.4.15_1764, released 10 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#4.4.15_1764_is_block_relnote)
 
@@ -9239,6 +9253,8 @@ subcollection: containers
 * [Aborted](/docs/containers?topic=containers-cluster-states-reference#cluster-state-aborted)
 
 * [Critical](/docs/containers?topic=containers-cluster-states-reference#cluster-state-critical)
+
+* [Create failed](/docs/containers?topic=containers-cluster-states-reference#cluster-state-create-failed)
 
 * [Delete failed](/docs/containers?topic=containers-cluster-states-reference#cluster-state-delete-failed)
 

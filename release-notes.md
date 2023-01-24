@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-23"
+lastupdated: "2023-01-24"
 
 keywords: kubernetes, release notes
 
@@ -30,12 +30,31 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## January 2023
 {: #containers-jan23}
 
+
+### 24 January 2023
+{: #containers-jan2423}
+{: release-note}
+
+CLI version 1.0.487 change log update
+:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.487.
+
+{{site.data.keyword.block_storage_is_short}} add-on versions `4.4.16_1779` and `5.0.5_1784`.
+:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
+Cluster autoscaler add-on version `1.0.7_940`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+
+Ingress ALB version `1.3.1_3685_iks`, `1.4.0_3684_iks`, and `1.5.1_3683_iks`
+:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
 ### 23 January 2023
 {: #containers-jan2323}
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.8` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
 
 ### 16 January 2023
 {: #containers-jan1723}
