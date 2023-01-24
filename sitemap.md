@@ -151,16 +151,6 @@ subcollection: containers
 
     * [Solution](/docs/containers?topic=containers-cs_uc_health#uc_research_solution)
 
-    * [Solution](/docs/containers?topic=containers-cs_uc_health#uc_research_the_solution)
-
-    * [Step 1: Containerize apps by using microservices](/docs/containers?topic=containers-cs_uc_health#uc_research_step1)
-
-    * [Step 2: Use secure and performance driven compute](/docs/containers?topic=containers-cs_uc_health#uc_research_step2)
-
-    * [Step 3: Ensure global availability](/docs/containers?topic=containers-cs_uc_health#uc_research_step3)
-
-    * [Step 4: Data sharing](/docs/containers?topic=containers-cs_uc_health#uc_research_step4)
-
     * [Results](/docs/containers?topic=containers-cs_uc_health#uc_research_results)
 
 [Retail use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_retail#cs_uc_retail)
