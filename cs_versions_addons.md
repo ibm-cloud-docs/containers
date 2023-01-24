@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-11"
+lastupdated: "2023-01-24"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -45,13 +45,23 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ## Version 1.5.1
 {: #1_5_1}
 
+### 1.5.1_3683_iks, released 24 January 2022
+{: #1.5.1_3683_iks}
+
+Introduces support for multiple platform architectures such as AMD64 and s390x.
+
 ### 1.5.1_3536_iks, released 3 January 2022
 {: #1.5.1_3536_iks}
 
-
+Initial release of `1.5.1`
 
 ## Version 1.4.0
 {: #1_4_0}
+
+### 1.4.0_3684_iks, released 24 January 2023
+{: #1.4.0_3684_iks}
+
+Introduces support for multiple platform architectures such as AMD64 and s390x.
 
 ### 1.4.0_3537_iks, released 3 January 2023
 {: #1.4.0_3537_iks}
@@ -72,7 +82,12 @@ Initial release of `1.4.0`
 ## Version 1.3.1
 {: #1_3_1}
 
-### 1.3.1_3538_iks (default), released 3 January 2023
+### 1.3.1_3685_iks (default), released 24 January 2023
+{: #1.3.1_3685_iks}
+
+Introduces support for multiple platform architectures such as AMD64 and s390x.
+
+### 1.3.1_3538_iks, released 3 January 2023
 {: #1.3.1_3538_iks}
 
 - [CVE-2022-43551](https://nvd.nist.gov/vuln/detail/CVE-2022-43551){: external}

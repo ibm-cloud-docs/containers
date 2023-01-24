@@ -277,6 +277,8 @@ subcollection: containers
 
         * Cluster autoscaler add-on version `1.0.7_940`.
 
+        * Ingress ALB version `1.3.1_3685_iks`, `1.4.0_3684_iks`, and `1.5.1_3683_iks`
+
     * [23 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan2323)
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.8` is available.
@@ -8056,9 +8058,13 @@ subcollection: containers
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
 
+    * [1.5.1_3683_iks, released 24 January 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3683_iks)
+
     * [1.5.1_3536_iks, released 3 January 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3536_iks)
 
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
+
+    * [1.4.0_3684_iks, released 24 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3684_iks)
 
     * [1.4.0_3537_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3537_iks)
 
@@ -8068,7 +8074,9 @@ subcollection: containers
 
 * [Version 1.3.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_1)
 
-    * [1.3.1_3538_iks (default), released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3538_iks)
+    * [1.3.1_3685_iks (default), released 24 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3685_iks)
+
+    * [1.3.1_3538_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3538_iks)
 
     * [1.3.1_3298_iks, released 15 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3298_iks)
 

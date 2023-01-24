@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-23"
+lastupdated: "2023-01-24"
 
 keywords: kubernetes, release notes
 
@@ -40,6 +40,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 Cluster autoscaler add-on version `1.0.7_940`.
 :   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+
+Ingress ALB version `1.3.1_3685_iks`, `1.4.0_3684_iks`, and `1.5.1_3683_iks`
+:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
 
 ### 23 January 2023
