@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-20"
+lastupdated: "2023-01-25"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -481,7 +481,7 @@ The TLS certificate is stored as a Kubernetes secret in the `default` namespace.
     ```
     {: pre}
 
-4. Specify the secret name in the `spec.tls` section of your [Ingress resource](/docs/containers?topic=containers-ingress-types#alb-comm-create).
+4. Specify the secret name in the `spec.tls` section of your [Ingress resource](/docs/containers?topic=containers-managed-ingress-setup).
 
 The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<globally_unique_account_HASH>-0000.<region>.containers.appdomain.cloud`, is registered by default for your cluster. The IBM-provided TLS certificate is a wildcard certificate and can be used for the wildcard subdomain.
 {: tip}
@@ -531,7 +531,7 @@ By storing custom TLS certificates in {{site.data.keyword.cloudcerts_long_notm}}
     ```
     {: pre}
 
-6. Specify the secret name in the `spec.tls` section of your [Ingress resource](/docs/containers?topic=containers-ingress-types#alb-comm-create).
+6. Specify the secret name in the `spec.tls` section of your [Ingress resource](/docs/containers?topic=containers-managed-ingress-setup).
 
 ## Managing non-TLS secrets
 {: #non-tls}

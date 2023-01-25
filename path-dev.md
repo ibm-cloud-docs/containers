@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-01-25"
 
 keywords: kubernetes, containers
 
@@ -151,7 +151,7 @@ Publicly expose an app in your cluster to the internet or privately expose an ap
             2. [Register a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname) for the NLB.
         - VPC clusters: Set up a [VPC load balancer](/docs/containers?topic=containers-vpc-lbaas).
 
-    - Ingress: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress-types#alb-comm-create) or the [private network](/docs/containers?topic=containers-ingress-types#alb-comm-create-private).
+    - Ingress: [Configure Ingress](/docs/containers?topic=containers-managed-ingress-setup) for the public or private network.
 
 Need help? Check out [Troubleshooting Ingress](/docs/containers?topic=containers-ingress-debug) and [Troubleshooting load balancers](/docs/containers?topic=containers-cs_loadbalancer_fails).
 {: tip}

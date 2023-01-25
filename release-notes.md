@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-24"
+lastupdated: "2023-01-25"
 
 keywords: kubernetes, release notes
 
@@ -1359,7 +1359,7 @@ Istio add-on
 :   [1.22](/docs/containers?topic=containers-cs_versions#cs_versions_available) is now the default version.
 
 Maintenance Windows for {{site.data.keyword.containershort}} ALBs
-:   You can now further control and manage your ALB updates by [creating a customized ConfigMap](/docs/containers?topic=containers-ingress-types#alb_scheduled_updates) that specifies the time you want the updates to occur and the percentage of ALBs you want to update.
+:   You can now further control and manage your ALB updates by [creating a customized ConfigMap](/docs/containers?topic=containers-ingress-alb-manage#alb-scheduled-updates) that specifies the time you want the updates to occur and the percentage of ALBs you want to update.
 
 
 
@@ -2347,7 +2347,7 @@ Worker node versions
 
 
 End of support for custom IBM Ingress image
-:   The custom {{site.data.keyword.containerlong_notm}} Ingress image is unsupported. In clusters that were created before 01 December 2020, [migrate any ALBs that continue to run the custom IBM Ingress image to the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types). Not ready to switch your ALBs to the Kubernetes Ingress image yet? The custom {{site.data.keyword.containerlong_notm}} Ingress image is available as an [open source project](https://github.com/IBM-Cloud/iks-ingress-controller/){: external}. However, this project is not officially supported by {{site.data.keyword.cloud_notm}}, and you are responsible for deploying, managing, and maintaining the Ingress controllers in your cluster.
+:   The custom {{site.data.keyword.containerlong_notm}} Ingress image is unsupported. In clusters that were created before 01 December 2020, [migrate any ALBs that continue to run the custom IBM Ingress image to the Kubernetes Ingress image](/docs/containers?topic=containers-managed-ingress-about). Not ready to switch your ALBs to the Kubernetes Ingress image yet? The custom {{site.data.keyword.containerlong_notm}} Ingress image is available as an [open source project](https://github.com/IBM-Cloud/iks-ingress-controller/){: external}. However, this project is not officially supported by {{site.data.keyword.cloud_notm}}, and you are responsible for deploying, managing, and maintaining the Ingress controllers in your cluster.
 
 
 
@@ -2931,7 +2931,7 @@ New! Private service endpoint allowlists
 :   You can now control access to your private cloud service endpoint by [creating a subnet allowlist](/docs/containers?topic=containers-access_cluster#private-se-allowlist). Only authorized requests to your cluster master that originate from subnets in the allowlist are permitted through the cluster's private cloud service endpoint.
 
 Private Kubernetes Ingress
-:   Added steps for [privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private).
+:   Added steps for [privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-managed-ingress-setup).
 
 ### 19 January 2021
 {: #containers-jan1921}
@@ -2965,7 +2965,7 @@ Cluster autoscaler
 {: release-note}
 
 Ingress resources
-:   Added example Ingress resource definitions that are compatible with Kubernetes version 1.19. See the example YAML file in the documentation for the [community Kubernetes Ingress setup](/docs/containers?topic=containers-ingress-types#alb-comm-create) or for the [deprecated custom {{site.data.keyword.containerlong_notm}} Ingress setup](/docs/containers?topic=containers-ingress-types#alb-comm-create).
+:   Added example Ingress resource definitions that are compatible with Kubernetes version 1.19. 
 
 Kubernetes benchmarks
 :   Added how to [run the CIS Kubernetes benchmark tests on your own worker nodes](/docs/containers?topic=containers-cis-benchmark#cis-worker-test). 
@@ -3131,7 +3131,7 @@ Istio add-on
 {: release-note}
 
 Default Kubernetes Ingress image
-:   In all new {{site.data.keyword.containerlong_notm}} clusters, default application load balancers (ALBs) now run the Kubernetes Ingress image. In existing clusters, ALBs continue to run the previously supported {{site.data.keyword.containerlong_notm}} Ingress image, which is now deprecated. For more information and migration actions, see [Setting up Kubernetes Ingress](/docs/containers?topic=containers-ingress-types).
+:   In all new {{site.data.keyword.containerlong_notm}} clusters, default application load balancers (ALBs) now run the Kubernetes Ingress image. In existing clusters, ALBs continue to run the previously supported {{site.data.keyword.containerlong_notm}} Ingress image, which is now deprecated. For more information and migration actions, see [Setting up Kubernetes Ingress](/docs/containers?topic=containers-managed-ingress-about).
 
 ## November 2020
 {: #containers-nov20}
@@ -3304,7 +3304,7 @@ Gateway firewalls and Calico policies
 
 
 Ingress classes
-:   Added information about [specifying Ingress classes](/docs/containers?topic=containers-ingress-types#ingress-class) to apply Ingress resources to specific ALBs.
+:   Added information about [specifying Ingress classes](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-class) to apply Ingress resources to specific ALBs.
 
 
 
@@ -3534,7 +3534,7 @@ Cluster autoscaler
 :   The [cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc) is available as a managed add-on. The cluster autoscaler Helm chart is deprecated. Migrate your autoscaled worker pools to use the add-on.
 
 New! Community Kubernetes Ingress support
-:   The Ingress ALBs in your cluster can now run the Kubernetes Ingress image, which is built on the community Kubernetes project's implementation of the NGINX Ingress controller. To use the Kubernetes Ingress image, you create your Ingress resources and ConfigMaps according to the Kubernetes Ingress format, including community Kubernetes Ingress annotations instead of custom {{site.data.keyword.containerlong_notm}} annotations. For more information about the differences between the {{site.data.keyword.containerlong_notm}} Ingress image and the Kubernetes Ingress image, see the [Choosing a supported image version](/docs/containers?topic=containers-ingress-types#alb-version-choose).
+:   The Ingress ALBs in your cluster can now run the Kubernetes Ingress image, which is built on the community Kubernetes project's implementation of the NGINX Ingress controller. To use the Kubernetes Ingress image, you create your Ingress resources and ConfigMaps according to the Kubernetes Ingress format, including community Kubernetes Ingress annotations instead of custom {{site.data.keyword.containerlong_notm}} annotations. 
 
 New! Default {{site.data.keyword.cloudcerts_long}} instances
 :   An {{site.data.keyword.cloudcerts_long_notm}} service instance is now created by default for all new and existing standard clusters. The {{site.data.keyword.cloudcerts_short}} service instance, which is named in the format `kube-crtmgr-<cluster_ID>`, stores the TLS certificate for your cluster's default Ingress subdomain. You can also upload your own TLS certificates for custom Ingress domains to this {{site.data.keyword.cloudcerts_short}} instance and use the new [**`ibmcloud ks ingress secret`** commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create) to create secrets for these certificates in your cluster. To ensure that a {{site.data.keyword.cloudcerts_short}} instance is automatically created for your new or existing cluster, verify that the API key for the region and resource group that the cluster is created in has the correct {{site.data.keyword.cloudcerts_short}} permissions.
@@ -3993,7 +3993,7 @@ Cluster and worker node quotas
 {: release-note}
 
 ALB pod scaling
-:   Added steps for scaling up your ALB processing capabilities by [increasing the number of ALB pods replicas](/docs/containers?topic=containers-ingress-types#alb_replicas).
+:   Added steps for scaling up your ALB processing capabilities by [increasing the number of ALB pods replicas](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas).
 
 
 
@@ -4183,7 +4183,7 @@ Istio add-on
 {: release-note}
 
 Managing Ingress ALBs
-:   Added a page for [managing the lifecycle of your ALBs](/docs/containers?topic=containers-ingress-types), including information about creating, updating, and moving ALBs.
+:   Added a page for [managing the lifecycle of your ALBs](/docs/containers?topic=containers-managed-ingress-about), including information about creating, updating, and moving ALBs.
 
 
   
@@ -4512,7 +4512,7 @@ Version changelog
 {: release-note}
 
 Exposing apps with load balancers or Ingress ALBs
-:   Added quick start pages to help you get up and running with [load balancers](/docs/containers?topic=containers-loadbalancer-qs) and [Ingress ALBs](/docs/containers?topic=containers-ingress-types).
+:   Added quick start pages to help you get up and running with [load balancers](/docs/containers?topic=containers-loadbalancer-qs) and [Ingress ALBs](/docs/containers?topic=containers-managed-ingress-about).
 
 
 
@@ -4562,7 +4562,7 @@ Gateway appliance firewalls
 :   Updated the [required IP addresses and ports](/docs/containers?topic=containers-firewall#vyatta_firewall) that you must open in a public gateway device firewall.
 
 Ingress ALB subdomain format
-:   [Changes are made to the Ingress subdomain](/docs/containers?topic=containers-ingress-about#ingress-resource). New clusters are assigned an Ingress subdomain in the format `cluster_name.globally_unique_account_HASH-0000.region.containers.appdomain.cloud` and an Ingress secret in the format `cluster_name.globally_unique_account_HASH-0000`. Any existing clusters that use the `cluster_name.region.containers.mybluemix.net` subdomain are assigned a CNAME record that maps to a `cluster_name.region_or_zone.containers.appdomain.cloud` subdomain.
+:   [Changes are made to the Ingress subdomain](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-subdomain). New clusters are assigned an Ingress subdomain in the format `cluster_name.globally_unique_account_HASH-0000.region.containers.appdomain.cloud` and an Ingress secret in the format `cluster_name.globally_unique_account_HASH-0000`. Any existing clusters that use the `cluster_name.region.containers.mybluemix.net` subdomain are assigned a CNAME record that maps to a `cluster_name.region_or_zone.containers.appdomain.cloud` subdomain.
 
 
 ### 21 November 2019
@@ -4749,7 +4749,7 @@ Calico MTU
 
 
 Creating DNS subdomains for VPC load balancers and private Ingress ALBs
-:   Added steps for [registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns) and for [exposing apps to a private network](/docs/containers?topic=containers-ingress-types#alb-comm-create-private) in VPC clusters.
+:   Added steps for [registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns) and for [exposing apps to a private network](/docs/containers?topic=containers-managed-ingress-setup) in VPC clusters.
 
 
 
@@ -4794,7 +4794,7 @@ New! Gateway-enabled classic clusters
 :   When you enable a gateway on a classic cluster, the cluster is created with a `compute` worker pool of compute worker nodes that are connected to a private VLAN only, and a `gateway` worker pool of gateway worker nodes that are connected to public and private VLANs. Traffic into or out of the cluster is routed through the gateway worker nodes, which provide your cluster with limited public access. For more information, check out the following links.
         - [Using a gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway)
         - [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_nodes)
-        - Flow of traffic to apps when using an [NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_gateway), an [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#v2_gateway), or [Ingress ALBs](/docs/containers?topic=containers-ingress-about#classic-gateway)
+        - Flow of traffic to apps when using an [NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_gateway), an [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#v2_gateway), or Ingress ALBs.
 
 :   Ready to get started? [Create a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-cluster-create-classic&interface=ui).
 

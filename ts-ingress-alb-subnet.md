@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-06"
+lastupdated: "2023-01-25"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -40,7 +40,7 @@ Your ALBs and your worker nodes might not exist on the same VLANs.
 This can occur when you delete worker nodes on the VLANs that the ALBs were also originally created on, and then create new worker nodes on new VLANs.
 
 
-Move your ALBs to the same VLANs that your worker nodes exist on by following the steps in [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-types#migrate-alb-vlan).
+Move your ALBs to the same VLANs that your worker nodes exist on by following the steps in [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan).
 {: tsResolve}
 
 

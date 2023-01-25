@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-12"
+  years: 2014, 2023
+lastupdated: "2023-01-25"
 
 keywords: kubernetes, networking
 
@@ -80,7 +80,7 @@ LoadBalancer
     * Classic clusters: [Network load balancer (NLB)](/docs/containers?topic=containers-loadbalancer). Every standard cluster is provisioned with four portable public and four portable private IP addresses that you can use to create a layer 4 TCP/UDP network load balancer (NLB) for your app. You can customize your NLB by exposing any port that your app requires. The portable public and private IP addresses that are assigned to the NLB are permanent and don't change when a worker node is re-created in the cluster. You can create a subdomain for your app that registers public NLB IP addresses with a DNS entry. You can also enable health check monitors on the NLB IPs for each subdomain.
     * VPC clusters: [Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas). When you create a Kubernetes LoadBalancer service for an app in your cluster, a layer 7 VPC load balancer is automatically created in your VPC outside of your cluster. The VPC load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. By default, the load balancer is also created with a hostname that you can use to access your app.
 
-[Ingress](/docs/containers?topic=containers-ingress-types)
+[Ingress](/docs/containers?topic=containers-managed-ingress-about)
 :   Expose multiple apps in a cluster by setting up routing with the Ingress application load balancer (ALB). The ALB uses a secured and unique public or private entry point, an Ingress subdomain, to route incoming requests to your apps. You can use one subdomain to expose multiple apps in your cluster as services. Ingress consists of three components:
     * The Ingress resource defines the rules for how to route and load balance incoming requests for an app.
     * The ALB listens for incoming HTTP, HTTPS, or TCP service requests. It forwards requests across the apps' pods based on the rules that you defined in the Ingress resource.
@@ -160,7 +160,7 @@ Ingress ALB
 :   **Load-balancing method**: HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules.
 :   **Use case**: Implement custom routing rules and SSL termination for multiple apps.
 :   **Implementation**:
-        1. Create an [Ingress service](/docs/containers?topic=containers-ingress-types#alb-comm-create) for the public ALB.
+        1. Create an [Ingress service](/docs/containers?topic=containers-managed-ingress-setup) for the public ALB.
         2. Customize ALB routing rules with [annotations](/docs/containers?topic=containers-comm-ingress-annotations).
 
 
@@ -174,7 +174,7 @@ Still want more details about the load balancing deployment patterns that are av
 To make an app publicly available to the internet in a VPC cluster, choose a load balancing deployment pattern that uses public `LoadBalancer` or `Ingress` services. The following table describes each possible deployment pattern, why you might use it, and how to set it up. For basic information about the networking services that these deployment patterns use, see [Understanding Kubernetes service types](#external).
 {: shortdesc}
 
-When you create a VPC cluster that runs Kubernetes version 1.18 or earlier, the VPC is created with a default security group that does not allow incoming traffic to your worker nodes. You must modify the security group for the VPC to allow incoming TCP traffic to ports `30000 - 32767`. For more information, see the "Before you begin" section of the [VPC load balancer](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb) or [Ingress](/docs/containers?topic=containers-ingress-types#alb-comm-create) setup topics.
+When you create a VPC cluster that runs Kubernetes version 1.18 or earlier, the VPC is created with a default security group that does not allow incoming traffic to your worker nodes. You must modify the security group for the VPC to allow incoming TCP traffic to ports `30000 - 32767`. For more information, see the "Before you begin" section of the [VPC load balancer](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb) or [Ingress](/docs/containers?topic=containers-managed-ingress-setup) setup topics.
 {: note}
 
 
@@ -196,7 +196,7 @@ Ingress ALB
 :   **Load-balancing method**: HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules.
 :   **Use case**: Implement custom routing rules and SSL termination for multiple apps.
 :   **Implementation**: 
-        1. Create an [Ingress service](/docs/containers?topic=containers-ingress-types#alb-comm-create) for the public ALB.
+        1. Create an [Ingress service](/docs/containers?topic=containers-managed-ingress-setup) for the public ALB.
         2. Customize ALB routing rules with [annotations](/docs/containers?topic=containers-comm-ingress-annotations).
 
 
@@ -265,7 +265,7 @@ Ingress ALB
 :   **Use case**: Implement custom routing rules and SSL termination for multiple apps.
 :   **Implementation**:
         1. [Disable the public ALB](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure).
-        2. [Enable the private ALB and create an Ingress resource](/docs/containers?topic=containers-ingress-types#alb-comm-create-private).
+        2. [Enable the private ALB and create an Ingress resource](/docs/containers?topic=containers-managed-ingress-setup).
         3. Customize ALB routing rules with [annotations](/docs/containers?topic=containers-comm-ingress-annotations).
         4. An NLB with a portable private IP address still has a public node port open on every worker node. Create a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block traffic to the public NodePorts.
 
@@ -309,7 +309,7 @@ Ingress ALB
 :   **Use case**: Implement custom routing rules and SSL termination for multiple apps.
 :   **Implementation**:
         1. Configure a [DNS service that is available on the private network](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/){: external}.
-        2. [Enable the private ALB and create an Ingress resource](/docs/containers?topic=containers-ingress-types#alb-comm-create-private).
+        2. [Enable the private ALB and create an Ingress resource](/docs/containers?topic=containers-managed-ingress-setup).
         3. In your private firewall, open port 80 for HTTP or port 443 for HTTPS to the IP address for the private ALB.
         4. Customize ALB routing rules with [annotations](/docs/containers?topic=containers-comm-ingress-annotations).
 
@@ -337,7 +337,7 @@ Ingress ALB
 :   **Load-balancing method**: HTTPS load balancing that exposes the app with a hostname and uses custom routing rules.
 :   **Use case**: Implement custom routing rules and SSL termination for multiple apps.
 :   **Implementation**:
-        1. [Enable the private ALB, create a subdomain to register the ALB with a DNS entry, and create an Ingress resource](/docs/containers?topic=containers-ingress-types#alb-comm-create-private).
+        1. [Enable the private ALB, create a subdomain to register the ALB with a DNS entry, and create an Ingress resource](/docs/containers?topic=containers-managed-ingress-setup).
         2. Customize ALB routing rules with [annotations](/docs/containers?topic=containers-comm-ingress-annotations).
 
 

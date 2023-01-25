@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-01-25"
 
 keywords: kubernetes
 
@@ -47,7 +47,7 @@ Review the following goals for {{site.data.keyword.containerlong_notm}}.
 
 
 - **Check whether {{site.data.keyword.containershort_notm}} clusters are accessible only by using private endpoints.** You can [disable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#disable-public-se). For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
-- **Check whether {{site.data.keyword.containershort_notm}} Ingress is configured only with TLS v1.2 for all inbound traffic.** The default TLS versions are 1.2 or 1.3. For more information, see [About Ingress](/docs/containers?topic=containers-ingress-about).
+- **Check whether {{site.data.keyword.containershort_notm}} Ingress is configured only with TLS v1.2 for all inbound traffic.** The default TLS versions are 1.2 or 1.3. For more information, see [Ingress in IBM Cloud](/docs/containers?topic=containers-managed-ingress-about).
 - **Check whether {{site.data.keyword.containershort_notm}} clusters are enabled with IBM Log Analysis.** For more information, see [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview).
 - **Check whether {{site.data.keyword.containershort_notm}} clusters are enabled with IBM Cloud Monitoring.** For more information, see [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics).
 - **Check whether the {{site.data.keyword.containershort_notm}} version is up-to-date.** For more information, see [Version information and update actions](/docs/containers?topic=containers-cs_versions).

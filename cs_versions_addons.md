@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-24"
+lastupdated: "2023-01-25"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -28,7 +28,7 @@ For more information about managing updates for Fluentd and Ingress ALBs, see [U
 {: #kube_ingress_changelog}
 
 
-View version changes for Ingress application load balancers (ALBs) that run the [community Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types).
+View version changes for Ingress application load balancers (ALBs) that run the [community Kubernetes Ingress image](/docs/containers?topic=containers-managed-ingress-about).
 {: shortdesc}
 
 When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` option. The latest three versions of the Kubernetes Ingress image are supported for ALBs. To list the currently supported versions, run the following command:
