@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-01-25"
 
 keywords: kubernetes, multi az, multi-az, szr, mzr
 
@@ -123,14 +123,14 @@ You can set up multiple clusters in different regions of one geolocation (such a
 ### What options do I have to load balance workloads across multiple clusters?
 {: #multiple-cluster-lb-options}
 
-To load balance workloads across multiple clusters, you must make your apps available on the public network by using [Application Load Balancers (ALBs)](/docs/containers?topic=containers-ingress-about) or [Network Load Balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about). The ALBs and NLBs are assigned a public IP address that you can use to access your apps.
+To load balance workloads across multiple clusters, you must make your apps available on the public network by using [Application Load Balancers (ALBs)](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-albs) or [Network Load Balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about). The ALBs and NLBs are assigned a public IP address that you can use to access your apps.
 
 To load balance workloads across your apps, add the public IP addresses of your ALBs and NLBs to a CIS global load balancer or your own global load balancer.
 
 ### Setting up a CIS global load balancer
 {: #cis-global-lb-setup}
 
-1. Set up [Kubernetes load balancer services](/docs/containers?topic=containers-loadbalancer-qs) or the [Ingress service](/docs/containers?topic=containers-ingress-types) to expose the apps in your cluster.
+1. Set up [Kubernetes load balancer services](/docs/containers?topic=containers-loadbalancer-qs) or the [Ingress service](/docs/containers?topic=containers-managed-ingress-about) to expose the apps in your cluster.
 2. Set up the CIS global load balancer by following steps 1 - 5 in [Getting Started with {{site.data.keyword.cloud_notm}} Internet Services (CIS)](/docs/cis?topic=cis-getting-started#getting-started). These steps walk you through provisioning the service instance, adding your app domain, and configuring your name servers, and creating DNS records. Create a DNS record for each ALB or NLB IP address that you collected. These DNS records map your app domain to all your cluster ALBs or NLBs, and ensure that requests to your app domain are forwarded to your clusters in a round-robin cycle.
 3. [Add health checks](/docs/cis?topic=cis-configure-glb#add-a-health-check) for the ALBs or NLBs. You can use the same health check for the ALBs or NLBs in all your clusters, or create specific health checks to use for specific clusters.
 4. [Add an origin pool](/docs/cis?topic=cis-configure-glb#add-a-pool) for each cluster by adding the cluster's ALB or NLB IPs. For example, if you have 3 clusters that each have two ALBs, create three origin pools that each have two ALB IP addresses. You can find the NLB or ALB IP addresses by running `kubectl get svc -n <namespace>`. Add a health check to each origin pool that you create.
@@ -139,14 +139,14 @@ To load balance workloads across your apps, add the public IP addresses of your 
 ### Setting up your own global load balancer
 {: #byo-global-lb-setup}
 
-1. Set up [Kubernetes load balancer services](/docs/containers?topic=containers-loadbalancer-qs) or set up the [Ingress service](/docs/containers?topic=containers-ingress-types) to expose the apps in your cluster.
+1. Set up [Kubernetes load balancer services](/docs/containers?topic=containers-loadbalancer-qs) or set up the [Ingress service](/docs/containers?topic=containers-managed-ingress-about) to expose the apps in your cluster.
 2. Configure your domain to route incoming traffic to your ALB or NLB services by adding the IP addresses of all public enabled ALBs and NLB services to your domain. You can find the NLB or ALB IP addresses by running `kubectl get svc -n <namespace>`.
 3. For each IP address, enable a ping-based health check so that your DNS provider can detect unhealthy IP addresses. If an unhealthy IP address is detected, traffic is not routed to this IP address anymore.
 
 ### What if I want to load balance workloads on the private network?
 {: #glb-private}
 
-{{site.data.keyword.cloud_notm}} does not offer a global load balancer service on the private network. However, you can connect your cluster to a private load balancer that you host in your on-prem network by using one of the [supported VPN options](/docs/containers?topic=containers-vpn). Make sure to expose your apps on the private network by using [Application Load Balancers (ALBs)](/docs/containers?topic=containers-ingress-about) or [Network Load Balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about), and use the private IP address in your VPN settings to connect your app to your on-prem network.
+{{site.data.keyword.cloud_notm}} does not offer a global load balancer service on the private network. However, you can connect your cluster to a private load balancer that you host in your on-prem network by using one of the [supported VPN options](/docs/containers?topic=containers-vpn). Make sure to expose your apps on the private network by using [Application Load Balancers (ALBs)](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-albs) or [Network Load Balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about), and use the private IP address in your VPN settings to connect your app to your on-prem network.
 
 
 

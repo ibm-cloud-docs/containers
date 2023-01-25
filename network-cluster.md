@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-01-25"
 
 keywords: kubernetes, vlan
 
@@ -313,7 +313,7 @@ To change the VLANs that a worker pool uses to provision worker nodes.
 
 8. Optional: You can repeat steps 2 - 7 for each worker pool in your cluster. After you complete these steps, all worker nodes in your cluster are set up with the new VLANs.
 
-9. The default ALBs in your cluster are still bound to the old VLAN because their IP addresses are from a subnet on that VLAN. Because ALBs can't be moved across VLANs, you can instead [create ALBs on the new VLANs and disable ALBs on the old VLANs](/docs/containers?topic=containers-ingress-types#migrate-alb-vlan).
+9. The default ALBs in your cluster are still bound to the old VLAN because their IP addresses are from a subnet on that VLAN. Because ALBs can't be moved across VLANs, you can instead [create ALBs on the new VLANs and disable ALBs on the old VLANs](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan).
 
 10. Optional: If you no longer need the subnets on the old VLANs, you can [remove them](/docs/containers?topic=containers-subnets#remove-subnets).
 

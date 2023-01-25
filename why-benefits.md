@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-15"
+  years: 2014, 2023
+lastupdated: "2023-01-25"
 
 keywords: kubernetes, containers
 
@@ -126,7 +126,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Scalable number of worker nodes to increase capacity](/docs/containers?topic=containers-cluster-scaling-classic-vpc)| |Yes|
 |[Persistent NFS file-based storage with volumes](/docs/containers?topic=containers-file_storage#file_storage)| |Yes|
 |[Public or private network app access by a network load balancer (NLB) service to a stable IP address](/docs/containers?topic=containers-loadbalancer)| |Yes|
-|[Public network app access by an Ingress service to a stable IP address and customizable URL](/docs/containers?topic=containers-ingress-about)| |Yes|
+|[Public network app access by an Ingress service to a stable IP address and customizable URL](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-albs)| |Yes|
 |[Portable public IP addresses](/docs/containers?topic=containers-subnets#review_ip)| |Yes|
 |[Logging and monitoring](/docs/containers?topic=containers-health#logging)| |Yes|
 |[Option to provision your worker nodes on physical (bare metal) servers](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)| |Yes|

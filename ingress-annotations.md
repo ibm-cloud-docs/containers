@@ -33,7 +33,7 @@ To add a server port to the client request before the request is forwarded to yo
 ## Routing incoming requests with a private ALB
 {: #alb_id_anno}
 
-To route incoming requests to your apps with a private ALB, use the following Kubernetes Ingress resource [annotation](/docs/containers?topic=containers-ingress-types#alb-comm-create-private). Private ALBs are configured to use resources with this class.
+To route incoming requests to your apps with a private ALB, specify the `private-iks-k8s-nginx` class annotation in the [Ingress resource](/docs/containers?topic=containers-managed-ingress-setup#managed-ingress-steps-resource). Private ALBs are configured to use resources with this class.
 {: shortdesc}
 
 ```sh
@@ -505,7 +505,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
     :   For more information about logging, see [Debug Logging](https://kubernetes.github.io/ingress-nginx/troubleshooting/#debug-logging){: external}.
     
     `replicas`
-    :   By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods. For more information, see [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-types#scale_albs).
+    :   By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods. For more information, see [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-alb-manage#scale_albs).
     
     `tcpServicesConfig`
     :   Specify a ConfigMap and the namespace that the ConfigMap is in, such as [`kube-system/tcp-services`](#tcp-ports-non-standard), that contains information about accessing your app service through a non-standard TCP port.
@@ -562,10 +562,9 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 ## Customizing the Ingress class
 {: #-custom-ingress-class}
 
-An Ingress class associates a class name with an Ingress controller type. Use the `IngressClass` resource to customize Ingress classes.
+An Ingress class associates a class name with an Ingress controller type. Use the [`IngressClass`](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class){: external} resource to customize Ingress classes.
 {: shortdesc}
 
-For more information, see [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class).
 
 
 ## Adding {{site.data.keyword.appid_short_notm}} authentication to apps
@@ -953,7 +952,7 @@ To edit the ConfigMap to enable SSL protocols and ciphers:
 ## Sending your custom certificate to legacy clients
 {: #default_server_cert}
 
-If you have legacy devices that don't support Server Name Indication (SNI) and you use a [custom TLS certificate in your Ingress resources](/docs/containers?topic=containers-ingress-types#alb-comm-create), you must edit the ALB's server settings to use your custom TLS certificate and custom TLS secret.
+If you have legacy devices that don't support Server Name Indication (SNI) and you use a [custom TLS certificate in your Ingress resources](/docs/containers?topic=containers-secrets#tls-custom), you must edit the ALB's server settings to use your custom TLS certificate and custom TLS secret.
 {: shortdesc}
 
 When you create a classic cluster, a Let's Encrypt certificate is generated for the default Ingress secret that IBM provides. If you create a custom secret in your cluster and specify this custom secret for TLS termination in your Ingress resources, the Ingress ALB sends the certificate for your custom secret to the client instead of the default Let's Encrypt certificate. However, if a client does not support SNI, the Ingress ALB defaults to the Let's Encrypt certificate because the default secret is listed in the ALB's default server settings. To send your custom certificate to devices that don't support SNI, complete the following steps to change the ALB's default server settings to your custom secret.

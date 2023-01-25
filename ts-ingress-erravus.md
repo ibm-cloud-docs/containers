@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-01-06"
+lastupdated: "2023-01-25"
 
 keywords: containers, ingress, troubleshoot ingress, ingress operator, ingress cluster operator, unsupported version, erravus
 
@@ -43,7 +43,7 @@ For any ALBs that use an unsupported version, update your ALBs.
 
 1. List your ALBs by using the **`ibmcloud ks ingress alb ls`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_albs) and check the version in the `Build` column.
 
-1. Update any ALBs that use an unsupported version. For more information, see [Updating ALBs](/docs/containers?topic=containers-ingress-types#alb-update).
+1. Update any ALBs that use an unsupported version. For more information, see [Updating ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-update).
 
 1. Wait 10 to 15 minutes, then check if the warning is resolved by running the **`ibmcloud ks ingress alb ls`** command.
 

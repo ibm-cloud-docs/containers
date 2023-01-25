@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-01-25"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -228,7 +228,7 @@ You can modify default ALB settings and add annotations to your Ingress resource
 ## How do I manage the lifecycle of my ALBs?
 {: #alb-lifecycle}
 
-Ingress ALBs are managed by {{site.data.keyword.containerlong_notm}}. To further modify and manage your ALBs, such as to manage version updates for your ALBs or to scale up ALB replicas, you can use `ibmcloud ks ingress alb` commands. For more information, see [Updating ALBs](/docs/containers?topic=containers-ingress-types#alb-update).
+Ingress ALBs are managed by {{site.data.keyword.containerlong_notm}}. To further modify and manage your ALBs, such as to manage version updates for your ALBs or to scale up ALB replicas, you can use `ibmcloud ks ingress alb` commands. For more information, see [Updating ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-update).
 {: shortdesc}
 
 

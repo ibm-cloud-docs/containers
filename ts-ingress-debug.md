@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-13"
+lastupdated: "2023-01-25"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -76,7 +76,7 @@ Start by checking for error messages in the Ingress resource deployment events a
     ```
     {: pre}
 
-    In the **Events** section of the output, you might see warning messages about invalid values in your Ingress resource or in certain annotations that you used. Check the [Ingress resource configuration documentation](/docs/containers?topic=containers-ingress-types#alb-comm-create) or the [annotations documentation](/docs/containers?topic=containers-comm-ingress-annotations).
+    In the **Events** section of the output, you might see warning messages about invalid values in your Ingress resource or in certain annotations that you used. Check the [Ingress resource configuration documentation](/docs/containers?topic=containers-managed-ingress-setup#managed-ingress-steps-resource) or the [annotations documentation](/docs/containers?topic=containers-comm-ingress-annotations).
 
     ```sh
     NAME:             myingress
@@ -194,7 +194,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
         * If the CLI returns a timeout and you have a custom firewall that is protecting your worker nodes, make sure that you allow ICMP in your firewall.
         * If you don't have a firewall or your firewall does not block the pings and the pings still timeout, [check the status of your ALB pods](#check_pods).
 
-    * Multizone clusters only: You can use the MZLB health check to determine the status of your ALB IPs (classic) or hostname (VPC). For more information about the MZLB, see [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress-about#ingress_components). The following HTTP cURL command uses the `albhealth` host, which is configured by {{site.data.keyword.containerlong_notm}} to return the `healthy` or `unhealthy` status for an ALB IP.
+    * Multizone clusters only: You can use the MZLB health check to determine the status of your ALB IPs (classic) or hostname (VPC). The following HTTP cURL command uses the `albhealth` host, which is configured by {{site.data.keyword.containerlong_notm}} to return the `healthy` or `unhealthy` status for an ALB IP.
         ```sh
         curl -X GET http://<ALB_IP>/ -H "Host: albhealth.<ingress_subdomain>"
         ```
@@ -404,7 +404,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     {: pre}
 
     * If everything is configured correctly, you get back the expected response from your app.
-    * If you get an error in response, there might be an error in your app or in a configuration that applies only to this specific ALB. Check your app code, your [Ingress resource configuration files](/docs/containers?topic=containers-ingress-types#alb-comm-create), or any other configurations you have applied to only this ALB.
+    * If you get an error in response, there might be an error in your app or in a configuration that applies only to this specific ALB. Check your app code, your [Ingress resource configuration files](/docs/containers?topic=containers-managed-ingress-setup#managed-ingress-steps-resource), or any other configurations you have applied to only this ALB.
 
 7. After you finish debugging, restore the health check on the ALB pods. Repeat these steps for each ALB pod.
     1. Log in to the ALB pod and remove the `#` from the `server_name`.

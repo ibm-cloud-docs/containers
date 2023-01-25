@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-01-24"
+lastupdated: "2023-01-25"
 
 keywords: containers
 subcollection: containers
@@ -4786,6 +4786,66 @@ subcollection: containers
 {: #sitemap_exposing_apps_with_ingress}
 
 
+[Ingress in {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-about)
+
+* [IBM-provided Ingress components](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-components)
+
+    * [Ingress subdomain](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-subdomain)
+
+    * [Ingress class](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-class)
+
+    * [Application Load Balancers (ALBs)](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-albs)
+
+    * [Default TLS certificate](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-tls)
+
+* [Getting started with Ingress](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-getstarted)
+
+[Setting up Ingress](/docs/containers?topic=containers-managed-ingress-setup#managed-ingress-setup)
+
+* [Before you begin](/docs/containers?topic=containers-managed-ingress-setup#managed-ingress-steps-before)
+
+* [Setup steps](/docs/containers?topic=containers-managed-ingress-setup#managed-ingress-steps)
+
+    * [Step 1: Create a `ClusterIP` service](/docs/containers?topic=containers-managed-ingress-setup#managed-ingress-steps-clusterip)
+
+    * [Step 2: Set up TLS termination with TLS certificates and Kubernetes secrets](/docs/containers?topic=containers-managed-ingress-setup#managed-ingress-steps-tls)
+
+    * [Step 3: Create the Ingress resource](/docs/containers?topic=containers-managed-ingress-setup#managed-ingress-steps-resource)
+
+    * [Step 4: Verify your Ingress setup](/docs/containers?topic=containers-managed-ingress-setup#managed-ingress-setup-verify)
+
+* [Custom domains with Ingress](/docs/containers?topic=containers-managed-ingress-setup#ingress-custom-domain)
+
+    * [Creating custom domains for public ALBs](/docs/containers?topic=containers-managed-ingress-setup#ingress-custom-domain-public)
+
+    * [Creating custom domains for private ALBs](/docs/containers?topic=containers-managed-ingress-setup#ingress-custom-domain-private)
+
+[Managing ALBs](/docs/containers?topic=containers-ingress-alb-manage#ingress-alb-manage)
+
+* [Updating ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-update)
+
+    * [Manually updating ALBs](/docs/containers?topic=containers-ingress-alb-manage#update-alb)
+
+    * [Managing automatic updates](/docs/containers?topic=containers-ingress-alb-manage#autoupdate)
+
+    * [Scheduling maintenance windows for automatic updates](/docs/containers?topic=containers-ingress-alb-manage#alb-scheduled-updates)
+
+    * [Choosing a supported image version](/docs/containers?topic=containers-ingress-alb-manage#alb-version-choose)
+
+    * [Viewing supported image versions](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list)
+
+    * [Reverting to an earlier version](/docs/containers?topic=containers-ingress-alb-manage#revert-alb-version)
+
+* [Scaling ALBs](/docs/containers?topic=containers-ingress-alb-manage#scale_albs)
+
+    * [Creating more ALBs in a zone](/docs/containers?topic=containers-ingress-alb-manage#create_alb)
+
+    * [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas)
+
+    * [Disabling ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-disable)
+
+* [Moving ALBs across VLANs in classic clusters](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan)
+
 [Customizing ALB routing](/docs/containers?topic=containers-comm-ingress-annotations#comm-ingress-annotations)
 
 * [Adding a server port to a host header](/docs/containers?topic=containers-comm-ingress-annotations#add-sport-hheader)
@@ -4892,6 +4952,20 @@ subcollection: containers
 ### Managing certificates and secrets
 {: #sitemap_managing_certificates_and_secrets}
 
+
+[Managing TLS and non-TLS certificates and secrets](/docs/containers?topic=containers-secrets#secrets)
+
+* [Managing TLS certificates and secrets with Ingress](/docs/containers?topic=containers-secrets#tls)
+
+    * [Setting up TLS secrets for the IBM-provided Ingress subdomain](/docs/containers?topic=containers-secrets#tls-default)
+
+    * [Setting up TLS secrets for custom subdomains](/docs/containers?topic=containers-secrets#tls-custom)
+
+* [Managing non-TLS secrets](/docs/containers?topic=containers-secrets#non-tls)
+
+    * [Creating a non-TLS secret in your cluster](/docs/containers?topic=containers-secrets#non-tls-create)
+
+    * [Managing non-TLS secret fields](/docs/containers?topic=containers-secrets#non-tls-field)
 
 [Setting up {{site.data.keyword.secrets-manager_short}} in your {{site.data.keyword.containershort}} cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr)
 
