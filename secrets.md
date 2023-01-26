@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2023
-lastupdated: "2023-01-25"
+lastupdated: "2023-01-26"
 
 keywords: secret, certificate, field, tls, non-tls, rotate, ingress
 
@@ -132,7 +132,7 @@ Learn how you can centrally manage your non-TLS secrets with [{{site.data.keywor
 ### Creating a non-TLS secret in your cluster
 {: #non-tls-create}
 
-Create a non-TLS secret by specifying the `--type Opaque` option in the **`ibmcloud ks ingress secret create`** command. With the `Opaque` type, you can include multiple non-certificate CRN values. If the `--type` option is not specified, TLS is applied by default. For more information and additional command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#alb-commands).
+Create a non-TLS secret by specifying the `--type Opaque` option in the **`ibmcloud ks ingress secret create`** command. With the `Opaque` type, you can include multiple non-certificate CRN values. If the `--type` option is not specified, TLS is applied by default. For more information and additional command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create).
 {: shortdesc}
 
 The following example command creates a non-TLS secret with the `Opaque` type specified. Non-TLS secrets require at least one secret [field](#non-tls-field-add). Note that how you specify the `--field` option varies [based on the type of secret you create](#non-tls-field-add). 
@@ -180,9 +180,9 @@ The following example output shows the secret fields and their values in the `da
 ```yaml
 apiVersion: v1
 data:
-  arbitraryFVT: YXJiaXRyYXJ5LXZhbHVl
-  userCredsFVT_password: cGFzc3dvcmQ=
-  userCredsFVT_username: dXNlcg==
+  arbitraryFVT: AAAaaAAaAAA1AAAaaAAa
+  userCredsFVT_password: aAAaa1aaaA=
+  userCredsFVT_username: aAAaaa==
 kind: Secret
 metadata:
   annotations:
@@ -192,8 +192,8 @@ metadata:
   creationTimestamp: "2022-11-08T19:45:05Z"
   name: example-secret
   namespace: default
-  resourceVersion: "119039"
-  uid: 4eac5419-2e74-458a-b8e8-62983e6d1e1e
+  resourceVersion: "111111"
+  uid: 1aaa1111-1a11-111a-a1a1-11111a1a1a1a
 type: Opaque
 ```
 {: screen}
