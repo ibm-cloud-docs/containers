@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-01-25"
+lastupdated: "2023-01-30"
 
 keywords: ingress, alb, manage albs, update, alb image
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 # Managing ALBs
 {: #ingress-alb-manage}
@@ -167,7 +168,7 @@ When you create a multizone cluster, a default public ALB is created in each zon
     ```
     {: pre}
 
-    The following command applies to **VPC clusters**. For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_create-vpc-gen2).
+    The following command applies to **VPC clusters**. For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb-create-vpc-gen2).
 
     ```sh
     ibmcloud ks ingress alb create vpc-gen2 --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> [--version image_version]

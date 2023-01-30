@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-25"
+lastupdated: "2023-01-30"
 
 keywords: kubernetes
 
@@ -14,6 +14,7 @@ subcollection: containers
 
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 
@@ -976,7 +977,7 @@ Free clusters are not available in VPC.
 
 
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--cluster-security-group GROUP_ID] [--operating-system UBUNTU_20_64|UBUNTU_18_64] [--version MAJOR.MINOR.PATCH] [--workers NUMBER_WORKERS_PER_ZONE]  [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--kms-account-id ID] [--kms-instance KMS_INSTANCE_ID] [--crk ROOT_KEY_ID][--skip-advance-permissions-check] [--sm-group GROUP] [--sm-instance INSTANCE] [-q] 
+ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--cluster-security-group GROUP_ID] [--operating-system UBUNTU_20_64|UBUNTU_18_64] [--version MAJOR.MINOR.PATCH] [--workers NUMBER_WORKERS_PER_ZONE]  [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--kms-account-id ID] [--kms-instance KMS_INSTANCE_ID] [--crk ROOT_KEY_ID][--skip-advance-permissions-check] [--sm-group GROUP] [--sm-instance INSTANCE] [-q] [--secondary-storage STORAGE]
 ```
 {: pre}
 
@@ -1059,6 +1060,9 @@ Minimum required permissions
 
 `--sm-instance INSTANCE`
 :    The CRN of the {{site.data.keyword.secrets-manager_short}} instance. To find the CRN of an instance, run [`ibmcloud ks ingress instance ls --cluster CLUSTER`](#cs_ingress_instance_ls).
+
+`--secondary-storage STORAGE`
+:    Optional: The storage option for the flavor. For example, `900gb.5iops-tier`. When you add a secondary disk, that disk is used for the container runtime, while the primary disk is used for the operating system. To view the storage options for a flavor, run the `**ibmcloud ks flavor get --flavor FLAVOR --zone ZONE --provider vpc-gen2` command.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
@@ -3195,6 +3199,9 @@ Minimum required permissions
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
+
+`--secondary-storage STORAGE`
+:    Optional: The storage option for the flavor. For example, `900gb.5iops-tier`. When you add a secondary disk, that disk is used for the container runtime, while the primary disk is used for the operating system. To view the storage options for a flavor, run the `**ibmcloud ks flavor get --flavor FLAVOR --zone ZONE --provider vpc-gen2` command.
 
 `--security-group GROUP`
 :    Optional. Specify up to five security group IDs to apply to all workers in the worker pool.

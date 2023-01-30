@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-01-06"
+lastupdated: "2023-01-30"
 
 keywords: containers, ingress, troubleshoot ingress, deployment missing, erradnf
 
@@ -12,6 +12,7 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Why does the Ingress status show an ERRADNF error?

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-25"
+lastupdated: "2023-01-30"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -12,6 +12,7 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 
@@ -76,7 +77,7 @@ Start by checking for error messages in the Ingress resource deployment events a
     ```
     {: pre}
 
-    In the **Events** section of the output, you might see warning messages about invalid values in your Ingress resource or in certain annotations that you used. Check the [Ingress resource configuration documentation](/docs/containers?topic=containers-managed-ingress-setup#managed-ingress-steps-resource) or the [annotations documentation](/docs/containers?topic=containers-comm-ingress-annotations).
+    In the **Events** section of the output, you might see warning messages about invalid values in your Ingress resource or in certain annotations that you used. Check the [Ingress resource configuration documentation](/docs/containers?topic=containers-managed-ingress-setup) or the [annotations documentation](/docs/containers?topic=containers-comm-ingress-annotations).
 
     ```sh
     NAME:             myingress
@@ -404,7 +405,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     {: pre}
 
     * If everything is configured correctly, you get back the expected response from your app.
-    * If you get an error in response, there might be an error in your app or in a configuration that applies only to this specific ALB. Check your app code, your [Ingress resource configuration files](/docs/containers?topic=containers-managed-ingress-setup#managed-ingress-steps-resource), or any other configurations you have applied to only this ALB.
+    * If you get an error in response, there might be an error in your app or in a configuration that applies only to this specific ALB. Check your app code, your [Ingress resource configuration files](/docs/containers?topic=containers-managed-ingress-setup), or any other configurations you have applied to only this ALB.
 
 7. After you finish debugging, restore the health check on the ALB pods. Repeat these steps for each ALB pod.
     1. Log in to the ALB pod and remove the `#` from the `server_name`.

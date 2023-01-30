@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-25"
+lastupdated: "2023-01-30"
 
 keywords: kubernetes, containers, kubernetes environment, moving to kubernetes, moving to containers, clusters, cluster sizing
 
@@ -12,6 +12,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 

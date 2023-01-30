@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-25"
+lastupdated: "2023-01-30"
 
 keywords: kubernetes, mzr, szr, multizone, multi az
 
@@ -12,6 +12,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 
@@ -57,7 +58,7 @@ The following image is used as an example to explain how {{site.data.keyword.con
 |--- |--- |--- |
 |Geography |North America (`na`)|An organizational grouping that is based on geographic continents.|
 |Country|Canada (`ca`)|The location's country within the geography.|
-|Metro|Mexico City (`mex-cty`), Dallas (`dal`)|The name of a city where 1 or more data centers are located. A metro might have a multizone region, such as Dallas, or might have a single zone region, such as Mexico City. If you create a cluster in a multizone region, the Kubernetes master and worker nodes can be spread across zones for high availability.|
+|Metro| For example, Dallas (`dal`). |The name of a city where 1 or more data centers are located. A metro might have a multizone region, such as Dallas, or might have a single zone region, such as Milan. If you create a cluster in a multizone region, the Kubernetes master and worker nodes can be spread across zones for high availability.|
 |Data center (zone)|Dallas 12 (`dal12`)|A physical location of the compute, network, and storage infrastructure and related cooling and power that host cloud services and applications. In a region, clusters can be spread across data centers, or zones, in an multizone architecture for high availability. Zones are isolated from each other, which ensures no shared single point of failure.|
 {: caption="Organization of {{site.data.keyword.containerlong_notm}} locations."}
 
@@ -89,12 +90,6 @@ The following image is used as an example to explain how {{site.data.keyword.con
 **Classic single zone**: If you create a classic cluster in a single zone region, you can create multiple worker nodes but you can't spread them across data centers (zones). The highly available master includes three replicas on separate hosts, but is not spread across zones.
 {: shortdesc}
 
-Hong Kong (`HKG02`) is deprecated and become unsupported later this year. To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your Hong Kong (`HKG02`) clusters by 28 September 2022. Clusters remaining after 28 September 2022 will be removed. Cluster creation in this location was stopped on 29 April 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/get-support?topic=get-support-dc-closure).
-{: important}
-
-
-Mexico City (MEX01) is deprecated and becomes unsupported later this year. To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your MEX01 clusters by 31 October 2022. Clusters remaining in this data center after 31 October 2022 will be removed. You cannot create clusters in this location after 07 May 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/get-support?topic=get-support-dc-closure).
-{: important}
 
 | Geography |  Country  | Metro | Data center |  Previous region  |
 |-----|-----|-----|-----|-----|
@@ -226,7 +221,7 @@ By default, you are logged in to the global {{site.data.keyword.containerlong_no
 When you use the new global functionality in the {{site.data.keyword.containerlong_notm}} CLI, consider the following changes from the legacy region-based functionality.
 
 * Listing resources:
-    * When you list resources, such as with the `ibmcloud ks cluster ls`, `ibmcloud ks subnets`, or `ibmcloud ks zone ls` commands, resources in all locations are returned. To filter resources by a specific location, certain commands include a `--location` option. For example, if you filter clusters for the `wdc` metro, multizone clusters in that metro and single-zone clusters in data centers (zones) within that metro are returned. If you filter clusters for the `wdc06` data center (zone), multizone clusters that have a worker node in that zone and single-zone clusters in that zone are returned. `ibmcloud ks cluster ls -l dal -l seo`.
+    * When you list resources, such as with the `ibmcloud ks cluster ls`, `ibmcloud ks subnets`, or `ibmcloud ks zone ls` commands, resources in all locations are returned. To filter resources by a specific location, certain commands include a `--location` option. For example, if you filter clusters for the `wdc` metro, multizone clusters in that metro and single-zone clusters in data centers (zones) within that metro are returned. If you filter clusters for the `wdc06` data center (zone), multizone clusters that have a worker node in that zone and single-zone clusters in that zone are returned. `ibmcloud ks cluster ls -l dal`.
 
     * Other commands don't return resources in all locations. To run `credential set/unset/get`, `api-key reset`, and `vlan spanning get` commands, you must specify a region in the `--region`.
 
@@ -290,7 +285,7 @@ To switch regions, use the `ibmcloud ks init` [command](/docs/containers?topic=c
 
 | {{site.data.keyword.containerlong_notm}} region | Corresponding {{site.data.keyword.cloud_notm}} regions | Available zones in the region |
 | --- | --- | --- |
-| AP North (standard clusters only) | Tokyo | che01, seo01, sng01, **tok02, tok04, tok05** |
+| AP North (standard clusters only) | Tokyo | che01, sng01, **tok02, tok04, tok05** |
 | AP South | Sydney | **syd01, syd04, syd05** |
 | EU Central | Frankfurt | ams03, **fra02, fra04, fra05**, mil01, par01 |
 | UK South | London | lon02, **lon04, lon05, lon06** |

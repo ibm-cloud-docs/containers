@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2021, 2022
-lastupdated: "2022-11-11"
+  years: 2021, 2023
+lastupdated: "2023-01-30"
 
 keywords: kubernetes, iks, ingress, monitoring
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 

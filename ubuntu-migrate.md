@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2022
-lastupdated: "2022-12-14"
+  years: 2022, 2023
+lastupdated: "2023-01-30"
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Migrating to a new Ubuntu version

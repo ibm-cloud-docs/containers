@@ -505,9 +505,6 @@ toc:
               - ts-ingress-vpc-app.md
               - ts-ingress-iks-no-subdomain-create.md
               - ts-ingress-subdomain-dupe-name.md
-              - ts-ingress-no-secret.md
-              - ts-ingress-secret-expiry.md
-              - ts-ingress-alb-secret.md
               - ts-ingress-alb-pods-nodes.md
               - ts-ingress-alb-no-deploy-zone.md
               - ts-ingress-source-ip-tainted.md

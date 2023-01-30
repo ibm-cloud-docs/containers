@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2022
-lastupdated: "2022-12-12"
+  years: 2014, 2023
+lastupdated: "2023-01-30"
 
 keywords: kubernetes, 1.21, versions, update, upgrade
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # 1.21 version information and update actions

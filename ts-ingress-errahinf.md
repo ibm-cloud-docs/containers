@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-01-06"
+lastupdated: "2023-01-30"
 
 keywords: containers, ingress status, troubleshoot ingress, errahinf
 
@@ -12,6 +12,7 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Why is the health check Ingress resource missing from my cluster?

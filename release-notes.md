@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-25"
+lastupdated: "2023-01-30"
 
 keywords: kubernetes, release notes
 
@@ -13,6 +13,7 @@ content-type: release-note
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 
@@ -29,6 +30,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## January 2023
 {: #containers-jan23}
+
+
+### 30 January 2023
+{: #containers-jan3023}
+{: release-note}
+
+New! Optional secondary disks for worker nodes in VPC clusters.
+:   When you create a VPC cluster, you can specify an optional secondary disk for your worker nodes. Secondary disks are used for the container runtime and are useful in scenarios where more container storage is needed, such as running pods with large images. For more information, see [Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
+
+
+CLI version `1.0.489`.
+:   For more information, see the [change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
+
+Ingress ALB version `1.5.1_3705_iks`, `1.4.0_3703_iks`, and `1.3.1_3704_iks`.
+:   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
 
 
 ### 24 January 2023

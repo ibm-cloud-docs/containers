@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-09"
+lastupdated: "2023-01-30"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, classic, create
 
@@ -12,6 +12,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Creating classic clusters
