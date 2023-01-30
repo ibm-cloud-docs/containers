@@ -262,6 +262,14 @@ subcollection: containers
 
 * [January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan23)
 
+    * [30 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan3023)
+
+        * New! Optional secondary disks for worker nodes in VPC clusters.
+
+        * CLI version `1.0.489`.
+
+        * Ingress ALB version `1.5.1_3705_iks`, `1.4.0_3703_iks`, and `1.3.1_3704_iks`.
+
     * [24 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan2423)
 
         * CLI version 1.0.487 change log update
