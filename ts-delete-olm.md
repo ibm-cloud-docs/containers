@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2022, 2022
-lastupdated: "2022-12-09"
+  years: 2022, 2023
+lastupdated: "2023-01-30"
 
 keywords: kubernetes, OLM, operator lifecycle manager, delete olm, delete operator lifecycle manager components
 
@@ -13,6 +13,7 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 

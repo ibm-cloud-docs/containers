@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-01-25"
+lastupdated: "2023-01-30"
 
 keywords: kubernetes
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 
@@ -60,7 +61,7 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
             * [`ibmcloud ks cluster master private-service-endpoint allowlist disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist_disable)
             * [`ibmcloud ks cluster master private-service-endpoint allowlist enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist_enable)
             * [`ibmcloud ks cluster master private-service-endpoint allowlist get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist_get)
-            * [`ibmcloud ks cluster master private-service-endpoint allowlist rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist_rm)
+            * [`ibmcloud ks cluster master private-service-endpoint allowlist remove`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist_rm)
         * [`ibmcloud ks cluster master private-service-endpoint enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_enable)
     * **`cluster master public-service-endpoint`**: Manage the public service endpoint of a cluster.
         * [`ibmcloud ks cluster master public-service-endpoint disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pub_se_disable)

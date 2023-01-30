@@ -14,6 +14,7 @@ subcollection: containers
 
 
 
+
 # Customizing ALB routing 
 {: #comm-ingress-annotations}
 
@@ -33,7 +34,7 @@ To add a server port to the client request before the request is forwarded to yo
 ## Routing incoming requests with a private ALB
 {: #alb_id_anno}
 
-To route incoming requests to your apps with a private ALB, specify the `private-iks-k8s-nginx` class annotation in the [Ingress resource](/docs/containers?topic=containers-managed-ingress-setup#managed-ingress-steps-resource). Private ALBs are configured to use resources with this class.
+To route incoming requests to your apps with a private ALB, specify the `private-iks-k8s-nginx` class annotation in the [Ingress resource](/docs/containers?topic=containers-managed-ingress-setup). Private ALBs are configured to use resources with this class.
 {: shortdesc}
 
 ```sh

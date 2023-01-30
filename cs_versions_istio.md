@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-10"
+lastupdated: "2023-01-30"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 

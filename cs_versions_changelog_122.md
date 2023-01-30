@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-01-24"
+lastupdated: "2023-01-30"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 Kubernetes version 1.22 is unsupported as of 20 January 2023. Update your cluster to at least [version 1.23](/docs/containers?topic=containers-cs_versions_123) as soon as possible.
 {: note}

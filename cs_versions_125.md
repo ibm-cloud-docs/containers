@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2022, 2022
-lastupdated: "2022-12-19"
+  years: 2022, 2023
+lastupdated: "2023-01-30"
 
 keywords: kubernetes, containers, 125, version 125, 125 update actions
 
@@ -12,6 +12,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # 1.25 version information and update actions

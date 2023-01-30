@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-01-25"
+lastupdated: "2023-01-30"
 
 keywords: ingress, alb, application load balancer, nginx, ingress controller, network traffic, exposing apps
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Ingress in {{site.data.keyword.cloud_notm}}

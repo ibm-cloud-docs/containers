@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2022, 2022
-lastupdated: "2022-12-12"
+  years: 2022, 2023
+lastupdated: "2023-01-30"
 
 keywords: kubernetes, containers
 
@@ -12,6 +12,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # 1.24 version information and update actions
