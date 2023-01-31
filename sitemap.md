@@ -264,6 +264,8 @@ subcollection: containers
 
     * [30 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan3023)
 
+        * Worker node fix packs `1.23.16_1561`, `1.24.10_1552`, and `1.25.6_1530`.
+
         * New! Optional secondary disks for worker nodes in VPC clusters.
 
         * CLI version `1.0.489`.
