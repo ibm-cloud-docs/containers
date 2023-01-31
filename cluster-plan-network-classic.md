@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-01-31"
 
 keywords: kubernetes network, classic
 
@@ -147,6 +147,9 @@ To make your apps externally accessible from the public internet, you can create
 For additional security, you can isolate networking workloads to gateway worker nodes and edge worker nodes.
 Gateway-enabled classic clusters
 :    Gateway worker nodes help you achieve network connectivity separation between the internet or an on-premises data center and the compute workload that runs in your cluster. When you create a classic cluster with a gateway, the cluster is created with a `compute` worker pool of compute worker nodes that are connected to a private VLAN only, and a `gateway` worker pool of gateway worker nodes that are connected to public and private VLANs. The gateway worker pool provides an edge firewall in the form of Calico policies for ingress and egress traffic, load balancers for ingress traffic to the cluster, and a gateway for egress traffic from the cluster. All NLB pods deploy to the gateway worker nodes, which are also tainted so that no compute workloads can be scheduled onto them. Then, if you want to provide another level of network separation between the public network and your worker pools of compute worker nodes, you can optionally create an edge worker pool. When you create an edge node worker pool in a gateway-enabled cluster, ALB pods are deployed to only those specified worker nodes. By deploying only ALBs to edge nodes, all layer 7 proxy management is kept separate from the gateway worker nodes so that TLS termination and HTTP request routing is completed by the ALBs on the private network only.
+
+Gateway-enabled clusters are deprecated and become unsupported soon. If you have a gateway-enabled cluster, plan to create a new cluster before support ends. If you need similar functionality to gateway-enabled clusters, consider creating a cluster on VPC infrastructure. For more information, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_vpc_basics). To get started creating a VPC cluster, see [Creating a standard VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
+{: deprecated}
 
 Classic clusters without a gateway
 :    Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes that are connected to public VLANs to be accessed externally and by isolating the networking workload. When you [label worker nodes as edge nodes](/docs/containers?topic=containers-edge#edge_nodes), NLB and ALB pods are deployed to only those specified worker nodes. To also prevent other workloads from running on edge nodes, you can [taint the edge nodes](/docs/containers?topic=containers-edge#edge_workloads). Then, you can deploy both public and private NLBs and ALBs to edge nodes.

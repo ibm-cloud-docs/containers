@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-01-31"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -161,6 +161,9 @@ The following diagram shows how Ingress directs communication from the internet 
 
 ### Gateway-enabled cluster
 {: #classic-gateway}
+
+Gateway-enabled clusters are deprecated and become unsupported soon. If you have a gateway-enabled cluster, plan to create a new cluster before support ends. If you need similar functionality to gateway-enabled clusters, consider creating a cluster on VPC infrastructure. For more information, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_vpc_basics). To get started creating a VPC cluster, see [Creating a standard VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
+{: deprecated}
 
 The following diagram shows how Ingress directs communication from the internet to an app in a [classic gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway).
 {: shortdesc}
