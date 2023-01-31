@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-01-18"
+lastupdated: "2023-01-31"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -38,6 +38,21 @@ Review the version 1.25 change log.
 {: shortdesc}
 
 
+
+
+### Change log for worker node fix pack 1.25.6_1530, released 30 January 2023
+{: #1256_1530}
+
+The following table shows the changes that are in the worker node fix pack 1.25.6_1530. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2018-20217](https://nvd.nist.gov/vuln/detail/CVE-2018-20217){: external},[CVE-2022-23521](https://nvd.nist.gov/vuln/detail/CVE-2022-23521){: external},[CVE-2022-28321](https://nvd.nist.gov/vuln/detail/CVE-2022-28321){: external},[CVE-2022-40897](https://nvd.nist.gov/vuln/detail/CVE-2022-40897){: external},[CVE-2022-40898](https://nvd.nist.gov/vuln/detail/CVE-2022-40898){: external},[CVE-2022-41903](https://nvd.nist.gov/vuln/detail/CVE-2022-41903){: external},[CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external},[CVE-2023-22809](https://nvd.nist.gov/vuln/detail/CVE-2023-22809){: external}. |
+| Ubuntu 20.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2021-33503](https://nvd.nist.gov/vuln/detail/CVE-2021-33503){: external},[CVE-2022-23521](https://nvd.nist.gov/vuln/detail/CVE-2022-23521){: external},[CVE-2022-28321](https://nvd.nist.gov/vuln/detail/CVE-2022-28321){: external},[CVE-2022-3094](https://nvd.nist.gov/vuln/detail/CVE-2022-3094){: external},[CVE-2022-40897](https://nvd.nist.gov/vuln/detail/CVE-2022-40897){: external},[CVE-2022-40898](https://nvd.nist.gov/vuln/detail/CVE-2022-40898){: external},[CVE-2022-41903](https://nvd.nist.gov/vuln/detail/CVE-2022-41903){: external},[CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external},[CVE-2023-0056](https://nvd.nist.gov/vuln/detail/CVE-2023-0056){: external},[CVE-2023-22809](https://nvd.nist.gov/vuln/detail/CVE-2023-22809){: external}. |
+| Kubernetes | 1.25.5 | 1.25.6 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.6){: external}. |
+| HAPROXY | 508bf6 | 8d6ea6 | [CVE-2022-42010](https://nvd.nist.gov/vuln/detail/CVE-2022-42010){: external},[CVE-2022-42011](https://nvd.nist.gov/vuln/detail/CVE-2022-42011){: external},[CVE-2022-42012](https://nvd.nist.gov/vuln/detail/CVE-2022-42012){: external},[CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external},[CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40304){: external},[CVE-2022-3821](https://nvd.nist.gov/vuln/detail/CVE-2022-3821){: external},[CVE-2022-35737](https://nvd.nist.gov/vuln/detail/CVE-2022-35737){: external},[CVE-2022-43680](https://nvd.nist.gov/vuln/detail/CVE-2022-43680){: external},[CVE-2021-46848](https://nvd.nist.gov/vuln/detail/CVE-2021-46848){: external}. |
+{: caption="Changes since version 1.25.5_1528" caption-side="top"}
 
 
 ### Change log for worker node fix pack 1.25.5_1528, released 16 January 2023
@@ -222,4 +237,5 @@ The following table shows the changes that are in the worker node fix pack 1.25.
 | Kubernetes DNS autoscaler | 1.8.5 | 1.8.6 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.8.6){: external}. In addition, CPU resource requests were reduced from `5m` to `1m` to better align with normal resource utilization. |
 | Pause container image | 3.7 | 3.8 | See the [pause container image release notes](https://github.com/kubernetes/kubernetes/blob/master/build/pause/CHANGELOG.md){: external}. |
 {: caption="Changes since version 1.24.6_1538 master and 1.24.6_1539 worker node."}
+
 
