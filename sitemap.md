@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-01-31"
 
 keywords: containers
 subcollection: containers
@@ -263,6 +263,8 @@ subcollection: containers
 * [January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan23)
 
     * [30 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan3023)
+
+        * Worker node fix packs `1.23.16_1561`, `1.24.10_1552`, and `1.25.6_1530`.
 
         * New! Optional secondary disks for worker nodes in VPC clusters.
 
@@ -6281,6 +6283,8 @@ subcollection: containers
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
 
+    * [Change log for worker node fix pack 1.25.6_1530, released 30 January 2023](/docs/containers?topic=containers-changelog_125#1256_1530)
+
     * [Change log for worker node fix pack 1.25.5_1528, released 16 January 2023](/docs/containers?topic=containers-changelog_125#1255_1528)
 
     * [Change log for worker node fix pack 1.25.5_1527, released 02 January 2023](/docs/containers?topic=containers-changelog_125#1255_1527)
@@ -6365,6 +6369,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.10_1552, released 30 January 2023](/docs/containers?topic=containers-changelog_124#12410_1552)
 
     * [Change log for worker node fix pack 1.24.9_1550, released 16 January 2023](/docs/containers?topic=containers-changelog_124#1249_1550)
 
@@ -6476,6 +6482,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for worker node fix pack 1.23.16_1561, released 30 January 2023](/docs/containers?topic=containers-changelog_123#12316_1561)
 
     * [Change log for worker node fix pack 1.23.15_1558, released 16 January 2023](/docs/containers?topic=containers-changelog_123#12315_1558)
 
@@ -6594,6 +6602,11 @@ subcollection: containers
     * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-123#cis-benchmark-56-123)
 
 * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-123#cis-benchmark-remediations-123)
+
+
+## Archived version history
+{: #sitemap_archived_version_history}
+
 
 
 ### Version 1.22
@@ -6920,11 +6933,6 @@ subcollection: containers
     * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-121#cis-benchmark-56-121)
 
 * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-121#cis-benchmark-remediations-121)
-
-
-## Archived version history
-{: #sitemap_archived_version_history}
-
 
 
 ### Version 1.20

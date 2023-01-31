@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-10"
+lastupdated: "2023-01-31"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, delete
 
@@ -12,6 +12,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 
@@ -422,6 +423,9 @@ To add a zone with worker nodes to your worker pool:
 
 ## Adding worker nodes in gateway-enabled classic clusters
 {: #gateway_pools}
+
+Gateway-enabled clusters are deprecated and become unsupported soon. If you have a gateway-enabled cluster, plan to create a new cluster before support ends. If you need similar functionality to gateway-enabled clusters, consider creating a cluster on VPC infrastructure. For more information, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_vpc_basics). To get started creating a VPC cluster, see [Creating a standard VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
+{: deprecated}
 
 By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. These pools are created with specific labels for compute or gateway functionality. Add compute or gateway worker nodes, depending on your use case.
 {: shortdesc}

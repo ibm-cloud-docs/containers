@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-01-31"
 
 keywords: kubernetes, release notes
 
@@ -31,10 +31,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## January 2023
 {: #containers-jan23}
 
-
 ### 30 January 2023
 {: #containers-jan3023}
 {: release-note}
+
+
+
+Worker node fix packs `1.23.16_1561`, `1.24.10_1552`, and `1.25.6_1530`.
+:   For more information, see the change logs: [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), and [1.25](/docs/containers?topic=containers-changelog_125).
+
+
 
 New! Optional secondary disks for worker nodes in VPC clusters.
 :   When you create a VPC cluster, you can specify an optional secondary disk for your worker nodes. Secondary disks are used for the container runtime and are useful in scenarios where more container storage is needed, such as running pods with large images. For more information, see [Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
@@ -1134,7 +1140,7 @@ CLI change log update
 
 
 Cluster security groups
-:   You can now specify up to five security groups to attach to workers when you create a VPC cluster. For more information, see [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cluster).
+:   You can now specify up to five security groups to attach to workers when you create a VPC cluster. For more information, see [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group).
 
 ### 26 April 2022
 {: #containers-apr2622}
@@ -3385,7 +3391,7 @@ CLI changelog
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.178](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 Ingress secret expiration synchronization
-:   Added a troubleshooting topic for when [Ingress secret expiration dates are out of sync or are not updated](/docs/containers?topic=containers-sync_cert_dates).
+:   Added a troubleshooting topic for when Ingress secret expiration dates are out of sync or are not updated.
 
 
 

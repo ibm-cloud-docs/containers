@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-01-31"
 
 keywords: kubernetes, lb2.0, nlb, app protocol, application protocol
 
@@ -96,6 +96,9 @@ The following diagram shows how a network load balancer (NLB) 1.0 directs commun
 ### Traffic flow in a gateway-enabled cluster
 {: #v1_gateway}
 
+Gateway-enabled clusters are deprecated and become unsupported soon. If you have a gateway-enabled cluster, plan to create a new cluster before support ends. If you need similar functionality to gateway-enabled clusters, consider creating a cluster on VPC infrastructure. For more information, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_vpc_basics). To get started creating a VPC cluster, see [Creating a standard VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
+{: deprecated}
+
 The following diagram shows how an NLB 1.0 directs communication from the internet to an app in a [gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway).
 {: shortdesc}
 
@@ -159,6 +162,9 @@ The following diagram shows how version 2.0 NLBs in each zone direct traffic fro
 
 ### Traffic flow in a gateway-enabled cluster
 {: #v2_gateway}
+
+Gateway-enabled clusters are deprecated and become unsupported soon. If you have a gateway-enabled cluster, plan to create a new cluster before support ends. If you need similar functionality to gateway-enabled clusters, consider creating a cluster on VPC infrastructure. For more information, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_vpc_basics). To get started creating a VPC cluster, see [Creating a standard VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
+{: deprecated}
 
 The following diagram shows how an NLB 2.0 directs communication from the internet to an app in a [gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway).
 {: shortdesc}

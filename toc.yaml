@@ -307,7 +307,10 @@ toc:
               topics:
               - cs_versions_123.md
               - cs_versions_changelog_123.md
-              - cs_benchmarks_123.md
+              - cs_benchmarks_123.md  
+      - topicgroup:
+          label: Archived version history
+          topics:
           - topicgroup:
               label: Version 1.22
               topics:
@@ -319,10 +322,7 @@ toc:
               topics:
               - cs_versions_121.md
               - cs_versions_changelog_121.md
-              - cs_benchmarks_121.md   
-      - topicgroup:
-          label: Archived version history
-          topics:
+              - cs_benchmarks_121.md 
           - topicgroup:
               label: Version 1.20 
               topics:
