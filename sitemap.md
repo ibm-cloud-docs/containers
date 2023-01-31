@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-01-31"
 
 keywords: containers
 subcollection: containers
@@ -6596,6 +6596,11 @@ subcollection: containers
 * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-123#cis-benchmark-remediations-123)
 
 
+## Archived version history
+{: #sitemap_archived_version_history}
+
+
+
 ### Version 1.22
 {: #sitemap_version_122}
 
@@ -6920,11 +6925,6 @@ subcollection: containers
     * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-121#cis-benchmark-56-121)
 
 * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-121#cis-benchmark-remediations-121)
-
-
-## Archived version history
-{: #sitemap_archived_version_history}
-
 
 
 ### Version 1.20
