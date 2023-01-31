@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2023
-lastupdated: "2023-01-26"
+lastupdated: "2023-01-31"
 
 keywords: secret, certificate, field, tls, non-tls, rotate, ingress
 
@@ -11,6 +11,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 # Managing TLS and non-TLS certificates and secrets
 {: #secrets}
@@ -87,7 +88,7 @@ Follow the steps to use the default TLS certificate for the IBM-provided Ingress
     ```
     {: pre}
 
-    To copy the secret with the `ibmcloud ks ingress secret create` command, you must have a default [{{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr) instance registered to your cluster. If you do not have a {{site.data.keyword.secrets-manager_short}} instance and your secrets are instead written directly to your cluster, your secrets do not have the required CRN value and you must manually copy them with `kubectl` commands. 
+    To copy the secret with the **`ibmcloud ks ingress secret create`** command, you must have a default [{{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr) instance registered to your cluster. If you do not have a {{site.data.keyword.secrets-manager_short}} instance and your secrets are instead written directly to your cluster, your secrets do not have the required CRN value and you must manually copy them with `kubectl` commands. 
     {: important}
 
 
