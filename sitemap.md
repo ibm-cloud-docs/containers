@@ -270,6 +270,10 @@ subcollection: containers
 
         * Worker node fix pack
 
+        * Persistent VPC load balancers
+
+        * Customized VPC load balancer health checks
+
 * [January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan23)
 
     * [30 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan3023)
@@ -4738,7 +4742,17 @@ subcollection: containers
 
     * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
 
+* [Persistent VPC load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_persist)
+
+* [Moving a VPC load balancer from one cluster to another](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move)
+
+    * [Detatching a VPC load balancer from a cluster](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move_detach)
+
+    * [Attaching a VPC load balancer to a cluster](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move_attach)
+
 * [Health checks for load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_health)
+
+    * [Customizing health checks for VPC load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_health_custom)
 
     * [Enabling TCP health checks for UDP load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_health_udp)
 

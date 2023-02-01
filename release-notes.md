@@ -48,6 +48,12 @@ Worker node fix pack
 
 
 
+Persistent VPC load balancers
+:   You can now create a [persistent VPC load balancer](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_persist) that remains available even after your cluster is deleted. 
+
+Customized VPC load balancer health checks
+:   For more control over your VPC load balancer health checks, you can use [optional annotations](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_health_custom) to customize your health checks with advanced configurations for test intervals, timeouts, and retries.
+
 ## January 2023
 {: #containers-jan23}
 
