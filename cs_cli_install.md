@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-01"
 
 keywords: kubernetes, ic, ks, kubectl
 
@@ -118,7 +118,7 @@ Using both {{site.data.keyword.openshiftlong_notm}} and Ubuntu {{site.data.keywo
         ```
         {: pre}
 
-2. Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.24. [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/).
+2. Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.25. [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/).
 
 3. If you use OS X or Linux, move the executable file to the `/usr/local/bin` directory.
     ```sh
@@ -144,7 +144,7 @@ Using both {{site.data.keyword.openshiftlong_notm}} and Ubuntu {{site.data.keywo
     ```
     {: pre}
 
-6. If you have clusters that run different versions of Kubernetes, such as 1.24.9 and 1.23.16, download each `kubectl` version binary file to a separate directory. Then, you can set up an alias in your local command-line interface profile to point to the `kubectl` binary file directory that matches the `kubectl` version of the cluster that you want to work with, or [run the CLI from a container](#cs_cli_container).
+6. If you have clusters that run different versions of Kubernetes, such as 1.25.6 and 1.24.16, download each `kubectl` version binary file to a separate directory. Then, you can set up an alias in your local command-line interface profile to point to the `kubectl` binary file directory that matches the `kubectl` version of the cluster that you want to work with, or [run the CLI from a container](#cs_cli_container).
 7. **Optional**: [Enable autocompletion for `kubectl` commands](https://kubernetes.io/docs/tasks/tools/#enabling-shell-autocompletion){: external}. The steps vary depending on the shell that you use.
 
 Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters&interface=ui).
@@ -186,7 +186,7 @@ Before you begin, [install Docker for Mac](https://docs.docker.com/desktop/insta
 You can use the commands that are provided with the Kubernetes CLI to manage clusters in {{site.data.keyword.cloud_notm}}.
 {: shortdesc}
 
-All `kubectl` commands that are available in Kubernetes 1.24 are supported for use with clusters in {{site.data.keyword.cloud_notm}}. After you create a cluster, set the context for your local CLI to that cluster with an environment variable. Then, you can run the Kubernetes `kubectl` commands to work with your cluster in {{site.data.keyword.cloud_notm}}.
+All `kubectl` commands that are available in Kubernetes 1.25 are supported for use with clusters in {{site.data.keyword.cloud_notm}}. After you create a cluster, set the context for your local CLI to that cluster with an environment variable. Then, you can run the Kubernetes `kubectl` commands to work with your cluster in {{site.data.keyword.cloud_notm}}.
 
 Before you can run `kubectl` commands:
 * [Install the required CLIs](#cs_cli_install).
@@ -385,7 +385,7 @@ Update the CLIs regularly to use new features.
 This task includes the information for updating the following CLIs:
 - {{site.data.keyword.cloud_notm}} CLI version 0.8.0 or later
 - {{site.data.keyword.containerlong_notm}} plug-in
-- Kubernetes CLI version 1.24 or later
+- Kubernetes CLI version 1.25 or later
 - {{site.data.keyword.registrylong_notm}} plug-in
 - {{site.data.keyword.containerlong_notm}} observability plug-in
 
