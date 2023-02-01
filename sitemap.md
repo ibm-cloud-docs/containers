@@ -4994,9 +4994,7 @@ subcollection: containers
 
     * [What functionality can I gain with {{site.data.keyword.secrets-manager_short}}?](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about_functionality)
 
-    * [What types of secrets are supported with {{site.data.keyword.secrets-manager_short}}?](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about_types)
-
-    * [What is the difference between the `ibmcloud ks ingress instance` CLI commands and the `ibmcloud ks ingress secret` CLI commands?](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about_cli)
+* [{{site.data.keyword.secrets-manager_short}} FAQ](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_migration_faq)
 
 * [Setting up your {{site.data.keyword.secrets-manager_short}} instance](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_setup)
 
