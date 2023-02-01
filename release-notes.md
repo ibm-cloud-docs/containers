@@ -32,9 +32,11 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-feb23}
 
 
+
 ### 01 February 2023
 {: #containers-feb0123}
 {: release-note}
+
 
 
 New! Kubernetes 1.26
