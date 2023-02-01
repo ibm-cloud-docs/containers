@@ -5002,6 +5002,8 @@ subcollection: containers
 
     * [Managing non-TLS secret fields](/docs/containers?topic=containers-secrets#non-tls-field)
 
+* [Secrets FAQ](/docs/containers?topic=containers-secrets#secrets-faq)
+
 [Setting up {{site.data.keyword.secrets-manager_short}} in your {{site.data.keyword.containershort}} cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr)
 
 * [About {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about)

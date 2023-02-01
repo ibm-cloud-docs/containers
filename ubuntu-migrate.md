@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-01"
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
 
@@ -20,7 +20,7 @@ subcollection: containers
 To migrate your worker nodes to a new Ubuntu version, you must provision a new worker pool. Then, add worker nodes to the new pool and remove the original worker pool. 
 {: shortdesc}
 
-Starting in February 2023, Ubuntu 20 becomes the default operating system for all supported {{site.data.keyword.containerlong_notm}} cluster versions. Ubuntu 18 becomes unsupported on 30 April 2023. To avoid disruptions to your workload, migrate your worker nodes from Ubuntu 18 to Ubuntu 20 as soon as possible.
+Ubuntu 20 is the [default operating system](/docs/containers?topic=containers-cs_versions) for all supported {{site.data.keyword.containerlong_notm}} cluster versions. 
 {: note}
 
 With the release of Ubuntu 20, some worker node flavors are deprecated. If you have worker nodes with these flavors, you must provision worker nodes with a new flavor during the migration process. The deprecated flavors are: `mb3c.4x32, mb3c.16x64, ms3c.4x32.1.9tb.ssd, ms3c.16x64.1.9tb.ssd, ms3c.28x256.3.8tb.ssd, ms3c.28x512.4x3.8tb.ssd, mr3c.28x512, md3c.16x64.4x4tb, md3c.28x512.4x4tb, mg3c.16x128, mg3c.28x256`.
