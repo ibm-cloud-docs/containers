@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-01"
 
 keywords: kubernetes, containers
 
@@ -23,13 +23,14 @@ subcollection: containers
 Deploy highly available containerized apps in Kubernetes clusters and use the powerful tools of {{site.data.keyword.containerlong}} to automate, isolate, secure, manage, and monitor your workloads across zones or regions.
 {: shortdesc}
 
-First, create a cluster with a few clicks in the {{site.data.keyword.cloud_notm}} console. Then, deploy your first containerized app to your cluster through the Kubernetes dashboard.
+First, create a cluster in the {{site.data.keyword.cloud_notm}} console or {{site.data.keyword.containerlong_notm}} CLI. Then, deploy your first containerized app to your cluster.
 
 To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {{site.data.keyword.cloud_notm}} account](/docs/account?topic=account-upgrading-account) where you are the owner or have [full Administrator access](/docs/account?topic=account-assign-access-resources).
 {: note}
 
-## Creating a free classic cluster
+## Creating a free classic cluster in the {{site.data.keyword.cloud_notm}} console
 {: #clusters_gs}
+{: ui}
 
 Set up your free classic cluster with one worker node by using the {{site.data.keyword.cloud_notm}} console. For more information about free clusters, such as expiration and limited capabilities, see the [FAQ](/docs/containers?topic=containers-faqs#faq_free).
 {: shortdesc}
@@ -43,8 +44,9 @@ Set up your free classic cluster with one worker node by using the {{site.data.k
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
 
 
-## Creating a VPC cluster
+## Creating a VPC cluster in the {{site.data.keyword.cloud_notm}} console
 {: #vpc-gen2-gs}
+{: ui}
 
 Create a standard VPC cluster by using the {{site.data.keyword.cloud_notm}} console. For more detailed information about your cluster customization options, see [Creating a standard VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
 {: shortdesc}
@@ -61,7 +63,7 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
 2. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 3. Configure your VPC environment.
     1. Select the **Standard** plan.
-    2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.24 or later**.
+    2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.25 or later**.
     3. Select **VPC** infrastructure.
     4. From the **Virtual private cloud** drop-down menu, select the VPC that you created earlier.
 4. Configure the **Location** details for your cluster.
@@ -76,7 +78,69 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
 
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
 
+## Creating classic clusters in the {{site.data.keyword.containerlong_notm}} CLI
+{: #clusters_gs_classic_cli}
+{: cli}
 
+Review the sample commands for creating classic clusters in the CLI. For more detailed steps and information about creating clusters, see [Creating classic clusters](/docs/containers?topic=containers-cluster-create-classic&interface=cli). For information about planning your cluster set up, see [Preparing to create clusters](/docs/containers?topic=containers-clusters&interface=cli).
+{: shortdesc}
+
+Create a free cluster.
+
+```sh
+ibmcloud ks cluster create classic --name my_cluster
+```
+{: pre}
+
+Create a classic cluster on a shared virtual machine.
+
+```sh
+ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+```
+{: pre}
+
+
+Create a classic cluster with bare metal architecture. 
+
+```sh
+ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+```
+{: pre}
+
+Create a classic cluster that uses private VLANs and the private cloud service endpoint only.
+
+```sh
+ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --private-vlan <private_VLAN_ID> --private-only --private-service-endpoint
+```
+{: pre}
+
+
+For a classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-mz), [add zones](/docs/containers?topic=containers-add_workers#add_zone):
+```sh
+ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+```
+{: pre}
+
+## Creating VPC clusters in the CLI
+{: #clusters_gs_vpc_cli}
+{: cli}
+
+Review the sample commands for creating classic clusters in the CLI. For more detailed steps and information about creating clusters, see [Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=cli#cluster_create_vpc). For information about planning your cluster set up, see [Preparing to create clusters](/docs/containers?topic=containers-clusters&interface=cli).
+{: shortdesc}
+
+Create a VPC cluster with three worker nodes.
+
+```sh
+ibmcloud ks cluster create vpc-gen2 --name my_cluster --zone us-east-1 --vpc-id <VPC_ID> --subnet-id <VPC_SUBNET_ID> --flavor b2.4x16 --workers 3
+```
+{: pre}
+
+For a VPC multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-vpc), [add zones](/docs/containers?topic=containers-add_workers#vpc_add_zone).
+
+```sh
+ibmcloud ks zone add vpc-gen2 --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <VPC_SUBNET_ID>
+```
+{: pre}
 
 ## Deploying an app to your cluster
 {: #deploy-app}
@@ -114,9 +178,6 @@ Follow the steps to deploy an example `websphere-liberty` to your free classic c
 10. In a tab in your browser, form the URL of your app by combining `http://` with the public IP and TCP port that you previously retrieved. For example, `http://169.xx.xxx.xxx:32323`. The **Welcome to Liberty** page is displayed.
 
 Great job! You just deployed your first app in your Kubernetes cluster.
-
-
-
 
 ### Deploying an app to a standard cluster and exposing with a load balancer
 {: #deployapp2}

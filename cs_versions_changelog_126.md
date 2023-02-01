@@ -43,16 +43,18 @@ Review the version 1.26 change log.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico configuration | N/A | N/A | Calico configuration now sets a [BGP password](https://projectcalico.docs.tigera.io/reference/resources/bgppeer#bgppassword) and container network sysctl tuning for `net.ipv4.tcp_keepalive_intvl` to `15`, `net.ipv4.tcp_keepalive_probes` to `6` and `net.ipv4.tcp_keepalive_time` to `40`.  |
-| containerd | v1.6.16 | v1.7.0-beta.2 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.7.0-beta.2). In addition, the image pull progress timeout has been configured to 5 minutes. |
+| Calico configuration | N/A | N/A | Calico configuration now sets a [BGP password](https://projectcalico.docs.tigera.io/reference/resources/bgppeer#bgppassword){: external} and container network sysctl tuning for `net.ipv4.tcp_keepalive_intvl` to `15`, `net.ipv4.tcp_keepalive_probes` to `6` and `net.ipv4.tcp_keepalive_time` to `40`.  |
+| containerd | v1.6.16 | v1.7.0-beta.2 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.7.0-beta.2){: external}. In addition, the image pull progress timeout has been configured to 5 minutes. |
 | IBM Cloud Controller Manager | v1.25.6-2 | v1.26.1-2 | Updated to support the Kubernetes `1.26.1` release. Updated `Go` dependencies and to `Go` version `1.19.5`. VPC load balancer creation now honors a user specified name. VPC load balancer update now handles an empty default pool name. |
 | Key Management Service provider | v2.5.13 | v2.6.2 | Delayed KMS pod termination until the Kubernetes API server terminates. Updated `Go` dependencies and to `Go` version `1.19.4`. |
-| Konnectivity agent and server | v0.0.34_491_iks | v0.1.0_503_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.1.0). |
-| Kubernetes | v1.25.6 | v1.26.1 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.1). |
-| Kubernetes configuration | N/A | N/A | Updated the [kube-proxy configuration](https://cloud.ibm.com/docs/containers?topic=containers-service-settings#kube-proxy). |
-| Kubernetes add-on resizer | 1.8.15 | 1.8.16 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.16). In addition, a liveness probe has been configured to improve availability. |
+| Konnectivity agent and server | v0.0.34_491_iks | v0.1.0_503_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.1.0){: external}. |
+| Kubernetes | v1.25.6 | v1.26.1 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.1){: external}. |
+| Kubernetes configuration | N/A | N/A | Updated the [kube-proxy configuration](/docs/containers?topic=containers-service-settings#kube-proxy){: external}. |
+| Kubernetes add-on resizer | 1.8.15 | 1.8.16 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.16){: external}. In addition, a liveness probe has been configured to improve availability. |
 | Kubernetes DNS autoscaler configuration | N/A | N/A | Memory resource requests were increased from `5Mi` to `7Mi` to better align with normal resource utilization. In addition, a liveness probe has been configured to improve availability. |
-| Kubernetes Metrics Server | v0.6.0 | v0.6.2 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.6.2). |
-| Kubernetes NodeLocal DNS cache | 1.22.13 | 1.22.15 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.15). |
-| Pause container image | 3.8 | 3.9 | See the [pause container image release notes](https://github.com/kubernetes/kubernetes/blob/master/build/pause/CHANGELOG.md). |
+| Kubernetes Metrics Server | v0.6.0 | v0.6.2 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.6.2){: external}. |
+| Kubernetes NodeLocal DNS cache | 1.22.13 | 1.22.15 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.15){: external}. |
+| Pause container image | 3.8 | 3.9 | See the [pause container image release notes](https://github.com/kubernetes/kubernetes/blob/master/build/pause/CHANGELOG.md){: external}. |
+{: caption="Changes since version 1.25."}
+
 

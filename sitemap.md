@@ -34,9 +34,13 @@ subcollection: containers
 
 [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started#getting-started)
 
-* [Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs)
+* [Creating a free classic cluster in the {{site.data.keyword.cloud_notm}} console](/docs/containers?topic=containers-getting-started#clusters_gs)
 
-* [Creating a VPC cluster](/docs/containers?topic=containers-getting-started#vpc-gen2-gs)
+* [Creating a VPC cluster in the {{site.data.keyword.cloud_notm}} console](/docs/containers?topic=containers-getting-started#vpc-gen2-gs)
+
+* [Creating classic clusters in the {{site.data.keyword.containerlong_notm}} CLI](/docs/containers?topic=containers-getting-started#clusters_gs_classic_cli)
+
+* [Creating VPC clusters in the CLI](/docs/containers?topic=containers-getting-started#clusters_gs_vpc_cli)
 
 * [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
 
@@ -5001,6 +5005,8 @@ subcollection: containers
     * [Creating a non-TLS secret in your cluster](/docs/containers?topic=containers-secrets#non-tls-create)
 
     * [Managing non-TLS secret fields](/docs/containers?topic=containers-secrets#non-tls-field)
+
+* [Secrets FAQ](/docs/containers?topic=containers-secrets#secrets-faq)
 
 [Setting up {{site.data.keyword.secrets-manager_short}} in your {{site.data.keyword.containershort}} cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr)
 

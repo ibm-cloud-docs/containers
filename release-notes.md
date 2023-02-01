@@ -32,13 +32,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-feb23}
 
 
+
 ### 01 February 2023
 {: #containers-feb0123}
 {: release-note}
 
 
+
 New! Kubernetes 1.26
-:   You can create or [update clusters to Kubernetes version 1.26](/docs/containers?topic=containers-cs_versions_125). With Kubernetes 1.26, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. 
+:   You can create or [update clusters to Kubernetes version 1.26](/docs/containers?topic=containers-cs_versions_126). With Kubernetes 1.26, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. 
 
 Master fix pack
 :   Kubernetes [1.26.1_1519](/docs/containers?topic=containers-changelog_126).

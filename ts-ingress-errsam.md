@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-01-17"
+lastupdated: "2023-02-01"
 
 keywords: kubernetes, help, network, connectivity, errsam, loadbalancer service missing
 
@@ -13,6 +13,7 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Why does the Ingress status show an ERRSAM error?
@@ -70,7 +71,7 @@ Complete the following steps to troubleshoot the issue.
     - **Classic**: If you see errors saying that the IP of the ALB is not available, disable the ALB using the **`ibmcloud ks ingress alb disable`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_disable), then reenable it with the **`ibmcloud ks ingress alb enable classic`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure) and specify the `--ip` flag with a free IP address from the error message.
     - **Classic**: If you see errors saying that no IPs are available, add new portable subnets to the cluster with the **`ibmcloud ks cluster subnet create`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_create).
     - **VPC**: If you see permission issues, review your IAM permissions. For more information, see [Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb).
-    - **VPC**: Ensure that you did not reach your LBaaS instance quota. For more information, see [Quotas and service limits](/docs/vpc?topic=vpc-quotas#alb-quotas) and **`ibmcloud is load-balancers`** [command](/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#load-balancers).
+    - **VPC**: Ensure that you did not reach your LBaaS instance quota. For more information, see [Quotas and service limits](/docs/vpc?topic=vpc-quotas#alb-quotas) and **`ibmcloud is load-balancers`** [command](/docs/vpc?topic=vpc-vpc-reference#lb-anchor).
     
 1. Wait 10 to 15 minutes, then check if the load balancer got an address assigned. If not, check the events again.
 
