@@ -18,7 +18,7 @@ subcollection: containers
 # 1.26 version information and update actions
 {: #cs_versions_126}
 
-Review information about version 1.26 of {{site.data.keyword.containerlong}}, released XXX
+Review information about version 1.26 of {{site.data.keyword.containerlong}}, released 01 February 2023, 
 {: shortdesc}
 
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
