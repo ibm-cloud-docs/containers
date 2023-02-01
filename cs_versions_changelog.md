@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-01"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -41,12 +41,13 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the change logs in the following list. 
 
 Supported Kubernetes versions
+:   [1.26 change log](/docs/containers?topic=containers-changelog_126)
+:   [1.25 change log](/docs/containers?topic=containers-changelog_125)
 :   [1.24 change log](/docs/containers?topic=containers-changelog_124)
-:   [1.23 change log](/docs/containers?topic=containers-changelog_123)
-:   [1.22 change log](/docs/containers?topic=containers-changelog_122)
 
 Deprecated Kubernetes versions
-:   [1.21 change log](/docs/containers?topic=containers-changelog_121) 
+:   [1.23 change log](/docs/containers?topic=containers-changelog_123)
+:   [1.22 change log](/docs/containers?topic=containers-changelog_122)
 
 Unsupported Kubernetes versions 
 :   [Archived change logs](/docs/containers?topic=containers-cs_versions#k8s_version_archive)

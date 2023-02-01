@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-01-31"
+lastupdated: "2023-02-01"
 
 keywords: containers
 subcollection: containers
@@ -259,6 +259,20 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb23)
+
+    * [01 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0123)
+
+        * New! Kubernetes 1.26
+
+        * Master fix pack
+
+        * Worker node fix pack
+
+        * Persistent VPC load balancers
+
+        * Customized VPC load balancer health checks
 
 * [January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan23)
 
@@ -4728,7 +4742,17 @@ subcollection: containers
 
     * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
 
+* [Persistent VPC load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_persist)
+
+* [Moving a VPC load balancer from one cluster to another](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move)
+
+    * [Detatching a VPC load balancer from a cluster](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move_detach)
+
+    * [Attaching a VPC load balancer to a cluster](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move_attach)
+
 * [Health checks for load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_health)
+
+    * [Customizing health checks for VPC load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_health_custom)
 
     * [Enabling TCP health checks for UDP load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_health_udp)
 
@@ -4984,9 +5008,7 @@ subcollection: containers
 
     * [What functionality can I gain with {{site.data.keyword.secrets-manager_short}}?](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about_functionality)
 
-    * [What types of secrets are supported with {{site.data.keyword.secrets-manager_short}}?](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about_types)
-
-    * [What is the difference between the `ibmcloud ks ingress instance` CLI commands and the `ibmcloud ks ingress secret` CLI commands?](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_about_cli)
+* [{{site.data.keyword.secrets-manager_short}} FAQ](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_migration_faq)
 
 * [Setting up your {{site.data.keyword.secrets-manager_short}} instance](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_setup)
 
@@ -6261,6 +6283,29 @@ subcollection: containers
 * [Major differences](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison-major)
 
 * [Minor differences](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison-minor)
+
+
+### Version 1.26
+{: #sitemap_version_126}
+
+
+[1.26 version information and update actions](/docs/containers?topic=containers-cs_versions_126#cs_versions_126)
+
+* [Release timeline](/docs/containers?topic=containers-cs_versions_126#release_timeline_126)
+
+* [Preparing to update](/docs/containers?topic=containers-cs_versions_126#prep-up-126)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions_126#before_126)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions_126#anchor)
+
+[Kubernetes version 1.26 change log](/docs/containers?topic=containers-changelog_126#changelog_126)
+
+* [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
+
+* [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for master fix pack 1.26.1_1519 and worker node fix pack 1.26.1_1520, released 1 February 2022](/docs/containers?topic=containers-changelog_126#1261_1519_and_1261_1520)
 
 
 ### Version 1.25

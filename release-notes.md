@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-31"
+lastupdated: "2023-02-01"
 
 keywords: kubernetes, release notes
 
@@ -27,6 +27,32 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: tip}
 
 
+
+## February 2023
+{: #containers-feb23}
+
+
+### 01 February 2023
+{: #containers-feb0123}
+{: release-note}
+
+
+New! Kubernetes 1.26
+:   You can create or [update clusters to Kubernetes version 1.26](/docs/containers?topic=containers-cs_versions_125). With Kubernetes 1.26, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. 
+
+Master fix pack
+:   Kubernetes [1.26.1_1519](/docs/containers?topic=containers-changelog_126).
+
+Worker node fix pack
+:   Kubernetes [1.26.1_1520](/docs/containers?topic=containers-changelog_126)
+
+
+
+Persistent VPC load balancers
+:   You can now create a [persistent VPC load balancer](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_persist) that remains available even after your cluster is deleted. 
+
+Customized VPC load balancer health checks
+:   For more control over your VPC load balancer health checks, you can use [optional annotations](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_health_custom) to customize your health checks with advanced configurations for test intervals, timeouts, and retries.
 
 ## January 2023
 {: #containers-jan23}
