@@ -289,7 +289,13 @@ toc:
           - cs_versions_overview.md
           - cs_versions_changelog.md
           - benchmarks_overview.md
-          - benchmark-comparison.md  
+          - benchmark-comparison.md 
+          - topicgroup:
+              label: Version 1.26
+              topics:
+              - cs_versions_126.md
+              - cs_versions_changelog_126.md
+              - cs_benchmarks_126.md 
           - topicgroup:
               label: Version 1.25
               topics:

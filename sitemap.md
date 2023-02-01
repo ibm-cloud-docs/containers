@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-01-31"
+lastupdated: "2023-02-01"
 
 keywords: containers
 subcollection: containers
@@ -259,6 +259,16 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb23)
+
+    * [01 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0123)
+
+        * New! Kubernetes 1.26
+
+        * Master fix pack
+
+        * Worker node fix pack
 
 * [January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan23)
 
@@ -6261,6 +6271,29 @@ subcollection: containers
 * [Major differences](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison-major)
 
 * [Minor differences](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison-minor)
+
+
+### Version 1.26
+{: #sitemap_version_126}
+
+
+[1.26 version information and update actions](/docs/containers?topic=containers-cs_versions_126#cs_versions_126)
+
+* [Release timeline](/docs/containers?topic=containers-cs_versions_126#release_timeline_126)
+
+* [Preparing to update](/docs/containers?topic=containers-cs_versions_126#prep-up-126)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions_126#before_126)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions_126#anchor)
+
+[Kubernetes version 1.26 change log](/docs/containers?topic=containers-changelog_126#changelog_126)
+
+* [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
+
+* [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for master fix pack 1.26.1_1519 and worker node fix pack 1.26.1_1520, released 1 February 2022](/docs/containers?topic=containers-changelog_126#1261_1519_and_1261_1520)
 
 
 ### Version 1.25

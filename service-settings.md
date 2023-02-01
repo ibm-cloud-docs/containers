@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-01"
+  years: 2014, 2023
+lastupdated: "2023-02-01"
 
 keywords: kubernetes
 
@@ -12,6 +12,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 
@@ -212,6 +213,7 @@ Review the default settings for the `kube-proxy` worker node component in {{site
 Iptable settings
 :   `iptables-sync-period 300s`
 :   `iptables-min-sync-period 5s`
+:   `iptables-localhost-nodeports false`
 
 Proxy mode
 :   `proxy-mode=iptables`
@@ -231,6 +233,16 @@ Review the feature gates that are applied to all master and worker node componen
 
 
 
+In cluster version 1.26 and later, you can use the **`kubectl get --raw /metrics | grep kubernetes_feature_enabled`** command to determine if a feature gate is enabled or disabled.
+{: tip}
+
+1.26
+:   `CustomCPUCFSQuotaPeriod=true`
+
+```sh
+kubectl get --raw /metrics | grep kubernetes_feature_enabled
+```
+{: pre}
 
 1.25
 :   `CustomCPUCFSQuotaPeriod=true`

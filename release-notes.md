@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-31"
+lastupdated: "2023-02-01"
 
 keywords: kubernetes, release notes
 
@@ -25,6 +25,26 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+
+
+## February 2023
+{: #containers-feb23}
+
+
+### 01 February 2023
+{: #containers-feb0123}
+{: release-note}
+
+
+New! Kubernetes 1.26
+:   You can create or [update clusters to Kubernetes version 1.26](/docs/containers?topic=containers-cs_versions_125). With Kubernetes 1.26, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. 
+
+Master fix pack
+:   Kubernetes [1.26.1_1519](/docs/containers?topic=containers-changelog_126).
+
+Worker node fix pack
+:   Kubernetes [1.26.1_1520](/docs/containers?topic=containers-changelog_126)
 
 
 
