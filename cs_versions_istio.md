@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-02"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -31,7 +31,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 | --- | --- | --- |
 | 1.16 | Yes | 1.23, 1.24, 1.25, 1.26 |
 | 1.15 | Yes | 1.22, 1.23, 1.24, 1.25 |
-| 1.14 | Yes | 1.21, 1.22, 1.23, 1.24, 1.25 |
+| 1.14 | No | 1.21, 1.22, 1.23, 1.24, 1.25 |
 {: caption="Supported Istio versions" caption-side="bottom"}
 
 ## Version 1.16
@@ -207,8 +207,11 @@ Updates in this version
 
 :   Adds a 1G memory limit and a 100M memory request to the `add-on-istio-operator` deployment. This addition resolves an error in which a reconcile loop increased memory usage over time. Because of this change, your Istio operator pod might restart frequently. However, the frequent operator pod restarts do not affect Istio on the cluster and your Kubernetes deployment still matches what was specified in the IOPs. 
 
-## Version 1.14
+## Unsupported: Version 1.14
 {: #v114}
+
+Version 1.14 of the managed Istio add-on is unsupported. 
+{: important}
 
 ### Change log for 1.14.6, released 10 January 2023
 {: #1146}

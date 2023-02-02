@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-01"
+lastupdated: "2023-02-02"
 
 keywords: kubernetes
 
@@ -213,7 +213,7 @@ Review the default settings for the `kube-proxy` worker node component in {{site
 Iptable settings
 :   `iptables-sync-period 300s`
 :   `iptables-min-sync-period 5s`
-:   `iptables-localhost-nodeports false`
+:   **For Kubernetes versions 1.26 and later**: `iptables-localhost-nodeports false`
 
 Proxy mode
 :   `proxy-mode=iptables`

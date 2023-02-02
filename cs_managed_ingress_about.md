@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-02"
 
 keywords: ingress, alb, application load balancer, nginx, ingress controller, network traffic, exposing apps
 
@@ -135,7 +135,7 @@ Setting up Ingress with TLS certificates involves creating or importing secrets.
 ## Getting started with Ingress
 {: #managed-ingress-getstarted}
 
-When you are ready to use Ingress in your cluster, [create an Ingress resource](/docs/containers) to configure your Ingress components, define rules for routing requests, and specify the path to app services. A separate Ingress resource is required for each namespace that contains an app or service that you want to expose.
+When you are ready to use Ingress in your cluster, [create an Ingress resource](/docs/containers?topic=containers-managed-ingress-setup) to configure your Ingress components, define rules for routing requests, and specify the path to app services. A separate Ingress resource is required for each namespace that contains an app or service that you want to expose.
 {: shortdesc}
 
 
