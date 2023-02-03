@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-02"
+lastupdated: "2023-02-03"
 
 keywords: kubernetes, release notes
 
@@ -67,6 +67,13 @@ Customized VPC load balancer health checks
 ### 30 January 2023
 {: #containers-jan3023}
 {: release-note}
+
+
+
+Master fix packs `1.23.16_1560`, `1.24.10_1551`, and `1.25.6_1529`.
+:   For more information, see the change logs: [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), and [1.25](/docs/containers?topic=containers-changelog_125).
+
+
 
 
 

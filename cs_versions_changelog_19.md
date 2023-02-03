@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-03"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -52,7 +52,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.1
 {: shortdesc}
 
 | Component | Previous | Current | Description || -------------- | -------------- | -------------- | ------------- |
-| Docker | 17.06.2 | 18.06.1 | See the [Docker release notes](https://docs.docker.com/engine/release-notes/#18061-ce){: external} |
+| Docker | 17.06.2 | 18.06.1 | See the [Docker release notes](https://docs.docker.com/engine/release-notes/23.0/#18061-ce){: external} |
 {: caption="Table 1. Changes since version 1.9.11_1536" caption-side="bottom"}
 
 
