@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-01-31"
+lastupdated: "2023-02-03"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -40,6 +40,26 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.23 change log.
 {: shortdesc}
+
+
+### Change log for master fix pack 1.23.16_1560, released 30 January 2023
+{: #12316_1560}
+
+The following table shows the changes that are in the master fix pack 1.23.16_1560. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.14 | v1.3.15 | Updated `Go` dependencies and to `Go` version `1.19.4`. |
+| GPU device plug-in and installer | 03fd318 | 79a2232 | Updated `Go` to version `1.19.4`. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1257 | 1280 | Publish s390x image. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.23.14-2 | v1.23.16-3 | Updated to support the `Kubernetes 1.23.16` release. Updated `Go` dependencies. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 421 | 425 | Fixes for [CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external} and [CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external}. |
+| Key Management Service provider | v2.5.12 | v2.5.13 | Updated `Go` dependencies and to `Go` version `1.19.4`. |
+| Konnectivity agent and server | v0.0.33_418_iks | v0.0.34_491_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.34){: external}. |
+| Kubernetes | v1.23.15 | v1.23.16 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.16){: external}. |
+{: caption="Changes since version 1.23.15_1555" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.23.16_1561, released 30 January 2023

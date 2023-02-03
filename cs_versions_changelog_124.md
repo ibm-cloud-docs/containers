@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-01-31"
+lastupdated: "2023-02-03"
 
 keywords: kubernetes, containers
 
@@ -36,6 +36,27 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.24 change log.
 {: shortdesc}
+
+
+### Change log for master fix pack 1.24.10_1551, released 30 January 2023
+{: #12410_1551}
+
+The following table shows the changes that are in the master fix pack 1.24.10_1551. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.14 | v1.3.15 | Updated `Go` dependencies and to `Go` version `1.19.4`. |
+| GPU device plug-in and installer | 03fd318 | 79a2232 | Updated `Go` to version `1.19.4`. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1257 | 1280 | Publish s390x image. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.3.4 | v2.3.6 | Updated `UBI images` to `8.7-1031` |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.24.8-3 | v1.24.10-2 | Updated to support the `Kubernetes 1.24.10` release. Updated `Go` dependencies and to `Go` version `1.19.5`. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 421 | 425 | Fixes for [CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external} and [CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external}. |
+| Key Management Service provider | v2.5.12 | v2.5.13 | Updated `Go` dependencies and to `Go` version `1.19.4`. Changed to focal distribution. |
+| Konnectivity agent and server | v0.0.33_418_iks | v0.0.34_491_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.34){: external}. |
+| Kubernetes | v1.24.9 | v1.24.10 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.10){: external}. |
+{: caption="Changes since version 1.24.9_1547" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.24.10_1552, released 30 January 2023
