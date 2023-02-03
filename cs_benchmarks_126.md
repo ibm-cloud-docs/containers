@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-02-02"
+lastupdated: "2023-02-03"
 
 keywords: kubernetes, containers, benchmarks, 1.26, CIS benchmarks
 
@@ -14,7 +14,7 @@ subcollection: containers
 
 
 
-# Version 1.26 CIS Kubernetes benchmark
+# Version 1.26 CIS Kubernetes benchmark 
 {: #cis-benchmark-126}
 
 The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external} as a framework of specific steps to configure Kubernetes more securely and with standards that are commensurate to various industry regulations. This document contains the results of the version 1.5 CIS Kubernetes benchmark for clusters that run Kubernetes version 1.26. For more information or help understanding the benchmark, see [Using the benchmark](/docs/containers?topic=containers-cis-benchmark).
@@ -321,7 +321,7 @@ Review information from {{site.data.keyword.IBM_notm}} on the CIS Benchmark resu
 | 5.3.2 | {{site.data.keyword.containerlong_notm}} has a set of [Default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy) and [Additional network policies can optionally be added](/docs/containers?topic=containers-network_policies#adding_network_policies){: external}. |
 | 5.4.2 | {{site.data.keyword.containerlong_notm}} can optionally [Enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
 | 5.5.1 | {{site.data.keyword.containerlong_notm}} can optionally [Enable image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec). |
-| 5.6.2 | {{site.data.keyword.containerlong_notm}} does not annotate all pods with [Seccomp profiles](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp){: external}. |
+| 5.6.2 | {{site.data.keyword.containerlong_notm}} does not annotate all pods with [Seccomp profiles](https://kubernetes.io/docs/concepts/security/pod-security-policy/#seccomp){: external}. |
 | 5.6.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that do not set a [Pod or container *securityContext*](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/). |
 | 5.6.4 | {{site.data.keyword.containerlong_notm}} deploys some Kubernetes resources to the default names. |
 {: caption="Explanation and remediation" caption-side="bottom"}

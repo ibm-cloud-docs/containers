@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-02-01"
+lastupdated: "2023-02-03"
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
 
@@ -55,6 +55,6 @@ Review the version 1.26 change log.
 | Kubernetes Metrics Server | v0.6.0 | v0.6.2 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.6.2){: external}. |
 | Kubernetes NodeLocal DNS cache | 1.22.13 | 1.22.15 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.15){: external}. |
 | Pause container image | 3.8 | 3.9 | See the [pause container image release notes](https://github.com/kubernetes/kubernetes/blob/master/build/pause/CHANGELOG.md){: external}. |
-{: caption="Changes since version 1.25."}
+{: caption="Changes since version 1.25." caption-side="bottom"}
 
 

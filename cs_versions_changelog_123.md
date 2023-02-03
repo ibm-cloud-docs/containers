@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-01-31"
+lastupdated: "2023-02-03"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -42,6 +42,26 @@ Review the version 1.23 change log.
 {: shortdesc}
 
 
+### Change log for master fix pack 1.23.16_1560, released 30 January 2023
+{: #12316_1560}
+
+The following table shows the changes that are in the master fix pack 1.23.16_1560. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.14 | v1.3.15 | Updated `Go` dependencies and to `Go` version `1.19.4`. |
+| GPU device plug-in and installer | 03fd318 | 79a2232 | Updated `Go` to version `1.19.4`. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1257 | 1280 | Publish s390x image. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.23.14-2 | v1.23.16-3 | Updated to support the `Kubernetes 1.23.16` release. Updated `Go` dependencies. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 421 | 425 | Fixes for [CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external} and [CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external}. |
+| Key Management Service provider | v2.5.12 | v2.5.13 | Updated `Go` dependencies and to `Go` version `1.19.4`. |
+| Konnectivity agent and server | v0.0.33_418_iks | v0.0.34_491_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.34){: external}. |
+| Kubernetes | v1.23.15 | v1.23.16 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.16){: external}. |
+{: caption="Changes since version 1.23.15_1555" caption-side="bottom"}
+
+
 ### Change log for worker node fix pack 1.23.16_1561, released 30 January 2023
 {: #12316_1561}
 
@@ -54,7 +74,7 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 | Ubuntu 20.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2021-33503](https://nvd.nist.gov/vuln/detail/CVE-2021-33503){: external},[CVE-2022-23521](https://nvd.nist.gov/vuln/detail/CVE-2022-23521){: external},[CVE-2022-28321](https://nvd.nist.gov/vuln/detail/CVE-2022-28321){: external},[CVE-2022-3094](https://nvd.nist.gov/vuln/detail/CVE-2022-3094){: external},[CVE-2022-40897](https://nvd.nist.gov/vuln/detail/CVE-2022-40897){: external},[CVE-2022-40898](https://nvd.nist.gov/vuln/detail/CVE-2022-40898){: external},[CVE-2022-41903](https://nvd.nist.gov/vuln/detail/CVE-2022-41903){: external},[CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external},[CVE-2023-0056](https://nvd.nist.gov/vuln/detail/CVE-2023-0056){: external},[CVE-2023-22809](https://nvd.nist.gov/vuln/detail/CVE-2023-22809){: external}. |
 | Kubernetes | 1.23.15 | 1.23.16 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.16){: external}. |
 | HAPROXY | 508bf6 | 8d6ea6 | [CVE-2022-42010](https://nvd.nist.gov/vuln/detail/CVE-2022-42010){: external},[CVE-2022-42011](https://nvd.nist.gov/vuln/detail/CVE-2022-42011){: external},[CVE-2022-42012](https://nvd.nist.gov/vuln/detail/CVE-2022-42012){: external},[CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external},[CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40304){: external},[CVE-2022-3821](https://nvd.nist.gov/vuln/detail/CVE-2022-3821){: external},[CVE-2022-35737](https://nvd.nist.gov/vuln/detail/CVE-2022-35737){: external},[CVE-2022-43680](https://nvd.nist.gov/vuln/detail/CVE-2022-43680){: external},[CVE-2021-46848](https://nvd.nist.gov/vuln/detail/CVE-2021-46848){: external}. |
-{: caption="Changes since version 1.23.15_1558" caption-side="top"}
+{: caption="Changes since version 1.23.15_1558" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.23.15_1558, released 16 January 2023
@@ -68,7 +88,7 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 | Ubuntu 18.04 packages | 4.15.0-200 | 4.15.0-202 | Worker node kernel & package updates for [CVE-2021-44758](https://nvd.nist.gov/vuln/detail/CVE-2021-44758){: external},[CVE-2022-0392](https://nvd.nist.gov/vuln/detail/CVE-2022-0392){: external},[CVE-2022-2663](https://nvd.nist.gov/vuln/detail/CVE-2022-2663){: external},[CVE-2022-3061](https://nvd.nist.gov/vuln/detail/CVE-2022-3061){: external},[CVE-2022-3437](https://nvd.nist.gov/vuln/detail/CVE-2022-3437){: external},[CVE-2022-3643](https://nvd.nist.gov/vuln/detail/CVE-2022-3643){: external},[CVE-2022-42896](https://nvd.nist.gov/vuln/detail/CVE-2022-42896){: external},[CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external},[CVE-2022-43552](https://nvd.nist.gov/vuln/detail/CVE-2022-43552){: external},[CVE-2022-43945](https://nvd.nist.gov/vuln/detail/CVE-2022-43945){: external},[CVE-2022-44640](https://nvd.nist.gov/vuln/detail/CVE-2022-44640){: external},[CVE-2022-45934](https://nvd.nist.gov/vuln/detail/CVE-2022-45934){: external},[CVE-2022-47629](https://nvd.nist.gov/vuln/detail/CVE-2022-47629){: external}. |
 | Ubuntu 20.04 packages | 5.4.0-135 | 5.4.0-137 | Worker node kernel & package updates for [CVE-2021-44758](https://nvd.nist.gov/vuln/detail/CVE-2021-44758){: external},[CVE-2022-0392](https://nvd.nist.gov/vuln/detail/CVE-2022-0392){: external},[CVE-2022-0417](https://nvd.nist.gov/vuln/detail/CVE-2022-0417){: external},[CVE-2022-2663](https://nvd.nist.gov/vuln/detail/CVE-2022-2663){: external},[CVE-2022-3061](https://nvd.nist.gov/vuln/detail/CVE-2022-3061){: external},[CVE-2022-3437](https://nvd.nist.gov/vuln/detail/CVE-2022-3437){: external},[CVE-2022-3643](https://nvd.nist.gov/vuln/detail/CVE-2022-3643){: external},[CVE-2022-42896](https://nvd.nist.gov/vuln/detail/CVE-2022-42896){: external},[CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external},[CVE-2022-43552](https://nvd.nist.gov/vuln/detail/CVE-2022-43552){: external},[CVE-2022-43945](https://nvd.nist.gov/vuln/detail/CVE-2022-43945){: external},[CVE-2022-44640](https://nvd.nist.gov/vuln/detail/CVE-2022-44640){: external},[CVE-2022-45934](https://nvd.nist.gov/vuln/detail/CVE-2022-45934){: external},[CVE-2022-47629](https://nvd.nist.gov/vuln/detail/CVE-2022-47629){: external}. |
 | Kubernetes |N/A|N/A|N/A|
-{: caption="Changes since version 1.23.15_1557" caption-side="top"}
+{: caption="Changes since version 1.23.15_1557" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.23.15_1557, released 02 January 2023
@@ -82,7 +102,7 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 | Ubuntu 18.04 packages |N/A|N/A|N/A|
 | Ubuntu 20.04 packages |N/A|N/A|N/A|
 | Kubernetes |N/A|N/A|N/A|
-{: caption="Changes since version 1.23.15_1556" caption-side="top"}
+{: caption="Changes since version 1.23.15_1556" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.23.15_1556, released 19 December 2022
@@ -97,7 +117,7 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 | Ubuntu 18.04 packages | 4.15.0-197 | 4.15.0-200 | Worker node kernel & package updates for [CVE-2022-2309](https://nvd.nist.gov/vuln/detail/CVE-2022-2309){: external},[CVE-2022-38533](https://nvd.nist.gov/vuln/detail/CVE-2022-38533){: external},[CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external},[CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40304){: external},[CVE-2022-41916](https://nvd.nist.gov/vuln/detail/CVE-2022-41916){: external},[CVE-2022-45061](https://nvd.nist.gov/vuln/detail/CVE-2022-45061){: external}. |
 | Ubuntu 20.04 packages | 5.4.0-132 | 5.4.0-135 | Worker node kernel & package updates for [CVE-2022-2309](https://nvd.nist.gov/vuln/detail/CVE-2022-2309){: external},[CVE-2022-38533](https://nvd.nist.gov/vuln/detail/CVE-2022-38533){: external},[CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external},[CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40304){: external},[CVE-2022-41916](https://nvd.nist.gov/vuln/detail/CVE-2022-41916){: external}. |
 | Kubernetes | 1.23.14 | 1.23.15 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.15){: external}. |
-{: caption="Changes since version 1.23.14_1554" caption-side="top"}
+{: caption="Changes since version 1.23.14_1554" caption-side="bottom"}
 
 
 ### Change log for master fix pack 1.23.15_1555, released 14 December 2022
@@ -134,7 +154,7 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 | Kubernetes |N/A|N/A|N/A|
 | HAPROXY | c619f4 | 508bf6 | [CVE-2016-3709](https://nvd.nist.gov/vuln/detail/CVE-2016-3709){: external}, [CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external}, [CVE-2022-1304](https://nvd.nist.gov/vuln/detail/CVE-2022-1304){: external}. |
 | CUDA | fd4353 | 0ab756 | [CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external}. |
-{: caption="Changes since version 1.23.14_1553" caption-side="top"}
+{: caption="Changes since version 1.23.14_1553" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.23.14_1553, released 21 November 2022
@@ -148,7 +168,7 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 | Ubuntu 18.04 packages | 4.15.0-194 | 4.15.0-197 | Worker node kernel & package updates for [CVE-2018-16860](https://nvd.nist.gov/vuln/detail/CVE-2018-16860){: external},[CVE-2019-12098](https://nvd.nist.gov/vuln/detail/CVE-2019-12098){: external},[CVE-2020-16156](https://nvd.nist.gov/vuln/detail/CVE-2020-16156){: external},[CVE-2021-3671](https://nvd.nist.gov/vuln/detail/CVE-2021-3671){: external},[CVE-2021-43618](https://nvd.nist.gov/vuln/detail/CVE-2021-43618){: external},[CVE-2022-2978](https://nvd.nist.gov/vuln/detail/CVE-2022-2978){: external},[CVE-2022-3028](https://nvd.nist.gov/vuln/detail/CVE-2022-3028){: external},[CVE-2022-3116](https://nvd.nist.gov/vuln/detail/CVE-2022-3116){: external},[CVE-2022-32221](https://nvd.nist.gov/vuln/detail/CVE-2022-32221){: external},[CVE-2022-3515](https://nvd.nist.gov/vuln/detail/CVE-2022-3515){: external},[CVE-2022-35737](https://nvd.nist.gov/vuln/detail/CVE-2022-35737){: external},[CVE-2022-39253](https://nvd.nist.gov/vuln/detail/CVE-2022-39253){: external},[CVE-2022-39260](https://nvd.nist.gov/vuln/detail/CVE-2022-39260){: external},[CVE-2022-40284](https://nvd.nist.gov/vuln/detail/CVE-2022-40284){: external},[CVE-2022-40674](https://nvd.nist.gov/vuln/detail/CVE-2022-40674){: external},[CVE-2022-40768](https://nvd.nist.gov/vuln/detail/CVE-2022-40768){: external},[CVE-2022-41974](https://nvd.nist.gov/vuln/detail/CVE-2022-41974){: external},[CVE-2022-42010](https://nvd.nist.gov/vuln/detail/CVE-2022-42010){: external},[CVE-2022-42011](https://nvd.nist.gov/vuln/detail/CVE-2022-42011){: external},[CVE-2022-42012](https://nvd.nist.gov/vuln/detail/CVE-2022-42012){: external}. |
 | Kubernetes | 1.23.13 | 1.23.14 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.14){: external}. |
 | CUDA | 576234 | cce0cf | [CVE-2022-3515](https://nvd.nist.gov/vuln/detail/CVE-2022-3515){: external},[CVE-2022-2509](https://nvd.nist.gov/vuln/detail/CVE-2022-2509){: external},[CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external},[CVE-2020-35525](https://nvd.nist.gov/vuln/detail/CVE-2020-35525){: external},[CVE-2020-35527](https://nvd.nist.gov/vuln/detail/CVE-2020-35527){: external}. |
-{: caption="Changes since version 1.23.13_1551" caption-side="top"}
+{: caption="Changes since version 1.23.13_1551" caption-side="bottom"}
 
 
 ### Change log for master fix pack 1.23.14_1552, released 16 November 2022
@@ -185,7 +205,7 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 | Kubernetes | 1.23.12 | 1.23.13 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.13){: external}. |
 | HAPROXY | b034b2 | 3a1392 | [CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external},[CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external},[CVE-2020-35525](https://nvd.nist.gov/vuln/detail/CVE-2020-35525){: external},[CVE-2020-35527](https://nvd.nist.gov/vuln/detail/CVE-2020-35527){: external},[CVE-2022-3515](https://nvd.nist.gov/vuln/detail/CVE-2022-3515){: external},[CVE-2022-2509](https://nvd.nist.gov/vuln/detail/CVE-2022-2509){: external}. |
 | CUDA | 3ea43b | 576234 | [CVE-2022-3515](https://nvd.nist.gov/vuln/detail/CVE-2022-3515){: external},[CVE-2022-2509](https://nvd.nist.gov/vuln/detail/CVE-2022-2509){: external},[CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external},[CVE-2020-35525](https://nvd.nist.gov/vuln/detail/CVE-2020-35525){: external},[CVE-2020-35527](https://nvd.nist.gov/vuln/detail/CVE-2020-35527){: external}. |
-{: caption="Changes since version 1.23.12_1549" caption-side="top"}
+{: caption="Changes since version 1.23.12_1549" caption-side="bottom"}
 
 
 ### Change log for master fix pack 1.23.13_1550, released 27 October 2022
