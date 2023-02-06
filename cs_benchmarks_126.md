@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-02-03"
+lastupdated: "2023-02-06"
 
 keywords: kubernetes, containers, benchmarks, 1.26, CIS benchmarks
 
@@ -61,7 +61,7 @@ Review the Master node security configuration results of the version 1.5 CIS Kub
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
-| 1.2.1 | Ensure that the `--anonymous-auth argument` is set to `false `| Not Scored | 1 | [Fail](#cis-benchmark-remediations-126) | {{site.data.keyword.IBM_notm}} |
+| 1.2.1 | Ensure that the `--anonymous-auth argument` is set to `false`| Not Scored | 1 | [Fail](#cis-benchmark-remediations-126) | {{site.data.keyword.IBM_notm}} |
 | 1.2.2 | Ensure that the `--basic-auth-file` argument is not set | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.2.3 | Ensure that the `--token-auth-file` parameter is not set | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.2.4 | Ensure that the `--kubelet-https` argument is set to `true` | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
@@ -199,7 +199,7 @@ Review the Worker Node Security Configuration results of the version 1.5 CIS Kub
 | 4.2.8 | Ensure that the `--hostname-override` argument is not set | Not Scored | 1 | [Fail](#cis-benchmark-remediations-126) | {{site.data.keyword.IBM_notm}} |
 | 4.2.9 | Ensure that the `--event-qps argument` is set to `0` or a level which ensures appropriate event capture | Not Scored | 2 | Pass | {{site.data.keyword.IBM_notm}} |
 | 4.2.10 | Ensure that the `--tls-cert-file` and `--tls-private-key-file` arguments are set as appropriate | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
-| 4.2.11 | Ensure that the `--rotate-certificates` argument is not set to `false `| Scored | 1 | [Pass](#cis-benchmark-remediations-126) | {{site.data.keyword.IBM_notm}} |
+| 4.2.11 | Ensure that the `--rotate-certificates` argument is not set to `false`| Scored | 1 | [Pass](#cis-benchmark-remediations-126) | {{site.data.keyword.IBM_notm}} |
 | 4.2.12 | Ensure that the `RotateKubeletServerCertificate` argument is set to `true` | Scored | 1 | [Fail](#cis-benchmark-remediations-126) | {{site.data.keyword.IBM_notm}} |
 | 4.2.13 | Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers | Not Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 {: caption="Section 4.2 Kubelet benchmark results" caption-side="bottom"}

@@ -44,7 +44,7 @@ Before you set up a Kubernetes API audit configuration, review the following inf
 * Only one audit webhook can be created in a cluster.
 * You must have the  [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the {{site.data.keyword.containerlong_notm}} cluster.
 
-To get started, follow the instructions to send Kubernetes API audit logs [to {{site.data.keyword.la_full_notm}}](#audit-api-server-la), [to a resource in the {{site.data.keyword.cloud_notm}} private network](#audit-api-server-priv), or [to an external server](#audit-api-server-external).
+To get started, follow the instructions to send Kubernetes API audit logs [to a resource in the {{site.data.keyword.cloud_notm}} private network](#audit-api-server-priv), or [to an external server](#audit-api-server-external).
 
 
 
