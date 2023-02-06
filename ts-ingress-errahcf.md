@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-06"
 
 keywords: containers, ingress, troubleshoot ingress, errahcf
 
@@ -15,7 +15,7 @@ content-type: troubleshoot
 
 
 
-# Why is my ALB not responding to health check requests?
+# Why does the Ingress status show an `ERRAHCF` error?
 {: #ts-ingress-errahcf}
 {: troubleshoot}
 {: support}
