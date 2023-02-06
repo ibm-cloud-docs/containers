@@ -8248,7 +8248,7 @@ subcollection: containers
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
 
-    * [1.5.1_3705_iks, released 30 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3705_iks)
+    * [1.5.1_3705_iks (default), released 30 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3705_iks)
 
     * [1.5.1_3683_iks, released 24 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3683_iks)
 
@@ -8268,9 +8268,9 @@ subcollection: containers
 
 * [Version 1.3.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_1)
 
-    * [1.3.1_3704_iks (default), released 30 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3704_iks)
+    * [1.3.1_3704_iks, released 30 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3704_iks)
 
-    * [1.3.1_3685_iks (default), released 24 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3685_iks)
+    * [1.3.1_3685_iks, released 24 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3685_iks)
 
     * [1.3.1_3538_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3538_iks)
 
