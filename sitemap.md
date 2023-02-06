@@ -4349,8 +4349,6 @@ subcollection: containers
 
     * [Considerations and prerequisites](/docs/containers?topic=containers-health-audit#prereqs-apiserver-logs)
 
-    * [Forwarding Kubernetes API audit logs to {{site.data.keyword.la_short}}](/docs/containers?topic=containers-health-audit#audit-api-server-la)
-
     * [Forwarding Kubernetes API audit logs to a resource in the {{site.data.keyword.cloud_notm}} private network](/docs/containers?topic=containers-health-audit#audit-api-server-priv)
 
     * [Forwarding Kubernetes API audit logs to an external server on the public Internet](/docs/containers?topic=containers-health-audit#audit-api-server-external)
