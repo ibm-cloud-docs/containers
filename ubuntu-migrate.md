@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-02-02"
+lastupdated: "2023-02-06"
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
 
@@ -34,7 +34,7 @@ For more information about creating worker pools and adding worker nodes, see [A
 Migrate your worker nodes to use Ubuntu 20. These steps apply to all supported cluster versions.
 {: shortdesc}
 
-1. In your cluster, create a new worker pool for the Ubuntu 20 worker nodes. Include the `--operating-system` option and specify `UBUNTU_20_64`. Make sure that the number of nodes specified with the `--size-per-zone` option matches the number of Ubuntu 20 worker nodes that are to be replaced.
+1. In your cluster, create a new worker pool for the Ubuntu 20 worker nodes. Include the `--operating-system=UBUNTU_20_64` option. Make sure that the number of nodes specified with the `--size-per-zone` option matches the number of Ubuntu 18 worker nodes that you are replacing.
 
     With the release of Ubuntu 20, some worker node flavors are deprecated. If you have worker nodes with these flavors, you must specify a supported flavor when creating your worker pool. The deprecated flavors are: `mb3c.4x32, mb3c.16x64, ms3c.4x32.1.9tb.ssd, ms3c.16x64.1.9tb.ssd, ms3c.28x256.3.8tb.ssd, ms3c.28x512.4x3.8tb.ssd, mr3c.28x512, md3c.16x64.4x4tb, md3c.28x512.4x4tb, mg3c.16x128, mg3c.28x256`. To list supported worker node flavors, run the `ibmcloud ks flavors --zone <zone>` command. For more information, see [Updating flavors](/docs/containers?topic=containers-update#machine_type).
     {: note}
