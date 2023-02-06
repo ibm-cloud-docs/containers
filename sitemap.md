@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-02-03"
+lastupdated: "2023-02-06"
 
 keywords: containers
 subcollection: containers
@@ -4045,11 +4045,9 @@ subcollection: containers
 
     * [Security groups applied to VPE gateways and VPC ALBs](/docs/containers?topic=containers-vpc-security-group#vpc-sg-vpe-alb)
 
-* [Viewing the VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-sg-view)
+* [Viewing VPC security groups in the CLI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cli)
 
-    * [Viewing VPC security groups in the CLI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cli)
-
-    * [Viewing the default VPC security groups in the UI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-ui)
+* [Viewing the default VPC security groups in the UI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-ui)
 
 * [Minimum inbound and outbound requirements](/docs/containers?topic=containers-vpc-security-group#vpc-sg-inbound-outbound)
 
@@ -4350,8 +4348,6 @@ subcollection: containers
 * [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)
 
     * [Considerations and prerequisites](/docs/containers?topic=containers-health-audit#prereqs-apiserver-logs)
-
-    * [Forwarding Kubernetes API audit logs to {{site.data.keyword.la_short}}](/docs/containers?topic=containers-health-audit#audit-api-server-la)
 
     * [Forwarding Kubernetes API audit logs to a resource in the {{site.data.keyword.cloud_notm}} private network](/docs/containers?topic=containers-health-audit#audit-api-server-priv)
 
@@ -8250,7 +8246,7 @@ subcollection: containers
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
 
-    * [1.5.1_3705_iks, released 30 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3705_iks)
+    * [1.5.1_3705_iks (default), released 30 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3705_iks)
 
     * [1.5.1_3683_iks, released 24 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3683_iks)
 
@@ -8270,9 +8266,9 @@ subcollection: containers
 
 * [Version 1.3.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_1)
 
-    * [1.3.1_3704_iks (default), released 30 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3704_iks)
+    * [1.3.1_3704_iks, released 30 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3704_iks)
 
-    * [1.3.1_3685_iks (default), released 24 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3685_iks)
+    * [1.3.1_3685_iks, released 24 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3685_iks)
 
     * [1.3.1_3538_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3538_iks)
 

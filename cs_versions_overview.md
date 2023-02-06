@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-02"
+lastupdated: "2023-02-06"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -70,7 +70,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 Unsupported Kubernetes versions
-:   [1.21](/docs/containers?topic=containers-changelog_121), [1.20](/docs/containers?topic=containers-cs_versions_120), [1.19](/docs/containers?topic=containers-cs_versions_119), [1.18](/docs/containers?topic=containers-118_changelog), [1.17](/docs/containers?topic=containers-117_changelog), [1.16](/docs/containers?topic=containers-116_changelog), [1.15](/docs/containers?topic=containers-115_changelog), [1.14](/docs/containers?topic=containers-114_changelog), [1.13](/docs/containers?topic=containers-113_changelog), [1.12](/docs/containers?topic=containers-112_changelog), [1.11](/docs/containers?topic=containers-111_changelog), [1.10](/docs/containers?topic=containers-110_changelog), [1.9](/docs/containers?topic=containers-19_changelog), [1.8](/docs/containers?topic=containers-18_changelog), [1.7](/docs/containers?topic=containers-17_changelog), 1.6, 1.5
+:   [1.22](/docs/containers?topic=containers-changelog_122)[1.21](/docs/containers?topic=containers-changelog_121), [1.20](/docs/containers?topic=containers-cs_versions_120), [1.19](/docs/containers?topic=containers-cs_versions_119), [1.18](/docs/containers?topic=containers-118_changelog), [1.17](/docs/containers?topic=containers-117_changelog), [1.16](/docs/containers?topic=containers-116_changelog), [1.15](/docs/containers?topic=containers-115_changelog), [1.14](/docs/containers?topic=containers-114_changelog), [1.13](/docs/containers?topic=containers-113_changelog), [1.12](/docs/containers?topic=containers-112_changelog), [1.11](/docs/containers?topic=containers-111_changelog), [1.10](/docs/containers?topic=containers-110_changelog), [1.9](/docs/containers?topic=containers-19_changelog), [1.8](/docs/containers?topic=containers-18_changelog), [1.7](/docs/containers?topic=containers-17_changelog), 1.6, 1.5
 
 ## Checking a cluster's Kubernetes server version
 {: #cs_server_version}
@@ -94,6 +94,16 @@ Server Version: v1.25+IKS
 
 Your Kubernetes cluster has three types of updates: major, minor, and patch. As updates become available, you are notified when you view information about the cluster master or worker nodes, such as with the `ibmcloud ks cluster ls`, `cluster get`, `worker ls`, or `worker get` commands.
 {: shortdesc}
+
+IBM provides bi-weekly worker node fix packs. It is IBM's goal to remediate detected, legitimate vulnerabilities within a time period appropriate for the risks they represent. To ensure the quality and stability of the release, fix packs might be delayed.
+
+Fix packs are applied to the latest upstream stable kernel version that is provided by Canonical.
+
+- For Ubuntu 20.04, it is the 5.4 kernel.
+- For Ubuntu 18.04, it is the 4.15 kernel.
+
+To keep your nodes secure, you must install worker node fix packs in a timely manner. You can subscribe to notifications to be alerted when a new update is available.
+
 
 |Update type|Examples of version labels|Updated by|Impact
 |-----|-----|-----|-----|
@@ -151,6 +161,6 @@ Unsupported clusters are not provided with security and patch updates and are no
 {: shortdesc}
 
 Unsupported Kubernetes versions
-:   [1.21](/docs/containers?topic=containers-cs_versions_121), [1.20](/docs/containers?topic=containers-cs_versions_120), [1.19](/docs/containers?topic=containers-cs_versions_119), [1.18](/docs/containers?topic=containers-118_changelog), [1.17](/docs/containers?topic=containers-117_changelog), [1.16](/docs/containers?topic=containers-116_changelog), [1.15](/docs/containers?topic=containers-115_changelog), [1.14](/docs/containers?topic=containers-114_changelog), [1.13](/docs/containers?topic=containers-113_changelog), [1.12](/docs/containers?topic=containers-112_changelog), [1.11](/docs/containers?topic=containers-111_changelog), [1.10](/docs/containers?topic=containers-110_changelog), [1.9](/docs/containers?topic=containers-19_changelog), [1.8](/docs/containers?topic=containers-18_changelog), [1.7](/docs/containers?topic=containers-17_changelog), 1.6, 1.5
+:   [1.22](/docs/containers?topic=containers-cs_versions_122)[1.21](/docs/containers?topic=containers-cs_versions_121), [1.20](/docs/containers?topic=containers-cs_versions_120), [1.19](/docs/containers?topic=containers-cs_versions_119), [1.18](/docs/containers?topic=containers-118_changelog), [1.17](/docs/containers?topic=containers-117_changelog), [1.16](/docs/containers?topic=containers-116_changelog), [1.15](/docs/containers?topic=containers-115_changelog), [1.14](/docs/containers?topic=containers-114_changelog), [1.13](/docs/containers?topic=containers-113_changelog), [1.12](/docs/containers?topic=containers-112_changelog), [1.11](/docs/containers?topic=containers-111_changelog), [1.10](/docs/containers?topic=containers-110_changelog), [1.9](/docs/containers?topic=containers-19_changelog), [1.8](/docs/containers?topic=containers-18_changelog), [1.7](/docs/containers?topic=containers-17_changelog), 1.6, 1.5
 
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-06"
 
 keywords: kubernetes, containers, 125, version 125, 125 update actions
 
@@ -29,9 +29,6 @@ Looking for general information on updating {{site.data.keyword.containerlong}} 
 ![This badge indicates Kubernetes version 1.25 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.25 certification badge" caption-side="bottom"} 
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.25 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
-
-
-
 
 
 For more information about Kubernetes project version 1.25, see the [Kubernetes change log](https://kubernetes.io/releases/notes/.){: external}
