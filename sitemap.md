@@ -4045,11 +4045,9 @@ subcollection: containers
 
     * [Security groups applied to VPE gateways and VPC ALBs](/docs/containers?topic=containers-vpc-security-group#vpc-sg-vpe-alb)
 
-* [Viewing the VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-sg-view)
+* [Viewing VPC security groups in the CLI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cli)
 
-    * [Viewing VPC security groups in the CLI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cli)
-
-    * [Viewing the default VPC security groups in the UI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-ui)
+* [Viewing the default VPC security groups in the UI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-ui)
 
 * [Minimum inbound and outbound requirements](/docs/containers?topic=containers-vpc-security-group#vpc-sg-inbound-outbound)
 

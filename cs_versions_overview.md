@@ -95,6 +95,16 @@ Server Version: v1.25+IKS
 Your Kubernetes cluster has three types of updates: major, minor, and patch. As updates become available, you are notified when you view information about the cluster master or worker nodes, such as with the `ibmcloud ks cluster ls`, `cluster get`, `worker ls`, or `worker get` commands.
 {: shortdesc}
 
+IBM provides bi-weekly worker node fix packs. It is IBM's goal to remediate detected, legitimate vulnerabilities within a time period appropriate for the risks they represent. To ensure the quality and stability of the release, fix packs might be delayed.
+
+Fix packs are applied to the latest upstream stable kernel version that is provided by Canonical.
+
+- For Ubuntu 20.04, it is the 5.4 kernel.
+- For Ubuntu 18.04, it is the 4.15 kernel.
+
+To keep your nodes secure, you must install worker node fix packs in a timely manner. You can subscribe to notifications to be alerted when a new update is available.
+
+
 |Update type|Examples of version labels|Updated by|Impact
 |-----|-----|-----|-----|
 |Major|1.x.x|You|Operation changes for clusters, including scripts or deployments.|
