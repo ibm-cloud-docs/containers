@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-07"
 
 keywords: kubernetes, clusters
 
@@ -164,7 +164,7 @@ The Kubernetes master is accessible through the private cloud service endpoint i
       type: LoadBalancer
       ports:
       - protocol: TCP
-        port: 8080
+        port: 8080 # Or, the <private_service_endpoint_port> that you found earlier.
         targetPort: 8080 # Optional. By default, the `targetPort` is set to match the `port` value unless specified otherwise. 
     ---
     kind: Endpoints
