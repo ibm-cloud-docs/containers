@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-23"
+lastupdated: "2023-02-06"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -13,6 +13,7 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 
@@ -97,22 +98,22 @@ The Ingress message provides details of what operation is in progress or informa
 
 |Ingress message|Description|
 |--- |--- |
-| `The load balancer service is missing (ERRSNF).` | For more information, see [Why is the LoadBalancer service missing from my cluster?](/docs/containers?topic=containers-ts-ingress-errsnf).|
-| `The ingress controller configmap is not found on the cluster (ERRICCNF).` | For more information, see [Why is the Ingress controller ConfigMap missing from my cluster?](/docs/containers?topic=containers-ts-ingress-erriccnf).|
+| `The load balancer service is missing (ERRSNF).` | For more information, see [Why does the Ingress status show an ERRSNF error?](/docs/containers?topic=containers-ts-ingress-errsnf).|
+| `The Ingress controller ConfigMap is not found on the cluster (ERRICCNF).` | For more information, see [Why does the Ingress status show an ERRICCNF error?](/docs/containers?topic=containers-ts-ingress-erriccnf).|
 | `The ALB version is no longer supported (ERRAVUS).` | For more information, see [Why does the Ingress status show an ERRAVUS error?](/docs/containers?topic=containers-ts-ingress-erravus).|
 | `The ALB deployment is not found on the cluster (ERRADNF).` | For more information, see [Why does the Ingress status show an ERRADNF error?](/docs/containers?topic=containers-ts-ingress-erradnf).|
 | `One or more ALB pod is not in running state (ERRADRUH).` | For more information, see [Why does the Ingress status show an `ERRADRUH` error?](/docs/containers?topic=containers-ts-ingress-erradruh).|
-| `The ALB health ingress resource is not found on the cluster (ERRAHINF).` | For more information, see [Why is the health check Ingress resource missing from my cluster?](/docs/containers?topic=containers-ts-ingress-errahinf).|
-| `The ALB health service is not found on the cluster (ERRAHSNF).` | For more information, see [Why is the ALB health check service missing from my cluster?](/docs/containers?topic=containers-ts-ingress-errahsnf).|
-| `The ALB is unable to respond to health requests (ERRAHCF).` | For more information, see [Why is my ALB not responding to health check requests?](/docs/containers?topic=containers-ts-ingress-errahcf).|
+| `The ALB health Ingress resource is not found on the cluster (ERRAHINF).` | For more information, see [Why does the Ingress status show an ERRAHINF error?](/docs/containers?topic=containers-ts-ingress-errahinf).|
+| `The ALB health service is not found on the cluster (ERRAHSNF).` | For more information, see [Why does the Ingress status show an ERRAHSNF error?](/docs/containers?topic=containers-ts-ingress-errahsnf).|
+| `The ALB is unable to respond to health requests (ERRAHCF).` | For more information, see [Why does the Ingress status show an ERRAHCF error?](/docs/containers?topic=containers-ts-ingress-errahcf).|
 | `The load balancer service address is missing (ERRSAM).` | For more information, see [Why does the Ingress status show an ERRSAM error?](/docs/containers?topic=containers-ts-ingress-errsam).|
-| `Could not access {{site.data.keyword.secrets-manager_short}} instance., verify S2S is enabled (ESSSMI).` | For more information, see [Why does the Ingress status show an ESSSMI error?](/docs/containers?topic=containers-ts-ingress-esssmi).|
-| `Could not access {{site.data.keyword.secrets-manager_short}} instance group, verify default group is accessible and exists within instance (ESSSMG).` | For more information, see [Why does the Ingress status show an ESSSMG error?](/docs/containers?topic=containers-ts-ingress-esssmg).|
-| `CRN does not match default secret with the same domain (ESSVC).` | For more information, see [Why does the Ingress status show an ESSVC error?](/docs/containers?topic=containers-ts-ingress-essvc).|
-| `Certificate for TLS secret expired or will expire soon (ESSEC).` | For more information, see [Why does the Ingress status show an ESSEC error?](/docs/containers?topic=containers-ts-ingress-essec).|
-| `Field for opaque secret expired or will expire soon (ESSEF).` | For more information, see [Why does the Ingress status show an ESSEF error?](/docs/containers?topic=containers-ts-ingress-essef).|
-| `Secret status shows a warning (ESSWS).` | For more information, see [Why does the Ingress status show an ESSWS error?](/docs/containers?topic=containers-ts-ingress-essws).|
-| `Secret is not present on the cluster or is in the wrong namespace (ESSDNE).` | For more information, see [Why does the Ingress status show an ESSDNE error?](/docs/containers?topic=containers-ts-ingress-essdne).|
+| `Could not access {{site.data.keyword.secrets-manager_short}} instance (ESSSMI).` | For more information, see [Why does the Ingress status show an ESSSMI error?](/docs/containers?topic=containers-ts-ingress-esssmi).|
+| `Could not access the secret group (ESSSMG).` | For more information, see [Why does the Ingress status show an ESSSMG error?](/docs/containers?topic=containers-ts-ingress-esssmg).|
+| `The CRN does not match the default secret with the same domain (ESSVC).` | For more information, see [Why does the Ingress status show an ESSVC error?](/docs/containers?topic=containers-ts-ingress-essvc).|
+| `The certificate for TLS secret expired or will expire soon (ESSEC).` | For more information, see [Why does the Ingress status show an ESSEC error?](/docs/containers?topic=containers-ts-ingress-essec).|
+| `The Opaque secret field expired or will expire soon (ESSEF).` | For more information, see [Why does the Ingress status show an ESSEF error?](/docs/containers?topic=containers-ts-ingress-essef).|
+| `The secret status shows a warning (ESSWS).` | For more information, see [Why does the Ingress status show an ESSWS error?](/docs/containers?topic=containers-ts-ingress-essws).|
+| `The secret is not present on the cluster or is in the wrong namespace (ESSDNE).` | For more information, see [Why does the Ingress status show an ESSDNE error?](/docs/containers?topic=containers-ts-ingress-essdne).|
 | `The subdomain has TLS secret issues (ERRDSISS).` | For more information, see [Why does the Ingress status show an ERRDSISS error?](/docs/containers?topic=containers-ts-ingress-errdsiss).|
 | `The subdomain has DNS resolution issues (ERRDRISS).` | For more information, see [Why does the Ingress status show an ERRDRISS error?](/docs/containers?topic=containers-ts-ingress-errdriss).|
 | `The subdomain has incorrect addresses registered (ERRDSIA).` | For more information, see [Why does the Ingress status show an ERRDSIA error?](/docs/containers?topic=containers-ts-ingress-errdsia).|

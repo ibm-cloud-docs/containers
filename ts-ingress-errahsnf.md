@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-06"
 
 keywords: containers, ingress, troubleshoot ingress, errahsnf
 
@@ -15,7 +15,7 @@ content-type: troubleshoot
 
 
 
-# Why is the ALB health check service missing from my cluster?
+# Why does the Ingress status show an `ERRAHSNF` error?
 {: #ts-ingress-errahsnf}
 {: troubleshoot}
 {: support}

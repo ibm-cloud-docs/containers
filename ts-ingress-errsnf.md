@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-06"
 
 keywords: containers, ingress, troubleshoot ingress, loadbalancer missing, errsnf
 
@@ -15,11 +15,10 @@ content-type: troubleshoot
 
 
 
-# Why is the Ingress LoadBalancer service missing from my cluster?
+# Why does the Ingress status show an `ERRSNF` error?
 {: #ts-ingress-errsnf}
 {: troubleshoot}
 {: support}
-
 
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}

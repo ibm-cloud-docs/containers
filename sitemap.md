@@ -9798,29 +9798,29 @@ subcollection: containers
 
 [Why does a connection via WebSocket close after 60 seconds?](/docs/containers?topic=containers-cs_ingress_websocket#cs_ingress_websocket)
 
-[Why is the Ingress LoadBalancer service missing from my cluster?](/docs/containers?topic=containers-ts-ingress-errsnf#ts-ingress-errsnf)
+[Why does the Ingress status show an `ERRSNF` error?](/docs/containers?topic=containers-ts-ingress-errsnf#ts-ingress-errsnf)
 
-[Why does the Ingress status show an ERRADNF error?](/docs/containers?topic=containers-ts-ingress-erradnf#ts-ingress-erradnf)
+[Why does the Ingress status show an `ERRADNF` error?](/docs/containers?topic=containers-ts-ingress-erradnf#ts-ingress-erradnf)
 
 [Why does the Ingress status show an `ERRAVUS` error?](/docs/containers?topic=containers-ts-ingress-erravus#ts-ingress-erravus)
 
-[Why is the Ingress controller ConfigMap missing from my cluster?](/docs/containers?topic=containers-ts-ingress-erriccnf#ts-ingress-erriccnf)
+[Why does the Ingress status show an `ERRICCNF` error?](/docs/containers?topic=containers-ts-ingress-erriccnf#ts-ingress-erriccnf)
 
-[Why does the Ingress status show an ERRSAM error?](/docs/containers?topic=containers-ts-ingress-errsam#ts-ingress-errsam)
+[Why does the Ingress status show an `ERRSAM` error?](/docs/containers?topic=containers-ts-ingress-errsam#ts-ingress-errsam)
 
-[Why is my ALB not responding to health check requests?](/docs/containers?topic=containers-ts-ingress-errahcf#ts-ingress-errahcf)
+[Why does the Ingress status show an `ERRAHCF` error?](/docs/containers?topic=containers-ts-ingress-errahcf#ts-ingress-errahcf)
 
-[Why is the ALB health check service missing from my cluster?](/docs/containers?topic=containers-ts-ingress-errahsnf#ts-ingress-errahsnf)
+[Why does the Ingress status show an `ERRAHSNF` error?](/docs/containers?topic=containers-ts-ingress-errahsnf#ts-ingress-errahsnf)
 
-[Why is the health check Ingress resource missing from my cluster?](/docs/containers?topic=containers-ts-ingress-errahinf#ts-ingress-errahinf)
+[Why does the Ingress status show an `ERRAHINF` error?](/docs/containers?topic=containers-ts-ingress-errahinf#ts-ingress-errahinf)
 
 [Why does the Ingress status show an `ERRADRUH` error?](/docs/containers?topic=containers-ts-ingress-erradruh#ts-ingress-erradruh)
 
-[Why does the Ingress status show an ERRDSIA error?](/docs/containers?topic=containers-ts-ingress-errdsia#ts-ingress-errdsia)
+[Why does the Ingress status show an `ERRDSIA` error?](/docs/containers?topic=containers-ts-ingress-errdsia#ts-ingress-errdsia)
 
-[Why does the Ingress status show an ERRDSISS error?](/docs/containers?topic=containers-ts-ingress-errdsiss#ts-ingress-errdsiss)
+[Why does the Ingress status show an `ERRDSISS` error?](/docs/containers?topic=containers-ts-ingress-errdsiss#ts-ingress-errdsiss)
 
-[Why does the Ingress status show an ERRDRISS error?](/docs/containers?topic=containers-ts-ingress-errdriss#ts-ingress-errdriss)
+[Why does the Ingress status show an `ERRDRISS` error?](/docs/containers?topic=containers-ts-ingress-errdriss#ts-ingress-errdriss)
 
 [Why does the Ingress status show an ESSSMI error?](/docs/containers?topic=containers-ts-ingress-esssmi#ts-ingress-esssmi)
 
