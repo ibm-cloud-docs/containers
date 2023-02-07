@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2022
-lastupdated: "2022-12-15"
+  years: 2014, 2023
+lastupdated: "2023-02-07"
 
 keywords: kubernetes
 
@@ -12,6 +12,7 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 
@@ -140,8 +141,8 @@ The following image shows the options that you have in {{site.data.keyword.conta
 | Resiliency| Medium as specific to a data center. File storage server is clustered by IBM with redundant networking.| Medium as specific to a data center. Block storage server is clustered by IBM with redundant networking. | 
 | Availability | Medium as specific to a data center. | Medium as specific to a data center. |
 | Scalability | Difficult to extend beyond the data center. You can't change an existing storage tier. | Difficult to extend beyond the data center. You can't change an existing storage tier. |
-| Encryption | At rest |   \n **Classic Block Storage**: Encryption at rest.   \n - **VPC Block Storage**: Encryption in transit with Key Protect.|
-| Backup and recovery | Set up periodic snapshots, replicate snapshots, duplicate storage, back up data to {{site.data.keyword.cos_full_notm}}, or copy data to and from pod and containers. |   \n **Classic Block Storage**: Set up periodic snapshots, replicate snapshots, duplicate storage, back up data to {{site.data.keyword.cos_full_notm}}, or copy data to and from pod and containers.  \n - **VPC Block Storage**: Kubernetes [`kubectl cp`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#cp){: external} command. |
+| Encryption | At rest |   \n **Classic Block Storage**: Encryption at rest.   \n **VPC Block Storage**: Encryption in transit with Key Protect. |
+| Backup and recovery | Set up periodic snapshots, replicate snapshots, duplicate storage, back up data to {{site.data.keyword.cos_full_notm}}, or copy data to and from pod and containers. |   \n **Classic Block Storage**: Set up periodic snapshots, replicate snapshots, duplicate storage, back up data to {{site.data.keyword.cos_full_notm}}, or copy data to and from pod and containers.  \n **VPC Block Storage**: Kubernetes [`kubectl cp`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#cp){: external} command. |
 | Common use cases | Mass or single file storage or file sharing across a single zone cluster. | Stateful sets, backing storage when you run your own database, or high-performance access for single pods. | 
 | Non-ideal use cases| Multizone clusters or geographically distributed data | Multizone clusters, geographically distributed data, or sharing data across multiple app instances. | 
 {: caption="Persistent storage options for single zone clusters"}
@@ -169,6 +170,7 @@ The {{site.data.keyword.cos_full_notm}} plug-in uses s3fs to manage your Object 
 ![High availability options for persistent storage in a multizone cluster](images/cs_storage_options_multizone.png){: caption="Figure 1. High availability options for persistent storage in a multizone cluster" caption-side="bottom"}
 
 
+
 | Characteristics | Object Storage | SDS (Portworx) | {{site.data.keyword.cloud_notm}} Databases|
 | --- | --- | --- | --- |
 | Multizone-capable | Yes | Yes | Yes |
@@ -188,6 +190,8 @@ The {{site.data.keyword.cos_full_notm}} plug-in uses s3fs to manage your Object 
 | Common use cases | Multizone clusters. Geographically distributed data. Static big data. Static multimedia content | Web apps | Backups | Archives | Stateful sets. Geographically distributed data. Common storage solution when you run apps across multiple cloud providers. Backing storage when you run your own database. High-performance access for single pods. Shared storage access across multiple pods and worker nodes. | Multizone clusters, relational and non-relational databases, or geographically distributed data. | 
 | Non-ideal use cases | Write-intensive workloads, random write operations, incremental data updates, or transaction databases. | N/A | App that is designed to write to a file system. | 
 {: caption: Persistent storage options for multizone clusters"}
+
+
 
 
 
