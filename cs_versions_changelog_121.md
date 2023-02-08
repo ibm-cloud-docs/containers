@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-08"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.21
 
@@ -408,7 +408,7 @@ The following table shows the changes that are in the worker node fix pack 1.21.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.19.3 | v3.19.4 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
+| Calico | v3.19.3 | v3.19.4 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
 | Cluster health image | v1.2.21 | v1.3.3 | Updated `golang.org/x/crypto` to `v0.0.0-20220214200702-86341886e292`. Adds fix for [CVE-2021-43565](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-43565){: external}. Adds Golang dependency updates. |
 | Gateway-enabled cluster controller | 1586 | 1653 | Updated to use `Go` version `1.17.7` and updated `Go` modules to fix CVEs. |
 | GPU device plug-in and installer | eefc4ae | d7daae6 | Updated GPU images to resolve CVEs. |
@@ -686,7 +686,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.19.1 | v3.19.3 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. Increased liveness and readiness probe timeouts to 10 seconds. |
+| Calico | v3.19.1 | v3.19.3 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. Increased liveness and readiness probe timeouts to 10 seconds. |
 | Gateway-enabled cluster controller | 1444 | 1510 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711){: external} and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}. |
 | GPU device plug-in and installer | 8c8bcdf | 58d7589 | Updated to use `Go` version `1.16.7`. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.21.4-1 | v1.21.5-1 | Updated to support the Kubernetes `1.21.5` release and to use `Go` version `1.16.8` and calicoctl version `3.19.3`. Fixed a bug that may cause node initialization to fail when a new node reuses the name of a deleted node. |
@@ -945,7 +945,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.17.3 | v3.19.1 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
+| Calico | v3.17.3 | v3.19.1 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
 | Gateway-enabled cluster controller | 1352 | 1348 | Updated to run as a non-root user by default, with privileged escalation as needed. |
 | GPU device plug-in and installer | 9a5e70b | c7b87b1 | Updated to use Go version `1.15.12`. Updated universal base image (UBI) to version 8.4 to resolve CVEs. Updated the GPU drivers to version [460.73.01](https://www.nvidia.com/Download/driverResults.aspx/173142/){: external}. |
 | {{site.data.keyword.IBM_notm}} Calico extension | 689 | 695 | Updated UBI minimal base image to version 8.4 to resolve CVEs. |

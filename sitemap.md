@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-02-07"
+lastupdated: "2023-02-08"
 
 keywords: containers
 subcollection: containers
@@ -266,11 +266,15 @@ subcollection: containers
 
 * [February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb23)
 
-    * [02 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0223)
+    * [8 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0823)
+
+        * ALB OAuth Proxy add-on version `2.0.0_1420`.
+
+    * [2 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0223)
 
         * Istio add-on `1.14` 
 
-    * [01 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0123)
+    * [1 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0123)
 
         * New! Kubernetes 1.26
 
@@ -8995,6 +8999,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_1420, released on 8 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1420)
 
     * [Version 2.0.0_1354, released on 15 December 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1354)
 
