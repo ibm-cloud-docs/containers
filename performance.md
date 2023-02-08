@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-08"
 
 keywords: kubernetes, kernel
 
@@ -26,6 +26,8 @@ If you have specific performance optimization requirements, you can change the d
 If you choose to change the default settings, you are doing so at your own risk. You are responsible for running tests against any changed settings and for any potential disruptions caused by the changed settings in your environment.
 {: important}
 
+
+
 ## Default worker node settings
 {: #worker-default}
 
@@ -35,7 +37,7 @@ By default, your worker nodes have the operating system and compute hardware of 
 ### Customizing the operating system
 {: #worker-default-os}
 
-The following operating systems are available for worker nodes: **Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated)**. Your cluster can't mix operating systems or use different operating systems.
+You can find a list of supported operating systems by cluster version in the [Kubernetes version information](/docs/containers?topic=containers-cs_versions). Your cluster can't mix operating systems or use different operating systems.
 {: shortdesc}
 
 To optimize your worker nodes, consider the following information.
@@ -43,8 +45,8 @@ To optimize your worker nodes, consider the following information.
 * **Temporary modifications**: If you log in to a pod or use some other process to modify a worker node setting, the modifications are temporary. Worker node lifecycle operations, such as autorecovery, reloading, updating, or replacing a worker node, change any modifications back to the default settings.
 * **Persistent modifications**: For modifications to persist across worker node lifecycle operations, create a daemon set that uses an init container. For more information, see [Modifying default worker node settings to optimize performance](#worker).
 
-    Modifications to the operating system are not supported. If you modify the default settings, you are responsible for debugging and resolving the issues that might occur.
-    {: important}
+Modifications to the operating system are not supported. If you modify the default settings, you are responsible for debugging and resolving the issues that might occur.
+{: important}
 
 ### Hardware changes
 {: #worker-default-hw}
@@ -206,7 +208,7 @@ The following `sysctl` network values can be set on all worker nodes in a cluste
 
 Deploy the following example `initContainer`. Remember to change the `containers:` section to your own application containers. The `initContainer` then sets the `sysctl` settings for all the regular containers in the pod because they all share the same network namespace.
 
-    ```
+    ```sh
     kubectl apply -f - << EOF
     apiVersion: apps/v1
     kind: Deployment
@@ -241,8 +243,8 @@ Deploy the following example `initContainer`. Remember to change the `containers
             image: us.icr.io/armada-master/alpine:latest
             command: ["sleep", "2592000"]
       EOF
-      ```
-      {: pre}
+    ```
+    {: pre}
       
 
 
@@ -259,31 +261,31 @@ Memory use is driven by the number of pods in the cluster. CPU use is driven by 
 
 The following symptoms might indicate a need to adjust the `metrics-server` resources:
 
-- The `metrics-server` is restarting frequently.
+    - The `metrics-server` is restarting frequently.
 
-- Deleting a namespace results in the namespace that is stuck in a `Terminating` state and `kubectl describe namespace` includes a condition reporting a metrics API discovery error.
+    - Deleting a namespace results in the namespace that is stuck in a `Terminating` state and `kubectl describe namespace` includes a condition reporting a metrics API discovery error.
 
-- `kubectl top pods`, `kubectl top nodes`, other `kubectl` commands, or applications that use the Kubernetes API to log Kubernetes errors such as:
+    - `kubectl top pods`, `kubectl top nodes`, other `kubectl` commands, or applications that use the Kubernetes API to log Kubernetes errors such as:
 
-    ```sh
-    The server is currently unable to handle the request (get pods.metrics.k8s.io)
-    ```
-    {: screen}
-    
-    ```sh
-    Discovery failed for some groups, 1 failing: unable to retrieve the complete list of server APIs: metrics.k8s.io/v1beta1: the server is currently unable to handle the request
-    ```
-    {: screen}
+        ```sh
+        The server is currently unable to handle the request (get pods.metrics.k8s.io)
+        ```
+        {: screen}
+        
+        ```sh
+        Discovery failed for some groups, 1 failing: unable to retrieve the complete list of server APIs: metrics.k8s.io/v1beta1: the server is currently unable to handle the request
+        ```
+        {: screen}
 
-- HorizontalPodAutoscalers (HPAs) do not scale deployments.
+    - HorizontalPodAutoscalers (HPAs) do not scale deployments.
 
-- Running `kubectl get apiservices v1beta1.metrics.k8s.io` results in a status like:
+    - Running `kubectl get apiservices v1beta1.metrics.k8s.io` results in a status like:
 
-    ```sh
-    NAME                     SERVICE                      AVAILABLE                      AGE
-    v1beta1.metrics.k8s.io   kube-system/metrics-server   False (FailedDiscoveryCheck)   139d
-    ```
-    {: screen}
+        ```sh
+        NAME                     SERVICE                      AVAILABLE                      AGE
+        v1beta1.metrics.k8s.io   kube-system/metrics-server   False (FailedDiscoveryCheck)   139d
+        ```
+        {: screen}
     
 ### Modify the `metrics-server-config` config map
 {: #metrics-server-config}
@@ -291,17 +293,17 @@ The following symptoms might indicate a need to adjust the `metrics-server` reso
 Both CPU and memory have tunable "base" and "per node" settings used to compute a total request.
 {: shortdesc}
 
-- `baseCPU`
-- `cpuPerNode`
-- `baseMemory`
-- `memoryPerNode`
+    - `baseCPU`
+    - `cpuPerNode`
+    - `baseMemory`
+    - `memoryPerNode`
     
-Where:
-```sh
-cpuRequest = baseCPU + cpuPerNode * number_of_nodes
-memoryRequest = baseMemory + memoryPerNode * number_of_nodes
-```    
-{: pre}
+    Where:
+    ```sh
+    cpuRequest = baseCPU + cpuPerNode * number_of_nodes
+    memoryRequest = baseMemory + memoryPerNode * number_of_nodes
+    ```    
+    {: pre}
 
 The number of nodes in these calculations comes from a set of "bucket sizes" and has a minimum size of 16 nodes.
 {: note}
@@ -309,8 +311,8 @@ The number of nodes in these calculations comes from a set of "bucket sizes" and
 CPU is requested in cores, with value such as `1` or fractional values such as `100m` (100 millicores).
 
 Memory is requested in bytes with an optional suffix of:
-- base 2 (1Ki = 1024): `Ki` (kilobytes), `Mi` (megabytes), `Gi` (gigabytes)
-- metric (1k = 1000): `k`, `M`, `G`
+    - base 2 (1Ki = 1024): `Ki` (kilobytes), `Mi` (megabytes), `Gi` (gigabytes).
+    - metric (1k = 1000): `k`, `M`, `G`.
 
 If the number of nodes in a cluster is expected to grow (or just change) over time, you might want to adjust the "per node" setting. If the number of nodes is static, adjust the "base" setting. In the end, the total CPU and memory values are set in the `metrics-server` deployment resource requests.
 
@@ -427,17 +429,17 @@ Containers:
 
 If the `Last State` shows a `Reason` of `OOMKilled`, increase the memory requests in the `metrics-server-config` ConfigMap in 100Mi increments or larger until the metrics-server is stable and runs for several hours or longer without being `OOMkilled`.
 ```sh
-    Last State:     Terminated
-      Reason:       OOMKilled
-      Exit Code:    137
+Last State:     Terminated
+  Reason:       OOMKilled
+  Exit Code:    137
 ```
 {: screen}
 
 If the `Last state` shows a shows a `Reason` of `Error` and Events such as those in the following example, increase the CPU requests in the `metrics-server-config` ConfigMap in 100m increments or larger until the metrics-server is stable and runs for several hours or longer without being killed due to probe timeouts.
 ```sh
-    Last State:     Terminated
-      Reason: Error
-      Exit Code: 137
+Last State:     Terminated
+  Reason: Error
+  Exit Code: 137
 ```
 {: screen}
 
