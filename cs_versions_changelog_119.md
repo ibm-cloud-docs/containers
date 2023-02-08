@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-08"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.19
 
@@ -419,7 +419,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.16.8 | v3.16.10 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
+| Calico | v3.16.8 | v3.16.10 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
 | Cluster health image | v1.2.12 | v1.2.13 | Updated to use `Go` version `1.15.12`. Updated image for [CVE-2021-33194](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33194){: external}. |
 | Gateway-enabled cluster controller | 1352 | 1348 | Updated to run as a non-root user by default, with privileged escalation as needed. |
 | GPU device plug-in and installer | 19bf25c | 22e2e0d | Updated to use `Go` version `1.15.12`. Updated universal base image (UBI) to version `8.4` to resolve CVEs. Updated the GPU drivers to version [460.73.01](https://www.nvidia.com/Download/driverResults.aspx/173142/){: external}. |
@@ -633,7 +633,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.16.7 | v3.16.8 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
+| Calico | v3.16.7 | v3.16.8 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.19.8-2 | v1.19.8-4 | Updated to use `calicoctl` version 3.16.8. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1165 | 1274 | Fixed a bug that might cause version 2.0 network load balancers (NLBs) to crash and restart on load balancer updates. |
 {: caption="Changes since version 1.19.8_1537" caption-side="bottom"}
@@ -646,7 +646,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.16.5 | v3.16.7 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
+| Calico | v3.16.5 | v3.16.7 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
 | Cluster health image | v1.2.6 | v1.2.8 | Updated to use `Go` version 1.15.7. Updated image to implement additional {{site.data.keyword.IBM_notm}} security controls. |
 | Gateway-enabled cluster controller | 1195 | 1232 | Updated to use `Go` version 1.15.7. |
 | {{site.data.keyword.IBM_notm}} Calico extension | 567 | 618 | Updated to use `Go` version 1.15.7. |
@@ -833,7 +833,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.16.4 | v3.16.5 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
+| Calico | v3.16.4 | v3.16.5 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
 | Cluster health image | v1.2.2 | v1.2.3 | Status codes have been added to add-on health messages. Set add-on health state to `critical` and status to `unknown` when cluster health is `critical`. When a cluster has a Kubernetes key management service (KMS) provider enabled and a disabled [Key Protect](/docs/containers?topic=containers-encryption#keyprotect) key, cluster health state is now set to `critical`. Updated image for [DLA-2424-1](https://www.debian.org/lts/security/2020/dla-2424){: external}. |
 | CoreDNS | 1.7.1 | 1.8.0 | See the [CoreDNS release notes](https://coredns.io/2020/10/22/coredns-1.8.0-release/){: external}. |
 | GPU device plug-in and installer | 0c07674 | b966c41 | Updated image for [CVE-2019-20386](https://nvd.nist.gov/vuln/detail/CVE-2019-20386){: external}, [CVE-2019-13050](https://nvd.nist.gov/vuln/detail/CVE-2019-13050){: external}, [CVE-2020-8177](https://nvd.nist.gov/vuln/detail/CVE-2020-8177){: external}, [CVE-2019-14889](https://nvd.nist.gov/vuln/detail/CVE-2019-14889){: external}, [CVE-2020-1730](https://nvd.nist.gov/vuln/detail/CVE-2020-1730){: external}, [CVE-2020-10029](https://nvd.nist.gov/vuln/detail/CVE-2020-10029){: external}, [CVE-2020-1751](https://nvd.nist.gov/vuln/detail/CVE-2020-1751){: external}, [CVE-2020-1752](https://nvd.nist.gov/vuln/detail/CVE-2020-1752){: external}, [CVE-2019-16168](https://nvd.nist.gov/vuln/detail/CVE-2019-16168){: external}, [CVE-2019-20218](https://nvd.nist.gov/vuln/detail/CVE-2019-20218){: external}, [CVE-2019-5018](https://nvd.nist.gov/vuln/detail/CVE-2019-5018){: external}, [CVE-2020-13630](https://nvd.nist.gov/vuln/detail/CVE-2020-13630){: external}, [CVE-2020-13631](https://nvd.nist.gov/vuln/detail/CVE-2020-13631){: external}, [CVE-2020-13632](https://nvd.nist.gov/vuln/detail/CVE-2020-13632){: external}, [CVE-2020-6405](https://nvd.nist.gov/vuln/detail/CVE-2020-6405){: external}, [CVE-2020-9327](https://nvd.nist.gov/vuln/detail/CVE-2020-9327){: external}, [CVE-2019-1551](https://nvd.nist.gov/vuln/detail/CVE-2019-1551){: external}, [CVE-2019-19221](https://nvd.nist.gov/vuln/detail/CVE-2019-19221){: external}, [CVE-2019-16935](https://nvd.nist.gov/vuln/detail/CVE-2019-16935){: external}, [CVE-2019-20907](https://nvd.nist.gov/vuln/detail/CVE-2019-20907){: external}, [CVE-2020-14422](https://nvd.nist.gov/vuln/detail/CVE-2020-14422){: external}, [CVE-2020-8492](https://nvd.nist.gov/vuln/detail/CVE-2020-8492){: external}, [CVE-2019-19906](https://nvd.nist.gov/vuln/detail/CVE-2019-19906){: external}, [CVE-2019-20454](https://nvd.nist.gov/vuln/detail/CVE-2019-20454){: external}, [CVE-2019-19956](https://nvd.nist.gov/vuln/detail/CVE-2019-19956){: external}, [CVE-2019-20388](https://nvd.nist.gov/vuln/detail/CVE-2019-20388){: external}, [CVE-2020-7595](https://nvd.nist.gov/vuln/detail/CVE-2020-7595){: external}, [CVE-2019-13627](https://nvd.nist.gov/vuln/detail/CVE-2019-13627){: external}, [CVE-2018-20843](https://nvd.nist.gov/vuln/detail/CVE-2018-20843){: external}, [CVE-2019-15903](https://nvd.nist.gov/vuln/detail/CVE-2019-15903){: external}, and [CVE-2019-20387](https://nvd.nist.gov/vuln/detail/CVE-2019-20387){: external}. |
@@ -876,7 +876,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.16.2 | v3.16.4 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. |
+| Calico | v3.16.2 | v3.16.4 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
 | Calico configuration | N/A | N/A | Updated the `calico-node` daemon set in the `kube-system` namespace to set the `spec.updateStrategy.rollingUpdate.maxUnavailable` parameter to `10%` for clusters with more than 50 worker nodes. |
 | Cluster health image | v1.2.1 | v1.2.2 | Fixed the cluster health status for when add-on customizations are used. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.19.2-9 | v1.19.3-3 | Updated to support the Kubernetes 1.19.3 release and to use `Go` version 1.15.2. |
@@ -892,7 +892,7 @@ The following table shows the changes that are in the `1.19.2_1524` version upda
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.13.4 | v3.16.2 | See the [Calico release notes](https://projectcalico.docs.tigera.io/releases){: external}. In addition, the Calico configuration was updated to use the [Kubernetes API data store driver](https://projectcalico.docs.tigera.io/getting-started/kubernetes/hardway/the-calico-datastore){: external}. |
+| Calico | v3.13.4 | v3.16.2 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. In addition, the Calico configuration was updated to use the [Kubernetes API data store driver](https://docs.tigera.io/calico/latest/getting-started/kubernetes/hardway/the-calico-datastore){: external}. |
 | Cluster health image | v1.1.11 | v1.2.1 | When a cluster has a Kubernetes key management service (KMS) provider enabled and a disabled [{{site.data.keyword.keymanagementserviceshort}}](/docs/containers?topic=containers-encryption#keyprotect) key, a warning is now returned in the cluster health state. In addition, updated to use `Go` version 1.15.2. |
 | containerd | 1.3.4 | 1.4.1 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.4.1){: external}. |
 | CoreDNS | 1.6.9 | 1.7.1 | See the [CoreDNS release notes](https://coredns.io/2020/09/21/coredns-1.7.1-release/){: external}. In addition, the CoreDNS configuration was updated to increase the weight of scheduling CoreDNS pods to different worker nodes and zones. |
