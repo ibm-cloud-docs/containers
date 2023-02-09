@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-08"
+lastupdated: "2023-02-09"
 
 keywords: kubernetes, release notes
 
@@ -1189,7 +1189,7 @@ CLI change log update
 
 
 Cluster security groups
-:   You can now specify up to five security groups to attach to workers when you create a VPC cluster. For more information, see [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group).
+:   You can now specify up to five security groups to attach to workers when you create a VPC cluster. For more information, see [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group&interface=ui#vpc-sg-cluster).
 
 ### 26 April 2022
 {: #containers-apr2622}
