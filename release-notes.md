@@ -31,6 +31,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## February 2023
 {: #containers-feb23}
 
+### 9 February 2023
+{: #containers-feb0923}
+{: release-note}
+
+{{site.data.keyword.block_storage_is_short}} add-on version `5.1`.
+:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
 ### 8 February 2023
 {: #containers-feb0823}
 {: release-note}
