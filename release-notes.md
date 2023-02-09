@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-08"
+lastupdated: "2023-02-09"
 
 keywords: kubernetes, release notes
 
@@ -30,6 +30,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## February 2023
 {: #containers-feb23}
+
+### 9 February 2023
+{: #containers-feb0923}
+{: release-note}
+
+{{site.data.keyword.block_storage_is_short}} add-on version `5.1`.
+:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
 
 ### 8 February 2023
 {: #containers-feb0823}
@@ -1189,7 +1196,7 @@ CLI change log update
 
 
 Cluster security groups
-:   You can now specify up to five security groups to attach to workers when you create a VPC cluster. For more information, see [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group).
+:   You can now specify up to five security groups to attach to workers when you create a VPC cluster. For more information, see [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group&interface=ui#vpc-sg-cluster).
 
 ### 26 April 2022
 {: #containers-apr2622}

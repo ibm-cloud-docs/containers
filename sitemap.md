@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-02-08"
+lastupdated: "2023-02-09"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb23)
+
+    * [9 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0923)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on version `5.1`.
 
     * [8 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0823)
 
@@ -8807,6 +8811,8 @@ subcollection: containers
     * [Change log for patch update 1.0.1_114, released 10 September 2020](/docs/containers?topic=containers-ca_changelog#101114_ca)
 
 [{{site.data.keyword.block_storage_is_short}} add-on change log](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
+
+    * [Change log for version 5.1, released 9 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1_is_block_relnote)
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
 
