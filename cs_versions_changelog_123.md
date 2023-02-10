@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-08"
+lastupdated: "2023-02-10"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -376,7 +376,7 @@ The following table shows the changes that are in the master fix pack 1.23.9_153
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.21.5 | v3.23.3 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. Updated the Calico custom resource definitions to include `preserveUnknownFields: false`. |
+| Calico | v3.21.5 | v3.23.3 | See the [Calico release notes](https://docs.tigera.io/archive){: external}. Updated the Calico custom resource definitions to include `preserveUnknownFields: false`. |
 | Cluster health image | v1.3.8 | v1.3.9 | Updated `Go` dependencies and to use `Go` version `1.18.4`. Fixed minor typographical error in the add-on `daemonset not available` health status. |
 | Gateway-enabled cluster controller | 1680 | 1792 | Updated to use `Go` version `1.17.11`. Updated image for [CVE-2022-2097](https://nvd.nist.gov/vuln/detail/CVE-2022-2097){: external} and [CVE-2022-29458](https://nvd.nist.gov/vuln/detail/CVE-2022-29458){: external}. |
 | GPU device plug-in and installer | 2b0b6d1 | d8f1be0 | Updated `Go` dependencies and to use `Go` version `1.18.3`. |
@@ -655,7 +655,7 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.20.3 | v3.21.4 | For more information, see the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
+| Calico | v3.20.3 | v3.21.4 | For more information, see the [Calico release notes](https://docs.tigera.io/archive){: external}. |
 | Cluster health image | v1.2.21 | v1.3.0 | Added new health check for cluster autoscaler add-on. |
 | CoreDNS | 1.8.6 | 1.8.7 | See the [CoreDNS release notes](https://coredns.io/2021/12/09/coredns-1.8.7-release/){: external}. |
 | GPU device plug-in and installer | eefc4ae | 4a174aa | Updated image for [CVE-2020-26160](https://nvd.nist.gov/vuln/detail/CVE-2020-26160){: external} and [CVE-2021-3538](https://nvd.nist.gov/vuln/detail/CVE-2021-3538){: external}. |

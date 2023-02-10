@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-08"
+lastupdated: "2023-02-10"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -435,7 +435,7 @@ The following table shows the changes that are in patch 1.10.5_1517.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.1.1 | v3.1.3 | See the Calico [release notes](https://docs.tigera.io/calico/latest/release-notes//){: external}.  |
+| Calico | v3.1.1 | v3.1.3 | See the Calico [release notes](https://docs.tigera.io/archive/){: external}.  |
 | {{site.data.keyword.cloud_notm}} Provider | v1.10.3-85 | v1.10.5-118 | Updated to support Kubernetes 1.10.5 release. In addition, LoadBalancer service `create failure` events now include any portable subnet errors.  |
 | {{site.data.keyword.filestorage_full_notm}} plug-in | 320 | 334 | Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes.  |
 | Kubernetes | v1.10.3 | v1.10.5 | See the Kubernetes [release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.5){: external}.  |

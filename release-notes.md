@@ -32,13 +32,19 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-feb23}
 
 
-
 ### 10 February 2023
 {: #containers-feb1023}
 {: release-note}
 
+
+New troubleshooting doc for how to recover after deleting a portable subnet in Classic clusters.
+:   For more information, see [I deleted a portable subnet and now my Classic cluster my Load Balancers are failing. How do I recover?](/docs/containers?topic=containers-ts-network-subnet-recover).
+
+
+
 Ingress ALB version `1.3.1_3754_iks` and `1.4.0_3755_iks`
 :   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
 
 
 
@@ -46,8 +52,10 @@ Ingress ALB version `1.3.1_3754_iks` and `1.4.0_3755_iks`
 {: #containers-feb0923}
 {: release-note}
 
+
 {{site.data.keyword.block_storage_is_short}} add-on version `5.1`.
 :   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
 
 ### 8 February 2023
 {: #containers-feb0823}

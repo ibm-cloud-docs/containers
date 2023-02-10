@@ -455,6 +455,7 @@ toc:
               - ts-network-iks-coredns-restart.md
               - ts-network-strongswan-vpn.md
               - ts-network-calico-node.md
+              - ts-network-subnet-recover.md
               - ts-network-snat-125.md
               - ts-network-egress-124.md
               - ts-network-strongswan-install-new.md
