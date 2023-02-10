@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-08"
+lastupdated: "2023-02-10"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -573,7 +573,7 @@ The following table shows the changes that are in the worker node fix pack 1.22.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.20.3 | v3.20.4 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
+| Calico | v3.20.3 | v3.20.4 | See the [Calico release notes](https://docs.tigera.io/archive){: external}. |
 | Cluster health image | v1.2.21 | v1.3.3 | Updated `golang.org/x/crypto` to `v0.0.0-20220214200702-86341886e292`. Adds fix for [CVE-2021-43565](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-43565){: external}. Adds Golang dependency updates. |
 | Gateway-enabled cluster controller | 1586 | 1653 | Updated to use `Go` version `1.17.7` and updated `Go` modules to fix CVEs. |
 | GPU device plug-in and installer | eefc4ae | d7daae6 | Updated GPU images to resolve CVEs. |
@@ -674,7 +674,7 @@ The following table shows the changes that are in the master fix pack update `1.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.20.1 | v3.20.3 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. Calico now adds the `node.kubernetes.io/network-unavailable` node taint when Calico shuts down on a node. The taint continues to be removed when Calico starts on a node. |
+| Calico | v3.20.1 | v3.20.3 | See the [Calico release notes](https://docs.tigera.io/archive){: external}. Calico now adds the `node.kubernetes.io/network-unavailable` node taint when Calico shuts down on a node. The taint continues to be removed when Calico starts on a node. |
 | Cluster health image | v1.2.18 | v1.2.20 | Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs. Updated to use `Go` version `1.16.10`. |
 | Gateway-enabled cluster controller | 1567 | 1586 | Updated Alpine base image to the latest `3.14` version to resolve CVEs. Updated to use `Go` version `1.16.10`. |
 | GPU device plug-in and installer | 7fd867d | c9bfc8c | Updated universal base image (UBI) to the `8.5-204` version to resolve CVEs. Updated to use `Go` version `1.16.10`. |
@@ -811,7 +811,7 @@ The following table shows the changes that are in the master fix pack `1.22.2_15
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.19.3 | v3.20.1 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
+| Calico | v3.19.3 | v3.20.1 | See the [Calico release notes](https://docs.tigera.io/archive){: external}. |
 | containerd configuration | N/A | N/A | Cluster administrators may now update the containerd registry host configurations on their clusters. See [Updating your cluster's containerd registry host configuration](/docs/containers?topic=containers-registry#update_containerd_registry_config) and the [containerd CRI plugin configuration guide](https://github.com/containerd/containerd/blob/v1.5.5/docs/cri/config.md#registry-configuration){: external}.|
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.21.5-1 | v1.22.2-1 | Updated to support the Kubernetes `1.22.2` release. In addition, the code for this component is now [open source](https://github.com/IBM-Cloud/cloud-provider-ibm){: external}. |
 | Kubernetes | v1.21.5 | v1.22.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.2){: external}. This update resolves [CVE-2021-25741](https://nvd.nist.gov/vuln/detail/CVE-2021-25741){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6496649){: external}). |

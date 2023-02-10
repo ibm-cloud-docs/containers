@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-08"
+lastupdated: "2023-02-10"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -489,7 +489,7 @@ The following table shows the changes that are in the patch 1.13.5_1517.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.4.0 | v3.4.4 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes//){: external}. Update resolves [CVE-2019-9946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/879585){: external}. |
+| Calico | v3.4.0 | v3.4.4 | See the [Calico release notes](https://docs.tigera.io/archive/){: external}. Update resolves [CVE-2019-9946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/879585){: external}. |
 | Cluster master HA proxy | 1.8.12-alpine | 1.9.6-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.9/src/CHANGELOG){: external}. Update resolves [CVE-2018-0732](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732){: external}, [CVE-2018-0734](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734){: external}, [CVE-2018-0737](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737){: external}, [CVE-2018-5407](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407){: external}, [CVE-2019-1543](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543){: external}, and [CVE-2019-1559](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559){: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | v1.13.4-86 | v1.13.5-107 | Updated to support the Kubernetes 1.13.5 and Calico 3.4.4 releases. |
 | Kubernetes | v1.13.4 | v1.13.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.5){: external}. |

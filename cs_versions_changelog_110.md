@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-08"
+lastupdated: "2023-02-10"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -360,7 +360,7 @@ The following table shows the changes that are in patch 1.10.8_1524.
 | Kubernetes | v1.10.7 | v1.10.8 | See the [Kubernetes release notes (https://github.com/kubernetes/kubernetes/releases/tag/v1.10.8){: external}.  |
 | Kubernetes DNS autoscaler | 1.1.2-r2 | 1.2.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.2.0){: external}.  |
 | {{site.data.keyword.cloud_notm}} Provider | v1.10.7-146 | v1.10.8-172 | Updated to support Kubernetes 1.10.8 release. Also, updated the documentation link in load balancer error messages.  |
-| IBM file storage classes | N/A | N/A | Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node. Removed duplicate `reclaimPolicy` parameter in the IBM file storage classes.  \n  Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass). |
+| IBM file storage classes | N/A | N/A | Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node. Removed duplicate `reclaimPolicy` parameter in the IBM file storage classes.  \n  Also, now when you update the cluster master, the default IBM file storage class remains unchanged. |
 {: caption="Table 1. Changes since version 1.10.7_1520" caption-side="bottom"}
 
 
@@ -435,7 +435,7 @@ The following table shows the changes that are in patch 1.10.5_1517.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.1.1 | v3.1.3 | See the Calico [release notes](https://docs.tigera.io/calico/latest/release-notes//){: external}.  |
+| Calico | v3.1.1 | v3.1.3 | See the Calico [release notes](https://docs.tigera.io/archive/){: external}.  |
 | {{site.data.keyword.cloud_notm}} Provider | v1.10.3-85 | v1.10.5-118 | Updated to support Kubernetes 1.10.5 release. In addition, LoadBalancer service `create failure` events now include any portable subnet errors.  |
 | {{site.data.keyword.filestorage_full_notm}} plug-in | 320 | 334 | Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes.  |
 | Kubernetes | v1.10.3 | v1.10.5 | See the Kubernetes [release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.5){: external}.  |

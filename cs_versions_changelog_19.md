@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-03"
+lastupdated: "2023-02-10"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -136,7 +136,7 @@ The following table shows the changes that are in patch 1.9.10_1527.
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
 | {{site.data.keyword.cloud_notm}} Provider | v1.9.10-192 | v1.9.10-219 | Updated the documentation link in load balancer error messages. |
-| {{site.data.keyword.cloud_notm}} file storage classes | N/A | N/A | Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node. Removed duplicate `reclaimPolicy` parameter in the IBM file storage classes.  \n Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass). |
+| {{site.data.keyword.cloud_notm}} file storage classes | N/A | N/A | Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node. Removed duplicate `reclaimPolicy` parameter in the IBM file storage classes.  \n Also, now when you update the cluster master, the default IBM file storage class remains unchanged. |
 {: caption="Table 1. Changes since version 1.9.10_1523" caption-side="bottom"}
 
 

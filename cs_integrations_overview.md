@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-10"
 
 keywords: kubernetes, helm
 
@@ -71,7 +71,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 
 |Service|Description|Classic|VPC|
 |----|------------|----|----|
-| {{site.data.keyword.vpc_short}} VPN | With the {{site.data.keyword.vpc_short}} VPN, you can securely connect your VPC to an on-premises network, other VPCs, or to classic infrastructure through a VPN tunnel. For more information, see [Connecting to your on-premises network](/docs/vpc?topic=vpc-vpn-onprem-example#configuring-onprem-gateway).| |Yes|
+| {{site.data.keyword.vpc_short}} VPN | With the {{site.data.keyword.vpc_short}} VPN, you can securely connect your VPC to an on-premises network, other VPCs, or to classic infrastructure through a VPN tunnel. For more information, see [Connecting to your on-premises network](/docs/vpc?topic=vpc-vpn-onprem-example).| |Yes|
 |{{site.data.keyword.dl_short}}|With [{{site.data.keyword.dl_full}}](/docs/dl?topic=dl-dl-about), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet. The {{site.data.keyword.dl_short}} offerings are useful when you must implement hybrid workloads, cross-provider workloads, large or frequent data transfers, or private workloads. To choose a {{site.data.keyword.dl_short}} offering and set up a {{site.data.keyword.dl_short}} connection, see [Get Started with {{site.data.keyword.dl_full_notm}} (2.0)](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl).|Yes|Yes|
 |strongSwan IPSec VPN Service|Set up a [strongSwan IPSec VPN service](https://www.strongswan.org/about.html){: external} that securely connects your Kubernetes cluster with an on-premises network. The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite. To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) directly in a pod in your cluster.|Yes| |
 |{{site.data.keyword.tg_short}}|Use {{site.data.keyword.tg_full_notm}} to manage access between your VPCs. {{site.data.keyword.tg_short}} instances can be configured to route between VPCs that are in the same region (local routing) or VPCs that are in different regions (global routing). Additionally, you can use {{site.data.keyword.tg_short}} to manage access between your VPCs in multiple regions to resources in your {{site.data.keyword.cloud_notm}} classic infrastructure. To get started, see the [{{site.data.keyword.tg_short}} documentation](/docs/transit-gateway?topic=transit-gateway-getting-started).| |Yes|

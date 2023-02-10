@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-02-09"
+lastupdated: "2023-02-10"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb23)
+
+    * [10 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb1023)
+
+        * New troubleshooting doc for how to recover after deleting a portable subnet in Classic clusters.
+
+        * Ingress ALB version `1.3.1_3754_iks` and `1.4.0_3755_iks`
 
     * [9 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0923)
 
@@ -5087,11 +5093,7 @@ subcollection: containers
 
 * [Storage classes](/docs/containers?topic=containers-kube_concepts#storageclasses)
 
-    * [Customizing a storage class](/docs/containers?topic=containers-kube_concepts#customized_storageclass)
-
-    * [Changing or updating to a different storage class](/docs/containers?topic=containers-kube_concepts#update_storageclass)
-
-    * [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass)
+* [Next steps](/docs/containers?topic=containers-kube_concepts#next-steps-storage)
 
 [Storing data on classic IBM Cloud {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
 
@@ -8262,7 +8264,9 @@ subcollection: containers
 
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
 
-    * [1.4.1_3703_iks, released 30 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.1_3703_iks)
+    * [1.4.0_3755_iks, released 10 February 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3755_iks)
+
+    * [1.4.0_3703_iks, released 30 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3703_iks)
 
     * [1.4.0_3684_iks, released 24 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3684_iks)
 
@@ -8273,6 +8277,8 @@ subcollection: containers
     * [1.4.0_3212_iks, released 12 December 2022](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3212_iks)
 
 * [Version 1.3.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_3_1)
+
+    * [1.3.1_3754_iks, released 10 February 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3754_iks)
 
     * [1.3.1_3704_iks, released 30 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.3.1_3704_iks)
 
@@ -8811,6 +8817,8 @@ subcollection: containers
     * [Change log for patch update 1.0.1_114, released 10 September 2020](/docs/containers?topic=containers-ca_changelog#101114_ca)
 
 [{{site.data.keyword.block_storage_is_short}} add-on change log](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
+
+* [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
 
     * [Change log for version 5.1, released 9 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1_is_block_relnote)
 

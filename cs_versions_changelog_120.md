@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-08"
+lastupdated: "2023-02-10"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.20
 
@@ -345,7 +345,7 @@ The following table shows the changes that are in the master fix pack update `1.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.17.5 | v3.17.6 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
+| Calico | v3.17.5 | v3.17.6 | See the [Calico release notes](https://docs.tigera.io/archive){: external}. |
 | Cluster health image | v1.2.18 | v1.2.20 | Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs. Updated to use `Go` version `1.16.10`. |
 | CoreDNS | 1.8.4 | 1.8.6 | See the [CoreDNS release notes](https://coredns.io/2021/10/07/coredns-1.8.6-release/){: external}. |
 | Gateway-enabled cluster controller | 1567 | 1586 | Updated Alpine base image to the latest `3.14` version to resolve CVEs. Updated to use `Go` version `1.16.10`. |
@@ -500,7 +500,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.17.4 | v3.17.5 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. Increased liveness and readiness probe timeouts to 10 seconds. |
+| Calico | v3.17.4 | v3.17.5 | See the [Calico release notes](https://docs.tigera.io/archive){: external}. Increased liveness and readiness probe timeouts to 10 seconds. |
 | CoreDNS | 1.8.0 | 1.8.4 | See the [CoreDNS release notes](https://coredns.io/2021/05/28/coredns-1.8.4-release/){: external}. |
 | Gateway-enabled cluster controller | 1444 | 1510 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711){: external} and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}. |
 | GPU device plug-in and installer | 8c8bcdf | 58d7589 | Updated to use `Go` version `1.16.7`. |
@@ -695,7 +695,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.17.3 | v3.17.4 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
+| Calico | v3.17.3 | v3.17.4 | See the [Calico release notes](https://docs.tigera.io/archive){: external}. |
 | Cluster health image | v1.2.12 | v1.2.13 | Updated to use `Go` version `1.15.12`. Updated image for [CVE-2021-33194](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33194){: external}. |
 | Gateway-enabled cluster controller | 1352 | 1348 | Updated to run as a non-root user by default, with privileged escalation as needed. |
 | GPU device plug-in and installer | 9a5e70b | 772e15f | Updated to use `Go` version `1.15.12`. Updated universal base image (UBI) to version 8.4 to resolve CVEs. Updated the GPU drivers to version [460.73.01](https://www.nvidia.com/Download/driverResults.aspx/173142/){: external}. |
@@ -966,7 +966,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.17.2 | v3.17.3 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
+| Calico | v3.17.2 | v3.17.3 | See the [Calico release notes](https://docs.tigera.io/archive){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.20.4-2 | v1.20.4-4 | Updated to use `calicoctl` version 3.17.3. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1165 | 1274 | Fixed a bug that might cause version 2.0 network load balancers (NLBs) to crash and restart on load balancer updates. |
 {: caption="Changes since version 1.20.4_1530." caption-side="bottom"}
@@ -1001,7 +1001,7 @@ The following table shows the changes that are in the version updates for `1.20.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.16.5 | v3.17.2 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
+| Calico | v3.16.5 | v3.17.2 | See the [Calico release notes](https://docs.tigera.io/archive){: external}. |
 | Cluster health image | v1.2.6 | v1.2.8 | Updated to use `Go` version 1.15.7. Updated image to implement additional {{site.data.keyword.IBM_notm}} security controls. |
 | Gateway-enabled cluster controller | 1195 | 1232 | Updated to use `Go` version 1.15.7. |
 | GPU device plug-in and installer | af5a6cb | 1c41e4b | Updated to support the Kubernetes 1.20 release. |
