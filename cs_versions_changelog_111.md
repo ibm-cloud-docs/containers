@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-10"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -466,7 +466,7 @@ The following table shows the changes that are in patch 1.11.3_1524.
 | -------------- | -------------- | -------------- | ------------- |
 | containerd | 1.1.3 | 1.1.4 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.1.4]{: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | v1.11.3-91 | v1.11.3-100 | Updated the documentation link in load balancer error messages. |
-| {{site.data.keyword.IBM_notm}} file storage classes | N/A | N/A | Removed duplicate `reclaimPolicy` parameter in the {{site.data.keyword.IBM_notm}} file storage classes.  \n Also, now when you update the cluster master, the default {{site.data.keyword.IBM_notm}} file storage class remains unchanged. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass). |
+| {{site.data.keyword.IBM_notm}} file storage classes | N/A | N/A | Removed duplicate `reclaimPolicy` parameter in the {{site.data.keyword.IBM_notm}} file storage classes.  \n Also, now when you update the cluster master, the default {{site.data.keyword.IBM_notm}} file storage class remains unchanged. |
 {: caption="Changes since version 1.11.3_1521" caption-side="bottom"}
 
 
@@ -481,7 +481,7 @@ The following table shows the changes that are in patch 1.11.3_1521.
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
 | {{site.data.keyword.cloud_notm}} Provider | v1.11.2-71 | v1.11.3-91 | Updated to support Kubernetes 1.11.3 release. |
-| {{site.data.keyword.IBM_notm}} file storage classes | N/A | N/A | Removed `mountOptions` in the {{site.data.keyword.IBM_notm}} file storage classes to use the default that is provided by the worker node.  \n Also, now when you update the cluster master, the default IBM file storage class remains `ibmc-file-bronze`. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass). |
+| {{site.data.keyword.IBM_notm}} file storage classes | N/A | N/A | Removed `mountOptions` in the {{site.data.keyword.IBM_notm}} file storage classes to use the default that is provided by the worker node.  \n Also, now when you update the cluster master, the default IBM file storage class remains `ibmc-file-bronze`. |
 | Key Management Service Provider | N/A | N/A | Added the ability to use the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} or a key management service (KMS) provider in your cluster](/docs/containers?topic=containers-encryption#keyprotect), all your Kubernetes secrets are encrypted. |
 | Kubernetes | v1.11.2 | v1.11.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.3){: external}. |
 | Kubernetes DNS autoscaler | 1.1.2-r2 | 1.2.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.2.0){: external}. |
