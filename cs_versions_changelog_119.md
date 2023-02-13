@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-10"
+lastupdated: "2023-02-13"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.19
 
@@ -892,7 +892,7 @@ The following table shows the changes that are in the `1.19.2_1524` version upda
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.13.4 | v3.16.2 | See the [Calico release notes](https://docs.tigera.io/archive){: external}. In addition, the Calico configuration was updated to use the [Kubernetes API data store driver](https://docs.tigera.io/calico/latest/getting-started/kubernetes/hardway/the-calico-datastore){: external}. |
+| Calico | v3.13.4 | v3.16.2 | See the [Calico release notes](https://docs.tigera.io/archive){: external}. In addition, the Calico configuration was updated to use the [Kubernetes API data store driver](https://docs.tigera.io/calico/3.25/getting-started/kubernetes/hardway/the-calico-datastore){: external}. |
 | Cluster health image | v1.1.11 | v1.2.1 | When a cluster has a Kubernetes key management service (KMS) provider enabled and a disabled [{{site.data.keyword.keymanagementserviceshort}}](/docs/containers?topic=containers-encryption#keyprotect) key, a warning is now returned in the cluster health state. In addition, updated to use `Go` version 1.15.2. |
 | containerd | 1.3.4 | 1.4.1 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.4.1){: external}. |
 | CoreDNS | 1.6.9 | 1.7.1 | See the [CoreDNS release notes](https://coredns.io/2020/09/21/coredns-1.7.1-release/){: external}. In addition, the CoreDNS configuration was updated to increase the weight of scheduling CoreDNS pods to different worker nodes and zones. |
