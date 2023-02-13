@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-10"
+lastupdated: "2023-02-13"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -345,7 +345,7 @@ The following table shows the changes that are in the master fix pack 1.13.8_152
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.4.4 | v3.6.4 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/){: external}. Update resolves [TTA-2019-001](https://www.tigera.io/security-bulletins/#TTA-2019-001){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/959551){: external}. |
+| Calico | v3.4.4 | v3.6.4 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. Update resolves [TTA-2019-001](https://www.tigera.io/security-bulletins/#TTA-2019-001){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/959551){: external}. |
 | CoreDNS configuration | N/A | N/A | Changed the default CoreDNS configuration from a 5 to 30 second TTL for DNS records in the `kubernetes` zone. This change aligns with the default KubeDNS configuration. Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize). |
 | GPU device plug-in and installer | 5d34347 | a7e8ece | Updated base image packages. |
 | Kubernetes | v1.13.7 | v1.13.8 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.8){: external}.
@@ -611,7 +611,7 @@ The following table shows the changes that are in the patch 1.13.2_1507.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.3.1 | v3.4.0 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/){: external}. |
+| Calico | v3.3.1 | v3.4.0 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. |
 | Cluster DNS provider | N/A | N/A | CoreDNS is now the default cluster DNS provider for new clusters. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. |
 | containerd | 1.1.5 | 1.2.2 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.2.2){: external}. |
 | CoreDNS | 1.2.2 | 1.2.6 | See the [CoreDNS release notes](https://github.com/coredns/coredns/releases/tag/v1.2.6){: external}. Additionally, the CoreDNS configuration is updated to [support multiple Corefiles](https://coredns.io/2017/07/23/corefile-explained/){: external}. |

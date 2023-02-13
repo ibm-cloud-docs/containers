@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-13"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -454,7 +454,7 @@ The following table shows the changes that are in the master fix pack 1.14.4_152
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.6.1 | v3.6.4 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/){: external}. Update resolves [TTA-2019-001](https://www.tigera.io/security-bulletins/#TTA-2019-001){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/959551){: external}. |
+| Calico | v3.6.1 | v3.6.4 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. Update resolves [TTA-2019-001](https://www.tigera.io/security-bulletins/#TTA-2019-001){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/959551){: external}. |
 | CoreDNS configuration | N/A | N/A | Changed the default CoreDNS configuration from a 5 to 30 second TTL for DNS records in the `kubernetes` zone. This change aligns with the default KubeDNS configuration. Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see [Customizing the cluster DNS provider}(/docs/containers?topic=containers-cluster_dns#dns_customize). |
 | GPU device plug-in and installer | 5d34347 | a7e8ece | Updated base image packages. |
 | Kubernetes | v1.14.3 | v1.14.4 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.4){: external}.

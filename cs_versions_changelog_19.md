@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-10"
+lastupdated: "2023-02-13"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -65,7 +65,7 @@ The following table shows the changes that are in patch 1.9.11_1536.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v2.6.5 | v2.6.12 | See the [Calico release notes](https://projectcalico.docs.tigera.io/release-notes/){: external} {: external} Update resolves [Tigera Technical Advisory TTA-2018-001](https://www.tigera.io/security-bulletins/){: external} |
+| Calico | v2.6.5 | v2.6.12 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external} {: external} Update resolves [Tigera Technical Advisory TTA-2018-001](https://www.tigera.io/security-bulletins/){: external} |
 | Kernel | 4.4.0-137 | 4.4.0-139 | Updated worker node images with kernel update for  [CVE-2018-7755](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog){: external} |
 | Kubernetes | v1.9.10 | v1.9.11 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.11){: external} |
 | {{site.data.keyword.cloud_notm}} | v1.9.10-219 | v1.9.11-249 | Updated to support the Kubernetes 1.9.11 release. |
