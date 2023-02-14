@@ -45,6 +45,13 @@ Istio add-on `1.15.5` and `1.16.2`
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.9` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
+
+
+Worker node fix packs `1.23.16_1562`, `1.24.10_1553`, `1.25.6_1531`, and `1.26.1_1521`.
+:   For more information, see the change logs: [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125), and [1.26](/docs/containers?topic=containers-changelog_126).
+
+
+
 ### 10 February 2023
 {: #containers-feb1023}
 {: release-note}

@@ -274,6 +274,8 @@ subcollection: containers
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.9` is available.
 
+        * Worker node fix packs `1.23.16_1562`, `1.24.10_1553`, `1.25.6_1531`, and `1.26.1_1521`.
+
     * [10 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb1023)
 
         * New troubleshooting doc for how to recover after deleting a portable subnet in Classic clusters.
