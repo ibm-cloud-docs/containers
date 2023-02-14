@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-02-13"
+lastupdated: "2023-02-14"
 
 keywords: containers
 subcollection: containers
@@ -266,9 +266,15 @@ subcollection: containers
 
 * [February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb23)
 
+    * [14 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb1423)
+
+        * Istio add-on `1.15.5` and `1.16.2`
+
     * [13 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb1323)
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.9` is available.
+
+        * Worker node fix packs `1.23.16_1562`, `1.24.10_1553`, `1.25.6_1531`, and `1.26.1_1521`.
 
     * [10 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb1023)
 
@@ -6327,6 +6333,8 @@ subcollection: containers
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
 
+    * [Change log for worker node fix pack 1.26.1_1521, released 13 February 2023](/docs/containers?topic=containers-changelog_126#1261_1521)
+
     * [Change log for master fix pack 1.26.1_1519 and worker node fix pack 1.26.1_1520, released 1 February 2022](/docs/containers?topic=containers-changelog_126#1261_1519_and_1261_1520)
 
 [Version 1.26 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-126)
@@ -6391,6 +6399,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for worker node fix pack 1.25.6_1531, released 13 February 2023](/docs/containers?topic=containers-changelog_125#1256_1531)
 
     * [Change log for master fix pack 1.25.6_1529, released 30 January 2023](/docs/containers?topic=containers-changelog_125#1256_1529)
 
@@ -6480,6 +6490,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.10_1553, released 13 February 2023](/docs/containers?topic=containers-changelog_124#12410_1553)
 
     * [Change log for master fix pack 1.24.10_1551, released 30 January 2023](/docs/containers?topic=containers-changelog_124#12410_1551)
 
@@ -6595,6 +6607,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for worker node fix pack 1.23.16_1562, released 13 February 2023](/docs/containers?topic=containers-changelog_123#12316_1562)
 
     * [Change log for master fix pack 1.23.16_1560, released 30 January 2023](/docs/containers?topic=containers-changelog_123#12316_1560)
 
@@ -8510,11 +8524,15 @@ subcollection: containers
 
 * [Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
 
+    * [Changelog for 1.16.2, released 14 February 2023](/docs/containers?topic=containers-istio-changelog#1162)
+
     * [Change log for 1.16.1, released 10 January 2023](/docs/containers?topic=containers-istio-changelog#1161)
 
     * [Change log for 1.16.0, released November 30th, 2022](/docs/containers?topic=containers-istio-changelog#1160)
 
 * [Version 1.15](/docs/containers?topic=containers-istio-changelog#v115)
+
+    * [Changelog for 1.15.5, released 14 February 2023](/docs/containers?topic=containers-istio-changelog#1155)
 
     * [Change log for 1.15.4, released 10 January 2023](/docs/containers?topic=containers-istio-changelog#1154)
 

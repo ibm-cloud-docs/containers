@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-13"
 
 keywords: kubernetes, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -837,9 +837,3 @@ To set up configuration files with Kustomize:
     ```
     {: screen}
     
-
-
-
-
-
-
