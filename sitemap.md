@@ -266,6 +266,10 @@ subcollection: containers
 
 * [February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb23)
 
+    * [14 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb1423)
+
+        * Istio add-on `1.15.5` and `1.16.2`
+
     * [13 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb1323)
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.9` is available.
@@ -8510,11 +8514,15 @@ subcollection: containers
 
 * [Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
 
+    * [Changelog for 1.16.2, released 14 February 2023](/docs/containers?topic=containers-istio-changelog#1162)
+
     * [Change log for 1.16.1, released 10 January 2023](/docs/containers?topic=containers-istio-changelog#1161)
 
     * [Change log for 1.16.0, released November 30th, 2022](/docs/containers?topic=containers-istio-changelog#1160)
 
 * [Version 1.15](/docs/containers?topic=containers-istio-changelog#v115)
+
+    * [Changelog for 1.15.5, released 14 February 2023](/docs/containers?topic=containers-istio-changelog#1155)
 
     * [Change log for 1.15.4, released 10 January 2023](/docs/containers?topic=containers-istio-changelog#1154)
 
