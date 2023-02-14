@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-10"
+lastupdated: "2023-02-14"
 
 keywords: kubernetes
 
@@ -126,7 +126,7 @@ Get started using storage in your cluster by reviewing the following docs.
 - [{{site.date.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)
 - [{{site.data.keyword.filestorage_short}} for Classic clusters](/docs/containers?topic=containers-file_storage)
 - [{{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-file-vpc-install)
-- [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-)
+- [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-understand)
 - [Portworx](/docs/containers?topic=containers-portworx)
 
 
