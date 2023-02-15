@@ -6381,7 +6381,7 @@ subcollection: containers
 
     * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-56-126)
 
-* [{{site.data.keyword.{{site.data.keyword.IBM_notm}}_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-remediations-126)
+* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-remediations-126)
 
 
 ### Version 1.25

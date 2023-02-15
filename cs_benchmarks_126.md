@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-02-06"
+lastupdated: "2023-02-15"
 
 keywords: kubernetes, containers, benchmarks, 1.26, CIS benchmarks
 
@@ -278,14 +278,14 @@ Review the Kubernetes Policies results of the version 1.5 CIS Kubernetes benchma
 {: caption="Section 5.6 General policies benchmark results" caption-side="bottom"}
 
 
-## {{site.data.keyword.{{site.data.keyword.IBM_notm}}_notm}} remediations and explanations
+## {{site.data.keyword.IBM_notm}} remediations and explanations
 {: #cis-benchmark-remediations-126}
 
 Review information from {{site.data.keyword.IBM_notm}} on the CIS Benchmark results.
 {: shortdesc}
 
 
-| #Section| Remediation/Explanation |
+| Section| Remediation/Explanation |
 | --- | --- |
 | 1.2.1 | {{site.data.keyword.containerlong_notm}} utilizes RBAC for cluster protection, but allows anonymous discovery, which is considered reasonable per [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external}. |
 | 1.2.10 | {{site.data.keyword.containerlong_notm}} does not enable the [*EventRateLimit*](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit){: external} admission controller since it is a Kubernetes alpha feature. |
