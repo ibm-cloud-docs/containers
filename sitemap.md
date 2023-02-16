@@ -5418,7 +5418,9 @@ subcollection: containers
 
 [Adding {{site.data.keyword.filestorage_vpc_short}} to apps](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps)
 
-* [Deploying an app that uses {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file)
+* [Deploying an app that uses {{site.data.keyword.filestorage_short}} with dynamic provisioning](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file_dynamic)
+
+* [Deploying an app that uses {{site.data.keyword.filestorage_short}} with static provisioning](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file_static)
 
 [Managing {{site.data.keyword.filestorage_vpc_full_notm}}](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-managing)
 
