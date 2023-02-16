@@ -1236,7 +1236,7 @@ CLI change log update
 
 
 Cluster security groups
-:   You can now specify up to five security groups to attach to workers when you create a VPC cluster. For more information, see [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group&interface=ui#vpc-sg-cluster).
+:   You can now specify up to five security groups to attach to workers when you create a VPC cluster. For more information, see [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group&interface=ui#vpc-sg-cluster-workers).
 
 ### 26 April 2022
 {: #containers-apr2622}
@@ -5583,7 +5583,7 @@ Worker pools
 :   Added instructions for how to [apply labels](/docs/containers?topic=containers-add_workers#worker_pool_labels) to existing worker pools.
 
 Reference topics
-:   To support new features such as Kubernetes 1.14, [change log reference](/docs/containers?topic=containers-changelog#changelog) pages are updated.
+:   To support new features such as Kubernetes 1.14, [change log reference](/docs/containers?topic=containers-cs_versions#cs_versions_available) pages are updated.
 
 ### 1 May 2019
 {: #containers-may0119}

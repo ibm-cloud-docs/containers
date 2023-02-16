@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-16"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -128,7 +128,7 @@ Review the version 1.8 changelogs.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Kubernetes | v1.8.8 | v1.8.11 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11]{: external}. This release addresses  [CVE-2017-1002101](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101){: external}[ and [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102){: external}[ vulnerabilities.  \n Now `secret`, `configMap`, `downwardAPI`, and projected volumes are mounted as read-only. Previously, apps could write data to these volumes, but the system could automatically revert the data. If your apps rely on the previous insecure behavior, modify them accordingly. |
+| Kubernetes | v1.8.8 | v1.8.11 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11){: external}. This release addresses  [CVE-2017-1002101](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101){: external}[ and [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102){: external}[ vulnerabilities.  \n Now `secret`, `configMap`, `downwardAPI`, and projected volumes are mounted as read-only. Previously, apps could write data to these volumes, but the system could automatically revert the data. If your apps rely on the previous insecure behavior, modify them accordingly. |
 | Pause container image | 3.0 | 3.1 | Removes inherited orphaned zombie processes. |
 | {{site.data.keyword.cloud_notm}} Provider | v1.8.8-86 | v1.8.11-126 | `NodePort` and `LoadBalancer` services now support [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#lb_source_ip) by setting `service.spec.externalTrafficPolicy` to `Local`. |
 | General | N/A | N/A | Fix [edge node](/docs/containers?topic=containers-edge#edge) toleration setup for older clusters. |
