@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-02-15"
+lastupdated: "2023-02-16"
 
 keywords: containers
 subcollection: containers
@@ -265,10 +265,6 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb23)
-
-    * [15 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb1523)
-
-        * {{site.data.keyword.block_storage_is_short}} add-on version `5.0.6_1820`.
 
     * [14 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb1423)
 
@@ -5422,7 +5418,9 @@ subcollection: containers
 
 [Adding {{site.data.keyword.filestorage_vpc_short}} to apps](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps)
 
-* [Deploying an app that uses {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file)
+* [Deploying an app that uses {{site.data.keyword.filestorage_short}} with dynamic provisioning](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file_dynamic)
+
+* [Deploying an app that uses {{site.data.keyword.filestorage_short}} with static provisioning](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file_static)
 
 [Managing {{site.data.keyword.filestorage_vpc_full_notm}}](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-managing)
 
@@ -6381,7 +6379,7 @@ subcollection: containers
 
     * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-56-126)
 
-* [{{site.data.keyword.{{site.data.keyword.IBM_notm}}_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-remediations-126)
+* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-remediations-126)
 
 
 ### Version 1.25
@@ -8849,8 +8847,6 @@ subcollection: containers
     * [Change log for version 5.1, released 9 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1_is_block_relnote)
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
-
-    * [Change log for version 5.0.6_1820, released 15 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.6-1820_is_block_relnote)
 
     * [Change log for version 5.0.5_1784, released 24 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.5-1784_is_block_relnote)
 
