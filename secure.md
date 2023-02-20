@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-16"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, containers
 
@@ -467,7 +467,7 @@ To access cluster component logs, you can choose to forward your logs to {{site.
 How can I monitor the health and performance of my cluster?
 :   You can verify the health, capacity, and performance of your apps, services, and worker nodes by monitoring your cluster components and compute resources from the {{site.data.keyword.containerlong_notm}} console or CLI, such as the CPU and memory usage. To view more in-depth metrics for a standard cluster or your apps, you can configure a monitoring agent in your cluster to send metrics to {{site.data.keyword.mon_full_notm}}. You can also install third-party monitoring solutions, such as Prometheus or Weave Scope, or use the metrics that are provided in the Kubernetes dashboard. For more information, see [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics).
 
-To set up a host-based intrusion detection system (HIDS) and security event log monitoring (SELM), install third-party tools that are designed to monitor your cluster and containerized apps to detect intrusion or misuse, such as [Twistlock](https://www.paloaltonetworks.com/prisma/cloud){: external} or the [Sysdig Falco project](https://sysdig.com/opensource/falco/){: external}.
+To set up a host-based intrusion detection system (HIDS) and security event log monitoring (SELM), install third-party tools that are designed to monitor your cluster and containerized apps to detect intrusion or misuse, such as [Twistlock](https://www.paloaltonetworks.com/prisma/cloud){: external} or the [Sysdig `Falco` project](https://sysdig.com/opensource/falco/){: external}.
 
 How can I audit events that happen in my cluster?
 :   You can [set up {{site.data.keyword.cloudaccesstraillong}} in your {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-at_events#at_events). For more information, view the [{{site.data.keyword.cloudaccesstrailshort}} documentation](/docs/activity-tracker?topic=activity-tracker-getting-started).
@@ -615,7 +615,7 @@ To set up encryption for your secrets, see [Encrypting Kubernetes secrets by usi
 
 If vulnerabilities are found in Kubernetes, Kubernetes releases CVEs in security bulletins to inform users and to describe the actions that users must take to remediate the vulnerability. Kubernetes security bulletins that affect {{site.data.keyword.containerlong_notm}} users or the {{site.data.keyword.cloud_notm}} platform are published in the [{{site.data.keyword.cloud_notm}} security bulletin](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security).
 
-Some CVEs require the latest patch update for a Kubernetes version that you can install as part of the regular [cluster update process](/docs/containers?topic=containers-update#update) in {{site.data.keyword.containerlong_notm}}. Make sure to apply security patches in time to protect your cluster from malicious attacks. For more information about what is included in a security patch, refer to the [version changelog](/docs/containers?topic=containers-changelog).
+Some CVEs require the latest patch update for a Kubernetes version that you can install as part of the regular [cluster update process](/docs/containers?topic=containers-update#update) in {{site.data.keyword.containerlong_notm}}. Make sure to apply security patches in time to protect your cluster from malicious attacks. For more information about what is included in a security patch, refer to the [version change log](/docs/containers?topic=containers-changelog).
 
 
 

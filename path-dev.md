@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, containers
 
@@ -32,7 +32,7 @@ Following a curated learning path to deploy highly available containerized apps 
 Begin working with your cluster by setting up the CLI and accessing the cluster.
 {: shortdesc}
 
-1. **CLI setup**: [Set up the CLIs](/docs/containers?topic=containers-cs_cli_install) that are necessary to create and work with clusters. As you work with your cluster, refer to the [command reference](/docs/containers?topic=containers-kubernetes-service-cli) and keep track of CLI version updates with the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog).
+1. **CLI setup**: [Set up the CLIs](/docs/containers?topic=containers-cs_cli_install) that are necessary to create and work with clusters. As you work with your cluster, refer to the [command reference](/docs/containers?topic=containers-kubernetes-service-cli) and keep track of CLI version updates with the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 2. **User permissions**: Ensure that your cluster administrator gives you the proper [{{site.data.keyword.cloud_notm}} IAM role](/docs/containers?topic=containers-learning-path-admin#admin_secure) to access the cluster.
 3. **Cluster access**: [Access your cluster through the public or private cloud service endpoint](/docs/containers?topic=containers-access_cluster).
 

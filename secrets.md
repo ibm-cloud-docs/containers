@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2023
-lastupdated: "2023-02-01"
+lastupdated: "2023-02-20"
 
 keywords: secret, certificate, field, tls, non-tls, rotate, ingress
 
@@ -78,7 +78,7 @@ Follow the steps to use the default TLS certificate for the IBM-provided Ingress
     ```
     {: pre}
 
-3. Create a secret for the default TLS certificate in each namespace where your Ingress resources or apps exist. Specify the TLS certficate CRN with the `--cert-crn` command option. 
+3. Create a secret for the default TLS certificate in each namespace where your Ingress resources or apps exist. Specify the TLS certificate CRN with the `--cert-crn` command option. 
 
     Alternatively, you can set the secret as the `defaultCertificate` in the [`ibm-ingress-deploy-config` ConfigMap](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy).
     {: tip}
