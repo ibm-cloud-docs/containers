@@ -5737,7 +5737,7 @@ subcollection: containers
 
 * [ibmcloud ks api](/docs/containers?topic=containers-icks_map#icks_map_api)
 
-* [ibmcloud ks init](/docs/containers?topic=containers-icks_map#icks_map_init)
+* [ibmcloud ks `init`](/docs/containers?topic=containers-icks_map#icks_map_init)
 
 * [ibmcloud ks script](/docs/containers?topic=containers-icks_map#icks_map_script)
 
@@ -7423,7 +7423,7 @@ subcollection: containers
 
 * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-119#cis-benchmark-remediations-119)
 
-[Version 1.18 changelog](/docs/containers?topic=containers-118_changelog#118_changelog)
+[Version 1.18 change log](/docs/containers?topic=containers-118_changelog#118_changelog)
 
 * [Change log for worker node fix pack 1.18.20_1566, released 27 September 2021](/docs/containers?topic=containers-118_changelog#11820_1566)
 
@@ -7537,7 +7537,7 @@ subcollection: containers
 
 * [Change log for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-118_changelog#1182_1512)
 
-[Version 1.17 changelog (unsupported as of 2 July 2021)](/docs/containers?topic=containers-117_changelog#117_changelog)
+[Version 1.17 change log (unsupported as of 2 July 2021)](/docs/containers?topic=containers-117_changelog#117_changelog)
 
 * [Change log for worker node fix pack 1.17.17_1568, released 19 July 2021](/docs/containers?topic=containers-117_changelog#11717_1568)
 
@@ -7649,7 +7649,7 @@ subcollection: containers
 
 * [Change log for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-117_changelog#1172_1515)
 
-[Version 1.16 changelog (unsupported as of 31 January 2021)](/docs/containers?topic=containers-116_changelog#116_changelog)
+[Version 1.16 change log (unsupported as of 31 January 2021)](/docs/containers?topic=containers-116_changelog#116_changelog)
 
 * [Change log for master fix pack 1.16.15_1557, released 19 January 2021](/docs/containers?topic=containers-116_changelog#11615_1557_master)
 
@@ -7743,7 +7743,7 @@ subcollection: containers
 
     * [Worker node patch](/docs/containers?topic=containers-116_changelog#1162_1514_worker)
 
-[Version 1.15 changelog (unsupported 22 September 2020)](/docs/containers?topic=containers-115_changelog#115_changelog)
+[Version 1.15 change log (unsupported 22 September 2020)](/docs/containers?topic=containers-115_changelog#115_changelog)
 
 * [Change log for worker node fix pack 1.15.12_1552, released 14 September 2020](/docs/containers?topic=containers-115_changelog#11512_1552)
 
@@ -7823,7 +7823,7 @@ subcollection: containers
 
 * [Change log for 1.15.1_1511, released 5 August 2019](/docs/containers?topic=containers-115_changelog#1151_1511)
 
-[Version 1.14 changelog (unsupported 31 May 2020)](/docs/containers?topic=containers-114_changelog#114_changelog)
+[Version 1.14 change log (unsupported 31 May 2020)](/docs/containers?topic=containers-114_changelog#114_changelog)
 
 * [Change log for worker node fix pack 1.14.10_1555, released 26 May 2020](/docs/containers?topic=containers-114_changelog#11410_1555)
 
@@ -7899,7 +7899,7 @@ subcollection: containers
 
 * [Change log for 1.14.1_1516, released 7 May 2019](/docs/containers?topic=containers-114_changelog#1141_1516)
 
-[Version 1.13 changelog (unsupported 22 February 2020)](/docs/containers?topic=containers-113_changelog#113_changelog)
+[Version 1.13 change log (unsupported 22 February 2020)](/docs/containers?topic=containers-113_changelog#113_changelog)
 
 * [Change log for fix pack 1.13.12_1550, released 17 February 2020](/docs/containers?topic=containers-113_changelog#11312_1550)
 
@@ -7977,7 +7977,7 @@ subcollection: containers
 
 * [Change log for 1.13.2_1507, released 5 February 2019](/docs/containers?topic=containers-113_changelog#1132_1507)
 
-[Version 1.12 changelog (unsupported 3 November 2019)](/docs/containers?topic=containers-112_changelog#112_changelog)
+[Version 1.12 change log (unsupported 3 November 2019)](/docs/containers?topic=containers-112_changelog#112_changelog)
 
 * [Change log for worker node fix pack 1.12.10_1570, released 28 October 2019](/docs/containers?topic=containers-112_changelog#11210_1570)
 
@@ -8053,7 +8053,7 @@ subcollection: containers
 
 * [Change log for 1.12.2_1527, released 7 November 2018](/docs/containers?topic=containers-112_changelog#1122_1527)
 
-[Version 1.11 changelog (unsupported as of 20 July 2019)](/docs/containers?topic=containers-111_changelog#111_changelog)
+[Version 1.11 change log (unsupported as of 20 July 2019)](/docs/containers?topic=containers-111_changelog#111_changelog)
 
 * [Change log for worker node fix pack 1.11.10_1564, released 8 July 2019](/docs/containers?topic=containers-111_changelog#11110_1564)
 
@@ -8123,7 +8123,7 @@ subcollection: containers
 
 * [Change log for 1.11.2_1513, released 14 August 2018](/docs/containers?topic=containers-111_changelog#1112_1513)
 
-[Version 1.10 changelog (unsupported as of 16 May 2019)](/docs/containers?topic=containers-110_changelog#110_changelog)
+[Version 1.10 change log (unsupported as of 16 May 2019)](/docs/containers?topic=containers-110_changelog#110_changelog)
 
 * [Change log for worker node fix pack 1.10.13_1558, released 13 May 2019](/docs/containers?topic=containers-110_changelog#11013_1558)
 
@@ -8193,7 +8193,7 @@ subcollection: containers
 
 * [Change log for 1.10.1_1508, released 01 May 2018](/docs/containers?topic=containers-110_changelog#1101_1508)
 
-[Version 1.9 changelog (unsupported as of 27 December 2018)](/docs/containers?topic=containers-19_changelog#19_changelog)
+[Version 1.9 change log (unsupported as of 27 December 2018)](/docs/containers?topic=containers-19_changelog#19_changelog)
 
 * [Change log for worker node fix pack 1.9.11_1539, released 17 December 2018](/docs/containers?topic=containers-19_changelog#1911_1539)
 
@@ -8237,7 +8237,7 @@ subcollection: containers
 
 * [Change log for 1.9.7_1510, released 30 April 2018](/docs/containers?topic=containers-19_changelog#197_1510)
 
-[Version 1.8 changelog (Unsupported)](/docs/containers?topic=containers-18_changelog#18_changelog)
+[Version 1.8 change log (Unsupported)](/docs/containers?topic=containers-18_changelog#18_changelog)
 
 * [Change log for worker node fix pack 1.8.15_1521, released 20 September 2018](/docs/containers?topic=containers-18_changelog#1815_1521)
 
@@ -8251,7 +8251,7 @@ subcollection: containers
 
 * [Change log for worker node fix pack 1.8.13_1515, released 21 June 2018](/docs/containers?topic=containers-18_changelog#1813_1515)
 
-* [Changelog 1.8.13_1514, released 19 June 2018](/docs/containers?topic=containers-18_changelog#1813_1514)
+* [Change log 1.8.13_1514, released 19 June 2018](/docs/containers?topic=containers-18_changelog#1813_1514)
 
 * [Change log for worker node fix pack 1.8.11_1512, released 11 June 2018](/docs/containers?topic=containers-18_changelog#1811_1512)
 
@@ -8261,7 +8261,7 @@ subcollection: containers
 
 * [Change log for 1.8.11_1509, released 19 April 2018](/docs/containers?topic=containers-18_changelog#1811_1509)
 
-[Version 1.7 changelog (Unsupported)](/docs/containers?topic=containers-17_changelog#17_changelog)
+[Version 1.7 change log (Unsupported)](/docs/containers?topic=containers-17_changelog#17_changelog)
 
 * [Change log for worker node fix pack 1.7.16_1514, released 11 June 2018](/docs/containers?topic=containers-17_changelog#1716_1514)
 
@@ -8540,7 +8540,7 @@ subcollection: containers
 
 * [Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
 
-    * [Changelog for 1.16.2, released 14 February 2023](/docs/containers?topic=containers-istio-changelog#1162)
+    * [Change log for 1.16.2, released 14 February 2023](/docs/containers?topic=containers-istio-changelog#1162)
 
     * [Change log for 1.16.1, released 10 January 2023](/docs/containers?topic=containers-istio-changelog#1161)
 
@@ -8548,7 +8548,7 @@ subcollection: containers
 
 * [Version 1.15](/docs/containers?topic=containers-istio-changelog#v115)
 
-    * [Changelog for 1.15.5, released 14 February 2023](/docs/containers?topic=containers-istio-changelog#1155)
+    * [Change log for 1.15.5, released 14 February 2023](/docs/containers?topic=containers-istio-changelog#1155)
 
     * [Change log for 1.15.4, released 10 January 2023](/docs/containers?topic=containers-istio-changelog#1154)
 

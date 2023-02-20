@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-14"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -160,7 +160,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
 
     `istio-components-pilot-requests-cpu`
     :   Default value: `"500m"`
-    :   Configure the CPU request in millicpu for the `istiod` component pod.
+    :   Configure the CPU request in milli CPU for the `istiod` component pod.
         Use caution when changing this value. Setting this value too low might prevent the control plane from working properly, and setting this value too high might prevent the `istiod` pod from being scheduled.
         {: important}
 

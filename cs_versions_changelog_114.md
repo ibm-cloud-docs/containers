@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-13"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -15,11 +15,11 @@ subcollection: containers
 
 
 
-# Version 1.14 changelog (unsupported 31 May 2020)
+# Version 1.14 change log (unsupported 31 May 2020) 
 {: #114_changelog}
 
 
-Version 1.14 is unsupported. You can review the following archive of 1.14 changelogs.
+Version 1.14 is unsupported. You can review the following archive of 1.14 change logs.
 {: shortdesc}
 
 ## Change log for worker node fix pack 1.14.10_1555, released 26 May 2020
@@ -82,7 +82,7 @@ The following table shows the changes that are in the worker node fix pack `1.14
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| HA proxy | 1.8.23 | 1.8.25 | See the [HA proxy changelogs](https://www.haproxy.org/download/1.8/src/CHANGELOG){: external}. The update addresses [CVE-2020-11100](https://nvd.nist.gov/vuln/detail/CVE-2020-11100){: external}. |
+| HA proxy | 1.8.23 | 1.8.25 | See the [HA proxy change logs](https://www.haproxy.org/download/1.8/src/CHANGELOG){: external}. The update addresses [CVE-2020-11100](https://nvd.nist.gov/vuln/detail/CVE-2020-11100){: external}. |
 | Ubuntu 18.04 packages | 4.15.0-91-generic | 4.15.0-96-generic | Updated worker node images with package and kernel updates for [CVE-2020-8831](https://nvd.nist.gov/vuln/detail/CVE-2020-8831){: external}, [CVE-2020-8833](https://nvd.nist.gov/vuln/detail/CVE-2020-8833){: external}, [CVE-2020-11100](https://nvd.nist.gov/vuln/detail/CVE-2020-11100){: external}, and [CVE-2020-8834](https://nvd.nist.gov/vuln/detail/CVE-2020-8834){: external}. |
 | Ubuntu 16.04 packages | 4.4.0-176-generic | 4.4.0-177-generic | Updated worker node images with package and kernel updates for [CVE-2020-8831](https://nvd.nist.gov/vuln/detail/CVE-2020-8831){: external}, [CVE-2020-8833](https://nvd.nist.gov/vuln/detail/CVE-2020-8833){: external}, and [CVE-2020-8428](https://nvd.nist.gov/vuln/detail/CVE-2020-8428){: external}. |
 {: caption="Changes since version 1.14.10_1550" caption-side="bottom"}

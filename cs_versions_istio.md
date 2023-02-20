@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-14"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -37,7 +37,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 ## Version 1.16
 {: #v116}
 
-### Changelog for 1.16.2, released 14 February 2023
+### Change log for 1.16.2, released 14 February 2023
 {: #1162}
 
 Review the changes that are included in version 1.16.2 of the managed Istio add-on.
@@ -122,7 +122,7 @@ Updates in this version
 ## Version 1.15
 {: #v115}
 
-### Changelog for 1.15.5, released 14 February 2023
+### Change log for 1.15.5, released 14 February 2023
 {: #1155}
 
 Review the changes that are included in version 1.15.5 of the managed Istio add-on.
@@ -836,7 +836,7 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.12.0](https://istio.io/latest/news/releases/1.12.x/announcing-1.12/){: external}. 
 
-:   Updates the `managed-istio` operator settings. This includes a `TERMINATION_DRAIN_DURATION` of 30 seconds which replaces an earlier prestop variable of 25 seconds. If you are already using a `TERMINATION_DRAIN_DURATION` you must increase the value by 30 seconds to account for this change. 
+:   Updates the `managed-istio` operator settings. This includes a `TERMINATION_DRAIN_DURATION` of 30 seconds which replaces an earlier `preStop` variable of 25 seconds. If you are already using a `TERMINATION_DRAIN_DURATION` you must increase the value by 30 seconds to account for this change. 
 
 :   Updates the affinity rules in the `k8s.overlay` to `k8s.affinity`. If you are using custom gateways, review the updated configuration for the default gateways to see if you want to use the change in your custom gateways. 
 
@@ -1019,7 +1019,7 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.11.0](https://istio.io/latest/news/releases/1.11.x/announcing-1.11/){: external} and [Istio 1.11.1](https://istio.io/latest/news/releases/1.11.x/announcing-1.11.1/.){: external}.
 
-:   Adds a postStart to the sidecar to enable the holdApplicationUntilProxyStarts option. Since the sidecar is normally last this doesn't impact default behavior where Istio places the sidecar as the last container. If you are adding containers to your pods, verify that they get added before the sidecar or can wait for the sidecar to start.
+:   Adds a `postStart` variable to the sidecar to enable the holdApplicationUntilProxyStarts option. Since the sidecar is normally last this doesn't impact default behavior where Istio places the sidecar as the last container. If you are adding containers to your pods, verify that they get added before the sidecar or can wait for the sidecar to start.
 
 :   Resolves the following CVEs
     - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}

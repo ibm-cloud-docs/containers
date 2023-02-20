@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-16"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -15,11 +15,11 @@ subcollection: containers
 
 
 
-# Version 1.9 changelog (unsupported as of 27 December 2018)
+# Version 1.9 change log (unsupported as of 27 December 2018)
 {: #19_changelog}
 
 
-Review the version 1.9 changelogs.
+Review the version 1.9 change logs.
 {: shortdesc}
 
 
@@ -82,7 +82,7 @@ The following table shows the changes that are in the worker node fix pack 1.9.1
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| TPM-enabled kernel | N/A | N/A | Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-kubernetes-service-cli) on an existing cluster, you need to [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks flavors --zone` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types). |
+| TPM-enabled kernel | N/A | N/A | Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-kubernetes-service-cli) on an existing cluster, you need to [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **`Trustable`** field after running the `ibmcloud ks flavors --zone` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types). |
 {: caption="Table 1. Changes since version 1.9.10_1531" caption-side="bottom"}
 
 ## Change log for worker node fix pack 1.9.10_1531, released 26 October 2018

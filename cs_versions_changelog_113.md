@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-13"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -16,11 +16,11 @@ subcollection: containers
 
 
 
-# Version 1.13 changelog (unsupported 22 February 2020)
+# Version 1.13 change log (unsupported 22 February 2020)
 {: #113_changelog}
 
 
-Version 1.13 is unsupported. You can review the following archive of 1.13 changelogs.
+Version 1.13 is unsupported. You can review the following archive of 1.13 change logs.
 {: shortdesc}
 
 ## Change log for fix pack 1.13.12_1550, released 17 February 2020

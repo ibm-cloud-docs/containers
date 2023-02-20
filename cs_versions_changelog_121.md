@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-10"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.21
 
@@ -342,7 +342,7 @@ The following table shows the changes that are in the worker node fix pack 1.21.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1865 | 1899 | Revert setting gratuitous arp on LBv1. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1865 | 1899 | Revert setting gratuitous ARP on LBv1. |
 {: caption="Changes since version 1.21.11_1553" caption-side="bottom"}
 
 
@@ -367,7 +367,7 @@ The following table shows the changes that are in the worker node fix pack 1.21.
 | Konnectivity agent | v0.0.27_a6b5248a_323_iks | v0.0.30_331_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.30){: external}.  Updated to use `Go` version `1.17.8`. |
 | Konnectivity server | v0.0.27_a6b5248a_323_iks | v0.0.30_331_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.30){: external}.  Updated to use `Go` version `1.17.8`. |
 | Kubernetes | v1.21.10 | v1.21.11 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.11){: external}. |
-| Load balancer and Load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1747 | 1865 | Updated the image to resolve CVEs. Updated to use `Go` version `1.17.8`. Set gratuitous arp at the correct time on LBv1. |
+| Load balancer and Load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1747 | 1865 | Updated the image to resolve CVEs. Updated to use `Go` version `1.17.8`. Set gratuitous ARP at the correct time on LBv1. |
 | Operator Lifecycle Manager | 0.16.1-IKS-15 | 0.16.1-IKS-16 | Resolve [CVE-2022-0778](https://nvd.nist.gov/vuln/detail/CVE-2022-0778){: external}. |
 {: caption="Changes since version 1.21.10_1550" caption-side="bottom"}
 
@@ -689,7 +689,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Calico | v3.19.1 | v3.19.3 | See the [Calico release notes](https://docs.tigera.io/archive){: external}. Increased liveness and readiness probe timeouts to 10 seconds. |
 | Gateway-enabled cluster controller | 1444 | 1510 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711){: external} and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}. |
 | GPU device plug-in and installer | 8c8bcdf | 58d7589 | Updated to use `Go` version `1.16.7`. |
-| {{site.data.keyword.cloud_notm}} Controller Manager | v1.21.4-1 | v1.21.5-1 | Updated to support the Kubernetes `1.21.5` release and to use `Go` version `1.16.8` and calicoctl version `3.19.3`. Fixed a bug that may cause node initialization to fail when a new node reuses the name of a deleted node. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.21.4-1 | v1.21.5-1 | Updated to support the Kubernetes `1.21.5` release and to use `Go` version `1.16.8` and `calicoctl` version `3.19.3`. Fixed a bug that may cause node initialization to fail when a new node reuses the name of a deleted node. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 398 | 400 | Updated to use `Go` version `1.16.7`. Updated universal base image (UBI) to the latest `8.4-208` version to resolve CVEs. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 945df65 | e3cb629 | Updated to use `Go` version `1.16.7`. |
 | Konnectivity agent | v0.0.21e_231_iks | v0.0.23_245_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.23){: external}. |
@@ -767,7 +767,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Gateway-enabled cluster controller | 1348 | 1444 | Updated image for [CVE-2021-36159](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36159){: external}. |
 | GPU device plug-in and installer | 483ccc2 | 8c8bcdf | Updated to use `Go` version `1.16.6`. |
 | {{site.data.keyword.IBM_notm}} Calico extension | 747 | 763 | Updated to use `Go` version `1.16.6`. Updated UBI to the latest `8.4-205` version to resolve CVEs. |
-| {{site.data.keyword.cloud_notm}} Controller Manager | v1.21.3-2 | v1.21.4-1 | Updated to support the Kubernetes `1.21.4` release and to use `Go` version `1.16.7` and calicoctl version `3.19.2`. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.21.3-2 | v1.21.4-1 | Updated to support the Kubernetes `1.21.4` release and to use `Go` version `1.16.7` and `calicoctl` version `3.19.2`. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 395 | 398 | Updated to use `Go` version `1.16.6`. Updated image for [CVE-2021-33910](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33910){: external}. |
 | Key Management Service provider | v2.3.6 | v2.3.7 | Updated to use `Go` version `1.15.15`. Updated UBI to the latest `8.4` version to resolve CVEs. |
 | Kubernetes | v1.21.3 | v1.21.4 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.4){: external}. |
@@ -830,7 +830,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | etcd | v3.4.14 | v3.4.16 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.16){: external}. |
 | GPU device plug-in and installer | 772e15f | 483ccc2 | Updated image for [CVE-2021-20271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-20271){: external}, [CVE-2021-3516](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3516){: external}, [CVE-2021-3517](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3517){: external}, [CVE-2021-3518](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3518){: external}, [CVE-2021-3537](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3537){: external}, [CVE-2021-3541](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3541){: external}, and [CVE-2021-3520](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3520){: external}. |
 | {{site.data.keyword.IBM_notm}} Calico extension | 730 | 747 | Updated universal base image (UBI) to version `8.4-205` to resolve CVEs. |
-| {{site.data.keyword.cloud_notm}} Controller Manager | v1.21.2-2 | v1.21.3-2 | Updated to support the Kubernetes `1.21.3` release and to use Go version `1.16.6` and calicoctl version `3.19.1`. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.21.2-2 | v1.21.3-2 | Updated to support the Kubernetes `1.21.3` release and to use Go version `1.16.6` and `calicoctl` version `3.19.1`. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 394 | 395 | Updated universal base image (UBI) to version `8.4-205` to resolve CVEs. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | b68ea92 | 945df65 | Updated image for [CVE-2021-33194](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33194){: external}. |
 | Key Management Service provider | v2.3.5 | v2.3.6 | Updated universal base image (UBI) to the latest version to resolve CVEs. |

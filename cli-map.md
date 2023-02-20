@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes
 
@@ -331,7 +331,7 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
 **Deprecated** [View or set the API endpoint and API version for the service](/docs/containers?topic=containers-kubernetes-service-cli#cs_cli_api).
 {: shortdesc}
 
-## ibmcloud ks init
+## ibmcloud ks `init`
 {: #icks_map_init}
 
 [Initialize the Kubernetes Service plug-in and get authentication tokens](/docs/containers?topic=containers-kubernetes-service-cli#cs_init).

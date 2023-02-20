@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-02-17"
+lastupdated: "2023-02-20"
 
 keywords: ingress, alb, manage albs, update, alb image
 
@@ -30,7 +30,6 @@ Manually keep your ALBs up to date with the latest version, or enable automatic 
 
 You can manually apply a one-time update of your Ingress ALB pods with the `ibmcloud ks ingress alb update` command. By default, this command applies the latest ALB image version, but you can apply a different version by including the  `--version` option. For more information or command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_update).
 {: shortdesc}
-
 If you want to update your ALB image to a specific version with the `--version` option, you must [disable automatic ALB updates](#autoupdate) and then keep them disabled for as long as you want to run the specified version. Automatic updates always apply the latest version and overwrite any manual updates you apply. If you want to use a different version, you cannot enable automatic updates. 
 {: important}
 
@@ -63,14 +62,14 @@ Do not enable automatic updates if you run an ALB image version that is differen
 ### Scheduling maintenance windows for automatic updates
 {: #alb-scheduled-updates}
 
-You can enable automatic updates of all Ingress ALB pods in a cluster by enabling [autoupdate](#autoupdate). If you enable autoupdate for your ALBs, you can further control and manage your ALB updates by creating a customized ConfigMap that specifies the time you want the updates to occur and the percentage of ALBs you want to update.  
+You can enable automatic updates of all Ingress ALB pods in a cluster by enabling [automatic updates](#autoupdate). If you enable automatic update for your ALBs, you can further control and manage your ALB updates by creating a customized ConfigMap that specifies the time you want the updates to occur and the percentage of ALBs you want to update.  
 {: shortdesc}
 
 To set a time for automatic updates, you set the `updateStartTime` and `updateEndTime` keys in the deployment ConfigMap. Each key represents an assigned time in a 24 hour format (HH:MM). Note that this time is specified in coordinated universal time (UTC) rather than your local time. To specify a percentage of ALBs to update, you set the `updatePercentage` key as a whole number between 0 and 100.
 
 1. Create a YAML file for your ConfigMap. Specify the `updatePercentage`, `updateStartTime`, and `updateEndTime` fields as key-value pairs in the `data` field.
 
-    The following example ConfigMap sets the autoupdate function to update 35% of ALB pods in your cluster between 20:34 and 23:59 UTC.
+    The following example ConfigMap sets the automatic update function to update 35% of ALB pods in your cluster between 20:34 and 23:59 UTC.
 
     ```yaml
     apiVersion: v1
@@ -134,7 +133,7 @@ Kubernetes Ingress versions
 
 The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `1.1.2_2507_iks` indicates the most recent build of the `0.47.0` Ingress NGINX version. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
 
-For the changes that are in each version of the Ingress images, see the [Ingress version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog).
+For the changes that are in each version of the Ingress images, see the [Ingress version change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
 ### Reverting to an earlier version
 {: #revert-alb-version}
@@ -153,7 +152,7 @@ Each ALB can handle around 20,000 connections per second. If you need to process
 ### Creating more ALBs in a zone
 {: #create_alb}
 
-Each ALB in a zone is deployed as two pods on different worker nodes. To scale up your ALB processing capabilites and handle more connections, you can create additional ALBs in a zone. The IP address of the new ALB is automatically added to your Ingress subdomain.
+Each ALB in a zone is deployed as two pods on different worker nodes. To scale up your ALB processing capabilities and handle more connections, you can create additional ALBs in a zone. The IP address of the new ALB is automatically added to your Ingress subdomain.
 {: shortdesc}
 
 When you create a multizone cluster, a default public ALB is created in each zone where you have worker nodes. If you later remove one of these original three zones and add workers in a different zone, a default public ALB is not created in that new zone. You can manually create an ALB to process connections in that new zone.
