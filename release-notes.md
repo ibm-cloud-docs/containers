@@ -936,7 +936,7 @@ Cluster autoscaler add-on
 {: #containers-july1422}
 
 Cross-account encryption
-:   You can now set up cross-account encryption. Note that this feature is available for allowlisted accounts only. For more infomration see, [Encrypting the Kubernetes secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect).
+:   You can now set up cross-account encryption. Note that this feature is available for allowlisted accounts only. For more information see, [Encrypting the Kubernetes secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect).
 
 {{site.data.keyword.cos_full_notm}} plug-in
 :   Version `2.1.18` of the {{site.data.keyword.cos_full_notm}} plug-in [is available](/docs/containers?topic=containers-cos_plugin_changelog).
@@ -1194,7 +1194,7 @@ Cluster autoscaler add-on
 :   Versions `1.0.5_628` and `1.1.0_615` are available. See [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
 
 ALB OAuth Proxy add-on
-:   Verion 1.0.0 is no longer supported. For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   Version 1.0.0 is no longer supported. For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 
 ### 12 May 2022
 {: #containers-may1222}
@@ -1784,7 +1784,7 @@ Istio add-on
 {: release-note}
 
 Worker node fix pack update
-:   Changelog documentation is available for worker node versions [`1.22.4_1534`](/docs/containers?topic=containers-changelog_122#1224_1534), [`1.21.7_1544`](/docs/containers?topic=containers-changelog_121#1217_1544), [`1.20.13_1566`](/docs/containers?topic=containers-changelog_120#12013_1566), and [`1.19.16_1573`](/docs/containers?topic=containers-changelog_119#11916_1573).
+:   Change log documentation is available for worker node versions [`1.22.4_1534`](/docs/containers?topic=containers-changelog_122#1224_1534), [`1.21.7_1544`](/docs/containers?topic=containers-changelog_121#1217_1544), [`1.20.13_1566`](/docs/containers?topic=containers-changelog_120#12013_1566), and [`1.19.16_1573`](/docs/containers?topic=containers-changelog_119#11916_1573).
 
 ## December 2021
 {: #containers-dec21}
@@ -1825,7 +1825,7 @@ Istio add-on
 :   [Version `1.12`](/docs/containers?topic=containers-istio-changelog#1102) of the Istio managed add-on is released.
 
 Master fix pack update
-:   Changelog documentation is available for version [`1.22.4_1531`](/docs/containers?topic=containers-changelog_122#1224_1531), [`1.21.7_1541`](/docs/containers?topic=containers-changelog_121#1217_1541), [`1.20.13_1563`](/docs/containers?topic=containers-changelog_120#12013_1563), and [`1.19.16_1570`](/docs/containers?topic=containers-changelog_119#11916_1570).
+:   Change log documentation is available for version [`1.22.4_1531`](/docs/containers?topic=containers-changelog_122#1224_1531), [`1.21.7_1541`](/docs/containers?topic=containers-changelog_121#1217_1541), [`1.20.13_1563`](/docs/containers?topic=containers-changelog_120#12013_1563), and [`1.19.16_1570`](/docs/containers?topic=containers-changelog_119#11916_1570).
 
 
 
@@ -1836,7 +1836,7 @@ Master fix pack update
 
 
 Worker node fix pack update
-:   Changelog documentation is available for version [`1.22.4_1532`](/docs/containers?topic=containers-changelog_122#1224_1532), [`1.21.7_1542`](/docs/containers?topic=containers-changelog_121#1217_1542), [`1.20.13_1564`](/docs/containers?topic=containers-changelog_120#12013_1564), and [`1.19.16_1571`](/docs/containers?topic=containers-changelog_119#11916_1571).
+:   Change log documentation is available for version [`1.22.4_1532`](/docs/containers?topic=containers-changelog_122#1224_1532), [`1.21.7_1542`](/docs/containers?topic=containers-changelog_121#1217_1542), [`1.20.13_1564`](/docs/containers?topic=containers-changelog_120#12013_1564), and [`1.19.16_1571`](/docs/containers?topic=containers-changelog_119#11916_1571).
 
 
 
@@ -1873,7 +1873,7 @@ Container service CLI
 {: release-note}
 
 Worker node fix pack update
-:   Changelog documentation is available for version [`1.22.3_1530`](/docs/containers?topic=containers-changelog_122#1223_1530), [`1.21.6_1540`](/docs/containers?topic=containers-changelog_121#1216_1540), [`1.20.12_1562`](/docs/containers?topic=containers-changelog_120#12012_1562), and [`1.19.16_1569`](/docs/containers?topic=containers-changelog_119#11916_1569).
+:   Change log documentation is available for version [`1.22.3_1530`](/docs/containers?topic=containers-changelog_122#1223_1530), [`1.21.6_1540`](/docs/containers?topic=containers-changelog_121#1216_1540), [`1.20.12_1562`](/docs/containers?topic=containers-changelog_120#12012_1562), and [`1.19.16_1569`](/docs/containers?topic=containers-changelog_119#11916_1569).
 
 {{site.data.keyword.block_storage_is_short}} add-on.
 :   [Version 4.0.3_793](/docs/containers?topic=containers-vpc_bs_changelog) is released.
@@ -1912,14 +1912,14 @@ Kubernetes Ingress image
 {: release-note}
 
 Worker node fix pack update
-:   Changelog documentation is available for version [`1.22.3_1529`](/docs/containers?topic=containers-changelog_122#1223_1529), [`1.21.6_1539`](/docs/containers?topic=containers-changelog_121#1216_1539), [`1.20.12_1561`](/docs/containers?topic=containers-changelog_120#12012_1561), and [`1.19.16_1568`](/docs/containers?topic=containers-changelog_119#11916_1568).
+:   Change log documentation is available for version [`1.22.3_1529`](/docs/containers?topic=containers-changelog_122#1223_1529), [`1.21.6_1539`](/docs/containers?topic=containers-changelog_121#1216_1539), [`1.20.12_1561`](/docs/containers?topic=containers-changelog_120#12012_1561), and [`1.19.16_1568`](/docs/containers?topic=containers-changelog_119#11916_1568).
 
 
 ### 15 November 2021
 {: #containers-nov1521}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   The [CLI change log(/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.344. 
 
 ### 12 November 2021
@@ -1927,14 +1927,14 @@ CLI changelog
 {: release-note}
 
 Master fix pack updates
-:   Changelog documentation is available for version  [`1.22.2_1526`](/docs/containers?topic=containers-changelog_122#1222_1526), [`1.21.5_1536`](/docs/containers?topic=containers-changelog_121#1215_1536), [`1.20.11_1558`](/docs/containers?topic=containers-changelog_120#12011_1558), and [`1.19.15_1565`](/docs/containers?topic=containers-changelog_119#11915_1565).
+:   Change log documentation is available for version  [`1.22.2_1526`](/docs/containers?topic=containers-changelog_122#1222_1526), [`1.21.5_1536`](/docs/containers?topic=containers-changelog_121#1215_1536), [`1.20.11_1558`](/docs/containers?topic=containers-changelog_120#12011_1558), and [`1.19.15_1565`](/docs/containers?topic=containers-changelog_119#11915_1565).
 
 ### 10 November 2021
 {: #containers-nov1021}
 {: release-note}
 
 Worker node fix pack update
-:   Changelog documentation is available for version [`1.22.2_1528`](/docs/containers?topic=containers-changelog_122#1222_1528), [`1.21.5_1538`](/docs/containers?topic=containers-changelog_121#1215_1538), [`1.20.11_1560`](/docs/containers?topic=containers-changelog_120#12011_1560), and [`1.19.15_1567`](/docs/containers?topic=containers-changelog_119#11915_1567).
+:   Change log documentation is available for version [`1.22.2_1528`](/docs/containers?topic=containers-changelog_122#1222_1528), [`1.21.5_1538`](/docs/containers?topic=containers-changelog_121#1215_1538), [`1.20.11_1560`](/docs/containers?topic=containers-changelog_120#12011_1560), and [`1.19.15_1567`](/docs/containers?topic=containers-changelog_119#11915_1567).
 
 ### 8 November 2021
 {: #containers-nov821}
@@ -1978,7 +1978,7 @@ Istio add-on change log
 {: #containers-oct2621}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   The [CLI change log(/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.334. 
 
 ### 25 October 2021
@@ -1986,7 +1986,7 @@ CLI changelog
 {: release-note}
 
 Worker node fix pack update
-:   Changelog documentation is available for version [`1.22.2_1527`](/docs/containers?topic=containers-changelog_122#1222_1527), [`1.21.5_1537`](/docs/containers?topic=containers-changelog_121#1215_1537), [`1.20.11_1559`](/docs/containers?topic=containers-changelog_120#12011_1559), and [`1.19.15_1566`](/docs/containers?topic=containers-changelog_119#11915_1566).
+:   Change log documentation is available for version [`1.22.2_1527`](/docs/containers?topic=containers-changelog_122#1222_1527), [`1.21.5_1537`](/docs/containers?topic=containers-changelog_121#1215_1537), [`1.20.11_1559`](/docs/containers?topic=containers-changelog_120#12011_1559), and [`1.19.15_1566`](/docs/containers?topic=containers-changelog_119#11915_1566).
 
 ### 22 October 2021
 {: #containers-oct2221}
@@ -2015,7 +2015,7 @@ New troubleshooting topic
 {: #containers-oct1321}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   The [CLI change log(/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.331. 
 
 ### 11 October 2021
@@ -2030,7 +2030,7 @@ Unsupported Kubernetes version 1.18
 
 
 Worker node fix pack update
-:   Changelog documentation is available for version [`1.22.2_1524`](/docs/containers?topic=containers-changelog_122#1222_1524), [`1.21.5_1533`](/docs/containers?topic=containers-changelog_121#1215_1533), [`1.20.11_1555`](/docs/containers?topic=containers-changelog_120#12011_1555), and [`1.19.15_1562`](/docs/containers?topic=containers-changelog_119#11915_1562).
+:   Change log documentation is available for version [`1.22.2_1524`](/docs/containers?topic=containers-changelog_122#1222_1524), [`1.21.5_1533`](/docs/containers?topic=containers-changelog_121#1215_1533), [`1.20.11_1555`](/docs/containers?topic=containers-changelog_120#12011_1555), and [`1.19.15_1562`](/docs/containers?topic=containers-changelog_119#11915_1562).
 
 ### 7 October 2021
 {: #containers-oct721}
@@ -2159,7 +2159,7 @@ Worker node fix pack update
 {: #containers-sep921}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.48.1_1613_iks`, `0.47.0_1614_iks`, and `0.43.0_1612_iks`.
 
 
@@ -2234,7 +2234,7 @@ Master fix pack update change log documentation
 Registry token update
 :   Registry tokens are no longer accepted for authentication in {{site.data.keyword.registrylong_notm}}. Update your clusters to use {{site.data.keyword.cloud_notm}} IAM authentication. For more information, see [Accessing {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-registry_access). For more information about Registry token deprecation, see [IBM Cloud Container Registry Deprecates Registry Tokens for Authentication](https://www.ibm.com/cloud/blog/announcements/ibm-cloud-container-registry-deprecates-registry-tokens-for-authentication){: external}.
 
-Ingress changelogs
+Ingress change logs
 :   Updated the [Ingress ALB change log(/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.48.1_1541_iks`, `0.47.0_1540_iks`, and `0.43.0_1539_iks`. Version `0.45.0_1482_iks` is removed.
 
 
@@ -2266,7 +2266,7 @@ Istio add-on change log
 {: #containers-aug1021}
 {: release-note}
 
-Ingress changelogs
+Ingress change logs
 :   Updated the [Ingress ALB change log(/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.48.1_1465_iks`, `0.47.0_1480_iks`, and `0.45.0_1482_iks`.
 
 
@@ -2280,14 +2280,14 @@ ALB OAuth Proxy
 {: #containers-aug0921}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.312](/docs/containers?topic=containers-cs_cli_changelog).
 
 ### 2 August 2021
 {: #containers-aug0221}
 {: release-note}
 
-Ingress changelogs
+Ingress change logs
 :   Updated the [Ingress ALB change log(/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.47.0_1434_iks` and `0.45.0_1435_iks`. Version `0.35.0` is now unsupported. 
 
 Worker node versions
@@ -2346,7 +2346,7 @@ Snapshots
 {: #containers-july0621}
 {: release-note}
 
-Ingress changelogs
+Ingress change logs
 :   Updated the [Ingress ALB change log(/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.47.0_1376_iks`, `0.45.0_1375_iks`, and `0.35.0_1374_iks`.
 
 Worker node versions
@@ -2384,7 +2384,7 @@ Master versions
 {: #containers-june2421}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.295](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 ### 23 June 2021
@@ -2408,7 +2408,7 @@ Worker node versions
 {: #containers-june2121}
 {: release-note}
 
-Ingress changelogs
+Ingress change logs
 :   Updated the [Ingress ALB change log(/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the release of version 0.47.0 of the Kubernetes Ingress image.
 
 New! The `addon options` command is now available
@@ -2438,7 +2438,7 @@ New! Private VPC NLB
 {: #containers-june1021}
 {: release-note}
 
-Ingress changelogs
+Ingress change logs
 :   Updated the [Ingress ALB change log(/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions 0.45.0, 0.35.0, and 0.34.1 of the Kubernetes Ingress image.
 
 
@@ -2509,7 +2509,7 @@ Istio add-on change log
 {: #containers-may2621}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.275](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 Version 0.45.0 of the Kubernetes Ingress image
@@ -2614,7 +2614,7 @@ Master versions
 {: #containers-april2621}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.258](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 
@@ -2631,7 +2631,7 @@ Worker node versions
 {: #containers-april2321}
 {: release-note}
 
-Ingress changelogs
+Ingress change logs
 :   Updated the [Ingress ALB change log(/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the release of version 0.45.0 of the Kubernetes Ingress image. Version 0.33.0 is now unsupported.
 
 
@@ -2648,7 +2648,7 @@ New! Toronto multizone region for VPC
 {: release-note}
 
 add-on change logs
-:   Updated version changelogs for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   Updated version change logs for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 
 Cluster autoscaler add-on
 :   [Patch update `1.0.2_256`](/docs/containers?topic=containers-ca_changelog) of the cluster autoscaler add-on is available.
@@ -2658,7 +2658,7 @@ Cluster autoscaler add-on
 
 
   
-Ingress changelogs
+Ingress change logs
 :   Updated the [Ingress ALB change log(/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for updates to the Kubernetes Ingress and {{site.data.keyword.containerlong_notm}} Ingress images.
 
 
@@ -2690,7 +2690,7 @@ Worker node versions
 
 
 
-Ingress changelogs
+Ingress change logs
 :   Updated the [Ingress ALB change log(/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for updates to the Kubernetes Ingress and {{site.data.keyword.containerlong_notm}} Ingress images.
 
 
@@ -2740,7 +2740,7 @@ New! image security add-on
 {: release-note}
 
 add-on change logs
-:   Added version changelogs for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   Added version change logs for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 
 Master versions
 :   Master fix pack update change log documentation is available for version [1.20.5_1533](/docs/containers?topic=containers-changelog_120#1205_1533), [1.19.9_1540](/docs/containers?topic=containers-changelog_119#1199_1540), [1.18.17_1546](/docs/containers?topic=containers-118_changelog#11817_1546), and [1.17.17_1557](/docs/containers?topic=containers-117_changelog#11717_1557).
@@ -2778,7 +2778,7 @@ Istio add-on
 
 
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [Ingress ALB change log(/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for updates to the Kubernetes Ingress and {{site.data.keyword.containerlong_notm}} Ingress images.
 
 
@@ -2839,7 +2839,7 @@ Deprecated fields across events
 {: #containers-march1621}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`nginx-ingress` build to 2458](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 ### 12 March 2021
@@ -2880,7 +2880,7 @@ Trusted images
 {: #containers-march0121}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.233](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 
@@ -2921,7 +2921,7 @@ End of service of VPC Gen 1
 {: #containers-feb2521}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.231](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 
@@ -2991,7 +2991,7 @@ Gateway firewalls and Calico policies
 {: #containers-feb1021}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`nginx-ingress` build to 2452](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 Gateway firewalls and Calico policies
@@ -3001,7 +3001,7 @@ Gateway firewalls and Calico policies
 {: #containers-feb0821}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.223](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 
@@ -3075,7 +3075,7 @@ Private Kubernetes Ingress
 {: #containers-jan1921}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`nginx-ingress` build to 2424](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 Master versions
@@ -3117,7 +3117,7 @@ Removal of data center support
 {: #containers-jan0721}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the latest [Kubernetes Ingress image build to `0.35.0_869_iks`](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0).
 
 
@@ -3148,7 +3148,7 @@ Worker node versions
 {: #containers-dec1820}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.208](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 {{site.data.keyword.cos_full_notm}} plug-in
@@ -3166,7 +3166,7 @@ Back up and restore
 
 
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the latest [Kubernetes Ingress image build to `0.35.0_826_iks`](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0).
 :   Updated the [`ingress-auth` build to 954](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
@@ -3191,7 +3191,7 @@ Cluster autoscaler
 
 
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the latest [Kubernetes Ingress image build to `0.35.0_767_iks`](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0).
 :   Updated the [`nginx-ingress` build to 2410 and the `ingress-auth` build to 947](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
@@ -3223,7 +3223,7 @@ Worker node versions
 Accessing clusters
 :   Updated the steps for [accessing clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se) to use the `--endpoint private` option in the **`ibmcloud ks cluster config`** command.
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.206](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 Proxy protocol for Ingress
@@ -3302,14 +3302,14 @@ New! Portieris for image security enforcement
 {: #containers-nov1920}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`nginx-ingress` build to 653 and the `ingress-auth` build to 425](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 ### 18 November 2020
 {: #containers-nov1820}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.197](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 
@@ -3319,7 +3319,7 @@ Knative add-on deprecation
 
 
 
-New! {{site.data.keyword.block_storage_is_short}} changelog
+New! {{site.data.keyword.block_storage_is_short}} change log
 :   Added a [change log(/docs/containers?topic=containers-vpc_bs_changelog) for the {{site.data.keyword.block_storage_is_short}} add-on.
 
 ### 16 November 2020
@@ -3468,8 +3468,8 @@ New! Network load balancer for VPC
 
 
 
-Version changelogs
-:   Changelog documentation is available for [1.19.2_1524](/docs/containers?topic=containers-changelog_119#1192_1524).
+Version change logs
+:   Change log documentation is available for [1.19.2_1524](/docs/containers?topic=containers-changelog_119#1192_1524).
 
 VPC load balancer
 :   Added support for setting the `service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-node-selector` and `service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-subnet` annotations when you create new VPC load balancers in clusters that run Kubernetes version 1.19.
@@ -3493,14 +3493,14 @@ Versions
 {: #containers-oct0820}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [Kubernetes Ingress image build to `0.35.0_474_iks`](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0).
 
 ### 6 October 2020
 {: #containers-oct0620}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.178](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 Ingress secret expiration synchronization
@@ -3520,7 +3520,7 @@ Istio add-on
 Default version
 :   The default version for clusters is now 1.18.
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`nginx-ingress` build to 652 and the `ingress-auth` build to 424](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 ## September 2020
@@ -3548,14 +3548,14 @@ Versions
 {: #containers-sept2420}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.171](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 ### 23 September 2020
 {: #containers-sept2320}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`nginx-ingress` build to 651 and the `ingress-auth` build to 423](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 
@@ -3665,7 +3665,7 @@ New! Worker node flavors
 {: #containers-aug2420}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.157](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 Cluster autoscaler
@@ -3719,14 +3719,14 @@ Istio add-on
 {: #containers-aug0620}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.143](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 ### 5 August 2020
 {: #containers-aug0520}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`nginx-ingress` image build to 647 and the `ingress-auth` image build to 421](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 
@@ -3818,7 +3818,7 @@ Istio add-on
 {: #containers-july1620}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`nginx-ingress` image build to 645 and the `ingress-auth` image build to 420](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 
@@ -3851,14 +3851,14 @@ Knative add-on
 {: #containers-july0720}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.118](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 ### 6 July 2020
 {: #containers-july0620}
 {: release-note}
 
-Version changelogs
+Version change logs
 :   Worker node fix pack update change log documentation is available.
 :   Kubernetes version [1.18.4_1518](/docs/containers?topic=containers-118_changelog#1184_1518), [1.17.7_1530](/docs/containers?topic=containers-117_changelog#1177_1530), [1.16.11_1537](/docs/containers?topic=containers-116_changelog#11611_1537), and [1.15.12_1544](/docs/containers?topic=containers-115_changelog#11512_1544).
 
@@ -3882,7 +3882,7 @@ VPC load balancer
 Gateway appliance firewalls
 :   Updated the [required IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_outbound) that you must open in a public gateway device.
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`ingress-auth` image build to 413](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 23 June 2020
@@ -3900,8 +3900,8 @@ Istio add-on
 {: #containers-june2220}
 {: release-note}
 
-Version changelogs
-:   Changelog documentation is available.
+Version change logs
+:   Change log documentation is available.
 :   Kubernetes version [1.18.4_1517](/docs/containers?topic=containers-118_changelog#1184_1517), [1.17.7_1529](/docs/containers?topic=containers-117_changelog#1177_1529), [1.16.11_1536](/docs/containers?topic=containers-116_changelog#11611_1536), and [1.15.12_1543](/docs/containers?topic=containers-115_changelog#11512_1543).
 
 
@@ -3909,7 +3909,7 @@ Version changelogs
 {: #containers-june1820}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`ingress-auth` image build to 413](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 16 June 2020
@@ -3918,14 +3918,14 @@ Ingress ALB changelog
 
 
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.99](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 ### 9 June 2020
 {: #containers-june0920}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.94](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 Permissions
@@ -3938,7 +3938,7 @@ New! Static routes add-on
 {: #containers-june0820}
 {: release-note}
 
-Version changelogs
+Version change logs
 :   Worker node change log documentation is available.
 :   Kubernetes [1.18.3_1515](/docs/containers?topic=containers-118_changelog#1183_1515), [1.17.6_1527](/docs/containers?topic=containers-117_changelog#1176_1527), [1.16.10_1534](/docs/containers?topic=containers-116_changelog#11610_1534), and [1.15.12_1541](/docs/containers?topic=containers-115_changelog#11512_1541)
 
@@ -3957,7 +3957,7 @@ Istio mTLS
 
 
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`nginx-ingress` image build to 637](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 
@@ -3997,7 +3997,7 @@ Unsupported: Kubernetes version 1.14
 {: #containers-may2620}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.84](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 Image pull secrets
@@ -4013,7 +4013,7 @@ NodeLocal DNS cache
 
 
 
-Version changelogs
+Version change logs
 :   Master and worker node change log documentation is available.
 :   Kubernetes [1.18.3_1514](/docs/containers?topic=containers-118_changelog#1183_1514), [1.17.6_1526](/docs/containers?topic=containers-117_changelog#1176_1526), [1.16.10_1533](/docs/containers?topic=containers-116_changelog#11610_1533), [1.15.12_1540](/docs/containers?topic=containers-115_changelog#11512_1540), and [1.14.10_1555](/docs/containers?topic=containers-114_changelog#11410_1555).
 
@@ -4049,7 +4049,7 @@ Istio add-on
 {: #containers-may1820}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`nginx-ingress` image build to 628](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 
@@ -4083,8 +4083,8 @@ NodeLocal DNS cache
 Zone-aware DNS beta
 :   For multizone clusters that run Kubernetes 1.18, you can set up [zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware) to improve DNS performance and availability.
 
-Version changelogs
-:   Changelog documentation is available for Kubernetes version [1.18.2_1512](/docs/containers?topic=containers-118_changelog#1182_1512).
+Version change logs
+:   Change log documentation is available for Kubernetes version [1.18.2_1512](/docs/containers?topic=containers-118_changelog#1182_1512).
 :   Kubernetes [1.17.5_1524](/docs/containers?topic=containers-117_changelog#1175_1524), [1.16.9_1531](/docs/containers?topic=containers-116_changelog#1169_1531), [1.15.11_1538](/docs/containers?topic=containers-115_changelog#11511_1538), and [1.14.10_1554](/docs/containers?topic=containers-114_changelog#11410_1554)
 
 
@@ -4092,7 +4092,7 @@ Version changelogs
 {: #containers-may0820}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.57](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 
@@ -4147,10 +4147,10 @@ VPC cluster master access
 {: #containers-april2720}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`ingress-auth` image build to 401](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
-Version changelogs
+Version change logs
 :   Kubernetes [1.17.5_1523](/docs/containers?topic=containers-117_changelog#1175_1523), [1.16.9_1530](/docs/containers?topic=containers-116_changelog#1169_1530), [1.15.11_1537](/docs/containers?topic=containers-115_changelog#11511_1537), and [1.14.10_1553](/docs/containers?topic=containers-114_changelog#11410_1553)
 
 
@@ -4158,7 +4158,7 @@ Version changelogs
 {: #containers-april2320}
 {: release-note}
 
-Version changelogs
+Version change logs
 :   Kubernetes [1.17.5_1522](/docs/containers?topic=containers-117_changelog#1175_1522), [1.16.9_1529](/docs/containers?topic=containers-116_changelog#1169_1529), [1.15.11_1536](/docs/containers?topic=containers-115_changelog#11511_1536), and [1.14.10_1552](/docs/containers?topic=containers-114_changelog#11410_1552).
 
 
@@ -4177,7 +4177,7 @@ Private network connection to registry
 {: #containers-april1720}
 {: release-note}
 
-Version changelog
+Version change log
 :   Master patch updates are available for Kubernetes [1.17.4_1521](/docs/containers?topic=containers-117_changelog#1174_1521_master).
 
 
@@ -4186,7 +4186,7 @@ Version changelog
 {: #containers-april1620}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`ingress-auth` image build to 394](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 13 April 2020
@@ -4198,7 +4198,7 @@ Gateway appliance firewalls
 
 
 
-Version changelogs
+Version change logs
 :   Worker node patch updates are available.
 :   Kubernetes [1.17.4_1521](/docs/containers?topic=containers-117_changelog#1174_1521), [1.16.7_1528](/docs/containers?topic=containers-116_changelog#1168_1528), [1.15.10_1535](/docs/containers?topic=containers-115_changelog#11511_1535), and [1.14.10_1551](/docs/containers?topic=containers-114_changelog#11410_1551).
 
@@ -4207,7 +4207,7 @@ Version changelogs
 {: #containers-april0620}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.28](/docs/containers?topic=containers-cs_cli_changelog#10).
 
  
@@ -4231,7 +4231,7 @@ Istio add-on
 {: #containers-mar3020}
 {: release-note}
 
-Version changelogs
+Version change logs
 :   Worker node patch updates are available.
 :   Kubernetes [1.17.3_1520](/docs/containers?topic=containers-117_changelog#1174_1520), [1.16.7_1527](/docs/containers?topic=containers-116_changelog#1168_1527), [1.15.10_1534](/docs/containers?topic=containers-115_changelog#11511_1534), and [1.14.10_1550](/docs/containers?topic=containers-114_changelog#11410_1550).
 
@@ -4252,14 +4252,14 @@ Tech overview
 
 
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`nginx-ingress` image build to 627](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 24 March 2020
 {: #containers-mar2420}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.15](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 
@@ -4291,7 +4291,7 @@ Sizing workloads
 
 
 
-Version changelogs
+Version change logs
 :   Master and worker node patch updates are available.
 :   Kubernetes [1.17.4_1519](/docs/containers?topic=containers-117_changelog#1174_1519), [1.16.8_1526](/docs/containers?topic=containers-116_changelog#1168_1526), [1.15.11_1533](/docs/containers?topic=containers-115_changelog#11511_1533), and [1.14.10_1549](/docs/containers?topic=containers-114_changelog#11410_1549).
 
@@ -4340,17 +4340,17 @@ Updating the {{site.data.keyword.block_storage_is_short}} add-on
 {: #containers-mar0420}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.4.102](/docs/containers?topic=containers-cs_cli_changelog#04).
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`ingress-auth` image build to 390](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 2 March 2020
 {: #containers-mar0220}
 {: release-note}
 
-Version changelogs
+Version change logs
 :   Worker node patch updates are available.
 :   Kubernetes [1.17.3_1518](/docs/containers?topic=containers-117_changelog#1173_1518), [1.16.7_1525](/docs/containers?topic=containers-116_changelog#1167_1525), [1.15.10_1532](/docs/containers?topic=containers-115_changelog#11510_1532), and [1.14.10_1548](/docs/containers?topic=containers-114_changelog#11410_1548).
 
@@ -4380,7 +4380,7 @@ Unsupported: Kubernetes version 1.13
 {: #containers-feb1920}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.4.90](/docs/containers?topic=containers-cs_cli_changelog).
 
 
@@ -4417,7 +4417,7 @@ Kubernetes version 1.17
 
 
 
-Version changelogs
+Version change logs
 :   Master and worker node patch updates.
 :   Kubernetes [1.17.3_1516](/docs/containers?topic=containers-117_changelog#1173_1516), [1.16.7_1524](/docs/containers?topic=containers-116_changelog#1167_1524), [1.15.10_1531](/docs/containers?topic=containers-115_changelog#11510_1531), [1.14.10_1547](/docs/containers?topic=containers-114_changelog#11410_1547), and [1.13.12_1550](/docs/containers?topic=containers-113_changelog#11312_1550)
 
@@ -4446,7 +4446,7 @@ Deprecated: Kubernetes version 1.14
 VPC cluster creation troubleshooting
 :   Added [troubleshooting steps](/docs/containers?topic=containers-ts_no_vpc) for when no VPCs are listed when you try to create a VPC cluster in the console.
 
-Knative changelogs
+Knative change logs
 :   Check out the changes that are in version 0.12.1 of the managed Knative add-on. If you installed the Knative add-on before, you must uninstall and reinstall the add-on to apply these changes in your cluster.
 
 
@@ -4470,7 +4470,7 @@ VPC security groups
 {: #containers-feb0320}
 {: release-note}
 
-Version changelog
+Version change log
 :   Kubernetes worker node fix packs [1.16.5_1523](/docs/containers?topic=containers-116_changelog#1165_1523), [1.15.8_1530](/docs/containers?topic=containers-115_changelog#1158_1530), [1.14.10_1546](/docs/containers?topic=containers-114_changelog#11410_1546), and [1.13.12_1549](/docs/containers?topic=containers-113_changelog#11312_1549).
 
 
@@ -4495,7 +4495,7 @@ Expanded troubleshooting
 {: #containers-jan3020}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`nginx-ingress` image build to 625](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 27 January 2020
@@ -4504,7 +4504,7 @@ Ingress ALB changelog
 
 
 
-Istio changelog
+Istio change log
 :   Added an [Istio add-on version change log(/docs/containers?topic=containers-istio-changelog).
 
 
@@ -4537,10 +4537,10 @@ Default {{site.data.keyword.containerlong_notm}} settings
 Helm version 3
 :   Updated [Adding services by using Helm charts](/docs/containers?topic=containers-helm) to include steps for installing Helm v3 in your cluster. Migrate to Helm v3 today for several advantages over Helm v2, such as the removal of the Helm server, Tiller.
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`nginx-ingress` image build to 621](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog). 
 
-Version changelog
+Version change log
 :   Patch updates are available.
 :   Kubernetes [1.16.5_1522](/docs/containers?topic=containers-116_changelog#1165_1522), [1.15.8_1529](/docs/containers?topic=containers-115_changelog#1158_1529), [1.14.10_1545](/docs/containers?topic=containers-114_changelog#11410_1545), and [1.13.12_1548](/docs/containers?topic=containers-113_changelog#11312_1548).
 
@@ -4558,14 +4558,14 @@ Version changelog
 {: #containers-jan0620}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`ingress-auth` image to build 373](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 3 January 2020
 {: #containers-jan0320}
 {: release-note}
 
-Version changelog
+Version change log
 :   Worker node patch updates are available.
 :   Kubernetes [1.16.3_1521](/docs/containers?topic=containers-116_changelog#1163_1521), [1.15.6_1528](/docs/containers?topic=containers-115_changelog#1156_1528), [1.14.9_1544](/docs/containers?topic=containers-114_changelog#1149_1544), and [1.13.12_1547](/docs/containers?topic=containers-113_changelog#11312_1547)
 
@@ -4577,14 +4577,14 @@ Version changelog
 {: #containers-dec1819}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [`nginx-ingress` image build to 615 and the `ingress-auth` image to build 372](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 17 December 2019
 {: #containers-dec1719}
 {: release-note}
 
-Version changelog
+Version change log
 :   Master patch updates are available.
 :   Kubernetes [1.16.3_1520](/docs/containers?topic=containers-116_changelog#1163_1520), [1.15.6_1527](/docs/containers?topic=containers-115_changelog#1156_1527), [1.14.9_1543](/docs/containers?topic=containers-114_changelog#1149_1543), and [1.13.12_1546](/docs/containers?topic=containers-113_changelog#11312_1546)
 
@@ -4618,7 +4618,7 @@ Setting up a service mesh with Istio
 {: #containers-dec1119}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.4.64](/docs/containers?topic=containers-cs_cli_changelog).
 
 
@@ -4640,7 +4640,7 @@ Managed Knative add-on
 {: #containers-dec0919}
 {: release-note}
 
-Version changelog
+Version change log
 :   Worker node patch updates are available.
 :   Kubernetes [1.16.3_1519](/docs/containers?topic=containers-116_changelog#1163_1519_worker), [1.15.6_1526](/docs/containers?topic=containers-115_changelog#1156_1526_worker), [1.14.9_1542](/docs/containers?topic=containers-114_changelog#1149_1542_worker), and [1.13.12_1545](/docs/containers?topic=containers-113_changelog#11312_1545_worker).
 
@@ -4675,7 +4675,7 @@ Use the internal KVDB in Portworx
 {: #containers-nov2619}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.4.61](/docs/containers?topic=containers-cs_cli_changelog).
 
 Cluster autoscaling for VPC clusters
@@ -4684,7 +4684,7 @@ Cluster autoscaling for VPC clusters
 New! Reservations and limits for PIDs
 :   Worker nodes that run Kubernetes version 1.14 or later set [process ID (PID) reservations and limits that vary by flavor](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node), to help prevent malicious or runaway apps from consuming all available PIDs.
 
-Version changelog
+Version change log
 :   Worker node patch updates are available.
 :   Kubernetes [1.16.3_1518](/docs/containers?topic=containers-116_changelog#1163_1518_worker), [1.15.6_1525](/docs/containers?topic=containers-115_changelog#1156_1525_worker), [1.14.9_1541](/docs/containers?topic=containers-114_changelog#1149_1541_worker), and [1.13.12_1544](/docs/containers?topic=containers-113_changelog#11312_1544_worker)
 
@@ -4707,10 +4707,10 @@ Ingress ALB subdomain format
 {: #containers-nov2119}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [ALB `nginx-ingress` image to 597 and the `ingress-auth` image to build 353](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
-Version changelog
+Version change log
 :   Master patch updates are available.
 :   Kubernetes [1.16.3_1518](/docs/containers?topic=containers-116_changelog#1163_1518), [1.15.6_1525](/docs/containers?topic=containers-115_changelog#1156_1525), [1.14.9_1541](/docs/containers?topic=containers-114_changelog#1149_1541), and [1.13.12_1544](/docs/containers?topic=containers-113_changelog#11312_1544).
 
@@ -4756,7 +4756,7 @@ Accessing your cluster
 
 
 
-Version changelog
+Version change log
 :   Worker node patch updates are available.
 :    Kubernetes [1.16.2_1515](/docs/containers?topic=containers-116_changelog#1162_1515_worker), [1.15.5_1522](/docs/containers?topic=containers-115_changelog#1155_1522_worker), [1.14.8_1538](/docs/containers?topic=containers-114_changelog#1148_1538_worker), and [1.13.12_1541](/docs/containers?topic=containers-113_changelog#11312_1541_worker).
 
@@ -4766,12 +4766,12 @@ Version changelog
 {: #containers-nov0719}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.4.51](/docs/containers?topic=containers-cs_cli_changelog).
 
 
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [ALB `ingress-auth` image to build 345](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 
@@ -4813,7 +4813,7 @@ New! Keep your own key (KYOK) support (beta)
 {: #containers-oct2819}
 {: release-note}
 
-Version changelogs
+Version change logs
 :   Worker node patch updates are available for Kubernetes [1.15.5_1521](/docs/containers?topic=containers-115_changelog#1155_1521), [1.14.8_1537](/docs/containers?topic=containers-114_changelog#1148_1537), [1.13.12_1540](/docs/containers?topic=containers-113_changelog#11312_1540), [1.12.10_1570](/docs/containers?topic=containers-112_changelog#11210_1570), and {{site.data.keyword.redhat_openshift_notm}} [3.11.153_1529_openshift](/docs/openshift?topic=openshift-openshift_changelog_311#311153_1529).
 
 
@@ -4827,7 +4827,7 @@ New! Resource groups for VPC clusters
 {: #containers-oct2419}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.4.42](/docs/containers?topic=containers-cs_cli_changelog).
 
 
@@ -4845,7 +4845,7 @@ Ingress subdomain troubleshooting
 {: #containers-oct2319}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the ALB [`nginx-ingress` image to build 584 and `ingress-auth` image build to 344](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 Ingress annotations
@@ -4855,7 +4855,7 @@ Ingress annotations
 {: #containers-oct2219}
 {: release-note}
 
-Version changelogs
+Version change logs
 :   Master patch updates are available for Kubernetes [1.15.5_1520](/docs/containers?topic=containers-115_changelog#1155_1520), [1.14.8_1536](/docs/containers?topic=containers-114_changelog#1148_1536), [1.13.12_1539](/docs/containers?topic=containers-113_changelog#11312_1539), and {{site.data.keyword.redhat_openshift_notm}} [3.11.146_1528_openshift](/docs/openshift?topic=openshift-openshift_changelog_311#311146_1528).
 
 
@@ -4876,7 +4876,7 @@ New DevOps tutorial
 {: #containers-oct1419}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.4.38](/docs/containers?topic=containers-cs_cli_changelog).
 
 
@@ -4894,7 +4894,7 @@ Creating DNS subdomains for VPC load balancers and private Ingress ALBs
 Let's Encrypt rate limits for Ingress
 :   Added troubleshooting steps for when no subdomain or secret is generated for the Ingress ALB when you create or delete clusters of the same name.
 
-Version changelogs
+Version change logs
 :   Worker node patch updates are available for Kubernetes [1.15.4_1519](/docs/containers?topic=containers-115_changelog#1154_1519_worker), [1.14.7_1535](/docs/containers?topic=containers-114_changelog#1147_1535_worker), [1.13.11_1538](/docs/containers?topic=containers-113_changelog#11311_1538_worker), [1.12.10_1569](/docs/containers?topic=containers-112_changelog#11210_1569_worker), and {{site.data.keyword.redhat_openshift_notm}} [3.11.146_1527_openshift](/docs/openshift?topic=openshift-openshift_changelog_311#311146_1527).
 
 
@@ -4903,7 +4903,7 @@ Version changelogs
 {: #containers-oct0319}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the ALB [`nginx-ingress` image to build 579 and `ingress-auth` image build to 341](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 DevOps toolchain
@@ -4938,7 +4938,7 @@ New! Gateway-enabled classic clusters
 
 
 
-Version changelogs
+Version change logs
 :   Patch updates are available for Kubernetes [1.15.4_1518](/docs/containers?topic=containers-115_changelog#1154_1518), [1.14.7_1534](/docs/containers?topic=containers-114_changelog#1147_1534), [1.13.11_1537](/docs/containers?topic=containers-113_changelog#11311_1537), and [1.12.10_1568](/docs/containers?topic=containers-112_changelog#11210_1568_worker).
 
     
@@ -4961,10 +4961,10 @@ Version changelogs
 {: #containers-sept2419}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.4.31](/docs/containers?topic=containers-cs_cli_changelog).
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the ALB [`nginx-ingress` image to build 566](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 Managing cluster network traffic for VPC clusters
@@ -4990,7 +4990,7 @@ Sending custom Ingress certificates to legacy clients
 {: #containers-sept1619}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the release of version 0.4.23.
 
 {{site.data.keyword.at_full_notm}} events
@@ -4998,7 +4998,7 @@ CLI changelog
 
 
 
-Version changelogs
+Version change logs
 :   Worker node patch updates are available for Kubernetes [1.15.3_1517](/docs/containers?topic=containers-115_changelog#1153_1517_worker), [1.14.6_1533](/docs/containers?topic=containers-114_changelog#1146_1533_worker), [1.13.10_1536](/docs/containers?topic=containers-113_changelog#11310_1536_worker), and [1.12.10_1567](/docs/containers?topic=containers-112_changelog#11210_1567_worker).
 
 
@@ -5021,7 +5021,7 @@ Entitled software
 {: #containers-sept1219}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the ALB [`nginx-ingress` image to build 552](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 
@@ -5030,14 +5030,14 @@ Ingress ALB changelog
 {: #containers-sept0519}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the ALB [`ingress-auth` image to build 340](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 4 September 2019
 {: #containers-sept0419}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.4.3](/docs/containers?topic=containers-cs_cli_changelog).
 
 IAM allowlists
@@ -5052,7 +5052,7 @@ IAM allowlists
 New! {{site.data.keyword.containerlong_notm}} plug-in version `0.4`
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for multiple changes in the [release of version 0.4.1](/docs/containers?topic=containers-cs_cli_changelog).
 
-Version changelog
+Version change log
 :   Worker node patch updates are available for Kubernetes [1.15.3_1516](/docs/containers?topic=containers-115_changelog#1153_1516_worker), [1.14.6_1532](/docs/containers?topic=containers-114_changelog#1146_1532_worker), [1.13.10_1535](/docs/containers?topic=containers-113_changelog#11310_1535_worker), [1.12.10_1566](/docs/containers?topic=containers-112_changelog#11210_1566_worker), and {{site.data.keyword.redhat_openshift_notm}} [3.11.135_1523](/docs/openshift?topic=openshift-openshift_changelog_311#311135_1523_worker).
 
 ## August 2019
@@ -5071,13 +5071,13 @@ Forwarding Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}
 {: #containers-aug2819}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.3.112](/docs/containers?topic=containers-cs_cli_changelog).
 
 
 
-Version changelogs
-:   Updated the changelogs for [1.15.3_1515](/docs/containers?topic=containers-115_changelog#1153_1515), [1.14.6_1531](/docs/containers?topic=containers-114_changelog#1146_1531), [1.13.10_1534](/docs/containers?topic=containers-113_changelog#11310_1534), and [1.12.10_1565](/docs/containers?topic=containers-112_changelog#11210_1565) master fix pack updates.
+Version change logs
+:   Updated the change logs for [1.15.3_1515](/docs/containers?topic=containers-115_changelog#1153_1515), [1.14.6_1531](/docs/containers?topic=containers-114_changelog#1146_1531), [1.13.10_1534](/docs/containers?topic=containers-113_changelog#11310_1534), and [1.12.10_1565](/docs/containers?topic=containers-112_changelog#11210_1565) master fix pack updates.
 
 
 
@@ -5090,7 +5090,7 @@ Version changelogs
 Cluster autoscaler
 :   With the latest version of the cluster autoscaler, you can [enable autoscaling for worker pools during the Helm chart installation](/docs/containers?topic=containers-cluster-scaling-helm) instead of modifying the config map after installation.
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the ALB [`nginx-ingress` image to build 524 and `ingress-auth` image to build 337](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 
@@ -5117,7 +5117,7 @@ Remove bound services from cluster
 {: #containers-aug2019}
 {: release-note}
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the ALB [`nginx-ingress` image to build 519](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for a `custom-ports` bug fix.
 
 
@@ -5149,8 +5149,8 @@ Kubernetes 1.14
 
 
 
-Version changelogs
-:   Updated the changelogs for [1.15.2_1514](/docs/containers?topic=containers-115_changelog#1152_1514), [1.14.5_1530](/docs/containers?topic=containers-114_changelog#1145_1530), [1.13.9_1533](/docs/containers?topic=containers-113_changelog#1139_1533), and [1.12.10_1564](/docs/containers?topic=containers-112_changelog#11210_1564) master fix pack updates.
+Version change logs
+:   Updated the change logs for [1.15.2_1514](/docs/containers?topic=containers-115_changelog#1152_1514), [1.14.5_1530](/docs/containers?topic=containers-114_changelog#1145_1530), [1.13.9_1533](/docs/containers?topic=containers-113_changelog#1139_1533), and [1.12.10_1564](/docs/containers?topic=containers-112_changelog#11210_1564) master fix pack updates.
 
 
 
@@ -5172,8 +5172,8 @@ Istio
 Knative
 :   Added instructions for how to use volumes to access secrets and config maps, pull images from a private registry, scale apps based on CPU usage, change the default container port, and change the `scale-to-zero-grace-period`.
 
-Version changelogs
-:   Updated the changelogs for [1.15.2_1513](/docs/containers?topic=containers-115_changelog#1152_1513), [1.14.5_1529](/docs/containers?topic=containers-114_changelog#1145_1529), [1.13.9_1532](/docs/containers?topic=containers-113_changelog#1139_1532), and [1.12.10_1563](/docs/containers?topic=containers-112_changelog#11210_1563) master fix pack updates.
+Version change logs
+:   Updated the change logs for [1.15.2_1513](/docs/containers?topic=containers-115_changelog#1152_1513), [1.14.5_1529](/docs/containers?topic=containers-114_changelog#1145_1529), [1.13.9_1532](/docs/containers?topic=containers-113_changelog#1139_1532), and [1.12.10_1563](/docs/containers?topic=containers-112_changelog#11210_1563) master fix pack updates.
 
 
 
@@ -5181,17 +5181,17 @@ Version changelogs
 {: #containers-aug1219}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.3.103](/docs/containers?topic=containers-cs_cli_changelog).
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the ALB `ingress-auth` image to build 335 for [`musl libc` vulnerabilities](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 ### 5 August 2019
 {: #containers-aug0519}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.3.99](/docs/containers?topic=containers-cs_cli_changelog).
 
 
@@ -5205,8 +5205,8 @@ New! Version 1.15
 Deprecated: Version 1.12
 :   Kubernetes version 1.12 is deprecated. Review the [changes across versions](/docs/containers?topic=containers-cs_versions), and update to a more recent version.
 
-Version changelogs
-:   Updated the changelogs for [1.14.4_1527](/docs/containers?topic=containers-114_changelog#1144_1527_worker), [1.13.8_1530](/docs/containers?topic=containers-113_changelog#1138_1530_worker), and [1.12.10_1561](/docs/containers?topic=containers-112_changelog#11210_1561_worker) worker node patch updates.
+Version change logs
+:   Updated the change logs for [1.14.4_1527](/docs/containers?topic=containers-114_changelog#1144_1527_worker), [1.13.8_1530](/docs/containers?topic=containers-113_changelog#1138_1530_worker), and [1.12.10_1561](/docs/containers?topic=containers-112_changelog#11210_1561_worker) worker node patch updates.
 
 
 
@@ -5218,10 +5218,10 @@ Version changelogs
 {: #containers-july3019}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.3.95](/docs/containers?topic=containers-cs_cli_changelog).
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the ALB `nginx-ingress` image to build 515 for the [ALB pod readiness check](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 Removing subnets from a cluster
@@ -5233,7 +5233,7 @@ Removing subnets from a cluster
 {: #containers-july2319}
 {: release-note}
 
-Fluentd changelog
+Fluentd change log
 :   Fixes [Alpine vulnerabilities](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog).
 
 
@@ -5245,10 +5245,10 @@ Fluentd changelog
 Version policy
 :   Increased the [version deprecation](/docs/containers?topic=containers-cs_versions#cs_versions_available) period from 30 to 45 days.
 
-Version changelogs
-:   Updated the changelogs for [1.14.4_1526](/docs/containers?topic=containers-114_changelog#1144_1526_worker), [1.13.8_1529](/docs/containers?topic=containers-113_changelog#1138_1529_worker), and [1.12.10_1560](/docs/containers?topic=containers-112_changelog#11210_1560_worker) worker node patch updates.
+Version change logs
+:   Updated the change logs for [1.14.4_1526](/docs/containers?topic=containers-114_changelog#1144_1526_worker), [1.13.8_1529](/docs/containers?topic=containers-113_changelog#1138_1529_worker), and [1.12.10_1560](/docs/containers?topic=containers-112_changelog#11210_1560_worker) worker node patch updates.
 
-Version changelog
+Version change log
 :   [Version 1.11is unsupported](/docs/containers?topic=containers-111_changelog#111_changelog).
 
 
@@ -5258,7 +5258,7 @@ Version changelog
 {: #containers-july1719}
 {: release-note} 
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Fixes [`rbash` vulnerabilities](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
     
 
@@ -5275,7 +5275,7 @@ Cluster and worker node ID
 
 
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the ALB `nginx-ingress` image to build 497.
 
 Troubleshooting clusters
@@ -5283,15 +5283,15 @@ Troubleshooting clusters
 
 
 
-Version changelogs
-:   Updated the changelogs for [1.14.4_1526](/docs/containers?topic=containers-114_changelog#1144_1526), [1.13.8_1529](/docs/containers?topic=containers-113_changelog#1138_1529), and [1.12.10_1560](/docs/containers?topic=containers-112_changelog#11210_1560) master fix pack updates.
+Version change logs
+:   Updated the change logs for [1.14.4_1526](/docs/containers?topic=containers-114_changelog#1144_1526), [1.13.8_1529](/docs/containers?topic=containers-113_changelog#1138_1529), and [1.12.10_1560](/docs/containers?topic=containers-112_changelog#11210_1560) master fix pack updates.
 
 ### 8 July 2019
 {: #containers-july0819}
 {: release-note}
 
-Version changelogs
-:   Updated the changelogs for [1.14.3_1525](/docs/containers?topic=containers-114_changelog#1143_1525), [1.13.7_1528](/docs/containers?topic=containers-113_changelog#1137_1528), [1.12.9_1559](/docs/containers?topic=containers-112_changelog#1129_1559), and [1.11.10_1564](/docs/containers?topic=containers-111_changelog#11110_1564) worker node patch updates.
+Version change logs
+:   Updated the change logs for [1.14.3_1525](/docs/containers?topic=containers-114_changelog#1143_1525), [1.13.7_1528](/docs/containers?topic=containers-113_changelog#1137_1528), [1.12.9_1559](/docs/containers?topic=containers-112_changelog#1129_1559), and [1.11.10_1564](/docs/containers?topic=containers-111_changelog#11110_1564) worker node patch updates.
 
 
 
@@ -5299,7 +5299,7 @@ Version changelogs
 {: #containers-july0219}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.3.58](/docs/containers?topic=containers-cs_cli_changelog).
 
 ### 1 July 2019
@@ -5325,7 +5325,7 @@ strongSwan VPN service
 Calico network policies
 :   Added a set of [public Calico policies](/docs/containers?topic=containers-network_policies#isolate_workers_public) and expanded the set of [private Calico policies](/docs/containers?topic=containers-network_policies#isolate_workers) to protect your cluster on public and private networks.
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [ALB `nginx-ingress` image to build 477](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 
@@ -5333,8 +5333,8 @@ Ingress ALB changelog
 Service limitations
 :   Updated the [maximum number of pods per worker node limitation](/docs/containers?topic=containers-limitations#tech_limits). For worker nodes that run Kubernetes 1.13.7_1527, 1.14.3_1524, or later and that have more than 11 CPU cores, the worker nodes can support 10 pods per core, up to a limit of 250 pods per worker node.
 
-Version changelogs
-:   Added changelogs for [1.14.3_1524](/docs/containers?topic=containers-114_changelog#1143_1524), [1.13.7_1527](/docs/containers?topic=containers-113_changelog#1137_1527), [1.12.9_1558](/docs/containers?topic=containers-112_changelog#1129_1558), and [1.11.10_1563](/docs/containers?topic=containers-111_changelog#11110_1563) worker node patch updates.
+Version change logs
+:   Added change logs for [1.14.3_1524](/docs/containers?topic=containers-114_changelog#1143_1524), [1.13.7_1527](/docs/containers?topic=containers-113_changelog#1137_1527), [1.12.9_1558](/docs/containers?topic=containers-112_changelog#1129_1558), and [1.11.10_1563](/docs/containers?topic=containers-111_changelog#11110_1563) worker node patch updates.
 
 
     
@@ -5353,10 +5353,10 @@ Accessing the Kubernetes master through the private cloud service endpoint
 {: #containers-june1819}
 {: release-note}
 
-CLI changelog
+CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of versions 0.3.47 and 0.3.49](/docs/containers?topic=containers-cs_cli_changelog).
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [ALB `nginx-ingress` image to build 473 and `ingress-auth` image to build 331](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 Managed add-on versions
@@ -5368,8 +5368,8 @@ Removing persistent storage
 Service bindings with private endpoint
 :   [Added steps](/docs/containers?topic=containers-service-binding) for how to manually create service credentials with the private cloud service endpoint when you bind the service to your cluster.
 
-Version changelogs
-:   Updated the changelogs for [1.14.3_1523](/docs/containers?topic=containers-114_changelog#1143_1523), [1.13.7_1526](/docs/containers?topic=containers-113_changelog#1137_1526), [1.12.9_1557](/docs/containers?topic=containers-112_changelog#1129_1557), and [1.11.10_1562] (/docs/containers?topic=containers-111_changelog#11110_1562) patch updates.
+Version change logs
+:   Updated the change logs for [1.14.3_1523](/docs/containers?topic=containers-114_changelog#1143_1523), [1.13.7_1526](/docs/containers?topic=containers-113_changelog#1137_1526), [1.12.9_1557](/docs/containers?topic=containers-112_changelog#1129_1557), and [1.11.10_1562] (/docs/containers?topic=containers-111_changelog#11110_1562) patch updates.
     
 
 ### 14 June 2019
@@ -5403,7 +5403,7 @@ Access to the Kubernetes master through the private cloud service endpoint
 {{site.data.keyword.BluDirectLink}}
 :   Added {{site.data.keyword.dl_full_notm}} to the [VPN connectivity](/docs/containers?topic=containers-vpn) page as a way to create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [ALB `ingress-auth` image to build 330](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
     
 
@@ -5411,10 +5411,10 @@ Ingress ALB changelog
 {: #containers-june0619}
 {: release-note}
 
-Fluentd changelog
+Fluentd change log
 :   Added a [Fluentd version change log(/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog).
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [ALB `nginx-ingress` image to build 470](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
     
 
@@ -5431,8 +5431,8 @@ CLI reference
 {: #containers-june0419}
 {: release-note}
 
-Version changelogs
-:   Updated the changelogs for the [1.14.2_1521](/docs/containers?topic=containers-114_changelog#1142_1521), [1.13.6_1524](/docs/containers?topic=containers-113_changelog#1136_1524), [1.12.9_1555](/docs/containers?topic=containers-112_changelog#1129_1555), and [1.11.10_1561](/docs/containers?topic=containers-111_changelog#11110_1561) patch releases.
+Version change logs
+:   Updated the change logs for the [1.14.2_1521](/docs/containers?topic=containers-114_changelog#1142_1521), [1.13.6_1524](/docs/containers?topic=containers-113_changelog#1136_1524), [1.12.9_1555](/docs/containers?topic=containers-112_changelog#1129_1555), and [1.11.10_1561](/docs/containers?topic=containers-111_changelog#11110_1561) patch releases.
 
 ### 3 June 2019
 {: #containers-june0319}
@@ -5444,7 +5444,7 @@ Bringing your own Ingress controller
 {{site.data.keyword.cos_full_notm}}
 :   Updated the [steps](/docs/containers?topic=containers-storage_cos_install) to install the {{site.data.keyword.cos_full_notm}} plug-in with or without the Helm server, Tiller.
 
-Ingress ALB changelog
+Ingress ALB change log
 :   Updated the [ALB `nginx-ingress` image to build 467](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 Kustomize
@@ -5471,7 +5471,7 @@ Troubleshooting storage
 {: #containers-may2819}
 {: release-note}
 
-Cluster add-ons changelog
+Cluster add-ons change log
 :   Updated the [ALB `nginx-ingress` image to build 462](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
 Troubleshooting registry
@@ -5488,7 +5488,7 @@ Troubleshooting storage
 CLI reference
 :   Updated the [CLI reference page](/docs/containers?topic=containers-kubernetes-service-cli) to reflect multiple changes for the [release of version 0.3.28](/docs/containers?topic=containers-cs_cli_changelog) of the {{site.data.keyword.containerlong_notm}} CLI plug-in.
 
-Cluster add-ons changelog
+Cluster add-ons change log
 :   Updated the [ALB `nginx-ingress` image to build 457](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
 Cluster and worker states
@@ -5518,8 +5518,8 @@ Popular topics
 {: #containers-may2019}
 {: release-note}
 
-Version changelogs
-:   Added [worker node fix pack changelogs](/docs/containers?topic=containers-changelog).
+Version change logs
+:   Added [worker node fix pack change logs](/docs/containers?topic=containers-changelog).
 
 ### 16 May 2019
 {: #containers-may1619}
@@ -5546,7 +5546,7 @@ Service limits
 {: #containers-may1319}
 {: release-note}
 
-Version changelogs
+Version change logs
 :   Added that new patch updates are available for [1.14.1_1518](/docs/containers?topic=containers-114_changelog#1141_1518), [1.13.6_1521](/docs/containers?topic=containers-113_changelog#1136_1521), [1.12.8_1552](/docs/containers?topic=containers-112_changelog#1128_1552), [1.11.10_1558](/docs/containers?topic=containers-111_changelog#11110_1558), and [1.10.13_1558](/docs/containers?topic=containers-110_changelog#11013_1558).
 
 Worker node flavors

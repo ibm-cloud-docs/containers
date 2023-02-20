@@ -1150,7 +1150,7 @@ subcollection: containers
 
     * [15 November 2021](/docs/containers?topic=containers-containers-relnotes#containers-nov1521)
 
-        * CLI changelog
+        * CLI change log
 
     * [12 November 2021](/docs/containers?topic=containers-containers-relnotes#containers-nov1221)
 
@@ -1182,7 +1182,7 @@ subcollection: containers
 
     * [26 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct2621)
 
-        * CLI changelog
+        * CLI change log
 
     * [25 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct2521)
 
@@ -1202,7 +1202,7 @@ subcollection: containers
 
     * [13 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct1321)
 
-        * CLI changelog
+        * CLI change log
 
     * [11 October 2021](/docs/containers?topic=containers-containers-relnotes#containers-oct1121)
 
@@ -1274,7 +1274,7 @@ subcollection: containers
 
     * [9 September 2021](/docs/containers?topic=containers-containers-relnotes#containers-sep921)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [1 September 2021](/docs/containers?topic=containers-containers-relnotes#containers-sep121)
 
@@ -1314,7 +1314,7 @@ subcollection: containers
 
         * Registry token update
 
-        * Ingress changelogs
+        * Ingress change logs
 
         * ALB OAuth Proxy
 
@@ -1328,17 +1328,17 @@ subcollection: containers
 
     * [10 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug1021)
 
-        * Ingress changelogs
+        * Ingress change logs
 
         * ALB OAuth Proxy
 
     * [9 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug0921)
 
-        * CLI changelog
+        * CLI change log
 
     * [2 August 2021](/docs/containers?topic=containers-containers-relnotes#containers-aug0221)
 
-        * Ingress changelogs
+        * Ingress change logs
 
         * Worker node versions
 
@@ -1368,7 +1368,7 @@ subcollection: containers
 
     * [6 July 2021](/docs/containers?topic=containers-containers-relnotes#containers-july0621)
 
-        * Ingress changelogs
+        * Ingress change logs
 
         * Worker node versions
 
@@ -1394,7 +1394,7 @@ subcollection: containers
 
     * [24 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june2421)
 
-        * CLI changelog
+        * CLI change log
 
     * [23 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june2321)
 
@@ -1408,7 +1408,7 @@ subcollection: containers
 
     * [21 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june2121)
 
-        * Ingress changelogs
+        * Ingress change logs
 
         * New! The `addon options` command is now available
 
@@ -1422,7 +1422,7 @@ subcollection: containers
 
     * [10 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june1021)
 
-        * Ingress changelogs
+        * Ingress change logs
 
     * [9 June 2021](/docs/containers?topic=containers-containers-relnotes#containers-june0921)
 
@@ -1452,7 +1452,7 @@ subcollection: containers
 
     * [26 May 2021](/docs/containers?topic=containers-containers-relnotes#containers-may2621)
 
-        * CLI changelog
+        * CLI change log
 
         * Version 0.45.0 of the Kubernetes Ingress image
 
@@ -1508,7 +1508,7 @@ subcollection: containers
 
     * [26 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april2621)
 
-        * CLI changelog
+        * CLI change log
 
         * VPC NLB
 
@@ -1516,7 +1516,7 @@ subcollection: containers
 
     * [23 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april2321)
 
-        * Ingress changelogs
+        * Ingress change logs
 
     * [20 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april2021)
 
@@ -1530,7 +1530,7 @@ subcollection: containers
 
         * {{site.data.keyword.cos_full_notm}} plug-in
 
-        * Ingress changelogs
+        * Ingress change logs
 
     * [16 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april1621)
 
@@ -1544,7 +1544,7 @@ subcollection: containers
 
         * Worker node versions
 
-        * Ingress changelogs
+        * Ingress change logs
 
     * [5 April 2021](/docs/containers?topic=containers-containers-relnotes#containers-april0521)
 
@@ -1586,7 +1586,7 @@ subcollection: containers
 
     * [22 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march2221)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [17 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-mar1721)
 
@@ -1596,7 +1596,7 @@ subcollection: containers
 
     * [16 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march1621)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [12 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march1221)
 
@@ -1616,7 +1616,7 @@ subcollection: containers
 
     * [1 March 2021](/docs/containers?topic=containers-containers-relnotes#containers-march0121)
 
-        * CLI changelog
+        * CLI change log
 
         * Istio add-on
 
@@ -1636,7 +1636,7 @@ subcollection: containers
 
     * [25 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb2521)
 
-        * CLI changelog
+        * CLI change log
 
     * [24 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb2421)
 
@@ -1672,13 +1672,13 @@ subcollection: containers
 
     * [10 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb1021)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
         * Gateway firewalls and Calico policies
 
     * [8 February 2021](/docs/containers?topic=containers-containers-relnotes#containers-feb0821)
 
-        * CLI changelog
+        * CLI change log
 
         * Istio add-on
 
@@ -1714,7 +1714,7 @@ subcollection: containers
 
     * [19 January 2021](/docs/containers?topic=containers-containers-relnotes#containers-jan1921)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
         * Master versions
 
@@ -1738,7 +1738,7 @@ subcollection: containers
 
     * [7 January 2021](/docs/containers?topic=containers-containers-relnotes#containers-jan0721)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [6 January 2021](/docs/containers?topic=containers-containers-relnotes#containers-jan0621)
 
@@ -1754,7 +1754,7 @@ subcollection: containers
 
     * [18 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1820)
 
-        * CLI changelog
+        * CLI change log
 
         * {{site.data.keyword.cos_full_notm}} plug-in
 
@@ -1764,7 +1764,7 @@ subcollection: containers
 
         * Back up and restore
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [16 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1620)
 
@@ -1776,7 +1776,7 @@ subcollection: containers
 
     * [14 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1420)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
         * Master versions
 
@@ -1792,7 +1792,7 @@ subcollection: containers
 
         * Accessing clusters
 
-        * CLI changelog
+        * CLI change log
 
         * Proxy protocol for Ingress
 
@@ -1832,15 +1832,15 @@ subcollection: containers
 
     * [19 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov1920)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [18 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov1820)
 
-        * CLI changelog
+        * CLI change log
 
         * Knative add-on deprecation
 
-        * New! {{site.data.keyword.block_storage_is_short}} changelog
+        * New! {{site.data.keyword.block_storage_is_short}} change log
 
     * [16 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov1620)
 
@@ -1906,7 +1906,7 @@ subcollection: containers
 
         * New! Network load balancer for VPC
 
-        * Version changelogs
+        * Version change logs
 
         * VPC load balancer
 
@@ -1920,11 +1920,11 @@ subcollection: containers
 
     * [8 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct0820)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [6 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct0620)
 
-        * CLI changelog
+        * CLI change log
 
         * Ingress secret expiration synchronization
 
@@ -1934,7 +1934,7 @@ subcollection: containers
 
         * Default version
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
 * [September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sep20)
 
@@ -1948,11 +1948,11 @@ subcollection: containers
 
     * [24 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2420)
 
-        * CLI changelog
+        * CLI change log
 
     * [23 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2320)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
         * Istio add-on
 
@@ -2002,7 +2002,7 @@ subcollection: containers
 
     * [24 August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug2420)
 
-        * CLI changelog
+        * CLI change log
 
         * Cluster autoscaler
 
@@ -2030,11 +2030,11 @@ subcollection: containers
 
     * [6 August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug0620)
 
-        * CLI changelog
+        * CLI change log
 
     * [5 August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug0520)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [4 August 2020](/docs/containers?topic=containers-containers-relnotes#containers-aug0420)
 
@@ -2078,7 +2078,7 @@ subcollection: containers
 
     * [16 July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july1620)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
         * Istio add-on
 
@@ -2094,11 +2094,11 @@ subcollection: containers
 
     * [7 July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july0720)
 
-        * CLI changelog
+        * CLI change log
 
     * [6 July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july0620)
 
-        * Version changelogs
+        * Version change logs
 
     * [2 July 2020](/docs/containers?topic=containers-containers-relnotes#containers-july0220)
 
@@ -2110,7 +2110,7 @@ subcollection: containers
 
         * Gateway appliance firewalls
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [23 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june2320)
 
@@ -2118,19 +2118,19 @@ subcollection: containers
 
     * [22 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june2220)
 
-        * Version changelogs
+        * Version change logs
 
     * [18 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june1820)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [16 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june1620)
 
-        * CLI changelog
+        * CLI change log
 
     * [9 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june0920)
 
-        * CLI changelog
+        * CLI change log
 
         * Permissions
 
@@ -2138,7 +2138,7 @@ subcollection: containers
 
     * [8 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june0820)
 
-        * Version changelogs
+        * Version change logs
 
     * [4 June 2020](/docs/containers?topic=containers-containers-relnotes#containers-june0420)
 
@@ -2146,7 +2146,7 @@ subcollection: containers
 
         * Istio mTLS
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
         * VPC network security
 
@@ -2164,7 +2164,7 @@ subcollection: containers
 
     * [26 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may2620)
 
-        * CLI changelog
+        * CLI change log
 
         * Image pull secrets
 
@@ -2172,7 +2172,7 @@ subcollection: containers
 
         * NodeLocal DNS cache
 
-        * Version changelogs
+        * Version change logs
 
     * [20 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may2020)
 
@@ -2184,7 +2184,7 @@ subcollection: containers
 
     * [18 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may1820)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [14 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may1420)
 
@@ -2200,11 +2200,11 @@ subcollection: containers
 
         * Zone-aware DNS beta
 
-        * Version changelogs
+        * Version change logs
 
     * [8 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may0820)
 
-        * CLI changelog
+        * CLI change log
 
     * [6 May 2020](/docs/containers?topic=containers-containers-relnotes#containers-may0620)
 
@@ -2232,13 +2232,13 @@ subcollection: containers
 
     * [27 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april2720)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
-        * Version changelogs
+        * Version change logs
 
     * [23 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april2320)
 
-        * Version changelogs
+        * Version change logs
 
     * [22 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april2220)
 
@@ -2246,21 +2246,21 @@ subcollection: containers
 
     * [17 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april1720)
 
-        * Version changelog
+        * Version change log
 
     * [16 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april1620)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [13 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april1320)
 
         * Gateway appliance firewalls
 
-        * Version changelogs
+        * Version change logs
 
     * [6 April 2020](/docs/containers?topic=containers-containers-relnotes#containers-april0620)
 
-        * CLI changelog
+        * CLI change log
 
         * Kubernetes cluster context
 
@@ -2272,7 +2272,7 @@ subcollection: containers
 
     * [30 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar3020)
 
-        * Version changelogs
+        * Version change logs
 
         * File storage classes
 
@@ -2282,11 +2282,11 @@ subcollection: containers
 
     * [25 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar2520)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [24 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar2420)
 
-        * CLI changelog
+        * CLI change log
 
     * [18 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar1820)
 
@@ -2300,7 +2300,7 @@ subcollection: containers
 
         * Sizing workloads
 
-        * Version changelogs
+        * Version change logs
 
     * [12 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar1220)
 
@@ -2322,13 +2322,13 @@ subcollection: containers
 
     * [4 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar0420)
 
-        * CLI changelog
+        * CLI change log
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [2 March 2020](/docs/containers?topic=containers-containers-relnotes#containers-mar0220)
 
-        * Version changelogs
+        * Version change logs
 
 * [February 2020](/docs/containers?topic=containers-containers-relnotes#containers-feb20)
 
@@ -2342,7 +2342,7 @@ subcollection: containers
 
     * [19 February 2020](/docs/containers?topic=containers-containers-relnotes#containers-feb1920)
 
-        * CLI changelog
+        * CLI change log
 
         * Developing and deploying apps
 
@@ -2356,7 +2356,7 @@ subcollection: containers
 
         * Kubernetes version 1.17
 
-        * Version changelogs
+        * Version change logs
 
     * [14 February 2020](/docs/containers?topic=containers-containers-relnotes#containers-feb1420)
 
@@ -2370,7 +2370,7 @@ subcollection: containers
 
         * VPC cluster creation troubleshooting
 
-        * Knative changelogs
+        * Knative change logs
 
     * [6 February 2020](/docs/containers?topic=containers-containers-relnotes#containers-feb0620)
 
@@ -2382,7 +2382,7 @@ subcollection: containers
 
     * [3 February 2020](/docs/containers?topic=containers-containers-relnotes#containers-feb0320)
 
-        * Version changelog
+        * Version change log
 
         * Expanded troubleshooting
 
@@ -2390,11 +2390,11 @@ subcollection: containers
 
     * [30 January 2020](/docs/containers?topic=containers-containers-relnotes#containers-jan3020)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [27 January 2020](/docs/containers?topic=containers-containers-relnotes#containers-jan2720)
 
-        * Istio changelog
+        * Istio change log
 
         * Back up and restore File and Block storage
 
@@ -2410,9 +2410,9 @@ subcollection: containers
 
         * Helm version 3
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
-        * Version changelog
+        * Version change log
 
     * [13 January 2020](/docs/containers?topic=containers-containers-relnotes#containers-jan1320)
 
@@ -2420,21 +2420,21 @@ subcollection: containers
 
     * [6 January 2020](/docs/containers?topic=containers-containers-relnotes#containers-jan0620)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [3 January 2020](/docs/containers?topic=containers-containers-relnotes#containers-jan0320)
 
-        * Version changelog
+        * Version change log
 
 * [December 2019](/docs/containers?topic=containers-containers-relnotes#containers-dec19)
 
     * [18 December 2019](/docs/containers?topic=containers-containers-relnotes#containers-dec1819)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [17 December 2019](/docs/containers?topic=containers-containers-relnotes#containers-dec1719)
 
-        * Version changelog
+        * Version change log
 
         * Adding classic infrastructure servers to gateway-enabled clusters
 
@@ -2446,7 +2446,7 @@ subcollection: containers
 
     * [11 December 2019](/docs/containers?topic=containers-containers-relnotes#containers-dec1119)
 
-        * CLI changelog
+        * CLI change log
 
         * Configuring VPC subnets
 
@@ -2456,7 +2456,7 @@ subcollection: containers
 
     * [9 December 2019](/docs/containers?topic=containers-containers-relnotes#containers-dec0919)
 
-        * Version changelog
+        * Version change log
 
     * [4 December 2019](/docs/containers?topic=containers-containers-relnotes#containers-dec0419)
 
@@ -2474,13 +2474,13 @@ subcollection: containers
 
     * [26 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov2619)
 
-        * CLI changelog
+        * CLI change log
 
         * Cluster autoscaling for VPC clusters
 
         * New! Reservations and limits for PIDs
 
-        * Version changelog
+        * Version change log
 
     * [22 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov2219)
 
@@ -2492,9 +2492,9 @@ subcollection: containers
 
     * [21 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov2119)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
-        * Version changelog
+        * Version change log
 
     * [19 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov1919)
 
@@ -2514,13 +2514,13 @@ subcollection: containers
 
         * Accessing your cluster
 
-        * Version changelog
+        * Version change log
 
     * [7 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov0719)
 
-        * CLI changelog
+        * CLI change log
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [5 November 2019](/docs/containers?topic=containers-containers-relnotes#containers-nov0519)
 
@@ -2542,13 +2542,13 @@ subcollection: containers
 
     * [28 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct2819)
 
-        * Version changelogs
+        * Version change logs
 
         * New! Resource groups for VPC clusters
 
     * [24 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct2419)
 
-        * CLI changelog
+        * CLI change log
 
         * Scaling down file storage
 
@@ -2556,13 +2556,13 @@ subcollection: containers
 
     * [23 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct2319)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
         * Ingress annotations
 
     * [22 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct2219)
 
-        * Version changelogs
+        * Version change logs
 
     * [17 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct1719)
 
@@ -2572,7 +2572,7 @@ subcollection: containers
 
     * [14 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct1419)
 
-        * CLI changelog
+        * CLI change log
 
         * Calico MTU
 
@@ -2580,11 +2580,11 @@ subcollection: containers
 
         * Let's Encrypt rate limits for Ingress
 
-        * Version changelogs
+        * Version change logs
 
     * [3 October 2019](/docs/containers?topic=containers-containers-relnotes#containers-oct0319)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
         * DevOps toolchain
 
@@ -2596,7 +2596,7 @@ subcollection: containers
 
         * New! Gateway-enabled classic clusters
 
-        * Version changelogs
+        * Version change logs
 
 * [September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept19)
 
@@ -2606,9 +2606,9 @@ subcollection: containers
 
     * [24 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept2419)
 
-        * CLI changelog
+        * CLI change log
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
         * Managing cluster network traffic for VPC clusters
 
@@ -2620,11 +2620,11 @@ subcollection: containers
 
     * [16 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept1619)
 
-        * CLI changelog
+        * CLI change log
 
         * {{site.data.keyword.at_full_notm}} events
 
-        * Version changelogs
+        * Version change logs
 
     * [13 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept1319)
 
@@ -2634,15 +2634,15 @@ subcollection: containers
 
     * [12 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept1219)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [5 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept0519)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [4 September 2019](/docs/containers?topic=containers-containers-relnotes#containers-sept0419)
 
-        * CLI changelog
+        * CLI change log
 
         * IAM allowlists
 
@@ -2650,7 +2650,7 @@ subcollection: containers
 
         * New! {{site.data.keyword.containerlong_notm}} plug-in version `0.4`
 
-        * Version changelog
+        * Version change log
 
 * [August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug19)
 
@@ -2660,15 +2660,15 @@ subcollection: containers
 
     * [28 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug2819)
 
-        * CLI changelog
+        * CLI change log
 
-        * Version changelogs
+        * Version change logs
 
     * [26 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug2619)
 
         * Cluster autoscaler
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [23 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug2319)
 
@@ -2680,7 +2680,7 @@ subcollection: containers
 
     * [20 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug2019)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [19 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug1919)
 
@@ -2692,7 +2692,7 @@ subcollection: containers
 
         * {{site.data.keyword.at_full}}
 
-        * Version changelogs
+        * Version change logs
 
     * [15 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug1519)
 
@@ -2704,17 +2704,17 @@ subcollection: containers
 
         * Knative
 
-        * Version changelogs
+        * Version change logs
 
     * [12 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug1219)
 
-        * CLI changelog
+        * CLI change log
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [5 August 2019](/docs/containers?topic=containers-containers-relnotes#containers-aug0519)
 
-        * CLI changelog
+        * CLI change log
 
         * New! `NodeLocal` DNS caching (beta)
 
@@ -2722,51 +2722,51 @@ subcollection: containers
 
         * Deprecated: Version 1.12
 
-        * Version changelogs
+        * Version change logs
 
 * [July 2019](/docs/containers?topic=containers-containers-relnotes#containers-jul19)
 
     * [30 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july3019)
 
-        * CLI changelog
+        * CLI change log
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
         * Removing subnets from a cluster
 
     * [23 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july2319)
 
-        * Fluentd changelog
+        * Fluentd change log
 
     * [22 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july2219)
 
         * Version policy
 
-        * Version changelogs
+        * Version change logs
 
-        * Version changelog
+        * Version change log
 
     * [17 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july1719)
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [15 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july1519)
 
         * Cluster and worker node ID
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
         * Troubleshooting clusters
 
-        * Version changelogs
+        * Version change logs
 
     * [8 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july0819)
 
-        * Version changelogs
+        * Version change logs
 
     * [2 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july0219)
 
-        * CLI changelog
+        * CLI change log
 
     * [1 July 2019](/docs/containers?topic=containers-containers-relnotes#containers-july0119)
 
@@ -2780,11 +2780,11 @@ subcollection: containers
 
         * Calico network policies
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
         * Service limitations
 
-        * Version changelogs
+        * Version change logs
 
     * [21 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june2119)
 
@@ -2792,9 +2792,9 @@ subcollection: containers
 
     * [18 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june1819)
 
-        * CLI changelog
+        * CLI change log
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
         * Managed add-on versions
 
@@ -2802,7 +2802,7 @@ subcollection: containers
 
         * Service bindings with private endpoint
 
-        * Version changelogs
+        * Version change logs
 
     * [14 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june1419)
 
@@ -2822,13 +2822,13 @@ subcollection: containers
 
         * {{site.data.keyword.BluDirectLink}}
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [6 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june0619)
 
-        * Fluentd changelog
+        * Fluentd change log
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
     * [5 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june0519)
 
@@ -2836,7 +2836,7 @@ subcollection: containers
 
     * [4 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june0419)
 
-        * Version changelogs
+        * Version change logs
 
     * [3 June 2019](/docs/containers?topic=containers-containers-relnotes#containers-june0319)
 
@@ -2844,7 +2844,7 @@ subcollection: containers
 
         * {{site.data.keyword.cos_full_notm}}
 
-        * Ingress ALB changelog
+        * Ingress ALB change log
 
         * Kustomize
 
@@ -2860,7 +2860,7 @@ subcollection: containers
 
     * [28 May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may2819)
 
-        * Cluster add-ons changelog
+        * Cluster add-ons change log
 
         * Troubleshooting registry
 
@@ -2870,7 +2870,7 @@ subcollection: containers
 
         * CLI reference
 
-        * Cluster add-ons changelog
+        * Cluster add-ons change log
 
         * Cluster and worker states
 
@@ -2884,7 +2884,7 @@ subcollection: containers
 
     * [20 May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may2019)
 
-        * Version changelogs
+        * Version change logs
 
     * [16 May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may1619)
 
@@ -2900,7 +2900,7 @@ subcollection: containers
 
     * [13 May 2019](/docs/containers?topic=containers-containers-relnotes#containers-may1319)
 
-        * Version changelogs
+        * Version change logs
 
         * Worker node flavors
 
@@ -9569,37 +9569,37 @@ subcollection: containers
 
 [Worker node states](/docs/containers?topic=containers-worker-node-state-reference#worker-node-state-reference)
 
-* [Critical state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-critical)
+* [`Critical` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-critical)
 
-* [Deleting state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleting)
+* [`Deleting` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleting)
 
-* [Deleted state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleted)
+* [`Deleted` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deleted)
 
-* [Deployed state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deployed)
+* [`Deployed` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deployed)
 
-* [Deploying state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploying)
+* [`Deploying` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploying)
 
-* [Deploy_failed state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploy-failed)
+* [`Deploy_failed` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploy-failed)
 
-* [Normal state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-normal)
+* [`Normal` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-normal)
 
-* [Provisioned state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioned)
+* [`Provisioned` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioned)
 
-* [Provisioning state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioning)
+* [`Provisioning` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioning)
 
-* [Provision pending state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-pending)
+* [`Provision pending` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-pending)
 
-* [Provision_failed state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-failed)
+* [`Provision_failed` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provision-failed)
 
-* [Reloading state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading)
+* [`Reloading` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading)
 
-* [Reloading_failed state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading-failed)
+* [`Reloading_failed` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading-failed)
 
-* [Reload_pending state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reload-pending)
+* [`Reload_pending` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reload-pending)
 
-* [Unknown state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-unknown)
+* [`Unknown` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-unknown)
 
-* [Warning state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-warning)
+* [`Warning` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-warning)
 
 [Common issues with worker nodes](/docs/containers?topic=containers-common_worker_nodes_issues#common_worker_nodes_issues)
 

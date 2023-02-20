@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, encrypt, security, kms, root key, crk
 
@@ -41,7 +41,7 @@ The following image and description outline default and optional data encryption
     * **VPC**: See [VPC worker nodes](#worker-encryption-vpc).
     * **Classic**: See [Classic worker nodes](#worker-encryption-classic).
 
-4. **Cluster secrets**: When you deploy your app, don't store confidential information, such as credentials or keys, in the YAML configuration file, configmaps, or scripts. Instead, use [Kubernetes secrets](https://kubernetes.io/docs/concepts/configuration/secret/){: external}, which are base64 encoded by default. To enable encyption of your Kubernetes secrets, [enable a key management service (KMS) provider](#keyprotect) for your cluster.
+4. **Cluster secrets**: When you deploy your app, don't store confidential information, such as credentials or keys, in the YAML configuration file, configmaps, or scripts. Instead, use [Kubernetes secrets](https://kubernetes.io/docs/concepts/configuration/secret/){: external}, which are base64 encoded by default. To enable encryption of your Kubernetes secrets, [enable a key management service (KMS) provider](#keyprotect) for your cluster.
 
 5. **Persistent storage encryption**: You can choose to store data by [setting up file, block, object, or software-defined Portworx persistent storage](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). If you store your data on file or block storage, your data is automatically encrypted at rest. If you use object storage, your data is also encrypted during transit. With Portworx, you can choose to [set up volume encryption](/docs/containers?topic=containers-portworx#encrypt_volumes) to protect your data during transit and at rest. The IBM Cloud infrastructure storage instances save the data on encrypted disks, so your data at rest is encrypted.
 

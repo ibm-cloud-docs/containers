@@ -27,7 +27,7 @@ Sometimes, you can customize routing for Ingress by adding [Kubernetes NGINX ann
 ## Adding a server port to a host header
 {: #add-sport-hheader}
 
-To add a server port to the client request before the request is forwarded to your back-end app, configure proxying external services in a [server snippet annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-snippet){: external} or as an `ibm-k8s-controller-config` ConfigMap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-set-headers){: external}.
+To add a server port to the client request before the request is forwarded to your back-end app, configure a proxy to external services in a [server snippet annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-snippet){: external} or as an `ibm-k8s-controller-config` ConfigMap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-set-headers){: external}.
 {: shortdesc}
 
 
@@ -137,7 +137,7 @@ nginx.ingress.kubernetes.io/configuration-snippet: |
 ## Adding path definitions to external services
 {: #external-services-path}
 
-To add path definitions to external services, such as services hosted in IBM Cloud, configure proxying external services in a [location snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external}. Or, replace proxying with a [permanent redirect to external services](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#permanent-redirect){: external}.
+To add path definitions to external services, such as services hosted in IBM Cloud, configure a proxy to external services in a [location snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external}. Or, replace the proxy with a [permanent redirect to external services](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#permanent-redirect){: external}.
 {: shortdesc}
 
 ## Redirecting insecure requests 
@@ -500,7 +500,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
     
     `logLevel`
     :   Specify the log level that you want to use. Choose from the following values. 
-    :   `2`: Shows the details by using diff about the changes in the configuration in `NGINX`. 
+    :   `2`: Shows the details by using the `**diff**` command to show changes in the configuration in `NGINX`. 
     :   `3`: Shows the details about the service, Ingress rule, endpoint changes in JSON format.
     :   `5`: Configures `NGINX` in debug mode.
     :   For more information about logging, see [Debug Logging](https://kubernetes.github.io/ingress-nginx/troubleshooting/#debug-logging){: external}.
