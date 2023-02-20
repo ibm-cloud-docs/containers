@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-16"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -17,11 +17,11 @@ subcollection: containers
 
 
 
-# Version 1.7 changelog (Unsupported)
+# Version 1.7 change log (Unsupported)
 {: #17_changelog}
 
 
-Review the version 1.7 changelogs.
+Review the version 1.7 change logs.
 {: shortdesc}
 
 ## Change log for worker node fix pack 1.7.16_1514, released 11 June 2018

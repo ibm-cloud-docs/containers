@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-16"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -15,11 +15,11 @@ subcollection: containers
 
 
 
-# Version 1.8 changelog (Unsupported)
+# Version 1.8 change log (Unsupported)
 {: #18_changelog}
 
 
-Review the version 1.8 changelogs.
+Review the version 1.8 change logs.
 {: shortdesc}
 
 ## Change log for worker node fix pack 1.8.15_1521, released 20 September 2018
@@ -84,7 +84,7 @@ Review the version 1.8 changelogs.
 {: caption="Table 1. Changes since version 1.8.13_1514" caption-side="bottom"}
 
 
-## Changelog 1.8.13_1514, released 19 June 2018
+## Change log 1.8.13_1514, released 19 June 2018
 {: #1813_1514}
 
 | Component | Previous | Current | Description |

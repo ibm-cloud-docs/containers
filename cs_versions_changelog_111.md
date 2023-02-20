@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-13"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -16,11 +16,11 @@ subcollection: containers
 
 
 
-# Version 1.11 changelog (unsupported as of 20 July 2019)
+# Version 1.11 change log (unsupported as of 20 July 2019)
 {: #111_changelog}
 
 
-Review the version 1.11 changelog.
+Review the version 1.11 change log.
 {: shortdesc}
 
 ## Change log for worker node fix pack 1.11.10_1564, released 8 July 2019

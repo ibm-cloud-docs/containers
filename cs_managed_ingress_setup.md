@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-20"
 
 keywords: ingress, expose apps, ingress resource, ALB, domain
 
@@ -193,7 +193,7 @@ Create the Ingress resource to define the routing rules that the Ingress control
     ```
     {: pre}
 
-    For example, to send a request to "myapp" by using a default Ingress subdomain, run the following command.
+    For example, to send a request to an app called `myapp` by using a default Ingress subdomain, run the following command.
 
     ```sh
     curl http://169.X.X.X/myapp -H "Host: mycluster-a1b2cdef345678g9hi012j3kl4567890-0000.us-south.containers.appdomain.cloud"
@@ -236,4 +236,5 @@ If you have a classic cluster with only a private VLAN, you must first configure
 1. Create a custom domain through your DNS service provider. Note that Ingress URLs must be 130 characters or fewer.
 
 2. Map your custom domain to the private ALBs by adding their IP addresses as A records (classic clusters) or their VPC hostname as a CNAME (VPC clusters). To find the ALB IP addresses (classic) or hostname (VPC), run `ibmcloud ks ingress alb ls -c <cluster_name_or_ID>`.
+
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -50,7 +50,7 @@ To deploy monitoring agents to your cluster, complete the following steps.
 
 4. In the {{site.data.keyword.mon_short}} UI, click **Add new dashboard**.
 
-5. Search for `Istio` and select one of {{site.data.keyword.mon_short}}'s predefined Istio dashboards.
+5. Search for `Istio` and select one of the {{site.data.keyword.mon_short}} predefined Istio dashboards.
 
 For more information about referencing metrics and dashboards, monitoring Istio internal components, and monitoring Istio A/B deployments and canary deployments, check out the [How to monitor Istio, the Kubernetes service mesh](https://sysdig.com/blog/monitor-istio/){: external} blog post.
 

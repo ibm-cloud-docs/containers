@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-16"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -16,11 +16,11 @@ subcollection: containers
 
 
 
-# Version 1.10 changelog (unsupported as of 16 May 2019)
+# Version 1.10 change log (unsupported as of 16 May 2019)
 {: #110_changelog}
 
 
-Review the version 1.10 changelogs.
+Review the version 1.10 change logs.
 {: shortdesc}
 
 

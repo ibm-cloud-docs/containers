@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-20"
 
 keywords: kubernetes, containers
 
@@ -251,7 +251,7 @@ Review the Kubernetes Policies results of the version 1.5 CIS Kubernetes benchma
 | Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.3.1 | Ensure that the CNI in use supports network policies. | Not Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
-| 5.3.2 | Ensure that all mamespaces have network policies defined. | Scored | 2 | [Fail](#cis-benchmark-remediations-121) | Shared |
+| 5.3.2 | Ensure that all namespaces have network policies defined. | Scored | 2 | [Fail](#cis-benchmark-remediations-121) | Shared |
 {: caption="Section 5.3 Network policies and CNI benchmark results" caption-side="bottom"}
 
 ### 5.4 Secrets management
