@@ -4115,6 +4115,8 @@ subcollection: containers
 
     * [If you do want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group#worker-sgs)
 
+* [Allow worker nodes to connect to the Ingress LoadBalancer](/docs/containers?topic=containers-vpc-security-group#vpc-security-group-loadbalancer-outbound)
+
 [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
 
 * [Creating ACLs from the console](/docs/containers?topic=containers-vpc-acls#acls_ui)
