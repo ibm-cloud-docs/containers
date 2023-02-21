@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-02-21"
 
 keywords: kubernetes, containers
 
@@ -192,7 +192,7 @@ The following table shows the changes that are in the master fix pack 1.24.8_154
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.23.3 | v3.24.5 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.24/release-notes/#v3245){: external}. |
+| Calico | v3.23.3 | v3.24.5 | See the [Calico release notes](https://docs.tigera.io/archive/v3.24/release-notes/#v3245){: external}. |
 | Cluster health image | v1.3.12 | v1.3.13 | Updated Go dependencies, `golangci-lint`, `gosec`, and to `Go` version 1.19.3. Updated base image version to 116. |
 | etcd | v3.5.4 | v3.5.5 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.5){: external}. |
 | Gateway-enabled cluster controller | 1823 | 1902 | `Go` module updates. |
@@ -468,7 +468,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.21.5 | v3.23.1 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.23/release-notes/){: external}. The **default** BGP configuration found in the `default` [BGP Configuration](https://docs.tigera.io/calico/latest/reference/resources/bgpconfig){: external} resource has been updated to set `nodeMeshMaxRestartTime` to `30m`.  This default change is only applied if the cluster does not have a custom BGP configuration. The previous default value was `120s`. |
+| Calico | v3.21.5 | v3.23.1 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.23/release-notes/){: external}. The **default** BGP configuration found in the `default` [BGP Configuration](https://docs.tigera.io/calico/3.25/reference/resources/bgpconfig.){: external} resource has been updated to set `nodeMeshMaxRestartTime` to `30m`.  This default change is only applied if the cluster does not have a custom BGP configuration. The previous default value was `120s`. |
 | CoreDNS | 1.8.7 | 1.9.2 | See the [CoreDNS release notes](https://github.com/coredns/coredns/blob/v1.9.2/notes/coredns-1.9.2.md){: external}. |
 | etcd | v3.4.18 | v3.5.4 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.4){: external}. |
 | GPU device plug-in and installer | 382ada9 | 2b0b6d1 | Updated image for [CVE-2018-25032](https://nvd.nist.gov/vuln/detail/CVE-2018-25032){: external}, [CVE-2021-3634](https://nvd.nist.gov/vuln/detail/CVE-2021-3634){: external}, [CVE-2021-3737](https://nvd.nist.gov/vuln/detail/CVE-2021-3737){: external} and [CVE-2021-4189](https://nvd.nist.gov/vuln/detail/CVE-2021-4189){: external}. |

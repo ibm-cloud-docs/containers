@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-02-21"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb23)
+
+    * [21 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb2123)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.10`.
+
+        * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.17_1829`, `5.0.7_1836`, and `5.1.2_1828`.
 
     * [20 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb2023)
 
@@ -4109,6 +4115,8 @@ subcollection: containers
 
     * [If you do want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group#worker-sgs)
 
+* [Allow worker nodes to connect to the Ingress LoadBalancer](/docs/containers?topic=containers-vpc-security-group#vpc-security-group-loadbalancer-outbound)
+
 [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
 
 * [Creating ACLs from the console](/docs/containers?topic=containers-vpc-acls#acls_ui)
@@ -4784,7 +4792,7 @@ subcollection: containers
 
 * [Moving a VPC load balancer from one cluster to another](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move)
 
-    * [Detatching a VPC load balancer from a cluster](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move_detach)
+    * [Detaching a VPC load balancer from a cluster](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move_detach)
 
     * [Attaching a VPC load balancer to a cluster](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move_attach)
 
@@ -5181,7 +5189,7 @@ subcollection: containers
 
 [Storing data on classic IBM Cloud {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
 
-* [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
+* [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
 
 * [Installing the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block)
 
@@ -5397,7 +5405,7 @@ subcollection: containers
 
 * [Prerequisites](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-prereq)
 
-    * [Labelling your worker nodes](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-label-um)
+    * [Labeling your worker nodes](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-label-um)
 
     * [Retrieving IAM and VPC details](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-driver-get-details)
 
@@ -8860,9 +8868,13 @@ subcollection: containers
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
 
+    * [Change log for version 5.1.2_1828, released 21 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.2-1828_is_block_relnote)
+
     * [Change log for version 5.1, released 9 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1_is_block_relnote)
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
+
+    * [Change log for version 5.0.7_1836, released 21 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.7-1836_is_block_relnote)
 
     * [Change log for version 5.0.5_1784, released 24 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.5-1784_is_block_relnote)
 
@@ -8881,6 +8893,8 @@ subcollection: containers
     * [Change log for version 5.0.0-beta_1125, released 10 June 2022](/docs/containers?topic=containers-vpc_bs_changelog#5.0.0-beta_1125_is_block_relnote)
 
 * [Version 4.4](/docs/containers?topic=containers-vpc_bs_changelog#044_is_block)
+
+    * [Change log for version 4.4.17_1829, released 21 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#4.4.17_1829_is_block_relnote)
 
     * [Change log for version 4.4.16_1779, released 24 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#4.4.16_1779_is_block_relnote)
 
@@ -8967,6 +8981,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.10, released 21 February 2023](/docs/containers?topic=containers-cos_plugin_changelog#02210_object_plugin)
 
 * [Change log for version 2.2.9, released 13 February 2023](/docs/containers?topic=containers-cos_plugin_changelog#0229_object_plugin)
 
@@ -9504,13 +9520,13 @@ subcollection: containers
 
 * [Could not get ClusterRoleBinding privileged-psp-user](/docs/containers?topic=containers-ts-app-pod-security#psp-user-not-get)
 
-* [ClusterRoleBinding `privileged-psp-user` does not have expected roleRef](/docs/containers?topic=containers-ts-app-pod-security#unexpected-role-ref)
+* [ClusterRoleBinding `privileged-psp-user` does not have expected `roleRef`](/docs/containers?topic=containers-ts-app-pod-security#unexpected-role-ref)
 
 * [ClusterRoleBinding privileged-psp-user does not have expected subjects](/docs/containers?topic=containers-ts-app-pod-security#psp-privilieged-unexpected-subjects)
 
 * [Could not get ClusterRoleBinding `restricted-psp-user`](/docs/containers?topic=containers-ts-app-pod-security#psp-restrictred-user-missing)
 
-* [ClusterRoleBinding `restricted-psp-user` does not have expected roleRef](/docs/containers?topic=containers-ts-app-pod-security#psp-restricted-role-ref)
+* [ClusterRoleBinding `restricted-psp-user` does not have expected `roleRef`](/docs/containers?topic=containers-ts-app-pod-security#psp-restricted-role-ref)
 
 * [ClusterRoleBinding restricted-psp-user does not have expected subjects](/docs/containers?topic=containers-ts-app-pod-security#psp-restricted-subjects)
 
@@ -9990,7 +10006,7 @@ subcollection: containers
 
 [Why does mounting {{site.data.keyword.blockstorageshort}} fail with an `fsck` error?](/docs/containers?topic=containers-ts-storage-fsck#ts-storage-fsck)
 
-[Why can't I delete my {{site.data.keyword.block_storage_is_short}} `volumesnapshot` resources?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
+[Why can't I delete my {{site.data.keyword.block_storage_is_short}} volume snapshot resources?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
 
 [Why can't I create {{site.data.keyword.block_storage_is_short}} snapshots?](/docs/containers?topic=containers-ts-storage-snapshotfails#ts-storage-snapshotfails)
 

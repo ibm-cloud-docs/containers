@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-02-21"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -861,7 +861,7 @@ The following table shows the changes that are in patch update 1.18.2_1512. If y
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.12.1 | v3.13.3 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.13/release-notes/){: external}. |
+| Calico | v3.12.1 | v3.13.3 | See the [Calico release notes](https://docs.tigera.io/archive/v3.13/release-notes/.){: external}. |
 | Cluster health image | v1.1.1 | v1.1.4 | When cluster add-ons don't support the current cluster version, a warning is now returned in the cluster health state. |
 | CoreDNS configuration | N/A | N/A | To improve cluster DNS availability, CoreDNS [pods now prefer evenly distributed scheduling](https://kubernetes.io/blog/2020/05/introducing-podtopologyspread/){: external} across worker nodes and zones. |
 | etcd | v3.4.3 | v3.4.7 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.7){: external}). |

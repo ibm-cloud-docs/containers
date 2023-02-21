@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-14"
+lastupdated: "2023-02-21"
 
 keywords: kubernetes
 
@@ -1281,7 +1281,7 @@ To scale down the {{site.data.keyword.filestorage_short}} plug-in:
         ```
         {: pre}
 
-    3. Wait a few minutes for the refresh to complete, then repeat substep `2.a` to check that the pods are removed. If the pods are rescheduled, the changes that you made to the {{site.data.keyword.filestorage_short}} plug-in configuration file were not properly saved. Make sure that your cluster runs the correct Kubernetes version, and try again.
+    3. Wait a few minutes for the refresh to complete, then repeat sub step `2.a` to check that the pods are removed. If the pods are rescheduled, the changes that you made to the {{site.data.keyword.filestorage_short}} plug-in configuration file were not properly saved. Make sure that your cluster runs the correct Kubernetes version, and try again.
 
 
 

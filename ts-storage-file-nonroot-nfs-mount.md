@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-06"
+lastupdated: "2023-02-21"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -14,6 +14,7 @@ content-type: troubleshoot
 
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 
@@ -48,18 +49,18 @@ can't create directory '/bitnami/mariadb/data': Permission denied
 By default, non-root users don't have write permission on the volume mount path for NFS-backed storage. Some common app images, such as Jenkins and Nexus3, specify a non-root user that owns the mount path in the Dockerfile.
 {: tsCauses}
 
-When you create a container from this Dockerfile, the creation of the container fails due to insufficient permissions of the non-root user on the mount path. To grant write permission, you can modify the Dockerfile to temporarily add the non-root user to the root user group before it changes the mount path permissions, or use an init container.
+When you create a container from this Dockerfile, the creation of the container fails due to insufficient permissions of the non-root user on the mount path. To grant write permission, you can modify the Dockerfile to temporarily add the non-root user to the root user group before it changes the mount path permissions, or use an `init` container.
 
-If you use a Helm chart to deploy the image, edit the Helm deployment to use an init container.
+If you use a Helm chart to deploy the image, edit the Helm deployment to use an `init` container.
 {: tip}
 
 
 
 
-When you include an [init container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/){: external} in your deployment, you can give a non-root user that is specified in your Dockerfile write permissions for the volume mount path inside the container.
+When you include an [`init` container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/){: external} in your deployment, you can give a non-root user that is specified in your Dockerfile write permissions for the volume mount path inside the container.
 {: tsResolve}
 
-The init container starts before your app container starts. The init container creates the volume mount path inside the container, changes the mount path to be owned by the correct (non-root) user, and closes. Then, your app container starts with the non-root user that must write to the mount path. Because the path is already owned by the non-root user, writing to the mount path is successful. If you don't want to use an init container, you can modify the Dockerfile to add non-root user access to NFS file storage.
+The `init` container starts before your app container starts. The `init` container creates the volume mount path inside the container, changes the mount path to be owned by the correct (non-root) user, and closes. Then, your app container starts with the non-root user that must write to the mount path. Because the path is already owned by the non-root user, writing to the mount path is successful. If you don't want to use an `init` container, you can modify the Dockerfile to add non-root user access to NFS file storage.
 
 
 
@@ -117,7 +118,7 @@ The init container starts before your app container starts. The init container c
     ```
     {: pre}
 
-4. In your deployment `.yaml` file, add the init container. Include the UID and GID that you previously retrieved.
+4. In your deployment `.yaml` file, add the `init` container. Include the UID and GID that you previously retrieved.
 
     ```yaml
     initContainers:

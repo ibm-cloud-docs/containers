@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-02-21"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -730,7 +730,7 @@ The following table shows the changes that are in the master fix pack patch upda
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.12.0 | v3.12.1 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. Updated to allow egress from the worker nodes via the `allow-vrrp` `GlobalNetworkPolicy`. |
+| Calico | v3.12.0 | v3.12.1 | See the [Calico release notes](https://docs.tigera.io/calico/3.25/release-notes/){: external}. Updated to allow egress from the worker nodes via the `allow-vrrp` `GlobalNetworkPolicy`. |
 | CoreDNS | 1.6.7 | 1.6.9 | See the [CoreDNS release notes](https://coredns.io/2020/03/24/coredns-1.6.9-release/){: external}. Fixed a bug during Corefile migration that might generate invalid data that makes CoreDNS pods fail. |
 | GPU device plug-in and installer | 49979f5 | 8c6538f | Updated the GPU drivers to version [440.33.01](https://www.nvidia.com/download/driverResults.aspx/154570){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.17.4-1 | v1.17.4-3 | Updated to use `calicoctl` version 3.12.1. |
@@ -822,7 +822,7 @@ The following table shows the changes that are in patch update 1.17.2_1515.
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.9.5 | v3.12.0 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.12/release-notes/){: external}. |
+| Calico | v3.9.5 | v3.12.0 | See the [Calico release notes](https://docs.tigera.io/archive/v3.12/release-notes/.){: external}. |
 | CoreDNS | 1.6.6 | 1.6.7 | See the [CoreDNS release notes](https://coredns.io/2020/01/28/coredns-1.6.7-release/){: external}. |
 | etcd | v3.3.18 | v3.4.3 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.3){: external}. |
 | GPU device plug-in and installer | da19df3 | affdfe2 | Image updated for [CVE-2016-9840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9840){: external}, [CVE-2016-9841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9841){: external}, [CVE-2016-9842](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9842){: external}, [CVE-2016-9843](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9843){: external}, and [CVE-2019-5188](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5188){: external}. |

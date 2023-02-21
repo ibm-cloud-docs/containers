@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-02-21"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -566,7 +566,7 @@ The following table shows the changes that are in the master and worker node pat
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.9.3 | v3.9.5 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.9/release-notes/){: external}. |
+| Calico | v3.9.3 | v3.9.5 | See the [Calico release notes](https://docs.tigera.io/archive/v3.9/release-notes/){: external}. |
 | Cluster master HA Proxy | 1.8.21-alpine | 1.8.23-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.8/src/CHANGELOG){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | CoreDNS | 1.6.2 | 1.6.6 | See the [CoreDNS release notes](https://coredns.io/2019/12/11/coredns-1.6.6-release/){: external}. Update resolves [CVE-2019-19794](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19794){: external}. |
 | etcd | v3.3.17 | v3.3.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.18){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
@@ -654,7 +654,7 @@ The following table shows the changes that are in the master fix pack 1.16.3_151
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.9.2 | v3.9.3 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. Update resolves [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}, [CVE-2019-5094](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094){: external}, and [DSA-4539-3](https://lists.debian.org/debian-security-announce/2019/msg00193.html){: external}. |
+| Calico | v3.9.2 | v3.9.3 | See the [Calico release notes](https://docs.tigera.io/calico/3.25/release-notes/){: external}. Update resolves [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}, [CVE-2019-5094](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094){: external}, and [DSA-4539-3](https://lists.debian.org/debian-security-announce/2019/msg00193.html){: external}. |
 | GPU device plug-in and installer | 9cd3df7 |    f2e7bd7 | Updated image for [CVE-2019-17596](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17596){: external}. Updated the GPU drivers to version [440.31](https://www.nvidia.com/Download/driverResults.aspx/153226/){: external}. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor    | 351 | 353 | Updated to use `Go` version 1.12.11. |
 | {{site.data.keyword.cloud_notm}} Provider    | v1.16.2-77 | v1.16.3-94 | Updated to support the Kubernetes 1.16.3 release. `calicoctl` version is updated to v3.9.3. |
@@ -687,7 +687,7 @@ The following tables show the changes that are in the patch `1.16.2_1514`. If yo
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-|Calico | v3.8.2 | v3.9.2 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.9/release-notes/){: external}.|
+|Calico | v3.8.2 | v3.9.2 | See the [Calico release notes](https://docs.tigera.io/archive/v3.9/release-notes/){: external}.|
 |CoreDNS |    1.3.1 |    1.6.2 |    See the [CoreDNS release notes](https://coredns.io/2019/08/13/coredns-1.6.2-release/){: external}. This update includes the following configuration changes.  - CoreDNS now runs `3` replica pods by default, and the pods prefer to schedule across worker nodes and zones to improve cluster DNS availability. If you update your cluster to version 1.16 from an earlier version, you can [configure the CoreDNS autoscaler](/docs/containers?topic=containers-cluster_dns#dns_autoscale) to use a minimum of `3` pods. \n - CoreDNS caching is updated to better support older DNS clients. If you disabled the CoreDNS `cache` plug-in, you can now re-enable the plug-in. \n - The CoreDNS deployment is now configured to check readiness by using the `ready` plug-in. \n - CoreDNS version 1.6 no longer supports the `proxy` plug-in, which is replaced by the `forward` plug-in. In addition, the CoreDNS `kubernetes` plug-in no longer supports the `resyncperiod` option and ignores the `upstream` option. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 350 | 351 | Updated to use the `distroless/static` base image and to use `Go` version 1.12.10.|
 | Kubernetes | v1.15.5 | v1.16.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.2){: external}. |

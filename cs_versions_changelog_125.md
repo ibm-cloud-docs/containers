@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-02-14"
+lastupdated: "2023-02-21"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -195,7 +195,7 @@ The following table shows the changes that are in the master fix pack 1.25.4_152
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.24.1 | v3.24.5 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.24/release-notes/#v3245){: external}. |
+| Calico | v3.24.1 | v3.24.5 | See the [Calico release notes](https://docs.tigera.io/archive/v3.24/release-notes/#v3245){: external}. |
 | Cluster health image | v1.3.12 | v1.3.13 | Updated Go dependencies, golangci-lint, gosec, and to `Go` version 1.19.3. Updated base image version to 116. |
 | etcd | v3.5.4 | v3.5.5 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.5){: external}. |
 | Gateway-enabled cluster controller | 1823 | 1902 | `Go` module updates. |
@@ -261,7 +261,7 @@ The following table shows the changes that are in the worker node fix pack 1.25.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.23.3 | v3.24.1 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.24/release-notes/){: external}. In addition, a `default` `FelixConfiguration` resource is created if it doesn't exist. The resource has `natPortRange` set to `32768:65535`. For more information, see [Why am I seeing SNAT port issues and egress connection failures?](/docs/containers?topic=containers-ts-network-snat-125){: external} |
+| Calico | v3.23.3 | v3.24.1 | See the [Calico release notes](https://docs.tigera.io/archive/v3.24/release-notes/){: external}. In addition, a `default` `FelixConfiguration` resource is created if it doesn't exist. The resource has `natPortRange` set to `32768:65535`. For more information, see [Why am I seeing SNAT port issues and egress connection failures?](/docs/containers?topic=containers-ts-network-snat-125){: external} |
 | CoreDNS | 1.9.3 | 1.10.0 | See the [CoreDNS release notes](https://github.com/coredns/coredns/blob/v1.10.0/notes/coredns-1.10.0.md){: external}. |
 | IBM Cloud Controller Manager | v1.24.5-1 | v1.25.2-2 | Updated to support the Kubernetes `1.25.2` release and `Go` version `1.19.1`. |
 | Kubernetes | v1.24.6 | v1.25.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.2){: external}. |
