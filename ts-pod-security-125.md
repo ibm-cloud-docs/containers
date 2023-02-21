@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-21"
 
 keywords: kubernetes, 1.25, help, cluster master operations error, CAE009
 
@@ -110,7 +110,7 @@ This message indicates the `privileged-psp-user` cluster role binding does not e
 
 1. If you get a `NotFound` error, create or update the `privileged-psp-user` [cluster role binding](#create-privileged-psp-user).
 
-## ClusterRoleBinding `privileged-psp-user` does not have expected roleRef
+## ClusterRoleBinding `privileged-psp-user` does not have expected `roleRef`
 {: #unexpected-role-ref}
 
 This error indicates an unexpected change and that the cluster role binding is referencing the wrong cluster role.
@@ -143,7 +143,7 @@ This message indicates the `restricted-psp-user` cluster role binding does not e
 
 1. If you get a `NotFound` error, create or update restricted-psp-user [cluster role binding](#create-restricted-psp-user).
 
-## ClusterRoleBinding `restricted-psp-user` does not have expected roleRef
+## ClusterRoleBinding `restricted-psp-user` does not have expected `roleRef`
 {: #psp-restricted-role-ref}
 
 This error indicates is an unexpected change and that the cluster role binding is referencing the wrong cluster role.

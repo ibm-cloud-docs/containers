@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-01"
+lastupdated: "2023-02-21"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, delete
 
@@ -654,7 +654,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 ## Adding classic infrastructure servers to gateway-enabled classic clusters
 {: #gateway_vsi}
 
-If you have non-containerized workloads on a classic IBM Cloud infrastructure [virtual server](https://cloud.ibm.com/gen1/infrastructure/provision/vs) or [bare metal server](https://cloud.ibm.com/gen1/infrastructure/provision/bm), you can connect those workloads to the workloads in your gateway-enabled classic cluster by adding the server instance to your cluster network.
+If you have non-containerized workloads on a classic IBM Cloud infrastructure [virtual server](https://cloud.ibm.com/gen1/infrastructure/provision/vs){: external} or [bare metal server](https://cloud.ibm.com/gen1/infrastructure/provision/bm){: external}, you can connect those workloads to the workloads in your gateway-enabled classic cluster by adding the server instance to your cluster network.
 {: shortdesc}
 
 This feature is deprecated. 
@@ -669,7 +669,7 @@ To connect your cluster and the server instance, you create an `ibm-external-com
 
 Before you begin, review the following limitations and considerations.
 
-- Although the virtual or bare metal server instance is added to your cluster's private pod network, the server instance is not managed by the cluster master and is not schedulable for workloads by the cluster master. You must continue to manage your server instance separately from your cluster's worker nodes by using the classic infrastructure [console](https://cloud.ibm.com/classic/devices), `ibmcloud sl` CLI, or API.
+- Although the virtual or bare metal server instance is added to your cluster's private pod network, the server instance is not managed by the cluster master and is not available for workloads by the cluster master. You must continue to manage your server instance separately from your cluster's worker nodes by using the classic infrastructure [console](https://cloud.ibm.com/classic/devices), `ibmcloud sl` CLI, or API.
 - Every time that your cluster master is updated, including both minor version updates that you apply manually and master patches that are applied automatically, you must also update your server instance connection by following the steps in [Updating the server instance connection](#update_connection).
 - You can add virtual or bare metal server to only one gateway-enabled classic cluster per private VLAN.
 
@@ -732,14 +732,14 @@ If you have an existing virtual or bare metal server that meets all these requir
     ```
     {: screen}
 
-1. Use the {{site.data.keyword.cloud_notm}} console to create a [virtual server](https://cloud.ibm.com/gen1/infrastructure/provision/vs) or a [bare metal server](https://cloud.ibm.com/gen1/infrastructure/provision/bm). The following options and values are required for a virtual or bare metal server that can be attached to a gateway-enabled cluster, but for the other options you can select whichever values you prefer. For example, you can choose any type of virtual or bare metal server as long as the following options and values are selected.
+1. Use the {{site.data.keyword.cloud_notm}} console to create a [virtual server](https://cloud.ibm.com/gen1/infrastructure/provision/vs){: external} or a [bare metal server](https://cloud.ibm.com/gen1/infrastructure/provision/bm){: external}. The following options and values are required for a virtual or bare metal server that can be attached to a gateway-enabled cluster, but for the other options you can select whichever values you prefer. For example, you can choose any type of virtual or bare metal server as long as the following options and values are selected.
     * For **Location**, select the same zone that you found in step 2.
     * For **SSH keys**, select the name of an SSH key that you stored in {{site.data.keyword.cloud_notm}}. An SSH key is required for your cluster to access the VSI. If you don't have an SSH key stored in {{site.data.keyword.cloud_notm}}, click **Add key**.
     * For **Image**, select CentOS 7.x, Red Hat 7.x, or Ubuntu 18.04.
     * Select private-only networking.
         * Virtual: For **Uplink port speeds**, select a **Private only** option.
         * Bare metal: For **Interface**, select **Private**.
-    * Virtual only: For **Private security group**, select at least **allow_outbound** and **allow_ssh**.
+    * Virtual only: For **Private security group**, select at least **`allow_outbound`** and **`allow_ssh`**.
     * For **Private VLAN**, select the router that you found in step 4. Note that the options are formatted like `dal10.bcr01a.1813`.
 
     To further customize your server, see the [virtual server documentation](/docs/virtual-servers?topic=virtual-servers-getting-started-tutorial) or [bare metal server documentation](/docs/bare-metal?topic=bare-metal-about-bm).
@@ -749,7 +749,7 @@ If you have an existing virtual or bare metal server that meets all these requir
 
 1. After you order the server, a series of emails is sent to your administrator: acknowledgment of the provisioning order, provisioning order approval and processing, and provisioning complete. The provisioning complete email indicates that your server is available to use. When you receive this email, you can continue to the next step. Note that the process for ordering a bare metal server is completed manually in your IBM Cloud infrastructure account, so it can take more than one business day to complete.
 
-1. Get the server instance's **private_ip** address.
+1. Get the server instance's **`private_ip`** address.
     * Virtual:
         ```sh
         ibmcloud sl vs list

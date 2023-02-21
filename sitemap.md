@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-02-21"
 
 keywords: containers
 subcollection: containers
@@ -4784,7 +4784,7 @@ subcollection: containers
 
 * [Moving a VPC load balancer from one cluster to another](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move)
 
-    * [Detatching a VPC load balancer from a cluster](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move_detach)
+    * [Detaching a VPC load balancer from a cluster](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move_detach)
 
     * [Attaching a VPC load balancer to a cluster](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move_attach)
 
@@ -5181,7 +5181,7 @@ subcollection: containers
 
 [Storing data on classic IBM Cloud {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
 
-* [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
+* [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
 
 * [Installing the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block)
 
@@ -5397,7 +5397,7 @@ subcollection: containers
 
 * [Prerequisites](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-prereq)
 
-    * [Labelling your worker nodes](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-label-um)
+    * [Labeling your worker nodes](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-label-um)
 
     * [Retrieving IAM and VPC details](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-driver-get-details)
 
@@ -9504,13 +9504,13 @@ subcollection: containers
 
 * [Could not get ClusterRoleBinding privileged-psp-user](/docs/containers?topic=containers-ts-app-pod-security#psp-user-not-get)
 
-* [ClusterRoleBinding `privileged-psp-user` does not have expected roleRef](/docs/containers?topic=containers-ts-app-pod-security#unexpected-role-ref)
+* [ClusterRoleBinding `privileged-psp-user` does not have expected `roleRef`](/docs/containers?topic=containers-ts-app-pod-security#unexpected-role-ref)
 
 * [ClusterRoleBinding privileged-psp-user does not have expected subjects](/docs/containers?topic=containers-ts-app-pod-security#psp-privilieged-unexpected-subjects)
 
 * [Could not get ClusterRoleBinding `restricted-psp-user`](/docs/containers?topic=containers-ts-app-pod-security#psp-restrictred-user-missing)
 
-* [ClusterRoleBinding `restricted-psp-user` does not have expected roleRef](/docs/containers?topic=containers-ts-app-pod-security#psp-restricted-role-ref)
+* [ClusterRoleBinding `restricted-psp-user` does not have expected `roleRef`](/docs/containers?topic=containers-ts-app-pod-security#psp-restricted-role-ref)
 
 * [ClusterRoleBinding restricted-psp-user does not have expected subjects](/docs/containers?topic=containers-ts-app-pod-security#psp-restricted-subjects)
 
@@ -9990,7 +9990,7 @@ subcollection: containers
 
 [Why does mounting {{site.data.keyword.blockstorageshort}} fail with an `fsck` error?](/docs/containers?topic=containers-ts-storage-fsck#ts-storage-fsck)
 
-[Why can't I delete my {{site.data.keyword.block_storage_is_short}} `volumesnapshot` resources?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
+[Why can't I delete my {{site.data.keyword.block_storage_is_short}} volume snapshot resources?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
 
 [Why can't I create {{site.data.keyword.block_storage_is_short}} snapshots?](/docs/containers?topic=containers-ts-storage-snapshotfails#ts-storage-snapshotfails)
 

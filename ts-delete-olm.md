@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-21"
 
 keywords: kubernetes, OLM, operator lifecycle manager, delete olm, delete operator lifecycle manager components
 
@@ -16,13 +16,12 @@ content-type: troubleshoot
 
 
 
-
 # How do I delete Operator Lifecycle Manager components?
 {: #ts-delete-olm} 
 
 Operator Lifecycle Manager (OLM) is not installed or managed on clusters that run Kubernetes version 1.23 or later. However, clusters that were upgraded from version 1.22 to version 1.23 or later might still have the OLM components installed. If you are not using OLM components on your cluster, follow these steps to remove them. 
 
-If you want to continue using OLM components in your cluster, or you want to install and run OLM on a cluster that runs version 1.23 or later, you must manage updates yourself. Refer to the [opensource OLM documentation](https://olm.operatorframework.io/).
+If you want to continue using OLM components in your cluster, or you want to install and run OLM on a cluster that runs version 1.23 or later, you must manage updates yourself. Refer to the [open source OLM documentation](https://olm.operatorframework.io/).
 {: note} 
 
 
@@ -96,7 +95,7 @@ If you want to continue using OLM components in your cluster, or you want to ins
         ```
         {: pre}
 
-        Example output listing the associated CRs.
+        Example output listing the associated CR.
         ```sh
         NAME                                  CREATED AT
         catalogsources.operators.coreos.com   2022-06-28T13:43:31Z
