@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-02-21"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -324,7 +324,7 @@ The following table shows the changes that are in the master and worker node pat
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.8.4 | v3.8.6 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.8/release-notes/){: external}. |
+| Calico | v3.8.4 | v3.8.6 | See the [Calico release notes](https://docs.tigera.io/archive/v3.8/release-notes/){: external}. |
 | Cluster master HA Proxy | 1.8.21-alpine | 1.8.23-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.8/src/CHANGELOG){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | etcd | v3.3.17 | v3.3.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.18){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | Gateway-enabled cluster controller | 1032 | 1045 | Updated image for [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
@@ -400,7 +400,7 @@ The following table shows the changes that are in the master fix pack 1.15.6_152
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.8.2 | v3.8.4 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. Update resolves [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}, [CVE-2019-5094](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094){: external}, and [DSA-4539-3](https://lists.debian.org/debian-security-announce/2019/msg00193.html){: external}. |
+| Calico | v3.8.2 | v3.8.4 | See the [Calico release notes](https://docs.tigera.io/calico/3.25/release-notes/){: external}. Update resolves [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}, [CVE-2019-5094](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094){: external}, and [DSA-4539-3](https://lists.debian.org/debian-security-announce/2019/msg00193.html){: external}. |
 | GPU device plug-in and installer | 9cd3df7 | f2e7bd7 | Updated image for [CVE-2019-17596](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17596){: external}. Updated the GPU drivers to version [440.31](https://www.nvidia.com/Download/driverResults.aspx/153226/){: external}. |
 | {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} plug-in and monitor    | 350 | 353 | Updated to use the `distroless/static` base image and to use `Go` version 1.12.11. |
 | {{site.data.keyword.cloud_notm}} Provider    | v1.15.5-159 | v1.15.6-182 | Updated to support the Kubernetes 1.15.6 release. `calicoctl` version is updated to v3.8.4. |
@@ -476,7 +476,7 @@ The following table shows the changes that are in the patch 1.15.4_1518. Master 
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-|Calico|v3.8.1|v3.8.2|See the [Calico release notes)](https://projectcalico.docs.tigera.io/archive/v3.8/release-notes/){: external}.|
+|Calico|v3.8.1|v3.8.2|See the [Calico release notes)](https://docs.tigera.io/archive/v3.8/release-notes/){: external}.|
 |Cluster master HA configuration|N/A|N/A|Updated configuration to improve performance of master update operations.|
 |Default IBM file storage class|N/A|N/A|Fixed a bug that might cause cluster master operations such as patch updates to clear the default IBM file storage class.|
 |Gateway-enabled cluster controller|N/A|844|New! For classic clusters with a gateway enabled, a `DaemonSet` is installed to configure settings for routing network traffic to worker nodes.|
@@ -602,7 +602,7 @@ The following table shows the changes that are in the patch 1.15.1_1511.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.6.4 | v3.8.1 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. In addition, Kubernetes version 1.15 clusters now have a new `allow-all-private-default` global network policy to allow all ingress and egress network traffic on private interface. For more information, see [Isolating clusters on the private network](/docs/containers?topic=containers-network_policies#isolate_workers).  |
+| Calico | v3.6.4 | v3.8.1 | See the [Calico release notes](https://docs.tigera.io/calico/3.25/release-notes/){: external}. In addition, Kubernetes version 1.15 clusters now have a new `allow-all-private-default` global network policy to allow all ingress and egress network traffic on private interface. For more information, see [Isolating clusters on the private network](/docs/containers?topic=containers-network_policies#isolate_workers).  |
 | {{site.data.keyword.cloud_notm}} Provider | v1.14.4-139 | v1.15.1-86 |  - Updated to support the Kubernetes 1.15.1 release. \n - `calicoctl` version is updated to 3.8.1. \n - Virtual Private Cloud (VPC) load balancer support is added for VPC clusters. |
 | Kubernetes | v1.14.4 | v1.15.1 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.1){: external} and [Kubernetes 1.15 blog](https://kubernetes.io/blog/2019/06/19/kubernetes-1-15-release-announcement/){: external}. Update resolves [CVE-2019-11248](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248){: external} (see [IBM security bulletin](https://www.ibm.com/support/pages/node/967113){: external}).  |
 | Kubernetes configuration | N/A | N/A | Updated Kubernetes API server default toleration seconds to 600 for the Kubernetes default `node.kubernetes.io/not-ready` and `node.kubernetes.io/unreachable` pod tolerations. For more information about tolerations, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external}.  |

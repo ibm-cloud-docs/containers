@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-02-21"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -305,7 +305,7 @@ The following table shows the changes that are in the patch 1.14.7_1534.
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-|Calico|v3.6.4|v3.6.5|See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.6/release-notes/){: external}. |
+|Calico|v3.6.4|v3.6.5|See the [Calico release notes](https://docs.tigera.io/archive/v3.6/release-notes/){: external}. |
 |Cluster master HA configuration|N/A|N/A|Updated configuration to improve performance of master update operations. |
 |containerd|v1.2.9|v1.2.10|See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.2.10){: external}. Update resolves [CVE-2019-16884](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16884){: external} and [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276){: external}. |
 |Default IBM file storage class|N/A|N/A|Fixed a bug that might cause cluster master operations such as patch updates to clear the default IBM file storage class. |
@@ -454,7 +454,7 @@ The following table shows the changes that are in the master fix pack 1.14.4_152
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.6.1 | v3.6.4 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. Update resolves [TTA-2019-001](https://www.tigera.io/security-bulletins/#TTA-2019-001){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/959551){: external}. |
+| Calico | v3.6.1 | v3.6.4 | See the [Calico release notes](https://docs.tigera.io/calico/3.25/release-notes/){: external}. Update resolves [TTA-2019-001](https://www.tigera.io/security-bulletins/#TTA-2019-001){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/959551){: external}. |
 | CoreDNS configuration | N/A | N/A | Changed the default CoreDNS configuration from a 5 to 30 second TTL for DNS records in the `kubernetes` zone. This change aligns with the default KubeDNS configuration. Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see [Customizing the cluster DNS provider}(/docs/containers?topic=containers-cluster_dns#dns_customize). |
 | GPU device plug-in and installer | 5d34347 | a7e8ece | Updated base image packages. |
 | Kubernetes | v1.14.3 | v1.14.4 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.4){: external}.
@@ -566,7 +566,7 @@ The following table shows the changes that are in the patch 1.14.1_1516.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.4.4 | v3.6.1 | See the [Calico release notes](https://projectcalico.docs.tigera.io/archive/v3.6/release-notes/){: external}. |
+| Calico | v3.4.4 | v3.6.1 | See the [Calico release notes](https://docs.tigera.io/archive/v3.6/release-notes/){: external}. |
 | CoreDNS | 1.2.6 | 1.3.1 | See the [CoreDNS release notes](https://coredns.io/2019/01/13/coredns-1.3.1-release/){: external}. The update includes the addition of a [metrics port](https://coredns.io/plugins/metrics/){: external} on the cluster DNS service.  \n CoreDNS is now the only supported cluster DNS provider. If you update a cluster to Kubernetes version 1.14 from an earlier version and used KubeDNS, KubeDNS is automatically migrated to CoreDNS during the cluster update. For more information or to test out CoreDNS before you update, see [Configure the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns). |
 | GPU device plug-in and installer | 9ff3fda | ed0dafc | Updated image for [CVE-2019-1543](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543){: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | v1.13.5-107 | v1.14.1-71 | Updated to support the Kubernetes 1.14.1 release. Additionally, `calicoctl` version is updated to 3.6.1. Fixed updates to version 2.0 network load balancers (NLBs) with only one available worker node for the load balancer pods. Private load balancers now support running on [private edge workers nodes](/docs/containers?topic=containers-edge#edge). |

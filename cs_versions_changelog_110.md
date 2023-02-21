@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-02-21"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -258,7 +258,7 @@ The following table shows the changes that are in patch 1.10.11_1536.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.2.1 | v3.3.1 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}. Update resolves [Tigera Technical Advisory TTA-2018-001](https://www.tigera.io/security-bulletins/){: external}.  |
+| Calico | v3.2.1 | v3.3.1 | See the [Calico release notes](https://docs.tigera.io/calico/3.25/release-notes/){: external}. Update resolves [Tigera Technical Advisory TTA-2018-001](https://www.tigera.io/security-bulletins/){: external}.  |
 | {{site.data.keyword.cloud_notm}} Provider | v1.10.8-197 | v1.10.11-219 | Updated to support the Kubernetes 1.10.11 release.  |
 | Kubernetes | v1.10.8 | v1.10.11 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.11){: external}. Update resolves [CVE-2018-1002105](https://github.com/kubernetes/kubernetes/issues/71411){: external}.  |
 | OpenVPN client and server | 2.4.4-r1-6 | 2.4.6-r3-IKS-8 | Updated image for [CVE-2018-0732](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732){: external} and [CVE-2018-0737](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737){: external}.  |
@@ -390,7 +390,7 @@ The following table shows the changes that are in patch 1.10.7_1520.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.1.3 | v3.2.1 | See the Calico [release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}.  |
+| Calico | v3.1.3 | v3.2.1 | See the Calico [release notes](https://docs.tigera.io/calico/3.25/release-notes/){: external}.  |
 | {{site.data.keyword.cloud_notm}} Provider | v1.10.5-118 | v1.10.7-146 | Updated to support Kubernetes 1.10.7 release. In addition, changed the cloud provider configuration to better handle updates for load balancer services with `externalTrafficPolicy` set to `local`.  |
 | {{site.data.keyword.filestorage_full_notm}} plug-in | 334 | 338 | Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You can't update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.  \n Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).  |
 | Kubernetes | v1.10.5 | v1.10.7 | See the Kubernetes [release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.7){: external}.  |
@@ -522,7 +522,7 @@ The following table shows the changes that are in patch 1.10.1_1508.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v2.6.5 | v3.1.1 | See the Calico [release notes](https://docs.tigera.io/calico/latest/release-notes/){: external}.  |
+| Calico | v2.6.5 | v3.1.1 | See the Calico [release notes](https://docs.tigera.io/calico/3.25/release-notes/){: external}.  |
 | Kubernetes Heapster | v1.5.0 | v1.5.2 | See the Kubernetes Heapster [release notes](https://github.com/kubernetes-retired/heapster/releases/tag/v1.5.2){: external}.  |
 | Kubernetes | v1.9.7 | v1.10.1 | See the Kubernetes [release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.1){: external}.  |
 | Kubernetes Configuration | N/A | N/A | Added `StorageObjectInUseProtection` to the `--enable-admission-plugins` option for the cluster's Kubernetes API server.  |
