@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-02-22"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb23)
+
+    * [22 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb2223)
+
+        * ALB OAuth Proxy add-on version `2.0.0_1469`.
 
     * [21 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb2123)
 
@@ -2456,7 +2460,7 @@ subcollection: containers
 
         * Configuring VPC subnets
 
-        * Kubernetes version lifecycles
+        * Kubernetes version life cycles
 
         * Managed Knative add-on
 
@@ -8508,7 +8512,7 @@ subcollection: containers
 
     * [Version 0.32.0 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_32_0)
 
-* [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
+* [Fluentd for logging change log](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 
     * [14 Nov 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#14-nov-2019)
 
@@ -9071,6 +9075,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_1469, released on 22 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1469)
 
     * [Version 2.0.0_1420, released on 8 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1420)
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-02-22"
 
 keywords: kubernetes, OLM, operator lifecycle manager, delete olm, delete operator lifecycle manager components
 
@@ -16,7 +16,7 @@ content-type: troubleshoot
 
 
 
-# How do I delete Operator Lifecycle Manager components?
+# How do I delete Operator Lifecycle Manager components? 
 {: #ts-delete-olm} 
 
 Operator Lifecycle Manager (OLM) is not installed or managed on clusters that run Kubernetes version 1.23 or later. However, clusters that were upgraded from version 1.22 to version 1.23 or later might still have the OLM components installed. If you are not using OLM components on your cluster, follow these steps to remove them. 
@@ -95,26 +95,26 @@ If you want to continue using OLM components in your cluster, or you want to ins
         ```
         {: pre}
 
-        Example output listing the associated CR.
+        Example output listing the associated custom resource.
         ```sh
         NAME                                  CREATED AT
         catalogsources.operators.coreos.com   2022-06-28T13:43:31Z
         ```
         {: screen}
 
-    2. Get the details of each CR to determine if it is used. 
+    2. Get the details of each custom resource to determine if it is used. 
         ```sh
         kubectl get catalogsources.operators.coreos.com -A
         ```
         {: pre}
 
-        Example output showing that the CR is not used.
+        Example output showing that the custom resource is not used.
         ```sh
         No resources found.
         ```
         {: screen}
 
-    3. If the CRs are not used, delete the CRD.
+    3. If the custom resources are not used, delete the CRD.
         ```sh
         kubectl delete crd catalogsources.operators.coreos.com
         ```

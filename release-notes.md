@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-02-22"
 
 keywords: kubernetes, release notes
 
@@ -30,6 +30,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## February 2023
 {: #containers-feb23}
+
+
+
+### 22 February 2023
+{: #containers-feb2223}
+{: release-note}
+
+ALB OAuth Proxy add-on version `2.0.0_1469`.
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+
+
 
 ### 21 February 2023
 {: #containers-feb2123}
@@ -4331,7 +4342,7 @@ Istio add-on
 {: release-note}
 
 Managing Ingress ALBs
-:   Added a page for [managing the lifecycle of your ALBs](/docs/containers?topic=containers-managed-ingress-about), including information about creating, updating, and moving ALBs.
+:   Added a page for [managing the life cycle of your ALBs](/docs/containers?topic=containers-managed-ingress-about), including information about creating, updating, and moving ALBs.
 
 
   
@@ -4401,7 +4412,7 @@ Developing and deploying apps
     - [Building containers from images](/docs/containers?topic=containers-images)
     - [Developing Kubernetes-native apps](/docs/containers?topic=containers-app)
     - [Deploying Kubernetes-native apps in clusters](/docs/containers?topic=containers-deploy_app)
-    - [Managing the app lifecycle](/docs/containers?topic=containers-update_app)
+    - [Managing the app life cycle](/docs/containers?topic=containers-update_app)
 
 Learning paths
 :   Curated learning paths for [administrators](/docs/containers?topic=containers-learning-path-admin) and [developers](/docs/containers?topic=containers-learning-path-dev) are now available to help guide you through your {{site.data.keyword.containerlong_notm}} experience.
@@ -4638,8 +4649,8 @@ Configuring VPC subnets
 
 
 
-Kubernetes version lifecycles
-:   Added information about [the release lifecycle of supported Kubernetes versions](/docs/containers?topic=containers-cs_versions#release_lifecycle).
+Kubernetes version life cycles
+:   Added information about [the release life cycle of supported Kubernetes versions](/docs/containers?topic=containers-cs_versions#release_lifecycle).
 
 Managed Knative add-on
 :   Added information about Istio version support.

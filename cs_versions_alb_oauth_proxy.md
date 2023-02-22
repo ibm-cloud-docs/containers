@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-08"
+lastupdated: "2023-02-22"
 
 keywords: kubernetes, oauth proxy, add-on
 
@@ -28,6 +28,12 @@ View information for version updates to the [ALB OAuth Proxy add-on](/docs/conta
 
 ## Version 2.0.0
 {: #2_0_0}
+
+### Version 2.0.0_1469, released on 22 February 2022.
+{: #2_0_0_1469}
+
+- Dependency updates.
+- Base image changes.
 
 ### Version 2.0.0_1420, released on 8 February 2022.
 {: #2_0_0_1420}

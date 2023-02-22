@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-02-22"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -196,7 +196,7 @@ The following table shows the changes that are in the master fix pack 1.25.4_152
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Calico | v3.24.1 | v3.24.5 | See the [Calico release notes](https://docs.tigera.io/archive/v3.24/release-notes/#v3245){: external}. |
-| Cluster health image | v1.3.12 | v1.3.13 | Updated Go dependencies, golangci-lint, gosec, and to `Go` version 1.19.3. Updated base image version to 116. |
+| Cluster health image | v1.3.12 | v1.3.13 | Updated `Go` dependencies, `golangci-lint`, `gosec`, in `Go` version 1.19.3. Updated base image version to 116. |
 | etcd | v3.5.4 | v3.5.5 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.5){: external}. |
 | Gateway-enabled cluster controller | 1823 | 1902 | `Go` module updates. |
 | GPU device plug-in and installer | 373bb9f | cce0cfa | Updated the GPU driver 470 minor version |

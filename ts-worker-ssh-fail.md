@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-02-22"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -130,7 +130,7 @@ If you are unable to use the `kubectl debug node` command, you can create an Alp
     
     
     
-    You can use the `kubectl cp` command to get logs or other files from a worker node. The following example gets the `/var/log/syslog` file.
+    You can use the `**kubectl cp**` command to get logs or other files from a worker node. The following example gets the `/var/log/syslog` file.
     ```sh
     kubectl cp default/debug-${NODE}:/host/var/log/syslog ./syslog
     ```

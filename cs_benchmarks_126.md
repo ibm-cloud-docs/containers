@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-02-17"
+lastupdated: "2023-02-22"
 
 keywords: kubernetes, containers, benchmarks, 1.26, CIS benchmarks
 
@@ -174,8 +174,8 @@ Review the Worker Node Security Configuration results of the version 1.5 CIS Kub
 | --- | --- | --- | --- | --- | --- |
 | 4.1.1 | Ensure that the kubelet service file permissions are set to `644` or more restrictive | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 4.1.2 | Ensure that the kubelet service file ownership is set to `root:root` | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
-| 4.1.3 | Ensure that the proxy kubeconfig file permissions are set to `644` or more restrictive | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
-| 4.1.4 | Ensure that the proxy kubeconfig file ownership is set to `root:root` | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
+| 4.1.3 | Ensure that the proxy `kubeconfig` file permissions are set to `644` or more restrictive | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
+| 4.1.4 | Ensure that the proxy `kubeconfig` file ownership is set to `root:root` | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 4.1.5 | Ensure that the `kubelet.conf` file permissions are set to `644` or more restrictive | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 4.1.6 | Ensure that the `kubelet.conf` file ownership is set to `root:root` | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 4.1.7 | Ensure that the certificate authorities file permissions are set to `644` or more restrictive | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
@@ -272,7 +272,7 @@ Review the Kubernetes Policies results of the version 1.5 CIS Kubernetes benchma
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.6.1 | Create administrative boundaries between resources using namespaces | Not Scored | 1 | Pass | Shared |
-| 5.6.2 | Ensure that the seccomp profile is set to docker/default in your pod definitions | Not Scored | 2 | [Fail](#cis-benchmark-remediations-126) | Shared |
+| 5.6.2 | Ensure that the `seccomp` profile is set to docker/default in your pod definitions | Not Scored | 2 | [Fail](#cis-benchmark-remediations-126) | Shared |
 | 5.6.3 | Apply Security Context to Your Pods and Containers | Not Scored | 2 | [Fail](#cis-benchmark-remediations-126) | Shared |
 | 5.6.4 | The default namespace should not be used | Scored | 2 | [Fail](#cis-benchmark-remediations-126) | Shared |
 {: caption="Section 5.6 General policies benchmark results" caption-side="bottom"}
@@ -321,8 +321,8 @@ Review information from {{site.data.keyword.IBM_notm}} on the CIS Benchmark resu
 | 5.3.2 | {{site.data.keyword.containerlong_notm}} has a set of [Default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy) and [Additional network policies can optionally be added](/docs/containers?topic=containers-network_policies#adding_network_policies){: external}. |
 | 5.4.2 | {{site.data.keyword.containerlong_notm}} can optionally [Enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
 | 5.5.1 | {{site.data.keyword.containerlong_notm}} can optionally [Enable image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec). |
-| 5.6.2 | {{site.data.keyword.containerlong_notm}} does not annotate all pods with [Seccomp profiles](https://kubernetes.io/docs/concepts/security/pod-security-policy/#seccomp){: external}. |
-| 5.6.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that do not set a [Pod or container *securityContext*](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/). |
+| 5.6.2 | {{site.data.keyword.containerlong_notm}} does not annotate all pods with [`seccomp` profiles](https://kubernetes.io/docs/concepts/security/pod-security-policy/#seccomp){: external}. |
+| 5.6.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that do not set a [Pod or container `securityContext`](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/). |
 | 5.6.4 | {{site.data.keyword.containerlong_notm}} deploys some Kubernetes resources to the default names. |
 {: caption="Explanation and remediation" caption-side="bottom"}
 
