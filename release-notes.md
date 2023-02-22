@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-02-22"
 
 keywords: kubernetes, release notes
 
@@ -30,6 +30,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## February 2023
 {: #containers-feb23}
+
+
+
+### 22 February 2023
+{: #containers-feb2223}
+{: release-note}
+
+ALB OAuth Proxy add-on version `2.0.0_1469`.
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+
+
 
 ### 21 February 2023
 {: #containers-feb2123}
