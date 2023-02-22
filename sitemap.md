@@ -2460,7 +2460,7 @@ subcollection: containers
 
         * Configuring VPC subnets
 
-        * Kubernetes version lifecycles
+        * Kubernetes version life cycles
 
         * Managed Knative add-on
 
@@ -8512,7 +8512,7 @@ subcollection: containers
 
     * [Version 0.32.0 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_32_0)
 
-* [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
+* [Fluentd for logging change log](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 
     * [14 Nov 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#14-nov-2019)
 

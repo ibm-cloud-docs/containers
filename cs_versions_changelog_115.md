@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-02-22"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -581,7 +581,7 @@ The following table shows the changes that are in the master fix pack 1.15.2_151
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico configuration | N/A | N/A | Calico `calico-kube-controllers` deployment in the `kube-system` namespace sets a memory limit on the `calico-kube-controllers` container. In addition, the `calico-node` deployment in the `kube-system` namespace no longer includes the `flexvol-driver` init container.  |
+| Calico configuration | N/A | N/A | Calico `calico-kube-controllers` deployment in the `kube-system` namespace sets a memory limit on the `calico-kube-controllers` container. In addition, the `calico-node` deployment in the `kube-system` namespace no longer includes the `flexvol-driver` `init` container.  |
 | Cluster health | N/A | N/A | Cluster health shows `Warning` state if a cluster control plane operation failed or was canceled. For more information, see (/docs/containers?topic=containers-debug_clusters">Debugging clusters].  |
 | GPU device plug-in and installer | d91d200 | 07c9b67 | Image updated for [CVE-2019-14697](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697){: external}.  |
 | {{site.data.keyword.cloud_notm}} Provider | v1.15.1-86 | v1.15.2-94 | Updated to support the Kubernetes 1.15.2 release.  |
@@ -608,7 +608,7 @@ The following table shows the changes that are in the patch 1.15.1_1511.
 | Kubernetes configuration | N/A | N/A | Updated Kubernetes API server default toleration seconds to 600 for the Kubernetes default `node.kubernetes.io/not-ready` and `node.kubernetes.io/unreachable` pod tolerations. For more information about tolerations, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external}.  |
 | Kubernetes add-on resizer | 1.8.4 | 1.8.5 | For more information, see the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.5){: external}.  |
 | Kubernetes DNS autoscaler | 1.4.0 | 1.6.0 | For more information, see the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.6.0){: external}.  |
-| Kubernetes nodelocal DNS cache | N/A | 1.15.4 | For more information, see the [Kubernetes nodelocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.15.4){: external}. For more information about this new beta feature, see [Setting up Nodelocal DNS Cache (beta)](/docs/containers?topic=containers-cluster_dns#dns_enablecache).  |
+| Kubernetes `NodeLocal` DNS cache | N/A | 1.15.4 | For more information, see the [Kubernetes `NodeLocal` DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.15.4){: external}. For more information about this new beta feature, see [Setting up `NodeLocal` DNS Cache (beta)](/docs/containers?topic=containers-cluster_dns#dns_enablecache).  |
 | Cluster master HA proxy | 1.9.7-alpine | 2.0.1-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/2.0/src/CHANGELOG){: external}.  |
 | GPU device plug-in and installer | a7e8ece | d91d200 | Updated image for [CVE-2019-9924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924){: external}.  |
 | Ubuntu 18.04 kernel and packages | 4.15.0-54-generic | 4.15.0-55-generic | Updated worker node images with package updates for [CVE-2019-11085](https://nvd.nist.gov/vuln/detail/CVE-2019-11085){: external}, [CVE-2019-11815](https://nvd.nist.gov/vuln/detail/CVE-2019-11815){: external}, [CVE-2019-11833](https://nvd.nist.gov/vuln/detail/CVE-2019-11833){: external}, [CVE-2019-11884](https://nvd.nist.gov/vuln/detail/CVE-2019-11884){: external}, [CVE-2019-13057](https://nvd.nist.gov/vuln/detail/CVE-2019-13057){: external}, [CVE-2019-13565](https://nvd.nist.gov/vuln/detail/CVE-2019-13565){: external}, [CVE-2019-13636](https://nvd.nist.gov/vuln/detail/CVE-2019-13636){: external}, and [CVE-2019-13638](https://nvd.nist.gov/vuln/detail/CVE-2019-13638){: external}.  |

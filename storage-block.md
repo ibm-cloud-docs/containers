@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-02-22"
 
 keywords: kubernetes
 
@@ -45,7 +45,7 @@ The steps on this page apply to classic clusters only. On VPC clusters, the {{si
 ## Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}
 {: #block_qs}
 
-In this quickstart guide, you create a 24Gi silver tier {{site.data.keyword.blockstorageshort}} volume in your cluster by creating a PVC to dynamically provision the volume. Then, you create an app deployment that mounts your PVC.
+In this quick start guide, you create a 24Gi silver tier {{site.data.keyword.blockstorageshort}} volume in your cluster by creating a PVC to dynamically provision the volume. Then, you create an app deployment that mounts your PVC.
 {: shortdesc}
 
 First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come back here after you have the [installed the {{site.data.keyword.blockstorageshort}} plug-in](#install_block).

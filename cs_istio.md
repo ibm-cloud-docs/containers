@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-02-22"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -160,7 +160,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
 
     `istio-components-pilot-requests-cpu`
     :   Default value: `"500m"`
-    :   Configure the CPU request in milli CPU for the `istiod` component pod.
+    :   Configure the CPU request in `milli` CPU for the `istiod` component pod.
         Use caution when changing this value. Setting this value too low might prevent the control plane from working properly, and setting this value too high might prevent the `istiod` pod from being scheduled.
         {: important}
 
@@ -189,7 +189,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
     
     `istio-ingressgateway-zone-1|2|3`
     :   Default value: `"<zone>"`
-    :   The zones where your worker nodes are deployed, which are automatically populated when you install the add-on and whenever you apply an Istio patch update. These fields apply your cluster's zones to the `istio-ingressgateway-public-1|2|3-enabled` fields. Note that if the zones that are listed in this setting are out of sync with your cluster zones, you can restart the autopopulation job by running `kubectl delete pod -n ibm-system -l addon.cleanup=istio` and `kubectl delete job -n ibm-system -l addon.cleanup=istio`.
+    :   The zones where your worker nodes are deployed, which are automatically populated when you install the add-on and whenever you apply an Istio patch update. These fields apply your cluster's zones to the `istio-ingressgateway-public-1|2|3-enabled` fields. Note that if the zones that are listed in this setting are out of sync with your cluster zones, you can restart the auto population job by running `kubectl delete pod -n ibm-system -l addon.cleanup=istio` and `kubectl delete job -n ibm-system -l addon.cleanup=istio`.
     
     `istio-monitoring-telemetry`
     :   Default value: `"true"`

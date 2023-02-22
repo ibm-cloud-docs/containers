@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-01"
+lastupdated: "2023-02-22"
 
 keywords: kubernetes
 
@@ -99,7 +99,7 @@ Your app code is ready to be containerized!
 Create a Dockerfile that includes your app code and the necessary configurations for your container. Then, build a Docker image from that Dockerfile and push it to your private image registry.
 {: shortdesc}
 
-1. In the `cf-py` directory that you created in the previous lesson, create a `Dockerfile`, which is the basis for creating a container image. You can create the Dockerfile by using your preferred CLI editor or a text editor on your computer. The following example shows how to create a Dockerfile file with the nano editor.
+1. In the `cf-py` directory that you created in the previous lesson, create a `Dockerfile`, which is the basis for creating a container image. You can create the Dockerfile by using your preferred CLI editor or a text editor on your computer. The following example shows how to create a Dockerfile file with the `nano` editor.
 
     ```sh
     nano Dockerfile
@@ -133,7 +133,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
     ```
     {: codeblock}
 
-3. Save your changes in the nano editor by pressing `ctrl + o`. Confirm your changes by pressing `enter`. Exit the nano editor by pressing `ctrl + x`.
+3. Save your changes in the `nano` editor by pressing `ctrl + o`. Confirm your changes by pressing `enter`. Exit the `nano` editor by pressing `ctrl + x`.
 
 4. Build a Docker image that includes your app code and push it to your private registry.
 

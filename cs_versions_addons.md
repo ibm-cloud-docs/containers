@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-02-22"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -527,7 +527,7 @@ Resolves [CVE-2022-1271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022
 ### Version 0.49.3_1745_iks, released on 20 October 2021
 {: #0.49.3_1745_iks}
 
-As of 14 Sep 2021, this is the only image supported for Kubernetes version 1.18 clusters. 
+As of 14 Sept 2021, this is the only image supported for Kubernetes version 1.18 clusters. 
 
 ## Version 0.48.0 
 {: #0_48_0}
@@ -886,7 +886,7 @@ In the `ibm-k8s-controller-config` ConfigMap, sets the `server-tokens` field to 
 
 - [CVE-2019-15847](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-15847){: external}.
 
-## Fluentd for logging changelog
+## Fluentd for logging change log
 {: #fluentd_changelog}
 
 
