@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-02-23"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -588,7 +588,7 @@ The following table shows the changes that are in patch 1.12.2_1527.
 | CoreDNS | N/A | 1.2.2 | See the [CoreDNS release notes](https://github.com/coredns/coredns/releases/tag/v1.2.2]{: external}. |
 | Kubernetes | v1.11.3 | v1.12.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.2]{: external}. |
 | Kubernetes configuration | N/A | N/A | Added three new IBM pod security policies and their associated cluster roles. For more information, see [Understanding default resources for IBM cluster management](/docs/containers?topic=containers-psp#ibm_psp). |
-| Kubernetes Dashboard | v1.8.3 | v1.10.0 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v1.10.0]{: external}.  \n If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers?topic=containers-deploy_app#cli_dashboard). Additionally, you can now scale up the number of Kubernetes Dashboard pods by running `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`. |
+| Kubernetes Dashboard | v1.8.3 | v1.10.0 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v1.10.0){: external}.  \n If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers?topic=containers-deploy_app#cli_dashboard). Additionally, you can now scale up the number of Kubernetes Dashboard pods by running `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`. |
 | Kubernetes DNS | 1.14.10 | 1.14.13 | See the [Kubernetes DNS release notes](https://github.com/kubernetes/dns/releases/tag/1.14.13]{: external}. |
 | Kubernetes Metrics Server | N/A | v0.3.1 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.3.1]{: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | v1.11.3-118 | v1.12.2-68 | Updated to support the Kubernetes 1.12 release. Additional changes include the following: \n - Load balancer pods (`ibm-cloud-provider-ip-*` in `ibm-system` namespace) now set CPU and memory resource requests. \n - The `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` annotation is added to specify the VLAN that the load balancer service deploys to. To see available VLANs in your cluster, run `ibmcloud ks vlan ls --zone <zone>`. \n - A new [load balancer 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs) is available as a beta. |
