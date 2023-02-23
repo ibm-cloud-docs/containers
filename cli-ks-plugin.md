@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-02-23"
 
 keywords: kubernetes
 
@@ -1262,6 +1262,14 @@ Minimum required permissions
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
+
+##### Example `cluster master audit-webhook get` command
+{: #cluster-master-audit-webhook-get-example}
+
+```sh
+ibmcloud ks cluster master audit-webhook get --cluster mycluster
+```
+{: pre}
 
 
 #### `ibmcloud ks cluster master audit-webhook set`
