@@ -60,9 +60,9 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
         * [`ibmcloud ks cluster master pod-security set`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-set)
         * [`ibmcloud ks cluster master pod-security unset`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-unset)
         * **`ibmcloud ks cluster master pod-security policy`**: View and modify the deprecated Pod Security policy configuration in supported clusters.
-            * [`ibmcloud ks cluster master pod-security policy disable`]((/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-policy-disable)
-            * [`ibmcloud ks cluster master pod-security policy enable`]((/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-policy-enable)
-            * [`ibmcloud ks cluster master pod-security policy get`]((/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-policy-get)
+            * [`ibmcloud ks cluster master pod-security policy disable`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-policy-disable)
+            * [`ibmcloud ks cluster master pod-security policy enable`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-policy-enable)
+            * [`ibmcloud ks cluster master pod-security policy get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-policy-get)
     * **`cluster master private-service-endpoint`**: Manage the private service endpoint of a cluster.
         * **`ibmcloud ks cluster master private-service-endpoint allowlist`**: Manage the private service endpoint allowlist.
             * [`ibmcloud ks cluster master private-service-endpoint allowlist add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist_add)
