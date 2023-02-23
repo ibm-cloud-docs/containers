@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-23"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -402,7 +402,7 @@ Before you begin
 
 1. Create an Object Storage bucket through the {{site.data.keyword.cloud_notm}} console by following [this getting started tutorial](/docs/cloud-object-storage?topic=cloud-object-storage-getting-started-cloud-object-storage#gs-create-buckets).
 
-2. Generate [HMAC service credentials](/docs/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials) in the bucket that you created.
+2. Generate [HMAC service credentials](/docs/cloud-object-storage?topic=cloud-object-storage-uhc-hmac-credentials-main) in the bucket that you created.
     1. In the **Service Credentials** tab of the {{site.data.keyword.cos_short}} dashboard, click **New Credential**.
     2. Give the HMAC credentials the `Writer` service access role.
     3. In the **Add Inline Configuration Parameters** field, specify `{"HMAC":true}`.

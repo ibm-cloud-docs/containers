@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-22"
+lastupdated: "2023-02-23"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -46,6 +46,12 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ## Version 1.5.1
 {: #1_5_1}
 
+### 1.5.1_3809_iks, released 23 February 2023
+{: #1.5.1_3809_iks}
+
+- Updates `golang` version to 1.20.1.
+- Resolves [CVE-2022-41723](https://nvd.nist.gov/vuln/detail/CVE-2022-41723){: external}
+
 ### 1.5.1_3779_iks, released 20 February 2023
 {: #1.5.1_3779_iks}
 
@@ -74,6 +80,12 @@ Initial release of `1.5.1`
 
 ## Version 1.4.0
 {: #1_4_0}
+
+### 1.4.0_3808_iks, released 23 February 2023
+{: #1.4.0_3808_iks}
+
+- Updates `golang` version to 1.20.1.
+- Resolves [CVE-2022-41723](https://nvd.nist.gov/vuln/detail/CVE-2022-41723){: external}
 
 ### 1.4.0_3783_iks, released 20 February 2023
 {: #1.4.0_3783_iks}
@@ -118,6 +130,12 @@ Initial release of `1.4.0`
 
 ## Version 1.3.1
 {: #1_3_1}
+
+### 1.3.1_3807_iks, released 23 February 2023
+{: #1.3.1_3807_ikss}
+
+- Updates `golang` version to 1.20.1.
+- Resolves [CVE-2022-41723](https://nvd.nist.gov/vuln/detail/CVE-2022-41723){: external}
 
 ### 1.3.1_3777_iks, released 20 February 2023
 {: #1.3.1_3777_iks}
