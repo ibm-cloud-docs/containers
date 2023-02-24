@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-02-23"
+lastupdated: "2023-02-24"
 
 keywords: containers
 subcollection: containers
@@ -9653,7 +9653,7 @@ subcollection: containers
 
 [VPC: Why can't I create worker nodes on dedicated hosts?](/docs/containers?topic=containers-ts-worker-dedicated#ts-worker-dedicated)
 
-[VPC: Why doesn't replacing a worker node create a worker node?](/docs/containers?topic=containers-auto-rebalance-off#auto-rebalance-off)
+[Why doesn't replacing a worker node create a worker node?](/docs/containers?topic=containers-auto-rebalance-off#auto-rebalance-off)
 
 [Classic: Why is the bare metal instance ID inconsistent with worker records?](/docs/containers?topic=containers-bm_machine_id#bm_machine_id)
 
