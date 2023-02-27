@@ -6361,7 +6361,7 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.26.1_1521, released 13 February 2023](/docs/containers?topic=containers-changelog_126#1261_1521)
 
-    * [Change log for master fix pack 1.26.1_1519 and worker node fix pack 1.26.1_1520, released 1 February 2022](/docs/containers?topic=containers-changelog_126#1261_1519_and_1261_1520)
+    * [Change log for master fix pack 1.26.1_1519 and worker node fix pack 1.26.1_1520, released 1 February 2023](/docs/containers?topic=containers-changelog_126#1261_1519_and_1261_1520)
 
 [Version 1.26 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-126)
 
