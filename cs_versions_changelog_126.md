@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-02-27"
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
 
@@ -53,7 +53,7 @@ The following table shows the changes that are in the worker node fix pack 1.26.
 {: caption="Changes since version 1.26.1_1520" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.26.1_1519 and worker node fix pack 1.26.1_1520, released 1 February 2022
+### Change log for master fix pack 1.26.1_1519 and worker node fix pack 1.26.1_1520, released 1 February 2023
 {: #1261_1519_and_1261_1520}
 
 | Component | Previous | Current | Description |
