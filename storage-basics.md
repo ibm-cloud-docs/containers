@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-02-27"
 
 keywords: kubernetes
 
@@ -123,7 +123,7 @@ Not finding what you are looking for? You can also create your own customized st
 Get started using storage in your cluster by reviewing the following docs.
 
 - [{{site.data.keyword.blockstorageshort}} for Classic](/docs/containers?topic=containers-block_storage)
-- [{{site.date.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)
+- [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)
 - [{{site.data.keyword.filestorage_short}} for Classic clusters](/docs/containers?topic=containers-file_storage)
 - [{{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-file-vpc-install)
 - [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-understand)

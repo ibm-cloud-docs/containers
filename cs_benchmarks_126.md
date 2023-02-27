@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-02-22"
+lastupdated: "2023-02-27"
 
 keywords: kubernetes, containers, benchmarks, 1.26, CIS benchmarks
 
@@ -226,7 +226,7 @@ Review the Kubernetes Policies results of the version 1.5 CIS Kubernetes benchma
 ### 5.2 Pod Security Policies
 {: #cis-benchmark-52-126}
 
-| # | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
+| Section | Recommendation | Scored/Not Scored | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.2.1 | Minimize the admission of privileged containers | Not Scored | 1 | [Pass](#cis-benchmark-remediations-126) | Shared |
 | 5.2.2 | Minimize the admission of containers wishing to share the host process ID namespace | Scored | 1 | [Pass](#cis-benchmark-remediations-126) | Shared |
