@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-02-22"
+lastupdated: "2023-02-28"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -40,6 +40,22 @@ Review the version 1.25 change log.
 
 
 
+### Change log for worker node fix pack 1.25.6_1532, released 27 February 2023
+{: #1256_1532}
+
+The following table shows the changes that are in the worker node fix pack 1.25.6_1532. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages |N/A|N/A| Worker node package updates for [CVE-2023-22490](https://nvd.nist.gov/vuln/detail/CVE-2023-22490){: external}, [CVE-2023-23946](https://nvd.nist.gov/vuln/detail/CVE-2023-23946){: external}, [CVE-2023-25725](https://nvd.nist.gov/vuln/detail/CVE-2023-25725){: external}. |
+| Ubuntu 20.04 packages |N/A|N/A| Worker node package updates for [CVE-2023-22490](https://nvd.nist.gov/vuln/detail/CVE-2023-22490){: external}, [CVE-2023-23946](https://nvd.nist.gov/vuln/detail/CVE-2023-23946){: external}, [CVE-2023-25725](https://nvd.nist.gov/vuln/detail/CVE-2023-25725){: external}. |
+| Kubernetes |N/A|N/A|N/A|
+| HAProxy | d38f89 | af5031 | [CVE-2022-40897](https://nvd.nist.gov/vuln/detail/CVE-2022-40897){: external}, [CVE-2022-4415](https://nvd.nist.gov/vuln/detail/CVE-2022-4415){: external}, [CVE-2020-10735](https://nvd.nist.gov/vuln/detail/CVE-2020-10735){: external}, [CVE-2021-28861](https://nvd.nist.gov/vuln/detail/CVE-2021-28861){: external}, [CVE-2022-45061](https://nvd.nist.gov/vuln/detail/CVE-2022-45061){: external}. |
+| Default Worker Pool | Ubuntu 18 | Ubuntu 20| For {{site.data.keyword.containerlong_notm}}, default `worker-pool` is created with Ubuntu 20 Operating system |
+{: caption="Changes since version 1.25.6_1531" caption-side="bottom"}
+
+
 ### Change log for worker node fix pack 1.25.6_1531, released 13 February 2023
 {: #1256_1531}
 
@@ -51,7 +67,7 @@ The following table shows the changes that are in the worker node fix pack 1.25.
 | Ubuntu 18.04 packages | 4.15.0-202 | 4.15.0-204 | Worker node kernel & package updates for [CVE-2022-28321](https://nvd.nist.gov/vuln/detail/CVE-2022-28321){: external}, [CVE-2022-3437](https://nvd.nist.gov/vuln/detail/CVE-2022-3437){: external}, [CVE-2022-4304](https://nvd.nist.gov/vuln/detail/CVE-2022-4304){: external}, [CVE-2022-4450](https://nvd.nist.gov/vuln/detail/CVE-2022-4450){: external}, [CVE-2022-45142](https://nvd.nist.gov/vuln/detail/CVE-2022-45142){: external}, [CVE-2022-47016](https://nvd.nist.gov/vuln/detail/CVE-2022-47016){: external}, [CVE-2023-0215](https://nvd.nist.gov/vuln/detail/CVE-2023-0215){: external}, [CVE-2023-0286](https://nvd.nist.gov/vuln/detail/CVE-2023-0286){: external}. |
 | Ubuntu 20.04 packages | 5.4.0-137 | 5.4.0-139 | Worker node kernel & package updates for [CVE-2022-28321](https://nvd.nist.gov/vuln/detail/CVE-2022-28321){: external}, [CVE-2022-3437](https://nvd.nist.gov/vuln/detail/CVE-2022-3437){: external}, [CVE-2022-4304](https://nvd.nist.gov/vuln/detail/CVE-2022-4304){: external}, [CVE-2022-4450](https://nvd.nist.gov/vuln/detail/CVE-2022-4450){: external}, [CVE-2022-45142](https://nvd.nist.gov/vuln/detail/CVE-2022-45142){: external}, [CVE-2022-47016](https://nvd.nist.gov/vuln/detail/CVE-2022-47016){: external}, [CVE-2023-0215](https://nvd.nist.gov/vuln/detail/CVE-2023-0215){: external}, [CVE-2023-0286](https://nvd.nist.gov/vuln/detail/CVE-2023-0286){: external}. |
 | Kubernetes |N/A|N/A|N/A|
-| Haproxy | 8d6ea6 | 08c969 | [CVE-2022-47629](https://nvd.nist.gov/vuln/detail/CVE-2022-47629){: external}. | 
+| HAProxy | 8d6ea6 | 08c969 | [CVE-2022-47629](https://nvd.nist.gov/vuln/detail/CVE-2022-47629){: external}. | 
 {: caption="Changes since version 1.25.6_1530" caption-side="bottom"}
 
 
@@ -87,7 +103,7 @@ The following table shows the changes that are in the worker node fix pack 1.25.
 | Ubuntu 18.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2018-20217](https://nvd.nist.gov/vuln/detail/CVE-2018-20217){: external},[CVE-2022-23521](https://nvd.nist.gov/vuln/detail/CVE-2022-23521){: external},[CVE-2022-28321](https://nvd.nist.gov/vuln/detail/CVE-2022-28321){: external},[CVE-2022-40897](https://nvd.nist.gov/vuln/detail/CVE-2022-40897){: external},[CVE-2022-40898](https://nvd.nist.gov/vuln/detail/CVE-2022-40898){: external},[CVE-2022-41903](https://nvd.nist.gov/vuln/detail/CVE-2022-41903){: external},[CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external},[CVE-2023-22809](https://nvd.nist.gov/vuln/detail/CVE-2023-22809){: external}. |
 | Ubuntu 20.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2021-33503](https://nvd.nist.gov/vuln/detail/CVE-2021-33503){: external},[CVE-2022-23521](https://nvd.nist.gov/vuln/detail/CVE-2022-23521){: external},[CVE-2022-28321](https://nvd.nist.gov/vuln/detail/CVE-2022-28321){: external},[CVE-2022-3094](https://nvd.nist.gov/vuln/detail/CVE-2022-3094){: external},[CVE-2022-40897](https://nvd.nist.gov/vuln/detail/CVE-2022-40897){: external},[CVE-2022-40898](https://nvd.nist.gov/vuln/detail/CVE-2022-40898){: external},[CVE-2022-41903](https://nvd.nist.gov/vuln/detail/CVE-2022-41903){: external},[CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external},[CVE-2023-0056](https://nvd.nist.gov/vuln/detail/CVE-2023-0056){: external},[CVE-2023-22809](https://nvd.nist.gov/vuln/detail/CVE-2023-22809){: external}. |
 | Kubernetes | 1.25.5 | 1.25.6 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.6){: external}. |
-| HAPROXY | 508bf6 | 8d6ea6 | [CVE-2022-42010](https://nvd.nist.gov/vuln/detail/CVE-2022-42010){: external},[CVE-2022-42011](https://nvd.nist.gov/vuln/detail/CVE-2022-42011){: external},[CVE-2022-42012](https://nvd.nist.gov/vuln/detail/CVE-2022-42012){: external},[CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external},[CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40304){: external},[CVE-2022-3821](https://nvd.nist.gov/vuln/detail/CVE-2022-3821){: external},[CVE-2022-35737](https://nvd.nist.gov/vuln/detail/CVE-2022-35737){: external},[CVE-2022-43680](https://nvd.nist.gov/vuln/detail/CVE-2022-43680){: external},[CVE-2021-46848](https://nvd.nist.gov/vuln/detail/CVE-2021-46848){: external}. |
+| HAProxy | 508bf6 | 8d6ea6 | [CVE-2022-42010](https://nvd.nist.gov/vuln/detail/CVE-2022-42010){: external},[CVE-2022-42011](https://nvd.nist.gov/vuln/detail/CVE-2022-42011){: external},[CVE-2022-42012](https://nvd.nist.gov/vuln/detail/CVE-2022-42012){: external},[CVE-2022-40303](https://nvd.nist.gov/vuln/detail/CVE-2022-40303){: external},[CVE-2022-40304](https://nvd.nist.gov/vuln/detail/CVE-2022-40304){: external},[CVE-2022-3821](https://nvd.nist.gov/vuln/detail/CVE-2022-3821){: external},[CVE-2022-35737](https://nvd.nist.gov/vuln/detail/CVE-2022-35737){: external},[CVE-2022-43680](https://nvd.nist.gov/vuln/detail/CVE-2022-43680){: external},[CVE-2021-46848](https://nvd.nist.gov/vuln/detail/CVE-2021-46848){: external}. |
 {: caption="Changes since version 1.25.5_1528" caption-side="bottom"}
 
 
@@ -167,7 +183,7 @@ The following table shows the changes that are in the worker node fix pack 1.25.
 |Containerd|1.6.8|1.6.10|See the [1.6.10 change log](https://github.com/containerd/containerd/releases/tag/v1.6.10){: external} and the [1.6.9 change log](https://github.com/containerd/containerd/releases/tag/v1.6.9){: external}. |
 | Ubuntu 18.04 packages |N/A|N/A| Worker node package updates for [CVE-2013-4235](https://nvd.nist.gov/vuln/detail/CVE-2013-4235){: external},[CVE-2022-3239](https://nvd.nist.gov/vuln/detail/CVE-2022-3239){: external},[CVE-2022-3524](https://nvd.nist.gov/vuln/detail/CVE-2022-3524){: external},[CVE-2022-3564](https://nvd.nist.gov/vuln/detail/CVE-2022-3564){: external},[CVE-2022-3565](https://nvd.nist.gov/vuln/detail/CVE-2022-3565){: external},[CVE-2022-3566](https://nvd.nist.gov/vuln/detail/CVE-2022-3566){: external},[CVE-2022-3567](https://nvd.nist.gov/vuln/detail/CVE-2022-3567){: external},[CVE-2022-3594](https://nvd.nist.gov/vuln/detail/CVE-2022-3594){: external},[CVE-2022-3621](https://nvd.nist.gov/vuln/detail/CVE-2022-3621){: external},[CVE-2022-42703](https://nvd.nist.gov/vuln/detail/CVE-2022-42703){: external}. |
 | Kubernetes |N/A|N/A|N/A|
-| HAPROXY | c619f4 | 508bf6 | [CVE-2016-3709](https://nvd.nist.gov/vuln/detail/CVE-2016-3709){: external}, [CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external}, [CVE-2022-1304](https://nvd.nist.gov/vuln/detail/CVE-2022-1304){: external}. |
+| HAProxy | c619f4 | 508bf6 | [CVE-2016-3709](https://nvd.nist.gov/vuln/detail/CVE-2016-3709){: external}, [CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external}, [CVE-2022-1304](https://nvd.nist.gov/vuln/detail/CVE-2022-1304){: external}. |
 | CUDA | fd4353 | 0ab756 | [CVE-2022-42898](https://nvd.nist.gov/vuln/detail/CVE-2022-42898){: external}. |
 {: caption="Changes since version 1.25.4_1523" caption-side="bottom"}
 
@@ -219,7 +235,7 @@ The following table shows the changes that are in the worker node fix pack 1.25.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages |N/A|N/A| Worker node package updates for [CVE-2022-32221](https://nvd.nist.gov/vuln/detail/CVE-2022-32221){: external},[CVE-2022-40284](https://nvd.nist.gov/vuln/detail/CVE-2022-40284){: external},[CVE-2022-42010](https://nvd.nist.gov/vuln/detail/CVE-2022-42010){: external},[CVE-2022-42011](https://nvd.nist.gov/vuln/detail/CVE-2022-42011){: external},[CVE-2022-42012](https://nvd.nist.gov/vuln/detail/CVE-2022-42012){: external}. |
 | Kubernetes | 1.25.2 | 1.25.3 | For more information, see the [change log](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.3){: external}. |
-| HAPROXY | b034b2 | 3a1392 | [CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external},[CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external},[CVE-2020-35525](https://nvd.nist.gov/vuln/detail/CVE-2020-35525){: external},[CVE-2020-35527](https://nvd.nist.gov/vuln/detail/CVE-2020-35527){: external},[CVE-2022-3515](https://nvd.nist.gov/vuln/detail/CVE-2022-3515){: external},[CVE-2022-2509](https://nvd.nist.gov/vuln/detail/CVE-2022-2509){: external}. |
+| HAProxy | b034b2 | 3a1392 | [CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external},[CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external},[CVE-2020-35525](https://nvd.nist.gov/vuln/detail/CVE-2020-35525){: external},[CVE-2020-35527](https://nvd.nist.gov/vuln/detail/CVE-2020-35527){: external},[CVE-2022-3515](https://nvd.nist.gov/vuln/detail/CVE-2022-3515){: external},[CVE-2022-2509](https://nvd.nist.gov/vuln/detail/CVE-2022-2509){: external}. |
 | CUDA | 3ea43b | 576234 | [CVE-2022-3515](https://nvd.nist.gov/vuln/detail/CVE-2022-3515){: external},[CVE-2022-2509](https://nvd.nist.gov/vuln/detail/CVE-2022-2509){: external},[CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external},[CVE-2020-35525](https://nvd.nist.gov/vuln/detail/CVE-2020-35525){: external},[CVE-2020-35527](https://nvd.nist.gov/vuln/detail/CVE-2020-35527){: external}. |
 {: caption="Changes since version 1.25.2_1519" caption-side="bottom"}
 

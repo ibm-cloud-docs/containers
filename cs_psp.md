@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-02-28"
 
 keywords: kubernetes
 
@@ -21,6 +21,9 @@ subcollection: containers
 
 With [pod security policies (PSPs)](https://kubernetes.io/docs/concepts/security/pod-security-policy/){: external}, you can
 configure policies to authorize who can create and update pods in {{site.data.keyword.containerlong}}.
+
+Pod security policies are not available in clusters that run version 1.25 or later. In clusters that run version 1.25 or later, use [Pod Security admission](/docs/containers?topic=containers-pod-security-admission) instead. To upgrade a cluster with pod security policies from version 1.24 to version 1.25, follow the steps in [Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration). 
+{: note}
 
 ## FAQs
 {: #psp-faqs}
