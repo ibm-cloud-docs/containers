@@ -9366,23 +9366,23 @@ subcollection: containers
 
 [VPC flavors](/docs/containers?topic=containers-vpc-flavors#vpc-flavors)
 
-* [au-syd](/docs/containers?topic=containers-vpc-flavors#au-syd)
+* [`au-syd`](/docs/containers?topic=containers-vpc-flavors#au-syd)
 
-* [br-sao](/docs/containers?topic=containers-vpc-flavors#br-sao)
+* [`br-sao`](/docs/containers?topic=containers-vpc-flavors#br-sao)
 
-* [ca-tor](/docs/containers?topic=containers-vpc-flavors#ca-tor)
+* [`ca-tor`](/docs/containers?topic=containers-vpc-flavors#ca-tor)
 
-* [eu-de](/docs/containers?topic=containers-vpc-flavors#eu-de)
+* [`eu-de`](/docs/containers?topic=containers-vpc-flavors#eu-de)
 
-* [eu-gb](/docs/containers?topic=containers-vpc-flavors#eu-gb)
+* [`eu-gb`](/docs/containers?topic=containers-vpc-flavors#eu-gb)
 
-* [jp-osa](/docs/containers?topic=containers-vpc-flavors#jp-osa)
+* [`jp-osa`](/docs/containers?topic=containers-vpc-flavors#jp-osa)
 
-* [jp-tok](/docs/containers?topic=containers-vpc-flavors#jp-tok)
+* [`jp-tok`](/docs/containers?topic=containers-vpc-flavors#jp-tok)
 
-* [us-east](/docs/containers?topic=containers-vpc-flavors#us-east)
+* [`us-east`](/docs/containers?topic=containers-vpc-flavors#us-east)
 
-* [us-south](/docs/containers?topic=containers-vpc-flavors#us-south)
+* [`us-south`](/docs/containers?topic=containers-vpc-flavors#us-south)
 
 
 ## Classic flavors
@@ -9391,37 +9391,37 @@ subcollection: containers
 
 [Classic flavors](/docs/containers?topic=containers-classic-flavors#classic-flavors)
 
-* [ams](/docs/containers?topic=containers-classic-flavors#ams)
+* [`ams`](/docs/containers?topic=containers-classic-flavors#ams)
 
-* [che](/docs/containers?topic=containers-classic-flavors#che)
+* [`che`](/docs/containers?topic=containers-classic-flavors#che)
 
-* [dal](/docs/containers?topic=containers-classic-flavors#dal)
+* [`dal`](/docs/containers?topic=containers-classic-flavors#dal)
 
-* [fra](/docs/containers?topic=containers-classic-flavors#fra)
+* [`fra`](/docs/containers?topic=containers-classic-flavors#fra)
 
-* [lon](/docs/containers?topic=containers-classic-flavors#lon)
+* [`lon`](/docs/containers?topic=containers-classic-flavors#lon)
 
-* [mil](/docs/containers?topic=containers-classic-flavors#mil)
+* [`mil`](/docs/containers?topic=containers-classic-flavors#mil)
 
-* [mon](/docs/containers?topic=containers-classic-flavors#mon)
+* [`mon`](/docs/containers?topic=containers-classic-flavors#mon)
 
-* [osa](/docs/containers?topic=containers-classic-flavors#osa)
+* [`osa`](/docs/containers?topic=containers-classic-flavors#osa)
 
-* [par](/docs/containers?topic=containers-classic-flavors#par)
+* [`par`](/docs/containers?topic=containers-classic-flavors#par)
 
-* [sao](/docs/containers?topic=containers-classic-flavors#sao)
+* [`sao`](/docs/containers?topic=containers-classic-flavors#sao)
 
-* [sjc](/docs/containers?topic=containers-classic-flavors#sjc)
+* [`sjc`](/docs/containers?topic=containers-classic-flavors#sjc)
 
-* [sng](/docs/containers?topic=containers-classic-flavors#sng)
+* [`sng`](/docs/containers?topic=containers-classic-flavors#sng)
 
-* [syd](/docs/containers?topic=containers-classic-flavors#syd)
+* [`syd`](/docs/containers?topic=containers-classic-flavors#syd)
 
-* [tok](/docs/containers?topic=containers-classic-flavors#tok)
+* [`tok`](/docs/containers?topic=containers-classic-flavors#tok)
 
-* [tor](/docs/containers?topic=containers-classic-flavors#tor)
+* [`tor`](/docs/containers?topic=containers-classic-flavors#tor)
 
-* [wdc](/docs/containers?topic=containers-classic-flavors#wdc)
+* [`wdc`](/docs/containers?topic=containers-classic-flavors#wdc)
 
 
 ## FAQs
