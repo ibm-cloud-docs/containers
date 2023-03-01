@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-28"
+lastupdated: "2023-03-01"
 
 keywords: kubernetes, release notes
 
@@ -27,6 +27,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: tip}
 
 
+## March 2023
+{: #containers-mar23}
+
+### 1 March 2023
+{: #containers-mar0123}
+{: release-note}
+
+CLI version `1.0.498`
+:   For more information, see the [change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 ## February 2023
 {: #containers-feb23}

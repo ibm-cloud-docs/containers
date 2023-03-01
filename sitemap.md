@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-02-28"
+lastupdated: "2023-03-01"
 
 keywords: containers
 subcollection: containers
@@ -263,6 +263,12 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar23)
+
+    * [1 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0123)
+
+        * CLI version `1.0.498`
 
 * [February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb23)
 
@@ -5807,6 +5813,18 @@ subcollection: containers
 
     * [`ibmcloud ks cluster master audit-webhook`](/docs/containers?topic=containers-kubernetes-service-cli#cluster_master_audit_webhook)
 
+    * [`ibmcloud ks cluster master pod-security get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-get)
+
+    * [`ibmcloud ks cluster master pod-security policy disable`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-policy-disable)
+
+    * [`ibmcloud ks cluster master pod-security policy enable`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-policy-enable)
+
+    * [`ibmcloud ks cluster master pod-security policy get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-policy-get)
+
+    * [`ibmcloud ks cluster master pod-security set`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-set)
+
+    * [`ibmcloud ks cluster master pod-security unset`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-unset)
+
     * [`ibmcloud ks cluster master private-service-endpoint allowlist`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist)
 
     * [Example `cluster master private-service-endpoint allowlist rm` command](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-private-service-endpoint-allowlist-rm)
@@ -6144,6 +6162,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.498](/docs/containers?topic=containers-cs_cli_changelog#cli-10498)
 
 * [Version 1.0.489](/docs/containers?topic=containers-cs_cli_changelog#cli-10489)
 
