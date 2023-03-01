@@ -268,7 +268,9 @@ subcollection: containers
 
     * [1 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0123)
 
-        * CLI version `1.0.498`
+        * CLI version `1.0.498`.
+
+        * ALB OAuth Proxy add-on version `2.0.0_1487`.
 
 * [February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb23)
 
@@ -9117,6 +9119,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_1487, released on 1 March 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1487)
 
     * [Version 2.0.0_1469, released on 22 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1469)
 

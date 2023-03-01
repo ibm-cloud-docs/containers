@@ -34,8 +34,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-mar0123}
 {: release-note}
 
-CLI version `1.0.498`
+CLI version `1.0.498`.
 :   For more information, see the [change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+ALB OAuth Proxy add-on version `2.0.0_1487`.
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+
 
 ## February 2023
 {: #containers-feb23}
