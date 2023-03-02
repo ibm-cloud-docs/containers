@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-03-02"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -44,10 +44,10 @@ Review the changes that are included in version 1.16.2 of the managed Istio add-
 {: shortdesc}
 
 Previous version
-:   1.16.2
+:   1.16.1
 
 Current version
-:   1.16.1
+:   1.16.2
 
 Updates in this version
 :   See the Istio release notes for [Istio 1.16.2](https://istio.io/latest/news/releases/1.16.x/announcing-1.16.2/.){: external}.
