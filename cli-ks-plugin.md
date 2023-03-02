@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-01"
+lastupdated: "2023-03-02"
 
 keywords: kubernetes
 
@@ -1552,11 +1552,11 @@ Minimum required permissions
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-#### Example `cluster master pod-security set` command
-{: #cluster-master-pod-security-set-example}
+#### Example `cluster master pod-security unset` command
+{: #cluster-master-pod-security-unset-example}
 
 ```sh
-ibmcloud ks cluster master pod-security set --cluster mycluster
+ibmcloud ks cluster master pod-security unset --cluster mycluster
 ```
 {: pre}
 
