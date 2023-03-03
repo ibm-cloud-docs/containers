@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-01"
+lastupdated: "2023-03-03"
 
 keywords: kubernetes
 
@@ -324,7 +324,7 @@ Set up a VPC load balancer to expose your app on the public network.
 
 When you create a Kubernetes `LoadBalancer` service in your cluster, a load balancer for VPC is automatically created in your VPC outside of your cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. The following diagram illustrates how a user accesses an app's service through the load balancer, even though your worker node is connected to only a private subnet.
 
-![VPC load balancing for a cluster.](/images/vpc-tutorial-4.svg "VPC load balancing for a cluster"){: caption="Figure 1. VPC load balancing for a cluster" caption-side="bottom"}
+![VPC load balancing for a cluster.](/images/vpc-alb-mz.svg "VPC load balancing for a cluster"){: caption="Figure 1. VPC load balancing for a cluster" caption-side="bottom"}
 
 1. Create a Kubernetes `LoadBalancer` service in your cluster to publicly expose the hello world app.
     ```sh

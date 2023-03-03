@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-03-02"
+lastupdated: "2023-03-03"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar23)
+
+    * [3 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0323)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.10`.
 
     * [1 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0123)
 
@@ -4755,11 +4759,15 @@ subcollection: containers
 
 * [Understanding load balancing for apps through Kubernetes service discovery](/docs/containers?topic=containers-cs_network_planning#in-cluster)
 
-    * [Services](/docs/containers?topic=containers-cs_network_planning#app-exposure-service)
-
-* [kube-proxy](/docs/containers?topic=containers-cs_network_planning#app-exposure-proxy)
-
 * [Understanding Kubernetes service types](/docs/containers?topic=containers-cs_network_planning#external)
+
+    * [`ClusterIP`](/docs/containers?topic=containers-cs_network_planning#cluster-ip-service)
+
+    * [`NodePort`](/docs/containers?topic=containers-cs_network_planning#nodeport-service)
+
+    * [`LoadBalancer`](/docs/containers?topic=containers-cs_network_planning#loadbalancer-service)
+
+    * [`Ingress`](/docs/containers?topic=containers-cs_network_planning#ingress-service)
 
 * [Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#public_access)
 
@@ -4784,13 +4792,11 @@ subcollection: containers
 
 * [Exposing an app by using a VPC load balancer in a VPC cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_vpc)
 
-[VPC: Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas#vpc-lbaas)
+[Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas#vpc-lbaas)
 
-* [About VPC load balancing in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-lbaas#lbaas_about)
+* [Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#nlb_vpc)
 
-    * [Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#nlb_vpc)
-
-    * [Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#lb_vpc)
+* [Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#lb_vpc)
 
 * [Setting up a Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb)
 
@@ -4836,15 +4842,11 @@ subcollection: containers
 
     * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_multi)
 
-    * [Traffic flow in a gateway-enabled cluster](/docs/containers?topic=containers-loadbalancer-about#v1_gateway)
-
 * [Components and architecture of an NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs)
 
     * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_single)
 
     * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_multi)
-
-    * [Traffic flow in a gateway-enabled cluster](/docs/containers?topic=containers-loadbalancer-about#v2_gateway)
 
 [Classic: Setting up basic load balancing with an NLB 1.0](/docs/containers?topic=containers-loadbalancer#loadbalancer)
 
@@ -9029,6 +9031,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.11, released 03 March 2023](/docs/containers?topic=containers-cos_plugin_changelog#02211_object_plugin)
 
 * [Change log for version 2.2.10, released 21 February 2023](/docs/containers?topic=containers-cos_plugin_changelog#02210_object_plugin)
 
