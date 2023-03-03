@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-22"
+lastupdated: "2023-03-03"
 
 keywords: kubernetes
 
@@ -245,8 +245,6 @@ Deploy your app as a container in a Kubernetes cluster.
     {: screen}
 
     b. Open a browser and check out the app with the following URL: `http://<public_IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. You can give this URL to a co-worker to try or enter it in your cell phone's browser so that you can see that the app really is publicly available. **Note**: Because worker nodes in VPC clusters don't have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. Then, you can use the worker node's private IP address and NodePort: `http://<private_IP_address>:<NodePort>`.
-    
-    ![A screen capture of the deployed boilerplate Python Flask app.](images/python_flask.png "A screen capture of the deployed boilerplate Python Flask app."){: caption="Figure 2. Th deployed boilerplate Python Flask app" caption-side="bottom"}
 
 4. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
 

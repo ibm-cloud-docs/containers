@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-03-03"
 
 keywords: kubernetes, lb2.0, nlb, app protocol, application protocol
 
@@ -93,27 +93,6 @@ The following diagram shows how a network load balancer (NLB) 1.0 directs commun
 
 4. When the app returns a response packet, it uses the IP address of the worker node where the NLB that forwarded the client request exists. The NLB then sends the response packet to the client.
 
-### Traffic flow in a gateway-enabled cluster
-{: #v1_gateway}
-
-Gateway-enabled clusters are deprecated and become unsupported soon. If you have a gateway-enabled cluster, plan to create a new cluster before support ends. If you need similar functionality to gateway-enabled clusters, consider creating a cluster on VPC infrastructure. For more information, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_vpc_basics). To get started creating a VPC cluster, see [Creating a standard VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
-{: deprecated}
-
-The following diagram shows how an NLB 1.0 directs communication from the internet to an app in a [gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway).
-{: shortdesc}
-
-![Expose an app in a gateway-enabled cluster by using an NLB 1.0](images/cs_loadbalancer_gateway1.png){: caption="Figure 3. Expose an app in a gateway-enabled cluster by using an NLB 1.0" caption-side="bottom"}
-
-1. A request to your app uses the public IP address of your NLB and the assigned port on the worker node. Note that if you [create a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLB, users can access your app through the NLB's subdomain instead. A DNS system service resolves the subdomain to the portable public IP address of the NLB.
-
-2. The NLB receives the request. The NLB is able to receive the request because the NLB pods are scheduled to a worker in the `gateway` worker pool, which has public network connectivity.
-
-3. The NLB forwards the request to the IP address of the worker node where an app pod is deployed over the private network. The source IP address of the request package is changed to the public IP address of the gateway worker node where the NLB is deployed. If multiple app instances are deployed in the cluster, the NLB routes the requests between the app pods.
-
-4. When the app returns a response, it uses the IP address of the gateway worker node where the NLB that forwarded the client request exists. The NLB then sends the response packet through the gateway to the client.
-
-
-
 ## Components and architecture of an NLB 2.0
 {: #planning_ipvs}
 
@@ -159,31 +138,4 @@ The following diagram shows how version 2.0 NLBs in each zone direct traffic fro
 5. Worker 10.73.14.26 unpacks the IPIP encapsulating packet, and then unpacks the client request packet. The client request packet is forwarded to the app pod on that worker node.
 
 6. Worker 10.73.14.26 then uses the source IP address from the original request packet, the client IP, to return the app pod's response packet directly to the client.
-
-### Traffic flow in a gateway-enabled cluster
-{: #v2_gateway}
-
-Gateway-enabled clusters are deprecated and become unsupported soon. If you have a gateway-enabled cluster, plan to create a new cluster before support ends. If you need similar functionality to gateway-enabled clusters, consider creating a cluster on VPC infrastructure. For more information, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_vpc_basics). To get started creating a VPC cluster, see [Creating a standard VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
-{: deprecated}
-
-The following diagram shows how an NLB 2.0 directs communication from the internet to an app in a [gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway).
-{: shortdesc}
-
-
-![Expose an app in a gateway-enabled cluster by using an NLB 2.0](images/cs_loadbalancer_gateway2.png){: caption="Figure 6. Expose an app in a gateway-enabled cluster by using an NLB 2.0" caption-side="bottom"}
-
-This diagram shows the traffic flow through a single-zone, gateway-enabled cluster. If your gateway-enabled cluster is multizone, you must deploy an NLB 2.0 in every zone where you have app instances. Each NLB routes requests to the app instances in its own zone and to app instances in other zones.
-
-1. A client request to your app uses the public IP address of your NLB and the assigned port on the worker node. In this example, the NLB has a virtual IP address of 169.61.23.130 and runs on the worker node that has the 10.73.13.25 private IP address. Note that if you [create a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLB, users can access your app through the NLB's subdomain instead. A DNS system service resolves the subdomain to the portable public IP address of the NLB.
-
-2. The NLB encapsulates the client request packet (labeled as "CR" in the image) inside an IPIP packet (labeled as "IPIP"). The client request packet retains the client IP as its source IP address. The IPIP encapsulating packet uses the worker node 10.73.14.25 IP as its source IP address. Note that the NLB is able to receive the request because the NLB pods are scheduled to a worker node in the `gateway` worker pool, which has public network connectivity.
-
-3. The NLB routes the IPIP packet to a compute worker node that an app pod is on and that has the private IP address 10.73.13.26. If multiple app instances are deployed in the zone, the NLB routes the requests in a round-robin style between the workers where app pods are deployed.
-
-4. The compute worker node, 10.73.13.26, unpacks the IPIP encapsulating packet, and then unpacks the client request packet. The client request packet is forwarded to the app pod on that worker node.
-
-5. The compute worker node, 10.73.13.26, then uses the source IP address from the original request packet, the client IP, to return the app pod's response packet directly to the client. Equal Cost Multipath (ECMP) routing is used to balance the response traffic through a gateway on one of the gateway worker nodes to the client.
-
-
-
 

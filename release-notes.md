@@ -3530,7 +3530,7 @@ Deprecated: Kubernetes version 1.16
 :   With the release of version 1.19, clusters that run version 1.16 are deprecated. Update your clusters to at least [version 1.17](/docs/containers?topic=containers-cs_versions#k8s_version_archive) today.
 
 New! Network load balancer for VPC
-:   In VPC Gen 2 clusters that run Kubernetes version 1.19, you can now create a layer 4 Network Load Balancer for VPC. VPC network load balancers offer source IP preservation and increased performance through direct server return (DSR). For more information, see [About VPC load balancing in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-lbaas#lbaas_about).
+:   In VPC Gen 2 clusters that run Kubernetes version 1.19, you can now create a layer 4 Network Load Balancer for VPC. VPC network load balancers offer source IP preservation and increased performance through direct server return (DSR). For more information, see [About VPC load balancing in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-lbaas).
 
 
 
@@ -4998,7 +4998,7 @@ New! Gateway-enabled classic clusters
 :   When you enable a gateway on a classic cluster, the cluster is created with a `compute` worker pool of compute worker nodes that are connected to a private VLAN only, and a `gateway` worker pool of gateway worker nodes that are connected to public and private VLANs. Traffic into or out of the cluster is routed through the gateway worker nodes, which provide your cluster with limited public access. For more information, check out the following links.
         - [Using a gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway)
         - [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_nodes)
-        - Flow of traffic to apps when using an [NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_gateway), an [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#v2_gateway), or Ingress ALBs.
+        - Flow of traffic to apps when using an [NLB 1.0](/docs/containers?topic=containers-loadbalancer-about), an [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about), or Ingress ALBs.
 
 :   Ready to get started? [Create a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-cluster-create-classic&interface=ui).
 
