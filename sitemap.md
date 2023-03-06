@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-03-03"
+lastupdated: "2023-03-06"
 
 keywords: containers
 subcollection: containers
@@ -9224,11 +9224,19 @@ subcollection: containers
 
 * [Account](/docs/containers?topic=containers-api-at-iam#ks-account)
 
+* [Certificate authority](/docs/containers?topic=containers-api-at-iam#ks-ca-api)
+
 * [Cluster](/docs/containers?topic=containers-api-at-iam#ks-cluster)
+
+* [Image security](/docs/containers?topic=containers-api-at-iam#image-security)
 
 * [Ingress](/docs/containers?topic=containers-api-at-iam#ks-ingress)
 
 * [Ingress ALB](/docs/containers?topic=containers-api-at-iam#ks-alb)
+
+* [Ingress load balancer](/docs/containers?topic=containers-api-at-iam#api-ingress-loadbalancer)
+
+* [Ingress status](/docs/containers?topic=containers-api-at-iam#api-ingress-status)
 
 * [Fluentd logging](/docs/containers?topic=containers-api-at-iam#ks-logging)
 
@@ -9592,7 +9600,7 @@ subcollection: containers
 
 [Why can't the cluster pull images from {{site.data.keyword.registrylong_notm}} during creation?](/docs/containers?topic=containers-ts_image_pull_create#ts_image_pull_create)
 
-[Why do cluster operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update#webhooks_update)
+[Why do cluster master operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update#webhooks_update)
 
 [Why is my Portieris cluster image security enforcement installation canceled?](/docs/containers?topic=containers-portieris_enable#portieris_enable)
 

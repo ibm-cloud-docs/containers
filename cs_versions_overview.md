@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-27"
+lastupdated: "2023-03-06"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -60,17 +60,12 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 1.23
 - Release date: 09 February 2022
-- End of support: 09 April 2023
+- End of support: 26 April 2023
 - Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_123)
 - [Change log](/docs/containers?topic=containers-changelog_123)
 
 
-
-
-
-Unsupported Kubernetes versions
-:   [Archived version history](/docs/containers?topic=containers-cs_sitemap#sitemap_archived_version_history)
 
 ## Checking a cluster's Kubernetes server version
 {: #cs_server_version}
