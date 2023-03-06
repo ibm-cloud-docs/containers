@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-03"
+lastupdated: "2023-03-06"
 
 keywords: kubernetes, networking
 
@@ -127,6 +127,11 @@ Expose multiple apps in a cluster by setting up routing with the [Ingress](/docs
 * The ALB listens for incoming HTTP, HTTPS, or TCP service requests. It forwards requests across the apps' pods based on the rules that you defined in the Ingress resource.
 * The multizone load balancer (MZLB) for classic clusters or the VPC load balancer for VPC clusters handles all incoming requests to your apps and load balances the requests among the ALBs in the various zones. It also enables health checks for the public Ingress IP addresses.
 
+
+![Ingress service traffic in Classic clusters](images/classic-ingress-traffic.svg "Ingress service traffic in Classic clusters."){: caption="Ingress service traffic in Classic clusters."}
+
+
+![Ingress service traffic in VPC clusters](images/vpc-ingress-traffic.svg "Ingress service traffic in VPC clusters."){: caption="Ingress service traffic in VPC clusters."}
 
 ## Planning public external load balancing
 {: #public_access}
