@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-03-03"
+lastupdated: "2023-03-06"
 
 keywords: containers
 subcollection: containers
@@ -9592,7 +9592,7 @@ subcollection: containers
 
 [Why can't the cluster pull images from {{site.data.keyword.registrylong_notm}} during creation?](/docs/containers?topic=containers-ts_image_pull_create#ts_image_pull_create)
 
-[Why do cluster operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update#webhooks_update)
+[Why do cluster master operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update#webhooks_update)
 
 [Why is my Portieris cluster image security enforcement installation canceled?](/docs/containers?topic=containers-portieris_enable#portieris_enable)
 
