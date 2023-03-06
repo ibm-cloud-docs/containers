@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-27"
+lastupdated: "2023-03-06"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -66,11 +66,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 - [Change log](/docs/containers?topic=containers-changelog_123)
 
 
-
-
-
-Unsupported Kubernetes versions
-:   [Archived version history](/docs/containers?topic=containers-cs_sitemap#sitemap_archived_version_history)
 
 ## Checking a cluster's Kubernetes server version
 {: #cs_server_version}
