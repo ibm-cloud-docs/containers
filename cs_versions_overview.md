@@ -60,7 +60,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 1.23
 - Release date: 09 February 2022
-- End of support: 09 April 2023
+- End of support: 26 April 2023
 - Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_123)
 - [Change log](/docs/containers?topic=containers-changelog_123)
