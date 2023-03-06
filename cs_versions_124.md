@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-02-10"
+lastupdated: "2023-03-06"
 
 keywords: kubernetes, containers
 
@@ -80,23 +80,21 @@ The following table shows the actions that you must take before you update the K
     ```
     {: pre}
 
-1. Search the repo for the Block Storage plug-in. Note that you will see versions for block `v2.x`.
+1. List the Helm deployments in your cluster and make a note of the {{site.data.keyword.blockstorageshort}} plug-in deployment in the `kube-system` namespace.
     ```sh
-    helm search repo block
+    helm ls -A
     ```
     {: pre}
-    
-    
-1. Save the chart that you found in the previous step to a file.
+
+1. Delete the plug-in from your cluster by using the `helm delete` command.
     ```sh
-    helm template iks-charts/ibmcloud-block-storage-plugin > block-plugin.yaml
+    helm delete RELEASE -n kube-system
     ```
     {: pre}
-    
-    
-1. Delete the plug-in from your cluster by using the file you saved in the previous step.
+
+1. List pods in the `kube-system` namespace to verify the plug-in pods have been removed.
     ```sh
-    kubectl delete -f block-plugin.yaml
+    kubectl get pods -n kube-system | grep block
     ```
     {: pre}
 
