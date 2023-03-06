@@ -9224,11 +9224,19 @@ subcollection: containers
 
 * [Account](/docs/containers?topic=containers-api-at-iam#ks-account)
 
+* [Certificate authority](/docs/containers?topic=containers-api-at-iam#ks-ca-api)
+
 * [Cluster](/docs/containers?topic=containers-api-at-iam#ks-cluster)
+
+* [Image security](/docs/containers?topic=containers-api-at-iam#image-security)
 
 * [Ingress](/docs/containers?topic=containers-api-at-iam#ks-ingress)
 
 * [Ingress ALB](/docs/containers?topic=containers-api-at-iam#ks-alb)
+
+* [Ingress load balancer](/docs/containers?topic=containers-api-at-iam#api-ingress-loadbalancer)
+
+* [Ingress status](/docs/containers?topic=containers-api-at-iam#api-ingress-status)
 
 * [Fluentd logging](/docs/containers?topic=containers-api-at-iam#ks-logging)
 
