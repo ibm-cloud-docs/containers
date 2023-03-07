@@ -268,6 +268,8 @@ subcollection: containers
 
     * [7 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0723)
 
+        * Worker node fix packs `1.23.16_1567`, `1.24.10_1557`, `1.25.6_1534`, and `1.26.1_1524`.
+
         * Cluster autoscaler add-on version `1.0.6_955` and `1.0.7_956`.
 
         * Istio add-on version `1.17.1`.
