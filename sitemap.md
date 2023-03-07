@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-03-06"
+lastupdated: "2023-03-07"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,16 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar23)
+
+    * [7 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0723)
+
+        * Worker node fix packs `1.23.16_1567`, `1.24.10_1557`, `1.25.6_1534`, and `1.26.1_1524`.
+
+        * Cluster autoscaler add-on version `1.0.6_955` and `1.0.7_956`.
+
+        * Istio add-on version `1.17.1`.
+
+        * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.17_1829`, `5.0.7_1836`, and `5.1.2_1828`.
 
     * [3 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0323)
 
@@ -5121,15 +5131,27 @@ subcollection: containers
 {: #sitemap_storing_data_on_persistent_storage}
 
 
-[Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning)
+[Planning for storage](/docs/containers?topic=containers-storage-plan#storage-plan)
 
-* [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution)
+* [Non-persistent storage](/docs/containers?topic=containers-storage-plan#storage-plan-non-persistent)
 
-* [Comparison of non-persistent storage options](/docs/containers?topic=containers-storage_planning#non_persistent_overview)
+* [Persistent storage for single zone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-single-zone)
 
-* [Comparison of persistent storage options for single zone clusters](/docs/containers?topic=containers-storage_planning#single_zone_persistent_storage)
+    * [Classic {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-storage-plan#storage-plan-classic-file)
 
-* [Comparison of persistent storage options for multizone clusters](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)
+    * [Classic {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-storage-plan#storage-plan-classic-block)
+
+    * [{{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-plan#storage-plan-vpc-file)
+
+    * [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-storage-plan#storage-plan-vpc-block)
+
+* [Persistent storage options for multizone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-multizone)
+
+    * [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-plan#storage-plan-cos)
+
+    * [Portworx](/docs/containers?topic=containers-storage-plan#storage-plan-portworx)
+
+    * [Databases](/docs/containers?topic=containers-storage-plan#storage-plan-databases)
 
 [Understanding Kubernetes storage basics](/docs/containers?topic=containers-kube_concepts#kube_concepts)
 
@@ -8596,6 +8618,10 @@ subcollection: containers
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
+* [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
+
+    * [Change log for 1.17.1, released 7 March 2023](/docs/containers?topic=containers-istio-changelog#1171)
+
 * [Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
 
     * [Change log for 1.16.2, released 14 February 2023](/docs/containers?topic=containers-istio-changelog#1162)
@@ -8830,7 +8856,9 @@ subcollection: containers
 
 * [Version 1.0.7](/docs/containers?topic=containers-ca_changelog#0107_ca_addon)
 
-    * [Change log for patch update 1.0.7_944, released 17 February 2023:](/docs/containers?topic=containers-ca_changelog#107944_ca)
+    * [Change log for patch update 1.0.7_956, released 7 March 2023](/docs/containers?topic=containers-ca_changelog#107956_ca)
+
+    * [Change log for patch update 1.0.7_944, released 17 February 2023](/docs/containers?topic=containers-ca_changelog#107944_ca)
 
     * [Change log for patch update 1.0.7_940, released 24 January 2023:](/docs/containers?topic=containers-ca_changelog#107940_ca)
 
@@ -8839,6 +8867,8 @@ subcollection: containers
     * [Change log for patch update 1.0.7_883, released 3 November 2022](/docs/containers?topic=containers-ca_changelog#107883_ca)
 
 * [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0106_ca_addon)
+
+    * [Change log for patch update 1.0.6_955, released 7 March 2023](/docs/containers?topic=containers-ca_changelog#106955_ca)
 
     * [Change log for patch update 1.0.6_899, released 9 January 2023](/docs/containers?topic=containers-ca_changelog#106899_ca)
 
@@ -8918,11 +8948,15 @@ subcollection: containers
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
 
+    * [Change log for version 5.1.4_1852, released 07 March 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.4_1852_is_block_relnote)
+
     * [Change log for version 5.1.2_1828, released 21 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.2-1828_is_block_relnote)
 
     * [Change log for version 5.1, released 9 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1_is_block_relnote)
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
+
+    * [Change log for version 5.0.8_1841, released 07 March 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.8_1841_is_block_relnote)
 
     * [Change log for version 5.0.7_1836, released 21 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.7-1836_is_block_relnote)
 

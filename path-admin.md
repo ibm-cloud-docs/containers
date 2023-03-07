@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-03-07"
 
 keywords: kubernetes, containers
 
@@ -144,8 +144,8 @@ Plan and add highly available persistent storage based on your app requirements,
 {: shortdesc}
 
 1. **Storage basics**: Start by understanding the [basics of Kubernetes storage](/docs/containers?topic=containers-kube_concepts).
-2. **Requirements**: Determine your [requirements for a storage solution](/docs/containers?topic=containers-storage_planning).
-3. **Choose a solution**: Using your storage requirements, choose a storage solution by comparing [non-persistent](/docs/containers?topic=containers-storage_planning#non_persistent_overview), [single-zone persistent](/docs/containers?topic=containers-storage_planning#single_zone_persistent_storage), or [multizone persistent](/docs/containers?topic=containers-storage_planning#persistent_storage_overview) storage.
+2. **Requirements**: Determine your [requirements for a storage solution](/docs/containers?topic=containers-storage-plan).
+3. **Choose a solution**: Using your storage requirements, choose a storage solution by comparing [non-persistent](/docs/containers?topic=containers-storage-plan), [single-zone persistent](/docs/containers?topic=containers-storage-plan), or [multizone persistent](/docs/containers?topic=containers-storage-plan) storage.
 
 Need help? Check out the troubleshooting page for your persistent storage solution.
 {: tip}

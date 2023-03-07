@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-03"
+lastupdated: "2023-03-07"
 
 keywords: kubernetes, release notes
 
@@ -29,6 +29,31 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## March 2023
 {: #containers-mar23}
+
+### 7 March 2023
+{: #containers-mar0723}
+{: release-note}
+
+
+
+Worker node fix packs `1.23.16_1567`, `1.24.10_1557`, `1.25.6_1534`, and `1.26.1_1524`.
+:   For more information, see the change logs: [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125), and [1.26](/docs/containers?topic=containers-changelog_126).
+
+
+
+Cluster autoscaler add-on version `1.0.6_955` and `1.0.7_956`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+
+
+
+Istio add-on version `1.17.1`.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog#1171).
+
+
+
+{{site.data.keyword.block_storage_is_short}} add-on versions `4.4.17_1829`, `5.0.7_1836`, and `5.1.2_1828`.
+:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
 
 ### 3 March 2023
 {: #containers-mar0323}

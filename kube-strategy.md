@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-03-07"
 
 keywords: kubernetes, containers, kubernetes environment, moving to kubernetes, moving to containers, clusters, cluster sizing
 
@@ -102,7 +102,7 @@ The cluster admin persona must have a broad knowledge that includes compute, net
 What are an app developer's main tasks and technical skills?
 :   As a developer, you design, create, secure, deploy, test, run, and monitor cloud-native, containerized apps in an Kubernetes cluster. To create and run these apps, you must be familiar with the concept of microservices, the [12-factor app](/docs/containers?topic=containers-plan_deploy#12factor) guidelines, [Docker and containerization principles](https://www.docker.com/){: external}, and available [Kubernetes deployment options](/docs/containers?topic=containers-plan_deploy).
 
-Kubernetes and {{site.data.keyword.containerlong_notm}} provide multiple options for how to [expose an app and keep an app private](/docs/containers?topic=containers-cs_network_planning), [add persistent storage](/docs/containers?topic=containers-storage_planning), [integrate other services](/docs/containers?topic=containers-ibm-3rd-party-integrations), and how you can [secure your workloads and protect sensitive data](/docs/containers?topic=containers-security#container). Before you move your app to a cluster in {{site.data.keyword.containerlong_notm}}, verify that you can run your app as a containerized app on the supported RHEL 7  operating system and that Kubernetes and {{site.data.keyword.containerlong_notm}} provide the capabilities that your workload needs.
+Kubernetes and {{site.data.keyword.containerlong_notm}} provide multiple options for how to [expose an app and keep an app private](/docs/containers?topic=containers-cs_network_planning), [add persistent storage](/docs/containers?topic=containers-), [integrate other services](/docs/containers?topic=containers-ibm-3rd-party-integrations), and how you can [secure your workloads and protect sensitive data](/docs/containers?topic=containers-security#container). Before you move your app to a cluster in {{site.data.keyword.containerlong_notm}}, verify that you can run your app as a containerized app on the supported RHEL 7  operating system and that Kubernetes and {{site.data.keyword.containerlong_notm}} provide the capabilities that your workload needs.
 
 Do cluster administrators and developers interact with each other?
 :   Yes. Cluster administrators and developers must interact frequently so that cluster administrators understand workload requirements to provide this capability in the cluster, and so that developers know about available limitations, integrations, and security principles that they must consider in their app development process.
@@ -287,7 +287,7 @@ Review more information about making resources highly available.
 * [Create multizone clusters](/docs/containers?topic=containers-ha_clusters#ha_clusters).
 * [Plan highly available deployments](/docs/containers?topic=containers-plan_deploy#highly_available_apps) that use features such as replica sets and pod anti-affinity across multizones.
 * [Run containers that are based on images in a cloud-based public registry](/docs/containers?topic=containers-images).
-* [Plan data storage](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Especially for multizone clusters, consider using a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/Cloudant?topic=Cloudant-getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/cloud-object-storage?topic=cloud-object-storage-getting-started-cloud-object-storage).
+* [Plan data storage](/docs/containers?topic=containers-storage-plan). Especially for multizone clusters, consider using a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/Cloudant?topic=Cloudant-getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/cloud-object-storage?topic=cloud-object-storage-getting-started-cloud-object-storage).
 * For multizone clusters, enable a [load balancer service](/docs/containers?topic=containers-loadbalancer#multi_zone_config) or the Ingress [multizone load balancer](/docs/containers?topic=containers-managed-ingress-about) to expose your apps publicly.
 
 
