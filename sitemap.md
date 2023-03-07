@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-03-06"
+lastupdated: "2023-03-07"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar23)
+
+    * [7 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0723)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.17_1829`, `5.0.7_1836`, and `5.1.2_1828`.
 
     * [3 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0323)
 
@@ -8918,11 +8922,15 @@ subcollection: containers
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
 
+    * [Change log for version 5.1.4_1852, released 07 March 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.4_1852_is_block_relnote)
+
     * [Change log for version 5.1.2_1828, released 21 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.2-1828_is_block_relnote)
 
     * [Change log for version 5.1, released 9 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1_is_block_relnote)
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
+
+    * [Change log for version 5.0.8_1841, released 07 March 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.8_1841_is_block_relnote)
 
     * [Change log for version 5.0.7_1836, released 21 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.7-1836_is_block_relnote)
 
