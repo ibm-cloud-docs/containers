@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-02-28"
+lastupdated: "2023-03-07"
 
 keywords: kubernetes, containers
 
@@ -35,6 +35,30 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.24 change log.
 {: shortdesc}
+
+
+### Change log for master fix pack 1.24.10_1557, released 2 March 2023
+{: #12410_1557}
+
+The following table shows the changes that are in the master fix pack 1.24.10_1557. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.15 | v1.3.16 | Updated `Go` dependencies and to `Go` version `1.19.6`. Updated universal base image (UBI) to resolve CVEs. |
+| etcd | v3.5.6 | v3.5.7 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.7){: external}. |
+| Gateway-enabled cluster controller | 1902 | 1987 | Updated `armada-utils` to version `v1.9.35` |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1280-amd64 | 1308-amd64 | Updated universal base image (UBI) to resolve [CVE-2022-47629](https://nvd.nist.gov/vuln/detail/CVE-2022-47629){: external}. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.3.6 | v2.3.7 | Updated universal base image (UBI) to resolve CVEs. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.24.10-2 | v1.24.10-10 | Updated `Go` dependencies. Updated `k8s.io/utils` digest to `a5ecb01`. Updated `vpcctl` to `v0.10.0`. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 425 | 427 | Updated universal base image (UBI) to resolve CVEs. |
+| Key Management Service provider | v2.5.13 | v2.6.3 | Updated `Go` dependencies and to `Go` version `1.19.6`. |
+| Konnectivity agent and server | v0.0.34_491_iks | v0.1.1_569_iks-amd64 | Updated to Konnectivity version v0.1.0. |
+| Kubernetes NodeLocal DNS cache | 1.22.11 | 1.22.18-amd64 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.18){: external}. |
+| Load balancer and Load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2325 | 2383 | Updated to `armada-utils` version `1.9.35`. |
+| Portieris admission controller | v0.12.6 | v0.13.3 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.3){: external}. |
+{: caption="Changes since version 1.24.10_1551" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.24.10_1554, released 27 February 2023
