@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-02"
+lastupdated: "2023-03-07"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -29,10 +29,41 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | --- | --- | --- |
+| 1.17 | Yes | 1.23, 1.24, 1.25, 1.26 |
 | 1.16 | Yes | 1.23, 1.24, 1.25, 1.26 |
 | 1.15 | Yes | 1.22, 1.23, 1.24, 1.25 |
 | 1.14 | No | 1.21, 1.22, 1.23, 1.24, 1.25 |
 {: caption="Supported Istio versions" caption-side="bottom"}
+
+## Version 1.17
+{: #v117}
+
+### Change log for 1.17.1, released 7 March 2023
+{: #1171}
+
+Review the changes that are included in version 1.17.1 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.16.2
+
+Current version
+:   1.17.1
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.17.1](https://istio.io/latest/news/releases/1.17.x/announcing-1.17.1/.){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2022-28321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-28321){: external}
+    - [CVE-2022-4203](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4203){: external}
+    - [CVE-2022-4304](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4304){: external}
+    - [CVE-2022-4450](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4450){: external}
+    - [CVE-2023-0215](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0215){: external} 
+    - [CVE-2023-0216](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0216){: external}
+    - [CVE-2023-0217](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0217){: external}
+    - [CVE-2023-0286](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0286){: external}
+    - [CVE-2023-0401](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0401){: external}
+    - [usn-5825-2](https://ubuntu.com/security/notices/USN-5825-2){: external}
+    - [usn-5844-1](https://ubuntu.com/security/notices/USN-5844-1){: external}
 
 ## Version 1.16
 {: #v116}

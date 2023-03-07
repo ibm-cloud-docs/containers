@@ -8616,6 +8616,10 @@ subcollection: containers
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
+* [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
+
+    * [Change log for 1.17.1, released 7 March 2023](/docs/containers?topic=containers-istio-changelog#1171)
+
 * [Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
 
     * [Change log for 1.16.2, released 14 February 2023](/docs/containers?topic=containers-istio-changelog#1162)
