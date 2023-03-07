@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-22"
+lastupdated: "2023-03-07"
 
 keywords: kubernetes
 
@@ -20,7 +20,7 @@ subcollection: containers
 # Storing data on classic IBM Cloud {{site.data.keyword.blockstorageshort}}
 {: #block_storage}
 
-{{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out whether {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is the correct storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For more information about pricing, see [Pricing](https://www.ibm.com/cloud/block-storage/pricing){: external}.
+{{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out whether {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is the correct storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage-plan). For more information about pricing, see [Pricing](https://www.ibm.com/cloud/block-storage/pricing){: external}.
 {: shortdesc}
 
 Keep in mind the following requirements when you use the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in.
@@ -32,7 +32,7 @@ Keep in mind the following requirements when you use the {{site.data.keyword.clo
 If your cluster can't access the public network, such as a private cluster behind a firewall or a cluster with only the private cloud service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your {{site.data.keyword.blockstorageshort}} instance over the private network.
 
 
-{{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage-plan).
 
 [Classic infrastructure]{: tag-classic-inf}
 
@@ -211,7 +211,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
     2. Review the [version change log](/docs/containers?topic=containers-changelog) to find the changes that are in the latest patch version.
 
-    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker reload command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) to safely reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker reload command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) to safely reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage-plan).
 
 1. [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the Helm version 3 client on your local machine.
 

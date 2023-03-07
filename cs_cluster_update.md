@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-06"
+lastupdated: "2023-03-07"
 
 keywords: kubernetes, upgrade, version
 
@@ -148,7 +148,7 @@ What if I choose not to define a config map?
 Before you update your classic infrastructure worker nodes, review the prerequisite steps.
 {: shortdesc}
 
-Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](/docs/containers?topic=containers-storage-plan).
 {: important}
 
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -357,7 +357,7 @@ What if a replacement worker node is not created?
 Before you update your VPC infrastructure worker nodes, review the prerequisite steps.
 {: shortdesc}
 
-Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is removed, and data is deleted if not [stored outside the pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is removed, and data is deleted if not [stored outside the pod](/docs/containers?topic=containers-storage-plan).
 {: important}
 
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -547,7 +547,7 @@ You can update the flavors, or machine types, of your worker nodes by adding new
 
 Before you begin:
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- If you store data on your worker node, the data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+- If you store data on your worker node, the data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage-plan).
 - Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms).
 
 To update flavors:

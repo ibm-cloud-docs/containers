@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-22"
+lastupdated: "2023-03-07"
 
 keywords: kubernetes, containers
 
@@ -118,7 +118,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Public network app access by a NodePort service to a non-stable IP address](/docs/containers?topic=containers-nodeport)|Yes|Yes|
 |[User access management](/docs/containers?topic=containers-access-overview#access_policies)|Yes|Yes|
 |[{{site.data.keyword.cloud_notm}} service access from the cluster and apps](/docs/containers?topic=containers-service-binding#bind-services)|Yes|Yes|
-|[Disk space on worker node for non-persistent storage](/docs/containers?topic=containers-storage_planning#non_persistent_overview)|Yes|Yes|
+|[Disk space on worker node for non-persistent storage](/docs/containers?topic=containers-storage-plan)|Yes|Yes|
 |[Provision {{site.data.keyword.redhat_openshift_notm}} clusters](/docs/openshift?topic=openshift-getting-started) | | Yes |
 |[Create clusters in a Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial) | | Yes |
 |[Ability to create cluster in every {{site.data.keyword.containerlong_notm}} region](/docs/containers?topic=containers-regions-and-zones)| | Yes |

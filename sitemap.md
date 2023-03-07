@@ -5125,15 +5125,27 @@ subcollection: containers
 {: #sitemap_storing_data_on_persistent_storage}
 
 
-[Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning)
+[Planning for storage](/docs/containers?topic=containers-storage-plan#storage-plan)
 
-* [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution)
+* [Non-persistent storage](/docs/containers?topic=containers-storage-plan#storage-plan-non-persistent)
 
-* [Comparison of non-persistent storage options](/docs/containers?topic=containers-storage_planning#non_persistent_overview)
+* [Persistent storage for single zone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-single-zone)
 
-* [Comparison of persistent storage options for single zone clusters](/docs/containers?topic=containers-storage_planning#single_zone_persistent_storage)
+    * [Classic {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-storage-plan#storage-plan-classic-file)
 
-* [Comparison of persistent storage options for multizone clusters](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)
+    * [Classic {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-storage-plan#storage-plan-classic-block)
+
+    * [{{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-plan#storage-plan-vpc-file)
+
+    * [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-storage-plan#storage-plan-vpc-block)
+
+* [Persistent storage options for multizone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-multizone)
+
+    * [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-plan#storage-plan-cos)
+
+    * [Portworx](/docs/containers?topic=containers-storage-plan#storage-plan-portworx)
+
+    * [Databases](/docs/containers?topic=containers-storage-plan#storage-plan-databases)
 
 [Understanding Kubernetes storage basics](/docs/containers?topic=containers-kube_concepts#kube_concepts)
 
