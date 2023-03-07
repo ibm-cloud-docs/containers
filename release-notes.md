@@ -34,8 +34,20 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-mar0723}
 {: release-note}
 
+
+Cluster autoscaler add-on version `1.0.6_955` and `1.0.7_956`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+
+
+
+Istio add-on version `1.17.1`.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog#1171).
+
+
+
 {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.17_1829`, `5.0.7_1836`, and `5.1.2_1828`.
 :   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
 
 ### 3 March 2023
 {: #containers-mar0323}
