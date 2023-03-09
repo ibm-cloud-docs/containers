@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-06"
+lastupdated: "2023-03-09"
 
 keywords: kubernetes, logmet, logs, metrics, audit, events
 
@@ -238,8 +238,6 @@ After the master refresh completes, your logs are sent to the private IP address
 
 To audit any events that are passed through your Kubernetes API server, you can create a configuration that uses Fluentd to forward events to an external server.
 {: shortdesc}
-
-To see how Fluentd is used, see [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging).
 
 Before you begin, ensure that you reviewed the [considerations and prerequisites](#prereqs-apiserver-logs). Note that [log filters](/docs/containers?topic=containers-health#filter-logs) are not supported.
 

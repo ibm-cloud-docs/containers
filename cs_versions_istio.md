@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-07"
+lastupdated: "2023-03-09"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -51,7 +51,7 @@ Current version
 :   1.17.1
 
 Updates in this version
-:   See the Istio release notes for [Istio 1.17.1](https://istio.io/latest/news/releases/1.17.x/announcing-1.17.1/.){:external}.
+:   See the Istio release notes for [Istio 1.17.1](https://istio.io/latest/news/releases/1.17.x/announcing-1.17.1/.){: external}.
 :   Resolves the following CVEs:
     - [CVE-2022-28321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-28321){: external}
     - [CVE-2022-4203](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4203){: external}
@@ -67,6 +67,33 @@ Updates in this version
 
 ## Version 1.16
 {: #v116}
+
+### Change log for 1.16.3, released 9 March 2023
+{: #1163}
+
+Review the changes that are included in version 1.16.3 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.16.2
+
+Current version
+:   1.16.3
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.16.3](https://istio.io/latest/news/releases/1.16.x/announcing-1.16.3/.){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2022-28321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-28321){: external}
+    - [CVE-2022-4203](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4203){: external}
+    - [CVE-2022-4304](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4304){: external}
+    - [CVE-2022-4450](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4450){: external}
+    - [CVE-2023-0215](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0215){: external} 
+    - [CVE-2023-0216](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0216){: external}
+    - [CVE-2023-0217](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0217){: external}
+    - [CVE-2023-0286](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0286){: external}
+    - [CVE-2023-0401](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0401){: external}
+    - [usn-5825-2](https://ubuntu.com/security/notices/USN-5825-2){: external}
+    - [usn-5844-1](https://ubuntu.com/security/notices/USN-5844-1){: external}
 
 ### Change log for 1.16.2, released 14 February 2023
 {: #1162}
@@ -153,6 +180,33 @@ Updates in this version
 ## Version 1.15
 {: #v115}
 
+### Change log for 1.15.6, released 9 March 2023
+{: #1156}
+
+Review the changes that are included in version 1.15.6 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.15.5
+
+Current version
+:   1.15.6
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.15.6](https://istio.io/latest/news/releases/1.15.x/announcing-1.15.6/.){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2022-28321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-28321){: external}
+    - [CVE-2022-4203](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4203){: external}
+    - [CVE-2022-4304](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4304){: external}
+    - [CVE-2022-4450](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4450){: external}
+    - [CVE-2023-0215](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0215){: external} 
+    - [CVE-2023-0216](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0216){: external}
+    - [CVE-2023-0217](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0217){: external}
+    - [CVE-2023-0286](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0286){: external}
+    - [CVE-2023-0401](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0401){: external}
+    - [usn-5825-2](https://ubuntu.com/security/notices/USN-5825-2){: external}
+    - [usn-5844-1](https://ubuntu.com/security/notices/USN-5844-1){: external}
+
 ### Change log for 1.15.5, released 14 February 2023
 {: #1155}
 
@@ -160,10 +214,10 @@ Review the changes that are included in version 1.15.5 of the managed Istio add-
 {: shortdesc}
 
 Previous version
-:   1.15.5
+:   1.15.4
 
 Current version
-:   1.15.4
+:   1.15.5
 
 Updates in this version
 :   See the Istio release notes for [Istio 1.15.5](https://istio.io/latest/news/releases/1.15.x/announcing-1.15.5/.){: external}.
