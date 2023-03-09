@@ -35,9 +35,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: release-note}
 
 
+Cluster autoscaler add-on version `1.0.8_968`
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+
+
 
 Istio add-on version `1.15.6` and `1.16.3`.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog#1163).
+
 
 
 

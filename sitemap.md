@@ -268,6 +268,8 @@ subcollection: containers
 
     * [9 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0923)
 
+        * Cluster autoscaler add-on version `1.0.8_968`
+
         * Istio add-on version `1.15.6` and `1.16.3`.
 
     * [7 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0723)
@@ -8869,6 +8871,10 @@ subcollection: containers
     * [Change log for patch update 1.1.0_475, released 30 March 2022](/docs/containers?topic=containers-ca_changelog#110475_ca)
 
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
+
+* [Version 1.0.8](/docs/containers?topic=containers-ca_changelog#0108_ca_addon)
+
+    * [Change log for patch update 1.0.8_968, released 9 March 2023](/docs/containers?topic=containers-ca_changelog#108968_ca)
 
 * [Version 1.0.7](/docs/containers?topic=containers-ca_changelog#0107_ca_addon)
 
