@@ -51,7 +51,7 @@ Current version
 :   1.17.1
 
 Updates in this version
-:   See the Istio release notes for [Istio 1.17.1](https://istio.io/latest/news/releases/1.17.x/announcing-1.17.1/.){:external}.
+:   See the Istio release notes for [Istio 1.17.1](https://istio.io/latest/news/releases/1.17.x/announcing-1.17.1/.){: external}.
 :   Resolves the following CVEs:
     - [CVE-2022-28321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-28321){: external}
     - [CVE-2022-4203](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4203){: external}
@@ -81,7 +81,7 @@ Current version
 :   1.16.3
 
 Updates in this version
-:   See the Istio release notes for [Istio 1.16.3](https://istio.io/latest/news/releases/1.16.x/announcing-1.16.3/.){:external}.
+:   See the Istio release notes for [Istio 1.16.3](https://istio.io/latest/news/releases/1.16.x/announcing-1.16.3/.){: external}.
 :   Resolves the following CVEs:
     - [CVE-2022-28321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-28321){: external}
     - [CVE-2022-4203](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4203){: external}
@@ -193,7 +193,7 @@ Current version
 :   1.15.6
 
 Updates in this version
-:   See the Istio release notes for [Istio 1.15.6](https://istio.io/latest/news/releases/1.15.x/announcing-1.15.6/.){:external}.
+:   See the Istio release notes for [Istio 1.15.6](https://istio.io/latest/news/releases/1.15.x/announcing-1.15.6/.){: external}.
 :   Resolves the following CVEs:
     - [CVE-2022-28321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-28321){: external}
     - [CVE-2022-4203](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4203){: external}
