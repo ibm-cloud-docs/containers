@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-23"
+lastupdated: "2023-03-09"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -155,9 +155,6 @@ Configure log forwarding for {{site.data.keyword.containerlong_notm}} standard c
 
 When you create a logging configuration for a source in your cluster to forward to an external server, a [Fluentd](https://www.fluentd.org/){: external} component is created in your cluster. Fluentd collects the logs from that source's paths and forwards the logs to an external server. The traffic from the source to the logging service on the ingestion port is encrypted.
 {: shortdesc}
-
-As of 14 November 2019, a Fluentd component is created for your cluster only if you create a logging configuration to forward logs to a syslog server. If no logging configurations for syslog exist in your cluster, the Fluentd component is removed automatically. If you don't forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, [automatic updates to Fluentd must be enabled](/docs/containers?topic=containers-update#logging-up).
-{: important}
 
 What are the sources that I can configure log forwarding for?
 :   In the following image, you can see the location of the sources that you can configure logging for.
