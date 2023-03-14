@@ -270,6 +270,8 @@ subcollection: containers
 
         * Ingress ALB version `1.4.0_3862_iks`, `1.5.1_3863_iks`, and `1.6.4_3864_iks`
 
+        * Worker node fix packs `1.23.16_1568`, `1.24.10_1558`, `1.25.6_1535`, and `1.26.1_1525`.
+
     * [9 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0923)
 
         * Cluster autoscaler add-on version `1.0.8_968`
