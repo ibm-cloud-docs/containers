@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-07"
+lastupdated: "2023-03-15"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -53,7 +53,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 1.24
 - Release date: 09 June 2022
-- End of support: 6 September 2023`†`
+- End of support: 06 September 2023`†`
 - Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_124)
 - [Change log](/docs/containers?topic=containers-changelog_124)
@@ -119,23 +119,35 @@ Patch updates (x.x.4_1510)
     - **Worker node patches**: Check monthly to see whether an update is available, and use the [`ibmcloud ks worker update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) command or the [`ibmcloud ks worker reload`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) command to apply these security and operating system patches. During an update or reload, your worker node machine is reimaged, and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage-plan).
     - **Master patches**: Master patches are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, as noted in the change log, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply.
 
+
 ## Release lifecycle
 {: #release_lifecycle}
-
-{{site.data.keyword.containerlong_notm}} concurrently supports select versions of community Kubernetes releases. 
-{: shortdesc}
 
 Each supported version of {{site.data.keyword.containerlong_notm}} goes through a lifecycle of testing, development, general release, support, deprecation, and becoming unsupported. Review the descriptions of each phase of a version's lifecycle. 
 
 Estimated days and versions are provided for general understanding. Actual availability and release dates are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 {: note}
 
-1. **Community release**: The Kubernetes community releases the new version. IBM engineers begin testing and hardening the community version in preparation to release a supported {{site.data.keyword.containerlong_notm}} version.
-2. **Latest supported version**: The version is released as the latest supported {{site.data.keyword.containerlong_notm}} version.
-3. **Default version**: The version becomes the default supported {{site.data.keyword.containerlong_notm}} version.
-4. **Supported version**: The version remains supported but is no longer the default version.
-5. **Deprecated**: The version is deprecated, and security patch updates might not be provided. Versions are deprecated for approximately 90 days. Approximately 45 days after deprecation, you receive a notification in the console and CLI that you have approximately 45 days remaining to update your cluster to a supported version before its current version becomes unsupported. During the deprecation period, the version is still supported and your cluster is still functional, but might require updating to a supported release to fix security vulnerabilities. For example, you can add and reload worker nodes.
-6. **Unsupported**: The version is unsupported. Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. If the cluster master runs two or more versions behind the oldest supported version, you can no longer apply updates and must delete the cluster and create a new one. 
+1. **Community release**: The community releases the new version. IBM engineers begin testing and hardening the community version in preparation to release a supported {{site.data.keyword.containerlong_notm}} version.
+2. **Supported version lifecycle**:
+    Development release
+    :   Release is under development and might be available as a Beta to select customers. IBM provides best effort support for the release.
+
+    General availability
+    :   Release is generally available (GA). IBM provides full support for the release. IBM provides a tentative target date for the release to be unsupported. Release will become the default version used during cluster creation once there are minimal restrictions and a reasonable adoption rate for the release.
+
+    Maintenance
+    :   Release has entered maintenance support as defined by the Kubernetes community. IBM provides maintenance support for Kubernetes based on community policy. IBM provides full support otherwise.
+
+3. **Deprecated version**: The version is deprecated. IBM provides an updated unsupported target date for the release. An unsupported countdown to this date will be provided at least 45 days before the release becomes unsupported. IBM provides minimal support for the release in alignment with the Kubernetes community. This support phase is generally the final phase before the release becomes unsupported and overrides the maintenance and extended support phases should there be any overlap. Security patch updates might not be provided. During the deprecation period, the version is still supported and your cluster is still functional, but might require updating to a supported release to fix security vulnerabilities. For example, by adding or reloading worker nodes.
+
+4. **Unsupported version**: The version is unsupported. IBM only provides support to upgrade to a supported release. The version is unsupported. Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. If the cluster master runs two or more versions behind the oldest supported version, you can no longer apply updates and must delete the cluster and create a new one. 
+
+5. **Archived**: The version is unsupported with no upgrade path. IBM provides no support. IBM reserves the right to shut down the control planes for such clusters.
+
+
+
+
 
 If you wait until your cluster is two or more minor versions behind the oldest supported version, you can't update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster. To avoid this issue, update deprecated clusters to a supported version that is one or two behind the current version, such as 1.21 or 1.22 and then update to the latest version, 1.23. If the worker nodes run a version two or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support. You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}.
 {: important}

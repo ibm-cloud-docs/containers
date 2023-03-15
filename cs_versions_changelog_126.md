@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-03-14"
+lastupdated: "2023-03-15"
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
 
@@ -65,7 +65,7 @@ The following table shows the changes that are in the master fix pack 1.26.1_152
 | Calico | v3.24.5 | v3.25.0 | See the [Calico release notes](https://docs.tigera.io/archive/v3.24/release-notes/#v3245){: external}. |
 | Cluster health image | v1.3.15 | v1.3.16 | Updated `Go` dependencies and to `Go` version `1.19.6`. Updated universal base image (UBI) to resolve CVEs. |
 | CoreDNS | 1.10.0 | 1.10.1 | See the [CoreDNS release notes](https://coredns.io/tags/notes/){: external}. |
-| etcd | v3.5.6 | v3.5.7 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.7){: external}. |
+| etcd | v3.5.6 | v3.5.7 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.7){: external}. |
 | {{site.data.keyword.IBM_notm}} Calico extension | 1305-amd64 | 1308-amd64 | Updated universal base image (UBI) to resolve [CVE-2022-47629](https://nvd.nist.gov/vuln/detail/CVE-2022-47629){: external}. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.3.6 | v2.3.7 | Updated universal base image (UBI) to resolve CVEs. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.26.1-2 | v1.26.1-16 | Updated `Go` dependencies. Updated `k8s.io/utils` digest to `a5ecb01`. |

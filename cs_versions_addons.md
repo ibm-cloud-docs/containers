@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-14"
+lastupdated: "2023-03-15"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -48,7 +48,7 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ### 1.6.4_3864_iks, released 13 March 2023
 {: #1.6.4_3864_iks}
 
-Initial release of `1.6.4`.
+Initial release of `1.6.4`. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.6.4){: external}.
 
 ## Version 1.5.1
 {: #1_5_1}
@@ -88,7 +88,7 @@ Introduces support for multiple platform architectures such as AMD64 and s390x.
 ### 1.5.1_3536_iks, released 3 January 2023
 {: #1.5.1_3536_iks}
 
-Initial release of `1.5.1`
+Initial release of `1.5.1`. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.5.1){: external}.
 
 ## Version 1.4.0
 {: #1_4_0}
@@ -143,7 +143,7 @@ Introduces support for multiple platform architectures such as AMD64 and s390x.
 ### 1.4.0_3212_iks, released 12 December 2022
 {: #1.4.0_3212_iks}
 
-Initial release of `1.4.0`
+Initial release of `1.4.0`. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.4.0){: external}.
 
 ## Version 1.3.1 (unsupported)
 {: #1_3_1}
@@ -200,7 +200,7 @@ Updated the golang version to 1.19.3.
 ### 1.3.1_3108_iks, released 30 November 2022
 {: #1.3.1_3108_iks}
 
-Initial release of `1.3.1`
+Initial release of `1.3.1`. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.3.1){: external}.
 
 
 ## Version 1.3.0 (unsupported)
@@ -218,7 +218,7 @@ Version 1.3.0 is no longer supported.
 ### 1.3.0_2847_iks, released 25 October 2022
 {: #1.3.0_2847_iks}
 
-Initial release of `1.3.0`
+Initial release of `1.3.0`. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.3.0){: external}.
 
 ## Version 1.2.1 (unsupported)
 {: #1_2_1}
@@ -301,7 +301,7 @@ Updated the NGINX base image.
 ### Version 1.2.1_2337_iks, released 10 Jun 2022
 {: #1.2.1_2337_iks}
 
-- Initial release of `1.2.1`
+- Initial release of `1.2.1`. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.2.1){: external}.
 - Resolves [CVE-2021-25748](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-25748){: external}
 
 ## Version 1.2.0
@@ -326,7 +326,7 @@ Resolves [CVE-2022-29824](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-202
 ### Version 1.2.0_2131_iks, released 26 April 2022
 {: #1.2.0_2131_iks}
 
-- Initial release of `1.2.0`.
+- Initial release of `1.2.0`. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.2.0){: external}.
 - Resolves [CVE-2021-25745](https://access.redhat.com/security/cve/cve-2021-25745){: external} and [CVE-2021-25746](https://access.redhat.com/security/cve/cve-2021-25746){: external}. For more information, see the [security bulletin](https://www.ibm.com/support/pages/node/6575101){: external}.
 
 ## Version 1.1.2 
