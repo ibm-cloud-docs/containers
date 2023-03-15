@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-03-14"
+lastupdated: "2023-03-15"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -67,7 +67,7 @@ The following table shows the changes that are in the master fix pack 1.23.16_15
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.3.15 | v1.3.16 | Updated `Go` dependencies and to `Go` version `1.19.6`. Updated universal base image (UBI) to resolve CVEs. |
-| etcd | v3.4.22 | v3.4.23 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.23){: external}. |
+| etcd | v3.4.22 | v3.4.23 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.23){: external}. |
 | Gateway-enabled cluster controller | 1902 | 1987 | Updated `armada-utils` to version `v1.9.35` |
 | {{site.data.keyword.IBM_notm}} Calico extension | 1280-amd64 | 1308-amd64 | Updated universal base image (UBI) to resolve [CVE-2022-47629](https://nvd.nist.gov/vuln/detail/CVE-2022-47629){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.23.16-3 | v1.23.16-11 | Updated `Go` dependencies. Updated `k8s.io/utils` digest to `a5ecb01`. Updated `vpcctl binary` to `3785`. |
