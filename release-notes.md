@@ -35,6 +35,11 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: release-note}
 
 
+Cluster autoscaler add-on version `1.1.0_978`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+
+
+
 
 ### 14 March 2023
 {: #containers-mar1423}

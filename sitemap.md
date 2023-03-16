@@ -268,6 +268,8 @@ subcollection: containers
 
     * [16 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar1623)
 
+        * Cluster autoscaler add-on version `1.1.0_978`.
+
     * [14 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar1423)
 
         * Ingress ALB version `1.4.0_3862_iks`, `1.5.1_3863_iks`, and `1.6.4_3864_iks`
@@ -8879,6 +8881,8 @@ subcollection: containers
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
 * [Version 1.1.0 (Beta)](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
+
+    * [Change log for patch update 1.1.0_978, released 16 March 2023](/docs/containers?topic=containers-ca_changelog#110978_ca)
 
     * [Change log for patch update 1.1.0_897, released 9 January 2023](/docs/containers?topic=containers-ca_changelog#110897_ca)
 
