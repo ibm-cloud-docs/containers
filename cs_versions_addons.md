@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-15"
+lastupdated: "2023-03-16"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -33,6 +33,8 @@ View version changes for Ingress application load balancers (ALBs) that run the 
 {: shortdesc}
 
 When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` option. The latest three versions of the Kubernetes Ingress image are supported for ALBs. To list the currently supported versions, run the following command:
+
+
 ```sh
 ibmcloud ks ingress alb versions
 ```
@@ -48,7 +50,11 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ### 1.6.4_3864_iks, released 13 March 2023
 {: #1.6.4_3864_iks}
 
-Initial release of `1.6.4`. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.6.4){: external}.
+- Initial release of `1.6.4`. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.6.4){: external}.
+- Updates the default OpenSSL version from `1.1.1t` to `3.0.8`. 
+
+TLS 1.0 and TLS 1.1 are no longer supported. Upgrade to the newer TLS version, or as a workaround you can change the security level to `0` for OpenSSL, by appending `@SECLEVEL=0` to your cipher list in the `kube-system/ibm-k8s-controller-config` ConfigMap. For example: `ssl-ciphers: HIGH:!aNULL:!MD5:!CAMELLIA:!AESCCM:!ECDH+CHACHA20@SECLEVEL=0`
+{: important}
 
 ## Version 1.5.1
 {: #1_5_1}
