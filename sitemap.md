@@ -268,6 +268,10 @@ subcollection: containers
 
     * [21 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2123)
 
+        * Cluster autoscaler add-on version `1.0.7_988` and `1.0.8_987`.
+
+        * =======
+
         * New troubleshooting steps for workers in `Critical` or `NotReady` state. 
 
     * [20 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2023)
@@ -8910,9 +8914,13 @@ subcollection: containers
 
 * [Version 1.0.8](/docs/containers?topic=containers-ca_changelog#0108_ca_addon)
 
+    * [Change log for patch update 1.0.8_987, released 21 March 2023](/docs/containers?topic=containers-ca_changelog#108987_ca)
+
     * [Change log for patch update 1.0.8_968, released 9 March 2023](/docs/containers?topic=containers-ca_changelog#108968_ca)
 
 * [Version 1.0.7](/docs/containers?topic=containers-ca_changelog#0107_ca_addon)
+
+    * [Change log for patch update 1.0.7_988, released 21 March 2023](/docs/containers?topic=containers-ca_changelog#107988_ca)
 
     * [Change log for patch update 1.0.7_956, released 7 March 2023](/docs/containers?topic=containers-ca_changelog#107956_ca)
 
