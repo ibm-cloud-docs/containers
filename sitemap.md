@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-03-20"
+lastupdated: "2023-03-21"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar23)
+
+    * [21 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2123)
+
+        * New troubleshooting steps for workers in `Critical` or `NotReady` state. 
 
     * [20 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2023)
 
@@ -4120,7 +4124,7 @@ subcollection: containers
 
 
 ### Controlling traffic with ACLs, security groups, and network policies
-{: #sitemap_controlling_traffic_with_acls,_security_groups,_and_network_policies}
+{: #sitemap_controlling_traffic_with_acls_security_groups_and_network_policies}
 
 
 [Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#vpc-network-policy)
@@ -9692,6 +9696,8 @@ subcollection: containers
 
 [Why do cluster master operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update#webhooks_update)
 
+[Deleting webhooks from a cluster](/docs/containers?topic=containers-ts-delete-webhooks#ts-delete-webhooks)
+
 [Why is my Portieris cluster image security enforcement installation canceled?](/docs/containers?topic=containers-portieris_enable#portieris_enable)
 
 [Why does my cluster stay in a pending state?](/docs/containers?topic=containers-cs_cluster_pending#cs_cluster_pending)
@@ -9788,6 +9794,30 @@ subcollection: containers
 * [Hard reboot](/docs/containers?topic=containers-common_worker_nodes_issues#hard-reboot)
 
 * [Instance can't be found](/docs/containers?topic=containers-common_worker_nodes_issues#instance-not-found)
+
+[Troubleshooting worker nodes in `Critical` or `NotReady` state](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready)
+
+* [Before you begin](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-before)
+
+    * [Worker node notifications and maintenance](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-notifs)
+
+    * [Common causes](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-common)
+
+* [Troubleshooting steps](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-steps)
+
+    * [If one or some worker nodes are affected](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-steps-some)
+
+    * [If all worker nodes in a single zone, subnet, or VLAN are affected](/docs/containers?topic=containers-ts-critical-notready#if-all-worker-nodes-in-a-single-zone-subnet-or-vlan-are-affected)
+
+    * [If all worker nodes in a cluster are affected](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-steps-all)
+
+    * [If worker nodes switch between normal and critical states](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-steps-switch)
+
+* [Gathering data for a support case](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-gather)
+
+    * [Before you begin](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-gather-before)
+
+    * [Gathering data](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-gather-steps)
 
 [VPC: Why can't I create worker nodes on dedicated hosts?](/docs/containers?topic=containers-ts-worker-dedicated#ts-worker-dedicated)
 

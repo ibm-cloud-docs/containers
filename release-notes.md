@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-20"
+lastupdated: "2023-03-21"
 
 keywords: kubernetes, release notes
 
@@ -29,6 +29,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## March 2023
 {: #containers-mar23}
+
+### 21 March 2023
+{: #containers-mar2123}
+{: release-note}
+
+New troubleshooting steps for workers in `Critical` or `NotReady` state. 
+:   For more information, see [Troubleshooting worker nodes in `Critical` or `NotReady` state](/docs/containers?topic=containers-ts-critical-notready).
 
 ### 20 March 2023
 {: #containers-mar2023}
