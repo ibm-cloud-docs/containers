@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-03-21"
+lastupdated: "2023-03-22"
 
 keywords: containers
 subcollection: containers
@@ -269,8 +269,6 @@ subcollection: containers
     * [21 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2123)
 
         * Cluster autoscaler add-on version `1.0.7_988` and `1.0.8_987`.
-
-        * =======
 
         * New troubleshooting steps for workers in `Critical` or `NotReady` state. 
 
@@ -9815,7 +9813,7 @@ subcollection: containers
 
     * [If one or some worker nodes are affected](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-steps-some)
 
-    * [If all worker nodes in a single zone, subnet, or VLAN are affected](/docs/containers?topic=containers-ts-critical-notready#if-all-worker-nodes-in-a-single-zone-subnet-or-vlan-are-affected)
+    * [If all worker nodes in a single zone, subnet, or VLAN are affected](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-steps-zone)
 
     * [If all worker nodes in a cluster are affected](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-steps-all)
 
