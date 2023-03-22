@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-24"
+lastupdated: "2023-03-22"
 
 keywords: kubernetes, 1.23, versions, update, upgrade
 
@@ -18,7 +18,7 @@ subcollection: containers
 # 1.23 version information and update actions
 {: #cs_versions_123}
 
-Kubernetes version 1.23 becomes unsupported on 26 April 2023. Update your cluster to at least [version 1.24](/docs/containers?topic=containers-cs_versions_124) as soon as possible.
+Kubernetes version 1.23 becomes unsupported on 08 May 2023. Update your cluster to at least [version 1.24](/docs/containers?topic=containers-cs_versions_124) as soon as possible.
 {: deprecated}
 
 Review information about version 1.23 of {{site.data.keyword.containerlong}}, released 09 Feb 2022.
@@ -44,7 +44,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
-| 1.23 | Yes | 09 Feb 2022 |  26 April 2023 `†` |
+| 1.23 | Yes | 09 Feb 2022 |  08 May 2023 `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.23" caption-side="bottom"}
 
 ## Preparing to update
@@ -53,7 +53,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 This information summarizes updates that are likely to have and impact on deployed apps when you update a cluster to version 1.23. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.23.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_123) for version 1.23. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}. 
 {: shortdesc}
 
-Kubernetes version 1.23 becomes unsupported on 26 April 2023. Update your cluster to at least [version 1.24](/docs/containers?topic=containers-cs_versions_124) as soon as possible.
+Kubernetes version 1.23 becomes unsupported on 08 May 2023. Update your cluster to at least [version 1.24](/docs/containers?topic=containers-cs_versions_124) as soon as possible.
 {: deprecated}
 
 ### Update before master
