@@ -80,7 +80,7 @@ If only some, but not all, of the worker nodes in your cluster are in a `Critica
  {: tip}
 
 ### If all worker nodes in a single zone, subnet, or VLAN are affected
-{: ts-critical-notready-steps-zone}
+{: #ts-critical-notready-steps-zone}
 
 If all worker nodes in a single zone, subnet, or VLAN are in a `Critical` or `NotReady` state, but all other worker nodes in the cluster are functioning normally, there might be an issue with a networking component. Follow the steps in [If all worker nodes in a cluster are affected](#ts-critical-notready-steps-all), especially to the steps regarding any networking components that may affect the zone, subnet or VLAN, such as firewall or gateway rules, ACLs or custom routes, or Calico and Kubernetes network policies.
 
