@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-03-23"
+lastupdated: "2023-03-24"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar23)
+
+    * [24 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2423)
+
+        * Ingress ALB version `1.4.0_3896_iks`, `1.5.1_3897_iks`, and `1.6.4_3898_iks`
 
     * [21 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2123)
 
@@ -4050,7 +4054,34 @@ subcollection: containers
 {: #sitemap_securing_the_cluster_network}
 
 
-[Classic: Opening required ports and IP addresses in your allowlist](/docs/containers?topic=containers-firewall#firewall)
+
+### Controlling traffic in Classic clusters
+{: #sitemap_controlling_traffic_in_classic_clusters}
+
+
+[Controlling traffic with network policies](/docs/containers?topic=containers-network_policies#network_policies)
+
+* [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy)
+
+* [Installing and configuring the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)
+
+* [Viewing network policies](/docs/containers?topic=containers-network_policies#view_policies)
+
+* [Adding network policies](/docs/containers?topic=containers-network_policies#adding_network_policies)
+
+* [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress)
+
+* [Example Calico policies to restrict public or private network traffic](/docs/containers?topic=containers-network_policies#isolate_workers_public)
+
+    * [Applying public network policies](/docs/containers?topic=containers-network_policies#calico-public)
+
+    * [Applying private network policies](/docs/containers?topic=containers-network_policies#isolate_workers)
+
+* [Controlling traffic between pods](/docs/containers?topic=containers-network_policies#isolate_services)
+
+* [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
+
+[Opening required ports and IP addresses in your allowlist](/docs/containers?topic=containers-firewall#firewall)
 
 * [Opening ports in a corporate allowlist](/docs/containers?topic=containers-firewall#corporate)
 
@@ -4084,49 +4115,9 @@ subcollection: containers
 
 * [Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge#sysdig-edge)
 
-[Controlling traffic with network policies on classic clusters](/docs/containers?topic=containers-network_policies#network_policies)
 
-* [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy)
-
-* [Installing and configuring the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)
-
-* [Viewing network policies](/docs/containers?topic=containers-network_policies#view_policies)
-
-* [Adding network policies](/docs/containers?topic=containers-network_policies#adding_network_policies)
-
-* [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress)
-
-* [Example Calico policies to restrict public or private network traffic](/docs/containers?topic=containers-network_policies#isolate_workers_public)
-
-    * [Applying public network policies](/docs/containers?topic=containers-network_policies#calico-public)
-
-    * [Applying private network policies](/docs/containers?topic=containers-network_policies#isolate_workers)
-
-* [Controlling traffic between pods](/docs/containers?topic=containers-network_policies#isolate_services)
-
-* [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
-
-[VPC: Opening required ports and IP addresses in other network allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
-
-* [Opening ports in a corporate allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
-
-    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
-
-    * [Running `kubectl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
-
-    * [Running `calicoctl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
-
-* [Allowing traffic from your cluster in other services' allowlists or in on-premises allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers)
-
-    * [Allowing ingress from a cluster to another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_ingress)
-
-    * [Allowing egress to a cluster from another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
-
-* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-vpc-firewall#iam_allowlist_vpc)
-
-
-### Controlling traffic with ACLs, security groups, and network policies
-{: #sitemap_controlling_traffic_with_acls_security_groups_and_network_policies}
+### Controlling traffic in VPC clusters with ACLs, security groups, and network policies
+{: #sitemap_controlling_traffic_in_vpc_clusters_with_acls_security_groups_and_network_policies}
 
 
 [Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#vpc-network-policy)
@@ -4188,6 +4179,24 @@ subcollection: containers
 * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-kube-policies#services_one_ns)
 
 * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-kube-policies#services_across_ns)
+
+[Opening required ports and IP addresses in other network allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
+
+* [Opening ports in a corporate allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
+
+    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
+
+    * [Running `kubectl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
+
+    * [Running `calicoctl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
+
+* [Allowing traffic from your cluster in other services' allowlists or in on-premises allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers)
+
+    * [Allowing ingress from a cluster to another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_ingress)
+
+    * [Allowing egress to a cluster from another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
+
+* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-vpc-firewall#iam_allowlist_vpc)
 
 [Managing security and compliance with Kubernetes](/docs/containers?topic=containers-manage-security-compliance#manage-security-compliance)
 
@@ -8400,9 +8409,13 @@ subcollection: containers
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
 
+    * [1.6.4_3898_iks, released 24 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3898_iks)
+
     * [1.6.4_3864_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3864_iks)
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
+
+    * [1.5.1_3897_iks, released 24 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3897_iks)
 
     * [1.5.1_3863_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3863_iks)
 
@@ -8417,6 +8430,8 @@ subcollection: containers
     * [1.5.1_3536_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3536_iks)
 
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
+
+    * [1.4.0_3896_iks, released 24 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3896_iks)
 
     * [1.4.0_3862_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3862_iks)
 

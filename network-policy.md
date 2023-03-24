@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-13"
+lastupdated: "2023-03-24"
 
 keywords: kubernetes, calico, egress, rules
 
@@ -17,8 +17,10 @@ subcollection: containers
 
 
 
-# Controlling traffic with network policies on classic clusters
+# Controlling traffic with network policies
 {: #network_policies}
+
+[Classic clusters]{: tag-classic-inf}
 
 This network policy information is specific to classic clusters. For network policy information for VPC clusters, see [Controlling traffic with security groups](/docs/containers?topic=containers-vpc-security-group).
 {: note}
