@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-16"
+lastupdated: "2023-03-24"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -47,6 +47,17 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ## Version 1.6.4
 {: #1_6_4}
 
+### 1.6.4_3898_iks, released 24 March 2023
+{: #1.6.4_3898_iks}
+
+- Updates `golang` version to `1.20.2`.
+- [CVE-2023-27533](https://nvd.nist.gov/vuln/detail/CVE-2023-27533){: external}
+- [CVE-2023-27534](https://nvd.nist.gov/vuln/detail/CVE-2023-27534){: external}
+- [CVE-2023-27535](https://nvd.nist.gov/vuln/detail/CVE-2023-27535){: external}
+- [CVE-2023-27536](https://nvd.nist.gov/vuln/detail/CVE-2023-27536){: external}
+- [CVE-2023-27537](https://nvd.nist.gov/vuln/detail/CVE-2023-27537){: external}
+- [CVE-2023-27538](https://nvd.nist.gov/vuln/detail/CVE-2023-27538){: external}
+
 ### 1.6.4_3864_iks, released 13 March 2023
 {: #1.6.4_3864_iks}
 
@@ -58,6 +69,11 @@ TLS 1.0 and TLS 1.1 are no longer supported. Upgrade to the newer TLS version, o
 
 ## Version 1.5.1
 {: #1_5_1}
+
+### 1.5.1_3897_iks, released 24 March 2023
+{: #1.5.1_3897_iks}
+
+Updates `golang` version to `1.20.2`.
 
 ### 1.5.1_3863_iks, released 13 March 2023
 {: #1.5.1_3863_iks}
@@ -98,6 +114,11 @@ Initial release of `1.5.1`. For more information, see the [community release doc
 
 ## Version 1.4.0
 {: #1_4_0}
+
+### 1.4.0_3896_iks, released 24 March 2023
+{: #1.4.0_3896_iks}
+
+Updates `golang` version to `1.20.2`.
 
 ### 1.4.0_3862_iks, released 13 March 2023
 {: #1.4.0_3862_iks}
