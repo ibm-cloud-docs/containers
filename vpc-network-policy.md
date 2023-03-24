@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-22"
+lastupdated: "2023-03-24"
 
 keywords: kubernetes, firewall
 
@@ -19,6 +19,8 @@ subcollection: containers
 
 # Overview of network security options
 {: #vpc-network-policy}
+
+[Virtual Private Cloud]{: tag-vpc}
 
 This information is specific to VPC clusters. For network policy information for classic clusters, see [Classic: Controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
 {: note}

@@ -4054,7 +4054,34 @@ subcollection: containers
 {: #sitemap_securing_the_cluster_network}
 
 
-[Classic: Opening required ports and IP addresses in your allowlist](/docs/containers?topic=containers-firewall#firewall)
+
+### Controlling traffic in Classic clusters
+{: #sitemap_controlling_traffic_in_classic_clusters}
+
+
+[Controlling traffic with network policies](/docs/containers?topic=containers-network_policies#network_policies)
+
+* [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy)
+
+* [Installing and configuring the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)
+
+* [Viewing network policies](/docs/containers?topic=containers-network_policies#view_policies)
+
+* [Adding network policies](/docs/containers?topic=containers-network_policies#adding_network_policies)
+
+* [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress)
+
+* [Example Calico policies to restrict public or private network traffic](/docs/containers?topic=containers-network_policies#isolate_workers_public)
+
+    * [Applying public network policies](/docs/containers?topic=containers-network_policies#calico-public)
+
+    * [Applying private network policies](/docs/containers?topic=containers-network_policies#isolate_workers)
+
+* [Controlling traffic between pods](/docs/containers?topic=containers-network_policies#isolate_services)
+
+* [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
+
+[Opening required ports and IP addresses in your allowlist](/docs/containers?topic=containers-firewall#firewall)
 
 * [Opening ports in a corporate allowlist](/docs/containers?topic=containers-firewall#corporate)
 
@@ -4088,49 +4115,9 @@ subcollection: containers
 
 * [Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge#sysdig-edge)
 
-[Controlling traffic with network policies on classic clusters](/docs/containers?topic=containers-network_policies#network_policies)
 
-* [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy)
-
-* [Installing and configuring the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)
-
-* [Viewing network policies](/docs/containers?topic=containers-network_policies#view_policies)
-
-* [Adding network policies](/docs/containers?topic=containers-network_policies#adding_network_policies)
-
-* [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress)
-
-* [Example Calico policies to restrict public or private network traffic](/docs/containers?topic=containers-network_policies#isolate_workers_public)
-
-    * [Applying public network policies](/docs/containers?topic=containers-network_policies#calico-public)
-
-    * [Applying private network policies](/docs/containers?topic=containers-network_policies#isolate_workers)
-
-* [Controlling traffic between pods](/docs/containers?topic=containers-network_policies#isolate_services)
-
-* [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
-
-[VPC: Opening required ports and IP addresses in other network allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
-
-* [Opening ports in a corporate allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
-
-    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
-
-    * [Running `kubectl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
-
-    * [Running `calicoctl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
-
-* [Allowing traffic from your cluster in other services' allowlists or in on-premises allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers)
-
-    * [Allowing ingress from a cluster to another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_ingress)
-
-    * [Allowing egress to a cluster from another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
-
-* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-vpc-firewall#iam_allowlist_vpc)
-
-
-### Controlling traffic with ACLs, security groups, and network policies
-{: #sitemap_controlling_traffic_with_acls_security_groups_and_network_policies}
+### Controlling traffic in VPC clusters with ACLs, security groups, and network policies
+{: #sitemap_controlling_traffic_in_vpc_clusters_with_acls_security_groups_and_network_policies}
 
 
 [Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#vpc-network-policy)
@@ -4192,6 +4179,24 @@ subcollection: containers
 * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-kube-policies#services_one_ns)
 
 * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-kube-policies#services_across_ns)
+
+[Opening required ports and IP addresses in other network allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
+
+* [Opening ports in a corporate allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
+
+    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
+
+    * [Running `kubectl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
+
+    * [Running `calicoctl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
+
+* [Allowing traffic from your cluster in other services' allowlists or in on-premises allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers)
+
+    * [Allowing ingress from a cluster to another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_ingress)
+
+    * [Allowing egress to a cluster from another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
+
+* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-vpc-firewall#iam_allowlist_vpc)
 
 [Managing security and compliance with Kubernetes](/docs/containers?topic=containers-manage-security-compliance#manage-security-compliance)
 
