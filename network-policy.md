@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-24"
+lastupdated: "2023-03-27"
 
 keywords: kubernetes, calico, egress, rules
 
@@ -34,7 +34,7 @@ Kubernetes network policies
 :   [Kubernetes network policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/){: external} specify how pods can communicate with other pods and with external endpoints. Both incoming and outgoing network traffic is allowed or blocked based on protocol, port, and source or destination IP addresses. Traffic can also be filtered based on pod and namespace labels. You can apply Kubernetes network policies by using `kubectl` commands or the Kubernetes APIs.
 
 Calico network policies
-:   [Calico network policies](https://docs.tigera.io/calico/3.25/reference/resources/networkpolicy){: external} are a set of the Kubernetes network policies. You can apply Calico policies by using the `calicoctl` command line. Calico policies add the following features.
+:   [Calico network policies](https://docs.tigera.io/calico/latest/reference/resources/networkpolicy){: external} are a set of the Kubernetes network policies. You can apply Calico policies by using the `calicoctl` command line. Calico policies add the following features.
     - Allow or block network traffic on specific network interfaces regardless of the Kubernetes pod source or destination IP address or CIDR.
     - Allow or block network traffic for pods across namespaces.
     - [Block inbound traffic to Kubernetes LoadBalancer or NodePort services](#block_ingress).
@@ -179,13 +179,13 @@ Before you begin, [install and configure the Calico CLI, and set the context for
 
 1. View all the Calico network policies that were created for the cluster. This list includes policies that might not apply to any pods or hosts yet. For a Calico policy to be enforced, a Kubernetes pod or Calico `HostEndpoint` must exist that matches the selector that in the Calico network policy.
 
-    [Network policies](https://docs.tigera.io/calico/3.25/reference/resources/networkpolicy){: external} are scoped to specific namespaces:
+    [Network policies](https://docs.tigera.io/calico/latest/reference/resources/networkpolicy){: external} are scoped to specific namespaces:
     ```sh
     calicoctl get NetworkPolicy --all-namespaces -o wide
     ```
     {: pre}
 
-    [Global network policies](https://docs.tigera.io/calico/3.25/reference/resources/globalnetworkpolicy){: external} are not scoped to specific namespaces:
+    [Global network policies](https://docs.tigera.io/calico/latest/reference/resources/globalnetworkpolicy){: external} are not scoped to specific namespaces:
     ```sh
     calicoctl get GlobalNetworkPolicy -o wide
     ```
@@ -214,7 +214,7 @@ To create Kubernetes network policies, see the [Kubernetes network policy docume
 
 To create Calico policies, use the following steps. Before you begin, [install and configure the Calico CLI, and set the context for your cluster to run Calico commands](#cli_install).
 
-1. Define your Calico [network policy](https://docs.tigera.io/calico/3.25/reference/resources/networkpolicy){: external} or [global network policy](https://docs.tigera.io/calico/3.25/reference/resources/globalnetworkpolicy){: external} by creating a configuration script (`.yaml`) with Calico v3 policy syntax. These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to.
+1. Define your Calico [network policy](https://docs.tigera.io/calico/latest/reference/resources/networkpolicy){: external} or [global network policy](https://docs.tigera.io/calico/latest/reference/resources/globalnetworkpolicy){: external} by creating a configuration script (`.yaml`) with Calico v3 policy syntax. These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to.
 
 1. Apply the policies to the cluster. If you have a Windows system, include the `--config=<filepath>/calicoctl.cfg` option.
     ```sh
