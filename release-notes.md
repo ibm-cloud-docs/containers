@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-24"
+lastupdated: "2023-03-27"
 
 keywords: kubernetes, release notes
 
@@ -1632,6 +1632,7 @@ Worker node fix pack update.
 
 Istio add-on
 :   [Version `1.13.1`](/docs/containers?topic=containers-istio-changelog#1131) is available.
+
 
 
 
