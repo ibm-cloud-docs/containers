@@ -266,6 +266,10 @@ subcollection: containers
 
 * [March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar23)
 
+    * [28 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2823)
+
+        * Worker node fix packs `1.23.17_1570`, `1.24.12_1560`, `1.25.8_1537`, and `1.26.3_1529`.
+
     * [24 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2423)
 
         * Ingress ALB version `1.4.0_3896_iks`, `1.5.1_3897_iks`, and `1.6.4_3898_iks`
