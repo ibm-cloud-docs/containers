@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-28"
+lastupdated: "2023-03-29"
 
 keywords: kubernetes, release notes
 
@@ -30,6 +30,22 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## March 2023
 {: #containers-mar23}
 
+### 29 March 2023
+{: #containers-mar2923}
+{: release-note}
+
+
+
+Worker node fix packs `1.23.17_1572`, `1.24.12_1562`, `1.25.8_1539`, and `1.26.3_1531`.
+:   For more information, see the change logs: [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125), and [1.26](/docs/containers?topic=containers-changelog_126).
+
+
+{{site.data.keyword.block_storage_is_short}} add-on versions `5.0.9_1862` and `5.1.5_1857`.
+:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
+Cluster autoscaler add-on versions `1.0.7_988` and `1.0.8_987`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+
 ### 28 March 2023
 {: #containers-mar2823}
 {: release-note}
@@ -55,10 +71,6 @@ Ingress ALB version `1.4.0_3896_iks`, `1.5.1_3897_iks`, and `1.6.4_3898_iks`
 ### 21 March 2023
 {: #containers-mar2123}
 {: release-note}
-
-Cluster autoscaler add-on version `1.0.7_988` and `1.0.8_987`.
-:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
-
 
 New troubleshooting steps for workers in `Critical` or `NotReady` state. 
 :   For more information, see [Troubleshooting worker nodes in `Critical` or `NotReady` state](/docs/containers?topic=containers-ts-critical-notready).
@@ -886,7 +898,8 @@ Istio add-on
 :   For more information, see [version 4.4.10_1578](/docs/containers?topic=containers-vpc_bs_changelog).
 
 New! vGPU worker node flavors are now available for VPC Gen 2.
-:   For more information about the available worker node flavors, see [VPC Gen 2 flavors](/docs/containers?topic=containers-vpc-flavors). Worker node flavors with vGPU support are the `gx2` flavor class, for example: `gx2.16x128.2v100`.
+:   For more information about the available worker node flavors, see [VPC Gen 2 flavors](/docs/containers?topic=containers-vpc-flavors). Worker node flavors with vGPU support are the `gx2` flavor class, for example: `gx2.16x128.2v100`. {{site.data.keyword.vpc_short}} worker nodes with GPUs are available for allowlisted accounts only. To request that your account be allowlisted, see [Requesting access to allowlisted features](/docs/openshift?topic=openshift-get-help). Be sure to include the data centers, the VPC infrastructure profile, and the number of workers that you want use. For example `12 worker nodes in us-east-1 of VPC profile gx2-16x128xv100`.
+
 
 ### 12 September 2022
 {: #containers-sep1222}
@@ -2576,7 +2589,7 @@ Cluster autoscaler add-on
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in
-:   Version `2.1.2` of the {{site.data.keyword.cos_full_notm}} plug-in is released. Update your clusters to use the latest version. For more information, see the [{{site.data.keyword.cos_full_notm}} plug-in change log(/docs/containers?topic=containers-cos_plugin_changelog).
+:   Version `2.1.2` of the {{site.data.keyword.cos_full_notm}} plug-in is released. Update your clusters to use the latest version. For more information, see the [{{site.data.keyword.cos_full_notm}} plug-in change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 Worker node versions
 :   Worker node fix pack update change log documentation is available for version [1.21.1_1521](/docs/containers?topic=containers-changelog_121#1211_1521), [1.20.7_1543](/docs/containers?topic=containers-changelog_120#1207_1543), [1.19.11_1550](/docs/containers?topic=containers-changelog_119#11911_1550), [1.18.19_1555](/docs/containers?topic=containers-118_changelog#11819_1555) and [1.17.17_1566](/docs/containers?topic=containers-117_changelog#11717_1566).

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-03-29"
 
 keywords: observability commands, observability cli, observability plug-in, logging commands, monitoring commands, logging cli, monitoring cli, logging config, monitoring config
 
@@ -89,7 +89,7 @@ ibmcloud ob logging config create --cluster CLUSTER --instance LOGGING_INSTANCE 
 :   The {{site.data.keyword.la_short}} ingestion key that you want to use for your configuration. This value is optional. If you don't specify this option, the latest ingestion key is automatically retrieved.   
 
 `--private-endpoint`
-:   When you add this option to your command, the private cloud service endpoint is used to connect to {{site.data.keyword.la_full_notm}}. To use the private cloud service endpoint, your cluster must be enabled for using private cloud service endpoints.  For more information, see worker communication to other services and networks for [classic](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem) and [VPC clusters](/docs/containers?topic=containers-plan_basics#worker-services-onprem). 
+:   When you add this option to your command, the private cloud service endpoint is used to connect to {{site.data.keyword.la_full_notm}}. To use the private cloud service endpoint, your cluster must be enabled for using private cloud service endpoints. For more information, see worker communication to other services and networks for [classic](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem) and [VPC clusters](/docs/containers?topic=containers-plan_basics#worker-services-onprem). 
 
 
 

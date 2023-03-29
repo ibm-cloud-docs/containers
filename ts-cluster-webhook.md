@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-06"
+lastupdated: "2023-03-29"
 
 keywords: kubernetes
 
@@ -124,19 +124,14 @@ Identify and restore the resource that causes the broken webhook.
         ```
         {: pre}
 
-    2. If the service type is **ClusterIP**, check that the pod for OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later) is in a **Running** status so that the webhook can connect securely to the Kubernetes API in the cluster master. If the pod is not healthy, check the pod events, logs, worker node health, and other components to troubleshoot.
+    2. If the service type is **ClusterIP**, check that the Konnectivity pod is in a **Running** status so that the webhook can connect securely to the Kubernetes API in the cluster master. If the pod is not healthy, check the pod events, logs, worker node health, and other components to troubleshoot.
 
-        * Kubernetes version 1.21 or later: Check the Konnectivity agent pods.
+        * Check the Konnectivity agent pods.
             ```sh
             kubectl describe pods -n kube-system -l app=konnectivity-agent
             ```
             {: pre}
 
-        * Kubernetes version 1.20 or earlier: Check the OpenVPN client pods.
-            ```sh
-            kubectl describe pods -n kube-system -l app=vpn
-            ```
-            {: pre}
 
     3. If the service does not have an endpoint, check the health of the backing resources, such as a deployment or pod. If the resource is not healthy, check the pod events, logs, worker node health, and other components to troubleshoot. For more information, see [Debugging app deployments](/docs/containers?topic=containers-debug_apps).
         ```sh
