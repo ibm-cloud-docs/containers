@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-03-29"
 
 keywords: kubernetes, help
 
@@ -55,7 +55,7 @@ The following symptoms might indicate a need to adjust the `metrics-server` reso
 Your cluster has a metrics service provided by the `metrics-server` deployment in the `kube-system` namespace. The `metrics-server` resource requests and limits are based on the number of nodes in the cluster and are optimized for clusters with 30 or less pods per worker node. If the memory requests are too low, it can fail with out-of-memory errors and can respond very slowly. If the CPU requests are too low, it can possibly fail liveness and readiness probes due to CPU throttling.
 {: tsCauses}
 
-Problems with the `metrics-server` can also be cause problems in other areas. The metrics APIs is not available if the control plane is not able to communicate with the metrics-server by using the openvpn tunnel or Konnectivity. Admission control webhooks can prevent the control plane from creating pods, including the `metrics-server` pod.
+Problems with the `metrics-server` can also be cause problems in other areas. The metrics APIs is not available if the control plane is not able to communicate with the metrics-server by using Konnectivity. Admission control webhooks can prevent the control plane from creating pods, including the `metrics-server` pod.
 
 Follow these steps to troubleshoot.
 {: tsResolve}
