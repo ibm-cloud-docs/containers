@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-23"
+lastupdated: "2023-03-29"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -192,7 +192,7 @@ The following table shows the changes that are in the master fix pack 1.12.10_15
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.3.6 | v3.6.4 | See the [Calico release notes](https://docs.tigera.io/calico/3.25/release-notes/){: external}. Update resolves [TTA-2019-001](https://www.tigera.io/security-bulletins/#TTA-2019-001){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/959551){: external}. |
+| Calico | v3.3.6 | v3.6.4 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/.){: external}. Update resolves [TTA-2019-001](https://www.tigera.io/security-bulletins/#TTA-2019-001){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/959551){: external}. |
 | CoreDNS configuration | N/A | N/A | Changed the default CoreDNS configuration from a 5 to 30 second TTL for DNS records in the `kubernetes` zone. This change aligns with the default KubeDNS configuration. Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize). |
 | GPU device plug-in and installer | 5d34347 | a7e8ece | Updated base image packages. |
 | Kubernetes | v1.12.9 | v1.12.10 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.10){: external}. |
@@ -333,7 +333,7 @@ The following table shows the changes that are in the patch 1.12.7_1548.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.3.1 | v3.3.6 | See the [Calico release notes](https://docs.tigera.io/calico/3.25/release-notes/){: external}. Update resolves [CVE-2019-9946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/879585){: external}. |
+| Calico | v3.3.1 | v3.3.6 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/.){: external}. Update resolves [CVE-2019-9946](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/879585){: external}. |
 | Cluster master HA proxy | 1.8.12-alpine | 1.9.6-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.9/src/CHANGELOG){: external}. Update resolves [CVE-2018-0732](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732){: external}, [CVE-2018-0734](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734){: external}, [CVE-2018-0737](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737){: external}, [CVE-2018-5407](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407){: external}, [CVE-2019-1543](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543){: external}, and [CVE-2019-1559](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559){: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | v1.12.6-157 | v1.12.7-180 | Updated to support the Kubernetes 1.12.7 and Calico 3.3.6 releases. |
 | Kubernetes | v1.12.6 | v1.12.7 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.7){: external}. |
@@ -552,7 +552,7 @@ The following table shows the changes that are in patch 1.12.2_1529.
 
 | Component | Previous | Current | Description |
 | -------------- | -------------- | -------------- | ------------- |
-| Calico | v3.2.1 | v3.3.1 | See the [Calico release notes](https://docs.tigera.io/calico/3.25/release-notes/){: external}. Update resolves [Tigera Technical Advisory TTA-2018-001](https://www.tigera.io/security-bulletins/){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/740799){: external}. |
+| Calico | v3.2.1 | v3.3.1 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/.){: external}. Update resolves [Tigera Technical Advisory TTA-2018-001](https://www.tigera.io/security-bulletins/){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/740799){: external}. |
 | Cluster DNS configuration | N/A | N/A | Fixed a bug that could result in both Kubernetes DNS and CoreDNS pods to run after cluster creation or update operations. |
 | containerd | v1.2.0 | v1.1.5 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.1.5){: external}. Updated containerd to fix a deadlock that can [stop pods from terminating](https://github.com/containerd/containerd/issues/2744){: external}. |
 | OpenVPN client and server | 2.4.4-r1-6 | 2.4.6-r3-IKS-8 | Updated image for [CVE-2018-0732](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732){: external} and [CVE-2018-0737](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737){: external}. |
