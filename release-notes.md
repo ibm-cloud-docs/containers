@@ -37,6 +37,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.9_1862` and `5.1.5_1857`.
 :   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
 
+Cluster autoscaler add-on versions `1.0.7_988` and `1.0.8_987`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+
 ### 28 March 2023
 {: #containers-mar2823}
 {: release-note}
@@ -62,10 +65,6 @@ Ingress ALB version `1.4.0_3896_iks`, `1.5.1_3897_iks`, and `1.6.4_3898_iks`
 ### 21 March 2023
 {: #containers-mar2123}
 {: release-note}
-
-Cluster autoscaler add-on version `1.0.7_988` and `1.0.8_987`.
-:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
-
 
 New troubleshooting steps for workers in `Critical` or `NotReady` state. 
 :   For more information, see [Troubleshooting worker nodes in `Critical` or `NotReady` state](/docs/containers?topic=containers-ts-critical-notready).

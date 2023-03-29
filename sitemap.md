@@ -270,6 +270,8 @@ subcollection: containers
 
         * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.9_1862` and `5.1.5_1857`.
 
+        * Cluster autoscaler add-on versions `1.0.7_988` and `1.0.8_987`.
+
     * [28 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2823)
 
         * Worker node fix packs `1.23.17_1570`, `1.24.12_1560`, `1.25.8_1537`, and `1.26.3_1529`.
@@ -279,8 +281,6 @@ subcollection: containers
         * Ingress ALB version `1.4.0_3896_iks`, `1.5.1_3897_iks`, and `1.6.4_3898_iks`
 
     * [21 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2123)
-
-        * Cluster autoscaler add-on version `1.0.7_988` and `1.0.8_987`.
 
         * New troubleshooting steps for workers in `Critical` or `NotReady` state. 
 
@@ -8943,13 +8943,13 @@ subcollection: containers
 
 * [Version 1.0.8](/docs/containers?topic=containers-ca_changelog#0108_ca_addon)
 
-    * [Change log for patch update 1.0.8_987, released 21 March 2023](/docs/containers?topic=containers-ca_changelog#108987_ca)
+    * [Change log for patch update 1.0.8_987, released 29 March 2023](/docs/containers?topic=containers-ca_changelog#108987_ca)
 
     * [Change log for patch update 1.0.8_968, released 9 March 2023](/docs/containers?topic=containers-ca_changelog#108968_ca)
 
 * [Version 1.0.7](/docs/containers?topic=containers-ca_changelog#0107_ca_addon)
 
-    * [Change log for patch update 1.0.7_988, released 21 March 2023](/docs/containers?topic=containers-ca_changelog#107988_ca)
+    * [Change log for patch update 1.0.7_988, released 29 March 2023](/docs/containers?topic=containers-ca_changelog#107988_ca)
 
     * [Change log for patch update 1.0.7_956, released 7 March 2023](/docs/containers?topic=containers-ca_changelog#107956_ca)
 
