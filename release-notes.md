@@ -34,6 +34,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-mar2923}
 {: release-note}
 
+
+
+Worker node fix packs `1.23.17_1572`, `1.24.12_1562`, `1.25.8_1539`, and `1.26.3_1531`.
+:   For more information, see the change logs: [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125), and [1.26](/docs/containers?topic=containers-changelog_126).
+
+
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.9_1862` and `5.1.5_1857`.
 :   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
 

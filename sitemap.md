@@ -268,6 +268,8 @@ subcollection: containers
 
     * [29 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2923)
 
+        * Worker node fix packs `1.23.17_1572`, `1.24.12_1562`, `1.25.8_1539`, and `1.26.3_1531`.
+
         * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.9_1862` and `5.1.5_1857`.
 
         * Cluster autoscaler add-on versions `1.0.7_988` and `1.0.8_987`.
