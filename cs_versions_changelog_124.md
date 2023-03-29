@@ -37,6 +37,18 @@ Review the version 1.24 change log.
 {: shortdesc}
 
 
+### Change log for worker node fix pack 1.24.12_1562, released 29 March 2023
+{: #12412_1562}
+
+The following table shows the changes that are in the worker node fix pack 1.24.12_1562. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 20.04 packages | 5.4.0-144 | 5.4.0-139 | Downgrading kernel to address [Upstream canonical bug](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2009325){: external}. |
+{: caption="Changes since version 1.24.12_1560" caption-side="bottom"}
+
+
 ### Change log for worker node fix pack 1.24.12_1560, released 27 March 2023
 {: #12412_1560}
 

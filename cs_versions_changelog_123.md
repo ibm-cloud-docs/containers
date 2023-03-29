@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-03-28"
+lastupdated: "2023-03-29"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -40,6 +40,18 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.23 change log.
 {: shortdesc}
+
+
+### Change log for worker node fix pack 1.23.17_1572, released 29 March 2023
+{: #12317_1572}
+
+The following table shows the changes that are in the worker node fix pack 1.23.17_1572. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 20.04 packages | 5.4.0-144 | 5.4.0-139 | Downgrading kernel to address [Upstream canonical bug](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2009325){: external}. |
+{: caption="Changes since version 1.23.17_1570" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.23.17_1570, released 27 March 2023
