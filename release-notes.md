@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-28"
+lastupdated: "2023-03-29"
 
 keywords: kubernetes, release notes
 
@@ -29,6 +29,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## March 2023
 {: #containers-mar23}
+
+### 29 March 2023
+{: #containers-mar2923}
+{: release-note}
+
+{{site.data.keyword.block_storage_is_short}} add-on versions `5.0.9_1862` and `5.1.5_1857`.
+:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
 
 ### 28 March 2023
 {: #containers-mar2823}
