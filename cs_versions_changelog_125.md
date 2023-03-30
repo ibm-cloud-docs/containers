@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-03-28"
+lastupdated: "2023-03-29"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -38,6 +38,18 @@ Review the version 1.25 change log.
 {: shortdesc}
 
 
+
+
+### Change log for worker node fix pack 1.25.8_1539, released 29 March 2023
+{: #1258_1539}
+
+The following table shows the changes that are in the worker node fix pack 1.25.8_1539. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 20.04 packages | 5.4.0-144 | 5.4.0-139 | Downgrading kernel to address [Upstream canonical bug](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2009325){: external}. |
+{: caption="Changes since version 1.25.8_1537" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.25.8_1537, released 27 March 2023
