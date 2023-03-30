@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-03-01"
+lastupdated: "2023-03-30"
 
 keywords: kubernetes
 
@@ -352,6 +352,9 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
 {: shortdesc}
 
 * [`ibmcloud ks script update`](/docs/containers?topic=containers-kubernetes-service-cli#script_update)
+
+
+
 
 ## ibmcloud ks storage 
 {: #icks_map_storage}
