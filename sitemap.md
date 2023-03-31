@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-03-30"
+lastupdated: "2023-03-31"
 
 keywords: containers
 subcollection: containers
@@ -9269,13 +9269,13 @@ subcollection: containers
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
 
-    * [Version 2.0.0_1487, released on 1 March 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1487)
+    * [Version 2.0.0_1487, released on 1 March 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1487)
 
-    * [Version 2.0.0_1469, released on 22 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1469)
+    * [Version 2.0.0_1469, released on 22 February 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1469)
 
-    * [Version 2.0.0_1420, released on 8 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1420)
+    * [Version 2.0.0_1420, released on 8 February 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1420)
 
-    * [Version 2.0.0_1354, released on 15 December 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1354)
+    * [Version 2.0.0_1354, released on 15 December 2022](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1354)
 
     * [Version 2.0.0_1315, released on 16 November 2022.](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1315)
 
