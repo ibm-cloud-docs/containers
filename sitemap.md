@@ -268,6 +268,8 @@ subcollection: containers
 
     * [03 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr0323)
 
+        * Pod Security admission 
+
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.13`.
 
 * [March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar23)
