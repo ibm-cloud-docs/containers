@@ -264,6 +264,12 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr23)
+
+    * [03 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr0323)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.13`.
+
 * [March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar23)
 
     * [29 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2923)
@@ -9174,6 +9180,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.13, released 03 April 2023](/docs/containers?topic=containers-cos_plugin_changelog#02213_object_plugin)
 
 * [Change log for version 2.2.12, released 20 March 2023](/docs/containers?topic=containers-cos_plugin_changelog#02212_object_plugin)
 
