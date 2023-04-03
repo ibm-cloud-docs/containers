@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-29"
+lastupdated: "2023-04-03"
 
 keywords: kubernetes, release notes
 
@@ -26,6 +26,19 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
+
+## April 2023
+{: #containers-apr23}
+
+### 03 April 2023
+{: #containers-apr0323}
+{: release-note}
+
+Pod Security admission 
+:   You might need to check your Pod Security set up when you upgrade your cluster from version 1.24 to 1.25. For more information, see [Migrating from PSPs to Pod Security admission](/docs/containers?topic=containers-pod-security-admission-migration&interface=ui).
+
+{{site.data.keyword.cos_full_notm}} plug-in version `2.2.13`.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 ## March 2023
 {: #containers-mar23}
@@ -51,6 +64,9 @@ Cluster autoscaler add-on versions `1.0.7_988` and `1.0.8_987`.
 {: release-note}
 
 
+  
+Master fix packs `1.23.17_1569`, `1.24.12_1559`, `1.25.8_1536`, and `1.26.3_1528`.
+:   For more information, see the change logs: [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125), and [1.26](/docs/containers?topic=containers-changelog_126).
 
 Worker node fix packs `1.23.17_1570`, `1.24.12_1560`, `1.25.8_1537`, and `1.26.3_1529`.
 :   For more information, see the change logs: [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125), and [1.26](/docs/containers?topic=containers-changelog_126).

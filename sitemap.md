@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-03-31"
+lastupdated: "2023-04-03"
 
 keywords: containers
 subcollection: containers
@@ -264,6 +264,14 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr23)
+
+    * [03 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr0323)
+
+        * Pod Security admission 
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.13`.
+
 * [March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar23)
 
     * [29 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2923)
@@ -275,6 +283,8 @@ subcollection: containers
         * Cluster autoscaler add-on versions `1.0.7_988` and `1.0.8_987`.
 
     * [28 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2823)
+
+        * Master fix packs `1.23.17_1569`, `1.24.12_1559`, `1.25.8_1536`, and `1.26.3_1528`.
 
         * Worker node fix packs `1.23.17_1570`, `1.24.12_1560`, `1.25.8_1537`, and `1.26.3_1529`.
 
@@ -4047,17 +4057,35 @@ subcollection: containers
 
 * [Pod Security Admission roadmap](/docs/containers?topic=containers-pod-security-admission#psa-roadmap)
 
-[Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration#pod-security-admission-migration)
+[Migrating from PSPs to Pod Security admission](/docs/containers?topic=containers-pod-security-admission-migration#pod-security-admission-migration)
 
-* [Checking for non-IBM PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-check-psp)
+* [Upgrade requirements](/docs/containers?topic=containers-pod-security-admission-migration#psa-upgrade-reqs)
 
-* [Checking for pods not using `ibm-privileged-psp`](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-pod-check)
+    * [Check that all pods run under the ibm-privileged-psp PSP](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-pod-check)
 
-* [Verifying the `privileged-psp-user` cluster role binding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
+    * [Verify the privileged-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
 
-* [Verifying the `restricted-psp-user` ClusterRoleBinding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-crb-verify)
+    * [Verify the restricted-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-crb-verify)
 
-    * [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
+    * [Checking for non-IBM PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-check-psp)
+
+* [Migration steps](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-steps)
+
+* [Enable Pod Security admission in your 1.24 cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-enable-124)
+
+    * [Review namespace permissions](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-perm)
+
+    * [Simplify and standardize PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-simplify)
+
+    * [Update the namespaces in your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-update-namespace)
+
+    * [Review the namespace creation process](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-creation)
+
+    * [Optional. Disable the PSP feature in the cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-disable-psp)
+
+    * [Optional. Upgrade your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-cluster-upgrade)
+
+* [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
 
 
 ## Securing the cluster network
@@ -6456,6 +6484,8 @@ subcollection: containers
 
     * [Change log for worker node fix pack 1.26.3_1531, released 29 March 2023](/docs/containers?topic=containers-changelog_126#1263_1531)
 
+    * [Change log for master fix pack 1.26.3_1528, released 28 March 2023](/docs/containers?topic=containers-changelog_126#1263_1528)
+
     * [Change log for worker node fix pack 1.26.3_1529, released 27 March 2023](/docs/containers?topic=containers-changelog_126#1263_1529)
 
     * [Change log for worker node fix pack 1.26.1_1525, released 13 March 2023](/docs/containers?topic=containers-changelog_126#1261_1525)
@@ -6532,6 +6562,8 @@ subcollection: containers
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
 
     * [Change log for worker node fix pack 1.25.8_1539, released 29 March 2023](/docs/containers?topic=containers-changelog_125#1258_1539)
+
+    * [Change log for master fix pack 1.25.8_1536, released 28 March 2023](/docs/containers?topic=containers-changelog_125#1258_1536)
 
     * [Change log for worker node fix pack 1.25.8_1537, released 27 March 2023](/docs/containers?topic=containers-changelog_125#1258_1537)
 
@@ -6633,6 +6665,8 @@ subcollection: containers
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
 
     * [Change log for worker node fix pack 1.24.12_1562, released 29 March 2023](/docs/containers?topic=containers-changelog_124#12412_1562)
+
+    * [Change log for master fix pack 1.24.12_1559, released 28 March 2023](/docs/containers?topic=containers-changelog_124#12412_1559)
 
     * [Change log for worker node fix pack 1.24.12_1560, released 27 March 2023](/docs/containers?topic=containers-changelog_124#12412_1560)
 
@@ -6760,6 +6794,8 @@ subcollection: containers
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
 
     * [Change log for worker node fix pack 1.23.17_1572, released 29 March 2023](/docs/containers?topic=containers-changelog_123#12317_1572)
+
+    * [Change log for master fix pack 1.23.17_1569, released 28 March 2023](/docs/containers?topic=containers-changelog_123#12317_1569)
 
     * [Change log for worker node fix pack 1.23.17_1570, released 27 March 2023](/docs/containers?topic=containers-changelog_123#12317_1570)
 
@@ -9174,6 +9210,8 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.13, released 03 April 2023](/docs/containers?topic=containers-cos_plugin_changelog#02213_object_plugin)
 
 * [Change log for version 2.2.12, released 20 March 2023](/docs/containers?topic=containers-cos_plugin_changelog#02212_object_plugin)
 

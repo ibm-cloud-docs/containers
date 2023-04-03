@@ -635,16 +635,47 @@ ALB OAuth Proxy add-on version 1.0.0 uses configuration snippet annotations (`ng
         ```
         {: codeblock}
 
-    2. Choose which tokens to send in the `Authorization` header to your app. For more information about ID and access tokens, see the [{{site.data.keyword.appid_short_notm}} documentation](/docs/appid?topic=appid-tokens){: external}.
-        * To send only the `ID Token`, add the `nginx.ingress.kubernetes.io/auth-response-headers: Authorization` annotation.
-        * To send only the `Access Token`, add the following information to the `access_by_lua_block{}` in the `configuration-snippet` annotation.
+    2. Sometimes the authentication cookie used by `OAuth2-Proxy` exceeds 4 KB. Therefore it is split into two parts. The following snippet must be added to ensure that both cookies could be properly updated by `OAuth2-Proxy`.
+        ```yaml
+        ...
+        annotations:
+            nginx.ingress.kubernetes.io/configuration-snippet: |
+            auth_request_set $_oauth2_<App_ID_service_instance_name>_upstream_1 $upstream_cookie__oauth2_<App_ID_service_instance_name>_1;
+            access_by_lua_block {
+                if ngx.var._oauth2_<App_ID_service_instance_name>_upstream_1 ~= "" then
+                ngx.header["Set-Cookie"] = "_oauth2_<App_ID_service_instance_name>_1=" .. ngx.var._oauth2_<App_ID_service_instance_name>_upstream_1 .. ngx.var.auth_cookie:match("(; .*)")
+                end
+            }
+        ...
+        ```
+        {: codeblock}
+
+        Kubernetes Ingress Controllers (ALBs) on clusters created on or after 31 January 2022 do not process Ingress resources that have snippet annotations (for example, `nginx.ingress.kubernetes.io/configuration-snippet`) by default as all new clusters are deployed with `allow-snippet-annotations: "false"` configuration in the ALB's ConfigMap. If you want to customize the `Authorization` header using the previous configuration snippets, you need to edit the ALB's ConfigMap (`kube-system/ibm-k8s-controller-config`) and change `allow-snippet-annotations: "false"` to `allow-snippet-annotations: "true"`.
+        {: note}
+
+    3. Choose which tokens to send in the `Authorization` header to your app. For more information about ID and access tokens, see the [{{site.data.keyword.appid_short_notm}} documentation](/docs/appid?topic=appid-tokens){: external}.
+        * To send only the `ID Token`, add the following annotation:
+        
+            ```yaml
+            ...
+            annotations:
+                nginx.ingress.kubernetes.io/auth-response-headers: Authorization
+            ...
+            ```
+            {: codeblock}
+
+        * To send only the `Access Token`, add the following information to the `configuration-snippet` annotation. (This extends the snippet from Step 5.2.)
         
             ```yaml
             ...
             annotations:
                 nginx.ingress.kubernetes.io/configuration-snippet: |
+                auth_request_set $_oauth2_<App_ID_service_instance_name>_upstream_1 $upstream_cookie__oauth2_<App_ID_service_instance_name>_1;
                 auth_request_set $access_token $upstream_http_x_auth_request_access_token;
                 access_by_lua_block {
+                    if ngx.var._oauth2_<App_ID_service_instance_name>_upstream_1 ~= "" then
+                    ngx.header["Set-Cookie"] = "_oauth2_<App_ID_service_instance_name>_1=" .. ngx.var._oauth2_<App_ID_service_instance_name>_upstream_1 .. ngx.var.auth_cookie:match("(; .*)")
+                    end
                     if ngx.var.access_token ~= "" then
                     ngx.req.set_header("Authorization", "Bearer " .. ngx.var.access_token)
                     end
@@ -653,14 +684,18 @@ ALB OAuth Proxy add-on version 1.0.0 uses configuration snippet annotations (`ng
             ```
             {: codeblock}
 
-        * To send the `Access Token` and the `ID Token`, add the following information to the `access_by_lua_block{}` in the `configuration-snippet` annotation.
+        * To send the `Access Token` and the `ID Token`, add the following information to the `configuration-snippet` annotation. (This extends the snippet from Step 5.2.)
             ```yaml
             ...
              annotations:
                 nginx.ingress.kubernetes.io/configuration-snippet: |
+                auth_request_set $_oauth2_<App_ID_service_instance_name>_upstream_1 $upstream_cookie__oauth2_<App_ID_service_instance_name>_1;
                 auth_request_set $access_token $upstream_http_x_auth_request_access_token;
                 auth_request_set $id_token $upstream_http_authorization;
                 access_by_lua_block {
+                    if ngx.var._oauth2_<App_ID_service_instance_name>_upstream_1 ~= "" then
+                    ngx.header["Set-Cookie"] = "_oauth2_<App_ID_service_instance_name>_1=" .. ngx.var._oauth2_<App_ID_service_instance_name>_upstream_1 .. ngx.var.auth_cookie:match("(; .*)")
+                    end
                     if ngx.var.id_token ~= "" and ngx.var.access_token ~= "" then
                     ngx.req.set_header("Authorization", "Bearer " .. ngx.var.access_token .. " " .. ngx.var.id_token:match("%s*Bearer%s*(.*)"))
                     end
@@ -669,10 +704,7 @@ ALB OAuth Proxy add-on version 1.0.0 uses configuration snippet annotations (`ng
             ```
             {: codeblock}
 
-        Kubernetes Ingress Controllers (ALBs) on clusters created on or after 31 January 2022 do not process Ingress resources having snippet annotations (for example, `nginx.ingress.kubernetes.io/configuration-snippet`) by default as all new clusters are deployed with `allow-snippet-annotations: "false"` configuration in the ALB's ConfigMap. If you want to customize the `Authorization` header using the previous configuration snippets, you need to edit the ALB's ConfigMap (`kube-system/ibm-k8s-controller-config`) and change `allow-snippet-annotations: "false"` to `allow-snippet-annotations: "true"`.
-        {: note}
-
-    3. Optional: If your app supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy) in addition to or instead of the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy), add the `nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2-<App_ID_service_instance_name>/start?rd=$escaped_request_uri` annotation. Note that all letters in the service instance name must specified as lowercase.
+    4. Optional: If your app supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy) in addition to or instead of the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy), add the `nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2-<App_ID_service_instance_name>/start?rd=$escaped_request_uri` annotation. Note that all letters in the service instance name must be in lowercase.
         * If you specify this annotation, and the authentication for a client fails, the client is redirected to the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance. This OAuth2-Proxy, which acts as the OIDC Relying Party (RP) for {{site.data.keyword.appid_short_notm}}, redirects the client to your {{site.data.keyword.appid_short_notm}} login page for authentication.
         * If you don't specify this annotation, a client must authenticate with a valid bearer token. If the authentication for a client fails, the client's request is rejected with a `401 Unauthorized` error message.
 
@@ -733,7 +765,8 @@ ALB OAuth Proxy add-on version 1.0.0 uses configuration snippet annotations (`ng
           # Allowed domains for redirection after authentication. Default: "". Example: example.com,*.example2.com For more info, see: https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview/ 
           oidc_extra_audiences:
           # Additional audiences which are allowed to pass verification. 
-          
+          cookie_refresh: 
+          # Refresh the cookie after this duration. Example: "15m". To use this feature, you must enable "Refresh token" for the AppID instance. For more info, see: https://cloud.ibm.com/docs/appid?topic=appid-managing-idp&interface=ui#idp-token-lifetime
         ```
         {: codeblock}
 
