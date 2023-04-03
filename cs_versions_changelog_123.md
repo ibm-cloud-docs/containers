@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-03-29"
+lastupdated: "2023-04-03"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -52,6 +52,27 @@ The following table shows the changes that are in the worker node fix pack 1.23.
 | --- | --- | --- | --- |
 | Ubuntu 20.04 packages | 5.4.0-144 | 5.4.0-139 | Downgrading kernel to address [Upstream canonical bug](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2009325){: external}. |
 {: caption="Changes since version 1.23.17_1570" caption-side="bottom"}
+
+
+### Change log for master fix pack 1.23.17_1569, released 28 March 2023
+{: #12317_1569}
+
+The following table shows the changes that are in the master fix pack 1.23.17_1569. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.16 | v1.3.17 | Updated `Go` to version `1.19.7` and updated dependencies. |
+| etcd | v3.4.23 | v3.4.24 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.24){: external}. |
+| GPU device plug-in and installer | 79a2232 | a873e90 | Updated `Go` to version `1.19.6`. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1308-amd64 | 1366-amd64 | Updated to resolve [CVE-2023-23916](https://nvd.nist.gov/vuln/detail/CVE-2023-23916){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.23.16-11 | v1.23.17-5 | Updated to support the `Kubernetes 1.23.17` release. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 427 | 429 | Updated universal base image (UBI) to resolve CVEs. Updated `Go` to version `1.19.6` and updated dependencies. |
+| Key Management Service provider | v2.6.3 | v2.6.4 | Updated `Go` to version `1.19.7` and updated dependencies. |
+| Kubernetes | v1.23.16 | v1.23.17 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.23.17){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2383 | 2420 | Updated the image to resolve CVEs. |
+{: caption="Changes since version 1.23.16_1567" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.23.17_1570, released 27 March 2023

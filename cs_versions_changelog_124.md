@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-03-29"
+lastupdated: "2023-04-03"
 
 keywords: kubernetes, containers
 
@@ -47,6 +47,27 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | --- | --- | --- | --- |
 | Ubuntu 20.04 packages | 5.4.0-144 | 5.4.0-139 | Downgrading kernel to address [Upstream canonical bug](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2009325){: external}. |
 {: caption="Changes since version 1.24.12_1560" caption-side="bottom"}
+
+
+### Change log for master fix pack 1.24.12_1559, released 28 March 2023
+{: #12412_1559}
+
+The following table shows the changes that are in the master fix pack 1.24.12_1559. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.16 | v1.3.17 | Updated `Go` to version `1.19.7` and updated dependencies. |
+| GPU device plug-in and installer | 79a2232 | a873e90 | Updated `Go` to version `1.19.6`. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1308-amd64 | 1366-amd64 | Updated to resolve [CVE-2023-23916](https://nvd.nist.gov/vuln/detail/CVE-2023-23916){: external}. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.3.7 | v2.4.0 | Removed ExpandInUsePersistentVolumes feature gate. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.24.10-10 | v1.24.12-1 | Updated to support the `Kubernetes 1.24.12` release. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 427 | 429 | Updated universal base image (UBI) to resolve CVEs. Updated `Go` to version `1.19.6` and updated dependencies. |
+| Key Management Service provider | v2.6.3 | v2.6.4 | Updated `Go` to version `1.19.7` and updated dependencies. |
+| Kubernetes | v1.24.10 | v1.24.12 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.12){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2383 | 2420 | Updated the image to resolve CVEs. |
+{: caption="Changes since version 1.24.10_1557" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.24.12_1560, released 27 March 2023
