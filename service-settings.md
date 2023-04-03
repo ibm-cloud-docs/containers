@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-02"
+lastupdated: "2023-04-03"
 
 keywords: kubernetes
 
@@ -60,14 +60,16 @@ Admission controllers
 :   `StorageObjectInUseProtection`
 :   `PersistentVolumeClaimResize`
 :   `Priority`
+:   `PodSecurity` (Optional in Kubernetes version 1.24, enabled in version 1.25 and later)
+:   `PodSecurityPolicy` (Kubernetes version 1.24 and earlier)
 :   `NodeRestriction`
 :   `TaintNodesByCondition`
-:   `CertificateApproval` (Kubernetes 1.18 or later)
-:   `CertificateSigning` (Kubernetes 1.18 or later)
-    - `CertificateSubjectRestriction` (Kubernetes 1.18 or later)
-    - `DefaultIngressClass` (Kubernetes 1.18 or later)
-    - `RuntimeClass` (Kubernetes 1.20 or later)
-    - `DenyServiceExternalIPs` (Kubernetes 1.21 or later)
+:   `CertificateApproval` 
+:   `CertificateSigning` 
+    - `CertificateSubjectRestriction` 
+    - `DefaultIngressClass` 
+    - `RuntimeClass` 
+    - `DenyServiceExternalIPs` 
     
 Kube audit log config
 :   `audit-log-maxsize=128`

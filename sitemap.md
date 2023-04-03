@@ -4055,17 +4055,35 @@ subcollection: containers
 
 * [Pod Security Admission roadmap](/docs/containers?topic=containers-pod-security-admission#psa-roadmap)
 
-[Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration#pod-security-admission-migration)
+[Migrating from PSPs to Pod Security admission](/docs/containers?topic=containers-pod-security-admission-migration#pod-security-admission-migration)
 
-* [Checking for non-IBM PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-check-psp)
+* [Upgrade requirements](/docs/containers?topic=containers-pod-security-admission-migration#psa-upgrade-reqs)
 
-* [Checking for pods not using `ibm-privileged-psp`](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-pod-check)
+    * [Check that all pods run under the ibm-privileged-psp PSP](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-pod-check)
 
-* [Verifying the `privileged-psp-user` cluster role binding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
+    * [Verify the privileged-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
 
-* [Verifying the `restricted-psp-user` ClusterRoleBinding is using default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-crb-verify)
+    * [Verify the restricted-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-crb-verify)
 
-    * [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
+    * [Checking for non-IBM PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-check-psp)
+
+* [Migration steps](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-steps)
+
+* [Enable Pod Security admission in your 1.24 cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-enable-124)
+
+    * [Review namespace permissions](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-perm)
+
+    * [Simplify and standardize PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-simplify)
+
+    * [Update the namespaces in your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-update-namespace)
+
+    * [Review the namespace creation process](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-creation)
+
+    * [Optional. Disable the PSP feature in the cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-disable-psp)
+
+    * [Optional. Upgrade your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-cluster-upgrade)
+
+* [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
 
 
 ## Securing the cluster network
