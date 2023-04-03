@@ -766,7 +766,7 @@ ALB OAuth Proxy add-on version 1.0.0 uses configuration snippet annotations (`ng
           oidc_extra_audiences:
           # Additional audiences which are allowed to pass verification. 
           cookie_refresh: 
-          # Refresh the cookie after this duration. Example: "15m"
+          # Refresh the cookie after this duration. Example: "15m". To use this feature, you must enable "Refresh token" for the AppID instance. For more info, see: https://cloud.ibm.com/docs/appid?topic=appid-managing-idp&interface=ui#idp-token-lifetime
         ```
         {: codeblock}
 
