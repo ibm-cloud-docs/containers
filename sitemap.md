@@ -266,7 +266,11 @@ subcollection: containers
 
 * [April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr23)
 
-    * [03 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr0323)
+    * [4 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr0423)
+
+        * Ingress ALB version `1.4.0_3953_iks`, `1.5.1_3951_iks`, and `1.6.4_3947_iks`
+
+    * [3 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr0323)
 
         * Pod Security admission 
 
@@ -8471,11 +8475,15 @@ subcollection: containers
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
 
+    * [1.6.4_3947_iks, released 4 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3947_iks)
+
     * [1.6.4_3898_iks, released 24 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3898_iks)
 
     * [1.6.4_3864_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3864_iks)
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
+
+    * [1.5.1_3951_iks, released 4 Arpil 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3951_iks)
 
     * [1.5.1_3897_iks, released 24 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3897_iks)
 
@@ -8492,6 +8500,8 @@ subcollection: containers
     * [1.5.1_3536_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3536_iks)
 
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
+
+    * [1.4.0_3953_iks, released 4 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3953_iks)
 
     * [1.4.0_3896_iks, released 24 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3896_iks)
 
