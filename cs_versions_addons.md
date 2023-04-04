@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-24"
+lastupdated: "2023-04-04"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 
@@ -47,6 +47,15 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ## Version 1.6.4
 {: #1_6_4}
 
+### 1.6.4_3947_iks, released 4 April 2023
+{: #1.6.4_3947_iks}
+
+- [CVE-2023-25809](https://nvd.nist.gov/vuln/detail/CVE-2023-25809){: external}
+- [CVE-2023-28642](https://nvd.nist.gov/vuln/detail/CVE-2023-28642){: external}
+- [CVE-2023-0464](https://nvd.nist.gov/vuln/detail/CVE-2023-0464){: external}
+- [CVE-2023-0465](https://nvd.nist.gov/vuln/detail/CVE-2023-0465){: external}
+- [CVE-2023-0466](https://nvd.nist.gov/vuln/detail/CVE-2023-0466){: external}
+
 ### 1.6.4_3898_iks, released 24 March 2023
 {: #1.6.4_3898_iks}
 
@@ -69,6 +78,14 @@ TLS 1.0 and TLS 1.1 are no longer supported. Upgrade to the newer TLS version, o
 
 ## Version 1.5.1
 {: #1_5_1}
+
+### 1.5.1_3951_iks, released 4 Arpil 2023
+{: #1.5.1_3951_iks}
+
+- [CVE-2023-25809](https://nvd.nist.gov/vuln/detail/CVE-2023-25809){: external}
+- [CVE-2023-28642](https://nvd.nist.gov/vuln/detail/CVE-2023-28642){: external}
+- [CVE-2023-0464](https://nvd.nist.gov/vuln/detail/CVE-2023-0464){: external}
+- [CVE-2023-0465](https://nvd.nist.gov/vuln/detail/CVE-2023-0465){: external}
 
 ### 1.5.1_3897_iks, released 24 March 2023
 {: #1.5.1_3897_iks}
@@ -114,6 +131,14 @@ Initial release of `1.5.1`. For more information, see the [community release doc
 
 ## Version 1.4.0
 {: #1_4_0}
+
+### 1.4.0_3953_iks, released 4 April 2023
+{: #1.4.0_3953_iks}
+
+- [CVE-2023-25809](https://nvd.nist.gov/vuln/detail/CVE-2023-25809){: external}
+- [CVE-2023-28642](https://nvd.nist.gov/vuln/detail/CVE-2023-28642){: external}
+- [CVE-2023-0464](https://nvd.nist.gov/vuln/detail/CVE-2023-0464){: external}
+- [CVE-2023-0465](https://nvd.nist.gov/vuln/detail/CVE-2023-0465){: external}
 
 ### 1.4.0_3896_iks, released 24 March 2023
 {: #1.4.0_3896_iks}
