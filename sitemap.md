@@ -266,6 +266,10 @@ subcollection: containers
 
 * [April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr23)
 
+    * [5 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr0523)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.10_1869` and `5.1.6_1872`.
+
     * [4 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr0423)
 
         * Ingress ALB version `1.4.0_3953_iks`, `1.5.1_3951_iks`, and `1.6.4_3947_iks`
@@ -9099,6 +9103,8 @@ subcollection: containers
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
 
+    * [Change log for version 5.1.6_1872, released 05 April 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.6_1872_is_block_relnote)
+
     * [Change log for version 5.1.5_1857, released 29 March 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.5_1857_is_block_relnote)
 
     * [Change log for version 5.1.4_1852, released 07 March 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.4_1852_is_block_relnote)
@@ -9108,6 +9114,8 @@ subcollection: containers
     * [Change log for version 5.1, released 9 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1_is_block_relnote)
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
+
+    * [Change log for version 5.0.10_1869, released 05 April 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.10_1869_is_block_relnote)
 
     * [Change log for version 5.0.9_1862, released 29 March 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.9_1862_is_block_relnote)
 
