@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-04-04"
+lastupdated: "2023-04-05"
 
 keywords: containers
 subcollection: containers
@@ -5204,8 +5204,8 @@ subcollection: containers
 * [Migration FAQ](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_migration_faq)
 
 
-## Storing data on persistent storage
-{: #sitemap_storing_data_on_persistent_storage}
+## Setting up storage
+{: #sitemap_setting_up_storage}
 
 
 [Planning for storage](/docs/containers?topic=containers-storage-plan#storage-plan)
@@ -5242,7 +5242,7 @@ subcollection: containers
 
 * [Next steps](/docs/containers?topic=containers-kube_concepts#next-steps-storage)
 
-[Storing data on classic IBM Cloud {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
+[Setting up classic IBM Cloud {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
 
 * [Quick start for {{site.data.keyword.cloud_notm}} Classic {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
 
@@ -5308,7 +5308,7 @@ subcollection: containers
 
     * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove_file)
 
-[Storing data on classic IBM Cloud {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
+[Setting up classic IBM Cloud {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
 
 * [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
 
@@ -5381,11 +5381,11 @@ subcollection: containers
     * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
 
 
-### Storing data on IBM Cloud Object Storage
-{: #sitemap_storing_data_on_ibm_cloud_object_storage}
+### Setting up IBM Cloud Object Storage
+{: #sitemap_setting_up_ibm_cloud_object_storage}
 
 
-[Storing data on {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-understand#storage-cos-understand)
+[Setting up {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-understand#storage-cos-understand)
 
 * [Creating your object storage service instance](/docs/containers?topic=containers-storage-cos-understand#create_cos_service)
 
@@ -5446,11 +5446,11 @@ subcollection: containers
 * [Flex](/docs/containers?topic=containers-storage_cos_reference#flex)
 
 
-### Storing data on IBM Cloud VPC Block Storage
-{: #sitemap_storing_data_on_ibm_cloud_vpc_block_storage}
+### Setting up IBM Cloud VPC Block Storage
+{: #sitemap_setting_up_ibm_cloud_vpc_block_storage}
 
 
-[Storing data on {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block)
+[Setting up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block)
 
 * [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc_block_qs)
 
@@ -5522,7 +5522,7 @@ subcollection: containers
 
     * [Automatically creating a secret by using a Shell script](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#secret-create-truted-profile)
 
-[Storing data on {{site.data.keyword.block_storage_is_short}} for unmanaged clusters](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-storage-driver-unmanaged)
+[Setting up {{site.data.keyword.block_storage_is_short}} for unmanaged clusters](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-storage-driver-unmanaged)
 
 * [Prerequisites](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-prereq)
 
@@ -5545,8 +5545,8 @@ subcollection: containers
     * [Ubuntu ConfigMap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
 
 
-### Storing data on IBM Cloud File Storage for VPC
-{: #sitemap_storing_data_on_ibm_cloud_file_storage_for_vpc}
+### Setting up IBM Cloud File Storage for VPC
+{: #sitemap_setting_up_ibm_cloud_file_storage_for_vpc}
 
 
 [Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} add-on](/docs/containers?topic=containers-storage-file-vpc-install#storage-file-vpc-install)
@@ -5571,7 +5571,7 @@ subcollection: containers
 
 [Storage class reference](/docs/containers?topic=containers-storage-file-vpc-sc-ref#storage-file-vpc-sc-ref)
 
-[Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
+[Setting up software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 
 * [About Portworx](/docs/containers?topic=containers-portworx#about-portworx)
 

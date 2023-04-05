@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-22"
+lastupdated: "2023-04-05"
 
 keywords: kubernetes
 
@@ -17,7 +17,7 @@ subcollection: containers
 
 
 
-# Storing data on classic IBM Cloud {{site.data.keyword.blockstorageshort}}
+# Setting up classic IBM Cloud {{site.data.keyword.blockstorageshort}}
 {: #block_storage}
 
 {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out whether {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is the correct storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage-plan). For more information about pricing, see [Pricing](https://www.ibm.com/cloud/block-storage/pricing){: external}.
@@ -26,7 +26,7 @@ subcollection: containers
 Keep in mind the following requirements when you use the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in.
 {: important}
 
-{{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure.  If you have a VPC cluster, see [Storing data on {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-vpc-block#vpc-block-reference).
+{{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure.  If you have a VPC cluster, see [Setting up {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-vpc-block#vpc-block-reference).
 
 
 If your cluster can't access the public network, such as a private cluster behind a firewall or a cluster with only the private cloud service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your {{site.data.keyword.blockstorageshort}} instance over the private network.
@@ -37,7 +37,7 @@ If your cluster can't access the public network, such as a private cluster behin
 [Classic infrastructure]{: tag-classic-inf}
 
 
-The steps on this page apply to classic clusters only. On VPC clusters, the {{site.data.keyword.block_storage_is_short}} add-on is installed by default. For more information, see [Storing data on Storing data on {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block).
+The steps on this page apply to classic clusters only. On VPC clusters, the {{site.data.keyword.block_storage_is_short}} add-on is installed by default. For more information, see [Setting up Setting up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block).
 {: important}
 
 
