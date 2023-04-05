@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-04-04"
+lastupdated: "2023-04-05"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr23)
+
+    * [5 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr0523)
+
+        * Cluster autoscaler add-on versions `1.0.6_1010`, `1.0.7_1021`, and `1.0.8_1016`.
+
+        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.10_1869` and `5.1.6_1872`.
 
     * [4 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr0423)
 
@@ -4065,29 +4071,29 @@ subcollection: containers
 
 * [Upgrade requirements](/docs/containers?topic=containers-pod-security-admission-migration#psa-upgrade-reqs)
 
-    * [Check that all pods run under the ibm-privileged-psp PSP](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-pod-check)
+    * [Step 1: Check that all pods run under the ibm-privileged-psp PSP](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-pod-check)
 
-    * [Verify the privileged-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
+    * [Step 2: Verify the privileged-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
 
-    * [Verify the restricted-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-crb-verify)
+    * [Step 3: Verify the restricted-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-crb-verify)
 
-    * [Checking for non-IBM PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-check-psp)
+    * [Step 4: Checking for non-IBM PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-check-psp)
 
 * [Migration steps](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-steps)
 
-* [Enable Pod Security admission in your 1.24 cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-enable-124)
+    * [Step 1: Enable Pod Security admission in your 1.24 cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-enable-124)
 
-    * [Review namespace permissions](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-perm)
+    * [Step 2: Review namespace permissions](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-perm)
 
-    * [Simplify and standardize PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-simplify)
+    * [Step 3: Simplify and standardize PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-simplify)
 
-    * [Update the namespaces in your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-update-namespace)
+    * [Step 4: Update the namespaces in your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-update-namespace)
 
-    * [Review the namespace creation process](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-creation)
+    * [Step 5: Review the namespace creation process](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-creation)
 
-    * [Optional. Disable the PSP feature in the cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-disable-psp)
+    * [Step 6: Optional. Disable the PSP feature in the cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-disable-psp)
 
-    * [Optional. Upgrade your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-cluster-upgrade)
+    * [Step 7: Optional. Upgrade your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-cluster-upgrade)
 
 * [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
 
@@ -5204,8 +5210,8 @@ subcollection: containers
 * [Migration FAQ](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_migration_faq)
 
 
-## Storing data on persistent storage
-{: #sitemap_storing_data_on_persistent_storage}
+## Setting up storage
+{: #sitemap_setting_up_storage}
 
 
 [Planning for storage](/docs/containers?topic=containers-storage-plan#storage-plan)
@@ -5242,7 +5248,7 @@ subcollection: containers
 
 * [Next steps](/docs/containers?topic=containers-kube_concepts#next-steps-storage)
 
-[Storing data on classic IBM Cloud {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
+[Setting up classic IBM Cloud {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
 
 * [Quick start for {{site.data.keyword.cloud_notm}} Classic {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
 
@@ -5308,7 +5314,7 @@ subcollection: containers
 
     * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove_file)
 
-[Storing data on classic IBM Cloud {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
+[Setting up classic IBM Cloud {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
 
 * [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
 
@@ -5381,11 +5387,11 @@ subcollection: containers
     * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
 
 
-### Storing data on IBM Cloud Object Storage
-{: #sitemap_storing_data_on_ibm_cloud_object_storage}
+### Setting up IBM Cloud Object Storage
+{: #sitemap_setting_up_ibm_cloud_object_storage}
 
 
-[Storing data on {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-understand#storage-cos-understand)
+[Setting up {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-understand#storage-cos-understand)
 
 * [Creating your object storage service instance](/docs/containers?topic=containers-storage-cos-understand#create_cos_service)
 
@@ -5446,11 +5452,11 @@ subcollection: containers
 * [Flex](/docs/containers?topic=containers-storage_cos_reference#flex)
 
 
-### Storing data on IBM Cloud VPC Block Storage
-{: #sitemap_storing_data_on_ibm_cloud_vpc_block_storage}
+### Setting up IBM Cloud VPC Block Storage
+{: #sitemap_setting_up_ibm_cloud_vpc_block_storage}
 
 
-[Storing data on {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block)
+[Setting up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block)
 
 * [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc_block_qs)
 
@@ -5522,7 +5528,7 @@ subcollection: containers
 
     * [Automatically creating a secret by using a Shell script](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#secret-create-truted-profile)
 
-[Storing data on {{site.data.keyword.block_storage_is_short}} for unmanaged clusters](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-storage-driver-unmanaged)
+[Setting up {{site.data.keyword.block_storage_is_short}} for unmanaged clusters](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-storage-driver-unmanaged)
 
 * [Prerequisites](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-prereq)
 
@@ -5545,8 +5551,8 @@ subcollection: containers
     * [Ubuntu ConfigMap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
 
 
-### Storing data on IBM Cloud File Storage for VPC
-{: #sitemap_storing_data_on_ibm_cloud_file_storage_for_vpc}
+### Setting up IBM Cloud File Storage for VPC
+{: #sitemap_setting_up_ibm_cloud_file_storage_for_vpc}
 
 
 [Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} add-on](/docs/containers?topic=containers-storage-file-vpc-install#storage-file-vpc-install)
@@ -5571,7 +5577,7 @@ subcollection: containers
 
 [Storage class reference](/docs/containers?topic=containers-storage-file-vpc-sc-ref#storage-file-vpc-sc-ref)
 
-[Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
+[Setting up software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 
 * [About Portworx](/docs/containers?topic=containers-portworx#about-portworx)
 
@@ -8999,11 +9005,15 @@ subcollection: containers
 
 * [Version 1.0.8](/docs/containers?topic=containers-ca_changelog#0108_ca_addon)
 
+    * [Change log for patch update 1.0.8_1016, released 5 April 2023](/docs/containers?topic=containers-ca_changelog#1081016_ca)
+
     * [Change log for patch update 1.0.8_987, released 29 March 2023](/docs/containers?topic=containers-ca_changelog#108987_ca)
 
     * [Change log for patch update 1.0.8_968, released 9 March 2023](/docs/containers?topic=containers-ca_changelog#108968_ca)
 
 * [Version 1.0.7](/docs/containers?topic=containers-ca_changelog#0107_ca_addon)
+
+    * [Change log for patch update 1.0.7_1021, released 5 April 2023](/docs/containers?topic=containers-ca_changelog#1071021_ca)
 
     * [Change log for patch update 1.0.7_988, released 29 March 2023](/docs/containers?topic=containers-ca_changelog#107988_ca)
 
@@ -9018,6 +9028,8 @@ subcollection: containers
     * [Change log for patch update 1.0.7_883, released 3 November 2022](/docs/containers?topic=containers-ca_changelog#107883_ca)
 
 * [Version 1.0.6](/docs/containers?topic=containers-ca_changelog#0106_ca_addon)
+
+    * [Change log for patch update 1.0.6_1010, released 5 April 2023](/docs/containers?topic=containers-ca_changelog#1061010_ca)
 
     * [Change log for patch update 1.0.6_955, released 7 March 2023](/docs/containers?topic=containers-ca_changelog#106955_ca)
 
@@ -9099,6 +9111,8 @@ subcollection: containers
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
 
+    * [Change log for version 5.1.6_1872, released 05 April 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.6_1872_is_block_relnote)
+
     * [Change log for version 5.1.5_1857, released 29 March 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.5_1857_is_block_relnote)
 
     * [Change log for version 5.1.4_1852, released 07 March 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.4_1852_is_block_relnote)
@@ -9108,6 +9122,8 @@ subcollection: containers
     * [Change log for version 5.1, released 9 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1_is_block_relnote)
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
+
+    * [Change log for version 5.0.10_1869, released 05 April 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.10_1869_is_block_relnote)
 
     * [Change log for version 5.0.9_1862, released 29 March 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.9_1862_is_block_relnote)
 

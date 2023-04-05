@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-22"
+lastupdated: "2023-04-05"
 
 keywords: portworx, kubernetes
 
@@ -17,7 +17,7 @@ subcollection: containers
 
 
 
-# Storing data on software-defined storage (SDS) with Portworx
+# Setting up software-defined storage (SDS) with Portworx
 {: #portworx}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [{{site.data.keyword.satelliteshort}}]{: tag-satellite}
@@ -1036,7 +1036,7 @@ Install PX-Backup on an {{site.data.keyword.containerlong_notm}} cluster in your
 Before you begin:
 - Make sure that your cluster meets the [minimum Portworx requirements](https://docs.portworx.com/start-here-installation/){: external}. 
 - [Install or update the {{site.data.keyword.cloud_notm}} Block Storage plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block).
-- Provision and attach 320Gi of block storage to your cluster. See [Storing data on classic {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage) or [Storing data on Block Storage for VPC](/docs/containers?topic=containers-vpc-block).
+- Provision and attach 320Gi of block storage to your cluster. See [Setting up classic {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage) or [Setting up Block Storage for VPC](/docs/containers?topic=containers-vpc-block).
 
 
 
