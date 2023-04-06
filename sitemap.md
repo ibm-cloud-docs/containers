@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-04-05"
+lastupdated: "2023-04-06"
 
 keywords: containers
 subcollection: containers
@@ -4067,7 +4067,7 @@ subcollection: containers
 
 * [Pod Security Admission roadmap](/docs/containers?topic=containers-pod-security-admission#psa-roadmap)
 
-[Migrating from PSPs to Pod Security admission](/docs/containers?topic=containers-pod-security-admission-migration#pod-security-admission-migration)
+[Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration#pod-security-admission-migration)
 
 * [Upgrade requirements](/docs/containers?topic=containers-pod-security-admission-migration#psa-upgrade-reqs)
 
@@ -4986,7 +4986,7 @@ subcollection: containers
 
 * [IBM-provided Ingress components](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-components)
 
-    * [Ingress subdomain](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-subdomain)
+    * [Ingress domain](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-subdomain)
 
     * [Ingress class](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-class)
 
@@ -5041,6 +5041,44 @@ subcollection: containers
     * [Disabling ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-disable)
 
 * [Moving ALBs across VLANs in classic clusters](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan)
+
+[Creating your own Ingress domain](/docs/containers?topic=containers-ingress-domains#ingress-domains)
+
+* [Setting up domains with the {{site.data.keyword.cloud_notm}} internal provider](/docs/containers?topic=containers-ingress-domains#ingress-domain-int)
+
+* [Setting up domains with {{site.data.keyword.cis_full_notm}}](/docs/containers?topic=containers-ingress-domains#ingress-domain-cis)
+
+    * [Set up service-to-service authorization](/docs/containers?topic=containers-ingress-domains#ingress-domain-cis-s2s)
+
+    * [Create a domain](/docs/containers?topic=containers-ingress-domains#ingress-domain-cis-create)
+
+* [Setting up domains from other external providers](/docs/containers?topic=containers-ingress-domains#ingress-domain-external)
+
+    * [Set up credentials for your provider](/docs/containers?topic=containers-ingress-domains#ingress-domains-ext-cred)
+
+    * [Create a domain, or add an existing domain](/docs/containers?topic=containers-ingress-domains#ingress-domains-ext-create)
+
+* [Managing domains](/docs/containers?topic=containers-ingress-domains#ingress-domains-manage)
+
+    * [Viewing domains in a cluster](/docs/containers?topic=containers-ingress-domains#ingress-domains-manage-view)
+
+    * [Removing a domain from a cluster](/docs/containers?topic=containers-ingress-domains#ingress-domains-manage-rm)
+
+    * [Updating a domain's IP addresses or hostname](/docs/containers?topic=containers-ingress-domains#ingress-domains-manage-update)
+
+    * [Changing a cluster's default domain](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-default)
+
+* [Managing external provider credentials](/docs/containers?topic=containers-ingress-domains#ingress-domains-manage-creds)
+
+    * [Viewing external provider credentials](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-creds-view)
+
+    * [Removing external provider credentials](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-creds-rm)
+
+* [Managing domain secrets](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-secrets)
+
+    * [Regenerating the certificate for an Ingress domain](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-secrets-regen)
+
+    * [Delete an Ingress domain secret](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-secrets-rm)
 
 [Customizing ALB routing](/docs/containers?topic=containers-comm-ingress-annotations#comm-ingress-annotations)
 
@@ -6079,6 +6117,30 @@ subcollection: containers
     * [`ibmcloud ks ingress alb update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_update)
 
     * [`ibmcloud ks ingress alb versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_versions)
+
+    * [`ibmcloud ks ingress domain create`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-create)
+
+    * [`ibmcloud ks ingress domain credential get`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-credential-get)
+
+    * [`ibmcloud ks ingress domain credential rm`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-credential-rm)
+
+    * [`ibmcloud ks ingress domain credential set akamai`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-credential-set-akamai)
+
+    * [`ibmcloud ks ingress domain credential set cloudflare`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-credential-set-cloudflare)
+
+    * [`ibmcloud ks ingress domain default replace`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-default-replace)
+
+    * [`ibmcloud ks ingress domain get`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-get)
+
+    * [`ibmcloud ks ingress domain ls`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-ls)
+
+    * [`ibmcloud ks ingress domain rm`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-rm)
+
+    * [`ibmcloud ks ingress domain secret regenerate`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-secret-regenerate)
+
+    * [`ibmcloud ks ingress domain secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-secret-rm)
+
+    * [`ibmcloud ks ingress domain update`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-update)
 
     * [`ibmcloud ks ingress instance default set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_default_set)
 
