@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-03-29"
+lastupdated: "2023-04-06"
 
 keywords: kubernetes, containers, 126, version 126, 126 update actions
 
@@ -74,7 +74,6 @@ When you upgrade your cluster to version 1.26, a [BGP password](https://docs.tig
 | **Unsupported:** Beta version of the `HorizontalPodAutoscaler` API | Migrate manifests and API clients to use the `autoscaling/v2` API version, available since Kubernetes version 1.23. For more information, see [Deprecated API Migration Guide - v1.26](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-26){: external}. | 
 | **Unsupported:** Storage class `volume.beta.kubernetes.io/storage-class` beta resource annotation | Migrate manifests and API clients to use the `spec.storageClassName` field on the  `PersistentVolumeClaim` and `PersistentVolume` resources instead. |
 | **Unsupported:** Select Kubernetes API server metrics replaced | The following Kubernetes API service metrics were replaced: `etcd_db_total_size_in_bytes` is replaced by `apiserver_storage_db_total_size_in_bytes`, `job_sync_total` is replaced by `job_syncs_total`, `job_finished_total` is replaced by `jobs_finished_total`, and `cronjob_job_creation_skew_duration_seconds` is replaced by `job_creation_skew_duration_seconds`.  If you rely on these replaced metrics, update accordingly. |
-| Updated default container network sysctls | New containers running on the pod network will have the following sysctl tuning applied by default: `net.ipv4.tcp_keepalive_intvl=15`, `net.ipv4.tcp_keepalive_probes=6` and `net.ipv4.tcp_keepalive_time=40`. If your apps rely on the previous defaults, you will need to update your app deployment to customize the sysctls. See [Optimizing network keepalive sysctl settings](/docs/containers?topic=containers-kernel#keepalive-iks) for details. |
 {: caption="Changes to make before you update the master to Kubernetes 1.26" caption-side="bottom"}
 
 ### Update after master

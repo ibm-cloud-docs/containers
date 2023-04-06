@@ -206,8 +206,10 @@ toc:
               - cs_managed_ingress_about.md
               - cs_managed_ingress_setup.md
               - cs_managed_ingress_alb.md
+              - ingress-domains.md
               - ingress-annotations.md
               - cs_ingress_monitor.md
+
           - topicgroup:
               label: Managing certificates and secrets
               topics:

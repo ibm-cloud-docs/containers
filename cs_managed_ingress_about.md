@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-02-09"
+lastupdated: "2023-04-06"
 
 keywords: ingress, alb, application load balancer, nginx, ingress controller, network traffic, exposing apps
 
@@ -31,7 +31,7 @@ For more information about Kubernetes Ingress, see the [Kubernetes documentation
 All the components required to use Ingress are provided for you when you create a cluster. You specify these components when you create your Ingress resource. 
 {: shortdesc}
 
-- Ingress subdomain
+- Ingress domain
 - Ingress class
 - Application Load Balancers (ALBs)
 - TLS certificate
@@ -39,13 +39,16 @@ All the components required to use Ingress are provided for you when you create 
 If you do not want to use the IBM-provided components, you can [create custom components](/docs/containers) that you specify in your Ingress resource instead.
 
 
-### Ingress subdomain
+### Ingress domain
 {: #managed-ingress-subdomain}
 
-The Ingress subdomain is used to form a unique URL for each app in your cluster. When you create a cluster, a unique Ingress subdomain is automatically registered for the cluster. 
+The default Ingress domain is used to form a unique URL for each app in your cluster, and is the domain that is referenced by the IP addresses of any ALBs in your cluster. When you create a cluster, a unique Ingress subdomain is automatically created and registered as the default domain. You can [change the default domain](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-default) to any domain that exists in your cluster. 
 {: shortdesc}
 
-The IP address of your public ALBs references the IBM-provided Ingress subdomain. Private ALBs, however, do not reference the IBM-provided Ingress subdomain and instead require a [custom domain](/docs/containers?topic=containers-managed-ingress-setup#ingress-custom-domain).
+You can also [create or add your own domain](/docs/containers?topic=containers-ingress-domains) registered with IBM Cloud's internal domain provider, or a domain registered with an external provider. Currently, {{site.data.keyword.cloud_notm}} supports external domains registered with {{site.data.keyword.cis_full_notm}}, Akamai, or Cloudflare.
+{: tip}
+
+ Private ALBs do not reference the IBM-provided Ingress subdomain and instead require a [custom domain](/docs/containers?topic=containers-managed-ingress-setup#ingress-custom-domain).
 {: note}
 
 The subdomain is registered in the following format.
