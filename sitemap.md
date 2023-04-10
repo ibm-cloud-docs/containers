@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-04-07"
+lastupdated: "2023-04-10"
 
 keywords: containers
 subcollection: containers
@@ -280,7 +280,7 @@ subcollection: containers
 
         * Pod Security admission 
 
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.13`.
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.13`
 
 * [March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar23)
 
