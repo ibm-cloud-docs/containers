@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-04-07"
+lastupdated: "2023-04-10"
 
 keywords: containers
 subcollection: containers
@@ -280,7 +280,7 @@ subcollection: containers
 
         * Pod Security admission 
 
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.13`.
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.13`
 
 * [March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar23)
 
@@ -10256,6 +10256,8 @@ subcollection: containers
 [Why does the Ingress status show an `ERRAHINF` error?](/docs/containers?topic=containers-ts-ingress-errahinf#ts-ingress-errahinf)
 
 [Why does the Ingress status show an `ERRADRUH` error?](/docs/containers?topic=containers-ts-ingress-erradruh#ts-ingress-erradruh)
+
+[Why does the Ingress status show an `ERRDSAISS` error?](/docs/containers?topic=containers-ts-ingress-errdsaiss#ts-ingress-errdsaiss)
 
 [Why does the Ingress status show an `ERRDSIA` error?](/docs/containers?topic=containers-ts-ingress-errdsia#ts-ingress-errdsia)
 
