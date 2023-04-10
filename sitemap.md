@@ -10257,6 +10257,8 @@ subcollection: containers
 
 [Why does the Ingress status show an `ERRADRUH` error?](/docs/containers?topic=containers-ts-ingress-erradruh#ts-ingress-erradruh)
 
+[Why does the Ingress status show an `ERRDSAISS` error?](/docs/containers?topic=containers-ts-ingress-errdsaiss#ts-ingress-errdsaiss)
+
 [Why does the Ingress status show an `ERRDSIA` error?](/docs/containers?topic=containers-ts-ingress-errdsia#ts-ingress-errdsia)
 
 [Why does the Ingress status show an `ERRDSISS` error?](/docs/containers?topic=containers-ts-ingress-errdsiss#ts-ingress-errdsiss)
