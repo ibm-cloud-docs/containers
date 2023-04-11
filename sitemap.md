@@ -270,6 +270,8 @@ subcollection: containers
 
         * CLI version `1.0.510`.
 
+        * Worker node fix packs `1.23.17_1574`, `1.24.12_1564`, `1.25.8_1541`, and `1.26.3_1533`.
+
     * [5 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr0523)
 
         * Cluster autoscaler add-on versions `1.0.6_1010`, `1.0.7_1021`, and `1.0.8_1016`.
@@ -6560,6 +6562,8 @@ subcollection: containers
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
 
+    * [Change log for worker node fix pack 1.26.3_1533, released 11 April 2023](/docs/containers?topic=containers-changelog_126#1263_1533)
+
     * [Change log for worker node fix pack 1.26.3_1531, released 29 March 2023](/docs/containers?topic=containers-changelog_126#1263_1531)
 
     * [Change log for master fix pack 1.26.3_1528, released 28 March 2023](/docs/containers?topic=containers-changelog_126#1263_1528)
@@ -6638,6 +6642,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for worker node fix pack 1.25.8_1541, released 11 April 2023](/docs/containers?topic=containers-changelog_125#1258_1541)
 
     * [Change log for worker node fix pack 1.25.8_1539, released 29 March 2023](/docs/containers?topic=containers-changelog_125#1258_1539)
 
@@ -6741,6 +6747,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.12_1564, released 11 April 2023](/docs/containers?topic=containers-changelog_124#12412_1564)
 
     * [Change log for worker node fix pack 1.24.12_1562, released 29 March 2023](/docs/containers?topic=containers-changelog_124#12412_1562)
 
@@ -6870,6 +6878,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for worker node fix pack 1.23.17_1574, released 11 April 2023](/docs/containers?topic=containers-changelog_123#12317_1574)
 
     * [Change log for worker node fix pack 1.23.17_1572, released 29 March 2023](/docs/containers?topic=containers-changelog_123#12317_1572)
 
