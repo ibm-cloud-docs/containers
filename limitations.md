@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-04-13"
 
 keywords: kubernetes, infrastructure, rbac, policy, http2, quota, app protocol, application protocol
 
@@ -119,10 +119,9 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Encryption | The secondary disks of your worker nodes are encrypted at rest by default by the [underlying VPC infrastructure provider](/docs/vpc?topic=vpc-block-storage-about#vpc-storage-encryption). However, you can't [bring your own encryption to the underlying virtual server instances](/docs/vpc?topic=vpc-creating-instances-byok). |
 | Location | VPC clusters are available only in [select multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones-vpc). |
 | Virtual Private Cloud | See [Limitations](/docs/vpc?topic=vpc-limitations) and [Quotas](/docs/vpc?topic=vpc-quotas). |
-| v2 API | VPC clusters use the [{{site.data.keyword.containerlong_notm}} v2 API](/docs/containers?topic=containers-cs_api_install#api_about). The v2 API is currently under development, with only a limited number of API operations currently available. You can run certain v1 API operations against the VPC cluster, such as `GET /v1/clusters` or `ibmcloud ks cluster ls`, but not all the information that a Classic cluster has is returned or you might experience unexpected results. For supported VPC v2 operations, see the [CLI reference topic for VPC commands](/docs/containers?topic=containers-kubernetes-service-cli). |
 | Worker node flavors | Only certain flavors are available for worker node [virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm). Bare metal machines are not supported.|
 | Worker node host access | For security, you can't SSH into the worker node compute host. |
-| Worker node updates | You can't update or reload worker nodes. Instead, you can delete the worker node and rebalance the worker pool with the `ibmcloud ks worker replace` command. If you replace multiple worker nodes at the same time, they are deleted and replaced concurrently, not one by one. Make sure that you have enough capacity in your cluster to reschedule your workloads before you replace worker nodes. |
+| Worker node updates | You can't update or reload VPC worker nodes. Instead, you can delete the worker node and rebalance the worker pool with the `ibmcloud ks worker replace` command. If you replace multiple worker nodes at the same time, they are deleted and replaced concurrently, not one by one. Make sure that you have enough capacity in your cluster to reschedule your workloads before you replace worker nodes. |
 {: caption="VPC cluster compute limitations"}
 
 
@@ -133,7 +132,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 
 | Category | Description |
 | -------- | ----------- |
-| App URL length | Kubernetes version 1.20 or later only: DNS resolution is managed by the cluster's [virtual private endpoint (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe), which can resolve URLs up to 130 characters. If you expose apps in your cluster with URLs, such as the Ingress subdomain, ensure that the URLs are 130 characters or fewer. |
+| App URL length | DNS resolution is managed by the cluster's [virtual private endpoint (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe), which can resolve URLs up to 130 characters. If you expose apps in your cluster with URLs, such as the Ingress subdomain, ensure that the URLs are 130 characters or fewer. |
 | Istio managed add-on | See [Istio add-on limitations](/docs/containers?topic=containers-istio-about#istio_limitations). |
 | Network speeds | [VPC profile network speeds](/docs/vpc?topic=vpc-profiles) refer to the speeds of the worker node interfaces. The maximum speed available to your worker nodes is `16Gbps`. Because IP in IP encapsulation is required for traffic between pods that are on different VPC worker nodes, data transfer speeds between pods on different worker nodes might be slower, about half the compute profile network speed. Overall network speeds for apps that you deploy to your cluster depend on the worker node size and application's architecture. |
 | NodePort | You can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. To access an app from the internet, you must use a VPC load balancer or Ingress service instead. |
@@ -150,9 +149,8 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 
 | Category | Description |
 | -------- | ----------- |
-| Storage class for profile sizes | The [available volume profiles](/docs/vpc?topic=vpc-block-storage-profiles) are limited to 2TB in size and 20,000 IOPS in capacity. |
+| Storage class for profile sizes | For more information, see [available volume profiles](/docs/vpc?topic=vpc-block-storage-profiles). |
 | Supported types | You can set up {{site.data.keyword.block_storage_is_short}}, {{site.data.keyword.cos_full_notm}} and {{site.data.keyword.databases-for}} only. \n - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block) is available as a cluster add-on. Make sure to [attach a public gateway to all the VPC subnets](/docs/vpc?topic=vpc-creating-vpc-resources-with-cli-and-api&interface=cli#attach-public-gateway-cli) that the cluster uses so that you can provision {{site.data.keyword.block_storage_is_short}}. \n - [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_install) is available as a Helm chart.  |
-| Unsupported types | NFS {{site.data.keyword.filestorage_short}} is not supported. |
 | Volume attachments | See [Volume attachment limits](/docs/vpc?topic=vpc-attaching-block-storage#vol-attach-limits).|
 | Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-portworx#portworx_limitations). |
 | {{site.data.keyword.block_storage_is_short}} | The default storage class in VPC clusters can not be changed. However, you can [create a custom storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class). |

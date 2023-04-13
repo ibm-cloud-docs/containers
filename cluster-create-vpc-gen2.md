@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-29"
+lastupdated: "2023-04-13"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2
 

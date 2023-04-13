@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-31"
+lastupdated: "2023-04-13"
 
 keywords: kubernetes, oauth proxy, add-on
 
@@ -28,6 +28,11 @@ View information for version updates to the [ALB OAuth Proxy add-on](/docs/conta
 
 ## Version 2.0.0
 {: #2_0_0}
+
+### Version 2.0.0_1528, released on 13 April 2023
+{: #2.0.0_1528}
+
+- Adds support for the `cookie-refresh` configuration option for `oauth2-proxy`. Using this feature might require additional configuration. For more information, see [Adding App ID authentication to apps](/docs/containers?topic=containers-comm-ingress-annotations#app-id-auth).
 
 ### Version 2.0.0_1487, released on 1 March 2023
 {: #2_0_0_1487}
