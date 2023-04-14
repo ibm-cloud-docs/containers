@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-13"
+lastupdated: "2023-04-14"
 
 keywords: kubernetes, release notes
 
@@ -3199,7 +3199,7 @@ Default version
 {: release-note}
 
 VPE
-:   In VPC clusters that run Kubernetes version 1.20 or later, worker node communication to the Kubernetes master is now established over the [VPC virtual private endpoint (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe).
+:   Worker node communication to the Kubernetes master is now established over the [VPC virtual private endpoint (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe).
 
 ### 22 February 2021
 {: #containers-feb2221}
