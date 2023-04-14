@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-02-06"
+lastupdated: "2023-04-14"
 
 keywords: containers, ingress, troubleshoot ingress, configmap missing, erriccnf
 
@@ -41,7 +41,7 @@ Create the ConfigMap.
 
 1. Run the following command to create the ConfigMap.
     ```sh
-    kubectl create -f https://github.com/IBM-Cloud/kube-samples/blob/master/ingress-config/ibm-k8s-controller-config.yaml
+    kubectl create -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/ingress-config/ibm-k8s-controller-config.yaml
     ```
     {: pre}
     

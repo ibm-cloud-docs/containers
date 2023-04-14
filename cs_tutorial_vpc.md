@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-03"
+lastupdated: "2023-04-14"
 
 keywords: kubernetes
 
@@ -282,7 +282,7 @@ Create a Kubernetes deployment to deploy a single app instance as a pod to your 
         Priority:           0
         PriorityClassName:  <none>
         Node:               10.xxx.xx.xxx/10.xxx.xx.xxx
-        Start Time:         Mon, 22 Apr 2019 12:40:48 -0400
+        Start Time:         Mon, 22 Apr 20122 12:40:48 -0400
         Labels:             pod-template-hash=d99cddb45
                             run=hello-world-deployment
         Annotations:        kubernetes.io/psp=ibm-privileged-psp

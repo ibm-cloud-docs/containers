@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-04-06"
+lastupdated: "2023-04-14"
 
 keywords: kubernetes
 
@@ -1308,9 +1308,6 @@ Minimum required permissions
 
 `--policy POLICY`
 :    Optional: The type of policy that is used for auditing. Use `default` or `verbose`. Note that the `verbose` policy type audits a larger number of API transactions, which may impact cluster performance, and is only recommended for occasional use.
-
-The `verbose` policy option is supported on {{site.data.keyword.containershort}} clusters that run on version 1.18 and later.
-{: note}
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
