@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-04-19"
+lastupdated: "2023-04-20"
 
 keywords: containers
 subcollection: containers
@@ -6543,7 +6543,7 @@ subcollection: containers
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
 
-[Comparing the CIS Kubernetes and the compliance operator benchmarks](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison)
+[Comparing the CIS Kubernetes and the Compliance Operator benchmarks](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison)
 
 * [Major differences](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison-major)
 
