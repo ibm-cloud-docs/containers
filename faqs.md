@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-07"
+lastupdated: "2023-04-20"
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
 
@@ -254,4 +254,9 @@ See the [IBM Open Source and Third Party policy](https://www.ibm.com/support/pag
 
 See [Managing costs for your clusters](/docs/containers?topic=containers-costs).
 
+## Can I downgrade my cluster to a previous version?
+{: #downgrade}
+{: faq}
+
+No, you cannot downgrade your cluster to a previous version.
 

@@ -37,7 +37,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: release-note}  
   
 Istio add-on version `1.16.4` and `1.17.2`.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog#1163).
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
 
 
 

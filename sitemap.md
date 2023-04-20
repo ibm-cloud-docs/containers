@@ -9793,6 +9793,8 @@ subcollection: containers
 
 * [What am I charged for? Can I estimate and control costs in my cluster?](/docs/containers?topic=containers-faqs#charges)
 
+* [Can I downgrade my cluster to a previous version?](/docs/containers?topic=containers-faqs#downgrade)
+
 
 ## Troubleshooting
 {: #sitemap_troubleshooting}
