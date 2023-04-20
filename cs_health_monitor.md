@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-01"
+lastupdated: "2023-04-20"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -185,7 +185,7 @@ The **Master Status** provides details of what operation from the master state i
 When you set up alerts, make sure to allow your cluster enough time to self-heal. Because Kubernetes has self healing capabilities, configure your alerts only for the issues that arise over time. By observing your cluster over time, you can learn which issues Kubernetes can resolve itself and which issues require alerts to avoid downtime.
 {: shortdesc}
 
-On 15 June 2022, the naming convention for {{site.data.keyword.mon_full}} alerts is changing to a Prometheus compatible format. For more information, see the [Sysdig release notes](https://docs.sysdig.com/en/docs/release-notes/enhanced-metric-store/#new-features-and-enhancements){: external}, [Mapping Legacy Sysdig Kubernetes Metrics with Prometheus Metrics](https://docs.sysdig.com/en/docs/sysdig-monitor/metrics/metrics-library/metrics-and-labels-mapping/mapping-legacy-sysdig-kubernetes-metrics-with-prometheus-metrics/){: external}, and [Mapping Classic Metrics with PromQL](https://docs.sysdig.com/en/docs/sysdig-monitor/metrics/metrics-library/metrics-and-labels-mapping/mapping-classic-metrics-with-promql-metrics/){: external}.
+On 15 June 2022, the naming convention for {{site.data.keyword.mon_full}} alerts is changing to a Prometheus compatible format. For more information, see the [Sysdig release notes](https://docs.sysdig.com/en/docs/release-notes/enhanced-metric-store/#new-features-and-enhancements){: external}, [Mapping Legacy Sysdig Kubernetes Metrics with Prometheus Metrics](https://docs.sysdig.com/en/docs/sysdig-monitor/using-monitor/metrics/metrics-library/metrics-and-labels-mapping/mapping-legacy-sysdig-kubernetes-metrics-with-prometheus-metrics/){: external}, and [Mapping Classic Metrics with PromQL](https://docs.sysdig.com/en/docs/sysdig-monitor/using-monitor/metrics/metrics-library/metrics-and-labels-mapping/mapping-classic-metrics-with-promql-metrics/){: external}.
 {: important}
 
 Depending on the size of your cluster, consider setting up alerts on the following levels:
