@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-04-07"
+lastupdated: "2023-04-20"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -37,6 +37,47 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 ## Version 1.17
 {: #v117}
 
+### Change log for 1.17.2, released 20 April 2023
+{: #1172}
+
+Review the changes that are included in version 1.17.2 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.17.1
+
+Current version
+:   1.17.2
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.17.2](https://istio.io/latest/news/releases/1.17.x/announcing-1.17.2/.){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2023-27487](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27487){: external}
+    - [CVE-2023-27488](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27488){: external}
+    - [CVE-2023-27491](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27491){: external}
+    - [CVE-2023-27492](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27492){: external}
+    - [CVE-2023-27493](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27493){: external}
+    - [CVE-2023-27496](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27496){: external}
+    - [CVE-2023-27533](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27533){: external}
+    - [CVE-2023-27534](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27534){: external}
+    - [CVE-2023-27535](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27535){: external}
+    - [CVE-2023-27536](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27536){: external}
+    - [CVE-2023-27538](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27538){: external}
+    - [CVE-2023-23914](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-23914){: external}
+    - [CVE-2023-23915](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-23915){: external}
+    - [CVE-2023-23916](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-23916){: external}
+    - [CVE-2023-0361](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0361){: external}
+    - [CVE-2022-48303](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-48303){: external}
+    - [CVE-2023-27320](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27320){: external}
+    - [usn-5964-1](https://ubuntu.com/security/notices/USN-5964-1){: external}
+    - [usn-5891-1](https://ubuntu.com/security/notices/USN-5891-1){: external}
+    - [usn-5901-1](https://ubuntu.com/security/notices/USN-5901-1){: external}
+    - [usn-5900-1](https://ubuntu.com/security/notices/USN-5900-1){: external}
+    - [usn-5908-1](https://ubuntu.com/security/notices/USN-5908-1){: external}
+
+:   For more information, see the [Istio security bulletin 2023-001](https://istio.io/latest/news/security/istio-security-2023-001/){: external}
+
+
 ### Change log for 1.17.1, released 7 March 2023
 {: #1171}
 
@@ -66,6 +107,47 @@ Updates in this version
 
 ## Version 1.16
 {: #v116}
+
+### Change log for 1.16.4, released 20 April 2023
+{: #1164}
+
+Review the changes that are included in version 1.16.4 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.16.3
+
+Current version
+:   1.16.4
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.16.4](https://istio.io/latest/news/releases/1.16.x/announcing-1.16.4/.){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2023-27487](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27487){: external}
+    - [CVE-2023-27488](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27488){: external}
+    - [CVE-2023-27491](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27491){: external}
+    - [CVE-2023-27492](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27492){: external}
+    - [CVE-2023-27493](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27493){: external}
+    - [CVE-2023-27496](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27496){: external}
+    - [CVE-2023-27533](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27533){: external}
+    - [CVE-2023-27534](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27534){: external}
+    - [CVE-2023-27535](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27535){: external}
+    - [CVE-2023-27536](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27536){: external}
+    - [CVE-2023-27538](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27538){: external}
+    - [CVE-2023-23914](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-23914){: external}
+    - [CVE-2023-23915](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-23915){: external}
+    - [CVE-2023-23916](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-23916){: external}
+    - [CVE-2023-0361](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0361){: external}
+    - [CVE-2022-48303](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-48303){: external}
+    - [CVE-2023-27320](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27320){: external}
+    - [usn-5964-1](https://ubuntu.com/security/notices/USN-5964-1){: external}
+    - [usn-5891-1](https://ubuntu.com/security/notices/USN-5891-1){: external}
+    - [usn-5901-1](https://ubuntu.com/security/notices/USN-5901-1){: external}
+    - [usn-5900-1](https://ubuntu.com/security/notices/USN-5900-1){: external}
+    - [usn-5908-1](https://ubuntu.com/security/notices/USN-5908-1){: external}
+
+:   For more information, see the [Istio security bulletin 2023-001](https://istio.io/latest/news/security/istio-security-2023-001/){: external}
+
 
 ### Change log for 1.16.3, released 9 March 2023
 {: #1163}

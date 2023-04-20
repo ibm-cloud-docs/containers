@@ -266,6 +266,10 @@ subcollection: containers
 
 * [April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr23)
 
+    * [20 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr2023)
+
+        * Istio add-on version `1.16.4` and `1.17.2`.
+
     * [13 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr1323)
 
         * ALB OAuth Proxy add-on version `2.0.0_1528`.
@@ -8855,9 +8859,13 @@ subcollection: containers
 
 * [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
 
+    * [Change log for 1.17.2, released 20 April 2023](/docs/containers?topic=containers-istio-changelog#1172)
+
     * [Change log for 1.17.1, released 7 March 2023](/docs/containers?topic=containers-istio-changelog#1171)
 
 * [Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
+
+    * [Change log for 1.16.4, released 20 April 2023](/docs/containers?topic=containers-istio-changelog#1164)
 
     * [Change log for 1.16.3, released 9 March 2023](/docs/containers?topic=containers-istio-changelog#1163)
 
