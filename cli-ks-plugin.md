@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-04-14"
+lastupdated: "2023-04-20"
 
 keywords: kubernetes
 
@@ -5151,7 +5151,7 @@ ibmcloud ks ingress domain secret rm --cluster CLUSTER --domain DOMAIN [-f] [--o
 ### `ibmcloud ks ingress domain update`
 {: #ingress-domain-update}
 
-Update an Ingress domain for a cluster to change the hostnames or IP addresses associated with the domain.
+Update an Ingress domain for a cluster to change the hostnames or IP addresses associated with the domain. This command updates all the resources in your cluster with the specified IP addresses or hostnames and changes your app URLs. 
 {: shortdesc}
 
 ```sh

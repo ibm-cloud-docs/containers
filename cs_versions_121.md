@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-04-20"
 
 keywords: kubernetes, 1.21, versions, update, upgrade
 
@@ -30,7 +30,7 @@ Looking for general information on updating {{site.data.keyword.containerlong}} 
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.21 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
-For more information about Kubernetes project version 1.21, see the [Kubernetes change log](https://v1-21.docs.kubernetes.io/releases/notes/){: external}.
+For more information about Kubernetes project version 1.21, see the [Kubernetes change log](https://relnotes.k8s.io/){: external}.
 
 ## Release timeline
 {: #release_timeline_121}

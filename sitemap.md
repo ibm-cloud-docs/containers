@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-04-18"
+lastupdated: "2023-04-20"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr23)
+
+    * [20 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr2023)
+
+        * Istio add-on version `1.16.4` and `1.17.2`.
 
     * [13 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr1323)
 
@@ -6543,7 +6547,7 @@ subcollection: containers
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
 
-[Comparing the CIS Kubernetes and the compliance operator benchmarks](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison)
+[Comparing the CIS Kubernetes and the Compliance Operator benchmarks](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison)
 
 * [Major differences](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison-major)
 
@@ -8855,9 +8859,13 @@ subcollection: containers
 
 * [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
 
+    * [Change log for 1.17.2, released 20 April 2023](/docs/containers?topic=containers-istio-changelog#1172)
+
     * [Change log for 1.17.1, released 7 March 2023](/docs/containers?topic=containers-istio-changelog#1171)
 
 * [Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
+
+    * [Change log for 1.16.4, released 20 April 2023](/docs/containers?topic=containers-istio-changelog#1164)
 
     * [Change log for 1.16.3, released 9 March 2023](/docs/containers?topic=containers-istio-changelog#1163)
 
@@ -9784,6 +9792,8 @@ subcollection: containers
 * [Does IBM support third-party and open source tools that I use with my cluster?](/docs/containers?topic=containers-faqs#faq_thirdparty_oss)
 
 * [What am I charged for? Can I estimate and control costs in my cluster?](/docs/containers?topic=containers-faqs#charges)
+
+* [Can I downgrade my cluster to a previous version?](/docs/containers?topic=containers-faqs#downgrade)
 
 
 ## Troubleshooting

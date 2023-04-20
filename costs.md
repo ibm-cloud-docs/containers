@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-03"
+lastupdated: "2023-04-20"
 
 keywords: kubernetes
 
@@ -108,9 +108,11 @@ When you provision storage, you can choose the storage type and storage class th
 {: shortdesc}
 
 To choose the correct storage solution, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage-plan). For more information, see:
-* [NFS file storage pricing](https://cloud.ibm.com/cloud-storage/file/order){: external}
-* [Block storage pricing](https://www.ibm.com/cloud/block-storage/pricing){: external}
-* [Object storage plans](https://cloud.ibm.com/objectstorage/create){: external}
+* [{{site.data.keyword.filestorage_short}}](https://www.ibm.com/cloud/file-storage){: external}
+* [{{site.data.keyword.blockstorageshort}}](https://www.ibm.com/cloud/block-storage){: external}
+* [{{site.data.keyword.filestorage_vpc_short}}](https://www.ibm.com/cloud/file-storage j){: external}
+* [{{site.data.keyword.block_storage_is_short}}](https://www.ibm.com/cloud/block-storage){: external}
+* [{{site.data.keyword.cos_full_notm}}](https://www.ibm.com/cloud/object-storage){: external}
 * [Portworx Enterprise pricing](https://cloud.ibm.com/catalog/services/portworx-enterprise){: external}
 
 ### {{site.data.keyword.cloud_notm}} services
@@ -164,7 +166,7 @@ The following steps present a general process to manage costs for your {{site.da
     * [Decide the cluster environment that you want](/docs/containers?topic=containers-strategy#kube_env).
     * [Consider the availability that you want for your cluster](/docs/containers?topic=containers-ha_clusters). For example, a basic high availability setup is one multizone cluster with two worker nodes in each of three zones, for a minimum total of 6 worker nodes.
 3. Check out other {{site.data.keyword.cloud_notm}} services, add-ons, operators, and other third-party software that you might use that can increase your cost. To get an idea of what other costs clusters typically incur, review [Understanding costs for your clusters](#costs-for-clusters).
-4. [Estimate your costs](/docs/billing-usage?topic=billing-usage-cost#cost) and review detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing](https://www.ibm.com/cloud/kubernetes-service/pricing){: external}.
+4. [Estimate your costs](/docs/billing-usage?topic=billing-usage-cost#cost) and review detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing](https://www.ibm.com/cloud/kubernetes-service){: external}.
 5. Manage the lifecycle of your cluster to control costs.
     * Consider [enabling the cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc) to automatically add or remove worker nodes in response to your cluster workload resource requests.
     * Manually [resize your worker pool](/docs/containers?topic=containers-add_workers) to remove worker nodes that you don't need. Keep in mind that you can't scale a worker pool down to zero worker nodes.
