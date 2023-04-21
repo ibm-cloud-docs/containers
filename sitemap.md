@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-04-20"
+lastupdated: "2023-04-21"
 
 keywords: containers
 subcollection: containers
@@ -3697,7 +3697,11 @@ subcollection: containers
 
 [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
 
+* [Prerequisites](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-prereqs)
+
 * [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
+
+* [Removing your old worker pools](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-removal)
 
 
 ## Managing cluster costs

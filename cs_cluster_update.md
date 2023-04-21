@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-04-18"
+lastupdated: "2023-04-21"
 
 keywords: kubernetes, upgrade, version
 
@@ -78,7 +78,7 @@ To update the Kubernetes master _major_ or _minor_ version:
     * Checking add-ons
         1. List the add-ons in the cluster.
             ```sh
-            ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+            ibmcloud ks cluster addon ls --cluster CLUSTER
             ```
             {: pre}
 
@@ -168,13 +168,13 @@ Set up a ConfigMap to perform a rolling update of your classic worker nodes.
 2. List available worker nodes and note their private IP address.
 
     ```sh
-    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
+    ibmcloud ks worker ls --cluster CLUSTER
     ```
     {: pre}
 
 3. View the labels of a worker node. You can find the worker node labels in the **Labels** section of your CLI output. Every label consists of a `NodeSelectorKey` and a `NodeSelectorValue`.
     ```sh
-    kubectl describe node <private_worker_IP>
+    kubectl describe node PRIVATE-WORKER-IP
     ```
     {: pre}
 
@@ -274,7 +274,7 @@ Set up a ConfigMap to perform a rolling update of your classic worker nodes.
 7. Update the worker nodes.
 
     ```sh
-    ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker_node1_ID> --worker <worker_node2_ID>
+    ibmcloud ks worker update --cluster CLUSTER --worker WORKER-NODE-1-ID --worker WORKER-NODE-2-ID
     ```
     {: pre}
 
@@ -369,27 +369,27 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
 ### Updating VPC worker nodes in the CLI
 {: #vpc_worker_cli}
 
-Before you update your VPC worker nodes, review the prerequisite steps. 
+Complete the following steps to update your worker nodes by using the CLI.
 {: shortdesc}
 
 1. Complete the [prerequisite steps](#vpc_worker_prereqs).
 2. Optional: Add capacity to your cluster by [resizing the worker pool](/docs/containers?topic=containers-add_workers#resize_pool). The pods on the worker node can be rescheduled and continue running on the added worker nodes during the update.
 3. List the worker nodes in your cluster and note the **ID** and **Primary IP** of the worker node that you want to update.
     ```sh
-    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
+    ibmcloud ks worker ls --cluster CLUSTER
     ```
     {: pre}
 
 4. Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
     *  To update the worker node to the same `major.minor` version as the master, such as from 1.24 to 1.25, include the `--update` option.
         ```sh
-        ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID> --update
+        ibmcloud ks worker replace --cluster CLUSTER --worker WORKER-NODE-ID --update
         ```
         {: pre}
 
     *  To update the worker node to the latest patch version at the same `major.minor` version, such as from 1.24.8_1530 to 1.24.9_1533, don't include the `--update` option.
         ```sh
-        ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID>
+        ibmcloud ks worker replace --cluster CLUSTER --worker WORKER-NODE-ID
         ```
         {: pre}
 
@@ -625,7 +625,7 @@ Before updating your worker nodes, make sure to back up your app data. Also, pla
     ```
     {: screen}
     
-        
+    
 
 ### Updating VPC worker nodes in the console
 {: #vpc_worker_ui}
@@ -644,46 +644,30 @@ You can update your VPC worker nodes in the console. Before you begin, consider 
 ## Updating flavors (machine types)
 {: #machine_type}
 
-You can update the flavors, or machine types, of your worker nodes by adding new worker nodes and removing the old ones. For example, if your cluster has deprecated Ubuntu 16 `x1c` or `x2c` worker node flavors, create Ubuntu 18 worker nodes that use flavors with `x3c` in the names.
-{: shortdesc}
-
 Before you begin:
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- If you store data on your worker node, the data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage-plan).
+- Data on the worker node is deleted. Consider storing your data on persistent storage outside of the worker node.
 - Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms).
 
 To update flavors:
 
 1. List available worker nodes and note their private IP address.
-    - **For worker nodes in a worker pool**:
+
         1. List available worker pools in your cluster.
             ```sh
-            ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+            ibmcloud ks worker-pool ls --cluster CLUSTER
             ```
             {: pre}
 
         2. List the worker nodes in the worker pool. Note the **ID** and **Private IP**.
             ```sh
-            ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+            ibmcloud ks worker ls --cluster CLUSTER --worker-pool WORKER-POOL
             ```
             {: pre}
 
         3. Get the details for a worker node. In the output, note the zone and either the private and public VLAN ID for classic clusters or the subnet ID for VPC clusters.
             ```sh
-            ibmcloud ks worker get --cluster <cluster_name_or_ID> --worker <worker_ID>
-            ```
-            {: pre}
-
-    - **Deprecated: For stand-alone worker nodes**:
-        1. List available worker nodes. Note the **ID** and **Private IP**.
-            ```sh
-            ibmcloud ks worker ls --cluster <cluster_name_or_ID>
-            ```
-            {: pre}
-
-        2. Get the details for a worker node and note the zone, the private VLAN ID, and the public VLAN ID.
-            ```sh
-            ibmcloud ks worker get --cluster <cluster_name_or_ID> --worker <worker_ID>
+            ibmcloud ks worker get --cluster CLUSTER --worker WORKER-ID
             ```
             {: pre}
 
@@ -694,74 +678,60 @@ To update flavors:
     {: pre}
 
 3. Create a worker node with the new machine type.
-    - **For worker nodes in a worker pool**:
-        1. Create a worker pool with the number of worker nodes that you want to replace.
-            * Classic clusters:
-                ```sh
-                ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
-                ```
-                {: pre}
-
-            * VPC Generation 2 clusters:
-                ```sh
-                ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
-                ```
-                {: pre}
-
-        2. Verify that the worker pool is created.
+    1. Create a worker pool with the number of worker nodes that you want to replace.
+        * Classic clusters:
             ```sh
-            ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+            ibmcloud ks worker-pool create classic --name WORKER-POOL --cluster CLUSTER --flavor FLAVOR --size-per-zone NUMBER-OF-WORKERS-PER-ZONE
             ```
             {: pre}
 
-        3. Add the zone to your worker pool that you retrieved earlier. When you add a zone, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. If you want to spread your worker nodes across multiple zones, choose a [classic](/docs/containers?topic=containers-regions-and-zones#zones-mz) or [VPC](/docs/containers?topic=containers-regions-and-zones#zones-vpc) multizone location.
-            * Classic clusters:
-                ```sh
-                ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-                ```
-                {: pre}
+        * VPC Generation 2 clusters:
+            ```sh
+            ibmcloud ks worker-pool create vpc-gen2 --name NAME --cluster CLUSTER --flavor FLAVOR --size-per-zone NUMBER-OF-WORKERS-PER-ZONE --label LABEL
+            ```
+            {: pre}
 
-            * VPC Generation 2 clusters:
-                ```sh
-                ibmcloud ks zone add vpc-gen2 --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <vpc_subnet_id>
-                ```
-                {: pre}
-
-    - **Deprecated: For stand-alone worker nodes**:
+    2. Verify that the worker pool is created.
         ```sh
-        ibmcloud ks worker add --cluster <cluster_name> --flavor <flavor> --workers <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+        ibmcloud ks worker-pool ls --cluster CLUSTER
         ```
         {: pre}
 
+    3. Add the zone to your worker pool that you retrieved earlier. When you add a zone, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. If you want to spread your worker nodes across multiple zones, choose a [classic](/docs/containers?topic=containers-regions-and-zones#zones-mz) or [VPC](/docs/containers?topic=containers-regions-and-zones#zones-vpc) multizone location.
+        * Classic clusters:
+            ```sh
+            ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER --worker-pool WORKER-POOL --private-vlan PRIVATE-VLAN-ID --public-vlan PUBLIC-VLAN-ID
+            ```
+            {: pre}
+
+        * VPC clusters:
+            ```sh
+            ibmcloud ks zone add vpc-gen2 --zone ZONE --cluster CLUSTER --worker-pool WORKER-POOL --subnet-id VPC-SUBNET-ID
+            ```
+            {: pre}
+
 4. Wait for the worker nodes to be deployed. When the worker node state changes to **Normal**, the deployment is finished.
     ```sh
-    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
+    ibmcloud ks worker ls --cluster CLUSTER
     ```
     {: pre}
 
 5. Remove the old worker node. **Note**: If you are removing a flavor that is billed monthly (such as bare metal), you are charged for the entire the month.
-    - **For worker nodes in a worker pool**:
-        1. Remove the worker pool with the old machine type. Removing a worker pool removes all worker nodes in the pool in all zones. This process might take a few minutes to complete.
-            ```sh
-            ibmcloud ks worker-pool rm --worker-pool <pool_name> --cluster <cluster_name_or_ID>
-            ```
-            {: pre}
-
-        2. Verify that the worker pool is removed.
-            ```sh
-            ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
-            ```
-            {: pre}
-
-    - **Deprecated: For stand-alone worker nodes**:
+    1. Remove the worker pool with the old machine type. Removing a worker pool removes all worker nodes in the pool in all zones. This process might take a few minutes to complete.
         ```sh
-        ibmcloud ks worker rm --cluster <cluster_name> --worker <worker_node>
+        ibmcloud ks worker-pool rm --worker-pool WORKER-POOL --cluster CLUSTER
+        ```
+        {: pre}
+
+    2. Verify that the worker pool is removed.
+        ```sh
+        ibmcloud ks worker-pool ls --cluster CLUSTER
         ```
         {: pre}
 
 6. Verify that the worker nodes are removed from your cluster.
     ```sh
-    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
+    ibmcloud ks worker ls --cluster CLUSTER
     ```
     {: pre}
 
@@ -808,12 +778,12 @@ As of 14 November 2019, a Fluentd component is created for your cluster only if 
 
 You can manage automatic updates of the Fluentd component in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the cluster.
 
-* Check whether automatic updates are enabled by running the `ibmcloud ks logging autoupdate get --cluster <cluster_name_or_ID>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_get).
+* Check whether automatic updates are enabled by running the `ibmcloud ks logging autoupdate get --cluster CLUSTER` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_get).
 * Disable automatic updates by running the `ibmcloud ks logging autoupdate disable` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_disable).
 * If automatic updates are disabled, but you need to change your configuration, you have two options:
     * Turn on automatic updates for your Fluentd pods.
         ```sh
-        ibmcloud ks logging autoupdate enable --cluster <cluster_name_or_ID>
+        ibmcloud ks logging autoupdate enable --cluster CLUSTER
         ```
         {: pre}
 
@@ -821,7 +791,7 @@ You can manage automatic updates of the Fluentd component in the following ways.
         Example command
 
         ```sh
-        ibmcloud ks logging config update --cluster <cluster_name_or_ID> --id <log_config_ID> --type <log_type> --force-update
+        ibmcloud ks logging config update --cluster CLUSTER --id LOG-CONFIG-ID --type LOG-TYPE --force-update
         ```
         {: pre}
 

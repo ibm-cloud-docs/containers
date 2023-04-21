@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-13"
+lastupdated: "2023-04-21"
 
 keywords: kubernetes, hardware, flavor, machine type, vm, bm
 
@@ -179,9 +179,6 @@ Every VM comes with an attached disk for storage of information that the VM need
 {: #vm-table}
 
 The following table shows available worker node flavors for classic and VPC clusters. Worker node flavors vary by cluster type, the zone where you want to create the cluster, the container platform, and the infrastructure provider that you want to use. To see the flavors available in your zone, run `ibmcloud ks flavors --zone <zone>`.
-
-Ubuntu 16 `x1c` or `x2c` worker node flavors are deprecated and no longer receive security updates. [Update your cluster to have Ubuntu 18 `x3c` worker nodes](/docs/containers?topic=containers-update#machine_type).
-{: deprecated}
 
 
 
