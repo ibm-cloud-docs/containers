@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-10"
+lastupdated: "2023-04-24"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -114,7 +114,7 @@ The Ingress message provides details of what operation is in progress or informa
 | `The Opaque secret field expired or will expire soon (ESSEF).` | For more information, see [Why does the Ingress status show an ESSEF error?](/docs/containers?topic=containers-ts-ingress-essef).|
 | `The secret status shows a warning (ESSWS).` | For more information, see [Why does the Ingress status show an ESSWS error?](/docs/containers?topic=containers-ts-ingress-essws).|
 | `The secret is not present on the cluster or is in the wrong namespace (ESSDNE).` | For more information, see [Why does the Ingress status show an ESSDNE error?](/docs/containers?topic=containers-ts-ingress-essdne).|
-| `The external provider for the given subdomain has authorization issues (ERRDSAISS).` | For more information, see [Why does the Ingress status show an ERRDSAISS error?](/docs/containerstopic=containers-ts-ingress-errdsaiss)?|
+| `The external provider for the given subdomain has authorization issues (ERRDSAISS).` | For more information, see [Why does the Ingress status show an ERRDSAISS error?](/docs/containers?topic=containers-ts-ingress-errdsaiss)|
 | `The subdomain has TLS secret issues (ERRDSISS).` | For more information, see [Why does the Ingress status show an ERRDSISS error?](/docs/containers?topic=containers-ts-ingress-errdsiss).|
 | `The subdomain has DNS resolution issues (ERRDRISS).` | For more information, see [Why does the Ingress status show an ERRDRISS error?](/docs/containers?topic=containers-ts-ingress-errdriss).|
 | `The subdomain has incorrect addresses registered (ERRDSIA).` | For more information, see [Why does the Ingress status show an ERRDSIA error?](/docs/containers?topic=containers-ts-ingress-errdsia).|
