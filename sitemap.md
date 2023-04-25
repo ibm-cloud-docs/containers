@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-04-24"
+lastupdated: "2023-04-25"
 
 keywords: containers
 subcollection: containers
@@ -9964,6 +9964,8 @@ subcollection: containers
 
 [Debugging worker nodes](/docs/containers?topic=containers-debug_worker_nodes#debug_worker_nodes)
 
+* [Check worker node notifications and maintenance updates](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-notifs)
+
 * [Quick steps to resolve worker node issues](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-quick)
 
 * [Debugging your worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-steps)
@@ -10032,11 +10034,7 @@ subcollection: containers
 
 [Troubleshooting worker nodes in `Critical` or `NotReady` state](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready)
 
-* [Before you begin](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-before)
-
-    * [Worker node notifications and maintenance](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-notifs)
-
-    * [Common causes](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-common)
+* [Check the common causes of worker node failures](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-common)
 
 * [Troubleshooting steps](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-steps)
 
