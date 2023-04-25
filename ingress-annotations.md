@@ -24,6 +24,9 @@ Modify the default settings for ALBs that run the Kubernetes Ingress image.
 Sometimes, you can customize routing for Ingress by adding [Kubernetes NGINX annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/){: external} (`nginx.ingress.kubernetes.io/<annotation>`). Kubernetes NGINX annotations are always applied to all service paths in the resource, and you can't specify service names within the annotations. Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are **not** supported.
 {: note}
 
+Kubernetes Ingress Controllers (ALBs) on clusters created on or after 31 January 2022 do not process Ingress resources that have snippet annotations (for example, `nginx.ingress.kubernetes.io/configuration-snippet`) by default as all new clusters are deployed with `allow-snippet-annotations: "false"` configuration in the ALB's ConfigMap. If you add any configuration snippets recommended here, you need to edit the ALB's ConfigMap (`kube-system/ibm-k8s-controller-config`) and change `allow-snippet-annotations: "false"` to `allow-snippet-annotations: "true"`.
+{: note}
+
 ## Adding a server port to a host header
 {: #add-sport-hheader}
 
@@ -574,8 +577,6 @@ An Ingress class associates a class name with an Ingress controller type. Use th
 Enforce authentication for your apps by configuring Ingress with [{{site.data.keyword.appid_full_notm}}](https://cloud.ibm.com/catalog/services/app-id){: external}.
 {: shortdesc}
 
-ALB OAuth Proxy add-on version 1.0.0 uses configuration snippet annotations (`nginx.ingress.kubernetes.io/configuration-snippet`) as part of the normal operation which is no longer supported by default for clusters created on or after 31 January 2022. All new clusters are deployed with `allow-snippet-annotations: "false"` configuration in the ALB's ConfigMap that prevents processing of Ingress resources having snippet annotations. You must upgrade the add-on to version 2.0.0 or edit the ALB's ConfigMap (`kube-system/ibm-k8s-controller-config`) and change `allow-snippet-annotations: "false"` to `allow-snippet-annotations: "true"`.
-{: important}
 
 1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.
 
@@ -650,8 +651,6 @@ ALB OAuth Proxy add-on version 1.0.0 uses configuration snippet annotations (`ng
         ```
         {: codeblock}
 
-        Kubernetes Ingress Controllers (ALBs) on clusters created on or after 31 January 2022 do not process Ingress resources that have snippet annotations (for example, `nginx.ingress.kubernetes.io/configuration-snippet`) by default as all new clusters are deployed with `allow-snippet-annotations: "false"` configuration in the ALB's ConfigMap. If you want to customize the `Authorization` header using the previous configuration snippets, you need to edit the ALB's ConfigMap (`kube-system/ibm-k8s-controller-config`) and change `allow-snippet-annotations: "false"` to `allow-snippet-annotations: "true"`.
-        {: note}
 
     3. Choose which tokens to send in the `Authorization` header to your app. For more information about ID and access tokens, see the [{{site.data.keyword.appid_short_notm}} documentation](/docs/appid?topic=appid-tokens){: external}.
         * To send only the `ID Token`, add the following annotation:
