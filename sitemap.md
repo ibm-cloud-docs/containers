@@ -9103,7 +9103,7 @@ subcollection: containers
 
 * [Version 1.1.0 (Beta)](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
 
-    * [Change log for patch update 1.1.0_1060, released 26 April 2023](/docs/containers?topic=containers-ca_changelog#110978_ca)
+    * [Change log for patch update 1.1.0_1060, released 26 April 2023](/docs/containers?topic=containers-ca_changelog#111060_ca)
 
     * [Change log for patch update 1.1.0_978, released 16 March 2023](/docs/containers?topic=containers-ca_changelog#110978_ca)
 
