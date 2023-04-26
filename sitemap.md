@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-04-25"
+lastupdated: "2023-04-26"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr23)
+
+    * [26 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr2623)
+
+        * Cluster autoscaler add-on version `1.1.0_1060`.
 
     * [24 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr2423)
 
@@ -3684,8 +3688,6 @@ subcollection: containers
     * [Updating the Calico ConfigMap](/docs/containers?topic=containers-kernel#calico-cm-mtu-update)
 
 * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
-
-    * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap-43)
 
 [Removing clusters](/docs/containers?topic=containers-remove#remove)
 
@@ -8599,7 +8601,7 @@ subcollection: containers
 
     * [1.5.1_3977_iks, released 12 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3977_iks)
 
-    * [1.5.1_3951_iks, released 4 Arpil 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3951_iks)
+    * [1.5.1_3951_iks, released 4 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3951_iks)
 
     * [1.5.1_3897_iks, released 24 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3897_iks)
 
@@ -9100,6 +9102,8 @@ subcollection: containers
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
 * [Version 1.1.0 (Beta)](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
+
+    * [Change log for patch update 1.1.0_1060, released 26 April 2023](/docs/containers?topic=containers-ca_changelog#111060_ca)
 
     * [Change log for patch update 1.1.0_978, released 16 March 2023](/docs/containers?topic=containers-ca_changelog#110978_ca)
 

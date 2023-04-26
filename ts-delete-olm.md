@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-04-05"
+lastupdated: "2023-04-26"
 
 keywords: kubernetes, OLM, operator lifecycle manager, delete olm, delete operator lifecycle manager components
 
@@ -73,7 +73,7 @@ If you want to continue using OLM components in your cluster, or you want to ins
 1. If there were no `clusterserviceversions` instances in the output of step 3, you are not using OLM. You can now get a list of the resources that were created by OLM and remove them.
 
 
-1. For each CRD in the following list, get the CRs across all namespaces.
+1. For each CRD in the following list, get the custom resources (CRs) across all namespaces.
     ```sh
     kubectl get catalogsources.operators.coreos.com -A
     kubectl get clusterserviceversions.operators.coreos.com -A

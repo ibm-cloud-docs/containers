@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-04-26"
 
 keywords: kubernetes, kernel
 
@@ -837,35 +837,49 @@ If you must use `hostPorts`, don't disable the port map plug-in.
 
 
 
-### Disabling the port map plug-in
-{: #calico-portmap-43}
-
-1. Edit the `default` Calico installation resource.
+1. Edit the `calico-config` ConfigMap resource.
     ```sh
-    kubectl edit installation default -n calico-system
+    kubectl edit cm calico-config -n kube-system
     ```
     {: pre}
 
-2. In the `spec.calicoNetwork` section, change the value of `hostPorts` to `Disabled`.
+1. In the `data.cni_network_config.plugins` section after the `kubernetes` plug-in, remove the `portmap` plug-in section. After you remove the `portmap` section, the configuration looks like the following:
     ```yaml
-    ...
-    spec:
-      calicoNetwork:
-        hostPorts: Disabled
-        ipPools:
-        - cidr: 172.30.0.0/16
-          encapsulation: IPIPCrossSubnet
-          natOutgoing: Enabled
-          nodeSelector: all()
-        mtu: 1480
-        nodeAddressAutodetectionV4:
-          interface: (^bond0$|^eth0$|^ens6$|^ens3$)
-      kubernetesProvider: OpenShift
-      registry: registry.ng.bluemix.net/armada-master/
-      variant: Calico
-    status:
-      variant: Calico
+    apiVersion: v1
+    data:
+      calico_backend: bird
+      cni_network_config: |-
+        {
+          "name": "k8s-pod-network",
+          "cniVersion": "0.3.1",
+          "plugins": [
+            {
+              "type": "calico",
+              ...
+            },
+            {
+              "type": "tuning",
+              ...
+            },
+            {
+              "type": "bandwidth",
+              ...
+            }
+          ]
+        }
+      typha_service_name: calico-typha
+      ...
     ```
-    {: screen}
+    {: codeblock}
 
-3. Save and close the file. Your changes are automatically applied.
+    Changing any other settings for the Calico plug-in in this ConfigMap is not supported.
+    {: important}
+
+1. Apply the change to your cluster by restarting all `calico-node` pods.
+    ```sh
+    kubectl rollout restart daemonset -n kube-system calico-node
+    ```
+    {: pre}
+
+
+
