@@ -2,10 +2,9 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-04-12"
+lastupdated: "2023-04-26"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
-
 subcollection: containers
 
 ---
@@ -91,7 +90,7 @@ TLS 1.0 and TLS 1.1 are no longer supported. Upgrade to the newer TLS version, o
 
 Updates `golang` to version `1.20.3`.
 
-### 1.5.1_3951_iks, released 4 Arpil 2023
+### 1.5.1_3951_iks, released 4 April 2023
 {: #1.5.1_3951_iks}
 
 - [CVE-2023-25809](https://nvd.nist.gov/vuln/detail/CVE-2023-25809){: external}
@@ -107,7 +106,7 @@ Updates `golang` version to `1.20.2`.
 ### 1.5.1_3863_iks, released 13 March 2023
 {: #1.5.1_3863_iks}
 
-Dependecy updates.
+Dependency updates.
 
 ### 1.5.1_3809_iks, released 23 February 2023
 {: #1.5.1_3809_iks}
@@ -167,7 +166,7 @@ Updates `golang` version to `1.20.2`.
 ### 1.4.0_3862_iks, released 13 March 2023
 {: #1.4.0_3862_iks}
 
-Dependecy updates.
+Dependency updates.
 
 ### 1.4.0_3808_iks, released 23 February 2023
 {: #1.4.0_3808_iks}

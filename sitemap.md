@@ -8601,7 +8601,7 @@ subcollection: containers
 
     * [1.5.1_3977_iks, released 12 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3977_iks)
 
-    * [1.5.1_3951_iks, released 4 Arpil 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3951_iks)
+    * [1.5.1_3951_iks, released 4 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3951_iks)
 
     * [1.5.1_3897_iks, released 24 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3897_iks)
 
