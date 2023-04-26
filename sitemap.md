@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-04-25"
+lastupdated: "2023-04-26"
 
 keywords: containers
 subcollection: containers
@@ -3684,8 +3684,6 @@ subcollection: containers
     * [Updating the Calico ConfigMap](/docs/containers?topic=containers-kernel#calico-cm-mtu-update)
 
 * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
-
-    * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap-43)
 
 [Removing clusters](/docs/containers?topic=containers-remove#remove)
 
