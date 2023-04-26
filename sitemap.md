@@ -266,6 +266,10 @@ subcollection: containers
 
 * [April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr23)
 
+    * [26 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr2623)
+
+        * Cluster autoscaler add-on version `1.1.0_1060`.
+
     * [24 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr2423)
 
         * Worker node fix packs `1.23.17_1576`, `1.24.13_1566`, `1.25.9_1543`, and `1.26.4_1535`.
@@ -9098,6 +9102,8 @@ subcollection: containers
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
 * [Version 1.1.0 (Beta)](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
+
+    * [Change log for patch update 1.1.0_1060, released 26 April 2023](/docs/containers?topic=containers-ca_changelog#110978_ca)
 
     * [Change log for patch update 1.1.0_978, released 16 March 2023](/docs/containers?topic=containers-ca_changelog#110978_ca)
 
