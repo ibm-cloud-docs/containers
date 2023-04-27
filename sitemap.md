@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-04-26"
+lastupdated: "2023-04-27"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr23)
+
+    * [27 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr2723)
+
+        * Ingress ALB version `1.6.4_4073_iks`, `1.5.1_4064_iks`, and `1.4.0_4062_iks`
 
     * [26 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr2623)
 
@@ -8589,6 +8593,8 @@ subcollection: containers
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
 
+    * [1.6.4_4073_iks, released 27 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_4073_iks)
+
     * [1.6.4_3976_iks, released 12 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3976_iks)
 
     * [1.6.4_3947_iks, released 4 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3947_iks)
@@ -8598,6 +8604,8 @@ subcollection: containers
     * [1.6.4_3864_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3864_iks)
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
+
+    * [1.5.1_4064_iks, released 27 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_4064_iks)
 
     * [1.5.1_3977_iks, released 12 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3977_iks)
 
@@ -8618,6 +8626,8 @@ subcollection: containers
     * [1.5.1_3536_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3536_iks)
 
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
+
+    * [1.4.0_4062_iks, released 27 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_4062_iks)
 
     * [1.4.0_3978_iks, released 12 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_3978_iks)
 

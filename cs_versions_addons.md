@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-04-26"
+lastupdated: "2023-04-27"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 subcollection: containers
@@ -47,6 +47,12 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ## Version 1.6.4
 {: #1_6_4}
 
+### 1.6.4_4073_iks, released 27 April 2023
+{: #1.6.4_4073_iks}
+
+- [CVE-2023-1255](https://nvd.nist.gov/vuln/detail/CVE-2023-1255){: external}
+- [CVE-2023-28484](https://nvd.nist.gov/vuln/detail/CVE-2023-28484){: external}
+- [CVE-2023-29469](https://nvd.nist.gov/vuln/detail/CVE-2023-29469){: external}
 
 ### 1.6.4_3976_iks, released 12 April 2023
 {: #1.6.4_3976_iks}
@@ -84,6 +90,16 @@ TLS 1.0 and TLS 1.1 are no longer supported. Upgrade to the newer TLS version, o
 
 ## Version 1.5.1
 {: #1_5_1}
+
+### 1.5.1_4064_iks, released 27 April 2023
+{: #1.5.1_4064_iks}
+
+- [CVE-2023-27533](https://nvd.nist.gov/vuln/detail/CVE-2023-27533){: external}
+- [CVE-2023-27534](https://nvd.nist.gov/vuln/detail/CVE-2023-27534){: external}
+- [CVE-2023-27535](https://nvd.nist.gov/vuln/detail/CVE-2023-27535){: external}
+- [CVE-2023-27536](https://nvd.nist.gov/vuln/detail/CVE-2023-27536){: external}
+- [CVE-2023-27537](https://nvd.nist.gov/vuln/detail/CVE-2023-27537){: external}
+- [CVE-2023-27538](https://nvd.nist.gov/vuln/detail/CVE-2023-27538){: external}
 
 ### 1.5.1_3977_iks, released 12 April 2023
 {: #1.5.1_3977_iks}
@@ -143,6 +159,15 @@ Initial release of `1.5.1`. For more information, see the [community release doc
 ## Version 1.4.0
 {: #1_4_0}
 
+### 1.4.0_4062_iks, released 27 April 2023
+{: #1.4.0_4062_iks}
+
+- [CVE-2023-27533](https://nvd.nist.gov/vuln/detail/CVE-2023-27533){: external}
+- [CVE-2023-27534](https://nvd.nist.gov/vuln/detail/CVE-2023-27534){: external}
+- [CVE-2023-27535](https://nvd.nist.gov/vuln/detail/CVE-2023-27535){: external}
+- [CVE-2023-27536](https://nvd.nist.gov/vuln/detail/CVE-2023-27536){: external}
+- [CVE-2023-27537](https://nvd.nist.gov/vuln/detail/CVE-2023-27537){: external}
+- [CVE-2023-27538](https://nvd.nist.gov/vuln/detail/CVE-2023-27538){: external}
 
 ### 1.4.0_3978_iks, released 12 April 2023
 {: #1.4.0_3978_iks}
