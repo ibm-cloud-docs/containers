@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-27"
+lastupdated: "2023-05-02"
 
 keywords: kubernetes, release notes
 
@@ -26,6 +26,13 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
+## May 2023
+{: #containers-may23}
+
+
+
+{{site.data.keyword.cos_full_notm}} plug-in version `2.2.14`
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 ## April 2023
 {: #containers-apr23}
