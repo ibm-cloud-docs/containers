@@ -266,6 +266,8 @@ subcollection: containers
 
 * [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
 
+* [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
+
     * [2 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0223)
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.14`
