@@ -31,13 +31,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
-
-## May 2023
-{: #containers-may23}
-
-### 2 May 2023
-{: #containers-may0223}
-
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.14`
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
