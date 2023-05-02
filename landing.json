@@ -1,6 +1,6 @@
 {
     "title": "IBM Cloud Kubernetes Service",
-    "lastupdated": "2023-04-28",
+    "lastupdated": "2023-05-02",
     "introduction": "Explore the capabilities of IBM Cloud Kubernetes Service and discover the tools to automate, isolate, secure, manage, and monitor your workloads. ",
     "section_devtools": {
       "api": "/apidocs/kubernetes", 
