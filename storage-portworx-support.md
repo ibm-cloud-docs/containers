@@ -15,7 +15,7 @@ subcollection: containers
 
 
 ## Getting help and support
-{: #storage-portworx-support}
+{: #storage_portworx_support}
 
 Contact Portworx support by using one of the following methods.
 
