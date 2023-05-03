@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-14"
+lastupdated: "2023-05-03"
 
 keywords: kubernetes, containers
 
@@ -435,7 +435,7 @@ By default, all {{site.data.keyword.cloud_notm}} storage solutions automatically
 Depending on the type of storage that you choose, you can set up additional encryption with {{site.data.keyword.keymanagementservicelong_notm}} to protect your data in transit and at rest with your own encryption key.
 - [VPC Block Storage](/docs/containers?topic=containers-vpc-block#vpc-block-encryption)
 - [{{site.data.keyword.cos_full_notm}}](/docs/cloud-object-storage?topic=cloud-object-storage-encryption)
-- [Portworx](/docs/containers?topic=containers-portworx#encrypt_volumes)
+- [Portworx](/docs/containers?topic=containers-storage-portworx-encyrption)
 
 You can also use an {{site.data.keyword.cloud_notm}} database service, such as [{{site.data.keyword.cloudant}} NoSQL DB](/docs/Cloudant?topic=Cloudant-getting-started-with-cloudant), to persist data in a managed database outside the cluster. Data that is stored with a cloud database service can be accessed across clusters, zones, and regions. For security-related information, see the database service-specific {{site.data.keyword.cloud_notm}} documentation.
 

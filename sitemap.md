@@ -5662,9 +5662,7 @@ subcollection: containers
 
     * [How does Portworx work?](/docs/containers?topic=containers-storage_portworx_about#about-px-work)
 
-    * [What worker node flavor in {{site.data.keyword.containerlong_notm}} is the correct one for Portworx?](/docs/containers?topic=containers-storage_portworx_about#about-px-flavors)
-
-    * [What if I want to run Portworx in a classic cluster with non-SDS worker nodes?](/docs/containers?topic=containers-storage_portworx_about#about-px-non-sds)
+    * [What are the requirements to run Portworx?](/docs/containers?topic=containers-storage_portworx_about#about-px-requirments)
 
     * [How can I make sure that my data is stored highly available?](/docs/containers?topic=containers-storage_portworx_about#about-px-ha)
 
@@ -5677,6 +5675,8 @@ subcollection: containers
 * [Planning your Portworx setup](/docs/containers?topic=containers-storage-portworx-plan#storage-portworx-plan)
 
 * [Limitations](/docs/containers?topic=containers-storage-portworx-plan#portworx_limitations)
+
+* [Overview of the Portworx lifecycle](/docs/containers?topic=containers-storage-portworx-plan#portowrx_lifecycle)
 
     * [Creating a secret to store the KMS credentials](/docs/containers?topic=containers-storage-portworx-plan#px_create_km_secret)
 
@@ -5694,7 +5694,7 @@ subcollection: containers
 
     * [Using the Portworx key-value database](/docs/containers?topic=containers-storage-portworx-kv-store#portworx-kvdb)
 
-    * [Optional: Setting up a Databases for etcd service instance](/docs/containers?topic=containers-storage-portworx-kv-store#databases-for-etcd)
+    * [Optional: Setting up a Databases for etcd service instance](/docs/containers?topic=containers-storage-portworx-kv-store#optional-setting-up-a-databases-for-etcd-service-instance)
 
 [Understanding encryption for Portworx](/docs/containers?topic=containers-storage-portworx-encryption#storage-portworx-encryption)
 

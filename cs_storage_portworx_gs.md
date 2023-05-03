@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-05-03"
 
 keywords: kubernetes, local persistent storage
 
@@ -159,7 +159,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
          
     `parameters.secure`
     :    Specify whether you want to encrypt the data in your volume with {{site.data.keyword.keymanagementservicelong_notm}}. Choose between the following options: 
-         - **true**: Enter `true` to enable encryption for your Portworx volumes. To encrypt volumes, you must have an {{site.data.keyword.keymanagementservicelong_notm}} service instance and a Kubernetes secret that holds your customer root key. For more information about how to set up encryption for Portworx volumes, see [Encrypting your Portworx volumes](/docs/containers?topic=containers-portworx#encrypt_volumes). 
+         - **true**: Enter `true` to enable encryption for your Portworx volumes. To encrypt volumes, you must have an {{site.data.keyword.keymanagementservicelong_notm}} service instance and a Kubernetes secret that holds your customer root key. For more information about how to set up encryption for Portworx volumes, see [Encrypting your Portworx volumes](/docs/containers?topic=containers-storage-portworx-encyrption). 
          - **false**: When you enter `false`, your Portworx volumes are not encrypted.
 
     :    If you don't specify this option, your Portworx volumes are not encrypted by default.

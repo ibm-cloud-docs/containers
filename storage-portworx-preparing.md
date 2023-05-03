@@ -32,7 +32,7 @@ Keep in mind that the networking of non-SDS worker nodes in classic clusters is 
 
 1. [Install the {{site.data.keyword.cloud_notm}} Block Volume Attacher plug-in](/docs/containers?topic=containers-utilities#block_storage_attacher).
 2. [Manually add block storage](/docs/containers?topic=containers-utilities#manual_block) to your worker nodes. For highly available data storage, Portworx requires at least 3 worker nodes with raw and unformatted block storage.
-3. If you want to use [journal devices](https://docs.portworx.com/install-with-other/operate-and-maintain/performance-and-tuning/tuning/){: external}, choose from the following options.
+3. If you want to use [journal devices](https://docs.portworx.com/install-with-other/operate-and-maintain/performance-and-tuning/tuning/){: external}, choose from the following options. Journal devices allow Portworx to write logs directly to a local disk on your worker node.
     - Attach an additional disk to at least 3 worker nodes to use for the journal. [Manually add](/docs/containers?topic=containers-utilities#manual_block) a 3 GB block storage device to a worker node in your cluster and find the device path. To find the device path after attaching the disk, log in to your worker node and run `lsblk` to list the devices on that node.
     - Select one of the block storage devices that you added earlier to use for the journal and find the device path. To find the device path after attaching the disk, log in to your worker node and run `lsblk` to list the devices on that node.
     - Let Portworx automatically create a journal partition during installation.
@@ -46,7 +46,7 @@ Keep in mind that the networking of non-SDS worker nodes in classic clusters is 
 {: #px-create-vpc-volumes}
 
 1. Follow the [steps](/docs/containers?topic=containers-utilities#vpc_cli_attach) to create the {{site.data.keyword.block_storage_is_short}} instances and attach these to each worker node that you want to add to the Portworx storage layer. For highly available data storage, Portworx requires at least 3 worker nodes with raw and unformatted block storage.
-2. If you want to use [journal devices](https://docs.portworx.com/install-with-other/operate-and-maintain/performance-and-tuning/tuning/){: external}, choose from the following options.
+2. If you want to use [journal devices](https://docs.portworx.com/install-with-other/operate-and-maintain/performance-and-tuning/tuning/){: external}, choose from the following options. Journal devices allow Portworx to write logs directly to a local disk on your worker node.
     - [Attach](/docs/containers?topic=containers-utilities#vpc_cli_attach) an additional 3 GB disk to at least 3 worker nodes in your cluster and find the device path. To find the device path after you attach the disk, log in to your worker node and run `lsblk` to list the devices on that node.
     - Select a device on a worker node where you want Portworx to create the journal.
 3. If you want to use a specific device for the internal Portworx KVDB, choose from the following options.
@@ -94,7 +94,7 @@ To enable Portworx to pull container images from {{site.data.keyword.registrysho
     {: screen}
 
 13. Click **Update**
-14. [Install Portworx in your cluster](#install_portworx)
+14. [Install Portworx in your cluster](/docs/containers?topic=containers-storage-install-portworx)
 
 
 
