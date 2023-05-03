@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-01"
+lastupdated: "2023-05-03"
 
 keywords: file, debug, help
 
@@ -190,8 +190,7 @@ If you use a `kubectl` CLI version that does not match at least the major.minor 
     {: pre}
 
 
-3. If a more recent version is available, install the new version. For instructions, see [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx).
-
+3. If a more recent version is available, install the new version. For instructions, see [Updating Portworx in your cluster](/docs/containers?topic=containers-storage-portworx-update).
 
 
 
