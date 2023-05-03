@@ -259,7 +259,7 @@ toc:
               - storage-portworx-recovery.md
               - storage-portworx-backup.md
               - storage-portworx-removing.md
-              - storage-portworx-support.md 
+              - storage-portworx-support.md
           - cs_storage_portworx_backup_gs.md
           - cs_storage_portworx_gs.md
           - storage-br.md
