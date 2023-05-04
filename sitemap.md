@@ -6572,12 +6572,6 @@ subcollection: containers
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
 
-[Comparing the CIS Kubernetes and the Compliance Operator benchmarks](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison)
-
-* [Major differences](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison-major)
-
-* [Minor differences](/docs/containers?topic=containers-benchmark-comparison#benchmark-comparison-minor)
-
 
 ### Version 1.26
 {: #sitemap_version_126}
