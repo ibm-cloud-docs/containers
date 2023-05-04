@@ -9740,8 +9740,6 @@ subcollection: containers
 
 * [`eu-de`](/docs/containers?topic=containers-vpc-flavors#eu-de)
 
-* [`eu-fr`](/docs/containers?topic=containers-vpc-flavors#eu-fr)
-
 * [`eu-gb`](/docs/containers?topic=containers-vpc-flavors#eu-gb)
 
 * [`jp-osa`](/docs/containers?topic=containers-vpc-flavors#jp-osa)
