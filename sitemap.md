@@ -266,7 +266,11 @@ subcollection: containers
 
 * [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
 
-    * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.14`
+    * [4 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0423)
+
+        * Ingress ALB version `1.6.4_4117_iks`, `1.5.1_4113_iks`, and `1.4.0_4114_iks`
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.14`
 
 * [April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr23)
 
@@ -8598,6 +8602,8 @@ subcollection: containers
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
 
+    * [1.6.4_4117_iks, released 4 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_4117_iks)
+
     * [1.6.4_4073_iks, released 27 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_4073_iks)
 
     * [1.6.4_3976_iks, released 12 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3976_iks)
@@ -8609,6 +8615,8 @@ subcollection: containers
     * [1.6.4_3864_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3864_iks)
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
+
+    * [1.5.1_4113_iks, released 4 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_4113_iks)
 
     * [1.5.1_4064_iks, released 27 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_4064_iks)
 
@@ -8631,6 +8639,8 @@ subcollection: containers
     * [1.5.1_3536_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3536_iks)
 
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
+
+    * [1.4.0_4114_iks, released 4 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_4114_iks)
 
     * [1.4.0_4062_iks, released 27 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_4062_iks)
 

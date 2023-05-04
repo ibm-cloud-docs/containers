@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-03"
+lastupdated: "2023-05-04"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## May 2023
 {: #containers-may23}
+
+
+
+### 4 May 2023
+{: #containers-may0423}
+{: release-note}
+
+Ingress ALB version `1.6.4_4117_iks`, `1.5.1_4113_iks`, and `1.4.0_4114_iks`
+:   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
 
 
 
