@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-05-03"
+lastupdated: "2023-05-04"
 
 keywords: containers
 subcollection: containers
@@ -9739,6 +9739,8 @@ subcollection: containers
 * [`ca-tor`](/docs/containers?topic=containers-vpc-flavors#ca-tor)
 
 * [`eu-de`](/docs/containers?topic=containers-vpc-flavors#eu-de)
+
+* [`eu-fr`](/docs/containers?topic=containers-vpc-flavors#eu-fr)
 
 * [`eu-gb`](/docs/containers?topic=containers-vpc-flavors#eu-gb)
 
