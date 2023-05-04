@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-03"
+lastupdated: "2023-05-04"
 
 keywords: kubernetes, encrypt, security, kms, root key, crk
 
@@ -374,8 +374,6 @@ You can manage the encryption of the worker nodes by enabling a KMS provider at 
     {: important}
 
 The encryption for the disks of the worker nodes in your worker pool are now managed by the root key in your KMS provider. If you created a cluster, the worker pool is the `default` worker pool.
-
-
 
 
 
