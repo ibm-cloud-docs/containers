@@ -5664,31 +5664,31 @@ subcollection: containers
 
 * [What is software-defined storage (SDS)?](/docs/containers?topic=containers-storage_portworx_about#about-px-sds)
 
-    * [How does Portworx work?](/docs/containers?topic=containers-storage_portworx_about#about-px-work)
+* [How does Portworx work?](/docs/containers?topic=containers-storage_portworx_about#about-px-work)
 
-    * [What are the requirements to run Portworx?](/docs/containers?topic=containers-storage_portworx_about#about-px-requirments)
+* [What are the requirements to run Portworx?](/docs/containers?topic=containers-storage_portworx_about#about-px-requirments)
 
-    * [How can I make sure that my data is stored highly available?](/docs/containers?topic=containers-storage_portworx_about#about-px-ha)
+* [How can I make sure that my data is stored highly available?](/docs/containers?topic=containers-storage_portworx_about#about-px-ha)
 
-    * [What volume topology offers the best performance for my pods?](/docs/containers?topic=containers-storage_portworx_about#about-px-topology)
+* [What volume topology offers the best performance for my pods?](/docs/containers?topic=containers-storage_portworx_about#about-px-topology)
 
-    * [Can I install Portworx in a private cluster?](/docs/containers?topic=containers-storage_portworx_about#about-px-private)
+* [Can I install Portworx in a private cluster?](/docs/containers?topic=containers-storage_portworx_about#about-px-private)
 
 * [What's next?](/docs/containers?topic=containers-storage_portworx_about#about-px-next)
 
-* [Planning your Portworx setup](/docs/containers?topic=containers-storage_portworx_plan#storage_portworx_plan)
+[Planning your Portworx setup](/docs/containers?topic=containers-storage_portworx_plan#storage_portworx_plan)
 
 * [Limitations](/docs/containers?topic=containers-storage_portworx_plan#portworx_limitations)
 
 * [Overview of the Portworx lifecycle](/docs/containers?topic=containers-storage_portworx_plan#portowrx_lifecycle)
 
-    * [Creating a secret to store the KMS credentials](/docs/containers?topic=containers-storage_portworx_plan#px_create_km_secret)
+* [Creating a secret to store the KMS credentials](/docs/containers?topic=containers-storage_portworx_plan#px_create_km_secret)
 
 [Preparing your cluster for Portworx](/docs/containers?topic=containers-storage_portworx_preparing#storage_portworx_preparing)
 
-    * [Classic clusters](/docs/containers?topic=containers-storage_portworx_preparing#px-create-classic-volumes)
+* [Classic clusters](/docs/containers?topic=containers-storage_portworx_preparing#px-create-classic-volumes)
 
-    * [VPC clusters](/docs/containers?topic=containers-storage_portworx_preparing#px-create-vpc-volumes)
+* [VPC clusters](/docs/containers?topic=containers-storage_portworx_preparing#px-create-vpc-volumes)
 
 * [Private only clusters: Copying the `ImagePullSecret` to the `kube-system` namespace from the Kubernetes dashboard](/docs/containers?topic=containers-storage_portworx_preparing#vpc-image-pull-px)
 
@@ -5696,7 +5696,7 @@ subcollection: containers
 
 * [Setting up a key-value store for Portworx metadata](/docs/containers?topic=containers-storage_portworx_kv_store#portworx_database)
 
-    * [Using the Portworx key-value database](/docs/containers?topic=containers-storage_portworx_kv_store#portworx-kvdb)
+* [Using the Portworx key-value database](/docs/containers?topic=containers-storage_portworx_kv_store#portworx-kvdb)
 
     * [Optional: Setting up a Databases for etcd service instance](/docs/containers?topic=containers-storage_portworx_kv_store#optional-setting-up-a-databases-for-etcd-service-instance)
 
@@ -5722,37 +5722,39 @@ subcollection: containers
 
 * [Exploring other Portworx features](/docs/containers?topic=containers-storage_portworx_update#features)
 
-* [Setting up disaster recovery with Portworx](/docs/containers?topic=containers-storage_portworx_recovery#storage_portworx_recovery)
+[Setting up disaster recovery with Portworx](/docs/containers?topic=containers-storage_portworx_recovery#storage_portworx_recovery)
 
-* [Backing up and restoring apps and data with PX-Backup](/docs/containers?topic=containers-storage_portworx_backup#storage_portworx_backup)
+[Backing up and restoring apps and data with PX-Backup](/docs/containers?topic=containers-storage_portworx_backup#storage_portworx_backup)
 
-    * [Installing PX-Backup on an {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-storage_portworx_backup#px-backup-install)
+* [Installing PX-Backup on an {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-storage_portworx_backup#px-backup-install)
 
-    * [Verifying your PX-Backup installation](/docs/containers?topic=containers-storage_portworx_backup#px-backup-verify)
+* [Verifying your PX-Backup installation](/docs/containers?topic=containers-storage_portworx_backup#px-backup-verify)
 
-    * [Logging in to the PX-Backup console](/docs/containers?topic=containers-storage_portworx_backup#px-backup-ui)
+* [Logging in to the PX-Backup console](/docs/containers?topic=containers-storage_portworx_backup#px-backup-ui)
 
-    * [Adding a backup location to your PX-Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-storage)
+* [Adding a backup location to your PX-Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-storage)
 
-    * [Adding an {{site.data.keyword.containerlong_notm}} cluster to your PX-Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-cluster)
+* [Adding an {{site.data.keyword.containerlong_notm}} cluster to your PX-Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-cluster)
 
-    * [Backing up and restoring cluster data with PX-Backup](/docs/containers?topic=containers-storage_portworx_backup#px-backup-and-restore)
+* [Installing Stork on a non-Portworx cluster](/docs/containers?topic=containers-storage_portworx_backup#px-backup-stork)
+
+* [Backing up and restoring cluster data with PX-Backup](/docs/containers?topic=containers-storage_portworx_backup#px-backup-and-restore)
 
     * [Upgrading PX-Backup](/docs/containers?topic=containers-storage_portworx_backup#px-backup-upgrade)
 
-* [Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-storage_portworx_removing#storage_portworx_removing)
+[Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-storage_portworx_removing#storage_portworx_removing)
 
-    * [Removing Portworx volumes from apps](/docs/containers?topic=containers-storage_portworx_removing#remove_pvc_apps_volumes)
+* [Removing Portworx volumes from apps](/docs/containers?topic=containers-storage_portworx_removing#remove_pvc_apps_volumes)
 
-    * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-storage_portworx_removing#remove_storage_node_cluster-px)
+* [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-storage_portworx_removing#remove_storage_node_cluster-px)
 
-    * [Removing the Portworx DaemonSet](/docs/containers?topic=containers-storage_portworx_removing#remove_px_daemonset)
+* [Removing the Portworx DaemonSet](/docs/containers?topic=containers-storage_portworx_removing#remove_px_daemonset)
 
-    * [Removing Portworx from your cluster](/docs/containers?topic=containers-storage_portworx_removing#remove_portworx)
+* [Removing Portworx from your cluster](/docs/containers?topic=containers-storage_portworx_removing#remove_portworx)
 
-* [Getting help and support](/docs/containers?topic=containers-storage_portworx_support#storage_portworx_support)
+[Getting help and support](/docs/containers?topic=containers-storage_portworx_support#storage_portworx_support)
 
-    * [Gathering logs](/docs/containers?topic=containers-storage_portworx_support#portworx_logs)
+* [Gathering logs](/docs/containers?topic=containers-storage_portworx_support#portworx_logs)
 
 [Getting started with PX-Backup](/docs/containers?topic=containers-getting-started-with-px-backup#getting-started-with-px-backup)
 
