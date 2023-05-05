@@ -266,6 +266,8 @@ subcollection: containers
 
 * [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
 
+    * [5 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0523)
+
     * [4 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0423)
 
         * Ingress ALB version `1.6.4_4117_iks`, `1.5.1_4113_iks`, and `1.4.0_4114_iks`
