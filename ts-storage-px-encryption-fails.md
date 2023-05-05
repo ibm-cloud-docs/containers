@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-03"
+lastupdated: "2023-05-05"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -55,7 +55,7 @@ Edit your Kubernetes secret to include the correct endpoint for your KMS provide
     ```
     {: pre}
 
-3. [Edit the Kubernetes secret that you created to include the correct endpoint for your KMS provider](/docs/openshift?topic=openshift-portworx#px_create_km_secret).
+3. [Edit the Kubernetes secret that you created to include the correct endpoint for your KMS provider](/docs/containers?topic=containers-storage_portworx_encryption).
     ```sh
     kubectl edit <secret-name> -n portworx
     ```

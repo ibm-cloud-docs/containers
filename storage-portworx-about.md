@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-04"
+lastupdated: "2023-05-05"
 
 keywords: portworx, kubernetes
 
@@ -37,7 +37,7 @@ Portworx also comes with additional features that you can use for your stateful 
 
 Review the requirements to [install Portworx](https://docs.portworx.com/install-portworx/prerequisites/){: external}.
 
-For production environments, choose one of the [sds worker node flavors](/docs/containerstopic=containers-planning_worker_nodes#sds-table) for best performance. 
+For production environments, choose one of the [sds worker node flavors](/docs/containers?topic=containers-planning_worker_nodes#sds-table) for best performance. 
 {: tip}
 
 ## How can I make sure that my data is stored highly available?
@@ -68,7 +68,7 @@ If you want to install Portworx in a cluster that doesn't have VRF or access to 
 ## What's next?
 {: #about-px-next}
 
-All set? Let's start with [creating a cluster with an SDS worker pool of at least three worker nodes](/docs/containers?topic=containers-clusters). If you want to include non-SDS worker nodes into your Portworx cluster, [add raw block storage](/docs/containers?topic=containers-utilities#manual_block) to each worker node. After your cluster is prepared, [install Portworx](/docs/containers?topic=containers-storage-install-portworx) in your cluster and create your first hyper-converged storage cluster.
+All set? Let's start with [creating a cluster with an SDS worker pool of at least three worker nodes](/docs/containers?topic=containers-clusters). If you want to include non-SDS worker nodes into your Portworx cluster, [add raw block storage](/docs/containers?topic=containers-utilities#manual_block) to each worker node. After your cluster is prepared, [install Portworx](/docs/containers?topic=containers-storage-portworx-deploy) in your cluster and create your first hyper-converged storage cluster.
 
 
 

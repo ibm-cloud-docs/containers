@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-13"
+lastupdated: "2023-05-05"
 
 keywords: kubernetes, infrastructure, rbac, policy, http2, quota, app protocol, application protocol
 
@@ -98,7 +98,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Category | Description |
 | -------- | ----------- |
 | Volume instances | You can have a total of 250 IBM Cloud infrastructure file and block storage volumes per account. If you mount more than this amount, you might see an "out of capacity" message when you provision persistent volumes. For more FAQs, see the [file](/docs/FileStorage?topic=FileStorage-file-storage-faqs#provision) and [block](/docs/BlockStorage?topic=BlockStorage-block-storage-faqs#authlimit) storage docs. If you want to mount more volumes, [contact IBM Support](/docs/get-support?topic=get-support-using-avatar). In your support ticket, include your account ID and the new file or block storage volume quota that you want.  |
-| Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-portworx#portworx_limitations). |
+| Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-storage-portworx-). |
 {: caption="Classic cluster storage limitations"}
 
 
@@ -152,7 +152,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Storage class for profile sizes | For more information, see [available volume profiles](/docs/vpc?topic=vpc-block-storage-profiles). |
 | Supported types | You can set up {{site.data.keyword.block_storage_is_short}}, {{site.data.keyword.cos_full_notm}} and {{site.data.keyword.databases-for}} only. \n - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block) is available as a cluster add-on. Make sure to [attach a public gateway to all the VPC subnets](/docs/vpc?topic=vpc-creating-vpc-resources-with-cli-and-api&interface=cli#attach-public-gateway-cli) that the cluster uses so that you can provision {{site.data.keyword.block_storage_is_short}}. \n - [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_install) is available as a Helm chart.  |
 | Volume attachments | See [Volume attachment limits](/docs/vpc?topic=vpc-attaching-block-storage#vol-attach-limits).|
-| Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-portworx#portworx_limitations). |
+| Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-storage-portowrx-plan#portworx_limitations). |
 | {{site.data.keyword.block_storage_is_short}} | The default storage class in VPC clusters can not be changed. However, you can [create a custom storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class). |
 {: caption="VPC cluster storage limitations"}
 

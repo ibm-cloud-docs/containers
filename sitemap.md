@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-05-04"
+lastupdated: "2023-05-05"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
+
+    * [5 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0523)
 
     * [4 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0423)
 
@@ -5755,26 +5757,6 @@ subcollection: containers
 [Getting help and support](/docs/containers?topic=containers-storage_portworx_support#storage_portworx_support)
 
 * [Gathering logs](/docs/containers?topic=containers-storage_portworx_support#portworx_logs)
-
-[Getting started with PX-Backup](/docs/containers?topic=containers-getting-started-with-px-backup#getting-started-with-px-backup)
-
-* [Getting help and support](/docs/containers?topic=containers-getting-started-with-px-backup#portworx_help)
-
-[Getting started with Portworx](/docs/containers?topic=containers-getting-started-with-portworx#getting-started-with-portworx)
-
-* [Verifying your Portworx installation](/docs/containers?topic=containers-getting-started-with-portworx#px-verify-installation-px)
-
-* [Creating a Portworx volume](/docs/containers?topic=containers-getting-started-with-portworx#px-add-storage)
-
-* [Mounting the volume to your app](/docs/containers?topic=containers-getting-started-with-portworx#px-mount-pvc)
-
-* [Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-getting-started-with-portworx#portworx_cleanup_volumes)
-
-    * [Removing Portworx volumes from apps](/docs/containers?topic=containers-getting-started-with-portworx#remove_pvc)
-
-    * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-getting-started-with-portworx#remove_storage_node_cluster)
-
-* [Getting help and support](/docs/containers?topic=containers-getting-started-with-portworx#portworx_help_and_support)
 
 [Backing up and restoring storage data](/docs/containers?topic=containers-storage_br#storage_br)
 
