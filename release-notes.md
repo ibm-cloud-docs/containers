@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-04"
+lastupdated: "2023-05-05"
 
 keywords: kubernetes, release notes
 
@@ -4981,7 +4981,7 @@ Tuning network performance
 
 
 Use the internal KVDB in Portworx
-:   Automatically set up a key-value database (KVDB) during the Portworx installation to store your Portworx metadata. For more information, see [Using the Portworx KVDB](/docs/containers?topic=containers-storage-portworx-kv-store).
+:   Automatically set up a key-value database (KVDB) during the Portworx installation to store your Portworx metadata. For more information, see [Using the Portworx KVDB](/docs/containers?topic=containers-storage_portworx_kv_store).
 
 ## November 2019
 {: #containers-nov19}
