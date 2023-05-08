@@ -5698,7 +5698,7 @@ subcollection: containers
 
 * [VPC clusters](/docs/containers?topic=containers-storage_portworx_preparing#px-create-vpc-volumes)
 
-* [Private only clusters: Copying the `ImagePullSecret` to the `kube-system` namespace from the Kubernetes dashboard](/docs/containers?topic=containers-storage_portworx_preparing#vpc-image-pull-px)
+* [Satellite clusters](/docs/containers?topic=containers-storage_portworx_preparing#px-create-satellite-volumes)
 
 [Setting up the Portworx key-value store](/docs/containers?topic=containers-storage_portworx_kv_store#storage_portworx_kv_store)
 
@@ -5727,6 +5727,8 @@ subcollection: containers
 [Updating Portworx in your cluster](/docs/containers?topic=containers-storage_portworx_update#storage_portworx_update)
 
 * [VPC: Updating worker nodes with Portworx volumes](/docs/containers?topic=containers-storage_portworx_update#portworx_vpc_up)
+
+* [Migrating Red Hat Enterprise Linux versions](/docs/containers?topic=containers-storage_portworx_update#px-rhel-migrate)
 
 * [Exploring other Portworx features](/docs/containers?topic=containers-storage_portworx_update#features)
 
