@@ -266,9 +266,15 @@ subcollection: containers
 
 * [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
 
+    * [9 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0923)
+
+        * Worker node fix packs `1.24.13_1567`, `1.25.9_1544`, `1.26.4_1536`, and `1.27.1_1521`.
+
     * [4 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0423)
 
         * Ingress ALB version `1.6.4_4117_iks`, `1.5.1_4113_iks`, and `1.4.0_4114_iks`
+
+    * [2 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0223)
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.14`
 
@@ -277,6 +283,8 @@ subcollection: containers
     * [27 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr2723)
 
         * Ingress ALB version `1.6.4_4073_iks`, `1.5.1_4064_iks`, and `1.4.0_4062_iks`
+
+        * Master fix packs `1.23.17_1576`, `1.24.13_1566`, `1.25.9_1543`, and `1.26.4_1535`.
 
     * [26 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr2623)
 

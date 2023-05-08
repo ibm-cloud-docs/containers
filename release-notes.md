@@ -30,6 +30,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-may23}
 
 
+### 9 May 2023
+{: #containers-may0923}
+{: release-note}
+
+
+
+Worker node fix packs `1.24.13_1567`, `1.25.9_1544`, `1.26.4_1536`, and `1.27.1_1521`.
+:   For more information, see the change logs: [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125), [1.26](/docs/containers?topic=containers-changelog_126), and [1.27](/docs/containers?topic=containers-changelog_127).
+
+
+
 
 
 
@@ -43,6 +54,12 @@ Ingress ALB version `1.6.4_4117_iks`, `1.5.1_4113_iks`, and `1.4.0_4114_iks`
 
 
 
+### 2 May 2023
+{: #containers-may0223}
+{: release-note}
+
+
+
 
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.14`
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
@@ -51,14 +68,17 @@ Ingress ALB version `1.6.4_4117_iks`, `1.5.1_4113_iks`, and `1.4.0_4114_iks`
 {: #containers-apr23}
 
 
-
 ### 27 April 2023
 {: #containers-apr2723}
 {: release-note}
 
+
+  
 Ingress ALB version `1.6.4_4073_iks`, `1.5.1_4064_iks`, and `1.4.0_4062_iks`
 :   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
-
+  
+Master fix packs `1.23.17_1576`, `1.24.13_1566`, `1.25.9_1543`, and `1.26.4_1535`.
+:   For more information, see the change logs: [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125), and [1.26](/docs/containers?topic=containers-changelog_126).
 
 
 ### 26 April 2023
