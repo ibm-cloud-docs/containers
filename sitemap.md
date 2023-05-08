@@ -10350,6 +10350,8 @@ subcollection: containers
 
 [Why does the Ingress status show an ESSSMI error?](/docs/containers?topic=containers-ts-ingress-esssmi#ts-ingress-esssmi)
 
+[Why does the Ingress status show an `ESSSMINF` error?](/docs/containers?topic=containers-ts-ingress-esssminf#ts-ingress-esssminf)
+
 [Why does the Ingress status show an ESSSMG error?](/docs/containers?topic=containers-ts-ingress-esssmg#ts-ingress-esssmg)
 
 [Why does the Ingress status show an ESSVC error?](/docs/containers?topic=containers-ts-ingress-essvc#ts-ingress-essvc)
