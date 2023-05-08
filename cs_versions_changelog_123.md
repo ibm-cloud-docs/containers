@@ -2,7 +2,7 @@
 
 copyright:
  years: 2022, 2023
-lastupdated: "2023-04-24"
+lastupdated: "2023-05-08"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -40,6 +40,30 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.23 change log.
 {: shortdesc}
+
+
+### Change log for master fix pack 1.23.17_1576, released 27 April 2023
+{: #12317_1576}
+
+The following table shows the changes that are in the master fix pack 1.23.17_1576. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.17 | v1.3.19 | Updated `Go` to version `1.19.8` and updated dependencies. |
+| Gateway-enabled cluster controller | 2024 | 2106 | Support Ubuntu 20 and update image to resolve CVEs. |
+| GPU device plug-in | a873e90 | fc4cf22 | Updated `Go` to version `1.19.7`. |
+| GPU installer | a873e90 | 28d80a0 | Updated `Go` to version `1.19.8`. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1366-amd64 | 1390-amd64 | Eliminate IP syscall. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.23.17-5 | v1.23.17-10 | Updated `Go` dependencies. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 429 | 431 | Updated `Go` to version `1.19.8` and updated dependencies. Update UBI base image. |
+| Key Management Service provider | v2.6.4 | v2.6.5 | Updated `Go` to version `1.19.7` and updated dependencies. |
+| Konnectivity agent and server | v0.1.1_569_iks-amd64 | v0.1.2_591_iks-amd64 | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.1.2){: external}. Updated configuration to set `keepalive-time` to `40s`. |
+| Kubernetes Metrics Server configuration | N/A | N/A | Updated to use TLS version 1.3 ciphers. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2420 | 2486 | Updated `Go` to version `1.19.7` and updated dependencies. |
+| Portieris admission controller | v0.13.3 | v0.13.4 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.4){: external}. |
+{: caption="Changes since version 1.23.17_1569" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.23.17_1576, released 24 April 2023

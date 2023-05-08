@@ -6579,6 +6579,8 @@ subcollection: containers
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
 
+    * [Change log for master fix pack 1.26.4_1535, released 27 April 2023](/docs/containers?topic=containers-changelog_126#1264_1535)
+
     * [Change log for worker node fix pack 1.26.4_1535, released 24 April 2023](/docs/containers?topic=containers-changelog_126#1264_1535)
 
     * [Change log for worker node fix pack 1.26.3_1533, released 11 April 2023](/docs/containers?topic=containers-changelog_126#1263_1533)
@@ -6661,6 +6663,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for master fix pack 1.25.9_1543, released 27 April 2023](/docs/containers?topic=containers-changelog_125#1259_1543)
 
     * [Change log for worker node fix pack 1.25.9_1543, released 24 April 2023](/docs/containers?topic=containers-changelog_125#1259_1543)
 
@@ -6768,6 +6772,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for master fix pack 1.24.13_1566, released 27 April 2023](/docs/containers?topic=containers-changelog_124#12413_1566)
 
     * [Change log for worker node fix pack 1.24.13_1566, released 24 April 2023](/docs/containers?topic=containers-changelog_124#12413_1566)
 
@@ -6901,6 +6907,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_123#changelog_overview_123)
 
 * [Version 1.23 change log](/docs/containers?topic=containers-changelog_123#123_changelog)
+
+    * [Change log for master fix pack 1.23.17_1576, released 27 April 2023](/docs/containers?topic=containers-changelog_123#12317_1576)
 
     * [Change log for worker node fix pack 1.23.17_1576, released 24 April 2023](/docs/containers?topic=containers-changelog_123#12317_1576)
 
