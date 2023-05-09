@@ -58,7 +58,7 @@ Start by verifying that the information that you entered in the {{site.data.keyw
 2. Verify that the {{site.data.keyword.cloud_notm}} API key that you entered has sufficient permissions to work with your cluster. You must be assigned the **Editor** platform access role and the **Manager** service access role for {{site.data.keyword.containerlong_notm}}. For more information, see [User access permissions](/docs/containers?topic=containers-access_reference).
 3. Verify that you entered the `etcd` API endpoint for your Databases for etcd service instance in the correct format.  
 
-    1. [Retrieve the Databases for etcd endpoint](/docs/containers?topic=containers-storage-portworx-kv-store).
+    1. [Retrieve the Databases for etcd endpoint](/docs/containers?topic=containers-storage_portworx_kv_store).
     2. Add the etcd endpoint in the format `etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>`. If you have more than one endpoint, include all endpoints and separate them with a semicolon (;).
 
         Example endpoint:
