@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-05"
+lastupdated: "2023-05-09"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, delete
 
@@ -43,7 +43,7 @@ No backups are created of your cluster or your data in your persistent storage. 
     * [Block storage](/docs/containers?topic=containers-block_storage#cleanup_block) for classic clusters
     * [Block storage](/docs/containers?topic=containers-vpc-block#cleanup_block_vpc) for VPC clusters
     * [Object storage](/docs/cloud-object-storage?topic=cloud-object-storage-deleting-multiple-objects-patterns)
-    * [Portworx](/docs/containers?topic=containers-storage-portworx-remove)
+    * [Portworx](/docs/containers?topic=containers-storage_portworx_removing)
 
 **To remove a cluster**:
 

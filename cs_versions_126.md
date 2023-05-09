@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-04-06"
+lastupdated: "2023-05-09"
 
 keywords: kubernetes, containers, 126, version 126, 126 update actions
 
@@ -64,7 +64,7 @@ Initial [1.26 version information and update actions](/docs/containers?topic=con
 When you upgrade your cluster to version 1.26, a [BGP password](https://docs.tigera.io/calico/latest/reference/resources/bgppeer#bgppassword){: external} is automatically configured for Calico. This results in a several second disruption to pod networking while the BGP password configuration is applied. 
 {: note}
 
-[Portworx](/docs/containers?topic=containers-getting-started-with-portworx) does not yet support version 1.26. Do not upgrade your cluster to version 1.26 if your apps use Portworx.
+[Portworx](/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.26. Do not upgrade your cluster to version 1.26 if your apps use Portworx.
 {: important}
 
 
