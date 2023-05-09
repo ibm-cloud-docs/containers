@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-05"
+lastupdated: "2023-05-09"
 
 keywords: storage, back up, restore
 
@@ -29,7 +29,7 @@ If you have not provisioned storage, review the [Kubernetes storage basics](/doc
 * [Block Storage](/docs/containers?topic=containers-block_storage#block_backup_restore)
 * [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
 * [{{site.data.keyword.cos_short}}](/docs/containers?topic=containers-storage-cos-understand)
-* [Portworx disaster recovery](/docs/containers?topic=containers-storage_portworx_recoveryy)
+* [Portworx disaster recovery](/docs/containers?topic=containers-storage_portworx_recovery)
 
 
 

@@ -63,7 +63,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         ```
         {: pre}
 
-4. Review the log files locally. If you can't resolve your issue by reviewing the logs, [open a support ticket](/docs/containers?topic=containers-storage-portworx-support) and provide the log information that you collected.
+4. Review the log files locally. If you can't resolve your issue by reviewing the logs, [open a support ticket](/docs/containers?topic=containers-storage_portworx_support) and provide the log information that you collected.
 
 
 

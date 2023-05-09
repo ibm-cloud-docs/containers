@@ -152,7 +152,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Storage class for profile sizes | For more information, see [available volume profiles](/docs/vpc?topic=vpc-block-storage-profiles). |
 | Supported types | You can set up {{site.data.keyword.block_storage_is_short}}, {{site.data.keyword.cos_full_notm}} and {{site.data.keyword.databases-for}} only. \n - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block) is available as a cluster add-on. Make sure to [attach a public gateway to all the VPC subnets](/docs/vpc?topic=vpc-creating-vpc-resources-with-cli-and-api&interface=cli#attach-public-gateway-cli) that the cluster uses so that you can provision {{site.data.keyword.block_storage_is_short}}. \n - [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_install) is available as a Helm chart.  |
 | Volume attachments | See [Volume attachment limits](/docs/vpc?topic=vpc-attaching-block-storage#vol-attach-limits).|
-| Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-storage-portowrx-plan#portworx_limitations). |
+| Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-storage-portworx-plan#portworx_limitations). |
 | {{site.data.keyword.block_storage_is_short}} | The default storage class in VPC clusters can not be changed. However, you can [create a custom storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class). |
 {: caption="VPC cluster storage limitations"}
 

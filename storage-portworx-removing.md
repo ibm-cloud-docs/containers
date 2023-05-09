@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-05"
+lastupdated: "2023-05-09"
 
 keywords: portworx, kubernetes
 
@@ -164,7 +164,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 If you don't want to use Portworx in your cluster, you can uninstall the Helm chart and delete your Portworx instance.
 {: shortdesc}
 
-The following steps walk you through deleting the Portworx Helm chart from your cluster and deleting your Portworx instance. If you want to clean up your Portworx installation by removing your volumes from your apps, removing individual worker nodes from Portworx, or if you want to completely remove Portworx and all your volumes and data, see [Cleaning up your Portworx cluster](/docs/containers?topic=containers-storage_portworx_remove).
+The following steps walk you through deleting the Portworx Helm chart from your cluster and deleting your Portworx instance. If you want to clean up your Portworx installation by removing your volumes from your apps, removing individual worker nodes from Portworx, or if you want to completely remove Portworx and all your volumes and data, see [Cleaning up your Portworx cluster](/docs/containers?topic=containers-storage_portworx_removing).
 {: note}
 
 The following commands result in data loss.
