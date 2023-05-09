@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-05-08"
+lastupdated: "2023-05-09"
 
 keywords: containers
 subcollection: containers
@@ -268,7 +268,7 @@ subcollection: containers
 
     * [9 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0923)
 
-        * Worker node fix packs `1.24.13_1567`, `1.25.9_1544`, `1.26.4_1536`, and `1.27.1_1521`.
+        * Worker node fix packs `1.24.13_1567`, `1.25.9_1544`, and `1.26.4_1536`.
 
     * [4 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0423)
 

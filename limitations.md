@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-05"
+lastupdated: "2023-05-09"
 
 keywords: kubernetes, infrastructure, rbac, policy, http2, quota, app protocol, application protocol
 
@@ -98,7 +98,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Category | Description |
 | -------- | ----------- |
 | Volume instances | You can have a total of 250 IBM Cloud infrastructure file and block storage volumes per account. If you mount more than this amount, you might see an "out of capacity" message when you provision persistent volumes. For more FAQs, see the [file](/docs/FileStorage?topic=FileStorage-file-storage-faqs#provision) and [block](/docs/BlockStorage?topic=BlockStorage-block-storage-faqs#authlimit) storage docs. If you want to mount more volumes, [contact IBM Support](/docs/get-support?topic=get-support-using-avatar). In your support ticket, include your account ID and the new file or block storage volume quota that you want.  |
-| Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-storage-portworx-). |
+| Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-storage_portworx_plan#portworx_limitations). |
 {: caption="Classic cluster storage limitations"}
 
 
