@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-05-08"
+lastupdated: "2023-05-09"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -55,7 +55,7 @@ The following table shows the changes that are in the worker node fix pack 1.25.
 
 
 ### Change log for master fix pack 1.25.9_1543, released 27 April 2023
-{: #1259_1543}
+{: #1259_1543M}
 
 The following table shows the changes that are in the master fix pack 1.25.9_1543. Master patch updates are applied automatically. 
 

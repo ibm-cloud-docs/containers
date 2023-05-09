@@ -2,7 +2,7 @@
 
 copyright:
  years: 2022, 2023
-lastupdated: "2023-05-08"
+lastupdated: "2023-05-09"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
 
@@ -43,7 +43,7 @@ Review the version 1.23 change log.
 
 
 ### Change log for master fix pack 1.23.17_1576, released 27 April 2023
-{: #12317_1576}
+{: #12317_1576M}
 
 The following table shows the changes that are in the master fix pack 1.23.17_1576. Master patch updates are applied automatically. 
 
