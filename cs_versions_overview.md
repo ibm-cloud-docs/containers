@@ -39,6 +39,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 
+
 **Latest**: 1.26
 - Release date: 01 February 2023
 - End of support: 24 April 2024`†`
