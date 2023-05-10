@@ -37,6 +37,7 @@ Create Classic and VPC clusters with Terraform
 :   For more information, see [Creating a single-zone classic cluster with Terraform](/docs/containers?topic=containers-cluster-create-classic&interface=tf#cluster_classic_tf) and [Creating a VPC cluster with Terraform](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=tf#cluster_vpcg2_tf).
 
 
+
 ### 9 May 2023
 {: #containers-may0923}
 {: release-note}
@@ -44,7 +45,6 @@ Create Classic and VPC clusters with Terraform
 
 Worker node fix packs `1.24.13_1567`, `1.25.9_1544`, and `1.26.4_1536`.
 :   For more information, see the change logs: [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125), and [1.26](/docs/containers?topic=containers-changelog_126).
-
 
 
 
