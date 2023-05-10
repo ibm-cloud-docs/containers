@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-05-09"
+lastupdated: "2023-05-10"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
+
+    * [10 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may1023)
+
+        * Create Classic and VPC clusters with Terraform
 
     * [9 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0923)
 
@@ -3462,6 +3466,8 @@ subcollection: containers
 
 * [Example commands to create classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster_create_classic)
 
+* [Creating a single-zone classic cluster with Terraform](/docs/containers?topic=containers-cluster-create-classic#cluster_classic_tf)
+
 [Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-gen2)
 
 * [Prerequisites and notes](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-prereq)
@@ -3471,6 +3477,8 @@ subcollection: containers
 * [Creating VPC clusters from the CLI](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_vpcg2_cli)
 
 * [Example commands to create VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_create_vpc)
+
+* [Creating a VPC cluster with Terraform](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_vpcg2_tf)
 
 [Creating clusters on dedicated hosts for VPC](/docs/containers?topic=containers-cluster-create-dedicated-hosts#cluster-create-dedicated-hosts)
 
