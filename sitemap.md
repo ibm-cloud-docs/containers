@@ -266,6 +266,10 @@ subcollection: containers
 
 * [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
 
+    * [10 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may1023)
+
+        * Create Classic and VPC clusters with Terraform
+
     * [9 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0923)
 
         * Worker node fix packs `1.24.13_1567`, `1.25.9_1544`, and `1.26.4_1536`.
@@ -3474,7 +3478,7 @@ subcollection: containers
 
 * [Example commands to create VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_create_vpc)
 
-* [Creating VPC clusters with Terraform](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_vpcg2_tf)
+* [Creating a VPC cluster with Terraform](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_vpcg2_tf)
 
 [Creating clusters on dedicated hosts for VPC](/docs/containers?topic=containers-cluster-create-dedicated-hosts#cluster-create-dedicated-hosts)
 

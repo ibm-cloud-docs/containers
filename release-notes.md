@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-09"
+lastupdated: "2023-05-10"
 
 keywords: kubernetes, release notes
 
@@ -29,11 +29,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## May 2023
 {: #containers-may23}
 
+### 10 May 2023
+{: #containers-may1023}
+{: release-note}
+
+Create Classic and VPC clusters with Terraform
+:   For more information, see [Creating a single-zone classic cluster with Terraform](/docs/containers?topic=containers-cluster-create-classic&interface=tf#cluster_classic_tf) and [Creating a VPC cluster with Terraform](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=tf#cluster_vpcg2_tf).
+
 
 ### 9 May 2023
 {: #containers-may0923}
 {: release-note}
-
 
 
 Worker node fix packs `1.24.13_1567`, `1.25.9_1544`, and `1.26.4_1536`.

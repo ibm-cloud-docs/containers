@@ -274,7 +274,7 @@ ibmcloud ks zone add vpc-gen2 --zone <zone> --cluster <cluster_name_or_ID> --wor
 ```
 {: pre}
 
-## Creating VPC clusters with Terraform
+## Creating a VPC cluster with Terraform
 {: #cluster_vpcg2_tf}
 {: terraform}
 
