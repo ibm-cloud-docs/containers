@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-05-11"
 
 keywords: kubernetes
 
@@ -17,7 +17,7 @@ subcollection: containers
 
 
 
-# Getting help
+# Getting help and support for {{site.data.keyword.containerlong_notm}}
 {: #get-help}
 
 Still having issues with your cluster? Review different ways to get help and support for your {{site.data.keyword.containerlong_notm}} clusters. For any questions or feedback, post in Slack.

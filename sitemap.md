@@ -9861,7 +9861,7 @@ subcollection: containers
 {: #sitemap_troubleshooting}
 
 
-[Getting help](/docs/containers?topic=containers-get-help#get-help)
+[Getting help and support for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-get-help#get-help)
 
 * [General ways to resolve cluster issues](/docs/containers?topic=containers-get-help#help-general)
 
