@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-22"
+lastupdated: "2023-05-11"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -111,8 +111,6 @@ If you are unable to use the `kubectl debug node` command, you can create an Alp
         hostPath:
           path: /
       dnsPolicy: ClusterFirst
-      hostNetwork: true
-      hostPID: true
       nodeSelector:
         kubernetes.io/hostname: ${NODE}
       restartPolicy: Never
