@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-05-10"
+lastupdated: "2023-05-12"
 
 keywords: kubernetes, containers
 
@@ -38,7 +38,7 @@ Review the version 1.24 change log.
 
 
 ### Change log for worker node fix pack 1.24.13_1567, released 9 May 2023
-{: #12413_1567}
+{: #12413_1567_W}
 
 The following table shows the changes that are in the worker node fix pack 1.24.13_1567. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
