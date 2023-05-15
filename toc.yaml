@@ -322,16 +322,29 @@ toc:
               topics:
               - cs_versions_124.md
               - cs_versions_changelog_124.md
-              - cs_benchmarks_124.md                
+              - cs_benchmarks_124.md
+      - topicgroup:
+          label: Add-on version history
+          topics:
+          - add-on-versions.md 
+          - cs_versions_addons.md
+          - cs_versions_istio.md
+          - versions-autoscaler.md
+          - versions-vpc-block-addon.md
+          - versions-object.md
+          - versions-static-route.md
+          - versions-backup-restore.md
+          - cs_versions_alb_oauth_proxy.md
+      - ibm-k8s-controller-config-change-log.md             
+      - topicgroup:
+          label: Archived version history
+          topics:
           - topicgroup:
               label: Version 1.23
               topics:
               - cs_versions_123.md
               - cs_versions_changelog_123.md
-              - cs_benchmarks_123.md  
-      - topicgroup:
-          label: Archived version history
-          topics:
+              - cs_benchmarks_123.md 
           - topicgroup:
               label: Version 1.22
               topics:
@@ -368,19 +381,6 @@ toc:
           - cs_versions_changelog_19.md
           - cs_versions_changelog_18.md
           - cs_versions_changelog_17.md
-      - topicgroup:
-          label: Add-on version history
-          topics:
-          - add-on-versions.md 
-          - cs_versions_addons.md
-          - cs_versions_istio.md
-          - versions-autoscaler.md
-          - versions-vpc-block-addon.md
-          - versions-object.md
-          - versions-static-route.md
-          - versions-backup-restore.md
-          - cs_versions_alb_oauth_proxy.md
-      - ibm-k8s-controller-config-change-log.md
       - topicgroup:
           label: Activity Tracker events
           topics:
