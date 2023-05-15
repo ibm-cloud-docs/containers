@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-05-11"
+lastupdated: "2023-05-15"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -33,6 +33,9 @@ For more information about the Kubernetes project versions, see the [Kubernetes 
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
+{: note}
+
+Ubuntu 18 is deprecated and becomes unsupported soon. For migration actions, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate).
 {: important}
 
 
