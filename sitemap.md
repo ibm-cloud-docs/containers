@@ -4048,6 +4048,12 @@ subcollection: containers
 
 * [Configure your application pods to authenticate with {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-pod-iam-identity#iam-identity-pod)
 
+[Assigning cluster access by using Terraform for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-terraform-setup#terraform-setup)
+
+* [Creating a {{site.data.keyword.containershort}} cluster by using Terraform](/docs/containers?topic=containers-terraform-setup#terraform-cluster-create)
+
+* [Assigning IAM user access to {{site.data.keyword.containershort}} clusters](/docs/containers?topic=containers-terraform-setup#terraform-cluster-IAM)
+
 
 ## Securing cluster workloads
 {: #sitemap_securing_cluster_workloads}
