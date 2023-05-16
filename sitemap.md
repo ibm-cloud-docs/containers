@@ -6399,6 +6399,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version v1.0.516](/docs/containers?topic=containers-cs_cli_changelog#cli-10516)
+
 * [Version v1.0.510](/docs/containers?topic=containers-cs_cli_changelog#cli-10510)
 
 * [Version v1.0.498](/docs/containers?topic=containers-cs_cli_changelog#cli-10498)
