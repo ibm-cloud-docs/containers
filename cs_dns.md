@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-01"
+lastupdated: "2023-05-16"
 
 keywords: kubernetes, coredns, kubedns, dns
 
@@ -533,30 +533,27 @@ By default, your cluster is set up with cluster-wide DNS resources, not zone-awa
 Do not use the [DNS cache label](#dns_cache) when you use zone-aware DNS in your cluster.
 {: important}
 
-### Deploying and enabling zone-aware DNS
+### Setting up zone-aware DNS
 {: #dns_zone_aware_deploy}
 
-To use zone-aware DNS, you must first deploy zone-aware DNS resources in your multizone cluster. Then, you can enable zone-aware DNS in each zone.
+Complete the following step to set up zone-aware DNS in your multizone cluster.
 {: shortdesc}
 
-Before you begin, update any [DNS egress network policies](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/nodelocaldns#network-policy-and-dns-connectivity){: external} that are impacted by zone-aware DNS, such as policies that rely on pod or namespace selectors for DNS egress.
-{: note}
+1. Update any [DNS egress network policies](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/nodelocaldns#network-policy-and-dns-connectivity){: external} that are impacted by zone-aware DNS, such as policies that rely on pod or namespace selectors for DNS egress. Run the following command to get a list of your network policies.
 
-```sh
-kubectl get networkpolicy --all-namespaces -o yaml
-```
-{: pre}
+    ```sh
+    kubectl get networkpolicy --all-namespaces -o yaml
+    ```
+    {: pre}
 
-1. Deploy zone-aware DNS resources.
-
-1. Add the `ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true` label to the `coredns` ConfigMap in the `kube-system` namespace.
+1. Label the `coredns` ConfigMap in the `kube-system` namespace with `ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true`.
 
     ```sh
     kubectl label cm -n kube-system coredns --overwrite "ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true"
     ```
     {: pre}
 
-1. [Refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh) to the deploy zone-aware DNS resources.
+1. [Refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh) to deploy the zone-aware DNS resources.
 
     ```sh
     ibmcloud ks cluster master refresh -c <cluster_name_or_ID>

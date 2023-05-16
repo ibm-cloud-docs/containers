@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-05-15"
+lastupdated: "2023-05-16"
 
 keywords: containers
 subcollection: containers
@@ -4501,7 +4501,7 @@ subcollection: containers
 
 * [Setting up zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
 
-    * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
+    * [Setting up zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
 
     * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
