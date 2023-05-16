@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-05-15"
+lastupdated: "2023-05-16"
 
 keywords: containers
 subcollection: containers
@@ -265,6 +265,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
+
+    * [16 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may1623)
+
+        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.0`.
 
     * [15 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may1523)
 
@@ -4048,6 +4052,12 @@ subcollection: containers
 
 * [Configure your application pods to authenticate with {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-pod-iam-identity#iam-identity-pod)
 
+[Assigning cluster access by using Terraform for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-terraform-setup#terraform-setup)
+
+* [Creating a {{site.data.keyword.containershort}} cluster by using Terraform](/docs/containers?topic=containers-terraform-setup#terraform-cluster-create)
+
+* [Assigning IAM user access to {{site.data.keyword.containershort}} clusters](/docs/containers?topic=containers-terraform-setup#terraform-cluster-IAM)
+
 
 ## Securing cluster workloads
 {: #sitemap_securing_cluster_workloads}
@@ -4501,7 +4511,7 @@ subcollection: containers
 
 * [Setting up zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
 
-    * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
+    * [Setting up zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
 
     * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
@@ -6388,6 +6398,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.516](/docs/containers?topic=containers-cs_cli_changelog#cli-10516)
 
 * [Version v1.0.510](/docs/containers?topic=containers-cs_cli_changelog#cli-10510)
 
@@ -10387,6 +10399,10 @@ subcollection: containers
 * [Version 1.1](/docs/containers?topic=containers-versions-vpc-file-addon#011_is_file)
 
     * [Change log for version 1.1-beta, released 15 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.1_is_file_relnote)
+
+* [Version 1.0](/docs/containers?topic=containers-versions-vpc-file-addon#01_is_file)
+
+    * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
