@@ -266,6 +266,10 @@ subcollection: containers
 
 * [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
 
+    * [16 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may1623)
+
+        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.0`.
+
     * [15 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may1523)
 
         * Cluster autoscaler add-on versions `1.0.6_1077`, `1.0.7_1076`, `1.0.8_1078`, and `1.1.0_1066`.
@@ -10393,6 +10397,10 @@ subcollection: containers
 * [Version 1.1](/docs/containers?topic=containers-versions-vpc-file-addon#011_is_file)
 
     * [Change log for version 1.1-beta, released 15 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.1_is_file_relnote)
+
+* [Version 1.0](/docs/containers?topic=containers-versions-vpc-file-addon#01_is_file)
+
+    * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
