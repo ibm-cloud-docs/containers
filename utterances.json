@@ -284,13 +284,11 @@
     "cluster_infra_errors": [
     "trouble deleting worker node on kubernetes cluster",
     "I have clusters that can't be deleted",
-    "cluster deleting",
     "my kubernetes cluster cannot be deleted",
     "cannot delete kubernetes cluster",
     "unable to delete cluster",
     "error trying to delete my worker node",
     "fail to delete a worker node in kubernetes cluster",
-    "cannot proceed to create the cluster",
     "unable to create a cluster",
     "I cannot create a Kubernetes standard cluster"
   ],
