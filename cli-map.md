@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-03-30"
+lastupdated: "2023-05-17"
 
 keywords: kubernetes
 
@@ -353,6 +353,16 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
 
 * [`ibmcloud ks script update`](/docs/containers?topic=containers-kubernetes-service-cli#script_update)
 
+
+
+
+## ibmcloud ks security-group
+{: #icks_map_security_group}
+
+[Reset or sync security group settings](/docs/containers?topic=containers-kubernetes-service-cli#security_group)
+
+* [`ibmcloud ks security-group reset`](/docs/containers?topic=containers-kubernetes-service-cli#security_group_reset)
+* [`ibmcloud ks security-group sync`](/docs/containers?topic=containers-kubernetes-service-cli#security_group_sync)
 
 
 
