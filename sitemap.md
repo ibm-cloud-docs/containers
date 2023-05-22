@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-05-16"
+lastupdated: "2023-05-22"
 
 keywords: containers
 subcollection: containers
@@ -5612,12 +5612,6 @@ subcollection: containers
 
     * [General purpose](/docs/containers?topic=containers-vpc-block#gen-purp-sc-vpc-block)
 
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup_block_vpc)
-
-    * [Understanding your storage removal options](/docs/containers?topic=containers-vpc-block#storage_delete_options_block_vpc)
-
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-vpc-block#storage_remove_block_vpc)
-
 [Setting up snapshots with the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
 
 * [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-addon-enable)
@@ -5978,6 +5972,8 @@ subcollection: containers
 * [ibmcloud ks `init`](/docs/containers?topic=containers-icks_map#icks_map_init)
 
 * [ibmcloud ks script](/docs/containers?topic=containers-icks_map#icks_map_script)
+
+* [ibmcloud ks security-group](/docs/containers?topic=containers-icks_map#icks_map_security_group)
 
 * [ibmcloud ks storage](/docs/containers?topic=containers-icks_map#icks_map_storage)
 
@@ -6380,6 +6376,12 @@ subcollection: containers
 * [`script` commands](/docs/containers?topic=containers-kubernetes-service-cli#script)
 
     * [`ibmcloud ks script update`](/docs/containers?topic=containers-kubernetes-service-cli#script_update)
+
+* [`security-group` commands](/docs/containers?topic=containers-kubernetes-service-cli#security_group)
+
+    * [`ibmcloud ks security-group reset`](/docs/containers?topic=containers-kubernetes-service-cli#security_group_reset)
+
+    * [`ibmcloud ks security-group sync`](/docs/containers?topic=containers-kubernetes-service-cli#security_group_sync)
 
 * [Beta: `storage` commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage)
 
