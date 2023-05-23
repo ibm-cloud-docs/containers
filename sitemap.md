@@ -55,29 +55,17 @@ subcollection: containers
 {: #sitemap_about}
 
 
-[Overview](/docs/containers?topic=containers-iks-overview#iks-overview)
+[Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-overview#overview)
 
-* [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-iks-overview#service-concepts)
+* [What is {{site.data.keyword.containerlong_notm}} and how does it work?](/docs/containers?topic=containers-overview#what-is-overview)
 
-    * [What is {{site.data.keyword.containerlong_notm}} and how does it work?](/docs/containers?topic=containers-iks-overview#what-is-overview)
+* [What is Kubernetes?](/docs/containers?topic=containers-overview#what-is-kube-overview)
 
-    * [What is Kubernetes?](/docs/containers?topic=containers-iks-overview#what-is-kube-overview)
+* [What are containers?](/docs/containers?topic=containers-overview#what-are-containers-overview)
 
-    * [What are containers?](/docs/containers?topic=containers-iks-overview#what-are-containers-overview)
+* [What compute host infrastructure does the service offer?](/docs/containers?topic=containers-overview#what-compute-infra-is-offered)
 
-    * [What compute host infrastructure does the service offer?](/docs/containers?topic=containers-iks-overview#what-compute-infra-is-offered)
-
-* [Docker containers](/docs/containers?topic=containers-iks-overview#docker_containers)
-
-    * [Key concepts](/docs/containers?topic=containers-iks-overview#docker-concepts)
-
-    * [Benefits](/docs/containers?topic=containers-iks-overview#docker-benefits)
-
-* [Kubernetes clusters](/docs/containers?topic=containers-iks-overview#kubernetes_basics)
-
-    * [Key concepts](/docs/containers?topic=containers-iks-overview#kubernetes-concepts)
-
-    * [Related resources](/docs/containers?topic=containers-iks-overview#kubernetes-resources)
+* [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
 
 [Benefits and service offerings](/docs/containers?topic=containers-cs_ov#cs_ov)
 

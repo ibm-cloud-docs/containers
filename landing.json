@@ -16,7 +16,7 @@
       {
         "title": "Understand IBM Cloud Kubernetes Service",
         "description": "Review frequently asked questions and key technologies that IBM Cloud Kubernetes Service uses.",
-        "href": "/docs/containers?topic=containers-iks-overview"
+        "href": "/docs/containers?topic=containers-overview"
       },
       {
         "title": "Get started with Kubernetes",
