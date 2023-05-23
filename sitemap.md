@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-05-16"
+lastupdated: "2023-05-23"
 
 keywords: containers
 subcollection: containers
@@ -55,29 +55,17 @@ subcollection: containers
 {: #sitemap_about}
 
 
-[Overview](/docs/containers?topic=containers-iks-overview#iks-overview)
+[Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-overview#overview)
 
-* [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-iks-overview#service-concepts)
+* [What is {{site.data.keyword.containerlong_notm}} and how does it work?](/docs/containers?topic=containers-overview#what-is-overview)
 
-    * [What is {{site.data.keyword.containerlong_notm}} and how does it work?](/docs/containers?topic=containers-iks-overview#what-is-overview)
+* [What is Kubernetes?](/docs/containers?topic=containers-overview#what-is-kube-overview)
 
-    * [What is Kubernetes?](/docs/containers?topic=containers-iks-overview#what-is-kube-overview)
+* [What are containers?](/docs/containers?topic=containers-overview#what-are-containers-overview)
 
-    * [What are containers?](/docs/containers?topic=containers-iks-overview#what-are-containers-overview)
+* [What compute host infrastructure does the service offer?](/docs/containers?topic=containers-overview#what-compute-infra-is-offered)
 
-    * [What compute host infrastructure does the service offer?](/docs/containers?topic=containers-iks-overview#what-compute-infra-is-offered)
-
-* [Docker containers](/docs/containers?topic=containers-iks-overview#docker_containers)
-
-    * [Key concepts](/docs/containers?topic=containers-iks-overview#docker-concepts)
-
-    * [Benefits](/docs/containers?topic=containers-iks-overview#docker-benefits)
-
-* [Kubernetes clusters](/docs/containers?topic=containers-iks-overview#kubernetes_basics)
-
-    * [Key concepts](/docs/containers?topic=containers-iks-overview#kubernetes-concepts)
-
-    * [Related resources](/docs/containers?topic=containers-iks-overview#kubernetes-resources)
+* [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
 
 [Benefits and service offerings](/docs/containers?topic=containers-cs_ov#cs_ov)
 
@@ -265,6 +253,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
+
+    * [23 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2323)
+
+        * Ingress ALB versions `1.6.4_4170_iks`, `1.5.1_4168_iks`, and `1.4.0_4169_iks`
 
     * [16 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may1623)
 
@@ -5612,12 +5604,6 @@ subcollection: containers
 
     * [General purpose](/docs/containers?topic=containers-vpc-block#gen-purp-sc-vpc-block)
 
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup_block_vpc)
-
-    * [Understanding your storage removal options](/docs/containers?topic=containers-vpc-block#storage_delete_options_block_vpc)
-
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-vpc-block#storage_remove_block_vpc)
-
 [Setting up snapshots with the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
 
 * [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-addon-enable)
@@ -5661,6 +5647,10 @@ subcollection: containers
     * [RHEL or CentOS ConfigMap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-rhel-cm)
 
     * [Ubuntu ConfigMap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
+
+[Removing {{site.data.keyword.block_storage_is_short}} from your cluster](/docs/containers?topic=containers-storage-block-vpc-remove#storage-block-vpc-remove)
+
+* [Cleaning up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-storage-block-vpc-remove#cleaning-up-block-vpc)
 
 
 ### Setting up IBM Cloud File Storage for VPC
@@ -5978,6 +5968,8 @@ subcollection: containers
 * [ibmcloud ks `init`](/docs/containers?topic=containers-icks_map#icks_map_init)
 
 * [ibmcloud ks script](/docs/containers?topic=containers-icks_map#icks_map_script)
+
+* [ibmcloud ks security-group](/docs/containers?topic=containers-icks_map#icks_map_security_group)
 
 * [ibmcloud ks storage](/docs/containers?topic=containers-icks_map#icks_map_storage)
 
@@ -6380,6 +6372,12 @@ subcollection: containers
 * [`script` commands](/docs/containers?topic=containers-kubernetes-service-cli#script)
 
     * [`ibmcloud ks script update`](/docs/containers?topic=containers-kubernetes-service-cli#script_update)
+
+* [`security-group` commands](/docs/containers?topic=containers-kubernetes-service-cli#security_group)
+
+    * [`ibmcloud ks security-group reset`](/docs/containers?topic=containers-kubernetes-service-cli#security_group_reset)
+
+    * [`ibmcloud ks security-group sync`](/docs/containers?topic=containers-kubernetes-service-cli#security_group_sync)
 
 * [Beta: `storage` commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage)
 
@@ -6944,6 +6942,8 @@ subcollection: containers
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
 
+    * [1.6.4_4170_iks, released 23 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_4170_iks)
+
     * [1.6.4_4117_iks, released 4 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_4117_iks)
 
     * [1.6.4_4073_iks, released 27 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_4073_iks)
@@ -6957,6 +6957,8 @@ subcollection: containers
     * [1.6.4_3864_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3864_iks)
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
+
+    * [1.5.1_4168_iks, released 23 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_4168_iks)
 
     * [1.5.1_4113_iks, released 4 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_4113_iks)
 
@@ -6981,6 +6983,8 @@ subcollection: containers
     * [1.5.1_3536_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3536_iks)
 
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
+
+    * [1.4.0_4169_iks, released 23 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_4169_iks)
 
     * [1.4.0_4114_iks, released 4 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_4114_iks)
 
@@ -9604,6 +9608,8 @@ subcollection: containers
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
 
+    * [1.6.4_4170_iks, released 23 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_4170_iks)
+
     * [1.6.4_4117_iks, released 4 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_4117_iks)
 
     * [1.6.4_4073_iks, released 27 April 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_4073_iks)
@@ -9617,6 +9623,8 @@ subcollection: containers
     * [1.6.4_3864_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3864_iks)
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
+
+    * [1.5.1_4168_iks, released 23 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_4168_iks)
 
     * [1.5.1_4113_iks, released 4 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_4113_iks)
 
@@ -9641,6 +9649,8 @@ subcollection: containers
     * [1.5.1_3536_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3536_iks)
 
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
+
+    * [1.4.0_4169_iks, released 23 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_4169_iks)
 
     * [1.4.0_4114_iks, released 4 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_4114_iks)
 
