@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-04-06"
+lastupdated: "2023-05-24"
 
 keywords: kubernetes, containers
 
@@ -23,9 +23,6 @@ Review information about version 1.24 of {{site.data.keyword.containerlong}}, re
 
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
 {: tip}
-
-Gateway-enabled clusters on Classic infrastructure are deprecated and will be unsupported soon. The end of support dates are linked directly to the end of support of {{site.data.keyword.containerlong_notm}} version 1.23. Gateway-enabled clusters are not supported on version 1.24 and later. If your cluster is gateway-enabled, plan to create a new cluster before support ends. If you need similar functionality, consider creating a cluster on VPC infrastructure.
-{: important} 
 
 ![This badge indicates Kubernetes version 1.24 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.24 certification badge" caption-side="bottom"} 
 

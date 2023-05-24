@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-05-12"
+lastupdated: "2023-05-24"
 
 keywords: kubernetes, containers
 
@@ -35,6 +35,22 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.24 change log.
 {: shortdesc}
+
+
+### Change log for worker node fix pack 1.24.14_1570, released 23 May 2023
+{: #12414_1570_W}
+
+The following table shows the changes that are in the worker node fix pack 1.24.14_1570. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | 4.15.0-210-generic | 4.15.0-211-generic | Worker node kernel & package updates for [CVE-2021-3979](https://nvd.nist.gov/vuln/detail/CVE-2021-3979){: external}, [CVE-2023-1118](https://nvd.nist.gov/vuln/detail/CVE-2023-1118){: external}. |
+| Ubuntu 20.04 packages | 5.4.0-139-generic | 5.4.0-148-generic | Worker node kernel & package updates for [CVE-2023-2004](https://nvd.nist.gov/vuln/detail/CVE-2023-2004){: external}. |
+| Kubernetes | 1.24.13 | 1.24.14 | see [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.14){: external}. |
+| Containerd | 1.6.20 | 1.6.21 | see [change logs](https://github.com/containerd/containerd/releases/tag/v1.6.21){: external}. |
+| Haproxy | N\A | N\A | N\A|
+{: caption="Changes since version 1.24.13_1567" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.24.13_1567, released 9 May 2023

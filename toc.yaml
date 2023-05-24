@@ -308,6 +308,11 @@ toc:
           - cs_versions_changelog.md
           - benchmarks_overview.md
           - topicgroup:
+              label: Version 1.27
+              topics:
+              - cs_versions_127.md
+              - cs_versions_changelog_127.md
+          - topicgroup:
               label: Version 1.26
               topics:
               - cs_versions_126.md
