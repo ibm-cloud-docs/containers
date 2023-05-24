@@ -44,8 +44,8 @@ Ubuntu 18 is deprecated and becomes unsupported soon. For migration actions, see
 
 
 **Latest**: 1.27
-- Release date: None
-- End of support: None
+- Release date: {{site.data.keyword.kubernetes_127_release_date}}
+- End of support: {{site.data.keyword.kubernetes_127_unsupported_date}}
 - Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_S390X`, `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_127)
 - [Change log](/docs/containers?topic=containers-changelog_127)
