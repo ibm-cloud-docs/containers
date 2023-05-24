@@ -36,6 +36,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-may2423}
 {: release-note}
 
+
+
 New! {{site.data.keyword.containerlong_notm}} version 1.27.
 :   You can create or [update clusters to Kubernetes version 1.27](/docs/containers?topic=containers-cs_versions_127). With Kubernetes 1.27, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
 
@@ -43,7 +45,8 @@ Master fix pack `1.27.2_1524` and worker node fix pack `1.27.2_1526`.
 :   For more information, see the [1.27 change log](/docs/containers?topic=containers-changelog_127).
 
 
-
+Worker node fix packs `1.24.14_1570`, `1.25.10_1546`, and `1.26.5_1538`.
+:   For more information, see the change logs: [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125), and [1.26](/docs/containers?topic=containers-changelog_126).
 
 
 

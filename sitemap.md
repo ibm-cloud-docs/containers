@@ -260,6 +260,8 @@ subcollection: containers
 
         * Master fix pack `1.27.2_1524` and worker node fix pack `1.27.2_1526`.
 
+        * Worker node fix packs `1.24.14_1570`, `1.25.10_1546`, and `1.26.5_1538`.
+
     * [23 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2323)
 
         * Ingress ALB versions `1.6.4_4170_iks`, `1.5.1_4168_iks`, and `1.4.0_4169_iks`
