@@ -6642,6 +6642,8 @@ subcollection: containers
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
 
+    * [Change log for worker node fix pack 1.26.5_1538, released 23 May 2023](/docs/containers?topic=containers-changelog_126#1265_1538_W)
+
     * [Change log for worker node fix pack 1.26.4_1536, released 9 May 2023](/docs/containers?topic=containers-changelog_126#1264_1536_W)
 
     * [Change log for master fix pack 1.26.4_1535, released 27 April 2023](/docs/containers?topic=containers-changelog_126#1264_1535M)
@@ -6728,6 +6730,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for worker node fix pack 1.25.10_1546, released 23 May 2023](/docs/containers?topic=containers-changelog_125#12510_1546_W)
 
     * [Change log for worker node fix pack 1.25.9_1544, released 9 May 2023](/docs/containers?topic=containers-changelog_125#1259_1544_W)
 
@@ -6839,6 +6843,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.14_1570, released 23 May 2023](/docs/containers?topic=containers-changelog_124#12414_1570_W)
 
     * [Change log for worker node fix pack 1.24.13_1567, released 9 May 2023](/docs/containers?topic=containers-changelog_124#12413_1567_W)
 
