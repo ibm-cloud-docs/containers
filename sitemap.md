@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-05-23"
+lastupdated: "2023-05-24"
 
 keywords: containers
 subcollection: containers
@@ -253,6 +253,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
+
+    * [24 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2423)
+
+        * New! {{site.data.keyword.containerlong_notm}} version 1.27.
+
+        * Master fix pack `1.27.2_1524` and worker node fix pack `1.27.2_1526`.
 
     * [23 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2323)
 
@@ -6593,6 +6599,27 @@ subcollection: containers
     * [What else can I do to increase the security and compliance of my cluster?](/docs/containers?topic=containers-cis-benchmark#benchmark-what-else)
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
+
+
+### Version 1.27
+{: #sitemap_version_127}
+
+
+[1.27 version information and update actions](/docs/containers?topic=containers-cs_versions_127#cs_versions_127)
+
+* [Release timeline](/docs/containers?topic=containers-cs_versions_127#release_timeline_127)
+
+* [Preparing to update](/docs/containers?topic=containers-cs_versions_127#prep-up-127)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions_127#before_127)
+
+[Kubernetes version 1.27 change log](/docs/containers?topic=containers-changelog_127#changelog_127)
+
+* [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
+
+* [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for master fix pack 1.27.2_1524 and worker node fix pack 1.27.2_1526, released 24 May 2023](/docs/containers?topic=containers-changelog_127#1.27.2_1524M_and_1.27.2_1526W)
 
 
 ### Version 1.26

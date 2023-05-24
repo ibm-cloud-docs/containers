@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-03"
+lastupdated: "2023-05-24"
 
 keywords: kubernetes
 
@@ -45,17 +45,19 @@ Request headers
 :   `requestheader-extra-headers-prefix=X-Remote-Extra-`
 
 Number of client requests
-:   `k8s_max_requests_inflight: 1600`
-:   `k8s_max_mutating_requests_inflight: 800`
+:   `max-requests-inflight=1600`
+:   `max-mutating-requests-inflight=800`
 
 Admission controllers
+:   `ClusterTrustBundleAttest` (Kubernetes version 1.27 and later)
+:   `ValidatingAdmissionPolicy` (Kubernetes version 1.27 and later)
+:   `DefaultStorageClass`
 :   `NamespaceLifecycle`
 :   `LimitRanger`
 :   `ServiceAccount`
 :   `MutatingAdmissionWebhook`
 :   `ValidatingAdmissionWebhook`
 :   `ResourceQuota`
-:   `PodSecurityPolicy`
 :   `DefaultTolerationSeconds`
 :   `StorageObjectInUseProtection`
 :   `PersistentVolumeClaimResize`
@@ -69,12 +71,8 @@ Admission controllers
     - `CertificateSubjectRestriction` 
     - `DefaultIngressClass` 
     - `RuntimeClass` 
-    - `DenyServiceExternalIPs` 
-    
-Kube audit log config
-:   `audit-log-maxsize=128`
-:   `audit-log-maxage=2`
-:   `audit-log-maxbackup=2`
+    - `DenyServiceExternalIPs`
+
 
 Feature gates 
 :   See [Feature gates](#feature-gates) 
@@ -107,9 +105,6 @@ Feature gates
 Pod garbage collection threshold
 :   `terminated-pod-gc-threshold=12500`
 
-Horizontal pod autoscaling
-:   `horizontal-pod-autoscaler-use-rest-clients=true`
-
 TLS cipher support
 :   TLS version =< 1.2 (Kubernetes version 1.19 and earlier):
     - `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`
@@ -132,43 +127,75 @@ TLS cipher support
 Review the default settings for the `kubelet` worker node component in {{site.data.keyword.containerlong_notm}}. 
 {: shortdesc}
 
+`kubeAPIQPS: 50` (Kubernetes version 1.27 and later)
+`kubeAPIBurst: 100` (Kubernetes version 1.27 and later)
+`eventBurst: 100` (Kubernetes version 1.27 and later)
+`eventRecordQPS: 50` (Kubernetes version 1.27 and later)
+`serializeImagePulls: false`
+`registryPullQPS: 5`
+`registryBurst: 5`
 
 
 cgroups 
-:   `kubelet-cgroups=/podruntime/kubelet`
+:   `kubeletCgroups: /podruntime/kubelet`
 :   `runtime-cgroups=/podruntime/runtime`
 
 Container logs
-:   `container-log-max-size=100Mi`
-:   `container-log-max-files=3`
+:   `containerLogMaxSize: 100Mi`
+:   `containerLogMaxFiles: 3`
 
 Container runtime endpoint
-:   `container-runtime-endpoint=unix:///run/containerd/containerd.sock`
+:   `containerRuntimeEndpoint: "unix:///run/containerd/containerd.sock"`
 
 CPU CFS quota
-:   `cpu-cfs-quota-period=20ms`
+:   `cpuCFSQuotaPeriod: 20ms`
 
 Feature gates
-:   See [Feature gates](#feature-gates). In addition, `CRIContainerLogRotation=true` is set.
+:   See [Feature gates](#feature-gates).
 
 File check frequency
-:   `file-check-frequency=5s`
+:   `fileCheckFrequency: 5s`
 
 Graceful Node Shutdown
-:   For Kubernetes version 1.21 and later:- `shutdownGracePeriod: 30s`
 :   `shutdownGracePeriodCriticalPods: 15s`
 
 Kubernetes and system reserves
-:   `kube-reserved='memory=1051Mi,cpu=36m,pid=2048'`
-:   `system-reserved='memory=1576Mi,cpu=54m,pid=2048'`
+:   `kubeReserved calculated based on worker node flavor`
+:   `systemReserved calculated based on worker node flavor`
 
 Pod eviction
-:   `eviction-soft='memory.available<100Mi,nodefs.available<10%,imagefs.available<10%,nodefs.inodesFree<10%,imagefs.inodesFree<10%'`
-:   `eviction-soft-grace-period='memory.available=10m,nodefs.available=10m,imagefs.available=10m,nodefs.inodesFree=10m,imagefs.inodesFree=10m'`
-:   `eviction-hard='memory.available<100Mi,nodefs.available<5%,imagefs.available<5%,nodefs.inodesFree<5%,imagefs.inodesFree<5%'`
+```sh
+evictionSoft:
+  memory.available:  "100Mi"
+  nodefs.available: "10%"
+  imagefs.available: "10%"
+  nodefs.inodesFree: "10%"
+  imagefs.inodesFree: "10%"
+```
+{: screen}
+
+```sh
+evictionSoftGracePeriod:
+  memory.available: "10m"
+  nodefs.available: "10m"
+  imagefs.available: "10m"
+  nodefs.inodesFree: "10m"
+  imagefs.inodesFree: "10m"
+```
+{: screen}
+
+```sh
+evictionHard:
+  memory.available: "100Mi"
+  nodefs.available: "5%"
+  imagefs.available: "5%"
+  nodefs.inodesFree: "5%"
+  imagefs.inodesFree: "5%"
+```
+{: screen}
 
 Pod manifest path
-:   `pod-manifest-path=/etc/kubernetes/manifests`
+:   `staticPodPath: /etc/kubernetes/manifests`
 
 TLS cipher support
 :   TLS version =< 1.2 (Kubernetes version 1.19 and earlier):
@@ -238,13 +265,12 @@ Review the feature gates that are applied to all master and worker node componen
 In cluster version 1.26 and later, you can use the **`kubectl get --raw /metrics | grep kubernetes_feature_enabled`** command to determine if a feature gate is enabled or disabled.
 {: tip}
 
+1.27
+:   `CustomCPUCFSQuotaPeriod=true`
+
 1.26
 :   `CustomCPUCFSQuotaPeriod=true`
 
-```sh
-kubectl get --raw /metrics | grep kubernetes_feature_enabled
-```
-{: pre}
 
 1.25
 :   `CustomCPUCFSQuotaPeriod=true`
