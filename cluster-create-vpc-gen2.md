@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-24"
+lastupdated: "2023-05-25"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2
 
@@ -263,7 +263,7 @@ VPC Gen 2 cluster flavors with instance storage are available for allowlisted ac
 {: note}
 
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name my_cluster --zone us-east-1 --vpc-id <VPC_ID> --subnet-id <VPC_SUBNET_ID> --flavor b2.4x16 --workers 3
+ibmcloud ks cluster create vpc-gen2 --name my_cluster --zone us-east-1 --vpc-id <VPC_ID> --subnet-id <VPC_SUBNET_ID> --flavor bx2.4x16 --workers 3
 ```
 {: pre}
 

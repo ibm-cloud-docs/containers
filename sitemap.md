@@ -254,6 +254,10 @@ subcollection: containers
 
 * [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
 
+    * [25 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2523)
+
+        * Kubernetes version 1.27 certification
+
     * [24 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2423)
 
         * New! {{site.data.keyword.containerlong_notm}} version 1.27.

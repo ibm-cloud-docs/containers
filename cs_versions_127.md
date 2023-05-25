@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-05-24"
+lastupdated: "2023-05-25"
 
 keywords: kubernetes, containers, 127, version 127, 127 update actions
 
@@ -23,6 +23,12 @@ Review information about version 1.27 of {{site.data.keyword.containerlong}}, re
 
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
 {: tip}
+
+
+
+![This badge indicates Kubernetes version 1.27 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.27 certification badge" caption-side="bottom"} 
+
+{{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.27 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation.
 
 
 
@@ -71,7 +77,6 @@ The following table shows the actions that you must take before you update the K
 | **Unsupported:** Pod `seccomp.security.alpha.kubernetes.io/pod` and `container.seccomp.security.alpha.kubernetes.io` annotations | Kubernetes no longer supports the pod `seccomp.security.alpha.kubernetes.io/pod` and `container.seccomp.security.alpha.kubernetes.io` annotations. These annotations have been deprecated since Kubernetes version 1.19 and has been replaced by the `securityContext.seccompProfile` field for pods and containers. If your pods rely on these unsupported annotations, update them to use the `securityContext.seccompProfile` field instead. For more information, see [Create Pod that uses the container runtime default seccomp profile](https://kubernetes.io/docs/tutorials/security/seccomp/#create-pod-that-uses-the-container-runtime-default-seccomp-profile){: external}. |
 | `k8s.gcr.io` redirect to `registry.k8s.io` | Kubernetes version 1.27 release artifacts are not published to the `k8s.gcr.io` registry. Futhermore, `k8s.gcr.io` registry traffic will be redirected to `registry.k8s.io`. For more information, see [k8s.gcr.io Redirect to registry.k8s.io - What You Need to Know](https://kubernetes.io/blog/2023/03/10/image-registry-redirect/){: external}. Note that IBM Cloud Kubernetes Service has already handled this migration action for all resources provided by IBM. |
 | `kubelet` legacy iptables rules | `kubelet` no longer creates certain legacy iptables rules by default. It is possible that this will cause problems with some third-party components that improperly depended on those rules. For more information, see [Kubernetes’s IPTables Chains Are Not API](https://kubernetes.io/blog/2022/09/07/iptables-chains-not-api/){: external}. |
-
 {: caption="Changes to make before you update the master to Kubernetes 1.27" caption-side="bottom"}
 
 

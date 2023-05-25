@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-05-23"
+lastupdated: "2023-05-25"
 
 keywords: kubernetes, containers
 
@@ -131,7 +131,7 @@ Review the sample commands for creating classic clusters in the CLI. For more de
 Create a VPC cluster with three worker nodes.
 
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name my_cluster --zone us-east-1 --vpc-id <VPC_ID> --subnet-id <VPC_SUBNET_ID> --flavor b2.4x16 --workers 3
+ibmcloud ks cluster create vpc-gen2 --name my_cluster --zone us-east-1 --vpc-id <VPC_ID> --subnet-id <VPC_SUBNET_ID> --flavor bx2.4x16 --workers 3
 ```
 {: pre}
 
