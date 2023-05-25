@@ -256,6 +256,8 @@ subcollection: containers
 
     * [25 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2523)
 
+        * CLI version `1.0.523`.
+
         * Kubernetes version 1.27 certification
 
     * [24 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2423)
@@ -6409,6 +6411,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version v1.0.523](/docs/containers?topic=containers-cs_cli_changelog#cli-10523)
+
 * [Version v1.0.516](/docs/containers?topic=containers-cs_cli_changelog#cli-10516)
 
 * [Version v1.0.510](/docs/containers?topic=containers-cs_cli_changelog#cli-10510)
@@ -11255,6 +11259,8 @@ subcollection: containers
 * [Gathering Calico logs](/docs/containers?topic=containers-calico_log_level#calico-log-gather)
 
 [Why does my pod with long running TCP connections get disconnected?](/docs/containers?topic=containers-ts-keepalive-sysctl#ts-keepalive-sysctl)
+
+[Why are DNS lookups from certain pods so slow?](/docs/containers?topic=containers-ts-slow-dns-lookup#ts-slow-dns-lookup)
 
 
 ### Logging and monitoring

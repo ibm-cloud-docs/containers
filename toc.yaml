@@ -503,6 +503,7 @@ toc:
               - ts-letsencrypt.md
               - ts-calico-log-level.md
               - ts-keepalive-sysctl.md
+              - ts-slow-dns-lookup.md
           - topicgroup:
               label: Logging and monitoring
               topics:
