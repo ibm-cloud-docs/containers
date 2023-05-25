@@ -256,6 +256,8 @@ subcollection: containers
 
     * [25 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2523)
 
+        * CLI version `1.0.523`.
+
         * Kubernetes version 1.27 certification
 
     * [24 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2423)
@@ -6408,6 +6410,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.523](/docs/containers?topic=containers-cs_cli_changelog#cli-10523)
 
 * [Version v1.0.516](/docs/containers?topic=containers-cs_cli_changelog#cli-10516)
 

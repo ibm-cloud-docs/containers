@@ -35,10 +35,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-may2523}
 {: release-note}
 
+CLI version `1.0.523`.
+:   For more information, see the [change log](/docs/containers?topic=containers-cs_cli_changelog).
 
+
+  
 Kubernetes version 1.27 certification
 :   Version [1.27](/docs/containers?topic=containers-cs_versions_127) release is now certified.
-
 
 
 
