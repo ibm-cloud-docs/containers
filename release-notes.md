@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-24"
+lastupdated: "2023-05-25"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## May 2023
 {: #containers-may23}
+
+
+
+### 25 May 2023
+{: #containers-may2523}
+{: release-note}
+
+
+Kubernetes version 1.27 certification
+:   Version [1.27](/docs/containers?topic=containers-cs_versions_127) release is now certified.
 
 
 

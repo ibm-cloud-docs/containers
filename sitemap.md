@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-05-24"
+lastupdated: "2023-05-25"
 
 keywords: containers
 subcollection: containers
@@ -253,6 +253,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
+
+    * [25 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2523)
+
+        * Kubernetes version 1.27 certification
 
     * [24 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2423)
 
