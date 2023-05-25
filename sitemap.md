@@ -11256,6 +11256,8 @@ subcollection: containers
 
 [Why does my pod with long running TCP connections get disconnected?](/docs/containers?topic=containers-ts-keepalive-sysctl#ts-keepalive-sysctl)
 
+[Why are DNS lookups from certain pods so slow?](/docs/containers?topic=containers-ts-slow-dns-lookup#ts-slow-dns-lookup)
+
 
 ### Logging and monitoring
 {: #sitemap_logging_and_monitoring1}
