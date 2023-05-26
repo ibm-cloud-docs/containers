@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-03-29"
+lastupdated: "2023-05-26"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -30,7 +30,8 @@ The following table shows the changes that are in the worker node fix pack 1.9.1
 {: shortdesc}
 
 
-| Component | Previous | Current | Description || -------------- | -------------- | -------------- | ------------- |
+| Component | Previous | Current | Description |
+| -------------- | -------------- | -------------- | ------------- |
 | Ubuntu packages | N/A | N/A | Updates to installed Ubuntu packages. |
 {: caption="Table 1. Changes since version 1.9.11_1538" caption-side="bottom"}
 
@@ -40,7 +41,8 @@ The following table shows the changes that are in the worker node fix pack 1.9.1
 The following table shows the changes that are in the worker node fix pack 1.9.11_1538.
 {: shortdesc}
 
-| Component | Previous | Current | Description || -------------- | -------------- | -------------- | ------------- |
+| Component | Previous | Current | Description |
+| -------------- | -------------- | -------------- | ------------- |
 | Worker node resource utilization | N/A | N/A | Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node). |
 {: caption="Table 1. Changes since version 1.9.11_1537" caption-side="bottom"}
 
@@ -51,7 +53,8 @@ The following table shows the changes that are in the worker node fix pack 1.9.1
 The following table shows the changes that are in the worker node fix pack 1.9.11_1537.
 {: shortdesc}
 
-| Component | Previous | Current | Description || -------------- | -------------- | -------------- | ------------- |
+| Component | Previous | Current | Description |
+| -------------- | -------------- | -------------- | ------------- |
 | Docker | 17.06.2 | 18.06.1 | See the [Docker release notes](https://docs.docker.com/engine/release-notes/23.0/#18061-ce){: external} |
 {: caption="Table 1. Changes since version 1.9.11_1536" caption-side="bottom"}
 
@@ -164,7 +167,8 @@ The following table shows the changes that are in patch 1.9.10_1523.
 {: shortdesc}
 
 
-| Component | Previous | Current | Description || -------------- | -------------- | -------------- | ------------- |
+| Component | Previous | Current | Description |
+| -------------- | -------------- | -------------- | ------------- |
 | {{site.data.keyword.cloud_notm}} Provider | v1.9.9-167 | v1.9.10-192 | Updated to support Kubernetes 1.9.10 release. In addition, changed the cloud provider configuration to better handle updates for load balancer services with `externalTrafficPolicy` set to `local`. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in | 334 | 338 | Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You can't update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.  \n Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class). |
 | Kubernetes | v1.9.9 | v1.9.10 | See the Kubernetes [release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.10){: external} |
@@ -204,7 +208,8 @@ The following table shows the changes that are in patch 1.9.9_1520.
 {: shortdesc}
 
 
-| Component | Previous | Current | Description || -------------- | -------------- | -------------- | ------------- |
+| Component | Previous | Current | Description |
+| -------------- | -------------- | -------------- | ------------- |
 | {{site.data.keyword.cloud_notm}} Provider | v1.9.8-141 | v1.9.9-167 | Updated to support Kubernetes 1.9.9 release. In addition, LoadBalancer service `create failure` events now include any portable subnet errors. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in | 320 | 334 | Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes. |
 | Kubernetes | v1.9.8 | v1.9.9 | See the Kubernetes [release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.9){: external} {: external} |
