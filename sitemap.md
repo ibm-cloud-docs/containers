@@ -9639,17 +9639,6 @@ subcollection: containers
 * [Change log for 1.7.16_1511, released 19 April 2018](/docs/containers?topic=containers-17_changelog#1716_1511)
 
 
-## Ingress ConfigMap change log
-{: #sitemap_ingress_configmap_change_log1}
-
-
-[Ingress ConfigMap change log](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ibm-k8s-controller-config-change-log)
-
-* [3 October 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-3-oct-2022)
-
-* [17 August 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-17-aug-2022)
-
-
 ## Activity Tracker events
 {: #sitemap_activity_tracker_events}
 

@@ -50,7 +50,7 @@ The following table shows the changes that are in the worker node fix pack 1.25.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-210-generic | 4.15.0-211-generic | Worker node kernel & package updates for [CVE-2021-3979](https://nvd.nist.gov/vuln/detail/CVE-2021-3979){: external}, [CVE-2023-1118](https://nvd.nist.gov/vuln/detail/CVE-2023-1118){: external}. |
 | Ubuntu 20.04 packages | 5.4.0-139-generic | 5.4.0-148-generic | Worker node kernel & package updates for [CVE-2023-2004](https://nvd.nist.gov/vuln/detail/CVE-2023-2004){: external}. |
-| Kubernetes | 1.25.9 | 1.25.10 | see [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.10){: external}. ||
+| Kubernetes | 1.25.9 | 1.25.10 | see [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.10){: external}. |
 | Haproxy | N\A | N\A | N\A|
 {: caption="Changes since version 1.25.9_1544" caption-side="bottom"}
 
