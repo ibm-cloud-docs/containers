@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-24"
+lastupdated: "2023-05-26"
 
 keywords: kubernetes
 
@@ -128,9 +128,13 @@ Review the default settings for the `kubelet` worker node component in {{site.da
 {: shortdesc}
 
 `kubeAPIQPS: 50` (Kubernetes version 1.27 and later)
+
 `kubeAPIBurst: 100` (Kubernetes version 1.27 and later)
+
 `eventBurst: 100` (Kubernetes version 1.27 and later)
+
 `eventRecordQPS: 50` (Kubernetes version 1.27 and later)
+
 `serializeImagePulls: false`
 `registryPullQPS: 5`
 `registryBurst: 5`
