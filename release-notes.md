@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-25"
+lastupdated: "2023-05-31"
 
 keywords: kubernetes, release notes
 
@@ -29,7 +29,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## May 2023
 {: #containers-may23}
 
+### 31 May 2023
+{: #containers-may3123}
+{: release-note}
 
+
+
+Master fix packs `1.24.14_1568`, `1.25.10_1545`, and `1.26.5_1537`.
+:   For more information, see the change logs: [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125), and [1.26](/docs/containers?topic=containers-changelog_126).
 
 ### 25 May 2023
 {: #containers-may2523}
