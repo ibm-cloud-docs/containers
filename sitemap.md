@@ -7788,6 +7788,16 @@ subcollection: containers
 
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
+[{{site.data.keyword.filestorage_vpc_full_notm}} add-on change log](/docs/containers?topic=containers-versions-vpc-file-addon#versions-vpc-file-addon)
+
+* [Version 1.1](/docs/containers?topic=containers-versions-vpc-file-addon#011_is_file)
+
+    * [Change log for version 1.1-beta, released 15 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.1_is_file_relnote)
+
+* [Version 1.0](/docs/containers?topic=containers-versions-vpc-file-addon#01_is_file)
+
+    * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.0_is_file_relnote)
+
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
 * [Change log for version 2.2.14, released 02 May 2023](/docs/containers?topic=containers-cos_plugin_changelog#02214_object_plugin)

@@ -338,6 +338,7 @@ toc:
           - cs_versions_istio.md
           - versions-autoscaler.md
           - versions-vpc-block-addon.md
+          - versions-vpc-file-addon.md
           - versions-object.md
           - versions-static-route.md
           - versions-backup-restore.md
