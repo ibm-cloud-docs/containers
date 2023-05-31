@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-05-30"
+lastupdated: "2023-05-31"
 
 keywords: containers
 subcollection: containers
@@ -5777,6 +5777,8 @@ subcollection: containers
 * [Adding an {{site.data.keyword.containerlong_notm}} cluster to your PX-Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-cluster)
 
 * [Installing Stork on a non-Portworx cluster](/docs/containers?topic=containers-storage_portworx_backup#px-backup-stork)
+
+* [Backing up data across regions with PX-Backup](/docs/containers?topic=containers-storage_portworx_backup#px-cross-region)
 
 * [Backing up and restoring cluster data with PX-Backup](/docs/containers?topic=containers-storage_portworx_backup#px-backup-and-restore)
 
