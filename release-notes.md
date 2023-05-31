@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-25"
+lastupdated: "2023-05-31"
 
 keywords: kubernetes, release notes
 
@@ -29,7 +29,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## May 2023
 {: #containers-may23}
 
+### 31 May 2023
+{: #containers-may3123}
+{: release-note}
 
+
+
+Master fix packs `1.24.14_1568`, `1.25.10_1545`, and `1.26.5_1537`.
+:   For more information, see the change logs: [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125), and [1.26](/docs/containers?topic=containers-changelog_126).
 
 ### 25 May 2023
 {: #containers-may2523}
@@ -98,8 +105,7 @@ Cluster autoscaler add-on versions `1.0.6_1077`, `1.0.7_1076`, `1.0.8_1078`, and
 {: release-note}
 
 Create Classic and VPC clusters with Terraform
-:   For more information, see [Creating a single-zone classic cluster with Terraform](https://cloud.ibm.com/docs/openshift?topic=openshift-cluster-create-classic&interface=terraform#cluster_classic_tf) and [Creating a VPC cluster with Terraform](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=terraform#cluster_vpcg2_tf).
-
+:   For more information, see [Creating a single-zone classic cluster with Terraform](/docs/containers?topic=containers-cluster-create-classic&interface=terraform#cluster_classic_tf) and [Creating a VPC cluster with Terraform](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=terraform#cluster_vpcg2_tf).
 
 
 ### 9 May 2023

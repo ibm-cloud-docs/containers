@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-05-26"
+lastupdated: "2023-05-31"
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
 
@@ -36,6 +36,28 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.26 change log.
 {: shortdesc}
+
+
+### Change log for master fix pack 1.26.5_1537, released 23 May 2023
+{: #1265_1537_M}
+
+The following table shows the changes that are in the master fix pack 1.26.5_1537. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.19 | v1.3.20 | Updated `Go` to version `1.19.9` and updated dependencies. Updated the base image. Resolved addon health bugs. |
+| etcd | v3.5.7 | v3.5.8 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.8){: external}. |
+| GPU device plug-in | fc4cf22 | 28d80a0 | Updated `Go` to version `1.19.8` |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.26.4-1 | v1.26.4-7 | Updated support of the Kubernetes 1.26.4 release. Updated Go dependencies. Key rotation. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 778ef2b | 4e2f346 | Make armada-rbac-sync FIPS compliant |
+| Key Management Service provider | v2.6.5 | v2.6.6 | Updated `Go` to version `1.19.9` and updated dependencies. |
+| Kubernetes | v1.26.4 | v1.26.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.5){: external}. |
+| Kubernetes DNS autoscaler | 1.8.6 | v1.8.8 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/v1.8.8){: external}. |
+| Kubernetes NodeLocal DNS cache | 1.22.18 | 1.22.21 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.21){: external}. |
+| Portieris admission controller | v0.13.4 | v0.13.5 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.5){: external}. |
+{: caption="Changes since version 1.26.4_1535" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.26.5_1538, released 23 May 2023

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-05-26"
+lastupdated: "2023-05-31"
 
 keywords: kubernetes, containers
 
@@ -35,6 +35,27 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.24 change log.
 {: shortdesc}
+
+
+### Change log for master fix pack 1.24.14_1568, released 23 May 2023
+{: #12414_1568_M}
+
+The following table shows the changes that are in the master fix pack 1.24.14_1568. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.19 | v1.3.20 | Updated `Go` to version `1.19.9` and updated dependencies. Updated the base image. Resolved addon health bugs. |
+| etcd | v3.5.7 | v3.5.8 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.8){: external}. |
+| GPU device plug-in | fc4cf22 | 28d80a0 | Updated `Go` to version `1.19.8` |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.24.13-1 | v1.24.13-6 | Updated support of the Kubernetes 1.24.13 release. Updated Go dependencies. Key rotation. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 778ef2b | 4e2f346 | Make armada-rbac-sync FIPS compliant |
+| Key Management Service provider | v2.6.5 | v2.6.6 | Updated `Go` to version `1.19.9` and updated dependencies. |
+| Kubernetes | v1.24.13 | v1.24.14 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.5){: external}. |
+| Kubernetes NodeLocal DNS cache | 1.22.18 | 1.22.21 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.21 |
+| Portieris admission controller | v0.13.4 | v0.13.5 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.5){: external}. |
+{: caption="Changes since version 1.24.13_1566" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.24.14_1570, released 23 May 2023
