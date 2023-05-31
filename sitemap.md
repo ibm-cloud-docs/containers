@@ -3136,31 +3136,6 @@ subcollection: containers
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
 
-## Using Calico network policies to control traffic on Classic clusters
-{: #sitemap_using_calico_network_policies_to_control_traffic_on_classic_clusters}
-
-
-[Using Calico network policies to control traffic on Classic clusters](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
-
-* [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
-
-* [Audience](/docs/containers?topic=containers-policy_tutorial#policies_audience)
-
-* [Prerequisites](/docs/containers?topic=containers-policy_tutorial#policies_prereqs)
-
-* [Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
-
-* [Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
-
-* [Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
-
-* [Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
-
-* [Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
-
-* [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
-
-
 ## Migrating an app from Cloud Foundry to a cluster
 {: #sitemap_migrating_an_app_from_cloud_foundry_to_a_cluster}
 
@@ -4186,6 +4161,26 @@ subcollection: containers
 ### Controlling traffic in Classic clusters
 {: #sitemap_controlling_traffic_in_classic_clusters}
 
+
+[Using Calico network policies to control traffic on Classic clusters](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
+
+* [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
+
+* [Audience](/docs/containers?topic=containers-policy_tutorial#policies_audience)
+
+* [Prerequisites](/docs/containers?topic=containers-policy_tutorial#policies_prereqs)
+
+* [Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
+
+* [Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
+
+* [Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
+
+* [Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
+
+* [Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
+
+* [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
 
 [Controlling traffic with network policies](/docs/containers?topic=containers-network_policies#network_policies)
 

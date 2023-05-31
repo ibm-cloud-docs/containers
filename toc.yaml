@@ -45,7 +45,6 @@ toc:
           label: Tutorials library for Kubernetes Service
           href: https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20
       - cs_tutorial_vpc.md
-      - cs_tutorials_policies.md
       - cs_tutorials_cf.md
   - navgroup: 
       id: howto
@@ -130,6 +129,7 @@ toc:
           - topicgroup: 
               label: Controlling traffic in Classic clusters
               topics:
+              - cs_tutorials_policies.md
               - network-policy.md
               - firewall.md
               - edge.md
