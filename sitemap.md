@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-05-31"
+lastupdated: "2023-06-01"
 
 keywords: containers
 subcollection: containers
@@ -4584,6 +4584,8 @@ subcollection: containers
 * [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)
 
     * [Considerations and prerequisites](/docs/containers?topic=containers-health-audit#prereqs-apiserver-logs)
+
+    * [Forwarding Kubernetes API audit logs to {{site.data.keyword.la_short}}](/docs/containers?topic=containers-health-audit#audit-api-server-la)
 
     * [Forwarding Kubernetes API audit logs to a resource in the {{site.data.keyword.cloud_notm}} private network](/docs/containers?topic=containers-health-audit#audit-api-server-priv)
 
