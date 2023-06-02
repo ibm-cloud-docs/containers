@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-05-25"
+lastupdated: "2023-06-02"
 
 keywords: kubernetes, containers, 127, version 127, 127 update actions
 
@@ -74,8 +74,8 @@ The following table shows the actions that you must take before you update the K
 | Type | Description |
 | --- | --- |
 | **Unsupported:** Beta version of the `CSIStorageCapacity` API | Migrate manifests and API clients to use the `storage.k8s.io/v1` API version, available since Kubernetes version 1.24. For more information, see [Deprecated API Migration Guide - v1.27](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-27){: external}. | 
-| **Unsupported:** Pod `seccomp.security.alpha.kubernetes.io/pod` and `container.seccomp.security.alpha.kubernetes.io` annotations | Kubernetes no longer supports the pod `seccomp.security.alpha.kubernetes.io/pod` and `container.seccomp.security.alpha.kubernetes.io` annotations. These annotations have been deprecated since Kubernetes version 1.19 and has been replaced by the `securityContext.seccompProfile` field for pods and containers. If your pods rely on these unsupported annotations, update them to use the `securityContext.seccompProfile` field instead. For more information, see [Create Pod that uses the container runtime default seccomp profile](https://kubernetes.io/docs/tutorials/security/seccomp/#create-pod-that-uses-the-container-runtime-default-seccomp-profile){: external}. |
-| `k8s.gcr.io` redirect to `registry.k8s.io` | Kubernetes version 1.27 release artifacts are not published to the `k8s.gcr.io` registry. Futhermore, `k8s.gcr.io` registry traffic will be redirected to `registry.k8s.io`. For more information, see [k8s.gcr.io Redirect to registry.k8s.io - What You Need to Know](https://kubernetes.io/blog/2023/03/10/image-registry-redirect/){: external}. Note that IBM Cloud Kubernetes Service has already handled this migration action for all resources provided by IBM. |
+| **Unsupported:** Pod `seccomp.security.alpha.kubernetes.io/pod` and `container.seccomp.security.alpha.kubernetes.io` annotations | Kubernetes no longer supports the pod `seccomp.security.alpha.kubernetes.io/pod` and `container.seccomp.security.alpha.kubernetes.io` annotations. These annotations have been deprecated since Kubernetes version 1.19 and has been replaced by the `securityContext.seccompProfile` field for pods and containers. If your pods rely on these unsupported annotations, update them to use the `securityContext.seccompProfile` field instead. For more information, see [Create Pod that uses the container runtime default `seccomp` profile](https://kubernetes.io/docs/tutorials/security/seccomp/#create-pod-that-uses-the-container-runtime-default-seccomp-profile){: external}. |
+| `k8s.gcr.io` redirect to `registry.k8s.io` | Kubernetes version 1.27 release artifacts are not published to the `k8s.gcr.io` registry. Furthermore, `k8s.gcr.io` registry traffic will be redirected to `registry.k8s.io`. For more information, see [k8s.gcr.io Redirect to registry.k8s.io - What You Need to Know](https://kubernetes.io/blog/2023/03/10/image-registry-redirect/){: external}. Note that IBM Cloud Kubernetes Service has already handled this migration action for all resources provided by IBM. |
 | `kubelet` legacy iptables rules | `kubelet` no longer creates certain legacy iptables rules by default. It is possible that this will cause problems with some third-party components that improperly depended on those rules. For more information, see [Kubernetes’s IPTables Chains Are Not API](https://kubernetes.io/blog/2022/09/07/iptables-chains-not-api/){: external}. |
 {: caption="Changes to make before you update the master to Kubernetes 1.27" caption-side="bottom"}
 
