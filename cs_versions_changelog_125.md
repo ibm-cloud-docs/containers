@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-05-31"
+lastupdated: "2023-06-02"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -49,7 +49,7 @@ The following table shows the changes that are in the master fix pack 1.25.10_15
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Cluster health image | v1.3.19 | v1.3.20 | Updated `Go` to version `1.19.9` and updated dependencies. Updated the base image. Resolved addon health bugs. |
+| Cluster health image | v1.3.19 | v1.3.20 | Updated `Go` to version `1.19.9` and updated dependencies. Updated the base image. Resolved add-on health bugs. |
 | etcd | v3.5.7 | v3.5.8 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.8){: external}. |
 | GPU device plug-in | fc4cf22 | 28d80a0 | Updated `Go` to version `1.19.8` |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.25.9-1 | v1.25.9-7 | Updated support of the Kubernetes 1.25.9 release. Updated Go dependencies. Key rotation. |
