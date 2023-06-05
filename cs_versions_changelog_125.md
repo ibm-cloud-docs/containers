@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-06-02"
+lastupdated: "2023-06-05"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -38,6 +38,20 @@ Review the version 1.25 change log.
 {: shortdesc}
 
 
+
+
+### Change log for worker node fix pack 1.25.10_1547, released 5 June 2023
+{: #12510_1547_W}
+
+The following table shows the changes that are in the worker node fix pack 1.25.10_1547. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 18.04 packages | 4.15.0-211-generic | 4.15.0-212-generic | Worker node kernel & package updates for [CVE-2019-17595](https://nvd.nist.gov/vuln/detail/CVE-2019-17595){: external},[CVE-2021-39537](https://nvd.nist.gov/vuln/detail/CVE-2021-39537){: external},[CVE-2022-29458](https://nvd.nist.gov/vuln/detail/CVE-2022-29458){: external},[CVE-2022-4304](https://nvd.nist.gov/vuln/detail/CVE-2022-4304){: external},[CVE-2023-1380](https://nvd.nist.gov/vuln/detail/CVE-2023-1380){: external},[CVE-2023-25584](https://nvd.nist.gov/vuln/detail/CVE-2023-25584){: external},[CVE-2023-25585](https://nvd.nist.gov/vuln/detail/CVE-2023-25585){: external},[CVE-2023-25588](https://nvd.nist.gov/vuln/detail/CVE-2023-25588){: external},[CVE-2023-2650](https://nvd.nist.gov/vuln/detail/CVE-2023-2650){: external},[CVE-2023-29491](https://nvd.nist.gov/vuln/detail/CVE-2023-29491){: external},[CVE-2023-30456](https://nvd.nist.gov/vuln/detail/CVE-2023-30456){: external},[CVE-2023-31436](https://nvd.nist.gov/vuln/detail/CVE-2023-31436){: external},[CVE-2023-31484](https://nvd.nist.gov/vuln/detail/CVE-2023-31484){: external},[CVE-2023-32233](https://nvd.nist.gov/vuln/detail/CVE-2023-32233){: external}. |
+| Ubuntu 20.04 packages | 5.4.0-148-generic | 5.4.0-149-generic | Worker node kernel & package updates for [CVE-2021-39537](https://nvd.nist.gov/vuln/detail/CVE-2021-39537){: external},[CVE-2022-29458](https://nvd.nist.gov/vuln/detail/CVE-2022-29458){: external},[CVE-2023-1075](https://nvd.nist.gov/vuln/detail/CVE-2023-1075){: external},[CVE-2023-1118](https://nvd.nist.gov/vuln/detail/CVE-2023-1118){: external},[CVE-2023-1380](https://nvd.nist.gov/vuln/detail/CVE-2023-1380){: external},[CVE-2023-25584](https://nvd.nist.gov/vuln/detail/CVE-2023-25584){: external},[CVE-2023-25585](https://nvd.nist.gov/vuln/detail/CVE-2023-25585){: external},[CVE-2023-25588](https://nvd.nist.gov/vuln/detail/CVE-2023-25588){: external},[CVE-2023-2612](https://nvd.nist.gov/vuln/detail/CVE-2023-2612){: external},[CVE-2023-2650](https://nvd.nist.gov/vuln/detail/CVE-2023-2650){: external},[CVE-2023-29491](https://nvd.nist.gov/vuln/detail/CVE-2023-29491){: external},[CVE-2023-30456](https://nvd.nist.gov/vuln/detail/CVE-2023-30456){: external},[CVE-2023-31436](https://nvd.nist.gov/vuln/detail/CVE-2023-31436){: external},[CVE-2023-32233](https://nvd.nist.gov/vuln/detail/CVE-2023-32233){: external}. |
+| Kubernetes | N/A |N/A|N/A|
+{: caption="Changes since version 1.25.10_1546" caption-side="bottom"}
 
 
 ### Change log for master fix pack 1.25.10_1545, released 23 May 2023
