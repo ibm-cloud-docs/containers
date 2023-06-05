@@ -256,7 +256,7 @@ subcollection: containers
 
     * [June 5](/docs/containers?topic=containers-containers-relnotes#containers-jun523)
 
-        * Worker node fix packs `1.24.14_1571`, `1.25.10_1547`, `1.26.5_1539`, and `1.27.2_1527`, .
+        * Worker node fix packs `1.24.14_1571`, `1.25.10_1547`, `1.26.5_1539`, and `1.27.2_1527`.
 
 * [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
 
