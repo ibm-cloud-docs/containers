@@ -254,6 +254,10 @@ subcollection: containers
 
 * [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
 
+    * [June 6](/docs/containers?topic=containers-containers-relnotes#containers-jun623)
+
+        * Ingress ALB versions `1.6.4_5067_iks`, `1.5.1_5074_iks`, and `1.4.0_5068_iks`
+
     * [June 5](/docs/containers?topic=containers-containers-relnotes#containers-jun523)
 
         * Worker node fix packs `1.24.14_1571`, `1.25.10_1547`, `1.26.5_1539`, and `1.27.2_1527`.
@@ -6996,6 +7000,8 @@ subcollection: containers
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
 
+    * [1.6.4_5067_iks, released 6 June 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5067_iks)
+
     * [1.6.4_4170_iks, released 23 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_4170_iks)
 
     * [1.6.4_4117_iks, released 4 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_4117_iks)
@@ -7011,6 +7017,8 @@ subcollection: containers
     * [1.6.4_3864_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3864_iks)
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
+
+    * [1.5.1_5074_iks, released 6 June 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_5074_iks)
 
     * [1.5.1_4168_iks, released 23 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_4168_iks)
 
@@ -7037,6 +7045,8 @@ subcollection: containers
     * [1.5.1_3536_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3536_iks)
 
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
+
+    * [1.4.0_5068_iks, released 6 June 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_5068_iks)
 
     * [1.4.0_4169_iks, released 23 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_4169_iks)
 

@@ -29,6 +29,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## June 2023
 {: #containers-jun23}
 
+
+
+### June 6
+{: #containers-jun623}
+{: release-note}
+
+Ingress ALB versions `1.6.4_5067_iks`, `1.5.1_5074_iks`, and `1.4.0_5068_iks`
+:   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
+
 ### June 5
 {: #containers-jun523}
 {: release-note}
