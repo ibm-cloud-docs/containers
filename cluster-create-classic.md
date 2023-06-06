@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-24"
+lastupdated: "2023-06-06"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, classic, create
 
@@ -110,7 +110,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
 {: shortdesc}
 
 * Ensure that you complete the prerequisites to [prepare your account](/docs/containers?topic=containers-clusters&interface=ui) and decide on your cluster setup.
-* Install the {{site.data.keyword.cloud_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
+* Install the {{site.data.keyword.cloud_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cli-install).
 
 1. Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you are logging in with a federated ID, use `ibmcloud login --sso`.
 

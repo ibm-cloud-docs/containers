@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-05"
+lastupdated: "2023-06-06"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## June 2023
 {: #containers-jun23}
+
+
+
+### June 6
+{: #containers-jun623}
+{: release-note}
+
+Ingress ALB versions `1.6.4_5067_iks`, `1.5.1_5074_iks`, and `1.4.0_5068_iks`
+:   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
 
 ### June 5
 {: #containers-jun523}
@@ -5016,7 +5027,7 @@ Version change log
 
 
 Adding classic infrastructure servers to gateway-enabled clusters
-:   [Adding classic IBM Cloud infrastructure server instances to your cluster network](/docs/containers?topic=containers-add_workers#gateway_vsi) is now generally available for classic gateway-enabled clusters.
+:   Adding classic IBM Cloud infrastructure server instances to your cluster network is now generally available for classic gateway-enabled clusters.
 
 
 
@@ -5204,7 +5215,7 @@ Ingress ALB change log
 {: release-note}
 
 New! Adding classic infrastructure servers to gateway-enabled classic clusters (Beta)
-:   If you have non-containerized workloads on a classic IBM Cloud infrastructure virtual server or bare metal server, you can connect those workloads to the workloads in your gateway-enabled classic cluster by [adding the server instance to your cluster network](/docs/containers?topic=containers-add_workers#gateway_vsi).
+:   If you have non-containerized workloads on a classic IBM Cloud infrastructure virtual server or bare metal server, you can connect those workloads to the workloads in your gateway-enabled classic cluster by adding the server instance to your cluster network.
 
 ### 4 November 2019
 {: #containers-nov0419}
@@ -5354,8 +5365,7 @@ End of service of {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon
 New! Gateway-enabled classic clusters
 :   Keep your compute workloads private and allow limited public connectivity to your classic cluster by enabling a gateway. You can enable a gateway only on standard, Kubernetes clusters during cluster creation.
 :   When you enable a gateway on a classic cluster, the cluster is created with a `compute` worker pool of compute worker nodes that are connected to a private VLAN only, and a `gateway` worker pool of gateway worker nodes that are connected to public and private VLANs. Traffic into or out of the cluster is routed through the gateway worker nodes, which provide your cluster with limited public access. For more information, check out the following links.
-        - [Using a gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway)
-        - [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_nodes)
+        - Isolating networking workloads to edge nodes in classic gateway-enabled clusters
         - Flow of traffic to apps when using an [NLB 1.0](/docs/containers?topic=containers-loadbalancer-about), an [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about), or Ingress ALBs.
 
 :   Ready to get started? [Create a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-cluster-create-classic&interface=ui).

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-06-06"
 
 keywords: kubernetes, kubectl, exec, timeout
 
@@ -29,7 +29,7 @@ There is a known issue that prevents the `kubectl exec <pod_name>` command from 
 For clusters that run on Kubernetes version 1.21 or later, run the `kubectl exec` command with `kubectl` version 1.20. To run all other commands, use the `kubectl` version that matches the `major.minor` version of your Kubernetes cluster. 
 {: tsResolve}
 
-1. [Download the binary file for `kubectl` version 1.20](/docs/containers?topic=containers-cs_cli_install#kubectl) and rename it to `kubectl-1.20` or similar.
+1. [Download the binary file for `kubectl` version 1.20](/docs/containers?topic=containers-cli-install) and rename it to `kubectl-1.20` or similar.
 
 2. To run `kubectl exec`, refer to the renamed 1.20 version.
 

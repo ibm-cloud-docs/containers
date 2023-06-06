@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-05"
+lastupdated: "2023-06-06"
 
 keywords: file, debug, help
 
@@ -175,7 +175,7 @@ If you use a `kubectl` CLI version that does not match at least the major.minor 
 
     The CLI versions match if you can see the same version in `GitVersion` for the client and the server. You can ignore the `+IKS` part of the version for the server.
 
-2. If the `kubectl` CLI versions on your local machine and your cluster don't match, either [update your cluster](/docs/containers?topic=containers-update) or [install a different CLI version on your local machine](/docs/containers?topic=containers-cs_cli_install#kubectl).
+2. If the `kubectl` CLI versions on your local machine and your cluster don't match, either [update your cluster](/docs/containers?topic=containers-update) or [install a different CLI version on your local machine](/docs/containers?topic=containers-cli-install.
 
 ## Updating Helm charts
 {: #debug_storage_px_helm}

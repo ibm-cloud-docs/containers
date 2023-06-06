@@ -52,8 +52,11 @@ toc:
       - topicgroup:
           label: Installing the CLI and API
           topics:
-          - cs_cli_install.md
+          - include: ../cli/reference/ibmcloud/download_cli.md
+          - include: ../cli/reference/ibmcloud/extend_cli.md
+          - cli-install.md
           - api-install.md
+          - include: ../cli/reference/ibmcloud/uninstall_cli.md
       - topicgroup:
           label: Planning your cluster environment
           topics:
@@ -565,6 +568,7 @@ toc:
               - ts-ingress-essws.md
               - ts-ingress-essdne.md
               - nested-ctm.md
+              - ts-istio-ingressgateway-pending.md
           - topicgroup:
               label: File Storage
               topics:

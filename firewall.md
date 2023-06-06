@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-30"
+lastupdated: "2023-06-06"
 
 keywords: kubernetes, allowlist, firewall, vyatta, ips
 
@@ -37,7 +37,8 @@ Review these situations in which you might need to open specific ports and IP ad
 {: #corporate}
 
 If corporate network policies prevent access from your local system to public endpoints via proxies or allowlists, you must allow access to run [`ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands](#firewall_bx), [`kubectl` commands](#firewall_kubectl), and [`calicoctl` commands](#firewall_calicoctl) from your local system.
-{: shortdesc}
+
+
 
 ### Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind an allowlist
 {: #firewall_bx}

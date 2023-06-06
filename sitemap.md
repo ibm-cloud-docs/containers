@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-06-05"
+lastupdated: "2023-06-06"
 
 keywords: containers
 subcollection: containers
@@ -253,6 +253,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
+
+    * [June 6](/docs/containers?topic=containers-containers-relnotes#containers-jun623)
+
+        * Ingress ALB versions `1.6.4_5067_iks`, `1.5.1_5074_iks`, and `1.4.0_5068_iks`
 
     * [June 5](/docs/containers?topic=containers-containers-relnotes#containers-jun523)
 
@@ -3169,29 +3173,37 @@ subcollection: containers
 {: #sitemap_installing_the_cli_and_api}
 
 
-[Setting up the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)
+[Installing the stand-alone {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-install-ibmcloud-cli#install-ibmcloud-cli)
 
-* [Installing the IBM Cloud CLI and plug-ins](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)
+* [Before you begin](/docs/containers?topic=containers-install-ibmcloud-cli#before-download-cli)
 
-* [Installing the Kubernetes CLI (`kubectl`)](/docs/containers?topic=containers-cs_cli_install#kubectl)
+* [Installing with an installer](/docs/containers?topic=containers-install-ibmcloud-cli#ibmcloud-cli-installer)
 
-* [Running the CLI in a container on your computer](/docs/containers?topic=containers-cs_cli_install#cs_cli_container)
+* [Installing from the shell](/docs/containers?topic=containers-install-ibmcloud-cli#shell_install)
 
-* [Configuring the CLI to run `kubectl`](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Installing to a custom directory](/docs/containers?topic=containers-install-ibmcloud-cli#install-custom-dir)
 
-* [Setting the Kubernetes context for multiple clusters](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple)
+* [Updating the {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-install-ibmcloud-cli#update-ibmcloud-cli)
 
-* [Creating a temporary `kubeconfig` file](/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig)
+[Extending {{site.data.keyword.cloud_notm}} CLI with plug-ins](/docs/containers?topic=containers-plug-ins#plug-ins)
 
-* [Updating the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
+* [Before you begin](/docs/containers?topic=containers-plug-ins#cli-before-you-begin)
 
-* [Installing the `odo` CLI for developers](/docs/containers?topic=containers-cs_cli_install#cli-odo-install)
+* [Searching for a plug-in](/docs/containers?topic=containers-plug-ins#cli-search-plugin)
 
-* [Uninstalling the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
+* [Installing a plug-in from the {{site.data.keyword.cloud_notm}} CLI repository](/docs/containers?topic=containers-plug-ins#install-from-repo)
 
-* [Using the {{site.data.keyword.cloud-shell_notm}} in your web browser](/docs/containers?topic=containers-cs_cli_install#cloud-shell)
+    * [Installing a specific plug-in](/docs/containers?topic=containers-plug-ins#cli-install-plugin)
 
-* [Deprecated: Using the Kubernetes web terminal in your web browser](/docs/containers?topic=containers-cs_cli_install#cli_web)
+    * [Installing all plug-ins](/docs/containers?topic=containers-plug-ins#cli-install-all)
+
+    * [Installing multiple plug-ins](/docs/containers?topic=containers-plug-ins#cli-install-multiple)
+
+* [Confirming installed plug-ins](/docs/containers?topic=containers-plug-ins#cli-install-view)
+
+* [Related information](/docs/containers?topic=containers-plug-ins#cli-install-relinfo)
+
+[Installing the Kubernetes CLI](/docs/containers?topic=containers-cli-install#cli-install)
 
 [Setting up the API](/docs/containers?topic=containers-cs_api_install#cs_api_install)
 
@@ -3204,6 +3216,12 @@ subcollection: containers
 * [Refreshing IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
 
 * [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_cli_refresh)
+
+[Uninstalling the stand-alone {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-ibmcloud-cli)
+
+* [Uninstalling on Windows](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-cli-windows)
+
+* [Uninstalling on Linux and macOS](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-cli-linux-macos)
 
 
 ## Planning your cluster environment
@@ -3347,16 +3365,6 @@ subcollection: containers
     * [Worker communication to other services or networks with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-services)
 
     * [External communication to apps that run on worker nodes with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-external)
-
-* [Scenario: Extend your on-premises data center with a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#gateway)
-
-    * [Worker-to-worker communication in a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#limited-public-worker)
-
-    * [Worker-to-master and user-to-master communication in a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#limited-public-master)
-
-    * [Worker communication to other services or networks in a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#limited-public-service)
-
-    * [External communication to apps that run on worker nodes in a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#limited-public-external)
 
 * [Scenario: Allow limited public connectivity with a gateway appliance](/docs/containers?topic=containers-plan_basics#vyatta-gateway)
 
@@ -3543,28 +3551,6 @@ subcollection: containers
 
     * [Adding a zone to a worker pool](/docs/containers?topic=containers-add_workers#add_zone)
 
-* [Adding worker nodes in gateway-enabled classic clusters](/docs/containers?topic=containers-add_workers#gateway_pools)
-
-    * [Adding a zone to compute and gateway worker pools](/docs/containers?topic=containers-add_workers#add_gateway_zone)
-
-    * [Creating a new compute worker pool](/docs/containers?topic=containers-add_workers#gateway_compute)
-
-    * [Creating a new gateway worker pool](/docs/containers?topic=containers-add_workers#gateway_replace)
-
-* [Adding classic infrastructure servers to gateway-enabled classic clusters](/docs/containers?topic=containers-add_workers#gateway_vsi)
-
-    * [Before you begin](/docs/containers?topic=containers-add_workers#byb)
-
-    * [Step 1: Create the virtual or bare metal server](/docs/containers?topic=containers-add_workers#vsi_1)
-
-    * [Step 2: Create the config map for the server instance connection](/docs/containers?topic=containers-add_workers#vsi_2)
-
-    * [Step 3: Create the server instance connection job](/docs/containers?topic=containers-add_workers#vsi_3)
-
-    * [Updating the server instance connection](/docs/containers?topic=containers-add_workers#update_connection)
-
-    * [Removing the server instance from your cluster network](/docs/containers?topic=containers-add_workers#vsi_4)
-
 * [Deprecated: Adding stand-alone worker nodes](/docs/containers?topic=containers-add_workers#standalone)
 
 * [Installing SGX drivers and platform software on SGX-capable worker nodes](/docs/containers?topic=containers-add_workers#install-sgx)
@@ -3618,9 +3604,15 @@ subcollection: containers
 
 [Enabling the cluster autoscaler add-on in your cluster](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-install-addon)
 
+* [Enabling the cluster autoscaler add-on from the console](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-enable-console)
+
+* [Enabling the cluster autoscaler add-on from the CLI](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-enable-CLI)
+
 * [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-update-addon)
 
-* [Removing the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon#ca-addon-rm)
+* [Removing the cluster autoscaler add-on from the console](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-remove-console)
+
+* [Removing the cluster autoscaler add-on from the CLI](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-remove-cli)
 
 * [Cluster autoscaler add-on parameter reference](/docs/containers?topic=containers-cluster-scaling-install-addon#ca_addon_ref)
 
@@ -7008,6 +7000,8 @@ subcollection: containers
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
 
+    * [1.6.4_5067_iks, released 6 June 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5067_iks)
+
     * [1.6.4_4170_iks, released 23 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_4170_iks)
 
     * [1.6.4_4117_iks, released 4 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_4117_iks)
@@ -7023,6 +7017,8 @@ subcollection: containers
     * [1.6.4_3864_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3864_iks)
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
+
+    * [1.5.1_5074_iks, released 6 June 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_5074_iks)
 
     * [1.5.1_4168_iks, released 23 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_4168_iks)
 
@@ -7049,6 +7045,8 @@ subcollection: containers
     * [1.5.1_3536_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3536_iks)
 
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
+
+    * [1.4.0_5068_iks, released 6 June 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_5068_iks)
 
     * [1.4.0_4169_iks, released 23 May 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_4169_iks)
 

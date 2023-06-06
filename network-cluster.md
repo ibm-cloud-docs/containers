@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-06-06"
 
 keywords: kubernetes, vlan
 
@@ -65,7 +65,7 @@ Did you create a cluster with only a private cloud service endpoint before you e
     {: pre}
 
 7. If the cluster is in an environment behind a firewall:
-    - [Allow your authorized cluster users to run `kubectl` commands to access the master through the private cloud service endpoint.](/docs/containers?topic=containers-firewall#firewall_kubectl)
+    - [Allow your authorized cluster users to run `kubectl` commands to access the master through the private cloud service endpoint.](/docs/containers?topic=containers-firewall)
     - [Allow outbound network traffic to the private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for infrastructure resources and for the {{site.data.keyword.cloud_notm}} services that you plan to use.
 
 8. Optional: To use the private cloud service endpoint only:

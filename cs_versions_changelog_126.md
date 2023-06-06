@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-06-05"
+lastupdated: "2023-06-06"
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
 
@@ -62,7 +62,7 @@ The following table shows the changes that are in the master fix pack 1.26.5_153
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.3.19 | v1.3.20 | Updated `Go` to version `1.19.9` and updated dependencies. Updated the base image. Resolved add-on health bugs. |
-| etcd | v3.5.7 | v3.5.8 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.8){: external}. |
+| etcd | v3.5.7 | v3.5.8 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.8){: external}. |
 | GPU device plug-in | fc4cf22 | 28d80a0 | Updated `Go` to version `1.19.8` |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.26.4-1 | v1.26.4-7 | Updated support of the Kubernetes 1.26.4 release. Updated Go dependencies. Key rotation. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 778ef2b | 4e2f346 | Make armada-rbac-sync FIPS compliant |
