@@ -3169,6 +3169,36 @@ subcollection: containers
 {: #sitemap_installing_the_cli_and_api}
 
 
+[Installing the stand-alone {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-install-ibmcloud-cli#install-ibmcloud-cli)
+
+* [Before you begin](/docs/containers?topic=containers-install-ibmcloud-cli#before-download-cli)
+
+* [Installing with an installer](/docs/containers?topic=containers-install-ibmcloud-cli#ibmcloud-cli-installer)
+
+* [Installing from the shell](/docs/containers?topic=containers-install-ibmcloud-cli#shell_install)
+
+* [Installing to a custom directory](/docs/containers?topic=containers-install-ibmcloud-cli#install-custom-dir)
+
+* [Updating the {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-install-ibmcloud-cli#update-ibmcloud-cli)
+
+[Extending {{site.data.keyword.cloud_notm}} CLI with plug-ins](/docs/containers?topic=containers-plug-ins#plug-ins)
+
+* [Before you begin](/docs/containers?topic=containers-plug-ins#cli-before-you-begin)
+
+* [Searching for a plug-in](/docs/containers?topic=containers-plug-ins#cli-search-plugin)
+
+* [Installing a plug-in from the {{site.data.keyword.cloud_notm}} CLI repository](/docs/containers?topic=containers-plug-ins#install-from-repo)
+
+    * [Installing a specific plug-in](/docs/containers?topic=containers-plug-ins#cli-install-plugin)
+
+    * [Installing all plug-ins](/docs/containers?topic=containers-plug-ins#cli-install-all)
+
+    * [Installing multiple plug-ins](/docs/containers?topic=containers-plug-ins#cli-install-multiple)
+
+* [Confirming installed plug-ins](/docs/containers?topic=containers-plug-ins#cli-install-view)
+
+* [Related information](/docs/containers?topic=containers-plug-ins#cli-install-relinfo)
+
 [Installing the Kubernetes CLI](/docs/containers?topic=containers-cli-install#cli-install)
 
 [Setting up the API](/docs/containers?topic=containers-cs_api_install#cs_api_install)
@@ -3182,6 +3212,12 @@ subcollection: containers
 * [Refreshing IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
 
 * [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_cli_refresh)
+
+[Uninstalling the stand-alone {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-ibmcloud-cli)
+
+* [Uninstalling on Windows](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-cli-windows)
+
+* [Uninstalling on Linux and macOS](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-cli-linux-macos)
 
 
 ## Planning your cluster environment
