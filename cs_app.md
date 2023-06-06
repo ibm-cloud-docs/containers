@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-07"
+lastupdated: "2023-06-06"
 
 keywords: kubernetes, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -633,7 +633,7 @@ As part of a [twelve-factor](https://12factor.net/){: external}, cloud-native ap
 For example, you can set up a base `kustomization` YAML file to declare Kubernetes objects such as deployments and PVCs that are shared in your development, testing, and production environments. Next, you can set up separate `kustomization` YAML files that have customized configurations for each environment, such as more replicas in production than testing. These customized YAML files can then overlay, or build on, the shared base YAML file so that you can manage environments that are mostly identical except for a few overlay configuration differences that you source-control. For more information about Kustomize such as a glossary and FAQs, check out the [Kustomize docs](https://kubectl.docs.kubernetes.io/references/kustomize/){: external}.
 
 Before you begin: 
-* Make sure that your [`kubectl` version](/docs/containers?topic=containers-cs_cli_install#kubectl) matches your cluster version.
+* Make sure that your [`kubectl` version](/docs/containers?topic=containers-cli-install) matches your cluster version.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To set up configuration files with Kustomize:

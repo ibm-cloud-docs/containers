@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-05-02"
+lastupdated: "2023-06-06"
 
 keywords: kubernetes
 
@@ -112,7 +112,7 @@ Do you have so many resources and users in your cluster that the Kubernetes dash
 
 Before you begin
 
-- [Install the required CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
+- [Install the required CLIs](/docs/containers?topic=containers-cli-install).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
 - To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform access role](/docs/containers?topic=containers-users#checking-perms). If you are assigned only a service access role but no platform access role, [launch the Kubernetes dashboard from the CLI](#db_cli).
@@ -139,7 +139,7 @@ After a cluster is created, you can deploy an app into that cluster by using the
 
 Before you begin
 
-- Install the required [CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
+- Install the required [CLIs](/docs/containers?topic=containers-cli-install).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 

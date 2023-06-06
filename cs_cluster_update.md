@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-05-09"
+lastupdated: "2023-06-06"
 
 keywords: kubernetes, upgrade, version, update cluster, update worker nodes, update cluster components, update cluster master
 
@@ -99,7 +99,7 @@ To update the Kubernetes master _major_ or _minor_ version:
 
 4. Update your API server and associated master components by using the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/login) or running the CLI `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update).
 5. Wait a few minutes, then confirm that the update is complete. Review the API server version on the {{site.data.keyword.cloud_notm}} clusters dashboard or run `ibmcloud ks cluster ls`.
-6. Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the API server version that runs in the master. [Kubernetes does not support](https://kubernetes.io/releases/version-skew-policy/){: external} `kubectl` client versions that are two or more versions apart from the server version (n +/- 2).
+6. Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cli-install) that matches the API server version that runs in the master. Kubernetes does not support `kubectl` client versions that are two or more versions apart from the server version (n +/- 2).
 
 When the master update is complete, you can update your worker nodes, depending on the type of cluster infrastructure provider that you have.
 * [Updating classic worker nodes](#worker_node).

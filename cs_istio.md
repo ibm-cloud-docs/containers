@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-04-20"
+lastupdated: "2023-06-06"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -354,7 +354,7 @@ You can't revert your managed Istio add-on to a previous version. If you want to
     1. Run the command to get the details of your validating webhook configuration.
 
         ```sh
-        kubectl get validatingwebhookconfigurations istiod-istio-system
+        kubectl get validatingwebhookconfigurations
         ```
         {: pre}
 
@@ -384,7 +384,7 @@ You can't revert your managed Istio add-on to a previous version. If you want to
     1. Verify that the `istiod-istio-system` webhook is no longer listed.
 
         ```sh
-        kubectl get validatingwebhookconfigurations istiod-istio-system
+        kubectl get validatingwebhookconfigurations
         ```
         {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-03-29"
+lastupdated: "2023-06-06"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -607,7 +607,7 @@ The following table shows the changes that are in the master fix pack 1.16.3_152
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Gateway-enabled cluster controller | 924 | 1032 | Support for [Adding classic infrastructure servers to gateway-enabled classic clusters](/docs/containers?topic=containers-add_workers#gateway_vsi) is now generally available (GA). In addition, the controller is updated to use Alpine base image version 3.10 and to use Go version 1.12.11. |
+| Gateway-enabled cluster controller | 924 | 1032 | Support for Adding classic infrastructure servers to gateway-enabled classic clusters is now generally available (GA). In addition, the controller is updated to use Alpine base image version 3.10 and to use Go version 1.12.11. |
 | IBM Calico extension | N/A | 130 | **New!**: Added a Calico node `init` container that creates Calico private host endpoints for worker nodes. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor    | 353 | 354 | Updated to support [non-root user access to an NFS file share](/docs/containers?topic=containers-cs_storage_nonroot) by allocating a group ID (GID) in the storage class. |
 | {{site.data.keyword.cloud_notm}} Provider    | v1.16.3-94 | v1.16.3-115 | Updated version 1.0 and 2.0 network load balancers (NLBs) to prefer scheduling NLB pods on worker nodes that don't currently run any NLB pods. In addition, the Virtual Private Cloud (VPC) load balancer plug-in is updated to use Go version 1.12.11. |

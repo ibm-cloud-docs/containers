@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-14"
+lastupdated: "2023-06-06"
 
 keywords: kubernetes, calico, egress, rules
 
@@ -53,10 +53,7 @@ When a cluster with a public VLAN is created, a `HostEndpoint` resource with the
 
 A `HostEndpoint` resource with the `ibm.role: worker_private` label is also created automatically for each worker node and its private network interface. A default `allow-all-private-default` policy is created so that all traffic is allowed to and from the private network interface. This `HostEndpoint` makes it easy for cluster users to further restrict private network traffic by creating Calico policies that select `ibm.role: worker_private` and have a lower order number than the `allow-all-private-default`."
 
-These default Calico host policies allow all public outbound network traffic and allow public inbound traffic to specific cluster components, such as Kubernetes NodePort, LoadBalancer, and Ingress services. All private traffic is allowed by default by the `allow-all-private-default` policy Any other inbound network traffic from the internet to your worker nodes that isn't specified in the default policies gets blocked. The default policies don't affect pod to pod traffic.
-
-Trying out a [gateway-enabled cluster](/docs/containers?topic=containers-plan_basics#gateway)? The default Calico host policies apply to the worker nodes in the gateway worker pool because they're the only worker nodes attached to the public network.
-{: tip}
+These default Calico host policies allow all public outbound network traffic and allow public inbound traffic to specific cluster components, such as Kubernetes NodePort, LoadBalancer, and Ingress services. All private traffic is allowed by default by the `allow-all-private-default` policy. Any other inbound network traffic from the internet to your worker nodes that isn't specified in the default policies gets blocked. The default policies don't affect pod to pod traffic.
 
 Don't remove the default policies from your cluster, because they are recreated on the next cluster master refresh or master update. If you want to further restrict traffic, apply lower order Calico policies to block the traffic. Be sure you fully understand what you are blocking, and that the cluster components do not need the traffic you want to block.
 {: important}

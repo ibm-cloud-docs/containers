@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-25"
+lastupdated: "2023-06-06"
 
 keywords: kubernetes
 
@@ -25,7 +25,7 @@ In the command line, you are notified when updates to the `ibmcloud` CLI and plu
 {: shortdesc}
 
 
-Refer to the following change logs for a summary of changes for each version of the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps), which uses the `ibmcloud ks` alias.
+Refer to the following change logs for a summary of changes for each version of the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cli-install), which uses the `ibmcloud ks` alias.
   
 ## Version 1.0
 {: #10}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-10"
+lastupdated: "2023-06-06"
 
 keywords: kubernetes, hardware, flavor, machine type, vm, bm
 
@@ -47,10 +47,6 @@ Classic standard clusters can be created on [virtual](#vm) and [bare metal](#bm)
 VPC clusters can be provisioned as standard clusters on shared [virtual](#vm) worker nodes only, and must be created in one of the supported [multizone locations](/docs/containers?topic=containers-regions-and-zones#zones-vpc). Free VPC clusters are not supported.
 
 VPC clusters can be provisioned using virtual worker nodes on standard infrastructure or dedicated hosts. Free VPC clusters are not supported.
-
-
-
-Gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes by default. During cluster creation you can specify the isolation and flavor for the compute worker nodes, but by default the gateway worker nodes are created on shared virtual machines with the `u3c.2x4` flavor. If you want to change the isolation and flavor of the gateway worker nodes, you can [create a new gateway worker pool](/docs/containers?topic=containers-add_workers#gateway_replace) to replace the `gateway` worker pool.
 
 ### Can I combine different flavors in a cluster?
 {: #combine-flavors}

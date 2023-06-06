@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-06-05"
+lastupdated: "2023-06-06"
 
 keywords: containers
 subcollection: containers
@@ -3169,29 +3169,7 @@ subcollection: containers
 {: #sitemap_installing_the_cli_and_api}
 
 
-[Setting up the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)
-
-* [Installing the IBM Cloud CLI and plug-ins](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)
-
-* [Installing the Kubernetes CLI (`kubectl`)](/docs/containers?topic=containers-cs_cli_install#kubectl)
-
-* [Running the CLI in a container on your computer](/docs/containers?topic=containers-cs_cli_install#cs_cli_container)
-
-* [Configuring the CLI to run `kubectl`](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-
-* [Setting the Kubernetes context for multiple clusters](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple)
-
-* [Creating a temporary `kubeconfig` file](/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig)
-
-* [Updating the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
-
-* [Installing the `odo` CLI for developers](/docs/containers?topic=containers-cs_cli_install#cli-odo-install)
-
-* [Uninstalling the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
-
-* [Using the {{site.data.keyword.cloud-shell_notm}} in your web browser](/docs/containers?topic=containers-cs_cli_install#cloud-shell)
-
-* [Deprecated: Using the Kubernetes web terminal in your web browser](/docs/containers?topic=containers-cs_cli_install#cli_web)
+[Installing the Kubernetes CLI](/docs/containers?topic=containers-cli-install#cli-install)
 
 [Setting up the API](/docs/containers?topic=containers-cs_api_install#cs_api_install)
 
@@ -3347,16 +3325,6 @@ subcollection: containers
     * [Worker communication to other services or networks with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-services)
 
     * [External communication to apps that run on worker nodes with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-external)
-
-* [Scenario: Extend your on-premises data center with a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#gateway)
-
-    * [Worker-to-worker communication in a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#limited-public-worker)
-
-    * [Worker-to-master and user-to-master communication in a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#limited-public-master)
-
-    * [Worker communication to other services or networks in a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#limited-public-service)
-
-    * [External communication to apps that run on worker nodes in a gateway-enabled classic cluster](/docs/containers?topic=containers-plan_basics#limited-public-external)
 
 * [Scenario: Allow limited public connectivity with a gateway appliance](/docs/containers?topic=containers-plan_basics#vyatta-gateway)
 
@@ -3543,28 +3511,6 @@ subcollection: containers
 
     * [Adding a zone to a worker pool](/docs/containers?topic=containers-add_workers#add_zone)
 
-* [Adding worker nodes in gateway-enabled classic clusters](/docs/containers?topic=containers-add_workers#gateway_pools)
-
-    * [Adding a zone to compute and gateway worker pools](/docs/containers?topic=containers-add_workers#add_gateway_zone)
-
-    * [Creating a new compute worker pool](/docs/containers?topic=containers-add_workers#gateway_compute)
-
-    * [Creating a new gateway worker pool](/docs/containers?topic=containers-add_workers#gateway_replace)
-
-* [Adding classic infrastructure servers to gateway-enabled classic clusters](/docs/containers?topic=containers-add_workers#gateway_vsi)
-
-    * [Before you begin](/docs/containers?topic=containers-add_workers#byb)
-
-    * [Step 1: Create the virtual or bare metal server](/docs/containers?topic=containers-add_workers#vsi_1)
-
-    * [Step 2: Create the config map for the server instance connection](/docs/containers?topic=containers-add_workers#vsi_2)
-
-    * [Step 3: Create the server instance connection job](/docs/containers?topic=containers-add_workers#vsi_3)
-
-    * [Updating the server instance connection](/docs/containers?topic=containers-add_workers#update_connection)
-
-    * [Removing the server instance from your cluster network](/docs/containers?topic=containers-add_workers#vsi_4)
-
 * [Deprecated: Adding stand-alone worker nodes](/docs/containers?topic=containers-add_workers#standalone)
 
 * [Installing SGX drivers and platform software on SGX-capable worker nodes](/docs/containers?topic=containers-add_workers#install-sgx)
@@ -3618,9 +3564,15 @@ subcollection: containers
 
 [Enabling the cluster autoscaler add-on in your cluster](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-install-addon)
 
+* [Enabling the cluster autoscaler add-on from the console](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-enable-console)
+
+* [Enabling the cluster autoscaler add-on from the CLI](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-enable-CLI)
+
 * [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-update-addon)
 
-* [Removing the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon#ca-addon-rm)
+* [Removing the cluster autoscaler add-on from the console](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-remove-console)
+
+* [Removing the cluster autoscaler add-on from the CLI](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-remove-cli)
 
 * [Cluster autoscaler add-on parameter reference](/docs/containers?topic=containers-cluster-scaling-install-addon#ca_addon_ref)
 
