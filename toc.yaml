@@ -213,7 +213,6 @@ toc:
               - ingress-domains.md
               - ingress-annotations.md
               - cs_ingress_monitor.md
-
           - topicgroup:
               label: Managing certificates and secrets
               topics:
