@@ -164,7 +164,6 @@
     "why does this happen - No Ingress subdomain exists after cluster creation",
     "The cluster State is normal, but the Ingress Subdomain and Ingress Secret are not available",
     "Ingress subdomain and secret creation takes more time for creation ",
-    "How to update config maps for kubernetes",
     "How to check the progress of the Ingress creation in kubernetes",
     "Ingress Subdomain and Ingress Secret are not available for kubernetes cluster"
   ],
