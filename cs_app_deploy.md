@@ -452,9 +452,3 @@ To run a workload on a GPU machine,
 Now that you deployed a test GPU workload, you might want to set up your cluster to run a tool that relies on GPU processing, such as [IBM Maximo Visual Inspection](https://www.ibm.com/products/maximo/remote-monitoring){: external}.
 
     
-
-
-
-
-
-

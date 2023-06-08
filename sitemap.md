@@ -3205,6 +3205,8 @@ subcollection: containers
 
 * [Confirming installed plug-ins](/docs/containers?topic=containers-plug-ins#cli-install-view)
 
+* [Updating installed plug-ins](/docs/containers?topic=containers-plug-ins#cli-update-plugin)
+
 * [Related information](/docs/containers?topic=containers-plug-ins#cli-install-relinfo)
 
 [Installing the Kubernetes CLI](/docs/containers?topic=containers-cli-install#cli-install)
