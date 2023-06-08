@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-03"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes, containers
 
@@ -91,7 +91,7 @@ To review the results of the CIS Kubernetes benchmark for Section 4: Worker node
 
 
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Create a namespace for the resources to run the benchmark.
     ```sh

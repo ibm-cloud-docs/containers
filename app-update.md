@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes
 
@@ -48,7 +48,7 @@ Want to scale your worker nodes instead of your pods? Check out the [cluster aut
 {: tip}
 
 Before you begin
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 To scale your apps,
@@ -89,7 +89,7 @@ Want to prevent downtime during your rolling update? Be sure to specify a [readi
 {: tip}
 
 Before you begin
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 * Create a [deployment](/docs/containers?topic=containers-deploy_app#app_cli).
 * Make sure that you have a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
@@ -230,7 +230,7 @@ When you use a [version control system such as Git](/docs/containers?topic=conta
 
 Before you begin, you need two clusters and the **Manager** [service access role](/docs/containers?topic=containers-users#checking-perms) for all namespaces in both clusters so that you can copy all the resources from one cluster and deploy them to another.
 
-1. [Target](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) the cluster that you want to copy resources from, such as a free cluster.
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 2. List all the configuration files in your cluster and verify that you want to copy these configurations.
     ```sh
     kubectl get all
@@ -260,7 +260,7 @@ Before you begin, you need two clusters and the **Manager** [service access role
     ```
     {: pre}
 
-4. [Target](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) the cluster that you want to copy the resources to, such as a production-ready standard cluster.
+4. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 5. Optional: If your free cluster used multiple namespaces, create the same namespaces in the standard cluster and [copy the image pull secret to each namespace](/docs/containers?topic=containers-registry#copy_imagePullSecret).
 6. Deploy the copied configuration files to your cluster. If a configuration file has specific information that can't be applied, you might need to update the configuration file and reapply.
     ```sh

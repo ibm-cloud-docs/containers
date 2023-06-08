@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-06"
+lastupdated: "2023-06-08"
 
 keywords: file, debug, help
 
@@ -220,7 +220,7 @@ If you use a `kubectl` CLI version that does not match at least the major.minor 
 
     The CLI versions match if you can see the same version in `GitVersion` for the client and the server. You can ignore the `+IKS` part of the version for the server.
 
-2. If the `kubectl` CLI versions on your local machine and your cluster don't match, either [update your cluster](/docs/containers?topic=containers-update) or [install a different CLI version on your local machine](/docs/containers?topic=containers-cli-install.
+2. If the `kubectl` CLI versions on your local machine and your cluster don't match, either update your cluster or [install a different CLI version on your local machine](/docs/containers?topic=containers-cli-install).
 
 ## Checking and updating the {{site.data.keyword.cos_short}} plug-in
 {: #debug_storage_cos_plugin}

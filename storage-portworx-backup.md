@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-05"
+lastupdated: "2023-06-08"
 
 keywords: portworx, kubernetes
 
@@ -77,7 +77,7 @@ From the CLI
 1. From the {{site.data.keyword.cloud_notm}} [Resource list](https://cloud.ibm.com/resources){: external}, find the PX-Backup service you created.
 2. Review the **Status** column to see if the installation succeeded or failed. The status might take a few minutes to update.
 3. If the status changes to **Active**, verify that the PX-Backup pods are running in your cluster.
-    1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+    1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
     2. Run the command to verify that the installation has completed.
         ```sh
         kubectl get po -n <px_backup_namespace> -ljob-name=pxcentral-post-install-hook  -o wide | awk '{print $1   $3}' | grep -iv error
@@ -161,7 +161,7 @@ Add the {{site.data.keyword.containerlong_notm}} cluster that you want to back u
 
 Before you begin:
 - [Log in to the PX-Backup console](#px-backup-ui).
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 The `kubeconfig` in clusters with PX-Backup expires after 24 hours. To prevent your cluster's `kubeconfig` file from expiring, set the context with your cluster using the `--admin` option.
 `

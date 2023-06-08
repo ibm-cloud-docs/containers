@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-06-07"
+lastupdated: "2023-06-08"
 
 keywords: containers
 subcollection: containers
@@ -254,11 +254,15 @@ subcollection: containers
 
 * [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
 
-    * [June 6](/docs/containers?topic=containers-containers-relnotes#containers-jun623)
+    * [8 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun823)
+
+        * Istio add-on version `1.16.5`.
+
+    * [6 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun623)
 
         * Ingress ALB versions `1.6.4_5067_iks`, `1.5.1_5074_iks`, and `1.4.0_5068_iks`
 
-    * [June 5](/docs/containers?topic=containers-containers-relnotes#containers-jun523)
+    * [5 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun523)
 
         * Worker node fix packs `1.24.14_1571`, `1.25.10_1547`, `1.26.5_1539`, and `1.27.2_1527`.
 
@@ -3200,6 +3204,8 @@ subcollection: containers
     * [Installing multiple plug-ins](/docs/containers?topic=containers-plug-ins#cli-install-multiple)
 
 * [Confirming installed plug-ins](/docs/containers?topic=containers-plug-ins#cli-install-view)
+
+* [Updating installed plug-ins](/docs/containers?topic=containers-plug-ins#cli-update-plugin)
 
 * [Related information](/docs/containers?topic=containers-plug-ins#cli-install-relinfo)
 
@@ -7317,6 +7323,8 @@ subcollection: containers
     * [Change log for 1.17.1, released 7 March 2023](/docs/containers?topic=containers-istio-changelog#1171)
 
 * [Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
+
+    * [Changelog for 1.16.5, released 8 June 2022](/docs/containers?topic=containers-istio-changelog#1165)
 
     * [Change log for 1.16.4, released 20 April 2023](/docs/containers?topic=containers-istio-changelog#1164)
 

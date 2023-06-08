@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-04-20"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -31,7 +31,7 @@ Before you begin, review the [Istio add-on change log](/docs/containers?topic=co
 Set up the managed Istio add-on in your cluster.
 {: shortdesc}
 
-1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 2. Enable the `istio` add-on.
     ```sh

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes, vyatta, strongswan, ipsec, on-premises, vpn, gateway, static route, routing table
 
@@ -51,7 +51,7 @@ To get started with static routes in {{site.data.keyword.containerlong_notm}}, e
 Before you begin
 
 - Ensure that you have the [**Administrator** IAM platform access role for the cluster in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-users#checking-perms).
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 ### Enabling the static route add-on from the console
 {: #enable-add-on-console}
@@ -69,16 +69,14 @@ To use the {{site.data.keyword.cloud_notm}} console, follow these steps.
 
 To use the CLI, follow these steps.
 
-1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-
-2. Enable the `static-route` add-on.
+1. Enable the `static-route` add-on.
 
     ```sh
     ibmcloud ks cluster addon enable static-route --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-3. Verify that the static route add-on has a status of `Addon Ready`.
+1. Verify that the static route add-on has a status of `Addon Ready`.
 
     ```sh
     ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>

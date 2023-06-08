@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-06-06"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -63,7 +63,7 @@ Before you begin
 {: #istio_install-cli}
 {: cli}
 
-1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 2. Review the supported [Istio versions](/docs/containers?topic=containers-istio-changelog).
     ```sh
