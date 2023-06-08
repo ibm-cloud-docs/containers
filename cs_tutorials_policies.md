@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-29"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes
 
@@ -55,7 +55,7 @@ This tutorial is intended for software developers and network administrators who
 {: #policies_prereqs}
 
 - [Create a classic cluster with at least 3 worker nodes. Free clusters, or single worker node clusters don’t have the required resources to complete this tutorial](/docs/containers?topic=containers-clusters). This tutorial is not available for VPC clusters.
-- [Target your CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Target your CLI to the cluster](/docs/containers?topic=containers-cli-install#cs_cli_configure).
 - [Install and configure the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install).
 - Ensure that you have the following {{site.data.keyword.cloud_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
     - [Any platform access role](/docs/containers?topic=containers-users#checking-perms)
@@ -158,7 +158,7 @@ The following image shows how the web server app is exposed to the internet by t
         Server values:
             server_version=nginx: 1.13.3 - lua: 10008
         Request Information:
-            client_address=1.1.1.1
+            client_address=10.176.XX.XX
             method=GET
             real path=/
             query=
