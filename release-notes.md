@@ -2978,7 +2978,7 @@ Worker node versions
 {: release-note}
 
 Deprecated: Kubernetes web terminal.
-:   The Kubernetes web terminal add-on is deprecated and becomes unsupported 1 July 2021. Instead, use the [{{site.data.keyword.cloud-shell_notm}}](/docs/containers?topic=containers-cli-install#cloud-shell).
+:   The Kubernetes web terminal add-on is deprecated and becomes unsupported 1 July 2021. Instead, use the [{{site.data.keyword.cloud-shell_notm}}](/docs/cloud-shell?topic=cloud-shell-shell-ui).
 
 
 
@@ -4659,7 +4659,7 @@ CLI change log
  
 
 Kubernetes cluster context
-:   Added topics for [Setting the Kubernetes context for multiple clusters](/docs/containers?topic=containers-cli-install#cli_config_multiple) and [Creating a temporary `kubeconfig` file](/docs/containers?topic=containers-cli-install#cli_temp_kubeconfig).
+:   Added topics for [Setting the Kubernetes context for multiple clusters](/docs/containers?topic=containers-cli-install) and [Creating a temporary `kubeconfig` file](/docs/containers?topic=containers-cli-install).
 
 ### 1 April 2020
 {: #containers-april0120}
@@ -5101,7 +5101,7 @@ Exposing apps with load balancers or Ingress ALBs
 
 
 Kubernetes web terminal for VPC clusters
-:   To use the Kubernetes web terminal for VPC clusters, make sure to [configure access to external endpoints](/docs/containers?topic=containers-cli-install#cli_web).
+:   To use the Kubernetes web terminal for VPC clusters, make sure to [configure access to external endpoints](/docs/containers?topic=containers-cli-install).
 
 Monitoring Istio
 :   Added [steps](/docs/containers?topic=containers-istio-health#istio_inspect) to launch the ControlZ component inspection and Envoy sidecar dashboards for the Istio managed add-on.

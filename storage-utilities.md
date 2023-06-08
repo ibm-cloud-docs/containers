@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-09"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes
 
@@ -327,7 +327,7 @@ The instructions in this topic are available for classic worker nodes only. If y
 {: note}
 
 - Make sure that you [manually](#manual_block) added raw, unformatted, and unmounted block storage to your non-SDS worker nodes.
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - Install the [block storage attacher plug-in](#block_storage_attacher).
 
 
@@ -483,7 +483,7 @@ The instructions in this topic are available for VPC worker nodes only. If you w
 
 Before you begin:
 
-[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 
 1. Check which region and zone your VPC worker node is in.
@@ -725,7 +725,7 @@ The instructions in this topic are available for VPC worker nodes only. If you w
 
 Before you begin:
 
-[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. List your storage volumes and note the ID of the volume that you want to attach.
 
@@ -755,7 +755,7 @@ Before you begin:
 You can remove storage from your worker node by using the `ibmcloud ks storage attachment rm` command.
 {: shortdesc}
 
-[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. List your storage volumes and note the ID of the volume that you want to remove.
     ```sh
@@ -863,7 +863,7 @@ Before you begin:
 
 - [Retrieve your {{site.data.keyword.cos_full_notm}} service credentials, the bucket name, and the bucket hostname](#backup_restore_setup_object_storage).
 - [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the Helm client on your local machine and set up the {{site.data.keyword.cloud_notm}} Helm chart repositories.
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 You can deploy the `ibm-storage-backup` pod or the `ibm-storage-restore` pod by either editing and applying the `values.yaml` file of the Helm chart, or by running the `helm install` command from the CLI.
 {: note}

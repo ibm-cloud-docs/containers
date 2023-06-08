@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-06"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes, hardware, flavor, machine type, vm, bm
 
@@ -90,7 +90,7 @@ Want to be sure that you always have enough worker nodes to cover your workload?
 When you create a worker pool, you choose the flavor, which describes the operating system along with the compute resources of the worker nodes. Supported operating systems are Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated). To update the version of the operating system that a worker node uses, such as from Ubuntu 16 to 18, you can [replace the flavor of the worker pool](/docs/containers?topic=containers-update#machine_type).
 
 You can also log in to your cluster to check the operating system of the worker nodes.
-1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 2. List your worker nodes.
     ```sh
     kubectl get nodes

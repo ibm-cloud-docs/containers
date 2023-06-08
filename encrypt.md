@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-07"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes, encrypt, security, kms, root key, crk
 
@@ -273,7 +273,7 @@ To verify secret encryption by disabling a root key
     ```
     {: pre}
 
-2. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+2. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 3. Verify that you can list the secrets in your cluster.
     ```sh
     kubectl get secrets --all-namespaces

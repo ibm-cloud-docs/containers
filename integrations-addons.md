@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-19"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes, helm
 
@@ -45,7 +45,6 @@ For more information about the prerequisites for each add-on, see:
 - [Cluster Autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc)
 - [Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool)
 - [Istio](/docs/containers?topic=containers-istio)
-- **Deprecated**: [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web)
 - [Static routes](/docs/containers?topic=containers-static-routes)
 
 ## Updating managed add-ons

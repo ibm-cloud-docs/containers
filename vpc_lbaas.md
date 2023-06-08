@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-07"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes, app protocol, application protocol
 
@@ -104,7 +104,7 @@ Expose your app to public network traffic by setting up a Kubernetes `LoadBalanc
 {: shortdesc}
 
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for the namespace in which you deploy the Kubernetes `LoadBalancer` service for the VPC NLB.
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 * To view VPC NLBs, install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
     ```sh
     ibmcloud plugin install infrastructure-service
@@ -400,7 +400,7 @@ Before you begin
 
 - Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for the namespace in which you deploy the Kubernetes `LoadBalancer` service for the VPC NLB.
 - Connect to your VPC private network, such as through a [VPC VPN connection](/docs/containers?topic=containers-vpc-vpnaas).
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - To view VPC NLBs, install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
     ```sh
     ibmcloud plugin install infrastructure-service
@@ -688,7 +688,7 @@ Do not confuse the Application Load Balancer for VPC with {{site.data.keyword.co
 Before you begin
 
 - Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for the namespace in which you deploy the Kubernetes `LoadBalancer` service for the VPC NLB.
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - To view VPC ALBs, install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
     ```sh
     ibmcloud plugin install infrastructure-service
@@ -1076,7 +1076,7 @@ Want to avoid the complexity of specifying additional TCP ports for health check
 Once you have created a VPC NLB or VPC ALB, you cannot reconfigure its subnets or zones. If you want to change the subnets or zone for an existing VPC load balancer, you must delete, update, and reapply the corresponding Kubernetes `LoadBalancer` service.
 {: shortdesc}
 
-1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. List your Kubernetes services and find the name of the `LoadBalancer` service you want to change.
 

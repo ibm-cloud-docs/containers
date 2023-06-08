@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-26"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes, kernel
 
@@ -74,7 +74,7 @@ Worker nodes are automatically provisioned with optimized kernel performance, bu
 You must have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for all namespaces to run the sample privileged `initContainer`. After the containers for the deployments are initialized, the privileges are dropped.
 {: note}
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Save the following daemon set in a file named `worker-node-kernel-settings.yaml`. In the `spec.template.spec.initContainers` section, add the fields and values for the `sysctl` parameters that you want to tune. This example daemon set changes the default maximum number of connections that are allowed in the environment via the `net.core.somaxconn` setting and the ephemeral port range via the `net.ipv4.ip_local_port_range` setting.
     ```yaml
@@ -476,7 +476,7 @@ You can reboot the worker node and the huge pages configuration persists. Howeve
 
 * **Operator** platform access role and **Manager** service access role for the cluster in {{site.data.keyword.cloud_notm}} IAM
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Create a `hugepages-ds.yaml` configuration file to enable huge pages. The following sample YAML uses a daemon set to run the pod on every worker node in your cluster. You can set the allocation of huge pages that are available on the worker node by using the `vm.nr_hugepages` parameter. This example allocates 512 pages at 2 MB per page, for 1 GB of total RAM allocated exclusively for huge pages.
 

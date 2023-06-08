@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-05-16"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes, coredns, kubedns, dns
 
@@ -30,7 +30,7 @@ The cluster DNS provider is [CoreDNS](https://coredns.io/){: external}, which is
 By default, CoreDNS includes a deployment to autoscale the CoreDNS pods in response to the number of worker nodes and cores within the cluster. You can fine-tune the CoreDNS autoscaler parameters by editing the CoreDNS autoscaling ConfigMap. For example, if your apps heavily use the cluster DNS provider, you might need to increase the minimum number of CoreDNS pods to support the app. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/){: external}.
 {: shortdesc}
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Verify that the CoreDNS autoscaler deployment is available. In your CLI output, verify that one deployment is **AVAILABLE**.
 
@@ -75,7 +75,7 @@ You can customize CoreDNS by editing the CoreDNS ConfigMap. For example, you mig
 `NodeLocal` DNS caching relies on CoreDNS to maintain the cache of DNS resolutions. Keep applicable `NodeLocal` DNS cache and CoreDNS configurations such as stub domains the same to maintain DNS resolution consistency.
 {: note}
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Verify that the CoreDNS deployment is available. In your CLI output, verify that one deployment is **AVAILABLE**.
 
@@ -223,7 +223,7 @@ kubectl get networkpolicy --all-namespaces -o yaml
 {: pre}
 
 
-1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 2. If you [customized stub domains and upstream DNS servers for CoreDNS](#dns_customize), you must also [customize the `NodeLocal` DNS cache](#dns_nodelocal_customize) with these stub domains and upstream DNS servers.
 3. List the nodes in your cluster. The `NodeLocal` DNS caching agent pods are part of a daemon set that run on each node.
 
@@ -280,7 +280,7 @@ kubectl get networkpolicy --all-namespaces -o yaml
 You can disable the `NodeLocal` DNS cache for one or more worker nodes.
 {: shortdesc}
 
-1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 2. Remove the `ibm-cloud.kubernetes.io/node-local-dns-enabled` label from the worker node. This action terminates the DNS caching agent pod on the worker node.
 
     Run the following command to remove the label from all worker nodes in the cluster.
@@ -348,7 +348,7 @@ You can customize the `NodeLocal` DNS cache by editing either of the two configm
 Edit the `node-local-dns` ConfigMap to customize the `NodeLocal` DNS cache configuration.
 {: shortdesc}
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Verify that the `NodeLocal` DNS cache daemon set is available.
 
@@ -449,7 +449,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 Edit the `node-local-dns-config` ConfigMap to extend the `NodeLocal` DNS cache configuration such as by customizing stub domains or upstream DNS servers. For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns){: external}.
 {: shortdesc}
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Verify that the `NodeLocal` DNS cache daemon set is available.
 

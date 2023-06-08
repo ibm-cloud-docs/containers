@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-20"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes
 
@@ -186,7 +186,7 @@ Install the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstoragesho
 Classic clusters that run {{site.data.keyword.containerlong_notm}} version 1.24 or later do not need to install the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in. The driver and plug-in are installed on these clusters by default.
 {: tip}
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Make sure that your worker node applies the latest patch for your minor version to run your worker node with the latest security settings. The patch version also ensures that the root password on the worker node is renewed. 
 
@@ -334,7 +334,7 @@ You can now continue to [create a PVC](#add_block) to provision block storage fo
 You can upgrade the existing {{site.data.keyword.cloud_notm}} Block Storage plug-in to the latest version.
 {: shortdesc}
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
 
@@ -389,7 +389,7 @@ Removing the plug-in does not remove existing PVCs, PVs, or data. When you remov
 {: important}
 
 Before you begin:
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - Make sure that you don't have any PVCs or PVs in your cluster that use block storage.
 
 To remove the plug-in:
@@ -532,7 +532,7 @@ The following example explains how to create a service ID with the required acce
 You can enable encryption by creating a Kubernetes secret that uses your personal API key as long as you have the **Reader** service access role for your {{site.data.keyword.keymanagementserviceshort}} instance as well as the **Viewer** platform access role and the **Writer** service access role for your cluster.
 {: tip}
 
-[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Make sure that you are assigned the Editor platform access role and the Writer service access role for {{site.data.keyword.keymanagementserviceshort}} so that you can create your own root key that you use to encrypt your {{site.data.keyword.blockstorageshort}} instance. You can review your IAM access roles in the [IAM console](https://cloud.ibm.com/iam){: external}. For more information about IAM roles, see [IAM access](/docs/account?topic=account-userroles).
 2. If you don't have a {{site.data.keyword.keymanagementserviceshort}} instance, [provision one](/docs/key-protect?topic=key-protect-provision).
@@ -1302,7 +1302,7 @@ What options do I have to add block storage to a stateful set?
 Use this option if you want to automatically create the PVC when you create the stateful set.
 {: shortdesc}
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 Complete the following steps to verify that all existing stateful sets in your cluster are fully deployed. If a stateful set is still being deployed, you can't start creating your stateful set. You must wait until all stateful sets in your cluster are fully deployed to avoid unexpected results.
 
@@ -1571,7 +1571,7 @@ You can pre-provision your PVCs before creating your stateful set or use existin
 
 When you [dynamically provision your PVCs when creating the stateful set](#block_dynamic_statefulset), the name of the PVC is assigned based on the values that you used in the stateful set YAML file. In order for the stateful set to use existing PVCs, the name of your PVCs must match the name that would automatically be created when using dynamic provisioning.
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. If you want to pre-provision the PVC for your stateful set before you create the stateful set, follow steps 1-3 in [Adding block storage to apps](#add_block) to create a PVC for each stateful set replica. Make sure that you create your PVC with a name that follows the following format: `<volume_name>-<statefulset_name>-<replica_number>`.
 
@@ -1766,7 +1766,7 @@ You can [set up periodic snapshots for your block storage](/docs/BlockStorage?to
 
 To store the snapshot, you must request snapshot space on your block storage. Snapshots are stored on the existing storage instance within the same zone. You can restore data from a snapshot if a user accidentally removes important data from the volume. \n  \n **To create a snapshot for your volume, complete the following steps.
 
-1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Log in to the `ibmcloud sl` CLI. 
 
@@ -1870,7 +1870,7 @@ To make your data even more highly available and protect your app from a zone fa
 You can use the `kubectl cp` [command](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#cp){: external} to copy files and directories to and from pods or specific containers in your cluster.
 {: shortdesc}
 
-[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) 
+[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster) 
 
 When you run the `kubectl cp` command, if you don't specify a container with `-c`, the command uses the first available container in the pod.
 
@@ -2274,7 +2274,7 @@ Remove the PVC, PV, and the storage instance from your {{site.data.keyword.cloud
 
 Before you begin:
 - Make sure that you backed up any data that you want to keep.
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 To clean up persistent data:
 

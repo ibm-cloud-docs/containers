@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-06-06"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes
 
@@ -41,7 +41,7 @@ To check the logs for individual app pods, you can run `kubectl logs <pod name>`
 Before you begin
 - Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
 - To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform access role](/docs/containers?topic=containers-users#checking-perms). If you are assigned only a service access role but no platform access role, [launch the Kubernetes dashboard from the CLI](#db_cli).
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
 
@@ -58,7 +58,7 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 ### Launching the Kubernetes dashboard from the CLI
 {: #db_cli}
 
-Before you begin, [install the CLI](/docs/containers?topic=containers-cs_cli_install).
+Before you begin, [install the CLI](/docs/containers?topic=containers-cli-install).
 
 1. Get your credentials for Kubernetes.
 
@@ -113,7 +113,7 @@ Do you have so many resources and users in your cluster that the Kubernetes dash
 Before you begin
 
 - [Install the required CLIs](/docs/containers?topic=containers-cli-install).
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
 - To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform access role](/docs/containers?topic=containers-users#checking-perms). If you are assigned only a service access role but no platform access role, [launch the Kubernetes dashboard from the CLI](#db_cli).
 
@@ -140,7 +140,7 @@ After a cluster is created, you can deploy an app into that cluster by using the
 Before you begin
 
 - Install the required [CLIs](/docs/containers?topic=containers-cli-install).
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 To deploy your app,
@@ -171,7 +171,7 @@ When you deploy an app, the app pods indiscriminately deploy to various worker n
 {: shortdesc}
 
 Before you begin
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the Kubernetes namespace.
 - **Optional**: [Set a label for the worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels) that you want to run the app on.
 
