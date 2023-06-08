@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-06"
+lastupdated: "2023-06-08"
 
 keywords: portworx, kubernetes
 
@@ -23,7 +23,7 @@ Contact Portworx support by using one of the following methods.
 
 - Calling `+1 (866) 244-7121` or `+1 (650) 729-4088` in the United States or one of the [International numbers](https://support.purestorage.com/Pure_Storage_Technical_Services/Technical_Services_Information/Contact_Us).
 
-- Opening an issue in the [Portworx Service Portal](https://support.purestorage.com/Pure_Storage_Technical_Services/Technical_Services_Information/Contact_Us){: external}. If you don't have an account, see [Request access](https://purestorage.my.site.com/customers/CustomerAccessRequest){: external}.
+- Opening an issue in the [Portworx Service Portal](https://support.purestorage.com/Pure_Storage_Technical_Services/Technical_Services_Information/Contact_Us){: external}. If you don't have an account, see [Request access](https://purestorage.force.com/customers/CustomerAccessRequest){: external}.
 
 
 ## Gathering logs
@@ -32,9 +32,10 @@ Contact Portworx support by using one of the following methods.
 You can use the following script to collect log information from your Portworx cluster.
 {: shortdesc}
 
+
 The following script collects Portworx logs from your cluster and saves them on your local machine in the `/tmp/pxlogs` directory.
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Clone the `ibmcloud-storage-utilities` repo.
     ```sh
@@ -63,7 +64,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         ```
         {: pre}
 
-4. Review the log files locally. If you can't resolve your issue by reviewing the logs, [open a support ticket](/docs/containers?topic=containers-storage_portworx_support) and provide the log information that you collected.
+4. Review the log files locally. If you can't resolve your issue by reviewing the logs, [open a support ticket](/docs/containers?topic=containers-get-help) and provide the log information that you collected.
 
 
 
