@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-06"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes, release notes
 
@@ -31,7 +31,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
-### June 6
+### 8 June 2023
+{: #containers-jun823}
+{: release-note}
+
+Istio add-on version `1.16.5`.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
+
+
+
+### 6 June 2023
 {: #containers-jun623}
 {: release-note}
 
@@ -40,7 +51,7 @@ Ingress ALB versions `1.6.4_5067_iks`, `1.5.1_5074_iks`, and `1.4.0_5068_iks`
 
 
 
-### June 5
+### 5 June 2023
 {: #containers-jun523}
 {: release-note}
 
@@ -2967,7 +2978,7 @@ Worker node versions
 {: release-note}
 
 Deprecated: Kubernetes web terminal.
-:   The Kubernetes web terminal add-on is deprecated and becomes unsupported 1 July 2021. Instead, use the [{{site.data.keyword.cloud-shell_notm}}](/docs/containers?topic=containers-cs_cli_install#cloud-shell).
+:   The Kubernetes web terminal add-on is deprecated and becomes unsupported 1 July 2021. Instead, use the [{{site.data.keyword.cloud-shell_notm}}](/docs/containers?topic=containers-cli-install#cloud-shell).
 
 
 
@@ -4648,7 +4659,7 @@ CLI change log
  
 
 Kubernetes cluster context
-:   Added topics for [Setting the Kubernetes context for multiple clusters](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple) and [Creating a temporary `kubeconfig` file](/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig).
+:   Added topics for [Setting the Kubernetes context for multiple clusters](/docs/containers?topic=containers-cli-install#cli_config_multiple) and [Creating a temporary `kubeconfig` file](/docs/containers?topic=containers-cli-install#cli_temp_kubeconfig).
 
 ### 1 April 2020
 {: #containers-april0120}
@@ -5090,7 +5101,7 @@ Exposing apps with load balancers or Ingress ALBs
 
 
 Kubernetes web terminal for VPC clusters
-:   To use the Kubernetes web terminal for VPC clusters, make sure to [configure access to external endpoints](/docs/containers?topic=containers-cs_cli_install#cli_web).
+:   To use the Kubernetes web terminal for VPC clusters, make sure to [configure access to external endpoints](/docs/containers?topic=containers-cli-install#cli_web).
 
 Monitoring Istio
 :   Added [steps](/docs/containers?topic=containers-istio-health#istio_inspect) to launch the ControlZ component inspection and Envoy sidecar dashboards for the Istio managed add-on.

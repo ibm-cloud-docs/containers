@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-05-09"
+lastupdated: "2023-06-08"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -107,6 +107,30 @@ Updates in this version
 
 ## Version 1.16
 {: #v116}
+
+### Changelog for 1.16.5, released 8 June 2022
+{: #1165}
+
+Review the changes that are included in version 1.16.5 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.16.4
+
+Current version
+:   1.16.5
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.16.5](https://istio.io/latest/news/releases/1.16.x/announcing-1.16.5/){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2022-3996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3996){: external}
+    - [CVE-2023-0464](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0464){: external}
+    - [CVE-2023-0466](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0466){: external}
+    - [CVE-2023-28486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28486){: external}
+    - [CVE-2023-28487](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28487){: external}
+    - [CVE-2023-1255](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1255){: external}
+    - [usn-6005-1](https://ubuntu.com/security/notices/USN-6005-1){: external}
+    - [usn-6039-1](https://ubuntu.com/security/notices/USN-6039-1){: external}
 
 ### Change log for 1.16.4, released 20 April 2023
 {: #1164}
