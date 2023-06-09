@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-06-08"
+lastupdated: "2023-06-09"
 
 keywords: kubernetes
 
@@ -6198,85 +6198,6 @@ ibmcloud ks logging autoupdate get --cluster CLUSTER [--output json] [-q]
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
-
-
-### `ibmcloud ks logging collect`
-{: #cs_log_collect}
-
-[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
-
-Make a request for a snapshot of your logs at a specific point in time and then store the logs in an {{site.data.keyword.cos_full_notm}} bucket.
-{: shortdesc}
-
-```sh
-ibmcloud ks logging collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-endpoint ENDPOINT --hmac-key-id HMAC_KEY_ID --hmac-key HMAC_KEY --type LOG_TYPE [-q]
-```
-{: pre}
-
-Minimum required permissions
-:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-
-`-c, --cluster CLUSTER`
-:    The name or ID of the cluster that you want to create a snapshot for.
-
-`--cos-bucket BUCKET_NAME`
-:    The name of the {{site.data.keyword.cos_short}} bucket that you want to store your logs in.
-
-`--cos-endpoint ENDPOINT`
-:    The regional, cross regional, or single data center {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. For available endpoints, see [Endpoints and storage locations](/docs/cloud-object-storage/basics?topic=cloud-object-storage-endpoints) in the {{site.data.keyword.cos_short}} documentation.
-
-`--hmac-key-id HMAC_KEY_ID`
-:    The unique ID for your HMAC credentials for your {{site.data.keyword.cos_short}} instance.
-
-`--hmac-key HMAC_KEY`
-:    The HMAC key for your {{site.data.keyword.cos_short}} instance.
-
-`--type LOG_TYPE`
-:    Optional: The type of logs that you want to create a snapshot of. Currently, `master` is the default and only option.
-
-`-q`
-:    Optional: Do not show the message of the day or update reminders.
-
-
-**Example command**:
-```sh
-ibmcloud ks logging collect --cluster mycluster --cos-bucket mybucket --cos-endpoint s3-api.us-geo.objectstorage.softlayer.net --hmac-key-id e2e7f5c9fo0144563c418dlhi3545m86 --hmac-key c485b9b9fo4376722f692b63743e65e1705301ab051em96j
-```
-{: pre}
-
-
-### `ibmcloud ks logging collect-status`
-{: #cs_log_collect_status}
-
-[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
-
-Check the status of the log collection snapshot request for your cluster.
-{: shortdesc}
-
-```sh
-ibmcloud ks logging collect-status --cluster CLUSTER [--output json]
-```
-{: pre}
-
-Minimum required permissions
-:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-
-`-c, --cluster CLUSTER`
-:    Required: The name or ID of the cluster that you want to create a snapshot for.
-
-`--output json`
-:    Optional: Prints the command output in JSON format.
-
-
-**Example command**:
-```sh
-ibmcloud ks logging collect-status --cluster mycluster
-```
-{: pre}
 
 
 ### `ibmcloud ks logging config create`

@@ -4551,10 +4551,6 @@ subcollection: containers
 
     * [Verifying, updating, and deleting log forwarding](/docs/containers?topic=containers-health#verifying-log-forwarding)
 
-* [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master)
-
-    * [Creating a snapshot](/docs/containers?topic=containers-health#creating-snapshot)
-
 [Monitoring cluster health](/docs/containers?topic=containers-health-monitor#health-monitor)
 
 * [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics)
@@ -4598,8 +4594,6 @@ subcollection: containers
     * [Forwarding Kubernetes API audit logs to an external server on the public Internet](/docs/containers?topic=containers-health-audit#audit-api-server-external)
 
     * [Managing API server log forwarding](/docs/containers?topic=containers-health-audit#audit-api-server-manage)
-
-    * [Taking a snapshot of API server logs](/docs/containers?topic=containers-health-audit#audit-api-server-snapshot)
 
 * [Service audit logs](/docs/containers?topic=containers-health-audit#audit-service)
 
@@ -6275,10 +6269,6 @@ subcollection: containers
     * [`ibmcloud ks logging autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_enable)
 
     * [`ibmcloud ks logging autoupdate get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_get)
-
-    * [`ibmcloud ks logging collect`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect)
-
-    * [`ibmcloud ks logging collect-status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect_status)
 
     * [`ibmcloud ks logging config create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_create)
 

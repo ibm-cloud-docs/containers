@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-08"
+lastupdated: "2023-06-09"
 
 keywords: kubernetes, logmet, logs, metrics, audit, events
 
@@ -553,11 +553,6 @@ Before you begin, ensure that you reviewed the [considerations and prerequisites
 {: #audit-api-server-manage}
 
 See [Verifying, updating, and deleting log forwarding](/docs/containers?topic=containers-health#verifying-log-forwarding).
-
-### Taking a snapshot of API server logs
-{: #audit-api-server-snapshot}
-
-See [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master).
 
 
 
