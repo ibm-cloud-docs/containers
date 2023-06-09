@@ -254,6 +254,8 @@ subcollection: containers
 
 * [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
 
+    * [9 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun923)
+
     * [8 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun823)
 
         * Istio add-on version `1.16.5`.
