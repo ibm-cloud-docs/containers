@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-06-08"
+lastupdated: "2023-06-09"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -379,77 +379,6 @@ You can stop forwarding logs by deleting one or all the logging configurations f
     ibmcloud ks logging config rm --cluster <my_cluster> --all
     ```
     {: pre}
-
-
-## Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket
-{: #collect_master}
-
-With {{site.data.keyword.containerlong_notm}}, you can take a snapshot of your master logs at any point in time to collect in an {{site.data.keyword.cos_full_notm}} bucket. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies.
-{: shortdesc}
-
-Because Kubernetes API Server logs are automatically streamed, they're also automatically deleted to make room for the new logs coming in. By keeping a snapshot of logs at a specific point in time, you can better troubleshoot issues, look into usage differences, and find patterns to help maintain more secure applications.
-
-Before you begin
-
-- [Provision an instance](/docs/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.cloud_notm}} catalog.
-- Ensure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the cluster.
-
-### Creating a snapshot
-{: #creating-snapshot}
-
-1. Create an Object Storage bucket through the {{site.data.keyword.cloud_notm}} console by following [this getting started tutorial](/docs/cloud-object-storage?topic=cloud-object-storage-getting-started-cloud-object-storage#gs-create-buckets).
-
-2. Generate [HMAC service credentials](/docs/cloud-object-storage?topic=cloud-object-storage-uhc-hmac-credentials-main) in the bucket that you created.
-    1. In the **Service Credentials** tab of the {{site.data.keyword.cos_short}} dashboard, click **New Credential**.
-    2. Give the HMAC credentials the `Writer` service access role.
-    3. In the **Add Inline Configuration Parameters** field, specify `{"HMAC":true}`.
-
-3. Through the CLI, make a request for a snapshot of your master logs.
-
-    ```sh
-    ibmcloud ks logging collect --cluster <cluster name or ID> --cos-bucket <COS_bucket_name> --cos-endpoint <location_of_COS_bucket> --hmac-key-id <HMAC_access_key_ID> --hmac-key <HMAC_access_key>
-    ```
-    {: pre}
-
-    | Parameter | Description |
-    | ---- | -------- |
-    | `-c, --cluster <cluster_name_or_ID>` | The name or ID of the cluster. |
-    | `--cos-bucket <COS_bucket_name>` | The name of the {{site.data.keyword.cos_short}} bucket that you want to store your logs in. |
-    | `--cos-endpoint <location_of_COS_bucket>` | The regional, cross regional, or single data center {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. For available endpoints, see [Endpoints and storage locations](/docs/cloud-object-storage/basics?topic=cloud-object-storage-endpoints) in the {{site.data.keyword.cos_short}} documentation. |
-    | `--hmac-key-id <HMAC_access_key_ID>` | The unique ID for your HMAC credentials for your {{site.data.keyword.cos_short}} instance. |
-    | `--hmac-key <HMAC_access_key>` | The HMAC key for your {{site.data.keyword.cos_short}} instance. |
-    {: caption="Table 2. Understanding the options for log filtering" caption-side="bottom"}
-
-    Example command and response
-
-    ```sh
-    ibmcloud ks logging collect --cluster mycluster --cos-bucket mybucket --cos-endpoint s3-api.us-geo.objectstorage.softlayer.net --hmac-key-id e2e7f5c9fo0144563c418dlhi3545m86 --hmac-key c485b9b9fo4376722f692b63743e65e1705301ab051em96j
-    There is no specified log type. The default master will be used.
-    Submitting log collection request for master logs for cluster mycluster...
-    OK
-    The log collection request was successfully submitted. To view the status of the request run ibmcloud ks logging collect-status mycluster.
-    ```
-    {: screen}
-
-4. Check the status of your request. It can take some time for the snapshot to complete, but you can check to see whether your request is successfully being completed or not. You can find the name of the file that contains your master logs in the response and use the {{site.data.keyword.cloud_notm}} console to download the file.
-
-    ```sh
-    ibmcloud ks logging collect-status --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-    Example output
-
-    ```sh
-    ibmcloud ks logging collect-status --cluster mycluster
-    Getting the status of the last log collection request for cluster mycluster...
-    OK
-    State     Start Time             Error   Log URLs
-    success   2018-09-18 16:49 PDT   - s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-0-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
-    s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-1-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
-    s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-2-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
-    ```
-    {: screen}
 
 
 

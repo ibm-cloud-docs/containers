@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-22"
+lastupdated: "2023-06-09"
 
-keywords: kubernetes, help, network, connectivity
+keywords: kubernetes, help, network, connectivity, ibmc, helm
 
 subcollection: containers
 
@@ -19,7 +19,7 @@ content-type: troubleshoot
 
 
 
-# Why does installing the Object storage `ibmc` Helm plug-in fail?
+# Why does installing the Object storage Helm plug-in fail?
 {: #cos_helm_fails}
 {: support}
 
