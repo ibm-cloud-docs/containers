@@ -10104,7 +10104,7 @@ subcollection: containers
 
 [Debugging the `metrics-server`](/docs/containers?topic=containers-debug_metrics_server#debug_metrics_server)
 
-[Why does the Kubernetes dashboard terminate with an `OOMKilled` error?](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-kube-dashboord-oom)
+[Why does the Kubernetes dashboard terminate with an out of memory error?](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-kube-dashboord-oom)
 
 * [Changing the resource auto refresh time interval from the Kubernetes dashboard](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-dashboard-auto-refresh)
 
@@ -10582,7 +10582,7 @@ subcollection: containers
 
 [Why am I still seeing charges for block storage devices after deleting my cluster?](/docs/containers?topic=containers-ts_storage_clean_volume#ts_storage_clean_volume)
 
-[Why does mounting {{site.data.keyword.blockstorageshort}} fail with an `fsck` error?](/docs/containers?topic=containers-ts-storage-fsck#ts-storage-fsck)
+[Why does mounting {{site.data.keyword.blockstorageshort}} fail with a file system check error?](/docs/containers?topic=containers-ts-storage-fsck#ts-storage-fsck)
 
 [Why can't I delete my {{site.data.keyword.block_storage_is_short}} volume snapshot resources?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
 
@@ -10613,7 +10613,7 @@ subcollection: containers
 
 [Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails#cos_access_bucket_fails)
 
-[Why does installing the Object storage `ibmc` Helm plug-in fail?](/docs/containers?topic=containers-cos_helm_fails#cos_helm_fails)
+[Why does installing the Object storage Helm plug-in fail?](/docs/containers?topic=containers-cos_helm_fails#cos_helm_fails)
 
 [Why can't non-root users access files?](/docs/containers?topic=containers-cos_nonroot_access#cos_nonroot_access)
 
