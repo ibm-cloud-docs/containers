@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-06-06"
+lastupdated: "2023-06-12"
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
 
@@ -68,7 +68,7 @@ The following table shows the changes that are in the master fix pack 1.26.5_153
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 778ef2b | 4e2f346 | Make armada-rbac-sync FIPS compliant |
 | Key Management Service provider | v2.6.5 | v2.6.6 | Updated `Go` to version `1.19.9` and updated dependencies. |
 | Kubernetes | v1.26.4 | v1.26.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.5){: external}. |
-| Kubernetes DNS autoscaler | 1.8.6 | v1.8.8 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/v1.8.8){: external}. |
+| Kubernetes DNS autoscaler | 1.8.6 | v1.8.8 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/v1.8.8){: external}. |
 | Kubernetes NodeLocal DNS cache | 1.22.18 | 1.22.21 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.21){: external}. |
 | Portieris admission controller | v0.13.4 | v0.13.5 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.5){: external}. |
 {: caption="Changes since version 1.26.4_1535" caption-side="bottom"}
@@ -85,6 +85,7 @@ The following table shows the changes that are in the worker node fix pack 1.26.
 | Ubuntu 18.04 packages | 4.15.0-210-generic | 4.15.0-211-generic | Worker node kernel & package updates for [CVE-2021-3979](https://nvd.nist.gov/vuln/detail/CVE-2021-3979){: external}, [CVE-2023-1118](https://nvd.nist.gov/vuln/detail/CVE-2023-1118){: external}. |
 | Ubuntu 20.04 packages | 5.4.0-139-generic | 5.4.0-148-generic | Worker node kernel & package updates for [CVE-2023-2004](https://nvd.nist.gov/vuln/detail/CVE-2023-2004){: external}. |
 | Kubernetes | 1.26.4 |1.26.5|see [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.5){: external}. |
+| Containerd | 1.7.0 | 1.7.1 | For more information, see the [change log](https://github.com/containerd/containerd/releases/tag/v1.7.1){: external} and [security bulletin for CVE-2023-28642 and CVE-2023-27561](https://www.ibm.com/support/pages/node/7001317){: external}. |
 | Haproxy | N\A | N\A | N\A|
 {: caption="Changes since version 1.26.4_1536" caption-side="bottom"}
 
