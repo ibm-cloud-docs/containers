@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-08"
+lastupdated: "2023-06-12"
 
 keywords: kubernetes
 
@@ -983,7 +983,7 @@ Version 0.1.591 of the CLI was released on 2 October 2018.
 Version 0.1.590 of the CLI was released on 1 October 2018.
 
 
-- Adds the [`ibmcloud ks logging collect`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect) and [`ibmcloud ks logging collect-status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect_status) commands for collecting API server logs in your cluster.
+- Adds the [`ibmcloud ks logging collect`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect) and [`ibmcloud ks logging collect-status`](/docs/containers?topic=containers-kubernetes-service-cli) commands for collecting API server logs in your cluster.
 - Adds the [`ibmcloud ks key-protect-enable` command](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms) to enable {{site.data.keyword.keymanagementserviceshort}} as a key management service (KMS) provider in your cluster. 
 - Adds the `--skip-master-health` option to the [ibmcloud ks worker reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) and [ibmcloud ks worker reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) commands to skip the master health check before initiating the reboot or reload. 
 - Renames `Owner Email` to `Owner` in the output of `ibmcloud ks cluster get`.
