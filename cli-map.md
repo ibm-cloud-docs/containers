@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-06-09"
+lastupdated: "2023-06-12"
 
 keywords: kubernetes
 
@@ -195,8 +195,6 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
     * [`ibmcloud ks logging autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_disable)
     * [`ibmcloud ks logging autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_enable)
     * [`ibmcloud ks logging autoupdate get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_get)
-* [`ibmcloud ks logging collect`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect)
-* [`ibmcloud ks logging collect-status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_collect_status)
 * **`logging config`**: View or modify log forwarding configurations for a cluster.
     * [`ibmcloud ks logging config create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_create)
     * [`ibmcloud ks logging config get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_get)
