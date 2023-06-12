@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-09"
+lastupdated: "2023-06-12"
 
 keywords: kubernetes, release notes
 
@@ -28,10 +28,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## June 2023
 {: #containers-jun23}
-
-### 9 June 2023
-{: #containers-jun923}
-{: release-note}
 
 
 
