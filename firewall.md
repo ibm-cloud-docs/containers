@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-06"
+lastupdated: "2023-06-14"
 
 keywords: kubernetes, allowlist, firewall, vyatta, ips
 
@@ -269,11 +269,12 @@ This table is moving. For the latest IP lists and continued updates, see the pub
 To permit worker nodes to communicate with {{site.data.keyword.registrylong_notm}}, allow outgoing network traffic from the worker nodes to {{site.data.keyword.registrylong_notm}} [regions](/docs/Registry?topic=Registry-registry_overview#registry_regions).
 {: shortdesc}
 
+
 Previously Registry subnets (IP addresses) were published in the following table. As of 17 August 2021, the Registry subnets are no longer published. When you access {{site.data.keyword.registrylong_notm}} over the public internet, you must not have any allowlist restrictions that are based on IP addresses in place. If you have any concerns about opening your allowlist, you can configure private access to {{site.data.keyword.registrylong_notm}} by using the private IBM Cloud network, see [Securing your connection to Container Registry](/docs/Registry?topic=Registry-registry_private).
 {: important}
 
-- `TCP port 443 FROM <each_worker_node_publicIP> TO us.icr.io`
-- `TCP port 443 FROM <each_worker_node_publicIP> TO registry.ng.bluemix.net`
+In addition to the following regional subdomains, you must also allow traffic from your worker nodes to port `443` on all subdomains of `icr.io` in case of redirection to other subdomains for delivery optimization. You must allow: `TCP port 443 FROM <each_worker_node_publicIP> TO *.icr.io`. If you use the deprecated domain names, you must allow those too.
+
 
 | {{site.data.keyword.containerlong_notm}} region | Registry address  |
 |---------------|-------------| 
@@ -466,7 +467,7 @@ Instead of setting up a gateway allowlist device, you can choose to use [Calico 
 If you want to access services that run inside or outside {{site.data.keyword.cloud_notm}} or on-premises and that are protected by an allowlist, you can add the IP addresses of your worker nodes in that allowlist to allow outbound network traffic to your cluster. For example, you might want to read data from an {{site.data.keyword.cloud_notm}} database that is protected by an allowlist, or specify your worker node subnets in an on-premises allowlist to allow network traffic from your cluster.
 {: shortdesc}
 
-1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 2. Get the worker node subnets or the worker node IP addresses.
 
