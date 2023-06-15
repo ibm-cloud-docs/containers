@@ -37,7 +37,6 @@ toc:
           - path-admin.md
           - path-dev.md
       - release-notes.md
-
   - navgroup:
       id: tutorial
       topics:
@@ -314,6 +313,7 @@ toc:
               topics:
               - cs_versions_127.md
               - cs_versions_changelog_127.md
+              - cs_benchmarks_127.md
           - topicgroup:
               label: Version 1.26
               topics:
@@ -619,4 +619,3 @@ toc:
               - ts-storage-px-encryption-fails.md
       - limitations.md
       - sitemap.md
-
