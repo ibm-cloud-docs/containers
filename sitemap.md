@@ -3672,8 +3672,6 @@ subcollection: containers
 
     * [Updating VPC worker nodes in the CLI](/docs/containers?topic=containers-update#vpc_worker_cli)
 
-    * [Updating VPC Gen2 worker nodes that use software-defined storage](/docs/containers?topic=containers-update#vpc_odf_cli)
-
     * [Updating VPC worker nodes in the console](/docs/containers?topic=containers-update#vpc_worker_ui)
 
 * [Updating flavors (machine types)](/docs/containers?topic=containers-update#machine_type)
