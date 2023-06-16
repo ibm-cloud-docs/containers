@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-06-15"
+lastupdated: "2023-06-16"
 
 keywords: containers
 subcollection: containers
@@ -9787,15 +9787,7 @@ subcollection: containers
 
 [IAM platform access roles](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles)
 
-* [No role defined](/docs/containers?topic=containers-iam-platform-access-roles#no-iam-platform-role)
-
-* [Viewer](/docs/containers?topic=containers-iam-platform-access-roles#viewer-iam-platform-role)
-
-* [Editor](/docs/containers?topic=containers-iam-platform-access-roles#editor-iam-platform-role)
-
-* [Operator](/docs/containers?topic=containers-iam-platform-access-roles#operator-iam-platform-role)
-
-* [Administrator](/docs/containers?topic=containers-iam-platform-access-roles#admin-iam-platform-role)
+* [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#kubernetes-service)
 
 [IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles#iam-service-access-roles)
 
