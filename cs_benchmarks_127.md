@@ -315,7 +315,7 @@ Review information from {{site.data.keyword.IBM_notm}} on the CIS Benchmark resu
 | 5.3.2 | {{site.data.keyword.containerlong_notm}} has a set of [default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy) and [additional network policies can optionally be added](/docs/containers?topic=containers-network_policies#adding_network_policies). |
 | 5.4.2 | {{site.data.keyword.containerlong_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
 | 5.5.1 | {{site.data.keyword.containerlong_notm}} can optionally [enable image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec). |
-| 5.6.2 | {{site.data.keyword.containerlong_notm}} does not annotate all pods with [seccomp profiles]( https://kubernetes.io/docs/concepts/security/pod-security-policy/#seccomp){: external}. |
+| 5.6.2 | {{site.data.keyword.containerlong_notm}} does not annotate all pods with [seccomp profiles](https://kubernetes.io/docs/concepts/security/pod-security-policy/#seccomp){: external}. |
 | 5.6.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that do not set a [pod or container *securityContext*](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
 | 5.6.4 | {{site.data.keyword.containerlong_notm}} deploys some Kubernetes resources to the default names. |
 {: caption="Explanation and remediation" caption-side="bottom"}
