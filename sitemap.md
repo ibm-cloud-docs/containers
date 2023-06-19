@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-06-16"
+lastupdated: "2023-06-19"
 
 keywords: containers
 subcollection: containers
@@ -253,6 +253,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
+
+    * [19 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun1923)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.15`
 
     * [8 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun823)
 
@@ -7852,6 +7856,8 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
+* [Change log for version 2.2.15, released 19 June 2023](/docs/containers?topic=containers-cos_plugin_changelog#02215_object_plugin)
+
 * [Change log for version 2.2.14, released 02 May 2023](/docs/containers?topic=containers-cos_plugin_changelog#02214_object_plugin)
 
 * [Change log for version 2.2.13, released 03 April 2023](/docs/containers?topic=containers-cos_plugin_changelog#02213_object_plugin)
@@ -9788,6 +9794,8 @@ subcollection: containers
 * [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#kubernetes-service)
 
 [IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles#iam-service-access-roles)
+
+* [Kubernetes service access roles and corresponding RBAC roles](/docs/containers?topic=containers-iam-service-access-roles#rbac_service)
 
 * [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-iam-service-access-roles#rbac_ref)
 
