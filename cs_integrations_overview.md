@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-06-09"
+lastupdated: "2023-06-19"
 
 keywords: kubernetes, helm
 
@@ -84,8 +84,8 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 
 |Service|Description|Classic|VPC|
 |----|------------|----|----|
-|CoScale|Monitor worker nodes, containers, replica sets, replication controllers, and services with [CoScale](https://newrelic.com/blog/nerd-life/coscale){: external}. For more information, see [Monitoring {{site.data.keyword.containerlong_notm}} with CoScale](https://www.ibm.com/blogs/cloud-archive/monitoring-ibm-bluemix-container-service-coscale/){: external}.|Yes|Yes|
-|Datadog|Monitor your cluster and view infrastructure and application performance metrics with [Datadog](https://www.datadoghq.com/){: external}. For more information, see [Monitoring {{site.data.keyword.containerlong_notm}} with Datadog](https://www.ibm.com/blogs/cloud-archive/monitoring-ibm-bluemix-container-service-datadog/){: external}.|Yes|Yes|
+|CoScale|Monitor worker nodes, containers, replica sets, replication controllers, and services with [CoScale](https://newrelic.com/blog/nerd-life/coscale){: external}.|Yes|Yes|
+|Datadog|Monitor your cluster and view infrastructure and application performance metrics with [Datadog](https://www.datadoghq.com/){: external}.|Yes|Yes|
 |{{site.data.keyword.cloudaccesstrailfull_notm}}|Monitor the administrative activity that is made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/activity-tracker?topic=activity-tracker-getting-started) documentation. For more information about the types of events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).|Yes|Yes|
 |{{site.data.keyword.la_full_notm}}|Add log management capabilities to your cluster by deploying a {{site.data.keyword.la_short}} agent to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/log-analysis?topic=log-analysis-tutorial-use-logdna).|Yes|Yes|
 |{{site.data.keyword.mon_full_notm}}|Gain operational visibility into the performance and health of your apps by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes to forward metrics to {{site.data.keyword.mon_full}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/monitoring?topic=monitoring-kubernetes_cluster#kubernetes_cluster).|Yes|Yes|
@@ -113,7 +113,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 |{{site.data.keyword.keymanagementservicefull_notm}}|Encrypt the Kubernetes secrets that are in your cluster by [enabling a key management service (KMS) provider](/docs/containers?topic=containers-encryption#kms). Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information. |Yes|Yes|
 |NeuVector|Protect containers with a cloud-native firewall by using [NeuVector](https://neuvector.com/){: external}. For more information, see [NeuVector Container Security](https://cloud.ibm.com/catalog/services/neuvector-container-security-platform){: external}.|Yes|Yes|
 |{{site.data.keyword.secrets-manager_full_notm}}| Ingress secrets and certificates| You can use {{site.data.keyword.secrets-manager_short}} to store and manage your Ingress secrets and certificates. For more information, see [Setting up {{site.data.keyword.secrets-manager_short}} in your Kubernetes Service cluster](/docs/containers?topic=containers-secrets-mgr).|Yes|Yes|
-|Twistlock|As a supplement to [Vulnerability Advisor](/docs/Registry?topic=Registry-va_index){: external}, you can use [Twistlock](https://www.paloaltonetworks.com/prisma/cloud){: external} to manage firewalls, threat protection, and incident response. For more information, see [Twistlock on {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/blogs/cloud-archive/twistlock-ibm-bluemix-container-service/){: external}.|Yes|Yes|
+|Twistlock|As a supplement to [Vulnerability Advisor](/docs/Registry?topic=Registry-va_index){: external}, you can use [Twistlock](https://www.paloaltonetworks.com/prisma/cloud){: external} to manage firewalls, threat protection, and incident response.|Yes|Yes|
 {: caption="Table 5. Security services" caption-side="bottom"}
 
 
