@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-19"
+lastupdated: "2023-06-20"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## June 2023
 {: #containers-jun23}
+
+### 20 June 2023
+{: #containers-jun2023}
+{: release-note} 
+
+
+
+Worker node fix pack updates
+:   Worker node fix pack updates are available for versions [1.27](/docs/containers?topic=containers-changelog_127), [1.26](/docs/containers?topic=containers-changelog_126), [1.25](/docs/containers?topic=containers-changelog_125), and [1.24](/docs/containers?topic=containers-changelog_124).
+
 
 ### 19 June 2023
 {: #containers-jun1923}

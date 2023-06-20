@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-06-20"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.21
 
@@ -59,7 +59,7 @@ The following table shows the changes that are in the worker node fix pack 1.21.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Ubuntu 18.04 packages | 4.15.0-192 | 4.15.0-193 | Worker node kernel & package updates for [CVE-2020-35525](https://nvd.nist.gov/vuln/detail/CVE-2020-35525){: external},[CVE-2021-33655](https://nvd.nist.gov/vuln/detail/CVE-2021-33655){: external},[CVE-2021-33656](https://nvd.nist.gov/vuln/detail/CVE-2021-33656){: external},[CVE-2022-0943](https://nvd.nist.gov/vuln/detail/CVE-2022-0943){: external},[CVE-2022-1154](https://nvd.nist.gov/vuln/detail/CVE-2022-1154){: external},[CVE-2022-1616](https://nvd.nist.gov/vuln/detail/CVE-2022-1616){: external},[CVE-2022-1619](https://nvd.nist.gov/vuln/detail/CVE-2022-1619){: external},[CVE-2022-1620](https://nvd.nist.gov/vuln/detail/CVE-2022-1620){: external},[CVE-2022-1621](https://nvd.nist.gov/vuln/detail/CVE-2022-1621){: external},[CVE-2022-2526](https://nvd.nist.gov/vuln/detail/CVE-2022-2526){: external},[CVE-2022-2795](https://nvd.nist.gov/vuln/detail/CVE-2022-2795){: external},[CVE-2022-35252](https://nvd.nist.gov/vuln/detail/CVE-2022-35252){: external},[CVE-2022-36946](https://nvd.nist.gov/vuln/detail/CVE-2022-36946){: external},[CVE-2022-38177](https://nvd.nist.gov/vuln/detail/CVE-2022-38177){: external},[CVE-2022-38178](https://nvd.nist.gov/vuln/detail/CVE-2022-38178){: external}. |
+| Ubuntu 18.04 packages | 4.15.0-192 | 4.15.0-193 | Worker node kernel & package updates for [CVE-2020-35525](https://nvd.nist.gov/vuln/detail/CVE-2020-35525){: external}, [CVE-2021-33655](https://nvd.nist.gov/vuln/detail/CVE-2021-33655){: external}, [CVE-2021-33656](https://nvd.nist.gov/vuln/detail/CVE-2021-33656){: external}, [CVE-2022-0943](https://nvd.nist.gov/vuln/detail/CVE-2022-0943){: external}, [CVE-2022-1154](https://nvd.nist.gov/vuln/detail/CVE-2022-1154){: external}, [CVE-2022-1616](https://nvd.nist.gov/vuln/detail/CVE-2022-1616){: external}, [CVE-2022-1619](https://nvd.nist.gov/vuln/detail/CVE-2022-1619){: external}, [CVE-2022-1620](https://nvd.nist.gov/vuln/detail/CVE-2022-1620){: external}, [CVE-2022-1621](https://nvd.nist.gov/vuln/detail/CVE-2022-1621){: external}, [CVE-2022-2526](https://nvd.nist.gov/vuln/detail/CVE-2022-2526){: external}, [CVE-2022-2795](https://nvd.nist.gov/vuln/detail/CVE-2022-2795){: external}, [CVE-2022-35252](https://nvd.nist.gov/vuln/detail/CVE-2022-35252){: external}, [CVE-2022-36946](https://nvd.nist.gov/vuln/detail/CVE-2022-36946){: external}, [CVE-2022-38177](https://nvd.nist.gov/vuln/detail/CVE-2022-38177){: external}, [CVE-2022-38178](https://nvd.nist.gov/vuln/detail/CVE-2022-38178){: external}. |
 | Kubernetes |N/A|N/A|N/A|
 {: caption="Changes since version 1.21.14_1578" caption-side="bottom"}
 
@@ -71,7 +71,7 @@ The following table shows the changes that are in the worker node fix pack 1.21.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Ubuntu 18.04 packages | 4.15.0-191 | 4.15.0-192 | Worker node kernel & package updates for [CVE-2021-33656](https://nvd.nist.gov/vuln/detail/CVE-2021-33656){: external},[CVE-2022-35252](https://nvd.nist.gov/vuln/detail/CVE-2022-35252){: external}. |
+| Ubuntu 18.04 packages | 4.15.0-191 | 4.15.0-192 | Worker node kernel & package updates for [CVE-2021-33656](https://nvd.nist.gov/vuln/detail/CVE-2021-33656){: external}, [CVE-2022-35252](https://nvd.nist.gov/vuln/detail/CVE-2022-35252){: external}. |
 | Kubernetes |N/A|N/A|N/A| 
 {: caption="Changes since version 1.21.14_1578" caption-side="bottom"}
 
@@ -109,9 +109,9 @@ The following table shows the changes that are in the worker node fix pack 1.21.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Ubuntu 18.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2019-5815](https://nvd.nist.gov/vuln/detail/CVE-2019-5815){: external},[CVE-2021-30560](https://nvd.nist.gov/vuln/detail/CVE-2021-30560){: external},[CVE-2022-31676](https://nvd.nist.gov/vuln/detail/CVE-2022-31676){: external},[CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external}. |
+| Ubuntu 18.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2019-5815](https://nvd.nist.gov/vuln/detail/CVE-2019-5815){: external}, [CVE-2021-30560](https://nvd.nist.gov/vuln/detail/CVE-2021-30560){: external}, [CVE-2022-31676](https://nvd.nist.gov/vuln/detail/CVE-2022-31676){: external}, [CVE-2022-37434](https://nvd.nist.gov/vuln/detail/CVE-2022-37434){: external}. |
 | Kubernetes |N/A|N/A|N/A| 
-| HAPROXY | 6514a2 | c1634f | [CVE-2022-32206](https://nvd.nist.gov/vuln/detail/CVE-2022-32206){: external},[CVE-2022-32208](https://nvd.nist.gov/vuln/detail/CVE-2022-32208){: external}
+| HAPROXY | 6514a2 | c1634f | [CVE-2022-32206](https://nvd.nist.gov/vuln/detail/CVE-2022-32206){: external}, [CVE-2022-32208](https://nvd.nist.gov/vuln/detail/CVE-2022-32208){: external}
 {: caption="Changes since version 1.21.14_1576" caption-side="bottom"}
 
 ### Change log for worker node fix pack 1.21.14_1576, released 16 August 2022
@@ -122,7 +122,7 @@ The following table shows the changes that are in the worker node fix pack 1.21.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Ubuntu 18.04 packages | 4.15.0-189 | 4.15.0-191 | Worker node kernel & package updates for [CVE-2016-3709](https://nvd.nist.gov/vuln/detail/CVE-2016-3709){: external},[CVE-2021-4209](https://nvd.nist.gov/vuln/detail/CVE-2021-4209){: external},[CVE-2022-1652](https://nvd.nist.gov/vuln/detail/CVE-2022-1652){: external},[CVE-2022-1679](https://nvd.nist.gov/vuln/detail/CVE-2022-1679){: external},[CVE-2022-1734](https://nvd.nist.gov/vuln/detail/CVE-2022-1734){: external},[CVE-2022-2509](https://nvd.nist.gov/vuln/detail/CVE-2022-2509){: external},[CVE-2022-2586](https://nvd.nist.gov/vuln/detail/CVE-2022-2586){: external},[CVE-2022-2588](https://nvd.nist.gov/vuln/detail/CVE-2022-2588){: external},[CVE-2022-34918](https://nvd.nist.gov/vuln/detail/CVE-2022-34918){: external}. |
+| Ubuntu 18.04 packages | 4.15.0-189 | 4.15.0-191 | Worker node kernel & package updates for [CVE-2016-3709](https://nvd.nist.gov/vuln/detail/CVE-2016-3709){: external}, [CVE-2021-4209](https://nvd.nist.gov/vuln/detail/CVE-2021-4209){: external}, [CVE-2022-1652](https://nvd.nist.gov/vuln/detail/CVE-2022-1652){: external}, [CVE-2022-1679](https://nvd.nist.gov/vuln/detail/CVE-2022-1679){: external}, [CVE-2022-1734](https://nvd.nist.gov/vuln/detail/CVE-2022-1734){: external}, [CVE-2022-2509](https://nvd.nist.gov/vuln/detail/CVE-2022-2509){: external}, [CVE-2022-2586](https://nvd.nist.gov/vuln/detail/CVE-2022-2586){: external}, [CVE-2022-2588](https://nvd.nist.gov/vuln/detail/CVE-2022-2588){: external}, [CVE-2022-34918](https://nvd.nist.gov/vuln/detail/CVE-2022-34918){: external}. |
 | Kubernetes |N/A|N/A|N/A| 
 | containerd | 1.6.6 | 1.6.8 | For more information, see the [change log](https://github.com/containerd/containerd/releases/tag/v1.6.8){: external}. |
 {: caption="Changes since version 1.21.14_1575" caption-side="bottom"}
@@ -135,7 +135,7 @@ The following table shows the changes that are in the worker node fix pack 1.21.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Ubuntu 18.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2022-27404](https://nvd.nist.gov/vuln/detail/CVE-2022-27404){: external},[CVE-2022-27405](https://nvd.nist.gov/vuln/detail/CVE-2022-27405){: external},[CVE-2022-27406](https://nvd.nist.gov/vuln/detail/CVE-2022-27406){: external},[CVE-2022-29217](https://nvd.nist.gov/vuln/detail/CVE-2022-29217){: external},[CVE-2022-31782](https://nvd.nist.gov/vuln/detail/CVE-2022-31782){: external}. |
+| Ubuntu 18.04 packages |N/A|N/A| Worker node kernel & package updates for [CVE-2022-27404](https://nvd.nist.gov/vuln/detail/CVE-2022-27404){: external}, [CVE-2022-27405](https://nvd.nist.gov/vuln/detail/CVE-2022-27405){: external}, [CVE-2022-27406](https://nvd.nist.gov/vuln/detail/CVE-2022-27406){: external}, [CVE-2022-29217](https://nvd.nist.gov/vuln/detail/CVE-2022-29217){: external}, [CVE-2022-31782](https://nvd.nist.gov/vuln/detail/CVE-2022-31782){: external}. |
 | Kubernetes |N/A|N/A|N/A|
 {: caption="Changes since version 1.21.14_1572" caption-side="bottom"}
 
@@ -169,7 +169,7 @@ The following table shows the changes that are in the worker node fix pack 1.21.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Ubuntu 18.04 packages | 4.15.0-188 | 4.15.0-189 | Worker node kernel & package updates for [CVE-2015-20107](https://nvd.nist.gov/vuln/detail/CVE-2015-20107){: external}, [CVE-2022-2097](https://nvd.nist.gov/vuln/detail/CVE-2022-2097){: external},[CVE-2022-22747](https://nvd.nist.gov/vuln/detail/CVE-2022-22747){: external}, [CVE-2022-24765](https://nvd.nist.gov/vuln/detail/CVE-2022-24765){: external}, [CVE-2022-29187](https://nvd.nist.gov/vuln/detail/CVE-2022-29187){: external},[CVE-2022-34480](https://nvd.nist.gov/vuln/detail/CVE-2022-34480){: external},[CVE-2022-34903](https://nvd.nist.gov/vuln/detail/CVE-2022-34903){: external}. |
+| Ubuntu 18.04 packages | 4.15.0-188 | 4.15.0-189 | Worker node kernel & package updates for [CVE-2015-20107](https://nvd.nist.gov/vuln/detail/CVE-2015-20107){: external}, [CVE-2022-2097](https://nvd.nist.gov/vuln/detail/CVE-2022-2097){: external}, [CVE-2022-22747](https://nvd.nist.gov/vuln/detail/CVE-2022-22747){: external}, [CVE-2022-24765](https://nvd.nist.gov/vuln/detail/CVE-2022-24765){: external}, [CVE-2022-29187](https://nvd.nist.gov/vuln/detail/CVE-2022-29187){: external}, [CVE-2022-34480](https://nvd.nist.gov/vuln/detail/CVE-2022-34480){: external}, [CVE-2022-34903](https://nvd.nist.gov/vuln/detail/CVE-2022-34903){: external}. |
 | Kubernetes |N/A|N/A|N/A|
 {: caption="Changes since version 1.21.14_1565" caption-side="bottom"}
 
@@ -181,7 +181,7 @@ The following table shows the changes that are in the worker node fix pack 1.21.
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Ubuntu 18.04 packages | 4.15.0-187 | 4.15.0-188 | Worker node kernel & package updates for [CVE-2022-1292](https://nvd.nist.gov/vuln/detail/CVE-2022-1292){: external},[CVE-2022-2068](https://nvd.nist.gov/vuln/detail/CVE-2022-2068){: external},[CVE-2022-2084](https://nvd.nist.gov/vuln/detail/CVE-2022-2084){: external},[CVE-2022-28388](https://nvd.nist.gov/vuln/detail/CVE-2022-28388){: external},[CVE-2022-32206](https://nvd.nist.gov/vuln/detail/CVE-2022-32206){: external},[CVE-2022-32208](https://nvd.nist.gov/vuln/detail/CVE-2022-32208){: external}. |
+| Ubuntu 18.04 packages | 4.15.0-187 | 4.15.0-188 | Worker node kernel & package updates for [CVE-2022-1292](https://nvd.nist.gov/vuln/detail/CVE-2022-1292){: external}, [CVE-2022-2068](https://nvd.nist.gov/vuln/detail/CVE-2022-2068){: external}, [CVE-2022-2084](https://nvd.nist.gov/vuln/detail/CVE-2022-2084){: external}, [CVE-2022-28388](https://nvd.nist.gov/vuln/detail/CVE-2022-28388){: external}, [CVE-2022-32206](https://nvd.nist.gov/vuln/detail/CVE-2022-32206){: external}, [CVE-2022-32208](https://nvd.nist.gov/vuln/detail/CVE-2022-32208){: external}. |
 | Kubernetes |N/A|N/A|N/A|
 {: caption="Changes since version 1.21.14_1564" caption-side="bottom"}
 
