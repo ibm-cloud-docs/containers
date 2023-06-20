@@ -254,6 +254,10 @@ subcollection: containers
 
 * [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
 
+    * [20 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2023)
+
+        * Worker node fix pack updates
+
     * [19 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun1923)
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.15`
