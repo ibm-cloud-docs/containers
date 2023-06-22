@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-06-20"
+lastupdated: "2023-06-22"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -36,6 +36,40 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 ## Version 1.17
 {: #v117}
+
+### Changelog for 1.17.3, released 22 June 2023
+{: #1173}
+
+Review the changes that are included in version 1.17.3 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.17.2
+
+Current version
+:   1.17.3
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.17.3](https://istio.io/latest/news/releases/1.17.x/announcing-1.17.3/){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2019-17594](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17594){: external}
+    - [CVE-2019-17595](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17595){: external}
+    - [CVE-2021-39537](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-39537){: external}
+    - [CVE-2022-29458](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29458){: external}
+    - [CVE-2023-29491](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29491){: external}
+    - [CVE-2023-1255](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1255){: external}
+    - [CVE-2023-2650 ](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650){: external}
+    - [CVE-2022-3996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3996){: external}
+    - [CVE-2023-0464](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0464){: external}
+    - [CVE-2023-0466](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0466){: external}
+    - [CVE-2023-28486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28486){: external}
+    - [CVE-2023-28487](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28487){: external}
+    - [usn-6105-1](https://ubuntu.com/security/notices/USN-6105-1){: external}
+    - [usn-6099-1](https://ubuntu.com/security/notices/USN-6099-1){: external}
+    - [usn-6119-1](https://ubuntu.com/security/notices/USN-6119-1){: external}
+    - [usn-6039-1](https://ubuntu.com/security/notices/USN-6039-1){: external}
+    - [usn-6005-1](https://ubuntu.com/security/notices/USN-6005-1){: external}   
+
 
 ### Change log for 1.17.2, released 20 April 2023
 {: #1172}
