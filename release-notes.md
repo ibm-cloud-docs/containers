@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-20"
+lastupdated: "2023-06-22"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,26 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## June 2023
 {: #containers-jun23}
+
+
+
+### 22 June 2023
+{: #containers-jun2223}
+{: release-note} 
+
+Istio add-on version `1.17.3`.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
+
+### 21 June 2023
+{: #containers-jun2123}
+{: release-note} 
+
+{{site.data.keyword.block_storage_is_short}} add-on versions `5.0.16_127` and `5.1.11_126`.
+:   This patch introduces two new variables to the `addon-vpc-block-csi-driver-configmap`. To get the latest snapshot configmap values users must add the new values to the existing configmap and apply the changes. For more information, see [Customizing snapshots](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-customize-snapshot) and [the add-on change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
+
 
 ### 20 June 2023
 {: #containers-jun2023}

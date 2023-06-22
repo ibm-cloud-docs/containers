@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-06-20"
+lastupdated: "2023-06-22"
 
 keywords: containers
 subcollection: containers
@@ -253,6 +253,14 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
+
+    * [22 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2223)
+
+        * Istio add-on version `1.17.3`.
+
+    * [21 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2123)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.16_127` and `5.1.11_126`.
 
     * [20 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2023)
 
@@ -5625,15 +5633,17 @@ subcollection: containers
 
 [Setting up snapshots with the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
 
-* [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-addon-enable)
-
-* [Optional: Deploying the snapshot validation webhook](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-validation-webhook)
-
-* [Creating a deployment](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-deployment)
+* [Creating an app deployment](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-deployment)
 
 * [Creating a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-create-snapshot)
 
 * [Restoring from a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-restore-from-snapshot)
+
+* [Customizing snapshots](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-customize-snapshot)
+
+    * [`addon-vpc-block-csi-driver-configmap` default settings](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-block-configmap-settings)
+
+* [Turning off snapshots](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-turn-off-snapshots)
 
 * [Troubleshooting snapshots](/docs/containers?topic=containers-vpc-volume-snapshot#ts-snapshot-vpc-block-addon-next)
 
@@ -7364,6 +7374,8 @@ subcollection: containers
 
 * [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
 
+    * [Changelog for 1.17.3, released 22 June 2023](/docs/containers?topic=containers-istio-changelog#1173)
+
     * [Change log for 1.17.2, released 20 April 2023](/docs/containers?topic=containers-istio-changelog#1172)
 
     * [Change log for 1.17.1, released 7 March 2023](/docs/containers?topic=containers-istio-changelog#1171)
@@ -7728,6 +7740,8 @@ subcollection: containers
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
 
+    * [Change log for version 5.1.11_126, released 21 June 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.11_126_is_block_relnote)
+
     * [Change log for version 5.1.8_1970, released 15 May 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.8_1970_is_block_relnote)
 
     * [Change log for version 5.1.6_1872, released 05 April 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.6_1872_is_block_relnote)
@@ -7741,6 +7755,8 @@ subcollection: containers
     * [Change log for version 5.1, released 9 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1_is_block_relnote)
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
+
+    * [Change log for version 5.0.16_127, released 21 June 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.16_127_is_block_relnote)
 
     * [Change log for version 5.0.12_1963, released 15 May 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.12_1963_is_block_relnote)
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-06-02"
+lastupdated: "2023-06-21"
 
 keywords: kubernetes, containers, 127, version 127, 127 update actions
 
@@ -58,9 +58,6 @@ This information summarizes updates that are likely to have and impact on deploy
 {: important}
 
 [Cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc) does not yet support version 1.27. Do not upgrade your cluster to version 1.27 if your cluster uses the cluster autoscaler.
-{: important}
-
-Gateway-enabled clusters on Classic infrastructure are deprecated and will be unsupported soon. The end of support dates are linked directly to the end of support of IBM Cloud Kubernetes Service version 1.26. Gateway-enabled clusters are not supported on version 1.27 and later. If your cluster is gateway-enabled, plan to create a new cluster before support ends. If you need similar functionality, consider creating a cluster on VPC infrastructure.
 {: important}
 
 
