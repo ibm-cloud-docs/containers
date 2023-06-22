@@ -30,13 +30,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-jun23}
 
 
-
 ### 22 June 2023
 {: #containers-jun2223}
 {: release-note} 
 
+
+
+
 Istio add-on version `1.17.3`.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
 
 
 
