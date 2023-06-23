@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-06-21"
+lastupdated: "2023-06-23"
 
 keywords: kubernetes, containers, 127, version 127, 127 update actions
 
@@ -55,9 +55,6 @@ This information summarizes updates that are likely to have and impact on deploy
 {: shortdesc}
 
 [Portworx](/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.27. Do not upgrade your cluster to version 1.27 if your apps use Portworx.
-{: important}
-
-[Cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc) does not yet support version 1.27. Do not upgrade your cluster to version 1.27 if your cluster uses the cluster autoscaler.
 {: important}
 
 

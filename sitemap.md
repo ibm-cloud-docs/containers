@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-06-22"
+lastupdated: "2023-06-23"
 
 keywords: containers
 subcollection: containers
@@ -255,6 +255,8 @@ subcollection: containers
 * [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
 
     * [22 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2223)
+
+        * Cluster autoscaler add-on version `1.0.9_44`.
 
         * Istio add-on version `1.17.3`.
 
@@ -3193,39 +3195,19 @@ subcollection: containers
 {: #sitemap_installing_the_cli_and_api}
 
 
-[Installing the stand-alone {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-install-ibmcloud-cli#install-ibmcloud-cli)
+[Installing the CLI](/docs/containers?topic=containers-cli-install#cli-install)
 
-* [Before you begin](/docs/containers?topic=containers-install-ibmcloud-cli#before-download-cli)
+* [Understanding the CLI tools](/docs/containers?topic=containers-cli-install#cli-understand)
 
-* [Installing with an installer](/docs/containers?topic=containers-install-ibmcloud-cli#ibmcloud-cli-installer)
+* [Run the installation command](/docs/containers?topic=containers-cli-install#run-the-installation-command)
 
-* [Installing from the shell](/docs/containers?topic=containers-install-ibmcloud-cli#shell_install)
+* [Install the Kubernetes CLI](/docs/containers?topic=containers-cli-install#install-kubectl-cli)
 
-* [Installing to a custom directory](/docs/containers?topic=containers-install-ibmcloud-cli#install-custom-dir)
+[Updating the CLI](/docs/containers?topic=containers-cli-update#cli-update)
 
-* [Updating the {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-install-ibmcloud-cli#update-ibmcloud-cli)
+* [Updating the {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-cli-update#updating-the--cli)
 
-[Extending {{site.data.keyword.cloud_notm}} CLI with plug-ins](/docs/containers?topic=containers-plug-ins#plug-ins)
-
-* [Before you begin](/docs/containers?topic=containers-plug-ins#cli-before-you-begin)
-
-* [Searching for a plug-in](/docs/containers?topic=containers-plug-ins#cli-search-plugin)
-
-* [Installing a plug-in from the {{site.data.keyword.cloud_notm}} CLI repository](/docs/containers?topic=containers-plug-ins#install-from-repo)
-
-    * [Installing a specific plug-in](/docs/containers?topic=containers-plug-ins#cli-install-plugin)
-
-    * [Installing all plug-ins](/docs/containers?topic=containers-plug-ins#cli-install-all)
-
-    * [Installing multiple plug-ins](/docs/containers?topic=containers-plug-ins#cli-install-multiple)
-
-* [Confirming installed plug-ins](/docs/containers?topic=containers-plug-ins#cli-install-view)
-
-* [Updating installed plug-ins](/docs/containers?topic=containers-plug-ins#cli-update-plugin)
-
-* [Related information](/docs/containers?topic=containers-plug-ins#cli-install-relinfo)
-
-[Installing the Kubernetes CLI](/docs/containers?topic=containers-cli-install#cli-install)
+* [Updating installed plug-ins](/docs/containers?topic=containers-cli-update#updating-installed-plug-ins)
 
 [Setting up the API](/docs/containers?topic=containers-cs_api_install#cs_api_install)
 
@@ -7625,6 +7607,10 @@ subcollection: containers
     * [Change log for patch update 1.1.0_475, released 30 March 2022](/docs/containers?topic=containers-ca_changelog#110475_ca)
 
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
+
+* [Version 1.0.9](/docs/containers?topic=containers-ca_changelog#0109_ca_addon)
+
+    * [Change log for patch update 1.0.9_44, released 22 June 2023](/docs/containers?topic=containers-ca_changelog#10944_ca)
 
 * [Version 1.0.8](/docs/containers?topic=containers-ca_changelog#0108_ca_addon)
 
