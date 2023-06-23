@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-22"
+lastupdated: "2023-06-23"
 
 keywords: kubernetes, release notes
 
@@ -33,6 +33,11 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ### 22 June 2023
 {: #containers-jun2223}
 {: release-note} 
+
+
+
+Cluster autoscaler add-on version `1.0.9_44`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).).
 
 
 
