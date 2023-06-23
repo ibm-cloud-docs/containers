@@ -33,7 +33,7 @@ You can use the following tools to manage your {{site.data.keyword.containerlong
 | CLI | Description |
 | --- | --- |
 | `ibmcloud` | You can use the `ibmcloud` CLI to login to your account, add users, manage your catalogs and more. |
-| `container-service` or `ks` plug-in | After installing the `ibmcloud` CLI, you can use the `ks` plug-in to create and manage {{site.data.keyword.containerlong_notm}} clusters. |
+| `ks` plug-in | After installing the `ibmcloud` CLI, you can use the `ks` plug-in to create and manage {{site.data.keyword.containerlong_notm}} clusters. |
 | `kubectl` | You can use the `kubectl` CLI to manage resources within your clusters like pods, deployments, and more. |
 {: caption="Table 1: CLI tools" caption-side="bottom"}
 
@@ -52,7 +52,7 @@ ibmcloud plugin install ks
 {: pre}
 
 
-## Install the `kubectl` CLI
+## Install the Kubernetes CLI
 {: #install-kubectl-cli}
 {: step}
 

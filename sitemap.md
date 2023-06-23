@@ -3201,7 +3201,7 @@ subcollection: containers
 
 * [Run the installation command](/docs/containers?topic=containers-cli-install#run-the-installation-command)
 
-* [Install the `kubectl` CLI](/docs/containers?topic=containers-cli-install#install-kubectl-cli)
+* [Install the Kubernetes CLI](/docs/containers?topic=containers-cli-install#install-kubectl-cli)
 
 [Updating the CLI](/docs/containers?topic=containers-cli-update#cli-update)
 
