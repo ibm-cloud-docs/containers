@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-04-14"
+lastupdated: "2023-06-26"
 
 keywords: kubernetes, networking
 
@@ -61,7 +61,6 @@ The following table compares the features of each network service type.
 
 |Characteristics|ClusterIP|NodePort|LoadBalancer (Classic - NLB)|LoadBalancer (VPC load balancer)|Ingress|
 |---------------|---------|--------|----------------------------|--------------------------------|-------|
-|Free clusters|Yes|Yes| | | |
 |Standard clusters|Yes|Yes|Yes|Yes|Yes|
 |Externally accessible| |Yes|Yes|Yes|Yes|
 |External hostname| | |Yes|Yes|Yes|

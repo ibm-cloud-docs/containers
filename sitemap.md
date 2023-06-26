@@ -44,8 +44,6 @@ subcollection: containers
 
 * [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
 
-    * [Deploying an app to a free classic cluster and exposing it with a node port](/docs/containers?topic=containers-getting-started#deployapp1)
-
     * [Deploying an app to a standard cluster and exposing with a load balancer](/docs/containers?topic=containers-getting-started#deployapp2)
 
 * [What's next?](/docs/containers?topic=containers-getting-started#whats-next)
@@ -253,6 +251,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
+
+    * [23 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2323)
+
+        * Free cluster tier deprecation
 
     * [22 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2223)
 
@@ -9843,8 +9845,6 @@ subcollection: containers
     * [Resources in a single zone cluster](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
 
     * [Resources in a multizone cluster](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
-
-    * [Free clusters](/docs/containers?topic=containers-regions-and-zones#regions_free)
 
 * [Accessing the global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint)
 

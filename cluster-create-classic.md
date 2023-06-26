@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-06"
+lastupdated: "2023-06-26"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, classic, create
 
@@ -23,13 +23,6 @@ subcollection: containers
 
 Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_notm}} console to create a fully customizable standard cluster with your choice of hardware isolation and access to features like multiple worker nodes for a highly available environment.
 {: shortdesc}
-
-
-
-Want to try out a free cluster first? See [Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs). Want to save on your classic worker node costs? [Create a reservation](/docs/containers?topic=containers-reservations) to lock in a discount over 1 or 3 year terms! Then, create your worker pool by using the reserved instances. Note that autoscaling can't be enable on worker pools that use reservations.
-{: tip}
-
-
 
 ## Creating a classic cluster in the console
 {: #clusters_ui}
@@ -288,14 +281,6 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 ## Example commands to create classic clusters
 {: #cluster_create_classic}
 {: cli}
-
-
-Create a free cluster
-
-```sh
-ibmcloud ks cluster create classic --name my_cluster
-```
-{: pre}
 
 Classic cluster, shared virtual machine
 

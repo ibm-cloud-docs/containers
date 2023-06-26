@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-27"
+lastupdated: "2023-06-26"
 
 keywords: kubernetes, vyatta, strongswan, ipsec, on-prem
 
@@ -176,8 +176,8 @@ Before you install the strongSwan Helm chart, you must decide on your strongSwan
 Before you begin
 - Install an IPSec VPN gateway in your on-premises data center.
 - Ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for the `default` namespace.
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-    All strongSwan configurations are permitted in standard clusters. If you use a free cluster, you can choose only an outbound VPN connection in [Step 3](#strongswan_3). Inbound VPN connections require a load balancer in the cluster, and load balancers are not available for free clusters.
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
+    All strongSwan configurations are permitted in standard clusters.
     {: note}
 
 ### Step 1: Get the strongSwan Helm chart
@@ -231,8 +231,6 @@ Inbound
 
 Outbound
 : The cluster initiates the VPN connection, and the on-premises VPN endpoint from the remote network listens for the connection.
-
-If you use a free cluster, you can choose only an outbound VPN connection. Inbound VPN connections require a load balancer in the cluster, and load balancers are not available for free clusters.
 
 To establish an inbound VPN connection, modify the following settings.
 
