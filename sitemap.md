@@ -252,6 +252,10 @@ subcollection: containers
 
 * [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
 
+    * [26 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2623)
+
+        * CLI version `1.0.528`.
+
     * [23 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2323)
 
         * Free cluster tier deprecation
@@ -3201,15 +3205,15 @@ subcollection: containers
 
 * [Understanding the CLI tools](/docs/containers?topic=containers-cli-install#cli-understand)
 
-* [Run the installation command](/docs/containers?topic=containers-cli-install#run-the-installation-command)
+* [Run the installation command](/docs/containers?topic=containers-cli-install#cli-install-include-step1-install-idt)
 
 * [Install the Kubernetes CLI](/docs/containers?topic=containers-cli-install#install-kubectl-cli)
 
 [Updating the CLI](/docs/containers?topic=containers-cli-update#cli-update)
 
-* [Updating the {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-cli-update#updating-the--cli)
+* [Updating the {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-cli-update#cli-update-include-update-ibmcloud-cli)
 
-* [Updating installed plug-ins](/docs/containers?topic=containers-cli-update#updating-installed-plug-ins)
+* [Updating installed plug-ins](/docs/containers?topic=containers-cli-update#cli-update-include-cli-update-plugin)
 
 [Setting up the API](/docs/containers?topic=containers-cs_api_install#cs_api_install)
 
@@ -6407,6 +6411,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.528](/docs/containers?topic=containers-cs_cli_changelog#cli-10528)
 
 * [Version v1.0.523](/docs/containers?topic=containers-cs_cli_changelog#cli-10523)
 
@@ -9807,7 +9813,7 @@ subcollection: containers
 
 [IAM platform access roles](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles)
 
-* [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#kubernetes-service)
+* [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles-include-containers-kubernetes-roles)
 
 [IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles#iam-service-access-roles)
 

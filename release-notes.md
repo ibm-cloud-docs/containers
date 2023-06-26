@@ -30,6 +30,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-jun23}
 
 
+### 26 June 2023
+{: #containers-jun2623}
+{: release-note} 
+
+CLI version `1.0.528`.
+:   For more information, see the [change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
 
 ### 23 June 2023
 {: #containers-jun2323}
