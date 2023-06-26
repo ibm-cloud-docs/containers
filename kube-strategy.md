@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-15"
+lastupdated: "2023-06-26"
 
 keywords: kubernetes, containers, kubernetes environment, moving to kubernetes, moving to containers, clusters, cluster sizing
 
@@ -31,7 +31,7 @@ You have lots of reasons to move your workloads to {{site.data.keyword.cloud_not
 
 But how do you get to the cloud? What are your options along the way? And how do you manage your workloads after you get there?
 
-Use this page to learn some strategies for your Kubernetes deployments on {{site.data.keyword.containerlong_notm}}. And always feel free to engage with our team on [Slack](https://ibm-cloud-success.slack.com){: external}.
+Use this page to learn some strategies for your Kubernetes deployments on {{site.data.keyword.containerlong_notm}}. And engage with our team on [Slack](https://ibm-cloud-success.slack.com){: external}.
 
 Not on slack yet? [Request an invite!](https://cloud.ibm.com/kubernetes/slack){: external}
 {: tip}
@@ -160,7 +160,7 @@ Now that you have a good estimate of your app size and the worker nodes that you
 
 1. [Create your cluster](/docs/containers?topic=containers-clusters) with the worker pool flavor and number of worker nodes that you [previously estimated](#sizing_workers).
 2. Review what compute resources your cluster uses by default and calculate the remaining cluster capacity that you can use for your workloads.
-    1. With the {{site.data.keyword.cloud_notm}} IAM **Manager** service access role for the cluster in all namespaces: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+    1. With the {{site.data.keyword.cloud_notm}} IAM **Manager** service access role for the cluster in all namespaces: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
     2. Find the CPU and memory usage across all worker nodes. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, you can also click your cluster and review the **Cluster Insights** card.
         ```sh
         kubectl top nodes
@@ -181,7 +181,7 @@ Now that you have a good estimate of your app size and the worker nodes that you
 3. [Deploy your apps](/docs/containers?topic=containers-deploy_app) to the cluster, and make sure to [set resource requests and limits](/docs/containers?topic=containers-app#resourcereq) based on the [app size that you previously estimated](#sizing_resources) for your apps, to limit the amount of compute resources the apps can consume.
 4. Deploy any add-ons, plug-ins, or other cloud services that you want to use.
 5. Review what compute resources your workloads consume and calculate the remaining cluster capacity to deploy additional apps or scale existing apps.
-    1. With at least the {{site.data.keyword.cloud_notm}} IAM **Reader** service access role for the cluster in all namespaces: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+    1. With at least the {{site.data.keyword.cloud_notm}} IAM **Reader** service access role for the cluster in all namespaces: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
     2. List the pods that run in your cluster.
         ```sh
         kubectl get pods --all-namespaces

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-23"
+lastupdated: "2023-06-26"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,25 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## June 2023
 {: #containers-jun23}
+
+
+### 26 June 2023
+{: #containers-jun2623}
+{: release-note} 
+
+CLI version `1.0.528`.
+:   For more information, see the [change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
+
+### 23 June 2023
+{: #containers-jun2323}
+{: release-note} 
+
+Free cluster tier deprecation
+:   The free cluster option is deprecated and will be unsupported on 25 July 2023. Existing free tier clusters will be allowed to finish their 30-day trial window. If you want to continue testing {{site.data.keyword.containerlong_notm}}, try creating a [Classic cluster](https://cloud.ibm.com/docs/containers?topic=containers-cluster-create-classic&interface=ui). Then [copy your deployments to the new cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster).
+
+
 
 
 ### 22 June 2023
@@ -4520,7 +4539,7 @@ Version change logs
 {: release-note}
 
 New! Virtual Private Cloud Generation 2
-:   You can now create standard Kubernetes clusters in your [Gen 2 Virtual Private Cloud (VPC)](/docs/vpc?topic=vpc-getting-started). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC Gen 2 clusters are available for only standard, Kubernetes clusters and are not supported in free clusters.
+:   You can now create standard Kubernetes clusters in your [Gen 2 Virtual Private Cloud (VPC)](/docs/vpc?topic=vpc-getting-started). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.
 
 :   For more information, check out the following links. 
     - [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)
@@ -5659,7 +5678,7 @@ App deployments
 :   Added steps for [copying deployments from one cluster to another](/docs/containers?topic=containers-update_app#copy_apps_cluster).
 
 FAQs
-:   Added an FAQ about [free clusters](/docs/containers?topic=containers-faqs#faq_free).
+:   Added an FAQ about free clusters.
 
 Istio
 :   Added steps for [exposing Istio-managed apps with TLS termination](/docs/containers?topic=containers-istio-mesh#istio_expose_bookinfo_tls), [securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls), and [Updating the Istio add-ons](/docs/containers?topic=containers-istio#istio_update).
@@ -6077,7 +6096,7 @@ Edge nodes
 :   Added private load balancer support for [edge nodes](/docs/containers?topic=containers-edge).
 
 Free clusters
-:   Clarified where [free clusters](/docs/containers?topic=containers-regions-and-zones#regions_free) are supported.
+:   Clarified where free clusters are supported.
 
 New! Integrations
 :   Added and restructure information about [{{site.data.keyword.cloud_notm}} services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations), [popular integrations](/docs/containers?topic=containers-supported_integrations), and [partnerships](/docs/containers?topic=containers-service-partners).

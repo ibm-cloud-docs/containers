@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-05-25"
+lastupdated: "2023-06-26"
 
 keywords: kubernetes, containers
 
@@ -32,8 +32,9 @@ To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {
 {: #clusters_gs}
 {: ui}
 
-Set up your free classic cluster with one worker node by using the {{site.data.keyword.cloud_notm}} console. For more information about free clusters, such as expiration and limited capabilities, see the [FAQ](/docs/containers?topic=containers-faqs#faq_free).
-{: shortdesc}
+The free tier option is deprecated and will be unsupported on 25 July 2023. Existing free tier clusters will be allowed to finish their 30-day trial window. If you want to try {{site.data.keyword.containerlong_notm}}, [contact IBM Sales](https://www.ibm.com/account/reg/us-en/signup?formid=MAIL-wcp){: external}.
+{: deprecated}
+
 
 1. In the [{{site.data.keyword.cloud_notm}} **Catalog**](https://cloud.ibm.com/catalog?category=containers){: external}, select **Kubernetes Service**. A cluster configuration page opens.
 2. From the plan dropdown, select the **Free** cluster option.
@@ -85,12 +86,6 @@ The worker node can take a few minutes to provision, but you can see the progres
 Review the sample commands for creating classic clusters in the CLI. For more detailed steps and information about creating clusters, see [Creating classic clusters](/docs/containers?topic=containers-cluster-create-classic&interface=cli). For information about planning your cluster set up, see [Preparing to create clusters](/docs/containers?topic=containers-clusters&interface=cli).
 {: shortdesc}
 
-Create a free cluster.
-
-```sh
-ibmcloud ks cluster create classic --name my_cluster
-```
-{: pre}
 
 Create a classic cluster on a shared virtual machine.
 
@@ -149,35 +144,6 @@ After you create a [classic](#clusters_gs) or a [VPC](#vpc-gen2-gs) cluster with
 {: shortdesc}
 
 The [Kubernetes dashboard](https://github.com/kubernetes/dashboard){: external} is a web console component that is provided by the open source community and installed in your cluster by default. Use the Kubernetes dashboard to manage Kubernetes resources that are within your cluster, such as pods, services, and namespaces. Not sure what all these Kubernetes resources mean? Check out the overview for [container](/docs/containers?topic=containers-overview) and [Kubernetes](/docs/containers?topic=containers-overview) concepts.
-
-The steps to deploy an app vary if you have a free or standard cluster, because free clusters don't support load balancers.
-
-### Deploying an app to a free classic cluster and exposing it with a node port
-{: #deployapp1}
-
-Follow the steps to deploy an example `websphere-liberty` to your free classic cluster.
-{: shortdesc}
-
-1. Select your cluster from the [cluster list](https://cloud.ibm.com/kubernetes/clusters){: external} to open the details for your cluster.
-2. Click **Kubernetes dashboard**.
-3. From the menu bar, click the **Create new resource** icon (`+`).
-4. Select the **Create from form** tab.
-    1. Enter a name for your app, such as `liberty`.
-    2. Enter `websphere-liberty` for your container image.
-    3. Enter the number of pods for your app deployment, such as `1`.
-    4. Leave the **Service** drop-down menu set to **None**.
-5. Click **Deploy**. During the deployment, the cluster downloads the `websphere-liberty` container image from Docker Hub and deploys the app in your cluster.
-6. Create a node port so that your app can be accessed by other users internally or externally. Because your cluster is a free cluster, you can only expose an app with a node port, not a load balancer or Ingress.
-    1. Click the **Create new resource** icon (`+`).
-    2. Copy the [node port YAML](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/gs-nodeport.yaml){: external} from GitHub
-    3. In the **Create from input** box, paste the node port YAML that you copied in the previous step.
-    4. Click **Upload**. The node port service is created.
-7. From the menu, click **Services**, and note the TCP endpoint port of your `liberty` service in the node port range `30000 - 32767`, such as `liberty:32323 TCP`.
-8. From the menu, click **Pods**, and note the **Node** that your pod runs on, such as `10.xxx.xx.xxx`.
-9. Return to the [{{site.data.keyword.cloud_notm}} clusters console](https://cloud.ibm.com/kubernetes/clusters), select your cluster, and click the **Worker Nodes** tab. Find the **Public IP** of the worker node that matches the private IP of the node that the pod runs on.
-10. In a tab in your browser, form the URL of your app by combining `http://` with the public IP and TCP port that you previously retrieved. For example, `http://169.xx.xxx.xxx:32323`. The **Welcome to Liberty** page is displayed.
-
-Great job! You just deployed your first app in your Kubernetes cluster.
 
 ### Deploying an app to a standard cluster and exposing with a load balancer
 {: #deployapp2}

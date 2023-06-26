@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-13"
+lastupdated: "2023-06-26"
 
 keywords: kubernetes, mzr, szr, multizone, multi az
 
@@ -161,23 +161,6 @@ Other cluster resources, such as storage, networking, compute, or apps running i
 
 When you initiate cluster management actions, such as running [`ibmcloud ks` commands](/docs/containers?topic=containers-kubernetes-service-cli), basic information about the cluster, such as name, ID, user, the command is routed through the global endpoint.
 
-
-
-
-
-### Free clusters
-{: #regions_free}
-
-Free clusters are limited to specific locations and are available for only classic infrastructure, not VPC infrastructure. For more information about free clusters, see [the FAQ](/docs/containers?topic=containers-faqs#faq_free).
-{: shortdesc}
-
-**Creating a free cluster in the CLI**: You can create a free cluster in select regions only. Your cluster is created in a data center within the region that you target. You can't specify the data center. The following regions are available.
-* Frankfurt region in `ibmcloud ks init --host https://eu-de.containers.cloud.ibm.com`
-* Dallas region in `ibmcloud ks init --host https://us-south.containers.cloud.ibm.com`
-
-**Creating a free cluster in the {{site.data.keyword.cloud_notm}} console**: When you use the console, you can't select a location. Your cluster is created in one of the following locations.
-* Dallas region in North America
-* Frankfurt region in Europe
 
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-06-23"
+lastupdated: "2023-06-26"
 
 keywords: containers
 subcollection: containers
@@ -43,8 +43,6 @@ subcollection: containers
 * [Creating VPC clusters in the CLI](/docs/containers?topic=containers-getting-started#clusters_gs_vpc_cli)
 
 * [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
-
-    * [Deploying an app to a free classic cluster and exposing it with a node port](/docs/containers?topic=containers-getting-started#deployapp1)
 
     * [Deploying an app to a standard cluster and exposing with a load balancer](/docs/containers?topic=containers-getting-started#deployapp2)
 
@@ -253,6 +251,14 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
+
+    * [26 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2623)
+
+        * CLI version `1.0.528`.
+
+    * [23 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2323)
+
+        * Free cluster tier deprecation
 
     * [22 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2223)
 
@@ -3199,15 +3205,15 @@ subcollection: containers
 
 * [Understanding the CLI tools](/docs/containers?topic=containers-cli-install#cli-understand)
 
-* [Run the installation command](/docs/containers?topic=containers-cli-install#run-the-installation-command)
+* [Run the installation command](/docs/containers?topic=containers-cli-install#cli-install-include-step1-install-idt)
 
 * [Install the Kubernetes CLI](/docs/containers?topic=containers-cli-install#install-kubectl-cli)
 
 [Updating the CLI](/docs/containers?topic=containers-cli-update#cli-update)
 
-* [Updating the {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-cli-update#updating-the--cli)
+* [Updating the {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-cli-update#cli-update-include-update-ibmcloud-cli)
 
-* [Updating installed plug-ins](/docs/containers?topic=containers-cli-update#updating-installed-plug-ins)
+* [Updating installed plug-ins](/docs/containers?topic=containers-cli-update#cli-update-include-cli-update-plugin)
 
 [Setting up the API](/docs/containers?topic=containers-cs_api_install#cs_api_install)
 
@@ -6406,6 +6412,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version v1.0.528](/docs/containers?topic=containers-cs_cli_changelog#cli-10528)
+
 * [Version v1.0.523](/docs/containers?topic=containers-cs_cli_changelog#cli-10523)
 
 * [Version v1.0.516](/docs/containers?topic=containers-cs_cli_changelog#cli-10516)
@@ -7356,7 +7364,7 @@ subcollection: containers
 
 * [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
 
-    * [Changelog for 1.17.3, released 22 June 2023](/docs/containers?topic=containers-istio-changelog#1173)
+    * [Change log for 1.17.3, released 22 June 2023](/docs/containers?topic=containers-istio-changelog#1173)
 
     * [Change log for 1.17.2, released 20 April 2023](/docs/containers?topic=containers-istio-changelog#1172)
 
@@ -7364,7 +7372,7 @@ subcollection: containers
 
 * [Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
 
-    * [Changelog for 1.16.5, released 8 June 2022](/docs/containers?topic=containers-istio-changelog#1165)
+    * [Change log for 1.16.5, released 8 June 2022](/docs/containers?topic=containers-istio-changelog#1165)
 
     * [Change log for 1.16.4, released 20 April 2023](/docs/containers?topic=containers-istio-changelog#1164)
 
@@ -9805,7 +9813,7 @@ subcollection: containers
 
 [IAM platform access roles](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles)
 
-* [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#kubernetes-service)
+* [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles-include-containers-kubernetes-roles)
 
 [IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles#iam-service-access-roles)
 
@@ -9843,8 +9851,6 @@ subcollection: containers
     * [Resources in a single zone cluster](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
 
     * [Resources in a multizone cluster](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
-
-    * [Free clusters](/docs/containers?topic=containers-regions-and-zones#regions_free)
 
 * [Accessing the global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint)
 

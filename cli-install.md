@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-23"
+lastupdated: "2023-06-26"
 
 keywords: containers,kubernetes, ic, ks, kubectl
 
@@ -21,7 +21,7 @@ subcollection: containers
 {: #cli-install}
 
 
-You can use the following tools to manage your {{site.data.keyword.containerlong_notm}} clusters. In most cases, installing all of the following tools is recommended.
+You can use the following tools to manage your {{site.data.keyword.containerlong_notm}} clusters. In most cases, installing all the following tools is recommended.
 {: shortdesc}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [{{site.data.keyword.satelliteshort}}]{: tag-satellite}

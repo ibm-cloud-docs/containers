@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-07"
+lastupdated: "2023-06-26"
 
 keywords: kubernetes, containers
 
@@ -107,10 +107,18 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.clou
 ## Comparison of free and standard clusters
 {: #cluster_types}
 
-You can create one free cluster or any number of standard clusters. Try out [free clusters](/docs/containers?topic=containers-getting-started#clusters_gs) to get familiar with a few Kubernetes capabilities, or create standard clusters to use the full capabilities of Kubernetes to deploy apps. Free clusters are automatically deleted after 30 days.
+Review the following table for a comparison of free and standard clusters.
 {: shortdesc}
 
+
+The free cluster option is deprecated and will be unsupported on 25 July 2023. Existing free tier clusters will be allowed to finish their 30-day trial window. If you want to try {{site.data.keyword.containerlong_notm}}, [contact IBM Sales](https://www.ibm.com/account/reg/us-en/signup?formid=MAIL-wcp){: external}.
+{: deprecated}
+
+Free clusters are automatically deleted after 30 days.
+{: note}
+
 If you have a free cluster and want to upgrade to a standard cluster, you can [create a standard cluster](/docs/containers?topic=containers-clusters). Then, [copy your deployment configuration files](/docs/containers?topic=containers-update_app#copy_apps_cluster) from your free cluster into the standard cluster.
+{: tip}
 
 |Characteristics|Free clusters|Standard clusters|
 |---------------|-------------|-----------------|
@@ -151,7 +159,6 @@ Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerl
 |Access to {{site.data.keyword.cloud_notm}} services such as AI|Yes|Yes|
 |Software-defined storage Portworx solution available for multizone data use cases|Yes|Yes|
 |Create a cluster in an IBM Virtual Private Cloud (VPC)|Yes|Yes|
-|Ability to create free clusters|Yes| |
 |Latest community Kubernetes distribution|Yes| |
 |Scope {{site.data.keyword.cloud_notm}} IAM access policies to access groups for service access roles that sync to cluster RBAC |Yes| |
 |Classic infrastructure cluster on only the private network|Yes| |
