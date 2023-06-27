@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-06-27"
 
 keywords: kubernetes, 1.25, help, cluster master operations error, CAE009
 
@@ -24,7 +24,7 @@ content-type: troubleshoot
 
 
 When you upgrade your {{site.data.keyword.containerlong_notm}} from Kubernetes version 1.24 to version 1.25, the upgrade fails and you see an error message similar to the following example.
-{: Symptoms}
+{: tsSymptoms}
 
 ```sh
 Version update cancelled. CAE009: Cannot complete cluster master operations because the cluster does not pass Pod Security upgrade prerequisites. Reason: [ClusterRoleBinding 'restricted-psp-user' does not have expected subjects]. For more information, see the troubleshooting docs: 'https://ibm.biz/master_pod_security_upgrade_iks_125'

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-06-26"
+lastupdated: "2023-06-27"
 
 keywords: containers
 subcollection: containers
@@ -251,6 +251,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
+
+    * [27 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2723)
+
+        * Pod security admission updates
 
     * [26 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2623)
 
@@ -4128,9 +4132,9 @@ subcollection: containers
 
 * [Configuring Pod Security admission namespace labels](/docs/containers?topic=containers-pod-security-admission#psa-namespace-labels)
 
-* [Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config)
+* [Default Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-default)
 
-* [Pod Security Admission roadmap](/docs/containers?topic=containers-pod-security-admission#psa-roadmap)
+* [Customizing the Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-custom)
 
 [Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration#pod-security-admission-migration)
 
@@ -4914,6 +4918,10 @@ subcollection: containers
 
 [Observing Istio traffic](/docs/containers?topic=containers-istio-health#istio-health)
 
+* [Enabling access logs for the entire mesh](/docs/containers?topic=containers-istio-health#enable_logs_entire)
+
+* [Enabling access logs for individual containers](/docs/containers?topic=containers-istio-health#enable_logs_individual)
+
 * [Setting up logging with {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_la)
 
 * [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_mon)
@@ -5680,9 +5688,9 @@ subcollection: containers
 
 [Adding {{site.data.keyword.filestorage_vpc_short}} to apps](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps)
 
-* [Deploying an app that uses {{site.data.keyword.filestorage_short}} with dynamic provisioning](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file_dynamic)
+* [Deploying an app that uses {{site.data.keyword.filestorage_vpc_short}} with dynamic provisioning](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file_dynamic)
 
-* [Deploying an app that uses {{site.data.keyword.filestorage_short}} with static provisioning](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file_static)
+* [Deploying an app that uses {{site.data.keyword.filestorage_vpc_short}} with static provisioning](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file_static)
 
 [Managing {{site.data.keyword.filestorage_vpc_full_notm}}](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-managing)
 
@@ -10117,6 +10125,8 @@ subcollection: containers
     * [Using TOTP MFA to create an infrastructure API key for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cluster_infra_errors#create-api-key-totp-mfa)
 
 [VPC: Why is no VPC available when I create a cluster in the console?](/docs/containers?topic=containers-ts_no_vpc#ts_no_vpc)
+
+* [Why do I get an error that my PodSecurityConfiguration is not valid?](/docs/containers?topic=containers-ts-pod-security-reset#ts-pod-security-reset)
 
 [Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-ts-app-pod-security#ts-app-pod-security)
 

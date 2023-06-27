@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-24"
+lastupdated: "2023-06-27"
 
 keywords: kubernetes, allowlist, ips
 
@@ -209,7 +209,7 @@ For example, you might have services that run inside or outside {{site.data.keyw
 If you want to permit egress from your allowlist-protected services to your cluster, you must add your worker nodes' private IP addresses or your cluster's VPC subnet CIDRs in your service's allowlist. Note that because worker nodes in VPC clusters have only private IP addresses, connections into the VPC cluster worker nodes can only originate from systems that are connected to your IBM Cloud private network.
 
 Before you begin
-1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 2. Install the `infrastructure-service` CLI plug-in. The prefix for running VPC infrastructure commands is `ibmcloud is`.
     ```sh
     ibmcloud plugin install infrastructure-service
@@ -415,7 +415,7 @@ Before you begin, the following steps require you to change the IAM allowlist fo
     ```
     {: screen}
 
-5. Get the [control plane CIDRs of the region where you cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/iam-firewall-ips){: external}. These CIDRs must also be added to your allowlist. 
+5. Get the [control plane CIDRs of the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/iam-firewall-ips){: external}. These CIDRs must also be added to your allowlist. 
 
 6. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/){: external}.
 
@@ -425,7 +425,7 @@ Before you begin, the following steps require you to change the IAM allowlist fo
 
 9. From the **User details** page, go to the **IP address restrictions** section.
 
-10. Enter the subnet CIDRs and IPs, and the control plane CIDRs of the region where you cluster is located.
+10. Enter the subnet CIDRs and IPs, and the control plane CIDRs of the region where your cluster is located.
 
 11. Click **Apply**.
 

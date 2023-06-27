@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-06-27"
 
 keywords: kubernetes, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -22,6 +22,35 @@ subcollection: containers
 
 Log and monitor your apps that are managed by Istio on {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
+
+## Enabling access logs for the entire mesh
+{: #enable_logs_entire}
+
+To enable Envoy access logs for the entire mesh, you can use the `managed-istio-custom` ConfigMap resource, which is located in the `ibm-operators` namespace that is provided by the Istio add-on. To enable Envoy access logs, edit the `managed-istio-custom` ConfigMap resource and add the key-value pair `istio-global-proxy-accessLogFile: "dev/stdout"`. For more information, see [Customizing the Istio installation](/docs/containers?topic=containers-istio&interface=ui#customize).
+{: shortdesc}
+
+## Enabling access logs for individual containers
+{: #enable_logs_individual}
+
+Starting from version 1.18, the Istio add-on provides the option to enable Envoy access logs for individual containers by using telemetry CRs. To set up telemetry CRs, use the following telemetry definition.
+
+```yaml
+apiVersion: telemetry.istio.io/v1alpha1
+kind: Telemetry
+metadata:
+  name: example-telemetry-enabling-envoy-access-logs
+  namespace: <namespace> # Pod's namespace
+spec:
+  selector:
+    matchLabels:
+      <key>: <value> # Pod's label
+  accessLogging:
+  - providers:
+    - name: enable-targeted-envoy-access-logs    
+```
+{: codeblock}
+
+Modify the previous example definition to contain your Pod's namespace and label. After the telemetry definition is applied, you can see Envoy access logs through the `istio-proxy` container.
 
 ## Setting up logging with {{site.data.keyword.la_full_notm}}
 {: #istio_health_la}
