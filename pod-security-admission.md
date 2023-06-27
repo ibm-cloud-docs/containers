@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-02-20"
+lastupdated: "2023-06-27"
 
 keywords: kubernetes, deploy, pod security admission, pod security, security profiles
 
@@ -86,8 +86,6 @@ By default, {{site.data.keyword.containerlong_notm}} adds the `privileged` Pod S
 Do not remove or change the labels for these namespaces.
 {: important}
 
-
-
 A namespace can be labeled to set the pod security profile for any or all the Pod Security Admission `modes`. 
 
 For example, you can label a namespace to enforce the `privileged` profile in addition to using `warn` or `audit` by using the `baseline` profile.
@@ -113,10 +111,10 @@ To label a namespace to enforce the `privileged` profile and generate warnings a
 - `pod-security.kubernetes.io/warn-version: latest`
 
 
-## Pod Security Admission plug-in configuration
-{: #psa-plugin-config}
+## Default Pod Security Admission plug-in configuration
+{: #psa-plugin-config-default}
 
-{{site.data.keyword.containerlong_notm}} uses the following `PodSecurityConfiguration` definition by default. Note that it is not currently possible to modify the Pod Security Admission configuration. 
+{{site.data.keyword.containerlong_notm}} uses the following `PodSecurityConfiguration` by default.
 
 ```yaml
 apiVersion: pod-security.admission.config.k8s.io/v1
@@ -136,26 +134,76 @@ exemptions:
 {: codeblock}
 
 
-## Pod Security Admission roadmap
-{: #psa-roadmap}
 
-Support for Pod Security Admission is expected to delivered in phases.
+## Customizing the Pod Security Admission plug-in configuration
+{: #psa-plugin-config-custom}
 
-Support for migrating clusters that use customized PSP configurations to v1.25 is not yet available as this requires the ability to have both Pod Security Policies and Pod Security Admission enabled simultaneously.
 
-Full functionality for v1.25 is not yet available: Administrators cannot configure the cluster wide Pod Security Admission plug-in configuration.
+The cluster-wide Pod Security Admission plug-in configuration sets `enforce`, `audit`, and `warn` behavior for all namespaces that don't have pod security labels or exemptions.
 
-| Functionality | Availability |
-| ---| ---|
-| Provide default Pod Security Admission plugin configuration that enforces the `privileged` profile.  | Available |
-| Support upgrade from v1.24 to v1.25 for clusters with only the default IBM PSPs and associated RBAC. | Available |
-| Cancel upgrades for clusters not using the default IBM PSPs and associated RBAC. | Available |
-| Optionally enable Pod Security Admission in v1.24 to support migration process. | 4Q 2022 |
-| Optionally disable Pod Security Policies in v1.24 to support migration process. | 4Q 2022 | 
-| Provide migration guide. | 4Q 2022 |
-| Customize the cluster wide Pod Security Admission plugin configuration. | 1Q 2023 |
-{: caption="Table 1. Availability for 1.25 functions" caption-side="bottom"}
 
+
+For Kubernetes 1.24 clusters the `apiVersion` must be `pod-security.admission.config.k8s.io/v1beta`. For 1.25 and later `pod-security.admission.config.k8s.io/v1` is preferred, but the `v1beta` API version can still be used.
+{: note}
+
+
+
+1. Create a YAML file containing a `PodSecurityConfiguration` resource. You can use the default configuration to start.
+
+    ```yaml
+    apiVersion: pod-security.admission.config.k8s.io/v1
+    kind: PodSecurityConfiguration
+    defaults:
+      enforce: "privileged"
+      enforce-version: "latest"
+      audit: "privileged"
+      audit-version: "latest"
+      warn: "privileged"
+      warn-version: "latest"
+    exemptions:
+      usernames: []
+      runtimeClasses: []
+      namespaces: []
+    ```
+    {: codeblock}
+
+1. Make the customizations that you want to use. Review the following the information about each section of the configuration.
+    `defaults`
+    :   The `defaults` section of the configuration defines cluster-wide defaults for namespaces that do not have pod security labels. The fields can have the same values as the corresponding namespace labels.
+
+    `exemptions`
+    :   The `exemptions` section of the configuration allows you to create pods that are otherwise prohibited because of the policy associated with a specific namespace. Exemption dimensions include the following cases.
+        - Usernames: Requests from users with an exempt authenticated (or impersonated) username are ignored. Usernames are typically IAM users or serviceaccounts. For example `usernames: [ "IAM#user@example.com" ]`. You can also exempt the username associated with an `admin kubeconfig` client certificate. If you want to specify an `admin kubeconfig` certificate, the username is the `CN` component of the current client-certificate.
+
+            ```sh
+            kubectl config view --minify -o jsonpath='{.users[0].user.client-certificate}'
+            /home/user/.bluemix/plugins/container-service/clusters/mycluster-cheku1620qbs90gq6mdg-admin/admin.pem
+            ```
+            {: pre}
+
+            In the following example, the username is `IBMid-27000xxxxx-admin-2023-05-12`. If you get a new `admin kubeconfig`, the username might be different.
+
+            ```sh
+            openssl x509 -in <client-certificate> -subject -noout`
+            subject=C = US, ST = San Francisco, L = CA, O = ibm-admins, CN = IBMid-27000xxxxx-admin-2023-05-12
+            ```
+            {: pre}
+
+        - RuntimeClassNames: Pods and workload resources specifying an exempt runtime class name are ignored.
+        - Namespaces: Pods and workload resources in an exempt namespace are ignored.
+
+
+1. Save your customizations YAML file.
+
+1. Run the `ibmcloud ks cluster master pod-security set` command.
+    ```sh
+    ibmcloud ks cluster master pod-security set --cluster CLUSTER --config-file CONFIG-FILE
+    ```
+    {: pre}
+
+
+When you run the `ibmcloud ks cluster master pod-security set` command, the  pod security admission is reset to the default configuration if you do not specify a configuration file.
+{: tip}
 
 
 

@@ -252,6 +252,10 @@ subcollection: containers
 
 * [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
 
+    * [27 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2723)
+
+        * Pod security admission updates
+
     * [26 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2623)
 
         * CLI version `1.0.528`.
@@ -4128,9 +4132,9 @@ subcollection: containers
 
 * [Configuring Pod Security admission namespace labels](/docs/containers?topic=containers-pod-security-admission#psa-namespace-labels)
 
-* [Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config)
+* [Default Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-default)
 
-* [Pod Security Admission roadmap](/docs/containers?topic=containers-pod-security-admission#psa-roadmap)
+* [Customizing the Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-custom)
 
 [Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration#pod-security-admission-migration)
 
@@ -10121,6 +10125,8 @@ subcollection: containers
     * [Using TOTP MFA to create an infrastructure API key for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cluster_infra_errors#create-api-key-totp-mfa)
 
 [VPC: Why is no VPC available when I create a cluster in the console?](/docs/containers?topic=containers-ts_no_vpc#ts_no_vpc)
+
+* [Why do I get an error that my PodSecurityConfiguration is not valid?](/docs/containers?topic=containers-ts-pod-security-reset#ts-pod-security-reset)
 
 [Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-ts-app-pod-security#ts-app-pod-security)
 
