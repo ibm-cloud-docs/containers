@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-06-26"
+lastupdated: "2023-06-27"
 
 keywords: containers
 subcollection: containers
@@ -4913,6 +4913,10 @@ subcollection: containers
 * [Disabling the default gateways](/docs/containers?topic=containers-istio-custom-gateway#disable-default-gateways)
 
 [Observing Istio traffic](/docs/containers?topic=containers-istio-health#istio-health)
+
+* [Enabling access logs for the entire mesh](/docs/containers?topic=containers-istio-health#enable_logs_entire)
+
+* [Enabling access logs for individual containers](/docs/containers?topic=containers-istio-health#enable_logs_individual)
 
 * [Setting up logging with {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_la)
 
