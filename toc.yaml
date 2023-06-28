@@ -216,7 +216,6 @@ toc:
               topics:
               - secrets.md
               - secrets-mgr.md
-              - certs-mgr-migration.md
       - topicgroup:
           label: Setting up storage
           topics:
@@ -439,7 +438,6 @@ toc:
               - ts-cluster-cli.md
               - ts-cluster-create-delete.md
               - ts-cluster-no-vpc.md
-              - ts-pod-security-reset.md
               - ts-pod-security-125.md
               - ts-cluster-icr-pull-img.md
               - ts-cluster-webhook.md

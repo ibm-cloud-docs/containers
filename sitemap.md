@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-06-27"
+lastupdated: "2023-06-28"
 
 keywords: containers
 subcollection: containers
@@ -253,8 +253,6 @@ subcollection: containers
 * [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
 
     * [27 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2723)
-
-        * Pod security admission updates
 
     * [26 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2623)
 
@@ -4132,10 +4130,6 @@ subcollection: containers
 
 * [Configuring Pod Security admission namespace labels](/docs/containers?topic=containers-pod-security-admission#psa-namespace-labels)
 
-* [Default Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-default)
-
-* [Customizing the Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-custom)
-
 [Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration#pod-security-admission-migration)
 
 * [Upgrade requirements](/docs/containers?topic=containers-pod-security-admission-migration#psa-upgrade-reqs)
@@ -5313,28 +5307,6 @@ subcollection: containers
 * [Controlling access to your secrets with secret groups](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_groups)
 
 * [Registering a {{site.data.keyword.secrets-manager_short}} instance when creating a cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_cluster_create)
-
-[Migrating from {{site.data.keyword.cloudcerts_long_notm}} to {{site.data.keyword.secrets-manager_full_notm}}](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr-migration)
-
-* [Setting up your {{site.data.keyword.secrets-manager_short}} instance](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup)
-
-    * [Step 1: Enable service-to-service communication](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_s2s)
-
-    * [Step 2: Creating a {{site.data.keyword.secrets-manager_short}} instance](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_create)
-
-    * [Step 3: Registering your {{site.data.keyword.secrets-manager_short}} instance to your cluster](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_register)
-
-    * [Step 4: Set a default {{site.data.keyword.secrets-manager_short}} instance and regenerate your secrets](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_default)
-
-    * [Step 5: Update the CRNs of secrets that are not managed by IBM](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_setup_crn)
-
-    * [Step 6: Unregister your {{site.data.keyword.cloudcerts_short}} instance](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_unregister)
-
-    * [Step 7: Optional. Delete the {{site.data.keyword.cloudcerts_short}} instance.](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_delete)
-
-* [Migrating your secrets without using {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_alt)
-
-* [Migration FAQ](/docs/containers?topic=containers-certs-mgr-migration#certs-mgr_migration_faq)
 
 
 ## Setting up storage
@@ -10125,8 +10097,6 @@ subcollection: containers
     * [Using TOTP MFA to create an infrastructure API key for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cluster_infra_errors#create-api-key-totp-mfa)
 
 [VPC: Why is no VPC available when I create a cluster in the console?](/docs/containers?topic=containers-ts_no_vpc#ts_no_vpc)
-
-* [Why do I get an error that my PodSecurityConfiguration is not valid?](/docs/containers?topic=containers-ts-pod-security-reset#ts-pod-security-reset)
 
 [Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-ts-app-pod-security#ts-app-pod-security)
 

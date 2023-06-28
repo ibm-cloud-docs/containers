@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-27"
+lastupdated: "2023-06-28"
 
 keywords: kubernetes, release notes
 
@@ -29,12 +29,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## June 2023
 {: #containers-jun23}
 
+
+
+
+
 ### 27 June 2023
 {: #containers-jun2723}
 {: release-note} 
 
-Pod security admission updates
-:   Review the [default pod security configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-default) and the steps to [customize pod security admission in your cluster](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-custom).
+
 
 
 ### 26 June 2023
