@@ -31,12 +31,11 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+
+
 ### 27 June 2023
 {: #containers-jun2723}
 {: release-note} 
-
-Pod security admission updates
-:   Review the [default pod security configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-default) and the steps to [customize pod security admission in your cluster](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-custom).
 
 
 
