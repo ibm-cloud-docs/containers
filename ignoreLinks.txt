@@ -3,6 +3,7 @@ ingress_host_name
 ingress_subdomain
 mycluster
 mycustomdomain
+https://curl.se/download.html
 myingress
 https://containers.cloud.ibm.com/global/v2
 https://helm.sh
