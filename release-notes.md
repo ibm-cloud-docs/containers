@@ -54,7 +54,7 @@ CLI version `1.0.528`.
 {: release-note} 
 
 Free cluster tier deprecation
-:   The free cluster option is deprecated and will be unsupported on 25 July 2023. Existing free tier clusters will be allowed to finish their 30-day trial window. If you want to continue testing {{site.data.keyword.containerlong_notm}}, try creating a [Classic cluster](https://cloud.ibm.com/docs/containers?topic=containers-cluster-create-classic&interface=ui). Then [copy your deployments to the new cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster).
+:   The free cluster option is deprecated and will be unsupported on 25 July 2023. Existing free tier clusters will be allowed to finish their 30-day trial window. If you want to continue testing {{site.data.keyword.containerlong_notm}}, try creating a [Classic cluster](/docs/containers?topic=containers-cluster-create-classic). Then [copy your deployments to the new cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster).
 
 
 
