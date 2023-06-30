@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-06-20"
+lastupdated: "2023-06-30"
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
 
@@ -36,6 +36,28 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.26 change log.
 {: shortdesc}
+
+
+### Change log for master fix pack 1.26.6_1541, released 27 June 2023
+{: #1266_1541_M}
+
+The following table shows the changes that are in the master fix pack 1.26.6_1541. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.20 | v1.3.21 | Updated `Go` dependencies and to `Go` version `1.19.10`. |
+| etcd | v3.5.8 | v3.5.9 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.9){: external}. |
+| Gateway-enabled cluster controller | 2106 | 2322 | Updated image to resolve [CVE-2023-2650](https://nvd.nist.gov/vuln/detail/CVE-2023-2650){: external}. |
+| GPU device plug-in and installer | 28d80a0 | 202b284 | Updated to `Go` version `1.19.9` |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.26.4-7 | v1.26.6-1 | Updated to support the `Kubernetes 1.26.6` release. Updated `Go` dependencies and to `Go` version `1.19.10`. Updated `calicoctl` and `vpcctl`. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 431 | 433 | Updated `Go` to version `1.20.4`. Updated UBI base image. |
+| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | d842983 | d293d8b | Updated `Go` to version `1.20.5`. Updates to build and base images. |
+| Key Management Service provider | v2.6.6 | v2.6.7 | Updated `Go` dependencies and to `Go` version `1.19.10`. |
+| Kubernetes | v1.26.5 | v1.26.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.6){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2486 | 2584 | Updated `Go` dependencies and to `Go` version `1.19.9`. Updated base image. |
+{: caption="Changes since version 1.26.5_1537" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.26.5_1540, released 19 June 2023
