@@ -40,6 +40,10 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 :   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon). 
 
 
+Worker node fix packs `1.24.15_1574`, `1.25.11_1550`, `1.26.6_1542`, and `1.27.3_1530`.
+:   For more information, see the change logs: [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125),  [1.26](/docs/containers?topic=containers-changelog_126), and [1.27](/docs/containers?topic=containers-changelog_127).
+
+
 ## June 2023
 {: #containers-jun23}
 
