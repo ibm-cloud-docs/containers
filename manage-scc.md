@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-07-03"
 
 keywords: kubernetes
 
@@ -55,10 +55,10 @@ Review the following goals for {{site.data.keyword.containerlong_notm}}.
 - **Check whether {{site.data.keyword.containershort_notm}} worker nodes are updated to the latest image to ensure patching of vulnerabilities.** For more information, see [Version information and update actions](/docs/containers?topic=containers-cs_versions).
 - **Check whether your {{site.data.keyword.containershort_notm}} cluster has image pull secrets enabled.** For more information, see [Understanding how to authorize your cluster to pull images from a private registry](/docs/containers?topic=containers-registry#cluster_registry_auth).
 - **Check whether {{site.data.keyword.containershort_notm}} access is managed only by IAM access groups.** For more information, see the [IAM documentation](/docs/account?topic=account-groups).
-- **Check whether {{site.data.keyword.containershort_notm}} has at least # service IDs with the IAM manager role.** Your account administrator configures the number of service IDs in [{{site.data.keyword.compliance_short}}](/docs/security-compliance?topic=security-compliance-custom-goals).
-- **Check whether {{site.data.keyword.containershort_notm}} has at least # users with the IAM manager role.** Your account administrator configures the number of users in [{{site.data.keyword.compliance_short}}](/docs/security-compliance?topic=security-compliance-custom-goals).
-- **Check whether {{site.data.keyword.containershort_notm}} has no more than # service IDs with the IAM administrator role.** Your account administrator configures the number of service IDs in [{{site.data.keyword.compliance_short}}](/docs/security-compliance?topic=security-compliance-custom-goals).
-- **Check whether {{site.data.keyword.containershort_notm}} has no more than # users with the IAM administrator role.** Your account administrator configures the number of service IDs in [{{site.data.keyword.compliance_short}}](/docs/security-compliance?topic=security-compliance-custom-goals).
+- **Check whether {{site.data.keyword.containershort_notm}} has at least # service IDs with the IAM manager role.** Your account administrator configures the number of service IDs in [{{site.data.keyword.compliance_short}}](/docs/security-compliance?topic=security-compliance-getting-started).
+- **Check whether {{site.data.keyword.containershort_notm}} has at least # users with the IAM manager role.** Your account administrator configures the number of users in [{{site.data.keyword.compliance_short}}](/docs/security-compliance?topic=security-compliance-getting-started).
+- **Check whether {{site.data.keyword.containershort_notm}} has no more than # service IDs with the IAM administrator role.** Your account administrator configures the number of service IDs in [{{site.data.keyword.compliance_short}}](/docs/security-compliance?topic=security-compliance-getting-started).
+- **Check whether {{site.data.keyword.containershort_notm}} has no more than # users with the IAM administrator role.** Your account administrator configures the number of service IDs in [{{site.data.keyword.compliance_short}}](/docs/security-compliance?topic=security-compliance-getting-started).
 - **Check whether {{site.data.keyword.containershort_notm}} is configured with role-based access control (RBAC).** [{{site.data.keyword.cloud_notm}} IAM service access roles for **Kubernetes Service**](/docs/containers?topic=containers-iam-service-access-roles) are automatically synchronized with RBAC roles in the cluster. You can also [customize RBAC](/docs/containers?topic=containers-access-overview).
 
 

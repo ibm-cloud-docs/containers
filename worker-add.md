@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-06"
+lastupdated: "2023-07-03"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, delete
 
@@ -484,7 +484,7 @@ When you develop a confidential computing application, you must design it in a w
 Before you begin, [create a worker pool](/docs/containers?topic=containers-add_workers#add_pool) with SGX-capable worker nodes. To work with Intel SGX, you must use one of the following machine types: `mb2c.4x32` and `ms2c.4x32.1.9tb.ssd`.
 
 
-1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Create a daemon set to install the drivers and platform software on your SGX-capable worker nodes.
 
@@ -581,7 +581,7 @@ You can assign a worker pool a label when you [create the worker pool](#add_pool
 Do not include personal information in your labels. Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
 {: important}
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. List the worker pools in your cluster.
     ```sh
@@ -591,7 +591,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 1. List the existing custom labels on worker nodes in the worker pool that you want to label.
     ```sh
-    ibmcloud ks worker-pool get -c <cluster_name_or_ID> --worker-pool <pool>
+    ibmcloud ks worker-pool get --cluster <cluster_name_or_ID> --worker-pool <pool>
     ```
     {: pre}
 
@@ -601,13 +601,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: important}
 
     ```sh
-    ibmcloud ks worker-pool label set <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> --label <key=value>
+    ibmcloud ks worker-pool label set --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> --label <key=value>
     ```
     {: pre}
 
     Example to set `<key>: <value>` as a new custom label in a worker pool with existing labels `team: DevOps` and `app: test`:
     ```sh
-    ibmcloud ks worker-pool label set <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> --label <key=value> --label team=DevOps --label app=test
+    ibmcloud ks worker-pool label set --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> --label <key=value> --label team=DevOps --label app=test
     ```
     {: pre}
 
@@ -653,13 +653,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
     Example to keep only the `team: DevOps` and `app: test` labels and remove all other custom labels from a worker pool:
     ```sh
-    ibmcloud ks worker-pool label set <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> --label team=DevOps --label app=test
+    ibmcloud ks worker-pool label set --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> --label team=DevOps --label app=test
     ```
     {: pre}
 
     Example to remove all custom label from a worker pool:
     ```sh
-    ibmcloud ks worker-pool label rm <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
+    ibmcloud ks worker-pool label rm --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
     ```
     {: pre}
 

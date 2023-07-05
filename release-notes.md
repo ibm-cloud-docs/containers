@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-30"
+lastupdated: "2023-07-05"
 
 keywords: kubernetes, release notes
 
@@ -25,6 +25,35 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+## July 2023
+{: #containers-july23}
+
+
+
+### July 5 2023
+{: #containers-july523}
+{: release-note} 
+
+Ingress ALB versions `1.6.4_5161_iks`, `1.5.1_5160_iks`, and `1.4.0_5159_iks`
+:   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
+
+### July 3 2023
+{: #containers-july323}
+{: release-note} 
+
+{{site.data.keyword.cos_full_notm}} plug-in version `2.2.16`
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
+{{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1`
+:   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon). 
+
+
+Worker node fix packs `1.24.15_1574`, `1.25.11_1550`, `1.26.6_1542`, and `1.27.3_1530`.
+:   For more information, see the change logs: [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125),  [1.26](/docs/containers?topic=containers-changelog_126), and [1.27](/docs/containers?topic=containers-changelog_127).
+
 
 ## June 2023
 {: #containers-jun23}
@@ -1843,7 +1872,7 @@ Create and manage dedicated hosts in VPC Gen 2.
 
 
 New! {{site.data.keyword.secrets-manager_full}}
-:   With the deprecation of {{site.data.keyword.cloudcerts_long}}, you can now manage certificates and secrets with {{site.data.keyword.secrets-manager_full}}. You can integrate your own {{site.data.keyword.secrets-manager_short}} instances with your Kubernetes clusters. {{site.data.keyword.secrets-manager_short}} instances can be used across multiple clusters, and a single cluster can have more than one instance. For more information, see [Migrating from IBM Cloud Certificate Manager to IBM Cloud {{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-certs-mgr-migration).
+:   With the deprecation of {{site.data.keyword.cloudcerts_long}}, you can now manage certificates and secrets with {{site.data.keyword.secrets-manager_full}}. You can integrate your own {{site.data.keyword.secrets-manager_short}} instances with your Kubernetes clusters. {{site.data.keyword.secrets-manager_short}} instances can be used across multiple clusters, and a single cluster can have more than one instance. 
 
 
 
