@@ -44,6 +44,12 @@ Istio add-on version `1.18.0`.
 
 
 
+Pod security admission updates
+:   Review the [default pod security configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-default) and the steps to [customize pod security admission in your cluster](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-custom).
+
+
+
+
 
 ### 5 July 2023
 {: #containers-july523}
@@ -71,8 +77,6 @@ Worker node fix packs `1.24.15_1574`, `1.25.11_1550`, `1.26.6_1542`, and `1.27.3
 
 ## June 2023
 {: #containers-jun23}
-
-
 
 
 
