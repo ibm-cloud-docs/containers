@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-05"
+lastupdated: "2023-07-06"
 
 keywords: kubernetes, release notes
 
@@ -29,9 +29,23 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## July 2023
 {: #containers-july23}
 
+### 6 July 2023
+{: #containers-july623}
+{: release-note} 
+
+Cluster autoscaler add-on version `1.0.8_56` and `1.0.7_57`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
 
 
-### July 5 2023
+
+Istio add-on version `1.18.0`.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
+
+
+
+### 5 July 2023
 {: #containers-july523}
 {: release-note} 
 
@@ -40,7 +54,7 @@ Ingress ALB versions `1.6.4_5161_iks`, `1.5.1_5160_iks`, and `1.4.0_5159_iks`
 
 
 
-### July 3 2023
+### 3 July 2023
 {: #containers-july323}
 {: release-note} 
 
@@ -99,7 +113,7 @@ Free cluster tier deprecation
 
 
 Cluster autoscaler add-on version `1.0.9_44`.
-:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).).
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
 
 
 
