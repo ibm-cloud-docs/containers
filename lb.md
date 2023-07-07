@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-17"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, lb1.0, nlb
 
@@ -365,7 +365,7 @@ When your cluster is connected to multiple public or private VLANs, your app pod
 
 When source IP is enabled, schedule app pods on worker nodes that are the same VLAN as the NLB's IP address by adding an affinity rule to the app deployment.
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Get the IP address of the NLB service. Look for the IP address in the **LoadBalancer Ingress** field.
     ```sh

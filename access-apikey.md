@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -228,7 +228,7 @@ Be sure that you want to reset the key and understand the impact to your app. Th
 **Before you begin**:
 - If the account owner does not set up the API key, [ensure that the user who sets the API key has the correct permissions](#owner_permissions).
 - Consider using a functional ID user for the API key owner instead of a personal user. In case the person leaves the team, the functional ID user remains the API key owner.
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 To set up the API key to access the IBM Cloud infrastructure portfolio:
 
@@ -269,7 +269,7 @@ The IBM Cloud infrastructure credentials that are set by the `ibmcloud ks creden
 
 **Before you begin**:
 - If you are not using the account owner's credentials, [ensure that the user whose credentials you want to set for the API key has the correct permissions](#owner_permissions).
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 To set infrastructure account credentials to access the IBM Cloud infrastructure portfolio:
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-06-06"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -634,7 +634,7 @@ For example, you can set up a base `kustomization` YAML file to declare Kubernet
 
 Before you begin: 
 * Make sure that your [`kubectl` version](/docs/containers?topic=containers-cli-install) matches your cluster version.
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 To set up configuration files with Kustomize:
 1. [Install the `kustomize` tool](https://kubectl.docs.kubernetes.io/installation/kustomize/){: external}.

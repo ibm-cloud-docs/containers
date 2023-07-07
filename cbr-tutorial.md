@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-07-07"
 
 keywords: cbr, context based restrictions, security, cbr scenario, containerscbr
 
@@ -57,7 +57,7 @@ Before beginning this tutorial, make sure you have created or installed the foll
 {: #cbr-tutorial-create-zone}
 {: step}
 
-[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Run the following example command to create a network that includes only one client IP that you want to use.
 

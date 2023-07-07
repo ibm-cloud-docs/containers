@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-09"
+lastupdated: "2023-07-07"
 
 keywords: portworx, kubernetes
 
@@ -136,7 +136,7 @@ Removing your Portworx cluster removes all the data from your Portworx cluster. 
 When you remove the Portworx DaemonSet, the Portworx containers are removed from your worker nodes. However, the Portworx configuration files remain on the worker nodes and the storage devices, and the data volumes are still intact. You can use the data volumes again if you restart the Portworx DaemonSet and containers by using the same configuration files.
 {: shortdesc}
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Clone the `ibmcloud-storage-utilities` repo.
     ```sh

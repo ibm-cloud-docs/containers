@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-14"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, registry, pull secret, secrets
 
@@ -34,7 +34,7 @@ You can deploy containers to your cluster from an IBM-provided public image or a
 Before you begin:
 1. [Set up a namespace in {{site.data.keyword.registrylong_notm}} and push images to this namespace](/docs/Registry?topic=Registry-getting-started#gs_registry_namespace_add).
 2. [Create a Kubernetes cluster](/docs/containers?topic=containers-clusters).
-3. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+3. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 To deploy a container into the **default** namespace of your cluster:
 
@@ -99,7 +99,7 @@ If the cluster administrator did not [store the image pull secret in the Kuberne
 
 Before you begin
 - [Create an image pull secret](/docs/containers?topic=containers-registry#other) to access images in other registries or Kubernetes namespaces other than `default`.
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 To refer to the image pull secret in your pod deployment,
 
@@ -235,7 +235,7 @@ To review the image policies in your cluster,
 
 Before you begin
 
-[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. List the image policies that apply globally to the cluster. For an example configuration, see the [Portieris policy documentation](https://github.com/IBM/portieris/blob/main/helm/portieris/templates/policies.yaml#L66){: external}.
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-02-21"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, help, network, connectivity, autoscaler
 
@@ -25,7 +25,7 @@ content-type: troubleshoot
 Review the options that you have to debug your cluster autoscaler and find the root causes for failures.
 {: shortdesc}
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 ## Step 1: Check the version
 {: #ca-debug-version}

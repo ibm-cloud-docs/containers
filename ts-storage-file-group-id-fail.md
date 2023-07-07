@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-22"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -49,7 +49,7 @@ While the daemon set is running, new worker nodes that are added to the cluster 
 Before you begin:
 
 * [Create persistent storage](/docs/containers?topic=containers-file_storage#add_file).
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 Steps:
 
