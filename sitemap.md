@@ -3237,6 +3237,10 @@ subcollection: containers
 
 * [Run the installation command](/docs/containers?topic=containers-cli-install#cli-install-include-step1-install-idt)
 
+* [Verify the installation](/docs/containers?topic=containers-cli-install#cli-install-include-step2-verify-idt)
+
+* [Install CLI plug-ins and tools](/docs/containers?topic=containers-cli-install#cli-install-include-step3-install-idt-manually)
+
 * [Install the Kubernetes CLI](/docs/containers?topic=containers-cli-install#install-kubectl-cli)
 
 [Updating the CLI](/docs/containers?topic=containers-cli-update#cli-update)
@@ -9864,6 +9868,8 @@ subcollection: containers
 * [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles-include-containers-kubernetes-roles)
 
 [IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles#iam-service-access-roles)
+
+* [Kubernetes Service](/docs/containers?topic=containers-iam-service-access-roles#iam-service-access-roles-include-containers-kubernetes-roles)
 
 * [Kubernetes service access roles and corresponding RBAC roles](/docs/containers?topic=containers-iam-service-access-roles#rbac_service)
 
