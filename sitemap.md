@@ -252,6 +252,10 @@ subcollection: containers
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
 
+    * [10 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1023)
+
+        * Static route add-on version `1.0.0_1122`.
+
     * [6 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july623)
 
         * Cluster autoscaler add-on version `1.0.8_56` and `1.0.7_57`.
@@ -8006,11 +8010,13 @@ subcollection: containers
 
 * [Change log for version 2.0.5, released 25 November 2020](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
 
-[Static route add-on change log](/docs/containers?topic=containers-static-route-changelog#static-route-changelog)
+[Static route add-on change log](/docs/containers?topic=containers-versions-static-route#versions-static-route)
 
-* [Version 1.0.0](/docs/containers?topic=containers-static-route-changelog#v100)
+* [Version 1.0.0](/docs/containers?topic=containers-versions-static-route#v100)
 
-    * [Change log for 1.0.0_649, released 8 September 2021](/docs/containers?topic=containers-static-route-changelog#100_649)
+    * [Change log for 1.0.0_1122, released 10 July 2023](/docs/containers?topic=containers-versions-static-route#100_1122)
+
+    * [Change log for 1.0.0_649, released 8 September 2021](/docs/containers?topic=containers-versions-static-route#100_649)
 
 [Back up and restore Helm chart](/docs/containers?topic=containers-backup_restore_changelog#backup_restore_changelog)
 

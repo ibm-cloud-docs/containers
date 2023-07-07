@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-06"
+lastupdated: "2023-07-07"
 
 keywords: autoscaler, add-on, autoscaler changelog
 
@@ -33,7 +33,7 @@ Release updates
 
 Refer to the following tables for a summary of changes for each version of the [cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-classic-vpc).
 
-To view a list of add-ons and the supported cluster versions, run the following command or see the [Supported cluster add-ons table](/docs/openshift?topic=openshift-supported-cluster-addon-versions).
+To view a list of add-ons and the supported cluster versions, run the following command or see the [Supported cluster add-ons table](/docs/containers?topic=containers-supported-cluster-addon-versions).
 
 ```sh
 ibmcloud ks cluster addon versions

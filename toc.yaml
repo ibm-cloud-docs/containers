@@ -335,7 +335,7 @@ toc:
           topics:
           - add-on-versions.md 
           - cs_versions_addons.md
-          - cs_versions_istio.md
+          - versions-istio.md
           - versions-autoscaler.md
           - versions-vpc-block-addon.md
           - versions-vpc-file-addon.md
