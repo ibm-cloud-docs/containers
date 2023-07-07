@@ -3237,10 +3237,6 @@ subcollection: containers
 
 * [Run the installation command](/docs/containers?topic=containers-cli-install#cli-install-include-step1-install-idt)
 
-* [Verify the installation](/docs/containers?topic=containers-cli-install#cli-install-include-step2-verify-idt)
-
-* [Install CLI plug-ins and tools](/docs/containers?topic=containers-cli-install#cli-install-include-step3-install-idt-manually)
-
 * [Install the Kubernetes CLI](/docs/containers?topic=containers-cli-install#install-kubectl-cli)
 
 [Updating the CLI](/docs/containers?topic=containers-cli-update#cli-update)
@@ -6066,8 +6062,6 @@ subcollection: containers
 
     * [`ibmcloud ks cluster master private-service-endpoint allowlist`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist)
 
-    * [Example `cluster master private-service-endpoint allowlist rm` command](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-private-service-endpoint-allowlist-rm)
-
     * [`ibmcloud ks cluster master private-service-endpoint disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_disable)
 
     * [`ibmcloud ks cluster master private-service-endpoint enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_enable)
@@ -6337,8 +6331,6 @@ subcollection: containers
     * [Experimental: `ibmcloud ks nlb-dns secret regenerate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-regenerate)
 
     * [Experimental: `ibmcloud ks nlb-dns secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-rm)
-
-    * [Example `nlb-dns secret rm` command](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns-secret-rm-example)
 
 * [`webhook-create` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_webhook_create)
 
@@ -9868,8 +9860,6 @@ subcollection: containers
 * [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles-include-containers-kubernetes-roles)
 
 [IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles#iam-service-access-roles)
-
-* [Kubernetes Service](/docs/containers?topic=containers-iam-service-access-roles#iam-service-access-roles-include-containers-kubernetes-roles)
 
 * [Kubernetes service access roles and corresponding RBAC roles](/docs/containers?topic=containers-iam-service-access-roles#rbac_service)
 
