@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-06-06"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -50,14 +50,14 @@ Ubuntu 18 is deprecated and becomes unsupported soon. For migration actions, see
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_127)
 - [Change log](/docs/containers?topic=containers-changelog_127)
 
-1.26
+**Default**: 1.26
 - Release date: 01 February 2023
 - End of support: 24 April 2024`†`
 - Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_S390X`, `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_126)
 - [Change log](/docs/containers?topic=containers-changelog_126)
 
-**Default**: 1.25
+1.25
 - Release date: 06 October 2022
 - End of support: 13 December 2023`†`
 - Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_S390X`, `UBUNTU_18_64`
@@ -86,7 +86,7 @@ kubectl version  --short | grep -i server
 
 Example output
 ```sh
-Server Version: v1.25+IKS
+Server Version: v1.26+IKS
 ```
 {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-08"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, ic, ks, kubectl, api
 
@@ -399,8 +399,8 @@ The following instructions require public network access in your cluster to conn
     ```sh
     {
     "major": "1",
-    "minor": "1.25",
-    "gitVersion": "v1.25+IKS",
+    "minor": "1.26",
+    "gitVersion": "v1.26+IKS",
     "gitCommit": "c35166bd86eaa91d17af1c08289ffeab3e71e11e",
     "gitTreeState": "clean",
     "buildDate": "2019-03-21T10:08:03Z",
