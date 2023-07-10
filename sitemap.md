@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-07-07"
+lastupdated: "2023-07-10"
 
 keywords: containers
 subcollection: containers
@@ -251,10 +251,6 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
-
-    * [10 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1023)
-
-        * Static route add-on version `1.0.0_1122`.
 
     * [6 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july623)
 
@@ -8009,8 +8005,6 @@ subcollection: containers
 [Static route add-on change log](/docs/containers?topic=containers-versions-static-route#versions-static-route)
 
 * [Version 1.0.0](/docs/containers?topic=containers-versions-static-route#v100)
-
-    * [Change log for 1.0.0_1122, released 10 July 2023](/docs/containers?topic=containers-versions-static-route#100_1122)
 
     * [Change log for 1.0.0_649, released 8 September 2021](/docs/containers?topic=containers-versions-static-route#100_649)
 
