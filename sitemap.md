@@ -252,6 +252,10 @@ subcollection: containers
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
 
+    * [11 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1123)
+
+        * New! OpenShift Data Foundation add-on version `4.13.0`.
+
     * [6 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july623)
 
         * Cluster autoscaler add-on version `1.0.8_56` and `1.0.7_57`.
