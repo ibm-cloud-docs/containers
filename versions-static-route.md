@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-22"
+lastupdated: "2023-07-10"
 
 keywords: kubernetes, static route, add-on
 
@@ -18,30 +18,30 @@ subcollection: containers
 
 
 # Static route add-on change log
-{: #static-route-changelog}
+{: #versions-static-route}
 
 For deployment steps, see the [managed static route add-on](/docs/containers?topic=containers-static-routes) docs.
 {: shortdesc}
 
 For steps on updating the static route add-on, see [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
 
-Review the supported versions of the static route add-on. In the CLI, you can run `ibmcloud ks cluster addon versions --addon static-route`.
+To view a list of add-ons and the supported cluster versions, run the following command or see the [Supported cluster add-ons table](/docs/containers?topic=containers-supported-cluster-addon-versions).
 
-| Static route add-on version | Supported? | Kubernetes |
-| --- | --- | --- |
-| 1.00 | Yes | 1.19, 1.20, 1.21, 1.22 |
-{: caption="Supported static route add-on versions" caption-side="bottom"}
+```sh
+ibmcloud ks cluster addon versions
+```
+{: pre}
+
 
 ## Version 1.0.0
 {: #v100}
 
+
+
 ### Change log for 1.0.0_649, released 8 September 2021
 {: #100_649}
 
-**Previous version:** 1.0.0_572 **Current version:** 1.0.0_649
-
-Updates in this version
-:   Uses `apiextensions.k8s.io/v1` instead of `apiextensions.k8s.io/v1beta1`.
+- Uses `apiextensions.k8s.io/v1` instead of `apiextensions.k8s.io/v1beta1`.
 
 
 

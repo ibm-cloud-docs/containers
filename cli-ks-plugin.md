@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-06-26"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes
 
@@ -1052,7 +1052,7 @@ Minimum required permissions
 {: #cluster-create-vpc-gen2-example}
 
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name mycluster --version 1.25 --zone us-south-1 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --subnet-id 1ab23c45-6789-0123-456d-789ef01gh234 --flavor bx2.4x16 --workers 3
+ibmcloud ks cluster create vpc-gen2 --name mycluster --version 1.26 --zone us-south-1 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --subnet-id 1ab23c45-6789-0123-456d-789ef01gh234 --flavor bx2.4x16 --workers 3
 ```
 {: pre}
 
@@ -1728,7 +1728,7 @@ Minimum required permissions
 :    Optional: Do not show the message of the day or update reminders.
 
 
-### Example `cluster master private-service-endpoint allowlist rm` command
+##### Example `cluster master private-service-endpoint allowlist rm` command
 {: #cluster-master-private-service-endpoint-allowlist-rm}
 
 ```sh
@@ -5135,11 +5135,11 @@ Update an Ingress domain for a cluster to change the hostnames or IP addresses a
 {: shortdesc}
 
 ```sh
-ibmcloud ks ingress domain update --cluster CLUSTER --domain DOMAIN [--hostname HOSTNAME] [--ip IP] [-q]
+ibmcloud ks ingress domain update --cluster CLUSTER --domain DOMAIN [--hostname HOSTNAME] [--ip IP] [--ip IP] [-q]
 ```
 {: pre}
 
-Note that when you add IP addresses or hostnames, you must include any IPs or hostnames that are currently registered to the domain. The domain updates with the exact values specified, so any current IP addresses or hostnames are overwritten if they are not included. For example, if `52.137.182.166` is currently registered to your domain and you want to add `52.137.182.270`, you must specify `--ip 52.137.182.166, 52.137.182.270` in the command.
+Note that when you add IP addresses or hostnames, you must include any IPs or hostnames that are currently registered to the domain. The domain updates with the exact values specified, so any current IP addresses or hostnames are overwritten if they are not included. For example, if `52.137.182.166` is currently registered to your domain and you want to add `52.137.182.270`, you must specify `--ip 52.137.182.166 --ip 52.137.182.270` in the command.
 {: important}
 
 Minimum required permissions
@@ -7397,7 +7397,7 @@ Minimum required permissions
 :    Optional: Do not show the message of the day or update reminders.
 
 
-### Example `nlb-dns secret rm` command
+#### Example `nlb-dns secret rm` command
 {: #nlb-dns-secret-rm-example}
 
 ```sh

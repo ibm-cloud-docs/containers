@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-24"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, affinity, taint
 
@@ -43,7 +43,7 @@ Before you begin
 * Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms):
     * Any platform access role for the cluster
     * **Writer** or **Manager** service access role for all namespaces
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 To create an edge node worker pool,
 
@@ -219,7 +219,7 @@ Using the `dedicated=edge` toleration means that all network load balancer (NLB)
 
 Before you begin
 - Ensure you that have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service access role for all namespaces](/docs/containers?topic=containers-users#checking-perms).
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 Complete the following steps to prevent other workloads from running on edge worker nodes.
 

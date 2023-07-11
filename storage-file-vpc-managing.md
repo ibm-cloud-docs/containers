@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-03-22"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes
 
@@ -189,7 +189,7 @@ Remove the PVC, PV, and the storage instance from your {{site.data.keyword.cloud
 
 Before you begin:
 - Make sure that you backed up any data that you want to keep.
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 To clean up persistent data:
 

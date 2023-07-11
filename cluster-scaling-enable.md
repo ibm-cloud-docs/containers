@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-06"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, node scaling, ca, autoscaler
 
@@ -28,7 +28,7 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler sca
 
 **Before you begin**:
 *  Install the [cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon).
-*  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 **To update the cluster autoscaler configmap and values**:
 
@@ -116,7 +116,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
 {: shortdesc}
 
 **Before you begin**:
-*  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 *  [Install the `ibm-iks-cluster-autoscaler` add-on](/docs/containers?topic=containers-cluster-scaling-install-addon).
 
 ### Customizing the cluster autoscaler add-on ConfigMap

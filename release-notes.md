@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-06"
+lastupdated: "2023-07-11"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## July 2023
 {: #containers-july23}
+
+
+
+### 11 July 2023
+{: #containers-july1123}
+{: release-note}
+
+New! OpenShift Data Foundation add-on version `4.13.0`.
+:   For more information, see the [change log](/docs/openshift?topic=openshift-odf_addon_changelog).
+
+
 
 ### 6 July 2023
 {: #containers-july623}

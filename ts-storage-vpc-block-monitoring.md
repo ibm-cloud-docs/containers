@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-02-01"
+lastupdated: "2023-07-07"
 
 keywords: vpc, monitoring, block storage, metrics
 
@@ -33,7 +33,7 @@ Metrics might fail to populate in the dashboard for one of the following reasons
 Check that the PVC is mounted. If the issue persists, manually view your metrics in the CLI to determine if the cause is related to issues with the console. 
 {: tsResolve}
 
-1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 2. Describe the PVC. If the **Used By** row of the output is populated with the name of a pod, then the PVC is mounted. 
 
@@ -127,7 +127,7 @@ After you complete the following steps, make sure to remove the resources you cr
 
     ```sh
     NAME          STATUS    ROLES    AGE     VERSION              
-    10.111.1.11   Ready     <none>   1d      v1.25+IKS            
+    10.111.1.11   Ready     <none>   1d      v1.26+IKS            
     ```
     {: screen}
 

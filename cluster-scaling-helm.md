@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-14"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, node scaling, ca, autoscaler
 
@@ -249,7 +249,7 @@ Before you begin to upgrade your cluster autoscaler release, complete the follow
 This topic applies only to the cluster autoscaler Helm chart.
 {: important}
 
-1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 2. To review the change log of chart versions, [download the source code `tar` file](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibm-iks-cluster-autoscaler) and open the `RELEASENOTES.MD` file.
 
 ### Upgrading the cluster autoscaler release version
@@ -330,7 +330,7 @@ Before you begin, see the [Prerequisites](#ca_helm_up_prereqs).
 If you don't want to automatically scale your worker pools, you can uninstall the cluster autoscaler Helm chart. After the removal, you must [resize](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-kubernetes-service-cli#cs_rebalance) your worker pools manually.
 {: shortdesc}
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Optional: To refer to your autoscaling settings later, make a backup of your ConfigMap.
 

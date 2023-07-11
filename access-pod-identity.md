@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-14"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -56,7 +56,7 @@ As an account administrator, create a trusted profile in {{site.data.keyword.clo
 
 **Before you begin**: Verify that you meet the [prerequisites](#iam-identity-prereqs).
 
-[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Create an [IAM trusted profile](/docs/account?topic=account-create-trusted-profile) in {{site.data.keyword.cloud_notm}} Identity and Access Management. Note the `uuid` (profile ID) in the output.
 
@@ -159,7 +159,7 @@ As a developer, you can configure your application pods to authenticate with {{s
 {: shortdesc}
 
 Before you begin:
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 * Make sure that your account administrator [created an IAM trusted profile for your cluster](#iam-identity-create-api).
 
 To configure your application pods to authenticate with {{site.data.keyword.cloud_notm}} services:

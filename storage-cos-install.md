@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-05-23"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes
 
@@ -28,7 +28,7 @@ Prerequisites
 :   The {{site.data.keyword.cos_full_notm}} plug-in requires at least 0.2 vCPU and 128 MB of memory.
 
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 To install the `ibmc` Helm plug-in and the `ibm-object-storage-plugin`:
 
@@ -47,7 +47,7 @@ To install the `ibmc` Helm plug-in and the `ibm-object-storage-plugin`:
         ```sh
         OK
         ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-        kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.25_1523*
+        kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.26_1523*
         ```
         {: screen}
 
@@ -282,7 +282,7 @@ Removing the `ibmc` Helm plug-in or the `ibm-object-storage-plugin` doesn't remo
 
 Before you begin:
 
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - Make sure that you don't have any PVCs or PVs in your cluster that use {{site.data.keyword.cos_full_notm}}. To list all pods that mount a specific PVC, run `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`.
 
 To remove the `ibmc` Helm plug-in and the `ibm-object-storage-plugin`:

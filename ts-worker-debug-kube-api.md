@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-22"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -28,7 +28,7 @@ If you have access to the cluster, you can debug the worker nodes by using the K
 
 Before you begin, make sure that you have the **Manager** service access role in all namespaces for the cluster, which corresponds to the `cluster-admin` RBAC role.
 
-1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 2. List the worker nodes in your cluster and note the **NAME** of the worker nodes that are not in a `Ready` **STATUS**. Note that the **NAME** is the private IP address of the worker node.
     ```sh
     kubectl get nodes

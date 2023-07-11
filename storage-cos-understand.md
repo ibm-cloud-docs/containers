@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-04-05"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes
 
@@ -66,7 +66,7 @@ To access your {{site.data.keyword.cos_full_notm}} service instance to read and 
 Follow these steps to create a Kubernetes secret for the credentials of an {{site.data.keyword.cos_full_notm}} service instance. If you plan to use a local Cloud Object Storage server or a different s3 API endpoint, create a Kubernetes secret with the appropriate credentials.
 
 Before you begin:
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 * Make sure that you have the **Manager** service access role for the cluster.
 
 To create a secret for your {{site.data.keyword.cos_full_notm}} credentials:

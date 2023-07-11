@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-07-06"
+lastupdated: "2023-07-11"
 
 keywords: containers
 subcollection: containers
@@ -251,6 +251,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
+
+    * [11 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1123)
+
+        * New! OpenShift Data Foundation add-on version `4.13.0`.
 
     * [6 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july623)
 
@@ -6058,8 +6062,6 @@ subcollection: containers
 
     * [`ibmcloud ks cluster master private-service-endpoint allowlist`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist)
 
-    * [Example `cluster master private-service-endpoint allowlist rm` command](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-private-service-endpoint-allowlist-rm)
-
     * [`ibmcloud ks cluster master private-service-endpoint disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_disable)
 
     * [`ibmcloud ks cluster master private-service-endpoint enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_enable)
@@ -6329,8 +6331,6 @@ subcollection: containers
     * [Experimental: `ibmcloud ks nlb-dns secret regenerate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-regenerate)
 
     * [Experimental: `ibmcloud ks nlb-dns secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-rm)
-
-    * [Example `nlb-dns secret rm` command](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns-secret-rm-example)
 
 * [`webhook-create` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_webhook_create)
 
@@ -8006,11 +8006,11 @@ subcollection: containers
 
 * [Change log for version 2.0.5, released 25 November 2020](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
 
-[Static route add-on change log](/docs/containers?topic=containers-static-route-changelog#static-route-changelog)
+[Static route add-on change log](/docs/containers?topic=containers-versions-static-route#versions-static-route)
 
-* [Version 1.0.0](/docs/containers?topic=containers-static-route-changelog#v100)
+* [Version 1.0.0](/docs/containers?topic=containers-versions-static-route#v100)
 
-    * [Change log for 1.0.0_649, released 8 September 2021](/docs/containers?topic=containers-static-route-changelog#100_649)
+    * [Change log for 1.0.0_649, released 8 September 2021](/docs/containers?topic=containers-versions-static-route#100_649)
 
 [Back up and restore Helm chart](/docs/containers?topic=containers-backup_restore_changelog#backup_restore_changelog)
 

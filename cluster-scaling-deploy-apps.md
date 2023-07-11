@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, node scaling, ca, autoscaler
 
@@ -30,7 +30,7 @@ For more information, see the following Kubernetes docs:
 
 **Before you begin**:
 *  [Install the `ibm-iks-cluster-autoscaler` plug-in](/docs/openshift?topic=openshift-cluster-scaling-install-addon).
-*  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 **To limit pods to run on certain autoscaled worker pools**:
 

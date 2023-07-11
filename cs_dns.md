@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-06-08"
+lastupdated: "2023-07-07"
 
 keywords: kubernetes, coredns, kubedns, dns
 
@@ -253,7 +253,7 @@ kubectl get networkpolicy --all-namespaces -o yaml
         
         ```sh
         NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.25+IKS   true
+        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.26+IKS   true
         ```
         {: screen}
 
@@ -308,7 +308,7 @@ You can disable the `NodeLocal` DNS cache for one or more worker nodes.
         
         ```sh
         NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.25+IKS   
+        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.26+IKS   
         ```
         {: screen}
 

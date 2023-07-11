@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-09"
+lastupdated: "2023-07-07"
 
 keywords: portworx, kubernetes
 
@@ -41,7 +41,7 @@ Before you begin:
 
 - If you attached a separate devices for the Portworx KVDB, make sure that you retrieve the device path by running `lsblk` while logged into your worker node.
 
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 To install Portworx:
 
