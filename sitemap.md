@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-07-11"
+lastupdated: "2023-07-12"
 
 keywords: containers
 subcollection: containers
@@ -251,6 +251,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
+
+    * [12 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1223)
+
+        * ALB OAuth Proxy add-on version `2.0.0_1669`.
 
     * [11 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1123)
 
@@ -7394,7 +7398,7 @@ subcollection: containers
 
 * [Version 1.18](/docs/containers?topic=containers-istio-changelog#v118)
 
-    * [Change log for 1.18.0, released 6 July 2023](/docs/containers?topic=containers-istio-changelog#1180)
+    * [Change log for 1.18.0, released 12 July 2023](/docs/containers?topic=containers-istio-changelog#1180)
 
 * [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
 
@@ -8019,6 +8023,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_1669, released on 12 July 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_1669)
 
     * [Version 2.0.0_1528, released on 13 April 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_1528)
 
