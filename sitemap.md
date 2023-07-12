@@ -7398,7 +7398,7 @@ subcollection: containers
 
 * [Version 1.18](/docs/containers?topic=containers-istio-changelog#v118)
 
-    * [Change log for 1.18.0, released 6 July 2023](/docs/containers?topic=containers-istio-changelog#1180)
+    * [Change log for 1.18.0, released 12 July 2023](/docs/containers?topic=containers-istio-changelog#1180)
 
 * [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
 
