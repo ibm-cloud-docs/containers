@@ -5152,7 +5152,7 @@ Version change log
 {: release-note}
 
 {{site.data.keyword.blockstorageshort}}
-:   Added steps for [adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes](/docs/containers?topic=containers-utilities#vpc_api_attach).
+:   Added steps for [adding raw {{site.data.keyword.block_storage_is_short}} to worker nodes](/docs/containers?topic=containers-utilities#vpc_api_attach).
 
 ### 6 January 2020
 {: #containers-jan0620}

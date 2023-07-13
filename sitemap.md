@@ -3241,6 +3241,10 @@ subcollection: containers
 
 * [Run the installation command](/docs/containers?topic=containers-cli-install#cli-install-include-step1-install-idt)
 
+* [Verify the installation](/docs/containers?topic=containers-cli-install#cli-install-include-step2-verify-idt)
+
+* [Install CLI plug-ins and tools](/docs/containers?topic=containers-cli-install#cli-install-include-step3-install-idt-manually)
+
 * [Install the Kubernetes CLI](/docs/containers?topic=containers-cli-install#install-kubectl-cli)
 
 [Updating the CLI](/docs/containers?topic=containers-cli-update#cli-update)
@@ -5831,15 +5835,15 @@ subcollection: containers
 
 * [Classic: Attaching raw block storage to non-SDS worker nodes](/docs/containers?topic=containers-utilities#attach_block)
 
-* [VPC: Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes by using the API](/docs/containers?topic=containers-utilities#vpc_api_attach)
+* [VPC: Adding raw {{site.data.keyword.block_storage_is_short}} to VPC worker nodes by using the API](/docs/containers?topic=containers-utilities#vpc_api_attach)
 
     * [Detaching raw and unformatted {{site.data.keyword.blockstorageshort}} from a worker node in a VPC cluster by using the API](/docs/containers?topic=containers-utilities#vpc_api_detach)
 
     * [Reviewing volume attachment details for a VPC worker node by using the API](/docs/containers?topic=containers-utilities#vpc_api_get_worker)
 
-* [VPC: Attaching raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes by using the CLI](/docs/containers?topic=containers-utilities#vpc_cli_attach)
+* [VPC: Attaching raw {{site.data.keyword.block_storage_is_short}} to VPC worker nodes by using the CLI](/docs/containers?topic=containers-utilities#vpc_cli_attach)
 
-    * [Removing raw {{site.data.keyword.blockstorageshort}} from VPC worker nodes by using the CLI](/docs/containers?topic=containers-utilities#storage-util-rm-vpc-cli)
+    * [Removing raw {{site.data.keyword.block_storage_is_short}} from VPC worker nodes by using the CLI](/docs/containers?topic=containers-utilities#storage-util-rm-vpc-cli)
 
 * [Backing up and restoring PVC data for file and block storage](/docs/containers?topic=containers-utilities#ibmcloud-backup-restore)
 
@@ -9864,6 +9868,8 @@ subcollection: containers
 * [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles-include-containers-kubernetes-roles)
 
 [IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles#iam-service-access-roles)
+
+* [Kubernetes Service](/docs/containers?topic=containers-iam-service-access-roles#iam-service-access-roles-include-containers-kubernetes-roles)
 
 * [Kubernetes service access roles and corresponding RBAC roles](/docs/containers?topic=containers-iam-service-access-roles#rbac_service)
 
