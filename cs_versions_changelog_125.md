@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-07-03"
+lastupdated: "2023-07-14"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -71,7 +71,7 @@ The following table shows the changes that are in the master fix pack 1.25.11_15
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.25.9-7 | v1.25.11-1 | Updated to support the `Kubernetes 1.25.11` release. Updated `Go` dependencies and to `Go` version `1.19.10`. Updated `calicoctl` and `vpcctl`. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 431 | 433 | Updated `Go` to version `1.20.4`. Updated UBI base image. |
 | Key Management Service provider | v2.6.6 | v2.6.7 | Updated `Go` dependencies and to `Go` version `1.19.10`. |
-| Kubernetes | v1.25.10 | v1.25.11 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.11){: external}. |
+| Kubernetes | v1.25.10 | v1.25.11 | [CVE-2023-2728](https://nvd.nist.gov/vuln/detail/CVE-2023-2728){: external}. For more information, see [{{site.data.keyword.containerlong_notm}} is affected by a Kubernetes API server security vulnerability (CVE-2023-2728)](https://www.ibm.com/support/pages/node/7011039){: external}. See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.11){: external}. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2486 | 2584 | Updated `Go` dependencies and to `Go` version `1.19.9`. Updated base image. |
 {: caption="Changes since version 1.25.10_1545" caption-side="bottom"}
 
@@ -135,7 +135,7 @@ The following table shows the changes that are in the worker node fix pack 1.25.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-210-generic | 4.15.0-211-generic | Worker node kernel & package updates for [CVE-2021-3979](https://nvd.nist.gov/vuln/detail/CVE-2021-3979){: external}, [CVE-2023-1118](https://nvd.nist.gov/vuln/detail/CVE-2023-1118){: external}. |
 | Ubuntu 20.04 packages | 5.4.0-139-generic | 5.4.0-148-generic | Worker node kernel & package updates for [CVE-2023-2004](https://nvd.nist.gov/vuln/detail/CVE-2023-2004){: external}. |
-| Kubernetes | 1.25.9 | 1.25.10 | see [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.10){: external}. |
+| Kubernetes | 1.25.9 | 1.25.10 | [CVE-2023-2431](https://nvd.nist.gov/vuln/detail/CVE-2023-2431){: external}. For more information, see [{{site.data.keyword.containerlong_notm}} is affected by a kubelet security vulnerability (CVE-2023-2431)](https://www.ibm.com/support/pages/node/7009655){: external}. See [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.10){: external}. |
 | Haproxy | N\A | N\A | N\A|
 {: caption="Changes since version 1.25.9_1544" caption-side="bottom"}
 
