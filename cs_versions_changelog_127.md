@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-07-03"
+lastupdated: "2023-07-14"
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
 
@@ -72,7 +72,7 @@ The following table shows the changes that are in the master fix pack 1.27.3_152
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 431 | 433 | Updated `Go` to version `1.20.4`. Updated UBI base image. |
 | {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | d842983 | d293d8b | Updated `Go` to version `1.20.5`. Updates to build and base images. |
 | Key Management Service provider | v2.6.6 | v2.6.7 | Updated `Go` dependencies and to `Go` version `1.19.10`. |
-| Kubernetes | v1.27.2 | v1.27.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.3){: external}. |
+| Kubernetes | v1.27.2 | v1.27.3 | [CVE-2023-2728](https://nvd.nist.gov/vuln/detail/CVE-2023-2728){: external}. For more information, see [{{site.data.keyword.containerlong_notm}} is affected by a Kubernetes API server security vulnerability (CVE-2023-2728)](https://www.ibm.com/support/pages/node/7011039){: external}. See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.3){: external}. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2486 | 2584 | Updated `Go` dependencies and to `Go` version `1.19.9`. Updated base image. |
 {: caption="Changes since version 1.27.2_1524" caption-side="bottom"}
 
