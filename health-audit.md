@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-09"
+lastupdated: "2023-07-13"
 
 keywords: kubernetes, logmet, logs, metrics, audit, events
 
@@ -379,6 +379,12 @@ Before you begin, ensure that you reviewed the [considerations and prerequisites
           podSelector:
             matchLabels:
               k8s-app: konnectivity-agent
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              app: konnectivity-agent
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: kube-system

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-12"
+lastupdated: "2023-07-13"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## July 2023
 {: #containers-july23}
+
+
 
 
 
@@ -5150,7 +5152,7 @@ Version change log
 {: release-note}
 
 {{site.data.keyword.blockstorageshort}}
-:   Added steps for [adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes](/docs/containers?topic=containers-utilities#vpc_api_attach).
+:   Added steps for [adding raw {{site.data.keyword.block_storage_is_short}} to worker nodes](/docs/containers?topic=containers-utilities#vpc_api_attach).
 
 ### 6 January 2020
 {: #containers-jan0620}
