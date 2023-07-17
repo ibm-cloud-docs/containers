@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-08"
+lastupdated: "2023-07-17"
 
 keywords: kubernetes, containers
 
@@ -143,9 +143,8 @@ Set up an image registry and a continuous integration and delivery (CI/CD) pipel
 Plan and add highly available persistent storage based on your app requirements, the type of data that you want to store, and how often you want to access this data.
 {: shortdesc}
 
-1. **Storage basics**: Start by understanding the [basics of Kubernetes storage](/docs/containers?topic=containers-kube_concepts).
-2. **Requirements**: Determine your [requirements for a storage solution](/docs/containers?topic=containers-storage-plan).
-3. **Choose a solution**: Using your storage requirements, choose a storage solution by comparing [non-persistent](/docs/containers?topic=containers-storage-plan), [single-zone persistent](/docs/containers?topic=containers-storage-plan), or [multizone persistent](/docs/containers?topic=containers-storage-plan) storage.
+1. **Requirements**: Determine your [requirements for a storage solution](/docs/containers?topic=containers-storage-plan).
+2. **Choose a solution**: Using your storage requirements, choose a storage solution by comparing [non-persistent](/docs/containers?topic=containers-storage-plan), [single-zone persistent](/docs/containers?topic=containers-storage-plan), or [multizone persistent](/docs/containers?topic=containers-storage-plan) storage.
 
 Need help? Check out the troubleshooting page for your persistent storage solution.
 {: tip}

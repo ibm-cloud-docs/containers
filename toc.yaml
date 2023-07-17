@@ -216,53 +216,49 @@ toc:
               topics:
               - secrets.md
               - secrets-mgr.md
+      - storage-plan.md
+      - storage-file.md
+      - storage-block.md
       - topicgroup:
-          label: Setting up storage
+          label: Setting up IBM Cloud Object Storage
           topics:
-          - storage-plan.md
-          - storage-basics.md
-          - storage-file.md
-          - storage-block.md
-          - topicgroup:
-              label: Setting up IBM Cloud Object Storage
-              topics:
-              - storage-cos-understand.md
-              - storage-cos-install.md 
-              - storage-cos-apps.md
-              - storage-cos-tutorial-quota.md
-              - storage-cos-vpc-ip.md
-              - storage-cos-reference.md
-          - topicgroup:   
-              label: Setting up IBM Cloud VPC Block Storage
-              topics:
-              - storage-block-vpc.md
-              - storage-block-vpc-snapshot.md
-              - storage-block-vpc-trusted-profiles.md
-              - storage-block-vpc-unmanaged.md
-              - storage-block-vpc-remove.md
-          - topicgroup:
-              label: Setting up IBM Cloud File Storage for VPC
-              topics: 
-              - storage-file-vpc-install.md 
-              - storage-file-vpc-apps.md
-              - storage-file-vpc-managing.md
-              - storage-file-vpc-sc-ref.md
-          - topicgroup:
-              label: Setting up Portworx
-              topics: 
-              - storage-portworx-about.md
-              - storage-portworx-plan.md
-              - storage-portworx-preparing.md
-              - storage-portworx-kv-store.md
-              - storage-portworx-encryption.md
-              - storage-portworx-deploy.md
-              - storage-portworx-update.md
-              - storage-portworx-recovery.md
-              - storage-portworx-backup.md
-              - storage-portworx-removing.md
-              - storage-portworx-support.md
-          - storage-br.md
-          - storage-utilities.md
+          - storage-cos-understand.md
+          - storage-cos-install.md 
+          - storage-cos-apps.md
+          - storage-cos-tutorial-quota.md
+          - storage-cos-vpc-ip.md
+          - storage-cos-reference.md
+      - topicgroup:   
+          label: Setting up IBM Cloud VPC Block Storage
+          topics:
+          - storage-block-vpc.md
+          - storage-block-vpc-snapshot.md
+          - storage-block-vpc-trusted-profiles.md
+          - storage-block-vpc-unmanaged.md
+          - storage-block-vpc-remove.md
+      - topicgroup:
+          label: Setting up IBM Cloud File Storage for VPC
+          topics: 
+          - storage-file-vpc-install.md 
+          - storage-file-vpc-apps.md
+          - storage-file-vpc-managing.md
+          - storage-file-vpc-sc-ref.md
+      - topicgroup:
+          label: Setting up Portworx
+          topics: 
+          - storage-portworx-about.md
+          - storage-portworx-plan.md
+          - storage-portworx-preparing.md
+          - storage-portworx-kv-store.md
+          - storage-portworx-encryption.md
+          - storage-portworx-deploy.md
+          - storage-portworx-update.md
+          - storage-portworx-recovery.md
+          - storage-portworx-backup.md
+          - storage-portworx-removing.md
+          - storage-portworx-support.md
+      - storage-br.md
+      - storage-utilities.md
       - topicgroup:
           label: Enhancing cluster capabilities with integrations
           topics:

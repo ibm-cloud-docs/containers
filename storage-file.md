@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-07"
+lastupdated: "2023-07-17"
 
 keywords: kubernetes
 
@@ -17,7 +17,7 @@ subcollection: containers
 
 
 
-# Setting up classic IBM Cloud {{site.data.keyword.filestorage_short}}
+# Setting up {{site.data.keyword.filestorage_short}}
 {: #file_storage}
 
 {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} is persistent, fast, and flexible network-attached, NFS-based {{site.data.keyword.filestorage_short}} that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} is the correct storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage-plan). For pricing information, see [Pricing](https://cloud.ibm.com/cloud-storage/file/order){: external}.
@@ -29,7 +29,7 @@ subcollection: containers
 [Classic infrastructure]{: tag-classic-inf}
 
 
-## Quick start for {{site.data.keyword.cloud_notm}} Classic {{site.data.keyword.filestorage_short}}
+## Quick start for {{site.data.keyword.filestorage_short}}
 {: #file_qs}
 
 In this quick start guide, you create a 24Gi endurance {{site.data.keyword.filestorage_short}} volume in your cluster by creating a PVC to dynamically provision the volume. Then, you create an app deployment that mounts your PVC.
@@ -233,7 +233,7 @@ If you choose a monthly billing type, when you remove the persistent storage, yo
 ## Adding {{site.data.keyword.filestorage_short}} to apps
 {: #add_file}
 
-Create a persistent volume claim (PVC) to [dynamically provision](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) {{site.data.keyword.filestorage_short}} for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the physical storage device in your IBM Cloud infrastructure account.
+Create a persistent volume claim (PVC) to dynamically provision {{site.data.keyword.filestorage_short}} for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the physical storage device in your IBM Cloud infrastructure account.
 {: shortdesc}
 
 Before you begin:
@@ -454,7 +454,7 @@ To add {{site.data.keyword.filestorage_short}}:
 ## Using existing {{site.data.keyword.filestorage_short}} in your cluster
 {: #existing_file}
 
-If you have an existing physical storage device that you want to use in your cluster, you can manually create the PV and PVC to [statically provision](/docs/containers?topic=containers-kube_concepts#static_provisioning) the storage.
+If you have an existing physical storage device that you want to use in your cluster, you can manually create the PV and PVC to statically provision the storage.
 {: shortdesc}
 
 Before you begin:
@@ -580,7 +580,7 @@ For persistent storage that was provisioned outside the cluster
     ```
     {: pre}
 
-4. Create another configuration file to create your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for `storage` and `accessMode`. The `storage-class` field must be an empty string. If any of these fields don't match the PV, then a new PV, and a new physical storage instance is [dynamically provisioned](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning).
+4. Create another configuration file to create your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for `storage` and `accessMode`. The `storage-class` field must be an empty string. If any of these fields don't match the PV, then a new PV, and a new physical storage instance is dynamically provisioned.
 
     ```yaml
     kind: PersistentVolumeClaim
@@ -1234,7 +1234,7 @@ To apply the latest security updates and for a better performance, use the defau
 ## Scaling down the default {{site.data.keyword.filestorage_short}} plug-in
 {: #file_scaledown_plugin}
 
-By default, your classic {{site.data.keyword.containerlong_notm}} clusters include the {{site.data.keyword.filestorage_short}} plug-in. If you don't need to use {{site.data.keyword.filestorage_short}} in your cluster, you can conserve cluster resources by scaling down the plug-in and watcher components. Later, you can scale back up to one replica if you need {{site.data.keyword.filestorage_short}}. You can't change other settings or remove the deployment entirely. Because the plug-in is still installed, it is updated along with the cluster version updates even if you scaled the plug-in down.
+By default, your classic clusters include the {{site.data.keyword.filestorage_short}} plug-in. If you don't need to use {{site.data.keyword.filestorage_short}} in your cluster, you can conserve cluster resources by scaling down the plug-in and watcher components. Later, you can scale back up to one replica if you need {{site.data.keyword.filestorage_short}}. You can't change other settings or remove the deployment entirely. Because the plug-in is still installed, it is updated along with the cluster version updates even if you scaled the plug-in down.
 {: shortdesc}
 
 Before you begin:
@@ -1713,11 +1713,11 @@ Removing persistent storage from your {{site.data.keyword.cloud_notm}} account v
 Is my persistent storage deleted when I delete my cluster?
 :   During cluster deletion, you have the option to remove your persistent storage. However, depending on how your storage was provisioned, the removal of your storage might not include all storage components.
 
-If you [dynamically provisioned](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) storage with a storage class that sets `reclaimPolicy: Delete`, your PVC, PV, and the storage instance are automatically deleted when you delete the cluster. For storage that was [statically provisioned](/docs/containers?topic=containers-kube_concepts#static_provisioning), VPC Block Storage, or storage that you provisioned with a storage class that sets `reclaimPolicy: Retain`, the PVC and the PV are removed when you delete the cluster, but your storage instance and your data remain. You are still charged for your storage instance. Also, if you deleted your cluster in an unhealthy state, the storage might still exist even if you chose to remove it.
+If you dynamically provisioned storage with a storage class that sets `reclaimPolicy: Delete`, your PVC, PV, and the storage instance are automatically deleted when you delete the cluster. For storage that was statically provisioned, VPC Block Storage, or storage that you provisioned with a storage class that sets `reclaimPolicy: Retain`, the PVC and the PV are removed when you delete the cluster, but your storage instance and your data remain. You are still charged for your storage instance. Also, if you deleted your cluster in an unhealthy state, the storage might still exist even if you chose to remove it.
 
 How do I delete the storage when I want to keep my cluster?
 :   When you dynamically provisioned the storage with a storage class that sets `reclaimPolicy: Delete`, you can remove the PVC to start the deletion process of your persistent storage. Your PVC, PV, and storage instance are automatically removed.
-:   For storage that was [statically provisioned](/docs/containers?topic=containers-kube_concepts#static_provisioning), VPC Block Storage, or storage that you provisioned with a storage class that sets `reclaimPolicy: Retain`, you must manually remove the PVC, PV, and the storage instance to avoid further charges.
+:   For storage that was statically provisioned, VPC Block Storage, or storage that you provisioned with a storage class that sets `reclaimPolicy: Retain`, you must manually remove the PVC, PV, and the storage instance to avoid further charges.
 
 How does the billing stop after I delete my storage?
 :   Depending on what storage components you delete and when, the billing cycle might not stop immediately. If you delete the PVC and PV, but not the storage instance in your {{site.data.keyword.cloud_notm}} account, that instance still exists and you are charged for it.

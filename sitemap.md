@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-07-14"
+lastupdated: "2023-07-17"
 
 keywords: containers
 subcollection: containers
@@ -76,12 +76,6 @@ subcollection: containers
 * [Comparison between {{site.data.keyword.redhat_openshift_notm}} and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes)
 
 [Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers)
-
-* [Virtual Private Cloud (VPC)](/docs/containers?topic=containers-infrastructure_providers#vpc-gen2-infra-overview)
-
-* [Classic](/docs/containers?topic=containers-infrastructure_providers#classic-infra-overview)
-
-* [Troubleshooting and support](/docs/containers?topic=containers-infrastructure_providers#infra-troubleshoot)
 
 [Your responsibilities with using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
 
@@ -5349,47 +5343,26 @@ subcollection: containers
 * [Registering a {{site.data.keyword.secrets-manager_short}} instance when creating a cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_cluster_create)
 
 
-## Setting up storage
-{: #sitemap_setting_up_storage}
+## Understanding your storage options
+{: #sitemap_understanding_your_storage_options}
 
 
-[Planning for storage](/docs/containers?topic=containers-storage-plan#storage-plan)
+[Understanding your storage options](/docs/containers?topic=containers-storage-plan#storage-plan)
 
-* [Non-persistent storage](/docs/containers?topic=containers-storage-plan#storage-plan-non-persistent)
+* [Non-persistent storage options](/docs/containers?topic=containers-storage-plan#storage-plan-non-persistent)
 
-* [Persistent storage for single zone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-single-zone)
+* [Single zone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-single-zone)
 
-    * [Classic {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-storage-plan#storage-plan-classic-file)
+* [Multizone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-multizone)
 
-    * [Classic {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-storage-plan#storage-plan-classic-block)
 
-    * [{{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-plan#storage-plan-vpc-file)
+## Setting up {{site.data.keyword.filestorage_short}}
+{: #sitemap_setting_up_}
 
-    * [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-storage-plan#storage-plan-vpc-block)
 
-* [Persistent storage options for multizone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-multizone)
+[Setting up {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
 
-    * [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-plan#storage-plan-cos)
-
-    * [Portworx](/docs/containers?topic=containers-storage-plan#storage-plan-portworx)
-
-    * [Databases](/docs/containers?topic=containers-storage-plan#storage-plan-databases)
-
-[Understanding Kubernetes storage basics](/docs/containers?topic=containers-kube_concepts#kube_concepts)
-
-* [Persistent volumes and persistent volume claims](/docs/containers?topic=containers-kube_concepts#pvc_pv)
-
-* [Dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning)
-
-* [Static provisioning](/docs/containers?topic=containers-kube_concepts#static_provisioning)
-
-* [Storage classes](/docs/containers?topic=containers-kube_concepts#storageclasses)
-
-* [Next steps](/docs/containers?topic=containers-kube_concepts#next-steps-storage)
-
-[Setting up classic IBM Cloud {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
-
-* [Quick start for {{site.data.keyword.cloud_notm}} Classic {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
+* [Quick start for {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
 
 * [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
 
@@ -5453,7 +5426,12 @@ subcollection: containers
 
     * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove_file)
 
-[Setting up classic IBM Cloud {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
+
+## Setting up {{site.data.keyword.blockstorageshort}}
+{: #sitemap_setting_up_1}
+
+
+[Setting up {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
 
 * [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
 
@@ -5526,7 +5504,7 @@ subcollection: containers
     * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
 
 
-### Setting up IBM Cloud Object Storage
+## Setting up IBM Cloud Object Storage
 {: #sitemap_setting_up_ibm_cloud_object_storage}
 
 
@@ -5591,7 +5569,7 @@ subcollection: containers
 * [Flex](/docs/containers?topic=containers-storage_cos_reference#flex)
 
 
-### Setting up IBM Cloud VPC Block Storage
+## Setting up IBM Cloud VPC Block Storage
 {: #sitemap_setting_up_ibm_cloud_vpc_block_storage}
 
 
@@ -5690,7 +5668,7 @@ subcollection: containers
 * [Cleaning up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-storage-block-vpc-remove#cleaning-up-block-vpc)
 
 
-### Setting up IBM Cloud File Storage for VPC
+## Setting up IBM Cloud File Storage for VPC
 {: #sitemap_setting_up_ibm_cloud_file_storage_for_vpc}
 
 
@@ -5717,7 +5695,7 @@ subcollection: containers
 [Storage class reference](/docs/containers?topic=containers-storage-file-vpc-sc-ref#storage-file-vpc-sc-ref)
 
 
-### Setting up Portworx
+## Setting up Portworx
 {: #sitemap_setting_up_portworx}
 
 
@@ -5821,7 +5799,17 @@ subcollection: containers
 
 * [Gathering logs](/docs/containers?topic=containers-storage_portworx_support#portworx_logs)
 
+
+## Backing up and restoring storage data
+{: #sitemap_backing_up_and_restoring_storage_data}
+
+
 [Backing up and restoring storage data](/docs/containers?topic=containers-storage_br#storage_br)
+
+
+## IBM Cloud storage utilities
+{: #sitemap_ibm_cloud_storage_utilities}
+
 
 [IBM Cloud storage utilities](/docs/containers?topic=containers-utilities#utilities)
 
