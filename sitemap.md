@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-07-14"
+lastupdated: "2023-07-17"
 
 keywords: containers
 subcollection: containers
@@ -5349,8 +5349,8 @@ subcollection: containers
 * [Registering a {{site.data.keyword.secrets-manager_short}} instance when creating a cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_cluster_create)
 
 
-## Setting up storage
-{: #sitemap_setting_up_storage}
+## Understanding storage
+{: #sitemap_understanding_storage}
 
 
 [Planning for storage](/docs/containers?topic=containers-storage-plan#storage-plan)
@@ -5386,6 +5386,11 @@ subcollection: containers
 * [Storage classes](/docs/containers?topic=containers-kube_concepts#storageclasses)
 
 * [Next steps](/docs/containers?topic=containers-kube_concepts#next-steps-storage)
+
+
+## Setting up classic IBM Cloud {{site.data.keyword.filestorage_short}}
+{: #sitemap_setting_up_classic_ibm_cloud_}
+
 
 [Setting up classic IBM Cloud {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
 
@@ -5452,6 +5457,11 @@ subcollection: containers
     * [Understanding your storage removal options](/docs/containers?topic=containers-file_storage#storage_delete_options_file)
 
     * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove_file)
+
+
+## Setting up classic IBM Cloud {{site.data.keyword.blockstorageshort}}
+{: #sitemap_setting_up_classic_ibm_cloud_1}
+
 
 [Setting up classic IBM Cloud {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
 
@@ -5526,7 +5536,7 @@ subcollection: containers
     * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
 
 
-### Setting up IBM Cloud Object Storage
+## Setting up IBM Cloud Object Storage
 {: #sitemap_setting_up_ibm_cloud_object_storage}
 
 
@@ -5591,7 +5601,7 @@ subcollection: containers
 * [Flex](/docs/containers?topic=containers-storage_cos_reference#flex)
 
 
-### Setting up IBM Cloud VPC Block Storage
+## Setting up IBM Cloud VPC Block Storage
 {: #sitemap_setting_up_ibm_cloud_vpc_block_storage}
 
 
@@ -5690,7 +5700,7 @@ subcollection: containers
 * [Cleaning up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-storage-block-vpc-remove#cleaning-up-block-vpc)
 
 
-### Setting up IBM Cloud File Storage for VPC
+## Setting up IBM Cloud File Storage for VPC
 {: #sitemap_setting_up_ibm_cloud_file_storage_for_vpc}
 
 
@@ -5717,7 +5727,7 @@ subcollection: containers
 [Storage class reference](/docs/containers?topic=containers-storage-file-vpc-sc-ref#storage-file-vpc-sc-ref)
 
 
-### Setting up Portworx
+## Setting up Portworx
 {: #sitemap_setting_up_portworx}
 
 
@@ -5821,7 +5831,17 @@ subcollection: containers
 
 * [Gathering logs](/docs/containers?topic=containers-storage_portworx_support#portworx_logs)
 
+
+## Backing up and restoring storage data
+{: #sitemap_backing_up_and_restoring_storage_data}
+
+
 [Backing up and restoring storage data](/docs/containers?topic=containers-storage_br#storage_br)
+
+
+## IBM Cloud storage utilities
+{: #sitemap_ibm_cloud_storage_utilities}
+
 
 [IBM Cloud storage utilities](/docs/containers?topic=containers-utilities#utilities)
 
