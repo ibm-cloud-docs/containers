@@ -216,11 +216,7 @@ toc:
               topics:
               - secrets.md
               - secrets-mgr.md
-      - topicgroup:
-          label: Understanding storage
-          topics:
-          - storage-plan.md
-          - storage-basics.md
+      - storage-plan.md
       - storage-file.md
       - storage-block.md
       - topicgroup:

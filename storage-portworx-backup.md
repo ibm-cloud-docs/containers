@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-28"
+lastupdated: "2023-07-17"
 
 keywords: portworx, kubernetes
 
@@ -32,7 +32,7 @@ Install PX-Backup on an {{site.data.keyword.containerlong_notm}} cluster in your
 Before you begin:
 - Make sure that your cluster meets the [minimum Portworx requirements](https://docs.portworx.com/start-here-installation/){: external}. 
 - [Install or update the {{site.data.keyword.cloud_notm}} Block Storage plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block).
-- Provision and attach 320Gi of block storage to your cluster. See [Setting up classic {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage) or [Setting up Block Storage for VPC](/docs/containers?topic=containers-vpc-block).
+- Provision and attach 320Gi of block storage to your cluster. See [Setting {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage) or [Setting up Block Storage for VPC](/docs/containers?topic=containers-vpc-block).
 
 
 

@@ -77,12 +77,6 @@ subcollection: containers
 
 [Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers)
 
-* [Virtual Private Cloud (VPC)](/docs/containers?topic=containers-infrastructure_providers#vpc-gen2-infra-overview)
-
-* [Classic](/docs/containers?topic=containers-infrastructure_providers#classic-infra-overview)
-
-* [Troubleshooting and support](/docs/containers?topic=containers-infrastructure_providers#infra-troubleshoot)
-
 [Your responsibilities with using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
 
 * [Overview of shared responsibilities](/docs/containers?topic=containers-responsibilities_iks#overview-by-resource)
@@ -5349,52 +5343,26 @@ subcollection: containers
 * [Registering a {{site.data.keyword.secrets-manager_short}} instance when creating a cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_cluster_create)
 
 
-## Understanding storage
-{: #sitemap_understanding_storage}
+## Understanding your storage options
+{: #sitemap_understanding_your_storage_options}
 
 
-[Planning for storage](/docs/containers?topic=containers-storage-plan#storage-plan)
+[Understanding your storage options](/docs/containers?topic=containers-storage-plan#storage-plan)
 
-* [Non-persistent storage](/docs/containers?topic=containers-storage-plan#storage-plan-non-persistent)
+* [Non-persistent storage options](/docs/containers?topic=containers-storage-plan#storage-plan-non-persistent)
 
-* [Persistent storage for single zone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-single-zone)
+* [Single zone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-single-zone)
 
-    * [Classic {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-storage-plan#storage-plan-classic-file)
-
-    * [Classic {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-storage-plan#storage-plan-classic-block)
-
-    * [{{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-plan#storage-plan-vpc-file)
-
-    * [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-storage-plan#storage-plan-vpc-block)
-
-* [Persistent storage options for multizone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-multizone)
-
-    * [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-plan#storage-plan-cos)
-
-    * [Portworx](/docs/containers?topic=containers-storage-plan#storage-plan-portworx)
-
-    * [Databases](/docs/containers?topic=containers-storage-plan#storage-plan-databases)
-
-[Understanding Kubernetes storage basics](/docs/containers?topic=containers-kube_concepts#kube_concepts)
-
-* [Persistent volumes and persistent volume claims](/docs/containers?topic=containers-kube_concepts#pvc_pv)
-
-* [Dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning)
-
-* [Static provisioning](/docs/containers?topic=containers-kube_concepts#static_provisioning)
-
-* [Storage classes](/docs/containers?topic=containers-kube_concepts#storageclasses)
-
-* [Next steps](/docs/containers?topic=containers-kube_concepts#next-steps-storage)
+* [Multizone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-multizone)
 
 
-## Setting up classic IBM Cloud {{site.data.keyword.filestorage_short}}
-{: #sitemap_setting_up_classic_ibm_cloud_}
+## Setting up {{site.data.keyword.filestorage_short}}
+{: #sitemap_setting_up_}
 
 
-[Setting up classic IBM Cloud {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
+[Setting up {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
 
-* [Quick start for {{site.data.keyword.cloud_notm}} Classic {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
+* [Quick start for {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
 
 * [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
 
@@ -5459,11 +5427,11 @@ subcollection: containers
     * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove_file)
 
 
-## Setting up classic IBM Cloud {{site.data.keyword.blockstorageshort}}
-{: #sitemap_setting_up_classic_ibm_cloud_1}
+## Setting up {{site.data.keyword.blockstorageshort}}
+{: #sitemap_setting_up_1}
 
 
-[Setting up classic IBM Cloud {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
+[Setting up {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
 
 * [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-15"
+lastupdated: "2023-07-17"
 
 keywords: kubernetes, classic
 
@@ -18,21 +18,17 @@ subcollection: containers
 # Supported infrastructure providers
 {: #infrastructure_providers}
 
-With {{site.data.keyword.containerlong}}, you can create a cluster from the following infrastructure providers. All the worker nodes in a cluster must be from the same provider. Originally, {{site.data.keyword.containerlong_notm}} provisioned your worker nodes in a single provider, classic infrastructure.
+With {{site.data.keyword.containerlong}}, you can create a cluster from the following infrastructure providers. All the worker nodes in a cluster must be from the same provider.
 
 [Virtual Private Cloud]{: tag-vpc}
-:   Create your cluster on the next generation of IBM Cloud infrastructure virtual servers in your own Virtual Private Cloud (VPC).
+:   Create clusters on virtual servers in your own Virtual Private Cloud (VPC).
+
 
 
 
 [Classic infrastructure]{: tag-classic-inf} 
-:   Create your cluster on a classic compute, networking, and storage environment in IBM Cloud infrastructure.
+:   Create clusters in a classic compute, networking, and storage environment in IBM Cloud infrastructure.
 
-
-## Virtual Private Cloud (VPC)
-{: #vpc-gen2-infra-overview}
-
-[Virtual Private Cloud]{: tag-vpc}
 
 | Component | Description | 
 | --- | --- | 
@@ -51,14 +47,14 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from the foll
 | Service interface | VPC clusters are supported by the [next version (`v2`) of the {{site.data.keyword.containerlong_notm}} API](/docs/containers?topic=containers-cs_api_install), and you can manage your VPC clusters through the same CLI and console as classic clusters.| 
 | Service compliance | See the VPC section in [What standards does the service comply to?](/docs/containers?topic=containers-faqs#standards).
 | Service limitations | See [Service limitations](/docs/containers?topic=containers-limitations#tech_limits). For VPC-specific limitations in {{site.data.keyword.containerlong_notm}}, see [VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits). For general VPC infrastructure provider limitations, see [Limitations](/docs/vpc?topic=vpc-limitations).  |
-{: caption="Table 1. VPC infrastructure overview." caption-side="bottom"}
+{: class="simple-tab-table"}
+{: caption="Table 1. Infrastructure overview" caption-side="bottom"}
+{: #infra-1}
+{: tab-title="VPC"}
+{: tab-group="infra-table"}
 
 
 
-## Classic
-{: #classic-infra-overview}
-
-[Classic infrastructure]{: tag-classic-inf} 
 
 | Component | Description | 
 | --- | --- | 
@@ -77,14 +73,11 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from the foll
 | Service interface | Classic clusters are fully supported in the {{site.data.keyword.containershort_notm}} [`v1` API](https://containers.cloud.ibm.com/global/swagger-global-api/#/){: external}, [CLI](/docs/containers?topic=containers-kubernetes-service-cli), and [console](https://cloud.ibm.com/kubernetes/clusters).|
 | Service compliance | See the classic section in [What standards does the service comply to?](/docs/containers?topic=containers-faqs#standards). |
 | Service limitations | See [Service limitations](/docs/containers?topic=containers-limitations#tech_limits). Feature-specific limitations are documented by section. |
-{: caption="Table 3. Classic infrastructure overview." caption-side="bottom"}
+{: class="simple-tab-table"}
+{: caption="Table 1. Infrastructure overview" caption-side="bottom"}
+{: #infra-3}
+{: tab-title="Classic"}
+{: tab-group="infra-table"}
 
-## Troubleshooting and support
-{: #infra-troubleshoot}
 
-Classic, VPC, and {{site.data.keyword.satelliteshort}} clusters are supported through the same {{site.data.keyword.cloud_notm}} Support processes. 
-
-- For cluster issues, check out the [Debugging your clusters](/docs/containers?topic=containers-debug_clusters) guide. 
-- For {{site.data.keyword.satelliteshort}}-specific issues, see [Troubleshooting errors](/docs/satellite?topic=satellite-sitemap&interface=cli#sitemap_troubleshooting_errors).
-- For VPC-specific topics. For questions, try posting in the [Slack channel](https://cloud.ibm.com/kubernetes/slack){: external}.
 
