@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-07-14"
+lastupdated: "2023-07-18"
 
 keywords: kubernetes, containers
 
@@ -35,6 +35,20 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.24 change log.
 {: shortdesc}
+
+
+### Change log for worker node fix pack 1.24.15_1576, released 17 July 2023
+{: #12415_1576_W}
+
+The following table shows the changes that are in the worker node fix pack 1.24.15_1576. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Kubernetes | N/A | N/A | N/A |
+| Ubuntu 18.04 packages | N/A | N/A | Worker node package updates for [CVE-2023-24626](https://nvd.nist.gov/vuln/detail/CVE-2023-24626){: external}, [CVE-2023-2953](https://nvd.nist.gov/vuln/detail/CVE-2023-2953){: external}. |
+| Ubuntu 20.04 packages | N/A | N/A | N/A |
+{: caption="Changes since version 1.24.15_1574" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.24.15_1574, released 03 July 2023
