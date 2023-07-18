@@ -4367,12 +4367,6 @@ subcollection: containers
 
 * [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-vpc-firewall#iam_allowlist_vpc)
 
-[Managing security and compliance with Kubernetes](/docs/containers?topic=containers-manage-security-compliance#manage-security-compliance)
-
-* [Monitoring security and compliance posture with Kubernetes](/docs/containers?topic=containers-manage-security-compliance#monitor-clusters)
-
-    * [Available goals for Kubernetes](/docs/containers?topic=containers-manage-security-compliance#clusters-available-goals)
-
 
 ## Managing the cluster network
 {: #sitemap_managing_the_cluster_network}
@@ -6672,13 +6666,13 @@ subcollection: containers
 
     * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-32-127)
 
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-127#cis-section-1-127)
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-127#cis-section-4-127)
 
     * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-41-127)
 
     * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-42-127)
 
-* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-127#cis-section-1-127)
+* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-127#cis-section-5-127)
 
     * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-51-127)
 
