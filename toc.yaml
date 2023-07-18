@@ -142,7 +142,6 @@ toc:
               - vpc-acls.md
               - vpc-kube-policies.md
               - vpc-firewall.md
-          - manage-scc.md
       - topicgroup:
           label: Managing the cluster network
           topics:

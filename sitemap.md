@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-07-17"
+lastupdated: "2023-07-18"
 
 keywords: containers
 subcollection: containers
@@ -245,6 +245,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
+
+    * [17 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1723)
+
+        * Worker node fix packs `1.24.15_1576`, `1.25.11_1552`, `1.26.6_1544`, and `1.27.3_1532`.
 
     * [12 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1223)
 
@@ -4363,12 +4367,6 @@ subcollection: containers
 
 * [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-vpc-firewall#iam_allowlist_vpc)
 
-[Managing security and compliance with Kubernetes](/docs/containers?topic=containers-manage-security-compliance#manage-security-compliance)
-
-* [Monitoring security and compliance posture with Kubernetes](/docs/containers?topic=containers-manage-security-compliance#monitor-clusters)
-
-    * [Available goals for Kubernetes](/docs/containers?topic=containers-manage-security-compliance#clusters-available-goals)
-
 
 ## Managing the cluster network
 {: #sitemap_managing_the_cluster_network}
@@ -6636,6 +6634,8 @@ subcollection: containers
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
 
+    * [Change log for worker node fix pack 1.27.3_1532, released 17 July 2023](/docs/containers?topic=containers-changelog_127#1273_1532_W)
+
     * [Change log for worker node fix pack 1.27.3_1530, released 03 July 2023](/docs/containers?topic=containers-changelog_127#1273_1530_W)
 
     * [Change log for master fix pack 1.27.3_1529, released 27 June 2023](/docs/containers?topic=containers-changelog_127#1273_1529_M)
@@ -6666,13 +6666,13 @@ subcollection: containers
 
     * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-32-127)
 
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-127#cis-section-1-127)
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-127#cis-section-4-127)
 
     * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-41-127)
 
     * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-42-127)
 
-* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-127#cis-section-1-127)
+* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-127#cis-section-5-127)
 
     * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-51-127)
 
@@ -6708,6 +6708,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for worker node fix pack 1.26.6_1544, released 17 July 2023](/docs/containers?topic=containers-changelog_126#1266_1544_W)
 
     * [Change log for worker node fix pack 1.26.6_1542, released 03 July 2023](/docs/containers?topic=containers-changelog_126#1266_1542_W)
 
@@ -6807,6 +6809,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for worker node fix pack 1.25.11_1552, released 17 July 2023](/docs/containers?topic=containers-changelog_125#12511_1552_W)
 
     * [Change log for worker node fix pack 1.25.11_1550, released 03 July 2023](/docs/containers?topic=containers-changelog_125#12511_1550_W)
 
@@ -6930,6 +6934,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.15_1576, released 17 July 2023](/docs/containers?topic=containers-changelog_124#12415_1576_W)
 
     * [Change log for worker node fix pack 1.24.15_1574, released 03 July 2023](/docs/containers?topic=containers-changelog_124#12415_1574_W)
 

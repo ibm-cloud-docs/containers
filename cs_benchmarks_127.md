@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-07-05"
+lastupdated: "2023-07-18"
 
 keywords: kubernetes, containers, benchmarks, 1.27, CIS benchmarks
 
@@ -158,7 +158,7 @@ Review the Control Plane Configuration results of the version 1.5 CIS Kubernetes
 {: caption="Section 3.2 Logging benchmark results" caption-side="bottom"}
 
 ## 4 Worker node security configuration
-{: #cis-section-1-127}
+{: #cis-section-4-127}
 
 Review the Worker Node Security Configuration results of the version 1.5 CIS Kubernetes benchmark.
 {: shortdesc}
@@ -201,7 +201,7 @@ Review the Worker Node Security Configuration results of the version 1.5 CIS Kub
 {: caption="Section 4.2 Kubelet benchmark results" caption-side="bottom"}
 
 ## 5 Kubernetes policies
-{: #cis-section-1-127}
+{: #cis-section-5-127}
 
 Review the Kubernetes Policies results of the version 1.5 CIS Kubernetes benchmark.
 {: shortdesc}
