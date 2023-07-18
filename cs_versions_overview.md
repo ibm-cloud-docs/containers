@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-07"
+lastupdated: "2023-07-18"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -66,7 +66,7 @@ Ubuntu 18 is deprecated and becomes unsupported soon. For migration actions, see
 
 1.24
 - Release date: 09 June 2022
-- End of support: 06 September 2023`†`
+- End of support: 11 October 2023
 - Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_S390X`, `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_124)
 - [Change log](/docs/containers?topic=containers-changelog_124)
