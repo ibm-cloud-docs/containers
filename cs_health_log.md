@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-06-12"
+lastupdated: "2023-07-19"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -24,7 +24,7 @@ Set up logging in {{site.data.keyword.containerlong}} to help you troubleshoot i
 
 Continuous monitoring and logging is the key to detecting attacks on your cluster and troubleshooting issues as they arise. By continuously monitoring your cluster, you're able to better understand your cluster capacity and the availability of resources that are available to your app. With this insight, you can prepare to protect your apps against downtime.
 
-You can configure custom settings for the logging agents that are deployed to your cluster such custom inclusion rules, logging directories, and more. For more information, see [Configuring a logging agent](/docs/log-analysis?topic=log-analysis-log_analysis_agent#log_analysis_agent_configure){: external}
+You can configure custom settings for the logging agents that are deployed to your cluster such custom inclusion rules, logging directories, and more. For more information, see [Logging agent](/docs/log-analysis?topic=log-analysis-log_analysis_agent).
 {: note}
 
 ## Choosing a logging solution
