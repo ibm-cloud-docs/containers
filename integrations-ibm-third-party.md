@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-07"
+lastupdated: "2023-07-19"
 
 keywords: kubernetes, helm
 
@@ -53,7 +53,6 @@ To secure your cluster network or connect to an on-prem data center, you can con
 - [strongSwan IPSec VPN Service](/docs/containers?topic=containers-vpn#vpn-setup)
 - [{{site.data.keyword.BluDirectLink}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl)
 - [Virtual Router Appliance (VRA)](/docs/containers?topic=containers-vpn#vyatta)
-- [Fortigate Security Appliance (FSA)](/docs/vmwaresolutions/services?topic=vmwaresolutions-fsa_considerations)
 
 
 

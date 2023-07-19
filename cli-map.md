@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-06-12"
+lastupdated: "2023-07-19"
 
 keywords: kubernetes
 
@@ -145,6 +145,10 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
 {: shortdesc}
 
 * **`ingress alb`**: View and configure an Ingress application load balancer (ALB).
+    * **`ingress alb autoscale`**: Configure autoscaling for Ingress ALBs. 
+        * [`ibmcloud ks ingress alb autouscale get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_get)
+        * [`ibmcloud ks ingress alb autouscale set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_set)
+        * [`ibmcloud ks ingress alb autouscale unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_unset)
     * **`ingress alb autoupdate`**: Manage automatic updates for the Ingress ALB add-on in a cluster.
         * [`ibmcloud ks ingress alb autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable)
         * [`ibmcloud ks ingress alb autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_enable)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-07"
+lastupdated: "2023-07-19"
 
 keywords: kubernetes
 
@@ -76,17 +76,18 @@ Get your code ready to go. Don't have any code yet? You can download starter cod
 
     To download the Python Flask app code:
 
-    a. In the catalog, in **Boilerplates**, click **Python Flask**. This boilerplate includes a runtime environment for both Python 2 and Python 3 apps.
+    1. In the catalog, in **Boilerplates**, click **Python Flask**. This boilerplate includes a runtime environment for both Python 2 and Python 3 apps.
 
-    b. Enter the app name `cf-py-<name>` and click **CREATE**. To access the app code for the boilerplate, you must deploy the CF app to the cloud first. You can use any name for the app. If you use the name from the example, replace `<name>` with a unique identifier, such as `cf-py-msx`.
+    2. Enter the app name `cf-py-<name>` and click **CREATE**. To access the app code for the boilerplate, you must deploy the CF app to the cloud first. You can use any name for the app. If you use the name from the example, replace `<name>` with a unique identifier, such as `cf-py-msx`.
 
-    **Attention**: Do not use personal information in any app, container image, or Kubernetes resource names.
+        Do not use personal information in any app, container image, or Kubernetes resource names.
+        {: note}
 
-    As the app is deployed, instructions for "Download, modify, and redeploy your app with the command line interface" are displayed.
+        As the app is deployed, instructions for **Download, modify, and redeploy your app with the command line interfac** are displayed.
 
-    c. From step 1 in the console instructions, click **DOWNLOAD STARTER CODE**.
+    3. From step 1 in the console instructions, click **DOWNLOAD STARTER CODE**.
 
-    d. Extract the `.zip` file and save its contents to your `cf-py` directory.
+    4. Extract the `.zip` file and save its contents to your `cf-py` directory.
 
 Your app code is ready to be containerized!
 

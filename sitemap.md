@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-07-18"
+lastupdated: "2023-07-19"
 
 keywords: containers
 subcollection: containers
@@ -245,6 +245,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
+
+    * [19 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1923)
+
+        * CLI version `1.0.540` is available.
 
     * [17 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1723)
 
@@ -6168,6 +6172,12 @@ subcollection: containers
 
 * [`ingress` commands](/docs/containers?topic=containers-kubernetes-service-cli#alb-commands)
 
+    * [`ibmcloud ks ingress alb autoscale get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_get)
+
+    * [`ibmcloud ks ingress alb autoscale set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_set)
+
+    * [`ibmcloud ks ingress alb autoscale unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_unset)
+
     * [`ibmcloud ks ingress alb autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable)
 
     * [`ibmcloud ks ingress alb autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_enable)
@@ -6413,6 +6423,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.540](/docs/containers?topic=containers-cs_cli_changelog#cli-10549)
 
 * [Version v1.0.528](/docs/containers?topic=containers-cs_cli_changelog#cli-10528)
 
