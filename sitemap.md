@@ -246,6 +246,10 @@ subcollection: containers
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
 
+    * [19 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1923)
+
+        * CLI version `1.0.540` is available.
+
     * [17 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1723)
 
         * Worker node fix packs `1.24.15_1576`, `1.25.11_1552`, `1.26.6_1544`, and `1.27.3_1532`.
@@ -6419,6 +6423,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.540](/docs/containers?topic=containers-cs_cli_changelog#cli-10549)
 
 * [Version v1.0.528](/docs/containers?topic=containers-cs_cli_changelog#cli-10528)
 
