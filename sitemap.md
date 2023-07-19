@@ -6168,6 +6168,12 @@ subcollection: containers
 
 * [`ingress` commands](/docs/containers?topic=containers-kubernetes-service-cli#alb-commands)
 
+    * [`ibmcloud ks ingress alb autoscale get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_get)
+
+    * [`ibmcloud ks ingress alb autoscale set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_set)
+
+    * [`ibmcloud ks ingress alb autoscale unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_unset)
+
     * [`ibmcloud ks ingress alb autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable)
 
     * [`ibmcloud ks ingress alb autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_enable)
