@@ -3482,7 +3482,7 @@ subcollection: containers
 
     * [How do I manage my worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#flavor-manage)
 
-    * [What storage disks options are available on worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#what-storage-disks-options-are-available-on-worker-nodes)
+    * [What storage disks options are available on worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#hardware-options)
 
     * [What limitations do I need to be aware of?](/docs/containers?topic=containers-planning_worker_nodes#flavor-limitations)
 
