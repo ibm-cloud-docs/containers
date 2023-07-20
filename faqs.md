@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-26"
+lastupdated: "2023-07-20"
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
 
@@ -128,16 +128,6 @@ For more information about the components of your cluster and how you can meet s
 
 The access policies that you assign users vary depending on what you want your users to be able to do. You can find more information about what roles authorize which types of actions on the [User access reference page](/docs/containers?topic=containers-access_reference) or in the following table's links. For steps to assign policies, see [Granting users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#checking-perms).
 
-| Use case | Example roles and scope |
-| --- | --- |
-| App auditor | [Viewer platform access role for a cluster, region, or resource group](/docs/containers?topic=containers-iam-platform-access-roles), [Reader service access role for a cluster, region, or resource group](/docs/containers?topic=containers-iam-service-access-roles). |
-| App developers | [Editor platform access role for a cluster](/docs/containers?topic=containers-iam-platform-access-roles), [Writer service access role scoped to a namespace](/docs/containers?topic=containers-iam-service-access-roles), [Cloud Foundry developer space role](/docs/containers?topic=containers-cloud-foundry-roles). |
-| Billing | [Viewer platform access role for a cluster, region, or resource group](/docs/containers?topic=containers-iam-platform-access-roles). |
-| Create a cluster | See [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions).|
-| Cluster administrator | [Administrator platform access role for a cluster](/docs/containers?topic=containers-iam-platform-access-roles), [Manager service access role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-iam-service-access-roles).|
-| DevOps operator | [Operator platform access role for a cluster](/docs/containers?topic=containers-iam-platform-access-roles), [Writer service access role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-iam-service-access-roles), [Cloud Foundry developer space role](/docs/containers?topic=containers-cloud-foundry-roles).  |
-| Operator or site reliability engineer | [Administrator platform access role for a cluster, region, or resource group](/docs/containers?topic=containers-iam-platform-access-roles), [Reader service access role for a cluster or region](/docs/containers?topic=containers-iam-service-access-roles) or [Manager service access role for all cluster namespaces](/docs/containers?topic=containers-iam-service-access-roles) to be able to use `kubectl top nodes,pods` commands. |
-{: caption="Types of roles you might assign to meet different use cases." caption-side="bottom"}
 
 ## Where can I find a list of security bulletins that affect my cluster?
 {: #faq_security_bulletins}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-07-19"
+lastupdated: "2023-07-20"
 
 keywords: containers
 subcollection: containers
@@ -3482,6 +3482,8 @@ subcollection: containers
 
     * [How do I manage my worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#flavor-manage)
 
+    * [What storage disks options are available on worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#hardware-options)
+
     * [What limitations do I need to be aware of?](/docs/containers?topic=containers-planning_worker_nodes#flavor-limitations)
 
     * [How can I check the operating system that my worker nodes run?](/docs/containers?topic=containers-planning_worker_nodes#flavor-os-check)
@@ -3912,15 +3914,15 @@ subcollection: containers
 
 * [VPC cluster](/docs/containers?topic=containers-service-arch#architecture_vpc)
 
-* [Overview of personal and sensitive data storage and removal options](/docs/containers?topic=containers-service-arch#ibm-data)
+[Overview of personal and sensitive data storage and removal options](/docs/containers?topic=containers-ibm-data#ibm-data)
 
-    * [What information is stored with IBM when using {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-service-arch#pi-info)
+* [What information is stored with IBM when using {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-ibm-data#pi-info)
 
-    * [How is my information stored and encrypted?](/docs/containers?topic=containers-service-arch#pi-storage)
+* [How is my information stored and encrypted?](/docs/containers?topic=containers-ibm-data#pi-storage)
 
-    * [Where is my information stored?](/docs/containers?topic=containers-service-arch#pi-location)
+* [Where is my information stored?](/docs/containers?topic=containers-ibm-data#pi-location)
 
-    * [How can I remove my information?](/docs/containers?topic=containers-service-arch#pi-removal)
+* [How can I remove my information?](/docs/containers?topic=containers-ibm-data#pi-removal)
 
 [Protecting {{site.data.keyword.containerlong_notm}} resources with context-based restrictions](/docs/containers?topic=containers-cbr#cbr)
 
@@ -5705,6 +5707,8 @@ subcollection: containers
 
 * [What is software-defined storage (SDS)?](/docs/containers?topic=containers-storage_portworx_about#about-px-sds)
 
+* [What are the benefits of Portworx?](/docs/containers?topic=containers-storage_portworx_about#portworx-benefits)
+
 * [How does Portworx work?](/docs/containers?topic=containers-storage_portworx_about#about-px-work)
 
 * [What are the requirements to run Portworx?](/docs/containers?topic=containers-storage_portworx_about#about-px-requirments)
@@ -5714,6 +5718,8 @@ subcollection: containers
 * [What volume topology offers the best performance for my pods?](/docs/containers?topic=containers-storage_portworx_about#about-px-topology)
 
 * [Can I install Portworx in a private cluster?](/docs/containers?topic=containers-storage_portworx_about#about-px-private)
+
+* [How do I get support?](/docs/containers?topic=containers-storage_portworx_about#portworx-billing-support)
 
 * [What's next?](/docs/containers?topic=containers-storage_portworx_about#about-px-next)
 
@@ -5849,36 +5855,6 @@ subcollection: containers
 ## Enhancing cluster capabilities with integrations
 {: #sitemap_enhancing_cluster_capabilities_with_integrations}
 
-
-[{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-service-partners#service-partners)
-
-* [Portworx](/docs/containers?topic=containers-service-partners#portworx-parter)
-
-    * [Benefits](/docs/containers?topic=containers-service-partners#portworx-benefits)
-
-    * [Integration with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-service-partners#portworx-integration)
-
-    * [Billing and support](/docs/containers?topic=containers-service-partners#portworx-billing-support)
-
-[IBM Cloud services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-3rd-party-integrations)
-
-* [IBM Cloud services](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-cloud-services)
-
-    * [IBM Cloud platform services](/docs/containers?topic=containers-ibm-3rd-party-integrations#platform-services)
-
-    * [IBM Cloud classic infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#infrastructure-services)
-
-    * [IBM Cloud VPC infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#vpc-infrastructure-services)
-
-* [Kubernetes community and open source integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-tools)
-
-    * [Integrations operated in partnership](/docs/containers?topic=containers-ibm-3rd-party-integrations#open-source-partners)
-
-    * [Managed add-ons](/docs/containers?topic=containers-ibm-3rd-party-integrations#cluster-add-ons)
-
-    * [Other third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-helm)
-
-    * [Extending Kubernetes API and software with CRDs and Operators](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-crd-operators)
 
 [Adding services by using managed add-ons](/docs/containers?topic=containers-managed-addons#managed-addons)
 
@@ -10164,7 +10140,7 @@ subcollection: containers
 
 [Why can't I create or delete clusters or worker nodes?](/docs/containers?topic=containers-cluster_infra_errors#cluster_infra_errors)
 
-* [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-cluster_infra_errors#cs_credentials)
+* [Unable to create or delete clusters or worker nodes due to permission and credential errors](/docs/containers?topic=containers-cluster_infra_errors#cs_credentials)
 
 * [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-cluster_infra_errors#orphaned)
 

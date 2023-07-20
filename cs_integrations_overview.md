@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-17"
+lastupdated: "2023-07-20"
 
 keywords: kubernetes, helm
 
@@ -19,7 +19,7 @@ subcollection: containers
 # Supported IBM Cloud and third-party integrations
 {: #supported_integrations}
 
-You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and external services with a standard cluster in {{site.data.keyword.containerlong_notm}}.
+You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and external services with your {{site.data.keyword.containerlong_notm}} clusters.
 {: shortdesc}
 
 ## Popular integrations
@@ -34,7 +34,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 | {{site.data.keyword.codeenginefull_notm}} | Serverless | {{site.data.keyword.codeengineshort}} is a fully managed, serverless platform that runs your containerized workloads, including web apps, micro-services, event-driven functions, or batch jobs. {{site.data.keyword.codeengineshort}} even builds container images for you from your source code. Because these workloads are all hosted within the same Kubernetes infrastructure, all them can seamlessly work together. For more information, see [Getting started with {{site.data.keyword.codeenginefull_notm}}](/docs/codeengine). |
 |{{site.data.keyword.registrylong_notm}}|Container images|Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the [{{site.data.keyword.registrylong}} documentation](/docs/Registry?topic=Registry-getting-started){: external}.|Yes|Yes|
 |{{site.data.keyword.cloud_notm}} {{site.data.keyword.contdelivery_short}}|Build automation|Automate your app builds and container deployments to Kubernetes clusters by using a toolchain. For more information about the setup, see [working with Tekton pipelines](/docs/ContinuousDelivery?topic=ContinuousDelivery-tekton-pipelines){: external}.|Yes|Yes|
-| {{site.data.keyword.filestorage_short}} |File storage| NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Setting up {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage).|Yes| |
+| {{site.data.keyword.filestorage_short}} |File storage| NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. |Yes| |
 |{{site.data.keyword.keymanagementservicefull_notm}}|Data encryption|Encrypt the Kubernetes secrets that are in your cluster by [enabling  a key management service (KMS) provider](/docs/containers?topic=containers-encryption#kms). Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information.|Yes|Yes|
 |{{site.data.keyword.la_full_notm}}|Cluster and app logs|Add log management capabilities to your cluster by deploying a {{site.data.keyword.la_short}} agent to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/log-analysis?topic=log-analysis-tutorial-use-logdna).|Yes|Yes|
 |{{site.data.keyword.mon_full_notm}}|Cluster and app metrics|Gain operational visibility into the performance and health of your apps by deploying an {{site.data.keyword.mon_full_notm}} agent to your worker nodes to forward metrics to {{site.data.keyword.mon_full}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/monitoring?topic=monitoring-kubernetes_cluster#kubernetes_cluster).|Yes|Yes|
