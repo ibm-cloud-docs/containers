@@ -10140,7 +10140,7 @@ subcollection: containers
 
 [Why can't I create or delete clusters or worker nodes?](/docs/containers?topic=containers-cluster_infra_errors#cluster_infra_errors)
 
-* [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-cluster_infra_errors#cs_credentials)
+* [Unable to create or delete clusters or worker nodes due to permission and credential errors](/docs/containers?topic=containers-cluster_infra_errors#cs_credentials)
 
 * [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-cluster_infra_errors#orphaned)
 
