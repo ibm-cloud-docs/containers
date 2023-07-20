@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-07"
+lastupdated: "2023-07-20"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -36,10 +36,10 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 {: tip}
 
 {{site.data.keyword.mon_full}}
-: Gain operational visibility into the performance and health of your apps and your cluster by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/monitoring?topic=monitoring-getting-started). To set up the {{site.data.keyword.mon_short}} agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#monitoring).
+:   Gain operational visibility into the performance and health of your apps and your cluster by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/monitoring?topic=monitoring-getting-started). To set up the {{site.data.keyword.mon_short}} agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#monitoring).
 
 Kubernetes dashboard
-: The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-deploy_app#cli_dashboard).
+:   The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-deploy_app#cli_dashboard).
 
 
 ## Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}
@@ -185,7 +185,7 @@ The **Master Status** provides details of what operation from the master state i
 When you set up alerts, make sure to allow your cluster enough time to self-heal. Because Kubernetes has self healing capabilities, configure your alerts only for the issues that arise over time. By observing your cluster over time, you can learn which issues Kubernetes can resolve itself and which issues require alerts to avoid downtime.
 {: shortdesc}
 
-On 15 June 2022, the naming convention for {{site.data.keyword.mon_full}} alerts is changing to a Prometheus compatible format. For more information, see the [Sysdig release notes](https://docs.sysdig.com/en/docs/release-notes/enhanced-metric-store/#new-features-and-enhancements){: external}, [Mapping Legacy Sysdig Kubernetes Metrics with Prometheus Metrics](https://docs.sysdig.com/en/docs/sysdig-monitor/using-monitor/metrics/metrics-library/metrics-and-labels-mapping/mapping-legacy-sysdig-kubernetes-metrics-with-prometheus-metrics/){: external}, and [Mapping Classic Metrics with PromQL](https://docs.sysdig.com/en/docs/sysdig-monitor/using-monitor/metrics/metrics-library/metrics-and-labels-mapping/mapping-classic-metrics-with-promql-metrics/){: external}.
+On 15 June 2022, the naming convention for {{site.data.keyword.mon_full}} alerts is change to a Prometheus compatible format. For more information, see the [Sysdig release notes](https://docs.sysdig.com/en/docs/release-notes/enhanced-metric-store/#new-features-and-enhancements){: external}, [Mapping Legacy Sysdig Kubernetes Metrics with Prometheus Metrics](https://docs.sysdig.com/en/docs/sysdig-monitor/using-monitor/metrics/metrics-library/metrics-and-labels-mapping/mapping-legacy-sysdig-kubernetes-metrics-with-prometheus-metrics/){: external}, and [Mapping Classic Metrics with PromQL](https://docs.sysdig.com/en/docs/sysdig-monitor/using-monitor/metrics/metrics-library/metrics-and-labels-mapping/mapping-classic-metrics-with-promql-metrics/){: external}.
 {: important}
 
 Depending on the size of your cluster, consider setting up alerts on the following levels:
@@ -201,7 +201,6 @@ Depending on the size of your cluster, consider setting up alerts on the followi
 
 Set up [autorecovery](#autorecovery) on your worker nodes to enable your cluster to automatically resolve issues.
 {: tip}
-
 
 
 
@@ -388,6 +387,7 @@ The following metrics are available for {{site.data.keyword.block_storage_is_sho
 
 If your {{site.data.keyword.block_storage_is_short}} volumes are reaching capacity, you can [set up volume expansion](/docs/containers?topic=containers-vpc-block#vpc-block-volume-expand).
 {: tip}
+
 
 
 
