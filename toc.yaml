@@ -298,7 +298,6 @@ toc:
           label: Version history
           topics:
           - cs_versions_overview.md
-          - cs_versions_changelog.md
           - benchmarks_overview.md
           - topicgroup:
               label: Version 1.27

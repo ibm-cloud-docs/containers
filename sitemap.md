@@ -6583,12 +6583,6 @@ subcollection: containers
 
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
 
-[Kubernetes version change logs](/docs/containers?topic=containers-changelog#changelog)
-
-* [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
-
-* [Version change logs](/docs/containers?topic=containers-changelog#change-logs-by-version)
-
 [CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark)
 
 * [Available benchmark versions](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-versions)
