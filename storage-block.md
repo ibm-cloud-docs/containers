@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-18"
+lastupdated: "2023-07-21"
 
 keywords: kubernetes
 
@@ -209,7 +209,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
         If your worker node does not apply the latest patch version, you see an asterisk (`*`) in the **Version** column of your CLI output.
 
-    2. Review the [version change log](/docs/containers?topic=containers-changelog) to find the changes that are in the latest patch version.
+    2. Review the [version change log](/docs/containers?topic=containers-cs_versions) to find the changes that are in the latest patch version.
 
     3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker reload command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) to safely reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage-plan).
 

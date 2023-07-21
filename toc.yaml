@@ -298,7 +298,6 @@ toc:
           label: Version history
           topics:
           - cs_versions_overview.md
-          - cs_versions_changelog.md
           - benchmarks_overview.md
           - topicgroup:
               label: Version 1.27
@@ -560,7 +559,7 @@ toc:
               - ts-ingress-essws.md
               - ts-ingress-essdne.md
               - nested-ctm.md
-              - ts-istio-ingressgateway-pending.md
+              - ts-addon-istio-ingressgateway-pending.md
           - topicgroup:
               label: File Storage
               topics:
@@ -571,6 +570,7 @@ toc:
               - ts-storage-file-app.md
               - ts-storage-file-group-id-fail.md
               - ts-storage-file-nonroot-nfs-mount.md
+              - ts-storage-vpc-file-non-root.md
               - ts-storage-file-nonroot.md
               - ts-storage-file-readonly.md
               - ts-storage-feedback.md

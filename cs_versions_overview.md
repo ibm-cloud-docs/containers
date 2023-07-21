@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-18"
+lastupdated: "2023-07-21"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -163,7 +163,7 @@ If you wait until your cluster is two or more minor versions behind the oldest s
 ## Preparing to update
 {: #prep-up}
 
- Updating a cluster to a new version from the previous version is likely to have an impact on deployed apps. For a complete list of changes, review the [community Kubernetes change logs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG){: external}, [IBM version change logs](/docs/containers?topic=containers-changelog){: external}, and [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
+ Updating a cluster to a new version from the previous version is likely to have an impact on deployed apps. For a complete list of changes, review the [community Kubernetes change logs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG){: external}, [IBM version change logs](/docs/containers?topic=containers-cs_versions), and [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
 
 For actions you should take before and after updating your cluster, see the version information links in [Available {{site.data.keyword.containerlong}} versions](#cs_versions_available).

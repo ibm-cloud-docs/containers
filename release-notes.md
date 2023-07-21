@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-20"
+lastupdated: "2023-07-21"
 
 keywords: kubernetes, release notes
 
@@ -30,6 +30,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-july23}
 
 
+
+### 21 July 2023
+{: #containers-july2123}
+{: release-note}
+
+Cluster autoscaler add-on update command.
+:   You can now use the `ibmcloud ks cluster addon update` command to update your add-on. For more information, see [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-update-addon).
 
 ### 19 July 2023
 {: #containers-july1923}
@@ -2867,7 +2874,7 @@ ALB OAuth Proxy
 {: release-note}
 
 Worker node versions
-:   Worker node fix pack update change log documentation is available. For more information, see [Version change log](/docs/containers?topic=containers-changelog).
+:   Worker node fix pack update change log documentation is available. For more information, see Version change log.
 
 
   
@@ -3103,7 +3110,7 @@ Worker node versions
 
 
 End of support for custom IBM Ingress image
-:   The custom {{site.data.keyword.containerlong_notm}} Ingress image is unsupported. In clusters that were created before 01 December 2020, [migrate any ALBs that continue to run the custom IBM Ingress image to the Kubernetes Ingress image](/docs/containers?topic=containers-managed-ingress-about). Not ready to switch your ALBs to the Kubernetes Ingress image yet? The custom {{site.data.keyword.containerlong_notm}} Ingress image is available as an [open source project](https://github.com/IBM-Cloud/iks-ingress-controller/){: external}. However, this project is not officially supported by {{site.data.keyword.cloud_notm}}, and you are responsible for deploying, managing, and maintaining the Ingress controllers in your cluster.
+:   The custom {{site.data.keyword.containerlong_notm}} Ingress image is unsupported. In clusters that were created before 01 December 2020, migrate any ALBs that continue to run the custom IBM Ingress image to the Kubernetes Ingress image. Not ready to switch your ALBs to the Kubernetes Ingress image yet? The custom {{site.data.keyword.containerlong_notm}} Ingress image is available as an [open source project](https://github.com/IBM-Cloud/iks-ingress-controller/){: external}. However, this project is not officially supported by {{site.data.keyword.cloud_notm}}, and you are responsible for deploying, managing, and maintaining the Ingress controllers in your cluster.
 
 
 
@@ -3687,7 +3694,7 @@ New! Private service endpoint allowlists
 :   You can now control access to your private cloud service endpoint by [creating a subnet allowlist](/docs/containers?topic=containers-access_cluster#private-se-allowlist). Only authorized requests to your cluster master that originate from subnets in the allowlist are permitted through the cluster's private cloud service endpoint.
 
 Private Kubernetes Ingress
-:   Added steps for [privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-managed-ingress-setup).
+:   Added steps for privately exposing apps with ALBs that run the Kubernetes Ingress image.
 
 ### 19 January 2021
 {: #containers-jan1921}
@@ -3887,7 +3894,7 @@ Istio add-on
 {: release-note}
 
 Default Kubernetes Ingress image
-:   In all new {{site.data.keyword.containerlong_notm}} clusters, default application load balancers (ALBs) now run the Kubernetes Ingress image. In existing clusters, ALBs continue to run the previously supported {{site.data.keyword.containerlong_notm}} Ingress image, which is now deprecated. For more information and migration actions, see [Setting up Kubernetes Ingress](/docs/containers?topic=containers-managed-ingress-about).
+:   In all new {{site.data.keyword.containerlong_notm}} clusters, default application load balancers (ALBs) now run the Kubernetes Ingress image. In existing clusters, ALBs continue to run the previously supported {{site.data.keyword.containerlong_notm}} Ingress image, which is now deprecated. For more information and migration actions, see Setting up Kubernetes Ingress.
 
 ## November 2020
 {: #containers-nov20}
@@ -4060,7 +4067,7 @@ Gateway firewalls and Calico policies
 
 
 Ingress classes
-:   Added information about [specifying Ingress classes](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-class) to apply Ingress resources to specific ALBs.
+:   Added information about specifying Ingress classes to apply Ingress resources to specific ALBs.
 
 
 
@@ -4939,7 +4946,7 @@ Istio add-on
 {: release-note}
 
 Managing Ingress ALBs
-:   Added a page for [managing the life cycle of your ALBs](/docs/containers?topic=containers-managed-ingress-about), including information about creating, updating, and moving ALBs.
+:   Added a page for managing the life cycle of your ALBs, including information about creating, updating, and moving ALBs.
 
 
   
@@ -5268,7 +5275,7 @@ Version change log
 {: release-note}
 
 Exposing apps with load balancers or Ingress ALBs
-:   Added quick start pages to help you get up and running with [load balancers](/docs/containers?topic=containers-loadbalancer-qs) and [Ingress ALBs](/docs/containers?topic=containers-managed-ingress-about).
+:   Added quick start pages to help you get up and running with [load balancers](/docs/containers?topic=containers-loadbalancer-qs) and Ingress ALBs.
 
 
 
@@ -5505,7 +5512,7 @@ Calico MTU
 
 
 Creating DNS subdomains for VPC load balancers and private Ingress ALBs
-:   Added steps for [registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns) and for [exposing apps to a private network](/docs/containers?topic=containers-managed-ingress-setup) in VPC clusters.
+:   Added steps for [registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns) and for exposing apps to a private network in VPC clusters.
 
 
 
@@ -6136,7 +6143,7 @@ Popular topics
 {: release-note}
 
 Version change logs
-:   Added [worker node fix pack change logs](/docs/containers?topic=containers-changelog).
+:   Added worker node fix pack change logs.
 
 ### 16 May 2019
 {: #containers-may1619}

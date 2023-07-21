@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-07-20"
+lastupdated: "2023-07-21"
 
 keywords: containers
 subcollection: containers
@@ -245,6 +245,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
+
+    * [21 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2123)
+
+        * Cluster autoscaler add-on update command.
 
     * [19 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1923)
 
@@ -6579,12 +6583,6 @@ subcollection: containers
 
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
 
-[Kubernetes version change logs](/docs/containers?topic=containers-changelog#changelog)
-
-* [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
-
-* [Version change logs](/docs/containers?topic=containers-changelog#change-logs-by-version)
-
 [CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark)
 
 * [Available benchmark versions](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-versions)
@@ -10632,6 +10630,12 @@ subcollection: containers
 [Why does my app fail with a group ID error for NFS file storage permissions?](/docs/containers?topic=containers-root#root)
 
 [Why does my app fail when a non-root user owns the NFS file storage mount path?](/docs/containers?topic=containers-nonroot#nonroot)
+
+[Why does my {{site.data.keyword.filestorage_vpc_short}} deployment fail due to a permissions error?](/docs/containers?topic=containers-ts-storage-vpc-file-non-root#ts-storage-vpc-file-non-root)
+
+* [Create custom storage class and specify the `uid` and `gid` your app needs](/docs/containers?topic=containers-ts-storage-vpc-file-non-root#ts-vpc-new-sc)
+
+* [Edit your app to run as root with `fsGroup: 0`](/docs/containers?topic=containers-ts-storage-vpc-file-non-root#ts-vpc-yaml-sc)
 
 [Why can't I add non-root user access to persistent storage?](/docs/containers?topic=containers-cs_storage_nonroot#cs_storage_nonroot)
 
