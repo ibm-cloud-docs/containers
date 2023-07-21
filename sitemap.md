@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-07-20"
+lastupdated: "2023-07-21"
 
 keywords: containers
 subcollection: containers
@@ -10632,6 +10632,12 @@ subcollection: containers
 [Why does my app fail with a group ID error for NFS file storage permissions?](/docs/containers?topic=containers-root#root)
 
 [Why does my app fail when a non-root user owns the NFS file storage mount path?](/docs/containers?topic=containers-nonroot#nonroot)
+
+[Why does my {{site.data.keyword.filestorage_vpc_short}} deployment fail due to a permissions error?](/docs/containers?topic=containers-ts-storage-vpc-file-non-root#ts-storage-vpc-file-non-root)
+
+* [Create custom storage class and specify the `uid` and `gid` your app needs](/docs/containers?topic=containers-ts-storage-vpc-file-non-root#ts-vpc-new-sc)
+
+* [Edit your app to run as root with `fsGroup: 0`](/docs/containers?topic=containers-ts-storage-vpc-file-non-root#ts-vpc-yaml-sc)
 
 [Why can't I add non-root user access to persistent storage?](/docs/containers?topic=containers-cs_storage_nonroot#cs_storage_nonroot)
 
