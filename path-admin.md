@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-17"
+lastupdated: "2023-07-21"
 
 keywords: kubernetes, containers
 
@@ -178,7 +178,7 @@ Manage your cluster and worker nodes through each phase of the cluster lifecycle
 - **Autoscaling**: [Automatically increase or decrease the number of worker nodes](/docs/containers?topic=containers-cluster-scaling-classic-vpc) based on the sizing needs of your scheduled workloads.
 - **Updating**: Keep your environment up-to-date by frequently [updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update). While you update, refer to these version reference pages:
     - [Version information and update actions](/docs/containers?topic=containers-cs_versions)
-    - [Version change log](/docs/containers?topic=containers-changelog)
+    - [Version change log](/docs/containers?topic=containers-cs_versions)
     - [Fluentd and Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog)
 - **Removing**: [Remove clusters and clean up related resources](/docs/containers?topic=containers-remove).
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-16"
+lastupdated: "2023-07-21"
 
 keywords: kubernetes, infrastructure, rbac, policy, http2, quota, app protocol, application protocol
 
@@ -82,7 +82,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 
 | Category | Description |
 | -------- | ----------- |
-| Ingress ALBs |  \n - The Ingress application load balancer (ALB) can process 32,768 connections per second. If your Ingress traffic exceeds this number,  [scale up the number of ALB replicas](/docs/containers?topic=containers-ingress-alb-manage#scale_albs) in your cluster to handle the increased workload. \n - ALBs that run the [{{site.data.keyword.containerlong_notm}} custom Ingress image](/docs/containers?topic=containers-managed-ingress-about) only: HTTP/2 is not supported. \n - ALBs that run the [{{site.data.keyword.containerlong_notm}} custom Ingress image] (/docs/containers?topic=containers-managed-ingress-about) only: The names of the `ClusterIP` services that expose your apps must be unique across all namespaces in your cluster.  |
+| Ingress ALBs |  \n - The Ingress application load balancer (ALB) can process 32,768 connections per second. If your Ingress traffic exceeds this number,  [scale up the number of ALB replicas](/docs/containers?topic=containers-comm-ingress-annotations) in your cluster to handle the increased workload. \n - ALBs that run the [{{site.data.keyword.containerlong_notm}} custom Ingress image](/docs/containers?topic=containers-managed-ingress-about) only: HTTP/2 is not supported. \n - ALBs that run the [{{site.data.keyword.containerlong_notm}} custom Ingress image] (/docs/containers?topic=containers-managed-ingress-about) only: The names of the `ClusterIP` services that expose your apps must be unique across all namespaces in your cluster.  |
 | Istio managed add-on | See [Istio add-on limitations](/docs/containers?topic=containers-istio-about#istio_limitations). |
 | Network load balancers (NLB)| - You can't update an existing NLB from version 1.0 to 2.0. You must create a new NLB 2.0. \n - You can't create subdomains for private NLBs. \n - You can register up to 128 subdomains. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-using-avatar).  |
 | strongSwan VPN service | See [strongSwan VPN service considerations](/docs/openshift?topic=openshift-vpn#strongswan_limitations). |
