@@ -246,6 +246,10 @@ subcollection: containers
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
 
+    * [21 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2123)
+
+        * Cluster autoscaler add-on update command.
+
     * [19 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1923)
 
         * CLI version `1.0.540` is available.
