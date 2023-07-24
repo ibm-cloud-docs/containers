@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-07-21"
+lastupdated: "2023-07-24"
 
 keywords: containers
 subcollection: containers
@@ -68,10 +68,6 @@ subcollection: containers
 [Benefits and service offerings](/docs/containers?topic=containers-cs_ov#cs_ov)
 
 * [Benefits of using the service](/docs/containers?topic=containers-cs_ov#benefits)
-
-* [Comparison of offerings and their combinations](/docs/containers?topic=containers-cs_ov#differentiation)
-
-* [Comparison of free and standard clusters](/docs/containers?topic=containers-cs_ov#cluster_types)
 
 * [Comparison between {{site.data.keyword.redhat_openshift_notm}} and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes)
 
@@ -245,6 +241,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
+
+    * [24 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2423)
+
+        * Cluster autoscaler add-on version `1.0.9_70`.
+
+        * Static route add-on version `1.0.0_1122`.
 
     * [21 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2123)
 
@@ -3638,7 +3640,7 @@ subcollection: containers
 {: #sitemap_autoscaling_clusters}
 
 
-[Preparing classic and VPC Gen 2 clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#cluster-scaling-classic-vpc)
+[Preparing classic and VPC clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#cluster-scaling-classic-vpc)
 
 * [Understanding scale-up and scale-down](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_about)
 
@@ -7640,6 +7642,8 @@ subcollection: containers
 
 * [Version 1.0.9](/docs/containers?topic=containers-ca_changelog#0109_ca_addon)
 
+    * [Change log for patch update 1.0.9_70, released 24 July 2023](/docs/containers?topic=containers-ca_changelog#10970_ca)
+
     * [Change log for patch update 1.0.9_44, released 22 June 2023](/docs/containers?topic=containers-ca_changelog#10944_ca)
 
 * [Version 1.0.8](/docs/containers?topic=containers-ca_changelog#0108_ca_addon)
@@ -7997,6 +8001,8 @@ subcollection: containers
 [Static route add-on change log](/docs/containers?topic=containers-versions-static-route#versions-static-route)
 
 * [Version 1.0.0](/docs/containers?topic=containers-versions-static-route#v100)
+
+    * [Change log for 1.0.0_1122, released 17 July 2023](/docs/containers?topic=containers-versions-static-route#100_1122)
 
     * [Change log for 1.0.0_649, released 8 September 2021](/docs/containers?topic=containers-versions-static-route#100_649)
 
@@ -10021,8 +10027,6 @@ subcollection: containers
 * [How does {{site.data.keyword.containerlong_notm}} work?](/docs/containers?topic=containers-faqs#kubernetes_service)
 
 * [Why should I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#faq_benefits)
-
-* [Can I get a free cluster?](/docs/containers?topic=containers-faqs#faq_free)
 
 * [What container platforms are available for my cluster?](/docs/containers?topic=containers-faqs#container_platforms)
 
