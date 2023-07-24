@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-26"
+lastupdated: "2023-07-24"
 
 keywords: kubernetes, containers
 
@@ -80,69 +80,6 @@ Secure exposure of apps to the public
 
 {{site.data.keyword.cloud_notm}} service integration
 :   Add extra capabilities to your app through the integration of {{site.data.keyword.cloud_notm}} services, such as {{site.data.keyword.watson}} APIs, Blockchain, data services, or Internet of Things.
-
-
-
-
-
-
-## Comparison of offerings and their combinations
-{: #differentiation}
-
-You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.cloud_notm}} Public, in {{site.data.keyword.cloud_notm}} Private, or in a hybrid setup.
-{: shortdesc}
-
-
-{{site.data.keyword.cloud_notm}} Public, off-premises
-:   With {{site.data.keyword.cloud_notm}} Public on [shared or dedicated](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) hardware or on bare metal machines, you can host your apps in clusters on the cloud by using {{site.data.keyword.containerlong_notm}}. You can also create a cluster with worker pools in multiple zones to increase high availability for your apps. {{site.data.keyword.containerlong_notm}} on {{site.data.keyword.cloud_notm}} Public delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts For more information, see [{{site.data.keyword.containerlong_notm}} technology](/docs/containers?topic=containers-service-arch).
-
-:   You can also create your cluster in a Virtual Private Cloud (VPC), which gives you the security of a private cloud environment with isolated networking features along with the dynamic scalability of the public cloud. For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).
-
-{{site.data.keyword.cloud_notm}} Private, on-premises
-:   {{site.data.keyword.cloud_notm}} Private is an application platform that can be installed locally on your own machines. You might choose to use Kubernetes in {{site.data.keyword.cloud_notm}} Private when you need to develop and manage on-premises, containerized apps in your own controlled environment behind a firewall. For more information, see the [{{site.data.keyword.cloud_notm}} Private product documentation](https://www.ibm.com/docs/en/cloud-private/3.2.x){: external}.
-
-
-
-
-## Comparison of free and standard clusters
-{: #cluster_types}
-
-Review the following table for a comparison of free and standard clusters.
-{: shortdesc}
-
-
-The free cluster option is deprecated and will be unsupported on 25 July 2023. Existing free tier clusters will be allowed to finish their 30-day trial window. If you want to try {{site.data.keyword.containerlong_notm}}, [contact IBM Sales](https://www.ibm.com/account/reg/us-en/signup?formid=MAIL-wcp){: external}.
-{: deprecated}
-
-Free clusters are automatically deleted after 30 days.
-{: note}
-
-If you have a free cluster and want to upgrade to a standard cluster, you can [create a standard cluster](/docs/containers?topic=containers-clusters). Then, [copy your deployment configuration files](/docs/containers?topic=containers-update_app#copy_apps_cluster) from your free cluster into the standard cluster.
-{: tip}
-
-|Characteristics|Free clusters|Standard clusters|
-|---------------|-------------|-----------------|
-|[In-cluster networking](/docs/containers?topic=containers-security#network)|Yes|Yes|
-|[Public network app access by a NodePort service to a non-stable IP address](/docs/containers?topic=containers-nodeport)|Yes|Yes|
-|[User access management](/docs/containers?topic=containers-access-overview#access_policies)|Yes|Yes|
-|[{{site.data.keyword.cloud_notm}} service access from the cluster and apps](/docs/containers?topic=containers-service-binding#bind-services)|Yes|Yes|
-|[Disk space on worker node for non-persistent storage](/docs/containers?topic=containers-storage-plan)|Yes|Yes|
-|[Provision {{site.data.keyword.redhat_openshift_notm}} clusters](/docs/openshift?topic=openshift-getting-started) | | Yes |
-|[Create clusters in a Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial) | | Yes |
-|[Ability to create cluster in every {{site.data.keyword.containerlong_notm}} region](/docs/containers?topic=containers-regions-and-zones)| | Yes |
-|[Multizone clusters to increase app high availability](/docs/containers?topic=containers-ha_clusters#mz-clusters)| |Yes|
-|Replicated masters for higher availability| | Yes |
-|[Scalable number of worker nodes to increase capacity](/docs/containers?topic=containers-cluster-scaling-classic-vpc)| |Yes|
-|[Persistent NFS file-based storage with volumes](/docs/containers?topic=containers-file_storage#file_storage)| |Yes|
-|[Public or private network app access by a network load balancer (NLB) service to a stable IP address](/docs/containers?topic=containers-loadbalancer)| |Yes|
-|[Public network app access by an Ingress service to a stable IP address and customizable URL](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-albs)| |Yes|
-|[Portable public IP addresses](/docs/containers?topic=containers-subnets#review_ip)| |Yes|
-|[Logging and monitoring](/docs/containers?topic=containers-health#logging)| |Yes|
-|[Option to provision your worker nodes on physical (bare metal) servers](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)| |Yes|
-{: caption="Characteristics of free and standard clusters" caption-side="bottom"}
-
-
-
 
 
 ## Comparison between {{site.data.keyword.redhat_openshift_notm}} and community Kubernetes clusters

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-20"
+lastupdated: "2023-07-24"
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
 
@@ -55,19 +55,6 @@ For more information about how your cluster resources are set up, see the [Servi
 {{site.data.keyword.containerlong_notm}} is a managed Kubernetes offering that delivers powerful tools, an intuitive user experience, and built-in security for rapid delivery of apps that you can bind to cloud services that are related to {{site.data.keyword.ibmwatson}}, AI, IoT, DevOps, security, and data analytics. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management. The service also has advanced capabilities around simplified cluster management, container security and isolation policies, the ability to design your own cluster, and integrated operational tools for consistency in deployment.
 
 For a detailed overview of capabilities and benefits, see [Benefits of using the service](/docs/containers?topic=containers-cs_ov#benefits).
-
-
-
-## Can I get a free cluster?
-{: #faq_free}
-{: faq}
-{: support}
-
-The free tier option is deprecated and will be unsupported on 25 July 2023. Existing free tier clusters will be allowed to finish their 30-day trial window. If you want to try {{site.data.keyword.containerlong_notm}}, [contact IBM Sales](https://www.ibm.com/account/reg/us-en/signup?formid=MAIL-wcp){: external}.
-{: deprecated}
-
-You can have 1 free cluster at a time in {{site.data.keyword.containerlong_notm}}, and each free cluster expires in 30 days. Free clusters are ideal for testing out Kubernetes deployments and getting familiar with the {{site.data.keyword.containerlong_notm}} API, CLI, and console tools. After you are done testing your free cluster, you can [copy your configuration files and redeploy them to a standard cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster).
-
 
 
 ## What container platforms are available for my cluster?

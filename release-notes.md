@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-21"
+lastupdated: "2023-07-24"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,19 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## July 2023
 {: #containers-july23}
+
+
+
+### 24 July 2023
+{: #containers-july2423}
+{: release-note}
+
+
+Cluster autoscaler add-on version `1.0.9_70`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+  
+Static route add-on version `1.0.0_1122`.
+:   For more information, see [the change log](/docs/containers?topic=containers-versions-static-route).
 
 
 
