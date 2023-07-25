@@ -34,8 +34,6 @@ subcollection: containers
 
 [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started#getting-started)
 
-* [Creating a free classic cluster in the {{site.data.keyword.cloud_notm}} console](/docs/containers?topic=containers-getting-started#clusters_gs)
-
 * [Creating a VPC cluster in the {{site.data.keyword.cloud_notm}} console](/docs/containers?topic=containers-getting-started#vpc-gen2-gs)
 
 * [Creating classic clusters in the {{site.data.keyword.containerlong_notm}} CLI](/docs/containers?topic=containers-getting-started#clusters_gs_classic_cli)
@@ -44,7 +42,7 @@ subcollection: containers
 
 * [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
 
-    * [Deploying an app to a standard cluster and exposing with a load balancer](/docs/containers?topic=containers-getting-started#deployapp2)
+    * [Deploying and exposing an app with a load balancer](/docs/containers?topic=containers-getting-started#deployapp2)
 
 * [What's next?](/docs/containers?topic=containers-getting-started#whats-next)
 
@@ -241,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
+
+    * [25 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2523)
+
+        * End of support for the free cluster tier 
 
     * [24 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2423)
 

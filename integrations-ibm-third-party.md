@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-20"
+lastupdated: "2023-07-25"
 
 keywords: kubernetes, helm
 
@@ -83,10 +83,6 @@ You can install other open source tools in your cluster, but these tools might n
 Supported integrations depend on the container platform, the infrastructure provider, and the cluster type that you choose. For more information, see [Supported {{site.data.keyword.cloud_notm}} and third-party integrations](/docs/containers?topic=containers-supported_integrations).
 {: note}
 
-### Integrations operated in partnership
-{: #open-source-partners}
-
-For more information about {{site.data.keyword.containerlong_notm}} partners and the benefit of each solution that they provide, see [{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-service-partners).
 
 ### Managed add-ons
 {: #cluster-add-ons}
