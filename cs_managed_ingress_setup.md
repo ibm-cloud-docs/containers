@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-06-22"
+lastupdated: "2023-07-25"
 
 keywords: ingress, expose apps, ingress resource, ALB, domain
 
@@ -110,9 +110,8 @@ Create the Ingress resource to define the routing rules that the Ingress control
     kind: Ingress
     metadata:
       name: my-ingress-resource
-      annotations:
-        kubernetes.io/ingress.class: <ingress_class>
     spec:
+      ingressClassName: nginx-example
       tls:
       - hosts:
         - <domain_name>
@@ -143,6 +142,9 @@ Create the Ingress resource to define the routing rules that the Ingress control
     :   `kubernetes.io/ingress.class`: Specify the Ingress class to apply. The IBM-provided Ingress classes are `"public-iks-k8s-nginx"` for public ALBs and `"private-iks-k8s-nginx"` for private ALBs. 
     :    For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, don't specify this annotation. Instead, find the Ingress class for your configuration, and specify that class in a `spec.ingressClassName: <class_name>` field. You must also specify this custom class in an [`IngressClass`](#ingress-custom-domain) resource and a `ibm-ingress-deploy-config` configmap. To customize routing for Ingress, you can add [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations) (`nginx.ingress.kubernetes.io/<annotation>`). Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are not supported.
 
+    `ingressClassName`
+    :   The Ingress class name. 
+  
     `tls.hosts`
     :   To use TLS, replace `<domain>` with the IBM-provided Ingress subdomain or your custom domain.
 
