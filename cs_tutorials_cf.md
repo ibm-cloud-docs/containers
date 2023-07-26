@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-19"
+lastupdated: "2023-07-26"
 
 keywords: kubernetes
 
@@ -83,7 +83,7 @@ Get your code ready to go. Don't have any code yet? You can download starter cod
         Do not use personal information in any app, container image, or Kubernetes resource names.
         {: note}
 
-        As the app is deployed, instructions for **Download, modify, and redeploy your app with the command line interfac** are displayed.
+        As the app is deployed, instructions for **Download, modify, and redeploy your app with the command line interface** are displayed.
 
     3. From step 1 in the console instructions, click **DOWNLOAD STARTER CODE**.
 
