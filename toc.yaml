@@ -263,6 +263,7 @@ toc:
       - topicgroup:
           label: Enhancing cluster capabilities with integrations
           topics:
+          - integrations-ibm-third-party.md
           - integrations-addons.md
           - integrations-helm.md
           - integrations-svcbind.md
