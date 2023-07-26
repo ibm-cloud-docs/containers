@@ -90,7 +90,7 @@ toc:
               - cluster-scaling-enable.md
               - cluster-scaling-deploy-apps.md
               - cluster-scaling-helm.md
-          - cs_cluster_update.md
+          - update.md
           - performance.md
           - cluster-remove.md
           - host-maintenance.md
@@ -176,10 +176,11 @@ toc:
           topics:
           - app-plan.md
           - images.md
-          - cs_app.md
+          - app.md
           - cs_app_deploy.md
           - nodeport.md
           - app-update.md
+          - kustomize.md
       - topicgroup:
           label: Setting up a service mesh with Istio
           topics:

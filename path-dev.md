@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-25"
+lastupdated: "2023-07-26"
 
 keywords: kubernetes, containers
 
@@ -63,7 +63,7 @@ Configure your app in a YAML file that declares the configuration of the Kuberne
     2. Build app containers from [images in public or private image registries](/docs/containers?topic=containers-images).
     3. Specify your [app requirements in a YAML file](/docs/containers?topic=containers-app#app_yaml), which declares the configuration of the Kubernetes object.
 2. **Version your app**:
-    1. To plan customized configurations for more than one environment, such as development, testing, and production environments, [use the Kustomize tool](/docs/containers?topic=containers-app#kustomize) to manage your configuration YAML file.
+    1. To plan customized configurations for more than one environment, such as development, testing, and production environments, [use the Kustomize tool](/docs/containers?topic=containers-kustomize) to manage your configuration YAML file.
     2. If you want to run your app in multiple clusters, public and private environments, or even multiple cloud providers, [package your application to help automate deployments](/docs/containers?topic=containers-plan_deploy#packaging).
 
 Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-debug_apps).
@@ -175,6 +175,9 @@ Enhance app capabilities by integrating various external services and catalog se
 
 1. **Review supported integrations**:
     - [All supported integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations)
+
+    - [{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-supported_integrations)
+
     - [{{site.data.keyword.cloud_notm}} services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations)
 2. **Add services to your cluster**: Ask your cluster administrator to [add the integration to your cluster](/docs/containers?topic=containers-learning-path-admin#admin_integrate).
 3. **Access services from your app**: Ensure that your app can access the service. For example, to access an IBM Cloud service instance from your app, you must [make the service credentials that are stored in the Kubernetes secret available to your app](/docs/containers?topic=containers-service-binding#adding_app).

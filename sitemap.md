@@ -3494,7 +3494,7 @@ subcollection: containers
 
     * [How do I manage my worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#flavor-manage)
 
-    * [What storage disks options are available on worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#hardware-options)
+    * [What storage options are available on worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#hardware-options)
 
     * [What limitations do I need to be aware of?](/docs/containers?topic=containers-planning_worker_nodes#flavor-limitations)
 
@@ -3710,9 +3710,7 @@ subcollection: containers
 
 [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update#update)
 
-* [Updating the Kubernetes master](/docs/containers?topic=containers-update#master)
-
-    * [About updating the master](/docs/containers?topic=containers-update#master-about)
+* [Updating the master](/docs/containers?topic=containers-update#master)
 
     * [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps)
 
@@ -3741,8 +3739,6 @@ subcollection: containers
     * [Managing automatic updates for Ingress ALBs](/docs/containers?topic=containers-update#alb)
 
 * [Updating managed add-ons](/docs/containers?topic=containers-update#addons)
-
-* [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool)
 
 [Tuning performance](/docs/containers?topic=containers-kernel#kernel)
 
@@ -4773,7 +4769,7 @@ subcollection: containers
 
     * [Default image policies](/docs/containers?topic=containers-images#portieris-default-policies)
 
-[Developing Kubernetes-native apps](/docs/containers?topic=containers-app#app)
+[Developing apps](/docs/containers?topic=containers-app#app)
 
 * [Specifying your app requirements in your YAML file](/docs/containers?topic=containers-app#app_yaml)
 
@@ -4804,8 +4800,6 @@ subcollection: containers
     * [Persistent volumes for container storage](/docs/containers?topic=containers-app#pv)
 
 * [Complete example deployment YAML](/docs/containers?topic=containers-app#yaml-example)
-
-* [Packaging apps for reuse in multiple environments with Kustomize](/docs/containers?topic=containers-app#kustomize)
 
 [Deploying Kubernetes-native apps in clusters](/docs/containers?topic=containers-deploy_app#deploy_app)
 
@@ -4840,6 +4834,8 @@ subcollection: containers
 * [Setting up continuous integration and delivery](/docs/containers?topic=containers-update_app#app_cicd)
 
 * [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
+
+[Packaging apps for reuse in multiple environments with Kustomize](/docs/containers?topic=containers-kustomize#kustomize)
 
 
 ## Setting up a service mesh with Istio

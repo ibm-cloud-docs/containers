@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-26"
+lastupdated: "2023-07-26"
 
 keywords: kubernetes, deploy
 
@@ -320,7 +320,7 @@ The following tips can help you organize your deployment YAML files.
     {: codeblock}
 
 * You can use the `kubectl apply -f` command to apply to an entire directory, not just a single file.
-* Try out the [`kustomize` project](/docs/containers?topic=containers-app#kustomize) that you can use to help write, customize, and reuse your Kubernetes resource YAML configurations.
+* Try out the [`kustomize` project](/docs/containers?topic=containers-kustomize) that you can use to help write, customize, and reuse your Kubernetes resource YAML configurations.
 
 Within the YAML file, you can use labels or annotations as metadata to manage your deployments.
 
@@ -358,7 +358,7 @@ Set up a continuous integration and delivery (CI/CD) pipeline
 
 Package your app configuration files
 :   Package your app with tools like Kustomize or Helm.
-    - With the `kustomize` [project](/docs/containers?topic=containers-app#kustomize), you can write, customize, and reuse your Kubernetes resource YAML configurations.
+    - With the `kustomize` [project](/docs/containers?topic=containers-kustomize), you can write, customize, and reuse your Kubernetes resource YAML configurations.
     - With the [Helm](https://helm.sh/docs/){: external} Kubernetes package manager, you can specify all Kubernetes resources that your app requires in a Helm chart. Then, you can use Helm to create the YAML configuration files and deploy these files in your cluster. You can also [integrate {{site.data.keyword.cloud_notm}}-provided Helm charts](https://cloud.ibm.com/kubernetes/helm){: external} to extend your cluster's capabilities, such as with a block storage plug-in.
         
 Are you looking to create YAML file templates? Some people use Helm to do just that, or you might try out other community tools such as [`ytt`](https://get-ytt.io/){: external}.

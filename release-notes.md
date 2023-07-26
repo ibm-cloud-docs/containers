@@ -6107,7 +6107,7 @@ Ingress ALB change log
 :   Updated the [ALB `nginx-ingress` image to build 467](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 Kustomize
-:   Added an example of [reusing Kubernetes configuration files across multiple environments with Kustomize](/docs/containers?topic=containers-app#kustomize).
+:   Added an example of [reusing Kubernetes configuration files across multiple environments with Kustomize](/docs/containers?topic=containers-kustomize).
 
 Razee
 :   Added [Razee](https://github.com/razee-io/Razee){: external} to the supported integrations to visualize deployment information in the cluster and to automate the deployment of Kubernetes resources. 
@@ -6244,7 +6244,7 @@ Free clusters
 :   Clarified where free clusters are supported.
 
 New! Integrations
-:   Added and restructure information about [{{site.data.keyword.cloud_notm}} services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations) and [popular integrations](/docs/containers?topic=containers-supported_integrations).
+:   Added and restructure information about [{{site.data.keyword.cloud_notm}} services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations), [popular integrations](/docs/containers?topic=containers-supported_integrations), and partnerships.
 
 New! Kubernetes version 1.14
 :   Create or update your clusters to [Kubernetes 1.14](/docs/containers?topic=containers-cs_versions#k8s_version_archive).
