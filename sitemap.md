@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-07-24"
+lastupdated: "2023-07-26"
 
 keywords: containers
 subcollection: containers
@@ -34,8 +34,6 @@ subcollection: containers
 
 [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started#getting-started)
 
-* [Creating a free classic cluster in the {{site.data.keyword.cloud_notm}} console](/docs/containers?topic=containers-getting-started#clusters_gs)
-
 * [Creating a VPC cluster in the {{site.data.keyword.cloud_notm}} console](/docs/containers?topic=containers-getting-started#vpc-gen2-gs)
 
 * [Creating classic clusters in the {{site.data.keyword.containerlong_notm}} CLI](/docs/containers?topic=containers-getting-started#clusters_gs_classic_cli)
@@ -44,7 +42,7 @@ subcollection: containers
 
 * [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
 
-    * [Deploying an app to a standard cluster and exposing with a load balancer](/docs/containers?topic=containers-getting-started#deployapp2)
+    * [Deploying and exposing an app with a load balancer](/docs/containers?topic=containers-getting-started#deployapp2)
 
 * [What's next?](/docs/containers?topic=containers-getting-started#whats-next)
 
@@ -241,6 +239,14 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
+
+    * [26 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2623)
+
+        * Ingress ALB versions `1.6.4_5219_iks`, `1.5.1_5217_iks`, and `1.4.0_5218_iks`
+
+    * [25 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2523)
+
+        * End of support for the free cluster tier 
 
     * [24 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2423)
 
@@ -3488,7 +3494,7 @@ subcollection: containers
 
     * [How do I manage my worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#flavor-manage)
 
-    * [What storage disks options are available on worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#hardware-options)
+    * [What storage options are available on worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#hardware-options)
 
     * [What limitations do I need to be aware of?](/docs/containers?topic=containers-planning_worker_nodes#flavor-limitations)
 
@@ -3704,9 +3710,7 @@ subcollection: containers
 
 [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update#update)
 
-* [Updating the Kubernetes master](/docs/containers?topic=containers-update#master)
-
-    * [About updating the master](/docs/containers?topic=containers-update#master-about)
+* [Updating the master](/docs/containers?topic=containers-update#master)
 
     * [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps)
 
@@ -3735,8 +3739,6 @@ subcollection: containers
     * [Managing automatic updates for Ingress ALBs](/docs/containers?topic=containers-update#alb)
 
 * [Updating managed add-ons](/docs/containers?topic=containers-update#addons)
-
-* [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool)
 
 [Tuning performance](/docs/containers?topic=containers-kernel#kernel)
 
@@ -4767,7 +4769,7 @@ subcollection: containers
 
     * [Default image policies](/docs/containers?topic=containers-images#portieris-default-policies)
 
-[Developing Kubernetes-native apps](/docs/containers?topic=containers-app#app)
+[Developing apps](/docs/containers?topic=containers-app#app)
 
 * [Specifying your app requirements in your YAML file](/docs/containers?topic=containers-app#app_yaml)
 
@@ -4798,8 +4800,6 @@ subcollection: containers
     * [Persistent volumes for container storage](/docs/containers?topic=containers-app#pv)
 
 * [Complete example deployment YAML](/docs/containers?topic=containers-app#yaml-example)
-
-* [Packaging apps for reuse in multiple environments with Kustomize](/docs/containers?topic=containers-app#kustomize)
 
 [Deploying Kubernetes-native apps in clusters](/docs/containers?topic=containers-deploy_app#deploy_app)
 
@@ -4834,6 +4834,8 @@ subcollection: containers
 * [Setting up continuous integration and delivery](/docs/containers?topic=containers-update_app#app_cicd)
 
 * [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
+
+[Packaging apps for reuse in multiple environments with Kustomize](/docs/containers?topic=containers-kustomize#kustomize)
 
 
 ## Setting up a service mesh with Istio
@@ -7066,6 +7068,8 @@ subcollection: containers
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
 
+    * [1.6.4_5219_iks, released 26 July 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5219_iks)
+
     * [1.6.4_5161_iks, released 5 July 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5161_iks)
 
     * [1.6.4_5067_iks, released 6 June 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5067_iks)
@@ -7085,6 +7089,8 @@ subcollection: containers
     * [1.6.4_3864_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3864_iks)
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
+
+    * [1.5.1_5217_iks, released 26 July 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_5217_iks)
 
     * [1.5.1_5160_iks, released 5 July 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_5160_iks)
 
@@ -7115,6 +7121,8 @@ subcollection: containers
     * [1.5.1_3536_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3536_iks)
 
 * [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
+
+    * [1.4.0_5218_iks, released 26 July 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_5218_iks)
 
     * [1.4.0_5159_iks, released 5 July 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_5159_iks)
 

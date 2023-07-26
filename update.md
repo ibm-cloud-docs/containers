@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-21"
+lastupdated: "2023-07-26"
 
-keywords: kubernetes, upgrade, version, update cluster, update worker nodes, update cluster components, update cluster master
+keywords: containers, upgrade, version, update cluster, update worker nodes, update cluster components, update cluster master
 
 subcollection: containers
 
@@ -19,27 +19,19 @@ subcollection: containers
 # Updating clusters, worker nodes, and cluster components
 {: #update}
 
-You can install updates to keep your Kubernetes clusters up-to-date in {{site.data.keyword.containerlong}}.
+Review the following sections for steps to keep your cluster master and worker nodes up-to-date.
 {: shortdesc}
 
-## Updating the Kubernetes master
+## Updating the master
 {: #master}
 
-Periodically, the Kubernetes project releases [major, minor, or patch updates](/docs/containers?topic=containers-cs_versions#update_types). Updates can affect the Kubernetes API server version or other components in your Kubernetes master. IBM updates the patch version, but you must update the master major and minor versions.
-{: shortdesc}
-
-### About updating the master
-{: #master-about}
 
 How do I know when to update the master?
-:   You are notified in the {{site.data.keyword.cloud_notm}} console and CLI when updates are available, and can also check the [supported versions](/docs/containers?topic=containers-cs_versions) page.
+:   You are notified in the console, announcements, and the CLI when updates are available. You can also periodically check the [supported versions page](/docs/containers?topic=containers-cs_versions).
 
 How many versions behind the latest can the master be?
-:   IBM generally supports three versions of Kubernetes at a time. You can update the Kubernetes API server only to the next version ahead of its current version (`n+1`). Additionally, your worker nodes can be up to two versions behind the master version (`n-2`).
+:   You can update the API server only to the next version ahead of its current version (`n+1`). Additionally, your worker nodes can be up to two versions behind the master version (`n-2`)
 
-For example, if your current Kubernetes API server version is 1.18 (`n`) and you want to update to 1.20, you must first update to 1.19 (`n+1`) and then to 1.20 (`n+2`). Next, you can update the worker nodes up to two version ahead, such as 1.18 to 1.20 (`n+2`).
-
-If your cluster runs an unsupported Kubernetes version, follow the [version archive instructions](/docs/containers?topic=containers-cs_versions#k8s_version_archive). To avoid getting in an unsupported state and operational impact, keep your cluster up-to-date.
 
 Can my worker nodes run a later version than the master?
 :   Your worker nodes can't run a later `major.minor` Kubernetes version than the master. Additionally, your worker nodes can be only up to two versions behind the master version (`n-2`). First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster.
@@ -581,97 +573,8 @@ Control when the Ingress application load balancer (ALB) component is updated. F
 
 Managed {{site.data.keyword.containerlong_notm}} add-ons are an easy way to enhance your cluster with open-source capabilities, such as Istio. The version of the open-source tool that you add to your cluster is tested by IBM and approved for use in {{site.data.keyword.containerlong_notm}}. To update managed add-ons that you enabled in your cluster to the latest versions, see [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
 
-## Updating from stand-alone worker nodes to worker pools
-{: #standalone_to_workerpool}
-
-With the introduction of multizone clusters, worker nodes with the same configuration, such as the machine type, are grouped in worker pools. When you create a new cluster, a worker pool that is named `default` is automatically created for you.
-{: shortdesc}
-
-Applies to only classic clusters. VPC clusters always use worker pools.
-{: note}
-
-You can use worker pools to spread worker nodes evenly across zones and build a balanced cluster. Balanced clusters are more available and resilient to failures. If a worker node is removed from a zone, you can rebalance the worker pool and automatically provision new worker nodes to that zone. Worker pools are also used to install Kubernetes version updates to all your worker nodes.  
-
-If you created clusters before multizone clusters became available, your worker nodes are still stand-alone and not automatically grouped into worker pools. You must update these clusters to use worker pools. If not updated, you can't change your single zone cluster to a multizone cluster.
-{: important}
-
-Review the following image to see how your cluster setup changes when you move from stand-alone worker nodes to worker pools.
-
-![Update your cluster from stand-alone worker nodes to worker pools](images/cs_cluster_migrate.png){: caption="Figure 1. Update your cluster from stand-alone worker nodes to worker pools" caption-side="bottom"}
-
-Before you begin:
-- Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the cluster.
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
-
-To update stand-alone worker nodes to worker pools:
-
-1. List existing stand-alone worker nodes in your cluster and note the **ID**, the **Machine Type**, and **Private IP**.
-    ```sh
-    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-2. Create a worker pool and decide on the flavor and the number of worker nodes that you want to add to the pool.
-    ```sh
-    ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
-    ```
-    {: pre}
-
-3. List available zones and decide where you want to provision the worker nodes in your worker pool. To view the zone where your stand-alone worker nodes are provisioned, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`. If you want to spread your worker nodes across multiple zones, choose a [classic](/docs/containers?topic=containers-regions-and-zones#zones-mz) or [VPC](/docs/containers?topic=containers-regions-and-zones#zones-vpc) multizone.
-    ```sh
-    ibmcloud ks zone ls
-    ```
-    {: pre}
-
-4. List available VLANs for the zone that you chose in the previous step. If you don't have a VLAN in that zone yet, the VLAN is automatically created for you when you add the zone to the worker pool.
-    ```sh
-    ibmcloud ks vlan ls --zone <zone>
-    ```
-    {: pre}
-
-5. Add the zone to your worker pool. When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. {{site.data.keyword.containerlong}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.
-    1. **To add a zone to one worker pool**: Replace `<pool_name>` with the name of your worker pool, and fill in the cluster ID, zone, and VLANs with the information you previously retrieved. If you don't have a private and a public VLAN in that zone, don't specify this option. A private and a public VLAN are automatically created for you.
-
-        If you want to use different VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.
-        ```sh
-        ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-        ```
-        {: pre}
-
-    2. **To add the zone to multiple worker pools**: Add multiple worker pools to the `ibmcloud ks zone add classic` command. To add multiple worker pools to a zone, you must have an existing private and public VLAN in that zone. If you don't have a public and private VLAN in that zone, consider adding the zone to one worker pool first so that a public and a private VLAN are created for you. Then, you can add the zone to other worker pools. It is important that the worker nodes in all your worker pools are provisioned into all the zones to ensure that your cluster is balanced across zones. If you want to use different VLANs for different worker pools, repeat this command with the VLAN that you want to use for your worker pool. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
-        ```sh
-        ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> -w <pool_name1> -w <pool_name2> -w <pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-        ```
-        {: pre}
-
-    3. **To add multiple zones to your worker pools**: Repeat the `ibmcloud ks zone add classic` command with a different zone and specify the worker pools that you want to provision in that zone. By adding more zones to your cluster, you change your cluster from a single zone cluster to a [multizone cluster](/docs/containers?topic=containers-ha_clusters#mz-clusters).
-
-6. Wait for the worker nodes to be deployed in each zone.
-    ```sh
-    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-    When the worker node state changes to **Normal** the deployment is finished.
-
-7. Remove your stand-alone worker nodes. If you have multiple stand-alone worker nodes, remove one at a time.
-    1. List the worker nodes in your cluster and compare the private IP address from this command with the private IP address that you retrieved in the beginning to find your stand-alone worker nodes.
-        ```sh
-        kubectl get nodes
-        ```
-        {: pre}
-
-    2. Remove your stand-alone worker node. Use the ID of the worker node that you retrieved with the `ibmcloud ks worker ls --cluster <cluster_name_or_ID>` command.
-        ```sh
-        ibmcloud ks worker rm --cluster <cluster_name_or_ID> --worker <worker_ID>
-        ```
-        {: pre}
-
-    3. Repeat these steps until all your stand-alone worker nodes are removed.
 
 
-What's next?
-:   Now that you updated your cluster to use worker pools, you can, improve availability by adding more zones to your cluster. Adding more zones to your cluster changes your cluster from a single zone cluster to a [multizone cluster](/docs/containers?topic=containers-ha_clusters#ha_clusters). When you change your single zone cluster to a multizone cluster, your Ingress domain changes from `<cluster_name>.<region>.containers.mybluemix.net` to `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. The existing Ingress domain is still valid and can be used to send requests to your apps.
 
 
 

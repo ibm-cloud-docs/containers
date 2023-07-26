@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-07"
+lastupdated: "2023-07-25"
 
 keywords: kubernetes, containers
 
@@ -28,56 +28,13 @@ First, create a cluster in the {{site.data.keyword.cloud_notm}} console or {{sit
 To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {{site.data.keyword.cloud_notm}} account](/docs/account?topic=account-upgrading-account) where you are the owner or have [full Administrator access](/docs/account?topic=account-assign-access-resources).
 {: note}
 
-## Creating a free classic cluster in the {{site.data.keyword.cloud_notm}} console
-{: #clusters_gs}
-{: ui}
-
-The free tier option is deprecated and will be unsupported on 25 July 2023. Existing free tier clusters will be allowed to finish their 30-day trial window. If you want to try {{site.data.keyword.containerlong_notm}}, [contact IBM Sales](https://www.ibm.com/account/reg/us-en/signup?formid=MAIL-wcp){: external}.
-{: deprecated}
-
-
-1. In the [{{site.data.keyword.cloud_notm}} **Catalog**](https://cloud.ibm.com/catalog?category=containers){: external}, select **Kubernetes Service**. A cluster configuration page opens.
-2. From the plan dropdown, select the **Free** cluster option.
-3. Give your cluster a unique name, such as `mycluster-free`.
-4. Select a resource group to create the cluster in, such as `default`.
-5. In the **Summary** pane, review the order summary and then click **Create**. A worker pool is created that contains one worker node in the default resource group.
-
-The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
-
 
 ## Creating a VPC cluster in the {{site.data.keyword.cloud_notm}} console
 {: #vpc-gen2-gs}
 {: ui}
 
 Create a standard VPC cluster by using the {{site.data.keyword.cloud_notm}} console. For more detailed information about your cluster customization options, see [Creating a standard VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
-{: shortdesc}
 
-VPC clusters can be created as standard clusters only, and as such incur costs. Be sure to review the order summary at the end of this tutorial to review the costs for your cluster. To keep your costs to a minimum, set up your cluster as a single zone cluster with one worker node only.
-{: important}
-
-1. Create a Virtual Private Cloud (VPC) on generation 2 compute.
-    1. Navigate to the [VPC create console](https://cloud.ibm.com/vpc/provision/vpc){: external}.
-    2. Give the VPC a name and select a resource group to deploy the VPC into.
-    3. Give the VPC subnet a name and select the location where you want to create the cluster.
-    4. Attach a public gateway to your subnet so that you can access public endpoints from your cluster. This public gateway is used later on to access container images from Docker Hub.
-    5. Click **Create virtual private cloud**.
-2. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
-3. Configure your VPC environment.
-    1. Select the **Standard** plan.
-    2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.26 or later**.
-    3. Select **VPC** infrastructure.
-    4. From the **Virtual private cloud** drop-down menu, select the VPC that you created earlier.
-4. Configure the **Location** details for your cluster.
-    1. Select the **Resource group** that you want to create your cluster in. You can't change the resource group later.
-    2. Select the zones to create your cluster in. The zones are filtered based on the VPC that you selected, and include the subnets that you previously created.
-5. Configure your **Worker pool** setup.
-    1. If you want a larger size for your worker nodes, click **Change flavor**. Otherwise, leave the default **4 vCPUs / 16 GB** flavor selected.
-    2. Set how many worker nodes to create per zone, such as **2**.
-6. Review the rest of the cluster details, such as the service endpoint, cluster name, and tags.
-7. In the **Summary** pane, review your order summary and then click **Create**.
-
-
-The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
 
 ## Creating classic clusters in the {{site.data.keyword.containerlong_notm}} CLI
 {: #clusters_gs_classic_cli}
@@ -140,12 +97,12 @@ ibmcloud ks zone add vpc-gen2 --zone <zone> --cluster <cluster_name_or_ID> --wor
 ## Deploying an app to your cluster
 {: #deploy-app}
 
-After you create a [classic](#clusters_gs) or a [VPC](#vpc-gen2-gs) cluster with a public gateway, deploy your first app. You can use a sample `websphere-liberty` Java application server that IBM provides and deploy the app to your cluster by using the Kubernetes dashboard.
+After you create a cluster, deploy your first app. You can use a sample `websphere-liberty` Java application server that IBM provides and deploy the app to your cluster by using the Kubernetes dashboard.
 {: shortdesc}
 
 The [Kubernetes dashboard](https://github.com/kubernetes/dashboard){: external} is a web console component that is provided by the open source community and installed in your cluster by default. Use the Kubernetes dashboard to manage Kubernetes resources that are within your cluster, such as pods, services, and namespaces. Not sure what all these Kubernetes resources mean? Check out the overview for [container](/docs/containers?topic=containers-overview) and [Kubernetes](/docs/containers?topic=containers-overview) concepts.
 
-### Deploying an app to a standard cluster and exposing with a load balancer
+### Deploying and exposing an app with a load balancer
 {: #deployapp2}
 
 Follow the steps to deploy an example `websphere-liberty` to your standard cluster.

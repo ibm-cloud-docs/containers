@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-04-06"
+lastupdated: "2023-07-26"
 
 keywords: ingress, alb, application load balancer, nginx, ingress controller, network traffic, exposing apps
 
@@ -48,7 +48,7 @@ The default Ingress domain is used to form a unique URL for each app in your clu
 You can also [create or add your own domain](/docs/containers?topic=containers-ingress-domains) registered with IBM Cloud's internal domain provider, or a domain registered with an external provider. Currently, {{site.data.keyword.cloud_notm}} supports external domains registered with {{site.data.keyword.cis_full_notm}}, Akamai, or Cloudflare.
 {: tip}
 
- Private ALBs do not reference the IBM-provided Ingress subdomain and instead require a [custom domain](/docs/containers?topic=containers-managed-ingress-setup#ingress-custom-domain).
+Private ALBs do not reference the IBM-provided Ingress subdomain and instead require a [custom domain](/docs/containers?topic=containers-managed-ingress-setup#ingress-custom-domain).
 {: note}
 
 The subdomain is registered in the following format.

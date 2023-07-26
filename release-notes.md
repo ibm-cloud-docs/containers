@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-24"
+lastupdated: "2023-07-26"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,28 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## July 2023
 {: #containers-july23}
+
+
+
+### 26 July 2023
+{: #containers-july2623}
+{: release-note} 
+
+Ingress ALB versions `1.6.4_5219_iks`, `1.5.1_5217_iks`, and `1.4.0_5218_iks`
+:   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
+
+
+
+### 25 July 2023
+{: #containers-july2523}
+{: release-note}
+
+
+End of support for the free cluster tier 
+:   As announced on [23 June 2023](#containers-jun2323), the free cluster option is no longer available. Existing free tier clusters will be allowed to finish their 30-day trial window. If you want to continue testing {{site.data.keyword.containerlong_notm}}, try creating a [Classic cluster](/docs/containers?topic=containers-cluster-create-classic). Then [copy your deployments to the new cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster).
+
 
 
 
@@ -6085,7 +6107,7 @@ Ingress ALB change log
 :   Updated the [ALB `nginx-ingress` image to build 467](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
 
 Kustomize
-:   Added an example of [reusing Kubernetes configuration files across multiple environments with Kustomize](/docs/containers?topic=containers-app#kustomize).
+:   Added an example of [reusing Kubernetes configuration files across multiple environments with Kustomize](/docs/containers?topic=containers-kustomize).
 
 Razee
 :   Added [Razee](https://github.com/razee-io/Razee){: external} to the supported integrations to visualize deployment information in the cluster and to automate the deployment of Kubernetes resources. 
@@ -6222,7 +6244,7 @@ Free clusters
 :   Clarified where free clusters are supported.
 
 New! Integrations
-:   Added and restructure information about [{{site.data.keyword.cloud_notm}} services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations), [popular integrations](/docs/containers?topic=containers-supported_integrations), and [partnerships](/docs/containers?topic=containers-service-partners).
+:   Added and restructure information about [{{site.data.keyword.cloud_notm}} services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations), [popular integrations](/docs/containers?topic=containers-supported_integrations), and partnerships.
 
 New! Kubernetes version 1.14
 :   Create or update your clusters to [Kubernetes 1.14](/docs/containers?topic=containers-cs_versions#k8s_version_archive).

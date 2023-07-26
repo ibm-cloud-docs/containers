@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-11"
+lastupdated: "2023-07-25"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, classic, create
 
@@ -264,7 +264,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 Classic cluster, shared virtual machine
 
 ```sh
-ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3
 ```
 {: pre}
 

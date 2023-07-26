@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-08"
+lastupdated: "2023-07-26"
 
 keywords: kubernetes
 
@@ -225,7 +225,7 @@ To see a list of supported integrations and steps for setting up a continuous de
 ## Copying deployments to another cluster
 {: #copy_apps_cluster}
 
-When you use a [version control system such as Git](/docs/containers?topic=containers-plan_deploy#deploy_organize), configuration management projects such as [`kustomize`](/docs/containers?topic=containers-app#kustomize), or continuous delivery tools such as [Razee](https://razee.io/){: external} in your cluster, you can deploy your app configuration files quickly from cluster to cluster. Sometimes you have only a few deployments that you tested in a cluster and prefer to copy these deployments and redeploy in another cluster. For example, you might use a free, classic infrastructure Kubernetes cluster for a proof of concept that you did not manage in Git. Now, you are ready to take this proof of concept and deploy it to a standard cluster that runs {{site.data.keyword.redhat_openshift_notm}} or on VPC infrastructure.
+When you use a [version control system such as Git](/docs/containers?topic=containers-plan_deploy#deploy_organize), configuration management projects such as [`kustomize`](/docs/containers?topic=containers-kustomize), or continuous delivery tools such as [Razee](https://razee.io/){: external} in your cluster, you can deploy your app configuration files quickly from cluster to cluster. Sometimes you have only a few deployments that you tested in a cluster and prefer to copy these deployments and redeploy in another cluster. For example, you might use a free, classic infrastructure Kubernetes cluster for a proof of concept that you did not manage in Git. Now, you are ready to take this proof of concept and deploy it to a standard cluster that runs {{site.data.keyword.redhat_openshift_notm}} or on VPC infrastructure.
 {: shortdesc}
 
 Before you begin, you need two clusters and the **Manager** [service access role](/docs/containers?topic=containers-users#checking-perms) for all namespaces in both clusters so that you can copy all the resources from one cluster and deploy them to another.

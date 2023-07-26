@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-20"
+lastupdated: "2023-07-26"
 
 keywords: kubernetes, helm
 
@@ -86,7 +86,8 @@ Supported integrations depend on the container platform, the infrastructure prov
 ### Integrations operated in partnership
 {: #open-source-partners}
 
-For more information about {{site.data.keyword.containerlong_notm}} partners and the benefit of each solution that they provide, see [{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-service-partners).
+Review the [{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-supported_integrations) and the benefit of each solution that they provide.
+
 
 ### Managed add-ons
 {: #cluster-add-ons}

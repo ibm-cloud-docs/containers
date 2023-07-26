@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-07"
+lastupdated: "2023-07-26"
 
 keywords: kubernetes, vlan
 
@@ -216,9 +216,8 @@ Removing all workers from a VLAN removes the IP address of the Ingress ALB in th
 
 
 
-Before you begin 
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
-- If your worker nodes are stand-alone (not part of a worker pool), [update them to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
+[Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
+
 
 To change the VLANs that a worker pool uses to provision worker nodes.
 
