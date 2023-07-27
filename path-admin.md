@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-26"
+lastupdated: "2023-07-27"
 
 keywords: kubernetes, containers
 
@@ -36,7 +36,7 @@ Start by designing a cluster for maximum availability and capacity for your work
     2. Plan your [security strategy](/docs/containers?topic=containers-security#network_segmentation), such as ensuring network segmentation and workload isolation.
 
 2. **Cluster setup**: After you plan your environment, plan the setup for a specific cluster.
-    1. Choose a [supported infrastructure provider](/docs/containers?topic=containers-infrastructure_providers).
+    1. Choose a [supported infrastructure provider](/docs/containers?topic=containers-overview#what-compute-infra-is-offered).
     2. Plan your [cluster network setup](/docs/containers?topic=containers-plan_clusters).
     3. Plan your cluster for [high availability](/docs/containers?topic=containers-ha_clusters).
     4. Plan your [worker node setup](/docs/containers?topic=containers-planning_worker_nodes).
@@ -176,7 +176,7 @@ Need help? Check out [Troubleshooting apps and integrations](/docs/containers?to
 Manage your cluster and worker nodes through each phase of the cluster lifecycle.
 {: shortdesc}
 
-- **Autoscaling**: [Automatically increase or decrease the number of worker nodes](/docs/containers?topic=containers-cluster-scaling-classic-vpc) based on the sizing needs of your scheduled workloads.
+- **Autoscaling**: [Automatically increase or decrease the number of worker nodes](/docs/containers?topic=containers-cluster-scaling-install-addon) based on the sizing needs of your scheduled workloads.
 - **Updating**: Keep your environment up-to-date by frequently [updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update). While you update, refer to these version reference pages:
     - [Version information and update actions](/docs/containers?topic=containers-cs_versions)
     - [Version change log](/docs/containers?topic=containers-cs_versions)

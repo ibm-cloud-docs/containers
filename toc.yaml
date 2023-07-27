@@ -15,13 +15,8 @@ toc:
       id: learn
       topics:
       - getting-started.md
-      - topicgroup:
-          label: About
-          topics:
-          - overview.md
-          - why-benefits.md
-          - providers.md
-          - responsibilities.md
+      - overview.md
+      - responsibilities.md
       - topicgroup:
           label: Use cases
           topics:
@@ -62,6 +57,7 @@ toc:
           - cluster-plan-network.md
           - cluster-plan-network-vpc.md
           - cluster-plan-network-classic.md
+          - storage-plan.md
           - cluster-plan-ha.md
           - worker-plan.md
       - topicgroup:
@@ -82,14 +78,6 @@ toc:
           topics:
           - worker-add.md
           - dedicated-hosts.md
-          - topicgroup: 
-              label: Autoscaling clusters
-              topics:
-              - cluster-scaling-classic-vpc.md
-              - cluster-scaling-install-addon.md
-              - cluster-scaling-enable.md
-              - cluster-scaling-deploy-apps.md
-              - cluster-scaling-helm.md
           - update.md
           - performance.md
           - cluster-remove.md
@@ -159,6 +147,13 @@ toc:
               - vpc-vpn.md
           - static-routes.md
           - cs_dns.md
+      - topicgroup: 
+          label: Autoscaling clusters
+          topics:
+          - cluster-scaling-classic-vpc.md
+          - cluster-scaling-install-addon.md
+          - cluster-scaling-enable.md
+          - cluster-scaling-deploy-apps.md
       - topicgroup:
           label: Logging and monitoring
           topics:
@@ -217,7 +212,6 @@ toc:
               topics:
               - secrets.md
               - secrets-mgr.md
-      - storage-plan.md
       - storage-file.md
       - storage-block.md
       - topicgroup:
@@ -234,6 +228,7 @@ toc:
           topics:
           - storage-block-vpc.md
           - storage-block-vpc-snapshot.md
+          - storage-block-vpc-configmap.md
           - storage-block-vpc-trusted-profiles.md
           - storage-block-vpc-unmanaged.md
           - storage-block-vpc-remove.md
