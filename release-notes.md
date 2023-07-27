@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-26"
+lastupdated: "2023-07-27"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## July 2023
 {: #containers-july23}
+
+
+
+### 27 July 2023
+{: #containers-july2723}
+{: release-note}
+
+Istio add-on version `1.16.6`, `1.17.4`, and `1.18.1 `.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
 
 
 
