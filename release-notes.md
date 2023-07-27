@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-26"
+lastupdated: "2023-07-27"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,25 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## July 2023
 {: #containers-july23}
+
+### 27 July 2023
+{: #containers-july2623}
+{: release-note}
+
+{{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1.6`
+:   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+
+
+
+
+### 27 July 2023
+{: #containers-july2723}
+{: release-note}
+
+Istio add-on version `1.16.6`, `1.17.4`, and `1.18.1 `.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
 
 
 
@@ -71,7 +90,7 @@ Static route add-on version `1.0.0_1122`.
 {: release-note}
 
 Cluster autoscaler add-on update command.
-:   You can now use the `ibmcloud ks cluster addon update` command to update your add-on. For more information, see [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-update-addon).
+:   You can now use the `ibmcloud ks cluster addon update` command to update your add-on. For more information, see [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-install-addon-update-addon).
 
 ### 19 July 2023
 {: #containers-july1923}
@@ -218,7 +237,7 @@ Istio add-on version `1.17.3`.
 {: release-note} 
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.16_127` and `5.1.11_126`.
-:   This patch introduces two new variables to the `addon-vpc-block-csi-driver-configmap`. To get the latest snapshot configmap values users must add the new values to the existing configmap and apply the changes. For more information, see [Customizing snapshots](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-customize-snapshot) and [the add-on change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   This patch introduces two new variables to the `addon-vpc-block-csi-driver-configmap`. To get the latest snapshot configmap values users must add the new values to the existing configmap and apply the changes. For more information, see [Customizing snapshots](/docs/containers?topic=containers-vpc-volume-snapshot) and [the add-on change log](/docs/containers?topic=containers-vpc_bs_changelog).
 
 
 
@@ -2173,7 +2192,7 @@ Maintenance Windows for {{site.data.keyword.containershort}} ALBs
 
 Cluster autoscaler
 :   Version [1.0.5_415](/docs/containers?topic=containers-ca_changelog) is available.
-:   New pages for [Preparing your cluster for autoscaling](/docs/openshift?topic=openshift-cluster-scaling-classic-vpc), [Installing the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon), and [Enabling autoscaling](/docs/containers?topic=containers-cluster-scaling-enable).
+:   New pages for [Preparing your cluster for autoscaling](/docs/openshift?topic=openshift-cluster-scaling-install-addon), [Installing the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon), and [Enabling autoscaling](/docs/containers?topic=containers-cluster-scaling-install-addon-enable).
 :   New troubleshooting pages for [resizing worker pools](/docs/containers?topic=containers-ts-ca-resize) and updating [unbalanced worker pools](/docs/containers?topic=containers-ts-ca-unbalanced) in autoscaled clusters. 
 
 
@@ -4329,7 +4348,7 @@ CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 1.0.157](/docs/containers?topic=containers-cs_cli_changelog#10).
 
 Cluster autoscaler
-:   The [cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc) is available as a managed add-on. The cluster autoscaler Helm chart is deprecated. Migrate your autoscaled worker pools to use the add-on.
+:   The [cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-install-addon) is available as a managed add-on. The cluster autoscaler Helm chart is deprecated. Migrate your autoscaled worker pools to use the add-on.
 
 New! Community Kubernetes Ingress support
 :   The Ingress ALBs in your cluster can now run the Kubernetes Ingress image, which is built on the community Kubernetes project's implementation of the NGINX Ingress controller. To use the Kubernetes Ingress image, you create your Ingress resources and ConfigMaps according to the Kubernetes Ingress format, including community Kubernetes Ingress annotations instead of custom {{site.data.keyword.containerlong_notm}} annotations. 
@@ -4687,7 +4706,7 @@ New! Virtual Private Cloud Generation 2
 :   You can now create standard Kubernetes clusters in your [Gen 2 Virtual Private Cloud (VPC)](/docs/vpc?topic=vpc-getting-started). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.
 
 :   For more information, check out the following links. 
-    - [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)
+    - [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-overview#what-compute-infra-is-offered)
     - [Supported virtual machine flavors for VPC Gen 2 worker nodes](/docs/containers?topic=containers-planning_worker_nodes#vm)
     - [New VPC Gen 2 commands for the CLI](/docs/containers?topic=containers-kubernetes-service-cli)
     - [VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
@@ -4784,7 +4803,7 @@ Ingress troubleshooting
 {: release-note}
 
 Cluster and worker node quotas
-:   Now, each region in your {{site.data.keyword.cloud_notm}} account has quotas for {{site.data.keyword.containershort}} clusters and workers. You can have **100 clusters** and **500 worker nodes** across clusters per region and per [infrastructure provider](/docs/containers?topic=containers-infrastructure_providers). With quotas in place, your account is better protected from accidental requests or billing surprises. Need more clusters? No problem, just [contact IBM Support](/docs/get-support?topic=get-support-using-avatar). In the support case, include the new cluster or worker node quota limit for the region and infrastructure provider that you want. For more information, see the [Service limitations](/docs/containers?topic=containers-limitations).
+:   Now, each region in your {{site.data.keyword.cloud_notm}} account has quotas for {{site.data.keyword.containershort}} clusters and workers. You can have **100 clusters** and **500 worker nodes** across clusters per region and per [infrastructure provider](/docs/containers?topic=containers-overview#what-compute-infra-is-offered). With quotas in place, your account is better protected from accidental requests or billing surprises. Need more clusters? No problem, just [contact IBM Support](/docs/get-support?topic=get-support-using-avatar). In the support case, include the new cluster or worker node quota limit for the region and infrastructure provider that you want. For more information, see the [Service limitations](/docs/containers?topic=containers-limitations).
 
 ### 29 April 2020
 {: #containers-april2920}
@@ -5339,7 +5358,7 @@ CLI change log
 :   Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in change log page for the [release of version 0.4.61](/docs/containers?topic=containers-cs_cli_changelog).
 
 Cluster autoscaling for VPC clusters
-:   You can [set up the cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-helm) on clusters that run on the first generation of compute for Virtual Private Cloud (VPC).
+:   You can set up the cluster autoscaler on clusters that run on the first generation of compute for Virtual Private Cloud (VPC).
 
 New! Reservations and limits for PIDs
 :   Worker nodes that run Kubernetes version 1.14 or later set [process ID (PID) reservations and limits that vary by flavor](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node), to help prevent malicious or runaway apps from consuming all available PIDs.
@@ -5747,7 +5766,7 @@ Version change logs
 {: release-note}
 
 Cluster autoscaler
-:   With the latest version of the cluster autoscaler, you can [enable autoscaling for worker pools during the Helm chart installation](/docs/containers?topic=containers-cluster-scaling-helm) instead of modifying the config map after installation.
+:   With the latest version of the cluster autoscaler, you can enable autoscaling for worker pools during the Helm chart installation instead of modifying the config map after installation.
 
 Ingress ALB change log
 :   Updated the ALB [`nginx-ingress` image to build 524 and `ingress-auth` image to build 337](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog).
@@ -5788,7 +5807,7 @@ Ingress ALB change log
 New! Virtual Private Cloud
 :   You can create standard Kubernetes clusters on classic infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your Virtual Private Cloud. VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. Classic on VPC clusters are available for only standard, Kubernetes clusters and are not supported in free or {{site.data.keyword.redhat_openshift_notm}} clusters.
 :   With classic clusters in VPC, {{site.data.keyword.containerlong_notm}} introduces version 2 of the API, which supports multiple infrastructure providers for your clusters. Your cluster network setup also changes, from worker nodes that use public and private VLANs and the public cloud service endpoint to worker nodes that are on a private subnet only and have the private cloud service endpoint enabled. For more information, check out the following links.
-    - [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)
+    - [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-overview#what-compute-infra-is-offered)
     - [About the v2 API](/docs/containers?topic=containers-cs_api_install#api_about)
     - [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_vpc_basics)
     

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-27"
+lastupdated: "2023-07-27"
 
 keywords: kubernetes, allowlist, ips
 
@@ -273,7 +273,7 @@ To permit egress to your cluster from another service, modify that service's all
 {: shortdesc}
 
 1. Get the worker node subnets or the worker node IP addresses.
-    * **Worker node subnet CIDRs**: If you anticipate changing the number of worker nodes in your cluster frequently, such as if you enable the [cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc), you might not want to update your allowlist for each new worker node. Instead, you can add the VPC subnets that the cluster uses. Keep in mind that the VPC subnet might be shared by worker nodes in other clusters.
+    * **Worker node subnet CIDRs**: If you anticipate changing the number of worker nodes in your cluster frequently, such as if you enable the [cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-install-addon), you might not want to update your allowlist for each new worker node. Instead, you can add the VPC subnets that the cluster uses. Keep in mind that the VPC subnet might be shared by worker nodes in other clusters.
         1. Get the **Worker Zones** and **VPCs** that your cluster is created in.
             ```sh
             ibmcloud ks cluster get -c <cluster>

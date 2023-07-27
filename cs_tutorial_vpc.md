@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-07"
+lastupdated: "2023-07-27"
 
 keywords: kubernetes
 
@@ -30,7 +30,7 @@ completion-time: 30m
 Create an {{site.data.keyword.containerlong}} cluster in your Virtual Private Cloud (VPC).
 {: shortdesc}
 
-With **{{site.data.keyword.containerlong_notm}} clusters on VPC**, you can create your cluster in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
+With **{{site.data.keyword.containerlong_notm}} clusters on VPC**, you can create your cluster in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-overview), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
 
 ## Objectives
 {: #vpc_ks_objectives}
@@ -418,7 +418,6 @@ Now that you have a VPC cluster, learn more about what you can do.
 {: shortdesc}
 
 * [Setting up block storage for your apps](/docs/containers?topic=containers-vpc-block)
-* [Overview of the differences between classic and VPC clusters](/docs/containers?topic=containers-infrastructure_providers)
 * [VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
 * [About the v2 API](/docs/containers?topic=containers-cs_api_install#api_about)
 

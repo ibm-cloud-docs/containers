@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-07-26"
+lastupdated: "2023-07-27"
 
 keywords: containers
 subcollection: containers
@@ -47,8 +47,8 @@ subcollection: containers
 * [What's next?](/docs/containers?topic=containers-getting-started#whats-next)
 
 
-## About
-{: #sitemap_about}
+## Understanding {{site.data.keyword.containerlong_notm}}
+{: #sitemap_understanding_}
 
 
 [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-overview#overview)
@@ -61,15 +61,16 @@ subcollection: containers
 
 * [What compute host infrastructure does the service offer?](/docs/containers?topic=containers-overview#what-compute-infra-is-offered)
 
+* [What are the benefits of using the service?](/docs/containers?topic=containers-overview#benefits)
+
+* [Comparison between {{site.data.keyword.redhat_openshift_notm}} and community Kubernetes clusters](/docs/containers?topic=containers-overview#openshift_kubernetes)
+
 * [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
 
-[Benefits and service offerings](/docs/containers?topic=containers-cs_ov#cs_ov)
 
-* [Benefits of using the service](/docs/containers?topic=containers-cs_ov#benefits)
+## Your responsibilities with using {{site.data.keyword.containerlong_notm}}
+{: #sitemap_your_responsibilities_with_using_}
 
-* [Comparison between {{site.data.keyword.redhat_openshift_notm}} and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes)
-
-[Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers)
 
 [Your responsibilities with using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
 
@@ -239,6 +240,14 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
+
+    * [27 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2623)
+
+        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1.6`
+
+    * [27 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2723)
+
+        * Istio add-on version `1.16.6`, `1.17.4`, and `1.18.1 `.
 
     * [26 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2623)
 
@@ -3446,6 +3455,14 @@ subcollection: containers
 
     * [External communication to apps that run on worker nodes for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-external)
 
+[Understanding your storage options](/docs/containers?topic=containers-storage-plan#storage-plan)
+
+* [Non-persistent storage options](/docs/containers?topic=containers-storage-plan#storage-plan-non-persistent)
+
+* [Single zone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-single-zone)
+
+* [Multizone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-multizone)
+
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
 
 * [Single zone clusters](/docs/containers?topic=containers-ha_clusters#single_zone)
@@ -3640,73 +3657,6 @@ subcollection: containers
 * [Removing dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-hosts-cli)
 
 * [Removing dedicated hosts pools in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-host-pool-cli)
-
-
-### Autoscaling clusters
-{: #sitemap_autoscaling_clusters}
-
-
-[Preparing classic and VPC clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#cluster-scaling-classic-vpc)
-
-* [Understanding scale-up and scale-down](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_about)
-
-* [Following scalable deployment practices](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices)
-
-    * [Can I autoscale multiple worker pools at once?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-multiple)
-
-    * [How can I make sure that the cluster autoscaler responds to what resources my app needs?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-resrequests)
-
-    * [Can I scale down a worker pool to zero (0) nodes?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-zero)
-
-    * [Can I optimize my deployments for autoscaling?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-apps)
-
-    * [Can I use taints and tolerations with autoscaled worker pools?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-taints)
-
-* [Rebalancing or resizing autoscaled worker pools](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_update_worker_node_pool)
-
-* [Preparing classic or VPC Gen 2 clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#prepare-autoscale-classic-vpc)
-
-[Enabling the cluster autoscaler add-on in your cluster](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-install-addon)
-
-* [Enabling the cluster autoscaler add-on from the console](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-enable-console)
-
-* [Enabling the cluster autoscaler add-on from the CLI](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-enable-CLI)
-
-* [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-update-addon)
-
-* [Removing the cluster autoscaler add-on from the console](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-remove-console)
-
-* [Removing the cluster autoscaler add-on from the CLI](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-remove-cli)
-
-* [Cluster autoscaler add-on parameter reference](/docs/containers?topic=containers-cluster-scaling-install-addon#ca_addon_ref)
-
-[Setting up autoscaling for your worker pools](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-enable)
-
-* [Customizing the cluster autoscaler configuration values](/docs/containers?topic=containers-cluster-scaling-enable#ca_customize)
-
-    * [Customizing the cluster autoscaler add-on ConfigMap](/docs/containers?topic=containers-cluster-scaling-enable#cluster-scaling-customize)
-
-[Deploying apps to worker pools where autoscaling is enabled](/docs/containers?topic=containers-cluster-scaling-deploy-apps#cluster-scaling-deploy-apps)
-
-* [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-cluster-scaling-deploy-apps#ca_scaleup)
-
-* [Pause pods](/docs/containers?topic=containers-cluster-scaling-deploy-apps#pause-pods-ca)
-
-* [Horizontal pod autoscaling (HPA)](/docs/containers?topic=containers-cluster-scaling-deploy-apps#hpca)
-
-[(Deprecated) Installing the cluster autoscaler Helm chart in your cluster](/docs/containers?topic=containers-cluster-scaling-helm#cluster-scaling-helm)
-
-* [Customizing the cluster autoscaler Helm chart values](/docs/containers?topic=containers-cluster-scaling-helm#ca_chart_values)
-
-* [Upgrading a cluster autoscaler Helm chart release](/docs/containers?topic=containers-cluster-scaling-helm#ca_helm_up)
-
-    * [Prerequisites](/docs/containers?topic=containers-cluster-scaling-helm#ca_helm_up_prereqs)
-
-    * [Upgrading the cluster autoscaler release version](/docs/containers?topic=containers-cluster-scaling-helm#ca_helm_up_general)
-
-* [Removing the cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-helm#ca_rm)
-
-* [Cluster autoscaler Helm chart parameter reference](/docs/containers?topic=containers-cluster-scaling-helm#ca_helm_ref)
 
 [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update#update)
 
@@ -4571,6 +4521,57 @@ subcollection: containers
     * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
 
+## Autoscaling clusters
+{: #sitemap_autoscaling_clusters}
+
+
+[Preparing classic and VPC clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#cluster-scaling-classic-vpc)
+
+* [Understanding scale-up and scale-down](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_about)
+
+* [Following scalable deployment practices](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices)
+
+    * [Can I autoscale multiple worker pools at once?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-multiple)
+
+    * [How can I make sure that the cluster autoscaler responds to what resources my app needs?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-resrequests)
+
+    * [Can I scale down a worker pool to zero (0) nodes?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-zero)
+
+    * [Can I optimize my deployments for autoscaling?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-apps)
+
+    * [Can I use taints and tolerations with autoscaled worker pools?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-taints)
+
+* [Rebalancing or resizing autoscaled worker pools](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_update_worker_node_pool)
+
+* [Preparing classic or VPC Gen 2 clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#prepare-autoscale-classic-vpc)
+
+[Enabling the cluster autoscaler add-on in your cluster](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-install-addon)
+
+* [Enabling the cluster autoscaler add-on from the console](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-enable-console)
+
+* [Enabling the cluster autoscaler add-on from the CLI](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-enable-CLI)
+
+* [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-install-addon-update-addon)
+
+* [Removing the cluster autoscaler add-on from the console](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-remove-console)
+
+* [Removing the cluster autoscaler add-on from the CLI](/docs/containers?topic=containers-cluster-scaling-install-addon#autoscaler-remove-cli)
+
+[Setting up autoscaling for your worker pools](/docs/containers?topic=containers-cluster-scaling-install-addon-enable#cluster-scaling-install-addon-enable)
+
+* [Customizing the cluster autoscaler configuration values](/docs/containers?topic=containers-cluster-scaling-install-addon-enable#ca_customize)
+
+* [Cluster autoscaler configmap reference](/docs/containers?topic=containers-cluster-scaling-install-addon-enable#ca-configmap)
+
+[Deploying apps to worker pools where autoscaling is enabled](/docs/containers?topic=containers-cluster-scaling-install-addon-deploy-apps#cluster-scaling-install-addon-deploy-apps)
+
+* [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-cluster-scaling-install-addon-deploy-apps#ca_scaleup)
+
+* [Pause pods](/docs/containers?topic=containers-cluster-scaling-install-addon-deploy-apps#pause-pods-ca)
+
+* [Horizontal pod autoscaling (HPA)](/docs/containers?topic=containers-cluster-scaling-install-addon-deploy-apps#hpca)
+
+
 ## Logging and monitoring
 {: #sitemap_logging_and_monitoring}
 
@@ -5355,19 +5356,6 @@ subcollection: containers
 * [Registering a {{site.data.keyword.secrets-manager_short}} instance when creating a cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_cluster_create)
 
 
-## Understanding your storage options
-{: #sitemap_understanding_your_storage_options}
-
-
-[Understanding your storage options](/docs/containers?topic=containers-storage-plan#storage-plan)
-
-* [Non-persistent storage options](/docs/containers?topic=containers-storage-plan#storage-plan-non-persistent)
-
-* [Single zone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-single-zone)
-
-* [Multizone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-multizone)
-
-
 ## Setting up {{site.data.keyword.filestorage_short}}
 {: #sitemap_setting_up_}
 
@@ -5637,13 +5625,13 @@ subcollection: containers
 
 * [Restoring from a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-restore-from-snapshot)
 
-* [Customizing snapshots](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-customize-snapshot)
-
-    * [`addon-vpc-block-csi-driver-configmap` default settings](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-block-configmap-settings)
-
 * [Turning off snapshots](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-turn-off-snapshots)
 
 * [Troubleshooting snapshots](/docs/containers?topic=containers-vpc-volume-snapshot#ts-snapshot-vpc-block-addon-next)
+
+[Customizing the {{site.data.keyword.block_storage_is_short}} configmap](/docs/containers?topic=containers-storage-block-vpc-configmap#storage-block-vpc-configmap)
+
+* [{{site.data.keyword.block_storage_is_short}} configmap reference](/docs/containers?topic=containers-storage-block-vpc-configmap#storage-block-vpc-configmap-reference)
 
 [Setting up trusted profiles for the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#storage-block-vpc-trusted-profiles)
 
@@ -5863,6 +5851,26 @@ subcollection: containers
 ## Enhancing cluster capabilities with integrations
 {: #sitemap_enhancing_cluster_capabilities_with_integrations}
 
+
+[IBM Cloud services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-3rd-party-integrations)
+
+* [IBM Cloud services](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-cloud-services)
+
+    * [IBM Cloud platform services](/docs/containers?topic=containers-ibm-3rd-party-integrations#platform-services)
+
+    * [IBM Cloud classic infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#infrastructure-services)
+
+    * [IBM Cloud VPC infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#vpc-infrastructure-services)
+
+* [Kubernetes community and open source integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-tools)
+
+    * [Integrations operated in partnership](/docs/containers?topic=containers-ibm-3rd-party-integrations#open-source-partners)
+
+    * [Managed add-ons](/docs/containers?topic=containers-ibm-3rd-party-integrations#cluster-add-ons)
+
+    * [Other third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-helm)
+
+    * [Extending Kubernetes API and software with CRDs and Operators](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-crd-operators)
 
 [Adding services by using managed add-ons](/docs/containers?topic=containers-managed-addons#managed-addons)
 
@@ -7392,9 +7400,13 @@ subcollection: containers
 
 * [Version 1.18](/docs/containers?topic=containers-istio-changelog#v118)
 
+    * [Changelog for 1.18.1, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1181)
+
     * [Change log for 1.18.0, released 12 July 2023](/docs/containers?topic=containers-istio-changelog#1180)
 
 * [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
+
+    * [Changelog for 1.17.4, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1174)
 
     * [Change log for 1.17.3, released 22 June 2023](/docs/containers?topic=containers-istio-changelog#1173)
 
@@ -7403,6 +7415,8 @@ subcollection: containers
     * [Change log for 1.17.1, released 7 March 2023](/docs/containers?topic=containers-istio-changelog#1171)
 
 * [Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
+
+    * [Changelog for 1.16.6, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1166)
 
     * [Change log for 1.16.5, released 8 June 2022](/docs/containers?topic=containers-istio-changelog#1165)
 
@@ -7907,6 +7921,8 @@ subcollection: containers
 [{{site.data.keyword.filestorage_vpc_full_notm}} add-on change log](/docs/containers?topic=containers-versions-vpc-file-addon#versions-vpc-file-addon)
 
 * [Version 1.1](/docs/containers?topic=containers-versions-vpc-file-addon#011_is_file)
+
+    * [Change log for version 1.1.6_41, release 28 July 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.1.6_is_file_relnote)
 
     * [Change log for version 1.1, released 3 July 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.1_is_file_relnote)
 
