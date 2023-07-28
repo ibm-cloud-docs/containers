@@ -5166,11 +5166,7 @@ subcollection: containers
 
     * [Creating more ALBs in a zone](/docs/containers?topic=containers-ingress-alb-manage#create_alb)
 
-    * [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas)
-
-    * [Disabling ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-disable)
-
-* [Moving ALBs across VLANs in classic clusters](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan)
+    * [Changing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas)
 
 [Creating your own Ingress domain](/docs/containers?topic=containers-ingress-domains#ingress-domains)
 
@@ -10573,6 +10569,8 @@ subcollection: containers
 [Classic clusters: Why does enabling Ingress ALBs result in subnet errors?](/docs/containers?topic=containers-cs_alb_subnet#cs_alb_subnet)
 
 [Why does a connection via WebSocket close after 60 seconds?](/docs/containers?topic=containers-cs_ingress_websocket#cs_ingress_websocket)
+
+[Why does the Ingress status show an `ERRHPAIWC` error?](/docs/containers?topic=containers-ts-ingress-errhpaiwc#ts-ingress-errhpaiwc)
 
 [Why does the Ingress status show an `ERRSNF` error?](/docs/containers?topic=containers-ts-ingress-errsnf#ts-ingress-errsnf)
 
