@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-27"
+lastupdated: "2023-07-28"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -31,7 +31,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 | --- | --- | --- |
 | 1.18 | Yes | 1.23, 1.24, 1.25, 1.26, 1.27 |
 | 1.17 | Yes | 1.23, 1.24, 1.25, 1.26 |
-| 1.16 | Yes (EOL 27 July 2023)| 1.23, 1.24, 1.25, 1.26 |
+| 1.16 | No | 1.23, 1.24, 1.25, 1.26 |
 | 1.15 | No | 1.22, 1.23, 1.24, 1.25 |
 {: caption="Supported Istio versions" caption-side="bottom"}
 
@@ -209,8 +209,11 @@ Updates in this version
     - [usn-5825-2](https://ubuntu.com/security/notices/USN-5825-2){: external}
     - [usn-5844-1](https://ubuntu.com/security/notices/USN-5844-1){: external}
 
-## Version 1.16
+## Unsupported: Version 1.16
 {: #v116}
+
+Version 1.16 of the managed Istio add-on is unsupported. 
+{: important}
 
 ### Changelog for 1.16.6, released 27 July 2023
 {: #1166}
