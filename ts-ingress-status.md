@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-04-24"
+lastupdated: "2023-07-28"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -106,6 +106,10 @@ The Ingress message provides details of what operation is in progress or informa
 | `The ALB health Ingress resource is not found on the cluster (ERRAHINF).` | For more information, see [Why does the Ingress status show an ERRAHINF error?](/docs/containers?topic=containers-ts-ingress-errahinf).|
 | `The ALB health service is not found on the cluster (ERRAHSNF).` | For more information, see [Why does the Ingress status show an ERRAHSNF error?](/docs/containers?topic=containers-ts-ingress-errahsnf).|
 | `The ALB is unable to respond to health requests (ERRAHCF).` | For more information, see [Why does the Ingress status show an ERRAHCF error?](/docs/containers?topic=containers-ts-ingress-errahcf).|
+| `Autoscaling is ineffective (ERRHPAETPI).` | For more information, see [Why does the Ingress status show an ERRHPAETPI error?](/docs/containers?topic=containers-ts-ingress-errhpaetpi).|
+| `The cluster does not have enough worker nodes to satisfy the autoscaling configuration (ERRHPAIWC).` | For more information, see [Why does the Ingress status show an ERRHPAIWC error?](/docs/containers?topic=containers-ts-ingress-errhpaiwc).|
+| `Autoscaling is failing (ERRHPANA).` | For more information, see [Why does the Ingress status show an ERRHPANA error?](/docs/containers?topic=containers-ts-ingress-errhpana).|
+| `The autoscaler resource is missing (ERRHPANF).` | For more information, see [Why does the Ingress status show an ERRHPANF error?](/docs/containers?topic=containers-ts-ingress-errhpanf).|
 | `The load balancer service address is missing (ERRSAM).` | For more information, see [Why does the Ingress status show an ERRSAM error?](/docs/containers?topic=containers-ts-ingress-errsam).|
 | `Could not access {{site.data.keyword.secrets-manager_short}} instance (ESSSMI).` | For more information, see [Why does the Ingress status show an ESSSMI error?](/docs/containers?topic=containers-ts-ingress-esssmi).|
 | `Could not access the secret group (ESSSMG).` | For more information, see [Why does the Ingress status show an ESSSMG error?](/docs/containers?topic=containers-ts-ingress-esssmg).|

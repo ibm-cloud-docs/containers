@@ -10570,6 +10570,8 @@ subcollection: containers
 
 [Why does a connection via WebSocket close after 60 seconds?](/docs/containers?topic=containers-cs_ingress_websocket#cs_ingress_websocket)
 
+[Why does the Ingress status show an `ERRHPAIWC` error?](/docs/containers?topic=containers-ts-ingress-errhpaiwc#ts-ingress-errhpaiwc)
+
 [Why does the Ingress status show an `ERRSNF` error?](/docs/containers?topic=containers-ts-ingress-errsnf#ts-ingress-errsnf)
 
 [Why does the Ingress status show an `ERRADNF` error?](/docs/containers?topic=containers-ts-ingress-erradnf#ts-ingress-erradnf)
