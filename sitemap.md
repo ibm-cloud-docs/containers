@@ -5166,11 +5166,7 @@ subcollection: containers
 
     * [Creating more ALBs in a zone](/docs/containers?topic=containers-ingress-alb-manage#create_alb)
 
-    * [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas)
-
-    * [Disabling ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-disable)
-
-* [Moving ALBs across VLANs in classic clusters](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan)
+    * [Changing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas)
 
 [Creating your own Ingress domain](/docs/containers?topic=containers-ingress-domains#ingress-domains)
 
