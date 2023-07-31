@@ -27,10 +27,10 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | --- | --- | --- |
-| 1.18 | Yes | 1.23, 1.24, 1.25, 1.26, 1.27 |
-| 1.17 | Yes | 1.23, 1.24, 1.25, 1.26 |
-| 1.16 | No | 1.23, 1.24, 1.25, 1.26 |
-| 1.15 | No | 1.22, 1.23, 1.24, 1.25 |
+| 1.18 | Yes | 1.24, 1.25, 1.26, 1.27 |
+| 1.17 | Yes | 1.24, 1.25, 1.26 |
+| 1.16 | No | 1.24, 1.25, 1.26 |
+| 1.15 | No | 1.24, 1.25 |
 {: caption="Supported Istio versions" caption-side="bottom"}
 
 ## Version 1.18
