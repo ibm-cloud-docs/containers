@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-06-23"
+lastupdated: "2023-07-31"
 
 keywords: kubernetes, containers, 127, version 127, 127 update actions
 
@@ -53,9 +53,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 This information summarizes updates that are likely to have and impact on deployed apps when you update a cluster to version 1.27. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.27.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_127) for version 1.27. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
-
-[Portworx](/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.27. Do not upgrade your cluster to version 1.27 if your apps use Portworx.
-{: important}
 
 
 ### Update before master

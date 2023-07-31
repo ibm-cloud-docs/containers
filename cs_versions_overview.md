@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-25"
+lastupdated: "2023-07-31"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -34,9 +34,6 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: note}
-
-Ubuntu 18 is deprecated and becomes unsupported soon. For migration actions, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate).
-{: important}
 
 
 
@@ -101,7 +98,6 @@ IBM provides bi-weekly worker node fix packs. IBM's goal is to remediate detecte
 Fix packs are applied to the latest upstream stable kernel version that is provided by Canonical.
 
 - For Ubuntu 20.04, it is the 5.4 kernel.
-- For Ubuntu 18.04, it is the 4.15 kernel.
 
 To keep your nodes secure, you must install worker node fix packs as soon as possible. You can subscribe to notifications to be alerted when a new update is available.
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-07-28"
+lastupdated: "2023-07-31"
 
 connectivitykeywords: kubernetes, errhpaiwc, ingress, autoscaler, alb
 
@@ -46,7 +46,7 @@ For more information on ALB autoscaling, see [Dynamically scaling ALBs with auto
 
 1. List and count the total number of worker nodes that are compatible with ALBs. If your cluster has dedicated edge nodes, then ALBs are scheduled only to those nodes. In this case, include the `--selector dedicated=edge` option in the above commands.
 
-  If your cluster has dedicated edge nodes, then ALBs are scheduled only to those nodes. In this case, include the `--selector dedicated=edge` option in the above commands.
+    If your cluster has dedicated edge nodes, then ALBs are scheduled only to those nodes. In this case, include the `--selector dedicated=edge` option in the above commands.
     {: note}
 
     - **Classic cluster with public ALB**
@@ -56,16 +56,16 @@ For more information on ALB autoscaling, see [Dynamically scaling ALBs with auto
         {: pre}
 
     - **Classic cluster with private ALB**
-      ```sh
-      kubectl get nodes --selector privateVLAN=<ALB VLAN>
-      ```
-      {: pre}
+        ```sh
+        kubectl get nodes --selector privateVLAN=<ALB VLAN>
+        ```
+        {: pre}
 
     - **VPC cluster**
-      ```sh
-      kubectl get nodes --selector ibm-cloud.kubernetes.io/zone=<ALB zone>
-      ```
-      {: pre}
+        ```sh
+        kubectl get nodes --selector ibm-cloud.kubernetes.io/zone=<ALB zone>
+        ```
+        {: pre}
 
 
 1. Update the autoscaler configuration or add extra worker nodes to you cluster to accomdate the number of nodes found in the previous step.
