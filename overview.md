@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-27"
+lastupdated: "2023-07-31"
 
 keywords: containers, kubernetes, infrastructure, rbac, policy, providers, benefits
 
@@ -200,13 +200,13 @@ Secure exposure of apps to the public
 :   Add extra capabilities to your app through the integration of {{site.data.keyword.cloud_notm}} services, such as {{site.data.keyword.watson}} APIs, Blockchain, data services, or Internet of Things.
 
 
-## Comparison between {{site.data.keyword.redhat_openshift_notm}} and community Kubernetes clusters
+## Comparison between {{site.data.keyword.redhat_openshift_notm}} and Kubernetes clusters
 {: #openshift_kubernetes}
 
 Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerlong_notm}} clusters are production-ready container platforms that are tailored for enterprise workloads. The following table compares and contrasts some common characteristics that can help you choose which container platform is best for your use case.
 {: shortdesc}
 
-|Characteristics|Community Kubernetes clusters|{{site.data.keyword.redhat_openshift_notm}} clusters|
+|Characteristics|Kubernetes clusters|{{site.data.keyword.redhat_openshift_notm}} clusters|
 |---------------|-------------|-----------------|
 |Complete cluster management experience through the {{site.data.keyword.containerlong_notm}} automation tools (API, CLI, console)|Yes|Yes|
 |Worldwide availability in single and multizones|Yes|Yes|
@@ -214,7 +214,7 @@ Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerl
 |Access to {{site.data.keyword.cloud_notm}} services such as AI|Yes|Yes|
 |Software-defined storage Portworx solution available for multizone data use cases|Yes|Yes|
 |Create a cluster in an IBM Virtual Private Cloud (VPC)|Yes|Yes|
-|Latest community Kubernetes distribution|Yes| |
+|Latest Kubernetes distribution|Yes| |
 |Scope {{site.data.keyword.cloud_notm}} IAM access policies to access groups for service access roles that sync to cluster RBAC |Yes| |
 |Classic infrastructure cluster on only the private network|Yes| |
 | GPU bare metal worker nodes | Yes | Yes |
@@ -223,10 +223,10 @@ Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerl
 |Integrated CI/CD with Jenkins| |Yes|
 |Stricter app security context set up by default| |Yes|
 |Simplified Kubernetes developer experience, with an app console that is suited for beginners| |Yes|
-|Supported operating system| Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated) | Red Hat Enterprise Linux 7  |
+|Supported operating system| [Kubernetes version information](/docs/containers?topic=containers-cs_versions). | [{{site.data.keyword.redhat_openshift_notm}} version information](/docs/openshift?topic=openshift-openshift_versions). |
 |Preferred external traffic networking| Ingress | Router |
 |Secured routes encrypted with {{site.data.keyword.hscrypto}} | | Yes |
-{: caption="Characteristics of community Kubernetes and {{site.data.keyword.redhat_openshift_notm}} clusters" caption-side="bottom"}
+{: caption="Characteristics of Kubernetes and {{site.data.keyword.redhat_openshift_notm}} clusters" caption-side="bottom"}
 
 
 

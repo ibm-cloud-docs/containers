@@ -63,7 +63,7 @@ subcollection: containers
 
 * [What are the benefits of using the service?](/docs/containers?topic=containers-overview#benefits)
 
-* [Comparison between {{site.data.keyword.redhat_openshift_notm}} and community Kubernetes clusters](/docs/containers?topic=containers-overview#openshift_kubernetes)
+* [Comparison between {{site.data.keyword.redhat_openshift_notm}} and Kubernetes clusters](/docs/containers?topic=containers-overview#openshift_kubernetes)
 
 * [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
 
@@ -248,8 +248,6 @@ subcollection: containers
     * [27 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2723)
 
         * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1.6`
-
-    * [27 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2723)
 
         * Istio add-on version `1.16.6`, `1.17.4`, and `1.18.1 `.
 
@@ -5171,6 +5169,10 @@ subcollection: containers
     * [Creating more ALBs in a zone](/docs/containers?topic=containers-ingress-alb-manage#create_alb)
 
     * [Changing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas)
+
+    * [Disabling ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-disable)
+
+* [Moving ALBs across VLANs in classic clusters](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan)
 
 [Creating your own Ingress domain](/docs/containers?topic=containers-ingress-domains#ingress-domains)
 
@@ -10576,7 +10578,13 @@ subcollection: containers
 
 [Why does a connection via WebSocket close after 60 seconds?](/docs/containers?topic=containers-cs_ingress_websocket#cs_ingress_websocket)
 
+[Why does the Ingress status show an `ERRHPAETPI` error?](/docs/containers?topic=containers-ts-ingress-errhpaetpi#ts-ingress-errhpaetpi)
+
 [Why does the Ingress status show an `ERRHPAIWC` error?](/docs/containers?topic=containers-ts-ingress-errhpaiwc#ts-ingress-errhpaiwc)
+
+[Why does the Ingress status show an `ERRHPANA` error?](/docs/containers?topic=containers-ts-ingress-errhpana#ts-ingress-errhpana)
+
+[Why does the Ingress status show an `ERRHPANF` error?](/docs/containers?topic=containers-ts-ingress-errhpanf#ts-ingress-errhpanf)
 
 [Why does the Ingress status show an `ERRSNF` error?](/docs/containers?topic=containers-ts-ingress-errsnf#ts-ingress-errsnf)
 

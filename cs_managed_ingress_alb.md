@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-07-28"
+lastupdated: "2023-07-31"
 
 keywords: ingress, alb, manage albs, update, alb image
 
@@ -219,7 +219,7 @@ A single ALB pod can handle a large amount of requests. If you experience timeou
 **For classic clusters**: If the ALB's load balancer service configuration has the `externalTrafficPolicy` set to `Local`, do not scale above 2 replicas. Classic load balancers run with a fixed configuration of 2 replicas, and can only forward traffic to ALB pods that are located on the same node as the load balancer pods. 
 
 By default, periodic Ingress version updates are automatically rolled out to your ALBs. If only one worker node exists in a zone in your cluster, and you set the number of ALB replicas to 1, this single ALB pod is deleted and a new pod is created whenever updates are applied. This process might cause traffic disruptions, even if you have worker nodes and ALB replicas in other zones. To prevent traffic disruptions, ensure that at least two worker nodes exist in each zone, and that two replicas exist for each ALB.
-{: warning}
+{: important}
 
 #### Manually scaling ALBs
 {: #alb_replicas_manual}
@@ -283,19 +283,22 @@ ibmcloud ks ingress alb autoscale set --alb ALB --cluster CLUSTER --max-replicas
 
 `--cluster, -c CLUSTER`
 :   Required: The name or ID of the cluster.
+
 `--alb ALB`
 :   The ALB ID. To see available ALB IDs, run `ibmcloud ks ingress alb ls`.
+
 `--max-replicas REPLICAS`:
 :   The maximum number of replicas for the ALB. Specify a whole number. The maximum number of ALB replicas is limited to the number of worker nodes on the cluster. To add more worker nodes to your cluster, see [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers).
+
 `--min-replicas REPLICAS`
 :   The minimum number of replicas for the ALB. Specify a whole number that is at least `2`.
 
-**To use average CPU utilization**
+
 `--cpu-average-utilization PERCENT`
 :   **Autoscaling by using average CPU utilization**: The target CPU utilization percentage for the autoscaler. The average represents the percentage of used CPU compared to the requested CPU for all ALB pods. To check the current CPU usage by ALB pods, run `kubectl top pods -n kube-system -l app=<alb-id>`. To check the CPU amount requested for ALB pods, run `kubectl get deployment -n kube-system <alb-id> -o=jsonpath='{.spec.template.spec.containers[0].resources.requests.cpu}`. You cannot use this option with the `--custom-metrics-file` option. 
 
 `--custom-metrics-file FILE`
-:   **Autoscaling by using custom metrics** Specify the name of the configuration file that defines custom metrics and target values for autoscaling. Note that you are responsible for installing and configuring a metrics provider, such as Prometheus. You cannot use this option with the `--cpu-average-utilization` option.
+:   **Autoscaling by using custom metrics**: Specify the name of the configuration file that defines custom metrics and target values for autoscaling. Note that you are responsible for installing and configuring a metrics provider, such as Prometheus. You cannot use this option with the `--cpu-average-utilization` option.
 
 Example custom metrics YAML file. Configure your custom metrics in a YAML file. Save the file and specify the file name with the `--custom-metrics-file` command option. For more information on writing your custom metrics spec file, See the Kubernetes documentation on [Horizontal Pod Autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-resource-metrics){: external} or the [MetricSpec API documentation](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#metricspec-v2-autoscaling){: external}).
 
@@ -311,6 +314,10 @@ Example custom metrics YAML file. Configure your custom metrics in a YAML file. 
     target:
       type: Value
       value: 2k
+```
+{: codeblock}
+
+
 
 #### Example commands for configuring dynamic ALB autoscaling
 {: #alb_replicas_autoscaler_ex}
