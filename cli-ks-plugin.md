@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-21"
+lastupdated: "2023-07-31"
 
 keywords: kubernetes
 
@@ -4820,12 +4820,8 @@ Minimum required permissions
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
-View the available images and image versions for Ingress ALBs in your cluster.
+View the available Ingress ALB versions.
 {: shortdesc}
-
-{{site.data.keyword.containerlong_notm}} supports two types of NGINX Ingress controller images for the ALB: the {{site.data.keyword.containerlong_notm}} Ingress image, and the Kubernetes Ingress image. The latest three version of each image type are supported for ALBs.
-- The {{site.data.keyword.containerlong_notm}} Ingress image is a custom implementation that is built on the NGINX Ingress controller.
-- The Kubernetes Ingress image is built on the community Kubernetes project's implementation of the NGINX Ingress controller.
 
 ```sh
 ibmcloud ks ingress alb versions [--output json] [-q]
