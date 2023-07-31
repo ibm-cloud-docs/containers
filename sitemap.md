@@ -241,7 +241,11 @@ subcollection: containers
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
 
-    * [27 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2623)
+    * [31 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july3123)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.17`
+
+    * [27 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2723)
 
         * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1.6`
 
@@ -7929,6 +7933,8 @@ subcollection: containers
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.17, released 3 July 2023](/docs/containers?topic=containers-cos_plugin_changelog#02217_object_plugin)
 
 * [Change log for version 2.2.16, released 3 July 2023](/docs/containers?topic=containers-cos_plugin_changelog#02216_object_plugin)
 
