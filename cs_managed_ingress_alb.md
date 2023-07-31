@@ -93,7 +93,7 @@ To set a time for automatic updates, you set the `updateStartTime` and `updateEn
     ```
     {: pre}
 
-### Choosing a supported image version
+## Choosing a supported image version
 {: #alb-version-choose}
 
 {{site.data.keyword.containerlong_notm}} supports only the Kubernetes Ingress image for the Ingress application load balancers (ALBs) in your cluster. The Kubernetes Ingress image is built on the community Kubernetes project's implementation of the NGINX Ingress controller. The previously supported {{site.data.keyword.containerlong_notm}} Ingress image, which was built on a custom implementation of the NGINX Ingress controller, is unsupported.
@@ -145,7 +145,7 @@ If your ALB pods were recently updated, but a custom configuration for your ALBs
 
 Note that if you revert to an earlier version, you must [disable automatic ALB updates](#autoupdate) and then keep them disabled for as long as you want to run the earlier version. Automatic updates always apply the latest version and overwrite any manual updates you apply. If you want to use an earlier version, you cannot enable automatic updates. 
 
-## Scaling ALBs
+## Manually scaling your ALBs
 {: #scale_albs}
 
 Each ALB can handle around 20,000 connections per second. If you need to process additional connections, you can create more ALBs in a zone or increase the number of ALB pod replicas.
@@ -221,8 +221,6 @@ A single ALB pod can handle a large amount of requests. If you experience timeou
 By default, periodic Ingress version updates are automatically rolled out to your ALBs. If only one worker node exists in a zone in your cluster, and you set the number of ALB replicas to 1, this single ALB pod is deleted and a new pod is created whenever updates are applied. This process might cause traffic disruptions, even if you have worker nodes and ALB replicas in other zones. To prevent traffic disruptions, ensure that at least two worker nodes exist in each zone, and that two replicas exist for each ALB.
 {: important}
 
-#### Manually scaling ALBs
-{: #alb_replicas_manual}
 
 Manually change the number of ALB replicas by creating a ConfigMap. Note that you cannot manually scale your ALB replicas if you have [configured your ALB to use dynamic scaling](#alb_replicas_autoscaler).
 
@@ -269,12 +267,12 @@ Manually change the number of ALB replicas by creating a ConfigMap. Note that yo
     ```
     {: pre}
 
-#### Dynamically scaling ALBs with autoscaler
+## Dynamically scaling ALBs with autoscaler
 {: #alb_replicas_autoscaler}
 
-With dynamic scaling, the number of ALB replicas changes automatically based on actual load. The number of replicas decreases when actual load is lower and increases when the load is higher, saving compute capacity while maintaining the ability to handle traffic during peak times. You can configure the ALB autoscaler to implement scaling based on CPU utilization, or on custom metrics that you define. 
+With dynamic scaling, the number of ALB replicas changes automatically based on actual load. The number of replicas decreases when actual load is lower and increases when the load is higher, saving compute capacity while maintaining the ability to handle traffic during peak times. You can configure the ALB autoscaler to implement scaling based on CPU utilization, or on custom metrics that you define.
 
-To use autoscaling, run the following command. To implement scaling based on CPU utilization, include the `--cpu-average-utilization` option. To use custom metrics, include the `--custom-metrics-file` option and specify a [configuration file path]().
+To set up autoscaling, run the following command. You can scale based on CPU utilization by including the `--cpu-average-utilization` option. Or you can scale based on custom metrics by including the `--custom-metrics-file` option and specify a configuration file path.
 
 ```sh
 ibmcloud ks ingress alb autoscale set --alb ALB --cluster CLUSTER --max-replicas NUM_REPLICAS --min-replicas NUM_REPLICAS [--output OUTPUT] [-q] (--cpu-average-utilization PERCENT | --custom-metrics-file FILE)
@@ -319,7 +317,7 @@ Example custom metrics YAML file. Configure your custom metrics in a YAML file. 
 
 
 
-#### Example commands for configuring dynamic ALB autoscaling
+### Example commands for configuring dynamic ALB autoscaling
 {: #alb_replicas_autoscaler_ex}
 
 Example command for dynamic scaling based on an average CPU utilization of 60%.
@@ -336,7 +334,17 @@ ibmcloud ks ingress alb autoscale set -c <cluster_name_or_ID> --alb <alb-id> --m
 ```
 {: pre}
 
-#### Disabling dynamic autoscaling
+### Calculating average CPU utilization
+{: #alb_scaling_average_cpu}
+
+The following image shows an example scenario for determining CPU usage when planning your autoscaling configuration.
+
+Assume that you have an idle cluster with two running ALB replicas that has no incoming traffic. The total CPU request in this case is `2*20m=40m`. One of the replicas might use `5m` CPU and the other `7m` CPU. We can calculate the CPU utilization by using the following formula.
+
+![Calculating average CPU utilization](images/ingress-autoscale.svg "Calculating average CPU utilization"){: caption="Figure 1. This image contains the formuala for calculating average CPU utilization" caption-side="bottom"}
+
+
+### Disabling ALB autoscaling
 {: #alb_replicas_autoscaler_disable}
 
 Run the command to disable autoscaling for an ALB.
@@ -347,7 +355,7 @@ ibmcloud ks ingress alb autoscale unset --alb ALB --cluster CLUSTER
 {: pre}
 
 
-### Disabling ALBs
+## Disabling ALBs
 {: #alb-disable}
 
 To scale down your ALBs, you can disable an ALB so that it no longer routes traffic in your cluster. 

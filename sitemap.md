@@ -5158,19 +5158,27 @@ subcollection: containers
 
     * [Scheduling maintenance windows for automatic updates](/docs/containers?topic=containers-ingress-alb-manage#alb-scheduled-updates)
 
-    * [Choosing a supported image version](/docs/containers?topic=containers-ingress-alb-manage#alb-version-choose)
+* [Choosing a supported image version](/docs/containers?topic=containers-ingress-alb-manage#alb-version-choose)
 
     * [Viewing supported image versions](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list)
 
     * [Reverting to an earlier version](/docs/containers?topic=containers-ingress-alb-manage#revert-alb-version)
 
-* [Scaling ALBs](/docs/containers?topic=containers-ingress-alb-manage#scale_albs)
+* [Manually scaling your ALBs](/docs/containers?topic=containers-ingress-alb-manage#scale_albs)
 
     * [Creating more ALBs in a zone](/docs/containers?topic=containers-ingress-alb-manage#create_alb)
 
     * [Changing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas)
 
-    * [Disabling ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-disable)
+* [Dynamically scaling ALBs with autoscaler](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas_autoscaler)
+
+    * [Example commands for configuring dynamic ALB autoscaling](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas_autoscaler_ex)
+
+    * [Calculating average CPU utilization](/docs/containers?topic=containers-ingress-alb-manage#alb_scaling_average_cpu)
+
+    * [Disabling ALB autoscaling](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas_autoscaler_disable)
+
+* [Disabling ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-disable)
 
 * [Moving ALBs across VLANs in classic clusters](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan)
 
