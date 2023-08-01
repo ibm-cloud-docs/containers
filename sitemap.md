@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-07-31"
+lastupdated: "2023-08-01"
 
 keywords: containers
 subcollection: containers
@@ -7410,13 +7410,13 @@ subcollection: containers
 
 * [Version 1.18](/docs/containers?topic=containers-istio-changelog#v118)
 
-    * [Changelog for 1.18.1, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1181)
+    * [Change log for 1.18.1, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1181)
 
     * [Change log for 1.18.0, released 12 July 2023](/docs/containers?topic=containers-istio-changelog#1180)
 
 * [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
 
-    * [Changelog for 1.17.4, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1174)
+    * [Change log for 1.17.4, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1174)
 
     * [Change log for 1.17.3, released 22 June 2023](/docs/containers?topic=containers-istio-changelog#1173)
 
@@ -7426,7 +7426,7 @@ subcollection: containers
 
 * [Unsupported: Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
 
-    * [Changelog for 1.16.6, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1166)
+    * [Change log for 1.16.6, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1166)
 
     * [Change log for 1.16.5, released 8 June 2022](/docs/containers?topic=containers-istio-changelog#1165)
 

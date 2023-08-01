@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-07-31"
+lastupdated: "2023-08-01"
 
 connectivitykeywords: kubernetes, errhpana, ingress, autoscaler, alb
 
@@ -29,7 +29,7 @@ Autoscaling is failing (ERRHPANA).
 ```
 {: screen}
 
-There are issues with the horizontal pod autoscaler (HPA) resource that are preventing autscaling from functioning. 
+There are issues with the horizontal pod autoscaler (HPA) resource that are preventing autoscaling from functioning. 
 {: tsCauses}
 
 View the HPA resource status for additional information on the error. Check the resource for issues or formatting errors that may prevent the autoscaler from functioning.

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-07-31"
+lastupdated: "2023-08-01"
 
 connectivitykeywords: kubernetes, errhpaetpi, ingress, autoscaler, alb
 
@@ -59,7 +59,7 @@ Before you change the `ExternalTrafficPolicy` setting, review the information ab
 
 - **To disable ALB autoscaling**
 
-    1. Run the command to disable autscaling for the cluster.
+    1. Run the command to disable autoscaling for the cluster.
         ```sh
         ibmcloud ks ingress alb autoscale unset -c <clusterID>
         ```

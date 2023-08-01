@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-07-31"
+lastupdated: "2023-08-01"
 
 connectivitykeywords: kubernetes, errhpaiwc, ingress, autoscaler, alb
 
@@ -32,7 +32,7 @@ The cluster does not have enough worker nodes to satisfy the autoscaling configu
 The cluster does not have enough compatible workers to meet the replica count specified in your ALB autoscaler configuration.
 {: tsCauses}
 
-Determine the number of required worker nodes. Then, update your autoscaler configuration replica count or add extra workers to your cluster to accomodate the requirements. 
+Determine the number of required worker nodes. Then, update your autoscaler configuration replica count or add extra workers to your cluster to accommodate the requirements. 
 {: tsResolve}
 
 For more information on ALB autoscaling, see [Dynamically scaling ALBs with autoscaler](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas_autoscaler).
@@ -68,7 +68,7 @@ For more information on ALB autoscaling, see [Dynamically scaling ALBs with auto
         {: pre}
 
 
-1. Update the autoscaler configuration or add extra worker nodes to you cluster to accomdate the number of nodes found in the previous step.
+1. Update the autoscaler configuration or add extra worker nodes to you cluster to accommodate the number of nodes found in the previous step.
     - **To update the autoscaler configuration**
         1. Get the ALB autoscaler configuration.
             ```sh

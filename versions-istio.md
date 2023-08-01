@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-31"
+lastupdated: "2023-08-01"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -36,7 +36,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 ## Version 1.18
 {: #v118}
 
-### Changelog for 1.18.1, released 27 July 2023
+### Change log for 1.18.1, released 27 July 2023
 {: #1181}
 
 Review the changes that are included in version 1.18.1 of the managed Istio add-on. For more information, see the [Istio security bulletin 2023-002](https://istio.io/latest/news/security/istio-security-2023-002/){: external}.
@@ -84,7 +84,7 @@ Updates in this version
 ## Version 1.17
 {: #v117}
 
-### Changelog for 1.17.4, released 27 July 2023
+### Change log for 1.17.4, released 27 July 2023
 {: #1174}
 
 Review the changes that are included in version 1.17.4 of the managed Istio add-on. For more information, see the [Istio security bulletin 2023-002](https://istio.io/latest/news/security/istio-security-2023-002/){: external}.
@@ -104,7 +104,7 @@ Updates in this version
     - [CVE-2023-1667](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1667){: external}
     - [CVE-2023-2283](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2283){: external}
     - [usn-6166-1](https://ubuntu.com/security/notices/USN-6166-1){: external}
-    - [usn-6138-1](https://ubuntu.com/security/notices/USN-6138-1-1){: external}
+    - [usn-6138-1](https://ubuntu.com/security/notices/USN-6138-1){: external}
 
 ### Change log for 1.17.3, released 22 June 2023
 {: #1173}
@@ -212,7 +212,7 @@ Updates in this version
 Version 1.16 of the managed Istio add-on is unsupported. 
 {: important}
 
-### Changelog for 1.16.6, released 27 July 2023
+### Change log for 1.16.6, released 27 July 2023
 {: #1166}
 
 Review the changes that are included in version 1.16.6 of the managed Istio add-on. For more information, see the [Istio security bulletin 2023-002](https://istio.io/latest/news/security/istio-security-2023-002/){: external}.
