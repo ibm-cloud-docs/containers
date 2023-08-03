@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-01"
+lastupdated: "2023-08-03"
 
 keywords: kubernetes, release notes
 
@@ -26,8 +26,19 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
+
+
 ## August 2023
 {: #containers-aug23}
+
+### 3 August 2023
+{: #containers-aug0323}
+{: release-note}
+
+
+CIS benchmarks for {{site.data.keyword.redhat_openshift_notm}} version [4.13]
+:   CIS benchmark results are available for {{site.data.keyword.redhat_openshift_notm}} version [4.13](/docs/openshift?topic=openshift-benchmarks_413).
+
 
 ### 1 August 2023
 {: #containers-aug0123}
@@ -58,7 +69,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
-Istio add-on version `1.16.6`, `1.17.4`, and `1.18.1 `.
+Istio add-on version `1.16.6`, `1.17.4`, and `1.18.1`.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
 
 
@@ -6189,7 +6200,8 @@ Cluster and worker states
 
 Cluster planning and creation
 :   You can now find information about cluster planning, creation, and removal and network planning in the following pages:
-    - [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters)
+    - [Create a classic cluster](/docs/containers?topic=containers-cluster-create-classic).
+    - [Create a VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2).
     - [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters)
     - [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes)
     - [Creating clusters](/docs/containers?topic=containers-clusters)
