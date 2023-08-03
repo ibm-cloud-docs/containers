@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-27"
+lastupdated: "2023-08-03"
 
 keywords: kubernetes, containers
 
@@ -132,22 +132,9 @@ Great job! You just deployed your first app in your Kubernetes cluster.
 ## What's next?
 {: #whats-next}
 
-Go through a tutorial to install the CLI, create a private image registry, set up your cluster environment, add an {{site.data.keyword.cloud_notm}} service to the cluster, and deploy an app.
 
-- [VPC clusters tutorial](/docs/containers?topic=containers-vpc_ks_tutorial)
+Check out the curated [learning path for administrators](/docs/containers?topic=containers-learning-path-admin) or [learning path for developers](/docs/containers?topic=containers-learning-path-dev).
 
-Set up the correct environment for your workloads.
-- Plan your [cluster network setup](/docs/containers?topic=containers-plan_clusters), develop a [highly available architecture](/docs/containers?topic=containers-ha_clusters), and [set up autoscaling](/docs/containers?topic=containers-cluster-scaling-install-addon) for your cluster.
-- Create [image pull secrets](/docs/containers?topic=containers-registry#other) to [deploy apps](/docs/containers?topic=containers-app) to Kubernetes namespaces other than `default`.
-- Decide what type of [file, block, object, database, or software-defined storage](/docs/containers?topic=containers-storage-plan) you want to integrate with your apps.
-- Control network traffic to your apps for [classic](/docs/containers?topic=containers-network_policies) and [VPC](/docs/containers?topic=containers-vpc-network-policy) clusters.
-
-Explore other capabilities for your cluster.
-- Check out [{{site.data.keyword.cloud_notm}} and 3rd-party services](/docs/containers?topic=containers-supported_integrations), such as Portworx.
-- Enhance your app lifecycle with [managed add-ons](/docs/containers?topic=containers-managed-addons) like Istio.
-
-Looking for an overview of all your options in {{site.data.keyword.containerlong_notm}}? Check out the curated [learning path for administrators](/docs/containers?topic=containers-learning-path-admin) or [learning path for developers](/docs/containers?topic=containers-learning-path-dev).
-{: tip}
 
 
 

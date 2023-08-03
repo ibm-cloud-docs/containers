@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-08-01"
+lastupdated: "2023-08-03"
 
 keywords: containers
 subcollection: containers
@@ -241,7 +241,13 @@ subcollection: containers
 
 * [August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug23)
 
+    * [3 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug0323)
+
+        * CIS benchmarks for {{site.data.keyword.redhat_openshift_notm}} version 4.13.
+
     * [1 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug0123)
+
+        * Worker node fix packs `1.24.16_1579`, `1.25.12_1554`, `1.26.7_1546`, and `1.27.4_1534`.
 
         * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.17_266` and `5.1.12_285`.
 
@@ -255,7 +261,7 @@ subcollection: containers
 
         * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1.6`
 
-        * Istio add-on version `1.16.6`, `1.17.4`, and `1.18.1 `.
+        * Istio add-on version `1.16.6`, `1.17.4`, and `1.18.1`.
 
     * [26 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2623)
 
@@ -3345,8 +3351,6 @@ subcollection: containers
 
 * [Making your resources highly available](/docs/containers?topic=containers-strategy#kube_ha)
 
-[Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters#plan_clusters)
-
 [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_vpc_basics#plan_vpc_basics)
 
 * [Worker-to-worker communication using VPC subnets](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-worker)
@@ -3545,20 +3549,18 @@ subcollection: containers
 
 * [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)
 
+[Preparing your account to create clusters](/docs/containers?topic=containers-clusters#clusters)
+
+* [Create a cluster](/docs/containers?topic=containers-clusters#next_steps)
+
 
 ## Creating clusters
 {: #sitemap_creating_clusters}
 
 
-[Preparing to create clusters](/docs/containers?topic=containers-clusters#clusters)
-
-* [Preparing to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare)
-
-* [Deciding on your cluster setup](/docs/containers?topic=containers-clusters#prepare_cluster_level)
-
-* [Next steps](/docs/containers?topic=containers-clusters#next_steps)
-
 [Creating classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster-create-classic)
+
+* [Prerequisites](/docs/containers?topic=containers-cluster-create-classic#classic-cluster-prereqs)
 
 * [Creating a classic cluster in the console](/docs/containers?topic=containers-cluster-create-classic#clusters_ui)
 
@@ -3567,6 +3569,8 @@ subcollection: containers
 * [Example commands to create classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster_create_classic)
 
 * [Creating a single-zone classic cluster with Terraform](/docs/containers?topic=containers-cluster-create-classic#cluster_classic_tf)
+
+* [Next steps for Classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster-create-classic-next-steps)
 
 [Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-gen2)
 
@@ -3579,6 +3583,8 @@ subcollection: containers
 * [Example commands to create VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_create_vpc)
 
 * [Creating a VPC cluster with Terraform](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster_vpcg2_tf)
+
+* [Next steps for VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-next-steps)
 
 [Creating clusters on dedicated hosts for VPC](/docs/containers?topic=containers-cluster-create-dedicated-hosts#cluster-create-dedicated-hosts)
 
@@ -5643,6 +5649,8 @@ subcollection: containers
 
 * [Turning off snapshots](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-turn-off-snapshots)
 
+* [Next steps](/docs/containers?topic=containers-vpc-volume-snapshot#snapshot-next-steps)
+
 * [Troubleshooting snapshots](/docs/containers?topic=containers-vpc-volume-snapshot#ts-snapshot-vpc-block-addon-next)
 
 [Customizing the {{site.data.keyword.block_storage_is_short}} configmap](/docs/containers?topic=containers-storage-block-vpc-configmap#storage-block-vpc-configmap)
@@ -5805,7 +5813,7 @@ subcollection: containers
 
     * [Upgrading PX-Backup](/docs/containers?topic=containers-storage_portworx_backup#px-backup-upgrade)
 
-[Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-storage_portworx_removing#storage_portworx_removing)
+[Removing Portworx](/docs/containers?topic=containers-storage_portworx_removing#storage_portworx_removing)
 
 * [Removing Portworx volumes from apps](/docs/containers?topic=containers-storage_portworx_removing#remove_pvc_apps_volumes)
 
@@ -6648,6 +6656,8 @@ subcollection: containers
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
 
+    * [Change log for worker node fix pack 1.27.4_1534, released 1 August 2023](/docs/containers?topic=containers-changelog_127#1274_1534_W)
+
     * [Change log for worker node fix pack 1.27.3_1532, released 17 July 2023](/docs/containers?topic=containers-changelog_127#1273_1532_W)
 
     * [Change log for worker node fix pack 1.27.3_1530, released 03 July 2023](/docs/containers?topic=containers-changelog_127#1273_1530_W)
@@ -6722,6 +6732,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for worker node fix pack 1.26.7_1546, released 1 August 2023](/docs/containers?topic=containers-changelog_126#1267_1546_W)
 
     * [Change log for worker node fix pack 1.26.6_1544, released 17 July 2023](/docs/containers?topic=containers-changelog_126#1266_1544_W)
 
@@ -6823,6 +6835,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for worker node fix pack 1.25.12_1554, released 1 August 2023](/docs/containers?topic=containers-changelog_125#12512_1554_W)
 
     * [Change log for worker node fix pack 1.25.11_1552, released 17 July 2023](/docs/containers?topic=containers-changelog_125#12511_1552_W)
 
@@ -6948,6 +6962,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.16_1579, released 1 August 2023](/docs/containers?topic=containers-changelog_124#12416_1579_W)
 
     * [Change log for worker node fix pack 1.24.15_1576, released 17 July 2023](/docs/containers?topic=containers-changelog_124#12415_1576_W)
 

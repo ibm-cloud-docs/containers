@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-01"
+lastupdated: "2023-08-03"
 
 keywords: kubernetes, release notes
 
@@ -29,9 +29,23 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## August 2023
 {: #containers-aug23}
 
+### 3 August 2023
+{: #containers-aug0323}
+{: release-note}
+
+
+CIS benchmarks for {{site.data.keyword.redhat_openshift_notm}} version 4.13.
+:   CIS benchmark results are available for {{site.data.keyword.redhat_openshift_notm}} version [4.13](/docs/openshift?topic=openshift-benchmarks_413).
+
+
 ### 1 August 2023
 {: #containers-aug0123}
 {: release-note}
+
+
+
+Worker node fix packs `1.24.16_1579`, `1.25.12_1554`, `1.26.7_1546`, and `1.27.4_1534`.
+:   For more information, see the change logs: [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125),  [1.26](/docs/containers?topic=containers-changelog_126), and [1.27](/docs/containers?topic=containers-changelog_127).
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.17_266` and `5.1.12_285`.
 :   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
@@ -44,6 +58,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ### 31 July 2023
 {: #containers-july3123}
 {: release-note}
+
 
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.17`
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
@@ -58,7 +73,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
-Istio add-on version `1.16.6`, `1.17.4`, and `1.18.1 `.
+Istio add-on version `1.16.6`, `1.17.4`, and `1.18.1`.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
 
 
@@ -6189,7 +6204,8 @@ Cluster and worker states
 
 Cluster planning and creation
 :   You can now find information about cluster planning, creation, and removal and network planning in the following pages:
-    - [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters)
+    - [Create a classic cluster](/docs/containers?topic=containers-cluster-create-classic).
+    - [Create a VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2).
     - [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters)
     - [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes)
     - [Creating clusters](/docs/containers?topic=containers-clusters)

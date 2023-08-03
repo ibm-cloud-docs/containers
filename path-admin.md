@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-27"
+lastupdated: "2023-08-03"
 
 keywords: kubernetes, containers
 
@@ -37,7 +37,9 @@ Start by designing a cluster for maximum availability and capacity for your work
 
 2. **Cluster setup**: After you plan your environment, plan the setup for a specific cluster.
     1. Choose a [supported infrastructure provider](/docs/containers?topic=containers-overview#what-compute-infra-is-offered).
-    2. Plan your [cluster network setup](/docs/containers?topic=containers-plan_clusters).
+    2. Plan your cluster network setup.
+        - [Understanding VPC cluster network basics](/docs/containers?topic=containers-plan_vpc_basics).
+        - [Understanding Classic cluster network basics](/docs/containers?topic=containers-plan_basics).
     3. Plan your cluster for [high availability](/docs/containers?topic=containers-ha_clusters).
     4. Plan your [worker node setup](/docs/containers?topic=containers-planning_worker_nodes).
 

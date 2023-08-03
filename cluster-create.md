@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-27"
+lastupdated: "2023-08-03"
 
-keywords: kubernetes, clusters, worker nodes, worker pools
+keywords: containers, clusters, worker nodes, worker pools
 
 subcollection: containers
 
@@ -15,29 +15,19 @@ subcollection: containers
 
 
 
-
-
-# Preparing to create clusters
+# Preparing your account to create clusters
 {: #clusters}
 
 
-Create a cluster in {{site.data.keyword.containerlong}}.
+
+Complete the following steps to prepare your account for creating {{site.data.keyword.containerlong_notm}} clusters.
 {: shortdesc}
 
-After [getting started](/docs/containers?topic=containers-getting-started), you might want to create a cluster that is customized to your use case and different public and private cloud environments. Consider the following steps to create the correct cluster each time.
 
-1. [Prepare your account to create clusters](/docs/containers?topic=containers-clusters#cluster_prepare). This step includes creating a billable account, setting up an API key with infrastructure permissions, making sure that you have Administrator access in {{site.data.keyword.cloud_notm}} IAM, planning resource groups, and setting up account networking.
-2. [Decide on your cluster setup](/docs/containers?topic=containers-clusters#prepare_cluster_level). This step includes planning cluster network and HA setup, estimating costs, and if applicable, allowing network traffic through a firewall.
-3. Create your [VPC Gen2](/docs/containers?topic=containers-cluster-create-vpc-gen2) or [classic](/docs/containers?topic=containers-cluster-create-classic) cluster by following the steps in the {{site.data.keyword.cloud_notm}} console or CLI.
+After the account administrator makes these preparations, you might not need to change them each time that you create a cluster. However, each time that you create a cluster, you still want to verify that the current account-level state is what you need it to be.
 
 
-## Preparing to create clusters at the account level
-{: #cluster_prepare}
-
-Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.containerlong_notm}}. After the account administrator makes these preparations, you might not need to change them each time that you create a cluster. However, each time that you create a cluster, you still want to verify that the current account-level state is what you need it to be.
-{: shortdesc}
-
-1. [Create or upgrade your account to a billable account ({{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription)](https://cloud.ibm.com/registration).
+1. [Create or upgrade your account to a billable account ({{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription)](https://cloud.ibm.com/registration).{: #cluster_prepare}
 
 2. [Set up an API key for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-access-creds) in the region and resource groups where you want to create clusters. Assign the API key with the [required service and infrastructure permissions to create clusters](/docs/containers?topic=containers-access_reference#cluster_create_permissions).
     Are you the account owner? You already have the necessary permissions! When you create a cluster, the API key for that region and resource group is set with your credentials.
@@ -57,7 +47,7 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
 
 5. **Classic clusters only**: Consider [creating a reservation](/docs/containers?topic=containers-reservations) to lock in a discount over 1 or 3 year terms for your worker nodes. After you create the cluster, add worker pools that use the reserved instances. Typical savings range between 30-50% compared to regular worker node costs.
 
-6. **Standard clusters**: Set up your IBM Cloud infrastructure networking to allow worker-to-master and user-to-master communication. Your cluster network setup varies with the infrastructure provider that you choose (classic or VPC). For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
+6.  Set up your IBM Cloud infrastructure networking to allow worker-to-master and user-to-master communication. Your cluster network setup varies with the infrastructure provider that you choose (classic or VPC).
     * **VPC clusters only**: Your VPC clusters are created with a public and a private cloud service endpoint by default. **Optional**: If you want your VPC clusters to communicate with classic clusters over the private network interface, you can choose to set up classic infrastructure access from the VPC that your cluster is in. Note that you can set up classic infrastructure access for only one VPC per region and [Virtual Routing and Forwarding (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) is required in your {{site.data.keyword.cloud_notm}} account. For more information, see [Setting up access to your Classic Infrastructure from VPC](/docs/vpc?topic=vpc-setting-up-access-to-classic-infrastructure).
 
     * **Classic clusters only, VRF and service endpoint enabled accounts**: You must set up your account to use VRF and service endpoints to support scenarios such as running internet-facing workloads and extending your on-premises data center. After you set up the account, your VPC and classic clusters are created with a public and a private cloud service endpoint by default.
@@ -74,37 +64,11 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
 
 
 
-
-## Deciding on your cluster setup
-{: #prepare_cluster_level}
-{: help}
-{: support}
-
-After you set up your account to create clusters, decide on the setup for your cluster. You must make these decisions every time that you create a cluster. Review the following decision tree image for more information, such as comparisons of Kubernetes and {{site.data.keyword.redhat_openshift_notm}}, and VPC and classic infrastructure.
-{: shortdesc}
-
-
-
-## Next steps
+## Create a cluster
 {: #next_steps}
 
-When the cluster is up and running, you can check out the following cluster administration tasks:
-- If you created the cluster in a multizone capable zone, [spread worker nodes by adding a zone to your cluster](/docs/containers?topic=containers-add_workers).
-- [Deploy an app in your cluster.](/docs/containers?topic=containers-deploy_app#app_cli)
-- [Set up your own private registry in {{site.data.keyword.cloud_notm}} to store and share Docker images with other users.](/docs/Registry?topic=Registry-getting-started)
-- [Set up the cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-install-addon) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
-- Control who can create pods in your cluster with [pod security policies](/docs/containers?topic=containers-psp).
-- Enable the [Istio](/docs/containers?topic=containers-istio) managed add-on to extend your cluster capabilities.
+- [Create a classic cluster](/docs/containers?topic=containers-cluster-create-classic).
+- [Create a VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2).
 
-Then, you can check out the following network configuration steps for your cluster setup:
-* Classic clusters:
-    * Isolate networking workloads to edge worker nodes [in classic clusters without a gateway](/docs/containers?topic=containers-edge).
-    * Expose your apps with [public networking services](/docs/containers?topic=containers-cs_network_planning#public_access) or [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
-    * Connect your cluster with services in private networks outside of your {{site.data.keyword.cloud_notm}} account by setting up [{{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl) or the [strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn).
-    * Create Calico host network policies to isolate your cluster on the [public network](/docs/containers?topic=containers-network_policies#isolate_workers_public) and on the [private network](/docs/containers?topic=containers-network_policies#isolate_workers).
-    * If you use a gateway appliance, such as a Virtual Router Appliance (VRA), [open up the required ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_inbound) in the public firewall to permit inbound traffic to networking services. If you also have a firewall on the private network, [allow communication between worker nodes and let your cluster access infrastructure resources over the private network](/docs/containers?topic=containers-firewall#firewall_private).
-* VPC clusters:
-    * Expose your apps with [public networking services](/docs/containers?topic=containers-cs_network_planning#public_access) or [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
-    * Connect your cluster with services in private networks outside of your {{site.data.keyword.cloud_notm}} account or with resources in other VPCs by [setting up the {{site.data.keyword.vpc_short}} VPN](/docs/containers?topic=containers-vpc-vpnaas).
-    * [Add rules to the security group for your worker nodes](/docs/containers?topic=containers-vpc-network-policy) to control ingress and egress traffic to your VPC subnets.
+
 
