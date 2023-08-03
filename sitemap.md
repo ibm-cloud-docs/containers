@@ -6656,6 +6656,8 @@ subcollection: containers
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
 
+    * [Change log for worker node fix pack 1.27.4_1534, released 1 August 2023](/docs/containers?topic=containers-changelog_127#1274_1534_W)
+
     * [Change log for worker node fix pack 1.27.3_1532, released 17 July 2023](/docs/containers?topic=containers-changelog_127#1273_1532_W)
 
     * [Change log for worker node fix pack 1.27.3_1530, released 03 July 2023](/docs/containers?topic=containers-changelog_127#1273_1530_W)
@@ -6730,6 +6732,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for worker node fix pack 1.26.7_1546, released 1 August 2023](/docs/containers?topic=containers-changelog_126#1267_1546_W)
 
     * [Change log for worker node fix pack 1.26.6_1544, released 17 July 2023](/docs/containers?topic=containers-changelog_126#1266_1544_W)
 
@@ -6831,6 +6835,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for worker node fix pack 1.25.12_1554, released 1 August 2023](/docs/containers?topic=containers-changelog_125#12512_1554_W)
 
     * [Change log for worker node fix pack 1.25.11_1552, released 17 July 2023](/docs/containers?topic=containers-changelog_125#12511_1552_W)
 
@@ -6956,6 +6962,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.16_1579, released 1 August 2023](/docs/containers?topic=containers-changelog_124#12416_1579_W)
 
     * [Change log for worker node fix pack 1.24.15_1576, released 17 July 2023](/docs/containers?topic=containers-changelog_124#12415_1576_W)
 
