@@ -243,7 +243,7 @@ subcollection: containers
 
     * [3 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug0323)
 
-        * CIS benchmarks for {{site.data.keyword.redhat_openshift_notm}} version [4.13]
+        * CIS benchmarks for {{site.data.keyword.redhat_openshift_notm}} version 4.13.
 
     * [1 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug0123)
 
