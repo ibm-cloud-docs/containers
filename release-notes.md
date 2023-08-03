@@ -26,8 +26,6 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
-
-
 ## August 2023
 {: #containers-aug23}
 
@@ -44,6 +42,11 @@ CIS benchmarks for {{site.data.keyword.redhat_openshift_notm}} version 4.13.
 {: #containers-aug0123}
 {: release-note}
 
+
+
+Worker node fix packs `1.24.16_1579`, `1.25.12_1554`, `1.26.7_1546`, and `1.27.4_1534`.
+:   For more information, see the change logs: [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125),  [1.26](/docs/containers?topic=containers-changelog_126), and [1.27](/docs/containers?topic=containers-changelog_127).
+
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.17_266` and `5.1.12_285`.
 :   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
 
@@ -55,6 +58,7 @@ CIS benchmarks for {{site.data.keyword.redhat_openshift_notm}} version 4.13.
 ### 31 July 2023
 {: #containers-july3123}
 {: release-note}
+
 
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.17`
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).

@@ -247,6 +247,8 @@ subcollection: containers
 
     * [1 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug0123)
 
+        * Worker node fix packs `1.24.16_1579`, `1.25.12_1554`, `1.26.7_1546`, and `1.27.4_1534`.
+
         * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.17_266` and `5.1.12_285`.
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
