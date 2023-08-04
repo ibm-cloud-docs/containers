@@ -247,17 +247,19 @@ subcollection: containers
 
     * [1 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug0123)
 
-        * Worker node fix packs `1.24.16_1579`, `1.25.12_1554`, `1.26.7_1546`, and `1.27.4_1534`.
+        * Worker node fix packs are available.
 
         * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.17_266` and `5.1.12_285`.
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
 
-    * [31 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july3123)
+    * [28 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2823)
 
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.17`
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.17`.
 
     * [27 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2723)
+
+        * Master fix packs are available
 
         * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1.6`
 
@@ -5743,6 +5745,8 @@ subcollection: containers
 
 * [What's next?](/docs/containers?topic=containers-storage_portworx_about#about-px-next)
 
+* [Exploring other Portworx features](/docs/containers?topic=containers-storage_portworx_about#features)
+
 [Planning your Portworx setup](/docs/containers?topic=containers-storage_portworx_plan#storage_portworx_plan)
 
 * [Limitations](/docs/containers?topic=containers-storage_portworx_plan#portworx_limitations)
@@ -5786,10 +5790,6 @@ subcollection: containers
 [Updating Portworx in your cluster](/docs/containers?topic=containers-storage_portworx_update#storage_portworx_update)
 
 * [VPC: Updating worker nodes with Portworx volumes](/docs/containers?topic=containers-storage_portworx_update#portworx_vpc_up)
-
-* [Migrating Red Hat Enterprise Linux versions](/docs/containers?topic=containers-storage_portworx_update#px-rhel-migrate)
-
-* [Exploring other Portworx features](/docs/containers?topic=containers-storage_portworx_update#features)
 
 [Setting up disaster recovery with Portworx](/docs/containers?topic=containers-storage_portworx_recovery#storage_portworx_recovery)
 
