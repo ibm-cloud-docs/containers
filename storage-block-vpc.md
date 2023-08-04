@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-26"
+lastupdated: "2023-08-04"
 
 keywords: kubernetes
 
@@ -24,6 +24,12 @@ subcollection: containers
 {: shortdesc}
 
 You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.block_storage_is_short}} is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage-plan). For pricing information, see [Pricing for {{site.data.keyword.block_storage_is_short}}](https://cloud.ibm.com/vpc-ext/provision/vs){: external}.
+
+
+
+The {{site.data.keyword.block_storage_is_short}} add-on is enabled by default on VPC clusters. However, the add-on is not currently supported for clusters with `UBUNTU_18_S390X` worker nodes. When you create a VPC cluster with `UBUNTU_18_S390X` worker nodes, the add-on pods remain in a `Pending` state. You can disable the add-on by running the `ibmcloud ks cluster addon disable` command.
+{: important}
+
 
 ## Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}
 {: #vpc_block_qs}
