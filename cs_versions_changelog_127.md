@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-08-03"
+lastupdated: "2023-08-04"
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
 
@@ -54,6 +54,27 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 | Kubernetes | 1.27.3 | 1.27.4 | see [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.4){: external}. |
 | Containerd | 1.6.21 | 1.6.22 | see [change logs](https://github.com/containerd/containerd/releases/tag/v1.6.22){: external}. |
 {: caption="Changes since version 1.27.3_1532" caption-side="bottom"}
+
+
+### Change log for master fix pack 1.27.4_1533, released 27 July 2023
+{: #1274_1533_M}
+
+The following table shows the changes that are in the master fix pack 1.27.4_1533. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.21 | v1.4.0 | Updated `Go` to version `1.19.11` and updated `Go` dependencies. Updated UBI base image with FedRAMP enablement support. |
+| etcd | N/A | N/A | etcd is now automatically defragmented when necessary. |
+| GPU device plug-in and installer | 202b284 | 495931a | Updated `Go` to version `1.20.6`. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.27.3-1 | v1.27.4-1 | Updated to support the Kubernetes `1.27.4` release. Updated `Go` dependencies and to `Go` version `1.20.6`. Updates to classic load balancers are now staggered. |
+| Key Management Service provider | v2.6.7 | v2.8.0 | Updated `Go` to version `1.19.11` and updated `Go` dependencies. Updated UBI base image with FedRAMP enablement support. |
+| Konnectivity agent and server | v0.1.2_591_iks | v0.1.3_5_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.1.3){: external}. |
+| Kubernetes NodeLocal DNS cache | 1.22.21 | 1.22.23 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.23){: external}. |
+| Kubernetes | v1.27.3 | v1.27.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.4){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2584 | 2631 | Updated `Go` to version `1.19.10` and updated `Go` dependencies. Updated Alpine base image. |
+{: caption="Changes since version 1.27.3_1529" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.27.3_1532, released 17 July 2023
