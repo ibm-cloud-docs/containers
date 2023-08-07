@@ -241,6 +241,10 @@ subcollection: containers
 
 * [August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug23)
 
+    * [7 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug0723)
+
+        * Cluster autoscaler add-on versions `1.0.9_81`,`1.0.8_82`, and `1.0.7_83`.
+
     * [3 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug0323)
 
         * CIS benchmarks for {{site.data.keyword.redhat_openshift_notm}} version 4.13.
@@ -7704,11 +7708,15 @@ subcollection: containers
 
 * [Version 1.0.9](/docs/containers?topic=containers-ca_changelog#0109_ca_addon)
 
+    * [Change log for patch update 1.0.9_81, released 07 August 2023](/docs/containers?topic=containers-ca_changelog#10981_ca)
+
     * [Change log for patch update 1.0.9_70, released 24 July 2023](/docs/containers?topic=containers-ca_changelog#10970_ca)
 
     * [Change log for patch update 1.0.9_44, released 22 June 2023](/docs/containers?topic=containers-ca_changelog#10944_ca)
 
 * [Version 1.0.8](/docs/containers?topic=containers-ca_changelog#0108_ca_addon)
+
+    * [Change log for patch update 1.0.8_82, released 7 August 2023](/docs/containers?topic=containers-ca_changelog#10882_ca)
 
     * [Change log for patch update 1.0.8_56, released 6 July 2023](/docs/containers?topic=containers-ca_changelog#10856_ca)
 
@@ -7721,6 +7729,8 @@ subcollection: containers
     * [Change log for patch update 1.0.8_968, released 9 March 2023](/docs/containers?topic=containers-ca_changelog#108968_ca)
 
 * [Version 1.0.7](/docs/containers?topic=containers-ca_changelog#0107_ca_addon)
+
+    * [Change log for patch update 1.0.7_83, released 7 August 2023](/docs/containers?topic=containers-ca_changelog#10783_ca)
 
     * [Change log for patch update 1.0.7_57, released 6 July 2023](/docs/containers?topic=containers-ca_changelog#10757_ca)
 
