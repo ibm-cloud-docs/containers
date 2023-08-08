@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-08-03"
+lastupdated: "2023-08-08"
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
 
@@ -37,7 +37,7 @@ With the release of Ubuntu 20, some worker node flavors are deprecated. If you h
 
 1. For the worker pools that you want to migrate, review the details of the worker pool.
     ```sh
-    ibmcloud ks worker-pool get --cluster CLUSTER --worker-pool WORKER-POOL
+    ibmcloud ks worker-pool get --cluster CLUSTER --worker-pool WORKER-POOL --output json
     ```
     {: pre}
 
