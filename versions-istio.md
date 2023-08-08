@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-08-01"
+lastupdated: "2023-08-08"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -35,6 +35,22 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 ## Version 1.18
 {: #v118}
+
+### Changelog for 1.18.2, released 8 August 2023
+{: #1182}
+
+Review the changes that are included in version 1.18.2 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.18.1
+
+Current version
+:   1.18.2
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.18.2](https://istio.io/latest/news/releases/1.18.x/announcing-1.18.2/){: external}.
+:   For more information, see the [Istio security bulletin 2023-003](https://istio.io/latest/news/security/istio-security-2023-003/){: external}.
 
 ### Change log for 1.18.1, released 27 July 2023
 {: #1181}
@@ -83,6 +99,23 @@ Updates in this version
 
 ## Version 1.17
 {: #v117}
+
+### Changelog for 1.17.5, released 8 August 2023
+{: #1175}
+
+Review the changes that are included in version 1.17.5 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.17.4
+
+Current version
+:   1.17.5
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.17.5](https://istio.io/latest/news/releases/1.17.x/announcing-1.17.5/){: external}.
+:   For more information, see the [Istio security bulletin 2023-003](https://istio.io/latest/news/security/istio-security-2023-003/){: external}.
+
 
 ### Change log for 1.17.4, released 27 July 2023
 {: #1174}
@@ -211,6 +244,23 @@ Updates in this version
 
 Version 1.16 of the managed Istio add-on is unsupported. 
 {: important}
+
+### Changelog for 1.16.7, released 8 August 2023
+{: #1167}
+
+Review the changes that are included in version 1.16.7 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.16.6
+
+Current version
+:   1.16.7
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.16.7](https://istio.io/latest/news/releases/1.16.x/announcing-1.16.7/){: external}.
+:   For more information, see the [Istio security bulletin 2023-003](https://istio.io/latest/news/security/istio-security-2023-003/){: external}.
+
 
 ### Change log for 1.16.6, released 27 July 2023
 {: #1166}

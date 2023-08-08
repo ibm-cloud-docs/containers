@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-27"
+lastupdated: "2023-08-08"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -49,7 +49,7 @@ Set up the managed Istio add-on in your cluster.
 
     ```sh
     NAME            Version     Health State   Health Status
-    istio           1.18.1       normal         Addon Ready
+    istio           1.18.2       normal         Addon Ready
     ```
     {: screen}
 
@@ -87,13 +87,13 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 1. Install BookInfo in your cluster.
     1. Download the latest Istio package, which includes the configuration files for the BookInfo app.
         ```sh
-        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.18.1 sh -
+        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.18.2 sh -
         ```
         {: pre}
 
     2. Navigate to the Istio package directory.
         ```sh
-        cd istio-1.18.1
+        cd istio-1.18.2
         ```
         {: pre}
 
