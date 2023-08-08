@@ -37,7 +37,13 @@ For example, using Istio in your microservice mesh can help you:
 - Deploy canary versions of apps and control the traffic that is sent to them.
 - Enable automatic encryption of data that is transferred between microservices.
 
-An Istio service mesh is composed of a data plane and a control plane. The data plane consists of Envoy proxy sidecars in each app pod, which mediate communication between microservices. The control plane consists of Pilot, Mixer telemetry and policy, and Citadel, which apply Istio configurations in your cluster. For more information about each of these components, see the [`istio` add-on description](#istio_ov_components).
+An Istio service mesh is composed of two main components, a data plane and a control plane. 
+
+Data plane
+:   The data plane consists of your applications, the sidecars that are injected into your application pods, the gateways, and data plane configuration resources like `ServiceEntries`, `VirtualServices`, `Gateways`, `DestinationRules`, `EnvoyFilters`, and more. You are responsible for configuring your service mesh, updating your sidecars and custom gateways on a patch update, and upgrading the add-on as newer versions are released.
+
+Control plane
+:   The control plane consists of the Istio operator, the managed Istio Operator, and `Istiod` which contains Pilot, Mixer telemetry and policy, and Citadel components. For more information about each of these components, see the [`istio` add-on description](#istio_ov_components). {{site.data.keyword.cloud_notm}} manages the control plane by providing patch updates, resolving vulnerabilities, and reconciling the managed resources.
 
 
 ## What is Istio on {{site.data.keyword.containerlong_notm}}?
