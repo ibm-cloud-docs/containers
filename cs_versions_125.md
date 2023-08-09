@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-06-02"
+lastupdated: "2023-08-09"
 
 keywords: kubernetes, containers, 125, version 125, 125 update actions
 
@@ -18,7 +18,7 @@ subcollection: containers
 # 1.25 version information and update actions
 {: #cs_versions_125}
 
-Review information about version 1.25 of {{site.data.keyword.containerlong}}, released 03 October 2022.
+Review information about version 1.25 of {{site.data.keyword.containerlong}}, released {{site.data.keyword.kubernetes_125_release_date}}.
 {: shortdesc}
 
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
