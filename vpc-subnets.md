@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-28"
+lastupdated: "2023-08-10"
 
 keywords: kubernetes, ips, vlans, networking, public gateway
 
@@ -489,7 +489,7 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
     ibm-cloud.kubernetes.io/iaas-provider=gc
     ibm-cloud.kubernetes.io/internal-ip=10.240.0.77
     ibm-cloud.kubernetes.io/machine-type=c2.2x4
-    ibm-cloud.kubernetes.io/os=UBUNTU_18_64
+    ibm-cloud.kubernetes.io/os=UBUNTU_20_64
     ibm-cloud.kubernetes.io/region=us-south
     ibm-cloud.kubernetes.io/sgx-enabled=false
     ibm-cloud.kubernetes.io/subnet-id=5f5787a4-f560-471b-b6ce-20067ac93439
