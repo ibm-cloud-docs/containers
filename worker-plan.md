@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-01"
+lastupdated: "2023-08-10"
 
 keywords: kubernetes, hardware, flavor, machine type, vm, bm
 
@@ -74,7 +74,7 @@ Unlike classic clusters, the worker nodes of your VPC cluster are not listed in 
 
 Choose a flavor, or machine type, with the correct storage configuration to support your workload. Some flavors have a mix of the following disks and storage configurations. For example, some flavors might have a SATA primary disk with a raw SSD secondary disk.
 
-[VPC clusters]{: tag-vpc}: For VPC clusters, you can also provision a secondary disk on your worker nodes. This optional disk is provisioned in your account and you can can see them in VPC console. The charges for these disks are separate to the cost of each worker and show as a different line item on your bill. These secondary volumes also count toward the quota usage for the your account.
+[VPC clusters]{: tag-vpc} You can also provision a secondary disk on your worker nodes. This optional disk is provisioned in your account and you can can see them in VPC console. The charges for these disks are separate to the cost of each worker and show as a different line item on your bill. These secondary volumes also count toward the quota usage for the your account.
 
 SATA
 :   A magnetic spinning disk storage device that is often used for the primary disk of the worker node that stores the OS file system.
@@ -108,7 +108,7 @@ Want to be sure that you always have enough worker nodes to cover your workload?
 ### How can I check the operating system that my worker nodes run?
 {: #flavor-os-check}
 
-When you create a worker pool, you choose the flavor, which describes the operating system along with the compute resources of the worker nodes. To update the version of the operating system that a worker node uses, such as from Ubuntu 16 to 18, you can [replace the flavor of the worker pool](/docs/containers?topic=containers-update#machine_type).
+When you create a worker pool, you choose the flavor, which describes the operating system along with the compute resources of the worker nodes. To update the version of the operating system that a worker node uses, such as from Ubuntu 18 to 20, you can [replace the flavor of the worker pool](/docs/containers?topic=containers-update#machine_type).
 
 You can also log in to your cluster to check the operating system of the worker nodes.
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
@@ -131,7 +131,7 @@ You can also log in to your cluster to check the operating system of the worker 
     Roles:              <none>
     Labels:             arch=amd64
                         ...
-                        ibm-cloud.kubernetes.io/os=UBUNTU_18_64
+                        ibm-cloud.kubernetes.io/os=UBUNTU_20_64
                         ...
                         kubernetes.io/arch=amd64
                         kubernetes.io/hostname=10.189.33.198

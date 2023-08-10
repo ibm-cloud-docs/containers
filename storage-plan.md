@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-26"
+lastupdated: "2023-08-10"
 
 keywords: kubernetes
 
@@ -113,6 +113,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 
 | Characteristics | Description |
 | --- | --- |
+| Deployment guide | [Setting up {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage). |
 | Ideal data types | All |
 | Supported provisioning type | Dynamic and static |
 | Data usage pattern | Random read-write operations, sequential read-write operations, or write-intensive workloads | 
@@ -138,6 +139,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 
 | Characteristics | Description |
 | --- | --- |
+| Deployment guide | [Setting up {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage). |
 | Ideal data types | All |
 | Supported provisioning type | Dynamic and static |
 | Data usage pattern | Random read-write operations, sequential read-write operations, or write-intensive workloads |
@@ -164,6 +166,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 
 | Characteristic | Description |
 | --- | --- |
+| Deployment guide | [Setting up {{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-file-vpc-install). |
 | Ideal data types | All |
 | Supported provisioning type | Dynamic and static |
 | Data usage pattern | Random read-write operations, sequential read-write operations, or write-intensive workloads |
@@ -188,6 +191,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 
 | Characteristics | Description |
 | --- | --- |
+| Deployment guide | [Setting up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block). |
 | Multizone-capable | No, as specific to a data center. Data can't be shared across zones, unless you implement your own data replication. |
 | Ideal data types | All |
 | Data usage pattern | Random read-write operations, sequential read-write operations, or write-intensive workloads |
@@ -223,6 +227,7 @@ The following sections show the options that you have in {{site.data.keyword.con
 
 | Characteristic | Description |
 | --- | --- |
+| Deployment guide | [Setting up {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-understand). |
 | Supported infrastructure providers | Classic, VPC, Satellite |
 | Ideal data types | Semi-structured and unstructured data |
 | Data usage pattern | Read-intensive workloads. Few or no write operations.
@@ -246,6 +251,7 @@ The following sections show the options that you have in {{site.data.keyword.con
 
 | Characteristics | Description |
 | --- | --- |
+| Deployment guide | [Setting up {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-storage_portworx_about). |
 | Supported infrastructure providers | Classic, VPC, Satellite |
 | Ideal data types | Any |
 | Data usage pattern | Read-intensive workloads. Few or no write operations. | Write-intensive workloads. Random read and write operation. Sequential read and write operations | Read-write-intensive workloads |
@@ -269,8 +275,10 @@ The following sections show the options that you have in {{site.data.keyword.con
 
 
 
+
 | Characteristics | Description|
 | --- | --- |
+| Deployment guide | [Connect a Cloud Databases deployment to an IBM Cloud Kubernetes Service application](/docs/cloud-databases?topic=cloud-databases-tutorial-k8s-app). |
 | Supported infrastructure providers | Classic, VPC, Satellite |
 | Ideal data types | Depends on the DBaaS |
 | Data usage pattern | Read-write-intensive workloads |
