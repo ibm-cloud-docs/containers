@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-20"
+lastupdated: "2023-08-14"
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
 
@@ -259,13 +259,15 @@ Review the following thresholds and alerts for worker nodes.
 Reloading or rebooting the worker can resolve the issue. However, you might need add more workers to increase capacity.
 {: shortdesc}
 
-1. Get your worker nodes and review the [state](/docs/openshift?topic=openshift-worker-node-state-reference). 
+1. Get your worker nodes and review the [state](/docs/containers?topic=containers-worker-node-state-reference). 
     ```sh
     kubectl get nodes
     ```
     {: pre}
 
-2. If all the worker nodes are **not** in the `Ready` state, [add worker nodes to your cluster](/docs/containers?topic=containers-add_workers).
+2. If all the worker nodes are **not** in the `Ready` state, add worker nodes to your cluster.
+    - [Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic).
+    - [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc).
 
 3. If all the worker nodes are in the `Ready` state, [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker nodes.
     1. Describe your worker node and review the **Events** section for common error messages.

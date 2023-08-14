@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-03-22"
+lastupdated: "2023-08-14"
 
-keywords: kubernetes
+keywords: containers
 
 subcollection: containers
 
@@ -61,7 +61,7 @@ See the following sections:
     kubectl get pod <pod_name> -n <namespace> -o go-template='{{range.status.containerStatuses}}{{"Container Name: "}}{{.name}}{{"\r\nLastState: "}}{{.lastState}}{{end}}'
     ```
 4. Review the reason. For example, `OOM Killed` means out of memory indicating that the container is crashing because of a resource limit.
-5. Add capacity to your cluster such as by [resizing worker pools](/docs/containers?topic=containers-add_workers) so that the resources can be fulfilled.
+5. Add capacity to your cluster such as by resizing worker pools so that the resources can be fulfilled. For more information, see [Resize your Classic worker pool](/docs/containers?topic=containers-add-workers-classic) or [Resize your VPC worker pool](/docs/containers?topic=containers-add-workers-vpc).
 
 
 

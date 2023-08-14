@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-27"
+lastupdated: "2023-08-14"
 
 keywords: kubernetes
 
@@ -160,7 +160,7 @@ The following steps present a general process to manage costs for your {{site.da
 1. Decide on a cloud platform strategy to manage your resources.
     * See [IBM Cloud Billing and Usage docs](/docs/billing-usage).
     * Organize your billing with [resource groups](/docs/account?topic=account-rgs).
-    * [Add tags to your clusters](/docs/containers?topic=containers-add_workers#cluster_tags) according to your organizational strategy.
+    * [Add tags to your clusters](/docs/containers?topic=containers-worker-tag-label) according to your organizational strategy.
 2. Plan the type of cluster that you need.
     * [Size your cluster to support your workloads](/docs/containers?topic=containers-strategy#sizing), including the network bandwidth that your workloads need.
     * [Decide the cluster environment that you want](/docs/containers?topic=containers-strategy#kube_env).
@@ -169,7 +169,7 @@ The following steps present a general process to manage costs for your {{site.da
 4. [Estimate your costs](/docs/billing-usage?topic=billing-usage-cost#cost) and review detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing](https://www.ibm.com/cloud/kubernetes-service){: external}.
 5. Manage the lifecycle of your cluster to control costs.
     * Consider [enabling the cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-install-addon) to automatically add or remove worker nodes in response to your cluster workload resource requests.
-    * Manually [resize your worker pool](/docs/containers?topic=containers-add_workers) to remove worker nodes that you don't need. Keep in mind that you can't scale a worker pool down to zero worker nodes.
+    * Manually resize your worker pool to remove worker nodes that you don't need. Keep in mind that you can't scale a worker pool down to zero worker nodes.
     * Use Kubernetes features such as [horizontal pod autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/){: external}, [pod priority](/docs/containers?topic=containers-pod_priority), and [resource requests and limits](/docs/containers?topic=containers-app#resourcereq) to control how resources are used within your cluster.
     * Consider setting up a [monitoring tool](/docs/containers?topic=containers-health-monitor#view_metrics) such as {{site.data.keyword.mon_full_notm}} and creating alerts for your workloads when they need more resources.
 6. [View your usage](/docs/billing-usage?topic=billing-usage-viewingusage#viewingusage) to continuously refine how you consume {{site.data.keyword.cloud_notm}} services.

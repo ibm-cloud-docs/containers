@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-27"
+lastupdated: "2023-08-14"
 
 keywords: containers, upgrade, version, update cluster, update worker nodes, update cluster components, update cluster master
 
@@ -30,7 +30,7 @@ How do I know when to update the master?
 :   You are notified in the console, announcements, and the CLI when updates are available. You can also periodically check the [supported versions page](/docs/containers?topic=containers-cs_versions).
 
 How many versions behind the latest can the master be?
-:   You can update the API server only to the next version ahead of its current version (`n+1`). Additionally, your worker nodes can be up to two versions behind the master version (`n-2`)
+:   You can update the API server only to the next version ahead of its current version (`n+1`).
 
 
 Can my worker nodes run a later version than the master?
@@ -147,7 +147,7 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
 - [Update the master](#master). The worker node version can't be higher than the API server version that runs in your Kubernetes master.
 - Make any changes that are marked with _Update after master_ in the [Kubernetes version preparation guide](/docs/containers?topic=containers-cs_versions).
 - If you want to apply a patch update, review the [Kubernetes version change log](/docs/containers?topic=containers-cs_versions).
-- Consider [adding more worker nodes](/docs/containers?topic=containers-add_workers) so that your cluster has enough capacity to rescheduling your workloads during the update.
+- Consider adding more worker nodes so that your cluster has enough capacity to rescheduling your workloads during the update. For more information, see [Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic) or [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc).
 - Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms).
 
 ### Updating classic worker nodes in the CLI with a configmap
@@ -332,7 +332,7 @@ To update {{site.data.keyword.satelliteshort}} worker nodes, see [Updating hosts
 For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 
 What happens to my apps during an update?
-:   If you run apps as part of a deployment on worker nodes that you update, the apps are rescheduled onto other worker nodes in the cluster. These worker nodes might be in a different worker pool. To avoid downtime for your app, you must ensure that you have enough capacity in the cluster to carry the workload, such as by [resizing your worker pools](/docs/containers?topic=containers-add_workers#resize_pool).
+:   If you run apps as part of a deployment on worker nodes that you update, the apps are rescheduled onto other worker nodes in the cluster. These worker nodes might be in a different worker pool. To avoid downtime for your app, you must ensure that you have enough capacity in the cluster to carry the workload, such as by resizing your worker pools. For more information, see [Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic) or [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc).
 
 What happens to my worker node during an update?
 :   Your VPC worker node is replaced by removing the old worker node and provisioning a new worker node that runs at the updated patch or `major.minor` version. The replacement worker node is created in the same zone, same worker pool, and with the same flavor as the deleted worker node. However, the replacement worker node is assigned a new private IP address, and loses any custom labels or taints that you applied to the old worker node (worker pool labels and taints are still applied to the replacement worker node).
@@ -365,7 +365,7 @@ Complete the following steps to update your worker nodes by using the CLI.
 {: shortdesc}
 
 1. Complete the [prerequisite steps](#vpc_worker_prereqs).
-2. Optional: Add capacity to your cluster by [resizing the worker pool](/docs/containers?topic=containers-add_workers#resize_pool). The pods on the worker node can be rescheduled and continue running on the added worker nodes during the update.
+2. Optional: Add capacity to your cluster by resizing the worker pool. The pods on the worker node can be rescheduled and continue running on the added worker nodes during the update. For more information, see [Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic) or [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc).
 3. List the worker nodes in your cluster and note the **ID** and **Primary IP** of the worker node that you want to update.
     ```sh
     ibmcloud ks worker ls --cluster CLUSTER
@@ -386,7 +386,7 @@ Complete the following steps to update your worker nodes by using the CLI.
         {: pre}
 
 5. Repeat these steps for each worker node that you must update.
-6. Optional: After the replaced worker nodes are in a **Ready** status, [resize the worker pool](/docs/containers?topic=containers-add_workers#resize_pool) to meet the cluster capacity that you want.
+6. Optional: After the replaced worker nodes are in a **Ready** status, resize the worker pool to meet the cluster capacity that you want. For more information, [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc).
 
 If you are running Portworx in your VPC cluster, you must [manually attach your {{site.data.keyword.block_storage_is_short}} volume to your new worker node.](/docs/containers?topic=containers-storage_portworx_update)
 {: note}
@@ -395,7 +395,7 @@ If you are running Portworx in your VPC cluster, you must [manually attach your 
 ### Updating VPC worker nodes in the console
 {: #vpc_worker_ui}
 
-You can update your VPC worker nodes in the console. Before you begin, consider [adding more worker nodes](/docs/containers?topic=containers-add_workers) to the cluster to help avoid downtime for your apps.
+You can update your VPC worker nodes in the console. Before you begin, consider [adding worker nodes](/docs/containers?topic=containers-add-workers-vpc) to the cluster to help avoid downtime for your apps.
 {: shortdesc}
 
 1. Complete the [prerequisite steps](#vpc_worker_prereqs).

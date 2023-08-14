@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-08-11"
+lastupdated: "2023-08-14"
 
 keywords: containers
 subcollection: containers
@@ -3640,51 +3640,30 @@ subcollection: containers
 [Accessing private clusters by using the WireGuard VPN](/docs/containers?topic=containers-cluster-access-wireguard#cluster-access-wireguard)
 
 
+## Adding worker nodes
+{: #sitemap_adding_worker_nodes}
+
+
+[Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic#add-workers-classic)
+
+* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-classic#add_pool)
+
+* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-classic#resize-pool)
+
+* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-classic#add_zone)
+
+[Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc#add-workers-vpc)
+
+* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-vpc#resize-pool)
+
+* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_pool)
+
+* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone)
+
+
 ## Managing the cluster and worker node lifecycle
 {: #sitemap_managing_the_cluster_and_worker_node_lifecycle}
 
-
-[Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers#add_workers)
-
-* [Adding worker nodes by resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool)
-
-* [Adding worker nodes in VPC clusters](/docs/containers?topic=containers-add_workers#vpc_pools)
-
-    * [Creating a new worker pool](/docs/containers?topic=containers-add_workers#vpc_add_pool)
-
-    * [Adding a zone to a worker pool](/docs/containers?topic=containers-add_workers#vpc_add_zone)
-
-* [Adding worker nodes in classic clusters](/docs/containers?topic=containers-add_workers#classic_pools)
-
-    * [Creating a new worker pool](/docs/containers?topic=containers-add_workers#add_pool)
-
-    * [Adding a zone to a worker pool](/docs/containers?topic=containers-add_workers#add_zone)
-
-* [Deprecated: Adding stand-alone worker nodes](/docs/containers?topic=containers-add_workers#standalone)
-
-* [Installing SGX drivers and platform software on SGX-capable worker nodes](/docs/containers?topic=containers-add_workers#install-sgx)
-
-    * [Installing with a script](/docs/containers?topic=containers-add_workers#intel-sgx-script)
-
-* [Adding tags to existing clusters](/docs/containers?topic=containers-add_workers#cluster_tags)
-
-    * [Adding tags to clusters with the console](/docs/containers?topic=containers-add_workers#add-tags-console)
-
-    * [Adding tags to clusters with the CLI](/docs/containers?topic=containers-add_workers#add-tags-cli)
-
-* [Adding labels to existing worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels)
-
-* [Automatically resolving issues for your worker nodes](/docs/containers?topic=containers-add_workers#planning_autorecovery)
-
-[Creating and managing dedicated hosts on VPC Gen 2 infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
-
-* [Setting up dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#setup-dedicated-host-cli)
-
-* [Removing worker nodes from a dedicated host in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-worker-nodes-cli)
-
-* [Removing dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-hosts-cli)
-
-* [Removing dedicated hosts pools in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-host-pool-cli)
 
 [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update#update)
 
@@ -3717,6 +3696,16 @@ subcollection: containers
     * [Managing automatic updates for Ingress ALBs](/docs/containers?topic=containers-update#alb)
 
 * [Updating managed add-ons](/docs/containers?topic=containers-update#addons)
+
+[Creating and managing dedicated hosts on VPC Gen 2 infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
+
+* [Setting up dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#setup-dedicated-host-cli)
+
+* [Removing worker nodes from a dedicated host in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-worker-nodes-cli)
+
+* [Removing dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-hosts-cli)
+
+* [Removing dedicated hosts pools in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-host-pool-cli)
 
 [Tuning performance](/docs/containers?topic=containers-kernel#kernel)
 
@@ -5957,6 +5946,10 @@ subcollection: containers
 * [About high availability](/docs/containers?topic=containers-ha#ha-about)
 
 * [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
+
+[Installing SGX drivers and platform software on SGX-capable worker nodes](/docs/containers?topic=containers-install-sgx#install-sgx)
+
+* [Installing with a script](/docs/containers?topic=containers-install-sgx#intel-sgx-script)
 
 
 ## API reference

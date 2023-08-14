@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-08-01"
+lastupdated: "2023-08-14"
 
 connectivitykeywords: kubernetes, errhpaiwc, ingress, autoscaler, alb
 
@@ -85,7 +85,7 @@ For more information on ALB autoscaling, see [Dynamically scaling ALBs with auto
             {: pre}
     
     - **To add extra worker nodes to the cluster**
-        1. Follow the steps in [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers). Make sure to add workers to the appropriate zone and VLAN identified in previous steps. If you are using edge nodes, label them as `dedicated=edge`.
+        1. Follow the steps in [Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic) or [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc). Make sure to add workers to the appropriate zone and VLAN identified in previous steps. If you are using edge nodes, label them as `dedicated=edge`.
 
 1. Wait 15 to 20 minutes for the changes to apply. Then check if the warning is resolved. 
 

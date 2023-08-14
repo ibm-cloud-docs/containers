@@ -73,11 +73,15 @@ toc:
           - cluster-access-admission-control.md
           - cluster-access-wireguard.md
       - topicgroup:
+          label: Adding worker nodes
+          topics:
+          - add-workers-classic.md
+          - add-workers-vpc.md
+      - topicgroup:
           label: Managing the cluster and worker node lifecycle
           topics:
-          - worker-add.md
-          - dedicated-hosts.md
           - update.md
+          - dedicated-hosts.md
           - performance.md
           - cluster-remove.md
           - host-maintenance.md
@@ -262,6 +266,7 @@ toc:
           - integrations-helm.md
           - integrations-svcbind.md
           - ha.md
+          - sgx-install.md
   - navgroup:
       id: reference
       topics:

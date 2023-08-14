@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-07-31"
+lastupdated: "2023-08-14"
 
 keywords: ingress, alb, manage albs, update, alb image
 
@@ -286,7 +286,7 @@ ibmcloud ks ingress alb autoscale set --alb ALB --cluster CLUSTER --max-replicas
 :   The ALB ID. To see available ALB IDs, run `ibmcloud ks ingress alb ls`.
 
 `--max-replicas REPLICAS`:
-:   The maximum number of replicas for the ALB. Specify a whole number. The maximum number of ALB replicas is limited to the number of worker nodes on the cluster. To add more worker nodes to your cluster, see [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers).
+:   The maximum number of replicas for the ALB. Specify a whole number. The maximum number of ALB replicas is limited to the number of worker nodes on the cluster. To add more worker nodes to your cluster, see [Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic) or [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc).
 
 `--min-replicas REPLICAS`
 :   The minimum number of replicas for the ALB. Specify a whole number that is at least `2`.
