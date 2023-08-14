@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-26"
+lastupdated: "2023-08-14"
 
 keywords: kubernetes, vlan
 
@@ -259,7 +259,7 @@ To change the VLANs that a worker pool uses to provision worker nodes.
 
 4. Set up a worker pool with the new VLAN network metadata for each zone. You can create a new worker pool, or modify an existing worker pool.
 
-    - **Create a new worker pool**: See [adding worker nodes by creating a new worker pool](/docs/containers?topic=containers-add_workers#add_pool).
+    - **Create a worker pool**: See [adding worker nodes by creating a new worker pool](/docs/containers?topic=containers-add-workers-classic).
 
     - **Modify an existing worker pool**: Set the worker pool's network metadata to use the VLAN for each zone. Worker nodes that were already created in the pool continue to use the previous VLANs, but new worker nodes in the pool use new VLAN metadata that you set.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-08-14"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -46,7 +46,7 @@ By default, ALB pods have two replicas. However, ALB pods have anti-affinity rul
     {: pre}
 
     * Classic and VPC clusters: If only one worker node exists in a zone, increase the number of worker nodes in that zone.
-        * **If you don't use edge nodes**: Ensure that at least two worker nodes exist in each zone by [resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool), [creating a new worker pool in a VPC cluster](/docs/containers?topic=containers-add_workers#vpc_add_pool), or [creating a new worker pool in a classic cluster](/docs/containers?topic=containers-add_workers#add_pool).
+        * **If you don't use edge nodes**: Ensure that at least two worker nodes exist in each zone by resizing an existing worker pool, [creating a new worker pool in a VPC cluster](/docs/containers?topic=containers-add-workers-vpc#vpc_add_pool), or [creating a new worker pool in a classic cluster](/docs/containers?topic=containers-add-workers-classic#add_pool).
         * **If you use edge nodes**: Ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge) are enabled in each zone.
     * Classic clusters only: If more than one worker node exists in each zone of your classic cluster, your worker nodes might be connected to different VLANs within one zone so that only one worker node exists on a private VLAN. Continue to the next step.
 
@@ -56,7 +56,7 @@ By default, ALB pods have two replicas. However, ALB pods have anti-affinity rul
     ```
     {: pre}
 
-3. If only one worker node exists on a private VLAN, and the other worker nodes in the zone are attached to a different private VLAN, [create a new worker pool](/docs/containers?topic=containers-add_workers#add_pool) with a size of at least one worker node. When you add a zone to the worker pool in step 6, specify the same zone and private VLAN as the worker node that you previously identified.
+3. If only one worker node exists on a private VLAN, and the other worker nodes in the zone are attached to a different private VLAN, [create a new worker pool](/docs/containers?topic=containers-add-workers-classic) with a size of at least one worker node. When you add a zone to the worker pool in step 6, specify the same zone and private VLAN as the worker node that you previously identified.
 
 4. Repeat these steps for each zone in your cluster to ensure that more than one worker node exists on a private VLAN.
 

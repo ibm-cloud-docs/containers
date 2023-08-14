@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-07"
+lastupdated: "2023-08-14"
 
 keywords: kubernetes, coredns, kubedns, dns
 
@@ -212,7 +212,7 @@ Do not add the DNS cache label when you already use [zone-aware DNS](#dns_zone_a
 Enable `NodeLocal` DNS cache for one or more worker nodes in your Kubernetes cluster.
 {: shortdesc}
 
-The following steps update DNS pods that run on particular worker nodes. You can also [label the worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels) so that future nodes inherit the label.
+The following steps update DNS pods that run on particular worker nodes. You can also [label the worker pool](/docs/containers?topic=containers-worker-tag-label) so that future nodes inherit the label.
 {: note}
 
 Before you begin, update any [DNS egress network policies](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/nodelocaldns#network-policy-and-dns-connectivity){: external} that are impacted by this feature, such as policies that rely on pod or namespace selectors for DNS egress.
@@ -234,7 +234,7 @@ kubectl get networkpolicy --all-namespaces -o yaml
 
 4. Add the `ibm-cloud.kubernetes.io/node-local-dns-enabled=true` label to the worker node. The label starts the DNS caching agent pod on the worker node.
     1. Add the label to one or more worker nodes.
-        * **To label all worker nodes in the cluster**: [Add the label to all existing worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels).
+        * **To label all worker nodes in the cluster**: [Add the label to all existing worker pools](/docs/containers?topic=containers-worker-tag-label).
         * **To label an individual worker node**:
         
             ```sh
@@ -611,7 +611,7 @@ Complete the following step to set up zone-aware DNS in your multizone cluster.
     ```
     {: pre}
 
-1. [Label your worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels) so that future worker nodes inherit the `ibm-cloud.kubernetes.io/zone-aware-dns-enabled=true` label.
+1. [Label your worker pools](/docs/containers?topic=containers-worker-tag-label) so that future worker nodes inherit the `ibm-cloud.kubernetes.io/zone-aware-dns-enabled=true` label.
 
 
 ### Disabling and deleting zone-aware DNS
@@ -621,7 +621,7 @@ To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of 
 {: shortdesc}
 
 
-1. Remove the `ibm-cloud.kubernetes.io/zone-aware-dns-enabled=true` [label from your worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels).
+1. Remove the `ibm-cloud.kubernetes.io/zone-aware-dns-enabled=true` [label from your worker pools](/docs/containers?topic=containers-worker-tag-label).
 1. Set an environment variable for the zones in the cluster.
     
     ```sh

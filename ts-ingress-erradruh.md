@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-08-14"
 
 keywords: containers, ingress status, troubleshoot ingress, erradruh
 
@@ -55,8 +55,8 @@ Complete the following steps to verify your cluster setup.
 1. If you notice scheduler problems, follow the steps:
     1. List your ALBs using the **`ibmcloud ks ingress alb ls`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_albs).
     1. List your workers using the **`ibmcloud ks worker ls`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_workers).
-    1. **Classic clusters**: Ensure you have at least two worker nodes in the VLANs where your ALBs are deployed. See [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers).
-    1. **VPC clusters**: Ensure you have at least two worker nodes in the zones where your ALBs are deployed. See [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers).
+    1. **Classic clusters**: Ensure you have at least two worker nodes in the VLANs where your ALBs are deployed. See [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add-workers-classic).
+    1. **VPC clusters**: Ensure you have at least two worker nodes in the zones where your ALBs are deployed. See [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add-workers-vpc).
     1. Ensure that your workers are healthy. For more information, see [Worker node states](/docs/containers?topic=containers-worker-node-state-reference).
     1. Ensure your nodes are not tainted or cordoned. For more information, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) and [Safely Drain a Node](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/).
         

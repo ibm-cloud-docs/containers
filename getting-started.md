@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-08-03"
+lastupdated: "2023-08-14"
 
 keywords: kubernetes, containers
 
@@ -67,7 +67,7 @@ ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4
 {: pre}
 
 
-For a classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-mz), [add zones](/docs/containers?topic=containers-add_workers#add_zone):
+For a classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-mz), [add zones](/docs/containers?topic=containers-add-workers-classic#add_zone):
 ```sh
 ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
 ```
@@ -87,7 +87,7 @@ ibmcloud ks cluster create vpc-gen2 --name my_cluster --zone us-east-1 --vpc-id 
 ```
 {: pre}
 
-For a VPC multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-vpc), [add zones](/docs/containers?topic=containers-add_workers#vpc_add_zone).
+For a VPC multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-vpc), [add zones](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone).
 
 ```sh
 ibmcloud ks zone add vpc-gen2 --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <VPC_SUBNET_ID>

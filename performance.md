@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-08"
+lastupdated: "2023-08-14"
 
 keywords: kubernetes, kernel
 
@@ -52,7 +52,7 @@ Modifications to the operating system are not supported. If you modify the defau
 {: #worker-default-hw}
 
 To change the compute hardware, such as the CPU and memory per worker node, choose among the following options.
-* [Create a worker pool](/docs/containers?topic=containers-add_workers). The instructions vary depending on the type of infrastructure for the cluster, such as classic, VPC, or gateway clusters.
+* Create a worker pool. The instructions vary depending on the type of infrastructure for the cluster, such as classic, VPC, or gateway clusters. For more information, see [Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic) or [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc). 
 * [Update the flavor](/docs/containers?topic=containers-update#machine_type) in your cluster by creating a worker pool and removing the previous worker pool.
 
 ## Modifying worker node settings to optimize performance
@@ -480,7 +480,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 1. Create a `hugepages-ds.yaml` configuration file to enable huge pages. The following sample YAML uses a daemon set to run the pod on every worker node in your cluster. You can set the allocation of huge pages that are available on the worker node by using the `vm.nr_hugepages` parameter. This example allocates 512 pages at 2 MB per page, for 1 GB of total RAM allocated exclusively for huge pages.
 
-    Want to enable huge pages only for certain worker nodes, such as a worker pool that you use for RAM-intensive apps? [Label](/docs/containers?topic=containers-add_workers#worker_pool_labels) and [taint](/docs/containers?topic=containers-kubernetes-service-cli#worker_pool_taint) your worker pool, and then add [affinity rules](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/){: external} to the daemon set so that the pods are deployed only to the worker nodes in the worker pool that you specify.
+    Want to enable huge pages only for certain worker nodes, such as a worker pool that you use for RAM-intensive apps? [Label](/docs/containers?topic=containers-worker-tag-label) and [taint](/docs/containers?topic=containers-kubernetes-service-cli#worker_pool_taint) your worker pool, and then add [affinity rules](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/){: external} to the daemon set so that the pods are deployed only to the worker nodes in the worker pool that you specify.
     {: tip}
 
     ```yaml

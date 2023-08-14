@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-09"
+lastupdated: "2023-08-14"
 
 keywords: kubernetes, release notes
 
@@ -5042,7 +5042,7 @@ New! CLI 1.0
 
 
 Installing SGX drivers
-:   Added a topic for [installing SGX drivers and platform software on SGX-capable worker nodes](/docs/containers?topic=containers-add_workers#install-sgx).
+:   Added a topic for [installing SGX drivers and platform software on SGX-capable worker nodes](/docs/containers?topic=containers-sgx-install).
 
 Sizing workloads
 :   Enhanced the topic with a [How do I monitor resource usage and capacity in my cluster?](/docs/containers?topic=containers-strategy#sizing_manage) FAQ.
@@ -5221,7 +5221,7 @@ Cluster autoscaler
 
 
 Tags
-:   Added how to [add {{site.data.keyword.cloud_notm}} tags to existing clusters](/docs/containers?topic=containers-add_workers#cluster_tags).
+:   Added how to [add {{site.data.keyword.cloud_notm}} tags to existing clusters](/docs/containers?topic=containers-worker-tag-label).
 
 VPC security groups
 :   [Modify the security group rules](/docs/openshift?topic=openshift-vpc-security-group)for VPC Gen 2 clusters to allow traffic requests that are routed to node ports on your worker nodes.
@@ -6260,7 +6260,8 @@ Cluster planning and creation
     - [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters)
     - [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes)
     - [Creating clusters](/docs/containers?topic=containers-clusters)
-    - [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers)
+    - [Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic)
+    - [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc)
     - [Removing clusters](/docs/containers?topic=containers-remove)
     - [Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster)
     
@@ -6357,7 +6358,7 @@ Permissions
 :   Added an FAQ, [What access policies do I give my cluster users?](/docs/containers?topic=containers-faqs#faq_access)
 
 Worker pools
-:   Added instructions for how to [apply labels](/docs/containers?topic=containers-add_workers#worker_pool_labels) to existing worker pools.
+:   Added instructions for how to [apply labels](/docs/containers?topic=containers-worker-tag-label) to existing worker pools.
 
 Reference topics
 :   To support new features such as Kubernetes 1.14, [change log reference](/docs/containers?topic=containers-cs_versions#cs_versions_available) pages are updated.

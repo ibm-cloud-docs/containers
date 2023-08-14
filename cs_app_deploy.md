@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-20"
+lastupdated: "2023-08-14"
 
 keywords: kubernetes
 
@@ -173,7 +173,7 @@ When you deploy an app, the app pods indiscriminately deploy to various worker n
 Before you begin
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the Kubernetes namespace.
-- **Optional**: [Set a label for the worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels) that you want to run the app on.
+- **Optional**: [Set a label for the worker pool](/docs/containers?topic=containers-worker-tag-label) that you want to run the app on.
 
 To deploy apps to specific worker nodes,
 
@@ -313,7 +313,7 @@ In the following steps, you learn how to deploy workloads that require the GPU. 
 In the following steps, you learn how to deploy workloads that require the GPU. You can also deploy apps that don't need to process their workloads across both the GPU and CPU. After, you might find it useful to play around with mathematically intensive workloads such as the [TensorFlow](https://www.tensorflow.org/){: external} machine learning framework with [this Kubernetes demo](https://github.com/pachyderm/pachyderm/tree/master/examples/ml/tensorflow){: external}.
 
 Before you begin
-- Create a [cluster](/docs/containers?topic=containers-clusters&interface=ui) or [worker pool](/docs/containers?topic=containers-add_workers#add_pool) that uses a GPU bare metal flavor. Keep in mind that setting up a bare metal machine can take more than one business day to complete.
+- Create a [cluster](/docs/containers?topic=containers-clusters&interface=ui) or worker pool that uses a GPU bare metal flavor. Keep in mind that setting up a bare metal machine can take more than one business day to complete.
 - Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the cluster.
 
 To run a workload on a GPU machine,
