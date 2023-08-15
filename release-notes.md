@@ -91,6 +91,19 @@ Worker node fix packs are available.
 ## July 2023
 {: #containers-july23}
 
+
+
+### 31 July 2023
+{: #containers-july3123}
+{: release-note}
+
+
+Ubuntu 18 is no longer supported.
+:   For more information, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate).
+
+
+
+
 ### 28 July 2023
 {: #containers-july2823}
 {: release-note}

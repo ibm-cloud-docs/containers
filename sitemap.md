@@ -263,6 +263,10 @@ subcollection: containers
 
 * [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
 
+    * [31 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july3123)
+
+        * Ubuntu 18 is no longer supported.
+
     * [28 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2823)
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.17`.
