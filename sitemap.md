@@ -1777,7 +1777,7 @@ subcollection: containers
 
     * [10 May 2021](/docs/containers?topic=containers-containers-relnotes#containers-may1021)
 
-        * New! PX-Backup is now available
+        * New! Portworx Backup is now available
 
         * Calico KDD update in 1.19
 
@@ -5755,17 +5755,17 @@ subcollection: containers
 
 [Setting up disaster recovery with Portworx](/docs/containers?topic=containers-storage_portworx_recovery#storage_portworx_recovery)
 
-[Backing up and restoring apps and data with PX-Backup](/docs/containers?topic=containers-storage_portworx_backup#storage_portworx_backup)
+[Backing up and restoring apps and data with Portworx Backup](/docs/containers?topic=containers-storage_portworx_backup#storage_portworx_backup)
 
-* [Installing PX-Backup on an {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-storage_portworx_backup#px-backup-install)
+* [Installing Portworx Backup on an {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-storage_portworx_backup#px-backup-install)
 
-* [Verifying your PX-Backup installation](/docs/containers?topic=containers-storage_portworx_backup#px-backup-verify)
+* [Verifying your Portworx Backup installation](/docs/containers?topic=containers-storage_portworx_backup#px-backup-verify)
 
-* [Logging in to the PX-Backup console](/docs/containers?topic=containers-storage_portworx_backup#px-backup-ui)
+* [Logging in to the Portworx Backup console](/docs/containers?topic=containers-storage_portworx_backup#px-backup-ui)
 
-* [Adding a backup location to your PX-Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-storage)
+* [Adding a backup location to your Portworx Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-storage)
 
-* [Adding an {{site.data.keyword.containerlong_notm}} cluster to your PX-Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-cluster)
+* [Adding an {{site.data.keyword.containerlong_notm}} cluster to your Portworx Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-cluster)
 
 * [Installing Stork on a non-Portworx cluster](/docs/containers?topic=containers-storage_portworx_backup#px-backup-stork)
 
