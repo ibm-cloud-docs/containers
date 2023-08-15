@@ -29,6 +29,21 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## August 2023
 {: #containers-aug23}
 
+### 15 August 2023
+{: #containers-aug1523}
+{: release-note}
+
+
+
+Worker node fix packs are available.
+:   [`1.24.16_1580`](/docs/containers?topic=containers-changelog_124)
+:   [`1.25.12_1555`](/docs/containers?topic=containers-changelog_125)
+:   [`1.26.7_1547`](/docs/containers?topic=containers-changelog_126)
+:   [`1.27.4_1535`](/docs/containers?topic=containers-changelog_127)
+
+
+
+  
 
 
 ### 9 August 2023
