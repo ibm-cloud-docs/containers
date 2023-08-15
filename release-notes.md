@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-14"
+lastupdated: "2023-08-15"
 
 keywords: kubernetes, release notes
 
@@ -29,6 +29,21 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## August 2023
 {: #containers-aug23}
 
+### 15 August 2023
+{: #containers-aug1523}
+{: release-note}
+
+
+
+Worker node fix packs are available.
+:   [`1.24.16_1580`](/docs/containers?topic=containers-changelog_124)
+:   [`1.25.12_1555`](/docs/containers?topic=containers-changelog_125)
+:   [`1.26.7_1547`](/docs/containers?topic=containers-changelog_126)
+:   [`1.27.4_1535`](/docs/containers?topic=containers-changelog_127)
+
+
+
+  
 
 
 ### 9 August 2023
@@ -90,6 +105,19 @@ Worker node fix packs are available.
 
 ## July 2023
 {: #containers-july23}
+
+
+
+### 31 July 2023
+{: #containers-july3123}
+{: release-note}
+
+
+Ubuntu 18 is no longer supported.
+:   For more information, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate).
+
+
+
 
 ### 28 July 2023
 {: #containers-july2823}
@@ -3313,8 +3341,8 @@ VPC cluster healthchecks
 {: #containers-may1021}
 {: release-note}
 
-New! PX-Backup is now available
-:   For more information, see [Backing up and restoring apps and data with PX-Backup](/docs/containers?topic=containers-storage_portworx_backup).
+New! Portworx Backup is now available
+:   For more information, see [Backing up and restoring apps and data with Portworx Backup](/docs/containers?topic=containers-storage_portworx_backup).
 
 
 
@@ -5890,7 +5918,7 @@ New! Virtual Private Cloud
 :   With classic clusters in VPC, {{site.data.keyword.containerlong_notm}} introduces version 2 of the API, which supports multiple infrastructure providers for your clusters. Your cluster network setup also changes, from worker nodes that use public and private VLANs and the public cloud service endpoint to worker nodes that are on a private subnet only and have the private cloud service endpoint enabled. For more information, check out the following links.
     - [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-overview#what-compute-infra-is-offered)
     - [About the v2 API](/docs/containers?topic=containers-cs_api_install#api_about)
-    - [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_vpc_basics)
+    - [Understanding VPC cluster networking](/docs/containers?topic=containers-plan_vpc_basics)
     
 :   Ready to get started? Try out the [Creating a classic cluster in your VPC tutorial](/docs/containers?topic=containers-vpc_ks_tutorial).
 

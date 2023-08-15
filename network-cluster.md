@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-14"
+lastupdated: "2023-08-15"
 
 keywords: kubernetes, vlan
 
@@ -23,7 +23,7 @@ subcollection: containers
 After you initially set up your network when you [create a cluster](/docs/containers?topic=containers-clusters), you can change the service endpoints that your cluster master is accessible through or change the VLAN connections for your worker nodes.
 {: shortdesc}
 
-The content on this page is specific to **classic clusters only**. For information about VPC clusters, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-vpc-subnets).
+The content on this page is specific to **classic clusters only**. For information about VPC clusters, see [VPC cluster networking](/docs/containers?topic=containers-vpc-subnets).
 {: note}
 
 
