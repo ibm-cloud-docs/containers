@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-14"
+lastupdated: "2023-08-15"
 
 keywords: kubernetes, release notes
 
@@ -5890,7 +5890,7 @@ New! Virtual Private Cloud
 :   With classic clusters in VPC, {{site.data.keyword.containerlong_notm}} introduces version 2 of the API, which supports multiple infrastructure providers for your clusters. Your cluster network setup also changes, from worker nodes that use public and private VLANs and the public cloud service endpoint to worker nodes that are on a private subnet only and have the private cloud service endpoint enabled. For more information, check out the following links.
     - [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-overview#what-compute-infra-is-offered)
     - [About the v2 API](/docs/containers?topic=containers-cs_api_install#api_about)
-    - [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_vpc_basics)
+    - [Understanding VPC cluster networking](/docs/containers?topic=containers-plan_vpc_basics)
     
 :   Ready to get started? Try out the [Creating a classic cluster in your VPC tutorial](/docs/containers?topic=containers-vpc_ks_tutorial).
 
