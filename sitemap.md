@@ -3743,8 +3743,6 @@ subcollection: containers
 
 * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
 
-[Removing clusters](/docs/containers?topic=containers-remove#remove)
-
 [Preparing for host maintenance updates](/docs/containers?topic=containers-host-maintenance#host-maintenance)
 
 * [Identifying your affected workers](/docs/containers?topic=containers-host-maintenance#worker-maintenance-list)
@@ -5956,6 +5954,13 @@ subcollection: containers
 * [Using a reservation in a cluster](/docs/containers?topic=containers-reservations#ri-use)
 
 * [Reviewing reservation usage](/docs/containers?topic=containers-reservations#ri-review)
+
+
+## Removing clusters
+{: #sitemap_removing_clusters}
+
+
+[Removing clusters](/docs/containers?topic=containers-remove#remove)
 
 
 ## API reference
@@ -9971,8 +9976,6 @@ subcollection: containers
 * [Required classic infrastructure permissions](/docs/containers?topic=containers-classic-roles#required-classic-rbac)
 
 * [Suggested classic infrastructure permissions](/docs/containers?topic=containers-classic-roles#classic-rbac-suggested)
-
-[Cloud Foundry roles](/docs/containers?topic=containers-cloud-foundry-roles#cloud-foundry-roles)
 
 
 ## Locations

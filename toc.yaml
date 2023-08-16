@@ -83,7 +83,6 @@ toc:
           - update.md
           - dedicated-hosts.md
           - performance.md
-          - cluster-remove.md
           - host-maintenance.md
           - ubuntu-migrate.md
       - topicgroup:
@@ -267,6 +266,7 @@ toc:
           topics:
           - costs.md
           - costs-reserved.md
+      - cluster-remove.md
   - navgroup:
       id: reference
       topics:
@@ -395,7 +395,6 @@ toc:
           - iam-platform-access-roles.md
           - iam-service-access-roles.md
           - classic-roles.md
-          - cloud-foundry-roles.md
       - locations.md
       - cs_integrations_overview.md
       - service-settings.md
