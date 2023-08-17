@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-01-30"
+lastupdated: "2023-08-17"
 
-keywords: kubernetes, containers
+keywords: kubernetes, containers, benchmarks
 
 subcollection: containers
 

@@ -3288,8 +3288,8 @@ subcollection: containers
 * [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
 
-## Installing the CLI and API
-{: #sitemap_installing_the_cli_and_api}
+## Installing the CLI
+{: #sitemap_installing_the_cli}
 
 
 [Installing the CLI](/docs/containers?topic=containers-cli-install#cli-install)
@@ -3310,6 +3310,17 @@ subcollection: containers
 
 * [Updating installed plug-ins](/docs/containers?topic=containers-cli-update#cli-update-include-cli-update-plugin)
 
+[Uninstalling the stand-alone {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-ibmcloud-cli)
+
+* [Uninstalling on Windows](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-cli-windows)
+
+* [Uninstalling on Linux and macOS](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-cli-linux-macos)
+
+
+## Setting up the API
+{: #sitemap_setting_up_the_api}
+
+
 [Setting up the API](/docs/containers?topic=containers-cs_api_install#cs_api_install)
 
 * [About the API](/docs/containers?topic=containers-cs_api_install#api_about)
@@ -3321,12 +3332,6 @@ subcollection: containers
 * [Refreshing IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
 
 * [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_cli_refresh)
-
-[Uninstalling the stand-alone {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-ibmcloud-cli)
-
-* [Uninstalling on Windows](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-cli-windows)
-
-* [Uninstalling on Linux and macOS](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-cli-linux-macos)
 
 
 ## Planning your cluster environment
@@ -3712,36 +3717,6 @@ subcollection: containers
 * [Removing dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-hosts-cli)
 
 * [Removing dedicated hosts pools in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-host-pool-cli)
-
-[Tuning performance](/docs/containers?topic=containers-kernel#kernel)
-
-* [Default worker node settings](/docs/containers?topic=containers-kernel#worker-default)
-
-    * [Customizing the operating system](/docs/containers?topic=containers-kernel#worker-default-os)
-
-    * [Hardware changes](/docs/containers?topic=containers-kernel#worker-default-hw)
-
-* [Modifying worker node settings to optimize performance](/docs/containers?topic=containers-kernel#worker)
-
-    * [Modifying worker node kernel settings](/docs/containers?topic=containers-kernel#worker-kernel-ds)
-
-* [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
-
-* [Optimizing network keepalive `sysctl` settings](/docs/containers?topic=containers-kernel#keepalive-iks)
-
-* [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics)
-
-    * [Modify the `metrics-server-config` config map](/docs/containers?topic=containers-kernel#metrics-server-config)
-
-    * [Determining which resources to tune](/docs/containers?topic=containers-kernel#determine-resources)
-
-* [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
-
-* [Changing the Calico maximum transmission unit (MTU)](/docs/containers?topic=containers-kernel#calico-mtu)
-
-    * [Updating the Calico ConfigMap](/docs/containers?topic=containers-kernel#calico-cm-mtu-update)
-
-* [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
 
 [Preparing for host maintenance updates](/docs/containers?topic=containers-host-maintenance#host-maintenance)
 
@@ -4625,8 +4600,8 @@ subcollection: containers
 * [Viewing worker node flow logs](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log_view)
 
 
-## Setting up an image build pipeline
-{: #sitemap_setting_up_an_image_build_pipeline}
+## Setting up an image registry
+{: #sitemap_setting_up_an_image_registry}
 
 
 [Setting up an image registry](/docs/containers?topic=containers-registry#registry)
@@ -4661,11 +4636,14 @@ subcollection: containers
 
     * [Example daemonset to update a containerd custom registry configuration](/docs/containers?topic=containers-registry#ds-example-registry)
 
+
+## Setting up continuous integration and delivery
+{: #sitemap_setting_up_continuous_integration_and_delivery}
+
+
 [Setting up continuous integration and delivery](/docs/containers?topic=containers-cicd#cicd)
 
-* [Supported automation tools](/docs/containers?topic=containers-cicd#cicd_strategy)
-
-* [Setting up a continuous delivery pipeline for a cluster](/docs/containers?topic=containers-cicd#continuous-delivery-pipeline)
+* [Other resources](/docs/containers?topic=containers-cicd#cicd-other)
 
 
 ## Developing and deploying apps
@@ -5954,6 +5932,41 @@ subcollection: containers
 * [Using a reservation in a cluster](/docs/containers?topic=containers-reservations#ri-use)
 
 * [Reviewing reservation usage](/docs/containers?topic=containers-reservations#ri-review)
+
+
+## Tuning performance
+{: #sitemap_tuning_performance}
+
+
+[Tuning performance](/docs/containers?topic=containers-kernel#kernel)
+
+* [Default worker node settings](/docs/containers?topic=containers-kernel#worker-default)
+
+    * [Customizing the operating system](/docs/containers?topic=containers-kernel#worker-default-os)
+
+    * [Hardware changes](/docs/containers?topic=containers-kernel#worker-default-hw)
+
+* [Modifying worker node settings to optimize performance](/docs/containers?topic=containers-kernel#worker)
+
+    * [Modifying worker node kernel settings](/docs/containers?topic=containers-kernel#worker-kernel-ds)
+
+* [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
+
+* [Optimizing network keepalive `sysctl` settings](/docs/containers?topic=containers-kernel#keepalive-iks)
+
+* [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics)
+
+    * [Modify the `metrics-server-config` config map](/docs/containers?topic=containers-kernel#metrics-server-config)
+
+    * [Determining which resources to tune](/docs/containers?topic=containers-kernel#determine-resources)
+
+* [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
+
+* [Changing the Calico maximum transmission unit (MTU)](/docs/containers?topic=containers-kernel#calico-mtu)
+
+    * [Updating the Calico ConfigMap](/docs/containers?topic=containers-kernel#calico-cm-mtu-update)
+
+* [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
 
 
 ## Removing clusters

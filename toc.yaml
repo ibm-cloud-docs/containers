@@ -44,12 +44,12 @@ toc:
       id: howto
       topics:
       - topicgroup:
-          label: Installing the CLI and API
+          label: Installing the CLI
           topics:
           - cli-install.md
           - cli-update.md
-          - api-install.md
           - include: ../cli/reference/ibmcloud/uninstall_cli.md
+      - api-install.md
       - topicgroup:
           label: Planning your cluster environment
           topics:
@@ -82,7 +82,6 @@ toc:
           topics:
           - update.md
           - dedicated-hosts.md
-          - performance.md
           - host-maintenance.md
           - ubuntu-migrate.md
       - topicgroup:
@@ -158,11 +157,8 @@ toc:
           - cs_health_monitor.md
           - health-audit.md
           - vpc-flow-logs.md
-      - topicgroup:
-          label: Setting up an image build pipeline
-          topics:
-          - registry.md
-          - cicd.md
+      - registry.md
+      - cicd.md
       - topicgroup:
           label: Developing and deploying apps
           topics:
@@ -266,6 +262,7 @@ toc:
           topics:
           - costs.md
           - costs-reserved.md
+      - performance.md
       - cluster-remove.md
   - navgroup:
       id: reference
