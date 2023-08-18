@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-15"
+lastupdated: "2023-08-18"
 
 keywords: containers, kubernetes, kubernetes environment, moving to kubernetes, moving to containers, clusters, cluster sizing
 
@@ -283,7 +283,7 @@ While no system is entirely failsafe, you can take steps to increase the high av
 {: shortdesc}
 
 Review more information about making resources highly available.
-* [Reduce potential points of failure](/docs/containers?topic=containers-ha#ha).
+* [Reduce potential points of failure](/docs/containers?topic=containers-ha_clusters).
 * [Create multizone clusters](/docs/containers?topic=containers-ha_clusters#ha_clusters).
 * [Plan highly available deployments](/docs/containers?topic=containers-plan_deploy#highly_available_apps) that use features such as replica sets and pod anti-affinity across multizones.
 * [Run containers that are based on images in a cloud-based public registry](/docs/containers?topic=containers-images).

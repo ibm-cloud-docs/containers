@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-08-17"
+lastupdated: "2023-08-18"
 
 keywords: containers
 subcollection: containers
@@ -3382,6 +3382,10 @@ subcollection: containers
 
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
 
+* [About high availability](/docs/containers?topic=containers-ha_clusters#ha-about)
+
+* [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha_clusters#fault_domains)
+
 * [Single zone clusters](/docs/containers?topic=containers-ha_clusters#single_zone)
 
     * [Is my master highly available in a single zone cluster?](/docs/containers?topic=containers-ha_clusters#sz-master-ha)
@@ -3569,6 +3573,34 @@ subcollection: containers
     * [Worker communication to other services or networks for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-services)
 
     * [External communication to apps that run on worker nodes for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-external)
+
+[Understanding encryption](/docs/containers?topic=containers-encryption#encryption)
+
+* [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms)
+
+    * [Available KMS providers](/docs/containers?topic=containers-encryption#kms-providers)
+
+    * [Controlling encryption](/docs/containers?topic=containers-encryption#kms-encrypt-control)
+
+    * [Features and limitations of KMS providers](/docs/containers?topic=containers-encryption#kms-keyprotect-features)
+
+* [Encrypting the Kubernetes secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect)
+
+    * [Prerequisites](/docs/containers?topic=containers-encryption#kms_prereqs)
+
+    * [Enabling KMS encryption for the cluster through the CLI](/docs/containers?topic=containers-encryption#kms_cli)
+
+    * [Enabling KMS encryption for the cluster through the console](/docs/containers?topic=containers-encryption#kms_ui)
+
+    * [Rotating the root key for your cluster](/docs/containers?topic=containers-encryption#kms_rotate)
+
+* [Verifying secret encryption](/docs/containers?topic=containers-encryption#verify_kms)
+
+* [Managing encryption for the worker nodes in your cluster](/docs/containers?topic=containers-encryption#worker-encryption)
+
+    * [Classic worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-classic)
+
+    * [VPC worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-vpc)
 
 [Understanding your storage options](/docs/containers?topic=containers-storage-plan#storage-plan)
 
@@ -4005,36 +4037,6 @@ subcollection: containers
 {: #sitemap_securing_cluster_workloads}
 
 
-[Protecting sensitive information in your cluster](/docs/containers?topic=containers-encryption#encryption)
-
-* [Overview of cluster encryption](/docs/containers?topic=containers-encryption#encrypt_ov)
-
-* [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms)
-
-    * [Available KMS providers](/docs/containers?topic=containers-encryption#kms-providers)
-
-    * [Controlling encryption](/docs/containers?topic=containers-encryption#kms-encrypt-control)
-
-    * [Features and limitations of KMS providers](/docs/containers?topic=containers-encryption#kms-keyprotect-features)
-
-* [Encrypting the Kubernetes secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect)
-
-    * [Prerequisites](/docs/containers?topic=containers-encryption#kms_prereqs)
-
-    * [Enabling KMS encryption for the cluster through the CLI](/docs/containers?topic=containers-encryption#kms_cli)
-
-    * [Enabling KMS encryption for the cluster through the console](/docs/containers?topic=containers-encryption#kms_ui)
-
-    * [Rotating the root key for your cluster](/docs/containers?topic=containers-encryption#kms_rotate)
-
-* [Verifying secret encryption](/docs/containers?topic=containers-encryption#verify_kms)
-
-* [Managing encryption for the worker nodes in your cluster](/docs/containers?topic=containers-encryption#worker-encryption)
-
-    * [Classic worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-classic)
-
-    * [VPC worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-vpc)
-
 [Configuring pod security policies](/docs/containers?topic=containers-psp#psp)
 
 * [FAQs](/docs/containers?topic=containers-psp#psp-faqs)
@@ -4114,13 +4116,8 @@ subcollection: containers
 * [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
 
 
-## Securing the cluster network
-{: #sitemap_securing_the_cluster_network}
-
-
-
-### Controlling traffic in Classic clusters
-{: #sitemap_controlling_traffic_in_classic_clusters}
+## Controlling network traffic in Classic clusters
+{: #sitemap_controlling_network_traffic_in_classic_clusters}
 
 
 [Using Calico network policies to control traffic on Classic clusters](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
@@ -4198,99 +4195,6 @@ subcollection: containers
 * [Preventing app workloads from running on edge worker nodes](/docs/containers?topic=containers-edge#edge_workloads)
 
 * [Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge#sysdig-edge)
-
-
-### Controlling traffic in VPC clusters with ACLs, security groups, and network policies
-{: #sitemap_controlling_traffic_in_vpc_clusters_with_acls_security_groups_and_network_policies}
-
-
-[Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#vpc-network-policy)
-
-* [Comparison of network security options](/docs/containers?topic=containers-vpc-network-policy#comparison)
-
-* [Access control lists (ACLs) or security groups?](/docs/containers?topic=containers-vpc-network-policy#acl-sg-compare)
-
-[Controlling traffic with VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
-
-* [VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-security-groups-details)
-
-    * [Security groups applied to cluster workers](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cluster-workers)
-
-    * [Security groups applied to VPE gateways and VPC ALBs](/docs/containers?topic=containers-vpc-security-group#vpc-sg-vpe-alb)
-
-* [Viewing VPC security groups in the CLI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cli)
-
-* [Viewing the default VPC security groups in the UI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-ui)
-
-* [Minimum inbound and outbound requirements](/docs/containers?topic=containers-vpc-security-group#vpc-sg-inbound-outbound)
-
-    * [Required inbound and outbound rules for cluster workers](/docs/containers?topic=containers-vpc-security-group#required-group-rules-workers)
-
-    * [Required inbound and outbound rules for VPC ALBs](/docs/containers?topic=containers-vpc-security-group#required-group-rules-alb)
-
-* [Creating security group rules](/docs/containers?topic=containers-vpc-security-group#vpc-sg-create-rules)
-
-    * [Creating rules in the console](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-rules)
-
-    * [Creating rules in the command line](/docs/containers?topic=containers-vpc-security-group#security_groups_cli)
-
-* [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cluster)
-
-    * [If you only want the default VPC and cluster security groups and no additional security groups](/docs/containers?topic=containers-vpc-security-group#default-sgs-only)
-
-    * [If you only want the cluster security group and not the default VPC security group](/docs/containers?topic=containers-vpc-security-group#cluster-sg-only)
-
-    * [If you want the cluster security group and your own additional security groups](/docs/containers?topic=containers-vpc-security-group#cluster-customer-sgs)
-
-    * [If you only want your own security groups](/docs/containers?topic=containers-vpc-security-group#customer-sgs-only)
-
-* [Adding security groups to worker pools at worker pool create time](/docs/containers?topic=containers-vpc-security-group#vpc-sg-worker-pool)
-
-    * [If you do not want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group#no-worker-sgs)
-
-    * [If you do want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group#worker-sgs)
-
-* [Allow worker nodes to connect to the Ingress LoadBalancer](/docs/containers?topic=containers-vpc-security-group#vpc-security-group-loadbalancer-outbound)
-
-[Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
-
-* [Creating ACLs from the console](/docs/containers?topic=containers-vpc-acls#acls_ui)
-
-    * [Creating ACLs with the CLI](/docs/containers?topic=containers-vpc-acls#acls_cli)
-
-[Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-kube-policies#vpc-kube-policies)
-
-* [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-kube-policies#services_one_ns)
-
-* [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-kube-policies#services_across_ns)
-
-[Opening required ports and IP addresses in other network allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
-
-* [Opening ports in a corporate allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
-
-    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
-
-    * [Running `kubectl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
-
-    * [Running `calicoctl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
-
-* [Allowing traffic from your cluster in other services' allowlists or in on-premises allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers)
-
-    * [Allowing ingress from a cluster to another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_ingress)
-
-    * [Allowing egress to a cluster from another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
-
-* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-vpc-firewall#iam_allowlist_vpc)
-
-
-## Managing the cluster network
-{: #sitemap_managing_the_cluster_network}
-
-
-
-### Classic clusters
-{: #sitemap_classic_clusters}
-
 
 [Configuring classic subnets and IP addresses](/docs/containers?topic=containers-subnets#subnets)
 
@@ -4383,9 +4287,87 @@ subcollection: containers
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
 
 
-### VPC clusters
-{: #sitemap_vpc_clusters}
+## Controlling network traffic in VPC clusters
+{: #sitemap_controlling_network_traffic_in_vpc_clusters}
 
+
+[Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#vpc-network-policy)
+
+* [Comparison of network security options](/docs/containers?topic=containers-vpc-network-policy#comparison)
+
+* [Access control lists (ACLs) or security groups?](/docs/containers?topic=containers-vpc-network-policy#acl-sg-compare)
+
+[Controlling traffic with VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
+
+* [VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-security-groups-details)
+
+    * [Security groups applied to cluster workers](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cluster-workers)
+
+    * [Security groups applied to VPE gateways and VPC ALBs](/docs/containers?topic=containers-vpc-security-group#vpc-sg-vpe-alb)
+
+* [Viewing VPC security groups in the CLI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cli)
+
+* [Viewing the default VPC security groups in the UI](/docs/containers?topic=containers-vpc-security-group#vpc-sg-ui)
+
+* [Minimum inbound and outbound requirements](/docs/containers?topic=containers-vpc-security-group#vpc-sg-inbound-outbound)
+
+    * [Required inbound and outbound rules for cluster workers](/docs/containers?topic=containers-vpc-security-group#required-group-rules-workers)
+
+    * [Required inbound and outbound rules for VPC ALBs](/docs/containers?topic=containers-vpc-security-group#required-group-rules-alb)
+
+* [Creating security group rules](/docs/containers?topic=containers-vpc-security-group#vpc-sg-create-rules)
+
+    * [Creating rules in the console](/docs/containers?topic=containers-vpc-security-group#security-group-inbound-rules)
+
+    * [Creating rules in the command line](/docs/containers?topic=containers-vpc-security-group#security_groups_cli)
+
+* [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cluster)
+
+    * [If you only want the default VPC and cluster security groups and no additional security groups](/docs/containers?topic=containers-vpc-security-group#default-sgs-only)
+
+    * [If you only want the cluster security group and not the default VPC security group](/docs/containers?topic=containers-vpc-security-group#cluster-sg-only)
+
+    * [If you want the cluster security group and your own additional security groups](/docs/containers?topic=containers-vpc-security-group#cluster-customer-sgs)
+
+    * [If you only want your own security groups](/docs/containers?topic=containers-vpc-security-group#customer-sgs-only)
+
+* [Adding security groups to worker pools at worker pool create time](/docs/containers?topic=containers-vpc-security-group#vpc-sg-worker-pool)
+
+    * [If you do not want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group#no-worker-sgs)
+
+    * [If you do want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group#worker-sgs)
+
+* [Allow worker nodes to connect to the Ingress LoadBalancer](/docs/containers?topic=containers-vpc-security-group#vpc-security-group-loadbalancer-outbound)
+
+[Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
+
+* [Creating ACLs from the console](/docs/containers?topic=containers-vpc-acls#acls_ui)
+
+    * [Creating ACLs with the CLI](/docs/containers?topic=containers-vpc-acls#acls_cli)
+
+[Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-kube-policies#vpc-kube-policies)
+
+* [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-kube-policies#services_one_ns)
+
+* [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-kube-policies#services_across_ns)
+
+[Opening required ports and IP addresses in other network allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
+
+* [Opening ports in a corporate allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
+
+    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
+
+    * [Running `kubectl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
+
+    * [Running `calicoctl` commands from behind an allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
+
+* [Allowing traffic from your cluster in other services' allowlists or in on-premises allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers)
+
+    * [Allowing ingress from a cluster to another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_ingress)
+
+    * [Allowing egress to a cluster from another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
+
+* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-vpc-firewall#iam_allowlist_vpc)
 
 [Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets#vpc-subnets)
 
@@ -4435,6 +4417,11 @@ subcollection: containers
 
     * [Use {{site.data.keyword.tg_full_notm}}](/docs/containers?topic=containers-vpc-vpnaas#vpc-use-transit-gw)
 
+
+## Adding static routes to worker nodes
+{: #sitemap_adding_static_routes_to_worker_nodes}
+
+
 [Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes#static-routes)
 
 * [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
@@ -4446,6 +4433,11 @@ subcollection: containers
     * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
 
 * [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
+
+
+## Configuring the cluster DNS provider
+{: #sitemap_configuring_the_cluster_dns_provider}
+
 
 [Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns)
 
@@ -4472,8 +4464,8 @@ subcollection: containers
     * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
 
-## Autoscaling clusters
-{: #sitemap_autoscaling_clusters}
+## Setting up the cluster autoscaler
+{: #sitemap_setting_up_the_cluster_autoscaler}
 
 
 [Preparing classic and VPC clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#cluster-scaling-classic-vpc)
@@ -5877,12 +5869,6 @@ subcollection: containers
     * [Referencing the secret in environment variables](/docs/containers?topic=containers-service-binding#reference_secret)
 
 * [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
-
-[Understanding high availability and disaster recovery](/docs/containers?topic=containers-ha#ha)
-
-* [About high availability](/docs/containers?topic=containers-ha#ha-about)
-
-* [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
 
 [Installing SGX drivers and platform software on SGX-capable worker nodes](/docs/containers?topic=containers-sgx-install#sgx-install)
 

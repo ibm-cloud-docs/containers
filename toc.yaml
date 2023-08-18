@@ -59,6 +59,7 @@ toc:
           - worker-plan.md
           - cluster-plan-network-vpc.md
           - cluster-plan-network-classic.md
+          - encrypt.md
           - storage-plan.md
       - topicgroup:
           label: Creating clusters
@@ -103,48 +104,35 @@ toc:
       - topicgroup:
           label: Securing cluster workloads
           topics:
-          - encrypt.md
           - cs_psp.md
           - pod-priority.md
           - kubeapi-priority.md
           - pod-security-admission.md
           - pod-security-admission-migration.md
       - topicgroup: 
-          label: Securing the cluster network
+          label: Controlling network traffic in Classic clusters
           topics:
-          - topicgroup: 
-              label: Controlling traffic in Classic clusters
-              topics:
-              - cs_tutorials_policies.md
-              - network-policy.md
-              - firewall.md
-              - edge.md
-          - topicgroup:
-              label: Controlling traffic in VPC clusters with ACLs, security groups, and network policies
-              topics:
-              - vpc-network-policy.md
-              - vpc-security-group.md
-              - vpc-acls.md
-              - vpc-kube-policies.md
-              - vpc-firewall.md
+          - cs_tutorials_policies.md
+          - network-policy.md
+          - firewall.md
+          - edge.md
+          - subnets.md
+          - network-cluster.md
+          - vpn.md
       - topicgroup:
-          label: Managing the cluster network
+          label: Controlling network traffic in VPC clusters
           topics:
-          - topicgroup:
-              label: Classic clusters
-              topics:
-              - subnets.md
-              - network-cluster.md
-              - vpn.md
-          - topicgroup:
-              label: VPC clusters
-              topics:
-              - vpc-subnets.md
-              - vpc-vpn.md
-          - static-routes.md
-          - cs_dns.md
+          - vpc-network-policy.md
+          - vpc-security-group.md
+          - vpc-acls.md
+          - vpc-kube-policies.md
+          - vpc-firewall.md
+          - vpc-subnets.md
+          - vpc-vpn.md
+      - static-routes.md
+      - cs_dns.md
       - topicgroup: 
-          label: Autoscaling clusters
+          label: Setting up the cluster autoscaler
           topics:
           - cluster-scaling-classic-vpc.md
           - cluster-scaling-install-addon.md
@@ -255,7 +243,6 @@ toc:
           - integrations-addons.md
           - integrations-helm.md
           - integrations-svcbind.md
-          - ha.md
           - sgx-install.md
       - topicgroup:
           label: Managing cluster costs
