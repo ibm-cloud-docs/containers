@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-06-16"
+lastupdated: "2023-08-18"
 
 keywords: kubernetes, infrastructure, rbac, policy
 
@@ -38,11 +38,11 @@ Wondering which access roles to assign to your cluster users? Use the examples i
 | Use case | Example roles and scope |
 | --- | --- |
 | App auditor | [Viewer platform access role for a cluster, region, or resource group](/docs/containers?topic=containers-iam-platform-access-roles), [Reader service access role for a cluster, region, or resource group](/docs/containers?topic=containers-iam-service-access-roles). |
-| App developers | [Editor platform access role for a cluster](/docs/containers?topic=containers-iam-platform-access-roles), [Writer service access role scoped to a namespace](/docs/containers?topic=containers-iam-service-access-roles), [Cloud Foundry developer space role](/docs/containers?topic=containers-cloud-foundry-roles). |
+| App developers | [Editor platform access role for a cluster](/docs/containers?topic=containers-iam-platform-access-roles), [Writer service access role scoped to a namespace](/docs/containers?topic=containers-iam-service-access-roles). |
 | Billing | [Viewer platform access role for a cluster, region, or resource group](/docs/containers?topic=containers-iam-platform-access-roles). |
 | Create a cluster | See [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions).|
 | Cluster administrator | [Administrator platform access role for a cluster](/docs/containers?topic=containers-iam-platform-access-roles), [Manager service access role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-iam-service-access-roles).|
-| DevOps operator | [Operator platform access role for a cluster](/docs/containers?topic=containers-iam-platform-access-roles), [Writer service access role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-iam-service-access-roles), [Cloud Foundry developer space role](/docs/containers?topic=containers-cloud-foundry-roles).  |
+| DevOps operator | [Operator platform access role for a cluster](/docs/containers?topic=containers-iam-platform-access-roles), [Writer service access role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-iam-service-access-roles).  |
 | Operator or site reliability engineer | [Administrator platform access role for a cluster, region, or resource group](/docs/containers?topic=containers-iam-platform-access-roles), [Reader service access role for a cluster or region](/docs/containers?topic=containers-iam-service-access-roles) or [Manager service access role for all cluster namespaces](/docs/containers?topic=containers-iam-service-access-roles) to be able to use `kubectl top nodes,pods` commands. |
 {: caption="Types of roles you might assign to meet different use cases." caption-side="bottom"}
 
