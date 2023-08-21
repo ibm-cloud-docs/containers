@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-08-18"
+lastupdated: "2023-08-21"
 
 keywords: containers
 subcollection: containers
@@ -3380,6 +3380,44 @@ subcollection: containers
 
 * [Create a cluster](/docs/containers?topic=containers-clusters#next_steps)
 
+[Setting up your API key credentials](/docs/containers?topic=containers-access-creds#access-creds)
+
+* [Setting up the API key for most use cases](/docs/containers?topic=containers-access-creds#api_key_most_cases)
+
+* [Understanding other options than the API key](/docs/containers?topic=containers-access-creds#api_key_other)
+
+* [Understanding how the API key works](/docs/containers?topic=containers-access-creds#api_key_about)
+
+    * [What is the API key used for?](/docs/containers?topic=containers-access-creds#api-key-uses)
+
+    * [How many API keys do I need?](/docs/containers?topic=containers-access-creds#how-many-apikeys)
+
+    * [How do I set up the API key?](/docs/containers?topic=containers-access-creds#howto-api-key-setup)
+
+    * [What permissions does the user who sets the API key need? How do I give the user these permissions?](/docs/containers?topic=containers-access-creds#what-perms-api-key)
+
+    * [How do I limit which commands a user can run?](/docs/containers?topic=containers-access-creds#limit-apikey-scopes)
+
+    * [What if I don't want to assign the API key owner or credentials owner the Super User infrastructure role?](/docs/containers?topic=containers-access-creds#non-superuser)
+
+    * [What happens if the user who set up the API key for a region and resource group leaves the company?](/docs/containers?topic=containers-access-creds#apikey-user-leaves)
+
+    * [How can I lock down my cluster if my API key becomes compromised?](/docs/containers?topic=containers-access-creds#apikey-lockdown)
+
+* [Ensuring that the API key or infrastructure credentials owner has the correct permissions](/docs/containers?topic=containers-access-creds#owner_permissions)
+
+* [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-access-creds#understand_infra)
+
+* [Accessing the infrastructure portfolio with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription account](/docs/containers?topic=containers-access-creds#default_account)
+
+* [Accessing a different classic infrastructure account](/docs/containers?topic=containers-access-creds#credentials)
+
+* [Customizing classic infrastructure permissions](/docs/containers?topic=containers-access-creds#infra_access)
+
+    * [Assigning infrastructure access through the console](/docs/containers?topic=containers-access-creds#infra_console)
+
+    * [Assigning infrastructure access through the CLI](/docs/containers?topic=containers-access-creds#infra_cli)
+
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
 
 * [About high availability](/docs/containers?topic=containers-ha_clusters#ha-about)
@@ -3768,6 +3806,14 @@ subcollection: containers
 
 * [Removing your old worker pools](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-removal)
 
+[Adding tags and labels to clusters](/docs/containers?topic=containers-worker-tag-label#worker-tag-label)
+
+* [Adding tags to clusters with the console](/docs/containers?topic=containers-worker-tag-label#add-tags-console)
+
+* [Adding tags to clusters with the CLI](/docs/containers?topic=containers-worker-tag-label#add-tags-cli)
+
+* [Adding labels to existing worker pools](/docs/containers?topic=containers-worker-tag-label#worker_pool_labels)
+
 
 ## Enhancing security
 {: #sitemap_enhancing_security}
@@ -3865,11 +3911,11 @@ subcollection: containers
 
 * [How can I remove my information?](/docs/containers?topic=containers-ibm-data#pi-removal)
 
-[Protecting {{site.data.keyword.containerlong_notm}} resources with context-based restrictions](/docs/containers?topic=containers-cbr#cbr)
+[Protecting cluster resources with context-based restrictions](/docs/containers?topic=containers-cbr#cbr)
 
 * [How {{site.data.keyword.containerlong_notm}} integrates with context-based restrictions](/docs/containers?topic=containers-cbr#cbr-overview)
 
-    * [Protecting {{site.data.keyword.containerlong_notm}} resources](/docs/containers?topic=containers-cbr#resources-types-cbr)
+    * [Protecting cluster resources](/docs/containers?topic=containers-cbr#resources-types-cbr)
 
     * [Protecting specific APIs](/docs/containers?topic=containers-cbr#protect-api-types-cbr)
 
@@ -3931,44 +3977,6 @@ subcollection: containers
     * [Assign access roles to individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-access-overview#iam_individuals_groups)
 
     * [Scope user access to cluster instances, namespaces, or resource groups](/docs/containers?topic=containers-access-overview#resource_groups)
-
-[Setting up API key credentials so the service can access the infrastructure and other cloud services](/docs/containers?topic=containers-access-creds#access-creds)
-
-* [Setting up the API key for most use cases](/docs/containers?topic=containers-access-creds#api_key_most_cases)
-
-* [Understanding other options than the API key](/docs/containers?topic=containers-access-creds#api_key_other)
-
-* [Understanding how the API key works](/docs/containers?topic=containers-access-creds#api_key_about)
-
-    * [What is the API key used for?](/docs/containers?topic=containers-access-creds#api-key-uses)
-
-    * [How many API keys do I need?](/docs/containers?topic=containers-access-creds#how-many-apikeys)
-
-    * [How do I set up the API key?](/docs/containers?topic=containers-access-creds#howto-api-key-setup)
-
-    * [What permissions does the user who sets the API key need? How do I give the user these permissions?](/docs/containers?topic=containers-access-creds#what-perms-api-key)
-
-    * [How do I limit which commands a user can run?](/docs/containers?topic=containers-access-creds#limit-apikey-scopes)
-
-    * [What if I don't want to assign the API key owner or credentials owner the Super User infrastructure role?](/docs/containers?topic=containers-access-creds#non-superuser)
-
-    * [What happens if the user who set up the API key for a region and resource group leaves the company?](/docs/containers?topic=containers-access-creds#apikey-user-leaves)
-
-    * [How can I lock down my cluster if my API key becomes compromised?](/docs/containers?topic=containers-access-creds#apikey-lockdown)
-
-* [Ensuring that the API key or infrastructure credentials owner has the correct permissions](/docs/containers?topic=containers-access-creds#owner_permissions)
-
-* [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-access-creds#understand_infra)
-
-* [Accessing the infrastructure portfolio with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription account](/docs/containers?topic=containers-access-creds#default_account)
-
-* [Accessing a different classic infrastructure account](/docs/containers?topic=containers-access-creds#credentials)
-
-* [Customizing classic infrastructure permissions](/docs/containers?topic=containers-access-creds#infra_access)
-
-    * [Assigning infrastructure access through the console](/docs/containers?topic=containers-access-creds#infra_console)
-
-    * [Assigning infrastructure access through the CLI](/docs/containers?topic=containers-access-creds#infra_cli)
 
 [Controlling user access with {{site.data.keyword.cloud_notm}} IAM and Kubernetes RBAC](/docs/containers?topic=containers-users#users)
 
@@ -5310,79 +5318,8 @@ subcollection: containers
 * [Registering a {{site.data.keyword.secrets-manager_short}} instance when creating a cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_cluster_create)
 
 
-## Setting up {{site.data.keyword.filestorage_short}}
-{: #sitemap_setting_up_}
-
-
-[Setting up {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
-
-* [Quick start for {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
-
-* [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
-
-    * [File storage types](/docs/containers?topic=containers-file_storage#file-types)
-
-    * [IOPS](/docs/containers?topic=containers-file_storage#file-iops)
-
-    * [Reclaim policy](/docs/containers?topic=containers-file_storage#file-reclaim)
-
-    * [Billing type](/docs/containers?topic=containers-file_storage#file-billing)
-
-* [Adding {{site.data.keyword.filestorage_short}} to apps](/docs/containers?topic=containers-file_storage#add_file)
-
-* [Using existing {{site.data.keyword.filestorage_short}} in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
-
-    * [Preparing your existing storage](/docs/containers?topic=containers-file_storage#existing-file-1)
-
-    * [Creating a persistent volume and a persistent volume claim](/docs/containers?topic=containers-file_storage#existing-file-2)
-
-* [Using {{site.data.keyword.filestorage_short}} in a stateful set](/docs/containers?topic=containers-file_storage#file_statefulset)
-
-    * [Creating the PVC when you create a stateful set by using dynamic provisioning](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
-
-    * [Static provisioning: Using an existing PVC with your stateful set](/docs/containers?topic=containers-file_storage#file_static_statefulset)
-
-* [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-file_storage#file_change_storage_configuration)
-
-* [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version)
-
-    * [Creating a customized storage class with a specific NFS version](/docs/containers?topic=containers-file_storage#custom-sc-nfs-creat)
-
-    * [Changing your existing PV to use a different NFS version](/docs/containers?topic=containers-file_storage#changing-pv-nfs)
-
-* [Scaling down the default {{site.data.keyword.filestorage_short}} plug-in](/docs/containers?topic=containers-file_storage#file_scaledown_plugin)
-
-* [Backing up and restoring data](/docs/containers?topic=containers-file_storage#file_backup_restore)
-
-    * [Setting up periodic snapshots](/docs/containers?topic=containers-file_storage#file-snapshots)
-
-    * [Replicating snapshots to another zone](/docs/containers?topic=containers-file_storage#file-replicate-snapshot-diff-zone)
-
-    * [Duplicating storage](/docs/containers?topic=containers-file_storage#file-dupe-storage)
-
-    * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-file_storage#file-backup-helm)
-
-    * [Copying data to and from pods and containers](/docs/containers?topic=containers-file_storage#file-cp-data)
-
-* [Storage class reference](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
-
-* [Sample customized storage classes](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
-
-    * [Creating topology-aware storage](/docs/containers?topic=containers-file_storage#file-topology)
-
-    * [Specifying the zone for multizone clusters](/docs/containers?topic=containers-file_storage#file_multizone_yaml)
-
-    * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class)
-
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-file_storage#cleanup_file)
-
-    * [Understanding your storage removal options](/docs/containers?topic=containers-file_storage#storage_delete_options_file)
-
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove_file)
-
-
 ## Setting up {{site.data.keyword.blockstorageshort}}
-{: #sitemap_setting_up_1}
+{: #sitemap_setting_up_}
 
 
 [Setting up {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
@@ -5458,73 +5395,8 @@ subcollection: containers
     * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
 
 
-## Setting up IBM Cloud Object Storage
-{: #sitemap_setting_up_ibm_cloud_object_storage}
-
-
-[Setting up {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-understand#storage-cos-understand)
-
-* [Creating your object storage service instance](/docs/containers?topic=containers-storage-cos-understand#create_cos_service)
-
-* [Creating {{site.data.keyword.cos_full_notm}} service credentials](/docs/containers?topic=containers-storage-cos-understand#service_credentials)
-
-* [Creating a secret for the object storage service credentials](/docs/containers?topic=containers-storage-cos-understand#create_cos_secret)
-
-* [Limitations](/docs/containers?topic=containers-storage-cos-understand#cos_limitations)
-
-[Installing the {{site.data.keyword.cos_full_notm}} plug-in on VPC and classic clusters](/docs/containers?topic=containers-storage_cos_install#storage_cos_install)
-
-* [Updating the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#update_cos_plugin)
-
-* [Removing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#remove_cos_plugin)
-
-* [Deciding on the object storage configuration](/docs/containers?topic=containers-storage_cos_install#configure_cos)
-
-* [Verifying your installation](/docs/containers?topic=containers-storage_cos_install#cos-plugin-verify)
-
-[Adding object storage to apps](/docs/containers?topic=containers-storage_cos_apps#storage_cos_apps)
-
-* [Creating a deployment](/docs/containers?topic=containers-storage_cos_apps#create-cos-deployment-steps)
-
-* [Using object storage in a stateful set](/docs/containers?topic=containers-storage_cos_apps#cos_statefulset)
-
-[Setting capacity quotas for apps that use {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-tutorial-quota)
-
-* [Objectives](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-objectives)
-
-* [Prerequisites](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-prereqs)
-
-* [Creating a set of service credentials](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-credentials)
-
-* [Creating a secret to store your credentials](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-secret)
-
-* [Installing the plug-in](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-install)
-
-* [Dynamically provisioning a bucket with a quota](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-bucket)
-
-* [Uploading a file to your bucket](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-file)
-
-* [Creating an app that mounts the bucket](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-app)
-
-* [Review](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-review)
-
-* [Next steps](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-next)
-
-[VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_vpc_ip#storage_cos_vpc_ip)
-
-[Storage class reference](/docs/containers?topic=containers-storage_cos_reference#storage_cos_reference)
-
-* [Standard](/docs/containers?topic=containers-storage_cos_reference#standard)
-
-* [Vault](/docs/containers?topic=containers-storage_cos_reference#Vault)
-
-* [Cold](/docs/containers?topic=containers-storage_cos_reference#cold)
-
-* [Flex](/docs/containers?topic=containers-storage_cos_reference#flex)
-
-
-## Setting up IBM Cloud VPC Block Storage
-{: #sitemap_setting_up_ibm_cloud_vpc_block_storage}
+## Setting up Block Storage for VPC
+{: #sitemap_setting_up_block_storage_for_vpc}
 
 
 [Setting up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block)
@@ -5624,8 +5496,79 @@ subcollection: containers
 * [Cleaning up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-storage-block-vpc-remove#cleaning-up-block-vpc)
 
 
-## Setting up IBM Cloud File Storage for VPC
-{: #sitemap_setting_up_ibm_cloud_file_storage_for_vpc}
+## Setting up {{site.data.keyword.filestorage_short}}
+{: #sitemap_setting_up_1}
+
+
+[Setting up {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
+
+* [Quick start for {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
+
+* [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
+
+    * [File storage types](/docs/containers?topic=containers-file_storage#file-types)
+
+    * [IOPS](/docs/containers?topic=containers-file_storage#file-iops)
+
+    * [Reclaim policy](/docs/containers?topic=containers-file_storage#file-reclaim)
+
+    * [Billing type](/docs/containers?topic=containers-file_storage#file-billing)
+
+* [Adding {{site.data.keyword.filestorage_short}} to apps](/docs/containers?topic=containers-file_storage#add_file)
+
+* [Using existing {{site.data.keyword.filestorage_short}} in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
+
+    * [Preparing your existing storage](/docs/containers?topic=containers-file_storage#existing-file-1)
+
+    * [Creating a persistent volume and a persistent volume claim](/docs/containers?topic=containers-file_storage#existing-file-2)
+
+* [Using {{site.data.keyword.filestorage_short}} in a stateful set](/docs/containers?topic=containers-file_storage#file_statefulset)
+
+    * [Creating the PVC when you create a stateful set by using dynamic provisioning](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
+
+    * [Static provisioning: Using an existing PVC with your stateful set](/docs/containers?topic=containers-file_storage#file_static_statefulset)
+
+* [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-file_storage#file_change_storage_configuration)
+
+* [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version)
+
+    * [Creating a customized storage class with a specific NFS version](/docs/containers?topic=containers-file_storage#custom-sc-nfs-creat)
+
+    * [Changing your existing PV to use a different NFS version](/docs/containers?topic=containers-file_storage#changing-pv-nfs)
+
+* [Scaling down the default {{site.data.keyword.filestorage_short}} plug-in](/docs/containers?topic=containers-file_storage#file_scaledown_plugin)
+
+* [Backing up and restoring data](/docs/containers?topic=containers-file_storage#file_backup_restore)
+
+    * [Setting up periodic snapshots](/docs/containers?topic=containers-file_storage#file-snapshots)
+
+    * [Replicating snapshots to another zone](/docs/containers?topic=containers-file_storage#file-replicate-snapshot-diff-zone)
+
+    * [Duplicating storage](/docs/containers?topic=containers-file_storage#file-dupe-storage)
+
+    * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-file_storage#file-backup-helm)
+
+    * [Copying data to and from pods and containers](/docs/containers?topic=containers-file_storage#file-cp-data)
+
+* [Storage class reference](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
+
+* [Sample customized storage classes](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
+
+    * [Creating topology-aware storage](/docs/containers?topic=containers-file_storage#file-topology)
+
+    * [Specifying the zone for multizone clusters](/docs/containers?topic=containers-file_storage#file_multizone_yaml)
+
+    * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class)
+
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-file_storage#cleanup_file)
+
+    * [Understanding your storage removal options](/docs/containers?topic=containers-file_storage#storage_delete_options_file)
+
+    * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove_file)
+
+
+## Setting up File Storage for VPC
+{: #sitemap_setting_up_file_storage_for_vpc}
 
 
 [Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} add-on](/docs/containers?topic=containers-storage-file-vpc-install#storage-file-vpc-install)
@@ -5649,6 +5592,71 @@ subcollection: containers
 * [Cleaning up persistent storage](/docs/containers?topic=containers-storage-file-vpc-managing#vpc-storage-remove-file)
 
 [Storage class reference](/docs/containers?topic=containers-storage-file-vpc-sc-ref#storage-file-vpc-sc-ref)
+
+
+## Setting up Object Storage
+{: #sitemap_setting_up_object_storage}
+
+
+[Setting up {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-understand#storage-cos-understand)
+
+* [Creating your object storage service instance](/docs/containers?topic=containers-storage-cos-understand#create_cos_service)
+
+* [Creating {{site.data.keyword.cos_full_notm}} service credentials](/docs/containers?topic=containers-storage-cos-understand#service_credentials)
+
+* [Creating a secret for the object storage service credentials](/docs/containers?topic=containers-storage-cos-understand#create_cos_secret)
+
+* [Limitations](/docs/containers?topic=containers-storage-cos-understand#cos_limitations)
+
+[Installing the {{site.data.keyword.cos_full_notm}} plug-in on VPC and classic clusters](/docs/containers?topic=containers-storage_cos_install#storage_cos_install)
+
+* [Updating the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#update_cos_plugin)
+
+* [Removing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#remove_cos_plugin)
+
+* [Deciding on the object storage configuration](/docs/containers?topic=containers-storage_cos_install#configure_cos)
+
+* [Verifying your installation](/docs/containers?topic=containers-storage_cos_install#cos-plugin-verify)
+
+[Adding object storage to apps](/docs/containers?topic=containers-storage_cos_apps#storage_cos_apps)
+
+* [Creating a deployment](/docs/containers?topic=containers-storage_cos_apps#create-cos-deployment-steps)
+
+* [Using object storage in a stateful set](/docs/containers?topic=containers-storage_cos_apps#cos_statefulset)
+
+[Setting capacity quotas for apps that use {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-tutorial-quota)
+
+* [Objectives](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-objectives)
+
+* [Prerequisites](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-prereqs)
+
+* [Creating a set of service credentials](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-credentials)
+
+* [Creating a secret to store your credentials](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-secret)
+
+* [Installing the plug-in](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-install)
+
+* [Dynamically provisioning a bucket with a quota](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-bucket)
+
+* [Uploading a file to your bucket](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-file)
+
+* [Creating an app that mounts the bucket](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-create-app)
+
+* [Review](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-review)
+
+* [Next steps](/docs/containers?topic=containers-storage-cos-tutorial-quota#storage-cos-quota-next)
+
+[VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_vpc_ip#storage_cos_vpc_ip)
+
+[Storage class reference](/docs/containers?topic=containers-storage_cos_reference#storage_cos_reference)
+
+* [Standard](/docs/containers?topic=containers-storage_cos_reference#standard)
+
+* [Vault](/docs/containers?topic=containers-storage_cos_reference#Vault)
+
+* [Cold](/docs/containers?topic=containers-storage_cos_reference#cold)
+
+* [Flex](/docs/containers?topic=containers-storage_cos_reference#flex)
 
 
 ## Setting up Portworx
@@ -5725,7 +5733,7 @@ subcollection: containers
 
 [Backing up and restoring apps and data with Portworx Backup](/docs/containers?topic=containers-storage_portworx_backup#storage_portworx_backup)
 
-* [Installing Portworx Backup on an {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-storage_portworx_backup#px-backup-install)
+* [Installing Portworx Backup](/docs/containers?topic=containers-storage_portworx_backup#px-backup-install)
 
 * [Verifying your Portworx Backup installation](/docs/containers?topic=containers-storage_portworx_backup#px-backup-verify)
 
@@ -7463,7 +7471,7 @@ subcollection: containers
 
 * [Version 1.18](/docs/containers?topic=containers-istio-changelog#v118)
 
-    * [Changelog for 1.18.2, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1182)
+    * [Change log for 1.18.2, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1182)
 
     * [Change log for 1.18.1, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1181)
 
@@ -7471,7 +7479,7 @@ subcollection: containers
 
 * [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
 
-    * [Changelog for 1.17.5, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1175)
+    * [Change log for 1.17.5, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1175)
 
     * [Change log for 1.17.4, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1174)
 
@@ -7483,7 +7491,7 @@ subcollection: containers
 
 * [Unsupported: Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
 
-    * [Changelog for 1.16.7, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1167)
+    * [Change log for 1.16.7, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1167)
 
     * [Change log for 1.16.6, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1166)
 
