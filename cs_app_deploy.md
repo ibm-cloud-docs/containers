@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-08-14"
+lastupdated: "2023-08-21"
 
 keywords: kubernetes
 
@@ -23,8 +23,6 @@ You can use Kubernetes techniques in {{site.data.keyword.containerlong}} to depl
 {: shortdesc}
 
 For more information about creating a configuration file for your application, see [Configuration Best Practices](https://kubernetes.io/docs/concepts/configuration/overview/){: external}.
-
-![Basic deployment process.](images/basic_app_deployment_process.png "Basic deployment process"){: caption="Figure 1. Basic deployment process" caption-side="bottom"}
 
 ## Launching the Kubernetes dashboard
 {: #cli_dashboard}
