@@ -86,6 +86,7 @@ toc:
           - dedicated-hosts.md
           - host-maintenance.md
           - ubuntu-migrate.md
+          - worker-tag-label.md
       - topicgroup:
           label: Enhancing security
           topics:

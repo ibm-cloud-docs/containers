@@ -3806,6 +3806,14 @@ subcollection: containers
 
 * [Removing your old worker pools](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-removal)
 
+[Adding tags and labels to clusters](/docs/containers?topic=containers-worker-tag-label#worker-tag-label)
+
+* [Adding tags to clusters with the console](/docs/containers?topic=containers-worker-tag-label#add-tags-console)
+
+* [Adding tags to clusters with the CLI](/docs/containers?topic=containers-worker-tag-label#add-tags-cli)
+
+* [Adding labels to existing worker pools](/docs/containers?topic=containers-worker-tag-label#worker_pool_labels)
+
 
 ## Enhancing security
 {: #sitemap_enhancing_security}
@@ -7463,7 +7471,7 @@ subcollection: containers
 
 * [Version 1.18](/docs/containers?topic=containers-istio-changelog#v118)
 
-    * [Changelog for 1.18.2, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1182)
+    * [Change log for 1.18.2, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1182)
 
     * [Change log for 1.18.1, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1181)
 
@@ -7471,7 +7479,7 @@ subcollection: containers
 
 * [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
 
-    * [Changelog for 1.17.5, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1175)
+    * [Change log for 1.17.5, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1175)
 
     * [Change log for 1.17.4, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1174)
 
@@ -7483,7 +7491,7 @@ subcollection: containers
 
 * [Unsupported: Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
 
-    * [Changelog for 1.16.7, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1167)
+    * [Change log for 1.16.7, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1167)
 
     * [Change log for 1.16.6, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1166)
 
