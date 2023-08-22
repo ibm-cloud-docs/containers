@@ -5134,9 +5134,9 @@ subcollection: containers
 
 * [Moving ALBs across VLANs in classic clusters](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan)
 
-[Creating your own Ingress domain](/docs/containers?topic=containers-ingress-domains#ingress-domains)
+[Setting up a domain for your cluster](/docs/containers?topic=containers-ingress-domains#ingress-domains)
 
-* [Setting up domains with the {{site.data.keyword.cloud_notm}} internal provider](/docs/containers?topic=containers-ingress-domains#ingress-domain-int)
+* [Setting up domains with the managed {{site.data.keyword.cloud_notm}} internal provider](/docs/containers?topic=containers-ingress-domains#ingress-domain-int)
 
 * [Setting up domains with {{site.data.keyword.cis_full_notm}}](/docs/containers?topic=containers-ingress-domains#ingress-domain-cis)
 
@@ -5144,15 +5144,21 @@ subcollection: containers
 
     * [Create a domain](/docs/containers?topic=containers-ingress-domains#ingress-domain-cis-create)
 
-* [Setting up domains from other external providers](/docs/containers?topic=containers-ingress-domains#ingress-domain-external)
+    * [Adding DNS credentials for an external provider](/docs/containers?topic=containers-ingress-domains#ingress-domains-ext-cred)
 
-    * [Set up credentials for your provider](/docs/containers?topic=containers-ingress-domains#ingress-domains-ext-cred)
+    * [Adding Akamai credentials](/docs/containers?topic=containers-ingress-domains#ingress-domains-ext-cred-ak)
 
-    * [Create a domain, or add an existing domain](/docs/containers?topic=containers-ingress-domains#ingress-domains-ext-create)
+    * [Adding Cloudflare credentials](/docs/containers?topic=containers-ingress-domains#ingress-domains-ext-cred-cf)
+
+    * [Verifying your provider credentials](/docs/containers?topic=containers-ingress-domains#ingress-domains-ext-cred-verify)
+
+* [Creating a domain, or adding an existing domain](/docs/containers?topic=containers-ingress-domains#ingress-domains-ext-create)
 
 * [Managing domains](/docs/containers?topic=containers-ingress-domains#ingress-domains-manage)
 
-    * [Viewing domains in a cluster](/docs/containers?topic=containers-ingress-domains#ingress-domains-manage-view)
+    * [Listing all domains in a cluster](/docs/containers?topic=containers-ingress-domains#ingress-domains-manage-view-ls)
+
+    * [Getting the details of a single domain](/docs/containers?topic=containers-ingress-domains#ingress-domains-manage-view-get)
 
     * [Removing a domain from a cluster](/docs/containers?topic=containers-ingress-domains#ingress-domains-manage-rm)
 
@@ -5166,11 +5172,11 @@ subcollection: containers
 
     * [Removing external provider credentials](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-creds-rm)
 
-* [Managing domain secrets](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-secrets)
+* [Managing domain secrets and certificates](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-secrets)
 
     * [Regenerating the certificate for an Ingress domain](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-secrets-regen)
 
-    * [Delete an Ingress domain secret](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-secrets-rm)
+    * [Deleting an Ingress domain secret](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-secrets-rm)
 
 [Customizing ALB routing](/docs/containers?topic=containers-comm-ingress-annotations#comm-ingress-annotations)
 
