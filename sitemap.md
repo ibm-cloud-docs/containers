@@ -7147,6 +7147,46 @@ subcollection: containers
 
 [Supported cluster add-on versions](/docs/containers?topic=containers-supported-cluster-addon-versions#supported-cluster-addon-versions)
 
+* [alb-oauth-proxy 2.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#alb-oauth-proxy-2.0.0)
+
+* [cluster-autoscaler 1.0.7](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.0.7)
+
+* [cluster-autoscaler 1.0.8](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.0.8)
+
+* [cluster-autoscaler 1.0.9](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.0.9)
+
+* [cluster-autoscaler 1.1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.1.0)
+
+* [csutil 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#csutil-1.0.0)
+
+* [csutil-experimental 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#csutil-experimental-1.0.0)
+
+* [debug-tool 2.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#debug-tool-2.0.0)
+
+* [image-key-synchronizer 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#image-key-synchronizer-1.0.0)
+
+* [istio 1.17](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.17)
+
+* [istio 1.18](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.18)
+
+* [openshift-data-foundation 4.9.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.9.0)
+
+* [openshift-data-foundation 4.10.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.10.0)
+
+* [openshift-data-foundation 4.11.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.11.0)
+
+* [openshift-data-foundation 4.12.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.12.0)
+
+* [openshift-data-foundation 4.13.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.13.0)
+
+* [static-route 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#static-route-1.0.0)
+
+* [vpc-block-csi-driver 5.0](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-block-csi-driver-5.0)
+
+* [vpc-block-csi-driver 5.1](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-block-csi-driver-5.1)
+
+* [vpc-file-csi-driver 1.1](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-1.1)
+
 [Ingress ALB and Fluentd version change log](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
