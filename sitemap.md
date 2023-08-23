@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-08-22"
+lastupdated: "2023-08-23"
 
 keywords: containers
 subcollection: containers
@@ -10085,6 +10085,8 @@ subcollection: containers
 
 * [`eu-de`](/docs/containers?topic=containers-vpc-flavors#eu-de)
 
+* [`eu-es`](/docs/containers?topic=containers-vpc-flavors#eu-es)
+
 * [`eu-gb`](/docs/containers?topic=containers-vpc-flavors#eu-gb)
 
 * [`jp-osa`](/docs/containers?topic=containers-vpc-flavors#jp-osa)
@@ -10111,6 +10113,8 @@ subcollection: containers
 * [`fra`](/docs/containers?topic=containers-classic-flavors#fra)
 
 * [`lon`](/docs/containers?topic=containers-classic-flavors#lon)
+
+* [`mad`](/docs/containers?topic=containers-classic-flavors#mad)
 
 * [`mil`](/docs/containers?topic=containers-classic-flavors#mil)
 
