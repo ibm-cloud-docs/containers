@@ -359,15 +359,6 @@ toc:
           - cs_versions_changelog_118.md
           - cs_versions_changelog_117.md
           - cs_versions_changelog_116.md
-          - cs_versions_changelog_115.md
-          - cs_versions_changelog_114.md
-          - cs_versions_changelog_113.md
-          - cs_versions_changelog_112.md
-          - cs_versions_changelog_111.md
-          - cs_versions_changelog_110.md
-          - cs_versions_changelog_19.md
-          - cs_versions_changelog_18.md
-          - cs_versions_changelog_17.md
       - topicgroup:
           label: Activity Tracker events
           topics:
