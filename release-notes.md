@@ -37,6 +37,11 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 New! Madrid multizone region
 :   You can now [create VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2) in [Madrid](/docs/containers?topic=containers-regions-and-zones).
 
+Worker node fix packs are available.
+:   [`1.27.4_1537`](/docs/containers?topic=containers-changelog_127)
+:   [`1.26.7_1551`](/docs/containers?topic=containers-changelog_126)
+:   [`1.25.12_1557`](/docs/containers?topic=containers-changelog_125)
+:   [`1.24.16_1582`](/docs/containers?topic=containers-changelog_124)
 
 ### 15 August 2023
 {: #containers-aug1523}
