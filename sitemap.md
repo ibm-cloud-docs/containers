@@ -239,7 +239,7 @@ subcollection: containers
 
 * [August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug23)
 
-    * [28 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug2823)
+    * [29 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug2923)
 
         * New! Madrid multizone region
 
