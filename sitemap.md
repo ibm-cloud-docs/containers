@@ -5737,6 +5737,8 @@ subcollection: containers
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
 
+    * [Change log for worker node fix pack 1.27.4_1537, released 28th August 2023](/docs/containers?topic=containers-changelog_127#1274_1537_W)
+
     * [Change log for worker node fix pack 1.27.4_1535, released 15th August 2023](/docs/containers?topic=containers-changelog_127#1274_1535_W)
 
     * [Change log for worker node fix pack 1.27.4_1534, released 1 August 2023](/docs/containers?topic=containers-changelog_127#1274_1534_W)
@@ -5817,6 +5819,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for worker node fix pack 1.26.7_1551, released 28th August 2023](/docs/containers?topic=containers-changelog_126#1267_1551_W)
 
     * [Change log for worker node fix pack 1.26.7_1547, released 15th August 2023](/docs/containers?topic=containers-changelog_126#1267_1547_W)
 
@@ -5924,6 +5928,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for worker node fix pack 1.25.12_1557, released 28th August 2023](/docs/containers?topic=containers-changelog_125#12512_1557_W)
 
     * [Change log for worker node fix pack 1.25.12_1555, released 15th August 2023](/docs/containers?topic=containers-changelog_125#12512_1555_W)
 
@@ -6055,6 +6061,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.16_1582, released 28th August 2023](/docs/containers?topic=containers-changelog_124#12416_1582_W)
 
     * [Change log for worker node fix pack 1.24.16_1580, released 15th August 2023](/docs/containers?topic=containers-changelog_124#12416_1580_W)
 
