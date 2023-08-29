@@ -8678,8 +8678,6 @@ subcollection: containers
 
 * [`lon`](/docs/containers?topic=containers-classic-flavors#lon)
 
-* [`mad`](/docs/containers?topic=containers-classic-flavors#mad)
-
 * [`mil`](/docs/containers?topic=containers-classic-flavors#mil)
 
 * [`mon`](/docs/containers?topic=containers-classic-flavors#mon)
