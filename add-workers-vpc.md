@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-14"
+lastupdated: "2023-08-23"
 
 keywords: containers, clusters, worker nodes, worker pools, add
 
@@ -236,3 +236,5 @@ If you have multiple worker pools in your cluster, add the zone to all them so t
     Worker Zones:  us-south-1, us-south-2, us-south-3
     ```
     {: screen}
+
+

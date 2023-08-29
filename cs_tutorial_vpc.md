@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-08-03"
+lastupdated: "2023-08-23"
 
 keywords: kubernetes
 
@@ -153,14 +153,14 @@ Create a Kubernetes deployment to deploy a single app instance as a pod to your 
     ```
     {: pre}
 
-2. Go to the `Lab 1` directory.
+1. Go to the `Lab 1` directory.
 
     ```sh
     cd 'container-service-getting-started-wt/Lab 1'
     ```
     {: pre}
 
-3. Use an existing registry namespace or create one, such as `vpc-gen2`.
+1. Use an existing registry namespace or create one, such as `vpc-gen2`.
     ```sh
     ibmcloud cr namespace-list
     ```
@@ -171,12 +171,12 @@ Create a Kubernetes deployment to deploy a single app instance as a pod to your 
     ```
     {: pre}
 
-4. Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registrylong_notm}} namespace that you created. If you need to change the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
+1. Build a Docker image that includes the app files of the `Lab 1` directory.
 
     Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image.
 
     ```sh
-    docker build -t us.icr.io/<namespace>/hello-world:1 .
+    docker build -t us.icr.io/<namespace>/hello-world:1
     ```
     {: pre}
 
@@ -190,7 +190,15 @@ Create a Kubernetes deployment to deploy a single app instance as a pod to your 
     ```
     {: screen}
 
-5. Create a deployment for your app. Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
+1. Push the image to the {{site.data.keyword.registrylong_notm}} namespace that you created. If you need to change the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
+
+    ```sh
+    docker push us.icr.io/<namespace>/hello-world:1 .
+    ```
+    {: pre}
+    
+
+1. Create a deployment for your app. Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
 
     ```sh
     kubectl create deployment hello-world-deployment --image=us.icr.io/vpc-gen2/hello-world:1
@@ -206,7 +214,7 @@ Create a Kubernetes deployment to deploy a single app instance as a pod to your 
 
     Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
 
-6. Make the app accessible by exposing the deployment as a NodePort service. Because your VPC worker nodes are connected to a private subnet only, the NodePort is assigned only a private IP address and is not exposed on the public network. Other services that run on the private network can access your app by using the private IP address of the NodePort service.
+1. Make the app accessible by exposing the deployment as a NodePort service. Because your VPC worker nodes are connected to a private subnet only, the NodePort is assigned only a private IP address and is not exposed on the public network. Other services that run on the private network can access your app by using the private IP address of the NodePort service.
 
     ```sh
     kubectl expose deployment/hello-world-deployment --type=NodePort --name=hello-world-service --port=8080 --target-port=8080
@@ -230,7 +238,7 @@ Create a Kubernetes deployment to deploy a single app instance as a pod to your 
     | `--target-port=*<8080>*` | The port that your app listens on and to which the service directs incoming network traffic. In this example, the `target-port` is the same as the `port`, but other apps that you create might use a different port. |
     {: caption="Table 1. Information about the command options." caption-side="bottom"}
 
-7. Now that all the deployment work is done, you can test your app from within the cluster. Get the details to form the private IP address that you can use to access your app.
+1. Now that all the deployment work is done, you can test your app from within the cluster. Get the details to form the private IP address that you can use to access your app.
     1. Get information about the service to see which NodePort was assigned. The NodePorts are randomly assigned when they are generated with the `expose` command, but within 30000-32767. In this example, the **NodePort** is 30872.
 
         ```sh
@@ -292,13 +300,13 @@ Create a Kubernetes deployment to deploy a single app instance as a pod to your 
         ```
         {: screen}
 
-8. Log in to the pod so that you can make a request to your app from within the cluster.
+1. Log in to the pod so that you can make a request to your app from within the cluster.
     ```sh
     kubectl exec -it hello-world-deployment-d99cddb45-lmj2v /bin/sh
     ```
     {: pre}
 
-9. Make a request to the NodePort service by using the worker node private IP address and the node port that you previously retrieved.
+1. Make a request to the NodePort service by using the worker node private IP address and the node port that you previously retrieved.
     ```sh
     wget -O - 10.xxx.xx.xxx:30872
     ```

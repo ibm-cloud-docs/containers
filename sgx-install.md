@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-15"
+lastupdated: "2023-08-23"
 
 keywords: containers, clusters, worker nodes, worker pools, add, sgx
 
@@ -68,3 +68,5 @@ Now, you can develop your confidential computing app to use the enclave for sens
 
 To uninstall the drivers and platform software, you can follow the same steps, but with the following installation command: `kubectl create -f https://raw.githubusercontent.com/ibm-cloud-security/data-shield-reference-apps/master/scripts/sgx-driver-psw/uninstall_sgx/deployment_uninstall_sgx_iks.yaml`
 {: note}
+
+

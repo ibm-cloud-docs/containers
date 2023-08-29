@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-02-06"
+lastupdated: "2023-08-22"
 
 keywords: containers, ingress, troubleshoot ingress, errahcf
 
@@ -65,7 +65,7 @@ Review your access control lists to make sure that health traffic is allowed.
 
 1. Ensure that no firewall rules or access control lists are blocking communication between the health checker application and your ALBs.
     - **VPC clusters**: Health check traffic originates from one of the worker nodes, flows through a VPC Public Gateway and arrives to the public side of the VPC Load Balancer instance. Configure your VPC Security Groups to allow this communication. For more information, see [Controlling traffic with VPC security groups](/docs/containers?topic=containers-vpc-security-group).
-    - **Classic clusters**: Health check traffic does not leave the cluster but might be sent from one node to another. Ensure your network policies do not block this traffic. For more information, see [Controlling traffic with network policies on classic clusters](/docs/containers?topic=containers-network_policies).
+    - **Classic clusters**: Make sure you enabled [Virtual Router Forwarding (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) in your account. Health check traffic does not leave the cluster but might be sent from one node to another. Ensure your network policies do not block this traffic. For more information, see [Controlling traffic with network policies on classic clusters](/docs/containers?topic=containers-network_policies). 
 
 1. Wait 10-15 minutes to see if the issue is resolved.
 
