@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-28"
+lastupdated: "2023-08-29"
 
 keywords: kubernetes, release notes
 
@@ -35,7 +35,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: release-note}
 
 New! Madrid multizone region
-:   You can now create clusters in [Madrid](/docs/containers?topic=containers-regions-and-zones).
+:   You can now [create VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2) in [Madrid](/docs/containers?topic=containers-regions-and-zones).
 
 
 ### 15 August 2023
