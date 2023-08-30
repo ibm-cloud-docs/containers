@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-22"
+lastupdated: "2023-08-30"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2
 
@@ -60,6 +60,7 @@ Worker Pool
 :    - **Flavor**: The flavor defines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to the containers. Available bare metal and virtual machines types vary by the zone in which you deploy the cluster. For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). 
 :    - **Worker nodes per zone**: For high availability, at least 3 worker nodes per zone are recommended. 
 :    - **Encrypt local disk**: By default, [worker nodes feature AES 256-bit disk encryption](/docs/containers?topic=containers-security#workernodes). You can choose to turn off disk encryption when you create the cluster.
+:   - **Secondary Storage**: You can provision a secondary disk to your worker nodes. For example a `900gb.5iops-tier` block storage disk. When you add a secondary disk, that disk is used for the container runtime, while the primary disk is used for the operating system. Secondary disks are useful in scenarios where more container storage is needed, such as running pods with large images. Secondary disks are provisioned in your account and you can can see them in VPC console. The charges for these disks are separate to the cost of each worker and show as a different line item on your bill. These secondary volumes also count toward the quota usage for the your account.
 
 Master service endpoint
 :    Service endpoints provide communication to the master. You can choose to configure your cluster with a private service endpoint or both a public and a private cloud service endpoint. For more information about what setup is required to run internet-facing apps, or to keep your cluster private, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw).
@@ -80,16 +81,13 @@ Observability integrations
 :    - [Logging]{: tag-dark-teal}: You can use Log Analysis to manage operating system logs, application logs, and platform logs. If you want to enable this integration later, see [Logging for clusters](/docs/containers?topic=containers-health&interface=ui).
 :    - [Monitoring]{: tag-magenta}: The monitoring service integration allows operational visibility into the performance and health of your applications, services, and platforms. If you disable this integration and want to enable it later, see [Monitoring cluster health](/docs/containers?topic=containers-health-monitor&interface=ui).
 
-
-
 ## Creating VPC clusters from the CLI
 {: #cluster_vpcg2_cli}
 {: cli}
 
 Create your single zone or multizone VPC cluster by using the {{site.data.keyword.cloud_notm}} CLI.
-{: shortdesc}
 
-**Before you begin**:
+
 * Make sure that you complete the prerequisites to [prepare your account](/docs/containers?topic=containers-clusters&interface=ui) and decide on your cluster setup.
 * Install the {{site.data.keyword.cloud_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cli-install).
 * Install the [VPC CLI plug-in](/docs/vpc?topic=vpc-creating-vpc-resources-with-cli-and-api&interface=cli).
@@ -236,20 +234,29 @@ Create your single zone or multizone VPC cluster by using the {{site.data.keywor
 {: #cluster_create_vpc}
 {: cli}
 
-VPC Gen 2 cluster flavors with instance storage are available for allowlisted accounts. To get added to the allowlist, [open a case](https://cloud.ibm.com/unifiedsupport/cases/form){: external} with support.
+Flavors with instance storage are available for allowlisted accounts. To get added to the allowlist, [open a case](https://cloud.ibm.com/unifiedsupport/cases/form){: external} with support.
 {: note}
 
+
+Example command to create a VPC cluster with 3 worker nodes in `us-east-1`.
+
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name my_cluster --zone us-east-1 --vpc-id <VPC_ID> --subnet-id <VPC_SUBNET_ID> --flavor bx2.4x16 --workers 3
+ibmcloud ks cluster create vpc-gen2 --name my_cluster --zone us-east-1 --vpc-id VPC-ID --subnet-id VPC-SUBNET-ID --flavor bx2.4x16 --workers 3
 ```
 {: pre}
 
-For a VPC multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-vpc), [add zones](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone).
+
+
+
+
+Example command to [add a zone](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone) to a multizone VPC cluster.
 
 ```sh
-ibmcloud ks zone add vpc-gen2 --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <VPC_SUBNET_ID>
+ibmcloud ks zone add vpc-gen2 --zone ZONE --cluster <cluster_name_or_ID> --worker-pool WORKER-POOL --subnet-id SUBNET-ID
 ```
 {: pre}
+
+
 
 ## Creating a VPC cluster with Terraform
 {: #cluster_vpcg2_tf}
