@@ -2512,7 +2512,9 @@ subcollection: containers
 
 [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 
-* [Available hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)
+* [Worker node FAQs](/docs/containers?topic=containers-planning_worker_nodes#worker-plan-faqs)
+
+    * [What hardware options are available to me?](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)
 
     * [What flavors are available to me?](/docs/containers?topic=containers-planning_worker_nodes#available-flavors)
 
@@ -2527,8 +2529,6 @@ subcollection: containers
     * [What storage options are available on worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#hardware-options)
 
     * [What limitations do I need to be aware of?](/docs/containers?topic=containers-planning_worker_nodes#flavor-limitations)
-
-    * [How can I check the operating system that my worker nodes run?](/docs/containers?topic=containers-planning_worker_nodes#flavor-os-check)
 
 * [Virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm)
 
@@ -2841,6 +2841,8 @@ subcollection: containers
 * [Removing dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-hosts-cli)
 
 * [Removing dedicated hosts pools in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-host-pool-cli)
+
+[Checking your worker node operating system](/docs/containers?topic=containers-flavor-os-check#flavor-os-check)
 
 [Preparing for host maintenance updates](/docs/containers?topic=containers-host-maintenance#host-maintenance)
 

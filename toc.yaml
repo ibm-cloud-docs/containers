@@ -84,6 +84,7 @@ toc:
           topics:
           - update.md
           - dedicated-hosts.md
+          - worker-os-check.md
           - host-maintenance.md
           - ubuntu-migrate.md
           - worker-tag-label.md
