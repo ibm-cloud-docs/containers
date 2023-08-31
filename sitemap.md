@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-08-30"
+lastupdated: "2023-08-31"
 
 keywords: containers
 subcollection: containers
@@ -238,6 +238,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug23)
+
+    * [31 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug3123)
+
+        * Ingress ALB versions `1.8.1_5317_iks`, `1.6.4_5270_iks`, and `1.5.1_5318_iks`
 
     * [29 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug2923)
 
@@ -2512,7 +2516,9 @@ subcollection: containers
 
 [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 
-* [Available hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)
+* [Worker node FAQs](/docs/containers?topic=containers-planning_worker_nodes#worker-plan-faqs)
+
+    * [What hardware options are available to me?](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)
 
     * [What flavors are available to me?](/docs/containers?topic=containers-planning_worker_nodes#available-flavors)
 
@@ -2527,8 +2533,6 @@ subcollection: containers
     * [What storage options are available on worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#hardware-options)
 
     * [What limitations do I need to be aware of?](/docs/containers?topic=containers-planning_worker_nodes#flavor-limitations)
-
-    * [How can I check the operating system that my worker nodes run?](/docs/containers?topic=containers-planning_worker_nodes#flavor-os-check)
 
 * [Virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm)
 
@@ -2841,6 +2845,8 @@ subcollection: containers
 * [Removing dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-hosts-cli)
 
 * [Removing dedicated hosts pools in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-host-pool-cli)
+
+[Checking your worker node operating system](/docs/containers?topic=containers-flavor-os-check#flavor-os-check)
 
 [Preparing for host maintenance updates](/docs/containers?topic=containers-host-maintenance#host-maintenance)
 
@@ -6253,7 +6259,13 @@ subcollection: containers
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
 
+* [Version 1.8.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_8_1)
+
+    * [1.8.1_5317_iks, released 31 August 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.1_5317_iks)
+
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
+
+    * [1.6.4_5270_iks, released 31 August 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5270_iks)
 
     * [1.6.4_5219_iks, released 26 July 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5219_iks)
 
@@ -6276,6 +6288,8 @@ subcollection: containers
     * [1.6.4_3864_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3864_iks)
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
+
+    * [1.5.1_5318_iks, released 31 August 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_5318_iks)
 
     * [1.5.1_5217_iks, released 26 July 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_5217_iks)
 
@@ -6307,7 +6321,7 @@ subcollection: containers
 
     * [1.5.1_3536_iks, released 3 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_3536_iks)
 
-* [Version 1.4.0](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
+* [Version 1.4.0 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#1_4_0)
 
     * [1.4.0_5218_iks, released 26 July 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.4.0_5218_iks)
 

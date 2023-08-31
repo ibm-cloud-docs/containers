@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-30"
+lastupdated: "2023-08-31"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2
 
@@ -32,6 +32,8 @@ Do not delete the subnets that you attach to your cluster during cluster creatio
 * A public network gateway is required when you want your cluster to access public endpoints, such as a public URL of another app or an {{site.data.keyword.cloud_notm}} service that supports public cloud service endpoints only. Make sure to review the [VPC networking basics](/docs/containers?topic=containers-plan_vpc_basics) to understand when a public network gateway is required and how you can set up your cluster to limit public access to one or more subnets only.
 * Before you can use KMS encryption, you must create a KMS instance and set up the required service authorization in IAM. For more information, see [Managing encryption for the worker nodes in your cluster](/docs/containers?topic=containers-encryption#worker-encryption).
 * By default, your cluster is provisioned with a VPC security group and a cluster-level security group. If you want to attach additional security groups or change which default security groups are applied when you create the cluster, you must [create your VPC cluster in the CLI](#cluster_vpcg2_cli).
+
+
 
 
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-29"
+lastupdated: "2023-08-31"
 
 keywords: kubernetes, release notes
 
@@ -28,6 +28,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## August 2023
 {: #containers-aug23}
+
+
+
+### 31 August 2023
+{: #containers-aug3123}
+{: release-note} 
+
+Ingress ALB versions `1.8.1_5317_iks`, `1.6.4_5270_iks`, and `1.5.1_5318_iks`
+:   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
 
 
 ### 29 August 2023
@@ -4432,5 +4442,6 @@ Deprecation of VPC Gen 1 compute
 
 Istio add-on
 :   [Version 1.5.10](/docs/containers?topic=containers-istio-changelog#1510) of the Istio managed add-on is released.
+
 
 
