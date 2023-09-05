@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-18"
+lastupdated: "2023-09-05"
 
 keywords: containers, kubernetes, infrastructure, rbac, policy, providers, benefits
 
@@ -81,18 +81,11 @@ Containers provide a standard way to package your application's code, configurat
 
 With {{site.data.keyword.containerlong}}, you can create a cluster by using infrastructure from the following providers. All the worker nodes in a cluster must be from the same provider.
 
-[{{site.data.keyword.vpc_full}}]{: tag-vpc}
-:   Create clusters on virtual servers in your own Virtual Private Cloud (VPC).
-
-
-
-
-[Classic infrastructure]{: tag-classic-inf} 
-:   Create clusters in a classic compute, networking, and storage environment in IBM Cloud infrastructure.
-
 
 | Component | Description | 
-| --- | --- | 
+| --- | --- |
+| Overview | Create clusters on virtual servers in your own Virtual Private Cloud (VPC). |
+| Supported container platforms | [{{site.data.keyword.redhat_openshift_notm}}]{: tag-red} or [Kubernetes]{: tag-blue} |
 | Compute and worker node resources | Worker nodes are created as virtual machines by using either shared infrastructure or dedicated hosts. Unlike classic clusters, VPC cluster worker nodes on shared hardware don't appear in your infrastructure portal or a separate infrastructure bill. Instead, you manage all maintenance and billing activity for the worker nodes through {{site.data.keyword.containerlong_notm}}. Your worker node instances are connected to certain VPC instances that do reside in your infrastructure account, such as the VPC subnet or storage volumes. For dedicated hosts, the dedicated host price covers the vCPU, memory, and any instance storage to be used by any workers placed on the host. For dedicated hosts, the dedicated host price covers the vCPU, memory, and any [instance storage](/docs/vpc?topic=vpc-instance-storage) to be used by any workers placed on the host. Note that all Intel® x86-64 servers have Hyper-Threading enabled by default. For more information, see [Intel Hyper-Threading Technology](/docs/vpc?topic=vpc-profiles#vpc-intel-hyper-threading). |
 | Security | Clusters on shared hardware run in an isolated environment in the public cloud. Clusters on dedicated hosts do not run in a shared environment, instead only your clusters are present on your hosts. Network access control lists protect the subnets that provide the floating IPs for your worker nodes. |
 | High availability | The master includes three replicas for high availability. Further, if you create your cluster in a multizone metro, the master replicas are spread across zones and you can also spread your worker pools across zones. |
@@ -116,9 +109,38 @@ With {{site.data.keyword.containerlong}}, you can create a cluster by using infr
 
 
 
+| Component | Description | 
+| --- | --- |
+| Overview | Create clusters on your own hardware, {{site.data.keyword.cloud_notm}} Classic or VPC, or on virtual servers in another cloud provider like AWS or Azure. |
+| Supported container platforms | [{{site.data.keyword.redhat_openshift_notm}}]{: tag-red} |
+| Compute and worker node resources | Worker nodes can be virtual machines using either shared infrastructure or dedicated hosts, or even bare metal servers. You manage maintenance and billing activity for the worker nodes through your host infrastructure provider whether that is {{site.data.keyword.cloud_notm}}, your own on-premises hardware, or another cloud provider. You also manage billing through {{site.data.keyword.cloud_notm}}. For more information about pricing, see [What am I charged for when I use {{site.data.keyword.satellitelong_notm}}?](/docs/satellite?topic=satellite-faqs#pricing). |
+| Security | See [Security and compliance](/docs/satellite?topic=satellite-compliance). |
+| High availability | See [About high availability and recover](/docs/satellite?topic=satellite-ha). |
+| Reservations | Reservations aren't available for {{site.data.keyword.satelliteshort}}. |
+| Cluster administration | See [Updating hosts that are assigned as worker nodes](/docs/satellite?topic=satellite-host-update-workers). | 
+| Cluster networking | If you attach {{site.data.keyword.cloud_notm}} Classic or VPC hosts to your location, refer to those descriptions. |
+| Apps and container platform | You can create [{{site.data.keyword.redhat_openshift_notm}} clusters](/docs/containers?topic=containers-faqs#container_platforms) to manage your containerized apps. Your app build processes don't differ because of the infrastructure provider, but how you expose the app does. For more information, see [Choosing an app exposure service](/docs/containers?topic=containers-cs_network_planning). |
+| App networking | All pods that are deployed to a worker node are assigned a private IP address in the 172.30.0.0/16 range by default. You can avoid subnet conflicts with the network that you use to connect to your location by specifying a custom subnet CIDR that provides the private IP addresses for your pods. To expose an app, see [Exposing apps in {{site.data.keyword.satelliteshort}} clusters](/docs/openshift?topic=openshift-sat-expose-apps). |
+| Storage | Bring your own storage drivers or deploy one of the supported storage templates. For more information, see [Understanding {{site.data.keyword.satelliteshort}} storage](/docs/satellite?topic=satellite-storage-template-ov). | 
+| User access | You can use {{site.data.keyword.cloud_notm}} IAM access policies to authorize users to create {{site.data.keyword.cloud_notm}} infrastructure, manage your cluster, and access cluster resources. For more information, see [Managing access overview](/docs/satellite?topic=satellite-iam). You can also further control access to your host infrastructure in policies provided by your infrastructure provider.|
+| Integrations | For cluster integrations, see [Supported {{site.data.keyword.cloud_notm}} and third-party integrations](/docs/containers?topic=containers-supported_integrations). For supported {{site.data.keyword.satelliteshort}} service integrations, see [Supported {{site.data.keyword.satelliteshort}} {{site.data.keyword.cloud_notm}} services](/docs/satellite?topic=satellite-managed-services).
+| Locations and versions | Clusters are managed from one of the [supported {{site.data.keyword.cloud_notm}} locations](/docs/satellite?topic=satellite-sat-regions). However, you can deploy worker nodes to your own location, an {{site.data.keyword.cloud_notm}} data center, or another cloud provider. For more information see [Understanding locations and hosts](/docs/satellite?topic=satellite-location-host). |
+| Service interface | {{site.data.keyword.satelliteshort}} are supported by the global [API](https://containers.cloud.ibm.com/global/swagger-global-api/) [{{site.data.keyword.containerlong_notm}}, the {{site.data.keyword.containerlong_notm}} [CLI](/docs/containers?topic=containers-cli-install) and the {{site.data.keyword.satelliteshort}} [CLI](/docs/satellite?topic=satellite-cli-install). You can also manage your clusters from the [console](https://cloud.ibm.com/satellite/clusters). |
+| Service compliance | For clusters, see [What standards does the service comply to?](/docs/containers?topic=containers-faqs#standards). For {{site.data.keyword.satelliteshort}}, see [Security and compliance](/docs/satellite?topic=satellite-compliance). |
+| Service limitations | See [Limitations, default settings, and usage requirements](/docs/satellite?topic=satellite-requirements). |
+{: class="simple-tab-table"}
+{: caption="Table 1. Infrastructure overview" caption-side="bottom"}
+{: #infra-2}
+{: tab-title="{{site.data.keyword.satelliteshort}}"}
+{: tab-group="infra-table"}
+
+
+
 
 | Component | Description | 
-| --- | --- | 
+| --- | --- |
+| Overview | Create clusters in a classic compute, networking, and storage environment in IBM Cloud infrastructure. |
+| Supported container platforms | [{{site.data.keyword.redhat_openshift_notm}}]{: tag-red} or [Kubernetes]{: tag-blue} |
 | Compute and worker node resources | [Virtual](/docs/containers?topic=containers-planning_worker_nodes#vm), [bare metal](/docs/containers?topic=containers-planning_worker_nodes#bm), and [software-defined storage](/docs/containers?topic=containers-planning_worker_nodes#sds) machines are available for your worker nodes. Your worker node instances reside in your IBM Cloud infrastructure account, but you can manage them through {{site.data.keyword.containerlong_notm}}. You own the worker node instances.|
 | Security | Built-in security features that help you protect your cluster infrastructure, isolate resources, and ensure security compliance. For more information, see the [classic Network Infrastructure documentation](/docs/cloud-infrastructure?topic=cloud-infrastructure-compare-infrastructure). |
 | High availability | For both classic and VPC clusters, the master includes three replicas for high availability. Further, if you create your cluster in a multizone metro, the master replicas are spread across zones and you can also spread your worker pools across zones. For more information, see [High availability for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha_clusters). |
@@ -144,13 +166,6 @@ With {{site.data.keyword.containerlong}}, you can create a cluster by using infr
 
 ## What are the benefits of using the service?
 {: #benefits}
-
-
-
-
-Clusters are deployed on compute hosts that provide native Kubernetes and {{site.data.keyword.IBM_notm}}-specific capabilities.
-{: shortdesc}
-
 
 
 

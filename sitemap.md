@@ -243,6 +243,10 @@ subcollection: containers
 
         * Ingress ALB versions `1.8.1_5317_iks`, `1.6.4_5270_iks`, and `1.5.1_5318_iks`
 
+    * [30 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug2023)
+
+        * Master fix packs are available.
+
     * [29 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug2923)
 
         * New! Madrid multizone region
