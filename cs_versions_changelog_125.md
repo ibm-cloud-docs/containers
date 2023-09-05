@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-08-29"
+lastupdated: "2023-09-05"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -38,6 +38,25 @@ Review the version 1.25 change log.
 {: shortdesc}
 
 
+
+
+### Change log for master fix pack 1.25.12_1556, released 30 August 2023
+{: #12512_1556_M}
+
+The following table shows the changes that are in the master fix pack 1.25.12_1556. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.3.23 | v1.3.24 | Updated `Go` to version `1.19.12` and updated dependencies. Updated base image version to 378. |
+| Gateway-enabled cluster controller | 2322 | 2366 | Update `Go` dependencies to fix [CVE-2023-3978](https://nvd.nist.gov/vuln/detail/CVE-2023-3978){: external}. |
+| GPU device plug-in and installer | 495931a | 8e87e60 | Updated `Go` to version `1.19.11` |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.25.12-1 | v1.25.12-4 | Updated `Go` dependencies to resolve a CVE. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 433 | 434 | Updated `Go` to version `1.20.6` and updated dependencies. Updated to newer UBI base image. |
+| Key Management Service provider | v2.7.2 | v2.7.3 | Updated `Go` dependencies. |
+| Portieris admission controller | v0.13.5 | v0.13.6 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.6){: external}. |
+{: caption="Changes since version 1.25.12_1553" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.25.12_1557, released 28th August 2023
