@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-05"
+lastupdated: "2023-09-07"
 
 keywords: containers, kubernetes, release notes
 
@@ -25,6 +25,16 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+## September 2023
+{: #containers-sep23}
+
+### 7 September 2023
+{: #containers-sep723}
+{: release-note} 
+
+{{site.data.keyword.cos_full_notm}} plug-in version `2.2.18`
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 ## August 2023
 {: #containers-aug23}
@@ -4316,9 +4326,7 @@ VPC security groups
 {: release-note}
 
 Versions
-:   Worker node fix pack update change log documentation is available.
-:   Kubernetes version [1.18.9_1530](/docs/containers?topic=containers-118_changelog#1189_1530), [1.17.12_1542](/docs/containers?topic=containers-117_changelog#11712_1542), and [1.16.15_1549](/docs/containers?topic=containers-116_changelog#11615_1549).
-
+:   Worker node fix pack update change log documentation is available.:   Kubernetes version [1.18.9_1530](/docs/containers?topic=containers-118_changelog#1189_1530), [1.17.12_1542](/docs/containers?topic=containers-117_changelog#11712_1542), and [1.16.15_1549](/docs/containers?topic=containers-116_changelog#11615_1549).
 
 ### 8 October 2020
 {: #containers-oct0820}
@@ -4416,7 +4424,7 @@ Versions
 
 Versions
 :   Worker node fix pack update change log documentation is available.
-:   Kubernetes version [1.18.8_1527](/docs/containers?topic=containers-118_changelog#1188_1527), [1.17.11_1539](/docs/containers?topic=containers-117_changelog#11711_1539), [1.16.14_1546](/docs/containers?topic=containers-116_changelog#11614_1546), and [1.15.12_1552](/docs/containers?topic=containers-115_changelog#11512_1552).
+:   Kubernetes version [1.18.8_1527](/docs/containers?topic=containers-118_changelog#1188_1527), [1.17.11_1539](/docs/containers?topic=containers-117_changelog#11711_1539), [1.16.14_1546](/docs/containers?topic=containers-116_changelog#11614_1546), and 1.15.12_1552.
 
 
 

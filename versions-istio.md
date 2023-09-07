@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-08-21"
+lastupdated: "2023-09-07"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -291,7 +291,7 @@ Updates in this version
     - [usn-6105-1](https://ubuntu.com/security/notices/USN-6105-1){: external}
     - [usn-6166-1](https://ubuntu.com/security/notices/USN-6166-1){: external}
     - [usn-6099-1](https://ubuntu.com/security/notices/USN-6099-1){: external}
-    - [usn-6138-1](https://ubuntu.com/security/notices/USN-6138-1-1){: external}
+    - [usn-6138-1](https://ubuntu.com/security/notices/USN-6138-1){: external}
     - [usn-6199-1](https://ubuntu.com/security/notices/USN-6199-1){: external}
 
 ### Change log for 1.16.5, released 8 June 2022
