@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-09-05"
+lastupdated: "2023-09-07"
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
 
@@ -52,7 +52,7 @@ The following table shows the changes that are in the master fix pack 1.26.7_155
 | GPU device plug-in and installer | 495931a | 8e87e60 | Updated `Go` to version `1.19.11` |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.26.7-1 | v1.26.7-4 | Updated `Go` dependencies to resolve a CVE. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 433 | 434 | Updated `Go` to version `1.20.6` and updated dependencies. Updated to newer UBI base image. |
-| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | d293d8b | a1edf56 | Updated `Go` to version `1.20.6``. |
+| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | d293d8b | a1edf56 | Updated `Go` to version `1.20.6`. |
 | Key Management Service provider | v2.7.2 | v2.7.3 | Updated `Go` dependencies. |
 | Portieris admission controller | v0.13.5 | v0.13.6 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.6){: external}. |
 {: caption="Changes since version 1.26.7_1545" caption-side="bottom"}

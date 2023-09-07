@@ -4326,9 +4326,7 @@ VPC security groups
 {: release-note}
 
 Versions
-:   Worker node fix pack update change log documentation is available.
-:   Kubernetes version [1.18.9_1530](/docs/containers?topic=containers-118_changelog#1189_1530), [1.17.12_1542](/docs/containers?topic=containers-117_changelog#11712_1542), and [1.16.15_1549](/docs/containers?topic=containers-116_changelog#11615_1549).
-
+:   Worker node fix pack update change log documentation is available.:   Kubernetes version [1.18.9_1530](/docs/containers?topic=containers-118_changelog#1189_1530), [1.17.12_1542](/docs/containers?topic=containers-117_changelog#11712_1542), and [1.16.15_1549](/docs/containers?topic=containers-116_changelog#11615_1549).
 
 ### 8 October 2020
 {: #containers-oct0820}
@@ -4426,7 +4424,7 @@ Versions
 
 Versions
 :   Worker node fix pack update change log documentation is available.
-:   Kubernetes version [1.18.8_1527](/docs/containers?topic=containers-118_changelog#1188_1527), [1.17.11_1539](/docs/containers?topic=containers-117_changelog#11711_1539), [1.16.14_1546](/docs/containers?topic=containers-116_changelog#11614_1546), and [1.15.12_1552](/docs/containers?topic=containers-115_changelog#11512_1552).
+:   Kubernetes version [1.18.8_1527](/docs/containers?topic=containers-118_changelog#1188_1527), [1.17.11_1539](/docs/containers?topic=containers-117_changelog#11711_1539), [1.16.14_1546](/docs/containers?topic=containers-116_changelog#11614_1546), and 1.15.12_1552.
 
 
 
