@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-27"
+lastupdated: "2023-09-08"
 
 keywords: kubernetes
 
@@ -225,7 +225,7 @@ To see a list of supported integrations and steps for setting up a continuous de
 ## Copying deployments to another cluster
 {: #copy_apps_cluster}
 
-When you use a [version control system such as Git](/docs/containers?topic=containers-plan_deploy#deploy_organize), configuration management projects such as [`kustomize`](/docs/containers?topic=containers-kustomize), or continuous delivery tools such as [Razee](https://razee.io/){: external} in your cluster, you can deploy your app configuration files quickly from cluster to cluster. Sometimes you have only a few deployments that you tested in a cluster and prefer to copy these deployments and redeploy in another cluster. For example, you might use a free, classic infrastructure Kubernetes cluster for a proof of concept that you did not manage in Git. Now, you are ready to take this proof of concept and deploy it to a standard cluster that runs {{site.data.keyword.redhat_openshift_notm}} or on VPC infrastructure.
+When you use a [version control system such as Git](/docs/containers?topic=containers-plan_deploy#deploy_organize), configuration management projects such as [`kustomize`](/docs/containers?topic=containers-kustomize), or continuous delivery tools such as [Razee](https://razee.io/){: external} in your cluster, you can deploy your app configuration files quickly from cluster to cluster. Sometimes you have only a few deployments that you tested in a cluster and prefer to copy these deployments and redeploy in another cluster.
 {: shortdesc}
 
 Before you begin, you need two clusters and the **Manager** [service access role](/docs/containers?topic=containers-users#checking-perms) for all namespaces in both clusters so that you can copy all the resources from one cluster and deploy them to another.
@@ -261,7 +261,7 @@ Before you begin, you need two clusters and the **Manager** [service access role
     {: pre}
 
 4. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
-5. Optional: If your free cluster used multiple namespaces, create the same namespaces in the standard cluster and [copy the image pull secret to each namespace](/docs/containers?topic=containers-registry#copy_imagePullSecret).
+5. Optional: If your cluster used multiple namespaces, create the same namespaces in the standard cluster and [copy the image pull secret to each namespace](/docs/containers?topic=containers-registry#copy_imagePullSecret).
 6. Deploy the copied configuration files to your cluster. If a configuration file has specific information that can't be applied, you might need to update the configuration file and reapply.
     ```sh
     kubectl apply -f myconfigs.yaml
