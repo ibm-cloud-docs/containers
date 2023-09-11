@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-08-31"
+lastupdated: "2023-09-11"
 
 keywords: kubernetes, help
 
@@ -36,5 +36,5 @@ alb-oauth-proxy        2.0.0     critical       Addon Not Ready (alb-oauth_proxy
 {: screen}
 
 
-The `H1502` status code indicates that the add-on cannot be enabled on LinuxONE (`s390x`) worker nodes. Check the [Supported cluster add-on versions](/docs/containers?topic=containers-supported-cluster-addon-versions) for the list of add-ons supported on LinuxONE worker nodes.
+The `H1502` status code indicates that the add-on cannot be enabled on LinuxONE (`s390x` architecture) worker nodes. Check the [Supported cluster add-on versions](/docs/containers?topic=containers-supported-cluster-addon-versions) for the list of add-ons supported on LinuxONE worker nodes.
 
