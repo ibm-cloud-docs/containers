@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-07"
+lastupdated: "2023-09-12"
 
 keywords: kubernetes
 
@@ -501,7 +501,7 @@ Before updating the add-on review the [change log](/docs/containers?topic=contai
 
 1. Update the add-on.
     ```sh
-    ibmcloud ks ks cluster addon update vpc-block-csi-driver --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
+    ibmcloud ks cluster addon update vpc-block-csi-driver --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
     ```
     {: pre}
 
