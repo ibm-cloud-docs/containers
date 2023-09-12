@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-07"
+lastupdated: "2023-09-12"
 
 keywords: containers, kubernetes, release notes
 
@@ -28,6 +28,22 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## September 2023
 {: #containers-sep23}
+
+### 12 September 2023
+{: #containers-sep1223}
+{: release-note} 
+
+
+
+Worker node fix packs are available.
+:   [1.27.4_1538](/docs/containers?topic=containers-changelog_127)
+:   [1.26.7_1552](/docs/containers?topic=containers-changelog_126)
+:   [1.25.12_1558](/docs/containers?topic=containers-changelog_125)
+:   [1.24.16_1583](/docs/containers?topic=containers-changelog_124)
+
+
+
+
 
 ### 7 September 2023
 {: #containers-sep723}
