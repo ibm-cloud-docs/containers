@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023
-lastupdated: "2023-09-11"
+lastupdated: "2023-09-12"
 
 keywords: kubernetes
 
@@ -46,17 +46,7 @@ A container image has the `FROM` directive in its `Dockerfile` with a designated
       $docker buildx build --platform linux/s390x -t <username>/<image>:latest --push .
       ```
       {: pre}
+      
    * If the parent image doesn't support s390x architecture, work with the provider of the parent image on how to support the `s390x` architecture.
 
-After your container image is built successfully, verify the container image is compatiable with `s390x` architecture.
-```
-$docker inspect <username>/<image>:latest |grep Arch
-   "Architecture": "390x",
-```
-{: screen}
-
-
-
-
-
-
+After your container image is built successfully, verify the container image is compatiable with `s390x` architecture by using the command `docker inspect <username>/<image>:latest |grep Arch` and the result of this command is `"Architecture": "390x"`. 
