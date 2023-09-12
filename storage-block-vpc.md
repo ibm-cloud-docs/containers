@@ -516,7 +516,7 @@ Before updating the add-on review the [change log](/docs/containers?topic=contai
     {: pre}
 
     ```sh
-    ibmcloud ks cluster addon enaable vpc-block-csi-driver --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
+    ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
     ```
     {: pre}
 
