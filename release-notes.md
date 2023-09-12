@@ -36,7 +36,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 Worker node fix packs are available.
-:   [1.28.1_1523](/docs/containers?topic=containers-changelog_128)
 :   [1.27.4_1538](/docs/containers?topic=containers-changelog_127)
 :   [1.26.7_1552](/docs/containers?topic=containers-changelog_126)
 :   [1.25.12_1558](/docs/containers?topic=containers-changelog_125)
