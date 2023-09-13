@@ -2688,8 +2688,6 @@ subcollection: containers
 
 * [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms)
 
-    * [Available KMS providers](/docs/containers?topic=containers-encryption#kms-providers)
-
     * [Controlling encryption](/docs/containers?topic=containers-encryption#kms-encrypt-control)
 
     * [Features and limitations of KMS providers](/docs/containers?topic=containers-encryption#kms-keyprotect-features)
