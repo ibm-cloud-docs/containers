@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-09-12"
+lastupdated: "2023-09-13"
 
 keywords: containers
 subcollection: containers
@@ -2687,8 +2687,6 @@ subcollection: containers
 [Understanding encryption](/docs/containers?topic=containers-encryption#encryption)
 
 * [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms)
-
-    * [Available KMS providers](/docs/containers?topic=containers-encryption#kms-providers)
 
     * [Controlling encryption](/docs/containers?topic=containers-encryption#kms-encrypt-control)
 

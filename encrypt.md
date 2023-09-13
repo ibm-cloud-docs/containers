@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-18"
+lastupdated: "2023-09-13"
 
-keywords: kubernetes, encrypt, security, kms, root key, crk
+keywords: containers, kubernetes, red hat, encrypt, security, kms, root key, crk
 
 subcollection: containers
 
@@ -26,8 +26,6 @@ Protect sensitive information in your {{site.data.keyword.containerlong}} cluste
 For more information about securing your cluster and personal information, see [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security) and [Storing personal information](/docs/containers?topic=containers-security#pi).
 
 
-The following image and description outline default and optional data encryption for {{site.data.keyword.containerlong_notm}} clusters.
-
 
 ![Overview of cluster encryption, as described in the following sections.](images/cs_encrypt_ov_kms-vpc.png "Overview of cluster encryption"){: caption="Figure 1. Overview of cluster encryption" caption-side="bottom"}
 
@@ -45,17 +43,13 @@ The following image and description outline default and optional data encryption
 
 
 
+
+
 ## Understanding Key Management Service (KMS) providers
 {: #kms}
 
 
 You can protect Kubernetes secrets and any credentials stored in a secret by enabling a [key management service (KMS) provider](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/){: external} which provides an encryption solution using a root key you control.
-
-
-### Available KMS providers
-{: #kms-providers}
-
-By default, {{site.data.keyword.containerlong_notm}} supports the following KMS providers.
 
 
 * {{site.data.keyword.keymanagementservicefull}} for [public cloud](/docs/key-protect?topic=key-protect-getting-started-tutorial) or [on-prem](https://www.ibm.com/docs/en/cloud-private/3.2.0?topic=apis-key-management-service){: external} environments.
