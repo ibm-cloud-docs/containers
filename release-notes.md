@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-12"
+lastupdated: "2023-09-14"
 
 keywords: containers, kubernetes, release notes
 
@@ -28,6 +28,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## September 2023
 {: #containers-sep23}
+
+### 14 September 2023
+{: #containers-sep1423}
+{: release-note} 
+
+
+{{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1.7_49`
+:   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+
+{{site.data.keyword.block_storage_is_short}} add-on versions `5.0.19_358` and `5.1.13_345`.
+:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
 
 ### 12 September 2023
 {: #containers-sep1223}
