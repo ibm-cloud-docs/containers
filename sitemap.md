@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-09-15"
+lastupdated: "2023-09-18"
 
 keywords: containers
 subcollection: containers
@@ -238,6 +238,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep23)
+
+    * [18 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1823)
+
+        * CLI version `1.0.566` is available.
 
     * [14 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1423)
 
@@ -4214,6 +4218,18 @@ subcollection: containers
 
 [Setting up a domain for your cluster](/docs/containers?topic=containers-ingress-domains#ingress-domains)
 
+* [Accessing domains in the console](/docs/containers?topic=containers-ingress-domains#ingress-domains-ui-access)
+
+* [Creating domains in the console](/docs/containers?topic=containers-ingress-domains#ingress-domains-ui)
+
+    * [Domain details](/docs/containers?topic=containers-ingress-domains#ingress-domains-ui-details)
+
+    * [Registration details](/docs/containers?topic=containers-ingress-domains#ingress-domains-ui-registration)
+
+    * [Credentials](/docs/containers?topic=containers-ingress-domains#ingress-domains-ui-credentials)
+
+* [Managing your domain in the console](/docs/containers?topic=containers-ingress-domains#ui)
+
 * [Setting up domains with the managed {{site.data.keyword.cloud_notm}} internal provider](/docs/containers?topic=containers-ingress-domains#ingress-domain-int)
 
 * [Setting up domains with {{site.data.keyword.cis_full_notm}}](/docs/containers?topic=containers-ingress-domains#ingress-domain-cis)
@@ -5548,6 +5564,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.566](/docs/containers?topic=containers-cs_cli_changelog#cli-10566)
 
 * [Version v1.0.540](/docs/containers?topic=containers-cs_cli_changelog#cli-10549)
 
