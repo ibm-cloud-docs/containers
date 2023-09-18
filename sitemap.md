@@ -239,6 +239,10 @@ subcollection: containers
 
 * [September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep23)
 
+    * [18 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1823)
+
+        * CLI version `1.0.566` is available.
+
     * [14 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1423)
 
         * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1.7_49`
@@ -5548,6 +5552,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.566](/docs/containers?topic=containers-cs_cli_changelog#cli-10566)
 
 * [Version v1.0.540](/docs/containers?topic=containers-cs_cli_changelog#cli-10549)
 
