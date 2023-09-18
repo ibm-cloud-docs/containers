@@ -4218,6 +4218,18 @@ subcollection: containers
 
 [Setting up a domain for your cluster](/docs/containers?topic=containers-ingress-domains#ingress-domains)
 
+* [Accessing domains in the console](/docs/containers?topic=containers-ingress-domains#ingress-domains-ui-access)
+
+* [Creating domains in the console](/docs/containers?topic=containers-ingress-domains#ingress-domains-ui)
+
+    * [Domain details](/docs/containers?topic=containers-ingress-domains#ingress-domains-ui-details)
+
+    * [Registration details](/docs/containers?topic=containers-ingress-domains#ingress-domains-ui-registration)
+
+    * [Credentials](/docs/containers?topic=containers-ingress-domains#ingress-domains-ui-credentials)
+
+* [Managing your domain in the console](/docs/containers?topic=containers-ingress-domains#ui)
+
 * [Setting up domains with the managed {{site.data.keyword.cloud_notm}} internal provider](/docs/containers?topic=containers-ingress-domains#ingress-domain-int)
 
 * [Setting up domains with {{site.data.keyword.cis_full_notm}}](/docs/containers?topic=containers-ingress-domains#ingress-domain-cis)
