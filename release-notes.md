@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-18"
+lastupdated: "2023-09-19"
 
 keywords: containers, kubernetes, release notes
 
@@ -35,6 +35,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 CLI version `1.0.566` is available.
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
+### 15 September 2023
+{: #containers-sep1523}
+{: release-note} 
+
+Cluster autoscaler add-on versions `1.0.9_103`,`1.0.8_104`, and `1.0.7_102`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+
+
 
 ### 14 September 2023
 {: #containers-sep1423}
