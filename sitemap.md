@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-09-18"
+lastupdated: "2023-09-19"
 
 keywords: containers
 subcollection: containers
@@ -242,6 +242,10 @@ subcollection: containers
     * [18 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1823)
 
         * CLI version `1.0.566` is available.
+
+    * [15 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1523)
+
+        * Cluster autoscaler add-on versions `1.0.9_103`,`1.0.8_104`, and `1.0.7_102`.
 
     * [14 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1423)
 
@@ -6917,6 +6921,8 @@ subcollection: containers
 
 * [Version 1.0.9](/docs/containers?topic=containers-ca_changelog#0109_ca_addon)
 
+    * [Change log for patch update 1.0.9_103, released 15 September 2023](/docs/containers?topic=containers-ca_changelog#109103_ca)
+
     * [Change log for patch update 1.0.9_81, released 07 August 2023](/docs/containers?topic=containers-ca_changelog#10981_ca)
 
     * [Change log for patch update 1.0.9_70, released 24 July 2023](/docs/containers?topic=containers-ca_changelog#10970_ca)
@@ -6924,6 +6930,8 @@ subcollection: containers
     * [Change log for patch update 1.0.9_44, released 22 June 2023](/docs/containers?topic=containers-ca_changelog#10944_ca)
 
 * [Version 1.0.8](/docs/containers?topic=containers-ca_changelog#0108_ca_addon)
+
+    * [Change log for patch update 1.0.8_104, released 15 September 2023](/docs/containers?topic=containers-ca_changelog#108104_ca)
 
     * [Change log for patch update 1.0.8_82, released 7 August 2023](/docs/containers?topic=containers-ca_changelog#10882_ca)
 
@@ -6938,6 +6946,8 @@ subcollection: containers
     * [Change log for patch update 1.0.8_968, released 9 March 2023](/docs/containers?topic=containers-ca_changelog#108968_ca)
 
 * [Version 1.0.7](/docs/containers?topic=containers-ca_changelog#0107_ca_addon)
+
+    * [Change log for patch update 1.0.7_102, released 15 September 2023](/docs/containers?topic=containers-ca_changelog#107102_ca)
 
     * [Change log for patch update 1.0.7_83, released 7 August 2023](/docs/containers?topic=containers-ca_changelog#10783_ca)
 
