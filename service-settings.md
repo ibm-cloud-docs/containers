@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-05-26"
+lastupdated: "2023-09-20"
 
 keywords: kubernetes
 
@@ -38,7 +38,8 @@ Default pod tolerations
 Privileged pods
 :   `allow-privileged=true`
 
-Request headers
+Request and response headers
+:   `strict-transport-security-directives="max-age=31536000"` (Kubernetes version 1.28 and later)
 :   `requestheader-client-ca-file=/mnt/etc/kubernetes-cert/ca.pem`
 :   `requestheader-username-headers=X-Remote-User`
 :   `requestheader-group-headers=X-Remote-Group`
@@ -127,6 +128,10 @@ TLS cipher support
 Review the default settings for the `kubelet` worker node component in {{site.data.keyword.containerlong_notm}}. 
 {: shortdesc}
 
+`imageGCHighThresholdPercent: 75` (Kubernetes version 1.28 and later)
+
+`imageGCLowThresholdPercent: 65` (Kubernetes version 1.28 and later)
+
 `kubeAPIQPS: 50` (Kubernetes version 1.27 and later)
 
 `kubeAPIBurst: 100` (Kubernetes version 1.27 and later)
@@ -136,7 +141,9 @@ Review the default settings for the `kubelet` worker node component in {{site.da
 `eventRecordQPS: 50` (Kubernetes version 1.27 and later)
 
 `serializeImagePulls: false`
+
 `registryPullQPS: 5`
+
 `registryBurst: 5`
 
 
@@ -243,10 +250,13 @@ TLS cipher support
 Review the default settings for the `kube-proxy` worker node component in {{site.data.keyword.containerlong_notm}}. 
 {: shortdesc}
 
+
 Iptable settings
+:   `iptables-sync-period 180s` (Kubernetes version 1.28 and later)
+:   `iptables-min-sync-period 3s` (Kubernetes version 1.28 and later)
 :   `iptables-sync-period 300s`
 :   `iptables-min-sync-period 5s`
-:   **For Kubernetes versions 1.26 and later**: `iptables-localhost-nodeports false`
+:   `iptables-localhost-nodeports false` (Kubernetes versions 1.26 and later)
 
 Proxy mode
 :   `proxy-mode=iptables`

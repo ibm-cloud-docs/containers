@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-19"
+lastupdated: "2023-09-20"
 
 keywords: containers, kubernetes, release notes
 
@@ -29,6 +29,27 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## September 2023
 {: #containers-sep23}
 
+
+
+### 20 September 2023
+{: #containers-sep2023}
+{: release-note} 
+
+New! {{site.data.keyword.containerlong_notm}} version 1.28.
+:   You can create or [update clusters to Kubernetes version 1.28](/docs/containers?topic=containers-cs_versions_128). With Kubernetes 1.28, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
+
+Master fix pack `1.28.2_1527` and worker node fix pack `1.28.1_1523`.
+:   For more information, see the [1.28 change log](/docs/containers?topic=containers-changelog_128).
+
+Networking changes for VPC clusters 1.28 and later
+:   In version 1.27 and earlier, VPC clusters pull container images from the {{site.data.keyword.registrylong_notm}} through a private cloud service endpoint for the Container Registry. For version 1.28 and later, this network path is updated so that images are pulled through a VPE gateway instead of a private service endpoint. For more information, see the [1.28 change log](/docs/containers?topic=containers-changelog_128).
+
+Trusted profile updates for Kubernetes clusters version 1.28 and later.
+:   You can now give trusted profiles service level access to your clusters, then use a federated ID, like App ID, to access the cluster at the level assigned in the trusted profile since trusted profile identities are now synced into the cluster RBAC. For more information, see [Creating trusted profiles](/docs/account?topic=account-create-trusted-profile&interface=ui) and [Logging in with a federated ID](/docs/account?topic=account-federated_id&interface=ui).
+
+
+
+
 ### 18 September 2023
 {: #containers-sep1823}
 {: release-note}
@@ -43,7 +64,6 @@ CLI version `1.0.566` is available.
 
 Cluster autoscaler add-on versions `1.0.9_103`,`1.0.8_104`, and `1.0.7_102`.
 :   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
-
 
 
 ### 14 September 2023

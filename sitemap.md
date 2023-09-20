@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-09-19"
+lastupdated: "2023-09-20"
 
 keywords: containers
 subcollection: containers
@@ -238,6 +238,16 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep23)
+
+    * [20 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2023)
+
+        * New! {{site.data.keyword.containerlong_notm}} version 1.28.
+
+        * Master fix pack `1.28.2_1527` and worker node fix pack `1.28.1_1523`.
+
+        * Networking changes for VPC clusters 1.28 and later
+
+        * Trusted profile updates for Kubernetes clusters version 1.28 and later.
 
     * [18 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1823)
 
@@ -5767,6 +5777,39 @@ subcollection: containers
     * [What else can I do to increase the security and compliance of my cluster?](/docs/containers?topic=containers-cis-benchmark#benchmark-what-else)
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
+
+
+### Version 1.28
+{: #sitemap_version_128}
+
+
+[1.28 version information and update actions](/docs/containers?topic=containers-cs_versions_128#cs_versions_128)
+
+* [Release timeline](/docs/containers?topic=containers-cs_versions_128#release_timeline_128)
+
+* [Preparing to update](/docs/containers?topic=containers-cs_versions_128#prep-up-128)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions_128#before_128)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions_128#after_128)
+
+* [Networking changes for VPC clusters](/docs/containers?topic=containers-cs_versions_128#networking_128)
+
+    * [What do I need to do?](/docs/containers?topic=containers-cs_versions_128#networking_steps)
+
+    * [I have custom security groups. What do I change?](/docs/containers?topic=containers-cs_versions_128#networking_steps_sg)
+
+    * [I have custom ACLs. What do I change?](/docs/containers?topic=containers-cs_versions_128#networking_steps_acl)
+
+    * [I have custom network policies. What do I change?](/docs/containers?topic=containers-cs_versions_128#networking_steps_policy)
+
+[Kubernetes version 1.28 change log](/docs/containers?topic=containers-changelog_128#changelog_128)
+
+* [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
+
+* [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#127_changelog)
+
+    * [Change log for master fix pack 1.28.2_1527 and worker node fix pack 1.28.1_1523, released 20 September 2023](/docs/containers?topic=containers-changelog_128#1.28.2_1527M-and-1.28.1_1523W)
 
 
 ### Version 1.27
