@@ -34,7 +34,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 
 ## Version 1.28 change log
-{: #127_changelog}
+{: #128_changelog}
 
 
 Review the version 1.28 change log.
