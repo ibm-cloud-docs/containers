@@ -5811,6 +5811,48 @@ subcollection: containers
 
     * [Change log for master fix pack 1.28.2_1527 and worker node fix pack 1.28.1_1523, released 20 September 2023](/docs/containers?topic=containers-changelog_128#1.28.2_1527M-and-1.28.1_1523W)
 
+[Kubernetes version 1.28 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-128)
+
+* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-128#cis-section-1-128)
+
+    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-11-128)
+
+    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-12-128)
+
+    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-13-128)
+
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-14-128)
+
+* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-128#cis-section-2-128)
+
+* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-128#cis-section-3-128)
+
+    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-31-128)
+
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-32-128)
+
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-128#cis-section-4-128)
+
+    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-41-128)
+
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-42-128)
+
+* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-128#cis-section-5-128)
+
+    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-51-128)
+
+    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-52-128)
+
+    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-53-128)
+
+    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-54-128)
+
+    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-55-128)
+
+    * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-56-128)
+
+* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-remediations-128)
+
 
 ### Version 1.27
 {: #sitemap_version_127}
