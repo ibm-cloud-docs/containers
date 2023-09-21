@@ -2,7 +2,8 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-09-14
+lastupdated: "2023-09-21"
+
 keywords: kubernetes, containers, 128, version 128, 128 update actions
 
 subcollection: containers
@@ -49,8 +50,10 @@ This information summarizes updates that are likely to have and impact on deploy
 [Portworx](/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.28. Do not upgrade your cluster to version 1.28 if your apps use Portworx.
 {: important}
 
+
 [Cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc) does not yet support version 1.28. Do not upgrade your cluster to version 1.28 if your cluster uses cluster autoscaler.
 {: important}
+
 
 {{site.data.keyword.containerlong_notm}} version 1.28 has **not** expanded its supported skew between core node and control plane components by one minor version.  The supported skew remains `n-2`. For more information, see [Changes to supported skew between control plane and node versions](https://kubernetes.io/blog/2023/08/15/kubernetes-v1-28-release/#changes-to-supported-skew-between-control-plane-and-node-versions) for the Kubernetes community information.
 {: important}
@@ -68,22 +71,16 @@ The following table shows the actions that you must take before you update the K
 | Networking changes to VPC clusters | In version 1.27 and earlier, VPC clusters pull images from the IBM Cloud Container Registry through a private cloud service endpoint for the Container Registry. For version 1.28 and later, this network path is updated so that images are pulled through a VPE gateway instead of a private service endpoint. For update actions, see [Networking changes for VPC clusters](#networking_128). |
 {: caption="Changes to make before you update the master to Kubernetes 1.28" caption-side="bottom"}
 
+
 ### Update after master
 {: #after_128}
+
 
 | Type | Description |
 | --- | --- |
 | `kubectl version` output and `--short` option | The `kubectl version` output has been changed to match the previous `kubectl version --short` output.  In addition, the `--short` option has been removed.  If your scripts rely on the previous behavior, update them. |
 | `kubelet` legacy iptables chains | `kubelet` no longer creates the `KUBE-MARK-DROP` nor `KUBE-MARK-MASQ` iptables chains. If your apps rely on these chains, update them accordingly.  For more information, see [Kubernetes’s IPTables Chains Are Not API](https://kubernetes.io/blog/2022/09/07/iptables-chains-not-api/). |
 {: caption="Changes to make after you update the master to Kubernetes 1.28" caption-side="bottom"}
-=======
-
-Version 1.28 is not yet available, but you can review information about expected changes included in the update.
-{: shortdesc}
-
-Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
-{: tip}
-
 
 
 
@@ -92,6 +89,8 @@ Looking for general information on updating {{site.data.keyword.containerlong}} 
 
 In version 1.27 and earlier, VPC clusters pull images from the IBM Cloud Container Registry through a private cloud service endpoint for the Container Registry. For version 1.28 and later, this network path is updated so that images are pulled through a VPE gateway instead of a private service endpoint. This change affects all clusters in a VPC; when you create or update a single cluster in a VPC to version 1.28, all clusters in that VPC, regardless of their version, have their network path updated. Depending on the setup of your security groups, network ACLs, and network policies, you may need to make changes to ensure that your workers continue to successfully pull container images after updating to version 1.28. 
 {: shortdesc}
+
+ 
 
 With the network path updates in version 1.28, creating or updating a VPC cluster to run at version 1.28 adds a new VPE gateway to your VPC. This VPE gateway is specifically used for pulling images from the IBM Cloud Container Registry and is assigned one IP address for each zone in the VPC that has at least one cluster worker. DNS entries are added to the entire VPC that resolve all `icr.io` domain names to the new VPE gateway IP addresses. Depending on how you have configured your network security components, you may need to take action to ensure that connections to the new VPE are allowed. 
 
@@ -105,9 +104,9 @@ The steps you need to take to ensure that your VPC cluster worker nodes continue
 - If you use the default network rules for all security groups, network ACLs, and network policies, you do not need to take any action. 
 - If you have a customized network security setup that blocks certain TCP connections within the VPC, you must take additional actions before updating to or creating a new cluster at version 1.28. Make the adjustments in the following sections to ensure that connections to the new VPE Gateway for Registry are allowed.
 
-
 Regardless of whether or not you need to take additional steps, if you keep other clusters in the VPC that do not run version 1.28 you must [refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh) on those clusters. This ensures that the correct updates are applied to the non-1.28 clusters so that traffic to the new VPE is allowed. 
 {: important}
+
 
 ### I have custom security groups. What do I change?
 {: #networking_steps_sg}
@@ -132,12 +131,13 @@ If VPC networks ACLs that apply to your cluster workers have been customized to 
 Add the following rules to your custom ACLs.
 
 | Rule type | Protocol | Source IP or CIDR | Source Port | Destination IP or CIDR | Destination Port  |
-|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|
 | Outbound/Allow | TCP | Entire VPC address prefix range | Any | Entire VPC address prefix range | 443 |
 | Outbound/Allow | TCP | Entire VPC address prefix range | Any | Entire VPC address prefix range | 4443 |
 | Inbound/Allow | TCP | Entire VPC address prefix range | 443 | Entire VPC address prefix range | Any |
 | Inbound/Allow | TCP | Entire VPC address prefix range | 4443 | Entire VPC address prefix range | Any |
 {: caption="Outbound and inbound ACL rules to add for version 1.28" caption-side="bottom"}
+
 
 ### I have custom network policies. What do I change?
 {: #networking_steps_policy}
@@ -165,4 +165,7 @@ spec:
   types:
   - Egress
 ```
+{: codeblock}
+
+
 
