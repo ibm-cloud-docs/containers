@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-09-20"
+lastupdated: "2023-09-21"
 
 keywords: containers
 subcollection: containers
@@ -5807,7 +5807,7 @@ subcollection: containers
 
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
-* [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#127_changelog)
+* [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
 
     * [Change log for master fix pack 1.28.2_1527 and worker node fix pack 1.28.1_1523, released 20 September 2023](/docs/containers?topic=containers-changelog_128#1.28.2_1527M-and-1.28.1_1523W)
 
