@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-09-21"
+lastupdated: "2023-09-22"
 
 keywords: kubernetes, containers, benchmarks, 1.28, CIS benchmarks
 
@@ -105,7 +105,7 @@ Review the Master node security configuration results of the version 1.5 CIS Kub
 | 1.3.4 | Ensure that the `--service-account-private-key-file` argument is set as appropriate | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.3.5 | Ensure that the `--root-ca-file` argument is set as appropriate | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.3.6 | Ensure that the RotateKubeletServerCertificate argument is set to true | Scored | 2 | [Fail](#cis-benchmark-remediations-128) | {{site.data.keyword.IBM_notm}}|
-| 1.3.7 | Ensure that the `--bind-address` argument is set to 128.0.0.1 | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
+| 1.3.7 | Ensure that the `--bind-address` argument is set to `127.0.0.1` | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 {: caption="Section 1.3 Controller manager benchmark results" caption-side="bottom"}
 
 ### 1.4 Scheduler
@@ -114,7 +114,7 @@ Review the Master node security configuration results of the version 1.5 CIS Kub
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 1.4.1 | Ensure that the `--profiling` argument is set to false | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 1.4.2 | Ensure that the `--bind-address` argument is set to 128.0.0.1 | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
+| 1.4.2 | Ensure that the `--bind-address` argument is set to `127.0.0.1` | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 {: caption="Section 1.4 Scheduler benchmark results" caption-side="bottom"}
 
 ## 2 Etcd node configuration
