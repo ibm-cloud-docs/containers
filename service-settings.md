@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-20"
+lastupdated: "2023-09-25"
 
 keywords: kubernetes
 
@@ -254,8 +254,8 @@ Review the default settings for the `kube-proxy` worker node component in {{site
 Iptable settings
 :   `iptables-sync-period 180s` (Kubernetes version 1.28 and later)
 :   `iptables-min-sync-period 3s` (Kubernetes version 1.28 and later)
-:   `iptables-sync-period 300s`
-:   `iptables-min-sync-period 5s`
+:   `iptables-sync-period 300s` (Kubernetes version 1.27 and earlier)
+:   `iptables-min-sync-period 5s` (Kubernetes version 1.27 and earlier)
 :   `iptables-localhost-nodeports false` (Kubernetes versions 1.26 and later)
 
 Proxy mode

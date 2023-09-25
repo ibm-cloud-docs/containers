@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-09-22"
+lastupdated: "2023-09-25"
 
 keywords: containers
 subcollection: containers
@@ -238,6 +238,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep23)
+
+    * [25 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2523)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on version `5.2`.
 
     * [22 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2223)
 
@@ -6400,6 +6404,8 @@ subcollection: containers
 
 * [vpc-block-csi-driver 5.1](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-block-csi-driver-5.1)
 
+* [vpc-block-csi-driver 5.2](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-block-csi-driver-5.2)
+
 * [vpc-file-csi-driver 1.1](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-1.1)
 
 [Ingress ALB and Fluentd version change log](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
@@ -7141,6 +7147,10 @@ subcollection: containers
     * [Change log for patch update 1.0.1_114, released 10 September 2020](/docs/containers?topic=containers-ca_changelog#101114_ca)
 
 [{{site.data.keyword.block_storage_is_short}} add-on change log](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
+
+* [Version 5.2](/docs/containers?topic=containers-vpc_bs_changelog#052_is_block)
+
+    * [Change log for version 5.2, released 25 September 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2_is_block_relnote)
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
 
