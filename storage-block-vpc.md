@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-12"
+lastupdated: "2023-09-25"
 
 keywords: kubernetes
 
@@ -27,7 +27,7 @@ You can choose between predefined storage tiers with GB sizes and IOPS that meet
 
 
 
-The {{site.data.keyword.block_storage_is_short}} add-on is enabled by default on VPC clusters. However, the add-on is not currently supported for clusters with `UBUNTU_18_S390X` worker nodes. When you create a VPC cluster with `UBUNTU_18_S390X` worker nodes, the add-on pods remain in a `Pending` state. You can disable the add-on by running the `ibmcloud ks cluster addon disable` command.
+The {{site.data.keyword.block_storage_is_short}} add-on is enabled by default on VPC clusters.  
 {: important}
 
 
