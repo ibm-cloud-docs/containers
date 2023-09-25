@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-09-22"
+lastupdated: "2023-09-25"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -47,31 +47,31 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_128)
 - [Change log](/docs/containers?topic=containers-changelog_128)
 
-1.27
+**Default**: 1.27
 - Release date: 24 May 2023
 - End of support: 14 August 2024`†`
 - Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_S390X`, `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_127)
 - [Change log](/docs/containers?topic=containers-changelog_127)
 
-**Default**: 1.26
+1.26
 - Release date: 01 February 2023
 - End of support: 24 April 2024`†`
-- Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_S390X`, `UBUNTU_18_64`
+- Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_126)
 - [Change log](/docs/containers?topic=containers-changelog_126)
 
 **Deprecated**: 1.25
 - Release date: 06 October 2022
 - End of support: 13 December 2023`†`
-- Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_S390X`, `UBUNTU_18_64`
+- Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_125)
 - [Change log](/docs/containers?topic=containers-changelog_125)
 
 1.24
 - Release date: 09 June 2022
 - End of support: 11 October 2023
-- Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_S390X`, `UBUNTU_18_64`
+- Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_124)
 - [Change log](/docs/containers?topic=containers-changelog_124)
 
@@ -90,7 +90,7 @@ kubectl version  --short | grep -i server
 
 Example output
 ```sh
-Server Version: v1.26+IKS
+Server Version: v1.27+IKS
 ```
 {: screen}
 
