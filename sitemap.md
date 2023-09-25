@@ -239,6 +239,10 @@ subcollection: containers
 
 * [September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep23)
 
+    * [25 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2523)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on version `5.2`.
+
     * [22 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2223)
 
         * Kubernetes version 1.28 certification
@@ -7143,6 +7147,10 @@ subcollection: containers
     * [Change log for patch update 1.0.1_114, released 10 September 2020](/docs/containers?topic=containers-ca_changelog#101114_ca)
 
 [{{site.data.keyword.block_storage_is_short}} add-on change log](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
+
+* [Version 5.2](/docs/containers?topic=containers-vpc_bs_changelog#052_is_block)
+
+    * [Change log for version 5.2, released 25 September 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2_is_block_relnote)
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
 
