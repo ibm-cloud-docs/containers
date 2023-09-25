@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-20"
+lastupdated: "2023-09-25"
 
 keywords: kubernetes, logmet, logs, metrics, audit, events
 
@@ -464,7 +464,7 @@ Before you begin, ensure that you reviewed the [considerations and prerequisites
 
 9. Configure the audit webhook and specify the `certificate-authority`, `client-certificate`, and `client-key` that you retrieved in the steps 5-7.
     ```sh
-    ibmcloud ks cluster master audit-webhook set --cluster <cluster> --remote-server https://127.0.0.1:2040/api/v1/namespaces/ibm-kube-audit/services/kube-audit-forwarder/proxy/post --ca-cert <certificate-authority> --client-cert <client-certificate> --client-key <client-key>
+    ibmcloud ks cluster master audit-webhook set --cluster <cluster> --remote-server https://127.0.0.1:2040/api/v1/namespaces/ibm-kube-audit/services/kube-audit-forwarder/proxy/post --ca-cert <certificate-authority> --client-cert <client-certificate> --client-key <client-key> [--policy default|verbose]
     ```
     {: pre}
 
@@ -504,7 +504,7 @@ Before you begin, ensure that you reviewed the [considerations and prerequisites
 1. Set up the webhook. If you don't provide any information in the options, a default configuration is used.
 
     ```sh
-    ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server <server_URL_or_IP> --ca-cert <CA_cert_path> --client-cert <client_cert_path> --client-key <client_key_path>
+    ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server <server_URL_or_IP> --ca-cert <CA_cert_path> --client-cert <client_cert_path> --client-key <client_key_path> [--policy default|verbose]
     ```
     {: pre}
     
