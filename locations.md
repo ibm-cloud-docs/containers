@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-29"
+lastupdated: "2023-09-26"
 
 keywords: kubernetes, mzr, szr, multizone, multi az
 
@@ -130,7 +130,7 @@ VPC resources are provisioned in a region, which is a separate group of zones wi
 
 
 
-`†` **Toronto and São Paulo multizone regions**: Toronto and São Paulo are available as multizone regions for clusters on VPC infrastructure only.
+`†` These regions are available as multizone regions for clusters on VPC infrastructure only.
 
 ### Resources in a single zone cluster
 {: #regions_single_zone}
