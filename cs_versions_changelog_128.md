@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-09-20"
+lastupdated: "2023-09-26"
 
 keywords: kubernetes, containers, change log, 128 change log, 128 updates
 
@@ -34,12 +34,25 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 
 ## Version 1.28 change log
-{: #128_changelog}
+{: #127_changelog}
 
 
 Review the version 1.28 change log.
 {: shortdesc}
 
+
+
+### Change log for worker node fix pack 1.28.2_1528, released 25 September 2023
+{: #1282_1528_W}
+
+The following table shows the changes that are in the worker node fix pack 1.28.2_1528. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 20.04 packages | 5.4.0-162-generic | 5.4.0-163-generic| Package updates for [CVE-2023-3341](https://nvd.nist.gov/vuln/detail/CVE-2023-3341){: external}, [CVE-2023-4156](https://nvd.nist.gov/vuln/detail/CVE-2023-4156){: external}, [CVE-2023-4128](https://nvd.nist.gov/vuln/detail/CVE-2023-4128){: external}, [CVE-2023-20588](https://nvd.nist.gov/vuln/detail/CVE-2023-20588){: external}, [CVE-2023-20900](https://nvd.nist.gov/vuln/detail/CVE-2023-20900){: external}, [CVE-2023-40283](https://nvd.nist.gov/vuln/detail/CVE-2023-40283){: external}. |
+| Containerd | 1.7.5 | 1.7.6 |N/A|
+{: caption="Changes since version 1.28.1_1523" caption-side="bottom"}
 
 
 ### Change log for master fix pack 1.28.2_1527 and worker node fix pack 1.28.1_1523, released 20 September 2023
@@ -59,4 +72,5 @@ Review the version 1.28 change log.
 | Kubernetes Metrics Server | v0.6.3 | v0.6.4 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.6.4). In addition, the Kubernetes Metrics Server has an updated role-based access control (RBAC) configuration. |
 | Kubernetes CSI snapshot controller and CRDs | v6.2.1 | v6.2.2 | See the [Kubernetes container storage interface (CSI) snapshotter release notes](https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v6.2.2). |
 {: caption="Changes since version 1.27." caption-side="bottom"}
+
 
