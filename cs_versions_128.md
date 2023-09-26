@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-09-22"
+lastupdated: "2023-09-26"
 
 keywords: kubernetes, containers, 128, version 128, 128 update actions
 
@@ -98,7 +98,7 @@ In version 1.27 and earlier, VPC clusters pull images from the IBM Cloud Contain
 
  
 
-With the network path updates in version 1.28, creating or updating a VPC cluster to run at version 1.28 adds a new VPE gateway to your VPC. This VPE gateway is specifically used for pulling images from the IBM Cloud Container Registry and is assigned one IP address for each zone in the VPC that has at least one cluster worker. DNS entries are added to the entire VPC that resolve all `icr.io` domain names to the new VPE gateway IP addresses. Depending on how you have configured your network security components, you may need to take action to ensure that connections to the new VPE are allowed. 
+With the network path updates in version 1.28, creating or updating a VPC cluster to run at version 1.28 adds a new VPE gateway to your VPC. This VPE gateway is specifically used for pulling images from the IBM Cloud Container Registry and is assigned one IP address for each zone in the VPC that has at least one cluster worker. DNS entries are added to the entire VPC that resolve all `icr.io` domain names to the new VPE gateway IP addresses. Depending on how you have configured your network security components, you may need to act to ensure that connections to the new VPE are allowed. 
 
 
 ### What do I need to do?
@@ -110,14 +110,14 @@ The steps you need to take to ensure that your VPC cluster worker nodes continue
 - If you use the default network rules for all security groups, network ACLs, and network policies, you do not need to take any action. 
 - If you have a customized network security setup that blocks certain TCP connections within the VPC, you must take additional actions before updating to or creating a new cluster at version 1.28. Make the adjustments in the following sections to ensure that connections to the new VPE Gateway for Registry are allowed.
 
-Regardless of whether or not you need to take additional steps, if you keep other clusters in the VPC that do not run version 1.28 you must [refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh) on those clusters. This ensures that the correct updates are applied to the non-1.28 clusters so that traffic to the new VPE is allowed. 
+Regardless of whether you need to take additional steps, if you keep other clusters in the VPC that do not run version 1.28 you must [refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh) on those clusters. This ensures that the correct updates are applied to the non-1.28 clusters so that traffic to the new VPE is allowed. 
 {: important}
 
 
 ### I have custom security groups. What do I change?
 {: #networking_steps_sg}
 
-The necessary allow rules are automatically added to the IBM-managed `kube-<cluster_ID>` cluster security group when you update to or create a cluster at version 1.28. However, if you created a VPC cluster that does **NOT** use the `kube-<cluster_ID>` cluster security group rules, you must make sure that the following security group rules are implemented to allow traffice to the VPE gateway for registry. If the rules are not already implemented in your custom setup, [add them](/docs/containers?topic=containers-vpc-security-group&interface=cli#security_groups_cli). Each of these rules must be created for each zone in the VPC and must specify the entire VPC address prefix range for the zone as the destination CIDR. To find the VPC address prefix range for each zone in the VPC, run `ibmcloud is vpc-address-prefixes <vpc_name_or_id>`.
+The necessary allow rules are automatically added to the IBM-managed `kube-<cluster_ID>` cluster security group when you update to or create a cluster at version 1.28. However, if you created a VPC cluster that does **NOT** use the `kube-<cluster_ID>` cluster security group rules, you must make sure that the following security group rules are implemented to allow traffic to the VPE gateway for registry. If the rules are not already implemented in your custom setup, [add them](/docs/containers?topic=containers-vpc-security-group&interface=cli#security_groups_cli). Each of these rules must be created for each zone in the VPC and must specify the entire VPC address prefix range for the zone as the destination CIDR. To find the VPC address prefix range for each zone in the VPC, run `ibmcloud is vpc-address-prefixes <vpc_name_or_id>`.
 
 Add the following rules to your custom security group.
 
