@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-25"
+lastupdated: "2023-09-26"
 
 keywords: kubernetes
 
@@ -27,7 +27,7 @@ You can choose between predefined storage tiers with GB sizes and IOPS that meet
 
 
 
-The {{site.data.keyword.block_storage_is_short}} add-on is enabled by default on VPC clusters.  
+The {{site.data.keyword.block_storage_is_short}} add-on is enabled by default on VPC clusters. However, only version 5.2 is supported on LinuxONE (s390x architecture) worker nodes. 
 {: important}
 
 
