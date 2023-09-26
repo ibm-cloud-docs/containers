@@ -239,6 +239,10 @@ subcollection: containers
 
 * [September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep23)
 
+    * [26 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2623)
+
+        * ALB OAuth Proxy add-on version `2.0.0_1843`.
+
     * [25 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2523)
 
         * {{site.data.keyword.block_storage_is_short}} add-on version `5.2`.
@@ -7419,6 +7423,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_1843, released on 26 September 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_1843)
 
     * [Version 2.0.0_1715, released on 9 August 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1715)
 
