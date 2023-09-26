@@ -428,6 +428,7 @@ toc:
               - ts-metrics-server.md
               - ts-kube-dashboord-oom.md
               - ts-admin-cert.md
+              - ts-vpc-byok-encrypted-storage.md
           - topicgroup:
               label: Worker nodes
               topics:

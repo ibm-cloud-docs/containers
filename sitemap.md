@@ -9096,6 +9096,8 @@ subcollection: containers
 
 [Why can't I create a new admin certificate?](/docs/containers?topic=containers-ts_admin-cert#ts_admin-cert)
 
+[Why can't I create a VPC cluster with encrypted worker nodes?](/docs/containers?topic=containers-ts-vpc-byok-encrypted-storage#ts-vpc-byok-encrypted-storage)
+
 
 ### Worker nodes
 {: #sitemap_worker_nodes}
