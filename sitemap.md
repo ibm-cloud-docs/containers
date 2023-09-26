@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-09-25"
+lastupdated: "2023-09-26"
 
 keywords: containers
 subcollection: containers
@@ -238,6 +238,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep23)
+
+    * [26 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2623)
+
+        * ALB OAuth Proxy add-on version `2.0.0_1843`.
 
     * [25 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2523)
 
@@ -7420,6 +7424,8 @@ subcollection: containers
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
 
+    * [Version 2.0.0_1843, released on 26 September 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_1843)
+
     * [Version 2.0.0_1715, released on 9 August 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0_1715)
 
     * [Version 2.0.0_1669, released on 12 July 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_1669)
@@ -9089,6 +9095,8 @@ subcollection: containers
 * [Changing the resource auto refresh time interval from the command line](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-dashboard-auto-refresh-cli)
 
 [Why can't I create a new admin certificate?](/docs/containers?topic=containers-ts_admin-cert#ts_admin-cert)
+
+[Why can't I create a VPC cluster with encrypted worker nodes?](/docs/containers?topic=containers-ts-vpc-byok-encrypted-storage#ts-vpc-byok-encrypted-storage)
 
 
 ### Worker nodes

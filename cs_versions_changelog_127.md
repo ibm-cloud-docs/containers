@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-09-12"
+lastupdated: "2023-09-26"
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
 
@@ -39,6 +39,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.27 change log.
 {: shortdesc}
+
 
 
 ### Change log for worker node fix pack 1.27.4_1538, released 12 September 2023
