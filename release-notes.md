@@ -80,6 +80,9 @@ Networking changes for VPC clusters 1.28 and later
 Trusted profile updates for Kubernetes clusters version 1.28 and later.
 :   You can now give trusted profiles service level access to your clusters, then use a federated ID, like App ID, to access the cluster at the level assigned in the trusted profile since trusted profile identities are now synced into the cluster RBAC. For more information, see [Creating trusted profiles](/docs/account?topic=account-create-trusted-profile&interface=ui) and [Logging in with a federated ID](/docs/account?topic=account-federated_id&interface=ui).
 
+New! Updated GPU drivers with version 1.28 clusters.
+:   With the release of IBM Cloud Kubernetes Version 1.28, GPU drivers moved to the 500 series version for all GPU worker node flavors. To use the 500 series GPU drivers, ensure that a GPU worker node flavor is being used and the cluster master version is upgraded to at least version 1.28. Versions earlier than 1.28 will still continue to use the 400 series GPU drivers. For more information, see [Deploying an app on a GPU machine](https://cloud.ibm.com/docs/containers?topic=containers-deploy_app&interface=ui#gpu_app).
+
   
 Master fix packs are available.
 :   [1.27.5_1540](/docs/containers?topic=containers-changelog_127)
