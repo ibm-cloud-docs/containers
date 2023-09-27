@@ -9084,6 +9084,8 @@ subcollection: containers
 
 [Why can't the cluster pull images from {{site.data.keyword.registrylong_notm}} during creation?](/docs/containers?topic=containers-ts_image_pull_create#ts_image_pull_create)
 
+[How do I rotate the cluster API key in the event of a leak?](/docs/containers?topic=containers-ts-troubleshoot-api-key-leak#ts-troubleshoot-api-key-leak)
+
 [Why do cluster master operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update#webhooks_update)
 
 [Deleting webhooks from a cluster](/docs/containers?topic=containers-ts-delete-webhooks#ts-delete-webhooks)
