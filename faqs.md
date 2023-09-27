@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-13"
+lastupdated: "2023-09-27"
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
 
@@ -114,6 +114,13 @@ For more information about the components of your cluster and how you can meet s
 {: shortdesc}
 
 The access policies that you assign users vary depending on what you want your users to be able to do. You can find more information about what roles authorize which types of actions on the [User access reference page](/docs/containers?topic=containers-access_reference) or in the following table's links. For steps to assign policies, see [Granting users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#checking-perms).
+
+## How do I rotate the cluster API key in the event of a leak?
+{: #faq_api_key_leak}
+{: faq}
+{: support}
+
+For instructions on how to rotate your API key, see [How do I rotate the cluster API key in the event of a leak?](/docs/containers?topic=containers-ts-troubleshoot-api-leak).
 
 
 ## Where can I find a list of security bulletins that affect my cluster?
