@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-29"
+lastupdated: "2023-09-27"
 
-keywords: kubernetes, node scaling, ca, autoscaler
+keywords: containers, kubernetes, node scaling, ca, autoscaler
 
 subcollection: containers
 
@@ -19,6 +19,8 @@ subcollection: containers
 {: #classic-flavors}
 
 Review the classic worker node flavors by metro.
+
+
 
 
 
