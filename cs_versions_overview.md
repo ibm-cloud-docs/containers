@@ -32,9 +32,8 @@ For more information about the Kubernetes project versions, see the [Kubernetes 
 
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
-Dates that are marked with a dagger (`†`) are tentative and subject to change.
+Dates that are marked with a dagger (`†`) are tentative and subject to change. Operating systems that are marked with an asterisk (`*`) are deprecated; [migrate any worker nodes](/docs/containers?topic=containers-ubuntu-migrate) that use a deprecated operating system to run on a newer operating system version. 
 {: note}
-
 
 
 
