@@ -261,6 +261,8 @@ subcollection: containers
 
         * Trusted profile updates for Kubernetes clusters version 1.28 and later.
 
+        * New! Updated GPU drivers with version 1.28 clusters.
+
         * Master fix packs are available.
 
     * [18 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1823)
@@ -4548,6 +4550,8 @@ subcollection: containers
     * [Creating a custom storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class)
 
     * [Verifying your {{site.data.keyword.block_storage_is_short}} file system](/docs/containers?topic=containers-vpc-block#vpc-block-fs-verify)
+
+    * [Updating the `VolumeAttachLimit`](/docs/containers?topic=containers-vpc-block#vpc-block-volume-attach-limit)
 
     * [Storing your custom PVC settings in a Kubernetes secret](/docs/containers?topic=containers-vpc-block#vpc-block-storageclass-secret)
 
@@ -8934,6 +8938,8 @@ subcollection: containers
 
 * [What access policies do I give my cluster users?](/docs/containers?topic=containers-faqs#faq_access)
 
+* [How do I rotate the cluster API key in the event of a leak?](/docs/containers?topic=containers-faqs#faq_api_key_leak)
+
 * [Where can I find a list of security bulletins that affect my cluster?](/docs/containers?topic=containers-faqs#faq_security_bulletins)
 
 * [Does the service offer support for bare metal and GPU?](/docs/containers?topic=containers-faqs#bare_metal_gpu)
@@ -9077,6 +9083,8 @@ subcollection: containers
 * [Creating the `restricted-psp-user` cluster role binding](/docs/containers?topic=containers-ts-app-pod-security#create-restricted-psp-user)
 
 [Why can't the cluster pull images from {{site.data.keyword.registrylong_notm}} during creation?](/docs/containers?topic=containers-ts_image_pull_create#ts_image_pull_create)
+
+[How do I rotate the cluster API key in the event of a leak?](/docs/containers?topic=containers-ts-troubleshoot-api-key-leak#ts-troubleshoot-api-key-leak)
 
 [Why do cluster master operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update#webhooks_update)
 

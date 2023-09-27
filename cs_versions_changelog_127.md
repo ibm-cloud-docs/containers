@@ -56,9 +56,9 @@ The following table shows the changes that are in the master fix pack 1.27.5_154
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.5 | v2.4.10 | Updated `Go dependencies`. Updated to newer UBI base image. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.27.4-5 | v1.27.5-3 | Updated to support the `Kubernetes 1.27.5` release. Updated `Go` to version `1.20.7` and updated `Go dependencies`. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 434 | 435 | Updated `Go` to version `1.20.6` and updated dependencies. Updated to newer UBI base image. |
-| Key Management Service provider | v2.8.1 | v2.8.2 | Updated `Go dependencies'. |
+| Key Management Service provider | v2.8.1 | v2.8.2 | Updated `Go dependencies`. |
 | Kubernetes | v1.27.4 | v1.27.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.5){: external}. |
-| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2631 | 2681 | Updated `Go` to version `1.19.12` and updated `Go dependencies'. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2631 | 2681 | Updated `Go` to version `1.19.12` and updated `Go dependencies`. |
 {: caption="Changes since version 1.27.4_1536" caption-side="bottom"}
 
 
