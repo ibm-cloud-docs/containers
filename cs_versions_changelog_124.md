@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-09-26"
+lastupdated: "2023-09-27"
 
 keywords: kubernetes, containers
 
@@ -36,6 +36,23 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the version 1.24 change log.
 {: shortdesc}
 
+
+
+### Change log for master fix pack 1.24.17_1586, released 20 September 2023
+{: #12417_1586_M}
+
+The following table shows the changes that are in the master fix pack 1.24.17_1586. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.5 | v2.4.10 | Updated `Go dependencies`. Updated to newer UBI base image. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.24.16-5 | v1.24.17-2 | Updated to support the `Kubernetes 1.24.17` release. Updated `Go` to version `1.20.7` and updated `Go dependencies`. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 434 | 435 | Updated `Go` to version `1.20.6` and updated dependencies. Updated to newer UBI base image. |
+| Kubernetes | v1.24.16 | v1.24.17 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.17){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2631 | 2681 | Updated `Go` to version `1.19.12` and updated `Go dependencies'. |
+{: caption="Changes since version 1.24.16_1581" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.24.16_1583, released 12 September 2023
