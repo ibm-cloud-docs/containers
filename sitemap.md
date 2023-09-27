@@ -261,6 +261,8 @@ subcollection: containers
 
         * Trusted profile updates for Kubernetes clusters version 1.28 and later.
 
+        * Master fix packs are available.
+
     * [18 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1823)
 
         * CLI version `1.0.566` is available.
