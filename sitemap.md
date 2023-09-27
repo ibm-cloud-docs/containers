@@ -4549,6 +4549,8 @@ subcollection: containers
 
     * [Verifying your {{site.data.keyword.block_storage_is_short}} file system](/docs/containers?topic=containers-vpc-block#vpc-block-fs-verify)
 
+    * [Updating the `VolumeAttachLimit`](/docs/containers?topic=containers-vpc-block#vpc-block-volume-attach-limit)
+
     * [Storing your custom PVC settings in a Kubernetes secret](/docs/containers?topic=containers-vpc-block#vpc-block-storageclass-secret)
 
     * [Enabling every user to customize the default PVC settings](/docs/containers?topic=containers-vpc-block#customize-with-secret)
