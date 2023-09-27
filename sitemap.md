@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-09-26"
+lastupdated: "2023-09-27"
 
 keywords: containers
 subcollection: containers
@@ -260,6 +260,8 @@ subcollection: containers
         * Networking changes for VPC clusters 1.28 and later
 
         * Trusted profile updates for Kubernetes clusters version 1.28 and later.
+
+        * Master fix packs are available.
 
     * [18 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1823)
 
@@ -5884,6 +5886,8 @@ subcollection: containers
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
 
+    * [Change log for master fix pack 1.27.5_1540, released 20 September 2023](/docs/containers?topic=containers-changelog_127#1275_1540_M)
+
     * [Change log for worker node fix pack 1.27.4_1538, released 12 September 2023](/docs/containers?topic=containers-changelog_127#1274_1538_W)
 
     * [Change log for master fix pack 1.27.4_1536, released 30 August 2023](/docs/containers?topic=containers-changelog_127#1274_1536_M)
@@ -5970,6 +5974,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for master fix pack 1.26.8_1554, released 20 September 2023](/docs/containers?topic=containers-changelog_126#1268_1554_M)
 
     * [Change log for worker node fix pack 1.26.7_1552, released 12 September 2023](/docs/containers?topic=containers-changelog_126#1267_1552_W)
 
@@ -6083,6 +6089,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for master fix pack 1.25.13_1561, released 20 September 2023](/docs/containers?topic=containers-changelog_125#12513_1561_M)
 
     * [Change log for worker node fix pack 1.25.12_1558, released 12 September 2023](/docs/containers?topic=containers-changelog_125#12512_1558_W)
 
@@ -6220,6 +6228,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for master fix pack 1.24.17_1586, released 20 September 2023](/docs/containers?topic=containers-changelog_124#12417_1586_M)
 
     * [Change log for worker node fix pack 1.24.16_1583, released 12 September 2023](/docs/containers?topic=containers-changelog_124#12416_1583_W)
 

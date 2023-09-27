@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-09-26"
+lastupdated: "2023-09-27"
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
 
@@ -37,6 +37,26 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the version 1.26 change log.
 {: shortdesc}
 
+
+
+### Change log for master fix pack 1.26.8_1554, released 20 September 2023
+{: #1268_1554_M}
+
+The following table shows the changes that are in the master fix pack 1.26.8_1554. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.25.1 | v3.26.1 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/#v3.26.1){: external}. |
+| Cluster health image | v1.3.24 | v1.4.2 | Updated `Go` to version `1.20.8` and updated dependencies. Updated to new base image. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.5 | v2.4.10 | Updated `Go dependencies`. Updated to newer UBI base image. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.26.7-4 | v1.26.8-3 | Updated to support the `Kubernetes 1.26.8` release. Updated `Go` to version `1.20.7` and updated `Go dependencies`. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 434 | 435 | Updated `Go` to version `1.20.6` and updated dependencies. Updated to newer UBI base image. |
+| Key Management Service provider | v2.7.3 | v2.8.2 | Updated `Go dependencies'. Changed to new base image. |
+| Kubernetes | v1.26.7 | v1.26.8 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.8){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2631 | 2681 | Updated `Go` to version `1.19.12` and updated `Go dependencies'. |
+{: caption="Changes since version 1.26.7_1550" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.26.7_1552, released 12 September 2023

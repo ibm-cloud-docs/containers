@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-26"
+lastupdated: "2023-09-27"
 
 keywords: containers, kubernetes, release notes
 
@@ -35,8 +35,11 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-sep2623}
 {: release-note}
 
+
 ALB OAuth Proxy add-on version `2.0.0_1843`.
 :   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+  
+
 
 
 
@@ -63,6 +66,8 @@ Kubernetes version 1.28 certification
 {: #containers-sep2023}
 {: release-note} 
 
+
+
 New! {{site.data.keyword.containerlong_notm}} version 1.28.
 :   You can create or [update clusters to Kubernetes version 1.28](/docs/containers?topic=containers-cs_versions_128). With Kubernetes 1.28, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
 
@@ -74,6 +79,16 @@ Networking changes for VPC clusters 1.28 and later
 
 Trusted profile updates for Kubernetes clusters version 1.28 and later.
 :   You can now give trusted profiles service level access to your clusters, then use a federated ID, like App ID, to access the cluster at the level assigned in the trusted profile since trusted profile identities are now synced into the cluster RBAC. For more information, see [Creating trusted profiles](/docs/account?topic=account-create-trusted-profile&interface=ui) and [Logging in with a federated ID](/docs/account?topic=account-federated_id&interface=ui).
+
+  
+Master fix packs are available.
+:   [1.27.5_1540](/docs/containers?topic=containers-changelog_127)
+:   [1.26.8_1554](/docs/containers?topic=containers-changelog_126)
+:   [1.25.13_1561](/docs/containers?topic=containers-changelog_125)
+:   [1.24.17_1586](/docs/containers?topic=containers-changelog_124)
+
+
+
 
 
 
