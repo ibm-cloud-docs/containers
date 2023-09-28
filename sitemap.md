@@ -239,6 +239,10 @@ subcollection: containers
 
 * [September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep23)
 
+    * [27 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2723)
+
+        * Worker node fix packs are available.
+
     * [26 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2623)
 
         * ALB OAuth Proxy add-on version `2.0.0_1843`.
