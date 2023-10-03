@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-13"
+lastupdated: "2023-10-03"
 
 keywords: kubernetes, app protocol, application protocol
 
@@ -416,7 +416,7 @@ To enable your app to receive private network requests,
     2. Enter a name for your subnet.
     3. Select the location where your cluster exists and the zone where you want to create the VPC NLB.
     4. Select the name of the VPC where your cluster exists.
-    5. Specify the number of IP addresses to create. Because this subnet is dedicated to the VPC NLB, you might choose a smaller size, such as 16. You can't change the number of IPs that a VPC subnet has later. If you enter a specific IP range, don't use the following reserved ranges: `172.16.0.0/16`, `172.18.0.0/16`, `172.19.0.0/16`, and `172.20.0.0/16`.
+    5. Specify the number of IP addresses to create. Because this subnet is dedicated to the VPC NLB, you might choose a smaller size, such as 16. You can't change the number of IPs that a VPC subnet has later.
     6. Click **Create subnet**. After the subnet is provisioned, note its **ID**.
 
 2. If the client that must connect to your app through the VPC NLB exists outside of the VPC and zone that you created the dedicated VPC subnet in, you must create a custom ingress routing table. Private VPC NLBs might add rules to the custom routing table to ensure service availability for some failure conditions. For more information, see the table in the [known limitations](/docs/vpc?topic=vpc-nlb-limitations) and [About routing tables and routes](/docs/vpc?topic=vpc-about-custom-routes).
