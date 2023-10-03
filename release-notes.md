@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-28"
+lastupdated: "2023-10-03"
 
 keywords: containers, kubernetes, release notes
 
@@ -25,6 +25,21 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+## October 2023
+{: #containers-oct23}
+
+
+### 3 October 2023
+{: #containers-oct323}
+{: release-note}
+
+
+
+Istio add-on versions `1.17.6` and `1.18.3`.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
 
 ## September 2023
 {: #containers-sep23}

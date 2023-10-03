@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-09-07"
+lastupdated: "2023-10-03"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -35,6 +35,26 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 ## Version 1.18
 {: #v118}
+
+### Changelog for 1.18.3, released 3 October 2023
+{: #1183}
+
+Review the changes that are included in version 1.18.3 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.18.2
+
+Current version
+:   1.18.3
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.18.3](https://istio.io/latest/news/releases/1.18.x/announcing-1.18.3/){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2023-28321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28321){: external}
+    - [CVE-2023-28322](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28322){: external}
+    - [CVE-2023-32001](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-32001){: external}
+    - [usn-6237-2](https://ubuntu.com/security/notices/USN-5328-1){: external}
 
 ### Change log for 1.18.2, released 8 August 2023
 {: #1182}
@@ -99,6 +119,26 @@ Updates in this version
 
 ## Version 1.17
 {: #v117}
+
+### Changelog for 1.17.6, released 3 October 2023
+{: #1176}
+
+Review the changes that are included in version 1.17.6 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.17.6
+
+Current version
+:   1.17.5
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.17.6](https://istio.io/latest/news/releases/1.17.x/announcing-1.17.6/){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2023-28321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28321){: external}
+    - [CVE-2023-28322](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28322){: external}
+    - [CVE-2023-32001](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-32001){: external}
+    - [usn-6237-2](https://ubuntu.com/security/notices/USN-5328-1){: external}
 
 ### Change log for 1.17.5, released 8 August 2023
 {: #1175}
