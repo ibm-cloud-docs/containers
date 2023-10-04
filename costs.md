@@ -162,8 +162,8 @@ The following steps present a general process to manage costs for your {{site.da
     * Organize your billing with [resource groups](/docs/account?topic=account-rgs).
     * [Add tags to your clusters](/docs/containers?topic=containers-worker-tag-label) according to your organizational strategy.
 2. Plan the type of cluster that you need.
-    * [Size your cluster to support your workloads](/docs/containers?topic=containers-strategy#sizing), including the network bandwidth that your workloads need.
-    * [Decide the cluster environment that you want](/docs/containers?topic=containers-strategy#kube_env).
+    * [Size your cluster to support your workloads](/docs/containers?topic=containers-strategy), including the network bandwidth that your workloads need.
+    * [Decide the cluster environment that you want](/docs/containers?topic=containers-strategy).
     * [Consider the availability that you want for your cluster](/docs/containers?topic=containers-ha_clusters). For example, a basic high availability setup is one multizone cluster with two worker nodes in each of three zones, for a minimum total of 6 worker nodes.
 3. Check out other {{site.data.keyword.cloud_notm}} services, add-ons, operators, and other third-party software that you might use that can increase your cost. To get an idea of what other costs clusters typically incur, review [Understanding costs for your clusters](#costs-for-clusters).
 4. [Estimate your costs](/docs/billing-usage?topic=billing-usage-cost#cost) and review detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing](https://www.ibm.com/cloud/kubernetes-service){: external}.

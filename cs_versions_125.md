@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-08-09"
+lastupdated: "2023-10-04"
 
 keywords: kubernetes, containers, 125, version 125, 125 update actions
 
@@ -33,8 +33,9 @@ Looking for general information on updating {{site.data.keyword.containerlong}} 
 
 For more information about Kubernetes project version 1.25, see the [Kubernetes change log](https://kubernetes.io/releases/notes/.){: external}
 
-## Release timeline 
+## Release timeline
 {: #release_timeline_125}
+
 
 The following table includes the expected release timeline for version 1.25 of {{site.data.keyword.containerlong}}. You can use this information for planning purposes, such as to estimate the general time that the version might become unsupported. 
 {: shortdesc}
@@ -42,9 +43,9 @@ The following table includes the expected release timeline for version 1.25 of {
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-| Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
+| Version | Supported? | Release date | Unsupported date |
 |------|------|----------|----------|
-| 1.25 | Yes | 06 October 2022 | 13 December 2023 |
+| 1.25 | Yes | 06 October 2022 | {{site.data.keyword.kubernetes_125_unsupported_date}} |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.25" caption-side="bottom"}
 
 ## Preparing to update
@@ -52,6 +53,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 This information summarizes updates that are likely to have and impact on deployed apps when you update a cluster to version 1.25. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.25.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_125) for version 1.25. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}. 
 {: shortdesc}
+
 
 
 
@@ -81,6 +83,7 @@ The following table shows the actions that you must take before you update the K
 | Application updates required for `natPortRange` changes. | Updates might be required if your app makes a lot of egress network connections from `pod-network` pods out to something external to the cluster. For example, if your app or has either 30,000+ of egress connections open on a single worker node at once, or opens over 30,000 egress connections on a single worker node within a few minutes of each other. For more information, see [Why am I running out of SNAT ports for egress connections from pods in my cluster?](/docs/containers?topic=containers-ts-network-snat-125). |
 | Kubernetes CSI snapshot controller installed by default | {{site.data.keyword.containerlong_notm}} now installs and manages the [Kubernetes CSI snapshot controller](https://github.com/kubernetes-csi/external-snapshotter/releases){: external}. As a result, upgrade your storage drivers and plug-ins to versions that don't require installing their own version of the Kubernetes CSI snapshot controller. For example, see [Setting up snapshots with the Block Storage for VPC add-on](/docs/containers?topic=containers-vpc-volume-snapshot) for instructions to enable support for VPC block storage volume snapshots. You do not need to uninstall an existing [Kubernetes CSI snapshot controller](https://github.com/kubernetes-csi/external-snapshotter/releases){: external} install before the upgrade. However after the upgrade, {{site.data.keyword.containerlong_notm}} will take over management of the install. |
 {: caption="Changes to make after you update the master to Kubernetes 1.25"}
+
 
 
 ### Update after master

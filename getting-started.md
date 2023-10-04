@@ -27,9 +27,9 @@ Complete the following steps to get familiar with the basics, understand the ser
 {: #getting-started-basics}
 {: step}
 
-- Get an overview of the service by reviewing the concepts and terms, and benefits. For more information, see [Understanding {{site.data.keyword.containerlong_notm}}](docs/containers?topic=containers-overview).
+- Get an overview of the service by reviewing the concepts and terms, and benefits. For more information, see [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-overview).
 
-- [Review the FAQs](docs/containers?topic=containers-overview)
+- [Review the FAQs](/docs/containers?topic=containers-faqs)
 
 Already familiar with containers and {{site.data.keyword.containerlong_notm}}? Continue to the next step to prepare your account for creating clusters.
 
@@ -55,7 +55,7 @@ Follow a tutorial, or set up your own custom cluster environment.
 
 - [Create a custom cluster on Classic infrastructure](/docs/containers?topic=containers-cluster-create-classic).
 
-- [Create a custom cluster on VPC infrastructure](/docs/containers?topic=containers-cluster-create-vpc).
+- [Create a custom cluster on VPC infrastructure](/docs/containers?topic=containers-cluster-create-vpc-gen2).
 
 
 Already have a cluster? Continue to the next step to deploy an app!
@@ -66,6 +66,7 @@ Already have a cluster? Continue to the next step to deploy an app!
 
 ## Deploy a sample app
 {: #getting-started-deploy-app}
+{: step}
 
 After you create a cluster, deploy your first app. You can use a sample `websphere-liberty` Java application server that IBM provides and deploy the app to your cluster by using the Kubernetes dashboard.
 
