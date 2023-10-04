@@ -9528,6 +9528,8 @@ subcollection: containers
 
 [Ingress health checks fail on Akamai Global Load Balancer (GLB) configurations](/docs/containers?topic=containers-cs_ingress_health_check_ctm#cs_ingress_health_check_ctm)
 
+[Why are my default `istio-ingressgateway` pods stuck in `pending`?](/docs/containers?topic=containers-ts-istio-ingressgateway-pending#ts-istio-ingressgateway-pending)
+
 
 ### File Storage
 {: #sitemap_file_storage}
