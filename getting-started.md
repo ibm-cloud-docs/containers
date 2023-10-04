@@ -1,117 +1,79 @@
 ---
 
 copyright:
-  years: 2014, 2023
-lastupdated: "2023-08-14"
+  years: 2023, 2023
+lastupdated: "2023-10-04"
 
-keywords: kubernetes, containers
+keywords: containers, kubernetes cluster,  vpc cluster, classic cluster, clusters
 
 subcollection: containers
 
 ---
 
+
 {{site.data.keyword.attribute-definition-list}}
-
-
-
 
 
 
 # Getting started with {{site.data.keyword.containerlong_notm}}
 {: #getting-started}
 
-Deploy highly available containerized apps in Kubernetes clusters and use the powerful tools of {{site.data.keyword.containerlong}} to automate, isolate, secure, manage, and monitor your workloads across zones or regions.
+{{site.data.keyword.containerlong_notm}} is a managed offering to create your own cluster of compute hosts where you can deploy and manage containerized apps on IBM Cloud. Combined with an intuitive user experience, built-in security and isolation, and advanced tools to secure, manage, and monitor your cluster workloads, you can rapidly deliver highly available and secure containerized apps in the public cloud.
 {: shortdesc}
 
-First, create a cluster in the {{site.data.keyword.cloud_notm}} console or {{site.data.keyword.containerlong_notm}} CLI. Then, deploy your first containerized app to your cluster.
+Complete the following steps to get familiar with the basics, understand the service components, create your first cluster, and deploy a starter app.
 
-To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {{site.data.keyword.cloud_notm}} account](/docs/account?topic=account-upgrading-account) where you are the owner or have [full Administrator access](/docs/account?topic=account-assign-access-resources).
-{: note}
+## Review the basics
+{: #getting-started-basics}
+{: step}
 
+- Get an overview of the service by reviewing the concepts and terms, and benefits. For more information, see [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-overview).
 
-## Creating a VPC cluster in the {{site.data.keyword.cloud_notm}} console
-{: #vpc-gen2-gs}
-{: ui}
+- [Review the FAQs](/docs/containers?topic=containers-faqs)
 
-Create a standard VPC cluster by using the {{site.data.keyword.cloud_notm}} console. For more detailed information about your cluster customization options, see [Creating a standard VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
+Already familiar with containers and {{site.data.keyword.containerlong_notm}}? Continue to the next step to prepare your account for creating clusters.
 
+## Prepare your account
+{: #getting-started-prepare-account}
+{: step}
 
-## Creating classic clusters in the {{site.data.keyword.containerlong_notm}} CLI
-{: #clusters_gs_classic_cli}
-{: cli}
+To set up your {{site.data.keyword.cloud_notm}} account so that you can create clusters, see [Preparing your account to create clusters](/docs/containers?topic=containers-clusters).
 
-Review the sample commands for creating classic clusters in the CLI. For more detailed steps and information about creating clusters, see [Creating classic clusters](/docs/containers?topic=containers-cluster-create-classic&interface=cli). For information about planning your cluster set up, see [Preparing to create clusters](/docs/containers?topic=containers-clusters&interface=cli).
-{: shortdesc}
-
-
-Create a classic cluster on a shared virtual machine.
-
-```sh
-ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
-```
-{: pre}
+If you've already prepared your account and you're ready to create a cluster, continue to the next step.
 
 
-Create a classic cluster with bare metal architecture. 
+## Create a cluster
+{: #getting-started-create}
+{: step}
 
-```sh
-ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
-```
-{: pre}
-
-Create a classic cluster that uses private VLANs and the private cloud service endpoint only.
-
-```sh
-ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --private-vlan <private_VLAN_ID> --private-only --private-service-endpoint
-```
-{: pre}
+Follow a tutorial, or set up your own custom cluster environment.
 
 
-For a classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-mz), [add zones](/docs/containers?topic=containers-add-workers-classic#add_zone):
-```sh
-ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-```
-{: pre}
 
-## Creating VPC clusters in the CLI
-{: #clusters_gs_vpc_cli}
-{: cli}
+- [Tutorial]{: tag-blue} [Create a cluster in your own Virtual Private Cloud](/docs/containers?topic=containers-vpc_ks_tutorial).
 
-Review the sample commands for creating classic clusters in the CLI. For more detailed steps and information about creating clusters, see [Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=cli#cluster_create_vpc). For information about planning your cluster set up, see [Preparing to create clusters](/docs/containers?topic=containers-clusters&interface=cli).
-{: shortdesc}
 
-Create a VPC cluster with three worker nodes.
+- [Create a custom cluster on Classic infrastructure](/docs/containers?topic=containers-cluster-create-classic).
 
-```sh
-ibmcloud ks cluster create vpc-gen2 --name my_cluster --zone us-east-1 --vpc-id <VPC_ID> --subnet-id <VPC_SUBNET_ID> --flavor bx2.4x16 --workers 3
-```
-{: pre}
+- [Create a custom cluster on VPC infrastructure](/docs/containers?topic=containers-cluster-create-vpc-gen2).
 
-For a VPC multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-vpc), [add zones](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone).
 
-```sh
-ibmcloud ks zone add vpc-gen2 --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <VPC_SUBNET_ID>
-```
-{: pre}
+Already have a cluster? Continue to the next step to deploy an app!
 
-## Deploying an app to your cluster
-{: #deploy-app}
+
+
+
+
+## Deploy a sample app
+{: #getting-started-deploy-app}
+{: step}
 
 After you create a cluster, deploy your first app. You can use a sample `websphere-liberty` Java application server that IBM provides and deploy the app to your cluster by using the Kubernetes dashboard.
-{: shortdesc}
 
-The [Kubernetes dashboard](https://github.com/kubernetes/dashboard){: external} is a web console component that is provided by the open source community and installed in your cluster by default. Use the Kubernetes dashboard to manage Kubernetes resources that are within your cluster, such as pods, services, and namespaces. Not sure what all these Kubernetes resources mean? Check out the overview for [container](/docs/containers?topic=containers-overview) and [Kubernetes](/docs/containers?topic=containers-overview) concepts.
 
-### Deploying and exposing an app with a load balancer
-{: #deployapp2}
-
-Follow the steps to deploy an example `websphere-liberty` to your standard cluster.
-{: shortdesc}
-
-1. Select your cluster from the [cluster list](https://cloud.ibm.com/kubernetes/clusters){: external} to open the details for your cluster.
+1. Select your cluster from the [cluster list](https://cloud.ibm.com/kubernetes/clusters){: external}.
 2. Click **Kubernetes dashboard**.
-3. From the menu bar, click the **Create new resource** icon (`+`).
-4. Select the **Create from form** tab.
+3. Click the **Create new resource** icon (`+`) and select the **Create from form** tab.
     1. Enter a name for your app, such as `liberty`.
     2. Enter `websphere-liberty` for your container image. Remember that your cluster's VPC subnet must have a public gateway so that the cluster can pull an image from DockerHub.
     3. Enter the number of pods for your app deployment, such as `1`.
@@ -119,6 +81,7 @@ Follow the steps to deploy an example `websphere-liberty` to your standard clust
         - **Port**: `80`
         - **Target port**: `9080`
         - **Protocol**: `TCP`
+
 5. Click **Deploy**. During the deployment, the cluster downloads the `websphere-liberty` container image from Docker Hub and deploys the app in your cluster. Your app is exposed by a Layer 4, version 1.0 network load balancer (NLB) so that it can be accessed by other users internally or externally. For other ways to expose an app such as Ingress, see [Planning in-cluster and external networking for apps](/docs/containers?topic=containers-cs_network_planning).
 6. From the **Pods** menu, click your `liberty` pod and check that its status is **Running**.
 7. From the **Services** menu, click the **External Endpoint** of your `liberty` service. For example, `169.xx.xxx.xxx:80` for classic clusters or `http://<hash>-<region>.lb.appdomain.cloud/` for VPC clusters. The **Welcome to Liberty** page is displayed.
@@ -129,15 +92,13 @@ Great job! You just deployed your first app in your Kubernetes cluster.
 
 
 
+
 ## What's next?
-{: #whats-next}
+{: #getting-started-whats-next}
 
 
-Check out the curated [learning path for administrators](/docs/containers?topic=containers-learning-path-admin) or [learning path for developers](/docs/containers?topic=containers-learning-path-dev).
-
-
-
-
-
+Check out the curated learning paths
+- [Learning path for administrators](/docs/containers?topic=containers-learning-path-admin).
+- [Learning path for developers](/docs/containers?topic=containers-learning-path-dev).
 
 

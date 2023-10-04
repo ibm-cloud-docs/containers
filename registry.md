@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-07-07"
+lastupdated: "2023-10-04"
 
 keywords: kubernetes, registry, pull secret, secrets
 
@@ -238,7 +238,7 @@ Image pull secrets are valid only for the Kubernetes namespaces that they were c
 Before you begin:
 
 1. [Set up a namespace in {{site.data.keyword.registrylong_notm}} and push images to this namespace](/docs/Registry?topic=Registry-getting-started#gs_registry_namespace_add).
-2. [Create a Kubernetes cluster](/docs/containers?topic=containers-clusters).
+2. [Create a cluster](/docs/containers?topic=containers-clusters).
 3. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 
@@ -443,7 +443,7 @@ If you already have a private registry, you must store the registry credentials 
 
 Before you begin:
 
-1. [Create a Kubernetes cluster](/docs/containers?topic=containers-clusters).
+1. [Create a cluster](/docs/containers?topic=containers-clusters).
 2. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 To create an image pull secret:

@@ -34,17 +34,15 @@ subcollection: containers
 
 [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started#getting-started)
 
-* [Creating a VPC cluster in the {{site.data.keyword.cloud_notm}} console](/docs/containers?topic=containers-getting-started#vpc-gen2-gs)
+* [Review the basics](/docs/containers?topic=containers-getting-started#getting-started-basics)
 
-* [Creating classic clusters in the {{site.data.keyword.containerlong_notm}} CLI](/docs/containers?topic=containers-getting-started#clusters_gs_classic_cli)
+* [Prepare your account](/docs/containers?topic=containers-getting-started#getting-started-prepare-account)
 
-* [Creating VPC clusters in the CLI](/docs/containers?topic=containers-getting-started#clusters_gs_vpc_cli)
+* [Create a cluster](/docs/containers?topic=containers-getting-started#getting-started-create)
 
-* [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
+* [Deploy a sample app](/docs/containers?topic=containers-getting-started#getting-started-deploy-app)
 
-    * [Deploying and exposing an app with a load balancer](/docs/containers?topic=containers-getting-started#deployapp2)
-
-* [What's next?](/docs/containers?topic=containers-getting-started#whats-next)
+* [What's next?](/docs/containers?topic=containers-getting-started#getting-started-whats-next)
 
 
 ## Understanding {{site.data.keyword.containerlong_notm}}
@@ -238,6 +236,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
+
+    * [4 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct423)
+
+        * Cluster autoscaler add-on version `1.0.9_134`.
 
     * [3 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct323)
 
@@ -2460,47 +2462,35 @@ subcollection: containers
 {: #sitemap_planning_your_cluster_environment}
 
 
-[Understanding and sizing your environment](/docs/containers?topic=containers-strategy#strategy)
+[Sizing your cluster environment](/docs/containers?topic=containers-strategy#strategy)
 
-* [Moving your workloads to the {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-strategy#cloud_workloads)
+* [What else besides my app might use resources in the cluster?](/docs/containers?topic=containers-strategy#sizing_other)
 
-    * [What can I move to the {{site.data.keyword.cloud_notm}}?](/docs/containers?topic=containers-strategy#move_to_cloud)
+* [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
 
-    * [Can I automate my infrastructure deployments?](/docs/containers?topic=containers-strategy#infra_packaging)
+* [What type of cluster and flavors should I get?](/docs/containers?topic=containers-strategy#env_flavors)
 
-    * [What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?](/docs/containers?topic=containers-strategy#app_kinds)
+* [Do I use multiple clusters, or just add more workers to an existing cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
 
-    * [What about serverless apps?](/docs/containers?topic=containers-strategy#apps_serverless-strategy)
+* [How can I set up my resources within the cluster?](/docs/containers?topic=containers-strategy#env_resources)
 
-    * [What skills should I have before I move my apps to a cluster?](/docs/containers?topic=containers-strategy#knowledge)
+    * [Consider your worker node capacity](/docs/containers?topic=containers-strategy#env_resources_worker_capacity)
 
-* [Sizing your Kubernetes cluster to support your workload](/docs/containers?topic=containers-strategy#sizing)
+    * [Provision different types of machines for a mix of computing resources](/docs/containers?topic=containers-strategy#env_resources_provision_types)
 
-    * [How many resources does my app require?](/docs/containers?topic=containers-strategy#sizing_resources)
+    * [Set up multiple namespaces when you have multiple teams and projects that share the cluster](/docs/containers?topic=containers-strategy#env_resources_multiple_namespaces)
 
-    * [What else besides my app might use resources in the cluster?](/docs/containers?topic=containers-strategy#sizing_other)
-
-    * [What type of availability do I want my workload to have?](/docs/containers?topic=containers-strategy#sizing_availability)
-
-    * [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
-
-    * [How do I monitor resource usage and capacity in my cluster?](/docs/containers?topic=containers-strategy#sizing_manage)
-
-* [Structuring your Kubernetes environment](/docs/containers?topic=containers-strategy#kube_env)
-
-    * [What type of cluster and flavors should I get?](/docs/containers?topic=containers-strategy#env_flavors)
-
-    * [Do I use multiple clusters, or just add more workers to an existing cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
-
-    * [How can I set up my resources within the cluster?](/docs/containers?topic=containers-strategy#env_resources)
-
-    * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-strategy#updating_kube)
-
-* [Making your resources highly available](/docs/containers?topic=containers-strategy#kube_ha)
+    * [Set resource quotas so that users in your cluster must use resource requests and limits](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
 
 [Preparing your account to create clusters](/docs/containers?topic=containers-clusters#clusters)
 
-* [Create a cluster](/docs/containers?topic=containers-clusters#next_steps)
+* [Create or upgrade your account](/docs/containers?topic=containers-clusters#prepare-create-account)
+
+* [Set up an API key](/docs/containers?topic=containers-clusters#prepare-create-api-key)
+
+* [Verify your permissions](/docs/containers?topic=containers-clusters#prepare-verify-permissions)
+
+* [Create your first cluster](/docs/containers?topic=containers-clusters#next_steps)
 
 [Setting up your API key credentials](/docs/containers?topic=containers-access-creds#access-creds)
 
@@ -2542,19 +2532,11 @@ subcollection: containers
 
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
 
-* [About high availability](/docs/containers?topic=containers-ha_clusters#ha-about)
-
 * [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha_clusters#fault_domains)
 
 * [Single zone clusters](/docs/containers?topic=containers-ha_clusters#single_zone)
 
-    * [Is my master highly available in a single zone cluster?](/docs/containers?topic=containers-ha_clusters#sz-master-ha)
-
-    * [How can I protect my workloads against a single zone failure?](/docs/containers?topic=containers-ha_clusters#sz-workload-failover)
-
-* [Multizone cluster](/docs/containers?topic=containers-ha_clusters#mz-clusters)
-
-    * [Why do I need worker nodes in three zones?](/docs/containers?topic=containers-ha_clusters#mz-cluster-zones)
+* [Multizone clusters](/docs/containers?topic=containers-ha_clusters#mz-clusters)
 
     * [How is my {{site.data.keyword.containerlong_notm}} master set up?](/docs/containers?topic=containers-ha_clusters#mz-master-setup)
 
@@ -2779,7 +2761,7 @@ subcollection: containers
 
 * [Creating a classic cluster in the console](/docs/containers?topic=containers-cluster-create-classic#clusters_ui)
 
-* [Creating a standard classic cluster in the CLI](/docs/containers?topic=containers-cluster-create-classic#clusters_cli_steps)
+* [Creating a classic cluster in the CLI](/docs/containers?topic=containers-cluster-create-classic#clusters_cli_steps)
 
 * [Example commands to create classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster_create_classic)
 
@@ -7056,6 +7038,8 @@ subcollection: containers
 
 * [Version 1.0.9](/docs/containers?topic=containers-ca_changelog#0109_ca_addon)
 
+    * [Change log for patch update 1.0.9_134, released 04 October 2023](/docs/containers?topic=containers-ca_changelog#109134_ca)
+
     * [Change log for patch update 1.0.9_103, released 15 September 2023](/docs/containers?topic=containers-ca_changelog#109103_ca)
 
     * [Change log for patch update 1.0.9_81, released 07 August 2023](/docs/containers?topic=containers-ca_changelog#10981_ca)
@@ -8956,6 +8940,16 @@ subcollection: containers
 
 * [Are the master and worker nodes highly available?](/docs/containers?topic=containers-faqs#faq_ha)
 
+* [What kinds of workloads can I move to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#move_to_cloud)
+
+* [Can I automate my infrastructure deployments?](/docs/containers?topic=containers-faqs#infra_packaging)
+
+* [What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?](/docs/containers?topic=containers-faqs#app_kinds)
+
+* [What about serverless apps?](/docs/containers?topic=containers-faqs#apps_serverless-strategy)
+
+* [What skills should I have before I move my apps to a cluster?](/docs/containers?topic=containers-faqs#knowledge)
+
 * [What options do I have to secure my cluster?](/docs/containers?topic=containers-faqs#secure_cluster)
 
 * [What access policies do I give my cluster users?](/docs/containers?topic=containers-faqs#faq_access)
@@ -8968,7 +8962,7 @@ subcollection: containers
 
 * [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster)
 
-* [Which Kubernetes versions does the service support?](/docs/containers?topic=containers-faqs#supported_kube_versions)
+* [Which versions does the service support?](/docs/containers?topic=containers-faqs#supported_kube_versions)
 
 * [Which worker node operating systems does the service support?](/docs/containers?topic=containers-faqs#supported_os_versions)
 
@@ -8978,13 +8972,17 @@ subcollection: containers
 
 * [What compliance standards does the service meet?](/docs/containers?topic=containers-faqs#standards)
 
-* [Can I use IBM Cloud and other services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
+* [Can I use other IBM Cloud services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
 
 * [Does IBM support third-party and open source tools that I use with my cluster?](/docs/containers?topic=containers-faqs#faq_thirdparty_oss)
 
 * [What am I charged for? Can I estimate and control costs in my cluster?](/docs/containers?topic=containers-faqs#charges)
 
 * [Can I downgrade my cluster to a previous version?](/docs/containers?topic=containers-faqs#downgrade)
+
+* [Can I move my current cluster to a different account?](/docs/containers?topic=containers-faqs#migrate-cluster-account)
+
+* [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-faqs#updating_kube)
 
 
 ## Troubleshooting
@@ -9529,6 +9527,8 @@ subcollection: containers
 [Why does the Ingress status show an ESSDNE error?](/docs/containers?topic=containers-ts-ingress-essdne#ts-ingress-essdne)
 
 [Ingress health checks fail on Akamai Global Load Balancer (GLB) configurations](/docs/containers?topic=containers-cs_ingress_health_check_ctm#cs_ingress_health_check_ctm)
+
+[Why are my default `istio-ingressgateway` pods stuck in `pending`?](/docs/containers?topic=containers-ts-istio-ingressgateway-pending#ts-istio-ingressgateway-pending)
 
 
 ### File Storage

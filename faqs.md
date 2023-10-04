@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-27"
+lastupdated: "2023-10-04"
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
 
@@ -96,6 +96,79 @@ If you have data that must be available, even if an outage occurs, make sure to 
 
 For more information about how to achieve high availability for your cluster, see [High availability for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha_clusters).
 
+## What kinds of workloads can I move to {{site.data.keyword.containerlong_notm}}?
+{: #move_to_cloud}
+
+The following table provides some examples of what types of workloads that users typically move to the various types of clouds. You might also choose a hybrid approach where you have clusters that run in both environments.
+{: shortdesc}
+
+| Workload | {{site.data.keyword.containershort_notm}} off-prem | on-prem |
+| --- | --- | --- |
+| DevOps enablement tools | Yes | |
+| Developing and testing apps | Yes | |
+| Apps have major shifts in demand and need to scale rapidly | Yes | |
+| Business apps such as CRM, HCM, ERP, and E-commerce | Yes | |
+| Collaboration and social tools such as email | Yes | |
+| Linux and x86 workloads | Yes | |
+| Bare metal | Yes | Yes |
+| GPU compute resources | Yes | Yes |
+| PCI and HIPAA-compliant workloads | Yes | Yes |
+| Legacy apps with platform and infrastructure constraints and dependencies | | Yes |
+| Proprietary apps with strict designs, licensing, or heavy regulations | | Yes |
+{: caption="{{site.data.keyword.cloud_notm}} implementations support your workloads" caption-side="bottom"}
+
+Ready to run workloads off-premises in {{site.data.keyword.containerlong_notm}}?
+:   Great! You're already in our public cloud documentation. Keep reading for more strategy ideas, or hit the ground running by [creating a cluster now](/docs/containers?topic=containers-getting-started).
+
+Want to run workloads in both on-premises and off-premises clouds?
+:   Explore [{{site.data.keyword.satellitelong_notm}}](/docs/satellite?topic=satellite-faqs) to extend the flexibility and scalability of {{site.data.keyword.cloud_notm}} into your on-premises, edge, or other cloud provider environments.
+
+## Can I automate my infrastructure deployments?
+{: #infra_packaging}
+
+If you want to run your app in multiple clusters, public and private environments, or even multiple cloud providers, you might wonder how you can make your deployment strategy work across these environments.
+
+You can use the open source [Terraform](/docs/ibm-cloud-provider-for-terraform?topic=ibm-cloud-provider-for-terraform-getting-started#getting-started) tool to automate the provisioning of {{site.data.keyword.cloud_notm}} infrastructure, including Kubernetes clusters. Follow along with this tutorial to [create single and multizone Kubernetes and OpenShift clusters](/docs/ibm-cloud-provider-for-terraform?topic=ibm-cloud-provider-for-terraform-tutorial-tf-clusters). After you create a cluster, you can also set up the [{{site.data.keyword.containerlong_notm}} cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-install-addon) so that your worker pool scales up and down worker nodes in response to your workload's resource requests.
+
+## What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?
+{: #app_kinds}
+
+Your containerized app must be able to run on one of the [supported operating systems](/docs/containers?topic=containers-cs_versions) for your cluster version. You also want to consider the statefulness of your app. For more information about the kinds of apps that can run in {{site.data.keyword.containerlong_notm}}, see [Planning app deployments](/docs/containers?topic=containers-plan_deploy#app_types).
+
+If you already have an app, you can [migrate it to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-plan_deploy#migrate_containerize). If you want to develop a new app, check out the [guidelines for developing stateless, cloud-native apps](/docs/containers?topic=containers-plan_deploy#12factor).
+
+## What about serverless apps?
+{: #apps_serverless-strategy}
+
+You can run serverless apps and jobs through the [{{site.data.keyword.codeenginefull_notm}}](/docs/codeengine?topic=codeengine-getting-started) service. {{site.data.keyword.codeengineshort}} can also build your images for you. {{site.data.keyword.codeengineshort}} is designed so that you don't need to interact with the underlying technology it is built upon. However, if you have existing tooling that is based upon Kubernetes or Knative, you can still use it with {{site.data.keyword.codeengineshort}}. For more information, see [Using Kubernetes to interact with your application](/docs/codeengine?topic=codeengine-kubernetes). 
+{: shortdesc}
+
+## What skills should I have before I move my apps to a cluster?
+{: #knowledge}
+
+Kubernetes is designed to provide capabilities to two main personas, the cluster admin and the app developer. Each persona uses different technical skills to successfully run and deploy apps to a cluster.
+{: shortdesc}
+
+What are a cluster admin's main tasks and technical knowledge?
+:   As a cluster admin, you are responsible to set up, operate, secure, and manage the {{site.data.keyword.cloud_notm}} infrastructure of your cluster. Typical tasks include:
+    - Size the cluster to provide enough capacity for your workloads.
+    - Design a cluster to meet the high availability, disaster recovery, and compliance standards of your company.
+    - Secure the cluster by setting up user permissions and limiting actions within the cluster to protect your compute resources, your network, and data.
+    - Plan and manage network communication between infrastructure components to ensure network security, segmentation, and compliance.
+    - Plan persistent storage options to meet data residency and data protection requirements.
+
+The cluster admin persona must have a broad knowledge that includes compute, network, storage, security, and compliance. In a typical company, this knowledge is spread across multiple specialists, such as System Engineers, System Administrators, Network Engineers, Network Architects, IT Managers, or Security and Compliance Specialists. Consider assigning the cluster admin role to multiple people in your company so that you have the required knowledge to successfully operate your cluster.
+
+What are an app developer's main tasks and technical skills?
+:   As a developer, you design, create, secure, deploy, test, run, and monitor cloud-native, containerized apps in an Kubernetes cluster. To create and run these apps, you must be familiar with the concept of microservices, the [12-factor app](/docs/containers?topic=containers-plan_deploy#12factor) guidelines, [Docker and containerization principles](https://www.docker.com/){: external}, and available [Kubernetes deployment options](/docs/containers?topic=containers-plan_deploy).
+
+Kubernetes and {{site.data.keyword.containerlong_notm}} provide multiple options for how to [expose an app and keep an app private](/docs/containers?topic=containers-cs_network_planning), [add persistent storage](/docs/containers?topic=containers-storage-plan), [integrate other services](/docs/containers?topic=containers-ibm-3rd-party-integrations), and how you can [secure your workloads and protect sensitive data](/docs/containers?topic=containers-security#container). Before you move your app to a cluster in {{site.data.keyword.containerlong_notm}}, verify that you can run your app as a containerized app on the supported operating system and that Kubernetes and {{site.data.keyword.containerlong_notm}} provide the capabilities that your workload needs.
+
+Do cluster administrators and developers interact with each other?
+:   Yes. Cluster administrators and developers must interact frequently so that cluster administrators understand workload requirements to provide this capability in the cluster, and so that developers know about available limitations, integrations, and security principles that they must consider in their app development process.
+
+
+
 ## What options do I have to secure my cluster?
 {: #secure_cluster}
 {: faq}
@@ -158,7 +231,7 @@ Keep in mind that some services such as Ingress might require multiple worker no
 
 
 
-## Which Kubernetes versions does the service support?
+## Which versions does the service support?
 {: #supported_kube_versions}
 {: faq}
 {: support}
@@ -166,14 +239,14 @@ Keep in mind that some services such as Ingress might require multiple worker no
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a new version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. 
 
 
-For more information about supported versions and update actions that you must take to move from one version to another, see [Kubernetes version information](/docs/containers?topic=containers-cs_versions)
+For more information about supported versions and update actions that you must take to move from one version to another, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
 
 ## Which worker node operating systems does the service support?
 {: #supported_os_versions}
 {: faq}
 {: support}
 
-For a list of supported worker node operated systems by cluster version, see [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
+For a list of supported worker node operated systems by cluster version, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
 
 
 
@@ -218,7 +291,7 @@ To view detailed system requirements, you can run a [software product compatibil
 
 
 
-## Can I use IBM Cloud and other services with my cluster?
+## Can I use other IBM Cloud services with my cluster?
 {: #faq_integrations}
 {: faq}
 
@@ -245,3 +318,17 @@ See [Managing costs for your clusters](/docs/containers?topic=containers-costs).
 
 No, you cannot downgrade your cluster to a previous version.
 
+
+## Can I move my current cluster to a different account?
+{: #migrate-cluster-account}
+{: faq}
+
+No, you cannot move cluster to a different account from the one it was created in.
+
+## How can I keep my cluster in a supported state?
+{: #updating_kube}
+
+- Make sure that your cluster always runs a [supported Kubernetes version](/docs/containers?topic=containers-cs_versions).
+- When a new Kubernetes minor version is released, an older version is shortly deprecated after and then becomes unsupported.
+
+For more information, see [Updating the master](/docs/containers?topic=containers-update#master) and [worker nodes](/docs/containers?topic=containers-update#worker_node).

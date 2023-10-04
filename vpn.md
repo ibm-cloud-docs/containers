@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-10-03"
+lastupdated: "2023-10-04"
 
 keywords: kubernetes, vyatta, strongswan, ipsec, on-prem
 
@@ -41,7 +41,6 @@ If you plan to connect your cluster to on-premises networks, check out the follo
 - If your VPN solution preserves the source IP addresses of requests, you can [create custom static routes](/docs/containers?topic=containers-static-routes) to ensure that your worker nodes can route responses from your cluster back to your on-premises network.</p>
 
 
-{: note}
 
 ## Using the strongSwan IPSec VPN service Helm chart
 {: #vpn-setup}

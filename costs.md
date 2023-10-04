@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-14"
+lastupdated: "2023-10-04"
 
 keywords: kubernetes
 
@@ -137,7 +137,7 @@ This information applies to VPC worker nodes only.
 {: note}
 
 Regional uplift charges
-:    When you create a cluster on VPC infrastructure, the worker nodes might incur an uplift charge that varies by the [multizone location](/docs/containers?topic=containers-regions-and-zones#zones-vpc) that you create the cluster in. The uplift charge is a percentage (`%`) of the hourly rate (`r`), and is added to the hourly rate of the worker node. The total hourly rate cost for a worker node can be calculated as `r + (r × %)`. In the [Kubernetes cluster creation console](https://cloud.ibm.com/kubernetes/catalog/create){: external}, this uplift is reflected in the pricing calculator as you configure your cluster details. The following table describes the pricing uplift by region.
+:    When you create a cluster on VPC infrastructure, the worker nodes might incur an uplift charge that varies by the [multizone location](/docs/containers?topic=containers-regions-and-zones#zones-vpc) that you create the cluster in. The uplift charge is a percentage (`%`) of the hourly rate (`r`), and is added to the hourly rate of the worker node. The total hourly rate cost for a worker node can be calculated as `r + (r × %)`. In the cluster creation console, this uplift is reflected in the pricing calculator as you configure your cluster details. The following table describes the pricing uplift by region.
 
 :    For a table that describes the pricing uplift by region, see [Regional pricing for VPC](https://cloud.ibm.com/vpc-ext/provision/vs){: external}.
 
@@ -162,8 +162,8 @@ The following steps present a general process to manage costs for your {{site.da
     * Organize your billing with [resource groups](/docs/account?topic=account-rgs).
     * [Add tags to your clusters](/docs/containers?topic=containers-worker-tag-label) according to your organizational strategy.
 2. Plan the type of cluster that you need.
-    * [Size your cluster to support your workloads](/docs/containers?topic=containers-strategy#sizing), including the network bandwidth that your workloads need.
-    * [Decide the cluster environment that you want](/docs/containers?topic=containers-strategy#kube_env).
+    * [Size your cluster to support your workloads](/docs/containers?topic=containers-strategy), including the network bandwidth that your workloads need.
+    * [Decide the cluster environment that you want](/docs/containers?topic=containers-strategy).
     * [Consider the availability that you want for your cluster](/docs/containers?topic=containers-ha_clusters). For example, a basic high availability setup is one multizone cluster with two worker nodes in each of three zones, for a minimum total of 6 worker nodes.
 3. Check out other {{site.data.keyword.cloud_notm}} services, add-ons, operators, and other third-party software that you might use that can increase your cost. To get an idea of what other costs clusters typically incur, review [Understanding costs for your clusters](#costs-for-clusters).
 4. [Estimate your costs](/docs/billing-usage?topic=billing-usage-cost#cost) and review detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing](https://www.ibm.com/cloud/kubernetes-service){: external}.

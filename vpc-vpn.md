@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-10-03"
+lastupdated: "2023-10-04"
 
 keywords: kubernetes, strongswan, ipsec, on-prem, vpnaas, direct link
 
@@ -47,7 +47,6 @@ You might have subnet conflicts with the IBM-provided default 172.30.0.0/16 rang
 If your VPN solution preserves the source IP addresses of requests, you can [create custom static routes](/docs/containers?topic=containers-static-routes) to ensure that your worker nodes can route responses from your cluster back to your on-premises network.
 
 
-{: note}
 
 ### {{site.data.keyword.vpc_short}} VPN
 {: #vpc-vpn-def}

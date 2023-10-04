@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-09-25"
+lastupdated: "2023-10-04"
 
 keywords: containers, upgrade, version, update cluster, update worker nodes, update cluster components, update cluster master
 
@@ -39,7 +39,7 @@ Can my worker nodes run a later version than the master?
 Worker nodes can run later patch versions than the master, such as patch versions that are specific to worker nodes for security updates.
 
 How are patch updates applied?
-:   By default, patch updates for the master are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can [check the versions change log](/docs/containers?topic=containers-cs_versions) for any potential impact and choose to safely use the `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) yourself without waiting for the update automation to apply.
+:   By default, patch updates for the master are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can check the [Kubernetes version information](/docs/containers?topic=containers-cs_versions) for any potential impact and choose to safely use the `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) yourself without waiting for the update automation to apply.
 
 Unlike the master, you must update your workers for each patch version.
 
@@ -63,7 +63,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 To update the Kubernetes master _major_ or _minor_ version:
 
-1. Review the [Kubernetes changes](/docs/containers?topic=containers-cs_versions) and make any updates marked _Update before master_.
+1. Review the [Kubernetes version information](/docs/containers?topic=containers-cs_versions) and make any updates marked _Update before master_.
 2. Review any [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}, such as deprecation notices.
 3. Check the add-ons and plug-ins that are installed in your cluster for any impact that might be caused by updating the cluster version.
 
@@ -134,11 +134,11 @@ Before you update your classic infrastructure worker nodes, review the prerequis
 Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](/docs/containers?topic=containers-storage-plan).
 {: important}
 
-- For the latest security patches and fixes, make sure to update your worker nodes to the latest patch as soon as possible after it is available. For more information about the latest updates, review the [change log](/docs/containers?topic=containers-cs_versions).
+- For the latest security patches and fixes, make sure to update your worker nodes to the latest patch as soon as possible after it is available. For more information about the latest updates, review the [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - [Update the master](#master). The worker node version can't be higher than the API server version that runs in your Kubernetes master.
 - Make any changes that are marked with _Update after master_ in the [Kubernetes version preparation guide](/docs/containers?topic=containers-cs_versions).
-- If you want to apply a patch update, review the [Kubernetes version change log](/docs/containers?topic=containers-cs_versions).
+- If you want to apply a patch update, review the [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
 - Consider adding more worker nodes so that your cluster has enough capacity to rescheduling your workloads during the update. For more information, see [Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic) or [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc).
 - Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms).
 
@@ -333,11 +333,11 @@ Before you update your VPC infrastructure worker nodes, review the prerequisite 
 Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is removed, and data is deleted if not [stored outside the pod](/docs/containers?topic=containers-storage-plan).
 {: important}
 
-- For the latest security patches and fixes, make sure to update your worker nodes to the latest patch as soon as possible after it is available. For more information about the latest updates, review the [change log](/docs/containers?topic=containers-cs_versions).
+- For the latest security patches and fixes, make sure to update your worker nodes to the latest patch as soon as possible after it is available. For more information about the latest updates, review the [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - [Update the master](#master). The worker node version can't be higher than the API server version that runs in your Kubernetes master.
 - Make any changes that are marked with _Update after master_ in the [Kubernetes version preparation guide](/docs/containers?topic=containers-cs_versions).
-- If you want to apply a patch update, review the [Kubernetes clusters](/docs/containers?topic=containers-cs_versions) version change log.
+- If you want to apply a patch update, review the [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
 - Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms).
 
 ### Updating VPC worker nodes in the CLI
