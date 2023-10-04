@@ -36,9 +36,9 @@ subcollection: containers
 
 * [Review the basics](/docs/containers?topic=containers-getting-started#getting-started-basics)
 
-* [Prepare your account](/docs/containers?topic=containers-getting-started#prepare-your-account)
+* [Prepare your account](/docs/containers?topic=containers-getting-started#getting-started-prepare-account)
 
-* [Create a cluster](/docs/containers?topic=containers-getting-started#create-a-cluster)
+* [Create a cluster](/docs/containers?topic=containers-getting-started#getting-started-create)
 
 * [Deploy a sample app](/docs/containers?topic=containers-getting-started#getting-started-deploy-app)
 
