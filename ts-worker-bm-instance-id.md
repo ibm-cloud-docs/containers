@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-07-21"
+lastupdated: "2023-10-04"
 
 keywords: kubernetes, help, network, connectivity
 
@@ -41,7 +41,7 @@ The machine ID can become inconsistent with the {{site.data.keyword.containerlon
 {: tsCauses}
 
 
-For {{site.data.keyword.containerlong_notm}} to re-identify the machine, [reload the bare metal worker node](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload). Note that reloading also updates the machine's [patch version](/docs/containers?topic=containers-cs_versions).
+For {{site.data.keyword.containerlong_notm}} to re-identify the machine, [reload the bare metal worker node](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload). Note that reloading also updates the machine's patch version. For more information, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
 {: tsResolve}
 
 You can also [delete the bare metal worker node](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_rm). Remember that bare metal instances are billed monthly.

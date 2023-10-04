@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-10-03"
+lastupdated: "2023-10-04"
 
 keywords: containers, kubernetes, release notes
 
@@ -28,6 +28,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2023
 {: #containers-oct23}
+
+### 4 October 2023
+{: #containers-oct423}
+{: release-note}
+
+
+Cluster autoscaler add-on version `1.0.9_134`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
 
 
 ### 3 October 2023
