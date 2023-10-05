@@ -9431,6 +9431,8 @@ subcollection: containers
 
 [Why do I see `SyncLoadBalancerFailed` errors when creating a VPC cluster?](/docs/containers?topic=containers-ts-loadbalancer-sync-failed#ts-loadbalancer-sync-failed)
 
+[Why are VPC load balancer health checks failing on my worker nodes?](/docs/containers?topic=containers-vpc-lb-healthcheck-fail#vpc-lb-healthcheck-fail)
+
 
 ### Ingress
 {: #sitemap_ingress}
