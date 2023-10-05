@@ -2580,6 +2580,8 @@ subcollection: containers
 
     * [What limitations do I need to be aware of?](/docs/containers?topic=containers-planning_worker_nodes#flavor-limitations)
 
+    * [What operations are blocked if my worker node is running an unsupported operating system?](/docs/containers?topic=containers-planning_worker_nodes#unsupported-os)
+
 * [Virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm)
 
     * [Planning considerations for VMs](/docs/containers?topic=containers-planning_worker_nodes#vm-planning)
@@ -8989,6 +8991,8 @@ subcollection: containers
 * [Can I move my current cluster to a different account?](/docs/containers?topic=containers-faqs#migrate-cluster-account)
 
 * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-faqs#updating_kube)
+
+* [What operations are blocked if my cluster is running an unsupported operating system?](/docs/containers?topic=containers-faqs#unsupported_os)
 
 
 ## Troubleshooting

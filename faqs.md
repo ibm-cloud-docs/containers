@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-10-04"
+lastupdated: "2023-10-05"
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
 
@@ -332,3 +332,19 @@ No, you cannot move cluster to a different account from the one it was created i
 - When a new Kubernetes minor version is released, an older version is shortly deprecated after and then becomes unsupported.
 
 For more information, see [Updating the master](/docs/containers?topic=containers-update#master) and [worker nodes](/docs/containers?topic=containers-update#worker_node).
+
+## What operations are blocked if my cluster is running an unsupported operating system?
+{: #unsupported_os}
+
+The following operations are blocked when an operating system is unsupported:
+
+- worker reload
+- worker replace without update
+- worker replace with update
+- worker update
+- worker pool create (with an unsupported OS)
+- worker pool rebalance
+- worker pool resize (scale up)
+- worker pool zone add
+- instance group resize (patch)
+- autoscaler remove worker (v2/autoscalerRemoveWorker)
