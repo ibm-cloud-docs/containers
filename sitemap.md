@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-10-04"
+lastupdated: "2023-10-05"
 
 keywords: containers
 subcollection: containers
@@ -3425,6 +3425,8 @@ subcollection: containers
 
     * [Required inbound and outbound rules for cluster workers](/docs/containers?topic=containers-vpc-security-group#required-group-rules-workers)
 
+    * [Required rules for VPCs with a cluster that runs at version 1.28 or later](/docs/containers?topic=containers-vpc-security-group#rules-sg-128)
+
     * [Required inbound and outbound rules for VPC ALBs](/docs/containers?topic=containers-vpc-security-group#required-group-rules-alb)
 
 * [Creating security group rules](/docs/containers?topic=containers-vpc-security-group#vpc-sg-create-rules)
@@ -3457,11 +3459,15 @@ subcollection: containers
 
     * [Creating ACLs with the CLI](/docs/containers?topic=containers-vpc-acls#acls_cli)
 
+    * [Required rules for VPCs with a cluster that runs at version 1.28 or later](/docs/containers?topic=containers-vpc-acls#acls-128)
+
 [Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-kube-policies#vpc-kube-policies)
 
 * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-kube-policies#services_one_ns)
 
 * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-kube-policies#services_across_ns)
+
+    * [Required policy rules for VPCs with a cluster that runs at version 1.28 or later](/docs/containers?topic=containers-vpc-kube-policies#policy-rules-128)
 
 [Opening required ports and IP addresses in other network allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
 
