@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-08-14"
+lastupdated: "2023-10-05"
 
 keywords: ingress, alb, manage albs, update, alb image
 
@@ -60,11 +60,15 @@ You can disable or enable automatic updates for your ALBs by running [`ibmcloud 
 Do not enable automatic updates if you run an ALB image version that is different from the latest version. Automatic updates always apply the latest version and overwrite any manual updates you apply. If you want to update your ALB image to a specific version by using the `ibmcloud ks ingress alb update` command with the `--version` option, you must first [disable automatic ALB updates](#autoupdate) and then keep them disabled for as long as you want to run the specified version.
 {: important}
 
+By default, periodic Ingress version updates are automatically rolled out to your ALBs. If only one worker node exists in a zone in your cluster, and you set the number of ALB replicas to 1, this single ALB pod is deleted and a new pod is created whenever updates are applied. This process might cause traffic disruptions even if you have worker nodes and ALB replicas in other zones. To prevent traffic disruptions, ensure that at least two worker nodes exist in each zone, and that [two replicas exist for each ALB](#alb_replicas). Note that during the update process, only new connections are routed to the second ALB pod; existing connections on the updating ALB pod are gracefully terminated. It is recommended that client applications initiate a retry for existing connections that are terminated during the update. 
+{: important}
+
+
 
 ### Scheduling maintenance windows for automatic updates
 {: #alb-scheduled-updates}
 
-You can enable automatic updates of all Ingress ALB pods in a cluster by enabling [automatic updates](#autoupdate). If you enable automatic update for your ALBs, you can further control and manage your ALB updates by creating a customized ConfigMap that specifies the time you want the updates to occur and the percentage of ALBs you want to update.  
+You can enable [automatic updates](#autoupdate) of all Ingress ALB pods in a cluster. If you enable automatic updates, you can further control and manage your ALB updates by creating a customized ConfigMap that specifies the time you want the updates to occur and the percentage of ALBs you want to update.  
 {: shortdesc}
 
 To set a time for automatic updates, you set the `updateStartTime` and `updateEndTime` keys in the deployment ConfigMap. Each key represents an assigned time in a 24 hour format (HH:MM). Note that this time is specified in coordinated universal time (UTC) rather than your local time. To specify a percentage of ALBs to update, you set the `updatePercentage` key as a whole number between 0 and 100.
@@ -218,7 +222,7 @@ A single ALB pod can handle a large amount of requests. If you experience timeou
 
 **For classic clusters**: If the ALB's load balancer service configuration has the `externalTrafficPolicy` set to `Local`, do not scale above 2 replicas. Classic load balancers run with a fixed configuration of 2 replicas, and can only forward traffic to ALB pods that are located on the same node as the load balancer pods. 
 
-By default, periodic Ingress version updates are automatically rolled out to your ALBs. If only one worker node exists in a zone in your cluster, and you set the number of ALB replicas to 1, this single ALB pod is deleted and a new pod is created whenever updates are applied. This process might cause traffic disruptions, even if you have worker nodes and ALB replicas in other zones. To prevent traffic disruptions, ensure that at least two worker nodes exist in each zone, and that two replicas exist for each ALB.
+By default, periodic Ingress version updates are automatically rolled out to your ALBs. If only one worker node exists in a zone in your cluster, and you set the number of ALB replicas to 1, this single ALB pod is deleted and a new pod is created whenever updates are applied. This process might cause traffic disruptions, even if you have worker nodes and ALB replicas in other zones. To prevent traffic disruptions, ensure that at least two worker nodes exist in each zone, and that two replicas exist for each ALB. Note that during the update process, only new connections are routed to the second ALB pod; existing connections on the updating ALB pod are gracefully terminated. It is recommended that client applications initiate a retry for existing connections that are terminated during the update. 
 {: important}
 
 
