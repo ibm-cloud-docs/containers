@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-10-04"
+lastupdated: "2023-10-05"
 
 keywords: containers
 subcollection: containers
@@ -2580,6 +2580,8 @@ subcollection: containers
 
     * [What limitations do I need to be aware of?](/docs/containers?topic=containers-planning_worker_nodes#flavor-limitations)
 
+    * [What operations are blocked if my worker node is running an unsupported operating system?](/docs/containers?topic=containers-planning_worker_nodes#unsupported-os)
+
 * [Virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm)
 
     * [Planning considerations for VMs](/docs/containers?topic=containers-planning_worker_nodes#vm-planning)
@@ -3425,6 +3427,8 @@ subcollection: containers
 
     * [Required inbound and outbound rules for cluster workers](/docs/containers?topic=containers-vpc-security-group#required-group-rules-workers)
 
+    * [Required rules for VPCs with a cluster that runs at version 1.28 or later](/docs/containers?topic=containers-vpc-security-group#rules-sg-128)
+
     * [Required inbound and outbound rules for VPC ALBs](/docs/containers?topic=containers-vpc-security-group#required-group-rules-alb)
 
 * [Creating security group rules](/docs/containers?topic=containers-vpc-security-group#vpc-sg-create-rules)
@@ -3457,11 +3461,15 @@ subcollection: containers
 
     * [Creating ACLs with the CLI](/docs/containers?topic=containers-vpc-acls#acls_cli)
 
+    * [Required rules for VPCs with a cluster that runs at version 1.28 or later](/docs/containers?topic=containers-vpc-acls#acls-128)
+
 [Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-kube-policies#vpc-kube-policies)
 
 * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-kube-policies#services_one_ns)
 
 * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-kube-policies#services_across_ns)
+
+    * [Required policy rules for VPCs with a cluster that runs at version 1.28 or later](/docs/containers?topic=containers-vpc-kube-policies#policy-rules-128)
 
 [Opening required ports and IP addresses in other network allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
 
@@ -8984,6 +8992,8 @@ subcollection: containers
 
 * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-faqs#updating_kube)
 
+* [What operations are blocked if my cluster is running an unsupported operating system?](/docs/containers?topic=containers-faqs#unsupported_os)
+
 
 ## Troubleshooting
 {: #sitemap_troubleshooting}
@@ -9424,6 +9434,8 @@ subcollection: containers
 [VPC clusters: Why does a Kubernetes `LoadBalancer` service fail with no IPs?](/docs/containers?topic=containers-vpc_no_lb#vpc_no_lb)
 
 [Why do I see `SyncLoadBalancerFailed` errors when creating a VPC cluster?](/docs/containers?topic=containers-ts-loadbalancer-sync-failed#ts-loadbalancer-sync-failed)
+
+[Why are VPC load balancer health checks failing on my worker nodes?](/docs/containers?topic=containers-vpc-lb-healthcheck-fail#vpc-lb-healthcheck-fail)
 
 
 ### Ingress

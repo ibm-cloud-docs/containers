@@ -507,6 +507,7 @@ toc:
               - ts-lb-vpc-app.md
               - ts-lb-vpc-no-ips.md
               - ts-lb-sync-failed.md
+              - ts-lb-vpc-healthcheck.md
           - topicgroup:
               label: Ingress
               topics:
