@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-10-05"
+lastupdated: "2023-10-06"
 
 keywords: containers
 subcollection: containers
@@ -236,6 +236,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
+
+    * [5 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct523)
+
+        * Ingress ALB versions `1.8.1_5384_iks`, `1.6.4_5406_iks`, and `1.5.1_5407_iks`
 
     * [4 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct423)
 
@@ -6440,9 +6444,13 @@ subcollection: containers
 
 * [Version 1.8.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_8_1)
 
+    * [1.8.1_5384_iks, released 5 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.1_5384_iks)
+
     * [1.8.1_5317_iks, released 31 August 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.1_5317_iks)
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
+
+    * [1.6.4_5406_iks, released 5 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5406_iks)
 
     * [1.6.4_5270_iks, released 31 August 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5270_iks)
 
@@ -6467,6 +6475,8 @@ subcollection: containers
     * [1.6.4_3864_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3864_iks)
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
+
+    * [1.5.1_5407_iks, released 5 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_5407_iks)
 
     * [1.5.1_5318_iks, released 31 August 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_5318_iks)
 
