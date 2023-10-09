@@ -583,9 +583,9 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
     An {{site.data.keyword.appid_short_notm}} instance can be used in only one namespace in your cluster. If you want to configure {{site.data.keyword.appid_short_notm}} for Ingress resources in multiple namespaces, repeat the steps in this section to specify a unique {{site.data.keyword.appid_short_notm}} instance for the Ingress resources in each namespace.
     {: note}
     
-    * To use an existing instance, ensure that the service instance name contains only **lowercase** alphanumeric characters or hyphens (`-`), and doesn't contain spaces. To change the name, select **Rename service** from the more options menu on your service instance details page.
+    * To use an existing instance, ensure that the service instance name contains only **lowercase** alphanumeric characters and its length does not exceed 25 characters. To change the name, select **Rename service** from the more options menu on your service instance details page.
     * To provision a [new {{site.data.keyword.appid_short_notm}} instance](https://cloud.ibm.com/catalog/services/app-id):
-        1. Replace the **Service name** with your own unique name for the service instance. The service instance name must contain only lowercase alphanumeric characters or hyphens (`-`), and can't contain spaces.
+        1. Replace the **Service name** with your own unique name for the service instance. The service instance name must contain only lowercase alphanumeric characters and can not be longer than 25 characters.
         2. Choose the same region that your cluster is deployed in.
         3. Click **Create**.
 
@@ -626,7 +626,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
         ```
         {: pre}
 
-5. In the Ingress resources for apps where you want to add {{site.data.keyword.appid_short_notm}} authentication, add the following annotations to the `metadata.annotations` section.
+5. In the Ingress resources for apps where you want to add {{site.data.keyword.appid_short_notm}} authentication, make sure that the resource name does not exceed 25 characters in length. Then, add the following annotations to the `metadata.annotations` section.
     1. Add the following `auth-url` annotation. This annotation specifies the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance, which acts as the OIDC Relying Party (RP) for {{site.data.keyword.appid_short_notm}}. Note that all letters in the service instance name must be specified as lowercase.
         ```yaml
         ...
