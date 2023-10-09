@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-07-31"
+lastupdated: "2023-10-09"
 
 keywords: kubernetes, containers, 127, version 127, 127 update actions
 
@@ -18,7 +18,7 @@ subcollection: containers
 # 1.27 version information and update actions
 {: #cs_versions_127}
 
-Review information about version 1.27 of {{site.data.keyword.containerlong}}, released {{site.data.keyword.kubernetes_127_release_date}}.
+Review information about version 1.27 of {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
