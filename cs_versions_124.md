@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-08-09"
+lastupdated: "2023-10-09"
 
 keywords: kubernetes, containers, 1.24 update actions
 
@@ -19,7 +19,7 @@ subcollection: containers
 {: #cs_versions_124}
 
 
-Kubernetes version 1.24 becomes unsupported on {{site.data.keyword.kubernetes_124_unsupported_date}}. Update your cluster to at least [version 1.25](/docs/containers?topic=containers-cs_versions_125) as soon as possible.
+Kubernetes version 1.24 is deprecated. Update your cluster to at least [version 1.25](/docs/containers?topic=containers-cs_versions_125) as soon as possible.
 {: deprecated}
 
 Review information about version 1.24 of {{site.data.keyword.containerlong}}, released {{site.data.keyword.kubernetes_124_release_date}}.
@@ -47,7 +47,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
-| 1.24 | Yes | 09 Jun 2022 | 06 Sept 2023 |
+| 1.24 | Yes | 09 Jun 2022 | {{site.data.keyword.kubernetes_124_unsupported_date}} |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.24" caption-side="bottom"}
 
 ## Preparing to update

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-05-23"
+lastupdated: "2023-10-09"
 
 keywords: kubernetes, containers, 126, version 126, 126 update actions
 
@@ -18,7 +18,7 @@ subcollection: containers
 # 1.26 version information and update actions
 {: #cs_versions_126}
 
-Review information about version 1.26 of {{site.data.keyword.containerlong}}, released {{site.data.keyword.kubernetes_126_release_date}}.
+Review information about version 1.26 of {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
