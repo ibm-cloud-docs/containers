@@ -33,11 +33,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ### 10 October 2023
 {: #containers-oct1023}
-{: release-note} 
+{: release-note}
 
-Istio add-on version `1.19.1`.
+
+
+[Change log]{: tag-purple} Istio add-on version `1.19.1`.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
-
 
 
 
@@ -47,7 +48,7 @@ Istio add-on version `1.19.1`.
 
 
 
-Worker node fix packs are available.
+[Change log]{: tag-purple} Worker node fix packs are available.
 
 :   [1.28.2_1529](/docs/containers?topic=containers-changelog_128)
 :   [1.27.5_1542](/docs/containers?topic=containers-changelog_127)
@@ -3251,7 +3252,7 @@ Worker node fix pack update
 {: release-note}
 
 New! Create a cluster with a template
-:   No longer do you have to manually specify the networking and worker node details to create a cluster, or enable security integrations such as logging and monitoring after creation. Instead, you can try out the **technical preview** to create a multizone cluster with nine worker nodes and encryption, logging, and monitoring already enabled. For more information, see [Creating a cluster by using an {{site.data.keyword.bpfull_notm}} template](/docs/openshift?topic=openshift-templates&interface=ui).
+:   No longer do you have to manually specify the networking and worker node details to create a cluster, or enable security integrations such as logging and monitoring after creation. Instead, you can try out the **technical preview** to create a multizone cluster with nine worker nodes and encryption, logging, and monitoring already enabled.
 
 {{site.data.keyword.cos_full_notm}} plug-in
 :   Version `2.1.3` is [released](/docs/containers?topic=containers-cos_plugin_changelog).

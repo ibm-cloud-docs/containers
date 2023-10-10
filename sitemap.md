@@ -239,11 +239,11 @@ subcollection: containers
 
     * [10 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1023)
 
-        * Istio add-on version `1.19.1`.
+        * [Change log]{: tag-purple} Istio add-on version `1.19.1`.
 
     * [9 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct923)
 
-        * Worker node fix packs are available.
+        * [Change log]{: tag-purple} Worker node fix packs are available.
 
     * [5 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct523)
 
