@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-10-09"
+lastupdated: "2023-10-10"
 
 keywords: containers
 subcollection: containers
@@ -8882,23 +8882,83 @@ subcollection: containers
 
 * [`au-syd`](/docs/containers?topic=containers-vpc-flavors#au-syd)
 
+    * [Australia flavors](/docs/containers?topic=containers-vpc-flavors#au-syd-balanced)
+
+    * [Australia flavors](/docs/containers?topic=containers-vpc-flavors#au-syd-compute)
+
+    * [Australia flavors](/docs/containers?topic=containers-vpc-flavors#au-syd-memory)
+
 * [`br-sao`](/docs/containers?topic=containers-vpc-flavors#br-sao)
+
+    * [Brazil flavors](/docs/containers?topic=containers-vpc-flavors#br-sao-balanced)
+
+    * [Brazil flavors](/docs/containers?topic=containers-vpc-flavors#br-sao-compute)
+
+    * [Brazil flavors](/docs/containers?topic=containers-vpc-flavors#br-sao-memory)
 
 * [`ca-tor`](/docs/containers?topic=containers-vpc-flavors#ca-tor)
 
+    * [Canada flavors](/docs/containers?topic=containers-vpc-flavors#ca-tor-balanced)
+
+    * [Canada flavors](/docs/containers?topic=containers-vpc-flavors#ca-tor-compute)
+
+    * [Canada flavors](/docs/containers?topic=containers-vpc-flavors#ca-tor-memory)
+
 * [`eu-de`](/docs/containers?topic=containers-vpc-flavors#eu-de)
+
+    * [Europe flavors](/docs/containers?topic=containers-vpc-flavors#eu-de-balanced)
+
+    * [Europe flavors](/docs/containers?topic=containers-vpc-flavors#eu-de-compute)
+
+    * [Europe flavors](/docs/containers?topic=containers-vpc-flavors#eu-de-memory)
 
 * [`eu-es`](/docs/containers?topic=containers-vpc-flavors#eu-es)
 
+    * [Europe flavors](/docs/containers?topic=containers-vpc-flavors#eu-es-balanced)
+
+    * [Europe flavors](/docs/containers?topic=containers-vpc-flavors#eu-es-compute)
+
+    * [Europe flavors](/docs/containers?topic=containers-vpc-flavors#eu-es-memory)
+
 * [`eu-gb`](/docs/containers?topic=containers-vpc-flavors#eu-gb)
+
+    * [Europe flavors](/docs/containers?topic=containers-vpc-flavors#eu-gb-balanced)
+
+    * [Europe flavors](/docs/containers?topic=containers-vpc-flavors#eu-gb-compute)
+
+    * [Europe flavors](/docs/containers?topic=containers-vpc-flavors#eu-gb-memory)
 
 * [`jp-osa`](/docs/containers?topic=containers-vpc-flavors#jp-osa)
 
+    * [Japan flavors](/docs/containers?topic=containers-vpc-flavors#jp-osa-balanced)
+
+    * [Japan flavors](/docs/containers?topic=containers-vpc-flavors#jp-osa-compute)
+
+    * [Japan flavors](/docs/containers?topic=containers-vpc-flavors#jp-osa-memory)
+
 * [`jp-tok`](/docs/containers?topic=containers-vpc-flavors#jp-tok)
+
+    * [Japan flavors](/docs/containers?topic=containers-vpc-flavors#jp-tok-balanced)
+
+    * [Japan flavors](/docs/containers?topic=containers-vpc-flavors#jp-tok-compute)
+
+    * [Japan flavors](/docs/containers?topic=containers-vpc-flavors#jp-tok-memory)
 
 * [`us-east`](/docs/containers?topic=containers-vpc-flavors#us-east)
 
+    * [United States flavors](/docs/containers?topic=containers-vpc-flavors#us-east-balanced)
+
+    * [United States flavors](/docs/containers?topic=containers-vpc-flavors#us-east-compute)
+
+    * [United States flavors](/docs/containers?topic=containers-vpc-flavors#us-east-memory)
+
 * [`us-south`](/docs/containers?topic=containers-vpc-flavors#us-south)
+
+    * [United States flavors](/docs/containers?topic=containers-vpc-flavors#us-south-balanced)
+
+    * [United States flavors](/docs/containers?topic=containers-vpc-flavors#us-south-compute)
+
+    * [United States flavors](/docs/containers?topic=containers-vpc-flavors#us-south-memory)
 
 
 ## Classic flavors
@@ -8909,35 +8969,161 @@ subcollection: containers
 
 * [`ams`](/docs/containers?topic=containers-classic-flavors#ams)
 
+    * [Amsterdam flavors](/docs/containers?topic=containers-classic-flavors#ams-balanced)
+
+    * [Amsterdam flavors](/docs/containers?topic=containers-classic-flavors#ams-compute)
+
+    * [Amsterdam flavors](/docs/containers?topic=containers-classic-flavors#ams-memory)
+
+    * [Amsterdam flavors](/docs/containers?topic=containers-classic-flavors#ams-uhmemory)
+
 * [`che`](/docs/containers?topic=containers-classic-flavors#che)
+
+    * [Chennai flavors](/docs/containers?topic=containers-classic-flavors#che-balanced)
+
+    * [Chennai flavors](/docs/containers?topic=containers-classic-flavors#che-compute)
+
+    * [Chennai flavors](/docs/containers?topic=containers-classic-flavors#che-memory)
+
+    * [Chennai flavors](/docs/containers?topic=containers-classic-flavors#che-uhmemory)
 
 * [`dal`](/docs/containers?topic=containers-classic-flavors#dal)
 
+    * [Dallas flavors](/docs/containers?topic=containers-classic-flavors#dal-balanced)
+
+    * [Dallas flavors](/docs/containers?topic=containers-classic-flavors#dal-compute)
+
+    * [Dallas flavors](/docs/containers?topic=containers-classic-flavors#dal-memory)
+
+    * [Dallas flavors](/docs/containers?topic=containers-classic-flavors#dal-uhmemory)
+
 * [`fra`](/docs/containers?topic=containers-classic-flavors#fra)
+
+    * [France flavors](/docs/containers?topic=containers-classic-flavors#fra-balanced)
+
+    * [France flavors](/docs/containers?topic=containers-classic-flavors#fra-compute)
+
+    * [France flavors](/docs/containers?topic=containers-classic-flavors#fra-memory)
+
+    * [France flavors](/docs/containers?topic=containers-classic-flavors#fra-uhmemory)
 
 * [`lon`](/docs/containers?topic=containers-classic-flavors#lon)
 
+    * [London flavors](/docs/containers?topic=containers-classic-flavors#lon-balanced)
+
+    * [London flavors](/docs/containers?topic=containers-classic-flavors#lon-compute)
+
+    * [London flavors](/docs/containers?topic=containers-classic-flavors#lon-memory)
+
+    * [London flavors](/docs/containers?topic=containers-classic-flavors#lon-uhmemory)
+
 * [`mil`](/docs/containers?topic=containers-classic-flavors#mil)
+
+    * [Milan flavors](/docs/containers?topic=containers-classic-flavors#mil-balanced)
+
+    * [Milan flavors](/docs/containers?topic=containers-classic-flavors#mil-compute)
+
+    * [Milan flavors](/docs/containers?topic=containers-classic-flavors#mil-memory)
+
+    * [Milan flavors](/docs/containers?topic=containers-classic-flavors#mil-uhmemory)
 
 * [`mon`](/docs/containers?topic=containers-classic-flavors#mon)
 
+    * [Montreal flavors](/docs/containers?topic=containers-classic-flavors#mon-balanced)
+
+    * [Montreal flavors](/docs/containers?topic=containers-classic-flavors#mon-compute)
+
+    * [Montreal flavors](/docs/containers?topic=containers-classic-flavors#mon-memory)
+
+    * [Montreal flavors](/docs/containers?topic=containers-classic-flavors#mon-uhmemory)
+
 * [`osa`](/docs/containers?topic=containers-classic-flavors#osa)
+
+    * [Osaka flavors](/docs/containers?topic=containers-classic-flavors#osa-balanced)
+
+    * [Osaka flavors](/docs/containers?topic=containers-classic-flavors#osa-compute)
+
+    * [Osaka flavors](/docs/containers?topic=containers-classic-flavors#osa-memory)
+
+    * [Osaka flavors](/docs/containers?topic=containers-classic-flavors#osa-uhmemory)
 
 * [`par`](/docs/containers?topic=containers-classic-flavors#par)
 
+    * [Paris flavors](/docs/containers?topic=containers-classic-flavors#par-balanced)
+
+    * [Paris flavors](/docs/containers?topic=containers-classic-flavors#par-compute)
+
+    * [Paris flavors](/docs/containers?topic=containers-classic-flavors#par-memory)
+
+    * [Paris flavors](/docs/containers?topic=containers-classic-flavors#par-uhmemory)
+
 * [`sao`](/docs/containers?topic=containers-classic-flavors#sao)
+
+    * [South America flavors](/docs/containers?topic=containers-classic-flavors#sao-balanced)
+
+    * [South America flavors](/docs/containers?topic=containers-classic-flavors#sao-memory)
+
+    * [South America flavors](/docs/containers?topic=containers-classic-flavors#sao-uhmemory)
 
 * [`sjc`](/docs/containers?topic=containers-classic-flavors#sjc)
 
+    * [San Jose flavors](/docs/containers?topic=containers-classic-flavors#sjc-balanced)
+
+    * [San Jose flavors](/docs/containers?topic=containers-classic-flavors#sjc-compute)
+
+    * [San Jose flavors](/docs/containers?topic=containers-classic-flavors#sjc-memory)
+
+    * [San Jose flavors](/docs/containers?topic=containers-classic-flavors#sjc-uhmemory)
+
 * [`sng`](/docs/containers?topic=containers-classic-flavors#sng)
+
+    * [Singapore flavors](/docs/containers?topic=containers-classic-flavors#sng-balanced)
+
+    * [Singapore flavors](/docs/containers?topic=containers-classic-flavors#sng-compute)
+
+    * [Singapore flavors](/docs/containers?topic=containers-classic-flavors#sng-memory)
+
+    * [Singapore flavors](/docs/containers?topic=containers-classic-flavors#sng-uhmemory)
 
 * [`syd`](/docs/containers?topic=containers-classic-flavors#syd)
 
+    * [Sydney flavors](/docs/containers?topic=containers-classic-flavors#syd-balanced)
+
+    * [Sydney flavors](/docs/containers?topic=containers-classic-flavors#syd-compute)
+
+    * [Sydney flavors](/docs/containers?topic=containers-classic-flavors#syd-memory)
+
+    * [Sydney flavors](/docs/containers?topic=containers-classic-flavors#syd-uhmemory)
+
 * [`tok`](/docs/containers?topic=containers-classic-flavors#tok)
+
+    * [Tokyo flavors](/docs/containers?topic=containers-classic-flavors#tok-balanced)
+
+    * [Tokyo flavors](/docs/containers?topic=containers-classic-flavors#tok-compute)
+
+    * [Tokyo flavors](/docs/containers?topic=containers-classic-flavors#tok-memory)
+
+    * [Tokyo flavors](/docs/containers?topic=containers-classic-flavors#tok-uhmemory)
 
 * [`tor`](/docs/containers?topic=containers-classic-flavors#tor)
 
+    * [Toronto flavors](/docs/containers?topic=containers-classic-flavors#tor-balanced)
+
+    * [Toronto flavors](/docs/containers?topic=containers-classic-flavors#tor-compute)
+
+    * [Toronto flavors](/docs/containers?topic=containers-classic-flavors#tor-memory)
+
+    * [Toronto flavors](/docs/containers?topic=containers-classic-flavors#tor-uhmemory)
+
 * [`wdc`](/docs/containers?topic=containers-classic-flavors#wdc)
+
+    * [Washington DC flavors](/docs/containers?topic=containers-classic-flavors#wdc-balanced)
+
+    * [Washington DC flavors](/docs/containers?topic=containers-classic-flavors#wdc-compute)
+
+    * [Washington DC flavors](/docs/containers?topic=containers-classic-flavors#wdc-memory)
+
+    * [Washington DC flavors](/docs/containers?topic=containers-classic-flavors#wdc-uhmemory)
 
 
 ## FAQs
