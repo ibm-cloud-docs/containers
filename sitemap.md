@@ -237,6 +237,14 @@ subcollection: containers
 
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
 
+    * [10 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1023)
+
+        * Istio add-on version `1.19.1`.
+
+    * [9 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct923)
+
+        * Worker node fix packs are available.
+
     * [5 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct523)
 
         * Ingress ALB versions `1.8.1_5384_iks`, `1.6.4_5406_iks`, and `1.5.1_5407_iks`

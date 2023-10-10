@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-10-06"
+lastupdated: "2023-10-10"
 
 keywords: containers, kubernetes, release notes
 
@@ -28,6 +28,36 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2023
 {: #containers-oct23}
+
+
+
+### 10 October 2023
+{: #containers-oct1023}
+{: release-note} 
+
+Istio add-on version `1.19.1`.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
+
+
+### 9 October 2023
+{: #containers-oct923}
+{: release-note} 
+
+
+
+Worker node fix packs are available.
+
+:   [1.28.2_1529](/docs/containers?topic=containers-changelog_128)
+:   [1.27.5_1542](/docs/containers?topic=containers-changelog_127)
+:   [1.26.8_1556](/docs/containers?topic=containers-changelog_126)
+:   [1.25.13_1563](/docs/containers?topic=containers-changelog_125)
+:   [1.24.16_1583](/docs/containers?topic=containers-changelog_124)
+
+
+
+
 
 
 
