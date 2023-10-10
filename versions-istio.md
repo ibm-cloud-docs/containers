@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-10-04"
+lastupdated: "2023-10-10"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -23,15 +23,30 @@ View information for patch and minor version updates to the [managed Istio add-o
 * **Minor version updates**: To update your Istio components to the most recent minor version of Istio that is supported by {{site.data.keyword.containerlong_notm}}, such as from version 1.8 to 1.9, follow the steps in [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor). When a minor version (`n`) of the Istio add-on is released, 1 minor version behind (`n-1`) is supported for typically 6 weeks after the latest version release date.
 * **`istioctl` and sidecar updates**: Whenever the managed Istio add-on is updated, make sure that you [update your `istioctl` client and the Istio sidecars for your app](/docs/containers?topic=containers-istio#update_client_sidecar) to match the Istio version of the add-on. You can check whether the versions of your `istioctl` client and the Istio add-on control plane match by running `istioctl version`.
 
-Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
+To view a list of add-ons and the supported cluster versions, run the following command or see the [Supported cluster add-on versions](/docs/containers?topic=containers-supported-cluster-addon-versions).
 
-| Istio add-on version | Supported? | Kubernetes version support |
-| --- | --- | --- |
-| 1.18 | Yes | 1.24, 1.25, 1.26, 1.27 |
-| 1.17 | Yes | 1.24, 1.25, 1.26 |
-| 1.16 | No | 1.24, 1.25, 1.26 |
-| 1.15 | No | 1.24, 1.25 |
-{: caption="Supported Istio versions" caption-side="bottom"}
+ibmcloud ks cluster addon versions
+{: pre}
+
+## Version 1.19
+{: #v119}
+
+### Change log for 1.19.1, released 10 October 2023
+{: #1191}
+
+Review the changes that are included in version 1.19.1 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.18.3
+
+Current version
+:   1.19.1
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.19.1](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.1/){:external}.
+:   Upstream announcement for [Istio 1.19.0](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.1/){:external}.   
+:   The managed Istio add-on does not support ambient mesh at this time.
 
 ## Version 1.18
 {: #v118}

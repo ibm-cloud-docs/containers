@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-10-09"
+lastupdated: "2023-10-10"
 
 keywords: containers
 subcollection: containers
@@ -236,6 +236,14 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
+
+    * [10 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1023)
+
+        * [Change log]{: tag-purple} Istio add-on version `1.19.1`.
+
+    * [9 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct923)
+
+        * [Change log]{: tag-purple} Worker node fix packs are available.
 
     * [5 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct523)
 
@@ -5831,6 +5839,8 @@ subcollection: containers
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
 
+    * [Change log for worker node fix pack 1.28.2_1529, released 9 October 2023](/docs/containers?topic=containers-changelog_128#1282_1529_W)
+
     * [Change log for worker node fix pack 1.28.2_1528, released 27 September 2023](/docs/containers?topic=containers-changelog_128#1282_1528_W)
 
     * [Change log for master fix pack 1.28.2_1527 and worker node fix pack 1.28.1_1523, released 20 September 2023](/docs/containers?topic=containers-changelog_128#1.28.2_1527M-and-1.28.1_1523W)
@@ -5895,6 +5905,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for worker node fix pack 1.27.5_1542, released 9 October 2023](/docs/containers?topic=containers-changelog_127#1275_1542_W)
 
     * [Change log for worker node fix pack 1.27.5_1541, released 27 September 2023](/docs/containers?topic=containers-changelog_127#1275_1541_W)
 
@@ -5986,6 +5998,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for worker node fix pack 1.26.8_1556, released 9 October 2023](/docs/containers?topic=containers-changelog_126#1268_1556_W)
 
     * [Change log for worker node fix pack 1.26.8_1555, released 27 September 2023](/docs/containers?topic=containers-changelog_126#1268_1555_W)
 
@@ -6103,6 +6117,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for worker node fix pack 1.25.13_1563, released 9 October 2023](/docs/containers?topic=containers-changelog_125#12513_1563_W)
 
     * [Change log for worker node fix pack 1.25.12_1562, released 27 September 2023](/docs/containers?topic=containers-changelog_125#12512_1562_W)
 
@@ -6244,6 +6260,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.17_1588, released 9 October 2023](/docs/containers?topic=containers-changelog_124#12417_1588_W)
 
     * [Change log for worker node fix pack 1.24.17_1587, released 27 September 2023](/docs/containers?topic=containers-changelog_124#12417_1587_W)
 
@@ -6779,6 +6797,10 @@ subcollection: containers
     * [01 January 2019](/docs/containers?topic=containers-cluster-add-ons-changelog#01-jan-2019)
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
+
+    * [Change log for 1.19.1, released 10 October 2023](/docs/containers?topic=containers-istio-changelog#1191)
 
 * [Version 1.18](/docs/containers?topic=containers-istio-changelog#v118)
 
@@ -8880,25 +8902,25 @@ subcollection: containers
 
 [VPC flavors](/docs/containers?topic=containers-vpc-flavors#vpc-flavors)
 
-* [`au-syd`](/docs/containers?topic=containers-vpc-flavors#au-syd)
+* [Australia](/docs/containers?topic=containers-vpc-flavors#australia)
 
-* [`br-sao`](/docs/containers?topic=containers-vpc-flavors#br-sao)
+* [Brazil](/docs/containers?topic=containers-vpc-flavors#brazil)
 
-* [`ca-tor`](/docs/containers?topic=containers-vpc-flavors#ca-tor)
+* [Canada](/docs/containers?topic=containers-vpc-flavors#canada)
 
-* [`eu-de`](/docs/containers?topic=containers-vpc-flavors#eu-de)
+* [Europe](/docs/containers?topic=containers-vpc-flavors#europe)
 
-* [`eu-es`](/docs/containers?topic=containers-vpc-flavors#eu-es)
+* [Europe](/docs/containers?topic=containers-vpc-flavors#europe)
 
-* [`eu-gb`](/docs/containers?topic=containers-vpc-flavors#eu-gb)
+* [Europe](/docs/containers?topic=containers-vpc-flavors#europe)
 
-* [`jp-osa`](/docs/containers?topic=containers-vpc-flavors#jp-osa)
+* [Japan](/docs/containers?topic=containers-vpc-flavors#japan)
 
-* [`jp-tok`](/docs/containers?topic=containers-vpc-flavors#jp-tok)
+* [Japan](/docs/containers?topic=containers-vpc-flavors#japan)
 
-* [`us-east`](/docs/containers?topic=containers-vpc-flavors#us-east)
+* [United States](/docs/containers?topic=containers-vpc-flavors#united-states)
 
-* [`us-south`](/docs/containers?topic=containers-vpc-flavors#us-south)
+* [United States](/docs/containers?topic=containers-vpc-flavors#united-states)
 
 
 ## Classic flavors
@@ -8907,37 +8929,37 @@ subcollection: containers
 
 [Classic flavors](/docs/containers?topic=containers-classic-flavors#classic-flavors)
 
-* [`ams`](/docs/containers?topic=containers-classic-flavors#ams)
+* [Amsterdam](/docs/containers?topic=containers-classic-flavors#amsterdam)
 
-* [`che`](/docs/containers?topic=containers-classic-flavors#che)
+* [Chennai](/docs/containers?topic=containers-classic-flavors#chennai)
 
-* [`dal`](/docs/containers?topic=containers-classic-flavors#dal)
+* [Dallas](/docs/containers?topic=containers-classic-flavors#dallas)
 
-* [`fra`](/docs/containers?topic=containers-classic-flavors#fra)
+* [France](/docs/containers?topic=containers-classic-flavors#france)
 
-* [`lon`](/docs/containers?topic=containers-classic-flavors#lon)
+* [London](/docs/containers?topic=containers-classic-flavors#london)
 
-* [`mil`](/docs/containers?topic=containers-classic-flavors#mil)
+* [Milan](/docs/containers?topic=containers-classic-flavors#milan)
 
-* [`mon`](/docs/containers?topic=containers-classic-flavors#mon)
+* [Montreal](/docs/containers?topic=containers-classic-flavors#montreal)
 
-* [`osa`](/docs/containers?topic=containers-classic-flavors#osa)
+* [Osaka](/docs/containers?topic=containers-classic-flavors#osaka)
 
-* [`par`](/docs/containers?topic=containers-classic-flavors#par)
+* [Paris](/docs/containers?topic=containers-classic-flavors#paris)
 
-* [`sao`](/docs/containers?topic=containers-classic-flavors#sao)
+* [South America](/docs/containers?topic=containers-classic-flavors#south-america)
 
-* [`sjc`](/docs/containers?topic=containers-classic-flavors#sjc)
+* [San Jose](/docs/containers?topic=containers-classic-flavors#san-jose)
 
-* [`sng`](/docs/containers?topic=containers-classic-flavors#sng)
+* [Singapore](/docs/containers?topic=containers-classic-flavors#singapore)
 
-* [`syd`](/docs/containers?topic=containers-classic-flavors#syd)
+* [Sydney](/docs/containers?topic=containers-classic-flavors#sydney)
 
-* [`tok`](/docs/containers?topic=containers-classic-flavors#tok)
+* [Tokyo](/docs/containers?topic=containers-classic-flavors#tokyo)
 
-* [`tor`](/docs/containers?topic=containers-classic-flavors#tor)
+* [Toronto](/docs/containers?topic=containers-classic-flavors#toronto)
 
-* [`wdc`](/docs/containers?topic=containers-classic-flavors#wdc)
+* [Washington DC](/docs/containers?topic=containers-classic-flavors#washington-dc)
 
 
 ## FAQs
