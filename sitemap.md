@@ -6798,6 +6798,10 @@ subcollection: containers
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
+* [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
+
+    * [Change log for 1.19.1, released 10 October 2023](/docs/containers?topic=containers-istio-changelog#1191)
+
 * [Version 1.18](/docs/containers?topic=containers-istio-changelog#v118)
 
     * [Changelog for 1.18.3, released 3 October 2023](/docs/containers?topic=containers-istio-changelog#1183)
