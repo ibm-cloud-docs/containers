@@ -8914,9 +8914,9 @@ subcollection: containers
 
 * [Japan](/docs/containers?topic=containers-vpc-flavors#japan)
 
-* [United States](/docs/containers?topic=containers-vpc-flavors#united)
+* [United States](/docs/containers?topic=containers-vpc-flavors#united-states)
 
-* [United States](/docs/containers?topic=containers-vpc-flavors#united)
+* [United States](/docs/containers?topic=containers-vpc-flavors#united-states)
 
 
 ## Classic flavors
@@ -8943,9 +8943,9 @@ subcollection: containers
 
 * [Paris](/docs/containers?topic=containers-classic-flavors#paris)
 
-* [South America](/docs/containers?topic=containers-classic-flavors#south)
+* [South America](/docs/containers?topic=containers-classic-flavors#south-america)
 
-* [San Jose](/docs/containers?topic=containers-classic-flavors#san)
+* [San Jose](/docs/containers?topic=containers-classic-flavors#san-jose)
 
 * [Singapore](/docs/containers?topic=containers-classic-flavors#singapore)
 
@@ -8955,7 +8955,7 @@ subcollection: containers
 
 * [Toronto](/docs/containers?topic=containers-classic-flavors#toronto)
 
-* [Washington DC](/docs/containers?topic=containers-classic-flavors#washington)
+* [Washington DC](/docs/containers?topic=containers-classic-flavors#washington-dc)
 
 
 ## FAQs
