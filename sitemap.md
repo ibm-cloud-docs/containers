@@ -8898,25 +8898,25 @@ subcollection: containers
 
 [VPC flavors](/docs/containers?topic=containers-vpc-flavors#vpc-flavors)
 
-* [Australia](/docs/containers?topic=containers-vpc-flavors#Australia)
+* [Australia](/docs/containers?topic=containers-vpc-flavors#australia)
 
-* [Brazil](/docs/containers?topic=containers-vpc-flavors#Brazil)
+* [Brazil](/docs/containers?topic=containers-vpc-flavors#brazil)
 
-* [Canada](/docs/containers?topic=containers-vpc-flavors#Canada)
+* [Canada](/docs/containers?topic=containers-vpc-flavors#canada)
 
-* [Europe](/docs/containers?topic=containers-vpc-flavors#Europe)
+* [Europe](/docs/containers?topic=containers-vpc-flavors#europe)
 
-* [Europe](/docs/containers?topic=containers-vpc-flavors#Europe)
+* [Europe](/docs/containers?topic=containers-vpc-flavors#europe)
 
-* [Europe](/docs/containers?topic=containers-vpc-flavors#Europe)
+* [Europe](/docs/containers?topic=containers-vpc-flavors#europe)
 
-* [Japan](/docs/containers?topic=containers-vpc-flavors#Japan)
+* [Japan](/docs/containers?topic=containers-vpc-flavors#japan)
 
-* [Japan](/docs/containers?topic=containers-vpc-flavors#Japan)
+* [Japan](/docs/containers?topic=containers-vpc-flavors#japan)
 
-* [United States](/docs/containers?topic=containers-vpc-flavors#United)
+* [United States](/docs/containers?topic=containers-vpc-flavors#united)
 
-* [United States](/docs/containers?topic=containers-vpc-flavors#United)
+* [United States](/docs/containers?topic=containers-vpc-flavors#united)
 
 
 ## Classic flavors
@@ -8925,37 +8925,37 @@ subcollection: containers
 
 [Classic flavors](/docs/containers?topic=containers-classic-flavors#classic-flavors)
 
-* [Amsterdam](/docs/containers?topic=containers-classic-flavors#Amsterdam)
+* [Amsterdam](/docs/containers?topic=containers-classic-flavors#amsterdam)
 
-* [Chennai](/docs/containers?topic=containers-classic-flavors#Chennai)
+* [Chennai](/docs/containers?topic=containers-classic-flavors#chennai)
 
-* [Dallas](/docs/containers?topic=containers-classic-flavors#Dallas)
+* [Dallas](/docs/containers?topic=containers-classic-flavors#dallas)
 
-* [France](/docs/containers?topic=containers-classic-flavors#France)
+* [France](/docs/containers?topic=containers-classic-flavors#france)
 
-* [London](/docs/containers?topic=containers-classic-flavors#London)
+* [London](/docs/containers?topic=containers-classic-flavors#london)
 
-* [Milan](/docs/containers?topic=containers-classic-flavors#Milan)
+* [Milan](/docs/containers?topic=containers-classic-flavors#milan)
 
-* [Montreal](/docs/containers?topic=containers-classic-flavors#Montreal)
+* [Montreal](/docs/containers?topic=containers-classic-flavors#montreal)
 
-* [Osaka](/docs/containers?topic=containers-classic-flavors#Osaka)
+* [Osaka](/docs/containers?topic=containers-classic-flavors#osaka)
 
-* [Paris](/docs/containers?topic=containers-classic-flavors#Paris)
+* [Paris](/docs/containers?topic=containers-classic-flavors#paris)
 
-* [South America](/docs/containers?topic=containers-classic-flavors#South)
+* [South America](/docs/containers?topic=containers-classic-flavors#south)
 
-* [San Jose](/docs/containers?topic=containers-classic-flavors#San)
+* [San Jose](/docs/containers?topic=containers-classic-flavors#san)
 
-* [Singapore](/docs/containers?topic=containers-classic-flavors#Singapore)
+* [Singapore](/docs/containers?topic=containers-classic-flavors#singapore)
 
-* [Sydney](/docs/containers?topic=containers-classic-flavors#Sydney)
+* [Sydney](/docs/containers?topic=containers-classic-flavors#sydney)
 
-* [Tokyo](/docs/containers?topic=containers-classic-flavors#Tokyo)
+* [Tokyo](/docs/containers?topic=containers-classic-flavors#tokyo)
 
-* [Toronto](/docs/containers?topic=containers-classic-flavors#Toronto)
+* [Toronto](/docs/containers?topic=containers-classic-flavors#toronto)
 
-* [Washington DC](/docs/containers?topic=containers-classic-flavors#Washington)
+* [Washington DC](/docs/containers?topic=containers-classic-flavors#washington)
 
 
 ## FAQs
