@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-10-10"
+lastupdated: "2023-10-11"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -45,7 +45,7 @@ Current version
 
 Updates in this version
 :   See the Istio release notes for [Istio 1.19.1](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.1/){:external}.
-:   Upstream announcement for [Istio 1.19.0](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.1/){:external}.   
+:   Upstream announcement for [Istio 1.19.0](https://istio.io/latest/news/releases/1.19.x/announcing-1.19/){:external}.   
 :   The managed Istio add-on does not support ambient mesh at this time.
 
 ## Version 1.18
