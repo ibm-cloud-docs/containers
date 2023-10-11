@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-10-10"
+lastupdated: "2023-10-11"
 
 keywords: containers, kubernetes, release notes
 
@@ -35,9 +35,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-oct1023}
 {: release-note}
 
+CLI version `1.0.573` is available.
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 
-[Change log]{: tag-purple} Istio add-on version `1.19.1`.
+
+Istio add-on version `1.19.1`.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
 
 
