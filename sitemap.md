@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-10-11"
+lastupdated: "2023-10-12"
 
 keywords: containers
 subcollection: containers
@@ -236,6 +236,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
+
+    * [12 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1223)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.19`
 
     * [10 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1023)
 
@@ -7379,6 +7383,8 @@ subcollection: containers
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.19, released 12 October 2023](/docs/containers?topic=containers-cos_plugin_changelog#02219_object_plugin)
 
 * [Change log for version 2.2.18, released 7 September 2023](/docs/containers?topic=containers-cos_plugin_changelog#02218_object_plugin)
 
