@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-10-06"
+lastupdated: "2023-10-12"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 subcollection: containers
@@ -46,6 +46,14 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ## Version 1.8.1
 {: #1_8_1}
 
+1.8.1 is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image.
+
+
+### 1.8.1_5434_iks, released 11 October 2023
+{: #1.8.1_5434_iks}
+
+- Go version update.
+ 
 
 ### 1.8.1_5384_iks, released 5 October 2023
 {: #1.8.1_5384_iks}
@@ -63,6 +71,11 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 
 ## Version 1.6.4
 {: #1_6_4}
+
+### 1.6.4_5435_iks, released 11 October 2023
+{: #1.6.4_5435_iks}
+
+Go version update.
 
 ### 1.6.4_5406_iks, released 5 October 2023
 {: #1.6.4_5406_iks}
@@ -151,6 +164,11 @@ TLS 1.0 and TLS 1.1 are no longer supported. Upgrade to the newer TLS version, o
 
 ## Version 1.5.1
 {: #1_5_1}
+
+### 1.5.1_5436_iks, released 11 October 2023
+{: #1.5.1_5436_iks}
+
+Go version update.
 
 ### 1.5.1_5407_iks, released 5 October 2023
 {: #1.5.1_5407_iks}
@@ -683,8 +701,6 @@ Resolves [CVE-2022-1271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022
 
 ### Version 1.1.1_1949_iks, released on 25 January 2022
 {: #1.1.1_1949_iks}
-
-Version 1.1.1_1949_iks is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. 
 
 - [CVE-2021-44716](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44716){: external}
 - [CVE-2021-44717](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44717){: external}
