@@ -247,7 +247,7 @@ subcollection: containers
 
         * CLI version `1.0.573` is available.
 
-        * Istio add-on version `1.19.1`.
+        * Istio add-on version `1.19.3`.
 
     * [9 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct923)
 
@@ -6816,7 +6816,7 @@ subcollection: containers
 
 * [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
 
-    * [Change log for 1.19.1, released 10 October 2023](/docs/containers?topic=containers-istio-changelog#1191)
+    * [Change log for 1.19.3, released 10 October 2023](/docs/containers?topic=containers-istio-changelog#1193)
 
 * [Version 1.18](/docs/containers?topic=containers-istio-changelog#v118)
 

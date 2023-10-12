@@ -46,14 +46,13 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ## Version 1.8.1
 {: #1_8_1}
 
-1.8.1 is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image.
-
+1.8.1 is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. 
 
 ### 1.8.1_5434_iks, released 11 October 2023
 {: #1.8.1_5434_iks}
 
 - Go version update.
- 
+
 
 ### 1.8.1_5384_iks, released 5 October 2023
 {: #1.8.1_5384_iks}
