@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-10-11"
+lastupdated: "2023-10-12"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -31,22 +31,24 @@ ibmcloud ks cluster addon versions
 ## Version 1.19
 {: #v119}
 
-### Change log for 1.19.1, released 10 October 2023
-{: #1191}
+### Change log for 1.19.3, released 10 October 2023
+{: #1193}
 
-Review the changes that are included in version 1.19.1 of the managed Istio add-on.
+Review the changes that are included in version 1.19.3 of the managed Istio add-on.
 {: shortdesc}
 
 Previous version
 :   1.18.3
 
 Current version
-:   1.19.1
+:   1.19.3
 
 Updates in this version
-:   See the Istio release notes for [Istio 1.19.1](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.1/){:external}.
-:   Upstream announcement for [Istio 1.19.0](https://istio.io/latest/news/releases/1.19.x/announcing-1.19/){:external}.   
-:   The managed Istio add-on does not support ambient mesh at this time.
+:   For more information, see the [Istio security bulletin 2023-004](https://istio.io/latest/news/security/istio-security-2023-004/){: external}
+:   See the Istio release notes for [Istio 1.19.3](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.3/.){:external}.
+:   Upstream announcement for [Istio 1.19.0](https://istio.io/latest/news/releases/1.19.x/announcing-1.19/.){:external}.   
+:   Addon-Istio does not support ambient mesh at this time
+
 
 ## Version 1.18
 {: #v118}

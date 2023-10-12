@@ -51,7 +51,7 @@ CLI version `1.0.573` is available.
 
 
 
-Istio add-on version `1.19.1`.
+Istio add-on version `1.19.3`.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
 
 
