@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-08-21"
+lastupdated: "2023-10-13"
 
 keywords: kubernetes, 1.22, versions, update, upgrade
 
@@ -16,15 +16,12 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-Kubernetes version 1.22 becomes unsupported on 14 September 2022. Update your cluster to at least [version 1.23](/docs/containers?topic=containers-cs_versions_123) as soon as possible.
-{: deprecated}
+Kubernetes version 1.22 is no longer supported.
+{: important}
 
 
 Review information about version 1.22 of {{site.data.keyword.containerlong}}, released 29 Sept 2021.
 {: shortdesc}
-
-Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
-{: tip}
 
 ![This badge indicates Kubernetes version 1.22 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.22 certification badge" caption-side="bottom"}
 
