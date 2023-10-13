@@ -4278,7 +4278,7 @@ subcollection: containers
 
     * [Credentials](/docs/containers?topic=containers-ingress-domains#ingress-domains-ui-credentials)
 
-* [Managing your domain in the console](/docs/containers?topic=containers-ingress-domains#ui)
+* [Managing your domain in the console](/docs/containers?topic=containers-ingress-domains#ingress-domains-ui-manage)
 
 * [Setting up domains with the managed {{site.data.keyword.cloud_notm}} internal provider](/docs/containers?topic=containers-ingress-domains#ingress-domain-int)
 
