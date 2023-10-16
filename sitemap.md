@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-10-13"
+lastupdated: "2023-10-16"
 
 keywords: containers
 subcollection: containers
@@ -3769,13 +3769,17 @@ subcollection: containers
     * [Example daemonset to update a containerd custom registry configuration](/docs/containers?topic=containers-registry#ds-example-registry)
 
 
-## Setting up continuous integration and delivery
-{: #sitemap_setting_up_continuous_integration_and_delivery}
+## Continuous integration and delivery for app development and deployment
+{: #sitemap_continuous_integration_and_delivery_for_app_development_and_deployment}
 
 
-[Setting up continuous integration and delivery](/docs/containers?topic=containers-cicd#cicd)
+[Continuous integration and delivery for app development and deployment](/docs/containers?topic=containers-cicd#cicd)
 
-* [Other resources](/docs/containers?topic=containers-cicd#cicd-other)
+* [Before you begin](/docs/containers?topic=containers-cicd#cicd_before)
+
+* [Creating a toolchain with Delivery Pipeline](/docs/containers?topic=containers-cicd#cicd_toolchain)
+
+* [Other resources for automating your pipeline](/docs/containers?topic=containers-cicd#cicd-other)
 
 
 ## Developing and deploying apps

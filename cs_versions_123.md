@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-03-22"
+lastupdated: "2023-10-13"
 
 keywords: kubernetes, 1.23, versions, update, upgrade
 
@@ -18,14 +18,11 @@ subcollection: containers
 # 1.23 version information and update actions
 {: #cs_versions_123}
 
-Kubernetes version 1.23 becomes unsupported on 08 May 2023. Update your cluster to at least [version 1.24](/docs/containers?topic=containers-cs_versions_124) as soon as possible.
-{: deprecated}
+Kubernetes version 1.23 is no longer supported. Update your cluster to at least [version 1.24](/docs/containers?topic=containers-cs_versions_124) as soon as possible.
+{: important}
 
-Review information about version 1.23 of {{site.data.keyword.containerlong}}, released 09 Feb 2022.
+Review information about version 1.23.
 {: shortdesc}
-
-Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
-{: tip}
 
 ![This badge indicates Kubernetes version 1.23 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.23 certification badge" caption-side="bottom"}
 
