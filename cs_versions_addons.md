@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-10-12"
+lastupdated: "2023-10-17"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 subcollection: containers
@@ -48,6 +48,17 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 
 1.8.1 is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. 
 
+### 1.8.1_5543_iks, released 17 October 2023
+{: #1.8.1_5543_iks}
+
+
+- [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325){: external}
+- [CVE-2023-38545](https://nvd.nist.gov/vuln/detail/CVE-2023-38545){: external}
+- [CVE-2023-38546](https://nvd.nist.gov/vuln/detail/CVE-2023-38546){: external}
+- [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
+
+
+
 ### 1.8.1_5434_iks, released 11 October 2023
 {: #1.8.1_5434_iks}
 
@@ -70,6 +81,15 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 
 ## Version 1.6.4
 {: #1_6_4}
+
+### 1.6.4_5544_iks, released 17 October 2023
+{: #1.6.4_5544_iks}
+
+
+- [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325){: external}
+- [CVE-2023-38545](https://nvd.nist.gov/vuln/detail/CVE-2023-38545){: external}
+- [CVE-2023-38546](https://nvd.nist.gov/vuln/detail/CVE-2023-38546){: external}
+- [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
 
 ### 1.6.4_5435_iks, released 11 October 2023
 {: #1.6.4_5435_iks}
@@ -163,6 +183,15 @@ TLS 1.0 and TLS 1.1 are no longer supported. Upgrade to the newer TLS version, o
 
 ## Version 1.5.1
 {: #1_5_1}
+
+### 1.5.1_5542_iks, released 17 October 2023
+{: #1.5.1_5542_iks}
+
+
+- [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325){: external}
+- [CVE-2023-38545](https://nvd.nist.gov/vuln/detail/CVE-2023-38545){: external}
+- [CVE-2023-38546](https://nvd.nist.gov/vuln/detail/CVE-2023-38546){: external}
+
 
 ### 1.5.1_5436_iks, released 11 October 2023
 {: #1.5.1_5436_iks}
