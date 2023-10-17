@@ -29,6 +29,19 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## October 2023
 {: #containers-oct23}
 
+### 18 October 2023
+{: #containers-oct1823}
+{: release-note}
+
+
+
+[Change log]{: tag-purple} Istio add-on version `1.18.5` and `1.17.8`.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
+
+
+
 
 ### 17 October 2023
 {: #containers-oct1723}
