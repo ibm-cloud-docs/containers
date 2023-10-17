@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-10-16"
+lastupdated: "2023-10-17"
 
 keywords: containers
 subcollection: containers
@@ -237,17 +237,21 @@ subcollection: containers
 
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
 
-    * [11 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1223)
+    * [17 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1723)
 
-        * Ingress ALB versions `1.5.1_5436_iks`, `1.6.4_5435_iks`, and `1.8.1_5434_iks`
+        * [Change log]{: tag-purple} Ingress ALB versions `1.8.1_5543_iks`, `1.6.4_5544_iks`, and `1.5.1_5542_iks`
 
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.19`
+    * [11 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1123)
+
+        * [Change log]{: tag-purple} Ingress ALB versions `1.5.1_5436_iks`, `1.6.4_5435_iks`, and `1.8.1_5434_iks`
+
+        * [Change log]{: tag-purple} {{site.data.keyword.cos_full_notm}} plug-in version `2.2.19`
 
     * [10 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1023)
 
-        * CLI version `1.0.573` is available.
+        * [Change log]{: tag-purple} CLI version `1.0.573` is available.
 
-        * Istio add-on version `1.19.3`.
+        * [Change log]{: tag-purple} Istio add-on version `1.19.3`.
 
     * [9 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct923)
 
@@ -6478,6 +6482,8 @@ subcollection: containers
 
 * [Version 1.8.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_8_1)
 
+    * [1.8.1_5543_iks, released 17 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.1_5543_iks)
+
     * [1.8.1_5434_iks, released 11 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.1_5434_iks)
 
     * [1.8.1_5384_iks, released 5 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.1_5384_iks)
@@ -6485,6 +6491,8 @@ subcollection: containers
     * [1.8.1_5317_iks, released 31 August 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.1_5317_iks)
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
+
+    * [1.6.4_5544_iks, released 17 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5544_iks)
 
     * [1.6.4_5435_iks, released 11 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5435_iks)
 
@@ -6513,6 +6521,8 @@ subcollection: containers
     * [1.6.4_3864_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3864_iks)
 
 * [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
+
+    * [1.5.1_5542_iks, released 17 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_5542_iks)
 
     * [1.5.1_5436_iks, released 11 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_5436_iks)
 
