@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-10-17"
+lastupdated: "2023-10-18"
 
 keywords: containers
 subcollection: containers
@@ -240,6 +240,8 @@ subcollection: containers
     * [18 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1823)
 
         * [Change log]{: tag-purple} Istio add-on version `1.18.5` and `1.17.8`.
+
+        * [Change log]{: tag-purple} ALB OAuth Proxy add-on version `2.0.0_1889`.
 
     * [17 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1723)
 
@@ -7525,6 +7527,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_1889, released on 18 October 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_1889)
 
     * [Version 2.0.0_1843, released on 26 September 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_1843)
 
