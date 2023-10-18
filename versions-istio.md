@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-10-12"
+lastupdated: "2023-10-17"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -52,6 +52,21 @@ Updates in this version
 
 ## Version 1.18
 {: #v118}
+
+### Changelog for 1.18.5, released 18 October 2023
+{: #1185}
+
+Previous version
+:   1.18.3
+
+Current version
+:   1.18.5
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.18.5](https://istio.io/latest/news/releases/1.18.x/announcing-1.18.5/.){: external}.
+:   Resolves [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487) and [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325).
+:   For more information, see the [Istio security bulletin 2023-004](https://istio.io/latest/news/security/istio-security-2023-004/){: external}.  
+
 
 ### Changelog for 1.18.3, released 3 October 2023
 {: #1183}
@@ -136,6 +151,21 @@ Updates in this version
 
 ## Version 1.17
 {: #v117}
+
+### Changelog for 1.17.8, released 18 October 2023
+{: #1178}
+
+Previous version
+:   1.17.6
+
+Current version
+:   1.17.8
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.17.8](https://istio.io/latest/news/releases/1.17.x/announcing-1.17.8/.){: external}.
+:   Resolves [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487) and [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325).
+:   For more information, see the [Istio security bulletin 2023-004](https://istio.io/latest/news/security/istio-security-2023-004/){: external}   
+
 
 ### Changelog for 1.17.6, released 3 October 2023
 {: #1176}

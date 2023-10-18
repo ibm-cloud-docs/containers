@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-10-17"
+lastupdated: "2023-10-18"
 
 keywords: containers, kubernetes, release notes
 
@@ -28,6 +28,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2023
 {: #containers-oct23}
+
+
+
+### 18 October 2023
+{: #containers-oct1823}
+{: release-note}
+
+
+
+[Change log]{: tag-purple} Istio add-on version `1.18.5` and `1.17.8`.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+  
+[Change log]{: tag-purple} ALB OAuth Proxy add-on version `2.0.0_1889`.
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+
+
+
+
 
 
 ### 17 October 2023

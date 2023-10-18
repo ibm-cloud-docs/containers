@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-10-10"
+lastupdated: "2023-10-18"
 
 keywords: kubernetes, node scaling, ca, autoscaler
 
@@ -24,8 +24,6 @@ Review the VPC Gen 2 worker node flavors by metro.
 
 If your account is allowlisted for flavors that are not listed below, you can find a list of available flavors by running **`ibmcloud ks flavor ls`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_flavor_ls).
 {: tip}
-
-
 
 
 

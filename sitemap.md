@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-10-17"
+lastupdated: "2023-10-18"
 
 keywords: containers
 subcollection: containers
@@ -236,6 +236,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
+
+    * [18 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1823)
+
+        * [Change log]{: tag-purple} Istio add-on version `1.18.5` and `1.17.8`.
+
+        * [Change log]{: tag-purple} ALB OAuth Proxy add-on version `2.0.0_1889`.
 
     * [17 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1723)
 
@@ -4818,7 +4824,7 @@ subcollection: containers
 
 * [Cold](/docs/containers?topic=containers-storage_cos_reference#cold)
 
-* [Flex](/docs/containers?topic=containers-storage_cos_reference#flex)
+* [Smart](/docs/containers?topic=containers-storage_cos_reference#smart)
 
 
 ## Setting up Portworx
@@ -6836,6 +6842,8 @@ subcollection: containers
 
 * [Version 1.18](/docs/containers?topic=containers-istio-changelog#v118)
 
+    * [Changelog for 1.18.5, released 18 October 2023](/docs/containers?topic=containers-istio-changelog#1185)
+
     * [Changelog for 1.18.3, released 3 October 2023](/docs/containers?topic=containers-istio-changelog#1183)
 
     * [Change log for 1.18.2, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1182)
@@ -6845,6 +6853,8 @@ subcollection: containers
     * [Change log for 1.18.0, released 12 July 2023](/docs/containers?topic=containers-istio-changelog#1180)
 
 * [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
+
+    * [Changelog for 1.17.8, released 18 October 2023](/docs/containers?topic=containers-istio-changelog#1178)
 
     * [Changelog for 1.17.6, released 3 October 2023](/docs/containers?topic=containers-istio-changelog#1176)
 
@@ -7517,6 +7527,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_1889, released on 18 October 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_1889)
 
     * [Version 2.0.0_1843, released on 26 September 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_1843)
 
