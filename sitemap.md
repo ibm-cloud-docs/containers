@@ -4824,7 +4824,7 @@ subcollection: containers
 
 * [Cold](/docs/containers?topic=containers-storage_cos_reference#cold)
 
-* [Flex](/docs/containers?topic=containers-storage_cos_reference#flex)
+* [Smart](/docs/containers?topic=containers-storage_cos_reference#smart)
 
 
 ## Setting up Portworx
