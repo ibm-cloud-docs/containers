@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-10-05"
+lastupdated: "2023-10-20"
 
 keywords: ingress, alb, manage albs, update, alb image
 
@@ -81,7 +81,7 @@ To set a time for automatic updates, you set the `updateStartTime` and `updateEn
     apiVersion: v1
     kind: ConfigMap
     metadata:
-        name: ingress-deploy-config
+        name: ibm-ingress-deploy-config
         namespace: kube-system
     data:
         "updatePercentage": "35"
