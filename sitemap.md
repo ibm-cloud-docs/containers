@@ -237,6 +237,10 @@ subcollection: containers
 
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
 
+    * [23 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct2323)
+
+        * [Change log]{: tag-purple} Ingress ALB version `1.8.4_5586_ikss`
+
     * [18 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1823)
 
         * [Change log]{: tag-purple} Istio add-on version `1.18.5` and `1.17.8`.
@@ -6485,6 +6489,10 @@ subcollection: containers
 [Ingress ALB and Fluentd version change log](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
+
+* [Version 1.8.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_8_4)
+
+    * [1.8.4_5586_iks, released 23 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_5586_iks)
 
 * [Version 1.8.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_8_1)
 
