@@ -2402,11 +2402,11 @@ subcollection: containers
 [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
 
 
-## Creating a cluster in your Virtual Private Cloud (VPC)
-{: #sitemap_creating_a_cluster_in_your_virtual_private_cloud_vpc}
+## Setting up your first cluster in your Virtual Private Cloud (VPC)
+{: #sitemap_setting_up_your_first_cluster_in_your_virtual_private_cloud_vpc}
 
 
-[Creating a cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial)
+[Setting up your first cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial)
 
 * [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
 
