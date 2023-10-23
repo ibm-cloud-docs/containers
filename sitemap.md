@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-10-20"
+lastupdated: "2023-10-23"
 
 keywords: containers
 subcollection: containers
@@ -236,6 +236,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
+
+    * [23 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct2323)
+
+        * [Change log]{: tag-purple} Ingress ALB version `1.8.4_5586_ikss`
 
     * [18 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1823)
 
@@ -2402,11 +2406,11 @@ subcollection: containers
 [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
 
 
-## Creating a cluster in your Virtual Private Cloud (VPC)
-{: #sitemap_creating_a_cluster_in_your_virtual_private_cloud_vpc}
+## Setting up your first cluster in your Virtual Private Cloud (VPC)
+{: #sitemap_setting_up_your_first_cluster_in_your_virtual_private_cloud_vpc}
 
 
-[Creating a cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial)
+[Setting up your first cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial)
 
 * [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
 
@@ -6486,6 +6490,10 @@ subcollection: containers
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
 
+* [Version 1.8.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_8_4)
+
+    * [1.8.4_5586_iks, released 23 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_5586_iks)
+
 * [Version 1.8.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_8_1)
 
     * [1.8.1_5543_iks, released 17 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.1_5543_iks)
@@ -8948,25 +8956,25 @@ subcollection: containers
 
 [VPC flavors](/docs/containers?topic=containers-vpc-flavors#vpc-flavors)
 
-* [Australia](/docs/containers?topic=containers-vpc-flavors#australia)
+* [Australia (`au-syd`)](/docs/containers?topic=containers-vpc-flavors#australia)
 
-* [Brazil](/docs/containers?topic=containers-vpc-flavors#brazil)
+* [Brazil (`br-sao`)](/docs/containers?topic=containers-vpc-flavors#brazil)
 
-* [Canada](/docs/containers?topic=containers-vpc-flavors#canada)
+* [Canada (`ca-tor`)](/docs/containers?topic=containers-vpc-flavors#canada)
 
-* [Europe](/docs/containers?topic=containers-vpc-flavors#europe)
+* [Europe (`eu-de`)](/docs/containers?topic=containers-vpc-flavors#europe)
 
-* [Europe](/docs/containers?topic=containers-vpc-flavors#europe)
+* [Europe (`eu-es`)](/docs/containers?topic=containers-vpc-flavors#europe)
 
-* [Europe](/docs/containers?topic=containers-vpc-flavors#europe)
+* [Europe (`eu-gb`)](/docs/containers?topic=containers-vpc-flavors#europe)
 
-* [Japan](/docs/containers?topic=containers-vpc-flavors#japan)
+* [Japan (`jp-osa`)](/docs/containers?topic=containers-vpc-flavors#japan)
 
-* [Japan](/docs/containers?topic=containers-vpc-flavors#japan)
+* [Japan (`jp-tok`)](/docs/containers?topic=containers-vpc-flavors#japan)
 
-* [United States](/docs/containers?topic=containers-vpc-flavors#united-states)
+* [United States (`us-east`)](/docs/containers?topic=containers-vpc-flavors#united-states)
 
-* [United States](/docs/containers?topic=containers-vpc-flavors#united-states)
+* [United States (`us-south`)](/docs/containers?topic=containers-vpc-flavors#united-states)
 
 
 ## Classic flavors
@@ -8975,37 +8983,37 @@ subcollection: containers
 
 [Classic flavors](/docs/containers?topic=containers-classic-flavors#classic-flavors)
 
-* [Amsterdam](/docs/containers?topic=containers-classic-flavors#amsterdam)
+* [Amsterdam (`ams`)](/docs/containers?topic=containers-classic-flavors#amsterdam)
 
-* [Chennai](/docs/containers?topic=containers-classic-flavors#chennai)
+* [Chennai (`che`)](/docs/containers?topic=containers-classic-flavors#chennai)
 
-* [Dallas](/docs/containers?topic=containers-classic-flavors#dallas)
+* [Dallas (`dal`)](/docs/containers?topic=containers-classic-flavors#dallas)
 
-* [France](/docs/containers?topic=containers-classic-flavors#france)
+* [France (`fra`)](/docs/containers?topic=containers-classic-flavors#france)
 
-* [London](/docs/containers?topic=containers-classic-flavors#london)
+* [London (`lon`)](/docs/containers?topic=containers-classic-flavors#london)
 
-* [Milan](/docs/containers?topic=containers-classic-flavors#milan)
+* [Milan (`mil`)](/docs/containers?topic=containers-classic-flavors#milan)
 
-* [Montreal](/docs/containers?topic=containers-classic-flavors#montreal)
+* [Montreal (`mon`)](/docs/containers?topic=containers-classic-flavors#montreal)
 
-* [Osaka](/docs/containers?topic=containers-classic-flavors#osaka)
+* [Osaka (`osa`)](/docs/containers?topic=containers-classic-flavors#osaka)
 
-* [Paris](/docs/containers?topic=containers-classic-flavors#paris)
+* [Paris (`par`)](/docs/containers?topic=containers-classic-flavors#paris)
 
-* [South America](/docs/containers?topic=containers-classic-flavors#south-america)
+* [South America (`sao`)](/docs/containers?topic=containers-classic-flavors#south-america)
 
-* [San Jose](/docs/containers?topic=containers-classic-flavors#san-jose)
+* [San Jose (`sjc`)](/docs/containers?topic=containers-classic-flavors#san-jose)
 
-* [Singapore](/docs/containers?topic=containers-classic-flavors#singapore)
+* [Singapore (`sng`)](/docs/containers?topic=containers-classic-flavors#singapore)
 
-* [Sydney](/docs/containers?topic=containers-classic-flavors#sydney)
+* [Sydney (`syd`)](/docs/containers?topic=containers-classic-flavors#sydney)
 
-* [Tokyo](/docs/containers?topic=containers-classic-flavors#tokyo)
+* [Tokyo (`tok`)](/docs/containers?topic=containers-classic-flavors#tokyo)
 
-* [Toronto](/docs/containers?topic=containers-classic-flavors#toronto)
+* [Toronto (`tor`)](/docs/containers?topic=containers-classic-flavors#toronto)
 
-* [Washington DC](/docs/containers?topic=containers-classic-flavors#washington-dc)
+* [Washington DC (`wdc`)](/docs/containers?topic=containers-classic-flavors#washington-dc)
 
 
 ## FAQs
