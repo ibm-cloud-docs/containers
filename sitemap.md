@@ -2412,9 +2412,11 @@ subcollection: containers
 
 [Setting up your first cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial)
 
+* [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
+
 * [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
 
-* [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
+* [What you'll get](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_rh_get)
 
 * [Prerequisites](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_prereqs)
 
