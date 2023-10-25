@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-10-10"
+lastupdated: "2023-10-25"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -40,6 +40,28 @@ Review the version 1.25 change log.
 
 
 
+
+
+### Change log for master fix pack 1.25.14_1564, released 25 October 2023
+{: #12514_1564_M}
+
+The following table shows the changes that are in the master fix pack 1.25.14_1564. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.4.2 | v1.4.4 | New version contains updates and security fixes. |
+| GPU device plug-in and installer | 8e87e60 | 4319682 | New version contains updates and security fixes. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1390 | 1487 | New version contains security fixes. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.10 | v2.4.12 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.25.13-3 | v1.25.14-6 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 4e2f346 | f0d3265 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.8.2 | v2.8.4 | New version contains updates and security fixes. |
+| Kubernetes | v1.25.13 | v1.25.14 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.14){: external}. |
+| Kubernetes NodeLocal DNS cache | 1.22.23 | 1.22.24 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.24){: external}. |
+| Portieris admission controller | v0.13.6 | v0.13.8 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.8){: external}. |
+{: caption="Changes since version 1.25.13_1561" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.25.13_1563, released 9 October 2023
