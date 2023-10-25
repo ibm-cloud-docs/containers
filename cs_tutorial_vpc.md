@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-10-23"
+lastupdated: "2023-10-25"
 
 keywords: kubernetes
 
@@ -32,16 +32,25 @@ Create an {{site.data.keyword.containerlong}} cluster in your Virtual Private Cl
 
 With **{{site.data.keyword.containerlong_notm}} clusters on VPC**, you can create your cluster in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-overview), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
 
-## Objectives
-{: #vpc_ks_objectives}
-
-In the tutorial lessons, you create an {{site.data.keyword.containerlong_notm}} cluster in a Virtual Private Cloud (VPC). Then, you deploy an app and expose the app publicly by using a load balancer.
-
 ## Audience
 {: #vpc_ks_audience}
 
 This tutorial is for administrators who are creating a cluster in {{site.data.keyword.containerlong_notm}} in VPC for the first time.
 {: shortdesc}
+
+## Objectives
+{: #vpc_ks_objectives}
+
+In the tutorial lessons, you create an {{site.data.keyword.containerlong_notm}} cluster in a Virtual Private Cloud (VPC). Then, you deploy an app and expose the app publicly by using a load balancer.
+
+## What you'll get
+{: #vpc_rh_get}
+
+In this tutorial, you will create the following resources. There are optional steps to delete these resources if you do not want to keep them after completing the tutorial. 
+
+- A VPC cluster
+- A simple Hello World app deployed to your cluster
+- A VPC load balancer to expose your app
 
 ## Prerequisites
 {: #vpc_ks_prereqs}

@@ -237,6 +237,12 @@ subcollection: containers
 
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
 
+    * [25 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct2523)
+
+        * [Change log]{: tag-purple} Master fix packs are available.
+
+        * [Change log]{: tag-purple} ALB OAuth Proxy add-on version `2.0.0_1901`.
+
     * [23 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct2323)
 
         * [Change log]{: tag-purple} Ingress ALB version `1.8.4_5586_ikss`
@@ -2412,9 +2418,11 @@ subcollection: containers
 
 [Setting up your first cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial)
 
+* [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
+
 * [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
 
-* [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
+* [What you'll get](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_rh_get)
 
 * [Prerequisites](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_prereqs)
 
@@ -5867,6 +5875,8 @@ subcollection: containers
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
 
+    * [Change log for master fix pack 1.28.2_1531, released 25 October 2023](/docs/containers?topic=containers-changelog_128#1282_1531_M)
+
     * [Change log for worker node fix pack 1.28.2_1529, released 9 October 2023](/docs/containers?topic=containers-changelog_128#1282_1529_W)
 
     * [Change log for worker node fix pack 1.28.2_1528, released 27 September 2023](/docs/containers?topic=containers-changelog_128#1282_1528_W)
@@ -5933,6 +5943,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for master fix pack 1.27.6_1544, released 25 October 2023](/docs/containers?topic=containers-changelog_127#1276_1544_M)
 
     * [Change log for worker node fix pack 1.27.5_1542, released 9 October 2023](/docs/containers?topic=containers-changelog_127#1275_1542_W)
 
@@ -6026,6 +6038,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for master fix pack 1.26.9_1557, released 25 October 2023](/docs/containers?topic=containers-changelog_126#1269_1557_M)
 
     * [Change log for worker node fix pack 1.26.8_1556, released 9 October 2023](/docs/containers?topic=containers-changelog_126#1268_1556_W)
 
@@ -6145,6 +6159,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for master fix pack 1.25.14_1564, released 25 October 2023](/docs/containers?topic=containers-changelog_125#12514_1564_M)
 
     * [Change log for worker node fix pack 1.25.13_1563, released 9 October 2023](/docs/containers?topic=containers-changelog_125#12513_1563_W)
 
@@ -7535,6 +7551,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_1901, released on 25 October 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_1901)
 
     * [Version 2.0.0_1889, released on 18 October 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_1889)
 

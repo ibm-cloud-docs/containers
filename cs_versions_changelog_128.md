@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-10-23"
+lastupdated: "2023-10-25"
 
 keywords: kubernetes, containers, change log, 128 change log, 128 updates
 
@@ -40,6 +40,28 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the version 1.28 change log.
 {: shortdesc}
 
+
+
+### Change log for master fix pack 1.28.2_1531, released 25 October 2023
+{: #1282_1531_M}
+
+The following table shows the changes that are in the master fix pack 1.28.2_1531. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.26.1 | v3.26.3 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/#v3.26.3){: external}. |
+| Cluster health image | v1.4.2 | v1.4.4 | New version contains updates and security fixes. |
+| GPU device plug-in and installer | 8e87e60 | 4319682 | New version contains updates and security fixes. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1390 | 1487 | New version contains security fixes. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.10 | v2.4.12 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.28.1-3 | v1.28.2-10 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 4e2f346 | f0d3265 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.8.2 | v2.8.4 | New version contains updates and security fixes. |
+| Kubernetes NodeLocal DNS cache | 1.22.23 | 1.22.24 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.24){: external}. |
+| Portieris admission controller | v0.13.6 | v0.13.8 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.8){: external}. |
+{: caption="Changes since version 1.28.2_1527" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.28.2_1529, released 9 October 2023
