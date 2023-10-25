@@ -237,6 +237,10 @@ subcollection: containers
 
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
 
+    * [25 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct2523)
+
+        * [Change log]{: tag-purple} Master fix packs are available.
+
     * [23 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct2323)
 
         * [Change log]{: tag-purple} Ingress ALB version `1.8.4_5586_ikss`
