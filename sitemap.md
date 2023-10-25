@@ -241,6 +241,8 @@ subcollection: containers
 
         * [Change log]{: tag-purple} Master fix packs are available.
 
+        * [Change log]{: tag-purple} ALB OAuth Proxy add-on version `2.0.0_1901`.
+
     * [23 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct2323)
 
         * [Change log]{: tag-purple} Ingress ALB version `1.8.4_5586_ikss`
@@ -7549,6 +7551,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_1901, released on 25 October 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_1901)
 
     * [Version 2.0.0_1889, released on 18 October 2023](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_1889)
 

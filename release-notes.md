@@ -44,6 +44,10 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 :   [1.25.14_1564](/docs/containers?topic=containers-changelog_125)
 
 
+[Change log]{: tag-purple} ALB OAuth Proxy add-on version `2.0.0_1901`.
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+
+
 
 
 
