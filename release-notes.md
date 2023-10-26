@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-10-25"
+lastupdated: "2023-10-26"
 
 keywords: containers, kubernetes, release notes
 
@@ -56,8 +56,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-oct2323}
 {: release-note}
 
+
+
+[Change log]{: tag-purple} Worker node fix packs are available. Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+:    Review the following change logs for your cluster version.
+    - [1.28.2_1532](/docs/containers?topic=containers-changelog_128)
+    - [1.27.6_1545](/docs/containers?topic=containers-changelog_127)
+    - [1.26.9_1558](/docs/containers?topic=containers-changelog_126)
+    - [1.25.14_1565](/docs/containers?topic=containers-changelog_125)
+    - [1.24.17_1589](/docs/containers?topic=containers-changelog_124)
+
+
+
+
+
 [Change log]{: tag-purple} Ingress ALB version `1.8.4_5586_ikss`
 :   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
 
 ### 18 October 2023
 {: #containers-oct1823}
