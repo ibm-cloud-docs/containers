@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-10-27"
+lastupdated: "2023-10-30"
 
 keywords: containers
 subcollection: containers
@@ -236,6 +236,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
+
+    * [30 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct3023)
+
+        * [Change log]{: tag-purple} {{site.data.keyword.cos_full_notm}} plug-in version `2.2.20`
+
+        * [New]{: tag-green} [Classic clusters]{: tag-classic-inf} Setting up alerts for {{site.data.keyword.blockstorageshort}} PVs with limited network connectivity.
 
     * [25 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct2523)
 
@@ -4572,6 +4578,8 @@ subcollection: containers
 
     * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
 
+* [Setting up monitoring for `limited` connectivity PVs](/docs/containers?topic=containers-block_storage#storage-block-vpc-limited-monitoring)
+
 
 ## Setting up Block Storage for VPC
 {: #sitemap_setting_up_block_storage_for_vpc}
@@ -7454,6 +7462,8 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
+* [Change log for version 2.2.20, released 30 October 2023](/docs/containers?topic=containers-cos_plugin_changelog#02220_object_plugin)
+
 * [Change log for version 2.2.19, released 12 October 2023](/docs/containers?topic=containers-cos_plugin_changelog#02219_object_plugin)
 
 * [Change log for version 2.2.18, released 7 September 2023](/docs/containers?topic=containers-cos_plugin_changelog#02218_object_plugin)
@@ -9751,6 +9761,8 @@ subcollection: containers
 [Why am I still seeing charges for block storage devices after deleting my cluster?](/docs/containers?topic=containers-ts_storage_clean_volume#ts_storage_clean_volume)
 
 [Why does mounting {{site.data.keyword.blockstorageshort}} fail with a file system check error?](/docs/containers?topic=containers-ts-storage-fsck#ts-storage-fsck)
+
+[Why does my Block Storage persistent volume show a `limited` connectivity status?](/docs/containers?topic=containers-block-pv-limited-connectivity#block-pv-limited-connectivity)
 
 [Why can't I delete my {{site.data.keyword.block_storage_is_short}} volume snapshot resources?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
 

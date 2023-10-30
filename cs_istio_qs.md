@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-10-12"
+lastupdated: "2023-10-30"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -48,8 +48,8 @@ Set up the managed Istio add-on in your cluster.
     Example output
 
     ```sh
-    NAME            Version     Health State   Health Status
-    istio           1.19.3       normal         Addon Ready
+    Name            Version     Health State   Health Status
+    istio           1.19       normal         Addon Ready
     ```
     {: screen}
 
