@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-10-30"
+lastupdated: "2023-11-01"
 
 keywords: containers
 subcollection: containers
@@ -237,11 +237,17 @@ subcollection: containers
 
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
 
+    * [31 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct3123)
+
+        * [New]{: tag-green} [VPC clusters]{: tag-vpc} VNI functionality for limiting access to {{site.data.keyword.filestorage_vpc_short}} by node, zone, worker pool and more.
+
+        * [Change log]{: tag-purple} {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.2`.
+
     * [30 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct3023)
 
         * [Change log]{: tag-purple} {{site.data.keyword.cos_full_notm}} plug-in version `2.2.20`
 
-        * [New]{: tag-green} [Classic clusters]{: tag-classic-inf} Setting up alerts for {{site.data.keyword.blockstorageshort}} PVs with limited network connectivity.
+        * [New]{: tag-green} Setting up alerts for {{site.data.keyword.blockstorageshort}} PVs with limited network connectivity.
 
     * [25 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct2523)
 
@@ -4765,15 +4771,27 @@ subcollection: containers
 
 [Adding {{site.data.keyword.filestorage_vpc_short}} to apps](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps)
 
-* [Deploying an app that uses {{site.data.keyword.filestorage_vpc_short}} with dynamic provisioning](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file_dynamic)
+* [Quick start for {{site.data.keyword.filestorage_vpc_short}} with dynamic provisioning](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-add-file-dynamic)
 
-* [Deploying an app that uses {{site.data.keyword.filestorage_vpc_short}} with static provisioning](/docs/containers?topic=containers-storage-file-vpc-apps#vpc_add_file_static)
+* [Attaching existing file storage to an app](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-add-file-static)
+
+* [Deploying an app that runs as non-root](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-file-non-root-app)
+
+* [Creating a custom storage class](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-custom-sc)
+
+* [Limiting file share access by worker node, zone, or worker pool](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-setup)
+
+    * [Prerequisites](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-prereqs)
+
+    * [Limiting file share access to pods on one worker node](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-one-worker)
+
+    * [Limiting file share access to pods on worker nodes in a single zone](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-one-zone)
+
+    * [Limiting file share access to pods on worker nodes in a single worker pool](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-one-pool)
+
+    * [Limiting file share access to pods on worker nodes in multiple worker pools](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-multiple-pools)
 
 [Managing {{site.data.keyword.filestorage_vpc_full_notm}}](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-managing)
-
-* [Creating a custom storage class](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-custom-sc)
-
-* [Create a custom storage class using DP2](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-dp2)
 
 * [Updating the {{site.data.keyword.filestorage_vpc_short}} add-on](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-update)
 
@@ -7445,6 +7463,10 @@ subcollection: containers
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [{{site.data.keyword.filestorage_vpc_full_notm}} add-on change log](/docs/containers?topic=containers-versions-vpc-file-addon#versions-vpc-file-addon)
+
+* [Version 1.2](/docs/containers?topic=containers-versions-vpc-file-addon#012_is_file)
+
+    * [Change log for version version 1.2.0, released 31 October 2023](/docs/containers?topic=containers-versions-vpc-file-addon#0120_is_file)
 
 * [Version 1.1](/docs/containers?topic=containers-versions-vpc-file-addon#011_is_file)
 
