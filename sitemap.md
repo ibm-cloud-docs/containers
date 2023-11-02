@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-11-01"
+lastupdated: "2023-11-02"
 
 keywords: containers
 subcollection: containers
@@ -6539,6 +6539,8 @@ subcollection: containers
 * [vpc-block-csi-driver 5.2](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-block-csi-driver-5.2)
 
 * [vpc-file-csi-driver 1.1](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-1.1)
+
+* [vpc-file-csi-driver 1.2](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-1.2)
 
 [Ingress ALB and Fluentd version change log](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 
