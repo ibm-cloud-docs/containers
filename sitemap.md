@@ -6540,6 +6540,8 @@ subcollection: containers
 
 * [vpc-file-csi-driver 1.1](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-1.1)
 
+* [vpc-file-csi-driver 1.2](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-1.2)
+
 [Ingress ALB and Fluentd version change log](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
