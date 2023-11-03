@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-11-02"
+lastupdated: "2023-11-03"
 
 keywords: containers
 subcollection: containers
@@ -4816,7 +4816,7 @@ subcollection: containers
 
 * [Limitations](/docs/containers?topic=containers-storage-cos-understand#cos_limitations)
 
-[Installing the {{site.data.keyword.cos_full_notm}} plug-in on VPC and classic clusters](/docs/containers?topic=containers-storage_cos_install#storage_cos_install)
+[Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#storage_cos_install)
 
 * [Updating the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#update_cos_plugin)
 
@@ -4857,14 +4857,6 @@ subcollection: containers
 [VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_vpc_ip#storage_cos_vpc_ip)
 
 [Storage class reference](/docs/containers?topic=containers-storage_cos_reference#storage_cos_reference)
-
-* [Standard](/docs/containers?topic=containers-storage_cos_reference#standard)
-
-* [Vault](/docs/containers?topic=containers-storage_cos_reference#Vault)
-
-* [Cold](/docs/containers?topic=containers-storage_cos_reference#cold)
-
-* [Smart](/docs/containers?topic=containers-storage_cos_reference#smart)
 
 
 ## Setting up Portworx
