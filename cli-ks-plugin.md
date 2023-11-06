@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-10-26"
+lastupdated: "2023-11-06"
 
 keywords: kubernetes
 
@@ -1061,7 +1061,7 @@ Minimum required permissions
 {: #cluster-create-vpc-gen2-example}
 
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name mycluster --version 1.27 --zone us-south-1 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --subnet-id 1ab23c45-6789-0123-456d-789ef01gh234 --flavor bx2.4x16 --workers 3
+ibmcloud ks cluster create vpc-gen2 --name mycluster --version 1.28 --zone us-south-1 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --subnet-id 1ab23c45-6789-0123-456d-789ef01gh234 --flavor bx2.4x16 --workers 3
 ```
 {: pre}
 
