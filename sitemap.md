@@ -235,6 +235,12 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
+
+    * [06 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0623)
+
+        * Kubernetes version 1.28 is now the default version for new {{site.data.keyword.containerlong_notm}} clusters.
+
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
 
     * [31 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct3123)

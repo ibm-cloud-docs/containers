@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-11-01"
+lastupdated: "2023-11-06"
 
 keywords: containers, kubernetes, release notes
 
@@ -25,6 +25,22 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+
+
+## November 2023
+{: #containers-nov23}
+
+### 06 November 2023
+{: #containers-nov0623}
+{: release-note}
+
+Kubernetes version 1.28 is now the default version for new {{site.data.keyword.containerlong_notm}} clusters.
+:   For more information, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions), the [1.28 version information and update actions](/docs/containers?topic=containers-cs_versions_128), and the [1.28 change log](/docs/containers?topic=containers-changelog_128).
+
+
+
+
 
 ## October 2023
 {: #containers-oct23}
