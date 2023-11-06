@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-11-03"
+lastupdated: "2023-11-06"
 
 keywords: containers
 subcollection: containers
@@ -234,6 +234,12 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
+
+    * [06 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0623)
+
+        * Kubernetes version 1.28 is now the default version for new {{site.data.keyword.containerlong_notm}} clusters.
 
 * [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
 

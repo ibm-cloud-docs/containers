@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-11-03"
+lastupdated: "2023-11-06"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2
 
@@ -218,7 +218,7 @@ Create your single zone or multizone VPC cluster by using the {{site.data.keywor
     When the provisioning of your Kubernetes master is completed, the state of your cluster changes to **normal**. After the Kubernetes master is ready, your worker nodes are set up.
     ```sh
     NAME         ID                                   State      Created          Workers    Zone      Version     Resource Group Name   Provider
-    mycluster    aaf97a8843a29941b49a598f516da72101   normal   20170201162433   3          Dallas     1.27.6_1526      Default               vpc-gen2
+    mycluster    aaf97a8843a29941b49a598f516da72101   normal   20170201162433   3          Dallas     1.28.2_1526      Default               vpc-gen2
     ```
     {: screen}
 
@@ -234,7 +234,7 @@ Create your single zone or multizone VPC cluster by using the {{site.data.keywor
     When the worker nodes are ready, the worker node **State** changes to `normal` and the **Status** changes to `Ready`. When the node **Status** changes to `Ready`, you can access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
     ```sh
     ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   b3c.4x16.encrypted  normal   Ready    dal10   1.27.6_1526
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   b3c.4x16.encrypted  normal   Ready    dal10   1.28.2_1526
     ```
     {: screen}
 
@@ -311,6 +311,8 @@ Terraform on {{site.data.keyword.cloud_notm}} enables predictable and consistent
     vpc_id            = "<vpc_id>"
     flavor            = "bx2.16x64"
     worker_count      = "3"
+    operating_system  = "UBUNTU_20_64"
+    kube_version      = "1.28.2"
     resource_group_id = "<resource_group_id>"
     zones {
         subnet_id = "<subnet_id>"
@@ -333,7 +335,10 @@ Terraform on {{site.data.keyword.cloud_notm}} enables predictable and consistent
     :   The number of worker nodes that you want to add to the default worker pool. 
     
     `operating_system`
-    :   The operating system of the worker nodes in the worker pool. For a list of supported operating systems by cluster version, see [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
+    :   The operating system of the worker nodes in the worker pool. For a list of supported operating systems by cluster version, see [Kubernetes version information](/docs/containers?topic=containers-cs_versions).  
+
+    `kube_version`
+    :   The Kubernetes version of your cluster. By default, clusters are created with the default Kubernetes version, but you can specify a different [supported version](/docs/containers?topic=containers-cs_versions&interface=ui#cs_versions_available).  
     
     `resource_group_id`
     :   The ID of the resource group. To see available resource groups, run `ibmcloud resource groups`. If no value is provided, the default resource group is used.

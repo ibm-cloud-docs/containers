@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-25"
+lastupdated: "2023-11-06"
 
 keywords: kubernetes, ic, ks, kubectl, api
 
@@ -242,25 +242,25 @@ Federated ID
     You can find the {{site.data.keyword.cloud_notm}} IAM token in the `access_token` and the refresh token in the `refresh_token` field of your API output.
 
 4. List all classic or VPC clusters in your account. If you want to [run Kubernetes API requests against a cluster](#kube_api), make sure to note the name or ID of the cluster that you want to work with.
-        Example request to list Classic clusters.
+    Example request to list Classic clusters.
     
-        ```sh
-        GET https://containers.cloud.ibm.com/global/v2/classic/getClusters
-        ```
-        {: codeblock}
+    ```sh
+    GET https://containers.cloud.ibm.com/global/v2/classic/getClusters
+    ```
+    {: codeblock}
 
-        Header
-        :    `Authorization: bearer <iam_token>`
+    Header
+    :    `Authorization: bearer <iam_token>`
 
-        Example command to list VPC clusters.
+    Example command to list VPC clusters.
     
-        ```sh
-        GET https://containers.cloud.ibm.com/global/v2/vpc/getClusters?provider=vpc-gen2
-        ```
-        {: codeblock}
+    ```sh
+    GET https://containers.cloud.ibm.com/global/v2/vpc/getClusters?provider=vpc-gen2
+    ```
+    {: codeblock}
 
-        Header
-        :    `Authorization`: Your {{site.data.keyword.cloud_notm}} IAM access token (`bearer <iam_token>`).
+    Header
+    :    `Authorization`: Your {{site.data.keyword.cloud_notm}} IAM access token (`bearer <iam_token>`).
 
 5. Review the [{{site.data.keyword.containerlong_notm}} API documentation](https://containers.cloud.ibm.com/global/swagger-global-api/#/){: external} to find a list of supported APIs.
 
@@ -399,8 +399,8 @@ The following instructions require public network access in your cluster to conn
     ```sh
     {
     "major": "1",
-    "minor": "1.27",
-    "gitVersion": "v1.27+IKS",
+    "minor": "1.28",
+    "gitVersion": "v1.28+IKS",
     "gitCommit": "c35166bd86eaa91d17af1c08289ffeab3e71e11e",
     "gitTreeState": "clean",
     "buildDate": "2019-03-21T10:08:03Z",

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-11-02"
+lastupdated: "2023-11-06"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -39,14 +39,14 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 
-[Latest]{: tag-green} 1.28
+[Latest]{: tag-green} [Default]{: tag-purple} 1.28
 - Release date: 20 September 2023
 - End of support: 4 December 2024†
 - Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_S390X`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_128)
 - [Change log](/docs/containers?topic=containers-changelog_128)
 
-[Default]{: tag-purple} 1.27
+1.27
 - Release date: 24 May 2023
 - End of support: 14 August 2024†
 - Supported operating systems: `UBUNTU_20_64`, `UBUNTU_18_64`*
@@ -89,7 +89,7 @@ kubectl version  --short | grep -i server
 
 Example output
 ```sh
-Server Version: v1.27+IKS
+Server Version: v1.28+IKS
 ```
 {: screen}
 
