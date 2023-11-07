@@ -26,20 +26,25 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
-
-
 ## November 2023
 {: #containers-nov23}
 
-### 06 November 2023
+### 7 November 2023
 {: #containers-nov0723}
 {: release-note}
+
+[Change log]{: tag-purple} CLI version `1.0.578` is available.
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
 
 [Change log]{: tag-purple} Ingress ALB updates
 :    Ingress ALB versions `1.9.4_5698_iks`, `1.8.4_5644_iks`, `1.6.4_5642_iks` are available. Version `1.8.4_5644_iks` is now the default version. Version `1.5.1` is no longer supported. For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
 
 
+
+  
 ### 06 November 2023
 {: #containers-nov0623}
 {: release-note}

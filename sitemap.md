@@ -237,7 +237,9 @@ subcollection: containers
 
 * [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
 
-    * [06 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0723)
+    * [7 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0723)
+
+        * [Change log]{: tag-purple} CLI version `1.0.578` is available.
 
         * [Change log]{: tag-purple} Ingress ALB updates
 
@@ -5672,6 +5674,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.578](/docs/containers?topic=containers-cs_cli_changelog#cli-01578)
 
 * [Version 0.1.573](/docs/containers?topic=containers-cs_cli_changelog#cli-01573)
 
