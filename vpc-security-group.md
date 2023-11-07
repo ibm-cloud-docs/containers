@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-10-30"
+lastupdated: "2023-11-07"
 
-keywords: kubernetes, firewall
+keywords: containers, kubernetes, firewall, acl, acls, access control list, rules, security group
 
 subcollection: containers
 
@@ -439,6 +439,9 @@ ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <clu
 {: pre}
 
 The security groups applied to the workers in the worker pool are a combination of those applied to the cluster that the worker pool is attached to and those applied to the worker pool at create time.
+
+
+
 
 ## Allow worker nodes to connect to the Ingress LoadBalancer
 {: #vpc-security-group-loadbalancer-outbound}
