@@ -491,6 +491,10 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
     
     `defaultConfig`
     :   Specify a default configmap for your ALBs. Enter the location of the configmap you want to use in the format `namespace/configmap-name`. For example, `kube-system/ibm-k8s-controller-config`.
+
+    `enableAnnotationValidation`
+    :   Enable or disable Ingress object annotation validation. When enabled, ALBs validate annotation values in Ingress resources before processing. For more information, see [the ingress-nginx source code](https://github.com/kubernetes/ingress-nginx/tree/main/internal/ingress/annotations){: external}.
+    :   This feature is available for ALB versions 1.9.0 and later and enabled by default.
     
     `enableSslPassthrough`
     :   Enable SSL passthrough for the ALB. The TLS connection is not terminated and passes through untouched.

@@ -237,6 +237,10 @@ subcollection: containers
 
 * [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
 
+    * [06 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0723)
+
+        * [Change log]{: tag-purple} Ingress ALB updates
+
     * [06 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0623)
 
         * Kubernetes version 1.28 is now the default version for new {{site.data.keyword.containerlong_notm}} clusters.
@@ -6544,7 +6548,13 @@ subcollection: containers
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
 
+* [1.9.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_9_4)
+
+    * [1.9.4_5698_iks, released 07 November 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_5698_iks)
+
 * [Version 1.8.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_8_4)
+
+    * [1.8.4_5644_iks, released 07 November 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_5644_iks)
 
     * [1.8.4_5586_iks, released 23 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_5586_iks)
 
@@ -6559,6 +6569,8 @@ subcollection: containers
     * [1.8.1_5317_iks, released 31 August 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.1_5317_iks)
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
+
+    * [1.6.4_5642_iks, released 07 November 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5642_iks)
 
     * [1.6.4_5544_iks, released 17 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5544_iks)
 
@@ -6588,7 +6600,7 @@ subcollection: containers
 
     * [1.6.4_3864_iks, released 13 March 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_3864_iks)
 
-* [Version 1.5.1](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
+* [Version 1.5.1 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#1_5_1)
 
     * [1.5.1_5542_iks, released 17 October 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.5.1_5542_iks)
 
