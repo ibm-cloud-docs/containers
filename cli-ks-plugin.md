@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-11-06"
+lastupdated: "2023-11-08"
 
 keywords: kubernetes
 
@@ -878,7 +878,7 @@ Minimum required permissions
      After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 
 `--public-service-endpoint`
-:    Enable the [public cloud service endpoint](/docs/containers?topic=containers-plan_basics#workeruser-master) so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your command line. If you have an [account that is enabled with VRF and service endpoints](/docs/account?topic=account-vrf-service-endpoint) and also include the `--private-service-endpoint` option, master-worker node communication goes over the private and the public network. You can later disable the public cloud service endpoint if you want a private-only cluster.
+:    Enable the [public cloud service endpoint](/docs/containers?topic=containers-plan_basics#workeruser-master) so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your command line. Public-only clusters can only be created in accounts that don't have VRF enabled. If you have an [account that is enabled with VRF and service endpoints](/docs/account?topic=account-vrf-service-endpoint) and also include the `--private-service-endpoint` option, master-worker node communication goes over the private and the public network. You can later disable the public cloud service endpoint if you want a private-only cluster.
      After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 
 
