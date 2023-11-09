@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-11-07"
+lastupdated: "2023-11-09"
 
 keywords: containers, kubernetes, release notes
 
@@ -29,11 +29,30 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## November 2023
 {: #containers-nov23}
 
+### 9 November 2023
+{: #containers-nov0923}
+{: release-note}
+
+
+
+[Change log]{: tag-purple} Worker node fix packs are available.
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+
+:   [1.28.2_1533](/docs/containers?topic=containers-changelog_128)
+:   [1.27.6_1546](/docs/containers?topic=containers-changelog_127)
+:   [1.26.9_1559](/docs/containers?topic=containers-changelog_126)
+:   [1.25.14_1566](/docs/containers?topic=containers-changelog_125)
+:   [1.24.17_1590](/docs/containers?topic=containers-changelog_124)
+
+
+
+
+
 ### 7 November 2023
 {: #containers-nov0723}
 {: release-note}
 
-[Change log]{: tag-purple} CLI version `1.0.578` is available.
+[Change log]{: tag-purple} CLI version `1.0.579` is available.
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 
