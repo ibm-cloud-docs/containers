@@ -237,6 +237,10 @@ subcollection: containers
 
 * [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
 
+    * [9 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0923)
+
+        * [Change log]{: tag-purple} Worker node fix packs are available.
+
     * [7 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0723)
 
         * [Change log]{: tag-purple} CLI version `1.0.579` is available.
