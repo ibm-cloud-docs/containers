@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-11-07"
+lastupdated: "2023-11-09"
 
 keywords: containers, kubernetes, release notes
 
@@ -33,7 +33,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-nov0723}
 {: release-note}
 
-[Change log]{: tag-purple} CLI version `1.0.578` is available.
+[Change log]{: tag-purple} CLI version `1.0.579` is available.
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 
