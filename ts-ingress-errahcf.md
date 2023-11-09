@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2023
-lastupdated: "2023-08-22"
+lastupdated: "2023-11-09"
 
 keywords: containers, ingress, troubleshoot ingress, errahcf
 
@@ -59,7 +59,7 @@ Review your access control lists to make sure that health traffic is allowed.
 
 1. Check that the ALB responds to health requests by running the following command. Enter the load balancer address and Ingress subdomain that you retrieved earlier.
     ```sh
-    curl https://LOAD-BALANCER-ADDRESS -H "Host: albhealth.INGRESS-SUBDOMAIN"
+    curl -k https://LOAD-BALANCER-ADDRESS -H "Host: albhealth.INGRESS-SUBDOMAIN"
     ```
     {: pre}
 
