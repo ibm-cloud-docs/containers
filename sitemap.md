@@ -237,6 +237,10 @@ subcollection: containers
 
 * [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
 
+    * [10 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov1023)
+
+        * Updated sorting and formatting for the Classic and VPC cluster flavor pages.
+
     * [9 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0923)
 
         * [Change log]{: tag-purple} Worker node fix packs are available.
