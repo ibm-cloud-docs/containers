@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-11-09"
+lastupdated: "2023-11-10"
 
 keywords: kubernetes, node scaling, ca, autoscaler
 
@@ -64,7 +64,6 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: tab-group="au-syd-tables"}
 
 
-
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
 | ---- | -------------------------------- | ---- | -- | --------------- | ----------------- |  -------------- |-- |
 | mx2.128x1024 | 128, 1024GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
@@ -85,9 +84,6 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 
 
 
-
-
-
 ## Sao Paulo (`br-sao`)
 {: #sao-paulo-br-sao}
 
@@ -101,9 +97,6 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | bx2.48x192 | 48, 192GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | bx2.4x16 | 4, 16GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | bx2.8x32 | 8, 32GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| bz2.2x8 | 2, 8GB, 4Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| bz2.4x16 | 4, 16GB, 8Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| bz2.8x32 | 8, 32GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Balanced flavors in Sao Paulo." caption-side="bottom"}
 {: #br-sao-balanced-table}
@@ -119,14 +112,11 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | cx2.48x96 | 48, 96GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | cx2.4x8 | 4, 8GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | cx2.8x16 | 8, 16GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| cz2.16x32 | 16, 32GB, 24Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| cz2.8x16 | 8, 16GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Compute flavors in Sao Paulo." caption-side="bottom"}
 {: #br-sao-compute-table}
 {: tab-title="Compute"}
 {: tab-group="br-sao-tables"}
-
 
 
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
@@ -139,16 +129,11 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | mx2.4x32 | 4, 32GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | mx2.64x512 | 64, 512GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | mx2.8x64 | 8, 64GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| mz2.16x128 | 16, 128GB, 24Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| mz2.8x64 | 8, 64GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Memory flavors in Sao Paulo." caption-side="bottom"}
 {: #br-sao-memory-table}
 {: tab-title="Memory"}
 {: tab-group="br-sao-tables"}
-
-
-
 
 
 
@@ -166,9 +151,6 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | bx2.48x192 | 48, 192GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | bx2.4x16 | 4, 16GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | bx2.8x32 | 8, 32GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| bz2.2x8 | 2, 8GB, 4Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| bz2.4x16 | 4, 16GB, 8Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| bz2.8x32 | 8, 32GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Balanced flavors in Toronto." caption-side="bottom"}
 {: #ca-tor-balanced-table}
@@ -184,14 +166,11 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | cx2.48x96 | 48, 96GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | cx2.4x8 | 4, 8GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | cx2.8x16 | 8, 16GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| cz2.16x32 | 16, 32GB, 24Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| cz2.8x16 | 8, 16GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Compute flavors in Toronto." caption-side="bottom"}
 {: #ca-tor-compute-table}
 {: tab-title="Compute"}
 {: tab-group="ca-tor-tables"}
-
 
 
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
@@ -205,16 +184,11 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | mx2.4x32 | 4, 32GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | mx2.64x512 | 64, 512GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | mx2.8x64 | 8, 64GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| mz2.16x128 | 16, 128GB, 24Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| mz2.8x64 | 8, 64GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Memory flavors in Toronto." caption-side="bottom"}
 {: #ca-tor-memory-table}
 {: tab-title="Memory"}
 {: tab-group="ca-tor-tables"}
-
-
-
 
 
 
@@ -254,7 +228,6 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: tab-group="eu-de-tables"}
 
 
-
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
 | ---- | -------------------------------- | ---- | -- | --------------- | ----------------- |  -------------- |-- |
 | mx2.128x1024 | 128, 1024GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
@@ -275,9 +248,6 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 
 
 
-
-
-
 ## Madrid (`eu-es`)
 {: #madrid-eu-es}
 
@@ -291,9 +261,6 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | bx2.48x192 | 48, 192GB, 25Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | bx2.4x16 | 4, 16GB, 8Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | bx2.8x32 | 8, 32GB, 16Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| bz2.2x8 | 2, 8GB, 4Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| bz2.4x16 | 4, 16GB, 8Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| bz2.8x32 | 8, 32GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Balanced flavors in Madrid." caption-side="bottom"}
 {: #eu-es-balanced-table}
@@ -309,14 +276,11 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | cx2.48x96 | 48, 96GB, 25Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | cx2.4x8 | 4, 8GB, 8Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | cx2.8x16 | 8, 16GB, 16Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| cz2.16x32 | 16, 32GB, 24Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| cz2.8x16 | 8, 16GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Compute flavors in Madrid." caption-side="bottom"}
 {: #eu-es-compute-table}
 {: tab-title="Compute"}
 {: tab-group="eu-es-tables"}
-
 
 
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
@@ -329,16 +293,11 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | mx2.4x32 | 4, 32GB, 8Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | mx2.64x512 | 64, 512GB, 25Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | mx2.8x64 | 8, 64GB, 16Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| mz2.16x128 | 16, 128GB, 24Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| mz2.8x64 | 8, 64GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Memory flavors in Madrid." caption-side="bottom"}
 {: #eu-es-memory-table}
 {: tab-title="Memory"}
 {: tab-group="eu-es-tables"}
-
-
-
 
 
 
@@ -356,9 +315,6 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | bx2.48x192 | 48, 192GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | bx2.4x16 | 4, 16GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | bx2.8x32 | 8, 32GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| bz2.2x8 | 2, 8GB, 4Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| bz2.4x16 | 4, 16GB, 8Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| bz2.8x32 | 8, 32GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Balanced flavors in London." caption-side="bottom"}
 {: #eu-gb-balanced-table}
@@ -374,14 +330,11 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | cx2.48x96 | 48, 96GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | cx2.4x8 | 4, 8GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | cx2.8x16 | 8, 16GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| cz2.16x32 | 16, 32GB, 24Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| cz2.8x16 | 8, 16GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Compute flavors in London." caption-side="bottom"}
 {: #eu-gb-compute-table}
 {: tab-title="Compute"}
 {: tab-group="eu-gb-tables"}
-
 
 
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
@@ -395,16 +348,11 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | mx2.4x32 | 4, 32GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | mx2.64x512 | 64, 512GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | mx2.8x64 | 8, 64GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| mz2.16x128 | 16, 128GB, 24Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| mz2.8x64 | 8, 64GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Memory flavors in London." caption-side="bottom"}
 {: #eu-gb-memory-table}
 {: tab-title="Memory"}
 {: tab-group="eu-gb-tables"}
-
-
-
 
 
 
@@ -444,7 +392,6 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: tab-group="jp-osa-tables"}
 
 
-
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
 | ---- | -------------------------------- | ---- | -- | --------------- | ----------------- |  -------------- |-- |
 | mx2.128x1024 | 128, 1024GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
@@ -464,9 +411,6 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 
 
 
-
-
-
 ## Tokyo (`jp-tok`)
 {: #tokyo-jp-tok}
 
@@ -480,9 +424,6 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | bx2.48x192 | 48, 192GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | bx2.4x16 | 4, 16GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | bx2.8x32 | 8, 32GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| bz2.2x8 | 2, 8GB, 4Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| bz2.4x16 | 4, 16GB, 8Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| bz2.8x32 | 8, 32GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Balanced flavors in Tokyo." caption-side="bottom"}
 {: #jp-tok-balanced-table}
@@ -498,14 +439,11 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | cx2.48x96 | 48, 96GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | cx2.4x8 | 4, 8GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | cx2.8x16 | 8, 16GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| cz2.16x32 | 16, 32GB, 24Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| cz2.8x16 | 8, 16GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Compute flavors in Tokyo." caption-side="bottom"}
 {: #jp-tok-compute-table}
 {: tab-title="Compute"}
 {: tab-group="jp-tok-tables"}
-
 
 
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
@@ -519,16 +457,11 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | mx2.4x32 | 4, 32GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | mx2.64x512 | 64, 512GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | mx2.8x64 | 8, 64GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| mz2.16x128 | 16, 128GB, 24Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| mz2.8x64 | 8, 64GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Memory flavors in Tokyo." caption-side="bottom"}
 {: #jp-tok-memory-table}
 {: tab-title="Memory"}
 {: tab-group="jp-tok-tables"}
-
-
-
 
 
 
@@ -546,9 +479,6 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | bx2.48x192 | 48, 192GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | bx2.4x16 | 4, 16GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | bx2.8x32 | 8, 32GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| bz2.2x8 | 2, 8GB, 4Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| bz2.4x16 | 4, 16GB, 8Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| bz2.8x32 | 8, 32GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Balanced flavors in Washington DC." caption-side="bottom"}
 {: #us-east-balanced-table}
@@ -564,14 +494,11 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | cx2.48x96 | 48, 96GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | cx2.4x8 | 4, 8GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | cx2.8x16 | 8, 16GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| cz2.16x32 | 16, 32GB, 24Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| cz2.8x16 | 8, 16GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Compute flavors in Washington DC." caption-side="bottom"}
 {: #us-east-compute-table}
 {: tab-title="Compute"}
 {: tab-group="us-east-tables"}
-
 
 
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
@@ -585,16 +512,11 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 | mx2.4x32 | 4, 32GB, 8Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier | N/A|
 | mx2.64x512 | 64, 512GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
 | mx2.8x64 | 8, 64GB, 16Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
-| mz2.16x128 | 16, 128GB, 24Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
-| mz2.8x64 | 8, 64GB, 16Gbps | Virtual | **UBUNTU_18_S390X (default)**| 100GB BLOCK | N/A | N/A| N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Memory flavors in Washington DC." caption-side="bottom"}
 {: #us-east-memory-table}
 {: tab-title="Memory"}
 {: tab-group="us-east-tables"}
-
-
-
 
 
 
@@ -634,7 +556,6 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: tab-group="us-south-tables"}
 
 
-
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
 | ---- | -------------------------------- | ---- | -- | --------------- | ----------------- |  -------------- |-- |
 | mx2.128x1024 | 128, 1024GB, 25Gbps | Virtual | UBUNTU_18_64, **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 600gb.5iops-tier, 900gb.5iops-tier, 1200gb.5iops-tier, 1600gb.5iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
@@ -651,9 +572,6 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: #us-south-memory-table}
 {: tab-title="Memory"}
 {: tab-group="us-south-tables"}
-
-
-
 
 
 
