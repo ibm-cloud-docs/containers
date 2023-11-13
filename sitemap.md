@@ -239,6 +239,10 @@ subcollection: containers
 
     * [13 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov1323)
 
+        * [Change log]{: tag-purple} {{site.data.keyword.cos_full_notm}} plug-in version `2.2.21`.
+
+        * [Change log]{: tag-purple}{{site.data.keyword.block_storage_is_short}} add-on versions `5.0.21_401` and `5.1.15_419`, and `5.2.10_428`.
+
         * [Change log]{: tag-purple} Cluster autoscaler add-on patch updates `1.0.9_195`, `1.0.8_233`, and `1.0.7_185`.
 
         * [Change log]{: tag-purple} {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.9_87`.
@@ -7364,9 +7368,13 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-vpc_bs_changelog#052_is_block)
 
+    * [Change log for version 5.2.10_428, released 13 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2.12_428_is_block_relnote)
+
     * [Change log for version 5.2, released 25 September 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2_is_block_relnote)
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
+
+    * [Change log for version 5.1.15_419 released 13 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.15_419_is_block_relnote)
 
     * [Change log for version 5.1.13_345, released 14 September 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.13_345_is_block_relnote)
 
@@ -7387,6 +7395,8 @@ subcollection: containers
     * [Change log for version 5.1, released 9 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1_is_block_relnote)
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
+
+    * [Change log for version 5.0.21_401, released 13 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.21_401_is_block_relnote)
 
     * [Change log for version 5.0.19_358, released 14 September 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.19_358_is_block_relnote)
 
@@ -7531,6 +7541,8 @@ subcollection: containers
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.21, released 13 November 2023](/docs/containers?topic=containers-cos_plugin_changelog#02221_object_plugin)
 
 * [Change log for version 2.2.20, released 30 October 2023](/docs/containers?topic=containers-cos_plugin_changelog#02220_object_plugin)
 
