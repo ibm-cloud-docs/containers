@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-11-10"
+lastupdated: "2023-11-13"
 
 keywords: containers
 subcollection: containers
@@ -236,6 +236,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
+
+    * [13 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov1323)
+
+        * [Change log]{: tag-purple} Cluster autoscaler add-on patch updates `1.0.9_195`, `1.0.8_233`, and `1.0.7_185`.
+
+        * [Change log]{: tag-purple} {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.9_87`.
 
     * [10 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov1023)
 
@@ -7216,6 +7222,8 @@ subcollection: containers
 
 * [Version 1.0.9](/docs/containers?topic=containers-ca_changelog#0109_ca_addon)
 
+    * [Change log for patch update 1.0.9_195, released 13 November 2023](/docs/containers?topic=containers-ca_changelog#109195_ca)
+
     * [Change log for patch update 1.0.9_134, released 04 October 2023](/docs/containers?topic=containers-ca_changelog#109134_ca)
 
     * [Change log for patch update 1.0.9_103, released 15 September 2023](/docs/containers?topic=containers-ca_changelog#109103_ca)
@@ -7227,6 +7235,8 @@ subcollection: containers
     * [Change log for patch update 1.0.9_44, released 22 June 2023](/docs/containers?topic=containers-ca_changelog#10944_ca)
 
 * [Version 1.0.8](/docs/containers?topic=containers-ca_changelog#0108_ca_addon)
+
+    * [Change log for patch update 1.0.8_233, released 13 November 2023](/docs/containers?topic=containers-ca_changelog#108233_ca)
 
     * [Change log for patch update 1.0.8_104, released 15 September 2023](/docs/containers?topic=containers-ca_changelog#108104_ca)
 
@@ -7243,6 +7253,8 @@ subcollection: containers
     * [Change log for patch update 1.0.8_968, released 9 March 2023](/docs/containers?topic=containers-ca_changelog#108968_ca)
 
 * [Version 1.0.7](/docs/containers?topic=containers-ca_changelog#0107_ca_addon)
+
+    * [Change log for patch update 1.0.7_185, released 13 November 2023](/docs/containers?topic=containers-ca_changelog#107_185_ca)
 
     * [Change log for patch update 1.0.7_102, released 15 September 2023](/docs/containers?topic=containers-ca_changelog#107102_ca)
 
@@ -7503,6 +7515,8 @@ subcollection: containers
     * [Change log for version version 1.2.0, released 31 October 2023](/docs/containers?topic=containers-versions-vpc-file-addon#0120_is_file)
 
 * [Version 1.1](/docs/containers?topic=containers-versions-vpc-file-addon#011_is_file)
+
+    * [Change log for version 1.1.9_87, released 13 November 2023](/docs/containers?topic=containers-versions-vpc-file-addon#)
 
     * [Change log for version 1.1.7_49, released 14 September 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.1.7_is_file_relnote)
 
