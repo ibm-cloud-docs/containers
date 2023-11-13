@@ -7526,7 +7526,7 @@ subcollection: containers
 
 * [Version 1.1](/docs/containers?topic=containers-versions-vpc-file-addon#011_is_file)
 
-    * [Change log for version 1.1.9_87, released 13 November 2023](/docs/containers?topic=containers-versions-vpc-file-addon#)
+    * [Change log for version 1.1.9_87, released 13 November 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.1.9_87_is_file_relnote)
 
     * [Change log for version 1.1.7_49, released 14 September 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.1.7_is_file_relnote)
 
