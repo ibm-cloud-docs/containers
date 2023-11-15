@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-11-09"
+lastupdated: "2023-11-15"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -65,7 +65,6 @@ The following table shows the changes that are in the master fix pack 1.25.14_15
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.4.2 | v1.4.4 | New version contains updates and security fixes. |
-| GPU device plug-in and installer | 8e87e60 | 4319682 | New version contains updates and security fixes. |
 | {{site.data.keyword.IBM_notm}} Calico extension | 1390 | 1487 | New version contains security fixes. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.10 | v2.4.12 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.25.13-3 | v1.25.14-6 | New version contains updates and security fixes. |
