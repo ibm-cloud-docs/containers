@@ -42,6 +42,29 @@ Review the version 1.25 change log.
 
 
 
+### Change log for master fix pack 1.25.15_1567, released 15 November 2023
+{: #12515_1567_M}
+
+The following table shows the changes that are in the master fix pack 1.25.15_1567. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.4.4 | v1.4.5 | New version contains updates and security fixes.|
+| etcd | v3.5.9 | v3.5.10 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.10){: external}. |
+| Gateway-enabled cluster controller | 2366 | 2415 | New version contains updates and security fixes. |
+| GPU device plug-in and installer | 4319682 | 99267c4 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 435 | 438 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | f0d3265 | e544e35 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.8.4 | v2.8.5 | New version contains updates and security fixes. |
+| Konnectivity agent and server| v0.1.3_5_iks | v0.1.5_39_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.1.5){: external}. |
+| Kubernetes | v1.25.14 | v1.25.15 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.15){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2681 | 2731 | New version contains updates and security fixes. |
+| Portieris admission controller | v0.13.8 | v0.13.10 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.10){: external}. |
+{: caption="Changes since version 1.25.14_1564" caption-side="bottom"}
+
+
 ### Change log for worker node fix pack 1.25.14_1566, released 08 November 2023
 {: #12514_1566_W}
 
