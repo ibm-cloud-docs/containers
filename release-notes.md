@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-11-15"
+lastupdated: "2023-11-16"
 
 keywords: containers, kubernetes, release notes
 
@@ -121,8 +121,6 @@ Kubernetes version 1.28 is now the default version for new {{site.data.keyword.c
 
 ## October 2023
 {: #containers-oct23}
-
-
 
 ### 31 October 2023
 {: #containers-oct3123}
