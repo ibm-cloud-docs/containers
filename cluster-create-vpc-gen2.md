@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-11-06"
+lastupdated: "2023-11-16"
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2
 
@@ -32,8 +32,6 @@ Do not delete the subnets that you attach to your cluster during cluster creatio
 * A public network gateway is required when you want your cluster to access public endpoints, such as a public URL of another app or an {{site.data.keyword.cloud_notm}} service that supports public cloud service endpoints only. Make sure to review the [VPC networking basics](/docs/containers?topic=containers-plan_vpc_basics) to understand when a public network gateway is required and how you can set up your cluster to limit public access to one or more subnets only.
 * Before you can use KMS encryption, you must create a KMS instance and set up the required service authorization in IAM. For more information, see [Managing encryption for the worker nodes in your cluster](/docs/containers?topic=containers-encryption#worker-encryption).
 * By default, your cluster is provisioned with a VPC security group and a cluster-level security group. If you want to attach additional security groups or change which default security groups are applied when you create the cluster, you must [create your VPC cluster in the CLI](#cluster_vpcg2_cli).
-
-
 
 
 
@@ -147,7 +145,7 @@ Create your single zone or multizone VPC cluster by using the {{site.data.keywor
     :   Specify the number of worker nodes to include in the cluster. If you don't specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster). This value is optional.
 
     `--operating-system SYSTEM`
-    :   Optional. The operating system of the worker nodes you want to provision in your cluster.  For a list of available operating systems by cluster version, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
+    :   Optional. The operating system of the worker nodes you want to provision in your cluster. For a list of available operating systems by cluster version, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
     :   If no option is specified, the default operating system version that corresponds to the cluster version is used.
 
 
@@ -260,7 +258,6 @@ ibmcloud ks cluster create vpc-gen2 --name my_cluster --zone us-east-1 --vpc-id 
 
 
 
-
 Example command to [add a zone](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone) to a multizone VPC cluster.
 
 ```sh
@@ -329,16 +326,16 @@ Terraform on {{site.data.keyword.cloud_notm}} enables predictable and consistent
     :   Required. The ID of the VPC that you want to use for your cluster. To list available VPCs, run `ibmcloud is vpcs`.
 
     `flavor`
-    :   Required. The worker node flavor. The flavor determines the amount of memory, CPU, and disk space that is available to your worker nodes. For a list of available worker node flavors, run `ibmcloud ks flavors --zone <zone> --provider classic`, or see [Classic flavors](/docs/containers?topic=containers-classic-flavors&interface=ui).  
+    :   Required. The worker node flavor. The flavor determines the amount of memory, CPU, and disk space that is available to your worker nodes. For a list of available worker node flavors, run `ibmcloud ks flavors --zone <zone> --provider classic`, or see [Classic flavors](/docs/containers?topic=containers-classic-flavors&interface=ui). 
 
     `worker_count`
     :   The number of worker nodes that you want to add to the default worker pool. 
     
     `operating_system`
-    :   The operating system of the worker nodes in the worker pool. For a list of supported operating systems by cluster version, see [Kubernetes version information](/docs/containers?topic=containers-cs_versions).  
+    :   The operating system of the worker nodes in the worker pool. For a list of supported operating systems by cluster version, see [Kubernetes version information](/docs/containers?topic=containers-cs_versions). 
 
     `kube_version`
-    :   The Kubernetes version of your cluster. By default, clusters are created with the default Kubernetes version, but you can specify a different [supported version](/docs/containers?topic=containers-cs_versions&interface=ui#cs_versions_available).  
+    :   The Kubernetes version of your cluster. By default, clusters are created with the default Kubernetes version, but you can specify a different [supported version](/docs/containers?topic=containers-cs_versions&interface=ui#cs_versions_available). 
     
     `resource_group_id`
     :   The ID of the resource group. To see available resource groups, run `ibmcloud resource groups`. If no value is provided, the default resource group is used.
