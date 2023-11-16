@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-11-15"
+lastupdated: "2023-11-16"
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
@@ -16,6 +16,9 @@ subcollection: containers
 
 View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.25. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}
+
+Kubernetes version 1.25 is deprecated. Update your cluster to at least [version 1.26](/docs/containers?topic=containers-cs_versions_126) as soon as possible.
+{: deprecated}
 
 ## Overview
 {: #changelog_overview_125}
