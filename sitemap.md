@@ -237,6 +237,10 @@ subcollection: containers
 
 * [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
 
+    * [20 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2023)
+
+        * [New]{: tag-green} You can now specify a custom pod subnet size when creating a VPC cluster.
+
     * [15 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov1523)
 
         * [Change log]{: tag-purple} Master fix packs are available. Review the change logs for your cluster version. Master patch updates are applied automatically.
