@@ -36,6 +36,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 [New]{: tag-green} You can now specify a custom pod subnet size when creating a VPC cluster.
 :   For more information, see the [CLI reference](/docs/?containerstopic=containers-kubernetes-service-cli#cli_cluster-create-vpc-gen2) or [create a VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=cli#cluster_create_vpc) with a custom pod subnet size.
 
+[Change log]{: tag-purple} {{site.data.keyword.cos_full_notm}} plug-in version `2.2.22`.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
 ### 15 November 2023
 {: #containers-nov1523}
 {: release-note}
