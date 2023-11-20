@@ -6964,9 +6964,9 @@ subcollection: containers
 
 * [Version 1.18](/docs/containers?topic=containers-istio-changelog#v118)
 
-    * [Changelog for 1.18.5, released 18 October 2023](/docs/containers?topic=containers-istio-changelog#1185)
+    * [Change log for 1.18.5, released 18 October 2023](/docs/containers?topic=containers-istio-changelog#1185)
 
-    * [Changelog for 1.18.3, released 3 October 2023](/docs/containers?topic=containers-istio-changelog#1183)
+    * [Change log for 1.18.3, released 3 October 2023](/docs/containers?topic=containers-istio-changelog#1183)
 
     * [Change log for 1.18.2, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1182)
 
@@ -6976,9 +6976,9 @@ subcollection: containers
 
 * [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
 
-    * [Changelog for 1.17.8, released 18 October 2023](/docs/containers?topic=containers-istio-changelog#1178)
+    * [Change log for 1.17.8, released 18 October 2023](/docs/containers?topic=containers-istio-changelog#1178)
 
-    * [Changelog for 1.17.6, released 3 October 2023](/docs/containers?topic=containers-istio-changelog#1176)
+    * [Change log for 1.17.6, released 3 October 2023](/docs/containers?topic=containers-istio-changelog#1176)
 
     * [Change log for 1.17.5, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1175)
 

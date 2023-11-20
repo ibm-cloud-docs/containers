@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-11-15"
+lastupdated: "2023-11-20"
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
 
@@ -54,7 +54,7 @@ The following table shows the changes that are in the master fix pack 1.26.10_15
 | GPU device plug-in and installer | 4319682 | 99267c4a | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.26.9-8 | v1.26.10-4 | New version contains updates and security fixes. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 435 | 438 | New version contains updates and security fixes. |
-| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | a1edf56 | c33e6e7 | hNew version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | a1edf56 | c33e6e7 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | f0d3265 | e544e35 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.8.4 | v2.8.5 | New version contains updates and security fixes. |
 | Konnectivity agent and server | v0.1.3_5_iks | v0.1.5_39_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.1.5){: external}. |
@@ -90,7 +90,7 @@ The following table shows the changes that are in the master fix pack 1.26.9_155
 | Cluster health image | v1.4.2 | v1.4.4 | New version contains updates and security fixes. |
 | {{site.data.keyword.IBM_notm}} Calico extension | 1390 | 1487 | New version contains security fixes. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.10 | v2.4.12 | New version contains updates and security fixes. |
-| {{site.data.keyword.cloud_notm}} Controller Manager | v1.26.8-3 | v1.26.9-8 | New version contains updates and security fixes. The logic for the `service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-idle-connection-timeout` annotation has changed. The default idle timeout is dependent on your account settings. In most cases, this value is `50`. However some allowlisted accounts have larger timeout settings. If you don't set the annotation, your load balancers use the timeout setting in your account. You can explicitly specify the timeout by setting this annotation. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.26.8-3 | v1.26.9-8 | New version contains updates and security fixes. The logic for the `service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-idle-connection-timeout` annotation has changed. The default idle timeout is dependent on your account settings. Usually, this value is `50`. However some allowlisted accounts have larger timeout settings. If you don't set the annotation, your load balancers use the timeout setting in your account. You can explicitly specify the timeout by setting this annotation. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 4e2f346 | f0d3265 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.8.2 | v2.8.4 | New version contains updates and security fixes. |
 | Kubernetes | v1.26.8 | v1.26.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.9){: external}. |

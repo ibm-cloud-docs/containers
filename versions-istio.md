@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-10-30"
+lastupdated: "2023-11-20"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -53,7 +53,7 @@ Updates in this version
 ## Version 1.18
 {: #v118}
 
-### Changelog for 1.18.5, released 18 October 2023
+### Change log for 1.18.5, released 18 October 2023
 {: #1185}
 
 Previous version
@@ -68,7 +68,7 @@ Updates in this version
 :   For more information, see the [Istio security bulletin 2023-004](https://istio.io/latest/news/security/istio-security-2023-004/){: external}.  
 
 
-### Changelog for 1.18.3, released 3 October 2023
+### Change log for 1.18.3, released 3 October 2023
 {: #1183}
 
 Review the changes that are included in version 1.18.3 of the managed Istio add-on.
@@ -152,7 +152,7 @@ Updates in this version
 ## Version 1.17
 {: #v117}
 
-### Changelog for 1.17.8, released 18 October 2023
+### Change log for 1.17.8, released 18 October 2023
 {: #1178}
 
 Previous version
@@ -167,7 +167,7 @@ Updates in this version
 :   For more information, see the [Istio security bulletin 2023-004](https://istio.io/latest/news/security/istio-security-2023-004/){: external}   
 
 
-### Changelog for 1.17.6, released 3 October 2023
+### Change log for 1.17.6, released 3 October 2023
 {: #1176}
 
 Review the changes that are included in version 1.17.6 of the managed Istio add-on.
