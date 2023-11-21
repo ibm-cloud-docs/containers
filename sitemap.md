@@ -2922,7 +2922,7 @@ subcollection: containers
 
 * [I need help with a broken webhook. What can I do?](/docs/containers?topic=containers-access_webhooks#access_webhooks-help)
 
-[Accessing private clusters by using the WireGuard VPN](/docs/containers?topic=containers-cluster-access-wireguard#cluster-access-wireguard)
+[Accessing private clusters](/docs/containers?topic=containers-cluster-access-wireguard#cluster-access-wireguard)
 
 
 ## Adding worker nodes
