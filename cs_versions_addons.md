@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-11-07"
+lastupdated: "2023-11-21"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 subcollection: containers
@@ -46,6 +46,12 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ## 1.9.4
 {: #1_9_4}
 
+### 1.9.4_5756_iks, released 21 November 2023
+{: #1.9.4_5756_iks}
+
+- Fixes [CVE-2023-5678](https://nvd.nist.gov/vuln/detail/CVE-2023-5678){: external}.
+
+
 ### 1.9.4_5698_iks, released 07 November 2023
 {: #1.9.4_5698_iks}
 
@@ -55,6 +61,11 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 {: #1_8_4}
 
 1.8.4 is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image.
+
+### 1.8.4_5757_iks, released 21 November 2023
+{: #1.8.4_5757_iks}
+
+- Fixes [CVE-2023-5678](https://nvd.nist.gov/vuln/detail/CVE-2023-5678){: external}.
 
 ### 1.8.4_5644_iks, released 07 November 2023
 {: #1.8.4_5644_iks}
@@ -106,6 +117,11 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 
 ## Version 1.6.4
 {: #1_6_4}
+
+### 1.6.4_5727_iks, released 21 November 2023
+{: #1.6.4_5727_iks}
+
+- Fixes [CVE-2023-5678](https://nvd.nist.gov/vuln/detail/CVE-2023-5678){: external}.
 
 ### 1.6.4_5642_iks, released 07 November 2023
 {: #1.6.4_5642_iks}
