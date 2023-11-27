@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-11-20"
+lastupdated: "2023-11-27"
 
 keywords: kubernetes, containers
 
@@ -39,6 +39,20 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the version 1.24 change log.
 {: shortdesc}
 
+
+
+### Change log for worker node fix pack 1.24.17_1591, released 22 November 2023
+{: #12417_1591_W}
+
+The following table shows the changes that are in the worker node fix pack 1.24.17_1591. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 20.04 packages | 5.4.0-166-generic | 5.4.0-166-generic | Worker node package updates for [CVE-2023-36054](https://nvd.nist.gov/vuln/detail/CVE-2023-36054){: external}, [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/CVE-2023-4016){: external}, [CVE-2023-43804](https://nvd.nist.gov/vuln/detail/CVE-2023-43804){: external}, [CVE-2023-45803](https://nvd.nist.gov/vuln/detail/CVE-2023-45803){: external}. |
+| Kubernetes |N/A|N/A|N/A|
+| Containerd|N/A|N/A|N/A|
+{: caption="Changes since version 1.24.17_1590" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.24.17_1590, released 08 November 2023
@@ -180,8 +194,8 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-212-generic | 4.15.0-214-generic | Worker node kernel & package updates for [CVE-2020-13987](https://nvd.nist.gov/vuln/detail/CVE-2020-13987){: external}, [CVE-2020-13988](https://nvd.nist.gov/vuln/detail/CVE-2020-13988){: external}, [CVE-2020-17437](https://nvd.nist.gov/vuln/detail/CVE-2020-17437){: external}, [CVE-2022-1184](https://nvd.nist.gov/vuln/detail/CVE-2022-1184){: external}, [CVE-2022-3303](https://nvd.nist.gov/vuln/detail/CVE-2022-3303){: external}, [CVE-2023-1611](https://nvd.nist.gov/vuln/detail/CVE-2023-1611){: external}, [CVE-2023-1670](https://nvd.nist.gov/vuln/detail/CVE-2023-1670){: external}, [CVE-2023-1859](https://nvd.nist.gov/vuln/detail/CVE-2023-1859){: external}, [CVE-2023-1990](https://nvd.nist.gov/vuln/detail/CVE-2023-1990){: external}, [CVE-2023-20867](https://nvd.nist.gov/vuln/detail/CVE-2023-20867){: external}, [CVE-2023-2124](https://nvd.nist.gov/vuln/detail/CVE-2023-2124){: external}, [CVE-2023-2828](https://nvd.nist.gov/vuln/detail/CVE-2023-2828){: external}, [CVE-2023-3090](https://nvd.nist.gov/vuln/detail/CVE-2023-3090){: external}, [CVE-2023-3111](https://nvd.nist.gov/vuln/detail/CVE-2023-3111){: external}, [CVE-2023-3141](https://nvd.nist.gov/vuln/detail/CVE-2023-3141){: external}, [CVE-2023-3268](https://nvd.nist.gov/vuln/detail/CVE-2023-3268){: external}, [CVE-2023-3390](https://nvd.nist.gov/vuln/detail/CVE-2023-3390){: external}, [CVE-2023-35001](https://nvd.nist.gov/vuln/detail/CVE-2023-35001){: external}. |
 | Ubuntu 20.04 packages | 5.4.0-153-generic | 5.4.0-155-generic | Worker node kernel & package updates for [CVE-2020-13987](https://nvd.nist.gov/vuln/detail/CVE-2020-13987){: external}, [CVE-2020-13988](https://nvd.nist.gov/vuln/detail/CVE-2020-13988){: external}, [CVE-2020-17437](https://nvd.nist.gov/vuln/detail/CVE-2020-17437){: external}, [CVE-2023-20867](https://nvd.nist.gov/vuln/detail/CVE-2023-20867){: external}, [CVE-2023-28321](https://nvd.nist.gov/vuln/detail/CVE-2023-28321){: external}, [CVE-2023-28322](https://nvd.nist.gov/vuln/detail/CVE-2023-28322){: external}, [CVE-2023-3090](https://nvd.nist.gov/vuln/detail/CVE-2023-3090){: external}, [CVE-2023-32629](https://nvd.nist.gov/vuln/detail/CVE-2023-32629){: external}, [CVE-2023-3390](https://nvd.nist.gov/vuln/detail/CVE-2023-3390){: external}, [CVE-2023-35001](https://nvd.nist.gov/vuln/detail/CVE-2023-35001){: external}, [CVE-2023-38408](https://nvd.nist.gov/vuln/detail/CVE-2023-38408){: external}. |
-| Kubernetes | 1.24.15 | 1.24.16 | see [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.16){: external}. |
-| Containerd | 1.6.21 | 1.6.22 | see [change logs](https://github.com/containerd/containerd/releases/tag/v1.6.22){: external}. |
+| Kubernetes | 1.24.15 | 1.24.16 | For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.16){: external}. |
+| Containerd | 1.6.21 | 1.6.22 | For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.6.22){: external}. |
 {: caption="Changes since version 1.24.15_1576" caption-side="bottom"}
 
 
@@ -314,8 +328,8 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-210-generic | 4.15.0-211-generic | Worker node kernel & package updates for [CVE-2021-3979](https://nvd.nist.gov/vuln/detail/CVE-2021-3979){: external}, [CVE-2023-1118](https://nvd.nist.gov/vuln/detail/CVE-2023-1118){: external}. |
 | Ubuntu 20.04 packages | 5.4.0-139-generic | 5.4.0-148-generic | Worker node kernel & package updates for [CVE-2023-2004](https://nvd.nist.gov/vuln/detail/CVE-2023-2004){: external}. |
-| Kubernetes | 1.24.13 | 1.24.14 | [CVE-2023-2431](https://nvd.nist.gov/vuln/detail/CVE-2023-2431){: external}. For more information, see [{{site.data.keyword.containerlong_notm}} is affected by a kubelet security vulnerability (CVE-2023-2431)](https://www.ibm.com/support/pages/node/7009655){: external}. See [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.14){: external}. |
-| Containerd | 1.6.20 | 1.6.21 | See [change logs](https://github.com/containerd/containerd/releases/tag/v1.6.21){: external}. |
+| Kubernetes | 1.24.13 | 1.24.14 | [CVE-2023-2431](https://nvd.nist.gov/vuln/detail/CVE-2023-2431){: external}. For more information, see [{{site.data.keyword.containerlong_notm}} is affected by a kubelet security vulnerability (CVE-2023-2431)](https://www.ibm.com/support/pages/node/7009655){: external}. For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.14){: external}. |
+| Containerd | 1.6.20 | 1.6.21 | For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.6.21){: external}. |
 | Haproxy | N\A | N\A | N\A|
 {: caption="Changes since version 1.24.13_1567" caption-side="bottom"}
 

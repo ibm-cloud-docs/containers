@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-06-20"
+lastupdated: "2023-11-27"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.20
 
@@ -529,7 +529,7 @@ The following table shows the changes that are in the worker node fix pack patch
 | --- | --- | --- | --- |
 | Disk identification | N/A | N/A | Enhanced the disk identification logic to handle the case of 2+ partitions. |
 | HA proxy | 9c98dc5 | 07f1e9 | Updated image with fixes for [CVE-2021-22922](https://nvd.nist.gov/vuln/detail/CVE-2021-22922){: external}, [CVE-2021-22923](https://nvd.nist.gov/vuln/detail/CVE-2021-22923){: external}, [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924){: external}, [CVE-2021-36222](https://nvd.nist.gov/vuln/detail/CVE-2021-36222){: external}, and [CVE-2021-37750](https://nvd.nist.gov/vuln/detail/CVE-2021-37750){: external}. |
-| Kubernetes | 1.20.10 | 1.20.11 | See [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.11){: external}. This update resolves [CVE-2021-25741](https://nvd.nist.gov/vuln/detail/CVE-2021-25741){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6496649){: external}). |
+| Kubernetes | 1.20.10 | 1.20.11 | For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.11){: external}. This update resolves [CVE-2021-25741](https://nvd.nist.gov/vuln/detail/CVE-2021-25741){: external}. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6496649){: external}). |
 | Ubuntu 18.04 packages | 4.15.0-156 | 4.15.0-158 | Updated worker node images and kernel with package updates [CVE-2021-22946](https://nvd.nist.gov/vuln/detail/CVE-2021-22946){: external}, [CVE-2021-22947](https://nvd.nist.gov/vuln/detail/CVE-2021-22947){: external}, [CVE-2021-33560](https://nvd.nist.gov/vuln/detail/CVE-2021-33560){: external}, [CVE-2021-3709](https://nvd.nist.gov/vuln/detail/CVE-2021-3709){: external}, [CVE-2021-3710](https://nvd.nist.gov/vuln/detail/CVE-2021-3710){: external}, [CVE-2021-40330](https://nvd.nist.gov/vuln/detail/CVE-2021-40330){: external}, [CVE-2021-40528](https://nvd.nist.gov/vuln/detail/CVE-2021-40528){: external}, and [CVE-2021-41072](https://nvd.nist.gov/vuln/detail/CVE-2021-41072){: external}. | 
 {: caption="Changes since version 1.20.10_1552" caption-side="bottom"}
 
@@ -623,7 +623,7 @@ The following table shows the changes that are in the worker node fix pack patch
 | HA proxy | aae810 | 68e6b3 | Updated image with fixes for [CVE-2021-33910](https://nvd.nist.gov/vuln/detail/CVE-2021-33910){: external}. |
 | Registry endpoints | Added zonal public registry endpoints for clusters with both private and public service endpoints enabled. |
 | Read only disk self healing | For VPC Gen2 workers. Added automation to recover from disks going read only. |
-| Containerd | v1.4.6 | v1.4.8 | See [change logs](https://github.com/containerd/containerd/releases/tag/v1.4.8){: external}. The update resolves CVE-2021-32760 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6478995){: external}). |
+| Containerd | v1.4.6 | v1.4.8 | For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.4.8){: external}. The update resolves CVE-2021-32760 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6478995){: external}). |
 | Kubernetes | v1.20.8 | v1.20.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.9){: external}. |
 {: caption="Changes since version 1.20.8_1546" caption-side="bottom"}
 

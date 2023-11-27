@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-06-20"
+lastupdated: "2023-11-27"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.21
 
@@ -310,7 +310,7 @@ The following table shows the changes that are in the master fix pack 1.21.12_15
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-175-generic | 4.15.0-176-generic | Kernel and package updates for [CVE-2018-16301](https://nvd.nist.gov/vuln/detail/CVE-2018-16301){: external}, [CVE-2019-18276](https://nvd.nist.gov/vuln/detail/CVE-2019-18276){: external}, [CVE-2020-8037](https://nvd.nist.gov/vuln/detail/CVE-2020-8037){: external}, [CVE-2021-31870](https://nvd.nist.gov/vuln/detail/CVE-2021-31870){: external}, [CVE-2021-31871](https://nvd.nist.gov/vuln/detail/CVE-2021-31871){: external}, [CVE-2021-31872](https://nvd.nist.gov/vuln/detail/CVE-2021-31872){: external}, [CVE-2021-31873](https://nvd.nist.gov/vuln/detail/CVE-2021-31873){: external}, [CVE-2021-43975](https://nvd.nist.gov/vuln/detail/CVE-2021-43975){: external}, [CVE-2022-1271](https://nvd.nist.gov/vuln/detail/CVE-2022-1271){: external}, [CVE-2022-24765](https://nvd.nist.gov/vuln/detail/CVE-2022-24765){: external}. |
-| Kubernetes | v1.21.11 | v1.21.12 | See [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.12){: external}. |
+| Kubernetes | v1.21.11 | v1.21.12 | For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.12){: external}. |
 {: caption="Changes since version 1.21.11_1556" caption-side="bottom"}
 
 
@@ -382,7 +382,7 @@ The following table shows the changes that are in the worker node fix pack 1.21.
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-171-generic | 4.15.0-173-generic | Kernel and package updates for [CVE-2021-20193](https://nvd.nist.gov/vuln/detail/CVE-2021-20193){: external}, [CVE-2021-25220](https://nvd.nist.gov/vuln/detail/CVE-2021-25220){: external}, [CVE-2021-3506](https://nvd.nist.gov/vuln/detail/CVE-2021-3506){: external}, [CVE-2022-0435](https://nvd.nist.gov/vuln/detail/CVE-2022-0435){: external}, [CVE-2022-0492](https://nvd.nist.gov/vuln/detail/CVE-2022-0492){: external}, [CVE-2022-0778](https://nvd.nist.gov/vuln/detail/CVE-2022-0778){: external}, [CVE-2022-0847](https://nvd.nist.gov/vuln/detail/CVE-2022-0847){: external}, [CVE-2022-23308](https://nvd.nist.gov/vuln/detail/CVE-2022-23308){: external}. |
 | HA proxy | 15198f | b40c07 | [CVE-2021-45960](https://nvd.nist.gov/vuln/detail/CVE-2021-45960){: external}, [CVE-2021-46143](https://nvd.nist.gov/vuln/detail/CVE-2021-46143){: external}, [CVE-2022-22822](https://nvd.nist.gov/vuln/detail/CVE-2022-22822){: external}, [CVE-2022-22823](https://nvd.nist.gov/vuln/detail/CVE-2022-22823){: external}, [CVE-2022-22824](https://nvd.nist.gov/vuln/detail/CVE-2022-22824){: external}, [CVE-2022-22825](https://nvd.nist.gov/vuln/detail/CVE-2022-22825){: external}, [CVE-2022-22826](https://nvd.nist.gov/vuln/detail/CVE-2022-22826){: external}, [CVE-2022-22827](https://nvd.nist.gov/vuln/detail/CVE-2022-22827){: external}, [CVE-2022-23852](https://nvd.nist.gov/vuln/detail/CVE-2022-23852){: external}, [CVE-2022-25235](https://nvd.nist.gov/vuln/detail/CVE-2022-25235){: external}, [CVE-2022-25236](https://nvd.nist.gov/vuln/detail/CVE-2022-25236){: external}, [CVE-2022-25315](https://nvd.nist.gov/vuln/detail/CVE-2022-25315){: external}, [CVE-2021-3999](https://nvd.nist.gov/vuln/detail/CVE-2021-3999){: external}, [CVE-2022-23218](https://nvd.nist.gov/vuln/detail/CVE-2022-23218){: external}, [CVE-2022-23219](https://nvd.nist.gov/vuln/detail/CVE-2022-23219){: external}, [CVE-2022-23308](https://nvd.nist.gov/vuln/detail/CVE-2022-23308){: external}, [CVE-2021-23177](https://nvd.nist.gov/vuln/detail/CVE-2021-23177){: external}, [CVE-2021-31566](https://nvd.nist.gov/vuln/detail/CVE-2021-31566){: external}. |
-| Kubernetes | 1.21.10 | 1.21.11 | See [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.11){: external}. |
+| Kubernetes | 1.21.10 | 1.21.11 | For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.11){: external}. |
 {: caption="Changes since version 1.21.10_1552" caption-side="bottom"}
 
 
@@ -810,7 +810,7 @@ The following table shows the changes that are in the worker node fix pack patch
 | HA proxy | aae810 | 68e6b3 | Updated image with fixes for [CVE-2021-33910](https://nvd.nist.gov/vuln/detail/CVE-2021-33910){: external}. |
 | Registry endpoints | N/A | N/A | Added zonal public registry endpoints for clusters with both private and public service endpoints enabled. |
 | Read only disk self healing | N/A | N/A | For VPC Gen2 workers. Added automation to recover from disks going read only. |
-| Containerd | v1.5.2 | v1.5.4 | See [change logs](https://github.com/containerd/containerd/releases/tag/v1.5.4){: external}. The update resolves CVE-2021-32760 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6478995){: external}).  |
+| Containerd | v1.5.2 | v1.5.4 | For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.5.4){: external}. The update resolves CVE-2021-32760 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6478995){: external}).  |
 | Kubernetes | v1.21.2 | v1.21.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.3){: external}. |
 {: caption="Changes since version 1.21.2_1524" caption-side="bottom"}
 

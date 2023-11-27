@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-08-21"
+lastupdated: "2023-11-27"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.19
 
@@ -360,7 +360,7 @@ The following table shows the changes that are in the worker node fix pack patch
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Ubuntu 18.04 packages | 4.15.0-147 | 4.15.0-151 | Updated worker node images & Kernel with package updates: [CVE-2020-13529](https://nvd.nist.gov/vuln/detail/CVE-2020-13529){: external}, [CVE-2021-22898](https://nvd.nist.gov/vuln/detail/CVE-2021-22898){: external}, [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924){: external} [CVE-2021-22925](https://nvd.nist.gov/vuln/detail/CVE-2021-22925){: external}, [CVE-2021-33200](https://nvd.nist.gov/vuln/detail/CVE-2021-33200){: external}, [CVE-2021-33909](https://nvd.nist.gov/vuln/detail/CVE-2021-33909){: external}, and [CVE-2021-33910](https://nvd.nist.gov/vuln/detail/CVE-2021-33910){: external}. |
-| Containerd | v1.4.6 | v1.4.8 | See [change logs](https://github.com/containerd/containerd/releases/tag/v1.4.8){: external}. The update resolves CVE-2021-32760 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6478995){: external}). |
+| Containerd | v1.4.6 | v1.4.8 | For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.4.8){: external}. The update resolves CVE-2021-32760 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6478995){: external}). |
 | HA proxy | aae810 | 68e6b3 | Updated image with fixes for [CVE-2021-33910](https://nvd.nist.gov/vuln/detail/CVE-2021-33910){: external}. |
 | Registry endpoints | Added zonal public registry endpoints for clusters with both private and public service endpoints enabled. |
 | Read only disk self healing | For VPC Gen2 workers. Added automation to recover from disks going read only. |
