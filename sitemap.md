@@ -243,7 +243,7 @@ subcollection: containers
 
         * [Change log]{: tag-purple} Cluster autoscaler add-on patch updates `1.2.0_290`, `1.0.9_290`, `1.0.8_292`, and `1.0.7_291`.
 
-    * [21 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2023)
+    * [21 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2123)
 
         * [Change log]{: tag-purple} Ingress ALB updates
 
