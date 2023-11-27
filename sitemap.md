@@ -237,6 +237,12 @@ subcollection: containers
 
 * [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
 
+    * [27 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2723)
+
+        * [New]{: tag-green} The Beta {{site.data.keyword.filestorage_vpc_short}} cluster add-on is now available to all accounts.
+
+        * [Change log]{: tag-purple} Cluster autoscaler add-on patch updates `1.2.0_290`, `1.0.9_290`, `1.0.8_292`, and `1.0.7_291`.
+
     * [21 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2023)
 
         * [Change log]{: tag-purple} Ingress ALB updates
@@ -248,6 +254,8 @@ subcollection: containers
         * [Change log]{: tag-purple} {{site.data.keyword.cos_full_notm}} plug-in version `2.2.22`.
 
     * [15 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov1523)
+
+        * [New]{: tag-green} The cluster autoscaler add-on now supports version 1.28 clusters.
 
         * [Change log]{: tag-purple} Master fix packs are available. Review the change logs for your cluster version. Master patch updates are applied automatically.
 
@@ -7230,6 +7238,12 @@ subcollection: containers
 
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
+* [Version 1.2.0](/docs/containers?topic=containers-ca_changelog#0120_ca_addon)
+
+    * [Change log for patch update 1.2.0_290, released 27 November 2023](/docs/containers?topic=containers-ca_changelog#120290_ca)
+
+    * [Change log for patch update 1.2.0_228, released 15 November 2023](/docs/containers?topic=containers-ca_changelog#120228_ca)
+
 * [Version 1.1.0 (Beta)](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
 
     * [Change log for patch update 1.1.0_1066, released 15 May 2023](/docs/containers?topic=containers-ca_changelog#111066_ca)
@@ -7256,6 +7270,8 @@ subcollection: containers
 
 * [Version 1.0.9](/docs/containers?topic=containers-ca_changelog#0109_ca_addon)
 
+    * [Change log for patch update 1.0.9_290, released 27 November 2023](/docs/containers?topic=containers-ca_changelog#109290_ca)
+
     * [Change log for patch update 1.0.9_195, released 13 November 2023](/docs/containers?topic=containers-ca_changelog#109195_ca)
 
     * [Change log for patch update 1.0.9_134, released 04 October 2023](/docs/containers?topic=containers-ca_changelog#109134_ca)
@@ -7269,6 +7285,8 @@ subcollection: containers
     * [Change log for patch update 1.0.9_44, released 22 June 2023](/docs/containers?topic=containers-ca_changelog#10944_ca)
 
 * [Version 1.0.8](/docs/containers?topic=containers-ca_changelog#0108_ca_addon)
+
+    * [Change log for patch update 1.0.8_292, released 27 November 2023](/docs/containers?topic=containers-ca_changelog#108292_ca)
 
     * [Change log for patch update 1.0.8_233, released 13 November 2023](/docs/containers?topic=containers-ca_changelog#108233_ca)
 
@@ -7287,6 +7305,8 @@ subcollection: containers
     * [Change log for patch update 1.0.8_968, released 9 March 2023](/docs/containers?topic=containers-ca_changelog#108968_ca)
 
 * [Version 1.0.7](/docs/containers?topic=containers-ca_changelog#0107_ca_addon)
+
+    * [Change log for patch update 1.0.7_291, released 27 November 2023](/docs/containers?topic=containers-ca_changelog#107291_ca)
 
     * [Change log for patch update 1.0.7_185, released 13 November 2023](/docs/containers?topic=containers-ca_changelog#107_185_ca)
 
