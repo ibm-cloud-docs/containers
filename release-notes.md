@@ -42,6 +42,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 [Change log]{: tag-purple}{{site.data.keyword.block_storage_is_short}} add-on versions `5.0.23_437` and `5.1.16_446`, and `5.2.11_447`.
 
 
+
+
 ### 22 November 2023
 {: #containers-nov2223}
 {: release-note}
