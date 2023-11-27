@@ -243,6 +243,12 @@ subcollection: containers
 
         * [Change log]{: tag-purple} Cluster autoscaler add-on patch updates `1.2.0_290`, `1.0.9_290`, `1.0.8_292`, and `1.0.7_291`.
 
+        * [Change log]{: tag-purple}{{site.data.keyword.block_storage_is_short}} add-on versions `5.0.23_437` and `5.1.16_446`, and `5.2.11_447`.
+
+    * [22 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2223)
+
+        * [Change log]{: tag-purple} Worker node fix packs are available.
+
     * [21 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2123)
 
         * [Change log]{: tag-purple} Ingress ALB updates
@@ -5949,6 +5955,8 @@ subcollection: containers
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
 
+    * [Change log for worker node fix pack 1.28.3_1535, released 22 November 2023](/docs/containers?topic=containers-changelog_128#1283_1535_W)
+
     * [Change log for master fix pack 1.28.3_1534, released 15 November 2023](/docs/containers?topic=containers-changelog_128#1283_1534_M)
 
     * [Change log for worker node fix pack 1.28.2_1533, released 08 November 2023](/docs/containers?topic=containers-changelog_128#1282_1533_W)
@@ -6023,6 +6031,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for worker node fix pack 1.27.7_1548, released 22 November 2023](/docs/containers?topic=containers-changelog_127#1277_1548_W)
 
     * [Change log for master fix pack 1.27.7_1547, released 15 November 2023](/docs/containers?topic=containers-changelog_127#1277_1547_M)
 
@@ -6124,6 +6134,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for worker node fix pack 1.26.10_1561, released 22 November 2023](/docs/containers?topic=containers-changelog_126#12610_1561_W)
 
     * [Change log for master fix pack 1.26.10_1560, released 15 November 2023](/docs/containers?topic=containers-changelog_126#12610_1560_M)
 
@@ -6251,6 +6263,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for worker node fix pack 1.25.15_1568, released 22 November 2023](/docs/containers?topic=containers-changelog_125#12515_1568_W)
 
     * [Change log for master fix pack 1.25.15_1567, released 15 November 2023](/docs/containers?topic=containers-changelog_125#12515_1567_M)
 
@@ -6402,6 +6416,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.17_1591, released 22 November 2023](/docs/containers?topic=containers-changelog_124#12417_1591_W)
 
     * [Change log for worker node fix pack 1.24.17_1590, released 08 November 2023](/docs/containers?topic=containers-changelog_124#12417_1590_W)
 
@@ -7418,11 +7434,15 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-vpc_bs_changelog#052_is_block)
 
-    * [Change log for version 5.2.10_428, released 13 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2.12_428_is_block_relnote)
+    * [Change log for version 5.2.11_447, released 27 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2.11_447_is_block_relnote)
+
+    * [Change log for version 5.2.10_428, released 13 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2.10_428_is_block_relnote)
 
     * [Change log for version 5.2, released 25 September 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2_is_block_relnote)
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
+
+* [Change log for version 5.1.16_446, released 27 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.16_446_is_block_relnote)
 
     * [Change log for version 5.1.15_419 released 13 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.15_419_is_block_relnote)
 
@@ -7445,6 +7465,8 @@ subcollection: containers
     * [Change log for version 5.1, released 9 February 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1_is_block_relnote)
 
 * [Version 5.0](/docs/containers?topic=containers-vpc_bs_changelog#050_is_block)
+
+    * [Change log for version 5.0.23_437, released 27 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.23_437_is_block_relnote)
 
     * [Change log for version 5.0.21_401, released 13 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.0.21_401_is_block_relnote)
 

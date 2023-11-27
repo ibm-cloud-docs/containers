@@ -39,11 +39,32 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 [Change log]{: tag-purple} Cluster autoscaler add-on patch updates `1.2.0_290`, `1.0.9_290`, `1.0.8_292`, and `1.0.7_291`.
 :   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
 
+[Change log]{: tag-purple}{{site.data.keyword.block_storage_is_short}} add-on versions `5.0.23_437` and `5.1.16_446`, and `5.2.11_447`.
+
+
+### 22 November 2023
+{: #containers-nov2223}
+{: release-note}
+
+
+
+[Change log]{: tag-purple} Worker node fix packs are available.
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+
+:   [1.28.3_1535](/docs/containers?topic=containers-changelog_128)
+:   [1.27.7_1548](/docs/containers?topic=containers-changelog_127)
+:   [1.26.10_1561](/docs/containers?topic=containers-changelog_126)
+:   [1.25.15_1568](/docs/containers?topic=containers-changelog_125)
+:   [1.24.17_1590](/docs/containers?topic=containers-changelog_124)
+
+
+
 
 
 ### 21 November 2023
 {: #containers-nov2123}
 {: release-note}
+
 
 
 [Change log]{: tag-purple} Ingress ALB updates
