@@ -2830,33 +2830,19 @@ subcollection: containers
 
     * [External communication to apps that run on worker nodes for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-external)
 
-[Understanding encryption](/docs/containers?topic=containers-encryption#encryption)
+[Encryption overview](/docs/containers?topic=containers-encryption#encryption)
 
-* [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms)
+* [Control plane](/docs/containers?topic=containers-encryption#control-plane-encryption)
 
-    * [Controlling encryption](/docs/containers?topic=containers-encryption#kms-encrypt-control)
+* [Worker node disks](/docs/containers?topic=containers-encryption#worker-node-encryption)
 
-    * [Features and limitations of KMS providers](/docs/containers?topic=containers-encryption#kms-keyprotect-features)
+* [Cluster secrets](/docs/containers?topic=containers-encryption#cluster-secret-encryption)
 
-* [Encrypting the Kubernetes secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect)
+* [Peristent storage](/docs/containers?topic=containers-encryption#persistent-encryption)
 
-    * [Prerequisites](/docs/containers?topic=containers-encryption#kms_prereqs)
+* [Next steps](/docs/containers?topic=containers-encryption#encryption-next-steps)
 
-    * [Enabling KMS encryption for the cluster through the CLI](/docs/containers?topic=containers-encryption#kms_cli)
-
-    * [Enabling KMS encryption for the cluster through the console](/docs/containers?topic=containers-encryption#kms_ui)
-
-    * [Rotating the root key for your cluster](/docs/containers?topic=containers-encryption#kms_rotate)
-
-* [Verifying secret encryption](/docs/containers?topic=containers-encryption#verify_kms)
-
-* [Managing encryption for the worker nodes in your cluster](/docs/containers?topic=containers-encryption#worker-encryption)
-
-    * [Classic worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-classic)
-
-    * [VPC worker nodes](/docs/containers?topic=containers-encryption#worker-encryption-vpc)
-
-[Understanding your storage options](/docs/containers?topic=containers-storage-plan#storage-plan)
+[Storage overview](/docs/containers?topic=containers-storage-plan#storage-plan)
 
 * [Non-persistent storage options](/docs/containers?topic=containers-storage-plan#storage-plan-non-persistent)
 
@@ -3031,6 +3017,27 @@ subcollection: containers
 * [Adding tags to clusters with the CLI](/docs/containers?topic=containers-worker-tag-label#add-tags-cli)
 
 * [Adding labels to existing worker pools](/docs/containers?topic=containers-worker-tag-label#worker_pool_labels)
+
+
+## Setting up encryption
+{: #sitemap_setting_up_encryption}
+
+
+[Setting up a key management service (KMS) provider](/docs/containers?topic=containers-encryption-setup#encryption-setup)
+
+* [Rotating your KMS root key](/docs/containers?topic=containers-encryption-setup#encryption-rotate)
+
+[Setting up cluster secret encryption](/docs/containers?topic=containers-encryption-secrets#encryption-secrets)
+
+* [Enabling secret encryption from the CLI](/docs/containers?topic=containers-encryption-secrets#encryption-secrets-cli)
+
+* [Enabling secret encryption from the console](/docs/containers?topic=containers-encryption-secrets#encryption-secrets-console)
+
+* [Rotating the root key for your cluster](/docs/containers?topic=containers-encryption-secrets#encryption-secrets-rotate)
+
+* [Verifying secret encryption](/docs/containers?topic=containers-encryption-secrets#encryption-secrets-verify)
+
+[Setting up worker node disk encryption for VPC clusters](/docs/containers?topic=containers-encryption-vpc-worker-disks#encryption-vpc-worker-disks)
 
 
 ## Enhancing security
