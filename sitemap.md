@@ -3025,8 +3025,6 @@ subcollection: containers
 
 [Setting up a key management service (KMS) provider](/docs/containers?topic=containers-encryption-setup#encryption-setup)
 
-* [Setting up worker node disk encryption for VPC clusters](/docs/containers?topic=containers-encryption-setup#encrypt-worker-node-disks)
-
 * [Rotating your KMS root key](/docs/containers?topic=containers-encryption-setup#encryption-rotate)
 
 [Setting up cluster secret encryption](/docs/containers?topic=containers-encryption-secrets#encryption-secrets)
