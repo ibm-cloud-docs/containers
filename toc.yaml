@@ -60,7 +60,7 @@ toc:
           - worker-plan.md
           - cluster-plan-network-vpc.md
           - cluster-plan-network-classic.md
-          - encrypt.md
+          - encryption.md
           - storage-plan.md
       - topicgroup:
           label: Creating clusters
@@ -88,6 +88,12 @@ toc:
           - host-maintenance.md
           - ubuntu-migrate.md
           - worker-tag-label.md
+      - topicgroup:
+          label: Setting up encryption
+          topics:
+          - encryption-setup.md
+          - encryption-secrets.md
+          - encryption-vpc-worker-disks.md
       - topicgroup:
           label: Enhancing security
           topics:

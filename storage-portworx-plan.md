@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-08-21"
+lastupdated: "2023-11-28"
 
 keywords: portworx, kubernetes
 
@@ -204,7 +204,7 @@ Review the following Portworx limitations.
 
     6. Exit the pod.
 
-Check out how to [encrypt the secrets in your cluster](/docs/containers?topic=containers-encryption#keyprotect), including the secret where you stored your {{site.data.keyword.keymanagementserviceshort}} CRK for your Portworx storage cluster.
+Check out how to [encrypt the secrets in your cluster](/docs/containers?topic=containers-encryption), including the secret where you stored your {{site.data.keyword.keymanagementserviceshort}} CRK for your Portworx storage cluster.
 {: tip}
 
 

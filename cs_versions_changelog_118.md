@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2023
-lastupdated: "2023-06-20"
+lastupdated: "2023-11-28"
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -478,7 +478,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.18.13-1 | v1.18.14-1 | Updated to support the Kubernetes 1.18.14 release. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in | N/A | N/A | Updated to run with a privileged security context. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | c148a8a | f859228 | Updated image for [CVE-2020-1971](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971){: external} and [CVE-2020-24659](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-24659){: external}. |
-| Key Management Service provider | v2.0.7 | v2.2.2 | Updated the key management service (KMS) provider support as follows. \n - Updated to use `Go` version 1.15.2. \n - Added support for [service-to-service authentication](/docs/account?topic=account-serviceauth). \n - Updated to use the KMS provider secret to identify when a [Key Protect](/docs/containers?topic=containers-encryption#keyprotect) key is enabled and disabled so that encryption and decryption requests are updated accordingly. |
+| Key Management Service provider | v2.0.7 | v2.2.2 | Updated the key management service (KMS) provider support as follows. \n - Updated to use `Go` version 1.15.2. \n - Added support for [service-to-service authentication](/docs/account?topic=account-serviceauth). \n - Updated to use the KMS provider secret to identify when a [Key Protect](/docs/containers?topic=containers-encryption) key is enabled and disabled so that encryption and decryption requests are updated accordingly. |
 | Kubernetes | v1.18.13 | v1.18.14 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.14){: external}. |
 | Kubernetes `NodeLocal` DNS cache | N/A | N/A | Updated to run with a least privileged security context. |
 | Operator Lifecycle Manager | 0.14.1-IKS-1 | 0.14.1-IKS-2 | Updated image for [CVE-2020-1971](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971){: external} and [CVE-2020-28928](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28928){: external}. |

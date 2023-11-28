@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-10-05"
+lastupdated: "2023-11-28"
 
 keywords: kubernetes, deploy
 
@@ -194,7 +194,7 @@ Secret
     - Personally identifiable information (PII: Store sensitive information such as email addresses or other types of information that are required for company compliance or government regulation in secrets.
     - Credentials: Put credentials such as passwords, keys, and tokens in a secret to reduce the risk of accidental exposure. For example, when you [bind a service](/docs/containers?topic=containers-service-binding) to your cluster, the credentials are stored in a secret.
 
-Want to make your secrets even more secured? Ask your cluster admin to [enable a key management service provider](/docs/containers?topic=containers-encryption#keyprotect) in your cluster to encrypt new and existing secrets.
+Want to make your secrets even more secured? Ask your cluster admin to [enable a key management service provider](/docs/containers?topic=containers-encryption) in your cluster to encrypt new and existing secrets.
 {: tip}
 
 ### How can I make sure that my app has the correct resources?
@@ -406,7 +406,7 @@ Kubernetes secrets
 :   When you deploy your app, don't store confidential information, such as credentials or keys, in the YAML configuration file, configmaps, or scripts. Instead, use [Kubernetes secrets](/docs/containers?topic=containers-security#pi), such as an image pull secret for registry credentials. You can then reference these secrets in your deployment YAML file.
 
 Secret encryption
-:   You can encrypt the Kubernetes secrets that you create in your cluster by using a key management service (KMS) provider. To get started, see [Encrypt secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect) and [Verify that secrets are encrypted](/docs/containers?topic=containers-encryption#verify_kms).
+:   You can encrypt the Kubernetes secrets that you create in your cluster by using a key management service (KMS) provider. To get started, see [Encrypt secrets by using a KMS provider](/docs/containers?topic=containers-encryption-setup) and [Verify that secrets are encrypted](/docs/containers?topic=containers-encryption-secrets).
 
 Microservice traffic encryption
 :   After you deploy your app, you can set up a service mesh and enable mTLS encryption for traffic between services in the mesh. To get started, [set up the managed Istio add-on](/docs/containers?topic=containers-istio). Then, follow the steps in [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls).
