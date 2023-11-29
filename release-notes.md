@@ -33,8 +33,19 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-nov2923}
 {: release-note}
 
-[Change log]{: tag-purple} OpenShift Data Foundation add-on versions `4.10.32`, `4.11.12`, and `4.12.13`.
-:   For more information, see the [change log](/docs/openshift?topic=openshift-odf_addon_changelog).
+
+
+
+[Change log]{: tag-purple} Worker node fix packs are available. Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+:    Review the following change logs for your cluster version.
+    - [1.28.3_1535](/docs/containers?topic=containers-changelog_128)
+    - [1.27.7_1548](/docs/containers?topic=containers-changelog_127)
+    - [1.26.10_1561](/docs/containers?topic=containers-changelog_126)
+    - [1.25.15_1568](/docs/containers?topic=containers-changelog_125)
+    - [1.24.17_1591](/docs/containers?topic=containers-changelog_124)
+
+
+
 
 ### 27 November 2023
 {: #containers-nov2723}
