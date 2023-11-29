@@ -237,6 +237,10 @@ subcollection: containers
 
 * [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
 
+    * [29 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2923)
+
+        * [Change log]{: tag-purple} OpenShift Data Foundation add-on versions `4.10.32`, `4.11.12`, and `4.12.13`.
+
     * [27 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2723)
 
         * [New]{: tag-green} The Beta {{site.data.keyword.filestorage_vpc_short}} cluster add-on is now available to all accounts.
