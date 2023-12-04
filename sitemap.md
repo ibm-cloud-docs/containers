@@ -9453,6 +9453,8 @@ subcollection: containers
 
 [Why can't I create a VPC cluster with encrypted worker nodes?](/docs/containers?topic=containers-ts-vpc-byok-encrypted-storage#ts-vpc-byok-encrypted-storage)
 
+[Why am I receiving mutliple etcd alerts?](/docs/containers?topic=containers-ts-addon-etcd-alerts#ts-addon-etcd-alerts)
+
 
 ### Worker nodes
 {: #sitemap_worker_nodes}
