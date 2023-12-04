@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-11-29"
+lastupdated: "2023-12-04"
 
 keywords: containers, kubernetes, release notes
 
@@ -26,6 +26,21 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
+## December 2023
+{: #containers-dec23}
+
+
+
+### 04 December 2023
+{: #containers-dec0423}
+{: release-note}
+
+
+[Change log]{: tag-purple} Ingress ALB updates
+:   Ingress ALB versions `1.9.4_5886_iks`, `1.8.4_5885_iks`, `1.6.4_5884_iks` are available. 1.9.4 is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
+
 ## November 2023
 {: #containers-nov23}
 
@@ -43,6 +58,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
     - [1.26.10_1561](/docs/containers?topic=containers-changelog_126)
     - [1.25.15_1568](/docs/containers?topic=containers-changelog_125)
     - [1.24.17_1591](/docs/containers?topic=containers-changelog_124)
+
 
 
 
