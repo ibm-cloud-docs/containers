@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-11-20"
+lastupdated: "2023-12-04"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -30,6 +30,32 @@ ibmcloud ks cluster addon versions
 
 ## Version 1.19
 {: #v119}
+
+### Changelog for 1.19.4, released 5 December 2023
+{: #1194}
+
+Review the changes that are included in version 1.19.4 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.19.3
+
+Current version
+:   1.19.4
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.19.64](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.4/){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2023-2975](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2975){: external}
+    - [CVE-2023-3446](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-3446){: external}
+    - [CVE-2023-38545](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-38545){: external}
+    - [CVE-2023-38546](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-38546){: external}
+    - [CVE-2023-3817](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-3817){: external}
+    - [CVE-2023-4911](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4911){: external}
+    - [CVE-2023-5363](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5363){: external}
+    - [CVE-2023-36054](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-36054){: external}
+    - [usn-6429-1](https://ubuntu.com/security/notices/USN-6429-1){: external}  
+    - [usn-6450-1](https://ubuntu.com/security/notices/USN-6450-1){: external}
 
 ### Change log for 1.19.3, released 10 October 2023
 {: #1193}

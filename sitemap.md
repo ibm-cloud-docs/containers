@@ -237,7 +237,11 @@ subcollection: containers
 
 * [December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec23)
 
-    * [04 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0423)
+    * [5 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0523)
+
+        * [Change log]{: tag-purple} Istio add-on version `1.19.4`.
+
+    * [4 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0423)
 
         * [Change log]{: tag-purple} Ingress ALB updates
 
@@ -7018,6 +7022,8 @@ subcollection: containers
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
 * [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
+
+    * [Changelog for 1.19.4, released 5 December 2023](/docs/containers?topic=containers-istio-changelog#1194)
 
     * [Change log for 1.19.3, released 10 October 2023](/docs/containers?topic=containers-istio-changelog#1193)
 
