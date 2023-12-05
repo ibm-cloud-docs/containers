@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-12-04"
+lastupdated: "2023-12-05"
 
 keywords: containers
 subcollection: containers
@@ -237,9 +237,15 @@ subcollection: containers
 
 * [December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec23)
 
-    * [04 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0423)
+    * [5 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0523)
+
+        * [Change log]{: tag-purple} Istio add-on version `1.19.4`.
+
+    * [4 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0423)
 
         * [Change log]{: tag-purple} Ingress ALB updates
+
+        * [Change log]{: tag-purple} Worker node fix packs are available. Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
 
 * [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
 
@@ -2515,25 +2521,6 @@ subcollection: containers
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
 
-## Migrating an app from Cloud Foundry to a cluster
-{: #sitemap_migrating_an_app_from_cloud_foundry_to_a_cluster}
-
-
-[Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
-
-* [Objectives](/docs/containers?topic=containers-cf_tutorial#cf_objectives)
-
-* [Audience](/docs/containers?topic=containers-cf_tutorial#cf_audience)
-
-* [Prerequisites](/docs/containers?topic=containers-cf_tutorial#cf_prereqs)
-
-* [Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
-
-* [Create a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
-
-* [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
-
-
 ## Installing the CLI
 {: #sitemap_installing_the_cli}
 
@@ -2848,7 +2835,7 @@ subcollection: containers
 
 * [Cluster secrets](/docs/containers?topic=containers-encryption#cluster-secret-encryption)
 
-* [Peristent storage](/docs/containers?topic=containers-encryption#persistent-encryption)
+* [Persistent storage](/docs/containers?topic=containers-encryption#persistent-encryption)
 
 * [Next steps](/docs/containers?topic=containers-encryption#encryption-next-steps)
 
@@ -5242,6 +5229,10 @@ subcollection: containers
 
 [Removing clusters](/docs/containers?topic=containers-remove#remove)
 
+* [Removing {{site.data.keyword.satelliteshort}} worker nodes or clusters](/docs/containers?topic=containers-remove#satcluster-rm)
+
+* [Next steps](/docs/containers?topic=containers-remove#cluster-remove-next-steps)
+
 
 ## API reference
 {: #sitemap_api_reference}
@@ -5970,6 +5961,8 @@ subcollection: containers
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
 
+    * [Change log for worker node fix pack 1.28.4_1538, released 04 December 2023](/docs/containers?topic=containers-changelog_128#1284_1538_W)
+
     * [Change log for worker node fix pack 1.28.3_1535, released 29 November 2023](/docs/containers?topic=containers-changelog_128#1283_1535_W)
 
     * [Change log for master fix pack 1.28.3_1534, released 15 November 2023](/docs/containers?topic=containers-changelog_128#1283_1534_M)
@@ -6046,6 +6039,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for worker node fix pack 1.27.8_1557, released 04 December 2023](/docs/containers?topic=containers-changelog_127#1278_1557_W)
 
     * [Change log for worker node fix pack 1.27.7_1548, released 29 November 2023](/docs/containers?topic=containers-changelog_127#1277_1548_W)
 
@@ -6149,6 +6144,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for worker node fix pack 1.26.11_1565, released 04 December 2023](/docs/containers?topic=containers-changelog_126#12611_1565_W)
 
     * [Change log for worker node fix pack 1.26.10_1561, released 29 November 2023](/docs/containers?topic=containers-changelog_126#12610_1561_W)
 
@@ -6278,6 +6275,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for worker node fix pack 1.25.16_1570, released 04 December 2023](/docs/containers?topic=containers-changelog_125#12516_1570_W)
 
     * [Change log for worker node fix pack 1.25.15_1568, released 29 November 2023](/docs/containers?topic=containers-changelog_125#12515_1568_W)
 
@@ -6431,6 +6430,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_124#changelog_overview_124)
 
 * [Version 1.24 change log](/docs/containers?topic=containers-changelog_124#124_changelog)
+
+    * [Change log for worker node fix pack 1.24.17_1592, released 04 December 2023](/docs/containers?topic=containers-changelog_124#12417_1592_W)
 
     * [Change log for worker node fix pack 1.24.17_1591, released 29 November 2023](/docs/containers?topic=containers-changelog_124#12417_1591_W)
 
@@ -7018,6 +7019,8 @@ subcollection: containers
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
 * [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
+
+    * [Changelog for 1.19.4, released 5 December 2023](/docs/containers?topic=containers-istio-changelog#1194)
 
     * [Change log for 1.19.3, released 10 October 2023](/docs/containers?topic=containers-istio-changelog#1193)
 
@@ -9453,6 +9456,8 @@ subcollection: containers
 
 [Why can't I create a VPC cluster with encrypted worker nodes?](/docs/containers?topic=containers-ts-vpc-byok-encrypted-storage#ts-vpc-byok-encrypted-storage)
 
+[Why am I receiving mutliple etcd alerts?](/docs/containers?topic=containers-ts-addon-etcd-alerts#ts-addon-etcd-alerts)
+
 
 ### Worker nodes
 {: #sitemap_worker_nodes}
@@ -9691,12 +9696,6 @@ subcollection: containers
 * [Fixing pod replacement by higher priority pods](/docs/containers?topic=containers-ts-app-pod-fail#pod-fail-higher-priority)
 
 [Why does binding a service to a cluster result in a same name error?](/docs/containers?topic=containers-ts-app-svc-bind-name#ts-app-svc-bind-name)
-
-[Why does binding a service to a cluster results in service not found error?](/docs/containers?topic=containers-ts-app-svc-bind-not-found#ts-app-svc-bind-not-found)
-
-* [Cluster user](/docs/containers?topic=containers-ts-app-svc-bind-not-found#service-bind-cluster-user)
-
-* [As the account admin](/docs/containers?topic=containers-ts-app-svc-bind-not-found#service-bind-account-admin)
 
 [Why does binding a service to a cluster results in service does not support service keys error?](/docs/containers?topic=containers-ts-app-svc-key#ts-app-svc-key)
 

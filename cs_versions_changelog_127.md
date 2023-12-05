@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-11-29"
+lastupdated: "2023-12-05"
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
 
@@ -42,6 +42,19 @@ Review the version 1.27 change log.
 
 
 
+
+
+### Change log for worker node fix pack 1.27.8_1557, released 04 December 2023
+{: #1278_1557_W}
+
+The following table shows the changes that are in the worker node fix pack 1.27.8_1557. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 20.04 packages | 5.4.0-166-generic | 5.4.0-167-generic | Worker node kernel & package updates for [CVE-2023-31085](https://nvd.nist.gov/vuln/detail/CVE-2023-31085){: external}, [CVE-2023-40217](https://nvd.nist.gov/vuln/detail/CVE-2023-40217){: external}, [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}, [CVE-2023-45871](https://nvd.nist.gov/vuln/detail/CVE-2023-45871){: external}, [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/CVE-2023-47038){: external}, [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/CVE-2023-5981){: external}. |
+| Kubernetes | 1.27.7 | 1.27.8 | For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.8){: external}. |
+{: caption="Changes since version 1.27.7_1548" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.27.7_1548, released 29 November 2023

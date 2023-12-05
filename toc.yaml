@@ -39,7 +39,6 @@ toc:
           label: Tutorials library for Kubernetes Service
           href: https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20
       - cs_tutorial_vpc.md
-      - cs_tutorials_cf.md
   - navgroup: 
       id: howto
       topics:
@@ -436,6 +435,7 @@ toc:
               - ts-kube-dashboord-oom.md
               - ts-admin-cert.md
               - ts-vpc-byok-encrypted-storage.md
+              - ts-etcd-alerts.md
           - topicgroup:
               label: Worker nodes
               topics:
@@ -491,7 +491,6 @@ toc:
               - ts-app-pod-pending.md
               - ts-app-pod-fail.md
               - ts-app-07-svc-name.md
-              - ts-app-svc-not-found.md
               - ts-app-svc-key.md
               - ts-app-helm-install.md
           - topicgroup:

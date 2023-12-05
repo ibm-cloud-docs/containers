@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-10-04"
+lastupdated: "2023-12-05"
 
-keywords: kubernetes
+keywords: containers, iro, openshift, red hat, red hat openshift
 
 subcollection: containers
 
@@ -174,7 +174,5 @@ The following steps present a general process to manage costs for your {{site.da
     * Consider setting up a [monitoring tool](/docs/containers?topic=containers-health-monitor#view_metrics) such as {{site.data.keyword.mon_full_notm}} and creating alerts for your workloads when they need more resources.
 6. [View your usage](/docs/billing-usage?topic=billing-usage-viewingusage#viewingusage) to continuously refine how you consume {{site.data.keyword.cloud_notm}} services.
 7. [Set spending notifications](/docs/billing-usage?topic=billing-usage-spending).
-
-
 
 

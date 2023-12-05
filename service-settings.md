@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-09-25"
+lastupdated: "2023-12-05"
 
-keywords: kubernetes
+keywords: containers
 
 subcollection: containers
 
@@ -128,9 +128,9 @@ TLS cipher support
 Review the default settings for the `kubelet` worker node component in {{site.data.keyword.containerlong_notm}}. 
 {: shortdesc}
 
-`imageGCHighThresholdPercent: 75` (Kubernetes version 1.28 and later)
+`imageGCHighThresholdPercent: 75` (Kubernetes version 1.26 and later)
 
-`imageGCLowThresholdPercent: 65` (Kubernetes version 1.28 and later)
+`imageGCLowThresholdPercent: 65` (Kubernetes version 1.26 and later)
 
 `kubeAPIQPS: 50` (Kubernetes version 1.27 and later)
 
