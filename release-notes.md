@@ -52,7 +52,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 :   Ingress ALB versions `1.9.4_5886_iks`, `1.8.4_5885_iks`, `1.6.4_5884_iks` are available. 1.9.4 is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
 
-[Change log]{: tag-purple} Worker node fix packs are available. Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+[Change log]{: tag-purple} Worker node fix packs are available. 
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
 :    Review the following change logs for your cluster version.
     - [1.28.4_1538](/docs/containers?topic=containers-changelog_128)
     - [1.27.8_1557](/docs/containers?topic=containers-changelog_127)
@@ -74,7 +75,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
-[Change log]{: tag-purple} Worker node fix packs are available. Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+[Change log]{: tag-purple} Worker node fix packs are available. 
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
 :    Review the following change logs for your cluster version.
     - [1.28.3_1535](/docs/containers?topic=containers-changelog_128)
     - [1.27.7_1548](/docs/containers?topic=containers-changelog_127)
@@ -270,7 +272,8 @@ Kubernetes version 1.28 is now the default version for new {{site.data.keyword.c
 
 
 
-[Change log]{: tag-purple} Worker node fix packs are available. Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+[Change log]{: tag-purple} Worker node fix packs are available. 
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
 :    Review the following change logs for your cluster version.
     - [1.28.2_1532](/docs/containers?topic=containers-changelog_128)
     - [1.27.6_1545](/docs/containers?topic=containers-changelog_127)
@@ -347,7 +350,6 @@ Kubernetes version 1.28 is now the default version for new {{site.data.keyword.c
 
 
 [Change log]{: tag-purple} Worker node fix packs are available.
-
 :   [1.28.2_1529](/docs/containers?topic=containers-changelog_128)
 :   [1.27.5_1542](/docs/containers?topic=containers-changelog_127)
 :   [1.26.8_1556](/docs/containers?topic=containers-changelog_126)
