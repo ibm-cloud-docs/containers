@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2023
-lastupdated: "2023-12-04"
+lastupdated: "2023-12-05"
 
 keywords: etcd, help, alert
 
@@ -20,12 +20,12 @@ content-type: troubleshoot
 You receive multiple alerts for `etcdHighNumberOfLeaderChanges` or `etcdExcessiveDatabaseGrowth`, with descriptions similar to the following messages.
 {: tsSymptoms}
 
-```
+```txt
 "etcd": 7.5 leader changes within the last 15 minutes. Frequent elections may be a sign of insufficient resources, high network latency, or disruptions by other components and should be investigated.
 ```
 {: screen}
 
-```
+```txt
 "etcd cluster "etcd": Observed surge in etcd writes leading to 50% increase in database size over the past four hours on etcd instance, please check as it might be disruptive.
 ```
 {: screen}

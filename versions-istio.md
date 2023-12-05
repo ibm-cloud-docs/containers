@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-12-04"
+lastupdated: "2023-12-05"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -44,7 +44,7 @@ Current version
 :   1.19.4
 
 Updates in this version
-:   See the Istio release notes for [Istio 1.19.64](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.4/){:external}.
+:   See the Istio release notes for [Istio 1.19.64](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.4/){: external}.
 :   Resolves the following CVEs:
     - [CVE-2023-2975](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2975){: external}
     - [CVE-2023-3446](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-3446){: external}

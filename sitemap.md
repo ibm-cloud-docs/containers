@@ -5229,6 +5229,10 @@ subcollection: containers
 
 [Removing clusters](/docs/containers?topic=containers-remove#remove)
 
+* [Removing {{site.data.keyword.satelliteshort}} worker nodes or clusters](/docs/containers?topic=containers-remove#satcluster-rm)
+
+* [Next steps](/docs/containers?topic=containers-remove#cluster-remove-next-steps)
+
 
 ## API reference
 {: #sitemap_api_reference}
