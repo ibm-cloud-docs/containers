@@ -245,13 +245,13 @@ subcollection: containers
 
         * [Change log]{: tag-purple} Ingress ALB updates
 
-        * [Change log]{: tag-purple} Worker node fix packs are available. Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+        * [Change log]{: tag-purple} Worker node fix packs are available. 
 
 * [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
 
     * [29 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2923)
 
-        * [Change log]{: tag-purple} Worker node fix packs are available. Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+        * [Change log]{: tag-purple} Worker node fix packs are available. 
 
     * [27 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2723)
 
@@ -329,7 +329,7 @@ subcollection: containers
 
     * [23 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct2323)
 
-        * [Change log]{: tag-purple} Worker node fix packs are available. Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+        * [Change log]{: tag-purple} Worker node fix packs are available. 
 
         * [Change log]{: tag-purple} Ingress ALB version `1.8.4_5586_ikss`
 
