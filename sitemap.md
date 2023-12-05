@@ -2519,25 +2519,6 @@ subcollection: containers
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
 
-## Migrating an app from Cloud Foundry to a cluster
-{: #sitemap_migrating_an_app_from_cloud_foundry_to_a_cluster}
-
-
-[Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
-
-* [Objectives](/docs/containers?topic=containers-cf_tutorial#cf_objectives)
-
-* [Audience](/docs/containers?topic=containers-cf_tutorial#cf_audience)
-
-* [Prerequisites](/docs/containers?topic=containers-cf_tutorial#cf_prereqs)
-
-* [Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
-
-* [Create a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
-
-* [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
-
-
 ## Installing the CLI
 {: #sitemap_installing_the_cli}
 
@@ -9709,12 +9690,6 @@ subcollection: containers
 * [Fixing pod replacement by higher priority pods](/docs/containers?topic=containers-ts-app-pod-fail#pod-fail-higher-priority)
 
 [Why does binding a service to a cluster result in a same name error?](/docs/containers?topic=containers-ts-app-svc-bind-name#ts-app-svc-bind-name)
-
-[Why does binding a service to a cluster results in service not found error?](/docs/containers?topic=containers-ts-app-svc-bind-not-found#ts-app-svc-bind-not-found)
-
-* [Cluster user](/docs/containers?topic=containers-ts-app-svc-bind-not-found#service-bind-cluster-user)
-
-* [As the account admin](/docs/containers?topic=containers-ts-app-svc-bind-not-found#service-bind-account-admin)
 
 [Why does binding a service to a cluster results in service does not support service keys error?](/docs/containers?topic=containers-ts-app-svc-key#ts-app-svc-key)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-11-28"
+lastupdated: "2023-12-05"
 
 keywords: kubernetes
 
@@ -2083,7 +2083,7 @@ ibmcloud ks cluster service bind --cluster CLUSTER --namespace KUBERNETES_NAMESP
 {: pre}
 
 Minimum required permissions
-:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -2101,7 +2101,7 @@ Minimum required permissions
      To list available roles for the service, run `ibmcloud iam roles --service <service_name>`. The service name is the name of the service in the catalog, which you can get by running `ibmcloud catalog search`.
 
 `--service SERVICE_INSTANCE`
-:    Required: The name of the {{site.data.keyword.cloud_notm}} service instance that you want to bind. To find the name, run `ibmcloud service list` for Cloud Foundry services, and `ibmcloud resource service-instances` for IAM-enabled services.
+:    Required: The name of the {{site.data.keyword.cloud_notm}} service instance that you want to bind. To find the name, run `ibmcloud resource service-instances`.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
@@ -2176,7 +2176,7 @@ ibmcloud ks cluster service unbind --cluster CLUSTER --namespace KUBERNETES_NAME
 {: pre}
 
 Minimum required permissions
-:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -6336,7 +6336,7 @@ Create a logging configuration. You can use this command to forward logs for con
 {: shortdesc}
 
 ```sh
-ibmcloud ks logging config create --cluster CLUSTER --logsource LOG_SOURCE --type syslog [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] [--syslog-protocol PROTOCOL] [--skip-validation] [--force-update] [--output json] [-q]
+ibmcloud ks logging config create --cluster CLUSTER --logsource LOG_SOURCE --type syslog [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] [--syslog-protocol PROTOCOL] [--skip-validation] [--force-update] [--output json] [-q]
 ```
 {: pre}
 
@@ -6362,12 +6362,6 @@ Minimum required permissions
 
 `--port LOG_SERVER_PORT`
 :    Optional: The port of the log collector server. If you don't specify a port, then the standard port `514` is used for `syslog` and the standard port `9091` is used for `ibm`.
-
-`--space CLUSTER_SPACE`
-:    Optional: The name of the Cloud Foundry space that you want to send logs to. This value is valid only for log type `ibm` and is optional. If you don't specify a space, logs are sent to the account level. If you do, you must also specify an `org`.
-
-`--org CLUSTER_ORG`
-:    Optional: The name of the Cloud Foundry org that the space is in. This value is valid only for log type `ibm` and is required if you specified a space.
 
 `-p, --app-path`
 :    The path on the container that the apps are logging to. To forward logs with source type `application`, you must provide a path. Wildcards, such as `/var/log/*.log`, can be used, but recursive globs, such as `/var/log/**/test.log`, can't be used. To specify more than one path, use multiple options, such as `-p /var/log/myApp1/&ast; -p /var/log/myApp2/&ast;`. This value is required for log source `application`.
@@ -6503,7 +6497,7 @@ Update the details of a log forwarding configuration.
 {: shortdesc}
 
 ```sh
-ibmcloud ks logging config update --cluster CLUSTER --id LOG_CONFIG_ID --type LOG_TYPE  [--namespace NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-paths PATH] [--app-containers PATH] [--output json] [--skipValidation] [--force-update] [-q]
+ibmcloud ks logging config update --cluster CLUSTER --id LOG_CONFIG_ID --type LOG_TYPE  [--namespace NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--app-paths PATH] [--app-containers PATH] [--output json] [--skipValidation] [--force-update] [-q]
 ```
 {: pre}
 
@@ -6529,12 +6523,6 @@ Minimum required permissions
 
 `--port LOG_SERVER_PORT`
 :    The port of the log collector server. This value is optional when the logging type is `syslog`. If you don't specify a port, then the standard port `514` is used for `syslog` and `9091` is used for `ibm`.
-
-`--space CLUSTER_SPACE`
-:    Optional: The name of the space that you want to send logs to. This value is valid only for log type `ibm` and is optional. If you don't specify a space, logs are sent to the account level. If you do, you must also specify an `org`.
-
-`--org CLUSTER_ORG`
-:    Optional: The name of the Cloud Foundry org that the space is in. This value is valid only for log type `ibm` and is required if you specified a space.
 
 `-p, --app-path`
 :    The path on the container that the apps are logging to. To forward logs with source type `application`, you must provide a path. Wildcards, such as `/var/log/*.log`, can be used, but recursive globs, such as `/var/log/**/test.log`, can't be used. To specify more than one path, use multiple options, such as `-p /var/log/myApp1/&ast; -p /var/log/myApp2/&ast;`. This value is required for log source `application`.
