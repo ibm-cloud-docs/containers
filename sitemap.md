@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-12-04"
+lastupdated: "2023-12-05"
 
 keywords: containers
 subcollection: containers
@@ -2852,7 +2852,7 @@ subcollection: containers
 
 * [Cluster secrets](/docs/containers?topic=containers-encryption#cluster-secret-encryption)
 
-* [Peristent storage](/docs/containers?topic=containers-encryption#persistent-encryption)
+* [Persistent storage](/docs/containers?topic=containers-encryption#persistent-encryption)
 
 * [Next steps](/docs/containers?topic=containers-encryption#encryption-next-steps)
 
