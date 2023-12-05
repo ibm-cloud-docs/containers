@@ -245,6 +245,8 @@ subcollection: containers
 
         * [Change log]{: tag-purple} Ingress ALB updates
 
+        * [Change log]{: tag-purple} Worker node fix packs are available. Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+
 * [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
 
     * [29 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2923)
