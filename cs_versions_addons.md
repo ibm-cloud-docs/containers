@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-12-04"
+lastupdated: "2023-12-06"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 subcollection: containers
@@ -43,10 +43,19 @@ The Kubernetes Ingress version follows the format `<community_version>_<ibm_buil
 
 When automatic updates are enabled for ALBs, your ALBs are updated to the most recent build of the version that is marked as `default`. If you want to use a version other than the default, you must [disable automatic updates](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable). Typically, the latest version becomes the default version one month after the latest version is released by the Kubernetes community. Actual availability and release dates of versions are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 
+If you use configuration snippets in your Ingress resource, you must adjust your ALB's ConfigMap (`kube-system/ibm-k8s-controller-config`) to include `allow-snippet-annotations: "true"`.
+{: tip}
+
+
 ## 1.9.4
 {: #1_9_4}
 
+If your Ingress resources use configuration snippets or redirects, their behavior might change with v1.9.4. Validate your configuration before updating. For more information about version 1.9.4, see the [1.9.4 community change log](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.9.4){: external}.
+{: important}
+
 1.9.4 is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image.
+{: note}
+
 
 ### 1.9.4_5886_iks, released 04 December 2023
 {: #1.9.4_5886_iks}
