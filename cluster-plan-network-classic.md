@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-10-26"
+lastupdated: "2023-12-06"
 
 keywords: kubernetes network, classic
 
@@ -64,7 +64,7 @@ In several situations, components in your cluster must be permitted to communica
 A communication channel must be set up so that worker nodes can establish a connection to the Kubernetes master. You can allow your worker nodes and Kubernetes master to communicate by enabling the public cloud service endpoint only, public and private cloud service endpoints, or the private cloud service endpoint only.
 {: shortdesc}
 
-To secure communication over public and private cloud service endpoints, {{site.data.keyword.containerlong_notm}} automatically sets up a Konnectivity connection between the Kubernetes master and the worker node when the cluster is created. Workers securely talk to the master through TLS certificates, and the master talks to workers through the OpenVPN connection.
+To secure communication over public and private cloud service endpoints, {{site.data.keyword.containerlong_notm}} automatically sets up a Konnectivity connection between the Kubernetes master and the worker node when the cluster is created. Workers securely talk to the master through TLS certificates, and the master talks to workers through the VPN connection.
 
 ### Public service endpoint only
 {: #workeruser-master-endpoint}
