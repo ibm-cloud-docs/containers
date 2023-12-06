@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-12-05"
+lastupdated: "2023-12-06"
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
 
@@ -39,6 +39,27 @@ Review the version 1.26 change log.
 
 
 
+
+
+### Change log for master fix pack 1.26.11_1564, released 06 December 2023
+{: #12611_1564_M}
+
+The following table shows the changes that are in the master fix pack 1.26.11_1564. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| GPU device plug-in and installer | 99267c4 | 0e3950c | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.12 | v2.4.14 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.26.10-4 | v1.26.11-6 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 438 | 439 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | c33e6e7 | 58e69e0 | New version contains updates and security fixes. |
+| Konnectivity agent and server | v0.1.5_39_iks | v0.1.5_47_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.1.5){: external}. |
+| Kubernetes | v1.26.10 | v1.26.11 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.11){: external}. |
+| Kubernetes NodeLocal DNS cache | 1.22.24 | 1.22.27 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.27){: external}. |
+| Load balancer and Load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2731 | 2767 | New version contains updates and security fixes. |
+{: caption="Changes since version 1.26.10_1560" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.26.11_1565, released 04 December 2023
