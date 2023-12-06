@@ -237,6 +237,10 @@ subcollection: containers
 
 * [December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec23)
 
+    * [6 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0623)
+
+        * [Change log]{: tag-purple} Master fix packs are available. 
+
     * [5 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0523)
 
         * [Change log]{: tag-purple} Istio add-on version `1.19.4`.
@@ -277,7 +281,7 @@ subcollection: containers
 
         * [New]{: tag-green} The cluster autoscaler add-on now supports version 1.28 clusters.
 
-        * [Change log]{: tag-purple} Master fix packs are available. Review the change logs for your cluster version. Master patch updates are applied automatically.
+        * [Change log]{: tag-purple} Master fix packs are available. 
 
     * [13 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov1323)
 

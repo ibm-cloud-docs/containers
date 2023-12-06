@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-12-05"
+lastupdated: "2023-12-06"
 
 keywords: containers, kubernetes, release notes
 
@@ -28,6 +28,25 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## December 2023
 {: #containers-dec23}
+
+
+### 6 December 2023
+{: #containers-dec0623}
+{: release-note}
+
+
+
+[Change log]{: tag-purple} Master fix packs are available. 
+:   Review the change logs for your cluster version. Master patch updates are applied automatically.
+:   [1.28.4_1537](/docs/containers?topic=containers-changelog_128)
+:   [1.27.8_1556](/docs/containers?topic=containers-changelog_127)
+:   [1.26.11_1564](/docs/containers?topic=containers-changelog_126)
+:   [1.25.16_1569](/docs/containers?topic=containers-changelog_125)
+
+
+
+
+
 
 
   
@@ -136,7 +155,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
-[Change log]{: tag-purple} Master fix packs are available. Review the change logs for your cluster version. Master patch updates are applied automatically.
+[Change log]{: tag-purple} Master fix packs are available. 
+:   Review the change logs for your cluster version. Master patch updates are applied automatically.
 :   [1.28.3_1534](/docs/containers?topic=containers-changelog_128)
 :   [1.27.7_1547](/docs/containers?topic=containers-changelog_127)
 :   [1.26.10_1560](/docs/containers?topic=containers-changelog_126)
