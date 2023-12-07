@@ -2942,7 +2942,7 @@ subcollection: containers
 
 [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc#add-workers-vpc)
 
-* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-vpc#resize-pool)
+* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-vpc#resize-pool-vpc)
 
 * [Creating a new worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_pool)
 
@@ -9290,11 +9290,11 @@ subcollection: containers
 
 * [Can I automate my infrastructure deployments?](/docs/containers?topic=containers-faqs#infra_packaging)
 
-* [What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?](/docs/containers?topic=containers-faqs#app_kinds)
+* [What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?](/docs/containers?topic=containers-faqs#app_kinds_dev)
 
 * [What about serverless apps?](/docs/containers?topic=containers-faqs#apps_serverless-strategy)
 
-* [What skills should I have before I move my apps to a cluster?](/docs/containers?topic=containers-faqs#knowledge)
+* [What skills should I have before I move my apps to a cluster?](/docs/containers?topic=containers-faqs#knowledge_skills)
 
 * [What options do I have to secure my cluster?](/docs/containers?topic=containers-faqs#secure_cluster)
 
