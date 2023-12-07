@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-12-06"
+lastupdated: "2023-12-07"
 
 keywords: containers
 subcollection: containers
@@ -236,6 +236,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec23)
+
+    * [7 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0723)
+
+        * [Change log]{: tag-purple} Istio add-on version `1.20.0`.
 
     * [6 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0623)
 
@@ -2938,7 +2942,7 @@ subcollection: containers
 
 [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc#add-workers-vpc)
 
-* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-vpc#resize-pool)
+* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-vpc#resize-pool-vpc)
 
 * [Creating a new worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_pool)
 
@@ -7038,6 +7042,10 @@ subcollection: containers
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
+* [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
+
+    * [Changelog for 1.20.0, released 7 December 2023](/docs/containers?topic=containers-istio-changelog#1200)
+
 * [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
 
     * [Changelog for 1.19.4, released 5 December 2023](/docs/containers?topic=containers-istio-changelog#1194)
@@ -9282,11 +9290,11 @@ subcollection: containers
 
 * [Can I automate my infrastructure deployments?](/docs/containers?topic=containers-faqs#infra_packaging)
 
-* [What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?](/docs/containers?topic=containers-faqs#app_kinds)
+* [What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?](/docs/containers?topic=containers-faqs#app_kinds_dev)
 
 * [What about serverless apps?](/docs/containers?topic=containers-faqs#apps_serverless-strategy)
 
-* [What skills should I have before I move my apps to a cluster?](/docs/containers?topic=containers-faqs#knowledge)
+* [What skills should I have before I move my apps to a cluster?](/docs/containers?topic=containers-faqs#knowledge_skills)
 
 * [What options do I have to secure my cluster?](/docs/containers?topic=containers-faqs#secure_cluster)
 
@@ -9476,7 +9484,7 @@ subcollection: containers
 
 [Why can't I create a VPC cluster with encrypted worker nodes?](/docs/containers?topic=containers-ts-vpc-byok-encrypted-storage#ts-vpc-byok-encrypted-storage)
 
-[Why am I receiving mutliple etcd alerts?](/docs/containers?topic=containers-ts-addon-etcd-alerts#ts-addon-etcd-alerts)
+[Why am I receiving multiple etcd alerts?](/docs/containers?topic=containers-ts-addon-etcd-alerts#ts-addon-etcd-alerts)
 
 
 ### Worker nodes

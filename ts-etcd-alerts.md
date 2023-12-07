@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2023
-lastupdated: "2023-12-05"
+lastupdated: "2023-12-07"
 
 keywords: etcd, help, alert
 
@@ -13,7 +13,7 @@ content-type: troubleshoot
 
 {{site.data.keyword.attribute-definition-list}}
 
-# Why am I receiving mutliple etcd alerts?
+# Why am I receiving multiple etcd alerts?
 {: #ts-addon-etcd-alerts}
 {: support}
 
@@ -33,6 +33,6 @@ You receive multiple alerts for `etcdHighNumberOfLeaderChanges` or `etcdExcessiv
 The cluster etcd database is located on the cluster control plane, which is maintained by IBM. Metrics from three separate etcd instances are pushed to a single pod in the cluster, but the source of the metrics is not always distinguished. When these metrics are collected by Prometheus they might be read as originating from a single etcd instance rather than multiple separate instances, resulting in a false alert for high rates of activity. In this case, there is no underlying issue and the alerts are triggered falsely. 
 {: tsCauses}
 
-In many cases, the `etcdHighNumberOfLeaderChanges` and `etcdExcessiveDatabaseGrowth` do not indicate an underlying issue and can be ignored. If you want to validate that the alerts are false, you can contact customer support. Open a [support case](/docs/get-support?topic=get-support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
+Often, the `etcdHighNumberOfLeaderChanges` and `etcdExcessiveDatabaseGrowth` do not indicate an underlying issue and can be ignored. If you want to validate that the alerts are false, you can contact customer support. Open a [support case](/docs/get-support?topic=get-support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
 {: tsResolve}
 
