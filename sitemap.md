@@ -4997,7 +4997,9 @@ subcollection: containers
 
 [Installing Autopilot for Portworx](/docs/containers?topic=containers-storage-portworx-autopilot#storage-portworx-autopilot)
 
-* [Installing autopilot](/docs/containers?topic=containers-storage-portworx-autopilot#storage-portworx-install-ap)
+* [Prerequisites](/docs/containers?topic=containers-storage-portworx-autopilot#autopilot-prereqs)
+
+* [Installing Autopilot](/docs/containers?topic=containers-storage-portworx-autopilot#storage-portworx-install-ap)
 
 * [Creating Rules](/docs/containers?topic=containers-storage-portworx-autopilot#storage-px-create-rules)
 
