@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-12-07"
+lastupdated: "2023-12-08"
 
 keywords: containers
 subcollection: containers
