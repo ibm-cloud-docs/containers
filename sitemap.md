@@ -237,6 +237,10 @@ subcollection: containers
 
 * [December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec23)
 
+    * [8 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0823)
+
+        * Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kubernetes API server security vulnerabilities
+
     * [7 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0723)
 
         * [Change log]{: tag-purple} Istio add-on version `1.20.0`.
@@ -9485,8 +9489,6 @@ subcollection: containers
 [Why can't I create a new admin certificate?](/docs/containers?topic=containers-ts_admin-cert#ts_admin-cert)
 
 [Why can't I create a VPC cluster with encrypted worker nodes?](/docs/containers?topic=containers-ts-vpc-byok-encrypted-storage#ts-vpc-byok-encrypted-storage)
-
-[Why am I receiving multiple etcd alerts?](/docs/containers?topic=containers-ts-addon-etcd-alerts#ts-addon-etcd-alerts)
 
 
 ### Worker nodes

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-12-07"
+lastupdated: "2023-12-08"
 
 keywords: containers, kubernetes, release notes
 
@@ -29,6 +29,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## December 2023
 {: #containers-dec23}
 
+
+
+### 8 December 2023
+{: #containers-dec0823}
+{: release-note}
+
+Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kubernetes API server security vulnerabilities
+:   For more information, see the [Security Bulletin](https://www.ibm.com/support/pages/node/7091444){: external}. 
 
 
 ### 7 December 2023
