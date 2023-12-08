@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-12-06"
+lastupdated: "2023-12-08"
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
 
@@ -74,7 +74,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Ubuntu 20.04 packages | 5.4.0-166-generic | 5.4.0-167-generic | Worker node kernel & package updates for [CVE-2023-31085](https://nvd.nist.gov/vuln/detail/CVE-2023-31085){: external}, [CVE-2023-40217](https://nvd.nist.gov/vuln/detail/CVE-2023-40217){: external}, [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}, [CVE-2023-45871](https://nvd.nist.gov/vuln/detail/CVE-2023-45871){: external}, [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/CVE-2023-47038){: external}, [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/CVE-2023-5981){: external}. |
-| Kubernetes | 1.27.7 | 1.27.8 | For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.8){: external}. |
+| Kubernetes | 1.27.7 | 1.27.8 | Review the [community Kubernetes change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.8){: external}. Resolves [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325){: external} and [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/){: external}. For more information, see [Security Bulletin: IBM Cloud Kubernetes Service is affected by Kubernetes API server security vulnerabilities (CVE-2023-39325 and CVE-2023-44487)](https://www.ibm.com/support/pages/node/7091444){: external}. |
 {: caption="Changes since version 1.27.7_1548" caption-side="bottom"}
 
 

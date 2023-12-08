@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-12-07"
+lastupdated: "2023-12-08"
 
 keywords: containers
 subcollection: containers
@@ -236,6 +236,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec23)
+
+    * [8 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0823)
+
+        * Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kubernetes API server security vulnerabilities
 
     * [7 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0723)
 
@@ -4997,7 +5001,9 @@ subcollection: containers
 
 [Installing Autopilot for Portworx](/docs/containers?topic=containers-storage-portworx-autopilot#storage-portworx-autopilot)
 
-* [Installing autopilot](/docs/containers?topic=containers-storage-portworx-autopilot#storage-portworx-install-ap)
+* [Prerequisites](/docs/containers?topic=containers-storage-portworx-autopilot#autopilot-prereqs)
+
+* [Installing Autopilot](/docs/containers?topic=containers-storage-portworx-autopilot#storage-portworx-install-ap)
 
 * [Creating Rules](/docs/containers?topic=containers-storage-portworx-autopilot#storage-px-create-rules)
 
@@ -9483,8 +9489,6 @@ subcollection: containers
 [Why can't I create a new admin certificate?](/docs/containers?topic=containers-ts_admin-cert#ts_admin-cert)
 
 [Why can't I create a VPC cluster with encrypted worker nodes?](/docs/containers?topic=containers-ts-vpc-byok-encrypted-storage#ts-vpc-byok-encrypted-storage)
-
-[Why am I receiving multiple etcd alerts?](/docs/containers?topic=containers-ts-addon-etcd-alerts#ts-addon-etcd-alerts)
 
 
 ### Worker nodes
