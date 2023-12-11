@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-10-04"
+lastupdated: "2023-12-11"
 
-keywords: webhooks, admission control, containers,
+keywords: containers, webhooks, admission control, 
 
 subcollection: containers
 
@@ -63,7 +63,7 @@ Many cluster add-ons, plug-ins, and other third-party extensions use admission c
 ### Setting up admission controller webhooks
 {: #configure-webhooks-122}
 
-In Kubernetes cluster versions 1.21 and later, Konnectivity replaced the OpenVPN solution. If you have cluster version 1.21 and later, and your webhook uses the ClusterIP, you must update your webhook to use a Kubernetes service instead.
+In cluster versions 1.21 and later, Konnectivity replaced the OpenVPN solution. If you have cluster version 1.21 and later, and your webhook uses the ClusterIP, you must update your webhook to use a Kubernetes service instead.
 {: shortdesc}
 
 You can configure a webhook by referencing the webhook app as a Kubernetes service, or by referencing the webhook app as an IP address or publicly registered DNS name.
