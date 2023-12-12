@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-12-06"
+lastupdated: "2023-12-12"
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 subcollection: containers
@@ -60,6 +60,8 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 ### 1.9.4_5886_iks, released 04 December 2023
 {: #1.9.4_5886_iks}
 
+[Default version]{: tag-green}
+
 - Dependency updates.
 
 
@@ -89,8 +91,6 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 
 ### 1.8.4_5644_iks, released 07 November 2023
 {: #1.8.4_5644_iks}
-
-[Default version]{: tag-green}
 
 - Dependency updates.
 
