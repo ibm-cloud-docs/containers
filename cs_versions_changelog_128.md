@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-12-08"
+lastupdated: "2023-12-12"
 
 keywords: kubernetes, containers, change log, 128 change log, 128 updates
 
@@ -73,6 +73,8 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 | --- | --- | --- | --- |
 | Ubuntu 20.04 packages | 5.4.0-166-generic | 5.4.0-167-generic | Worker node kernel & package updates for [CVE-2023-31085](https://nvd.nist.gov/vuln/detail/CVE-2023-31085){: external}, [CVE-2023-40217](https://nvd.nist.gov/vuln/detail/CVE-2023-40217){: external}, [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}, [CVE-2023-45871](https://nvd.nist.gov/vuln/detail/CVE-2023-45871){: external}, [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/CVE-2023-47038){: external}, [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/CVE-2023-5981){: external}. |
 | Kubernetes | 1.28.3 | 1.28.4 | For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.4){: external}. |
+| Containerd | 1.7.9 | 1.7.10 | For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.10){: external}. |
+| GPU device plug-in and installer | 0e3950c | 2d51c7a | New version contains updates and security fixes. Driver version upgraded from [535.54.03](http://docs.nvidia.com/datacenter/tesla/tesla-release-notes-535-54-03/index.html){: external} to [535.129.03](http://docs.nvidia.com/datacenter/tesla/tesla-release-notes-535.129.03/index.html){: external}. |
 {: caption="Changes since version 1.28.3_1535" caption-side="bottom"}
 
 
