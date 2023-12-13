@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-12-04"
+lastupdated: "2023-12-13"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -34,6 +34,8 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 Dates that are marked with a dagger (`†`) are tentative and subject to change. Operating systems that are marked with an asterisk (`*`) are deprecated; [migrate any worker nodes](/docs/containers?topic=containers-ubuntu-migrate) that use a deprecated operating system to run on a newer operating system version. 
 {: note}
+
+
 
 
 

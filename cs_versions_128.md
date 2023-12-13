@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-11-27"
+lastupdated: "2023-12-13"
 
 keywords: kubernetes, containers, 128, version 128, 128 update actions
 
@@ -92,8 +92,6 @@ The following table shows the actions that you must take before you update the K
 In version 1.27 and earlier, VPC clusters pull images from the IBM Cloud Container Registry through a private cloud service endpoint for the Container Registry. For version 1.28 and later, this network path is updated so that images are pulled through a VPE gateway instead of a private service endpoint. This change affects all clusters in a VPC; when you create or update a single cluster in a VPC to version 1.28, all clusters in that VPC, regardless of their version, have their network path updated. Depending on the setup of your security groups, network ACLs, and network policies, you may need to make changes to ensure that your workers continue to successfully pull container images after updating to version 1.28. 
 {: shortdesc}
 
- 
-
 The following image shows the new network path for version 1.28, which uses a VPE Gateway for Registry instead of the private service endpoint.
 
 ![VPE Gateway for Registry](images/registry-vpe-iks.svg){: caption="VPE Gateway for Registry in 1.28 and later clusters."}
@@ -126,7 +124,6 @@ Add the following rules to your custom security group.
 | Rule type | Protocol | Destination IP or CIDR | Destination Port |
 |---|---|---|---|
 | Outbound | TCP | Entire VPC address prefix range | 443 |
-| Outbound | TCP | Entire VPC address prefix range | 4443 |
 {: caption="Outbound security group rules to add for version 1.28" caption-side="bottom"}
 
 To make these rules more restrictive, you can set the destination to the security group used by the VPE Gateway or you can specify the exact VPE Gateway reserved IP address. Note that these IP addresses can change if all cluster workers in a VPC are removed. 
@@ -141,9 +138,7 @@ Add the following rules to your custom ACLs.
 | Rule type | Protocol | Source IP or CIDR | Source Port | Destination IP or CIDR | Destination Port  |
 |---|---|---|---|---|---|
 | Outbound/Allow | TCP | Entire VPC address prefix range | Any | Entire VPC address prefix range | 443 |
-| Outbound/Allow | TCP | Entire VPC address prefix range | Any | Entire VPC address prefix range | 4443 |
 | Inbound/Allow | TCP | Entire VPC address prefix range | 443 | Entire VPC address prefix range | Any |
-| Inbound/Allow | TCP | Entire VPC address prefix range | 4443 | Entire VPC address prefix range | Any |
 {: caption="Outbound and inbound ACL rules to add for version 1.28" caption-side="bottom"}
 
 
@@ -165,7 +160,6 @@ spec:
       - <entire-vpc-address-prefix-range> # example: 10.245.0.0/16
       ports:
       - 443
-      - 4443
     protocol: TCP
     source: {}
   order: 500
