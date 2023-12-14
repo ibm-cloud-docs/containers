@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-12-07"
+lastupdated: "2023-12-14"
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
 
@@ -193,8 +193,11 @@ Updates in this version
     - [usn-6138-1](https://ubuntu.com/security/notices/USN-6138-1){: external}
 
 
-## Version 1.17
+## Unsupported: Version 1.17
 {: #v117}
+
+Version 1.17 of the managed Istio add-on is unsupported. 
+{: important}
 
 ### Change log for 1.17.8, released 18 October 2023
 {: #1178}
