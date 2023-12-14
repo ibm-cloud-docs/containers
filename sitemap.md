@@ -7072,7 +7072,7 @@ subcollection: containers
 
     * [Change log for 1.18.0, released 12 July 2023](/docs/containers?topic=containers-istio-changelog#1180)
 
-* [Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
+* [Unsupported: Version 1.17](/docs/containers?topic=containers-istio-changelog#v117)
 
     * [Change log for 1.17.8, released 18 October 2023](/docs/containers?topic=containers-istio-changelog#1178)
 
