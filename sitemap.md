@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2023
-lastupdated: "2023-12-13"
+lastupdated: "2023-12-14"
 
 keywords: containers
 subcollection: containers
@@ -236,6 +236,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec23)
+
+    * [14 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec1423)
+
+        * [New]{: tag-green} Information on worker node removal priority
 
     * [8 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0823)
 
@@ -2980,6 +2984,8 @@ subcollection: containers
     * [Updating VPC worker nodes in the console](/docs/containers?topic=containers-update#vpc_worker_ui)
 
 * [Updating flavors (machine types)](/docs/containers?topic=containers-update#machine_type)
+
+* [How are worker pools scaled down?](/docs/containers?topic=containers-update#worker-scaledown-logic)
 
 * [Updating cluster components](/docs/containers?topic=containers-update#components)
 

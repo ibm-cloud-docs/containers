@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-12-13"
+lastupdated: "2023-12-14"
 
 keywords: containers, kubernetes, release notes
 
@@ -28,8 +28,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+
+
 ## December 2023
 {: #containers-dec23}
+
+### 14 December 2023
+{: #containers-dec1423}
+{: release-note}
+
+[New]{: tag-green} Information on worker node removal priority
+:   Details are available for [automated worker node removal](/docs/containers?topic=containers-update#worker-scaledown-logic) when scaling down a worker pool. 
+
 
 
 
