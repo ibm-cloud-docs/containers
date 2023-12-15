@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-12-14"
+lastupdated: "2023-12-15"
 
 keywords: containers, kubernetes, release notes
 
@@ -28,10 +28,10 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
-
-
 ## December 2023
 {: #containers-dec23}
+
+
 
 ### 14 December 2023
 {: #containers-dec1423}
@@ -163,6 +163,7 @@ Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kuber
 
 [Change log]{: tag-purple} {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.10_93` and `1.2.3_97`.
 :   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+
 
 
 
