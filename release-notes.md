@@ -167,6 +167,7 @@ Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kuber
 
 
 
+
 ### 21 November 2023
 {: #containers-nov2123}
 {: release-note}

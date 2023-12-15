@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-11-16"
+lastupdated: "2023-12-15"
 
 keywords: kubernetes
 
@@ -318,7 +318,7 @@ In the following steps, you learn how to deploy workloads that require the GPU. 
 In the following steps, you learn how to deploy workloads that require the GPU. You can also deploy apps that don't need to process their workloads across both the GPU and CPU. After, you might find it useful to play around with mathematically intensive workloads such as the [TensorFlow](https://www.tensorflow.org/){: external} machine learning framework with [this Kubernetes demo](https://github.com/pachyderm/pachyderm/tree/master/examples/ml/tensorflow){: external}.
 
 Before you begin
-- Create a [cluster](/docs/containers?topic=containers-clusters&interface=ui) or worker pool that uses a GPU bare metal flavor. Keep in mind that setting up a bare metal machine can take more than one business day to complete.
+- Create a [cluster](/docs/containers?topic=containers-clusters) or worker pool that uses a GPU bare metal flavor. Keep in mind that setting up a bare metal machine can take more than one business day to complete.
 - Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the cluster.
 
 To run a workload on a GPU machine,
