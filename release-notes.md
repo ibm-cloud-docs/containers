@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-12-15"
+lastupdated: "2023-12-18"
 
 keywords: containers, kubernetes, release notes
 
@@ -30,6 +30,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## December 2023
 {: #containers-dec23}
+
+### 18 December 2023
+{: #containers-dec1823}
+{: release-note}
+
+
+
+[Change log]{: tag-purple} Worker node fix packs are available. 
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+:    Review the following change logs for your cluster version.
+    - [1.28.4_1539](/docs/containers?topic=containers-changelog_128)
+    - [1.27.8_1558](/docs/containers?topic=containers-changelog_127)
+    - [1.26.11_1566](/docs/containers?topic=containers-changelog_126)
+    - [1.25.16_1571](/docs/containers?topic=containers-changelog_125)
+
+
+
+
 
 
 
