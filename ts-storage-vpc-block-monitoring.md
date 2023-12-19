@@ -2,11 +2,11 @@
 
 copyright: 
   years: 2022, 2023
-lastupdated: "2023-11-06"
+lastupdated: "2023-12-19"
 
 keywords: vpc, monitoring, block storage, metrics
 
-subcollection: openshift
+subcollection: containers
 
 content-type: troubleshoot
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-12-07"
+lastupdated: "2023-12-19"
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
 
@@ -532,7 +532,7 @@ In the following steps, you set up a subdomain through which your users can acce
 {: #istio-no-tls}
 
 1. [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
-2. [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
+2. [Install the `istioctl` CLI](/docs/containers?topic=containers-istio&interface=cli#istioctl).
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they are in the Istio service mesh](#istio_sidecar).
 
 To publicly expose apps:
@@ -665,7 +665,7 @@ Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-a
 
 
 1. [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
-2. [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
+2. [Install the `istioctl` CLI](/docs/containers?topic=containers-istio&interface=cli#istioctl).
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they are in the Istio service mesh](#istio_sidecar).
 
 To publicly expose apps:

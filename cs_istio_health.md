@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2023
-lastupdated: "2023-06-27"
+lastupdated: "2023-12-19"
 
 keywords: kubernetes, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -93,7 +93,7 @@ The ControlZ dashboard accesses the Istio component ports to provide an interact
 
 Before you begin
 * [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
-* [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
+* [Install the `istioctl` CLI](/docs/containers?topic=containers-istio&interface=cli#istioctl).
 
 ### ControlZ
 {: #controlz}

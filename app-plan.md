@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-12-05"
+lastupdated: "2023-12-19"
 
 keywords: kubernetes, deploy
 
@@ -427,9 +427,6 @@ With {{site.data.keyword.cloud_notm}} IAM, you can assign permissions to individ
 To control access at the pod level, you can configure [pod security policies (PSPs)](/docs/containers?topic=containers-psp).
 
 Within the app deployment YAML, you can set the security context for a pod or container. For more information, review the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}.
-
-Want to control access at the application level? To create a sign-on flow that you can update at any time without changing your app code, try integrating your app with [{{site.data.keyword.appid_long_notm}}](/docs/appid?topic=appid-getting-started).
-{: tip}
 
 ### After I deploy my app, how can I monitor its health?
 {: #app_plan_logmet_monitor}
