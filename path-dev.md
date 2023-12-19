@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2023
-lastupdated: "2023-11-28"
+lastupdated: "2023-12-19"
 
 keywords: kubernetes, containers
 
@@ -77,8 +77,8 @@ Deploy your app to the cluster by running your app configuration file.
 {: shortdesc}
 
 
-- [Deploying apps with the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#app_ui).
-- [Deploying apps with the CLI](/docs/containers?topic=containers-deploy_app#app_cli).
+- [Deploying apps with the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app&interface=ui#deploy_apps_ui).
+- [Deploying apps with the CLI](/docs/containers?topic=containers-deploy_app&interface=cli#deploy_apps_cli).
 - [Deploying apps to specific worker nodes by using labels](/docs/containers?topic=containers-deploy_app#node_affinity).
 - [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app).
 

@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2023, 2023
-lastupdated: "2023-04-10"
+lastupdated: "2023-12-19"
 
-keywords: kubernetes, errdsaiss, ingress, domain, third party, external domain
+keywords: containers, errdsaiss, ingress, domain, third party, external domain
 
 subcollection: containers
 
@@ -44,7 +44,7 @@ Complete the following steps based on your external domain provider.
 
 - For external Akamai or Cloudflare domains, make sure that you create a valid credential for the cluster by using **`ibmcloud ks ingress domain credential set`** command.
 
-- For domains provisioned with Cloud Internet Services, ensure that the service-to-service authorization is in place. For more information, see [Setting up domains with IBM Cloud Internet Services](/docs/containers?topic=containers-ingress-domains#ingress-domain-cis). If you no longer want to use the domain you registered, then you can remove it by using the **`ibmcloud ks ingress domain rm --c CLUSTER --domain DOMAIN`** command.
+- For domains provisioned with Cloud Internet Services, ensure that the service-to-service authorization is in place. For more information, see [Setting up domains with IBM Cloud Internet Services](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domain-cis). If you no longer want to use the domain you registered, then you can remove it by using the **`ibmcloud ks ingress domain rm --c CLUSTER --domain DOMAIN`** command.
 
 
 
