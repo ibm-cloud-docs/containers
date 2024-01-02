@@ -235,6 +235,12 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan24)
+
+    * [2 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan0224)
+
+        * [Change log]{: tag-purple} Worker node fix packs are available. 
+
 * [December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec23)
 
     * [18 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec1823)

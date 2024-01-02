@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2023
-lastupdated: "2023-12-18"
+  years: 2014, 2024
+lastupdated: "2024-01-02"
 
 keywords: containers, kubernetes, release notes
 
@@ -25,6 +25,27 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+
+## January 2024
+{: #containers-jan24}
+
+### 2 January 2024
+{: #containers-jan0224}
+{: release-note}
+
+
+
+[Change log]{: tag-purple} Worker node fix packs are available. 
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+:    Review the following change logs for your cluster version.
+    - [1.28.4_1540](/docs/containers?topic=containers-changelog_128)
+    - [1.27.8_1559](/docs/containers?topic=containers-changelog_127)
+    - [1.26.11_1567](/docs/containers?topic=containers-changelog_126)
+    - [1.25.16_1572](/docs/containers?topic=containers-changelog_125)
+
+
+
 
 
 
