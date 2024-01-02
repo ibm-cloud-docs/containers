@@ -417,6 +417,7 @@ toc:
               - ts-cluster-debug.md
               - ts-webhook-debug.md
               - ts-cluster-master.md
+              - ts-cluster-master-upgrade.md
               - states-cluster.md
               - ts-cluster-cli.md
               - ts-cluster-create-delete.md

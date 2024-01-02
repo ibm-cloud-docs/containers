@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2017, 2023
-lastupdated: "2023-12-19"
+  years: 2017, 2024
+lastupdated: "2024-01-02"
 
 keywords: containers
 subcollection: containers
@@ -9401,6 +9401,8 @@ subcollection: containers
 * [Reviewing master health, status, and states](/docs/containers?topic=containers-debug_master#review-master-health)
 
 * [Understanding the impact of a master outage](/docs/containers?topic=containers-debug_master#review-master-outage)
+
+[Why do I see a `Cannot complete cluster master upgrade` message?](/docs/containers?topic=containers-ts-cluster-master-upgrade#ts-cluster-master-upgrade)
 
 [Cluster states](/docs/containers?topic=containers-cluster-states-reference#cluster-states-reference)
 
