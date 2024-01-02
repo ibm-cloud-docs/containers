@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2017, 2023
-lastupdated: "2023-12-19"
+  years: 2017, 2024
+lastupdated: "2024-01-02"
 
 keywords: containers
 subcollection: containers
@@ -234,6 +234,12 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan24)
+
+    * [2 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan0224)
+
+        * [Change log]{: tag-purple} Worker node fix packs are available. 
 
 * [December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec23)
 
@@ -5995,6 +6001,8 @@ subcollection: containers
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
 
+    * [Change log for worker node fix pack 1.28.4_1540, released 02 January 2024](/docs/containers?topic=containers-changelog_128#1284_1540_W)
+
     * [Change log for worker node fix pack 1.28.4_1539, released 18 December 2023](/docs/containers?topic=containers-changelog_128#1284_1539_W)
 
     * [Change log for master fix pack 1.28.4_1537, released 06 December 2023](/docs/containers?topic=containers-changelog_128#1284_1537_M)
@@ -6077,6 +6085,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for worker node fix pack 1.27.8_1559, released 02 January 2024](/docs/containers?topic=containers-changelog_127#1278_1559_W)
 
     * [Change log for worker node fix pack 1.27.8_1558, released 18 December 2023](/docs/containers?topic=containers-changelog_127#1278_1558_W)
 
@@ -6186,6 +6196,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for worker node fix pack 1.26.11_1567, released 02 January 2024](/docs/containers?topic=containers-changelog_126#12611_1567_W)
 
     * [Change log for worker node fix pack 1.26.11_1566, released 18 December 2023](/docs/containers?topic=containers-changelog_126#12611_1566_W)
 
@@ -6321,6 +6333,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for worker node fix pack 1.25.16_1572, released 02 January 2024](/docs/containers?topic=containers-changelog_125#12516_1572_W)
 
     * [Change log for worker node fix pack 1.25.16_1571, released 18 December 2023](/docs/containers?topic=containers-changelog_125#12516_1571_W)
 
@@ -9401,6 +9415,8 @@ subcollection: containers
 * [Reviewing master health, status, and states](/docs/containers?topic=containers-debug_master#review-master-health)
 
 * [Understanding the impact of a master outage](/docs/containers?topic=containers-debug_master#review-master-outage)
+
+[Why do I see a `Cannot complete cluster master upgrade` message?](/docs/containers?topic=containers-ts-cluster-master-upgrade#ts-cluster-master-upgrade)
 
 [Cluster states](/docs/containers?topic=containers-cluster-states-reference#cluster-states-reference)
 
