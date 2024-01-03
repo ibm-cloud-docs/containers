@@ -1,8 +1,9 @@
 ---
 
 copyright: 
-  years: 2022, 2023
-lastupdated: "2023-06-27"
+  years: 2022, 2024
+lastupdated: "2024-01-03"
+
 
 keywords: kubernetes, 1.25, help, cluster master operations error, CAE009
 

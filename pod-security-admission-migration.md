@@ -1,8 +1,9 @@
 ---
 
 copyright: 
-  years: 2022, 2023
-lastupdated: "2023-04-26"
+  years: 2022, 2024
+lastupdated: "2024-01-03"
+
 
 keywords: kubernetes, deploy, migrating psps to pod security, pod security admission, migrate to pod security admission
 

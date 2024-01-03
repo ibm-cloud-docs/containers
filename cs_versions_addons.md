@@ -1,8 +1,9 @@
 ---
 
 copyright:
-  years: 2014, 2023
-lastupdated: "2023-12-12"
+  years: 2014, 2024
+lastupdated: "2024-01-03"
+
 
 keywords: kubernetes, nginx, ingress controller, fluentd
 subcollection: containers

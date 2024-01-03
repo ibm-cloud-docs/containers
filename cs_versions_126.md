@@ -1,8 +1,9 @@
 ---
 
 copyright: 
-  years: 2023, 2023
-lastupdated: "2023-10-09"
+  years: 2023, 2024
+lastupdated: "2024-01-03"
+
 
 keywords: kubernetes, containers, 126, version 126, 126 update actions
 
