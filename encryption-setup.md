@@ -1,8 +1,9 @@
 ---
 
 copyright: 
-  years: 2023, 2023
-lastupdated: "2023-11-29"
+  years: 2023, 2024
+lastupdated: "2024-01-03"
+
 
 keywords: containers, kubernetes, red hat, encrypt, security, kms, root key, crk
 

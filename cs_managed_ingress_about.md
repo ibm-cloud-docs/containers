@@ -1,8 +1,9 @@
 ---
 
 copyright:
-  years: 2022, 2023
-lastupdated: "2023-07-26"
+  years: 2022, 2024
+lastupdated: "2024-01-03"
+
 
 keywords: ingress, alb, application load balancer, nginx, ingress controller, network traffic, exposing apps
 

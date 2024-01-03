@@ -2,7 +2,8 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-01-02"
+lastupdated: "2024-01-03"
+
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
 
