@@ -54,6 +54,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 | Ubuntu 20.04 packages | 5.4.0-169-generic | 5.4.0-169-generic | Worker node package updates for [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/CVE-2023-48795){: external}. |
 | Kubernetes | 1.28.4 | 1.28.4 | N/A |
 | Containerd | 1.7.11 | 1.7.11 | N/A |
+| GPU device plug-in and installer | 2d51c7a | b9c978a | New version contains security fixes. |
 {: caption="Changes since version 1.28.4_1539" caption-side="bottom"}
 
 
