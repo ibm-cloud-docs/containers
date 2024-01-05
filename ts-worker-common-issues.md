@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-05"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -131,7 +131,7 @@ If you have a firewall, [configure your firewall settings to allow outgoing traf
 
 Check whether your cluster does not have a public IP by running `ibmcloud ks worker ls --cluster <mycluster>`. If no public IP is listed, then your cluster has only private VLANs.
     * If you want the cluster to have only private VLANs, set up your [VLAN connection](/docs/containers?topic=containers-plan_basics#private_clusters) and your [firewall](/docs/containers?topic=containers-firewall#firewall_outbound).
-    * If you created the cluster with only the private cloud service endpoint before you enabled your account for [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint), your workers can't connect to the master. Try [setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account. If you still want a private cloud service endpoint only cluster after your account is updated, you can then disable the public cloud service endpoint.
+    * If you created the cluster with only the private cloud service endpoint before you enabled your account for [VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint), your workers can't connect to the master. Try [setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account. If you still want a private cloud service endpoint only cluster after your account is updated, you can then disable the public cloud service endpoint.
     * If you want the cluster to have a public IP, [add new worker nodes](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_add) with both public and private VLANs.
 
 ## Hard reboot
