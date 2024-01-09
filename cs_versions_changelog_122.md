@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-05"
 
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.23
@@ -733,7 +733,7 @@ The following table shows the changes that are in the master fix pack update `1.
 | etcd | v3.4.17 | v3.4.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.18){: external}. |
 | Gateway-enabled cluster controller | 1510 | 1567 | Updated to use `Go` version `1.16.9`. |
 | GPU device plug-in and installer | 58d7589 | 7fd867d | Updated image for [CVE-2021-36222](https://nvd.nist.gov/vuln/detail/CVE-2021-36222){: external}, [CVE-2021-37750](https://nvd.nist.gov/vuln/detail/CVE-2021-37750){: external}, [CVE-2021-22922](https://nvd.nist.gov/vuln/detail/CVE-2021-22922){: external}, [CVE-2021-22923](https://nvd.nist.gov/vuln/detail/CVE-2021-22923){: external} and [CVE-2021-22924](https://nvd.nist.gov/vuln/detail/CVE-2021-22924){: external}. |
-| {{site.data.keyword.cloud_notm}} Controller Manager | v1.22.2-3 | v1.22.3-2 | Updated to support the Kubernetes `1.22.3` release and to use `Go` version `1.16.9`. Updated image for [DLA-2797-1](https://www.debian.org/lts/security/2021/dla-2797){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.22.2-3 | v1.22.3-2 | Updated to support the Kubernetes `1.22.3` release and to use `Go` version `1.16.9`. Updated image for [DLA-2797-1](https://lists.debian.org/debian-lts-announce/2021/10/msg00025.html){: external}. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | e3cb629 | 4ca5637 | Updated universal base image (UBI) to the latest `8.4` version to resolve CVEs. |
 | Key Management Service provider | v2.3.8 | v2.3.10 | Updated `Go` module dependencies and to use `Go` version `1.16.9`.  Updated image for [CVE-2021-22946](https://nvd.nist.gov/vuln/detail/CVE-2021-22946){: external}. |
 | Konnectivity agent | v0.0.24_262_iks | v0.0.24_268_iks | Update to use `Go` version `1.16.9`. |
