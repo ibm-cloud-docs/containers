@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-09"
 
 
 keywords: kubernetes, containers, 128, version 128, 128 update actions
@@ -53,9 +53,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 This information summarizes updates that are likely to have and impact on deployed apps when you update a cluster to version 1.28. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.28.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_128) for version 1.28. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
-
-[Portworx](/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.28. Do not upgrade your cluster to version 1.28 if your apps use Portworx.
-{: important}
 
 
 {{site.data.keyword.containerlong_notm}} version 1.28 has **not** expanded its supported skew between core node and control plane components by one minor version.  The supported skew remains `n-2`. For more information, see [Changes to supported skew between control plane and node versions](https://kubernetes.io/blog/2023/08/15/kubernetes-v1-28-release/#changes-to-supported-skew-between-control-plane-and-node-versions) for the Kubernetes community information.

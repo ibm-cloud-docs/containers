@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-01-05"
+lastupdated: "2024-01-09"
 
 
 keywords: containers
@@ -238,19 +238,29 @@ subcollection: containers
 
 * [January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan24)
 
+    * [10 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1024)
+
+        * Subscribe to the {{site.data.keyword.cloud_notm}} documentation release notes via RSS.
+
+        * Ingress ALB updates
+
+        * {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch update `1.2.5_107`.
+
+        * {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates `5.2.14_485` and `5.1.19_486`.
+
     * [2 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan0224)
 
-        * [Change log]{: tag-purple} Worker node fix packs are available. 
+        * Worker node fix packs are available. 
 
 * [December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec23)
 
     * [18 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec1823)
 
-        * [Change log]{: tag-purple} Worker node fix packs are available. 
+        * Worker node fix packs are available. 
 
     * [14 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec1423)
 
-        * [New]{: tag-green} Information on worker node removal priority.
+        * Information on worker node removal priority.
 
         * Kubernetes version 1.24 is unsupported.
 
@@ -260,63 +270,63 @@ subcollection: containers
 
     * [7 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0723)
 
-        * [Change log]{: tag-purple} Istio add-on version `1.20.0`.
+        * Istio add-on version `1.20.0`.
 
     * [6 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0623)
 
-        * [Change log]{: tag-purple} Master fix packs are available. 
+        * Master fix packs are available. 
 
     * [5 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0523)
 
-        * [Change log]{: tag-purple} Istio add-on version `1.19.4`.
+        * Istio add-on version `1.19.4`.
 
     * [4 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0423)
 
-        * [Change log]{: tag-purple} Ingress ALB updates
+        * Ingress ALB updates
 
-        * [Change log]{: tag-purple} Worker node fix packs are available. 
+        * Worker node fix packs are available. 
 
 * [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
 
     * [29 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2923)
 
-        * [Change log]{: tag-purple} Worker node fix packs are available. 
+        * Worker node fix packs are available. 
 
     * [27 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2723)
 
-        * [New]{: tag-green} The Beta {{site.data.keyword.filestorage_vpc_short}} cluster add-on is now available to all accounts.
+        * The Beta {{site.data.keyword.filestorage_vpc_short}} cluster add-on is now available to all accounts.
 
-        * [Change log]{: tag-purple} Cluster autoscaler add-on patch updates `1.2.0_290`, `1.0.9_290`, `1.0.8_292`, and `1.0.7_291`.
+        * Cluster autoscaler add-on patch updates `1.2.0_290`, `1.0.9_290`, `1.0.8_292`, and `1.0.7_291`.
 
-        * [Change log]{: tag-purple}{{site.data.keyword.block_storage_is_short}} add-on versions `5.0.23_437` and `5.1.16_446`, and `5.2.11_447`.
+        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.23_437` and `5.1.16_446`, and `5.2.11_447`.
 
-        * [Change log]{: tag-purple} {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.10_93` and `1.2.3_97`.
+        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.10_93` and `1.2.3_97`.
 
     * [21 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2123)
 
-        * [Change log]{: tag-purple} Ingress ALB updates
+        * Ingress ALB updates
 
     * [20 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2023)
 
-        * [New]{: tag-green} You can now specify a custom pod subnet size when creating a VPC cluster.
+        * You can now specify a custom pod subnet size when creating a VPC cluster.
 
-        * [Change log]{: tag-purple} {{site.data.keyword.cos_full_notm}} plug-in version `2.2.22`.
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.22`.
 
     * [15 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov1523)
 
-        * [New]{: tag-green} The cluster autoscaler add-on now supports version 1.28 clusters.
+        * The cluster autoscaler add-on now supports version 1.28 clusters.
 
-        * [Change log]{: tag-purple} Master fix packs are available. 
+        * Master fix packs are available. 
 
     * [13 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov1323)
 
-        * [Change log]{: tag-purple} {{site.data.keyword.cos_full_notm}} plug-in version `2.2.21`.
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.21`.
 
-        * [Change log]{: tag-purple}{{site.data.keyword.block_storage_is_short}} add-on versions `5.0.21_401` and `5.1.15_419`, and `5.2.10_428`.
+        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.21_401` and `5.1.15_419`, and `5.2.10_428`.
 
-        * [Change log]{: tag-purple} Cluster autoscaler add-on patch updates `1.0.9_195`, `1.0.8_233`, and `1.0.7_185`.
+        * Cluster autoscaler add-on patch updates `1.0.9_195`, `1.0.8_233`, and `1.0.7_185`.
 
-        * [Change log]{: tag-purple} {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.9_87`.
+        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.9_87`.
 
     * [10 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov1023)
 
@@ -324,13 +334,13 @@ subcollection: containers
 
     * [9 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0923)
 
-        * [Change log]{: tag-purple} Worker node fix packs are available.
+        * Worker node fix packs are available.
 
     * [7 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0723)
 
-        * [Change log]{: tag-purple} CLI version `1.0.579` is available.
+        * CLI version `1.0.579` is available.
 
-        * [Change log]{: tag-purple} Ingress ALB updates
+        * Ingress ALB updates
 
     * [06 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0623)
 
@@ -340,53 +350,53 @@ subcollection: containers
 
     * [31 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct3123)
 
-        * [New]{: tag-green} [VPC clusters]{: tag-vpc} VNI functionality for limiting access to {{site.data.keyword.filestorage_vpc_short}} by node, zone, worker pool and more.
+        * VNI functionality for limiting access to {{site.data.keyword.filestorage_vpc_short}} by node, zone, worker pool and more.
 
-        * [Change log]{: tag-purple} {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.2`.
+        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.2`.
 
     * [30 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct3023)
 
-        * [Change log]{: tag-purple} {{site.data.keyword.cos_full_notm}} plug-in version `2.2.20`
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.20`
 
-        * [New]{: tag-green} Setting up alerts for {{site.data.keyword.blockstorageshort}} PVs with limited network connectivity.
+        * Setting up alerts for {{site.data.keyword.blockstorageshort}} PVs with limited network connectivity.
 
     * [25 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct2523)
 
-        * [Change log]{: tag-purple} Master fix packs are available.
+        * Master fix packs are available.
 
-        * [Change log]{: tag-purple} ALB OAuth Proxy add-on version `2.0.0_1901`.
+        * ALB OAuth Proxy add-on version `2.0.0_1901`.
 
     * [23 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct2323)
 
-        * [Change log]{: tag-purple} Worker node fix packs are available. 
+        * Worker node fix packs are available. 
 
-        * [Change log]{: tag-purple} Ingress ALB version `1.8.4_5586_ikss`
+        * Ingress ALB version `1.8.4_5586_ikss`
 
     * [18 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1823)
 
-        * [Change log]{: tag-purple} Istio add-on version `1.18.5` and `1.17.8`.
+        * Istio add-on version `1.18.5` and `1.17.8`.
 
-        * [Change log]{: tag-purple} ALB OAuth Proxy add-on version `2.0.0_1889`.
+        * ALB OAuth Proxy add-on version `2.0.0_1889`.
 
     * [17 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1723)
 
-        * [Change log]{: tag-purple} Ingress ALB versions `1.8.1_5543_iks`, `1.6.4_5544_iks`, and `1.5.1_5542_iks`
+        * Ingress ALB versions `1.8.1_5543_iks`, `1.6.4_5544_iks`, and `1.5.1_5542_iks`
 
     * [11 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1123)
 
-        * [Change log]{: tag-purple} Ingress ALB versions `1.5.1_5436_iks`, `1.6.4_5435_iks`, and `1.8.1_5434_iks`
+        * Ingress ALB versions `1.5.1_5436_iks`, `1.6.4_5435_iks`, and `1.8.1_5434_iks`
 
-        * [Change log]{: tag-purple} {{site.data.keyword.cos_full_notm}} plug-in version `2.2.19`
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.19`
 
     * [10 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1023)
 
-        * [Change log]{: tag-purple} CLI version `1.0.573` is available.
+        * CLI version `1.0.573` is available.
 
-        * [Change log]{: tag-purple} Istio add-on version `1.19.3`.
+        * Istio add-on version `1.19.3`.
 
     * [9 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct923)
 
-        * [Change log]{: tag-purple} Worker node fix packs are available.
+        * Worker node fix packs are available.
 
     * [5 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct523)
 
@@ -6536,6 +6546,8 @@ subcollection: containers
 
 * [1.9.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_9_4)
 
+    * [1.9.4_6161_iks, released 10 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6161_iks)
+
     * [1.9.4_5886_iks, released 04 December 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_5886_iks)
 
     * [1.9.4_5756_iks, released 21 November 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_5756_iks)
@@ -6543,6 +6555,8 @@ subcollection: containers
     * [1.9.4_5698_iks, released 07 November 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_5698_iks)
 
 * [Version 1.8.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_8_4)
+
+    * [1.8.4_6173_iks, released 10 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_6173_iks)
 
     * [1.8.4_5885_iks, released 04 December 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_5885_iks)
 
@@ -6563,6 +6577,8 @@ subcollection: containers
     * [1.8.1_5317_iks, released 31 August 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.1_5317_iks)
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
+
+    * [1.6.4_6177_iks, released 10 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_6177_iks)
 
     * [1.6.4_5884_iks, released 04 December 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5884_iks)
 
@@ -7352,6 +7368,8 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-vpc_bs_changelog#052_is_block)
 
+    * [Change log for version 5.2.14_485, released 10 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2.14_485_is_block_relnote)
+
     * [Change log for version 5.2.11_447, released 27 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2.11_447_is_block_relnote)
 
     * [Change log for version 5.2.10_428, released 13 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2.10_428_is_block_relnote)
@@ -7359,6 +7377,8 @@ subcollection: containers
     * [Change log for version 5.2, released 25 September 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2_is_block_relnote)
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
+
+    * [Change log for version 5.1.19_486, released 10 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.19_486_is_block_relnote)
 
 * [Change log for version 5.1.16_446, released 27 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.16_446_is_block_relnote)
 
@@ -7511,6 +7531,8 @@ subcollection: containers
 [{{site.data.keyword.filestorage_vpc_full_notm}} add-on change log](/docs/containers?topic=containers-versions-vpc-file-addon#versions-vpc-file-addon)
 
 * [Version 1.2](/docs/containers?topic=containers-versions-vpc-file-addon#012_is_file)
+
+    * [Change log for version 1.2.5_107, released 10 January 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.5_107_is_file_relnote)
 
     * [Change log for version 1.2.3_97, released 27 November 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.3_97_is_file_relnote)
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-05"
+lastupdated: "2024-01-09"
 
 
 keywords: containers, kubernetes, release notes
@@ -31,13 +31,34 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## January 2024
 {: #containers-jan24}
 
+### 10 January 2024
+{: #containers-jan1024}
+{: release-note}
+
+Subscribe to the {{site.data.keyword.cloud_notm}} documentation release notes via RSS.
+:   You can get notified via RSS about documentation updates for {{site.data.keyword.containerlong_notm}} such as worker node fix packs, new cluster versions, new cluster add-on versions, and more.  For more information, see [Subscribing to an RSS feed](/docs/containers?topic=containers-viewing-cloud-status#subscribing-rss-feed).
+
+
+  
+Ingress ALB updates
+:   Ingress ALB versions `1.9.4_6161_iks`, `1.8.4_6173_iks`, `1.6.4_6177_iks` are available. 1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
+
+{{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch update `1.2.5_107`.
+:   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+
+{{site.data.keyword.block_storage_is_short}} cluster add-on patch updates `5.2.14_485` and `5.1.19_486`.
+:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
+
 ### 2 January 2024
 {: #containers-jan0224}
 {: release-note}
 
 
 
-[Change log]{: tag-purple} Worker node fix packs are available. 
+Worker node fix packs are available. 
 :    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
 :    Review the following change logs for your cluster version.
     - [1.28.4_1540](/docs/containers?topic=containers-changelog_128)
@@ -59,7 +80,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
-[Change log]{: tag-purple} Worker node fix packs are available. 
+Worker node fix packs are available. 
 :    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
 :    Review the following change logs for your cluster version.
     - [1.28.4_1539](/docs/containers?topic=containers-changelog_128)
@@ -77,7 +98,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-dec1423}
 {: release-note}
 
-[New]{: tag-green} Information on worker node removal priority.
+Information on worker node removal priority.
 :   Details are available for [automated worker node removal](/docs/containers?topic=containers-update#worker-scaledown-logic) when scaling down a worker pool.
 
 
@@ -107,7 +128,7 @@ Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kuber
 {: #containers-dec0723}
 {: release-note}
 
-[Change log]{: tag-purple} Istio add-on version `1.20.0`.
+Istio add-on version `1.20.0`.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
 
 
@@ -118,7 +139,7 @@ Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kuber
 
 
 
-[Change log]{: tag-purple} Master fix packs are available. 
+Master fix packs are available. 
 :   Review the change logs for your cluster version. Master patch updates are applied automatically.
 :   [1.28.4_1537](/docs/containers?topic=containers-changelog_128)
 :   [1.27.8_1556](/docs/containers?topic=containers-changelog_127)
@@ -136,7 +157,7 @@ Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kuber
 {: #containers-dec0523}
 {: release-note}
 
-[Change log]{: tag-purple} Istio add-on version `1.19.4`.
+Istio add-on version `1.19.4`.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
   
 
@@ -149,11 +170,11 @@ Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kuber
 
 
   
-[Change log]{: tag-purple} Ingress ALB updates
+Ingress ALB updates
 :   Ingress ALB versions `1.9.4_5886_iks`, `1.8.4_5885_iks`, `1.6.4_5884_iks` are available. 1.9.4 is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
 
-[Change log]{: tag-purple} Worker node fix packs are available. 
+Worker node fix packs are available. 
 :    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
 :    Review the following change logs for your cluster version.
     - [1.28.4_1538](/docs/containers?topic=containers-changelog_128)
@@ -176,7 +197,7 @@ Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kuber
 
 
 
-[Change log]{: tag-purple} Worker node fix packs are available. 
+Worker node fix packs are available. 
 :    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
 :    Review the following change logs for your cluster version.
     - [1.28.3_1535](/docs/containers?topic=containers-changelog_128)
@@ -193,15 +214,16 @@ Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kuber
 {: #containers-nov2723}
 {: release-note}
 
-[New]{: tag-green} The Beta {{site.data.keyword.filestorage_vpc_short}} cluster add-on is now available to all accounts.
+The Beta {{site.data.keyword.filestorage_vpc_short}} cluster add-on is now available to all accounts.
 :   Previously the add-on was available in allowlisted accounts only. For more information, see [Enabling the {{site.data.keyword.filestorage_vpc_short}} add-on](/docs/containers?topic=containers-cluster-scaling-install-addon).
 
-[Change log]{: tag-purple} Cluster autoscaler add-on patch updates `1.2.0_290`, `1.0.9_290`, `1.0.8_292`, and `1.0.7_291`.
+Cluster autoscaler add-on patch updates `1.2.0_290`, `1.0.9_290`, `1.0.8_292`, and `1.0.7_291`.
 :   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
 
-[Change log]{: tag-purple}{{site.data.keyword.block_storage_is_short}} add-on versions `5.0.23_437` and `5.1.16_446`, and `5.2.11_447`.
+{{site.data.keyword.block_storage_is_short}} add-on versions `5.0.23_437` and `5.1.16_446`, and `5.2.11_447`.
+:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
 
-[Change log]{: tag-purple} {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.10_93` and `1.2.3_97`.
+{{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.10_93` and `1.2.3_97`.
 :   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon).
 
 
@@ -214,7 +236,7 @@ Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kuber
 
 
 
-[Change log]{: tag-purple} Ingress ALB updates
+Ingress ALB updates
 :    Ingress ALB versions `1.9.4_5756_iks`, `1.8.4_5757_iks`, `1.6.4_5727_iks` are available. For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
 
@@ -223,22 +245,22 @@ Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kuber
 {: #containers-nov2023}
 {: release-note}
 
-[New]{: tag-green} You can now specify a custom pod subnet size when creating a VPC cluster.
+You can now specify a custom pod subnet size when creating a VPC cluster.
 :   For more information, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cli_cluster-create-vpc-gen2) or [create a VPC cluster](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=cli#cluster_create_vpc) with a custom pod subnet size.
 
-[Change log]{: tag-purple} {{site.data.keyword.cos_full_notm}} plug-in version `2.2.22`.
+{{site.data.keyword.cos_full_notm}} plug-in version `2.2.22`.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 ### 15 November 2023
 {: #containers-nov1523}
 {: release-note}
 
-[New]{: tag-green} The cluster autoscaler add-on now supports version 1.28 clusters.
+The cluster autoscaler add-on now supports version 1.28 clusters.
 :   For more information, see [Enabling the cluster autoscaler add-on in your cluster](/docs/containers?topic=containers-cluster-scaling-install-addon).
 
 
 
-[Change log]{: tag-purple} Master fix packs are available. 
+Master fix packs are available. 
 :   Review the change logs for your cluster version. Master patch updates are applied automatically.
 :   [1.28.3_1534](/docs/containers?topic=containers-changelog_128)
 :   [1.27.7_1547](/docs/containers?topic=containers-changelog_127)
@@ -256,16 +278,16 @@ Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kuber
 {: release-note}
 
 
-[Change log]{: tag-purple} {{site.data.keyword.cos_full_notm}} plug-in version `2.2.21`.
+{{site.data.keyword.cos_full_notm}} plug-in version `2.2.21`.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
-[Change log]{: tag-purple}{{site.data.keyword.block_storage_is_short}} add-on versions `5.0.21_401` and `5.1.15_419`, and `5.2.10_428`.
+{{site.data.keyword.block_storage_is_short}} add-on versions `5.0.21_401` and `5.1.15_419`, and `5.2.10_428`.
 :   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
 
-[Change log]{: tag-purple} Cluster autoscaler add-on patch updates `1.0.9_195`, `1.0.8_233`, and `1.0.7_185`.
+Cluster autoscaler add-on patch updates `1.0.9_195`, `1.0.8_233`, and `1.0.7_185`.
 :   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
 
-[Change log]{: tag-purple} {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.9_87`.
+{{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.9_87`.
 :   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon).
 
 
@@ -283,7 +305,7 @@ Updated sorting and formatting for the Classic and VPC cluster flavor pages.
 
 
 
-[Change log]{: tag-purple} Worker node fix packs are available.
+Worker node fix packs are available.
 :    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
 
 :   [1.28.2_1533](/docs/containers?topic=containers-changelog_128)
@@ -300,12 +322,12 @@ Updated sorting and formatting for the Classic and VPC cluster flavor pages.
 {: #containers-nov0723}
 {: release-note}
 
-[Change log]{: tag-purple} CLI version `1.0.579` is available.
+CLI version `1.0.579` is available.
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 
 
-[Change log]{: tag-purple} Ingress ALB updates
+Ingress ALB updates
 :    Ingress ALB versions `1.9.4_5698_iks`, `1.8.4_5644_iks`, `1.6.4_5642_iks` are available. Version `1.8.4_5644_iks` is now the default version. Version `1.5.1` is no longer supported. For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
 
@@ -331,10 +353,10 @@ Kubernetes version 1.28 is now the default version for new {{site.data.keyword.c
 {: release-note}
 
 
-[New]{: tag-green} [VPC clusters]{: tag-vpc} VNI functionality for limiting access to {{site.data.keyword.filestorage_vpc_short}} by node, zone, worker pool and more.
+VNI functionality for limiting access to {{site.data.keyword.filestorage_vpc_short}} by node, zone, worker pool and more.
 :   You now have more granular control over how pods access your {{site.data.keyword.filestorage_vpc_short}}. For more information, see [Limiting file share access by worker node, zone, or worker pool](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-setup).
 
-[Change log]{: tag-purple} {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.2`.
+{{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.2`.
 :   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon).
 
 
@@ -342,10 +364,10 @@ Kubernetes version 1.28 is now the default version for new {{site.data.keyword.c
 {: #containers-oct3023}
 {: release-note}
 
-[Change log]{: tag-purple} {{site.data.keyword.cos_full_notm}} plug-in version `2.2.20`
+{{site.data.keyword.cos_full_notm}} plug-in version `2.2.20`
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
-[New]{: tag-green} Setting up alerts for {{site.data.keyword.blockstorageshort}} PVs with limited network connectivity.
+Setting up alerts for {{site.data.keyword.blockstorageshort}} PVs with limited network connectivity.
 :   For more information, see [Setting up monitoring for `limited` connectivity PVs](/docs/containers?topic=containers-block_storage#storage-block-vpc-limited-monitoring).
 
 ### 25 October 2023
@@ -354,14 +376,14 @@ Kubernetes version 1.28 is now the default version for new {{site.data.keyword.c
 
 
 
-[Change log]{: tag-purple} Master fix packs are available.
+Master fix packs are available.
 :   [1.28.2_1531](/docs/containers?topic=containers-changelog_128)
 :   [1.27.6_1544](/docs/containers?topic=containers-changelog_127)
 :   [1.26.9_1557](/docs/containers?topic=containers-changelog_126)
 :   [1.25.14_1564](/docs/containers?topic=containers-changelog_125)
 
 
-[Change log]{: tag-purple} ALB OAuth Proxy add-on version `2.0.0_1901`.
+ALB OAuth Proxy add-on version `2.0.0_1901`.
 :   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 
 
@@ -375,7 +397,7 @@ Kubernetes version 1.28 is now the default version for new {{site.data.keyword.c
 
 
 
-[Change log]{: tag-purple} Worker node fix packs are available. 
+Worker node fix packs are available. 
 :    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
 :    Review the following change logs for your cluster version.
     - [1.28.2_1532](/docs/containers?topic=containers-changelog_128)
@@ -388,7 +410,7 @@ Kubernetes version 1.28 is now the default version for new {{site.data.keyword.c
 
 
 
-[Change log]{: tag-purple} Ingress ALB version `1.8.4_5586_ikss`
+Ingress ALB version `1.8.4_5586_ikss`
 :   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
 
@@ -399,10 +421,10 @@ Kubernetes version 1.28 is now the default version for new {{site.data.keyword.c
 
 
 
-[Change log]{: tag-purple} Istio add-on version `1.18.5` and `1.17.8`.
+Istio add-on version `1.18.5` and `1.17.8`.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
   
-[Change log]{: tag-purple} ALB OAuth Proxy add-on version `2.0.0_1889`.
+ALB OAuth Proxy add-on version `2.0.0_1889`.
 :   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 
 
@@ -414,7 +436,7 @@ Kubernetes version 1.28 is now the default version for new {{site.data.keyword.c
 {: #containers-oct1723}
 {: release-note}
 
-[Change log]{: tag-purple} Ingress ALB versions `1.8.1_5543_iks`, `1.6.4_5544_iks`, and `1.5.1_5542_iks`
+Ingress ALB versions `1.8.1_5543_iks`, `1.6.4_5544_iks`, and `1.5.1_5542_iks`
 :   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
 
@@ -423,10 +445,10 @@ Kubernetes version 1.28 is now the default version for new {{site.data.keyword.c
 {: #containers-oct1123}
 {: release-note}
 
-[Change log]{: tag-purple} Ingress ALB versions `1.5.1_5436_iks`, `1.6.4_5435_iks`, and `1.8.1_5434_iks`
+Ingress ALB versions `1.5.1_5436_iks`, `1.6.4_5435_iks`, and `1.8.1_5434_iks`
 :   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
-[Change log]{: tag-purple} {{site.data.keyword.cos_full_notm}} plug-in version `2.2.19`
+{{site.data.keyword.cos_full_notm}} plug-in version `2.2.19`
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 
@@ -436,12 +458,12 @@ Kubernetes version 1.28 is now the default version for new {{site.data.keyword.c
 {: #containers-oct1023}
 {: release-note}
 
-[Change log]{: tag-purple} CLI version `1.0.573` is available.
+CLI version `1.0.573` is available.
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 
 
-[Change log]{: tag-purple} Istio add-on version `1.19.3`.
+Istio add-on version `1.19.3`.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
 
 
@@ -452,7 +474,7 @@ Kubernetes version 1.28 is now the default version for new {{site.data.keyword.c
 
 
 
-[Change log]{: tag-purple} Worker node fix packs are available.
+Worker node fix packs are available.
 :   [1.28.2_1529](/docs/containers?topic=containers-changelog_128)
 :   [1.27.5_1542](/docs/containers?topic=containers-changelog_127)
 :   [1.26.8_1556](/docs/containers?topic=containers-changelog_126)
