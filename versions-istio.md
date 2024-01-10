@@ -97,7 +97,7 @@ Current version
 
 Updates in this version
 :   For more information, see the [Istio security bulletin 2023-005](https://istio.io/latest/news/security/istio-security-2023-005/){: external}.
-:   See the Istio release notes for [Istio 1.19.5](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.5/.){:external}.
+:   See the Istio release notes for [Istio 1.19.5](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.5/.){: external}.
 :   Resolves the following CVEs:
     - [USN-6517-1](https://ubuntu.com/security/notices/USN-6517-1){: external}
     - [CVE-2022-48522](https://nvd.nist.gov/vuln/detail/CVE-2022-48522){: external}
