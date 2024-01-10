@@ -246,7 +246,7 @@ subcollection: containers
 
         * Istio cluster add-on versions `1.20.0`, `1.19.5`, and `1.18.6`.
 
-        * Istio add-on version 1.18 is unsupported
+        * Istio add-on version 1.18 will no longer be supported on 21 February 2024
 
         * {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch update `1.2.5_107`.
 
