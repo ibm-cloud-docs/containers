@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-10"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -32,6 +32,39 @@ ibmcloud ks cluster addon versions
 ## Version 1.20
 {: #v120}
 
+### Changelog for 1.20.1, released 10 January 2024
+{: #1201}
+
+Review the changes that are included in version 1.20.1 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.20.0
+
+Current version
+:   1.20.1
+
+Updates in this version
+:   For more information, see the [Istio security bulletin 2023-005](https://istio.io/latest/news/security/istio-security-2023-005/){: external}.
+:   See the Istio release notes for [Istio 1.20.1](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.1/.){: external}.
+:   Resolves the following CVEs:
+    - [USN-6517-1](https://ubuntu.com/security/notices/USN-6517-1){: external}
+    - [CVE-2022-48522](https://nvd.nist.gov/vuln/detail/CVE-2022-48522){: external}
+    - [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/CVE-2023-47038){: external}
+    - [USN-6477-1](https://ubuntu.com/security/notices/USN-6477-1){: external}
+    - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/CVE-2023-4016){: external}
+    - [USN-6427-1](https://ubuntu.com/security/notices/USN-6427-1){: external}
+    - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
+    - [USN-6535-1](https://ubuntu.com/security/notices/USN-6535-1){: external}
+    - [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/CVE-2023-46218){: external}
+    - [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/CVE-2023-46219){: external}
+    - [USN-6541-1](https://ubuntu.com/security/notices/USN-6541-1){: external}
+    - [CVE-2023-4806](https://nvd.nist.gov/vuln/detail/CVE-2023-4806){: external}
+    - [CVE-2023-4813](https://nvd.nist.gov/vuln/detail/CVE-2023-4813){: external}
+    - [CVE-2023-5156](https://nvd.nist.gov/vuln/detail/CVE-2023-5156){: external}
+    - [USN-6499-1](https://ubuntu.com/security/notices/USN-6499-1){: external}
+    - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/CVE-2023-5981){: external}
+
 ### Changelog for 1.20.0, released 7 December 2023
 {: #1200}
 
@@ -50,7 +83,41 @@ Updates in this version
 ## Version 1.19
 {: #v119}
 
-### Changelog for 1.19.4, released 5 December 2023
+### Change log for 1.19.5, released 10 January 2024
+{: #1195}
+
+Review the changes that are included in version 1.19.5 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.19.4
+
+Current version
+:   1.19.5
+
+Updates in this version
+:   For more information, see the [Istio security bulletin 2023-005](https://istio.io/latest/news/security/istio-security-2023-005/){: external}.
+:   See the Istio release notes for [Istio 1.19.5](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.5/.){:external}.
+:   Resolves the following CVEs:
+    - [USN-6517-1](https://ubuntu.com/security/notices/USN-6517-1){: external}
+    - [CVE-2022-48522](https://nvd.nist.gov/vuln/detail/CVE-2022-48522){: external}
+    - [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/CVE-2023-47038){: external}
+    - [USN-6477-1](https://ubuntu.com/security/notices/USN-6477-1){: external}
+    - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/CVE-2023-4016){: external}
+    - [USN-6427-1](https://ubuntu.com/security/notices/USN-6427-1){: external}
+    - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
+    - [USN-6535-1](https://ubuntu.com/security/notices/USN-6535-1){: external}
+    - [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/CVE-2023-46218){: external}
+    - [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/CVE-2023-46219){: external}
+    - [USN-6541-1](https://ubuntu.com/security/notices/USN-6541-1){: external}
+    - [CVE-2023-4806](https://nvd.nist.gov/vuln/detail/CVE-2023-4806){: external}
+    - [CVE-2023-4813](https://nvd.nist.gov/vuln/detail/CVE-2023-4813){: external}
+    - [CVE-2023-5156](https://nvd.nist.gov/vuln/detail/CVE-2023-5156){: external}
+    - [USN-6499-1](https://ubuntu.com/security/notices/USN-6499-1){: external}
+    - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/CVE-2023-5981){: external}
+
+
+### Change log for 1.19.4, released 5 December 2023
 {: #1194}
 
 Review the changes that are included in version 1.19.4 of the managed Istio add-on.
@@ -95,8 +162,67 @@ Updates in this version
 :   Addon-Istio does not support ambient mesh at this time
 
 
-## Version 1.18
+## Unsupported: Version 1.18
 {: #v118}
+
+### Change log for 1.18.6, released 10 January 2024
+{: #1186}
+
+Review the changes that are included in version 1.18.6 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.18.5
+
+Current version
+:   1.18.6
+
+Updates in this version
+:   This is the EOL version for 1.18. Support for Istio 1.18 ends on 21 February 2024.
+:   See the Istio release notes for [Istio 1.18.6](https://istio.io/latest/news/releases/1.18.x/announcing-1.18.6/.){: external}.
+:   For more information, see the [Istio security bulletin 2023-005](https://istio.io/latest/news/security/istio-security-2023-005/){: external}.
+:   Resolves the following CVEs:
+    - [USN-6517-1](https://ubuntu.com/security/notices/USN-6517-1){: external}
+    - [CVE-2022-48522](https://nvd.nist.gov/vuln/detail/CVE-2022-48522){: external}
+    - [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/CVE-2023-47038){: external}
+    - [USN-6450-1](https://ubuntu.com/security/notices/USN-6450-1){: external}
+    - [CVE-2023-2975](https://nvd.nist.gov/vuln/detail/CVE-2023-2975){: external}
+    - [CVE-2023-5363](https://nvd.nist.gov/vuln/detail/CVE-2023-5363){: external}
+    - [USN-6435-1](https://ubuntu.com/security/notices/USN-6435-1){: external}
+    - [CVE-2023-3446](https://nvd.nist.gov/vuln/detail/CVE-2023-3446){: external}
+    - [CVE-2023-3817](https://nvd.nist.gov/vuln/detail/CVE-2023-3817){: external}
+    - [USN-6467-1](https://ubuntu.com/security/notices/USN-6467-1){: external}
+    - [CVE-2023-36054](https://nvd.nist.gov/vuln/detail/CVE-2023-36054){: external}
+    - [USN-6429-1](https://ubuntu.com/security/notices/USN-6429-1){: external}
+    - [CVE-2023-38545](https://nvd.nist.gov/vuln/detail/CVE-2023-38545){: external}
+    - [CVE-2023-38546](https://nvd.nist.gov/vuln/detail/CVE-2023-38546){: external}
+    - [USN-6543-1](https://ubuntu.com/security/notices/USN-6543-1){: external}
+    - [CVE-2023-39804](https://nvd.nist.gov/vuln/detail/CVE-2023-39804){: external}
+    - [USN-6477-1](https://ubuntu.com/security/notices/USN-6477-1){: external}
+    - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/CVE-2023-4016){: external}
+    - [USN-6427-1](https://ubuntu.com/security/notices/USN-6427-1){: external}
+    - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
+    - [USN-6535-1](https://ubuntu.com/security/notices/USN-6535-1){: external}
+    - [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/CVE-2023-46218){: external}
+    - [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/CVE-2023-46219){: external}
+    - [USN-6541-1](https://ubuntu.com/security/notices/USN-6541-1){: external}
+    - [CVE-2023-4806](https://nvd.nist.gov/vuln/detail/CVE-2023-4806){: external}
+    - [CVE-2023-4813](https://nvd.nist.gov/vuln/detail/CVE-2023-4813){: external}
+    - [CVE-2023-5156](https://nvd.nist.gov/vuln/detail/CVE-2023-5156){: external}
+    - [USN-6499-1](https://ubuntu.com/security/notices/USN-6499-1){: external}
+    - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/CVE-2023-5981){: external}
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Change log for 1.18.5, released 18 October 2023
 {: #1185}

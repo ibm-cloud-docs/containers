@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-09"
 
 
 keywords: kubernetes, nginx, ingress controller, fluentd
@@ -58,6 +58,15 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 {: note}
 
 
+### 1.9.4_6161_iks, released 10 January 2023
+{: #1.9.4_6161_iks}
+
+[Default version]{: tag-green}
+
+- Dependency updates.
+- CVE remediation for [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/CVE-2023-46219){:external} and [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/CVE-2023-46218){:external}.
+
+
 ### 1.9.4_5886_iks, released 04 December 2023
 {: #1.9.4_5886_iks}
 
@@ -79,6 +88,14 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 
 ## Version 1.8.4
 {: #1_8_4}
+
+
+### 1.8.4_6173_iks, released 10 January 2023
+{: #1.8.4_6173_iks}
+
+- Dependency updates.
+- CVE remediation for [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/CVE-2023-46219){:external} and [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/CVE-2023-46218){:external}.
+
 
 ### 1.8.4_5885_iks, released 04 December 2023
 {: #1.8.4_5885_iks}
@@ -138,6 +155,13 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 
 ## Version 1.6.4
 {: #1_6_4}
+
+### 1.6.4_6177_iks, released 10 January 2023
+{: #1.6.4_6177_iks}
+
+- Dependency updates.
+- CVE remediation for [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/CVE-2023-46219){:external} and [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/CVE-2023-46218){:external}.
+
 
 ### 1.6.4_5884_iks, released 04 December 2023
 {: #1.6.4_5884_iks}
