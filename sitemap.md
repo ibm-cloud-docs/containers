@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-01-09"
+lastupdated: "2024-01-10"
 
 
 keywords: containers
@@ -243,6 +243,10 @@ subcollection: containers
         * Subscribe to the {{site.data.keyword.cloud_notm}} documentation release notes via RSS.
 
         * Ingress ALB updates
+
+        * Istio cluster add-on versions `1.20.0`, `1.19.5`, and `1.18.6`.
+
+        * Istio add-on version 1.18 is unsupported
 
         * {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch update `1.2.5_107`.
 
@@ -6926,15 +6930,21 @@ subcollection: containers
 
 * [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
 
+    * [Changelog for 1.20.1, released 10 January 2024](/docs/containers?topic=containers-istio-changelog#1201)
+
     * [Changelog for 1.20.0, released 7 December 2023](/docs/containers?topic=containers-istio-changelog#1200)
 
 * [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
 
-    * [Changelog for 1.19.4, released 5 December 2023](/docs/containers?topic=containers-istio-changelog#1194)
+    * [Change log for 1.19.5, released 10 January 2024](/docs/containers?topic=containers-istio-changelog#1195)
+
+    * [Change log for 1.19.4, released 5 December 2023](/docs/containers?topic=containers-istio-changelog#1194)
 
     * [Change log for 1.19.3, released 10 October 2023](/docs/containers?topic=containers-istio-changelog#1193)
 
-* [Version 1.18](/docs/containers?topic=containers-istio-changelog#v118)
+* [Unsupported: Version 1.18](/docs/containers?topic=containers-istio-changelog#v118)
+
+    * [Change log for 1.18.6, released 10 January 2024](/docs/containers?topic=containers-istio-changelog#1186)
 
     * [Change log for 1.18.5, released 18 October 2023](/docs/containers?topic=containers-istio-changelog#1185)
 

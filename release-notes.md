@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-09"
+lastupdated: "2024-01-10"
 
 
 keywords: containers, kubernetes, release notes
@@ -43,6 +43,12 @@ Subscribe to the {{site.data.keyword.cloud_notm}} documentation release notes vi
 Ingress ALB updates
 :   Ingress ALB versions `1.9.4_6161_iks`, `1.8.4_6173_iks`, `1.6.4_6177_iks` are available. 1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
+Istio cluster add-on versions `1.20.0`, `1.19.5`, and `1.18.6`.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+Istio add-on version 1.18 is unsupported
+:   Follow the steps to update your [Istio components](/docs/containers?topic=containers-istio#istio_minor) to the latest patch version of Istio 1.18 that is supported by {{site.data.keyword.containerlong_notm}}.
+
 
 
 {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch update `1.2.5_107`.
@@ -50,6 +56,7 @@ Ingress ALB updates
 
 {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates `5.2.14_485` and `5.1.19_486`.
 :   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
 
 
 ### 2 January 2024
