@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-10"
+lastupdated: "2024-01-12"
 
 
 keywords: containers, kubernetes, release notes
@@ -594,7 +594,7 @@ Trusted profile updates for Kubernetes clusters version 1.28 and later.
 :   You can now give trusted profiles service level access to your clusters, then use a federated ID, like App ID, to access the cluster at the level assigned in the trusted profile since trusted profile identities are now synced into the cluster RBAC. For more information, see [Creating trusted profiles](/docs/account?topic=account-create-trusted-profile&interface=ui) and [Logging in with a federated ID](/docs/account?topic=account-federated_id&interface=ui).
 
 New! Updated GPU drivers with version 1.28 clusters.
-:   With the release of IBM Cloud Kubernetes Version 1.28, GPU drivers moved to the 500 series version for all GPU worker node flavors. To use the 500 series GPU drivers, ensure that a GPU worker node flavor is being used and the cluster master version is upgraded to at least version 1.28. Versions earlier than 1.28 will still continue to use the 400 series GPU drivers. For more information, see [Deploying an app on a GPU machine](https://cloud.ibm.com/docs/containers?topic=containers-deploy_app&interface=ui#gpu_app).
+:   With the release of IBM Cloud Kubernetes Version 1.28, GPU drivers moved to the 500 series version for all GPU worker node flavors. To use the 500 series GPU drivers, ensure that a GPU worker node flavor is being used and the cluster master version is upgraded to at least version 1.28. Versions earlier than 1.28 will still continue to use the 400 series GPU drivers. For more information, see [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app&interface=ui#gpu_app).
 
   
 Master fix packs are available.
@@ -1937,7 +1937,7 @@ Worker node fix pack 1.22.15_1577, 1.23.13_1551, 1.24.7_1543, and 1.25.3_1521
 {: release-note}
 
 Changes to the Portworx update process beginning with version `2.12`.
-:   Beginning with version `2.12` Portworx uses an operator-based deployment model instead of the Helm based model use in version `2.11` and earlier. If you want to update from Portworx `2.11` to version `2.12`, follow the migration steps in the [Portworx documentation](https://docs.portworx.com/operations/operate-kubernetes/migrate-daemonset/){: external}.
+:   Beginning with version `2.12` Portworx uses an operator-based deployment model instead of the Helm based model use in version `2.11` and earlier. If you want to update from Portworx `2.11` to version `2.12`, follow the migration steps in the [Portworx documentation](https://docs.portworx.com/portworx-enterprise/operations/operate-kubernetes/migrate-daemonset){: external}.
 
 Cluster autoscaler add-on version `1.0.7_883`.
 :   For more information, see [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).

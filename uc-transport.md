@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-12"
 
 
 keywords: kubernetes
@@ -37,7 +37,7 @@ An IT Exec has worldwide shipping routing and scheduling systems that partners i
 Key technologies:    
 * [Multi-regions for business partner ecosystem](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [Horizontal scaling](/docs/containers?topic=containers-plan_deploy#highly_available_apps)
-* [Open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/architecture/toolchains/){: external}
+* [Open toolchains in {{site.data.keyword.contdelivery_full}}](/docs/ContinuousDelivery?topic=ContinuousDelivery-getting-started&interface=ui){: external}
 * [Cloud services for innovation](https://www.ibm.com/cloud/products#analytics){: external}
 * [{{site.data.keyword.messagehub_full}} to feed event data to apps](/docs/EventStreams?topic=EventStreams-about#about)
 
