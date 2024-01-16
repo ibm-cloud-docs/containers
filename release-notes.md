@@ -36,6 +36,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-jan1624}
 {: release-note}
 
+Cluster autoscaler add-on patch updates `1.2.0_322` and `1.0.9_328`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+
 
 
 ALB OAuth Proxy add-on version `2.0.0_2063`.
