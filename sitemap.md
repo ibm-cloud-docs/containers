@@ -7388,7 +7388,7 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-vpc_bs_changelog#052_is_block)
 
-    * [Change log for version 5.2.14_485, released 10 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2.14_485_is_block_relnote)
+    * [Change log for version 5.2.14_485, released 10 January 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.14_485_is_block_relnote)
 
     * [Change log for version 5.2.11_447, released 27 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2.11_447_is_block_relnote)
 
@@ -7398,7 +7398,7 @@ subcollection: containers
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
 
-    * [Change log for version 5.1.19_486, released 10 January 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.19_486_is_block_relnote)
+    * [Change log for version 5.1.19_486, released 10 January 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.19_486_is_block_relnote)
 
 * [Change log for version 5.1.16_446, released 27 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.1.16_446_is_block_relnote)
 
