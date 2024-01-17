@@ -31,6 +31,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## January 2024
 {: #containers-jan24}
 
+### 17 January 2024
+{: #containers-jan1724}
+{: release-note}
+
+
+
+Worker node fix packs are available. 
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+:    Review the following change logs for your cluster version.
+    - [1.28.4_1541](/docs/containers?topic=containers-changelog_128)
+    - [1.27.8_1560](/docs/containers?topic=containers-changelog_127)
+    - [1.26.11_1568](/docs/containers?topic=containers-changelog_126)
+    - [1.25.16_1573](/docs/containers?topic=containers-changelog_125)
+
+
+
+
+
 
 ### 16 January 2024
 {: #containers-jan1624}

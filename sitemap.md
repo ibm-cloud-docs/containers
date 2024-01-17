@@ -238,6 +238,10 @@ subcollection: containers
 
 * [January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan24)
 
+    * [17 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1724)
+
+        * Worker node fix packs are available. 
+
     * [16 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1624)
 
         * Cluster autoscaler add-on patch updates `1.2.0_322` and `1.0.9_328`.
@@ -6028,6 +6032,8 @@ subcollection: containers
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
 
+    * [Change log for worker node fix pack 1.28.4_1541, released 16 January 2024](/docs/containers?topic=containers-changelog_128#1284_1541_W)
+
     * [Change log for worker node fix pack 1.28.4_1540, released 02 January 2024](/docs/containers?topic=containers-changelog_128#1284_1540_W)
 
     * [Change log for worker node fix pack 1.28.4_1539, released 18 December 2023](/docs/containers?topic=containers-changelog_128#1284_1539_W)
@@ -6112,6 +6118,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for worker node fix pack 1.27.8_1560, released 16 January 2024](/docs/containers?topic=containers-changelog_127#1278_1560_W)
 
     * [Change log for worker node fix pack 1.27.8_1559, released 02 January 2024](/docs/containers?topic=containers-changelog_127#1278_1559_W)
 
@@ -6223,6 +6231,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for worker node fix pack 1.26.11_1568, released 16 January 2024](/docs/containers?topic=containers-changelog_126#12611_1568_W)
 
     * [Change log for worker node fix pack 1.26.11_1567, released 02 January 2024](/docs/containers?topic=containers-changelog_126#12611_1567_W)
 
@@ -6360,6 +6370,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_125#changelog_overview_125)
 
 * [Version 1.25 change log](/docs/containers?topic=containers-changelog_125#125_changelog)
+
+    * [Change log for worker node fix pack 1.25.16_1573, released 16 January 2024](/docs/containers?topic=containers-changelog_125#12516_1573_W)
 
     * [Change log for worker node fix pack 1.25.16_1572, released 02 January 2024](/docs/containers?topic=containers-changelog_125#12516_1572_W)
 
