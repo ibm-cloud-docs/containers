@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-01-12"
+lastupdated: "2024-01-17"
 
 
 keywords: kubernetes, containers, change log, 128 change log, 128 updates
@@ -87,7 +87,7 @@ The following table shows the changes that are in the master fix pack 1.28.4_153
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 438 | 439 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | c33e6e7 | 58e69e0 | New version contains updates and security fixes. |
 | Konnectivity agent and server | v0.1.5_39_iks | v0.1.5_47_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.1.5){: external}. |
-| Kubernetes | v1.28.3 | v1.28.4 | Review the [community Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.4){: external}. Resolves [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325){: external} and [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/){: external}. For more information, see [Security Bulletin: IBM Cloud Kubernetes Service is affected by Kubernetes API server security vulnerabilities (CVE-2023-39325 and CVE-2023-44487)](https://www.ibm.com/support/pages/node/7091444){: external}. |
+| Kubernetes | v1.28.3 | v1.28.4 | Review the [community Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.4){: external}. Resolves [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325){: external} and [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}. For more information, see [Security Bulletin: IBM Cloud Kubernetes Service is affected by Kubernetes API server security vulnerabilities (CVE-2023-39325 and CVE-2023-44487)](https://www.ibm.com/support/pages/node/7091444){: external}. |
 | Load balancer and Load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2731 | 2767 | New version contains updates and security fixes. |
 | Kubernetes NodeLocal DNS cache | 1.22.24 | 1.22.27 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.27){: external}. |
 {: caption="Changes since version 1.28.3_1534" caption-side="bottom"}
@@ -104,7 +104,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 | Ubuntu 20.04 packages | 5.4.0-166-generic | 5.4.0-167-generic | Worker node kernel & package updates for [CVE-2023-31085](https://nvd.nist.gov/vuln/detail/CVE-2023-31085){: external}, [CVE-2023-40217](https://nvd.nist.gov/vuln/detail/CVE-2023-40217){: external}, [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}, [CVE-2023-45871](https://nvd.nist.gov/vuln/detail/CVE-2023-45871){: external}, [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/CVE-2023-47038){: external}, [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/CVE-2023-5981){: external}. |
 | Kubernetes | 1.28.3 | 1.28.4 | For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.4){: external}. |
 | Containerd | 1.7.9 | 1.7.10 | For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.10){: external}. |
-| GPU device plug-in and installer | 0e3950c | 2d51c7a | New version contains updates and security fixes. Driver version upgraded from [535.54.03](http://docs.nvidia.com/datacenter/tesla/tesla-release-notes-535-54-03/index.html){: external} to [535.129.03](http://docs.nvidia.com/datacenter/tesla/tesla-release-notes-535.129.03/index.html){: external}. |
+| GPU device plug-in and installer | 0e3950c | 2d51c7a | New version contains updates and security fixes. Driver version upgraded from [535.54.03](http://docs.nvidia.com/datacenter/tesla/tesla-release-notes-535-54-03/index.html){: external} to [535.129.03](https://docs.nvidia.com/datacenter/tesla/tesla-release-notes-535-129-03/index.html){: external}. |
 {: caption="Changes since version 1.28.3_1535" caption-side="bottom"}
 
 
@@ -133,7 +133,7 @@ The following table shows the changes that are in the master fix pack 1.28.3_153
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.4.4 | v1.4.5 | New version contains updates and security fixes. |
-| etcd | v3.5.9 | v3.5.10 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.10){: external}. |
+| etcd | v3.5.9 | v3.5.10 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.10){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.28.2-10 | v1.28.3-5 | New version contains updates and security fixes. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 435 | 438 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | a1edf56 | c33e6e7 | New version contains updates and security fixes. |
@@ -242,8 +242,8 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 | Kubernetes configuration | N/A | N/A | See [Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings). In addition, both `default` and `verbose` [Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server) records now contain extra user claim information. |
 | GPU device plug-in and installer | NA | 61afd3d | Driver version: [535.54.03](http://docs.nvidia.com/datacenter/tesla/tesla-release-notes-535-54-03/index.html). |
 | Kubernetes Dashboard metrics scraper | N/A |	N/A | Increased Kubernetes Dashboard metrics scraper CPU resource request to `20m`. |
-| Kubernetes DNS autoscaler | v1.8.8 | v1.8.9 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/v1.8.9). |
-| Kubernetes Metrics Server | v0.6.3 | v0.6.4 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.6.4). In addition, the Kubernetes Metrics Server has an updated role-based access control (RBAC) configuration. |
+| Kubernetes DNS autoscaler | v1.8.8 | v1.8.9 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/v1.8.9). |
+| Kubernetes Metrics Server | v0.6.3 | v0.6.4 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.6.4). In addition, the Kubernetes Metrics Server has an updated role-based access control (RBAC) configuration. |
 | Kubernetes CSI snapshot controller and CRDs | v6.2.1 | v6.2.2 | See the [Kubernetes container storage interface (CSI) snapshotter release notes](https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v6.2.2). |
 {: caption="Changes since version 1.27." caption-side="bottom"}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-17"
 
 
 keywords: kubernetes, clusters
@@ -101,7 +101,7 @@ The Kubernetes master is accessible through the private cloud service endpoint i
 
 1. Set up your {{site.data.keyword.vpc_short}} VPN and connect to your private network through the VPN.
     1. [Configure a VPN gateway on your local machine](/docs/vpc?topic=vpc-vpn-onprem-example). For example, you might choose to set up strongSwan on your machine.
-    2. [Create a VPN gateway in your VPC, and create the connection between the VPC VPN gateway and your local VPN gateway](/docs/vpc?topic=vpc-vpn-create-gateway#vpn-create-ui). In the **New VPN connection for VPC** section, add the `166.8.0.0/14` subnet to the **Local subnets** field. If you have a multizone cluster, repeat this step to configure a VPC gateway on a subnet in each zone where you have worker nodes.
+    2. [Create a VPN gateway in your VPC, and create the connection between the VPC VPN gateway and your local VPN gateway](/docs/vpc?topic=vpc-vpn-create-gateway&interface=ui#vpn-create-ui). In the **New VPN connection for VPC** section, add the `166.8.0.0/14` subnet to the **Local subnets** field. If you have a multizone cluster, repeat this step to configure a VPC gateway on a subnet in each zone where you have worker nodes.
     3. Verify that you are connected to the private network through your {{site.data.keyword.vpc_short}} VPN connection.
 
 2. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.

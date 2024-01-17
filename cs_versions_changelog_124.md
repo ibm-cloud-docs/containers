@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-17"
 
 
 keywords: kubernetes, containers
@@ -272,7 +272,7 @@ The following table shows the changes that are in the master fix pack 1.24.15_15
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.24.5 | v3.24.6 | See the [Calico release notes](https://docs.tigera.io/calico/3.24/release-notes/#v3.24.6){: external}. |
+| Calico | v3.24.5 | v3.24.6 | See the [Calico release notes](https://archive-os-3-24.netlify.app/calico/3.24/release-notes/#v3.24.6){: external}. |
 | Cluster health image | v1.3.20 | v1.3.21 | Updated `Go` dependencies and to `Go` version `1.19.10`. |
 | etcd | v3.5.8 | v3.5.9 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.9){: external}. |
 | Gateway-enabled cluster controller | 2106 | 2322 | Updated image to resolve [CVE-2023-2650](https://nvd.nist.gov/vuln/detail/CVE-2023-2650){: external}. |

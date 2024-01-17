@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-17"
 
 
 keywords: containers, kubernetes, infrastructure, rbac, policy, providers, benefits
@@ -18,7 +18,7 @@ subcollection: containers
 # Understanding {{site.data.keyword.containerlong_notm}}
 {: #overview}
 
-Learn more about [{{site.data.keyword.containerlong}}](https://www.ibm.com/cloud/kubernetes-service){: external}, its capabilities, and the options that are available to you to customize the cluster to your needs.
+Learn more about [{{site.data.keyword.containerlong}}](https://www.ibm.com/products/kubernetes-service){: external}, its capabilities, and the options that are available to you to customize the cluster to your needs.
 {: shortdesc}
 
 {{site.data.keyword.containerlong_notm}} is a managed offering to create your own Kubernetes cluster of compute hosts to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management for your apps. Combined with an intuitive user experience, built-in security and isolation, and advanced tools to secure, manage, and monitor your cluster workloads, you can rapidly deliver highly available and secure containerized apps in the public cloud.

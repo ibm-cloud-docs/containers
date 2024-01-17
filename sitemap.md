@@ -6936,9 +6936,9 @@ subcollection: containers
 
 * [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
 
-    * [Changelog for 1.20.1, released 10 January 2024](/docs/containers?topic=containers-istio-changelog#1201)
+    * [Change log for 1.20.1, released 10 January 2024](/docs/containers?topic=containers-istio-changelog#1201)
 
-    * [Changelog for 1.20.0, released 7 December 2023](/docs/containers?topic=containers-istio-changelog#1200)
+    * [Change log for 1.20.0, released 7 December 2023](/docs/containers?topic=containers-istio-changelog#1200)
 
 * [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
 

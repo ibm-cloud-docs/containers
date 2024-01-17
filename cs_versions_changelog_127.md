@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-17"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -88,7 +88,7 @@ The following table shows the changes that are in the master fix pack 1.27.8_155
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 438 | 439 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | c33e6e7 | 58e69e0b | New version contains updates and security fixes. |
 | Konnectivity agent and server | v0.1.5_39_iks | v0.1.5_47_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.1.5){: external}. |
-| Kubernetes | v1.27.7 | v1.27.8 | Review the [community Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.8){: external}. Resolves [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325){: external} and [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/){: external}. For more information, see [Security Bulletin: IBM Cloud Kubernetes Service is affected by Kubernetes API server security vulnerabilities (CVE-2023-39325 and CVE-2023-44487)](https://www.ibm.com/support/pages/node/7091444){: external}. |
+| Kubernetes | v1.27.7 | v1.27.8 | Review the [community Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.8){: external}. Resolves [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325){: external} and [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}. For more information, see [Security Bulletin: IBM Cloud Kubernetes Service is affected by Kubernetes API server security vulnerabilities (CVE-2023-39325 and CVE-2023-44487)](https://www.ibm.com/support/pages/node/7091444){: external}. |
 | Kubernetes NodeLocal DNS cache | 1.22.24 | 1.22.27 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.27){: external}. |
 | Load balancer and Load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2731 | 2767 | New version contains updates and security fixes. |
 {: caption="Changes since version 1.27.7_1547" caption-side="bottom"}
@@ -131,7 +131,7 @@ The following table shows the changes that are in the master fix pack 1.27.7_154
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.4.4 | v1.4.5 | New version contains updates and security fixes. |
-| etcd | v3.5.9 | v3.5.10 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.10){: external}. |
+| etcd | v3.5.9 | v3.5.10 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.10){: external}. |
 | GPU device plug-in and installer | 4319682 | 99267c4 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.27.6-8 | v1.27.7-4 | New version contains updates and security fixes. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 435 | 438 | New version contains updates and security fixes. |
