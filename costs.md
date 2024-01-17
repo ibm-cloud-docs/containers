@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-17"
 
 
 keywords: containers, iro, openshift, red hat, red hat openshift
@@ -76,7 +76,7 @@ Bandwidth refers to the public data transfer of inbound and outbound network tra
 Review the following factors that impact public bandwidth charges:
 * **Location**: As with worker nodes, charges vary depending on the zone that your resources are deployed in.
 * **Pay-As-You-Go for VM**: Because VMs are billed at an hourly rate, your VM worker node machines have a Pay-As-You-Go allocation of outbound networking based on GB usage.
-* **Included bandwidth and tiered packages for BM**: Bare metal worker nodes might come with a certain allocation of outbound networking per month that varies by geography: 20 TB for North America and Europe, or 5 TB for Asia Pacific and South America. After you exceed your included bandwidth, you are charged according to a tiered usage scheme for your geography. If you exceed a tier allotment, you might also be charged a standard data transfer fee. For more information, see [Bandwidth packages](https://www.ibm.com/cloud/bandwidth){: external}.
+* **Included bandwidth and tiered packages for BM**: Bare metal worker nodes might come with a certain allocation of outbound networking per month that varies by geography: 20 TB for North America and Europe, or 5 TB for Asia Pacific and South America. After you exceed your included bandwidth, you are charged according to a tiered usage scheme for your geography. If you exceed a tier allotment, you might also be charged a standard data transfer fee. For more information, see [Bandwidth packages](https://github.com/etcd-io/etcd/releases/v3.5.10){: external}.
 
 **VPC clusters**: For more information about how internet data transfer works in your Virtual Private Cloud, see [Pricing for VPC](https://cloud.ibm.com/vpc-ext/provision/vs){: external}.
 
@@ -113,7 +113,7 @@ To choose the correct storage solution, see [Planning highly available persisten
 * [{{site.data.keyword.blockstorageshort}}](https://www.ibm.com/products/block-storage){: external}
 * [{{site.data.keyword.filestorage_vpc_short}}](https://www.ibm.com/products/file-storage){: external}
 * [{{site.data.keyword.block_storage_is_short}}](https://www.ibm.com/products/block-storage){: external}
-* [{{site.data.keyword.cos_full_notm}}](https://www.ibm.com/cloud/object-storage){: external}
+* [{{site.data.keyword.cos_full_notm}}](https://www.ibm.com/products/cloud-object-storage){: external}
 * [Portworx Enterprise pricing](https://cloud.ibm.com/catalog/services/portworx-enterprise){: external}
 
 ### {{site.data.keyword.cloud_notm}} services
@@ -167,7 +167,7 @@ The following steps present a general process to manage costs for your {{site.da
     * [Decide the cluster environment that you want](/docs/containers?topic=containers-strategy).
     * [Consider the availability that you want for your cluster](/docs/containers?topic=containers-ha_clusters). For example, a basic high availability setup is one multizone cluster with two worker nodes in each of three zones, for a minimum total of 6 worker nodes.
 3. Check out other {{site.data.keyword.cloud_notm}} services, add-ons, operators, and other third-party software that you might use that can increase your cost. To get an idea of what other costs clusters typically incur, review [Understanding costs for your clusters](#costs-for-clusters).
-4. [Estimate your costs](/docs/billing-usage?topic=billing-usage-cost#cost) and review detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing](https://www.ibm.com/cloud/kubernetes-service){: external}.
+4. [Estimate your costs](/docs/billing-usage?topic=billing-usage-cost#cost) and review detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing](https://www.ibm.com/products/kubernetes-service){: external}.
 5. Manage the lifecycle of your cluster to control costs.
     * Consider [enabling the cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-install-addon) to automatically add or remove worker nodes in response to your cluster workload resource requests.
     * Manually resize your worker pool to remove worker nodes that you don't need. Keep in mind that you can't scale a worker pool down to zero worker nodes.
@@ -175,5 +175,6 @@ The following steps present a general process to manage costs for your {{site.da
     * Consider setting up a [monitoring tool](/docs/containers?topic=containers-health-monitor#view_metrics) such as {{site.data.keyword.mon_full_notm}} and creating alerts for your workloads when they need more resources.
 6. [View your usage](/docs/billing-usage?topic=billing-usage-viewingusage#viewingusage) to continuously refine how you consume {{site.data.keyword.cloud_notm}} services.
 7. [Set spending notifications](/docs/billing-usage?topic=billing-usage-spending).
+
 
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-16"
+lastupdated: "2024-01-17"
 
 
 keywords: containers, kubernetes, release notes
@@ -30,6 +30,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## January 2024
 {: #containers-jan24}
+
+### 17 January 2024
+{: #containers-jan1724}
+{: release-note}
+
+
+
+Worker node fix packs are available. 
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+:    Review the following change logs for your cluster version.
+    - [1.28.4_1541](/docs/containers?topic=containers-changelog_128)
+    - [1.27.8_1560](/docs/containers?topic=containers-changelog_127)
+    - [1.26.11_1568](/docs/containers?topic=containers-changelog_126)
+    - [1.25.16_1573](/docs/containers?topic=containers-changelog_125)
+
+
+
+
 
 
 ### 16 January 2024
@@ -3563,7 +3581,7 @@ Review the release notes for September 2021.
 
 
 New! Kubernetes 1.22
-:   You can create or [update clusters to Kubernetes version 1.22](/docs/containers?topic=containers-cs_versions_122). With Kubernetes 1.22, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. For more information, [see the blog announcement](https://www.ibm.com/cloud/blog/announcements/kubernetes-version-121-now-available-in-ibm-cloud-kubernetes-service){: external}.
+:   You can create or [update clusters to Kubernetes version 1.22](/docs/containers?topic=containers-cs_versions_122). With Kubernetes 1.22, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. For more information, [see the blog announcement](https://www.ibm.com/blog/announcement/kubernetes-version-121-now-available-in-ibm-cloud-kubernetes-service/){: external}.
 
 Deprecated and unsupported Kubernetes versions
 :   With the release of Kubernetes 1.22, clusters that run version 1.18 remain deprecated, with a tentative unsupported date of 10 Oct 2021. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions_120) as soon as possible.
@@ -3717,7 +3735,7 @@ Master fix pack update change log documentation
 {: release-note}
 
 Registry token update
-:   Registry tokens are no longer accepted for authentication in {{site.data.keyword.registrylong_notm}}. Update your clusters to use {{site.data.keyword.cloud_notm}} IAM authentication. For more information, see [Accessing {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-registry_access). For more information about Registry token deprecation, see [IBM Cloud Container Registry Deprecates Registry Tokens for Authentication](https://www.ibm.com/cloud/blog/announcements/ibm-cloud-container-registry-deprecates-registry-tokens-for-authentication){: external}.
+:   Registry tokens are no longer accepted for authentication in {{site.data.keyword.registrylong_notm}}. Update your clusters to use {{site.data.keyword.cloud_notm}} IAM authentication. For more information, see [Accessing {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-registry_access). For more information about Registry token deprecation, see [IBM Cloud Container Registry Deprecates Registry Tokens for Authentication](https://www.ibm.com/blog/announcement/ibm-cloud-container-registry-deprecates-registry-tokens-for-authentication/){: external}.
 
 Ingress change logs
 :   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.48.1_1541_iks`, `0.47.0_1540_iks`, and `0.43.0_1539_iks`. Version `0.45.0_1482_iks` is removed.
@@ -3935,7 +3953,7 @@ Ingress change logs
 
 
 New! Kubernetes 1.21
-:   You can create or (/docs/containers?topic=containers-cs_versions_121)update your cluster to Kubernetes version 1.21. With Kubernetes 1.21, you get the latest stable enhancements from the community, such as stable `CronJob`, `EndpointSlice`, and `PodDisruptionBudget` resources. You also get enhancements to the {{site.data.keyword.cloud_notm}} product, such as a refreshed user interface experience. For more information, see the [blog announcement](https://www.ibm.com/cloud/blog/announcements/kubernetes-version-121-now-available-in-ibm-cloud-kubernetes-service){: external}.
+:   You can create or (/docs/containers?topic=containers-cs_versions_121)update your cluster to Kubernetes version 1.21. With Kubernetes 1.21, you get the latest stable enhancements from the community, such as stable `CronJob`, `EndpointSlice`, and `PodDisruptionBudget` resources. You also get enhancements to the {{site.data.keyword.cloud_notm}} product, such as a refreshed user interface experience. For more information, see the [blog announcement](https://www.ibm.com/blog/announcement/kubernetes-version-121-now-available-in-ibm-cloud-kubernetes-service/){: external}.
 
 Deprecated Kubernetes 1.18
 :   With the release of Kubernetes 1.21, clusters that run version 1.18 are deprecated, with a tentative unsupported date of 10 October 2021. Update your cluster to at least [version 1.19](/docs/containers?topic=containers-cs_versions_119) as soon as possible.
@@ -4025,7 +4043,7 @@ Istio add-on
 :   [Version 1.9.4 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#v19) is released.
 
 Deprecated Ubuntu 16 end of support date
-:   The Ubuntu 16 worker node flavors were deprecated 1 December 2020, with an initial unsupported date of April 2021. To give customers more time to migrate to a newer Ubuntu version, the end of support date is extended to 31 December 2021. Before 31 December 2021, [update the worker pools in your cluster to run Ubuntu 18](/docs/containers?topic=containers-update#machine_type). For more information, see the [{{site.data.keyword.cloud_notm}} blog](https://www.ibm.com/cloud/blog/announcements/new-bare-metal-servers-available-for-kubernetes-and-openshift-clusters){: external}.
+:   The Ubuntu 16 worker node flavors were deprecated 1 December 2020, with an initial unsupported date of April 2021. To give customers more time to migrate to a newer Ubuntu version, the end of support date is extended to 31 December 2021. Before 31 December 2021, [update the worker pools in your cluster to run Ubuntu 18](/docs/containers?topic=containers-update#machine_type). For more information, see the [{{site.data.keyword.cloud_notm}} blog](https://www.ibm.com/blog/announcement/new-bare-metal-servers-available-for-kubernetes-and-openshift-clusters/){: external}.
 
 ### 11 May 2021
 {: #containers-may1121}
@@ -4448,7 +4466,7 @@ Certified Kubernetes
 
 
 New! Kubernetes 1.20
-:   You can create or [update](/docs/containers?topic=containers-cs_versions_120) your cluster to Kubernetes version 1.20. With Kubernetes 1.20, you get the latest stable enhancements from the community, as well as beta access to features such as [API server priority](/docs/containers?topic=containers-kubeapi-priority). For more information, see the [blog announcement](http://www.ibm.com/cloud/blog/announcements/kubernetes-version-120-now-available-in-ibm-cloud-kubernetes-service){: external}.
+:   You can create or [update](/docs/containers?topic=containers-cs_versions_120) your cluster to Kubernetes version 1.20. With Kubernetes 1.20, you get the latest stable enhancements from the community, as well as beta access to features such as [API server priority](/docs/containers?topic=containers-kubeapi-priority). For more information, see the [blog announcement](https://www.ibm.com/blog/announcement/kubernetes-version-120-now-available-in-ibm-cloud-kubernetes-service){: external}.
 
 Deprecated Kubernetes 1.17
 :   With the release of Kubernetes 1.20, clusters that run version 1.17 are deprecated, with a tentative unsupported date of 2 July 2021. Update your cluster to at least [version 1.18](/docs/containers?topic=containers-cs_versions#k8s_version_archive) as soon as possible.

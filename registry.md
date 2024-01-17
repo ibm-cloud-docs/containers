@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-05"
+lastupdated: "2024-01-17"
 
 
 keywords: kubernetes, registry, pull secret, secrets
@@ -116,7 +116,7 @@ For workloads in other Kubernetes namespaces in the cluster to pull container im
 
 
 My cluster image pull secret uses a registry token. Does a token still work?
-:   From 19 August 2021, using {{site.data.keyword.registrylong_notm}} tokens is discontinued and no longer works. For more information, see [{{site.data.keyword.registrylong_notm}} Deprecates Registry Tokens for Authentication](https://www.ibm.com/cloud/blog/announcements/ibm-cloud-container-registry-deprecates-registry-tokens-for-authentication){: external}.
+:   From 19 August 2021, using {{site.data.keyword.registrylong_notm}} tokens is discontinued and no longer works. For more information, see [{{site.data.keyword.registrylong_notm}} Deprecates Registry Tokens for Authentication](https://www.ibm.com/blog/announcement/ibm-cloud-container-registry-deprecates-registry-tokens-for-authentication/){: external}.
 {: deprecated}
 
 
