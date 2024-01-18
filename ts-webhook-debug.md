@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-18"
 
 
 keywords: kubernetes, help, network, connectivity, webhooks
@@ -96,7 +96,7 @@ Complete the following steps to identify the webhook that is causing the issue. 
 
     - If there is an error calling the webhook, review the documentation for that service for product-specific debugging steps.
 
-    - If the webhook is rejecting the requests, look at the policies and configuration options for the webhook. It might be possible to adjust them to allow the request. Or, the request might be violating the policies and the request or the application making the request need to be changed. For more information, see [What are the best practices for using webhooks](/docs/openshift?topic=openshift-access_webhooks#webhook-best-practice).
+    - If the webhook is rejecting the requests, look at the policies and configuration options for the webhook. It might be possible to adjust them to allow the request. Or, the request might be violating the policies and the request or the application making the request need to be changed. For more information, see [What are the best practices for using webhooks](/docs/containers?topic=containers-access_webhooks#webhook-best-practice).
 
 
 ## Reviewing the service that the webhook is calling

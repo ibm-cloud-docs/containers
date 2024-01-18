@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-18"
 
 
 keywords: kubernetes
@@ -538,7 +538,7 @@ Before updating the add-on review the [change log](/docs/containers?topic=contai
     
     
     
-    If you use a default storage class other than the `ibmc-vpc-block-10iops-tier` storage class you must change the default storage class settings in the `addon-vpc-block-csi-driver-configmap` ConfigMap. For more information, see [Changing the default storage class](/docs/openshift?topic=openshift-vpc-block#vpc-block-default-edit).
+    If you use a default storage class other than the `ibmc-vpc-block-10iops-tier` storage class you must change the default storage class settings in the `addon-vpc-block-csi-driver-configmap` ConfigMap. For more information, see [Changing the default storage class](/docs/containers?topic=containers-vpc-block#vpc-block-default-edit).
     {: important}
     
 1. If you created custom storage classes based on the default {{site.data.keyword.block_storage_is_short}} storage classes, you must recreate those storage classes to update the parameters. For more information, see [Recreating custom storage classes after updating to version 4.2](#recreate-sc-42).

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-17"
+lastupdated: "2024-01-18"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -90,7 +90,7 @@ If you entered the correct information on the {{site.data.keyword.cloud_notm}} c
 {: shortdesc}
 
 1. Verify that the cluster that you want to use meets the [minimum hardware requirements for Portworx](https://docs.portworx.com/portworx-enterprise/install-portworx/prerequisites){: external}.
-2. If you want to use a virtual machine cluster, make sure that you [added raw, unformatted, and unmounted block storage](/docs/openshift?topic=openshift-utilities#manual_block) to your cluster so that Portworx can include the disks into the Portworx storage layer.
+2. If you want to use a virtual machine cluster, make sure that you [added raw, unformatted, and unmounted block storage](/docs/containers?topic=containers-utilities#manual_block) to your cluster so that Portworx can include the disks into the Portworx storage layer.
 
 
 ## Step 3: Reach out to Portworx and IBM

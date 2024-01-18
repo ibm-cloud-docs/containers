@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-18"
 
 
 keywords: kubernetes, firewall
@@ -26,7 +26,7 @@ subcollection: containers
 Control inbound and outbound traffic to your cluster by creating and applying access control lists (ACLs) to each subnet that your cluster is attached to. Note that these steps outline the minimum ACL rules that are required for basic cluster functionality. You might need to create additional ACL rules based on your use case.
 {: shortdesc}
 
-Looking for a simpler security setup? Leave the default ACL for your VPC as-is, and modify the [default security group](/docs/openshift?topic=openshift-vpc-security-group) instead.
+Looking for a simpler security setup? Leave the default ACL for your VPC as-is, and modify the [default security group](/docs/containers?topic=containers-vpc-security-group) instead.
 {: tip}
 
 Level of application
@@ -55,7 +55,7 @@ If you have a VPC cluster that runs at version 1.28 or later, you might need to 
 For each subnet that your cluster is attached to, use the {{site.data.keyword.cloud_notm}} VPC console to create a custom ACL with rules that limit inbound and outbound network traffic to only communication that is necessary for the cluster to function. 
 {: shortdesc}
 
-Looking for a simpler security setup? Leave the default ACL for your VPC as-is, and modify the [default security group](/docs/openshift?topic=openshift-vpc-security-group) instead.
+Looking for a simpler security setup? Leave the default ACL for your VPC as-is, and modify the [default security group](/docs/containers?topic=containers-vpc-security-group) instead.
 {: tip}
 
 1. Multizone clusters only: In the [Subnets for VPC dashboard](https://cloud.ibm.com/vpc-ext/network/subnets){: external}, note the **IP Range** of each subnet that your cluster is attached to.
@@ -114,7 +114,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
 For each subnet that your cluster is attached to, use the {{site.data.keyword.cloud_notm}} CLI to create a custom ACL with rules that limit inbound and outbound network traffic to only communication that is necessary for the cluster to function. Note that these steps outline the minimum ACL rules that are required to allow a cluster to deploy and to have basic function; they aren't intended to cover all use cases.
 {: shortdesc}
 
-Looking for a simpler security setup? Leave the default ACL for your VPC as-is, and modify the [default security group](/docs/openshift?topic=openshift-vpc-security-group) instead.
+Looking for a simpler security setup? Leave the default ACL for your VPC as-is, and modify the [default security group](/docs/containers?topic=containers-vpc-security-group) instead.
 {: tip}
 
 Before you begin

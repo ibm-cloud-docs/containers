@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-18"
 
 
 keywords: kubernetes, help, network, connectivity, autoscaler
@@ -143,7 +143,7 @@ Check the health of the cluster autoscaler pod.
     ```
     {: pre}
 
-3. Review the **Command** section to check that the [custom cluster autoscaler configuration](/docs/openshift?topic=openshift-cluster-scaling-install-addon-enable) matches what you expect, such as the`scale-down-delay-after-add` value.
+3. Review the **Command** section to check that the [custom cluster autoscaler configuration](/docs/containers?topic=containers-cluster-scaling-install-addon-enable) matches what you expect, such as the`scale-down-delay-after-add` value.
     ```sh
     Command:
         ./cluster-autoscaler

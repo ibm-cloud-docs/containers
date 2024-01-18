@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-17"
+lastupdated: "2024-01-18"
 
 
 keywords: containers, kubernetes, release notes
@@ -2211,7 +2211,7 @@ Istio add-on
 :   For more information, see [version 4.4.10_1578](/docs/containers?topic=containers-vpc_bs_changelog).
 
 New! vGPU worker node flavors are now available for VPC Gen 2.
-:   For more information about the available worker node flavors, see [VPC Gen 2 flavors](/docs/containers?topic=containers-vpc-flavors). Worker node flavors with vGPU support are the `gx2` flavor class, for example: `gx2.16x128.2v100`. {{site.data.keyword.vpc_short}} worker nodes with GPUs are available for allowlisted accounts only. To request that your account be allowlisted, see [Requesting access to allowlisted features](/docs/openshift?topic=openshift-get-help). Be sure to include the data centers, the VPC infrastructure profile, and the number of workers that you want use. For example `12 worker nodes in us-east-1 of VPC profile gx2-16x128xv100`.
+:   For more information about the available worker node flavors, see [VPC Gen 2 flavors](/docs/containers?topic=containers-vpc-flavors). Worker node flavors with vGPU support are the `gx2` flavor class, for example: `gx2.16x128.2v100`. {{site.data.keyword.vpc_short}} worker nodes with GPUs are available for allowlisted accounts only. To request that your account be allowlisted, see [Requesting access to allowlisted features](/docs/containers?topic=containers-get-help). Be sure to include the data centers, the VPC infrastructure profile, and the number of workers that you want use. For example `12 worker nodes in us-east-1 of VPC profile gx2-16x128xv100`.
 
 
 ### 12 September 2022
@@ -2808,7 +2808,7 @@ Istio add-on
 
 
 Create and manage dedicated hosts in VPC Gen 2.
-:   You can now create clusters on dedicated hosts in VPC Gen 2. Note that support for dedicated hosts is available only for allowlisted accounts. For more information, see [Creating and managing dedicated hosts](/docs/openshift?topic=openshift-dedicated-hosts).
+:   You can now create clusters on dedicated hosts in VPC Gen 2. Note that support for dedicated hosts is available only for allowlisted accounts. For more information, see [Creating and managing dedicated hosts](/docs/containers?topic=containers-dedicated-hosts).
 
   
 ### 11 April 2022
@@ -3016,7 +3016,7 @@ Maintenance Windows for {{site.data.keyword.containershort}} ALBs
 
 Cluster autoscaler
 :   Version [1.0.5_415](/docs/containers?topic=containers-ca_changelog) is available.
-:   New pages for [Preparing your cluster for autoscaling](/docs/openshift?topic=openshift-cluster-scaling-install-addon), [Installing the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon), and [Enabling autoscaling](/docs/containers?topic=containers-cluster-scaling-install-addon-enable).
+:   New pages for [Preparing your cluster for autoscaling](/docs/containers?topic=containers-cluster-scaling-install-addon), [Installing the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon), and [Enabling autoscaling](/docs/containers?topic=containers-cluster-scaling-install-addon-enable).
 :   New troubleshooting pages for [resizing worker pools](/docs/containers?topic=containers-ts-ca-resize) and updating [unbalanced worker pools](/docs/containers?topic=containers-ts-ca-unbalanced) in autoscaled clusters. 
 
 
@@ -3177,7 +3177,7 @@ Version change log
 :   [Version 4.1.2_834](/docs/containers?topic=containers-vpc_bs_changelog) is released.
 
 **New!** Gathering Ingress logs
-:   When troubleshooting Ingress, follow the steps in [gathering Ingress logs](/docs/openshift?topic=openshift-ingress-must-gather) to retrieve useful debugging information.
+:   When troubleshooting Ingress, follow the steps in [gathering Ingress logs](/docs/containers?topic=containers-ingress-must-gather) to retrieve useful debugging information.
 
 
 
@@ -3962,10 +3962,10 @@ Deprecated Kubernetes 1.18
 
 Expanded Troubleshooting
 :   You can now find troubleshooting steps for {{site.data.keyword.cloud_notm}} persistent storage in the following pages.  
-    - [{{site.data.keyword.filestorage_short}}](/docs/openshift?topic=openshift-debug_storage_file)
-    - [{{site.data.keyword.blockstorageshort}}](/docs/openshift?topic=openshift-debug_storage_block)
-    - [{{site.data.keyword.cos_short}}](/docs/openshift?topic=openshift-debug_storage_cos)
-    - [Portworx](/docs/openshift?topic=openshift-debug_storage_px)
+    - [{{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-debug_storage_file)
+    - [{{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-debug_storage_block)
+    - [{{site.data.keyword.cos_short}}](/docs/containers?topic=containers-debug_storage_cos)
+    - [Portworx](/docs/containers?topic=containers-debug_storage_px)
 
 ### 07 June 2021
 {: #containers-june0721}
@@ -4050,7 +4050,7 @@ Deprecated Ubuntu 16 end of support date
 {: release-note}
 
 VPC cluster healthchecks
-:   If you set up [VPC security groups](/docs/openshift?topic=openshift-vpc-security-group) or [VPC access control lists (ACLs)](/docs/openshift?topic=openshift-vpc-acls) to secure your cluster network, you can now create the rules to allow the necessary traffic from the control plane IP addresses and Akamai IPv4 IP addresses to health check your ALBs. Previously, a quota on the number of rules per security group or ACL prevented the ability to create all necessary rules for health checks.
+:   If you set up [VPC security groups](/docs/containers?topic=containers-vpc-security-group) or [VPC access control lists (ACLs)](/docs/containers?topic=containers-vpc-acls) to secure your cluster network, you can now create the rules to allow the necessary traffic from the control plane IP addresses and Akamai IPv4 IP addresses to health check your ALBs. Previously, a quota on the number of rules per security group or ACL prevented the ability to create all necessary rules for health checks.
 
 ### 10 May 2021
 {: #containers-may1021}
@@ -4758,7 +4758,7 @@ Worker node versions
 {: release-note}
 
 Cluster autoscaler add-on
-:   Patch update `1.0.1_146` is released. For more information, see the [Cluster autoscaler add-on change log](/docs/openshift?topic=openshift-ca_changelog).
+:   Patch update `1.0.1_146` is released. For more information, see the [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
 
 
 

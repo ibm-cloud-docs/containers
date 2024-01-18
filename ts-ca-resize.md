@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-18"
 
 
 keywords: kubernetes, help, network, connectivity, autoscaler
@@ -24,6 +24,6 @@ When the cluster autoscaler is enabled for a worker pool, you can't [resize](/do
 You must edit the ConfigMap to change the worker pool minimum or maximum sizes, or disable cluster autoscaling for that worker pool. Don't use the `ibmcloud ks worker rm` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_rm) to remove individual worker nodes from your worker pool, which can unbalance the worker pool. 
 {: tsCauses}
 
-See [Resizing or rebalancing autoscaled worker pools](/docs/openshift?topic=openshift-cluster-scaling-classic-vpc#ca_update_worker_node_pool). Further, if you don't disable the worker pools before you disable the `cluster-autoscaler` add-on, the worker pools can't be resized manually. Reinstall the cluster autoscaler, edit the ConfigMap to disable the worker pool, and try again.
+See [Resizing or rebalancing autoscaled worker pools](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_update_worker_node_pool). Further, if you don't disable the worker pools before you disable the `cluster-autoscaler` add-on, the worker pools can't be resized manually. Reinstall the cluster autoscaler, edit the ConfigMap to disable the worker pool, and try again.
 {: tsResolve}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-18"
 
 
 keywords: cbr, context based restrictions, security, cbr scenario, containerscbr
@@ -50,8 +50,8 @@ Before beginning this tutorial, make sure you have created or installed the foll
 - The CLI tools including the {{site.data.keyword.cloud_notm}} CLI, the Containers service CLI plug-in, and the CBR plug-in. For more information, see [Getting started with the {{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started).
 - An {{site.data.keyword.containerlong_notm}} cluster. For more information, see [Creating clusters](/docs/containers?topic=containers-clusters).
 - Review the [What are context-based restrictions](/docs/account?topic=account-context-restrictions-whatis) docs to get an understanding of network zones and rules.
-- Review the [Protecting cluster resources with context-based restrictions](/docs/openshift?topic=openshift-cbr) docs to understand how you can leverage CBR for your {{site.data.keyword.containerlong_notm}} resources.
-- Review the [limitations for using CBR with {{site.data.keyword.containerlong_notm}}](/docs/openshift?topic=openshift-cbr&interface=cli#cbr-limitations).
+- Review the [Protecting cluster resources with context-based restrictions](/docs/containers?topic=containers-cbr) docs to understand how you can leverage CBR for your {{site.data.keyword.containerlong_notm}} resources.
+- Review the [limitations for using CBR with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cbr&interface=cli#cbr-limitations).
 
 
 ## Creating your network zone

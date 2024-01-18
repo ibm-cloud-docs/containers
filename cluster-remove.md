@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-18"
 
 
 keywords: containers, kubernetes, clusters, worker nodes, worker pools, delete
@@ -111,9 +111,9 @@ When you remove {{site.data.keyword.redhat_openshift_notm}} clusters or worker n
     {: screen}
 
 3. Remove the worker nodes or clusters by referring to the following options. The corresponding hosts in your {{site.data.keyword.satelliteshort}} location become unassigned and require a reload before you can use them for other {{site.data.keyword.satelliteshort}} resources.
-    *  [Resize worker pools](/docs/openshift?topic=openshift-kubernetes-service-cli#cs_worker_pool_resize) to reduce the number of worker nodes in the cluster.
-    *  [Remove individual worker nodes](/docs/openshift?topic=openshift-kubernetes-service-cli#cs_worker_rm) from the cluster.
-    *  [Remove the cluster](/docs/openshift?topic=openshift-remove).
+    *  [Resize worker pools](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_resize) to reduce the number of worker nodes in the cluster.
+    *  [Remove individual worker nodes](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_rm) from the cluster.
+    *  [Remove the cluster](/docs/containers?topic=containers-remove).
 4. For each worker node that you removed, decide what to do with the corresponding host in your {{site.data.keyword.satelliteshort}} location.
     *  Reload the host operating system so that you can attach and assign the host to other {{site.data.keyword.satelliteshort}} resources such as the location control plane or other clusters. For more information, see the update process in [Updating {{site.data.keyword.satelliteshort}} location control plane hosts](/docs/satellite?topic=satellite-host-update-location).
     *  Delete the hosts from your underlying infrastructure provider. For more information, refer to the infrastructure provider documentation.
