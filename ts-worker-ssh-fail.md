@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-05"
+lastupdated: "2024-01-18"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -345,7 +345,7 @@ After you finish debugging, clean up resources to disable SSH access.
     ```
     {: pre}
 
-3. [Reload your classic worker node](/docs/openshift?topic=openshift-kubernetes-service-cli#cs_worker_reload) or [replace your VPC worker node](/docs/openshift?topic=openshift-kubernetes-service-cli#cli_worker_replace) so that the original SSH configuration is used and the SSH key that you added is removed.
+3. [Reload your classic worker node](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [replace your VPC worker node](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_replace) so that the original SSH configuration is used and the SSH key that you added is removed.
 
 
 

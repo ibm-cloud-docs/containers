@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-18"
 
 
 keywords: kubernetes
@@ -97,7 +97,7 @@ Before beginning this tutorial make sure you have created or installed the follo
 When you install the plug-in in your cluster, make sure to specify the `--set quotaLimit=true` option. Specifying this option means any buckets you create with PVCs have a quota limit equal to the storage size in the PVC.
 {: important}
 
-1. Follow the steps to [install the plug-in and enable quota limits](/docs/openshift?topic=openshift-storage_cos_install). If you've already installed the plug-in in your cluster, you can skip this step. To see if the plug-in is already installed, follow the next step.
+1. Follow the steps to [install the plug-in and enable quota limits](/docs/containers?topic=containers-storage_cos_install). If you've already installed the plug-in in your cluster, you can skip this step. To see if the plug-in is already installed, follow the next step.
 
 1. Verify the plug-in is installed by listing the driver pods.
 

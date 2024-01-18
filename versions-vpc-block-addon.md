@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-17"
+lastupdated: "2024-01-18"
 
 
 keywords: containers, block, storage, add-on, changelog
@@ -607,7 +607,7 @@ After updating to version 4.2, you must complete the following steps.
 {: important}
 
 * [Delete and recreate](/docs/containers?topic=containers-vpc-block#vpc-addon-update) any custom storage classes that are using the `sizeRange` or `iopsRange` parameters.
-* If you use a default storage class other than `ibmc-vpc-block-10iops-tier`, you must change the `isStorageClassDefault` setting to `false` in the `addon-vpc-block-csi-driver-configmap` configmap in the `kube-system` namespace. For more information, see [Changing the default storage class](/docs/openshift?topic=openshift-vpc-block#vpc-block-default-edit).
+* If you use a default storage class other than `ibmc-vpc-block-10iops-tier`, you must change the `isStorageClassDefault` setting to `false` in the `addon-vpc-block-csi-driver-configmap` configmap in the `kube-system` namespace. For more information, see [Changing the default storage class](/docs/containers?topic=containers-vpc-block#vpc-block-default-edit).
     
 
 

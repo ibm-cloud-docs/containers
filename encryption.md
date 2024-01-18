@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-18"
 
 
 keywords: containers, kubernetes, red hat, encrypt, security, kms, root key, crk
@@ -89,5 +89,5 @@ Depending on the type of persistent storage you use, you can encrypt the data wr
 ## Next steps
 {: #encryption-next-steps}
 
-To get started with encryption, you must first [create a KMS instance and root key](/docs/openshift?topic=openshift-encryption-setup).
+To get started with encryption, you must first [create a KMS instance and root key](/docs/containers?topic=containers-encryption-setup).
 

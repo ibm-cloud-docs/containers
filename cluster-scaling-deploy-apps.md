@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-18"
 
 
 keywords: kubernetes, node scaling, ca, autoscaler
@@ -30,12 +30,12 @@ For more information, see the following Kubernetes docs:
 * [Taints and tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external}
 
 **Before you begin**:
-*  [Install the `ibm-iks-cluster-autoscaler` plug-in](/docs/openshift?topic=openshift-cluster-scaling-install-addon).
+*  [Install the `ibm-iks-cluster-autoscaler` plug-in](/docs/containers?topic=containers-cluster-scaling-install-addon).
 *  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 **To limit pods to run on certain autoscaled worker pools**:
 
-1. Make sure that you labeled and tainted your autoscaled worker pool as described in [Preparing your cluster for autoscaling](/docs/openshift?topic=openshift-cluster-scaling-install-addon).
+1. Make sure that you labeled and tainted your autoscaled worker pool as described in [Preparing your cluster for autoscaling](/docs/containers?topic=containers-cluster-scaling-install-addon).
 2. In your pod spec template, match the `nodeSelector` or `nodeAffinity` to the label that you used in your worker pool.
 
     Example of `nodeSelector`:
@@ -93,7 +93,7 @@ For more information, see the following Kubernetes docs:
 ## Scaling up worker nodes before the worker pool has insufficient resources
 {: #ca_scaleup}
 
-As described in the [Understanding how the cluster autoscaler works](/docs/openshift?topic=openshift-cluster-scaling-classic-vpc#ca_about) topic and the [Kubernetes Cluster Autoscaler FAQs](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md){: external}, the cluster autoscaler scales up your worker pools in response to your requested resources of the workload against the available recourses of the worker pool. However, you might want the cluster autoscaler to scale up worker nodes before the worker pool runs out of resources. In this case, your workload does not need to wait as long for worker nodes to be provisioned because the worker pool is already scaled up to meet the resource requests.
+As described in the [Understanding how the cluster autoscaler works](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_about) topic and the [Kubernetes Cluster Autoscaler FAQs](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md){: external}, the cluster autoscaler scales up your worker pools in response to your requested resources of the workload against the available recourses of the worker pool. However, you might want the cluster autoscaler to scale up worker nodes before the worker pool runs out of resources. In this case, your workload does not need to wait as long for worker nodes to be provisioned because the worker pool is already scaled up to meet the resource requests.
 {: shortdesc}
 
 The cluster autoscaler does not support early scaling (overprovisioning) of worker pools. However, you can configure other Kubernetes resources to work with the cluster autoscaler to achieve early scaling.

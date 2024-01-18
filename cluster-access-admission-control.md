@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-18"
 
 
 keywords: containers, webhooks, admission control, 
@@ -56,7 +56,7 @@ Keep in mind the following best practices and considerations when you configure 
 {: #access_webhooks-app-use-controllers}
 
 Many cluster add-ons, plug-ins, and other third-party extensions use admission controllers. Some common ones include:
-- [Portieris](/docs/openshift?topic=openshift-images#portieris-image-sec)
+- [Portieris](/docs/containers?topic=containers-images#portieris-image-sec)
 - [Istio](/docs/containers?topic=containers-istio-about)
 
 

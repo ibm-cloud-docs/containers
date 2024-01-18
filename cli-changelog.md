@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-17"
+lastupdated: "2024-01-18"
 
 
 keywords: containers, oc, ks
@@ -453,7 +453,7 @@ Version 1.0.223 of the CLI was released on 8 February 2021.
 - Adds the [`ibmcloud ks worker-pool create satellite` command](/docs/openshift?topic=openshift-kubernetes-service-cli#cs_worker_pool_create_sat) to add worker pools to {{site.data.keyword.redhat_openshift_notm}} clusters in {{site.data.keyword.satelliteshort}}.
 - Adds the [`ibmcloud ks zone add satellite` command](/docs/openshift?topic=openshift-kubernetes-service-cli#cs_zone_add_sat) to add zones to {{site.data.keyword.redhat_openshift_notm}} clusters and worker pools in {{site.data.keyword.satelliteshort}}.
 - Adds the optional `--host-label`, `--pod-subnet`, `--pull-secret`, `--service-subnet`, `--workers`, and `--zone` flags to the [`ibmcloud ks cluster create satellite` command](/docs/openshift?topic=openshift-kubernetes-service-cli#cli_cluster-create-satellite).
-- Adds the `satellite` value to the `--provider` option in the [`ibmcloud ks zone ls` command](/docs/openshift?topic=openshift-kubernetes-service-cli#cs_datacenters) to list zones in your {{site.data.keyword.satelliteshort}} location. 
+- Adds the `satellite` value to the `--provider` option in the [`ibmcloud ks zone ls` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_datacenters) to list zones in your {{site.data.keyword.satelliteshort}} location. 
 
 ## Version 1.0.208
 {: #cli-10208}
@@ -481,7 +481,7 @@ Version 1.0.197 of the CLI was released on 18 November 2020.
 - Ensures that incident IDs are returned with 500-level messages. 
 - In `ibmcloud ks cluster storage` commands, the cluster name is now accepted in the `--cluster` option in addition to the cluster ID. 
 - Updates the output of the `ibmcloud ks ingress alb migrate` command to be more readable.
-- Adds the `--endpoint` option to the [`ibmcloud ks cluster config` command](/docs/openshift?topic=openshift-kubernetes-service-cli#cs_cluster_config) to use the Link endpoint URL for the cluster context.
+- Adds the `--endpoint` option to the [`ibmcloud ks cluster config` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_config) to use the Link endpoint URL for the cluster context.
 - Updates the help text in various languages.
 
 ## Version 1.0.178
