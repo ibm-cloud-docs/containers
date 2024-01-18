@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-01-09"
+lastupdated: "2024-01-18"
 
 
 keywords: kubernetes, containers, 128, version 128, 128 update actions
@@ -28,7 +28,7 @@ Review information about version 1.28 of {{site.data.keyword.containerlong}}. Fo
 
 ![This badge indicates Kubernetes version 1.28 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.28 certification badge" caption-side="bottom"} 
 
-{{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.28 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation.
+{{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.28 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
 
 

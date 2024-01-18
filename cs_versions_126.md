@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-18"
 
 
 keywords: kubernetes, containers, 126, version 126, 126 update actions
@@ -29,7 +29,7 @@ Looking for general information on updating {{site.data.keyword.containerlong}} 
 
 ![This badge indicates Kubernetes version 1.26 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.26 certification badge" caption-side="bottom"} 
 
-{{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.26 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation.
+{{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.26 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
 
 For more information about Kubernetes project version 1.26, see the [Kubernetes change log](https://kubernetes.io/releases/notes/.){: external}
