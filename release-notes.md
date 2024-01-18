@@ -31,6 +31,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## January 2024
 {: #containers-jan24}
 
+### 19 January 2024
+{: #containers-jan1924}
+{: release-note}
+
+OpenShift Data Foundation add-on version `4.14.0`.
+:   For more information, see the [change log](/docs/openshift?topic=openshift-odf_addon_changelog).
+
 ### 17 January 2024
 {: #containers-jan1724}
 {: release-note}
@@ -94,6 +101,8 @@ Istio add-on version 1.18 will no longer be supported on 21 February 2024
 
 {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates `5.2.14_485` and `5.1.19_486`.
 :   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
+
 
 
 

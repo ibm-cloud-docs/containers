@@ -238,6 +238,10 @@ subcollection: containers
 
 * [January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan24)
 
+    * [19 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1924)
+
+        * OpenShift Data Foundation add-on version `4.14.0`.
+
     * [17 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1724)
 
         * Worker node fix packs are available. 
