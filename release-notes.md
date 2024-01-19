@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-18"
+lastupdated: "2024-01-19"
 
 
 keywords: containers, kubernetes, release notes
@@ -30,6 +30,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## January 2024
 {: #containers-jan24}
+
+
+
+
+### 19 January 2024
+{: #containers-jan1924}
+{: release-note}
+
+CLI version `1.0.589` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
 
 ### 17 January 2024
 {: #containers-jan1724}
@@ -94,6 +106,8 @@ Istio add-on version 1.18 will no longer be supported on 21 February 2024
 
 {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates `5.2.14_485` and `5.1.19_486`.
 :   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
+
 
 
 
@@ -3130,7 +3144,7 @@ ALB OAuth Proxy add-on
 
 
 New! Kubernetes 1.23
-:   You can create or [update clusters to Kubernetes version 1.23](/docs/containers?topic=containers-cs_versions_123). With Kubernetes 1.23, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product. 
+:   You can create or [update clusters to Kubernetes version 1.23](/docs/containers?topic=containers-cs_versions_123). With Kubernetes 1.23, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
 
 Deprecated and unsupported Kubernetes versions
 :   With the release of Kubernetes 1.23, clusters that run version 1.20 remain deprecated, with a tentative unsupported date of May 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-01-18"
+lastupdated: "2024-01-19"
 
 
 keywords: containers
@@ -237,6 +237,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan24)
+
+    * [19 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1924)
+
+        * CLI version `1.0.589` is available.
 
     * [17 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1724)
 
