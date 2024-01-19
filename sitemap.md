@@ -240,7 +240,7 @@ subcollection: containers
 
     * [19 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1924)
 
-        * OpenShift Data Foundation add-on version `4.14.0`.
+        * CLI version `1.0.589` is available.
 
     * [17 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1724)
 

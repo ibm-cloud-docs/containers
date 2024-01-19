@@ -31,12 +31,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## January 2024
 {: #containers-jan24}
 
+
+
+
 ### 19 January 2024
 {: #containers-jan1924}
 {: release-note}
 
-OpenShift Data Foundation add-on version `4.14.0`.
-:   For more information, see the [change log](/docs/openshift?topic=openshift-odf_addon_changelog).
+CLI version `1.0.589` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
 
 ### 17 January 2024
 {: #containers-jan1724}
