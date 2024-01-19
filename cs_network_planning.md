@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-19"
 
 
 keywords: kubernetes, networking
@@ -187,10 +187,6 @@ Ingress ALB
         1. Create an [Ingress service](/docs/containers?topic=containers-managed-ingress-setup) for the public ALB.
         2. Customize ALB routing rules with [annotations](/docs/containers?topic=containers-comm-ingress-annotations).
 
-
-
-Still want more details about the load balancing deployment patterns that are available in {{site.data.keyword.containerlong_notm}}? Check out this [blog post](https://www.ibm.com/cloud/blog/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability){: external}.
-{: tip}
 
 ### Choosing a deployment pattern for VPC clusters
 {: #pattern_public_vpc}
