@@ -238,6 +238,10 @@ subcollection: containers
 
 * [January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan24)
 
+    * [22 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan2224)
+
+        * Ingress ALB updates
+
     * [19 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1924)
 
         * CLI version `1.0.589` is available.
@@ -6570,9 +6574,11 @@ subcollection: containers
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
 
-* [1.9.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_9_4)
+* [Version 1.9.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_9_4)
 
-    * [1.9.4_6161_iks, released 10 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6161_iks)
+    * [1.9.4_6251_iks, released 22 January 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6251_iks)
+
+    * [1.9.4_6161_iks, released 10 January 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6161_iks)
 
     * [1.9.4_5886_iks, released 04 December 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_5886_iks)
 
@@ -6582,7 +6588,9 @@ subcollection: containers
 
 * [Version 1.8.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_8_4)
 
-    * [1.8.4_6173_iks, released 10 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_6173_iks)
+    * [1.8.4_6245_iks, released 22 January 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_6245_iks)
+
+    * [1.8.4_6173_iks, released 10 January 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_6173_iks)
 
     * [1.8.4_5885_iks, released 04 December 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_5885_iks)
 
@@ -6604,7 +6612,9 @@ subcollection: containers
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
 
-    * [1.6.4_6177_iks, released 10 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_6177_iks)
+    * [1.6.4_6250_iks, released 22 January 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_6250_iks)
+
+    * [1.6.4_6177_iks, released 10 January 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_6177_iks)
 
     * [1.6.4_5884_iks, released 04 December 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5884_iks)
 

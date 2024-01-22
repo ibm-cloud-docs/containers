@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-10"
+lastupdated: "2024-01-22"
 
 
 keywords: kubernetes, nginx, ingress controller, fluentd
@@ -48,7 +48,7 @@ If you use configuration snippets in your Ingress resource, you must adjust your
 {: tip}
 
 
-## 1.9.4
+## Version 1.9.4
 {: #1_9_4}
 
 If your Ingress resources use configuration snippets or redirects, their behavior might change with v1.9.4. Validate your configuration before updating. For more information about version 1.9.4, see the [1.9.4 community change log](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.9.4){: external}.
@@ -58,7 +58,14 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 {: note}
 
 
-### 1.9.4_6161_iks, released 10 January 2023
+### 1.9.4_6251_iks, released 22 January 2024
+{: #1.9.4_6251_iks}
+
+- Dependency updates. 
+- CVE remediation for [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external} and [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}.
+
+
+### 1.9.4_6161_iks, released 10 January 2024
 {: #1.9.4_6161_iks}
 
 [Default version]{: tag-green}
@@ -69,8 +76,6 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 
 ### 1.9.4_5886_iks, released 04 December 2023
 {: #1.9.4_5886_iks}
-
-[Default version]{: tag-green}
 
 - Dependency updates.
 
@@ -89,8 +94,13 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 ## Version 1.8.4
 {: #1_8_4}
 
+### 1.8.4_6245_iks, released 22 January 2024
+{: #1.8.4_6245_iks}
 
-### 1.8.4_6173_iks, released 10 January 2023
+- Dependency updates. 
+- CVE remediation for [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external} and [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}.
+
+### 1.8.4_6173_iks, released 10 January 2024
 {: #1.8.4_6173_iks}
 
 - Dependency updates.
@@ -156,7 +166,13 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 ## Version 1.6.4
 {: #1_6_4}
 
-### 1.6.4_6177_iks, released 10 January 2023
+### 1.6.4_6250_iks, released 22 January 2024
+{: #1.6.4_6250_iks}
+
+- Dependency updates. 
+- CVE remediation for [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external} and [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}.
+
+### 1.6.4_6177_iks, released 10 January 2024
 {: #1.6.4_6177_iks}
 
 - Dependency updates.
