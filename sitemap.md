@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-01-19"
+lastupdated: "2024-01-22"
 
 
 keywords: containers
@@ -237,6 +237,14 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan24)
+
+    * [22 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan2224)
+
+        * Ingress ALB updates
+
+    * [22 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan2224)
+
+        * Ingress ALB updates
 
     * [19 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1924)
 
@@ -6570,9 +6578,11 @@ subcollection: containers
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
 
-* [1.9.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_9_4)
+* [Version 1.9.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_9_4)
 
-    * [1.9.4_6161_iks, released 10 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6161_iks)
+    * [1.9.4_6251_iks, released 22 January 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6251_iks)
+
+    * [1.9.4_6161_iks, released 10 January 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6161_iks)
 
     * [1.9.4_5886_iks, released 04 December 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_5886_iks)
 
@@ -6582,7 +6592,9 @@ subcollection: containers
 
 * [Version 1.8.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_8_4)
 
-    * [1.8.4_6173_iks, released 10 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_6173_iks)
+    * [1.8.4_6245_iks, released 22 January 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_6245_iks)
+
+    * [1.8.4_6173_iks, released 10 January 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_6173_iks)
 
     * [1.8.4_5885_iks, released 04 December 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_5885_iks)
 
@@ -6604,7 +6616,9 @@ subcollection: containers
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
 
-    * [1.6.4_6177_iks, released 10 January 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_6177_iks)
+    * [1.6.4_6250_iks, released 22 January 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_6250_iks)
+
+    * [1.6.4_6177_iks, released 10 January 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_6177_iks)
 
     * [1.6.4_5884_iks, released 04 December 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_5884_iks)
 
@@ -9538,6 +9552,8 @@ subcollection: containers
     * [Using TOTP MFA to create an infrastructure API key for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cluster_infra_errors#create-api-key-totp-mfa)
 
 [VPC: Why is no VPC available when I create a cluster in the console?](/docs/containers?topic=containers-ts_no_vpc#ts_no_vpc)
+
+[Why do I get an `infrastructure operation failed` error when creating a VPC cluster?](/docs/containers?topic=containers-ts-pod-security-reset#ts-pod-security-reset)
 
 [Why do I get an error that my PodSecurityConfiguration is not valid?](/docs/containers?topic=containers-ts-pod-security-reset#ts-pod-security-reset)
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-19"
+lastupdated: "2024-01-22"
 
 
 keywords: containers, kubernetes, release notes
@@ -30,6 +30,25 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## January 2024
 {: #containers-jan24}
+
+
+### 22 January 2024
+{: #containers-jan2224}
+{: release-note}
+
+Ingress ALB updates
+:   Ingress ALB versions `1.9.4_6251_iks`, `1.8.4_6245_iks`, `1.6.4_6250_iks` are available. For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
+
+### 22 January 2024
+{: #containers-jan2224}
+{: release-note}
+
+  
+Ingress ALB updates
+:   Ingress ALB versions `1.9.4_6251_iks`, `1.8.4_6245_iks`, `1.6.4_6250_iks` are available. 1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
 
 
 
