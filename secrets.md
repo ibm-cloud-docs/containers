@@ -32,7 +32,7 @@ Your Ingress TLS certificate is stored as a Kubernetes secret. To manage the TLS
 For example, you can import a certificate from {{site.data.keyword.secrets-manager_short}} to a Kubernetes secret in your cluster by running the following command.
 
 ```sh
-ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <crn> --name <secret_name> --namespace openshift-ingress
+ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <crn> --name <secret_name> --namespace default
 ```
 {: pre}
 
@@ -76,7 +76,7 @@ Follow the steps to use the default TLS certificate for the IBM-provided Ingress
 
 
     ```sh
-    ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace openshift-ingress
+    ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default
     ```
     {: pre}
 
@@ -86,7 +86,7 @@ Follow the steps to use the default TLS certificate for the IBM-provided Ingress
     {: tip}
 
     ```sh
-    ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace openshift-ingress
+    ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace default
     ```
     {: pre}
 
@@ -111,7 +111,7 @@ By storing custom TLS certificates in [{{site.data.keyword.secrets-manager_short
 
 
     ```sh
-    ibmcloud ks ingress secret create --name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn> --namespace openshift-ingress
+    ibmcloud ks ingress secret create --name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn> --namespace default
     ```
     {: pre}
 
@@ -143,7 +143,7 @@ Create a non-TLS secret by specifying the `--type Opaque` option in the **`ibmcl
 The following example command creates a non-TLS secret with the `Opaque` type specified. Non-TLS secrets require at least one secret [field](#non-tls-field-add). Note that how you specify the `--field` option varies [based on the type of secret you create](#non-tls-field-add). 
 
 ```sh
-ibmcloud ks ingress secret create -c cluster-test --name example-secret --namespace openshift-ingress --field crn:v1:bluemix:public:secrets-manager:us-south:a/1aa111aa1a11111aaa1a1111aa1aa111:111a1111-11a1 --type Opaque 
+ibmcloud ks ingress secret create -c cluster-test --name example-secret --namespace default --field crn:v1:bluemix:public:secrets-manager:us-south:a/1aa111aa1a11111aaa1a1111aa1aa111:111a1111-11a1 --type Opaque 
 ```
 {: pre}
 
@@ -226,7 +226,7 @@ The default field names are `arbitrary` for arbitrary secrets, `api_key` for IAM
 The following example adds three secret fields - using the same IAM credentials secret, named `iam` - to demonstrate how the different `--field` options affect the resulting field name. You can [view the fields](#non-tls-field-view) added to a secret by running `kubectl get secret` and viewing the `data` block of the output. 
 
 ```sh
-ibmcloud ks ingress secret field add --cluster example-cluster --name example-iam-secret --namespace openshift-ingress  --field crn:v1:bluemix:public:secrets-manager:us-south:a/1aa111aa-1a11-111a-aa1a-1111aa1aa111:secret:111a1111-11a1-11aa-a1a1-111aa12345aa --field custom_iam_name=crn:v1:bluemix:public:secrets-manager:us-south:a/1aa111aa-1a11-111a-aa1a-1111aa1aa111:secret:111a1111-11a1-11aa-a1a1-111aa12345aa --field prefix=crn:v1:bluemix:public:secrets-manager:us-south:a/1aa111aa-1a11-111a-aa1a-1111aa1aa111:secret:111a1111-11a1-11aa-a1a1-111aa12345aa
+ibmcloud ks ingress secret field add --cluster example-cluster --name example-iam-secret --namespace default  --field crn:v1:bluemix:public:secrets-manager:us-south:a/1aa111aa-1a11-111a-aa1a-1111aa1aa111:secret:111a1111-11a1-11aa-a1a1-111aa12345aa --field custom_iam_name=crn:v1:bluemix:public:secrets-manager:us-south:a/1aa111aa-1a11-111a-aa1a-1111aa1aa111:secret:111a1111-11a1-11aa-a1a1-111aa12345aa --field prefix=crn:v1:bluemix:public:secrets-manager:us-south:a/1aa111aa-1a11-111a-aa1a-1111aa1aa111:secret:111a1111-11a1-11aa-a1a1-111aa12345aa
 ```
 {: pre}
 
@@ -248,7 +248,7 @@ Run the **`ingress secret update`** command to update a secret field's values. N
 {: #shortdesc}
 
 ```sh
-ibmcloud ks ingress secret update --cluster example-cluster --name example-secret --namespace openshift-ingress
+ibmcloud ks ingress secret update --cluster example-cluster --name example-secret --namespace default
 ```
 {: pre}
 
@@ -259,7 +259,7 @@ You can remove a secret field from a non-TLS secret. For more information and co
 {: shortdesc}
 
 ```sh
-ibmcloud ks ingress secret field rm -c example-cluster --name example-secret --namespace openshift-ingress --field-name example-Field
+ibmcloud ks ingress secret field rm -c example-cluster --name example-secret --namespace default --field-name example-Field
 ```
 {: pre}
 
