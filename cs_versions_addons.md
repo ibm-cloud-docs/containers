@@ -57,13 +57,13 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 1.9.4 is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image.
 {: note}
 
-
 ### 1.9.4_6251_iks, released 22 January 2024
 {: #1.9.4_6251_iks}
 
-- Dependency updates. 
-- CVE remediation for [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external} and [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}.
+[Default version]{: tag-green}
 
+- Dependency updates.
+- CVE remediation for [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external} and [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}.
 
 ### 1.9.4_6161_iks, released 10 January 2024
 {: #1.9.4_6161_iks}
@@ -97,8 +97,10 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 ### 1.8.4_6245_iks, released 22 January 2024
 {: #1.8.4_6245_iks}
 
+
 - Dependency updates. 
 - CVE remediation for [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external} and [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}.
+
 
 ### 1.8.4_6173_iks, released 10 January 2024
 {: #1.8.4_6173_iks}

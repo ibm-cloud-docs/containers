@@ -242,6 +242,10 @@ subcollection: containers
 
         * Ingress ALB updates
 
+    * [22 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan2224)
+
+        * Ingress ALB updates
+
     * [19 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1924)
 
         * CLI version `1.0.589` is available.
@@ -9548,6 +9552,8 @@ subcollection: containers
     * [Using TOTP MFA to create an infrastructure API key for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cluster_infra_errors#create-api-key-totp-mfa)
 
 [VPC: Why is no VPC available when I create a cluster in the console?](/docs/containers?topic=containers-ts_no_vpc#ts_no_vpc)
+
+[Why do I get an `infrastructure operation failed` error when creating a VPC cluster?](/docs/containers?topic=containers-ts-pod-security-reset#ts-pod-security-reset)
 
 [Why do I get an error that my PodSecurityConfiguration is not valid?](/docs/containers?topic=containers-ts-pod-security-reset#ts-pod-security-reset)
 
