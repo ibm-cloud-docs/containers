@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-22"
 
 
 keywords: secret, certificate, field, tls, non-tls, rotate, ingress
@@ -72,7 +72,8 @@ Follow the steps to use the default TLS certificate for the IBM-provided Ingress
     ```
     {: screen}
 
-2. View the secret details and note the CRN value. This is the CRN of the TLS certificate.
+2. View the secret details and note the CRN value. This is the CRN of the TLS certificate. If you do not have a default [{{site.data.keyword.secrets-manager_short}}] instance registered to your cluster, your secret does not have a CRN. See the note in the following step for more details. 
+
 
     ```sh
     ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default
@@ -93,6 +94,7 @@ Follow the steps to use the default TLS certificate for the IBM-provided Ingress
     {: important}
 
 
+
 ### Setting up TLS secrets for custom subdomains
 {: #tls-custom}
 
@@ -104,8 +106,9 @@ By storing custom TLS certificates in [{{site.data.keyword.secrets-manager_short
 
 1. Create or import a secret for the TLS certificate in the namespace where your Ingress resource exists. For example, you can import a secret from {{site.data.keyword.secrets-manager_short}} into your cluster by running the following command. Specify the TLS certificate's CRN with the `--cert-crn` command option.
 
-    To import the secret with the `ibmcloud ks ingress secret create` command, you must have a default [{{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr) instance registered to your cluster. If you do not have a {{site.data.keyword.secrets-manager_short}} instance and your secrets are instead written directly to your cluster, your secrets do not have the required CRN value and you must manually copy them with `kubectl` commands. 
-    {: important}
+  To import the certificate with the `ibmcloud ks ingress secret create` command, you must have a default [{{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr) instance registered to your cluster. If you do not have a {{site.data.keyword.secrets-manager_short}} instance and your secrets are instead written directly to your cluster, your secrets do not have the required CRN value and you must manually copy them with `kubectl` commands. 
+  {: important}
+
 
     ```sh
     ibmcloud ks ingress secret create --name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn> --namespace <namespace>
