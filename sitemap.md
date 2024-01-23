@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-01-22"
+lastupdated: "2024-01-23"
 
 
 keywords: containers
@@ -237,10 +237,6 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan24)
-
-    * [22 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan2224)
-
-        * Ingress ALB updates
 
     * [22 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan2224)
 
