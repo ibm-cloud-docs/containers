@@ -9549,7 +9549,7 @@ subcollection: containers
 
 [VPC: Why is no VPC available when I create a cluster in the console?](/docs/containers?topic=containers-ts_no_vpc#ts_no_vpc)
 
-[Why do I get an `infrastructure operation failed` error when creating a VPC cluster?](/docs/containers?topic=containers-ts-pod-security-reset#ts-pod-security-reset)
+[Why do I get an `infrastructure operation failed` error when creating a VPC cluster?](/docs/containers?topic=containers-ts-resource-group-permissions#ts-resource-group-permissions)
 
 [Why do I get an error that my PodSecurityConfiguration is not valid?](/docs/containers?topic=containers-ts-pod-security-reset#ts-pod-security-reset)
 
