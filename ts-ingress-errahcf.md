@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-01-05"
+lastupdated: "2024-01-26"
 
 
 keywords: containers, ingress, troubleshoot ingress, errahcf
@@ -65,8 +65,13 @@ Review your access control lists to make sure that health traffic is allowed.
     {: pre}
 
 1. Ensure that no firewall rules or access control lists are blocking communication between the health checker application and your ALBs.
-    - **VPC clusters**: Health check traffic originates from one of the worker nodes, flows through a VPC Public Gateway and arrives to the public side of the VPC Load Balancer instance. Configure your VPC Security Groups to allow this communication. For more information, see [Controlling traffic with VPC security groups](/docs/containers?topic=containers-vpc-security-group).
-    - **Classic clusters**: Make sure you enabled [Virtual Router Forwarding (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) in your account. Health check traffic does not leave the cluster but might be sent from one node to another. Ensure your network policies do not block this traffic. For more information, see [Controlling traffic with network policies on classic clusters](/docs/containers?topic=containers-network_policies). 
+    - **VPC clusters**:
+        - Health check traffic originates from one of the worker nodes of your cluster. In the case of public ALBs, the traffic is directed to the public floating IP address of the VPC Load Balancer instance, therefore it is required to have a Public Gateway attached to all the worker subnets. In the case of private ALBs, the traffic is directed to the VPC subnet IP address of the VPC Load Balancer, therefore a Public Gateway is not required.
+        - If your VPC Load Balancers are located on a subnet other than the worker nodes of your cluster, you will need to update the Security Group attached to the VPC Load Balancer subnet to allow incoming traffic from the worker subnets.
+        - For more information, see [Controlling traffic with VPC security groups](/docs/containers?topic=containers-vpc-security-group).
+    - **Classic clusters**:
+        - Make sure you enabled [Virtual Router Forwarding (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) in your account. Health check traffic does not leave the cluster but might be sent from one node to another. Ensure your network policies do not block this traffic.
+        - For more information, see [Controlling traffic with network policies on classic clusters](/docs/containers?topic=containers-network_policies). 
 
 1. Wait 10-15 minutes to see if the issue is resolved.
 
