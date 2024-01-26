@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-26"
 
 
-keywords: kubernetes, help, network, connectivity
+keywords: kubernetes, help, network, connectivity, containers
 
 subcollection: containers
 
@@ -24,7 +24,7 @@ content-type: troubleshoot
 {: #cos_pvc_pending}
 {: support}
 
-[
+
 
 
 

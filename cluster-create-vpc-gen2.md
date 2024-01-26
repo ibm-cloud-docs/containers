@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-01-26"
 
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2
@@ -36,8 +36,8 @@ Do not delete the subnets that you attach to your cluster during cluster creatio
 
 
 
-* If your VPC Clusters requires access to Classic Infrastructure resources, you must [enable VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint&interface=ui#service-endpoint) in your account.
-* If you VPC Clusters doesn't require Classic Infrastructure Access, no account changes are required.
+* If your VPC Clusters require access to Classic Infrastructure resources, you must [enable VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint&interface=ui#service-endpoint) in your account.
+* If your VPC Clusters don't require Classic Infrastructure Access, no account changes are required.
 
 
 ## Creating a VPC cluster in the console
