@@ -598,7 +598,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
     2. In the **Identity providers** tab, make sure that you have an Identity Provider selected. If no Identity Provider is selected, the user will not be authenticated but will be issued an access token for anonymous access to the app.
     3. In the **Authentication settings** tab, add redirect URLs for your app in the format `https://<hostname>/oauth2-<App_ID_service_instance_name>/callback`. Note that all letters in the service instance name must specified as lowercase.
 
-    If you use the [{{site.data.keyword.appid_full_notm}} logout function](/docs/appid?topic=appid-cd-sso#cd-sso-log-out), you must append `/sign_out` to your domain in the format `https://<hostname>/oauth2-<App_ID_service_instance_name>/sign_out` and include this URL in the redirect URLs list. If you want to use a custom logout page, you must set `whitelist_domains` in the ConfigMap for OAuth2-Proxy. Call the `https://<hostname>/oauth2-<App_ID_service_instance_name>/sign_out` endpoint with the `rd` query parameter or set the `X-Auth-Request-Redirect` header with your custom logout page. For more details, see [Sign out](https://oauth2-proxy.github.io/oauth2-proxy/features/endpoints#sign-out){: external}.
+    If you use the [{{site.data.keyword.appid_full_notm}} logout function](/docs/appid?topic=appid-cd-sso#cd-sso-log-out), you must append `/sign_out` to your domain in the format `https://<hostname>/oauth2-<App_ID_service_instance_name>/sign_out` and include this URL in the redirect URLs list. If you want to use a custom logout page, you must set `whitelist_domains` in the ConfigMap for OAuth2-Proxy. Call the `https://<hostname>/oauth2-<App_ID_service_instance_name>/sign_out` endpoint with the `rd` query parameter or set the `X-Auth-Request-Redirect` header with your custom logout page. For more details, see [Sign out](https://oauth2-proxy.github.io/oauth2-proxy/features/endpoints/#sign-out){: external}.
     {: note}
 
 3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster. The command creates a service key for the service instance, or you can include the `--key` option to use existing service key credentials. Be sure to bind the service instance to the same namespace that your Ingress resources exist in. Note that all letters in the service instance name must specified as lowercase.
@@ -733,7 +733,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
           auth_logging: <true|false>
           # Log all authentication attempts.
           auth_logging_format:
-          # Format for authentication logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration#auth-log-format
+          # Format for authentication logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration/overview#logging-configuration
           cookie_csrf_expire: "15m"
           # Expiration timeframe for CSRF cookie. Default is "15m".
           cookie_csrf_per_request: <true|false>
@@ -751,7 +751,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
           request_logging: <true|false>
           # Log all requests to the backend app.
           request_logging_format:
-          # Format for request logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration#request-log-format
+          # Format for request logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration/overview#request-log-format
           scope:
           # Scope of the OAuth authentication. For more info, see https://oauth.net/2/scope/
           set_authorization_header: <true|false>
@@ -761,11 +761,11 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
           standard_logging: <true|false>
           # Log standard runtime information.
           standard_logging_format:
-          # Format for standard logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration#standard-log-format
+          # Format for standard logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration/overview#standard-log-format
           tls_secret_name:
           # The name of a secret that contains the server-side TLS certificate and key to enable TLS between the OAuth2-Proxy and the Ingress ALB. By default, the TLS secret defined in your Ingress resources is used.
           whitelist_domains:
-          # Allowed domains for redirection after authentication. Default: "". Example: example.com,*.example2.com For more info, see: https://oauth2-proxy.github.io/oauth2-proxy/configuration/overview/ 
+          # Allowed domains for redirection after authentication. Default: "". Example: example.com,*.example2.com For more info, see: https://oauth2-proxy.github.io/oauth2-proxy/configuration/overview#command-line-options
           oidc_extra_audiences:
           # Additional audiences which are allowed to pass verification. 
           cookie_refresh: 
