@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-01-30"
+lastupdated: "2024-02-01"
 
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
@@ -40,6 +40,31 @@ Review the version 1.26 change log.
 
 
 
+
+
+### Change log for master fix pack 1.26.13_1569, released 31 January 2024
+{: #12613_1569_M}
+
+The following table shows the changes that are in the master fix pack 1.26.13_1569. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.26.3 | v3.26.4 | See the [Calico release notes](https://docs.tigera.io/calico/3.26/release-notes/#v3.26.4){: external}. |
+| Cluster health image | v1.4.5 | v1.4.6 | New version contains security fixes. |
+| etcd | v3.5.10 | v3.5.11 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.11){: external}. |
+| GPU device plug-in and installer | 0e3950c | 6273cd0 | New version contains security fixes. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1487 | 1525 | New version contains security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.26.11-6 | v1.26.13-3 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | 58e69e0 | 90a78ef | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | e544e35 | 7185ea1 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.8.5 | v2.8.6 | New version contains updates and security fixes. |
+| Kubernetes | v1.26.11 | v1.26.13 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.13){: external}. |
+| Kubernetes NodeLocal DNS cache | 1.22.27 | 1.22.28 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.28){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2767 | 2789 | New version contains updates and security fixes. |
+| Portieris admission controller | v0.13.10 | v0.13.11 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.11){: external}. |
+{: caption="Changes since version 1.26.11_1564" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.26.13_1570, released 29 January 2024
