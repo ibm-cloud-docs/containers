@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-30"
+lastupdated: "2024-02-01"
 
 
 keywords: containers, kubernetes, release notes
@@ -26,6 +26,32 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+## February 2024
+{: #containers-feb24}
+
+### 01 February 2024
+{: #containers-feb0124}
+{: release-note}
+
+
+
+Master fix packs are available for {{site.data.keyword.containerlong_notm}}
+:   Review the change logs for your cluster version. Master patch updates are applied automatically.
+:   [1.28.6_1542](/docs/containers?topic=containers-changelog_128)
+:   [1.27.10_1561](/docs/containers?topic=containers-changelog_127)
+:   [1.26.13_1569](/docs/containers?topic=containers-changelog_126)
+
+{{site.data.keyword.containerlong_notm}} version 1.25 is no longer supported.
+:   Update your 1.25 clusters to at least version 1.26. For more information, see [1.26 version information and update actions](/docs/containers?topic=containers-cs_versions_126).
+
+
+
+
+
+
+{{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch update `1.0.8_346`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
 
 
 ## January 2024
