@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-22"
+lastupdated: "2024-02-01"
 
 
 keywords: containers
@@ -99,9 +99,6 @@ TLS cipher support
 
 Review the default settings for the `kube-controller-manager` master component in {{site.data.keyword.containerlong_notm}}. 
 {: shortdesc}
-
-Modifying feature gates is not supported in {{site.data.keyword.containerlong_notm}}.
-{: important}
 
 Feature gates
 :   See [Feature gates](#feature-gates)

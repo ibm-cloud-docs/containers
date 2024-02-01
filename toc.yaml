@@ -310,12 +310,6 @@ toc:
               - cs_versions_126.md
               - cs_versions_changelog_126.md
               - cs_benchmarks_126.md 
-          - topicgroup:
-              label: Version 1.25
-              topics:
-              - cs_versions_125.md
-              - cs_versions_changelog_125.md
-              - cs_benchmarks_125.md
       - topicgroup:
           label: Add-on version history
           topics:
@@ -333,6 +327,12 @@ toc:
       - topicgroup:
           label: Archived version history
           topics:
+          - topicgroup:
+              label: Version 1.25
+              topics:
+              - cs_versions_125.md
+              - cs_versions_changelog_125.md
+              - cs_benchmarks_125.md
           - topicgroup:
               label: Version 1.24 
               topics:
@@ -565,6 +565,7 @@ toc:
               - ts-storage-debug-file.md
               - ts-storage-pvc-fail-permissions.md
               - ts-storage-file-block-pvc-pending.md
+              - ts-vpc-file-container-creating.md
               - ts-storage-file-app.md
               - ts-storage-file-group-id-fail.md
               - ts-storage-file-nonroot-nfs-mount.md

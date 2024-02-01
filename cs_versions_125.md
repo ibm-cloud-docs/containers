@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-02-01"
 
 
 keywords: kubernetes, containers, 125, version 125, 125 update actions
@@ -25,8 +25,8 @@ Review information about version 1.25 of {{site.data.keyword.containerlong}}.
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
 {: tip}
 
-Kubernetes version 1.25 is deprecated. Update your cluster to at least [version 1.26](/docs/containers?topic=containers-cs_versions_126) as soon as possible.
-{: deprecated}
+Kubernetes version 1.25 is no longer supported. Update your cluster to at least [version 1.26](/docs/containers?topic=containers-cs_versions_126) as soon as possible.
+{: important}
 
 
 
