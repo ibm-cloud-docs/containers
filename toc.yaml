@@ -93,6 +93,7 @@ toc:
           - encryption-setup.md
           - encryption-secrets.md
           - encryption-vpc-worker-disks.md
+          - encryption-wireguard-workers.md
       - topicgroup:
           label: Enhancing security
           topics:

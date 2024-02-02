@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-02-01"
+lastupdated: "2024-02-02"
 
 
 keywords: containers
@@ -2916,6 +2916,8 @@ subcollection: containers
 
 * [Persistent storage](/docs/containers?topic=containers-encryption#persistent-encryption)
 
+* [Worker-to-worker traffic](/docs/containers?topic=containers-encryption#worker-to-worker-encryption)
+
 * [Next steps](/docs/containers?topic=containers-encryption#encryption-next-steps)
 
 [Storage overview](/docs/containers?topic=containers-storage-plan#storage-plan)
@@ -3116,6 +3118,12 @@ subcollection: containers
 * [Verifying secret encryption](/docs/containers?topic=containers-encryption-secrets&interface=ui#encryption-secrets-verify)
 
 [Setting up worker node disk encryption for VPC clusters](/docs/containers?topic=containers-encryption-vpc-worker-disks#encryption-vpc-worker-disks)
+
+[Encrypting worker-to-worker traffic with WireGuard](/docs/containers?topic=containers-encrypt-nodes-wireguard#encrypt-nodes-wireguard)
+
+* [Enabling WireGuard encryption](/docs/containers?topic=containers-encrypt-nodes-wireguard#encrypt-nodes-wireguard-enable)
+
+* [Disabling WireGuard encryption](/docs/containers?topic=containers-encrypt-nodes-wireguard#encrypt-nodes-wireguard-disable)
 
 
 ## Enhancing security
