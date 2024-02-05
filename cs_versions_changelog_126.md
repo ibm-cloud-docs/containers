@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-02-01"
+lastupdated: "2024-02-05"
 
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
@@ -53,7 +53,7 @@ The following table shows the changes that are in the master fix pack 1.26.13_15
 | --- | --- | --- | --- |
 | Calico | v3.26.3 | v3.26.4 | See the [Calico release notes](https://docs.tigera.io/calico/3.26/release-notes/#v3.26.4){: external}. |
 | Cluster health image | v1.4.5 | v1.4.6 | New version contains security fixes. |
-| etcd | v3.5.10 | v3.5.11 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.11){: external}. |
+| etcd | v3.5.10 | v3.5.11 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.11){: external}. |
 | GPU device plug-in and installer | 0e3950c | 6273cd0 | New version contains security fixes. |
 | {{site.data.keyword.IBM_notm}} Calico extension | 1487 | 1525 | New version contains security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.26.11-6 | v1.26.13-3 | New version contains updates and security fixes. |
