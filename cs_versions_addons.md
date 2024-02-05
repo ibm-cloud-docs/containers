@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-22"
+lastupdated: "2024-02-05"
 
 
 keywords: kubernetes, nginx, ingress controller, fluentd
@@ -54,21 +54,25 @@ If you use configuration snippets in your Ingress resource, you must adjust your
 If your Ingress resources use configuration snippets or redirects, their behavior might change with v1.9.4. Validate your configuration before updating. For more information about version 1.9.4, see the [1.9.4 community change log](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.9.4){: external}.
 {: important}
 
-1.9.4 is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image.
-{: note}
+[Default version]{: tag-green}
+
+1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image.
+
+
+### 1.9.4_6292_iks, released 05 February 2024
+{: #1.9.4_6292_iks}
+
+- Dependency updates.
+- CVE remediation for [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/CVE-2024-0727){: external}.
 
 ### 1.9.4_6251_iks, released 22 January 2024
 {: #1.9.4_6251_iks}
-
-[Default version]{: tag-green}
 
 - Dependency updates.
 - CVE remediation for [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external} and [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}.
 
 ### 1.9.4_6161_iks, released 10 January 2024
 {: #1.9.4_6161_iks}
-
-[Default version]{: tag-green}
 
 - Dependency updates.
 - CVE remediation for [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/CVE-2023-46219){: external} and [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/CVE-2023-46218){: external}.
@@ -94,9 +98,15 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 ## Version 1.8.4
 {: #1_8_4}
 
+### 1.8.4_6291_iks, released 05 February 2024
+{: #1.8.4_6291_iks}
+
+- Dependency updates. 
+- CVE remediation for [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/CVE-2024-0727){: external}.
+
+
 ### 1.8.4_6245_iks, released 22 January 2024
 {: #1.8.4_6245_iks}
-
 
 - Dependency updates. 
 - CVE remediation for [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external} and [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}.
@@ -167,6 +177,12 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 
 ## Version 1.6.4
 {: #1_6_4}
+
+### 1.6.4_6293_iks, released 05 February 2024
+{: #1.6.4_6293_iks}
+
+- Dependency updates. 
+- CVE remediation for [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/CVE-2024-0727){: external}.
 
 ### 1.6.4_6250_iks, released 22 January 2024
 {: #1.6.4_6250_iks}
