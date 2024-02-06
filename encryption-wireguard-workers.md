@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2024
-lastupdated: "2024-02-02"
+lastupdated: "2024-02-06"
 
 
 keywords: kubernetes, help, wireguard, worker encryption
@@ -35,7 +35,7 @@ For more information on this configuration setting, see [Enable WireGuard for a 
 ## Enabling WireGuard encryption
 {: #encrypt-nodes-wireguard-enable}
 
-1. Run the following command to enable WireGuard.
+1. Run the following command to enable WireGuard for worker-to-worker traffic.
 
     ```sh
     kubectl patch felixconfiguration default --type='merge' -p '{"spec":{"wireguardEnabled":true}}'
@@ -48,7 +48,7 @@ For more information on this configuration setting, see [Enable WireGuard for a 
     ```
     {: screen}
 
-2. To verify that WireGuard is enabled, view your felixconfiguration. In the output, find the WireGuard section and verify that `wireguardPublicKey` is listed in the status column. 
+2. Verify your setup by reviewing the `felixconfiguration`. In the output, find the WireGuard section and verify that `wireguardEnabled: true`. 
 
     ```sh
     kubectl get felixconfiguration default -o yaml
@@ -57,7 +57,7 @@ For more information on this configuration setting, see [Enable WireGuard for a 
 
     Example output.
 
-    ```sh
+    ```yaml
     apiVersion: crd.projectcalico.org/v1
     kind: FelixConfiguration
     metadata:
@@ -87,7 +87,7 @@ If you no longer need worker-to-worker encryption in your cluster, you can disab
 1. Run the following command to disable WireGuard.
 
     ```sh
-    kubectl patch felixconfiguration default --type='merge' -p '{"spec":{"wireguardEnabled":false}}' --allow-version-mismatch
+    kubectl patch felixconfiguration default --type='merge' -p '{"spec":{"wireguardEnabled":false}}'
     ```
     {: pre}
 
@@ -104,7 +104,7 @@ If you no longer need worker-to-worker encryption in your cluster, you can disab
     {: pre}
 
     Example output
-    ```sh
+    ```yaml
     apiVersion: crd.projectcalico.org/v1
     kind: FelixConfiguration
     metadata:
