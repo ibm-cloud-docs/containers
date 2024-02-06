@@ -87,7 +87,7 @@ If you no longer need worker-to-worker encryption in your cluster, you can disab
 1. Run the following command to disable WireGuard.
 
     ```sh
-    kubectl patch felixconfiguration default --type='merge' -p '{"spec":{"wireguardEnabled":false}}' --allow-version-mismatch
+    kubectl patch felixconfiguration default --type='merge' -p '{"spec":{"wireguardEnabled":false}}'
     ```
     {: pre}
 
