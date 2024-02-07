@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-17"
+lastupdated: "2024-02-07"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -31,6 +31,25 @@ ibmcloud ks cluster addon versions
 
 ## Version 1.20
 {: #v120}
+
+### Change log for 1.20.2, released 07 February 2024
+{: #1202}
+
+Review the changes that are included in version 1.20.2 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.20.1
+
+Current version
+:   1.20.2
+
+Updates in this version
+:   For more information, see the [Istio 1.20.2 release notes](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.2/.){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2023-39804](https://nvd.nist.gov/vuln/detail/CVE-2023-39804){: external}
+    - [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/CVE-2023-48795){: external}
+
 
 ### Change log for 1.20.1, released 10 January 2024
 {: #1201}
@@ -82,6 +101,25 @@ Updates in this version
 
 ## Version 1.19
 {: #v119}
+
+### Change log for 1.19.6, released 07 February 2024
+{: #1196}
+
+Review the changes that are included in version 1.19.6 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.19.5
+
+Current version
+:   1.19.6
+
+Updates in this version
+:   See the [Istio 1.19.6 release notes](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.6){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2023-39804](https://nvd.nist.gov/vuln/detail/CVE-2023-39804){: external}
+    - [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/CVE-2023-48795){: external}
+
 
 ### Change log for 1.19.5, released 10 January 2024
 {: #1195}
@@ -165,6 +203,26 @@ Updates in this version
 ## Unsupported: Version 1.18
 {: #v118}
 
+### Change log for 1.18.7, released 07 February 2024
+{: #1187}
+
+Review the changes that are included in version 1.18.7 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.18.6
+
+Current version
+:   1.18.7
+
+Updates in this version
+:   This version is the EOL version for 1.18. Support for Istio 1.18 ends on 21 February 2024.
+:   See the Istio release notes for [Istio 1.18.7](https://istio.io/latest/news/releases/1.18.x/announcing-1.18.7){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2023-39804](https://nvd.nist.gov/vuln/detail/CVE-2023-39804){: external}
+    - [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/CVE-2023-48795){: external}
+
+
 ### Change log for 1.18.6, released 10 January 2024
 {: #1186}
 
@@ -178,7 +236,6 @@ Current version
 :   1.18.6
 
 Updates in this version
-:   This is the EOL version for 1.18. Support for Istio 1.18 ends on 21 February 2024.
 :   See the Istio release notes for [Istio 1.18.6](https://istio.io/latest/news/releases/1.18.x/announcing-1.18.6/.){: external}.
 :   For more information, see the [Istio security bulletin 2023-005](https://istio.io/latest/news/security/istio-security-2023-005/){: external}.
 :   Resolves the following CVEs:
