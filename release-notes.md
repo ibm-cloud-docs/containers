@@ -35,6 +35,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-feb0824}
 {: release-note}
 
+CLI version `1.0.595` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.2.15_501` and `5.1.21_506` are available.
 :   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
 
