@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-19"
+lastupdated: "2024-02-08"
 
 
 keywords: kubernetes, helm
@@ -93,7 +93,6 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 |Prometheus|Prometheus is an open source monitoring, logging, and alerting tool that was designed for Kubernetes. Prometheus retrieves detailed information about the cluster, worker nodes, and deployment health based on Kubernetes logging information. CPU, memory, I/O, and network activity is collected for each container that runs in a cluster. You can use the collected data in custom queries or alerts to monitor performance and workloads in your cluster. To use Prometheus, follow the [CoreOS instructions](https://github.com/prometheus-operator/kube-prometheus){: external}.|Yes|Yes|
 |Sematext|View metrics and logs for your containerized applications by using [Sematext](https://sematext.com/){: external}.|Yes|Yes|
 |Splunk|Import and search your Kubernetes logging, object, and metrics data in Splunk by using Splunk Connect for Kubernetes. Splunk Connect for Kubernetes is a collection of Helm charts that deploy a Splunk-supported deployment of Fluentd to your Kubernetes cluster, a Splunk-built Fluentd HTTP Event Collector (HEC) plug-in to send logs and metadata, and a metrics deployment that captures your cluster metrics. For more information, see [Solving Business Problems with Splunk on {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/blog/solving-business-problems-with-splunk-on-ibm-cloud-kubernetes-service/){: external}.|Yes|Yes|
-|Weave Scope|[Weave Scope](https://www.weave.works/oss/scope/){: external} provides a visual diagram of your resources within a Kubernetes cluster, including services, pods, containers, processes, nodes, and more. Weave Scope provides interactive metrics for CPU and memory and also provides tools to tail and exec into a container.|Yes|Yes|
 {: caption="Table 4. Logging and monitoring services" caption-side="bottom"}
 
 
