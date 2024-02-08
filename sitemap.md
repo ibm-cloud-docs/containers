@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-02-07"
+lastupdated: "2024-02-08"
 
 
 keywords: containers
@@ -237,6 +237,20 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb24)
+
+    * [08 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb0824)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.2.15_501` and `5.1.21_506` are available.
+
+        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.2.6_130` is available.
+
+    * [07 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb0724)
+
+        * Istio add-on versions `1.20.2`, `1.19.6`, and `1.18.7` are available.
+
+    * [05 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb0524)
+
+        * Ingress ALB updates
 
     * [01 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb0124)
 
@@ -7301,6 +7315,8 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-vpc_bs_changelog#052_is_block)
 
+    * [Change log for version 5.2.15_501, released 08 February 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.15_501_is_block_relnote)
+
     * [Change log for version 5.2.14_485, released 10 January 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.14_485_is_block_relnote)
 
     * [Change log for version 5.2.11_447, released 27 November 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2.11_447_is_block_relnote)
@@ -7310,6 +7326,8 @@ subcollection: containers
     * [Change log for version 5.2, released 25 September 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2_is_block_relnote)
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
+
+    * [Change log for version 5.1.21_506, released 08 February 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.21_506_is_block_relnote)
 
     * [Change log for version 5.1.19_486, released 10 January 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.19_486_is_block_relnote)
 
@@ -7465,7 +7483,9 @@ subcollection: containers
 
 * [Version 1.2](/docs/containers?topic=containers-versions-vpc-file-addon#012_is_file)
 
-    * [Change log for version 1.2.5_107, released 10 January 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.5_107_is_file_relnote)
+    * [Change log for version 1.2.6_130, released 08 February 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.6_130_is_file_relnote)
+
+    * [Change log for version 1.2.5_107, released 10 January 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.5_107_is_file_relnote)
 
     * [Change log for version 1.2.3_97, released 27 November 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.3_97_is_file_relnote)
 
