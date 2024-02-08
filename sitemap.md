@@ -240,6 +240,8 @@ subcollection: containers
 
     * [08 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb0824)
 
+        * CLI version `1.0.595` is available.
+
         * {{site.data.keyword.block_storage_is_short}} add-on versions `5.2.15_501` and `5.1.21_506` are available.
 
         * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.2.6_130` is available.
@@ -5839,6 +5841,10 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.595](/docs/containers?topic=containers-cs_cli_changelog#cli-01959)
+
+* [Version v1.0.589](/docs/containers?topic=containers-cs_cli_changelog#cli-01589)
 
 * [Version v1.0.579](/docs/containers?topic=containers-cs_cli_changelog#cli-01579)
 
