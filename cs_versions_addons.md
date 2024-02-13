@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-02-05"
+lastupdated: "2024-02-13"
 
 
 keywords: kubernetes, nginx, ingress controller, fluentd
@@ -58,6 +58,12 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 
 1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image.
 
+### 1.9.4_6346_iks, released 13 February 2024
+{: #1.9.4_6346_iks}
+
+- Dependency updates.
+- CVE remediation for [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626){: external}.
+
 
 ### 1.9.4_6292_iks, released 05 February 2024
 {: #1.9.4_6292_iks}
@@ -97,6 +103,12 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 
 ## Version 1.8.4
 {: #1_8_4}
+
+### 1.8.4_6345_iks, released 13 February 2024
+{: #1.8.4_6345_iks}
+
+- Dependency updates.
+- CVE remediation for [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626){: external}.
 
 ### 1.8.4_6291_iks, released 05 February 2024
 {: #1.8.4_6291_iks}
@@ -177,6 +189,12 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 
 ## Version 1.6.4
 {: #1_6_4}
+
+### 1.6.4_6344_iks, released 13 February 2024
+{: #1.6.4_6344_iks}
+
+- Dependency updates.
+- CVE remediation for [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626){: external}.
 
 ### 1.6.4_6293_iks, released 05 February 2024
 {: #1.6.4_6293_iks}
