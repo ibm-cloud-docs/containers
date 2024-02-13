@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-02-08"
+lastupdated: "2024-02-13"
 
 
 keywords: containers, kubernetes, release notes
@@ -29,6 +29,28 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## February 2024
 {: #containers-feb24}
+
+
+### 13 February 2024
+{: #containers-feb1324}
+{: release-note}
+
+
+
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+:    Review the following change logs for your cluster version.
+    - [1.28.6_1544](/docs/containers?topic=containers-changelog_128)
+    - [1.27.10_1563](/docs/containers?topic=containers-changelog_127)
+    - [1.26.13_1571](/docs/containers?topic=containers-changelog_126)
+
+Ingress ALB versions `1.9.4_6346_iks`, `1.8.4_6345_iks`, `1.6.4_6344_iks` are available for {{site.data.keyword.containerlong_notm}}.
+:   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
+
+
+
 
 
 ### 08 February 2024
