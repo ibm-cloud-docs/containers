@@ -31,6 +31,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-feb24}
 
 
+### 16 February 2024
+{: #containers-feb1624}
+{: release-note}
+
+
+
+{{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch update `1.1.0_362`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+
 
 
 

@@ -238,6 +238,10 @@ subcollection: containers
 
 * [February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb24)
 
+    * [16 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb1624)
+
+        * {{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch update `1.1.0_362`.
+
     * [14 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb1424)
 
         * New! {{site.data.keyword.containerlong_notm}} version 1.29.
@@ -7245,6 +7249,8 @@ subcollection: containers
     * [Change log for patch update 1.2.0_228, released 15 November 2023](/docs/containers?topic=containers-ca_changelog#120228_ca)
 
 * [Version 1.1.0 (Beta)](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
+
+    * [Change log for patch update 1.1.0_362, released 16 February 2024](/docs/containers?topic=containers-ca_changelog#110362_ca)
 
     * [Change log for patch update 1.1.0_1066, released 15 May 2023](/docs/containers?topic=containers-ca_changelog#111066_ca)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-02-16"
 
 
 keywords: containers, kubernetes cluster,  vpc cluster, classic cluster, clusters
@@ -51,8 +51,7 @@ Follow a tutorial, or set up your own custom cluster environment.
 
 
 
-- [Tutorial]{: tag-blue} [Create a cluster in your own Virtual Private Cloud](/docs/containers?topic=containers-vpc_ks_tutorial).
-
+- [Tutorial]{: tag-green} [Create a cluster in your own Virtual Private Cloud](/docs/containers?topic=containers-vpc_ks_tutorial).
 
 - [Create a custom cluster on Classic infrastructure](/docs/containers?topic=containers-cluster-create-classic).
 
