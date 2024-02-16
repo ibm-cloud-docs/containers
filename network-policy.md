@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-02-16"
 
 
 keywords: kubernetes, calico, egress, rules
@@ -213,6 +213,9 @@ To create Kubernetes network policies, see the [Kubernetes network policy docume
 To create Calico policies, use the following steps. Before you begin, [install and configure the Calico CLI, and set the context for your cluster to run Calico commands](#cli_install).
 
 1. Define your Calico [network policy](https://docs.tigera.io/calico/latest/reference/resources/networkpolicy){: external} or [global network policy](https://docs.tigera.io/calico/latest/reference/resources/globalnetworkpolicy){: external} by creating a configuration script (`.yaml`) with Calico v3 policy syntax. These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to.
+
+    For new clusters provisioned at version 1.29 or later, the short names for `globalnetworkpolicies.crd.projectcalico.org` (`gnp`) and `hostendpoints.crd.projectcalico.org` (`hep`) are not supported. However, if you upgrade a cluster to version 1.29 or later, the short names are still supported.
+    {: important}
 
 1. Apply the policies to the cluster. If you have a Windows system, include the `--config=<filepath>/calicoctl.cfg` option.
     ```sh

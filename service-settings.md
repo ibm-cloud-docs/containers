@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-02-01"
+lastupdated: "2024-02-16"
 
 
 keywords: containers
@@ -80,7 +80,7 @@ Feature gates
 :   See [Feature gates](#feature-gates) 
 
 TLS cipher support
-:   TLS version =< 1.2 (Kubernetes version 1.19 and earlier):
+:   TLS version 1.2:
     - `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`
     - `TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`
     - `TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256`
@@ -88,7 +88,7 @@ TLS cipher support
     - `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
     - `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256`
 
-:   TLS version 1.3 (Kubernetes version 1.19 and later):
+:   TLS version 1.3:
     - `TLS_AES_128_GCM_SHA256`
     - `TLS_CHACHA20_POLY1305_SHA256`
     - `TLS_AES_256_GCM_SHA384`
@@ -107,7 +107,7 @@ Pod garbage collection threshold
 :   `terminated-pod-gc-threshold=12500`
 
 TLS cipher support
-:   TLS version =< 1.2 (Kubernetes version 1.19 and earlier):
+:   TLS version 1.2:
     - `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`
     - `TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`
     - `TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256`
@@ -115,7 +115,7 @@ TLS cipher support
     - `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
     - `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256`
 
-:   TLS version 1.3 (Kubernetes version 1.19 and later):
+:   TLS version 1.3:
     - `TLS_AES_128_GCM_SHA256`
     - `TLS_CHACHA20_POLY1305_SHA256`
     - `TLS_AES_256_GCM_SHA384`
@@ -209,7 +209,7 @@ Pod manifest path
 :   `staticPodPath: /etc/kubernetes/manifests`
 
 TLS cipher support
-:   TLS version =< 1.2 (Kubernetes version 1.19 and earlier):
+:   TLS version 1.2:
     - `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`
     - `TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`
     - `TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256`
@@ -217,7 +217,7 @@ TLS cipher support
     - `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
     - `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256`
 
-:   TLS version 1.3 (Kubernetes version 1.19 and later): 
+:   TLS version 1.3: 
     - `TLS_AES_128_GCM_SHA256`
     - `TLS_CHACHA20_POLY1305_SHA256`
     - `TLS_AES_256_GCM_SHA384`
@@ -230,7 +230,7 @@ Review the default settings for the `kube-scheduler` worker node component in {{
 {: shortdesc}
 
 TLS cipher support
-:   TLS version =< 1.2 (Kubernetes version 1.19 and earlier):
+:   TLS version 1.2:
     - `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`
     - `TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`
     - `TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256`
@@ -238,7 +238,7 @@ TLS cipher support
     - `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
     - `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256`
 
-:   TLS version 1.3 (Kubernetes version 1.19 and later):
+:   TLS version 1.3:
     - `TLS_AES_128_GCM_SHA256`
     - `TLS_CHACHA20_POLY1305_SHA256`
     - `TLS_AES_256_GCM_SHA384`
@@ -252,11 +252,14 @@ Review the default settings for the `kube-proxy` worker node component in {{site
 
 
 Iptable settings
-:   `iptables-sync-period 180s` (Kubernetes version 1.28 and later)
-:   `iptables-min-sync-period 3s` (Kubernetes version 1.28 and later)
+:   `iptables-sync-period 120` (Kubernetes version 1.29 and later)
+:   `iptables-min-sync-period 2s` (Kubernetes version 1.29 and later)
+:   `iptables-sync-period 180s` (Kubernetes version 1.28)
+:   `iptables-min-sync-period 3s` (Kubernetes version 1.28)
 :   `iptables-sync-period 300s` (Kubernetes version 1.27 and earlier)
 :   `iptables-min-sync-period 5s` (Kubernetes version 1.27 and earlier)
 :   `iptables-localhost-nodeports false` (Kubernetes versions 1.26 and later)
+
 
 Proxy mode
 :   `proxy-mode=iptables`
@@ -279,7 +282,13 @@ Review the feature gates that are applied to all master and worker node componen
 In cluster version 1.26 and later, you can use the **`kubectl get --raw /metrics | grep kubernetes_feature_enabled`** command to determine if a feature gate is enabled or disabled.
 {: tip}
 
+1.29
+:   `CustomCPUCFSQuotaPeriod=true`
+:   `KMSv1=true`
+:   `StructuredAuthenticationConfiguration=true`
+
 1.28
+:   `CustomCPUCFSQuotaPeriod=true`
 :   `UnauthenticatedHTTP2DOSMitigation=true`
 
 1.27

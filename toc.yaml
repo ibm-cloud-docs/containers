@@ -294,6 +294,12 @@ toc:
           - cs_versions_overview.md
           - benchmarks_overview.md
           - topicgroup:
+              label: Version 1.29
+              topics:
+              - cs_versions_129.md
+              - cs_versions_changelog_129.md
+              - cs_benchmarks_129.md
+          - topicgroup:
               label: Version 1.28
               topics:
               - cs_versions_128.md

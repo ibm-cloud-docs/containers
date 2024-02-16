@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-02-16"
 
 
 keywords: kubernetes
@@ -812,6 +812,8 @@ You can remove storage from your worker node by using the `ibmcloud ks storage a
 
 ## Backing up and restoring PVC data for file and block storage
 {: #ibmcloud-backup-restore}
+
+
 
 With the {{site.data.keyword.cloud_notm}} Backup Restore Helm chart, you can create a one-time or scheduled backup for data that is stored in a file storage or block storage persistent volume claim (PVC). Your data is stored in an {{site.data.keyword.cos_full_notm}} service instance that you create and own. You can use existing backups in your {{site.data.keyword.cos_full_notm}} service instance to restore data to a PVC in your cluster.
 {: shortdesc}

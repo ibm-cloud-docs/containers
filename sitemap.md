@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-02-13"
+lastupdated: "2024-02-16"
 
 
 keywords: containers
@@ -237,6 +237,20 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb24)
+
+    * [16 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb1624)
+
+        * {{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch update `1.1.0_362`.
+
+    * [14 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb1424)
+
+        * New! {{site.data.keyword.containerlong_notm}} version 1.29.
+
+        * Master fix pack `1.29.1_1524` and worker node fix pack `1.29.1_1525`.
+
+        * Starting with {{site.data.keyword.containerlong_notm}} version 1.29, Calico components run in the `calico-system` namespace and the Calico operator components run in the `tigera-operator` namespace.
+
+        * {{site.data.keyword.containerlong_notm}} version 1.26 is deprecated.
 
     * [13 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb1324)
 
@@ -5339,9 +5353,15 @@ subcollection: containers
 
 * [Changing the Calico maximum transmission unit (MTU)](/docs/containers?topic=containers-kernel#calico-mtu)
 
-    * [Updating the Calico ConfigMap](/docs/containers?topic=containers-kernel#calico-cm-mtu-update)
+    * [Updating the Calico ConfigMap in Kubernetes version 1.28 and earlier](/docs/containers?topic=containers-kernel#calico-cm-mtu-update)
+
+    * [Updating the Calico installation in Kubernetes version 1.29 and later](/docs/containers?topic=containers-kernel#calico-mtu-43)
 
 * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
+
+    * [Disabling the port map plug-in in Kubernetes version 1.29 and later](/docs/containers?topic=containers-kernel#calico-portmap-129)
+
+    * [Disabling the port map plug-in in Kubernetes version 1.28 and earlier](/docs/containers?topic=containers-kernel#calico-portmap-128)
 
 
 ## Removing clusters
@@ -6060,6 +6080,73 @@ subcollection: containers
     * [What else can I do to increase the security and compliance of my cluster?](/docs/containers?topic=containers-cis-benchmark#benchmark-what-else)
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
+
+
+### Version 1.29
+{: #sitemap_version_129}
+
+
+[1.29 version information and update actions](/docs/containers?topic=containers-cs_versions_129#cs_versions_129)
+
+* [Release timeline](/docs/containers?topic=containers-cs_versions_129#release_timeline_129)
+
+* [Preparing to update](/docs/containers?topic=containers-cs_versions_129#prep-up-129)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions_129#before_129)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions_129#after_129)
+
+    * [Understanding the Tigera resource migration](/docs/containers?topic=containers-cs_versions_129#129-tigera-migration)
+
+[Kubernetes version 1.29 change log](/docs/containers?topic=containers-changelog_129#changelog_129)
+
+* [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
+
+* [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
+
+    * [Change log for master fix pack 1.29.1_1524 and worker node fix pack 1.29.1_1525, released 14 February 2024](/docs/containers?topic=containers-changelog_129#1291_1524M_and_1291_1525W)
+
+[Kubernetes version 1.29 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-129)
+
+* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-129#cis-section-1-129)
+
+    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-11-129)
+
+    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-12-129)
+
+    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-13-129)
+
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-14-129)
+
+* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-129#cis-section-2-129)
+
+* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-129#cis-section-3-129)
+
+    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-31-129)
+
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-32-129)
+
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-129#cis-section-4-129)
+
+    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-41-129)
+
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-42-129)
+
+* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-129#cis-section-5-129)
+
+    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-51-129)
+
+    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-52-129)
+
+    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-53-129)
+
+    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-54-129)
+
+    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-55-129)
+
+    * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-56-129)
+
+* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-remediations-129)
 
 
 ### Version 1.28
@@ -7162,6 +7249,8 @@ subcollection: containers
     * [Change log for patch update 1.2.0_228, released 15 November 2023](/docs/containers?topic=containers-ca_changelog#120228_ca)
 
 * [Version 1.1.0 (Beta)](/docs/containers?topic=containers-ca_changelog#0110_ca_addon)
+
+    * [Change log for patch update 1.1.0_362, released 16 February 2024](/docs/containers?topic=containers-ca_changelog#110362_ca)
 
     * [Change log for patch update 1.1.0_1066, released 15 May 2023](/docs/containers?topic=containers-ca_changelog#111066_ca)
 

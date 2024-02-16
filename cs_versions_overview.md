@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-02-01"
+lastupdated: "2024-02-14"
 
 
 keywords: kubernetes, versions, update, upgrade
@@ -43,7 +43,14 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 
-[Latest]{: tag-green} [Default]{: tag-purple} 1.28
+[Latest]{: tag-green} 1.29
+- Release date: None
+- End of support: None
+- Operating systems: `UBUNTU_20_64`
+- [Version information and update actions](/docs/containers?topic=containers-cs_versions_129)
+- [Change log](/docs/containers?topic=containers-changelog_129)
+
+[Default]{: tag-purple} 1.28
 - Release date: 20 September 2023
 - End of support: 4 December 2024†
 - Operating systems: `UBUNTU_20_64`
