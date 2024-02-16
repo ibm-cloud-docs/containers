@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-23"
+lastupdated: "2024-02-16"
 
 
 keywords: containers, kubernetes, kernel, performance
@@ -719,7 +719,7 @@ spec:
 
 
 
-### Updating the Calico ConfigMap
+### Updating the Calico ConfigMap in Kubernetes version 1.28 and earlier
 {: #calico-cm-mtu-update}
 
 After [applying the DaemonSet to increase the Calico plug-in MTU](#calico-mtu), complete the following steps to update the Calico ConfigMap.
@@ -825,6 +825,51 @@ After [applying the DaemonSet to increase the Calico plug-in MTU](#calico-mtu), 
 
 
 
+### Updating the Calico installation in Kubernetes version 1.29 and later
+{: #calico-mtu-43}
+
+After [applying the DaemonSet to increase the Calico plug-in MTU](#calico-mtu), complete the following steps to update the Calico installation.
+
+
+To run your {{site.data.keyword.redhat_openshift_notm}} cluster, make sure that the MTU is equal to or greater than 1450 bytes.
+{: important}
+
+1. Edit the `default` Calico installation resource.
+    ```sh
+    oc edit installation default -n calico-system
+    ```
+    {: pre}
+
+2. In the `spec.calicoNetwork` section, change the value of the `mtu` field.
+    ```yaml
+    ...
+    spec:
+      calicoNetwork:
+        ipPools:
+        - cidr: 172.30.0.0/16
+          encapsulation: IPIPCrossSubnet
+          natOutgoing: Enabled
+          nodeSelector: all()
+        mtu: 8980
+        nodeAddressAutodetectionV4:
+          interface: (^bond0$|^eth0$|^ens6$|^ens3$)
+      kubernetesProvider: OpenShift
+      registry: registry.ng.bluemix.net/armada-master/
+      variant: Calico
+    status:
+      variant: Calico
+    ```
+    {: screen}
+
+    To run your {{site.data.keyword.redhat_openshift_notm}} cluster, make sure that the MTU is equal to or greater than 1450 bytes.
+    {: important}
+
+3. Save and close the file.
+
+4. Apply the MTU changes to your worker nodes by [rebooting all worker nodes in your cluster](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot).
+
+
+
 ## Disabling the port map plug-in
 {: #calico-portmap}
 
@@ -837,6 +882,44 @@ If you must use `hostPorts`, don't disable the port map plug-in.
 {: note}
 
 
+### Disabling the port map plug-in in Kubernetes version 1.29 and later
+{: #calico-portmap-129}
+
+
+1. Edit the `default` Calico installation resource.
+    ```sh
+    kubectl edit installation default -n calico-system
+    ```
+    {: pre}
+
+1. In the `spec.calicoNetwork` section, change the value of `hostPorts` to `Disabled`.
+    ```yaml
+    ...
+    spec:
+      calicoNetwork:
+        hostPorts: Disabled
+        ipPools:
+        - cidr: 172.30.0.0/16
+          encapsulation: IPIPCrossSubnet
+          natOutgoing: Enabled
+          nodeSelector: all()
+        mtu: 1480
+        nodeAddressAutodetectionV4:
+          interface: (^bond0$|^eth0$|^ens6$|^ens3$)
+      kubernetesProvider: OpenShift
+      registry: registry.ng.bluemix.net/armada-master/
+      variant: Calico
+    status:
+      variant: Calico
+    ```
+    {: screen}
+
+1. Save and close the file. Your changes are automatically applied.
+
+
+
+### Disabling the port map plug-in in Kubernetes version 1.28 and earlier
+{: #calico-portmap-128}
 
 1. Edit the `calico-config` ConfigMap resource.
     ```sh

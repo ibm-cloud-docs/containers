@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-02-16"
 
 
 keywords: kubernetes, deploy, pod security admission, pod security, security profiles
@@ -82,6 +82,8 @@ By default, {{site.data.keyword.containerlong_notm}} adds the `privileged` Pod S
 - `kube-system` 
 - `ibm-system`
 - `ibm-operators`
+- `calico-system` (Version 1.29 and later)
+- `tigera-operator` (Version 1.29 and later)
 
 
 Do not remove or change the labels for these namespaces.

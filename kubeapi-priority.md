@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-02-16"
 
 
 keywords: kubernetes
@@ -34,10 +34,12 @@ For example, you might have a user or namespace that runs your critical apps in 
 | Flow schema | Resources that requests come from | Priority level |
 | ----------- | --------- | -------------- |
 | `apiserver-health` | Kubernetes API server health resources | [Custom priority level](#kube-api-prioritylevelconfig) for these resources. |
+| `calico-system-service-accounts` | Resources in the `calico-system` namespace that use a service account in the namespace | Same priority as `kube-system` namespace service accounts. This schema is available for {{site.data.keyword.containerlong}} version 1.29 and later.|
 | `ibm-admin` | Resources from IBM cluster administrators | Exempts requests by cluster administrators from priority restrictions |
 | `ibm-system-service-accounts` | Resources in the `ibm-system` namespace that use a service account in the namespace | Same priority as `kube-system` namespace service accounts |
 | `ibm-operators-service-accounts` | Resources in the `ibm-operators` namespace that use a service account in the namespace | Same priority as `kube-system` namespace service accounts |
 | `system-node-proxiers` | The `kube-proxy` | Same priority as the `kubelet` |
+| `tigera-operator-service-accounts` | Resources in the `tigera-operator` namespace that use a service account in the namespace | Same priority as `kube-system` namespace service accounts. This schema is available for {{site.data.keyword.containerlong}} version 1.29 and later.|
 {: caption="Default flow schema and priority levels" caption-side="bottom"}
 
 You can create your own flow schema and priorities, but don't modify the default settings. Unexpected results might occur in your cluster when you modify API request priorities.

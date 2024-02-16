@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-02-13"
+lastupdated: "2024-02-16"
 
 
 keywords: containers, kubernetes, release notes
@@ -31,6 +31,28 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-feb24}
 
 
+
+
+
+### 14 February 2024
+{: #containers-feb1424}
+{: release-note}
+
+New! {{site.data.keyword.containerlong_notm}} version 1.29.
+:   You can create or [update clusters to Kubernetes version 1.29](/docs/containers?topic=containers-cs_versions_129). With Kubernetes 1.29, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
+
+Master fix pack `1.29.1_1524` and worker node fix pack `1.29.1_1525`.
+:   For more information, see the [1.29 change log](/docs/containers?topic=containers-changelog_129).
+
+Starting with {{site.data.keyword.containerlong_notm}} version 1.29, Calico components run in the `calico-system` namespace and the Calico operator components run in the `tigera-operator` namespace.
+:   For more information, see [1.29 version information and update actions](/docs/containers?topic=containers-cs_versions_129).
+
+
+{{site.data.keyword.containerlong_notm}} version 1.26 is deprecated.
+:   Update your cluster to at least [version 1.27](/docs/containers?topic=containers-cs_versions_127) as soon as possible.
+
+
+
 ### 13 February 2024
 {: #containers-feb1324}
 {: release-note}
@@ -46,6 +68,7 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 
 Ingress ALB versions `1.9.4_6346_iks`, `1.8.4_6345_iks`, `1.6.4_6344_iks` are available for {{site.data.keyword.containerlong_notm}}.
 :   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
 
 
 
