@@ -15,11 +15,11 @@ subcollection: containers
 # Kubernetes version 1.26 change log
 {: #changelog_126}
 
-Kubernetes version 1.26 is deprecated. Update your cluster to at least [version 1.27](/docs/containers?topic=containers-cs_versions_127) as soon as possible.
-{: deprecated}
-
 View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.26. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}
+
+Kubernetes version 1.26 is deprecated. Update your cluster to at least [version 1.27](/docs/containers?topic=containers-cs_versions_127) as soon as possible.
+{: deprecated}
 
 ## Overview
 {: #changelog_overview_126}
