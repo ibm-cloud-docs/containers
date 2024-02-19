@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-18"
+lastupdated: "2024-02-19"
 
 
 keywords: kubernetes
@@ -12,7 +12,7 @@ subcollection: containers
 content-type: tutorial
 services: containers, vpc
 account-plan: paid
-completion-time: 30m
+completion-time: 60m
 
 ---
 
@@ -26,7 +26,7 @@ completion-time: 30m
 {: #vpc_ks_tutorial}
 {: toc-content-type="tutorial"}
 {: toc-services="containers, vpc"}
-{: toc-completion-time="30m"}
+{: toc-completion-time="60m"}
 
 Create an {{site.data.keyword.containerlong}} cluster in your Virtual Private Cloud (VPC).
 {: shortdesc}

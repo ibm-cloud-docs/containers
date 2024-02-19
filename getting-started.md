@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2024
-lastupdated: "2024-02-16"
+lastupdated: "2024-02-19"
 
 
 keywords: containers, kubernetes cluster,  vpc cluster, classic cluster, clusters
@@ -47,18 +47,17 @@ If you've already prepared your account and you're ready to create a cluster, co
 {: #getting-started-create}
 {: step}
 
-Follow a tutorial, or set up your own custom cluster environment.
+Follow a tutorial, or set up your own custom cluster environment. Review the following table for your deployment options.
 
 
+| Type and level | Time | Deployment method | Description |
+| --- | --- | --- | --- |
+| [Tutorial]{: tag-green} Beginner | 60 minutes | CLI | [Create a cluster in your own Virtual Private Cloud](/docs/containers?topic=containers-vpc_ks_tutorial). | 
+| [Custom deployment]{: tag-warm-gray} Intermediate | UI, CLI, or Terraform | 1-3 hours | [Create a custom cluster on Classic infrastructure](/docs/containers?topic=containers-cluster-create-classic). |
+| [Custom deployment]{: tag-warm-gray} Intermediate | UI, CLI, or Terraform | 1-3 hours | [Create a custom cluster on VPC infrastructure](/docs/containers?topic=containers-cluster-create-vpc-gen2). |
 
-- [Tutorial]{: tag-green} [Create a cluster in your own Virtual Private Cloud](/docs/containers?topic=containers-vpc_ks_tutorial).
 
-- [Create a custom cluster on Classic infrastructure](/docs/containers?topic=containers-cluster-create-classic).
-
-- [Create a custom cluster on VPC infrastructure](/docs/containers?topic=containers-cluster-create-vpc-gen2).
-
-
-Already have a cluster? Continue to the next step to deploy an app!
+Already have a cluster? Continue to the next step to deploy a sample app!
 
 
 
