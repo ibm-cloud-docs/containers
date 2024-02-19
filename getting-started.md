@@ -53,8 +53,8 @@ Follow a tutorial, or set up your own custom cluster environment. Review the fol
 | Type | Level | Time | Deployment method | Description |
 | --- | --- | --- | --- | --- |
 | [Tutorial]{: tag-green} | Beginner | 60 minutes | CLI | [Create a cluster in your own Virtual Private Cloud](/docs/containers?topic=containers-vpc_ks_tutorial). | 
-| [Custom deployment]{: tag-warm-gray} | Intermediate | UI, CLI, or Terraform | 1-3 hours | [Create a custom cluster on Classic infrastructure](/docs/containers?topic=containers-cluster-create-classic). |
-| [Custom deployment]{: tag-warm-gray} | Intermediate | UI, CLI, or Terraform | 1-3 hours | [Create a custom cluster on VPC infrastructure](/docs/containers?topic=containers-cluster-create-vpc-gen2). |
+| Custom deployment | Intermediate | UI, CLI, or Terraform | 1-3 hours | [Create a custom cluster on Classic infrastructure](/docs/containers?topic=containers-cluster-create-classic). |
+| Custom deployment | Intermediate | UI, CLI, or Terraform | 1-3 hours | [Create a custom cluster on VPC infrastructure](/docs/containers?topic=containers-cluster-create-vpc-gen2). |
 {: caption="Options for creating a cluster" caption-side="bottom"}
 
 Already have a cluster? Continue to the next step to deploy a sample app!
