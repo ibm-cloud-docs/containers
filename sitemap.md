@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-02-19"
+lastupdated: "2024-02-20"
 
 
 keywords: containers
@@ -237,6 +237,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb24)
+
+    * [19 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb1924)
+
+        * Ingress ALB versions `1.9.4_6359_iks` and `1.8.4_6363_iks` are available for {{site.data.keyword.containerlong_notm}}.
 
     * [16 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb1624)
 
@@ -6568,6 +6572,8 @@ subcollection: containers
 
 * [Version 1.9.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_9_4)
 
+    * [1.9.4_6359_iks, released 19 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6359_iks)
+
     * [1.9.4_6346_iks, released 13 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6346_iks)
 
     * [1.9.4_6292_iks, released 05 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6292_iks)
@@ -6583,6 +6589,8 @@ subcollection: containers
     * [1.9.4_5698_iks, released 07 November 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_5698_iks)
 
 * [Version 1.8.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_8_4)
+
+    * [1.8.4_6363_iks, released 19 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_6363_iks)
 
     * [1.8.4_6345_iks, released 13 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_6345_iks)
 
