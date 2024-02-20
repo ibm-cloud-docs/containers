@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-02-01"
+lastupdated: "2024-02-20"
 
 
 keywords: kubernetes, node scaling, ca, autoscaler
@@ -63,6 +63,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: tab-group="au-syd-tables"}
 
 
+
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
 | ---- | -------------------------------- | ---- | -- | --------------- | ----------------- |  -------------- |-- |
 | mx2.128x1024 | 128, 1024GB, 25Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 300gb.10iops-tier, 600gb.5iops-tier, 600gb.10iops-tier, 900gb.5iops-tier, 900gb.10iops-tier, 1200gb.5iops-tier, 1200gb.10iops-tier, 1600gb.5iops-tier, 1600gb.10iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
@@ -118,6 +119,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: tab-group="br-sao-tables"}
 
 
+
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
 | ---- | -------------------------------- | ---- | -- | --------------- | ----------------- |  -------------- |-- |
 | mx2.128x1024 | 128, 1024GB, 25Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 300gb.10iops-tier, 600gb.5iops-tier, 600gb.10iops-tier, 900gb.5iops-tier, 900gb.10iops-tier, 1200gb.5iops-tier, 1200gb.10iops-tier, 1600gb.5iops-tier, 1600gb.10iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
@@ -170,6 +172,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: #ca-tor-compute-table}
 {: tab-title="Compute"}
 {: tab-group="ca-tor-tables"}
+
 
 
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
@@ -227,6 +230,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: tab-group="eu-de-tables"}
 
 
+
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
 | ---- | -------------------------------- | ---- | -- | --------------- | ----------------- |  -------------- |-- |
 | mx2.128x1024 | 128, 1024GB, 25Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 300gb.10iops-tier, 600gb.5iops-tier, 600gb.10iops-tier, 900gb.5iops-tier, 900gb.10iops-tier, 1200gb.5iops-tier, 1200gb.10iops-tier, 1600gb.5iops-tier, 1600gb.10iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
@@ -282,6 +286,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: tab-group="eu-es-tables"}
 
 
+
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
 | ---- | -------------------------------- | ---- | -- | --------------- | ----------------- |  -------------- |-- |
 | mx2.128x1024 | 128, 1024GB, 25Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 300gb.10iops-tier, 600gb.5iops-tier, 600gb.10iops-tier, 900gb.5iops-tier, 900gb.10iops-tier, 1200gb.5iops-tier, 1200gb.10iops-tier, 1600gb.5iops-tier, 1600gb.10iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
@@ -334,6 +339,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: #eu-gb-compute-table}
 {: tab-title="Compute"}
 {: tab-group="eu-gb-tables"}
+
 
 
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
@@ -391,6 +397,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: tab-group="jp-osa-tables"}
 
 
+
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
 | ---- | -------------------------------- | ---- | -- | --------------- | ----------------- |  -------------- |-- |
 | mx2.128x1024 | 128, 1024GB, 25Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 300gb.10iops-tier, 600gb.5iops-tier, 600gb.10iops-tier, 900gb.5iops-tier, 900gb.10iops-tier, 1200gb.5iops-tier, 1200gb.10iops-tier, 1600gb.5iops-tier, 1600gb.10iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
@@ -443,6 +450,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: #jp-tok-compute-table}
 {: tab-title="Compute"}
 {: tab-group="jp-tok-tables"}
+
 
 
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
@@ -500,6 +508,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: tab-group="us-east-tables"}
 
 
+
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
 | ---- | -------------------------------- | ---- | -- | --------------- | ----------------- |  -------------- |-- |
 | mx2.128x1024 | 128, 1024GB, 25Gbps | Virtual | **UBUNTU_20_64 (default)**| 100GB BLOCK | N/A | 300gb.5iops-tier, 300gb.10iops-tier, 600gb.5iops-tier, 600gb.10iops-tier, 900gb.5iops-tier, 900gb.10iops-tier, 1200gb.5iops-tier, 1200gb.10iops-tier, 1600gb.5iops-tier, 1600gb.10iops-tier, 2400gb.10iops-tier, 3000gb.10iops-tier, 4000gb.10iops-tier | N/A|
@@ -553,6 +562,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: #us-south-compute-table}
 {: tab-title="Compute"}
 {: tab-group="us-south-tables"}
+
 
 
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
