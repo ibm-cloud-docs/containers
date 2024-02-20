@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-02-20"
 
 
 keywords: kubernetes
@@ -304,12 +304,9 @@ To deploy apps to specific worker nodes,
 If you have a [GPU machine type](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes), you can accelerate the processing time required for compute intensive workloads such as AI, machine learning, inferencing and more.
 {: shortdesc}
 
-{{site.data.keyword.vpc_short}} worker nodes with GPUs are available for allowlisted accounts only. To request that your account be allowlisted, see [Requesting access to allowlisted features](/docs/openshift?topic=openshift-get-help). Be sure to include the data centers, the VPC infrastructure profile, and the number of workers that you want use. For example `12 worker nodes in us-east-1 of VPC profile gx2-16x128xv100`.
-{: important}
 
 
-
-With the release of IBM Cloud Kubernetes Version 1.28, GPU drivers moved to the 500 series version for all GPU worker node flavors. To use the 500 series GPU drivers, ensure that a GPU worker node flavor is being used and the cluster master version is upgraded to at least version 1.28. Versions earlier than 1.28 will still continue to use the 400 series GPU drivers. Supported GPU worker node flavors in Classic are `mg4c.48x384.2xv100` and `mg4c.32x384.2xp100`.
+With the release of IBM Cloud Kubernetes Version 1.28, GPU drivers moved to the 500 series version for all GPU worker node flavors. To use the 500 series GPU drivers, ensure that a GPU worker node flavor is being used and the cluster master version is upgraded to at least version 1.28. Versions earlier than 1.28 will still continue to use the 400 series GPU drivers.
 {: note}
 
 
