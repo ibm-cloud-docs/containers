@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-02-16"
+lastupdated: "2024-02-21"
 
 
 keywords: containers, kubernetes, kernel, performance
@@ -831,8 +831,6 @@ After [applying the DaemonSet to increase the Calico plug-in MTU](#calico-mtu), 
 After [applying the DaemonSet to increase the Calico plug-in MTU](#calico-mtu), complete the following steps to update the Calico installation.
 
 
-To run your {{site.data.keyword.redhat_openshift_notm}} cluster, make sure that the MTU is equal to or greater than 1450 bytes.
-{: important}
 
 1. Edit the `default` Calico installation resource.
     ```sh
@@ -860,9 +858,6 @@ To run your {{site.data.keyword.redhat_openshift_notm}} cluster, make sure that 
       variant: Calico
     ```
     {: screen}
-
-    To run your {{site.data.keyword.redhat_openshift_notm}} cluster, make sure that the MTU is equal to or greater than 1450 bytes.
-    {: important}
 
 3. Save and close the file.
 

@@ -81,7 +81,7 @@ New! {{site.data.keyword.containerlong_notm}} version 1.29.
 Master fix pack `1.29.1_1524` and worker node fix pack `1.29.1_1525`.
 :   For more information, see the [1.29 change log](/docs/containers?topic=containers-changelog_129).
 
-Starting with {{site.data.keyword.containerlong_notm}} version 1.29, Calico components run in the `calico-system` namespace and the Calico operator components run in the `tigera-operator` namespace.
+Starting with {{site.data.keyword.containerlong_notm}} version 1.29, Calico components run in the `calico-system` namespace and the Tigera operator components run in the `tigera-operator` namespace.
 :   For more information, see [1.29 version information and update actions](/docs/containers?topic=containers-cs_versions_129).
 
 

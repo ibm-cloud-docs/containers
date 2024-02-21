@@ -258,7 +258,7 @@ subcollection: containers
 
         * Master fix pack `1.29.1_1524` and worker node fix pack `1.29.1_1525`.
 
-        * Starting with {{site.data.keyword.containerlong_notm}} version 1.29, Calico components run in the `calico-system` namespace and the Calico operator components run in the `tigera-operator` namespace.
+        * Starting with {{site.data.keyword.containerlong_notm}} version 1.29, Calico components run in the `calico-system` namespace and the Tigera operator components run in the `tigera-operator` namespace.
 
         * {{site.data.keyword.containerlong_notm}} version 1.26 is deprecated.
 
@@ -6106,7 +6106,7 @@ subcollection: containers
 
     * [Update after master](/docs/containers?topic=containers-cs_versions_129#after_129)
 
-    * [Understanding the Tigera resource migration](/docs/containers?topic=containers-cs_versions_129#129-tigera-migration)
+    * [Understanding the Tigera Operator namespace migration](/docs/containers?topic=containers-cs_versions_129#129-tigera-migration)
 
 [Kubernetes version 1.29 change log](/docs/containers?topic=containers-changelog_129#changelog_129)
 

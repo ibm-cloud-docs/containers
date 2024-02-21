@@ -49,7 +49,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 ## Preparing to update
 {: #prep-up-129}
 
-This information summarizes updates that are likely to have and impact on deployed apps when you update a cluster to version 1.29. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.29.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_129) for version 1.29. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
+This information summarizes updates that are likely to have an impact on deployed apps when you update a cluster to version 1.29. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.29.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_129) for version 1.29. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
 
 
@@ -70,7 +70,7 @@ The following table shows the actions that you must take before you update the K
 | **Unsupported:** `v1beta2` version of the `FlowSchema` and `PriorityLevelConfiguration` API | Migrate manifests and API clients to use the `flowcontrol.apiserver.k8s.io/v1beta3` API version, which is available since Kubernetes version 1.26. For more information, see [Deprecated API Migration Guide - v1.29](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-29). |
 | **Unsupported:** `CronJob` timezone specifications | When creating a `CronJob` resource, setting the `CRON_TZ` or `TZ` timezone specifications by using `.spec.schedule` is no longer allowed. Migrate your `CronJob` resources to use `.spec.timeZone` instead. See [Unsupported TimeZone specification](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#unsupported-timezone-specification) for details. |
 | Updated extra user claim prefix | In the [Kubernetes API server auditing records](/docs/containers?topic=containers-health-audit#audit-api-server), extra user claim information is prefixed with `cloud.ibm.com/authn_` instead of `authn_`. If your apps parsed this information, update them accordingly. |
-| Tigera operator namespace migration | Tigera operator component is added and manages the Calico installation. As a result, Calico resources run in the `calico-system` and `tigera-operator` namespaces instead of `kube-system`. These namespaces are configured to be privileged like the `kube-system` namespace. During an upgrade, the Tigera operator migrates Calico resources and customizations from the `kube-system` namespace to the `calico-system` namespace. Check that all of your worker nodes are in `Ready` state. If your cluster workers are not healthy, the Tigera Operator might have issues during the upgrade. Ensure that no policy controller, such as Gatekeeper, or admission webhook is enabled to prevent the creation of a new namespace for Calico components (`calico-system` and `tigera-system`). If you are unsure, upgrade on a test cluster first and run through a set of actions like a master refresh, reloading, or replacing all nodes before proceeding with other clusters. You can continue normal cluster operations during the migration because the migration might be in progress after the cluster master upgrade is completed. If your apps or operations tooling rely on Calico running in the `kube-system` namespace, update them accordingly.  For more information, see [Understanding the Tigera migration](#129-tigera-migration). |
+| Tigera operator namespace migration | Tigera operator component is added and manages the Calico installation. As a result, Calico resources run in the `calico-system` and `tigera-operator` namespaces instead of `kube-system`. These namespaces are configured to be privileged like the `kube-system` namespace. During an upgrade, the Tigera operator migrates Calico resources and customizations from the `kube-system` namespace to the `calico-system` namespace. You can continue normal cluster operations during the migration because the migration might be in progress after the cluster master upgrade is completed. If your apps or operations tooling rely on Calico running in the `kube-system` namespace, update them accordingly.  For more information, see [Understanding the Tigera migration](#129-tigera-migration). |
 | Calico custom resource short names | For new clusters, Calico custom resource short names `gnp` and `heps` are removed from the `globalnetworkpolicies.crd.projectcalico.org` and `hostendpoints.crd.projectcalico.org` custom resource definitions. Upgraded clusters retain the short names. Either way, if your `kubectl` commands rely on the short names, update them to use the standard names of `globalnetworkpolicies` and  `hostendpoints` instead. |
 | Legacy service account token cleanup | [Kubernetes legacy service account token cleaner](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#legacy-serviceaccount-token-cleaner) automatically labels, invalidates, and deletes unused legacy service account tokens. Tokens are labeled and invalidated when unused for one year, and then if unused for another year, deleted. You can use the `kubectl get secrets -A -l kubernetes.io/legacy-token-last-used -L kubernetes.io/legacy-token-last-used` command to determine when a legacy service account token was last used and the  `kubectl get secrets -A -l kubernetes.io/legacy-token-invalid-since -L kubernetes.io/legacy-token-invalid-since` command to determine if any legacy service account tokens are invalid and future candidates for deletion. Tokens labeled as invalid can be re-actived by removing the `kubernetes.io/legacy-token-invalid-since` label. For more information about these labels, see [`kubernetes.io/legacy-token-last-used`](https://kubernetes.io/docs/reference/labels-annotations-taints/#kubernetes-io-legacy-token-last-used) and [`kubernetes.io/legacy-token-invalid-since`](https://kubernetes.io/docs/reference/labels-annotations-taints/#kubernetes-io-legacy-token-invalid-since). |
 {: caption="Changes to make before you update the master to Kubernetes 1.29" caption-side="bottom"}
@@ -88,17 +88,20 @@ The following table shows the actions that you must take after you update the Ku
 {: caption="Changes to make after you update the master to Kubernetes 1.29" caption-side="bottom"}
 
 
-### Understanding the Tigera resource migration
+### Understanding the Tigera Operator namespace migration
 {: #129-tigera-migration}
 
 In version 1.29, Tigera Operator was introduced to manage Calico resources. All the Calico components are migrated from the `kube-system` to the `calico-system` namespace. During the master upgrade process, a new deployment appears called Tigera Operator, which manages the migration process and the lifecycle of Calico components, such as `calico-node`, `calico-typha`, and `calico-kube-controllers`.
 {: shortdesc}
 
-Check the status of the Calico components before beginning the upgrade. The operator can start its job only when all the Calico components are healthy, up, and running.
+Check the status of the Calico components before beginning the upgrade. The operator can start its job only when all the Calico components are healthy, up, and running. If the Calico components are healthy, the rollout status returned by the command for each component is `successfully rolled out`.
+```sh
+kubectl rollout status -n kube-system deploy/calico-typha deploy/calico-kube-controllers ds/calico-node
+```
+{: pre}
 
-After the master upgrade is finished, some resources might remain in the `kube-system` namespace. These resources are no longer used by Calico and the next patch upgrade removes them. 
 
-These Calico resources in `kube-system` namespace are no longer needed after the upgrade is complete:
+After the master upgrade is finished, some Calico resources might remain in the `kube-system` namespace. These resources are no longer used by Calico and are no longer needed after the migration is complete. The next master operation removes them. Do not remove them yourself.
 ```txt
 - "kind": "ConfigMap", "name": "calico-config"
 - "kind": "Secret", "name": "calico-bgp-password"
