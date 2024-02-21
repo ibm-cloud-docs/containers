@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-02-20"
+lastupdated: "2024-02-21"
 
 
 keywords: containers
@@ -237,6 +237,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb24)
+
+    * [21 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb2124)
+
+        * Kubernetes version 1.29 certification
+
+        * {{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch updates `1.0.9_377` and `1.2.0_365`.
 
     * [19 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb1924)
 
@@ -7250,6 +7256,8 @@ subcollection: containers
 
 * [Version 1.2.0](/docs/containers?topic=containers-ca_changelog#0120_ca_addon)
 
+    * [Change log for patch update 1.2.0_365, released 21 February 2024](/docs/containers?topic=containers-ca_changelog#120365_ca)
+
     * [Change log for patch update 1.2.0_322, released 16 January 2024](/docs/containers?topic=containers-ca_changelog#120322_ca)
 
     * [Change log for patch update 1.2.0_290, released 27 November 2023](/docs/containers?topic=containers-ca_changelog#120290_ca)
@@ -7283,6 +7291,8 @@ subcollection: containers
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
 
 * [Version 1.0.9](/docs/containers?topic=containers-ca_changelog#0109_ca_addon)
+
+    * [Change log for patch update 1.0.9_377, released 21 February 2024](/docs/containers?topic=containers-ca_changelog#109377_ca)
 
     * [Change log for patch update 1.0.9_328, released 16 January 2024](/docs/containers?topic=containers-ca_changelog#109328_ca)
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-02-20"
+lastupdated: "2024-02-21"
 
 
 keywords: containers, kubernetes, release notes
@@ -29,6 +29,22 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## February 2024
 {: #containers-feb24}
+
+### 21 February 2024
+{: #containers-feb2124}
+{: release-note}
+
+
+
+Kubernetes version 1.29 certification
+:   Version [1.29](/docs/containers?topic=containers-cs_versions_129) release is now certified.
+
+
+
+{{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch updates `1.0.9_377` and `1.2.0_365`.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+
+
 
 
 
