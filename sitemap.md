@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-02-20"
+lastupdated: "2024-02-21"
 
 
 keywords: containers
@@ -238,6 +238,12 @@ subcollection: containers
 
 * [February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb24)
 
+    * [21 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb2124)
+
+        * Kubernetes version 1.29 certification
+
+        * {{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch updates `1.0.9_377` and `1.2.0_365`.
+
     * [19 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb1924)
 
         * Ingress ALB versions `1.9.4_6359_iks` and `1.8.4_6363_iks` are available for {{site.data.keyword.containerlong_notm}}.
@@ -252,7 +258,7 @@ subcollection: containers
 
         * Master fix pack `1.29.1_1524` and worker node fix pack `1.29.1_1525`.
 
-        * Starting with {{site.data.keyword.containerlong_notm}} version 1.29, Calico components run in the `calico-system` namespace and the Calico operator components run in the `tigera-operator` namespace.
+        * Starting with {{site.data.keyword.containerlong_notm}} version 1.29, Calico components run in the `calico-system` namespace and the Tigera operator components run in the `tigera-operator` namespace.
 
         * {{site.data.keyword.containerlong_notm}} version 1.26 is deprecated.
 
@@ -6100,7 +6106,7 @@ subcollection: containers
 
     * [Update after master](/docs/containers?topic=containers-cs_versions_129#after_129)
 
-    * [Understanding the Tigera resource migration](/docs/containers?topic=containers-cs_versions_129#129-tigera-migration)
+    * [Understanding the Tigera Operator namespace migration](/docs/containers?topic=containers-cs_versions_129#129-tigera-migration)
 
 [Kubernetes version 1.29 change log](/docs/containers?topic=containers-changelog_129#changelog_129)
 
@@ -7250,6 +7256,8 @@ subcollection: containers
 
 * [Version 1.2.0](/docs/containers?topic=containers-ca_changelog#0120_ca_addon)
 
+    * [Change log for patch update 1.2.0_365, released 21 February 2024](/docs/containers?topic=containers-ca_changelog#120365_ca)
+
     * [Change log for patch update 1.2.0_322, released 16 January 2024](/docs/containers?topic=containers-ca_changelog#120322_ca)
 
     * [Change log for patch update 1.2.0_290, released 27 November 2023](/docs/containers?topic=containers-ca_changelog#120290_ca)
@@ -7283,6 +7291,8 @@ subcollection: containers
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
 
 * [Version 1.0.9](/docs/containers?topic=containers-ca_changelog#0109_ca_addon)
+
+    * [Change log for patch update 1.0.9_377, released 21 February 2024](/docs/containers?topic=containers-ca_changelog#109377_ca)
 
     * [Change log for patch update 1.0.9_328, released 16 January 2024](/docs/containers?topic=containers-ca_changelog#109328_ca)
 
