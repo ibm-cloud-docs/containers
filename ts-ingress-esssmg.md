@@ -1,11 +1,11 @@
 ---
 
 copyright: 
-  years: 2022, 2024
-lastupdated: "2024-01-03"
+  years: 2023, 2024
+lastupdated: "2024-02-23"
 
 
-keywords: kubernetes, help, network, connectivity, esssmg
+keywords: kubernetes, help, network, connectivity, containers, esssmg
 
 subcollection: containers
 
