@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-02-21"
+lastupdated: "2024-02-23"
 
 
 keywords: kubernetes, containers, change log, 129 change log, 129 updates
@@ -49,7 +49,7 @@ Review the version 1.29 change log.
 | --- | --- | --- | --- |
 | Calico | v3.26.4 | v3.27.0 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/#v3.27.0). |
 | Tigera Operator | N/A | v1.32.4-74-iks | **New:** See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.32.4). |
-| etcd | v3.5.11 | v3.5.12 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.12). |
+| etcd | v3.5.11 | v3.5.12 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.12). |
 | IBM Calico extension | 1525 | N/A | Component has been removed. |
 | IBM Cloud Block Storage driver and plug-in | v2.4.14 | v2.5.4 | New version contains updates and security fixes. |
 | IBM Cloud Controller Manager | v1.28.6-3 | v1.29.1-7 | New version contains updates and security fixes. |
