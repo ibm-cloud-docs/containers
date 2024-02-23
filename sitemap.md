@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-02-22"
+lastupdated: "2024-02-23"
 
 
 keywords: containers
@@ -6538,8 +6538,6 @@ subcollection: containers
 
 * [`alb-oauth-proxy` 2.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#alb-oauth-proxy-2.0.0)
 
-* [`cluster-autoscaler` 1.0.8](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.0.8)
-
 * [`cluster-autoscaler` 1.0.9](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.0.9)
 
 * [`cluster-autoscaler` 1.1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.1.0)
@@ -6553,8 +6551,6 @@ subcollection: containers
 * [`debug-tool` 2.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#debug-tool-2.0.0)
 
 * [`image-key-synchronizer` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#image-key-synchronizer-1.0.0)
-
-* [`istio` 1.18](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.18)
 
 * [`istio` 1.19](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.19)
 
