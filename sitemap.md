@@ -2978,6 +2978,20 @@ subcollection: containers
 
 * [Multizone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-multizone)
 
+[Documenting your environment architecture](/docs/containers?topic=containers-document-environment#document-environment)
+
+* [Step 1: Understanding your app and architecture](/docs/containers?topic=containers-document-environment#understand-arch)
+
+    * [Example 1: A basic app running in a single OpenShift cluster](/docs/containers?topic=containers-document-environment#example-arch-1)
+
+    * [Example 2: A multi-cluster architecture with a global load balancer and Cloudant service](/docs/containers?topic=containers-document-environment#example-arch-2)
+
+    * [Example 3: A VSI client contacting a VPC network load balancer with an external service backend](/docs/containers?topic=containers-document-environment#example-arch-3)
+
+* [Step 2: Choose a tool](/docs/containers?topic=containers-document-environment#choose-arch-tool)
+
+* [Step 3: Create the diagram](/docs/containers?topic=containers-document-environment#create-arch-diagram)
+
 
 ## Creating clusters
 {: #sitemap_creating_clusters}
@@ -9586,6 +9600,19 @@ subcollection: containers
 * [Washington DC (`wdc`)](/docs/containers?topic=containers-classic-flavors#washington-dc-wdc)
 
 
+## Viewing cloud status
+{: #sitemap_viewing_cloud_status}
+
+
+[Viewing cloud status](/docs/containers?topic=containers-viewing-cloud-status#viewing-cloud-status)
+
+* [Viewing the status of a dedicated multizone region (MZR)](/docs/containers?topic=containers-viewing-cloud-status#view-private-mzr)
+
+* [Subscribing to an RSS feed](/docs/containers?topic=containers-viewing-cloud-status#subscribing-rss-feed)
+
+* [Checking incident reports](/docs/containers?topic=containers-viewing-cloud-status#status-incident-report)
+
+
 ## FAQs
 {: #sitemap_faqs}
 
@@ -9651,33 +9678,18 @@ subcollection: containers
 * [What operations are blocked if my cluster is running an unsupported operating system?](/docs/containers?topic=containers-faqs#unsupported_os)
 
 
-## Troubleshooting
-{: #sitemap_troubleshooting}
+## Running tests with the Diagnostics and Debug Tool
+{: #sitemap_running_tests_with_the_diagnostics_and_debug_tool}
 
-
-[Getting help and support for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-get-help#get-help)
-
-* [General ways to resolve cluster issues](/docs/containers?topic=containers-get-help#help-general)
-
-* [Reviewing issues and status](/docs/containers?topic=containers-get-help#help-cloud-status)
-
-* [Feedback and questions](/docs/containers?topic=containers-get-help#feedback-qs)
-
-* [Contacting support](/docs/containers?topic=containers-get-help#help-support)
-
-* [Requesting access to allowlisted features](/docs/containers?topic=containers-get-help#allowlist-access-request)
-
-[Viewing cloud status](/docs/containers?topic=containers-viewing-cloud-status#viewing-cloud-status)
-
-* [Viewing the status of a dedicated multizone region (MZR)](/docs/containers?topic=containers-viewing-cloud-status#view-private-mzr)
-
-* [Subscribing to an RSS feed](/docs/containers?topic=containers-viewing-cloud-status#subscribing-rss-feed)
-
-* [Checking incident reports](/docs/containers?topic=containers-viewing-cloud-status#status-incident-report)
 
 [Running tests with the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool#debug-tool)
 
 * [Enabling the Diagnostics and Debug Tool add-on](/docs/containers?topic=containers-debug-tool#debug-tool-enable)
+
+
+## Troubleshooting
+{: #sitemap_troubleshooting}
+
 
 
 ### Clusters and masters
@@ -9938,6 +9950,43 @@ subcollection: containers
     * [Cleaning up after debugging](/docs/containers?topic=containers-cs_ssh_worker#ssh-debug-cleanup)
 
 
+### Apps and services
+{: #sitemap_apps_and_services}
+
+
+[Debugging app deployments](/docs/containers?topic=containers-debug_apps#debug_apps)
+
+[Why do images fail to pull from registry with `ImagePullBackOff` or authorization errors?](/docs/containers?topic=containers-ts-app-image-pull#ts-app-image-pull)
+
+* [Troubleshooting image pull secrets that use API keys](/docs/containers?topic=containers-ts-app-image-pull#img-pull-api-key)
+
+[Why don't my containers start?](/docs/containers?topic=containers-ts-app-container-start#ts-app-container-start)
+
+* [Fixing registry quota issues](/docs/containers?topic=containers-ts-app-container-start#regitry-quota)
+
+* [Fixing IP address issues](/docs/containers?topic=containers-ts-app-container-start#calico-ips)
+
+    * [Step 1: Releasing individual IP addresses](/docs/containers?topic=containers-ts-app-container-start#individual-ips)
+
+    * [Step 2: Releasing IP address blocks](/docs/containers?topic=containers-ts-app-container-start#releasing-individual-ips)
+
+[Why do my pods fail to deploy after applying a pod security policy?](/docs/containers?topic=containers-ts-app-psp#ts-app-psp)
+
+[Why do pods remain in pending state?](/docs/containers?topic=containers-ts-app-pod-pending#ts-app-pod-pending)
+
+[Why do pods repeatedly fail to restart or are unexpectedly removed?](/docs/containers?topic=containers-ts-app-pod-fail#ts-app-pod-fail)
+
+* [Fixing container resource limits](/docs/containers?topic=containers-ts-app-pod-fail#pod-fail-resource-limits)
+
+* [Fixing pod replacement by higher priority pods](/docs/containers?topic=containers-ts-app-pod-fail#pod-fail-higher-priority)
+
+[Why does binding a service to a cluster result in a same name error?](/docs/containers?topic=containers-ts-app-svc-bind-name#ts-app-svc-bind-name)
+
+[Why does binding a service to a cluster results in service does not support service keys error?](/docs/containers?topic=containers-ts-app-svc-key#ts-app-svc-key)
+
+[Why can't I install a Helm chart with updated configuration values?](/docs/containers?topic=containers-ts-app-helm-install#ts-app-helm-install)
+
+
 ### Cluster autoscaler
 {: #sitemap_cluster_autoscaler}
 
@@ -10019,43 +10068,6 @@ subcollection: containers
 [Why doesn't the Kubernetes dashboard display utilization graphs?](/docs/containers?topic=containers-cs_dashboard_graphs#cs_dashboard_graphs)
 
 [Why are my log lines so long?](/docs/containers?topic=containers-long_lines#long_lines)
-
-
-### Apps and services
-{: #sitemap_apps_and_services}
-
-
-[Debugging app deployments](/docs/containers?topic=containers-debug_apps#debug_apps)
-
-[Why do images fail to pull from registry with `ImagePullBackOff` or authorization errors?](/docs/containers?topic=containers-ts-app-image-pull#ts-app-image-pull)
-
-* [Troubleshooting image pull secrets that use API keys](/docs/containers?topic=containers-ts-app-image-pull#img-pull-api-key)
-
-[Why don't my containers start?](/docs/containers?topic=containers-ts-app-container-start#ts-app-container-start)
-
-* [Fixing registry quota issues](/docs/containers?topic=containers-ts-app-container-start#regitry-quota)
-
-* [Fixing IP address issues](/docs/containers?topic=containers-ts-app-container-start#calico-ips)
-
-    * [Step 1: Releasing individual IP addresses](/docs/containers?topic=containers-ts-app-container-start#individual-ips)
-
-    * [Step 2: Releasing IP address blocks](/docs/containers?topic=containers-ts-app-container-start#releasing-individual-ips)
-
-[Why do my pods fail to deploy after applying a pod security policy?](/docs/containers?topic=containers-ts-app-psp#ts-app-psp)
-
-[Why do pods remain in pending state?](/docs/containers?topic=containers-ts-app-pod-pending#ts-app-pod-pending)
-
-[Why do pods repeatedly fail to restart or are unexpectedly removed?](/docs/containers?topic=containers-ts-app-pod-fail#ts-app-pod-fail)
-
-* [Fixing container resource limits](/docs/containers?topic=containers-ts-app-pod-fail#pod-fail-resource-limits)
-
-* [Fixing pod replacement by higher priority pods](/docs/containers?topic=containers-ts-app-pod-fail#pod-fail-higher-priority)
-
-[Why does binding a service to a cluster result in a same name error?](/docs/containers?topic=containers-ts-app-svc-bind-name#ts-app-svc-bind-name)
-
-[Why does binding a service to a cluster results in service does not support service keys error?](/docs/containers?topic=containers-ts-app-svc-key#ts-app-svc-key)
-
-[Why can't I install a Helm chart with updated configuration values?](/docs/containers?topic=containers-ts-app-helm-install#ts-app-helm-install)
 
 
 ### Managed add-ons
@@ -10381,6 +10393,27 @@ subcollection: containers
 [Why does encryption fail with an invalid KMS endpoint?](/docs/containers?topic=containers-px-kms-endpoint#px-kms-endpoint)
 
 
+## Getting help and support
+{: #sitemap_getting_help_and_support}
+
+
+[Getting help and support](/docs/containers?topic=containers-get-help#get-help)
+
+* [Best practices](/docs/containers?topic=containers-get-help#help-general)
+
+* [Step 1: Review the status of {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-get-help#help-cloud-status)
+
+* [Step 2: Gather details and document the problem](/docs/containers?topic=containers-get-help#ts-app-debug-gather)
+
+* [Step 3: Running tests to rule in or rule out each component](/docs/containers?topic=containers-get-help#ts-app-debug-narrow-1)
+
+* [Step 4: Gathering more data](/docs/containers?topic=containers-get-help#ts-app-debug-gather-again)
+
+* [Step 4: Reach out in Slack or review user forums for similar issues](/docs/containers?topic=containers-get-help#feedback-qs)
+
+* [Contacting support](/docs/containers?topic=containers-get-help#help-support)
+
+
 ## Service limitations
 {: #sitemap_service_limitations}
 
@@ -10404,4 +10437,11 @@ subcollection: containers
     * [Networking](/docs/containers?topic=containers-limitations#vpc_gen2_networking_limit)
 
     * [Storage](/docs/containers?topic=containers-limitations#vpc_gen2_storage_limit)
+
+
+## Requesting access to allowlisted features
+{: #sitemap_requesting_access_to_allowlisted_features}
+
+
+[Requesting access to allowlisted features](/docs/containers?topic=containers-allowlist-request#allowlist-request)
 

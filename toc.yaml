@@ -61,6 +61,7 @@ toc:
           - cluster-plan-network-classic.md
           - encryption.md
           - storage-plan.md
+          - document-environment.md
       - topicgroup:
           label: Creating clusters
           topics:
@@ -411,13 +412,12 @@ toc:
   - navgroup: 
       id: help
       topics:
+      - include: ../get-support/ViewStatus.md
       - faqs.md
+      - ts-debug-tool.md
       - topicgroup:
           label: Troubleshooting
           topics:
-          - get-help.md
-          - include: ../get-support/ViewStatus.md
-          - ts-debug-tool.md
           - topicgroup:
               label: Clusters and masters
               topics:
@@ -463,6 +463,19 @@ toc:
               - ts-worker-pod-timeout.md
               - ts-worker-ssh-fail.md
           - topicgroup:
+              label: Apps and services
+              topics:
+              - ts-app-debug.md
+              - ts-app-01-debug.md
+              - ts-app-02-imgpull.md
+              - ts-app-container-start.md
+              - ts-app-04-psp.md
+              - ts-app-pod-pending.md
+              - ts-app-pod-fail.md
+              - ts-app-07-svc-name.md
+              - ts-app-svc-key.md
+              - ts-app-helm-install.md
+          - topicgroup:
               label: Cluster autoscaler
               topics:
               - ts-ca-debug.md
@@ -491,18 +504,6 @@ toc:
               topics:
               - ts-health-iks-kube-db-graphs.md
               - ts-health-loglines.md
-          - topicgroup:
-              label: Apps and services
-              topics:
-              - ts-app-01-debug.md
-              - ts-app-02-imgpull.md
-              - ts-app-container-start.md
-              - ts-app-04-psp.md
-              - ts-app-pod-pending.md
-              - ts-app-pod-fail.md
-              - ts-app-07-svc-name.md
-              - ts-app-svc-key.md
-              - ts-app-helm-install.md
           - topicgroup:
               label: Managed add-ons
               topics:
@@ -617,5 +618,7 @@ toc:
               - ts-storage-debug-portworx.md
               - ts-storage-px-debug.md
               - ts-storage-px-encryption-fails.md
+      - get-help.md
       - limitations.md
+      - allowlist-request.md
       - sitemap.md
