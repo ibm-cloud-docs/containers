@@ -321,7 +321,7 @@ toc:
       - topicgroup:
           label: Add-on version history
           topics:
-          - add-on-versions.md 
+          - add-on-versions.md
           - cs_versions_addons.md
           - versions-istio.md
           - versions-autoscaler.md
@@ -331,7 +331,7 @@ toc:
           - versions-static-route.md
           - versions-backup-restore.md
           - cs_versions_alb_oauth_proxy.md
-      - ibm-k8s-controller-config-change-log.md             
+      - ibm-k8s-controller-config-change-log.md
       - topicgroup:
           label: Archived version history
           topics:
