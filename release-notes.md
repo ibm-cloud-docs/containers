@@ -35,7 +35,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: release-note}
 
 New! NVIDIA L4 GPU support. You can now create VPC clusters with worker nodes which have NVIDIA L4 GPUs.
-:   GPU support is available in {{site.data.keyword.containerlong_notm}} clusters at version 1.28 or later with gx3 worker nodes. When you provision a new version 1.28 or later cluster, or add a worker pool to an existing 1.28 or later cluster, the GPU drivers are automatically installed and you can get started right away by [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app).
+:   L4 GPU support is available in {{site.data.keyword.containerlong_notm}} clusters at version 1.28 or later with `gx3` worker nodes.
+:   When you provision a version 1.28 or later VPC cluster with `gx3` worker nodes, or add a `gx3` worker pool to an existing 1.28 or later VPC cluster, the GPU drivers are automatically installed and you can get started right away. For more information, see [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app).
 
 New worker node flavors are available with L4 GPUs.
 :   The following worker node flavors with L4 GPUs are now available. For more information, see [VPC flavors](/docs/containers?topic=containers-vpc-flavors).

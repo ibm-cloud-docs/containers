@@ -311,9 +311,10 @@ In {{site.data.keyword.containerlong_notm}}, the required GPU drivers are automa
 
 
 
-In the following steps, you learn how to deploy workloads that require the GPU. You can also deploy apps that don't need to process their workloads across both the GPU and CPU. 
+In the following steps, you learn how to deploy workloads that require the GPU. However, you can also deploy apps that don't need to process their workloads across both the GPU and CPU. 
 
-In the following steps, you learn how to deploy workloads that require the GPU. You can also deploy apps that don't need to process their workloads across both the GPU and CPU. After, you might find it useful to play around with mathematically intensive workloads such as the [TensorFlow](https://www.tensorflow.org/){: external} machine learning framework with [this Kubernetes demo](https://github.com/pachyderm/pachyderm/tree/master/examples/ml/tensorflow){: external}.
+You can also try mathematically intensive workloads such as the [TensorFlow](https://www.tensorflow.org/){: external} machine learning framework with [this Kubernetes demo](https://github.com/pachyderm/pachyderm/tree/master/examples/ml/tensorflow){: external}.
+{: tip}
 
 Before you begin
 - Create a [cluster](/docs/containers?topic=containers-clusters) or worker pool that uses a GPU flavor. Keep in mind that setting up a bare metal machine can take more than one business day to complete. For a list of available flavors, see the following links.
@@ -324,7 +325,7 @@ Before you begin
 
 To run a workload on a GPU machine,
 
-1. Create a YAML file. In this example, a `Job` YAML manages batch-like workloads by making a short-lived pod that runs until the command that it is scheduled to complete successfully terminates.
+1. Create a YAML file. In this example, a `Job` YAML manages batch-like workloads by making a short-lived pod that runs until the command completes and successfully terminates.
 
     For GPU workloads, you must specify the `resources: limits: nvidia.com/gpu` field in the job YAML.
     {: note}
