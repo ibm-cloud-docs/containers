@@ -242,6 +242,8 @@ subcollection: containers
 
         * New! NVIDIA L4 GPU support. You can now create VPC clusters with worker nodes which have NVIDIA L4 GPUs.
 
+        * Ingress ALB patch updates `1.9.4_6376_iks`, `1.8.4_6375_iks`, and `1.6.4_6374_iks` for {{site.data.keyword.containerlong_notm}}.
+
         * New worker node flavors are available with L4 GPUs.
 
     * [22 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb2224)
@@ -6598,6 +6600,8 @@ subcollection: containers
 
 * [Version 1.9.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_9_4)
 
+    * [1.9.4_6376_iks, released 26 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6376_iks)
+
     * [1.9.4_6359_iks, released 19 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6359_iks)
 
     * [1.9.4_6346_iks, released 13 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6346_iks)
@@ -6615,6 +6619,8 @@ subcollection: containers
     * [1.9.4_5698_iks, released 07 November 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_5698_iks)
 
 * [Version 1.8.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_8_4)
+
+    * [1.8.4_6375_iks, released 26 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_6375_iks)
 
     * [1.8.4_6363_iks, released 19 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_6363_iks)
 
@@ -6645,6 +6651,8 @@ subcollection: containers
     * [1.8.1_5317_iks, released 31 August 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.1_5317_iks)
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
+
+    * [1.6.4_6374_iks, released 26 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_6374_iks)
 
     * [1.6.4_6344_iks, released 13 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_6344_iks)
 
