@@ -34,8 +34,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-feb2724}
 {: release-note}
 
+
+
+
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+:    Review the following change logs for your cluster version.
+    - [1.29.2_1529](/docs/containers?topic=containers-changelog_129)
+    - [1.28.7_1547](/docs/containers?topic=containers-changelog_128)
+    - [1.27.11_1567](/docs/containers?topic=containers-changelog_127)
+    - [1.26.14_1576](/docs/containers?topic=containers-changelog_126)
+
+
+
+
+
 CLI version `1.0.597` is available.
 :   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
 
 ### 26 February 2024
 {: #containers-feb2624}

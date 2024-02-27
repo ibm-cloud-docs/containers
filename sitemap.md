@@ -240,6 +240,8 @@ subcollection: containers
 
     * [27 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb2724)
 
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+
         * CLI version `1.0.597` is available.
 
     * [26 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb2624)
