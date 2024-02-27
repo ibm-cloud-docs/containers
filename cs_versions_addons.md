@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-02-20"
+lastupdated: "2024-02-27"
 
 
 keywords: kubernetes, nginx, ingress controller, fluentd
@@ -58,6 +58,11 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 
 1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image.
 
+### 1.9.4_6376_iks, released 26 February 2024
+{: #1.9.4_6376_iks}
+
+- Updates `golang` version to `1.22.0`.
+
 ### 1.9.4_6359_iks, released 19 February 2024
 {: #1.9.4_6359_iks}
 
@@ -108,6 +113,11 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 
 ## Version 1.8.4
 {: #1_8_4}
+
+### 1.8.4_6375_iks, released 26 February 2024
+{: #1.8.4_6375_iks}
+
+- Updates `golang` version to `1.22.0`.
 
 ### 1.8.4_6363_iks, released 19 February 2024
 {: #1.8.4_6363_iks}
@@ -200,6 +210,11 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 
 ## Version 1.6.4
 {: #1_6_4}
+
+### 1.6.4_6374_iks, released 26 February 2024
+{: #1.6.4_6374_iks}
+
+- Updates `golang` version to `1.22.0`.
 
 ### 1.6.4_6344_iks, released 13 February 2024
 {: #1.6.4_6344_iks}

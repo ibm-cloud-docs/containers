@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-02-26"
+lastupdated: "2024-02-27"
 
 
 keywords: containers, kubernetes, release notes
@@ -30,6 +30,29 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## February 2024
 {: #containers-feb24}
 
+### 27 February 2024
+{: #containers-feb2724}
+{: release-note}
+
+
+
+
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
+:    Review the following change logs for your cluster version.
+    - [1.29.2_1529](/docs/containers?topic=containers-changelog_129)
+    - [1.28.7_1547](/docs/containers?topic=containers-changelog_128)
+    - [1.27.11_1567](/docs/containers?topic=containers-changelog_127)
+    - [1.26.14_1576](/docs/containers?topic=containers-changelog_126)
+
+
+
+
+
+CLI version `1.0.597` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
 ### 26 February 2024
 {: #containers-feb2624}
 {: release-note}
@@ -38,11 +61,19 @@ New! NVIDIA L4 GPU support. You can now create VPC clusters with worker nodes wh
 :   L4 GPU support is available in {{site.data.keyword.containerlong_notm}} clusters at version 1.28 or later with `gx3` worker nodes.
 :   When you provision a version 1.28 or later VPC cluster with `gx3` worker nodes, or add a `gx3` worker pool to an existing 1.28 or later VPC cluster, the GPU drivers are automatically installed and you can get started right away. For more information, see [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app).
 
+
+
+Ingress ALB patch updates `1.9.4_6376_iks`, `1.8.4_6375_iks`, and `1.6.4_6374_iks` for {{site.data.keyword.containerlong_notm}}.
+:   For more information, see the [change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+
+
+
 New worker node flavors are available with L4 GPUs.
 :   The following worker node flavors with L4 GPUs are now available. For more information, see [VPC flavors](/docs/containers?topic=containers-vpc-flavors).
     - `gx3.16x80x1L4`: 1 GPU, 16 cores, 80 GB memory, 100GB storage, 32 Gbps network speed.
     - `gx3.32x160x2L4`: 2 GPU, 32 cores, 160 GB, memory, 100GB storage, 32 Gbps network speed
     - `gx3.64x320x4L4`: 4 GPU, 64 cores, 320 GB memory, 100GB storage, 32 Gbps network speed
+
 
 
 

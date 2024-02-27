@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-02-26"
+lastupdated: "2024-02-27"
 
 
 keywords: containers
@@ -238,9 +238,17 @@ subcollection: containers
 
 * [February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb24)
 
+    * [27 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb2724)
+
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+
+        * CLI version `1.0.597` is available.
+
     * [26 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb2624)
 
         * New! NVIDIA L4 GPU support. You can now create VPC clusters with worker nodes which have NVIDIA L4 GPUs.
+
+        * Ingress ALB patch updates `1.9.4_6376_iks`, `1.8.4_6375_iks`, and `1.6.4_6374_iks` for {{site.data.keyword.containerlong_notm}}.
 
         * New worker node flavors are available with L4 GPUs.
 
@@ -5902,6 +5910,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version v1.0.597](/docs/containers?topic=containers-cs_cli_changelog#cli-01597)
+
 * [Version v1.0.595](/docs/containers?topic=containers-cs_cli_changelog#cli-01959)
 
 * [Version v1.0.589](/docs/containers?topic=containers-cs_cli_changelog#cli-01589)
@@ -6138,6 +6148,8 @@ subcollection: containers
 
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
 
+    * [Change log for worker node fix pack 1.29.2_1529, released 26 February 2024](/docs/containers?topic=containers-changelog_129#1292_1529_W)
+
     * [Change log for master fix pack 1.29.1_1524 and worker node fix pack 1.29.1_1525, released 14 February 2024](/docs/containers?topic=containers-changelog_129#1291_1524M_and_1291_1525W)
 
 [Kubernetes version 1.29 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-129)
@@ -6212,6 +6224,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
+
+    * [Change log for worker node fix pack 1.28.7_1547, released 26 February 2024](/docs/containers?topic=containers-changelog_128#1287_1547_W)
 
     * [Change log for worker node fix pack 1.28.6_1544, released 12 February 2024](/docs/containers?topic=containers-changelog_128#1286_1544_W)
 
@@ -6305,6 +6319,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for worker node fix pack 1.27.11_1567, released 26 February 2024](/docs/containers?topic=containers-changelog_127#12711_1567_W)
 
     * [Change log for worker node fix pack 1.27.10_1563, released 12 February 2024](/docs/containers?topic=containers-changelog_127#12710_1563_W)
 
@@ -6424,6 +6440,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for worker node fix pack 1.26.14_1576, released 26 February 2024](/docs/containers?topic=containers-changelog_126#12614_1576_W)
 
     * [Change log for worker node fix pack 1.26.13_1571, released 12 February 2024](/docs/containers?topic=containers-changelog_126#12613_1571_W)
 
@@ -6598,6 +6616,8 @@ subcollection: containers
 
 * [Version 1.9.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_9_4)
 
+    * [1.9.4_6376_iks, released 26 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6376_iks)
+
     * [1.9.4_6359_iks, released 19 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6359_iks)
 
     * [1.9.4_6346_iks, released 13 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_6346_iks)
@@ -6615,6 +6635,8 @@ subcollection: containers
     * [1.9.4_5698_iks, released 07 November 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.9.4_5698_iks)
 
 * [Version 1.8.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_8_4)
+
+    * [1.8.4_6375_iks, released 26 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_6375_iks)
 
     * [1.8.4_6363_iks, released 19 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.4_6363_iks)
 
@@ -6645,6 +6667,8 @@ subcollection: containers
     * [1.8.1_5317_iks, released 31 August 2023](/docs/containers?topic=containers-cluster-add-ons-changelog#1.8.1_5317_iks)
 
 * [Version 1.6.4](/docs/containers?topic=containers-cluster-add-ons-changelog#1_6_4)
+
+    * [1.6.4_6374_iks, released 26 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_6374_iks)
 
     * [1.6.4_6344_iks, released 13 February 2024](/docs/containers?topic=containers-cluster-add-ons-changelog#1.6.4_6344_iks)
 
