@@ -6140,6 +6140,8 @@ subcollection: containers
 
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
 
+    * [Change log for worker node fix pack 1.29.2_1529, released 26 February 2024](/docs/containers?topic=containers-changelog_129#1292_1529_W)
+
     * [Change log for master fix pack 1.29.1_1524 and worker node fix pack 1.29.1_1525, released 14 February 2024](/docs/containers?topic=containers-changelog_129#1291_1524M_and_1291_1525W)
 
 [Kubernetes version 1.29 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-129)
@@ -6214,6 +6216,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
+
+    * [Change log for worker node fix pack 1.28.7_1547, released 26 February 2024](/docs/containers?topic=containers-changelog_128#1287_1547_W)
 
     * [Change log for worker node fix pack 1.28.6_1544, released 12 February 2024](/docs/containers?topic=containers-changelog_128#1286_1544_W)
 
@@ -6307,6 +6311,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for worker node fix pack 1.27.11_1567, released 26 February 2024](/docs/containers?topic=containers-changelog_127#12711_1567_W)
 
     * [Change log for worker node fix pack 1.27.10_1563, released 12 February 2024](/docs/containers?topic=containers-changelog_127#12710_1563_W)
 
@@ -6426,6 +6432,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for worker node fix pack 1.26.14_1576, released 26 February 2024](/docs/containers?topic=containers-changelog_126#12614_1576_W)
 
     * [Change log for worker node fix pack 1.26.13_1571, released 12 February 2024](/docs/containers?topic=containers-changelog_126#12613_1571_W)
 
