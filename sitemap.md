@@ -238,6 +238,10 @@ subcollection: containers
 
 * [February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb24)
 
+    * [27 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb2724)
+
+        * CLI version `1.0.597` is available.
+
     * [26 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb2624)
 
         * New! NVIDIA L4 GPU support. You can now create VPC clusters with worker nodes which have NVIDIA L4 GPUs.
@@ -5903,6 +5907,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.597](/docs/containers?topic=containers-cs_cli_changelog#cli-01597)
 
 * [Version v1.0.595](/docs/containers?topic=containers-cs_cli_changelog#cli-01959)
 
