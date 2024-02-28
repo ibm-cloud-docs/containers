@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-02-07"
+lastupdated: "2024-02-28"
 
 
 keywords: kubernetes
@@ -7857,7 +7857,7 @@ Minimum required permissions
 
 
 #### Example `infra-permissions get` command
-{: #infra-permissions get-example}
+{: #infra-permissions-get-example}
 
 ```sh
 ibmcloud ks infra-permissions get --region us-south
