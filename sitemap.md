@@ -6594,6 +6594,8 @@ subcollection: containers
 
 * [`cluster-autoscaler` 1.2.0](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.0)
 
+* [`cluster-autoscaler` 1.2.1](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.1)
+
 * [`csutil` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#csutil-1.0.0)
 
 * [`csutil-experimental` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#csutil-experimental-1.0.0)
