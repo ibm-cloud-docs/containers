@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-02-27"
+lastupdated: "2024-02-29"
 
 
 keywords: containers, kubernetes, release notes
@@ -29,6 +29,25 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## February 2024
 {: #containers-feb24}
+
+### 28 February 2024
+{: #containers-feb2824}
+{: release-note}
+
+
+
+Master patch updates for {{site.data.keyword.containerlong_notm}} clusters. Master patches are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Review the change logs for your cluster version.
+:   [1.29](/docs/containers?topic=containers-changelog_128)
+:   [1.28](/docs/containers?topic=containers-changelog_128)
+:   [1.27](/docs/containers?topic=containers-changelog_127)
+:   [1.26](/docs/containers?topic=containers-changelog_126)
+
+
+
+
+
+
+
 
 ### 27 February 2024
 {: #containers-feb2724}
