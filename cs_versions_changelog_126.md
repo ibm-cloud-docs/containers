@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-02-27"
+lastupdated: "2024-02-29"
 
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
@@ -43,6 +43,29 @@ Review the version 1.26 change log.
 
 
 
+
+
+### Change log for master fix pack 1.26.14_1575, released 28 February 2024
+{: #12614_1575_M}
+
+The following table shows the changes that are in the master fix pack 1.26.14_1575. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.4.6 | v1.4.7 | New version contains updates and security fixes. |
+| etcd | v3.5.11 | v3.5.12 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.12){: external}. |
+| GPU device plug-in and installer | 6273cd0 | d992fea | New version contains updates and security fixes. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1525 | 1534 | New version contains security fixes. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.14 | v2.4.18 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.26.13-3 | v1.26.13-8 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 439 | 441 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 7185ea1 | bd30030 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.8.6 | v2.8.7 | New version contains updates and security fixes. |
+| Kubernetes | v1.26.13 | v1.26.14 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.14){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2789 | 2807 | New version contains updates and security fixes. |
+{: caption="Changes since version 1.26.13_1569" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.26.14_1576, released 26 February 2024

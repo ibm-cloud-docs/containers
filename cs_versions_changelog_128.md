@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-02-27"
+lastupdated: "2024-02-29"
 
 
 keywords: kubernetes, containers, change log, 128 change log, 128 updates
@@ -41,6 +41,28 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the version 1.28 change log.
 {: shortdesc}
 
+
+
+### Change log for master fix pack 1.28.7_1547, released 28 February 2024
+{: #1287_1547_M}
+
+The following table shows the changes that are in the master fix pack 1.28.7_1547. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.4.6 | v1.4.7 | New version contains updates and security fixes. |
+| etcd | v3.5.11 | v3.5.12 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.12){: external}. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1525 | 1534 | New version contains security fixes. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.14 | v2.4.18 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.28.6-3 | v1.28.7-2 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 439 | 441 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 7185ea1 | bd30030 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.8.6 | v2.8.7 | New version contains updates and security fixes. |
+| Kubernetes | v1.28.6 | v1.28.7 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.7){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2789 | 2807 | New version contains updates and security fixes. |
+{: caption="Changes since version 1.28.6_1542" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.28.7_1547, released 26 February 2024

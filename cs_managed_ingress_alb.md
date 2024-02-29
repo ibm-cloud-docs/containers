@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-02-29"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -140,7 +140,7 @@ Kubernetes Ingress versions
 
 The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `1.1.2_2507_iks` indicates the most recent build of the `0.47.0` Ingress NGINX version. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
 
-For the changes that are in each version of the Ingress images, see the [Ingress version change log](/docs/containers?topic=containers-cluster-add-ons-changelog).
+For the changes that are in each version of the Ingress images, see the [Ingress version change log](/docs/containers?topic=containers-cs_versions_ingress).
 
 ### Reverting to an earlier version
 {: #revert-alb-version}
