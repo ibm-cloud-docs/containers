@@ -2,20 +2,16 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-17"
+lastupdated: "2024-03-01"
 
 
-keywords: kubernetes, registry, pull secret, secrets
-
+keywords: containers, kubernetes, registry, pull secret, secrets
 subcollection: containers
 
 
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-
-
 
 
 # Setting up an image registry
