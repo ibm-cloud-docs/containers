@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-02-21"
+lastupdated: "2024-03-04"
 
 
 keywords: kubernetes, containers, 129, version 129, 129 update actions
@@ -54,9 +54,6 @@ This information summarizes updates that are likely to have an impact on deploye
 
 
 [Portworx](/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.29. If your apps use Portworx, do not upgrade your cluster to version 1.29.
-{: important}
-
-[Cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc) does not yet support version 1.29. If your cluster uses cluster autoscaler, do not upgrade your cluster to version 1.29.
 {: important}
 
 
