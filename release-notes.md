@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-02-29"
+lastupdated: "2024-03-04"
 
 
 keywords: containers, kubernetes, release notes
@@ -27,12 +27,16 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
+
 ## February 2024
 {: #containers-feb24}
 
 ### 28 February 2024
 {: #containers-feb2824}
 {: release-note}
+
+{{site.data.keyword.containerlong_notm}} cluster autoscaler version 1.2.1 is available.
+:   Version 1.2.1 of the autoscaler adds support for cluster version 1.29. For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
 
 
 

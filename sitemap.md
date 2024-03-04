@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-03-01"
+lastupdated: "2024-03-04"
 
 
 keywords: containers
@@ -239,6 +239,8 @@ subcollection: containers
 * [February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb24)
 
     * [28 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb2824)
+
+        * {{site.data.keyword.containerlong_notm}} cluster autoscaler version 1.2.1 is available.
 
         * Master patch updates for {{site.data.keyword.containerlong_notm}} clusters. Master patches are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Review the change logs for your cluster version.
 
@@ -6938,7 +6940,9 @@ subcollection: containers
 
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
-* [Version 1.2.0](/docs/containers?topic=containers-ca_changelog#0120_ca_addon)
+* [Version 1.2.1](/docs/containers?topic=containers-ca_changelog#0121_ca_addon)
+
+    * [Change log for patch update 1.2.1_395, released 28 February 2024](/docs/containers?topic=containers-ca_changelog#121395_ca)
 
     * [Change log for patch update 1.2.0_365, released 21 February 2024](/docs/containers?topic=containers-ca_changelog#120365_ca)
 
