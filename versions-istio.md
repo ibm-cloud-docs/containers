@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-02-13"
+lastupdated: "2024-03-06"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -31,6 +31,31 @@ ibmcloud ks cluster addon versions
 
 ## Version 1.20
 {: #v120}
+
+### Changelog for 1.20.3, released 06 March 2024
+{: #1203}
+
+Review the changes that are included in version 1.20.3 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.20.2
+
+Current version
+:   1.20.3
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.20.3](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.3/){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2023-6779](https://nvd.nist.gov/vuln/detail/CVE-2023-6779){: external}
+    - [CVE-2023-6246](https://nvd.nist.gov/vuln/detail/CVE-2023-6246){: external}
+    - [CVE-2023-6004](https://nvd.nist.gov/vuln/detail/CVE-2023-6004){: external}
+    - [CVE-2024-0553](https://nvd.nist.gov/vuln/detail/CVE-2024-0553){: external}
+    - [CVE-2023-6918](https://nvd.nist.gov/vuln/detail/CVE-2023-6918){: external}
+    - [CVE-2023-2953](https://nvd.nist.gov/vuln/detail/CVE-2023-2953){: external}
+    - [CVE-2024-22365](https://nvd.nist.gov/vuln/detail/CVE-2024-22365){: external}
+    - [CVE-2024-0567](https://nvd.nist.gov/vuln/detail/CVE-2024-0567){: external}
+    - [CVE-2023-6780](https://nvd.nist.gov/vuln/detail/CVE-2023-6780){: external}
 
 ### Change log for 1.20.2, released 07 February 2024
 {: #1202}
@@ -101,6 +126,32 @@ Updates in this version
 
 ## Version 1.19
 {: #v119}
+
+### Changelog for 1.19.7, released 06 March 2024
+{: #1197}
+
+Review the changes that are included in version 1.19.7 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.19.6
+
+Current version
+:   1.19.7
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.19.7](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.7/){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2023-6779](https://nvd.nist.gov/vuln/detail/CVE-2023-6779){: external}
+    - [CVE-2023-6246](https://nvd.nist.gov/vuln/detail/CVE-2023-6246){: external}
+    - [CVE-2023-6004](https://nvd.nist.gov/vuln/detail/CVE-2023-6004){: external}
+    - [CVE-2024-0553](https://nvd.nist.gov/vuln/detail/CVE-2024-0553){: external}
+    - [CVE-2023-6918](https://nvd.nist.gov/vuln/detail/CVE-2023-6918){: external}
+    - [CVE-2023-2953](https://nvd.nist.gov/vuln/detail/CVE-2023-2953){: external}
+    - [CVE-2024-22365](https://nvd.nist.gov/vuln/detail/CVE-2024-22365){: external}
+    - [CVE-2024-0567](https://nvd.nist.gov/vuln/detail/CVE-2024-0567){: external}
+    - [CVE-2023-6780](https://nvd.nist.gov/vuln/detail/CVE-2023-6780){: external}
+
 
 ### Change log for 1.19.6, released 07 February 2024
 {: #1196}
