@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-02-29"
+lastupdated: "2024-03-06"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -55,7 +55,7 @@ The following table shows the changes that are in the master fix pack 1.27.11_15
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.4.6 | v1.4.7 | New version contains updates and security fixes. |
-| etcd | v3.5.11 | v3.5.12 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.12){: external}. |
+| etcd | v3.5.11 | v3.5.12 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.12){: external}. |
 | Gateway-enabled cluster controller | N/A | 2415 | New version contains updates and security fixes. |
 | GPU device plug-in and installer | 6273cd0 | d992fea | New version contains updates and security fixes. |
 | {{site.data.keyword.IBM_notm}} Calico extension | 1525 | 1534 | New version contains security fixes. |
