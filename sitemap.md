@@ -236,6 +236,12 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [March 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb24)
+
+    * [06 March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar0624)
+
+        * Istio add-on versions `1.20.3` and `1.19.7` are available.
+
 * [February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb24)
 
     * [28 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb2824)
@@ -6666,6 +6672,8 @@ subcollection: containers
 
 * [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
 
+    * [Changelog for 1.20.3, released 06 March 2024](/docs/containers?topic=containers-istio-changelog#1203)
+
     * [Change log for 1.20.2, released 07 February 2024](/docs/containers?topic=containers-istio-changelog#1202)
 
     * [Change log for 1.20.1, released 10 January 2024](/docs/containers?topic=containers-istio-changelog#1201)
@@ -6673,6 +6681,8 @@ subcollection: containers
     * [Change log for 1.20.0, released 7 December 2023](/docs/containers?topic=containers-istio-changelog#1200)
 
 * [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
+
+    * [Changelog for 1.19.7, released 06 March 2024](/docs/containers?topic=containers-istio-changelog#1197)
 
     * [Change log for 1.19.6, released 07 February 2024](/docs/containers?topic=containers-istio-changelog#1196)
 

@@ -29,6 +29,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+## March 2024
+{: #containers-feb24}
+
+### 06 March 2024
+{: #containers-mar0624}
+{: release-note}
+
+
+Istio add-on versions `1.20.3` and `1.19.7` are available.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
 
 ## February 2024
 {: #containers-feb24}
