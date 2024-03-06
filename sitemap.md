@@ -236,11 +236,13 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
-* [March 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb24)
+* [March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar24)
 
     * [06 March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar0624)
 
         * Istio add-on versions `1.20.3` and `1.19.7` are available.
+
+        * CLI version `1.0.601` is available.
 
 * [February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb24)
 
@@ -5921,6 +5923,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.601](/docs/containers?topic=containers-cs_cli_changelog#cli-010601)
 
 * [Version v1.0.597](/docs/containers?topic=containers-cs_cli_changelog#cli-01597)
 
