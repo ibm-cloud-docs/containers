@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-06"
+lastupdated: "2024-03-07"
 
 
 keywords: containers, kubernetes, release notes
@@ -30,6 +30,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## March 2024
 {: #containers-mar24}
+
+
 
 ### 06 March 2024
 {: #containers-mar0624}
